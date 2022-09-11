@@ -421,7 +421,7 @@ EvtScript N(80244888) = {
         EVT_WAIT(5)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
     EVT_END_THREAD
-    EVT_CALL(ContinueSpeech, 1, -1, -1, 512, MESSAGE_ID(0x1100A8))
+    EVT_CALL(ContinueSpeech, 1, -1, -1, 512, MESSAGE_ID_1100A8)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(EndSpeech, 1, -1, -1, 512)
@@ -474,7 +474,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, 0, -250, 120, 45)
     EVT_CALL(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1100A0), 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1100A0, 160, 40)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(SetPlayerAnimation, 65578)
     EVT_WAIT(20)
@@ -513,7 +513,7 @@ EvtScript N(idle_80244BF8) = {
         EVT_CALL(PlayerMoveTo, -75, 65, 10)
         EVT_CALL(PlayerFaceNpc, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100A1))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100A1)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_7)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_1)
@@ -543,7 +543,7 @@ EvtScript N(80245014) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100B4))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID_1100B4)
     EVT_CALL(NpcFaceNpc, NPC_PARTNER, 1, 1)
     EVT_CALL(SetCamDistance, 0, 600)
     EVT_CALL(SetCamPitch, 0, EVT_FLOAT(10.0), EVT_FLOAT(-8.0))
@@ -580,7 +580,7 @@ EvtScript N(80245014) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID(0x1100B5))
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID_1100B5)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -592,7 +592,7 @@ EvtScript N(80245014) = {
 EvtScript N(80245444) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_A, NPC_ANIM_world_lakilester_Palette_00_Anim_4, 0, MESSAGE_ID(0x1100A2))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_A, NPC_ANIM_world_lakilester_Palette_00_Anim_4, 0, MESSAGE_ID_1100A2)
     EVT_CALL(SetNpcPos, 1, -290, 120, 45)
     EVT_THREAD
         EVT_WAIT(10)
@@ -601,7 +601,7 @@ EvtScript N(80245444) = {
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 5, MESSAGE_ID(0x1100A3))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 5, MESSAGE_ID_1100A3)
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_7)
     EVT_CALL(UseSettingsFrom, 0, 0, 0, 0)
     EVT_CALL(SetPanTarget, 0, 0, 0, 0)
@@ -645,7 +645,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100A4))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100A4)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -653,7 +653,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_8, NPC_ANIM_lakilulu_Palette_00_Anim_8, 0, MESSAGE_ID(0x1100A5))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_8, NPC_ANIM_lakilulu_Palette_00_Anim_8, 0, MESSAGE_ID_1100A5)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -661,7 +661,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x1100A6))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID_1100A6)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_1)
     EVT_CALL(EndSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -672,14 +672,14 @@ EvtScript N(80245444) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_LABEL(10)
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 0, MESSAGE_ID(0x1100A7))
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0020))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 0, MESSAGE_ID_1100A7)
+    EVT_CALL(ShowChoice, MESSAGE_ID_1E0020)
     EVT_IF_NE(LVar0, 0)
         EVT_EXEC_WAIT(N(80244888))
         EVT_WAIT(10)
         EVT_GOTO(10)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100A9))
+        EVT_CALL(ContinueSpeech, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID_1100A9)
         EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_1)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
         EVT_WAIT(10)
@@ -692,7 +692,7 @@ EvtScript N(80245444) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x1100AA))
+        EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID_1100AA)
         EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_1)
         EVT_CALL(EndSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -703,28 +703,28 @@ EvtScript N(80245444) = {
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x1100AB))
+        EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID_1100AB)
         EVT_WAIT(10)
-        EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0021))
+        EVT_CALL(ShowChoice, MESSAGE_ID_1E0021)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(-1)
             EVT_CASE_EQ(0)
-                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100AC))
+                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100AC)
             EVT_CASE_EQ(1)
-                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100AD))
+                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100AD)
             EVT_CASE_EQ(2)
-                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100AE))
+                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100AE)
             EVT_CASE_EQ(3)
-                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100AF))
+                EVT_CALL(ContinueSpeech, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100AF)
         EVT_END_SWITCH
     EVT_END_IF
     EVT_CALL(InterpNpcYaw, 1, 90, 1)
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_9)
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID(0x1100B0))
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100B1))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID_1100B0)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100B1)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID(0x1100B2))
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100B3))
+    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID_1100B2)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID_1100B3)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -737,7 +737,7 @@ EvtScript N(80245444) = {
     EVT_CALL(N(LoadPartyImage))
     EVT_EXEC(N(802438CC))
     EVT_WAIT(15)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D0190), 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D0190, 160, 40)
     EVT_EXEC(N(802438F8))
     EVT_WAIT(10)
     EVT_CALL(PanToTarget, 0, 0, 0)
@@ -776,13 +776,13 @@ EvtScript N(defeat_80246038) = {
 
 EvtScript N(interact_802461C0) = {
     EVT_IF_LE(GB_StoryProgress, 53)
-        EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x110032))
+        EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID_110032)
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_NE(LVar0, 8)
-            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x110034))
+            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID_110034)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x110032))
+            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID_110032)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -898,7 +898,7 @@ StaticNpc N(npcGroup_80246624) = {
         NPC_ANIM_lakilulu_Palette_00_Anim_1,
         NPC_ANIM_lakilulu_Palette_00_Anim_1,
     },
-    .tattle = MESSAGE_ID(0x1A00E2),
+    .tattle = MESSAGE_ID_1A00E2,
 };
 
 StaticNpc N(npcGroup_80246814) = {

@@ -19,7 +19,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1: Jump
-    .nameMsg = MESSAGE_ID(0x2600A0),
+    .nameMsg = MESSAGE_ID_2600A0,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -32,7 +32,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2: SpinJump
-    .nameMsg = MESSAGE_ID(0x2600A1),
+    .nameMsg = MESSAGE_ID_2600A1,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -45,7 +45,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3: TornadoJump
-    .nameMsg = MESSAGE_ID(0x2600A2),
+    .nameMsg = MESSAGE_ID_2600A2,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -58,7 +58,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4: Hammer
-    .nameMsg = MESSAGE_ID(0x2600A3),
+    .nameMsg = MESSAGE_ID_2600A3,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -71,7 +71,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5: SuperHammer
-    .nameMsg = MESSAGE_ID(0x2600A4),
+    .nameMsg = MESSAGE_ID_2600A4,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -84,7 +84,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6: UltraHammer
-    .nameMsg = MESSAGE_ID(0x2600A5),
+    .nameMsg = MESSAGE_ID_2600A5,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -97,9 +97,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7: LuckyStar
-    .nameMsg = MESSAGE_ID(0x2600A6),
-    .fullDescMsg = MESSAGE_ID(0x2500A6),
-    .shortDescMsg = MESSAGE_ID(0x2300A6),
+    .nameMsg = MESSAGE_ID_2600A6,
+    .fullDescMsg = MESSAGE_ID_2500A6,
+    .shortDescMsg = MESSAGE_ID_2300A6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LuckyStar),
     .sortValue = 0,
@@ -136,9 +136,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item A: FirstDegreeCard
-    .nameMsg = MESSAGE_ID(0x2600E2),
-    .fullDescMsg = MESSAGE_ID(0x2500E2),
-    .shortDescMsg = MESSAGE_ID(0x2300E2),
+    .nameMsg = MESSAGE_ID_2600E2,
+    .fullDescMsg = MESSAGE_ID_2500E2,
+    .shortDescMsg = MESSAGE_ID_2300E2,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FirstDegreeCard),
     .sortValue = 0,
@@ -149,9 +149,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item B: SecondDegreeCard
-    .nameMsg = MESSAGE_ID(0x2600E3),
-    .fullDescMsg = MESSAGE_ID(0x2500E3),
-    .shortDescMsg = MESSAGE_ID(0x2300E3),
+    .nameMsg = MESSAGE_ID_2600E3,
+    .fullDescMsg = MESSAGE_ID_2500E3,
+    .shortDescMsg = MESSAGE_ID_2300E3,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SecondDegreeCard),
     .sortValue = 0,
@@ -162,9 +162,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item C: ThirdDegreeCard
-    .nameMsg = MESSAGE_ID(0x2600E4),
-    .fullDescMsg = MESSAGE_ID(0x2500E4),
-    .shortDescMsg = MESSAGE_ID(0x2300E4),
+    .nameMsg = MESSAGE_ID_2600E4,
+    .fullDescMsg = MESSAGE_ID_2500E4,
+    .shortDescMsg = MESSAGE_ID_2300E4,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ThirdDegreeCard),
     .sortValue = 0,
@@ -175,9 +175,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item D: FourthDegreeCard
-    .nameMsg = MESSAGE_ID(0x2600E5),
-    .fullDescMsg = MESSAGE_ID(0x2500E5),
-    .shortDescMsg = MESSAGE_ID(0x2300E5),
+    .nameMsg = MESSAGE_ID_2600E5,
+    .fullDescMsg = MESSAGE_ID_2500E5,
+    .shortDescMsg = MESSAGE_ID_2300E5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FourthDegreeCard),
     .sortValue = 0,
@@ -188,9 +188,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E: Diploma
-    .nameMsg = MESSAGE_ID(0x2600E6),
-    .fullDescMsg = MESSAGE_ID(0x2500E6),
-    .shortDescMsg = MESSAGE_ID(0x2300E6),
+    .nameMsg = MESSAGE_ID_2600E6,
+    .fullDescMsg = MESSAGE_ID_2500E6,
+    .shortDescMsg = MESSAGE_ID_2300E6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Diploma),
     .sortValue = 0,
@@ -201,9 +201,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F: UltraStone
-    .nameMsg = MESSAGE_ID(0x2600E7),
-    .fullDescMsg = MESSAGE_ID(0x2500E7),
-    .shortDescMsg = MESSAGE_ID(0x2300E7),
+    .nameMsg = MESSAGE_ID_2600E7,
+    .fullDescMsg = MESSAGE_ID_2500E7,
+    .shortDescMsg = MESSAGE_ID_2300E7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_UltraStone),
     .sortValue = 0,
@@ -214,9 +214,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 10: KoopaFortressKey
-    .nameMsg = MESSAGE_ID(0x2600A7),
-    .fullDescMsg = MESSAGE_ID(0x2500A7),
-    .shortDescMsg = MESSAGE_ID(0x2300A7),
+    .nameMsg = MESSAGE_ID_2600A7,
+    .fullDescMsg = MESSAGE_ID_2500A7,
+    .shortDescMsg = MESSAGE_ID_2300A7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KoopaFortressKey),
     .sortValue = 0,
@@ -227,9 +227,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11: RuinsKey
-    .nameMsg = MESSAGE_ID(0x2600A8),
-    .fullDescMsg = MESSAGE_ID(0x2500A8),
-    .shortDescMsg = MESSAGE_ID(0x2300A8),
+    .nameMsg = MESSAGE_ID_2600A8,
+    .fullDescMsg = MESSAGE_ID_2500A8,
+    .shortDescMsg = MESSAGE_ID_2300A8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RuinsKey),
     .sortValue = 0,
@@ -240,9 +240,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 12: PulseStone
-    .nameMsg = MESSAGE_ID(0x2600B0),
-    .fullDescMsg = MESSAGE_ID(0x2500B0),
-    .shortDescMsg = MESSAGE_ID(0x2300B0),
+    .nameMsg = MESSAGE_ID_2600B0,
+    .fullDescMsg = MESSAGE_ID_2500B0,
+    .shortDescMsg = MESSAGE_ID_2300B0,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PulseStone),
     .sortValue = 0,
@@ -253,9 +253,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13: TubbaCastleKey
-    .nameMsg = MESSAGE_ID(0x2600A9),
-    .fullDescMsg = MESSAGE_ID(0x2500A9),
-    .shortDescMsg = MESSAGE_ID(0x2300A9),
+    .nameMsg = MESSAGE_ID_2600A9,
+    .fullDescMsg = MESSAGE_ID_2500A9,
+    .shortDescMsg = MESSAGE_ID_2300A9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_TubbaCastleKey),
     .sortValue = 0,
@@ -266,9 +266,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14: CrystalPalaceKey
-    .nameMsg = MESSAGE_ID(0x2600AA),
-    .fullDescMsg = MESSAGE_ID(0x2500AA),
-    .shortDescMsg = MESSAGE_ID(0x2300AA),
+    .nameMsg = MESSAGE_ID_2600AA,
+    .fullDescMsg = MESSAGE_ID_2500AA,
+    .shortDescMsg = MESSAGE_ID_2300AA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CrystalPalaceKey),
     .sortValue = 0,
@@ -279,9 +279,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 15: LunarStone
-    .nameMsg = MESSAGE_ID(0x2600B3),
-    .fullDescMsg = MESSAGE_ID(0x2500B3),
-    .shortDescMsg = MESSAGE_ID(0x2300B3),
+    .nameMsg = MESSAGE_ID_2600B3,
+    .fullDescMsg = MESSAGE_ID_2500B3,
+    .shortDescMsg = MESSAGE_ID_2300B3,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LunarStone),
     .sortValue = 0,
@@ -292,9 +292,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 16: PyramidStone
-    .nameMsg = MESSAGE_ID(0x2600B4),
-    .fullDescMsg = MESSAGE_ID(0x2500B4),
-    .shortDescMsg = MESSAGE_ID(0x2300B4),
+    .nameMsg = MESSAGE_ID_2600B4,
+    .fullDescMsg = MESSAGE_ID_2500B4,
+    .shortDescMsg = MESSAGE_ID_2300B4,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PyramidStone),
     .sortValue = 0,
@@ -305,9 +305,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 17: DiamondStone
-    .nameMsg = MESSAGE_ID(0x2600B5),
-    .fullDescMsg = MESSAGE_ID(0x2500B5),
-    .shortDescMsg = MESSAGE_ID(0x2300B5),
+    .nameMsg = MESSAGE_ID_2600B5,
+    .fullDescMsg = MESSAGE_ID_2500B5,
+    .shortDescMsg = MESSAGE_ID_2300B5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DiamondStone),
     .sortValue = 0,
@@ -318,9 +318,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 18: GoldenJar
-    .nameMsg = MESSAGE_ID(0x2600B2),
-    .fullDescMsg = MESSAGE_ID(0x2500B2),
-    .shortDescMsg = MESSAGE_ID(0x2300B2),
+    .nameMsg = MESSAGE_ID_2600B2,
+    .fullDescMsg = MESSAGE_ID_2500B2,
+    .shortDescMsg = MESSAGE_ID_2300B2,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_VolcanoVase),
     .sortValue = 0,
@@ -331,9 +331,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 19: KooperShell
-    .nameMsg = MESSAGE_ID(0x2600AF),
-    .fullDescMsg = MESSAGE_ID(0x2500AF),
-    .shortDescMsg = MESSAGE_ID(0x2300AF),
+    .nameMsg = MESSAGE_ID_2600AF,
+    .fullDescMsg = MESSAGE_ID_2500AF,
+    .shortDescMsg = MESSAGE_ID_2300AF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KooperShell),
     .sortValue = 0,
@@ -344,9 +344,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1A: BowserCastleKey
-    .nameMsg = MESSAGE_ID(0x2600AB),
-    .fullDescMsg = MESSAGE_ID(0x2500AB),
-    .shortDescMsg = MESSAGE_ID(0x2300AB),
+    .nameMsg = MESSAGE_ID_2600AB,
+    .fullDescMsg = MESSAGE_ID_2500AB,
+    .shortDescMsg = MESSAGE_ID_2300AB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BowserCastleKey),
     .sortValue = 0,
@@ -370,9 +370,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1C: BooWeight
-    .nameMsg = MESSAGE_ID(0x2600B7),
-    .fullDescMsg = MESSAGE_ID(0x2500B7),
-    .shortDescMsg = MESSAGE_ID(0x2300B7),
+    .nameMsg = MESSAGE_ID_2600B7,
+    .fullDescMsg = MESSAGE_ID_2500B7,
+    .shortDescMsg = MESSAGE_ID_2300B7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BooWeight),
     .sortValue = 0,
@@ -383,9 +383,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1D: BooPortrait
-    .nameMsg = MESSAGE_ID(0x2600B8),
-    .fullDescMsg = MESSAGE_ID(0x2500B8),
-    .shortDescMsg = MESSAGE_ID(0x2300B8),
+    .nameMsg = MESSAGE_ID_2600B8,
+    .fullDescMsg = MESSAGE_ID_2500B8,
+    .shortDescMsg = MESSAGE_ID_2300B8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BooPortrait),
     .sortValue = 0,
@@ -396,9 +396,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1E: CrystalBerry
-    .nameMsg = MESSAGE_ID(0x2600C4),
-    .fullDescMsg = MESSAGE_ID(0x2500C4),
-    .shortDescMsg = MESSAGE_ID(0x2300C4),
+    .nameMsg = MESSAGE_ID_2600C4,
+    .fullDescMsg = MESSAGE_ID_2500C4,
+    .shortDescMsg = MESSAGE_ID_2300C4,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CrystalBerry),
     .sortValue = 0,
@@ -409,9 +409,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1F: MysticalKey
-    .nameMsg = MESSAGE_ID(0x2600B9),
-    .fullDescMsg = MESSAGE_ID(0x2500B9),
-    .shortDescMsg = MESSAGE_ID(0x2300B9),
+    .nameMsg = MESSAGE_ID_2600B9,
+    .fullDescMsg = MESSAGE_ID_2500B9,
+    .shortDescMsg = MESSAGE_ID_2300B9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MysticalKey),
     .sortValue = 0,
@@ -422,9 +422,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 20: StoreroomKey
-    .nameMsg = MESSAGE_ID(0x2600BA),
-    .fullDescMsg = MESSAGE_ID(0x2500BA),
-    .shortDescMsg = MESSAGE_ID(0x2300BA),
+    .nameMsg = MESSAGE_ID_2600BA,
+    .fullDescMsg = MESSAGE_ID_2500BA,
+    .shortDescMsg = MESSAGE_ID_2300BA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IronKey),
     .sortValue = 0,
@@ -435,9 +435,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 21: ToyTrain
-    .nameMsg = MESSAGE_ID(0x2600BB),
-    .fullDescMsg = MESSAGE_ID(0x2500BB),
-    .shortDescMsg = MESSAGE_ID(0x2300BB),
+    .nameMsg = MESSAGE_ID_2600BB,
+    .fullDescMsg = MESSAGE_ID_2500BB,
+    .shortDescMsg = MESSAGE_ID_2300BB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ToyTrain),
     .sortValue = 0,
@@ -448,9 +448,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 22: BooRecord
-    .nameMsg = MESSAGE_ID(0x2600B6),
-    .fullDescMsg = MESSAGE_ID(0x2500B6),
-    .shortDescMsg = MESSAGE_ID(0x2300B6),
+    .nameMsg = MESSAGE_ID_2600B6,
+    .fullDescMsg = MESSAGE_ID_2500B6,
+    .shortDescMsg = MESSAGE_ID_2300B6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BooRecord),
     .sortValue = 0,
@@ -461,9 +461,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 23: FryingPan
-    .nameMsg = MESSAGE_ID(0x2600BC),
-    .fullDescMsg = MESSAGE_ID(0x2500BC),
-    .shortDescMsg = MESSAGE_ID(0x2300BC),
+    .nameMsg = MESSAGE_ID_2600BC,
+    .fullDescMsg = MESSAGE_ID_2500BC,
+    .shortDescMsg = MESSAGE_ID_2300BC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FryingPan),
     .sortValue = 0,
@@ -474,9 +474,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 24: Dictionary
-    .nameMsg = MESSAGE_ID(0x2600BD),
-    .fullDescMsg = MESSAGE_ID(0x2500BD),
-    .shortDescMsg = MESSAGE_ID(0x2300BD),
+    .nameMsg = MESSAGE_ID_2600BD,
+    .fullDescMsg = MESSAGE_ID_2500BD,
+    .shortDescMsg = MESSAGE_ID_2300BD,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Dictionary),
     .sortValue = 0,
@@ -487,9 +487,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 25: MysteryNote
-    .nameMsg = MESSAGE_ID(0x2600BE),
-    .fullDescMsg = MESSAGE_ID(0x2500BE),
-    .shortDescMsg = MESSAGE_ID(0x2300BE),
+    .nameMsg = MESSAGE_ID_2600BE,
+    .fullDescMsg = MESSAGE_ID_2500BE,
+    .shortDescMsg = MESSAGE_ID_2300BE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MysteryNote),
     .sortValue = 0,
@@ -513,9 +513,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 27: CrystalBall
-    .nameMsg = MESSAGE_ID(0x2600C9),
-    .fullDescMsg = MESSAGE_ID(0x2500C9),
-    .shortDescMsg = MESSAGE_ID(0x2300C9),
+    .nameMsg = MESSAGE_ID_2600C9,
+    .fullDescMsg = MESSAGE_ID_2500C9,
+    .shortDescMsg = MESSAGE_ID_2300C9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CrystalBall),
     .sortValue = 0,
@@ -539,9 +539,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 29: Cookbook
-    .nameMsg = MESSAGE_ID(0x2600CB),
-    .fullDescMsg = MESSAGE_ID(0x2500CB),
-    .shortDescMsg = MESSAGE_ID(0x2300CB),
+    .nameMsg = MESSAGE_ID_2600CB,
+    .fullDescMsg = MESSAGE_ID_2500CB,
+    .shortDescMsg = MESSAGE_ID_2300CB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Cookbook),
     .sortValue = 0,
@@ -552,9 +552,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2A: JadeRaven
-    .nameMsg = MESSAGE_ID(0x2600CC),
-    .fullDescMsg = MESSAGE_ID(0x2500CC),
-    .shortDescMsg = MESSAGE_ID(0x2300CC),
+    .nameMsg = MESSAGE_ID_2600CC,
+    .fullDescMsg = MESSAGE_ID_2500CC,
+    .shortDescMsg = MESSAGE_ID_2300CC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JadeRaven),
     .sortValue = 0,
@@ -565,9 +565,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2B: MagicalSeed1
-    .nameMsg = MESSAGE_ID(0x2600C0),
-    .fullDescMsg = MESSAGE_ID(0x2500C0),
-    .shortDescMsg = MESSAGE_ID(0x2300C0),
+    .nameMsg = MESSAGE_ID_2600C0,
+    .fullDescMsg = MESSAGE_ID_2500C0,
+    .shortDescMsg = MESSAGE_ID_2300C0,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MagicalSeed1),
     .sortValue = 0,
@@ -578,9 +578,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2C: MagicalSeed2
-    .nameMsg = MESSAGE_ID(0x2600C1),
-    .fullDescMsg = MESSAGE_ID(0x2500C1),
-    .shortDescMsg = MESSAGE_ID(0x2300C1),
+    .nameMsg = MESSAGE_ID_2600C1,
+    .fullDescMsg = MESSAGE_ID_2500C1,
+    .shortDescMsg = MESSAGE_ID_2300C1,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MagicalSeed2),
     .sortValue = 0,
@@ -591,9 +591,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2D: MagicalSeed3
-    .nameMsg = MESSAGE_ID(0x2600C2),
-    .fullDescMsg = MESSAGE_ID(0x2500C2),
-    .shortDescMsg = MESSAGE_ID(0x2300C2),
+    .nameMsg = MESSAGE_ID_2600C2,
+    .fullDescMsg = MESSAGE_ID_2500C2,
+    .shortDescMsg = MESSAGE_ID_2300C2,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MagicalSeed3),
     .sortValue = 0,
@@ -604,9 +604,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2E: MagicalSeed4
-    .nameMsg = MESSAGE_ID(0x2600C3),
-    .fullDescMsg = MESSAGE_ID(0x2500C3),
-    .shortDescMsg = MESSAGE_ID(0x2300C3),
+    .nameMsg = MESSAGE_ID_2600C3,
+    .fullDescMsg = MESSAGE_ID_2500C3,
+    .shortDescMsg = MESSAGE_ID_2300C3,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MagicalSeed4),
     .sortValue = 0,
@@ -630,9 +630,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 30: Calculator
-    .nameMsg = MESSAGE_ID(0x2600CA),
-    .fullDescMsg = MESSAGE_ID(0x2500CA),
-    .shortDescMsg = MESSAGE_ID(0x2300CA),
+    .nameMsg = MESSAGE_ID_2600CA,
+    .fullDescMsg = MESSAGE_ID_2500CA,
+    .shortDescMsg = MESSAGE_ID_2300CA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Calculator),
     .sortValue = 0,
@@ -643,9 +643,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 31: SnowmanBucket
-    .nameMsg = MESSAGE_ID(0x2600CF),
-    .fullDescMsg = MESSAGE_ID(0x2500CF),
-    .shortDescMsg = MESSAGE_ID(0x2300CF),
+    .nameMsg = MESSAGE_ID_2600CF,
+    .fullDescMsg = MESSAGE_ID_2500CF,
+    .shortDescMsg = MESSAGE_ID_2300CF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SnowmanBucket),
     .sortValue = 0,
@@ -656,9 +656,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 32: SnowmanScarf
-    .nameMsg = MESSAGE_ID(0x2600D0),
-    .fullDescMsg = MESSAGE_ID(0x2500D0),
-    .shortDescMsg = MESSAGE_ID(0x2300D0),
+    .nameMsg = MESSAGE_ID_2600D0,
+    .fullDescMsg = MESSAGE_ID_2500D0,
+    .shortDescMsg = MESSAGE_ID_2300D0,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SnowmanScarf),
     .sortValue = 0,
@@ -669,9 +669,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 33: RedKey
-    .nameMsg = MESSAGE_ID(0x2600D2),
-    .fullDescMsg = MESSAGE_ID(0x2500D2),
-    .shortDescMsg = MESSAGE_ID(0x2300D2),
+    .nameMsg = MESSAGE_ID_2600D2,
+    .fullDescMsg = MESSAGE_ID_2500D2,
+    .shortDescMsg = MESSAGE_ID_2300D2,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RedKey),
     .sortValue = 0,
@@ -682,9 +682,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 34: BlueKey
-    .nameMsg = MESSAGE_ID(0x2600D3),
-    .fullDescMsg = MESSAGE_ID(0x2500D3),
-    .shortDescMsg = MESSAGE_ID(0x2300D3),
+    .nameMsg = MESSAGE_ID_2600D3,
+    .fullDescMsg = MESSAGE_ID_2500D3,
+    .shortDescMsg = MESSAGE_ID_2300D3,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BlueKey),
     .sortValue = 0,
@@ -708,9 +708,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 36: Letter01
-    .nameMsg = MESSAGE_ID(0x2600EB),
-    .fullDescMsg = MESSAGE_ID(0x2500EB),
-    .shortDescMsg = MESSAGE_ID(0x2300EB),
+    .nameMsg = MESSAGE_ID_2600EB,
+    .fullDescMsg = MESSAGE_ID_2500EB,
+    .shortDescMsg = MESSAGE_ID_2300EB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -721,9 +721,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 37: Letter02
-    .nameMsg = MESSAGE_ID(0x2600EC),
-    .fullDescMsg = MESSAGE_ID(0x2500EC),
-    .shortDescMsg = MESSAGE_ID(0x2300EC),
+    .nameMsg = MESSAGE_ID_2600EC,
+    .fullDescMsg = MESSAGE_ID_2500EC,
+    .shortDescMsg = MESSAGE_ID_2300EC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -734,9 +734,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 38: Letter03
-    .nameMsg = MESSAGE_ID(0x2600ED),
-    .fullDescMsg = MESSAGE_ID(0x2500ED),
-    .shortDescMsg = MESSAGE_ID(0x2300ED),
+    .nameMsg = MESSAGE_ID_2600ED,
+    .fullDescMsg = MESSAGE_ID_2500ED,
+    .shortDescMsg = MESSAGE_ID_2300ED,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -747,9 +747,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 39: Letter04
-    .nameMsg = MESSAGE_ID(0x2600EE),
-    .fullDescMsg = MESSAGE_ID(0x2500EE),
-    .shortDescMsg = MESSAGE_ID(0x2300EE),
+    .nameMsg = MESSAGE_ID_2600EE,
+    .fullDescMsg = MESSAGE_ID_2500EE,
+    .shortDescMsg = MESSAGE_ID_2300EE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -760,9 +760,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3A: Letter05
-    .nameMsg = MESSAGE_ID(0x2600EF),
-    .fullDescMsg = MESSAGE_ID(0x2500EF),
-    .shortDescMsg = MESSAGE_ID(0x2300EF),
+    .nameMsg = MESSAGE_ID_2600EF,
+    .fullDescMsg = MESSAGE_ID_2500EF,
+    .shortDescMsg = MESSAGE_ID_2300EF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -773,9 +773,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3B: Letter06
-    .nameMsg = MESSAGE_ID(0x2600F0),
-    .fullDescMsg = MESSAGE_ID(0x2500F0),
-    .shortDescMsg = MESSAGE_ID(0x2300F0),
+    .nameMsg = MESSAGE_ID_2600F0,
+    .fullDescMsg = MESSAGE_ID_2500F0,
+    .shortDescMsg = MESSAGE_ID_2300F0,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -786,9 +786,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3C: Letter07
-    .nameMsg = MESSAGE_ID(0x2600F1),
-    .fullDescMsg = MESSAGE_ID(0x2500F1),
-    .shortDescMsg = MESSAGE_ID(0x2300F1),
+    .nameMsg = MESSAGE_ID_2600F1,
+    .fullDescMsg = MESSAGE_ID_2500F1,
+    .shortDescMsg = MESSAGE_ID_2300F1,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -799,9 +799,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3D: Letter08
-    .nameMsg = MESSAGE_ID(0x2600F2),
-    .fullDescMsg = MESSAGE_ID(0x2500F2),
-    .shortDescMsg = MESSAGE_ID(0x2300F2),
+    .nameMsg = MESSAGE_ID_2600F2,
+    .fullDescMsg = MESSAGE_ID_2500F2,
+    .shortDescMsg = MESSAGE_ID_2300F2,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -812,9 +812,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3E: Letter09
-    .nameMsg = MESSAGE_ID(0x2600F3),
-    .fullDescMsg = MESSAGE_ID(0x2500F3),
-    .shortDescMsg = MESSAGE_ID(0x2300F3),
+    .nameMsg = MESSAGE_ID_2600F3,
+    .fullDescMsg = MESSAGE_ID_2500F3,
+    .shortDescMsg = MESSAGE_ID_2300F3,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -838,9 +838,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 40: Letter10
-    .nameMsg = MESSAGE_ID(0x2600F4),
-    .fullDescMsg = MESSAGE_ID(0x2500F4),
-    .shortDescMsg = MESSAGE_ID(0x2300F4),
+    .nameMsg = MESSAGE_ID_2600F4,
+    .fullDescMsg = MESSAGE_ID_2500F4,
+    .shortDescMsg = MESSAGE_ID_2300F4,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -851,9 +851,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 41: Letter11
-    .nameMsg = MESSAGE_ID(0x2600F5),
-    .fullDescMsg = MESSAGE_ID(0x2500F5),
-    .shortDescMsg = MESSAGE_ID(0x2300F5),
+    .nameMsg = MESSAGE_ID_2600F5,
+    .fullDescMsg = MESSAGE_ID_2500F5,
+    .shortDescMsg = MESSAGE_ID_2300F5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -903,9 +903,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 45: Letter12
-    .nameMsg = MESSAGE_ID(0x2600F6),
-    .fullDescMsg = MESSAGE_ID(0x2500F6),
-    .shortDescMsg = MESSAGE_ID(0x2300F6),
+    .nameMsg = MESSAGE_ID_2600F6,
+    .fullDescMsg = MESSAGE_ID_2500F6,
+    .shortDescMsg = MESSAGE_ID_2300F6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -916,9 +916,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 46: Letter13
-    .nameMsg = MESSAGE_ID(0x2600F7),
-    .fullDescMsg = MESSAGE_ID(0x2500F7),
-    .shortDescMsg = MESSAGE_ID(0x2300F7),
+    .nameMsg = MESSAGE_ID_2600F7,
+    .fullDescMsg = MESSAGE_ID_2500F7,
+    .shortDescMsg = MESSAGE_ID_2300F7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -929,9 +929,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 47: Letter14
-    .nameMsg = MESSAGE_ID(0x2600F8),
-    .fullDescMsg = MESSAGE_ID(0x2500F8),
-    .shortDescMsg = MESSAGE_ID(0x2300F8),
+    .nameMsg = MESSAGE_ID_2600F8,
+    .fullDescMsg = MESSAGE_ID_2500F8,
+    .shortDescMsg = MESSAGE_ID_2300F8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -942,9 +942,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 48: Letter15
-    .nameMsg = MESSAGE_ID(0x2600F9),
-    .fullDescMsg = MESSAGE_ID(0x2500F9),
-    .shortDescMsg = MESSAGE_ID(0x2300F9),
+    .nameMsg = MESSAGE_ID_2600F9,
+    .fullDescMsg = MESSAGE_ID_2500F9,
+    .shortDescMsg = MESSAGE_ID_2300F9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -955,9 +955,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 49: Letter16
-    .nameMsg = MESSAGE_ID(0x2600FA),
-    .fullDescMsg = MESSAGE_ID(0x2500FA),
-    .shortDescMsg = MESSAGE_ID(0x2300FA),
+    .nameMsg = MESSAGE_ID_2600FA,
+    .fullDescMsg = MESSAGE_ID_2500FA,
+    .shortDescMsg = MESSAGE_ID_2300FA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -968,9 +968,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4A: Letter17
-    .nameMsg = MESSAGE_ID(0x2600FB),
-    .fullDescMsg = MESSAGE_ID(0x2500FB),
-    .shortDescMsg = MESSAGE_ID(0x2300FB),
+    .nameMsg = MESSAGE_ID_2600FB,
+    .fullDescMsg = MESSAGE_ID_2500FB,
+    .shortDescMsg = MESSAGE_ID_2300FB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -981,9 +981,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4B: Letter18
-    .nameMsg = MESSAGE_ID(0x2600FC),
-    .fullDescMsg = MESSAGE_ID(0x2500FC),
-    .shortDescMsg = MESSAGE_ID(0x2300FC),
+    .nameMsg = MESSAGE_ID_2600FC,
+    .fullDescMsg = MESSAGE_ID_2500FC,
+    .shortDescMsg = MESSAGE_ID_2300FC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -994,9 +994,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4C: Letter19
-    .nameMsg = MESSAGE_ID(0x2600FD),
-    .fullDescMsg = MESSAGE_ID(0x2500FD),
-    .shortDescMsg = MESSAGE_ID(0x2300FD),
+    .nameMsg = MESSAGE_ID_2600FD,
+    .fullDescMsg = MESSAGE_ID_2500FD,
+    .shortDescMsg = MESSAGE_ID_2300FD,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1020,9 +1020,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4E: Letter20
-    .nameMsg = MESSAGE_ID(0x2600FE),
-    .fullDescMsg = MESSAGE_ID(0x2500FE),
-    .shortDescMsg = MESSAGE_ID(0x2300FE),
+    .nameMsg = MESSAGE_ID_2600FE,
+    .fullDescMsg = MESSAGE_ID_2500FE,
+    .shortDescMsg = MESSAGE_ID_2300FE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1033,9 +1033,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 4F: Letter21
-    .nameMsg = MESSAGE_ID(0x2600FF),
-    .fullDescMsg = MESSAGE_ID(0x2500FF),
-    .shortDescMsg = MESSAGE_ID(0x2300FF),
+    .nameMsg = MESSAGE_ID_2600FF,
+    .fullDescMsg = MESSAGE_ID_2500FF,
+    .shortDescMsg = MESSAGE_ID_2300FF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1046,9 +1046,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 50: Letter22
-    .nameMsg = MESSAGE_ID(0x260100),
-    .fullDescMsg = MESSAGE_ID(0x250100),
-    .shortDescMsg = MESSAGE_ID(0x230100),
+    .nameMsg = MESSAGE_ID_260100,
+    .fullDescMsg = MESSAGE_ID_250100,
+    .shortDescMsg = MESSAGE_ID_230100,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1059,9 +1059,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 51: Letter23
-    .nameMsg = MESSAGE_ID(0x260101),
-    .fullDescMsg = MESSAGE_ID(0x250101),
-    .shortDescMsg = MESSAGE_ID(0x230101),
+    .nameMsg = MESSAGE_ID_260101,
+    .fullDescMsg = MESSAGE_ID_250101,
+    .shortDescMsg = MESSAGE_ID_230101,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1072,9 +1072,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 52: Letter24
-    .nameMsg = MESSAGE_ID(0x260102),
-    .fullDescMsg = MESSAGE_ID(0x250102),
-    .shortDescMsg = MESSAGE_ID(0x230102),
+    .nameMsg = MESSAGE_ID_260102,
+    .fullDescMsg = MESSAGE_ID_250102,
+    .shortDescMsg = MESSAGE_ID_230102,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1085,9 +1085,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 53: Artifact
-    .nameMsg = MESSAGE_ID(0x2600B1),
-    .fullDescMsg = MESSAGE_ID(0x2500B1),
-    .shortDescMsg = MESSAGE_ID(0x2300B1),
+    .nameMsg = MESSAGE_ID_2600B1,
+    .fullDescMsg = MESSAGE_ID_2500B1,
+    .shortDescMsg = MESSAGE_ID_2300B1,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Artifact),
     .sortValue = 0,
@@ -1098,9 +1098,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 54: Letter25
-    .nameMsg = MESSAGE_ID(0x2600EA),
-    .fullDescMsg = MESSAGE_ID(0x2500EA),
-    .shortDescMsg = MESSAGE_ID(0x2300EA),
+    .nameMsg = MESSAGE_ID_2600EA,
+    .fullDescMsg = MESSAGE_ID_2500EA,
+    .shortDescMsg = MESSAGE_ID_2300EA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Letter),
     .sortValue = 0,
@@ -1124,9 +1124,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 56: Dolly
-    .nameMsg = MESSAGE_ID(0x2600AE),
-    .fullDescMsg = MESSAGE_ID(0x2500AE),
-    .shortDescMsg = MESSAGE_ID(0x2300AE),
+    .nameMsg = MESSAGE_ID_2600AE,
+    .fullDescMsg = MESSAGE_ID_2500AE,
+    .shortDescMsg = MESSAGE_ID_2300AE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Dolly),
     .sortValue = 0,
@@ -1137,9 +1137,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 57: WaterStone
-    .nameMsg = MESSAGE_ID(0x2600C5),
-    .fullDescMsg = MESSAGE_ID(0x2500C5),
-    .shortDescMsg = MESSAGE_ID(0x2300C5),
+    .nameMsg = MESSAGE_ID_2600C5,
+    .fullDescMsg = MESSAGE_ID_2500C5,
+    .shortDescMsg = MESSAGE_ID_2300C5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_WaterStone),
     .sortValue = 0,
@@ -1150,9 +1150,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 58: MagicalBean
-    .nameMsg = MESSAGE_ID(0x2600C6),
-    .fullDescMsg = MESSAGE_ID(0x2500C6),
-    .shortDescMsg = MESSAGE_ID(0x2300C6),
+    .nameMsg = MESSAGE_ID_2600C6,
+    .fullDescMsg = MESSAGE_ID_2500C6,
+    .shortDescMsg = MESSAGE_ID_2300C6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MagicalBean),
     .sortValue = 0,
@@ -1163,9 +1163,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 59: FertileSoil
-    .nameMsg = MESSAGE_ID(0x2600C7),
-    .fullDescMsg = MESSAGE_ID(0x2500C7),
-    .shortDescMsg = MESSAGE_ID(0x2300C7),
+    .nameMsg = MESSAGE_ID_2600C7,
+    .fullDescMsg = MESSAGE_ID_2500C7,
+    .shortDescMsg = MESSAGE_ID_2300C7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FertileSoil),
     .sortValue = 0,
@@ -1176,9 +1176,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5A: MiracleWater
-    .nameMsg = MESSAGE_ID(0x2600C8),
-    .fullDescMsg = MESSAGE_ID(0x2500C8),
-    .shortDescMsg = MESSAGE_ID(0x2300C8),
+    .nameMsg = MESSAGE_ID_2600C8,
+    .fullDescMsg = MESSAGE_ID_2500C8,
+    .shortDescMsg = MESSAGE_ID_2300C8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MiracleWater),
     .sortValue = 0,
@@ -1189,9 +1189,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5B: VolcanoVase
-    .nameMsg = MESSAGE_ID(0x2600CD),
-    .fullDescMsg = MESSAGE_ID(0x2500CD),
-    .shortDescMsg = MESSAGE_ID(0x2300CD),
+    .nameMsg = MESSAGE_ID_2600CD,
+    .fullDescMsg = MESSAGE_ID_2500CD,
+    .shortDescMsg = MESSAGE_ID_2300CD,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_VolcanoVase),
     .sortValue = 0,
@@ -1202,9 +1202,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5C: KootTheTape
-    .nameMsg = MESSAGE_ID(0x260104),
-    .fullDescMsg = MESSAGE_ID(0x250104),
-    .shortDescMsg = MESSAGE_ID(0x230104),
+    .nameMsg = MESSAGE_ID_260104,
+    .fullDescMsg = MESSAGE_ID_250104,
+    .shortDescMsg = MESSAGE_ID_230104,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootTheTape),
     .sortValue = 0,
@@ -1215,9 +1215,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5D: BakingSugar
-    .nameMsg = MESSAGE_ID(0x2600D8),
-    .fullDescMsg = MESSAGE_ID(0x2500D8),
-    .shortDescMsg = MESSAGE_ID(0x2300D8),
+    .nameMsg = MESSAGE_ID_2600D8,
+    .fullDescMsg = MESSAGE_ID_2500D8,
+    .shortDescMsg = MESSAGE_ID_2300D8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingSugar),
     .sortValue = 0,
@@ -1228,9 +1228,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5E: BakingSalt
-    .nameMsg = MESSAGE_ID(0x2600D9),
-    .fullDescMsg = MESSAGE_ID(0x2500D9),
-    .shortDescMsg = MESSAGE_ID(0x2300D9),
+    .nameMsg = MESSAGE_ID_2600D9,
+    .fullDescMsg = MESSAGE_ID_2500D9,
+    .shortDescMsg = MESSAGE_ID_2300D9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingSalt),
     .sortValue = 0,
@@ -1241,9 +1241,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 5F: BakingEgg
-    .nameMsg = MESSAGE_ID(0x2600DA),
-    .fullDescMsg = MESSAGE_ID(0x2500DA),
-    .shortDescMsg = MESSAGE_ID(0x2300DA),
+    .nameMsg = MESSAGE_ID_2600DA,
+    .fullDescMsg = MESSAGE_ID_2500DA,
+    .shortDescMsg = MESSAGE_ID_2300DA,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingEgg),
     .sortValue = 0,
@@ -1254,9 +1254,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 60: BakingCream
-    .nameMsg = MESSAGE_ID(0x2600DB),
-    .fullDescMsg = MESSAGE_ID(0x2500DB),
-    .shortDescMsg = MESSAGE_ID(0x2300DB),
+    .nameMsg = MESSAGE_ID_2600DB,
+    .fullDescMsg = MESSAGE_ID_2500DB,
+    .shortDescMsg = MESSAGE_ID_2300DB,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingCream),
     .sortValue = 0,
@@ -1267,9 +1267,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 61: BakingStrawberry
-    .nameMsg = MESSAGE_ID(0x2600DC),
-    .fullDescMsg = MESSAGE_ID(0x2500DC),
-    .shortDescMsg = MESSAGE_ID(0x2300DC),
+    .nameMsg = MESSAGE_ID_2600DC,
+    .fullDescMsg = MESSAGE_ID_2500DC,
+    .shortDescMsg = MESSAGE_ID_2300DC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingStrawberry),
     .sortValue = 0,
@@ -1280,9 +1280,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 62: BakingButter
-    .nameMsg = MESSAGE_ID(0x2600DD),
-    .fullDescMsg = MESSAGE_ID(0x2500DD),
-    .shortDescMsg = MESSAGE_ID(0x2300DD),
+    .nameMsg = MESSAGE_ID_2600DD,
+    .fullDescMsg = MESSAGE_ID_2500DD,
+    .shortDescMsg = MESSAGE_ID_2300DD,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingButter),
     .sortValue = 0,
@@ -1293,9 +1293,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 63: BakingCleanser
-    .nameMsg = MESSAGE_ID(0x2600DE),
-    .fullDescMsg = MESSAGE_ID(0x2500DE),
-    .shortDescMsg = MESSAGE_ID(0x2300DE),
+    .nameMsg = MESSAGE_ID_2600DE,
+    .fullDescMsg = MESSAGE_ID_2500DE,
+    .shortDescMsg = MESSAGE_ID_2300DE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingCleanser),
     .sortValue = 0,
@@ -1306,9 +1306,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 64: BakingWater
-    .nameMsg = MESSAGE_ID(0x2600DF),
-    .fullDescMsg = MESSAGE_ID(0x2500DF),
-    .shortDescMsg = MESSAGE_ID(0x2300DF),
+    .nameMsg = MESSAGE_ID_2600DF,
+    .fullDescMsg = MESSAGE_ID_2500DF,
+    .shortDescMsg = MESSAGE_ID_2300DF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingWater),
     .sortValue = 0,
@@ -1319,9 +1319,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 65: BakingFlour
-    .nameMsg = MESSAGE_ID(0x2600E0),
-    .fullDescMsg = MESSAGE_ID(0x2500E0),
-    .shortDescMsg = MESSAGE_ID(0x2300E0),
+    .nameMsg = MESSAGE_ID_2600E0,
+    .fullDescMsg = MESSAGE_ID_2500E0,
+    .shortDescMsg = MESSAGE_ID_2300E0,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingFlour),
     .sortValue = 0,
@@ -1332,9 +1332,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 66: BakingMilk
-    .nameMsg = MESSAGE_ID(0x2600E1),
-    .fullDescMsg = MESSAGE_ID(0x2500E1),
-    .shortDescMsg = MESSAGE_ID(0x2300E1),
+    .nameMsg = MESSAGE_ID_2600E1,
+    .fullDescMsg = MESSAGE_ID_2500E1,
+    .shortDescMsg = MESSAGE_ID_2300E1,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BakingMilk),
     .sortValue = 0,
@@ -1345,9 +1345,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 67: Lyrics
-    .nameMsg = MESSAGE_ID(0x2600D6),
-    .fullDescMsg = MESSAGE_ID(0x2500D6),
-    .shortDescMsg = MESSAGE_ID(0x2300D6),
+    .nameMsg = MESSAGE_ID_2600D6,
+    .fullDescMsg = MESSAGE_ID_2500D6,
+    .shortDescMsg = MESSAGE_ID_2300D6,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Lyrics),
     .sortValue = 0,
@@ -1358,9 +1358,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 68: Melody
-    .nameMsg = MESSAGE_ID(0x2600D7),
-    .fullDescMsg = MESSAGE_ID(0x2500D7),
-    .shortDescMsg = MESSAGE_ID(0x2300D7),
+    .nameMsg = MESSAGE_ID_2600D7,
+    .fullDescMsg = MESSAGE_ID_2500D7,
+    .shortDescMsg = MESSAGE_ID_2300D7,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Melody),
     .sortValue = 0,
@@ -1371,9 +1371,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 69: Mailbag
-    .nameMsg = MESSAGE_ID(0x2600BF),
-    .fullDescMsg = MESSAGE_ID(0x2500BF),
-    .shortDescMsg = MESSAGE_ID(0x2300BF),
+    .nameMsg = MESSAGE_ID_2600BF,
+    .fullDescMsg = MESSAGE_ID_2500BF,
+    .shortDescMsg = MESSAGE_ID_2300BF,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Mailbag),
     .sortValue = 0,
@@ -1384,9 +1384,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6A: PeachKey1
-    .nameMsg = MESSAGE_ID(0x2600AC),
-    .fullDescMsg = MESSAGE_ID(0x2500AC),
-    .shortDescMsg = MESSAGE_ID(0x2300AC),
+    .nameMsg = MESSAGE_ID_2600AC,
+    .fullDescMsg = MESSAGE_ID_2500AC,
+    .shortDescMsg = MESSAGE_ID_2300AC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PeachKey),
     .sortValue = 0,
@@ -1397,9 +1397,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6B: OddKey
-    .nameMsg = MESSAGE_ID(0x2600AD),
-    .fullDescMsg = MESSAGE_ID(0x2500AD),
-    .shortDescMsg = MESSAGE_ID(0x2300AD),
+    .nameMsg = MESSAGE_ID_2600AD,
+    .fullDescMsg = MESSAGE_ID_2500AD,
+    .shortDescMsg = MESSAGE_ID_2300AD,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IronKey),
     .sortValue = 0,
@@ -1410,9 +1410,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6C: StarStone
-    .nameMsg = MESSAGE_ID(0x2600D1),
-    .fullDescMsg = MESSAGE_ID(0x2500D1),
-    .shortDescMsg = MESSAGE_ID(0x2300D1),
+    .nameMsg = MESSAGE_ID_2600D1,
+    .fullDescMsg = MESSAGE_ID_2500D1,
+    .shortDescMsg = MESSAGE_ID_2300D1,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StarStone),
     .sortValue = 0,
@@ -1423,9 +1423,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6D: SneakyParasol
-    .nameMsg = MESSAGE_ID(0x2600D4),
-    .fullDescMsg = MESSAGE_ID(0x2500D4),
-    .shortDescMsg = MESSAGE_ID(0x2300D4),
+    .nameMsg = MESSAGE_ID_2600D4,
+    .fullDescMsg = MESSAGE_ID_2500D4,
+    .shortDescMsg = MESSAGE_ID_2300D4,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SneakyParasol),
     .sortValue = 0,
@@ -1436,9 +1436,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6E: KootKoopaLegends
-    .nameMsg = MESSAGE_ID(0x260103),
-    .fullDescMsg = MESSAGE_ID(0x250103),
-    .shortDescMsg = MESSAGE_ID(0x230103),
+    .nameMsg = MESSAGE_ID_260103,
+    .fullDescMsg = MESSAGE_ID_250103,
+    .shortDescMsg = MESSAGE_ID_230103,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootKoopaLegends),
     .sortValue = 0,
@@ -1449,9 +1449,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 6F: KootLuigiAutograph
-    .nameMsg = MESSAGE_ID(0x260105),
-    .fullDescMsg = MESSAGE_ID(0x250105),
-    .shortDescMsg = MESSAGE_ID(0x230105),
+    .nameMsg = MESSAGE_ID_260105,
+    .fullDescMsg = MESSAGE_ID_250105,
+    .shortDescMsg = MESSAGE_ID_230105,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootLuigiAutograph),
     .sortValue = 0,
@@ -1462,9 +1462,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 70: KootEmptyWallet
-    .nameMsg = MESSAGE_ID(0x260106),
-    .fullDescMsg = MESSAGE_ID(0x250106),
-    .shortDescMsg = MESSAGE_ID(0x230106),
+    .nameMsg = MESSAGE_ID_260106,
+    .fullDescMsg = MESSAGE_ID_250106,
+    .shortDescMsg = MESSAGE_ID_230106,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootEmptyWallet),
     .sortValue = 0,
@@ -1475,9 +1475,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 71: KootMerluvleeAutograph
-    .nameMsg = MESSAGE_ID(0x260107),
-    .fullDescMsg = MESSAGE_ID(0x250107),
-    .shortDescMsg = MESSAGE_ID(0x230107),
+    .nameMsg = MESSAGE_ID_260107,
+    .fullDescMsg = MESSAGE_ID_250107,
+    .shortDescMsg = MESSAGE_ID_230107,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootMerluvleeAutograph),
     .sortValue = 0,
@@ -1501,9 +1501,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 73: KootOldPhoto
-    .nameMsg = MESSAGE_ID(0x260108),
-    .fullDescMsg = MESSAGE_ID(0x250108),
-    .shortDescMsg = MESSAGE_ID(0x230108),
+    .nameMsg = MESSAGE_ID_260108,
+    .fullDescMsg = MESSAGE_ID_250108,
+    .shortDescMsg = MESSAGE_ID_230108,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootPhoto),
     .sortValue = 0,
@@ -1514,9 +1514,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 74: KootGlasses
-    .nameMsg = MESSAGE_ID(0x260109),
-    .fullDescMsg = MESSAGE_ID(0x250109),
-    .shortDescMsg = MESSAGE_ID(0x230109),
+    .nameMsg = MESSAGE_ID_260109,
+    .fullDescMsg = MESSAGE_ID_250109,
+    .shortDescMsg = MESSAGE_ID_230109,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootGlasses),
     .sortValue = 0,
@@ -1540,9 +1540,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 76: KootPackage
-    .nameMsg = MESSAGE_ID(0x26010A),
-    .fullDescMsg = MESSAGE_ID(0x25010A),
-    .shortDescMsg = MESSAGE_ID(0x23010A),
+    .nameMsg = MESSAGE_ID_26010A,
+    .fullDescMsg = MESSAGE_ID_25010A,
+    .shortDescMsg = MESSAGE_ID_23010A,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootPackage),
     .sortValue = 0,
@@ -1553,9 +1553,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 77: KootRedJar
-    .nameMsg = MESSAGE_ID(0x26010B),
-    .fullDescMsg = MESSAGE_ID(0x25010B),
-    .shortDescMsg = MESSAGE_ID(0x23010B),
+    .nameMsg = MESSAGE_ID_26010B,
+    .fullDescMsg = MESSAGE_ID_25010B,
+    .shortDescMsg = MESSAGE_ID_23010B,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KootRedJar),
     .sortValue = 0,
@@ -1566,9 +1566,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 78: PeachKey2
-    .nameMsg = MESSAGE_ID(0x2600AC),
-    .fullDescMsg = MESSAGE_ID(0x2500AC),
-    .shortDescMsg = MESSAGE_ID(0x2300AC),
+    .nameMsg = MESSAGE_ID_2600AC,
+    .fullDescMsg = MESSAGE_ID_2500AC,
+    .shortDescMsg = MESSAGE_ID_2300AC,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PeachKey),
     .sortValue = 0,
@@ -1579,9 +1579,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 79: WarehouseKey
-    .nameMsg = MESSAGE_ID(0x2600CE),
-    .fullDescMsg = MESSAGE_ID(0x2500CE),
-    .shortDescMsg = MESSAGE_ID(0x2300CE),
+    .nameMsg = MESSAGE_ID_2600CE,
+    .fullDescMsg = MESSAGE_ID_2500CE,
+    .shortDescMsg = MESSAGE_ID_2300CE,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IronKey),
     .sortValue = 0,
@@ -1592,9 +1592,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7A: PrisonKey1
-    .nameMsg = MESSAGE_ID(0x2600D5),
-    .fullDescMsg = MESSAGE_ID(0x2500D5),
-    .shortDescMsg = MESSAGE_ID(0x2300D5),
+    .nameMsg = MESSAGE_ID_2600D5,
+    .fullDescMsg = MESSAGE_ID_2500D5,
+    .shortDescMsg = MESSAGE_ID_2300D5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IronKey),
     .sortValue = 0,
@@ -1605,9 +1605,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7B: SilverCredit
-    .nameMsg = MESSAGE_ID(0x2600E8),
-    .fullDescMsg = MESSAGE_ID(0x2500E8),
-    .shortDescMsg = MESSAGE_ID(0x2300E8),
+    .nameMsg = MESSAGE_ID_2600E8,
+    .fullDescMsg = MESSAGE_ID_2500E8,
+    .shortDescMsg = MESSAGE_ID_2300E8,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SilverCredit),
     .sortValue = 0,
@@ -1618,9 +1618,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7C: GoldCredit
-    .nameMsg = MESSAGE_ID(0x2600E9),
-    .fullDescMsg = MESSAGE_ID(0x2500E9),
-    .shortDescMsg = MESSAGE_ID(0x2300E9),
+    .nameMsg = MESSAGE_ID_2600E9,
+    .fullDescMsg = MESSAGE_ID_2500E9,
+    .shortDescMsg = MESSAGE_ID_2300E9,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_GoldCredit),
     .sortValue = 0,
@@ -1631,9 +1631,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7D: PrisonKey2
-    .nameMsg = MESSAGE_ID(0x2600D5),
-    .fullDescMsg = MESSAGE_ID(0x2500D5),
-    .shortDescMsg = MESSAGE_ID(0x2300D5),
+    .nameMsg = MESSAGE_ID_2600D5,
+    .fullDescMsg = MESSAGE_ID_2500D5,
+    .shortDescMsg = MESSAGE_ID_2300D5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PeachKey),
     .sortValue = 0,
@@ -1644,9 +1644,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7E: PrisonKey3
-    .nameMsg = MESSAGE_ID(0x2600D5),
-    .fullDescMsg = MESSAGE_ID(0x2500D5),
-    .shortDescMsg = MESSAGE_ID(0x2300D5),
+    .nameMsg = MESSAGE_ID_2600D5,
+    .fullDescMsg = MESSAGE_ID_2500D5,
+    .shortDescMsg = MESSAGE_ID_2300D5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PeachKey),
     .sortValue = 0,
@@ -1657,9 +1657,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 7F: PrisonKey4
-    .nameMsg = MESSAGE_ID(0x2600D5),
-    .fullDescMsg = MESSAGE_ID(0x2500D5),
-    .shortDescMsg = MESSAGE_ID(0x2300D5),
+    .nameMsg = MESSAGE_ID_2600D5,
+    .fullDescMsg = MESSAGE_ID_2500D5,
+    .shortDescMsg = MESSAGE_ID_2300D5,
     .sellValue = -1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PeachKey),
     .sortValue = 0,
@@ -1670,9 +1670,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 80: FireFlower
-    .nameMsg = MESSAGE_ID(0x260000),
-    .fullDescMsg = MESSAGE_ID(0x250000),
-    .shortDescMsg = MESSAGE_ID(0x230000),
+    .nameMsg = MESSAGE_ID_260000,
+    .fullDescMsg = MESSAGE_ID_250000,
+    .shortDescMsg = MESSAGE_ID_230000,
     .sellValue = 4,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FireFlower),
     .sortValue = 0,
@@ -1683,9 +1683,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 81: SnowmanDoll
-    .nameMsg = MESSAGE_ID(0x260001),
-    .fullDescMsg = MESSAGE_ID(0x250001),
-    .shortDescMsg = MESSAGE_ID(0x230001),
+    .nameMsg = MESSAGE_ID_260001,
+    .fullDescMsg = MESSAGE_ID_250001,
+    .shortDescMsg = MESSAGE_ID_230001,
     .sellValue = 6,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SnowmanDoll),
     .sortValue = 0,
@@ -1696,9 +1696,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 82: ThunderRage
-    .nameMsg = MESSAGE_ID(0x260002),
-    .fullDescMsg = MESSAGE_ID(0x250002),
-    .shortDescMsg = MESSAGE_ID(0x230002),
+    .nameMsg = MESSAGE_ID_260002,
+    .fullDescMsg = MESSAGE_ID_250002,
+    .shortDescMsg = MESSAGE_ID_230002,
     .sellValue = 8,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ThunderRage),
     .sortValue = 0,
@@ -1709,9 +1709,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 83: ShootingStar
-    .nameMsg = MESSAGE_ID(0x260004),
-    .fullDescMsg = MESSAGE_ID(0x250004),
-    .shortDescMsg = MESSAGE_ID(0x230004),
+    .nameMsg = MESSAGE_ID_260004,
+    .fullDescMsg = MESSAGE_ID_250004,
+    .shortDescMsg = MESSAGE_ID_230004,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ShootingStar),
     .sortValue = 0,
@@ -1722,9 +1722,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 84: ThunderBolt
-    .nameMsg = MESSAGE_ID(0x260003),
-    .fullDescMsg = MESSAGE_ID(0x250003),
-    .shortDescMsg = MESSAGE_ID(0x230003),
+    .nameMsg = MESSAGE_ID_260003,
+    .fullDescMsg = MESSAGE_ID_250003,
+    .shortDescMsg = MESSAGE_ID_230003,
     .sellValue = 4,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ThunderBolt),
     .sortValue = 0,
@@ -1735,9 +1735,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 85: Pebble
-    .nameMsg = MESSAGE_ID(0x260006),
-    .fullDescMsg = MESSAGE_ID(0x250006),
-    .shortDescMsg = MESSAGE_ID(0x230006),
+    .nameMsg = MESSAGE_ID_260006,
+    .fullDescMsg = MESSAGE_ID_250006,
+    .shortDescMsg = MESSAGE_ID_230006,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Pebble),
     .sortValue = 0,
@@ -1748,9 +1748,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 86: DustyHammer
-    .nameMsg = MESSAGE_ID(0x260005),
-    .fullDescMsg = MESSAGE_ID(0x250005),
-    .shortDescMsg = MESSAGE_ID(0x230005),
+    .nameMsg = MESSAGE_ID_260005,
+    .fullDescMsg = MESSAGE_ID_250005,
+    .shortDescMsg = MESSAGE_ID_230005,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DustyHammer),
     .sortValue = 0,
@@ -1774,9 +1774,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 88: StoneCap
-    .nameMsg = MESSAGE_ID(0x260007),
-    .fullDescMsg = MESSAGE_ID(0x250007),
-    .shortDescMsg = MESSAGE_ID(0x230007),
+    .nameMsg = MESSAGE_ID_260007,
+    .fullDescMsg = MESSAGE_ID_250007,
+    .shortDescMsg = MESSAGE_ID_230007,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StoneCap),
     .sortValue = 0,
@@ -1787,9 +1787,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 89: TastyTonic
-    .nameMsg = MESSAGE_ID(0x26000E),
-    .fullDescMsg = MESSAGE_ID(0x25000E),
-    .shortDescMsg = MESSAGE_ID(0x23000E),
+    .nameMsg = MESSAGE_ID_26000E,
+    .fullDescMsg = MESSAGE_ID_25000E,
+    .shortDescMsg = MESSAGE_ID_23000E,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_TastyTonic),
     .sortValue = 0,
@@ -1800,9 +1800,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8A: Mushroom
-    .nameMsg = MESSAGE_ID(0x260009),
-    .fullDescMsg = MESSAGE_ID(0x250009),
-    .shortDescMsg = MESSAGE_ID(0x230009),
+    .nameMsg = MESSAGE_ID_260009,
+    .fullDescMsg = MESSAGE_ID_250009,
+    .shortDescMsg = MESSAGE_ID_230009,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Mushroom),
     .sortValue = 0,
@@ -1813,9 +1813,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8B: VoltShroom
-    .nameMsg = MESSAGE_ID(0x260008),
-    .fullDescMsg = MESSAGE_ID(0x250008),
-    .shortDescMsg = MESSAGE_ID(0x230008),
+    .nameMsg = MESSAGE_ID_260008,
+    .fullDescMsg = MESSAGE_ID_250008,
+    .shortDescMsg = MESSAGE_ID_230008,
     .sellValue = 7,
     .hudElemID = ITEM_HS_INDEX(HES_Item_VoltShroom),
     .sortValue = 0,
@@ -1826,9 +1826,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8C: SuperShroom
-    .nameMsg = MESSAGE_ID(0x26000A),
-    .fullDescMsg = MESSAGE_ID(0x25000A),
-    .shortDescMsg = MESSAGE_ID(0x23000A),
+    .nameMsg = MESSAGE_ID_26000A,
+    .fullDescMsg = MESSAGE_ID_25000A,
+    .shortDescMsg = MESSAGE_ID_23000A,
     .sellValue = 7,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SuperShroom),
     .sortValue = 0,
@@ -1839,9 +1839,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8D: DriedShroom
-    .nameMsg = MESSAGE_ID(0x26000D),
-    .fullDescMsg = MESSAGE_ID(0x25000D),
-    .shortDescMsg = MESSAGE_ID(0x23000D),
+    .nameMsg = MESSAGE_ID_26000D,
+    .fullDescMsg = MESSAGE_ID_25000D,
+    .shortDescMsg = MESSAGE_ID_23000D,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DriedShroom),
     .sortValue = 0,
@@ -1852,9 +1852,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8E: UltraShroom
-    .nameMsg = MESSAGE_ID(0x26000B),
-    .fullDescMsg = MESSAGE_ID(0x25000B),
-    .shortDescMsg = MESSAGE_ID(0x23000B),
+    .nameMsg = MESSAGE_ID_26000B,
+    .fullDescMsg = MESSAGE_ID_25000B,
+    .shortDescMsg = MESSAGE_ID_23000B,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_UltraShroom),
     .sortValue = 0,
@@ -1865,9 +1865,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 8F: SleepySheep
-    .nameMsg = MESSAGE_ID(0x260026),
-    .fullDescMsg = MESSAGE_ID(0x250026),
-    .shortDescMsg = MESSAGE_ID(0x230026),
+    .nameMsg = MESSAGE_ID_260026,
+    .fullDescMsg = MESSAGE_ID_250026,
+    .shortDescMsg = MESSAGE_ID_230026,
     .sellValue = 4,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SleepySheep),
     .sortValue = 0,
@@ -1878,9 +1878,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 90: POWBlock
-    .nameMsg = MESSAGE_ID(0x260027),
-    .fullDescMsg = MESSAGE_ID(0x250027),
-    .shortDescMsg = MESSAGE_ID(0x230027),
+    .nameMsg = MESSAGE_ID_260027,
+    .fullDescMsg = MESSAGE_ID_250027,
+    .shortDescMsg = MESSAGE_ID_230027,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_POWBlock),
     .sortValue = 0,
@@ -1904,9 +1904,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 92: StopWatch
-    .nameMsg = MESSAGE_ID(0x260028),
-    .fullDescMsg = MESSAGE_ID(0x250028),
-    .shortDescMsg = MESSAGE_ID(0x230028),
+    .nameMsg = MESSAGE_ID_260028,
+    .fullDescMsg = MESSAGE_ID_250028,
+    .shortDescMsg = MESSAGE_ID_230028,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StopWatch),
     .sortValue = 0,
@@ -1917,9 +1917,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 93: WhackasBump
-    .nameMsg = MESSAGE_ID(0x260019),
-    .fullDescMsg = MESSAGE_ID(0x250019),
-    .shortDescMsg = MESSAGE_ID(0x230019),
+    .nameMsg = MESSAGE_ID_260019,
+    .fullDescMsg = MESSAGE_ID_250019,
+    .shortDescMsg = MESSAGE_ID_230019,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_WhackasBump),
     .sortValue = 0,
@@ -1930,9 +1930,9 @@ ItemData gItemTable[] = {
     .potencyB = 25
 },
 {   // item 94: Apple
-    .nameMsg = MESSAGE_ID(0x26001A),
-    .fullDescMsg = MESSAGE_ID(0x25001A),
-    .shortDescMsg = MESSAGE_ID(0x23001A),
+    .nameMsg = MESSAGE_ID_26001A,
+    .fullDescMsg = MESSAGE_ID_25001A,
+    .shortDescMsg = MESSAGE_ID_23001A,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Apple),
     .sortValue = 0,
@@ -1943,9 +1943,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 95: LifeShroom
-    .nameMsg = MESSAGE_ID(0x26000C),
-    .fullDescMsg = MESSAGE_ID(0x25000C),
-    .shortDescMsg = MESSAGE_ID(0x23000C),
+    .nameMsg = MESSAGE_ID_26000C,
+    .fullDescMsg = MESSAGE_ID_25000C,
+    .shortDescMsg = MESSAGE_ID_23000C,
     .sellValue = 20,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LifeShroom),
     .sortValue = 0,
@@ -1956,9 +1956,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 96: Mystery
-    .nameMsg = MESSAGE_ID(0x26002B),
-    .fullDescMsg = MESSAGE_ID(0x25002B),
-    .shortDescMsg = MESSAGE_ID(0x23002B),
+    .nameMsg = MESSAGE_ID_26002B,
+    .fullDescMsg = MESSAGE_ID_25002B,
+    .shortDescMsg = MESSAGE_ID_23002B,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Mystery),
     .sortValue = 0,
@@ -1969,9 +1969,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 97: RepelGel
-    .nameMsg = MESSAGE_ID(0x26002C),
-    .fullDescMsg = MESSAGE_ID(0x25002C),
-    .shortDescMsg = MESSAGE_ID(0x23002C),
+    .nameMsg = MESSAGE_ID_26002C,
+    .fullDescMsg = MESSAGE_ID_25002C,
+    .shortDescMsg = MESSAGE_ID_23002C,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RepelGel),
     .sortValue = 0,
@@ -1982,9 +1982,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 98: FrightJar
-    .nameMsg = MESSAGE_ID(0x26002A),
-    .fullDescMsg = MESSAGE_ID(0x25002A),
-    .shortDescMsg = MESSAGE_ID(0x23002A),
+    .nameMsg = MESSAGE_ID_26002A,
+    .fullDescMsg = MESSAGE_ID_25002A,
+    .shortDescMsg = MESSAGE_ID_23002A,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FrightJar),
     .sortValue = 0,
@@ -2008,9 +2008,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 9A: DizzyDial
-    .nameMsg = MESSAGE_ID(0x260029),
-    .fullDescMsg = MESSAGE_ID(0x250029),
-    .shortDescMsg = MESSAGE_ID(0x230029),
+    .nameMsg = MESSAGE_ID_260029,
+    .fullDescMsg = MESSAGE_ID_250029,
+    .shortDescMsg = MESSAGE_ID_230029,
     .sellValue = 6,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DizzyDial),
     .sortValue = 0,
@@ -2021,9 +2021,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 9B: SuperSoda
-    .nameMsg = MESSAGE_ID(0x26000F),
-    .fullDescMsg = MESSAGE_ID(0x25000F),
-    .shortDescMsg = MESSAGE_ID(0x23000F),
+    .nameMsg = MESSAGE_ID_26000F,
+    .fullDescMsg = MESSAGE_ID_25000F,
+    .shortDescMsg = MESSAGE_ID_23000F,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SuperSoda),
     .sortValue = 0,
@@ -2034,9 +2034,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item 9C: Lemon
-    .nameMsg = MESSAGE_ID(0x260015),
-    .fullDescMsg = MESSAGE_ID(0x250015),
-    .shortDescMsg = MESSAGE_ID(0x230015),
+    .nameMsg = MESSAGE_ID_260015,
+    .fullDescMsg = MESSAGE_ID_250015,
+    .shortDescMsg = MESSAGE_ID_230015,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Lemon),
     .sortValue = 0,
@@ -2047,9 +2047,9 @@ ItemData gItemTable[] = {
     .potencyB = 2
 },
 {   // item 9D: Lime
-    .nameMsg = MESSAGE_ID(0x260014),
-    .fullDescMsg = MESSAGE_ID(0x250014),
-    .shortDescMsg = MESSAGE_ID(0x230014),
+    .nameMsg = MESSAGE_ID_260014,
+    .fullDescMsg = MESSAGE_ID_250014,
+    .shortDescMsg = MESSAGE_ID_230014,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Lime),
     .sortValue = 0,
@@ -2060,9 +2060,9 @@ ItemData gItemTable[] = {
     .potencyB = 3
 },
 {   // item 9E: BlueBerry
-    .nameMsg = MESSAGE_ID(0x260010),
-    .fullDescMsg = MESSAGE_ID(0x250010),
-    .shortDescMsg = MESSAGE_ID(0x230010),
+    .nameMsg = MESSAGE_ID_260010,
+    .fullDescMsg = MESSAGE_ID_250010,
+    .shortDescMsg = MESSAGE_ID_230010,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BlueBerry),
     .sortValue = 0,
@@ -2073,9 +2073,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item 9F: RedBerry
-    .nameMsg = MESSAGE_ID(0x260011),
-    .fullDescMsg = MESSAGE_ID(0x250011),
-    .shortDescMsg = MESSAGE_ID(0x230011),
+    .nameMsg = MESSAGE_ID_260011,
+    .fullDescMsg = MESSAGE_ID_250011,
+    .shortDescMsg = MESSAGE_ID_230011,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RedBerry),
     .sortValue = 0,
@@ -2086,9 +2086,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item A0: YellowBerry
-    .nameMsg = MESSAGE_ID(0x260012),
-    .fullDescMsg = MESSAGE_ID(0x250012),
-    .shortDescMsg = MESSAGE_ID(0x230012),
+    .nameMsg = MESSAGE_ID_260012,
+    .fullDescMsg = MESSAGE_ID_250012,
+    .shortDescMsg = MESSAGE_ID_230012,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_YellowBerry),
     .sortValue = 0,
@@ -2099,9 +2099,9 @@ ItemData gItemTable[] = {
     .potencyB = 3
 },
 {   // item A1: BubbleBerry
-    .nameMsg = MESSAGE_ID(0x260013),
-    .fullDescMsg = MESSAGE_ID(0x250013),
-    .shortDescMsg = MESSAGE_ID(0x230013),
+    .nameMsg = MESSAGE_ID_260013,
+    .fullDescMsg = MESSAGE_ID_250013,
+    .shortDescMsg = MESSAGE_ID_230013,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BubbleBerry),
     .sortValue = 0,
@@ -2112,9 +2112,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item A2: JamminJelly
-    .nameMsg = MESSAGE_ID(0x260018),
-    .fullDescMsg = MESSAGE_ID(0x250018),
-    .shortDescMsg = MESSAGE_ID(0x230018),
+    .nameMsg = MESSAGE_ID_260018,
+    .fullDescMsg = MESSAGE_ID_250018,
+    .shortDescMsg = MESSAGE_ID_230018,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JamminJelly),
     .sortValue = 0,
@@ -2125,9 +2125,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item A3: MapleSyrup
-    .nameMsg = MESSAGE_ID(0x260017),
-    .fullDescMsg = MESSAGE_ID(0x250017),
-    .shortDescMsg = MESSAGE_ID(0x230017),
+    .nameMsg = MESSAGE_ID_260017,
+    .fullDescMsg = MESSAGE_ID_250017,
+    .shortDescMsg = MESSAGE_ID_230017,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MapleSyrup),
     .sortValue = 0,
@@ -2138,9 +2138,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item A4: HoneySyrup
-    .nameMsg = MESSAGE_ID(0x260016),
-    .fullDescMsg = MESSAGE_ID(0x250016),
-    .shortDescMsg = MESSAGE_ID(0x230016),
+    .nameMsg = MESSAGE_ID_260016,
+    .fullDescMsg = MESSAGE_ID_250016,
+    .shortDescMsg = MESSAGE_ID_230016,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HoneySyrup),
     .sortValue = 0,
@@ -2151,9 +2151,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item A5: Goomnut
-    .nameMsg = MESSAGE_ID(0x26001B),
-    .fullDescMsg = MESSAGE_ID(0x25001B),
-    .shortDescMsg = MESSAGE_ID(0x23001B),
+    .nameMsg = MESSAGE_ID_26001B,
+    .fullDescMsg = MESSAGE_ID_25001B,
+    .shortDescMsg = MESSAGE_ID_23001B,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Goomnut),
     .sortValue = 0,
@@ -2164,9 +2164,9 @@ ItemData gItemTable[] = {
     .potencyB = 3
 },
 {   // item A6: KoopaLeaf
-    .nameMsg = MESSAGE_ID(0x26001C),
-    .fullDescMsg = MESSAGE_ID(0x25001C),
-    .shortDescMsg = MESSAGE_ID(0x23001C),
+    .nameMsg = MESSAGE_ID_26001C,
+    .fullDescMsg = MESSAGE_ID_25001C,
+    .shortDescMsg = MESSAGE_ID_23001C,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KoopaLeaf),
     .sortValue = 0,
@@ -2177,9 +2177,9 @@ ItemData gItemTable[] = {
     .potencyB = 3
 },
 {   // item A7: DriedPasta
-    .nameMsg = MESSAGE_ID(0x26001D),
-    .fullDescMsg = MESSAGE_ID(0x25001D),
-    .shortDescMsg = MESSAGE_ID(0x23001D),
+    .nameMsg = MESSAGE_ID_26001D,
+    .fullDescMsg = MESSAGE_ID_25001D,
+    .shortDescMsg = MESSAGE_ID_23001D,
     .sellValue = 4,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DriedPasta),
     .sortValue = 0,
@@ -2190,9 +2190,9 @@ ItemData gItemTable[] = {
     .potencyB = 2
 },
 {   // item A8: DriedFruit
-    .nameMsg = MESSAGE_ID(0x26001E),
-    .fullDescMsg = MESSAGE_ID(0x25001E),
-    .shortDescMsg = MESSAGE_ID(0x23001E),
+    .nameMsg = MESSAGE_ID_26001E,
+    .fullDescMsg = MESSAGE_ID_25001E,
+    .shortDescMsg = MESSAGE_ID_23001E,
     .sellValue = 5,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DriedFruit),
     .sortValue = 0,
@@ -2203,9 +2203,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item A9: StrangeLeaf
-    .nameMsg = MESSAGE_ID(0x26001F),
-    .fullDescMsg = MESSAGE_ID(0x25001F),
-    .shortDescMsg = MESSAGE_ID(0x23001F),
+    .nameMsg = MESSAGE_ID_26001F,
+    .fullDescMsg = MESSAGE_ID_25001F,
+    .shortDescMsg = MESSAGE_ID_23001F,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StrangeLeaf),
     .sortValue = 0,
@@ -2216,9 +2216,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item AA: CakeMix
-    .nameMsg = MESSAGE_ID(0x260020),
-    .fullDescMsg = MESSAGE_ID(0x250020),
-    .shortDescMsg = MESSAGE_ID(0x230020),
+    .nameMsg = MESSAGE_ID_260020,
+    .fullDescMsg = MESSAGE_ID_250020,
+    .shortDescMsg = MESSAGE_ID_230020,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CakeMix),
     .sortValue = 0,
@@ -2229,9 +2229,9 @@ ItemData gItemTable[] = {
     .potencyB = 1
 },
 {   // item AB: Egg
-    .nameMsg = MESSAGE_ID(0x260021),
-    .fullDescMsg = MESSAGE_ID(0x250021),
-    .shortDescMsg = MESSAGE_ID(0x230021),
+    .nameMsg = MESSAGE_ID_260021,
+    .fullDescMsg = MESSAGE_ID_250021,
+    .shortDescMsg = MESSAGE_ID_230021,
     .sellValue = 2,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Egg),
     .sortValue = 0,
@@ -2242,9 +2242,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item AC: Coconut
-    .nameMsg = MESSAGE_ID(0x260022),
-    .fullDescMsg = MESSAGE_ID(0x250022),
-    .shortDescMsg = MESSAGE_ID(0x230022),
+    .nameMsg = MESSAGE_ID_260022,
+    .fullDescMsg = MESSAGE_ID_250022,
+    .shortDescMsg = MESSAGE_ID_230022,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Coconut),
     .sortValue = 0,
@@ -2255,9 +2255,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item AD: Melon
-    .nameMsg = MESSAGE_ID(0x260023),
-    .fullDescMsg = MESSAGE_ID(0x250023),
-    .shortDescMsg = MESSAGE_ID(0x230023),
+    .nameMsg = MESSAGE_ID_260023,
+    .fullDescMsg = MESSAGE_ID_250023,
+    .shortDescMsg = MESSAGE_ID_230023,
     .sellValue = 7,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Melon),
     .sortValue = 0,
@@ -2268,9 +2268,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item AE: StinkyHerb
-    .nameMsg = MESSAGE_ID(0x260024),
-    .fullDescMsg = MESSAGE_ID(0x250024),
-    .shortDescMsg = MESSAGE_ID(0x230024),
+    .nameMsg = MESSAGE_ID_260024,
+    .fullDescMsg = MESSAGE_ID_250024,
+    .shortDescMsg = MESSAGE_ID_230024,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StinkyHerb),
     .sortValue = 0,
@@ -2281,9 +2281,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item AF: IcedPotato
-    .nameMsg = MESSAGE_ID(0x260025),
-    .fullDescMsg = MESSAGE_ID(0x250025),
-    .shortDescMsg = MESSAGE_ID(0x230025),
+    .nameMsg = MESSAGE_ID_260025,
+    .fullDescMsg = MESSAGE_ID_250025,
+    .shortDescMsg = MESSAGE_ID_230025,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IcedPotato),
     .sortValue = 0,
@@ -2294,9 +2294,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item B0: SpicySoup
-    .nameMsg = MESSAGE_ID(0x26002D),
-    .fullDescMsg = MESSAGE_ID(0x25002D),
-    .shortDescMsg = MESSAGE_ID(0x23002D),
+    .nameMsg = MESSAGE_ID_26002D,
+    .fullDescMsg = MESSAGE_ID_25002D,
+    .shortDescMsg = MESSAGE_ID_23002D,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpicySoup),
     .sortValue = 0,
@@ -2307,9 +2307,9 @@ ItemData gItemTable[] = {
     .potencyB = 4
 },
 {   // item B1: ApplePie
-    .nameMsg = MESSAGE_ID(0x26002E),
-    .fullDescMsg = MESSAGE_ID(0x25002E),
-    .shortDescMsg = MESSAGE_ID(0x23002E),
+    .nameMsg = MESSAGE_ID_26002E,
+    .fullDescMsg = MESSAGE_ID_25002E,
+    .shortDescMsg = MESSAGE_ID_23002E,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ApplePie),
     .sortValue = 0,
@@ -2320,9 +2320,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item B2: HoneyUltra
-    .nameMsg = MESSAGE_ID(0x260035),
-    .fullDescMsg = MESSAGE_ID(0x250035),
-    .shortDescMsg = MESSAGE_ID(0x230035),
+    .nameMsg = MESSAGE_ID_260035,
+    .fullDescMsg = MESSAGE_ID_250035,
+    .shortDescMsg = MESSAGE_ID_230035,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HoneyUltra),
     .sortValue = 0,
@@ -2333,9 +2333,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item B3: MapleUltra
-    .nameMsg = MESSAGE_ID(0x260036),
-    .fullDescMsg = MESSAGE_ID(0x250036),
-    .shortDescMsg = MESSAGE_ID(0x230036),
+    .nameMsg = MESSAGE_ID_260036,
+    .fullDescMsg = MESSAGE_ID_250036,
+    .shortDescMsg = MESSAGE_ID_230036,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MapleUltra),
     .sortValue = 0,
@@ -2346,9 +2346,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item B4: JellyUltra
-    .nameMsg = MESSAGE_ID(0x260037),
-    .fullDescMsg = MESSAGE_ID(0x250037),
-    .shortDescMsg = MESSAGE_ID(0x230037),
+    .nameMsg = MESSAGE_ID_260037,
+    .fullDescMsg = MESSAGE_ID_250037,
+    .shortDescMsg = MESSAGE_ID_230037,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyUltra),
     .sortValue = 0,
@@ -2359,9 +2359,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item B5: Koopasta
-    .nameMsg = MESSAGE_ID(0x260038),
-    .fullDescMsg = MESSAGE_ID(0x250038),
-    .shortDescMsg = MESSAGE_ID(0x230038),
+    .nameMsg = MESSAGE_ID_260038,
+    .fullDescMsg = MESSAGE_ID_250038,
+    .shortDescMsg = MESSAGE_ID_230038,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Koopasta),
     .sortValue = 0,
@@ -2372,9 +2372,9 @@ ItemData gItemTable[] = {
     .potencyB = 7
 },
 {   // item B6: FriedShroom
-    .nameMsg = MESSAGE_ID(0x260039),
-    .fullDescMsg = MESSAGE_ID(0x250039),
-    .shortDescMsg = MESSAGE_ID(0x230039),
+    .nameMsg = MESSAGE_ID_260039,
+    .fullDescMsg = MESSAGE_ID_250039,
+    .shortDescMsg = MESSAGE_ID_230039,
     .sellValue = 5,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FriedShroom),
     .sortValue = 0,
@@ -2385,9 +2385,9 @@ ItemData gItemTable[] = {
     .potencyB = 2
 },
 {   // item B7: ShroomCake
-    .nameMsg = MESSAGE_ID(0x26003C),
-    .fullDescMsg = MESSAGE_ID(0x25003C),
-    .shortDescMsg = MESSAGE_ID(0x23003C),
+    .nameMsg = MESSAGE_ID_26003C,
+    .fullDescMsg = MESSAGE_ID_25003C,
+    .shortDescMsg = MESSAGE_ID_23003C,
     .sellValue = 20,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ShroomCake),
     .sortValue = 0,
@@ -2398,9 +2398,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item B8: ShroomSteak
-    .nameMsg = MESSAGE_ID(0x26003B),
-    .fullDescMsg = MESSAGE_ID(0x25003B),
-    .shortDescMsg = MESSAGE_ID(0x23003B),
+    .nameMsg = MESSAGE_ID_26003B,
+    .fullDescMsg = MESSAGE_ID_25003B,
+    .shortDescMsg = MESSAGE_ID_23003B,
     .sellValue = 45,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ShroomSteak),
     .sortValue = 0,
@@ -2411,9 +2411,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item B9: HotShroom
-    .nameMsg = MESSAGE_ID(0x26003A),
-    .fullDescMsg = MESSAGE_ID(0x25003A),
-    .shortDescMsg = MESSAGE_ID(0x23003A),
+    .nameMsg = MESSAGE_ID_26003A,
+    .fullDescMsg = MESSAGE_ID_25003A,
+    .shortDescMsg = MESSAGE_ID_23003A,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HotShroom),
     .sortValue = 0,
@@ -2424,9 +2424,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item BA: SweetShroom
-    .nameMsg = MESSAGE_ID(0x26003D),
-    .fullDescMsg = MESSAGE_ID(0x25003D),
-    .shortDescMsg = MESSAGE_ID(0x23003D),
+    .nameMsg = MESSAGE_ID_26003D,
+    .fullDescMsg = MESSAGE_ID_25003D,
+    .shortDescMsg = MESSAGE_ID_23003D,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SweetShroom),
     .sortValue = 0,
@@ -2437,9 +2437,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item BB: YummyMeal
-    .nameMsg = MESSAGE_ID(0x26003F),
-    .fullDescMsg = MESSAGE_ID(0x25003F),
-    .shortDescMsg = MESSAGE_ID(0x23003F),
+    .nameMsg = MESSAGE_ID_26003F,
+    .fullDescMsg = MESSAGE_ID_25003F,
+    .shortDescMsg = MESSAGE_ID_23003F,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_YummyMeal),
     .sortValue = 0,
@@ -2450,9 +2450,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item BC: HealthyJuice
-    .nameMsg = MESSAGE_ID(0x260042),
-    .fullDescMsg = MESSAGE_ID(0x250042),
-    .shortDescMsg = MESSAGE_ID(0x230042),
+    .nameMsg = MESSAGE_ID_260042,
+    .fullDescMsg = MESSAGE_ID_250042,
+    .shortDescMsg = MESSAGE_ID_230042,
     .sellValue = 25,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HealthyJuice),
     .sortValue = 0,
@@ -2463,9 +2463,9 @@ ItemData gItemTable[] = {
     .potencyB = 40
 },
 {   // item BD: BlandMeal
-    .nameMsg = MESSAGE_ID(0x26003E),
-    .fullDescMsg = MESSAGE_ID(0x25003E),
-    .shortDescMsg = MESSAGE_ID(0x23003E),
+    .nameMsg = MESSAGE_ID_26003E,
+    .fullDescMsg = MESSAGE_ID_25003E,
+    .shortDescMsg = MESSAGE_ID_23003E,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BlandMeal),
     .sortValue = 0,
@@ -2476,9 +2476,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item BE: DeluxeFeast
-    .nameMsg = MESSAGE_ID(0x260040),
-    .fullDescMsg = MESSAGE_ID(0x250040),
-    .shortDescMsg = MESSAGE_ID(0x230040),
+    .nameMsg = MESSAGE_ID_260040,
+    .fullDescMsg = MESSAGE_ID_250040,
+    .shortDescMsg = MESSAGE_ID_230040,
     .sellValue = 60,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DeluxeFeast),
     .sortValue = 0,
@@ -2489,9 +2489,9 @@ ItemData gItemTable[] = {
     .potencyB = 40
 },
 {   // item BF: SpecialShake
-    .nameMsg = MESSAGE_ID(0x260041),
-    .fullDescMsg = MESSAGE_ID(0x250041),
-    .shortDescMsg = MESSAGE_ID(0x230041),
+    .nameMsg = MESSAGE_ID_260041,
+    .fullDescMsg = MESSAGE_ID_250041,
+    .shortDescMsg = MESSAGE_ID_230041,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpecialShake),
     .sortValue = 0,
@@ -2502,9 +2502,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item C0: BigCookie
-    .nameMsg = MESSAGE_ID(0x260043),
-    .fullDescMsg = MESSAGE_ID(0x250043),
-    .shortDescMsg = MESSAGE_ID(0x230043),
+    .nameMsg = MESSAGE_ID_260043,
+    .fullDescMsg = MESSAGE_ID_250043,
+    .shortDescMsg = MESSAGE_ID_230043,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BigCookie),
     .sortValue = 0,
@@ -2515,9 +2515,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item C1: Cake
-    .nameMsg = MESSAGE_ID(0x260044),
-    .fullDescMsg = MESSAGE_ID(0x250044),
-    .shortDescMsg = MESSAGE_ID(0x230044),
+    .nameMsg = MESSAGE_ID_260044,
+    .fullDescMsg = MESSAGE_ID_250044,
+    .shortDescMsg = MESSAGE_ID_230044,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Cake),
     .sortValue = 0,
@@ -2528,9 +2528,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item C2: Mistake
-    .nameMsg = MESSAGE_ID(0x260045),
-    .fullDescMsg = MESSAGE_ID(0x250045),
-    .shortDescMsg = MESSAGE_ID(0x230045),
+    .nameMsg = MESSAGE_ID_260045,
+    .fullDescMsg = MESSAGE_ID_250045,
+    .shortDescMsg = MESSAGE_ID_230045,
     .sellValue = 1,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Mistake),
     .sortValue = 0,
@@ -2541,9 +2541,9 @@ ItemData gItemTable[] = {
     .potencyB = 1
 },
 {   // item C3: KoopaTea
-    .nameMsg = MESSAGE_ID(0x260046),
-    .fullDescMsg = MESSAGE_ID(0x250046),
-    .shortDescMsg = MESSAGE_ID(0x230046),
+    .nameMsg = MESSAGE_ID_260046,
+    .fullDescMsg = MESSAGE_ID_250046,
+    .shortDescMsg = MESSAGE_ID_230046,
     .sellValue = 3,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KoopaTea),
     .sortValue = 0,
@@ -2554,9 +2554,9 @@ ItemData gItemTable[] = {
     .potencyB = 7
 },
 {   // item C4: HoneySuper
-    .nameMsg = MESSAGE_ID(0x260032),
-    .fullDescMsg = MESSAGE_ID(0x250032),
-    .shortDescMsg = MESSAGE_ID(0x230032),
+    .nameMsg = MESSAGE_ID_260032,
+    .fullDescMsg = MESSAGE_ID_250032,
+    .shortDescMsg = MESSAGE_ID_230032,
     .sellValue = 20,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HoneySuper),
     .sortValue = 0,
@@ -2567,9 +2567,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item C5: MapleSuper
-    .nameMsg = MESSAGE_ID(0x260033),
-    .fullDescMsg = MESSAGE_ID(0x250033),
-    .shortDescMsg = MESSAGE_ID(0x230033),
+    .nameMsg = MESSAGE_ID_260033,
+    .fullDescMsg = MESSAGE_ID_250033,
+    .shortDescMsg = MESSAGE_ID_230033,
     .sellValue = 35,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MapleSuper),
     .sortValue = 0,
@@ -2580,9 +2580,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item C6: JellySuper
-    .nameMsg = MESSAGE_ID(0x260034),
-    .fullDescMsg = MESSAGE_ID(0x250034),
-    .shortDescMsg = MESSAGE_ID(0x230034),
+    .nameMsg = MESSAGE_ID_260034,
+    .fullDescMsg = MESSAGE_ID_250034,
+    .shortDescMsg = MESSAGE_ID_230034,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellySuper),
     .sortValue = 0,
@@ -2593,9 +2593,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item C7: Spaghetti
-    .nameMsg = MESSAGE_ID(0x260047),
-    .fullDescMsg = MESSAGE_ID(0x250047),
-    .shortDescMsg = MESSAGE_ID(0x230047),
+    .nameMsg = MESSAGE_ID_260047,
+    .fullDescMsg = MESSAGE_ID_250047,
+    .shortDescMsg = MESSAGE_ID_230047,
     .sellValue = 7,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Spaghetti),
     .sortValue = 0,
@@ -2606,9 +2606,9 @@ ItemData gItemTable[] = {
     .potencyB = 4
 },
 {   // item C8: EggMissile
-    .nameMsg = MESSAGE_ID(0x260048),
-    .fullDescMsg = MESSAGE_ID(0x250048),
-    .shortDescMsg = MESSAGE_ID(0x230048),
+    .nameMsg = MESSAGE_ID_260048,
+    .fullDescMsg = MESSAGE_ID_250048,
+    .shortDescMsg = MESSAGE_ID_230048,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_EggMissile),
     .sortValue = 0,
@@ -2619,9 +2619,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item C9: FriedEgg
-    .nameMsg = MESSAGE_ID(0x260049),
-    .fullDescMsg = MESSAGE_ID(0x250049),
-    .shortDescMsg = MESSAGE_ID(0x230049),
+    .nameMsg = MESSAGE_ID_260049,
+    .fullDescMsg = MESSAGE_ID_250049,
+    .shortDescMsg = MESSAGE_ID_230049,
     .sellValue = 7,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FriedEgg),
     .sortValue = 0,
@@ -2632,9 +2632,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item CA: HoneyShroom
-    .nameMsg = MESSAGE_ID(0x26002F),
-    .fullDescMsg = MESSAGE_ID(0x25002F),
-    .shortDescMsg = MESSAGE_ID(0x23002F),
+    .nameMsg = MESSAGE_ID_26002F,
+    .fullDescMsg = MESSAGE_ID_25002F,
+    .shortDescMsg = MESSAGE_ID_23002F,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HoneyShroom),
     .sortValue = 0,
@@ -2645,9 +2645,9 @@ ItemData gItemTable[] = {
     .potencyB = 5
 },
 {   // item CB: HoneyCandy
-    .nameMsg = MESSAGE_ID(0x26004A),
-    .fullDescMsg = MESSAGE_ID(0x25004A),
-    .shortDescMsg = MESSAGE_ID(0x23004A),
+    .nameMsg = MESSAGE_ID_26004A,
+    .fullDescMsg = MESSAGE_ID_25004A,
+    .shortDescMsg = MESSAGE_ID_23004A,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HoneyCandy),
     .sortValue = 0,
@@ -2658,9 +2658,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item CC: ElectroPop
-    .nameMsg = MESSAGE_ID(0x26004B),
-    .fullDescMsg = MESSAGE_ID(0x25004B),
-    .shortDescMsg = MESSAGE_ID(0x23004B),
+    .nameMsg = MESSAGE_ID_26004B,
+    .fullDescMsg = MESSAGE_ID_25004B,
+    .shortDescMsg = MESSAGE_ID_23004B,
     .sellValue = 25,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ElectroPop),
     .sortValue = 0,
@@ -2671,9 +2671,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item CD: FirePop
-    .nameMsg = MESSAGE_ID(0x26004C),
-    .fullDescMsg = MESSAGE_ID(0x25004C),
-    .shortDescMsg = MESSAGE_ID(0x23004C),
+    .nameMsg = MESSAGE_ID_26004C,
+    .fullDescMsg = MESSAGE_ID_25004C,
+    .shortDescMsg = MESSAGE_ID_23004C,
     .sellValue = 20,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FirePop),
     .sortValue = 0,
@@ -2684,9 +2684,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item CE: LimeCandy
-    .nameMsg = MESSAGE_ID(0x26004D),
-    .fullDescMsg = MESSAGE_ID(0x25004D),
-    .shortDescMsg = MESSAGE_ID(0x23004D),
+    .nameMsg = MESSAGE_ID_26004D,
+    .fullDescMsg = MESSAGE_ID_25004D,
+    .shortDescMsg = MESSAGE_ID_23004D,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LimeCandy),
     .sortValue = 0,
@@ -2697,9 +2697,9 @@ ItemData gItemTable[] = {
     .potencyB = 20
 },
 {   // item CF: CocoPop
-    .nameMsg = MESSAGE_ID(0x26004E),
-    .fullDescMsg = MESSAGE_ID(0x25004E),
-    .shortDescMsg = MESSAGE_ID(0x23004E),
+    .nameMsg = MESSAGE_ID_26004E,
+    .fullDescMsg = MESSAGE_ID_25004E,
+    .shortDescMsg = MESSAGE_ID_23004E,
     .sellValue = 12,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CocoPop),
     .sortValue = 0,
@@ -2710,9 +2710,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item D0: LemonCandy
-    .nameMsg = MESSAGE_ID(0x26004F),
-    .fullDescMsg = MESSAGE_ID(0x25004F),
-    .shortDescMsg = MESSAGE_ID(0x23004F),
+    .nameMsg = MESSAGE_ID_26004F,
+    .fullDescMsg = MESSAGE_ID_25004F,
+    .shortDescMsg = MESSAGE_ID_23004F,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LemonCandy),
     .sortValue = 0,
@@ -2723,9 +2723,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item D1: JellyPop
-    .nameMsg = MESSAGE_ID(0x260050),
-    .fullDescMsg = MESSAGE_ID(0x250050),
-    .shortDescMsg = MESSAGE_ID(0x230050),
+    .nameMsg = MESSAGE_ID_260050,
+    .fullDescMsg = MESSAGE_ID_250050,
+    .shortDescMsg = MESSAGE_ID_230050,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyPop),
     .sortValue = 0,
@@ -2736,9 +2736,9 @@ ItemData gItemTable[] = {
     .potencyB = 64
 },
 {   // item D2: StrangeCake
-    .nameMsg = MESSAGE_ID(0x260051),
-    .fullDescMsg = MESSAGE_ID(0x250051),
-    .shortDescMsg = MESSAGE_ID(0x230051),
+    .nameMsg = MESSAGE_ID_260051,
+    .fullDescMsg = MESSAGE_ID_250051,
+    .shortDescMsg = MESSAGE_ID_230051,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_StrangeCake),
     .sortValue = 0,
@@ -2749,9 +2749,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item D3: KookyCookie
-    .nameMsg = MESSAGE_ID(0x260052),
-    .fullDescMsg = MESSAGE_ID(0x250052),
-    .shortDescMsg = MESSAGE_ID(0x230052),
+    .nameMsg = MESSAGE_ID_260052,
+    .fullDescMsg = MESSAGE_ID_250052,
+    .shortDescMsg = MESSAGE_ID_230052,
     .sellValue = 12,
     .hudElemID = ITEM_HS_INDEX(HES_Item_KookyCookie),
     .sortValue = 0,
@@ -2762,9 +2762,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item D4: FrozenFries
-    .nameMsg = MESSAGE_ID(0x260053),
-    .fullDescMsg = MESSAGE_ID(0x250053),
-    .shortDescMsg = MESSAGE_ID(0x230053),
+    .nameMsg = MESSAGE_ID_260053,
+    .fullDescMsg = MESSAGE_ID_250053,
+    .shortDescMsg = MESSAGE_ID_230053,
     .sellValue = 15,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FrozenFries),
     .sortValue = 0,
@@ -2775,9 +2775,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item D5: PotatoSalad
-    .nameMsg = MESSAGE_ID(0x260054),
-    .fullDescMsg = MESSAGE_ID(0x250054),
-    .shortDescMsg = MESSAGE_ID(0x230054),
+    .nameMsg = MESSAGE_ID_260054,
+    .fullDescMsg = MESSAGE_ID_250054,
+    .shortDescMsg = MESSAGE_ID_230054,
     .sellValue = 6,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PotatoSalad),
     .sortValue = 0,
@@ -2788,9 +2788,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item D6: NuttyCake
-    .nameMsg = MESSAGE_ID(0x260055),
-    .fullDescMsg = MESSAGE_ID(0x250055),
-    .shortDescMsg = MESSAGE_ID(0x230055),
+    .nameMsg = MESSAGE_ID_260055,
+    .fullDescMsg = MESSAGE_ID_250055,
+    .shortDescMsg = MESSAGE_ID_230055,
     .sellValue = 6,
     .hudElemID = ITEM_HS_INDEX(HES_Item_NuttyCake),
     .sortValue = 0,
@@ -2801,9 +2801,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item D7: MapleShroom
-    .nameMsg = MESSAGE_ID(0x260030),
-    .fullDescMsg = MESSAGE_ID(0x250030),
-    .shortDescMsg = MESSAGE_ID(0x230030),
+    .nameMsg = MESSAGE_ID_260030,
+    .fullDescMsg = MESSAGE_ID_250030,
+    .shortDescMsg = MESSAGE_ID_230030,
     .sellValue = 25,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MapleShroom),
     .sortValue = 0,
@@ -2814,9 +2814,9 @@ ItemData gItemTable[] = {
     .potencyB = 10
 },
 {   // item D8: BoiledEgg
-    .nameMsg = MESSAGE_ID(0x260056),
-    .fullDescMsg = MESSAGE_ID(0x250056),
-    .shortDescMsg = MESSAGE_ID(0x230056),
+    .nameMsg = MESSAGE_ID_260056,
+    .fullDescMsg = MESSAGE_ID_250056,
+    .shortDescMsg = MESSAGE_ID_230056,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BoiledEgg),
     .sortValue = 0,
@@ -2827,9 +2827,9 @@ ItemData gItemTable[] = {
     .potencyB = 8
 },
 {   // item D9: YoshiCookie
-    .nameMsg = MESSAGE_ID(0x260057),
-    .fullDescMsg = MESSAGE_ID(0x250057),
-    .shortDescMsg = MESSAGE_ID(0x230057),
+    .nameMsg = MESSAGE_ID_260057,
+    .fullDescMsg = MESSAGE_ID_250057,
+    .shortDescMsg = MESSAGE_ID_230057,
     .sellValue = 20,
     .hudElemID = ITEM_HS_INDEX(HES_Item_YoshiCookie),
     .sortValue = 0,
@@ -2840,9 +2840,9 @@ ItemData gItemTable[] = {
     .potencyB = 15
 },
 {   // item DA: JellyShroom1
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2853,9 +2853,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item DB: JellyShroom2
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2866,9 +2866,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item DC: JellyShroom3
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2879,9 +2879,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item DD: JellyShroom4
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2892,9 +2892,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item DE: JellyShroom5
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2905,9 +2905,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item DF: JellyShroom6
-    .nameMsg = MESSAGE_ID(0x260031),
-    .fullDescMsg = MESSAGE_ID(0x250031),
-    .shortDescMsg = MESSAGE_ID(0x230031),
+    .nameMsg = MESSAGE_ID_260031,
+    .fullDescMsg = MESSAGE_ID_250031,
+    .shortDescMsg = MESSAGE_ID_230031,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JellyShroom),
     .sortValue = 0,
@@ -2918,9 +2918,9 @@ ItemData gItemTable[] = {
     .potencyB = 50
 },
 {   // item E0: SpinSmash
-    .nameMsg = MESSAGE_ID(0x260068),
-    .fullDescMsg = MESSAGE_ID(0x250068),
-    .shortDescMsg = MESSAGE_ID(0x230068),
+    .nameMsg = MESSAGE_ID_260068,
+    .fullDescMsg = MESSAGE_ID_250068,
+    .shortDescMsg = MESSAGE_ID_230068,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpinSmash),
     .sortValue = 23,
@@ -2931,9 +2931,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E1: Multibounce
-    .nameMsg = MESSAGE_ID(0x26005E),
-    .fullDescMsg = MESSAGE_ID(0x25005E),
-    .shortDescMsg = MESSAGE_ID(0x23005E),
+    .nameMsg = MESSAGE_ID_26005E,
+    .fullDescMsg = MESSAGE_ID_25005E,
+    .shortDescMsg = MESSAGE_ID_23005E,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Multibounce),
     .sortValue = 4,
@@ -2944,9 +2944,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E2: PowerPlusA
-    .nameMsg = MESSAGE_ID(0x260073),
-    .fullDescMsg = MESSAGE_ID(0x250073),
-    .shortDescMsg = MESSAGE_ID(0x230073),
+    .nameMsg = MESSAGE_ID_260073,
+    .fullDescMsg = MESSAGE_ID_250073,
+    .shortDescMsg = MESSAGE_ID_230073,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerPlus),
     .sortValue = 67,
@@ -2957,9 +2957,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E3: DodgeMaster
-    .nameMsg = MESSAGE_ID(0x260080),
-    .fullDescMsg = MESSAGE_ID(0x250080),
-    .shortDescMsg = MESSAGE_ID(0x230080),
+    .nameMsg = MESSAGE_ID_260080,
+    .fullDescMsg = MESSAGE_ID_250080,
+    .shortDescMsg = MESSAGE_ID_230080,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DodgeMaster),
     .sortValue = 40,
@@ -2970,9 +2970,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E4: PowerBounce
-    .nameMsg = MESSAGE_ID(0x260061),
-    .fullDescMsg = MESSAGE_ID(0x250061),
-    .shortDescMsg = MESSAGE_ID(0x230061),
+    .nameMsg = MESSAGE_ID_260061,
+    .fullDescMsg = MESSAGE_ID_250061,
+    .shortDescMsg = MESSAGE_ID_230061,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerBounce),
     .sortValue = 13,
@@ -2983,9 +2983,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E5: SpikeShield
-    .nameMsg = MESSAGE_ID(0x26007F),
-    .fullDescMsg = MESSAGE_ID(0x25007F),
-    .shortDescMsg = MESSAGE_ID(0x23007F),
+    .nameMsg = MESSAGE_ID_26007F,
+    .fullDescMsg = MESSAGE_ID_25007F,
+    .shortDescMsg = MESSAGE_ID_23007F,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpikeShield),
     .sortValue = 92,
@@ -2996,9 +2996,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E6: FirstAttack
-    .nameMsg = MESSAGE_ID(0x260087),
-    .fullDescMsg = MESSAGE_ID(0x250087),
-    .shortDescMsg = MESSAGE_ID(0x230087),
+    .nameMsg = MESSAGE_ID_260087,
+    .fullDescMsg = MESSAGE_ID_250087,
+    .shortDescMsg = MESSAGE_ID_230087,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FirstAttack),
     .sortValue = 109,
@@ -3009,9 +3009,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E7: HPPlusA
-    .nameMsg = MESSAGE_ID(0x260071),
-    .fullDescMsg = MESSAGE_ID(0x250071),
-    .shortDescMsg = MESSAGE_ID(0x230071),
+    .nameMsg = MESSAGE_ID_260071,
+    .fullDescMsg = MESSAGE_ID_250071,
+    .shortDescMsg = MESSAGE_ID_230071,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPPlus),
     .sortValue = 53,
@@ -3022,9 +3022,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E8: QuakeHammer
-    .nameMsg = MESSAGE_ID(0x26006A),
-    .fullDescMsg = MESSAGE_ID(0x25006A),
-    .shortDescMsg = MESSAGE_ID(0x23006A),
+    .nameMsg = MESSAGE_ID_26006A,
+    .fullDescMsg = MESSAGE_ID_25006A,
+    .shortDescMsg = MESSAGE_ID_23006A,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_QuakeHammer),
     .sortValue = 24,
@@ -3035,9 +3035,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item E9: DoubleDip
-    .nameMsg = MESSAGE_ID(0x26006D),
-    .fullDescMsg = MESSAGE_ID(0x25006D),
-    .shortDescMsg = MESSAGE_ID(0x23006D),
+    .nameMsg = MESSAGE_ID_26006D,
+    .fullDescMsg = MESSAGE_ID_25006D,
+    .shortDescMsg = MESSAGE_ID_23006D,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DoubleDip),
     .sortValue = 33,
@@ -3061,9 +3061,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item EB: SleepStomp
-    .nameMsg = MESSAGE_ID(0x26005C),
-    .fullDescMsg = MESSAGE_ID(0x25005C),
-    .shortDescMsg = MESSAGE_ID(0x23005C),
+    .nameMsg = MESSAGE_ID_26005C,
+    .fullDescMsg = MESSAGE_ID_25005C,
+    .shortDescMsg = MESSAGE_ID_23005C,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SleepStomp),
     .sortValue = 9,
@@ -3074,9 +3074,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item EC: FireShield
-    .nameMsg = MESSAGE_ID(0x260097),
-    .fullDescMsg = MESSAGE_ID(0x250097),
-    .shortDescMsg = MESSAGE_ID(0x230097),
+    .nameMsg = MESSAGE_ID_260097,
+    .fullDescMsg = MESSAGE_ID_250097,
+    .shortDescMsg = MESSAGE_ID_230097,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FireShield),
     .sortValue = 91,
@@ -3087,9 +3087,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item ED: QuickChange
-    .nameMsg = MESSAGE_ID(0x260070),
-    .fullDescMsg = MESSAGE_ID(0x250070),
-    .shortDescMsg = MESSAGE_ID(0x230070),
+    .nameMsg = MESSAGE_ID_260070,
+    .fullDescMsg = MESSAGE_ID_250070,
+    .shortDescMsg = MESSAGE_ID_230070,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_QuickChange),
     .sortValue = 36,
@@ -3100,9 +3100,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item EE: DDownPound
-    .nameMsg = MESSAGE_ID(0x260069),
-    .fullDescMsg = MESSAGE_ID(0x250069),
-    .shortDescMsg = MESSAGE_ID(0x230069),
+    .nameMsg = MESSAGE_ID_260069,
+    .fullDescMsg = MESSAGE_ID_250069,
+    .shortDescMsg = MESSAGE_ID_230069,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DDownPound),
     .sortValue = 29,
@@ -3113,9 +3113,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item EF: DizzyStomp
-    .nameMsg = MESSAGE_ID(0x26005D),
-    .fullDescMsg = MESSAGE_ID(0x25005D),
-    .shortDescMsg = MESSAGE_ID(0x23005D),
+    .nameMsg = MESSAGE_ID_26005D,
+    .fullDescMsg = MESSAGE_ID_25005D,
+    .shortDescMsg = MESSAGE_ID_23005D,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DizzyStomp),
     .sortValue = 10,
@@ -3139,9 +3139,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F1: PrettyLucky
-    .nameMsg = MESSAGE_ID(0x260081),
-    .fullDescMsg = MESSAGE_ID(0x250081),
-    .shortDescMsg = MESSAGE_ID(0x230081),
+    .nameMsg = MESSAGE_ID_260081,
+    .fullDescMsg = MESSAGE_ID_250081,
+    .shortDescMsg = MESSAGE_ID_230081,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PrettyLucky),
     .sortValue = 85,
@@ -3152,9 +3152,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F2: FeelingFine
-    .nameMsg = MESSAGE_ID(0x26008C),
-    .fullDescMsg = MESSAGE_ID(0x25008C),
-    .shortDescMsg = MESSAGE_ID(0x23008C),
+    .nameMsg = MESSAGE_ID_26008C,
+    .fullDescMsg = MESSAGE_ID_25008C,
+    .shortDescMsg = MESSAGE_ID_23008C,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FeelingFine),
     .sortValue = 94,
@@ -3165,9 +3165,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F3: AttackFXA
-    .nameMsg = MESSAGE_ID(0x26008D),
-    .fullDescMsg = MESSAGE_ID(0x25008D),
-    .shortDescMsg = MESSAGE_ID(0x23008D),
+    .nameMsg = MESSAGE_ID_26008D,
+    .fullDescMsg = MESSAGE_ID_25008D,
+    .shortDescMsg = MESSAGE_ID_23008D,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXA),
     .sortValue = 112,
@@ -3178,9 +3178,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F4: AllorNothing
-    .nameMsg = MESSAGE_ID(0x260093),
-    .fullDescMsg = MESSAGE_ID(0x250093),
-    .shortDescMsg = MESSAGE_ID(0x230093),
+    .nameMsg = MESSAGE_ID_260093,
+    .fullDescMsg = MESSAGE_ID_250093,
+    .shortDescMsg = MESSAGE_ID_230093,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AllorNothing),
     .sortValue = 80,
@@ -3191,9 +3191,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F5: HPDrain
-    .nameMsg = MESSAGE_ID(0x260078),
-    .fullDescMsg = MESSAGE_ID(0x250078),
-    .shortDescMsg = MESSAGE_ID(0x230078),
+    .nameMsg = MESSAGE_ID_260078,
+    .fullDescMsg = MESSAGE_ID_250078,
+    .shortDescMsg = MESSAGE_ID_230078,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPDrain),
     .sortValue = 79,
@@ -3217,9 +3217,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F7: SlowGo
-    .nameMsg = MESSAGE_ID(0x260094),
-    .fullDescMsg = MESSAGE_ID(0x250094),
-    .shortDescMsg = MESSAGE_ID(0x230094),
+    .nameMsg = MESSAGE_ID_260094,
+    .fullDescMsg = MESSAGE_ID_250094,
+    .shortDescMsg = MESSAGE_ID_230094,
     .sellValue = 10,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SlowGo),
     .sortValue = 111,
@@ -3230,9 +3230,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F8: FPPlusA
-    .nameMsg = MESSAGE_ID(0x260072),
-    .fullDescMsg = MESSAGE_ID(0x250072),
-    .shortDescMsg = MESSAGE_ID(0x230072),
+    .nameMsg = MESSAGE_ID_260072,
+    .fullDescMsg = MESSAGE_ID_250072,
+    .shortDescMsg = MESSAGE_ID_230072,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FPPlus),
     .sortValue = 58,
@@ -3243,9 +3243,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item F9: MegaRush
-    .nameMsg = MESSAGE_ID(0x260086),
-    .fullDescMsg = MESSAGE_ID(0x250086),
-    .shortDescMsg = MESSAGE_ID(0x230086),
+    .nameMsg = MESSAGE_ID_260086,
+    .fullDescMsg = MESSAGE_ID_250086,
+    .shortDescMsg = MESSAGE_ID_230086,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MegaRush),
     .sortValue = 81,
@@ -3256,9 +3256,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FA: IcePower
-    .nameMsg = MESSAGE_ID(0x260095),
-    .fullDescMsg = MESSAGE_ID(0x250095),
-    .shortDescMsg = MESSAGE_ID(0x230095),
+    .nameMsg = MESSAGE_ID_260095,
+    .fullDescMsg = MESSAGE_ID_250095,
+    .shortDescMsg = MESSAGE_ID_230095,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_IcePower),
     .sortValue = 90,
@@ -3269,9 +3269,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FB: DefendPlusA
-    .nameMsg = MESSAGE_ID(0x260074),
-    .fullDescMsg = MESSAGE_ID(0x250074),
-    .shortDescMsg = MESSAGE_ID(0x230074),
+    .nameMsg = MESSAGE_ID_260074,
+    .fullDescMsg = MESSAGE_ID_250074,
+    .shortDescMsg = MESSAGE_ID_230074,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DefendPlus),
     .sortValue = 70,
@@ -3282,9 +3282,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FC: PayOff
-    .nameMsg = MESSAGE_ID(0x260096),
-    .fullDescMsg = MESSAGE_ID(0x250096),
-    .shortDescMsg = MESSAGE_ID(0x230096),
+    .nameMsg = MESSAGE_ID_260096,
+    .fullDescMsg = MESSAGE_ID_250096,
+    .shortDescMsg = MESSAGE_ID_230096,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PayOff),
     .sortValue = 101,
@@ -3295,9 +3295,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FD: MoneyMoney
-    .nameMsg = MESSAGE_ID(0x26009A),
-    .fullDescMsg = MESSAGE_ID(0x25009A),
-    .shortDescMsg = MESSAGE_ID(0x23009A),
+    .nameMsg = MESSAGE_ID_26009A,
+    .fullDescMsg = MESSAGE_ID_25009A,
+    .shortDescMsg = MESSAGE_ID_23009A,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MoneyMoney),
     .sortValue = 101,
@@ -3308,9 +3308,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FE: ChillOut
-    .nameMsg = MESSAGE_ID(0x260098),
-    .fullDescMsg = MESSAGE_ID(0x250098),
-    .shortDescMsg = MESSAGE_ID(0x230098),
+    .nameMsg = MESSAGE_ID_260098,
+    .fullDescMsg = MESSAGE_ID_250098,
+    .shortDescMsg = MESSAGE_ID_230098,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ChillOut),
     .sortValue = 105,
@@ -3321,9 +3321,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item FF: HappyHeartA
-    .nameMsg = MESSAGE_ID(0x260079),
-    .fullDescMsg = MESSAGE_ID(0x250079),
-    .shortDescMsg = MESSAGE_ID(0x230079),
+    .nameMsg = MESSAGE_ID_260079,
+    .fullDescMsg = MESSAGE_ID_250079,
+    .shortDescMsg = MESSAGE_ID_230079,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyHeart),
     .sortValue = 42,
@@ -3334,9 +3334,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 100: ZapTap
-    .nameMsg = MESSAGE_ID(0x260099),
-    .fullDescMsg = MESSAGE_ID(0x250099),
-    .shortDescMsg = MESSAGE_ID(0x230099),
+    .nameMsg = MESSAGE_ID_260099,
+    .fullDescMsg = MESSAGE_ID_250099,
+    .shortDescMsg = MESSAGE_ID_230099,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ZapTap),
     .sortValue = 95,
@@ -3360,9 +3360,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 102: RightOn
-    .nameMsg = MESSAGE_ID(0x26009B),
-    .fullDescMsg = MESSAGE_ID(0x25009B),
-    .shortDescMsg = MESSAGE_ID(0x23009B),
+    .nameMsg = MESSAGE_ID_26009B,
+    .fullDescMsg = MESSAGE_ID_25009B,
+    .shortDescMsg = MESSAGE_ID_23009B,
     .sellValue = 300,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RightOn),
     .sortValue = 41,
@@ -3373,9 +3373,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 103: RunawayPay
-    .nameMsg = MESSAGE_ID(0x26009C),
-    .fullDescMsg = MESSAGE_ID(0x25009C),
-    .shortDescMsg = MESSAGE_ID(0x23009C),
+    .nameMsg = MESSAGE_ID_26009C,
+    .fullDescMsg = MESSAGE_ID_25009C,
+    .shortDescMsg = MESSAGE_ID_23009C,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_RunawayPay),
     .sortValue = 99,
@@ -3386,9 +3386,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 104: Refund
-    .nameMsg = MESSAGE_ID(0x26009D),
-    .fullDescMsg = MESSAGE_ID(0x25009D),
-    .shortDescMsg = MESSAGE_ID(0x23009D),
+    .nameMsg = MESSAGE_ID_26009D,
+    .fullDescMsg = MESSAGE_ID_25009D,
+    .shortDescMsg = MESSAGE_ID_23009D,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Refund),
     .sortValue = 100,
@@ -3399,9 +3399,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 105: FlowerSaverA
-    .nameMsg = MESSAGE_ID(0x26007B),
-    .fullDescMsg = MESSAGE_ID(0x25007B),
-    .shortDescMsg = MESSAGE_ID(0x23007B),
+    .nameMsg = MESSAGE_ID_26007B,
+    .fullDescMsg = MESSAGE_ID_25007B,
+    .shortDescMsg = MESSAGE_ID_23007B,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FlowerSaver),
     .sortValue = 63,
@@ -3412,9 +3412,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 106: TripleDip
-    .nameMsg = MESSAGE_ID(0x26006E),
-    .fullDescMsg = MESSAGE_ID(0x25006E),
-    .shortDescMsg = MESSAGE_ID(0x23006E),
+    .nameMsg = MESSAGE_ID_26006E,
+    .fullDescMsg = MESSAGE_ID_25006E,
+    .shortDescMsg = MESSAGE_ID_23006E,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_TripleDip),
     .sortValue = 34,
@@ -3425,9 +3425,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 107: HammerThrow
-    .nameMsg = MESSAGE_ID(0x260066),
-    .fullDescMsg = MESSAGE_ID(0x250066),
-    .shortDescMsg = MESSAGE_ID(0x230066),
+    .nameMsg = MESSAGE_ID_260066,
+    .fullDescMsg = MESSAGE_ID_250066,
+    .shortDescMsg = MESSAGE_ID_230066,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HammerThrow),
     .sortValue = 28,
@@ -3438,9 +3438,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 108: MegaQuake
-    .nameMsg = MESSAGE_ID(0x26006C),
-    .fullDescMsg = MESSAGE_ID(0x25006C),
-    .shortDescMsg = MESSAGE_ID(0x23006C),
+    .nameMsg = MESSAGE_ID_26006C,
+    .fullDescMsg = MESSAGE_ID_25006C,
+    .shortDescMsg = MESSAGE_ID_23006C,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MegaQuake),
     .sortValue = 26,
@@ -3451,9 +3451,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 109: SmashCharge
-    .nameMsg = MESSAGE_ID(0x260064),
-    .fullDescMsg = MESSAGE_ID(0x250064),
-    .shortDescMsg = MESSAGE_ID(0x230064),
+    .nameMsg = MESSAGE_ID_260064,
+    .fullDescMsg = MESSAGE_ID_250064,
+    .shortDescMsg = MESSAGE_ID_230064,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SmashCharge),
     .sortValue = 21,
@@ -3464,9 +3464,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 10A: JumpCharge
-    .nameMsg = MESSAGE_ID(0x26005A),
-    .fullDescMsg = MESSAGE_ID(0x25005A),
-    .shortDescMsg = MESSAGE_ID(0x23005A),
+    .nameMsg = MESSAGE_ID_26005A,
+    .fullDescMsg = MESSAGE_ID_25005A,
+    .shortDescMsg = MESSAGE_ID_23005A,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_JumpCharge),
     .sortValue = 5,
@@ -3477,9 +3477,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 10B: SSmashChg
-    .nameMsg = MESSAGE_ID(0x260065),
-    .fullDescMsg = MESSAGE_ID(0x250065),
-    .shortDescMsg = MESSAGE_ID(0x230065),
+    .nameMsg = MESSAGE_ID_260065,
+    .fullDescMsg = MESSAGE_ID_250065,
+    .shortDescMsg = MESSAGE_ID_230065,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SSmashChg),
     .sortValue = 22,
@@ -3490,9 +3490,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 10C: SJumpChg
-    .nameMsg = MESSAGE_ID(0x26005B),
-    .fullDescMsg = MESSAGE_ID(0x25005B),
-    .shortDescMsg = MESSAGE_ID(0x23005B),
+    .nameMsg = MESSAGE_ID_26005B,
+    .fullDescMsg = MESSAGE_ID_25005B,
+    .shortDescMsg = MESSAGE_ID_23005B,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SJumpChg),
     .sortValue = 6,
@@ -3503,9 +3503,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 10D: PowerRush
-    .nameMsg = MESSAGE_ID(0x260084),
-    .fullDescMsg = MESSAGE_ID(0x250084),
-    .shortDescMsg = MESSAGE_ID(0x230084),
+    .nameMsg = MESSAGE_ID_260084,
+    .fullDescMsg = MESSAGE_ID_250084,
+    .shortDescMsg = MESSAGE_ID_230084,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerRush),
     .sortValue = 83,
@@ -3555,9 +3555,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 111: LastStand
-    .nameMsg = MESSAGE_ID(0x260085),
-    .fullDescMsg = MESSAGE_ID(0x250085),
-    .shortDescMsg = MESSAGE_ID(0x230085),
+    .nameMsg = MESSAGE_ID_260085,
+    .fullDescMsg = MESSAGE_ID_250085,
+    .shortDescMsg = MESSAGE_ID_230085,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LastStand),
     .sortValue = 82,
@@ -3568,9 +3568,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 112: CloseCall
-    .nameMsg = MESSAGE_ID(0x260083),
-    .fullDescMsg = MESSAGE_ID(0x250083),
-    .shortDescMsg = MESSAGE_ID(0x230083),
+    .nameMsg = MESSAGE_ID_260083,
+    .fullDescMsg = MESSAGE_ID_250083,
+    .shortDescMsg = MESSAGE_ID_230083,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_CloseCall),
     .sortValue = 84,
@@ -3581,9 +3581,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 113: PUpDDown
-    .nameMsg = MESSAGE_ID(0x260076),
-    .fullDescMsg = MESSAGE_ID(0x250076),
-    .shortDescMsg = MESSAGE_ID(0x230076),
+    .nameMsg = MESSAGE_ID_260076,
+    .fullDescMsg = MESSAGE_ID_250076,
+    .shortDescMsg = MESSAGE_ID_230076,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PUpDDown),
     .sortValue = 78,
@@ -3594,9 +3594,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 114: LuckyDay
-    .nameMsg = MESSAGE_ID(0x260082),
-    .fullDescMsg = MESSAGE_ID(0x250082),
-    .shortDescMsg = MESSAGE_ID(0x230082),
+    .nameMsg = MESSAGE_ID_260082,
+    .fullDescMsg = MESSAGE_ID_250082,
+    .shortDescMsg = MESSAGE_ID_230082,
     .sellValue = 300,
     .hudElemID = ITEM_HS_INDEX(HES_Item_LuckyDay),
     .sortValue = 86,
@@ -3620,9 +3620,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 116: PDownDUp
-    .nameMsg = MESSAGE_ID(0x260077),
-    .fullDescMsg = MESSAGE_ID(0x250077),
-    .shortDescMsg = MESSAGE_ID(0x230077),
+    .nameMsg = MESSAGE_ID_260077,
+    .fullDescMsg = MESSAGE_ID_250077,
+    .shortDescMsg = MESSAGE_ID_230077,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PDownDUp),
     .sortValue = 77,
@@ -3633,9 +3633,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 117: PowerQuake
-    .nameMsg = MESSAGE_ID(0x26006B),
-    .fullDescMsg = MESSAGE_ID(0x25006B),
-    .shortDescMsg = MESSAGE_ID(0x23006B),
+    .nameMsg = MESSAGE_ID_26006B,
+    .fullDescMsg = MESSAGE_ID_25006B,
+    .shortDescMsg = MESSAGE_ID_23006B,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerQuake),
     .sortValue = 25,
@@ -3672,9 +3672,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11A: HeartFinder
-    .nameMsg = MESSAGE_ID(0x26007C),
-    .fullDescMsg = MESSAGE_ID(0x25007C),
-    .shortDescMsg = MESSAGE_ID(0x23007C),
+    .nameMsg = MESSAGE_ID_26007C,
+    .fullDescMsg = MESSAGE_ID_25007C,
+    .shortDescMsg = MESSAGE_ID_23007C,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HeartFinder),
     .sortValue = 97,
@@ -3685,9 +3685,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11B: FlowerFinder
-    .nameMsg = MESSAGE_ID(0x26007D),
-    .fullDescMsg = MESSAGE_ID(0x25007D),
-    .shortDescMsg = MESSAGE_ID(0x23007D),
+    .nameMsg = MESSAGE_ID_26007D,
+    .fullDescMsg = MESSAGE_ID_25007D,
+    .shortDescMsg = MESSAGE_ID_23007D,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FlowerFinder),
     .sortValue = 98,
@@ -3698,9 +3698,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11C: SpinAttack
-    .nameMsg = MESSAGE_ID(0x260089),
-    .fullDescMsg = MESSAGE_ID(0x250089),
-    .shortDescMsg = MESSAGE_ID(0x230089),
+    .nameMsg = MESSAGE_ID_260089,
+    .fullDescMsg = MESSAGE_ID_250089,
+    .shortDescMsg = MESSAGE_ID_230089,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpinAttack),
     .sortValue = 108,
@@ -3711,9 +3711,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11D: DizzyAttack
-    .nameMsg = MESSAGE_ID(0x26008A),
-    .fullDescMsg = MESSAGE_ID(0x25008A),
-    .shortDescMsg = MESSAGE_ID(0x23008A),
+    .nameMsg = MESSAGE_ID_26008A,
+    .fullDescMsg = MESSAGE_ID_25008A,
+    .shortDescMsg = MESSAGE_ID_23008A,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DizzyAttack),
     .sortValue = 107,
@@ -3724,9 +3724,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11E: ISpy
-    .nameMsg = MESSAGE_ID(0x26009E),
-    .fullDescMsg = MESSAGE_ID(0x25009E),
-    .shortDescMsg = MESSAGE_ID(0x23009E),
+    .nameMsg = MESSAGE_ID_26009E,
+    .fullDescMsg = MESSAGE_ID_25009E,
+    .shortDescMsg = MESSAGE_ID_23009E,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ISpy),
     .sortValue = 104,
@@ -3737,9 +3737,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 11F: SpeedySpin
-    .nameMsg = MESSAGE_ID(0x26008B),
-    .fullDescMsg = MESSAGE_ID(0x25008B),
-    .shortDescMsg = MESSAGE_ID(0x23008B),
+    .nameMsg = MESSAGE_ID_26008B,
+    .fullDescMsg = MESSAGE_ID_25008B,
+    .shortDescMsg = MESSAGE_ID_23008B,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_SpeedySpin),
     .sortValue = 106,
@@ -3750,9 +3750,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 120: BumpAttack
-    .nameMsg = MESSAGE_ID(0x260088),
-    .fullDescMsg = MESSAGE_ID(0x250088),
-    .shortDescMsg = MESSAGE_ID(0x230088),
+    .nameMsg = MESSAGE_ID_260088,
+    .fullDescMsg = MESSAGE_ID_250088,
+    .shortDescMsg = MESSAGE_ID_230088,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_BumpAttack),
     .sortValue = 110,
@@ -3763,9 +3763,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 121: PowerJump
-    .nameMsg = MESSAGE_ID(0x260058),
-    .fullDescMsg = MESSAGE_ID(0x250058),
-    .shortDescMsg = MESSAGE_ID(0x230058),
+    .nameMsg = MESSAGE_ID_260058,
+    .fullDescMsg = MESSAGE_ID_250058,
+    .shortDescMsg = MESSAGE_ID_230058,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerJump),
     .sortValue = 1,
@@ -3789,9 +3789,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 123: MegaJump
-    .nameMsg = MESSAGE_ID(0x260059),
-    .fullDescMsg = MESSAGE_ID(0x250059),
-    .shortDescMsg = MESSAGE_ID(0x230059),
+    .nameMsg = MESSAGE_ID_260059,
+    .fullDescMsg = MESSAGE_ID_250059,
+    .shortDescMsg = MESSAGE_ID_230059,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MegaJump),
     .sortValue = 3,
@@ -3802,9 +3802,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 124: PowerSmash1
-    .nameMsg = MESSAGE_ID(0x260062),
-    .fullDescMsg = MESSAGE_ID(0x250062),
-    .shortDescMsg = MESSAGE_ID(0x230062),
+    .nameMsg = MESSAGE_ID_260062,
+    .fullDescMsg = MESSAGE_ID_250062,
+    .shortDescMsg = MESSAGE_ID_230062,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerSmash1),
     .sortValue = 17,
@@ -3828,9 +3828,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 126: MegaSmash
-    .nameMsg = MESSAGE_ID(0x260063),
-    .fullDescMsg = MESSAGE_ID(0x250063),
-    .shortDescMsg = MESSAGE_ID(0x230063),
+    .nameMsg = MESSAGE_ID_260063,
+    .fullDescMsg = MESSAGE_ID_250063,
+    .shortDescMsg = MESSAGE_ID_230063,
     .sellValue = 200,
     .hudElemID = ITEM_HS_INDEX(HES_Item_MegaSmash),
     .sortValue = 19,
@@ -3841,9 +3841,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 127: PowerSmash2
-    .nameMsg = MESSAGE_ID(0x260062),
-    .fullDescMsg = MESSAGE_ID(0x250062),
-    .shortDescMsg = MESSAGE_ID(0x230062),
+    .nameMsg = MESSAGE_ID_260062,
+    .fullDescMsg = MESSAGE_ID_250062,
+    .shortDescMsg = MESSAGE_ID_230062,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Present),
     .sortValue = 17,
@@ -3854,9 +3854,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 128: PowerSmash3
-    .nameMsg = MESSAGE_ID(0x260062),
-    .fullDescMsg = MESSAGE_ID(0x250062),
-    .shortDescMsg = MESSAGE_ID(0x230062),
+    .nameMsg = MESSAGE_ID_260062,
+    .fullDescMsg = MESSAGE_ID_250062,
+    .shortDescMsg = MESSAGE_ID_230062,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Present),
     .sortValue = 17,
@@ -3867,9 +3867,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 129: DeepFocus1
-    .nameMsg = MESSAGE_ID(0x26007E),
-    .fullDescMsg = MESSAGE_ID(0x25007E),
-    .shortDescMsg = MESSAGE_ID(0x23007E),
+    .nameMsg = MESSAGE_ID_26007E,
+    .fullDescMsg = MESSAGE_ID_25007E,
+    .shortDescMsg = MESSAGE_ID_23007E,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DeepFocus),
     .sortValue = 49,
@@ -3893,9 +3893,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 12B: ShrinkSmash
-    .nameMsg = MESSAGE_ID(0x260067),
-    .fullDescMsg = MESSAGE_ID(0x250067),
-    .shortDescMsg = MESSAGE_ID(0x230067),
+    .nameMsg = MESSAGE_ID_260067,
+    .fullDescMsg = MESSAGE_ID_250067,
+    .shortDescMsg = MESSAGE_ID_230067,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ShrinkSmash),
     .sortValue = 27,
@@ -3932,9 +3932,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 12E: DDownJump
-    .nameMsg = MESSAGE_ID(0x260060),
-    .fullDescMsg = MESSAGE_ID(0x250060),
-    .shortDescMsg = MESSAGE_ID(0x230060),
+    .nameMsg = MESSAGE_ID_260060,
+    .fullDescMsg = MESSAGE_ID_250060,
+    .shortDescMsg = MESSAGE_ID_230060,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DDownJump),
     .sortValue = 12,
@@ -3945,9 +3945,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 12F: ShrinkStomp
-    .nameMsg = MESSAGE_ID(0x26005F),
-    .fullDescMsg = MESSAGE_ID(0x25005F),
-    .shortDescMsg = MESSAGE_ID(0x23005F),
+    .nameMsg = MESSAGE_ID_26005F,
+    .fullDescMsg = MESSAGE_ID_25005F,
+    .shortDescMsg = MESSAGE_ID_23005F,
     .sellValue = 75,
     .hudElemID = ITEM_HS_INDEX(HES_Item_ShrinkStomp),
     .sortValue = 8,
@@ -3958,9 +3958,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 130: DamageDodgeA
-    .nameMsg = MESSAGE_ID(0x260075),
-    .fullDescMsg = MESSAGE_ID(0x250075),
-    .shortDescMsg = MESSAGE_ID(0x230075),
+    .nameMsg = MESSAGE_ID_260075,
+    .fullDescMsg = MESSAGE_ID_250075,
+    .shortDescMsg = MESSAGE_ID_230075,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DamageDodge),
     .sortValue = 73,
@@ -3984,9 +3984,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 132: DeepFocus2
-    .nameMsg = MESSAGE_ID(0x26007E),
-    .fullDescMsg = MESSAGE_ID(0x25007E),
-    .shortDescMsg = MESSAGE_ID(0x23007E),
+    .nameMsg = MESSAGE_ID_26007E,
+    .fullDescMsg = MESSAGE_ID_25007E,
+    .shortDescMsg = MESSAGE_ID_23007E,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DeepFocus),
     .sortValue = 49,
@@ -3997,9 +3997,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 133: DeepFocus3
-    .nameMsg = MESSAGE_ID(0x26007E),
-    .fullDescMsg = MESSAGE_ID(0x25007E),
-    .shortDescMsg = MESSAGE_ID(0x23007E),
+    .nameMsg = MESSAGE_ID_26007E,
+    .fullDescMsg = MESSAGE_ID_25007E,
+    .shortDescMsg = MESSAGE_ID_23007E,
     .sellValue = 50,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DeepFocus),
     .sortValue = 49,
@@ -4010,9 +4010,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 134: HPPlusB
-    .nameMsg = MESSAGE_ID(0x260071),
-    .fullDescMsg = MESSAGE_ID(0x250071),
-    .shortDescMsg = MESSAGE_ID(0x230071),
+    .nameMsg = MESSAGE_ID_260071,
+    .fullDescMsg = MESSAGE_ID_250071,
+    .shortDescMsg = MESSAGE_ID_230071,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPPlus),
     .sortValue = 53,
@@ -4023,9 +4023,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 135: FPPlusB
-    .nameMsg = MESSAGE_ID(0x260072),
-    .fullDescMsg = MESSAGE_ID(0x250072),
-    .shortDescMsg = MESSAGE_ID(0x230072),
+    .nameMsg = MESSAGE_ID_260072,
+    .fullDescMsg = MESSAGE_ID_250072,
+    .shortDescMsg = MESSAGE_ID_230072,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FPPlus),
     .sortValue = 58,
@@ -4036,9 +4036,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 136: HappyHeartB
-    .nameMsg = MESSAGE_ID(0x260079),
-    .fullDescMsg = MESSAGE_ID(0x250079),
-    .shortDescMsg = MESSAGE_ID(0x230079),
+    .nameMsg = MESSAGE_ID_260079,
+    .fullDescMsg = MESSAGE_ID_250079,
+    .shortDescMsg = MESSAGE_ID_230079,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyHeart),
     .sortValue = 42,
@@ -4049,9 +4049,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 137: HappyHeartX
-    .nameMsg = MESSAGE_ID(0x260079),
-    .fullDescMsg = MESSAGE_ID(0x250079),
-    .shortDescMsg = MESSAGE_ID(0x230079),
+    .nameMsg = MESSAGE_ID_260079,
+    .fullDescMsg = MESSAGE_ID_250079,
+    .shortDescMsg = MESSAGE_ID_230079,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyHeart),
     .sortValue = 42,
@@ -4062,9 +4062,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 138: FlowerSaverB
-    .nameMsg = MESSAGE_ID(0x26007B),
-    .fullDescMsg = MESSAGE_ID(0x25007B),
-    .shortDescMsg = MESSAGE_ID(0x23007B),
+    .nameMsg = MESSAGE_ID_26007B,
+    .fullDescMsg = MESSAGE_ID_25007B,
+    .shortDescMsg = MESSAGE_ID_23007B,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FlowerSaver),
     .sortValue = 63,
@@ -4075,9 +4075,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 139: FlowerSaverX
-    .nameMsg = MESSAGE_ID(0x26007B),
-    .fullDescMsg = MESSAGE_ID(0x25007B),
-    .shortDescMsg = MESSAGE_ID(0x23007B),
+    .nameMsg = MESSAGE_ID_26007B,
+    .fullDescMsg = MESSAGE_ID_25007B,
+    .shortDescMsg = MESSAGE_ID_23007B,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FlowerSaver),
     .sortValue = 63,
@@ -4088,9 +4088,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13A: DamageDodgeB
-    .nameMsg = MESSAGE_ID(0x260075),
-    .fullDescMsg = MESSAGE_ID(0x250075),
-    .shortDescMsg = MESSAGE_ID(0x230075),
+    .nameMsg = MESSAGE_ID_260075,
+    .fullDescMsg = MESSAGE_ID_250075,
+    .shortDescMsg = MESSAGE_ID_230075,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DamageDodge),
     .sortValue = 73,
@@ -4101,9 +4101,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13B: DamageDodgeX
-    .nameMsg = MESSAGE_ID(0x260075),
-    .fullDescMsg = MESSAGE_ID(0x250075),
-    .shortDescMsg = MESSAGE_ID(0x230075),
+    .nameMsg = MESSAGE_ID_260075,
+    .fullDescMsg = MESSAGE_ID_250075,
+    .shortDescMsg = MESSAGE_ID_230075,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DamageDodge),
     .sortValue = 73,
@@ -4114,9 +4114,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13C: PowerPlusB
-    .nameMsg = MESSAGE_ID(0x260073),
-    .fullDescMsg = MESSAGE_ID(0x250073),
-    .shortDescMsg = MESSAGE_ID(0x230073),
+    .nameMsg = MESSAGE_ID_260073,
+    .fullDescMsg = MESSAGE_ID_250073,
+    .shortDescMsg = MESSAGE_ID_230073,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerPlus),
     .sortValue = 67,
@@ -4127,9 +4127,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13D: PowerPlusX
-    .nameMsg = MESSAGE_ID(0x260073),
-    .fullDescMsg = MESSAGE_ID(0x250073),
-    .shortDescMsg = MESSAGE_ID(0x230073),
+    .nameMsg = MESSAGE_ID_260073,
+    .fullDescMsg = MESSAGE_ID_250073,
+    .shortDescMsg = MESSAGE_ID_230073,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_PowerPlus),
     .sortValue = 67,
@@ -4140,9 +4140,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13E: DefendPlusX
-    .nameMsg = MESSAGE_ID(0x260074),
-    .fullDescMsg = MESSAGE_ID(0x250074),
-    .shortDescMsg = MESSAGE_ID(0x230074),
+    .nameMsg = MESSAGE_ID_260074,
+    .fullDescMsg = MESSAGE_ID_250074,
+    .shortDescMsg = MESSAGE_ID_230074,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DefendPlus),
     .sortValue = 70,
@@ -4153,9 +4153,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 13F: DefendPlusY
-    .nameMsg = MESSAGE_ID(0x260074),
-    .fullDescMsg = MESSAGE_ID(0x250074),
-    .shortDescMsg = MESSAGE_ID(0x230074),
+    .nameMsg = MESSAGE_ID_260074,
+    .fullDescMsg = MESSAGE_ID_250074,
+    .shortDescMsg = MESSAGE_ID_230074,
     .sellValue = 250,
     .hudElemID = ITEM_HS_INDEX(HES_Item_DefendPlus),
     .sortValue = 70,
@@ -4166,9 +4166,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 140: HappyFlowerA
-    .nameMsg = MESSAGE_ID(0x26007A),
-    .fullDescMsg = MESSAGE_ID(0x25007A),
-    .shortDescMsg = MESSAGE_ID(0x23007A),
+    .nameMsg = MESSAGE_ID_26007A,
+    .fullDescMsg = MESSAGE_ID_25007A,
+    .shortDescMsg = MESSAGE_ID_23007A,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyFlower),
     .sortValue = 46,
@@ -4179,9 +4179,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 141: HappyFlowerB
-    .nameMsg = MESSAGE_ID(0x26007A),
-    .fullDescMsg = MESSAGE_ID(0x25007A),
-    .shortDescMsg = MESSAGE_ID(0x23007A),
+    .nameMsg = MESSAGE_ID_26007A,
+    .fullDescMsg = MESSAGE_ID_25007A,
+    .shortDescMsg = MESSAGE_ID_23007A,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyFlower),
     .sortValue = 46,
@@ -4192,9 +4192,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 142: HappyFlowerX
-    .nameMsg = MESSAGE_ID(0x26007A),
-    .fullDescMsg = MESSAGE_ID(0x25007A),
-    .shortDescMsg = MESSAGE_ID(0x23007A),
+    .nameMsg = MESSAGE_ID_26007A,
+    .fullDescMsg = MESSAGE_ID_25007A,
+    .shortDescMsg = MESSAGE_ID_23007A,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HappyFlower),
     .sortValue = 46,
@@ -4205,9 +4205,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 143: GroupFocus
-    .nameMsg = MESSAGE_ID(0x26006F),
-    .fullDescMsg = MESSAGE_ID(0x25006F),
-    .shortDescMsg = MESSAGE_ID(0x23006F),
+    .nameMsg = MESSAGE_ID_26006F,
+    .fullDescMsg = MESSAGE_ID_25006F,
+    .shortDescMsg = MESSAGE_ID_23006F,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_GroupFocus),
     .sortValue = 35,
@@ -4218,9 +4218,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 144: Peekaboo
-    .nameMsg = MESSAGE_ID(0x26009F),
-    .fullDescMsg = MESSAGE_ID(0x25009F),
-    .shortDescMsg = MESSAGE_ID(0x23009F),
+    .nameMsg = MESSAGE_ID_26009F,
+    .fullDescMsg = MESSAGE_ID_25009F,
+    .shortDescMsg = MESSAGE_ID_23009F,
     .sellValue = 100,
     .hudElemID = ITEM_HS_INDEX(HES_Item_Peekaboo),
     .sortValue = 37,
@@ -4231,9 +4231,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 145: AttackFXD
-    .nameMsg = MESSAGE_ID(0x26008E),
-    .fullDescMsg = MESSAGE_ID(0x25008E),
-    .shortDescMsg = MESSAGE_ID(0x23008E),
+    .nameMsg = MESSAGE_ID_26008E,
+    .fullDescMsg = MESSAGE_ID_25008E,
+    .shortDescMsg = MESSAGE_ID_23008E,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXD),
     .sortValue = 115,
@@ -4244,9 +4244,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 146: AttackFXB
-    .nameMsg = MESSAGE_ID(0x26008F),
-    .fullDescMsg = MESSAGE_ID(0x25008F),
-    .shortDescMsg = MESSAGE_ID(0x23008F),
+    .nameMsg = MESSAGE_ID_26008F,
+    .fullDescMsg = MESSAGE_ID_25008F,
+    .shortDescMsg = MESSAGE_ID_23008F,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXB),
     .sortValue = 113,
@@ -4257,9 +4257,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 147: AttackFXE
-    .nameMsg = MESSAGE_ID(0x260090),
-    .fullDescMsg = MESSAGE_ID(0x250090),
-    .shortDescMsg = MESSAGE_ID(0x230090),
+    .nameMsg = MESSAGE_ID_260090,
+    .fullDescMsg = MESSAGE_ID_250090,
+    .shortDescMsg = MESSAGE_ID_230090,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXE),
     .sortValue = 116,
@@ -4270,9 +4270,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 148: AttackFXC
-    .nameMsg = MESSAGE_ID(0x260091),
-    .fullDescMsg = MESSAGE_ID(0x250091),
-    .shortDescMsg = MESSAGE_ID(0x230091),
+    .nameMsg = MESSAGE_ID_260091,
+    .fullDescMsg = MESSAGE_ID_250091,
+    .shortDescMsg = MESSAGE_ID_230091,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXC),
     .sortValue = 114,
@@ -4283,9 +4283,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 149: AttackFXF
-    .nameMsg = MESSAGE_ID(0x260092),
-    .fullDescMsg = MESSAGE_ID(0x250092),
-    .shortDescMsg = MESSAGE_ID(0x230092),
+    .nameMsg = MESSAGE_ID_260092,
+    .fullDescMsg = MESSAGE_ID_250092,
+    .shortDescMsg = MESSAGE_ID_230092,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXF),
     .sortValue = 117,
@@ -4296,9 +4296,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14A: HPPlusC
-    .nameMsg = MESSAGE_ID(0x260071),
-    .fullDescMsg = MESSAGE_ID(0x250071),
-    .shortDescMsg = MESSAGE_ID(0x230071),
+    .nameMsg = MESSAGE_ID_260071,
+    .fullDescMsg = MESSAGE_ID_250071,
+    .shortDescMsg = MESSAGE_ID_230071,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPPlus),
     .sortValue = 53,
@@ -4309,9 +4309,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14B: HPPlusX
-    .nameMsg = MESSAGE_ID(0x260071),
-    .fullDescMsg = MESSAGE_ID(0x250071),
-    .shortDescMsg = MESSAGE_ID(0x230071),
+    .nameMsg = MESSAGE_ID_260071,
+    .fullDescMsg = MESSAGE_ID_250071,
+    .shortDescMsg = MESSAGE_ID_230071,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPPlus),
     .sortValue = 53,
@@ -4322,9 +4322,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14C: HPPlusY
-    .nameMsg = MESSAGE_ID(0x260071),
-    .fullDescMsg = MESSAGE_ID(0x250071),
-    .shortDescMsg = MESSAGE_ID(0x230071),
+    .nameMsg = MESSAGE_ID_260071,
+    .fullDescMsg = MESSAGE_ID_250071,
+    .shortDescMsg = MESSAGE_ID_230071,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_HPPlus),
     .sortValue = 53,
@@ -4335,9 +4335,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14D: FPPlusC
-    .nameMsg = MESSAGE_ID(0x260072),
-    .fullDescMsg = MESSAGE_ID(0x250072),
-    .shortDescMsg = MESSAGE_ID(0x230072),
+    .nameMsg = MESSAGE_ID_260072,
+    .fullDescMsg = MESSAGE_ID_250072,
+    .shortDescMsg = MESSAGE_ID_230072,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FPPlus),
     .sortValue = 58,
@@ -4348,9 +4348,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14E: FPPlusX
-    .nameMsg = MESSAGE_ID(0x260072),
-    .fullDescMsg = MESSAGE_ID(0x250072),
-    .shortDescMsg = MESSAGE_ID(0x230072),
+    .nameMsg = MESSAGE_ID_260072,
+    .fullDescMsg = MESSAGE_ID_250072,
+    .shortDescMsg = MESSAGE_ID_230072,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FPPlus),
     .sortValue = 58,
@@ -4361,9 +4361,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 14F: FPPlusY
-    .nameMsg = MESSAGE_ID(0x260072),
-    .fullDescMsg = MESSAGE_ID(0x250072),
-    .shortDescMsg = MESSAGE_ID(0x230072),
+    .nameMsg = MESSAGE_ID_260072,
+    .fullDescMsg = MESSAGE_ID_250072,
+    .shortDescMsg = MESSAGE_ID_230072,
     .sellValue = 150,
     .hudElemID = ITEM_HS_INDEX(HES_Item_FPPlus),
     .sortValue = 58,
@@ -4387,9 +4387,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 151: AttackFXF2
-    .nameMsg = MESSAGE_ID(0x260092),
-    .fullDescMsg = MESSAGE_ID(0x250092),
-    .shortDescMsg = MESSAGE_ID(0x230092),
+    .nameMsg = MESSAGE_ID_260092,
+    .fullDescMsg = MESSAGE_ID_250092,
+    .shortDescMsg = MESSAGE_ID_230092,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXF),
     .sortValue = 117,
@@ -4400,9 +4400,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 152: AttackFXF3
-    .nameMsg = MESSAGE_ID(0x260092),
-    .fullDescMsg = MESSAGE_ID(0x250092),
-    .shortDescMsg = MESSAGE_ID(0x230092),
+    .nameMsg = MESSAGE_ID_260092,
+    .fullDescMsg = MESSAGE_ID_250092,
+    .shortDescMsg = MESSAGE_ID_230092,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXF),
     .sortValue = 117,
@@ -4413,9 +4413,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 153: AttackFXF4
-    .nameMsg = MESSAGE_ID(0x260092),
-    .fullDescMsg = MESSAGE_ID(0x250092),
-    .shortDescMsg = MESSAGE_ID(0x230092),
+    .nameMsg = MESSAGE_ID_260092,
+    .fullDescMsg = MESSAGE_ID_250092,
+    .shortDescMsg = MESSAGE_ID_230092,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXF),
     .sortValue = 117,
@@ -4426,9 +4426,9 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 154: AttackFXF5
-    .nameMsg = MESSAGE_ID(0x260092),
-    .fullDescMsg = MESSAGE_ID(0x250092),
-    .shortDescMsg = MESSAGE_ID(0x230092),
+    .nameMsg = MESSAGE_ID_260092,
+    .fullDescMsg = MESSAGE_ID_250092,
+    .shortDescMsg = MESSAGE_ID_230092,
     .sellValue = 30,
     .hudElemID = ITEM_HS_INDEX(HES_Item_AttackFXF),
     .sortValue = 117,
@@ -4530,7 +4530,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 15C: StarPiece
-    .nameMsg = MESSAGE_ID(0x26010C),
+    .nameMsg = MESSAGE_ID_26010C,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = 1,

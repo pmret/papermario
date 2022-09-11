@@ -260,7 +260,7 @@ static s32 N(pad_BDC)[] = {
 
 EvtScript N(80240BE0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D0182), 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D0182, 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

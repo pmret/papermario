@@ -263,7 +263,7 @@ s32 N(itemList_80240E10)[] = {
 EvtScript N(80240E24) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1100DB), 300, 120)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1100DB, 300, 120)
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -310,12 +310,12 @@ EvtScript N(80241028) = {
     EVT_SWITCH(LVar8)
         EVT_CASE_LE(-1)
         EVT_CASE_LE(0)
-            EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D015C), 160, 40)
+            EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D015C, 160, 40)
         EVT_CASE_EQ(158)
             EVT_EXEC_WAIT(N(80240E84))
             EVT_CALL(RemoveItemAt, LVar1)
             EVT_IF_EQ(GF_FLO22_ThrewBlueBerryDownWell, 0)
-                EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x1100DD), 35, 35, 0)
+                EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID_1100DD, 35, 35, 0)
                 EVT_SET(GF_FLO22_ThrewBlueBerryDownWell, 1)
                 EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -35, 0, 0, 0, GF_FLO22_Item_FlowerSaverB)
                 EVT_SET(LVar7, LVar0)
@@ -337,12 +337,12 @@ EvtScript N(80241028) = {
                 EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), FALSE)
                 EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_HAS_SHADOW)), TRUE)
             EVT_ELSE
-                EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x1100DE), 35, 35, 0)
+                EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID_1100DE, 35, 35, 0)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_EXEC_WAIT(N(80240E84))
             EVT_CALL(RemoveItemAt, LVar1)
-            EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x1100DC), 35, 35, 0)
+            EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID_1100DC, 35, 35, 0)
             EVT_CALL(RandInt, 1, LVar1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(0.0))

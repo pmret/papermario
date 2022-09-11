@@ -514,7 +514,7 @@ EvtScript N(goombario_tattle) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_282)
     EVT_CALL(SetCamFlag80, 2, 1)
     EVT_WAIT(10)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x1C0092), ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_talk, NPC_ANIM_battle_goombario_default_idle)
+    EVT_CALL(ActorSpeak, MESSAGE_ID_1C0092, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_talk, NPC_ANIM_battle_goombario_default_idle)
     EVT_CALL(N(UnkTattleEffectFunc2), LVar5)
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, 2, 0)

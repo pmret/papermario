@@ -875,7 +875,7 @@ EvtScript N(interact_80246310) = {
     EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
     EVT_WAIT(15)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_5, NPC_ANIM_world_clubba_Palette_00_Anim_2, 0, MESSAGE_ID(0x0E00F2))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_5, NPC_ANIM_world_clubba_Palette_00_Anim_2, 0, MESSAGE_ID_0E00F2)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_6)
     EVT_WAIT(10)
@@ -925,7 +925,7 @@ StaticNpc N(npcGroup_80246528) = {
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
     },
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
-    .tattle = MESSAGE_ID(0x1A00B6),
+    .tattle = MESSAGE_ID_1A00B6,
 };
 
 EvtScript N(idle_80246718) = {

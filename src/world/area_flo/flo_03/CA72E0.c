@@ -235,7 +235,7 @@ EvtScript N(80240FFC) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x1100C8))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_1100C8)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_3)
     EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_18"), 1)
@@ -280,11 +280,11 @@ EvtScript N(interact_802412BC) = {
             EVT_SET(MapVar(14), 1)
             EVT_SET(LVar4, EVT_FLOAT(3.5))
             EVT_EXEC_WAIT(N(8024122C))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110050))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110050)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
             EVT_WAIT(20)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110051))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110051)
             EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_12)
             EVT_CALL(SetNpcYaw, 2, 270)
             EVT_CALL(GetNpcPos, 2, LVar0, LVar1, LVar2)
@@ -302,7 +302,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(PlaySoundAtNpc, 2, 0x263, 0)
             EVT_CALL(ShowEmote, 2, EMOTE_QUESTION, -45, 30, 1, 0, 0, 0, 0)
             EVT_CALL(GetNpcPos, 3, LVar0, LVar1, LVar2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110052))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110052)
             EVT_CALL(SetNpcYaw, 3, 90)
             EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -317,7 +317,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(SetNpcPos, 3, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
             EVT_WAIT(20)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110053))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110053)
             EVT_CALL(SetNpcYaw, 4, 270)
             EVT_CALL(GetNpcPos, 4, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -328,7 +328,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
             EVT_WAIT(20)
             EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110054))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110054)
             EVT_CALL(SetNpcYaw, 5, 270)
             EVT_CALL(GetNpcPos, 5, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -344,7 +344,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_8)
             EVT_WAIT(20)
             EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110055))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110055)
             EVT_CALL(SetNpcPos, 1, -233, 0, -217)
             EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -357,10 +357,10 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(PlaySoundAtNpc, 1, SOUND_262, 0)
             EVT_CALL(ShowEmote, 1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0)
             EVT_WAIT(15)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110056))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110056)
             EVT_SET(LVar4, EVT_FLOAT(90.0))
             EVT_EXEC_WAIT(N(8024122C))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110057))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110057)
             EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
@@ -372,12 +372,12 @@ EvtScript N(interact_802412BC) = {
             EVT_SET(GB_StoryProgress, 44)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x110058))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID_110058)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
             EVT_ELSE
                 EVT_SET(LVar4, EVT_FLOAT(3.5))
                 EVT_EXEC_WAIT(N(8024122C))
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_8, NPC_ANIM_petunia_Palette_00_Anim_3, 0, MESSAGE_ID(0x110059))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_8, NPC_ANIM_petunia_Palette_00_Anim_3, 0, MESSAGE_ID_110059)
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_4)
                 EVT_WAIT(20)
@@ -387,20 +387,20 @@ EvtScript N(interact_802412BC) = {
                 EVT_EXEC_WAIT(N(80240F0C))
                 EVT_CALL(AddKeyItem, ITEM_MAGICAL_BEAN)
                 EVT_WAIT(20)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11005A))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_11005A)
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0)
                 EVT_SET(GB_StoryProgress, 45)
             EVT_END_IF
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11005B))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_11005B)
         EVT_CASE_LT(60)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11005C))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_11005C)
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaByte(1), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11005D))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_11005D)
                 EVT_SET(AreaByte(1), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11005E))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID_11005E)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(ResetCam, 0, EVT_FLOAT(8.0))
@@ -931,7 +931,7 @@ StaticNpc N(npcGroup_8024388C) = {
         NPC_ANIM_petunia_Palette_00_Anim_1,
         NPC_ANIM_petunia_Palette_00_Anim_1,
     },
-    .tattle = MESSAGE_ID(0x1A00DD),
+    .tattle = MESSAGE_ID_1A00DD,
 };
 
 StaticNpc N(npcGroup_80243A7C) = {

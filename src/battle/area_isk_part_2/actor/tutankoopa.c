@@ -664,7 +664,7 @@ EvtScript N(8021D81C) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0D00E5), ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
+        EVT_CALL(ActorSpeak, MESSAGE_ID_0D00E5, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_END_IF
@@ -917,14 +917,14 @@ EvtScript N(8021E9C8) = {
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0D00E6), ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
+        EVT_CALL(ActorSpeak, MESSAGE_ID_0D00E6, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0D00E7), ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
+        EVT_CALL(ActorSpeak, MESSAGE_ID_0D00E7, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_1)
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
@@ -1144,7 +1144,7 @@ EvtScript N(8021F80C) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0D00E4), ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_B, NPC_ANIM_tutankoopa_Palette_00_Anim_1)
+        EVT_CALL(ActorSpeak, MESSAGE_ID_0D00E4, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_B, NPC_ANIM_tutankoopa_Palette_00_Anim_1)
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 1)
     EVT_END_IF
     EVT_RETURN

@@ -14,9 +14,9 @@ s32 N(GetTattle)(void) {
     s32 msg;
 
     if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_GOT_PULSE_STONE) {
-        msg = MESSAGE_ID(0x190063);
+        msg = MESSAGE_ID_190063;
     } else {
-        msg = MESSAGE_ID(0x190062);
+        msg = MESSAGE_ID_190062;
     }
     return msg;
 }

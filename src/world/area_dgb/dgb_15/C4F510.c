@@ -267,7 +267,7 @@ EvtScript N(idle_80242238) = {
     EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_6)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID(0x0E00F3))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID_0E00F3)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -427,7 +427,7 @@ EvtScript N(80242AD0) = {
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00D8), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
         EVT_RESUME_GROUP(1)
         EVT_RETURN
