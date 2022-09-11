@@ -25,7 +25,6 @@ void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
 
 // ECAA80_ItemChoice_SaveSelected (needs data?)
-// INCLUDE_ASM(s32, "ECAA80", func_802419F0_ECB6F0);
 
 extern s32 ECAA80_ItemChoice_HasSelectedItem;
 extern s32 ECAA80_ItemChoice_SelectedItemID;
