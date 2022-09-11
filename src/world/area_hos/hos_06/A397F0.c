@@ -36,7 +36,7 @@ ApiStatus Merlow_SetBadgePurchased(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    evt_set_variable(NULL, GSWF(1771) + index, TRUE);
+    evt_set_variable(NULL, GF_HOS06_MerlowBadge_00 + index, TRUE);
     return ApiStatus_DONE2;
 }
 
@@ -50,7 +50,7 @@ ApiStatus Merlow_ShopBadgesPopup(Evt* script, s32 isInitialCall) {
         menu = script->functionTempPtr[2];
         menuPos = 0;
         for (i = 0; i < 15; i++) {
-            if (!evt_get_variable(NULL, GSWF(1771) + i)) {
+            if (!evt_get_variable(NULL, GF_HOS06_MerlowBadge_00 + i)) {
                 ItemData* item = &gItemTable[D_802435EC_A3CACC[i].itemID];
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
                 menu->userIndex[menuPos] = i;

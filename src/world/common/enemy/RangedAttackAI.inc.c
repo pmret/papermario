@@ -22,10 +22,10 @@ ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 40.0f;
     territory.detectFlags = 0;
 

@@ -5,7 +5,13 @@ static char* N(exit_str_1) = "jan_02";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_8024030C_B2833C);
+//void fx_sun();
+
+// will not match with correct function definition
+ApiStatus func_8024030C_B2833C(Evt* script, s32 isInitialCall) {
+    fx_sun(0, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/enemy/HoppingAI.inc.c"
 

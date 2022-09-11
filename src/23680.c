@@ -320,19 +320,19 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
 
     // check if the wander we've reached the boundary of the territory
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-                               enemy->territory->wander.point.x,
-                               enemy->territory->wander.point.z,
+                               enemy->territory->wander.centerPos.x,
+                               enemy->territory->wander.centerPos.z,
                                npc->pos.x,
                                npc->pos.z,
-                               enemy->territory->wander.wanderSizeX,
-                               enemy->territory->wander.wanderSizeZ)
-        && npc->moveSpeed < dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z)) {
+                               enemy->territory->wander.wanderSize.x,
+                               enemy->territory->wander.wanderSize.z)
+        && npc->moveSpeed < dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z)) {
         if (!(enemy->aiFlags & ENEMY_AI_FLAGS_20)) {
             enemy->aiFlags |= (ENEMY_AI_FLAGS_20 | ENEMY_AI_FLAGS_40);
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_40) {
-            npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
+            npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
         }
 
@@ -340,7 +340,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         y = npc->pos.y;
         z = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
-            yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
+            yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
             ai_check_fwd_collisions(npc, 5.0f, &yaw, NULL, NULL, NULL);
             npc->yaw = yaw;
@@ -352,7 +352,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
     }
 
     // perform the motion
-    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | stillWithinTerritory) {
+    if (enemy->territory->wander.wanderSize.x | enemy->territory->wander.wanderSize.z | stillWithinTerritory) {
         if (!npc->turnAroundYawAdjustment) {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         } else {
@@ -544,7 +544,7 @@ void basic_ai_lose_player(Evt* script, MobileAISettings* npcAISettings, EnemyDet
     npc->duration--;
     if (npc->duration == 0) {
         // turn to face home position
-        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
+        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
     }
 }
@@ -559,10 +559,10 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 

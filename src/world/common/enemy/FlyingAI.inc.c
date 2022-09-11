@@ -22,10 +22,10 @@ void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+            enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
@@ -153,18 +153,18 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     }
     
     if (is_point_within_region(enemy->territory->wander.wanderShape, 
-                               enemy->territory->wander.point.x, 
-                               enemy->territory->wander.point.z,
+                               enemy->territory->wander.centerPos.x, 
+                               enemy->territory->wander.centerPos.z,
                                npc->pos.x, npc->pos.z,
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
+                               enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+        posW = dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             cond = TRUE;
         }
     }
 
-    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | cond) {
+    if (enemy->territory->wander.wanderSize.x | enemy->territory->wander.wanderSize.z | cond) {
         if (npc->turnAroundYawAdjustment != 0) {
             return;
         }
@@ -446,10 +446,10 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
 

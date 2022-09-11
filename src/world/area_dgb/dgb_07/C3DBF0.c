@@ -17,7 +17,7 @@ MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_07_tattle },
+    .tattle = { MSG_MapTattle_dgb_07 },
 };
 
 EvtScript N(80241490) = {
@@ -41,10 +41,10 @@ EvtScript N(exitSingleDoor_80241530) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 6)
-    EVT_SET(EVT_VAR(2), 22)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 6)
+    EVT_SET(LVar2, 22)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 2)
@@ -55,11 +55,11 @@ EvtScript N(exitSingleDoor_80241530) = {
 
 EvtScript N(enterSingleDoor_802415E4) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 22)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LVar2, 22)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -97,8 +97,8 @@ static s32 N(pad_17E4)[] = {
 };
 
 EvtScript N(802417F0) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
@@ -122,12 +122,12 @@ s32 N(extraAnimationList_802418AC)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_8,
     NPC_ANIM_world_clubba_Palette_00_Anim_11,
     NPC_ANIM_world_clubba_Palette_00_Anim_12,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_802418D4)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 MobileAISettings N(npcAISettings_802418DC) = {

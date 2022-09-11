@@ -415,7 +415,7 @@ void appendGfx_shading_palette(
 INCLUDE_ASM(s32, "de740_len_23f0", appendGfx_shading_palette);
 #endif
 
-void func_801491E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alpha) {
+void func_801491E4(Matrix4f mtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alpha) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
 
     if (alpha == 255) {

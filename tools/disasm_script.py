@@ -670,21 +670,21 @@ class ScriptDisassembler:
     def var(self, arg, prefer_hex = False, use_evt_ptr = True):
         if arg in self.symbol_map:
             s = self.symbol_map[arg][0][1]
-            return f"EVT_ADDR({s})" if use_evt_ptr else s
+            return f"EVT_PTR({s})" if use_evt_ptr else s
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
             if v <= -220000000: return f"EVT_FLOAT({round_fixed((v + 230000000) / 1024)})"
-            elif v <= -200000000: return f"UF({v + 210000000})"
-            elif v <= -180000000: return f"UW({v + 190000000})"
-            elif v <= -160000000: return f"GSW({v + 170000000})"
-            elif v <= -140000000: return f"LSW({v + 150000000})"
-            elif v <= -120000000: return f"GSWF({v + 130000000})"
-            elif v <= -100000000: return f"LSWF({v + 110000000})"
-            elif v <= -80000000: return f"GF({v + 90000000})"
-            elif v <= -60000000: return f"LF({v + 70000000})"
-            elif v <= -40000000: return f"GW({v + 50000000})"
-            elif v <= -20000000: return f"LW({v + 30000000})"
+            elif v <= -200000000: return f"ArrayFlag({v + 210000000})"
+            elif v <= -180000000: return f"ArrayVar({v + 190000000})"
+            elif v <= -160000000: return f"GameByte({v + 170000000})"
+            elif v <= -140000000: return f"AreaByte({v + 150000000})"
+            elif v <= -120000000: return f"GameFlag({v + 130000000})"
+            elif v <= -100000000: return f"AreaFlag({v + 110000000})"
+            elif v <= -80000000: return f"MapFlag({v + 90000000})"
+            elif v <= -60000000: return f"LocalFlag({v + 70000000})"
+            elif v <= -40000000: return f"MapVar({v + 50000000})"
+            elif v <= -20000000: return f"LocalVar({v + 30000000})"
 
         if arg == 0xFFFFFFFF:
             return "-1"

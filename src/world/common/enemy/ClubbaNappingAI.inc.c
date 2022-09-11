@@ -171,8 +171,8 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, En
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
-                      enemy->territory->wander.point.z) <= npc->moveSpeed) {
+    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x,
+                      enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 15;
         enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_50;
@@ -181,7 +181,7 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, En
         currentYaw = npc->yaw;
         ai_check_fwd_collisions(npc, 5.0f, &currentYaw, 0, 0, 0);
         npc->yaw = currentYaw;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
@@ -209,10 +209,10 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 40.0f;
     territory.detectFlags = 0;
 

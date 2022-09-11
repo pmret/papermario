@@ -87,10 +87,10 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
     f32 hitDepth;
     
     if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+            enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
     dummyNpc.pos.x = npc->pos.x;
     dummyNpc.pos.y = npc->pos.y + 1.0f;
@@ -235,10 +235,10 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0; 
 

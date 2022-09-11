@@ -10,21 +10,20 @@ static char* N(exit_str_5) = "";
 
 void get_model_env_color_parameters(u8* arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4, u8* arg5);
 
-s32 N(GetTattle)(void) {
-    s32 msg;
-
+s32 N(get_tattle)(void) {
+    s32 tattle;
     if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_GOT_PULSE_STONE) {
-        msg = MESSAGE_ID(0x19, 0x63);
+        tattle = MSG_MapTattle_sbk_02_after;
     } else {
-        msg = MESSAGE_ID(0x19, 0x62);
+        tattle = MSG_MapTattle_sbk_02_before;
     }
-    return msg;
+    return tattle;
 }
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
 ApiStatus func_80240338_92A5E8(Evt* script, s32 isInitialCall) {
-    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, EVT_MAP_VAR(0));
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MapVar(0));
     
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;

@@ -108,16 +108,16 @@ ApiStatus func_802C03E8(Evt* script, s32 isInitialCall) {
 
 EvtScript D_802C0410 = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
-    EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-    EVT_ADD(LW(1), 45)
-    EVT_CALL(MakeItemEntity, LW(10), LW(0), LW(1), LW(2), 1, 0)
-    EVT_SET(LW(10), LW(0))
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 45)
+    EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
+    EVT_SET(LVarA, LVar0)
     EVT_WAIT(15)
-    EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-    EVT_ADD(LW(1), 20)
-    EVT_CALL(func_802C0000, LW(0), LW(1), LW(2))
-    EVT_CALL(RemoveItemEntity, LW(10))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 20)
+    EVT_CALL(func_802C0000, LVar0, LVar1, LVar2)
+    EVT_CALL(RemoveItemEntity, LVarA)
     EVT_RETURN
     EVT_END
 };
@@ -129,7 +129,7 @@ EvtScript D_802C04F4 = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_EAT)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Eat)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -142,7 +142,7 @@ EvtScript D_802C0560 = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_DRINK)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Drink)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -151,53 +151,53 @@ EvtScript D_802C0560 = {
 EvtScript D_802C05CC_32579C = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartner, LW(0))
-    EVT_IF_NE(LW(0), 0)
+    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_IF_NE(LVar0, 0)
         EVT_CALL(func_802D2B6C)
         EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(func_802C02E4)
-    EVT_CALL(func_802C0358, LW(10))
+    EVT_CALL(func_802C0358, LVarA)
     EVT_EXEC_WAIT(D_802C0410)
-    EVT_IF_EQ(LW(13), 0)
+    EVT_IF_EQ(LVarD, 0)
         EVT_EXEC_WAIT(D_802C04F4)
     EVT_ELSE
         EVT_EXEC_WAIT(D_802C0560)
     EVT_END_IF
-    EVT_IF_EQ(LW(15), 1)
-        EVT_CALL(SetPlayerAnimation, ANIM_STICK_OUT_TONGUE)
+    EVT_IF_EQ(LVarF, 1)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_StickOutTongue)
     EVT_END_IF
-    EVT_IF_GT(LW(11), 0)
-        EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-        EVT_ADD(LW(0), 0)
-        EVT_ADD(LW(1), 35)
-        EVT_CALL(func_802C00AC, LW(0), LW(1), LW(2), LW(11))
+    EVT_IF_GT(LVarB, 0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 0)
+        EVT_ADD(LVar1, 35)
+        EVT_CALL(func_802C00AC, LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
-    EVT_IF_GT(LW(12), 0)
-        EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-        EVT_ADD(LW(0), 20)
-        EVT_ADD(LW(1), 25)
-        EVT_CALL(func_802C016C, LW(0), LW(1), LW(2), LW(12))
+    EVT_IF_GT(LVarC, 0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 20)
+        EVT_ADD(LVar1, 25)
+        EVT_CALL(func_802C016C, LVar0, LVar1, LVar2, LVarC)
     EVT_END_IF
-    EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-    EVT_ADD(LW(1), 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LW(0), LW(1), LW(2), LW(11))
-    EVT_IF_NE(LW(11), 0)
-        EVT_CALL(func_802C022C, LW(11))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    EVT_IF_NE(LVarB, 0)
+        EVT_CALL(func_802C022C, LVarB)
     EVT_END_IF
-    EVT_IF_NE(LW(12), 0)
-        EVT_CALL(func_802C0288, LW(12))
+    EVT_IF_NE(LVarC, 0)
+        EVT_CALL(func_802C0288, LVarC)
     EVT_END_IF
-    EVT_IF_EQ(LW(15), 0)
+    EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_THUMBS_UP)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_ThumbsUp)
         EVT_WAIT(30)
     EVT_ELSE
         EVT_WAIT(30)
     EVT_END_IF
-    EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-    EVT_CALL(ShowRecoveryShimmer, LW(0), LW(1), LW(2), LW(11))
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
     EVT_CALL(func_802C03E8)
     EVT_CALL(DisablePlayerInput, FALSE)

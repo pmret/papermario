@@ -172,15 +172,15 @@ void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, E
         script->functionTemp[1]--;
     }
 
-    if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) < npc->moveSpeed) {
-        npc->pos.x = enemy->territory->wander.point.x;
-        npc->pos.z = enemy->territory->wander.point.z;
-        npc->yaw = enemy->territory->wander.wanderSizeX;
+    if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) < npc->moveSpeed) {
+        npc->pos.x = enemy->territory->wander.centerPos.x;
+        npc->pos.z = enemy->territory->wander.centerPos.z;
+        npc->yaw = enemy->territory->wander.wanderSize.x;
         script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
@@ -195,10 +195,10 @@ ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 

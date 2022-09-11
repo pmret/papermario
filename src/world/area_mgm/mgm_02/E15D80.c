@@ -163,7 +163,7 @@ void N(draw_score_display)(void* renderData) {
     }
 
     draw_box(0, 9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    draw_msg(MESSAGE_ID(0x8,0x47), data->windowA_posX + 42, 28, 255, MSG_PAL_WHITE, 0);
+    draw_msg(MSG_MGM_0047, data->windowA_posX + 42, 28, 255, MSG_PAL_WHITE, 0);
     draw_number(NUM_PANELS - data->found, data->windowA_posX + 65, 43, TRUE, MSG_PAL_WHITE, 255, 3);
     draw_ci_image_with_clipping(&mgm_02_PeachPanelImg, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &mgm_02_PeachPanelPal,
         data->windowA_posX + 5, 26, 10, 20, 300, 200, 255);
@@ -178,7 +178,7 @@ void N(draw_score_display)(void* renderData) {
     // draw tenths of seconds
     draw_number(deciseconds, data->windowB_posX + 40, 31, TRUE, MSG_PAL_WHITE, 255, 0);
     // draw dot
-    draw_msg(MESSAGE_ID(0x8,0x24), data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
+    draw_msg(MSG_MGM_0024, data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
 }
 
 void N(work_draw_score)(void) {
@@ -244,8 +244,8 @@ ApiStatus N(CreateSignpost)(void) {
 
 ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 hitModelID = evt_get_variable(script, LW(0xA));
-    s32 hitColliderID = evt_get_variable(script, LW(0xB)); // unused
+    s32 hitModelID = evt_get_variable(script, LVarA);
+    s32 hitColliderID = evt_get_variable(script, LVarB); // unused
     s32 i;
 
     for (i = 0; i < NUM_BOXES; i++) {
@@ -254,19 +254,19 @@ ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
         }
     }
 
-    evt_set_variable(script, LW(0xC), data->box[i].content);
+    evt_set_variable(script, LVarC, data->box[i].content);
 
     switch (data->box[i].content) {
         case BOX_CONTENT_FUZZY:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LVarD, data->box[i].npcID);
             data->box[i].state = BOX_STATE_FUZZY_HIT;
             break;
         case BOX_CONTENT_BOMB:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LVarD, data->box[i].npcID);
             data->box[i].state = BOX_STATE_BOMB_HIT;
             break;
         case BOX_CONTENT_EMPTY:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LVarD, data->box[i].npcID);
             data->box[i].state = BOX_STATE_EMPTY_HIT;
             break;
         case BOX_CONTENT_PEACH:
@@ -481,7 +481,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     npc->duration = 8;
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
-                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_3;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
@@ -506,11 +506,11 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     npc->pos.x = update_lerp(EASING_LINEAR, (f32)enemy->varTable[1] / 10.0, (f32)enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
                     npc->pos.y = update_lerp(EASING_LINEAR, (f32)enemy->varTable[2] / 10.0, (f32)enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
                     npc->pos.z = update_lerp(EASING_LINEAR, (f32)enemy->varTable[3] / 10.0, (f32)enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
-                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_F;
-                        gPlayerStatusPtr->anim = ANIM_RUN_PANIC;
+                        gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->position.x;
                         npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
@@ -522,12 +522,12 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     }
                     break;
                 case BOX_STATE_FUZZY_GRAB:
-                    gPlayerStatusPtr->anim = ANIM_RUN_PANIC;
+                    gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         data->mashProgress++;
                     }
                     if (data->mashProgress >= 12) {
-                        gPlayerStatusPtr->anim = ANIM_10002;
+                        gPlayerStatusPtr->anim = ANIM_Mario_10002;
                         data->stunFlags &= ~STUN_FLAGS_STUNNED;
                         data->stunFlags |= STUN_FLAGS_CHANGED;
                         data->box[i].state = BOX_STATE_FUZZY_DETACH;
@@ -616,7 +616,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                         gPlayerStatusPtr->targetYaw = 265.0f;
                     }
                     // rest of case could simply use fallthough, but wouldnt match
-                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -627,7 +627,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     }
                     break;
                 case BOX_STATE_BOMB_ATTACK:
-                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -640,10 +640,10 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                 case BOX_STATE_BOMB_STUN:
                     npc->duration--;
                     if (npc->duration == 25) {
-                        gPlayerStatusPtr->anim = ANIM_CHARRED;
+                        gPlayerStatusPtr->anim = ANIM_Mario_Charred;
                     }
                     if (npc->duration <= 0) {
-                        gPlayerStatusPtr->anim = ANIM_10002;
+                        gPlayerStatusPtr->anim = ANIM_Mario_10002;
                         data->stunFlags &= ~STUN_FLAGS_STUNNED;
                         data->stunFlags |= STUN_FLAGS_CHANGED;
                         data->box[i].state = BOX_STATE_BOMB_DONE;
@@ -814,10 +814,10 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
         gPlayerStatusPtr->targetYaw = 180.0;
         if (data->timeLeft == 0) {
             sfx_play_sound(SOUND_MENU_ERROR);
-            gPlayerStatusPtr->anim = ANIM_10002;
+            gPlayerStatusPtr->anim = ANIM_Mario_10002;
         } else {
             sfx_play_sound(SOUND_D4);
-            gPlayerStatusPtr->anim = ANIM_10002;
+            gPlayerStatusPtr->anim = ANIM_Mario_10002;
         }
 
         return ApiStatus_DONE2;
@@ -856,7 +856,7 @@ ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
     if (data->currentScore == 0 && data->found == NUM_PANELS) {
         outScore = -1;
     }
-    evt_set_variable(script, LW(0), outScore);
+    evt_set_variable(script, LVar0, outScore);
 
     return ApiStatus_DONE2;
 }
@@ -979,7 +979,7 @@ ApiStatus N(DestroyMinigame)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LW(0xA), gPlayerData.coins);
+    evt_set_variable(script, LVarA, gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 

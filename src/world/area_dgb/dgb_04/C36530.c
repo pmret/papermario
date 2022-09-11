@@ -18,7 +18,7 @@ MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_04_tattle },
+    .tattle = { MSG_MapTattle_dgb_04 },
 };
 
 EvtScript N(80243170) = {
@@ -42,10 +42,10 @@ EvtScript N(exitSingleDoor_80243210) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 16)
-    EVT_SET(EVT_VAR(2), 16)
-    EVT_SET(EVT_VAR(3), 1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 16)
+    EVT_SET(LVar2, 16)
+    EVT_SET(LVar3, 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 0)
@@ -58,10 +58,10 @@ EvtScript N(exitDoubleDoor_802432C4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
-    EVT_SET(EVT_VAR(0), 1)
-    EVT_SET(EVT_VAR(1), 20)
-    EVT_SET(EVT_VAR(2), 13)
-    EVT_SET(EVT_VAR(3), 11)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar1, 20)
+    EVT_SET(LVar2, 13)
+    EVT_SET(LVar3, 11)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 0)
@@ -71,17 +71,17 @@ EvtScript N(exitDoubleDoor_802432C4) = {
 };
 
 EvtScript N(enterSingleDoor_80243378) = {
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(UseDoorSounds, 3)
-            EVT_SET(EVT_VAR(2), 13)
-            EVT_SET(EVT_VAR(3), 11)
+            EVT_SET(LVar2, 13)
+            EVT_SET(LVar3, 11)
             EVT_EXEC_WAIT(EnterDoubleDoor)
         EVT_CASE_EQ(1)
             EVT_CALL(UseDoorSounds, 0)
-            EVT_SET(EVT_VAR(2), 16)
-            EVT_SET(EVT_VAR(3), 1)
+            EVT_SET(LVar2, 16)
+            EVT_SET(LVar3, 1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -147,11 +147,11 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(2)
     EVT_LABEL(20)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-    EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(4), EVT_VAR(2))
-    EVT_CALL(GetPlayerActionState, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 0)
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar4, LVar2)
+    EVT_CALL(GetPlayerActionState, LVar0)
+    EVT_IF_NE(LVar0, 0)
         EVT_WAIT(1)
         EVT_GOTO(20)
     EVT_END_IF
@@ -160,37 +160,37 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 20)
-    EVT_ADD(EVT_VAR(2), 2)
-    EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 20)
+    EVT_ADD(LVar2, 2)
+    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_80017)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD
         EVT_LOOP(100)
-            EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_ADD(EVT_VAR(1), 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_ADD(EVT_VAR(1), 1)
-            EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            EVT_ADD(LVar1, 1)
+            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+            EVT_ADD(LVar1, 1)
+            EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x108)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
@@ -200,13 +200,13 @@ EvtScript N(npcAI_802435E4) = {
 };
 
 EvtScript N(80243A0C) = {
-    EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(6)
-            EVT_CALL(GetSelfAnimationFromTable, 7, EVT_VAR(0))
+            EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
             EVT_EXEC_WAIT(0x800936DC)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -215,8 +215,8 @@ EvtScript N(80243A0C) = {
 };
 
 EvtScript N(80243A98) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(1)
@@ -272,7 +272,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
     {},
 };
 
-#define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
+#define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_DGB04_SuperBlock
 #include "world/common/atomic/SuperBlockData.inc.c"
 

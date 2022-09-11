@@ -74,9 +74,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_80238110) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802383F4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8023818C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8023819C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802383F4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8023818C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8023819C)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -91,42 +91,42 @@ EvtScript N(idle_8023818C) = {
 EvtScript N(handleEvent_8023819C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(GetLastEvent, ACTOR_PARTNER, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_7)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySound, SOUND_208C)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_7)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
-            EVT_SET_CONST(LW(2), NPC_ANIM_goompa_Palette_00_Anim_3)
-            EVT_SET_CONST(LW(3), NPC_ANIM_goompa_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar2, NPC_ANIM_goompa_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar3, NPC_ANIM_goompa_Palette_00_Anim_1)
             EVT_EXEC_WAIT(D_80294FE4)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
-            EVT_SET_CONST(LW(0), NPC_ANIM_goompa_Palette_00_Anim_7)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
-            EVT_SET_CONST(LW(2), NPC_ANIM_goompa_Palette_00_Anim_7)
-            EVT_SET_CONST(LW(3), NPC_ANIM_goompa_Palette_00_Anim_3)
-            EVT_SET_CONST(LW(4), NPC_ANIM_goompa_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar0, NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar2, NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar3, NPC_ANIM_goompa_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar4, NPC_ANIM_goompa_Palette_00_Anim_1)
             EVT_EXEC_WAIT(D_80294C68)
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LW(0), 0)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
+            EVT_SET_CONST(LVar0, 0)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_7)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_33)
         EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_1)
-            EVT_SET_CONST(LW(2), NPC_ANIM_goompa_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar2, NPC_ANIM_goompa_Palette_00_Anim_3)
             EVT_EXEC_WAIT(D_80295EC4)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -136,8 +136,8 @@ EvtScript N(handleEvent_8023819C) = {
 };
 
 EvtScript N(takeTurn_802383F4) = {
-    EVT_CALL(GetBattlePhase, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetBattlePhase, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
             EVT_EXEC_WAIT(N(8023859C))
         EVT_CASE_EQ(PHASE_5)
@@ -152,17 +152,17 @@ EvtScript N(takeTurn_802383F4) = {
 };
 
 EvtScript N(80238488) = {
-    EVT_SET_CONST(LW(0), 1)
-    EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_9)
-    EVT_SET_CONST(LW(2), NPC_ANIM_goompa_Palette_00_Anim_2)
+    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_9)
+    EVT_SET_CONST(LVar2, NPC_ANIM_goompa_Palette_00_Anim_2)
     EVT_EXEC_WAIT(D_80294720)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802384D4) = {
-    EVT_SET_CONST(LW(0), 1)
-    EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_3)
+    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar1, NPC_ANIM_goompa_Palette_00_Anim_3)
     EVT_EXEC_WAIT(D_80294AFC)
     EVT_RETURN
     EVT_END

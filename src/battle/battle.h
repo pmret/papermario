@@ -2,6 +2,7 @@
 #define _BATTLE_BATTLE_H_
 
 #include "common.h"
+#include "message_ids.h"
 
 enum BattleAreaIDs {
     BTL_AREA_KMR_PART_1         = 0x00,

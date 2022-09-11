@@ -24,10 +24,10 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
@@ -166,12 +166,12 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
                 w2 = fabsf(npc->jumpVelocity) + 16.0;
                 if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
                     npc->pos.y = y2;
-                    enemy->territory->wander.point.x = npc->pos.x;
-                    enemy->territory->wander.point.y = npc->pos.y;
-                    enemy->territory->wander.point.z = npc->pos.z;
-                    enemy->territory->wander.detect.x = npc->pos.x;
-                    enemy->territory->wander.detect.y = npc->pos.y;
-                    enemy->territory->wander.detect.z = npc->pos.z;
+                    enemy->territory->wander.centerPos.x = npc->pos.x;
+                    enemy->territory->wander.centerPos.y = npc->pos.y;
+                    enemy->territory->wander.centerPos.z = npc->pos.z;
+                    enemy->territory->wander.detectPos.x = npc->pos.x;
+                    enemy->territory->wander.detectPos.y = npc->pos.y;
+                    enemy->territory->wander.detectPos.z = npc->pos.z;
                     enemy->varTable[10] = 5;
                     if (enemy->varTable[13] != 0) {
                         if (npc->pos.y <= 0.0) {

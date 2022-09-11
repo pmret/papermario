@@ -30,12 +30,12 @@ ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
         script->varTable[10] = script->varTable[0];
 
         if (script->varTable[0] == 0) {
-            script->varTable[1] = GSWF(484);
-            script->varTable[2] = GSWF(489);
+            script->varTable[1] = GF_KKJ16_Item_PowerRush;
+            script->varTable[2] = GF_KKJ_Stored_PowerRush;
             menu->popupType = POPUP_MENU_USEKEY;
         } else {
-            script->varTable[1] = GSWF(489);
-            script->varTable[2] = GSWF(494);
+            script->varTable[1] = GF_KKJ_Stored_PowerRush;
+            script->varTable[2] = GF_KKJ_Retrieved_PowerRush;
             menu->popupType = POPUP_MENU_TAKE_FROM_CHEST;
         }
 
@@ -112,7 +112,7 @@ ApiStatus func_80240500_AF2160(Evt* script, s32 isInitialCall) {
     }
 
     if (found) {
-        evt_set_variable(NULL, GSWF(494 + i), TRUE);
+        evt_set_variable(NULL, GF_KKJ_Retrieved_PowerRush + i, TRUE);
     }
 
     return ApiStatus_DONE2;

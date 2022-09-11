@@ -13,7 +13,7 @@ ApiStatus func_80240000_91B8E0(Evt* script, s32 isInitialCall) {
         status = 1;
     }
     if (status >= 0) {
-        evt_set_variable(script, GW(9), status);
+        evt_set_variable(script, MapVar(9), status);
     }
     
     return ApiStatus_BLOCK;

@@ -283,15 +283,15 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
     }
 
     if (get_enemy_safe(enemy->npcID) == NULL) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
     if (enemy->varTable[0] == 5) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
     if (get_enemy_safe(enemy->npcID) == NULL) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
 
@@ -363,7 +363,7 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
-                evt_set_variable(script, EVT_VAR(0), 1);
+                evt_set_variable(script, LVar0, 1);
                 return ApiStatus_DONE2;
             }
             if (enemy->varTable[1] & 1) {

@@ -21,6 +21,6 @@ typedef u8 Addr[];
 #define BTL_DEFAULT_STAGE -1
 
 /// Terminates an extraAnimationList
-#define ANIM_END -1
+#define ANIM_LIST_END -1
 
 #endif
