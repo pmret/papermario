@@ -414,8 +414,27 @@ typedef struct ShapeSpellFXData {
 } ShapeSpellFXData; // size = 0x38
 
 typedef struct GatherEnergyPinkFXData {
-    /* 0x00 */ char todo[0];
-} GatherEnergyPinkFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f posA;
+    /* 0x10 */ Vec3f posB;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+} GatherEnergyPinkFXData; // size = 0x60
 
 typedef struct DropLeavesFXData {
     /* 0x00 */ char todo[0];
