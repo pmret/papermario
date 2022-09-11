@@ -5,9 +5,6 @@
 #include "common/UnkAngleFunc1.inc.c"
 
 #include "speech_bubble.png.h"
-#include "speech_bubble.png.inc.c"
-#include "speech_bubble.pal.inc.c"
-#include "speech_bubble_dlist.gfx.inc.c"
 
 typedef struct UnkE20EB0 {
     /* 0x00 */ Npc* unk_00;
@@ -23,6 +20,10 @@ typedef struct UnkE20EB0 {
 } UnkE20EB0; /* size = 0x2C */
 
 BSS UnkE20EB0 D_802B79C0_E21870;
+
+#include "speech_bubble.png.inc.c"
+#include "speech_bubble.pal.inc.c"
+#include "speech_bubble_dlist.gfx.inc.c"
 
 UnkE20EB0* D_802B79A8_E21858 = &D_802B79C0_E21870;
 
