@@ -284,7 +284,7 @@ glabel partner_walking_follow_player
 /* 8552C 800EC07C 0C00F598 */  jal       func_8003D660
 /* 85530 800EC080 0220202D */   daddu    $a0, $s1, $zero
 /* 85534 800EC084 86240084 */  lh        $a0, 0x84($s1)
-/* 85538 800EC088 0C016F6A */  jal       get_collider_type_by_id
+/* 85538 800EC088 0C016F6A */  jal       get_collider_flags
 /* 8553C 800EC08C 00000000 */   nop
 /* 85540 800EC090 2442FFFE */  addiu     $v0, $v0, -2
 /* 85544 800EC094 2C420002 */  sltiu     $v0, $v0, 2
@@ -335,7 +335,7 @@ glabel partner_walking_follow_player
 /* 855F0 800EC140 0803B4B7 */  j         .L800ED2DC
 /* 855F4 800EC144 00000000 */   nop
 .L800EC148_855F8:
-/* 855F8 800EC148 0C016F6A */  jal       get_collider_type_by_id
+/* 855F8 800EC148 0C016F6A */  jal       get_collider_flags
 /* 855FC 800EC14C 86240084 */   lh       $a0, 0x84($s1)
 /* 85600 800EC150 3C058011 */  lui       $a1, %hi(D_8010CFBC)
 /* 85604 800EC154 24A5CFBC */  addiu     $a1, $a1, %lo(D_8010CFBC)
@@ -765,7 +765,7 @@ glabel partner_walking_follow_player
 /* 85C64 800EC7B4 A4800000 */   sh       $zero, ($a0)
 .L800EC7B8:
 /* 85C68 800EC7B8 86240084 */  lh        $a0, 0x84($s1)
-/* 85C6C 800EC7BC 0C016F6A */  jal       get_collider_type_by_id
+/* 85C6C 800EC7BC 0C016F6A */  jal       get_collider_flags
 /* 85C70 800EC7C0 00000000 */   nop
 /* 85C74 800EC7C4 2442FFFE */  addiu     $v0, $v0, -2
 /* 85C78 800EC7C8 2C420002 */  sltiu     $v0, $v0, 2
@@ -938,7 +938,7 @@ glabel partner_walking_follow_player
 /* 85EF4 800ECA44 00000000 */   nop
 /* 85EF8 800ECA48 3C108011 */  lui       $s0, %hi(D_8010C978)
 /* 85EFC 800ECA4C 2610C978 */  addiu     $s0, $s0, %lo(D_8010C978)
-/* 85F00 800ECA50 0C016F6A */  jal       get_collider_type_by_id
+/* 85F00 800ECA50 0C016F6A */  jal       get_collider_flags
 /* 85F04 800ECA54 8E040000 */   lw       $a0, ($s0)
 /* 85F08 800ECA58 2442FFFE */  addiu     $v0, $v0, -2
 /* 85F0C 800ECA5C 2C420002 */  sltiu     $v0, $v0, 2

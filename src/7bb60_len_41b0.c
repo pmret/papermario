@@ -122,7 +122,7 @@ void func_800E29C8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
     f32 temp_f20;
-    s32 phi_a0;
+    AnimID anim;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
@@ -152,12 +152,12 @@ void func_800E29C8(void) {
         func_800E315C(colliderID);
         playerStatus->position.y = temp_f20;
         if (colliderID >= 0) {
-            if (!(playerStatus->animFlags & 1)) {
-                phi_a0 = 0x10009;
+            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+                anim = ANIM_Mario_10009;
             } else {
-                phi_a0 = 0x6000B;
+                anim = ANIM_Mario_6000B;
             }
-            suggest_player_anim_clearUnkFlag(phi_a0);
+            suggest_player_anim_clearUnkFlag(anim);
             enable_player_input();
             phys_player_land();
         }
@@ -343,15 +343,14 @@ void func_800E315C(s32 colliderID) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (colliderID >= 0) {
-        u8 colliderType = get_collider_type_by_id(colliderID);
-
-        switch (colliderType) {
-            case 1:
-            case 4:
-            case 5:
+        s32 surfaceType = get_collider_flags(colliderID) & 0xFF;
+        switch (surfaceType) {
+            case SURFACE_TYPE_WATER:
+            case SURFACE_TYPE_DOCK_WALL:
+            case SURFACE_TYPE_SLIDE:
                 set_action_state(ACTION_STATE_LAND);
                 break;
-            case 3:
+            case SURFACE_TYPE_LAVA:
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -363,7 +362,7 @@ void func_800E315C(s32 colliderID) {
                     }
                 }
                 break;
-            case 2:
+            case SURFACE_TYPE_SPIKES:
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
@@ -393,7 +392,7 @@ void phys_player_land(void) {
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800000;
     playerStatus->landPos.x = playerStatus->position.x;
     playerStatus->landPos.z = playerStatus->position.z;
-    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
     sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         phys_adjust_cam_on_landing();
@@ -888,20 +887,20 @@ void phys_main_collision_below(void) {
     f32 temp_f24 = (2.0f * playerStatus->colliderHeight) / 7.0f;
     f32 hitRx, hitRz;
     f32 hitDirX, hitDirZ;
-    s32 result;
+    s32 colliderID;
     s32 cond;
 
-    result = player_raycast_below_cam_relative(playerStatus, &playerX, &playerY, &playerZ, &outLength, &hitRx, &hitRz,
+    colliderID = player_raycast_below_cam_relative(playerStatus, &playerX, &playerY, &playerZ, &outLength, &hitRx, &hitRz,
                                                &hitDirX, &hitDirZ);
     playerStatus->groundNormalPitch = get_player_normal_pitch();
 
     if (collHeightHalf + (temp_f24 * 0.5f) < outLength) {
-        result = -1;
+        colliderID = -1;
     }
     if (playerStatus->timeInAir == 0) {
-        collisionStatus->currentFloor = result;
+        collisionStatus->currentFloor = colliderID;
     }
-    if (result >= 0) {
+    if (colliderID >= 0) {
         playerStatus->groundAnglesXZ.x = hitDirX;
         playerStatus->groundAnglesXZ.y = hitDirZ;
     }
@@ -910,7 +909,7 @@ void phys_main_collision_below(void) {
         return;
     }
 
-    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_AIRBORNE) {
         return;
     }
 
@@ -922,9 +921,10 @@ void phys_main_collision_below(void) {
         (phys_adjust_cam_on_landing(), !phys_should_player_be_sliding()) ||
         (set_action_state(ACTION_STATE_SLIDING), (playerStatus->actionState != ACTION_STATE_SLIDING))))
     {
-        if (result >= 0) {
-            switch (get_collider_type_by_id(result) & 0xFF) {
-                case 2:
+        if (colliderID >= 0) {
+            s32 surfaceType = get_collider_flags(colliderID) & 0xFF;
+            switch (surfaceType) {
+                case SURFACE_TYPE_SPIKES:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -936,7 +936,7 @@ void phys_main_collision_below(void) {
                         }
                     }
                     break;
-                case 3:
+                case SURFACE_TYPE_LAVA:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -1109,26 +1109,25 @@ s8 get_current_partner_id(void) {
     return gPlayerData.currentPartner;
 }
 
-void try_player_footstep_sounds(s32 arg0) {
-    if (gGameStatusPtr->frameCounter % arg0 == 0) {
-        u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
-        s32 soundID;
-        s32 soundID2;
+void try_player_footstep_sounds(s32 interval) {
+    if (gGameStatusPtr->frameCounter % interval == 0) {
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & 0xFF;
+        s32 soundID, altSoundID;
 
-        if (colliderType == 6 || colliderType == 9) {
-            soundID = SOUND_143;
-            soundID2 = SOUND_144;
+        if (surfaceType == SURFACE_TYPE_FLOWERS || surfaceType == SURFACE_TYPE_HEDGES) {
+            soundID = SOUND_STEP_CRUNCHY1;
+            altSoundID = SOUND_STEP_CRUNCHY2;
         } else {
-            soundID = SOUND_STEP1;
-            soundID2 = SOUND_STEP2;
+            soundID = SOUND_STEP_NORMAL1;
+            altSoundID = SOUND_STEP_NORMAL2;
         }
 
-        if (D_800F7B80 == 0) {
-            soundID = soundID2;
+        if (FootstepSoundSelector == 0) {
+            soundID = altSoundID;
         }
 
         sfx_play_sound_at_player(soundID, 0);
-        D_800F7B80 ^= 1;
+        FootstepSoundSelector ^= 1;
     }
 }
 
@@ -1186,16 +1185,16 @@ s32 phys_can_player_interact(void) {
 }
 
 f32 func_800E5348(void) {
-    f32 temp_f0 = get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, gPlayerStatus.currentYaw);
+    f32 deltaYaw = get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, gPlayerStatus.currentYaw);
 
-    if (temp_f0 < -5.0f && temp_f0 > -175.0f) {
-        temp_f0 = 0.0f;
-    } else if (temp_f0 > 5.0f && temp_f0 < 175.0f) {
-        temp_f0 = 180.0f;
+    if (deltaYaw < -5.0f && deltaYaw > -175.0f) {
+        deltaYaw = 0.0f;
+    } else if (deltaYaw > 5.0f && deltaYaw < 175.0f) {
+        deltaYaw = 180.0f;
     } else {
-        temp_f0 = D_800F7B40;
+        deltaYaw = D_800F7B40;
     }
-    return clamp_angle(temp_f0 - 90.0f + gCameras[gCurrentCameraID].currentYaw);
+    return clamp_angle(deltaYaw - 90.0f + gCameras[gCurrentCameraID].currentYaw);
 }
 
 f32 player_get_camera_facing_angle(void) {

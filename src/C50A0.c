@@ -1975,7 +1975,7 @@ block_47: // TODO required to match
                     itemEntity->position.x = playerStatus->position.x;
                     itemEntity->position.y = playerStatus->position.y + playerStatus->colliderHeight;
                     itemEntity->position.z = playerStatus->position.z;
-                    suggest_player_anim_setUnkFlag(0x6000C);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 }
 
                 if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
@@ -1998,7 +1998,7 @@ block_47: // TODO required to match
                     (itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) ||
                     (itemEntity->pickupMsgFlags & 2))
                 {
-                    suggest_player_anim_setUnkFlag(0x6000C);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 }
             }
 
@@ -2170,7 +2170,7 @@ block_47: // TODO required to match
                     sort_items();
                     add_item(itemEntity->itemID);
                 }
-                suggest_player_anim_setUnkFlag(0x6000C);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 func_801363A0(itemEntity);
                 set_window_update(0xC, (s32) basic_window_update);
                 D_801568E4 = 50;
@@ -2192,7 +2192,7 @@ block_47: // TODO required to match
             }
             break;
         case 15:
-            suggest_player_anim_setUnkFlag(0x10002);
+            suggest_player_anim_setUnkFlag(ANIM_Mario_10002);
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             enable_player_input();
             partner_enable_input();

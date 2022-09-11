@@ -1765,9 +1765,10 @@ s32 partner_get_out(Npc* partner) {
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
                 hitDepth = 1000.0f;
                 if (npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionRadius)) {
-                    s32 colliderType = get_collider_type_by_id(D_8010C978);
+                    // bug? collider flags not properly masked with 0xFF
+                    s32 surfaceType = get_collider_flags(D_8010C978);
 
-                    if ((colliderType == 2 || colliderType == 3) || (hitDepth > 100.0f)) {
+                    if ((surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) || (hitDepth > 100.0f)) {
                         moveToX = playerStatus->position.x;
                         moveToY = playerStatus->position.y;
                         moveToZ = playerStatus->position.z;

@@ -225,10 +225,10 @@ s32 func_802BD7DC(void) {
     //TODO find better match
     if (outLength <= 16.0f && colliderTypeID >= 0) {
         if (!(colliderTypeID & COLLISION_WITH_ENTITY_BIT) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
-            colliderTypeID = get_collider_type_by_id(colliderTypeID) & 0xFF;
-            if (colliderTypeID - 1 >= 3U) {
+            colliderTypeID = get_collider_flags(colliderTypeID) & 0xFF; //TODO surface type
+            if (!(colliderTypeID == SURFACE_TYPE_WATER || colliderTypeID == SURFACE_TYPE_SPIKES || colliderTypeID == SURFACE_TYPE_LAVA)) { //
                 ret = FALSE;
-                if (colliderTypeID != 5) {
+                if (colliderTypeID != SURFACE_TYPE_SLIDE) {
                     npc->moveToPos.x = outX;
                     npc->moveToPos.y = outY;
                     npc->moveToPos.z = outZ;
@@ -342,19 +342,21 @@ void func_802BDDD8_321928(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    f32 sp3C, sp40, sp44, sp48, sp4C, sp50, sp54;
+    f32 hitDepth, sp40, sp44, sp48, sp4C, sp50, sp54;
     f32 yaw = 0.0f;
     f32 moveSpeed = 0.0f;
     f32 x, y, z;
     f32 temp_f0_3;
     s32 raycastBelowResult;
-    s32 phi_a3;
-    f32 phi_f20;
-
+    s32 currentSurfaceType;
+    s32 belowSurfaceType;
+    s32 pitchShift;
+    f32 height;
 
     func_802BD6BC_32120C(&yaw, &moveSpeed);
 
-    if ((u8)(get_collider_type_by_id(npc->currentFloor)) == 3) {
+    currentSurfaceType = get_collider_flags(npc->currentFloor) & 0xFF;
+    if (currentSurfaceType == SURFACE_TYPE_LAVA) {
         moveSpeed *= 0.5f;
     }
 
@@ -373,11 +375,11 @@ void func_802BDDD8_321928(Npc* npc) {
             }
 
             if (D_802BFF20 < 0x3C) {
-                phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
+                pitchShift = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, pitchShift);
             } else {
-                phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
+                pitchShift = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, pitchShift);
             }
         }
     }
@@ -466,18 +468,18 @@ void func_802BDDD8_321928(Npc* npc) {
 
     func_802BDA90_3215E0(npc);
     npc->moveToPos.y -= npc->jumpScale;
-    sp3C = npc->collisionHeight + 2;
+    hitDepth = npc->collisionHeight + 2;
     y = npc->moveToPos.y + 12.0f;
     x = playerStatus->position.x;
     z = playerStatus->position.z;
     add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
-    raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &sp3C, &sp40,
+    raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &hitDepth, &sp40,
                                                             &sp44, &sp48, &sp4C);
     D_802BFF28 = get_player_normal_pitch();
-    phi_f20 = 12.0f;
+    height = 12.0f;
 
     if (D_802BFF28 != 0.0f) {
-        phi_f20 = 32.0f;
+        height = 32.0f;
     }
 
     if (D_802BFF28 > 0.0f && raycastBelowResult >= 0) {
@@ -485,7 +487,7 @@ void func_802BDDD8_321928(Npc* npc) {
         npc->pos.y = (npc->pos.y + fabs((sp50 / sp54) * playerStatus->runSpeed));
     }
 
-    if (sp3C <= phi_f20 && raycastBelowResult >= 0) {
+    if (hitDepth <= height && raycastBelowResult >= 0) {
         playerStatus->lastGoodPosition.x = npc->pos.x;
         playerStatus->lastGoodPosition.y = npc->pos.y;
         playerStatus->lastGoodPosition.z = npc->pos.z;
@@ -498,8 +500,8 @@ void func_802BDDD8_321928(Npc* npc) {
         npc->jumpScale = 0.0f;
         playerStatus->timeInAir = 0;
 
-        if ((get_collider_type_by_id(raycastBelowResult) & 0xFF) == 3) {
-
+        belowSurfaceType = get_collider_flags(raycastBelowResult) & 0xFF;
+        if (belowSurfaceType == SURFACE_TYPE_LAVA) {
             npc->currentAnim.w = 0x80006;
             npc->moveSpeed = moveSpeed * 0.5f;
         } else {
@@ -582,7 +584,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= NPC_FLAG_100;
                 set_action_state(ACTION_STATE_RIDE);
-                suggest_player_anim_setUnkFlag(0x8000E);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                 npc->currentAnim.w = 0x80005;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
@@ -598,7 +600,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->moveSpeed = 3.0f;
                 npc->jumpScale = 0.0f;
                 npc->yaw = playerStatus->targetYaw;
-                suggest_player_anim_setUnkFlag(0x8000E);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
                 D_802BFF08 = 1;
@@ -700,12 +702,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->currentAnim.w = 0x80005;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF14 = 101;
             break;
         case 101:
             sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             /* fallthrough */
         case 102:
             D_802BFF14 += 1;
@@ -723,7 +725,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->jumpVelocity -= npc->jumpScale;
 
                 if (npc->jumpVelocity <= 0.0f) {
-                    suggest_player_anim_clearUnkFlag(0x10008);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
                 }
 
                 npc->duration--;
@@ -740,7 +742,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     npc->yaw = playerStatus->targetYaw;
                     npc->duration = 3;
                     set_action_state(ACTION_STATE_RIDE);
-                    suggest_player_anim_setUnkFlag(0x8000E);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                     disable_player_shadow();
                     partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
@@ -827,11 +829,11 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             npc->moveSpeed = sp2C / npc->duration;
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF14 += 1;
             break;
         case 4:
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             D_802BFF14++;
             /* fallthrough */
         case 5:
@@ -962,11 +964,11 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             lakilester->moveSpeed = sp2C / lakilester->duration;
             lakilester->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
                                  lakilester->moveToPos.x, lakilester->moveToPos.z);
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF00++;
             break;
         case 1:
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             D_802BFF00++;
         case 2:
             playerStatus->position.y += lakilester->jumpVelocity;
@@ -1149,7 +1151,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             }
 
             sfx_play_sound_at_npc(SOUND_295, 0, -4);
-            playerStatus->anim = 0x8000E;
+            playerStatus->anim = ANIM_Mario_8000E;
             playerStatus->unk_BC = 0;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);

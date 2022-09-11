@@ -3,7 +3,7 @@
 #include "../src/world/partners.h"
 #include "npc.h"
 
-void force_player_anim(s32 arg0);
+void force_player_anim(AnimID);
 void func_802BE014_31DB84(void);
 
 s32 D_802BE250_31DDC0[] = {24, 6};
@@ -391,7 +391,7 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         world_watt_dispose_static_effect();
         partner_init_put_away(watt);
-        force_player_anim(0x10002);
+        force_player_anim(ANIM_Mario_10002);
         wattActionStatus->actingPartner = PARTNER_NONE;
         wattActionStatus->partnerActionState = PARTNER_ACTION_NONE;
         playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
@@ -484,16 +484,16 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
 void func_802BE014_31DB84(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 currentSpeed = playerStatus->currentSpeed;
-    s32 animationID;
+    AnimID anim;
 
     if (playerStatus->runSpeed <= currentSpeed) {
-        animationID = 0x60002;
+        anim = ANIM_Mario_60002;
     } else if (playerStatus->walkSpeed <= currentSpeed) {
-        animationID = 0x60000;
+        anim = ANIM_Mario_60000;
     } else {
-        animationID = 0x60007;
+        anim = ANIM_Mario_60007;
     }
-    suggest_player_anim_clearUnkFlag(animationID);
+    suggest_player_anim_clearUnkFlag(anim);
 }
 
 void func_802BE070_31DBE0(void) {

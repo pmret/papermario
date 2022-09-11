@@ -15,7 +15,7 @@ void func_802B6000_E2A340(void) {
         disable_player_static_collisions();
         disable_player_input();
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_100000 | PLAYER_STATUS_FLAGS_FLYING);
-        suggest_player_anim_clearUnkFlag(0x8001F);
+        suggest_player_anim_clearUnkFlag(ANIM_Mario_8001F);
         playerStatus->fallState = 0;
         mem_clear(PlayerTweesterPhysics, sizeof(TweesterPhysics));
         PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));

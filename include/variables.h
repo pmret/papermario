@@ -72,7 +72,7 @@ extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
-extern s16 D_800F7B80;
+extern s16 FootstepSoundSelector;
 extern u8* D_801512F0;
 extern u16 D_80151308;
 extern s32 gEntityHideMode;
@@ -258,8 +258,8 @@ extern s32 D_80292110[];
 
 extern s32 D_8029FBD0;
 
-extern s32 KoopatrolDisguiseExtraAnims[];
-extern s32 HammerBroDisguiseExtraAnims[];
+extern AnimID KoopatrolDisguiseExtraAnims[];
+extern AnimID HammerBroDisguiseExtraAnims[];
 
 //various
 extern s32 D_802C05CC;

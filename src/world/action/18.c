@@ -29,19 +29,18 @@ void func_802B6000_E245D0(void) {
     f32 cosTheta;
     f32 sinTheta;
     s32 colliderID;
+    AnimID anim;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         phys_adjust_cam_on_landing();
-        if (!(playerStatus->animFlags & 0x1000)) {
-            s32 temp;
-
-            if (!(playerStatus->animFlags & 1)) {
-                temp = 0x10004;
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+                anim = ANIM_Mario_Walking;
             } else {
-                temp = 0x60000;
+                anim = ANIM_Mario_60000;
             }
-            suggest_player_anim_clearUnkFlag(temp);
+            suggest_player_anim_clearUnkFlag(anim);
         } else {
             func_802B6198_E24768();
         }
@@ -76,11 +75,11 @@ void func_802B6000_E245D0(void) {
 }
 
 void func_802B6198_E24768(void) {
-    if (!(gPlayerStatus.animFlags & 0x2000)) {
-        if (!(gGameStatusPtr->peachFlags & 0x10)) {
+    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag((State18PeachAnims)[gGameStatusPtr->peachCookingIngredient]);
         } else {
-            suggest_player_anim_clearUnkFlag(0xD000D); // doood
+            suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
         }
     } else {
         peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -92,7 +91,7 @@ void func_802B6230_E24800(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        suggest_player_anim_clearUnkFlag(0xA0005);
+        suggest_player_anim_clearUnkFlag(ANIM_Peach_A0005);
         playerStatus->currentStateTime = 8;
     }
 
@@ -102,12 +101,12 @@ void func_802B6230_E24800(void) {
             try_player_footstep_sounds(1);
         }
     } else {
-        if (!(playerStatus->flags & 0x4000)) {
-            set_action_state(0);
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_4000)) {
+            set_action_state(ACTION_STATE_IDLE);
         } else if (playerStatus->currentSpeed >= playerStatus->runSpeed) {
-            set_action_state(2);
+            set_action_state(ACTION_STATE_RUN);
         } else {
-            set_action_state(1);
+            set_action_state(ACTION_STATE_WALK);
         }
     }
 }

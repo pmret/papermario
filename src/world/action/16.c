@@ -11,7 +11,7 @@ void func_802B6000_E287F0(void) {
     if (playerStatus->flags & 0x80000000) {
         playerStatus->flags &= ~0x80000000;
 
-        suggest_player_anim_setUnkFlag(0x10017);
+        suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);
 
         playerStatus->flags |= 8;
         playerStatus->fallState = 0;
@@ -53,7 +53,7 @@ void func_802B6000_E287F0(void) {
         playerStatus->position.y = player_check_collision_below(func_800E34D8(), &colliderID);
 
         if (colliderID >= 0) {
-            colliderID = get_collider_type_by_id(colliderID); // what
+            colliderID = get_collider_flags(colliderID); //TODO surfaceType
             set_action_state(ACTION_STATE_LAND);
         }
     }

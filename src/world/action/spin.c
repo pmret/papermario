@@ -237,21 +237,21 @@ void func_802B6000_E25D60(void) {
             playerStatus->currentStateTime = 2;
             playerStatus->fallState = 2;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
         } else if (sp10 < playerStatus->spriteFacingAngle) {
             if (playerStatus->spriteFacingAngle >= 180.0f && sp10 < 180.0f) {
                 playerStatus->spriteFacingAngle = 180.0f;
                 playerStatus->currentStateTime = 2;
                 playerStatus->fallState = 2;
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
-                suggest_player_anim_clearUnkFlag(0x10002);
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             }
         } else if (playerStatus->spriteFacingAngle <= 0.0f && sp10 < 90.0f) {
             playerStatus->spriteFacingAngle = 0.0f;
             playerStatus->currentStateTime = 2;
             playerStatus->fallState = 2;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
         }
         playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle);
     }

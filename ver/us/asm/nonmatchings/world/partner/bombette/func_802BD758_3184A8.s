@@ -348,7 +348,7 @@ glabel func_802BD758_3184A8
 /* 3189B0 802BDC60 00000000 */   nop
 /* 3189B4 802BDC64 3C048011 */  lui       $a0, %hi(D_8010C978)
 /* 3189B8 802BDC68 8C84C978 */  lw        $a0, %lo(D_8010C978)($a0)
-/* 3189BC 802BDC6C 0C016F6A */  jal       get_collider_type_by_id
+/* 3189BC 802BDC6C 0C016F6A */  jal       get_collider_flags
 /* 3189C0 802BDC70 00000000 */   nop
 /* 3189C4 802BDC74 304200FF */  andi      $v0, $v0, 0xff
 /* 3189C8 802BDC78 2442FFFE */  addiu     $v0, $v0, -2

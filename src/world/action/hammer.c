@@ -219,7 +219,7 @@ void action_hammer_update(void) {
     HammerHit->unk_1C = 0;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        s32 animID;
+        AnimID anim;
         s32 soundID;
 
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
@@ -232,28 +232,28 @@ void action_hammer_update(void) {
 
         if (gPlayerData.hammerLevel == 2) {
             soundID = SOUND_2117;
-            animID = 0x6001A;
+            anim = ANIM_Mario_6001A;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2117;
-                animID = 0x60018;
+                anim = ANIM_Mario_60018;
             }
         } else if (gPlayerData.hammerLevel == 1) {
             soundID = SOUND_2116;
-            animID = 0x60016;
+            anim = ANIM_Mario_60016;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2116;
-                animID = 0x60014;
+                anim = ANIM_Mario_60014;
             }
         } else {
             soundID = SOUND_2115;
-            animID = 0x60012;
+            anim = ANIM_Mario_60012;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2115;
-                animID = 0x60010;
+                anim = ANIM_Mario_60010;
             }
         }
 
-        suggest_player_anim_clearUnkFlag(animID);
+        suggest_player_anim_clearUnkFlag(anim);
         sfx_play_sound_at_player(soundID, 0);
         HammerHit->unk_0C = 0;
         HammerHit->unk_14 = 0;

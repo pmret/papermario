@@ -324,7 +324,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
             } else {
-                suggest_player_anim_setUnkFlag(0x8000F);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
                     partnerNPC->isFacingAway = 1;

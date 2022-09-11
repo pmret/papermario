@@ -35,7 +35,7 @@ void func_802B6000_E236E0(void) {
     f32 moveVectorAngle;
     s32 stickAxisX;
     s32 stickAxisY;
-    s32 playerAnim;
+    AnimID anim;
     s32 changedAnim = FALSE;
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B65E8_E23CC8();
@@ -53,15 +53,15 @@ void func_802B6000_E236E0(void) {
         }
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
-            playerAnim = 0x90003;
+            anim = ANIM_Mario_90003;
         }
         else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
-            playerAnim = 0x10004;
+            anim = ANIM_Mario_Walking;
         }
         else {
-            playerAnim = 0x60000;
+            anim = ANIM_Mario_60000;
         }
-        suggest_player_anim_clearUnkFlag(playerAnim);
+        suggest_player_anim_clearUnkFlag(anim);
     }
 
     if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
@@ -118,7 +118,7 @@ void action_run_update(void) {
     f32 moveX;
     f32 moveY;
     s32 temp_v1;
-    s32 phi_a0;
+    AnimID anim;
     f32 phi_f2;
     s32 phi_s3;
 
@@ -138,18 +138,18 @@ void action_run_update(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
-            phi_a0 = 0x90003;
+            anim = ANIM_Mario_90003;
         } else {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
-                phi_a0 = 0x10005;
+                anim = ANIM_Mario_Running;
             } else {
-                phi_a0 = 0x60002;
+                anim = ANIM_Mario_60002;
             }
         }
-        suggest_player_anim_clearUnkFlag(phi_a0);
+        suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->flags & 0x00004000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_4000) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(4);
         return;
@@ -179,18 +179,15 @@ void action_run_update(void) {
         }
 
         if (fabsf(D_800F7B40 - moveX) <= 90.0f) {
-            temp_v1 = playerStatus->animFlags;
-            if (temp_v1 >= 0) {
+            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000)) {
                 playerStatus->targetYaw = moveX;
             }
-            playerStatus->animFlags &= ~0x80000000;
+            playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_80000000;
         } else {
-            temp_v1 = playerStatus->animFlags;
-            temp_v1 = temp_v1 < 0;
-            if (temp_v1) {
+            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000) {
                 playerStatus->targetYaw = moveX;
             } else {
-                playerStatus->animFlags |= 0x80000000;
+                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_80000000;
             }
         }
 
@@ -214,7 +211,7 @@ void func_802B6550_E23C30(void) {
             suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
             return;
         }
-        suggest_player_anim_clearUnkFlag(0xD000D);
+        suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
         return;
     }
     peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -273,12 +270,12 @@ void action_run_update_peach(void) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 if (!gameStatus->peachCookingIngredient) {
-                    suggest_player_anim_clearUnkFlag(0xA0003);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0003);
                 } else {
                     suggest_player_anim_clearUnkFlag(WalkPeachAnims[gameStatus->peachCookingIngredient]);
                 }
             } else {
-                suggest_player_anim_clearUnkFlag(0xD000D);
+                suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].run);

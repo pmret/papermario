@@ -254,11 +254,11 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             case 21:
                 //TODO: make if statement less bad
                 if ((((u8)playerStatus->actionState - 0x15) < 3U) || (playerStatus->timeInAir != 0)) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     script->functionTemp[0] = 0;
                     break;
                 } else {
-                    suggest_player_anim_clearUnkFlag(0x10006);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
                     kooper->moveToPos.x = D_802BEC70 = playerStatus->position.x;
                     kooper->moveToPos.y = D_802BEC74 = playerStatus->position.y;
                     kooper->moveToPos.z = D_802BEC78 = playerStatus->position.z;
@@ -279,9 +279,9 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     disable_npc_blur(kooper);
                     if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
-                            suggest_player_anim_clearUnkFlag(0x10002);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                         } else {
-                            suggest_player_anim_clearUnkFlag(0x10005);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
                         }
                         script->functionTemp[0] = 0;
                         break;
@@ -297,7 +297,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
                         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
 
-                        suggest_player_anim_clearUnkFlag(0x10007);
+                        suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
                         D_802BEC60 = 0;
                         sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, -4);
                         script->functionTemp[0] = 2;
@@ -315,7 +315,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     if (kooper->jumpVelocity < 0.0f) {
                         if (D_802BEC60 == 0) {
                             D_802BEC60 = 1;
-                            suggest_player_anim_clearUnkFlag(0x10008);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
                         }
                     }
 

@@ -11,7 +11,7 @@ void func_802B6000_E26710(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 temp_f0;
     f32 fallVelocity;
-    u8 colliderType;
+    s32 surfaceType;
     f32 phi_f4;
     s32 colliderBelow;
     u32 entityType;
@@ -26,7 +26,7 @@ void func_802B6000_E26710(void) {
         playerStatus->gravityIntegrator[1] = -7.38624f;
         playerStatus->gravityIntegrator[2] = 3.44694f;
         playerStatus->gravityIntegrator[3] = -0.75f;
-        suggest_player_anim_setUnkFlag(0x80000);
+        suggest_player_anim_setUnkFlag(ANIM_Mario_80000);
         disable_player_input();
         playerStatus->flags |= 0x200;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
@@ -120,14 +120,14 @@ void func_802B6000_E26710(void) {
                     }
                 }
 
-                colliderType = get_collider_type_by_id(colliderBelow);
-                if (colliderType == 3) {
+                surfaceType = get_collider_flags(colliderBelow) & 0xFF;
+                if (surfaceType == SURFACE_TYPE_LAVA) {
                     playerStatus->unk_BF = 1;
                     playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
                     playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                     return;
-                } else if (colliderType == 2) {
+                } else if (surfaceType == SURFACE_TYPE_SPIKES) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
                     playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     return;

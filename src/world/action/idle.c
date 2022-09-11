@@ -41,12 +41,8 @@ void action_idle_update(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 anim;
 
-        playerStatus->flags &=
-            ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
-            | PLAYER_STATUS_FLAGS_80000
-            | PLAYER_STATUS_FLAGS_JUMPING
-            | PLAYER_STATUS_FLAGS_FALLING
-            | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
+            | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_AIRBORNE);
         wasMoving = TRUE;
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
@@ -108,16 +104,13 @@ void action_idle_update_peach(void) {
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->flags &=
-            ~(PLAYER_STATUS_FLAGS_JUMPING
-            | PLAYER_STATUS_FLAGS_FALLING
-            | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
 
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
             } else {
-                suggest_player_anim_clearUnkFlag(0xC000E);
+                suggest_player_anim_clearUnkFlag(ANIM_Peach_C000E);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].idle);
@@ -130,7 +123,7 @@ void action_idle_update_peach(void) {
                 if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) && (playerStatus->unk_C4 == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
                         playerStatus->fallState++;
-                        suggest_player_anim_clearUnkFlag(0xC0003);
+                        suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
                         return;
                     }
                     playerStatus->currentStateTime++;
@@ -140,23 +133,23 @@ void action_idle_update_peach(void) {
                 if (playerStatus->unk_BC != 0) {
                     playerStatus->fallState++;
                     playerStatus->currentStateTime = 0;
-                    suggest_player_anim_clearUnkFlag(0xA0001);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                 }
                 break;
             case 2: {
                 playerStatus->currentStateTime++;
                 if (playerStatus->currentStateTime > 200) {
                     playerStatus->fallState++;
-                    suggest_player_anim_clearUnkFlag(0xC0003);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
                 }
                 break;
             }
             case 3:
                 if (playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
-                    suggest_player_anim_clearUnkFlag(0xA0001);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                     playerStatus->fallState = 0;
                 } else if (playerStatus->unk_BC != 0) {
-                    suggest_player_anim_clearUnkFlag(0xC0004);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0004);
                 }
                 break;
         }

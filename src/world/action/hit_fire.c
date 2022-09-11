@@ -12,7 +12,7 @@ void func_802B6000_E27C90(void) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_800 | PLAYER_STATUS_FLAGS_FLYING);
-        suggest_player_anim_setUnkFlag(0x10019);
+        suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
         playerStatus->fallState = 0;
         playerStatus->gravityIntegrator[0] = 18.3473f;
         playerStatus->gravityIntegrator[1] = -3.738f;
@@ -44,11 +44,11 @@ void func_802B6000_E27C90(void) {
             playerStatus->flags |= 4;
         }
     } else {
-        s32 collider;
+        s32 colliderID;
 
-        playerStatus->position.y = player_check_collision_below(func_800E34D8(), &collider);
-        if (collider >= 0) {
-            collider = get_collider_type_by_id(collider);
+        playerStatus->position.y = player_check_collision_below(func_800E34D8(), &colliderID);
+        if (colliderID >= 0) {
+            colliderID = get_collider_flags(colliderID); //TODO surfaceType
             set_action_state(ACTION_STATE_LAND);
             playerStatus->blinkTimer = 60;
             playerStatus->unk_BF = 0;

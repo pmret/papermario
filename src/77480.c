@@ -366,7 +366,7 @@ s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f3
     radius = playerStatus->colliderDiameter * 0.5f;
     ret = -1;
 
-    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) == 0) {
+    if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING))) {
         height = playerStatus->colliderHeight * 0.286f;
     } else {
         height = 1.0f;
@@ -544,7 +544,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     s32 ret = -1;
 
     height = 0.0f;
-    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING)) == 0) {
+    if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING))) {
         height = 10.01f;
     }
     radius = playerStatus->colliderDiameter * 0.5f;
@@ -835,9 +835,9 @@ s32 get_overriding_player_anim(s32 anim) {
     return anim;
 }
 
-void suggest_player_anim_clearUnkFlag(s32 anim) {
+void suggest_player_anim_clearUnkFlag(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 newAnim = get_overriding_player_anim(anim);
+    AnimID newAnim = get_overriding_player_anim(anim);
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
@@ -846,7 +846,7 @@ void suggest_player_anim_clearUnkFlag(s32 anim) {
     }
 }
 
-void force_player_anim(s32 anim) {
+void force_player_anim(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = anim;
@@ -854,9 +854,9 @@ void force_player_anim(s32 anim) {
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_10000000;
 }
 
-void suggest_player_anim_setUnkFlag(s32 anim) {
+void suggest_player_anim_setUnkFlag(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 newAnim = get_overriding_player_anim(anim);
+    AnimID newAnim = get_overriding_player_anim(anim);
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
@@ -867,34 +867,34 @@ void suggest_player_anim_setUnkFlag(s32 anim) {
 
 void update_player_blink(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 phi_a2 = 0;
+    s32 outtaSight = FALSE;
     u8 phi_v1;
     u8* alpha;
 
     if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
-        phi_a2 = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
+        outtaSight = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
         playerStatus->blinkTimer--;
         alpha = &playerStatus->alpha1;
         if (!(gGameStatusPtr->frameCounter & 1)) {
-            if (phi_a2) {
-                phi_v1 = 0xC0;
+            if (outtaSight) {
+                phi_v1 = 192;
             } else {
-                phi_v1 = 0xFF;
+                phi_v1 = 255;
             }
         } else {
-            phi_v1 = 0x60;
+            phi_v1 = 96;
         }
         *alpha = phi_v1;
 
         if (!playerStatus->blinkTimer) {
-            if (phi_a2) {
-                playerStatus->alpha1 = 0x80;
+            if (outtaSight) {
+                playerStatus->alpha1 = 128;
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
             } else {
-                playerStatus->alpha1 = 0xFF;
+                playerStatus->alpha1 = 255;
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000;
             }
         } else {

@@ -78,7 +78,7 @@ void func_802B6120_E2A7D0(void) {
             phi_f4 = 2;
         }
         *tempUnk_1C = phi_f4;
-        if (!(playerStatus->animFlags & 0x2000)) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             playerStatus->currentStateTime = 20;
             playerStatus->fallState = 0;
             parasolStruct->unk_08 = 0xF;
@@ -99,11 +99,11 @@ void func_802B6120_E2A7D0(void) {
         case 0:
             if (playerStatus->unk_90[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
-                    suggest_player_anim_clearUnkFlag(0xC0024);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0024);
                     sfx_play_sound_at_player(SOUND_92, 0);
                     playerStatus->fallState++;
                 } else {
-                    suggest_player_anim_clearUnkFlag(0xC0027);
+                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0027);
                     playerStatus->fallState = 0x32;
                     playerStatus->currentStateTime = 10;
                     parasolStruct->unk_08 = 0;
@@ -111,7 +111,7 @@ void func_802B6120_E2A7D0(void) {
             }
         case 1:
             if (--playerStatus->currentStateTime == 0) {
-                suggest_player_anim_clearUnkFlag(0xC0025);
+                suggest_player_anim_clearUnkFlag(ANIM_Peach_C0025);
                 playerStatus->fallState = 2;
                 if (parasolStruct->npc == NULL) {
                     playerStatus->fallState = 0x28;

@@ -330,7 +330,7 @@ void entity_GiantChest_open(Entity* entity) {
                 chest->giveItemHeightInterpPhase = 180.0f;
                 chest->state++;
                 if (chest->itemID != 0) {
-                    suggest_player_anim_setUnkFlag(0x6000C);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                     sin_cos_rad((90.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinRight, &cosRight);
                     sin_cos_rad((180.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinFwd, &cosFwd);
                     horizontalOffset = 0.0f;
@@ -412,7 +412,7 @@ void entity_GiantChest_await_got_item(Entity* entity) {
         if (data->unk_30 != 0) {
             exec_entity_commandlist(entity);
             remove_item_entity_by_index(data->itemEntityIndex);
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             enable_player_input();
             data->itemID = -1;
         }

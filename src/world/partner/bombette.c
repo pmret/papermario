@@ -238,7 +238,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             enable_npc_blur(npc);
             npc->duration = 4;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             evt->functionTemp[0] = 21;
         case 21:
             if (playerStatus->actionState == 0x15 || playerStatus->actionState == 0x16) {
@@ -277,7 +277,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 npc->pos.y = npc->moveToPos.y;
                 npc->pos.z = npc->moveToPos.z;
                 disable_npc_blur(npc);
-                suggest_player_anim_clearUnkFlag(0x6000C);
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_6000C);
                 npc->yaw = playerStatus->targetYaw;
                 npc->currentAnim.w = 0x30005;
                 evt->functionTemp[0] = 1;
@@ -288,7 +288,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 npc->pos.y = playerStatus->position.y + playerStatus->colliderHeight;
                 npc->yaw = playerStatus->targetYaw;
                 if (evt->functionTemp[1] == 1) {
-                    suggest_player_anim_clearUnkFlag(0x60006);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_60006);
                 }
 
                 if (evt->functionTemp[1] != 0) {
@@ -329,9 +329,9 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             y = npc->pos.y + 14.0f;
             z = npc->pos.z;
             hitDepth = 16.0f;
-            if ((npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && ((u32) ((get_collider_type_by_id(D_8010C978) & 0xFF) - 2) < 2U)) {
+            if ((npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && ((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2) < 2U)) {
                 if (playerStatus->actionState == 0) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
                 npc->currentAnim.w = 0x30010;
                 npc->flags &= ~0x200;
@@ -351,7 +351,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 }
                 if (evt->functionTemp[1] == 40) {
                     if (playerStatus->actionState == 0) {
-                        suggest_player_anim_clearUnkFlag(0x10002);
+                        suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     }
                     enable_player_input();
                     D_802BE92C = 0;
@@ -376,7 +376,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 evt->functionTemp[1] = 0x14;
                 evt->functionTemp[0] = 3;
                 if (playerStatus->actionState == 0) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
             }
     }
@@ -492,7 +492,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
     switch (evt->functionTemp[0]) {
         case 7:
             if (playerStatus->actionState == 0) {
-                suggest_player_anim_clearUnkFlag(0x10002);
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             }
             if (D_802BE92C != 0) {
                 D_802BE92C = 0;

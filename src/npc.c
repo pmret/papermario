@@ -172,7 +172,7 @@ s32 _create_npc_basic(NpcBlueprint* blueprint) {
     return _create_npc(blueprint, NULL, FALSE);
 }
 
-s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList) {
+s32 _create_npc_standard(NpcBlueprint* blueprint, AnimID** animList) {
     return _create_npc(blueprint, animList, FALSE);
 }
 
@@ -1606,29 +1606,30 @@ void func_8003D660(Npc* npc, s32 arg1) {
 
     if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {
-            switch (get_collider_type_by_id((u16)npc->currentFloor) & 0xFF) {
-                case 6:
+            s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & 0xFF;
+            switch (surfaceType) {
+                case SURFACE_TYPE_FLOWERS:
                     func_8003DA38(npc, arg1);
                     return;
-                case 7:
+                case SURFACE_TYPE_CLOUD:
                     func_8003DC38(npc, arg1);
                     return;
-                case 8:
+                case SURFACE_TYPE_SNOW:
                     if ((temp->partnerActionState == PARTNER_ACTION_NONE) || (temp->actingPartner != PARTNER_LAKILESTER)) {
                         func_8003DFA0(npc, arg1);
                         return;
                     }
                     break;
-                case 9:
+                case SURFACE_TYPE_HEDGES:
                     func_8003E0D4(npc, arg1);
                     return;
-                case 1:
+                case SURFACE_TYPE_WATER:
                     func_8003E1D0(npc, arg1);
                     return;
-                case 2:
-                case 3:
-                case 4:
-                case 5:
+                case SURFACE_TYPE_SPIKES:
+                case SURFACE_TYPE_LAVA:
+                case SURFACE_TYPE_DOCK_WALL:
+                case SURFACE_TYPE_SLIDE:
                 default:
                     func_8003D788(npc, arg1);
                     return;

@@ -21,7 +21,7 @@ void func_802B6000_E291A0(void) {
 
     switch (playerStatus->fallState) {
         case 0:
-            suggest_player_anim_clearUnkFlag(0x1002E);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_1002E);
             D_802B62E0 = 0x20;
             D_802B62D0 = 16.0f;
             D_802B62D4 = 4.0f;
@@ -51,7 +51,7 @@ void func_802B6000_E291A0(void) {
             tempCollision = player_check_collision_below(D_802B62D0, &sp10);
             if (sp10 >= 0) {
                 sfx_play_sound_at_player(SOUND_162, 0);
-                suggest_player_anim_setUnkFlag(0x80003);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
                 playerStatus->position.y = tempCollision;
                 D_802B62E0 = 0xA;
                 playerStatus->fallState++;
@@ -59,7 +59,7 @@ void func_802B6000_E291A0(void) {
             break;
         case 3:
             if (playerStatus->unk_BC != 0) {
-                suggest_player_anim_setUnkFlag(0x10030);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
                 playerStatus->fallState = 5;
                 playerStatus->currentStateTime = 15;
                 break;

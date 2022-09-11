@@ -70,7 +70,7 @@ void func_802B60A4_E29514(void) {
             D_802B6ED0 = -1;
         }
         if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-            suggest_player_anim_clearUnkFlag(0x1002B);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_1002B);
         }
     }
     switch (playerStatus->fallState) {
@@ -123,7 +123,7 @@ void func_802B60A4_E29514(void) {
                 playerStatus->flags |= 0x800000;
             }
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-                suggest_player_anim_setUnkFlag(0x10007);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_AnimMidairStill);
                 playerStatus->fallState = 3;
                 playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;

@@ -60,7 +60,7 @@ void entity_Padlock_push_player(Entity* entity) {
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         if (data->pushSpeed == 0.0f) {
-            suggest_player_anim_clearUnkFlag(0x10005);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
         }
 
         data->pushSpeed += 0.5;

@@ -145,9 +145,11 @@ s32 phys_adjust_cam_on_landing(void) {
     }
 
     if (ret == 1) {
-        if ((get_collider_type_by_id(gCollisionStatus.currentFloor) & 0xFF) == 3) {
-            ret = 0;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & 0xFF;
+
+        if (surfaceType == SURFACE_TYPE_LAVA) {
             gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            ret = 0;
         } else {
             gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
         }
@@ -466,12 +468,15 @@ s32 check_input_hammer(void) {
 s32 check_input_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
+    s32 surfaceType;
 
     if (!(playerStatus->pressedButtons & BUTTON_A)) {
         return FALSE;
     }
 
-    if ((get_collider_type_by_id((u16)collisionStatus->currentFloor) == 5) && phys_should_player_be_sliding()) {
+    // bug? collider flags not properly masked with 0xFF
+    surfaceType = get_collider_flags((u16)gCollisionStatus.currentFloor);
+    if ((surfaceType == SURFACE_TYPE_SLIDE) && phys_should_player_be_sliding()) {
         return FALSE;
     }
 

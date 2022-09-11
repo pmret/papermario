@@ -284,7 +284,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
                 e21_y = triangle->e21.y;
                 e21_z = triangle->e21.z;
 
-                // vector product
+                // cross product
                 normalX = e13_y * e21_z - e13_z * e21_y;
                 normalY = e13_z * e21_x - e13_x * e21_z;
                 normalZ = e13_x * e21_y - e13_y * e21_x;
@@ -465,7 +465,7 @@ void update_collider_transform(s16 colliderID) {
     }
 }
 
-s32 get_collider_type_by_id(s32 colliderID) {
+s32 get_collider_flags(s32 colliderID) {
     if (colliderID & COLLISION_WITH_ENTITY_BIT) {
         return 0;
     } else {

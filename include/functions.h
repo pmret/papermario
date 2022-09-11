@@ -608,9 +608,9 @@ s32 add_star_pieces(s32 amt);
 s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags);
 
 void set_action_state(s32 actionState);
-s32 get_collider_type_by_id(s32 colliderID);
-void suggest_player_anim_setUnkFlag(s32 arg0);
-void suggest_player_anim_clearUnkFlag(s32 arg0);
+s32 get_collider_flags(s32 colliderID);
+void suggest_player_anim_setUnkFlag(AnimID anim);
+void suggest_player_anim_clearUnkFlag(AnimID anim);
 void subtract_hp(s32 amt);
 void draw_status_ui(void);
 void open_status_menu_long(void);

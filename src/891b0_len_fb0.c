@@ -29,7 +29,7 @@ void func_800EFD08(void) {
         colliderType = D_80109480;
     }
 
-    D_80109480 = get_collider_type_by_id((u16)gCollisionStatus.currentFloor) & 0xFF;
+    D_80109480 = get_collider_flags((u16)gCollisionStatus.currentFloor) & 0xFF;
 
     if (playerStatus->actionState != ACTION_STATE_JUMP) {
         colliderType = D_80109480;
@@ -42,19 +42,19 @@ void func_800EFD08(void) {
     D_8010CFF0 = playerStatus->timeInAir;
 
     switch (colliderType) {
-        case 6:
+        case SURFACE_TYPE_FLOWERS:
             func_800F0248();
             break;
-        case 7:
+        case SURFACE_TYPE_CLOUD:
             func_800F0490();
             break;
-        case 8:
+        case SURFACE_TYPE_SNOW:
             func_800F0864();
             break;
-        case 9:
+        case SURFACE_TYPE_HEDGES:
             func_800F09EC();
             break;
-        case 1:
+        case SURFACE_TYPE_WATER:
             func_800F0B3C();
             break;
         default:

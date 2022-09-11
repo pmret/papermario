@@ -10,7 +10,7 @@ void func_802B6000_E24920(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
     s32 jumpInputCheck;
-    s32 phi_a0;
+    AnimID anim;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B62CC_E24BEC();
@@ -22,9 +22,7 @@ void func_802B6000_E24920(void) {
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED |
             PLAYER_STATUS_FLAGS_800000 |
             PLAYER_STATUS_FLAGS_80000 |
-            PLAYER_STATUS_FLAGS_FLYING |
-            PLAYER_STATUS_FLAGS_FALLING |
-            PLAYER_STATUS_FLAGS_JUMPING
+            PLAYER_STATUS_FLAGS_AIRBORNE
         );
         playerStatus->fallState = 0;
         playerStatus->timeInAir = 0;
@@ -33,14 +31,14 @@ void func_802B6000_E24920(void) {
         playerStatus->landPos.z = playerStatus->position.z;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
-            phi_a0 = 0x90002;
+            anim = ANIM_Mario_90002;
         } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
-            phi_a0 = 0x10009;
+            anim = ANIM_Mario_10009;
         } else {
-            phi_a0 = 0x6000B;
+            anim = ANIM_Mario_6000B;
         }
 
-        suggest_player_anim_clearUnkFlag(phi_a0);
+        suggest_player_anim_clearUnkFlag(anim);
         sfx_play_sound_at_player(SOUND_8161, 0);
         sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
 
@@ -86,9 +84,7 @@ void func_802B61C0_E24AE0(void) {
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED |
             PLAYER_STATUS_FLAGS_800000 |
             PLAYER_STATUS_FLAGS_80000 |
-            PLAYER_STATUS_FLAGS_FLYING |
-            PLAYER_STATUS_FLAGS_FALLING |
-            PLAYER_STATUS_FLAGS_JUMPING
+            PLAYER_STATUS_FLAGS_AIRBORNE
         );
         playerStatus->fallState = 0;
         playerStatus->timeInAir = 0;
@@ -127,7 +123,7 @@ void func_802B62CC_E24BEC(void) {
         playerStatus->fallState = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -171,7 +167,7 @@ void func_802B644C_E24D6C(void) {
         playerStatus->fallState = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 

@@ -26,6 +26,7 @@ void func_802B6000_E27510(void) {
 void func_802B6060_E27570(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus;
+    s32 surfaceType;
     f32 cosA;
     f32 sinA;
     s32 hitID;
@@ -50,7 +51,7 @@ void func_802B6060_E27570(void) {
         D_802B6794 = 0.0f;
         D_802B6798 = 0.0f;
         D_802B679C = 0;
-        suggest_player_anim_clearUnkFlag(0x1000A);
+        suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
         sfx_play_sound_at_player(SOUND_167, 0);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
@@ -82,7 +83,8 @@ void func_802B6060_E27570(void) {
             D_802B6798 = hitRy;
             if (hitID >= 0) {
                 collisionStatus = &gCollisionStatus;
-                if ((u8)get_collider_type_by_id(hitID) == 5) {
+                surfaceType = get_collider_flags(hitID) & 0xFF;
+                if (surfaceType == SURFACE_TYPE_SLIDE) {
                     collisionStatus->currentFloor = hitID;
                     playerStatus->position.y = posY;
                     D_802B6790 = hitRy + 180.0f;
@@ -114,7 +116,7 @@ void func_802B6060_E27570(void) {
                 playerStatus->currentSpeed -= tempCurrentSpeed;
                 if (playerStatus->currentSpeed <= 0.0f) {
                     sfx_play_sound_at_player(SOUND_172, 0);
-                    suggest_player_anim_setUnkFlag(0x10031);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                     playerStatus->fallState = 6;
                     playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
@@ -145,7 +147,7 @@ void func_802B6060_E27570(void) {
             playerStatus->position.y = player_check_collision_below(func_800E34D8(), &hitID);
             if (hitID >= 0) {
                 D_802B678C = -1;
-                suggest_player_anim_setUnkFlag(0x80003);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
                 sfx_play_sound_at_player(SOUND_162, 0);
                 playerStatus->fallState++;
             }
@@ -156,7 +158,7 @@ void func_802B6060_E27570(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             if (playerStatus->unk_BC != 0) {
-                suggest_player_anim_setUnkFlag(0x10030);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
                 playerStatus->fallState++;
             }
             break;
@@ -166,7 +168,7 @@ void func_802B6060_E27570(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             if (playerStatus->unk_BC != 0) {
-                suggest_player_anim_setUnkFlag(0x10031);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                 sfx_play_sound_at_player(SOUND_172, 0);
                 playerStatus->currentStateTime = 15;
                 playerStatus->fallState++;

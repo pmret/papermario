@@ -57,7 +57,7 @@ void func_802B6000_E27F40(void) {
             if (playerStatus->unk_BF == 1) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, 40);
             }
-            suggest_player_anim_setUnkFlag(0x80000 | 2);
+            suggest_player_anim_setUnkFlag(ANIM_Mario_80002);
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
             playerStatus->unk_C2 = 0;
@@ -164,7 +164,7 @@ void func_802B6000_E27F40(void) {
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                 sfx_play_sound_at_player(SOUND_3FB, 0);
-                suggest_player_anim_setUnkFlag(0x8001A);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
                 playerStatus->flags &= ~0x800;
                 playerStatus->flags &= ~8;
                 playerStatus->unk_BF = 0;

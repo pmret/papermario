@@ -654,11 +654,11 @@ enum SoundIDs {
     SOUND_139                       = 0x00000139,
     SOUND_13D                       = 0x0000013D,
     SOUND_13E                       = 0x0000013E,
-    SOUND_STEP1                     = 0x00000141,
-    SOUND_STEP2                     = 0x00000142,
-    SOUND_143                       = 0x00000143,
-    SOUND_144                       = 0x00000144,
-    SOUND_146                       = 0x00000146,
+    SOUND_STEP_NORMAL1              = 0x00000141,
+    SOUND_STEP_NORMAL2              = 0x00000142,
+    SOUND_STEP_CRUNCHY1             = 0x00000143,
+    SOUND_STEP_CRUNCHY2             = 0x00000144,
+    SOUND_SPIN_JUMP                 = 0x00000146,
     SOUND_TORNADO_JUMP              = 0x00000147,
     SOUND_SOFT_LAND                 = 0x00000148,
     SOUND_149                       = 0x00000149,
@@ -3096,6 +3096,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
     PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
+    PLAYER_STATUS_FLAGS_AIRBORNE                         = 0x0000000E,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_40                               = 0x00000040,
@@ -4076,6 +4077,19 @@ enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_20000000          = 0x20000000,
     MUSIC_SETTINGS_FLAGS_40000000          = 0x40000000,
     MUSIC_SETTINGS_FLAGS_80000000          = 0x80000000,
+};
+
+// the lower byte of Collider::flags
+enum SurfaceType {
+    SURFACE_TYPE_WATER              = 1,
+    SURFACE_TYPE_SPIKES             = 2,
+    SURFACE_TYPE_LAVA               = 3,
+    SURFACE_TYPE_DOCK_WALL          = 4,
+    SURFACE_TYPE_SLIDE              = 5,
+    SURFACE_TYPE_FLOWERS            = 6,
+    SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
+    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
 };
 
 enum ColliderFlags {
