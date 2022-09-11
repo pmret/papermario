@@ -7,7 +7,6 @@ options:
   mnemonic_ljust: 10
   platform: n64
   subalign: 8
-  auto_all_sections: [".data", ".rodata", ".bss"]
   asm_data_macro: "dlabel"
 
   base_path: ../..
@@ -2510,6 +2509,10 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160]
+
+###############
+### Effects ###
+###############
   - name: effect_gfx_big_smoke_puff
     dir: effects/gfx
     type: code
@@ -6060,6 +6063,10 @@ segments:
     - [0x7E4D00, .data, 7E0E80]
     - [0x7E4EF0, data]
     - [0x7E7380]
+
+############
+### Maps ###
+############
   - name: machi
     dir: world/area_mac/machi
     type: code
@@ -13293,6 +13300,10 @@ segments:
       - [0xE9E690, palette, BombableRock]
       - [0xE9E6B0]
   - [0xE9ECD0, bin] # unk data
+
+#################
+### Dead maps ###
+#################
   - type: code
     start: 0xEA0900
     vram: 0x80240000
