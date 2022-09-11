@@ -4,7 +4,6 @@
 
 #define NAMESPACE b_area_isk_part_1_isk_08
 
-BSS char N(pad)[8]; // BSS has bad alignment. Should be 0x10 aligned.
 BSS EffectInstance* N(D_80224DB0);
 
 ApiStatus func_80218BA0_4E32E0(Evt* script, s32 isInitialCall) {

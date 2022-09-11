@@ -25,8 +25,6 @@ extern EvtScript N(8021F630);
 extern EvtScript N(80222C44);
 extern EvtScript N(80223870);
 
-// TODO: This pad is here due to rodata having subalign 4, while bss is 0x10 aligned as normal.
-BSS static char pad;
 BSS s32 D_80235FC0[31];
 
 #include "common/StartRumbleWithParams.inc.c"

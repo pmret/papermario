@@ -4,8 +4,6 @@
 #include "battle/item/mystery.png.h"
 #include "pause/pause_common.h"
 
-BSS s32 D_802A25B8[2];
-
 #include "ItemRefund.inc.c"
 
 extern s32 D_802A25C8[7];

@@ -112,7 +112,6 @@ extern EvtScript N(handleEvent_8021D600);
 extern EvtScript N(nextTurn_8022A038);
 extern EvtScript N(copyPartner);
 
-BSS char N(pad)[8]; // BSS Alignment Hack
 BSS s32 D_80232C20[12];
 BSS s32 D_80232C50;
 

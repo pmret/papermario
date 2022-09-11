@@ -14,7 +14,7 @@ NUPiOverlaySegment D_8007795C = {
     .textStart = pause_TEXT_START,
     .textEnd = pause_TEXT_END,
     .dataStart = pause_DATA_START,
-    .dataEnd = pause_DATA_END,
+    .dataEnd = pause_RODATA_END,
     .bssStart = pause_BSS_START,
     .bssEnd = pause_BSS_END,
 };

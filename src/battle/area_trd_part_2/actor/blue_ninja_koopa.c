@@ -148,8 +148,6 @@ s32 N(idleAnimations_8022B6DC)[] = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-// TODO: This pad is here due to rodata having subalign 4, while bss is 0x10 aligned as normal.
-BSS static char pad;
 #include "common/UnkWhirlwindEffectFunc.inc.c"
 
 #include "common/UnkEnemyFunc.inc.c"
