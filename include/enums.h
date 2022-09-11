@@ -3093,10 +3093,10 @@ enum NpcFlags {
 };
 
 enum PlayerStatusFlags {
+    PLAYER_STATUS_FLAGS_AIRBORNE                         = 0x0000000E,
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
     PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
-    PLAYER_STATUS_FLAGS_AIRBORNE                         = 0x0000000E,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_40                               = 0x00000040,
@@ -4081,6 +4081,7 @@ enum MusicSettingsFlags {
 
 // the lower byte of Collider::flags
 enum SurfaceType {
+    SURFACE_TYPE_DEFAULT            = 0,
     SURFACE_TYPE_WATER              = 1,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_LAVA               = 3,
