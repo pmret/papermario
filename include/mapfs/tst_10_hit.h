@@ -1,0 +1,17 @@
+#define COLLIDER_Root 0x10
+#define COLLIDER_Default 0xF
+#define COLLIDER_change 0xE
+#define COLLIDER_stage 0xD
+#define COLLIDER_7 0xC
+#define COLLIDER_deiliw 0xB
+#define COLLIDER_o134 0xA
+#define COLLIDER_5 0x9
+#define COLLIDER_deilis 0x8
+#define COLLIDER_o138 0x7
+#define COLLIDER_3 0x6
+#define COLLIDER_deilie 0x5
+#define COLLIDER_o132 0x4
+#define COLLIDER_1 0x3
+#define COLLIDER_deilitn 0x2
+#define COLLIDER_deilin 0x1
+#define COLLIDER_o136 0x0

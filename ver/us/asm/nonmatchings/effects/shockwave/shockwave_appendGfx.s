@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E004AEE8
+.double 0.3
+
+.section .text
+
 glabel shockwave_appendGfx
 /* 358C4C E004A78C 27BDFEE8 */  addiu     $sp, $sp, -0x118
 /* 358C50 E004A790 AFBF00FC */  sw        $ra, 0xfc($sp)

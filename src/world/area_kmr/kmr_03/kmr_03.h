@@ -2,6 +2,8 @@
 /// @brief Goomba Region - Bottom of the Cliff
 
 #include "common.h"
+#include "../kmr.h"
+#include "message_ids.h"
 #include "map.h"
 #include "../kmr.h"
 
@@ -17,5 +19,3 @@ extern EvtScript N(80242340);
 extern EvtScript N(802406C0);
 extern EvtScript N(main);
 extern EvtScript N(makeEntities);
-
-extern s32 D_802EA0C4;

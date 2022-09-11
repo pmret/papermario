@@ -2,21 +2,21 @@
 /// @brief Flower Fields - (West) Path to Maze
 
 #include "common.h"
+#include "../flo.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE flo_23
 
-extern s32 D_802EA0C4;
-
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEE260)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024026C_CEE4CC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240B68_CEEDC8)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240C2C_CEEE8C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240C9C_CEEEFC)(Evt* script, s32 isInitialCall);
+ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
+ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlowerGuard_SetItemEntityPosition)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlowerGuard_MakeItemList)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242568);
 extern EvtScript N(main);

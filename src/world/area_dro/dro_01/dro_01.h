@@ -2,6 +2,8 @@
 /// @brief Dry Dry Outpost - Outpost 1
 
 #include "common.h"
+#include "../dro.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE dro_01
@@ -18,62 +20,56 @@ typedef struct {
     u32 unk_08;
 } N(shopPrice);
 
-ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetCurrentCameraYawClamped180)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetCurrentFloor)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetEntryPos)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetGameStatus75)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall);
-ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall);
-ApiStatus N(Set80151310_1)(Evt* script, s32 isInitialCall);
-ApiStatus N(SetCamVfov)(Evt* script, s32 isInitialCall);
-ApiStatus N(SetManyVars)(Evt* script, s32 isInitialCall);
-ApiStatus N(SetPlayerStatusAnimFlags100000)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_GetCamVfov)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_ShouldQuizmoLeave)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_NPC_Aux_Impl)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_HideEntities)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SetCamVfov)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_Init)(Evt* script, s32 isInitialCall);
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(SomeXYZFunc2)(Evt* script, s32 isInitialCall);
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkCameraFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc25)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_HideWorld)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SpinPartner)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SpinPlayer)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_CalcLetterPos)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc26)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241B5C_95CD5C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241BE0_95CDE0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241DF8_95CFF8)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241EAC_95D0AC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241EE0_95D0E0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241F60_95D160)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241F78_95D178)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241F94_95D194)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802424D4_95D6D4)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_RenderInit)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_FadeInWorld)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SetStageLightsDelay)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SetVannaAnim_Idle)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SetVannaAnim_Clap)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_CreateWorker)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243014_95E214)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243058_95E258)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetFloorCollider)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802431B4_95E3B4)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802431FC_95E3FC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243350_95E550)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243578_95E778)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_UnkFunc25)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_GetCurrentCameraYawClamped180)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_GetCurrentFloor)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_GetEntryPos)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_SetPlayerStatusAnimFlags100000)(Evt* script, s32 isInitialCall);
-ApiStatus N(dup_SomeXYZFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_AwaitDownInput)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_GetCameraYaw)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_GetCurrentFloor)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_GetEntryPos)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall);
+ApiStatus N(dup_Pipe_GetPointAheadOfPlayer)(Evt* script, s32 isInitialCall);
 
-extern s32** N(D_8024B5B0_9667B0);
+extern s32** N(varStash);
 extern N(shopInventory) N(shopInventory_8024B4FC)[];
 extern N(shopPrice) N(shopPriceList_8024B550)[];
 

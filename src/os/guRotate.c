@@ -1,9 +1,12 @@
-#include "common.h"
+#include "PR/guint.h"
+
+f32 sin_rad(f32 x);
+f32 cos_rad(f32 x);
 
 extern float D_800958C0;
 
 void guRotateF(float mf[4][4], float a, float x, float y, float z) {
-	static float dtor = PI_D / 180.0;
+	static float dtor = 3.1415926 / 180.0;
 	float sine;
 	float cosine;
 	float ab, bc, ca, t;

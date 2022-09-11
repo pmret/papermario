@@ -32,10 +32,10 @@ ApiStatus UpdateLerp(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus RandInt(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 max = evt_get_variable(script, *ptrReadPos++);
-    Bytecode outVar = *ptrReadPos++;
+    s32 max = evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
 
     evt_set_variable(script, outVar, rand_int(max));
 
@@ -43,11 +43,11 @@ ApiStatus RandInt(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetAngleBetweenNPCs(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 aID = evt_get_variable(script, *ptrReadPos++);
-    s32 bID = evt_get_variable(script, *ptrReadPos++);
-    Bytecode outVar = *ptrReadPos++;
+    s32 aID = evt_get_variable(script, *args++);
+    s32 bID = evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
 
     Npc* a = resolve_npc(script, aID);
     Npc* b = resolve_npc(script, bID);
@@ -58,10 +58,10 @@ ApiStatus GetAngleBetweenNPCs(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetAngleToNPC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 npcID = evt_get_variable(script, *ptrReadPos++);
-    Bytecode outVar = *ptrReadPos++;
+    s32 npcID = evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
     evt_set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
@@ -71,10 +71,10 @@ ApiStatus GetAngleToNPC(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetAngleToPlayer(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 npcID = evt_get_variable(script, *ptrReadPos++);
-    Bytecode outVar = *ptrReadPos++;
+    s32 npcID = evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
     evt_set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
@@ -83,7 +83,7 @@ ApiStatus GetAngleToPlayer(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
@@ -93,9 +93,9 @@ ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall) {
     f32 distance;
 
     if (isInitialCall) {
-        *targetX = evt_get_variable(script, *ptrReadPos++);
-        *targetZ = evt_get_variable(script, *ptrReadPos++);
-        *distanceRequired = evt_get_variable(script, *ptrReadPos++);
+        *targetX = evt_get_variable(script, *args++);
+        *targetZ = evt_get_variable(script, *args++);
+        *distanceRequired = evt_get_variable(script, *args++);
     }
 
     distance = dist2D(
@@ -111,7 +111,7 @@ ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
@@ -119,13 +119,13 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    Bytecode outVar = EVT_VAR(0);
+    Bytecode outVar = LVar0;
 
     if (isInitialCall) {
-        *targetX = evt_get_variable(script, *ptrReadPos++);
-        *targetZ = evt_get_variable(script, *ptrReadPos++);
-        *distanceRequired = evt_get_variable(script, *ptrReadPos++);
-        outVar = *ptrReadPos++;
+        *targetX = evt_get_variable(script, *args++);
+        *targetZ = evt_get_variable(script, *args++);
+        *distanceRequired = evt_get_variable(script, *args++);
+        outVar = *args++;
     }
 
     distance = dist2D(
@@ -170,17 +170,17 @@ ApiStatus AwaitPlayerLeave(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus AddVectorPolar(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    Bytecode xVar = *ptrReadPos++;
+    Bytecode xVar = *args++;
     f32 x = evt_get_float_variable(script, xVar);
 
-    Bytecode yVar = *ptrReadPos++;
+    Bytecode yVar = *args++;
     f32 y = evt_get_float_variable(script, yVar);
 
-    f32 r = evt_get_float_variable(script, *ptrReadPos++);
+    f32 r = evt_get_float_variable(script, *args++);
 
-    add_vec2D_polar(&x, &y, r, evt_get_float_variable(script, *ptrReadPos++));
+    add_vec2D_polar(&x, &y, r, evt_get_float_variable(script, *args++));
 
     evt_set_float_variable(script, xVar, x);
     evt_set_float_variable(script, yVar, y);
@@ -244,7 +244,9 @@ ApiStatus func_802D4C4C(Evt* script, s32 initialCall) {
 }
 
 ApiStatus func_802D4CC4(Evt* script, s32 initialCall) {
-    s32 value = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 value = evt_get_variable(script, *args++);
+
     if (value < 0) {
         set_screen_overlay_params_back(255, -1.0f);
     } else {
@@ -255,7 +257,8 @@ ApiStatus func_802D4CC4(Evt* script, s32 initialCall) {
 }
 
 ApiStatus func_802D4D14(Evt* script, s32 initialCall) {
-    s32 value = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 value = evt_get_float_variable(script, *args++);
 
     set_screen_overlay_center(0, 0, 0xC, 0x14);
     set_screen_overlay_center(0, 1, 0x134, 0xDC);
@@ -269,102 +272,129 @@ ApiStatus func_802D4D88(Evt* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_EQUIVALENT
-// most likely functionally equivalent, lots of issues though.
-void load_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
-    struct Vec3f* temp_s4;
-    f32* temp_s7;
+void load_path_data(s32 num, f32* normalizedLengths, Vec3f* pathPositions, Vec3f* outVectors) {
+    f32* lenBuf = heap_malloc(num * sizeof(f32));
+    Vec3f* vecBuf = heap_malloc(num * sizeof(Vec3f));
     s32 i;
-    f32* temp;
-    f32 new_var;
-    f32 new_var2;
 
-    temp_s7 = heap_malloc(numVecs * sizeof(f32));
-    temp_s4 = heap_malloc(numVecs * sizeof(Vec3f));
-    arg1[0] = 0.0f;
-
-    for (i = 1; i < numVecs; i++) {
-        f32 temp_x = SQ(arg2[i].x - arg2[i - 1].x);
-        f32 temp_y = SQ(arg2[i].y - arg2[i - 1].y);
-        f32 temp_z = SQ(arg2[i].z - arg2[i - 1].z);
-        arg1[i] = arg1[i - 1] + sqrtf(temp_x + temp_y + temp_z);
+    // compute the distance of each vector along the path and map to the range [0,1]
+    normalizedLengths[0] = 0.0f;
+    for (i = 1; i < num; i++) {
+        f32 dx = pathPositions[i].x - pathPositions[i-1].x;
+        f32 dy = pathPositions[i].y - pathPositions[i-1].y;
+        f32 dz = pathPositions[i].z - pathPositions[i-1].z;
+        f32 length = sqrtf(SQ(dx) + SQ(dy) + SQ(dz));
+        normalizedLengths[i] = normalizedLengths[i-1] + length;
+    }
+    for (i = 1; i < num; i++) {
+        normalizedLengths[i] /= normalizedLengths[num-1];
     }
 
-    for (i = 1; i < numVecs; i++) {
-        arg1[i] = arg1[i] / arg1[numVecs - 1];
+    // end points
+    outVectors[0].x = 0.0f;
+    outVectors[0].y = 0.0f;
+    outVectors[0].z = 0.0f;
+    outVectors[num-1].x = 0.0f;
+    outVectors[num-1].y = 0.0f;
+    outVectors[num-1].z = 0.0f;
+    
+    for (i = 0; i < num - 1; i++) {
+        lenBuf[i] = normalizedLengths[i+1] - normalizedLengths[i];
+        vecBuf[i+1].x = (pathPositions[i+1].x - pathPositions[i].x) / lenBuf[i];
+        vecBuf[i+1].y = (pathPositions[i+1].y - pathPositions[i].y) / lenBuf[i];
+        vecBuf[i+1].z = (pathPositions[i+1].z - pathPositions[i].z) / lenBuf[i];
     }
 
-    arg3[0].x = 0;
+    // n = 1
+    outVectors[1].x = vecBuf[2].x - vecBuf[1].x;
+    outVectors[1].y = vecBuf[2].y - vecBuf[1].y;
+    outVectors[1].z = vecBuf[2].z - vecBuf[1].z;
+    vecBuf[1].x = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
+    vecBuf[1].y = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
+    vecBuf[1].z = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
 
-    arg3[numVecs - 1].z = 0;
-    arg3[0].z = 0;
-
-    arg3[numVecs - 1].x = 0;
-
-    arg3[0].y = 0;
-    arg3[numVecs - 1].y = 0;
-
-    for (i = 0; i < (numVecs - 1); i++) {
-        f32 temp = temp_s7[i];
-        temp_s7[i] = arg1[i + 1] - arg1[i];
-        temp_s4[i + 1].x = ((arg2[i + 1].x - arg2[i].x) / temp_s7[i]);
-        temp_s4[i + 1].y = ((arg2[i + 1].y - arg2[i].y) / temp);
-        temp_s4[i + 1].z = ((arg2[i + 1].z - arg2[i].z) / temp);
+    // 1 < n < N - 2
+    for (i = 1; i < num - 2; i++) {
+        f32 sx = lenBuf[i] / vecBuf[i].x;
+        f32 sy = lenBuf[i] / vecBuf[i].y;
+        f32 sz = lenBuf[i] / vecBuf[i].z;
+        outVectors[i+1].x = (vecBuf[i+2].x - vecBuf[i+1].x) - outVectors[i].x * sx;
+        outVectors[i+1].y = (vecBuf[i+2].y - vecBuf[i+1].y) - outVectors[i].y * sy;
+        outVectors[i+1].z = (vecBuf[i+2].z - vecBuf[i+1].z) - outVectors[i].z * sz;
+        vecBuf[i+1].x = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sx;
+        vecBuf[i+1].y = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sy;
+        vecBuf[i+1].z = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sz;
     }
 
-    arg3[1].x = temp_s4[2].x - temp_s4[1].x;
-    arg3[1].y = temp_s4[2].y - temp_s4[1].y;
-    arg3[1].z = temp_s4[2].z - temp_s4[1].z;
-    temp_s4[1].x = ((arg1[2] - arg1[0]) * 2);
-    temp_s4[1].y = ((arg1[2] - arg1[0]) * 2);
-    temp_s4[1].z = ((arg1[2] - arg1[0]) * 2);
+    // n = N - 2
+    outVectors[num-2].x -= (lenBuf[num-2] * outVectors[num-1].x);
+    outVectors[num-2].y -= (lenBuf[num-2] * outVectors[num-1].y);
+    outVectors[num-2].z -= (lenBuf[num-2] * outVectors[num-1].z);
 
-    for (i = 1; i < numVecs - 2; i++) {
-        f32 temp_x = temp_s7[i] / temp_s4[i].x;
-        f32 temp_y = temp_s7[i] / temp_s4[i].y;
-        f32 temp_z = temp_s7[i] / temp_s4[i].z;
-        new_var = arg3[i].x;
-        arg3[i + 1].x = (temp_s4[i + 2].x - temp_s4[i].x) - (new_var * temp_x);
-        arg3[i + 1].y = (temp_s4[i + 2].y - temp_s4[i].y) - (new_var * temp_y);
-        arg3[i + 1].z = (temp_s4[i + 2].z - temp_s4[i].z) - (new_var * temp_z);
-        temp_s4[i].x = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_x);
-        temp_s4[i].y = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_y);
-        temp_s4[i].z = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_z);
+    for (i = num - 2; i > 0; i--) {
+        outVectors[i].x = (outVectors[i].x - (lenBuf[i] * outVectors[i+1].x)) / vecBuf[i].x;
+        outVectors[i].y = (outVectors[i].y - (lenBuf[i] * outVectors[i+1].y)) / vecBuf[i].y;
+        outVectors[i].z = (outVectors[i].z - (lenBuf[i] * outVectors[i+1].z)) / vecBuf[i].z;
     }
-
-    arg3[numVecs - 2].x = arg3[numVecs - 2].x - (temp_s7[numVecs - 2] * arg3[numVecs - 1].x);
-    arg3[numVecs - 2].y = arg3[numVecs - 2].y - (temp_s7[numVecs - 2] * arg3[numVecs - 1].y);
-    arg3[numVecs - 2].z = arg3[numVecs - 2].z - (temp_s7[numVecs - 2] * arg3[numVecs - 1].z);
-
-    for (i = (numVecs - 2); i > 0 ; i--) {
-        arg3[i].x = (arg3[i].x - (temp_s7[i] * arg3[i + 1].x)) / temp_s4[i].x;
-        arg3[i].y = (arg3[i].y - (temp_s7[i] * arg3[i + 1].y)) / temp_s4[i].y;
-        arg3[i].z = (arg3[i].z - (temp_s7[i] * arg3[i + 1].z)) / temp_s4[i].z;
-    }
-
-    heap_free(temp_s7);
-    heap_free(temp_s4);
+    
+    heap_free(lenBuf);
+    heap_free(vecBuf);
 }
-#else
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", load_path_data);
-#endif
 
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", get_path_position);
+void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalizedLengths, Vec3f* pathPoints, Vec3f* vectors) {
+    s32 limit = numVectors - 1;
+    f32 curLength;
+    f32 curProgress;
+    f32 ax, ay, az, bx, by, bz, dx, dy, dz;
+    s32 i;
+    
+    for (i = 0; i < limit;) {
+        s32 temp_v1 = (i + limit) / 2;
+
+        if (normalizedLengths[temp_v1] < alpha) {
+            i = temp_v1 + 1;
+        } else {
+            limit = temp_v1;
+        }
+    }
+
+    if (i > 0) {
+        i--;
+    }
+    
+    curLength = normalizedLengths[i+1] - normalizedLengths[i];
+    curProgress = alpha - normalizedLengths[i];
+
+    dx = (pathPoints[i+1].x - pathPoints[i].x) / curLength;
+    ax = (((vectors[i+1].x - vectors[i].x) * curProgress / curLength) + (3.0f * vectors[i].x)) * curProgress;
+    bx = dx - (((2.0f * vectors[i].x) + vectors[i+1].x) * curLength);
+    outPos->x = ((ax + bx) * curProgress) + pathPoints[i].x;
+
+    dy = (pathPoints[i+1].y - pathPoints[i].y) / curLength;
+    ay = (((vectors[i+1].y - vectors[i].y) * curProgress / curLength) + (3.0f * vectors[i].y)) * curProgress;
+    by = dy - (((2.0f * vectors[i].y) + vectors[i+1].y) * curLength);
+    outPos->y = ((ay + by) * curProgress) + pathPoints[i].y;
+
+    dz = (pathPoints[i+1].z - pathPoints[i].z) / curLength;
+    az = (((vectors[i+1].z - vectors[i].z) * curProgress / curLength) + (3.0f * vectors[i].z)) * curProgress;
+    bz = dz - (((2.0f * vectors[i].z) + vectors[i+1].z) * curLength);
+    outPos->z = ((az + bz) * curProgress) + pathPoints[i].z;
+}
 
 s32 LoadPath(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 time = evt_get_variable(script, *args++);
-    s32 vectorList = evt_get_variable(script, *args++);
+    Vec3f* vectorList = (Vec3f*) evt_get_variable(script, *args++);
     s32 numVectors = evt_get_variable(script, *args++);
     s32 easingType = evt_get_variable(script, *args++);
-    Path* path = heap_malloc(sizeof(Path));
+    Path* path = heap_malloc(sizeof(*path));
 
-    script->varTable[15] = path;
+    script->varTablePtr[15] = path;
     path->numVectors = numVectors;
-    path->unk_04 = heap_malloc(numVectors * sizeof(f32));
+    path->lengths = heap_malloc(numVectors * sizeof(f32));
     path->staticVectorList = vectorList;
     path->vectors = heap_malloc(numVectors * sizeof(Vec3f));
-    load_path_data(path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
+    load_path_data(path->numVectors, path->lengths, path->staticVectorList, path->vectors);
 
     path->timeElapsed = 0;
     path->timeLeft = time - 1;
@@ -373,31 +403,74 @@ s32 LoadPath(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", GetNextPathPos, Evt* script, s32 isInitialCall);
+ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall) {
+    Path* path = script->varTablePtr[0xF];
+    Vec3f pos;
+    f32 alpha;
+    f32 diff;
+
+    switch (path->easingType) {
+        case EASING_LINEAR:
+            alpha = 1.0f / path->timeLeft * path->timeElapsed;
+            break;
+        case EASING_QUADRATIC_IN:
+            alpha = 1.0f / SQ(path->timeLeft) * SQ(path->timeElapsed);
+            break;
+        case EASING_QUADRATIC_OUT:
+            diff = path->timeLeft - path->timeElapsed;
+            alpha = 1.0f - (SQ(diff) / SQ(path->timeLeft));
+            break;
+        case EASING_COS_IN_OUT:
+            alpha = (1.0f - cos_rad((PI / path->timeLeft) * path->timeElapsed)) * 0.5f;
+            break;
+        default:
+            alpha = 0.0f;
+            break;
+    }
+
+    get_path_position(alpha, &pos, path->numVectors, path->lengths, path->staticVectorList, path->vectors);
+    script->varTable[1] = (pos.x * 1024.0f) + -2.3e8f;
+    script->varTable[2] = (pos.y * 1024.0f) + -2.3e8f;
+    script->varTable[3] = (pos.z * 1024.0f) + -2.3e8f;
+
+    if (path->timeElapsed < path->timeLeft) {
+        path->timeElapsed = path->timeElapsed + 1;
+        script->varTable[0] = 1;
+    } else {
+        heap_free(path->lengths);
+        heap_free(path->vectors);
+        heap_free(script->varTablePtr[15]);
+        script->varTable[0] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetDist2D(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
+    Bytecode outVar = *args++;
 
-    Bytecode outVar = *ptrReadPos++;
     evt_set_float_variable(script, outVar, dist2D(
-                           evt_get_float_variable(script, *ptrReadPos++),
-                           evt_get_float_variable(script, *ptrReadPos++),
-                           evt_get_float_variable(script, *ptrReadPos++),
-                           evt_get_float_variable(script, *ptrReadPos++)
+                           evt_get_float_variable(script, *args++),
+                           evt_get_float_variable(script, *args++),
+                           evt_get_float_variable(script, *args++),
+                           evt_get_float_variable(script, *args++)
                        ));
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetTimeFreezeMode(Evt* script, s32 initialCall) {
-    set_time_freeze_mode(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    set_time_freeze_mode(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
 ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 initialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 setMode = evt_get_variable(script,  *ptrReadPos++);
-    s32 flags = evt_get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 setMode = evt_get_variable(script, *args++);
+    s32 flags = evt_get_variable(script, *args++);
 
     if (setMode) {
         gOverrideFlags |= flags;
@@ -409,20 +482,19 @@ ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 initialCall) {
 }
 
 ApiStatus SetValueByRef(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 dest = evt_get_variable(script, *ptrReadPos++); /* Reference */
-    s32 src = evt_get_variable(script, *ptrReadPos++);
+    s32 dest = evt_get_variable(script, *args++); /* Reference */
+    s32 src = evt_get_variable(script, *args++);
     evt_set_variable(script, dest, src);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetValueByRef(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-
-    s32 src = evt_get_variable(script, *ptrReadPos++); /* Reference */
-    Bytecode dest = *ptrReadPos++;
+    Bytecode* args = script->ptrReadPos;
+    s32 src = evt_get_variable(script, *args++); /* Reference */
+    Bytecode dest = *args++;
 
     evt_set_variable(script, dest, evt_get_variable(script, src));
 
@@ -430,7 +502,8 @@ ApiStatus GetValueByRef(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus EnableStatusMenu(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
+    Bytecode* args = script->ptrReadPos;
+    if (evt_get_variable(script, *args++) != 0) {
         decrement_status_menu_disabled();
     } else {
         increment_status_menu_disabled();
@@ -440,7 +513,9 @@ ApiStatus EnableStatusMenu(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (evt_get_variable(script, *args++) != 0) {
         func_800E9894();
         close_status_menu();
     } else {
@@ -451,7 +526,8 @@ ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
-    s16 mode = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s16 mode = evt_get_variable(script, *args++);
 
     set_game_mode(mode);
 
@@ -459,17 +535,17 @@ ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *ptrReadPos, clamp_angle(evt_get_variable(script, *ptrReadPos)));
+    evt_set_variable(script, *args, clamp_angle(evt_get_variable(script, *args)));
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    evt_set_float_variable(script, *ptrReadPos, clamp_angle(evt_get_float_variable(script, *ptrReadPos)));
+    evt_set_float_variable(script, *args, clamp_angle(evt_get_float_variable(script, *args)));
 
     return ApiStatus_DONE2;
 }

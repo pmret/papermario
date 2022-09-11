@@ -5,9 +5,7 @@
 
 #define NAMESPACE EF7A80
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #include "world/common/DeadUnkFunc1.inc.c"
 

@@ -7,22 +7,49 @@ Originally written by Mark Street (https://github.com/mkst)
 
 import re
 import struct
-from typing import Optional
 from pathlib import Path
 from util.log import error
 
 from util import options
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
+
 class N64SegVtx(CommonSegCodeSubsegment):
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract,
-                 given_subalign, given_is_overlay, given_dir, args = [], yaml = {}):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract,
-                         given_subalign, given_is_overlay, given_dir, args, yaml)
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract,
+        given_subalign,
+        exclusive_ram_id,
+        given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
+    ):
+        super().__init__(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            exclusive_ram_id=exclusive_ram_id,
+            given_dir=given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
+        )
         self.file_text = None
 
     def get_linker_section(self) -> str:
-        return '.data'
+        return ".data"
 
     def out_path(self) -> Path:
         return options.get_asset_path() / self.dir / f"{self.name}.vtx.inc.c"
@@ -31,10 +58,12 @@ class N64SegVtx(CommonSegCodeSubsegment):
         self.file_text = self.disassemble_data(rom_bytes)
 
     def disassemble_data(self, rom_bytes):
-        vertex_data = rom_bytes[self.rom_start:self.rom_end]
+        vertex_data = rom_bytes[self.rom_start : self.rom_end]
         segment_length = len(vertex_data)
         if (segment_length) % 16 != 0:
-            error(f"Error: Vtx segment {self.name} length ({segment_length}) is not a multiple of 16!")
+            error(
+                f"Error: Vtx segment {self.name} length ({segment_length}) is not a multiple of 16!"
+            )
 
         lines = []
         preamble = options.get_generated_c_premble()
@@ -42,8 +71,10 @@ class N64SegVtx(CommonSegCodeSubsegment):
         lines.append("")
 
         vertex_count = segment_length // 16
-        cname = re.sub(r"[^0-9a-zA-Z_]", "_", self.name)
-        lines.append(f"Vtx {cname}[{vertex_count}] = {{")
+        sym = self.create_symbol(
+            addr=self.vram_start, in_segment=True, type="data", define=True
+        )
+        lines.append(f"Vtx {sym.name}[{vertex_count}] = {{")
 
         for vtx in struct.iter_unpack(">hhhHhhBBBB", vertex_data):
             x, y, z, flg, t, c, r, g, b, a = vtx
@@ -66,7 +97,11 @@ class N64SegVtx(CommonSegCodeSubsegment):
                 f.write(self.file_text)
 
     def should_scan(self) -> bool:
-        return options.mode_active("vtx") and self.rom_start != "auto" and self.rom_end != "auto"
+        return (
+            options.mode_active("vtx")
+            and self.rom_start != "auto"
+            and self.rom_end != "auto"
+        )
 
     def should_split(self) -> bool:
         return self.extract and options.mode_active("vtx")

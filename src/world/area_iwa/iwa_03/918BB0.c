@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "iwa_01";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918BB0", func_80240000_918BB0);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -11,4 +11,17 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918BB0", func_80240000_918BB0);
 
 #include "world/common/CheckItemFlags40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918BB0", func_802402BC_918E6C);
+ApiStatus func_802402BC_918E6C(Evt* script, s32 isInitialCall) {
+    s32 result = -1;
+    
+    if (gPlayerStatus.lastGoodPosition.y > 200.0) {
+        result = 0;
+    }
+    if (gPlayerStatus.lastGoodPosition.y < 40.0) {
+        result = 1;
+    }
+    if (result >= 0) {
+        evt_set_variable(script, MapVar(9), result);
+    }
+    return ApiStatus_BLOCK;
+}

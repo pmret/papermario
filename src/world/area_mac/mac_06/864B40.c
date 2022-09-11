@@ -1,9 +1,9 @@
 #include "mac_06.h"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_06/864B40", func_8024030C_864E4C);
+#define NAMESPACE dup_mac_06
+#include "world/common/UnkFloatFunc001.inc.c"
+#define NAMESPACE mac_06
 
 #include "world/common/SpawnSunEffect.inc.c"

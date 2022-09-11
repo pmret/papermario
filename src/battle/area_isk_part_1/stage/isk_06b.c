@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "mapfs/isk_bt06_shape.h"
 
 #define NAMESPACE b_area_isk_part_1_isk_06b
 
@@ -19,9 +20,9 @@ ApiStatus func_80218B78_4E32B8(Evt* script, s32 isInitialCall) {
 
 EvtScript N(beforeBattle_80223F40) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(func_80218B30_4E3270)
-    EVT_CALL(EnableModel, 23, 0)
+    EVT_CALL(EnableModel, MODEL_kesu, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -36,6 +37,6 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt06_shape",
     .hit = "isk_bt06_hit",
-    .preBattle = N(beforeBattle_80223F40),
-    .postBattle = N(afterBattle_80223F9C),
+    .preBattle = &N(beforeBattle_80223F40),
+    .postBattle = &N(afterBattle_80223F9C),
 };

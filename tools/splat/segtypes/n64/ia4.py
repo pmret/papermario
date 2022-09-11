@@ -3,6 +3,7 @@ import png
 from math import ceil
 from util import iter
 
+
 class N64SegIa4(N64SegRgba16):
     @staticmethod
     def get_writer(width, height):

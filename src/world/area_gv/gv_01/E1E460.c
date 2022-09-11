@@ -1,21 +1,10 @@
 #include "gv_01.h"
 #include "sprite.h"
+#include "hud_element.h"
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
-
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_802405EC_E1EA4C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -40,7 +29,7 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
     gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     general_heap_create();
     clear_render_tasks();
     clear_generic_entity_list();
@@ -52,7 +41,7 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     clear_model_data();
     clear_sprite_shading_data();
     reset_background_settings();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);
@@ -68,6 +57,6 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     initialize_collision();
     intro_logos_set_fade_alpha(255);
     intro_logos_set_fade_color(208);
-    set_game_mode(2);
+    set_game_mode(GAME_MODE_TITLE_SCREEN);
     return ApiStatus_FINISH;
 }

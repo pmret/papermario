@@ -1,21 +1,21 @@
 #include "mac_06.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_802404C0_865000);
+extern u32 N(unkAngle1);
+extern s32 N(unkAngle2);
+extern s32 N(unkAngle3);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_8024050C_86504C);
+void N(unkVtxFunc001)(Vtx* firstVertex, Vtx* copiedVertices, s32 numVertices, s32* arg3);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240658_865198);
+#include "world/common/resolve_npc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_802408D0_865410);
+#include "world/common/UnkAngleFunc001.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240974_8654B4);
+INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", mac_06_unkVtxFunc001);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240A18_865558);
+#include "world/common/unkAngleFuncs023.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240B88_8656C8);
+#include "world/common/UnkFloatFunc001.inc.c"
+
+#include "world/common/UnkPlayerPosFunc.inc.c"
 
 #include "world/common/PlayFX3D.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240DA4_8658E4);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_06/865000", func_80240E48_865988);

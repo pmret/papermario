@@ -1,8 +1,7 @@
 #include "dgb_05.h"
 #include "sprite/npc/world_clubba.h"
 #include "message_ids.h"
-
-extern Npc* wPartnerNpc;
+#include "entity.h"
 
 enum {
     NPC_WORLD_CLUBBA0,
@@ -15,15 +14,15 @@ EntryList N(entryList) = {
     { 515.0f, 0.0f, 310.0f, 0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_05_tattle },
+    .tattle = { MSG_MapTattle_dgb_05 },
 };
 
 EvtScript N(802414E0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -40,28 +39,28 @@ static s32 N(pad_1578)[] = {
 };
 
 EvtScript N(exitSingleDoor_80241580) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 16)
-    EVT_SET(EVT_VAR(2), 30)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 16)
+    EVT_SET(LVar2, 30)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(enterSingleDoor_80241634) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 30)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LVar2, 30)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -69,13 +68,13 @@ EvtScript N(enterSingleDoor_80241634) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -15)
+    EVT_IF_LT(GB_StoryProgress, -15)
         EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_8024230C)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
@@ -95,11 +94,11 @@ static s32 N(pad_17E8)[] = {
 
 EvtScript N(802417F0) = {
     EVT_CALL(N(func_80240000_C3AA10))
-    EVT_CALL(func_802CA988, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+    EVT_CALL(func_802CA988, 0, LVar2, LVar3, LVar4, LVar5)
     EVT_CALL(N(func_80240030_C3AA40))
-    EVT_SET(EVT_SAVE_FLAG(1047), 1)
+    EVT_SET(GF_DGB05_BoardedFloor, 1)
     EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -109,8 +108,8 @@ static s32 N(pad_1868)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1047), 0)
-        EVT_CALL(MakeEntity, 0x802BCE84, 510, -210, 100, 0, MAKE_ENTITY_END)
+    EVT_IF_EQ(GF_DGB05_BoardedFloor, 0)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 510, -210, 100, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -121,8 +120,8 @@ static s32 N(pad_18BC) = {
 };
 
 EvtScript N(802418C0) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
@@ -143,22 +142,22 @@ s32 N(unk_missing_8024197C)[] = {
 
 s32 N(extraAnimationList_802419A4)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
-NpcAISettings N(npcAISettings_802419AC) = {
+MobileAISettings N(npcAISettings_802419AC) = {
     .moveSpeed = 1.0f,
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 100.0f,
-    .unk_10 = { .f = 40.0f },
-    .unk_14 = 10,
+    .alertOffsetDist = 40.0f,
+    .playerSearchInterval = 10,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 90 },
-    .unk_20 = 15,
+    .chaseTurnRate= 90,
+    .chaseUpdateInterval = 15,
     .chaseRadius = 200.0f,
-    .unk_28 = { .f = 160.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 160.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802419DC) = {
@@ -166,7 +165,7 @@ EvtScript N(npcAI_802419DC) = {
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
     EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(func_80240E80_C3B890), EVT_PTR(N(npcAISettings_802419AC)))
+    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(npcAISettings_802419AC)))
     EVT_RETURN
     EVT_END
 };
@@ -188,7 +187,7 @@ EvtScript N(npcAI_80241A78) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(UnkFunc7))
+    EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END
 };
@@ -199,7 +198,7 @@ NpcSettings N(npcSettings_80241B20) = {
     .ai = &N(npcAI_80241A78),
     .onDefeat = &N(802418C0),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 StaticNpc N(npcGroup_80241B4C)[] = {
@@ -209,16 +208,18 @@ StaticNpc N(npcGroup_80241B4C)[] = {
         .pos = { 132.0f, -110.0f, 238.0f },
         .flags = NPC_FLAG_LOCK_ANIMS,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 132, -110, 238, 0, 0, -32767, 0, 325, 0, 185, 200 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 132, -110, 238, 0, 0, -32767, 0, 325, 0, 185, 200 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -237,18 +238,20 @@ StaticNpc N(npcGroup_80241B4C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80241B20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -277,16 +280,18 @@ StaticNpc N(npcGroup_80241F2C)[] = {
         .pos = { 503.0f, -210.0f, 225.0f },
         .flags = NPC_FLAG_LOCK_ANIMS,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 503, -210, 225, 0, 0, -32767, 0, 503, -210, 290, 200, 150, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 503, -210, 225, 0, 0, -32767, 0, 503, -210, 290, 200, 150, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -305,18 +310,20 @@ StaticNpc N(npcGroup_80241F2C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80241B20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -339,8 +346,8 @@ StaticNpc N(npcGroup_80241F2C)[] = {
 };
 
 NpcGroupList N(npcGroupList_8024230C) = {
-    NPC_GROUP(N(npcGroup_80241B4C), BATTLE_ID(15, 1, 0, 3)),
-    NPC_GROUP(N(npcGroup_80241F2C), BATTLE_ID(15, 2, 0, 3)),
+    NPC_GROUP(N(npcGroup_80241B4C), 0x0F01, 0x02),
+    NPC_GROUP(N(npcGroup_80241F2C), 0x0F02, 0x02),
     {},
 };
 
@@ -358,381 +365,5 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkNpcAIFunc6.inc.c"
-
-#include "world/common/UnkNpcAIFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-void N(func_8024067C_C3B08C)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if (npc->duration > 0) {
-        npc->duration--;
-    }
-
-    if (npc->duration == 1) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-        script->functionTemp[0] = 1;
-    }
-}
-
-void N(func_80240704_C3B114)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    PlayerData* playerData = get_player_data();
-    s32 phi_s2 = FALSE;
-    s32 var;
-    f32 posX, posZ;
-
-    if (func_800490B4(territory, enemy, 80.0f, 0.0f, 0)) {
-        if ((gPlayerStatusPtr->actionState ==  2) || (gPlayerStatusPtr->actionState == 26) ||
-            (gPlayerStatusPtr->actionState ==  3) || (gPlayerStatusPtr->actionState == 14) ||
-            (gPlayerStatusPtr->actionState == 16) || (gPlayerStatusPtr->actionState == 11) ||
-            (gPlayerStatusPtr->actionState == 10) || (gPlayerStatusPtr->actionState == 18) ||
-            (gPlayerStatusPtr->actionState == 19) || (gPlayerStatusPtr->actionState == 37)) {
-            phi_s2 = TRUE;
-        }
-
-        if (playerData->currentPartner == 2) {
-            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
-                phi_s2 = TRUE;
-            }
-        }
-    }
-
-    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
-        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
-        posX = npc->pos.x;
-        posZ = npc->pos.z;
-        add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
-        if (dist2D(posX, posZ, wPartnerNpc->pos.x, wPartnerNpc->pos.z) <= 80.0f) {
-            phi_s2 = TRUE;
-        }
-    }
-
-    if (phi_s2) {
-        ai_enemy_play_sound(npc, 0xB000000E, 0);
-        npc->currentAnim.w = enemy->animList[11];
-        npc->duration = 10;
-        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-        script->functionTemp[0] = 2;
-    }
-
-    npc->duration++;
-    if (npc->duration == 27) {
-        ai_enemy_play_sound(npc, 0xB000000C, 0);
-    } else if (npc->duration == 57) {
-        ai_enemy_play_sound(npc, 0xB000000D, 0);
-    } else if (npc->duration == 59) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration == 60) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-    }
-}
-
-void N(func_802409BC_C3B3CC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        npc->duration = 1;
-        enemy->varTable[7] = 40;
-        script->functionTemp[0] = 3;
-    }
-}
-
-void N(func_80240A20_C3B430)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->yaw = clamp_angle((npc->yaw + rand_int(180)) - 90.0f);
-    npc->currentAnim.w = enemy->animList[0];
-    script->functionTemp[1] = (rand_int(1000) % 2) + 2;
-    script->functionTemp[0] = 4;
-}
-
-void N(func_80240AC8_C3B4D8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
-
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->functionTemp[0] = 12;
-        return;
-    }
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        script->functionTemp[1]--;
-        if (script->functionTemp[1] > 0) {
-            npc->yaw = clamp_angle(npc->yaw + 180.0f);
-            npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
-            return;
-        }
-
-        var = enemy->varTable[7];
-        if (var == 40) {
-            npc->duration = 20;
-            script->functionTemp[0] = var;
-        } else if (var == 50) {
-            npc->duration = 25;
-            script->functionTemp[0] = var;
-        }
-    }
-}
-
-void N(func_80240C00_C3B610)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[1];
-        if (enemy->territory->wander.moveSpeedOverride < 0) {
-            npc->moveSpeed = aiSettings->moveSpeed;
-        } else {
-            npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
-        }
-        script->functionTemp[0] = 0x29;
-    }
-}
-
-void N(func_80240CAC_C3B6BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 var;
-
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->functionTemp[0] = 12;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
-                      enemy->territory->wander.point.z) <= npc->moveSpeed) {
-        npc->currentAnim.w = enemy->animList[0];
-        npc->duration = 15;
-        enemy->varTable[7] = 50;
-        script->functionTemp[0] = 3;
-    } else if (npc->turnAroundYawAdjustment == 0) {
-        var = npc->yaw;
-        func_8004A784(npc, 5.0f, &var, 0, 0, 0);
-        npc->yaw = var;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-    }
-}
-
-void N(func_80240E24_C3B834)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if (npc->turnAroundYawAdjustment == 0) {
-        npc->duration--;
-        if (npc->duration <= 0) {
-            npc->duration = 0;
-            script->functionTemp[0] = 0;
-        }
-    }
-}
-
-ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 40.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0] = 0;
-        npc->duration = 30;
-        npc->currentAnim.w = enemy->animList[10];
-        npc->flags &= ~0x800;
-        enemy->varTable[0] = 0;
-        if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
-        }
-        if (enemy->unk_B0 & 4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 40;
-            npc->currentAnim.w = enemy->animList[0];
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
-        script->functionTemp[0] = 30;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(func_8024067C_C3B08C)(script, npcAISettings, territoryPtr);
-            break;
-        case 1:
-            N(func_80240704_C3B114)(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            N(func_802409BC_C3B3CC)(script, npcAISettings, territoryPtr);
-            break;
-        case 3:
-            N(func_80240A20_C3B430)(script, npcAISettings, territoryPtr);
-            break;
-        case 4:
-            N(func_80240AC8_C3B4D8)(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 13) {
-                break;
-            }
-        case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
-            npc->duration = 0xF;
-            enemy->varTable[7] = 40;
-            script->functionTemp[0] = 3;
-            break;
-        case 30:
-            N(UnkNpcAIFunc6)(script);
-            if (script->functionTemp[0] != 31) {
-                break;
-            }
-        case 31:
-            N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0] != 32) {
-                break;
-            }
-        case 32:
-            N(UnkNpcAIFunc8)(script);
-            break;
-        case 33:
-            N(UnkNpcAIFunc5)(script);
-            break;
-        case 40:
-            N(func_80240C00_C3B610)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 41) {
-                break;
-            }
-        case 41:
-            N(func_80240CAC_C3B6BC)(script, npcAISettings, territoryPtr);
-            break;
-        case 50:
-            N(func_80240E24_C3B834)(script, npcAISettings, territoryPtr);
-            break;
-        case 99:
-            func_8004A73C(script);
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
-        }
-        if (enemy->unk_B0 & 4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
-        }
-        enemy->varTable[0] = 0;
-    }
-
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
-        script->functionTemp[0] = 30;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
-        case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
-        case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
-        case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
-        case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
-            break;
-        case 30:
-            N(UnkNpcAIFunc6)(script);
-        case 31:
-            N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0] != 32) {
-                break;
-            }
-        case 32:
-            N(UnkNpcAIFunc8)(script);
-            if (script->functionTemp[0] != 33) {
-                break;
-            }
-        case 33:
-            N(UnkNpcAIFunc5)(script);
-            break;
-        case 99:
-            func_8004A73C(script);
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"

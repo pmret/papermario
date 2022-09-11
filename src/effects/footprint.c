@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000240[];
+extern Gfx D_09000240_32FD90[];
 
 void func_E0018000(FootprintFXData* part);
 void footprint_init(EffectInstance* effect);
@@ -38,9 +38,9 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
+    effect->data.footprint = part;
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.footprint != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -75,7 +75,7 @@ void footprint_init(EffectInstance* effect) {
 }
 
 void footprint_update(EffectInstance* effect) {
-    FootprintFXData* part = (FootprintFXData*)effect->data;
+    FootprintFXData* part = effect->data.footprint;
     s32 cond = FALSE;
     s32 i;
 
@@ -107,7 +107,7 @@ void footprint_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00183BC(EffectInstance* effect) {
@@ -116,7 +116,7 @@ void func_E00183BC(EffectInstance* effect) {
 
 void footprint_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    FootprintFXData* part = effectTemp->data;
+    FootprintFXData* part = effectTemp->data.footprint;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
@@ -124,7 +124,7 @@ void footprint_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
-            Gfx* dlist = D_09000240;
+            Gfx* dlist = D_09000240_32FD90;
 
             gDisplayContext->matrixStack[gMatrixListPos] = part->mtx;
 

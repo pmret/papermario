@@ -20,7 +20,7 @@ typedef struct WindowGroup {
     /* 0x01 */ u8 max;
 } WindowGroup; // size = 0x02
 
-WindowStyle gWindowStyles[] = {
+WindowStyle gWindowStyles[64] = {
     { 3 }, { 3 }, { 11 }, { 12 }, { 13 }, { 14 }, { 3 }, { 21 }, { 3 }, { 0 }, { 9 }, { 3 }, { 0 }, { 1 }, { 3 }, { 9 },
     { 10 }, { 7 }, { 8 }, { 3 }, { 3 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
     { 0 }, { 0 }, { 0 }, { 0 }, { 3 }, { 11 }, { 12 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
@@ -357,7 +357,7 @@ void render_window_root(void) {
     gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
     gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 16, 0x2CF0); // WHAT?? does it make several operations at once?
+    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 16, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE);
     gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPPipeSync(gMasterGfxPos++);
@@ -427,13 +427,13 @@ void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFu
     }
 }
 
-void set_window_update(s32 windowID, WindowUpdateFunc func) {
+void set_window_update(s32 windowID, s32 func) {
     if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
-        if (func.i == gWindows[windowID].fpUpdate.i) {
+        if (func == gWindows[windowID].fpUpdate.i) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
             gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
-            gWindows[windowID].fpPending = func;
+            gWindows[windowID].fpPending.i = func;
         }
     }
 }
@@ -459,11 +459,12 @@ void setup_pause_menu_tab(MenuWindowBP* bp, s32 count) {
     s32 i;
 
     for (i = 0; i < count; i++, bp++) {
-        set_window_properties(bp->windowID, bp->pos.x, bp->pos.y, bp->width, bp->height, bp->priority, bp->fpDrawContents, bp->tab, bp->parentID);
+        set_window_properties(bp->windowID, bp->pos.x, bp->pos.y, bp->width, bp->height, bp->priority,
+                              bp->fpDrawContents, bp->tab, bp->parentID);
         if (bp->style.defaultStyleID != -1) {
             gWindowStyles[bp->windowID] = bp->style;
         }
-        set_window_update(bp->windowID, bp->fpUpdate);
+        set_window_update(bp->windowID, bp->fpUpdate.i);
         gWindows[bp->windowID].flags |= bp->extraFlags;
     }
 }

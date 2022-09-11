@@ -1,75 +1,19 @@
 #include "nok_02.h"
 
-#define UNK_ALPHA_FUNC_NPC 19
+#define CHUCK_QUIZMO_NPC_ID 19
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241614_9D8634);
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241910_9D8930);
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241FFC_9D901C);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242080_9D90A0);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242298_9D92B8);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_8024234C_9D936C);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242380_9D93A0);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242400_9D9420);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242418_9D9438);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242434_9D9454);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242908_9D9928);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242974_9D9994);
+#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -81,24 +25,206 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C24_9D9C44);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C5C_9D9C7C);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242F74_9D9F94);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FB8_9D9FD8);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 #include "world/common/SwitchToPartner.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243010_9DA030);
+ApiStatus func_80243010_9DA030(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 temp_f20;
+    f32 temp_f22;
+    f32 f3;
 
+    temp_f22 = evt_get_variable(script, *args++);
+    temp_f20 = evt_get_variable(script, *args++);
+    f3 = evt_get_variable(script, *args++);
+
+    fx_explosion(0, temp_f22, temp_f20 + 15.0f, f3);
+    exec_ShakeCam1(0, 0, 20);
+    return ApiStatus_DONE2;
+}
+
+// float regalloc
+#ifdef NON_MATCHING
+ApiStatus func_802430CC_9DA0EC(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc1 = evt_get_variable(script, *args++);
+    Npc* npc2 = evt_get_variable(script, *args++);
+    s32 outVal = FALSE;
+    f32 xDiff, zDiff;
+
+    if (playerStatus->currentSpeed >= 4.0f) {
+        script->varTable[2]++;
+        if (script->varTable[2] > 2) {
+            script->varTable[2] = 2;
+        }
+    } else {
+        script->varTable[2] = 0;
+    }
+
+    xDiff = npc1->pos.x - playerStatus->position.x;
+    zDiff = npc1->pos.z - playerStatus->position.z;
+    if ((SQ(xDiff) + SQ(zDiff) < 6400.0f) && (script->varTable[2] >= 2)) {
+        outVal = TRUE;
+    }
+
+    xDiff = npc1->pos.x - npc2->pos.x;
+    zDiff = npc1->pos.z - npc2->pos.z;
+    if (SQ(xDiff) + SQ(zDiff) < 1600.0f) {
+        outVal = TRUE;
+    }
+
+    script->varTable[0] = outVal;
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802430CC_9DA0EC);
+#endif
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243214_9DA234);
+ApiStatus func_80243214_9DA234(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243294_9DA2B4);
+    if (playerStatus->currentSpeed >= 4.0f) {
+        script->varTable[2]++;
+        if (script->varTable[2] > 2) {
+            script->varTable[2] = 2;
+        }
+    } else {
+        script->varTable[2] = 0;
+    }
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_8024351C_9DA53C);
+    script->varTable[0] = 1;
+    if (script->varTable[2] >= 2) {
+        script->varTable[0] = 0;
+    }
+    if (playerStatus->currentSpeed == 0.0f) {
+        script->varTable[0] = 0;
+    }
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243754_9DA774);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80243294_9DA2B4(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 randRange = 10000;
+    Npc* npc1 = evt_get_variable(script, *args++);
+    Npc* npc2 = evt_get_variable(script, *args++);
+    f32 xDiff, zDiff;
+    f32 x, z;
+    f32 dist;
+    s32 rand;
+
+    while (TRUE) {
+        rand = rand_int(randRange);
+        x = ((rand - (randRange / 2)) / 100) + npc1->pos.x;
+        rand = rand_int(randRange);
+        z = ((rand - (randRange / 2)) / 100) + npc1->pos.z;
+
+        xDiff = x - -150.0f;
+        zDiff = z - 250.0f;
+        if (SQ(xDiff) + SQ(zDiff) < 22500.0f) {
+            xDiff = x - playerStatus->position.x;
+            zDiff = z - playerStatus->position.z;
+            if (SQ(xDiff) + SQ(zDiff) > 6400.0f) {
+                xDiff = x - npc2->pos.x;
+                zDiff = z - npc2->pos.z;
+                if (SQ(xDiff) + SQ(zDiff) > 1600.0f) {
+                    break;
+                }
+            }
+        }
+
+        randRange += 5000;
+        if (randRange > 30000) {
+            randRange = 30000;
+        }
+    }
+    xDiff = x - npc1->pos.x;
+    zDiff = z - npc1->pos.z;
+    dist = SQ(xDiff) + SQ(zDiff);
+    if (dist != 0.0f) {
+        dist = sqrtf(dist) / 10.0f;
+    }
+    script->varTable[10] = x;
+    script->varTable[11] = z;
+    script->varTable[12] = (s32) dist + 1;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_8024351C_9DA53C(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 randRange = 10000;
+    Npc* npc = evt_get_variable(script, *args++);
+    f32 xDiff, zDiff;
+    f32 x, z;
+    f32 dist;
+    s32 rand;
+
+    while (TRUE) {
+        rand = rand_int(randRange);
+        x = ((rand - (randRange / 2)) / 100) + npc->pos.x;
+        rand = rand_int(randRange);
+        z = ((rand - (randRange / 2)) / 100) + npc->pos.z;
+
+        xDiff = x - -150.0f;
+        zDiff = z - 250.0f;
+        if (SQ(xDiff) + SQ(zDiff) < 22500.0f) {
+            xDiff = x - playerStatus->position.x;
+            zDiff = z - playerStatus->position.z;
+            if (SQ(xDiff) + SQ(zDiff) > 6400.0f) {
+                break;
+            }
+        }
+
+        randRange += 5000;
+        if (randRange > 30000) {
+            randRange = 30000;
+        }
+    }
+    xDiff = x - npc->pos.x;
+    zDiff = z - npc->pos.z;
+    dist = SQ(xDiff) + SQ(zDiff);
+    if (dist != 0.0f) {
+        dist = sqrtf(dist) / 10.0f;
+    }
+    script->varTable[10] = x;
+    script->varTable[11] = z;
+    script->varTable[12] = (s32) dist + 1;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80243754_9DA774(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc;
+    f32 yaw;
+
+    if (isInitialCall) {
+        script->functionTempPtr[1] = npc = evt_get_variable(script, *args++);
+        npc->moveToPos.x = (evt_get_variable(script, *args++) + npc->pos.x) * 0.5f;
+        npc->moveToPos.z = (evt_get_variable(script, *args++) + npc->pos.z) * 0.5f;
+        npc->moveToPos.y = dist2D(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);
+        script->functionTemp[2] = atan2(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);
+        npc->duration = 0;
+    }
+
+    npc = script->functionTempPtr[1];
+    npc->pos.x = npc->moveToPos.x;
+    npc->pos.z = npc->moveToPos.z;
+
+    npc->duration += 9;
+    if (npc->duration >= 360) {
+        npc->duration = 360;
+    }
+    yaw = script->functionTemp[2] + npc->duration;
+    npc->yaw = clamp_angle(yaw + 90.0f);
+    npc_move_heading(npc, npc->moveToPos.y, yaw);
+
+    if (npc->duration == 360) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}

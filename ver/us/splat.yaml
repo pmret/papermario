@@ -7,7 +7,8 @@ options:
   mnemonic_ljust: 10
   platform: n64
   subalign: 8
-  auto_all_sections: True
+  auto_all_sections: [".data", ".rodata", ".bss"]
+  asm_data_macro: "dlabel"
 
   base_path: ../..
   target_path: ver/us/baserom.z64
@@ -37,13 +38,15 @@ segments:
     subsegments:
     - [0x0040, asm, boot]
     - [0x0B70, bin, rspboot_font]
-  - type: code
+  - name: main
+    type: code
     start: 0x1000
     vram: 0x80025C00
     subsegments:
     - [0x1000, c, bss]
     - [0x1000, hasm, entry_point]
     - [0x1060, c, is_debug]
+    - [0x1370, c, main_pre]
     - [0x1370, c, main]
     - [0x1B40, c, main_loop]
     - [0x3BF0, c, input]
@@ -79,20 +82,22 @@ segments:
     - [0x20EC0, c, status_icons]
     - [0x23680, c]
     - [0x25AF0, c]
-    - [0x25F00, c, 25f00_len_940]
-    - [0x26840, c, 26840_len_20d0]
-    - [0x28910, c, 28910_len_5090]
-    - [0x2BF90, c]
-    - [0x2D9A0, c, 2d9a0_len_890]
-    - [0x2E230, c, 2e230_len_2190]
-    - [0x303C0, c, 303c0_len_3e10]
-    - [0x30450, c]
-    - [0x31650, c, 31650]
-    - [0x33450, c]
-    - [0x341D0, c, 341d0]
+    - [0x25F00, c, audio/25f00_len_940]
+    - [0x26840, c, audio/sfx_player]
+    - [0x28910, c, audio/28910_len_5090]
+    - [0x2BF90, c, audio/2BF90]
+    - [0x2D9A0, c, audio/2d9a0_len_890]
+    - [0x2E230, c, audio/2e230_len_2190]
+    - [0x303C0, c, audio/303c0_len_3e10]
+    - [0x30450, c, audio/30450]
+    - [0x31650, c, audio/31650]
+    - [0x33450, c, audio/33450]
+    - [0x341D0, c, audio/reverb]
+    - [0x341D0, c, 5B320]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
     - [0x362A0, c, collision]
+    - [0x38F00, c, 38F00]
     - [0x39210, c, 39210_len_aa0]
     - [0x39CB0, c, os/39cb0_len_100]
     - [0x39DB0, c, os/nusys/nuSched]
@@ -132,14 +137,17 @@ segments:
     - [0x3C2C0, c, os/osEPiLinkHandle, gcc_272 -O3]
     - [0x3C310, c, os/osCartRomInit]
     - [0x3C490, c, os/devmgr, gcc_272 -O3]
-    - [0x3C850, c, os/3c850_len_f0]
-    - [0x3C940, c, os/3c940_len_140]
+    - [0x3C850, c, os/piacs, gcc_272 -O3]
+    - [0x3C940, c, os/aigetlength, gcc_272 -O3]
+    - [0x3C950, c, os/aigetstatus, gcc_272 -O3]
+    - [0x3C960, c, os/aisetfrequency, gcc_272 -O3]
     - [0x3CA80, c, os/aisetnextbuf, gcc_272 -O3]
     - [0x3CB20, hasm, os/osInvalDCache]
     - [0x3CBD0, hasm, os/osInvalICache]
     - [0x3CC50, hasm, os/osWritebackDCache]
     - [0x3CCD0, hasm, os/osWritebackDCacheAll]
-    - [0x3CD00, c, os/3cd00_len_5f0] # MOVE_ADDU
+    - [0x3CD00, c, os/contquery, gcc_272 -O3]
+    - [0x3CDA0, c, os/contreaddata, gcc_272 -O3]
     - [0x3CF80, c, os/controller]
     - [0x3D290, c, os/osVirtualToPhysical, gcc_272 -O3]
     - [0x3D2F0, c, os/sqrtf, -ffast-math]
@@ -156,22 +164,22 @@ segments:
     - [0x3FA50, hasm, os/bcopy]
     - [0x3FD70, hasm, os/bzero]
     - [0x3FE10, c, os/string, gcc_272 -O3]
-    - [0x3FEA0, c, os/3FEA0]
-    - [0x408EC, c, os/sprintf] # MOVE_ADDU
+    - [0x3FEA0, c, os/xprintf, gcc_272 -O3]
+    - [0x408EC, c, os/sprintf, gcc_272 -O3]
     - [0x40980, c, os/osCreateMesgQueue]
     - [0x409B0, c, os/osJamMesg, gcc_272 -O3]
     - [0x40AF0, c, os/osRecvMesg, gcc_272 -O3]
     - [0x40C20, c, os/sendmesg, gcc_272 -O3]
     - [0x40D50, c, os/seteventmesg, gcc_272 -O3]
     - [0x40E00, hasm, os/osGetCount]
-    - [0x40E10, c, os/40E10]
+    - [0x40E10, c, os/sptask, gcc_272 -O3]
     - [0x41050, c, os/osSpTaskYield, gcc_272 -O3]
     - [0x41070, c, os/sptaskyielded, gcc_272 -O3]
     - [0x410C0, c, os/sirawdma, gcc_272 -O3]
-    - [0x41170, c, os/41170_len_f0]
+    - [0x41170, c, os/siacs, gcc_272 -O3]
     - [0x41260, c, os/createthread, gcc_272 -O3]
-    - [0x41330, c, os/osGetThreadPri]
-    - [0x41350, c, os/osSetThreadPri] # MOVE_ADDU
+    - [0x41330, c, os/osGetThreadPri, gcc_272 -O3]
+    - [0x41350, c, os/osSetThreadPri, gcc_272 -O3]
     - [0x41420, c, os/startthread, gcc_272 -O3]
     - [0x41540, c, os/stopthread, gcc_272 -O3]
     - [0x41600, c, os/thread, gcc_272 -O3]
@@ -188,7 +196,7 @@ segments:
     - [0x41DB0, c, os/vigetcurrframebuf, gcc_272 -O3]
     - [0x41DF0, c, os/vigetnextframebuf, gcc_272 -O3]
     - [0x41E30, c, os/vigetmode, gcc_272 -O3]
-    - [0x41E70, c, os/41e70_len_340]
+    - [0x41E70, c, os/vimgr]
     - [0x421B0, c, os/visetevent, gcc_272 -O3]
     - [0x42210, c, os/visetmode, gcc_272 -O3]
     - [0x42260, c, os/visetspecial, gcc_272 -O3]
@@ -210,21 +218,23 @@ segments:
     - [0x42DE0, c, os/guMtxXFML, gcc_272 -O3]
     - [0x42E70, c, os/guMtxXFMF, gcc_272 -O3]
     - [0x42F20, c, os/guRotate, gcc_272 -O3]
-    - [0x43200, c, os/43200_len_7c0]
-    - [0x43590, c, os/43590]
-    - [0x439C0, c, os/439c0_len_220]
-    - [0x43BE0, c, os/43be0_len_5e0]
-    - [0x441C0, c, os/441c0_len_1c0]
+    - [0x43200, c, os/motor]
+    - [0x43590, c, os/pfsallocatefile, gcc_272 -O3]
+    - [0x439C0, c, os/pfsdeletefile, gcc_272 -O3]
+    - [0x43BE0, c, os/pfsreadwritefile, gcc_272 -O3]
+    - [0x44020, c, os/pfsfilestate, gcc_272 -O3]
+    - [0x441C0, c, os/pfsfindfile, gcc_272 -O3]
     - [0x44380, c, os/pfsfreeblocks, gcc_272 -O3]
-    - [0x44490, c, os/44490]
-    - [0x44860, c, os/44860_len_60]
-    - [0x448C0, c, os/448c0_len_210]
-    - [0x44AD0, c, os/44ad0_len_70]
-    - [0x44B40, c, os/44b40_len_a90]
-    - [0x455D0, c, os/455d0_len_1f0]
-    - [0x457C0, c, os/457c0_len_270]
+    - [0x44490, c, os/pfsinitpak, gcc_272 -O3]
+    - [0x44860, c, os/pfsrepairid, gcc_272 -O3]
+    - [0x448C0, c, os/pfsgetstatus, gcc_272 -O3]
+    - [0x44AD0, c, os/pfsselectbank, gcc_272 -O3]
+    - [0x44B40, c, os/contpfs, gcc_272 -O3]
+    - [0x455D0, c, os/contramread, gcc_272 -O3]
+    - [0x457C0, c, os/contramwrite, gcc_272 -O3]
+    - [0x459D0, hasm, os/parameters] # Needs actual symbols added
     - [0x45A30, c, os/afterprenmi, gcc_272 -O3]
-    - [0x45A50, c, os/45a50_len_3a0]
+    - [0x45A50, c, os/initialize]
     - [0x45DF0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
@@ -235,7 +245,9 @@ segments:
     - [0x46970, c, os/epirawread, gcc_272 -O3]
     - [0x46AE0, c, os/epirawwrite, gcc_272 -O3]
     - [0x46C50, c, os/ai, gcc_272 -O3]
-    - [0x46C70, c, os/46c70_len_e00]
+    - [0x46C70, hasm, os/bcmp]
+    - [0x46D80, c, os/xlitob]
+    - [0x46FD0, c, os/xldtob]
     - [0x47A60, hasm, os/__osGetCause]
     - [0x47A70, hasm, os/__osGetSR]
     - [0x47A80, hasm, os/__osSetCompare]
@@ -249,27 +261,30 @@ segments:
     - [0x47B30, c, os/sprawdma, gcc_272 -O3]
     - [0x47BC0, c, os/sirawread, gcc_272 -O3]
     - [0x47C10, c, os/sirawwrite, gcc_272 -O3]
-    - [0x47C60, c, os/47c60_len_f0] # MOVE_ADDU
+    - [0x47C60, c, os/crc, gcc_272 -O3]
     - [0x47D50, c, os/destroythread, gcc_272 -O3]
     - [0x47E30, hasm, os/osMapTLBRdb]
-    - [0x47E90, c, os/47e90_len_110]
-    - [0x47FA0, c, os/47fa0_len_20]
+    - [0x47E90, c, os/vi]
+    - [0x47FA0, c, os/vigetcurrcontext]
     - [0x47FC0, hasm, os/guNormalize]
-    - [0x48020, c, os/48020_len_a00]
+    - [0x48020, c, os/pfschecker, gcc_272 -O3]
+    - [0x48740, c, os/pfsisplug, gcc_272 -O3]
     - [0x48A20, c, os/ldiv]
     - [0x48BE0, c, os/osSiDeviceBusy]
-    - [0x48C00, c, os/48c00_len_5c0]
-    - [0x491C0, c, os/491c0_len_f80]
-    - [0x49C70, c, os/49C70]
-    - [0x4A140, c, os/4a140_len_70]
-    - [0x4A1B0, c, os/4a1b0_len_40]
+    - [0x48C00, c, os/divdi3]
+    - [0x491C0, c, os/moddi3]
+    - [0x491C0, c, os/udivdi3]
+    - [0x49C70, c, os/umoddi3]
+    - [0x4A140, c, os/strcpy, gcc_272 -O1]
+    - [0x4A170, c, os/strcmp, gcc_272 -O1]
+    - [0x4A1B0, c, os/memset, gcc_272 -O1]
     - [0x4A1F0, hasm, os/decode_yay0]
     - [0x4A2A0, c, os/osFlash]
     - [0x4AC90, pm_effect_loads, effect_loads]
     - [0x4DF30, c, battle/battle]
     - [0x4E5A0, bin, n_aspMain_text]
-    - [0x4F200, data]
-    - [0x4F410, .data, main]
+    - [0x4F200, .data, main_pre]
+    - [0x4F420, .data, main]
     - [0x4F420, .data, main_loop]
     - [0x4F660, .data, rumble]
     - [0x4F670, .data, 43F0]
@@ -278,7 +293,6 @@ segments:
       type: .data
       name: curtains
       subsegments:
-      - [0x4F9E0, .data, curtains]
       - [0x4F9E0, i4, sprite/unk_checkers, 16, 32]
       - [0x4FAE0]
       - [0x4FB30, rgba32, sprite/curtains, 32, 32]
@@ -302,35 +316,40 @@ segments:
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
+    - [0x52CC0, .data, state_logos]
     - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
     - [0x52EE0, .data, state_demo]
     - [0x52FF0, data]
-    - [0x53570, .data, 25f00_len_940]
-    - [0x53590, data, 26840_len_20d0]
-    - [0x541B0, .data, 30450]
-    - [0x54250, .data, 31650]
-    - [0x542E0, data]
-    - [0x5A3E0, .data, 341d0]
+    - [0x53570, .data, audio/25f00_len_940]
+    - [0x53590, .data, audio/sfx_player]
+    - [0x541B0, .data, audio/30450]
+    - [0x54250, .data, audio/31650]
+    - [0x54260, .data, audio/33450]
+    - [0x54360, data]
+    - [0x5A3E0, .data, audio/reverb]
     - [0x5A610, .data, effects]
-    - [0x5B320, data]
+    - [0x5B320, .data, 5B320]
     - [0x6B360, .data, world/world]
-    - [0x6EAC0, data] # has scripts
+    - [0x6EAC0, .data, 38F00]
+    - [0x6EF80, .data, os/nusys/nuSched]
+    - [0x6EFA0, .data, os/nusys/nuGfxInit]
+    - [0x6F0A0, .data, os/nusys/nuContPakMgr]
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
     - [0x6F120, .data, os/nusys/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
-    - [0x6F190, .data, os/3c850_len_f0]
+    - [0x6F190, .data, os/piacs]
     - [0x6F1A0, .data, os/aisetnextbuf]
     - [0x6F1B0, .data, os/controller]
     - [0x6F1C0, .data, os/position]
     - [0x6F1D0, .data, os/rotateRPY]
     - [0x6F1E0, .data, os/sins]
-    - [0x6F9E0, .data, os/3FEA0]
+    - [0x6F9E0, .data, os/xprintf]
     - [0x6FA30, .data, os/seteventmesg]
-    - [0x6FA40, .data, os/41170_len_f0]
+    - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/osSetThreadPri]
     - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
@@ -358,332 +377,408 @@ segments:
     - [0x8E790, c, 8e790_len_2850]
     - [0x90FE0, .data, npc_collision]
     - [0x913B0, .data, world/actions]
-    - [0x914E0, .data, world/partners] # TODO shiftability: include following images in c file to fix padding issues
-    - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
-    - [0x91D70, palette, ui/a_button_unpressed]
-    - [0x91D90, ci4,     ui/a_button_pressed, 48, 40]
-    - [0x92150, palette, ui/a_button_pressed]
-    - [0x92170, ci4,     ui/analog_stick, 32, 32]
-    - [0x92370, palette, ui/analog_stick]
-    - [0x92390, ci4,     ui/analog_stick_left, 40, 32]
-    - [0x92610, palette, ui/analog_stick_left]
-    - [0x92630, ci4,     ui/analog_stick2, 32, 32]
-    - [0x92830, palette, ui/analog_stick2]
-    - [0x92850, ci4,     ui/analog_stick_right, 40, 32]
-    - [0x92AD0, palette, ui/analog_stick_right]
-    - [0x92AF0, ci4,     ui/analog_stick3, 32, 32]
-    - [0x92CF0, palette, ui/analog_stick3]
-    - [0x92D10, ci4,     ui/analog_stick_down, 32, 32]
-    - [0x92F10, palette, ui/analog_stick_down]
-    - [0x92F30, ci4,     ui/analog_stick_up, 32, 32]
-    - [0x93130, palette, ui/analog_stick_up]
-    - [0x93150, ci4,     ui/unk_bar, 72, 16]
-    - [0x93390, palette, ui/unk_bar]
-    - [0x933B0, ci4,     ui/ok, 24, 16]
-    - [0x93470, palette, ui/ok]
-    - [0x93490, ci4,     ui/start_button, 48, 40]
-    - [0x93850, palette, ui/start_button]
-    - [0x93870, ci4,     ui/start_button2, 48, 40]
-    - [0x93C30, palette, ui/start_button2]
-    - [0x93C50, ci4,     ui/start, 24, 8]
-    - [0x93CB0, palette, ui/start]
-    - [0x93CD0, ci4,     ui/hammer, 32, 32]
-    - [0x93ED0, palette, ui/hammer]
-    - [0x93EF0, palette, ui/hammer.disabled]
-    - [0x93F10, ci4,     ui/super_hammer, 32, 32]
-    - [0x94110, palette, ui/super_hammer]
-    - [0x94130, palette, ui/super_hammer.disabled]
-    - [0x94150, ci4,     ui/ultra_hammer, 32, 32]
-    - [0x94350, palette, ui/ultra_hammer]
-    - [0x94370, palette, ui/ultra_hammer.disabled]
-    - [0x94390, ci4,     ui/boots, 32, 32]
-    - [0x94590, palette, ui/boots]
-    - [0x945B0, palette, ui/boots.disabled]
-    - [0x945D0, ci4,     ui/super_boots, 32, 32]
-    - [0x947D0, palette, ui/super_boots]
-    - [0x947F0, palette, ui/super_boots.disabled]
-    - [0x94810, ci4,     ui/ultra_boots, 32, 32]
-    - [0x94A10, palette, ui/ultra_boots]
-    - [0x94A30, palette, ui/ultra_boots.disabled]
-    - [0x94A50, ci4,     ui/item, 32, 32]
-    - [0x94C50, palette, ui/item]
-    - [0x94C70, palette, ui/item.disabled]
-    - [0x94C90, ci4,     ui/star_spirit, 32, 32]
-    - [0x94E90, palette, ui/star_spirit]
-    - [0x94EB0, palette, ui/star_spirit.disabled]
-    - [0x94ED0, ci4,     ui/arrow_left, 16, 16]
-    - [0x94F50, palette, ui/arrow_left]
-    - [0x94F70, ci4,     ui/arrow_right, 16, 16]
-    - [0x94FF0, palette, ui/arrow_right]
-    - [0x95010, ci4,     ui/point_right, 16, 16]
-    - [0x95090, palette, ui/point_right]
-    - [0x950B0, ci4,     ui/pip, 8, 8]
-    - [0x950D0, palette, ui/pip]
-    - [0x950F0, ci4,     ui/pip2, 8, 8]
-    - [0x95110, palette, ui/pip2]
-    - [0x95130, data]
-    - [0x95990, ci4,     ui/kaime, 56, 24]
-    - [0x95C30, palette, ui/kaime]
-    - [0x95C50, ci4,     ui/unused_1, 16, 16]
-    - [0x95CD0, palette, ui/unused_1]
-    - [0x95CF0, ci4,     ui/unused_2, 16, 16]
-    - [0x95D70, palette, ui/unused_2]
-    - [0x95D90, ci4,     ui/unused_3, 16, 16]
-    - [0x95E10, palette, ui/unused_3]
-    - [0x95E30, data]
-    - [0x963B0, ci4,     ui/eldstar, 32, 32]
-    - [0x965B0, palette, ui/eldstar]
-    - [0x965D0, palette, ui/eldstar.disabled]
-    - [0x965F0, ci4,     ui/mamar, 32, 32]
-    - [0x967F0, palette, ui/mamar]
-    - [0x96810, palette, ui/mamar.disabled]
-    - [0x96830, ci4,     ui/skolar, 32, 32]
-    - [0x96A30, palette, ui/skolar]
-    - [0x96A50, palette, ui/skolar.disabled]
-    - [0x96A70, ci4,     ui/muskular, 32, 32]
-    - [0x96C70, palette, ui/muskular]
-    - [0x96C90, palette, ui/muskular.disabled]
-    - [0x96CB0, ci4,     ui/misstar, 32, 32]
-    - [0x96EB0, palette, ui/misstar]
-    - [0x96ED0, palette, ui/misstar.disabled]
-    - [0x96EF0, ci4,     ui/klevar, 32, 32]
-    - [0x970F0, palette, ui/klevar]
-    - [0x97110, palette, ui/klevar.disabled]
-    - [0x97130, ci4,     ui/kalmar, 32, 32]
-    - [0x97330, palette, ui/kalmar]
-    - [0x97350, palette, ui/kalmar.disabled]
-    - [0x97370, ci4,     ui/all_spirits, 32, 32]
-    - [0x97570, palette, ui/all_spirits]
-    - [0x97590, palette, ui/all_spirits.disabled]
-    - [0x975B0, ci4,     ui/peach_beam, 32, 32]
-    - [0x977B0, palette, ui/peach_beam]
-    - [0x977D0, palette, ui/peach_beam.disabled]
-    - [0x977F0, ci4,     ui/mario_head, 16, 16]
-    - [0x97870, palette, ui/mario_head]
-    - [0x97890, ci4,     ui/partner0, 32, 32]
-    - [0x97A90, palette, ui/partner0]
-    - [0x97AB0, palette, ui/partner0.disabled]
-    - [0x97AD0, ci4,     ui/goombario, 32, 32]
-    - [0x97CD0, palette, ui/goombario]
-    - [0x97CF0, palette, ui/goombario.disabled]
-    - [0x97D10, ci4,     ui/kooper, 32, 32]
-    - [0x97F10, palette, ui/kooper]
-    - [0x97F30, palette, ui/kooper.disabled]
-    - [0x97F50, ci4,     ui/bombette, 32, 32]
-    - [0x98150, palette, ui/bombette]
-    - [0x98170, palette, ui/bombette.disabled]
-    - [0x98190, ci4,     ui/parakarry, 32, 32]
-    - [0x98390, palette, ui/parakarry]
-    - [0x983B0, palette, ui/parakarry.disabled]
-    - [0x983D0, ci4,     ui/bow, 32, 32]
-    - [0x985D0, palette, ui/bow]
-    - [0x985F0, palette, ui/bow.disabled]
-    - [0x98610, ci4,     ui/watt, 32, 32]
-    - [0x98810, palette, ui/watt]
-    - [0x98830, palette, ui/watt.disabled]
-    - [0x98850, ci4,     ui/sushie, 32, 32]
-    - [0x98A50, palette, ui/sushie]
-    - [0x98A70, palette, ui/sushie.disabled]
-    - [0x98A90, ci4,     ui/lakilester, 32, 32]
-    - [0x98C90, palette, ui/lakilester]
-    - [0x98CB0, palette, ui/lakilester.disabled]
-    - [0x98CD0, ci4,     ui/partner9, 32, 32]
-    - [0x98ED0, palette, ui/partner9]
-    - [0x98EF0, palette, ui/partner9.disabled]
-    - [0x98F10, ci4,     ui/partner10, 32, 32]
-    - [0x99110, palette, ui/partner10]
-    - [0x99130, palette, ui/partner10.disabled]
-    - [0x99150, ci4,     ui/partner11, 32, 32]
-    - [0x99350, palette, ui/partner11]
-    - [0x99370, palette, ui/partner11.disabled]
-    - [0x99390, data]
-    - [0x99430, ci4,     ui/0, 16, 16]
-    - [0x994B0, palette, ui/0]
-    - [0x994D0, ci4,     ui/1, 16, 16]
-    - [0x99550, palette, ui/1]
-    - [0x99570, ci4,     ui/2, 16, 16]
-    - [0x995F0, palette, ui/2]
-    - [0x99610, ci4,     ui/3, 16, 16]
-    - [0x99690, palette, ui/3]
-    - [0x996B0, ci4,     ui/4, 16, 16]
-    - [0x99730, palette, ui/4]
-    - [0x99750, ci4,     ui/5, 16, 16]
-    - [0x997D0, palette, ui/5]
-    - [0x997F0, ci4,     ui/6, 16, 16]
-    - [0x99870, palette, ui/6]
-    - [0x99890, ci4,     ui/7, 16, 16]
-    - [0x99910, palette, ui/7]
-    - [0x99930, ci4,     ui/8, 16, 16]
-    - [0x999B0, palette, ui/8]
-    - [0x999D0, ci4,     ui/9, 16, 16]
-    - [0x99A50, palette, ui/9]
-    - [0x99A70, ci4,     ui/hp, 16, 16]
-    - [0x99AF0, palette, ui/hp]
-    - [0x99B10, ci4,     ui/fp, 16, 16]
-    - [0x99B90, palette, ui/fp]
-    - [0x99BB0, data]
-    - [0x99FB0, ci4,     ui/coins0, 16, 16]
-    - [0x9A030, palette, ui/coins0]
-    - [0x9A050, ci4,     ui/coins1, 16, 16]
-    - [0x9A0D0, palette, ui/coins1]
-    - [0x9A0F0, ci4,     ui/coins2, 16, 16]
-    - [0x9A170, palette, ui/coins2]
-    - [0x9A190, ci4,     ui/coins3, 16, 16]
-    - [0x9A210, palette, ui/coins3]
-    - [0x9A230, ci4,     ui/coins4, 16, 16]
-    - [0x9A2B0, palette, ui/coins4]
-    - [0x9A2D0, ci4,     ui/coins5, 16, 16]
-    - [0x9A350, palette, ui/coins5]
-    - [0x9A370, ci4,     ui/coins6, 16, 16]
-    - [0x9A3F0, palette, ui/coins6]
-    - [0x9A410, ci4,     ui/coins7, 16, 16]
-    - [0x9A490, palette, ui/coins7]
-    - [0x9A4B0, ci4,     ui/coins8, 16, 16]
-    - [0x9A530, palette, ui/coins8]
-    - [0x9A550, ci4,     ui/coins9, 16, 16]
-    - [0x9A5D0, palette, ui/coins9]
-    - [0x9A5F0, ci4,     ui/star_points0, 16, 16]
-    - [0x9A670, palette, ui/star_points0]
-    - [0x9A690, ci4,     ui/star_points1, 16, 16]
-    - [0x9A710, palette, ui/star_points1]
-    - [0x9A730, ci4,     ui/star_points2, 16, 16]
-    - [0x9A7B0, palette, ui/star_points2]
-    - [0x9A7D0, ci4,     ui/star_points3, 16, 16]
-    - [0x9A850, palette, ui/star_points3]
-    - [0x9A870, ci4,     ui/star_points4, 16, 16]
-    - [0x9A8F0, palette, ui/star_points4]
-    - [0x9A910, ci4,     ui/star_points5, 16, 16]
-    - [0x9A990, palette, ui/star_points5]
-    - [0x9A9B0, ci4,     ui/star_points6, 16, 16]
-    - [0x9AA30, palette, ui/star_points6]
-    - [0x9AA50, ci4,     ui/star_points7, 16, 16]
-    - [0x9AAD0, palette, ui/star_points7]
-    - [0x9AAF0, ci4,     ui/bluepip, 16, 16]
-    - [0x9AB70, palette, ui/bluepip]
-    - [0x9AB90, ci4,     ui/bluepip2, 16, 16]
-    - [0x9AC10, palette, ui/bluepip2]
-    - [0x9AC30, ci4,     ui/charge_jump, 24, 24]
-    - [0x9AD50, palette, ui/charge_jump]
-    - [0x9AD70, ci4,     ui/charge_hammer, 24, 24]
-    - [0x9AE90, palette, ui/charge_hammer]
-    - [0x9AEB0, ci4,     ui/charge_goombario, 24, 24]
-    - [0x9AFD0, palette, ui/charge_goombario]
-    - [0x9AFF0, ci4,     ui/exclamation, 24, 24]
-    - [0x9B110, palette, ui/exclamation]
-    - [0x9B130, ci4,     ui/sleeping, 16, 16]
-    - [0x9B1B0, palette, ui/sleeping]
-    - [0x9B1D0, ci4,     ui/sleeping2, 16, 16]
-    - [0x9B250, palette, ui/sleeping2]
-    - [0x9B270, ci4,     ui/sleeping3, 16, 16]
-    - [0x9B2F0, palette, ui/sleeping3]
-    - [0x9B310, ci4,     ui/shocked, 16, 16]
-    - [0x9B390, palette, ui/shocked]
-    - [0x9B3B0, ci4,     ui/shocked2, 16, 16]
-    - [0x9B430, palette, ui/shocked2]
-    - [0x9B450, ci4,     ui/shocked3, 16, 16]
-    - [0x9B4D0, palette, ui/shocked3]
-    - [0x9B4F0, ci4,     ui/shocked4, 16, 16]
-    - [0x9B570, palette, ui/shocked4]
-    - [0x9B590, ci4,     ui/dizzy, 16, 16]
-    - [0x9B610, palette, ui/dizzy]
-    - [0x9B630, ci4,     ui/dizzy2, 16, 16]
-    - [0x9B6B0, palette, ui/dizzy2]
-    - [0x9B6D0, ci4,     ui/dizzy3, 16, 16]
-    - [0x9B750, palette, ui/dizzy3]
-    - [0x9B770, ci4,     ui/dizzy4, 16, 16]
-    - [0x9B7F0, palette, ui/dizzy4]
-    - [0x9B810, ci4,     ui/poisoned, 16, 16]
-    - [0x9B890, palette, ui/poisoned]
-    - [0x9B8B0, ci4,     ui/poisoned2, 16, 16]
-    - [0x9B930, palette, ui/poisoned2]
-    - [0x9B950, ci4,     ui/frozen, 16, 16]
-    - [0x9B9D0, palette, ui/frozen]
-    - [0x9B9F0, ci4,     ui/frozen2, 16, 16]
-    - [0x9BA70, palette, ui/frozen2]
-    - [0x9BA90, ci4,     ui/frozen3, 16, 16]
-    - [0x9BB10, palette, ui/frozen3]
-    - [0x9BB30, ci4,     ui/frozen4, 16, 16]
-    - [0x9BBB0, palette, ui/frozen4]
-    - [0x9BBD0, ci4,     ui/timed, 16, 16]
-    - [0x9BC50, palette, ui/timed]
-    - [0x9BC70, ci4,     ui/timed2, 16, 16]
-    - [0x9BCF0, palette, ui/timed2]
-    - [0x9BD10, ci4,     ui/timed3, 16, 16]
-    - [0x9BD90, palette, ui/timed3]
-    - [0x9BDB0, ci4,     ui/timed4, 16, 16]
-    - [0x9BE30, palette, ui/timed4]
-    - [0x9BE50, ci4,     ui/downed, 16, 16]
-    - [0x9BED0, palette, ui/downed]
-    - [0x9BEF0, ci4,     ui/downed2, 16, 16]
-    - [0x9BF70, palette, ui/downed2]
-    - [0x9BF90, ci4,     ui/shrink, 16, 16]
-    - [0x9C010, palette, ui/shrink]
-    - [0x9C030, ci4,     ui/shrink2, 16, 16]
-    - [0x9C0B0, palette, ui/shrink2]
-    - [0x9C0D0, ci4,     ui/shrink3, 16, 16]
-    - [0x9C150, palette, ui/shrink3]
-    - [0x9C170, ci4,     ui/shrink4, 16, 16]
-    - [0x9C1F0, palette, ui/shrink4]
-    - [0x9C210, ci4,     ui/transparent, 16, 16]
-    - [0x9C290, palette, ui/transparent]
-    - [0x9C2B0, ci4,     ui/transparent2, 16, 16]
-    - [0x9C330, palette, ui/transparent2]
-    - [0x9C350, ci4,     ui/transparent3, 16, 16]
-    - [0x9C3D0, palette, ui/transparent3]
-    - [0x9C3F0, ci4,     ui/transparent4, 16, 16]
-    - [0x9C470, palette, ui/transparent4]
-    - [0x9C490, ci4,     ui/transparent5, 16, 16]
-    - [0x9C510, palette, ui/transparent5]
-    - [0x9C530, ci4,     ui/transparent6, 16, 16]
-    - [0x9C5B0, palette, ui/transparent6]
-    - [0x9C5D0, ci4,     ui/peril, 40, 16]
-    - [0x9C710, palette, ui/peril]
-    - [0x9C730, ci4,     ui/danger, 40, 16]
-    - [0x9C870, palette, ui/danger]
-    - [0x9C890, ci4,     ui/refund, 40, 24]
-    - [0x9CA70, palette, ui/refund]
-    - [0x9CA90, ci4,     ui/happy, 40, 16]
-    - [0x9CBD0, palette, ui/happy]
-    - [0x9CBF0, ci4,     ui/hp_drain, 40, 16]
-    - [0x9CD30, palette, ui/hp_drain]
-    - [0x9CD50, ci4,     ui/diamond, 32, 32]
-    - [0x9CF50, palette, ui/diamond]
-    - [0x9CF70, palette, ui/diamond.disabled]
-    - [0x9CF90, ci4,     ui/orb_blue, 32, 32]
-    - [0x9D190, palette, ui/orb_blue]
-    - [0x9D1B0, palette, ui/orb_blue.disabled]
-    - [0x9D1D0, ci4,     ui/orb_green, 32, 32]
-    - [0x9D3D0, palette, ui/orb_green]
-    - [0x9D3F0, palette, ui/orb_green.disabled]
-    - [0x9D410, ci4,     ui/orb_red, 32, 32]
-    - [0x9D610, palette, ui/orb_red]
-    - [0x9D630, palette, ui/orb_red.disabled]
-    - start: 0x9D650 # TODO: The images before this (just above) should probably be with these in c
+    - [0x914E0, .data, world/partners]
+    - start: 0x919B0
       type: .data
-      name: 9D650
+      name: global_hud_scripts
       subsegments:
-      - [0x9D650, .data, 9D650]
+      - [0x919B0, ci4,     ui/input/a_button_unpressed, 48, 40]
+      - [0x91D70, palette, ui/input/a_button_unpressed]
+      - [0x91D90, ci4,     ui/input/a_button_pressed, 48, 40]
+      - [0x92150, palette, ui/input/a_button_pressed]
+      - [0x92170, ci4,     ui/input/analog_stick, 32, 32]
+      - [0x92370, palette, ui/input/analog_stick]
+      - [0x92390, ci4,     ui/input/analog_stick_left, 40, 32]
+      - [0x92610, palette, ui/input/analog_stick_left]
+      - [0x92630, ci4,     ui/input/analog_stick2, 32, 32]
+      - [0x92830, palette, ui/input/analog_stick2]
+      - [0x92850, ci4,     ui/input/analog_stick_right, 40, 32]
+      - [0x92AD0, palette, ui/input/analog_stick_right]
+      - [0x92AF0, ci4,     ui/input/analog_stick3, 32, 32]
+      - [0x92CF0, palette, ui/input/analog_stick3]
+      - [0x92D10, ci4,     ui/input/analog_stick_down, 32, 32]
+      - [0x92F10, palette, ui/input/analog_stick_down]
+      - [0x92F30, ci4,     ui/input/analog_stick_up, 32, 32]
+      - [0x93130, palette, ui/input/analog_stick_up]
+      - [0x93150, ci4,     ui/unk_bar, 72, 16]
+      - [0x93390, palette, ui/unk_bar]
+      - [0x933B0, ci4,     ui/ok, 24, 16]
+      - [0x93470, palette, ui/ok]
+      - [0x93490, ci4,     ui/input/start_button, 48, 40]
+      - [0x93850, palette, ui/input/start_button]
+      - [0x93870, ci4,     ui/input/start_button2, 48, 40]
+      - [0x93C30, palette, ui/input/start_button2]
+      - [0x93C50, ci4,     ui/input/start_text, 24, 8]
+      - [0x93CB0, palette, ui/input/start_text]
+      - [0x93CD0, ci4,     ui/hammer, 32, 32]
+      - [0x93ED0, palette, ui/hammer]
+      - [0x93EF0, palette, ui/hammer.disabled]
+      - [0x93F10, ci4,     ui/super_hammer, 32, 32]
+      - [0x94110, palette, ui/super_hammer]
+      - [0x94130, palette, ui/super_hammer.disabled]
+      - [0x94150, ci4,     ui/ultra_hammer, 32, 32]
+      - [0x94350, palette, ui/ultra_hammer]
+      - [0x94370, palette, ui/ultra_hammer.disabled]
+      - [0x94390, ci4,     ui/boots, 32, 32]
+      - [0x94590, palette, ui/boots]
+      - [0x945B0, palette, ui/boots.disabled]
+      - [0x945D0, ci4,     ui/super_boots, 32, 32]
+      - [0x947D0, palette, ui/super_boots]
+      - [0x947F0, palette, ui/super_boots.disabled]
+      - [0x94810, ci4,     ui/ultra_boots, 32, 32]
+      - [0x94A10, palette, ui/ultra_boots]
+      - [0x94A30, palette, ui/ultra_boots.disabled]
+      - [0x94A50, ci4,     ui/item, 32, 32]
+      - [0x94C50, palette, ui/item]
+      - [0x94C70, palette, ui/item.disabled]
+      - [0x94C90, ci4,     ui/star_spirit, 32, 32]
+      - [0x94E90, palette, ui/star_spirit]
+      - [0x94EB0, palette, ui/star_spirit.disabled]
+      - [0x94ED0, ci4,     ui/arrow_left, 16, 16]
+      - [0x94F50, palette, ui/arrow_left]
+      - [0x94F70, ci4,     ui/arrow_right, 16, 16]
+      - [0x94FF0, palette, ui/arrow_right]
+      - [0x95010, ci4,     ui/point_right, 16, 16]
+      - [0x95090, palette, ui/point_right]
+      - [0x950B0, ci4,     ui/pip, 8, 8]
+      - [0x950D0, palette, ui/pip]
+      - [0x950F0, ci4,     ui/pip2, 8, 8]
+      - [0x95110, palette, ui/pip2]
+      - [0x95130, ci4,     ui/coin_sparkle_0, 8, 8]
+      - [0x95150, palette, ui/coin_sparkle_0]
+      - [0x95170, ci4,     ui/coin_sparkle_1, 8, 8]
+      - [0x95190, palette, ui/coin_sparkle_1]
+      - [0x951B0, ci4,     ui/coin_sparkle_2, 8, 8]
+      - [0x951D0, palette, ui/coin_sparkle_2]
+      - [0x951F0, ci4,     ui/coin_sparkle_3, 8, 8]
+      - [0x95210, palette, ui/coin_sparkle_3]
+      - [0x95230, ci4,     ui/coin_sparkle_4, 8, 8]
+      - [0x95250, palette, ui/coin_sparkle_4]
+      - [0x95270, ci4,     ui/coin_sparkle_5, 8, 8]
+      - [0x95290, palette, ui/coin_sparkle_5]
+      - [0x952B0, ci4,     ui/coin_sparkle_none, 8, 8]
+      - [0x952D0, palette, ui/coin_sparkle_none]
+      - [0x952F0, ia8,     ui/status/star_point_shine, 24, 24]
+      - [0x95530, ci4,     ui/status/star_piece_0, 16, 16]
+      - [0x955B0, palette, ui/status/star_piece_0]
+      - [0x955D0, ci4,     ui/status/star_piece_1, 16, 16]
+      - [0x95650, palette, ui/status/star_piece_1]
+      - [0x95670, ci4,     ui/status/star_piece_2, 16, 16]
+      - [0x956F0, palette, ui/status/star_piece_2]
+      - [0x95710, ci4,     ui/menu_times, 8, 8]
+      - [0x95730, palette, ui/menu_times]
+      - [0x95750, ci4,     ui/fp_cost, 16, 8]
+      - [0x95790, palette, ui/fp_cost]
+      - [0x957B0, palette, ui/fp_cost.reduced]
+      - [0x957D0, palette, ui/fp_cost.reduced_twice]
+      - [0x957F0, palette, ui/fp_cost.notenough]
+      - [0x95810, ci4,     ui/pow_cost, 16, 8]
+      - [0x95850, palette, ui/pow_cost]
+      - [0x95870, palette, ui/pow_cost.reduced]
+      - [0x95890, palette, ui/pow_cost.reduced_twice]
+      - [0x958B0, palette, ui/pow_cost.notenough]
+      - [0x958D0, ci4,     ui/green_arrow_down, 16, 8]
+      - [0x95910, palette, ui/green_arrow_down]
+      - [0x95930, ci4,     ui/green_arrow_up, 16, 8]
+      - [0x95970, palette, ui/green_arrow_up]
+      - [0x95990, ci4,     ui/kaime, 56, 24]
+      - [0x95C30, palette, ui/kaime]
+      - [0x95C50, ci4,     ui/unused_1, 16, 16]
+      - [0x95CD0, palette, ui/unused_1]
+      - [0x95CF0, ci4,     ui/unused_2, 16, 16]
+      - [0x95D70, palette, ui/unused_2]
+      - [0x95D90, ci4,     ui/unused_3, 16, 16]
+      - [0x95E10, palette, ui/unused_3]
+      - [0x95E30, ci4,     ui/red_bar1, 112, 8]
+      - [0x95FF0, palette, ui/red_bar1]
+      - [0x96010, ci4,     ui/empty_bar, 112, 8]
+      - [0x961D0, palette, ui/empty_bar]
+      - [0x961F0, ci4,     ui/red_bar2, 104, 8]
+      - [0x96390, palette, ui/red_bar2]
+      - [0x963B0, ci4,     ui/eldstar, 32, 32]
+      - [0x965B0, palette, ui/eldstar]
+      - [0x965D0, palette, ui/eldstar.disabled]
+      - [0x965F0, ci4,     ui/mamar, 32, 32]
+      - [0x967F0, palette, ui/mamar]
+      - [0x96810, palette, ui/mamar.disabled]
+      - [0x96830, ci4,     ui/skolar, 32, 32]
+      - [0x96A30, palette, ui/skolar]
+      - [0x96A50, palette, ui/skolar.disabled]
+      - [0x96A70, ci4,     ui/muskular, 32, 32]
+      - [0x96C70, palette, ui/muskular]
+      - [0x96C90, palette, ui/muskular.disabled]
+      - [0x96CB0, ci4,     ui/misstar, 32, 32]
+      - [0x96EB0, palette, ui/misstar]
+      - [0x96ED0, palette, ui/misstar.disabled]
+      - [0x96EF0, ci4,     ui/klevar, 32, 32]
+      - [0x970F0, palette, ui/klevar]
+      - [0x97110, palette, ui/klevar.disabled]
+      - [0x97130, ci4,     ui/kalmar, 32, 32]
+      - [0x97330, palette, ui/kalmar]
+      - [0x97350, palette, ui/kalmar.disabled]
+      - [0x97370, ci4,     ui/star_beam, 32, 32]
+      - [0x97570, palette, ui/star_beam]
+      - [0x97590, palette, ui/star_beam.disabled]
+      - [0x975B0, ci4,     ui/peach_beam, 32, 32]
+      - [0x977B0, palette, ui/peach_beam]
+      - [0x977D0, palette, ui/peach_beam.disabled]
+      - [0x977F0, ci4,     ui/mario_head, 16, 16]
+      - [0x97870, palette, ui/mario_head]
+      - [0x97890, ci4,     ui/partner0, 32, 32]
+      - [0x97A90, palette, ui/partner0]
+      - [0x97AB0, palette, ui/partner0.disabled]
+      - [0x97AD0, ci4,     ui/goombario, 32, 32]
+      - [0x97CD0, palette, ui/goombario]
+      - [0x97CF0, palette, ui/goombario.disabled]
+      - [0x97D10, ci4,     ui/kooper, 32, 32]
+      - [0x97F10, palette, ui/kooper]
+      - [0x97F30, palette, ui/kooper.disabled]
+      - [0x97F50, ci4,     ui/bombette, 32, 32]
+      - [0x98150, palette, ui/bombette]
+      - [0x98170, palette, ui/bombette.disabled]
+      - [0x98190, ci4,     ui/parakarry, 32, 32]
+      - [0x98390, palette, ui/parakarry]
+      - [0x983B0, palette, ui/parakarry.disabled]
+      - [0x983D0, ci4,     ui/bow, 32, 32]
+      - [0x985D0, palette, ui/bow]
+      - [0x985F0, palette, ui/bow.disabled]
+      - [0x98610, ci4,     ui/watt, 32, 32]
+      - [0x98810, palette, ui/watt]
+      - [0x98830, palette, ui/watt.disabled]
+      - [0x98850, ci4,     ui/sushie, 32, 32]
+      - [0x98A50, palette, ui/sushie]
+      - [0x98A70, palette, ui/sushie.disabled]
+      - [0x98A90, ci4,     ui/lakilester, 32, 32]
+      - [0x98C90, palette, ui/lakilester]
+      - [0x98CB0, palette, ui/lakilester.disabled]
+      - [0x98CD0, ci4,     ui/partner9, 32, 32]
+      - [0x98ED0, palette, ui/partner9]
+      - [0x98EF0, palette, ui/partner9.disabled]
+      - [0x98F10, ci4,     ui/partner10, 32, 32]
+      - [0x99110, palette, ui/partner10]
+      - [0x99130, palette, ui/partner10.disabled]
+      - [0x99150, ci4,     ui/partner11, 32, 32]
+      - [0x99350, palette, ui/partner11]
+      - [0x99370, palette, ui/partner11.disabled]
+      - [0x99390, ci4,     ui/status/text_times, 8, 8]
+      - [0x993B0, palette, ui/status/text_times]
+      - [0x993D0, ci4,     ui/status/text_slash, 8, 16]
+      - [0x99410, palette, ui/status/text_slash]
+      - [0x99430, ci4,     ui/status/text_0, 16, 16]
+      - [0x994B0, palette, ui/status/text_0]
+      - [0x994D0, ci4,     ui/status/text_1, 16, 16]
+      - [0x99550, palette, ui/status/text_1]
+      - [0x99570, ci4,     ui/status/text_2, 16, 16]
+      - [0x995F0, palette, ui/status/text_2]
+      - [0x99610, ci4,     ui/status/text_3, 16, 16]
+      - [0x99690, palette, ui/status/text_3]
+      - [0x996B0, ci4,     ui/status/text_4, 16, 16]
+      - [0x99730, palette, ui/status/text_4]
+      - [0x99750, ci4,     ui/status/text_5, 16, 16]
+      - [0x997D0, palette, ui/status/text_5]
+      - [0x997F0, ci4,     ui/status/text_6, 16, 16]
+      - [0x99870, palette, ui/status/text_6]
+      - [0x99890, ci4,     ui/status/text_7, 16, 16]
+      - [0x99910, palette, ui/status/text_7]
+      - [0x99930, ci4,     ui/status/text_8, 16, 16]
+      - [0x999B0, palette, ui/status/text_8]
+      - [0x999D0, ci4,     ui/status/text_9, 16, 16]
+      - [0x99A50, palette, ui/status/text_9]
+      - [0x99A70, ci4,     ui/status/text_hp, 16, 16]
+      - [0x99AF0, palette, ui/status/text_hp]
+      - [0x99B10, ci4,     ui/status/text_fp, 16, 16]
+      - [0x99B90, palette, ui/status/text_fp]
+      - [0x99BB0, ci4,     ui/status/pow_unit_1, 8, 8]
+      - [0x99BD0, palette, ui/status/pow_unit_1]
+      - [0x99BF0, ci4,     ui/status/pow_unit_2, 8, 8]
+      - [0x99C10, palette, ui/status/pow_unit_2]
+      - [0x99C30, ci4,     ui/status/pow_unit_3, 8, 8]
+      - [0x99C50, palette, ui/status/pow_unit_3]
+      - [0x99C70, ci4,     ui/status/pow_unit_4, 8, 8]
+      - [0x99C90, palette, ui/status/pow_unit_4]
+      - [0x99CB0, ci4,     ui/status/pow_unit_5, 8, 8]
+      - [0x99CD0, palette, ui/status/pow_unit_5]
+      - [0x99CF0, ci4,     ui/status/pow_unit_6, 8, 8]
+      - [0x99D10, palette, ui/status/pow_unit_6]
+      - [0x99D30, ci4,     ui/status/pow_unit_7, 8, 8]
+      - [0x99D50, palette, ui/status/pow_unit_7]
+      - [0x99D70, ci4,     ui/status/pow_unit_empty, 8, 8]
+      - [0x99D90, palette, ui/status/pow_unit_empty]
+      - [0x99DB0, ci4,     ui/status/pow_star_1, 8, 8]
+      - [0x99DD0, palette, ui/status/pow_star_1]
+      - [0x99DF0, ci4,     ui/status/pow_star_2, 8, 8]
+      - [0x99E10, palette, ui/status/pow_star_2]
+      - [0x99E30, ci4,     ui/status/pow_star_3, 8, 8]
+      - [0x99E50, palette, ui/status/pow_star_3]
+      - [0x99E70, ci4,     ui/status/pow_star_4, 8, 8]
+      - [0x99E90, palette, ui/status/pow_star_4]
+      - [0x99EB0, ci4,     ui/status/pow_star_5, 8, 8]
+      - [0x99ED0, palette, ui/status/pow_star_5]
+      - [0x99EF0, ci4,     ui/status/pow_star_6, 8, 8]
+      - [0x99F10, palette, ui/status/pow_star_6]
+      - [0x99F30, ci4,     ui/status/pow_star_7, 8, 8]
+      - [0x99F50, palette, ui/status/pow_star_7]
+      - [0x99F70, ci4,     ui/status/pow_star_empty, 8, 8]
+      - [0x99F90, palette, ui/status/pow_star_empty]
+      - [0x99FB0, ci4,     ui/status/coin_0, 16, 16]
+      - [0x9A030, palette, ui/status/coin_0]
+      - [0x9A050, ci4,     ui/status/coin_1, 16, 16]
+      - [0x9A0D0, palette, ui/status/coin_1]
+      - [0x9A0F0, ci4,     ui/status/coin_2, 16, 16]
+      - [0x9A170, palette, ui/status/coin_2]
+      - [0x9A190, ci4,     ui/status/coin_3, 16, 16]
+      - [0x9A210, palette, ui/status/coin_3]
+      - [0x9A230, ci4,     ui/status/coin_4, 16, 16]
+      - [0x9A2B0, palette, ui/status/coin_4]
+      - [0x9A2D0, ci4,     ui/status/coin_5, 16, 16]
+      - [0x9A350, palette, ui/status/coin_5]
+      - [0x9A370, ci4,     ui/status/coin_6, 16, 16]
+      - [0x9A3F0, palette, ui/status/coin_6]
+      - [0x9A410, ci4,     ui/status/coin_7, 16, 16]
+      - [0x9A490, palette, ui/status/coin_7]
+      - [0x9A4B0, ci4,     ui/status/coin_8, 16, 16]
+      - [0x9A530, palette, ui/status/coin_8]
+      - [0x9A550, ci4,     ui/status/coin_9, 16, 16]
+      - [0x9A5D0, palette, ui/status/coin_9]
+      - [0x9A5F0, ci4,     ui/status/star_point_0, 16, 16]
+      - [0x9A670, palette, ui/status/star_point_0]
+      - [0x9A690, ci4,     ui/status/star_point_1, 16, 16]
+      - [0x9A710, palette, ui/status/star_point_1]
+      - [0x9A730, ci4,     ui/status/star_point_2, 16, 16]
+      - [0x9A7B0, palette, ui/status/star_point_2]
+      - [0x9A7D0, ci4,     ui/status/star_point_3, 16, 16]
+      - [0x9A850, palette, ui/status/star_point_3]
+      - [0x9A870, ci4,     ui/status/star_point_4, 16, 16]
+      - [0x9A8F0, palette, ui/status/star_point_4]
+      - [0x9A910, ci4,     ui/status/star_point_5, 16, 16]
+      - [0x9A990, palette, ui/status/star_point_5]
+      - [0x9A9B0, ci4,     ui/status/star_point_6, 16, 16]
+      - [0x9AA30, palette, ui/status/star_point_6]
+      - [0x9AA50, ci4,     ui/status/star_point_7, 16, 16]
+      - [0x9AAD0, palette, ui/status/star_point_7]
+      - [0x9AAF0, ci4,     ui/bluepip, 16, 16]
+      - [0x9AB70, palette, ui/bluepip]
+      - [0x9AB90, ci4,     ui/bluepip2, 16, 16]
+      - [0x9AC10, palette, ui/bluepip2]
+      - [0x9AC30, ci4,     ui/battle/status/charge_jump, 24, 24]
+      - [0x9AD50, palette, ui/battle/status/charge_jump]
+      - [0x9AD70, ci4,     ui/battle/status/charge_hammer, 24, 24]
+      - [0x9AE90, palette, ui/battle/status/charge_hammer]
+      - [0x9AEB0, ci4,     ui/battle/status/charge_goombario, 24, 24]
+      - [0x9AFD0, palette, ui/battle/status/charge_goombario]
+      - [0x9AFF0, ci4,     ui/battle/status/exclamation, 24, 24]
+      - [0x9B110, palette, ui/battle/status/exclamation]
+      - [0x9B130, ci4,     ui/battle/status/sleep_0, 16, 16]
+      - [0x9B1B0, palette, ui/battle/status/sleep_0]
+      - [0x9B1D0, ci4,     ui/battle/status/sleep_1, 16, 16]
+      - [0x9B250, palette, ui/battle/status/sleep_1]
+      - [0x9B270, ci4,     ui/battle/status/sleep_2, 16, 16]
+      - [0x9B2F0, palette, ui/battle/status/sleep_2]
+      - [0x9B310, ci4,     ui/battle/status/static_0, 16, 16]
+      - [0x9B390, palette, ui/battle/status/static_0]
+      - [0x9B3B0, ci4,     ui/battle/status/static_1, 16, 16]
+      - [0x9B430, palette, ui/battle/status/static_1]
+      - [0x9B450, ci4,     ui/battle/status/paralyze_0, 16, 16]
+      - [0x9B4D0, palette, ui/battle/status/paralyze_0]
+      - [0x9B4F0, ci4,     ui/battle/status/paralyze_1, 16, 16]
+      - [0x9B570, palette, ui/battle/status/paralyze_1]
+      - [0x9B590, ci4,     ui/battle/status/dizzy_0, 16, 16]
+      - [0x9B610, palette, ui/battle/status/dizzy_0]
+      - [0x9B630, ci4,     ui/battle/status/dizzy_1, 16, 16]
+      - [0x9B6B0, palette, ui/battle/status/dizzy_1]
+      - [0x9B6D0, ci4,     ui/battle/status/dizzy_2, 16, 16]
+      - [0x9B750, palette, ui/battle/status/dizzy_2]
+      - [0x9B770, ci4,     ui/battle/status/dizzy_3, 16, 16]
+      - [0x9B7F0, palette, ui/battle/status/dizzy_3]
+      - [0x9B810, ci4,     ui/battle/status/poison_0, 16, 16]
+      - [0x9B890, palette, ui/battle/status/poison_0]
+      - [0x9B8B0, ci4,     ui/battle/status/poison_1, 16, 16]
+      - [0x9B930, palette, ui/battle/status/poison_1]
+      - [0x9B950, ci4,     ui/battle/status/frozen_0, 16, 16]
+      - [0x9B9D0, palette, ui/battle/status/frozen_0]
+      - [0x9B9F0, ci4,     ui/battle/status/frozen_1, 16, 16]
+      - [0x9BA70, palette, ui/battle/status/frozen_1]
+      - [0x9BA90, ci4,     ui/battle/status/frozen_2, 16, 16]
+      - [0x9BB10, palette, ui/battle/status/frozen_2]
+      - [0x9BB30, ci4,     ui/battle/status/frozen_3, 16, 16]
+      - [0x9BBB0, palette, ui/battle/status/frozen_3]
+      - [0x9BBD0, ci4,     ui/battle/status/stop_0, 16, 16]
+      - [0x9BC50, palette, ui/battle/status/stop_0]
+      - [0x9BC70, ci4,     ui/battle/status/stop_1, 16, 16]
+      - [0x9BCF0, palette, ui/battle/status/stop_1]
+      - [0x9BD10, ci4,     ui/battle/status/stop_2, 16, 16]
+      - [0x9BD90, palette, ui/battle/status/stop_2]
+      - [0x9BDB0, ci4,     ui/battle/status/stop_3, 16, 16]
+      - [0x9BE30, palette, ui/battle/status/stop_3]
+      - [0x9BE50, ci4,     ui/battle/status/pdown_0, 16, 16]
+      - [0x9BED0, palette, ui/battle/status/pdown_0]
+      - [0x9BEF0, ci4,     ui/battle/status/pdown_1, 16, 16]
+      - [0x9BF70, palette, ui/battle/status/pdown_1]
+      - [0x9BF90, ci4,     ui/battle/status/shrink_0, 16, 16]
+      - [0x9C010, palette, ui/battle/status/shrink_0]
+      - [0x9C030, ci4,     ui/battle/status/shrink_1, 16, 16]
+      - [0x9C0B0, palette, ui/battle/status/shrink_1]
+      - [0x9C0D0, ci4,     ui/battle/status/shrink_2, 16, 16]
+      - [0x9C150, palette, ui/battle/status/shrink_2]
+      - [0x9C170, ci4,     ui/battle/status/shrink_3, 16, 16]
+      - [0x9C1F0, palette, ui/battle/status/shrink_3]
+      - [0x9C210, ci4,     ui/battle/status/transparent_0, 16, 16]
+      - [0x9C290, palette, ui/battle/status/transparent_0]
+      - [0x9C2B0, ci4,     ui/battle/status/transparent_1, 16, 16]
+      - [0x9C330, palette, ui/battle/status/transparent_1]
+      - [0x9C350, ci4,     ui/battle/status/transparent_2, 16, 16]
+      - [0x9C3D0, palette, ui/battle/status/transparent_2]
+      - [0x9C3F0, ci4,     ui/battle/status/transparent_3, 16, 16]
+      - [0x9C470, palette, ui/battle/status/transparent_3]
+      - [0x9C490, ci4,     ui/battle/status/transparent_4, 16, 16]
+      - [0x9C510, palette, ui/battle/status/transparent_4]
+      - [0x9C530, ci4,     ui/battle/status/transparent_5, 16, 16]
+      - [0x9C5B0, palette, ui/battle/status/transparent_5]
+      - [0x9C5D0, ci4,     ui/battle/status/peril, 40, 16]
+      - [0x9C710, palette, ui/battle/status/peril]
+      - [0x9C730, ci4,     ui/battle/status/danger, 40, 16]
+      - [0x9C870, palette, ui/battle/status/danger]
+      - [0x9C890, ci4,     ui/battle/status/refund, 40, 24]
+      - [0x9CA70, palette, ui/battle/status/refund]
+      - [0x9CA90, ci4,     ui/battle/status/happy, 40, 16]
+      - [0x9CBD0, palette, ui/battle/status/happy]
+      - [0x9CBF0, ci4,     ui/battle/status/hp_drain, 40, 16]
+      - [0x9CD30, palette, ui/battle/status/hp_drain]
+      - [0x9CD50, ci4,     ui/move_basic, 32, 32]
+      - [0x9CF50, palette, ui/move_basic]
+      - [0x9CF70, palette, ui/move_basic.disabled]
+      - [0x9CF90, ci4,     ui/move_partner_1, 32, 32]
+      - [0x9D190, palette, ui/move_partner_1]
+      - [0x9D1B0, palette, ui/move_partner_1.disabled]
+      - [0x9D1D0, ci4,     ui/move_partner_2, 32, 32]
+      - [0x9D3D0, palette, ui/move_partner_2]
+      - [0x9D3F0, palette, ui/move_partner_2.disabled]
+      - [0x9D410, ci4,     ui/move_partner_3, 32, 32]
+      - [0x9D610, palette, ui/move_partner_3]
+      - [0x9D630, palette, ui/move_partner_3.disabled]
+      - [0x9D650]
       - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
       - [0x9DA58]
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
-    - [0x9DE60, data]
+      - [0x9DE60]
+    - [0xA2930, data]
     - [0xA2D40, .data, 8a860_len_3f30]
     - start: 0xA2D90
       type: .data
       name: 8e790_len_2850
       subsegments:
-      - [0xA2D90, .data, 8e790_len_2850]
-      - [0xA2E90, ia8, ui/corners9, 16, 64]
-      - [0xA3290, ia8, ui/corners8, 24, 96]
-      - [0xA3B90, ia8, ui/corners6, 16, 40]
-      - [0xA3E10, ia8, ui/corners7, 16, 32]
-      - [0xA4010, ia8, ui/corners3, 16, 96]
-      - [0xA4610, ia8, ui/corners5, 16, 32]
-      - [0xA4810, ia8, ui/corners4, 8, 32]
-      - [0xA4910, i4, ui/background1, 16, 16]
-      - [0xA4990, ia8, ui/corners1, 16, 64]
-      - [0xA4D90, i4, ui/corners2, 16, 64]
-      - [0xA4F90, i4, ui/background2, 16, 1]
+      - [0xA2D90]
+      - [0xA2E90, ia8, ui/box/corners9, 16, 64]
+      - [0xA3290, ia8, ui/box/corners8, 24, 96]
+      - [0xA3B90, ia8, ui/box/corners6, 16, 40]
+      - [0xA3E10, ia8, ui/box/corners7, 16, 32]
+      - [0xA4010, ia8, ui/box/corners3, 16, 96]
+      - [0xA4610, ia8, ui/box/corners5, 16, 32]
+      - [0xA4810, ia8, ui/box/corners4, 8, 32]
+      - [0xA4910, i4, ui/box/bg_tile, 16, 16]
+      - [0xA4990, ia8, ui/box/corners1, 16, 64]
+      - [0xA4D90, i4, ui/box/corners2, 16, 64]
+      - [0xA4F90, i4, ui/box/bg_flat, 16, 1]
       - [0xA4F98]
       - [0xA5078, vtx, vtx/drawbox1]
       - [0xA50B8]
@@ -695,7 +790,7 @@ segments:
     - [0xA5DD0, c, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
-    - [0xB72B0, c, entity]
+    - [0xB72B0, c, entity_model]
     - [0xB9D60, c, msg]
     - [0xC50A0, c, C50A0]
     - [0xCD180, c, cd180_len_38f0]
@@ -705,34 +800,37 @@ segments:
     - [0xDBA20, c, dba20_len_350]
     - [0xDBD70, c, trigger]
     - [0xDC470, c, dc470_len_14c0]
-    - [0xDD930, c, dd930_len_1c0]
+    - [0xDD930, c, audio/ambience]
     - [0xDDAF0, c, windows]
     - [0xDE740, c, de740_len_23f0]
-    - [0xDF950, c, sfx]
-    - [0xE0B30, c, e0b30_len_b80]
+    - [0xDF950, c, audio/sfx]
+    - [0xE0B30, c, audio/e0b30_len_b80]
     - [0xE16B0, .data, a5dd0_len_114e0]
     - [0xE2950, .data, B4580]
-    - [0xE2960, .data, entity]
+    - [0xE2960, .data, entity_model]
     - [0xE2980, .data, msg]
-    - [0xE2CA0, data]
+    - [0xE2CA0, .data, C50A0]
     - start: 0xE2DF0
       type: .data
       name: cd180_len_38f0
       subsegments:
-      - [0xE2DF0, .data, cd180_len_38f0]
-      - [0xE2E00, i4, ui/star_silhouette, 32, 64]
-      - [0xE3200, i4, ui/mario_head_silhouette, 64, 64]
-      - [0xE3A00, i4, ui/quarter_circle_silhouette, 32, 32]
-      - [0xE3C00, i8, ui/flame_thing_silhouette, 64, 64]
-      - [0xE4C00]
-    - [0xE5490, data]
+      - [0xE2DF0]
+      - [0xE2E00, i4, ui/stencil/star, 32, 64]
+      - [0xE3200, i4, ui/stencil/mario, 64, 64]
+      - [0xE3A00, i4, ui/stencil/sharp_circle, 32, 32]
+      - [0xE3C00, i8, ui/stencil/blurry_circle, 64, 64]
+      - [0xE4C00, vtx, vtx/stencil1]
+      - [0xE4CA0]
+      - [0xE4E70, vtx, vtx/stencil2]
+      - [0xE4FF0]
+    - [0xE5490, .data, CEE40]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
-    - [0xE5840, .data, dd930_len_1c0]
+    - [0xE5840, .data, audio/ambience]
     - [0xE5850, .data, windows]
-    - [0xE59D0, .data, sfx]
-    - [0xE5DF0, .data, e0b30_len_b80]
+    - [0xE59D0, .data, audio/sfx]
+    - [0xE5DF0, .data, audio/e0b30_len_b80]
     - [0xE5E40]
   - type: code
     dir: evt
@@ -763,26 +861,46 @@ segments:
     start: 0x102610
     vram: 0x802E0D90
     subsegments:
-    - [0x102610, c, entity/SaveBlock]
+    - [0x102610, c, entity/Shadow]
+    - [0x102660, c, entity/SaveBlock]
     - [0x102C80, c, entity/Switch]
-    - [0x104730, c, 104730]
+    - [0x103CD0, c, entity/ShatteringBlock_common]
+    - [0x104730, c, entity/ShatteringBlock]
     - [0x104940, c, entity/Block]
     - [0x105700, c, entity/ItemBlock]
     - [0x105F90, c, entity/HeartBlock]
     - [0x106EF0, c, entity/SuperBlock]
     - [0x107830, c, entity/SimpleSpring]
+    - [0x107A30, c, entity/HiddenPanel]
     - [0x1086A0, c, entity/Chest]
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
-    - [0x10A9F0, data]
-    #- [0x10A9F0, i4,      shadow/square, 16, 16]
-    #- [0x10AA70, i4,      shadow/circle, 16, 16]
-    - [0x10AAF0, data]
-    #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
-    #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    - [0x10AF70, .data, 104730]
-    - [0x10B610, data]
+    - start: 0x10A9F0
+      type: .data
+      name: entity/Shadow
+      subsegments:
+      - [0x10A9F0, i4, entity/shadow/square, 16, 16]
+      - [0x10AA70, i4, entity/shadow/circle, 16, 16]
+      - [0x10AAF0, vtx, entity/vtx/shadow1]
+      - [0x10AB30, vtx, entity/vtx/shadow2]
+      - [0x10AB70, i4, entity/shadow/square_big, 32, 32]
+      - [0x10AD70, i4, entity/shadow/circle_big, 32, 32]
+      - [0x10AF70]
+    - [0x10B1B0, .data, entity/SaveBlock]
+    - [0x10B2C0, .data, entity/Switch]
+    - [0x10B4C0, .data, entity/ShatteringBlock_common]
+    - [0x10B4F0, .data, entity/ShatteringBlock]
+    - [0x10B610, .data, entity/Block]
+    - [0x10BB90, .data, entity/ItemBlock]
+    - [0x10BF10, .data, entity/HeartBlock]
+    - [0x10C090, .data, entity/SuperBlock]
+    - [0x10C220, .data, entity/SimpleSpring]
+    - [0x10C300, .data, entity/HiddenPanel]
+    - [0x10C3B0, .data, entity/Chest]
+    - [0x10C6E0, .data, entity/WoodenCrate]
+    - [0x10C780, .data, entity/BlueWarpPipe]
+    - [0x10C830, .data, entity/Signpost]
     - [0x10C880]
   - type: code
     start: 0x10CC10
@@ -807,138 +925,162 @@ segments:
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
-  - type: code
+  - name: ui_images
+    type: code
     start: 0x131340
     vram: 0x8023E000
     subsegments:
-    - [0x131340, ci4, ui/unused_badge_points_icon, 24, 24]
-    - [0x131460, palette, ui/unused_badge_points_icon]
-    - [0x131480, palette, ui/unused_badge_points_icon.disabled]
-    - [0x1314A0, ci4, ui/unused_map_icon, 24, 24]
-    - [0x1315C0, palette, ui/unused_map_icon]
-    - [0x1315E0, palette, ui/unused_map_icon.disabled]
-    - [0x131600, ci4, ui/unused_menu_selector, 16, 16]
-    - [0x131680, palette, ui/unused_menu_selector]
-    - [0x1316A0, ci4, ui/unused_up_arrow, 16, 16]
-    - [0x131720, palette, ui/unused_up_arrow]
-    - [0x131740, bin] # todo
-    - [0x131780, ci4, ui/menu_label_stats, 48, 16]
-    - [0x131900, palette, ui/menu_label_stats]
-    - [0x131920, ci4, ui/menu_label_badges, 48, 16]
-    - [0x131AA0, palette, ui/menu_label_badges]
-    - [0x131AC0, ci4, ui/menu_label_items, 48, 16]
-    - [0x131C40, palette, ui/menu_label_items]
-    - [0x131C60, ci4, ui/menu_label_party, 48, 16]
-    - [0x131DE0, palette, ui/menu_label_party]
-    - [0x131E00, ci4, ui/menu_label_spirits, 48, 16]
-    - [0x131F80, palette, ui/menu_label_spirits]
-    - [0x131FA0, ci4, ui/menu_label_map, 48, 16]
-    - [0x132120, palette, ui/menu_label_map]
-    - [0x132140, bin] # todo
-    - [0x132400, ci4, ui/label_file, 32, 16]
-    - [0x132500, palette, ui/label_file]
-    - [0x132520, ci4, ui/label_file2, 32, 16]
-    - [0x132620, palette, ui/label_file2]
-    - [0x132640, ci4, ui/label_mono, 64, 16]
-    - [0x132840, palette, ui/label_mono]
-    - [0x132860, ci4, ui/label_mono2, 64, 16]
-    - [0x132A60, palette, ui/label_mono2]
-    - [0x132A80, ci4, ui/label_stereo, 64, 16]
-    - [0x132C80, palette, ui/label_stereo]
-    - [0x132CA0, ci4, ui/label_stereo2, 64, 16]
-    - [0x132EA0, palette, ui/label_stereo2]
-    - [0x132EC0, ci4, ui/eldstar_small, 16, 16]
-    - [0x132F40, palette, ui/eldstar_small]
-    - [0x132F60, ci4, ui/eldstar_small_silhouette, 16, 16]
-    - [0x132FE0, palette, ui/eldstar_small_silhouette]
-    - [0x133000, ci4, ui/mamar_small, 16, 16]
-    - [0x133080, palette, ui/mamar_small]
-    - [0x1330A0, ci4, ui/mamar_small_silhouette, 16, 16]
-    - [0x133120, palette, ui/mamar_small_silhouette]
-    - [0x133140, ci4, ui/skolar_small, 16, 16]
-    - [0x1331C0, palette, ui/skolar_small]
-    - [0x1331E0, ci4, ui/skolar_small_silhouette, 16, 16]
-    - [0x133260, palette, ui/skolar_small_silhouette]
-    - [0x133280, ci4, ui/muskular_small, 16, 16]
-    - [0x133300, palette, ui/muskular_small]
-    - [0x133320, ci4, ui/muskular_small_silhouette, 16, 16]
-    - [0x1333A0, palette, ui/muskular_small_silhouette]
-    - [0x1333C0, ci4, ui/misstar_small, 16, 16]
-    - [0x133440, palette, ui/misstar_small]
-    - [0x133460, ci4, ui/misstar_small_silhouette, 16, 16]
-    - [0x1334E0, palette, ui/misstar_small_silhouette]
-    - [0x133500, ci4, ui/klevar_small, 16, 16]
-    - [0x133580, palette, ui/klevar_small]
-    - [0x1335A0, ci4, ui/klevar_small_silhouette, 16, 16]
-    - [0x133620, palette, ui/klevar_small_silhouette]
-    - [0x133640, ci4, ui/kalmar_small, 16, 16]
-    - [0x1336C0, palette, ui/kalmar_small]
-    - [0x1336E0, ci4, ui/kalmar_small_silhouette, 16, 16]
-    - [0x133760, palette, ui/kalmar_small_silhouette]
-    - [0x133780, ci4, ui/mario_small, 24, 24]
-    - [0x1338A0, palette, ui/mario_small]
-    - [0x1338C0, ci4, ui/mario_small2, 24, 24]
-    - [0x1339E0, palette, ui/mario_small2]
-    - [0x133A00, ci4, ui/mario_small3, 24, 24]
-    - [0x133B20, palette, ui/mario_small3]
-    - [0x133B40, ci4, ui/ui_ja_super, 40, 16]
-    - [0x133C80, palette, ui/ui_ja_super]
-    - [0x133CA0, ci4, ui/ui_ja_ultra, 40, 16]
-    - [0x133DE0, palette, ui/ui_ja_ultra]
-    - [0x133E00, ci4, ui/z_up_arrow, 16, 16]
-    - [0x133E80, palette, ui/z_up_arrow]
-    - [0x133EA0, ci4, ui/r_down_arrow, 16, 16]
-    - [0x133F20, palette, ui/r_down_arrow]
-    - [0x133F40, ci4, ui/z_up_arrow2, 16, 16]
-    - [0x133FC0, palette, ui/z_up_arrow2]
-    - [0x133FE0, ci4, ui/r_down_arrow2, 16, 16]
-    - [0x134060, palette, ui/r_down_arrow2]
-    - [0x134080, ci4, ui/c_up, 16, 16]
-    - [0x134100, palette, ui/c_up]
-    - [0x134120, ci4, ui/c_down, 16, 16]
-    - [0x1341A0, palette, ui/c_down]
-    - [0x1341C0, ci4, ui/bp_needed, 48, 8]
-    - [0x134280, palette, ui/bp_needed]
-    - [0x1342A0, ci4, ui/mario_large, 32, 32]
-    - [0x1344A0, palette, ui/mario_large]
-    - [0x1344C0, ci4, ui/rectangle, 16, 8]
-    - [0x134500, palette, ui/rectangle]
-    - [0x134520, ci4, ui/badge_icon, 16, 16]
-    - [0x1345A0, palette, ui/badge_icon]
-    - [0x1345C0, ci4, ui/mario_icon, 16, 16]
-    - [0x134640, palette, ui/mario_icon]
-    - [0x134660, ci4, ui/clock_icon, 16, 16]
-    - [0x1346E0, palette, ui/clock_icon]
-    - [0x134700, ci4, ui/star_piece_icon, 16, 16]
-    - [0x134780, palette, ui/star_piece_icon]
-    - [0x1347A0, ci4, ui/star_piece_icon2, 16, 16]
-    - [0x134820, palette, ui/star_piece_icon2]
-    - [0x134840, ci4, ui/star_piece_icon3, 16, 16]
-    - [0x1348C0, palette, ui/star_piece_icon3]
-    - [0x1348E0, ci4, ui/fp_icon, 16, 16]
-    - [0x134960, palette, ui/fp_icon]
-    - [0x134980, bin] # todo
-    - [0x1349C0, ci4, ui/boots_disabled_icon, 16, 16]
-    - [0x134A40, palette, ui/boots_disabled_icon]
-    - [0x134A60, ci4, ui/boots_icon, 16, 16]
-    - [0x134AE0, palette, ui/boots_icon]
-    - [0x134B00, ci4, ui/super_boots_icon, 16, 16]
-    - [0x134B80, palette, ui/super_boots_icon]
-    - [0x134BA0, ci4, ui/ultra_boots_icon, 16, 16]
-    - [0x134C20, palette, ui/ultra_boots_icon]
-    - [0x134C40, ci4, ui/hammer_disabled_icon, 16, 16]
-    - [0x134CC0, palette, ui/hammer_disabled_icon]
-    - [0x134CE0, ci4, ui/hammer_icon, 16, 16]
-    - [0x134D60, palette, ui/hammer_icon]
-    - [0x134D80, ci4, ui/super_hammer_icon, 16, 16]
-    - [0x134E00, palette, ui/super_hammer_icon]
-    - [0x134E20, ci4, ui/ultra_hammer_icon, 16, 16]
-    - [0x134EA0, palette, ui/ultra_hammer_icon]
-    - [0x134EC0, ci4, ui/blue_orb, 16, 16]
-    - [0x134F40, palette, ui/blue_orb]
-    - [0x134F60, ci4, ui/label_bubble, 56, 16]
-    - [0x135120, palette, ui/label_bubble]
-    - [0x135140, data, pause_icon_table]
+    - [0x131340, ci4, ui/pause/unused_badge_points, 24, 24]
+    - [0x131460, palette, ui/pause/unused_badge_points]
+    - [0x131480, palette, ui/pause/unused_badge_points.disabled]
+    - [0x1314A0, ci4, ui/pause/unused_compass, 24, 24]
+    - [0x1315C0, palette, ui/pause/unused_compass]
+    - [0x1315E0, palette, ui/pause/unused_compass.disabled]
+    - [0x131600, ci4, ui/pause/cursor_hand, 16, 16]
+    - [0x131680, palette, ui/pause/cursor_hand]
+    - [0x1316A0, ci4, ui/files/filename_caret, 16, 16]
+    - [0x131720, palette, ui/files/filename_caret]
+    - [0x131740, ci4, ui/files/filename_space, 8, 8]
+    - [0x131760, palette, ui/files/filename_space]
+    - [0x131780, ci4, ui/pause/label_stats, 48, 16]
+    - [0x131900, palette, ui/pause/label_stats]
+    - [0x131920, ci4, ui/pause/label_badges, 48, 16]
+    - [0x131AA0, palette, ui/pause/label_badges]
+    - [0x131AC0, ci4, ui/pause/label_items, 48, 16]
+    - [0x131C40, palette, ui/pause/label_items]
+    - [0x131C60, ci4, ui/pause/label_party, 48, 16]
+    - [0x131DE0, palette, ui/pause/label_party]
+    - [0x131E00, ci4, ui/pause/label_spirits, 48, 16]
+    - [0x131F80, palette, ui/pause/label_spirits]
+    - [0x131FA0, ci4, ui/pause/label_map, 48, 16]
+    - [0x132120, palette, ui/pause/label_map]
+    - [0x132140, ci4, ui/pause/small_digit_0, 8, 8]
+    - [0x132160, palette, ui/pause/small_digit_0]
+    - [0x132180, ci4, ui/pause/small_digit_1, 8, 8]
+    - [0x1321A0, palette, ui/pause/small_digit_1]
+    - [0x1321C0, ci4, ui/pause/small_digit_2, 8, 8]
+    - [0x1321E0, palette, ui/pause/small_digit_2]
+    - [0x132200, ci4, ui/pause/small_digit_3, 8, 8]
+    - [0x132220, palette, ui/pause/small_digit_3]
+    - [0x132240, ci4, ui/pause/small_digit_4, 8, 8]
+    - [0x132260, palette, ui/pause/small_digit_4]
+    - [0x132280, ci4, ui/pause/small_digit_5, 8, 8]
+    - [0x1322A0, palette, ui/pause/small_digit_5]
+    - [0x1322C0, ci4, ui/pause/small_digit_6, 8, 8]
+    - [0x1322E0, palette, ui/pause/small_digit_6]
+    - [0x132300, ci4, ui/pause/small_digit_7, 8, 8]
+    - [0x132320, palette, ui/pause/small_digit_7]
+    - [0x132340, ci4, ui/pause/small_digit_8, 8, 8]
+    - [0x132360, palette, ui/pause/small_digit_8]
+    - [0x132380, ci4, ui/pause/small_digit_9, 8, 8]
+    - [0x1323A0, palette, ui/pause/small_digit_9]
+    - [0x1323C0, ci4, ui/pause/small_text_bp, 8, 8]
+    - [0x1323E0, palette, ui/pause/small_text_bp]
+    - [0x132400, ci4, ui/pause/label_jp_file, 32, 16]
+    - [0x132500, palette, ui/pause/label_jp_file]
+    - [0x132520, ci4, ui/pause/label_jp_file_disabled, 32, 16]
+    - [0x132620, palette, ui/pause/label_jp_file_disabled]
+    - [0x132640, ci4, ui/files/option_mono_on, 64, 16]
+    - [0x132840, palette, ui/files/option_mono_on]
+    - [0x132860, ci4, ui/files/option_mono_off, 64, 16]
+    - [0x132A60, palette, ui/files/option_mono_off]
+    - [0x132A80, ci4, ui/files/option_stereo_on, 64, 16]
+    - [0x132C80, palette, ui/files/option_stereo_on]
+    - [0x132CA0, ci4, ui/files/option_stereo_off, 64, 16]
+    - [0x132EA0, palette, ui/files/option_stereo_off]
+    - [0x132EC0, ci4, ui/files/eldstar, 16, 16]
+    - [0x132F40, palette, ui/files/eldstar]
+    - [0x132F60, ci4, ui/files/eldstar_silhouette, 16, 16]
+    - [0x132FE0, palette, ui/files/eldstar_silhouette]
+    - [0x133000, ci4, ui/files/mamar, 16, 16]
+    - [0x133080, palette, ui/files/mamar]
+    - [0x1330A0, ci4, ui/files/mamar_silhouette, 16, 16]
+    - [0x133120, palette, ui/files/mamar_silhouette]
+    - [0x133140, ci4, ui/files/skolar, 16, 16]
+    - [0x1331C0, palette, ui/files/skolar]
+    - [0x1331E0, ci4, ui/files/skolar_silhouette, 16, 16]
+    - [0x133260, palette, ui/files/skolar_silhouette]
+    - [0x133280, ci4, ui/files/muskular, 16, 16]
+    - [0x133300, palette, ui/files/muskular]
+    - [0x133320, ci4, ui/files/muskular_silhouette, 16, 16]
+    - [0x1333A0, palette, ui/files/muskular_silhouette]
+    - [0x1333C0, ci4, ui/files/misstar, 16, 16]
+    - [0x133440, palette, ui/files/misstar]
+    - [0x133460, ci4, ui/files/misstar_silhouette, 16, 16]
+    - [0x1334E0, palette, ui/files/misstar_silhouette]
+    - [0x133500, ci4, ui/files/klevar, 16, 16]
+    - [0x133580, palette, ui/files/klevar]
+    - [0x1335A0, ci4, ui/files/klevar_silhouette, 16, 16]
+    - [0x133620, palette, ui/files/klevar_silhouette]
+    - [0x133640, ci4, ui/files/kalmar, 16, 16]
+    - [0x1336C0, palette, ui/files/kalmar]
+    - [0x1336E0, ci4, ui/files/kalmar_silhouette, 16, 16]
+    - [0x133760, palette, ui/files/kalmar_silhouette]
+    - [0x133780, ci4, ui/pause/map_walk0, 24, 24]
+    - [0x1338A0, palette, ui/pause/map_walk0]
+    - [0x1338C0, ci4, ui/pause/map_walk1, 24, 24]
+    - [0x1339E0, palette, ui/pause/map_walk1]
+    - [0x133A00, ci4, ui/pause/map_walk2, 24, 24]
+    - [0x133B20, palette, ui/pause/map_walk2]
+    - [0x133B40, ci4, ui/pause/jp_super, 40, 16]
+    - [0x133C80, palette, ui/pause/jp_super]
+    - [0x133CA0, ci4, ui/pause/jp_ultra, 40, 16]
+    - [0x133DE0, palette, ui/pause/jp_ultra]
+    - [0x133E00, ci4, ui/pause/list_prev_page, 16, 16]
+    - [0x133E80, palette, ui/pause/list_prev_page]
+    - [0x133EA0, ci4, ui/pause/list_next_page, 16, 16]
+    - [0x133F20, palette, ui/pause/list_next_page]
+    - [0x133F40, ci4, ui/pause/unused_z_up_arrow, 16, 16]
+    - [0x133FC0, palette, ui/pause/unused_z_up_arrow]
+    - [0x133FE0, ci4, ui/pause/unused_r_down_arrow, 16, 16]
+    - [0x134060, palette, ui/pause/unused_r_down_arrow]
+    - [0x134080, ci4, ui/pause/desc_msg_prev, 16, 16]
+    - [0x134100, palette, ui/pause/desc_msg_prev]
+    - [0x134120, ci4, ui/pause/desc_msg_next, 16, 16]
+    - [0x1341A0, palette, ui/pause/desc_msg_next]
+    - [0x1341C0, ci4, ui/pause/bp_needed, 48, 8]
+    - [0x134280, palette, ui/pause/bp_needed]
+    - [0x1342A0, ci4, ui/pause/mario_large, 32, 32]
+    - [0x1344A0, palette, ui/pause/mario_large]
+    - [0x1344C0, ci4, ui/pause/dash, 16, 8]
+    - [0x134500, palette, ui/pause/dash]
+    - [0x134520, ci4, ui/pause/stat_bp, 16, 16]
+    - [0x1345A0, palette, ui/pause/stat_bp]
+    - [0x1345C0, ci4, ui/pause/stat_mario, 16, 16]
+    - [0x134640, palette, ui/pause/stat_mario]
+    - [0x134660, ci4, ui/pause/stat_time, 16, 16]
+    - [0x1346E0, palette, ui/pause/stat_time]
+    - [0x134700, ci4, ui/pause/stat_star_piece0, 16, 16]
+    - [0x134780, palette, ui/pause/stat_star_piece0]
+    - [0x1347A0, ci4, ui/pause/stat_star_piece1, 16, 16]
+    - [0x134820, palette, ui/pause/stat_star_piece1]
+    - [0x134840, ci4, ui/pause/stat_star_piece2, 16, 16]
+    - [0x1348C0, palette, ui/pause/stat_star_piece2]
+    - [0x1348E0, ci4, ui/pause/stat_fp, 16, 16]
+    - [0x134960, palette, ui/pause/stat_fp]
+    - [0x134980, ci4, ui/pause/stat_times, 8, 8]
+    - [0x1349A0, palette, ui/pause/stat_times]
+    - [0x1349C0, ci4, ui/pause/stat_boots0, 16, 16]
+    - [0x134A40, palette, ui/pause/stat_boots0]
+    - [0x134A60, ci4, ui/pause/stat_boots1, 16, 16]
+    - [0x134AE0, palette, ui/pause/stat_boots1]
+    - [0x134B00, ci4, ui/pause/stat_boots2, 16, 16]
+    - [0x134B80, palette, ui/pause/stat_boots2]
+    - [0x134BA0, ci4, ui/pause/stat_boots3, 16, 16]
+    - [0x134C20, palette, ui/pause/stat_boots3]
+    - [0x134C40, ci4, ui/pause/stat_hammer0, 16, 16]
+    - [0x134CC0, palette, ui/pause/stat_hammer0]
+    - [0x134CE0, ci4, ui/pause/stat_hammer1, 16, 16]
+    - [0x134D60, palette, ui/pause/stat_hammer1]
+    - [0x134D80, ci4, ui/pause/stat_hammer2, 16, 16]
+    - [0x134E00, palette, ui/pause/stat_hammer2]
+    - [0x134E20, ci4, ui/pause/stat_hammer3, 16, 16]
+    - [0x134EA0, palette, ui/pause/stat_hammer3]
+    - [0x134EC0, ci4, ui/pause/partner_rank, 16, 16]
+    - [0x134F40, palette, ui/pause/partner_rank]
+    - [0x134F60, ci4, ui/pause/unused_bubble, 56, 16]
+    - [0x135120, palette, ui/pause/unused_bubble]
+    - [0x135140, .data, menu_hud_scripts]
   - type: code
     dir: pause
     start: 0x135EE0
@@ -973,9 +1115,9 @@ segments:
       - [0x15D5F0, ci4,        spirits_bg, 128, 110]
       - [0x15F170, palette,    spirits_bg]
       - [0x15F370, rgba16,     orbs, 8, 32]
-      - [0x15F570, ia8,        image_15F570, 16, 16]
-      - [0x15F670, ia8,        image_15F670, 16, 16]
-      - [0x15F770, ia4,        arrows, 16, 64]
+      - [0x15F570, ia8,        map_location, 16, 16]
+      - [0x15F670, ia8,        map_path_marker, 16, 16]
+      - [0x15F770, ia4,        map_arrows, 16, 64]
       - [0x15F970, ci4,        banner_hp, 64, 16]
       - [0x15FB70, palette,    banner_hp]
       - [0x15FD70, ci4,        banner_fp, 64, 16]
@@ -997,7 +1139,8 @@ segments:
       - [0x161E70, .data,      pause_gfx]
     - [0x162D30, .data,      pause_styles]
     - [0x1632A0]
-  - type: code
+  - name: filemenu
+    type: code
     start: 0x163400
     vram: 0x80242BA0
     subsegments:
@@ -1008,16 +1151,14 @@ segments:
     - [0x169BE0, c]
     - [0x16A3E0, .data, 163400]
     - [0x16A680, data]
-    - [0x16C7D0, .rodata, 165490]
-    - [0x16C848, .rodata, 167570]
-    - [0x16C8C0, .rodata, 168590]
+    - [0x16C7D0]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
     subsegments:
     - [0x16C8E0, c, 16c8e0]
     - [0x16F740, c, 16F740]
-    - [0x1776B0, c, 1776B0]
+    - [0x1776B0, c, battle_cam]
     - [0x17D6A0, c, 17D6A0]
     - [0x17FEB0, c]
     - [0x181810, c]
@@ -1035,25 +1176,174 @@ segments:
     - [0x1AF120, c]
     - [0x1AF230, c]
     - [0x1AF2D0, .data, 16c8e0]
-    - [0x1AF5C0, .data, 1776B0]
-    - [0x1AF8A0, .data, 190B20]
+    - [0x1AF5C0, .data, battle_cam]
+    - [0x1B2050, .data, 17D6A0]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - start: 0x1B7CE0
+      type: .data
+      name: battle_ui_gfx
+      subsegments:
+      - [0x1B7CE0, ci4, ui/battle/menu/unused, 32, 32]
+      - [0x1B7EE0, palette, ui/battle/menu/unused]
+      - [0x1B7F00, palette, ui/battle/menu/unused.disabled]
+      - [0x1B7F20, ci4, ui/battle/menu/flee, 32, 32]
+      - [0x1B8120, palette, ui/battle/menu/flee]
+      - [0x1B8140, palette, ui/battle/menu/flee.disabled]
+      - [0x1B8160, ci4, ui/battle/menu/defend, 32, 32]
+      - [0x1B8360, palette, ui/battle/menu/defend]
+      - [0x1B8380, palette, ui/battle/menu/defend.disabled]
+      - [0x1B83A0, ci4, ui/battle/menu/strategies, 32, 32]
+      - [0x1B85A0, palette, ui/battle/menu/strategies]
+      - [0x1B85C0, palette, ui/battle/menu/strategies.disabled]
+      - [0x1B85E0, ci4, ui/battle/menu/nothing, 32, 32]
+      - [0x1B87E0, palette, ui/battle/menu/nothing]
+      - [0x1B8800, palette, ui/battle/menu/nothing.disabled]
+      - [0x1B8820, ci4, ui/battle/menu/pouch, 32, 32]
+      - [0x1B8A20, palette, ui/battle/menu/pouch]
+      - [0x1B8A40, palette, ui/battle/menu/pouch.disabled]
+      - [0x1B8A60, ci4, ui/battle/swap_Z, 16, 16]
+      - [0x1B8AE0, palette, ui/battle/swap_Z]
+      - [0x1B8B00, ci4, ui/battle/swap_arrow_left, 8, 16]
+      - [0x1B8B40, palette, ui/battle/swap_arrow_left]
+      - [0x1B8B60, ci4, ui/battle/swap_arrow_right, 8, 16]
+      - [0x1B8BA0, palette, ui/battle/swap_arrow_right]
+      - [0x1B8D40, ci4, ui/battle/menu/spirits, 32, 32]
+      - [0x1B8F40, palette, ui/battle/menu/spirits]
+      - [0x1B8F60, ci4, ui/battle/yellow_arrow, 16, 16]
+      - [0x1B8FE0, palette, ui/battle/yellow_arrow]
+      - [0x1B9120, ci4, ui/battle/hp_bar, 32, 16]
+      - [0x1B9220, palette, ui/battle/hp_bar]
+      - [0x1B9240, ci4, ui/battle/hp_0, 8, 8]
+      - [0x1B9260, palette, ui/battle/hp_0]
+      - [0x1B9280, ci4, ui/battle/hp_1, 8, 8]
+      - [0x1B92A0, palette, ui/battle/hp_1]
+      - [0x1B92C0, ci4, ui/battle/hp_2, 8, 8]
+      - [0x1B92E0, palette, ui/battle/hp_2]
+      - [0x1B9300, ci4, ui/battle/hp_3, 8, 8]
+      - [0x1B9320, palette, ui/battle/hp_3]
+      - [0x1B9340, ci4, ui/battle/hp_4, 8, 8]
+      - [0x1B9360, palette, ui/battle/hp_4]
+      - [0x1B9380, ci4, ui/battle/hp_5, 8, 8]
+      - [0x1B93A0, palette, ui/battle/hp_5]
+      - [0x1B93C0, ci4, ui/battle/hp_6, 8, 8]
+      - [0x1B93E0, palette, ui/battle/hp_6]
+      - [0x1B9400, ci4, ui/battle/hp_7, 8, 8]
+      - [0x1B9420, palette, ui/battle/hp_7]
+      - [0x1B9440, ci4, ui/battle/hp_8, 8, 8]
+      - [0x1B9460, palette, ui/battle/hp_8]
+      - [0x1B9480, ci4, ui/battle/hp_9, 8, 8]
+      - [0x1B94A0, palette, ui/battle/hp_9]
+      - [0x1B94C0, ci4, ui/battle/cont/b_up, 48, 40]
+      - [0x1B9880, palette, ui/battle/cont/b_up]
+      - [0x1B98A0, ci4, ui/battle/cont/b_down, 48, 40]
+      - [0x1B9C60, palette, ui/battle/cont/b_down]
+      - [0x1B9C80, ci4, ui/battle/cont/c_left_up, 40, 34]
+      - [0x1B9F28, palette, ui/battle/cont/c_left_up]
+      - [0x1B9F48, ci4, ui/battle/cont/c_left_down, 40, 34]
+      - [0x1BA1F0, palette, ui/battle/cont/c_left_down]
+      - [0x1BA210, ci4, ui/battle/cont/c_right_up, 40, 34]
+      - [0x1BA4B8, palette, ui/battle/cont/c_right_up]
+      - [0x1BA4D8, ci4, ui/battle/cont/c_right_down, 40, 34]
+      - [0x1BA780, palette, ui/battle/cont/c_right_down]
+      - [0x1BA7A0, ci4, ui/battle/cont/c_up_up, 40, 34]
+      - [0x1BAA48, palette, ui/battle/cont/c_up_up]
+      - [0x1BAA68, ci4, ui/battle/cont/c_up_down, 40, 34]
+      - [0x1BAD10, palette, ui/battle/cont/c_up_down]
+      - [0x1BAD30, ci4, ui/battle/cont/c_down_up, 40, 34]
+      - [0x1BAFD8, palette, ui/battle/cont/c_down_up]
+      - [0x1BAFF8, ci4, ui/battle/cont/c_down_down, 40, 34]
+      - [0x1BB2A0, palette, ui/battle/cont/c_down_down]
+      - [0x1BB2C0, ci4, ui/battle/cmd/timing_1_chance, 72, 24]
+      - [0x1BB620, palette, ui/battle/cmd/timing_1_chance]
+      - [0x1BB640, ci4, ui/battle/cmd/timing_ready, 16, 16]
+      - [0x1BB6C0, palette, ui/battle/cmd/timing_ready]
+      - [0x1BB6E0, ci4, ui/battle/cmd/timing_wait, 16, 16]
+      - [0x1BB760, palette, ui/battle/cmd/timing_wait]
+      - [0x1BB780, ci4, ui/battle/cmd/charge_1, 8, 8]
+      - [0x1BB7A0, palette, ui/battle/cmd/charge_1]
+      - [0x1BB7C0, ci4, ui/battle/cmd/charge_2, 8, 8]
+      - [0x1BB7E0, palette, ui/battle/cmd/charge_2]
+      - [0x1BB800, ci4, ui/battle/cmd/charge_3, 8, 8]
+      - [0x1BB820, palette, ui/battle/cmd/charge_3]
+      - [0x1BB840, ci4, ui/battle/cmd/charge_4, 8, 8]
+      - [0x1BB860, palette, ui/battle/cmd/charge_4]
+      - [0x1BB880, ci4, ui/battle/cmd/timing_3_chances, 96, 24]
+      - [0x1BBD00, palette, ui/battle/cmd/timing_3_chances]
+      - [0x1BBD20, ci4, ui/battle/cmd/gauge_result, 32, 24]
+      - [0x1BBEA0, palette, ui/battle/cmd/gauge_result]
+      - [0x1BBEC0, ci4, ui/battle/cmd/timing_ok, 24, 24]
+      - [0x1BBFE0, palette, ui/battle/cmd/timing_ok]
+      - [0x1BC000, ci4, ui/battle/cmd/timing_miss, 24, 24]
+      - [0x1BC120, palette, ui/battle/cmd/timing_miss]
+      - [0x1BC140, ci4, ui/battle/cmd/flee_0, 16, 24]
+      - [0x1BC200, palette, ui/battle/cmd/flee_0]
+      - [0x1BC220, ci4, ui/battle/cmd/flee_1, 16, 24]
+      - [0x1BC2E0, palette, ui/battle/cmd/flee_1]
+      - [0x1BC300, ci4, ui/battle/cmd/flee_2, 16, 24]
+      - [0x1BC3C0, palette, ui/battle/cmd/flee_2]
+      - [0x1BC3E0, ci4, ui/battle/cmd/100pct, 64, 48]
+      - [0x1BC9E0, palette, ui/battle/cmd/100pct]
+      - [0x1BCA00, ci4, ui/battle/cmd/right_on, 56, 24]
+      - [0x1BCCA0, palette, ui/battle/cmd/right_on]
+      - [0x1BCCC0, ci4, ui/battle/cmd/fill_result, 32, 24]
+      - [0x1BCE40, palette, ui/battle/cmd/fill_result]
+      - [0x1BCE60, ci4, ui/battle/cmd/aim/marker_0, 16, 16]
+      - [0x1BCEE0, palette, ui/battle/cmd/aim/marker_0]
+      - [0x1BCF00, ci4, ui/battle/cmd/aim/marker_1, 16, 16]
+      - [0x1BCF80, palette, ui/battle/cmd/aim/marker_1]
+      - [0x1BCFA0, ci4, ui/battle/cmd/aim/marker_2, 16, 16]
+      - [0x1BD020, palette, ui/battle/cmd/aim/marker_2]
+      - [0x1BD040, ci4, ui/battle/cmd/aim/marker_3, 16, 16]
+      - [0x1BD0C0, palette, ui/battle/cmd/aim/marker_3]
+      - [0x1BD0E0, ci4, ui/battle/cmd/aim/marker_4, 16, 16]
+      - [0x1BD160, palette, ui/battle/cmd/aim/marker_4]
+      - [0x1BD180, ci4, ui/battle/cmd/aim/marker_5, 16, 16]
+      - [0x1BD200, palette, ui/battle/cmd/aim/marker_5]
+      - [0x1BD220, ci4, ui/battle/cmd/aim/marker_6, 16, 16]
+      - [0x1BD2A0, palette, ui/battle/cmd/aim/marker_6]
+      - [0x1BD2C0, ci4, ui/battle/cmd/aim/marker_7, 16, 16]
+      - [0x1BD340, palette, ui/battle/cmd/aim/marker_7]
+      - [0x1BD360, ci4, ui/battle/cmd/aim/shimmer_0, 16, 16]
+      - [0x1BD3E0, palette, ui/battle/cmd/aim/shimmer_0]
+      - [0x1BD400, ci4, ui/battle/cmd/aim/shimmer_1, 16, 16]
+      - [0x1BD480, palette, ui/battle/cmd/aim/shimmer_1]
+      - [0x1BD4A0, ci4, ui/battle/cmd/aim/shimmer_2, 16, 16]
+      - [0x1BD520, palette, ui/battle/cmd/aim/shimmer_2]
+      - [0x1BD540, ci4, ui/battle/cmd/aim/shimmer_3, 16, 16]
+      - [0x1BD5C0, palette, ui/battle/cmd/aim/shimmer_3]
+      - [0x1BD5E0, ci4, ui/battle/cmd/aim/shimmer_4, 16, 16]
+      - [0x1BD660, palette, ui/battle/cmd/aim/shimmer_4]
+      - [0x1BD680, ci4, ui/battle/cmd/aim/shimmer_5, 16, 16]
+      - [0x1BD700, palette, ui/battle/cmd/aim/shimmer_5]
+      - [0x1BD720, ci4, ui/battle/cmd/aim/shimmer_6, 16, 16]
+      - [0x1BD7A0, palette, ui/battle/cmd/aim/shimmer_6]
+      - [0x1BD7C0, ci4, ui/battle/cmd/aim/shimmer_7, 16, 16]
+      - [0x1BD840, palette, ui/battle/cmd/aim/shimmer_7]
+      - [0x1BD860, ci4, ui/battle/cmd/aim/reticle_0, 32, 32]
+      - [0x1BDA60, palette, ui/battle/cmd/aim/reticle_0]
+      - [0x1BDA80, ci4, ui/battle/cmd/aim/reticle_1, 32, 32]
+      - [0x1BDC80, palette, ui/battle/cmd/aim/reticle_1]
+      - [0x1BDCA0, ci4, ui/battle/cmd/aim/target_0, 24, 24]
+      - [0x1BDDC0, palette, ui/battle/cmd/aim/target_0]
+      - [0x1BDDE0, ci4, ui/battle/cmd/aim/target_1, 24, 24]
+      - [0x1BDF00, palette, ui/battle/cmd/aim/target_1]
+      - [0x1BDF20, ci4, ui/battle/unk_star, 32, 32]
+      - [0x1BE120, palette, ui/battle/unk_star]
+      - [0x1BE140]
+      - [0x1BE148, ia8, ui/battle/projector_spot, 32, 32]
+      - [0x1BE548]
+      - [0x1BE550, ia8, ui/battle/projector_beam, 64, 64]
+      - [0x1BF550]
+      - [0x1BF558, ia8, ui/battle/projector_reel, 64, 64]
+      - [0x1C0558]
+      - [0x1C0560, ia8, ui/battle/swap_background, 48, 16]
+      - [0x1C0860]
+    - [0x1C2100, data, 1C2100]
     - [0x1C2EC0, .data, 19FAF0]
     - [0x1C2FC0, .data, 1A5830]
     - [0x1C3000, .data, 1AF120]
     - [0x1CB0B0, .data, 1AF230]
-    - [0x1CB240, .rodata, 16c8e0]
-    - [0x1CB368, .rodata, 16F740]
-    - [0x1CB4E0, .rodata, 1776B0]
-    - [0x1CB670, .rodata, 17D6A0]
-    - [0x1CBC30, .rodata, 182B30]
-    - [0x1CBDD0, .rodata, 18C790]
-    - [0x1CBE70, .rodata, 18F340]
-    - [0x1CBE80, .rodata, 190B20]
-    - [0x1CBF80, .rodata, 196AA0]
-    - [0x1CC0A0, .rodata, actor_api]
-    - [0x1CC160, .rodata, 19FAF0]
-    - [0x1CC270, .rodata, 1A5830]
+    - [0x1CB240]
   - [0x1CC310, ci4,     icon/present, 32, 32]
   - [0x1CC510, palette, icon/present]
   - [0x1CC530, ci4,     icon/cake/finished_cake, 32, 32]
@@ -2219,8 +2509,43 @@ segments:
     subsegments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
-    - [0x326160, .data, 325AD0]
-  - [0x326410, bin] # big_smoke_puff gfx
+    - [0x326160]
+  - name: effect_gfx_big_smoke_puff
+    dir: effects/gfx
+    type: code
+    start: 0x326410
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x326410, c, big_smoke_puff]
+    - start: 0x326410
+      type: .data
+      name: big_smoke_puff
+      subsegments:
+      - [0x326410, ci4,     D_09000000_326410, 32, 32]
+      - [0x326610, palette, D_09000000_326410]
+      - [0x326630, ci4,     D_09000220_326630, 32, 32]
+      - [0x326830, palette, D_09000220_326630]
+      - [0x326850, ci4,     D_09000440_326850, 32, 32]
+      - [0x326A50, palette, D_09000440_326850]
+      - [0x326A70, ci4,     D_09000660_326A70, 32, 32]
+      - [0x326C70, palette, D_09000660_326A70]
+      - [0x326C90, ci4,     D_09000880_326C90, 32, 32]
+      - [0x326E90, palette, D_09000880_326C90]
+      - [0x326EB0, ci4,     D_09000AA0_326EB0, 32, 32]
+      - [0x3270B0, palette, D_09000AA0_326EB0]
+      - [0x3270D0, ci4,     D_09000CC0_3270D0, 32, 32]
+      - [0x3272D0, palette, D_09000CC0_3270D0]
+      - [0x3272F0, vtx, D_09000EE0_3272F0]
+      - [0x327330, gfx, D_09000F20_327330]
+      - [0x327398, gfx, D_09000F88_327398]
+      - [0x3273B0, gfx, D_09000FA0_3273B0]
+      - [0x327470, gfx, D_09001060_327470]
+      - [0x327530, gfx, D_09001120_327530]
+      - [0x3275F0, gfx, D_090011E0_3275F0]
+      - [0x3276B0, gfx, D_090012A0_3276B0]
+      - [0x327770, gfx, D_09001360_327770]
+      - [0x327830, gfx, D_09001420_327830]
   - name: effect_big_smoke_puff
     dir: effects
     type: code
@@ -2254,7 +2579,37 @@ segments:
     subsegments:
     - [0x32C7A0, c, flower_splash]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # flower_splash, flower_trail gfx
+  - name: effect_gfx_flower_splash_trail
+    dir: effects/gfx
+    type: code
+    start: 0x32CEC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32CEC0, c, flower_splash_trail]
+    - start: 0x32CEC0
+      type: .data
+      name: flower_splash_trail
+      subsegments:
+      - [0x32CEC0, ci4, D_09000000_32CEC0, 16, 16]
+      - [0x32CF40, palette, D_09000000_32CEC0]
+      - [0x32CF60, palette, D_09000000_32CEC0.yellow]
+      - [0x32CF80, rgba16, D_090000C0_32CF80, 32, 32]
+      - [0x32D780, vtx, D_090008C0_32D780]
+      - [0x32D8F0, vtx, D_09000A30_32D8F0]
+      - [0x32D900, vtx, D_09000A40_32D900]
+      - [0x32D910, vtx, D_09000A50_32D910]
+      - [0x32D950, vtx, D_09000A90_32D950]
+      - [0x32D970, vtx, D_09000AB0_32D970]
+      - [0x32D9B0, vtx, D_09000AF0_32D9B0]
+      - [0x32DA10, gfx, D_09000B50_32DA10]
+      - [0x32DAD0, gfx, D_09000C10_32DAD0]
+      - [0x32DB90, gfx, D_09000CD0_32DB90]
+      - [0x32DC18, gfx, D_09000D58_32DC18]
+      - [0x32DC50, gfx, D_09000D90_32DC50]
+      - [0x32DCC8, gfx, D_09000E08_32DCC8]
+      - [0x32DCE0, gfx, D_09000E20_32DCE0]
+      - [0x32DCF8, gfx, D_09000E38_32DCF8]
   - name: effect_flower_trail
     dir: effects
     type: code
@@ -2270,7 +2625,24 @@ segments:
     subsegments:
     - [0x32E490, c, cloud_puff]
     - [0x32EC10]
-  - [0x32EC50, bin] # cloud_puff, cloud_trail gfx
+  - name: effect_gfx_cloud_puff_trail
+    dir: effects/gfx
+    type: code
+    start: 0x32EC50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32EC50, c, cloud_puff_trail]
+    - start: 0x32EC50
+      type: .data
+      name: cloud_puff_trail
+      subsegments:
+      - [0x32EC50, ci4, D_09000000_32EC50, 16, 16]
+      - [0x32ECD0, palette, D_09000000_32EC50]
+      - [0x32ECF0, vtx, D_090000A0_32ECF0]
+      - [0x32ED30, gfx, D_090000E0_32ED30]
+      - [0x32EE08, gfx, D_090001B8_32EE08]
+      - [0x32EE28]
   - name: effect_cloud_trail
     dir: effects
     type: code
@@ -2286,7 +2658,22 @@ segments:
     vram: 0xE0018000
     subsegments:
     - [0x32F580, c, footprint]
-  - [0x32FB50, bin] # footprint gfx
+  - name: effect_gfx_footprint
+    dir: effects/gfx
+    type: code
+    start: 0x32FB50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32FB50, c, footprint]
+    - start: 0x32FB50
+      type: .data
+      name: footprint
+      subsegments:
+      - [0x32FB50, i4, D_09000000_32FB50, 32, 32]
+      - [0x32FD50, vtx, D_09000200_32FD50]
+      - [0x32FD90, gfx, D_09000240_32FD90]
+      - [0x32FE28]
   - name: effect_floating_flower
     dir: effects
     type: code
@@ -2295,7 +2682,26 @@ segments:
     subsegments:
     - [0x32FE30, c, floating_flower]
     - [0x330440]
-  - [0x330460, bin] # floating_flower gfx
+  - name: effect_gfx_floating_flower
+    dir: effects/gfx
+    type: code
+    start: 0x330460
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x330460, c, floating_flower]
+    - start: 0x330460
+      type: .data
+      name: floating_flower
+      subsegments:
+      - [0x330460, ci4, D_09000000_330460, 16, 16]
+      - [0x3304E0, palette, D_09000000_330460]
+      - [0x330500, vtx, D_090000A0_330500]
+      - [0x3305D0, vtx, D_09000170_3305D0]
+      - [0x330690, vtx, D_09000230_330690]
+      - [0x330750, gfx, D_090002F0_330750]
+      - [0x3308B0, gfx, D_09000450_3308B0]
+      - [0x330908]
   - name: effect_snowflake
     dir: effects
     type: code
@@ -2304,7 +2710,26 @@ segments:
     subsegments:
     - [0x330910, c, snowflake]
     - [0x330EF0]
-  - [0x330F00, bin] # snowflake gfx
+  - name: effect_gfx_snowflake
+    dir: effects/gfx
+    type: code
+    start: 0x330F00
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x330F00, c, snowflake]
+    - start: 0x330F00
+      type: .data
+      name: snowflake
+      subsegments:
+      - [0x330F00, i4, D_09000000_330F00, 16, 16]
+      - [0x330F80, i4, D_09000080_330F80, 64, 64]
+      - [0x331780, vtx, D_09000880_331780]
+      - [0x3317C0, vtx, D_090008C0_3317C0]
+      - [0x331800, gfx, D_09000900_331800]
+      - [0x3318E8, gfx, D_090009E8_3318E8]
+      - [0x331910, gfx, D_09000A10_331910]
+      - [0x331938]
   - name: effect_star
     dir: effects
     type: code
@@ -2339,7 +2764,7 @@ segments:
     vram: 0xE0024000
     subsegments:
     - [0x339250, c, shape_spell]
-    - [0x339F10, data]
+    - [0x339F10]
   - [0x339F60, bin] # shape_spell gfx
   - name: effect_gather_energy_pink
     dir: effects
@@ -2357,7 +2782,7 @@ segments:
     vram: 0xE0028000
     subsegments:
     - [0x33CDF0, c, drop_leaves]
-    - [0x33D5D0, data]
+    - [0x33D5D0]
   - [0x33D610, bin] # drop_leaves, windy_leaves gfx
   - name: effect_dust
     dir: effects
@@ -2366,7 +2791,7 @@ segments:
     vram: 0xE002A000
     subsegments:
     - [0x33E8C0, c, dust]
-    - [0x33EFE0, data]
+    - [0x33EFE0]
   - [0x33F000, bin] # dust gfx
   - name: effect_shattering_stones
     dir: effects
@@ -2445,8 +2870,63 @@ segments:
     vram: 0xE003C000
     subsegments:
     - [0x34F4C0, c, damage_indicator]
-    - [0x350160, data]
-  - [0x350220, bin] # damage_indicator gfx
+    - [0x350160]
+  - name: effect_gfx_damage_indicator
+    dir: effects/gfx
+    type: code
+    start: 0x350220
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x350220, c, damage_indicator]
+    - start: 0x350220
+      type: .data
+      name: damage_indicator
+      subsegments:
+      - [0x350220, i4, D_09000000_350220, 32, 32]
+      - [0x350420, i4, D_09000200_350420, 32, 32]
+      - [0x350620, i4, D_09000400_350620, 32, 32]
+      - [0x350820, i4, D_09000600_350820, 32, 32]
+      - [0x350A20, i4, D_09000800_350A20, 32, 32]
+      - [0x350C20, i4, D_09000A00_350C20, 32, 32]
+      - [0x350E20, i4, D_09000C00_350E20, 32, 32]
+      - [0x351020, i4, D_09000E00_351020, 32, 32]
+      - [0x351220, i4, D_09001000_351220, 32, 32]
+      - [0x351420, i4, D_09001200_351420, 32, 32]
+      - [0x351620, i4, D_09001400_351620, 32, 32]
+      - [0x351820, i4, D_09001600_351820, 32, 32]
+      - [0x351A20, i4, D_09001800_351A20, 32, 32]
+      - [0x351C20, i4, D_09001A00_351C20, 32, 32]
+      - [0x351E20, vtx, D_09001C00_351E20]
+      - [0x351E30, vtx, D_09001C10_351E30]
+      - [0x351E50, vtx, D_09001C30_351E50]
+      - [0x351E60, vtx, D_09001C40_351E60]
+      - [0x351EA0, vtx, D_09001C80_351EA0]
+      - [0x351EE0, vtx, D_09001CC0_351EE0]
+      - [0x351F20, vtx, D_09001D00_351F20]
+      - [0x351F60, gfx, D_09001D40_351F60]
+      - [0x352000, gfx, D_09001DE0_352000]
+      - [0x352070, gfx, D_09001E50_352070]
+      - [0x3520B0, gfx, D_09001E90_3520B0]
+      - [0x3520F0, gfx, D_09001ED0_3520F0]
+      - [0x352130, gfx, D_09001F10_352130]
+      - [0x352170, gfx, D_09001F50_352170]
+      - [0x3521B0, gfx, D_09001F90_3521B0]
+      - [0x3521F0, gfx, D_09001FD0_3521F0]
+      - [0x352230, gfx, D_09002010_352230]
+      - [0x352270, gfx, D_09002050_352270]
+      - [0x3522B0, gfx, D_09002090_3522B0]
+      - [0x3522F0, gfx, D_090020D0_3522F0]
+      - [0x352330, gfx, D_09002110_352330]
+      - [0x352370, gfx, D_09002150_352370]
+      - [0x352380, gfx, D_09002160_352380]
+      - [0x352390, gfx, D_09002170_352390]
+      - [0x3523A0, gfx, D_09002180_3523A0]
+      - [0x3523B0, gfx, D_09002190_3523B0]
+      - [0x3523C8, gfx, D_090021A8_3523C8]
+      - [0x3523E0, gfx, D_090021C0_3523E0]
+      - [0x352400, gfx, D_090021E0_352400]
+      - [0x352420, gfx, D_09002200_352420]
   - name: effect_purple_ring
     dir: effects
     type: code
@@ -2454,7 +2934,7 @@ segments:
     vram: 0xE003E000
     subsegments:
     - [0x352440, c, purple_ring]
-    - [0x352CB0, data]
+    - [0x352CB0]
   - [0x352CE0, bin] # purple_ring gfx
   - name: effect_flame
     dir: effects
@@ -2515,7 +2995,7 @@ segments:
     vram: 0xE004C000
     subsegments:
     - [0x359F20, c, music_note]
-    - [0x35A580, data]
+    - [0x35A580]
   - [0x35A5E0, bin] # music_note gfx
   - name: effect_smoke_burst
     dir: effects
@@ -2532,7 +3012,7 @@ segments:
     vram: 0xE0050000
     subsegments:
     - [0x35BFD0, c, sweat]
-    - [0x35C530, data]
+    - [0x35C530]
   - [0x35C550, bin] # sweat gfx
   - name: effect_sleep_bubble
     dir: effects
@@ -2541,7 +3021,7 @@ segments:
     vram: 0xE0052000
     subsegments:
     - [0x35CA80, c, sleep_bubble]
-    - [0x35D460, data]
+    - [0x35D460]
   - [0x35D510, bin] # sleep_bubble gfx
   - name: effect_windy_leaves
     dir: effects
@@ -2550,7 +3030,7 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c, windy_leaves]
-    - [0x35E8A0, data]
+    - [0x35E8A0]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -2558,7 +3038,7 @@ segments:
     vram: 0xE0058000
     subsegments:
     - [0x35E920, c, falling_leaves]
-    - [0x35F0A0, data]
+    - [0x35F0A0]
   - [0x35F0E0, bin] # falling_leaves gfx
   - name: effect_stars_spread
     dir: effects
@@ -2567,7 +3047,7 @@ segments:
     vram: 0xE005A000
     subsegments:
     - [0x3602C0, c, stars_spread]
-    - [0x360A10, data]
+    - [0x360A10]
   - [0x360A30, bin] # stars_spread gfx
   - name: effect_steam_burst
     dir: effects
@@ -2594,8 +3074,27 @@ segments:
     vram: 0xE0060000
     subsegments:
     - [0x363160, c, big_snowflakes]
-    - [0x363890, data]
-  - [0x3638C0, bin] # big_snowflakes gfx
+    - [0x363890]
+  - name: effect_gfx_big_snowflakes
+    dir: effects/gfx
+    type: code
+    start: 0x3638C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3638C0, c, big_snowflakes]
+    - start: 0x3638C0
+      type: .data
+      name: big_snowflakes
+      subsegments:
+      - [0x3638C0, i4, D_09000000_3638C0, 16, 16]
+      - [0x363940, i4, D_09000080_363940, 64, 64]
+      - [0x364140, vtx, D_09000880_364140]
+      - [0x364180, vtx, D_090008C0_364180]
+      - [0x3641C0, gfx, D_09000900_3641C0]
+      - [0x3642A8, gfx, D_090009E8_3642A8]
+      - [0x3642D0, gfx, D_09000A10_3642D0]
+      - [0x3642F8]
   - name: effect_debuff
     dir: effects
     type: code
@@ -2603,8 +3102,24 @@ segments:
     vram: 0xE0062000
     subsegments:
     - [0x364300, c, debuff]
-    - [0x364BC0, data]
-  - [0x364C00, bin] # debuff gfx
+    - [0x364BC0]
+  - name: effect_gfx_debuff
+    dir: effects/gfx
+    type: code
+    start: 0x364C00
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x364C00, c, debuff]
+    - start: 0x364C00
+      type: .data
+      name: debuff
+      subsegments:
+      - [0x364C00, i4, D_09000000_364C00, 32, 32]
+      - [0x364E00, vtx, D_09000200_364E00]
+      - [0x364E40, gfx, D_09000240_364E40]
+      - [0x364EE8, gfx, D_090002E8_364EE8]
+      - [0x364F08]
   - name: effect_green_impact
     dir: effects
     type: code
@@ -2657,7 +3172,7 @@ segments:
     vram: 0xE006E000
     subsegments:
     - [0x372790, c, fire_breath]
-    - [0x373390, data]
+    - [0x373390]
   - [0x3733E0, bin] # fire_breath gfx
   - name: effect_shimmer_burst
     dir: effects
@@ -2674,7 +3189,7 @@ segments:
     vram: 0xE0072000
     subsegments:
     - [0x374E50, c, energy_shockwave]
-    - [0x375500, data]
+    - [0x375500]
   - [0x375510, bin] # energy_shockwave gfx
   - name: effect_shimmer_wave
     dir: effects
@@ -2691,17 +3206,17 @@ segments:
     vram: 0xE0076000
     subsegments:
     - [0x377070, c, aura]
-    - [0x377F00, data]
+    - [0x377F00]
   - [0x377F80, bin] # aura gfx
-  - name: effect_effect_3C
+  - name: effect_bulb_glow
     dir: effects
     type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c, effect_3C]
+    - [0x37A3F0, c, bulb_glow]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # effect_3C gfx
+  - [0x37ADD0, bin] # bulb_glow gfx
   - name: effect_effect_3D
     dir: effects
     type: code
@@ -2709,7 +3224,7 @@ segments:
     vram: 0xE007A000
     subsegments:
     - [0x37C540, c, effect_3D]
-    - [0x37D140, data]
+    - [0x37D140]
   - [0x37D180, bin] # effect_3D gfx
   - name: effect_blast
     dir: effects
@@ -2718,7 +3233,7 @@ segments:
     vram: 0xE007C000
     subsegments:
     - [0x37D490, c, blast]
-    - [0x37D9A0, data]
+    - [0x37D9A0]
   - [0x37D9D0, bin] # blast, bombette_breaking gfx
   - name: effect_fire_flower # should be called fire_flower but we already have a segment with that name TODO rename
     dir: effects
@@ -2727,7 +3242,7 @@ segments:
     vram: 0xE007E000
     subsegments:
     - [0x37F720, c, fire_flower]
-    - [0x380350, data]
+    - [0x380350]
   - [0x3803A0, bin] # fire_flower gfx
   - name: effect_recover
     dir: effects
@@ -2736,7 +3251,7 @@ segments:
     vram: 0xE0080000
     subsegments:
     - [0x3812C0, c, recover]
-    - [0x381D80, data]
+    - [0x381D80]
   - [0x381E00, bin] # recover gfx
   - name: effect_disable_x
     dir: effects
@@ -2745,8 +3260,55 @@ segments:
     vram: 0xE0082000
     subsegments:
     - [0x385640, c, disable_x]
-    - [0x386340, data]
-  - [0x3863B0, bin] # disable_x gfx
+    - [0x386340]
+  - name: effect_gfx_disable_x
+    dir: effects/gfx
+    type: code
+    start: 0x3863B0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3863B0, c, disable_x]
+    - start: 0x3863B0
+      type: .data
+      name: disable_x
+      subsegments:
+      - [0x3863B0, i4, D_09000000_3863B0, 32, 32]
+      - [0x3865B0, i4, D_09000200_3865B0, 32, 32]
+      - [0x3867B0, i4, D_09000400_3867B0, 32, 32]
+      - [0x3869B0, i4, D_09000600_3869B0, 32, 32]
+      - [0x386BB0, i4, D_09000800_386BB0, 32, 32]
+      - [0x386DB0, i4, D_09000A00_386DB0, 32, 32]
+      - [0x386FB0, i4, D_09000C00_386FB0, 32, 32]
+      - [0x3871B0, i4, D_09000E00_3871B0, 32, 32]
+      - [0x3873B0, i4, D_09001000_3873B0, 32, 32]
+      - [0x3875B0, i4, D_09001200_3875B0, 32, 32]
+      - [0x3877B0, i4, D_09001400_3877B0, 32, 32]
+      - [0x3879B0, i4, D_09001600_3879B0, 32, 32]
+      - [0x387BB0, rgba16, D_09001800_387BB0, 32, 32]
+      - [0x3883B0, vtx, D_09002000_3883B0]
+      - [0x3883F0, vtx, D_09002040_3883F0]
+      - [0x388430, vtx, D_09002080_388430]
+      - [0x388470, vtx, D_090020C0_388470]
+      - [0x3884B0, gfx, D_09002100_3884B0]
+      - [0x388548, gfx, D_09002198_388548]
+      - [0x3885E0, gfx, D_09002230_3885E0]
+      - [0x388600, gfx, D_09002250_388600]
+      - [0x388620, gfx, D_09002270_388620]
+      - [0x388640, gfx, D_09002290_388640]
+      - [0x388660, gfx, D_090022B0_388660]
+      - [0x3886D0, gfx, D_09002320_3886D0]
+      - [0x388710, gfx, D_09002360_388710]
+      - [0x388750, gfx, D_090023A0_388750]
+      - [0x388790, gfx, D_090023E0_388790]
+      - [0x3887D0, gfx, D_09002420_3887D0]
+      - [0x388810, gfx, D_09002460_388810]
+      - [0x388850, gfx, D_090024A0_388850]
+      - [0x388890, gfx, D_090024E0_388890]
+      - [0x3888D0, gfx, D_09002520_3888D0]
+      - [0x388910, gfx, D_09002560_388910]
+      - [0x388950, gfx, D_090025A0_388950]
+      - [0x388990, gfx, D_090025E0_388990]
   - name: effect_bombette_breaking
     dir: effects
     type: code
@@ -2754,7 +3316,7 @@ segments:
     vram: 0xE0084000
     subsegments:
     - [0x3889D0, c, bombette_breaking]
-    - [0x3897E0, data]
+    - [0x3897E0]
   - name: effect_firework
     dir: effects
     type: code
@@ -2825,7 +3387,31 @@ segments:
     subsegments:
     - [0x391D30, c, small_gold_sparkle]
     - [0x3923C0]
-  - [0x392440, bin] # small_gold_sparkle gfx
+  - name: effect_gfx_small_gold_sparkle
+    dir: effects/gfx
+    type: code
+    start: 0x392440
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x392440, c, small_gold_sparkle]
+    - start: 0x392440
+      type: .data
+      name: small_gold_sparkle
+      subsegments:
+      - [0x392440, i4, D_09000000_392440, 16, 16]
+      - [0x3924C0, i4, D_09000080_3924C0, 16, 16]
+      - [0x392540, i4, D_09000100_392540, 16, 16]
+      - [0x3925C0, i4, D_09000180_3925C0, 16, 16]
+      - [0x392640, i4, D_09000200_392640, 16, 16]
+      - [0x3926C0, vtx, D_09000280_3926C0]
+      - [0x392700, gfx, D_090002C0_392700]
+      - [0x392770, gfx, D_09000330_392770]
+      - [0x3927B0, gfx, D_09000370_3927B0]
+      - [0x3927F0, gfx, D_090003B0_3927F0]
+      - [0x392830, gfx, D_090003F0_392830]
+      - [0x392870, gfx, D_09000430_392870]
+      - [0x3928B0, gfx, D_09000470_3928B0]
   - name: effect_flashing_box_shockwave
     dir: effects
     type: code
@@ -2833,7 +3419,7 @@ segments:
     vram: 0xE0094000
     subsegments:
     - [0x3928D0, c, flashing_box_shockwave]
-    - [0x393080, data]
+    - [0x393080]
   - [0x3930A0, bin] # flashing_box_shockwave gfx
   - name: effect_balloon
     dir: effects
@@ -2843,7 +3429,35 @@ segments:
     subsegments:
     - [0x394280, c, balloon]
     - [0x394660]
-  - [0x394670, bin] # balloon gfx
+  - name: effect_gfx_balloon
+    dir: effects/gfx
+    type: code
+    start: 0x394670
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x394670, c, balloon]
+    - start: 0x394670
+      type: .data
+      name: balloon
+      subsegments:
+      - [0x394670, ci4, D_09000000_394670, 32, 32]
+      - [0x394870, ci4, D_09000200_394870, 32, 32, D_09000000_394670]
+      - [0x394A70, palette, D_09000000_394670]
+      - [0x394A90] # padding
+      - [0x394C70, ci4, D_09000600_394C70, 32, 32]
+      - [0x394E70, ci4, D_09000800_394E70, 32, 32, D_09000600_394C70]
+      - [0x395070, palette, D_09000600_394C70]
+      - [0x395090] # padding
+      - [0x395270, ci4, D_09000C00_395270, 32, 32]
+      - [0x395470, ci4, D_09000E00_395470, 32, 32, D_09000C00_395270]
+      - [0x395670, palette, D_09000C00_395270]
+      - [0x395690] # padding
+      - [0x395870, vtx, D_09001200_395870]
+      - [0x3958F0, gfx, D_09001280_3958F0]
+      - [0x3959C8, gfx, D_09001358_3959C8]
+      - [0x395AA0, gfx, D_09001430_395AA0]
+      - [0x395B78, gfx, D_09001508_395B78]
   - name: effect_floating_rock
     dir: effects
     type: code
@@ -2860,7 +3474,7 @@ segments:
     vram: 0xE009A000
     subsegments:
     - [0x3965B0, c, chomp_drop]
-    - [0x397010, data]
+    - [0x397010]
   - [0x397040, bin] # chomp_drop gfx
   - name: effect_quizmo_stage
     dir: effects
@@ -2930,7 +3544,55 @@ segments:
     subsegments:
     - [0x3AA920, c, butterflies]
     - [0x3AAFE0]
-  - [0x3AB030, bin] # butterflies gfx
+  - name: effect_gfx_butterflies
+    dir: effects/gfx
+    type: code
+    start: 0x3AB030
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3AB030, c, butterflies]
+    - start: 0x3AB030
+      type: .data
+      name: butterflies
+      subsegments:
+      - [0x3AB030, ci4, D_09000000_3AB030, 32, 64]
+      - [0x3AB430, palette, D_09000000_3AB030]
+      - [0x3AB450, ci4, D_09000420_3AB450, 32, 64]
+      - [0x3AB850, palette, D_09000420_3AB450]
+      - [0x3AB870, ci4, D_09000840_3AB870, 32, 64]
+      - [0x3ABC70, palette, D_09000840_3AB870]
+      - [0x3ABC80, ci4, D_09000C50_3ABC80, 32, 64]
+      - [0x3AC080, palette, D_09000C50_3ABC80]
+      - [0x3AC0A0, ci4, D_09001070_3AC0A0, 32, 64]
+      - [0x3AC4A0, palette, D_09001070_3AC0A0]
+      - [0x3AC4B0, ci4, D_09001480_3AC4B0, 32, 64]
+      - [0x3AC8B0, palette, D_09001480_3AC4B0]
+      - [0x3AC8D0, ci4, D_090018A0_3AC8D0, 32, 64]
+      - [0x3ACCD0, palette, D_090018A0_3AC8D0]
+      - [0x3ACCF0, ci4, D_09001CC0_3ACCF0, 32, 64]
+      - [0x3AD0F0, palette, D_09001CC0_3ACCF0]
+      - [0x3AD110, ci4, D_090020E0_3AD110, 32, 64]
+      - [0x3AD510, palette, D_090020E0_3AD110]
+      - [0x3AD530, ci4, D_09002500_3AD530, 32, 64]
+      - [0x3AD930, palette, D_09002500_3AD530]
+      - [0x3AD950, ci4, D_09002920_3AD950, 32, 64]
+      - [0x3ADD50, palette, D_09002920_3AD950]
+      - [0x3ADD70, vtx, D_09002D40_3ADD70]
+      - [0x3AE8B0, gfx, D_09003880_3AE8B0]
+      - [0x3AE928, gfx, D_090038F8_3AE928]
+      - [0x3AE998, gfx, D_09003968_3AE998]
+      - [0x3AEA08, gfx, D_090039D8_3AEA08]
+      - [0x3AEA78, gfx, D_09003A48_3AEA78]
+      - [0x3AEAE8, gfx, D_09003AB8_3AEAE8]
+      - [0x3AEB58, gfx, D_09003B28_3AEB58]
+      - [0x3AEBC8, gfx, D_09003B98_3AEBC8]
+      - [0x3AEC38, gfx, D_09003C08_3AEC38]
+      - [0x3AECA8, gfx, D_09003C78_3AECA8]
+      - [0x3AED18, gfx, D_09003CE8_3AED18]
+      - [0x3AED88, gfx, D_09003D58_3AED88]
+      - [0x3AEDF8, gfx, D_09003DC8_3AEDF8]
+      - [0x3AEE18]
   - name: effect_stat_change
     dir: effects
     type: code
@@ -3018,8 +3680,28 @@ segments:
     vram: 0xE00BE000
     subsegments:
     - [0x3BBF60, c, water_splash]
-    - [0x3BCA50, data]
-  - [0x3BCA90, bin] # water_splash gfx
+    - [0x3BCA50]
+  - name: effect_gfx_water_splash
+    dir: effects/gfx
+    type: code
+    start: 0x3BCA90
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3BCA90, c, water_splash]
+    - start: 0x3BCA90
+      type: .data
+      name: water_splash
+      subsegments:
+      - [0x3BCA90, ia8, D_09000000_3BCA90, 16, 16]
+      - [0x3BCB90, gfx, D_09000100_3BCB90]
+      - [0x3BCC38, vtx, D_090001A8_3BCC38]
+      - [0x3BCC78, vtx, D_090001E8_3BCC78]
+      - [0x3BCCB8, vtx, D_09000228_3BCCB8]
+      - [0x3BCCF8, gfx, D_09000268_3BCCF8]
+      - [0x3BCD18, gfx, D_09000288_3BCD18]
+      - [0x3BCD38, gfx, D_090002A8_3BCD38]
+      - [0x3BCD58]
   - name: effect_snowman_doll
     dir: effects
     type: code
@@ -3063,8 +3745,29 @@ segments:
     vram: 0xE00C8000
     subsegments:
     - [0x3CF3A0, c, throw_spiny]
-    - [0x3CFAB0, data]
-  - [0x3CFAF0, bin] # throw_spiny gfx
+    - [0x3CFAB0]
+  - name: effect_gfx_throw_spiny
+    dir: effects/gfx
+    type: code
+    start: 0x3CFAF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3CFAF0, c, throw_spiny]
+    - start: 0x3CFAF0
+      type: .data
+      name: throw_spiny
+      subsegments:
+      - [0x3CFAF0, ci4, D_09000000_3CFAF0, 32, 32]
+      - [0x3CFCF0, palette, D_09000000_3CFAF0]
+      - [0x3CFD10] # padding
+      - [0x3CFEF0, ci4, D_09000400_3CFEF0, 32, 32]
+      - [0x3D00F0, palette, D_09000400_3CFEF0]
+      - [0x3D0110] # padding
+      - [0x3D02F0, gfx, D_09000800_3D02F0]
+      - [0x3D03C8, gfx, D_090008D8_3D03C8]
+      - [0x3D04A0, vtx, D_090009B0_3D04A0]
+      - [0x3D04E0, gfx, D_090009F0_3D04E0]
   - name: effect_effect_65
     dir: effects
     type: code
@@ -3090,7 +3793,7 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c, whirlwind]
-    - [0x3D3910, data]
+    - [0x3D3910]
   - [0x3D3930, bin] # whirlwind gfx
   - name: effect_red_impact
     dir: effects
@@ -3125,7 +3828,7 @@ segments:
     vram: 0xE00D8000
     subsegments:
     - [0x3D67C0, c, tattle_window]
-    - [0x3D6FA0, data]
+    - [0x3D6FA0]
   - [0x3D7040, bin] # tattle_window gfx
   - name: effect_shiny_flare
     dir: effects
@@ -3224,8 +3927,74 @@ segments:
     vram: 0xE010C000
     subsegments:
     - [0x3E54C0, c, peach_star_beam]
-    - [0x3E5ED0, data]
-  - [0x3E5F30, bin] # peach_star_beam gfx
+    - [0x3E5ED0]
+  - name: effect_gfx_peach_star_beam
+    dir: effects/gfx
+    type: code
+    start: 0x3E5F30
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3E5F30, c, peach_star_beam]
+    - start: 0x3E5F30
+      type: .data
+      name: peach_star_beam
+      subsegments:
+      - [0x3E5F30, vtx, D_09000000_3E5F30]
+      - [0x3E60D0, vtx, D_090001A0_3E60D0]
+      - [0x3E60F0, vtx, D_090001C0_3E60F0]
+      - [0x3E6110, vtx, D_090001E0_3E6110]
+      - [0x3E6150, vtx, D_09000220_3E6150]
+      - [0x3E6160, vtx, D_09000230_3E6160]
+      - [0x3E6170, vtx, D_09000240_3E6170]
+      - [0x3E6180, vtx, D_09000250_3E6180]
+      - [0x3E61B0, gfx, D_09000280_3E61B0]
+      - [0x3E61E8, gfx, D_090002B8_3E61E8]
+      - [0x3E6218, gfx, D_090002E8_3E6218]
+      - [0x3E62D0, gfx, D_090003A0_3E62D0]
+      - [0x3E62F0, gfx, D_090003C0_3E62F0]
+      - [0x3E6300, gfx, D_090003D0_3E6300]
+      - [0x3E6310] # padding
+      - [0x3E6318, i4, D_090003E8_3E6318, 32, 32]
+      - [0x3E6518, ci4, D_090005E8_3E6518, 32, 32]
+      - [0x3E6718, palette, D_090005E8_3E6518]
+      - [0x3E6738] # padding
+      - [0x3E6918, ci4, D_090009E8_3E6918, 64, 64]
+      - [0x3E7118, palette, D_090009E8_3E6918]
+      - [0x3E7138] # padding
+      - [0x3E7318, ci4, D_090013E8_3E7318, 64, 64]
+      - [0x3E7B18, palette, D_090013E8_3E7318]
+      - [0x3E7B38] # padding
+      - [0x3E7D18, ci4, D_09001DE8_3E7D18, 64, 64]
+      - [0x3E8518, palette, D_09001DE8_3E7D18]
+      - [0x3E8538] # padding
+      - [0x3E8718, ci4, D_090027E8_3E8718, 64, 64]
+      - [0x3E8F18, palette, D_090027E8_3E8718]
+      - [0x3E8F38] # padding
+      - [0x3E9118, ci4, D_090031E8_3E9118, 64, 64]
+      - [0x3E9918, palette, D_090031E8_3E9118]
+      - [0x3E9938] # padding
+      - [0x3E9B18, ci4, D_09003BE8_3E9B18, 64, 64]
+      - [0x3EA318, palette, D_09003BE8_3E9B18]
+      - [0x3EA338] # padding
+      - [0x3EA518, ci4, D_090045E8_3EA518, 64, 64]
+      - [0x3EAD18, palette, D_090045E8_3EA518]
+      - [0x3EAD38] # padding
+      - [0x3EAF18, gfx, D_09004FE8_3EAF18]
+      - [0x3EAFC0, gfx, D_09005090_3EAFC0]
+      - [0x3EB020, gfx, D_090050F0_3EB020]
+      - [0x3EB098, gfx, D_09005168_3EB098]
+      - [0x3EB110, gfx, D_090051E0_3EB110]
+      - [0x3EB188, gfx, D_09005258_3EB188]
+      - [0x3EB200, gfx, D_090052D0_3EB200]
+      - [0x3EB278, gfx, D_09005348_3EB278]
+      - [0x3EB2F0, gfx, D_090053C0_3EB2F0]
+      - [0x3EB368, gfx, D_09005438_3EB368]
+      - [0x3EB3E0, gfx, D_090054B0_3EB3E0]
+      - [0x3EB420, vtx, D_090054F0_3EB420]
+      - [0x3EB460, vtx, D_09005530_3EB460]
+      - [0x3EB4A0, gfx, D_09005570_3EB4A0]
+      - [0x3EB4C0, gfx, D_09005590_3EB4C0]
   - name: effect_chapter_change
     dir: effects
     type: code
@@ -3358,7 +4127,7 @@ segments:
     vram: 0xE0114000
     subsegments:
     - [0x3FEAE0, c, lil_oink]
-    - [0x3FF180, data]
+    - [0x3FF180]
   - [0x3FF250, bin] # lil_oink gfx
   - name: effect_something_rotating
     dir: effects
@@ -3375,8 +4144,33 @@ segments:
     vram: 0xE0118000
     subsegments:
     - [0x403400, c, breaking_junk]
-    - [0x403BB0, data]
-  - [0x403BF0, bin] # breaking_junk gfx
+    - [0x403BB0]
+  - name: effect_gfx_breaking_junk
+    dir: effects/gfx
+    type: code
+    start: 0x403BF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x403BF0, c, breaking_junk]
+    - start: 0x403BF0
+      type: .data
+      name: breaking_junk
+      subsegments:
+      - [0x403BF0, ia8, D_09000000_403BF0, 16, 16]
+      - [0x403CF0, ia8, D_09000100_403CF0, 16, 16]
+      - [0x403DF0, ia8, D_09000200_403DF0, 16, 16]
+      - [0x403EF0, ia8, D_09000300_403EF0, 16, 16]
+      - [0x403FF0, gfx, D_09000400_403FF0]
+      - [0x404098, vtx, D_090004A8_404098]
+      - [0x4040D8, vtx, D_090004E8_4040D8]
+      - [0x404118, vtx, D_09000528_404118]
+      - [0x404158, vtx, D_09000568_404158]
+      - [0x404198, gfx, D_090005A8_404198]
+      - [0x4041B8, gfx, D_090005C8_4041B8]
+      - [0x4041D8, gfx, D_090005E8_4041D8]
+      - [0x4041F8, gfx, D_09000608_4041F8]
+      - [0x404218]
   - name: effect_partner_buff
     dir: effects
     type: code
@@ -3442,7 +4236,7 @@ segments:
     vram: 0xE0120000
     subsegments:
     - [0x40B3F0, c, sun]
-    - [0x40BB70, data]
+    - [0x40BB70]
   - [0x40BBA0, bin] # sun gfx
   - name: effect_star_spirits_energy
     dir: effects
@@ -3502,7 +4296,7 @@ segments:
     overlay: True
     subsegments:
     - [0x422000, c, hammer]
-    - [0x422A90, data]
+    - [0x422A90]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
@@ -3520,7 +4314,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4233F0, c, break_free]
-    - [0x423C30, data]
+    - [0x423C30]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
@@ -3529,7 +4323,28 @@ segments:
     overlay: True
     subsegments:
     - [0x423C70, c, whirlwind]
-    - [0x424550, data]
+    - start: 0x424550
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x424550, ci4, whirlwind_1, 24, 24]
+      - [0x424670, palette, whirlwind_1]
+      - [0x424690, ci4, whirlwind_2, 24, 24]
+      - [0x4247B0, palette, whirlwind_2]
+      - [0x4247D0, ci4, whirlwind_3, 24, 24]
+      - [0x4248F0, palette, whirlwind_3]
+      - [0x424910, ci4, whirlwind_4, 24, 24]
+      - [0x424A30, palette, whirlwind_4]
+      - [0x424A50, ci4, whirlwind_5, 24, 24]
+      - [0x424B70, palette, whirlwind_5]
+      - [0x424B90, ci4, whirlwind_6, 24, 24]
+      - [0x424CB0, palette, whirlwind_6]
+      - [0x424CD0, ci4, whirlwind_7, 24, 24]
+      - [0x424DF0, palette, whirlwind_7]
+      - [0x424E10, ci4, whirlwind_bubble, 56, 48]
+      - [0x425350, palette, whirlwind_bubble]
+      - [0x425370]
+    - [0x425550]
   - type: code
     start: 0x425590
     vram: 0x802A9000
@@ -3547,7 +4362,7 @@ segments:
     overlay: True
     subsegments:
     - [0x425B50, c, "07"]
-    - [0x426130, data]
+    - [0x426130]
   - type: code
     start: 0x426170
     vram: 0x802A9000
@@ -3556,7 +4371,7 @@ segments:
     overlay: True
     subsegments:
     - [0x426170, c, dizzy_shell]
-    - [0x426970, data]
+    - [0x426970]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
@@ -3565,7 +4380,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4269D0, c, fire_shell]
-    - [0x427320, data]
+    - [0x427320]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
@@ -3592,7 +4407,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4282E0, c, body_slam]
-    - [0x428A30, data]
+    - [0x428A30]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
@@ -3601,7 +4416,7 @@ segments:
     overlay: True
     subsegments:
     - [0x428A70, c, air_lift]
-    - [0x4292C0, data]
+    - [0x4292C0]
   - type: code
     start: 0x429320
     vram: 0x802A9000
@@ -3610,7 +4425,7 @@ segments:
     overlay: True
     subsegments:
     - [0x429320, c, air_raid]
-    - [0x429C90, data]
+    - [0x429C90]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
@@ -3619,7 +4434,7 @@ segments:
     overlay: True
     subsegments:
     - [0x429D20, c, squirt]
-    - [0x42A480, data]
+    - [0x42A480]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
@@ -3628,7 +4443,28 @@ segments:
     overlay: True
     subsegments:
     - [0x42A4F0, c, water_block]
-    - [0x42B650, data]
+    - start: 0x42B650
+      type: .data
+      name: water_block
+      subsegments:
+      - [0x42B650, ci4, water_block_1, 24, 24]
+      - [0x42B770, palette, water_block_1]
+      - [0x42B790, ci4, water_block_2, 24, 24]
+      - [0x42B8B0, palette, water_block_2]
+      - [0x42B8D0, ci4, water_block_3, 24, 24]
+      - [0x42B9F0, palette, water_block_3]
+      - [0x42BA10, ci4, water_block_0, 24, 24]
+      - [0x42BB30, palette, water_block_0]
+      - [0x42BB50, ci4, water_block_block, 32, 32]
+      - [0x42BD50, palette, water_block_block]
+      - [0x42BD70, ci4, water_block_circle, 40, 40]
+      - [0x42C090, palette, water_block_circle]
+      - [0x42C0B0, ci4, water_block_cloud, 40, 40]
+      - [0x42C3D0, palette, water_block_cloud]
+      - [0x42C3F0, ci4, water_block_4, 24, 24]
+      - [0x42C510, palette, water_block_4]
+      - [0x42C530]
+    - [0x42C6F0]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
@@ -3637,8 +4473,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42C6F0, c, tidal_wave]
-    - [0x42CEB0, data]
-    - [0x42CED0]
+    - [0x42CEB0]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
@@ -3647,8 +4482,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42CF10, c, power_shock]
-    - [0x42D9B0, data]
-    - [0x42D9D0]
+    - [0x42D9B0]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
@@ -3657,7 +4491,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42DA10, c, mega_shock]
-    - [0x42E342, .data, mega_shock]
+    - [0x42E342] # todo offset ?
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
@@ -3675,7 +4509,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42EE20, c, spiny_surge]
-    - [0x42F680, data]
+    - [0x42F680]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
@@ -3684,7 +4518,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42F6E0, c, hurricane]
-    - [0x42FFC0, data]
+    - [0x42FFC0]
   - type: code
     start: 0x430020
     vram: 0x802A9000
@@ -3693,7 +4527,7 @@ segments:
     overlay: True
     subsegments:
     - [0x430020, c, spook]
-    - [0x430940, data]
+    - [0x430940]
   - dir: battle/area_kmr_part_1
     type: code
     start: 0x4309A0
@@ -4027,54 +4861,53 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x52B6A0, c]
-    - [0x52B7C0, c]
-    - [0x52B9D0, data]
+    - [0x52B6A0, c, actor/general_guy]
+    - [0x52B7C0, c, actor/toy_tank]
+    - [0x52B8F0, c, actor/light_bulb]
+    - [0x52B9D0, c, stage/omo_07]
+    - [0x52B9D0, c, area]
   - dir: battle/area_omo2_1
     type: code
     start: 0x543570
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x543570, c]
-    - [0x543620, data]
+    - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x5483E0, c]
-    - [0x548500, data]
+    - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x54CC70, c]
-    - [0x54CCA0, data]
+    - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552440, data]
+    - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552BB0, data]
+    - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x556C90, data]
+    - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
@@ -4088,6 +4921,9 @@ segments:
     - [0x557F90, c]
     - [0x5580C0, c]
     - [0x558190, data]
+    - [0x56DF50, .rodata, 5573E0]
+    - [0x56DF90, rodata]
+    - [0x56E070]
   - dir: battle/area_kgr
     type: code
     start: 0x56E2A0
@@ -4238,21 +5074,60 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x623BA0, c]
-    - [0x6253E0, c]
-    - [0x625750, c]
-    - [0x626A30, data]
+    - [0x623BA0, c, actor/duplighost]
+    - [0x625190, c, actor/gulpit]
+    - [0x625190, c, actor/gulpit_rocks]
+    - [0x625190, c, actor/white_clubba]
+    - [0x625190, c, actor/frost_piranha]
+    - [0x6253E0, c, actor/gray_magikoopa]
+    - [0x625750, c, stage/sam_01]
+    - [0x625A70, c, stage/sam_02]
+    - [0x625D90, c, stage/sam_02b]
+    - [0x6260B0, c, stage/sam_02c]
+    - [0x6263D0, c, stage/sam_02d]
+    - [0x6266F0, c, stage/sam_03]
+    - [0x626A30, c, area]
   - dir: battle/area_sam2
     type: code
     start: 0x63D1E0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x63D1E0, c]
-    - [0x63D710, c]
-    - [0x63D9F0, c]
-    - [0x63DD60, c]
-    - [0x63F040, data]
+    - [0x63D1E0, c, actor/monstar]
+    - [0x63D710, c, actor/paragoomba]
+    - [0x63D9F0, c, actor/gray_magikoopa]
+    - [0x63DD60, c, stage/sam_01]
+    - [0x63E080, c, stage/sam_02]
+    - [0x63E3A0, c, stage/sam_02b]
+    - [0x63E6C0, c, stage/sam_02c]
+    - [0x63E9E0, c, stage/sam_02d]
+    - [0x63ED00, c, stage/sam_03]
+    - [0x63F040, c, area]
+    - [0x63F040, c, dlist]
+    - start: 0x63F040
+      type: .data
+      name: actor/monstar
+      subsegments:
+      - [0x63F040]
+      - [0x63F278, ci4, actor/img, 32, 32]
+      - [0x63F478, palette, actor/img]
+      - [0x63F498]
+    - [0x641070, .data, actor/paragoomba]
+    - [0x644310, .data, actor/gray_magikoopa]
+    - [0x646FD0, .data, stage/sam_01]
+    - [0x6473E0, .data, stage/sam_02]
+    - [0x647820, .data, stage/sam_02b]
+    - [0x647B70, .data, stage/sam_02c]
+    - [0x647EE0, .data, stage/sam_02d]
+    - [0x648260, .data, stage/sam_03]
+    - [0x648670, .data, area]
+    - [0x648750, .data, dlist]
+    - start: 0x648860
+      type: .data
+      name: vtx
+      subsegments:
+      - [0x648860, vtx, monstar_bubbles]
+    - [0x648C80]
   - dir: battle/area_pra
     type: code
     start: 0x648E10
@@ -4270,22 +5145,31 @@ segments:
     type: code
     start: 0x660750
     vram: 0x80218000
+    subalign: 16 # BSS alignment hack
     overlay: True
     subsegments:
-    - [0x660750, c]
-    - [0x660D20, c]
-    - [0x660E10, c]
-    - [0x661150, data]
+    - [0x660750, c, actor/crystal_king]
+    - [0x660D20, c, actor/crystal_bit]
+    - [0x660E10, c, stage/sam_04]
+    - [0x661150, c, area]
   - dir: battle/area_pra3
     type: code
     start: 0x669D80
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x669D80, c]
-    - [0x66B5B0, c]
-    - [0x66B920, c]
-    - [0x66BC90, data]
+    - [0x669D80, c, actor/duplighost]
+    - [0x66B370, c, actor/swoopula]
+    - [0x66B5B0, c, actor/white_clubba]
+    - [0x66B5B0, c, actor/red_magikoopa]
+    - [0x66B920, c, actor/gray_magikoopa]
+    - [0x66BC90, c, stage/pra_01]
+    - [0x66BC90, c, stage/pra_02]
+    - [0x66BC90, c, stage/pra_03]
+    - [0x66BC90, c, stage/pra_03b]
+    - [0x66BC90, c, stage/pra_03c]
+    - [0x66BC90, c, stage/pra_04]
+    - [0x66BC90, c, area]
   - dir: battle/area_kpa
     type: code
     start: 0x684A30
@@ -4307,6 +5191,7 @@ segments:
     - [0x69F320, c]
     - [0x6A2B50, c]
     - [0x6A44E0, data]
+    - [0x6BB940]
   - dir: battle/area_kpa3
     type: code
     start: 0x6BBB90
@@ -4423,6 +5308,7 @@ segments:
     subsegments:
     - [0x70BD10, c, lakilester]
     - [0x70DEE0, data, 70DED0]
+    - [0x710EC0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -4448,7 +5334,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x715850, c, mushroom] # TODO fix auto_all for .data
+    - [0x715850, c, mushroom]
     - [0x715E50]
   - name: fire_flower
     dir: battle/item
@@ -4555,7 +5441,7 @@ segments:
       type: .data
       name: sleepy_sheep
       subsegments:
-      - [0x71EFC0, .data, sleepy_sheep]
+      - [0x71EFC0]
       - [0x71F580, ci4, sleepy_sheep1, 56, 48]
       - [0x71FAC0, palette, sleepy_sheep1]
       - [0x71FAE0, ci4, sleepy_sheep2, 56, 48]
@@ -4665,7 +5551,7 @@ segments:
       type: .data
       name: egg_missile
       subsegments:
-      - [0x7291D0, .data, egg_missile]
+      - [0x7291D0]
       - [0x729790, ci4, egg_missile1, 32, 32]
       - [0x729990, palette, egg_missile1]
       - [0x7299B0, ci4, egg_missile2, 32, 32]
@@ -4712,7 +5598,7 @@ segments:
       type: .data
       name: mystery
       subsegments:
-      - [0x72CF00, .data, mystery]
+      - [0x72CF00]
       - [0x72D4C0, ci4, mystery, 32, 32]
       - [0x72D6C0, palette, mystery]
       - [0x72D6E0]
@@ -4746,7 +5632,7 @@ segments:
       type: .data
       name: coconut
       subsegments:
-      - [0x72F960, .data, coconut]
+      - [0x72F960]
       - [0x72FF20, ci4, coconut, 32, 32]
       - [0x730120, palette, coconut]
       - [0x730140]
@@ -4771,7 +5657,7 @@ segments:
       type: .data
       name: strange_cake
       subsegments:
-      - [0x731EA0, .data, strange_cake]
+      - [0x731EA0]
       - [0x732470, ci4, strange_cake1, 32, 32]
       - [0x732670, palette, strange_cake1]
       - [0x732690, ci4, strange_cake2, 32, 32]
@@ -5187,8 +6073,7 @@ segments:
     - [0x7E7A30, data]
     - [0x7E8470, data]
     - [0x7EA340, data]
-    - [0x7EAA50, .rodata, 7E73A0]
-    - [0x7EAD00, .rodata, 7E7850]
+    - [0x7EAA50]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -5712,12 +6597,7 @@ segments:
     - [0x8C82B0, c]
     - [0x8C83A0, c]
     - [0x8C85E0, c]
-    - [0x8C85E0, .data, 8C7F90]
-    - [0x8C8680, .data, 8C8140]
-    - [0x8C88E0, .data, 8C82B0]
-    - [0x8C9780, .data, 8C83A0]
-    - [0x8CA2D0, .data, 8C85E0]
-    - [0x8CA8F0]
+    - [0x8C85E0]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
@@ -5824,9 +6704,7 @@ segments:
     subsegments:
     - [0x8EB360, c, header]
     - [0x8EB390, c, events]
-    - [0x8EB390, .data, header]
-    - [0x8EB420, .data, events]
-    - [0x8EBE10]
+    - [0x8EB390]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
     type: code
@@ -6020,9 +6898,7 @@ segments:
     subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, 929270]
-    - [0x929A00, .data, 9292B0]
-    - [0x929A80]
+    - [0x9292D0]
   - name: sbk_01
     dir: world/area_sbk/sbk_01
     type: code
@@ -6032,9 +6908,7 @@ segments:
     subsegments:
     - [0x929A90, c]
     - [0x929AD0, c]
-    - [0x929AF0, .data, 929A90]
-    - [0x929E00, .data, 929AD0]
-    - [0x92A290]
+    - [0x929AF0]
   - name: sbk_02
     dir: world/area_sbk/sbk_02
     type: code
@@ -6621,9 +7495,7 @@ segments:
     - [0x95B7E0,       c, 95B7E0]
     - [0x95E660,       c, 95E660]
     - [0x95E7A0,       c, 95E7A0]
-    - [0x95ECC0,   .data, 95B7E0]
-    - [0x9685C0,   .data, 95E7A0]
-    - [0x968FD0]
+    - [0x95ECC0]
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
@@ -6637,7 +7509,7 @@ segments:
       type: .data
       name: 9694C0
       subsegments:
-      - [0x96CC30,   .data, 9694C0]
+      - [0x96CC30]
       - [0x971F98,     vtx, vtx/971F98]
       - [0x9722B8,     vtx, vtx/9722B8]
       - [0x973578]
@@ -9186,9 +10058,7 @@ segments:
     subsegments:
     - [0xBF6A00, c, header]
     - [0xBF6A00, c, events]
-    - [0xBF6A00,   .data, header]
-    - [0xBF6B00,   .data, events]
-    - [0xBF7670]
+    - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
@@ -9198,9 +10068,7 @@ segments:
     subsegments:
     - [0xBF7680, c, header]
     - [0xBF7680, c, events]
-    - [0xBF7680,   .data, header]
-    - [0xBF7770,   .data, events]
-    - [0xBF8780]
+    - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
@@ -9210,9 +10078,7 @@ segments:
     subsegments:
     - [0xBF8790, c, header]
     - [0xBF8790, c, events]
-    - [0xBF8790,   .data, header]
-    - [0xBF8890,   .data, events]
-    - [0xBF9400]
+    - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
@@ -9222,9 +10088,7 @@ segments:
     subsegments:
     - [0xBF9410, c, header]
     - [0xBF9410, c, events]
-    - [0xBF9410,   .data, header]
-    - [0xBF9510,   .data, events]
-    - [0xBFA090]
+    - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
@@ -9234,9 +10098,7 @@ segments:
     subsegments:
     - [0xBFA0A0,       c, BFA0A0]
     - [0xBFA100,       c, BFA100]
-    - [0xBFA150,   .data, BFA0A0]
-    - [0xBFA260,   .data, BFA100]
-    - [0xBFD840]
+    - [0xBFA150]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
@@ -9266,10 +10128,6 @@ segments:
     - [0xC08F70,    .data, data7]
     - [0xC08FF0,    .data, data]
     - [0xC20C70]
-    # rodata seemingly in 3 different parts:
-    # dgb_00-18, 1x 32767.0, 2 jump tables
-    # dgb_00, 2x 32767.0, jump table
-    # dgb_08 only
   - name: C20F40 # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
     type: code
     dir: world/area_dgb
@@ -9579,8 +10437,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC2EBA0,       c, C2EBA0]
-    - [0xC2FFD0,   .data, C2EBA0]
-    - [0xC31190]
+    - [0xC2FFD0]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
@@ -9590,8 +10447,7 @@ segments:
     subsegments:
     - [0xC314E0,       c, C314E0]
     - [0xC31730,       c, C31730]
-    - [0xC33CB0,   .data, C31730]
-    - [0xC35EA0]
+    - [0xC33CB0]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
@@ -9600,8 +10456,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC36530,       c, C36530]
-    - [0xC39640,   .data, C36530]
-    - [0xC3A910]
+    - [0xC39640]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
@@ -9610,8 +10465,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3AA10,       c, C3AA10]
-    - [0xC3BEA0,   .data, C3AA10]
-    - [0xC3CD40]
+    - [0xC3BEA0]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
@@ -9620,8 +10474,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3D080,       c, C3D080]
-    - [0xC3D340,   .data, C3D080]
-    - [0xC3DBE0]
+    - [0xC3D340]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
@@ -9630,8 +10483,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3DBF0,       c, C3DBF0]
-    - [0xC3F020,   .data, C3DBF0]
-    - [0xC3FA70]
+    - [0xC3F020]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
@@ -9640,8 +10492,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3FDB0,       c, C3FDB0]
-    - [0xC43A40,   .data, C3FDB0]
-    - [0xC467A0]
+    - [0xC43A40]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
@@ -9650,8 +10501,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC46BE0,       c, C46BE0]
-    - [0xC4A3E0,   .data, C46BE0]
-    - [0xC4BF50]
+    - [0xC4A3E0]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
@@ -9660,8 +10510,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4C390,       c, C4C390]
-    - [0xC4C580,   .data, C4C390]
-    - [0xC4D3D0]
+    - [0xC4C580]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
@@ -9670,8 +10519,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4D3E0,       c, C4D3E0]
-    - [0xC4D430,   .data, C4D3E0]
-    - [0xC4DEE0]
+    - [0xC4D430]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
@@ -9680,8 +10528,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4DEF0,       c, C4DEF0]
-    - [0xC4E1B0,   .data, C4DEF0]
-    - [0xC4E950]
+    - [0xC4E1B0]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
@@ -9690,8 +10537,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4E960, c, C4E960]
-    - [0xC4E960,   .data, C4E960]
-    - [0xC4F020]
+    - [0xC4E960]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
@@ -9700,8 +10546,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4F030, c, C4F030]
-    - [0xC4F030,   .data, C4F030]
-    - [0xC4F500]
+    - [0xC4F030]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
@@ -9711,8 +10556,7 @@ segments:
     subsegments:
     - [0xC4F510,       c, C4F510]
     - [0xC50CA0,       c, C50CA0]
-    - [0xC50D80,   .data, C4F510]
-    - [0xC521E0]
+    - [0xC50D80]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
@@ -9721,8 +10565,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC52540,       c, C52540]
-    - [0xC53970,   .data, C52540]
-    - [0xC55720]
+    - [0xC53970]
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
@@ -9731,8 +10574,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC55A60,       c, C55A60]
-    - [0xC55A60,   .data, C55A60]
-    - [0xC55F30]
+    - [0xC55A60]
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
@@ -9742,8 +10584,7 @@ segments:
     subsegments:
     - [0xC55F40,       c, C55F40]
     - [0xC56EF0,       c, C56EF0]
-    - [0xC571B0,   .data, C55F40]
-    - [0xC59810]
+    - [0xC571B0]
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code
@@ -9975,8 +10816,7 @@ segments:
     - [0xC9DF20,       c, C9DF20]
     - [0xC9DF60,       c, C9DF60]
     - [0xC9EE30,       c, C9EE30]
-    - [0xC9F300,   .data, C9DF60]
-    - [0xCA70A0]
+    - [0xC9F300]
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code
@@ -9986,8 +10826,7 @@ segments:
     subsegments:
     - [0xCA72A0,       c, CA72A0]
     - [0xCA72E0,       c, CA72E0]
-    - [0xCA78D0,   .data, CA72E0]
-    - [0xCAC1D0]
+    - [0xCA78D0]
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
@@ -9997,8 +10836,7 @@ segments:
     subsegments:
     - [0xCAC1F0,       c, CAC1F0]
     - [0xCAC5D0,       c, CAC5D0]
-    - [0xCAC930,   .data, CAC5D0]
-    - [0xCAED20]
+    - [0xCAC930]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
@@ -10010,8 +10848,7 @@ segments:
     - [0xCAFA80,       c, CAFA80]
     - [0xCAFAC0,       c, CAFAC0]
     - [0xCB0B80,       c, CB0B80]
-    - [0xCB0C20,   .data, CAFAC0]
-    - [0xCB4E60]
+    - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
@@ -10023,8 +10860,7 @@ segments:
     - [0xCB5040,       c, CB5040]
     - [0xCB50E0,       c, CB50E0]
     - [0xCB5320,       c, CB5320]
-    - [0xCB6820,   .data, CB50E0]
-    - [0xCB9190]
+    - [0xCB6820]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
@@ -10037,9 +10873,7 @@ segments:
     - [0xCB9280,       c, CB9280]
     - [0xCB96B0,       c, CB96B0]
     - [0xCBA430,       c, CBA430]
-    - [0xCBA670,   .data, CB9280]
-    - [0xCBD290,   .data, CBA430]
-    - [0xCBDCB0]
+    - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
@@ -10048,8 +10882,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCBDCD0,       c, CBDCD0]
-    - [0xCBDFF0,   .data, CBDCD0]
-    - [0xCC0E10]
+    - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
     type: code
@@ -10059,8 +10892,7 @@ segments:
     subsegments:
     - [0xCC0E30,       c, CC0E30]
     - [0xCC0E70,       c, CC0E70]
-    - [0xCC1520,   .data, CC0E70]
-    - [0xCC3800]
+    - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
@@ -10071,8 +10903,7 @@ segments:
     - [0xCC3810,       c, CC3810]
     - [0xCC3850,       c, CC3850]
     - [0xCC6DE0,       c, CC6DE0]
-    - [0xCC6E80,   .data, CC3850]
-    - [0xCCB230]
+    - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
@@ -10083,9 +10914,7 @@ segments:
     - [0xCCB310,       c, CCB310]
     - [0xCCBE20,       c, CCBE20]
     - [0xCCD670,       c, CCD670]
-    - [0xCCD6A0,   .data, CCB310]
-    - [0xCCF7D0,   .data, CCBE20]
-    - [0xCD0620]
+    - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
@@ -10094,8 +10923,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCD06C0,       c, CD06C0]
-    - [0xCD06C0,   .data, CD06C0]
-    - [0xCD1E20]
+    - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
@@ -10108,9 +10936,7 @@ segments:
     - [0xCD1F10,       c, CD1F10]
     - [0xCD2C80,       c, CD2C80]
     - [0xCD4770,       c, CD4770]
-    - [0xCD47A0,   .data, CD1F10]
-    - [0xCD5E40,   .data, CD2C80]
-    - [0xCD7210]
+    - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code
@@ -10121,8 +10947,7 @@ segments:
     - [0xCD72E0,       c, CD72E0]
     - [0xCD7320,       c, CD7320]
     - [0xCD7350,       c, CD7350]
-    - [0xCDA500,   .data, CD7350]
-    - [0xCDC5D0]
+    - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code
@@ -10133,9 +10958,7 @@ segments:
     - [0xCDC6A0,       c, CDC6A0]
     - [0xCDCBD0,       c, CDCBD0]
     - [0xCDCC30,       c, CDCC30]
-    - [0xCDCE70,   .data, CDC6A0]
-    - [0xCE2D60,   .data, CDCC30]
-    - [0xCE36E0]
+    - [0xCDCE70]
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
@@ -10144,8 +10967,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCE36F0,       c, CE36F0]
-    - [0xCE4030,   .data, CE36F0]
-    - [0xCE66F0]
+    - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
@@ -10155,9 +10977,7 @@ segments:
     subsegments:
     - [0xCE6700,       c, CE6700]
     - [0xCE7240,       c, CE7240]
-    - [0xCE73F0,   .data, CE6700]
-    - [0xCE7440,   .data, CE7240]
-    - [0xCEC210]
+    - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
@@ -10168,9 +10988,7 @@ segments:
     - [0xCEC240,       c, CEC240]
     - [0xCEC280,       c, CEC280]
     - [0xCEC290,       c, CEC290]
-    - [0xCEC4D0,   .data, CEC240]
-    - [0xCED7E0,   .data, CEC290]
-    - [0xCEE250]
+    - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
@@ -10180,8 +10998,7 @@ segments:
     subsegments:
     - [0xCEE260,       c, CEE260]
     - [0xCEE2A0,       c, CEE2A0]
-    - [0xCEEF30,   .data, CEE2A0]
-    - [0xCF08D0]
+    - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
@@ -10192,8 +11009,7 @@ segments:
     - [0xCF0940,       c, CF0940]
     - [0xCF0980,       c, CF0980]
     - [0xCF0BC0,       c, CF0BC0]
-    - [0xCF0ED0,   .data, CF0980]
-    - [0xCF2BB0]
+    - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
@@ -10205,9 +11021,7 @@ segments:
     - [0xCF2C10,       c, CF2C10]
     - [0xCF4BC0,       c, CF4BC0]
     - [0xCF4E00,       c, CF4E00]
-    - [0xCF4EA0,   .data, CF2C10]
-    - [0xCF68B0,   .data, CF4BC0]
-    - [0xCF7AA0]
+    - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code
@@ -11057,7 +11871,6 @@ segments:
     - [0xE0B5F0, data]
     - [0xE0C0C0, data]
     - [0xE0D510, data]
-    - [0xE0E700, data]
     - [0xE0E740]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
@@ -11129,7 +11942,14 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE20EB0, c, e20eb0]
-    - [0xE215C0, data]
+    - start: 0xE215C0
+      type: .data
+      name: e20eb0
+      subsegments:
+      - [0xE215C0, ci4, speech_bubble, 32, 32]
+      - [0xE217C0, palette, speech_bubble]
+      - [0xE217E0, gfx, speech_bubble_dlist]
+      - [0xE21858]
     - [0xE21860]
   - type: code
     overlay: True
@@ -11155,7 +11975,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE23260, c, idle]
-    - [0xE23690, .data, idle]
+    - [0xE23690]
   - type: code
     name: world_action_walk
     dir: world/action
@@ -11181,7 +12001,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE245D0, c, 18]
-    - [0xE248D0, .data, 18]
+    - [0xE248D0]
   - type: code
     name: world_action_land
     dir: world/action
@@ -11314,45 +12134,1165 @@ segments:
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2B530, c, E2B530]
-    - [0xE2BE40, c, E2BE40]
-    - [0xE2C930, c]
-    - [0xE2D410, data]
-    - [0xE2D680]
+    - [0xE2B530, c, Padlock]
+    - [0xE2BE40, c, BoardedFloor]
+    - [0xE2C930, c, BombableRock]
+    - [0xE2D410]
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2D730, c]
-    - [0xE2E5F0, c]
-    - [0xE2EDE0, c]
-    - [0xE2EFD0, data]
-    - [0xE2F6F0]
+    - [0xE2D730, c, Plants1]
+    - [0xE2E5F0, c, Plants2]
+    - [0xE2EDE0, c, ArrowSign]
+    - [0xE2EFD0]
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2F750, c, E2F750]
-    - [0xE307C0, c, E307C0]
-    - [0xE31380, data]
-    - [0xE314C0]
-  - [0xE31530, bin] # unk data
-  - [0xE32420, bin] # unk data
-  - [0xE35670, bin] # unk data
-  - [0xE38890, bin] # unk data
-  - [0xE3B870, bin] # unk data
-  - [0xE3E260, bin] # unk data
-  - [0xE42240, bin] # unk data
-  - [0xE4B2E0, bin] # unk data
-  - [0xE4E7F0, bin] # unk data
-  - [0xE62370, bin] # unk data
-  - [0xE62AC0, bin] # unk data
-  - [0xE639C0, bin] # unk data
-  - [0xE648D0, bin] # unk data
+    - [0xE2F750, c, Tweester]
+    - [0xE307C0, c, StarBoxLauncher]
+    - [0xE31380]
+  - name: entity_model_Hammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE31530
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31530, c, Hammer1Block]
+    - start: 0xE31530
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE31530, vtx, Hammer1Block]
+      - [0xE317B0, ci4, Hammer1Block_face, 16, 32]
+      - [0xE318B0, palette, Hammer1Block_face]
+      - [0xE318D0]
+  - name: entity_model_Hammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE31A30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31A30, c, Hammer2Block]
+    - start: 0xE31A30
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE31A30, vtx, Hammer2Block]
+      - [0xE31CB0, ci4, Hammer2Block_face, 16, 32]
+      - [0xE31DB0, palette, Hammer2Block_face]
+      - [0xE31DD0]
+  - name: entity_model_Hammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE31F30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31F30, c, Hammer3Block]
+    - start: 0xE31F30
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE31F30, vtx, Hammer3Block]
+      - [0xE321B0, ci4, Hammer3Block_face, 16, 32]
+      - [0xE322B0, palette, Hammer3Block_face]
+      - [0xE322D0]
+  - name: entity_model_ShatteringHammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE32420
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE32420, c, ShatteringHammer1Block]
+    - start: 0xE32420
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE32420, vtx, ShatteringHammer1Block]
+      - [0xE33480, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xE33680, palette, ShatteringHammer1Block_texture]
+      - [0xE33880]
+  - name: entity_model_ShatteringHammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE35670
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE35670, c, ShatteringHammer2Block]
+    - start: 0xE35670
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xE35670, vtx, ShatteringHammer2Block]
+      - [0xE366D0, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xE36AD0]
+  - name: entity_model_ShatteringHammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE38890
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE38890, c, ShatteringHammer3Block]
+    - start: 0xE38890
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xE38890, vtx, ShatteringHammer3Block]
+      - [0xE398E0, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xE399E0, palette, ShatteringHammer3Block_texture]
+      - [0xE39A00]
+  - name: entity_model_YellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE3B870
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3B870, c, YellowBlock]
+    - start: 0xE3B870
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xE3B870, vtx, YellowBlock]
+      - [0xE3B9F0, rgba16, YellowBlock_face, 32, 32]
+      - [0xE3C1F0]
+  - name: entity_model_RedBlock
+    dir: entity/model
+    type: code
+    start: 0xE3C320
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3C320, c, RedBlock]
+    - start: 0xE3C320
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xE3C320, vtx, RedBlock]
+      - [0xE3C4A0, rgba16, RedBlock_face, 32, 32]
+      - [0xE3CCA0]
+  - name: entity_model_UnusedBlock
+    dir: entity/model
+    type: code
+    start: 0xE3CDD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3CDD0, c, UnusedBlock]
+    - start: 0xE3CDD0
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xE3CDD0, vtx, UnusedBlock]
+      - [0xE3D190, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xE3D590]
+      - [0xE3D618, ci4, UnusedBlock_img2, 16, 32]
+      - [0xE3D718, palette, UnusedBlock_img2]
+      - [0xE3D738]
+  - name: entity_model_PushBlock
+    dir: entity/model
+    type: code
+    start: 0xE3DA60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3DA60, c, PushBlock]
+    - start: 0xE3DA60
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xE3DA60, vtx, PushBlock]
+      - [0xE3DB80, ci4, PushBlock_face, 16, 16]
+      - [0xE3DC00, palette, PushBlock_face]
+      - [0xE3DC20]
+  - name: entity_model_BrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE3DDB0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3DDB0, c, BrickBlock]
+    - start: 0xE3DDB0
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xE3DDB0, vtx, BrickBlock]
+      - [0xE3DEF0, ci4, BrickBlock_face, 32, 32]
+      - [0xE3E0F0, palette, BrickBlock_face]
+      - [0xE3E110]
+  - name: entity_model_ShatteringBrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE3E260
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3E260, c, ShatteringBrickBlock]
+    - start: 0xE3E260
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xE3E260, vtx, ShatteringBrickBlock]
+      - [0xE3FD00, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xE40500]
+  - name: entity_model_InertYellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE42240
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE42240, c, InertYellowBlock]
+    - start: 0xE42240
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xE42240, vtx, InertYellowBlock_1]
+      - [0xE42340, vtx, InertYellowBlock_2]
+      - [0xE423C0, ci4, InertYellowBlock_face, 32, 32]
+      - [0xE425C0, palette, InertYellowBlock_face]
+      - [0xE425E0]
+  - name: entity_model_InertRedBlock
+    dir: entity/model
+    type: code
+    start: 0xE42740
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE42740, c, InertRedBlock]
+    - start: 0xE42740
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xE42740, vtx, InertRedBlock_1]
+      - [0xE42840, vtx, InertRedBlock_2]
+      - [0xE428C0, rgba16, InertRedBlock_face, 32, 32]
+      - [0xE430C0]
+  - name: entity_model_HeartBlock
+    dir: entity/model
+    type: code
+    start: 0xE431F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE431F0, c, HeartBlock]
+    - start: 0xE431F0
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xE431F0, vtx, HeartBlock]
+      - [0xE435B0, rgba16, HeartBlock_face, 16, 32]
+      - [0xE439B0]
+  - name: entity_model_PowBlock
+    dir: entity/model
+    type: code
+    start: 0xE43B20
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE43B20, c, PowBlock]
+    - start: 0xE43B20
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xE43B20, vtx, PowBlock]
+      - [0xE43C20, ci8, PowBlock_face, 64, 32]
+      - [0xE44420, palette, PowBlock_face]
+      - [0xE44620]
+  - name: entity_model_SuperBlock
+    dir: entity/model
+    type: code
+    start: 0xE44800
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE44800, c, SuperBlock]
+    - start: 0xE44800
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xE44800, vtx, SuperBlock]
+      - [0xE44C80, ci4, SuperBlock_tex, 16, 32]
+      - [0xE44D80, palette, SuperBlock_tex]
+      - [0xE44DA0]
+  - name: entity_model_UltraBlock
+    dir: entity/model
+    type: code
+    start: 0xE45110
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE45110, c, UltraBlock]
+    - start: 0xE45110
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xE45110, vtx, UltraBlock]
+      - [0xE45590, ci4, UltraBlock_tex, 16, 32]
+      - [0xE45690, palette, UltraBlock_tex]
+      - [0xE456B0]
+  - name: entity_model_HitYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE459F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE459F0, c, HitYellowBlock_gfx]
+    - start: 0xE459F0
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xE459F0, vtx, HitYellowBlock_1]
+      - [0xE45B50, vtx, HitYellowBlock_2]
+      - [0xE45CB0]
+      - [0xE45E10, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xE46610, rgba16, HitYellowBlock_face2, 32, 32]
+  - name: entity_model_HitYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE46E10
+    vram: 0x00000000
+    subsegments:
+    - [0xE46E10, c, HitYellowBlock_anim]
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE470B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE470B0, c, HitFloatingYellowBlock_gfx]
+    - start: 0xE470B0
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xE470B0, vtx, HitFloatingYellowBlock_1]
+      - [0xE47210, vtx, HitFloatingYellowBlock_2]
+      - [0xE47390]
+      - [0xE474F0, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xE47CF0, rgba16, HitFloatingYellowBlock_face2, 32, 32]
+  - name: entity_model_HitFloatingYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE484F0
+    vram: 0x00000000
+    subsegments:
+    - [0xE484F0, c, HitFloatingYellowBlock_anim]
+  - name: entity_model_HitRedBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE48780
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE48780, c, HitRedBlock_gfx]
+    - start: 0xE48780
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xE48780, vtx, HitRedBlock_1]
+      - [0xE488E0, vtx, HitRedBlock_2]
+      - [0xE48A40]
+      - [0xE48BE0, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xE493E0, rgba16, HitRedBlock_face2, 32, 32]
+  - name: entity_model_HitRedBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE49BE0
+    vram: 0x00000000
+    subsegments:
+    - [0xE49BE0, c, HitRedBlock_anim]
+  - name: entity_model_HeartBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE49E40
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE49E40, c, HeartBlockContent]
+    - start: 0xE49E40
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xE49E40]
+      #- [0xE49E40, ci4, HeartBlockContent_img1, 32, 32]
+      #- [0xE4A040, ci4, HeartBlockContent_img2, 32, 32]
+      #- [0xE4A240, ci4, HeartBlockContent_img3, 32, 32]
+      #- [0xE4A440, palette, HeartBlockContent_pal] # this palette is common for all images above
+      #- [0xE4A460]
+  - name: entity_model_SuperBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE4A6A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4A6A0, c, SuperBlockContent]
+    - start: 0xE4A6A0
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xE4A6A0, ci4, SuperBlockContent, 32, 32]
+      - [0xE4A8A0, palette, SuperBlockContent]
+      - [0xE4A8C0, palette, SuperBlockContent.pal2]
+      - [0xE4A8E0, palette, SuperBlockContent.pal3]
+      - [0xE4A900, palette, SuperBlockContent.pal4]
+      - [0xE4A920]
+  - name: entity_model_UltraBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE4AA80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4AA80, c, UltraBlockContent]
+    - start: 0xE4AA80
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xE4AA80]
+      #- [0xE4AA80, ci4, UltraBlockContent_img1, 32, 32]
+      #- [0xE4AC80, ci4, UltraBlockContent_img2, 32, 32]
+      #- [0xE4AE80, ci4, UltraBlockContent_img3, 32, 32]
+      #- [0xE4B080, palette, UltraBlockContent_pal] # this palette is common for all images above
+      #- [0xE4B0A0]
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xE4B2E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4B2E0, c, SaveBlock]
+    - start: 0xE4B2E0
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xE4B2E0, vtx, SaveBlock_1]
+      - [0xE4B650, vtx, SaveBlock_2]
+      - [0xE4B9A0, vtx, SaveBlock_3]
+      - [0xE4BBE0, rgba16, SaveBlock_star, 32, 32]
+      - [0xE4C3E0]
+      - [0xE4C450, rgba32, SaveBlock_face, 32, 32]
+      - [0xE4D450]
+      - [0xE4D4C8, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xE4E4C8]
+  - name: entity_model_BoardedFloor
+    dir: entity/model
+    type: code
+    start: 0xE4E7F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4E7F0, c, BoardedFloor]
+    - start: 0xE4E7F0
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xE4E7F0, vtx, BoardedFloor_1]
+      - [0xE4E9D0, vtx, BoardedFloor_2]
+      - [0xE4EBB0, vtx, BoardedFloor_3]
+      - [0xE4ED90, vtx, BoardedFloor_4]
+      - [0xE4EF70, vtx, BoardedFloor_5]
+      - [0xE4F0F0, vtx, BoardedFloor_6]
+      - [0xE4F270, vtx, BoardedFloor_7]
+      - [0xE4F470, vtx, BoardedFloor_8]
+      - [0xE4F670, vtx, BoardedFloor_9]
+      - [0xE4F7F0, vtx, BoardedFloor_A]
+      - [0xE4F970, vtx, BoardedFloor_B]
+      - [0xE4FA70, vtx, BoardedFloor_C]
+      - [0xE4FBF0, rgba16, BoardedFloor, 64, 32]
+      - [0xE50BF0]
+  - name: entity_model_WoodenCrate
+    dir: entity/model
+    type: code
+    start: 0xE51640
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE51640, c, WoodenCrate]
+    - start: 0xE51640
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xE51640, vtx, WoodenCrate]
+      - [0xE52BA0, ci4, WoodenCrate_img1, 64, 64]
+      - [0xE533A0, palette, WoodenCrate_img1]
+      - [0xE533C0]
+      - [0xE53468, ci4, WoodenCrate_img2, 64, 64]
+      - [0xE53C68, palette, WoodenCrate_img2]
+      - [0xE53C88]
+  - name: entity_model_StarBoxLauncher
+    dir: entity/model
+    type: code
+    start: 0xE55A40
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE55A40, c, StarBoxLauncher]
+    - start: 0xE55A40
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xE55A40, vtx, StarBoxLauncher_1]
+      - [0xE55B30, vtx, StarBoxLauncher_2]
+      - [0xE55C50, vtx, StarBoxLauncher_3]
+      - [0xE55C90, vtx, StarBoxLauncher_4]
+      - [0xE55CD0, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xE55ED0]
+      - [0xE55F48, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xE56748, palette, StarBoxLauncher_face]
+      - [0xE56768]
+      - [0xE56810, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xE56910, palette, StarBoxLauncher_box]
+      - [0xE56930]
+  - name: entity_model_HiddenPanel
+    dir: entity/model
+    type: code
+    start: 0xE56BA0
+    vram: 0x0A000000
+    subsegments:
+    - [0xE56BA0, c, HiddenPanel]
+  - name: entity_model_Tweester
+    dir: entity/model
+    type: code
+    start: 0xE56E60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE56E60, c, Tweester]
+    - start: 0xE56E60
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xE56E60, vtx, Tweester_1]
+      - [0xE57270, vtx, Tweester_2]
+      - [0xE57680, vtx, Tweester_3]
+      - [0xE576C0, vtx, Tweester_4]
+      - [0xE57A50, i8, Tweester_img1, 32, 32]
+      - [0xE57E50, i8, Tweester_img2, 32, 32]
+      - [0xE58250]
+      - [0xE58300, ci4, Tweester_img3, 64, 32]
+      - [0xE58700, palette, Tweester_img3]
+      - [0xE58720]
+  - name: entity_model_BlueWarpPipe
+    dir: entity/model
+    type: code
+    start: 0xE58CD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE58CD0, c, BlueWarpPipe]
+    - start: 0xE58CD0
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xE58CD0, vtx, BlueWarpPipe_1]
+      - [0xE58D30, vtx, BlueWarpPipe_2]
+      - [0xE58FB0, vtx, BlueWarpPipe_3]
+      - [0xE58FF0, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xE59070, palette, BlueWarpPipe_texBase]
+      - [0xE59090]
+      - [0xE59140, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xE59240, palette, BlueWarpPipe_texPipe]
+      - [0xE59260]
+  - name: entity_model_Signpost
+    dir: entity/model
+    type: code
+    start: 0xE59480
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE59480, c, Signpost]
+    - start: 0xE59480
+      type: .data
+      name: Signpost
+      subsegments:
+      - [0xE59480, vtx, Signpost_1]
+      - [0xE595A0, vtx, Signpost_2]
+      - [0xE59A00, ci4, Signpost, 32, 32]
+      - [0xE59C00, palette, Signpost]
+      - [0xE59C20]
+  - name: entity_model_ArrowSign
+    dir: entity/model
+    type: code
+    start: 0xE59F00
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE59F00, c, ArrowSign]
+    - start: 0xE59F00
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xE59F00]
+      - [0xE59F80, ci8, ArrowSign, 64, 32]
+      - [0xE5A780, palette, ArrowSign]
+      - [0xE5A980]
+  - name: entity_model_Padlock
+    dir: entity/model
+    type: code
+    start: 0xE5AB50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5AB50, c, Padlock]
+    - start: 0xE5AB50
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xE5AB50, vtx, Padlock_1]
+      - [0xE5B110, vtx, Padlock_2]
+      - [0xE5B170, vtx, Padlock_3]
+      - [0xE5B1B0, vtx, Padlock_4]
+      - [0xE5B250, ci8, Padlock_face, 32, 32]
+      - [0xE5B650, palette, Padlock_face]
+      - [0xE5B850]
+      - [0xE5B8F8, ci8, Padlock_keyhole, 32, 64]
+      - [0xE5C0F8, palette, Padlock_keyhole]
+      - [0xE5C2F8]
+      - [0xE5C3A0, ci8, Padlock_body, 32, 32]
+      - [0xE5C7A0, palette, Padlock_body]
+      - [0xE5C9A0]
+  - name: entity_model_PadlockRedFrame
+    dir: entity/model
+    type: code
+    start: 0xE5CD80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5CD80, c, PadlockRedFrame]
+    - start: 0xE5CD80
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xE5CD80, vtx, PadlockRedFrame_1]
+      - [0xE5CF80, vtx, PadlockRedFrame_2]
+      - [0xE5CFC0, vtx, PadlockRedFrame_3]
+      - [0xE5D000, vtx, PadlockRedFrame_4]
+      - [0xE5D2C0, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xE5DAC0, palette, PadlockRedFrame_keyhole]
+      - [0xE5DCC0]
+      - [0xE5DD68, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xE5E168, palette, PadlockRedFrame_face]
+      - [0xE5E368]
+  - name: entity_model_PadlockRedFace
+    dir: entity/model
+    type: code
+    start: 0xE5E730
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5E730, c, PadlockRedFace]
+    - start: 0xE5E730
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xE5E730, vtx, PadlockRedFace_1]
+      - [0xE5ECF0, vtx, PadlockRedFace_2]
+      - [0xE5ED50, vtx, PadlockRedFace_3]
+      - [0xE5ED90, vtx, PadlockRedFace_4]
+      - [0xE5EE30, i4, PadlockRedFace_face, 32, 32]
+      - [0xE5F030]
+      - [0xE5F0A8, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xE5F8A8, palette, PadlockRedFace_keyhole]
+      - [0xE5FAA8]
+      - [0xE5FB50, ci8, PadlockRedFace_body, 32, 32]
+      - [0xE5FF50, palette, PadlockRedFace_body]
+      - [0xE60150]
+  - name: entity_model_PadlockBlueFace
+    dir: entity/model
+    type: code
+    start: 0xE60550
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE60550, c, PadlockBlueFace]
+    - start: 0xE60550
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xE60550, vtx, PadlockBlueFace_1]
+      - [0xE60B10, vtx, PadlockBlueFace_2]
+      - [0xE60B70, vtx, PadlockBlueFace_3]
+      - [0xE60BB0, vtx, PadlockBlueFace_4]
+      - [0xE60C50, i4, PadlockBlueFace_face, 32, 32]
+      - [0xE60E50]
+      - [0xE60EC8, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xE616C8, palette, PadlockBlueFace_keyhole]
+      - [0xE618C8]
+      - [0xE61970, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xE61D70, palette, PadlockBlueFace_body]
+      - [0xE61F70]
+  - name: entity_model_GreenStompSwitch
+    dir: entity/model
+    type: code
+    start: 0xE62370
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE62370, c, GreenStompSwitch]
+    - start: 0xE62370
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xE62370, vtx, GreenStompSwitch_1]
+      - [0xE623F0, vtx, GreenStompSwitch_2]
+      - [0xE625F0, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xE62670, palette, GreenStompSwitch_tex]
+      - [0xE62690]
+      - [0xE62748, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xE62848, palette, GreenStompSwitch_exclamationMark]
+      - [0xE62868]
+  - name: entity_model_RedSwitch
+    dir: entity/model
+    type: code
+    start: 0xE62AC0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE62AC0, c, RedSwitch]
+    - start: 0xE62AC0
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xE62AC0, vtx, RedSwitch_1]
+      - [0xE62E50, vtx, RedSwitch_2]
+      - [0xE62E90, vtx, RedSwitch_3]
+      - [0xE63090, ci8, RedSwitch_tex, 16, 16]
+      - [0xE63190, palette, RedSwitch_tex]
+      - [0xE63390]
+      - [0xE63438, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xE63538]
+  - name: entity_model_BlueSwitch
+    dir: entity/model
+    type: code
+    start: 0xE639C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE639C0, c, BlueSwitch]
+    - start: 0xE639C0
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xE639C0, vtx, BlueSwitch_1]
+      - [0xE63CC0, vtx, BlueSwitch_2]
+      - [0xE63D50, vtx, BlueSwitch_3]
+      - [0xE63D90, vtx, BlueSwitch_4]
+      - [0xE63F90, ci8, BlueSwitch_tex, 16, 16]
+      - [0xE64090, palette, BlueSwitch_tex]
+      - [0xE64290]
+      - [0xE64338, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xE64438]
+  - name: entity_model_Chest
+    dir: entity/model
+    type: code
+    start: 0xE648D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE648D0, c, Chest]
+    - start: 0xE648D0
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xE648D0, vtx, Chest_1]
+      - [0xE64A60, vtx, Chest_2]
+      - [0xE64AE0, vtx, Chest_3]
+      - [0xE64C60, vtx, Chest_4]
+      - [0xE64CE0, rgba16, Chest_tex1, 16, 32]
+      - [0xE650E0]
+      - [0xE65168, ci4, Chest_tex2, 16, 32]
+      - [0xE65268, palette, Chest_tex2]
+      - [0xE65288]
+      - [0xE65340, ci4, Chest_lock, 16, 32]
+      - [0xE65440, palette, Chest_lock]
+      - [0xE65460]
+  - name: entity_model_ScriptSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE657A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE657A0, c, ScriptSpring_gfx]
+    - start: 0xE657A0
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xE657A0, vtx, ScriptSpring_1]
+      - [0xE65A20, vtx, ScriptSpring_2]
+      - [0xE65AA0, vtx, ScriptSpring_3]
+      - [0xE65B20, vtx, ScriptSpring_4]
+      - [0xE65BA0, vtx, ScriptSpring_5]
+      - [0xE65E20, vtx, ScriptSpring_6]
+      - [0xE65F80, vtx, ScriptSpring_7]
+      - [0xE66000, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xE66100, palette, ScriptSpring_tex1]
+      - [0xE66300]
+      - [0xE663A8, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xE664A8, palette, ScriptSpring_tex2]
+      - [0xE666A8]
+      - [0xE66750, ci8, ScriptSpring_star, 32, 32]
+      - [0xE66B50, palette, ScriptSpring_star]
+      - [0xE66D50]
+  - name: entity_model_ScriptSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE67120
+    vram: 0x00000000
+    subsegments:
+    - [0xE67120, c, ScriptSpring_anim]
+  - name: entity_model_SimpleSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE68580
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE68580, c, SimpleSpring_gfx]
+    - start: 0xE68580
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xE68580, vtx, SimpleSpring_1]
+      - [0xE68800, vtx, SimpleSpring_2]
+      - [0xE68880, vtx, SimpleSpring_3]
+      - [0xE68900, vtx, SimpleSpring_4]
+      - [0xE68B80, vtx, SimpleSpring_5]
+      - [0xE68CE0, vtx, SimpleSpring_6]
+      - [0xE68D60, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xE68E60, palette, SimpleSpring_tex1]
+      - [0xE69060]
+      - [0xE69108, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xE69308]
+      - [0xE69380, ci8, SimpleSpring_star, 32, 32]
+      - [0xE69780, palette, SimpleSpring_star]
+      - [0xE69980]
+  - name: entity_model_SimpleSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE69D50
+    vram: 0x00000000
+    subsegments:
+    - [0xE69D50, c, SimpleSpring_anim]
+  - name: entity_model_BellbellPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6B1B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6B1B0, c, BellbellPlant_gfx]
+    - start: 0xE6B1B0
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xE6B1B0, vtx, BellbellPlant_1]
+      - [0xE6B540, vtx, BellbellPlant_2]
+      - [0xE6B7F0, vtx, BellbellPlant_3]
+      - [0xE6B8D0, vtx, BellbellPlant_4]
+      - [0xE6BBC0, vtx, BellbellPlant_5]
+      - [0xE6BCA0]
+      - [0xE6C240, rgba16, BellbellPlant, 16, 16]
+  - name: entity_model_BellbellPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE6C440
+    vram: 0x00000000
+    subsegments:
+    - [0xE6C440, c, BellbellPlant_anim]
+  - name: entity_model_TrumpetPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6D390
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6D390, c, TrumpetPlant_gfx]
+    - start: 0xE6D390
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xE6D390, vtx, TrumpetPlant_1]
+      - [0xE6D5D0, vtx, TrumpetPlant_2]
+      - [0xE6DD40]
+      - [0xE6E0D0, rgba16, TrumpetPlant, 16, 16]
+  - name: entity_model_TrumpetPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE6E2D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE6E2D0, c, TrumpetPlant_anim]
+  - name: entity_model_MunchlesiaReset_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6E660
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6E660, c, MunchlesiaReset_gfx]
+    - start: 0xE6E660
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xE6E660, vtx, MunchlesiaReset]
+      - [0xE6FF50]
+      - [0xE74548, rgba16, MunchlesiaReset, 16, 16]
+  - name: entity_model_MunchlesiaReset_anim
+    dir: entity/model
+    type: code
+    start: 0xE74750
+    vram: 0x00000000
+    subsegments:
+    - [0xE74750, c, MunchlesiaReset_anim]
+  - name: entity_model_MunchlesiaGrab_gfx
+    dir: entity/model
+    type: code
+    start: 0xE74BD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE74BD0, c, MunchlesiaGrab_gfx]
+    - start: 0xE74BD0
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xE74BD0, vtx, MunchlesiaGrab]
+      - [0xE764C0]
+      - [0xE7AAB8, rgba16, MunchlesiaGrab, 16, 16]
+  - name: entity_model_MunchlesiaGrab_anim
+    dir: entity/model
+    type: code
+    start: 0xE7ACC0
+    vram: 0x00000000
+    subsegments:
+    - [0xE7ACC0, c, MunchlesiaGrab_anim]
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    dir: entity/model
+    type: code
+    start: 0xE7B0E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE7B0E0, c, MunchlesiaEnvelop_gfx]
+    - start: 0xE7B0E0
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xE7B0E0, vtx, MunchlesiaEnvelop]
+      - [0xE7C9D0]
+      - [0xE80FC8, rgba16, MunchlesiaEnvelop, 16, 16]
+  - name: entity_model_MunchlesiaEnvelop_anim
+    dir: entity/model
+    type: code
+    start: 0xE811D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE811D0, c, MunchlesiaEnvelop_anim]
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    dir: entity/model
+    type: code
+    start: 0xE815F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE815F0, c, MunchlesiaBeginChew_gfx]
+    - start: 0xE815F0
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xE815F0, vtx, MunchlesiaBeginChew]
+      - [0xE82EE0]
+      - [0xE87E30, rgba16, MunchlesiaBeginChew, 16, 16]
+  - name: entity_model_MunchlesiaBeginChew_anim
+    dir: entity/model
+    type: code
+    start: 0xE88030
+    vram: 0x00000000
+    subsegments:
+    - [0xE88030, c, MunchlesiaBeginChew_anim]
+  - name: entity_model_MunchlesiaChewing_gfx
+    dir: entity/model
+    type: code
+    start: 0xE884A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE884A0, c, MunchlesiaChewing_gfx]
+    - start: 0xE884A0
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xE884A0, vtx, MunchlesiaChewing]
+      - [0xE89D90]
+      - [0xE8A210, rgba16, MunchlesiaChewing, 16, 16]
+  - name: entity_model_MunchlesiaChewing_anim
+    dir: entity/model
+    type: code
+    start: 0xE8A410
+    vram: 0x00000000
+    subsegments:
+    - [0xE8A410, c, MunchlesiaChewing_anim]
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    dir: entity/model
+    type: code
+    start: 0xE8A9E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE8A9E0, c, MunchlesiaSpitOut_gfx]
+    - start: 0xE8A9E0
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xE8A9E0, vtx, MunchlesiaSpitOut]
+      - [0xE8C2D0]
+      - [0xE91220, rgba16, MunchlesiaSpitOut, 16, 16]
+  - name: entity_model_MunchlesiaSpitOut_anim
+    dir: entity/model
+    type: code
+    start: 0xE91420
+    vram: 0x00000000
+    subsegments:
+    - [0xE91420, c, MunchlesiaSpitOut_anim]
+  - name: entity_model_MunchlesiaReset1_gfx
+    dir: entity/model
+    type: code
+    start: 0xE91890
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE91890, c, MunchlesiaReset1_gfx]
+    - start: 0xE91890
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xE91890, vtx, MunchlesiaReset1]
+      - [0xE93180]
+      - [0xE980D0, rgba16, MunchlesiaReset1, 16, 16]
+  - name: entity_model_MunchlesiaReset1_anim
+    dir: entity/model
+    type: code
+    start: 0xE982D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE982D0, c, MunchlesiaReset1_anim]
+  - name: entity_model_CymbalPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE98740
+    vram: 0x00000000
+    subsegments:
+    - [0xE98740, c, CymbalPlant_anim]
+  - name: entity_model_CymbalPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE992F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE992F0, c, CymbalPlant_gfx]
+    - start: 0xE992F0
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xE992F0, ci4, CymbalPlant, 64, 64]
+      - [0xE99AF0, palette, CymbalPlant]
+      - [0xE99B10]
+      - [0xE99BB8, vtx, CymbalPlant_1]
+      - [0xE99C58, vtx, CymbalPlant_2]
+      - [0xE99CB8, vtx, CymbalPlant_3]
+      - [0xE99D58, vtx, CymbalPlant_4]
+      - [0xE99EA8, vtx, CymbalPlant_5]
+      - [0xE9A018, vtx, CymbalPlant_6]
+      - [0xE9A0A8, vtx, CymbalPlant_7]
+      - [0xE9A218, vtx, CymbalPlant_8]
+      - [0xE9A368]
+  - name: entity_model_PinkFlower_anim
+    dir: entity/model
+    type: code
+    start: 0xE9A990
+    vram: 0x00000000
+    subsegments:
+    - [0xE9A990, c, PinkFlower_anim]
+  - name: entity_model_PinkFlower_gfx
+    dir: entity/model
+    type: code
+    start: 0xE9B500
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9B500, c, PinkFlower_gfx]
+    - start: 0xE9B500
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xE9B500, vtx, PinkFlower_1]
+      - [0xE9B540, vtx, PinkFlower_2]
+      - [0xE9B790, vtx, PinkFlower_3]
+      - [0xE9B8B0, vtx, PinkFlower_4]
+      - [0xE9B9B0, vtx, PinkFlower_5]
+      - [0xE9BAB0, ia16, PinkFlower_light, 16, 16]
+      - [0xE9BCB0]
+      - [0xE9BD20, rgba16, PinkFlower_tex, 16, 64]
+      - [0xE9C520]
+  - name: entity_model_SpinningFlower
+    dir: entity/model
+    type: code
+    start: 0xE9C900
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9C900, c, SpinningFlower]
+    - start: 0xE9C900
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xE9C900, vtx, SpinningFlower_1]
+      - [0xE9C950, vtx, SpinningFlower_2]
+      - [0xE9C9A0, vtx, SpinningFlower_3]
+      - [0xE9CA20, vtx, SpinningFlower_4]
+      - [0xE9CA80, ia4, SpinningFlower_img1, 16, 32]
+      - [0xE9CB80]
+      - [0xE9CBF8, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xE9D3F8]
+  - name: entity_model_BombableRock
+    dir: entity/model
+    type: code
+    start: 0xE9D650
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9D650, c, BombableRock]
+    - start: 0xE9D650
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xE9D650, vtx, BombableRock_1]
+      - [0xE9D9D0, vtx, BombableRock_2]
+      - [0xE9DAF0, vtx, BombableRock_3]
+      - [0xE9DC50, vtx, BombableRock_4]
+      - [0xE9DD70, vtx, BombableRock_5]
+      - [0xE9DE90, ci4, BombableRock, 64, 64]
+      - [0xE9E690, palette, BombableRock]
+      - [0xE9E6B0]
+  - [0xE9ECD0, bin] # unk data
   - type: code
     start: 0xEA0900
     vram: 0x80240000
@@ -11679,15 +13619,20 @@ segments:
   - [0xFA08A0, bin, bgm/Bowser_s_Attacks_95]
   - [0xFA3C60, bin, bgm/End_Parade_1_90]
   - [0xFA85F0, bin, bgm/End_Parade_2_91]
-  - [0xFABE90, bin, bgm/The_End_6E]
+  - [0xFABE90, bin, bgm/Ths_End_6E]
   - [0xFACC80, bin, bgm/Koopa_Radio_Station_2D]
-  - [0xFAD210, bin, bgm/The_End_Low_Frequency__2E]
+  - [0xFAD210, bin, bgm/Ths_End_Low_Frequency__2E]
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
-  - [0xFAE860, bin] # sfx
-  - [0x1943000, bin] # duplicate of 0x1E00000
-  - [0x1983000, bin]
-  - [0x19E09A8, Yay0] # TODO shiftability - figure out what these are and if they have any pointers in them
+  - [0xFAE860, bin] # more audio stuff
+
+  - [0x1943000, bin] # sprite data build metadata
+  - [0x1943020, bin] # Player sprite table
+  - [0x1943BA0, bin] # Mario world sprites
+  - [0x199A8C0, bin] # Retro sprites
+  - [0x199BB00, bin] # Princess Peach sprites
+  - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
+  - [0x19E09A8, Yay0]
   - [0x19E1390, Yay0]
   - [0x19E1888, Yay0]
   - [0x19E2330, Yay0]
@@ -11942,1092 +13887,56 @@ segments:
   - start: 0x1B83000
     type: pm_msg
     files:
-      - 00_introduction
-      - 01_postgame_celebration
-      - 02_toad_town_gate_sector
-      - 03_toad_town_castle_sector
-      - 04_toad_town_bridge_sector
-      - 05_toad_town_train_sector
-      - 06_toad_town_warehouse_sector
-      - 07_toad_town_docks_sector
-      - 08_minigames
-      - 09_castle_grounds
-      - 0A_shooting_star_summit
-      - 0B_prologue
-      - 0C_chapter_1
-      - 0D_chapter_2
-      - 0E_chapter_3
-      - 0F_chapter_4
-      - 10_chapter_5
-      - 11_chapter_6
-      - 12_chapter_7
-      - 13_chapter_8
-      - 14_peach_segments
-      - 15_koopa_koot_favors
-      - 16_russ_t_advice
-      - 17_news_bulletin
-      - 18_gossip_bulletin
-      - 19_map_tattles
-      - 1A_npc_tattles
-      - 1B_entity_tattles
-      - 1C_enemy_tattles
-      - 1D_menus
-      - 1E_choices
-      - 1F_pause
-      - 20_party_letters_luigi_diary
-      - 21_advice_fortunes
-      - 22_treasure_fortunes
-      - 23_item_descriptions # TODO: difference between 23,24,25 (shops, menus, pickups?)
-      - 24_item_descriptions
-      - 25_item_descriptions
-      - 26_item_names
-      - 27_shop_messages
-      - 28_partner_descriptions
-      - 29_enemy_names
-      - 2A_mario_moves
-      - 2B_partner_moves
-      - 2C_quiz_questions
-      - 2D_quiz_options
-      - 2E_credits
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
-  - name: mapfs
-    type: pm_map_data
-    start: 0x1E40000
-    files:
-      - dro_01_shape
-      - dro_01_hit
-      - dro_02_shape
-      - dro_02_hit
-      - hos_00_shape
-      - hos_00_hit
-      - hos_01_shape
-      - hos_01_hit
-      - hos_02_shape
-      - hos_02_hit
-      - hos_03_shape
-      - hos_03_hit
-      - hos_04_shape
-      - hos_04_hit
-      - hos_05_shape
-      - hos_05_hit
-      - hos_06_shape
-      - hos_06_hit
-      - hos_10_shape
-      - hos_10_hit
-      - hos_20_shape
-      - hos_20_hit
-      - isk_01_shape
-      - isk_01_hit
-      - isk_02_shape
-      - isk_02_hit
-      - isk_03_shape
-      - isk_03_hit
-      - isk_04_shape
-      - isk_04_hit
-      - isk_05_shape
-      - isk_05_hit
-      - isk_06_shape
-      - isk_06_hit
-      - isk_07_shape
-      - isk_07_hit
-      - isk_08_shape
-      - isk_08_hit
-      - isk_09_shape
-      - isk_09_hit
-      - isk_10_shape
-      - isk_10_hit
-      - isk_11_shape
-      - isk_11_hit
-      - isk_12_shape
-      - isk_12_hit
-      - isk_13_shape
-      - isk_13_hit
-      - isk_14_shape
-      - isk_14_hit
-      - isk_16_shape
-      - isk_16_hit
-      - isk_18_shape
-      - isk_18_hit
-      - isk_19_shape
-      - isk_19_hit
-      - iwa_00_shape
-      - iwa_00_hit
-      - iwa_01_shape
-      - iwa_01_hit
-      - iwa_02_shape
-      - iwa_02_hit
-      - iwa_03_shape
-      - iwa_03_hit
-      - iwa_04_shape
-      - iwa_04_hit
-      - iwa_10_shape
-      - iwa_10_hit
-      - iwa_11_shape
-      - iwa_11_hit
-      - osr_00_shape
-      - osr_00_hit
-      - osr_01_shape
-      - osr_01_hit
-      - osr_02_shape
-      - osr_02_hit
-      - osr_03_shape
-      - osr_03_hit
-      - kkj_00_shape
-      - kkj_00_hit
-      - kkj_01_shape
-      - kkj_01_hit
-      - kkj_02_shape
-      - kkj_02_hit
-      - kkj_03_shape
-      - kkj_03_hit
-      - kkj_10_shape
-      - kkj_10_hit
-      - kkj_11_shape
-      - kkj_11_hit
-      - kkj_12_shape
-      - kkj_12_hit
-      - kkj_13_shape
-      - kkj_13_hit
-      - kkj_14_shape
-      - kkj_14_hit
-      - kkj_15_shape
-      - kkj_15_hit
-      - kkj_16_shape
-      - kkj_16_hit
-      - kkj_17_shape
-      - kkj_17_hit
-      - kkj_18_shape
-      - kkj_18_hit
-      - kkj_19_shape
-      - kkj_19_hit
-      - kkj_20_shape
-      - kkj_20_hit
-      - kkj_21_shape
-      - kkj_21_hit
-      - kkj_22_shape
-      - kkj_22_hit
-      - kkj_23_shape
-      - kkj_23_hit
-      - kkj_24_shape
-      - kkj_24_hit
-      - kkj_25_shape
-      - kkj_25_hit
-      - kkj_26_shape
-      - kkj_26_hit
-      - kkj_27_shape
-      - kkj_27_hit
-      - kkj_28_shape
-      - kkj_28_hit
-      - kkj_29_shape
-      - kkj_29_hit
-      - kmr_00_shape
-      - kmr_00_hit
-      - kmr_02_shape
-      - kmr_02_hit
-      - kmr_03_shape
-      - kmr_03_hit
-      - kmr_04_shape
-      - kmr_04_hit
-      - kmr_05_shape
-      - kmr_05_hit
-      - kmr_06_shape
-      - kmr_06_hit
-      - kmr_07_shape
-      - kmr_07_hit
-      - kmr_09_shape
-      - kmr_09_hit
-      - kmr_10_shape
-      - kmr_10_hit
-      - kmr_11_shape
-      - kmr_11_hit
-      - kmr_12_shape
-      - kmr_12_hit
-      - kmr_20_shape
-      - kmr_20_hit
-      - kmr_30_shape
-      - kmr_30_hit
-      - kpa_01_shape
-      - kpa_01_hit
-      - kpa_03_shape
-      - kpa_03_hit
-      - kpa_04_shape
-      - kpa_04_hit
-      - kpa_08_shape
-      - kpa_08_hit
-      - kpa_09_shape
-      - kpa_09_hit
-      - kpa_10_shape
-      - kpa_10_hit
-      - kpa_11_shape
-      - kpa_11_hit
-      - kpa_12_shape
-      - kpa_12_hit
-      - kpa_13_shape
-      - kpa_13_hit
-      - kpa_14_shape
-      - kpa_14_hit
-      - kpa_15_shape
-      - kpa_15_hit
-      - kpa_16_shape
-      - kpa_16_hit
-      - kpa_17_shape
-      - kpa_17_hit
-      - kpa_32_shape
-      - kpa_32_hit
-      - kpa_33_shape
-      - kpa_33_hit
-      - kpa_40_shape
-      - kpa_40_hit
-      - kpa_41_shape
-      - kpa_41_hit
-      - kpa_50_shape
-      - kpa_50_hit
-      - kpa_52_shape
-      - kpa_52_hit
-      - kpa_60_shape
-      - kpa_60_hit
-      - kpa_61_shape
-      - kpa_61_hit
-      - kpa_62_shape
-      - kpa_62_hit
-      - kpa_63_shape
-      - kpa_63_hit
-      - kpa_70_shape
-      - kpa_70_hit
-      - kpa_80_shape
-      - kpa_80_hit
-      - kpa_90_shape
-      - kpa_90_hit
-      - kpa_91_shape
-      - kpa_91_hit
-      - kpa_94_shape
-      - kpa_94_hit
-      - kpa_95_shape
-      - kpa_95_hit
-      - kpa_96_shape
-      - kpa_96_hit
-      - kpa_102_shape
-      - kpa_102_hit
-      - kpa_111_shape
-      - kpa_111_hit
-      - kpa_112_shape
-      - kpa_112_hit
-      - kpa_113_shape
-      - kpa_113_hit
-      - kpa_115_shape
-      - kpa_115_hit
-      - kpa_116_shape
-      - kpa_116_hit
-      - kpa_117_shape
-      - kpa_117_hit
-      - kpa_118_shape
-      - kpa_118_hit
-      - kpa_119_shape
-      - kpa_119_hit
-      - kpa_121_shape
-      - kpa_121_hit
-      - kpa_130_shape
-      - kpa_130_hit
-      - kpa_133_shape
-      - kpa_133_hit
-      - kpa_134_shape
-      - kpa_134_hit
-      - machi_shape
-      - machi_hit
-      - mac_00_shape
-      - mac_00_hit
-      - mac_01_shape
-      - mac_01_hit
-      - mac_02_shape
-      - mac_02_hit
-      - mac_03_shape
-      - mac_03_hit
-      - mac_04_shape
-      - mac_04_hit
-      - mac_05_shape
-      - mac_05_hit
-      - mac_06_shape
-      - mac_06_hit
-      - tik_01_shape
-      - tik_01_hit
-      - tik_02_shape
-      - tik_02_hit
-      - tik_03_shape
-      - tik_03_hit
-      - tik_04_shape
-      - tik_04_hit
-      - tik_05_shape
-      - tik_05_hit
-      - tik_06_shape
-      - tik_06_hit
-      - tik_07_shape
-      - tik_07_hit
-      - tik_08_shape
-      - tik_08_hit
-      - tik_09_shape
-      - tik_09_hit
-      - tik_10_shape
-      - tik_10_hit
-      - tik_12_shape
-      - tik_12_hit
-      - tik_14_shape
-      - tik_14_hit
-      - tik_15_shape
-      - tik_15_hit
-      - tik_17_shape
-      - tik_17_hit
-      - tik_18_shape
-      - tik_18_hit
-      - tik_19_shape
-      - tik_19_hit
-      - tik_20_shape
-      - tik_20_hit
-      - tik_21_shape
-      - tik_21_hit
-      - tik_22_shape
-      - tik_22_hit
-      - tik_23_shape
-      - tik_23_hit
-      - tik_25_shape
-      - tik_25_hit
-      - kgr_01_shape
-      - kgr_01_hit
-      - kgr_02_shape
-      - kgr_02_hit
-      - nok_01_shape
-      - nok_01_hit
-      - nok_02_shape
-      - nok_02_hit
-      - nok_03_shape
-      - nok_03_hit
-      - nok_04_shape
-      - nok_04_hit
-      - nok_11_shape
-      - nok_11_hit
-      - nok_12_shape
-      - nok_12_hit
-      - nok_13_shape
-      - nok_13_hit
-      - nok_14_shape
-      - nok_14_hit
-      - nok_15_shape
-      - nok_15_hit
-      - sbk_00_shape
-      - sbk_00_hit
-      - sbk_01_shape
-      - sbk_01_hit
-      - sbk_02_shape
-      - sbk_02_hit
-      - sbk_03_shape
-      - sbk_03_hit
-      - sbk_04_shape
-      - sbk_04_hit
-      - sbk_05_shape
-      - sbk_05_hit
-      - sbk_06_shape
-      - sbk_06_hit
-      - sbk_10_shape
-      - sbk_10_hit
-      - sbk_11_shape
-      - sbk_11_hit
-      - sbk_12_shape
-      - sbk_12_hit
-      - sbk_13_shape
-      - sbk_13_hit
-      - sbk_14_shape
-      - sbk_14_hit
-      - sbk_15_shape
-      - sbk_15_hit
-      - sbk_16_shape
-      - sbk_16_hit
-      - sbk_20_shape
-      - sbk_20_hit
-      - sbk_21_shape
-      - sbk_21_hit
-      - sbk_22_shape
-      - sbk_22_hit
-      - sbk_23_shape
-      - sbk_23_hit
-      - sbk_24_shape
-      - sbk_24_hit
-      - sbk_25_shape
-      - sbk_25_hit
-      - sbk_26_shape
-      - sbk_26_hit
-      - sbk_30_shape
-      - sbk_30_hit
-      - sbk_31_shape
-      - sbk_31_hit
-      - sbk_32_shape
-      - sbk_32_hit
-      - sbk_33_shape
-      - sbk_33_hit
-      - sbk_34_shape
-      - sbk_34_hit
-      - sbk_35_shape
-      - sbk_35_hit
-      - sbk_36_shape
-      - sbk_36_hit
-      - sbk_40_shape
-      - sbk_40_hit
-      - sbk_41_shape
-      - sbk_41_hit
-      - sbk_42_shape
-      - sbk_42_hit
-      - sbk_43_shape
-      - sbk_43_hit
-      - sbk_44_shape
-      - sbk_44_hit
-      - sbk_45_shape
-      - sbk_45_hit
-      - sbk_46_shape
-      - sbk_46_hit
-      - sbk_50_shape
-      - sbk_50_hit
-      - sbk_51_shape
-      - sbk_51_hit
-      - sbk_52_shape
-      - sbk_52_hit
-      - sbk_53_shape
-      - sbk_53_hit
-      - sbk_54_shape
-      - sbk_54_hit
-      - sbk_55_shape
-      - sbk_55_hit
-      - sbk_56_shape
-      - sbk_56_hit
-      - sbk_60_shape
-      - sbk_60_hit
-      - sbk_61_shape
-      - sbk_61_hit
-      - sbk_62_shape
-      - sbk_62_hit
-      - sbk_63_shape
-      - sbk_63_hit
-      - sbk_64_shape
-      - sbk_64_hit
-      - sbk_65_shape
-      - sbk_65_hit
-      - sbk_66_shape
-      - sbk_66_hit
-      - sbk_99_shape
-      - sbk_99_hit
-      - trd_00_shape
-      - trd_00_hit
-      - trd_01_shape
-      - trd_01_hit
-      - trd_02_shape
-      - trd_02_hit
-      - trd_03_shape
-      - trd_03_hit
-      - trd_04_shape
-      - trd_04_hit
-      - trd_05_shape
-      - trd_05_hit
-      - trd_06_shape
-      - trd_06_hit
-      - trd_07_shape
-      - trd_07_hit
-      - trd_08_shape
-      - trd_08_hit
-      - trd_09_shape
-      - trd_09_hit
-      - trd_10_shape
-      - trd_10_hit
-      - tst_01_shape
-      - tst_01_hit
-      - tst_02_shape
-      - tst_02_hit
-      - tst_03_shape
-      - tst_03_hit
-      - tst_04_shape
-      - tst_04_hit
-      - tst_10_shape
-      - tst_10_hit
-      - tst_11_shape
-      - tst_11_hit
-      - tst_12_shape
-      - tst_12_hit
-      - tst_13_shape
-      - tst_13_hit
-      - tst_20_shape
-      - tst_20_hit
-      - jan_00_shape
-      - jan_00_hit
-      - jan_01_shape
-      - jan_01_hit
-      - jan_02_shape
-      - jan_02_hit
-      - jan_03_shape
-      - jan_03_hit
-      - jan_04_shape
-      - jan_04_hit
-      - jan_05_shape
-      - jan_05_hit
-      - jan_06_shape
-      - jan_06_hit
-      - jan_07_shape
-      - jan_07_hit
-      - jan_08_shape
-      - jan_08_hit
-      - jan_09_shape
-      - jan_09_hit
-      - jan_10_shape
-      - jan_10_hit
-      - jan_11_shape
-      - jan_11_hit
-      - jan_12_shape
-      - jan_12_hit
-      - jan_13_shape
-      - jan_13_hit
-      - jan_14_shape
-      - jan_14_hit
-      - jan_15_shape
-      - jan_15_hit
-      - jan_16_shape
-      - jan_16_hit
-      - jan_17_shape
-      - jan_17_hit
-      - jan_18_shape
-      - jan_18_hit
-      - jan_19_shape
-      - jan_19_hit
-      - jan_22_shape
-      - jan_22_hit
-      - jan_23_shape
-      - jan_23_hit
-      - mim_01_shape
-      - mim_01_hit
-      - mim_02_shape
-      - mim_02_hit
-      - mim_03_shape
-      - mim_03_hit
-      - mim_04_shape
-      - mim_04_hit
-      - mim_05_shape
-      - mim_05_hit
-      - mim_06_shape
-      - mim_06_hit
-      - mim_07_shape
-      - mim_07_hit
-      - mim_08_shape
-      - mim_08_hit
-      - mim_09_shape
-      - mim_09_hit
-      - mim_10_shape
-      - mim_10_hit
-      - mim_11_shape
-      - mim_11_hit
-      - mim_12_shape
-      - mim_12_hit
-      - obk_01_shape
-      - obk_01_hit
-      - obk_02_shape
-      - obk_02_hit
-      - obk_03_shape
-      - obk_03_hit
-      - obk_04_shape
-      - obk_04_hit
-      - obk_05_shape
-      - obk_05_hit
-      - obk_06_shape
-      - obk_06_hit
-      - obk_07_shape
-      - obk_07_hit
-      - obk_08_shape
-      - obk_08_hit
-      - obk_09_shape
-      - obk_09_hit
-      - arn_02_shape
-      - arn_02_hit
-      - arn_03_shape
-      - arn_03_hit
-      - arn_04_shape
-      - arn_04_hit
-      - arn_05_shape
-      - arn_05_hit
-      - arn_07_shape
-      - arn_07_hit
-      - arn_08_shape
-      - arn_08_hit
-      - arn_09_shape
-      - arn_09_hit
-      - arn_10_shape
-      - arn_10_hit
-      - arn_11_shape
-      - arn_11_hit
-      - arn_12_shape
-      - arn_12_hit
-      - arn_13_shape
-      - arn_13_hit
-      - arn_20_shape
-      - arn_20_hit
-      - dgb_01_shape
-      - dgb_01_hit
-      - dgb_02_shape
-      - dgb_02_hit
-      - dgb_03_shape
-      - dgb_03_hit
-      - dgb_04_shape
-      - dgb_04_hit
-      - dgb_05_shape
-      - dgb_05_hit
-      - dgb_06_shape
-      - dgb_06_hit
-      - dgb_07_shape
-      - dgb_07_hit
-      - dgb_08_shape
-      - dgb_08_hit
-      - dgb_09_shape
-      - dgb_09_hit
-      - dgb_10_shape
-      - dgb_10_hit
-      - dgb_11_shape
-      - dgb_11_hit
-      - dgb_12_shape
-      - dgb_12_hit
-      - dgb_13_shape
-      - dgb_13_hit
-      - dgb_14_shape
-      - dgb_14_hit
-      - dgb_15_shape
-      - dgb_15_hit
-      - dgb_16_shape
-      - dgb_16_hit
-      - dgb_17_shape
-      - dgb_17_hit
-      - dgb_18_shape
-      - dgb_18_hit
-      - kzn_01_shape
-      - kzn_01_hit
-      - kzn_02_shape
-      - kzn_02_hit
-      - kzn_03_shape
-      - kzn_03_hit
-      - kzn_04_shape
-      - kzn_04_hit
-      - kzn_05_shape
-      - kzn_05_hit
-      - kzn_06_shape
-      - kzn_06_hit
-      - kzn_07_shape
-      - kzn_07_hit
-      - kzn_08_shape
-      - kzn_08_hit
-      - kzn_09_shape
-      - kzn_09_hit
-      - kzn_10_shape
-      - kzn_10_hit
-      - kzn_11_shape
-      - kzn_11_hit
-      - kzn_17_shape
-      - kzn_17_hit
-      - kzn_18_shape
-      - kzn_18_hit
-      - kzn_19_shape
-      - kzn_19_hit
-      - kzn_20_shape
-      - kzn_20_hit
-      - kzn_22_shape
-      - kzn_22_hit
-      - kzn_23_shape
-      - kzn_23_hit
-      - flo_00_shape
-      - flo_00_hit
-      - flo_03_shape
-      - flo_03_hit
-      - flo_07_shape
-      - flo_07_hit
-      - flo_08_shape
-      - flo_08_hit
-      - flo_09_shape
-      - flo_09_hit
-      - flo_10_shape
-      - flo_10_hit
-      - flo_11_shape
-      - flo_11_hit
-      - flo_12_shape
-      - flo_12_hit
-      - flo_13_shape
-      - flo_13_hit
-      - flo_14_shape
-      - flo_14_hit
-      - flo_15_shape
-      - flo_15_hit
-      - flo_16_shape
-      - flo_16_hit
-      - flo_17_shape
-      - flo_17_hit
-      - flo_18_shape
-      - flo_18_hit
-      - flo_19_shape
-      - flo_19_hit
-      - flo_21_shape
-      - flo_21_hit
-      - flo_22_shape
-      - flo_22_hit
-      - flo_23_shape
-      - flo_23_hit
-      - flo_24_shape
-      - flo_24_hit
-      - flo_25_shape
-      - flo_25_hit
-      - sam_01_shape
-      - sam_01_hit
-      - sam_02_shape
-      - sam_02_hit
-      - sam_03_shape
-      - sam_03_hit
-      - sam_04_shape
-      - sam_04_hit
-      - sam_05_shape
-      - sam_05_hit
-      - sam_06_shape
-      - sam_06_hit
-      - sam_07_shape
-      - sam_07_hit
-      - sam_08_shape
-      - sam_08_hit
-      - sam_09_shape
-      - sam_09_hit
-      - sam_10_shape
-      - sam_10_hit
-      - sam_11_shape
-      - sam_11_hit
-      - sam_12_shape
-      - sam_12_hit
-      - pra_01_shape
-      - pra_01_hit
-      - pra_02_shape
-      - pra_02_hit
-      - pra_03_shape
-      - pra_03_hit
-      - pra_04_shape
-      - pra_04_hit
-      - pra_05_shape
-      - pra_05_hit
-      - pra_09_shape
-      - pra_09_hit
-      - pra_10_shape
-      - pra_10_hit
-      - pra_11_shape
-      - pra_11_hit
-      - pra_13_shape
-      - pra_13_hit
-      - pra_14_shape
-      - pra_14_hit
-      - pra_15_shape
-      - pra_15_hit
-      - pra_16_shape
-      - pra_16_hit
-      - pra_18_shape
-      - pra_18_hit
-      - pra_19_shape
-      - pra_19_hit
-      - pra_20_shape
-      - pra_20_hit
-      - pra_21_shape
-      - pra_21_hit
-      - pra_22_shape
-      - pra_22_hit
-      - pra_29_shape
-      - pra_29_hit
-      - pra_31_shape
-      - pra_31_hit
-      - pra_32_shape
-      - pra_32_hit
-      - pra_33_shape
-      - pra_33_hit
-      - pra_34_shape
-      - pra_34_hit
-      - pra_35_shape
-      - pra_35_hit
-      - pra_40_shape
-      - pra_40_hit
-      - omo_01_shape
-      - omo_01_hit
-      - omo_02_shape
-      - omo_02_hit
-      - omo_03_shape
-      - omo_03_hit
-      - omo_04_shape
-      - omo_04_hit
-      - omo_05_shape
-      - omo_05_hit
-      - omo_06_shape
-      - omo_06_hit
-      - omo_07_shape
-      - omo_07_hit
-      - omo_08_shape
-      - omo_08_hit
-      - omo_09_shape
-      - omo_09_hit
-      - omo_10_shape
-      - omo_10_hit
-      - omo_11_shape
-      - omo_11_hit
-      - omo_12_shape
-      - omo_12_hit
-      - omo_13_shape
-      - omo_13_hit
-      - omo_14_shape
-      - omo_14_hit
-      - omo_15_shape
-      - omo_15_hit
-      - omo_16_shape
-      - omo_16_hit
-      - omo_17_shape
-      - omo_17_hit
-      - end_00_shape
-      - end_00_hit
-      - end_01_shape
-      - end_01_hit
-      - mgm_00_shape
-      - mgm_00_hit
-      - mgm_01_shape
-      - mgm_01_hit
-      - mgm_02_shape
-      - mgm_02_hit
-      - mgm_03_shape
-      - mgm_03_hit
-      - gv_01_shape
-      - gv_01_hit
-      - kmr_bt03_shape
-      - kmr_bt03_hit
-      - kmr_bt04_shape
-      - kmr_bt04_hit
-      - kmr_bt05_shape
-      - kmr_bt05_hit
-      - kmr_bt06_shape
-      - kmr_bt06_hit
-      - nok_bt01_shape
-      - nok_bt01_hit
-      - nok_bt02_shape
-      - nok_bt02_hit
-      - nok_bt03_shape
-      - nok_bt03_hit
-      - nok_bt04_shape
-      - nok_bt04_hit
-      - trd_bt00_shape
-      - trd_bt00_hit
-      - trd_bt01_shape
-      - trd_bt01_hit
-      - trd_bt02_shape
-      - trd_bt02_hit
-      - trd_bt03_shape
-      - trd_bt03_hit
-      - trd_bt04_shape
-      - trd_bt04_hit
-      - trd_bt05_shape
-      - trd_bt05_hit
-      - iwa_bt01_shape
-      - iwa_bt01_hit
-      - iwa_bt02_shape
-      - iwa_bt02_hit
-      - sbk_bt02_shape
-      - sbk_bt02_hit
-      - isk_bt01_shape
-      - isk_bt01_hit
-      - isk_bt02_shape
-      - isk_bt02_hit
-      - isk_bt03_shape
-      - isk_bt03_hit
-      - isk_bt04_shape
-      - isk_bt04_hit
-      - isk_bt05_shape
-      - isk_bt05_hit
-      - isk_bt06_shape
-      - isk_bt06_hit
-      - isk_bt07_shape
-      - isk_bt07_hit
-      - isk_bt08_shape
-      - isk_bt08_hit
-      - arn_bt01_shape
-      - arn_bt01_hit
-      - arn_bt02_shape
-      - arn_bt02_hit
-      - arn_bt03_shape
-      - arn_bt03_hit
-      - arn_bt04_shape
-      - arn_bt04_hit
-      - arn_bt05_shape
-      - arn_bt05_hit
-      - arn_bt06_shape
-      - arn_bt06_hit
-      - dgb_bt01_shape
-      - dgb_bt01_hit
-      - dgb_bt02_shape
-      - dgb_bt02_hit
-      - dgb_bt03_shape
-      - dgb_bt03_hit
-      - dgb_bt04_shape
-      - dgb_bt04_hit
-      - dgb_bt05_shape
-      - dgb_bt05_hit
-      - mim_bt01_shape
-      - mim_bt01_hit
-      - omo_bt01_shape
-      - omo_bt01_hit
-      - omo_bt02_shape
-      - omo_bt02_hit
-      - omo_bt03_shape
-      - omo_bt03_hit
-      - omo_bt04_shape
-      - omo_bt04_hit
-      - omo_bt05_shape
-      - omo_bt05_hit
-      - omo_bt06_shape
-      - omo_bt06_hit
-      - omo_bt07_shape
-      - omo_bt07_hit
-      - kgr_bt01_shape
-      - kgr_bt01_hit
-      - flo_bt01_shape
-      - flo_bt01_hit
-      - flo_bt02_shape
-      - flo_bt02_hit
-      - flo_bt03_shape
-      - flo_bt03_hit
-      - flo_bt04_shape
-      - flo_bt04_hit
-      - flo_bt05_shape
-      - flo_bt05_hit
-      - flo_bt06_shape
-      - flo_bt06_hit
-      - jan_bt00_shape
-      - jan_bt00_hit
-      - jan_bt01_shape
-      - jan_bt01_hit
-      - jan_bt02_shape
-      - jan_bt02_hit
-      - jan_bt03_shape
-      - jan_bt03_hit
-      - jan_bt04_shape
-      - jan_bt04_hit
-      - kzn_bt01_shape
-      - kzn_bt01_hit
-      - kzn_bt02_shape
-      - kzn_bt02_hit
-      - kzn_bt04_shape
-      - kzn_bt04_hit
-      - kzn_bt05_shape
-      - kzn_bt05_hit
-      - sam_bt01_shape
-      - sam_bt01_hit
-      - sam_bt02_shape
-      - sam_bt02_hit
-      - sam_bt03_shape
-      - sam_bt03_hit
-      - sam_bt04_shape
-      - sam_bt04_hit
-      - tik_bt01_shape
-      - tik_bt01_hit
-      - tik_bt02_shape
-      - tik_bt02_hit
-      - tik_bt03_shape
-      - tik_bt03_hit
-      - tik_bt04_shape
-      - tik_bt04_hit
-      - tik_bt05_shape
-      - tik_bt05_hit
-      - pra_bt01_shape
-      - pra_bt01_hit
-      - pra_bt02_shape
-      - pra_bt02_hit
-      - pra_bt03_shape
-      - pra_bt03_hit
-      - pra_bt04_shape
-      - pra_bt04_hit
-      - mac_bt01_shape
-      - mac_bt01_hit
-      - mac_bt02_shape
-      - mac_bt02_hit
-      - kpa_bt01_shape
-      - kpa_bt01_hit
-      - kpa_bt02_shape
-      - kpa_bt02_hit
-      - kpa_bt03_shape
-      - kpa_bt03_hit
-      - kpa_bt04_shape
-      - kpa_bt04_hit
-      - kpa_bt05_shape
-      - kpa_bt05_hit
-      - kpa_bt07_shape
-      - kpa_bt07_hit
-      - kpa_bt08_shape
-      - kpa_bt08_hit
-      - kpa_bt09_shape
-      - kpa_bt09_hit
-      - kpa_bt11_shape
-      - kpa_bt11_hit
-      - kpa_bt13_shape
-      - kpa_bt13_hit
-      - kpa_bt14_shape
-      - kpa_bt14_hit
-      - hos_bt01_shape
-      - hos_bt01_hit
-      - hos_bt02_shape
-      - hos_bt02_hit
-      - kkj_bt01_shape
-      - kkj_bt01_hit
-      - kkj_bt02_shape
-      - kkj_bt02_hit
-      - mac_tex
-      - tik_tex
-      - kgr_tex
-      - kmr_tex
-      - iwa_tex
-      - sbk_tex
-      - dro_tex
-      - isk_tex
-      - trd_tex
-      - nok_tex
-      - hos_tex
-      - kpa_tex
-      - osr_tex
-      - kkj_tex
-      - tst_tex
-      - jan_tex
-      - mim_tex
-      - obk_tex
-      - arn_tex
-      - dgb_tex
-      - kzn_tex
-      - flo_tex
-      - sam_tex
-      - pra_tex
-      - omo_tex
-      - end_tex
-      - mgm_tex
-      - gv__tex
-      - kmr_bg
-      - nok_bg
-      - sbk_bg
-      - sbk3_bg
-      - iwa_bg
-      - hos_bg
-      - arn_bg
-      - obk_bg
-      - omo_bg
-      - yos_bg
-      - jan_bg
-      - fla_bg
-      - flb_bg
-      - sra_bg
-      - yki_bg
-      - sam_bg
-      - kpa_bg
-      - title_bg
-      - title_data
-      - party_kurio
-      - party_kameki
-      - party_pinki
-      - party_pareta
-      - party_resa
-      - party_akari
-      - party_opuku
-      - party_pokopi
+  - [0x1E40000, pm_map_data, mapfs]
   - type: bin
     start: 0x27FEE22 # TODO shiftability
     subalign: 2

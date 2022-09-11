@@ -6,18 +6,17 @@
 
 #include "common/SetAngleClamped.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240104_DA5344);
+#include "common/CompareFloats.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240188_DA53C8);
+#include "common/UnkBufferFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024020C_DA544C);
+#include "common/SetPlayerStatusPosYaw.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_802402B0_DA54F0);
+#include "common/SetNpcPosYaw.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240538_DA5778);
+#include "common/IsAOrBPressed.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"

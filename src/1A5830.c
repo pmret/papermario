@@ -110,7 +110,7 @@ void dispatch_event_actor(Actor* actor, s32 event) {
         Evt* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitScriptSource, 0xA, 0x20);
+        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
         actor->onHitScript = newScript;
         actor->onHitID = newScript->id;
         newScript->owner1.actorID = actor->actorID;
@@ -168,7 +168,7 @@ s32 calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_TRANSPARENT) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -285,7 +285,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transStatus == STATUS_E || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
+    if (target->transparentStatus == STATUS_TRANSPARENT || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
         return HIT_RESULT_MISS;
     }
 
@@ -719,54 +719,54 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
-        script = start_script(&DoSleepHit, 10, 0);
+        script = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
-        script = start_script(&DoDizzyHit, 10, 0);
+        script = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
-        script = start_script(&DoParalyzeHit, 10, 0);
+        script = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
-        script = start_script(&DoPoisonHit, 10, 0);
+        script = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
-        script = start_script(&DoStopHit, 10, 0);
+        script = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
-        script = start_script(&DoFreezeHit, 10, 0);
+        script = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        script->varTable[3] = (s32) target;
+        script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_HIT_ICE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
-        script = start_script(&DoShrinkHit, 10, 0);
+        script = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        script->varTable[3] = (s32) target;
+        script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -781,7 +781,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & 8)
-        && (attacker->transStatus != STATUS_E)
+        && (attacker->transparentStatus != STATUS_TRANSPARENT)
         && !has_enchanted_part(attacker)
     ) {
         // enum mismatch? shock vs explode :raised_eyebrow:
@@ -794,37 +794,36 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     return hitResult;
 }
 
-// part before the first conditional needs work
+// missing one move
 #ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorMovementWalk* walk;
-    s32 dispatchEvent;
-
-    u16 temp_v1;
+    ActorState* state;
+    s32 dispatchEvent = originalEvent;
+    s32 currentAttackDamage;
+    s32 hpChangeCounter;
 
     battleStatus->currentAttackDamage = damageAmount;
-    temp_v1 = actor->hpChangeCounter + battleStatus->currentAttackDamage;
-    actor->hpChangeCounter += temp_v1;
-    actor->damageCounter += temp_v1;
+    currentAttackDamage = battleStatus->currentAttackDamage;
+
+    actor->hpChangeCounter += currentAttackDamage;
+    hpChangeCounter = actor->hpChangeCounter;
+    actor->damageCounter += hpChangeCounter;
+    actor->hpChangeCounter -= hpChangeCounter;
     battleStatus->lastAttackDamage = 0;
-    actor->hpChangeCounter -= temp_v1;
-    actor->currentHP -= temp_v1;
-
-    dispatchEvent = originalEvent;
-
-    walk = &actor->walk;
+    do { } while (0);
+    actor->currentHP -= hpChangeCounter;
+    state = &actor->state;
     if (actor->currentHP <= 0) {
+        dispatchEvent = EVENT_DEATH;
         battleStatus->lastAttackDamage += actor->currentHP;
         actor->currentHP = 0;
-    dispatchEvent = EVENT_DEATH;
     }
-
-    battleStatus->lastAttackDamage += temp_v1;
+    battleStatus->lastAttackDamage += currentAttackDamage;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
 
-    if (battleStatus->flags1 & 0x20) {
+    if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
@@ -832,7 +831,6 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
             dispatchEvent = EVENT_IMMUNE;
         }
     }
-
     if (dispatchEvent == EVENT_DEATH) {
         if (originalEvent == EVENT_SPIN_SMASH_LAUNCH_HIT) {
             dispatchEvent = EVENT_SPIN_SMASH_LAUNCH_DEATH;
@@ -843,20 +841,18 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     }
 
     if (stopMotion == 0) {
-        s32 targetActorID = actor->targetActorID; // why?
+        s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
-                              battleStatus->lastAttackDamage, 0);
-            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
-                          battleStatus->lastAttackDamage);
-            actor->targetActorID = targetActorID;
+            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
+            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
+            actor->targetActorID = oldTargetActorID;
         } else {
-            actor->targetActorID = targetActorID;
+            actor->targetActorID = oldTargetActorID;
         }
     } else {
-        show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage, 0);
-        func_802666E4(actor, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage);
+        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+        func_802666E4(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
     }
 
     if (battleStatus->lastAttackDamage > 0) {
@@ -939,7 +935,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     }
 
     actor->idleScriptSource = idleCode;
-    newScriptContext = start_script(idleCode, 10, 0);
+    newScriptContext = start_script(idleCode, EVT_PRIORITY_A, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
     newScriptContext->owner1.actorID = actorID;
@@ -1029,14 +1025,14 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
         }
 
         actor = get_actor(actorID);
-        script->functionTemp[1] = (s32)actor;
+        script->functionTempPtr[1] = actor;
         actor->state.currentPos.x = actor->currentPos.x;
         actor->state.currentPos.y = actor->currentPos.y;
         actor->state.currentPos.z = actor->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
-    actor = (Actor*)script->functionTemp[1];
+    actor = script->functionTempPtr[1];
     actor->state.currentPos.y += actor->state.velocity;
     actor->state.velocity -= actor->state.acceleration;
 
@@ -1054,15 +1050,340 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1A5830", FallToGoal);
+ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorState* state;
+    f32 x, y, z;
+    f32 goalX, goalY, goalZ;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        s32 actorID = evt_get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.enemyID;
+        }
+        actor = get_actor(actorID);
+        state = &actor->state;
+        script->functionTempPtr[1] = actor;
+
+        actor->state.moveTime = evt_get_variable(script, *args++);
+
+        actor->state.currentPos.x = actor->currentPos.x;
+        actor->state.currentPos.y = actor->currentPos.y;
+        actor->state.currentPos.z = actor->currentPos.z;
+
+        x = actor->state.currentPos.x;
+        y = actor->state.currentPos.y;
+        z = actor->state.currentPos.z;
+        goalX = actor->state.goalPos.x;
+        goalY = actor->state.goalPos.y;
+        goalZ = actor->state.goalPos.z;
+
+        actor->state.angle = atan2(x, z, goalX, goalZ);
+        actor->state.distance = dist2D(x, z, goalX, goalZ);
+        y = goalY - y;
+
+        if (actor->state.moveTime == 0) {
+            actor->state.moveTime = actor->state.distance / actor->state.speed;
+        } else {
+            actor->state.speed = actor->state.distance / actor->state.moveTime;
+        }
+
+        state->velocity = 0.0f;
+        state->acceleration = (y / state->moveTime - state->velocity) / (-state->moveTime * 0.5);
+
+        if (actor->actorTypeData1[4] != 0) {
+            sfx_play_sound_at_position(actor->actorTypeData1[4], 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+        }
+        script->functionTemp[0] = 1;
+    }
+
+    actor = script->functionTempPtr[1];
+    actor->state.currentPos.y += actor->state.velocity;
+    actor->state.velocity -= actor->state.acceleration;
+    add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
+    actor->currentPos.x = actor->state.currentPos.x;
+    actor->currentPos.y = actor->state.currentPos.y;
+    actor->currentPos.z = actor->state.currentPos.z;
+    actor->state.moveTime--;
+
+    if (actor->state.moveTime <= 0) {
+        play_movement_dust_effects(2, actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, actor->state.angle);
+        actor->currentPos.x = actor->state.goalPos.x;
+        actor->currentPos.y = actor->state.goalPos.y;
+        actor->currentPos.z = actor->state.goalPos.z;
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 INCLUDE_ASM(s32, "1A5830", RunToGoal);
 
+#ifdef NON_EQUIVALENT
+s32 IdleRunToGoal(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorMovement* fly;
+    f32 x1, z1, x2, z2;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        s32 actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        actor = get_actor(actorID);
+        script->functionTempPtr[1] = actor;
+        fly = &actor->fly;
+
+        actor->flyTime = evt_get_variable(script, *args++);
+
+        actor->fly.currentPos.x = actor->currentPos.x;
+        actor->fly.currentPos.y = actor->currentPos.y;
+        actor->fly.currentPos.z = actor->currentPos.z;
+        actor->fly.unk_18.x = actor->fly.goalPos.x;
+        actor->fly.unk_18.y = actor->fly.goalPos.y;
+        actor->fly.unk_18.z = actor->fly.goalPos.z;
+
+        x1 = actor->fly.currentPos.x;
+        z1 = actor->fly.currentPos.z;
+        x2 = actor->fly.goalPos.x;
+        z2 = actor->fly.goalPos.z;
+
+        actor->fly.angle = atan2(x1, z1, x2, z2);
+        actor->fly.distance = dist2D(x1, z1, x2, z2);
+
+        if (actor->flyTime == 0) {
+            actor->flyTime = actor->fly.distance / actor->fly.speed;
+            if (actor->flyTime == 0) {
+                actor->flyTime = 1;
+            }
+            actor->fly.speed += (actor->fly.distance - actor->flyTime * actor->fly.speed) / actor->flyTime;
+        } else {
+            actor->fly.speed = actor->fly.distance / actor->flyTime;
+        }
+
+        if (actor->actorTypeData1b[0] >= 0) {
+            fly->distance = actor->actorTypeData1b[0] + 1;
+        } else {
+            fly->distance = ~actor->actorTypeData1b[0];
+        }
+        script->functionTemp[0] = TRUE;
+    }
+
+    actor = script->functionTempPtr[1];
+    fly = &actor->fly;
+
+    add_xz_vec3f_copy2(&fly->currentPos, actor->fly.speed, actor->fly.angle);
+    if (actor->fly.speed < 4.0f) {
+        play_movement_dust_effects(0, actor->fly.currentPos.x, actor->fly.currentPos.y, actor->fly.currentPos.z, actor->fly.angle);
+    } else {
+        play_movement_dust_effects(1, actor->fly.currentPos.x, actor->fly.currentPos.y, actor->fly.currentPos.z, actor->fly.angle);
+    }
+    actor->currentPos.x = fly->currentPos.x;
+    actor->currentPos.z = fly->currentPos.z;
+    actor->flyTime--;
+
+    if (actor->flyTime > 0) {
+        return ApiStatus_BLOCK;
+    } else {
+        actor->currentPos.x = fly->unk_18.x;
+        actor->currentPos.z = fly->unk_18.z;
+        if (actor->actorTypeData1[0] != 0 && actor->actorTypeData1[1] == 0) {
+            snd_stop_sound(actor->actorTypeData1[0]);
+        }
+        return ApiStatus_DONE1;
+    }
+}
+#else
 INCLUDE_ASM(s32, "1A5830", IdleRunToGoal);
+#endif
 
-INCLUDE_ASM(s32, "1A5830", JumpPartTo);
+s32 JumpPartTo(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* movement;
+    s32 actorID, partIndex;
+    f32 x, y, z;
+    f32 x1, y1, z1;
+    f32 deltaDist;
 
-INCLUDE_ASM(s32, "1A5830", FallPartTo);
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        partIndex = evt_get_variable(script, *args++);
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
+        movement = part->movement;
+
+        x = evt_get_variable(script, *args++);
+        y = evt_get_variable(script, *args++);
+        z = evt_get_variable(script, *args++);
+        movement->goalPos.x = x;
+        movement->goalPos.y = y;
+        movement->goalPos.z = z;
+        movement->moveTime = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+
+        x1 = movement->goalPos.x;
+        y1 = movement->goalPos.y;
+        z1 = movement->goalPos.z;
+
+        movement->unk_00.x = part->absolutePosition.x;
+        movement->unk_00.y = part->absolutePosition.y;
+        movement->unk_00.z = part->absolutePosition.z;
+
+        x = movement->unk_00.x;
+        y = movement->unk_00.y;
+        z = movement->unk_00.z;
+
+        movement->angle = atan2(x, z, x1, z1);
+        movement->distance = dist2D(x, z, x1, z1);
+
+        y = y1 - y;
+
+        if (movement->moveTime == 0) {
+            movement->moveTime = movement->distance / movement->moveSpeed;
+            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
+        } else {
+            movement->moveSpeed = movement->distance / movement->moveTime;
+            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
+        }
+        movement->moveSpeed += deltaDist / movement->moveTime;
+        movement->unk_2C = movement->jumpScale * movement->moveTime * 0.5f + y / movement->moveTime;
+        if (part->partTypeData[4] != 0) {
+            sfx_play_sound_at_position(part->partTypeData[4], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+        }
+        script->functionTemp[0] = 1;
+    }
+
+    part = script->functionTempPtr[2];
+    movement = part->movement;
+    movement->unk_00.y += movement->unk_2C;
+    movement->unk_2C -= movement->jumpScale;
+    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->angle);
+    part->absolutePosition.x = movement->unk_00.x;
+    part->absolutePosition.y = movement->unk_00.y;
+    part->absolutePosition.z = movement->unk_00.z;
+    movement->moveTime--;
+
+    if (movement->moveTime <= 0) {
+        if (script->functionTemp[3] != 0) {
+            play_movement_dust_effects(2, movement->goalPos.x, movement->goalPos.y, movement->goalPos.z, movement->angle);
+        }
+        part->absolutePosition.x = movement->goalPos.x;
+        part->absolutePosition.y = movement->goalPos.y;
+        part->absolutePosition.z = movement->goalPos.z;
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+s32 FallPartTo(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* movement;
+    s32 actorID, partIndex;
+    f32 x, y, z;
+    f32 x1, y1, z1;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        partIndex = evt_get_variable(script, *args++);
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
+        movement = part->movement;
+
+        x = evt_get_variable(script, *args++);
+        y = evt_get_variable(script, *args++);
+        z = evt_get_variable(script, *args++);
+        movement->goalPos.x = x;
+        movement->goalPos.y = y;
+        movement->goalPos.z = z;
+        movement->moveTime = evt_get_variable(script, *args++);
+
+        x1 = movement->goalPos.x;
+        y1 = movement->goalPos.y;
+        z1 = movement->goalPos.z;
+
+        movement->unk_00.x = part->absolutePosition.x;
+        movement->unk_00.y = part->absolutePosition.y;
+        movement->unk_00.z = part->absolutePosition.z;
+
+        x = movement->unk_00.x;
+        y = movement->unk_00.y;
+        z = movement->unk_00.z;
+
+        movement->angle = atan2(x, z, x1, z1);
+        movement->distance = dist2D(x, z, x1, z1);
+
+        y = y1 - y;
+
+        if (movement->moveTime == 0) {
+            movement->moveTime = movement->distance / movement->moveSpeed;
+        } else {
+            movement->moveSpeed = movement->distance / movement->moveTime;
+        }
+
+        movement->unk_2C = 0.0f;
+        movement->jumpScale = (y / movement->moveTime - movement->unk_2C) / (-movement->moveTime * 0.5);
+        if (part->partTypeData[4] != 0) {
+            sfx_play_sound_at_position(part->partTypeData[4], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+        }
+        script->functionTemp[0] = 1;
+    }
+
+    part = script->functionTempPtr[2];
+    movement = part->movement;
+    movement->unk_00.y += movement->unk_2C;
+    movement->unk_2C -= movement->jumpScale;
+    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->angle);
+    part->absolutePosition.x = movement->unk_00.x;
+    part->absolutePosition.y = movement->unk_00.y;
+    part->absolutePosition.z = movement->unk_00.z;
+    movement->moveTime--;
+
+    if (movement->moveTime <= 0) {
+        play_movement_dust_effects(2, movement->goalPos.x, movement->goalPos.y, movement->goalPos.z, movement->angle);
+        part->absolutePosition.x = movement->goalPos.x;
+        part->absolutePosition.y = movement->goalPos.y;
+        part->absolutePosition.z = movement->goalPos.z;
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 s32 LandJumpPart(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -1084,8 +1405,8 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
 
         actor = get_actor(actorID);
         part = get_actor_part(actor, partIndex);
-        script->functionTemp[1] = (s32) actor;
-        script->functionTemp[2] = (s32) part;
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
         movement = part->movement;
         movement->unk_00.x = part->absolutePosition.x;
         movement->unk_00.y = part->absolutePosition.y;
@@ -1093,11 +1414,11 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
 
-    part = (ActorPart*)script->functionTemp[2];
+    part = script->functionTempPtr[2];
     movement = part->movement;
     movement->unk_00.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;
-    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->unk_30);
+    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->angle);
     part->absolutePosition.x = movement->unk_00.x;
     part->absolutePosition.y = movement->unk_00.y;
     part->absolutePosition.z = movement->unk_00.z;
@@ -1111,15 +1432,291 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1A5830", RunPartTo);
+s32 RunPartTo(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* movement;
+    s32 actorID, partIndex;
+    f32 x, y, z;
+    f32 x1, y1, z1;
+    f32 deltaDist;
 
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        partIndex = evt_get_variable(script, *args++);
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
+        movement = part->movement;
+
+        x = evt_get_variable(script, *args++);
+        y = evt_get_variable(script, *args++);
+        z = evt_get_variable(script, *args++);
+        movement->goalPos.x = x;
+        movement->goalPos.y = y;
+        movement->goalPos.z = z;
+        movement->moveTime = evt_get_variable(script, *args++);
+
+        x1 = movement->goalPos.x;
+        y1 = movement->goalPos.y;
+        z1 = movement->goalPos.z;
+
+        movement->unk_00.x = part->absolutePosition.x;
+        movement->unk_00.y = part->absolutePosition.y;
+        movement->unk_00.z = part->absolutePosition.z;
+
+        x = movement->unk_00.x;
+        y = movement->unk_00.y;
+        z = movement->unk_00.z;
+
+        movement->angle = atan2(x, z, x1, z1);
+        movement->distance = dist2D(x, z, x1, z1);
+
+        if (movement->moveTime == 0) {
+            movement->moveTime = movement->distance / movement->moveSpeed;
+        } else {
+            movement->moveSpeed = movement->distance / movement->moveTime;
+        }
+        if (part->actorTypeData2b[0] >= 0) {
+            movement->distance = part->actorTypeData2b[0] + 1;
+        } else {
+            movement->distance = ~part->actorTypeData2b[0];
+        }
+        if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
+            sfx_play_sound_at_position(part->partTypeData[0], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+        }
+        script->functionTemp[0] = 1;
+    }
+
+    part = script->functionTempPtr[2];
+    movement = part->movement;
+    actor = script->functionTempPtr[1];
+
+    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->angle);
+    if (movement->moveSpeed < 4.0f) {
+        play_movement_dust_effects(0, movement->unk_00.x, movement->unk_00.y, movement->unk_00.z, movement->angle);
+    } else {
+        play_movement_dust_effects(1, movement->unk_00.x, movement->unk_00.y, movement->unk_00.z, movement->angle);
+    }
+    part->absolutePosition.x = movement->unk_00.x;
+    part->absolutePosition.y = movement->unk_00.y;
+    part->absolutePosition.z = movement->unk_00.z;
+
+    if (part->partTypeData[0] != 0 && part->partTypeData[1] != 0) {
+        if (part->actorTypeData2b[0] >= 0) {
+            movement->distance += movement->moveSpeed;
+            if (part->actorTypeData2b[0] < movement->distance) {
+                actor->footStepCounter++;
+                movement->distance = 0;
+                if (actor->footStepCounter % 2 != 0) {
+                    if (part->partTypeData[0] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[0], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                } else {
+                    if (part->partTypeData[1] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[1], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                }
+            }
+        } else {
+            movement->distance += 1.0f;
+            if (-part->actorTypeData2b[0] <= movement->distance) {
+                actor->footStepCounter++;
+                movement->distance = 0;
+                if (actor->footStepCounter % 2 != 0) {
+                    if (part->partTypeData[0] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[0], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                } else {
+                    if (part->partTypeData[1] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[1], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                }
+            }
+        }
+    }
+
+    movement->moveTime--;
+    if (movement->moveTime > 0) {
+        return ApiStatus_BLOCK;
+    } else {
+        part->absolutePosition.x = movement->goalPos.x;
+        part->absolutePosition.z = movement->goalPos.z;
+        if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
+            snd_stop_sound(part->partTypeData[0]);
+        }
+        return ApiStatus_DONE1;
+    }
+}
+
+f32 update_lerp_battle(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration);
 INCLUDE_ASM(s32, "1A5830", update_lerp_battle);
 
 INCLUDE_ASM(s32, "1A5830", FlyToGoal);
 
 INCLUDE_ASM(s32, "1A5830", IdleFlyToGoal);
 
+#ifdef NON_MATCHING
+s32 FlyPartTo(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* partMovement;
+    s32 actorID, partIndex;
+    f32 f2, f4;
+    f32 d1, d2, d3, delta;
+    f32 d1_, d2_, d3_, delta_;
+
+    if (isInitialCall) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        partIndex = evt_get_variable(script, *args++);
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
+        partMovement = part->movement;
+
+        partMovement->goalPos.x = evt_get_variable(script, *args++);
+        partMovement->goalPos.y = evt_get_variable(script, *args++);
+        partMovement->goalPos.z = evt_get_variable(script, *args++);
+        partMovement->moveTime = evt_get_variable(script, *args++);
+        partMovement->unk_3A = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+
+        partMovement->unk_18.x = partMovement->unk_00.x = part->absolutePosition.x;
+        d1_ = SQ((partMovement->unk_00.x - partMovement->goalPos.x));
+        partMovement->unk_18.y = partMovement->unk_00.y = part->absolutePosition.y;
+        d2_ = SQ((partMovement->unk_00.y - partMovement->goalPos.z));
+        partMovement->unk_18.z = partMovement->unk_00.z = part->absolutePosition.z;
+        d3_ = SQ((partMovement->unk_00.z - partMovement->goalPos.z));
+
+        partMovement->distance = sqrtf(d1_ + d2_ + d3_);
+
+        if (partMovement->moveTime == 0) {
+            partMovement->moveTime = partMovement->distance / partMovement->moveSpeed;
+        } else {
+            partMovement->moveSpeed = partMovement->distance / partMovement->moveTime;
+        }
+
+        if (partMovement->moveTime == 0) {
+            return ApiStatus_DONE2;
+        }
+
+        if (part->partTypeData[2] != 0 && part->partTypeData[3] == 0) {
+            sfx_play_sound_at_position(part->partTypeData[2], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+        }
+        partMovement->unk_3C = 0;
+        partMovement->angle = 0.0f;
+
+        if (part->actorTypeData2b[1] >= 0) {
+            partMovement->unk_2C = actor->actorTypeData1b[1] + 1;
+        } else {
+            partMovement->unk_2C = ~actor->actorTypeData1b[1];
+        }
+    }
+
+    part = script->functionTempPtr[2];
+    partMovement = part->movement;
+    actor = script->functionTempPtr[1];
+    partMovement->unk_00.x = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.x, partMovement->goalPos.x, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->unk_00.y = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.y, partMovement->goalPos.y, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->unk_00.z = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.z, partMovement->goalPos.z, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->unk_3C++;
+
+    if (partMovement->moveTime < partMovement->unk_3C) {
+        part->absolutePosition.x = partMovement->goalPos.x;
+        part->absolutePosition.y = partMovement->goalPos.y;
+        part->absolutePosition.z = partMovement->goalPos.z;
+        if (part->partTypeData[2] != 0 && part->partTypeData[3] == 0) {
+            snd_stop_sound(part->partTypeData[2]);
+        }
+        return ApiStatus_DONE2;
+    }
+
+    if (part->partTypeData[2] != 0 && part->partTypeData[3] != 0) {
+        if (part->actorTypeData2b[1] >= 0) {
+            partMovement->unk_2C += partMovement->moveSpeed;
+            if (part->actorTypeData2b[1] < partMovement->unk_2C) {
+                actor->footStepCounter++;
+                partMovement->unk_2C = 0;
+                if (actor->footStepCounter % 2 != 0) {
+                    if (part->partTypeData[2] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[2], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                } else {
+                    if (part->partTypeData[3] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[3], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                }
+            }
+        } else {
+            partMovement->unk_2C += 1.0f;
+            if (-part->actorTypeData2b[1] <= partMovement->unk_2C) {
+                actor->footStepCounter++;
+                partMovement->unk_2C = 0;
+                if (actor->footStepCounter % 2 != 0) {
+                    if (part->partTypeData[2] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[2], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                } else {
+                    if (part->partTypeData[3] != 0) {
+                        sfx_play_sound_at_position(part->partTypeData[3], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                    }
+                }
+            }
+        }
+    }
+
+    delta = partMovement->goalPos.x;
+    delta -= partMovement->unk_00.x;
+    d1 = SQ(delta);
+    delta = partMovement->goalPos.y - partMovement->unk_00.y;
+    d2 = SQ(delta);
+    delta = partMovement->goalPos.z - partMovement->unk_00.z;
+    d3 = SQ(delta);
+    f2 = sqrtf(d1 + d2 + d3);
+
+    //f2 = sqrtf(SQ((partMovement->unk_00.x - partMovement->goalPos.x)) + SQ((partMovement->unk_00.y - partMovement->goalPos.y)) + SQ((partMovement->unk_00.z - partMovement->goalPos.z)));
+    if (f2 == 0.0f) {
+        f2 = 1.0f;
+    }
+    if (partMovement->distance == 0.0f) {
+        partMovement->distance = 1.0f;
+    }
+
+    f4 = sin_deg((1.0 - f2 / partMovement->distance) * 180.0);
+    if (partMovement->unk_3A == 0) {
+        f4 = 0.0f;
+    }
+    if (partMovement->unk_3A < 0) {
+        f4 = -f4 * (-partMovement->unk_3A);
+    }
+    if (partMovement->unk_3A > 0) {
+        f4 = f4 * partMovement->unk_3A;
+    }
+
+    part->absolutePosition.x = partMovement->unk_00.x;
+    part->absolutePosition.y = partMovement->unk_00.y + f4;
+    part->absolutePosition.z = partMovement->unk_00.z;
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "1A5830", FlyPartTo);
+#endif
 
 ApiStatus GetLastEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -1220,8 +1817,6 @@ ApiStatus GetEnemyMaxHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// battlestatus shtuff
-#ifdef NON_EQUIVALENT
 ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -1229,29 +1824,30 @@ ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 i;
+    s32 numEnemies;
+    s16* enemyIDs;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
+    numEnemies = battleStatus->numEnemyActors;
+    enemyIDs = battleStatus->enemyIDs;
 
-    for (i = 0; i < battleStatus->numEnemyActors; i++) {
-        if (actor == battleStatus->enemyActors[(u8)battleStatus->enemyIDs[i]]) {
-            battleStatus->enemyIDs[i] = -1;
+    for (i = 0; i < numEnemies; i++) {
+        if (actor == battleStatus->enemyActors[enemyIDs[i] & 0xFF]) {
+            enemyIDs[i] = -1;
         }
     }
 
     currentEncounter->coinsEarned += actor->extraCoinBonus;
     currentEncounter->coinsEarned += actor->actorBlueprint->coinReward;
     btl_delete_actor(actor);
-    battleStatus->enemyActors[(u8)actorID] = NULL;
+    battleStatus->enemyActors[actorID & 0xFF] = NULL;
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "1A5830", RemoveActor);
-#endif
 
 ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1788,10 +2384,10 @@ ApiStatus SetActorSize(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (y != EVT_LIMIT) {
+    if (y != EVT_IGNORE_ARG) {
         actor->size.y = y;
     }
-    if (x != EVT_LIMIT) {
+    if (x != EVT_IGNORE_ARG) {
         actor->size.x = x;
     }
     actor->shadowScale = actor->size.x / 24.0;
@@ -1830,11 +2426,11 @@ ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
 
     part = get_actor_part(get_actor(actorID), partIndex);
 
-    if (sizeY != EVT_LIMIT) {
+    if (sizeY != EVT_IGNORE_ARG) {
         part->size.y = sizeY;
     }
 
-    if (sizeX != EVT_LIMIT) {
+    if (sizeX != EVT_IGNORE_ARG) {
         part->size.x = sizeX;
     }
 
@@ -1952,7 +2548,7 @@ ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
     inflict_status(actorTo, actorFrom->staticStatus, actorFrom->staticDuration);
     inflict_status(actorTo, actorFrom->stoneStatus, actorFrom->stoneDuration);
     inflict_status(actorTo, actorFrom->koStatus, actorFrom->koDuration);
-    inflict_status(actorTo, actorFrom->transStatus, actorFrom->transDuration);
+    inflict_status(actorTo, actorFrom->transparentStatus, actorFrom->transparentDuration);
 
     actorFrom->status = 0;
     actorTo->status = 0;
@@ -1984,9 +2580,9 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
         remove_status_static(actor->hudElementDataIndex);
     }
 
-    if (actor->transStatus != 0) {
-        actor->transDuration = 0;
-        actor->transStatus = 0;
+    if (actor->transparentStatus != 0) {
+        actor->transparentDuration = 0;
+        actor->transparentStatus = 0;
         remove_status_transparent(actor->hudElementDataIndex);
     }
 
@@ -1997,7 +2593,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor->koStatus = 0;
     actor->koDuration = 0;
-    actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
+    actor->disableEffect->data.disableX->unk_3C = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->isGlowing = 0;

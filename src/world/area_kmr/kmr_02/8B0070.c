@@ -1,89 +1,28 @@
 #include "kmr_02.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
 static char* N(exit_str_2) = "kmr_09";
 static char* N(exit_str_3) = "";
 
-#define UNK_ALPHA_FUNC_NPC 8
+#define CHUCK_QUIZMO_NPC_ID 8
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240A7C_8B0AEC);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240B00_8B0B70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240D18_8B0D88);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240DCC_8B0E3C);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E00_8B0E70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E80_8B0EF0);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E98_8B0F08);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EB4_8B0F24);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802413F4_8B1464);
-
-#include "world/common/UnkNpcAIFunc43.inc.c"
-
-#include "world/common/UnkNpcAIFunc44.inc.c"
-
-#include "world/common/NpcJumpFunc3.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
+#include "world/common/enemy/StationaryAI.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";
@@ -105,13 +44,8 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422F8_8B2368);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802426A0_8B2710);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802426E4_8B2754);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242710_8B2780);
 
@@ -127,7 +61,8 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427EC_8B285C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024280C_8B287C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242860_8B28D0);
+#define UNK_NPC_POS_FUNC_NUM 7
+#include "world/common/UnkNpcPosFunc.inc.c"
 
 #include "world/common/SyncStatusMenu.inc.c"
 
@@ -135,7 +70,51 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BA8_8B2C18);
 
+// will match when preceding bss is worked out
+#ifdef NON_MATCHING
+s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
+    Bytecode* args;
+    
+    static u8 oldPrimR, oldPrimG, oldPrimB;
+    static u8 oldEnvR, oldEnvG, oldEnvB;
+    
+    s32 newEnvR, newEnvB, newEnvG;
+    s32 newPrimR, newPrimG, newPrimB;
+    s32 duration;
+
+    args = script->ptrReadPos;
+    newPrimR = evt_get_variable(script, *args++);
+    newPrimG = evt_get_variable(script, *args++);
+    newPrimB = evt_get_variable(script, *args++);
+    newEnvR = evt_get_variable(script, *args++);
+    newEnvG = evt_get_variable(script, *args++);
+    newEnvB = evt_get_variable(script, *args++);
+    duration = evt_get_variable(script, *args++);
+    if (isInitialCall) {
+        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        script->functionTemp[0] = 0;
+    }
+    if (duration > 0) {
+        set_model_env_color_parameters(
+            oldPrimR + ((newPrimR - oldPrimR) * script->functionTemp[0]) / duration,
+            oldPrimG + ((newPrimG - oldPrimG) * script->functionTemp[0]) / duration,
+            oldPrimB + ((newPrimB - oldPrimB) * script->functionTemp[0]) / duration,
+            oldEnvR  + ( (newEnvR - oldEnvR) * script->functionTemp[0]) / duration,
+            oldEnvG  + ( (newEnvG - oldEnvG) * script->functionTemp[0]) / duration,
+            oldEnvB  + ( (newEnvB - oldEnvB) * script->functionTemp[0]) / duration);
+            script->functionTemp[0]++;
+        if (duration < script->functionTemp[0]) {
+            return 2;
+        }
+    } else {
+        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        return 2;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BC0_8B2C30);
+#endif
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F08_8B2F78);
 

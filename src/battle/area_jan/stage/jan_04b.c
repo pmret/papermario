@@ -25,7 +25,7 @@ Stage NAMESPACE = {
     .shape = "jan_bt04_shape",
     .hit = "jan_bt04_hit",
     .bg = "jan_bg",
-    .preBattle = N(beforeBattle_802284F0),
-    .postBattle = N(afterBattle_80228540),
+    .preBattle = &N(beforeBattle_802284F0),
+    .postBattle = &N(afterBattle_80228540),
     .foregroundModelList = N(foregroundModelList_80228550),
 };

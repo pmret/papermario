@@ -3,6 +3,7 @@
 
 #define NAMESPACE battle_partner_watt
 
+extern EffectInstance* D_8023C1B0;
 extern EffectInstance* D_8023C1B4;
 extern s32 D_8023C1B8;
 extern s32 D_8023C1BC;
@@ -67,33 +68,50 @@ ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80238570_704060(Evt* script, s32 isInitialCall) {
-    s32* var = D_80239A0C_7054FC;
+    EffectInstance* effect = D_80239A0C_7054FC;
 
-    if (var != NULL) {
-        *var |= 0x10;
+    if (effect != NULL) {
+        effect->flags |= 0x10;
     }
     D_80239A0C_7054FC = NULL;
 
     return ApiStatus_DONE2;
 }
 
-// Beware this demon because "EffectInstanceDataThing" is one hell of a
-// janky solution, but this does match.
 ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
-    EffectInstanceDataThing* dataThing;
+    ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
-    dataThing = D_8023C1B4->data;
-    dataThing->unk_30 = 3;
+    data = D_8023C1B4->data.thunderboltRing;
+    data->unk_30 = 3;
 
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238668_704158);
+ApiStatus func_80238668_704158(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* partner = gBattleStatus.partnerActor;
+    f32 x = partner->currentPos.x + partner->headOffset.x;
+    f32 y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    f32 z = partner->currentPos.z + partner->headOffset.z;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+        fx_bulb_glow(0, x, y, z, 1.0f, &D_8023C1B0);
+    }
+
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] == 0) {
+        D_8023C1B0->data.bulbGlow->unk_14 = 5;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -102,7 +120,7 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 statusChance = lookup_status_chance(targetActor->statusTable, 5);
 
-    if (targetActor->transStatus == 14) {
+    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
         statusChance = 0;
     }
     if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -116,18 +134,16 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238810_704300);
 
-// Beware this demon because "EffectInstanceDataThing" is one hell of a
-// janky solution, but this does match.
 ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
-    EffectInstanceDataThing* temp_a0;
+    ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
-    temp_a0 = D_8023C1B4->data;
-    temp_a0->unk_30 = 2;
+    data = D_8023C1B4->data.thunderboltRing;
+    data->unk_30 = 2;
 
     return ApiStatus_DONE2;
 }
@@ -147,7 +163,7 @@ ApiStatus func_80238C08_7046F8(Evt* script, s32 isInitialCall) {
     if (battleStatus->turboChargeTurnsLeft < var1) {
         battleStatus->turboChargeTurnsLeft = var1;
         battleStatus->turboChargeAmount = 1;
-        battleStatus->unk_43C->unk_0C->unk_24 = battleStatus->turboChargeTurnsLeft;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
     }
 
     if (gBattleStatus.flags2 & 2) {
@@ -174,7 +190,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
-        if (targetActor->transStatus == 14) {
+        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

@@ -2,8 +2,8 @@
 #include "npc.h"
 
 ApiStatus N(SetCamera0MoveFlag1)(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[0];
+    Camera* camera = &gCameras[CAM_DEFAULT];
 
-    camera->moveFlags |= 1;
+    camera->moveFlags |= CAMERA_MOVE_FLAGS_1;
     return ApiStatus_DONE2;
 }

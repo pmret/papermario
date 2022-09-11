@@ -1,19 +1,16 @@
 #include "pra_37.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240000_D92F40);
+ApiStatus func_80240000_D92F40(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->playerSpriteSet = 1;
+    sprintf(wMapShapeName, "pra_10_shape");
+    sprintf(wMapHitName, "pra_10_hit");
+    return ApiStatus_BLOCK;
+}
 
-#include "world/common/reflection.inc.c"
+const char* N(exit_str_0) = "pra_22\0\0pra_28";
 
-#include "world/common/UnkNpcAIFunc6.inc.c"
+#include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/UnkNpcAIFunc7.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc27.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"

@@ -63,15 +63,15 @@ void func_802B6120_E2A7D0(void) {
     f32 phi_f20;
     f32 phi_f22;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         mem_clear(&D_802B6E80, sizeof(D_802B6E80));
         disable_player_static_collisions();
         tempUnk_1C = &parasolStruct->unk_1C;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0;
-        playerStatus->unk_8C = 0;
+        playerStatus->pitch = 0;
         phi_f4 = -2;
 
         if (playerStatus->spriteFacingAngle >= 90 && playerStatus->spriteFacingAngle < 270) {
@@ -79,38 +79,38 @@ void func_802B6120_E2A7D0(void) {
         }
         *tempUnk_1C = phi_f4;
         if (!(playerStatus->animFlags & 0x2000)) {
-            playerStatus->framesOnGround = 20;
+            playerStatus->currentStateTime = 20;
             playerStatus->fallState = 0;
             parasolStruct->unk_08 = 0xF;
             parasolStruct->npc = func_802B6000_E2A6B0();
         } else {
             playerStatus->fallState = 0x14;
-            playerStatus->framesOnGround = 40;
+            playerStatus->currentStateTime = 40;
             parasolStruct->unk_04 = 1;
             parasolStruct->unk_0C = 0xC;
             temp_v0 = get_npc_by_index(D_8010C96C);
             temp_v0->flags |= 0x40000;
             playerStatus->flags |= 0x100000;
-            sfx_play_sound_at_player(0xFD, 0);
+            sfx_play_sound_at_player(SOUND_FD, 0);
         }
     }
 
     switch (playerStatus->fallState) {
         case 0:
-            if (playerStatus->unk_90 == 0) {
+            if (playerStatus->unk_90[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_clearUnkFlag(0xC0024);
-                    sfx_play_sound_at_player(0x92, 0);
+                    sfx_play_sound_at_player(SOUND_92, 0);
                     playerStatus->fallState++;
                 } else {
                     suggest_player_anim_clearUnkFlag(0xC0027);
                     playerStatus->fallState = 0x32;
-                    playerStatus->framesOnGround = 10;
+                    playerStatus->currentStateTime = 10;
                     parasolStruct->unk_08 = 0;
                 }
             }
         case 1:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 suggest_player_anim_clearUnkFlag(0xC0025);
                 playerStatus->fallState = 2;
                 if (parasolStruct->npc == NULL) {
@@ -122,15 +122,15 @@ void func_802B6120_E2A7D0(void) {
             break;
         case 2:
             if (playerStatus->unk_BC != 0) {
-                playerStatus->framesOnGround = 12;
+                playerStatus->currentStateTime = 12;
                 playerStatus->flags |= 0x100000;
                 playerStatus->fallState++;
-                sfx_play_sound_at_player(0xFD, 0);
+                sfx_play_sound_at_player(SOUND_FD, 0);
             }
             break;
         case 3:
-            if (--playerStatus->framesOnGround == 0) {
-                playerStatus->framesOnGround = 10;
+            if (--playerStatus->currentStateTime == 0) {
+                playerStatus->currentStateTime = 10;
                 parasolStruct->unk_0C = 0xA;
                 playerStatus->fallState++;
             }
@@ -140,7 +140,7 @@ void func_802B6120_E2A7D0(void) {
             temp_f20 = playerStatus->spriteFacingAngle;
             func_802B6CF0_E2B3A0();
             playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
-            if (playerStatus->framesOnGround == 0) {
+            if (playerStatus->currentStateTime == 0) {
                 phi_v0 = 0;
                 if (parasolStruct->unk_1C > 0) {
                     if (temp_f20 < 270 && playerStatus->spriteFacingAngle >= 270) {
@@ -152,14 +152,14 @@ void func_802B6120_E2A7D0(void) {
                 }
                 if (phi_v0 != 0) {
                     playerStatus->fallState = 6;
-                    playerStatus->framesOnGround = 2;
+                    playerStatus->currentStateTime = 2;
                     if (peach_make_disguise_npc(playerStatus->unk_0D) != 0) {
                         playerStatus->fallState = 5;
                         peach_sync_disguise_npc();
                     }
                 }
             } else {
-                playerStatus->framesOnGround--;
+                playerStatus->currentStateTime--;
             }
             break;
         case 5:
@@ -168,7 +168,7 @@ void func_802B6120_E2A7D0(void) {
             gameStatus->peachFlags |= 2;
             playerStatus->fallState++;
         case 6:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
             }
             func_802B6CF0_E2B3A0();
@@ -178,7 +178,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 -= 2.35;
                 if (parasolStruct->unk_20 <= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 10;
+                    playerStatus->currentStateTime = 10;
                     playerStatus->fallState++;
                     playerStatus->spriteFacingAngle = 180;
                     temp_v0 = get_npc_by_index(D_8010C96C);
@@ -192,7 +192,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 += 2.35;
                 if (parasolStruct->unk_20 >= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 10;
+                    playerStatus->currentStateTime = 10;
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     temp_v0 = get_npc_by_index(D_8010C96C);
@@ -210,7 +210,7 @@ void func_802B6120_E2A7D0(void) {
             playerStatus->targetYaw = clamp_angle(phi_f12_2 - 90);
             break;
         case 8:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 temp_v0 = get_npc_by_index(D_8010C96C);
                 temp_v0->flags &= ~0x40000;
@@ -220,7 +220,7 @@ void func_802B6120_E2A7D0(void) {
             }
             break;
         case 20:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
             }
             func_802B6CF0_E2B3A0();
@@ -230,7 +230,7 @@ void func_802B6120_E2A7D0(void) {
             temp_f20_2 = playerStatus->spriteFacingAngle;
             func_802B6CF0_E2B3A0();
             playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
-            if (playerStatus->framesOnGround == 0) {
+            if (playerStatus->currentStateTime == 0) {
                 phi_v0_2 = 0;
                 if (parasolStruct->unk_1C > 0) {
                     if (temp_f20_2 < 270 && playerStatus->spriteFacingAngle >= 270) {
@@ -241,7 +241,7 @@ void func_802B6120_E2A7D0(void) {
                     phi_v0_2 = 1;
                 }
                 if (phi_v0_2 != 0) {
-                    playerStatus->framesOnGround = 2;
+                    playerStatus->currentStateTime = 2;
                     playerStatus->fallState++;
                     gameStatus2 = gGameStatusPtr;
                     playerStatus->animFlags &= -0x2001;
@@ -252,11 +252,11 @@ void func_802B6120_E2A7D0(void) {
                     playerStatus->colliderDiameter = 0x26;
                 }
             } else {
-                playerStatus->framesOnGround--;
+                playerStatus->currentStateTime--;
             }
             break;
         case 22:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
             }
             func_802B6CF0_E2B3A0();
@@ -266,7 +266,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 -= 2.35;
                 if (parasolStruct->unk_20 <= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 10;
+                    playerStatus->currentStateTime = 10;
                     playerStatus->fallState++;
                     playerStatus->spriteFacingAngle = 180;
                     D_8010C95C = 1;
@@ -279,7 +279,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 += 2.35;
                 if (parasolStruct->unk_20 >= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 10;
+                    playerStatus->currentStateTime = 10;
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     D_8010C95C = 0;
@@ -294,7 +294,7 @@ void func_802B6120_E2A7D0(void) {
             playerStatus->targetYaw = clamp_angle(cam->currentYaw - temp_f0_3 - 90);
             break;
         case 24:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 playerStatus->flags &= ~0x100000;
                 set_action_state(ACTION_STATE_IDLE);
@@ -312,7 +312,7 @@ void func_802B6120_E2A7D0(void) {
             }
             break;
         case 50:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }
@@ -333,7 +333,7 @@ void func_802B6120_E2A7D0(void) {
             parasolStruct->position.y = playerStatus->position.y - 20;
         }
         if (parasolStruct->unk_08 < 0xB && parasolStruct->unk_08 & 1) {
-            fx_sparkles(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
+            fx_sparkles(FX_SPARKLES_3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
             temp_f22 = parasolStruct->position.x;
             tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
 
@@ -351,9 +351,9 @@ void func_802B6120_E2A7D0(void) {
         }
     }
     if (parasolStruct->unk_0C != 0) {
-        if (parasolStruct->unk_0C < 0xB) {
-            if (parasolStruct->unk_0C == 0xA) {
-                sfx_play_sound_at_player(0xFE, 0);
+        if (parasolStruct->unk_0C < 11) {
+            if (parasolStruct->unk_0C == 10) {
+                sfx_play_sound_at_player(SOUND_FE, 0);
             }
             if ((parasolStruct->unk_0C & 3) == 0) {
                 fx_stars_shimmer(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);

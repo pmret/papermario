@@ -175,7 +175,7 @@ def do_query(query):
     for match in matches:
         if i == args.num_out:
             break
-        match_str = "{:.2f} - {}".format(matches[match], match)
+        match_str = "{:.3f} - {}".format(matches[match], match)
         if match not in s_files:
            match_str += " (decompiled)"
         print(match_str)
@@ -261,6 +261,8 @@ def output_match_dict(match_dict, num_decomped_dupes, num_undecomped_dupes, num_
 
     out_file.close()
 
+def is_decompiled(sym):
+    return sym not in s_files
 
 def do_cross_query():
     ccount = Counter()
@@ -282,7 +284,7 @@ def do_cross_query():
             cluster_score = diff_syms(query_bytes, sym_bytes[cluster_first])
             if cluster_score >= args.threshold:
                 cluster_match = True
-                if sym_name.startswith("func") and not cluster_first.startswith("func"):
+                if is_decompiled(sym_name) and not is_decompiled(cluster_first):
                     ccount[sym_name] = ccount[cluster_first]
                     del ccount[cluster_first]
                     cluster_first = sym_name
@@ -290,11 +292,11 @@ def do_cross_query():
                 else:
                     cluster.append(sym_name)
 
-                if cluster_first.startswith("func"):
-                    ccount[cluster_first] += 1
+                if not is_decompiled(cluster_first):
+                    ccount[cluster_first] += len(sym_bytes[cluster_first][0])
 
-                #if len(cluster) % 10 == 0 and len(cluster) >= 10:
-                print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
+                if len(cluster) % 10 == 0 and len(cluster) >= 10:
+                    print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
                 break
         if not cluster_match:
             clusters.append([sym_name])
@@ -316,11 +318,11 @@ if __name__ == "__main__":
     rom_bytes = read_rom()
     map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
     map_offsets = get_map_offsets(map_syms)
-    
+
     s_files = get_all_s_files()
-    
+
     query_dir = find_dir(args.query)
-    
+
     if query_dir is not None:
         files = os.listdir(query_dir)
         for f_name in files:

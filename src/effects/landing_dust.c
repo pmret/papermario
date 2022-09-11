@@ -105,8 +105,8 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    effect->data.landingDust = data;
+    ASSERT(effect->data.landingDust != NULL);
 
     shim_mem_clear(data, numParts * sizeof(*data));
 
@@ -213,7 +213,7 @@ void landing_dust_init(EffectInstance* effect) {
 }
 
 void landing_dust_update(EffectInstance* effect) {
-    LandingDustFXData* data = effect->data;
+    LandingDustFXData* data = effect->data.landingDust;
 
     data->unk_40 = D_E000CD24[data->unk_38][data->unk_3C++];
 
@@ -254,11 +254,11 @@ void landing_dust_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void landing_dust_appendGfx(void* effect) {
-    LandingDustFXData* part = ((EffectInstance*)effect)->data;
+    LandingDustFXData* part = ((EffectInstance*)effect)->data.landingDust;
     s32 type = part->type;
     s32 temp_t0 = part->unk_40;
     Matrix4f mtx1;

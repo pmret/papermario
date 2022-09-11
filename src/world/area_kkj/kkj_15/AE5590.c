@@ -7,8 +7,11 @@ static char* N(exit_str_3) = "kkj_11";
 static char* N(exit_str_4) = "kkj_11\0";
 static char* N(exit_str_5) = "";
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"
+ApiStatus func_8024030C_AE589C(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags &= ~0x1;
+    gPlayerData.currentPartner = script->varTable[0];
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_15/AE5590", func_8024030C_AE589C);
+    return ApiStatus_DONE2;
+}

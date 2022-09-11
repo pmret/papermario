@@ -7,36 +7,14 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240038_953FF8);
+ApiStatus func_80240038_953FF8(void) {
+    bgm_set_variation(0, 1);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024005C_95401C);
+ApiStatus func_8024005C_95401C(void) {
+    bgm_set_variation(0, 0);
+    return ApiStatus_DONE2;
+}
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_802400BC_95407C);
-
-#include "world/common/UnkFunc18.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024024C_95420C);
-
-#include "world/common/SwitchToPartner.inc.c"
-
-#include "world/common/UnkFunc19.inc.c"
-
-#include "world/common/UnkFunc20.inc.c"
-
-#include "world/common/UnkFunc39.inc.c"
-
-#include "world/common/UnkFunc21.inc.c"
-
-#include "world/common/UnkFunc22.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240680_954640);
-
-#include "world/common/UnkFunc23.inc.c"
-
-#include "world/common/UnkPartnerPosFuncs.inc.c"
-
-#include "world/common/UnkFunc40.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"

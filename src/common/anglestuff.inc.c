@@ -3,7 +3,7 @@
 #include "BattleAreaAngleStuff.inc.c"
 
 // TODO Merge this file with the included file when all data is disassembled.
-f32 N(floatTable)[] = {
+f32 N(sinTable)[] = {
     0.000000f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f,
     0.139173f, 0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f,
     0.275637f, 0.292372f, 0.309017f, 0.325568f, 0.342020f, 0.358368f, 0.374607f, 0.390731f,

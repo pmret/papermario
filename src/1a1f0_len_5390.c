@@ -5,13 +5,16 @@
 #include "hud_element.h"
 
 extern s32 D_80077C40;
+extern EnemyDrops D_80077EB8;
 
 extern s8 D_8009A654;
 extern s16 D_8009A668;
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;
-extern EffectInstance* D_800A0BA8;
-extern EffectInstance* D_800A0BAC;
+extern EffectInstance* WorldMerleeOrbEffect;
+extern EffectInstance* WorldMerleeWaveEffect;
+
+void set_battle_formation(Battle*);
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -44,14 +47,24 @@ ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(0, 60);
     }
-    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
+
+    if (is_merlee_message_done()) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(1, 60);
     }
-    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
+
+    if (is_merlee_message_done()) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
@@ -64,12 +77,12 @@ ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
 
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
-    do {} while (0);
 
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
     }
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall) {
@@ -92,7 +105,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(0x24B);
+        sfx_play_sound(SOUND_24B);
         npc->alpha = 0;
     }
 
@@ -101,8 +114,9 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     if ((u32)(npc->alpha & 0xFF) >= 0xFF) {
         npc->alpha = 0xFF;
         return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
     }
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
@@ -112,24 +126,24 @@ ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
     if (npc->alpha == 0) {
         npc->alpha = 0;
         return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
     }
-
-    return ApiStatus_BLOCK;
 }
 
-// same as func_802616F4 aside from syms
+// same as BattleMerleeUpdateFX aside from syms
 ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
-    EffectInstanceData* effectInstanceData;
+    EnergyOrbWaveFXData* effectData;
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_800A0BA4 = merlee->pos.y;
-        D_800A0BA8 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_800A0BAC = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        WorldMerleeOrbEffect = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        WorldMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
-        sfx_play_sound(0x2074);
+        sfx_play_sound(SOUND_2074);
     }
 
     merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
@@ -137,37 +151,37 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_800A0BA8->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z;
+    effectData = WorldMerleeOrbEffect->data.energyOrbWave;
+    effectData->pos.x = merlee->pos.x;
+    effectData->pos.y = merlee->pos.y + 16.0f;
+    effectData->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_800A0BAC->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+    effectData = WorldMerleeWaveEffect->data.energyOrbWave;
+    effectData->pos.x = merlee->pos.x;
+    effectData->pos.y = merlee->pos.y + 16.0f;
+    effectData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_800A0BB8 == 2) {
-        ((EffectInstanceData*)D_800A0BA8->data)->unk_30 = 0.00001f;
-        ((EffectInstanceData*)D_800A0BAC->data)->unk_30 = 0.00001f;
-        D_800A0BA8->flags |= EFFECT_INSTANCE_FLAGS_10;
-        D_800A0BAC->flags |= EFFECT_INSTANCE_FLAGS_10;
+        WorldMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
+        WorldMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
+        WorldMerleeOrbEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+        WorldMerleeWaveEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
         return ApiStatus_DONE1;
     }
 
     if (D_800A0BB8 == 1) {
-        effectInstanceData = D_800A0BA8->data;
-        effectInstanceData->unk_30 += 0.35;
-        if (effectInstanceData->unk_30 > 3.5) {
-            effectInstanceData->unk_30 = 3.5f;
+        effectData = WorldMerleeOrbEffect->data.energyOrbWave;
+        effectData->scale += 0.35;
+        if (effectData->scale > 3.5) {
+            effectData->scale = 3.5f;
         }
 
         if (D_800A0BA0 != 0) {
             D_800A0BA0--;
         } else {
-            effectInstanceData = D_800A0BAC->data;
-            effectInstanceData->unk_30 += 0.5;
-            if (effectInstanceData->unk_30 > 5.0) {
+            effectData = WorldMerleeWaveEffect->data.energyOrbWave;
+            effectData->scale += 0.5;
+            if (effectData->scale > 5.0) {
                 D_800A0BB8 = 2;
             }
         }
@@ -246,8 +260,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
         }
     }
 
-    script->functionTemp[1] -= 1;
-
+    script->functionTemp[1]--;
     if (script->functionTemp[1] == 0) {
         npc->flags |= NPC_FLAG_2;
         return ApiStatus_DONE1;
@@ -378,7 +391,7 @@ void update_encounters_pre_battle(void) {
             }
 
             if (currentEncounter->songID < 0) {
-                switch (currentEncounter->eFirstStrike) {
+                switch (currentEncounter->firstStrikeType) {
                     case 0:
                         bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_NONE);
                         break;
@@ -417,22 +430,22 @@ void update_encounters_pre_battle(void) {
                 }
 
                 partner_handle_before_battle();
-                currentEncounter->unk_A0 = 0;
-                currentEncounter->unk_A2 = 0;
+                currentEncounter->dizzyAttackStatus = 0;
+                currentEncounter->dizzyAttackDuration = 0;
 
                 enemy = currentEncounter->currentEnemy;
                 currentEncounter->unk_10 = enemy->unk_B5;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == 3) {
-                    currentEncounter->unk_A0 = 4;
-                    currentEncounter->unk_A2 = 3;
+                    currentEncounter->dizzyAttackStatus = 4;
+                    currentEncounter->dizzyAttackDuration = 3;
                 }
 
                 sfx_stop_sound(SOUND_2111);
                 sfx_stop_sound(SOUND_2112);
                 sfx_stop_sound(SOUND_2113);
                 sfx_stop_sound(SOUND_2114);
-                set_battle_formation(0);
+                set_battle_formation(NULL);
                 set_battle_stage(encounter->stage);
                 load_battle(encounter->battle);
                 currentEncounter->unk_07 = 1;
@@ -571,7 +584,7 @@ void show_first_strike_message(void) {
 
     screenWidthHalf = SCREEN_WIDTH / 2;
 
-    switch (currentEncounter->eFirstStrike) {
+    switch (currentEncounter->firstStrikeType) {
         case FIRST_STRIKE_PLAYER:
             switch (currentEncounter->hitType) {
                 case 2:
@@ -697,7 +710,7 @@ s32 check_conversation_trigger(void) {
     f32 xTemp, yTemp, zTemp;
     s32 i, j;
 
-    playerStatus->unk_C8 = NULL;
+    playerStatus->encounteredNPC = NULL;
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
     playerColliderHeight = playerStatus->colliderHeight;
     playerColliderRadius = playerStatus->colliderDiameter / 2;
@@ -705,7 +718,7 @@ s32 check_conversation_trigger(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 
@@ -796,7 +809,7 @@ s32 check_conversation_trigger(void) {
     }
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
-        playerStatus->unk_C8 = npc;
+        playerStatus->encounteredNPC = npc;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();
@@ -804,7 +817,7 @@ s32 check_conversation_trigger(void) {
             enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
             encounterStatus->currentEncounter = encounter;
             encounterStatus->currentEnemy = enemy;
-            encounterStatus->eFirstStrike = FIRST_STRIKE_PLAYER;
+            encounterStatus->firstStrikeType = FIRST_STRIKE_PLAYER;
             return TRUE;
         }
     }

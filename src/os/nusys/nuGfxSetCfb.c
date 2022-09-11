@@ -12,7 +12,7 @@ void nuGfxSetCfb(u16** framebuf, u32 framebufnum) {
     nuGfxRetraceWait(1);
     nuScSetFrameBufferNum(framebufnum);
 
-    if(framebufnum > 1) {
+    if (framebufnum > 1) {
         s32	i;
 
         for (i = 0; i < framebufnum - 1; i++) {

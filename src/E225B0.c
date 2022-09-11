@@ -14,33 +14,21 @@ typedef struct struct802B7C78 {
     /* 0x28 */ s32 unk_28;
 } struct802B7C78;
 
-typedef struct UnknownCommand {
-    /* 0x00 */ Matrix4f* unk_00;
-    /* 0x04 */ Matrix4f* unk_04;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ u8 unk_10;
-} UnknownCommand;
-
-extern Matrix4f D_802B7580_E22B30;
-extern Matrix4f D_802B7BA0_E23150;
-extern Matrix4f D_802B7BC0_E23170;
-extern Matrix4f D_802B7BE0_E23190;
+extern u8 D_802B7580_E22B30[];
+extern u8 D_802B7BA0_E23150[];
+extern u8 D_802B7BC0_E23170[];
+extern u8 D_802B7BE0_E23190[];
 extern Gfx D_802B7C00_E231B0[];
 
 extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
-extern struct8015A578 D_8015A578;
 
-void fold_appendGfx_component(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 
 void func_802B7000_E225B0(void) {
     Matrix4f matrix1;
     Matrix4f matrix2;
-    UnknownCommand command;
+    FoldImageRecPart foldImage;
 
     Gfx* oldMasterGfxPos;
     f32 scale;
@@ -73,31 +61,31 @@ void func_802B7000_E225B0(void) {
             case 1:
             case 2:
             case 3:
-                command.unk_04 = &D_802B7BA0_E23150;
+                foldImage.palette = D_802B7BA0_E23150;
                 break;
             case 4:
             case 5:
             case 6:
             case 7:
-                command.unk_04 = &D_802B7BC0_E23170;
+                foldImage.palette = D_802B7BC0_E23170;
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                command.unk_04 = &D_802B7BE0_E23190;
+                foldImage.palette = D_802B7BE0_E23190;
                 break;
         }
-        fold_update(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
+        fold_update(0, FOLD_TYPE_7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
-        command.unk_00 = &D_802B7580_E22B30;
-        command.unk_08 = 0x38;
-        command.unk_0A = 0x38;
-        command.unk_0C = -0x1C;
-        command.unk_0E = 0x2E;
-        command.unk_10 = 0xFF;
+        foldImage.raster = D_802B7580_E22B30;
+        foldImage.width = 56;
+        foldImage.height = 56;
+        foldImage.xOffset = -28;
+        foldImage.yOffset = 46;
+        foldImage.opacity = 255;
 
-        fold_appendGfx_component(0, &command, 0, &matrix2);
+        fold_appendGfx_component(0, &foldImage, 0, matrix2);
         gSPPopMatrix(gMasterGfxPos++, 0);
     }
 }
@@ -135,7 +123,7 @@ void func_802B735C_E2290C(void) {
 
     switch (temp_v1) {
         case 0:
-            if (partnerActionStatus->actionState.b[0] && partnerActionStatus->actionState.b[3] == 8) {
+            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
                 phi_v0 = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
                 phi_v0 = playerStatus->flags & 0x3000;
@@ -172,8 +160,8 @@ void func_802B735C_E2290C(void) {
                 }
             }
 
-            if (D_802B7C78_E23228->unk_18++ >= 0x33) {
-                D_8015A578.unk_02 = 0;
+            if (D_802B7C78_E23228->unk_18++ > 50) {
+                gCurrentHiddenPanels.activateISpy = FALSE;
                 D_8010C93C = NULL;
                 playerStatus->animFlags &= ~0x100;
             }

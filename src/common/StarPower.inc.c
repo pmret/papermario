@@ -7,7 +7,7 @@ ApiStatus N(UnkStarFunc1)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    fx_sparkles(0, a, b, c, 40.0f);
+    fx_sparkles(FX_SPARKLES_0, a, b, c, 40.0f);
     return ApiStatus_DONE2;
 }
 
@@ -27,7 +27,7 @@ ApiStatus N(UnkStarFunc3)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    fx_sparkles(0, a, b, c, 30.0f);
+    fx_sparkles(FX_SPARKLES_0, a, b, c, 30.0f);
     return ApiStatus_DONE2;
 }
 

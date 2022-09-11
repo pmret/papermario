@@ -4,61 +4,61 @@
 #define NAMESPACE b_area_kzn_kzn_05
 
 EvtScript N(80228E40) = {
-    EVT_SET(LW(10), LW(1))
-    EVT_CALL(SetTexPanner, LW(0), LW(1))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar1)
+    EVT_CALL(SetTexPanner, LVar0, LVar1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LW(10), 0, LW(0), 0)
-        EVT_CALL(SetTexPanOffset, LW(10), 1, LW(1), 0)
-        EVT_SUB(LW(0), -300)
-        EVT_SUB(LW(1), -500)
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, LVarA, 1, LVar1, 0)
+        EVT_SUB(LVar0, -300)
+        EVT_SUB(LVar1, -500)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80228F0C) = {
-    EVT_SET(LW(10), LW(1))
-    EVT_CALL(SetTexPanner, LW(0), LW(1))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar1)
+    EVT_CALL(SetTexPanner, LVar0, LVar1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LW(10), 0, LW(0), LW(1))
-        EVT_ADD(LW(0), 16384)
-        EVT_ADD(LW(1), 0)
-        EVT_WAIT_FRAMES(5)
+        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
+        EVT_ADD(LVar0, 16384)
+        EVT_ADD(LVar1, 0)
+        EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80228FBC) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_SET(LW(9), LW(1))
-    EVT_SET(LW(8), LW(2))
-    EVT_SET(LW(7), LW(3))
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVar9, LVar1)
+    EVT_SET(LVar8, LVar2)
+    EVT_SET(LVar7, LVar3)
     EVT_LABEL(0)
-    EVT_SET(LW(2), LW(8))
-    EVT_ADD(LW(2), LW(9))
-    EVT_CALL(MakeLerp, LW(8), LW(2), LW(7), 0)
+    EVT_SET(LVar2, LVar8)
+    EVT_ADD(LVar2, LVar9)
+    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LW(10), LW(0), 0, 0)
-        EVT_WAIT_FRAMES(1)
-        EVT_IF_EQ(LW(1), 0)
+        EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(LW(2), LW(8))
-    EVT_ADD(LW(2), LW(9))
-    EVT_CALL(MakeLerp, LW(2), LW(8), LW(7), 0)
+    EVT_SET(LVar2, LVar8)
+    EVT_ADD(LVar2, LVar9)
+    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LW(10), LW(0), 0, 0)
-        EVT_WAIT_FRAMES(1)
-        EVT_IF_EQ(LW(1), 0)
+        EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -70,23 +70,23 @@ EvtScript N(80228FBC) = {
 EvtScript N(beforeBattle_8022916C) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_SET(LW(0), 17)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVar0, 17)
+    EVT_SET(LVar1, 0)
     EVT_EXEC(N(80228E40))
-    EVT_SET(LW(0), 15)
-    EVT_SET(LW(1), 1)
+    EVT_SET(LVar0, 15)
+    EVT_SET(LVar1, 1)
     EVT_EXEC(N(80228E40))
-    EVT_SET(LW(0), 10)
-    EVT_SET(LW(1), 2)
+    EVT_SET(LVar0, 10)
+    EVT_SET(LVar1, 2)
     EVT_EXEC(N(80228F0C))
-    EVT_SET(LW(0), 11)
-    EVT_SET(LW(1), 3)
+    EVT_SET(LVar0, 11)
+    EVT_SET(LVar1, 3)
     EVT_EXEC(N(80228F0C))
-    EVT_SET(LW(0), 26)
-    EVT_SET(LW(1), 4)
+    EVT_SET(LVar0, 26)
+    EVT_SET(LVar1, 4)
     EVT_EXEC(N(80228F0C))
-    EVT_SET(LW(0), 27)
-    EVT_SET(LW(1), 5)
+    EVT_SET(LVar0, 27)
+    EVT_SET(LVar1, 5)
     EVT_EXEC(N(80228F0C))
     EVT_CALL(EnableModel, 29, 0)
     EVT_CALL(EnableModel, 30, 0)
@@ -160,6 +160,6 @@ Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt05_shape",
     .hit = "kzn_bt05_hit",
-    .preBattle = N(beforeBattle_8022916C),
-    .postBattle = N(afterBattle_8022974C),
+    .preBattle = &N(beforeBattle_8022916C),
+    .postBattle = &N(afterBattle_8022974C),
 };

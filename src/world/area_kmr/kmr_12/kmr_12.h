@@ -2,6 +2,8 @@
 /// @brief Goomba Region - Goomba Road 4
 
 #include "common.h"
+#include "../kmr.h"
+#include "message_ids.h"
 #include "map.h"
 #include "../kmr.h"
 
@@ -12,11 +14,8 @@
 #define GetGoomba N(GetGoomba)
 ApiStatus GetGoomba(Evt* script, s32 isInitialCall);
 
-extern  MapConfig N(config);
-extern  EvtScript N(main);
-extern  EvtScript N(PlayMusic);
-extern  EvtScript N(MakeEntities);
-extern  EvtScript N(ReadWestSign);
+extern EvtScript N(main);
+extern EvtScript N(PlayMusic);
+extern EvtScript N(MakeEntities);
+extern EvtScript N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);
-
-extern s32 D_802EAFDC;

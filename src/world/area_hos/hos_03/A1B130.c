@@ -1,8 +1,6 @@
 #include "hos_03.h"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1B130", func_8024033C_A1B43C);
 

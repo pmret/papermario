@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 #include "sprite.h"
 #include "sprite/npc/world_goombario.h"
 #include "sprite/npc/world_kooper.h"
@@ -9,7 +10,7 @@
 #include "sprite/npc/world_sushie.h"
 #include "sprite/npc/world_lakilester.h"
 
-extern s32 gPartnerPopupProperties[11][4];
+extern s32 gPartnerPopupProperties[13][4];
 extern s8 gPauseBufferPal1[512];
 extern s8 gPauseBufferImg1[15752];
 extern s8 gPauseBufferPal2[512];
@@ -35,8 +36,8 @@ static s32 gPausePartnersLevel;
 static s32 gPausePartnersNumPartners;
 
 HudScript* gPausePartnersIconScripts[] = {
-    HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
-    HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb
+    &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+    &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
 };
 Vp gPausePartnersViewport = {
     .vp = {
@@ -49,55 +50,55 @@ s32 gPausePartnersSpriteAnims[][4] = {
         NPC_ANIM_world_goombario_normal_still,
         NPC_ANIM_world_goombario_normal_walk,
         NPC_ANIM_world_goombario_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_kooper_normal_still,
         NPC_ANIM_world_kooper_normal_walk,
         NPC_ANIM_world_kooper_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bombette_normal_still,
         NPC_ANIM_world_bombette_normal_walk,
         NPC_ANIM_world_bombette_normal_idle_fast,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_parakarry_Palette_00_Anim_0,
         NPC_ANIM_world_parakarry_Palette_00_Anim_2,
         NPC_ANIM_world_parakarry_Palette_00_Anim_6,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bow_Palette_00_Anim_0,
         NPC_ANIM_world_bow_Palette_00_Anim_2,
         NPC_ANIM_world_bow_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_watt_Palette_00_Anim_0,
         NPC_ANIM_world_watt_Palette_00_Anim_2,
         NPC_ANIM_world_watt_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_sushie_Palette_00_Anim_0,
         NPC_ANIM_world_sushie_Palette_00_Anim_2,
         NPC_ANIM_world_sushie_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_lakilester_Palette_00_Anim_0,
         NPC_ANIM_world_lakilester_Palette_00_Anim_5,
         NPC_ANIM_world_lakilester_Palette_00_Anim_9,
-        ANIM_END
+        ANIM_LIST_END
     }
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 gPausePartnersMessages[] = {
-    MESSAGE_ID(0x28, 0x6), MESSAGE_ID(0x28, 0x13), MESSAGE_ID(0x28, 0x20), MESSAGE_ID(0x28, 0x2D),
-    MESSAGE_ID(0x28, 0x3A), MESSAGE_ID(0x28, 0x47), MESSAGE_ID(0x28, 0x54), MESSAGE_ID(0x28, 0x61)
+    MSG_PartnerDesc_Goombario_Pause, MSG_PartnerDesc_Kooper_Pause, MSG_PartnerDesc_Bombette_Pause, MSG_PartnerDesc_Parakarry_Pause,
+    MSG_PartnerDesc_Bow_Pause, MSG_PartnerDesc_Watt_Pause, MSG_PartnerDesc_Sushie_Pause, MSG_PartnerDesc_Lakilester_Pause
 };
 s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
                                  MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
@@ -418,13 +419,13 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, 0, 0);
 
     if (level == 1) {
-        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[2]);
+        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
     } else if (level == 2) {
-        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[2]);
-        set_hud_element_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[3]);
+        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
+        hud_element_set_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersIconIDs[3]);
     }
 }
 
@@ -455,9 +456,9 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         style = 1;
 
         if (i == 0) {
-            moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].moveNameID;
+            moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].nameMsg;
         } else {
-            moveNameID =  gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].moveNameID;
+            moveNameID =  gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].nameMsg;
         }
 
         if (i > 0) {
@@ -467,16 +468,16 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         }
 
         draw_msg(moveNameID, msgX, msgY, 255, 10, style);
-        set_hud_element_scale(gPausePartnersIconIDs[i + 4], 0.5f);
+        hud_element_set_scale(gPausePartnersIconIDs[i + 4], 0.5f);
         //TODO find better match
-        set_hud_element_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
-        draw_hud_element_3(gPausePartnersIconIDs[i + 4]);
+        hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
+        hud_element_draw_without_clipping(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
             draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, 10, 255, 3);
             if (costFP > 0) {
-                set_hud_element_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
-                draw_hud_element_3(gPausePartnersIconIDs[0]);
+                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
+                hud_element_draw_without_clipping(gPausePartnersIconIDs[0]);
             }
         }
     }
@@ -491,8 +492,8 @@ void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s
 }
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    set_hud_element_render_pos(gPausePartnersIconIDs[1], baseX + 17, baseY + 16);
-    draw_hud_element_3(gPausePartnersIconIDs[1]);
+    hud_element_set_render_pos(gPausePartnersIconIDs[1], baseX + 17, baseY + 16);
+    hud_element_draw_without_clipping(gPausePartnersIconIDs[1]);
 }
 
 void pause_partners_init(MenuPanel* panel) {
@@ -518,8 +519,8 @@ void pause_partners_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts); i++) {
-        gPausePartnersIconIDs[i] = create_hud_element(gPausePartnersIconScripts[i]);
-        set_hud_element_flags(gPausePartnersIconIDs[i], 0x80);
+        gPausePartnersIconIDs[i] = hud_element_create(gPausePartnersIconScripts[i]);
+        hud_element_set_flags(gPausePartnersIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersWindowBPs); i++) {
@@ -652,9 +653,9 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if (gPausePartnersLevel == 0) {
         gPauseCurrentDescMsg = gPausePartnersMessages[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]];
     } else if (gPausePartnersSelectedMove == 0) {
-        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].fullDescMsg;
     } else {
-        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].fullDescMsg;
     }
 }
 
@@ -690,7 +691,7 @@ void pause_partners_cleanup(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersIconIDs); i++) {
-        free_hud_element(gPausePartnersIconIDs[i]);
+        hud_element_free(gPausePartnersIconIDs[i]);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersSpriteIDs); i++) {

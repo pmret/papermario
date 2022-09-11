@@ -1,3 +1,9 @@
 #include "kpa_114.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_114/A9E980", func_80240000_A9E980);
+ApiStatus func_80240000_A9E980(Evt* script, s32 isInitialCall) {
+    sprintf(wMapShapeName, "kpa_112_shape");
+    sprintf(wMapHitName, "kpa_112_hit");
+    return ApiStatus_BLOCK;
+}
+
+const char* N(exit_str_0) = "kpa_113\0kpa_115";

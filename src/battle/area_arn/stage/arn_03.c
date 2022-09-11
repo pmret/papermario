@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/arn_bt03_shape.h"
 
 #define NAMESPACE b_area_arn_arn_03
 
@@ -15,7 +16,7 @@ EvtScript N(afterBattle_80227AB0) = {
 };
 
 s32 N(foregroundModelList_80227AC0)[] = {
-    0xFFFFFFFF, 0x0000001A, 0x00000000,
+    -1, MODEL_iwa4, 0,
 };
 
 Stage NAMESPACE = {
@@ -23,7 +24,7 @@ Stage NAMESPACE = {
     .shape = "arn_bt03_shape",
     .hit = "arn_bt03_hit",
     .bg = "arn_bg",
-    .preBattle = N(beforeBattle_80227A90),
-    .postBattle = N(afterBattle_80227AB0),
+    .preBattle = &N(beforeBattle_80227A90),
+    .postBattle = &N(afterBattle_80227AB0),
     .foregroundModelList = N(foregroundModelList_80227AC0),
 };

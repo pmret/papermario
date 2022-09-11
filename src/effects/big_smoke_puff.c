@@ -6,16 +6,17 @@ static f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.
 static f32 sPartScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
 static f32 sPartYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
 
-extern Gfx D_09000FA0[];
-extern Gfx D_09001060[];
-extern Gfx D_09001120[];
-extern Gfx D_090011E0[];
-extern Gfx D_090012A0[];
-extern Gfx D_09001360[];
-extern Gfx D_09001420[];
+extern Gfx D_09000FA0_3273B0[];
+extern Gfx D_09001060_327470[];
+extern Gfx D_09001120_327530[];
+extern Gfx D_090011E0_3275F0[];
+extern Gfx D_090012A0_3276B0[];
+extern Gfx D_09001360_327770[];
+extern Gfx D_09001420_327830[];
 
 static Gfx* sDlists[7] = {
-    D_09000FA0, D_09001060, D_09001120, D_090011E0, D_090012A0, D_09001360, D_09001420
+    D_09000FA0_3273B0, D_09001060_327470, D_09001120_327530, D_090011E0_3275F0, D_090012A0_3276B0, D_09001360_327770,
+    D_09001420_327830
 };
 
 void big_smoke_puff_init(EffectInstance* effect);
@@ -45,7 +46,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.bigSmokePuff = data;
 
     ASSERT(data != NULL);
 
@@ -74,7 +75,7 @@ void big_smoke_puff_init(EffectInstance* effect) {
 }
 
 void big_smoke_puff_update(EffectInstance* effect) {
-    BigSmokePuffFXData* data = effect->data;
+    BigSmokePuffFXData* data = effect->data.bigSmokePuff;
     s32 cond = FALSE;
     s32 i;
 
@@ -115,12 +116,12 @@ void big_smoke_puff_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void big_smoke_puff_appendGfx(void* effect) {
     EffectInstance* eff = (EffectInstance*)effect;
-    BigSmokePuffFXData* data = ((EffectInstance*)effect)->data;
+    BigSmokePuffFXData* data = ((EffectInstance*)effect)->data.bigSmokePuff;
     Matrix4f mtx;
     s32 i;
 

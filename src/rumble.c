@@ -31,8 +31,8 @@ void start_rumble(s32 freq, s32 nframes) {
 }
 
 void update_max_rumble_duration(void) {
-    if (rumbleButtons != gGameStatusPtr->currentButtons) {
-        rumbleButtons = gGameStatusPtr->currentButtons;
+    if (rumbleButtons != gGameStatusPtr->currentButtons[0]) {
+        rumbleButtons = gGameStatusPtr->currentButtons[0];
         reset_max_rumble_duration();
     }
 

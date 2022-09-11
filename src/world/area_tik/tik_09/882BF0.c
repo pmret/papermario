@@ -1,13 +1,5 @@
 #include "tik_09.h"
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc5.inc.c"
-
-INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80241204_8833C4);
+#include "world/common/GetDefeatedEnemyCount.inc.c"

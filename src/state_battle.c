@@ -9,30 +9,7 @@ s32 D_800778A0[] = {
 };
 
 s32 D_800778AC[] = {
-    0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-};
-
-Gfx D_800778C8[] = {
-    gsDPPipeSync(),
-    gsDPSetCycleType(G_CYC_COPY),
-    gsDPSetTexturePersp(G_TP_NONE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
-    gsDPSetRenderMode(G_RM_NOOP, G_RM_NOOP2),
-    gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
-};
-
-// Should maybe be in state_logos.c but creates an 0x8 data split
-Gfx D_80077908[] = {
-    gsDPPipeSync(),
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetTexturePersp(G_TP_NONE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
-    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
+    0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000
 };
 
 // BSS
@@ -52,7 +29,7 @@ void state_step_battle(void) {
             return;
         }
         D_800A0900--;
-        gOverrideFlags |= 0x8;
+        gOverrideFlags |= GLOBAL_OVERRIDES_8;
         nuContRmbForceStop();
     }
 
@@ -88,8 +65,8 @@ void state_step_battle(void) {
             clear_entity_models();
             clear_animator_list();
             clear_generic_entity_list();
-            set_hud_element_nonworld_cache(NULL, 0);
-            clear_hud_element_cache();
+            hud_element_set_aux_cache(NULL, 0);
+            hud_element_clear_cache();
             reset_status_menu();
             clear_item_entity_data();
             clear_script_list();
@@ -104,7 +81,7 @@ void state_step_battle(void) {
             gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40;
             D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
-            gOverrideFlags &= ~0x8;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
 
             if (D_800A0900 >= 0) {
                 return;
@@ -129,7 +106,7 @@ void state_drawUI_battle(void) {
 }
 
 void state_init_end_battle(void) {
-    gOverrideFlags |= 0x8;
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
     nuContRmbForceStop();
     D_800A0900 = 5;
 }
@@ -141,16 +118,16 @@ void state_step_end_battle(void) {
     if (D_800A0900 >= 0) {
         D_800A0900--;
         if (D_800A0900 == 0) {
+            MapSettings* mapSettings;
             MapConfig* mapConfig;
-            Map* map;
 
             D_800A0900 = -1;
             nuGfxSetCfb(D_800778A0, 3);
-            gOverrideFlags &= ~0x8;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
-            mapConfig = get_current_map_header();
-            map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+            mapSettings = get_current_map_settings();
+            mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
             btl_restore_world_cameras(gGameStatusPtr);
             gGameStatusPtr->isBattle = FALSE;
             func_8005AF84();
@@ -164,18 +141,18 @@ void state_step_end_battle(void) {
             init_entity_models();
             reset_animator_list();
             init_generic_entity_list();
-            set_hud_element_nonworld_cache(0, 0);
+            hud_element_set_aux_cache(0, 0);
             init_hud_element_list();
             init_item_entity_list();
             init_script_list();
             init_npc_list();
-            func_80110E58();
+            init_entity_data();
             init_trigger_list();
 
             if (gGameStatusPtr->demoFlags & 1) {
                 npc_reload_all();
                 playerStatus->animFlags = D_800A0904;
-                set_game_mode(17);
+                set_game_mode(GAME_MODE_DEMO);
             } else {
                 void* mapShape;
                 u32 sizeTemp;
@@ -188,18 +165,18 @@ void state_step_end_battle(void) {
                 initialize_collision();
                 restore_map_collision_data();
 
-                if (map->dmaStart != NULL) {
-                    dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                if (mapConfig->dmaStart != NULL) {
+                    dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                 }
 
-                load_map_bg(map->bgName);
-                if (mapConfig->background != NULL) {
-                    read_background_size(mapConfig->background);
+                load_map_bg(mapConfig->bgName);
+                if (mapSettings->background != NULL) {
+                    read_background_size(mapSettings->background);
                 } else {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapConfig->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
+                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 
@@ -207,7 +184,7 @@ void state_step_end_battle(void) {
                 if (D_800A0908 != 0) {
                     set_time_freeze_mode(D_800A0908);
                 }
-                set_game_mode(4);
+                set_game_mode(GAME_MODE_CHANGE_MAP);
             }
         }
     }

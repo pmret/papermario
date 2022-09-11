@@ -26,7 +26,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt05_shape",
     .hit = "kmr_bt05_hit",
     .bg = "kmr_bg",
-    .preBattle = N(beforeBattle_80220A28),
-    .postBattle = N(afterBattle_80220A5C),
+    .preBattle = &N(beforeBattle_80220A28),
+    .postBattle = &N(afterBattle_80220A5C),
     .foregroundModelList = N(foregroundModelList_80220A6C),
 };

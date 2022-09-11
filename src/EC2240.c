@@ -9,7 +9,7 @@ const char* ascii_EC7170 = "flo_09";
 const char* ascii_EC7178 = "flo_22";
 const char* ascii_EC7180 = "flo_18\0";
 
-INCLUDE_ASM(s32, "EC2240", func_80240040_EC2240);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -55,18 +55,18 @@ ApiStatus func_80240158_EC2358(Evt* script, s32 isInitialCall) {
                 osSyncPrintf("cccc\n");
             }
         }
-        npc->currentAnim.w = enemy->animList[2];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_RUN];
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc_move_heading(npc, 2.0f, npc->yaw);
     } else if (temp_f4 > 0.2) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim.w = enemy->animList[1];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     } else {
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
     }
     return ApiStatus_BLOCK;
 }

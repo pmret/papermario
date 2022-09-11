@@ -56,7 +56,6 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
     cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
-    compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS_COMMON = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
@@ -66,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
-    cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -x c -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -102,14 +101,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
-        depfile="$out.d",
-        deps="gcc",
-    )
-
-    ninja.rule("cc_dsl",
-        description="dsl $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -126,7 +118,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -148,12 +140,17 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("img_header",
         description="img_header $in",
-        command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
+        command=f"$python {BUILD_TOOLS}/img/header.py $in $out $c_name",
     )
 
     ninja.rule("bin_inc_c",
         description="bin_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
+    )
+
+    ninja.rule("pal_inc_c",
+        description="pal_inc_c $out",
+        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out $c_name",
     )
 
     ninja.rule("yay0",
@@ -205,6 +202,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(f"compiler_type = \"gcc\"\n")
         f.write(
 """
 [preserve_macros]
@@ -239,7 +237,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "vtx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
+            modes.extend(["bin", "Yay0", "img", "vtx", "gfx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
                           "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
@@ -330,7 +328,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c":
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c" or task == "pal_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -345,7 +343,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cxx"]:
+                elif task in ["cc", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -381,14 +379,10 @@ class Configure:
                     else: # papermario
                         cflags = "-fforce-addr"
 
-                # check for dsl
+                # c
                 task = "cc"
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
-                with entry.src_paths[0].open() as f:
-                    s = f.read()
-                    if " SCRIPT(" in s or "#pragma SCRIPT" in s:
-                        task = "cc_dsl"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -412,7 +406,7 @@ class Configure:
                             if seg.flip_vertical:
                                 flags += "--flip-y "
 
-                            src_paths = [seg.out_path()]
+                            src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".png.bin")
 
@@ -421,10 +415,14 @@ class Configure:
                                 "img_flags": flags,
                             })
 
-                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header")
-                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
+                            c_sym = seg.create_symbol(
+                                addr=seg.vram_start, in_segment=True, type="data", define=True
+                            )
+                            vars = {"c_name": c_sym.name}
+                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header", vars)
+                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c", vars)
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
-                            src_paths = [seg.out_path()]
+                            src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
 
@@ -432,7 +430,12 @@ class Configure:
                                 "img_type": seg.type,
                                 "img_flags": "",
                             })
-                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
+
+                            c_sym = seg.create_symbol(
+                                addr=seg.vram_start, in_segment=True, type="data", define=True
+                            )
+                            vars = {"c_name": c_sym.name}
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "pal_inc_c", vars)
             elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
@@ -455,6 +458,10 @@ class Configure:
                 })
                 build(entry.object_path, [bin_path], "bin")
 
+                # c_sym = seg.create_symbol(
+                #     addr=seg.vram_start, in_segment=True, type="data", define=True
+                # )
+                # vars = {"c_name": c_sym.name}
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")
@@ -707,13 +714,13 @@ if __name__ == "__main__":
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
-        if "Free Software Foundation" in exec_shell(["cpp-11", "--version"]):
-            args.cpp = "cpp-11"
+        if "Free Software Foundation" in exec_shell(["cpp-12", "--version"]):
+            args.cpp = "cpp-12"
         else:
             print("error: system C preprocessor is not GNU!")
             print("This is a known issue on macOS - only clang's cpp is installed by default.")
             print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-            print("    ./configure --cpp cpp-11")
+            print("    ./configure --cpp cpp-12")
             exit(1)
 
     # default version behaviour is to only do those that exist

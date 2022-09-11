@@ -2,13 +2,15 @@
 /// @brief Flower Fields - (NE) Puff Puff Machine
 
 #include "common.h"
+#include "../flo.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE flo_18
 
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFloatFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall);

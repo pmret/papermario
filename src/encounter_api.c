@@ -170,7 +170,7 @@ ApiStatus DoNpcDefeat(Evt* script, s32 isInitialCall) {
 
     kill_script(script);
     npc->currentAnim.w = owner->animList[6];
-    newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
+    newScript = start_script(&SCRIPT_NpcDefeat, EVT_PRIORITY_A, 0);
     owner->defeatScript = newScript;
     owner->defeatScriptID = newScript->id;
     newScript->owner1.enemy = owner;
@@ -192,7 +192,7 @@ void start_battle(Evt* script, s32 songID) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = 0;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = 0;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
@@ -217,7 +217,7 @@ void start_battle(Evt* script, s32 songID) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;
 
-            hitEvtInstance = start_script(enemy->hitBytecode, 10, 0);
+            hitEvtInstance = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
 
             enemy->hitScript = hitEvtInstance;
             enemy->hitScriptID = hitEvtInstance->id;
@@ -260,7 +260,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = FIRST_STRIKE_NONE;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
@@ -284,7 +284,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
             ) && enemy->hitBytecode != NULL) {
             enemy->encountered = TRUE;
 
-            script = start_script(enemy->hitBytecode, 10, 0);
+            script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
             enemy->hitScript = script;
             enemy->hitScriptID = script->id;
 
@@ -323,7 +323,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     Evt* scriptTemp = script;
     ApiStatus ret = ApiStatus_DONE2;
     Evt* aiScript;
-    s32 phi_s1;
+    s32 groupFlags;
 
     if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
         id = enemy->npcID;
@@ -345,9 +345,9 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->flags & ENEMY_FLAGS_1) {
-        phi_s1 = 10;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        phi_s1 = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
     if (enemy->aiScript != NULL) {
@@ -356,12 +356,12 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
 
     enemy->unk_C8 = 100;
     enemy->aiBytecode = newScriptSource;
-    scriptTemp = start_script(newScriptSource, 10, 0);
+    scriptTemp = start_script(newScriptSource, EVT_PRIORITY_A, 0);
     enemy->aiScript = scriptTemp;
     enemy->aiScriptID = scriptTemp->id;
-    scriptTemp->owner1.enemyID = (s32)enemy;
+    scriptTemp->owner1.enemy = enemy;
     scriptTemp->owner2.npcID = id;
-    scriptTemp->groupFlags = phi_s1;
+    scriptTemp->groupFlags = groupFlags;
     return ret;
 }
 
@@ -395,9 +395,9 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     npc = get_enemy(npcId);
 
     if (npc->flags & 1) {
-        groupFlags = 10;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        groupFlags = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
     if (npc->aiScript != NULL) {
@@ -405,7 +405,7 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     }
 
     npc->unk_C8 = 100;
-    newScript = start_script(npc->aiBytecode, 10, 0);
+    newScript = start_script(npc->aiBytecode, EVT_PRIORITY_A, 0);
     npc->aiScript = newScript;
     npc->aiScriptID = newScript->id;
     newScript->owner1.enemy = npc;
@@ -473,10 +473,10 @@ ApiStatus SetNpcAux(Evt* script, s32 isInitialCall) {
 
     if (newScriptSource != NULL) {
         enemy->auxBytecode = newScriptSource;
-        scriptTemp = start_script(newScriptSource, 10, 0);
+        scriptTemp = start_script(newScriptSource, EVT_PRIORITY_A, 0);
         enemy->auxScript = scriptTemp;
         enemy->auxScriptID = scriptTemp->id;
-        scriptTemp->owner1.enemyID = (s32)enemy;
+        scriptTemp->owner1.enemy = enemy;
         scriptTemp->owner2.npcID = id;
         scriptTemp->groupFlags = script->groupFlags;
     }
@@ -501,31 +501,31 @@ ApiStatus BindNpcAux(Evt* script, s32 isInitialCall) {
 
 ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* npc = script->owner1.enemy;
+    Enemy* enemy = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     Evt* newScript;
     s32 groupFlags;
 
     if (npcID == NPC_SELF) {
-        npcID = npc->npcID;
+        npcID = enemy->npcID;
     }
 
-    npc = get_enemy(npcID);
+    enemy = get_enemy(npcID);
 
-    if (npc->flags & 1) {
-        groupFlags = 10;
+    if (enemy->flags & 1) {
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        groupFlags = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
-    if (npc->auxScript != NULL) {
-        kill_script_by_ID(npc->auxScriptID);
+    if (enemy->auxScript != NULL) {
+        kill_script_by_ID(enemy->auxScriptID);
     }
 
-    newScript = start_script(npc->auxBytecode, 10, 0);
-    npc->auxScript = newScript;
-    npc->auxScriptID = newScript->id;
-    newScript->owner1.enemy = npc;
+    newScript = start_script(enemy->auxBytecode, EVT_PRIORITY_A, 0);
+    enemy->auxScript = newScript;
+    enemy->auxScriptID = newScript->id;
+    newScript->owner1.enemy = enemy;
     newScript->owner2.npcID = npcID;
     newScript->groupFlags = groupFlags;
 
@@ -650,7 +650,7 @@ ApiStatus GetNpcVar(Evt* script, s32 isInitialCall) {
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     s32 varIdx = evt_get_variable(script, *args++);
-    s32 var3 = *args;
+    s32 var3 = *args++;
 
     if (npcID == NPC_SELF) {
         npcID = npc->npcID;
@@ -797,7 +797,7 @@ ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->unk_2A & 8);
+    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->actionFlags & AI_ACTION_08);
     return ApiStatus_DONE2;
 }
 
@@ -806,17 +806,17 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var0 = evt_get_variable(script, *script->ptrReadPos);
 
-    enemy->unk_B0 |= 4;
+    enemy->aiFlags |= ENEMY_AI_FLAGS_4;
 
     if (var0 == 0) {
         s32 unk;
 
-        if (!(enemy->unk_B0 & 0x10)) {
+        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_10)) {
             npc->currentAnim.w = *enemy->animList;
         }
 
-        if (!(enemy->unk_B0 & 0x8)) {
-            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
+        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_8)) {
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 
         if ((npc->flags & 0xA08) == 0x808) {

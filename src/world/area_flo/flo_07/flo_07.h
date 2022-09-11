@@ -2,14 +2,16 @@
 /// @brief Flower Fields - (SW) Posie and Crystal Tree
 
 #include "common.h"
+#include "../flo.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE flo_07
 
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240344_CAC534)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242B0C);

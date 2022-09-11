@@ -1,3 +1,3 @@
 #include "mac_04.h"
 
-#include "world/common/UnkMusicFunc.inc.c"
+#include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"

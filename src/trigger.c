@@ -23,7 +23,7 @@ void clear_trigger_data(void) {
     collisionStatus->currentFloor = -1;
     collisionStatus->lastTouchedFloor = -1;
     collisionStatus->currentCeiling = -1;
-    collisionStatus->unk_0A = -1;
+    collisionStatus->currentInspect = -1;
     collisionStatus->unk_0C = -1;
     collisionStatus->unk_0E = -1;
     collisionStatus->unk_10 = -1;
@@ -130,7 +130,7 @@ void update_triggers(void) {
             if (listTrigger->location.colliderID == collisionStatus->currentWall) {
                 collisionStatus->touchingWallTrigger = 1;
             }
-            if ((listTrigger->location.colliderID != collisionStatus->unk_0A) || !phys_can_player_interact()) {
+            if ((listTrigger->location.colliderID != collisionStatus->currentInspect) || !phys_can_player_interact()) {
                 continue;
             }
         }
@@ -149,7 +149,7 @@ void update_triggers(void) {
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
             if ((listTrigger->location.colliderID != collisionStatus->currentFloor) ||
-                !(gGameStatusPtr->pressedButtons & BUTTON_A) || (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+                !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                 continue;
             }
         }

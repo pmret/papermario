@@ -296,12 +296,12 @@ glabel msg_draw_speech_arrow
 .L8012D7D8:
 /* C3ED8 8012D7D8 3C028007 */  lui       $v0, %hi(gCurrentDisplayContextIndex)
 /* C3EDC 8012D7DC 8C4241F4 */  lw        $v0, %lo(gCurrentDisplayContextIndex)($v0)
-/* C3EE0 8012D7E0 3C1E8015 */  lui       $fp, %hi(D_8014C4C0)
-/* C3EE4 8012D7E4 27DEC4C0 */  addiu     $fp, $fp, %lo(D_8014C4C0)
+/* C3EE0 8012D7E0 3C1E8015 */  lui       $fp, %hi(gMsgUnkQuad)
+/* C3EE4 8012D7E4 27DEC4C0 */  addiu     $fp, $fp, %lo(gMsgUnkQuad)
 /* C3EE8 8012D7E8 10400003 */  beqz      $v0, .L8012D7F8
 /* C3EEC 8012D7EC 4600C306 */   mov.s    $f12, $f24
-/* C3EF0 8012D7F0 3C1E8015 */  lui       $fp, %hi(D_8014C480)
-/* C3EF4 8012D7F4 27DEC480 */  addiu     $fp, $fp, %lo(D_8014C480)
+/* C3EF0 8012D7F0 3C1E8015 */  lui       $fp, %hi(gMsgUnkArrowQuad)
+/* C3EF4 8012D7F4 27DEC480 */  addiu     $fp, $fp, %lo(gMsgUnkArrowQuad)
 .L8012D7F8:
 /* C3EF8 8012D7F8 8622050A */  lh        $v0, 0x50a($s1)
 /* C3EFC 8012D7FC 8623050C */  lh        $v1, 0x50c($s1)

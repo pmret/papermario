@@ -46,10 +46,10 @@ void func_802B60A4_E29514(void) {
 
     if (playerStatus->flags & (1 << 31)) {
         playerStatus->flags &= ~0x80000000;
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
         playerStatus->fallState = 1;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         D_802B6EE4 = 0.0f;
         D_802B6EE8 = 0.0f;
         D_802B6EF4 = playerStatus->position.y;
@@ -61,7 +61,7 @@ void func_802B60A4_E29514(void) {
 
         TempPointer = &D_802B6ED0;
         if (sp20 >= 0){
-            if(!(sp20 & 0x4000)) {
+            if (!(sp20 & COLLISION_WITH_ENTITY_BIT)) {
                 D_802B6ED0 = -1;
             } else {
                 D_802B6ED0 = sp20 & 0x3FF;
@@ -73,15 +73,15 @@ void func_802B60A4_E29514(void) {
             suggest_player_anim_clearUnkFlag(0x1002B);
         }
     }
-    switch(playerStatus->fallState) {
+    switch (playerStatus->fallState) {
         case 1:
-            gOverrideFlags |= 0x40;
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (++D_802B6EE4 >= 20.0f) {
                 D_802B6EE4 = 20.0f;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            if (playerStatus->framesOnGround < 10) {
-                playerStatus->framesOnGround++;
+            if (playerStatus->currentStateTime < 10) {
+                playerStatus->currentStateTime++;
                 D_802B6EF4++;
             }
             D_802B6EE8 += 8.0f;
@@ -110,29 +110,29 @@ void func_802B60A4_E29514(void) {
                 playerStatus->position.x += sp10 * sp1C;
                 playerStatus->position.z -= sp14 * sp1C;
             }
-            gCameras->targetPos.x = playerStatus->position.x;
-            gCameras->targetPos.y = playerStatus->position.y;
-            gCameras->targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             sp20 = func_802B6000_E29470();
-            if (sp20 < 0 || !(sp20 & 0x4000)) {
-                playerStatus->framesOnGround = 20;
+            if (sp20 < 0 || !(sp20 & COLLISION_WITH_ENTITY_BIT)) {
+                playerStatus->currentStateTime = 20;
                 D_802B6EE8 = 0.0f;
                 D_802B6EF4 = playerStatus->position.y;
                 playerStatus->fallState++;
                 D_802B6EF0 = 1.6f;
                 playerStatus->flags |= 0x800000;
             }
-            if (gGameStatusPtr->pressedButtons & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
+            if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
                 suggest_player_anim_setUnkFlag(0x10007);
                 playerStatus->fallState = 3;
-                playerStatus->framesOnGround = 30;
+                playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;
                 gCollisionStatus.currentFloor = -1;
                 exec_entity_commandlist(get_entity_by_index(D_802B6ED0));
             }
             break;
         case 2:
-            gOverrideFlags |= 0x40;
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (--D_802B6EE4 < 0.0f) {
                 D_802B6EE4 = 0.0f;
                 playerStatus->flags &= ~0x100000;
@@ -147,16 +147,16 @@ void func_802B60A4_E29514(void) {
             playerStatus->position.z += D_802B6ED8;
             collision_lava_reset_check_additional_overlaps();
             playerStatus->position.y = player_check_collision_below(D_802B6EF0, &sp20);
-            gCameras->targetPos.x = playerStatus->position.x;
-            gCameras->targetPos.y = playerStatus->position.y;
-            gCameras->targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             if (sp20 >= 0) {
                 playerStatus->flags &= ~0x100000;
                 enable_player_input();
                 enable_player_static_collisions();
                 set_action_state(ACTION_STATE_LAND);
                 enable_partner_ai();
-                gOverrideFlags &= ~0x40;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                 return;
             }
     }
@@ -181,11 +181,11 @@ void func_802B60A4_E29514(void) {
             D_802B6EE8 += 8.0f;
 
             playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
-            gCameras->targetPos.z = playerStatus->position.z;
-            gCameras->targetPos.x = playerStatus->position.x;
-            gCameras->targetPos.y = playerStatus->position.y;
-            if (playerStatus->framesOnGround != 0) {
-                playerStatus->framesOnGround--;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            if (playerStatus->currentStateTime != 0) {
+                playerStatus->currentStateTime--;
                 D_802B6EE4 += 2.0f;
                 if (D_802B6EE4 >= 45.0f) {
                     D_802B6EE4 = 45.0f;
@@ -194,7 +194,7 @@ void func_802B60A4_E29514(void) {
                 break;
             }
             playerStatus->fallState++;
-            playerStatus->framesOnGround = 30;
+            playerStatus->currentStateTime = 30;
             phys_adjust_cam_on_landing();
             break;
         case 1:
@@ -210,33 +210,33 @@ void func_802B60A4_E29514(void) {
 
             tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 4.0f;
             playerStatus->position.y += tempY;
-            gCameras->targetPos.x = playerStatus->position.x;
-            gCameras->targetPos.y = playerStatus->position.y;
-            gCameras->targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             tempDistance = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->position.x, playerStatus->position.z));
             if (tempDistance > 40.0f) {
                 if (D_802BCE30 + 30 < playerStatus->position.y) {
                     playerStatus->fallState++;
                     sp18 = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
                     sin_cos_rad(sp18 * TAU / 360.0f, &sp10, &sp14);
-                    playerStatus->framesOnGround = 64;
+                    playerStatus->currentStateTime = 64;
                     D_802B6EEC = sp18;
                     D_802B6ED4 = (sp10 * tempDistance) * 0.015625;
                     D_802B6ED8 = (-sp14 * tempDistance) * 0.015625;
                 }
                 break;
             }
-            if (playerStatus->framesOnGround == 0) {
+            if (playerStatus->currentStateTime == 0) {
                 playerStatus->fallState = 0xA;
-                playerStatus->framesOnGround = 20;
+                playerStatus->currentStateTime = 20;
             } else {
-                playerStatus->framesOnGround--;
+                playerStatus->currentStateTime--;
             }
             break;
         case 2:
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            if (playerStatus->framesOnGround != 0) {
-                playerStatus->framesOnGround--;
+            if (playerStatus->currentStateTime != 0) {
+                playerStatus->currentStateTime--;
                 if (D_802B6EE0-- < 0.0f) {
                     D_802B6EE0 = 0.0f;
                 }
@@ -247,9 +247,9 @@ void func_802B60A4_E29514(void) {
             } else {
                 playerStatus->fallState = 0xB;
             }
-            gCameras->targetPos.x = playerStatus->position.x;
-            gCameras->targetPos.y = playerStatus->position.y;
-            gCameras->targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             break;
         case 7:
             if (++D_802B6EE4 >= 45.0f) {
@@ -262,8 +262,8 @@ void func_802B60A4_E29514(void) {
             }
             tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 3.0f;
             playerStatus->position.y += tempY;
-            if (playerStatus->framesOnGround != 0) {
-                playerStatus->framesOnGround--;
+            if (playerStatus->currentStateTime != 0) {
+                playerStatus->currentStateTime--;
                 break;
             }
         case 8:
@@ -273,7 +273,7 @@ void func_802B60A4_E29514(void) {
             playerStatus->flags |= 0x800000;
             start_falling();
             enable_partner_ai();
-            gOverrideFlags &= ~0x40;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             break;
     }
 }

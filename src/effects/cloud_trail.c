@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090000E0[];
-extern Gfx D_090001B8[];
+extern Gfx D_090000E0_32ED30[];
+extern Gfx D_090001B8_32EE08[];
 
 void cloud_trail_init(EffectInstance* effect);
 void cloud_trail_update(EffectInstance* effect);
@@ -26,9 +26,9 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
+    effect->data.cloudTrail = part;
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.cloudTrail != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -60,7 +60,7 @@ void cloud_trail_init(EffectInstance* effect) {
 }
 
 void cloud_trail_update(EffectInstance* effect) {
-    CloudTrailFXData* part = (CloudTrailFXData*)effect->data;
+    CloudTrailFXData* part = effect->data.cloudTrail;
     s32 cond = FALSE;
     s32 i;
 
@@ -75,7 +75,7 @@ void cloud_trail_update(EffectInstance* effect) {
                 part->unk_1C = part->unk_28 + shim_sin_deg(part->unk_30) * 0.1;
                 part->unk_20 = part->unk_2C + shim_cos_deg(part->unk_30) * 0.1;
 
-                if (part->unk_04 == 0 && (part->lifetime == 5 && gPlayerActionState == ACTION_STATE_IDLE)) {
+                if (part->unk_04 == 0 && (part->lifetime == 5 && gPlayerStatus.actionState == ACTION_STATE_IDLE)) {
                     part->lifetime++;
                     return;
                 }
@@ -110,19 +110,19 @@ void cloud_trail_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void cloud_trail_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    CloudTrailFXData* part = effectTemp->data;
+    CloudTrailFXData* part = effectTemp->data.cloudTrail;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090000E0);
+    gSPDisplayList(gMasterGfxPos++, D_090000E0_32ED30);
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
@@ -137,7 +137,7 @@ void cloud_trail_appendGfx(void* effect) {
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->alpha);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_090001B8);
+            gSPDisplayList(gMasterGfxPos++, D_090001B8_32EE08);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
     }

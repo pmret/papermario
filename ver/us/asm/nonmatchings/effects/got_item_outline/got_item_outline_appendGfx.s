@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0036650
+.double 0.6, 0.0
+
+.section .text
+
 glabel got_item_outline_appendGfx
 /* 345704 E0036224 27BDFF28 */  addiu     $sp, $sp, -0xd8
 /* 345708 E0036228 0080402D */  daddu     $t0, $a0, $zero

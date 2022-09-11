@@ -9,8 +9,6 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void msg_printer_set_origin_pos(MessagePrintState* printer, s32 x, s32 y);
-
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
@@ -56,7 +54,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0] = 0;
-        gOverrideFlags |= 0x10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
         }
@@ -97,7 +95,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_menu_disabled();
-            gOverrideFlags &= ~0x10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
     }
@@ -163,7 +161,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_menu_disabled();
-            gOverrideFlags &= ~0x10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
     }
@@ -228,10 +226,10 @@ ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
 
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         battleStatus->unk_92 |= 1;
-        gOverrideFlags |= 0x80;
+        gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
         battleStatus->unk_92 &= ~1;
-        gOverrideFlags &= ~0x80;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     return ApiStatus_DONE2;
@@ -264,7 +262,7 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
     s32 a1 = *args++;
-    f32 t1;
+    u8 t1;
     f32 t2;
     s32 t3;
 
@@ -328,7 +326,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->unk_438[idx] = soundID;
+    actor->loopingSoundID[idx] = soundID;
     sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
@@ -346,12 +344,12 @@ ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->unk_438[idx] == 0) {
+    if (actor->loopingSoundID[idx] == 0) {
         return ApiStatus_DONE2;
     }
 
-    sfx_stop_sound(actor->unk_438[idx]);
-    actor->unk_438[idx] = 0;
+    sfx_stop_sound(actor->loopingSoundID[idx]);
+    actor->loopingSoundID[idx] = 0;
     return ApiStatus_DONE2;
 }
 
@@ -427,7 +425,7 @@ INCLUDE_ASM(s32, "181810", load_tattle_flags);
 
 ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = 3;
-    btl_set_state(0x20);
+    btl_set_state(BATTLE_STATE_END_BATTLE);
 
     return ApiStatus_DONE2;
 }

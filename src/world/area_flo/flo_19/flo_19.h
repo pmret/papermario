@@ -2,12 +2,14 @@
 /// @brief Flower Fields - Cloudy Climb
 
 #include "common.h"
+#include "../flo.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE flo_19
 
-ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFloatFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240340_CE3A30)(Evt* script, s32 isInitialCall);

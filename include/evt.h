@@ -104,27 +104,7 @@ enum {
     EVT_OP_94,
 };
 
-// deprecated, use those in script_api/macros.h instead
-#define EVT_VAR(v)           ((v -  30000000))
-#define EVT_MAP_VAR(v)       ((v -  50000000))
-#define EVT_FLAG(v)          ((v -  70000000))
-#define EVT_MAP_FLAG(v)      ((v -  90000000))
-#define EVT_AREA_FLAG(v)     ((v - 110000000))
-#define EVT_SAVE_FLAG(v)     ((v - 130000000))
-#define EVT_AREA_VAR(v)      ((v - 150000000))
-#define EVT_SAVE_VAR(v)      ((v - 170000000))
-#define EVT_ARRAY(v)         (Bytecode) ((v - 190000000))
-#define EVT_ARRAY_FLAG(v)    ((v - 210000000))
-#define EVT_FIXED(v)         (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
-#define EVT_PTR(sym)         (Bytecode) &sym
-#define EVT_LIMIT            -250000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000
-
-// deprecated, use enum GSW/GSWF
-#define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
-#define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)
-#define EVT_SAVE_FLAG_TUTORIAL_GOT_STAR_PIECE EVT_SAVE_FLAG(101)
-#define EVT_WORLD_LOCATION EVT_SAVE_VAR(425)
 
 /* Return type of evt_execute_next_command */
 #define EVT_CONTINUE 0   /* Continue to next command */
@@ -138,5 +118,31 @@ typedef s32 ApiStatus;
 #define ApiStatus_DONE2  2   /* Conditional on Evt->disableScripts */
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
+
+enum EventGroupFlags {
+    EVT_GROUP_00    = 0x00,
+    EVT_GROUP_0B    = 0x0B, // 8 | 4 | 1
+    EVT_GROUP_1B    = 0x1B, // 10 | 8 | 4 | 1
+    EVT_GROUP_EF    = 0xEF, // ~10
+    EVT_GROUP_01    = 0x01,
+    EVT_GROUP_02    = 0x02,
+    EVT_GROUP_04    = 0x04,
+    EVT_GROUP_08    = 0x08,
+    EVT_GROUP_10    = 0x10,
+};
+
+enum EventPriority {
+    EVT_PRIORITY_0  = 0x00, // map main script
+    EVT_PRIORITY_1  = 0x01,
+    EVT_PRIORITY_A  = 0x0A,
+    EVT_PRIORITY_14 = 0x14,
+};
+
+enum EventStateFlags {
+    EVT_FLAG_01     = 0x01,
+    EVT_FLAG_10     = 0x10, // has child?
+    EVT_FLAG_20     = 0x20, // add to global script list
+    EVT_FLAG_40     = 0x40, // thread?
+};
 
 #endif

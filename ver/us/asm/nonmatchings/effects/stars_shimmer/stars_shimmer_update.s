@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0044E60
+.double 0.01
+
+dlabel D_E0044E68
+.double 0.96
+
+dlabel D_E0044E70
+.double 0.1
+
+dlabel D_E0044E78
+.word 0xE0044514, 0xE0044514, 0xE0044704, 0xE00446B0, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE004462C, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE0044704, 0xE004462C, 0x00000000
+
+dlabel D_E0044EF8
+.double -0.02
+
+.section .text
+
 glabel stars_shimmer_update
 /* 355384 E0044424 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 355388 E0044428 AFB40020 */  sw        $s4, 0x20($sp)

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00C29A0
+.double 0.1
+
+.section .text
+
 glabel fright_jar_main
 /* 3C11D0 E00C2000 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 3C11D4 E00C2004 F7B40038 */  sdc1      $f20, 0x38($sp)

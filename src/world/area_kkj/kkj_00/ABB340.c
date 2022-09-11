@@ -1,29 +1,25 @@
 #include "kkj_00.h"
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240C44_ABBED4);
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str) = "end_00";
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240F40_ABC1D0);
+ApiStatus func_80240F40_ABC1D0(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 0;
+    }
+
+    set_screen_overlay_color(0, 208, 208, 208);
+    set_screen_overlay_params_front(1, script->functionTemp[1]);
+
+    if (script->functionTemp[1] == 255) {
+        return ApiStatus_DONE2;
+    }
+
+    script->functionTemp[1] += 7;
+    if (script->functionTemp[1] > 255) {
+        script->functionTemp[1] = 255;
+    }
+
+    return ApiStatus_BLOCK;
+}

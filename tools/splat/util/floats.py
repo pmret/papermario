@@ -1,10 +1,9 @@
-
 import math
 import struct
 
 # From mips_to_c: https://github.com/matt-kempster/mips_to_c/blob/d208400cca045113dada3e16c0d59c50cdac4529/src/translate.py#L2085
 def format_f32_imm(num: int) -> str:
-    packed = struct.pack(">I", num & (2 ** 32 - 1))
+    packed = struct.pack(">I", num & (2**32 - 1))
     value = struct.unpack(">f", packed)[0]
 
     if not value or value == 4294967296.0:
@@ -53,10 +52,11 @@ def format_f32_imm(num: int) -> str:
         return str(value)
 
     ret = fmt(prec)
-    if "." not in ret:
+    if "." not in ret and "e" not in ret:
         ret += ".0"
     return ret
 
+
 def format_f64_imm(num: int) -> str:
-    (value,) = struct.unpack(">d", struct.pack(">Q", num & (2 ** 64 - 1)))
+    (value,) = struct.unpack(">d", struct.pack(">Q", num & (2**64 - 1)))
     return str(value)

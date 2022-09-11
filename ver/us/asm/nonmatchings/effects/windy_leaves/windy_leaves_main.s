@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0056EA0
+.double 0.1
+
+dlabel D_E0056EA8
+.double 0.008
+
+dlabel D_E0056EB0
+.double 0.05
+
+.section .text
+
 glabel windy_leaves_main
 /* 35DA00 E0056000 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 35DA04 E0056004 F7B40048 */  sdc1      $f20, 0x48($sp)

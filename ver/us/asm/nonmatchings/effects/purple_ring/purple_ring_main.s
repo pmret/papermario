@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E003E870
+.double 0.1
+
+.section .text
+
 glabel purple_ring_main
 /* 352440 E003E000 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 352444 E003E004 F7BA00A0 */  sdc1      $f26, 0xa0($sp)

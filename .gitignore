@@ -10,6 +10,7 @@ venv/
 ctx.c
 expected/
 .vscode/launch.json
+.vscode/*.log
 /tools/star-rod
 /tools/to_rename.txt
 /ver/current

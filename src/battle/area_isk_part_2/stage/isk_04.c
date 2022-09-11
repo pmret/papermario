@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "mapfs/isk_bt04_shape.h"
 
 #define NAMESPACE b_area_isk_part_2_isk_04
 
@@ -34,14 +35,14 @@ EvtScript N(afterBattle_80220178) = {
 };
 
 s32 N(foregroundModelList_80220194)[] = {
-    0x00000033, 0x00000034, 0x00000000,
+    MODEL_o500, MODEL_o501, 0,
 };
 
 Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt04_shape",
     .hit = "isk_bt04_hit",
-    .preBattle = N(beforeBattle_80220130),
-    .postBattle = N(afterBattle_80220178),
+    .preBattle = &N(beforeBattle_80220130),
+    .postBattle = &N(afterBattle_80220178),
     .foregroundModelList = N(foregroundModelList_80220194),
 };

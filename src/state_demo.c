@@ -78,26 +78,26 @@ void state_step_demo(void) {
         case 3:
             intro_logos_set_fade_alpha(255);
             intro_logos_set_fade_color(224);
-            gGameStatusPtr->introState = 3;
-            gOverrideFlags |= 8;
+            gGameStatusPtr->introState = INTRO_STATE_3;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             intro_logos_update_fade();
             gGameStatusPtr->demoState = 5;
             break;
         case 4:
-            if (gGameStatusPtr->introState != 0) {
+            if (gGameStatusPtr->introState != INTRO_STATE_0) {
                 gGameStatusPtr->introState--;
             }
 
-            if (gGameStatusPtr->introState == 0) {
+            if (gGameStatusPtr->introState == INTRO_STATE_0) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = 0;
                 gGameStatusPtr->peachFlags = 0;
                 func_80056204();
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->unk_76 = 0;
-                gGameStatusPtr->disableScripts = 0;
-                gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
-                gOverrideFlags &= ~0x8;
+                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 general_heap_create();
                 clear_render_tasks();
                 clear_generic_entity_list();
@@ -109,7 +109,7 @@ void state_step_demo(void) {
                 clear_model_data();
                 clear_sprite_shading_data();
                 reset_background_settings();
-                clear_hud_element_cache();
+                hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
                 clear_entity_data(0);
@@ -123,7 +123,7 @@ void state_step_demo(void) {
                 clear_item_entity_data();
                 clear_saved_variables();
                 initialize_collision();
-                set_game_mode(2);
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
             }
             return;
         case 0:
@@ -134,7 +134,7 @@ void state_step_demo(void) {
             gGameStatusPtr->peachFlags = 0;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            evt_set_variable(NULL, EVT_STORY_PROGRESS, demoSceneData->unk_6);
+            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->unk_6);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);
@@ -142,7 +142,7 @@ void state_step_demo(void) {
                 set_map_transition_effect(2);
             }
 
-            set_game_mode(3);
+            set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
         case 1:
             get_map_IDs_by_name(demoSceneData->mapName, &areaID, &mapID);
@@ -152,7 +152,7 @@ void state_step_demo(void) {
             gGameStatusPtr->peachFlags = 1;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            evt_set_variable(NULL, EVT_STORY_PROGRESS, demoSceneData->unk_6);
+            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->unk_6);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);
@@ -160,7 +160,7 @@ void state_step_demo(void) {
                 set_map_transition_effect(2);
             }
 
-            set_game_mode(3);
+            set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
         case 2:
             load_demo_battle(demoSceneData->entryID);

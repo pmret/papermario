@@ -5,4 +5,8 @@ static char* N(exit_str_1) = "kmr_22";
 static char* N(exit_str_2) = "tik_22";
 static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/892A20", func_80240000_892A20);
+ApiStatus func_80240000_892A20(Evt* script, s32 isInitialCall) {
+    bgm_set_track_volumes(0, 2);
+    return ApiStatus_DONE2;
+}
+

@@ -1,16 +1,19 @@
 #include "common.h"
 #include "../partners.h"
 
+extern s32 DoorModelsSwingCCW[3];
+extern s32 DoorModelsSwingCW[3];
+
 ApiStatus CheckRideScriptForEnterExit(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
     if (partner_get_ride_script() != NULL) {
-        if (gPartnerActionStatus.actionState.b[0] == ACTION_STATE_IDLE) {
+        if (gPartnerActionStatus.partnerActionState == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;
-            script->varTable[11] = partner_get_ride_script();
+            script->varTablePtr[11] = partner_get_ride_script();
             script->varTable[13] = playerStatus->targetYaw;
         }
     }
@@ -63,7 +66,32 @@ ApiStatus SetPlayerPositionFromSaveData(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", EnterPlayerPostPipe);
+ApiStatus EnterPlayerPostPipe(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    MapSettings* mapSettings = get_current_map_settings();
+    ApiStatus ret = ApiStatus_BLOCK;
+
+    if (isInitialCall) {
+        playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+        playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+        script->varTable[2] = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+        playerStatus->position.y = script->varTable[2] - 40;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+    } else {
+        do {
+            playerStatus->position.y += 1.0f;
+            if (!(playerStatus->position.y < script->varTable[2])) {
+                playerStatus->position.y = script->varTable[2];
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+                ret = ApiStatus_DONE2;
+            }
+        } while (0); // todo required to match
+    }
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+    return ret;
+}
 
 ApiStatus ShortenPartnerTetherDistance(Evt* script, s32 isInitialCall) {
     partner_set_tether_distance(20.0f);
@@ -90,8 +118,8 @@ ApiStatus PlayerMoveToDoor(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetEntryCoords(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    MapConfig* mapConfig = get_current_map_header();
-    Vec4f* entryList = (Vec4f*)mapConfig->entryList;
+    MapSettings* mapSettings = get_current_map_settings();
+    Vec4f* entryList = (Vec4f*)mapSettings->entryList;
     s32 index = evt_get_variable(script, *args++);
 
     evt_set_variable(script, *args++, entryList[index].x);
@@ -102,10 +130,66 @@ ApiStatus GetEntryCoords(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSingleDoor);
+ApiStatus SetupSingleDoor(Evt* script, s32 isInitialCall) {
+    if (script->varTable[3] >= 0) {
+        DoorModelsSwingCCW[0] = script->varTable[2];
+        DoorModelsSwingCCW[1] = -1;
+        DoorModelsSwingCW[0] = -1;
+    } else {
+        DoorModelsSwingCW[0] = script->varTable[2];
+        DoorModelsSwingCW[1] = -1;
+        DoorModelsSwingCCW[0] = -1;
+    }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitSingleDoor);
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+    script->varTablePtr[3] = &DoorModelsSwingCW;
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupDoubleDoors);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitDoubleDoors);
+ApiStatus SetupSplitSingleDoor(Evt* script, s32 isInitialCall) {
+    if (script->varTable[3] >= 0) {
+        DoorModelsSwingCCW[0] = script->varTable[2];
+        DoorModelsSwingCCW[1] = script->varTable[4];
+        DoorModelsSwingCCW[2] = -1;
+        DoorModelsSwingCW[0] = -1;
+    } else {
+        DoorModelsSwingCW[0] = script->varTable[2];
+        DoorModelsSwingCW[1] = script->varTable[4];
+        DoorModelsSwingCW[2] = -1;
+        DoorModelsSwingCCW[0] = -1;
+    }
+
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetupDoubleDoors(Evt* script, s32 isInitialCall) {
+    DoorModelsSwingCCW[0] = script->varTable[2];
+    DoorModelsSwingCCW[1] = -1;
+
+    DoorModelsSwingCW[0] = script->varTable[3];
+    DoorModelsSwingCW[1] = -1;
+
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetupSplitDoubleDoors(Evt* script, s32 isInitialCall) {
+    DoorModelsSwingCCW[0] = script->varTable[2];
+    DoorModelsSwingCCW[1] = script->varTable[4];
+    DoorModelsSwingCCW[2] = -1;
+
+    DoorModelsSwingCW[0] = script->varTable[3];
+    DoorModelsSwingCW[1] = script->varTable[5];
+    DoorModelsSwingCW[2] = -1;
+
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+
+    return ApiStatus_DONE2;
+}

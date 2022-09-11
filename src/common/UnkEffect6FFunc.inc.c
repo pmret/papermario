@@ -3,7 +3,7 @@
 
 ApiStatus N(UnkEffect6FFunc)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Effect6FInstance* effect;
+    EffectInstance* effect;
     s32 unused_var = evt_get_variable(script, *args++);
     s32 temp_s6 = evt_get_variable(script, *args++);
     s32 temp_s5 = evt_get_variable(script, *args++);
@@ -14,13 +14,13 @@ ApiStatus N(UnkEffect6FFunc)(Evt* script, s32 isInitialCall) {
     s32 temp_s1 = evt_get_variable(script, *args++);
     s32 temp_s0_9 = evt_get_variable(script, *args++);
 
-    effect = (Effect6FInstance*)fx_cold_breath(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
-    effect->data->rotation.z = temp_s3;
-    effect->data->scale.x = temp_s1;
-    effect->data->scale.y = temp_s0_9;
-    effect->data->color.x = 255;
-    effect->data->color.y = 255;
-    effect->data->color.z = 255;
+    effect = fx_cold_breath(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
+    effect->data.coldBreath->unk_18 = temp_s3;
+    effect->data.coldBreath->unk_1C = temp_s1;
+    effect->data.coldBreath->unk_20 = temp_s0_9;
+    effect->data.coldBreath->unk_28 = 255;
+    effect->data.coldBreath->unk_2C = 255;
+    effect->data.coldBreath->unk_30 = 255;
 
     return ApiStatus_DONE2;
 }

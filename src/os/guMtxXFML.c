@@ -1,4 +1,4 @@
-#include "common.h"
+#include "PR/guint.h"
 
 void guMtxXFML(Mtx *m, float x, float y, float z, float *ox, float *oy, float *oz)
 {

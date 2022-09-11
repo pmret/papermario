@@ -3,6 +3,11 @@
 static char* N(exit_str_0) = "kpa_13";
 static char* N(exit_str_1) = "kpa_01";
 static char* N(exit_str_2) = "kpa_16";
-static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A574B0", func_80240000_A574B0);
+s32 N(get_tattle)(void) {
+    if (!evt_get_variable(NULL, GF_KPA16_ShutOffLava)) {
+        return MSG_MapTattle_kpa_14_before;
+    } else {
+        return MSG_MapTattle_kpa_14_after;
+    }
+}

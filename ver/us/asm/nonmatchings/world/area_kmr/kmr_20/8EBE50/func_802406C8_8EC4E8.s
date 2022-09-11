@@ -95,8 +95,8 @@ glabel func_802406C8_8EC4E8
 .L8024080C:
 /* 8EC62C 8024080C 1260001A */  beqz      $s3, .L80240878
 /* 8EC630 80240810 0240802D */   daddu    $s0, $s2, $zero
-/* 8EC634 80240814 3C028008 */  lui       $v0, %hi(HudScript_Item_ITEM_08B)
-/* 8EC638 80240818 244222F8 */  addiu     $v0, $v0, %lo(HudScript_Item_ITEM_08B)
+/* 8EC634 80240814 3C028008 */  lui       $v0, %hi(HES_Item_Unused_08B)
+/* 8EC638 80240818 244222F8 */  addiu     $v0, $v0, %lo(HES_Item_Unused_08B)
 /* 8EC63C 8024081C AE220000 */  sw        $v0, ($s1)
 /* 8EC640 80240820 AE320108 */  sw        $s2, 0x108($s1)
 /* 8EC644 80240824 AE3E018C */  sw        $fp, 0x18c($s1)
@@ -115,8 +115,8 @@ glabel func_802406C8_8EC4E8
 /* 8EC674 80240854 00508024 */  and       $s0, $v0, $s0
 /* 8EC678 80240858 12000005 */  beqz      $s0, .L80240870
 /* 8EC67C 8024085C AE200210 */   sw       $zero, 0x210($s1)
-/* 8EC680 80240860 3C028008 */  lui       $v0, %hi(HudScript_Item_ITEM_08B_disabled)
-/* 8EC684 80240864 24422328 */  addiu     $v0, $v0, %lo(HudScript_Item_ITEM_08B_disabled)
+/* 8EC680 80240860 3C028008 */  lui       $v0, %hi(HES_Item_Unused_08B_disabled)
+/* 8EC684 80240864 24422328 */  addiu     $v0, $v0, %lo(HES_Item_Unused_08B_disabled)
 /* 8EC688 80240868 AE3E0210 */  sw        $fp, 0x210($s1)
 /* 8EC68C 8024086C AE220000 */  sw        $v0, ($s1)
 .L80240870:

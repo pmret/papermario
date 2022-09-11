@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "mapfs/isk_bt04_shape.h"
 
 #define NAMESPACE b_area_isk_part_1_isk_04
 
@@ -22,7 +23,7 @@ ApiStatus N(DeleteTorchFX)(Evt* script, s32 isInitialCall) {
 
 EvtScript N(beforeBattle_80223AC0) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(N(CreateTorchFX))
     EVT_RETURN
     EVT_END
@@ -35,14 +36,14 @@ EvtScript N(afterBattle_80223B08) = {
 };
 
 s32 N(foregroundModelList_80223B24)[] = {
-    0x00000033, 0x00000034, 0x00000000,
+    MODEL_o500, MODEL_o501, 0,
 };
 
 Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt04_shape",
     .hit = "isk_bt04_hit",
-    .preBattle = N(beforeBattle_80223AC0),
-    .postBattle = N(afterBattle_80223B08),
+    .preBattle = &N(beforeBattle_80223AC0),
+    .postBattle = &N(afterBattle_80223B08),
     .foregroundModelList = N(foregroundModelList_80223B24),
 };

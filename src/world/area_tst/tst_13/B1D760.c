@@ -37,7 +37,7 @@ void func_8024013C_B1D89C(void) {
     guScaleF(sp50, x, y, z);
     guMtxCatF(sp50, sp10, sp10);
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
-    mdl_project_tex_coords(1, D_80242860_B1FFC0, &sp10, NULL);
+    mdl_project_tex_coords(1, D_80242860_B1FFC0, sp10, NULL);
 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);

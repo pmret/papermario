@@ -9,7 +9,7 @@ dlabel flo_14_D_80245328_CD0638
 .double 0.98
 
 .section .text
-glabel func_80240504_CCB814
+glabel flo_14_func_80240504_CCB814
 /* CCB814 80240504 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* CCB818 80240508 AFBF0064 */  sw        $ra, 0x64($sp)
 /* CCB81C 8024050C AFB00060 */  sw        $s0, 0x60($sp)

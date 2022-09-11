@@ -90,7 +90,9 @@ typedef void *__gnuc_va_list;
  (AP = ((__gnuc_va_list) __builtin_next_arg (LASTARG)))
 
 #undef va_end
+#ifndef M2CTX
 void va_end (__gnuc_va_list);		/* Defined in libgcc.a */
+#endif
 #define va_end(AP)	((void)0)
 
 /* We cast to void * and then to TYPE * because this avoids
@@ -136,7 +138,7 @@ void va_end (__gnuc_va_list);		/* Defined in libgcc.a */
 /* Define va_list, if desired, from __gnuc_va_list. */
 /* We deliberately do not define va_list when called from
    stdio.h, because ANSI C says that stdio.h is not supposed to define
-   va_list.  stdio.h needs to have access to that data type, 
+   va_list.  stdio.h needs to have access to that data type,
    but must not use that name.  It should use the name __gnuc_va_list,
    which is safe because it is reserved for the implementation.  */
 

@@ -21,7 +21,7 @@ Stage NAMESPACE = {
     .texture = "mim_tex",
     .shape = "mim_bt01_shape",
     .hit = "mim_bt01_hit",
-    .preBattle = N(beforeBattle_80233670),
-    .postBattle = N(afterBattle_8023369C),
+    .preBattle = &N(beforeBattle_80233670),
+    .postBattle = &N(afterBattle_8023369C),
 };
 

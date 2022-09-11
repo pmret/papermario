@@ -10,8 +10,12 @@ class CommonSegAsm(CommonSegCodeSubsegment):
         return options.get_asm_path() / self.dir / f"{self.name}.s"
 
     def scan(self, rom_bytes: bytes):
-        if self.rom_start != "auto" and self.rom_end != "auto" and self.rom_start != self.rom_end:
-            self.funcs_text = self.disassemble_code(rom_bytes, options.get("asm_endlabels", False))
+        if (
+            self.rom_start != "auto"
+            and self.rom_end != "auto"
+            and self.rom_start != self.rom_end
+        ):
+            self.scan_code(rom_bytes, is_asm=True)
 
     def get_file_header(self):
         return []
@@ -22,13 +26,9 @@ class CommonSegAsm(CommonSegCodeSubsegment):
             if out_path:
                 out_path.parent.mkdir(parents=True, exist_ok=True)
 
-                out_lines = self.get_file_header()
-                for func in self.funcs_text:
-                    out_lines.extend(self.funcs_text[func][0])
-                    out_lines.append("")
+                self.print_file_boundaries()
 
-                self.split_write(out_path, out_lines)
-
-    def split_write(self, out_path, out_lines):
-        with open(out_path, "w", newline="\n") as f:
-            f.write("\n".join(out_lines))
+                with open(out_path, "w", newline="\n") as f:
+                    for line in self.get_file_header():
+                        f.write(line + "\n")
+                    f.write(self.text_section.disassemble())

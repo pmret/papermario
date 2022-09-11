@@ -2,8 +2,9 @@
 /// @brief Gusty Gulch - Windmill Exterior
 
 #include "common.h"
-#include "map.h"
 #include "../arn.h"
+#include "message_ids.h"
+#include "map.h"
 
 #define NAMESPACE arn_07
 
@@ -31,7 +32,7 @@ ApiStatus N(arn_07_StarSpiritEffectFunc4)(Evt* script, s32 isInitialCall);
 ApiStatus N(arn_07_StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall);
 ApiStatus N(arn_07_StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240800_BED5F0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241C5C_BEEA4C)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall);

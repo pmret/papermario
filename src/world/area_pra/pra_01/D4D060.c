@@ -1,11 +1,11 @@
 #include "pra_01.h"
 
-#include "world/common/reflection.inc.c"
+#include "world/common/atomic/Reflection.inc.c"
 
 #include "common/UnkFogFunc.inc.c"
 
 ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
-    gOverrideFlags &= ~0x80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     return ApiStatus_DONE2;
 }
 

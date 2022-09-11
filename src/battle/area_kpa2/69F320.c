@@ -1,4 +1,9 @@
 #include "common.h"
+#include "sprite/npc/battle_bowser.h"
+#include "sprite/npc/parade_peach.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
+#include "effects.h"
 
 #define NAMESPACE b_area_kpa2
 
@@ -6,7 +11,9 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218178_69F378);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/UnkFireBreathFXFunc.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802181E4_69F3E4);
 
@@ -64,14 +71,18 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219818_6A0A18);
 #include "common/GetItemEntityPosition.inc.c"
 #define NAMESPACE b_area_kpa2
 
-//#include "common/DisableRandomAbility.inc.c"
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219FFC_6A11FC);
+// #define NAMESPACE dup_b_area_kpa2
+// #include "common/DisableRandomAbility.inc.c"
+// #define NAMESPACE dup_b_area_kpa2
 
 #define NAMESPACE dup_b_area_kpa2
 #include "common/CanPlayerLoseAction.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A254_6A1454);
+#define NAMESPACE dup_b_area_kpa2
+#include "common/UnkFireBreathFXFunc.inc.c"
+#define NAMESPACE b_area_kpa2
 
 #define NAMESPACE dup3_b_area_kpa2
 #include "common/StartRumbleWithParams.inc.c"
@@ -116,6 +127,8 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B3B4_6A25B4);
 #include "common/CanPlayerLoseAction.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B60C_6A280C);
+#define NAMESPACE dup2_b_area_kpa2
+#include "common/UnkFireBreathFXFunc.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B678_6A2878);

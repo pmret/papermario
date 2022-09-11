@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00CEE50
+.double 0.2
+
+dlabel D_E00CEE58
+.double 0.1
+
+.section .text
+
 glabel whirlwind_main
 /* 3D2AC0 E00CE000 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 3D2AC4 E00CE004 F7BC0060 */  sdc1      $f28, 0x60($sp)

@@ -50,7 +50,7 @@ glabel btl_draw_upgrade_windows
 /* 18E908 80260028 26B5FA80 */  addiu     $s5, $s5, %lo(D_8029FA80)
 /* 18E90C 8026002C 27B40054 */  addiu     $s4, $sp, 0x54
 /* 18E910 80260030 8EA40000 */  lw        $a0, ($s5)
-/* 18E914 80260034 0C05126B */  jal       get_hud_element_render_pos
+/* 18E914 80260034 0C05126B */  jal       hud_element_get_render_pos
 /* 18E918 80260038 0280302D */   daddu    $a2, $s4, $zero
 /* 18E91C 8026003C 0000202D */  daddu     $a0, $zero, $zero
 /* 18E920 80260040 2405000F */  addiu     $a1, $zero, 0xf
@@ -83,7 +83,7 @@ glabel btl_draw_upgrade_windows
 /* 18E98C 802600AC E7B40028 */   swc1     $f20, 0x28($sp)
 /* 18E990 802600B0 02C0282D */  daddu     $a1, $s6, $zero
 /* 18E994 802600B4 8EA4000C */  lw        $a0, 0xc($s5)
-/* 18E998 802600B8 0C05126B */  jal       get_hud_element_render_pos
+/* 18E998 802600B8 0C05126B */  jal       hud_element_get_render_pos
 /* 18E99C 802600BC 0280302D */   daddu    $a2, $s4, $zero
 /* 18E9A0 802600C0 0000202D */  daddu     $a0, $zero, $zero
 /* 18E9A4 802600C4 8FA60050 */  lw        $a2, 0x50($sp)
@@ -110,7 +110,7 @@ glabel btl_draw_upgrade_windows
 /* 18E9F8 80260118 24E7FFEA */   addiu    $a3, $a3, -0x16
 /* 18E9FC 8026011C 02C0282D */  daddu     $a1, $s6, $zero
 /* 18EA00 80260120 8EA40008 */  lw        $a0, 8($s5)
-/* 18EA04 80260124 0C05126B */  jal       get_hud_element_render_pos
+/* 18EA04 80260124 0C05126B */  jal       hud_element_get_render_pos
 /* 18EA08 80260128 0280302D */   daddu    $a2, $s4, $zero
 /* 18EA0C 8026012C 0000202D */  daddu     $a0, $zero, $zero
 /* 18EA10 80260130 8FA60050 */  lw        $a2, 0x50($sp)

@@ -55,7 +55,7 @@ INCLUDE_ASM(s32, "effects/emote", func_E0020000);
 void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
-    EmoteFXData* part;
+    EmoteFXData* data;
     EffectInstance* effect;
     s32 numParts;
 
@@ -74,39 +74,39 @@ void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    data = effect->data.emote = shim_general_heap_malloc(numParts * sizeof(*data));
 
-    ASSERT(effect->data != NULL);
-    part->unk_3C = arg1;
-    part->unk_00 = arg0;
-    part->unk_30 = arg0;
+    ASSERT(effect->data.emote != NULL);
+    data->unk_3C = arg1;
+    data->unk_00 = arg0;
+    data->unk_30 = arg0;
 
     if (arg7 <= 0) {
         arg7 = 10000;
     }
-    part->unk_2C = arg7;
-    part->unk_34 = 0;
+    data->unk_2C = arg7;
+    data->unk_34 = 0;
 
     if (arg0 == 1) {
         s32 i;
 
-        for (i = 0; i < numParts; i++, part++) {
-            part->unk_10 = arg2;
-            part->unk_14 = arg3;
-            part->unk_18 = arg4;
-            part->unk_1C = arg6;
-            part->unk_20 = arg5;
-            part->unk_3C = arg1;
-            func_E0020000(part, i);
+        for (i = 0; i < numParts; i++, data++) {
+            data->unk_10 = arg2;
+            data->unk_14 = arg3;
+            data->unk_18 = arg4;
+            data->unk_1C = arg6;
+            data->unk_20 = arg5;
+            data->unk_3C = arg1;
+            func_E0020000(data, i);
         }
     } else {
-        part->unk_10 = arg2;
-        part->unk_14 = arg3;
-        part->unk_18 = arg4;
-        part->unk_1C = arg6;
-        part->unk_20 = arg5;
-        part->unk_3C = arg1;
-        func_E0020000(part, 1);
+        data->unk_10 = arg2;
+        data->unk_14 = arg3;
+        data->unk_18 = arg4;
+        data->unk_1C = arg6;
+        data->unk_20 = arg5;
+        data->unk_3C = arg1;
+        func_E0020000(data, 1);
     }
     *arg8 = effect;
 }
@@ -115,7 +115,7 @@ void emote_init(EffectInstance* effect) {
 }
 
 void emote_update(EffectInstance* effect) {
-    EmoteFXData* part = effect->data;
+    EmoteFXData* part = effect->data.emote;
     s32 temp_a0 = D_E0020D80[part->unk_30][part->unk_34];
     s32 type = part->unk_00;
 
@@ -165,7 +165,7 @@ void emote_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 // lots of issues

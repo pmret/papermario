@@ -7,26 +7,26 @@ enum {
     NPC_BZZAP,
 };
 
-BSS s32 N(D_802453B0_EF79C0)[91];
+BSS s32 N(ItemChoiceList)[91];
 
-f32 N(D_802444C0_CCF7D0)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
 
-NpcAISettings N(npcAISettings_802444D8) = {
+MobileAISettings N(npcAISettings_802444D8) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 5,
     .alertRadius = 80.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 2,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 2,
     .chaseSpeed = 4.5f,
-    .unk_1C = { .s = 6 },
-    .unk_20 = 1,
+    .chaseTurnRate= 6,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 90.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80244508) = {
@@ -34,7 +34,7 @@ EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(func_80241E1C_CCD12C), EVT_PTR(N(npcAISettings_802444D8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
     EVT_RETURN
     EVT_END
 };
@@ -60,32 +60,32 @@ NpcSettings N(npcSettings_802445D0) = {
     .level = 99,
 };
 
-s32 N(D_802445FC_CCF90C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80244600_CCF910) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
 EvtScript N(80244604) = {
-    EVT_SET(EVT_VAR(9), EVT_VAR(1))
+    EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_SET(LVarA, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
         EVT_CASE_DEFAULT
-            EVT_CALL(RemoveItemAt, EVT_VAR(1))
-            EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
-            EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
-            EVT_CALL(RemoveItemEntity, EVT_VAR(0))
+            EVT_CALL(RemoveItemAt, LVar1)
+            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
+            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
+            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
+            EVT_WAIT(30)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
-    EVT_CALL(N(func_80242288_CCD598), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -93,73 +93,73 @@ EvtScript N(80244604) = {
 };
 
 EvtScript N(80244738) = {
-    EVT_CALL(N(func_802422C0_CCD5D0), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(D_802453B0_EF79C0)), 0, 1)
-    EVT_CALL(N(func_80242234_CCD544), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), LVar0)
+    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END
 };
 
 
 s32 N(D_80244788_CCFA98)[] = {
-    0x000000A1, 0x00000000,
+    ITEM_BUBBLE_BERRY, ITEM_NONE
 };
 
 EvtScript N(interact_80244790) = {
-    EVT_IF_EQ(EVT_AREA_FLAG(37), 1)
-        EVT_SET(EVT_AREA_FLAG(35), 1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0063))
-        EVT_SET(EVT_AREA_FLAG(35), 0)
+    EVT_IF_EQ(AreaFlag(37), 1)
+        EVT_SET(AreaFlag(35), 1)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0063)
+        EVT_SET(AreaFlag(35), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(35), 1)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1412), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x005F))
+    EVT_SET(AreaFlag(35), 1)
+    EVT_IF_EQ(GF_FLO14_GaveBerryToBubblePlant, 0)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_005F)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0060))
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0060)
     EVT_END_IF
-    EVT_CALL(FindItem, 161, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), -1)
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(D_80244788_CCFA98)))
-        EVT_SET(EVT_VAR(1), 0)
+    EVT_CALL(FindItem, 161, LVar0)
+    EVT_IF_NE(LVar0, -1)
+        EVT_SET(LVar0, EVT_PTR(N(D_80244788_CCFA98)))
+        EVT_SET(LVar1, 0)
         EVT_EXEC_WAIT(N(80244738))
-        EVT_IF_EQ(EVT_VAR(0), -1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0064))
+        EVT_IF_EQ(LVar0, -1)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0064)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0061))
-            EVT_SET(EVT_AREA_FLAG(36), 1)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0061)
+            EVT_SET(AreaFlag(36), 1)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(PlayerMoveTo, 555, 110, 20)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_CALL(func_802CF56C, 2)
-            EVT_WAIT_FRAMES(5)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(1.0), 0, 350, EVT_FIXED(17.0), EVT_FIXED(-6.0))
+            EVT_WAIT(5)
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(1.0), 0, 350, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
             EVT_EXEC(N(80243870))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0062))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0062)
             EVT_THREAD
-                EVT_WAIT_FRAMES(40)
+                EVT_WAIT(40)
                 EVT_CALL(InterpPlayerYaw, 315, 0)
             EVT_END_THREAD
             EVT_LABEL(10)
-            EVT_IF_EQ(EVT_AREA_FLAG(37), 0)
-                EVT_WAIT_FRAMES(1)
+            EVT_IF_EQ(AreaFlag(37), 0)
+                EVT_WAIT(1)
                 EVT_GOTO(10)
             EVT_END_IF
-            EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063))
-            EVT_SET(EVT_SAVE_FLAG(1412), 1)
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH6_0063)
+            EVT_SET(GF_FLO14_GaveBerryToBubblePlant, 1)
             EVT_BIND_TRIGGER(N(8024352C), TRIGGER_FLOOR_PRESS_A, 30, 1, 0)
         EVT_END_IF
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(35), 0)
+    EVT_SET(AreaFlag(35), 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80244ADC) = {
-    EVT_SET(EVT_AREA_FLAG(36), 0)
-    EVT_SET(EVT_AREA_FLAG(37), 0)
+    EVT_SET(AreaFlag(36), 0)
+    EVT_SET(AreaFlag(37), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80244790)))
     EVT_RETURN
     EVT_END
@@ -169,13 +169,15 @@ StaticNpc N(npcGroup_80244B20) = {
     .id = NPC_BUBULB,
     .settings = &N(npcSettings_802445A4),
     .pos = { 617.0f, 0.0f, 108.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_4000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_4000,
     .init = &N(init_80244ADC),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_bubulb_Palette_00_Anim_2,
         NPC_ANIM_bubulb_Palette_00_Anim_E,
         NPC_ANIM_bubulb_Palette_00_Anim_E,
@@ -193,26 +195,28 @@ StaticNpc N(npcGroup_80244B20) = {
         NPC_ANIM_bubulb_Palette_00_Anim_2,
         NPC_ANIM_bubulb_Palette_00_Anim_2,
     },
-    .tattle = MESSAGE_ID(0x1A, 0x00E3),
+    .tattle = MSG_NpcTattle_BubblePlant,
 };
 
 StaticNpc N(npcGroup_80244D10) = {
     .id = NPC_BZZAP,
     .settings = &N(npcSettings_80244578),
     .pos = { -175.0f, 55.0f, 15.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 4,
-    .movement = { -175, 55, 15, 30, 0, -32767, 0, -175, 55, 15, 200, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 4,
+    },
+	.territory = { .temp = { -175, 55, 15, 30, 0, -32767, 0, -175, 55, 15, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_bzzap_Palette_00_Anim_2,
         NPC_ANIM_bzzap_Palette_00_Anim_2,
@@ -231,12 +235,12 @@ StaticNpc N(npcGroup_80244D10) = {
         NPC_ANIM_bzzap_Palette_00_Anim_1,
         NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcGroupList N(npcGroupList_80244F00) = {
-    NPC_GROUP(N(npcGroup_80244B20), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_80244D10), BATTLE_ID(24, 25, 0, 1)),
+    NPC_GROUP(N(npcGroup_80244B20)),
+    NPC_GROUP(N(npcGroup_80244D10), 0x1819, 0x00),
     {},
 };
 
@@ -245,7 +249,7 @@ static s32 N(pad_4F24)[] = {
 };
 
 EvtScript N(80244F30) = {
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 675, 60, -100, 17, EVT_SAVE_FLAG(1387))
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 675, 60, -100, 17, GF_FLO14_Item_StarPiece)
     EVT_RETURN
     EVT_END
 };
@@ -256,204 +260,75 @@ static s32 N(pad_4F64)[] = {
 
 EvtScript N(80244F70) = {
     EVT_LOOP(0)
-        EVT_CALL(N(func_80242360_CCD670), EVT_VAR(0))
-        EVT_IF_EQ(EVT_VAR(0), EVT_VAR(4))
-            EVT_CALL(GetPlayerActionState, EVT_VAR(0))
-            EVT_IF_NE(EVT_VAR(0), 23)
-                EVT_IF_EQ(EVT_VAR(8), 0)
+        EVT_CALL(N(func_80242360_CCD670), LVar0)
+        EVT_IF_EQ(LVar0, LVar4)
+            EVT_CALL(GetPlayerActionState, LVar0)
+            EVT_IF_NE(LVar0, 23)
+                EVT_IF_EQ(LVar8, 0)
                     EVT_THREAD
-                        EVT_CALL(GetModelCenter, EVT_VAR(5))
-                        EVT_CALL(PlaySoundAt, 0x1DB, 4194304, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                        EVT_CALL(GetModelCenter, LVar5)
+                        EVT_CALL(PlaySoundAt, 0x1DB, 4194304, LVar0, LVar1, LVar2)
                     EVT_END_THREAD
                 EVT_END_IF
-                EVT_IF_LT(EVT_VAR(7), 90)
-                    EVT_IF_EQ(EVT_VAR(7), 0)
-                        EVT_WAIT_FRAMES(5)
-                        EVT_SET(EVT_VAR(8), 6)
-                        EVT_CALL(ModifyColliderFlags, 0, EVT_VAR(9), 0x7FFFFE00)
+                EVT_IF_LT(LVar7, 90)
+                    EVT_IF_EQ(LVar7, 0)
+                        EVT_WAIT(5)
+                        EVT_SET(LVar8, 6)
+                        EVT_CALL(ModifyColliderFlags, 0, LVar9, 0x7FFFFE00)
                     EVT_END_IF
-                    EVT_ADD(EVT_VAR(8), 1)
-                    EVT_ADD(EVT_VAR(7), EVT_VAR(8))
+                    EVT_ADD(LVar8, 1)
+                    EVT_ADD(LVar7, LVar8)
                 EVT_END_IF
                 EVT_GOTO(50)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_NE(EVT_VAR(7), 0)
-            EVT_SUB(EVT_VAR(8), 1)
-            EVT_ADD(EVT_VAR(7), EVT_VAR(8))
-            EVT_IF_LE(EVT_VAR(7), 0)
-                EVT_SET(EVT_VAR(8), 0)
-                EVT_SET(EVT_VAR(7), 0)
+        EVT_IF_NE(LVar7, 0)
+            EVT_SUB(LVar8, 1)
+            EVT_ADD(LVar7, LVar8)
+            EVT_IF_LE(LVar7, 0)
+                EVT_SET(LVar8, 0)
+                EVT_SET(LVar7, 0)
                 EVT_THREAD
-                    EVT_CALL(GetModelCenter, EVT_VAR(5))
-                    EVT_CALL(PlaySoundAt, 0x1DC, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                    EVT_CALL(GetModelCenter, LVar5)
+                    EVT_CALL(PlaySoundAt, 0x1DC, 0, LVar0, LVar1, LVar2)
                 EVT_END_THREAD
-                EVT_CALL(ModifyColliderFlags, 1, EVT_VAR(9), 0x7FFFFE00)
+                EVT_CALL(ModifyColliderFlags, 1, LVar9, 0x7FFFFE00)
             EVT_END_IF
         EVT_END_IF
         EVT_LABEL(50)
-        EVT_IF_GE(EVT_VAR(7), 90)
-            EVT_SET(EVT_VAR(8), -1)
-            EVT_SET(EVT_VAR(7), 90)
+        EVT_IF_GE(LVar7, 90)
+            EVT_SET(LVar8, -1)
+            EVT_SET(LVar7, 90)
         EVT_END_IF
-        EVT_CALL(RotateModel, EVT_VAR(5), EVT_VAR(7), -1, 0, 0)
-        EVT_CALL(RotateModel, EVT_VAR(6), EVT_VAR(7), -1, 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(RotateModel, LVar5, LVar7, -1, 0, 0)
+        EVT_CALL(RotateModel, LVar6, LVar7, -1, 0, 0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80245224) = {
-    EVT_SET(EVT_VAR(4), 21)
-    EVT_SET(EVT_VAR(5), 21)
-    EVT_SET(EVT_VAR(6), 20)
-    EVT_SET(EVT_VAR(7), EVT_MAP_VAR(10))
-    EVT_SET(EVT_VAR(8), EVT_MAP_VAR(11))
-    EVT_SET(EVT_VAR(9), 22)
+    EVT_SET(LVar4, 21)
+    EVT_SET(LVar5, 21)
+    EVT_SET(LVar6, 20)
+    EVT_SET(LVar7, MapVar(10))
+    EVT_SET(LVar8, MapVar(11))
+    EVT_SET(LVar9, 22)
     EVT_EXEC(N(80244F70))
-    EVT_SET(EVT_VAR(4), 17)
-    EVT_SET(EVT_VAR(5), 26)
-    EVT_SET(EVT_VAR(6), 25)
-    EVT_SET(EVT_VAR(7), EVT_MAP_VAR(12))
-    EVT_SET(EVT_VAR(8), EVT_MAP_VAR(13))
-    EVT_SET(EVT_VAR(9), 18)
+    EVT_SET(LVar4, 17)
+    EVT_SET(LVar5, 26)
+    EVT_SET(LVar6, 25)
+    EVT_SET(LVar7, MapVar(12))
+    EVT_SET(LVar8, MapVar(13))
+    EVT_SET(LVar9, 18)
     EVT_EXEC(N(80244F70))
     EVT_RETURN
     EVT_END
 };
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-void N(func_80241764_CCCA74)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_802444C0_CCF7D0)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-ApiStatus N(func_80241E1C_CCD12C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
-    }
-
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4 != 0) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
-        case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(UnkFunc4)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_80241764_CCCA74)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
-            break;
-        case 13:
-            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
-            break;
-        case 14:
-            N(UnkFunc6)(script, aiSettings, territoryPtr);
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_802445FC_CCF90C) = FALSE;
-    }
-
-    if (N(D_802445FC_CCF90C)) {
-        N(D_802445FC_CCF90C) = FALSE;
-        evt_set_variable(script, *args, N(D_80244600_CCF910));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80244600_CCF910) = evt_get_variable(script, *args);
-    N(D_802445FC_CCF90C) = TRUE;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_802453B0_EF79C0)[i] = ptr[i];
-        }
-        N(D_802453B0_EF79C0)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_802453B0_EF79C0)[i] = i + 128;
-            N(D_802453B0_EF79C0)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"

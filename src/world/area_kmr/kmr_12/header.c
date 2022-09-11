@@ -6,12 +6,12 @@ EntryList N(entryList) = {
     { 471.0f, 0.0f, 12.0f, 270.0f }, // east, towards Goomba King's Fortress
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_kmr_12_tattle },
+    .tattle = { MSG_MapTattle_kmr_12 },
 };
 
 EvtScript N(PlayMusic) = {
@@ -21,6 +21,6 @@ EvtScript N(PlayMusic) = {
 };
 
 ApiStatus GetGoomba(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = get_enemy_safe(NPC_GOOMBA);
+    script->varTablePtr[0] = get_enemy_safe(NPC_GOOMBA);
     return ApiStatus_DONE2;
 }

@@ -1,17 +1,97 @@
 #include "hos_05.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240880_A2AAC0);
+void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
+void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802409C4_A2AC04);
+ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 primR = evt_get_variable(script, *args++);
+    s32 primG = evt_get_variable(script, *args++);
+    s32 primB = evt_get_variable(script, *args++);
+    s32 primA = evt_get_variable(script, *args++);
+    s32 fogR = evt_get_variable(script, *args++);
+    s32 fogG = evt_get_variable(script, *args++);
+    s32 fogB = evt_get_variable(script, *args++);
+    s32 fogStart = evt_get_variable(script, *args++);
+    s32 fogEnd = evt_get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240D54_A2AF94);
+    set_model_fog_color_parameters(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240DA0_A2AFE0);
+ApiStatus func_802409C4_A2AC04(Evt* script, s32 isInitialCall) {
+    Bytecode* args;
+    static u8 oldPrimR, oldPrimG, oldPrimB;
+    static u8 oldEnvR, oldEnvG, oldEnvB;
+    static s32 newPrimR, newPrimG, newPrimB;
+    static s32 newEnvR, newEnvG, newEnvB;
+    static s32 duration, time;
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240DF8_A2B038);
+    args = script->ptrReadPos;
+    if (isInitialCall) {
+        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        newPrimR = evt_get_variable(script, *args++);
+        newPrimG = evt_get_variable(script, *args++);
+        newPrimB = evt_get_variable(script, *args++);
+        newEnvR = evt_get_variable(script, *args++);
+        newEnvG = evt_get_variable(script, *args++);
+        newEnvB = evt_get_variable(script, *args++);
+        duration = evt_get_variable(script, *args++);
+        time = 0;
+    }
+    
+    if (duration > 0) {
+        if(time >= duration) {
+            return ApiStatus_DONE2;
+        }
+        time++;
+        set_model_env_color_parameters(
+            (oldPrimR + ((newPrimR - oldPrimR) * time) / duration),
+            (oldPrimG + ((newPrimG - oldPrimG) * time) / duration),
+            (oldPrimB + ((newPrimB - oldPrimB) * time) / duration),
+            (oldEnvR  + ( (newEnvR - oldEnvR)  * time) / duration),
+            (oldEnvG  + ( (newEnvG - oldEnvG)  * time) / duration),
+            (oldEnvB  + ( (newEnvB - oldEnvB)  * time) / duration));
+        if (time >= duration) {
+            return ApiStatus_DONE2;
+        }
+    } else {
+        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240E30_A2B070);
+void func_80240D54_A2AF94(s32 camID, f32 fov) {
+    Camera* camera = &gCameras[camID];
+    camera->vfov = fov * 1.1;
+}
 
+ApiStatus func_80240DA0_A2AFE0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 camID = evt_get_variable(script, *args++);
+    f32 fov = evt_get_float_variable(script, *args++);
+
+    func_80240D54_A2AF94(camID, fov);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240DF8_A2B038(Evt* script, s32 isInitialCall) {
+    GameStatus* gameStatus = gGameStatusPtr;
+    if (gameStatus->creditsViewportMode < 5U) {
+        gameStatus->creditsViewportMode++;
+        state_init_intro();
+    }
+    return ApiStatus_DONE1;
+}
+
+ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
+    mdl_set_all_fog_mode(3);
+    return ApiStatus_DONE2;
+}
+
+// adjusts properties of EmitterVolume:GoldShimmer2 effect
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240E50_A2B090);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240F30_A2B170);

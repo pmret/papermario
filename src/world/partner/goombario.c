@@ -3,13 +3,15 @@
 #include "goombario.h"
 #include "../src/world/partners.h"
 
+extern s32* D_802B79A8_E21858;
+
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
-BSS s32 D_802BDF38;
+BSS Npc* D_802BDF38;
 BSS s32 D_802BDF3C;
-BSS unkPartnerStruct D_802BDF40;
+BSS TweesterPhysics GoombarioTweesterPhysics;
 BSS s32 D_802BDF5C;
-BSS s32 D_802BDF60;
+BSS s32 GoombarioGetTattleID;
 BSS s32 D_802BDF64;
 
 s32 D_802BDC40_317B60[] = {
@@ -45,7 +47,7 @@ void world_goombario_init(Npc* goombario) {
 
 ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
     Npc* goombario = script->owner2.npc;
-    D_802BDF60 = -1;
+    GoombarioGetTattleID = -1;
 
     if (isInitialCall) {
         partner_init_get_out(goombario);
@@ -60,22 +62,22 @@ EvtScript world_goombario_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BDD88_317CA8 = &D_802BDF40;
+TweesterPhysics* GoombarioTweesterPhysicsPtr = &GoombarioTweesterPhysics;
 
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
-        mem_clear(D_802BDD88_317CA8, sizeof(*D_802BDD88_317CA8));
-        D_8010C954 = 0;
+        mem_clear(GoombarioTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->unk_2F4[1]++;
-    entity = D_8010C954;
+    playerData->partnerUsedTime[PARTNER_GOOMBARIO]++;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
@@ -83,62 +85,62 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
         return 0;
     }
 
-    switch (D_802BDD88_317CA8->unk_04) {
+    switch (GoombarioTweesterPhysicsPtr->state) {
         case 0:
-            D_802BDD88_317CA8->unk_04 = 1;
-            D_802BDD88_317CA8->flags = npc->flags;
-            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BDD88_317CA8->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
-            D_802BDD88_317CA8->unk_14 = 6.0f;
-            D_802BDD88_317CA8->unk_18 = 50.0f;
-            D_802BDD88_317CA8->unk_00 = 120;
+            GoombarioTweesterPhysicsPtr->state = 1;
+            GoombarioTweesterPhysicsPtr->prevFlags = npc->flags;
+            GoombarioTweesterPhysicsPtr->radius = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+            GoombarioTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            GoombarioTweesterPhysicsPtr->angularVelocity = 6.0f;
+            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            GoombarioTweesterPhysicsPtr->countdown = 120;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
+            sin_cos_rad((GoombarioTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
-            npc->pos.x = entity->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
-            D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
+            npc->pos.x = entity->position.x + (sinAngle * GoombarioTweesterPhysicsPtr->radius);
+            npc->pos.z = entity->position.z - (cosAngle * GoombarioTweesterPhysicsPtr->radius);
+            GoombarioTweesterPhysicsPtr->angle = clamp_angle(GoombarioTweesterPhysicsPtr->angle - GoombarioTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BDD88_317CA8->unk_0C > 20.0f) {
-                D_802BDD88_317CA8->unk_0C--;
-            } else if (D_802BDD88_317CA8->unk_0C < 19.0f) {
-                D_802BDD88_317CA8->unk_0C++;
+            if (GoombarioTweesterPhysicsPtr->radius > 20.0f) {
+                GoombarioTweesterPhysicsPtr->radius--;
+            } else if (GoombarioTweesterPhysicsPtr->radius < 19.0f) {
+                GoombarioTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BDD88_317CA8->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((GoombarioTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BDD88_317CA8->unk_18 > 150.0f) {
-                D_802BDD88_317CA8->unk_18 = 150.0f;
+            if (GoombarioTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            npc->pos.y += tempY;
+            npc->pos.y += liftoffVelocity;
 
-            npc->renderYaw = clamp_angle(360.0f - D_802BDD88_317CA8->unk_10);
-            D_802BDD88_317CA8->unk_14 += 0.8;
+            npc->renderYaw = clamp_angle(360.0f - GoombarioTweesterPhysicsPtr->angle);
+            GoombarioTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BDD88_317CA8->unk_14 > 40.0f) {
-                D_802BDD88_317CA8->unk_14 = 40.0f;
+            if (GoombarioTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                GoombarioTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BDD88_317CA8->unk_00 == 0) {
-                D_802BDD88_317CA8->unk_04++;
+            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
+                GoombarioTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            npc->flags = D_802BDD88_317CA8->flags;
-            D_802BDD88_317CA8->unk_00 = 30;
-            D_802BDD88_317CA8->unk_04++;
+            npc->flags = GoombarioTweesterPhysicsPtr->prevFlags;
+            GoombarioTweesterPhysicsPtr->countdown = 30;
+            GoombarioTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(npc);
             partner_walking_update_motion(npc);
 
-            if (--D_802BDD88_317CA8->unk_00 == 0) {
-                D_802BDD88_317CA8->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
+                GoombarioTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -152,10 +154,10 @@ EvtScript world_goombario_update = {
 };
 
 void func_802BD564_317484(Npc* goombario) {
-    if (D_8010C954) {
-        D_8010C954 = 0;
-        goombario->flags = D_802BDD88_317CA8->flags;
-        D_802BDD88_317CA8->unk_04 = 0;
+    if (TweesterTouchingPartner) {
+        TweesterTouchingPartner = NULL;
+        goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
+        GoombarioTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking (goombario);
     }
 }
@@ -164,11 +166,11 @@ s32 world_goombario_can_pause(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
     s32 new_var;
 
-    if (goombarioActionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 
-    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_NO_Y_MOVEMENT)) != NPC_FLAG_1000) {
+    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_JUMPING)) != NPC_FLAG_1000) {
         return new_var = 0;
         do { } while (new_var); // why though
     }
@@ -177,39 +179,38 @@ s32 world_goombario_can_pause(Npc* goombario) {
 }
 
 // get message for tattle routine
-// has big jumptable at rodata 802BDE88
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    set_time_freeze_mode(0);
+    set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
     if (D_802BDF64 != 0) {
         D_802BDF64 = 0;
         enable_player_input();
     }
 
-    goombarioActionStatus->actionState.b[0] = 0;
-    goombarioActionStatus->actionState.b[3] = 0;
+    goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+    goombarioActionStatus->actingPartner = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 
 EvtScript world_goombario_use_ability = {
     EVT_CALL(func_802BD5D8_3174F8)
-    EVT_IF_EQ(EVT_VAR(0), -1)
+    EVT_IF_EQ(LVar0, -1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_IF_EQ(LVar0, 0)
         EVT_CALL(func_802BDB30_317A50)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(1), 0)
+    EVT_IF_EQ(LVar1, 0)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk,
-                 NPC_ANIM_world_goombario_normal_idle, 0, EVT_VAR(0))
+                 NPC_ANIM_world_goombario_normal_idle, 0, LVar0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(func_802BDB30_317A50)
     EVT_RETURN
     EVT_END
@@ -234,15 +235,15 @@ EvtScript world_goombario_put_away = {
 void world_goombario_pre_battle(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    if (goombarioActionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
-        CancelMessageAndBlock();
+        cancel_current_message();
         partner_clear_player_tracking(goombario);
-        goombarioActionStatus->actionState.b[0] = 0;
-        goombarioActionStatus->actionState.b[3] = 0;
+        goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        goombarioActionStatus->actingPartner = PARTNER_NONE;
         disable_npc_blur(goombario);
     }
 
-    goombarioActionStatus->actionState.b[3] = 1;
+    goombarioActionStatus->actingPartner = PARTNER_GOOMBARIO;
 }

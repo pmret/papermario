@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E011E810
+.double 0.1
+
+dlabel D_E011E818
+.double 0.7
+
+dlabel D_E011E820
+.double 0.3
+
+dlabel D_E011E828
+.double 0.01
+
+.section .text
+
 glabel ice_pillar_update
 /* 409B24 E011E194 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 409B28 E011E198 AFB30024 */  sw        $s3, 0x24($sp)

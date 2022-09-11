@@ -7,7 +7,7 @@ extern s32 D_800A0950;
 void state_init_intro(void) {
     s8 unk_A8;
 
-    gGameStatusPtr->introState = 0;
+    gGameStatusPtr->introState = INTRO_STATE_0;
 
     set_curtain_scale_goal(1.0f);
     set_curtain_fade_goal(0.3f);
@@ -74,7 +74,7 @@ void state_init_intro(void) {
 
 void state_step_intro(void) {
     PlayerData* playerData = &gPlayerData;
-    u32 pressedButtons = gGameStatusPtr->pressedButtons;
+    u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
     s32 i;
 
     if (gGameStatusPtr->creditsViewportMode != -1) {
@@ -82,15 +82,19 @@ void state_step_intro(void) {
             D_800A0964 = 1;
         }
 
-        if (D_800A0964 == 1 && (gGameStatusPtr->introState == 0 || gGameStatusPtr->introState == 1 ||
-                                gGameStatusPtr->introState == 4)) {
+        if (D_800A0964 == 1 && (gGameStatusPtr->introState == INTRO_STATE_0 ||
+                                gGameStatusPtr->introState == INTRO_STATE_1 ||
+                                gGameStatusPtr->introState == INTRO_STATE_4))
+        {
             gGameStatusPtr->creditsViewportMode = 100;
             state_init_intro();
             return;
         }
 
-        if (D_800A0964 == 2 && (gGameStatusPtr->introState == 0 || gGameStatusPtr->introState == 1 ||
-                                gGameStatusPtr->introState == 4)) {
+        if (D_800A0964 == 2 && (gGameStatusPtr->introState == INTRO_STATE_0 ||
+                                gGameStatusPtr->introState == INTRO_STATE_1 ||
+                                gGameStatusPtr->introState == INTRO_STATE_4))
+        {
             gGameStatusPtr->creditsViewportMode++;
             state_init_intro();
             return;
@@ -98,44 +102,44 @@ void state_step_intro(void) {
     }
 
     switch (gGameStatusPtr->introState) {
-        case 0:
+        case INTRO_STATE_0:
             update_effects();
             update_cameras();
             if (gGameStatusPtr->creditsViewportMode == -1) {
                 set_curtain_fade_goal(0.0f);
                 if (intro_logos_fade_out(D_800A0956)) {
-                    gGameStatusPtr->introState = 1;
+                    gGameStatusPtr->introState = INTRO_STATE_1;
                     set_curtain_draw_callback(NULL);
                 }
             } else {
                 D_800A0954 += D_800A0956;
                 if (D_800A0954 >= 0xFF) {
                     D_800A0954 = 0xFF;
-                    gGameStatusPtr->introState = 1;
+                    gGameStatusPtr->introState = INTRO_STATE_1;
                     set_curtain_draw_callback(NULL);
                 }
             }
             break;
-        case 1:
+        case INTRO_STATE_1:
             D_800A0950 = 4;
-            gOverrideFlags |= 8;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             if (D_800A0960 != 0xE) {
-                gGameStatusPtr->introState = 2;
+                gGameStatusPtr->introState = INTRO_STATE_2;
             }
             break;
-        case 21:
+        case INTRO_STATE_15:
             D_800A0950--;
             if (D_800A0950 <= 0) {
-                gOverrideFlags &= -9;
-                gGameStatusPtr->introState = 2;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                gGameStatusPtr->introState = INTRO_STATE_2;
             }
             break;
-        case 2:
+        case INTRO_STATE_2:
             set_curtain_draw_callback(NULL);
-            gGameStatusPtr->isBattle = 0;
+            gGameStatusPtr->isBattle = FALSE;
             gGameStatusPtr->unk_76 = 0;
-            gGameStatusPtr->disableScripts = 0;
-            gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+            gGameStatusPtr->disableScripts = FALSE;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
 
             if (gGameStatusPtr->creditsViewportMode == -1) {
                 general_heap_create();
@@ -149,7 +153,7 @@ void state_step_intro(void) {
                 clear_model_data();
                 clear_sprite_shading_data();
                 reset_background_settings();
-                clear_hud_element_cache();
+                hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
                 clear_entity_data(0);
@@ -163,7 +167,7 @@ void state_step_intro(void) {
                 clear_item_entity_data();
                 clear_saved_variables();
                 initialize_collision();
-                set_game_mode(2);
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
                 return;
             }
 
@@ -183,19 +187,19 @@ void state_step_intro(void) {
                 playerData->partners[i].enabled = 0;
             }
 
-            playerData->currentPartner = 0;
+            playerData->currentPartner = PARTNER_NONE;
             load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
-            gGameStatusPtr->introState = 3;
+            gGameStatusPtr->introState = INTRO_STATE_3;
             disable_player_input();
             break;
-        case 3:
+        case INTRO_STATE_3:
             if (D_800A0960 == 0xE) {
                 D_800A0960 = 0xF;
             }
-            D_800A0954 = 0xFF - D_800A0958;
-            gOverrideFlags &= ~0x8;
-            gCameras->flags &= ~0x2;
-            gOverrideFlags &= ~0x2;
+            D_800A0954 = 255 - D_800A0958;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+            gCameras[CAM_DEFAULT].flags &= ~0x2;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
             update_player();
             update_encounters();
             update_npcs();
@@ -203,17 +207,17 @@ void state_step_intro(void) {
             update_cameras();
             if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
                 gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
-                gGameStatusPtr->introState = 4;
+                gGameStatusPtr->introState = INTRO_STATE_4;
                 break;
             }
             return;
-        case 4:
+        case INTRO_STATE_4:
             update_effects();
             update_cameras();
             update_npcs();
             if (D_800A0954 == 0) {
-                set_screen_overlay_params_front(0xFF, -1.0f);
-                set_screen_overlay_params_back(0xFF, -1.0f);
+                set_screen_overlay_params_front(255, -1.0f);
+                set_screen_overlay_params_back(255, -1.0f);
             } else {
                 D_800A0954 -= D_800A0958;
                 if (D_800A0954 < 0) {

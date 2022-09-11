@@ -1,11 +1,21 @@
+#include "effects.h"
 #include "kkj_25.h"
 
 #include "world/common/GetFloorCollider.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06A80", func_802400AC_B06AAC);
+#include "common/UnkLightningFXFunc.inc.c"
 
 #include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06A80", func_80240264_B06C64);
+ApiStatus func_80240264_B06C64(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+
+    fx_lens_flare(0, posX, posY, posZ, duration);
+    return ApiStatus_DONE2;
+}

@@ -2,13 +2,13 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern HudScript HudScript_Happy[];
-extern HudScript HudScript_HPDrain[];
+extern HudScript HES_Happy;
+extern HudScript HES_HPDrain;
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
-extern EffectInstance* D_8029FB98;
-extern EffectInstance* D_8029FB9C;
+extern EffectInstance* BattleMerleeOrbEffect;
+extern EffectInstance* BattleMerleeWaveEffect;
 extern s32 D_8029FBA0;
 extern s16 D_8029FBA4;
 extern s32 D_8029FBA8;
@@ -19,7 +19,7 @@ void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
-    if (battleStatus->flags2 & 0x40) {
+    if (battleStatus->flags2 & BS_FLAGS2_40) {
         actorPart->idleAnimations = bPeachIdleAnims;
         set_animation(0, 0, 0xA0002);
     } else if (!battleStatus->outtaSightActive) {
@@ -49,7 +49,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
 
     deduct_current_move_fp();
-    gBattleStatus.flags1 |= 0x400000;
+    gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_DEFENDING;
     actorPart->idleAnimations = bMarioDefendAnims;
     set_animation(0, 0, 0x10014);
     return ApiStatus_DONE2;
@@ -59,7 +59,7 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
-    sfx_play_sound(0x3FC);
+    sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
         player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
@@ -68,10 +68,11 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+ApiStatus func_80260BF4(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "18F340", func_80260BF4);
 
 ApiStatus func_80260DB8(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= 0x40000;
+    gBattleStatus.flags1 |= BS_FLAGS1_40000;
     return ApiStatus_DONE2;
 }
 
@@ -98,9 +99,9 @@ ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80260E5C(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 &= ~0x8000;
-    gBattleStatus.flags1 &= ~0x2000;
-    gBattleStatus.flags1 &= ~0x4000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
 }
 
@@ -135,8 +136,8 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = create_hud_element(HudScript_Refund);
-        set_hud_element_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
+        D_8029FBA0 = hud_element_create(&HES_Refund);
+        hud_element_set_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -148,7 +149,7 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        free_hud_element(D_8029FBA0);
+        hud_element_free(D_8029FBA0);
     }
 
     return ApiStatus_DONE2;
@@ -188,46 +189,43 @@ ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
 
 ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    ItemData* item = &gItemTable[0x95];
+    ItemData* item = &gItemTable[ITEM_LIFE_SHROOM];
 
     playerData->curHP += item->potencyA;
     if (playerData->curMaxHP < playerData->curHP) {
         playerData->curHP = playerData->curMaxHP;
     }
-    playerData->invItems[find_item(0x95)] = ITEM_NONE;
+    playerData->invItems[find_item(ITEM_LIFE_SHROOM)] = ITEM_NONE;
     sort_items();
     script->varTable[3] = item->potencyA;
 
     return ApiStatus_DONE2;
 }
 
-// TODO something wrong with the struct breakdown for BattleStatus
-#ifdef NON_EQUIVALENT
 ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->dangerFlags = 0;
-    gBattleState = battleStatus->unk_474;
-    battleStatus->battleState = battleStatus->unk_468;
-    battleStatus->flags1 |= 8;
-    battleStatus->flags2 &= ~0x8000000;
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
+    gBattleState = D_800DC4E4;
+    gBattleState2 = D_800DC4D8;
+    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags2 &= ~BS_FLAGS2_8000000;
 
-    if (!(battleStatus->flags2 & 0x40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 1;
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && !(battleStatus->dangerFlags & 1)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 2;
+
+        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
+            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "18F340", RestorePreDefeatState);
-#endif
 
 ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
@@ -244,7 +242,7 @@ ApiStatus func_802613A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
+ApiStatus PlayBattleMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -254,7 +252,7 @@ ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
+ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -264,7 +262,7 @@ ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261530(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -273,13 +271,16 @@ ApiStatus func_80261530(Evt* script, s32 isInitialCall) {
     }
 
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 0xFE);
-
     script->functionTemp[0]--;
-    do {} while(0); // TODO required to match
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-ApiStatus func_802615C8(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeFadeStageFromBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -295,24 +296,24 @@ ApiStatus func_802615C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80261648(Evt* script, s32 isInitialCall) {
+ApiStatus BattleFadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(0x24B);
+        sfx_play_sound(SOUND_24B);
         merlee->alpha = 0;
     }
 
     merlee->alpha += 17;
-    if (merlee->alpha >= 0xFF) {
-        merlee->alpha = 0xFF;
+    if (merlee->alpha >= 255) {
+        merlee->alpha = 255;
         return ApiStatus_DONE1;
     }
 
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616B4(Evt* script, s32 isInitialCall) {
+ApiStatus BattleFadeOutMerlee(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     merlee->alpha -= 17;
@@ -324,55 +325,55 @@ ApiStatus func_802616B4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
-    EffectInstanceData* effectInstanceData;
+    EnergyOrbWaveFXData* data;
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_8029FB94 = merlee->pos.y;
-        D_8029FB98 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_8029FB9C = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        BattleMerleeOrbEffect = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
-        sfx_play_sound(0x2074);
+        sfx_play_sound(SOUND_2074);
     }
     merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
 
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_8029FB98->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z;
+    data = BattleMerleeOrbEffect->data.energyOrbWave;
+    data->pos.x = merlee->pos.x;
+    data->pos.y = merlee->pos.y + 16.0f;
+    data->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_8029FB9C->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+    data = BattleMerleeWaveEffect->data.energyOrbWave;
+    data->pos.x = merlee->pos.x;
+    data->pos.y = merlee->pos.y + 16.0f;
+    data->pos.z = merlee->pos.z + 5.0f;
 
     if (D_8029FBA4 == 2) {
-        ((EffectInstanceData*)D_8029FB98->data)->unk_30 = 0.00001f;
-        ((EffectInstanceData*)D_8029FB9C->data)->unk_30 = 0.00001f;
-        D_8029FB98->flags |= 0x10;
-        D_8029FB9C->flags |= 0x10;
+        BattleMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
+        BattleMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
+        BattleMerleeOrbEffect->flags |= 0x10;
+        BattleMerleeWaveEffect->flags |= 0x10;
         return ApiStatus_DONE1;
     }
 
     if (D_8029FBA4 == 1) {
-        effectInstanceData = D_8029FB98->data;
-        effectInstanceData->unk_30 += 0.35;
-        if (effectInstanceData->unk_30 > 3.5) {
-            effectInstanceData->unk_30 = 3.5f;
+        data = BattleMerleeOrbEffect->data.energyOrbWave;
+        data->scale += 0.35;
+        if (data->scale > 3.5) {
+            data->scale = 3.5f;
         }
 
         if (D_8029FB90 != 0) {
             D_8029FB90--;
         } else {
-            effectInstanceData = D_8029FB9C->data;
-            effectInstanceData->unk_30 += 0.5;
-            if (effectInstanceData->unk_30 > 5.0) {
+            data = BattleMerleeWaveEffect->data.energyOrbWave;
+            data->scale += 0.5;
+            if (data->scale > 5.0) {
                 D_8029FBA4 = 2;
             }
         }
@@ -410,24 +411,24 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = create_hud_element(HudScript_HPDrain);
-        set_hud_element_render_pos(D_8029FBAC, screenX, screenY);
+        D_8029FBAC = hud_element_create(&HES_HPDrain);
+        hud_element_set_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = create_hud_element(HudScript_Happy);
-        set_hud_element_render_pos(D_8029FBA8, screenX, screenY);
+        D_8029FBA8 = hud_element_create(&HES_Happy);
+        hud_element_set_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
     if (script->varTable[10] > 0) {
-        free_hud_element(D_8029FBAC);
+        hud_element_free(D_8029FBAC);
     }
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        free_hud_element(D_8029FBA8);
+        hud_element_free(D_8029FBA8);
     }
     return ApiStatus_DONE2;
 }
@@ -488,7 +489,51 @@ ApiStatus func_80261DD4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", func_80261DF4);
+ApiStatus func_80261DF4(Evt* script, s32 isInitialCall) {
+    ItemEntity* item = get_item_entity(script->varTable[10]);
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 0;
+    }
+
+    switch (script->functionTemp[1]) {
+        case 0:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[0] = 8;
+                script->functionTemp[1] = 1;
+            }
+            break;
+        case 1:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            item->position.x += 1.5;
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[0] = 4;
+                script->functionTemp[1] = 2;
+            }
+            break;
+        case 2:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            item->position.x += 1.2;
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[1] = 3;
+            }
+            break;
+        case 3:
+            D_8029FBB0[0] = 20;
+            D_8029FBB0[1] = 20;
+            D_8029FBB0[2] = 20;
+            return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80261FB4(Evt* script, s32 isInitialCall) {
     ItemEntity* item = get_item_entity(script->varTable[10]);

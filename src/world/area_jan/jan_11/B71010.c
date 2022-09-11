@@ -2,4 +2,11 @@
 
 #include "world/common/GetFloorCollider.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_11/B71010", func_802407DC_B7103C);
+ApiStatus N(IsPartnerWatt)(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_WATT) {
+        script->varTable[9] = TRUE;
+    } else {
+        script->varTable[9] = FALSE;
+    }
+    return ApiStatus_DONE2;
+}

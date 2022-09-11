@@ -1,8 +1,8 @@
 #include "flo_14.h"
 
 ApiStatus N(func_80242360_CCD670)(Evt* script, s32 isInitialCall) {
-    CollisionStatus* collisionStatus = &gCollisionStatus;
+    Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);
+    evt_set_variable(script, *args++, gCollisionStatus.floorBelow);
     return ApiStatus_DONE2;
 }

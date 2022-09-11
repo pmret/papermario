@@ -13,6 +13,7 @@
 #endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
+#define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
 #define A(sym) NS(AREA, sym)
 #define N(sym) NS(NAMESPACE, sym)
@@ -64,21 +65,41 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+// Size of tmem in bytes (4kB)
+#define TMEM_SIZE 0x1000
+// Height of tiles to use when copying fullscreen images (6)
+#define SCREEN_COPY_TILE_HEIGHT ((TMEM_SIZE) / ((SCREEN_WIDTH) * (2)))
+
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI      3.141592f
 #define PI_D    3.141592
 #define TAU     6.28318f
 #define PI_S    3.14159f // Shorter PI
 
-#define SPRITE_WORLD_SCALE 0.71428573f
+// Angle conversion macros
+#define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
+#define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+
+// Should be 1.0f / 0x7FFF, but precision is wrong for a double
+#define SHT_MINV 3.051851e-05
+
+
+#define SPRITE_WORLD_SCALE   (5.0f/7.0f)
+#define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
 #define BATTLE_ENTITY_ID_MASK 0x800
 
-#define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
+#define COLLISION_WITH_NPC_BIT 0x2000
+#define COLLISION_WITH_ENTITY_BIT 0x4000
+#define COLLISION_IGNORE_ENTITIES 0x40000
+#define COLLISION_ONLY_ENTITIES 0x100000
 
-#define SQ(x) (x*x)
-#define CUBE(x) (x*x*x)
-#define QUART(x) (x*x*x*x)
+#define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
+#define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
+
+#define SQ(x) ((x) * (x))
+#define CUBE(x) ((x) * (x) * (x))
+#define QUART(x) ((x) * (x) * (x) * (x))
 
 /// Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
@@ -92,6 +113,30 @@
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
 #define SPRITE_PIXEL_SCALE (5.0 / 7.0)
+
+#define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+
+/* common AI function and script variables */
+// ai script
+#define AI_TEMP_STATE                  functionTemp[0]
+#define AI_TEMP_STATE_AFTER_SUSPEND    functionTemp[1]
+#define AI_PATROL_GOAL_INDEX           functionTemp[2]
+// melee enemy
+#define AI_VAR_ATTACK_STATE    varTable[0]
+#define AI_VAR_MELEE_PRE_TIME  varTable[1]
+#define AI_VAR_MELEE_HIT_TIME  varTable[2]
+#define AI_VAR_MELEE_MISS_TIME varTable[3]
+#define AI_VAR_NEXT_STATE      varTable[7]
+// melee hitbox
+#define AI_VAR_HITNPC_YOFFSET  varTable[0]
+#define AI_VAR_HITNPC_DIST     varTable[1]
+#define AI_VAR_HITNPC_2        varTable[2]
+#define AI_VAR_HITNPC_3        varTable[3]
+#define AI_VAR_HITNPC_4        varTable[4]
+#define AI_VAR_HITNPC_SOUND    varTable[15]
+// projectile hitbox
+#define VAR_PROJECTILE_HITBOX_STATE varTable[0]
+#define AI_PROJECTILE_AMMO_COUNT varTable[3]
 
 #ifdef PERMUTER
 #undef SCRIPT

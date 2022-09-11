@@ -14,13 +14,27 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218258_608D08);
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218404_608EB4);
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_802184E4_608F94);
+#define NAMESPACE dup_b_area_tik2
+#include "common/UnkWaterFountainFunc.inc.c"
+#define NAMESPACE b_area_tik2
 
 #define NAMESPACE dup2_b_area_tik2
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_tik2
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_802186D8_609188);
+ApiStatus func_802186D8_609188(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode arg0 = *args++;
+    f32 var0, var1;
+
+    var1 = evt_get_float_variable(script, *args++);
+    do {} while(0);
+    var0 = evt_get_float_variable(script, arg0);
+
+    evt_set_float_variable(script, arg0, var1 * sin_rad(var0 * TAU / 360.0f));
+
+    return ApiStatus_DONE2;
+}
 
 #define NAMESPACE dup_b_area_tik2
 #include "common/FadeBackgroundToBlack.inc.c"
@@ -30,7 +44,9 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_802186D8_609188);
 #include "common/UnfadeBackgroundToBlack.inc.c"
 #define NAMESPACE b_area_tik2
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218884_609334);
+#define NAMESPACE dup2_b_area_tik2
+#include "common/UnkWaterFountainFunc.inc.c"
+#define NAMESPACE b_area_tik2
 
 #define NAMESPACE dup3_b_area_tik2
 #include "common/StartRumbleWithParams.inc.c"
@@ -38,4 +54,4 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218884_609334);
 
 #include "common/UnkBattleFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218BE0_609690);
+#include "world/common/UnkFunc56.inc.c"

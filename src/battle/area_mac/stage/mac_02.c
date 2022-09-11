@@ -22,6 +22,6 @@ Stage NAMESPACE = {
     .texture = "mac_tex",
     .shape = "mac_bt02_shape",
     .hit = "mac_bt02_hit",
-    .preBattle = N(beforeBattle_80232930),
-    .postBattle = N(afterBattle_8023297C),
+    .preBattle = &N(beforeBattle_80232930),
+    .postBattle = &N(afterBattle_8023297C),
 };

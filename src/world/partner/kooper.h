@@ -5,7 +5,7 @@
 #include "script_api/map.h"
 
 void world_kooper_init(Npc*);
-void world_kooper_test_first_strike(Npc*);
+s32 world_kooper_test_first_strike(Npc*, Npc*);
 void world_kooper_pre_battle(Npc*);
 void world_kooper_post_battle(Npc*);
 

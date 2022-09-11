@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 
 #include "pause/image_143BF0.png.h"
 #include "pause/image_143FF0.png.h"
@@ -6,9 +7,9 @@
 #include "pause/world_map.png.h"
 #include "pause/spirits_bg.png.h"
 #include "pause/orbs.png.h"
-#include "pause/image_15F570.png.h"
-#include "pause/image_15F670.png.h"
-#include "pause/arrows.png.h"
+#include "pause/map_location.png.h"
+#include "pause/map_path_marker.png.h"
+#include "pause/map_arrows.png.h"
 #include "pause/banner_hp.png.h"
 #include "pause/banner_fp.png.h"
 #include "pause/banner_bp.png.h"
@@ -27,9 +28,9 @@
 #include "pause/spirits_bg.png.inc.c"
 #include "pause/spirits_bg.pal.inc.c"
 #include "pause/orbs.png.inc.c"
-#include "pause/image_15F570.png.inc.c"
-#include "pause/image_15F670.png.inc.c"
-#include "pause/arrows.png.inc.c"
+#include "pause/map_location.png.inc.c"
+#include "pause/map_path_marker.png.inc.c"
+#include "pause/map_arrows.png.inc.c"
 #include "pause/banner_hp.png.inc.c"
 #include "pause/banner_hp.pal.inc.c"
 #include "pause/banner_fp.png.inc.c"
@@ -212,9 +213,9 @@ Gfx gPauseDLPathPoints[] = {
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
     gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureTile(pause_image_15F570_png, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile(pause_map_location_png, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadMultiTile(pause_image_15F670_png, 0x100, 1, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadMultiTile(pause_map_path_marker_png, 0x100, 1, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
@@ -349,27 +350,27 @@ s8 gPauseMsg_55[] = { 0x21, 0x42, 0x49, 0x4C, 0x49, 0x54, 0x49, 0x45, 0x53, 0xFD
 s8 gPauseMsg_56[] = { 0x1F, 0x1F, 0x1F, 0xFD };                                                                               // ???[End]
 
 s32 gPauseMessages[] = {
-    MESSAGE_ID(0x00, 0x00), MESSAGE_ID(0x1F, 0x1C), MESSAGE_ID(0x1F, 0x2B), MESSAGE_ID(0x1F, 0x2C),
-    MESSAGE_ID(0x1F, 0x2D), MESSAGE_ID(0x1F, 0x2E), MESSAGE_ID(0x1F, 0x2F), MESSAGE_ID(0x1F, 0x30),
-    MESSAGE_ID(0x1F, 0x31), MESSAGE_ID(0x1F, 0x1D), MESSAGE_ID(0x1F, 0x1E), MESSAGE_ID(0x1F, 0x1F),
-    MESSAGE_ID(0x1F, 0x20), MESSAGE_ID(0x1F, 0x21), MESSAGE_ID(0x1F, 0x22), MESSAGE_ID(0x1F, 0x23),
-    MESSAGE_ID(0x1F, 0x24), MESSAGE_ID(0x1F, 0x25), MESSAGE_ID(0x1F, 0x26), MESSAGE_ID(0x1F, 0x27),
-    MESSAGE_ID(0x1F, 0x28), MESSAGE_ID(0x1F, 0x29), MESSAGE_ID(0x1F, 0x2A), (s32)gPauseMsg_17,
-    (s32)gPauseMsg_18,      (s32)gPauseMsg_19,      (s32)gPauseMsg_1A,      MESSAGE_ID(0x1F, 0x01),
-    MESSAGE_ID(0x1F, 0x02), MESSAGE_ID(0x1F, 0x03), MESSAGE_ID(0x1F, 0x04), MESSAGE_ID(0x1F, 0x05),
-    MESSAGE_ID(0x1F, 0x06), MESSAGE_ID(0x1F, 0x07), MESSAGE_ID(0x1F, 0x08), MESSAGE_ID(0x1F, 0x09),
-    MESSAGE_ID(0x1F, 0x0A), MESSAGE_ID(0x1F, 0x0B), MESSAGE_ID(0x1F, 0x0C), MESSAGE_ID(0x1F, 0x0D),
-    MESSAGE_ID(0x1F, 0x0E), MESSAGE_ID(0x1F, 0x0F), MESSAGE_ID(0x1F, 0x10), MESSAGE_ID(0x1F, 0x11),
-    MESSAGE_ID(0x1F, 0x12), MESSAGE_ID(0x1F, 0x13), MESSAGE_ID(0x1F, 0x14), MESSAGE_ID(0x1F, 0x15),
-    MESSAGE_ID(0x1F, 0x16), MESSAGE_ID(0x1F, 0x17), (s32)gPauseMsg_32,      (s32)gPauseMsg_33,
+    0, MSG_MenuTip_BadgeTutorial_01, MSG_MenuTip_002B, MSG_MenuTip_002C,
+    MSG_MenuTip_002D, MSG_MenuTip_002E, MSG_MenuTip_002F, MSG_MenuTip_0030,
+    MSG_MenuTip_0031, MSG_MenuTip_BadgeTutorial_02, MSG_MenuTip_BadgeTutorial_03, MSG_MenuTip_BadgeTutorial_04,
+    MSG_MenuTip_BadgeTutorial_05, MSG_MenuTip_BadgeTutorial_06, MSG_MenuTip_BadgeTutorial_07, MSG_MenuTip_BadgeTutorial_08,
+    MSG_MenuTip_BadgeTutorial_09, MSG_MenuTip_BadgeTutorial_10, MSG_MenuTip_BadgeTutorial_11, MSG_MenuTip_BadgeTutorial_12,
+    MSG_MenuTip_BadgeTutorial_13, MSG_MenuTip_BadgeTutorial_14, MSG_MenuTip_BadgeTutorial_15, (s32)gPauseMsg_17,
+    (s32)gPauseMsg_18,      (s32)gPauseMsg_19,      (s32)gPauseMsg_1A,      MSG_MenuTip_StatsTab,
+    MSG_MenuTip_BadgesTab, MSG_MenuTip_ItemsTab, MSG_MenuTip_PartyTab, MSG_MenuTip_SpiritsTab,
+    MSG_MenuTip_MapTab, MSG_MenuTip_ControllingMario, MSG_MenuTip_HeartPoints, MSG_MenuTip_FlowerPoints,
+    MSG_MenuTip_BadgePoints, MSG_MenuTip_Boots1, MSG_MenuTip_Boots2, MSG_MenuTip_Boots3,
+    MSG_MenuTip_Hammer0, MSG_MenuTip_Hammer1, MSG_MenuTip_Hammer2, MSG_MenuTip_Hammer3,
+    MSG_MenuTip_StarPower, MSG_MenuTip_StarPoints, MSG_MenuTip_Coins, MSG_MenuTip_Secrets,
+    MSG_MenuTip_StarPieces, MSG_MenuTip_Time, (s32)gPauseMsg_32,      (s32)gPauseMsg_33,
     (s32)gPauseMsg_34,      (s32)gPauseMsg_35,      (s32)gPauseMsg_36,      (s32)gPauseMsg_37,
     (s32)gPauseMsg_38,      (s32)gPauseMsg_39,      (s32)gPauseMsg_3A,      (s32)gPauseMsg_3B,
     (s32)gPauseMsg_3C,      (s32)gPauseMsg_3D,      (s32)gPauseMsg_3E,      (s32)gPauseMsg_3F,
     (s32)gPauseMsg_40,      (s32)gPauseMsg_41,      (s32)gPauseMsg_42,      (s32)gPauseMsg_43,
-    (s32)gPauseMsg_44,      MESSAGE_ID(0x1F, 0x00), (s32)gPauseMsg_46,      (s32)gPauseMsg_47,
+    (s32)gPauseMsg_44,      MSG_MenuTip_None, (s32)gPauseMsg_46,      (s32)gPauseMsg_47,
     (s32)gPauseMsg_48,      (s32)gPauseMsg_49,      (s32)gPauseMsg_4A,      (s32)gPauseMsg_4B,
-    MESSAGE_ID(0x1F, 0x1A), MESSAGE_ID(0x1F, 0x1B), MESSAGE_ID(0x1F, 0x00), (s32)gPauseMsg_4F,
-    (s32)gPauseMsg_50,      MESSAGE_ID(0x1F, 0x19), MESSAGE_ID(0x1F, 0x18), (s32)gPauseMsg_53,
+    MSG_MenuTip_BadgeTab_All, MSG_MenuTip_BadgeTab_Equipped, MSG_MenuTip_None, (s32)gPauseMsg_4F,
+    (s32)gPauseMsg_50,      MSG_MenuTip_ItemTab_Consumables, MSG_MenuTip_ItemTab_KeyItems, (s32)gPauseMsg_53,
     (s32)gPauseMsg_54,      (s32)gPauseMsg_55,      (s32)gPauseMsg_56
 };
 

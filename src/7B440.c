@@ -4,11 +4,11 @@ void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 inputBufPos = playerStatus->inputBufPos;
 
-    playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
-    playerStatus->stickAxis[1] = gGameStatusPtr->stickY;
-    playerStatus->currentButtons = gGameStatusPtr->currentButtons;
-    playerStatus->pressedButtons = gGameStatusPtr->pressedButtons;
-    playerStatus->heldButtons = gGameStatusPtr->heldButtons;
+    playerStatus->stickAxis[0] = gGameStatusPtr->stickX[0];
+    playerStatus->stickAxis[1] = gGameStatusPtr->stickY[0];
+    playerStatus->currentButtons = gGameStatusPtr->currentButtons[0];
+    playerStatus->pressedButtons = gGameStatusPtr->pressedButtons[0];
+    playerStatus->heldButtons = gGameStatusPtr->heldButtons[0];
 
     inputBufPos++;
     if (inputBufPos >= 10) {
@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & 0x3000) {
+    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -31,25 +31,23 @@ void update_player_input(void) {
     }
 
     if (playerStatus->animFlags & 8) {
-        playerStatus->animFlags |= 0x200000;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }
 }
 
-#ifdef NON_EQUIVALENT
 void reset_player_status(void) {
-    s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    MapConfig* mapConfig;
+    MapSettings* mapSettings;
     f32 one;
     f32* floatsTemp;
 
     D_8010C96C = -1;
-    D_8010C954 = 0;
+    TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
-    *temp8010C92C = 0;
+    D_8010C92C = 0;
     D_8010C95C = 0;
     D_8010C980 = 0;
     D_800F7B40 = 0;
@@ -72,59 +70,56 @@ void reset_player_status(void) {
         playerStatus->animFlags |= 0x1000;
 
         if (gGameStatusPtr->peachFlags & 2) {
-            *temp8010C92C = 2;
+            D_8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        gGameStatusPtr->peachAnimIdx = 0;
+        gGameStatusPtr->peachCookingIngredient = 0;
     }
 
-    // This grossness is needed for matching
-    floatsTemp = &D_800F7B70[0];
-    playerStatus->walkSpeed = *(floatsTemp++) * one;
-    playerStatus->runSpeed = *(floatsTemp++) * one;
-    playerStatus->unk_6C = *(floatsTemp++) * one;
+    // TODO required to match
+    floatsTemp = &(&D_800F7B74)[-1]; // index of 0 does not work
+    playerStatus->walkSpeed = *floatsTemp++ * one;
+    playerStatus->runSpeed = *floatsTemp++ * one;
+    playerStatus->maxJumpSpeed = *floatsTemp++ * one;
 
     set_action_state(ACTION_STATE_IDLE);
 
     playerStatus->currentSpeed = 0.0f;
     playerStatus->targetYaw = 0.0f;
-    playerStatus->unk_64 = 0.0f;
-    playerStatus->unk_88 = 0.0f;
+    playerStatus->overlapPushAmount = 0.0f;
+    playerStatus->overlapPushYaw = 0.0f;
     playerStatus->anim = 0;
-    playerStatus->decorationList = 0;
+    playerStatus->timeInAir = 0;
     playerStatus->position.x = 0.0f;
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
-    playerStatus->unk_90 = 0.0f;
-    playerStatus->unk_94 = 0;
-    playerStatus->unk_98 = 0;
-    playerStatus->unk_9C = 0;
+    playerStatus->unk_90[CAM_DEFAULT] = 0.0f;
+    playerStatus->unk_90[CAM_BATTLE] = 0.0f;
+    playerStatus->unk_90[CAM_TATTLE] = 0.0f;
+    playerStatus->unk_90[CAM_3] = 0.0f;
 
-    mapConfig = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].config;
+    mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 
-    if (mapConfig->entryList != NULL) {
-        if (gGameStatusPtr->entryID < mapConfig->entryCount) {
-            playerStatus->position.x = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
-            playerStatus->position.y = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
-            playerStatus->position.z = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
-            playerStatus->currentYaw = (*mapConfig->entryList)[gGameStatusPtr->entryID].yaw;
+    if (mapSettings->entryList != NULL) {
+        if (gGameStatusPtr->entryID < mapSettings->entryCount) {
+            playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+            playerStatus->position.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+            playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+            playerStatus->currentYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
-    gCameras->targetPos.x = playerStatus->position.x;
-    gCameras->targetPos.y = playerStatus->position.y;
-    gCameras->targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
-    phys_reset_spin_history(mapConfig);
-    mem_clear(&gPlayerSpinState, sizeof(PlayerSpinState));
+    phys_reset_spin_history();
+    mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));
 }
-#else
-INCLUDE_ASM(s32, "7B440", reset_player_status);
-#endif
 
 void get_packed_buttons(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -148,7 +143,7 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
         mag = magMax;
     }
 
-    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[0].currentYaw);
+    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].currentYaw);
     if (mag == 0.0f) {
         ang = playerStatus->targetYaw;
     }
@@ -157,82 +152,83 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
     *magnitude = mag;
 }
 
-void game_input_to_move_vector(f32* arg0, f32* arg1) {
+void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 stickX = gGameStatusPtr->stickX;
-    f32 stickY = -gGameStatusPtr->stickY;
-    f32 tempMax = 70.0f;
-    f32 temp1;
-    f32 temp2;
+    f32 stickX = gGameStatusPtr->stickX[0];
+    f32 stickY = -gGameStatusPtr->stickY[0];
+    f32 maxRadius = 70.0f;
+    f32 magnitude;
+    f32 angle;
 
-    temp1 = dist2D(0.0f, 0.0f, stickX, stickY);
-    if (temp1 >= tempMax) {
-        temp1 = tempMax;
+    magnitude = dist2D(0.0f, 0.0f, stickX, stickY);
+    if (magnitude >= maxRadius) {
+        magnitude = maxRadius;
     }
 
-    temp2 = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[0].currentYaw);
-    if (temp1 == 0.0f) {
-        temp2 = playerStatus->targetYaw;
+    angle = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    if (magnitude == 0.0f) {
+        angle = playerStatus->targetYaw;
     }
 
-    *arg0 = temp2;
-    *arg1 = temp1;
+    *outAngle = angle;
+    *outMagnitude = magnitude;
 }
 
-// tail merge crap
-#ifdef NON_EQUIVALENT
 void func_800E24F8(void) {
-    Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
-    Camera* camera = &gCameras[0];
-    f32 x = playerShadow->rotation.x + 180.0;
-    f32 z = playerShadow->rotation.z + 180.0;
+    Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
+    f32 x = shadow->rotation.x + 180.0;
+    f32 z = shadow->rotation.z + 180.0;
+    Camera* camera = &gCameras[CAM_DEFAULT];
+    f32 temp;
 
     if (x != 0.0f || z != 0.0f) {
         switch (gPlayerStatus.actionState) {
-            case 3:
-            case 8:
-                camera->unk_49C = 32.0f;
+            case ACTION_STATE_JUMP:
+            case ACTION_STATE_FALLING:
+                temp = 32.0f;
+                camera->unk_49C = temp;
                 break;
-            case 1:
-            case 2:
-                if (camera->targetScreenCoords[1] < 130) {
+            case ACTION_STATE_WALK:
+            case ACTION_STATE_RUN:
+                if (camera->targetScreenCoords.y < 130) {
                     camera->unk_49C = 3.0f;
-                    return;
+                    break;
                 }
-
+                temp = 3.0f;
                 if (D_8010C9A0++ > 10) {
                     D_8010C9A0 = 10;
                     camera->unk_49C -= 2.0f;
-                    if (camera->unk_49C < 3.0f) {
-                        camera->unk_49C = 3.0f;
+                    if (camera->unk_49C < temp) {
+                        camera->unk_49C = temp;
                     }
                 }
                 break;
-            case 17:
-                camera->unk_49C = 3.0f;
+            case ACTION_STATE_SLIDING:
+                temp = 3.0f;
+                camera->unk_49C = temp;
                 break;
             default:
+                temp = 3.0f;
                 D_8010C9A0 = 0;
                 camera->unk_49C -= 2.0f;
-                if (camera->unk_49C < 3.0f) {
-                    camera->unk_49C = 3.0f;
+                if (camera->unk_49C < temp) {
+                    camera->unk_49C = temp;
                 }
                 break;
         }
     } else {
         switch (gPlayerStatus.actionState) {
-            case 1:
-            case 2:
-            case 3:
-            case 0x11:
-                camera->unk_49C = 7.2f;
+            case ACTION_STATE_WALK:
+            case ACTION_STATE_RUN:
+            case ACTION_STATE_JUMP:
+            case ACTION_STATE_SLIDING:
+                temp = 7.2f;
                 break;
             default:
-                camera->unk_49C = 24.0f;
+                temp = 24.0f;
                 break;
         }
+
+        camera->unk_49C = temp;
     }
 }
-#else
-INCLUDE_ASM(s32, "7B440", func_800E24F8);
-#endif

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E010AFA8
+.double 0.8
+
+.section .text
+
 glabel firework_rocket_appendGfx
 /* 3E4888 E010A4E8 27BDFF30 */  addiu     $sp, $sp, -0xd0
 /* 3E488C E010A4EC AFB70094 */  sw        $s7, 0x94($sp)

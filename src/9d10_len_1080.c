@@ -1,10 +1,13 @@
 #include "common.h"
 #include "camera.h"
 
+void update_camera_mode_4(Camera* camera);
 INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_4, Camera* camera);
 
+void update_camera_mode_2(Camera* camera);
 INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_2, Camera* camera);
 
+void update_camera_mode_1(Camera* camera);
 INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_1, Camera* camera);
 
 void update_camera_mode_0(Camera* camera) {

@@ -30,8 +30,8 @@ glabel func_80240B54_8EC974
 /* 8EC9D0 80240BB0 0000A82D */  daddu     $s5, $zero, $zero
 /* 8EC9D4 80240BB4 02A0902D */  daddu     $s2, $s5, $zero
 /* 8EC9D8 80240BB8 24160001 */  addiu     $s6, $zero, 1
-/* 8EC9DC 80240BBC 3C1E8008 */  lui       $fp, %hi(HudScript_Item_ITEM_08C_disabled)
-/* 8EC9E0 80240BC0 27DE2388 */  addiu     $fp, $fp, %lo(HudScript_Item_ITEM_08C_disabled)
+/* 8EC9DC 80240BBC 3C1E8008 */  lui       $fp, %hi(HES_Item_Unused_08C_disabled)
+/* 8EC9E0 80240BC0 27DE2388 */  addiu     $fp, $fp, %lo(HES_Item_Unused_08C_disabled)
 /* 8EC9E4 80240BC4 3C138024 */  lui       $s3, %hi(D_80244FA0_8F0DC0)
 /* 8EC9E8 80240BC8 26734FA0 */  addiu     $s3, $s3, %lo(D_80244FA0_8F0DC0)
 /* 8EC9EC 80240BCC 02E0882D */  daddu     $s1, $s7, $zero
@@ -45,8 +45,8 @@ glabel func_80240B54_8EC974
 /* 8ECA08 80240BE8 54400019 */  bnel      $v0, $zero, .L80240C50
 /* 8ECA0C 80240BEC 26520001 */   addiu    $s2, $s2, 1
 /* 8ECA10 80240BF0 0240802D */  daddu     $s0, $s2, $zero
-/* 8ECA14 80240BF4 3C068008 */  lui       $a2, %hi(HudScript_Item_ITEM_08C)
-/* 8ECA18 80240BF8 24C62358 */  addiu     $a2, $a2, %lo(HudScript_Item_ITEM_08C)
+/* 8ECA14 80240BF4 3C068008 */  lui       $a2, %hi(HES_Item_Unused_08C)
+/* 8ECA18 80240BF8 24C62358 */  addiu     $a2, $a2, %lo(HES_Item_Unused_08C)
 /* 8ECA1C 80240BFC AE260000 */  sw        $a2, ($s1)
 /* 8ECA20 80240C00 AE320108 */  sw        $s2, 0x108($s1)
 /* 8ECA24 80240C04 AE36018C */  sw        $s6, 0x18c($s1)

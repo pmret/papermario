@@ -12,13 +12,13 @@ void func_802B6000_E24040(void) {
     s32 temp_v1;
 
     playerStatus->fallState = 0;
-    playerStatus->decorationList = 0;
+    playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~0x80000008;
     playerStatus->flags |= 2;
-    playerStatus->unk_3C = playerStatus->position.x;
-    playerStatus->unk_40 = playerStatus->position.z;
-    playerStatus->unk_4C = playerStatus->position.y;
+    playerStatus->jumpFromPos.x = playerStatus->position.x;
+    playerStatus->jumpFromPos.z = playerStatus->position.z;
+    playerStatus->jumpFromHeight = playerStatus->position.y;
 
     phys_init_integrator_for_current_state();
 
@@ -37,7 +37,7 @@ void func_802B6000_E24040(void) {
 
 void func_802B60B4_E240F4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 phi_a0;
+    s32 anim;
 
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
@@ -46,7 +46,7 @@ void func_802B60B4_E240F4(void) {
         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
             phys_adjust_cam_on_landing();
         } else {
-            gCameras[0].moveFlags |= 1;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
         }
 
         if (playerStatus->actionState == ACTION_STATE_JUMP) {
@@ -60,26 +60,23 @@ void func_802B60B4_E240F4(void) {
     }
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
-        phi_a0 = 0x90005;
+        anim = 0x90005;
     } else if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-        phi_a0 = 0x10007;
+        anim = 0x10007;
     } else {
-        phi_a0 = 0x60009;
+        anim = 0x60009;
     }
-    suggest_player_anim_clearUnkFlag(phi_a0);
+    suggest_player_anim_clearUnkFlag(anim);
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6198_E241D8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    s32 temp_s1;
-    s32 phi_a0;
+    s32 anim;
 
-    temp_s1 = 0x80000000; // weirdness with this - fake match
-
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
 
         D_8010C960 = entity->position.x;
@@ -89,26 +86,25 @@ void func_802B6198_E241D8(void) {
         disable_player_input();
     }
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 
     if (playerStatus->fallState != 1) {
         return;
     }
 
-    if (playerStatus->flags & 0x80000000) {
-        playerStatus->flags &= ~0x8000000A;
-        playerStatus->flags |= 4;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
 
 
         if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-            phi_a0 = 0x10008;
+            anim = 0x10008;
         } else {
-            phi_a0 = 0x6000A;
+            anim = 0x6000A;
         }
 
-        temp_s1 = phi_a0;
-        suggest_player_anim_clearUnkFlag(temp_s1);
-        gCameras[0].moveFlags |= 1;
+        suggest_player_anim_clearUnkFlag(anim);
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
 
     playerStatus->fallState++;
@@ -122,11 +118,11 @@ void func_802B6294_E242D4(void) {
         return;
     }
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 phi_a0;
 
-        playerStatus->flags &= ~0x8000000A;
-        playerStatus->flags |= 4;
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90005;
@@ -136,9 +132,9 @@ void func_802B6294_E242D4(void) {
             phi_a0 = 0x6000A;
         }
         suggest_player_anim_clearUnkFlag(phi_a0);
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6348_E24388(void) {
@@ -157,13 +153,13 @@ void func_802B6348_E24388(void) {
         return;
     }
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= 0x7FFFFFF5;
-        playerStatus->flags |= 4;
-        gCameras[0].moveFlags |= 1;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
     phys_update_interact_collider();
     sp28 = playerStatus->position.x;
     sp2C = playerStatus->position.y;
@@ -183,10 +179,10 @@ void func_802B647C_E244BC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 temp_v1;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->flags &= ~0xA;
-        playerStatus->flags |= 4;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
 
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
             temp_v1 = 0x10008;
@@ -195,24 +191,24 @@ void func_802B647C_E244BC(void) {
         }
 
         suggest_player_anim_clearUnkFlag(temp_v1);
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6508_E24548(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->flags &= ~0xA;
-        playerStatus->flags |= 4;
-        gCameras[0].moveFlags |= 1;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             suggest_player_anim_clearUnkFlag(0xA0006);
         }
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
     phys_update_interact_collider();
 }

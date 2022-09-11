@@ -19,7 +19,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_JAMMIN_JELLY,
             .pos = { 80, 100, -240 },
             .spawnMode = 0xF,
-            .pickupFlag = EVT_SAVE_FLAG(1383),
+            .pickupFlag = GF_FLO10_Tree1_JamminJelly,
         },
     }
 };
@@ -33,7 +33,7 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_80244A40) = { 137.0f, 0.0f, -283.0f, 0.0f };
 
 EvtScript N(80244A50) = {
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_SET(LVar0, EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 9, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80244A40)), 1, 0)
     EVT_RETURN

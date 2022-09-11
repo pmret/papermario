@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "omo_03";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -15,40 +15,20 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 
 #include "world/common/SetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402F4_DAD6F4);
+ApiStatus func_802402F4_DAD6F4(Evt* script, s32 isInitialCall) {
+    f32 playerVx = gPlayerStatus.currentSpeed * 5.0f * sin_deg(gPlayerStatus.targetYaw);
+    f32 playerVz = gPlayerStatus.currentSpeed * 5.0f * -cos_deg(gPlayerStatus.targetYaw);
+    script->varTable[0] = (gPlayerStatus.position.x + playerVx);
+    script->varTable[1] = (gPlayerStatus.position.z + playerVz);
+    
+    return ApiStatus_DONE2;
+}
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+#include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4_DAE3F4);
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802416AC_DAEAAC);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241898_DAEC98);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241908_DAED08);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802419D8_DAEDD8);
-
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241AD0_DAEED0);
-
+const s32 N(pad_8)[] = { 0, 0 };
 static char* N(exit_str_2) = "omo_04";
 
 #include "world/common/SetCamera0Flag1000.inc.c"

@@ -1,12 +1,13 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "mapfs/iwa_bt01_shape.h"
 
 #define NAMESPACE b_area_iwa_iwa_01b
 
 EvtScript N(beforeBattle_80221510) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetGroupEnabled, 13, 0)
+    EVT_CALL(SetGroupEnabled, MODEL_a, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -17,7 +18,7 @@ EvtScript N(afterBattle_80221544) = {
 };
 
 s32 N(foregroundModelList_80221554)[] = {
-    0x00000017, 0x00000018, 0x00000000,
+    MODEL_iwa1, MODEL_o331, 0,
 };
 
 Stage NAMESPACE = {
@@ -25,7 +26,7 @@ Stage NAMESPACE = {
     .shape = "iwa_bt01_shape",
     .hit = "iwa_bt01_hit",
     .bg = "iwa_bg",
-    .preBattle = N(beforeBattle_80221510),
-    .postBattle = N(afterBattle_80221544),
+    .preBattle = &N(beforeBattle_80221510),
+    .postBattle = &N(afterBattle_80221544),
     .foregroundModelList = N(foregroundModelList_80221554),
 };

@@ -2,6 +2,8 @@
 /// @brief Tubba's Castle - West Hall (3F)
 
 #include "common.h"
+#include "../dgb.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE dgb_15
@@ -9,9 +11,9 @@
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241464_C50974)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
+ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242AB0);
 extern EvtScript N(80242AD0);

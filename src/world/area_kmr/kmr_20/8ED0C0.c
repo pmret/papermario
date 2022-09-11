@@ -1,27 +1,15 @@
 #include "kmr_20.h"
 
-#include "world/common/Call800E9894.inc.c"
+#include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
+ApiStatus func_8024159C_8ED3BC(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 1);
+    return ApiStatus_DONE2;
+}
 
-#include "world/common/UnkFunc32.inc.c"
+ApiStatus func_802415C4_8ED3E4(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x3F);
+    return ApiStatus_DONE2;
+}
 
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-#include "world/common/UnkFunc36.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_8024159C_8ED3BC);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802415C4_8ED3E4);
-
-#include "world/common/UnkFunc40.inc.c"
+#include "world/common/WaitForPlayerToLand.inc.c"

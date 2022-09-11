@@ -1,41 +1,87 @@
 #include "common.h"
+#include "pause/pause_common.h"
+#include "hud_element.h"
+#include "world/partners.h"
 
-extern Bytecode D_802D9D34[0];
-extern s32 D_802DB7D0;
-extern s32 D_802DB7D8[10];
-extern s32 D_802DB800[10];
-s32 func_802D5B10();
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
+static ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
 
-s32 D_802D9D30 = 0;
+extern MusicEvent* MusicEventList;
+extern Evt* RunningMusicEvents[10];
+extern s32 RunningMusicEventIDs[10];
+extern PopupMenu D_802DB830;
 
-EvtScript D_802D9D34 = {
-    EVT_CALL(func_802D5B10)
+s32 MusicEventPollCount = 0;
+
+static EvtScript EVS_MusicEventMonitor = {
+    EVT_CALL(PollMusicEvents)
     EVT_RETURN
     EVT_END
 };
 
-INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
-
-ApiStatus func_802D5C70(Evt* script) {
+static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
+    MusicEventTrigger* list;
+    s32 musicEventID, scriptSelector;
+    u32 count;
     s32 i;
 
-    D_802DB7D0 = evt_get_variable(script, *script->ptrReadPos);
+    bgm_poll_music_events(&list, &count);
+    
+    for (i = 0; i < count; i++, list++) {
+        MusicEvent* cur = MusicEventList;
+        musicEventID = (*list & 0xFF0000) >> 0x10;
+        scriptSelector = *list & 0xFF;
+        while (cur->musicEventID != -1) {
+            if (cur->musicEventID == musicEventID) {
+                break;
+            }
+            cur++;
+        }
+        // bug? can cur ever be NULL here?
+        // condition should probably be if (cur->musicEventID != -1)
+        if (cur != NULL) {
+            EvtScript* newSource = cur->scripts[scriptSelector];
+            if (RunningMusicEvents[musicEventID] != NULL) {
+                kill_script_by_ID(RunningMusicEventIDs[musicEventID]);
+            }
+            if (newSource != NULL) {
+                Evt* newEvt = start_script(newSource, 1, 0);
+                RunningMusicEvents[musicEventID] = newEvt;
+                RunningMusicEventIDs[musicEventID] = newEvt->id;
+            }
+        }
+    }
+    bgm_flush_music_events();
+    MusicEventPollCount++;
+    return ApiStatus_BLOCK;
+}
 
-    for (i = 0; i < ARRAY_COUNT(D_802DB7D8); i++) {
-        D_802DB7D8[i] = 0;
-        D_802DB800[i] = 0;
+ApiStatus RegisterMusicEvents(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 i;
+
+    // expects a list of MusicEvent, terminated by -1 0 0 0 0
+    MusicEventList = (MusicEvent*) evt_get_variable(script, *args++);
+
+    for (i = 0; i < ARRAY_COUNT(RunningMusicEvents); i++) {
+        RunningMusicEvents[i] = NULL;
+        RunningMusicEventIDs[i] = 0;
     }
 
-    start_script(&D_802D9D34, 1, 0);
+    start_script(&EVS_MusicEventMonitor, EVT_PRIORITY_1, 0);
     return ApiStatus_DONE2;
 }
 
 ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 itemID = evt_get_variable(script, *args++);
-    s32* ptrNextPos = args++;
+    s32 musicPlayer = evt_get_variable(script, *args++);
+    s32 fadeTime = evt_get_variable(script, *args++);
 
-    return (bgm_set_song(itemID, -1, 0, evt_get_variable(script, *ptrNextPos++), 8) != 0) * ApiStatus_DONE2;
+    if (bgm_set_song(musicPlayer, -1, 0, fadeTime, 8)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall) {
@@ -45,37 +91,52 @@ ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall) {
     s32 variation = evt_get_variable(script, *args++);
     s16 volume = evt_get_variable(script, *args++);
 
-    return (bgm_set_song(musicPlayer, songID, variation, 0x1F4, volume) != 0) * ApiStatus_DONE2;
+    if (bgm_set_song(musicPlayer, songID, variation, 500, volume)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    s16 var4 = evt_get_variable(script, *args++);
-    s16 var5 = evt_get_variable(script, *args++);
+    s32 musicPlayer = evt_get_variable(script, *args++);
+    s32 songID = evt_get_variable(script, *args++);
+    s32 variation = evt_get_variable(script, *args++);
+    s32 fadeTime = evt_get_variable(script, *args++);
+    s16 fadeStartVolume = evt_get_variable(script, *args++);
+    s16 fadeEndVolume = evt_get_variable(script, *args++);
 
-    return (func_8014A964(var0, var1, var2, var3, var4, var5) != 0) * ApiStatus_DONE2;
+    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) { 
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus func_802D5EE0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 playerIndex = evt_get_variable(script, *args++);
 
-    (&gMusicSettings[evt_get_variable(script, *args++)])->flags |= 0x2;
+    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAGS_2;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5F28(Evt* script, s32 isInitialCall) {
+ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 playerIndex = evt_get_variable(script, *args++);
+    s32 mix = evt_get_variable(script, *args++);
+    s32 state = evt_get_variable(script, *args++);
 
-    func_8014AA54(evt_get_variable(script, *args++), evt_get_variable(script, *args++), (s16)evt_get_variable(script, *args++));
+    bgm_adjust_proximity(playerIndex, mix, state);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5FA4(Evt* script, s32 isInitialCall) {
-    func_8014AB0C(0, (s16)evt_get_variable(script, *script->ptrReadPos));
+ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s16 trackVolSet = evt_get_variable(script, *args++);
+
+    bgm_set_track_volumes(0, trackVolSet);
     return ApiStatus_DONE2;
 }
 
@@ -86,8 +147,10 @@ ApiStatus PopSong(Evt* script, s32 isInitialCall) {
 
 ApiStatus PushSong(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 songID = evt_get_variable(script, *args++);
+    s32 variation = evt_get_variable(script, *args++);
 
-    bgm_push_song(evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    bgm_push_song(songID, variation);
     return ApiStatus_DONE2;
 }
 
@@ -103,23 +166,33 @@ ApiStatus PushBattleSong(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetBattleSong(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 songID = evt_get_variable(script, *args++);
+    s32 variation = evt_get_variable(script, *args++);
 
-    bgm_set_battle_song(evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    bgm_set_battle_song(songID, variation);
     return ApiStatus_DONE2;
 }
 
 ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 flags = evt_get_variable(script, *args++);
+    s32 time = evt_get_variable(script, *args++);
 
-    return (play_ambient_sounds(-1, flags) != 0) * ApiStatus_DONE2;
+    if (play_ambient_sounds(-1, time)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
-    return (play_ambient_sounds(soundID, 0xFA) != 0) * ApiStatus_DONE2;
+    if (play_ambient_sounds(soundID, 250)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus PlaySound(Evt* script, s32 isInitialCall) {
@@ -133,9 +206,9 @@ ApiStatus PlaySound(Evt* script, s32 isInitialCall) {
 ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
-    s32 value2 = evt_get_variable(script, *args++);
+    s32 volume = evt_get_variable(script, *args++);
 
-    sfx_play_sound_with_params(soundID, value2 & 0xFF, 0, 0);
+    sfx_play_sound_with_params(soundID, volume, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -153,15 +226,17 @@ ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall) {
 
 ApiStatus StopSound(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 soundID = evt_get_variable(script, *args++);
 
-    sfx_stop_sound(evt_get_variable(script, *args++));
+    sfx_stop_sound(soundID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D62E4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 soundID = evt_get_variable(script, *args++);
 
-    func_80149A6C(evt_get_variable(script, *args++), 1);
+    func_80149A6C(soundID, TRUE);
     return ApiStatus_DONE2;
 }
 
@@ -182,25 +257,201 @@ ApiStatus UseAdvancedDoorSounds(Evt* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode soundID = *args++;
-    u16 value2 = evt_get_variable(script, *args++);
+    u16 spatializationFlags = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
 
-    sfx_play_sound_at_position(soundID, value2, x, y, z);
+    sfx_play_sound_at_position(soundID, spatializationFlags, x, y, z);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowKeyChoicePopup, Evt* script, s32 isInitialCall);
+ApiStatus ShowKeyChoicePopup(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    PopupMenu* menu = &D_802DB830;
+    Trigger* trigger = script->owner2.trigger;
+    s32 numEntries;
+    s32 t; // TODO required in both places to match
+    s32 i;
 
-INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowConsumableChoicePopup, Evt* script, s32 isInitialCall);
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
 
-// TODO: probably a split here (sound_api, item_api)
+    t = script->functionTemp[0];
+    switch (t) {
+        case 0:
+            disable_player_input();
+            disable_player_static_collisions();
+            partner_disable_input();
+            close_status_menu();
+            numEntries = 0;
+
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
+
+            for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+                s16 invItem = playerData->keyItems[i];
+
+                if (invItem != ITEM_NONE) {
+                    s32 found = FALSE;
+                    s32* itemIt = trigger->itemList;
+
+                    while (*itemIt > 0) {
+                        if (invItem == *itemIt) {
+                            found = TRUE;
+                            break;
+                        }
+                        itemIt++;
+                    }
+
+                    if (found) {
+                        ItemData* item = &gItemTable[playerData->keyItems[i]];
+
+                        menu->ptrIcon[numEntries] = gItemHudScripts[item->hudElemID].enabled;
+                        menu->userIndex[numEntries] = i;
+                        menu->enabled[numEntries] = TRUE;
+                        menu->nameMsg[numEntries] = item->nameMsg;
+                        menu->descMsg[numEntries] = item->shortDescMsg;
+                        numEntries++;
+                    }
+                }
+            }
+
+            if (numEntries == 0) {
+                script->varTable[0] = 0;
+                return ApiStatus_DONE1;
+            }
+            menu->popupType = POPUP_MENU_USEKEY;
+            menu->numEntries = numEntries;
+            menu->initialPos = 0;
+            create_popup_menu(menu);
+            script->functionTemp[1] = 0;
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (script->functionTemp[1] == 0) {
+                script->functionTemp[2] = menu->result;
+                if (script->functionTemp[2] == 0) {
+                    break;
+                }
+                hide_popup_menu();
+            }
+
+            script->functionTemp[1]++;
+            if (script->functionTemp[1] >= 15) {
+                destroy_popup_menu();
+
+                if (script->functionTemp[2] == 0xFF) {
+                    script->varTable[0] = -1;
+                    return ApiStatus_DONE1;
+                } else {
+                    t = menu->userIndex[script->functionTemp[2] - 1];
+
+                    script->varTable[1] = t;
+                    script->varTable[0] = playerData->keyItems[t];
+                    return ApiStatus_DONE1;
+                }
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    PopupMenu* menu = &D_802DB830;
+    Trigger* trigger = script->owner2.trigger;
+    s32 numEntries;
+    s32 t; // TODO required in both places to match
+    s32 i;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    t = script->functionTemp[0];
+    switch (t) {
+        case 0:
+            disable_player_input();
+            disable_player_static_collisions();
+            partner_disable_input();
+            close_status_menu();
+            numEntries = 0;
+
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
+
+            for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+                s16 invItem = playerData->invItems[i];
+
+                if (invItem != ITEM_NONE) {
+                    s32 found = FALSE;
+                    s32* itemIt = trigger->itemList;
+
+                    while (*itemIt > 0) {
+                        if (invItem == *itemIt) {
+                            found = TRUE;
+                            break;
+                        }
+                        itemIt++;
+                    }
+
+                    if (found) {
+                        ItemData* item = &gItemTable[playerData->invItems[i]];
+
+                        menu->ptrIcon[numEntries] = gItemHudScripts[item->hudElemID].enabled;
+                        menu->userIndex[numEntries] = i;
+                        menu->enabled[numEntries] = TRUE;
+                        menu->nameMsg[numEntries] = item->nameMsg;
+                        menu->descMsg[numEntries] = item->shortDescMsg;
+                        numEntries++;
+                    }
+                }
+            }
+
+            if (numEntries == 0) {
+                script->varTable[0] = 0;
+                return ApiStatus_DONE1;
+            }
+            menu->popupType = POPUP_MENU_USEKEY;
+            menu->numEntries = numEntries;
+            menu->initialPos = 0;
+            create_popup_menu(menu);
+            script->functionTemp[1] = 0;
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (script->functionTemp[1] == 0) {
+                script->functionTemp[2] = menu->result;
+                if (script->functionTemp[2] == 0) {
+                    break;
+                }
+                hide_popup_menu();
+            }
+
+            script->functionTemp[1]++;
+            if (script->functionTemp[1] >= 15) {
+                destroy_popup_menu();
+
+                if (script->functionTemp[2] == 0xFF) {
+                    script->varTable[0] = -1;
+                    return ApiStatus_DONE1;
+                } else {
+                    t = menu->userIndex[script->functionTemp[2] - 1];
+
+                    script->varTable[1] = t;
+                    script->varTable[0] = playerData->invItems[t];
+                    return ApiStatus_DONE1;
+                }
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus RemoveKeyItemAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s16* ptrKeyItems = &gPlayerData.keyItems;
+    s16* ptrKeyItems = gPlayerData.keyItems;
 
     ptrKeyItems[index] = ITEM_NONE;
     return ApiStatus_DONE2;
@@ -209,7 +460,7 @@ ApiStatus RemoveKeyItemAt(Evt* script, s32 isInitialCall) {
 ApiStatus RemoveItemAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s16* ptrInvItems = &gPlayerData.invItems;
+    s16* ptrInvItems = gPlayerData.invItems;
 
     ptrInvItems[index] = ITEM_NONE;
     sort_items();
@@ -244,7 +495,7 @@ ApiStatus CloseChoicePopup(Evt* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
     partner_enable_input();
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
 }
 
@@ -394,7 +645,7 @@ ApiStatus DropItemEntity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DropItemEntityB(Evt* script, s32 isInitialCall) {
+ApiStatus DropTinyItemEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemID = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -404,7 +655,7 @@ ApiStatus DropItemEntityB(Evt* script, s32 isInitialCall) {
     s32 pickupVar = evt_get_variable_index(script, *args++);
 
     script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
-    set_item_entity_flags(script->varTable[0], 0x4000);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TINY);
     return ApiStatus_DONE2;
 }
 
@@ -477,14 +728,14 @@ ApiStatus SetItemFlags(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-;
+
 ApiStatus SetItemAlpha(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemEntityIndex = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 alpha = evt_get_variable(script, *args++);
     ItemEntity* itemEntity = get_item_entity(itemEntityIndex);
 
-    itemEntity->unk_2F = var2;
+    itemEntity->alpha = alpha;
     return ApiStatus_DONE2;
 }
 
@@ -523,13 +774,16 @@ ApiStatus ShowGotItem(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++), evt_get_variable(script, *args++), *args++);
+            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++),
+                                                                 evt_get_variable(script, *args++),
+                                                                 *args++);
             script->functionTemp[0] = 1;
             break;
         case 1:
             if (get_item_entity(script->functionTemp[1]) == NULL) {
                 return ApiStatus_DONE2;
             }
+            break;
     }
     return ApiStatus_BLOCK;
 }

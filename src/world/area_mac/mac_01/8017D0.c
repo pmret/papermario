@@ -1,97 +1,53 @@
 #include "mac_01.h"
 
-#define UNK_ALPHA_FUNC_NPC 5
+#define CHUCK_QUIZMO_NPC_ID 5
 
-extern u8 D_80258407_818C87;
+extern s32 D_8024D944_80E1C4;
+extern s32 D_8024D948_80E1C8;
+extern s32 D_80258404_818C84;
+extern s32 D_80262F68;
 
-#include "world/common/UnkMusicFunc.inc.c"
+#include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"
 
-#define NAMESPACE dup_mac_01
-#include "world/common/UnkNpcAIFunc24.inc.c"
-#define NAMESPACE mac_01
-
-#include "world/common/UnkFunc13.inc.c"
-
-#define NAMESPACE dup_mac_01
-#include "world/common/UnkNpcAIFunc1.inc.c"
-#define NAMESPACE mac_01
-
-#include "world/common/UnkFunc14.inc.c"
-
-#define NAMESPACE dup_mac_01
-#include "world/common/UnkNpcAIFunc25.inc.c"
-#define NAMESPACE mac_01
-
-#define NAMESPACE dup_mac_01
-#include "world/common/NpcJumpFunc2.inc.c"
-#define NAMESPACE mac_01
-
-#define NAMESPACE dup_mac_01
-#include "world/common/NpcJumpFunc.inc.c"
-#define NAMESPACE mac_01
-
-#define NAMESPACE dup_mac_01
-#include "world/common/UnkNpcAIFunc13.inc.c"
-#define NAMESPACE mac_01
-
-#include "world/common/UnkFunc15.inc.c"
-
-#define NAMESPACE dup_mac_01
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-#define NAMESPACE mac_01
-
-#include "world/common/UnkFunc16.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241C14_802494);
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241F10_802790);
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/UnkFoldFunc.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
+ApiStatus func_80243380_803C00(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 spriteIndex = evt_get_variable(script, *args++);
+    s32 rasterIndex = evt_get_variable(script, *args++);
+    UnkEntityStruct* temp_v0 = heap_malloc(sizeof(*temp_v0));
 
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802425FC_802E7C);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242680_802F00);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242898_803118);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024294C_8031CC);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242980_803200);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A00_803280);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242FA4_803824);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243380_803C00);
+    temp_v0->spriteIndex = spriteIndex;
+    temp_v0->rasterIndex = rasterIndex;
+    temp_v0->unk_34 = gPlayerStatus.colliderHeight;
+    temp_v0->unk_38 = gPlayerStatus.colliderDiameter;
+    temp_v0->pos.x = gPlayerStatus.position.x;
+    temp_v0->pos.y = gPlayerStatus.position.y;
+    temp_v0->pos.z = gPlayerStatus.position.z;
+    temp_v0->rot.x = 0.0f;
+    temp_v0->rot.y = 0.0f;
+    temp_v0->rot.z = 0.0f;
+    temp_v0->scale.x = SPRITE_WORLD_SCALE;
+    temp_v0->scale.y = SPRITE_WORLD_SCALE;
+    temp_v0->scale.z = SPRITE_WORLD_SCALE;
+    temp_v0->foldID = func_8013A704(1);
+    temp_v0->entityID = create_generic_entity_world(NULL, mac_01_UnkFoldFunc);
+    evt_set_variable(script, MapVar(10), (s32) temp_v0);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243494_803D14);
 
@@ -103,27 +59,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243680_803F00);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-ApiStatus func_80243AA0_804320(Evt* script, s32 isInitialCall) {
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ToadHouse.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -131,17 +67,18 @@ ApiStatus func_80243AA0_804320(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243CD4_804554);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
+ApiStatus func_80243D28_8045A8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    D_8024D948_80E1C8 = evt_get_variable(script, *args++);
+    D_8024D944_80E1C4 = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440BC_80493C);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 #include "world/common/GetPlayerCoins.inc.c"
 
@@ -157,9 +94,39 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446AC_804F2C);
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802447E0_805060);
+ApiStatus func_802447E0_805060(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 0;
+    }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244848_8050C8);
+    script->functionTemp[1] += 10;
+    if (script->functionTemp[1] > 255) {
+        script->functionTemp[1] = 255;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+
+    if (script->functionTemp[1] == 255) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+ApiStatus func_80244848_8050C8(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 255;
+    }
+
+    script->functionTemp[1] -= 10;
+    if (script->functionTemp[1] <= 0) {
+        script->functionTemp[1] = 0;
+        return ApiStatus_DONE2;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802448A0_805120);
 
@@ -171,7 +138,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_stats_805418);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_badges_805540);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244D68_8055E8);
+#include "world/common/UnkMachiFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244E10_805690);
 
@@ -179,7 +146,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244E90_805710);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244F5C_8057DC);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245018_805898);
+ApiStatus func_80245018_805898(Evt* script, s32 isInitialCall) {
+    D_80262F68 = 0;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245028_8058A8);
 
@@ -196,11 +166,16 @@ ApiStatus func_80245440_805CC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245488_805D08);
+ApiStatus func_80245488_805D08(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    D_80258404_818C84 = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 void func_802454B4_805D34(void) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80258407_818C87);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80258404_818C84 & 0xFF);
 }
 
 ApiStatus func_80245504_805D84(Evt* script, s32 isInitialCall) {

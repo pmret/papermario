@@ -3,43 +3,11 @@
 static char* N(exit_str_0) = "omo_17";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240000_DB22C0);
+#include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240070_DB2330);
+#include "world/common/enemy/GrooveGuyAI.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240140_DB2400);
-
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240238_DB24F8);
-
-#include "world/common/UnkNpcAIFunc4.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802405BC_DB287C);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240780_DB2A40);
-
-#include "world/common/UnkNpcAIFunc23.inc.c"
-
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802416A8_DB3968);
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80241D60_DB4020);
+#include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

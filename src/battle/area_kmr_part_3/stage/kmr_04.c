@@ -7,11 +7,11 @@
 
 EvtScript N(beforeBattle_80232B08) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LW(0), 1)
-    EVT_SET(LW(2), 0)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar2, 0)
     EVT_EXEC(N(clouds1))
-    EVT_SET(LW(0), 4)
-    EVT_SET(LW(2), 70)
+    EVT_SET(LVar0, 4)
+    EVT_SET(LVar2, 70)
     EVT_EXEC(N(clouds1))
     EVT_RETURN
     EVT_END
@@ -31,7 +31,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt04_shape",
     .hit = "kmr_bt04_hit",
     .bg = "kmr_bg",
-    .preBattle = N(beforeBattle_80232B08),
-    .postBattle = N(afterBattle_80232B80),
+    .preBattle = &N(beforeBattle_80232B08),
+    .postBattle = &N(afterBattle_80232B80),
     .foregroundModelList = N(foregroundModelList_80232B90),
 };

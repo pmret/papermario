@@ -32,7 +32,7 @@ glabel btl_state_update_peach_menu
 /* 41E924 802A9B94 00400008 */  jr        $v0
 /* 41E928 802A9B98 00000000 */   nop
 .L802A9B9C_41E92C:
-/* 41E92C 802A9B9C 0C093903 */  jal       func_8024E40C
+/* 41E92C 802A9B9C 0C093903 */  jal       btl_cam_use_preset
 /* 41E930 802A9BA0 24040002 */   addiu    $a0, $zero, 2
 /* 41E934 802A9BA4 0C093936 */  jal       btl_cam_move
 /* 41E938 802A9BA8 2404000A */   addiu    $a0, $zero, 0xa
@@ -297,8 +297,8 @@ glabel btl_state_update_peach_menu
 /* 41ED14 802A9F84 A2420178 */  sb        $v0, 0x178($s2)
 /* 41ED18 802A9F88 24020081 */  addiu     $v0, $zero, 0x81
 /* 41ED1C 802A9F8C A642017C */  sh        $v0, 0x17c($s2)
-/* 41ED20 802A9F90 3C038009 */  lui       $v1, %hi(D_8008FA78)
-/* 41ED24 802A9F94 8C63FA78 */  lw        $v1, %lo(D_8008FA78)($v1)
+/* 41ED20 802A9F90 3C038009 */  lui       $v1, %hi(gMoveTable+0xA18)
+/* 41ED24 802A9F94 8C63FA78 */  lw        $v1, %lo(gMoveTable+0xA18)($v1)
 /* 41ED28 802A9F98 2402000A */  addiu     $v0, $zero, 0xa
 /* 41ED2C 802A9F9C A642017A */  sh        $v0, 0x17a($s2)
 /* 41ED30 802A9FA0 0C090464 */  jal       btl_set_state

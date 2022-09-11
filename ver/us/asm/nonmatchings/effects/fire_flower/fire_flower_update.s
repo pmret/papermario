@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E007EC48
+.word LE007E270_37F990, LE007E2C0_37F9E0, LE007E314_37FA34, LE007E334_37FA54, LE007E354_37FA74, LE007E3A0_37FAC0, LE007E3C8_37FAE8, 0
+
+dlabel D_E007EC68
+.double 0.01
+
+dlabel D_E007EC70
+.double 0.9, 0.0
+
+.section .text
+
 glabel fire_flower_update
 /* 37F924 E007E204 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 37F928 E007E208 AFB1001C */  sw        $s1, 0x1c($sp)

@@ -1,6 +1,7 @@
 #include "dead.h"
 #include "common.h"
 #include "effects.h"
+#include "battle/battle.h"
 
 // Copy of kzn_19 (C8DBB0.c)
 
@@ -8,10 +9,10 @@
 
 extern s32 D_80248388[];
 extern s32 D_80248380;
+extern s32 D_80243DD8_EAC8B8;
+extern s32 D_80243DDC_EAC8BC;
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
@@ -38,7 +39,7 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -46,7 +47,26 @@ INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
+#ifdef NON_MATCHING 
+ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos; 
+    
+    if (isInitialCall) {
+        D_80243DD8_EAC8B8 = 0;
+    }
+    if (D_80243DD8_EAC8B8 != 0) {
+        D_80243DD8_EAC8B8 = 0;
+
+        dead_evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
+                
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+#else 
 INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
+#endif 
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
@@ -69,12 +89,7 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "EA8AE0", func_80241B50_EAA630);
-
-INCLUDE_ASM(s32, "EA8AE0", func_80241B94_EAA674);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241BC0_EAA6A0);

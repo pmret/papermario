@@ -25,15 +25,3 @@ dlabel D_E010AF80
 
 dlabel D_E010AF84
 .word 0x00000000, 0x00000000, 0x00000000
-
-dlabel D_E010AF90
-.double 0.11
-
-dlabel D_E010AF98
-.double 0.15
-
-dlabel D_E010AFA0
-.double 0.15
-
-dlabel D_E010AFA8
-.double 0.8

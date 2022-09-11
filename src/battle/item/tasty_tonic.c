@@ -1,4 +1,5 @@
 #include "tasty_tonic.h"
+#include "effects.h"
 
 #include "ItemRefund.inc.c"
 
@@ -21,9 +22,9 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
             case ACTOR_CLASS_PLAYER:
                 break;
             case ACTOR_CLASS_PARTNER:
-                dispatch_event_partner(0x31);
+                dispatch_event_partner(EVENT_RECOVER_STATUS);
         }
-        actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
+        actor->disableEffect->data.disableX->unk_3C = 0;
     }
 
     return ApiStatus_DONE2;
@@ -32,39 +33,39 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x89)
+    EVT_SET_CONST(LVarA, 0x89)
     EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(GetOwnerTarget, EVT_VAR(0), EVT_VAR(1))
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+    EVT_IF_EQ(LVar0, 0)
         EVT_EXEC_WAIT(battle_item_tasty_tonic_DrinkItem)
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 25)
-        EVT_ADD(EVT_VAR(2), 5)
-        EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 20)
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 25)
+        EVT_ADD(LVar2, 5)
+        EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 20)
         EVT_CALL(SetAnimation, 0, 0, 65586)
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
         EVT_CALL(SetAnimation, 0, 0, 65538)
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(2), 5)
-        EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar2, 5)
+        EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, 10)
         EVT_CALL(battle_item_tasty_tonic_func_802A123C_72223C, 0)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
     EVT_ELSE
-        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 25)
-        EVT_ADD(EVT_VAR(2), 5)
-        EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
-        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 20)
-        EVT_WAIT_FRAMES(30)
-        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(2), 5)
-        EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+        EVT_CALL(GetActorPos, 256, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 25)
+        EVT_ADD(LVar2, 5)
+        EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 5)
+        EVT_CALL(GetActorPos, 256, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 20)
+        EVT_WAIT(30)
+        EVT_CALL(GetActorPos, 256, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar2, 5)
+        EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, 5)
         EVT_CALL(battle_item_tasty_tonic_func_802A123C_72223C, 256)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
     EVT_END_IF
     EVT_EXEC_WAIT(battle_item_tasty_tonic_PlayerGoHome)
     EVT_RETURN

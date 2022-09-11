@@ -1,6 +1,6 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guLookAtReflectF(Matrix4f mf, LookAt *l,
+void guLookAtReflectF(f32 mf[4][4], LookAt *l,
                       f32 xEye, f32 yEye, f32 zEye,
                       f32 xAt,  f32 yAt,  f32 zAt,
                       f32 xUp,  f32 yUp,  f32 zUp) {
@@ -86,7 +86,7 @@ void guLookAtReflect(Mtx *m, LookAt *l,
                      f32 xAt, f32 yAt, f32 zAt,
                      f32 xUp, f32 yUp, f32 zUp)
 {
-    Matrix4f mf;
+    f32 mf[4][4];
 
     guLookAtReflectF(mf, l, xEye, yEye, zEye, xAt, yAt, zAt, xUp, yUp, zUp);
 

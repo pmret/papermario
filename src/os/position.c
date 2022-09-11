@@ -1,6 +1,9 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guPositionF(Matrix4f mf, f32 r, f32 p, f32 h, f32 s, f32 x, f32 y, f32 z) {
+f32 sin_rad(f32 x);
+f32 cos_rad(f32 x);
+
+void guPositionF(f32 mf[4][4], f32 r, f32 p, f32 h, f32 s, f32 x, f32 y, f32 z) {
         static f32 dtor = 3.1415926 / 180.0;
         f32   sinr, sinp, sinh;
         f32   cosr, cosp, cosh;

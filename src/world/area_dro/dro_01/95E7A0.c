@@ -1,27 +1,7 @@
 #include "dro_01.h"
 
 #define NAMESPACE dro_01_dup
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-#define NAMESPACE dro_01
-
-#define NAMESPACE dro_01_dup
-#include "world/common/GetCurrentFloor.inc.c"
-#define NAMESPACE dro_01
-
-#define NAMESPACE dro_01_dup
-#include "world/common/UnkFunc25.inc.c"
-#define NAMESPACE dro_01
-
-#define NAMESPACE dro_01_dup
-#include "world/common/GetEntryPos.inc.c"
-#define NAMESPACE dro_01
-
-#define NAMESPACE dro_01_dup
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-#define NAMESPACE dro_01
-
-#define NAMESPACE dro_01_dup
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 #define NAMESPACE dro_01
 
 #include "common/foliage.inc.c"
@@ -43,7 +23,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_COIN,
             .pos = { 120, 92, -18 },
             .spawnMode = 0xF,
-            .pickupFlag = EVT_SAVE_FLAG(760),
+            .pickupFlag = GF_DRO01_Tree1_Coin,
         },
     }
 };
@@ -57,7 +37,7 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
 EvtScript N(8024DD78) = {
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_SET(LVar0, EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 11, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024DD68)), 1, 0)
     EVT_RETURN

@@ -3,17 +3,23 @@
 
 #define NAMESPACE action_command_tidal_wave
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
+extern HudScript HES_BlueMeter;
+extern HudScript HES_PressAButton;
+extern HudScript HES_PressBButton;
+extern HudScript HES_BButtonHeld;
+extern HudScript HES_CDownButtonHeld;
+extern HudScript HES_PressCDownButton;
+extern HudScript HES_AButton;
+extern HudScript HES_AButtonDown;
 extern s32 D_802944A0;
 
-extern HudScript* D_802A97C0_42CEB0[];
-extern HudScript* D_802A97CC_42CEBC[];
+HudScript* D_802A97C0_42CEB0[3] = { &HES_PressAButton, &HES_PressBButton, &HES_PressCDownButton };
+HudScript* D_802A97CC_42CEBC[3] = { &HES_AButtonDown, &HES_BButtonHeld, &HES_CDownButtonHeld };
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
     s32 i;
 
     battleStatus->unk_82 = 5;
@@ -33,18 +39,18 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->hudElementX = -48;
         actionCommandStatus->hudElementY = 80;
 
-        hudElement = create_hud_element(HudScript_BlueMeter);
-        actionCommandStatus->hudElements[0] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-        set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, 0x82);
+        id = hud_element_create(&HES_BlueMeter);
+        actionCommandStatus->hudElements[0] = id;
+        hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+        hud_element_set_render_depth(id, 0);
+        hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
         for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
-            hudElement = create_hud_element(HudScript_AButton);
-            actionCommandStatus->hudElements[i] = hudElement;
-            set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            set_hud_element_render_depth(hudElement, 0);
-            set_hud_element_flags(hudElement, 0x82);
+            id = hud_element_create(&HES_AButton);
+            actionCommandStatus->hudElements[i] = id;
+            hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+            hud_element_set_render_depth(id, 0);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         }
 
         return ApiStatus_DONE2;
@@ -81,7 +87,7 @@ ApiStatus func_802A9138_42C828(Evt* script, s32 isInitialCall) {
 void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
     s8 oldButton;
     s8 newButton;
     s32 numLookbackFrames;
@@ -93,11 +99,11 @@ void N(update)(void) {
     switch (actionCommandStatus->state) {
         case 0:
             btl_set_popup_duration(99);
-            hudElement = actionCommandStatus->hudElements[0];
+            id = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
             }
-            set_hud_element_alpha(hudElement, 0xFF);
+            hud_element_set_alpha(id, 255);
             actionCommandStatus->state = 1;
             break;
         case 1:
@@ -106,7 +112,7 @@ void N(update)(void) {
             if (actionCommandStatus->hudElementX > 50) {
                 actionCommandStatus->hudElementX = 50;
             }
-            set_hud_element_render_pos(
+            hud_element_set_render_pos(
                 actionCommandStatus->hudElements[0],
                 actionCommandStatus->hudElementX + 21,
                 actionCommandStatus->hudElementY + 28);
@@ -121,7 +127,7 @@ void N(update)(void) {
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             actionCommandStatus->unk_5C = rand_int(2);
             actionCommandStatus->state = 11;
-            actionCommandStatus->unk_72 = 0U;
+            actionCommandStatus->unk_72 = 0;
             // fallthrough
         case 11:
             btl_set_popup_duration(99);
@@ -133,15 +139,15 @@ void N(update)(void) {
                 actionCommandStatus->unk_5C = newButton;
             } while (oldButton == newButton);
 
-            hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-            set_hud_element_anim(
-                hudElement, D_802A97C0_42CEB0[newButton]);
-            set_hud_element_render_pos(
-                hudElement,
+            id = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
+            hud_element_set_script(
+                id, D_802A97C0_42CEB0[newButton]);
+            hud_element_set_render_pos(
+                id,
                 actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudElementY);
-            clear_hud_element_flags(hudElement, 2);
-            sfx_play_sound(0x233);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            sfx_play_sound(SOUND_233);
             actionCommandStatus->unk_70 = 1;
             actionCommandStatus->state = 12;
             // fallthrough
@@ -173,7 +179,7 @@ void N(update)(void) {
                 // Determine starting point in input buffer.
                 bufferPos = battleStatus->inputBufferPos - numLookbackFrames;
                 if (bufferPos < 0) {
-                    bufferPos += 0x40;
+                    bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
 
                 // If determined that 0 frames should be searched, search a minimum of 1.
@@ -183,8 +189,8 @@ void N(update)(void) {
 
                 // Check buffer for past N frames' worth of button presses.
                 for (i = 0; i < numLookbackFrames; i++) {
-                    if (bufferPos >= 0x40) {
-                        bufferPos -= 0x40;
+                    if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
+                        bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
 
                     // If not locked out from previous wrong press...
@@ -203,7 +209,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x8000) {
+                                    if (buttonsPressed & ~BUTTON_A) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -217,7 +223,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x4000) {
+                                    if (buttonsPressed & ~BUTTON_B) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -231,7 +237,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x4) {
+                                    if (buttonsPressed & ~BUTTON_C_DOWN) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -244,17 +250,17 @@ void N(update)(void) {
                     if (actionCommandStatus->unk_60) {
                         // Wrong; prevent successful inputs for 10 frames.
                         actionCommandStatus->unk_72 = 10;
-                        sfx_play_sound(0x21D);
+                        sfx_play_sound(SOUND_MENU_ERROR);
                         actionCommandStatus->unk_70 = 0;
                     }
 
                     if (success) {
                         // Correct; shrink button, set up next button press, etc.
-                        hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-                        set_hud_element_anim(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
-                        set_hud_element_scale(hudElement, 0.5f);
-                        set_hud_element_render_pos(
-                            hudElement,
+                        id = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
+                        hud_element_set_script(id, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
+                        hud_element_set_scale(id, 0.5f);
+                        hud_element_set_render_pos(
+                            id,
                             actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20),
                             actionCommandStatus->hudElementY + 7);
                         actionCommandStatus->unk_5D++;
@@ -265,7 +271,7 @@ void N(update)(void) {
                         }
                         actionCommandStatus->state = 11;
                         battleStatus->unk_84++;
-                        sfx_play_sound(0x21C);
+                        sfx_play_sound(SOUND_21C);
                         return;
                     }
 
@@ -301,16 +307,16 @@ void N(draw_hud_elements)(void) {
     s32 i;
 
     for (i = 1; i < 15; i++) {
-        draw_hud_element_clipped(gActionCommandStatus.hudElements[i]);
+        hud_element_draw_clipped(gActionCommandStatus.hudElements[i]);
     }
 }
 
 void N(free_hud_elements)(void) {
     s32 i;
 
-    free_hud_element(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
 
     for (i = 1; i < 15; i++) {
-        free_hud_element(gActionCommandStatus.hudElements[i]);
+        hud_element_free(gActionCommandStatus.hudElements[i]);
     }
 }

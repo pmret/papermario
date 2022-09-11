@@ -20,7 +20,7 @@ void firework_rocket_render(EffectInstance* effect) {
     renderTask.renderMode =  RENDER_MODE_SURFACE_OPA;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 INCLUDE_ASM(s32, "effects/firework_rocket", firework_rocket_appendGfx);

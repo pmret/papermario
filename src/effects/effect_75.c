@@ -1,13 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect117 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-} Effect117; // size = 0x??
-
 void fx_75_appendGfx(void* effect);
 
 s32 D_E00EAA50[2] = { 0x09001A00, 0x09001A20 };
@@ -22,7 +15,7 @@ void fx_75_init(void) {
 INCLUDE_ASM(s32, "effects/effect_75", fx_75_update);
 
 void fx_75_render(EffectInstance* effect) {
-    Effect117* effect117 = effect->data;
+    Effect75FXData* data = effect->data.unk_75;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
@@ -32,7 +25,7 @@ void fx_75_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], effect117->unk_04, effect117->unk_08, effect117->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
+    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], data->unk_04, data->unk_08, data->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
 
     outDist = outZ + 5000;
     if (outDist < 0) {
@@ -51,7 +44,7 @@ void fx_75_render(EffectInstance* effect) {
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = shim_queue_render_task(renderTaskPtr);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00EA664(void) {

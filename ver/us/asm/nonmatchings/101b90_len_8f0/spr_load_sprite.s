@@ -90,20 +90,20 @@ glabel spr_load_sprite
 /* 101D38 802DEC48 2673FEB8 */  addiu     $s3, $s3, %lo(D_802DFEB8)
 /* 101D3C 802DEC4C 0260282D */  daddu     $a1, $s3, $zero
 /* 101D40 802DEC50 24060194 */  addiu     $a2, $zero, 0x194
-/* 101D44 802DEC54 3C12802E */  lui       $s2, %hi(D_802E004C)
-/* 101D48 802DEC58 2652004C */  addiu     $s2, $s2, %lo(D_802E004C)
+/* 101D44 802DEC54 3C12802E */  lui       $s2, %hi(PlayerRasterSetsLoaded)
+/* 101D48 802DEC58 2652004C */  addiu     $s2, $s2, %lo(PlayerRasterSetsLoaded)
 /* 101D4C 802DEC5C 8E420000 */  lw        $v0, ($s2)
 /* 101D50 802DEC60 3C04802E */  lui       $a0, %hi(D_802E0C20)
 /* 101D54 802DEC64 24840C20 */  addiu     $a0, $a0, %lo(D_802E0C20)
-/* 101D58 802DEC68 3C01802E */  lui       $at, %hi(D_802E0050)
+/* 101D58 802DEC68 3C01802E */  lui       $at, %hi(PlayerRasterBufferSetOffsets)
 /* 101D5C 802DEC6C 00230821 */  addu      $at, $at, $v1
-/* 101D60 802DEC70 AC220050 */  sw        $v0, %lo(D_802E0050)($at)
+/* 101D60 802DEC70 AC220050 */  sw        $v0, %lo(PlayerRasterBufferSetOffsets)($at)
 /* 101D64 802DEC74 26A20001 */  addiu     $v0, $s5, 1
 /* 101D68 802DEC78 00021080 */  sll       $v0, $v0, 2
 /* 101D6C 802DEC7C 00441021 */  addu      $v0, $v0, $a0
 /* 101D70 802DEC80 00641821 */  addu      $v1, $v1, $a0
-/* 101D74 802DEC84 3C04802E */  lui       $a0, %hi(D_802E0C60)
-/* 101D78 802DEC88 8C840C60 */  lw        $a0, %lo(D_802E0C60)($a0)
+/* 101D74 802DEC84 3C04802E */  lui       $a0, %hi(SpriteDataHeader)
+/* 101D78 802DEC88 8C840C60 */  lw        $a0, %lo(SpriteDataHeader)($a0)
 /* 101D7C 802DEC8C 3C07802E */  lui       $a3, %hi(D_802E0C14)
 /* 101D80 802DEC90 8CE70C14 */  lw        $a3, %lo(D_802E0C14)($a3)
 /* 101D84 802DEC94 8C680000 */  lw        $t0, ($v1)

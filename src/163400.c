@@ -1,14 +1,8 @@
 #include "common.h"
 #include "filemenu.h"
 #include "hud_element.h"
-
-extern s32 D_80241ECC;
-extern MenuPanel D_8024A098;
-extern MenuPanel D_8024A114;
-extern MenuPanel D_8024A158;
-extern MenuPanel D_8024A1D8;
-extern s32 D_8024BA60;
-extern s32 D_8024BA98;
+#include "fio.h"
+#include "ld_addrs.h"
 
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_contents_copy_arrow(
@@ -18,16 +12,25 @@ void filemenu_draw_contents_copy_arrow(
     s32 opacity, s32 darkening
 );
 
-s32* D_80249B80[] = { &D_80241ECC };
+extern HudScript D_80241ECC;
+extern MenuPanel D_8024A098;
+extern MenuPanel D_8024A114;
+extern MenuPanel D_8024A158;
+extern MenuPanel D_8024A1D8;
+extern WindowStyleCustom D_8024BA60;
+extern WindowStyleCustom D_8024BA98;
+extern s32 D_8024C088;
+
+HudScript* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
-s32 D_80249B94 = 160;
-s32 D_80249B98 = -120;
+s32 D_80249B94 = SCREEN_WIDTH / 2;
+s32 D_80249B98 = -SCREEN_HEIGHT / 2;
 s32 D_80249B9C = 0;
-s32 D_80249BA0 = 160;
-s32 D_80249BA4 = -120;
+s32 D_80249BA0 = SCREEN_WIDTH / 2;
+s32 D_80249BA4 = -SCREEN_HEIGHT / 2;
 s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
-s32 D_80249BB0[] = { 0x00000001, 0x00000000 };
+s32 D_80249BB0[] = { TRUE, FALSE };
 s32 D_80249BB8 = 0;
 s16 D_80249BBC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249BDC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
@@ -42,18 +45,72 @@ s16 D_80249CB8[10] = { -2, -8, -18, -30, -42, -55, -70, -85, -100, -115 };
 s16 D_80249CCC[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
 s16 D_80249CE0[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
 s16 D_80249CF4[16] = { 180, 173, 161, 148, 134, 120, 105, 91, 77, 62, 48, 34, 21, 9, 2, 0 };
-s16 D_80249D14[] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
-s16 D_80249D34[] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
+s16 D_80249D14[16] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
+s16 D_80249D34[10] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
 s32 D_80249D4C = 0; // padding?
-s32 D_80249D60[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
-s32 D_80249D70[] = { 0x40E00000, 0x41480000, 0x41500000, 0x41680000, 0x41600000, 0x41500000, 0x41380000, 0x41180000,
-                     0x40F00000, 0x40B00000, 0x40600000, 0x40000000, 0x3F800000, 0x3F000000, 0x00000000, };
-s32 D_80249DAC[] = { 0x2C000010, 0x00180120, 0x00C00000, 0x00000000, 0x00000000, 0xFF000000, 0x00000001, 0x40000000, };
-s32 D_80249DCC[] = { &D_8024BA60, 0x18000000, 0x00000120, 0x00C00000, filemenu_draw_contents_copy_arrow, 0x00000000,
-                     0x2C000000, 0x00000001, 0x00000000, &D_8024BA98, 0x17000000, 0x00000140, 0x00F00000,
-                     filemenu_draw_cursor, 0x00000000, 0xFF000000, 0x00000001, 0x00000000, &D_8024BA98, 0x00000000,
-                     0x00000000, };
+Vp D_80249D60 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0},
+        .vtrans = { 640, 480, 511, 0},
+    }
+};
+f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
+
+MenuWindowBP D_80249DAC[3] = {
+    {
+        .windowID = 0x2C,
+        .pos = {
+            .x = 16,
+            .y = 24,
+        },
+        .width = 288,
+        .height = 192,
+        .priority = 0,
+        .fpDrawContents = NULL,
+        .tab = NULL,
+        .parentID = -1,
+        .fpUpdate = { 1 },
+        .extraFlags = 0x40,
+        .style = { .customStyle = &D_8024BA60 },
+    },
+    {
+        .windowID = 0x18,
+        .pos = {
+            .x = 0,
+            .y = 0,
+        },
+        .width = 0x120,
+        .height = 0xC0,
+        .priority = 0,
+        .fpDrawContents = filemenu_draw_contents_copy_arrow,
+        .tab = NULL,
+        .parentID = 0x2C,
+        .fpUpdate = { 1} ,
+        .extraFlags = 0x00,
+        .style = { .customStyle = &D_8024BA98 },
+    },
+    {
+        .windowID = 0x17,
+        .pos = {
+            .x = 0,
+            .y = 0,
+        },
+        .width = 0x140,
+        .height = 0xF0,
+        .priority = 0,
+        .fpDrawContents = filemenu_draw_cursor,
+        .tab = NULL,
+        .parentID = -1,
+        .fpUpdate = { 1 },
+        .extraFlags = 0x00,
+        .style = { .customStyle = &D_8024BA98 },
+    },
+};
+
+extern Gfx D_8024B600[];
+extern Gfx D_8024B6F0[];
+extern Gfx D_8024B708[];
 
 BSS s32 filemenu_iterFileIdx;
 BSS s32 filemenu_pressedButtons;
@@ -61,13 +118,25 @@ BSS s32 filemenu_8024C088;
 BSS s32 filemenu_heldButtons;
 BSS s32 filemenu_8024C090;
 BSS s32 filemenu_loadedFileIdx;
-BSS s32 filemenu_8024C098[2];
+BSS s8 filemenu_8024C098;
+BSS s32 filemenu_8024C09C;
 BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_8024C100[8];
+BSS s32 filemenu_8024C100[4];
+BSS u8 filemenu_8024C110[8];
 
-INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
+s32 func_80244BC4(void);
+
+void mainmenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
+    if (ulx <= -2688 || uly <= -2688 || lrx <= 0 || lry <= 0) {
+        return;
+    }
+    if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
+        return;
+    }
+    gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+}
 
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
     menu->col = col;
@@ -76,18 +145,18 @@ void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
                                     (menu->numCols * menu->row) + menu->col];
 }
 
-void filemenu_set_cursor_alpha(s32 arg0) {
-    filemenu_cursorGoalAlpha = arg0;
-    filemenu_cursorGoalAlpha2 = arg0;
+void filemenu_set_cursor_alpha(s32 alpha) {
+    filemenu_cursorGoalAlpha = alpha;
+    filemenu_cursorGoalAlpha2 = alpha;
 }
 
 void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
     Window* window = &gWindows[windowID];
 
-    if (D_80249BB0[0] != 0
+    if (D_80249BB0[0]
             || get_game_mode() == GAME_MODE_END_FILE_SELECT
             || get_game_mode() == GAME_MODE_END_LANGUAGE_SELECT) {
-        if (D_80249BB0[0] != 0) {
+        if (D_80249BB0[0]) {
             s32 i;
 
             for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
@@ -99,7 +168,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
                 }
             }
             if (i >= ARRAY_COUNT(gWindows)) {
-                D_80249BB0[0] = 0;
+                D_80249BB0[0] = FALSE;
             }
         }
         D_80249BA0 = posX;
@@ -160,7 +229,7 @@ void filemenu_update_cursor(void) {
     }
 
     if (i >= ARRAY_COUNT(gWindows)) {
-        if (filemenu_cursorGoalAlpha2 == 0xFF) {
+        if (filemenu_cursorGoalAlpha2 == 255) {
             if (D_80249BB8 != 0) {
                 D_80249BB8--;
                 if (D_80249BB8 == 0) {
@@ -176,10 +245,52 @@ void filemenu_update_cursor(void) {
         D_80249BB8 = 1;
     }
 
-    filemenu_cursorGoalAlpha2 = 0xFF;
+    filemenu_cursorGoalAlpha2 = 255;
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_update);
+void filemenu_update(void) {
+    MenuPanel* menu = filemenu_menus[filemenu_8024C098];
+    MenuPanel** menuIt;
+    s32 i;
+
+    for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+        if ((gWindows[i].parent == -1 || gWindows[i].parent == 0x2C) &&
+            (gWindows[i].flags & WINDOW_FLAGS_INITIAL_ANIMATION))
+        {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(gWindows)) {
+        filemenu_heldButtons = gGameStatusPtr->heldButtons[0];
+        filemenu_pressedButtons = gGameStatusPtr->pressedButtons[0];
+    } else {
+        filemenu_heldButtons = 0;
+        filemenu_pressedButtons = 0;
+    }
+
+    if (filemenu_pressedButtons & BUTTON_B) {
+        filemenu_pressedButtons &= ~BUTTON_A;
+    }
+    if (filemenu_heldButtons & BUTTON_B) {
+        filemenu_heldButtons &= ~BUTTON_A;
+    }
+
+    if (menu->initialized) {
+        if (menu->fpHandleInput != NULL) {
+            menu->fpHandleInput(menu);
+        }
+    }
+
+    // TODO clean up bad match
+    menuIt = filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, menuIt++) {
+        menu = *menuIt;
+        if (menu->initialized && menu->fpUpdate != NULL) {
+            menu->fpUpdate(menu);
+        }
+    }
+}
 
 void func_8024330C(
     s32 windowIdx,
@@ -498,11 +609,98 @@ void filemenu_update_hidden_with_rotation(
     }
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_update_select_file);
+void filemenu_update_select_file(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    Window* parent = &gWindows[window->parent];
+    s32 updateCounter = window->updateCounter;
+    f32 temp_f4 = updateCounter / 16.0f;
+    s32 widthDelta = (parent->width / 2) - (window->width / 2);
+    s32 heightDelta = (parent->height / 2) - (window->height / 2) - 34;
 
-INCLUDE_ASM(s32, "163400", filemenu_update_deselect_file);
+    if (updateCounter < 16) {
+        *posX += -window->pos.x + (((f32) (widthDelta - window->pos.x) * temp_f4) + window->pos.x);
+        *posY += -window->pos.y + (((f32) (heightDelta - window->pos.y) * temp_f4) + window->pos.y);
+    } else {
+        *posX += -window->pos.x + ((f32) (widthDelta - window->pos.x) + window->pos.x);
+        *posY += -window->pos.y + ((f32) (heightDelta - window->pos.y) + window->pos.y);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
 
-INCLUDE_ASM(s32, "163400", filemenu_update_show_name_confirm);
+void filemenu_update_deselect_file(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    s32 updateCounter = window->updateCounter;
+    f32 temp_f4 = 1.0f - (updateCounter / 16.0f);
+
+    if (updateCounter < 16) {
+        *posX += -window->pos.x + (((80 - window->pos.x) * temp_f4) + window->pos.x);
+        *posY += -window->pos.y + (((36 - window->pos.y) * temp_f4) + window->pos.y);
+    } else {
+        *posX += -window->pos.x + ((80 - window->pos.x) * 0.0f + window->pos.x);
+        *posY += -window->pos.y + ((36 - window->pos.y) * 0.0f + window->pos.y);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
+
+void filemenu_update_show_name_confirm(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    s32 updateCounter = window->updateCounter;
+    s32 temp_s1;
+    s32 temp_s2;
+    s32 temp_s3;
+    u32 temp_v1;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 140);
+
+    if (updateCounter < 10) {
+        temp_s2 = updateCounter * 48;
+        temp_s3 = updateCounter * 12;
+        mainmenu_draw_rect(0, 0, 1280, temp_s2, 0, 0, 0, 0, 0);
+        temp_s1 = (SCREEN_HEIGHT - temp_s3) * 4;
+        mainmenu_draw_rect(0, temp_s1, 1280, 960, 0, 0, 0, 0, 0);
+        mainmenu_draw_rect(0, temp_s2, updateCounter * 64, temp_s1, 0, 0, 0, 0, 0);
+        mainmenu_draw_rect((SCREEN_WIDTH - (updateCounter * 16)) * 4, temp_s2, 1280, temp_s1, 0, 0, 0, 0, 0);
+    } else {
+        mainmenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
+    }
+
+    temp_v1 = updateCounter - 10;
+    if (temp_v1 < 10) {
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        *posY -= D_80249D34[temp_v1];
+    }
+    if (updateCounter >= 20) {
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
 
 void filemenu_update_hidden_name_confirm(
     s32 windowIdx,
@@ -539,15 +737,181 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (temp_a1 > 255) {
             temp_a1 = 255;
         }
-        set_hud_element_alpha(filemenu_cursorHudElemID[0], temp_a1);
-        set_hud_element_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
-        draw_hud_element_3(filemenu_cursorHudElemID[0]);
+        hud_element_set_alpha(filemenu_cursorHudElemID[0], temp_a1);
+        hud_element_set_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
+        hud_element_draw_without_clipping(filemenu_cursorHudElemID[0]);
     }
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_draw_contents_copy_arrow);
 
-INCLUDE_ASM(void, "163400", filemenu_init);
+void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
+                                       s32 darkening)
+{
+    Matrix4f sp20, sp60;
+    MenuPanel* menu0 = filemenu_menus[0];
+    f32 startX, startZ;
+    f32 endX, endZ;
+    f32 temp_f28;
+
+    if (menu0->page == 4 && menu0->selected < 4) {
+        if (menu0->selected != filemenu_loadedFileIdx && filemenu_8024C098 != 2) {
+            switch (filemenu_loadedFileIdx) {
+                case 0:
+                    startX = 130.0f;
+                    startZ = 90.0f;
+                    break;
+                case 1:
+                    startX = 190.0f;
+                    startZ = 90.0f;
+                    break;
+                case 2:
+                    startX = 130.0f;
+                    startZ = 150.0f;
+                    break;
+                default:
+                    startX = 190.0f;
+                    startZ = 150.0f;
+                    break;
+            }
+
+            switch (filemenu_menus[0]->selected) {
+                case 0:
+                    endX = 130.0f;
+                    endZ = 90.0f;
+                    break;
+                case 1:
+                    endX = 190.0f;
+                    endZ = 90.0f;
+                    break;
+                case 2:
+                    endX = 130.0f;
+                    endZ = 150.0f;
+                    break;
+                default:
+                    endX = 190.0f;
+                    endZ = 150.0f;
+                    break;
+            }
+
+            temp_f28 = -atan2(startX, startZ, endX, endZ) - 90.0f;
+
+            gSPViewport(gMasterGfxPos++, &D_80249D60);
+
+            guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPDisplayList(gMasterGfxPos++, D_8024B600);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 128);
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 0);
+
+            guTranslateF(sp20, startX + 4.0f, startZ + 4.0f, 0.0f);
+            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslateF(sp60, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+            gSPDisplayList(gMasterGfxPos++, D_8024B708);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 230, 230, 255);
+            gDPSetEnvColor(gMasterGfxPos++, 232, 40, 160, 0);
+
+            guTranslateF(sp20, startX, startZ, 0.0f);
+            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslateF(sp60, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+            gSPDisplayList(gMasterGfxPos++, D_8024B708);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+}
+
+// TODO bad match, look into
+void filemenu_init(s32 arg0) {
+    MenuPanel** panelIt;
+    MenuPanel* menu;
+    s32 i;
+
+    dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
+        filemenu_cursorHudElemID[i] = hud_element_create(D_80249B80[i]);
+        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+    }
+
+    D_8024C088 = filemenu_cursorHudElemID[0];
+    if (!arg0) {
+        D_80249DAC[0].style.customStyle->background.imgData = NULL; // ???
+    }
+    setup_pause_menu_tab(D_80249DAC, ARRAY_COUNT(D_80249DAC));
+    menu = filemenu_menus[0];
+    filemenu_8024C098 = 0;
+
+    if (!arg0) {
+        menu->page = 0;
+    } else {
+        menu->page = 2;
+    }
+
+    if (menu->page == 0) {
+        for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+            if (!fio_load_game(i)) {
+                gSaveSlotHasData[i] = FALSE;
+            } else {
+                gSaveSlotMetadata[i] = gCurrentSaveFile.unk_12EC;
+                gSaveSlotHasData[i] = TRUE;
+            }
+        }
+
+        if (menu->page == 0) {
+            fio_has_valid_backup();
+            if (D_800D95E8.saveCount >= 4) {
+                D_800D95E8.saveCount = 0;
+            }
+            gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
+        }
+    }
+
+    filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
+
+    panelIt = filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
+        if ((*panelIt)->fpInit != NULL) {
+            (*panelIt)->fpInit((*panelIt));
+        }
+    }
+    update_window_hierarchy(0x17, 0x40);
+}
 
 // TODO bad match, look into
 void filemenu_cleanup(void) {
@@ -555,26 +919,33 @@ void filemenu_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        free_hud_element(filemenu_cursorHudElemID[i]);
+        hud_element_free(filemenu_cursorHudElemID[i]);
     }
 
     panelIt = filemenu_menus;
-    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
         if ((*panelIt)->initialized) {
             if ((*panelIt)->fpCleanup != NULL) {
                 (*panelIt)->fpCleanup(*panelIt);
             }
         }
-        panelIt++;
     }
 
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
         set_window_update(i, WINDOW_UPDATE_HIDE);
     }
 
-    set_window_update(0x18, WINDOW_UPDATE_HIDE);
-    set_window_update(0x17, WINDOW_UPDATE_HIDE);
+    set_window_update(WINDOW_ID_PAUSE_TUTORIAL, WINDOW_UPDATE_HIDE);
+    set_window_update(WINDOW_ID_PAUSE_DECRIPTION, WINDOW_UPDATE_HIDE);
     func_80244BC4();
 }
 
-INCLUDE_ASM(s32, "163400", func_80244BC4);
+s32 func_80244BC4() {
+    if (filemenu_menus[0]->page == 0 && filemenu_8024C098 == 1 && filemenu_menus[1]->selected == 0) {
+        return 2;
+    } else if (filemenu_menus[0]->page == 0 && filemenu_menus[0]->selected < 4) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

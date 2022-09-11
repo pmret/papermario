@@ -66,9 +66,9 @@ glabel spr_update_sprite
 .L802DE398:
 /* 101488 802DE398 00521021 */  addu      $v0, $v0, $s2
 /* 10148C 802DE39C 00021080 */  sll       $v0, $v0, 2
-/* 101490 802DE3A0 3C01802E */  lui       $at, %hi(D_802DFA58)
+/* 101490 802DE3A0 3C01802E */  lui       $at, %hi(D_802DFA48 + 0x10)
 /* 101494 802DE3A4 00220821 */  addu      $at, $at, $v0
-/* 101498 802DE3A8 8C22FA58 */  lw        $v0, %lo(D_802DFA58)($at)
+/* 101498 802DE3A8 8C22FA58 */  lw        $v0, %lo(D_802DFA48 + 0x10)($at)
 /* 10149C 802DE3AC 8FBF0038 */  lw        $ra, 0x38($sp)
 /* 1014A0 802DE3B0 8FB70034 */  lw        $s7, 0x34($sp)
 /* 1014A4 802DE3B4 8FB60030 */  lw        $s6, 0x30($sp)

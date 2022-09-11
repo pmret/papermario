@@ -1,6 +1,9 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guPerspectiveF(Matrix4f mf, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
+f32 sin_rad(f32 x);
+f32 cos_rad(f32 x);
+
+void guPerspectiveF(f32 mf[4][4], u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
     f32 cot;
     s32 i, j;
 
@@ -35,7 +38,7 @@ void guPerspectiveF(Matrix4f mf, u16 *perspNorm, f32 fovy, f32 aspect, f32 near,
 }
 
 void guPerspective(Mtx *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
-    Matrix4f mf;
+    f32 mf[4][4];
 
     guPerspectiveF(mf, perspNorm, fovy, aspect, near, far, scale);
 

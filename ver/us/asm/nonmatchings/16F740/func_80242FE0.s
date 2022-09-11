@@ -286,7 +286,7 @@ glabel func_80242FE0
 /* 171CC8 802433E8 00000000 */   nop
 /* 171CCC 802433EC 1440013B */  bnez      $v0, .L802438DC
 /* 171CD0 802433F0 00000000 */   nop
-/* 171CD4 802433F4 0C093903 */  jal       func_8024E40C
+/* 171CD4 802433F4 0C093903 */  jal       btl_cam_use_preset
 /* 171CD8 802433F8 24040002 */   addiu    $a0, $zero, 2
 /* 171CDC 802433FC 12400007 */  beqz      $s2, .L8024341C
 /* 171CE0 80243400 3C030010 */   lui      $v1, 0x10

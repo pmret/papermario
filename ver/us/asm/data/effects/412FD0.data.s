@@ -13,21 +13,3 @@ dlabel D_E0124BC0
 
 dlabel D_E0124BE4
 .ascii "<Zdhjlnpqqnkgdhjlnpqqnkg\0\0\0"
-
-dlabel D_E0124C00
-.double 0.1
-
-dlabel D_E0124C08
-.double 0.04
-
-dlabel D_E0124C10
-.double 0.001
-
-dlabel D_E0124C18
-.double 0.01
-
-dlabel D_E0124C20
-.double 0.4
-
-dlabel D_E0124C28
-.double 0.1

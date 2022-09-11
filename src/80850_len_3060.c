@@ -1,18 +1,35 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 TimesHudScript;
+extern HudScript* TimesHudScript;
+extern HudScript* SPIncrementHudScripts[];
+extern HudScript* SPStarHudScripts[];
+extern s32 D_800F7FE8;
+extern s32 D_800F7FEC;
+extern s32 D_800F7FF0;
+extern s32 D_800F7FF4;
+extern s32 D_800F7FF8;
+extern s32 D_800F7FFC;
+extern s32 D_800F8000[];
+
+extern s16 D_8010CD10;
+extern s16 D_8010CD12;
+
 extern s32 DigitHudScripts[10];
 
-extern HudScript HudScript_StatusHP[];
-extern HudScript HudScript_StatusHeart[];
-extern HudScript HudScript_StatusFP[];
-extern HudScript HudScript_StatusFlower[];
-extern HudScript HudScript_Item_CoinSparkleRandom[];
-extern HudScript HudScript_StatusStarPoint[];
-extern HudScript HudScript_StatusStar1[];
-extern HudScript HudScript_StatusTimes[];
-extern HudScript HudScript_StatusSPShine[];
+extern HudScript HES_StatusHP;
+extern HudScript HES_StatusHeart;
+extern HudScript HES_StatusFP;
+extern HudScript HES_StatusFlower;
+extern HudScript HES_Item_CoinSparkleRandom;
+extern HudScript HES_StatusStarPoint;
+extern HudScript HES_StatusStar1;
+extern HudScript HES_StatusTimes;
+extern HudScript HES_StatusSPShine;
+extern HudScript HES_StatusSPEmptyIncrement;
+extern HudScript HES_StatusStarEmpty;
+
+extern HudScript SlashHudScript;
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -43,7 +60,7 @@ void clear_player_data(void) {
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
-    playerData->unk_292 = 0;
+    playerData->starBeamLevel = 0;
     playerData->currentPartner = 0;
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
@@ -74,32 +91,32 @@ void clear_player_data(void) {
         playerData->storedItems[i] = ITEM_NONE;
     }
 
-    playerData->otherHitsTaken = 0;
-    playerData->unk_296 = 0;
+    playerData->actionCommandAttempts = 0;
+    playerData->actionCommandSuccesses = 0;
     playerData->hitsTaken = 0;
     playerData->hitsBlocked = 0;
     playerData->playerFirstStrikes = 0;
     playerData->enemyFirstStrikes = 0;
     playerData->powerBounces = 0;
     playerData->battlesCount = 0;
-    playerData->unk_2A4[0] = 0;
-    playerData->unk_2A4[1] = 0;
-    playerData->unk_2A4[2] = 0;
-    playerData->unk_2A4[3] = 0;
-    playerData->unk_2AC = 0;
-    playerData->unk_2B0 = 0;
+    playerData->battlesWon = 0;
+    playerData->unk_2A6 = 0;
+    playerData->battlesFled = 0;
+    playerData->trainingsDone = 0;
+    playerData->walkingStepsTaken = 0;
+    playerData->runningStepsTaken = 0;
     playerData->idleFrameCounter = 0;
     playerData->totalCoinsEarned = 0;
     playerData->frameCounter = 0;
     playerData->quizzesAnswered = 0;
     playerData->quizzesCorrect = 0;
 
-    for (i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
-        playerData->unk_2C4[i] = 0;
-        playerData->unk_2F4[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {
+        playerData->partnerUnlockedTime[i] = 0;
+        playerData->partnerUsedTime[i] = 0;
     }
 
-    playerData->unk_328 = 0;
+    playerData->droTreeOrbitTime = 0;
     playerData->starPiecesCollected = 0;
     playerData->jumpGamePlays = 0;
     playerData->jumpGameTotal = 0;
@@ -266,7 +283,7 @@ s32 get_stored_empty_count(void) {
 void enforce_hpfp_limits(void) {
     PlayerData* playerData = &gPlayerData;
 
-    playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(4) * 5);
+    playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(ABILITY_HP_PLUS) * 5);
     if (playerData->curMaxHP > 75) {
         playerData->curMaxHP = 75;
     }
@@ -274,7 +291,7 @@ void enforce_hpfp_limits(void) {
         playerData->curHP = playerData->curMaxHP;
     }
 
-    playerData->curMaxFP = playerData->hardMaxFP + (is_ability_active(12) * 5);
+    playerData->curMaxFP = playerData->hardMaxFP + (is_ability_active(ABILITY_FP_PLUS) * 5);
     if (playerData->curMaxFP > 75) {
         playerData->curMaxFP = 75;
     }
@@ -320,81 +337,81 @@ void initialize_status_menu(void) {
     uiStatus->starpointsBlinkCounter = 0;
     uiStatus->unk_6C[2] = -1;
     uiStatus->unk_3B[1] = 0;
-    uiStatus->unk_57[0] = 0;
-    uiStatus->unk_57[1] = 0;
-    uiStatus->unk_57[2] = 0;
-    uiStatus->unk_57[3] = 0;
+    uiStatus->unk_57 = 0;
+    uiStatus->unk_58 = 0;
+    uiStatus->unk_59 = 0;
+    uiStatus->spBarsToBlink = 0;
     uiStatus->unk_6C[0] = 0;
     uiStatus->unk_6C[1] = 0;
     uiStatus->iconIndex12 = -1;
 
     close_status_menu();
 
-    iconIndex = create_hud_element(HudScript_StatusHP);
+    iconIndex = hud_element_create(&HES_StatusHP);
     uiStatus->hpIconIndices[0] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusHeart);
+    iconIndex = hud_element_create(&HES_StatusHeart);
     uiStatus->hpIconIndices[1] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusFP);
+    iconIndex = hud_element_create(&HES_StatusFP);
     uiStatus->fpIconIndices[0] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusFlower);
+    iconIndex = hud_element_create(&HES_StatusFlower);
     uiStatus->fpIconIndices[1] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusCoin);
+    iconIndex = hud_element_create(&HES_StatusCoin);
     uiStatus->coinIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
+    iconIndex = hud_element_create(&HES_Item_CoinSparkleRandom);
     uiStatus->coinSparkleIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusStarPoint);
+    iconIndex = hud_element_create(&HES_StatusStarPoint);
     uiStatus->starpointsIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusSPShine);
+    iconIndex = hud_element_create(&HES_StatusSPShine);
     uiStatus->starpointsShineIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    newVar = create_hud_element(HudScript_StatusTimes);
+    newVar = hud_element_create(&HES_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HES_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HES_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HES_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = create_hud_element(HudScript_StatusStar1);
+    iconIndex = hud_element_create(&HES_StatusStar1);
     uiStatus->starIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     func_800F0D5C();
 }
@@ -409,12 +426,12 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     s32 digit;
     s32 place;
 
-    set_hud_element_anim(iconID, TimesHudScript);
+    hud_element_set_script(iconID, TimesHudScript);
     x += 8;
     y2 = y + 8;
-    set_hud_element_render_pos(iconID, x, y + 7);
-    clear_hud_element_flags(iconID, 2);
-    draw_hud_element_2(iconID);
+    hud_element_set_render_pos(iconID, x, y + 7);
+    hud_element_clear_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_draw_next(iconID);
 
     // Write each digit of the input number into the digits array
     for (i = 0; i < numDigits; i++) {
@@ -434,10 +451,10 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
         // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
         if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
             keepDrawing = TRUE;
-            set_hud_element_anim(iconID, DigitHudScripts[digit]);
-            set_hud_element_render_pos(iconID, x, y2);
-            clear_hud_element_flags(iconID, 2);
-            draw_hud_element_2(iconID);
+            hud_element_set_script(iconID, DigitHudScripts[digit]);
+            hud_element_set_render_pos(iconID, x, y2);
+            hud_element_clear_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(iconID);
         }
     }
 }
@@ -445,8 +462,75 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
 #endif
 
-INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
+// close but some ordering / reg issues
+#ifdef NON_MATCHING
+void status_menu_draw_stat(s32 id, s32 x, s32 y, s32 arg3, s32 arg4) {
+    s8 digits[4];
+    s32 sp18;
+    s32 sp1C;
+    s32 cond;
+    s32 digit;
+    s32 numDigits;
+    s32 localX;
+    s32 localY;
+    s32 i;
 
+    numDigits = 2;
+
+    sp18 = x + 8;
+    sp1C = y + 8;
+    i = 0;
+    hud_element_set_script(id, SlashHudScript);
+    hud_element_set_render_pos(id, x + 22, y + 9);
+    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_draw_next(id);
+
+
+    for (; i < numDigits; i++) {
+        s32 num = arg3 % 10;
+
+        digits[numDigits - i - 1] = num;
+        arg3 /= 10;
+    }
+
+    localX = sp18;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+
+    for (i = 0; i < numDigits; i++) {
+        digits[numDigits - i - 1] = arg4 % 10;
+        arg4 /= 10;
+    }
+
+    localX = sp18 + 26;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+}
+#else
+INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
+#endif
+
+void update_status_menu(void);
 INCLUDE_ASM(s32, "80850_len_3060", update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
@@ -454,16 +538,16 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && ((gGameStatusPtr->frameCounter % 3) == 0)) {
-        sfx_play_sound(0x211);
+        sfx_play_sound(SOUND_211);
     }
 
     iconIndex = uiStatus->iconIndex10;
-    set_hud_element_render_pos(iconIndex, posX + 27, posY + 11);
-    draw_hud_element_clipped(iconIndex);
+    hud_element_set_render_pos(iconIndex, posX + 27, posY + 11);
+    hud_element_draw_clipped(iconIndex);
 
     iconIndex = uiStatus->iconIndex11;
-    set_hud_element_render_pos(iconIndex, posX + 15, posY + 11);
-    draw_hud_element_clipped(iconIndex);
+    hud_element_set_render_pos(iconIndex, posX + 15, posY + 11);
+    hud_element_draw_clipped(iconIndex);
 
     draw_number(uiStatus->displayCoins, posX + 58, posY + 4, 1, 10, 255, 3);
 }
@@ -477,8 +561,8 @@ void update_coin_counter(void) {
     if (uiStatus->unk_6C[1] != 0) {
         uiStatus->unk_6C[1] -= 1;
         if (((uiStatus->unk_6C[1] << 24) == 0) && (uiStatus->iconIndex12 >= 0)) {
-            free_hud_element(uiStatus->iconIndex12);
-            free_hud_element(uiStatus->iconIndex13);
+            hud_element_free(uiStatus->iconIndex12);
+            hud_element_free(uiStatus->iconIndex13);
             uiStatus->iconIndex12 = -1;
         }
         D_8010CD12 = 0;
@@ -492,7 +576,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(20, basic_hidden_window_update);
+                set_window_update(WINDOW_ID_20, (s32)basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -513,10 +597,10 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
-        set_window_update(0x14, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_20, WINDOW_UPDATE_HIDE);
         if (uiStatus->iconIndex12 > -1) {
-            free_hud_element(uiStatus->iconIndex10);
-            free_hud_element(uiStatus->iconIndex11);
+            hud_element_free(uiStatus->iconIndex10);
+            hud_element_free(uiStatus->iconIndex11);
             uiStatus->iconIndex12 = -1;
         }
         uiStatus->unk_6C[0] = 0;
@@ -526,16 +610,16 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(0x14, basic_window_update);
-        index = create_hud_element(HudScript_MenuTimes);
+        set_window_properties(WINDOW_ID_20, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
+        set_window_update(WINDOW_ID_20, (s32)basic_window_update);
+        index = hud_element_create(&HES_MenuTimes);
         uiStatus->iconIndex10 = index;
-        set_hud_element_flags(index, 0x80);
-        set_hud_element_tint(index, 0xff, 0xff, 0xff);
-        index = create_hud_element(HudScript_StatusCoin);
+        hud_element_set_flags(index, HUD_ELEMENT_FLAGS_80);
+        hud_element_set_tint(index, 255, 255, 255);
+        index = hud_element_create(&HES_StatusCoin);
         uiStatus->iconIndex11 = index;
-        set_hud_element_flags(index, 0x80);
-        set_hud_element_tint(index, 0xff, 0xff, 0xff);
+        hud_element_set_flags(index, HUD_ELEMENT_FLAGS_80);
+        hud_element_set_tint(index, 255, 255, 255);
         uiStatus->unk_6C[0] = 0;
 
         if (uiStatus->unk_6C[2] < 0) {
@@ -555,7 +639,7 @@ void hide_coin_counter(void) {
     }
 }
 
-void func_800E96C8(void) {
+void hide_coin_counter_immediately(void) {
     UiStatus* uiStatus = &gUIStatus;
 
     if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0] == 0)) {
@@ -883,13 +967,14 @@ void reset_status_menu(void) {
 // Weird order of loading stuff
 #ifdef NON_EQUIVALENT
 s32 is_ability_active(s32 ability) {
-    s32 abilityMoveID;
     PlayerData* playerData = &gPlayerData;
     s32 attackFXArray[6];
+    s32 abilityMoveID;
     s32 ret;
     s32 attackFXIndex;
-    s32 badgeMoveID;
     s32 i;
+    s32 badgeMoveID;
+    u8* moveID;
 
     ret = 0;
     attackFXIndex = 0;
@@ -902,17 +987,15 @@ s32 is_ability_active(s32 ability) {
         return 0;
     }
 
-
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-        s32 b = playerData->equippedBadges[i];
+        badgeMoveID = playerData->equippedBadges[i];
 
-        if (b != 0) {
-            badgeMoveID = gItemTable[b].moveID;
+        if (badgeMoveID != 0) {
+            moveID = &gItemTable[badgeMoveID].moveID;
+            badgeMoveID = *moveID;
         }
 
         switch (ability) {
-            default:
-                continue;
             case ABILITY_DODGE_MASTER:
                 abilityMoveID = 0x4c;
                 break;
@@ -1106,6 +1189,9 @@ s32 is_ability_active(s32 ability) {
             case ABILITY_HEALTHY_HEALTHY:
                 abilityMoveID = 0x4a;
                 break;
+            default:
+                do { } while (0);
+                continue;
         }
         if (badgeMoveID == abilityMoveID) {
             ret++;
@@ -1120,7 +1206,6 @@ s32 is_ability_active(s32 ability) {
 #else
 INCLUDE_ASM(s32, "80850_len_3060", is_ability_active);
 #endif
-
 
 s32 is_partner_ability_active(s32 ability) {
     return 0;
@@ -1147,7 +1232,7 @@ s32 add_coins(s32 amt) {
     return playerData->coins;
 }
 
-s8 add_star_points(s32 amt) {
+s32 add_star_points(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
@@ -1165,7 +1250,7 @@ s8 add_star_points(s32 amt) {
     return gPlayerData.starPoints;
 }
 
-u8 add_star_pieces(s32 amt) {
+s32 add_star_pieces(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
@@ -1200,22 +1285,22 @@ void add_SP(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     UiStatus* uiStatus = &gUIStatus;
     s32 phi_v1;
-    s32 blah;
+    s32 maxPower;
 
-    uiStatus->unk_57[0] = 1;
-    uiStatus->unk_57[1] = 60;
+    uiStatus->unk_57 = 1;
+    uiStatus->unk_58 = 60;
 
     phi_v1 = playerData->specialBarsFilled;
     if (playerData->specialBarsFilled < 0) {
         phi_v1 = playerData->specialBarsFilled + 31;
     }
-    uiStatus->unk_57[2] = phi_v1 >> 5;
+    uiStatus->unk_59 = phi_v1 >> 5;
 
     playerData->specialBarsFilled += amt;
 
-    blah = playerData->maxStarPower << 8;
-    if (playerData->specialBarsFilled > blah) {
-        playerData->specialBarsFilled = blah;
+    maxPower = playerData->maxStarPower << 8;
+    if (playerData->specialBarsFilled > maxPower) {
+        playerData->specialBarsFilled = maxPower;
     }
 
     gUIStatus.displaySP = gPlayerData.specialBarsFilled;
@@ -1291,7 +1376,7 @@ s8 add_fortress_keys(s32 amt) {
     return gPlayerData.fortressKeyCount;
 }
 
-s8 subtract_fortress_keys(s8 amt) {
+s32 subtract_fortress_keys(s32 amt) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->fortressKeyCount -= amt;
@@ -1302,6 +1387,6 @@ s8 subtract_fortress_keys(s8 amt) {
     return playerData->fortressKeyCount;
 }
 
-s8 get_fortress_key_count(void) {
+s32 get_fortress_key_count(void) {
     return gPlayerData.fortressKeyCount;
 }

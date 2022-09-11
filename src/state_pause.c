@@ -5,7 +5,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-s32 D_80077950[] = { 0x8038F800, 0x803B5000, &heap_battleHead };
+s32* D_80077950[] = { &D_8038F800, &D_803B5000, &heap_battleHead };
 
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,
@@ -39,7 +39,7 @@ void state_step_pause(void) {
             if (nuGfxCfb[1] == nuGfxCfb_ptr) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
-                gOverrideFlags |= 0x8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
                 gGameStatusPtr->backgroundFlags &= ~0xF0;
                 gGameStatusPtr->backgroundFlags |= 0x10;
 
@@ -69,8 +69,8 @@ void state_step_pause(void) {
                     clear_entity_models();
                     clear_animator_list();
                     clear_generic_entity_list();
-                    set_hud_element_nonworld_cache(_3169F0_VRAM, 0x38000);
-                    clear_hud_element_cache();
+                    hud_element_set_aux_cache(_3169F0_VRAM, 0x38000);
+                    hud_element_clear_cache();
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
@@ -82,7 +82,7 @@ void state_step_pause(void) {
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
-                    gOverrideFlags &= ~0x8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 }
 
                 if (D_800A0920 >= 0) {
@@ -94,7 +94,7 @@ void state_step_pause(void) {
                 pause_handle_input(0, 0);
                 D_800A0920--;
             } else {
-                pause_handle_input(gGameStatusPtr->pressedButtons, gGameStatusPtr->heldButtons);
+                pause_handle_input(gGameStatusPtr->pressedButtons[0], gGameStatusPtr->heldButtons[0]);
             }
             D_800A0922 = 0;
             break;
@@ -118,7 +118,7 @@ void state_step_unpause(void) {
         case 0:
         case 1:
             if (D_800A0920 == 4) {
-                gOverrideFlags |= 0x8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
             }
 
             if (D_800A0920 >= 0) {
@@ -128,17 +128,17 @@ void state_step_unpause(void) {
 
                 if (D_800A0920 == 0) {
                     if (D_800A0920 == 0) {
+                        MapSettings* mapSettings;
                         MapConfig* mapConfig;
-                        Map* map;
                         s32 assetData;
                         s32 assetSize;
 
                         D_800A0920 = -1;
                         nuGfxSetCfb(&D_80077950, ARRAY_COUNT(D_80077950));
                         pause_cleanup();
-                        gOverrideFlags &= ~0x8;
-                        mapConfig = get_current_map_header();
-                        map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                        gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                        mapSettings = get_current_map_settings();
+                        mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;
                         gGameStatusPtr->backgroundFlags &= ~0xF0;
                         func_8005AF84();
@@ -151,12 +151,12 @@ void state_step_unpause(void) {
                         init_entity_models();
                         reset_animator_list();
                         init_generic_entity_list();
-                        set_hud_element_nonworld_cache(0, 0);
+                        hud_element_set_aux_cache(0, 0);
                         init_hud_element_list();
                         init_item_entity_list();
                         init_script_list();
                         init_npc_list();
-                        func_80110E58();
+                        init_entity_data();
                         init_trigger_list();
                         func_801497FC(D_800A0924);
                         bgm_reset_max_volume();
@@ -167,13 +167,13 @@ void state_step_unpause(void) {
                         initialize_collision();
                         restore_map_collision_data();
 
-                        if (map->dmaStart != NULL) {
-                            dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                        if (mapConfig->dmaStart != NULL) {
+                            dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                         }
 
-                        load_map_bg(map->bgName);
-                        if (mapConfig->background != NULL) {
-                            read_background_size(mapConfig->background);
+                        load_map_bg(mapConfig->bgName);
+                        if (mapSettings->background != NULL) {
+                            read_background_size(mapSettings->background);
                         } else {
                             set_background_size(296, 200, 12, 20);
                         }
@@ -223,7 +223,7 @@ void state_step_unpause(void) {
             update_player();
             update_effects();
             enable_player_input();
-            set_game_mode(4);
+            set_game_mode(GAME_MODE_CHANGE_MAP);
             break;
     }
 }

@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0026A28
+.double 0.7
+
+dlabel D_E0026A30
+.double 0.1
+
+dlabel D_E0026A38
+.double 0.4
+
+dlabel D_E0026A40
+.double 0.1
+
+dlabel D_E0026A48
+.double 0.3
+
+.section .text
+
 glabel gather_energy_pink_update
 /* 33B30C E002618C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 33B310 E0026190 AFB1003C */  sw        $s1, 0x3c($sp)

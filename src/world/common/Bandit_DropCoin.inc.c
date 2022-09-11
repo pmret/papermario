@@ -15,18 +15,18 @@ ApiStatus N(Bandit_DropCoin)(Evt* script, s32 isInitialCall) {
 
         if (npcID == -1) {
             npc = get_npc_unsafe(script->owner2.npcID);
-        } else if (npcID >= -270000000) {
+        } else if (npcID >= EVT_LIMIT) {
             npc = get_npc_unsafe(npcID);
         } else {
             npc = (Npc*)npcID;
         }
 
-        script->functionTemp[0] = (s32)npc;
+        script->functionTempPtr[0] = npc;
         script->functionTemp[1] = itemEntityIndex;
         script->functionTemp[2] = areaFlag;
     }
 
-    npc = (Npc*)script->functionTemp[0];
+    npc = script->functionTempPtr[0];
     itemEntityIndex = script->functionTemp[1];
     areaFlag = script->functionTemp[2];
 

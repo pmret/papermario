@@ -4,15 +4,15 @@
 #include "sprite.h"
 
 void state_init_startup(void) {
-    gOverrideFlags |= 0x8;
-    gGameStatusPtr->introState = 3;
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    gGameStatusPtr->introState = INTRO_STATE_3;
 }
 
 void state_step_startup(void) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
-    if (gameStatus->introState != 0) {
+    if (gameStatus->introState != INTRO_STATE_0) {
         gameStatus->introState--;
         return;
     }
@@ -42,8 +42,8 @@ void state_step_startup(void) {
     clear_model_data();
     clear_sprite_shading_data();
     reset_background_settings();
-    set_hud_element_nonworld_cache(0, 0);
-    clear_hud_element_cache();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);
@@ -79,8 +79,8 @@ void state_step_startup(void) {
         audio_set_mono();
     }
 
-    gOverrideFlags &= ~0x8;
-    set_game_mode(1);
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+    set_game_mode(GAME_MODE_LOGOS);
 }
 
 void state_drawUI_startup(void) {
