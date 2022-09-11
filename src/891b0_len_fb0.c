@@ -8,15 +8,23 @@ void func_800F0864(void);
 void func_800F09EC(void);
 void func_800F0B3C(void);
 
-extern s32 D_80109480;
+s32 D_80109480 = 0;
+f32 D_80109484 = 0.0f;
+s16 D_80109488[] = {4, 0};
+s32 D_8010948C = 0;
+s16 D_80109490 = 4;
+s16 D_80109492 = 5;
+s32 D_80109494 = 0;
+s32 D_80109498 = 0;
+s16 D_8010949C[] = {4, 0};
+s32 D_801094A0 = 0;
+s16 D_801094A4[] = {4, 0};
+s32 D_801094A8 = 0;
+s16 D_801094AC = 4;
+s16 D_801094AE = 4;
+
 extern s32 D_8010CFF0;
 extern s32 D_8010CFF4;
-extern f32 D_8010948C;
-extern s16 D_80109490;
-extern s16 D_80109492;
-extern s32 D_80109494;
-extern s16 D_801094A4;
-extern s32 D_801094A8;
 
 void func_800EFD00(void) {
 }

@@ -760,7 +760,18 @@ segments:
       - [0x9DA58]
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
       - [0x9DE60]
-    - [0xA2930, data]
+    - [0xA2930, .data, 891b0_len_fb0]
+    - [0xA2960, .data, 8a160_len_700]
+    - start: 0xA2960
+      type: .data
+      name: 8a160_len_700
+      subsegments:
+      - [0xA2960, ia8, A2960, 32, 16]
+      - [0xA2B60] # Vp
+      - [0xA2B70, vtx, A2B70]
+      - [0xA2BC0, gfx, A2BC0]
+      - [0xA2C88, gfx, A2C88]
+      - [0xA2CB0]
     - [0xA2D40, .data, 8a860_len_3f30]
     - start: 0xA2D90
       type: .data
