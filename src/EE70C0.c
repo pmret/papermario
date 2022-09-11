@@ -16,7 +16,17 @@ extern const s32 D_802453E0_EEB990[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 
-INCLUDE_ASM(s32, "EE70C0", func_802422B4_EE8864);
+// INCLUDE_ASM(s32, "EE70C0", func_802422B4_EE8864);
+
+extern s32 D_8024462C_EEABDC;
+extern s32 D_80244630_EEABE0;
+
+s32 func_802422B4_EE8864(Evt *arg0) {
+    D_80244630_EEABE0 = dead_evt_get_variable(arg0, *arg0->ptrReadPos);
+    D_8024462C_EEABDC = 1;
+    return 2;
+}
+
 
 ApiStatus func_802422EC_EE889C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
