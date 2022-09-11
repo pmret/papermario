@@ -1,5 +1,11 @@
 # splat Release Notes
 
+### 0.9.4
+* A new linker script section is now automatically created when the .bss section begins, using NOLOAD as opposed to the previous hacky rom rewinding we were previously doing. Additionally, `ld_section_labels` now includes `.rodata` by default.
+
+### 0.9.3
+* Added `add_set_gp_64` option (true by default), which allows controlling whether to add ".set gp=64" to asm/hasm files
+
 ### 0.9.2
 * Added "palette" argument to ci4/ci8 segments so that segments' palettes can be manually specified
 

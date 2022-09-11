@@ -135,6 +135,7 @@ class LinkerWriter:
 
             for i, section in enumerate(section_labels):
                 if not section.started and section.name == cur_section:
+                    section.started = True
                     if i > 0:
                         if not section_labels[i - 1].ended:
                             section_labels[i - 1].ended = True
@@ -142,7 +143,9 @@ class LinkerWriter:
                                 f"{seg_name}{section_labels[i - 1].name.upper()}_END",
                                 ".",
                             )
-                    section.started = True
+                    if section.name == ".bss":
+                        self._end_block()
+                        self._begin_bss_segment(entry.segment)
                     self._write_symbol(f"{seg_name}{section.name.upper()}_START", ".")
 
             if options.enable_ld_alignment_hack():
@@ -268,6 +271,16 @@ class LinkerWriter:
 
         self._writeln(
             f".{name} {vram_str}: AT({name}_ROM_START) SUBALIGN({segment.subalign})"
+        )
+        self._begin_block()
+
+    def _begin_bss_segment(self, segment: Segment):
+        name = get_segment_cname(segment) + "_bss"
+
+        self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
+
+        self._writeln(
+            f".{name} (NOLOAD) : SUBALIGN({segment.subalign})"
         )
         self._begin_block()
 
