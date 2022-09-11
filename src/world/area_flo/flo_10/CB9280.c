@@ -18,7 +18,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { .get = N(func_80240000_CB9200) },
+    .tattle = { .get = N(get_tattle) },
 };
 
 EvtScript N(802414E0) = {
@@ -441,9 +441,9 @@ EvtScript N(802427EC) = {
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(802415C4))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MESSAGE_ID_110082)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MSG_CH6_0082)
     EVT_CALL(NpcFacePlayer, 0, 1)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID_110083)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MSG_CH6_0083)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_lily_Palette_00_Anim_6)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_lily_Palette_00_Anim_1)
@@ -451,7 +451,7 @@ EvtScript N(802427EC) = {
     EVT_SET(LVar1, 1)
     EVT_EXEC_WAIT(N(80241CB4))
     EVT_CALL(AddKeyItem, ITEM_MIRACLE_WATER)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID_110084)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MSG_CH6_0084)
     EVT_CALL(EndSpeech, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_lily_Palette_00_Anim_1)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
@@ -609,7 +609,7 @@ EvtScript N(8024324C) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID_1100C6)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MSG_CH6_00C6)
     EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_12"), 1)
     EVT_WAIT(100)
@@ -639,7 +639,7 @@ EvtScript N(8024339C) = {
                 EVT_CALL(CloseChoicePopup)
                 EVT_CALL(SetTimeFreezeMode, 0)
                 EVT_WAIT(10)
-                EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID_110081)
+                EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MSG_CH6_0081)
             EVT_CASE_DEFAULT
                 EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
                 EVT_CALL(PlayerMoveTo, -17, -17, 20)
@@ -714,7 +714,7 @@ EvtScript N(interact_802437C8) = {
             EVT_CALL(PanToTarget, 0, 0, 1)
             EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID_110078)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MSG_CH6_0078)
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_9, NPC_ANIM_lily_Palette_00_Anim_5, 5)
         EVT_CASE_LT(48)
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)
@@ -728,46 +728,46 @@ EvtScript N(interact_802437C8) = {
                 EVT_CALL(PanToTarget, 0, 0, 1)
                 EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
                 EVT_WAIT(10)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID_110079)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MSG_CH6_0079)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 1)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
                 EVT_CALL(ShowEmote, -1, EMOTE_EXCLAMATION, 0, 15, 1, 0, 0, 0, 0)
                 EVT_WAIT(15)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID_11007A)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1, NPC_ANIM_lily_Palette_00_Anim_1, 0, MSG_CH6_007A)
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_5, NPC_ANIM_lily_Palette_00_Anim_1, 0)
                 EVT_CALL(GetPlayerTargetYaw, LVar0)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 1)
                 EVT_WAIT(20)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MESSAGE_ID_11007B)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MSG_CH6_007B)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 1)
                 EVT_WAIT(20)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID_11007C)
-                EVT_CALL(ShowChoice, MESSAGE_ID_1E0011)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MSG_CH6_007C)
+                EVT_CALL(ShowChoice, MSG_Choice_0011)
                 EVT_WAIT(10)
                 EVT_SWITCH(LVar0)
                     EVT_CASE_EQ(0)
-                        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID_11007D)
+                        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MSG_CH6_007D)
                     EVT_CASE_EQ(1)
-                        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID_11007E)
+                        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MSG_CH6_007E)
                 EVT_END_SWITCH
                 EVT_WAIT(10)
                 EVT_SET(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_CALL(SetEnemyFlagBits, -1, 4194304, 0)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID_11007F)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MSG_CH6_007F)
             EVT_END_IF
         EVT_CASE_LT(49)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID_110080)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MSG_CH6_0080)
             EVT_SET(GF_FLO10_ShowedLilyTheWaterStone, 1)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID_110085)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MSG_CH6_0085)
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0)
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0)
         EVT_CASE_LT(60)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID_110086)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MSG_CH6_0086)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID_110087)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MSG_CH6_0087)
     EVT_END_SWITCH
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
     EVT_EXEC_WAIT(N(802415E8))
@@ -823,7 +823,7 @@ StaticNpc N(npcGroup_80243E64) = {
         NPC_ANIM_lily_Palette_00_Anim_1,
         NPC_ANIM_lily_Palette_00_Anim_1,
     },
-    .tattle = MESSAGE_ID_1A00DF,
+    .tattle = MSG_NpcTattle_Lily,
 };
 
 NpcGroupList N(npcGroupList_80244054) = {

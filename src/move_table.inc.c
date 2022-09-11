@@ -30,9 +30,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 3: Hammer1
-    .nameMsg = MESSAGE_ID_1D0038,
+    .nameMsg = MSG_Menus_0038,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_2300A3,
+    .shortDescMsg = MSG_ItemShortDesc_Hammer,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -40,9 +40,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 4: Hammer2
-    .nameMsg = MESSAGE_ID_1D0038,
-    .fullDescMsg = MESSAGE_ID_2300A4,
-    .shortDescMsg = MESSAGE_ID_2300A4,
+    .nameMsg = MSG_Menus_0038,
+    .fullDescMsg = MSG_ItemShortDesc_SuperHammer,
+    .shortDescMsg = MSG_ItemShortDesc_SuperHammer,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -50,9 +50,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 5: Hammer3
-    .nameMsg = MESSAGE_ID_1D0038,
-    .fullDescMsg = MESSAGE_ID_2300A5,
-    .shortDescMsg = MESSAGE_ID_2300A5,
+    .nameMsg = MSG_Menus_0038,
+    .fullDescMsg = MSG_ItemShortDesc_UltraHammer,
+    .shortDescMsg = MSG_ItemShortDesc_UltraHammer,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -60,7 +60,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 6: Unused_Hammer4
-    .nameMsg = MESSAGE_ID_1D0038,
+    .nameMsg = MSG_Menus_0038,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -80,9 +80,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8: SpinSmash
-    .nameMsg = MESSAGE_ID_2A0010,
-    .fullDescMsg = MESSAGE_ID_250068,
-    .shortDescMsg = MESSAGE_ID_230068,
+    .nameMsg = MSG_PlayerMoveName_SpinSmash,
+    .fullDescMsg = MSG_ItemFullDesc_SpinSmash,
+    .shortDescMsg = MSG_ItemShortDesc_SpinSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -90,9 +90,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 9: QuakeHammer
-    .nameMsg = MESSAGE_ID_2A0012,
-    .fullDescMsg = MESSAGE_ID_25006A,
-    .shortDescMsg = MESSAGE_ID_23006A,
+    .nameMsg = MSG_PlayerMoveName_QuakeHammer,
+    .fullDescMsg = MSG_ItemFullDesc_QuakeHammer,
+    .shortDescMsg = MSG_ItemShortDesc_QuakeHammer,
     .flags = MOVE_DATA_FLAG_20 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -100,9 +100,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move A: DDownPound
-    .nameMsg = MESSAGE_ID_2A0011,
-    .fullDescMsg = MESSAGE_ID_250069,
-    .shortDescMsg = MESSAGE_ID_230069,
+    .nameMsg = MSG_PlayerMoveName_DDownPound,
+    .fullDescMsg = MSG_ItemFullDesc_DDownPound,
+    .shortDescMsg = MSG_ItemShortDesc_DDownPound,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -120,7 +120,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move C: Unused_Hammer_0C
-    .nameMsg = MESSAGE_ID_1D0038,
+    .nameMsg = MSG_Menus_0038,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -130,9 +130,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move D: HammerThrow
-    .nameMsg = MESSAGE_ID_2A000E,
-    .fullDescMsg = MESSAGE_ID_250066,
-    .shortDescMsg = MESSAGE_ID_230066,
+    .nameMsg = MSG_PlayerMoveName_HammerThrow,
+    .fullDescMsg = MSG_ItemFullDesc_HammerThrow,
+    .shortDescMsg = MSG_ItemShortDesc_HammerThrow,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -140,9 +140,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move E: MegaQuake
-    .nameMsg = MESSAGE_ID_2A0014,
-    .fullDescMsg = MESSAGE_ID_25006C,
-    .shortDescMsg = MESSAGE_ID_23006C,
+    .nameMsg = MSG_PlayerMoveName_MegaQuake,
+    .fullDescMsg = MSG_ItemFullDesc_MegaQuake,
+    .shortDescMsg = MSG_ItemShortDesc_MegaQuake,
     .flags = MOVE_DATA_FLAG_20 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -150,9 +150,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move F: SmashCharge
-    .nameMsg = MESSAGE_ID_2A000C,
-    .fullDescMsg = MESSAGE_ID_250064,
-    .shortDescMsg = MESSAGE_ID_230064,
+    .nameMsg = MSG_PlayerMoveName_SmashCharge,
+    .fullDescMsg = MSG_ItemFullDesc_SmashCharge,
+    .shortDescMsg = MSG_ItemShortDesc_SmashCharge,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -160,9 +160,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 10: Unused_Hammer_10
-    .nameMsg = MESSAGE_ID_1D0038,
-    .fullDescMsg = MESSAGE_ID_250064,
-    .shortDescMsg = MESSAGE_ID_230064,
+    .nameMsg = MSG_Menus_0038,
+    .fullDescMsg = MSG_ItemFullDesc_SmashCharge,
+    .shortDescMsg = MSG_ItemShortDesc_SmashCharge,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -170,9 +170,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 11: SuperSmashCharge
-    .nameMsg = MESSAGE_ID_2A000D,
-    .fullDescMsg = MESSAGE_ID_250065,
-    .shortDescMsg = MESSAGE_ID_230065,
+    .nameMsg = MSG_PlayerMoveName_SuperSmashCharge,
+    .fullDescMsg = MSG_ItemFullDesc_SSmashChg,
+    .shortDescMsg = MSG_ItemShortDesc_SSmashChg,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -180,9 +180,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 12: Unused_Hammer_12
-    .nameMsg = MESSAGE_ID_1D0038,
-    .fullDescMsg = MESSAGE_ID_250065,
-    .shortDescMsg = MESSAGE_ID_230065,
+    .nameMsg = MSG_Menus_0038,
+    .fullDescMsg = MSG_ItemFullDesc_SSmashChg,
+    .shortDescMsg = MSG_ItemShortDesc_SSmashChg,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -200,9 +200,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 14: PowerQuake
-    .nameMsg = MESSAGE_ID_2A0013,
-    .fullDescMsg = MESSAGE_ID_25006B,
-    .shortDescMsg = MESSAGE_ID_23006B,
+    .nameMsg = MSG_PlayerMoveName_PowerQuake,
+    .fullDescMsg = MSG_ItemFullDesc_PowerQuake,
+    .shortDescMsg = MSG_ItemShortDesc_PowerQuake,
     .flags = MOVE_DATA_FLAG_20 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -210,9 +210,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 15: PowerSmash
-    .nameMsg = MESSAGE_ID_2A000A,
-    .fullDescMsg = MESSAGE_ID_250062,
-    .shortDescMsg = MESSAGE_ID_230062,
+    .nameMsg = MSG_PlayerMoveName_PowerSmash,
+    .fullDescMsg = MSG_ItemFullDesc_PowerSmash,
+    .shortDescMsg = MSG_ItemShortDesc_PowerSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -230,9 +230,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 17: MegaSmash
-    .nameMsg = MESSAGE_ID_2A000B,
-    .fullDescMsg = MESSAGE_ID_250063,
-    .shortDescMsg = MESSAGE_ID_230063,
+    .nameMsg = MSG_PlayerMoveName_MegaSmash,
+    .fullDescMsg = MSG_ItemFullDesc_MegaSmash,
+    .shortDescMsg = MSG_ItemShortDesc_MegaSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -240,9 +240,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 18: ShrinkSmash
-    .nameMsg = MESSAGE_ID_2A000F,
-    .fullDescMsg = MESSAGE_ID_250067,
-    .shortDescMsg = MESSAGE_ID_230067,
+    .nameMsg = MSG_PlayerMoveName_ShrinkSmash,
+    .fullDescMsg = MSG_ItemFullDesc_ShrinkSmash,
+    .shortDescMsg = MSG_ItemShortDesc_ShrinkSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -260,9 +260,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 1A: Jump1
-    .nameMsg = MESSAGE_ID_1D0039,
-    .fullDescMsg = MESSAGE_ID_2300A0,
-    .shortDescMsg = MESSAGE_ID_2300A0,
+    .nameMsg = MSG_Menus_0039,
+    .fullDescMsg = MSG_ItemShortDesc_Jump,
+    .shortDescMsg = MSG_ItemShortDesc_Jump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -270,9 +270,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 1B: Jump2
-    .nameMsg = MESSAGE_ID_1D0039,
-    .fullDescMsg = MESSAGE_ID_2300A1,
-    .shortDescMsg = MESSAGE_ID_2300A1,
+    .nameMsg = MSG_Menus_0039,
+    .fullDescMsg = MSG_ItemShortDesc_SpinJump,
+    .shortDescMsg = MSG_ItemShortDesc_SpinJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -280,9 +280,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 1C: Jump3
-    .nameMsg = MESSAGE_ID_1D0039,
-    .fullDescMsg = MESSAGE_ID_2300A2,
-    .shortDescMsg = MESSAGE_ID_2300A2,
+    .nameMsg = MSG_Menus_0039,
+    .fullDescMsg = MSG_ItemShortDesc_TornadoJump,
+    .shortDescMsg = MSG_ItemShortDesc_TornadoJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -290,7 +290,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 1D: Unused_Jump4
-    .nameMsg = MESSAGE_ID_1D0039,
+    .nameMsg = MSG_Menus_0039,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -300,7 +300,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 1E: Unused_Jump5
-    .nameMsg = MESSAGE_ID_1D0039,
+    .nameMsg = MSG_Menus_0039,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -310,9 +310,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 1F: Multibounce
-    .nameMsg = MESSAGE_ID_2A0006,
-    .fullDescMsg = MESSAGE_ID_25005E,
-    .shortDescMsg = MESSAGE_ID_23005E,
+    .nameMsg = MSG_PlayerMoveName_Multibounce,
+    .fullDescMsg = MSG_ItemFullDesc_Multibounce,
+    .shortDescMsg = MSG_ItemShortDesc_Multibounce,
     .flags = MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_8000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -320,9 +320,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 20: PowerBounce
-    .nameMsg = MESSAGE_ID_2A0009,
-    .fullDescMsg = MESSAGE_ID_250061,
-    .shortDescMsg = MESSAGE_ID_230061,
+    .nameMsg = MSG_PlayerMoveName_PowerBounce,
+    .fullDescMsg = MSG_ItemFullDesc_PowerBounce,
+    .shortDescMsg = MSG_ItemShortDesc_PowerBounce,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -330,9 +330,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 21: SleepStomp
-    .nameMsg = MESSAGE_ID_2A0004,
-    .fullDescMsg = MESSAGE_ID_25005C,
-    .shortDescMsg = MESSAGE_ID_23005C,
+    .nameMsg = MSG_PlayerMoveName_SleepStomp,
+    .fullDescMsg = MSG_ItemFullDesc_SleepStomp,
+    .shortDescMsg = MSG_ItemShortDesc_SleepStomp,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -340,9 +340,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 22: DizzyStomp
-    .nameMsg = MESSAGE_ID_2A0005,
-    .fullDescMsg = MESSAGE_ID_25005D,
-    .shortDescMsg = MESSAGE_ID_23005D,
+    .nameMsg = MSG_PlayerMoveName_DizzyStomp,
+    .fullDescMsg = MSG_ItemFullDesc_DizzyStomp,
+    .shortDescMsg = MSG_ItemShortDesc_DizzyStomp,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -360,7 +360,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 24: Unused_24
-    .nameMsg = MESSAGE_ID_1D0039,
+    .nameMsg = MSG_Menus_0039,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -370,9 +370,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 25: JumpCharge
-    .nameMsg = MESSAGE_ID_2A0002,
-    .fullDescMsg = MESSAGE_ID_25005A,
-    .shortDescMsg = MESSAGE_ID_23005A,
+    .nameMsg = MSG_PlayerMoveName_JumpCharge,
+    .fullDescMsg = MSG_ItemFullDesc_JumpCharge,
+    .shortDescMsg = MSG_ItemShortDesc_JumpCharge,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER | MOVE_DATA_FLAG_800,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -380,9 +380,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 26: Unused_26
-    .nameMsg = MESSAGE_ID_1D0039,
-    .fullDescMsg = MESSAGE_ID_25005A,
-    .shortDescMsg = MESSAGE_ID_23005A,
+    .nameMsg = MSG_Menus_0039,
+    .fullDescMsg = MSG_ItemFullDesc_JumpCharge,
+    .shortDescMsg = MSG_ItemShortDesc_JumpCharge,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -390,9 +390,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 27: SuperJumpCharge
-    .nameMsg = MESSAGE_ID_2A0003,
-    .fullDescMsg = MESSAGE_ID_25005B,
-    .shortDescMsg = MESSAGE_ID_23005B,
+    .nameMsg = MSG_PlayerMoveName_SuperJumpCharge,
+    .fullDescMsg = MSG_ItemFullDesc_SJumpChg,
+    .shortDescMsg = MSG_ItemShortDesc_SJumpChg,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER | MOVE_DATA_FLAG_800,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -400,9 +400,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 28: Unused_28
-    .nameMsg = MESSAGE_ID_1D0039,
-    .fullDescMsg = MESSAGE_ID_25005B,
-    .shortDescMsg = MESSAGE_ID_23005B,
+    .nameMsg = MSG_Menus_0039,
+    .fullDescMsg = MSG_ItemFullDesc_SJumpChg,
+    .shortDescMsg = MSG_ItemShortDesc_SJumpChg,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -430,9 +430,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 2B: PowerJump
-    .nameMsg = MESSAGE_ID_2A0000,
-    .fullDescMsg = MESSAGE_ID_250058,
-    .shortDescMsg = MESSAGE_ID_230058,
+    .nameMsg = MSG_PlayerMoveName_PowerJump,
+    .fullDescMsg = MSG_ItemFullDesc_PowerJump,
+    .shortDescMsg = MSG_ItemShortDesc_PowerJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -450,9 +450,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 2D: MegaJump
-    .nameMsg = MESSAGE_ID_2A0001,
-    .fullDescMsg = MESSAGE_ID_250059,
-    .shortDescMsg = MESSAGE_ID_230059,
+    .nameMsg = MSG_PlayerMoveName_MegaJump,
+    .fullDescMsg = MSG_ItemFullDesc_MegaJump,
+    .shortDescMsg = MSG_ItemShortDesc_MegaJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -460,9 +460,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 2E: DDownJump
-    .nameMsg = MESSAGE_ID_2A0008,
-    .fullDescMsg = MESSAGE_ID_250060,
-    .shortDescMsg = MESSAGE_ID_230060,
+    .nameMsg = MSG_PlayerMoveName_DDownJump,
+    .fullDescMsg = MSG_ItemFullDesc_DDownJump,
+    .shortDescMsg = MSG_ItemShortDesc_DDownJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -470,9 +470,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 2F: ShrinkStomp
-    .nameMsg = MESSAGE_ID_2A0007,
-    .fullDescMsg = MESSAGE_ID_25005F,
-    .shortDescMsg = MESSAGE_ID_23005F,
+    .nameMsg = MSG_PlayerMoveName_ShrinkStomp,
+    .fullDescMsg = MSG_ItemFullDesc_ShrinkStomp,
+    .shortDescMsg = MSG_ItemShortDesc_ShrinkStomp,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -491,8 +491,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 31: Unused_DefendPlus
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250074,
-    .shortDescMsg = MESSAGE_ID_230074,
+    .fullDescMsg = MSG_ItemFullDesc_DefendPlus,
+    .shortDescMsg = MSG_ItemShortDesc_DefendPlus,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_3,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -510,9 +510,9 @@ MoveData gMoveTable[] = {
     .costBP = 8
 },
 {   // move 33: DamageDodge
-    .nameMsg = MESSAGE_ID_260075,
-    .fullDescMsg = MESSAGE_ID_250075,
-    .shortDescMsg = MESSAGE_ID_230075,
+    .nameMsg = MSG_ItemName_DamageDodge,
+    .fullDescMsg = MSG_ItemFullDesc_DamageDodge,
+    .shortDescMsg = MSG_ItemShortDesc_DamageDodge,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_3,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -520,9 +520,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 34: Items
-    .nameMsg = MESSAGE_ID_1D003F,
+    .nameMsg = MSG_Menus_003F,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D00A4,
+    .shortDescMsg = MSG_Menus_Action_UseItem,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_ITEMS,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -530,9 +530,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 35: DoubleDip
-    .nameMsg = MESSAGE_ID_2A0015,
-    .fullDescMsg = MESSAGE_ID_25006D,
-    .shortDescMsg = MESSAGE_ID_23006D,
+    .nameMsg = MSG_PlayerMoveName_DoubleDip,
+    .fullDescMsg = MSG_ItemFullDesc_DoubleDip,
+    .shortDescMsg = MSG_ItemShortDesc_DoubleDip,
     .flags = 0,
     .category = MOVE_TYPE_ITEMS,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -540,9 +540,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 36: TripleDip
-    .nameMsg = MESSAGE_ID_2A0016,
-    .fullDescMsg = MESSAGE_ID_25006E,
-    .shortDescMsg = MESSAGE_ID_23006E,
+    .nameMsg = MSG_PlayerMoveName_TripleDip,
+    .fullDescMsg = MSG_ItemFullDesc_TripleDip,
+    .shortDescMsg = MSG_ItemShortDesc_TripleDip,
     .flags = 0,
     .category = MOVE_TYPE_ITEMS,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -560,9 +560,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 38: QuickChange
-    .nameMsg = MESSAGE_ID_2A0018,
-    .fullDescMsg = MESSAGE_ID_250070,
-    .shortDescMsg = MESSAGE_ID_230070,
+    .nameMsg = MSG_PlayerMoveName_QuickChange,
+    .fullDescMsg = MSG_ItemFullDesc_QuickChange,
+    .shortDescMsg = MSG_ItemShortDesc_QuickChange,
     .flags = 0,
     .category = MOVE_TYPE_TACTICS,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -590,9 +590,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 3B: PowerPlus
-    .nameMsg = MESSAGE_ID_260073,
-    .fullDescMsg = MESSAGE_ID_250073,
-    .shortDescMsg = MESSAGE_ID_230073,
+    .nameMsg = MSG_ItemName_PowerPlus,
+    .fullDescMsg = MSG_ItemFullDesc_PowerPlus,
+    .shortDescMsg = MSG_ItemShortDesc_PowerPlus,
     .flags = 0,
     .category = MOVE_TYPE_ATTACK_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -600,9 +600,9 @@ MoveData gMoveTable[] = {
     .costBP = 6
 },
 {   // move 3C: AllorNothing
-    .nameMsg = MESSAGE_ID_260093,
-    .fullDescMsg = MESSAGE_ID_250093,
-    .shortDescMsg = MESSAGE_ID_230093,
+    .nameMsg = MSG_ItemName_AllorNothing,
+    .fullDescMsg = MSG_ItemFullDesc_AllorNothing,
+    .shortDescMsg = MSG_ItemShortDesc_AllorNothing,
     .flags = 0,
     .category = MOVE_TYPE_ATTACK_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -610,9 +610,9 @@ MoveData gMoveTable[] = {
     .costBP = 4
 },
 {   // move 3D: IcePower
-    .nameMsg = MESSAGE_ID_260095,
-    .fullDescMsg = MESSAGE_ID_250095,
-    .shortDescMsg = MESSAGE_ID_230095,
+    .nameMsg = MSG_ItemName_IcePower,
+    .fullDescMsg = MSG_ItemFullDesc_IcePower,
+    .shortDescMsg = MSG_ItemShortDesc_IcePower,
     .flags = 0,
     .category = MOVE_TYPE_ATTACK_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -620,9 +620,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 3E: PUpDDown
-    .nameMsg = MESSAGE_ID_2A0019,
-    .fullDescMsg = MESSAGE_ID_250076,
-    .shortDescMsg = MESSAGE_ID_230076,
+    .nameMsg = MSG_PlayerMoveName_PUpDDown,
+    .fullDescMsg = MSG_ItemFullDesc_PUpDDown,
+    .shortDescMsg = MSG_ItemShortDesc_PUpDDown,
     .flags = 0,
     .category = MOVE_TYPE_ATTACK_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -640,9 +640,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 40: SpikeShield
-    .nameMsg = MESSAGE_ID_26007F,
-    .fullDescMsg = MESSAGE_ID_25007F,
-    .shortDescMsg = MESSAGE_ID_23007F,
+    .nameMsg = MSG_ItemName_SpikeShield,
+    .fullDescMsg = MSG_ItemFullDesc_SpikeShield,
+    .shortDescMsg = MSG_ItemShortDesc_SpikeShield,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -650,9 +650,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 41: FireShield
-    .nameMsg = MESSAGE_ID_260097,
-    .fullDescMsg = MESSAGE_ID_250097,
-    .shortDescMsg = MESSAGE_ID_230097,
+    .nameMsg = MSG_ItemName_FireShield,
+    .fullDescMsg = MSG_ItemFullDesc_FireShield,
+    .shortDescMsg = MSG_ItemShortDesc_FireShield,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -660,9 +660,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 42: PrettyLucky
-    .nameMsg = MESSAGE_ID_260081,
-    .fullDescMsg = MESSAGE_ID_250081,
-    .shortDescMsg = MESSAGE_ID_230081,
+    .nameMsg = MSG_ItemName_PrettyLucky,
+    .fullDescMsg = MSG_ItemFullDesc_PrettyLucky,
+    .shortDescMsg = MSG_ItemShortDesc_PrettyLucky,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -670,9 +670,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 43: FeelingFine
-    .nameMsg = MESSAGE_ID_26008C,
-    .fullDescMsg = MESSAGE_ID_25008C,
-    .shortDescMsg = MESSAGE_ID_23008C,
+    .nameMsg = MSG_ItemName_FeelingFine,
+    .fullDescMsg = MSG_ItemFullDesc_FeelingFine,
+    .shortDescMsg = MSG_ItemShortDesc_FeelingFine,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -680,9 +680,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 44: ZapTap
-    .nameMsg = MESSAGE_ID_260099,
-    .fullDescMsg = MESSAGE_ID_250099,
-    .shortDescMsg = MESSAGE_ID_230099,
+    .nameMsg = MSG_ItemName_ZapTap,
+    .fullDescMsg = MSG_ItemFullDesc_ZapTap,
+    .shortDescMsg = MSG_ItemShortDesc_ZapTap,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -690,9 +690,9 @@ MoveData gMoveTable[] = {
     .costBP = 4
 },
 {   // move 45: DefendPlus
-    .nameMsg = MESSAGE_ID_260074,
-    .fullDescMsg = MESSAGE_ID_250074,
-    .shortDescMsg = MESSAGE_ID_230074,
+    .nameMsg = MSG_ItemName_DefendPlus,
+    .fullDescMsg = MSG_ItemFullDesc_DefendPlus,
+    .shortDescMsg = MSG_ItemShortDesc_DefendPlus,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -701,8 +701,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 46: LastStand
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250085,
-    .shortDescMsg = MESSAGE_ID_230085,
+    .fullDescMsg = MSG_ItemFullDesc_LastStand,
+    .shortDescMsg = MSG_ItemShortDesc_LastStand,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -711,8 +711,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 47: CloseCall
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250083,
-    .shortDescMsg = MESSAGE_ID_230083,
+    .fullDescMsg = MSG_ItemFullDesc_CloseCall,
+    .shortDescMsg = MSG_ItemShortDesc_CloseCall,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -721,8 +721,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 48: LuckyDay
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250082,
-    .shortDescMsg = MESSAGE_ID_230082,
+    .fullDescMsg = MSG_ItemFullDesc_LuckyDay,
+    .shortDescMsg = MSG_ItemShortDesc_LuckyDay,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -730,9 +730,9 @@ MoveData gMoveTable[] = {
     .costBP = 7
 },
 {   // move 49: PDownDUp
-    .nameMsg = MESSAGE_ID_2A001A,
-    .fullDescMsg = MESSAGE_ID_250077,
-    .shortDescMsg = MESSAGE_ID_230077,
+    .nameMsg = MSG_PlayerMoveName_PDownDUp,
+    .fullDescMsg = MSG_ItemFullDesc_PDownDUp,
+    .shortDescMsg = MSG_ItemShortDesc_PDownDUp,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -760,9 +760,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 4C: DodgeMaster
-    .nameMsg = MESSAGE_ID_260080,
-    .fullDescMsg = MESSAGE_ID_250080,
-    .shortDescMsg = MESSAGE_ID_230080,
+    .nameMsg = MSG_ItemName_DodgeMaster,
+    .fullDescMsg = MSG_ItemFullDesc_DodgeMaster,
+    .shortDescMsg = MSG_ItemShortDesc_DodgeMaster,
     .flags = 0,
     .category = MOVE_TYPE_9,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -770,9 +770,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 4D: FirstAttack
-    .nameMsg = MESSAGE_ID_260087,
-    .fullDescMsg = MESSAGE_ID_250087,
-    .shortDescMsg = MESSAGE_ID_230087,
+    .nameMsg = MSG_ItemName_FirstAttack,
+    .fullDescMsg = MSG_ItemFullDesc_FirstAttack,
+    .shortDescMsg = MSG_ItemShortDesc_FirstAttack,
     .flags = 0,
     .category = MOVE_TYPE_9,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -780,9 +780,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 4E: SlowGo
-    .nameMsg = MESSAGE_ID_260094,
-    .fullDescMsg = MESSAGE_ID_250094,
-    .shortDescMsg = MESSAGE_ID_230094,
+    .nameMsg = MSG_ItemName_SlowGo,
+    .fullDescMsg = MSG_ItemFullDesc_SlowGo,
+    .shortDescMsg = MSG_ItemShortDesc_SlowGo,
     .flags = 0,
     .category = MOVE_TYPE_9,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -790,9 +790,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 4F: RightOn
-    .nameMsg = MESSAGE_ID_26009B,
-    .fullDescMsg = MESSAGE_ID_25009B,
-    .shortDescMsg = MESSAGE_ID_23009B,
+    .nameMsg = MSG_ItemName_RightOn,
+    .fullDescMsg = MSG_ItemFullDesc_RightOn,
+    .shortDescMsg = MSG_ItemShortDesc_RightOn,
     .flags = 0,
     .category = MOVE_TYPE_9,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -801,8 +801,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 50: BumpAttack
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250088,
-    .shortDescMsg = MESSAGE_ID_230088,
+    .fullDescMsg = MSG_ItemFullDesc_BumpAttack,
+    .shortDescMsg = MSG_ItemShortDesc_BumpAttack,
     .flags = 0,
     .category = MOVE_TYPE_9,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -820,9 +820,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 52: HPPlus
-    .nameMsg = MESSAGE_ID_260071,
-    .fullDescMsg = MESSAGE_ID_250071,
-    .shortDescMsg = MESSAGE_ID_230071,
+    .nameMsg = MSG_ItemName_HPPlus,
+    .fullDescMsg = MSG_ItemFullDesc_HPPlus,
+    .shortDescMsg = MSG_ItemShortDesc_HPPlus,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -840,9 +840,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 54: AttackFXA
-    .nameMsg = MESSAGE_ID_26008D,
-    .fullDescMsg = MESSAGE_ID_25008D,
-    .shortDescMsg = MESSAGE_ID_23008D,
+    .nameMsg = MSG_ItemName_AttackFXA,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXA,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXA,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -850,9 +850,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 55: AttackFXD
-    .nameMsg = MESSAGE_ID_26008E,
-    .fullDescMsg = MESSAGE_ID_25008E,
-    .shortDescMsg = MESSAGE_ID_23008E,
+    .nameMsg = MSG_ItemName_AttackFXD,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXD,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXD,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -860,9 +860,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 56: AttackFXB
-    .nameMsg = MESSAGE_ID_26008F,
-    .fullDescMsg = MESSAGE_ID_25008F,
-    .shortDescMsg = MESSAGE_ID_23008F,
+    .nameMsg = MSG_ItemName_AttackFXB,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXB,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXB,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -870,9 +870,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 57: AttackFXE
-    .nameMsg = MESSAGE_ID_260090,
-    .fullDescMsg = MESSAGE_ID_250090,
-    .shortDescMsg = MESSAGE_ID_230090,
+    .nameMsg = MSG_ItemName_AttackFXE,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXE,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXE,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -880,9 +880,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 58: AttackFXC
-    .nameMsg = MESSAGE_ID_260091,
-    .fullDescMsg = MESSAGE_ID_250091,
-    .shortDescMsg = MESSAGE_ID_230091,
+    .nameMsg = MSG_ItemName_AttackFXC,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXC,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXC,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -890,9 +890,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 59: AttackFXF
-    .nameMsg = MESSAGE_ID_260092,
-    .fullDescMsg = MESSAGE_ID_250092,
-    .shortDescMsg = MESSAGE_ID_230092,
+    .nameMsg = MSG_ItemName_AttackFXF,
+    .fullDescMsg = MSG_ItemFullDesc_AttackFXF,
+    .shortDescMsg = MSG_ItemShortDesc_AttackFXF,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -900,9 +900,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 5A: HPDrain
-    .nameMsg = MESSAGE_ID_260078,
-    .fullDescMsg = MESSAGE_ID_250078,
-    .shortDescMsg = MESSAGE_ID_230078,
+    .nameMsg = MSG_ItemName_HPDrain,
+    .fullDescMsg = MSG_ItemFullDesc_HPDrain,
+    .shortDescMsg = MSG_ItemShortDesc_HPDrain,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -910,9 +910,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 5B: FPPlus
-    .nameMsg = MESSAGE_ID_260072,
-    .fullDescMsg = MESSAGE_ID_250072,
-    .shortDescMsg = MESSAGE_ID_230072,
+    .nameMsg = MSG_ItemName_FPPlus,
+    .fullDescMsg = MSG_ItemFullDesc_FPPlus,
+    .shortDescMsg = MSG_ItemShortDesc_FPPlus,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -920,9 +920,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 5C: MoneyMoney
-    .nameMsg = MESSAGE_ID_26009A,
-    .fullDescMsg = MESSAGE_ID_25009A,
-    .shortDescMsg = MESSAGE_ID_23009A,
+    .nameMsg = MSG_ItemName_MoneyMoney,
+    .fullDescMsg = MSG_ItemFullDesc_MoneyMoney,
+    .shortDescMsg = MSG_ItemShortDesc_MoneyMoney,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -930,9 +930,9 @@ MoveData gMoveTable[] = {
     .costBP = 7
 },
 {   // move 5D: ChillOutBadge
-    .nameMsg = MESSAGE_ID_260098,
-    .fullDescMsg = MESSAGE_ID_250098,
-    .shortDescMsg = MESSAGE_ID_230098,
+    .nameMsg = MSG_ItemName_ChillOut,
+    .fullDescMsg = MSG_ItemFullDesc_ChillOut,
+    .shortDescMsg = MSG_ItemShortDesc_ChillOut,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -940,9 +940,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 5E: HappyHeart
-    .nameMsg = MESSAGE_ID_260079,
-    .fullDescMsg = MESSAGE_ID_250079,
-    .shortDescMsg = MESSAGE_ID_230079,
+    .nameMsg = MSG_ItemName_HappyHeart,
+    .fullDescMsg = MSG_ItemFullDesc_HappyHeart,
+    .shortDescMsg = MSG_ItemShortDesc_HappyHeart,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -950,9 +950,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 5F: MegaRush
-    .nameMsg = MESSAGE_ID_260086,
-    .fullDescMsg = MESSAGE_ID_250086,
-    .shortDescMsg = MESSAGE_ID_230086,
+    .nameMsg = MSG_ItemName_MegaRush,
+    .fullDescMsg = MSG_ItemFullDesc_MegaRush,
+    .shortDescMsg = MSG_ItemShortDesc_MegaRush,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -970,9 +970,9 @@ MoveData gMoveTable[] = {
     .costBP = 8
 },
 {   // move 61: RunawayPay
-    .nameMsg = MESSAGE_ID_26009C,
-    .fullDescMsg = MESSAGE_ID_25009C,
-    .shortDescMsg = MESSAGE_ID_23009C,
+    .nameMsg = MSG_ItemName_RunawayPay,
+    .fullDescMsg = MSG_ItemFullDesc_RunawayPay,
+    .shortDescMsg = MSG_ItemShortDesc_RunawayPay,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -980,9 +980,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 62: FlowerSaver
-    .nameMsg = MESSAGE_ID_26007B,
-    .fullDescMsg = MESSAGE_ID_25007B,
-    .shortDescMsg = MESSAGE_ID_23007B,
+    .nameMsg = MSG_ItemName_FlowerSaver,
+    .fullDescMsg = MSG_ItemFullDesc_FlowerSaver,
+    .shortDescMsg = MSG_ItemShortDesc_FlowerSaver,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -990,9 +990,9 @@ MoveData gMoveTable[] = {
     .costBP = 6
 },
 {   // move 63: PayOff
-    .nameMsg = MESSAGE_ID_260096,
-    .fullDescMsg = MESSAGE_ID_250096,
-    .shortDescMsg = MESSAGE_ID_230096,
+    .nameMsg = MSG_ItemName_PayOff,
+    .fullDescMsg = MSG_ItemFullDesc_PayOff,
+    .shortDescMsg = MSG_ItemShortDesc_PayOff,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1001,8 +1001,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 64: PowerRush
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250084,
-    .shortDescMsg = MESSAGE_ID_230084,
+    .fullDescMsg = MSG_ItemFullDesc_PowerRush,
+    .shortDescMsg = MSG_ItemShortDesc_PowerRush,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1041,8 +1041,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 68: HeartFinder
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_25007C,
-    .shortDescMsg = MESSAGE_ID_23007C,
+    .fullDescMsg = MSG_ItemFullDesc_HeartFinder,
+    .shortDescMsg = MSG_ItemShortDesc_HeartFinder,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1051,8 +1051,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 69: FlowerFinder
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_25007D,
-    .shortDescMsg = MESSAGE_ID_23007D,
+    .fullDescMsg = MSG_ItemFullDesc_FlowerFinder,
+    .shortDescMsg = MSG_ItemShortDesc_FlowerFinder,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1061,8 +1061,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 6A: SpinAttack
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_250089,
-    .shortDescMsg = MESSAGE_ID_230089,
+    .fullDescMsg = MSG_ItemFullDesc_SpinAttack,
+    .shortDescMsg = MSG_ItemShortDesc_SpinAttack,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1071,8 +1071,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 6B: DizzyAttack
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_25008A,
-    .shortDescMsg = MESSAGE_ID_23008A,
+    .fullDescMsg = MSG_ItemFullDesc_DizzyAttack,
+    .shortDescMsg = MSG_ItemShortDesc_DizzyAttack,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1081,8 +1081,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 6C: ISpy
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_25009E,
-    .shortDescMsg = MESSAGE_ID_23009E,
+    .fullDescMsg = MSG_ItemFullDesc_ISpy,
+    .shortDescMsg = MSG_ItemShortDesc_ISpy,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1091,8 +1091,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 6D: SpeedySpin
     .nameMsg = 0,
-    .fullDescMsg = MESSAGE_ID_25008B,
-    .shortDescMsg = MESSAGE_ID_23008B,
+    .fullDescMsg = MSG_ItemFullDesc_SpeedySpin,
+    .shortDescMsg = MSG_ItemShortDesc_SpeedySpin,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1100,9 +1100,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 6E: Refund
-    .nameMsg = MESSAGE_ID_26009D,
-    .fullDescMsg = MESSAGE_ID_25009D,
-    .shortDescMsg = MESSAGE_ID_23009D,
+    .nameMsg = MSG_ItemName_Refund,
+    .fullDescMsg = MSG_ItemFullDesc_Refund,
+    .shortDescMsg = MSG_ItemShortDesc_Refund,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1130,9 +1130,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 71: DeepFocus
-    .nameMsg = MESSAGE_ID_26007E,
-    .fullDescMsg = MESSAGE_ID_25007E,
-    .shortDescMsg = MESSAGE_ID_23007E,
+    .nameMsg = MSG_ItemName_DeepFocus,
+    .fullDescMsg = MSG_ItemFullDesc_DeepFocus,
+    .shortDescMsg = MSG_ItemShortDesc_DeepFocus,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1160,9 +1160,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 74: HappyFlower
-    .nameMsg = MESSAGE_ID_26007A,
-    .fullDescMsg = MESSAGE_ID_25007A,
-    .shortDescMsg = MESSAGE_ID_23007A,
+    .nameMsg = MSG_ItemName_HappyFlower,
+    .fullDescMsg = MSG_ItemFullDesc_HappyFlower,
+    .shortDescMsg = MSG_ItemShortDesc_HappyFlower,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1170,9 +1170,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 75: GroupFocus
-    .nameMsg = MESSAGE_ID_26006F,
-    .fullDescMsg = MESSAGE_ID_25006F,
-    .shortDescMsg = MESSAGE_ID_23006F,
+    .nameMsg = MSG_ItemName_GroupFocus,
+    .fullDescMsg = MSG_ItemFullDesc_GroupFocus,
+    .shortDescMsg = MSG_ItemShortDesc_GroupFocus,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1180,9 +1180,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 76: Peekaboo
-    .nameMsg = MESSAGE_ID_26009F,
-    .fullDescMsg = MESSAGE_ID_25009F,
-    .shortDescMsg = MESSAGE_ID_23009F,
+    .nameMsg = MSG_ItemName_Peekaboo,
+    .fullDescMsg = MSG_ItemFullDesc_Peekaboo,
+    .shortDescMsg = MSG_ItemShortDesc_Peekaboo,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1190,9 +1190,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 77: Focus
-    .nameMsg = MESSAGE_ID_1D0014,
+    .nameMsg = MSG_Menus_StarPower_Focus,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0020,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Focus,
     .flags = MOVE_DATA_FLAG_80000000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1200,9 +1200,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 78: Refresh
-    .nameMsg = MESSAGE_ID_1D0015,
+    .nameMsg = MSG_Menus_StarPower_Refresh,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0021,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Refresh,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1210,9 +1210,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 79: Lullaby
-    .nameMsg = MESSAGE_ID_1D0016,
+    .nameMsg = MSG_Menus_StarPower_Lullaby,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0022,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Lullaby,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1220,9 +1220,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 7A: StarStorm
-    .nameMsg = MESSAGE_ID_1D0017,
+    .nameMsg = MSG_Menus_StarPower_StarStorm,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0023,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_StarStorm,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1230,9 +1230,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 7B: ChillOutMove
-    .nameMsg = MESSAGE_ID_1D0018,
+    .nameMsg = MSG_Menus_StarPower_ChillOut,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0024,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_ChillOut,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1240,9 +1240,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 7C: Smooch
-    .nameMsg = MESSAGE_ID_1D0019,
+    .nameMsg = MSG_Menus_StarPower_Smooch,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0025,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Smooch,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1250,9 +1250,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 7D: TimeOut
-    .nameMsg = MESSAGE_ID_1D001A,
+    .nameMsg = MSG_Menus_StarPower_TimeOut,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0026,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_TimeOut,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1260,9 +1260,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 7E: UpAndAway
-    .nameMsg = MESSAGE_ID_1D001B,
+    .nameMsg = MSG_Menus_StarPower_UpAndAway,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0027,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_UpAndAway,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1270,9 +1270,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 7F: StarBeam
-    .nameMsg = MESSAGE_ID_1D001C,
+    .nameMsg = MSG_Menus_StarPower_StarBeam,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0028,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_StarBeam,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1280,9 +1280,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 80: PeachBeam
-    .nameMsg = MESSAGE_ID_1D001D,
+    .nameMsg = MSG_Menus_StarPower_PeachBeam,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0029,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_PeachBeam,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1290,9 +1290,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 81: PeachFocus
-    .nameMsg = MESSAGE_ID_1D001E,
+    .nameMsg = MSG_Menus_StarPower_Peach_Focus,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0020,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Focus,
     .flags = MOVE_DATA_FLAG_100,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1300,9 +1300,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 82: TwinkDash
-    .nameMsg = MESSAGE_ID_1D001F,
+    .nameMsg = MSG_Menus_StarPower_Twink_Dash,
     .fullDescMsg = 0,
-    .shortDescMsg = MESSAGE_ID_1D0020,
+    .shortDescMsg = MSG_Menus_StarPowerDesc_Focus,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_STAR_POWER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1310,9 +1310,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 83: Headbonk1
-    .nameMsg = MESSAGE_ID_2B0000,
-    .fullDescMsg = MESSAGE_ID_280007,
-    .shortDescMsg = MESSAGE_ID_280002,
+    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk1,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_2,
@@ -1320,9 +1320,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 84: Headbonk2
-    .nameMsg = MESSAGE_ID_2B0000,
-    .fullDescMsg = MESSAGE_ID_280008,
-    .shortDescMsg = MESSAGE_ID_280002,
+    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk2,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_2,
@@ -1330,9 +1330,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 85: Headbonk3
-    .nameMsg = MESSAGE_ID_2B0000,
-    .fullDescMsg = MESSAGE_ID_280009,
-    .shortDescMsg = MESSAGE_ID_280002,
+    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk3,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_2,
@@ -1340,9 +1340,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 86: Tattle
-    .nameMsg = MESSAGE_ID_2B0001,
-    .fullDescMsg = MESSAGE_ID_28000A,
-    .shortDescMsg = MESSAGE_ID_280003,
+    .nameMsg = MSG_PartnerMoveName_Tattle,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Tattle,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Tattle,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_20000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1350,9 +1350,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 87: Charge
-    .nameMsg = MESSAGE_ID_2B0002,
-    .fullDescMsg = MESSAGE_ID_28000B,
-    .shortDescMsg = MESSAGE_ID_280004,
+    .nameMsg = MSG_PartnerMoveName_Charge,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Charge,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Charge,
     .flags = MOVE_DATA_FLAG_100,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1360,9 +1360,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 88: Multibonk
-    .nameMsg = MESSAGE_ID_2B0003,
-    .fullDescMsg = MESSAGE_ID_28000C,
-    .shortDescMsg = MESSAGE_ID_280005,
+    .nameMsg = MSG_PartnerMoveName_Multibonk,
+    .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Multibonk,
+    .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Multibonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_2,
@@ -1370,9 +1370,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 89: ShellToss1
-    .nameMsg = MESSAGE_ID_2B0004,
-    .fullDescMsg = MESSAGE_ID_280014,
-    .shortDescMsg = MESSAGE_ID_28000F,
+    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss1,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1380,9 +1380,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8A: ShellToss2
-    .nameMsg = MESSAGE_ID_2B0004,
-    .fullDescMsg = MESSAGE_ID_280015,
-    .shortDescMsg = MESSAGE_ID_28000F,
+    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss2,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1390,9 +1390,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8B: ShellToss3
-    .nameMsg = MESSAGE_ID_2B0004,
-    .fullDescMsg = MESSAGE_ID_280016,
-    .shortDescMsg = MESSAGE_ID_28000F,
+    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss3,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1400,9 +1400,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8C: PowerShell
-    .nameMsg = MESSAGE_ID_2B0005,
-    .fullDescMsg = MESSAGE_ID_280017,
-    .shortDescMsg = MESSAGE_ID_280010,
+    .nameMsg = MSG_PartnerMoveName_PowerShell,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_PowerShell,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_PowerShell,
     .flags = MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1410,9 +1410,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8D: DizzyShell
-    .nameMsg = MESSAGE_ID_2B0006,
-    .fullDescMsg = MESSAGE_ID_280018,
-    .shortDescMsg = MESSAGE_ID_280011,
+    .nameMsg = MSG_PartnerMoveName_DizzyShell,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_DizzyShell,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_DizzyShell,
     .flags = MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1420,9 +1420,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8E: FireShell
-    .nameMsg = MESSAGE_ID_2B0007,
-    .fullDescMsg = MESSAGE_ID_280019,
-    .shortDescMsg = MESSAGE_ID_280012,
+    .nameMsg = MSG_PartnerMoveName_FireShell,
+    .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_FireShell,
+    .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_FireShell,
     .flags = MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1430,9 +1430,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8F: BodySlam1
-    .nameMsg = MESSAGE_ID_2B0008,
-    .fullDescMsg = MESSAGE_ID_280021,
-    .shortDescMsg = MESSAGE_ID_28001C,
+    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam1,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1440,9 +1440,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 90: BodySlam2
-    .nameMsg = MESSAGE_ID_2B0008,
-    .fullDescMsg = MESSAGE_ID_280022,
-    .shortDescMsg = MESSAGE_ID_28001C,
+    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam2,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1450,9 +1450,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 91: BodySlam3
-    .nameMsg = MESSAGE_ID_2B0008,
-    .fullDescMsg = MESSAGE_ID_280023,
-    .shortDescMsg = MESSAGE_ID_28001C,
+    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam3,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1460,9 +1460,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 92: Bomb
-    .nameMsg = MESSAGE_ID_2B0009,
-    .fullDescMsg = MESSAGE_ID_280024,
-    .shortDescMsg = MESSAGE_ID_28001D,
+    .nameMsg = MSG_PartnerMoveName_Bomb,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_Bomb,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_Bomb,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1470,9 +1470,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 93: PowerBomb
-    .nameMsg = MESSAGE_ID_2B000A,
-    .fullDescMsg = MESSAGE_ID_280025,
-    .shortDescMsg = MESSAGE_ID_28001E,
+    .nameMsg = MSG_PartnerMoveName_PowerBomb,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_PowerBomb,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_PowerBomb,
     .flags = MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1480,9 +1480,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 94: MegaBomb
-    .nameMsg = MESSAGE_ID_2B000B,
-    .fullDescMsg = MESSAGE_ID_280026,
-    .shortDescMsg = MESSAGE_ID_28001F,
+    .nameMsg = MSG_PartnerMoveName_MegaBomb,
+    .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_MegaBomb,
+    .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_MegaBomb,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1490,9 +1490,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 95: SkyDive1
-    .nameMsg = MESSAGE_ID_2B000C,
-    .fullDescMsg = MESSAGE_ID_28002E,
-    .shortDescMsg = MESSAGE_ID_280029,
+    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive1,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -1500,9 +1500,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 96: SkyDive2
-    .nameMsg = MESSAGE_ID_2B000C,
-    .fullDescMsg = MESSAGE_ID_28002F,
-    .shortDescMsg = MESSAGE_ID_280029,
+    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive2,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -1510,9 +1510,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 97: SkyDive3
-    .nameMsg = MESSAGE_ID_2B000C,
-    .fullDescMsg = MESSAGE_ID_280030,
-    .shortDescMsg = MESSAGE_ID_280029,
+    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive3,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -1520,9 +1520,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 98: ShellShot
-    .nameMsg = MESSAGE_ID_2B000D,
-    .fullDescMsg = MESSAGE_ID_280031,
-    .shortDescMsg = MESSAGE_ID_28002A,
+    .nameMsg = MSG_PartnerMoveName_ShellShot,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_ShellShot,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_ShellShot,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_5,
@@ -1530,9 +1530,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 99: AirLift
-    .nameMsg = MESSAGE_ID_2B000E,
-    .fullDescMsg = MESSAGE_ID_280032,
-    .shortDescMsg = MESSAGE_ID_28002B,
+    .nameMsg = MSG_PartnerMoveName_AirLift,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_AirLift,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_AirLift,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_400 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1540,9 +1540,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9A: AirRaid
-    .nameMsg = MESSAGE_ID_2B000F,
-    .fullDescMsg = MESSAGE_ID_280033,
-    .shortDescMsg = MESSAGE_ID_28002C,
+    .nameMsg = MSG_PartnerMoveName_AirRaid,
+    .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_AirRaid,
+    .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_AirRaid,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1610,9 +1610,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A1: ElectroDash1
-    .nameMsg = MESSAGE_ID_2B0014,
-    .fullDescMsg = MESSAGE_ID_280048,
-    .shortDescMsg = MESSAGE_ID_280043,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash1,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1620,9 +1620,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A2: ElectroDash2
-    .nameMsg = MESSAGE_ID_2B0014,
-    .fullDescMsg = MESSAGE_ID_280049,
-    .shortDescMsg = MESSAGE_ID_280043,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash2,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1630,9 +1630,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A3: ElectroDash3
-    .nameMsg = MESSAGE_ID_2B0014,
-    .fullDescMsg = MESSAGE_ID_28004A,
-    .shortDescMsg = MESSAGE_ID_280043,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash3,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_15,
@@ -1640,9 +1640,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A4: PowerShock
-    .nameMsg = MESSAGE_ID_2B0015,
-    .fullDescMsg = MESSAGE_ID_28004B,
-    .shortDescMsg = MESSAGE_ID_280044,
+    .nameMsg = MSG_PartnerMoveName_PowerShock,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_PowerShock,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_PowerShock,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_3,
@@ -1650,9 +1650,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A5: TurboCharge
-    .nameMsg = MESSAGE_ID_2B0016,
-    .fullDescMsg = MESSAGE_ID_28004C,
-    .shortDescMsg = MESSAGE_ID_280045,
+    .nameMsg = MSG_PartnerMoveName_TurboCharge,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_TurboCharge,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_TurboCharge,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_10,
@@ -1660,9 +1660,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A6: MegaShock
-    .nameMsg = MESSAGE_ID_2B0017,
-    .fullDescMsg = MESSAGE_ID_28004D,
-    .shortDescMsg = MESSAGE_ID_280046,
+    .nameMsg = MSG_PartnerMoveName_MegaShock,
+    .fullDescMsg = MSG_PartnerDesc_Watt_Pause_MegaShock,
+    .shortDescMsg = MSG_PartnerDesc_Watt_Battle_MegaShock,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_12,
@@ -1670,9 +1670,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A7: BellyFlop1
-    .nameMsg = MESSAGE_ID_2B0018,
-    .fullDescMsg = MESSAGE_ID_280055,
-    .shortDescMsg = MESSAGE_ID_280050,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop1,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1680,9 +1680,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A8: BellyFlop2
-    .nameMsg = MESSAGE_ID_2B0018,
-    .fullDescMsg = MESSAGE_ID_280056,
-    .shortDescMsg = MESSAGE_ID_280050,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop2,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1690,9 +1690,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A9: BellyFlop3
-    .nameMsg = MESSAGE_ID_2B0018,
-    .fullDescMsg = MESSAGE_ID_280057,
-    .shortDescMsg = MESSAGE_ID_280050,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop3,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -1700,9 +1700,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AA: Squirt
-    .nameMsg = MESSAGE_ID_2B0019,
-    .fullDescMsg = MESSAGE_ID_280058,
-    .shortDescMsg = MESSAGE_ID_280051,
+    .nameMsg = MSG_PartnerMoveName_Squirt,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_Squirt,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_Squirt,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_14,
@@ -1710,9 +1710,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AB: WaterBlock
-    .nameMsg = MESSAGE_ID_2B001A,
-    .fullDescMsg = MESSAGE_ID_280059,
-    .shortDescMsg = MESSAGE_ID_280052,
+    .nameMsg = MSG_PartnerMoveName_WaterBlock,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_WaterBlock,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_WaterBlock,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_10,
@@ -1720,9 +1720,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AC: TidalWave
-    .nameMsg = MESSAGE_ID_2B001B,
-    .fullDescMsg = MESSAGE_ID_28005A,
-    .shortDescMsg = MESSAGE_ID_280053,
+    .nameMsg = MSG_PartnerMoveName_TidalWave,
+    .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_TidalWave,
+    .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_TidalWave,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_8,
@@ -1730,9 +1730,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AD: SpinyFlip1
-    .nameMsg = MESSAGE_ID_2B001C,
-    .fullDescMsg = MESSAGE_ID_280062,
-    .shortDescMsg = MESSAGE_ID_28005D,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip1,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_16,
@@ -1740,9 +1740,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AE: SpinyFlip2
-    .nameMsg = MESSAGE_ID_2B001C,
-    .fullDescMsg = MESSAGE_ID_280063,
-    .shortDescMsg = MESSAGE_ID_28005D,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip2,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_16,
@@ -1750,9 +1750,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AF: SpinyFlip3
-    .nameMsg = MESSAGE_ID_2B001C,
-    .fullDescMsg = MESSAGE_ID_280064,
-    .shortDescMsg = MESSAGE_ID_28005D,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip3,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_16,
@@ -1760,9 +1760,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B0: SpinySurge
-    .nameMsg = MESSAGE_ID_2B001D,
-    .fullDescMsg = MESSAGE_ID_280065,
-    .shortDescMsg = MESSAGE_ID_28005E,
+    .nameMsg = MSG_PartnerMoveName_SpinySurge,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinySurge,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinySurge,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1770,9 +1770,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B1: CloudNine
-    .nameMsg = MESSAGE_ID_2B001E,
-    .fullDescMsg = MESSAGE_ID_280066,
-    .shortDescMsg = MESSAGE_ID_28005F,
+    .nameMsg = MSG_PartnerMoveName_CloudNine,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_CloudNine,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_CloudNine,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_10,
@@ -1780,9 +1780,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B2: Hurricane
-    .nameMsg = MESSAGE_ID_2B001F,
-    .fullDescMsg = MESSAGE_ID_280067,
-    .shortDescMsg = MESSAGE_ID_280060,
+    .nameMsg = MSG_PartnerMoveName_Hurricane,
+    .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_Hurricane,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_0060,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_12,
@@ -1790,9 +1790,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B3: Smack1
-    .nameMsg = MESSAGE_ID_2B0010,
-    .fullDescMsg = MESSAGE_ID_28003B,
-    .shortDescMsg = MESSAGE_ID_280036,
+    .nameMsg = MSG_PartnerMoveName_Smack,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack1,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1800,9 +1800,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B4: Smack2
-    .nameMsg = MESSAGE_ID_2B0010,
-    .fullDescMsg = MESSAGE_ID_28003C,
-    .shortDescMsg = MESSAGE_ID_280036,
+    .nameMsg = MSG_PartnerMoveName_Smack,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack2,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1810,9 +1810,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B5: Smack3
-    .nameMsg = MESSAGE_ID_2B0010,
-    .fullDescMsg = MESSAGE_ID_28003D,
-    .shortDescMsg = MESSAGE_ID_280036,
+    .nameMsg = MSG_PartnerMoveName_Smack,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack3,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1820,9 +1820,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B6: OuttaSight
-    .nameMsg = MESSAGE_ID_2B0011,
-    .fullDescMsg = MESSAGE_ID_28003E,
-    .shortDescMsg = MESSAGE_ID_280037,
+    .nameMsg = MSG_PartnerMoveName_OuttaSight,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_OuttaSight,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_OuttaSight,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1830,9 +1830,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B7: Spook
-    .nameMsg = MESSAGE_ID_2B0012,
-    .fullDescMsg = MESSAGE_ID_28003F,
-    .shortDescMsg = MESSAGE_ID_280038,
+    .nameMsg = MSG_PartnerMoveName_Spook,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Spook,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Spook,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,
@@ -1840,9 +1840,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B8: FanSmack
-    .nameMsg = MESSAGE_ID_2B0013,
-    .fullDescMsg = MESSAGE_ID_280040,
-    .shortDescMsg = MESSAGE_ID_280039,
+    .nameMsg = MSG_PartnerMoveName_FanSmack,
+    .fullDescMsg = MSG_PartnerDesc_Bow_Pause_FanSmack,
+    .shortDescMsg = MSG_PartnerDesc_Bow_Battle_FanSmack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_4,

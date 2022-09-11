@@ -487,13 +487,13 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MESSAGE_ID_1200E5, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MESSAGE_ID_1200E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
         EVT_CASE_EQ(2)
-            EVT_CALL(ActorSpeak, MESSAGE_ID_1200E7, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
         EVT_CASE_DEFAULT
-            EVT_CALL(ActorSpeak, MESSAGE_ID_1200E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
     EVT_END_SWITCH
     EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

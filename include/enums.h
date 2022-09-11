@@ -580,6 +580,7 @@ enum SoundIDs {
     SOUND_97                        = 0x00000097,
     SOUND_98                        = 0x00000098,
     SOUND_9B                        = 0x0000009B,
+    SOUND_9E                        = 0x0000009E,
     SOUND_A1                        = 0x000000A1,
     SOUND_A2                        = 0x000000A2,
     SOUND_A3                        = 0x000000A3,

@@ -111,10 +111,10 @@ NpcSettings N(npcSettings_80240840) = {
 
 EvtScript N(interact_8024086C) = {
     EVT_IF_EQ(AreaFlag(4), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID_0E00F0)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F0)
         EVT_SET(AreaFlag(4), 1)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID_0E00F1)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F1)
         EVT_SET(AreaFlag(4), 0)
     EVT_END_IF
     EVT_RETURN
@@ -160,7 +160,7 @@ StaticNpc N(npcGroup_80240954) = {
         NPC_ANIM_boo_Palette_01_Anim_3,
         NPC_ANIM_boo_Palette_01_Anim_3,
     },
-    .tattle = MESSAGE_ID_1A00B3,
+    .tattle = MSG_NpcTattle_HidingBoo,
 };
 
 NpcGroupList N(npcGroupList_80240B44) = {

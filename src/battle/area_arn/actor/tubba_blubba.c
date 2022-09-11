@@ -523,7 +523,7 @@ EvtScript N(80226B88) = {
 
 EvtScript N(80227878) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_14)
-    EVT_CALL(ActorSpeak, MESSAGE_ID_0E00C9, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_14, NPC_ANIM_battle_tubba_Palette_00_Anim_14)
+    EVT_CALL(ActorSpeak, MSG_CH3_00C9, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_14, NPC_ANIM_battle_tubba_Palette_00_Anim_14)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar1, 7012372)
     EVT_EXEC_WAIT(DoDeath)

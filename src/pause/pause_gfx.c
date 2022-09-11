@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 
 #include "pause/image_143BF0.png.h"
 #include "pause/image_143FF0.png.h"
@@ -349,27 +350,27 @@ s8 gPauseMsg_55[] = { 0x21, 0x42, 0x49, 0x4C, 0x49, 0x54, 0x49, 0x45, 0x53, 0xFD
 s8 gPauseMsg_56[] = { 0x1F, 0x1F, 0x1F, 0xFD };                                                                               // ???[End]
 
 s32 gPauseMessages[] = {
-    MESSAGE_ID_000000, MESSAGE_ID_1F001C, MESSAGE_ID_1F002B, MESSAGE_ID_1F002C,
-    MESSAGE_ID_1F002D, MESSAGE_ID_1F002E, MESSAGE_ID_1F002F, MESSAGE_ID_1F0030,
-    MESSAGE_ID_1F0031, MESSAGE_ID_1F001D, MESSAGE_ID_1F001E, MESSAGE_ID_1F001F,
-    MESSAGE_ID_1F0020, MESSAGE_ID_1F0021, MESSAGE_ID_1F0022, MESSAGE_ID_1F0023,
-    MESSAGE_ID_1F0024, MESSAGE_ID_1F0025, MESSAGE_ID_1F0026, MESSAGE_ID_1F0027,
-    MESSAGE_ID_1F0028, MESSAGE_ID_1F0029, MESSAGE_ID_1F002A, (s32)gPauseMsg_17,
-    (s32)gPauseMsg_18,      (s32)gPauseMsg_19,      (s32)gPauseMsg_1A,      MESSAGE_ID_1F0001,
-    MESSAGE_ID_1F0002, MESSAGE_ID_1F0003, MESSAGE_ID_1F0004, MESSAGE_ID_1F0005,
-    MESSAGE_ID_1F0006, MESSAGE_ID_1F0007, MESSAGE_ID_1F0008, MESSAGE_ID_1F0009,
-    MESSAGE_ID_1F000A, MESSAGE_ID_1F000B, MESSAGE_ID_1F000C, MESSAGE_ID_1F000D,
-    MESSAGE_ID_1F000E, MESSAGE_ID_1F000F, MESSAGE_ID_1F0010, MESSAGE_ID_1F0011,
-    MESSAGE_ID_1F0012, MESSAGE_ID_1F0013, MESSAGE_ID_1F0014, MESSAGE_ID_1F0015,
-    MESSAGE_ID_1F0016, MESSAGE_ID_1F0017, (s32)gPauseMsg_32,      (s32)gPauseMsg_33,
+    0, MSG_MenuTip_BadgeTutorial_01, MSG_MenuTip_002B, MSG_MenuTip_002C,
+    MSG_MenuTip_002D, MSG_MenuTip_002E, MSG_MenuTip_002F, MSG_MenuTip_0030,
+    MSG_MenuTip_0031, MSG_MenuTip_BadgeTutorial_02, MSG_MenuTip_BadgeTutorial_03, MSG_MenuTip_BadgeTutorial_04,
+    MSG_MenuTip_BadgeTutorial_05, MSG_MenuTip_BadgeTutorial_06, MSG_MenuTip_BadgeTutorial_07, MSG_MenuTip_BadgeTutorial_08,
+    MSG_MenuTip_BadgeTutorial_09, MSG_MenuTip_BadgeTutorial_10, MSG_MenuTip_BadgeTutorial_11, MSG_MenuTip_BadgeTutorial_12,
+    MSG_MenuTip_BadgeTutorial_13, MSG_MenuTip_BadgeTutorial_14, MSG_MenuTip_BadgeTutorial_15, (s32)gPauseMsg_17,
+    (s32)gPauseMsg_18,      (s32)gPauseMsg_19,      (s32)gPauseMsg_1A,      MSG_MenuTip_StatsTab,
+    MSG_MenuTip_BadgesTab, MSG_MenuTip_ItemsTab, MSG_MenuTip_PartyTab, MSG_MenuTip_SpiritsTab,
+    MSG_MenuTip_MapTab, MSG_MenuTip_ControllingMario, MSG_MenuTip_HeartPoints, MSG_MenuTip_FlowerPoints,
+    MSG_MenuTip_BadgePoints, MSG_MenuTip_Boots1, MSG_MenuTip_Boots2, MSG_MenuTip_Boots3,
+    MSG_MenuTip_Hammer0, MSG_MenuTip_Hammer1, MSG_MenuTip_Hammer2, MSG_MenuTip_Hammer3,
+    MSG_MenuTip_StarPower, MSG_MenuTip_StarPoints, MSG_MenuTip_Coins, MSG_MenuTip_Secrets,
+    MSG_MenuTip_StarPieces, MSG_MenuTip_Time, (s32)gPauseMsg_32,      (s32)gPauseMsg_33,
     (s32)gPauseMsg_34,      (s32)gPauseMsg_35,      (s32)gPauseMsg_36,      (s32)gPauseMsg_37,
     (s32)gPauseMsg_38,      (s32)gPauseMsg_39,      (s32)gPauseMsg_3A,      (s32)gPauseMsg_3B,
     (s32)gPauseMsg_3C,      (s32)gPauseMsg_3D,      (s32)gPauseMsg_3E,      (s32)gPauseMsg_3F,
     (s32)gPauseMsg_40,      (s32)gPauseMsg_41,      (s32)gPauseMsg_42,      (s32)gPauseMsg_43,
-    (s32)gPauseMsg_44,      MESSAGE_ID_1F0000, (s32)gPauseMsg_46,      (s32)gPauseMsg_47,
+    (s32)gPauseMsg_44,      MSG_MenuTip_None, (s32)gPauseMsg_46,      (s32)gPauseMsg_47,
     (s32)gPauseMsg_48,      (s32)gPauseMsg_49,      (s32)gPauseMsg_4A,      (s32)gPauseMsg_4B,
-    MESSAGE_ID_1F001A, MESSAGE_ID_1F001B, MESSAGE_ID_1F0000, (s32)gPauseMsg_4F,
-    (s32)gPauseMsg_50,      MESSAGE_ID_1F0019, MESSAGE_ID_1F0018, (s32)gPauseMsg_53,
+    MSG_MenuTip_BadgeTab_All, MSG_MenuTip_BadgeTab_Equipped, MSG_MenuTip_None, (s32)gPauseMsg_4F,
+    (s32)gPauseMsg_50,      MSG_MenuTip_ItemTab_Consumables, MSG_MenuTip_ItemTab_KeyItems, (s32)gPauseMsg_53,
     (s32)gPauseMsg_54,      (s32)gPauseMsg_55,      (s32)gPauseMsg_56
 };
 

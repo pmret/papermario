@@ -3,4 +3,10 @@
 static char* N(exit_str_0) = "kzn_17";
 static char* N(exit_str_1) = "kzn_19";
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_18/C8C0A0", func_80240000_C8C0A0);
+s32 N(get_tattle)(void) {
+    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_CH5_STAR_SPRIT_DEPARTED) {
+        return MSG_MapTattle_kzn_18_before;
+    } else {
+        return MSG_MapTattle_kzn_18_after;
+    }
+}

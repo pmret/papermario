@@ -3,6 +3,7 @@
 
 #include "common_structs.h"
 #include "enums.h"
+#include "message_ids.h"
 #include "script_api/map.h"
 #include "npc.h"
 

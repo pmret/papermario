@@ -132,7 +132,7 @@ EvtScript N(802404D8) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(6.5))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_9, NPC_ANIM_sun_Palette_00_Anim_9, 517, MESSAGE_ID_1100C3)
+    EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_9, NPC_ANIM_sun_Palette_00_Anim_9, 517, MSG_CH6_00C3)
     EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_sun_Palette_00_Anim_9)
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 1000)
@@ -219,25 +219,25 @@ EvtScript N(8024094C) = {
 EvtScript N(interact_80240B28) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(50)
-            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009A)
+            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009A)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
             EVT_WAIT(20)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(20)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009B)
+            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009B)
             EVT_SET(GB_StoryProgress, 50)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009C)
+            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009C)
         EVT_CASE_LT(57)
             EVT_IF_EQ(GF_FLO15_SunThankedPlayer, 0)
-                EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009D)
+                EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009D)
                 EVT_SET(GF_FLO15_SunThankedPlayer, 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009E)
+                EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009E)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID_11009F)
+            EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MSG_CH6_009F)
     EVT_END_SWITCH
     EVT_SET(AreaFlag(38), 1)
     EVT_RETURN
@@ -309,7 +309,7 @@ StaticNpc N(npcGroup_80240EE0)[] = {
             NPC_ANIM_sun_Palette_00_Anim_1,
             NPC_ANIM_sun_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E1,
+        .tattle = MSG_NpcTattle_TheSun,
     },
     {
         .id = NPC_SUN1,
@@ -341,7 +341,7 @@ StaticNpc N(npcGroup_80240EE0)[] = {
             NPC_ANIM_sun_Palette_00_Anim_1,
             NPC_ANIM_sun_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E1,
+        .tattle = MSG_NpcTattle_TheSun,
     },
 };
 

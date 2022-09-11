@@ -5,9 +5,10 @@
 
 #define NAMESPACE ED4220
 
-s32 func_80240000_ED4220(void) {
-    if (evt_get_variable(NULL, GB_StoryProgress) <= 0x30) {
-        return MESSAGE_ID_190119;
+s32 N(get_tattle)(void) {
+    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+        return MSG_MapTattle_flo_10_before;
+    } else {
+        return MSG_MapTattle_flo_10_after;
     }
-    return MESSAGE_ID_19011A;
 }

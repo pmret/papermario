@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 #include "sprite.h"
 #include "sprite/npc/world_goombario.h"
 #include "sprite/npc/world_kooper.h"
@@ -96,8 +97,8 @@ s32 gPausePartnersSpriteAnims[][4] = {
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 gPausePartnersMessages[] = {
-    MESSAGE_ID_280006, MESSAGE_ID_280013, MESSAGE_ID_280020, MESSAGE_ID_28002D,
-    MESSAGE_ID_28003A, MESSAGE_ID_280047, MESSAGE_ID_280054, MESSAGE_ID_280061
+    MSG_PartnerDesc_Goombario_Pause, MSG_PartnerDesc_Kooper_Pause, MSG_PartnerDesc_Bombette_Pause, MSG_PartnerDesc_Parakarry_Pause,
+    MSG_PartnerDesc_Bow_Pause, MSG_PartnerDesc_Watt_Pause, MSG_PartnerDesc_Sushie_Pause, MSG_PartnerDesc_Lakilester_Pause
 };
 s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
                                  MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };

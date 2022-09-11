@@ -2,6 +2,7 @@
 #include "fio.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "message_ids.h"
 
 extern Mtx Entity_SaveBlock_Mtx;
 extern Gfx Entity_SaveBlock_RenderContent[];
@@ -76,7 +77,7 @@ void entity_SaveBlock_save_data(void) {
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(GF_Tutorial_SaveBlock)) {
         SaveBlockTutorialPrinterClosed = FALSE;
-        msg_get_printer_for_msg(MESSAGE_ID_1D0000, &SaveBlockTutorialPrinterClosed);
+        msg_get_printer_for_msg(MSG_Menus_Tutorial_SaveBlock, &SaveBlockTutorialPrinterClosed);
         set_global_flag(GF_Tutorial_SaveBlock);
         return;
     }
@@ -94,12 +95,12 @@ void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
 void entity_SaveBlock_show_choice_message(void) {
     SaveBlockTutorialPrinterClosed = FALSE;
     SaveBlockResultPrinterClosed = FALSE;
-    SaveBlockResultPrinter = msg_get_printer_for_msg(MESSAGE_ID_1D0004, &SaveBlockResultPrinterClosed);
-    SaveBlockTutorialPrinter = msg_get_printer_for_msg(MESSAGE_ID_1E000A, &SaveBlockTutorialPrinterClosed);
+    SaveBlockResultPrinter = msg_get_printer_for_msg(MSG_Menus_SavePrompt, &SaveBlockResultPrinterClosed);
+    SaveBlockTutorialPrinter = msg_get_printer_for_msg(MSG_Choice_000A, &SaveBlockTutorialPrinterClosed);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_msg(MESSAGE_ID_1D0005, SaveBlockResultPrinter);
+    msg_printer_load_msg(MSG_Menus_SaveComplete, SaveBlockResultPrinter);
     sfx_play_sound(SOUND_10);
 }
 

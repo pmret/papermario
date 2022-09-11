@@ -108,15 +108,15 @@ s32 N(D_80244788_CCFA98)[] = {
 EvtScript N(interact_80244790) = {
     EVT_IF_EQ(AreaFlag(37), 1)
         EVT_SET(AreaFlag(35), 1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_110063)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0063)
         EVT_SET(AreaFlag(35), 0)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(AreaFlag(35), 1)
     EVT_IF_EQ(GF_FLO14_GaveBerryToBubblePlant, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_11005F)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_005F)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_110060)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0060)
     EVT_END_IF
     EVT_CALL(FindItem, 161, LVar0)
     EVT_IF_NE(LVar0, -1)
@@ -124,9 +124,9 @@ EvtScript N(interact_80244790) = {
         EVT_SET(LVar1, 0)
         EVT_EXEC_WAIT(N(80244738))
         EVT_IF_EQ(LVar0, -1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_110064)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0064)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_110061)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0061)
             EVT_SET(AreaFlag(36), 1)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(PlayerMoveTo, 555, 110, 20)
@@ -136,7 +136,7 @@ EvtScript N(interact_80244790) = {
             EVT_WAIT(5)
             EVT_CALL(AdjustCam, 0, EVT_FLOAT(1.0), 0, 350, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
             EVT_EXEC(N(80243870))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID_110062)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0062)
             EVT_THREAD
                 EVT_WAIT(40)
                 EVT_CALL(InterpPlayerYaw, 315, 0)
@@ -147,7 +147,7 @@ EvtScript N(interact_80244790) = {
                 EVT_GOTO(10)
             EVT_END_IF
             EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MESSAGE_ID_110063)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH6_0063)
             EVT_SET(GF_FLO14_GaveBerryToBubblePlant, 1)
             EVT_BIND_TRIGGER(N(8024352C), TRIGGER_FLOOR_PRESS_A, 30, 1, 0)
         EVT_END_IF
@@ -195,7 +195,7 @@ StaticNpc N(npcGroup_80244B20) = {
         NPC_ANIM_bubulb_Palette_00_Anim_2,
         NPC_ANIM_bubulb_Palette_00_Anim_2,
     },
-    .tattle = MESSAGE_ID_1A00E3,
+    .tattle = MSG_NpcTattle_BubblePlant,
 };
 
 StaticNpc N(npcGroup_80244D10) = {

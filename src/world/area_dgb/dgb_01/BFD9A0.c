@@ -439,7 +439,7 @@ EvtScript N(80244AD0) = {
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D00D8, 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
         EVT_RESUME_GROUP(1)
         EVT_RETURN
@@ -687,7 +687,7 @@ EvtScript N(idle_8024536C) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtCollider, 28, 456, 0)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID_0E0101)
+    EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MSG_CH3_0101)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_tubba_Palette_00_Anim_19)
         EVT_WAIT(4)

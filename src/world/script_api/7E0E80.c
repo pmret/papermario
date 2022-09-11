@@ -1,4 +1,5 @@
 #include "common.h"
+#include "message_ids.h"
 #include "hud_element.h"
 #include "model.h"
 
@@ -270,7 +271,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 100;
                 script->functionTemp[2] = 0;
-                D_80286528 = msg_get_printer_for_msg(MESSAGE_ID_1E0001, &script->functionTemp[2]);
+                D_80286528 = msg_get_printer_for_msg(MSG_Choice_0001, &script->functionTemp[2]);
             }
             break;
         case 100:
@@ -506,7 +507,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_41;
                 script->functionTemp[2] = 0;
-                D_80286538 = msg_get_printer_for_msg(MESSAGE_ID_1E0003, &script->functionTemp[2]);
+                D_80286538 = msg_get_printer_for_msg(MSG_Choice_0003, &script->functionTemp[2]);
             }
             break;
         case DIALOG_STATE_41:

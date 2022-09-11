@@ -9,7 +9,7 @@
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
 ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
-s32 N(func_80240000_CB9200)(void);
+s32 N(get_tattle)(void);
 ApiStatus N(func_80240040_CB9240)(Evt* script, s32 isInitialCall);
 
 extern s32 N(D_80244070_CBD270);

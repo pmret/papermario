@@ -1019,7 +1019,7 @@ EvtScript N(80244058) = {
     EVT_END_IF
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID_1100C9)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MSG_CH6_00C9)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
@@ -1128,7 +1128,7 @@ EvtScript N(80244774) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, 65, LVar1, 80)
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 270)
     EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, 450, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
-    EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_flying_magikoopa_Palette_02_Anim_9, NPC_ANIM_flying_magikoopa_Palette_02_Anim_1, 0, MESSAGE_ID_1100BB)
+    EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_flying_magikoopa_Palette_02_Anim_9, NPC_ANIM_flying_magikoopa_Palette_02_Anim_1, 0, MSG_CH6_00BB)
     EVT_WAIT(20)
     EVT_EXEC(N(80244270))
     EVT_WAIT(80)
@@ -1145,7 +1145,7 @@ EvtScript N(80244774) = {
     EVT_END_IF
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID_1100C1)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MSG_CH6_00C1)
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(20)
     EVT_CALL(PutPartnerAway)
@@ -1167,7 +1167,7 @@ EvtScript N(80244774) = {
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID_1100C2)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MSG_CH6_00C2)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
@@ -1244,16 +1244,16 @@ EvtScript N(80244E2C) = {
 EvtScript N(80244ED0) = {
     EVT_SWITCH(MapVar(10))
         EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID_1100B9)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MSG_CH6_00B9)
             EVT_CALL(InterpNpcYaw, 3, 90, 0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100BF)
+            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00BF)
             EVT_CALL(InterpNpcYaw, 0, 90, 0)
         EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100BF)
+            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00BF)
             EVT_CALL(InterpNpcYaw, 1, 270, 0)
         EVT_CASE_EQ(3)
-            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100BF)
+            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00BF)
             EVT_CALL(InterpNpcYaw, 2, 270, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -1263,13 +1263,13 @@ EvtScript N(80244ED0) = {
 EvtScript N(80245004) = {
     EVT_SWITCH(MapVar(10))
         EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID_1100BA)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MSG_CH6_00BA)
         EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100C0)
+            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00C0)
         EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100C0)
+            EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00C0)
         EVT_CASE_EQ(3)
-            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MESSAGE_ID_1100C0)
+            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 16, MSG_CH6_00C0)
     EVT_END_SWITCH
     EVT_CALL(SetNpcVar, 3, 0, 1)
     EVT_WAIT(5)
@@ -1437,29 +1437,29 @@ EvtScript N(interact_802457D4) = {
         EVT_CASE_EQ(0)
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_IF_EQ(LVar0, 3)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID_1100B6)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MSG_CH6_00B6)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID_1100BC)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MSG_CH6_00BC)
             EVT_END_IF
             EVT_ADD(AreaByte(6), 1)
         EVT_CASE_EQ(1)
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_IF_EQ(LVar0, 3)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID_1100B7)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MSG_CH6_00B7)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID_1100BD)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MSG_CH6_00BD)
             EVT_END_IF
             EVT_ADD(AreaByte(6), 1)
         EVT_CASE_EQ(2)
             EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, 300, EVT_FLOAT(19.0), EVT_FLOAT(-9.0))
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_IF_EQ(LVar0, 3)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID_1100B8)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MSG_CH6_00B8)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
                 EVT_WAIT(15)
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 0)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID_1100BE)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MSG_CH6_00BE)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
                 EVT_WAIT(15)
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0)
@@ -1570,7 +1570,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E4,
+        .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_LAKITU1,
@@ -1610,7 +1610,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E4,
+        .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_LAKITU2,
@@ -1650,7 +1650,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E4,
+        .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_MAGIKOOPA,
@@ -1690,7 +1690,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
             NPC_ANIM_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_magikoopa_Palette_02_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E4,
+        .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_FLYING_MAGIKOOPA,
@@ -1730,7 +1730,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
             NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A00E4,
+        .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
 };
 

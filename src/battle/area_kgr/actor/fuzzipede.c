@@ -149,7 +149,7 @@ EvtScript N(nextTurn_80218C58) = {
         EVT_CALL(SetBattleCamOffsetZ, 10)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
-        EVT_CALL(ActorSpeak, MESSAGE_ID_07009C, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_24, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+        EVT_CALL(ActorSpeak, MSG_MAC_Port_009C, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_24, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)

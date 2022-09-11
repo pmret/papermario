@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 #include "sprite.h"
 #include "sprite/npc/world_eldstar.h"
 #include "sprite/npc/world_mamar.h"
@@ -249,7 +250,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
 
     if (gPauseMenuCurrentTab == 5) {
         if (playerData->maxStarPower > gPauseSpiritsIndexes[menu->selected]) {
-            msgID = gPauseSpiritsIndexes[menu->selected] + MESSAGE_ID_1D002A;
+            msgID = gPauseSpiritsIndexes[menu->selected] + MSG_Menus_SpiritName_Eldstar;
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
@@ -374,7 +375,7 @@ void pause_spirits_handle_input(MenuPanel* panel) {
     if (get_player_data()->maxStarPower <= gPauseSpiritsIndexes[panel->selected]) {
         gPauseCurrentDescMsg = pause_get_menu_msg(0x56);
     } else {
-        gPauseCurrentDescMsg = MESSAGE_ID_1D0031 + gPauseSpiritsIndexes[panel->selected];
+        gPauseCurrentDescMsg = MSG_Menus_SpiritDesc_Eldstar + gPauseSpiritsIndexes[panel->selected];
     }
 }
 

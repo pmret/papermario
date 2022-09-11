@@ -338,15 +338,15 @@ EvtScript N(init_80241288) = {
 EvtScript N(interact_802412E8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(8)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID_0E00BA)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MSG_CH3_00BA)
         EVT_CASE_LT(42)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID_0E00BB)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MSG_CH3_00BB)
         EVT_CASE_LT(61)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID_0E00BC)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MSG_CH3_00BC)
         EVT_CASE_LT(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID_0E00BD)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MSG_CH3_00BD)
         EVT_CASE_GE(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID_0E00BE)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MSG_CH3_00BE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -424,7 +424,7 @@ StaticNpc N(npcGroup_80241638) = {
         NPC_ANIM_yakkey_Palette_00_Anim_1,
         NPC_ANIM_yakkey_Palette_00_Anim_1,
     },
-    .tattle = MESSAGE_ID_1A00B4,
+    .tattle = MSG_NpcTattle_Yakkey,
 };
 
 NpcGroupList N(npcGroupList_80241828) = {

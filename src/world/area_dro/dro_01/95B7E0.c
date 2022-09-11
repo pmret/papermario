@@ -476,7 +476,7 @@ s32 N(D_80248088_963288)[] = {
 
 EvtScript N(80248090) = {
     EVT_CALL(N(LetterDelivery_Init), 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 76, 69,
-        MESSAGE_ID_0D0089, MESSAGE_ID_0D008A, MESSAGE_ID_0D008B, MESSAGE_ID_0D008C, EVT_PTR(N(D_80248088_963288)))
+        MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C, EVT_PTR(N(D_80248088_963288)))
     EVT_EXEC_WAIT(N(80247D90))
     EVT_RETURN
     EVT_END
@@ -484,18 +484,18 @@ EvtScript N(80248090) = {
 
 EvtScript N(interact_802480E0) = {
     EVT_IF_GE(GB_StoryProgress, -53)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID_0D0062)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_0062)
         EVT_RETURN
     EVT_END_IF
     EVT_SWITCH(AreaByte(0))
         EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID_0D005F)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_005F)
             EVT_ADD(AreaByte(0), 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID_0D0060)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_0060)
             EVT_ADD(AreaByte(0), 1)
         EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID_0D0061)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_0061)
             EVT_SUB(AreaByte(0), 1)
     EVT_END_SWITCH
     EVT_RETURN
@@ -518,19 +518,19 @@ EvtScript N(interact_8024821C) = {
             EVT_END_IF
             EVT_SWITCH(AreaByte(1))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MESSAGE_ID_0D0063)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MSG_CH2_0063)
                     EVT_ADD(AreaByte(1), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MESSAGE_ID_0D0064)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MSG_CH2_0064)
                     EVT_ADD(AreaByte(1), 1)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MESSAGE_ID_0D0065)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MSG_CH2_0065)
                     EVT_SET(AreaByte(1), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MESSAGE_ID_0D0066)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MSG_CH2_0066)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MESSAGE_ID_0D0067)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_03_Anim_4, NPC_ANIM_dryite_Palette_03_Anim_1, 0, MSG_CH2_0067)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -545,16 +545,16 @@ EvtScript N(init_802483A8) = {
 EvtScript N(interact_802483CC) = {
     EVT_SWITCH(AreaByte(2))
         EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID_0D0068)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0068)
             EVT_ADD(AreaByte(2), 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID_0D0069)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0069)
             EVT_ADD(AreaByte(2), 1)
         EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID_0D006A)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_006A)
             EVT_ADD(AreaByte(2), 1)
         EVT_CASE_EQ(3)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID_0D006B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_006B)
             EVT_SET(AreaByte(2), 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -583,7 +583,7 @@ EvtScript N(80248504) = {
         EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_END_THREAD
     EVT_CALL(PlayerFaceNpc, 3, 0)
-    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0078)
+    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0078)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(GetNpcPos, 3, LVar3, LVar4, LVar5)
     EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -599,11 +599,11 @@ EvtScript N(80248504) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0079)
+    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0079)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D007A)
+    EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_007A)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
@@ -626,7 +626,7 @@ EvtScript N(interact_80248864) = {
         EVT_IF_EQ(GF_DRO01_HeardHintAboutSpinningRoof, 1)
             EVT_CALL(N(func_802431B4_95E3B4))
             EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D007B)
+                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_007B)
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
@@ -634,24 +634,24 @@ EvtScript N(interact_80248864) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(1), 0)
-                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D006C)
-                EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D006D)
-                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D006E)
+                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_006C)
+                EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_006D)
+                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_006E)
                 EVT_SET(AreaFlag(1), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D006F)
-                EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0070)
-                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0071)
+                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_006F)
+                EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0070)
+                EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0071)
                 EVT_SET(AreaFlag(1), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0072)
-            EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0073)
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0074)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0072)
+            EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0073)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0074)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0075)
-            EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0076)
-            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID_0D0077)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0075)
+            EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0076)
+            EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_0077)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -719,16 +719,16 @@ EvtScript N(interact_80248D54) = {
     EVT_IF_EQ(GF_DRO01_Gift_Melody, 1)
         EVT_CALL(FindKeyItem, ITEM_MELODY, LVar0)
         EVT_IF_NE(LVar0, -1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0084)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0084)
             EVT_RETURN
         EVT_ELSE
             EVT_IF_EQ(GF_DRO01_Gift_ToldComposerAboutMelody, 0)
                 EVT_IF_LT(GB_StoryProgress, 88)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0085)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0085)
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
                     EVT_WAIT(30)
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0086)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0086)
                     EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, 1)
                     EVT_RETURN
                 EVT_END_IF
@@ -738,26 +738,26 @@ EvtScript N(interact_80248D54) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D007C)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_007C)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D007D)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_007D)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D007E)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_007E)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D007F)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_007F)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0080)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0080)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0081)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0081)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
     EVT_END_SWITCH
@@ -768,11 +768,11 @@ EvtScript N(interact_80248D54) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0082)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0082)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_3)
             EVT_WAIT(60)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID_0D0083)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MSG_CH2_0083)
             EVT_SET(LVar0, 104)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
@@ -867,7 +867,7 @@ EvtScript N(idle_8024918C) = {
 EvtScript N(interact_80249750) = {
     EVT_IF_EQ(AreaByte(4), 4)
         EVT_IF_EQ(AreaByte(5), 1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID_0D0088)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MSG_CH2_0088)
             EVT_EXEC_WAIT(N(80248090))
             EVT_IF_NE(LVarC, 0)
                 EVT_RETURN
@@ -892,9 +892,9 @@ EvtScript N(init_8024981C) = {
 };
 
 EvtScript N(interact_80249854) = {
-    EVT_CALL(SpeakToPlayer, 7, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MESSAGE_ID_0D008E)
-    EVT_CALL(SpeakToPlayer, 8, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MESSAGE_ID_0D008F)
-    EVT_CALL(SpeakToPlayer, 9, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MESSAGE_ID_0D0090)
+    EVT_CALL(SpeakToPlayer, 7, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MSG_CH2_008E)
+    EVT_CALL(SpeakToPlayer, 8, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MSG_CH2_008F)
+    EVT_CALL(SpeakToPlayer, 9, NPC_ANIM_three_sisters_Palette_01_Anim_4, NPC_ANIM_three_sisters_Palette_01_Anim_1, 0, MSG_CH2_0090)
     EVT_RETURN
     EVT_END
 };
@@ -912,26 +912,26 @@ EvtScript N(interact_802498E8) = {
     EVT_CALL(FindKeyItem, ITEM_FOURTH_DEGREE_CARD, LVar4)
     EVT_CALL(FindKeyItem, ITEM_DIPLOMA, LVar5)
     EVT_IF_NE(LVar1, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009A)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009A)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(LVar2, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009B)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009B)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(LVar3, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009C)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009C)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(LVar4, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009D)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009D)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(LVar5, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009E)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009E)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D0099)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_0099)
     EVT_RETURN
     EVT_END
 };
@@ -943,7 +943,7 @@ EvtScript N(init_80249ABC) = {
 };
 
 EvtScript N(interact_80249AE0) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MESSAGE_ID_0D009F)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_01_Anim_4, NPC_ANIM_dryite_Palette_01_Anim_1, 0, MSG_CH2_009F)
     EVT_RETURN
     EVT_END
 };
@@ -985,7 +985,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_mouser_Palette_00_Anim_1,
             NPC_ANIM_mouser_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0090,
+        .tattle = MSG_NpcTattle_DRO_Greeter,
     },
     {
         .id = NPC_DRYITE0,
@@ -1018,7 +1018,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_03_Anim_1,
             NPC_ANIM_dryite_Palette_03_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0091,
+        .tattle = MSG_NpcTattle_DRO_DryiteA,
     },
     {
         .id = NPC_DRYITE1,
@@ -1050,7 +1050,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_02_Anim_1,
             NPC_ANIM_dryite_Palette_02_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0094,
+        .tattle = MSG_NpcTattle_DRO_DryiteD,
     },
     {
         .id = NPC_DRYITE2,
@@ -1082,7 +1082,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_00_Anim_1,
             NPC_ANIM_dryite_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0092,
+        .tattle = MSG_NpcTattle_DRO_DryiteB,
     },
     {
         .id = NPC_DRYITE3,
@@ -1114,7 +1114,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_00_Anim_1,
             NPC_ANIM_dryite_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0093,
+        .tattle = MSG_NpcTattle_DRO_DryiteC,
     },
     {
         .id = NPC_ARTIST_TOAD,
@@ -1146,7 +1146,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_artist_toad_Palette_01_Anim_0,
             NPC_ANIM_artist_toad_Palette_01_Anim_0,
         },
-        .tattle = MESSAGE_ID_1A0095,
+        .tattle = MSG_NpcTattle_Composer,
     },
     {
         .id = NPC_MOUSER1,
@@ -1178,7 +1178,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_mouser_Palette_01_Anim_1,
             NPC_ANIM_mouser_Palette_01_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A008F,
+        .tattle = MSG_NpcTattle_DRO_ShopOwner,
     },
     {
         .id = NPC_CHUCK_QUIZMO,
@@ -1211,7 +1211,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
             NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
         },
-        .tattle = MESSAGE_ID_1A0002,
+        .tattle = MSG_NpcTattle_ChuckQuizmo,
     },
     {
         .id = NPC_DRYITE4,
@@ -1244,7 +1244,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_01_Anim_1,
             NPC_ANIM_dryite_Palette_01_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0096,
+        .tattle = MSG_NpcTattle_DRO_DojoGraduate,
     },
     {
         .id = NPC_DRYITE5,
@@ -1277,7 +1277,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
             NPC_ANIM_dryite_Palette_01_Anim_1,
             NPC_ANIM_dryite_Palette_01_Anim_1,
         },
-        .tattle = MESSAGE_ID_1A0097,
+        .tattle = MSG_NpcTattle_DRO_WorriedDryite,
     },
 };
 
@@ -1312,7 +1312,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
         },
-        .tattle = MESSAGE_ID_1A0003,
+        .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
         .id = NPC_THREE_SISTERS1,
@@ -1344,7 +1344,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
         },
-        .tattle = MESSAGE_ID_1A0004,
+        .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
         .id = NPC_THREE_SISTERS2,
@@ -1376,7 +1376,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
             NPC_ANIM_three_sisters_Palette_01_Anim_3,
         },
-        .tattle = MESSAGE_ID_1A0005,
+        .tattle = MSG_NpcTattle_TravelingMaidC,
     },
 };
 
@@ -1392,21 +1392,21 @@ NpcGroupList N(npcGroupList_8024B47C) = {
 };
 
 s32 N(intTable_8024B4A0)[] = {
-    MESSAGE_ID_270049, MESSAGE_ID_27004A, MESSAGE_ID_27004B, MESSAGE_ID_27004C,
-    MESSAGE_ID_27004D, MESSAGE_ID_27004E, MESSAGE_ID_27004F, MESSAGE_ID_270050,
-    MESSAGE_ID_270051, MESSAGE_ID_270052, MESSAGE_ID_270053, MESSAGE_ID_270054,
-    MESSAGE_ID_270055, MESSAGE_ID_270056, MESSAGE_ID_270057, MESSAGE_ID_270058,
-    MESSAGE_ID_270059, MESSAGE_ID_27005A, MESSAGE_ID_27005B, MESSAGE_ID_27005C,
-    MESSAGE_ID_27005D, MESSAGE_ID_27005E, MESSAGE_ID_27005F,
+    MSG_Shop_0049, MSG_Shop_004A, MSG_Shop_004B, MSG_Shop_004C,
+    MSG_Shop_004D, MSG_Shop_004E, MSG_Shop_004F, MSG_Shop_0050,
+    MSG_Shop_0051, MSG_Shop_0052, MSG_Shop_0053, MSG_Shop_0054,
+    MSG_Shop_0055, MSG_Shop_0056, MSG_Shop_0057, MSG_Shop_0058,
+    MSG_Shop_0059, MSG_Shop_005A, MSG_Shop_005B, MSG_Shop_005C,
+    MSG_Shop_005D, MSG_Shop_005E, MSG_Shop_005F,
 };
 
 N(shopInventory) N(shopInventory_8024B4FC)[] = {
-    { ITEM_THUNDER_BOLT,    5, MESSAGE_ID_240003 },
-    { ITEM_DUSTY_HAMMER,    2, MESSAGE_ID_240005 },
-    { ITEM_HONEY_SYRUP,     5, MESSAGE_ID_240016 },
-    { ITEM_DRIED_SHROOM,    2, MESSAGE_ID_24000D },
-    { ITEM_DRIED_PASTA,     3, MESSAGE_ID_24001D },
-    { ITEM_MUSHROOM,        3, MESSAGE_ID_240009 },
+    { ITEM_THUNDER_BOLT,    5, MSG_ItemShopDesc_ThunderBolt },
+    { ITEM_DUSTY_HAMMER,    2, MSG_ItemShopDesc_DustyHammer },
+    { ITEM_HONEY_SYRUP,     5, MSG_ItemShopDesc_HoneySyrup },
+    { ITEM_DRIED_SHROOM,    2, MSG_ItemShopDesc_DriedShroom },
+    { ITEM_DRIED_PASTA,     3, MSG_ItemShopDesc_DriedPasta },
+    { ITEM_MUSHROOM,        3, MSG_ItemShopDesc_Mushroom },
     {},
 };
 
@@ -1458,13 +1458,13 @@ EvtScript N(8024B6B4) = {
     EVT_CALL(func_802D2C14, 1)
     EVT_EXEC_WAIT(N(8024B614))
     EVT_IF_LT(GB_StoryProgress, -64)
-        EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID_0D0087)
+        EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MSG_CH2_0087)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
         EVT_WAIT(30)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID_0D0088)
+    EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MSG_CH2_0088)
     EVT_SET(GB_StoryProgress, -64)
     EVT_CALL(func_802D2C14, 0)
     EVT_EXEC_WAIT(N(8024B664))
@@ -1478,7 +1478,7 @@ EvtScript N(8024B7B0) = {
         EVT_CALL(N(func_80243578_95E778))
         EVT_CALL(func_802D2C14, 1)
         EVT_EXEC_WAIT(N(8024B614))
-        EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID_0D008D)
+        EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MSG_CH2_008D)
         EVT_SET(LVar0, 119)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(8024B5B4))
@@ -1648,7 +1648,7 @@ EvtScript N(toggleVis_8024C040) = {
         EVT_CASE_EQ(0)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(-66)
-                    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID_1D017B, 160, 40)
+                    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_017B, 160, 40)
                     EVT_SET(LVar0, -1)
                     EVT_RETURN
                 EVT_CASE_LT(-65)
