@@ -4095,14 +4095,7 @@ enum SurfaceType {
 
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
-    COLLIDER_FLAGS_WATER_FLOOR       = 0x00000001,
-    COLLIDER_FLAGS_LAVA_FLOOR        = 0x00000002,
-    COLLIDER_FLAGS_SUSHIE_DOCK_WALL  = 0x00000004,
-    COLLIDER_FLAGS_SNOW_FLOOR        = 0x00000008,
-    COLLIDER_FLAGS_10                = 0x00000010,
-    COLLIDER_FLAGS_20                = 0x00000020,
-    COLLIDER_FLAGS_40                = 0x00000040,
-    COLLIDER_FLAGS_80                = 0x00000080,
+    COLLIDER_FLAGS_SURFACE_TYPE      = 0x000000FF,
     COLLIDER_FLAGS_100               = 0x00000100,
     COLLIDER_FLAGS_200               = 0x00000200,
     COLLIDER_FLAGS_400               = 0x00000400,

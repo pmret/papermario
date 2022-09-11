@@ -150,7 +150,7 @@ s32 func_802BD558_319AC8(void) {
     raycastResult = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38,
                                                       &sp3C, &sp40, &sp44);
 
-    surfaceType = get_collider_flags(raycastResult) & 0xFF;
+    surfaceType = get_collider_flags(raycastResult) & COLLIDER_FLAGS_SURFACE_TYPE;
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.unk_BF = 2;
         D_802BEBC0_31CBE0 = 0x15;
@@ -375,7 +375,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         z = playerStatus->position.z;
                         sp2C = playerStatus->colliderHeight * 0.5f;
                         if (npc_raycast_down_around(0x10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
-                            s32 surfaceType = get_collider_flags(D_8010C978) & 0xFF;
+                            s32 surfaceType = get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE;
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                                 playerStatus->unk_BF = 2;
                                 D_802BEBC0_31CBE0 = 0x15;

@@ -1765,7 +1765,7 @@ s32 partner_get_out(Npc* partner) {
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
                 hitDepth = 1000.0f;
                 if (npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionRadius)) {
-                    // bug? collider flags not properly masked with 0xFF
+                    // @bug? collider flags not properly masked with COLLIDER_FLAGS_SURFACE_TYPE
                     s32 surfaceType = get_collider_flags(D_8010C978);
 
                     if ((surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) || (hitDepth > 100.0f)) {

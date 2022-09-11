@@ -343,7 +343,7 @@ void func_800E315C(s32 colliderID) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (colliderID >= 0) {
-        s32 surfaceType = get_collider_flags(colliderID) & 0xFF;
+        s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
         switch (surfaceType) {
             case SURFACE_TYPE_WATER:
             case SURFACE_TYPE_DOCK_WALL:
@@ -922,7 +922,7 @@ void phys_main_collision_below(void) {
         (set_action_state(ACTION_STATE_SLIDING), (playerStatus->actionState != ACTION_STATE_SLIDING))))
     {
         if (colliderID >= 0) {
-            s32 surfaceType = get_collider_flags(colliderID) & 0xFF;
+            s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
             switch (surfaceType) {
                 case SURFACE_TYPE_SPIKES:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
@@ -1111,7 +1111,7 @@ s8 get_current_partner_id(void) {
 
 void try_player_footstep_sounds(s32 interval) {
     if (gGameStatusPtr->frameCounter % interval == 0) {
-        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & 0xFF;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE;
         s32 soundID, altSoundID;
 
         if (surfaceType == SURFACE_TYPE_FLOWERS || surfaceType == SURFACE_TYPE_HEDGES) {

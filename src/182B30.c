@@ -3705,7 +3705,7 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
                 x = part->currentPos.x;
                 y = part->currentPos.y + (part->size.y / 2);
                 z = part->currentPos.z - 5.0f;
-                // bug? perhaps this should be % 4?
+                // @bug? perhaps this should be % 4?
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }

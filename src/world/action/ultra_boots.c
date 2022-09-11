@@ -120,7 +120,7 @@ void func_802B6000_E26710(void) {
                     }
                 }
 
-                surfaceType = get_collider_flags(colliderBelow) & 0xFF;
+                surfaceType = get_collider_flags(colliderBelow) & COLLIDER_FLAGS_SURFACE_TYPE;
                 if (surfaceType == SURFACE_TYPE_LAVA) {
                     playerStatus->unk_BF = 1;
                     playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);

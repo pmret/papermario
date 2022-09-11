@@ -100,7 +100,7 @@ void func_802B6000_E26DE0(void) {
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
                     break;
                 } else {
-                    surfaceType = get_collider_flags(belowColliderID) & 0xFF;
+                    surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
                     if (surfaceType == SURFACE_TYPE_LAVA) {
                         playerStatus->unk_BF = 1;
                         set_action_state(ACTION_STATE_HIT_LAVA);

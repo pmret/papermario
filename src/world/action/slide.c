@@ -83,7 +83,7 @@ void func_802B6060_E27570(void) {
             D_802B6798 = hitRy;
             if (hitID >= 0) {
                 collisionStatus = &gCollisionStatus;
-                surfaceType = get_collider_flags(hitID) & 0xFF;
+                surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE;
                 if (surfaceType == SURFACE_TYPE_SLIDE) {
                     collisionStatus->currentFloor = hitID;
                     playerStatus->position.y = posY;

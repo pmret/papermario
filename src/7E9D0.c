@@ -145,7 +145,7 @@ s32 phys_adjust_cam_on_landing(void) {
     }
 
     if (ret == 1) {
-        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & 0xFF;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE;
 
         if (surfaceType == SURFACE_TYPE_LAVA) {
             gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
@@ -474,7 +474,7 @@ s32 check_input_jump(void) {
         return FALSE;
     }
 
-    // bug? collider flags not properly masked with 0xFF
+    // @bug? collider flags not properly masked with COLLIDER_FLAGS_SURFACE_TYPE
     surfaceType = get_collider_flags((u16)gCollisionStatus.currentFloor);
     if ((surfaceType == SURFACE_TYPE_SLIDE) && phys_should_player_be_sliding()) {
         return FALSE;

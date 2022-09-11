@@ -164,7 +164,7 @@ void func_802B6348_E24388(void) {
     height = playerStatus->colliderHeight;
 
     colliderID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
-    surfaceType = get_collider_flags(colliderID) & 0xFF;
+    surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
     if (!(surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) && check_input_jump()) {
         set_action_state(ACTION_STATE_JUMP);
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
