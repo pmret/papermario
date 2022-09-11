@@ -479,7 +479,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(MoveBattleCamOver, 30)
                 EVT_WAIT(30)
                 EVT_CALL(func_802535B4, 0)
-                EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x0065), ACTOR_SELF, 9, NPC_ANIM_shy_squad_guy_Palette_00_Anim_11, NPC_ANIM_shy_squad_guy_Palette_00_Anim_11)
+                EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F0065), ACTOR_SELF, 9, NPC_ANIM_shy_squad_guy_Palette_00_Anim_11, NPC_ANIM_shy_squad_guy_Palette_00_Anim_11)
                 EVT_SET(LVar0, 2)
                 EVT_LOOP(15)
                     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_shy_squad_guy_Palette_00_Anim_A)
@@ -1292,7 +1292,7 @@ EvtScript N(flee) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x0066), ACTOR_SELF, 1, -1, -1)
+    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F0066), ACTOR_SELF, 1, -1, -1)
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
@@ -1340,9 +1340,9 @@ EvtScript N(flee) = {
     EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(2.5))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_IF_LT(LVar0, 14)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x0067), ACTOR_ENEMY0, 1, -1, -1)
+        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F0067), ACTOR_ENEMY0, 1, -1, -1)
     EVT_ELSE
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x0068), ACTOR_ENEMY0, 1, -1, -1)
+        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F0068), ACTOR_ENEMY0, 1, -1, -1)
     EVT_END_IF
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)

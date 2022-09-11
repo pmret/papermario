@@ -163,7 +163,7 @@ void N(draw_score_display)(void* renderData) {
     }
 
     draw_box(0, 9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    draw_msg(MESSAGE_ID(0x8,0x47), data->windowA_posX + 42, 28, 255, MSG_PAL_WHITE, 0);
+    draw_msg(MESSAGE_ID(0x080047), data->windowA_posX + 42, 28, 255, MSG_PAL_WHITE, 0);
     draw_number(NUM_PANELS - data->found, data->windowA_posX + 65, 43, TRUE, MSG_PAL_WHITE, 255, 3);
     draw_ci_image_with_clipping(&mgm_02_PeachPanelImg, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &mgm_02_PeachPanelPal,
         data->windowA_posX + 5, 26, 10, 20, 300, 200, 255);
@@ -178,7 +178,7 @@ void N(draw_score_display)(void* renderData) {
     // draw tenths of seconds
     draw_number(deciseconds, data->windowB_posX + 40, 31, TRUE, MSG_PAL_WHITE, 255, 0);
     // draw dot
-    draw_msg(MESSAGE_ID(0x8,0x24), data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
+    draw_msg(MESSAGE_ID(0x080024), data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
 }
 
 void N(work_draw_score)(void) {

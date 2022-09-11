@@ -111,7 +111,7 @@ EvtScript N(npcAI_80240B50) = {
             EVT_WAIT(15)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 5)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A6))
+            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B00A6))
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
             EVT_CALL(SetPanTarget, 0, -20, 0, 68)
             EVT_CALL(SetCamPitch, 0, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
@@ -130,11 +130,11 @@ EvtScript N(npcAI_80240B50) = {
             EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_goompa_Palette_00_Anim_1)
             EVT_CALL(InterpNpcYaw, 0, 276, 20)
             EVT_WAIT(30)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A7))
+            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B00A7))
             EVT_WAIT(5)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(30)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8))
+            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B00A8))
             EVT_CALL(N(UnkFunc41), 0, 5)
             EVT_SET(GB_StoryProgress, -121)
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
@@ -236,7 +236,7 @@ StaticNpc N(npcGroup_80241260) = {
         NPC_ANIM_goompa_Palette_00_Anim_3,
         NPC_ANIM_goompa_Palette_00_Anim_3,
     },
-    .tattle = MESSAGE_ID(0x1A, 0x0063),
+    .tattle = MESSAGE_ID(0x1A0063),
 };
 
 NpcGroupList N(npcGroupList_80241450) = {

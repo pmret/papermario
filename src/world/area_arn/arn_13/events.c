@@ -259,7 +259,7 @@ NpcGroupList N(npcGroupList_80240BCC) = {
 
 EvtScript N(80240BF0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x0184), 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D0184), 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

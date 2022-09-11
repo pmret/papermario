@@ -242,7 +242,7 @@ EvtScript N(802419F4) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x00C7))
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x1100C7))
     EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_03"), 2)
     EVT_WAIT(100)
@@ -282,14 +282,14 @@ EvtScript N(interact_80241C8C) = {
                     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                     EVT_ADD(LVar0, 30)
                     EVT_CALL(SetCamProperties, 0, EVT_FLOAT(4.0), LVar0, LVar1, LVar2, 325, EVT_FLOAT(19.0), EVT_FLOAT(-9.5))
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008C))
-                    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0011))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11008C))
+                    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0011))
                     EVT_WAIT(10)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(0)
-                            EVT_CALL(ContinueSpeech, -1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008D))
+                            EVT_CALL(ContinueSpeech, -1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11008D))
                         EVT_CASE_EQ(1)
-                            EVT_CALL(ContinueSpeech, -1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008E))
+                            EVT_CALL(ContinueSpeech, -1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11008E))
                     EVT_END_SWITCH
                     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), FALSE)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_5)
@@ -299,16 +299,16 @@ EvtScript N(interact_80241C8C) = {
                     EVT_WAIT(10)
                     EVT_SWITCH(GF_FLO10_LilyRequestedWaterStone)
                         EVT_CASE_EQ(0)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F))
+                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11008F))
                         EVT_CASE_EQ(1)
                             EVT_CALL(SetPlayerAnimation, 393218)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F))
+                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11008F))
                             EVT_CALL(SetPlayerAnimation, 393221)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
+                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110091))
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimPray)
                             EVT_WAIT(40)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
+                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110092))
                             EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                     EVT_END_SWITCH
                     EVT_SET(GF_FLO12_Met_Rosie, 1)
@@ -317,19 +317,19 @@ EvtScript N(interact_80241C8C) = {
                         EVT_CASE_EQ(0)
                             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                                 EVT_EXEC(N(80241BE4))
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x0090))
+                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x110090))
                                 EVT_CALL(SetPlayerAnimation, 393221)
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
+                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110091))
                                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimPray)
                                 EVT_WAIT(40)
                                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
+                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110092))
                                 EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                             EVT_ELSE
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x0090))
+                                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x110090))
                             EVT_END_IF
                         EVT_CASE_EQ(1)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0093))
+                            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110093))
                     EVT_END_SWITCH
             EVT_END_SWITCH
         EVT_CASE_LT(48)
@@ -340,15 +340,15 @@ EvtScript N(interact_80241C8C) = {
                 EVT_ADD(LVar0, 30)
                 EVT_CALL(SetCamProperties, 0, EVT_FLOAT(4.0), LVar0, LVar1, LVar2, 325, EVT_FLOAT(19.0), EVT_FLOAT(-9.5))
             EVT_END_IF
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0094))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110094))
             EVT_SET(LVar0, EVT_PTR(N(D_802419EC_CC281C)))
             EVT_SET(LVar1, 0)
             EVT_EXEC_WAIT(N(8024199C))
             EVT_SWITCH(LVar0)
                 EVT_CASE_LE(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0093))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110093))
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0095))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110095))
                     EVT_CALL(RemoveItemEntity, LVar7)
                     EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380)
                     EVT_SET(LVar0, 87)
@@ -356,21 +356,21 @@ EvtScript N(interact_80241C8C) = {
                     EVT_EXEC_WAIT(N(802417F0))
                     EVT_CALL(AddKeyItem, ITEM_WATER_STONE)
                     EVT_WAIT(10)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0096))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110096))
                     EVT_SET(AreaFlag(22), 1)
                     EVT_SET(GB_StoryProgress, 48)
             EVT_END_SWITCH
         EVT_CASE_LT(53)
             EVT_SWITCH(AreaFlag(22))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0097))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110097))
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0096))
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110096))
             EVT_END_SWITCH
         EVT_CASE_LT(60)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0098))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110098))
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0099))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x110099))
     EVT_END_SWITCH
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
     EVT_EXEC_WAIT(N(80240830))
@@ -439,7 +439,7 @@ StaticNpc N(npcGroup_802425D8)[] = {
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x00E0),
+        .tattle = MESSAGE_ID(0x1A00E0),
     },
     {
         .id = NPC_ROSIE1,

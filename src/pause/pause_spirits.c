@@ -249,7 +249,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
 
     if (gPauseMenuCurrentTab == 5) {
         if (playerData->maxStarPower > gPauseSpiritsIndexes[menu->selected]) {
-            msgID = gPauseSpiritsIndexes[menu->selected] + MESSAGE_ID(0x1D, 0x2A);
+            msgID = gPauseSpiritsIndexes[menu->selected] + MESSAGE_ID(0x1D002A);
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
@@ -374,7 +374,7 @@ void pause_spirits_handle_input(MenuPanel* panel) {
     if (get_player_data()->maxStarPower <= gPauseSpiritsIndexes[panel->selected]) {
         gPauseCurrentDescMsg = pause_get_menu_msg(0x56);
     } else {
-        gPauseCurrentDescMsg = MESSAGE_ID(0x1D, 0x31) + gPauseSpiritsIndexes[panel->selected];
+        gPauseCurrentDescMsg = MESSAGE_ID(0x1D0031) + gPauseSpiritsIndexes[panel->selected];
     }
 }
 

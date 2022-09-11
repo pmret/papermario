@@ -160,7 +160,7 @@ EvtScript N(nextTurn_80218FB0) = {
                 EVT_CALL(SetBattleCamZoom, 380)
                 EVT_CALL(SetBattleCamOffsetZ, 0)
                 EVT_CALL(MoveBattleCamOver, 20)
-                EVT_CALL(ActorSpeak, MESSAGE_ID(0x0E, 0x0102), ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_9, NPC_ANIM_battle_tubba_Palette_00_Anim_2)
+                EVT_CALL(ActorSpeak, MESSAGE_ID(0x0E0102), ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_9, NPC_ANIM_battle_tubba_Palette_00_Anim_2)
                 EVT_THREAD
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_15)
                     EVT_WAIT(4)
@@ -357,7 +357,7 @@ EvtScript N(takeTurn_80219750) = {
         EVT_CALL(SetBattleCamOffsetZ, 0)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0E, 0x0103), ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_9, NPC_ANIM_battle_tubba_Palette_00_Anim_2)
+        EVT_CALL(ActorSpeak, MESSAGE_ID(0x0E0103), ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_9, NPC_ANIM_battle_tubba_Palette_00_Anim_2)
         EVT_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_15)
             EVT_WAIT(4)

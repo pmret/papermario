@@ -211,7 +211,7 @@ EvtScript N(interact_80241564) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0049))
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x110049))
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
         EVT_SET(LVar0, EVT_PTR(N(FlowerGuard_ItemChoiceList)))
@@ -220,7 +220,7 @@ EvtScript N(interact_80241564) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004A))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11004A))
             EVT_CASE_DEFAULT
                 EVT_SET(LVar8, LVar0)
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
@@ -232,7 +232,7 @@ EvtScript N(interact_80241564) = {
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004D))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11004D))
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x21C, 0)
                         EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_7)
@@ -259,13 +259,13 @@ EvtScript N(interact_80241564) = {
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5)
                         EVT_SET(GF_FLO23_GaveBlueBerry, 1)
                     EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11004C))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1)
                     EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11004C))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1)
                     EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004B))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11004B))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_6)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, LVar8, 375, 20, 0, 1, 0)
@@ -323,9 +323,9 @@ EvtScript N(interact_80241564) = {
         EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x004E))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11004E))
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x004F))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11004F))
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -380,7 +380,7 @@ StaticNpc N(npcGroup_80241F98) = {
         NPC_ANIM_gate_flower_Palette_00_Anim_1,
         NPC_ANIM_gate_flower_Palette_00_Anim_1,
     },
-    .tattle = MESSAGE_ID(0x1A, 0x00DC),
+    .tattle = MESSAGE_ID(0x1A00DC),
 };
 
 StaticNpc N(npcGroup_80242188) = {

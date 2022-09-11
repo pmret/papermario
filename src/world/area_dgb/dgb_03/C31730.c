@@ -348,7 +348,7 @@ EvtScript N(80243740) = {
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00D8), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00D8), 160, 40)
         EVT_CALL(CloseChoicePopup)
         EVT_RESUME_GROUP(1)
         EVT_RETURN

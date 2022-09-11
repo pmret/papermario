@@ -137,7 +137,7 @@ EvtScript N(80243C9C) = {
 
 EvtScript N(80243CC8) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x017C), 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D017C), 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -824,7 +824,7 @@ EvtScript N(802482F8) = {
         EVT_ADD(LVar0, 1)
     EVT_END_IF
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00DC))
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00DC))
         EVT_SET(LVar0, 39)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
@@ -835,32 +835,32 @@ EvtScript N(802482F8) = {
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00D6))
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0011))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00D6))
+    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0011))
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00D7))
+        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00D7))
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00D8))
+    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00D8))
     EVT_CALL(ShowCoinCounter, 1)
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0018))
+    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0018))
     EVT_CALL(ShowCoinCounter, 0)
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00D7))
+        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00D7))
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(func_80241394_96A554), LVar0, LVar1)
     EVT_IF_NE(LVar1, 0)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00D9))
+        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00D9))
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00DA))
+    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00DA))
     EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
@@ -875,7 +875,7 @@ EvtScript N(802482F8) = {
     EVT_WAIT(60)
     EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_4)
     EVT_CALL(PlayerMoveTo, -100, -370, 8)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D, 0x00DB))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MESSAGE_ID(0x0D00DB))
     EVT_EXEC(N(80243AF0))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(func_802D2C14, 0)
@@ -1249,7 +1249,7 @@ EvtScript N(interact_8024ADE4) = {
         EVT_SET(LVar8, LVar0)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVar8)
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0006))
+    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0006))
     EVT_WAIT(3)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(ContinueSpeech, -1, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVar9)
@@ -1438,22 +1438,22 @@ EvtScript N(interact_8024B8F0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B2))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B2))
             EVT_ELSE
                 EVT_SWITCH(AreaByte(3))
                     EVT_CASE_EQ(0)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AF))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AF))
                         EVT_SET(AreaByte(3), 1)
                     EVT_CASE_EQ(1)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B0))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B0))
                         EVT_SET(AreaByte(3), 2)
                     EVT_CASE_EQ(2)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B1))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B1))
                         EVT_SET(AreaByte(3), 1)
                 EVT_END_SWITCH
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B3))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B3))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1472,14 +1472,14 @@ EvtScript N(interact_8024BA9C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutDesert, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0091))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D0091))
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0092))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D0092))
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0093))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D0093))
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0094))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D0094))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(8024B8A0))
     EVT_IF_NE(LVarC, 0)
@@ -1499,16 +1499,16 @@ EvtScript N(interact_8024BBD0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(3), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A1))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A1))
                 EVT_SET(AreaFlag(3), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A2))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A2))
                 EVT_SET(AreaFlag(3), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A3))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A3))
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A4))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A4))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1521,7 +1521,7 @@ EvtScript N(init_8024BCD4) = {
 };
 
 EvtScript N(interact_8024BCF8) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A0))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A0))
     EVT_RETURN
     EVT_END
 };
@@ -1536,26 +1536,26 @@ EvtScript N(interact_8024BD4C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A5))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A5))
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A6))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A6))
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A7))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A7))
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A8))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A8))
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00A9))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00A9))
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AA))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AA))
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
     EVT_END_SWITCH
@@ -1573,16 +1573,16 @@ EvtScript N(interact_8024BF34) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(5), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AB))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AB))
                 EVT_SET(AreaFlag(5), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AC))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AC))
                 EVT_SET(AreaFlag(5), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AD))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AD))
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00AE))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00AE))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1679,17 +1679,17 @@ EvtScript N(idle_8024C450) = {
 
 EvtScript N(interact_8024C4EC) = {
     EVT_IF_EQ(GF_DRO02_Moustafa_UnusedDialogOverride, 1)
-        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CF))
+        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CF))
         EVT_RETURN
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-64)
             EVT_SET(LVarB, 0)
-            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B4))
+            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B4))
             EVT_LABEL(0)
-            EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0019))
+            EVT_CALL(ShowChoice, MESSAGE_ID(0x1E0019))
             EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B6))
+                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B6))
                 EVT_EXEC(N(8024C1F8))
                 EVT_RETURN
             EVT_ELSE
@@ -1701,11 +1701,11 @@ EvtScript N(interact_8024C4EC) = {
             EVT_EXEC_WAIT(N(80248A50))
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B8))
+                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B8))
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
                 EVT_CASE_EQ(-1)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B7))
+                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B7))
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
             EVT_END_SWITCH
@@ -1714,55 +1714,55 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_IF_EQ(LVarA, 156)
                     EVT_SET(GB_DRO02_SheekLemonGiftCount, 1)
                     EVT_SET(GB_DRO02_SheekGiftCount, 10)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BB))
-                    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001C))
+                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BB))
+                    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E001C))
                 EVT_ELSE
                     EVT_ADD(GB_DRO02_SheekGiftCount, 1)
                     EVT_IF_LE(GB_DRO02_SheekGiftCount, 2)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B5))
+                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B5))
                         EVT_GOTO(0)
                     EVT_END_IF
                     EVT_IF_EQ(GB_DRO02_SheekGiftCount, 3)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B9))
-                        EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001B))
+                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B9))
+                        EVT_CALL(ShowChoice, MESSAGE_ID(0x1E001B))
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BA))
-                        EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001B))
+                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BA))
+                        EVT_CALL(ShowChoice, MESSAGE_ID(0x1E001B))
                         EVT_SET(GB_DRO02_SheekGiftCount, 10)
                     EVT_END_IF
                 EVT_END_IF
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BA))
-                EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001C))
+                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BA))
+                EVT_CALL(ShowChoice, MESSAGE_ID(0x1E001C))
             EVT_END_IF
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BC))
+                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BC))
                 EVT_CASE_EQ(1)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BD))
+                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BD))
                     EVT_SET(GF_DRO02_Sheek_AskedAboutDesert, 1)
                 EVT_CASE_EQ(2)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BE))
+                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BE))
                     EVT_SET(GF_DRO02_Sheek_AskedAboutRuins, 1)
                 EVT_CASE_EQ(3)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BF))
+                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00BF))
                 EVT_CASE_EQ(4)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C1))
+                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C1))
                     EVT_SET(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
                     EVT_SET(LVarB, 1)
             EVT_END_SWITCH
             EVT_SET(GF_DRO02_Sheek_SpokeTo, 1)
-            EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C0))
-            EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001A))
+            EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C0))
+            EVT_CALL(ShowChoice, MESSAGE_ID(0x1E001A))
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(EndSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0)
                 EVT_GOTO(1)
             EVT_ELSE
-                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B6))
+                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00B6))
             EVT_END_IF
             EVT_IF_EQ(LVarB, 1)
                 EVT_IF_EQ(MapFlag(0), 0)
@@ -1771,7 +1771,7 @@ EvtScript N(interact_8024C4EC) = {
                         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                         EVT_CALL(AwaitPlayerLeave, LVar0, LVar2, 50)
                         EVT_CALL(DisablePlayerInput, TRUE)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C2))
+                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C2))
                         EVT_CALL(DisablePlayerInput, FALSE)
                         EVT_SET(MapFlag(0), 0)
                     EVT_END_THREAD
@@ -1792,54 +1792,54 @@ EvtScript N(interact_8024C4EC) = {
             EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(FadeOutMusic, 0, 500)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C3))
+                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C3))
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C4))
+                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C4))
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C5))
+                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C5))
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C6))
+                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C6))
             EVT_END_IF
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -337, 140, -200, 20)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C7))
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C8))
+            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C7))
+            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C8))
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -335, 163, -260, 20)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C9))
+            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00C9))
             EVT_SET(LVar0, 18)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddKeyItem, ITEM_PULSE_STONE)
             EVT_SET(GB_StoryProgress, -63)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CA))
+            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CA))
             EVT_KILL_THREAD(LVarA)
             EVT_EXEC(N(80243AF0))
         EVT_CASE_GE(-63)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(-62)
-                    EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CB))
+                    EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CB))
                 EVT_CASE_GE(-62)
                     EVT_IF_GE(GB_StoryProgress, -56)
                         EVT_IF_EQ(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 0)
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CD))
+                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CD))
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                             EVT_WAIT(15)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
                             EVT_WAIT(30)
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CE))
+                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CE))
                             EVT_SET(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 1)
                         EVT_ELSE
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00D0))
+                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00D0))
                         EVT_END_IF
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CC))
+                        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D00CC))
                     EVT_END_IF
             EVT_END_SWITCH
     EVT_END_SWITCH
@@ -2018,7 +2018,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_archeologist_Palette_00_Anim_1,
             NPC_ANIM_archeologist_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x0001),
+        .tattle = MESSAGE_ID(0x1A0001),
     },
     {
         .id = NPC_DRYITE0,
@@ -2051,7 +2051,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_dryite_Palette_02_Anim_1,
             NPC_ANIM_dryite_Palette_02_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009C),
+        .tattle = MESSAGE_ID(0x1A009C),
     },
     {
         .id = NPC_DISGUISED_MOUSTAFA,
@@ -2083,7 +2083,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
             NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x0098),
+        .tattle = MESSAGE_ID(0x1A0098),
     },
     {
         .id = NPC_TOAD,
@@ -2115,7 +2115,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_toad_Palette_00_Anim_3,
             NPC_ANIM_toad_Palette_00_Anim_3,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009A),
+        .tattle = MESSAGE_ID(0x1A009A),
     },
     {
         .id = NPC_WORLD_MERLEE,
@@ -2147,7 +2147,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_world_merlee_Palette_00_Anim_4,
             NPC_ANIM_world_merlee_Palette_00_Anim_4,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009B),
+        .tattle = MESSAGE_ID(0x1A009B),
     },
     {
         .id = NPC_MOUSTAFA,
@@ -2179,7 +2179,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_moustafa_Palette_00_Anim_1,
             NPC_ANIM_moustafa_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x0099),
+        .tattle = MESSAGE_ID(0x1A0099),
     },
     {
         .id = NPC_DRYITE1,
@@ -2211,7 +2211,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_dryite_Palette_00_Anim_1,
             NPC_ANIM_dryite_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009D),
+        .tattle = MESSAGE_ID(0x1A009D),
     },
     {
         .id = NPC_DRYITE2,
@@ -2243,7 +2243,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_dryite_Palette_00_Anim_1,
             NPC_ANIM_dryite_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x00A0),
+        .tattle = MESSAGE_ID(0x1A00A0),
     },
     {
         .id = NPC_MOUSER0,
@@ -2275,7 +2275,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_mouser_Palette_00_Anim_1,
             NPC_ANIM_mouser_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009E),
+        .tattle = MESSAGE_ID(0x1A009E),
     },
     {
         .id = NPC_MOUSER1,
@@ -2307,7 +2307,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_mouser_Palette_00_Anim_1,
             NPC_ANIM_mouser_Palette_00_Anim_1,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x009F),
+        .tattle = MESSAGE_ID(0x1A009F),
     },
     {
         .id = NPC_MOUSER2,
@@ -2371,7 +2371,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
             NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
         },
-        .tattle = MESSAGE_ID(0x1A, 0x0002),
+        .tattle = MESSAGE_ID(0x1A0002),
     },
 };
 

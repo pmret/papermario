@@ -18,7 +18,7 @@
     EVT_CALL(AssignScript, EVT_PTR(N(SuperBlock_OnHit)))
 
 s32 N(SuperBlock_CantUpgradeMessages)[2] = {
-    MESSAGE_ID(0x1D,0xF0), MESSAGE_ID(0x1D,0xF1)
+    MESSAGE_ID(0x1D00F0), MESSAGE_ID(0x1D00F1)
 };
 
 s16 N(SuperBlock_PartnerIDs)[8] = {
@@ -33,14 +33,14 @@ s16 N(SuperBlock_PartnerIDs)[8] = {
 };
 
 s32 N(SuperBlock_UpgradeDescMessages)[8][2] = {
-    { MESSAGE_ID(0x1D,0xE0), MESSAGE_ID(0x1D,0xE1) },
-    { MESSAGE_ID(0x1D,0xE2), MESSAGE_ID(0x1D,0xE3) },
-    { MESSAGE_ID(0x1D,0xE4), MESSAGE_ID(0x1D,0xE5) },
-    { MESSAGE_ID(0x1D,0xE6), MESSAGE_ID(0x1D,0xE7) },
-    { MESSAGE_ID(0x1D,0xE8), MESSAGE_ID(0x1D,0xE9) },
-    { MESSAGE_ID(0x1D,0xEA), MESSAGE_ID(0x1D,0xEB) },
-    { MESSAGE_ID(0x1D,0xEC), MESSAGE_ID(0x1D,0xED) },
-    { MESSAGE_ID(0x1D,0xEE), MESSAGE_ID(0x1D,0xEF) }
+    { MESSAGE_ID(0x1D00E0), MESSAGE_ID(0x1D00E1) },
+    { MESSAGE_ID(0x1D00E2), MESSAGE_ID(0x1D00E3) },
+    { MESSAGE_ID(0x1D00E4), MESSAGE_ID(0x1D00E5) },
+    { MESSAGE_ID(0x1D00E6), MESSAGE_ID(0x1D00E7) },
+    { MESSAGE_ID(0x1D00E8), MESSAGE_ID(0x1D00E9) },
+    { MESSAGE_ID(0x1D00EA), MESSAGE_ID(0x1D00EB) },
+    { MESSAGE_ID(0x1D00EC), MESSAGE_ID(0x1D00ED) },
+    { MESSAGE_ID(0x1D00EE), MESSAGE_ID(0x1D00EF) }
 };
 
 f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS] = {
@@ -100,7 +100,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, LVarC)
     EVT_CALL(N(SuperBlock_CountEligiblePartners))
     EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDC), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DC), 160, 40)
         EVT_WAIT(10)
         EVT_CALL(N(SuperBlock_EndGlowEffect), LVar9)
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -111,9 +111,9 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_END_IF
     EVT_IF_EQ(GF_Tutorial_SuperBlock, 0)
         EVT_SET(GF_Tutorial_SuperBlock, 1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDA), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DA), 160, 40)
     EVT_ELSE
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDB), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DB), 160, 40)
     EVT_END_IF
     EVT_CALL(N(SuperBlock_ShowSelectPartnerMenu))
     EVT_IF_EQ(LVar0, -1)
@@ -134,8 +134,8 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF
     EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0x0DF), 160, 40)
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E,0x0D))
+    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DF), 160, 40)
+    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E000D))
     EVT_CALL(CloseMessage)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(N(SuperBlock_EndGlowEffect), LVar9)
@@ -151,9 +151,9 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(N(SuperBlock_EndGlowEffect), LVar9)
     EVT_CALL(N(SuperBlock_LoadCurrentPartnerName))
     EVT_IF_EQ(LVarD, 1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDD), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DD), 160, 40)
     EVT_ELSE
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDE), 160, 40)
+        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D00DE), 160, 40)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(EnablePartnerAI)
