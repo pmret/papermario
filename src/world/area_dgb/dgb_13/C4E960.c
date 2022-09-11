@@ -9,7 +9,7 @@ MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_13_tattle },
+    .tattle = { MSG_MapTattle_dgb_13 },
 };
 
 EvtScript N(80240050) = {
@@ -48,7 +48,7 @@ EvtScript N(main) = {
     EVT_CALL(ModifyColliderFlags, 0, 6, 0x7FFFFE00)
     EVT_EXEC_WAIT(N(80240680))
     EVT_EXEC(N(80240050))
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(8024014C)))
+    EVT_SET(LVar0, EVT_PTR(N(8024014C)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -75,10 +75,10 @@ EvtScript N(80240380) = {
     EVT_CALL(MakeLerp, 0, 30, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
+        EVT_CALL(TranslateGroup, 47, 0, 0, LVar0)
         EVT_CALL(UpdateColliderTransform, 13)
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -90,10 +90,10 @@ EvtScript N(80240424) = {
     EVT_CALL(MakeLerp, 30, 0, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
+        EVT_CALL(TranslateGroup, 47, 0, 0, LVar0)
         EVT_CALL(UpdateColliderTransform, 13)
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -105,10 +105,10 @@ EvtScript N(802404C8) = {
     EVT_CALL(MakeLerp, 0, 30, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
+        EVT_CALL(TranslateGroup, 53, 0, 0, LVar0)
         EVT_CALL(UpdateColliderTransform, 17)
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -120,10 +120,10 @@ EvtScript N(8024056C) = {
     EVT_CALL(MakeLerp, 30, 0, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
+        EVT_CALL(TranslateGroup, 53, 0, 0, LVar0)
         EVT_CALL(UpdateColliderTransform, 17)
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -132,12 +132,12 @@ EvtScript N(8024056C) = {
 };
 
 EvtScript N(80240610) = {
-    EVT_IF_EQ(EVT_MAP_VAR(0), 0)
+    EVT_IF_EQ(MapVar(0), 0)
         EVT_EXEC_WAIT(N(80240380))
-        EVT_SET(EVT_MAP_VAR(0), 1)
+        EVT_SET(MapVar(0), 1)
     EVT_ELSE
         EVT_EXEC_WAIT(N(80240424))
-        EVT_SET(EVT_MAP_VAR(0), 0)
+        EVT_SET(MapVar(0), 0)
     EVT_END_IF
     EVT_UNBIND
     EVT_RETURN

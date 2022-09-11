@@ -5,6 +5,7 @@
 #include "world/partners.h"
 #include "sparkle_script.h"
 #include "item_entity.h"
+#include "message_ids.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -326,18 +327,18 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar) {
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
     s32 i;
     s32 id;
     ItemEntity* itemEntity;
     f32 hitDepth;
     Shadow* shadow;
 
-    if (pickupVar <= -120000000) {
-        pickupVar = pickupVar + 130000000;
+    if (pickupFlagIndex <= EVT_GAME_FLAG_CUTOFF) {
+        pickupFlagIndex = EVT_INDEX_OF_GAME_FLAG(pickupFlagIndex);
     }
 
-    if (pickupVar > 0) {
+    if (pickupFlagIndex > 0) {
         switch (itemSpawnMode) {
             case ITEM_SPAWN_MODE_KEY:
             case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
@@ -353,7 +354,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             case ITEM_SPAWN_MODE_FIXED:
             case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
             case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
-                if (get_global_flag(pickupVar) != 0) {
+                if (get_global_flag(pickupFlagIndex) != 0) {
                     return -1;
                 }
                 break;
@@ -388,7 +389,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     itemEntity->flags = ITEM_ENTITY_FLAGS_80 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM0;
     itemEntity->pickupMsgFlags = 0;
-    itemEntity->boundVar = pickupVar;
+    itemEntity->boundVar = pickupFlagIndex;
     itemEntity->itemID = itemID;
     itemEntity->physicsData = NULL;
     itemEntity->pickupDelay = pickupDelay;
@@ -813,8 +814,8 @@ void update_item_entities(void) {
 
 void appendGfx_item_entity(void* data) {
     ItemEntity* itemEntity = (ItemEntity*)data;
-    Mtx sp18;
-    Matrix4f sp58, sp98, spD8;
+    Mtx mtxTransform;
+    Matrix4f mtxTranslate, mtxRotY, mtxScale;
     s32 alpha = 255;
     s32 yOffset;
     f32 rot;
@@ -843,16 +844,16 @@ void appendGfx_item_entity(void* data) {
     }
 
     rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
-    guTranslateF(sp58, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
-    guRotateF(sp98, rot, 0.0f, 1.0f, 0.0f);
+    guTranslateF(mtxTranslate, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
+    guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
     if (itemEntity->flags & ITEM_ENTITY_FLAGS_TINY) {
-        guScaleF(spD8, itemEntity->scale, itemEntity->scale, itemEntity->scale);
-        guMtxCatF(sp98, spD8, sp98);
+        guScaleF(mtxScale, itemEntity->scale, itemEntity->scale, itemEntity->scale);
+        guMtxCatF(mtxRotY, mtxScale, mtxRotY);
     }
-    guMtxCatF(sp98, sp58, sp58);
-    guMtxF2L(sp58, &sp18);
+    guMtxCatF(mtxRotY, mtxTranslate, mtxTranslate);
+    guMtxF2L(mtxTranslate, &mtxTransform);
 
-    gDisplayContext->matrixStack[gMatrixListPos] = sp18;
+    gDisplayContext->matrixStack[gMatrixListPos] = mtxTransform;
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -900,9 +901,9 @@ void appendGfx_item_entity(void* data) {
             gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
 
             if (itemEntity->flags & (ITEM_ENTITY_FLAGS_8000000 | ITEM_ENTITY_FLAGS_TRANSPARENT)) {
-                func_801491E4(&sp58, 0, 0, 0x18, 0x18, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, alpha);
             } else {
-                func_801491E4(&sp58, 0, 0, 0x18, 0x18, 255);
+                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, 255);
             }
         } else {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
@@ -934,9 +935,9 @@ void appendGfx_item_entity(void* data) {
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
             if (itemEntity->flags & (ITEM_ENTITY_FLAGS_8000000 | ITEM_ENTITY_FLAGS_TRANSPARENT)) {
-                func_801491E4(&sp58, 0, 0, 0x20, 0x20, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, alpha);
             } else {
-                func_801491E4(&sp58, 0, 0, 0x20, 0x20, 255);
+                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, 255);
             }
         } else {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
@@ -1373,7 +1374,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                 physData->unk_08 = 24.0f;
                 physData->constVelocity = 24.0f;
                 if (item->wsFaceAngle < 0) {
-                    if (IS_ID_ITEM(item->itemID)) {
+                    if (IS_ITEM(item->itemID)) {
                         if (rand_int(10000) < 5000) {
                             physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
                         } else {
@@ -1633,9 +1634,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                             physData->velz = 0.0f;
                             item->flags |= ITEM_ENTITY_FLAGS_20000000;
                         } else {
-                            if (IS_ID_BADGE(item->itemID)) {
+                            if (IS_BADGE(item->itemID)) {
                                 sfx_play_sound_at_position(SOUND_21B, 0, item->position.x, item->position.y, item->position.z);
-                            } else if (IS_ID_ITEM(item->itemID)) {
+                            } else if (IS_ITEM(item->itemID)) {
                                 sfx_play_sound_at_position(SOUND_21A, 0, item->position.x, item->position.y, item->position.z);
                             } else {
                                 switch (item->itemID) {
@@ -1686,9 +1687,9 @@ void update_item_entity_collectable(ItemEntity* item) {
 
             fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
 
-            if (IS_ID_ITEM(item->itemID)) {
+            if (IS_ITEM(item->itemID)) {
                 item->state = 0xA;
-            } else if (IS_ID_BADGE(item->itemID)) {
+            } else if (IS_BADGE(item->itemID)) {
                 item->state = 0xA;
             } else if (item->itemID == ITEM_STAR_PIECE) {
                 playerData->starPiecesCollected++;
@@ -2054,15 +2055,15 @@ block_47: // TODO required to match
             break;
         case 4:
             if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) &&
-                !evt_get_variable(NULL, GSWF(97)))
+                !evt_get_variable(NULL, GF_Tutorial_GotItem))
             {
-                evt_set_variable(NULL, GSWF(97), TRUE);
+                evt_set_variable(NULL, GF_Tutorial_GotItem, TRUE);
                 itemEntity->state = 5;
                 break;
             }
 
-            if (itemEntity->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GSWF(101))) {
-                evt_set_variable(NULL, GSWF(101), TRUE);
+            if (itemEntity->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
+                evt_set_variable(NULL, GF_Tutorial_GotStarPiece, TRUE);
                 itemEntity->state = 5;
                 break;
             }
@@ -2221,19 +2222,19 @@ void func_801363A0(ItemEntity* itemEntity) {
         case 10:
             if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                    itemMsg = MSG_Menus_0058;
                 } else {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                    itemMsg = MSG_Menus_005A;
                 }
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                    itemMsg = MSG_Menus_005D;
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                    itemMsg = MSG_Menus_005E;
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                    itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
@@ -2250,19 +2251,19 @@ void func_801363A0(ItemEntity* itemEntity) {
                 s3 = 0x4C;
             } else {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                    itemMsg = MSG_Menus_0059;
                 } else {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                    itemMsg = MSG_Menus_005B;
                 }
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                    itemMsg = MSG_Menus_005D;
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                    itemMsg = MSG_Menus_005E;
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                    itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
@@ -2287,13 +2288,13 @@ void func_801363A0(ItemEntity* itemEntity) {
                 set_window_properties(WINDOW_ID_19, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
-                offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x060), 0) + 0x18;
+                offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
                 set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
-            offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
+            offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
             set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
     }
@@ -2314,36 +2315,36 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 11:
             if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                    itemMsg = MSG_Menus_0058;
                 } else {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                    itemMsg = MSG_Menus_005A;
                 }
                 set_message_msg(itemData->nameMsg, 0);
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                    itemMsg = MSG_Menus_005D;
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                    itemMsg = MSG_Menus_005E;
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                    itemMsg = MSG_Menus_005C;
                 }
             } else {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                    itemMsg = MSG_Menus_0059;
                 } else {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                    itemMsg = MSG_Menus_005B;
                 }
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                    itemMsg = MSG_Menus_005D;
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                    itemMsg = MSG_Menus_005E;
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                    itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
@@ -2369,7 +2370,7 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 13:
         case 14:
             set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
-            draw_msg(MESSAGE_ID(0x1D, 0x05F), posX + 40, posY + 4, 255, 47, 0);
+            draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, 47, 0);
             hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
             hud_element_draw_next(D_801568E0);
             break;
@@ -2377,7 +2378,7 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
 }
 
 void func_801369D0(ItemEntity* itemEntity, s32 x, s32 y) {
-    draw_msg(MESSAGE_ID(0x1D,0x060), x + 12, y + 4, 255, 52, 0);
+    draw_msg(MSG_Menus_0060, x + 12, y + 4, 255, 52, 0);
 }
 
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {

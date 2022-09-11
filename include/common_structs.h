@@ -70,6 +70,11 @@ typedef struct Vec2i {
     /* 0x04 */ s32 y;
 } Vec2i; // size = 0x08
 
+typedef struct VecXZi {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 z;
+} VecXZi; // size = 0x08
+
 typedef struct Vec3i {
     /* 0x00 */ s32 x;
     /* 0x04 */ s32 y;
@@ -81,10 +86,10 @@ typedef struct Vec2f {
     /* 0x04 */ f32 y;
 } Vec2f; // size = 0x08
 
-typedef struct Vec2XZf {
+typedef struct VecXZf {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 z;
-} Vec2XZf; // size = 0x08
+} VecXZf; // size = 0x08
 
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
@@ -610,7 +615,7 @@ typedef struct MusicSettings {
 } MusicSettings; // size = 0x30
 
 typedef struct MusicProximityTrigger {
-    /* 0x00 */ Vec2XZf pos;
+    /* 0x00 */ VecXZf pos;
     /* 0x08 */ f32 innerDist;
     /* 0x0C */ f32 outerDist;
     /* 0x10 */ s32 unk;
@@ -1901,8 +1906,8 @@ typedef struct PlayerStatus {
     /* 0x01C */ Vec3f extraVelocity;
     /* 0x028 */ Vec3f position;
     /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
-    /* 0x03C */ Vec2XZf jumpFromPos;
-    /* 0x044 */ Vec2XZf landPos;
+    /* 0x03C */ VecXZf jumpFromPos;
+    /* 0x044 */ VecXZf landPos;
     /* 0x04C */ f32 jumpFromHeight;
     /* 0x050 */ f32 jumpApexHeight;
     /* 0x054 */ f32 currentSpeed;

@@ -1,8 +1,9 @@
 #include "flo_10.h"
 
-s32 N(func_80240000_CB9200)(void) {
-    if (evt_get_variable(NULL, GB_StoryProgress) <= 0x30) {
-        return MESSAGE_ID(0x19, 0x0119);
+s32 N(get_tattle)(void) {
+    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+        return MSG_MapTattle_flo_10_before;
+    } else {
+        return MSG_MapTattle_flo_10_after;
     }
-    return MESSAGE_ID(0x19, 0x011A);
 }

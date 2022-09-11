@@ -8,7 +8,7 @@ static char* N(exit_str_1) = "kmr_12";
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING
 ApiStatus func_80240A6C_8D482C(Evt* script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, EVT_MAP_VAR(0)));
+    Entity* entity = get_entity_by_index(evt_get_variable(NULL, MapVar(0)));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;

@@ -42,5 +42,5 @@ enum {
 #define as_DisableMirroring AS_OP_19,
 
 // used in entity models
-#define ANIM_NULL (void*)(0xFFFFFFFF)
+#define ENTITY_ANIN_NULL (void*)(0xFFFFFFFF)
 #endif

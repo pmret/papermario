@@ -60,9 +60,9 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
     if (npc->duration <= 0) {
         randomDist = rand_int(30) + 180.0;
         isCCW = FALSE;
-        if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) - iterations;
-            moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) - iterations;
+            moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             if (randomDist > moveDist) {
                 randomDist = moveDist;
             }
@@ -286,10 +286,10 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
     
@@ -361,7 +361,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 ApiStatus N(FlyingMagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    evt_set_variable(script, EVT_VAR(0), gCurrentEncounter.currentEnemy == enemy);
+    evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
     return ApiStatus_DONE2;
 }
 

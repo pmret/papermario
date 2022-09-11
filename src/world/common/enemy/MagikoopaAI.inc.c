@@ -238,10 +238,10 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
     
@@ -326,7 +326,7 @@ ApiStatus N(MagikoopaAI_OnPlayerFled)(Evt* script, s32 isInitialCall) {
 ApiStatus N(MagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    evt_set_variable(script, EVT_VAR(0), gCurrentEncounter.currentEnemy == enemy);
+    evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
     return ApiStatus_DONE2;
 }
 

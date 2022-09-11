@@ -24,7 +24,7 @@ EvtScript N(main) = {
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241A9C)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80241040))
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(802411A8)))
+    EVT_SET(LVar0, EVT_PTR(N(802411A8)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -112,13 +112,24 @@ StaticNpc N(npcGroup_802414CC) = {
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = STANDARD_HEART_DROPS(3),
+        .dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops  = STANDARD_HEART_DROPS(3),
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 1,
         .maxCoinBonus = 3,
     },
-	.territory = { .temp = { -196, 130, 104, 50, 30, -32767, 1, -196, 130, 104, 120 }},
+    .territory = {
+        .wander = {
+            .isFlying = FALSE,
+            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+            .wanderShape = SHAPE_RECT,
+            .centerPos  = { -196, 130, 104 },
+            .wanderSize = { 50, 30 },
+            .detectShape = SHAPE_CYLINDER,
+            .detectPos  = { -196, 130, 104 },
+            .detectSize = { 120 },
+        }
+    },
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -184,7 +195,9 @@ StaticNpc N(npcGroup_802418AC) = {
     .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 20,
-    { ITEM_DRIED_SHROOM, 10, 0 },
+        .itemDrops = {
+            { ITEM_DRIED_SHROOM, 10, 0 }
+        },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .maxCoinBonus = 2,

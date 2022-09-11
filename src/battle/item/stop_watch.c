@@ -23,7 +23,7 @@ ApiStatus N(func_802A12D4_7270A4)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x00000092)
+    EVT_SET_CONST(LVarA, 0x00000092)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(5)
@@ -31,7 +31,7 @@ EvtScript N(main) = {
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FIXED(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_246)
     EVT_WAIT(200)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -39,17 +39,17 @@ EvtScript N(main) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
-    EVT_IF_EQ(EVT_VAR(0), 6)
+    EVT_CALL(ItemCheckHit, LVar0, 268435456, 0, LVar0, 0)
+    EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetItemPower, ITEM_STOP_WATCH, EVT_VAR(0), EVT_VAR(1))
-    EVT_CALL(MakeStatusField, EVT_VAR(0), 2097152, 100, EVT_VAR(0))
-    EVT_CALL(func_80252B3C, EVT_VAR(0), 1342177280, EVT_VAR(0), 0, 32)
+    EVT_CALL(GetItemPower, ITEM_STOP_WATCH, LVar0, LVar1)
+    EVT_CALL(MakeStatusField, LVar0, 2097152, 100, LVar0)
+    EVT_CALL(func_80252B3C, LVar0, 1342177280, LVar0, 0, 32)
     EVT_LABEL(1)
     EVT_WAIT(5)
-    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), -1)
+    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(N(func_802A12D4_7270A4))

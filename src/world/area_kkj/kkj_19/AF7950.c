@@ -23,7 +23,7 @@ ApiStatus func_80240000_AF7950(Evt* script, s32 isInitialCall) {
     s32 var;
 
     D_80240E90_AF87E0 = evt_get_variable(script, *args++);
-    var = evt_get_variable(NULL, LSWF(18));
+    var = evt_get_variable(NULL, AreaFlag(18));
 
     if (var == 1) {
         D_80240E88_AF87D8 = var;

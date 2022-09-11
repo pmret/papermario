@@ -75,10 +75,10 @@ void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         script->functionTemp[1]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x,
-                               enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX,
-                               enemy->territory->wander.wanderSizeZ) != 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x,
+                               enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x,
+                               enemy->territory->wander.wanderSize.z) != 0) {
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
@@ -175,10 +175,10 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
 

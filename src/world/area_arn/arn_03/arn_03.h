@@ -2,9 +2,9 @@
 /// @brief Gusty Gulch - Ghost Town 1
 
 #include "common.h"
-#include "map.h"
-#include "message_ids.h"
 #include "../arn.h"
+#include "message_ids.h"
+#include "map.h"
 
 #define NAMESPACE arn_03
 

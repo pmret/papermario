@@ -83,7 +83,7 @@ ApiStatus N(GetEffectiveTongueOffset)(Evt* script, s32 isInitialCall) {
         percent = 100.0f;
     }
     amplitude = (amplitude * percent) / 100.0f;
-    script->varTable[0] = EVT_FIXED(amplitude);
+    script->varTable[0] = EVT_FLOAT_TO_FIXED(amplitude);
     return ApiStatus_DONE2;
 }
 

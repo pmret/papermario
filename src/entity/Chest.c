@@ -11,9 +11,9 @@ extern Mtx Entity_Chest_lidMtx;
 
 EvtScript Entity_Chest_AdjustCam_ISK = {
     EVT_THREAD
-        EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(UseSettingsFrom, 0, -195, -358, -555)
-        EVT_CALL(SetPanTarget, 0, LW(0), LW(1), LW(2))
+        EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, 0, EVT_FLOAT(290.0))
         EVT_CALL(SetCamPitch, 0, EVT_FLOAT(20.0), EVT_FLOAT(-10.0))
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
@@ -357,7 +357,7 @@ void entity_GiantChest_open(Entity* entity) {
 void entity_GiantChest_give_equipment(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
     f32 angle;
-    s32 flag;
+    s32 flagIndex;
 
     switch (data->itemID) {
         case ITEM_JUMP:
@@ -388,11 +388,11 @@ void entity_GiantChest_give_equipment(Entity* entity) {
         data->itemEntityIndex = make_item_entity_nodelay(data->itemID, data->itemEntityPos.x, data->itemEntityPos.y, data->itemEntityPos.z, 1, -1);
     }
 
-    flag = data->gameFlagIndex;
-    if (flag <= EVT_SAVE_FLAG(10000000)) {
-        flag += 130000000;
+    flagIndex = data->gameFlagIndex;
+    if (flagIndex <= EVT_GAME_FLAG_CUTOFF) {
+        flagIndex = EVT_INDEX_OF_GAME_FLAG(flagIndex);
     }
-    set_global_flag(flag);
+    set_global_flag(flagIndex);
 }
 
 void entity_Chest_start_bound_script(Entity* entity) {

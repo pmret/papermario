@@ -10,70 +10,70 @@ extern Gfx Entity_SimpleSpring_RenderPart6[];
 extern Gfx Entity_SimpleSpring_RenderPart7[];
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart9 = {
-    .displayList = ANIM_NULL,
+    .displayList = ENTITY_ANIN_NULL,
     .pos = { 0.0f, 5.0f, 0.0f },
-    .sibling = ANIM_NULL,
-    .child = ANIM_NULL,
+    .sibling = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart8 = {
-    .displayList = ANIM_NULL,
+    .displayList = ENTITY_ANIN_NULL,
     .pos = { 0.0f, 20.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart9,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart7 = {
     .displayList = Entity_SimpleSpring_RenderPart7,
     .sibling = &Entity_SimpleSpring_NodePart8,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart6 = {
     .displayList = Entity_SimpleSpring_RenderPart6,
     .pos = { 0.0f, 20.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart7,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart5 = {
     .displayList = Entity_SimpleSpring_RenderPart5,
     .pos = { 0.0f, 8.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart6,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart4 = {
     .displayList = Entity_SimpleSpring_RenderPart4,
     .pos = { 0.0f, 12.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart5,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart3 = {
     .displayList = Entity_SimpleSpring_RenderPart3,
     .pos = { 0.0f, 16.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart4,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart2 = {
     .displayList = Entity_SimpleSpring_RenderPart2,
     .pos = { 0.0f, 20.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart3,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_NodePart1 = {
     .displayList = Entity_SimpleSpring_RenderPart1,
     .pos = { 0.0f, 20.0f, 0.0f },
     .sibling = &Entity_SimpleSpring_NodePart2,
-    .child = ANIM_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_SimpleSpring_ParentNode = {
-    .displayList = ANIM_NULL,
-    .sibling = ANIM_NULL,
+    .displayList = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIN_NULL,
     .child = &Entity_SimpleSpring_NodePart1,
 };
 
@@ -88,7 +88,7 @@ StaticAnimatorNode* Entity_SimpleSpring_Mesh[] = {
     &Entity_SimpleSpring_NodePart7,
     &Entity_SimpleSpring_NodePart8,
     &Entity_SimpleSpring_NodePart9,
-    ANIM_NULL,
+    ENTITY_ANIN_NULL,
 };
 
 AnimScript Entity_SimpleSpring_AnimLaunch = {

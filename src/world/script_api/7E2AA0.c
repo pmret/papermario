@@ -24,10 +24,10 @@ typedef struct AdvancedDoor {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s16 newItemVisGroup;
     /* 0x0A */ s16 prevItemVisGroup;
-    /* 0x0C */ Vec2XZf unk_0C;
-    /* 0x14 */ Vec2XZf unk_14;
-    /* 0x1C */ Vec2XZf unk_1C;
-    /* 0x24 */ Vec2XZf unk_24;
+    /* 0x0C */ VecXZf unk_0C;
+    /* 0x14 */ VecXZf unk_14;
+    /* 0x1C */ VecXZf unk_1C;
+    /* 0x24 */ VecXZf unk_24;
     /* 0x2C */ EvtScript* scripts[4];
     /* 0x3C */ s32 modelID;
     /* 0x40 */ s32 bgColor[3];

@@ -21,7 +21,7 @@ ApiStatus func_802402BC_918E6C(Evt* script, s32 isInitialCall) {
         result = 1;
     }
     if (result >= 0) {
-        evt_set_variable(script, GW(9), result);
+        evt_set_variable(script, MapVar(9), result);
     }
     return ApiStatus_BLOCK;
 }

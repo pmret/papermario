@@ -1,7 +1,7 @@
 #include "kzn_10.h"
 
-#define UNK_FUNC_50_VAR1 -469.0
-#define UNK_FUNC_50_VAR2 46.0
+#define UNK_FUNC_50_LVar1 -469.0
+#define UNK_FUNC_50_LVar2 46.0
 
 ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
     subtract_hp(1);

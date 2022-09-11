@@ -101,9 +101,9 @@ ActorBlueprint NAMESPACE = {
 
 EvtScript N(init) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, 116, 70, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_RETURN
     EVT_END
 };
@@ -118,8 +118,8 @@ EvtScript N(idle) = {
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_OR_EQ(EVENT_HIT)
@@ -129,15 +129,15 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
-            EVT_IF_EQ(LW(0), 0)
-                EVT_CALL(func_8026E914, LW(0), LW(1))
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_IF_EQ(LVar0, 0)
+                EVT_CALL(func_8026E914, LVar0, LVar1)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
-            EVT_IF_EQ(LW(0), 0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
@@ -173,8 +173,8 @@ EvtScript N(onHit) = {
 };
 
 EvtScript N(shake_tank) = {
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
-    EVT_IF_EQ(LW(0), 0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+    EVT_IF_EQ(LVar0, 0)
         EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
         EVT_WAIT(30)
     EVT_END_IF
@@ -384,9 +384,9 @@ EvtScript N(onDeath) = {
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, 0)
     EVT_CALL(EnableModel, 41, 0)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 5, LW(0))
-    EVT_IF_NE(LW(0), 0)
-        EVT_CALL(RemoveEffect, LW(0))
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 5, LVar0)
+    EVT_IF_NE(LVar0, 0)
+        EVT_CALL(RemoveEffect, LVar0)
         EVT_CALL(SetActorVar, ACTOR_ENEMY1, 5, 0)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)

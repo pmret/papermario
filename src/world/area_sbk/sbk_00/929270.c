@@ -15,7 +15,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_sbk_00_tattle },
+    .tattle = { MSG_MapTattle_sbk_00 },
 };
 
 EvtScript N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  1, "sbk_01",  0);
@@ -43,7 +43,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_CALL(N(SpawnSunEffect))
     EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(80240198)))
+    EVT_SET(LVar0, EVT_PTR(N(80240198)))
     EVT_EXEC(EnterWalk)
     EVT_RETURN
     EVT_END

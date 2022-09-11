@@ -1259,7 +1259,7 @@ Actor* create_actor(Formation formation) {
     DecorationTable* decorationTable;
     s32 i, j, k;
 
-    if (formation->home.index >= -270000000) {
+    if (formation->home.index >= EVT_LIMIT) {
         x = btl_actorHomePositions[formation->home.index].x;
         y = btl_actorHomePositions[formation->home.index].y;
         z = btl_actorHomePositions[formation->home.index].z;

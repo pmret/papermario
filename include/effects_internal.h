@@ -50,7 +50,7 @@ EffectInstance* star_main(s32, f32, f32, f32, f32, f32, f32, f32);
 void emote_main(s32, s32, f32, f32, f32, f32, f32, s32, EffectInstance**);
 FX_MAIN(sparkles_main);
 EffectInstance* shape_spell_main(s32, f32, f32, f32, f32, f32, f32, s32);
-FX_MAIN(gather_energy_pink_main);
+void gather_energy_pink_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(drop_leaves_main);
 EffectInstance* dust_main(s32, f32, f32, f32, s32);
 FX_MAIN(shattering_stones_main);

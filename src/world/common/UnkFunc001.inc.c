@@ -14,10 +14,10 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
 
     detectVolumePtr->skipPlayerDetectChance = 0;
     detectVolumePtr->shape = enemy->territory->wander.detectShape;
-    detectVolumePtr->pointX = enemy->territory->wander.detect.x;
-    detectVolumePtr->pointZ = enemy->territory->wander.detect.z;
-    detectVolumePtr->sizeX = enemy->territory->wander.detectSizeX;
-    detectVolumePtr->sizeZ = enemy->territory->wander.detectSizeZ;
+    detectVolumePtr->pointX = enemy->territory->wander.detectPos.x;
+    detectVolumePtr->pointZ = enemy->territory->wander.detectPos.z;
+    detectVolumePtr->sizeX = enemy->territory->wander.detectSize.x;
+    detectVolumePtr->sizeZ = enemy->territory->wander.detectSize.z;
     detectVolumePtr->halfHeight = 500.0f;
     detectVolumePtr->detectFlags = 0;
 

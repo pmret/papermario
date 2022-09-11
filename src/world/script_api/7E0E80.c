@@ -1,4 +1,5 @@
 #include "common.h"
+#include "message_ids.h"
 #include "hud_element.h"
 #include "model.h"
 #include "pause/pause_common.h"
@@ -13,54 +14,54 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
 
 EvtScript ShopBeginSpeech = {
-    EVT_CALL(SpeakToPlayer, VAR1, VAR2, VAR3, 0, VAR0)
+    EVT_CALL(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopContinueSpeech = {
-    EVT_CALL(ContinueSpeech, VAR1, VAR2, VAR3, 0, VAR0)
+    EVT_CALL(ContinueSpeech, LVar1, LVar2, LVar3, 0, LVar0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopResetSpeech = {
-    EVT_CALL(EndSpeech, VAR1, VAR2, VAR3, 0)
-    EVT_CALL(SpeakToPlayer, VAR1, VAR2, VAR3, 0, VAR0)
+    EVT_CALL(EndSpeech, LVar1, LVar2, LVar3, 0)
+    EVT_CALL(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopEndSpeech = {
-    EVT_CALL(EndSpeech, VAR0, VAR1, VAR2, 0)
+    EVT_CALL(EndSpeech, LVar0, LVar1, LVar2, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript D_80283F58_7E4DD8 = {
-    EVT_CALL(GetCurrentPartner, VAR1)
-    EVT_IF_EQ(VAR1, 0)
+    EVT_CALL(GetCurrentPartner, LVar1)
+    EVT_IF_EQ(LVar1, 0)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(VAR1, 2)
+    EVT_IF_EQ(LVar1, 2)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(VAR1, 3)
+    EVT_IF_EQ(LVar1, 3)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_RETURN
     EVT_LABEL(10)
     EVT_CALL(func_802803C8)
-    EVT_IF_EQ(VAR2, 0)
+    EVT_IF_EQ(LVar2, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(func_80280410, VAR0)
+    EVT_CALL(func_80280410, LVar0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript BadgeShopInteract = {
-    EVT_CALL(ShowShopPurchaseDialog, VAR0)
+    EVT_CALL(ShowShopPurchaseDialog, LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -271,7 +272,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 100;
                 script->functionTemp[2] = 0;
-                D_80286528 = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0x01), &script->functionTemp[2]);
+                D_80286528 = msg_get_printer_for_msg(MSG_Choice_0001, &script->functionTemp[2]);
             }
             break;
         case 100:
@@ -508,7 +509,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_41;
                 script->functionTemp[2] = 0;
-                D_80286538 = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0x3), &script->functionTemp[2]);
+                D_80286538 = msg_get_printer_for_msg(MSG_Choice_0003, &script->functionTemp[2]);
             }
             break;
         case DIALOG_STATE_41:

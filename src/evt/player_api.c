@@ -395,7 +395,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
 
         if (npcID == NPC_SELF) {
             npc = get_npc_safe(script->owner2.npcID);
-        } else if (npcID < -270000000) {
+        } else if (npcID < EVT_LIMIT) {
             npc = (Npc*)npcID;
         } else {
             npc = get_npc_safe(npcID);

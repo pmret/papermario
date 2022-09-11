@@ -35,19 +35,19 @@ s32 D_80280A30 = 0xFF;
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
+        EVT_SETF(LVar0, EVT_FLOAT(1.0))
         EVT_LOOP(10)
-            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
+            EVT_CALL(SetActorScale, 256, LVar0, LVar0, EVT_FLOAT(1.0))
+            EVT_SUBF(LVar0, EVT_FLOAT(0.1))
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CALL(EnablePartnerBlur)
     EVT_CALL(PlaySoundAtActor, 0, 14)
-    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
-    EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
+    EVT_CALL(SetGoalPos, 256, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, 256, 10, 0, 0, 1)
     EVT_CALL(DisablePartnerBlur)
     EVT_RETURN
@@ -56,24 +56,24 @@ EvtScript BtlPutPartnerAway = {
 
 EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
+        EVT_SETF(LVar0, EVT_FLOAT(0.1))
         EVT_LOOP(20)
-            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05))
+            EVT_CALL(SetActorScale, 256, LVar0, LVar0, EVT_FLOAT(1.0))
+            EVT_ADDF(LVar0, EVT_FLOAT(0.05))
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, 0, 13)
-    EVT_CALL(GetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
-    EVT_IF_EQ(EVT_VAR(1), 0)
+    EVT_CALL(GetGoalPos, 256, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
+    EVT_IF_EQ(LVar1, 0)
         EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
     EVT_ELSE
         EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
     EVT_END_IF
-    EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ForceHomePos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetActorPos, 256, LVar0, LVar1, LVar2)
+    EVT_CALL(ForceHomePos, 256, LVar0, LVar1, LVar2)
     EVT_RETURN
     EVT_END
 };

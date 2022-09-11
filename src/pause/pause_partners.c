@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 #include "sprite.h"
 #include "sprite/npc/world_goombario.h"
 #include "sprite/npc/world_kooper.h"
@@ -49,55 +50,55 @@ s32 gPausePartnersSpriteAnims[][4] = {
         NPC_ANIM_world_goombario_normal_still,
         NPC_ANIM_world_goombario_normal_walk,
         NPC_ANIM_world_goombario_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_kooper_normal_still,
         NPC_ANIM_world_kooper_normal_walk,
         NPC_ANIM_world_kooper_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bombette_normal_still,
         NPC_ANIM_world_bombette_normal_walk,
         NPC_ANIM_world_bombette_normal_idle_fast,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_parakarry_Palette_00_Anim_0,
         NPC_ANIM_world_parakarry_Palette_00_Anim_2,
         NPC_ANIM_world_parakarry_Palette_00_Anim_6,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bow_Palette_00_Anim_0,
         NPC_ANIM_world_bow_Palette_00_Anim_2,
         NPC_ANIM_world_bow_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_watt_Palette_00_Anim_0,
         NPC_ANIM_world_watt_Palette_00_Anim_2,
         NPC_ANIM_world_watt_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_sushie_Palette_00_Anim_0,
         NPC_ANIM_world_sushie_Palette_00_Anim_2,
         NPC_ANIM_world_sushie_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_lakilester_Palette_00_Anim_0,
         NPC_ANIM_world_lakilester_Palette_00_Anim_5,
         NPC_ANIM_world_lakilester_Palette_00_Anim_9,
-        ANIM_END
+        ANIM_LIST_END
     }
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 gPausePartnersMessages[] = {
-    MESSAGE_ID(0x28, 0x6), MESSAGE_ID(0x28, 0x13), MESSAGE_ID(0x28, 0x20), MESSAGE_ID(0x28, 0x2D),
-    MESSAGE_ID(0x28, 0x3A), MESSAGE_ID(0x28, 0x47), MESSAGE_ID(0x28, 0x54), MESSAGE_ID(0x28, 0x61)
+    MSG_PartnerDesc_Goombario_Pause, MSG_PartnerDesc_Kooper_Pause, MSG_PartnerDesc_Bombette_Pause, MSG_PartnerDesc_Parakarry_Pause,
+    MSG_PartnerDesc_Bow_Pause, MSG_PartnerDesc_Watt_Pause, MSG_PartnerDesc_Sushie_Pause, MSG_PartnerDesc_Lakilester_Pause
 };
 s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
                                  MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
