@@ -373,8 +373,8 @@ void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
 
     if (gPauseMenuCurrentTab == 6) {
         if (gPauseMapCursorCurrentOption != -1) {
-            msgWidth = get_msg_width(MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3), 0);
-            msgID = MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3);
+            msgWidth = get_msg_width(MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3), 0);
+            msgID = MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3);
             draw_msg(msgID, baseX + ((width - msgWidth) >> 1), baseY + 1, 255, 0, 0);
         }
     }
@@ -521,7 +521,7 @@ void pause_map_handle_input(MenuPanel* tab) {
         return;
     }
 
-    gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (gPauseMapCursorCurrentOption * 3);
+    gPauseCurrentDescMsg = MSG_Menus_00F3 + (gPauseMapCursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
     if (evt_get_variable(0, GB_StoryProgress) >= gPauseMapSpaces[gPauseMapCursorCurrentOption].afterRequirement) {

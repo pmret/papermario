@@ -18,7 +18,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_sbk_01_tattle },
+    .tattle = { MSG_MapTattle_sbk_01 },
 };
 
 EvtScript N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);

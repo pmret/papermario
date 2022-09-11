@@ -82,7 +82,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_dro_02_tattle },
+    .tattle = { MSG_MapTattle_dro_02 },
 };
 
 EvtScript N(80243AF0) = {

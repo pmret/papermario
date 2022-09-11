@@ -120,7 +120,7 @@ ActorPartBlueprint N(parts)[] = {
         .elementImmunityFlags = 0,
         .unk_1C = 0,
         .unk_1D = 0,
-        .unk_20 = MSG_actor_general_guy_dup,
+        .unk_20 = MSG_EnemyName_GeneralGuyDup,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -134,7 +134,7 @@ ActorPartBlueprint N(parts)[] = {
         .elementImmunityFlags = 0,
         .unk_1C = 0,
         .unk_1D = 0,
-        .unk_20 = MSG_actor_general_guy_dup,
+        .unk_20 = MSG_EnemyName_GeneralGuyDup,
     },
 };
 

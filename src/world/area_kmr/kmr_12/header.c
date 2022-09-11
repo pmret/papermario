@@ -11,7 +11,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_kmr_12_tattle },
+    .tattle = { MSG_MapTattle_kmr_12 },
 };
 
 EvtScript N(PlayMusic) = {

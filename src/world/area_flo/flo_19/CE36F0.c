@@ -13,7 +13,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_flo_19_tattle },
+    .tattle = { MSG_MapTattle_flo_19 },
 };
 
 // Extraneous END_CASE_MULTI

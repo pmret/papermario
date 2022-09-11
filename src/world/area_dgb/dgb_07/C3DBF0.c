@@ -17,7 +17,7 @@ MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_07_tattle },
+    .tattle = { MSG_MapTattle_dgb_07 },
 };
 
 EvtScript N(80241490) = {

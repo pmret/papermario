@@ -17,7 +17,7 @@ MapSettings N(settings) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_flo_22_tattle },
+    .tattle = { MSG_MapTattle_flo_22 },
 };
 
 EvtScript N(802402E0) = {

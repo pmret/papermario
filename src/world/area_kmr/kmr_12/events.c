@@ -67,7 +67,7 @@ EvtScript N(ReadWestSign) = {
     // "Eat a Mushroom to regain your energy!"
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_kmr_12_sign_trap, 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTrap, 160, 40)
     EVT_RESUME_GROUP(1)
 
     EVT_SET(LocalFlag(0), FALSE)
@@ -214,7 +214,7 @@ EvtScript N(ReadEastSign) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_kmr_12_sign_to_fortress, 160, 40)
+    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Sign_GoombaKingsFortress, 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, 0)
     EVT_RETURN
