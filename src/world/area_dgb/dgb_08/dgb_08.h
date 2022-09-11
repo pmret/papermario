@@ -2,6 +2,8 @@
 /// @brief Tubba's Castle - East Hall (1/2F)
 
 #include "common.h"
+#include "../dgb.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE dgb_08

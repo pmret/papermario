@@ -2,6 +2,8 @@
 /// @brief Tubba's Castle - Great Hall
 
 #include "common.h"
+#include "../dgb.h"
+#include "message_ids.h"
 #include "map.h"
 #include "animation_script.h"
 

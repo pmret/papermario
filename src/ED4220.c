@@ -1,5 +1,6 @@
 #include "dead.h"
 #include "common.h"
+#include "message_ids.h"
 
 // Copy of flo_10 (CBP200.c)
 

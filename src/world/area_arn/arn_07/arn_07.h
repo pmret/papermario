@@ -2,8 +2,9 @@
 /// @brief Gusty Gulch - Windmill Exterior
 
 #include "common.h"
-#include "map.h"
 #include "../arn.h"
+#include "message_ids.h"
+#include "map.h"
 
 #define NAMESPACE arn_07
 

@@ -2,6 +2,8 @@
 /// @brief Dry Dry Outpost - Outpost 1
 
 #include "common.h"
+#include "../dro.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE dro_01

@@ -1,7 +1,26 @@
 #ifndef _WORLD_AREA_KMR_KMR_H_
 #define _WORLD_AREA_KMR_KMR_H_
 
-#include "evt.h"
+enum {
+    AB_KMR_0       = AreaByte(0),
+    AB_KMR_1       = AreaByte(1),
+    AB_KMR_2       = AreaByte(2),
+    AB_KMR_3       = AreaByte(3),
+    AB_KMR_4       = AreaByte(4),
+    AB_KMR_5       = AreaByte(5),
+    AB_KMR_6       = AreaByte(6),
+    AB_KMR_7       = AreaByte(7),
+    AB_KMR_8       = AreaByte(8),
+    AB_KMR_9       = AreaByte(9),
+    AB_KMR_A       = AreaByte(10),
+    AB_KMR_B       = AreaByte(11),
+    AB_KMR_C       = AreaByte(12),
+    AB_KMR_D       = AreaByte(13),
+    AB_KMR_E       = AreaByte(14),
+    AB_KMR_F       = AreaByte(15),
+};
+
+#define AF_KMR(index) AreaFlag(index)
 
 extern MapSettings kmr_00_settings;
 extern MapSettings kmr_02_settings;
