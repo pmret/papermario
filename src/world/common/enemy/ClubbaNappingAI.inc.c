@@ -42,13 +42,13 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
         if (   gPlayerStatusPtr->actionState == ACTION_STATE_RUN
             || gPlayerStatusPtr->actionState == ACTION_STATE_SPIN
             || gPlayerStatusPtr->actionState == ACTION_STATE_JUMP
-            || gPlayerStatusPtr->actionState == ACTION_STATE_GROUND_POUND
-            || gPlayerStatusPtr->actionState == ACTION_STATE_ULTRA_POUND
+            || gPlayerStatusPtr->actionState == ACTION_STATE_SPIN_POUND
+            || gPlayerStatusPtr->actionState == ACTION_STATE_TORNADO_POUND
             || gPlayerStatusPtr->actionState == ACTION_STATE_STEP_DOWN_LAND
             || gPlayerStatusPtr->actionState == ACTION_STATE_LAND
             || gPlayerStatusPtr->actionState == ACTION_STATE_HAMMER
             || gPlayerStatusPtr->actionState == ACTION_STATE_13
-            || gPlayerStatusPtr->actionState == ACTION_STATE_25) {
+            || gPlayerStatusPtr->actionState == ACTION_STATE_INVALID_25) {
             shouldWakeUp = TRUE;
         }
 
@@ -70,7 +70,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     }
 
     if (shouldWakeUp) {
-        ai_enemy_play_sound(npc, 0xB000000E, 0);
+        ai_enemy_play_sound(npc, SOUND_B000000E, 0);
         npc->currentAnim.w = enemy->animList[11];
         npc->duration = 10;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
@@ -80,9 +80,9 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
 
     npc->duration++;
     if (npc->duration == 27) {
-        ai_enemy_play_sound(npc, 0xB000000C, 0);
+        ai_enemy_play_sound(npc, SOUND_B000000C, 0);
     } else if (npc->duration == 57) {
-        ai_enemy_play_sound(npc, 0xB000000D, 0);
+        ai_enemy_play_sound(npc, SOUND_B000000D, 0);
     } else if (npc->duration == 59) {
         npc->currentAnim.w = enemy->animList[12];
     } else if (npc->duration == 60) {

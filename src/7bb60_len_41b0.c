@@ -103,7 +103,7 @@ s32 collision_main_above(void) {
                 } while (0);
 
                 playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
-                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
                     playerStatus->actionState != ACTION_STATE_SPIN_JUMP)
                     {
                     playerStatus->gravityIntegrator[0] = 0.0f;
@@ -121,15 +121,15 @@ s32 collision_main_above(void) {
 void func_800E29C8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
-    f32 temp_f20;
+    f32 groundPosY;
     AnimID anim;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
     }
 
-    if (playerStatus->fallState == 0) {
+    if (playerStatus->actionSubstate == 0) {
         if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
@@ -138,19 +138,19 @@ void func_800E29C8(void) {
             record_jump_apex();
             gravity_use_fall_parms();
             integrate_gravity();
-            playerStatus->fallState = 1;
+            playerStatus->actionSubstate = 1;
         }
         if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
             playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
         }
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
-    } else if (playerStatus->fallState == 2) {
+    } else if (playerStatus->actionSubstate == 2) {
         if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
-        temp_f20 = player_check_collision_below(func_800E34D8(), &colliderID);
+        groundPosY = player_check_collision_below(func_800E34D8(), &colliderID);
         func_800E315C(colliderID);
-        playerStatus->position.y = temp_f20;
+        playerStatus->position.y = groundPosY;
         if (colliderID >= 0) {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
                 anim = ANIM_Mario_10009;
@@ -283,9 +283,9 @@ void phys_init_integrator_for_current_state(void) {
             break;
         case ACTION_STATE_JUMP:
         case ACTION_STATE_SPIN_JUMP:
-        case ACTION_STATE_GROUND_POUND:
-        case ACTION_STATE_ULTRA_JUMP:
-        case ACTION_STATE_ULTRA_POUND:
+        case ACTION_STATE_SPIN_POUND:
+        case ACTION_STATE_TORNADO_JUMP:
+        case ACTION_STATE_TORNADO_POUND:
         case ACTION_STATE_HIT_FIRE:
         case ACTION_STATE_HIT_LAVA:
             temp_a0 = GravityParamsStartJump;
@@ -313,7 +313,7 @@ void gravity_use_fall_parms(void) {
     do {} while (0);
     playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & 0x40000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
         playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
         playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
         playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
@@ -331,9 +331,7 @@ void phys_update_falling(void) {
         gPlayerStatus.actionState != ACTION_STATE_BOUNCE)
     {
         s32 colliderID;
-
         gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
-
         func_800E315C(colliderID);
     }
 }
@@ -343,7 +341,7 @@ void func_800E315C(s32 colliderID) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (colliderID >= 0) {
-        s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
+        s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
         switch (surfaceType) {
             case SURFACE_TYPE_WATER:
             case SURFACE_TYPE_DOCK_WALL:
@@ -407,22 +405,22 @@ void phys_player_land(void) {
                 Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
 
                 entity->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
-                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_ULTRA_POUND &&
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
+                    playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
                     playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_GROUND_POUND)
+                    playerStatus->actionState != ACTION_STATE_SPIN_POUND)
                 {
                     set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
                 } else {
                     disable_player_input();
-                    playerStatus->fallState = 0xB;
+                    playerStatus->actionSubstate = 0xB;
                 }
                 return;
             }
         }
     }
 
-    if (playerStatus->flags & 0x4000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_4000) {
         set_action_state(ACTION_STATE_RUN);
         return;
     }
@@ -464,12 +462,12 @@ f32 integrate_gravity(void) {
 }
 
 f32 func_800E34D8(void) {
-    f32 ret = integrate_gravity();
+    f32 velocity = integrate_gravity();
 
     if (func_800E0208()) {
-        ret = 0.0f;
+        velocity = 0.0f;
     }
-    return ret;
+    return velocity;
 }
 
 f32 player_check_collision_below(f32 offset, s32* colliderID) {
@@ -548,8 +546,8 @@ void collision_main_lateral(void) {
                 }
             }
             break;
-        case ACTION_STATE_GROUND_POUND:
-        case ACTION_STATE_ULTRA_POUND:
+        case ACTION_STATE_SPIN_POUND:
+        case ACTION_STATE_TORNADO_POUND:
             playerStatus->position.x += playerStatus->extraVelocity.x;
             playerStatus->position.y += playerStatus->extraVelocity.y;
             playerStatus->position.z += playerStatus->extraVelocity.z;
@@ -623,7 +621,7 @@ void collision_main_lateral(void) {
                     }
                     sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
 
-                    if (playerStatus->actionState == ACTION_STATE_14) {
+                    if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK) {
                         if (fabsf(sinTheta) > fabsf(cosTheta)) {
                             xBump = speed * sinTheta;
                             zBump = 0.0f;
@@ -750,7 +748,7 @@ void collision_main_lateral(void) {
         case ACTION_STATE_LANDING_ON_SWITCH:
         case ACTION_STATE_LAND:
         case ACTION_STATE_STEP_DOWN_LAND:
-        case ACTION_STATE_ULTRA_JUMP:
+        case ACTION_STATE_TORNADO_JUMP:
         case ACTION_STATE_SLIDING:
         case ACTION_STATE_HIT_FIRE:
         case ACTION_STATE_HIT_LAVA:
@@ -922,7 +920,7 @@ void phys_main_collision_below(void) {
         (set_action_state(ACTION_STATE_SLIDING), (playerStatus->actionState != ACTION_STATE_SLIDING))))
     {
         if (colliderID >= 0) {
-            s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
+            s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
                 case SURFACE_TYPE_SPIKES:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
@@ -1098,7 +1096,7 @@ void check_input_midair_jump(void) {
                 gPlayerStatus.flags |= 8;
                 break;
             case 2:
-                set_action_state(ACTION_STATE_ULTRA_JUMP);
+                set_action_state(ACTION_STATE_TORNADO_JUMP);
                 gPlayerStatus.flags |= 8;
                 break;
         }
@@ -1111,7 +1109,7 @@ s8 get_current_partner_id(void) {
 
 void try_player_footstep_sounds(s32 interval) {
     if (gGameStatusPtr->frameCounter % interval == 0) {
-        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
         s32 soundID, altSoundID;
 
         if (surfaceType == SURFACE_TYPE_FLOWERS || surfaceType == SURFACE_TYPE_HEDGES) {

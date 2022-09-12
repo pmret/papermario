@@ -1,34 +1,34 @@
 #include "common.h"
 #include "world/actions.h"
 
-s32 WalkPeachAnims[] = {
-    0x000A0002, // none
-    0x000A002B, // cream
-    0x000A002D, // strawberry
-    0x000A002F, // butter
-    0x000A0031, // cleanser
-    0x000A0033, // water
-    0x000A0035, // milk
-    0x000A0037, // flour
-    0x000A0039, // egg
-    0x000A003B, // complete cake
-    0x000A003D, // cake bowl
-    0x000A003F, // cake mixed
-    0x000A0041, // cake pan
-    0x000A0043, // cake batter
-    0x000A0045, // cake bare
-    0x000A0047, // salt
-    0x000A0049, // sugar
-    0x000A004B, // cake with icing
-    0x000A004D, // cake with berries
+AnimID WalkPeachAnims[] = {
+    ANIM_Peach_A0002, // none
+    ANIM_Peach_A002B, // cream
+    ANIM_Peach_A002D, // strawberry
+    ANIM_Peach_A002F, // butter
+    ANIM_Peach_A0031, // cleanser
+    ANIM_Peach_A0033, // water
+    ANIM_Peach_A0035, // milk
+    ANIM_Peach_A0037, // flour
+    ANIM_Peach_A0039, // egg
+    ANIM_Peach_A003B, // complete cake
+    ANIM_Peach_A003D, // cake bowl
+    ANIM_Peach_A003F, // cake mixed
+    ANIM_Peach_A0041, // cake pan
+    ANIM_Peach_A0043, // cake batter
+    ANIM_Peach_A0045, // cake bare
+    ANIM_Peach_A0047, // salt
+    ANIM_Peach_A0049, // sugar
+    ANIM_Peach_A004B, // cake with icing
+    ANIM_Peach_A004D, // cake with berries
     0x00000000
 };
 
-void action_run_update_peach(void);
+void action_update_run_peach(void);
 void func_802B65E8_E23CC8(void);
 
 // walk
-void func_802B6000_E236E0(void) {
+void action_update_walk(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 moveVectorMagnitude;
@@ -112,19 +112,19 @@ void func_802B6000_E236E0(void) {
 }
 
 // run
-void action_run_update(void) {
+void action_update_run(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 moveX;
     f32 moveY;
     s32 temp_v1;
     AnimID anim;
-    f32 phi_f2;
+    f32 runSpeedModifier;
     s32 phi_s3;
 
     phi_s3 = 0;
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        action_run_update_peach();
+        action_update_run_peach();
         return;
     }
 
@@ -156,13 +156,13 @@ void action_run_update(void) {
     }
 
     D_8010C980++;
-    phi_f2 = 1.0f;
+    runSpeedModifier = 1.0f;
 
-    if (playerStatus->animFlags & 0x10000) {
-        phi_f2 = 1.5f;
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING) {
+        runSpeedModifier = 1.5f;
     }
 
-    playerStatus->currentSpeed = playerStatus->runSpeed * phi_f2;
+    playerStatus->currentSpeed = playerStatus->runSpeed * runSpeedModifier;
     player_input_to_move_vector(&moveX, &moveY);
     phys_update_interact_collider();
     if (check_input_jump() == FALSE) {
@@ -253,7 +253,7 @@ void func_802B65E8_E23CC8(void) {
     try_player_footstep_sounds(8);
 }
 
-void action_run_update_peach(void) {
+void action_update_run_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     GameStatus* gameStatus;
     f32 moveX;

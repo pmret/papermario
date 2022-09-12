@@ -1931,7 +1931,7 @@ typedef struct PlayerStatus {
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ s8 prevActionState;
-    /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
+    /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ AnimID anim;
     /* 0x0BC */ u16 unk_BC;

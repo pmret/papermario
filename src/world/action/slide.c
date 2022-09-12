@@ -23,7 +23,7 @@ void func_802B6000_E27510(void) {
     D_802B6788 = temp_v0[3];
 }
 
-void func_802B6060_E27570(void) {
+void action_update_sliding(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus;
     s32 surfaceType;
@@ -42,7 +42,7 @@ void func_802B6060_E27570(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->animFlags |= 4;
         func_802B6000_E27510();
@@ -64,7 +64,7 @@ void func_802B6060_E27570(void) {
     playerStatus->position.z = posZ;
     playerStatus->position.y = posY;
 
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 0:
             D_802B6780 += 0.1;
             if (D_802B6784 <= D_802B6780) {
@@ -83,7 +83,7 @@ void func_802B6060_E27570(void) {
             D_802B6798 = hitRy;
             if (hitID >= 0) {
                 collisionStatus = &gCollisionStatus;
-                surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE;
+                surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SLIDE) {
                     collisionStatus->currentFloor = hitID;
                     playerStatus->position.y = posY;
@@ -91,12 +91,12 @@ void func_802B6060_E27570(void) {
                     break;
                 }
                 if (!(fabs(D_802B6794 - D_802B6798) >= 50.0)) {
-                    playerStatus->fallState = 1;
+                    playerStatus->actionSubstate = 1;
                 } else {
-                    playerStatus->fallState = 2;
+                    playerStatus->actionSubstate = 2;
                 }
             } else {
-                playerStatus->fallState = 2;
+                playerStatus->actionSubstate = 2;
             }
             sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sinA, &cosA);
             playerStatus->position.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
@@ -117,7 +117,7 @@ void func_802B6060_E27570(void) {
                 if (playerStatus->currentSpeed <= 0.0f) {
                     sfx_play_sound_at_player(SOUND_172, 0);
                     suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
-                    playerStatus->fallState = 6;
+                    playerStatus->actionSubstate = 6;
                     playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
                     playerStatus->position.y = posY;
@@ -132,7 +132,7 @@ void func_802B6060_E27570(void) {
             playerStatus->gravityIntegrator[0] += playerStatus->gravityIntegrator[1];
             playerStatus->position.y += playerStatus->gravityIntegrator[0];
             if (playerStatus->gravityIntegrator[0] <= 0.0f) {
-                playerStatus->fallState = 3;
+                playerStatus->actionSubstate = 3;
                 playerStatus->gravityIntegrator[0] = 0.1143f;
                 playerStatus->gravityIntegrator[1] = -0.2871f;
                 playerStatus->gravityIntegrator[2] = -0.1823f;
@@ -149,7 +149,7 @@ void func_802B6060_E27570(void) {
                 D_802B678C = -1;
                 suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
                 sfx_play_sound_at_player(SOUND_162, 0);
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 4:
@@ -159,7 +159,7 @@ void func_802B6060_E27570(void) {
             }
             if (playerStatus->unk_BC != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 5:
@@ -171,7 +171,7 @@ void func_802B6060_E27570(void) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                 sfx_play_sound_at_player(SOUND_172, 0);
                 playerStatus->currentStateTime = 15;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 6:
@@ -180,7 +180,7 @@ void func_802B6060_E27570(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             if (--playerStatus->currentStateTime == 0) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 7:

@@ -11,7 +11,7 @@ void func_802B6000_E24040(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     AnimID anim;
 
-    playerStatus->fallState = 0;
+    playerStatus->actionSubstate = 0;
     playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~0x80000008;
@@ -35,7 +35,7 @@ void func_802B6000_E24040(void) {
     collisionStatus->currentFloor = -1;
 }
 
-void func_802B60B4_E240F4(void) {
+void action_update_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID anim;
 
@@ -71,7 +71,7 @@ void func_802B60B4_E240F4(void) {
     playerStatus->timeInAir++;
 }
 
-void func_802B6198_E241D8(void) {
+void action_update_landing_on_switch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     AnimID anim;
@@ -88,7 +88,7 @@ void func_802B6198_E241D8(void) {
 
     playerStatus->timeInAir++;
 
-    if (playerStatus->fallState != 1) {
+    if (playerStatus->actionSubstate != 1) {
         return;
     }
 
@@ -106,10 +106,10 @@ void func_802B6198_E241D8(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
 
-    playerStatus->fallState++;
+    playerStatus->actionSubstate++;
 }
 
-void func_802B6294_E242D4(void) {
+void action_update_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
@@ -136,7 +136,7 @@ void func_802B6294_E242D4(void) {
     playerStatus->timeInAir++;
 }
 
-void func_802B6348_E24388(void) {
+void action_update_step_down(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
     s32 surfaceType;
@@ -164,11 +164,11 @@ void func_802B6348_E24388(void) {
     height = playerStatus->colliderHeight;
 
     colliderID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
-    surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
+    surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (!(surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) && check_input_jump()) {
         set_action_state(ACTION_STATE_JUMP);
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
-        func_802B60B4_E240F4();
+        action_update_jump();
     }
 }
 

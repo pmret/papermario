@@ -213,7 +213,7 @@ s32 func_802B62A4_E25174(void) {
     return ret;
 }
 
-void action_hammer_update(void) {
+void action_update_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     HammerHit->unk_1C = 0;
@@ -225,7 +225,7 @@ void action_hammer_update(void) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_200000;
         HammerHit->timer = 0;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_BC = 0;
         HammerHit->hitID = func_802B62A4_E25174();
@@ -382,11 +382,11 @@ void func_802B6820_E256F0(void) {
         }
     }
 
-    if (playerStatus->fallState == 0 && result >= 0 && HammerHit->unk_14 == 0) {
-        playerStatus->fallState++;
+    if (playerStatus->actionSubstate == 0 && result >= 0 && HammerHit->unk_14 == 0) {
+        playerStatus->actionSubstate++;
     }
-    if (playerStatus->fallState == 1 && result < 0) {
-        playerStatus->fallState = 2;
+    if (playerStatus->actionSubstate == 1 && result < 0) {
+        playerStatus->actionSubstate = 2;
     }
     HammerHit->timer += 1;
     if (result >= 0) {

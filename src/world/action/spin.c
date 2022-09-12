@@ -8,7 +8,7 @@ extern s32 gSpinHistoryPosZ[5];
 extern s16 gSpinHistoryPosAngle[5];
 void phys_clear_spin_history(void);
 
-void func_802B6000_E25D60(void) {
+void action_update_spin(void) {
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sp10, sp14, temp_f24;
@@ -22,7 +22,7 @@ void func_802B6000_E25D60(void) {
         playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SPINNING;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_20000;
         playerStatus->currentStateTime = 0;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerSpinState->stopSoundTimer = 0;
         playerSpinState->hasBufferedSpin = 0;
         playerSpinState->spinDirectionMagnitude = 0.0f;
@@ -140,7 +140,7 @@ void func_802B6000_E25D60(void) {
         playerSpinState->bufferedStickAxis.y = playerStatus->stickAxis[1];
     }
 
-    if (playerStatus->fallState >= 2) {
+    if (playerStatus->actionSubstate >= 2) {
         playerSpinState->spinDirectionMagnitude = playerSpinState->spinDirectionMagnitude - 1.0f;;
         if (playerSpinState->spinDirectionMagnitude < 0.0f) {
             playerSpinState->spinDirectionMagnitude = 0.0f;
@@ -161,13 +161,13 @@ void func_802B6000_E25D60(void) {
         return;
     }
 
-    if (playerStatus->fallState == 0) {
+    if (playerStatus->actionSubstate == 0) {
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000) {
-            playerStatus->fallState = 1;
+            playerStatus->actionSubstate = 1;
         } else if (gCollisionStatus.pushingAgainstWall >= 0) {
             playerSpinState->hitWallTime++;
             if (playerSpinState->hitWallTime >= 10) {
-                playerStatus->fallState = 1;
+                playerStatus->actionSubstate = 1;
             }
         }
     }
@@ -217,7 +217,7 @@ void func_802B6000_E25D60(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed * temp_f24;
             break;
     }
-    if (playerStatus->fallState == 0) {
+    if (playerStatus->actionSubstate == 0) {
         playerSpinState->spinCountdown--;
         if (playerSpinState->spinCountdown > 0) {
             if (playerStatus->currentStateTime >= 2) {
@@ -225,31 +225,31 @@ void func_802B6000_E25D60(void) {
             }
             return;
         } else {
-            playerStatus->fallState = 1;
+            playerStatus->actionSubstate = 1;
         }
     }
 
-    if (playerStatus->fallState == 1) {
+    if (playerStatus->actionSubstate == 1) {
         sp10 = playerStatus->spriteFacingAngle;
         playerStatus->spriteFacingAngle = sp10 + playerStatus->spinRate;
 
         if (playerSpinState->hasBufferedSpin != 0) {
             playerStatus->currentStateTime = 2;
-            playerStatus->fallState = 2;
+            playerStatus->actionSubstate = 2;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
         } else if (sp10 < playerStatus->spriteFacingAngle) {
             if (playerStatus->spriteFacingAngle >= 180.0f && sp10 < 180.0f) {
                 playerStatus->spriteFacingAngle = 180.0f;
                 playerStatus->currentStateTime = 2;
-                playerStatus->fallState = 2;
+                playerStatus->actionSubstate = 2;
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             }
         } else if (playerStatus->spriteFacingAngle <= 0.0f && sp10 < 90.0f) {
             playerStatus->spriteFacingAngle = 0.0f;
             playerStatus->currentStateTime = 2;
-            playerStatus->fallState = 2;
+            playerStatus->actionSubstate = 2;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
         }

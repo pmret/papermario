@@ -2,7 +2,7 @@
 
 extern f32 D_802B62B0;
 
-void func_802B6000_E27C90(void) {
+void action_update_hit_fire(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta;
     f32 cosTheta;
@@ -13,7 +13,7 @@ void func_802B6000_E27C90(void) {
         playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_800 | PLAYER_STATUS_FLAGS_FLYING);
         suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->gravityIntegrator[0] = 18.3473f;
         playerStatus->gravityIntegrator[1] = -3.738f;
         playerStatus->gravityIntegrator[2] = 0.8059f;
@@ -36,11 +36,11 @@ void func_802B6000_E27C90(void) {
     playerStatus->position.x += speed * sinTheta;
     playerStatus->position.z -= speed * cosTheta;
 
-    if (playerStatus->fallState == 0) {
+    if (playerStatus->actionSubstate == 0) {
         integrate_gravity();
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
         if (playerStatus->gravityIntegrator[0] < 0.0f) {
-            playerStatus->fallState = 1;
+            playerStatus->actionSubstate = 1;
             playerStatus->flags |= 4;
         }
     } else {

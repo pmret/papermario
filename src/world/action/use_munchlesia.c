@@ -6,20 +6,20 @@ extern f32 D_802B62D8;
 extern f32 D_802B62DC;
 extern s32 D_802B62E0;
 
-void func_802B6000_E291A0(void) {
+void action_update_use_munchlesia(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 sp10;
     f32 tempCollision;
 
-    if (playerStatus->flags & (1 << 31)) {
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->fallState = 0;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->actionSubstate = 0;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         disable_player_static_collisions();
         disable_player_input();
     }
 
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 0:
             suggest_player_anim_clearUnkFlag(ANIM_Mario_1002E);
             D_802B62E0 = 0x20;
@@ -27,7 +27,7 @@ void func_802B6000_E291A0(void) {
             D_802B62D4 = 4.0f;
             D_802B62D8 = 1.0f;
             D_802B62D4 = 1.875f;
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
             D_802B62DC = playerStatus->targetYaw;
             break;
         case 1:
@@ -38,7 +38,7 @@ void func_802B6000_E291A0(void) {
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             if (D_802B62D0 <= 0.0f) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 2:
@@ -54,13 +54,13 @@ void func_802B6000_E291A0(void) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
                 playerStatus->position.y = tempCollision;
                 D_802B62E0 = 0xA;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 3:
             if (playerStatus->unk_BC != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
-                playerStatus->fallState = 5;
+                playerStatus->actionSubstate = 5;
                 playerStatus->currentStateTime = 15;
                 break;
             }

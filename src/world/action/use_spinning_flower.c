@@ -31,7 +31,7 @@ s32 func_802B6000_E29470(void) {
     return player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
 }
 
-void func_802B60A4_E29514(void) {
+void action_update_use_spinning_flower(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Entity* entityByIndex;
     s32* TempPointer;
@@ -48,7 +48,7 @@ void func_802B60A4_E29514(void) {
         playerStatus->flags &= ~0x80000000;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
-        playerStatus->fallState = 1;
+        playerStatus->actionSubstate = 1;
         playerStatus->currentStateTime = 0;
         D_802B6EE4 = 0.0f;
         D_802B6EE8 = 0.0f;
@@ -73,7 +73,7 @@ void func_802B60A4_E29514(void) {
             suggest_player_anim_clearUnkFlag(ANIM_Mario_1002B);
         }
     }
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 1:
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (++D_802B6EE4 >= 20.0f) {
@@ -118,13 +118,13 @@ void func_802B60A4_E29514(void) {
                 playerStatus->currentStateTime = 20;
                 D_802B6EE8 = 0.0f;
                 D_802B6EF4 = playerStatus->position.y;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
                 D_802B6EF0 = 1.6f;
                 playerStatus->flags |= 0x800000;
             }
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_AnimMidairStill);
-                playerStatus->fallState = 3;
+                playerStatus->actionSubstate = 3;
                 playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;
                 gCollisionStatus.currentFloor = -1;
@@ -161,7 +161,7 @@ void func_802B60A4_E29514(void) {
             }
     }
 
-    switchCondition = playerStatus->fallState - 3;
+    switchCondition = playerStatus->actionSubstate - 3;
     switch (switchCondition) {
         case 0:
             if (D_802B6ED0 >= 0) {
@@ -193,7 +193,7 @@ void func_802B60A4_E29514(void) {
                 playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
                 break;
             }
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
             playerStatus->currentStateTime = 30;
             phys_adjust_cam_on_landing();
             break;
@@ -216,7 +216,7 @@ void func_802B60A4_E29514(void) {
             tempDistance = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->position.x, playerStatus->position.z));
             if (tempDistance > 40.0f) {
                 if (D_802BCE30 + 30 < playerStatus->position.y) {
-                    playerStatus->fallState++;
+                    playerStatus->actionSubstate++;
                     sp18 = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
                     sin_cos_rad(sp18 * TAU / 360.0f, &sp10, &sp14);
                     playerStatus->currentStateTime = 64;
@@ -227,7 +227,7 @@ void func_802B60A4_E29514(void) {
                 break;
             }
             if (playerStatus->currentStateTime == 0) {
-                playerStatus->fallState = 0xA;
+                playerStatus->actionSubstate = 0xA;
                 playerStatus->currentStateTime = 20;
             } else {
                 playerStatus->currentStateTime--;
@@ -245,7 +245,7 @@ void func_802B60A4_E29514(void) {
                 playerStatus->position.y += tempY;
                 playerStatus->position.z += D_802B6ED8;
             } else {
-                playerStatus->fallState = 0xB;
+                playerStatus->actionSubstate = 0xB;
             }
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;

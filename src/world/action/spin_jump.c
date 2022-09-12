@@ -4,7 +4,7 @@ extern f32 D_802B6730;
 
 s32 func_802B6648_E27428(void);
 
-void func_802B6000_E26DE0(void) {
+void action_update_spin_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Entity* entity;
@@ -19,7 +19,7 @@ void func_802B6000_E26DE0(void) {
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING);
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
 
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
         D_802B6730 = 0.0f;
         playerStatus->gravityIntegrator[0] = 5.2f;
@@ -31,7 +31,7 @@ void func_802B6000_E26DE0(void) {
     }
 
     tempCondition = 0;
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 0:
             D_802B6730 = 40.0f;
             playerStatus->pitch += 40.0f;
@@ -52,7 +52,7 @@ void func_802B6000_E26DE0(void) {
             if (playerStatus->pitch == 360.0f) {
                 if (playerStatus->gravityIntegrator[0] <= 0.0f) {
                     playerStatus->currentStateTime = 5;
-                    playerStatus->fallState = 2;
+                    playerStatus->actionSubstate = 2;
                     playerStatus->gravityIntegrator[0] = 2.0f;
                 }
             }
@@ -66,7 +66,7 @@ void func_802B6000_E26DE0(void) {
                 }
             }
             if (--playerStatus->currentStateTime <= 0) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 3:
@@ -75,7 +75,7 @@ void func_802B6000_E26DE0(void) {
             playerStatus->pitch += 45.0f;
             if (playerStatus->pitch >= 360.0) {
                 playerStatus->pitch = 0.0f;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
                 playerStatus->gravityIntegrator[1] = -3.4744f;
                 playerStatus->gravityIntegrator[2] = 0.4704f;
                 playerStatus->gravityIntegrator[3] = -1.1904f;
@@ -96,11 +96,11 @@ void func_802B6000_E26DE0(void) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->currentFloor),
                         entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
-                    playerStatus->fallState = 0xB;
+                    playerStatus->actionSubstate = 0xB;
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
                     break;
                 } else {
-                    surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE;
+                    surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (surfaceType == SURFACE_TYPE_LAVA) {
                         playerStatus->unk_BF = 1;
                         set_action_state(ACTION_STATE_HIT_LAVA);
@@ -117,11 +117,11 @@ void func_802B6000_E26DE0(void) {
                         playerStatus->gravityIntegrator[3] = -1.1904f;
                         playerStatus->gravityIntegrator[0] = 10.0f;
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000B);
-                        playerStatus->actionState = ACTION_STATE_GROUND_POUND;
+                        playerStatus->actionState = ACTION_STATE_SPIN_POUND;
                         playerStatus->timeInAir = 0;
                         playerStatus->unk_280 = 0xC;
                         playerStatus->pitch = 0.0f;
-                        playerStatus->fallState++;
+                        playerStatus->actionSubstate++;
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(SOUND_149, 0);
                         start_rumble(0x80, 0x19);
@@ -143,7 +143,7 @@ void func_802B6000_E26DE0(void) {
                 } else {
                     playerStatus->position.y = player_check_collision_below(temp_f20, &belowColliderID);
                     if (playerStatus->gravityIntegrator[0] < 0.0f && belowColliderID >= 0) {
-                        playerStatus->fallState++;
+                        playerStatus->actionSubstate++;
                     }
                 }
                 playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
@@ -164,7 +164,7 @@ void func_802B6000_E26DE0(void) {
             break;
         case 11:
             set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
             enable_player_input();
             break;
         case 12:

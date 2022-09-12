@@ -1854,7 +1854,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     actionState != ACTION_STATE_LAUNCH &&
                     actionState != ACTION_STATE_RIDE &&
                     actionState != ACTION_STATE_IDLE &&
-                    (actionState != ACTION_STATE_USE_SPINNING_FLOWER || playerStatus->fallState != 1)
+                    (actionState != ACTION_STATE_USE_SPINNING_FLOWER || playerStatus->actionSubstate != 1)
                 ) {
                     break;
                 }

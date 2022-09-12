@@ -145,7 +145,7 @@ s32 phys_adjust_cam_on_landing(void) {
     }
 
     if (ret == 1) {
-        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
 
         if (surfaceType == SURFACE_TYPE_LAVA) {
             gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;

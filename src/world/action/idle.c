@@ -1,38 +1,38 @@
 #include "common.h"
 #include "../actions.h"
 
-s32 IdlePeachAnims[] = {
-    0x000A0001, // none
-    0x000A0007, // cream
-    0x000A0009, // strawberry
-    0x000A000B, // butter
-    0x000A000D, // cleanser
-    0x000A000F, // water
-    0x000A0011, // milk
-    0x000A0013, // flour
-    0x000A0015, // egg
-    0x000A0017, // complete cake
-    0x000A0019, // cake bowl
-    0x000A001B, // cake mixed
-    0x000A001D, // cake pan
-    0x000A001F, // cake batter
-    0x000A0021, // cake bare
-    0x000A0023, // salt
-    0x000A0025, // sugar
-    0x000A0027, // cake with icing
-    0x000A0029, // cake with berries
+AnimID IdlePeachAnims[] = {
+    ANIM_Peach_A0001, // none
+    ANIM_Peach_A0007, // cream
+    ANIM_Peach_A0009, // strawberry
+    ANIM_Peach_A000B, // butter
+    ANIM_Peach_A000D, // cleanser
+    ANIM_Peach_A000F, // water
+    ANIM_Peach_A0011, // milk
+    ANIM_Peach_A0013, // flour
+    ANIM_Peach_A0015, // egg
+    ANIM_Peach_A0017, // complete cake
+    ANIM_Peach_A0019, // cake bowl
+    ANIM_Peach_A001B, // cake mixed
+    ANIM_Peach_A001D, // cake pan
+    ANIM_Peach_A001F, // cake batter
+    ANIM_Peach_A0021, // cake bare
+    ANIM_Peach_A0023, // salt
+    ANIM_Peach_A0025, // sugar
+    ANIM_Peach_A0027, // cake with icing
+    ANIM_Peach_A0029, // cake with berries
     0x00000000,
 };
 
-void action_idle_update_peach(void);
+void action_update_idle_peach(void);
 
-void action_idle_update(void) {
+void action_update_idle(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     s32 wasMoving = FALSE;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        action_idle_update_peach();
+        action_update_idle_peach();
         return;
     }
 
@@ -44,7 +44,7 @@ void action_idle_update(void) {
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
             | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_AIRBORNE);
         wasMoving = TRUE;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -91,7 +91,7 @@ void action_idle_update(void) {
     }
 }
 
-void action_idle_update_peach(void) {
+void action_update_idle_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 angle;
@@ -99,7 +99,7 @@ void action_idle_update_peach(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -118,11 +118,11 @@ void action_idle_update_peach(void) {
     }
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
-        switch (playerStatus->fallState) {
+        switch (playerStatus->actionSubstate) {
             case 0:
                 if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) && (playerStatus->unk_C4 == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
-                        playerStatus->fallState++;
+                        playerStatus->actionSubstate++;
                         suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
                         return;
                     }
@@ -131,7 +131,7 @@ void action_idle_update_peach(void) {
                 break;
             case 1:
                 if (playerStatus->unk_BC != 0) {
-                    playerStatus->fallState++;
+                    playerStatus->actionSubstate++;
                     playerStatus->currentStateTime = 0;
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                 }
@@ -139,7 +139,7 @@ void action_idle_update_peach(void) {
             case 2: {
                 playerStatus->currentStateTime++;
                 if (playerStatus->currentStateTime > 200) {
-                    playerStatus->fallState++;
+                    playerStatus->actionSubstate++;
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
                 }
                 break;
@@ -147,7 +147,7 @@ void action_idle_update_peach(void) {
             case 3:
                 if (playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
-                    playerStatus->fallState = 0;
+                    playerStatus->actionSubstate = 0;
                 } else if (playerStatus->unk_BC != 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_C0004);
                 }

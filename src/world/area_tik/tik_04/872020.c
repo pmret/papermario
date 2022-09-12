@@ -63,7 +63,7 @@ ApiStatus func_80240C20_872650(Evt* script, s32 isInitialCall) {
     PlayerStatus* player = &gPlayerStatus;
 
     if ((gCollisionStatus.currentFloor == 9) || (gCollisionStatus.currentFloor == 0xB)) {
-        if ((player->actionState == ACTION_STATE_GROUND_POUND) || (player->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((player->actionState == ACTION_STATE_SPIN_POUND) || (player->actionState == ACTION_STATE_TORNADO_POUND)) {
             return ApiStatus_BLOCK;
         }
     }

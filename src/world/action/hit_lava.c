@@ -6,7 +6,7 @@ extern f32 D_802B68B4;
 extern f32 D_802B68B8;
 extern f32 D_802B68BC;
 
-void func_802B6000_E27F40(void) {
+void action_update_hit_lava(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sp18;
     f32 sp1C;
@@ -24,10 +24,10 @@ void func_802B6000_E27F40(void) {
         playerStatus->animFlags |= 4;
         playerStatus->flags |= 0x800;
         if (playerStatus->unk_BF == 1) {
-            playerStatus->fallState = 0x14;
+            playerStatus->actionSubstate = 0x14;
             playerStatus->currentStateTime = 2;
         } else {
-            playerStatus->fallState = 0;
+            playerStatus->actionSubstate = 0;
         }
         D_802B68BC = playerStatus->position.y;
         playerStatus->currentSpeed = 0.0f;
@@ -41,15 +41,15 @@ void func_802B6000_E27F40(void) {
         sfx_play_sound_at_player(SOUND_E8, 0);
     }
 
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 21:
             if (--playerStatus->currentStateTime == -1) {
-                playerStatus->fallState = 0;
+                playerStatus->actionSubstate = 0;
             }
             break;
         case 20:
             if (--playerStatus->currentStateTime == -1) {
-                playerStatus->fallState = 0;
+                playerStatus->actionSubstate = 0;
             }
             playerStatus->position.y -= 4.0f;
             break;
@@ -61,7 +61,7 @@ void func_802B6000_E27F40(void) {
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
             playerStatus->unk_C2 = 0;
-            playerStatus->fallState = 2;
+            playerStatus->actionSubstate = 2;
             playerStatus->currentStateTime = 1;
             playerStatus->gravityIntegrator[0] = 20.0f;
             playerStatus->gravityIntegrator[2] = 250.0f;
@@ -73,7 +73,7 @@ void func_802B6000_E27F40(void) {
             break;
         case 1:
             if (--playerStatus->currentStateTime << 16 <= 0) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 2:
@@ -90,11 +90,11 @@ void func_802B6000_E27F40(void) {
                 D_802B68B4 += 3.0f;
                 if (D_802B68B4 > 180.0f) {
                     D_802B68B4 = 180.0f;
-                    playerStatus->fallState++;
+                    playerStatus->actionSubstate++;
                 }
             } else {
                 playerStatus->position.y = playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2];
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 3:
@@ -112,12 +112,12 @@ void func_802B6000_E27F40(void) {
             playerStatus->gravityIntegrator[1] = -0.2871f;
             playerStatus->gravityIntegrator[2] = -0.1823f;
             playerStatus->gravityIntegrator[3] = 0.01152f;
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
             break;
         case 4:
             D_802B68B8 = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
             playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
             break;
         case 5:
             D_802B68B8 = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
@@ -150,7 +150,7 @@ void func_802B6000_E27F40(void) {
                 }
             }
             if (sp2C == 2) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 6:
@@ -170,7 +170,7 @@ void func_802B6000_E27F40(void) {
                 playerStatus->unk_BF = 0;
                 playerStatus->gravityIntegrator[0] = 6.0f;
                 playerStatus->position.y += 6.0f;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 7:
@@ -179,7 +179,7 @@ void func_802B6000_E27F40(void) {
             playerStatus->position.y = player_check_collision_below(tempGravityIntegrator, &sp2C);
             if (sp2C >= 0) {
                 playerStatus->currentStateTime = 0xA;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
             }
             break;
         case 8:
@@ -190,7 +190,7 @@ void func_802B6000_E27F40(void) {
             }
             break;
     }
-    if (playerStatus->fallState < 7) {
+    if (playerStatus->actionSubstate < 7) {
         playerStatus->timeInAir++;
     }
 }

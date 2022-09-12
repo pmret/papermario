@@ -1268,6 +1268,9 @@ enum SoundIDs {
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
     SOUND_B000000A                  = 0xB000000A,
+    SOUND_B000000C                  = 0xB000000C,
+    SOUND_B000000D                  = 0xB000000D,
+    SOUND_B000000E                  = 0xB000000E,
     SOUND_B0000010                  = 0xB0000010,
     SOUND_B0000011                  = 0xB0000011,
     SOUND_B0000012                  = 0xB0000012,
@@ -2638,13 +2641,13 @@ enum ActionStates {
     // Following action states prohibit movement (see set_action_state())
     ACTION_STATE_TALK                           = 0x0000000C,  ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP                      = 0x0000000D,
-    ACTION_STATE_GROUND_POUND                   = 0x0000000E,
-    ACTION_STATE_ULTRA_JUMP                     = 0x0000000F,
-    ACTION_STATE_ULTRA_POUND                    = 0x00000010,
+    ACTION_STATE_SPIN_POUND                   = 0x0000000E,
+    ACTION_STATE_TORNADO_JUMP                     = 0x0000000F,
+    ACTION_STATE_TORNADO_POUND                    = 0x00000010,
     ACTION_STATE_SLIDING                        = 0x00000011,
     ACTION_STATE_HAMMER                         = 0x00000012,
     ACTION_STATE_13                             = 0x00000013,
-    ACTION_STATE_14                             = 0x00000014,
+    ACTION_STATE_PUSHING_BLOCK                  = 0x00000014,
     ACTION_STATE_HIT_FIRE                       = 0x00000015,  ///< Causes Mario to fly up and take damage. Used for fire bars.
     ACTION_STATE_KNOCKBACK                      = 0x00000016,  // some kind of knockback, does no damage
     ACTION_STATE_HIT_LAVA                       = 0x00000017,
@@ -2661,7 +2664,7 @@ enum ActionStates {
     ACTION_STATE_STEP_UP                        = 0x00000022,
     ACTION_STATE_23                             = 0x00000023,
     ACTION_STATE_24                             = 0x00000024,
-    ACTION_STATE_25                             = 0x00000025,
+    ACTION_STATE_INVALID_25                             = 0x00000025,
     ACTION_STATE_USE_SPRING                     = 0x00000026,
 };
 
@@ -4095,7 +4098,7 @@ enum SurfaceType {
 
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
-    COLLIDER_FLAGS_SURFACE_TYPE      = 0x000000FF,
+    COLLIDER_FLAGS_SURFACE_TYPE_MASK = 0x000000FF,
     COLLIDER_FLAGS_100               = 0x00000100,
     COLLIDER_FLAGS_200               = 0x00000200,
     COLLIDER_FLAGS_400               = 0x00000400,

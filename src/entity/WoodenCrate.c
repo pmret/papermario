@@ -220,8 +220,8 @@ s32 entity_WoodenCrate_idle(Entity* entity) {
     s32 shouldBreak = FALSE;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
-            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_SPIN_POUND)
+            || (playerStatus->actionState == ACTION_STATE_TORNADO_POUND)) {
             set_action_state(ACTION_STATE_FALLING);
             shouldBreak = TRUE;
         }

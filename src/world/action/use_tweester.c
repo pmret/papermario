@@ -4,7 +4,7 @@
 
 extern struct TweesterPhysics* PlayerTweesterPhysics;
 
-void func_802B6000_E2A340(void) {
+void action_update_use_tweester(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
@@ -16,8 +16,8 @@ void func_802B6000_E2A340(void) {
         disable_player_input();
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_100000 | PLAYER_STATUS_FLAGS_FLYING);
         suggest_player_anim_clearUnkFlag(ANIM_Mario_8001F);
-        playerStatus->fallState = 0;
-        mem_clear(PlayerTweesterPhysics, sizeof(TweesterPhysics));
+        playerStatus->actionSubstate = 0;
+        mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
         PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
         PlayerTweesterPhysics->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
         PlayerTweesterPhysics->angularVelocity = 6.0f;
@@ -26,7 +26,7 @@ void func_802B6000_E2A340(void) {
         sfx_play_sound_at_player(SOUND_2F6, 0);
     }
 
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 0:
             sin_cos_rad((PlayerTweesterPhysics->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
@@ -54,14 +54,14 @@ void func_802B6000_E2A340(void) {
                 PlayerTweesterPhysics->angularVelocity = 40.0f;
             }
             if (--PlayerTweesterPhysics->countdown == 0) {
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
                 entity_start_script(entity);
             }
             break;
         case 1:
             disable_player_shadow();
             disable_npc_shadow(wPartnerNpc);
-            playerStatus->blinkTimer = 0x32;
+            playerStatus->blinkTimer = 50;
             enable_player_static_collisions();
             enable_player_input();
             playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_100000 | PLAYER_STATUS_FLAGS_FLYING);

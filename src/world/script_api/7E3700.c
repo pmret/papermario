@@ -226,7 +226,7 @@ ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
     s32 collider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
 
     if (gCollisionStatus.pushingAgainstWall == collider) {
-        if (playerStatus->actionState == ACTION_STATE_14
+        if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
         || playerStatus->actionState == ACTION_STATE_WALK
         || playerStatus->actionState == ACTION_STATE_RUN) {
             if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {

@@ -1606,7 +1606,7 @@ void func_8003D660(Npc* npc, s32 arg1) {
 
     if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {
-            s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE;
+            s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
                 case SURFACE_TYPE_FLOWERS:
                     func_8003DA38(npc, arg1);
