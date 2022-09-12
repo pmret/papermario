@@ -349,11 +349,11 @@ void set_action_state(s32 actionState) {
     if (actionState == ACTION_STATE_HIT_FIRE || actionState == ACTION_STATE_HIT_LAVA) {
         s8 partner;
 
-        if (playerStatus->unk_BF == 3) {
+        if (playerStatus->hazardType == HAZARD_TYPE_FIRE_BAR) {
             actionState = ACTION_STATE_HIT_FIRE;
         }
 
-        // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
+        // Whilst Sushie, Lakilester, or Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
@@ -393,9 +393,9 @@ void set_action_state(s32 actionState) {
         sfx_stop_sound(spinState->spinSoundID);
     }
 
-    if (playerStatus->unk_D8 != NULL) {
-        playerStatus->unk_D8->data.unk_46->unk_24 = 10;
-        playerStatus->unk_D8 = NULL;
+    if (playerStatus->specialSpinEffect != NULL) {
+        playerStatus->specialSpinEffect->data.unk_46->unk_24 = 10;
+        playerStatus->specialSpinEffect = NULL;
     }
 }
 
@@ -415,10 +415,7 @@ void start_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ACTION_STATE_FALLING);
-    playerStatus->gravityIntegrator[0] = 0.1143f;
-    playerStatus->gravityIntegrator[1] = -0.2871f;
-    playerStatus->gravityIntegrator[2] = -0.1823f;
-    playerStatus->gravityIntegrator[3] = 0.01152f;
+    LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
 }
 
 void start_bounce_a(void) {

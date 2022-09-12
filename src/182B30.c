@@ -348,9 +348,9 @@ void appendGfx_player_actor_blur(Actor* actor) {
                 guRotateF(mtxRotZ, rotZ, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(mtxRotX, mtxRotY, mtxTransform);
                 guMtxCatF(mtxTransform, mtxRotZ, mtxRotation);
-                guScaleF(mtxScale, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                                actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor * partTable->verticalStretch,
-                                actor->scale.z * SPRITE_PIXEL_SCALE);
+                guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                                actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * SPRITE_WORLD_SCALE_D);
                 guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
                 guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
                 guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
@@ -424,9 +424,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
     guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotX, mtxRotY, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
-    guScaleF(mtxScale, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.z * SPRITE_PIXEL_SCALE);
+    guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                    actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                    actor->scale.z * SPRITE_WORLD_SCALE_D);
     guMtxCatF(mtxScale, mtxRotation, mtxActor);
 
     numParts = actor->numParts;
@@ -453,7 +453,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
         }
 
         if (partTable->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
-            guScaleF(mtxPartScale, actor->scale.x * SPRITE_PIXEL_SCALE, actor->scale.y * SPRITE_PIXEL_SCALE, actor->scale.z * SPRITE_PIXEL_SCALE);
+            guScaleF(mtxPartScale, actor->scale.x * SPRITE_WORLD_SCALE_D, actor->scale.y * SPRITE_WORLD_SCALE_D, actor->scale.z * SPRITE_WORLD_SCALE_D);
         }
 
         j = decorationTable->unk_7D9;

@@ -734,10 +734,10 @@ void appendGfx_npc(Npc* npc) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if ((npc->scale.x * SPRITE_PIXEL_SCALE != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE != 1.0f)
-        || (npc->scale.z * SPRITE_PIXEL_SCALE != 1.0f)) {
-        guScaleF(mtx2, npc->scale.x * SPRITE_PIXEL_SCALE, (npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE,
-                 npc->scale.z * SPRITE_PIXEL_SCALE);
+    if ((npc->scale.x * SPRITE_WORLD_SCALE_D != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D != 1.0f)
+        || (npc->scale.z * SPRITE_WORLD_SCALE_D != 1.0f)) {
+        guScaleF(mtx2, npc->scale.x * SPRITE_WORLD_SCALE_D, (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D,
+                 npc->scale.z * SPRITE_WORLD_SCALE_D);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
@@ -763,13 +763,13 @@ void appendGfx_npc(Npc* npc) {
         }
 
 
-        if ((npc->scale.x * SPRITE_PIXEL_SCALE != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE != 1.0f)
-            || (npc->scale.z * SPRITE_PIXEL_SCALE != 1.0f))
+        if ((npc->scale.x * SPRITE_WORLD_SCALE_D != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D != 1.0f)
+            || (npc->scale.z * SPRITE_WORLD_SCALE_D != 1.0f))
         {
             do {
-                guScaleF(mtx2, npc->scale.x * SPRITE_PIXEL_SCALE,
-                               (npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE,
-                               npc->scale.z * SPRITE_PIXEL_SCALE);
+                guScaleF(mtx2, npc->scale.x * SPRITE_WORLD_SCALE_D,
+                               (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D,
+                               npc->scale.z * SPRITE_WORLD_SCALE_D);
             } while (0); // required to match (macro?)
             guMtxCatF(mtx2, mtx1, mtx1);
 
@@ -794,13 +794,13 @@ void appendGfx_npc(Npc* npc) {
             guMtxCatF(mtx2, mtx1, mtx1);
         }
 
-        if ((npc->scale.x * SPRITE_PIXEL_SCALE != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE != 1.0f)
-            || (npc->scale.z * SPRITE_PIXEL_SCALE != 1.0f))
+        if ((npc->scale.x * SPRITE_WORLD_SCALE_D != 1.0f) || ((npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D != 1.0f)
+            || (npc->scale.z * SPRITE_WORLD_SCALE_D != 1.0f))
         {
             do {
-                guScaleF(mtx2, npc->scale.x * SPRITE_PIXEL_SCALE,
-                               (npc->scale.y * npc->verticalStretch) * SPRITE_PIXEL_SCALE,
-                               npc->scale.z * SPRITE_PIXEL_SCALE);
+                guScaleF(mtx2, npc->scale.x * SPRITE_WORLD_SCALE_D,
+                               (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D,
+                               npc->scale.z * SPRITE_WORLD_SCALE_D);
             } while (0); // required to match (macro?)
 
             guMtxCatF(mtx2, mtx1, mtx1);

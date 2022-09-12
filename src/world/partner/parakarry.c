@@ -152,7 +152,7 @@ s32 func_802BD558_319AC8(void) {
 
     surfaceType = get_collider_flags(raycastResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
-        gPlayerStatus.unk_BF = 2;
+        gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         D_802BEBC0_31CBE0 = 0x15;
         gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800;
     }
@@ -377,7 +377,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         if (npc_raycast_down_around(0x10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
                             s32 surfaceType = get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
-                                playerStatus->unk_BF = 2;
+                                playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 D_802BEBC0_31CBE0 = 0x15;
                                 playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                             }

@@ -1936,7 +1936,7 @@ typedef struct PlayerStatus {
     /* 0x0B8 */ AnimID anim;
     /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
-    /* 0x0BF */ s8 unk_BF;
+    /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ char unk_C4;
@@ -1946,7 +1946,7 @@ typedef struct PlayerStatus {
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ f32* unk_D0;
     /* 0x0D4 */ f32 spinRate;
-    /* 0x0D8 */ struct EffectInstance* unk_D8; // effect 46
+    /* 0x0D8 */ struct EffectInstance* specialSpinEffect;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;

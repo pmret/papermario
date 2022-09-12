@@ -1,21 +1,23 @@
 #include "common.h"
 
-extern f32 D_8010C960;
-extern f32 D_8010C97C;
+extern f32 JumpedOnSwitchX;
+extern f32 JumpedOnSwitchZ;
 
-void func_802B6508_E24548(void);
-void func_802B647C_E244BC(void);
+// private functions
+static void initialize_jump(void);
+static void action_update_peach_step_down(void);
+static void action_update_peach_falling(void);
 
-void func_802B6000_E24040(void) {
+static void initialize_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     AnimID anim;
 
-    playerStatus->actionSubstate = 0;
+    playerStatus->actionSubstate = JUMP_STATE_0;
     playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
-    playerStatus->flags &= ~0x80000008;
-    playerStatus->flags |= 2;
+    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_FLYING);
+    playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
     playerStatus->jumpFromPos.x = playerStatus->position.x;
     playerStatus->jumpFromPos.z = playerStatus->position.z;
     playerStatus->jumpFromHeight = playerStatus->position.y;
@@ -39,9 +41,9 @@ void action_update_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID anim;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        func_802B6000_E24040();
+        initialize_jump();
 
         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
             phys_adjust_cam_on_landing();
@@ -79,16 +81,16 @@ void action_update_landing_on_switch(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
 
-        D_8010C960 = entity->position.x;
-        D_8010C97C = entity->position.z;
-        func_802B6000_E24040();
-        playerStatus->flags |= 0x880000;
+        JumpedOnSwitchX = entity->position.x;
+        JumpedOnSwitchZ = entity->position.z;
+        initialize_jump();
+        playerStatus->flags |= (PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_80000);
         disable_player_input();
     }
 
     playerStatus->timeInAir++;
 
-    if (playerStatus->actionSubstate != 1) {
+    if (playerStatus->actionSubstate != JUMP_STATE_1) {
         return;
     }
 
@@ -113,7 +115,7 @@ void action_update_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B647C_E244BC();
+        action_update_peach_falling();
         return;
     }
 
@@ -146,7 +148,7 @@ void action_update_step_down(void) {
     f32 height;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B6508_E24548();
+        action_update_peach_step_down();
         return;
     }
 
@@ -172,7 +174,7 @@ void action_update_step_down(void) {
     }
 }
 
-void func_802B647C_E244BC(void) {
+static void action_update_peach_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID anim;
 
@@ -193,7 +195,7 @@ void func_802B647C_E244BC(void) {
     playerStatus->timeInAir++;
 }
 
-void func_802B6508_E24548(void) {
+static void action_update_peach_step_down(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {

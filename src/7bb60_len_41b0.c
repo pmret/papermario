@@ -3,8 +3,8 @@
 
 extern f32 GravityParamsStartJump[];
 extern f32 D_8010C928;
-extern f32 D_8010C960;
-extern f32 D_8010C97C;
+extern f32 JumpedOnSwitchX;
+extern f32 JumpedOnSwitchZ;
 extern f32 D_8010C984;
 
 void func_800E315C(s32 colliderID);
@@ -130,7 +130,7 @@ void func_800E29C8(void) {
     }
 
     if (playerStatus->actionSubstate == 0) {
-        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
         integrate_gravity();
@@ -145,7 +145,7 @@ void func_800E29C8(void) {
         }
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
     } else if (playerStatus->actionSubstate == 2) {
-        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
         groundPosY = player_check_collision_below(func_800E34D8(), &colliderID);
@@ -192,10 +192,7 @@ void func_800E2BB0(void) {
 
     if (cond) {
         record_jump_apex();
-        playerStatus->gravityIntegrator[0] = 0.1143f;
-        playerStatus->gravityIntegrator[1] = -0.2871f;
-        playerStatus->gravityIntegrator[2] = -0.1823f;
-        playerStatus->gravityIntegrator[3] = 0.01152f;
+        LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
         set_action_state(ACTION_STATE_FALLING);
     }
 }
@@ -272,7 +269,7 @@ void phys_update_jump(void) {
 
 void phys_init_integrator_for_current_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* temp_a0;
+    f32* params;
 
     switch (playerStatus->actionState) {
         case ACTION_STATE_LANDING_ON_SWITCH:
@@ -288,17 +285,17 @@ void phys_init_integrator_for_current_state(void) {
         case ACTION_STATE_TORNADO_POUND:
         case ACTION_STATE_HIT_FIRE:
         case ACTION_STATE_HIT_LAVA:
-            temp_a0 = GravityParamsStartJump;
+            params = GravityParamsStartJump;
             if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
-                playerStatus->gravityIntegrator[0] = *temp_a0++;
-                playerStatus->gravityIntegrator[1] = *temp_a0++;
-                playerStatus->gravityIntegrator[2] = *temp_a0++;
-                playerStatus->gravityIntegrator[3] = *temp_a0++;
+                playerStatus->gravityIntegrator[0] = *params++;
+                playerStatus->gravityIntegrator[1] = *params++;
+                playerStatus->gravityIntegrator[2] = *params++;
+                playerStatus->gravityIntegrator[3] = *params++;
             } else {
-                playerStatus->gravityIntegrator[0] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[1] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[2] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[3] = *temp_a0++ * 0.5f;
+                playerStatus->gravityIntegrator[0] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[1] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[2] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[3] = *params++ * 0.5f;
             }
             break;
     }
@@ -308,21 +305,21 @@ static const f32 padding = 0.0f;
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
-    f32* floats = GravityParamsStartFall;
+    f32* params = GravityParamsStartFall;
     PlayerStatus* playerStatus;
     do {} while (0);
     playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
-        playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[3] = *floats++ / 12.0f;
+        playerStatus->gravityIntegrator[0] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[1] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[2] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[3] = *params++ / 12.0f;
     } else {
-        playerStatus->gravityIntegrator[0] = *floats++;
-        playerStatus->gravityIntegrator[1] = *floats++;
-        playerStatus->gravityIntegrator[2] = *floats++;
-        playerStatus->gravityIntegrator[3] = *floats++;
+        playerStatus->gravityIntegrator[0] = *params++;
+        playerStatus->gravityIntegrator[1] = *params++;
+        playerStatus->gravityIntegrator[2] = *params++;
+        playerStatus->gravityIntegrator[3] = *params++;
     }
 }
 
@@ -352,7 +349,7 @@ void func_800E315C(s32 colliderID) {
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                            playerStatus->unk_BF = 1;
+                            playerStatus->hazardType = HAZARD_TYPE_LAVA;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                     } else {
@@ -364,7 +361,7 @@ void func_800E315C(s32 colliderID) {
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
-                            playerStatus->unk_BF = 2;
+                            playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                         break;
@@ -413,7 +410,7 @@ void phys_player_land(void) {
                     set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
                 } else {
                     disable_player_input();
-                    playerStatus->actionSubstate = 0xB;
+                    playerStatus->actionSubstate = 11;
                 }
                 return;
             }
@@ -926,7 +923,7 @@ void phys_main_collision_below(void) {
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                                playerStatus->unk_BF = 2;
+                                playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 set_action_state(ACTION_STATE_HIT_LAVA);
                             }
                         } else {
@@ -938,7 +935,7 @@ void phys_main_collision_below(void) {
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                                playerStatus->unk_BF = 1;
+                                playerStatus->hazardType = HAZARD_TYPE_LAVA;
                                 set_action_state(ACTION_STATE_HIT_LAVA);
                             }
                         } else {

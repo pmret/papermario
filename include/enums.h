@@ -1786,6 +1786,22 @@ enum ItemTargetFlags {
     ITEM_TARGET_FLAG_8000               = 0x8000
 };
 
+enum PlayerSprites {
+    SPR_Mario_1                         = 0x1,
+    SPR_Mario_2                         = 0x2,
+    SPR_Mario_3                         = 0x3,
+    SPR_Mario_4                         = 0x4,
+    SPR_Mario_5                         = 0x5,
+    SPR_Mario_6                         = 0x6,
+    SPR_Mario_7                         = 0x7,
+    SPR_Mario_8                         = 0x8,
+    SPR_Mario_9                         = 0x9,
+    SPR_Peach_A                         = 0xA,
+    SPR_Peach_B                         = 0xB,
+    SPR_Peach_C                         = 0xC,
+    SPR_Peach_D                         = 0xD,
+};
+
 // TODO: extract player sprite + animations
 enum PlayerAnims {
     ANIM_Mario_StandStill                 = 0x00010000,
@@ -2641,9 +2657,9 @@ enum ActionStates {
     // Following action states prohibit movement (see set_action_state())
     ACTION_STATE_TALK                           = 0x0000000C,  ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP                      = 0x0000000D,
-    ACTION_STATE_SPIN_POUND                   = 0x0000000E,
-    ACTION_STATE_TORNADO_JUMP                     = 0x0000000F,
-    ACTION_STATE_TORNADO_POUND                    = 0x00000010,
+    ACTION_STATE_SPIN_POUND                     = 0x0000000E,
+    ACTION_STATE_TORNADO_JUMP                   = 0x0000000F,
+    ACTION_STATE_TORNADO_POUND                  = 0x00000010,
     ACTION_STATE_SLIDING                        = 0x00000011,
     ACTION_STATE_HAMMER                         = 0x00000012,
     ACTION_STATE_13                             = 0x00000013,
@@ -2666,6 +2682,11 @@ enum ActionStates {
     ACTION_STATE_24                             = 0x00000024,
     ACTION_STATE_INVALID_25                             = 0x00000025,
     ACTION_STATE_USE_SPRING                     = 0x00000026,
+};
+
+enum JumpState {
+    JUMP_STATE_0                        = 0,
+    JUMP_STATE_1                        = 1,
 };
 
 /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
@@ -3409,6 +3430,13 @@ enum ActionCommand {
     ACTION_COMMAND_SPOOK                     = 0x00000015,
     ACTION_COMMAND_WATER_BLOCK               = 0x00000016,
     ACTION_COMMAND_TIDAL_WAVE                = 0x00000017,
+};
+
+enum HazardType {
+    HAZARD_TYPE_NONE        = 0,
+    HAZARD_TYPE_LAVA        = 1,
+    HAZARD_TYPE_SPIKES      = 2,
+    HAZARD_TYPE_FIRE_BAR    = 3,
 };
 
 enum EffectGfxDataFlags {

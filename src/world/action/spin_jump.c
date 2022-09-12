@@ -102,7 +102,7 @@ void action_update_spin_jump(void) {
                 } else {
                     surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (surfaceType == SURFACE_TYPE_LAVA) {
-                        playerStatus->unk_BF = 1;
+                        playerStatus->hazardType = HAZARD_TYPE_LAVA;
                         set_action_state(ACTION_STATE_HIT_LAVA);
                         playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;

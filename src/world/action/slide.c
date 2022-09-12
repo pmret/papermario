@@ -133,10 +133,7 @@ void action_update_sliding(void) {
             playerStatus->position.y += playerStatus->gravityIntegrator[0];
             if (playerStatus->gravityIntegrator[0] <= 0.0f) {
                 playerStatus->actionSubstate = 3;
-                playerStatus->gravityIntegrator[0] = 0.1143f;
-                playerStatus->gravityIntegrator[1] = -0.2871f;
-                playerStatus->gravityIntegrator[2] = -0.1823f;
-                playerStatus->gravityIntegrator[3] = 0.01152f;
+                LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
             }
             break;
         case 3:

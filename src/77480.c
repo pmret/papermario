@@ -1293,7 +1293,7 @@ void func_800E0B90(void) {
     f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
     f32 temp_f20 = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
     s32 trueAnim;
-    s32 animByte;
+    s32 sprIndex;
     f32 unk_90;
     s32 phi_v1;
     f32 phi_f0;
@@ -1351,13 +1351,13 @@ void func_800E0B90(void) {
     if (playerStatus->flags & 0x20000) {
         playerStatus->trueAnimation = trueAnim;
     } else {
-        animByte = (trueAnim >> 0x10) & 0xFF;
+        sprIndex = (trueAnim >> 0x10) & 0xFF;
 
-        if (playerStatus->actionState != 0xF && !(playerStatus->flags & 0x100000)) {
+        if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PLAYER_STATUS_FLAGS_100000)) {
             playerStatus->spriteFacingAngle = unk_90 + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & 0x10000000) &&
-                (animByte == 1 || animByte == 6 || animByte == 10) &&
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_10000000) &&
+                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
                 fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
@@ -1366,10 +1366,9 @@ void func_800E0B90(void) {
             playerStatus->currentYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & 0x10000000) &&
-                (animByte == 1 || animByte == 6 || animByte == 10) &&
-                playerStatus->spriteFacingAngle < 350.0f &&
-                playerStatus->spriteFacingAngle > 190.0f)
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_10000000) &&
+                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
+                playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
             }
@@ -1388,50 +1387,50 @@ void func_800E0B90(void) {
     playerStatus->flags |= 0x40000000;
 }
 
-s32 get_player_back_anim(s32 arg0) {
-    s32 animByte = (arg0 >> 16) & 0xff;
-    s32 ret = 0;
+s32 get_player_back_anim(s32 anim) {
+    s32 sprIndex = (anim >> 16) & 0xff;
+    s32 outAnim = 0;
 
-    if (animByte != 1) {
-        if (animByte != 6 && animByte != 10) {
-            return arg0;
+    if (sprIndex != SPR_Mario_1) {
+        if (sprIndex != SPR_Mario_6 && sprIndex != SPR_Peach_A) {
+            return anim;
         }
 
-        if (animByte == 1) {
-            if (arg0 > 0x1000C) {
-                return arg0;
+        if (sprIndex == SPR_Mario_1) {
+            if (anim > ANIM_Mario_1000C) {
+                return anim;
             }
-        } else if (animByte == 6) {
-            if (arg0 == 0x6000C) {
-                ret = 0x6000D;
-            } else if (arg0 == 0x6000E) {
-                ret = 0x6000F;
-            } else if (arg0 == 0x60010) {
-                ret = 0x60011;
-            } else if (arg0 == 0x60012) {
-                ret = 0x60013;
-            } else if (arg0 == 0x60014) {
-                ret = 0x60015;
-            } else if (arg0 == 0x60016) {
-                ret = 0x60017;
-            } else if (arg0 == 0x60018) {
-                ret = 0x60019;
-            } else if (arg0 == 0x6001A) {
-                ret = 0x6001B;
+        } else if (sprIndex == SPR_Mario_6) {
+            if (anim == ANIM_Mario_6000C) {
+                outAnim = ANIM_Mario_6000D;
+            } else if (anim == ANIM_Mario_6000E) {
+                outAnim = ANIM_Mario_6000F;
+            } else if (anim == ANIM_Mario_60010) {
+                outAnim = ANIM_Mario_60011;
+            } else if (anim == ANIM_Mario_60012) {
+                outAnim = ANIM_Mario_60013;
+            } else if (anim == ANIM_Mario_60014) {
+                outAnim = ANIM_Mario_60015;
+            } else if (anim == ANIM_Mario_60016) {
+                outAnim = ANIM_Mario_60017;
+            } else if (anim == ANIM_Mario_60018) {
+                outAnim = ANIM_Mario_60019;
+            } else if (anim == ANIM_Mario_6001A) {
+                outAnim = ANIM_Mario_6001B;
             }
-        } else if (animByte == 10) {
-            if (arg0 > 0xA0006) {
-                ret = arg0 + 1;
+        } else if (sprIndex == SPR_Peach_A) {
+            if (anim > ANIM_Peach_A0006) {
+                outAnim = anim + 1;
             }
         }
-    } else if (arg0 > 0x1000C) {
-        return arg0;
+    } else if (anim > ANIM_Mario_1000C) {
+        return anim;
     }
 
-    if (ret != 0) {
-        return ret;
+    if (outAnim != 0) {
+        return outAnim;
     } else {
-        return arg0 | 0x1000000;
+        return anim | 0x1000000;
     }
 
 }
@@ -1506,7 +1505,7 @@ void appendGfx_player(void* data) {
     s32 phi_a0;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
-        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
         guMtxCatF(spE0, sp20, sp20);
         guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
@@ -1526,7 +1525,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(spE0, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
@@ -1632,7 +1631,7 @@ void appendGfx_player_spin(void* data) {
         guMtxCatF(mtx, rotation, mtx);
         guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(mtx, translation, mtx);
-        guScaleF(scale, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(scale, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(mtx, scale, mtx);
         guTranslateF(translation, px, py, pz);
         guMtxCatF(mtx, translation, mtx);

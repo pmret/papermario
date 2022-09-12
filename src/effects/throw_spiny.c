@@ -163,7 +163,7 @@ void throw_spiny_appendGfx(void* effect) {
     ThrowSpinyFXData* data = ((EffectInstance*)effect)->data.throwSpiny;
     s32 temp_s5 = data->rgba;
     s32 temp_s6 = data->unk_00;
-    f32 scale = data->unk_40 * SPRITE_PIXEL_SCALE;
+    f32 scale = data->unk_40 * SPRITE_WORLD_SCALE_D;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));

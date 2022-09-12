@@ -2665,7 +2665,7 @@ void btl_state_update_select_target(void) {
                 }
             }
 
-            if (battleStatus->currentTargetListFlags < 0) {
+            if (battleStatus->currentTargetListFlags & 0x80000000) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
                     gBattleState2 = battleStatus->unk_6E;
                     if (gBattleStatus.flags2 & BS_FLAGS2_40) {
