@@ -115,7 +115,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims
     npc->scale.x = 1.0f;
     npc->scale.y = 1.0f;
     npc->scale.z = 1.0f;
-    npc->currentAnim.w = blueprint->initialAnim;
+    npc->currentAnim = blueprint->initialAnim;
     npc->animationSpeed = 1.0f;
     npc->renderYaw = 0.0f;
     npc->unk_98 = 0;
@@ -150,9 +150,9 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims
         npc->extraAnimList = animList;
         if (!(npc->flags & NPC_FLAG_1000000)) {
             if (!(npc->flags & NPC_FLAG_PARTICLE)) {
-                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim.w, animList);
+                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, animList);
             } else {
-                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim.w | 0x80000000, animList);
+                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | 0x80000000, animList);
             }
         } else {
             npc->flags |= NPC_FLAG_2;
@@ -552,14 +552,14 @@ void update_npcs(void) {
 
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                         if (!(npc->flags & NPC_FLAG_1000000)) {
-                            if (npc->currentAnim.w != 0) {
+                            if (npc->currentAnim != 0) {
                                 if (npc->spriteInstanceID >= 0) {
-                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim.w, npc->animationSpeed);
+                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
                                 }
                             }
                         }
                     } else {
-                        spr_update_player_sprite(1, npc->currentAnim.w, npc->animationSpeed);
+                        spr_update_player_sprite(1, npc->currentAnim, npc->animationSpeed);
                     }
 
                     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
@@ -617,9 +617,9 @@ void update_npcs(void) {
                             if (npc->spriteInstanceID < 0) {
                                 npc->spriteInstanceID++;
                                 if (npc->spriteInstanceID == -1) {
-                                    npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim.w, npc->extraAnimList);
+                                    npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, npc->extraAnimList);
                                     ASSERT(npc->spriteInstanceID >= 0);
-                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim.w, npc->animationSpeed);
+                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
                                 }
                             }
                         }
@@ -742,7 +742,7 @@ void appendGfx_npc(Npc* npc) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim.w != 0) && (npc->spriteInstanceID >= 0)) {
+        if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim != 0) && (npc->spriteInstanceID >= 0)) {
             npc_draw_with_palswap(npc, renderYaw, mtx1);
             npc->unk_2C = func_802DE5C8(npc->spriteInstanceID);
         }
@@ -776,7 +776,7 @@ void appendGfx_npc(Npc* npc) {
         }
 
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim.w != 0)) {
+            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim != 0)) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
@@ -806,7 +806,7 @@ void appendGfx_npc(Npc* npc) {
             guMtxCatF(mtx2, mtx1, mtx1);
         }
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim.w != 0)) {
+            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim != 0)) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
@@ -945,7 +945,7 @@ void set_npc_sprite(Npc* npc, s32 anim, u32** extraAnimList) {
         ASSERT(npc->spriteInstanceID >= 0);
     }
 
-    npc->currentAnim.w = anim;
+    npc->currentAnim = anim;
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         if (!(npc->flags & NPC_FLAG_1000000)) {
@@ -1023,19 +1023,19 @@ void npc_reload_all(void) {
             if (npc->flags && !(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                 if (!(npc->flags & NPC_FLAG_1000000)) {
                     if (!(npc->flags & NPC_FLAG_PARTICLE)) {
-                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim.w, npc->extraAnimList);
+                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, npc->extraAnimList);
                     } else {
-                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim.w | 0x80000000, npc->extraAnimList);
+                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | 0x80000000, npc->extraAnimList);
                     }
                 }
                 if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                     if (!(npc->flags & NPC_FLAG_1000000) && (npc->palSwapType != 0)) {
-                        npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim.h);
+                        npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
                         npc->paletteCount = 0;
                         while (npc->spritePaletteList[npc->paletteCount] != -1) {
                             npc->paletteCount++;
                         }
-                        npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim.h);
+                        npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);
                     }
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                         if (!(npc->flags & NPC_FLAG_1000000)) {

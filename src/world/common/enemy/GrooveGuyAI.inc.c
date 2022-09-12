@@ -20,20 +20,20 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         case 0:
             enemy->varTable[0] = 1;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = 0x3C000C;
+            npc->currentAnim = 0x3C000C;
             set_npc_yaw(npc, 270.0f);
             npc->rotation.y = 0.0f;
             // fallthrough
         case 1:
             phase = enemy->varTable[1] % 16;
             if (phase < 4) {
-                npc->currentAnim.w = 0x3C000C;
+                npc->currentAnim = 0x3C000C;
             } else if (phase < 8) {
-                npc->currentAnim.w = 0x3C000B;
+                npc->currentAnim = 0x3C000B;
             } else if (phase < 12) {
-                npc->currentAnim.w = 0x3C000C;
+                npc->currentAnim = 0x3C000C;
             } else  if (phase < 16) {
-                npc->currentAnim.w = 0x3C000D;
+                npc->currentAnim = 0x3C000D;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x41) {
@@ -44,7 +44,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             enemy->varTable[0] = 3;
             enemy->varTable[1] = 0;
             npc->rotation.y = 0.0f;
-            npc->currentAnim.w = 0x3C000C;
+            npc->currentAnim = 0x3C000C;
             // fallthrough
         case 3:
             npc->rotation.y += 35.0;
@@ -88,7 +88,7 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->aiFlags & 4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

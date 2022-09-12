@@ -193,7 +193,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
                     gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
-                    parakarry->currentAnim.w = 0x40009;
+                    parakarry->currentAnim = 0x40009;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                     parakarry->flags &= ~NPC_FLAG_4000;
@@ -257,7 +257,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->moveToPos.x = playerStatus->position.x;
                     parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
                     parakarry->moveToPos.z = playerStatus->position.z;
-                    parakarry->currentAnim.w = 0x40003;
+                    parakarry->currentAnim = 0x40003;
                     add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
                     tempYaw = playerStatus->targetYaw;
 
@@ -278,7 +278,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         disable_npc_blur(parakarry);
                         parakarry->yaw = playerStatus->targetYaw;
                         parakarry->moveSpeed = 0.2f;
-                        parakarry->currentAnim.w = 0x4000A;
+                        parakarry->currentAnim = 0x4000A;
                         parakarry->planarFlyDist = 0;
                         suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
                         sfx_play_sound_at_npc(SOUND_2009, 0, -4);
@@ -396,7 +396,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                 parakarry->jumpScale = -0.01f;
                                 parakarry->moveToPos.y = playerStatus->position.y;
                                 parakarry->duration = 0;
-                                parakarry->currentAnim.w = 0x4000A;
+                                parakarry->currentAnim = 0x4000A;
                                 parakarry->animationSpeed = 1.8f;
                                 gCollisionStatus.currentFloor = -1;
                                 D_802BEBC0_31CBE0++;
@@ -535,7 +535,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
         }
 
         if (D_802BEBC0_31CBE0 == 0x16 || D_802BEBC0_31CBE0 == 0x15 || D_802BEBC0_31CBE0 == 0x14) {
-            parakarry->currentAnim.w = 0x40001;
+            parakarry->currentAnim = 0x40001;
             D_802BEBB0 = 0;
             parakarry->jumpVelocity = 0.0f;
             parakarry->flags &= ~ACTOR_FLAG_HP_OFFSET_BELOW;

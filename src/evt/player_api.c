@@ -111,7 +111,7 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     AnimID anim = evt_get_variable(script, *args++);
 
-    gPlayerStatus.anim = playerNpc->currentAnim.w = anim;
+    gPlayerStatus.anim = playerNpc->currentAnim = anim;
 
     if (gPlayerStatus.anim == ANIM_Mario_80003) {
         exec_ShakeCam1(0, 0, 2);

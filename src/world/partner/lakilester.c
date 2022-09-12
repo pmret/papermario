@@ -502,10 +502,10 @@ void func_802BDDD8_321928(Npc* npc) {
 
         belowSurfaceType = get_collider_flags(raycastBelowResult) & 0xFF;
         if (belowSurfaceType == SURFACE_TYPE_LAVA) {
-            npc->currentAnim.w = 0x80006;
+            npc->currentAnim = 0x80006;
             npc->moveSpeed = moveSpeed * 0.5f;
         } else {
-            npc->currentAnim.w = 0x80005;
+            npc->currentAnim = 0x80005;
             npc->moveSpeed = moveSpeed;
         }
         return;
@@ -585,7 +585,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->flags |= NPC_FLAG_100;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
-                npc->currentAnim.w = 0x80005;
+                npc->currentAnim = 0x80005;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= (NPC_FLAG_100 | NPC_FLAG_400000);
@@ -595,7 +595,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->pos.x = playerStatus->position.x;
                 npc->pos.y = npc->moveToPos.y;
                 npc->pos.z = playerStatus->position.z;
-                npc->currentAnim.w = 0x80005;
+                npc->currentAnim = 0x80005;
                 playerStatus->position.y = npc->pos.y + 10.0f;
                 npc->moveSpeed = 3.0f;
                 npc->jumpScale = 0.0f;
@@ -699,7 +699,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
             npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->duration = 12;
-            npc->currentAnim.w = 0x80005;
+            npc->currentAnim = 0x80005;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
             suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);

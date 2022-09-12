@@ -29,7 +29,7 @@ void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_WALK];
     script->functionTemp[1] = 0;
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
@@ -189,7 +189,7 @@ void N(FlyingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim.w = *enemy->animList;
+    npc->currentAnim = *enemy->animList;
     script->functionTemp[0] = 3;
 }
 
@@ -266,7 +266,7 @@ void N(FlyingAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration = 0;
     npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     script->functionTemp[0] = AI_STATE_ALERT;
 }
 
@@ -286,7 +286,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     f32 jumpVelocity = (f32)enemy->varTable[5] / 100.0;
     f32 jumpScale = (f32)enemy->varTable[6] / 100.0;
 
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
@@ -338,7 +338,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     if (npc->jumpVelocity >= 0.0) {
         npc->pos.y += npc->jumpVelocity;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
         enemy->unk_07 = 0;
         if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
             posX = npc->pos.x;

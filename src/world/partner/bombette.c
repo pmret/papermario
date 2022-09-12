@@ -255,7 +255,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->moveToPos.x = playerStatus->position.x;
             npc->moveToPos.y = playerStatus->position.y;
             npc->moveToPos.z = playerStatus->position.z;
-            npc->currentAnim.w = 0x30007;
+            npc->currentAnim = 0x30007;
             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 0.0f, playerStatus->targetYaw);
 
             temp_f0 = clamp_angle(playerStatus->targetYaw + ((D_802BE920 != 0) ? -90.0f : 90.0f));
@@ -279,7 +279,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 disable_npc_blur(npc);
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_6000C);
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim.w = 0x30005;
+                npc->currentAnim = 0x30005;
                 evt->functionTemp[0] = 1;
                 evt->functionTemp[1] = 10;
             }
@@ -299,7 +299,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 sfx_play_sound_at_npc(0x80000000, 0, -4);
                 D_802BE924 = 1;
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
-                npc->currentAnim.w = 0x30006;
+                npc->currentAnim = 0x30006;
                 npc->jumpVelocity = 0.0f;
                 D_802BE938 = 0;
                 npc->flags = (npc->flags | 0x200) & ~0x100;
@@ -333,7 +333,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 if (playerStatus->actionState == 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
-                npc->currentAnim.w = 0x30010;
+                npc->currentAnim = 0x30010;
                 npc->flags &= ~0x200;
                 evt->functionTemp[1] = 2;
                 evt->functionTemp[0] = 3;
@@ -372,7 +372,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                     }
                 }
 
-                npc->currentAnim.w = 0x30000 | 0x10;
+                npc->currentAnim = 0x30000 | 0x10;
                 evt->functionTemp[1] = 0x14;
                 evt->functionTemp[0] = 3;
                 if (playerStatus->actionState == 0) {
@@ -436,7 +436,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
-            npc->currentAnim.w = 0x30011;
+            npc->currentAnim = 0x30011;
             temp1 = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             if (!(get_clamped_angle_diff(camera->currentYaw, temp1) < 0.0f)) {
                 evt->functionTemp[2] = 1;
@@ -463,7 +463,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 10.0f, npc->yaw);
             npc->jumpVelocity = 0.0f;
-            npc->currentAnim.w = 0x30011;
+            npc->currentAnim = 0x30011;
             npc->flags |= 0x800;
             evt->functionTemp[0] = 6;
             break;
@@ -506,7 +506,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
             npc->rotation.z = 0.0f;
-            npc->currentAnim.w = 0x30003;
+            npc->currentAnim = 0x30003;
             partner_clear_player_tracking(npc);
             if (D_802BE924 == 0) {
                 return ApiStatus_DONE2;
@@ -525,7 +525,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
             npc->rotation.z = 0.0f;
-            npc->currentAnim.w = 0x30003;
+            npc->currentAnim = 0x30003;
             npc->pos.x = playerStatus->position.x;
             npc->pos.y = playerStatus->position.y;
             npc->pos.z = playerStatus->position.z;
@@ -663,7 +663,7 @@ void world_bombette_pre_battle(Npc* bombette) {
         bombette->pos.y = playerStatus->position.y;
         bombette->rotation.x = 0.0f;
         bombette->rotation.z = 0.0f;
-        bombette->currentAnim.w = 0x30003;
+        bombette->currentAnim = 0x30003;
         partner_clear_player_tracking(bombette);
         disable_npc_blur(bombette);
 

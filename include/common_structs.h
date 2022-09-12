@@ -189,10 +189,7 @@ typedef struct Npc {
                 NpcQuizmoBlur* quizmo;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
-    /* 0x028 */ union {
-    /*       */     u16 h;
-    /*       */     u32 w;
-    /*       */ } currentAnim;
+    /* 0x028 */ AnimID currentAnim;
     /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;

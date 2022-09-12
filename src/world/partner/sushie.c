@@ -309,7 +309,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
             temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
-            partnerNPC->currentAnim.w = 0x7000A;
+            partnerNPC->currentAnim = 0x7000A;
             partnerNPC->yaw = temp_f0;
             partnerNPC->jumpScale = 0.0f;
             partnerNPC->moveSpeed = 3.0f;

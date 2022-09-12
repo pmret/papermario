@@ -35,7 +35,7 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
 
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {

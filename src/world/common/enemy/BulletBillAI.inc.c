@@ -88,14 +88,14 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.z = blasterNpc->pos.z + 1.0;
             npc->yaw = blasterNpc->yaw;
             npc->moveSpeed = aiSettings->chaseSpeed;
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_RUN];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_RUN];
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 25.0f, npc->yaw);
             if (npc->yaw < 180.0f) {
                 npc->renderYaw = 180.0f;
             } else {
                 npc->renderYaw = 0.0f;
             }
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_CHASE];
             npc->duration = 300;
             npc->flags |= (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_LOCK_ANIMS);
             enable_npc_shadow(npc);
@@ -122,7 +122,7 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
             }
 
             if (hitDetected) {
-                npc->currentAnim.w = enemy->animList[ENEMY_ANIM_HIT];
+                npc->currentAnim = enemy->animList[ENEMY_ANIM_HIT];
                 ai_enemy_play_sound(npc, SOUND_B0000018, 0);
                 fx_ring_blast(0, npc->pos.x, npc->pos.y + 5.0f, npc->pos.z + 1.0f, 0.05f, 20);
                 fx_smoke_burst(0, npc->pos.x, npc->pos.y + 5.0f, npc->pos.z + 0.0f, 1.2f, 25);
@@ -162,7 +162,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_BLASTER_INIT;
         npc->duration = 30;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         enemy->flags |= ENEMY_FLAGS_200000;
         disable_npc_shadow(npc);
     }
@@ -173,7 +173,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
     }
     
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         } 
@@ -195,7 +195,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
                 bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_INIT;
                 bulletEnemy->AI_VAR_BULLET_BLASTER = enemy->npcID;
                 bulletEnemy->AI_VAR_BULLET_RANGE = enemy->AI_VAR_BLASTER_RANGE;
-                npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+                npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
                 npc->duration = 10;
                 script->AI_TEMP_STATE = AI_STATE_BLASTER_FIRE;
             } else {
@@ -208,7 +208,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->duration > 0) {
                 break;
             }
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
             bulletEnemy = get_enemy(enemy->AI_VAR_BLASTER_BULLET);
             bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_PRE;            
             ai_enemy_play_sound(npc, SOUND_328, 0x200000);

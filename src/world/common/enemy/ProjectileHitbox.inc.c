@@ -58,14 +58,14 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* terri
         s32 sp28;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 20;
         script->functionTemp[0] = 33;
     } else {
         s32 npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
 
         if (npcID != NPC_SELF && get_enemy(npcID)->varTable[0] == 0 && npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
             npc->duration = enemy->varTable[1];
             script->functionTemp[0] = 30;
         }
@@ -84,11 +84,11 @@ void N(ProjectileHitbox_30)(Evt* script) {
             s32 emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         } else {
             Enemy* hitboxEnemy;
 
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
             hitboxEnemy = get_enemy(npcID);
             hitboxEnemy->varTable[4] = enemy->npcID;
             hitboxEnemy->varTable[0] = 1;
@@ -113,7 +113,7 @@ void N(ProjectileHitbox_32)(Evt* script) {
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
     if (enemy2->varTable[0] == 0) {
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = enemy->varTable[2];
         script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
     }

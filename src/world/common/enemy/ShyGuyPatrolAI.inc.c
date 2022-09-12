@@ -8,7 +8,7 @@ void N(ShyGuyPatrolAI_14)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->moveSpeed *= 0.6;
-    npc->currentAnim.w = enemy->animList[12];
+    npc->currentAnim = enemy->animList[12];
     npc->duration = 5;
     script->functionTemp[0] = 0xF;
 }
@@ -26,7 +26,7 @@ void N(ShyGuyPatrolAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     if (npc->duration == 0) {
         npc->moveSpeed *= 0.6;
 
-        npc->currentAnim.w = enemy->animList[11];
+        npc->currentAnim = enemy->animList[11];
         npc->duration = 10;
         script->functionTemp[0] = 16;
     }
@@ -54,7 +54,7 @@ void N(ShyGuyPatrolAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim.w = *enemy->animList;
+        npc->currentAnim = *enemy->animList;
         script->functionTemp[0] = 0;
     }
 }
@@ -83,7 +83,7 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
    if (isInitialCall || enemy->aiFlags & 4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->patrol.isFlying) {

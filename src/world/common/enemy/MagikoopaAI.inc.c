@@ -18,7 +18,7 @@ void N(MagikoopaAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~2;
         npc->duration = 0;
         script->AI_TEMP_STATE = 1;
@@ -76,7 +76,7 @@ void N(MagikoopaAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     f32 posX, posY, posZ;
 
     enemy->varTable[0] = 1;
-    npc->currentAnim.w = enemy->animList[8];
+    npc->currentAnim = enemy->animList[8];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->flags &= ~2;
     npc->scale.x = 0.1f;
@@ -157,16 +157,16 @@ void N(MagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         npc->duration = 0xF;
         script->AI_TEMP_STATE = 0;
         return;
     }
     if (N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory) == 1) {
         ai_enemy_play_sound(npc, SOUND_SPELL_CAST1, 0);
-        npc->currentAnim.w = enemy->animList[8];
+        npc->currentAnim = enemy->animList[8];
         posX = npc->pos.x;
         posY = npc->pos.y + 32.0f;
         posZ = npc->pos.z + 1.0f;
@@ -183,7 +183,7 @@ void N(MagikoopaAI_22)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     
     temp_v0->duration--;
     if (temp_v0->duration <= 0) {
-        temp_v0->currentAnim.w = temp_s0->animList[9];
+        temp_v0->currentAnim = temp_s0->animList[9];
         temp_v0->duration = 9;
         script->AI_TEMP_STATE = 0x17;
     }
@@ -200,7 +200,7 @@ void N(MagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         projectileEnemy = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory);
         if (projectileEnemy != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim = enemy->animList[0];
             npc->duration = 15;
             script->AI_TEMP_STATE = 0;
         } else {
@@ -218,7 +218,7 @@ void N(MagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         npc->duration = 3;
         script->AI_TEMP_STATE = 0;
     }
@@ -246,7 +246,7 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
     
     if (isInitialCall || (enemy->aiFlags & 4)) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         npc->flags &= ~0x800;
         npc->flags |= 0x200000;
         enemy->flags |= 0x200000;
@@ -317,7 +317,7 @@ ApiStatus N(MagikoopaAI_OnPlayerFled)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->alpha = 255;
-    npc->currentAnim.w = enemy->animList[2];
+    npc->currentAnim = enemy->animList[2];
     npc->duration = 0;
     script->functionTemp[0] = 0;
     return ApiStatus_DONE2;

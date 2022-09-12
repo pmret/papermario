@@ -30,7 +30,7 @@ ApiStatus func_80240050_A6ACF0(Evt* script, s32 isInitialCall) {
     } else {
         animID = 0xA0003;
     }
-    npc->currentAnim.w = animID;
+    npc->currentAnim = animID;
     evt_set_variable(script, outVar, playerStatus->targetYaw);
     return ApiStatus_DONE2;
 }

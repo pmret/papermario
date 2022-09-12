@@ -544,7 +544,7 @@ void peach_set_disguise_anim(s32 arg0) {
     s32 listIndex = D_8010C96C;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim.w = arg0;
+        get_npc_by_index(listIndex)->currentAnim = arg0;
     }
 }
 

@@ -230,7 +230,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             spinyEnemy->varTable[10] = 1;
             spinyEnemy->varTable[11] = enemy->npcID;
             npc->duration = 15;
-            npc->currentAnim.w = NPC_ANIM_lakitu_Palette_00_Anim_14;
+            npc->currentAnim = NPC_ANIM_lakitu_Palette_00_Anim_14;
             script->AI_TEMP_STATE = 30;
         }
     }
@@ -263,7 +263,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->duration > 0) {
                 break;
             }
-            npc->currentAnim.w = NPC_ANIM_lakitu_Palette_00_Anim_15;
+            npc->currentAnim = NPC_ANIM_lakitu_Palette_00_Anim_15;
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 3;
             npc->duration = 10;

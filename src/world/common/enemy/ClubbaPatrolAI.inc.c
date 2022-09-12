@@ -25,7 +25,7 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_PATROL_INIT;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~0x800;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags |= 0x200;

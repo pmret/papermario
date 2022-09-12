@@ -107,12 +107,12 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 if (D_802BE278_31DDE8 == 0) {
                     D_802BE278_31DDE8 = 1;
                     func_802BD1AC_31CD1C(1);
-                    watt->currentAnim.w = 0x60003;
+                    watt->currentAnim = 0x60003;
                 }
             } else if (D_802BE278_31DDE8 != 0) {
                 D_802BE278_31DDE8 = 0;
                 func_802BD1AC_31CD1C(0);
-                watt->currentAnim.w = 0x60001;
+                watt->currentAnim = 0x60001;
             }
 
             if (WattStaticEffect != NULL) {
@@ -236,7 +236,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 partnerActionStatus->partnerAction_unk_1 = 0;
                 playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
                 func_802BE014_31DB84();
-                npc->currentAnim.w = 0x60001;
+                npc->currentAnim = 0x60001;
                 D_802BE304 = 1;
                 script->functionTemp[1] = 2;
             }
@@ -285,10 +285,10 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 npc->moveToPos.x = playerStatus->position.x;
                 npc->moveToPos.y = playerStatus->position.y + 5.0f;
                 npc->moveToPos.z = playerStatus->position.z;
-                npc->currentAnim.w = 0x60002;
+                npc->currentAnim = 0x60002;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim.w = 0x60001;
+                npc->currentAnim = 0x60001;
                 playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2;
                 func_802BE014_31DB84();
                 npc_set_palswap_mode_A(npc, 1);
@@ -305,7 +305,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 npc->moveToPos.x = playerStatus->position.x;
                 npc->moveToPos.y = playerStatus->position.y + 5.0f;
                 npc->moveToPos.z = playerStatus->position.z;
-                npc->currentAnim.w = 0x60002;
+                npc->currentAnim = 0x60002;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->duration = 8;
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
@@ -319,7 +319,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
             npc->duration--;
             if (npc->duration == 0) {
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim.w = 0x60001;
+                npc->currentAnim = 0x60001;
                 partnerActionStatus->actingPartner = PARTNER_WATT;
                 playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2;
                 func_802BE014_31DB84();
@@ -354,7 +354,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
 
     if (D_802BE304 == 2) {
         playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
-        npc->currentAnim.w = 0x60001;
+        npc->currentAnim = 0x60001;
         partner_clear_player_tracking(npc);
         D_802BE30C = 0;
         partnerActionStatus->actingPartner = PARTNER_NONE;

@@ -28,7 +28,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;

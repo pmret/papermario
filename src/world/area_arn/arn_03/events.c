@@ -151,7 +151,7 @@ void N(func_80241068_BDFDF8)(Evt* script, MobileAISettings* aiSettings, EnemyDet
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0] = 4;
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         }
     }
 }
