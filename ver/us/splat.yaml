@@ -933,6 +933,7 @@ segments:
     - [0x116498, pm_charset_palettes, subtitle,         1]
     - [0x1164A8, pm_charset_palettes, title,            1]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
+  - [0x11A23E, bin] # padding (needed atm, will fix when added to c file)
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
   - name: ui_images
@@ -2576,7 +2577,9 @@ segments:
     subsegments:
     - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # landing_dust, walking_dust, smoke_ring, smoke_impact, smoke_burst gfx
+  - start: 0x328EA0 # landing_dust, walking_dust, smoke_ring, smoke_impact, smoke_burst gfx
+    type: bin
+    align: 16
   - name: effect_walking_dust
     dir: effects
     type: code
@@ -3549,7 +3552,9 @@ segments:
     subsegments:
     - [0x3A70F0, c, quizmo_audience]
     - [0x3A7710]
-  - [0x3A77A0, bin] # quizmo_audience gfx
+  - start: 0x3A77A0 # quizmo_audience gfx
+    type: bin
+    align: 16
   - name: effect_butterflies
     dir: effects
     type: code
@@ -3668,7 +3673,9 @@ segments:
     subsegments:
     - [0x3B7B80, c, water_fountain]
     - [0x3B8470]
-  - [0x3B8860, bin] # water_fountain gfx
+  - start: 0x3B8860 # water_fountain gfx
+    type: bin
+    align: 16
   - name: effect_underwater
     dir: effects
     type: code
@@ -3677,7 +3684,9 @@ segments:
     subsegments:
     - [0x3B8BD0, c, underwater]
     - [0x3B9A50]
-  - [0x3B9A70, bin] # underwater gfx
+  - start: 0x3B9A70 # underwater gfx
+    type: bin
+    align: 16
   - name: effect_lightning_bolt
     dir: effects
     type: code
@@ -4142,7 +4151,9 @@ segments:
     subsegments:
     - [0x3FEAE0, c, lil_oink]
     - [0x3FF180]
-  - [0x3FF250, bin] # lil_oink gfx
+  - start: 0x3FF250 # lil_oink gfx
+    type: bin
+    align: 16
   - name: effect_something_rotating
     dir: effects
     type: code
@@ -4195,6 +4206,7 @@ segments:
     - [0x404E40, data]
   - type: group # partner_buff gfx
     start: 0x404F40
+    align: 16
     subsegments:
     - start: 0x404F40
       type: ci4
@@ -13655,19 +13667,44 @@ segments:
   - [0x199BB00, bin] # Princess Peach sprites
   - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
   - [0x19E09A8, Yay0]
-  - [0x19E1390, Yay0]
-  - [0x19E1888, Yay0]
-  - [0x19E2330, Yay0]
-  - [0x19E2DE0, Yay0]
-  - [0x19E3208, Yay0]
-  - [0x19E3BA8, Yay0]
-  - [0x19E3FD8, Yay0]
-  - [0x19E4828, Yay0]
-  - [0x19E4BE0, Yay0]
-  - [0x19E5758, Yay0]
-  - [0x19E5950, Yay0]
-  - [0x19E62A0, Yay0]
-  - start: 0x19E67B8 # TODO shiftability
+  - start: 0x19E1390
+    type: Yay0
+    align: 8
+  - start: 0x19E1888
+    type: Yay0
+    align: 8
+  - start: 0x19E2330
+    type: Yay0
+    align: 8
+  - start: 0x19E2DE0
+    type: Yay0
+    align: 8
+  - start: 0x19E3208
+    type: Yay0
+    align: 8
+  - start: 0x19E3BA8
+    type: Yay0
+    align: 8
+  - start: 0x19E3FD8
+    type: Yay0
+    align: 8
+  - start: 0x19E4828
+    type: Yay0
+    align: 8
+  - start: 0x19E4BE0
+    type: Yay0
+    align: 8
+  - start: 0x19E5758
+    type: Yay0
+    align: 8
+  - start: 0x19E5950
+    type: Yay0
+    align: 8
+  - start: 0x19E62A0
+    type: Yay0
+    align: 8
+  - start: 0x19E67B8
+    align: 8
     type: pm_npc_sprites
     dir: sprite
     name: npc
@@ -13960,6 +13997,6 @@ segments:
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, pm_map_data, mapfs]
   - type: bin
-    start: 0x27FEE22 # TODO shiftability
+    start: 0x27FEE22
     subalign: 2
   - [0x2800000]
