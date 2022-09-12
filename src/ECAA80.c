@@ -9,6 +9,8 @@
 
 extern s32 N(ItemChoiceList)[];
 extern s32 N(FlowerGuard_ItemChoiceList)[91];
+extern s32 ECAA80_ItemChoice_HasSelectedItem;
+extern s32 ECAA80_ItemChoice_SelectedItemID;
 
 void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
@@ -26,13 +28,11 @@ INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
 
 // ECAA80_ItemChoice_SaveSelected (needs data?)
 
-extern s32 ECAA80_ItemChoice_HasSelectedItem;
-extern s32 ECAA80_ItemChoice_SelectedItemID;
 
-s32 func_802419F0_ECB6F0(Evt *arg0) {
+ApiStatus ECAA80_ItemChoice_SaveSelected(Evt *arg0) {
     ECAA80_ItemChoice_SelectedItemID = dead_evt_get_variable(arg0, *arg0->ptrReadPos);
     ECAA80_ItemChoice_HasSelectedItem = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 

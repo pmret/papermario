@@ -7,6 +7,8 @@
 #define NAMESPACE EE70C0
 
 extern const s32 D_802453E0_EEB990[];
+extern s32 D_8024462C_EEABDC;
+extern s32 D_80244630_EEABE0;
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
@@ -16,13 +18,12 @@ extern const s32 D_802453E0_EEB990[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 
-extern s32 D_8024462C_EEABDC;
-extern s32 D_80244630_EEABE0;
 
-s32 func_802422B4_EE8864(Evt *arg0) {
+
+ApiStatus func_802422B4_EE8864(Evt *arg0) {
     D_80244630_EEABE0 = dead_evt_get_variable(arg0, *arg0->ptrReadPos);
     D_8024462C_EEABDC = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 
