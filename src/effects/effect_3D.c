@@ -9,9 +9,6 @@ void fx_3D_update(EffectInstance* effect);
 void fx_3D_render(EffectInstance* effect);
 void fx_3D_appendGfx(void* effect);
 
-// Some operations happening in the wrong order.
-// Offsets in the 'for' loop look wrong but they're just shifted by 8 bytes.
-#if NON_MATCHING
 void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** outEffect) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
@@ -68,10 +65,10 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                 temp_f24 *= 8.0f;
                 temp_f26 *= 8.0f;
 
+                bpPtr->unk_00 = 0;
                 bpPtr->init = fx_3D_init;
                 bpPtr->update = fx_3D_update;
                 bpPtr->renderWorld = fx_3D_render;
-                bpPtr->unk_00 = 0;
                 bpPtr->unk_14 = NULL;
                 bpPtr->effectID = EFFECT_3D;
 
@@ -108,8 +105,8 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                     part->unk_50 = 20.0f;
                     part->unk_4C = part->unk_54 = func_E0200000(360);
                     part->unk_58 = 255;
-                    part->unk_5C = 10;
                     part->unk_64 = ((i - 1) / 5) * 2;
+                    part->unk_5C = 10;
                 }
 
                 *outEffect = effect;
@@ -117,9 +114,6 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/effect_3D", fx_3D_main);
-#endif
 
 void fx_3D_init(EffectInstance* effect) {
 }
