@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import hashlib
-from typing import Dict, List, Union, Set, Any
+from typing import Dict, List, Optional, Union, Set, Any
 import argparse
 import spimdisasm
 import rabbitizer
@@ -20,7 +20,7 @@ from util.symbols import Symbol
 
 from intervaltree import Interval, IntervalTree
 
-VERSION = "0.9.4"
+VERSION = "0.9.5"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -375,12 +375,17 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     if options.mode_active("ld"):
         global linker_writer
         linker_writer = LinkerWriter()
-        for segment in tqdm.tqdm(
-            all_segments,
-            total=len(all_segments),
-            desc=f"Writing linker script {brief_seg_name(segment, 20)}",
+        for i, segment in enumerate(
+            tqdm.tqdm(
+                all_segments,
+                total=len(all_segments),
+                desc=f"Writing linker script {brief_seg_name(segment, 20)}",
+            )
         ):
-            linker_writer.add(segment)
+            next_segment: Optional[Segment] = None
+            if i < len(all_segments) - 1:
+                next_segment = all_segments[i + 1]
+            linker_writer.add(segment, next_segment)
         linker_writer.save_linker_script()
         linker_writer.save_symbol_header()
 

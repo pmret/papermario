@@ -1,5 +1,7 @@
-from typing import Union, List
+from typing import Optional, Union, List
 from pathlib import Path
+from segtypes.common.code import CommonSegCode
+from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.data import CommonSegData
 from segtypes.common.linker_section import LinkerSection, dotless_type
 from segtypes.n64.img import N64SegImg
@@ -98,11 +100,12 @@ class LinkerWriter:
 
         self._writeln("SECTIONS")
         self._begin_block()
+        self._writeln(f"__romPos = 0;")
 
         if options.get_gp() is not None:
             self._writeln("_gp = " + f"0x{options.get_gp():X};")
 
-    def add(self, segment: Segment):
+    def add(self, segment: Segment, next_segment: Optional[Segment]):
         entries = segment.get_linker_entries()
         self.entries.extend(entries)
 
@@ -190,7 +193,7 @@ class LinkerWriter:
                     f"{seg_name}_{dotless_type(section.name).upper()}_END", "."
                 )
 
-        self._end_segment(segment)
+        self._end_segment(segment, next_segment)
 
     def save_linker_script(self):
         if self.linker_discard_section:
@@ -249,14 +252,12 @@ class LinkerWriter:
             self.symbols.append(symbol)
 
     def _begin_segment(self, segment: Segment, mid_segment=False):
-        # force location if not shiftable/auto
-        if not self.shiftable and isinstance(segment.rom_start, int):
-            self._writeln(f"__romPos = 0x{segment.rom_start:X};")
-        else:
-            # TODO: align 0x10, preferably
-            pass
+        self._writeln(". = __romPos;")
 
-        self._writeln(f". = __romPos;")
+        # Align directive
+        if segment.align:
+            self._writeln(f". = ALIGN({segment.align});")
+            self._writeln("__romPos = .;")
 
         vram = segment.vram_start
         vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
@@ -279,26 +280,21 @@ class LinkerWriter:
 
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
 
-        self._writeln(
-            f".{name} (NOLOAD) : SUBALIGN({segment.subalign})"
-        )
+        self._writeln(f".{name} (NOLOAD) : SUBALIGN({segment.subalign})")
         self._begin_block()
 
-    def _end_segment(self, segment: Segment):
+    def _end_segment(self, segment: Segment, next_segment: Optional[Segment] = None):
         self._end_block()
 
         name = get_segment_cname(segment)
 
-        # force end if not shiftable/auto
-        if (
-            not self.shiftable
-            and isinstance(segment.rom_start, int)
-            and isinstance(segment.rom_end, int)
-        ):
-            self._write_symbol(f"{name}_ROM_END", segment.rom_end)
-            self._writeln(f"__romPos = 0x{segment.rom_end:X};")
+        self._writeln(f"__romPos += SIZEOF(.{name});")
+
+        if next_segment:
+            rom_end_val = get_segment_cname(next_segment) + "_ROM_START"
         else:
-            self._writeln(f"__romPos += SIZEOF(.{name});")
-            self._write_symbol(f"{name}_ROM_END", "__romPos")
+            rom_end_val = "__romPos"
+
+        self._write_symbol(f"{name}_ROM_END", rom_end_val)
 
         self._writeln("")

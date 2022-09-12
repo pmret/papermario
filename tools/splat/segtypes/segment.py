@@ -23,6 +23,12 @@ def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
         return None
 
 
+def parse_segment_align(segment: Union[dict, list]) -> Optional[int]:
+    if isinstance(segment, dict) and "align" in segment:
+        return int(segment["align"])
+    return None
+
+
 def parse_segment_subalign(segment: Union[dict, list]) -> int:
     default = options.get_subalign()
     if isinstance(segment, dict):
@@ -163,6 +169,7 @@ class Segment:
         self.vram_start = vram_start
         self.extract = extract
 
+        self.align: Optional[int] = None
         self.given_subalign = given_subalign
         self.exclusive_ram_id = exclusive_ram_id
         self.given_dir = given_dir
@@ -233,7 +240,10 @@ class Segment:
             args=args,
             yaml=yaml,
         )
-        cls.given_section_order = parse_segment_section_order(yaml)
+        ret.given_section_order = parse_segment_section_order(yaml)
+
+        if not ret.align:
+            ret.align = parse_segment_align(yaml)
         return ret
 
     @property

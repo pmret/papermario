@@ -50,6 +50,7 @@ class CommonSegCode(CommonSegGroup):
         self.jtbl_glabels_to_add = set()
         self.jumptables: Dict[int, Tuple[int, int]] = {}
         self.rodata_syms: Dict[int, List[Symbol]] = {}
+        self.align = 0x10
 
     @property
     def needs_symbols(self) -> bool:

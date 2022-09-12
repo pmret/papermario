@@ -363,6 +363,7 @@ def get_mips_abi_gpr() -> str:
 def get_mips_abi_float_regs() -> str:
     return opts.get("mips_abi_float_regs", "numeric")
 
+
 # Determines whether to ad ".set gp=64 to asm/hasm files"
 def get_add_set_gp_64() -> bool:
     return opts.get("add_set_gp_64", True)

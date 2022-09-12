@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.9.5
+* Changes have been made to the linker script such that it is more shiftable. Rather than setting the rom position to hard-coded addresses, it increments the position by the size of the previous segment. Some projects may experience some alignment-related issues after this change. If specified, the new segment option `align: n` will add an `ALIGN(n)` directive for that section's linker segment.
+
 ### 0.9.4
 * A new linker script section is now automatically created when the .bss section begins, using NOLOAD as opposed to the previous hacky rom rewinding we were previously doing. Additionally, `ld_section_labels` now includes `.rodata` by default.
 
