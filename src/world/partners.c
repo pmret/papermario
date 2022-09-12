@@ -1931,7 +1931,7 @@ s32 func_800EF4E0(void) {
     Camera* cameras = gCameras;
     s32 ret;
 
-    if (playerStatus->unk_90[CAM_DEFAULT] == 0.0f) {
+    if (playerStatus->flipYaw[CAM_DEFAULT] == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
             ret = 1;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);

@@ -51,11 +51,11 @@ void func_80240100_B1CB50(void* data) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
-    spr_update_player_sprite(1, playerStatus->trueAnimation ^ 0x1000000, 1.0f);
+    spr_update_player_sprite(1, playerStatus->trueAnimation ^ SPRITE_ID_1000000, 1.0f);
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 

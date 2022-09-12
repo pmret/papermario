@@ -5,6 +5,13 @@
 
 #define SPR_PLAYER_COLOR_VARIATIONS 6
 
+enum SpriteIDFields {
+    SPRITE_ID_ANIM_MASK     = 0x000000FF,
+    SPRITE_ID_PAL_MASK      = 0x0000FF00,
+    SPRITE_ID_SPR_MASK      = 0x00FF0000,
+    SPRITE_ID_1000000       = 0x01000000,
+};
+
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
     /* 0x04 */ s32 unk_04;
@@ -111,7 +118,7 @@ void spr_render_init(void);
 
 void spr_update_player_raster_cache(void);
 
-s32 spr_update_player_sprite(s32 arg0, s32 arg1, f32 arg2);
+s32 spr_update_player_sprite(s32 arg0, s32 arg1, f32 timescale);
 
 s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx);
 

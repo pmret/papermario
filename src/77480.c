@@ -823,7 +823,8 @@ s32 get_overriding_player_anim(s32 anim) {
             return -1;
         }
     } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        if (playerStatus->unk_C4 && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
+        if ((playerStatus->peachItemHeld != 0)
+        && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
             anim = ANIM_Peach_D0000;
         }
     }
@@ -1282,7 +1283,7 @@ void update_partner_timers(void) {
 
         for (i = 1; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {
             if (playerData->partners[i].enabled) {
-                playerData->partnerUnlockedTime[i] += 1;
+                playerData->partnerUnlockedTime[i]++;
             }
         }
     }
@@ -1291,70 +1292,71 @@ void update_partner_timers(void) {
 void func_800E0B90(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    f32 temp_f20 = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
+    f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
     s32 trueAnim;
     s32 sprIndex;
-    f32 unk_90;
-    s32 phi_v1;
-    f32 phi_f0;
+    f32 angle;
+    s32 direction;
+    f32 timescale;
 
     D_800F7B48 = 0.0f;
-    if (temp_f20 < -5.0f && temp_f20 > -175.0f) {
-        temp_f20 = 0.0f;
-        phi_v1 = 0;
-    } else if (temp_f20 > 5.0f && temp_f20 < 175.0f) {
-        temp_f20 = 180.0f;
-        phi_v1 = 1;
+    if (camRelativeYaw < -5.0f && camRelativeYaw > -175.0f) {
+        camRelativeYaw = 0.0f;
+        direction = 0;
+    } else if (camRelativeYaw > 5.0f && camRelativeYaw < 175.0f) {
+        camRelativeYaw = 180.0f;
+        direction = 1;
     } else {
-        temp_f20 = D_800F7B40;
-        phi_v1 = 2;
+        // direction is close to flipping, use saved value
+        camRelativeYaw = PrevPlayerCamRelativeYaw;
+        direction = 2;
     }
-    if (D_8010C95C != phi_v1 && phi_v1 != 2) {
-        D_8010C95C = phi_v1;
-        playerStatus->unk_90[gCurrentCameraID] = (phi_v1 != 0) ? 180.0f : -180.0f;
+    // detect direction change
+    if (PrevPlayerDirection != direction && direction != 2) {
+        PrevPlayerDirection = direction;
+        playerStatus->flipYaw[gCurrentCameraID] = (direction != 0) ? 180.0f : -180.0f;
 
         if (fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) >= 90.0f) {
-            playerStatus->unk_90[gCurrentCameraID] = -playerStatus->unk_90[gCurrentCameraID];
+            playerStatus->flipYaw[gCurrentCameraID] = -playerStatus->flipYaw[gCurrentCameraID];
         }
     }
-
-    unk_90 = playerStatus->unk_90[gCurrentCameraID];
-    if (unk_90 != 0.0f) {
-        if (unk_90 < 0.0f) {
-            unk_90 += 28.0f;
-            if (unk_90 > 0.0f) {
-                unk_90 = 0.0f;
+    // handle sprite 'flipping' when changing direction
+    angle = playerStatus->flipYaw[gCurrentCameraID];
+    if (angle != 0.0f) {
+        if (angle < 0.0f) {
+            angle += 28.0f;
+            if (angle > 0.0f) {
+                angle = 0.0f;
             }
         }
-
-        if (unk_90 > 0.0f) {
-            unk_90 -= 28.0f;
-            if (unk_90 < 0.0f) {
-                unk_90 = 0.0f;
+        if (angle > 0.0f) {
+            angle -= 28.0f;
+            if (angle < 0.0f) {
+                angle = 0.0f;
             }
         }
     }
 
-    if (playerStatus->flags & 0x200000) {
-        unk_90 = 0.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_200000) {
+        angle = 0.0f;
     }
 
-    playerStatus->unk_90[gCurrentCameraID] = unk_90;
+    playerStatus->flipYaw[gCurrentCameraID] = angle;
 
-    D_800F7B40 = unk_90 = clamp_angle(temp_f20);
-    unk_90 = clamp_angle(playerStatus->unk_90[gCurrentCameraID] + unk_90);
+    PrevPlayerCamRelativeYaw = angle = clamp_angle(camRelativeYaw);
+    angle = clamp_angle(playerStatus->flipYaw[gCurrentCameraID] + angle);
     if (playerStatus->currentSpeed == 0.0f) {
         D_800F7B48 = 0.0f;
     }
 
     trueAnim = playerStatus->anim;
-    if (playerStatus->flags & 0x20000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_20000) {
         playerStatus->trueAnimation = trueAnim;
     } else {
         sprIndex = (trueAnim >> 0x10) & 0xFF;
 
         if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PLAYER_STATUS_FLAGS_100000)) {
-            playerStatus->spriteFacingAngle = unk_90 + D_800F7B48;
+            playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
             if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_10000000) &&
                 (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
@@ -1376,15 +1378,15 @@ void func_800E0B90(void) {
         }
     }
 
-    phi_f0 = 1.0f;
-    if (playerStatus->flags & 0x40000) {
-        phi_f0 = 0.5f;
+    timescale = 1.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+        timescale = 0.5f;
     }
-    if (playerStatus->flags & 0x20000000) {
-        phi_f0 = 0.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_20000000) {
+        timescale = 0.0f;
     }
-    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, phi_f0);
-    playerStatus->flags |= 0x40000000;
+    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
+    playerStatus->flags |= PLAYER_STATUS_FLAGS_40000000;
 }
 
 s32 get_player_back_anim(s32 anim) {
@@ -1430,7 +1432,7 @@ s32 get_player_back_anim(s32 anim) {
     if (outAnim != 0) {
         return outAnim;
     } else {
-        return anim | 0x1000000;
+        return anim | SPRITE_ID_1000000;
     }
 
 }
@@ -1502,7 +1504,7 @@ void appendGfx_player(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
     f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
-    s32 phi_a0;
+    s32 flags;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
         guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
@@ -1525,7 +1527,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
+        guScaleF(spE0, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
@@ -1543,14 +1545,14 @@ void appendGfx_player(void* data) {
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             }
         }
-
-        phi_a0 = 0;
-
+      
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            phi_a0 = PLAYER_STATUS_ANIM_FLAGS_10000000;
+            flags = 0x10000000;
+        } else {
+            flags = 0;
         }
 
-        spr_draw_player_sprite(phi_a0, 0, 0, 0, sp20);
+        spr_draw_player_sprite(flags, 0, 0, 0, sp20);
     }
 
     D_800F7B4C++;

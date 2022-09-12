@@ -23,7 +23,7 @@ BSS s32 D_8010C94C;
 BSS s32 D_8010C950;
 BSS s32 TweesterTouchingPartner;
 BSS s32 D_8010C958;
-BSS s32 D_8010C95C;
+BSS s32 PrevPlayerDirection;
 BSS s32 JumpedOnSwitchX;
 BSS s32 D_8010C964;
 BSS s32 D_8010C968;

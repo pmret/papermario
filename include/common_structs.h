@@ -1922,9 +1922,9 @@ typedef struct PlayerStatus {
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 overlapPushYaw;
     /* 0x08C */ f32 pitch;
-    /* 0x090 */ f32 unk_90[4];
+    /* 0x090 */ f32 flipYaw[4];
     /* 0x0A0 */ f32 heading;
-    /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
+    /* 0x0A4 */ AnimID trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
@@ -1939,7 +1939,7 @@ typedef struct PlayerStatus {
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
-    /* 0x0C4 */ char unk_C4;
+    /* 0x0C4 */ s8 peachItemHeld;
     /* 0x0C5 */ s8 unk_C5;
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;

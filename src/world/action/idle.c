@@ -25,9 +25,9 @@ AnimID IdlePeachAnims[] = {
 };
 
 enum {
-    SUBSTATE_IDLE_0         = 0,
-    SUBSTATE_IDLE_1         = 1,
-    SUBSTATE_IDLE_TIRED   = 2,
+    SUBSTATE_IDLE_DEFAULT   = 0,
+    SUBSTATE_IDLE_STRETCH   = 1,
+    SUBSTATE_DELAY_SLEEP    = 2,
     SUBSTATE_IDLE_SLEEP     = 3,
 };
 
@@ -52,7 +52,7 @@ void action_update_idle(void) {
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
             | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_AIRBORNE);
         wasMoving = TRUE;
-        playerStatus->actionSubstate = SUBSTATE_IDLE_0;
+        playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -103,7 +103,7 @@ void action_update_idle_peach(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->actionSubstate = SUBSTATE_IDLE_0;
+        playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -123,9 +123,11 @@ void action_update_idle_peach(void) {
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
         switch (playerStatus->actionSubstate) {
-            case SUBSTATE_IDLE_0:
-                if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) && (playerStatus->unk_C4 == 0)) {
+            case SUBSTATE_IDLE_DEFAULT:
+                if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))
+                    && (playerStatus->peachItemHeld == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
+                        // begin first yawm
                         playerStatus->actionSubstate++;
                         suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
                         return;
@@ -133,14 +135,16 @@ void action_update_idle_peach(void) {
                     playerStatus->currentStateTime++;
                 }
                 break;
-            case SUBSTATE_IDLE_1:
+            case SUBSTATE_IDLE_STRETCH:
+                // waiting for yawn to finish
                 if (playerStatus->unk_BC != 0) {
                     playerStatus->actionSubstate++;
                     playerStatus->currentStateTime = 0;
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                 }
                 break;
-            case SUBSTATE_IDLE_TIRED:
+            case SUBSTATE_DELAY_SLEEP:
+                // delay before next yawn and sleep
                 playerStatus->currentStateTime++;
                 if (playerStatus->currentStateTime > 200) {
                     playerStatus->actionSubstate++;
@@ -148,9 +152,10 @@ void action_update_idle_peach(void) {
                 }
                 break;
             case SUBSTATE_IDLE_SLEEP:
+                // peach is asleep
                 if (playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
-                    playerStatus->actionSubstate = SUBSTATE_IDLE_0;
+                    playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
                 } else if (playerStatus->unk_BC != 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_C0004);
                 }

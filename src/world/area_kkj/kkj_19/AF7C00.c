@@ -251,8 +251,8 @@ ApiStatus func_80240B8C_AF84DC(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240C10_AF8560(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    gPlayerStatus.unk_C4 = evt_get_variable(script, *args++);
-    gGameStatusPtr->peachCookingIngredient = gPlayerStatus.unk_C4;
+    gPlayerStatus.peachItemHeld = evt_get_variable(script, *args++);
+    gGameStatusPtr->peachCookingIngredient = gPlayerStatus.peachItemHeld;
 
     return ApiStatus_DONE2;
 }

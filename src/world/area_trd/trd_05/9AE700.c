@@ -92,9 +92,9 @@ ApiStatus func_80240404_9AEB04(Evt* script, s32 isInitialCall) {
     N(D_80243090).rot.x = 0.0f;
     N(D_80243090).rot.y = 0.0f;
     N(D_80243090).rot.z = 0.0f;
-    N(D_80243090).scale.x = SPRITE_WORLD_SCALE;
-    N(D_80243090).scale.y = SPRITE_WORLD_SCALE;
-    N(D_80243090).scale.z = SPRITE_WORLD_SCALE;
+    N(D_80243090).scale.x = SPRITE_WORLD_SCALE_F;
+    N(D_80243090).scale.y = SPRITE_WORLD_SCALE_F;
+    N(D_80243090).scale.z = SPRITE_WORLD_SCALE_F;
     N(D_80243090).foldStateID = func_8013A704(1);
     N(D_80243090).entityID = create_generic_entity_world(0, func_80240020_9AE720);
     return ApiStatus_DONE2;

@@ -36,7 +36,7 @@ extern ActorPartBlueprint bMarioParts[];
 
 extern PartnerDMAData D_80283F10[];
 
-s32 func_80265CE8(u32*, s32);
+s32 func_80265CE8(AnimID*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);

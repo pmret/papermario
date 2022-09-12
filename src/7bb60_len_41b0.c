@@ -1187,7 +1187,7 @@ f32 func_800E5348(void) {
     } else if (deltaYaw > 5.0f && deltaYaw < 175.0f) {
         deltaYaw = 180.0f;
     } else {
-        deltaYaw = D_800F7B40;
+        deltaYaw = PrevPlayerCamRelativeYaw;
     }
     return clamp_angle(deltaYaw - 90.0f + gCameras[gCurrentCameraID].currentYaw);
 }

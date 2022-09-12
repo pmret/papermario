@@ -3134,7 +3134,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_4000                             = 0x00004000,
     PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
-    PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
+    PLAYER_STATUS_FLAGS_40000                            = 0x00040000, // physics and animations run at half speed
     PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
     PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
     PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?

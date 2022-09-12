@@ -97,7 +97,7 @@ void action_update_parasol(void) {
 
     switch (playerStatus->actionSubstate) {
         case 0:
-            if (playerStatus->unk_90[CAM_DEFAULT] == 0) {
+            if (playerStatus->flipYaw[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_C0024);
                     sfx_play_sound_at_player(SOUND_92, 0);
@@ -269,10 +269,10 @@ void action_update_parasol(void) {
                     playerStatus->currentStateTime = 10;
                     playerStatus->actionSubstate++;
                     playerStatus->spriteFacingAngle = 180;
-                    D_8010C95C = 1;
+                    PrevPlayerDirection = 1;
                     phi_f12 = (cam->currentYaw - 180) - 90;
                     temp_f0_3 = clamp_angle((cam->currentYaw - 180) - 90);
-                    D_800F7B40 = temp_f0_3;
+                    PrevPlayerCamRelativeYaw = temp_f0_3;
                     playerStatus->currentYaw = temp_f0_3;
                 }
             } else {
@@ -282,10 +282,10 @@ void action_update_parasol(void) {
                     playerStatus->currentStateTime = 10;
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->actionSubstate++;
-                    D_8010C95C = 0;
+                    PrevPlayerDirection = 0;
                     phi_f12 = (cam->currentYaw - 0) - 90;
                     temp_f0_3 = clamp_angle(phi_f12);
-                    D_800F7B40 = temp_f0_3;
+                    PrevPlayerCamRelativeYaw = temp_f0_3;
                     playerStatus->currentYaw = temp_f0_3;
                 }
             }

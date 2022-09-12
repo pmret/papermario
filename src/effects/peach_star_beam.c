@@ -189,7 +189,7 @@ void peach_star_beam_appendGfx(void* effect) {
             }
 
             if (!(data->pos.z < partZ)) {
-                shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, SPRITE_WORLD_SCALE, partX, partY, partZ);
+                shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, SPRITE_WORLD_SCALE_F, partX, partY, partZ);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

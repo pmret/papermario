@@ -66,7 +66,7 @@ void npc_iter_no_op(void) {
     }
 }
 
-s32 _create_npc(NpcBlueprint* blueprint, u32** animList, s32 skipLoadingAnims) {
+s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims) {
     Npc* npc;
     s32 i;
     s32 j;

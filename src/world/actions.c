@@ -33,7 +33,7 @@ void action_update_use_munchlesia(void);
 void action_update_use_tweester(void);
 void action_update_state_23(void);
 
-s32 D_800F7B40 = 0;
+s32 PrevPlayerCamRelativeYaw = 0;
 s32 D_800F7B44 = 0;
 f32 D_800F7B48 = 0.0f;
 s32 D_800F7B4C = 0;

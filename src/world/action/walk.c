@@ -81,7 +81,7 @@ void action_update_walk(void) {
                 return;
             }
 
-            if (fabsf(D_800F7B40 - moveVectorAngle) <= 90.0f && abs(moveVectorMagnitude - D_800F7B44) < 20) {
+            if (fabsf(PrevPlayerCamRelativeYaw - moveVectorAngle) <= 90.0f && abs(moveVectorMagnitude - D_800F7B44) < 20) {
                 if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000)) {
                     if (moveVectorMagnitude >= 20.0f) {
                         playerStatus->targetYaw = moveVectorAngle;
@@ -178,7 +178,7 @@ void action_update_run(void) {
             return;
         }
 
-        if (fabsf(D_800F7B40 - moveX) <= 90.0f) {
+        if (fabsf(PrevPlayerCamRelativeYaw - moveX) <= 90.0f) {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000)) {
                 playerStatus->targetYaw = moveX;
             }

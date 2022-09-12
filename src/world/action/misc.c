@@ -228,7 +228,7 @@ void action_update_talk(void) {
 
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
             suggest_player_anim_setUnkFlag(ANIM_Mario_80007);
-        } else if (playerStatus->unk_C4 == 0) {
+        } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
                 suggest_player_anim_setUnkFlag(ANIM_Peach_C0000);
             } else {
@@ -241,7 +241,7 @@ void action_update_talk(void) {
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
-        } else if (playerStatus->unk_C4 == 0) {
+        } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
                 suggest_player_anim_setUnkFlag(ANIM_Peach_A0001);
             } else {
