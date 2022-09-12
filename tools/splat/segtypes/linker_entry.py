@@ -252,12 +252,9 @@ class LinkerWriter:
             self.symbols.append(symbol)
 
     def _begin_segment(self, segment: Segment, mid_segment=False):
-        self._writeln(". = __romPos;")
-
         # Align directive
         if segment.align:
-            self._writeln(f". = ALIGN({segment.align});")
-            self._writeln("__romPos = .;")
+            self._writeln(f"__romPos = (__romPos + {segment.align - 1}) & ~{segment.align - 1}; /* align {segment.align} */")
 
         vram = segment.vram_start
         vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
