@@ -18,9 +18,7 @@ extern s32 D_80244630_EEABE0;
 
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 
-
-
-ApiStatus func_802422B4_EE8864(Evt *script, s32 isInitialCall) {
+ApiStatus EE70C0_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     D_80244630_EEABE0 = dead_evt_get_variable(script, *args++);
     D_8024462C_EEABDC = 1;
