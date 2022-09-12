@@ -25,7 +25,6 @@ ApiStatus EE70C0_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus func_802422EC_EE889C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);

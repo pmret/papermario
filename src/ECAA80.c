@@ -28,7 +28,6 @@ INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
 
 // ECAA80_ItemChoice_SaveSelected (needs data?)
 
-
 ApiStatus ECAA80_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ECAA80_ItemChoice_SelectedItemID = dead_evt_get_variable(script, *args++);
