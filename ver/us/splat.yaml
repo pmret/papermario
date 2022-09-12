@@ -919,6 +919,7 @@ segments:
     - [0x10CC10, data] # font width data
   - type: group
     dir: charset
+    vram: 0x802ED970
     start: 0x10F1B0
     subsegments: # TODO shiftability: what is going on here
     - [0x10F1B0, linker_offset,       standard]
