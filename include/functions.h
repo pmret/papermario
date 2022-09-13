@@ -732,7 +732,6 @@ void func_802B2000(void);
 void func_802B203C(void);
 void func_802B2078(void);
 void func_802B20B4(void);
-void func_802B6CF0_E2B3A0(void);
 void func_802B7000_E225B0(void);
 void func_802B70B4_E201C4(void);
 void func_802B7140(void);

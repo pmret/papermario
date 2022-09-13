@@ -42,7 +42,7 @@ void reset_player_status(void) {
     f32 one;
     f32* floatsTemp;
 
-    D_8010C96C = -1;
+    PeachDisguiseNpcIndex = -1;
     TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;

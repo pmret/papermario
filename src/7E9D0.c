@@ -224,7 +224,7 @@ void phys_update_action_state(void) {
     if (playerStatus->unk_C5 != 0) {
         playerStatus->unk_C5--;
         if (playerStatus->unk_C5 == 0) {
-            gCameras[CAM_DEFAULT].moveFlags |= 4;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_4;
         }
     }
 
@@ -541,7 +541,7 @@ void check_input_spin(void) {
 }
 
 void peach_set_disguise_anim(s32 arg0) {
-    s32 listIndex = D_8010C96C;
+    s32 listIndex = PeachDisguiseNpcIndex;
 
     if (listIndex >= 0) {
         get_npc_by_index(listIndex)->currentAnim = arg0;
@@ -555,9 +555,9 @@ void func_800E63A4(s32 arg0) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
         playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
-        gGameStatusPtr->peachFlags &= ~0x2;
+        gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
         playerStatus->peachDisguise = 0;
-        free_npc_by_index(D_8010C96C);
+        free_npc_by_index(PeachDisguiseNpcIndex);
         set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
@@ -573,9 +573,9 @@ void peach_check_for_parasol_input(void) {
         if (D_8010C92C != 0) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
-                if (gGameStatusPtr->peachFlags & 2) {
+                if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
                     playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
-                    gGameStatusPtr->peachFlags |= 2;
+                    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
@@ -583,7 +583,7 @@ void peach_check_for_parasol_input(void) {
                     }
                 }
             }
-        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_PARASOL && playerStatus->pressedButtons & B_BUTTON) {
             set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
         }
     }
@@ -592,8 +592,8 @@ void peach_check_for_parasol_input(void) {
 void peach_sync_disguise_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8010C96C >= 0) {
-        Npc* npc = get_npc_by_index(D_8010C96C);
+    if (PeachDisguiseNpcIndex >= 0) {
+        Npc* npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
         if (npc->flags & NPC_FLAG_40000) {
             npc->renderYaw = playerStatus->spriteFacingAngle;
@@ -628,8 +628,8 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     bpPtr->onUpdate = NULL;
     bpPtr->onRender = NULL;
 
-    D_8010C96C = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
-    npc = get_npc_by_index(D_8010C96C);
+    PeachDisguiseNpcIndex = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
+    npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
     disable_npc_shadow(npc);
 

@@ -79,6 +79,7 @@
 // Angle conversion macros
 #define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
 #define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+#define DEG_TO_RAD(deg) (((deg) * TAU) / 360.0f)
 
 // Should be 1.0f / 0x7FFF, but precision is wrong for a double
 #define SHT_MINV 3.051851e-05
