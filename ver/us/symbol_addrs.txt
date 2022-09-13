@@ -27308,7 +27308,6 @@ gSpriteHeapPtr = 0x8034F800; // type:data
 D_8038F800 = 0x8038F800; // type:data
 D_803B5000 = 0x803B5000; // type:data
 heap_battleHead = 0x803DA800; // type:data
-D_8887FFFB = 0x8887FFFB; // type:data
 D_A0000000 = 0xA0000000; // type:data
 D_A4000000 = 0xA4000000; // type:data
 D_A4000768 = 0xA4000768; // type:data
