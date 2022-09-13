@@ -2,7 +2,7 @@ from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 import typing
 from segtypes.common.group import CommonSegGroup
-from segtypes.common.linker_section import dotless_type
+from linker_entry import dotless_type
 from segtypes.segment import RomAddr, Segment
 from util import log, options
 from util.range import Range
