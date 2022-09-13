@@ -1218,7 +1218,7 @@ void load_partner_actor(void) {
 
             if (part->idleAnimations != NULL) {
                 part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
-                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | 0x80000000, NULL);
+                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | SPRITE_ID_TAIL_ALLOCATE, NULL);
             }
 
             if (i + 1 >= partCount) {
@@ -1484,7 +1484,7 @@ Actor* create_actor(Formation formation) {
         part->unk_84 = -1;
 
         if (part->idleAnimations != NULL) {
-            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~0x80000000;
+            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~SPRITE_ID_TAIL_ALLOCATE;
             part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 

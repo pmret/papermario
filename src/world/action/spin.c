@@ -6,6 +6,7 @@ extern s32 gSpinHistoryPosY[5];
 extern s32 gSpinHistoryPosX[5];
 extern s32 gSpinHistoryPosZ[5];
 extern s16 gSpinHistoryPosAngle[5];
+
 void phys_clear_spin_history(void);
 
 enum {

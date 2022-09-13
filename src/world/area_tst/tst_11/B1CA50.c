@@ -55,7 +55,7 @@ void func_80240100_B1CB50(void* data) {
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
-    spr_update_player_sprite(1, playerStatus->trueAnimation ^ SPRITE_ID_1000000, 1.0f);
+    spr_update_player_sprite(1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 

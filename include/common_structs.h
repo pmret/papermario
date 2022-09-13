@@ -1885,6 +1885,14 @@ typedef struct FontData {
     /* 0x00 */ char unk_00[24];
 } FontData; // size = 0x18
 
+typedef struct SlideParams {
+    f32 heading;
+    f32 maxDescendAccel;
+    f32 launchVelocity;
+    f32 maxDescendVelocity;
+    f32 integrator[4];
+} SlideParams;
+
 typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
@@ -1941,7 +1949,7 @@ typedef struct PlayerStatus {
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ f32* unk_D0;
+    /* 0x0D0 */ SlideParams* slideParams;
     /* 0x0D4 */ f32 spinRate;
     /* 0x0D8 */ struct EffectInstance* specialSpinEffect;
     /* 0x0DC */ s32 currentButtons;
@@ -1955,7 +1963,7 @@ typedef struct PlayerStatus {
     /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
     /* 0x1BC */ char unk_1BC[196];
-    /* 0x280 */ s8 unk_280;
+    /* 0x280 */ s8 poundImpactDelay; // governs period of immobility after landing a ground pound
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 

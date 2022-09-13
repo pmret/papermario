@@ -6,10 +6,11 @@
 #define SPR_PLAYER_COLOR_VARIATIONS 6
 
 enum SpriteIDFields {
-    SPRITE_ID_ANIM_MASK     = 0x000000FF,
-    SPRITE_ID_PAL_MASK      = 0x0000FF00,
-    SPRITE_ID_SPR_MASK      = 0x00FF0000,
-    SPRITE_ID_1000000       = 0x01000000,
+    SPRITE_ID_ANIM_MASK         = 0x000000FF,
+    SPRITE_ID_PAL_MASK          = 0x0000FF00,
+    SPRITE_ID_SPR_MASK          = 0x00FF0000,
+    SPRITE_ID_BACK_FACING       = 0x01000000,
+    SPRITE_ID_TAIL_ALLOCATE     = 0x80000000,
 };
 
 typedef struct SpriteComponent {

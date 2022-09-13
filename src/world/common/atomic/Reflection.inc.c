@@ -25,7 +25,7 @@ void N(SetPartnerFlags20000)(void);
 s32 N(reflection_unk_resolve_anim)(s32 playerAnim) {
     AnimID temp;
 
-    playerAnim &= ~SPRITE_ID_1000000;
+    playerAnim &= ~SPRITE_ID_BACK_FACING;
     temp = playerAnim + ~ANIM_Mario_6000B;
     if (temp < 16 && temp & 1) {
         playerAnim--;
@@ -59,7 +59,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
             return playerAnim;
     }
 
-    return playerAnim | SPRITE_ID_1000000;
+    return playerAnim | SPRITE_ID_BACK_FACING;
 }
 
 ApiStatus N(ReflectWall)(Evt* script, s32 isInitialCall) {

@@ -8,7 +8,7 @@ enum {
     SUBSTATE_END_LAUNCH         = 3,
     SUBSTATE_RETURN_INIT        = 4,
     SUBSTATE_RETURN_MOTION      = 5,
-    SUBSTATE_FALL               = 6,
+    SUBSTATE_HOVER               = 6,
     SUBSTATE_BOUNCE             = 7,
     SUBSTATE_DELAY_DONE         = 8,
     SUBSTATE_DELAY_INIT_SINK    = 20,
@@ -164,7 +164,7 @@ void action_update_hit_lava(void) {
                 playerStatus->actionSubstate++;
             }
             break;
-        case SUBSTATE_FALL:
+        case SUBSTATE_HOVER:
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA && (playerStatus->timeInAir % 2) == 0) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }

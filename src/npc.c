@@ -152,7 +152,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims
             if (!(npc->flags & NPC_FLAG_PARTICLE)) {
                 npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, animList);
             } else {
-                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | 0x80000000, animList);
+                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | SPRITE_ID_TAIL_ALLOCATE, animList);
             }
         } else {
             npc->flags |= NPC_FLAG_2;
@@ -1025,7 +1025,7 @@ void npc_reload_all(void) {
                     if (!(npc->flags & NPC_FLAG_PARTICLE)) {
                         npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, npc->extraAnimList);
                     } else {
-                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | 0x80000000, npc->extraAnimList);
+                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | SPRITE_ID_TAIL_ALLOCATE, npc->extraAnimList);
                     }
                 }
                 if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {

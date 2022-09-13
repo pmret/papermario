@@ -1432,7 +1432,7 @@ s32 get_player_back_anim(s32 anim) {
     if (outAnim != 0) {
         return outAnim;
     } else {
-        return anim | SPRITE_ID_1000000;
+        return anim | SPRITE_ID_BACK_FACING;
     }
 
 }

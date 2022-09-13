@@ -4,15 +4,27 @@ extern s32 gSpinHistoryBufferPos;
 extern s32 gSpinHistoryPosY[5];
 extern s16 gSpinHistoryPosAngle[5];
 
-s32 func_802B65F8_E26D08(void);
+void phys_clear_spin_history(void);
+void record_jump_apex(void);
+
+enum {
+    SUBSTATE_ASCEND         = 0,
+    SUBSTATE_HOVER          = 1,
+    SUBSTATE_DESCEND        = 2,
+    SUBSTATE_IMPACT         = 3,
+    SUBSTATE_HIT_SWITCH     = 11,
+    SUBSTATE_DONE_SWITCH    = 12,
+};
+
+static s32 get_collider_below_tornado_jump(void);
 
 void action_update_tornado_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    f32 temp_f0;
+    f32 cameraRelativeYaw;
     f32 fallVelocity;
     s32 surfaceType;
-    f32 phi_f4;
+    f32 spinRate;
     s32 colliderBelow;
     u32 entityType;
 
@@ -20,7 +32,7 @@ void action_update_tornado_jump(void) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_JUMPING);
         phys_clear_spin_history();
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_ASCEND;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->gravityIntegrator[0] = 16.0f;
         playerStatus->gravityIntegrator[1] = -7.38624f;
@@ -30,14 +42,15 @@ void action_update_tornado_jump(void) {
         disable_player_input();
         playerStatus->flags |= PLAYER_STATUS_FLAGS_200;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
-        temp_f0 = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
-        phi_f4 = -60.0f;
-        if (temp_f0 <= 180.0f) {
-            phi_f4 = 60.0f;
+        cameraRelativeYaw = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
+        if (cameraRelativeYaw <= 180.0f) {
+            spinRate = 60.0f;
+        } else {
+            spinRate = -60.0f;
         }
-        playerStatus->spinRate = phi_f4;
+        playerStatus->spinRate = spinRate;
     }
-    if (playerStatus->actionSubstate < 4) {
+    if (playerStatus->actionSubstate <= SUBSTATE_IMPACT) {
         if (playerStatus->spinRate >= 0.0f) {
             playerStatus->spriteFacingAngle += playerStatus->spinRate;
             if (playerStatus->spriteFacingAngle >= 360.0f) {
@@ -61,7 +74,7 @@ void action_update_tornado_jump(void) {
     }
 
     switch (playerStatus->actionSubstate) {
-        case 0:
+        case SUBSTATE_ASCEND:
             fallVelocity = integrate_gravity();
             playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
             if (colliderBelow >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
@@ -69,7 +82,7 @@ void action_update_tornado_jump(void) {
                 if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     disable_player_input();
-                    playerStatus->actionSubstate = 11;
+                    playerStatus->actionSubstate = SUBSTATE_HIT_SWITCH;
                     break;
                 }
             }
@@ -85,12 +98,12 @@ void action_update_tornado_jump(void) {
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
-        case 1:
+        case SUBSTATE_HOVER:
             if (--playerStatus->currentStateTime <= 0) {
                 playerStatus->actionSubstate++;
             }
             break;
-        case 2:
+        case SUBSTATE_DESCEND:
             fallVelocity = integrate_gravity();
             playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
             if (fallVelocity < -100.0f) {
@@ -145,24 +158,24 @@ void action_update_tornado_jump(void) {
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_400;
             }
             break;
-        case 3:
+        case SUBSTATE_IMPACT:
             if (--playerStatus->currentStateTime == 0) {
                 playerStatus->actionSubstate++;
                 playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
-        case 11:
+        case SUBSTATE_HIT_SWITCH:
             set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
             playerStatus->actionSubstate++;
             enable_player_input();
             break;
-        case 12:
+        case SUBSTATE_DONE_SWITCH:
             break;
     }
 
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
-        colliderBelow = func_802B65F8_E26D08();
+        colliderBelow = get_collider_below_tornado_jump();
         if (colliderBelow >= 0) {
             collisionStatus->lastTouchedFloor = -1;
             collisionStatus->currentFloor = colliderBelow;
@@ -170,19 +183,13 @@ void action_update_tornado_jump(void) {
     }
 }
 
-s32 func_802B65F8_E26D08(void) {
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
-    f32 sp38;
-    f32 sp3C;
-    f32 sp40;
-    f32 sp44;
+static s32 get_collider_below_tornado_jump(void) {
+    f32 posX, posY, posZ, height;
+    f32 hitRx, hitRz, hitDirX, hitDirZ;
 
-    sp28 = gPlayerStatus.position.x;
-    sp34 = gPlayerStatus.colliderHeight;
-    sp30 = gPlayerStatus.position.z;
-    sp2C = gPlayerStatus.position.y + (sp34 * 0.5f);
-    return player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
+    posX = gPlayerStatus.position.x;
+    posZ = gPlayerStatus.position.z;
+    height = gPlayerStatus.colliderHeight;
+    posY = gPlayerStatus.position.y + (height * 0.5f);
+    return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }

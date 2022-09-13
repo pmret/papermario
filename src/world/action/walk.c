@@ -24,10 +24,9 @@ AnimID WalkPeachAnims[] = {
     0x00000000
 };
 
-void action_update_run_peach(void);
-void func_802B65E8_E23CC8(void);
+static void action_update_run_peach(void);
+static void action_update_walk_peach(void);
 
-// walk
 void action_update_walk(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
@@ -38,7 +37,7 @@ void action_update_walk(void) {
     AnimID anim;
     s32 changedAnim = FALSE;
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B65E8_E23CC8();
+        action_update_walk_peach();
         return;
     }
 
@@ -111,7 +110,6 @@ void action_update_walk(void) {
     }
 }
 
-// run
 void action_update_run(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
@@ -129,7 +127,8 @@ void action_update_run(void) {
     }
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~0x80880000;
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED |
+            PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_80000);
         D_8010C980 = 0;
         playerStatus->unk_60 = 0;
         phi_s3 = 1;
@@ -217,7 +216,7 @@ void func_802B6550_E23C30(void) {
     peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
 }
 
-void func_802B65E8_E23CC8(void) {
+static void action_update_walk_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 magnitude;
     f32 angle;
@@ -253,7 +252,7 @@ void func_802B65E8_E23CC8(void) {
     try_player_footstep_sounds(8);
 }
 
-void action_update_run_peach(void) {
+static void action_update_run_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     GameStatus* gameStatus;
     f32 moveX;
