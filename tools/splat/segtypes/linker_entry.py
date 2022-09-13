@@ -70,10 +70,6 @@ def get_segment_cname(segment: Segment) -> str:
     return to_cname(name)
 
 
-def dotless_type(type: str) -> str:
-    return type[1:] if type[0] == "." else type
-
-
 @dataclass
 class LinkerSection:
     name: str
@@ -237,7 +233,7 @@ class LinkerWriter:
                 and section.section_type not in last_seen_sections.values()
             ):
                 self._write_symbol(
-                    f"{seg_name}_{dotless_type(section.name).upper()}_END", "."
+                    f"{seg_name}_{section.name.upper()}_END", "."
                 )
 
         self._end_segment(segment, next_segment)
