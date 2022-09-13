@@ -135,7 +135,7 @@ void drop_leaves_appendGfx(void* effect) {
 
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMasterGfxPos++, D_09001180);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x14, 0x64, 0x14, part->unk_24);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 20, 100, 20, part->unk_24);
 
     shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
