@@ -4,11 +4,11 @@ extern f32 JumpedOnSwitchX;
 extern f32 JumpedOnSwitchZ;
 
 // private functions
-static void initialize_jump(void);
-static void action_update_peach_step_down(void);
-static void action_update_peach_falling(void);
+void initialize_jump(void);
+void action_update_peach_step_down(void);
+void action_update_peach_falling(void);
 
-static void initialize_jump(void) {
+void initialize_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     AnimID anim;
@@ -174,7 +174,7 @@ void action_update_step_down(void) {
     }
 }
 
-static void action_update_peach_falling(void) {
+void action_update_peach_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID anim;
 
@@ -195,7 +195,7 @@ static void action_update_peach_falling(void) {
     playerStatus->timeInAir++;
 }
 
-static void action_update_peach_step_down(void) {
+void action_update_peach_step_down(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {

@@ -5,8 +5,8 @@ enum {
     SUBSTATE_DONE   = 1,
 };
 
-static void action_update_peach_land(void);
-static void action_update_peach_step_down_land(void);
+void action_update_peach_land(void);
+void action_update_peach_step_down_land(void);
 
 void action_update_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -117,7 +117,7 @@ void action_update_step_down_land(void) {
     update_locomotion_state();
 }
 
-static void action_update_peach_land(void) {
+void action_update_peach_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
@@ -161,7 +161,7 @@ static void action_update_peach_land(void) {
     }
 }
 
-static void action_update_peach_step_down_land(void) {
+void action_update_peach_step_down_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
