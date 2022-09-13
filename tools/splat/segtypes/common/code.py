@@ -2,13 +2,17 @@ from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 import typing
 from segtypes.common.group import CommonSegGroup
-from segtypes.linker_entry import dotless_type
 from segtypes.segment import RomAddr, Segment
 from util import log, options
 from util.range import Range
 from util.symbols import Symbol
 
 CODE_TYPES = ["c", "asm", "hasm"]
+
+
+def dotless_type(type: str) -> str:
+    return type[1:] if type[0] == "." else type
+
 
 # code group
 class CommonSegCode(CommonSegGroup):
