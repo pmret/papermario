@@ -19,8 +19,8 @@ void action_update_use_munchlesia(void) {
     s32 colliderID;
     f32 hitPosY;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_INIT;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         disable_player_static_collisions();

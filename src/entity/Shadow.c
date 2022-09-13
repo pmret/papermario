@@ -9,7 +9,7 @@ void entity_Shadow_init(Shadow* shadow) {
 
 s32 entity_can_collide_with_jumping_player(Entity* entity) {
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) &&
-        (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_JUMPING)) {
+        (gPlayerStatus.flags & PS_FLAGS_JUMPING)) {
         return TRUE;
     }
     return FALSE;

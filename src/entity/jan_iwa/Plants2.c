@@ -38,7 +38,7 @@ extern AnimScript Entity_MunchlesiaReset1_Animation;
 extern StaticAnimatorNode* Entity_MunchlesiaReset1_Mesh[];
 
 void entity_BellbellPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_BellbellPlant_AnimationUse);
@@ -46,7 +46,7 @@ void entity_BellbellPlant_idle(Entity* entity) {
 }
 
 void entity_TrumpetPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_TrumpetPlant_AnimationUse);
@@ -147,7 +147,7 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
     entity_Munchlesia_create_child(entity, &Entity_MunchlesiaBeginChew);
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
-    gPlayerStatus.flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    gPlayerStatus.flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
     suggest_player_anim_setUnkFlag(ANIM_Mario_8001F);
 }
 

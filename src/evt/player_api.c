@@ -255,12 +255,12 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         }
 
         playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_FLYING;
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_10000000;
+        playerStatus->flags |= PS_FLAGS_FLYING;
+        playerStatus->animFlags |= PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
                     anim = ANIM_Mario_AnimMidairStill;
                 } else {
                     anim = ANIM_Mario_60009;
@@ -280,8 +280,8 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     playerNpc->jumpVelocity -= playerNpc->jumpScale;
 
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
                 anim = ANIM_Mario_AnimMidair;
             } else {
                 anim = ANIM_Mario_6000A;
@@ -302,12 +302,12 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
     playerNpc->duration--;
     if (playerNpc->duration == 0) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_10000000;
+        playerStatus->flags &= ~PS_FLAGS_FLYING;
+        playerStatus->animFlags &= ~PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
                     anim = ANIM_Mario_10009;
                 } else {
                     anim = ANIM_Mario_6000B;
@@ -746,9 +746,9 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos)) {
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags &= ~PA_FLAGS_USING_PULSE_STONE;
     } else {
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags |= PA_FLAGS_USING_PULSE_STONE;
     }
 
     return ApiStatus_DONE2;
@@ -771,14 +771,14 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
 ApiStatus func_802D2B50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8;
+    playerStatus->animFlags |= PA_FLAGS_8;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+    playerStatus->animFlags |= PA_FLAGS_4;
     return ApiStatus_DONE2;
 }
 
@@ -789,13 +789,13 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO;
+        playerStatus->animFlags &= ~PA_FLAGS_8BIT_MARIO;
     } else {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO
-            | PLAYER_STATUS_ANIM_FLAGS_40000
-            | PLAYER_STATUS_ANIM_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
+            | PA_FLAGS_40000
+            | PA_FLAGS_4;
     }
 
     return ApiStatus_DONE2;

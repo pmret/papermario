@@ -15,8 +15,8 @@ void entity_ScriptSpring_idle(Entity* entity) {
 
     if (playerStatus->actionState != ACTION_STATE_RIDE && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
         playerStatus->unk_C5 = 5;
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FALLING;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_800000;
+        playerStatus->flags &= ~PS_FLAGS_FALLING;
+        playerStatus->flags |= PS_FLAGS_800000;
         play_model_animation(entity->virtualModelIndex, Entity_ScriptSpring_AnimLaunch);
         if (entity_start_script(entity)) {
             set_action_state(ACTION_STATE_USE_SPRING);

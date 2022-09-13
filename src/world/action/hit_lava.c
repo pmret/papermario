@@ -29,11 +29,11 @@ void action_update_hit_lava(void) {
     static f32 ReturnAngle;
     static f32 InitialPosY;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= (PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_FLYING);
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags |= (PS_FLAGS_800000 | PS_FLAGS_FLYING);
+        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->flags |= PS_FLAGS_800;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;
             playerStatus->currentStateTime = 2;
@@ -80,7 +80,7 @@ void action_update_hit_lava(void) {
             playerStatus->jumpFromPos.x = playerStatus->position.x;
             playerStatus->jumpFromPos.z = playerStatus->position.z;
             playerStatus->jumpFromHeight = playerStatus->position.y;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
+            playerStatus->flags |= PS_FLAGS_JUMPING;
             break;
         case SUBSTATE_DELAY_LAUNCH:
             if (--playerStatus->currentStateTime <= 0) {
@@ -176,8 +176,8 @@ void action_update_hit_lava(void) {
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                 sfx_play_sound_at_player(SOUND_3FB, 0);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800;
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
+                playerStatus->flags &= ~PS_FLAGS_800;
+                playerStatus->flags &= ~PS_FLAGS_FLYING;
                 playerStatus->hazardType = HAZARD_TYPE_NONE;
                 playerStatus->gravityIntegrator[0] = 6.0f;
                 playerStatus->position.y += 6.0f;
@@ -195,7 +195,7 @@ void action_update_hit_lava(void) {
         case SUBSTATE_DELAY_DONE:
             if (--playerStatus->currentStateTime <= 0) {
                 set_action_state(ACTION_STATE_LAND);
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800000;
+                playerStatus->flags &= ~PS_FLAGS_800000;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             }
             break;

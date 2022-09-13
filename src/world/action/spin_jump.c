@@ -27,9 +27,9 @@ void action_update_spin_jump(void) {
 
     static f32 RotationRate;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING);
-        playerStatus->flags |= (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_JUMPING | PS_FLAGS_FALLING);
+        playerStatus->flags |= (PS_FLAGS_JUMPING | PS_FLAGS_FLYING);
 
         playerStatus->actionSubstate = SUBSTATE_SPIN;
         playerStatus->currentSpeed = 0.0f;
@@ -37,7 +37,7 @@ void action_update_spin_jump(void) {
         playerStatus->gravityIntegrator[0] = 5.2f;
         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
         disable_player_input();
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_200;
+        playerStatus->flags |= PS_FLAGS_200;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
         sfx_play_sound_at_player(SOUND_SPIN_JUMP, 0);
     }
@@ -109,19 +109,19 @@ void action_update_spin_jump(void) {
                         entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     playerStatus->actionSubstate = SUBSTATE_HIT_SWITCH;
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
+                    playerStatus->flags &= ~PS_FLAGS_FLYING;
                     break;
                 } else {
                     surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (surfaceType == SURFACE_TYPE_LAVA) {
                         playerStatus->hazardType = HAZARD_TYPE_LAVA;
                         set_action_state(ACTION_STATE_HIT_LAVA);
-                        playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
-                        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
+                        playerStatus->flags |= PS_FLAGS_800;
+                        playerStatus->flags &= ~PS_FLAGS_FLYING;
                         return;
                     } else if (surfaceType == SURFACE_TYPE_SPIKES) {
                         set_action_state(ACTION_STATE_HIT_LAVA);
-                        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
+                        playerStatus->flags &= ~PS_FLAGS_FLYING;
                         return;
                     } else {
                         playerStatus->gravityIntegrator[1] = -3.4744f;
@@ -140,7 +140,7 @@ void action_update_spin_jump(void) {
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;
                         panels->flipTriggerPosY = playerStatus->position.y;
-                        playerStatus->flags |= PLAYER_STATUS_FLAGS_400;
+                        playerStatus->flags |= PS_FLAGS_400;
                     }
                 }
             }
@@ -186,7 +186,7 @@ void action_update_spin_jump(void) {
 
     if (landed) {
         set_action_state(ACTION_STATE_LAND);
-        playerStatus->flags &= ~PLAYER_STATUS_ANIM_FLAGS_8;
+        playerStatus->flags &= ~PA_FLAGS_8;
     }
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
         belowColliderID = get_collider_below_spin_jump();

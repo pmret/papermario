@@ -12,11 +12,11 @@ void action_update_hit_fire(void) {
 
     static f32 ReturnAngle;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
 
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
-        playerStatus->flags |= (PLAYER_STATUS_FLAGS_800 | PLAYER_STATUS_FLAGS_FLYING);
+        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->flags |= (PS_FLAGS_800 | PS_FLAGS_FLYING);
 
         suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
         
@@ -36,7 +36,7 @@ void action_update_hit_fire(void) {
     sin_cos_rad(ReturnAngle * TAU / 360.0f, &dx, &dy);
     speed = playerStatus->currentSpeed;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+    if (playerStatus->flags & PS_FLAGS_40000) {
         speed *= 0.5;
     }
 
@@ -48,7 +48,7 @@ void action_update_hit_fire(void) {
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
         if (playerStatus->gravityIntegrator[0] < 0.0f) {
             playerStatus->actionSubstate = SUBSTATE_FALLING;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+            playerStatus->flags |= PS_FLAGS_FALLING;
         }
     } else {
         s32 colliderID;
@@ -59,7 +59,7 @@ void action_update_hit_fire(void) {
             set_action_state(ACTION_STATE_LAND);
             playerStatus->blinkTimer = 60;
             playerStatus->hazardType = HAZARD_TYPE_NONE;
-            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800;
+            playerStatus->flags &= ~PS_FLAGS_800;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
         }
     }

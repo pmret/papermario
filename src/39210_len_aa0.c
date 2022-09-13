@@ -13,7 +13,7 @@ void get_npc_pos(s32 npcID, f32* outX, f32* outY, f32* outZ, s32* arg4) {
         *outX = playerStatus->position.x;
         *outY = playerStatus->position.y;
         *outZ = playerStatus->position.z;
-        if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+        if (playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING)) {
             *arg4 = TRUE;
         }
     } else {

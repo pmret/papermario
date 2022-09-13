@@ -213,18 +213,18 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         func_802BD710_31D280(npc);
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
             if (partnerActionStatus->partnerAction_unk_1 == 0) {
                 if ((partnerActionStatus->partnerActionState != ACTION_STATE_IDLE) ||
                     (func_800EA52C(6) && !is_starting_conversation()))
                 {
                     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
-                        if (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2)) {
+                        if (playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2)) {
                             D_802BE304 = 20;
                         } else {
                             D_802BE304 = 40;
                         }
-                    } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
+                    } else if (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) {
                         D_802BE304 = 2;
                     } else {
                         D_802BE304 = 40;
@@ -234,7 +234,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 }
             } else {
                 partnerActionStatus->partnerAction_unk_1 = 0;
-                playerStatus->animFlags |= (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2);
+                playerStatus->animFlags |= (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2);
                 func_802BE014_31DB84();
                 npc->currentAnim = 0x60001;
                 D_802BE304 = 1;
@@ -257,7 +257,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
         case 41:
             if (script->functionTemp[1] == 0) {
                 if (script->functionTemp[2] >= playerStatus->inputEnabledCounter) {
-                    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
+                    if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
                         if (func_800EA52C(6)) {
                             if (!is_starting_conversation()) {
                                 D_802BE304 = 20;
@@ -275,7 +275,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
     switch (D_802BE304) {
         case 20:
             if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+                playerStatus->animFlags |= PA_FLAGS_HOLDING_WATT;
                 D_802BE30C = 1;
                 npc->flags |= NPC_FLAG_100 | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
@@ -289,13 +289,13 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->yaw = playerStatus->targetYaw;
                 npc->currentAnim = 0x60001;
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2;
+                playerStatus->animFlags |= PA_FLAGS_2;
                 func_802BE014_31DB84();
                 npc_set_palswap_mode_A(npc, 1);
                 script->functionTemp[1] = 2;
                 D_802BE304 = 1;
             } else {
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+                playerStatus->animFlags |= PA_FLAGS_HOLDING_WATT;
                 D_802BE30C = 1;
                 npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                 gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
@@ -321,7 +321,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 npc->yaw = playerStatus->targetYaw;
                 npc->currentAnim = 0x60001;
                 partnerActionStatus->actingPartner = PARTNER_WATT;
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2;
+                playerStatus->animFlags |= PA_FLAGS_2;
                 func_802BE014_31DB84();
                 script->functionTemp[1] = 2;
                 D_802BE304 = 1;
@@ -329,7 +329,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             world_watt_sync_held_position();
-            if ((playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+            if ((playerStatus->flags & PS_FLAGS_800)) {
                 D_802BE304 = 2;
             } else {
                 s32 actionState = playerStatus->actionState;
@@ -353,7 +353,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
     }
 
     if (D_802BE304 == 2) {
-        playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
+        playerStatus->animFlags &= ~(PA_FLAGS_2 | PA_FLAGS_HOLDING_WATT);
         npc->currentAnim = 0x60001;
         partner_clear_player_tracking(npc);
         D_802BE30C = 0;
@@ -394,7 +394,7 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
         force_player_anim(ANIM_Mario_10002);
         wattActionStatus->actingPartner = PARTNER_NONE;
         wattActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-        playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
+        playerStatus->animFlags &= ~(PA_FLAGS_2 | PA_FLAGS_HOLDING_WATT);
         gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
@@ -459,7 +459,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             world_watt_sync_held_position();
             watt->flags &= ~NPC_FLAG_GRAVITY;
             watt->flags |= NPC_FLAG_100;
-            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+            playerStatus->animFlags |= (PA_FLAGS_2 | PA_FLAGS_HOLDING_WATT);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             wattActionStatus->partnerActionState = PARTNER_ACTION_WATT_SHINE;
             wattActionStatus->actingPartner = PARTNER_WATT;

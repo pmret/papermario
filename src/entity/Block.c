@@ -121,7 +121,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         }
     } else {
         if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) {
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING)) {
+            if (!(playerStatus->flags & PS_FLAGS_JUMPING)) {
                 Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
                 if (shadow != NULL) {
                     f32 temp2 = entity->position.y - shadow->position.y;
@@ -331,7 +331,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return FALSE;
         }
 
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING) {
+        if (playerStatus->flags & PS_FLAGS_JUMPING) {
             exec_entity_commandlist(entity);
         }
         return TRUE;
@@ -356,7 +356,7 @@ s32 entity_block_handle_collision(Entity* entity) {
         if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_HAMMER)) {
             return TRUE;
         }
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_1000000)) {
+        if (!(playerStatus->flags & PS_FLAGS_1000000)) {
             return TRUE;
         }
     }

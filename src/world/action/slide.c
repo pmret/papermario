@@ -44,8 +44,8 @@ void action_update_sliding(void) {
     f32 hitRx, hitRy, hitDirX, hitDirZ;
     s32 hitID;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_SLIDING;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->animFlags |= 4;

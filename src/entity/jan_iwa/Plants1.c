@@ -55,7 +55,7 @@ void func_802BB000_E2D930(Entity* entity) {
 
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && !is_picking_up_item()) {
         if (playerStatus->actionState == ACTION_STATE_RIDE) {
-            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+            playerStatus->animFlags |= PA_FLAGS_4;
         } else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
             D_802BCE34 = data->unk_28;
             D_802BCE30 = data->unk_2A;
@@ -98,7 +98,7 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
     data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) &&
-        (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING) &&
+        (playerStatus->animFlags & PA_FLAGS_SPINNING) &&
         fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) < 60.0)
         {
         exec_entity_commandlist(entity);
@@ -274,10 +274,10 @@ void entity_CymbalPlant_idle(Entity* entity) {
         case 0:
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
                 if (partnerActionStatus->actingPartner != 0) {
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+                    playerStatus->animFlags |= PA_FLAGS_4;
                 }
                 func_800EF300();
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_40000;
+                playerStatus->animFlags |= PA_FLAGS_40000;
                 data->timer = 4;
                 data->unk_01++;
                 data->state++;
@@ -291,14 +291,14 @@ void entity_CymbalPlant_idle(Entity* entity) {
             }
             break;
         case 1:
-            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_40000;
+            playerStatus->animFlags |= PA_FLAGS_40000;
             if (--data->timer == 0) {
                 start_rumble(128, 10);
                 data->timer = 30;
                 data->state++;
                 yaw = playerStatus->spriteFacingAngle;
                 playerStatus->spriteFacingAngle = 80.0f;
-                playerStatus->flags |= PLAYER_STATUS_FLAGS_100000;
+                playerStatus->flags |= PS_FLAGS_100000;
                 D_802BCE20 = yaw;
             }
             func_802BB98C_E2E2BC(entity);
@@ -328,7 +328,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                 data->state++;
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
                 enable_player_input();
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_100000;
             }
             break;
         case 6:

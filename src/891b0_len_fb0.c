@@ -35,7 +35,7 @@ void func_800EFD08(void) {
         colliderType = D_80109480;
     }
 
-    if (playerStatus->actionState == ACTION_STATE_LAND && playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->actionState == ACTION_STATE_LAND && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         D_8010CFF4 = D_8010CFF0;
     }
 

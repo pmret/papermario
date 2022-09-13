@@ -40,17 +40,17 @@ void action_update_idle(void) {
     f32 angle, magnitude;
     AnimID anim;
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
         action_update_idle_peach();
         return;
     }
 
     playerStatus->currentStateTime++;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
 
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
-            | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_AIRBORNE);
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED
+            | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
         wasMoving = TRUE;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
@@ -59,9 +59,9 @@ void action_update_idle(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
-        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
+        if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
             anim = ANIM_Mario_90002;
-        } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+        } else if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
             anim = ANIM_Mario_10002;
         } else if (playerStatus->prevActionState == ACTION_STATE_IDLE) {
             anim = ANIM_Mario_60005;
@@ -71,7 +71,7 @@ void action_update_idle(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS) {
+    if (playerStatus->animFlags & PA_FLAGS_RAISED_ARMS) {
         set_action_state(ACTION_STATE_RAISE_ARMS);
     } else {
         player_input_to_move_vector(&angle, &magnitude);
@@ -89,7 +89,7 @@ void action_update_idle(void) {
                 set_action_state(ACTION_STATE_WALK);
                 if (magnitude != 0.0f) {
                     playerStatus->targetYaw = angle;
-                    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_80000000;
+                    playerStatus->animFlags &= ~PA_FLAGS_80000000;
                 }
             }
         }
@@ -101,16 +101,16 @@ void action_update_idle_peach(void) {
     PlayerData* playerData = &gPlayerData;
     f32 angle, magnitude;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
+        playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
 
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
             } else {
@@ -121,10 +121,10 @@ void action_update_idle_peach(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
         switch (playerStatus->actionSubstate) {
             case SUBSTATE_IDLE_DEFAULT:
-                if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))
+                if (!(playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED))
                     && (playerStatus->peachItemHeld == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
                         // begin first yawm
@@ -153,7 +153,7 @@ void action_update_idle_peach(void) {
                 break;
             case SUBSTATE_IDLE_SLEEP:
                 // peach is asleep
-                if (playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+                if (playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                     playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
                 } else if (playerStatus->unk_BC != 0) {

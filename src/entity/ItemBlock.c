@@ -30,7 +30,7 @@ void entity_ItemBlock_idle(Entity* entity) {
 void entity_HiddenItemBlock_idle(Entity* entity) {
     s32 alpha = entity->alpha;
 
-    if (gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_HOLDING_WATT) {
         alpha += 32;
         if (alpha > 192) {
             alpha = 192;
@@ -208,7 +208,7 @@ s32 entity_TriggerBlock_start_bound_script(Entity* entity) {
 void entity_TriggerBlock_disable_player_input(void) {
     disable_player_input();
     gPlayerStatus.currentSpeed = 0.0f;
-    gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800000;
+    gPlayerStatus.flags |= PS_FLAGS_800000;
     set_action_state(ACTION_STATE_FALLING);
     gravity_use_fall_parms();
 }

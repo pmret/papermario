@@ -188,7 +188,7 @@ s32 func_802B62A4_E25174(void) {
                 if (hammerLevel >= 0) {
                     ret = -1;
                 } else {
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SHIVERING;
+                    playerStatus->animFlags |= PA_FLAGS_SHIVERING;
                 }
                 break;
             case ENTITY_TYPE_HAMMER2_BLOCK:
@@ -196,7 +196,7 @@ s32 func_802B62A4_E25174(void) {
                 if (hammerLevel >= 1) {
                     ret = -1;
                 } else {
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SHIVERING;
+                    playerStatus->animFlags |= PA_FLAGS_SHIVERING;
                 }
                 break;
             case ENTITY_TYPE_HAMMER3_BLOCK:
@@ -204,12 +204,12 @@ s32 func_802B62A4_E25174(void) {
                 if (hammerLevel >= 2) {
                     ret = -1;
                 } else {
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SHIVERING;
+                    playerStatus->animFlags |= PA_FLAGS_SHIVERING;
                 }
                 break;
             case ENTITY_TYPE_WOODEN_CRATE:
             case ENTITY_TYPE_BOMBABLE_ROCK:
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SHIVERING;
+                playerStatus->animFlags |= PA_FLAGS_SHIVERING;
                 break;
             case ENTITY_TYPE_BLUE_SWITCH:
             case ENTITY_TYPE_RED_SWITCH:
@@ -227,12 +227,12 @@ void action_update_hammer(void) {
 
     HammerHit->unk_1C = 0;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         AnimID anim;
         s32 soundID;
 
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_200000;
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags |= PS_FLAGS_200000;
         HammerHit->timer = 0;
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->currentSpeed = 0.0f;
@@ -268,9 +268,9 @@ void action_update_hammer(void) {
         HammerHit->unk_14 = 0;
     }
 
-    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_1000000;
-    if (HammerHit->timer < 3 && (playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_20000000;
+    playerStatus->flags &= ~PS_FLAGS_1000000;
+    if (HammerHit->timer < 3 && (playerStatus->flags & PS_FLAGS_40000)) {
+        playerStatus->flags |= PS_FLAGS_20000000;
     } else if (HammerHit->timer < 2) {
         HammerHit->timer++;
     } else {
@@ -381,9 +381,9 @@ void func_802B6820_E256F0(void) {
 
         if (collisionStatus->lastWallHammered >= 0 && (collisionStatus->lastWallHammered & COLLISION_WITH_ENTITY_BIT)) {
             get_entity_by_index(collisionStatus->lastWallHammered)->collisionTimer = 0;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_1000000;
+            playerStatus->flags |= PS_FLAGS_1000000;
         } else if (HammerHit->hitID < 0) {
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_1000000;
+            playerStatus->flags |= PS_FLAGS_1000000;
         }
 
         if (HammerHit->hitID < 0 && gPlayerData.hammerLevel >= 2) {
@@ -403,7 +403,7 @@ void func_802B6820_E256F0(void) {
         HammerHit->unk_14 = 1;
     }
     if (HammerHit->timer == 6) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_200000;
+        playerStatus->flags &= ~PS_FLAGS_200000;
     }
 
     unk_BC = playerStatus->unk_BC;
@@ -415,9 +415,9 @@ void func_802B6820_E256F0(void) {
         HammerHit->unk_14 = 0;
         ten = 10; // required to match
         if (HammerHit->unk_1C != 0 || HammerHit->timer > ten) {
-            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_1000000;
+            playerStatus->flags &= ~PS_FLAGS_1000000;
             set_action_state(ACTION_STATE_IDLE);
         }
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_200000;
+        playerStatus->flags &= ~PS_FLAGS_200000;
     }
 }

@@ -9,9 +9,9 @@ void entity_Signpost_idle(Entity* entity) {
     f32 val = fabsf(clamp_angle(180.0f - entity->rotation.y) - clamp_angle(atan2(entity->position.x, entity->position.z,
                     playerStatus->position.x, playerStatus->position.z)));
 
-    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) && !(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (val <= 40.0f || val >= 320.0f)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) && !(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (val <= 40.0f || val >= 320.0f)) {
         entity->flags |= ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
+        if ((playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
             entity_start_script(entity);
         }
     } else {

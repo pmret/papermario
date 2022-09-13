@@ -660,10 +660,10 @@ EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
     EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 1)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_400000, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 0)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_400000, 0)
     EVT_RETURN
     EVT_END
 };

@@ -711,7 +711,7 @@ s32 check_conversation_trigger(void) {
     s32 i, j;
 
     playerStatus->encounteredNPC = NULL;
-    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
+    playerStatus->flags &= ~PS_FLAGS_HAS_CONVERSATION_NPC;
     playerColliderHeight = playerStatus->colliderHeight;
     playerColliderRadius = playerStatus->colliderDiameter / 2;
     playerX = playerStatus->position.x;
@@ -808,9 +808,9 @@ s32 check_conversation_trigger(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
+    if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
         playerStatus->encounteredNPC = npc;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
+        playerStatus->flags |= PS_FLAGS_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;

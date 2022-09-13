@@ -212,11 +212,11 @@ void phys_update_action_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
 
-    if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_40000)) {
-        playerStatus->flags &= ~PLAYER_STATUS_ANIM_FLAGS_20000000;
+    if (!(playerStatus->flags & PA_FLAGS_40000)) {
+        playerStatus->flags &= ~PA_FLAGS_20000000;
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
         phys_peach_update();
         return;
     }
@@ -239,7 +239,7 @@ void phys_update_action_state(void) {
     if (playerSpinState->stopSoundTimer != 0) {
         playerSpinState->stopSoundTimer--;
         if (playerSpinState->stopSoundTimer == 0) {
-            playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
+            playerStatus->animFlags &= ~PA_FLAGS_SPINNING;
             if (playerSpinState->spinSoundID != 0) {
                 sfx_stop_sound(playerSpinState->spinSoundID);
             }
@@ -252,19 +252,19 @@ void phys_update_action_state(void) {
         if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
             s32 cond;
 
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+            if (!(playerStatus->flags & PS_FLAGS_INPUT_DISABLED)) {
                 cond = check_conversation_trigger();
             } else {
                 cond = FALSE;
             }
 
-            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && cond) {
+            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAGS_20) && cond) {
                 set_action_state(ACTION_STATE_TALK);
             }
             check_input_spin();
         }
 
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
             void* dmaStart = PlayerActionsTable[playerStatus->actionState].dmaStart;
 
             if (dmaStart != NULL && dmaStart != D_8010C924) {
@@ -273,7 +273,7 @@ void phys_update_action_state(void) {
             }
         }
         PlayerActionsTable[playerStatus->actionState].update();
-    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+    } while (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED);
 }
 
 void phys_peach_update(void) {
@@ -282,11 +282,11 @@ void phys_peach_update(void) {
     func_800E24F8();
 
     do {
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && check_conversation_trigger()) {
+        if (!(playerStatus->flags & PS_FLAGS_20) && check_conversation_trigger()) {
             set_action_state(ACTION_STATE_TALK);
         }
 
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
             Action* action = &PlayerActionsTable[playerStatus->actionState];
 
             if (action->flag) {
@@ -306,10 +306,10 @@ void phys_peach_update(void) {
                 PlayerActionsTable[playerStatus->actionState].update();
             }
         }
-    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+    } while (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED);
 
     peach_check_for_parasol_input();
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE) {
+    if (playerStatus->animFlags & PA_FLAGS_IN_DISGUISE) {
         peach_sync_disguise_npc();
     }
 }
@@ -319,12 +319,12 @@ void set_action_state(s32 actionState) {
     PlayerData* playerData = &gPlayerData;
     PlayerSpinState* spinState = &gPlayerSpinState;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_200) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_200;
+    if (playerStatus->flags & PS_FLAGS_200) {
+        playerStatus->flags &= ~PS_FLAGS_200;
         enable_player_input();
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
+    if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
         // TODO figure this out
 #ifdef NON_EQUIVALENT
         if (
@@ -341,7 +341,7 @@ void set_action_state(s32 actionState) {
 #endif
             playerStatus->prevActionState = playerStatus->actionState;
             playerStatus->actionState = actionState;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+            playerStatus->flags |= PS_FLAGS_ACTION_STATE_CHANGED;
         }
         return;
     }
@@ -358,17 +358,17 @@ void set_action_state(s32 actionState) {
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
-                playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
+                playerStatus->animFlags |= PA_FLAGS_4;
+                playerStatus->flags |= PS_FLAGS_800;
                 return;
             }
         }
     }
 
     if (actionState == ACTION_STATE_SLIDING) {
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_10;
+        playerStatus->flags |= PS_FLAGS_10;
         playerStatus->moveFrames = 0;
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_4000;
+        playerStatus->flags &= ~PS_FLAGS_4000;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
@@ -377,17 +377,17 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ACTION_STATE_ENEMY_FIRST_STRIKE) {
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_4;
     }
     playerStatus->actionState = actionState;
-    playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    playerStatus->flags |= PS_FLAGS_ACTION_STATE_CHANGED;
 
     if (playerStatus->actionState == ACTION_STATE_SPIN) {
         return;
     }
 
-    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
-    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
+    playerStatus->flags &= ~PS_FLAGS_20000;
+    playerStatus->animFlags &= ~PA_FLAGS_SPINNING;
 
     if (spinState->spinSoundID != 0) {
         sfx_stop_sound(spinState->spinSoundID);
@@ -444,7 +444,7 @@ s32 check_input_hammer(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (playerStatus->pressedButtons & BUTTON_B) {
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_FALLING) {
+        if (playerStatus->flags & PS_FLAGS_FALLING) {
             return FALSE;
         }
 
@@ -478,8 +478,8 @@ s32 check_input_jump(void) {
     }
 
     if (collisionStatus->touchingWallTrigger != 0 ||
-        (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE |
-                                    PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE)))
+        (playerStatus->animFlags & (PA_FLAGS_SPEECH_PROMPT_AVAILABLE |
+                                    PA_FLAGS_INTERACT_PROMPT_AVAILABLE)))
     {
         return FALSE;
     }
@@ -510,7 +510,7 @@ void check_input_spin(void) {
     PlayerSpinState* spinState = &gPlayerSpinState;
     PlayerSpinState* temp2 = spinState;
 
-    if (!(playerStatus->flags & (PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO | PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) &&
+    if (!(playerStatus->flags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_USING_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(ABILITY_SLOW_GO)) {
@@ -522,7 +522,7 @@ void check_input_spin(void) {
         if (actionState != ACTION_STATE_RIDE) {
             if (actionState < ACTION_STATE_STEP_UP) {
                 if (actionState < ACTION_STATE_JUMP) {
-                    if (actionState >= 0 && !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING)) {
+                    if (actionState >= 0 && !(playerStatus->animFlags & PA_FLAGS_SPINNING)) {
                         if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
                             if (spinState->hasBufferedSpin != FALSE) {
@@ -554,7 +554,7 @@ void func_800E63A4(s32 arg0) {
     if (arg0 != 0) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
+        playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
@@ -574,7 +574,7 @@ void peach_check_for_parasol_input(void) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
                 if (gGameStatusPtr->peachFlags & 2) {
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
+                    playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
                     gGameStatusPtr->peachFlags |= 2;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);

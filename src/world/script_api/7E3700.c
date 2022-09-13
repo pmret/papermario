@@ -229,7 +229,7 @@ ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
         if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
         || playerStatus->actionState == ACTION_STATE_WALK
         || playerStatus->actionState == ACTION_STATE_RUN) {
-            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
+            if (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) {
                 script->varTable[13] = FALSE;
             } else {
                 script->varTable[13] = TRUE;
