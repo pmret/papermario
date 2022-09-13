@@ -2,7 +2,7 @@
 #include "effects_internal.h"
 
 extern Gfx* D_E00DE810[][5];
-extern s32 D_E00DE84C[];
+extern Gfx* D_E00DE84C[];
 extern s8 D_E00DE858[];
 extern u8 D_E00DE8B4[];
 extern u8 D_E00DE910[];
