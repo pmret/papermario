@@ -48,8 +48,8 @@ void action_update_use_spinning_flower(void) {
     f32 distToCenter;
     s8 switchCondition;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
         playerStatus->actionSubstate = SUBSTATE_ATTRACT;
@@ -60,7 +60,7 @@ void action_update_use_spinning_flower(void) {
         D_802B6EDC = 3.0f;
         disable_player_static_collisions();
         disable_player_input();
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_100000;
+        playerStatus->flags |= PS_FLAGS_100000;
         entityID = gCollisionStatus.currentFloor;
 
         TempPointer = &SpinningFlower_EntityIndex;
@@ -73,7 +73,7 @@ void action_update_use_spinning_flower(void) {
         } else {
             SpinningFlower_EntityIndex = -1;
         }
-        if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
+        if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
             suggest_player_anim_clearUnkFlag(ANIM_Mario_1002B);
         }
     }
@@ -126,10 +126,10 @@ void action_update_use_spinning_flower(void) {
                 D_802B6EF4 = playerStatus->position.y;
                 playerStatus->actionSubstate++;
                 D_802B6EF0 = 1.6f;
-                playerStatus->flags |= PLAYER_STATUS_FLAGS_800000;
+                playerStatus->flags |= PS_FLAGS_800000;
             }
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z &&
-                !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
+                !(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_AnimMidairStill);
                 playerStatus->actionSubstate = SUBSTATE_SPIN_UP;
                 playerStatus->currentStateTime = 30;
@@ -142,7 +142,7 @@ void action_update_use_spinning_flower(void) {
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (--D_802B6EE4 < 0.0f) {
                 D_802B6EE4 = 0.0f;
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_100000;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
             sin_cos_rad((SpinningFlower_AngleToCenter - 60.0f) * TAU / 360.0f, &dx, &dz);
@@ -158,7 +158,7 @@ void action_update_use_spinning_flower(void) {
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             if (entityID >= 0) {
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_100000;
                 enable_player_input();
                 enable_player_static_collisions();
                 set_action_state(ACTION_STATE_LAND);

@@ -78,7 +78,7 @@ void state_step_battle(void) {
             btl_save_world_cameras();
             load_battle_section();
             D_800A0904 = gPlayerStatusPtr->animFlags;
-            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40;
+            gPlayerStatusPtr->animFlags &= ~PA_FLAGS_40;
             D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_8;

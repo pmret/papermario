@@ -1845,7 +1845,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
             if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_2000000)) {
                 s32 actionState = playerStatus->actionState;
 
-                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_10000000) &&
+                if (!(playerStatus->animFlags & PA_FLAGS_10000000) &&
                         ((playerStatus->timeInAir == 0 &&
                         actionState != ACTION_STATE_JUMP &&
                         actionState != ACTION_STATE_FALLING) ||
@@ -2033,7 +2033,7 @@ block_47: // TODO required to match
                 item_entity_disable_shadow(itemEntity);
                 if (func_800DFCF4() &&
                     playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER &&
-                    !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_10000000))
+                    !(playerStatus->animFlags & PA_FLAGS_10000000))
                 {
                     set_action_state(ACTION_STATE_IDLE);
                 }

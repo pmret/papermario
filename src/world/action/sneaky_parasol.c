@@ -63,8 +63,8 @@ void action_update_parasol(void) {
     f32 phi_f20;
     f32 phi_f22;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         mem_clear(&D_802B6E80, sizeof(D_802B6E80));
         disable_player_static_collisions();
         tempUnk_1C = &parasolStruct->unk_1C;
@@ -78,7 +78,7 @@ void action_update_parasol(void) {
             phi_f4 = 2;
         }
         *tempUnk_1C = phi_f4;
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
             playerStatus->currentStateTime = 20;
             playerStatus->actionSubstate = 0;
             parasolStruct->unk_08 = 0xF;

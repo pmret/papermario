@@ -18,7 +18,7 @@ ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
     } else if ((playerStatus->actionState != ACTION_STATE_PUSHING_BLOCK) && (playerStatus->actionState != ACTION_STATE_WALK) &&
                (playerStatus->actionState != ACTION_STATE_RUN)) {
         script->varTable[0] = 0;
-    } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
+    } else if (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) {
         script->varTable[0] = 0;
     } else {
         script->varTable[0] = 1;

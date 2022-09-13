@@ -149,7 +149,7 @@ void update_triggers(void) {
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
             if ((listTrigger->location.colliderID != collisionStatus->currentFloor) ||
-                !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+                !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PS_FLAGS_INPUT_DISABLED)) {
                 continue;
             }
         }

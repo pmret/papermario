@@ -24,6 +24,6 @@ ApiStatus func_80240040_ABB2D0(Evt* script, s32 isInitialCall) {
         status->slideParams = &D_8024162C_ABC8BC;
     }
 
-    status->flags |= PLAYER_STATUS_FLAGS_10;
+    status->flags |= PS_FLAGS_10;
     return ApiStatus_DONE2;
 }

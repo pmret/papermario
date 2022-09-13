@@ -507,7 +507,7 @@ void update_npcs(void) {
     f32 x, y, z;
     f32 hitYaw, hitPitch, hitLength;
 
-    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_8000;
+    playerStatus->animFlags &= ~PA_FLAGS_8000;
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400))) {
         s32 i;
 

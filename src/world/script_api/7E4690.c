@@ -76,13 +76,13 @@ ApiStatus EnterPlayerPostPipe(Evt* script, s32 isInitialCall) {
         playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
         script->varTable[2] = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
         playerStatus->position.y = script->varTable[2] - 40;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+        playerStatus->flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
     } else {
         do {
             playerStatus->position.y += 1.0f;
             if (!(playerStatus->position.y < script->varTable[2])) {
                 playerStatus->position.y = script->varTable[2];
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+                playerStatus->flags &= ~PS_FLAGS_CAMERA_DOESNT_FOLLOW;
                 ret = ApiStatus_DONE2;
             }
         } while (0); // todo required to match

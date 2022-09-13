@@ -248,7 +248,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_init_put_away(sushie);
-        gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+        gPlayerStatusPtr->animFlags &= ~PA_FLAGS_400000;
     }
 
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;

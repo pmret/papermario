@@ -44,12 +44,12 @@ s32 func_800E6904(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) {
+    if (playerStatus->animFlags & PA_FLAGS_100000) {
         return FALSE;
     }
 
     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_1000) &&
+        if (!(playerStatus->flags & PS_FLAGS_1000) &&
             (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN))
         {
             return TRUE;
@@ -75,17 +75,17 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s32 actionState = gPlayerStatus.actionState;
 
-    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) &&
-        !(gPlayerStatus.flags & PLAYER_STATUS_FLAGS_100) &&
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_100000) &&
+        !(gPlayerStatus.flags & PS_FLAGS_100) &&
         !(currentButtons & (BUTTON_Z | BUTTON_R)) &&
         (pressedButtons & (BUTTON_START | BUTTON_C_LEFT | BUTTON_C_RIGHT)) &&
         ((gGameStatusPtr->mapShop == NULL) || !(gGameStatusPtr->mapShop->flags & 1)) &&
         !(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_MENUS) &&
         !is_picking_up_item())
     {
-        if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
+        if (!(gPlayerStatus.animFlags & PA_FLAGS_8BIT_MARIO)) {
             if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
-                if (!(gPlayerStatus.flags & PLAYER_STATUS_FLAGS_1000)) {
+                if (!(gPlayerStatus.flags & PS_FLAGS_1000)) {
                     if (actionState == ACTION_STATE_IDLE ||
                         actionState == ACTION_STATE_WALK ||
                         actionState == ACTION_STATE_RUN)
@@ -232,11 +232,11 @@ void check_input_open_menus(void) {
 block_17:
                 switch (D_8010CCF8) {
                     case 0:
-                        if (playerStatus->flags & PLAYER_STATUS_FLAGS_40) {
+                        if (playerStatus->flags & PS_FLAGS_40) {
                             sfx_play_sound(SOUND_MENU_ERROR);
                             if (D_8010C9C0) {
                                 func_800E6860();
-                                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
+                                playerStatus->flags &= ~PS_FLAGS_20;
                                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                             }
@@ -261,7 +261,7 @@ block_17:
                         popup->initialPos = 0;
                         break;
                 }
-                playerStatus->flags |= PLAYER_STATUS_FLAGS_20;
+                playerStatus->flags |= PS_FLAGS_20;
                 disable_player_input();
                 partner_disable_input();
                 D_8010CCFA = 3;
@@ -270,7 +270,7 @@ block_17:
             }
             break;
         case 1:
-            flags = ~PLAYER_STATUS_FLAGS_20;
+            flags = ~PS_FLAGS_20;
             if ((func_800E6904() == 0) || is_picking_up_item() || D_8010CCFE < playerStatus->inputEnabledCounter) {
                 playerStatus->flags &= flags;
                 enable_player_input();
@@ -278,7 +278,7 @@ block_17:
                 D_8010CD00 = 0;
                 if (D_8010C9C0) {
                     func_800E6860();
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
+                    playerStatus->flags &= ~PS_FLAGS_20;
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 }
@@ -351,7 +351,7 @@ block_17:
                     }
                 }
                 func_800E6860();
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
+                playerStatus->flags &= ~PS_FLAGS_20;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
             }
@@ -361,7 +361,7 @@ block_17:
             if (D_8010CCFA == 0) {
                 func_800E6860();
                 D_8010CD00 = 0;
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
+                playerStatus->flags &= ~PS_FLAGS_20;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                 enable_player_input();
                 partner_enable_input();

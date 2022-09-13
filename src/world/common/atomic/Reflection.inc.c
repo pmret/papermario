@@ -93,7 +93,7 @@ void N(reflection_setup_wall)(void) {
 
         spr_update_player_sprite(2, anim, 1.0f);
 
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
+        if (!(playerStatus->flags & PS_FLAGS_20000)) {
             if (playerStatus->alpha1 != D_802D9D70) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -168,7 +168,7 @@ void N(reflection_setup_floor)(void) {
 
         spr_update_player_sprite(1, playerStatus->trueAnimation, 1.0f);
 
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
+        if (!(playerStatus->flags & PS_FLAGS_20000)) {
             if (playerStatus->alpha1 != D_802D9D71) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -188,7 +188,7 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
-            !(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)
+            !(playerStatus->flags & PS_FLAGS_20000)
                 ? N(reflection_render_floor)
                 : N(reflection_render_floor_fancy)
         );

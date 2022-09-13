@@ -278,7 +278,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     }
                     disable_npc_blur(kooper);
                     if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
-                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
+                        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                         } else {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
@@ -294,7 +294,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         kooper->moveToPos.y = playerStatus->position.y;
                         kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
-                        playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
+                        playerStatus->flags |= PS_FLAGS_JUMPING;
                         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
 
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
@@ -693,7 +693,7 @@ void world_kooper_pre_battle(Npc* kooper) {
         }
 
         D_802BEB40_31CB60 = 0;
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_JUMPING;
+        playerStatus->flags &= ~PS_FLAGS_JUMPING;
 
         kooper->jumpVelocity = 0.0f;
         kooper->flags &= ~NPC_FLAG_JUMPING;

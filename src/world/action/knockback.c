@@ -12,12 +12,12 @@ void action_update_knockback(void) {
 
     static f32 ReturnAngle;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         
         suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);
         
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_FLYING;
+        playerStatus->flags |= PS_FLAGS_FLYING;
 
         playerStatus->actionSubstate = SUBSTATE_FLYING;
         playerStatus->gravityIntegrator[0] = 18.3473f;
@@ -36,7 +36,7 @@ void action_update_knockback(void) {
 
     speed = playerStatus->currentSpeed;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+    if (playerStatus->flags & PS_FLAGS_40000) {
         speed *= 0.5f;
     }
 
@@ -50,7 +50,7 @@ void action_update_knockback(void) {
 
         if (playerStatus->gravityIntegrator[0] < 0.0f) {
             playerStatus->actionSubstate = SUBSTATE_FALLING;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+            playerStatus->flags |= PS_FLAGS_FALLING;
         }
     } else {
         s32 colliderID;

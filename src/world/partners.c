@@ -486,7 +486,7 @@ s32 func_800EA52C(s32 arg0) {
     u32 playerActionState = playerStatus->actionState;
     s32 ret = FALSE;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+    if (playerStatus->flags & PS_FLAGS_800) {
         return FALSE;
     }
 
@@ -585,10 +585,10 @@ void _use_partner_ability(void) {
         partnerActionStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_4) {
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_4;
+    if (playerStatus->animFlags & PA_FLAGS_4) {
+        playerStatus->animFlags &= ~PA_FLAGS_4;
         partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_40000000;
+        playerStatus->animFlags |= PA_FLAGS_40000000;
     }
 
     if (D_8010CFE8 != 0) {
@@ -1028,8 +1028,8 @@ void partner_handle_after_battle(void) {
         D_8010CFE8 = 1;
 
         if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
-            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
-            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_2;
+            gPlayerStatusPtr->animFlags &= ~PA_FLAGS_HOLDING_WATT;
+            gPlayerStatusPtr->animFlags &= ~PA_FLAGS_2;
             actionStatus->actingPartner = PARTNER_NONE;
         }
 
@@ -1115,7 +1115,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
     s32 isPlayerJumping;
     PlayerPathElement* currentSnapshot;
 
-    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+    if (playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING)) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         isPlayerJumping = FALSE;
@@ -1141,9 +1141,9 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
+    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)
         || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_800)) {
             partner_walking_follow_player(partner);
         }
         if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
@@ -1157,7 +1157,7 @@ void partner_walking_update_motion(Npc* partner) {
         partner->pos.z = playerStatus->position.z;
         partner->jumpVelocity = 0.0f;
         partner->jumpScale = 0.0f;
-        partner->flags = partner->flags & ~PLAYER_STATUS_ANIM_FLAGS_800;
+        partner->flags = partner->flags & ~PA_FLAGS_800;
     }
 
     partner_do_player_collision(partner);
@@ -1247,11 +1247,11 @@ void partner_flying_update_motion(Npc* partner) {
     f32 var_f2;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 ||
-        (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) ||
+        (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) ||
         partnerActionStatus->inputDisabled ||
         partnerActionStatus->partnerAction_unk_2 != 0)
     {
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800) || D_800F8020 == 0) {
+        if (!(playerStatus->animFlags & PA_FLAGS_800) || D_800F8020 == 0) {
             partner_flying_follow_player(partner);
         }
         if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {

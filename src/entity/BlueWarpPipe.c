@@ -61,7 +61,7 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) != 0) {
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
 
-        if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))) {
+        if (!(playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED))) {
             s32 stickAxisX = abs(playerStatus->stickAxis[0]);
             s32 stickAxisZ = playerStatus->stickAxis[1];
 
