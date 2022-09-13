@@ -919,9 +919,9 @@ segments:
     - [0x10CC10, data] # font width data
   - type: group
     dir: charset
-    vram: 0x802ED970
+    vram: 0
     start: 0x10F1B0
-    subsegments: # TODO shiftability: what is going on here
+    subsegments:
     - [0x10F1B0, linker_offset,       standard]
     - [0x10F1B0, pm_charset,          standard, 16, 16, 0xA6]
     - [0x1144B0, linker_offset,       standard_pal]
@@ -2395,13 +2395,11 @@ segments:
   - type: code
     start: 0x316C00
     vram: 0x802AE000
-    overlay: True
     subsegments:
     - [0x316C00, c]
   - type: code
     start: 0x316D90
     vram: 0x802AE000
-    overlay: True
     subsegments:
     - [0x316D90, c, 316d90]
   - type: code
@@ -2414,7 +2412,6 @@ segments:
     name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x317020, c, goombario]
     - [0x317B60]
@@ -2423,7 +2420,6 @@ segments:
     name: world_partner_bombette
     start: 0x317E50
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x317E50, c, bombette]
     - [0x3195D0]
@@ -2432,7 +2428,6 @@ segments:
     name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x319670, c, parakarry]
     - [0x31B000]
@@ -2441,7 +2436,6 @@ segments:
     name: world_partner_kooper
     start: 0x31B120
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x31B120, c, kooper]
     - [0x31CB60]
@@ -2450,7 +2444,6 @@ segments:
     name: world_partner_watt
     start: 0x31CC70
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x31CC70, c, watt]
     - [0x31DDC0]
@@ -2459,7 +2452,6 @@ segments:
     name: world_partner_sushie
     start: 0x31DE70
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x31DE70, c, sushie]
     - [0x320B20]
@@ -2468,7 +2460,6 @@ segments:
     name: world_partner_lakilester
     start: 0x320C50
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x320C50, c, lakilester]
     - [0x3239B0]
@@ -2477,7 +2468,6 @@ segments:
     name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x323A50, c, bow]
     - [0x324930]
@@ -2486,7 +2476,6 @@ segments:
     name: world_partner_goompa
     start: 0x324A10
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x324A10, c, goompa]
     - [0x324E80]
@@ -2495,7 +2484,6 @@ segments:
     name: world_partner_goombaria
     start: 0x324F10
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x324F10, c, goombaria]
     - [0x325000]
@@ -2504,14 +2492,12 @@ segments:
     name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
-    overlay: True
     subsegments:
     - [0x325070, c, twink]
     - [0x325160]
   - type: code
     start: 0x3251D0
     vram: 0x802C0000
-    overlay: True
     subsegments:
     - [0x3251D0, c, 3251D0]
     - [0x3255E0]
@@ -4311,7 +4297,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_jump
-    overlay: True
     subsegments:
     - [0x4219F0, c, jump]
     - [0x421FC0]
@@ -4320,7 +4305,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_hammer
-    overlay: True
     subsegments:
     - [0x422000, c, hammer]
     - [0x422A90]
@@ -4329,7 +4313,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_flee
-    overlay: True
     subsegments:
     - [0x422AD0, c, flee]
     - [0x4233B0]
@@ -4338,7 +4321,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_break_free
-    overlay: True
     subsegments:
     - [0x4233F0, c, break_free]
     - [0x423C30]
@@ -4347,7 +4329,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_whirlwind
-    overlay: True
     subsegments:
     - [0x423C70, c, whirlwind]
     - start: 0x424550
@@ -4377,7 +4358,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_stop_leech
-    overlay: True
     subsegments:
     - [0x425590, c, stop_leech]
     - [0x425B10]
@@ -4386,7 +4366,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_07
-    overlay: True
     subsegments:
     - [0x425B50, c, "07"]
     - [0x426130]
@@ -4395,7 +4374,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_dizzy_shell
-    overlay: True
     subsegments:
     - [0x426170, c, dizzy_shell]
     - [0x426970]
@@ -4404,7 +4382,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_fire_shell
-    overlay: True
     subsegments:
     - [0x4269D0, c, fire_shell]
     - [0x427320]
@@ -4413,7 +4390,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_0A
-    overlay: True
     subsegments:
     - [0x4273B0, c, 0A]
     - [0x427A30]
@@ -4422,7 +4398,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_bomb
-    overlay: True
     subsegments:
     - [0x427A70, c, bomb]
     - [0x428280]
@@ -4431,7 +4406,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_body_slam
-    overlay: True
     subsegments:
     - [0x4282E0, c, body_slam]
     - [0x428A30]
@@ -4440,7 +4414,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_air_lift
-    overlay: True
     subsegments:
     - [0x428A70, c, air_lift]
     - [0x4292C0]
@@ -4449,7 +4422,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_air_raid
-    overlay: True
     subsegments:
     - [0x429320, c, air_raid]
     - [0x429C90]
@@ -4458,7 +4430,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_squirt
-    overlay: True
     subsegments:
     - [0x429D20, c, squirt]
     - [0x42A480]
@@ -4467,7 +4438,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_water_block
-    overlay: True
     subsegments:
     - [0x42A4F0, c, water_block]
     - start: 0x42B650
@@ -4497,7 +4467,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_tidal_wave
-    overlay: True
     subsegments:
     - [0x42C6F0, c, tidal_wave]
     - [0x42CEB0]
@@ -4506,7 +4475,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_power_shock
-    overlay: True
     subsegments:
     - [0x42CF10, c, power_shock]
     - [0x42D9B0]
@@ -4515,7 +4483,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_mega_shock
-    overlay: True
     subsegments:
     - [0x42DA10, c, mega_shock]
     - [0x42E342] # todo offset ?
@@ -4524,7 +4491,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_smack
-    overlay: True
     subsegments:
     - [0x42E3A0, c, smack]
     - [0x42ED70]
@@ -4533,7 +4499,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_spiny_surge
-    overlay: True
     subsegments:
     - [0x42EE20, c, spiny_surge]
     - [0x42F680]
@@ -4542,7 +4507,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_hurricane
-    overlay: True
     subsegments:
     - [0x42F6E0, c, hurricane]
     - [0x42FFC0]
@@ -4551,7 +4515,6 @@ segments:
     vram: 0x802A9000
     dir: battle/action_cmd
     name: action_cmd_spook
-    overlay: True
     subsegments:
     - [0x430020, c, spook]
     - [0x430940]
@@ -4560,7 +4523,6 @@ segments:
     start: 0x4309A0
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x4309A0, c, area]
     - [0x4309A0, c, actor/goomba]
@@ -4577,7 +4539,6 @@ segments:
     start: 0x439A90
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x439A90, c, area]
     - [0x439A90, c, actor/blue_goomba]
@@ -4597,7 +4558,6 @@ segments:
     start: 0x447440
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x447440, c, area]
     - [0x447440, c, actor/spiked_goomba]
@@ -4624,7 +4584,6 @@ segments:
     type: code
     start: 0x464490
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x464490, c, actor/chan]
     - [0x464560, c, actor/lee]
@@ -4639,7 +4598,6 @@ segments:
     type: code
     start: 0x47F0B0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x47F0B0, c, actor/goombario_tutor]
     - [0x47F0D0, c, actor/ember]
@@ -4654,7 +4612,6 @@ segments:
     start: 0x48D1A0
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x48D1A0, c, area]
     - [0x48D1A0, c, actor/goomba]
@@ -4673,7 +4630,6 @@ segments:
     type: code
     start: 0x4A10A0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4A10A0, c, area]
     - [0x4A10A0, c, actor/bullet_bill]
@@ -4701,7 +4657,6 @@ segments:
     start: 0x4B11F0
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x4B11F0, c, area]
     - [0x4B11F0, c, actor/fake_bowser]
@@ -4726,7 +4681,6 @@ segments:
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4CF1B0, c, area]
     - [0x4CF1B0, c, actor/eldstar]
@@ -4737,7 +4691,6 @@ segments:
     start: 0x4D01F0
     vram: 0x80218000
     subalign: 4
-    overlay: True
     subsegments:
     - [0x4D01F0, c, area]
     - [0x4D01F0, c, actor/cleft]
@@ -4753,7 +4706,6 @@ segments:
     start: 0x4DA5E0
     vram: 0x80218000
     subalign: 16 # BSS alignment hack
-    overlay: True
     subsegments:
     - [0x4DA5E0, c, actor/pokey]
     - [0x4DA6B0, c, actor/bandit]
@@ -4764,7 +4716,6 @@ segments:
     type: code
     start: 0x4E2740
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4E2740, c, actor/pokey_mummy]
     - [0x4E2810, c, actor/swooper]
@@ -4790,7 +4741,6 @@ segments:
     type: code
     start: 0x4EF4A0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4EF4A0, c, actor/chain_chomp]
     - [0x4EFB30, c, actor/tutankoopa]
@@ -4812,7 +4762,6 @@ segments:
     type: code
     start: 0x4F7BE0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4F7BE0, c, actor/forest_fuzzy]
     - [0x4F7D50, c, actor/bzzap]
@@ -4824,7 +4773,6 @@ segments:
     type: code
     start: 0x4FEA50
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x4FEA50, c, actor/hypergoomba]
     - [0x4FED30, c, actor/hyper_paragoomba]
@@ -4843,7 +4791,6 @@ segments:
     type: code
     start: 0x50F020
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x50F020, c, actor/clubba]
     - [0x50F020, c, actor/tubba_blubba]
@@ -4858,7 +4805,6 @@ segments:
     type: code
     start: 0x5125D0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x5125D0, c, actor/red_shy_guy]
     - [0x5126A0, c, actor/blue_shy_guy]
@@ -4886,7 +4832,6 @@ segments:
     type: code
     start: 0x52B6A0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x52B6A0, c, actor/general_guy]
     - [0x52B7C0, c, actor/toy_tank]
@@ -4897,49 +4842,42 @@ segments:
     type: code
     start: 0x543570
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
-    overlay: True
     subsegments:
     - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x5573E0, c]
     - [0x557A80, c]
@@ -4955,7 +4893,6 @@ segments:
     type: code
     start: 0x56E2A0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x56E2A0, c, actor/fuzzipede]
     - [0x56E800, c, stage/kgr_01]
@@ -4965,7 +4902,6 @@ segments:
     type: code
     start: 0x573920
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x573920, c, actor/spear_guy]
     - [0x5739F0, c, actor/hurt_plant]
@@ -4987,7 +4923,6 @@ segments:
     type: code
     start: 0x584940
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x584940, c, actor/putrid_piranha]
     - [0x584B90, c, actor/white_magikoopa]
@@ -5005,7 +4940,6 @@ segments:
     type: code
     start: 0x58C2F0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x58C2F0, c, actor/lava_bubble]
     - [0x58C420, c, actor/putrid_piranha]
@@ -5026,7 +4960,6 @@ segments:
     type: code
     start: 0x59E6E0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x59E6E0, c]
     - [0x59F420, c]
@@ -5036,7 +4969,6 @@ segments:
     type: code
     start: 0x5B14B0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x5B14B0, c]
     - [0x5B16A0, c]
@@ -5049,7 +4981,6 @@ segments:
     type: code
     start: 0x5CE690
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x5CE690, c]
     - [0x5CF2D0, c]
@@ -5058,7 +4989,6 @@ segments:
     type: code
     start: 0x5EC490
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x5EC490, c]
     - [0x5EC560, c]
@@ -5074,7 +5004,6 @@ segments:
     type: code
     start: 0x608AB0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x608AB0, c]
     - [0x608CB0, c]
@@ -5086,7 +5015,6 @@ segments:
     type: code
     start: 0x6186F0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x6186F0, c]
     - [0x6187C0, c]
@@ -5099,7 +5027,6 @@ segments:
     type: code
     start: 0x623BA0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x623BA0, c, actor/duplighost]
     - [0x625190, c, actor/gulpit]
@@ -5118,7 +5045,6 @@ segments:
     type: code
     start: 0x63D1E0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x63D1E0, c, actor/monstar]
     - [0x63D710, c, actor/paragoomba]
@@ -5159,7 +5085,6 @@ segments:
     type: code
     start: 0x648E10
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x648E10, c]
     - [0x649050, c]
@@ -5173,7 +5098,6 @@ segments:
     start: 0x660750
     vram: 0x80218000
     subalign: 16 # BSS alignment hack
-    overlay: True
     subsegments:
     - [0x660750, c, actor/crystal_king]
     - [0x660D20, c, actor/crystal_bit]
@@ -5183,7 +5107,6 @@ segments:
     type: code
     start: 0x669D80
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x669D80, c, actor/duplighost]
     - [0x66B370, c, actor/swoopula]
@@ -5201,7 +5124,6 @@ segments:
     type: code
     start: 0x684A30
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x684A30, c]
     - [0x684B00, c]
@@ -5212,7 +5134,6 @@ segments:
     type: code
     start: 0x69F200
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x69F200, c]
     - [0x69F320, c]
@@ -5223,7 +5144,6 @@ segments:
     type: code
     start: 0x6BBB90
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
@@ -5233,7 +5153,6 @@ segments:
     type: code
     start: 0x6CC070
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x6CC070, c]
     - [0x6CC1C0, c]
@@ -5242,7 +5161,6 @@ segments:
     type: code
     start: 0x6DBDA0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x6DBDA0, c]
     - [0x6DC2F0, c]
@@ -5251,7 +5169,6 @@ segments:
     type: code
     start: 0x6DDDC0
     vram: 0x80218000
-    overlay: True
     subsegments:
     - [0x6DDDC0, c]
     - [0x6DDE90, c]
@@ -5269,7 +5186,6 @@ segments:
     type: code
     start: 0x6F0B30
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x6F0B30, c, goompa]
   - name: battle_partner_goombario
@@ -5277,7 +5193,6 @@ segments:
     type: code
     start: 0x6F10E0
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x6F10E0, c, goombario]
     - [0x6F2290]
@@ -5286,7 +5201,6 @@ segments:
     type: code
     start: 0x6F5E80
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x6F5E80, c, kooper]
     - [0x6F62B0]
@@ -5295,7 +5209,6 @@ segments:
     type: code
     start: 0x6FAD10
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x6FAD10, c, bombette]
     - [0x6FB350]
@@ -5304,7 +5217,6 @@ segments:
     type: code
     start: 0x6FFD80
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x6FFD80, c, parakarry]
     - [0x701590, data]
@@ -5313,7 +5225,6 @@ segments:
     type: code
     start: 0x703AF0
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x703AF0, c, watt]
     - [0x704A80, data]
@@ -5322,7 +5233,6 @@ segments:
     type: code
     start: 0x707CA0
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x707CA0, c, sushie]
     - [0x708B70, data]
@@ -5331,7 +5241,6 @@ segments:
     type: code
     start: 0x70BD10
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x70BD10, c, lakilester]
     - [0x70DEE0, data, 70DED0]
@@ -5341,7 +5250,6 @@ segments:
     type: code
     start: 0x710EF0
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x710EF0, c, bow]
     - [0x7111F0, data]
@@ -5350,7 +5258,6 @@ segments:
     type: code
     start: 0x714CF0
     vram: 0x80238000
-    overlay: True
     subsegments:
     - [0x714CF0, c, twink]
     - [0x714DC0, data]
@@ -5359,7 +5266,6 @@ segments:
     type: code
     start: 0x715850
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x715850, c, mushroom]
     - [0x715E50]
@@ -5368,7 +5274,6 @@ segments:
     type: code
     start: 0x716C60
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x716C60, c, fire_flower]
     - [0x717060]
@@ -5377,7 +5282,6 @@ segments:
     type: code
     start: 0x7179D0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7179D0, c, dusty_hammer]
     - start: 0x717C10
@@ -5392,7 +5296,6 @@ segments:
     type: code
     start: 0x718850
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x718850, c, pow_block]
     - [0x718BF0]
@@ -5401,7 +5304,6 @@ segments:
     type: code
     start: 0x719970
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x719970, c, pebble]
     - start: 0x719BB0
@@ -5416,7 +5318,6 @@ segments:
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71A7F0, c, volt_shroom]
     - [0x71AA70]
@@ -5425,7 +5326,6 @@ segments:
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71B1A0, c, thunder_rage]
     - [0x71B640]
@@ -5434,7 +5334,6 @@ segments:
     type: code
     start: 0x71BE30
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71BE30, c, snowman_doll]
     - [0x71C270]
@@ -5443,7 +5342,6 @@ segments:
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71CCE0, c, dried_shroom]
     - [0x71D010]
@@ -5452,7 +5350,6 @@ segments:
     type: code
     start: 0x71D770
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71D770, c, shooting_star]
     - [0x71DCC0]
@@ -5461,7 +5358,6 @@ segments:
     type: code
     start: 0x71E650
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x71E650, c, sleepy_sheep]
     - start: 0x71EFC0
@@ -5481,7 +5377,6 @@ segments:
     type: code
     start: 0x7215A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7215A0, c, stone_cap]
     - [0x721970]
@@ -5490,7 +5385,6 @@ segments:
     type: code
     start: 0x722000
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x722000, c, tasty_tonic]
     - [0x7222D0]
@@ -5499,7 +5393,6 @@ segments:
     type: code
     start: 0x722B40
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x722B40, c, thunder_bolt]
     - [0x722FE0]
@@ -5508,7 +5401,6 @@ segments:
     type: code
     start: 0x723780
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x723780, c, ultra_shroom]
     - [0x723AB0]
@@ -5517,7 +5409,6 @@ segments:
     type: code
     start: 0x724240
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x724240, c, unknown_item]
     - [0x724570]
@@ -5526,7 +5417,6 @@ segments:
     type: code
     start: 0x724CE0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x724CE0, c, super_soda]
     - [0x725210]
@@ -5535,7 +5425,6 @@ segments:
     type: code
     start: 0x725F60
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x725F60, c, hustle_drink]
     - [0x726240]
@@ -5544,7 +5433,6 @@ segments:
     type: code
     start: 0x726DD0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x726DD0, c, stop_watch]
     - [0x727120]
@@ -5553,7 +5441,6 @@ segments:
     type: code
     start: 0x727910
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x727910, c, dizzy_dial]
     - [0x727CE0]
@@ -5562,7 +5449,6 @@ segments:
     type: code
     start: 0x7285E0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7285E0, c, please_come_back]
     - [0x728820]
@@ -5571,7 +5457,6 @@ segments:
     type: code
     start: 0x728EC0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x728EC0, c, egg_missile]
     - start: 0x7291D0
@@ -5593,7 +5478,6 @@ segments:
     type: code
     start: 0x72A750
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72A750, c, insecticide_herb]
     - start: 0x72AB70
@@ -5609,7 +5493,6 @@ segments:
     type: code
     start: 0x72B910
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72B910, c, fright_jar]
     - [0x72BC60]
@@ -5618,7 +5501,6 @@ segments:
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72C5B0, c, mystery]
     - start: 0x72CF00
@@ -5634,7 +5516,6 @@ segments:
     type: code
     start: 0x72DB70
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72DB70, c, repel_gel]
     - [0x72DE00]
@@ -5643,7 +5524,6 @@ segments:
     type: code
     start: 0x72E530
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72E530, c, life_shroom]
     - [0x72EA20]
@@ -5652,7 +5532,6 @@ segments:
     type: code
     start: 0x72F720
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x72F720, c, coconut]
     - start: 0x72F960
@@ -5668,7 +5547,6 @@ segments:
     type: code
     start: 0x7305A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7305A0, c, electro_pop]
     - [0x730AE0]
@@ -5677,7 +5555,6 @@ segments:
     type: code
     start: 0x731300
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x731300, c, strange_cake]
     - start: 0x731EA0
@@ -5697,7 +5574,6 @@ segments:
     type: code
     start: 0x7330D0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7330D0, c, food]
     - [0x733700]
@@ -5705,7 +5581,6 @@ segments:
     type: code
     start: 0x7345A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7345A0, c, hammer]
     - [0x734650]
@@ -5713,7 +5588,6 @@ segments:
     type: code
     start: 0x737890
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x737890, c, spin_smash]
     - [0x737A20]
@@ -5721,7 +5595,6 @@ segments:
     type: code
     start: 0x73AED0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x73AED0, c, quake_hammer]
     - [0x73AF80]
@@ -5729,7 +5602,6 @@ segments:
     type: code
     start: 0x73D860
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x73D860, c, jump]
     - [0x73D9A0]
@@ -5737,7 +5609,6 @@ segments:
     type: code
     start: 0x740CC0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x740CC0, c]
     - [0x740DB0, data]
@@ -5745,7 +5616,6 @@ segments:
     type: code
     start: 0x743DF0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x743DF0, c]
     - [0x743FF0, data]
@@ -5753,7 +5623,6 @@ segments:
     type: code
     start: 0x746E10
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x746E10, c]
     - [0x746F00, data]
@@ -5761,7 +5630,6 @@ segments:
     type: code
     start: 0x748DD0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x748DD0, c]
     - [0x748EC0, data]
@@ -5769,7 +5637,6 @@ segments:
     type: code
     start: 0x74AD90
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x74AD90, c]
     - [0x74AF40, data]
@@ -5777,7 +5644,6 @@ segments:
     type: code
     start: 0x74D570
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x74D570, c]
     - [0x74D850, data]
@@ -5785,7 +5651,6 @@ segments:
     type: code
     start: 0x74F130
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x74F130, c]
     - [0x74F3D0, data]
@@ -5793,7 +5658,6 @@ segments:
     type: code
     start: 0x752450
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x752450, c]
     - [0x752500, data]
@@ -5801,7 +5665,6 @@ segments:
     type: code
     start: 0x756780
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x756780, c]
     - [0x756900, data]
@@ -5809,7 +5672,6 @@ segments:
     type: code
     start: 0x7595B0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7595B0, c]
     - [0x7598D0, data]
@@ -5817,7 +5679,6 @@ segments:
     type: code
     start: 0x75C980
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x75C980, c]
     - [0x75CCE0, data]
@@ -5825,7 +5686,6 @@ segments:
     type: code
     start: 0x75E5D0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x75E5D0, c]
     - [0x75E8F0, data]
@@ -5833,7 +5693,6 @@ segments:
     type: code
     start: 0x761920
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x761920, c]
     - [0x761C80, data]
@@ -5841,7 +5700,6 @@ segments:
     type: code
     start: 0x763540
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x763540, c]
     - [0x7635F0, data]
@@ -5849,7 +5707,6 @@ segments:
     type: code
     start: 0x765C20
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x765C20, c, auto_jump]
     - [0x765D10]
@@ -5857,7 +5714,6 @@ segments:
     type: code
     start: 0x767C90
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x767C90, c]
     - [0x767D40, data]
@@ -5865,7 +5721,6 @@ segments:
     type: code
     start: 0x76A830
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x76A830, c, auto_multibounce]
     - [0x76A920]
@@ -5873,7 +5728,6 @@ segments:
     type: code
     start: 0x76D760
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x76D760, c]
     - [0x76D850, data]
@@ -5881,7 +5735,6 @@ segments:
     type: code
     start: 0x76F330
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x76F330, c]
     - [0x76F420, data]
@@ -5889,7 +5742,6 @@ segments:
     type: code
     start: 0x770F30
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x770F30, c]
     - [0x771020, data]
@@ -5897,7 +5749,6 @@ segments:
     type: code
     start: 0x772BA0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x772BA0, c]
     - [0x772C50, data]
@@ -5905,7 +5756,6 @@ segments:
     type: code
     start: 0x775100
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x775100, c]
     - [0x7751B0, data]
@@ -5913,7 +5763,6 @@ segments:
     type: code
     start: 0x777690
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x777690, c]
     - [0x777740, data]
@@ -5921,7 +5770,6 @@ segments:
     type: code
     start: 0x779C90
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x779C90, c]
     - [0x779E30, data]
@@ -5929,7 +5777,6 @@ segments:
     type: code
     start: 0x77CB80
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x77CB80, c]
     - [0x77CC30, data]
@@ -5937,7 +5784,6 @@ segments:
     type: code
     start: 0x77F240
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x77F240, c]
     - [0x77F3D0, data]
@@ -5945,7 +5791,6 @@ segments:
     type: code
     start: 0x781920
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x781920, c]
     - [0x781AF0, data]
@@ -5953,7 +5798,6 @@ segments:
     type: code
     start: 0x783BA0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x783BA0, c]
     - [0x783C90, data]
@@ -5961,7 +5805,6 @@ segments:
     type: code
     start: 0x785B20
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x785B20, c]
     - [0x785C20, data]
@@ -5969,7 +5812,6 @@ segments:
     type: code
     start: 0x789E60
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x789E60, c]
     - [0x78A490]
@@ -5977,7 +5819,6 @@ segments:
     type: code
     start: 0x78B600
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x78B600, c]
     - [0x78C070]
@@ -5985,7 +5826,6 @@ segments:
     type: code
     start: 0x78D150
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x78D150, c]
     - [0x78D770]
@@ -5993,7 +5833,6 @@ segments:
     type: code
     start: 0x78E7D0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x78E7D0, c]
     - [0x78EEC0]
@@ -6001,7 +5840,6 @@ segments:
     type: code
     start: 0x7900D0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7900D0, c]
     - [0x7909C0]
@@ -6009,7 +5847,6 @@ segments:
     type: code
     start: 0x791D90
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x791D90, c]
     - [0x7923C0]
@@ -6017,7 +5854,6 @@ segments:
     type: code
     start: 0x793D20
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x793D20, c]
     - [0x794240]
@@ -6025,7 +5861,6 @@ segments:
     type: code
     start: 0x7952E0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7952E0, c]
     - [0x7959B0]
@@ -6033,7 +5868,6 @@ segments:
     type: code
     start: 0x796FC0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x796FC0, c]
     - [0x7984B0]
@@ -6041,7 +5875,6 @@ segments:
     type: code
     start: 0x7997B0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7997B0, c]
     - [0x79ACA0]
@@ -6049,7 +5882,6 @@ segments:
     type: code
     start: 0x79BFA0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x79BFA0, c]
     - [0x79C4D0]
@@ -6057,20 +5889,17 @@ segments:
     type: code
     start: 0x79D8A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x79D8A0, c]
     - [0x79DE50]
   - type: code # todo identify
     start: 0x79EF40
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x79EF40, bin]
   - type: code # todo identify
     start: 0x7A89A0
     vram: 0x802A1000
-    overlay: True
     subsegments:
     - [0x7A89A0, bin]
   - [0x7B5960, bin]  # todo identify
@@ -6078,7 +5907,6 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
-    overlay: True
     subsegments:
     - [0x7E0E80, c]
     - [0x7E2AA0, c]
@@ -6094,7 +5922,6 @@ segments:
   - name: machi
     dir: world/area_mac/machi
     type: code
-    overlay: True
     start: 0x7E73A0
     vram: 0x80240000
     subsegments:
@@ -6108,7 +5935,6 @@ segments:
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
-    overlay: True
     start: 0x7EAD10
     vram: 0x80240000
     subsegments:
@@ -6131,7 +5957,6 @@ segments:
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code
-    overlay: True
     start: 0x800880
     vram: 0x80240000
     subsegments:
@@ -6153,7 +5978,6 @@ segments:
   - name: mac_02
     dir: world/area_mac/mac_02
     type: code
-    overlay: True
     start: 0x8232C0
     vram: 0x80240000
     subsegments:
@@ -6172,7 +5996,6 @@ segments:
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
-    overlay: True
     start: 0x831800
     vram: 0x80240000
     subsegments:
@@ -6191,7 +6014,6 @@ segments:
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code
-    overlay: True
     start: 0x842BD0
     vram: 0x80240000
     subsegments:
@@ -6215,7 +6037,6 @@ segments:
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code
-    overlay: True
     start: 0x852170
     vram: 0x80240000
     subsegments:
@@ -6232,7 +6053,6 @@ segments:
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
-    overlay: True
     start: 0x864B40
     vram: 0x80240000
     subsegments:
@@ -6246,7 +6066,6 @@ segments:
   - name: tik_01
     dir: world/area_tik/tik_01
     type: code
-    overlay: True
     start: 0x8694B0
     vram: 0x80240000
     subsegments:
@@ -6261,7 +6080,6 @@ segments:
   - name: tik_02
     dir: world/area_tik/tik_02
     type: code
-    overlay: True
     start: 0x86C740
     vram: 0x80240000
     subsegments:
@@ -6276,7 +6094,6 @@ segments:
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
-    overlay: True
     start: 0x86EB00
     vram: 0x80240000
     subsegments:
@@ -6292,7 +6109,6 @@ segments:
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code
-    overlay: True
     start: 0x871A30
     vram: 0x80240000
     subsegments:
@@ -6307,7 +6123,6 @@ segments:
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
-    overlay: True
     start: 0x874DC0
     vram: 0x80240000
     subsegments:
@@ -6322,7 +6137,6 @@ segments:
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
-    overlay: True
     start: 0x876EE0
     vram: 0x80240000
     subsegments:
@@ -6336,7 +6150,6 @@ segments:
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code
-    overlay: True
     start: 0x879BE0
     vram: 0x80240000
     subsegments:
@@ -6351,7 +6164,6 @@ segments:
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code
-    overlay: True
     start: 0x87EDF0
     vram: 0x80240000
     subsegments:
@@ -6366,7 +6178,6 @@ segments:
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code
-    overlay: True
     start: 0x8821C0
     vram: 0x80240000
     subsegments:
@@ -6381,7 +6192,6 @@ segments:
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
-    overlay: True
     start: 0x8863C0
     vram: 0x80240000
     subsegments:
@@ -6395,7 +6205,6 @@ segments:
   - name: tik_12
     dir: world/area_tik/tik_12
     type: code
-    overlay: True
     start: 0x888BD0
     vram: 0x80240000
     subsegments:
@@ -6410,7 +6219,6 @@ segments:
   - name: tik_14
     dir: world/area_tik/tik_14
     type: code
-    overlay: True
     start: 0x88D600
     vram: 0x80240000
     subsegments:
@@ -6424,7 +6232,6 @@ segments:
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
-    overlay: True
     start: 0x88FBA0
     vram: 0x80240000
     subsegments:
@@ -6438,7 +6245,6 @@ segments:
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
-    overlay: True
     start: 0x892A20
     vram: 0x80240000
     subsegments:
@@ -6452,7 +6258,6 @@ segments:
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
-    overlay: True
     start: 0x8956E0
     vram: 0x80240000
     subsegments:
@@ -6466,7 +6271,6 @@ segments:
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
-    overlay: True
     start: 0x8975E0
     vram: 0x80240000
     subsegments:
@@ -6479,7 +6283,6 @@ segments:
   - name: tik_20
     dir: world/area_tik/tik_20
     type: code
-    overlay: True
     start: 0x89A350
     vram: 0x80240000
     subsegments:
@@ -6492,7 +6295,6 @@ segments:
   - name: tik_21
     dir: world/area_tik/tik_21
     type: code
-    overlay: True
     start: 0x89D7A0
     vram: 0x80240000
     subsegments:
@@ -6504,7 +6306,6 @@ segments:
   - name: tik_22
     dir: world/area_tik/tik_22
     type: code
-    overlay: True
     start: 0x89FEC0
     vram: 0x80240000
     subsegments:
@@ -6516,7 +6317,6 @@ segments:
   - name: tik_23
     dir: world/area_tik/tik_23
     type: code
-    overlay: True
     start: 0x8A23D0
     vram: 0x80240000
     subsegments:
@@ -6529,7 +6329,6 @@ segments:
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
-    overlay: True
     start: 0x8A5A80
     vram: 0x80240000
     subsegments:
@@ -6544,7 +6343,6 @@ segments:
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
-    overlay: True
     start: 0x8A7F80
     vram: 0x80240000
     subsegments:
@@ -6557,7 +6355,6 @@ segments:
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code
-    overlay: True
     start: 0x8A9A10
     vram: 0x80240000
     subsegments:
@@ -6570,7 +6367,6 @@ segments:
   - name: kgr_02
     dir: world/area_kgr/kgr_02
     type: code
-    overlay: True
     start: 0x8AA450
     vram: 0x80240000
     subsegments:
@@ -6584,7 +6380,6 @@ segments:
   - name: kmr_00
     dir: world/area_kmr/kmr_00
     type: code
-    overlay: True
     start: 0x8ABF90
     vram: 0x80240000
     subsegments:
@@ -6598,7 +6393,6 @@ segments:
   - name: kmr_02
     dir: world/area_kmr/kmr_02
     type: code
-    overlay: True
     start: 0x8B0070
     vram: 0x80240000
     subsegments:
@@ -6619,7 +6413,6 @@ segments:
   - name: kmr_03
     dir: world/area_kmr/kmr_03
     type: code
-    overlay: True
     start: 0x8C7F90
     vram: 0x80240000
     subsegments:
@@ -6632,7 +6425,6 @@ segments:
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
-    overlay: True
     start: 0x8CA900
     vram: 0x80240000
     subsegments:
@@ -6646,7 +6438,6 @@ segments:
   - name: kmr_05
     dir: world/area_kmr/kmr_05
     type: code
-    overlay: True
     start: 0x8CE070
     vram: 0x80240000
     subsegments:
@@ -6660,7 +6451,6 @@ segments:
   - name: kmr_06
     dir: world/area_kmr/kmr_06
     type: code
-    overlay: True
     start: 0x8D1510
     vram: 0x80240000
     subsegments:
@@ -6674,7 +6464,6 @@ segments:
   - name: kmr_07
     dir: world/area_kmr/kmr_07
     type: code
-    overlay: True
     start: 0x8D3DC0
     vram: 0x80240000
     subsegments:
@@ -6685,7 +6474,6 @@ segments:
   - name: kmr_09
     dir: world/area_kmr/kmr_09
     type: code
-    overlay: True
     start: 0x8D5E00
     vram: 0x80240000
     subsegments:
@@ -6697,7 +6485,6 @@ segments:
   - name: kmr_10
     dir: world/area_kmr/kmr_10
     type: code
-    overlay: True
     start: 0x8D84D0
     vram: 0x80240000
     subsegments:
@@ -6711,7 +6498,6 @@ segments:
   - name: kmr_11
     dir: world/area_kmr/kmr_11
     type: code
-    overlay: True
     start: 0x8DA100
     vram: 0x80240000
     subsegments:
@@ -6729,7 +6515,6 @@ segments:
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code
-    overlay: True
     start: 0x8EB360
     vram: 0x80240000
     subsegments:
@@ -6739,7 +6524,6 @@ segments:
   - name: kmr_20
     dir: world/area_kmr/kmr_20
     type: code
-    overlay: True
     start: 0x8EBE20
     vram: 0x80240000
     subsegments:
@@ -6768,7 +6552,6 @@ segments:
   - name: kmr_21
     dir: world/area_kmr/kmr_21
     type: code
-    overlay: True
     start: 0x8FEE80
     vram: 0x80240000
     subsegments:
@@ -6779,7 +6562,6 @@ segments:
   - name: kmr_22
     dir: world/area_kmr/kmr_22
     type: code
-    overlay: True
     start: 0x8FF670
     vram: 0x80240000
     subsegments:
@@ -6792,7 +6574,6 @@ segments:
   - name: kmr_23
     dir: world/area_kmr/kmr_23
     type: code
-    overlay: True
     start: 0x907A30
     vram: 0x80240000
     subsegments:
@@ -6803,7 +6584,6 @@ segments:
   - name: kmr_24
     dir: world/area_kmr/kmr_24
     type: code
-    overlay: True
     start: 0x90B240
     vram: 0x80240000
     subsegments:
@@ -6814,7 +6594,6 @@ segments:
   - name: kmr_30
     dir: world/area_kmr/kmr_30
     type: code
-    overlay: True
     start: 0x90B6D0
     vram: 0x80240000
     subsegments:
@@ -6826,7 +6605,6 @@ segments:
   - name: iwa_00
     dir: world/area_iwa/iwa_00
     type: code
-    overlay: True
     start: 0x90CC40
     vram: 0x80240000
     subsegments:
@@ -6837,7 +6615,6 @@ segments:
   - name: iwa_01
     dir: world/area_iwa/iwa_01
     type: code
-    overlay: True
     start: 0x90F6B0
     vram: 0x80240000
     subsegments:
@@ -6852,7 +6629,6 @@ segments:
   - name: iwa_02
     dir: world/area_iwa/iwa_02
     type: code
-    overlay: True
     start: 0x915D70
     vram: 0x80240000
     subsegments:
@@ -6864,7 +6640,6 @@ segments:
   - name: iwa_03
     dir: world/area_iwa/iwa_03
     type: code
-    overlay: True
     start: 0x918BB0
     vram: 0x80240000
     subsegments:
@@ -6877,7 +6652,6 @@ segments:
   - name: iwa_04
     dir: world/area_iwa/iwa_04
     type: code
-    overlay: True
     start: 0x91B8E0
     vram: 0x80240000
     subsegments:
@@ -6889,7 +6663,6 @@ segments:
   - name: iwa_10
     dir: world/area_iwa/iwa_10
     type: code
-    overlay: True
     start: 0x91E570
     vram: 0x80240000
     subsegments:
@@ -6909,7 +6682,6 @@ segments:
   - name: iwa_11
     dir: world/area_iwa/iwa_11
     type: code
-    overlay: True
     start: 0x9269F0
     vram: 0x80240000
     subsegments:
@@ -6923,7 +6695,6 @@ segments:
   - name: sbk_00
     dir: world/area_sbk/sbk_00
     type: code
-    overlay: True
     start: 0x929270
     vram: 0x80240000
     subsegments:
@@ -6933,7 +6704,6 @@ segments:
   - name: sbk_01
     dir: world/area_sbk/sbk_01
     type: code
-    overlay: True
     start: 0x929A90
     vram: 0x80240000
     subsegments:
@@ -6943,7 +6713,6 @@ segments:
   - name: sbk_02
     dir: world/area_sbk/sbk_02
     type: code
-    overlay: True
     start: 0x92A2B0
     vram: 0x80240000
     subsegments:
@@ -6958,7 +6727,6 @@ segments:
   - name: sbk_03
     dir: world/area_sbk/sbk_03
     type: code
-    overlay: True
     start: 0x92F8B0
     vram: 0x80240000
     subsegments:
@@ -6970,7 +6738,6 @@ segments:
   - name: sbk_04
     dir: world/area_sbk/sbk_04
     type: code
-    overlay: True
     start: 0x9304D0
     vram: 0x80240000
     subsegments:
@@ -6982,7 +6749,6 @@ segments:
   - name: sbk_05
     dir: world/area_sbk/sbk_05
     type: code
-    overlay: True
     start: 0x930CF0
     vram: 0x80240000
     subsegments:
@@ -6995,7 +6761,6 @@ segments:
   - name: sbk_06
     dir: world/area_sbk/sbk_06
     type: code
-    overlay: True
     start: 0x9325C0
     vram: 0x80240000
     subsegments:
@@ -7008,7 +6773,6 @@ segments:
   - name: sbk_10
     dir: world/area_sbk/sbk_10
     type: code
-    overlay: True
     start: 0x933C80
     vram: 0x80240000
     subsegments:
@@ -7019,7 +6783,6 @@ segments:
   - name: sbk_11
     dir: world/area_sbk/sbk_11
     type: code
-    overlay: True
     start: 0x934040
     vram: 0x80240000
     subsegments:
@@ -7031,7 +6794,6 @@ segments:
   - name: sbk_12
     dir: world/area_sbk/sbk_12
     type: code
-    overlay: True
     start: 0x934D40
     vram: 0x80240000
     subsegments:
@@ -7043,7 +6805,6 @@ segments:
   - name: sbk_13
     dir: world/area_sbk/sbk_13
     type: code
-    overlay: True
     start: 0x9357E0
     vram: 0x80240000
     subsegments:
@@ -7055,7 +6816,6 @@ segments:
   - name: sbk_14
     dir: world/area_sbk/sbk_14
     type: code
-    overlay: True
     start: 0x9366E0
     vram: 0x80240000
     subsegments:
@@ -7066,7 +6826,6 @@ segments:
   - name: sbk_15
     dir: world/area_sbk/sbk_15
     type: code
-    overlay: True
     start: 0x936CD0
     vram: 0x80240000
     subsegments:
@@ -7078,7 +6837,6 @@ segments:
   - name: sbk_16
     dir: world/area_sbk/sbk_16
     type: code
-    overlay: True
     start: 0x937570
     vram: 0x80240000
     subsegments:
@@ -7090,7 +6848,6 @@ segments:
   - name: sbk_20
     dir: world/area_sbk/sbk_20
     type: code
-    overlay: True
     start: 0x938590
     vram: 0x80240000
     subsegments:
@@ -7103,7 +6860,6 @@ segments:
   - name: sbk_21
     dir: world/area_sbk/sbk_21
     type: code
-    overlay: True
     start: 0x939560
     vram: 0x80240000
     subsegments:
@@ -7113,7 +6869,6 @@ segments:
   - name: sbk_22
     dir: world/area_sbk/sbk_22
     type: code
-    overlay: True
     start: 0x939930
     vram: 0x80240000
     subsegments:
@@ -7125,7 +6880,6 @@ segments:
   - name: sbk_23
     dir: world/area_sbk/sbk_23
     type: code
-    overlay: True
     start: 0x93A760
     vram: 0x80240000
     subsegments:
@@ -7136,7 +6890,6 @@ segments:
   - name: sbk_24
     dir: world/area_sbk/sbk_24
     type: code
-    overlay: True
     start: 0x93AC30
     vram: 0x80240000
     subsegments:
@@ -7149,7 +6902,6 @@ segments:
   - name: sbk_25
     dir: world/area_sbk/sbk_25
     type: code
-    overlay: True
     start: 0x93C280
     vram: 0x80240000
     subsegments:
@@ -7163,7 +6915,6 @@ segments:
   - name: sbk_26
     dir: world/area_sbk/sbk_26
     type: code
-    overlay: True
     start: 0x93DCD0
     vram: 0x80240000
     subsegments:
@@ -7177,7 +6928,6 @@ segments:
   - name: sbk_30
     dir: world/area_sbk/sbk_30
     type: code
-    overlay: True
     start: 0x93F5B0
     vram: 0x80240000
     subsegments:
@@ -7187,7 +6937,6 @@ segments:
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code
-    overlay: True
     start: 0x944000
     vram: 0x80240000
     subsegments:
@@ -7199,7 +6948,6 @@ segments:
   - name: sbk_32
     dir: world/area_sbk/sbk_32
     type: code
-    overlay: True
     start: 0x944A60
     vram: 0x80240000
     subsegments:
@@ -7210,7 +6958,6 @@ segments:
   - name: sbk_33
     dir: world/area_sbk/sbk_33
     type: code
-    overlay: True
     start: 0x9459D0
     vram: 0x80240000
     subsegments:
@@ -7221,7 +6968,6 @@ segments:
   - name: sbk_34
     dir: world/area_sbk/sbk_34
     type: code
-    overlay: True
     start: 0x945ED0
     vram: 0x80240000
     subsegments:
@@ -7234,7 +6980,6 @@ segments:
   - name: sbk_35
     dir: world/area_sbk/sbk_35
     type: code
-    overlay: True
     start: 0x9486B0
     vram: 0x80240000
     subsegments:
@@ -7246,7 +6991,6 @@ segments:
   - name: sbk_36
     dir: world/area_sbk/sbk_36
     type: code
-    overlay: True
     start: 0x949E60
     vram: 0x80240000
     subsegments:
@@ -7258,7 +7002,6 @@ segments:
   - name: sbk_40
     dir: world/area_sbk/sbk_40
     type: code
-    overlay: True
     start: 0x94B3A0
     vram: 0x80240000
     subsegments:
@@ -7271,7 +7014,6 @@ segments:
   - name: sbk_41
     dir: world/area_sbk/sbk_41
     type: code
-    overlay: True
     start: 0x94C040
     vram: 0x80240000
     subsegments:
@@ -7282,7 +7024,6 @@ segments:
   - name: sbk_42
     dir: world/area_sbk/sbk_42
     type: code
-    overlay: True
     start: 0x94C510
     vram: 0x80240000
     subsegments:
@@ -7294,7 +7035,6 @@ segments:
   - name: sbk_43
     dir: world/area_sbk/sbk_43
     type: code
-    overlay: True
     start: 0x94D170
     vram: 0x80240000
     subsegments:
@@ -7305,7 +7045,6 @@ segments:
   - name: sbk_44
     dir: world/area_sbk/sbk_44
     type: code
-    overlay: True
     start: 0x94D5A0
     vram: 0x80240000
     subsegments:
@@ -7317,7 +7056,6 @@ segments:
   - name: sbk_45
     dir: world/area_sbk/sbk_45
     type: code
-    overlay: True
     start: 0x94E4A0
     vram: 0x80240000
     subsegments:
@@ -7328,7 +7066,6 @@ segments:
   - name: sbk_46
     dir: world/area_sbk/sbk_46
     type: code
-    overlay: True
     start: 0x94E9A0
     vram: 0x80240000
     subsegments:
@@ -7343,7 +7080,6 @@ segments:
   - name: sbk_50
     dir: world/area_sbk/sbk_50
     type: code
-    overlay: True
     start: 0x950610
     vram: 0x80240000
     subsegments:
@@ -7353,7 +7089,6 @@ segments:
   - name: sbk_51
     dir: world/area_sbk/sbk_51
     type: code
-    overlay: True
     start: 0x950970
     vram: 0x80240000
     subsegments:
@@ -7365,7 +7100,6 @@ segments:
   - name: sbk_52
     dir: world/area_sbk/sbk_52
     type: code
-    overlay: True
     start: 0x951670
     vram: 0x80240000
     subsegments:
@@ -7376,7 +7110,6 @@ segments:
   - name: sbk_53
     dir: world/area_sbk/sbk_53
     type: code
-    overlay: True
     start: 0x951AE0
     vram: 0x80240000
     subsegments:
@@ -7388,7 +7121,6 @@ segments:
   - name: sbk_54
     dir: world/area_sbk/sbk_54
     type: code
-    overlay: True
     start: 0x952580
     vram: 0x80240000
     subsegments:
@@ -7399,7 +7131,6 @@ segments:
   - name: sbk_55
     dir: world/area_sbk/sbk_55
     type: code
-    overlay: True
     start: 0x952A50
     vram: 0x80240000
     subsegments:
@@ -7413,7 +7144,6 @@ segments:
   - name: sbk_56
     dir: world/area_sbk/sbk_56
     type: code
-    overlay: True
     start: 0x953FC0
     vram: 0x80240000
     subsegments:
@@ -7425,7 +7155,6 @@ segments:
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
-    overlay: True
     start: 0x9569F0
     vram: 0x80240000
     subsegments:
@@ -7437,7 +7166,6 @@ segments:
   - name: sbk_61
     dir: world/area_sbk/sbk_61
     type: code
-    overlay: True
     start: 0x956F90
     vram: 0x80240000
     subsegments:
@@ -7448,7 +7176,6 @@ segments:
   - name: sbk_62
     dir: world/area_sbk/sbk_62
     type: code
-    overlay: True
     start: 0x957350
     vram: 0x80240000
     subsegments:
@@ -7460,7 +7187,6 @@ segments:
   - name: sbk_63
     dir: world/area_sbk/sbk_63
     type: code
-    overlay: True
     start: 0x957D70
     vram: 0x80240000
     subsegments:
@@ -7472,7 +7198,6 @@ segments:
   - name: sbk_64
     dir: world/area_sbk/sbk_64
     type: code
-    overlay: True
     start: 0x958590
     vram: 0x80240000
     subsegments:
@@ -7483,7 +7208,6 @@ segments:
   - name: sbk_65
     dir: world/area_sbk/sbk_65
     type: code
-    overlay: True
     start: 0x958950
     vram: 0x80240000
     subsegments:
@@ -7493,7 +7217,6 @@ segments:
   - name: sbk_66
     dir: world/area_sbk/sbk_66
     type: code
-    overlay: True
     start: 0x958CB0
     vram: 0x80240000
     subsegments:
@@ -7507,7 +7230,6 @@ segments:
   - name: sbk_99
     dir: world/area_sbk/sbk_99
     type: code
-    overlay: True
     start: 0x95AEB0
     vram: 0x80240000
     subsegments:
@@ -7518,7 +7240,6 @@ segments:
   - name: dro_01
     dir: world/area_dro/dro_01
     type: code
-    overlay: True
     start: 0x95B200
     vram: 0x80240000
     subsegments:
@@ -7530,7 +7251,6 @@ segments:
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
-    overlay: True
     start: 0x9691C0
     vram: 0x80240000
     subsegments:
@@ -7548,7 +7268,6 @@ segments:
   - name: isk_01
     dir: world/area_isk/isk_01
     type: code
-    overlay: True
     start: 0x978140
     vram: 0x80240000
     subsegments:
@@ -7560,7 +7279,6 @@ segments:
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
-    overlay: True
     start: 0x978710
     vram: 0x80240000
     subsegments:
@@ -7576,7 +7294,6 @@ segments:
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
-    overlay: True
     start: 0x979E50
     vram: 0x80240000
     subsegments:
@@ -7588,7 +7305,6 @@ segments:
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code
-    overlay: True
     start: 0x97B630
     vram: 0x80240000
     subsegments:
@@ -7604,7 +7320,6 @@ segments:
   - name: isk_05
     dir: world/area_isk/isk_05
     type: code
-    overlay: True
     start: 0x97DAD0
     vram: 0x80240000
     subsegments:
@@ -7616,7 +7331,6 @@ segments:
   - name: isk_06
     dir: world/area_isk/isk_06
     type: code
-    overlay: True
     start: 0x980A20
     vram: 0x80240000
     subsegments:
@@ -7628,7 +7342,6 @@ segments:
   - name: isk_07
     dir: world/area_isk/isk_07
     type: code
-    overlay: True
     start: 0x982440
     vram: 0x80240000
     subsegments:
@@ -7645,7 +7358,6 @@ segments:
   - name: isk_08
     dir: world/area_isk/isk_08
     type: code
-    overlay: True
     start: 0x984E30
     vram: 0x80240000
     subsegments:
@@ -7657,7 +7369,6 @@ segments:
   - name: isk_09
     dir: world/area_isk/isk_09
     type: code
-    overlay: True
     start: 0x9864E0
     vram: 0x80240000
     subsegments:
@@ -7672,7 +7383,6 @@ segments:
   - name: isk_10
     dir: world/area_isk/isk_10
     type: code
-    overlay: True
     start: 0x988B60
     vram: 0x80240000
     subsegments:
@@ -7683,7 +7393,6 @@ segments:
   - name: isk_11
     dir: world/area_isk/isk_11
     type: code
-    overlay: True
     start: 0x98AA10
     vram: 0x80240000
     subsegments:
@@ -7699,7 +7408,6 @@ segments:
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code
-    overlay: True
     start: 0x98D640
     vram: 0x80240000
     subsegments:
@@ -7712,7 +7420,6 @@ segments:
   - name: isk_13
     dir: world/area_isk/isk_13
     type: code
-    overlay: True
     start: 0x98F7E0
     vram: 0x80240000
     subsegments:
@@ -7723,7 +7430,6 @@ segments:
   - name: isk_14
     dir: world/area_isk/isk_14
     type: code
-    overlay: True
     start: 0x992730
     vram: 0x80240000
     subsegments:
@@ -7735,7 +7441,6 @@ segments:
   - name: isk_16
     dir: world/area_isk/isk_16
     type: code
-    overlay: True
     start: 0x9951F0
     vram: 0x80240000
     subsegments:
@@ -7749,7 +7454,6 @@ segments:
   - name: isk_18
     dir: world/area_isk/isk_18
     type: code
-    overlay: True
     start: 0x997F70
     vram: 0x80240000
     subsegments:
@@ -7761,7 +7465,6 @@ segments:
   - name: isk_19
     dir: world/area_isk/isk_19
     type: code
-    overlay: True
     start: 0x999740
     vram: 0x80240000
     subsegments:
@@ -7773,7 +7476,6 @@ segments:
   - name: trd_00
     dir: world/area_trd/trd_00
     type: code
-    overlay: True
     start: 0x999C70
     vram: 0x80240000
     subsegments:
@@ -7788,7 +7490,6 @@ segments:
   - name: trd_01
     dir: world/area_trd/trd_01
     type: code
-    overlay: True
     start: 0x99C990
     vram: 0x80240000
     subsegments:
@@ -7803,7 +7504,6 @@ segments:
   - name: trd_02
     dir: world/area_trd/trd_02
     type: code
-    overlay: True
     start: 0x9A0FE0
     vram: 0x80240000
     subsegments:
@@ -7817,7 +7517,6 @@ segments:
   - name: trd_03
     dir: world/area_trd/trd_03
     type: code
-    overlay: True
     start: 0x9A4650
     vram: 0x80240000
     subsegments:
@@ -7832,7 +7531,6 @@ segments:
   - name: trd_04
     dir: world/area_trd/trd_04
     type: code
-    overlay: True
     start: 0x9A83F0
     vram: 0x80240000
     subsegments:
@@ -7846,7 +7544,6 @@ segments:
   - name: trd_05
     dir: world/area_trd/trd_05
     type: code
-    overlay: True
     start: 0x9AE700
     vram: 0x80240000
     subsegments:
@@ -7860,7 +7557,6 @@ segments:
   - name: trd_06
     dir: world/area_trd/trd_06
     type: code
-    overlay: True
     start: 0x9B1790
     vram: 0x80240000
     subsegments:
@@ -7875,7 +7571,6 @@ segments:
   - name: trd_07
     dir: world/area_trd/trd_07
     type: code
-    overlay: True
     start: 0x9B6980
     vram: 0x80240000
     subsegments:
@@ -7889,7 +7584,6 @@ segments:
   - name: trd_08
     dir: world/area_trd/trd_08
     type: code
-    overlay: True
     start: 0x9BB2A0
     vram: 0x80240000
     subsegments:
@@ -7902,7 +7596,6 @@ segments:
   - name: trd_09
     dir: world/area_trd/trd_09
     type: code
-    overlay: True
     start: 0x9BD660
     vram: 0x80240000
     subsegments:
@@ -7917,7 +7610,6 @@ segments:
   - name: trd_10
     dir: world/area_trd/trd_10
     type: code
-    overlay: True
     start: 0x9C2910
     vram: 0x80240000
     subsegments:
@@ -7930,7 +7622,6 @@ segments:
   - name: nok_01
     dir: world/area_nok/nok_01
     type: code
-    overlay: True
     start: 0x9C53E0
     vram: 0x80240000
     subsegments:
@@ -7948,7 +7639,6 @@ segments:
   - name: nok_02
     dir: world/area_nok/nok_02
     type: code
-    overlay: True
     start: 0x9D7020
     vram: 0x80240000
     subsegments:
@@ -7972,7 +7662,6 @@ segments:
   - name: nok_03
     dir: world/area_nok/nok_03
     type: code
-    overlay: True
     start: 0x9EB7F0
     vram: 0x80240000
     subsegments:
@@ -7984,7 +7673,6 @@ segments:
   - name: nok_04
     dir: world/area_nok/nok_04
     type: code
-    overlay: True
     start: 0x9EDBF0
     vram: 0x80240000
     subsegments:
@@ -7997,7 +7685,6 @@ segments:
   - name: nok_11
     dir: world/area_nok/nok_11
     type: code
-    overlay: True
     start: 0x9F4A40
     vram: 0x80240000
     subsegments:
@@ -8009,7 +7696,6 @@ segments:
   - name: nok_12
     dir: world/area_nok/nok_12
     type: code
-    overlay: True
     start: 0x9FA7F0
     vram: 0x80240000
     subsegments:
@@ -8028,7 +7714,6 @@ segments:
   - name: nok_13
     dir: world/area_nok/nok_13
     type: code
-    overlay: True
     start: 0xA00600
     vram: 0x80240000
     subsegments:
@@ -8043,7 +7728,6 @@ segments:
   - name: nok_14
     dir: world/area_nok/nok_14
     type: code
-    overlay: True
     start: 0xA02840
     vram: 0x80240000
     subsegments:
@@ -8059,7 +7743,6 @@ segments:
   - name: nok_15
     dir: world/area_nok/nok_15
     type: code
-    overlay: True
     start: 0xA06F00
     vram: 0x80240000
     subsegments:
@@ -8073,7 +7756,6 @@ segments:
   - name: hos_00
     dir: world/area_hos/hos_00
     type: code
-    overlay: True
     start: 0xA0BCF0
     vram: 0x80240000
     subsegments:
@@ -8091,7 +7773,6 @@ segments:
   - name: hos_01
     dir: world/area_hos/hos_01
     type: code
-    overlay: True
     start: 0xA10880
     vram: 0x80240000
     subsegments:
@@ -8107,7 +7788,6 @@ segments:
   - name: hos_02
     dir: world/area_hos/hos_02
     type: code
-    overlay: True
     start: 0xA16220
     vram: 0x80240000
     subsegments:
@@ -8123,7 +7803,6 @@ segments:
   - name: hos_03
     dir: world/area_hos/hos_03
     type: code
-    overlay: True
     start: 0xA1B100
     vram: 0x80240000
     subsegments:
@@ -8142,7 +7821,6 @@ segments:
   - name: hos_04
     dir: world/area_hos/hos_04
     type: code
-    overlay: True
     start: 0xA26ED0
     vram: 0x80240000
     subsegments:
@@ -8162,7 +7840,6 @@ segments:
   - name: hos_05
     dir: world/area_hos/hos_05
     type: code
-    overlay: True
     start: 0xA2A240
     vram: 0x80240000
     subsegments:
@@ -8180,7 +7857,6 @@ segments:
   - name: hos_06
     dir: world/area_hos/hos_06
     type: code
-    overlay: True
     start: 0xA394E0
     vram: 0x80240000
     subsegments:
@@ -8197,7 +7873,6 @@ segments:
   - name: hos_10
     dir: world/area_hos/hos_10
     type: code
-    overlay: True
     start: 0xA3F740
     vram: 0x80240000
     subsegments:
@@ -8213,7 +7888,6 @@ segments:
   - name: hos_20
     dir: world/area_hos/hos_20
     type: code
-    overlay: True
     start: 0xA45930
     vram: 0x80240000
     subsegments:
@@ -8225,7 +7899,6 @@ segments:
   - name: kpa_01
     dir: world/area_kpa/kpa_01
     type: code
-    overlay: True
     start: 0xA46F60
     vram: 0x80240000
     subsegments:
@@ -8239,7 +7912,6 @@ segments:
   - name: kpa_03
     dir: world/area_kpa/kpa_03
     type: code
-    overlay: True
     start: 0xA485C0
     vram: 0x80240000
     subsegments:
@@ -8253,7 +7925,6 @@ segments:
   - name: kpa_04
     dir: world/area_kpa/kpa_04
     type: code
-    overlay: True
     start: 0xA4BF60
     vram: 0x80240000
     subsegments:
@@ -8264,7 +7935,6 @@ segments:
   - name: kpa_08
     dir: world/area_kpa/kpa_08
     type: code
-    overlay: True
     start: 0xA4CA20
     vram: 0x80240000
     subsegments:
@@ -8278,7 +7948,6 @@ segments:
   - name: kpa_09
     dir: world/area_kpa/kpa_09
     type: code
-    overlay: True
     start: 0xA4F000
     vram: 0x80240000
     subsegments:
@@ -8292,7 +7961,6 @@ segments:
   - name: kpa_10
     dir: world/area_kpa/kpa_10
     type: code
-    overlay: True
     start: 0xA51980
     vram: 0x80240000
     subsegments:
@@ -8303,7 +7971,6 @@ segments:
   - name: kpa_11
     dir: world/area_kpa/kpa_11
     type: code
-    overlay: True
     start: 0xA528C0
     vram: 0x80240000
     subsegments:
@@ -8317,7 +7984,6 @@ segments:
   - name: kpa_12
     dir: world/area_kpa/kpa_12
     type: code
-    overlay: True
     start: 0xA54950
     vram: 0x80240000
     subsegments:
@@ -8330,7 +7996,6 @@ segments:
   - name: kpa_13
     dir: world/area_kpa/kpa_13
     type: code
-    overlay: True
     start: 0xA55F20
     vram: 0x80240000
     subsegments:
@@ -8344,7 +8009,6 @@ segments:
   - name: kpa_14
     dir: world/area_kpa/kpa_14
     type: code
-    overlay: True
     start: 0xA574B0
     vram: 0x80240000
     subsegments:
@@ -8359,7 +8023,6 @@ segments:
   - name: kpa_15
     dir: world/area_kpa/kpa_15
     type: code
-    overlay: True
     start: 0xA59390
     vram: 0x80240000
     subsegments:
@@ -8371,7 +8034,6 @@ segments:
   - name: kpa_16
     dir: world/area_kpa/kpa_16
     type: code
-    overlay: True
     start: 0xA5A030
     vram: 0x80240000
     subsegments:
@@ -8383,7 +8045,6 @@ segments:
   - name: kpa_17
     dir: world/area_kpa/kpa_17
     type: code
-    overlay: True
     start: 0xA5CA20
     vram: 0x80240000
     subsegments:
@@ -8396,7 +8057,6 @@ segments:
   - name: kpa_32
     dir: world/area_kpa/kpa_32
     type: code
-    overlay: True
     start: 0xA5E0C0
     vram: 0x80240000
     subsegments:
@@ -8408,7 +8068,6 @@ segments:
   - name: kpa_33
     dir: world/area_kpa/kpa_33
     type: code
-    overlay: True
     start: 0xA5F080
     vram: 0x80240000
     subsegments:
@@ -8420,7 +8079,6 @@ segments:
   - name: kpa_40
     dir: world/area_kpa/kpa_40
     type: code
-    overlay: True
     start: 0xA60040
     vram: 0x80240000
     subsegments:
@@ -8431,7 +8089,6 @@ segments:
   - name: kpa_41
     dir: world/area_kpa/kpa_41
     type: code
-    overlay: True
     start: 0xA60470
     vram: 0x80240000
     subsegments:
@@ -8442,7 +8099,6 @@ segments:
   - name: kpa_50
     dir: world/area_kpa/kpa_50
     type: code
-    overlay: True
     start: 0xA609D0
     vram: 0x80240000
     subsegments:
@@ -8453,7 +8109,6 @@ segments:
   - name: kpa_51
     dir: world/area_kpa/kpa_51
     type: code
-    overlay: True
     start: 0xA64090
     vram: 0x80240000
     subsegments:
@@ -8466,7 +8121,6 @@ segments:
   - name: kpa_52
     dir: world/area_kpa/kpa_52
     type: code
-    overlay: True
     start: 0xA67100
     vram: 0x80240000
     subsegments:
@@ -8480,7 +8134,6 @@ segments:
   - name: kpa_53
     dir: world/area_kpa/kpa_53
     type: code
-    overlay: True
     start: 0xA6ACA0
     vram: 0x80240000
     subsegments:
@@ -8493,7 +8146,6 @@ segments:
   - name: kpa_60
     dir: world/area_kpa/kpa_60
     type: code
-    overlay: True
     start: 0xA6CB00
     vram: 0x80240000
     subsegments:
@@ -8504,7 +8156,6 @@ segments:
   - name: kpa_61
     dir: world/area_kpa/kpa_61
     type: code
-    overlay: True
     start: 0xA6E3E0
     vram: 0x80240000
     subsegments:
@@ -8518,7 +8169,6 @@ segments:
   - name: kpa_62
     dir: world/area_kpa/kpa_62
     type: code
-    overlay: True
     start: 0xA72220
     vram: 0x80240000
     subsegments:
@@ -8530,7 +8180,6 @@ segments:
   - name: kpa_63
     dir: world/area_kpa/kpa_63
     type: code
-    overlay: True
     start: 0xA735B0
     vram: 0x80240000
     subsegments:
@@ -8543,7 +8192,6 @@ segments:
   - name: kpa_70
     dir: world/area_kpa/kpa_70
     type: code
-    overlay: True
     start: 0xA74870
     vram: 0x80240000
     subsegments:
@@ -8556,7 +8204,6 @@ segments:
   - name: kpa_81
     dir: world/area_kpa/kpa_81
     type: code
-    overlay: True
     start: 0xA784C0
     vram: 0x80240000
     subsegments:
@@ -8569,7 +8216,6 @@ segments:
   - name: kpa_82
     dir: world/area_kpa/kpa_82
     type: code
-    overlay: True
     start: 0xA7A500
     vram: 0x80240000
     subsegments:
@@ -8582,7 +8228,6 @@ segments:
   - name: kpa_83
     dir: world/area_kpa/kpa_83
     type: code
-    overlay: True
     start: 0xA83490
     vram: 0x80240000
     subsegments:
@@ -8595,7 +8240,6 @@ segments:
   - name: kpa_90
     dir: world/area_kpa/kpa_90
     type: code
-    overlay: True
     start: 0xA867B0
     vram: 0x80240000
     subsegments:
@@ -8606,7 +8250,6 @@ segments:
   - name: kpa_91
     dir: world/area_kpa/kpa_91
     type: code
-    overlay: True
     start: 0xA86A50
     vram: 0x80240000
     subsegments:
@@ -8620,7 +8263,6 @@ segments:
   - name: kpa_94
     dir: world/area_kpa/kpa_94
     type: code
-    overlay: True
     start: 0xA8C7C0
     vram: 0x80240000
     subsegments:
@@ -8631,7 +8273,6 @@ segments:
   - name: kpa_95
     dir: world/area_kpa/kpa_95
     type: code
-    overlay: True
     start: 0xA8CA80
     vram: 0x80240000
     subsegments:
@@ -8645,7 +8286,6 @@ segments:
   - name: kpa_96
     dir: world/area_kpa/kpa_96
     type: code
-    overlay: True
     start: 0xA927C0
     vram: 0x80240000
     subsegments:
@@ -8656,7 +8296,6 @@ segments:
   - name: kpa_100
     dir: world/area_kpa/kpa_100
     type: code
-    overlay: True
     start: 0xA93160
     vram: 0x80240000
     subsegments:
@@ -8668,7 +8307,6 @@ segments:
   - name: kpa_101
     dir: world/area_kpa/kpa_101
     type: code
-    overlay: True
     start: 0xA93440
     vram: 0x80240000
     subsegments:
@@ -8680,7 +8318,6 @@ segments:
   - name: kpa_102
     dir: world/area_kpa/kpa_102
     type: code
-    overlay: True
     start: 0xA93740
     vram: 0x80240000
     subsegments:
@@ -8693,7 +8330,6 @@ segments:
   - name: kpa_111
     dir: world/area_kpa/kpa_111
     type: code
-    overlay: True
     start: 0xA99590
     vram: 0x80240000
     subsegments:
@@ -8706,7 +8342,6 @@ segments:
   - name: kpa_112
     dir: world/area_kpa/kpa_112
     type: code
-    overlay: True
     start: 0xA9C990
     vram: 0x80240000
     subsegments:
@@ -8717,7 +8352,6 @@ segments:
   - name: kpa_113
     dir: world/area_kpa/kpa_113
     type: code
-    overlay: True
     start: 0xA9CC30
     vram: 0x80240000
     subsegments:
@@ -8731,7 +8365,6 @@ segments:
   - name: kpa_114
     dir: world/area_kpa/kpa_114
     type: code
-    overlay: True
     start: 0xA9E980
     vram: 0x80240000
     subsegments:
@@ -8742,7 +8375,6 @@ segments:
   - name: kpa_115
     dir: world/area_kpa/kpa_115
     type: code
-    overlay: True
     start: 0xA9ED40
     vram: 0x80240000
     subsegments:
@@ -8755,7 +8387,6 @@ segments:
   - name: kpa_116
     dir: world/area_kpa/kpa_116
     type: code
-    overlay: True
     start: 0xAA1EE0
     vram: 0x80240000
     subsegments:
@@ -8766,7 +8397,6 @@ segments:
   - name: kpa_117
     dir: world/area_kpa/kpa_117
     type: code
-    overlay: True
     start: 0xAA2180
     vram: 0x80240000
     subsegments:
@@ -8777,7 +8407,6 @@ segments:
   - name: kpa_118
     dir: world/area_kpa/kpa_118
     type: code
-    overlay: True
     start: 0xAA23C0
     vram: 0x80240000
     subsegments:
@@ -8788,7 +8417,6 @@ segments:
   - name: kpa_119
     dir: world/area_kpa/kpa_119
     type: code
-    overlay: True
     start: 0xAA2660
     vram: 0x80240000
     subsegments:
@@ -8800,7 +8428,6 @@ segments:
   - name: kpa_121
     dir: world/area_kpa/kpa_121
     type: code
-    overlay: True
     start: 0xAA28F0
     vram: 0x80240000
     subsegments:
@@ -8811,7 +8438,6 @@ segments:
   - name: kpa_130
     dir: world/area_kpa/kpa_130
     type: code
-    overlay: True
     start: 0xAA2D20
     vram: 0x80240000
     subsegments:
@@ -8823,7 +8449,6 @@ segments:
   - name: kpa_133
     dir: world/area_kpa/kpa_133
     type: code
-    overlay: True
     start: 0xAA7480
     vram: 0x80240000
     subsegments:
@@ -8838,7 +8463,6 @@ segments:
   - name: kpa_134
     dir: world/area_kpa/kpa_134
     type: code
-    overlay: True
     start: 0xAA8FA0
     vram: 0x80240000
     subsegments:
@@ -8854,7 +8478,6 @@ segments:
   - name: osr_00
     dir: world/area_osr/osr_00
     type: code
-    overlay: True
     start: 0xAAC830
     vram: 0x80240000
     subsegments:
@@ -8866,7 +8489,6 @@ segments:
   - name: osr_01
     dir: world/area_osr/osr_01
     type: code
-    overlay: True
     start: 0xAAFFF0
     vram: 0x80240000
     subsegments:
@@ -8880,7 +8502,6 @@ segments:
   - name: osr_02
     dir: world/area_osr/osr_02
     type: code
-    overlay: True
     start: 0xAB2170
     vram: 0x80240000
     subsegments:
@@ -8896,7 +8517,6 @@ segments:
   - name: osr_03
     dir: world/area_osr/osr_03
     type: code
-    overlay: True
     start: 0xAB6290
     vram: 0x80240000
     subsegments:
@@ -8911,7 +8531,6 @@ segments:
   - name: osr_04
     dir: world/area_osr/osr_04
     type: code
-    overlay: True
     start: 0xAB92B0
     vram: 0x80240000
     subsegments:
@@ -8922,7 +8541,6 @@ segments:
   - name: kkj_00
     dir: world/area_kkj/kkj_00
     type: code
-    overlay: True
     start: 0xABB290
     vram: 0x80240000
     subsegments:
@@ -8937,7 +8555,6 @@ segments:
   - name: kkj_01
     dir: world/area_kkj/kkj_01
     type: code
-    overlay: True
     start: 0xAC5170
     vram: 0x80240000
     subsegments:
@@ -8949,7 +8566,6 @@ segments:
   - name: kkj_02
     dir: world/area_kkj/kkj_02
     type: code
-    overlay: True
     start: 0xAC8D20
     vram: 0x80240000
     subsegments:
@@ -8961,7 +8577,6 @@ segments:
   - name: kkj_03
     dir: world/area_kkj/kkj_03
     type: code
-    overlay: True
     start: 0xAC9710
     vram: 0x80240000
     subsegments:
@@ -8975,7 +8590,6 @@ segments:
   - name: kkj_10
     dir: world/area_kkj/kkj_10
     type: code
-    overlay: True
     start: 0xACAB20
     vram: 0x80240000
     subsegments:
@@ -8990,7 +8604,6 @@ segments:
   - name: kkj_11
     dir: world/area_kkj/kkj_11
     type: code
-    overlay: True
     start: 0xACE140
     vram: 0x80240000
     subsegments:
@@ -9007,7 +8620,6 @@ segments:
   - name: kkj_12
     dir: world/area_kkj/kkj_12
     type: code
-    overlay: True
     start: 0xAD4090
     vram: 0x80240000
     subsegments:
@@ -9018,7 +8630,6 @@ segments:
   - name: kkj_13
     dir: world/area_kkj/kkj_13
     type: code
-    overlay: True
     start: 0xAD5ED0
     vram: 0x80240000
     subsegments:
@@ -9035,7 +8646,6 @@ segments:
   - name: kkj_14
     dir: world/area_kkj/kkj_14
     type: code
-    overlay: True
     start: 0xADAEA0
     vram: 0x80240000
     subsegments:
@@ -9059,7 +8669,6 @@ segments:
   - name: kkj_15
     dir: world/area_kkj/kkj_15
     type: code
-    overlay: True
     start: 0xAE5590
     vram: 0x80240000
     subsegments:
@@ -9081,7 +8690,6 @@ segments:
   - name: kkj_16
     dir: world/area_kkj/kkj_16
     type: code
-    overlay: True
     start: 0xAED410
     vram: 0x80240000
     subsegments:
@@ -9095,7 +8703,6 @@ segments:
   - name: kkj_17
     dir: world/area_kkj/kkj_17
     type: code
-    overlay: True
     start: 0xAF1C60
     vram: 0x80240000
     subsegments:
@@ -9107,7 +8714,6 @@ segments:
   - name: kkj_18
     dir: world/area_kkj/kkj_18
     type: code
-    overlay: True
     start: 0xAF2CA0
     vram: 0x80240000
     subsegments:
@@ -9122,7 +8728,6 @@ segments:
   - name: kkj_19
     dir: world/area_kkj/kkj_19
     type: code
-    overlay: True
     start: 0xAF7950
     vram: 0x80240000
     subsegments:
@@ -9136,7 +8741,6 @@ segments:
   - name: kkj_20
     dir: world/area_kkj/kkj_20
     type: code
-    overlay: True
     start: 0xAFDB40
     vram: 0x80240000
     subsegments:
@@ -9150,7 +8754,6 @@ segments:
   - name: kkj_21
     dir: world/area_kkj/kkj_21
     type: code
-    overlay: True
     start: 0xB022A0
     vram: 0x80240000
     subsegments:
@@ -9160,7 +8763,6 @@ segments:
   - name: kkj_22
     dir: world/area_kkj/kkj_22
     type: code
-    overlay: True
     start: 0xB024F0
     vram: 0x80240000
     subsegments:
@@ -9171,7 +8773,6 @@ segments:
   - name: kkj_23
     dir: world/area_kkj/kkj_23
     type: code
-    overlay: True
     start: 0xB02880
     vram: 0x80240000
     subsegments:
@@ -9187,7 +8788,6 @@ segments:
   - name: kkj_24
     dir: world/area_kkj/kkj_24
     type: code
-    overlay: True
     start: 0xB06570
     vram: 0x80240000
     subsegments:
@@ -9199,7 +8799,6 @@ segments:
   - name: kkj_25
     dir: world/area_kkj/kkj_25
     type: code
-    overlay: True
     start: 0xB06A00
     vram: 0x80240000
     subsegments:
@@ -9217,7 +8816,6 @@ segments:
   - name: kkj_26
     dir: world/area_kkj/kkj_26
     type: code
-    overlay: True
     start: 0xB13120
     vram: 0x80240000
     subsegments:
@@ -9229,7 +8827,6 @@ segments:
   - name: kkj_27
     dir: world/area_kkj/kkj_27
     type: code
-    overlay: True
     start: 0xB13D70
     vram: 0x80240000
     subsegments:
@@ -9242,7 +8839,6 @@ segments:
   - name: kkj_28
     dir: world/area_kkj/kkj_28
     type: code
-    overlay: True
     start: 0xB14EA0
     vram: 0x80240000
     subsegments:
@@ -9252,7 +8848,6 @@ segments:
   - name: kkj_29
     dir: world/area_kkj/kkj_29
     type: code
-    overlay: True
     start: 0xB150B0
     vram: 0x80240000
     subsegments:
@@ -9265,7 +8860,6 @@ segments:
   - name: tst_01
     dir: world/area_tst/tst_01
     type: code
-    overlay: True
     start: 0xB1A900
     vram: 0x80240000
     subsegments:
@@ -9276,7 +8870,6 @@ segments:
   - name: tst_02
     dir: world/area_tst/tst_02
     type: code
-    overlay: True
     start: 0xB1AC30
     vram: 0x80240000
     subsegments:
@@ -9287,7 +8880,6 @@ segments:
   - name: tst_03
     dir: world/area_tst/tst_03
     type: code
-    overlay: True
     start: 0xB1AF80
     vram: 0x80240000
     subsegments:
@@ -9298,7 +8890,6 @@ segments:
   - name: tst_04
     dir: world/area_tst/tst_04
     type: code
-    overlay: True
     start: 0xB1B570
     vram: 0x80240000
     subsegments:
@@ -9313,7 +8904,6 @@ segments:
   - name: tst_10
     dir: world/area_tst/tst_10
     type: code
-    overlay: True
     start: 0xB1C540
     vram: 0x80240000
     subsegments:
@@ -9323,7 +8913,6 @@ segments:
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code
-    overlay: True
     start: 0xB1CA50
     vram: 0x80240000
     subsegments:
@@ -9333,7 +8922,6 @@ segments:
   - name: tst_12
     dir: world/area_tst/tst_12
     type: code
-    overlay: True
     start: 0xB1D2F0
     vram: 0x80240000
     subsegments:
@@ -9341,7 +8929,6 @@ segments:
   - name: tst_13
     dir: world/area_tst/tst_13
     type: code
-    overlay: True
     start: 0xB1D760
     vram: 0x80240000
     subsegments:
@@ -9351,7 +8938,6 @@ segments:
   - name: tst_20
     dir: world/area_tst/tst_20
     type: code
-    overlay: True
     start: 0xB20470
     vram: 0x80240000
     subsegments:
@@ -9359,7 +8945,6 @@ segments:
   - name: jan_00
     dir: world/area_jan/jan_00
     type: code
-    overlay: True
     start: 0xB20540
     vram: 0x80240000
     subsegments:
@@ -9375,7 +8960,6 @@ segments:
   - name: jan_01
     dir: world/area_jan/jan_01
     type: code
-    overlay: True
     start: 0xB28030
     vram: 0x80240000
     subsegments:
@@ -9390,7 +8974,6 @@ segments:
   - name: jan_02
     dir: world/area_jan/jan_02
     type: code
-    overlay: True
     start: 0xB2C470
     vram: 0x80240000
     subsegments:
@@ -9407,7 +8990,6 @@ segments:
   - name: jan_03
     dir: world/area_jan/jan_03
     type: code
-    overlay: True
     start: 0xB34BD0
     vram: 0x80240000
     subsegments:
@@ -9423,7 +9005,6 @@ segments:
   - name: jan_04
     dir: world/area_jan/jan_04
     type: code
-    overlay: True
     start: 0xB44770
     vram: 0x80240000
     subsegments:
@@ -9448,7 +9029,6 @@ segments:
   - name: jan_05
     dir: world/area_jan/jan_05
     type: code
-    overlay: True
     start: 0xB4AA70
     vram: 0x80240000
     subsegments:
@@ -9468,7 +9048,6 @@ segments:
   - name: jan_06
     dir: world/area_jan/jan_06
     type: code
-    overlay: True
     start: 0xB52830
     vram: 0x80240000
     subsegments:
@@ -9488,7 +9067,6 @@ segments:
   - name: jan_07
     dir: world/area_jan/jan_07
     type: code
-    overlay: True
     start: 0xB59870
     vram: 0x80240000
     subsegments:
@@ -9504,7 +9082,6 @@ segments:
   - name: jan_08
     dir: world/area_jan/jan_08
     type: code
-    overlay: True
     start: 0xB5E2B0
     vram: 0x80240000
     subsegments:
@@ -9522,7 +9099,6 @@ segments:
   - name: jan_09
     dir: world/area_jan/jan_09
     type: code
-    overlay: True
     start: 0xB65AB0
     vram: 0x80240000
     subsegments:
@@ -9538,7 +9114,6 @@ segments:
   - name: jan_10
     dir: world/area_jan/jan_10
     type: code
-    overlay: True
     start: 0xB6C390
     vram: 0x80240000
     subsegments:
@@ -9556,7 +9131,6 @@ segments:
   - name: jan_11
     dir: world/area_jan/jan_11
     type: code
-    overlay: True
     start: 0xB70860
     vram: 0x80240000
     subsegments:
@@ -9569,7 +9143,6 @@ segments:
   - name: jan_12
     dir: world/area_jan/jan_12
     type: code
-    overlay: True
     start: 0xB730B0
     vram: 0x80240000
     subsegments:
@@ -9582,7 +9155,6 @@ segments:
   - name: jan_13
     dir: world/area_jan/jan_13
     type: code
-    overlay: True
     start: 0xB767B0
     vram: 0x80240000
     subsegments:
@@ -9595,7 +9167,6 @@ segments:
   - name: jan_14
     dir: world/area_jan/jan_14
     type: code
-    overlay: True
     start: 0xB7A050
     vram: 0x80240000
     subsegments:
@@ -9609,7 +9180,6 @@ segments:
   - name: jan_15
     dir: world/area_jan/jan_15
     type: code
-    overlay: True
     start: 0xB7D920
     vram: 0x80240000
     subsegments:
@@ -9623,7 +9193,6 @@ segments:
   - name: jan_16
     dir: world/area_jan/jan_16
     type: code
-    overlay: True
     start: 0xB80000
     vram: 0x80240000
     subsegments:
@@ -9636,7 +9205,6 @@ segments:
   - name: jan_17
     dir: world/area_jan/jan_17
     type: code
-    overlay: True
     start: 0xB837C0
     vram: 0x80240000
     subsegments:
@@ -9648,7 +9216,6 @@ segments:
   - name: jan_18
     dir: world/area_jan/jan_18
     type: code
-    overlay: True
     start: 0xB83B90
     vram: 0x80240000
     subsegments:
@@ -9659,7 +9226,6 @@ segments:
   - name: jan_19
     dir: world/area_jan/jan_19
     type: code
-    overlay: True
     start: 0xB83E60
     vram: 0x80240000
     subsegments:
@@ -9670,7 +9236,6 @@ segments:
   - name: jan_22
     dir: world/area_jan/jan_22
     type: code
-    overlay: True
     start: 0xB84180
     vram: 0x80240000
     subsegments:
@@ -9684,7 +9249,6 @@ segments:
   - name: jan_23
     dir: world/area_jan/jan_23
     type: code
-    overlay: True
     start: 0xB8FCD0
     vram: 0x80240000
     subsegments:
@@ -9695,7 +9259,6 @@ segments:
   - name: mim_01
     dir: world/area_mim/mim_01
     type: code
-    overlay: True
     start: 0xB93440
     vram: 0x80240000
     subsegments:
@@ -9710,7 +9273,6 @@ segments:
   - name: mim_02
     dir: world/area_mim/mim_02
     type: code
-    overlay: True
     start: 0xB97C00
     vram: 0x80240000
     subsegments:
@@ -9724,7 +9286,6 @@ segments:
   - name: mim_03
     dir: world/area_mim/mim_03
     type: code
-    overlay: True
     start: 0xB9B480
     vram: 0x80240000
     subsegments:
@@ -9737,7 +9298,6 @@ segments:
   - name: mim_04
     dir: world/area_mim/mim_04
     type: code
-    overlay: True
     start: 0xB9D960
     vram: 0x80240000
     subsegments:
@@ -9752,7 +9312,6 @@ segments:
   - name: mim_05
     dir: world/area_mim/mim_05
     type: code
-    overlay: True
     start: 0xBA0730
     vram: 0x80240000
     subsegments:
@@ -9765,7 +9324,6 @@ segments:
   - name: mim_06
     dir: world/area_mim/mim_06
     type: code
-    overlay: True
     start: 0xBA4780
     vram: 0x80240000
     subsegments:
@@ -9780,7 +9338,6 @@ segments:
   - name: mim_07
     dir: world/area_mim/mim_07
     type: code
-    overlay: True
     start: 0xBAA140
     vram: 0x80240000
     subsegments:
@@ -9797,7 +9354,6 @@ segments:
   - name: mim_08
     dir: world/area_mim/mim_08
     type: code
-    overlay: True
     start: 0xBAD940
     vram: 0x80240000
     subsegments:
@@ -9811,7 +9367,6 @@ segments:
   - name: mim_09
     dir: world/area_mim/mim_09
     type: code
-    overlay: True
     start: 0xBB2E00
     vram: 0x80240000
     subsegments:
@@ -9825,7 +9380,6 @@ segments:
   - name: mim_10
     dir: world/area_mim/mim_10
     type: code
-    overlay: True
     start: 0xBB59E0
     vram: 0x80240000
     subsegments:
@@ -9838,7 +9392,6 @@ segments:
   - name: mim_11
     dir: world/area_mim/mim_11
     type: code
-    overlay: True
     start: 0xBB7070
     vram: 0x80240000
     subsegments:
@@ -9852,7 +9405,6 @@ segments:
   - name: mim_12
     dir: world/area_mim/mim_12
     type: code
-    overlay: True
     start: 0xBBB380
     vram: 0x80240000
     subsegments:
@@ -9865,7 +9417,6 @@ segments:
   - name: obk_01
     dir: world/area_obk/obk_01
     type: code
-    overlay: True
     start: 0xBBD1A0
     vram: 0x80240000
     subsegments:
@@ -9879,7 +9430,6 @@ segments:
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
-    overlay: True
     start: 0xBC2A90
     vram: 0x80240000
     subsegments:
@@ -9894,7 +9444,6 @@ segments:
   - name: obk_03
     dir: world/area_obk/obk_03
     type: code
-    overlay: True
     start: 0xBC4280
     vram: 0x80240000
     subsegments:
@@ -9912,7 +9461,6 @@ segments:
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code
-    overlay: True
     start: 0xBC7E60
     vram: 0x80240000
     subsegments:
@@ -9927,7 +9475,6 @@ segments:
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
-    overlay: True
     start: 0xBCD060
     vram: 0x80240000
     subsegments:
@@ -9941,7 +9488,6 @@ segments:
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code
-    overlay: True
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
@@ -9953,7 +9499,6 @@ segments:
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
-    overlay: True
     start: 0xBCEBF0
     vram: 0x80240000
     subsegments:
@@ -9970,7 +9515,6 @@ segments:
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code
-    overlay: True
     start: 0xBD3870
     vram: 0x80240000
     subsegments:
@@ -9986,7 +9530,6 @@ segments:
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code
-    overlay: True
     start: 0xBDA7B0
     vram: 0x80240000
     subsegments:
@@ -10001,7 +9544,6 @@ segments:
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
-    overlay: True
     start: 0xBDD1B0
     vram: 0x80240000
     subsegments:
@@ -10012,7 +9554,6 @@ segments:
   - name: arn_03
     dir: world/area_arn/arn_03
     type: code
-    overlay: True
     start: 0xBDED90
     vram: 0x80240000
     subsegments:
@@ -10023,7 +9564,6 @@ segments:
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
-    overlay: True
     start: 0xBE37B0
     vram: 0x80240000
     subsegments:
@@ -10034,7 +9574,6 @@ segments:
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
-    overlay: True
     start: 0xBE7BE0
     vram: 0x80240000
     subsegments:
@@ -10045,7 +9584,6 @@ segments:
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
-    overlay: True
     start: 0xBECDF0
     vram: 0x80240000
     subsegments:
@@ -10060,7 +9598,6 @@ segments:
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
-    overlay: True
     start: 0xBF47A0
     vram: 0x80240000
     subsegments:
@@ -10072,7 +9609,6 @@ segments:
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
-    overlay: True
     start: 0xBF6060
     vram: 0x80240000
     subsegments:
@@ -10083,7 +9619,6 @@ segments:
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
-    overlay: True
     start: 0xBF6A00
     vram: 0x80240000
     subsegments:
@@ -10093,7 +9628,6 @@ segments:
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
-    overlay: True
     start: 0xBF7680
     vram: 0x80240000
     subsegments:
@@ -10103,7 +9637,6 @@ segments:
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
-    overlay: True
     start: 0xBF8790
     vram: 0x80240000
     subsegments:
@@ -10113,7 +9646,6 @@ segments:
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
-    overlay: True
     start: 0xBF9410
     vram: 0x80240000
     subsegments:
@@ -10123,7 +9655,6 @@ segments:
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
-    overlay: True
     start: 0xBFA0A0
     vram: 0x80240000
     subsegments:
@@ -10133,7 +9664,6 @@ segments:
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
-    overlay: True
     start: 0xBFD880
     vram: 0x80240000
     subsegments:
@@ -10463,7 +9993,6 @@ segments:
   - name: dgb_02
     dir: world/area_dgb/dgb_02
     type: code
-    overlay: True
     start: 0xC2EBA0
     vram: 0x80240000
     subsegments:
@@ -10472,7 +10001,6 @@ segments:
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
-    overlay: True
     start: 0xC314E0
     vram: 0x80240000
     subsegments:
@@ -10482,7 +10010,6 @@ segments:
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
-    overlay: True
     start: 0xC36530
     vram: 0x80240000
     subsegments:
@@ -10491,7 +10018,6 @@ segments:
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
-    overlay: True
     start: 0xC3AA10
     vram: 0x80240000
     subsegments:
@@ -10500,7 +10026,6 @@ segments:
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
-    overlay: True
     start: 0xC3D080
     vram: 0x80240000
     subsegments:
@@ -10509,7 +10034,6 @@ segments:
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
-    overlay: True
     start: 0xC3DBF0
     vram: 0x80240000
     subsegments:
@@ -10518,7 +10042,6 @@ segments:
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
-    overlay: True
     start: 0xC3FDB0
     vram: 0x80240000
     subsegments:
@@ -10527,7 +10050,6 @@ segments:
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
-    overlay: True
     start: 0xC46BE0
     vram: 0x80240000
     subsegments:
@@ -10536,7 +10058,6 @@ segments:
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
-    overlay: True
     start: 0xC4C390
     vram: 0x80240000
     subsegments:
@@ -10545,7 +10066,6 @@ segments:
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
-    overlay: True
     start: 0xC4D3E0
     vram: 0x80240000
     subsegments:
@@ -10554,7 +10074,6 @@ segments:
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
-    overlay: True
     start: 0xC4DEF0
     vram: 0x80240000
     subsegments:
@@ -10563,7 +10082,6 @@ segments:
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
-    overlay: True
     start: 0xC4E960
     vram: 0x80240000
     subsegments:
@@ -10572,7 +10090,6 @@ segments:
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
-    overlay: True
     start: 0xC4F030
     vram: 0x80240000
     subsegments:
@@ -10581,7 +10098,6 @@ segments:
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
-    overlay: True
     start: 0xC4F510
     vram: 0x80240000
     subsegments:
@@ -10591,7 +10107,6 @@ segments:
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
-    overlay: True
     start: 0xC52540
     vram: 0x80240000
     subsegments:
@@ -10600,7 +10115,6 @@ segments:
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
-    overlay: True
     start: 0xC55A60
     vram: 0x80240000
     subsegments:
@@ -10609,7 +10123,6 @@ segments:
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
-    overlay: True
     start: 0xC55F40
     vram: 0x80240000
     subsegments:
@@ -10619,7 +10132,6 @@ segments:
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code
-    overlay: True
     start: 0xC599D0
     vram: 0x80240000
     subsegments:
@@ -10629,7 +10141,6 @@ segments:
   - name: kzn_02
     dir: world/area_kzn/kzn_02
     type: code
-    overlay: True
     start: 0xC5A740
     vram: 0x80240000
     subsegments:
@@ -10644,7 +10155,6 @@ segments:
   - name: kzn_03
     dir: world/area_kzn/kzn_03
     type: code
-    overlay: True
     start: 0xC60D10
     vram: 0x80240000
     subsegments:
@@ -10659,7 +10169,6 @@ segments:
   - name: kzn_04
     dir: world/area_kzn/kzn_04
     type: code
-    overlay: True
     start: 0xC68130
     vram: 0x80240000
     subsegments:
@@ -10673,7 +10182,6 @@ segments:
   - name: kzn_05
     dir: world/area_kzn/kzn_05
     type: code
-    overlay: True
     start: 0xC6C0D0
     vram: 0x80240000
     subsegments:
@@ -10683,7 +10191,6 @@ segments:
   - name: kzn_06
     dir: world/area_kzn/kzn_06
     type: code
-    overlay: True
     start: 0xC6C920
     vram: 0x80240000
     subsegments:
@@ -10695,7 +10202,6 @@ segments:
   - name: kzn_07
     dir: world/area_kzn/kzn_07
     type: code
-    overlay: True
     start: 0xC6E330
     vram: 0x80240000
     subsegments:
@@ -10709,7 +10215,6 @@ segments:
   - name: kzn_08
     dir: world/area_kzn/kzn_08
     type: code
-    overlay: True
     start: 0xC71480
     vram: 0x80240000
     subsegments:
@@ -10722,7 +10227,6 @@ segments:
   - name: kzn_09
     dir: world/area_kzn/kzn_09
     type: code
-    overlay: True
     start: 0xC76CE0
     vram: 0x80240000
     subsegments:
@@ -10736,7 +10240,6 @@ segments:
   - name: kzn_10
     dir: world/area_kzn/kzn_10
     type: code
-    overlay: True
     start: 0xC7E180
     vram: 0x80240000
     subsegments:
@@ -10748,7 +10251,6 @@ segments:
   - name: kzn_11
     dir: world/area_kzn/kzn_11
     type: code
-    overlay: True
     start: 0xC801A0
     vram: 0x80240000
     subsegments:
@@ -10762,7 +10264,6 @@ segments:
   - name: kzn_17
     dir: world/area_kzn/kzn_17
     type: code
-    overlay: True
     start: 0xC85AB0
     vram: 0x80240000
     subsegments:
@@ -10775,7 +10276,6 @@ segments:
   - name: kzn_18
     dir: world/area_kzn/kzn_18
     type: code
-    overlay: True
     start: 0xC8C0A0
     vram: 0x80240000
     subsegments:
@@ -10787,7 +10287,6 @@ segments:
   - name: kzn_19
     dir: world/area_kzn/kzn_19
     type: code
-    overlay: True
     start: 0xC8DBB0
     vram: 0x80240000
     subsegments:
@@ -10802,7 +10301,6 @@ segments:
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code
-    overlay: True
     start: 0xC95F30
     vram: 0x80240000
     subsegments:
@@ -10814,7 +10312,6 @@ segments:
   - name: kzn_22
     dir: world/area_kzn/kzn_22
     type: code
-    overlay: True
     start: 0xC9A200
     vram: 0x80240000
     subsegments:
@@ -10827,7 +10324,6 @@ segments:
   - name: kzn_23
     dir: world/area_kzn/kzn_23
     type: code
-    overlay: True
     start: 0xC9C300
     vram: 0x80240000
     subsegments:
@@ -10840,7 +10336,6 @@ segments:
   - name: flo_00
     dir: world/area_flo/flo_00
     type: code
-    overlay: True
     start: 0xC9DF20
     vram: 0x80240000
     subsegments:
@@ -10851,7 +10346,6 @@ segments:
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code
-    overlay: True
     start: 0xCA72A0
     vram: 0x80240000
     subsegments:
@@ -10861,7 +10355,6 @@ segments:
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
-    overlay: True
     start: 0xCAC1F0
     vram: 0x80240000
     subsegments:
@@ -10871,7 +10364,6 @@ segments:
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
-    overlay: True
     start: 0xCAED40
     vram: 0x80240000
     subsegments:
@@ -10883,7 +10375,6 @@ segments:
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
-    overlay: True
     start: 0xCB5000
     vram: 0x80240000
     subsegments:
@@ -10895,7 +10386,6 @@ segments:
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
-    overlay: True
     start: 0xCB9200
     vram: 0x80240000
     subsegments:
@@ -10908,7 +10398,6 @@ segments:
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
-    overlay: True
     start: 0xCBDCD0
     vram: 0x80240000
     subsegments:
@@ -10917,7 +10406,6 @@ segments:
   - name: flo_12
     dir: world/area_flo/flo_12
     type: code
-    overlay: True
     start: 0xCC0E30
     vram: 0x80240000
     subsegments:
@@ -10927,7 +10415,6 @@ segments:
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
-    overlay: True
     start: 0xCC3810
     vram: 0x80240000
     subsegments:
@@ -10938,7 +10425,6 @@ segments:
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
-    overlay: True
     start: 0xCCB310
     vram: 0x80240000
     subsegments:
@@ -10949,7 +10435,6 @@ segments:
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
-    overlay: True
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
@@ -10958,7 +10443,6 @@ segments:
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
-    overlay: True
     start: 0xCD1E30
     vram: 0x80240000
     subsegments:
@@ -10971,7 +10455,6 @@ segments:
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code
-    overlay: True
     start: 0xCD72E0
     vram: 0x80240000
     subsegments:
@@ -10982,7 +10465,6 @@ segments:
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code
-    overlay: True
     start: 0xCDC6A0
     vram: 0x80240000
     subsegments:
@@ -10993,7 +10475,6 @@ segments:
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
-    overlay: True
     start: 0xCE36F0
     vram: 0x80240000
     subsegments:
@@ -11002,7 +10483,6 @@ segments:
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
-    overlay: True
     start: 0xCE6700
     vram: 0x80240000
     subsegments:
@@ -11012,7 +10492,6 @@ segments:
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
-    overlay: True
     start: 0xCEC240
     vram: 0x80240000
     subsegments:
@@ -11023,7 +10502,6 @@ segments:
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
-    overlay: True
     start: 0xCEE260
     vram: 0x80240000
     subsegments:
@@ -11033,7 +10511,6 @@ segments:
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
-    overlay: True
     start: 0xCF0940
     vram: 0x80240000
     subsegments:
@@ -11044,7 +10521,6 @@ segments:
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
-    overlay: True
     start: 0xCF2BD0
     vram: 0x80240000
     subsegments:
@@ -11056,7 +10532,6 @@ segments:
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code
-    overlay: True
     start: 0xCF7B70
     vram: 0x80240000
     subsegments:
@@ -11070,7 +10545,6 @@ segments:
   - name: sam_02
     dir: world/area_sam/sam_02
     type: code
-    overlay: True
     start: 0xD05730
     vram: 0x80240000
     subsegments:
@@ -11085,7 +10559,6 @@ segments:
   - name: sam_03
     dir: world/area_sam/sam_03
     type: code
-    overlay: True
     start: 0xD110C0
     vram: 0x80240000
     subsegments:
@@ -11097,7 +10570,6 @@ segments:
   - name: sam_04
     dir: world/area_sam/sam_04
     type: code
-    overlay: True
     start: 0xD135D0
     vram: 0x80240000
     subsegments:
@@ -11113,7 +10585,6 @@ segments:
   - name: sam_05
     dir: world/area_sam/sam_05
     type: code
-    overlay: True
     start: 0xD187E0
     vram: 0x80240000
     subsegments:
@@ -11127,7 +10598,6 @@ segments:
   - name: sam_06
     dir: world/area_sam/sam_06
     type: code
-    overlay: True
     start: 0xD1FE90
     vram: 0x80240000
     subsegments:
@@ -11141,7 +10611,6 @@ segments:
   - name: sam_07
     dir: world/area_sam/sam_07
     type: code
-    overlay: True
     start: 0xD2BD30
     vram: 0x80240000
     subsegments:
@@ -11155,7 +10624,6 @@ segments:
   - name: sam_08
     dir: world/area_sam/sam_08
     type: code
-    overlay: True
     start: 0xD2FC80
     vram: 0x80240000
     subsegments:
@@ -11169,7 +10637,6 @@ segments:
   - name: sam_09
     dir: world/area_sam/sam_09
     type: code
-    overlay: True
     start: 0xD362F0
     vram: 0x80240000
     subsegments:
@@ -11181,7 +10648,6 @@ segments:
   - name: sam_10
     dir: world/area_sam/sam_10
     type: code
-    overlay: True
     start: 0xD37800
     vram: 0x80240000
     subsegments:
@@ -11194,7 +10660,6 @@ segments:
   - name: sam_11
     dir: world/area_sam/sam_11
     type: code
-    overlay: True
     start: 0xD3A5D0
     vram: 0x80240000
     subsegments:
@@ -11212,7 +10677,6 @@ segments:
   - name: sam_12
     dir: world/area_sam/sam_12
     type: code
-    overlay: True
     start: 0xD4BA20
     vram: 0x80240000
     subsegments:
@@ -11227,7 +10691,6 @@ segments:
   - name: pra_01
     dir: world/area_pra/pra_01
     type: code
-    overlay: True
     start: 0xD4D040
     vram: 0x80240000
     subsegments:
@@ -11241,7 +10704,6 @@ segments:
   - name: pra_02
     dir: world/area_pra/pra_02
     type: code
-    overlay: True
     start: 0xD4FFF0
     vram: 0x80240000
     subsegments:
@@ -11255,7 +10717,6 @@ segments:
   - name: pra_03
     dir: world/area_pra/pra_03
     type: code
-    overlay: True
     start: 0xD53CB0
     vram: 0x80240000
     subsegments:
@@ -11268,7 +10729,6 @@ segments:
   - name: pra_04
     dir: world/area_pra/pra_04
     type: code
-    overlay: True
     start: 0xD54690
     vram: 0x80240000
     subsegments:
@@ -11283,7 +10743,6 @@ segments:
   - name: pra_05
     dir: world/area_pra/pra_05
     type: code
-    overlay: True
     start: 0xD55BB0
     vram: 0x80240000
     subsegments:
@@ -11295,7 +10754,6 @@ segments:
   - name: pra_06
     dir: world/area_pra/pra_06
     type: code
-    overlay: True
     start: 0xD57430
     vram: 0x80240000
     subsegments:
@@ -11306,7 +10764,6 @@ segments:
   - name: pra_09
     dir: world/area_pra/pra_09
     type: code
-    overlay: True
     start: 0xD58890
     vram: 0x80240000
     subsegments:
@@ -11318,7 +10775,6 @@ segments:
   - name: pra_10
     dir: world/area_pra/pra_10
     type: code
-    overlay: True
     start: 0xD5F2B0
     vram: 0x80240000
     subsegments:
@@ -11330,7 +10786,6 @@ segments:
   - name: pra_11
     dir: world/area_pra/pra_11
     type: code
-    overlay: True
     start: 0xD61500
     vram: 0x80240000
     subsegments:
@@ -11343,7 +10798,6 @@ segments:
   - name: pra_12
     dir: world/area_pra/pra_12
     type: code
-    overlay: True
     start: 0xD62D10
     vram: 0x80240000
     subsegments:
@@ -11354,7 +10808,6 @@ segments:
   - name: pra_13
     dir: world/area_pra/pra_13
     type: code
-    overlay: True
     start: 0xD645E0
     vram: 0x80240000
     subsegments:
@@ -11367,7 +10820,6 @@ segments:
   - name: pra_14
     dir: world/area_pra/pra_14
     type: code
-    overlay: True
     start: 0xD67D00
     vram: 0x80240000
     subsegments:
@@ -11380,7 +10832,6 @@ segments:
   - name: pra_15
     dir: world/area_pra/pra_15
     type: code
-    overlay: True
     start: 0xD69810
     vram: 0x80240000
     subsegments:
@@ -11393,7 +10844,6 @@ segments:
   - name: pra_16
     dir: world/area_pra/pra_16
     type: code
-    overlay: True
     start: 0xD69B20
     vram: 0x80240000
     subsegments:
@@ -11405,7 +10855,6 @@ segments:
   - name: pra_18
     dir: world/area_pra/pra_18
     type: code
-    overlay: True
     start: 0xD6B620
     vram: 0x80240000
     subsegments:
@@ -11418,7 +10867,6 @@ segments:
   - name: pra_19
     dir: world/area_pra/pra_19
     type: code
-    overlay: True
     start: 0xD6E9B0
     vram: 0x80240000
     subsegments:
@@ -11431,7 +10879,6 @@ segments:
   - name: pra_20
     dir: world/area_pra/pra_20
     type: code
-    overlay: True
     start: 0xD763A0
     vram: 0x80240000
     subsegments:
@@ -11443,7 +10890,6 @@ segments:
   - name: pra_21
     dir: world/area_pra/pra_21
     type: code
-    overlay: True
     start: 0xD77F20
     vram: 0x80240000
     subsegments:
@@ -11456,7 +10902,6 @@ segments:
   - name: pra_22
     dir: world/area_pra/pra_22
     type: code
-    overlay: True
     start: 0xD78880
     vram: 0x80240000
     subsegments:
@@ -11469,7 +10914,6 @@ segments:
   - name: pra_27
     dir: world/area_pra/pra_27
     type: code
-    overlay: True
     start: 0xD799F0
     vram: 0x80240000
     subsegments:
@@ -11481,7 +10925,6 @@ segments:
   - name: pra_28
     dir: world/area_pra/pra_28
     type: code
-    overlay: True
     start: 0xD7B2A0
     vram: 0x80240000
     subsegments:
@@ -11493,7 +10936,6 @@ segments:
   - name: pra_29
     dir: world/area_pra/pra_29
     type: code
-    overlay: True
     start: 0xD7CB50
     vram: 0x80240000
     subsegments:
@@ -11506,7 +10948,6 @@ segments:
   - name: pra_31
     dir: world/area_pra/pra_31
     type: code
-    overlay: True
     start: 0xD7ED60
     vram: 0x80240000
     subsegments:
@@ -11521,7 +10962,6 @@ segments:
   - name: pra_32
     dir: world/area_pra/pra_32
     type: code
-    overlay: True
     start: 0xD86A00
     vram: 0x80240000
     subsegments:
@@ -11533,7 +10973,6 @@ segments:
   - name: pra_33
     dir: world/area_pra/pra_33
     type: code
-    overlay: True
     start: 0xD896E0
     vram: 0x80240000
     subsegments:
@@ -11546,7 +10985,6 @@ segments:
   - name: pra_34
     dir: world/area_pra/pra_34
     type: code
-    overlay: True
     start: 0xD8B3B0
     vram: 0x80240000
     subsegments:
@@ -11559,7 +10997,6 @@ segments:
   - name: pra_35
     dir: world/area_pra/pra_35
     type: code
-    overlay: True
     start: 0xD8D250
     vram: 0x80240000
     subsegments:
@@ -11574,7 +11011,6 @@ segments:
   - name: pra_36
     dir: world/area_pra/pra_36
     type: code
-    overlay: True
     start: 0xD91700
     vram: 0x80240000
     subsegments:
@@ -11585,7 +11021,6 @@ segments:
   - name: pra_37
     dir: world/area_pra/pra_37
     type: code
-    overlay: True
     start: 0xD92F40
     vram: 0x80240000
     subsegments:
@@ -11596,7 +11031,6 @@ segments:
   - name: pra_38
     dir: world/area_pra/pra_38
     type: code
-    overlay: True
     start: 0xD955F0
     vram: 0x80240000
     subsegments:
@@ -11607,7 +11041,6 @@ segments:
   - name: pra_39
     dir: world/area_pra/pra_39
     type: code
-    overlay: True
     start: 0xD97890
     vram: 0x80240000
     subsegments:
@@ -11618,7 +11051,6 @@ segments:
   - name: pra_40
     dir: world/area_pra/pra_40
     type: code
-    overlay: True
     start: 0xD999B0
     vram: 0x80240000
     subsegments:
@@ -11631,7 +11063,6 @@ segments:
   - name: omo_01
     dir: world/area_omo/omo_01
     type: code
-    overlay: True
     start: 0xD9AEF0
     vram: 0x80240000
     subsegments:
@@ -11646,7 +11077,6 @@ segments:
   - name: omo_02
     dir: world/area_omo/omo_02
     type: code
-    overlay: True
     start: 0xD9D4D0
     vram: 0x80240000
     subsegments:
@@ -11662,7 +11092,6 @@ segments:
   - name: omo_03
     dir: world/area_omo/omo_03
     type: code
-    overlay: True
     start: 0xDA5240
     vram: 0x80240000
     subsegments:
@@ -11675,7 +11104,6 @@ segments:
   - name: omo_04
     dir: world/area_omo/omo_04
     type: code
-    overlay: True
     start: 0xDAD400
     vram: 0x80240000
     subsegments:
@@ -11687,7 +11115,6 @@ segments:
   - name: omo_05
     dir: world/area_omo/omo_05
     type: code
-    overlay: True
     start: 0xDB22C0
     vram: 0x80240000
     subsegments:
@@ -11699,7 +11126,6 @@ segments:
   - name: omo_06
     dir: world/area_omo/omo_06
     type: code
-    overlay: True
     start: 0xDB7910
     vram: 0x80240000
     subsegments:
@@ -11713,7 +11139,6 @@ segments:
   - name: omo_07
     dir: world/area_omo/omo_07
     type: code
-    overlay: True
     start: 0xDBD2B0
     vram: 0x80240000
     subsegments:
@@ -11730,7 +11155,6 @@ segments:
   - name: omo_08
     dir: world/area_omo/omo_08
     type: code
-    overlay: True
     start: 0xDC43D0
     vram: 0x80240000
     subsegments:
@@ -11744,7 +11168,6 @@ segments:
   - name: omo_09
     dir: world/area_omo/omo_09
     type: code
-    overlay: True
     start: 0xDCCCD0
     vram: 0x80240000
     subsegments:
@@ -11765,7 +11188,6 @@ segments:
   - name: omo_10
     dir: world/area_omo/omo_10
     type: code
-    overlay: True
     start: 0xDD79B0
     vram: 0x80240000
     subsegments:
@@ -11778,7 +11200,6 @@ segments:
   - name: omo_11
     dir: world/area_omo/omo_11
     type: code
-    overlay: True
     start: 0xDDC830
     vram: 0x80240000
     subsegments:
@@ -11791,7 +11212,6 @@ segments:
   - name: omo_12
     dir: world/area_omo/omo_12
     type: code
-    overlay: True
     start: 0xDDF310
     vram: 0x80240000
     subsegments:
@@ -11804,7 +11224,6 @@ segments:
   - name: omo_13
     dir: world/area_omo/omo_13
     type: code
-    overlay: True
     start: 0xDE2490
     vram: 0x80240000
     subsegments:
@@ -11819,7 +11238,6 @@ segments:
   - name: omo_14
     dir: world/area_omo/omo_14
     type: code
-    overlay: True
     start: 0xDE56B0
     vram: 0x80240000
     subsegments:
@@ -11832,7 +11250,6 @@ segments:
   - name: omo_15
     dir: world/area_omo/omo_15
     type: code
-    overlay: True
     start: 0xDE8770
     vram: 0x80240000
     subsegments:
@@ -11843,7 +11260,6 @@ segments:
   - name: omo_16
     dir: world/area_omo/omo_16
     type: code
-    overlay: True
     start: 0xDEBED0
     vram: 0x80240000
     subsegments:
@@ -11855,7 +11271,6 @@ segments:
   - name: omo_17
     dir: world/area_omo/omo_17
     type: code
-    overlay: True
     start: 0xDEEEA0
     vram: 0x80240000
     subsegments:
@@ -11871,7 +11286,6 @@ segments:
   - name: end_00
     dir: world/area_end/end_00
     type: code
-    overlay: True
     start: 0xDF6A00
     vram: 0x80240000
     subsegments:
@@ -11888,7 +11302,6 @@ segments:
   - name: end_01
     dir: world/area_end/end_01
     type: code
-    overlay: True
     start: 0xE05360
     vram: 0x80240000
     subsegments:
@@ -11906,7 +11319,6 @@ segments:
   - name: mgm_00
     dir: world/area_mgm/mgm_00
     type: code
-    overlay: True
     start: 0xE0E7A0
     vram: 0x80240000
     subsegments:
@@ -11919,7 +11331,6 @@ segments:
   - name: mgm_01
     dir: world/area_mgm/mgm_01
     type: code
-    overlay: True
     start: 0xE12760
     vram: 0x80240000
     subsegments:
@@ -11932,7 +11343,6 @@ segments:
   - name: mgm_02
     dir: world/area_mgm/mgm_02
     type: code
-    overlay: True
     start: 0xE15D80
     vram: 0x80240000
     subsegments:
@@ -11945,7 +11355,6 @@ segments:
   - name: mgm_03
     dir: world/area_mgm/mgm_03
     type: code
-    overlay: True
     start: 0xE1E380
     vram: 0x80240000
     subsegments:
@@ -11953,14 +11362,12 @@ segments:
   - name: gv_01
     dir: world/area_gv/gv_01
     type: code
-    overlay: True
     start: 0xE1E460
     vram: 0x80240000
     subsegments:
     - [0xE1E460, c]
     - [0xE1EC20, data]
   - type: code
-    overlay: True
     start: 0xE20110
     vram: 0x802B7000
     subsegments:
@@ -11968,7 +11375,6 @@ segments:
     - [0xE20B30, data]
     - [0xE20DD0]
   - type: code
-    overlay: True
     start: 0xE20EB0
     vram: 0x802B7000
     subsegments:
@@ -11983,7 +11389,6 @@ segments:
       - [0xE21858]
     - [0xE21860]
   - type: code
-    overlay: True
     start: 0xE21870
     vram: 0x802B7000
     subsegments:
@@ -11991,7 +11396,6 @@ segments:
     - [0xE21EB0, data]
     - [0xE22590]
   - type: code
-    overlay: True
     start: 0xE225B0
     vram: 0x802B7000
     subsegments:
@@ -12003,7 +11407,6 @@ segments:
     dir: world/action
     start: 0xE23260
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE23260, c, idle]
     - [0xE23690]
@@ -12012,7 +11415,6 @@ segments:
     dir: world/action
     start: 0xE236E0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE236E0, c, walk]
     - [0xE23FF0]
@@ -12021,7 +11423,6 @@ segments:
     dir: world/action
     start: 0xE24040
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE24040, c, jump]
   - type: code
@@ -12029,7 +11430,6 @@ segments:
     dir: world/action
     start: 0xE245D0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE245D0, c, 18]
     - [0xE248D0]
@@ -12038,7 +11438,6 @@ segments:
     dir: world/action
     start: 0xE24920
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE24920, c, land]
   - type: code
@@ -12046,7 +11445,6 @@ segments:
     dir: world/action
     start: 0xE24ED0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE24ED0, c, hammer]
     - [0xE25C80, data, hammer]
@@ -12056,7 +11454,6 @@ segments:
     dir: world/action
     start: 0xE25D60
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE25D60, c, spin]
     - [0xE26700]
@@ -12065,7 +11462,6 @@ segments:
     dir: world/action
     start: 0xE26710
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE26710, c, ultra_boots]
     - [0xE26DA0]
@@ -12074,7 +11470,6 @@ segments:
     dir: world/action
     start: 0xE26DE0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE26DE0, c, super_boots]
     - [0xE274C0]
@@ -12083,7 +11478,6 @@ segments:
     dir: world/action
     start: 0xE27510
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE27510, c, slide]
     - [0xE27C50]
@@ -12092,7 +11486,6 @@ segments:
     dir: world/action
     start: 0xE27C90
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE27C90, c, hit_fire]
   - type: code
@@ -12100,7 +11493,6 @@ segments:
     dir: world/action
     start: 0xE27F40
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE27F40, c, hit_lava]
     - [0xE28790]
@@ -12109,7 +11501,6 @@ segments:
     dir: world/action
     start: 0xE287F0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE287F0, c, 16]
   - type: code
@@ -12117,7 +11508,6 @@ segments:
     dir: world/action
     start: 0xE28A30
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE28A30, c, encounter]
     - [0xE29190]
@@ -12126,7 +11516,6 @@ segments:
     dir: world/action
     start: 0xE291A0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE291A0, c, use_munchlesia]
     - [0xE29450]
@@ -12135,7 +11524,6 @@ segments:
     dir: world/action
     start: 0xE29470
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE29470, c, use_spinning_flower]
     - [0xE2A300]
@@ -12144,7 +11532,6 @@ segments:
     dir: world/action
     start: 0xE2A340
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE2A340, c, use_tweester]
     - [0xE2A690, data, use_tweester]
@@ -12154,7 +11541,6 @@ segments:
     dir: world/action
     start: 0xE2A6B0
     vram: 0x802B6000
-    overlay: True
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
     - [0xE2B430, data, sneaky_parasol]
@@ -12163,7 +11549,6 @@ segments:
     dir: entity/default
     start: 0xE2B530
     vram: 0x802BAE00
-    overlay: True
     subsegments:
     - [0xE2B530, c, Padlock]
     - [0xE2BE40, c, BoardedFloor]
@@ -12173,7 +11558,6 @@ segments:
     dir: entity/jan_iwa
     start: 0xE2D730
     vram: 0x802BAE00
-    overlay: True
     subsegments:
     - [0xE2D730, c, Plants1]
     - [0xE2E5F0, c, Plants2]
@@ -12183,7 +11567,6 @@ segments:
     dir: entity/sbk_omo
     start: 0xE2F750
     vram: 0x802BAE00
-    overlay: True
     subsegments:
     - [0xE2F750, c, Tweester]
     - [0xE307C0, c, StarBoxLauncher]
@@ -13331,7 +12714,6 @@ segments:
   - type: code
     start: 0xEA0900
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEA0900, c]
     - [0xEA0C10, c, EA0C10]
@@ -13341,7 +12723,6 @@ segments:
   - type: code
     start: 0xEA6FD0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
@@ -13350,7 +12731,6 @@ segments:
   - type: code
     start: 0xEA8AE0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEA8AE0, c]
     - [0xEAA810, data]
@@ -13358,7 +12738,6 @@ segments:
   - type: code
     start: 0xEB0E60
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
@@ -13366,7 +12745,6 @@ segments:
   - type: code
     start: 0xEB5130
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
@@ -13374,7 +12752,6 @@ segments:
   - type: code
     start: 0xEB7230
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEB7230, c]
     - [0xEB7540, c, EB7540]
@@ -13383,7 +12760,6 @@ segments:
   - type: code
     start: 0xEB8E50
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEB8E50, c, EB8E50]
     - [0xEB8E90, c, EB8E90]
@@ -13393,7 +12769,6 @@ segments:
   - type: code
     start: 0xEC2200
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEC2200, c, EC2200]
     - [0xEC2240, c, EC2240]
@@ -13403,7 +12778,6 @@ segments:
   - type: code
     start: 0xEC71B0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
@@ -13411,7 +12785,6 @@ segments:
   - type: code
     start: 0xEC9D00
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEC9D00, c]
     - [0xECAA40, c]
@@ -13423,7 +12796,6 @@ segments:
   - type: code
     start: 0xECFFF0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xECFFF0, c]
     - [0xED0030, c]
@@ -13434,7 +12806,6 @@ segments:
   - type: code
     start: 0xED4220
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xED4220, c]
     - [0xED4260, c]
@@ -13445,7 +12816,6 @@ segments:
   - type: code
     start: 0xED8E20
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xED8E20, c, ED8E20]
     - [0xED9170, data]
@@ -13453,7 +12823,6 @@ segments:
   - type: code
     start: 0xEDBFE0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
@@ -13461,7 +12830,6 @@ segments:
   - type: code
     start: 0xEDE9C0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEDE9C0, c]
     - [0xEDEA00, c, EDEA00]
@@ -13471,7 +12839,6 @@ segments:
   - type: code
     start: 0xEE65B0
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
@@ -13481,7 +12848,6 @@ segments:
   - type: code
     start: 0xEED100
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEED100, c]
     - [0xEED140, c]
@@ -13493,7 +12859,6 @@ segments:
   - type: code
     start: 0xEF2610
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEF2610, c]
     - [0xEF2650, c]
@@ -13503,7 +12868,6 @@ segments:
   - type: code
     start: 0xEF7A80
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
@@ -13512,7 +12876,6 @@ segments:
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
-    overlay: True
     subsegments:
     - [0xEFEB00, c]
     - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
