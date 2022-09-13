@@ -616,7 +616,7 @@ void collision_main_lateral(void) {
                             speed *= 0.5f;
                         }
                     }
-                    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
 
                     if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK) {
                         if (fabsf(sinTheta) > fabsf(cosTheta)) {
@@ -634,7 +634,7 @@ void collision_main_lateral(void) {
                         zBump = 0.0f;
                     }
 
-                    sin_cos_rad(playerStatus->targetYaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
                     speed = playerStatus->currentSpeed;
                     if (playerStatus->flags & PS_FLAGS_40000) {
                         speed *= 0.5f;
@@ -673,7 +673,7 @@ void collision_main_lateral(void) {
                                                         playerStatus->colliderDiameter * 0.5f, playerStatus->targetYaw);
                 if (speed == 0.0f && result < 0) {
                     yaw2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
-                    sin_cos_rad((yaw2 + 180.0f) * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw2 + 180.0f), &sinTheta, &cosTheta);
                     playerX = playerStatus->position.x + (sinTheta * playerStatus->colliderDiameter * 0.5f);
                     playerY = playerStatus->position.y;
                     playerZ = playerStatus->position.z - (cosTheta * playerStatus->colliderDiameter * 0.5f);

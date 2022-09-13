@@ -190,7 +190,7 @@ void entity_Tweester_move(Entity* entity) {
     }
 
     data->yaw = clamp_angle(data->yaw + temp_f4);
-    yawRad = data->yaw * TAU / 360.0f;
+    yawRad = DEG_TO_RAD(data->yaw);
     entity->position.x += sin_rad(yawRad);
     entity->position.z -= cos_rad(yawRad);
 

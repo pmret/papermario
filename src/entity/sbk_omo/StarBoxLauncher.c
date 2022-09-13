@@ -142,7 +142,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
             /* fallthrough */
         case 1:
             temp = entity->position.y;
-            entity->position.y = temp + 8.0 * sin_rad(data->riseSpeedPhase * TAU / 360.0f);
+            entity->position.y = temp + 8.0 * sin_rad(DEG_TO_RAD(data->riseSpeedPhase));
             data->riseSpeedPhase += 2.0f;
             if (data->riseSpeedPhase >= 180.0f) {
                 data->riseSpeedPhase = 180.0f;
@@ -157,14 +157,14 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
             }
             break;
         case 2:
-            entity->rotation.z = data->maxRotationZ * sin_rad(data->rotationZPhase * TAU / 360.0f);
+            entity->rotation.z = data->maxRotationZ * sin_rad(DEG_TO_RAD(data->rotationZPhase));
             clamp_angle(entity->rotation.z);
             data->rotationZPhase += 30.0f;
             if (data->rotationZPhase >= 360.0f) {
                 data->rotationZPhase -= 360.0f;
             }
 
-            entity->position.y += data->riseVelocity * cos_rad(data->riseSpeedPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
             data->riseSpeedPhase += 30.0f;
             if (data->riseSpeedPhase >= 360.0f) {
                 data->riseSpeedPhase -= 360.0f;
@@ -181,7 +181,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
                 data->maxRotationZ = 0.0f;
             }
 
-            entity->rotation.z = data->maxRotationZ * sin_rad(data->rotationZPhase * TAU / 360.0f);
+            entity->rotation.z = data->maxRotationZ * sin_rad(DEG_TO_RAD(data->rotationZPhase));
             clamp_angle(entity->rotation.z);
             data->rotationZPhase += 30.0f;
             if (data->rotationZPhase >= 360.0f) {
@@ -190,7 +190,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
 
             entity_StarBoxLauncher_update_face_anim(entity);
 
-            entity->position.y += data->riseVelocity * cos_rad(data->riseSpeedPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
             data->riseSpeedPhase += 30.0f;
             if (data->riseSpeedPhase >= 360.0f) {
                 data->riseSpeedPhase -= 360.0f;

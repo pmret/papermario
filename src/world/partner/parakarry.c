@@ -302,7 +302,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         if (!((tempFrameCounter - tempFrameCounterU32 * 6) & 0xFFFF)) {
                             sfx_play_sound_at_npc(SOUND_2009, 0, -4);
                         }
-                        sp2C = fabsf(sin_rad((20 - D_802BEBC4) * 18 * TAU / 360.0f)) * 1.3;
+                        sp2C = fabsf(sin_rad(DEG_TO_RAD((20 - D_802BEBC4) * 18))) * 1.3;
                         playerStatus->position.y += sp2C;
                         parakarry->pos.y += sp2C;
                         x = parakarry->pos.x;

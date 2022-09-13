@@ -662,7 +662,7 @@ void peach_disguise_check_overlaps(void) {
     } else {
         yaw = camera->currentYaw - 90.0f;
     }
-    sin_cos_rad(clamp_angle(yaw) * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(clamp_angle(yaw)), &sinTheta, &cosTheta);
 
     for (phi_s1 = 2, i = 2; i > 0; i--, phi_s1 += 18) {
         f32 x = playerStatus->position.x + (sinTheta * phi_s1);

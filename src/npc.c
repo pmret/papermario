@@ -400,7 +400,7 @@ void npc_do_other_npc_collision(Npc* npc) {
                             }
 
                             if (collision) {
-                                temp_f20_2 = atan2(otherX, otherZ, thisX, thisZ) * TAU / 360.0f;
+                                temp_f20_2 = DEG_TO_RAD(atan2(otherX, otherZ, thisX, thisZ));
                                 temp_f24_2 = thisBuf + otherBuf - dist;
                                 temp_f22_3 = temp_f24_2 * sin_rad(temp_f20_2);
                                 temp_f22_4 = -temp_f24_2 * cos_rad(temp_f20_2);
@@ -1698,7 +1698,7 @@ void func_8003DA38(Npc* npc, s32 arg1) {
 
     if (D_80077C1C++ > 0) {
         D_80077C1C = 0;
-        theta = clamp_angle(-npc->yaw) * TAU / 360.0f;
+        theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
 

@@ -56,7 +56,7 @@ void entity_TrumpetPlant_idle(Entity* entity) {
 void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+    angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
     xOffset = -26.0 * cos_rad(angle);
     zOffset = 6.0 * sin_rad(angle);
     fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
@@ -69,7 +69,7 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
     if (data->numCoins < 3) {
         f32 xOffset, zOffset, angle;
 
-        angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+        angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 

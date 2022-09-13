@@ -133,7 +133,7 @@ s32 func_802B62A4_E25174(void) {
         }
     }
 
-    sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
@@ -163,7 +163,7 @@ s32 func_802B62A4_E25174(void) {
             }
         }
 
-        sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+        sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
             y = playerY;
@@ -309,7 +309,7 @@ void func_802B6820_E256F0(void) {
         }
     }
 
-    sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
@@ -344,7 +344,7 @@ void func_802B6820_E256F0(void) {
                 yaw += -15.0f;
             }
         }
-        sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+        sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
 
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);

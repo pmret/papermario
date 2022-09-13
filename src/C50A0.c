@@ -1457,7 +1457,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     } else {
                         temp = 2.1f;
                     }
-                    theta = physData->moveAngle * TAU / 360.0f;
+                    theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
                     physData->velx = temp * sinAngle;
@@ -1589,7 +1589,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                         item->position.y = outY;
                         item->position.z = outZ;
                         physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
-                        theta = physData->moveAngle * TAU / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = sinAngle * 2.0;

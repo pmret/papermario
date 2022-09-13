@@ -328,10 +328,10 @@ void action_update_parasol(void) {
     if (parasolStruct->time > 0) {
         if (--parasolStruct->time == 10) {
             if (playerStatus->spriteFacingAngle >= 90 && playerStatus->spriteFacingAngle < 270) {
-                phi_f20 = ((cam->currentYaw - 270) * TAU) / 360;
+                phi_f20 = DEG_TO_RAD(cam->currentYaw - 270);
                 phi_f22 = 46;
             } else {
-                phi_f20 = ((cam->currentYaw - 90) * TAU) / 360;
+                phi_f20 = DEG_TO_RAD(cam->currentYaw - 90);
                 phi_f22 = 30;
             }
             parasolStruct->position.x = playerStatus->position.x + (phi_f22 * sin_rad(phi_f20));
@@ -343,13 +343,13 @@ void action_update_parasol(void) {
             
             /*
             TODO something like:
-            phi_f20 = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
+            phi_f20 = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
             parasolStruct->position.x += sin_rad(phi_f20) * 10.0;
             parasolStruct->position.z -= cos_rad(phi_f20) * 10.0;
             */
             
             temp_f22 = parasolStruct->position.x;
-            tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
+            tempX = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
 
             phi_f20 = tempX;
             tempX = temp_f22 + (sin_rad(phi_f20) * 10.0);

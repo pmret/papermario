@@ -45,8 +45,8 @@ void func_802BD100_31DE70(void) {
         phi_v1 = 8;
     }
 
-    playerStatus->position.z -= cos_rad((cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1) *
-                                        TAU / 360.0f) * -4.0f;
+    playerStatus->position.z -= cos_rad(DEG_TO_RAD(
+        cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1)) * -4.0f;
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {

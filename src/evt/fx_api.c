@@ -49,8 +49,8 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
     offsetX = rand_int(10) - 5;
     offsetZ = rand_int(10) - 5;
     offsetY = -2.0f - ((SQ(offsetX) + SQ(offsetZ)) / 5.0f);
-    sinA = sin_rad(angle * TAU / 360.0f);
-    cosA = cos_rad(angle * TAU / 360.0f);
+    sinA = sin_rad(DEG_TO_RAD(angle));
+    cosA = cos_rad(DEG_TO_RAD(angle));
     fx_cloud_trail(
         posX + ((sinA * magnitude * script->functionTemp[0]) / duration) + offsetX,
         posY + 15.5f + offsetY,

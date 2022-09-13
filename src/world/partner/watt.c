@@ -148,7 +148,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                     WattTweesterPhysicsPtr->radius++;
                 }
 
-                liftoffVelocity = sin_rad(WattTweesterPhysicsPtr->liftoffVelocityPhase * TAU / 360.0f) * 3.0f;
+                liftoffVelocity = sin_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
                 WattTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
                 if (WattTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -525,7 +525,7 @@ void world_watt_sync_held_position(void) {
             }
         }
 
-        angle = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + angleOffset) * TAU / 360.0f;
+        angle = DEG_TO_RAD(camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + angleOffset);
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;

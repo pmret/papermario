@@ -29,7 +29,7 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
             wattEffectData->angle += 15;
             wattEffectData->angle = clamp_angle(wattEffectData->angle);
         }
-        actor->unk_19A = sin_rad(wattEffectData->angle * TAU / 360.0f) * 3.0f;
+        actor->unk_19A = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
         x = actor->currentPos.x + actor->headOffset.x;
         y = actor->currentPos.y + actor->headOffset.y + actor->unk_19A + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match

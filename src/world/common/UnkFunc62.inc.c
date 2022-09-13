@@ -81,7 +81,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             phi_f20 = state->velocity;
             temp_f22_2 = state->acceleration;
-            phi_f0 = sin_rad(state->unk_24 * TAU / 360.0f);
+            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.53;
             state->velocity = phi_f20 + ((phi_f0 * phi_f2 * temp_f22_2) + temp_f22_2);
         } else {
@@ -99,7 +99,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             velocity = state->velocity;
             temp_f22_3 = state->acceleration;
-            phi_f0 = sin_rad(state->unk_24 * TAU / 360.0f);
+            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.8;
             state->velocity = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
