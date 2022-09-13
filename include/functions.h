@@ -740,7 +740,7 @@ void func_802B71C8(void);
 void func_802B71D4(void);
 void func_802B72C0_E22870(void);
 s32 func_802BD7DC(void);
-void func_802BE070_31DBE0(void);
+void world_watt_sync_held_position(void);
 void func_802BFB44_323694(f32 arg0);
 
 void initialize_curtains(void);

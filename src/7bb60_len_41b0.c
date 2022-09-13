@@ -126,10 +126,10 @@ void func_800E29C8(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = LANDING_ON_SWITCH_SUBSTATE_0;
     }
 
-    if (playerStatus->actionSubstate == 0) {
+    if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_0) {
         if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
@@ -138,13 +138,13 @@ void func_800E29C8(void) {
             record_jump_apex();
             gravity_use_fall_parms();
             integrate_gravity();
-            playerStatus->actionSubstate = 1;
+            playerStatus->actionSubstate = LANDING_ON_SWITCH_SUBSTATE_1;
         }
         if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
             playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
         }
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
-    } else if (playerStatus->actionSubstate == 2) {
+    } else if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_2) {
         if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
@@ -995,7 +995,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     f32 x, y, z;
     f32 temp_f0;
 
-    if (playerStatus->animFlags & 0x1000) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_800E4F10();
         return;
     }

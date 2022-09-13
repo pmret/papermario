@@ -26,7 +26,7 @@ s32 action_hammer_is_swinging_away(s32 animID) {
         return TRUE;
     }
 
-    // away-facing swing anims
+    // back facing swing anims
     switch (animID) {
         case ANIM_Mario_60011:
         case ANIM_Mario_60013:
@@ -122,6 +122,7 @@ s32 func_802B62A4_E25174(void) {
     s32 ret;
     s32 i;
 
+    // first attempt
     yaw = func_800E5348();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
         angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
@@ -150,6 +151,7 @@ s32 func_802B62A4_E25174(void) {
         }
     }
 
+    // second attempt
     if (i >= 16) {
         yaw = func_800E5348();
         if (!action_hammer_is_swinging_away(playerStatus->trueAnimation)) {

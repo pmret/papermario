@@ -393,9 +393,9 @@ void set_action_state(s32 actionState) {
         sfx_stop_sound(spinState->spinSoundID);
     }
 
-    if (playerStatus->specialSpinEffect != NULL) {
-        playerStatus->specialSpinEffect->data.unk_46->unk_24 = 10;
-        playerStatus->specialSpinEffect = NULL;
+    if (playerStatus->specialDecorationEffect != NULL) {
+        playerStatus->specialDecorationEffect->data.unk_46->unk_24 = 10;
+        playerStatus->specialDecorationEffect = NULL;
     }
 }
 

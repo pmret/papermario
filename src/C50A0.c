@@ -1854,7 +1854,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     actionState != ACTION_STATE_LAUNCH &&
                     actionState != ACTION_STATE_RIDE &&
                     actionState != ACTION_STATE_IDLE &&
-                    (actionState != ACTION_STATE_USE_SPINNING_FLOWER || playerStatus->actionSubstate != 1)
+                    !(actionState == ACTION_STATE_USE_SPINNING_FLOWER && playerStatus->actionSubstate == 1)
                 ) {
                     break;
                 }
@@ -1874,7 +1874,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                 }
             }
             D_801568E0 = hud_element_create(gItemHudScripts[gItemTable[itemEntity->itemID].hudElemID].enabled);
-            hud_element_set_flags(D_801568E0, 0x80);
+            hud_element_set_flags(D_801568E0, HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(D_801568E0, -100, -100);
             itemEntity->state = 2;
 
@@ -1942,9 +1942,9 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     playerData->hammerLevel = itemEntity->itemID - 4;
                 }
 
-                if (itemEntity->itemID == ITEM_JUMP ||
-                    itemEntity->itemID == ITEM_SPIN_JUMP ||
-                    itemEntity->itemID == ITEM_TORNADO_JUMP)
+                if (itemEntity->itemID == ITEM_BOOTS ||
+                    itemEntity->itemID == ITEM_SUPER_BOOTS ||
+                    itemEntity->itemID == ITEM_ULTRA_BOOTS)
                 {
                     playerData->bootsLevel = itemEntity->itemID - 1;
                 }

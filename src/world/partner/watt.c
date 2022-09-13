@@ -219,7 +219,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                     (func_800EA52C(6) && !is_starting_conversation()))
                 {
                     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
-                        if (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_2 | 1)) {
+                        if (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2)) {
                             D_802BE304 = 20;
                         } else {
                             D_802BE304 = 40;
@@ -234,7 +234,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 }
             } else {
                 partnerActionStatus->partnerAction_unk_1 = 0;
-                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+                playerStatus->animFlags |= (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2);
                 func_802BE014_31DB84();
                 npc->currentAnim = 0x60001;
                 D_802BE304 = 1;
@@ -328,7 +328,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
             }
             break;
         case 1:
-            func_802BE070_31DBE0();
+            world_watt_sync_held_position();
             if ((playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
                 D_802BE304 = 2;
             } else {
@@ -455,8 +455,8 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z,
                                             script->varTable[1], script->varTable[3]);
             playerStatus->heading = playerStatus->targetYaw;
-            move_player(script->functionTemp[1], playerStatus->heading, *((f32*) &script->varTable[5]));
-            func_802BE070_31DBE0();
+            move_player(script->functionTemp[1], playerStatus->heading, script->varTableF[5]);
+            world_watt_sync_held_position();
             watt->flags &= ~NPC_FLAG_GRAVITY;
             watt->flags |= NPC_FLAG_100;
             playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
@@ -467,7 +467,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] += 1;
             break;
         case 1:
-            func_802BE070_31DBE0();
+            world_watt_sync_held_position();
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
                 if (script->varTable[12]) {
@@ -496,45 +496,45 @@ void func_802BE014_31DB84(void) {
     suggest_player_anim_clearUnkFlag(anim);
 }
 
-void func_802BE070_31DBE0(void) {
+void world_watt_sync_held_position(void) {
     Npc* partnerNPC;
     Npc* new_var2;
     Camera* camera = gCameras;
     PlayerStatus* playerStatus;
-    f32 temp, angle;
+    f32 offsetScale, angle;
     f32 spriteFacingAngle;
-    s32 phi_v1;
+    s32 angleOffset;
 
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
             if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
-                phi_v1 = -5;
-                temp = 0.6f;
+                angleOffset = -5;
+                offsetScale = 0.6f;
             } else {
-                phi_v1 = 5;
-                temp = 0.6f;
+                angleOffset = 5;
+                offsetScale = 0.6f;
             }
         } else {
             if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
-                phi_v1 = 5;
-                temp = 0.6f;
+                angleOffset = 5;
+                offsetScale = 0.6f;
             } else {
-                phi_v1 = -5;
-                temp = 0.6f;
+                angleOffset = -5;
+                offsetScale = 0.6f;
             }
         }
 
-        angle = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + phi_v1) * TAU / 360.0f;
+        angle = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + angleOffset) * TAU / 360.0f;
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;
-        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(angle) * gPlayerStatusPtr->colliderDiameter * temp);
+        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
 
         new_var2 = wPartnerNpc;
         playerStatus = gPlayerStatusPtr;
         partnerNPC = new_var2;
-        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * temp);
+        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
 
         wPartnerNpc->yaw = gPlayerStatusPtr->targetYaw;
         wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;

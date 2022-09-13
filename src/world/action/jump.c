@@ -13,7 +13,7 @@ static void initialize_jump(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     AnimID anim;
 
-    playerStatus->actionSubstate = JUMP_STATE_0;
+    playerStatus->actionSubstate = JUMP_SUBSTATE_0;
     playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_FLYING);
@@ -90,7 +90,7 @@ void action_update_landing_on_switch(void) {
 
     playerStatus->timeInAir++;
 
-    if (playerStatus->actionSubstate != JUMP_STATE_1) {
+    if (playerStatus->actionSubstate != JUMP_SUBSTATE_1) {
         return;
     }
 

@@ -89,7 +89,7 @@ void func_800F0248(void) {
 
     if (
         playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN &&
-        (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->actionSubstate != 0)
+        !(playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0)
     ) {
         D_80109490 = 0;
         return;
@@ -128,7 +128,7 @@ void func_800F0864(void) {
     if (
         (
             playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN &&
-            (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->actionSubstate != 0) &&
+            !(playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) &&
             playerStatus->actionState != ACTION_STATE_LAND && playerStatus->actionState != ACTION_STATE_IDLE
         ) || playerStatus->flags >= 0
     ) {

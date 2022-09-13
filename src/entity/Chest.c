@@ -360,13 +360,13 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     s32 flagIndex;
 
     switch (data->itemID) {
-        case ITEM_JUMP:
+        case ITEM_BOOTS:
             gPlayerData.bootsLevel = 0;
             break;
-        case ITEM_SPIN_JUMP:
+        case ITEM_SUPER_BOOTS:
             gPlayerData.bootsLevel = 1;
             break;
-        case ITEM_TORNADO_JUMP:
+        case ITEM_ULTRA_BOOTS:
             gPlayerData.bootsLevel = 2;
             break;
         case ITEM_HAMMER:

@@ -1,7 +1,12 @@
 #include "common.h"
 
-void func_802B62CC_E24BEC(void);
-void func_802B644C_E24D6C(void);
+enum {
+    SUBSTATE_INIT   = 0,
+    SUBSTATE_DONE   = 1,
+};
+
+static void action_update_peach_land(void);
+static void action_update_peach_step_down_land(void);
 
 void action_update_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -13,7 +18,7 @@ void action_update_land(void) {
     AnimID anim;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B62CC_E24BEC();
+        action_update_peach_land();
         return;
     }
 
@@ -24,7 +29,7 @@ void action_update_land(void) {
             PLAYER_STATUS_FLAGS_80000 |
             PLAYER_STATUS_FLAGS_AIRBORNE
         );
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
@@ -50,7 +55,7 @@ void action_update_land(void) {
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
         camera->moveFlags &= ~CAMERA_MOVE_FLAGS_4;
     }
-    playerStatus->actionSubstate++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -75,7 +80,7 @@ void action_update_step_down_land(void) {
     f32 inputMoveAngle;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B644C_E24D6C();
+        action_update_peach_step_down_land();
         return;
     }
 
@@ -86,7 +91,7 @@ void action_update_step_down_land(void) {
             PLAYER_STATUS_FLAGS_80000 |
             PLAYER_STATUS_FLAGS_AIRBORNE
         );
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
@@ -99,7 +104,7 @@ void action_update_step_down_land(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->actionSubstate++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -112,7 +117,7 @@ void action_update_step_down_land(void) {
     update_locomotion_state();
 }
 
-void func_802B62CC_E24BEC(void) {
+static void action_update_peach_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
@@ -120,7 +125,7 @@ void func_802B62CC_E24BEC(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
@@ -136,7 +141,7 @@ void func_802B62CC_E24BEC(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->actionSubstate++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -156,7 +161,7 @@ void func_802B62CC_E24BEC(void) {
     }
 }
 
-void func_802B644C_E24D6C(void) {
+static void action_update_peach_step_down_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
@@ -164,7 +169,7 @@ void func_802B644C_E24D6C(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
@@ -177,7 +182,7 @@ void func_802B644C_E24D6C(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->actionSubstate++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
 

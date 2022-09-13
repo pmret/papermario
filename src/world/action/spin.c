@@ -50,7 +50,7 @@ void action_update_spin(void) {
         playerSpinState->bufferedStickAxis.x = 0;
         playerSpinState->bufferedStickAxis.y = 0;
         playerSpinState->spinSoundID = 0;
-        playerStatus->specialSpinEffect = NULL;
+        playerStatus->specialDecorationEffect = NULL;
         playerSpinState->initialSpinTime = 25;
         playerSpinState->fullSpeedSpinTime = 15;
         playerSpinState->spinRate = 40.0f;
@@ -117,7 +117,7 @@ void action_update_spin(void) {
             playerStatus->spinRate = -playerSpinState->spinRate;
         }
         if (spinFlags != 0) {
-            playerStatus->specialSpinEffect = fx_46(effectType, playerStatus, 1.0f, 1000);
+            playerStatus->specialDecorationEffect = fx_46(effectType, playerStatus, 1.0f, 1000);
         }
 
         phys_clear_spin_history();

@@ -126,7 +126,7 @@ void action_update_launch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(0x80000000 | 0x80000 | 0x8 | 0x4 | 0x2);
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -134,7 +134,7 @@ void action_update_launch(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
-        if (playerStatus->animFlags & 0x1000) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             return;
         }
         playerStatus->currentStateTime = 5;

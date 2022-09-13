@@ -40,6 +40,7 @@ s32 get_player_back_anim(s32 arg0);
 void appendGfx_player(void* data);
 void appendGfx_player_spin(void* data);
 void update_player_shadow(void);
+s32 partner_use_ability(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -698,14 +699,14 @@ void phys_update_standard(void) {
     check_input_use_partner();
     phys_update_action_state();
 
-    if (!(playerStatus->flags & 8)) {
-        if (playerStatus->flags & 2) {
+    if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING)) {
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING) {
             phys_update_jump();
         }
     }
 
-    if (playerStatus->flags & 4) {
-        if (!(playerStatus->flags & 8)) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_FALLING) {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING)) {
             phys_update_falling();
         }
     }
@@ -716,11 +717,8 @@ void phys_update_standard(void) {
         collision_main_lateral();
         collision_check_player_overlaps();
 
-        if (
-            collision_main_above() < 0 &&
-            playerStatus->timeInAir == 0 &&
-            playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS
-        ) {
+        if (collision_main_above() < 0 && playerStatus->timeInAir == 0 &&
+            playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             func_800E4F10();
         }
 
@@ -730,8 +728,8 @@ void phys_update_standard(void) {
         }
     }
 
-    if (playerStatus->animFlags & 2) {
-        func_802BE070_31DBE0();
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_2) {
+        world_watt_sync_held_position();
     }
 
     if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW)) {

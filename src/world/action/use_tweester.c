@@ -4,6 +4,11 @@
 
 extern struct TweesterPhysics* PlayerTweesterPhysics;
 
+enum {
+    SUBSTATE_LAUNCH     = 0,
+    SUBSTATE_DONE       = 1
+};
+
 void action_update_use_tweester(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -16,18 +21,18 @@ void action_update_use_tweester(void) {
         disable_player_input();
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_100000 | PLAYER_STATUS_FLAGS_FLYING);
         suggest_player_anim_clearUnkFlag(ANIM_Mario_8001F);
-        playerStatus->actionSubstate = 0;
+        playerStatus->actionSubstate = SUBSTATE_LAUNCH;
         mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
         PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
         PlayerTweesterPhysics->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
         PlayerTweesterPhysics->angularVelocity = 6.0f;
         PlayerTweesterPhysics->liftoffVelocityPhase = 50.0f;
-        PlayerTweesterPhysics->countdown = 0x78;
-        sfx_play_sound_at_player(SOUND_2F6, 0);
+        PlayerTweesterPhysics->countdown = 120;
+        sfx_play_sound_at_player(SOUND_TWEESTER_LAUNCH, 0);
     }
 
     switch (playerStatus->actionSubstate) {
-        case 0:
+        case SUBSTATE_LAUNCH:
             sin_cos_rad((PlayerTweesterPhysics->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
             playerStatus->position.x = entity->position.x + (sinAngle * PlayerTweesterPhysics->radius);
@@ -54,11 +59,11 @@ void action_update_use_tweester(void) {
                 PlayerTweesterPhysics->angularVelocity = 40.0f;
             }
             if (--PlayerTweesterPhysics->countdown == 0) {
-                playerStatus->actionSubstate++;
+                playerStatus->actionSubstate++; // SUBSTATE_DONE
                 entity_start_script(entity);
             }
             break;
-        case 1:
+        case SUBSTATE_DONE:
             disable_player_shadow();
             disable_npc_shadow(wPartnerNpc);
             playerStatus->blinkTimer = 50;
