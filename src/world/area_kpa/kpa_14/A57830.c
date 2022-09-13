@@ -28,7 +28,7 @@ ApiStatus func_8024073C_A57BEC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (gCollisionStatus.currentFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
-        if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
+        if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
             playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
             temp_a0 == 0)
         {

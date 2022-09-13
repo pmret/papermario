@@ -1351,9 +1351,9 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
         player->footStepCounter++;
         playerState->distance = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
-            sfx_play_sound_at_position(SOUND_STEP1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
-            sfx_play_sound_at_position(SOUND_STEP2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
     }
 
@@ -1426,9 +1426,9 @@ ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
         player->footStepCounter++;
         playerState->distance = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
-            sfx_play_sound_at_position(SOUND_STEP1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
-            sfx_play_sound_at_position(SOUND_STEP2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
     }
 

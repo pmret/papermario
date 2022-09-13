@@ -79,7 +79,7 @@ void entity_StarBoxLauncher_check_launch(Entity* entity) {
                 result = get_entity_type(D_8010C978) == ENTITY_TYPE_STAR_BOX_LAUCHER;
             }
         }
-    } else if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (actionState == ACTION_STATE_GROUND_POUND || actionState == ACTION_STATE_ULTRA_POUND)) {
+    } else if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (actionState == ACTION_STATE_SPIN_POUND || actionState == ACTION_STATE_TORNADO_POUND)) {
         result = 1;
     } else if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_HAMMER) {
         result = -1;

@@ -45,14 +45,14 @@ ApiStatus N(LetterDelivery_CalcLetterPos)(Evt* script, s32 isInitialCall) {
 ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
-    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim.w;
-    npc->currentAnim.w = script->varTable[4];
+    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim;
+    npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
-    npc->currentAnim.w = N(LetterDelivery_SavedNpcAnim);
+    npc->currentAnim = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }

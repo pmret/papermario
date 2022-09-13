@@ -131,7 +131,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
     ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_10; // emerge from ground
+    npc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_10; // emerge from ground
     npc->duration = 10;
     script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;
 }
@@ -145,7 +145,7 @@ static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, En
         enemy->flags &= ~MONTY_MOLE_UNK_NPC_FLAGS;
     }
     if (npc->duration <= 0) {
-        npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_18; // get and throw rock
+        npc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_18; // get and throw rock
         npc->duration = 10;
         script->AI_TEMP_STATE = AI_STATE_MOLE_DRAW_ROCK;
     }
@@ -160,11 +160,11 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, E
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->alertOffsetDist)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
-            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
+            npc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
             npc->duration = 30;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_PRE_BURROW;
         } else {
-            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1B; // throw rock
+            npc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_1B; // throw rock
             npc->duration = 15;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_THROW_ROCK;
         }
@@ -186,12 +186,12 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, 
     }
     if (moleNpc->duration < 8) {
         if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > 100.0) {
-            moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_15; // clap
+            moleNpc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_15; // clap
         }
     }
     if (moleNpc->duration <= 0) {
-        if (moleNpc->currentAnim.w != NPC_ANIM_monty_mole_Palette_00_Anim_15) {
-            moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
+        if (moleNpc->currentAnim != NPC_ANIM_monty_mole_Palette_00_Anim_15) {
+            moleNpc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_1;
         }
         moleNpc->duration = 15;
         script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_BURROW;
@@ -206,7 +206,7 @@ static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, 
     if (npc->duration <= 0) {
         ai_enemy_play_sound(npc, SOUND_MOLE_DIG, 0);
         npc->duration = 11;
-        npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_11; // retreat into ground
+        npc->currentAnim = NPC_ANIM_monty_mole_Palette_00_Anim_11; // retreat into ground
         script->AI_TEMP_STATE = AI_STATE_MOLE_BURROW;
     }
 }

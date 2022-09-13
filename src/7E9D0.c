@@ -145,9 +145,11 @@ s32 phys_adjust_cam_on_landing(void) {
     }
 
     if (ret == 1) {
-        if ((get_collider_type_by_id(gCollisionStatus.currentFloor) & 0xFF) == 3) {
-            ret = 0;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+
+        if (surfaceType == SURFACE_TYPE_LAVA) {
             gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            ret = 0;
         } else {
             gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
         }
@@ -347,11 +349,11 @@ void set_action_state(s32 actionState) {
     if (actionState == ACTION_STATE_HIT_FIRE || actionState == ACTION_STATE_HIT_LAVA) {
         s8 partner;
 
-        if (playerStatus->unk_BF == 3) {
+        if (playerStatus->hazardType == HAZARD_TYPE_FIRE_BAR) {
             actionState = ACTION_STATE_HIT_FIRE;
         }
 
-        // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
+        // Whilst Sushie, Lakilester, or Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
@@ -391,9 +393,9 @@ void set_action_state(s32 actionState) {
         sfx_stop_sound(spinState->spinSoundID);
     }
 
-    if (playerStatus->unk_D8 != NULL) {
-        playerStatus->unk_D8->data.unk_46->unk_24 = 10;
-        playerStatus->unk_D8 = NULL;
+    if (playerStatus->specialDecorationEffect != NULL) {
+        playerStatus->specialDecorationEffect->data.unk_46->unk_24 = 10;
+        playerStatus->specialDecorationEffect = NULL;
     }
 }
 
@@ -413,10 +415,7 @@ void start_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ACTION_STATE_FALLING);
-    playerStatus->gravityIntegrator[0] = 0.1143f;
-    playerStatus->gravityIntegrator[1] = -0.2871f;
-    playerStatus->gravityIntegrator[2] = -0.1823f;
-    playerStatus->gravityIntegrator[3] = 0.01152f;
+    LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
 }
 
 void start_bounce_a(void) {
@@ -466,12 +465,15 @@ s32 check_input_hammer(void) {
 s32 check_input_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
+    s32 surfaceType;
 
     if (!(playerStatus->pressedButtons & BUTTON_A)) {
         return FALSE;
     }
 
-    if ((get_collider_type_by_id((u16)collisionStatus->currentFloor) == 5) && phys_should_player_be_sliding()) {
+    // @bug? collider flags not properly masked with COLLIDER_FLAGS_SURFACE_TYPE
+    surfaceType = get_collider_flags((u16)gCollisionStatus.currentFloor);
+    if ((surfaceType == SURFACE_TYPE_SLIDE) && phys_should_player_be_sliding()) {
         return FALSE;
     }
 
@@ -542,7 +544,7 @@ void peach_set_disguise_anim(s32 arg0) {
     s32 listIndex = D_8010C96C;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim.w = arg0;
+        get_npc_by_index(listIndex)->currentAnim = arg0;
     }
 }
 

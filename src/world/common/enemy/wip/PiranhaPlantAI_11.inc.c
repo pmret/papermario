@@ -9,7 +9,7 @@ void N(PiranhaPlantAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         enemy->flags &= ~(ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000);
     }
     if (npc->duration == 0) {
-        npc->currentAnim.w = enemy->animList[10];
+        npc->currentAnim = enemy->animList[10];
         npc->duration = 0;
         script->functionTemp[0] = 12;
     }

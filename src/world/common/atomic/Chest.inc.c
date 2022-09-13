@@ -7,18 +7,18 @@
 
 // temporarily copied from StashVars to allow static varStash
 ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
-    static s32** varStash = NULL;
+    static s32* varStash = NULL;
     s32 i;
 
     if (varStash == NULL) {
         varStash = heap_malloc(sizeof(script->varTable));
 
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            varStash[i] = (s32*) script->varTable[i];
+            varStash[i] = script->varTable[i];
         }
     } else {
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            script->varTable[i] = (s32) varStash[i];
+            script->varTable[i] = varStash[i];
         }
 
         heap_free(varStash);

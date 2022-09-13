@@ -48,9 +48,9 @@ void reset_player_status(void) {
     D_8010C940 = 0;
     D_8010C958 = 0;
     D_8010C92C = 0;
-    D_8010C95C = 0;
+    PrevPlayerDirection = 0;
     D_8010C980 = 0;
-    D_800F7B40 = 0;
+    PrevPlayerCamRelativeYaw = 0;
     D_800F7B44 = 0;
     D_8010C938 = 0;
     D_8010C990 = 0.0f;
@@ -97,10 +97,10 @@ void reset_player_status(void) {
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
-    playerStatus->unk_90[CAM_DEFAULT] = 0.0f;
-    playerStatus->unk_90[CAM_BATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_TATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_3] = 0.0f;
+    playerStatus->flipYaw[CAM_DEFAULT] = 0.0f;
+    playerStatus->flipYaw[CAM_BATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_TATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_3] = 0.0f;
 
     mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 

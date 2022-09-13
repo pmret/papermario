@@ -2515,7 +2515,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
     Matrix4f sp60;
     Matrix4f spA0;
 
-    guPositionF(spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
+    guPositionF(spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE_F,
                 evt_get_variable(N(D_8024EFCC), ArrayVar(4)), evt_get_variable(N(D_8024EFCC), ArrayVar(5)),
                 evt_get_variable(N(D_8024EFCC), ArrayVar(6)));
 
@@ -2539,7 +2539,7 @@ void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
     Matrix4f sp20;
     u32 temp_s1;
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE_F,
                 evt_get_variable(N(D_8024EFCC), ArrayVar(4)), evt_get_variable(N(D_8024EFCC), ArrayVar(5)),
                 evt_get_variable(N(D_8024EFCC), ArrayVar(6)));
 

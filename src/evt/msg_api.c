@@ -84,7 +84,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 arg2) {
             npc = resolve_npc(script, temp_fp);
             get_screen_coords(gCurrentCameraID, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z,
                               &screenX, &screenY, &screenZ);
-            script->functionTemp[3] = npc->currentAnim.w;
+            script->functionTemp[3] = npc->currentAnim;
             script->varTable[15] = npc->yaw;
         }
 

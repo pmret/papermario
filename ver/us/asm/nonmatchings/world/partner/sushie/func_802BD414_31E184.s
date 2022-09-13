@@ -316,7 +316,7 @@ glabel func_802BD414_31E184
 /* 31E5F4 802BD884 2442C978 */  addiu     $v0, $v0, %lo(D_8010C978)
 /* 31E5F8 802BD888 8C440000 */  lw        $a0, ($v0)
 /* 31E5FC 802BD88C 94420002 */  lhu       $v0, 2($v0)
-/* 31E600 802BD890 0C016F6A */  jal       get_collider_type_by_id
+/* 31E600 802BD890 0C016F6A */  jal       get_collider_flags
 /* 31E604 802BD894 A6220000 */   sh       $v0, ($s1)
 /* 31E608 802BD898 304200FF */  andi      $v0, $v0, 0xff
 /* 31E60C 802BD89C 24030004 */  addiu     $v1, $zero, 4

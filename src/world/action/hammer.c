@@ -1,5 +1,12 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite.h"
+
+enum {
+    SUBSTATE_HAMMER_0   = 0,
+    SUBSTATE_HAMMER_1   = 1,
+    SUBSTATE_HAMMER_2   = 2
+};
 
 typedef struct HammerHitData {
     /* 0x00 */ Vec3f hitPos;
@@ -15,18 +22,18 @@ extern HammerHitData* HammerHit;
 void func_802B6820_E256F0(void);
 
 s32 action_hammer_is_swinging_away(s32 animID) {
-    if (animID & 0x1000000) {
+    if (animID & SPRITE_ID_BACK_FACING) {
         return TRUE;
     }
 
-    // away-facing swing anims
+    // back facing swing anims
     switch (animID) {
-        case 0x60011:
-        case 0x60013:
-        case 0x60015:
-        case 0x60017:
-        case 0x60019:
-        case 0x6001B:
+        case ANIM_Mario_60011:
+        case ANIM_Mario_60013:
+        case ANIM_Mario_60015:
+        case ANIM_Mario_60017:
+        case ANIM_Mario_60019:
+        case ANIM_Mario_6001B:
             return TRUE;
     }
     return FALSE;
@@ -101,7 +108,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
     }
 
     sfx_play_sound_at_player(soundID, 0);
-    start_rumble(0x100, 50);
+    start_rumble(256, 50);
 }
 
 s32 func_802B62A4_E25174(void) {
@@ -115,6 +122,7 @@ s32 func_802B62A4_E25174(void) {
     s32 ret;
     s32 i;
 
+    // first attempt
     yaw = func_800E5348();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
         angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
@@ -143,7 +151,8 @@ s32 func_802B62A4_E25174(void) {
         }
     }
 
-    if (i >= 0x10) {
+    // second attempt
+    if (i >= 16) {
         yaw = func_800E5348();
         if (!action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
             angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
@@ -213,47 +222,47 @@ s32 func_802B62A4_E25174(void) {
     return ret;
 }
 
-void action_hammer_update(void) {
+void action_update_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     HammerHit->unk_1C = 0;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        s32 animID;
+        AnimID anim;
         s32 soundID;
 
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_200000;
         HammerHit->timer = 0;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_BC = 0;
         HammerHit->hitID = func_802B62A4_E25174();
 
         if (gPlayerData.hammerLevel == 2) {
             soundID = SOUND_2117;
-            animID = 0x6001A;
+            anim = ANIM_Mario_6001A;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2117;
-                animID = 0x60018;
+                anim = ANIM_Mario_60018;
             }
         } else if (gPlayerData.hammerLevel == 1) {
             soundID = SOUND_2116;
-            animID = 0x60016;
+            anim = ANIM_Mario_60016;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2116;
-                animID = 0x60014;
+                anim = ANIM_Mario_60014;
             }
         } else {
             soundID = SOUND_2115;
-            animID = 0x60012;
+            anim = ANIM_Mario_60012;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2115;
-                animID = 0x60010;
+                anim = ANIM_Mario_60010;
             }
         }
 
-        suggest_player_anim_clearUnkFlag(animID);
+        suggest_player_anim_clearUnkFlag(anim);
         sfx_play_sound_at_player(soundID, 0);
         HammerHit->unk_0C = 0;
         HammerHit->unk_14 = 0;
@@ -305,6 +314,7 @@ void func_802B6820_E256F0(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
+    // check collision allong 16 points in a line away from the player
     for (i = 1; i < 16; i++) {
         x = playerX + (outSinTheta * i);
         y = playerY;
@@ -382,13 +392,13 @@ void func_802B6820_E256F0(void) {
         }
     }
 
-    if (playerStatus->fallState == 0 && result >= 0 && HammerHit->unk_14 == 0) {
-        playerStatus->fallState++;
+    if (playerStatus->actionSubstate == SUBSTATE_HAMMER_0 && result >= 0 && HammerHit->unk_14 == 0) {
+        playerStatus->actionSubstate++;
     }
-    if (playerStatus->fallState == 1 && result < 0) {
-        playerStatus->fallState = 2;
+    if (playerStatus->actionSubstate == SUBSTATE_HAMMER_1 && result < 0) {
+        playerStatus->actionSubstate = SUBSTATE_HAMMER_2;
     }
-    HammerHit->timer += 1;
+    HammerHit->timer++;
     if (result >= 0) {
         HammerHit->unk_14 = 1;
     }

@@ -207,8 +207,8 @@ void Entity_BoardedFloor_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if (playerStatus->actionState == ACTION_STATE_GROUND_POUND
-            || playerStatus->actionState == ACTION_STATE_ULTRA_POUND) {
+        if (playerStatus->actionState == ACTION_STATE_SPIN_POUND
+            || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) {
             entity_start_script(entity);
             exec_entity_commandlist(entity);
         }

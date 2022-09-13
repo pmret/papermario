@@ -43,7 +43,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim = enemy->animList[0];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             script->functionTemp[1] = 0;
@@ -63,7 +63,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
                 break;
             }
         case 10:
-            npc->currentAnim.w = enemy->animList[3];
+            npc->currentAnim = enemy->animList[3];
             npc->planarFlyDist = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             npc->jumpScale = 1.3f;
             npc->jumpVelocity = 0.0f;
@@ -173,7 +173,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
                 break;
             }
         case 14:
-            npc->currentAnim.w = enemy->animList[8];
+            npc->currentAnim = enemy->animList[8];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             npc->duration = 15;

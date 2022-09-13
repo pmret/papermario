@@ -1,19 +1,24 @@
 #include "common.h"
 
-void func_802B62CC_E24BEC(void);
-void func_802B644C_E24D6C(void);
+enum {
+    SUBSTATE_INIT   = 0,
+    SUBSTATE_DONE   = 1,
+};
 
-void func_802B6000_E24920(void) {
+void action_update_peach_land(void);
+void action_update_peach_step_down_land(void);
+
+void action_update_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
     s32 jumpInputCheck;
-    s32 phi_a0;
+    AnimID anim;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B62CC_E24BEC();
+        action_update_peach_land();
         return;
     }
 
@@ -22,25 +27,23 @@ void func_802B6000_E24920(void) {
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED |
             PLAYER_STATUS_FLAGS_800000 |
             PLAYER_STATUS_FLAGS_80000 |
-            PLAYER_STATUS_FLAGS_FLYING |
-            PLAYER_STATUS_FLAGS_FALLING |
-            PLAYER_STATUS_FLAGS_JUMPING
+            PLAYER_STATUS_FLAGS_AIRBORNE
         );
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
-            phi_a0 = 0x90002;
+            anim = ANIM_Mario_90002;
         } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
-            phi_a0 = 0x10009;
+            anim = ANIM_Mario_10009;
         } else {
-            phi_a0 = 0x6000B;
+            anim = ANIM_Mario_6000B;
         }
 
-        suggest_player_anim_clearUnkFlag(phi_a0);
+        suggest_player_anim_clearUnkFlag(anim);
         sfx_play_sound_at_player(SOUND_8161, 0);
         sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
 
@@ -52,13 +55,13 @@ void func_802B6000_E24920(void) {
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
         camera->moveFlags &= ~CAMERA_MOVE_FLAGS_4;
     }
-    playerStatus->fallState++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
     jumpInputCheck = check_input_jump();
 
-    if (jumpInputCheck != 0 || jumpInputCheck < playerStatus->fallState) {
+    if (jumpInputCheck != 0 || jumpInputCheck < playerStatus->actionSubstate) {
         if (inputMoveMagnitude == 0.0f) {
             set_action_state(ACTION_STATE_IDLE);
             return;
@@ -70,14 +73,14 @@ void func_802B6000_E24920(void) {
     }
 }
 
-void func_802B61C0_E24AE0(void) {
+void action_update_step_down_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B644C_E24D6C();
+        action_update_peach_step_down_land();
         return;
     }
 
@@ -86,11 +89,9 @@ void func_802B61C0_E24AE0(void) {
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED |
             PLAYER_STATUS_FLAGS_800000 |
             PLAYER_STATUS_FLAGS_80000 |
-            PLAYER_STATUS_FLAGS_FLYING |
-            PLAYER_STATUS_FLAGS_FALLING |
-            PLAYER_STATUS_FLAGS_JUMPING
+            PLAYER_STATUS_FLAGS_AIRBORNE
         );
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
@@ -103,7 +104,7 @@ void func_802B61C0_E24AE0(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->fallState++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -116,7 +117,7 @@ void func_802B61C0_E24AE0(void) {
     update_locomotion_state();
 }
 
-void func_802B62CC_E24BEC(void) {
+void action_update_peach_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
@@ -124,10 +125,10 @@ void func_802B62CC_E24BEC(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -140,7 +141,7 @@ void func_802B62CC_E24BEC(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->fallState++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -160,7 +161,7 @@ void func_802B62CC_E24BEC(void) {
     }
 }
 
-void func_802B644C_E24D6C(void) {
+void action_update_peach_step_down_land(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
@@ -168,10 +169,10 @@ void func_802B644C_E24D6C(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -181,7 +182,7 @@ void func_802B644C_E24D6C(void) {
         collisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->fallState++;
+    playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
 

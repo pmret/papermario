@@ -83,8 +83,7 @@
 // Should be 1.0f / 0x7FFF, but precision is wrong for a double
 #define SHT_MINV 3.051851e-05
 
-
-#define SPRITE_WORLD_SCALE   (5.0f/7.0f)
+#define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
 #define BATTLE_ENTITY_ID_MASK 0x800
@@ -112,9 +111,15 @@
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
-#define SPRITE_PIXEL_SCALE (5.0 / 7.0)
-
 #define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+
+// loads integrator with standard parameter set used for falling
+
+#define LOAD_INTEGRATOR_FALL(ptr) \
+    (ptr)[0] =  0.11430f; \
+    (ptr)[1] = -0.28710f; \
+    (ptr)[2] = -0.18230f; \
+    (ptr)[3] =  0.01152f; \
 
 /* common AI function and script variables */
 // ai script

@@ -101,7 +101,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
     angleToNpc = atan2(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z);
     deltaYaw = get_clamped_angle_diff(angleToPlayer, angleToNpc);
     if ((hitDetected > 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
-        playerStatus->unk_BF = 3;
+        playerStatus->hazardType = HAZARD_TYPE_FIRE_BAR;
         set_action_state(ACTION_STATE_HIT_FIRE);
         sfx_play_sound_at_position(SOUND_E8, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         gCurrentEncounter.battleTriggerCooldown = 45;

@@ -9,7 +9,7 @@ void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration++;
     if (npc->duration == enemy->varTable[13]) {
-        npc->currentAnim.w = enemy->animList[11];
+        npc->currentAnim = enemy->animList[11];
     }
     if (npc->duration == enemy->varTable[14]) {
         enemy->varTable[0] = 3;
@@ -17,7 +17,7 @@ void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     if (npc->duration >= enemy->varTable[12]) {
         enemy->varTable[0] = 4;
         npc->duration = 8;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         fx_emote(EMOTE_FRUSTRATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
         script->functionTemp[0] = 13;
     }

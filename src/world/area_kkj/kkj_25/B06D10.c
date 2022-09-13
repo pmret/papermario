@@ -19,9 +19,9 @@ ApiStatus func_802406EC_B070EC(Evt* script, s32 isInitialCall) {
     unkStruct->rot.x = 0.0f;
     unkStruct->rot.y = 0.0f;
     unkStruct->rot.z = 0.0f;
-    unkStruct->scale.x = SPRITE_WORLD_SCALE;
-    unkStruct->scale.y = SPRITE_WORLD_SCALE;
-    unkStruct->scale.z = SPRITE_WORLD_SCALE;
+    unkStruct->scale.x = SPRITE_WORLD_SCALE_F;
+    unkStruct->scale.y = SPRITE_WORLD_SCALE_F;
+    unkStruct->scale.z = SPRITE_WORLD_SCALE_F;
     unkStruct->foldID = func_8013A704(1);
     unkStruct->entityID = create_generic_entity_world(NULL, kkj_25_UnkFoldFunc);
 

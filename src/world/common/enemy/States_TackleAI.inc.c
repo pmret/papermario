@@ -11,7 +11,7 @@ void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, Ene
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     npc->duration = enemy->varTable[2];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     script->AI_TEMP_STATE = 13;
@@ -24,7 +24,7 @@ ApiStatus N(UnkDistFunc)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
 
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
         if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
             npc->moveSpeed = aiSettings->chaseSpeed;
             if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
                 npc->collisionHeight = enemy->varTable[6] / 2;
@@ -66,7 +66,7 @@ void N(UnkNpcAIFunc12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     if ((npc->duration <= 0) || (--npc->duration <= 0) || (temp != 0)) {
         enemy->unk_07 = 0;
-        npc->currentAnim.w = enemy->animList[10];
+        npc->currentAnim = enemy->animList[10];
         npc->duration = 0;
         script->functionTemp[0] = 15;
     }

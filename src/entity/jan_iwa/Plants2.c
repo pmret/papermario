@@ -148,7 +148,7 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
     gPlayerStatus.flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-    suggest_player_anim_setUnkFlag(0x8001F);
+    suggest_player_anim_setUnkFlag(ANIM_Mario_8001F);
 }
 
 void func_802BC308_E2EC38(Entity* entity) {

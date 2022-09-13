@@ -40,6 +40,7 @@ s32 get_player_back_anim(s32 arg0);
 void appendGfx_player(void* data);
 void appendGfx_player_spin(void* data);
 void update_player_shadow(void);
+s32 partner_use_ability(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -366,7 +367,7 @@ s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f3
     radius = playerStatus->colliderDiameter * 0.5f;
     ret = -1;
 
-    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) == 0) {
+    if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING))) {
         height = playerStatus->colliderHeight * 0.286f;
     } else {
         height = 1.0f;
@@ -544,7 +545,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     s32 ret = -1;
 
     height = 0.0f;
-    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING)) == 0) {
+    if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING))) {
         height = 10.01f;
     }
     radius = playerStatus->colliderDiameter * 0.5f;
@@ -698,14 +699,14 @@ void phys_update_standard(void) {
     check_input_use_partner();
     phys_update_action_state();
 
-    if (!(playerStatus->flags & 8)) {
-        if (playerStatus->flags & 2) {
+    if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING)) {
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING) {
             phys_update_jump();
         }
     }
 
-    if (playerStatus->flags & 4) {
-        if (!(playerStatus->flags & 8)) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_FALLING) {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING)) {
             phys_update_falling();
         }
     }
@@ -716,11 +717,8 @@ void phys_update_standard(void) {
         collision_main_lateral();
         collision_check_player_overlaps();
 
-        if (
-            collision_main_above() < 0 &&
-            playerStatus->timeInAir == 0 &&
-            playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS
-        ) {
+        if (collision_main_above() < 0 && playerStatus->timeInAir == 0 &&
+            playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             func_800E4F10();
         }
 
@@ -730,8 +728,8 @@ void phys_update_standard(void) {
         }
     }
 
-    if (playerStatus->animFlags & 2) {
-        func_802BE070_31DBE0();
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_2) {
+        world_watt_sync_held_position();
     }
 
     if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW)) {
@@ -823,7 +821,8 @@ s32 get_overriding_player_anim(s32 anim) {
             return -1;
         }
     } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        if (playerStatus->unk_C4 && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
+        if ((playerStatus->peachItemHeld != 0)
+        && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
             anim = ANIM_Peach_D0000;
         }
     }
@@ -835,9 +834,9 @@ s32 get_overriding_player_anim(s32 anim) {
     return anim;
 }
 
-void suggest_player_anim_clearUnkFlag(s32 anim) {
+void suggest_player_anim_clearUnkFlag(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 newAnim = get_overriding_player_anim(anim);
+    AnimID newAnim = get_overriding_player_anim(anim);
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
@@ -846,7 +845,7 @@ void suggest_player_anim_clearUnkFlag(s32 anim) {
     }
 }
 
-void force_player_anim(s32 anim) {
+void force_player_anim(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = anim;
@@ -854,9 +853,9 @@ void force_player_anim(s32 anim) {
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_10000000;
 }
 
-void suggest_player_anim_setUnkFlag(s32 anim) {
+void suggest_player_anim_setUnkFlag(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 newAnim = get_overriding_player_anim(anim);
+    AnimID newAnim = get_overriding_player_anim(anim);
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
@@ -867,34 +866,34 @@ void suggest_player_anim_setUnkFlag(s32 anim) {
 
 void update_player_blink(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 phi_a2 = 0;
+    s32 outtaSight = FALSE;
     u8 phi_v1;
     u8* alpha;
 
     if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
-        phi_a2 = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
+        outtaSight = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
         playerStatus->blinkTimer--;
         alpha = &playerStatus->alpha1;
         if (!(gGameStatusPtr->frameCounter & 1)) {
-            if (phi_a2) {
-                phi_v1 = 0xC0;
+            if (outtaSight) {
+                phi_v1 = 192;
             } else {
-                phi_v1 = 0xFF;
+                phi_v1 = 255;
             }
         } else {
-            phi_v1 = 0x60;
+            phi_v1 = 96;
         }
         *alpha = phi_v1;
 
         if (!playerStatus->blinkTimer) {
-            if (phi_a2) {
-                playerStatus->alpha1 = 0x80;
+            if (outtaSight) {
+                playerStatus->alpha1 = 128;
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
             } else {
-                playerStatus->alpha1 = 0xFF;
+                playerStatus->alpha1 = 255;
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000;
             }
         } else {
@@ -965,9 +964,7 @@ void func_800E01DC(void) {
 s32 func_800E0208(void) {
     s32 ret = FALSE;
 
-    if (gGameStatusPtr->disableScripts &&
-        (gGameStatusPtr->currentButtons[0] & PLAYER_STATUS_FLAGS_10))
-    {
+    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons[0] & BUTTON_R)) {
         if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
@@ -1284,7 +1281,7 @@ void update_partner_timers(void) {
 
         for (i = 1; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {
             if (playerData->partners[i].enabled) {
-                playerData->partnerUnlockedTime[i] += 1;
+                playerData->partnerUnlockedTime[i]++;
             }
         }
     }
@@ -1293,73 +1290,74 @@ void update_partner_timers(void) {
 void func_800E0B90(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    f32 temp_f20 = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
+    f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
     s32 trueAnim;
-    s32 animByte;
-    f32 unk_90;
-    s32 phi_v1;
-    f32 phi_f0;
+    s32 sprIndex;
+    f32 angle;
+    s32 direction;
+    f32 timescale;
 
     D_800F7B48 = 0.0f;
-    if (temp_f20 < -5.0f && temp_f20 > -175.0f) {
-        temp_f20 = 0.0f;
-        phi_v1 = 0;
-    } else if (temp_f20 > 5.0f && temp_f20 < 175.0f) {
-        temp_f20 = 180.0f;
-        phi_v1 = 1;
+    if (camRelativeYaw < -5.0f && camRelativeYaw > -175.0f) {
+        camRelativeYaw = 0.0f;
+        direction = 0;
+    } else if (camRelativeYaw > 5.0f && camRelativeYaw < 175.0f) {
+        camRelativeYaw = 180.0f;
+        direction = 1;
     } else {
-        temp_f20 = D_800F7B40;
-        phi_v1 = 2;
+        // direction is close to flipping, use saved value
+        camRelativeYaw = PrevPlayerCamRelativeYaw;
+        direction = 2;
     }
-    if (D_8010C95C != phi_v1 && phi_v1 != 2) {
-        D_8010C95C = phi_v1;
-        playerStatus->unk_90[gCurrentCameraID] = (phi_v1 != 0) ? 180.0f : -180.0f;
+    // detect direction change
+    if (PrevPlayerDirection != direction && direction != 2) {
+        PrevPlayerDirection = direction;
+        playerStatus->flipYaw[gCurrentCameraID] = (direction != 0) ? 180.0f : -180.0f;
 
         if (fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) >= 90.0f) {
-            playerStatus->unk_90[gCurrentCameraID] = -playerStatus->unk_90[gCurrentCameraID];
+            playerStatus->flipYaw[gCurrentCameraID] = -playerStatus->flipYaw[gCurrentCameraID];
         }
     }
-
-    unk_90 = playerStatus->unk_90[gCurrentCameraID];
-    if (unk_90 != 0.0f) {
-        if (unk_90 < 0.0f) {
-            unk_90 += 28.0f;
-            if (unk_90 > 0.0f) {
-                unk_90 = 0.0f;
+    // handle sprite 'flipping' when changing direction
+    angle = playerStatus->flipYaw[gCurrentCameraID];
+    if (angle != 0.0f) {
+        if (angle < 0.0f) {
+            angle += 28.0f;
+            if (angle > 0.0f) {
+                angle = 0.0f;
             }
         }
-
-        if (unk_90 > 0.0f) {
-            unk_90 -= 28.0f;
-            if (unk_90 < 0.0f) {
-                unk_90 = 0.0f;
+        if (angle > 0.0f) {
+            angle -= 28.0f;
+            if (angle < 0.0f) {
+                angle = 0.0f;
             }
         }
     }
 
-    if (playerStatus->flags & 0x200000) {
-        unk_90 = 0.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_200000) {
+        angle = 0.0f;
     }
 
-    playerStatus->unk_90[gCurrentCameraID] = unk_90;
+    playerStatus->flipYaw[gCurrentCameraID] = angle;
 
-    D_800F7B40 = unk_90 = clamp_angle(temp_f20);
-    unk_90 = clamp_angle(playerStatus->unk_90[gCurrentCameraID] + unk_90);
+    PrevPlayerCamRelativeYaw = angle = clamp_angle(camRelativeYaw);
+    angle = clamp_angle(playerStatus->flipYaw[gCurrentCameraID] + angle);
     if (playerStatus->currentSpeed == 0.0f) {
         D_800F7B48 = 0.0f;
     }
 
     trueAnim = playerStatus->anim;
-    if (playerStatus->flags & 0x20000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_20000) {
         playerStatus->trueAnimation = trueAnim;
     } else {
-        animByte = (trueAnim >> 0x10) & 0xFF;
+        sprIndex = (trueAnim >> 0x10) & 0xFF;
 
-        if (playerStatus->actionState != 0xF && !(playerStatus->flags & 0x100000)) {
-            playerStatus->spriteFacingAngle = unk_90 + D_800F7B48;
+        if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PLAYER_STATUS_FLAGS_100000)) {
+            playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & 0x10000000) &&
-                (animByte == 1 || animByte == 6 || animByte == 10) &&
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_10000000) &&
+                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
                 fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
@@ -1368,10 +1366,9 @@ void func_800E0B90(void) {
             playerStatus->currentYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & 0x10000000) &&
-                (animByte == 1 || animByte == 6 || animByte == 10) &&
-                playerStatus->spriteFacingAngle < 350.0f &&
-                playerStatus->spriteFacingAngle > 190.0f)
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_10000000) &&
+                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
+                playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
             }
@@ -1379,61 +1376,61 @@ void func_800E0B90(void) {
         }
     }
 
-    phi_f0 = 1.0f;
-    if (playerStatus->flags & 0x40000) {
-        phi_f0 = 0.5f;
+    timescale = 1.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+        timescale = 0.5f;
     }
-    if (playerStatus->flags & 0x20000000) {
-        phi_f0 = 0.0f;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_20000000) {
+        timescale = 0.0f;
     }
-    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, phi_f0);
-    playerStatus->flags |= 0x40000000;
+    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
+    playerStatus->flags |= PLAYER_STATUS_FLAGS_40000000;
 }
 
-s32 get_player_back_anim(s32 arg0) {
-    s32 animByte = (arg0 >> 16) & 0xff;
-    s32 ret = 0;
+s32 get_player_back_anim(s32 anim) {
+    s32 sprIndex = (anim >> 16) & 0xff;
+    s32 outAnim = 0;
 
-    if (animByte != 1) {
-        if (animByte != 6 && animByte != 10) {
-            return arg0;
+    if (sprIndex != SPR_Mario_1) {
+        if (sprIndex != SPR_Mario_6 && sprIndex != SPR_Peach_A) {
+            return anim;
         }
 
-        if (animByte == 1) {
-            if (arg0 > 0x1000C) {
-                return arg0;
+        if (sprIndex == SPR_Mario_1) {
+            if (anim > ANIM_Mario_1000C) {
+                return anim;
             }
-        } else if (animByte == 6) {
-            if (arg0 == 0x6000C) {
-                ret = 0x6000D;
-            } else if (arg0 == 0x6000E) {
-                ret = 0x6000F;
-            } else if (arg0 == 0x60010) {
-                ret = 0x60011;
-            } else if (arg0 == 0x60012) {
-                ret = 0x60013;
-            } else if (arg0 == 0x60014) {
-                ret = 0x60015;
-            } else if (arg0 == 0x60016) {
-                ret = 0x60017;
-            } else if (arg0 == 0x60018) {
-                ret = 0x60019;
-            } else if (arg0 == 0x6001A) {
-                ret = 0x6001B;
+        } else if (sprIndex == SPR_Mario_6) {
+            if (anim == ANIM_Mario_6000C) {
+                outAnim = ANIM_Mario_6000D;
+            } else if (anim == ANIM_Mario_6000E) {
+                outAnim = ANIM_Mario_6000F;
+            } else if (anim == ANIM_Mario_60010) {
+                outAnim = ANIM_Mario_60011;
+            } else if (anim == ANIM_Mario_60012) {
+                outAnim = ANIM_Mario_60013;
+            } else if (anim == ANIM_Mario_60014) {
+                outAnim = ANIM_Mario_60015;
+            } else if (anim == ANIM_Mario_60016) {
+                outAnim = ANIM_Mario_60017;
+            } else if (anim == ANIM_Mario_60018) {
+                outAnim = ANIM_Mario_60019;
+            } else if (anim == ANIM_Mario_6001A) {
+                outAnim = ANIM_Mario_6001B;
             }
-        } else if (animByte == 10) {
-            if (arg0 > 0xA0006) {
-                ret = arg0 + 1;
+        } else if (sprIndex == SPR_Peach_A) {
+            if (anim > ANIM_Peach_A0006) {
+                outAnim = anim + 1;
             }
         }
-    } else if (arg0 > 0x1000C) {
-        return arg0;
+    } else if (anim > ANIM_Mario_1000C) {
+        return anim;
     }
 
-    if (ret != 0) {
-        return ret;
+    if (outAnim != 0) {
+        return outAnim;
     } else {
-        return arg0 | 0x1000000;
+        return anim | SPRITE_ID_BACK_FACING;
     }
 
 }
@@ -1505,10 +1502,10 @@ void appendGfx_player(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
     f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
-    s32 phi_a0;
+    s32 flags;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
-        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
         guMtxCatF(spE0, sp20, sp20);
         guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
@@ -1528,7 +1525,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(spE0, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
@@ -1546,14 +1543,14 @@ void appendGfx_player(void* data) {
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             }
         }
-
-        phi_a0 = 0;
-
+      
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            phi_a0 = PLAYER_STATUS_ANIM_FLAGS_10000000;
+            flags = 0x10000000;
+        } else {
+            flags = 0;
         }
 
-        spr_draw_player_sprite(phi_a0, 0, 0, 0, sp20);
+        spr_draw_player_sprite(flags, 0, 0, 0, sp20);
     }
 
     D_800F7B4C++;
@@ -1634,7 +1631,7 @@ void appendGfx_player_spin(void* data) {
         guMtxCatF(mtx, rotation, mtx);
         guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(mtx, translation, mtx);
-        guScaleF(scale, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guScaleF(scale, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(mtx, scale, mtx);
         guTranslateF(translation, px, py, pz);
         guMtxCatF(mtx, translation, mtx);

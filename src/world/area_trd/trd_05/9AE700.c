@@ -87,14 +87,14 @@ void func_80240020_9AE720(void) {
 
 ApiStatus func_80240404_9AEB04(Evt* script, s32 isInitialCall) {
     N(D_80243090).pos.x = gPlayerStatus.position.x;
-    N(D_80243090).pos.y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * SPRITE_PIXEL_SCALE * 0.5);
+    N(D_80243090).pos.y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * SPRITE_WORLD_SCALE_D * 0.5);
     N(D_80243090).pos.z = gPlayerStatus.position.z;
     N(D_80243090).rot.x = 0.0f;
     N(D_80243090).rot.y = 0.0f;
     N(D_80243090).rot.z = 0.0f;
-    N(D_80243090).scale.x = SPRITE_WORLD_SCALE;
-    N(D_80243090).scale.y = SPRITE_WORLD_SCALE;
-    N(D_80243090).scale.z = SPRITE_WORLD_SCALE;
+    N(D_80243090).scale.x = SPRITE_WORLD_SCALE_F;
+    N(D_80243090).scale.y = SPRITE_WORLD_SCALE_F;
+    N(D_80243090).scale.z = SPRITE_WORLD_SCALE_F;
     N(D_80243090).foldStateID = func_8013A704(1);
     N(D_80243090).entityID = create_generic_entity_world(0, func_80240020_9AE720);
     return ApiStatus_DONE2;
@@ -113,7 +113,7 @@ ApiStatus func_80240508_9AEC08(Evt* script, s32 isInitialCall) {
     s32 z = evt_get_float_variable(script, *args++);
 
     N(D_80243090).pos.x = x;
-    N(D_80243090).pos.y = y + (gPlayerStatus.colliderHeight * SPRITE_PIXEL_SCALE * 0.5);
+    N(D_80243090).pos.y = y + (gPlayerStatus.colliderHeight * SPRITE_WORLD_SCALE_D * 0.5);
     N(D_80243090).pos.z = z;
     return ApiStatus_DONE2;
 }
