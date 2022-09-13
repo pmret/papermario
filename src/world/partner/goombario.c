@@ -97,7 +97,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((GoombarioTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
 
             npc->pos.x = entity->position.x + (sinAngle * GoombarioTweesterPhysicsPtr->radius);
             npc->pos.z = entity->position.z - (cosAngle * GoombarioTweesterPhysicsPtr->radius);
@@ -109,7 +109,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
                 GoombarioTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((GoombarioTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             GoombarioTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (GoombarioTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {

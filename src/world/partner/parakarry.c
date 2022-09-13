@@ -73,7 +73,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((ParakarryTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
             parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
             ParakarryTweesterPhysicsPtr->angle = clamp_angle(ParakarryTweesterPhysicsPtr->angle - ParakarryTweesterPhysicsPtr->angularVelocity);
@@ -84,7 +84,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
                 ParakarryTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((ParakarryTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             ParakarryTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (ParakarryTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {

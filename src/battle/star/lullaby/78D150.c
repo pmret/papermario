@@ -21,7 +21,7 @@ ApiStatus func_802A1518_78D668(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 1;
         case 1:
             temp = script->functionTemp[2];
-            temp2 = (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 30.0f) + 30.0f;
+            temp2 = (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 30.0f) + 30.0f;
             fx_music_note(0, temp, temp2, 50.0f);
 
             script->functionTemp[2] += 14;

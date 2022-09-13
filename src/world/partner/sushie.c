@@ -97,7 +97,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
     s32 hitResult;
 
-    sin_cos_rad((*yaw * TAU) / 360.0f, &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(*yaw), &sinAngle, &cosAngle);
     cosAngle = -cosAngle;
     totalLength = radius + length;
     hitResult = test_ray_colliders(0x10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
@@ -179,7 +179,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((SushieTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
             sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
             SushieTweesterPhysicsPtr->angle = clamp_angle(SushieTweesterPhysicsPtr->angle - SushieTweesterPhysicsPtr->angularVelocity);
@@ -190,7 +190,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
                 SushieTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((SushieTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (SushieTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {

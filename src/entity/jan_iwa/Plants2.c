@@ -182,7 +182,7 @@ void entity_MunchlesiaChewing_init(Entity* entity) {
 
 void func_802BC3E4_E2ED14(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    gPlayerStatus.position.y = data->unk_0C + (sin_rad((data->unk_10 * TAU) / 360.0f) * 3.0f);
+    gPlayerStatus.position.y = data->unk_0C + (sin_rad(DEG_TO_RAD(data->unk_10)) * 3.0f);
 
     data->unk_10 += 24.0f;
     if (data->unk_10 > 360.0f) {

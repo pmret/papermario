@@ -874,7 +874,7 @@ void render_npcs(void) {
 }
 
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
-    f32 angle = (yaw * TAU) / 360.0f;
+    f32 angle = DEG_TO_RAD(yaw);
     f32 sin = sin_rad(angle);
     f32 cos = cos_rad(angle);
 
@@ -1664,11 +1664,11 @@ void func_8003D788(Npc* npc, s32 arg1) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
             if (phi_a2 == 0) {
-                sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-npc->yaw)), &sinTheta, &cosTheta);
                 fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f), sinTheta, cosTheta);
             } else {
-                sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(npc->yaw)), &sinTheta, &cosTheta);
                 fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * sinTheta), npc->pos.y + 1.5f,
                               npc->pos.z + (npc->collisionRadius * cosTheta), 5.0f, 10.0f, 1.0f, 5, 30);
             }
@@ -1723,7 +1723,7 @@ void func_8003DFA0(Npc* npc, s32 arg1) {
         f32 z;
 
         D_80077C30 = 0;
-        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
         fx_footprint(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
@@ -1739,7 +1739,7 @@ void func_8003E0D4(Npc* npc, s32 arg1) {
         f32 cosTheta;
 
         D_80077C38 = 0;
-        theta = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
         fx_falling_leaves(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
@@ -1754,7 +1754,7 @@ void func_8003E1D0(Npc* npc, s32 arg1) {
         f32 z;
 
         D_80077C3A = 0;
-        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
         fx_rising_bubble(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,

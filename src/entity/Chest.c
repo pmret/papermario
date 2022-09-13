@@ -381,7 +381,7 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
 
     if (data->itemID != 0) {
-        angle = (entity->rotation.y * TAU) / 360.0f;
+        angle = DEG_TO_RAD(entity->rotation.y);
         data->itemEntityPos.x = entity->position.x + (sin_rad(angle) * 10.0f);
         data->itemEntityPos.y = entity->position.y;
         data->itemEntityPos.z = entity->position.z + (cos_rad(angle) * 10.0f);

@@ -1436,7 +1436,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     if (!(item->flags & ITEM_ENTITY_FLAGS_1000000)) {
                         temp = rand_int(2000);
                         temp = (temp / 1000.0f) + 1.5;
-                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = temp * sinAngle;
@@ -1444,7 +1444,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     } else {
                         temp = rand_int(2000);
                         temp = (temp / 1000.0f) + 2.0;
-                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = temp * sinAngle;

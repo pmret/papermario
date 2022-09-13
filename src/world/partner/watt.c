@@ -137,7 +137,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 watt->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
             case 1:
-                sin_cos_rad((WattTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+                sin_cos_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
                 watt->pos.x = (entity->position.x + (sinAngle * WattTweesterPhysicsPtr->radius));
                 watt->pos.z = (entity->position.z - (cosAngle * WattTweesterPhysicsPtr->radius));
                 WattTweesterPhysicsPtr->angle = clamp_angle(WattTweesterPhysicsPtr->angle - WattTweesterPhysicsPtr->angularVelocity);

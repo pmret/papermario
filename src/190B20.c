@@ -713,7 +713,7 @@ void clear_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
 }
 
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -722,7 +722,7 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
 }
 
 void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -731,7 +731,7 @@ void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
 }
 
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -752,7 +752,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
         D_802938A8 = 4;
     } else if (D_802938A8++ >= 4) {
         D_802938A8 = 0;
-        temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-angleDeg));
         temp_f20_2 = sin_rad(temp_f20);
         temp_f0 = cos_rad(temp_f20);
         fx_walking_dust(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);

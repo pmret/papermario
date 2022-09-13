@@ -3675,7 +3675,7 @@ void func_8025D90C(ActorPart* part, s32 decorationIndex) {
             decor->stateResetTimer[decorationIndex]++;
             if (decor->stateResetTimer[decorationIndex] >= 4) {
                 decor->stateResetTimer[decorationIndex] = 0;
-                angle = (clamp_angle(-part->yaw) * TAU) / 360.0f;
+                angle = DEG_TO_RAD(clamp_angle(-part->yaw));
                 sinA = sin_rad(angle);
                 cosA = cos_rad(angle);
                 fx_walking_dust(0,

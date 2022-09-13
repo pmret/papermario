@@ -108,7 +108,7 @@ void action_update_use_spinning_flower(void) {
             }
             game_input_to_move_vector(&inputAngle, &inputMagnitude);
             if (inputMagnitude != 0.0f) {
-                sin_cos_rad((inputAngle * TAU) / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                 inputMagnitude *= 0.03125f;
                 if (inputMagnitude < 0.1) {
                     inputMagnitude = 0.1f;

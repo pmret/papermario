@@ -338,7 +338,7 @@ ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
         D_8029FB90 = 12;
         sfx_play_sound(SOUND_2074);
     }
-    merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
+    merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);

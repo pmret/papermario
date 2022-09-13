@@ -102,7 +102,7 @@ void action_update_sliding(void) {
             } else {
                 playerStatus->actionSubstate = SUBSTATE_LAUNCH;
             }
-            sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sinA, &cosA);
+            sin_cos_rad(DEG_TO_RAD(D_802B6790), &sinA, &cosA);
             playerStatus->position.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
             snd_stop_sound(SOUND_167);
             break;

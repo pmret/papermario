@@ -384,7 +384,7 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     s32 hitID;
     f32 temp;
 
-    theta = (yaw * TAU) / 360.0f;
+    theta = DEG_TO_RAD(yaw);
     deltaX = radius * sin_rad(theta);
     temp = -radius; // needed to match
     deltaZ = temp * cos_rad(theta);
@@ -493,7 +493,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
     s32 phi_s2 = -1;
     f32 a, b;
 
-    sin_cos_rad((yaw * TAU) / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     aX = length * outSinTheta;
     temp_f22 = length + radius + (radius * 0.5f);
     inverseOutCosTheta = -outCosTheta;

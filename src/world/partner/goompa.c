@@ -63,7 +63,7 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
             goompa->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
             goompa->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((GoompaTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(GoompaTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             goompa->pos.x = entity->position.x + (sinAngle * GoompaTweesterPhysicsPtr->radius);
             goompa->pos.z = entity->position.z - (cosAngle * GoompaTweesterPhysicsPtr->radius);
             GoompaTweesterPhysicsPtr->angle = clamp_angle(GoompaTweesterPhysicsPtr->angle - GoompaTweesterPhysicsPtr->angularVelocity);
@@ -74,7 +74,7 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
                 GoompaTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((GoompaTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(GoompaTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             GoompaTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (GoompaTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {

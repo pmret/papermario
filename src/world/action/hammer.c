@@ -66,7 +66,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
         soundID = SOUND_2118;
     }
 
-    theta = (func_800E5348() * TAU) / 360.0f;
+    theta = DEG_TO_RAD(func_800E5348());
     sinTheta = sin_rad(theta) * 25.0f;
     cosTheta = cos_rad(theta) * -25.0f;
 
