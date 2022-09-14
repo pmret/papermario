@@ -840,7 +840,7 @@ void suggest_player_anim_clearUnkFlag(AnimID anim) {
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
-        playerStatus->suggestAnimDone = 0;
+        playerStatus->animNotifyValue = 0;
         playerStatus->flags &= ~PS_FLAGS_10000000;
     }
 }
@@ -849,7 +849,7 @@ void force_player_anim(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = anim;
-    playerStatus->suggestAnimDone = 0;
+    playerStatus->animNotifyValue = 0;
     playerStatus->flags &= ~PS_FLAGS_10000000;
 }
 
@@ -859,7 +859,7 @@ void suggest_player_anim_setUnkFlag(AnimID anim) {
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
-        playerStatus->suggestAnimDone = 0;
+        playerStatus->animNotifyValue = 0;
         playerStatus->flags |= PS_FLAGS_10000000;
     }
 }
@@ -1383,7 +1383,7 @@ void func_800E0B90(void) {
     if (playerStatus->flags & PS_FLAGS_20000000) {
         timescale = 0.0f;
     }
-    playerStatus->suggestAnimDone = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
+    playerStatus->animNotifyValue = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
     playerStatus->flags |= PS_FLAGS_40000000;
 }
 

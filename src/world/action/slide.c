@@ -158,7 +158,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            if (playerStatus->suggestAnimDone != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
                 playerStatus->actionSubstate++; // SUBSTATE_GET_UP
             }
@@ -168,7 +168,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            if (playerStatus->suggestAnimDone != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                 sfx_play_sound_at_player(SOUND_DUST_OFF, 0);
                 playerStatus->currentStateTime = 15;

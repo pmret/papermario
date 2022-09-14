@@ -7,15 +7,17 @@ extern s32 D_802DF57C;
 extern s32 spr_playerMaxComponents;
 extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern SpriteAnimData* spr_npcSprites[0xEA];
-
-extern u8 spr_npcSpriteInstanceCount[];
+extern u8 spr_npcSpriteInstanceCount[0xEA];
 extern SpriteInstance D_802DFA48[51];
 
 extern Quad* D_802DFE44;
 extern s32 D_802DFE48[22];
 extern s32 D_802DFEA0[3];
-extern s32 D_802DFEAC;
+extern s32 SpriteUpdateNotifyValue;
+extern s32 D_802DF530;
 
+SpriteComponent** spr_allocate_components(s32);
+void spr_load_npc_extra_anims(SpriteAnimData*, u32*);
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
 Quad spr_defaultQuad = {
@@ -411,10 +413,10 @@ void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compLi
     }
 }
 
-s32 spr_component_update(s32 arg0, SpriteComponent** compList, SpriteAnimComponent** arg2, SpriteRasterCacheEntry** rasterCache, s32 overridePalette) {
+s32 spr_component_update(s32 curNotifyValue, SpriteComponent** compList, SpriteAnimComponent** arg2, SpriteRasterCacheEntry** rasterCache, s32 overridePalette) {
     SpriteComponent** compListIt;
 
-    D_802DFEAC = arg0;
+    SpriteUpdateNotifyValue = curNotifyValue;
 
     compListIt = compList;
     while ((s32) *compListIt != -1) {
@@ -429,7 +431,7 @@ s32 spr_component_update(s32 arg0, SpriteComponent** compList, SpriteAnimCompone
         spr_component_update_finish(*compListIt++, compList, rasterCache, overridePalette);
     }
 
-    return D_802DFEAC;
+    return SpriteUpdateNotifyValue;
 }
 
 void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
@@ -539,7 +541,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
         sprite->componentList = NULL;
         sprite->spriteData = 0;
         sprite->currentAnimID = -1;
-        sprite->unk_10 = 0;
+        sprite->notifyValue = 0;
     }
 
     spr_init_quad_cache();
@@ -559,7 +561,7 @@ INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 ar
 INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 s32 func_802DDEC4(s32 arg0) {
-    return spr_playerCurrentAnimInfo[arg0].unk_08;
+    return spr_playerCurrentAnimInfo[arg0].notifyValue;
 }
 
 void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
@@ -617,14 +619,58 @@ PAL_PTR* spr_get_player_palettes(s32 spriteIndex) {
     return sprites->palettesOffset;
 }
 
-INCLUDE_ASM(s32, "sprite", spr_load_npc_sprite);
+s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
+    SpriteAnimData* animData;
+    SpriteComponent** compList;
+    s32 listIndex;
+    s32 i;
+
+    s32 spriteIndex = (animID >> 0x10) & 0x7FFF;
+    s32 spriteFlag = (u32)animID >> 0x1F;
+    
+    for (i = 0; i < ARRAY_COUNT(D_802DFA48); i++) {
+        if (D_802DFA48[i].spriteIndex == 0) {
+            break;
+        }
+    }
+    if (D_802DF530 < i) {
+        D_802DF530 = i;
+    }
+    if (i == ARRAY_COUNT(D_802DFA48)) {
+        return -1;
+    }
+    listIndex = i;
+    if (spr_npcSprites[spriteIndex] != NULL) {
+        spr_npcSpriteInstanceCount[spriteIndex]++;
+        animData = (SpriteHeader*) spr_npcSprites[spriteIndex];
+        D_802DFA48[listIndex].spriteData = animData;
+    } else {
+        spr_npcSpriteInstanceCount[spriteIndex] = 1;
+        animData = spr_load_sprite(spriteIndex - 1, 0, spriteFlag);
+        D_802DFA48[listIndex].spriteData = (SpriteHeader*) animData;
+        spr_npcSprites[spriteIndex] = animData;
+        if (extraAnimList != NULL) {
+            spr_load_npc_extra_anims(animData, extraAnimList);
+        }
+    }
+    compList = spr_allocate_components(animData->maxComponents);
+    D_802DFA48[listIndex].componentList = compList;
+    while (*compList != (SpriteComponent*) -1) {
+        SpriteComponent* comp = *compList;
+        comp->unk_4C = func_8013A704(1);
+        compList++;
+    }
+    D_802DFA48[listIndex].spriteIndex = spriteIndex;
+    D_802DFA48[listIndex].currentAnimID = -1;
+    return listIndex;
+}
 
 INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 
 INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 
 s32 func_802DE5C8(s32 arg0) {
-    return D_802DFA48[arg0].unk_10;
+    return D_802DFA48[arg0].notifyValue;
 }
 
 s32 spr_free_sprite(s32 spriteInstanceID) {

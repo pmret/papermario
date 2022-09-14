@@ -1939,7 +1939,7 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ AnimID anim;
-    /* 0x0BC */ u16 suggestAnimDone; // set to 1 when animations from suggest_player_anim are finished?
+    /* 0x0BC */ u16 animNotifyValue;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;

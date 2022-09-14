@@ -139,7 +139,7 @@ void action_update_parasol(void) {
             }
             break;
         case SUBSTATE_PUT_AWAY:
-            if (playerStatus->suggestAnimDone != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 playerStatus->currentStateTime = 12;
                 playerStatus->flags |= PS_FLAGS_100000;
                 playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_BEGIN
@@ -318,7 +318,7 @@ void action_update_parasol(void) {
             enable_player_static_collisions();
             break;
         case SUBSTATE_FAILED:
-            if (playerStatus->suggestAnimDone != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }

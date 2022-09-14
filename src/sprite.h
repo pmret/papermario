@@ -31,7 +31,7 @@ typedef struct SpriteComponent {
 typedef struct PlayerCurrentAnimInfo {
     /* 0x00 */ SpriteComponent** componentList;
     /* 0x04 */ s32 animID;
-    /* 0x08 */ s32 unk_08;
+    /* 0x08 */ s32 notifyValue;
 } PlayerCurrentAnimInfo; // size = 0xC
 
 typedef struct SpriteAnimComponent {
@@ -62,7 +62,7 @@ typedef struct SpriteInstance {
     /* 0x04 */ SpriteComponent** componentList;
     /* 0x08 */ SpriteHeader* spriteData;
     /* 0x0C */ s32 currentAnimID;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ s32 notifyValue;
 } SpriteInstance; // size = 0x14
 
 typedef struct PlayerSpriteSet {

@@ -175,8 +175,8 @@ glabel spr_component_update_commands
 /* 100478 802DD388 3484FFFF */  ori       $a0, $a0, 0xffff
 /* 10047C 802DD38C 8E230004 */  lw        $v1, 4($s1)
 /* 100480 802DD390 30A200FF */  andi      $v0, $a1, 0xff
-/* 100484 802DD394 3C01802E */  lui       $at, %hi(D_802DFEAC)
-/* 100488 802DD398 AC22FEAC */  sw        $v0, %lo(D_802DFEAC)($at)
+/* 100484 802DD394 3C01802E */  lui       $at, %hi(SpriteUpdateNotifyValue)
+/* 100488 802DD398 AC22FEAC */  sw        $v0, %lo(SpriteUpdateNotifyValue)($at)
 /* 10048C 802DD39C 00021400 */  sll       $v0, $v0, 0x10
 /* 100490 802DD3A0 00641824 */  and       $v1, $v1, $a0
 /* 100494 802DD3A4 00621825 */  or        $v1, $v1, $v0
