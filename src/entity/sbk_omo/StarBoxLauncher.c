@@ -95,7 +95,7 @@ void entity_StarBoxLauncher_check_launch(Entity* entity) {
         exec_entity_commandlist(entity);
         data->timer = 4;
         disable_player_static_collisions();
-        playerStatus->unk_C5 = 5;
+        playerStatus->camResetDelay = 5;
     }
 }
 

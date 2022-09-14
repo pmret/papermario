@@ -1080,7 +1080,7 @@ void func_800E4F10(void) {
 
 void check_input_midair_jump(void) {
     if (!(gPlayerStatus.flags & (PS_FLAGS_800000 | PS_FLAGS_10 | PS_FLAGS_FLYING)) &&
-        !(gPlayerStatus.animFlags & 0x4001) &&
+        !(gPlayerStatus.animFlags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_HOLDING_WATT)) &&
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.timeInAir < 18 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
@@ -1090,11 +1090,11 @@ void check_input_midair_jump(void) {
                 break;
             case 1:
                 set_action_state(ACTION_STATE_SPIN_JUMP);
-                gPlayerStatus.flags |= 8;
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
             case 2:
                 set_action_state(ACTION_STATE_TORNADO_JUMP);
-                gPlayerStatus.flags |= 8;
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
         }
     }

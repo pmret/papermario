@@ -1897,7 +1897,7 @@ typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 currentStateTime;
-    /* 0x00A */ s8 unk_0A;
+    /* 0x00A */ s8 shiverTime;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
@@ -1945,7 +1945,7 @@ typedef struct PlayerStatus {
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ s8 peachItemHeld;
-    /* 0x0C5 */ s8 unk_C5;
+    /* 0x0C5 */ s8 camResetDelay;
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;

@@ -1531,14 +1531,14 @@ void appendGfx_player(void* data) {
 
         if (playerStatus->animFlags & PA_FLAGS_SHIVERING) {
             playerStatus->animFlags = playerStatus->animFlags & ~PA_FLAGS_SHIVERING;
-            playerStatus->unk_0A = 22;
+            playerStatus->shiverTime = 22;
             func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             func_802DDFF8(playerStatus->anim, 5, 1, 1, 1, 0, 0);
         }
 
-        if (playerStatus->unk_0A != 0) {
-            playerStatus->unk_0A--;
-            if (playerStatus->unk_0A == 0) {
+        if (playerStatus->shiverTime != 0) {
+            playerStatus->shiverTime--;
+            if (playerStatus->shiverTime == 0) {
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             }
         }

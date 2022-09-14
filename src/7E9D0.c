@@ -221,9 +221,9 @@ void phys_update_action_state(void) {
         return;
     }
 
-    if (playerStatus->unk_C5 != 0) {
-        playerStatus->unk_C5--;
-        if (playerStatus->unk_C5 == 0) {
+    if (playerStatus->camResetDelay != 0) {
+        playerStatus->camResetDelay--;
+        if (playerStatus->camResetDelay == 0) {
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_4;
         }
     }
