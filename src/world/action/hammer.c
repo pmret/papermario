@@ -236,7 +236,7 @@ void action_update_hammer(void) {
         HammerHit->timer = 0;
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_BC = 0;
+        playerStatus->suggestAnimDone = 0;
         HammerHit->hitID = func_802B62A4_E25174();
 
         if (gPlayerData.hammerLevel == 2) {
@@ -406,7 +406,7 @@ void func_802B6820_E256F0(void) {
         playerStatus->flags &= ~PS_FLAGS_200000;
     }
 
-    unk_BC = playerStatus->unk_BC;
+    unk_BC = playerStatus->suggestAnimDone;
     if (unk_BC == 1) {
         if (HammerHit->timer >= 7 && (playerStatus->pressedButtons & BUTTON_B)) {
             HammerHit->unk_1C = unk_BC;

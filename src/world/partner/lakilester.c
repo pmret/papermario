@@ -1152,7 +1152,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
             sfx_play_sound_at_npc(SOUND_295, 0, -4);
             playerStatus->anim = ANIM_Mario_8000E;
-            playerStatus->unk_BC = 0;
+            playerStatus->suggestAnimDone = 0;
             playerStatus->flags |= PS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;

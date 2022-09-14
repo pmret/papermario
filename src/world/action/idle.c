@@ -137,7 +137,7 @@ void action_update_idle_peach(void) {
                 break;
             case SUBSTATE_IDLE_STRETCH:
                 // waiting for yawn to finish
-                if (playerStatus->unk_BC != 0) {
+                if (playerStatus->suggestAnimDone != 0) {
                     playerStatus->actionSubstate++;
                     playerStatus->currentStateTime = 0;
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
@@ -156,7 +156,7 @@ void action_update_idle_peach(void) {
                 if (playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                     playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
-                } else if (playerStatus->unk_BC != 0) {
+                } else if (playerStatus->suggestAnimDone != 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_C0004);
                 }
                 break;

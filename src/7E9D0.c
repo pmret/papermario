@@ -540,18 +540,18 @@ void check_input_spin(void) {
     }
 }
 
-void peach_set_disguise_anim(s32 arg0) {
+void peach_set_disguise_anim(AnimID anim) {
     s32 listIndex = PeachDisguiseNpcIndex;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim = arg0;
+        get_npc_by_index(listIndex)->currentAnim = anim;
     }
 }
 
-void func_800E63A4(s32 arg0) {
+void peach_force_disguise_action(s32 useParasol) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (arg0 != 0) {
+    if (useParasol) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
         playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
@@ -648,13 +648,12 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     return npc;
 }
 
-void peach_disguise_check_overlaps(void) {
+s32 peach_disguise_check_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 yaw;
-    f32 sinTheta;
-    f32 cosTheta;
-    s32 phi_s1;
+    f32 yaw, dx, dy;
+    s32 radius;
+    s32 hitID;
     s32 i;
 
     if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
@@ -662,14 +661,17 @@ void peach_disguise_check_overlaps(void) {
     } else {
         yaw = camera->currentYaw - 90.0f;
     }
-    sin_cos_rad(DEG_TO_RAD(clamp_angle(yaw)), &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(clamp_angle(yaw)), &dx, &dy);
 
-    for (phi_s1 = 2, i = 2; i > 0; i--, phi_s1 += 18) {
-        f32 x = playerStatus->position.x + (sinTheta * phi_s1);
+    for (radius = 2, i = 2; i > 0; radius += 18, i--) {
+        f32 x = playerStatus->position.x + (dx * radius);
         f32 y = playerStatus->position.y + 4.0f;
-        f32 z = playerStatus->position.z - (cosTheta * phi_s1);
-        if (player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw) >= 0) {
+        f32 z = playerStatus->position.z - (dy * radius);
+        hitID = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        if (hitID >= 0) {
             break;
         }
     }
+
+    return hitID;
 }

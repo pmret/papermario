@@ -54,7 +54,7 @@ void reset_player_status(void) {
     D_800F7B44 = 0;
     D_8010C938 = 0;
     D_8010C990 = 0.0f;
-    playerStatus->unk_0D = 1;
+    playerStatus->availableDisguiseType = 1;
     playerStatus->renderMode = 0xD;
 
     playerStatus->alpha1 = 255;

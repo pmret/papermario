@@ -1900,7 +1900,7 @@ typedef struct PlayerStatus {
     /* 0x00A */ s8 unk_0A;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
-    /* 0x00D */ s8 unk_0D;
+    /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
     /* 0x00E */ u8 alpha1;
     /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 blinkTimer;
@@ -1939,7 +1939,7 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ AnimID anim;
-    /* 0x0BC */ u16 unk_BC;
+    /* 0x0BC */ u16 suggestAnimDone; // set to 1 when animations from suggest_player_anim are finished?
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;

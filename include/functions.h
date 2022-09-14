@@ -201,7 +201,7 @@ s32 collision_main_above(void);
 void collision_lava_reset_check_additional_overlaps(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
-void peach_set_disguise_anim(s32);
+void peach_set_disguise_anim(AnimID);
 
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(void*),
