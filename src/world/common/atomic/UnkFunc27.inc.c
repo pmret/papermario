@@ -11,7 +11,7 @@ ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     s32 temp_s1 = testS1;
     s32 temp_s2 = testS2;
 
-    if ((s32) temp_s0_3 == -1) {
+    if (temp_s0_3 == PTR_LIST_END) {
         mdl_set_all_fog_mode(temp_s1);
         return ApiStatus_DONE2;
     }

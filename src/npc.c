@@ -744,11 +744,11 @@ void appendGfx_npc(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim != 0) && (npc->spriteInstanceID >= 0)) {
             npc_draw_with_palswap(npc, renderYaw, mtx1);
-            npc->unk_2C = func_802DE5C8(npc->spriteInstanceID);
+            npc->animNotifyValue = spr_get_notify_value(npc->spriteInstanceID);
         }
     } else {
         npc_draw_with_palswap(npc, renderYaw, mtx1);
-        npc->unk_2C = func_802DDEC4(1);
+        npc->animNotifyValue = func_802DDEC4(1);
     }
 
     if (npc->flags & NPC_FLAG_REFLECT_WALL) {

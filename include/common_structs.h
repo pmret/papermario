@@ -190,7 +190,7 @@ typedef struct Npc {
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
-    /* 0x02C */ s32 unk_2C;
+    /* 0x02C */ s32 animNotifyValue;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -1534,7 +1534,7 @@ typedef struct ActorPart {
     /* 0x80 */ s32 partFlags3;
     /* 0x84 */ s32 unk_84;
     /* 0x88 */ u32 currentAnimation;
-    /* 0x8C */ s32 unk_8C;
+    /* 0x8C */ s32 animNotifyValue;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;

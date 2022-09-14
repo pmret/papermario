@@ -605,7 +605,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
@@ -613,7 +613,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
         }
@@ -634,7 +634,7 @@ void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_sprite(part->unk_84, anim, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
         }

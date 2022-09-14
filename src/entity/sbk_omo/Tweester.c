@@ -153,7 +153,7 @@ void entity_Tweester_select_target_point(Entity* entity) {
     paths = data->paths;
 
     if (pathOffset == 0) {
-        for (i = 0; (s32)*paths != -1; paths++, i++) {
+        for (i = 0; *paths != PTR_LIST_END; paths++, i++) {
         }
         j = rand_int(i * 10 - 1) / 10;
         paths = data->paths;

@@ -16,7 +16,7 @@ enum SpriteIDFields {
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s16** readPos;
+    /* 0x08 */ s16* readPos;
     /* 0x0C */ f32 waitTime;
     /* 0x10 */ s32 loopCounter;
     /* 0x14 */ s32 currentRaster;
@@ -35,7 +35,7 @@ typedef struct PlayerCurrentAnimInfo {
 } PlayerCurrentAnimInfo; // size = 0xC
 
 typedef struct SpriteAnimComponent {
-    /* 0x00 */ s16** cmdList;
+    /* 0x00 */ s16* cmdList;
     /* 0x04 */ s16 cmdListSize;
     /* 0x06 */ Vec3s compOffset;
 } SpriteAnimComponent; // size = 0xC
@@ -51,16 +51,25 @@ typedef struct SpriteRasterCacheEntry {
 
 typedef struct SpriteHeader {
     /* 0x00 */ SpriteRasterCacheEntry* rasterList;
-    /* 0x04 */ s16** paletteList;
+    /* 0x04 */ PAL_PTR* paletteList;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariants;
     /* 0x10 */ SpriteAnimComponent** animListStart;
 } SpriteHeader; // size = 0x14
 
+/// Sprite data header.
+typedef struct SpriteAnimData {
+    /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
+    /* 0x04 */ PAL_PTR* palettesOffset;
+    /* 0x08 */ s32 maxComponents;
+    /* 0x0C */ s32 colorVariations;
+    /* 0x10 */ SpriteAnimComponent** animListStart;
+} SpriteAnimData; // size = 0x10
+
 typedef struct SpriteInstance {
     /* 0x00 */ s32 spriteIndex;
     /* 0x04 */ SpriteComponent** componentList;
-    /* 0x08 */ SpriteHeader* spriteData;
+    /* 0x08 */ SpriteAnimData* spriteData;
     /* 0x0C */ s32 currentAnimID;
     /* 0x10 */ s32 notifyValue;
 } SpriteInstance; // size = 0x14
@@ -83,14 +92,6 @@ typedef struct PlayerSpriteCacheEntry {
     /* 0x08 */ s32 spriteIndex;
     /* 0x0C */ IMG_PTR raster;
 } PlayerSpriteCacheEntry; // size = 0x10
-
-/// Sprite data header.
-typedef struct SpriteAnimData {
-    /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
-    /* 0x04 */ PAL_PTR* palettesOffset;
-    /* 0x08 */ s32 maxComponents;
-    /* 0x0C */ s32 colorVariations;
-} SpriteAnimData; // size = 0x10
 
 typedef struct UnkSpriteThing {
     /* 0x00 */ char unk_00[0x6];
@@ -142,7 +143,7 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale);
 
 s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx);
 
-s32 func_802DE5C8(s32 arg0);
+s32 spr_get_notify_value(s32 arg0);
 
 s32 spr_free_sprite(s32 spriteInstanceID);
 
