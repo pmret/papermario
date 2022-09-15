@@ -118,7 +118,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
             bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((BombetteTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bombette->pos.x = entity->position.x + (sinAngle * BombetteTweesterPhysicsPtr->radius);
             bombette->pos.z = entity->position.z - (cosAngle * BombetteTweesterPhysicsPtr->radius);
             BombetteTweesterPhysicsPtr->angle = clamp_angle(BombetteTweesterPhysicsPtr->angle - BombetteTweesterPhysicsPtr->angularVelocity);
@@ -129,7 +129,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
                 BombetteTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((BombetteTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             BombetteTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (BombetteTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {

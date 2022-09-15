@@ -33,7 +33,7 @@ void action_update_hit_fire(void) {
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 
-    sin_cos_rad(ReturnAngle * TAU / 360.0f, &dx, &dy);
+    sin_cos_rad(DEG_TO_RAD(ReturnAngle), &dx, &dy);
     speed = playerStatus->currentSpeed;
 
     if (playerStatus->flags & PS_FLAGS_40000) {

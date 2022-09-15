@@ -157,7 +157,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     guScaleF(sp18, entity->scale.x, entity->scale.x, entity->scale.x);
     guMtxCatF(sp18, sp58, sp58);
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A001098_E9C598));
-    sin_cos_rad((gCameras[CAM_DEFAULT].currentYaw + 180.0f) * TAU / 360.0f, &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(gCameras[CAM_DEFAULT].currentYaw + 180.0f), &sinAngle, &cosAngle);
     sp18[3][1] += 10.0f;
     sp18[3][2] -= 10.0f;
     guMtxCatF(sp58, sp18, sp18);

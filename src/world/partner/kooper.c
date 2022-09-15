@@ -117,7 +117,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
             kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((KooperTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
 
             kooper->pos.x = entity->position.x + (sinAngle * KooperTweesterPhysicsPtr->radius);
             kooper->pos.z = entity->position.z - (cosAngle * KooperTweesterPhysicsPtr->radius);
@@ -129,7 +129,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
                 KooperTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((KooperTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
 
             KooperTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 

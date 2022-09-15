@@ -908,7 +908,7 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     s32 i;
     f32 ret;
 
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     collider = &collisionData->colliderList[colliderID];
 
     gCollisionRayDirY = 0;

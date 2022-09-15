@@ -9,7 +9,7 @@ ApiStatus func_80218000_6DBDA0(Evt* script, s32 isInitialCall) {
 
     D_802187E4_6DC584 += 9;
     D_802187E4_6DC584 = clamp_angle(D_802187E4_6DC584);
-    actor->unk_19A = sin_rad((D_802187E4_6DC584 * TAU) / 360.0f) * 3.0f;
+    actor->unk_19A = sin_rad(DEG_TO_RAD(D_802187E4_6DC584)) * 3.0f;
 
     return ApiStatus_DONE2;
 }

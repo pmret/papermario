@@ -54,7 +54,7 @@ void action_update_step_up(void) {
     }
 
     integrate_gravity();
-    sin_cos_rad((playerStatus->targetYaw * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
     colliderID = -1;
     playerStatus->position.x += sinTheta * 3.0f;
     playerStatus->position.z -= cosTheta * 3.0f;

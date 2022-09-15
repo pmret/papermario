@@ -97,7 +97,7 @@ void func_800F0248(void) {
 
     if (D_80109490++ > 0) {
         D_80109490 = 0;
-        sin_cos_rad((clamp_angle(-playerStatus->currentYaw) * TAU) / 360.0f, &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
 
         x = (playerStatus->colliderDiameter * sin * -0.4f) + playerStatus->position.x;
         z = (playerStatus->colliderDiameter * cos * -0.4f) + playerStatus->position.z;
@@ -138,7 +138,7 @@ void func_800F0864(void) {
 
     if (D_801094A4++ >= 4) {
         D_801094A4 = 0;
-        sin_cos_rad((clamp_angle(-playerStatus->currentYaw) * TAU) / 360.0f, &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
         fx_footprint(
             playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
             playerStatus->position.y + 1.5f,

@@ -60,7 +60,7 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     *hitDirZ = 0.0f;
     inputLength = *outLength;
     temp_f20 = diameter * 0.28f;
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     sinTemp = temp_f20 * sinTheta;
     cosTemp = -temp_f20 * cosTheta;
     inputX = *outX;
@@ -238,7 +238,7 @@ s32 player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* p
     f32 radius;
 
     radius = player->colliderDiameter * 0.3f;
-    theta = yaw * TAU / 360.0f;
+    theta = DEG_TO_RAD(yaw);
     deltaX = radius * sin_rad(theta);
     deltaZ = -radius * cos_rad(theta);
 
@@ -373,7 +373,7 @@ s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f3
         height = 1.0f;
     }
 
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     cosTheta = -cosTheta;
     hitDepth = length + radius;
     hitID = player_raycast_general(mode, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
@@ -481,7 +481,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
 
     radius = playerStatus->colliderDiameter * 0.5f;
     height = playerStatus->colliderHeight * 0.286f;
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
 
     depth = length + radius;
     cosTheta = -cosTheta;
@@ -550,7 +550,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     }
     radius = playerStatus->colliderDiameter * 0.5f;
 
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     cosTheta = -cosTheta;
     hitDepth = length + radius;
 
@@ -840,7 +840,7 @@ void suggest_player_anim_clearUnkFlag(AnimID anim) {
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
-        playerStatus->unk_BC = 0;
+        playerStatus->animNotifyValue = 0;
         playerStatus->flags &= ~PS_FLAGS_10000000;
     }
 }
@@ -849,7 +849,7 @@ void force_player_anim(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = anim;
-    playerStatus->unk_BC = 0;
+    playerStatus->animNotifyValue = 0;
     playerStatus->flags &= ~PS_FLAGS_10000000;
 }
 
@@ -859,7 +859,7 @@ void suggest_player_anim_setUnkFlag(AnimID anim) {
 
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
-        playerStatus->unk_BC = 0;
+        playerStatus->animNotifyValue = 0;
         playerStatus->flags |= PS_FLAGS_10000000;
     }
 }
@@ -1383,7 +1383,7 @@ void func_800E0B90(void) {
     if (playerStatus->flags & PS_FLAGS_20000000) {
         timescale = 0.0f;
     }
-    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
+    playerStatus->animNotifyValue = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
     playerStatus->flags |= PS_FLAGS_40000000;
 }
 
@@ -1432,7 +1432,6 @@ s32 get_player_back_anim(s32 anim) {
     } else {
         return anim | SPRITE_ID_BACK_FACING;
     }
-
 }
 
 void render_player(void) {
@@ -1532,14 +1531,14 @@ void appendGfx_player(void* data) {
 
         if (playerStatus->animFlags & PA_FLAGS_SHIVERING) {
             playerStatus->animFlags = playerStatus->animFlags & ~PA_FLAGS_SHIVERING;
-            playerStatus->unk_0A = 22;
+            playerStatus->shiverTime = 22;
             func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             func_802DDFF8(playerStatus->anim, 5, 1, 1, 1, 0, 0);
         }
 
-        if (playerStatus->unk_0A != 0) {
-            playerStatus->unk_0A--;
-            if (playerStatus->unk_0A == 0) {
+        if (playerStatus->shiverTime != 0) {
+            playerStatus->shiverTime--;
+            if (playerStatus->shiverTime == 0) {
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             }
         }

@@ -107,7 +107,7 @@ ApiStatus func_80218000_4CF1B0(Evt* script, s32 isInitialCall) {
     sym = &D_80219040;
     *sym += 15;
     *sym = clamp_angle(*sym);
-    actor->unk_19A = sin_rad(*sym * TAU / 360.0f) * 3.0f;
+    actor->unk_19A = sin_rad(DEG_TO_RAD(*sym)) * 3.0f;
 
     return ApiStatus_BLOCK;
 }

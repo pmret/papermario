@@ -114,7 +114,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((LakilesterTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
             lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
             LakilesterTweesterPhysicsPtr->angle = clamp_angle(LakilesterTweesterPhysicsPtr->angle - LakilesterTweesterPhysicsPtr->angularVelocity);
@@ -125,7 +125,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
                 LakilesterTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((LakilesterTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             LakilesterTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (LakilesterTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -483,7 +483,7 @@ void func_802BDDD8_321928(Npc* npc) {
     }
 
     if (D_802BFF28 > 0.0f && raycastBelowResult >= 0) {
-        sin_cos_rad((D_802BFF28 * TAU) / 360.0f, &sp50, &sp54);
+        sin_cos_rad(DEG_TO_RAD(D_802BFF28), &sp50, &sp54);
         npc->pos.y = (npc->pos.y + fabs((sp50 / sp54) * playerStatus->runSpeed));
     }
 
@@ -1152,7 +1152,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
             sfx_play_sound_at_npc(SOUND_295, 0, -4);
             playerStatus->anim = ANIM_Mario_8000E;
-            playerStatus->unk_BC = 0;
+            playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;

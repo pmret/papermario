@@ -22,6 +22,6 @@ ApiStatus func_80240000_ACE140(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240034_ACE174(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    gPlayerStatus.unk_0D = evt_get_float_variable(script, *args++);
+    gPlayerStatus.availableDisguiseType = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }

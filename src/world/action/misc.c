@@ -74,12 +74,12 @@ void action_update_state_23(void) {
             return;
     }
 
-    sin_cos_rad((D_8010C990 * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(D_8010C990), &sinTheta, &cosTheta);
 
     miscTempVariable = 3.0f;
     miscTempVariable = sinTheta * miscTempVariable;
 
-    sin_cos_rad((D_802B6770_E27C80 * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(D_802B6770_E27C80), &sinTheta, &cosTheta);
     
     playerXOffset = sinTheta * miscTempVariable;
     playerZOffset = cosTheta * miscTempVariable;

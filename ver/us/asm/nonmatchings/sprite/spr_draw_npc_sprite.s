@@ -4,8 +4,8 @@
 glabel spr_draw_npc_sprite
 /* 1014C8 802DE3D8 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 1014CC 802DE3DC 308900FF */  andi      $t1, $a0, 0xff
-/* 1014D0 802DE3E0 3C02802E */  lui       $v0, %hi(D_802DFA48)
-/* 1014D4 802DE3E4 2442FA48 */  addiu     $v0, $v0, %lo(D_802DFA48)
+/* 1014D0 802DE3E0 3C02802E */  lui       $v0, %hi(SpriteInstances)
+/* 1014D4 802DE3E4 2442FA48 */  addiu     $v0, $v0, %lo(SpriteInstances)
 /* 1014D8 802DE3E8 00091880 */  sll       $v1, $t1, 2
 /* 1014DC 802DE3EC 00691821 */  addu      $v1, $v1, $t1
 /* 1014E0 802DE3F0 00031880 */  sll       $v1, $v1, 2
@@ -95,9 +95,9 @@ glabel spr_draw_npc_sprite
 /* 101614 802DE524 00091080 */  sll       $v0, $t1, 2
 /* 101618 802DE528 00491021 */  addu      $v0, $v0, $t1
 /* 10161C 802DE52C 00021080 */  sll       $v0, $v0, 2
-/* 101620 802DE530 3C10802E */  lui       $s0, %hi(D_802DFA48 + 0x4)
+/* 101620 802DE530 3C10802E */  lui       $s0, %hi(SpriteInstances + 0x4)
 /* 101624 802DE534 02028021 */  addu      $s0, $s0, $v0
-/* 101628 802DE538 8E10FA4C */  lw        $s0, %lo(D_802DFA48 + 0x4)($s0)
+/* 101628 802DE538 8E10FA4C */  lw        $s0, %lo(SpriteInstances + 0x4)($s0)
 /* 10162C 802DE53C 3C022000 */  lui       $v0, 0x2000
 /* 101630 802DE540 00821024 */  and       $v0, $a0, $v0
 /* 101634 802DE544 54400001 */  bnel      $v0, $zero, .L802DE54C

@@ -623,7 +623,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
         *pan = (screenX * 0.2f) + 32.0f;
     } else {
         f32 temp_f20 = ((screenX * 127.0) / 320.0) - 64.0;
-        *pan = (s32) (temp_f20 * sin_rad((fabs(temp_f20) * 90.0 * (1/64.0) * TAU) / 360.0)) + 64;
+        *pan = (s32) (temp_f20 * sin_rad(DEG_TO_RAD(fabs(temp_f20) * 90.0 / 64.0))) + 64;
     }
 }
 

@@ -193,7 +193,7 @@ extern Entity* TweesterTouchingPartner;
 extern Entity* TweesterTouchingPlayer;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 PrevPlayerDirection;
-extern s32 D_8010C96C;
+extern s32 PeachDisguiseNpcIndex;
 extern s32 D_8010C980;
 extern s32 D_8010C9A0;
 extern s32 PrevPlayerCamRelativeYaw;
