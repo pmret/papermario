@@ -1,20 +1,25 @@
 #include "sprite.h"
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
-extern s32 D_802DF540;
-extern SpriteAnimData* spr_playerSprites[13];
-extern s32 D_802DF57C;
-extern s32 spr_playerMaxComponents;
-extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
-extern SpriteAnimData* spr_npcSprites[0xEA];
-
-extern u8 spr_npcSpriteInstanceCount[];
-extern SpriteInstance D_802DFA48[51];
-
-extern Quad* D_802DFE44;
-extern s32 D_802DFE48[22];
-extern s32 D_802DFEA0[3];
-extern s32 D_802DFEAC;
+BSS s32 D_802DF520; // unused?
+BSS s32 spr_allocateBtlComponentsOnWorldHeap;
+BSS s32 D_802DF528[2]; // unused?
+BSS s32 D_802DF530;
+BSS s32 D_802DF534[3]; // unused?
+BSS s32 D_802DF540;
+BSS s32 D_802DF544; // unused?
+BSS SpriteAnimData* spr_playerSprites[13];
+BSS s32 D_802DF57C;
+BSS s32 spr_playerMaxComponents;
+BSS s32 D_802DF584; // unused?
+BSS PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
+BSS s32 D_802DF5AC; // unused?
+BSS SpriteAnimData* spr_npcSprites[234];
+BSS u8 spr_npcSpriteInstanceCount[240];
+BSS SpriteInstance D_802DFA48[51];
+BSS Quad* D_802DFE44;
+BSS s32 D_802DFE48[22];
+BSS s32 D_802DFEA0[3];
+BSS s32 D_802DFEAC;
 
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 

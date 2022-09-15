@@ -6,20 +6,24 @@
 #define SPRITE_ROM_START 0x1943000 + 0x10
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
-extern s32 D_802DFEB0[];
-extern s32 D_802DFEB8[];
-extern s32 PlayerRasterSetsLoaded;
-extern s32 PlayerRasterBufferSetOffsets[13];
-extern s32 D_802E0090[];
-extern s32 PlayerRasterHeader;
-extern s32 D_802E0C14[];
-extern s32 D_802E0C20[];
-extern s32 PlayerRasterCacheSize;
-extern s32 PlayerRasterMaxSize;
-extern s32 SpriteDataHeader[];
-extern s32 D_802E0C64;
-extern s32 D_802E0C68;
-extern PlayerSpriteCacheEntry PlayerRasterCache[18];
+
+BSS s32 D_802DFEB0[2];
+BSS s32 D_802DFEB8[101];
+BSS s32 PlayerRasterSetsLoaded;
+BSS s32 PlayerRasterBufferSetOffsets[13];
+BSS s32 D_802D0084[3]; // unused?
+BSS s32 D_802E0090[0x2E0]; // correct length?
+
+BSS s32 PlayerRasterHeader;
+BSS s32 D_802E0C14[3];
+BSS s32 D_802E0C20[14];
+BSS s32 PlayerRasterCacheSize;
+BSS s32 PlayerRasterMaxSize;
+BSS s32 SpriteDataHeader[1]; // ?
+BSS s32 D_802E0C64;
+BSS s32 D_802E0C68;
+BSS s32 D_802E0C6C; // unused?
+BSS PlayerSpriteCacheEntry PlayerRasterCache[18];
 
 INCLUDE_ASM(s32, "101b90_len_8f0", spr_swizzle_anim_offsets);
 

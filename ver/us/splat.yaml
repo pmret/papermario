@@ -356,9 +356,11 @@ segments:
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
     - [0x72E80, bin, n_aspMain_data]
     - [0x73130]
-  - type: code
+  - name: engine1
+    type: code
     start: 0x759B0
     vram: 0x800DC500
+    follows_vram: main
     subsegments:
     - [0x759B0, c, bss2]
     - [0x759B0, c, npc_collision]
@@ -793,9 +795,11 @@ segments:
       - [0xA5078, vtx, vtx/drawbox1]
       - [0xA50B8]
     - [0xA5100]
-  - type: code
+  - name: engine2
+    type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
+    follows_vram: engine1
     subsegments:
     - [0xA5DD0, c, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
@@ -842,7 +846,8 @@ segments:
     - [0xE59D0, .data, audio/sfx]
     - [0xE5DF0, .data, audio/e0b30_len_b80]
     - [0xE5E40]
-  - type: code
+  - name: evt
+    type: code
     dir: evt
     start: 0xE79B0
     vram: 0x802C3000
@@ -860,16 +865,20 @@ segments:
     - [0xFBE10, c, fx_api]
     - [0xFE0B0, c, demo_api]
     - [0xFE650]
-  - type: code
+  - name: engine4
+    type: code
     start: 0xFEE30
     vram: 0x802DBD40
+    # follows_vram: evt
     subsegments:
     - [0x0FEE30, c, sprite]
     - [0x101B90, c, 101b90_len_8f0]
     - [0x102480]
-  - type: code
+  - name: entity
+    type: code
     start: 0x102610
     vram: 0x802E0D90
+    follows_vram: engine4
     subsegments:
     - [0x102610, c, entity/Shadow]
     - [0x102660, c, entity/SaveBlock]
@@ -912,7 +921,8 @@ segments:
     - [0x10C780, .data, entity/BlueWarpPipe]
     - [0x10C830, .data, entity/Signpost]
     - [0x10C880]
-  - type: code
+  - name: font_width
+    type: code
     start: 0x10CC10
     vram: 0x802EB3D0
     subsegments:
@@ -1097,6 +1107,7 @@ segments:
     dir: pause
     start: 0x135EE0
     vram: 0x80242BA0
+    follows_vram: ui_images
     subsegments:
     - [0x135EE0, c, pause_main]
     - [0x137ED0, c, pause_tabs]
@@ -1155,6 +1166,7 @@ segments:
     type: code
     start: 0x163400
     vram: 0x80242BA0
+    follows_vram: ui_images
     subsegments:
     - [0x163400, c, 163400]
     - [0x165490, c, 165490]
@@ -2501,6 +2513,10 @@ segments:
     subsegments:
     - [0x3251D0, c, 3251D0]
     - [0x3255E0]
+
+###############
+### Effects ###
+###############
   - type: code
     start: 0x325AD0
     vram: 0xE0200000
@@ -2508,10 +2524,6 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160]
-
-###############
-### Effects ###
-###############
   - name: effect_gfx_big_smoke_puff
     dir: effects/gfx
     type: code
@@ -4286,6 +4298,10 @@ segments:
     - [0x414BA0, c, effect_86]
     - [0x415020]
   - [0x415060, bin] # effect_86 gfx
+
+#######################
+### Action Commands ###
+#######################
   - type: code
     start: 0x415D90
     vram: 0x802A1000
@@ -4518,6 +4534,10 @@ segments:
     subsegments:
     - [0x430020, c, spook]
     - [0x430940]
+
+####################
+### Battle Areas ###
+####################
   - dir: battle/area_kmr_part_1
     type: code
     start: 0x4309A0
@@ -5181,6 +5201,10 @@ segments:
     - [0x6DE4A0, c]
     - [0x6DE650, c]
     - [0x6DE670, data]
+
+#######################
+### Battle Partners ###
+#######################
   - name: battle_partner_goompa
     dir: battle/partner
     type: code
@@ -5261,6 +5285,10 @@ segments:
     subsegments:
     - [0x714CF0, c, twink]
     - [0x714DC0, data]
+
+####################
+### Battle Items ###
+####################
   - name: mushroom
     dir: battle/item
     type: code
@@ -5577,6 +5605,10 @@ segments:
     subsegments:
     - [0x7330D0, c, food]
     - [0x733700]
+
+####################
+### Battle Moves ###
+####################
   - dir: battle/move/hammer
     type: code
     start: 0x7345A0
