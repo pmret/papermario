@@ -35,7 +35,7 @@ typedef struct PlayerCurrentAnimInfo {
 } PlayerCurrentAnimInfo; // size = 0xC
 
 typedef struct SpriteAnimComponent {
-    /* 0x00 */ s16* cmdList;
+    /* 0x00 */ u16* cmdList;
     /* 0x04 */ s16 cmdListSize;
     /* 0x06 */ Vec3s compOffset;
 } SpriteAnimComponent; // size = 0xC

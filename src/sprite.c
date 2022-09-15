@@ -142,18 +142,18 @@ void spr_make_quad_for_size(Quad* quad, s32 width, s32 height) {
 Quad* spr_get_quad_for_size(s32* quadIndex, s32 width, s32 height) {
     Quad* quad;
     s32 qi;
-    s32 widthHeight;
+    s32 dimensions;
     s32 i;
 
     if ((width * height) / 2 <= 0x800) {
-        widthHeight = (width << 0x18) + (height << 0x10);
+        dimensions = (width << 0x18) + (height << 0x10);
         qi = *quadIndex;
-        if (qi != -1 && (widthHeight == (D_802DFE48[qi] & 0xFFFF0000))) {
+        if (qi != -1 && (dimensions == (D_802DFE48[qi] & 0xFFFF0000))) {
             return spr_get_cached_quad(qi);
         }
 
         for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
-            if (widthHeight == (D_802DFE48[i] & 0xFFFF0000)) {
+            if (dimensions == (D_802DFE48[i] & 0xFFFF0000)) {
                 *quadIndex = i;
                 return spr_get_cached_quad(i);
             }
@@ -167,7 +167,7 @@ Quad* spr_get_quad_for_size(s32* quadIndex, s32 width, s32 height) {
 
         if (i != ARRAY_COUNT(D_802DFE48)) {
             *quadIndex = i;
-            D_802DFE48[i] = widthHeight;
+            D_802DFE48[i] = dimensions;
             quad = spr_get_cached_quad(i);
             spr_make_quad_for_size(quad, width, height);
             return quad;
@@ -206,39 +206,38 @@ void spr_appendGfx_component(
     f32 dx, f32 dy, f32 dz,
     f32 rotX, f32 rotY, f32 rotZ,
     f32 scaleX, f32 scaleY, f32 scaleZ,
-    s32 opacity, void* palette, Matrix4f mtx)
+    s32 opacity, PAL_PTR palette, Matrix4f mtx)
 {
-    Matrix4f sp20;
-    Matrix4f sp60;
-    FoldImageRecPart spA0;
+    Matrix4f mtxTransform;
+    Matrix4f mtxTemp;
+    FoldImageRecPart foldImg;
     s32 quadIndex;
     Quad* quad;
-    u32 temp_v1;
     s32 width;
     s32 height;
 
-    guTranslateF(sp60, dx, dy, dz);
-    guMtxCatF(sp60, mtx, sp20);
+    guTranslateF(mtxTemp, dx, dy, dz);
+    guMtxCatF(mtxTemp, mtx, mtxTransform);
 
     if (rotY != 0.0f) {
-        guRotateF(sp60, rotY, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(sp60, sp20, sp20);
+        guRotateF(mtxTemp, rotY, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     }
     if (rotZ != 0.0f) {
-        guRotateF(sp60, rotZ, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(sp60, sp20, sp20);
+        guRotateF(mtxTemp, rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     }
     if (rotX != 0.0f) {
-        guRotateF(sp60, rotX, 1.0f, 0.0f, 0.0f);
-        guMtxCatF(sp60, sp20, sp20);
+        guRotateF(mtxTemp, rotX, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     }
 
     if (scaleX != 1.0f || scaleY != 1.0f || scaleZ != 1.0f) {
-        guScaleF(sp60, scaleX, scaleY, scaleZ);
-        guMtxCatF(sp60, sp20, sp20);
+        guScaleF(mtxTemp, scaleX, scaleY, scaleZ);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     }
 
-    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -267,16 +266,16 @@ void spr_appendGfx_component(
     }
 
     if (quad != NULL) {
-        spr_appendGfx_component_flat(quad, cache->image, palette, width, height, rotY, sp20, (u8) opacity);
+        spr_appendGfx_component_flat(quad, cache->image, palette, width, height, rotY, mtxTransform, (u8) opacity);
     } else {
-        spA0.raster = cache->image;
-        spA0.palette = palette;
-        spA0.width = width;
-        spA0.height = height;
-        spA0.xOffset = -(width / 2);
-        spA0.yOffset = height;
-        spA0.opacity = opacity;
-        if (fold_appendGfx_component((u8) (u16) D_802DF540, &spA0, 0x80000, sp20) == 1) { // todo bitfield?
+        foldImg.raster = cache->image;
+        foldImg.palette = palette;
+        foldImg.width = width;
+        foldImg.height = height;
+        foldImg.xOffset = -(width / 2);
+        foldImg.yOffset = height;
+        foldImg.opacity = opacity;
+        if (fold_appendGfx_component((u8) (u16) D_802DF540, &foldImg, 0x80000, mtxTransform) == 1) { // todo bitfield?
             D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
         }
     }
@@ -289,44 +288,39 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
         *outY = inY;
         *outZ = inZ;
     } else {
-        Matrix4f mtx, mtx2;
-        f32 f1, f2, f3, f4, f5, f6, f7, f8, f9;
+        Matrix4f mtxTransform, mtxTemp;
+        f32 xx, yx, zx, xy, yy, zy, xz, yz, zz;
 
-        guRotateF(mtx, rotY, 0.0f, 1.0f, 0.0f);
-        guRotateF(mtx2, rotZ, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(mtx2, mtx, mtx);
-        guRotateF(mtx2, rotX, 1.0f, 0.0f, 0.0f);
-        guMtxCatF(mtx2, mtx, mtx);
+        guRotateF(mtxTransform, rotY, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxTemp, rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guRotateF(mtxTemp, rotX, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-        f1 = (mtx[0][0] * inX);
-        f2 = (mtx[1][0] * inY);
-        f3 = (mtx[2][0] * inZ);
-        f4 = (mtx[0][1] * inX);
-        f5 = (mtx[1][1] * inY);
-        f6 = (mtx[2][1] * inZ);
-        f7 = (mtx[0][2] * inX);
-        f8 = (mtx[1][2] * inY);
-        f9 = (mtx[2][2] * inZ);
+        xx = (mtxTransform[0][0] * inX);
+        yx = (mtxTransform[1][0] * inY);
+        zx = (mtxTransform[2][0] * inZ);
+        xy = (mtxTransform[0][1] * inX);
+        yy = (mtxTransform[1][1] * inY);
+        zy = (mtxTransform[2][1] * inZ);
+        xz = (mtxTransform[0][2] * inX);
+        yz = (mtxTransform[1][2] * inY);
+        zz = (mtxTransform[2][2] * inZ);
 
-        *outX = f1 + f2 + f3;
-        *outY = f4 + f5 + f6;
-        *outZ = f7 + f8 + f9;
+        *outX = xx + yx + zx;
+        *outY = xy + yy + zy;
+        *outZ = xz + yz + zz;
     }
 }
 
-void spr_draw_component(s32 opacity, SpriteComponent* component, SpriteAnimComponent* anim, SpriteRasterCacheEntry** cache, s16** arg4, f32 arg5, Matrix4f mtx) {
-    f32 dx;
-    f32 dy;
-    f32 dz;
+void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComponent* anim,
+        SpriteRasterCacheEntry** cache, PAL_PTR* palettes, f32 zscale, Matrix4f mtx) {
     SpriteRasterCacheEntry* cacheEntry;
     s32 paletteIdx;
-    void* pal;
-    f32 rotX;
-    f32 rotY;
-    f32 rotZ;
-    f32 inX;
-    f32 inY;
-    f32 inZ;
+    PAL_PTR pal;
+    f32 dx, dy, dz;
+    f32 rotX, rotY, rotZ;
+    f32 inX, inY, inZ;
 
     if (component->initialized && component->currentRaster != -1) {
         rotX = D_802DFEA0[0];
@@ -336,14 +330,14 @@ void spr_draw_component(s32 opacity, SpriteComponent* component, SpriteAnimCompo
         inY = component->compPos.y + anim->compOffset.y;
         inZ = component->compPos.z + anim->compOffset.z;
 
-        spr_transform_point(rotX, rotY, rotZ, inX, inY, inZ * arg5, &dx, &dy, &dz);
+        spr_transform_point(rotX, rotY, rotZ, inX, inY, inZ * zscale, &dx, &dy, &dz);
         cacheEntry = cache[component->currentRaster];
         paletteIdx = component->currentPalette;
-        if (opacity & 0x08000000) {
+        if (drawOpts & 0x08000000) {
             cacheEntry->image = spr_get_player_raster(component->currentRaster & 0xFFF, D_802DF57C);
         }
         D_802DF540 = component->unk_4C;
-        pal = arg4[paletteIdx];
+        pal = palettes[paletteIdx];
 
         spr_appendGfx_component(
             cacheEntry,
@@ -354,7 +348,7 @@ void spr_draw_component(s32 opacity, SpriteComponent* component, SpriteAnimCompo
             component->scale.x,
             component->scale.y,
             component->scale.z,
-            opacity, pal, mtx
+            drawOpts, pal, mtx
         );
         component->unk_4C = D_802DF540;
     }
@@ -397,7 +391,7 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
         changedFlags = 0;
   
         bufPos = comp->readPos;
-        gotoPos = (s16*) -1;
+        gotoPos = (u16*) -1;
         
         comp->waitTime -= spr_animUpdateTimeScale;
         
@@ -437,7 +431,7 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
                     gotoPos = bufPos;
                     break;
                 // 1VVV
-                // Set Image -- FFF is valid value for "no image"
+                // SetImage -- FFF is valid value for "no image"
                 case 0x1000:
                     cmdValue = *bufPos++ & 0xFFF;
                     if (cmdValue != 0xFFF) {
