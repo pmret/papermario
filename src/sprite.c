@@ -314,7 +314,7 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
     }
 }
 
-void spr_draw_component(s32 opacity, SpriteComponent* component, UnkSpriteThing* arg2, SpriteRasterCacheEntry** cache, s16** arg4, f32 arg5, Matrix4f mtx) {
+void spr_draw_component(s32 opacity, SpriteComponent* component, SpriteAnimComponent* anim, SpriteRasterCacheEntry** cache, s16** arg4, f32 arg5, Matrix4f mtx) {
     f32 dx;
     f32 dy;
     f32 dz;
@@ -332,9 +332,9 @@ void spr_draw_component(s32 opacity, SpriteComponent* component, UnkSpriteThing*
         rotX = D_802DFEA0[0];
         rotY = D_802DFEA0[1];
         rotZ = D_802DFEA0[2];
-        inX = component->compPos.x + arg2->unk_06.x;
-        inY = component->compPos.y + arg2->unk_06.y;
-        inZ = component->compPos.z + arg2->unk_06.z;
+        inX = component->compPos.x + anim->compOffset.x;
+        inY = component->compPos.y + anim->compOffset.y;
+        inZ = component->compPos.z + anim->compOffset.z;
 
         spr_transform_point(rotX, rotY, rotZ, inX, inY, inZ * arg5, &dx, &dy, &dz);
         cacheEntry = cache[component->currentRaster];
@@ -360,7 +360,7 @@ void spr_draw_component(s32 opacity, SpriteComponent* component, UnkSpriteThing*
     }
 }
 
-s32 spr_sign_extend_12bit(u16 val) {
+s32 spr_unpack_signed_12bit(u16 val) {
     s32 temp = val & 0xFFF;
 
     if (temp & 0x800) {
@@ -370,7 +370,7 @@ s32 spr_sign_extend_12bit(u16 val) {
     }
 }
 
-s32 spr_sign_extend_16bit(u16 val) {
+s32 spr_unpack_signed_16bit(u16 val) {
     s32 temp = val & 0xFFFF;
 
     if (temp & 0x8000) {
@@ -380,8 +380,181 @@ s32 spr_sign_extend_16bit(u16 val) {
     }
 }
 
-void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* animComponent);
-INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
+void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* anim) {
+    f32 posX, posY, posZ;
+    f32 rotX, rotY, rotZ;
+    f32 scaleX, scaleY, scaleZ;
+    s32 changedFlags;
+    
+    u16* bufPos;
+    u16* gotoPos;
+    s32 cmdValue;
+
+    if (comp->initialized) {
+        scaleZ = 1.0f;
+        scaleY = 1.0f;
+        scaleX = 1.0f;
+        changedFlags = 0;
+  
+        bufPos = comp->readPos;
+        gotoPos = (s16*) -1;
+        
+        comp->waitTime -= spr_animUpdateTimeScale;
+        
+        while (comp->waitTime <= 0.0f) {
+            // overflow check
+            if (bufPos >= &anim->cmdList[anim->cmdListSize / 2]) {
+                bufPos = anim->cmdList;
+                break;
+            }
+            
+            switch (*bufPos & 0xF000) {
+                // 0VVV
+                // Wait
+                case 0x0000:
+                    comp->waitTime = *bufPos++ & 0xFFF;
+                    if (comp->waitTime == 0.0f) {
+                        comp->waitTime = 4095.0f;
+                    }
+                    comp->posOffset.z = 0.0f;
+                    comp->posOffset.y = 0.0f;
+                    comp->posOffset.x = 0.0f;
+                    comp->rotation.z = 0;
+                    comp->rotation.y = 0;
+                    comp->rotation.x = 0;
+                    comp->scale.z = 1.0f;
+                    comp->scale.y = 1.0f;
+                    comp->scale.x = 1.0f;
+                    break;
+                // 2VVV
+                // Goto -- jump to another position in the list
+                case 0x2000:
+                    bufPos = &anim->cmdList[spr_unpack_signed_12bit(*bufPos)];
+                    if (bufPos == gotoPos) {
+                        bufPos = anim->cmdList;
+                        comp->waitTime = 1.0f;
+                    }
+                    gotoPos = bufPos;
+                    break;
+                // 1VVV
+                // Set Image -- FFF is valid value for "no image"
+                case 0x1000:
+                    cmdValue = *bufPos++ & 0xFFF;
+                    if (cmdValue != 0xFFF) {
+                        comp->currentRaster = cmdValue;
+                    } else {
+                        comp->currentRaster = -1;
+                    }
+                    comp->currentPalette = -1;
+                    break;
+                // 6VVV
+                // SetPalette -- FFF to clear
+                case 0x6000:
+                    cmdValue = *bufPos++ & 0xFFF;
+                    if (cmdValue != 0xFFF) {
+                        comp->currentPalette = cmdValue;
+                    } else {
+                        comp->currentPalette = -1;
+                    }
+                    break;
+                // 8VUU
+                // SetProperty
+                // 81-XX parent to component XX
+                // 82-YY set notify value to YY
+                case 0x8000:
+                    cmdValue = *bufPos++;
+                    switch (cmdValue & 0xF00) {
+                        case 0x100: // set parent
+                            comp->properties = (comp->properties & 0xFFFF0000) | cmdValue;
+                            break;
+                        case 0x200: // set notify value
+                            SpriteUpdateNotifyValue = cmdValue & 0xFF;
+                            comp->properties = (comp->properties & 0xFF00FFFF) | (SpriteUpdateNotifyValue << 0x10);
+                            break;
+                    }
+                    break;
+                // 3VVV XXXX YYYY ZZZZ
+                // SetPosition -- what does the flag do?
+                case 0x3000:
+                    switch (*bufPos++ & 0xF) {
+                        case 0:
+                        case 1:
+                            posX = spr_unpack_signed_16bit(*bufPos++);
+                            posY = spr_unpack_signed_16bit(*bufPos++);
+                            posZ = spr_unpack_signed_16bit(*bufPos++);
+                            changedFlags |= 1;
+                            break;
+                    }
+                    break;
+                // 4XXX YYYY ZZZZ
+                // SetRotation (euler angles)
+                case 0x4000:
+                    rotX = spr_unpack_signed_12bit(*bufPos++);
+                    rotY = spr_unpack_signed_16bit(*bufPos++);
+                    rotZ = spr_unpack_signed_16bit(*bufPos++);
+                    changedFlags |= 2;
+                    break;
+                // 5VVV UUUU
+                // SetScale (%)
+                case 0x5000:
+                    switch (*bufPos++ & 0xF) {
+                        case 0:
+                            scaleZ = *bufPos++ / 100.0f;
+                            scaleY = scaleZ;
+                            scaleX = scaleZ;
+                            break;
+                        case 1:
+                            scaleX = *bufPos++ / 100.0f;
+                            break;
+                        case 2:
+                            scaleY = *bufPos++ / 100.0f;
+                            break;
+                        case 3:
+                            scaleZ = *bufPos++ / 100.0f;
+                            break;
+                    }
+                    changedFlags |= 4;
+                    break;
+                // 7VVV UUUU
+                // Loop -- VV iterations jumping back to UUUU
+                case 0x7000:
+                    if (comp->loopCounter != 0) {
+                        comp->loopCounter--;
+                        if (comp->loopCounter == 0) {
+                            bufPos += 2;
+                            break;
+                        }
+                    } else {
+                        comp->loopCounter = bufPos[1];
+                    }
+                    bufPos = &anim->cmdList[spr_unpack_signed_12bit(*bufPos)];
+                    break;
+                // invalid command
+                default:
+                    bufPos = anim->cmdList;
+                    comp->waitTime = 1.0f;
+                    break;
+            }
+        } // end loop
+        
+        comp->readPos = bufPos;
+        if (changedFlags & 1) {
+            comp->posOffset.x = posX;
+            comp->posOffset.y = posY;
+            comp->posOffset.z = posZ;
+        }
+        if (changedFlags & 2) {
+            comp->rotation.x = rotX;
+            comp->rotation.y = rotY;
+            comp->rotation.z = rotZ;
+        }
+        if (changedFlags & 4) {
+            comp->scale.x = scaleX;
+            comp->scale.y = scaleY;
+            comp->scale.z = scaleZ;
+        }
+    }
+}
 
 void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList,
                                  SpriteRasterCacheEntry** rasterCacheEntry, s32 overridePalette)
@@ -394,8 +567,8 @@ void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compLi
         comp->compPos.y = comp->posOffset.y;
         comp->compPos.z = comp->posOffset.z;
 
-        if ((comp->unk_04 & 0xF00) == 0x100) {
-            listComp = compList[comp->unk_04 & 0xFF];
+        if ((comp->properties & 0xF00) == 0x100) {
+            listComp = compList[comp->properties & 0xFF];
             comp->compPos.x += listComp->compPos.x;
             comp->compPos.y += listComp->compPos.y;
             comp->compPos.z += listComp->compPos.z;
@@ -442,7 +615,7 @@ void spr_init_component_anim_state(SpriteComponent* comp, SpriteAnimComponent* a
     }
 
     comp->initialized = TRUE;
-    comp->unk_04 = 0;
+    comp->properties = 0;
     comp->readPos = anim->cmdList;
     comp->waitTime = 0;
     comp->loopCounter = 0;
@@ -546,7 +719,99 @@ s32 func_802DDA84(void) {
 
 INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 arg2);
 
+#ifdef NON_EQUIVALENT
+s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** paletteList, Matrix4f mtx) {
+    PlayerCurrentAnimInfo* animInfo;
+    SpriteComponent** compList;
+    SpriteAnimComponent** animList;
+    SpriteRasterCacheEntry** rasterList;
+    s32 spriteIndex;
+    s32 animIndex;
+    s32 spriteAnimIndex;
+    s32 animID;
+    s32 camRelativeYaw;
+    s32 alpha;
+    f32 zscale;
+    PAL_PTR* drawPalettes;
+
+    camRelativeYaw = yaw;
+    spriteAnimIndex = spriteInstanceID & 0xFF;
+    
+    animID = spr_playerCurrentAnimInfo[spriteAnimIndex].animID;
+
+    if (animID == -1) {
+        return 0;
+    }
+    
+    spriteIndex = ((animID >> 0x10) & 0xFF) - 1;
+    D_802DF57C = spriteIndex;
+    if (spr_playerSprites[spriteIndex] == NULL) {
+        return 0;
+    }
+    rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
+    animList = &spr_playerSprites[spriteIndex]->animListStart[animID & 0xFF];
+    drawPalettes = spr_playerSprites[spriteIndex]->palettesOffset;
+    if (animID & 0x01000000) {
+        switch (spriteIndex) {
+            case 0:
+            case 5:
+            case 9:
+                spriteIndex++;
+                D_802DF57C = spriteIndex;
+                rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
+                break;
+        }
+    }
+    
+    if (!(spriteInstanceID & 0x40000000)) {
+        camRelativeYaw += (s32) -gCameras[gCurrentCamID].currentYaw;
+        if (camRelativeYaw > 360) {
+            camRelativeYaw -= 360;
+        }
+        if (camRelativeYaw < -360) {
+            camRelativeYaw += 360;
+        }
+    }
+    if ((camRelativeYaw - 91) < 180U || (camRelativeYaw + 270) < 180U) {
+        zscale = -1.5f;
+    } else {
+        zscale = 1.5f;
+    }
+    
+    if (spriteInstanceID & 0x10000000) {
+        zscale = 0.0f - zscale;
+    }
+    
+    D_802DFEA0[0] = 0;
+    D_802DFEA0[1] = camRelativeYaw;
+    D_802DFEA0[2] = 0;
+    
+    if (spriteInstanceID & 0x80000000) {
+        if (arg2 == 0) {
+            return 0;
+        }
+        alpha = arg2 & 0xFF;
+    } else {
+        alpha = 255;
+    }
+    
+    compList = spr_playerCurrentAnimInfo[spriteAnimIndex].componentList;
+    if (spriteInstanceID & 0x20000000) {
+        drawPalettes = paletteList;
+    }
+    while (*compList != PTR_LIST_END) {
+        SpriteComponent* comp = *compList;
+        spr_draw_component(alpha | 0x08000000, comp, *animList, rasterList, drawPalettes, zscale, mtx);
+        compList++;
+        if (*animList != PTR_LIST_END) {
+            animList++;
+        }
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+#endif
 
 s32 func_802DDEC4(s32 arg0) {
     return spr_playerCurrentAnimInfo[arg0].notifyValue;
@@ -654,7 +919,39 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
     return listIndex;
 }
 
+// animList being odd
+#ifdef NON_MATCHING
+s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
+    SpriteAnimData* animData;
+    SpriteComponent** compList;
+    SpriteAnimComponent** animList;
+    SpriteRasterCacheEntry** rasterList;
+
+    s32 palID;
+    s32 i = spriteInstanceID & 0xFF;
+    s32 animIndex = animID & 0xFF;
+    
+    animData = SpriteInstances[i].spriteData;
+    compList = SpriteInstances[i].componentList;
+    animList = &animData->animListStart[animIndex];
+    rasterList = animData->rastersOffset;
+
+    palID = (animID >> 8) & 0xFF;
+    spr_set_anim_timescale(timeScale);
+    if ((spriteInstanceID < 0) || ((SpriteInstances[i].currentAnimID & 0xFF) != animIndex)) {
+        spr_init_anim_state(compList, animList);
+        SpriteInstances[i].currentAnimID = (palID << 8) | animIndex;
+        SpriteInstances[i].notifyValue = 0;
+    }
+    if (!(spriteInstanceID & 0x40000000)) {
+        SpriteInstances[i].notifyValue = spr_component_update(SpriteInstances[i].notifyValue,
+            compList, animList, rasterList, palID);
+    }
+    return SpriteInstances[i].notifyValue;
+}
+#else
 INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
+#endif
 
 INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 

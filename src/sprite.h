@@ -15,7 +15,7 @@ enum SpriteIDFields {
 
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 properties; ///< AABBCCCC : AA = unused?, BB = parent, CCCC = notify value
     /* 0x08 */ s16* readPos;
     /* 0x0C */ f32 waitTime;
     /* 0x10 */ s32 loopCounter;
@@ -49,14 +49,6 @@ typedef struct SpriteRasterCacheEntry {
     /* 0x07 */ s8 quadCacheIndex;
 } SpriteRasterCacheEntry; // size = 0x8
 
-typedef struct SpriteHeader {
-    /* 0x00 */ SpriteRasterCacheEntry* rasterList;
-    /* 0x04 */ PAL_PTR* paletteList;
-    /* 0x08 */ s32 maxComponents;
-    /* 0x0C */ s32 colorVariants;
-    /* 0x10 */ SpriteAnimComponent** animListStart;
-} SpriteHeader; // size = 0x14
-
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
@@ -64,7 +56,7 @@ typedef struct SpriteAnimData {
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
     /* 0x10 */ SpriteAnimComponent** animListStart;
-} SpriteAnimData; // size = 0x10
+} SpriteAnimData; // size = 0x14
 
 typedef struct SpriteInstance {
     /* 0x00 */ s32 spriteIndex;
@@ -92,11 +84,6 @@ typedef struct PlayerSpriteCacheEntry {
     /* 0x08 */ s32 spriteIndex;
     /* 0x0C */ IMG_PTR raster;
 } PlayerSpriteCacheEntry; // size = 0x10
-
-typedef struct UnkSpriteThing {
-    /* 0x00 */ char unk_00[0x6];
-    /* 0x06 */ Vec3s unk_06;
-} UnkSpriteThing; // size = ??
 
 typedef struct Quad {
     Vtx v[4];
