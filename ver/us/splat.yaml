@@ -13030,7 +13030,9 @@ segments:
   - [0x199A8C0, bin] # Retro sprites
   - [0x199BB00, bin] # Princess Peach sprites
   - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
-  - [0x19E09A8, Yay0]
+  - start: 0x19E09A8
+    type: Yay0
+    align: 8
   - start: 0x19E1390
     type: Yay0
     align: 8
