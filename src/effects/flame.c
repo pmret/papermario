@@ -27,8 +27,8 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], data->unk_04, data->unk_08, data->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
-    
+    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], data->pos.x, data->pos.y, data->pos.z, 1.0f, &outX, &outY, &outZ, &outS);
+
     outDist = outZ + 5000;
     if (outDist < 0) {
         outDist = 0;
@@ -39,7 +39,7 @@ void flame_render(EffectInstance* effect) {
     if (outS < 0.01 && -0.01 < outS) {
         outDist = 0;
     }
-    
+
     renderTaskPtr->appendGfx = flame_appendGfx;
     renderTaskPtr->distance = -outDist;
     renderTaskPtr->appendGfxArg = effect;
