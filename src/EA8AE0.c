@@ -11,6 +11,8 @@ extern s32 D_80248388[];
 extern s32 D_80248380;
 extern s32 D_80243DD8_EAC8B8;
 extern s32 D_80243DDC_EAC8BC;
+extern s32 func_802413C0_EA9EA0;
+void func_8012DFE8(s32, void (*)());
 
 #include "world/common/atomic/TexturePan.inc.c"
 
@@ -37,15 +39,11 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
-? func_8012DFE8(?, ? *);                            /* extern */
-extern ? func_802413C0_EA9EA0;
-
-? func_8024140C_EA9EEC(Evt *arg0) {
-    dead_evt_set_variable(arg0, -0x02FAF080, dead_heap_malloc(0x780));
+ApiStatus func_8024140C_EA9EEC(Evt* script) {
+    dead_evt_set_variable(script, -0x02FAF080, (s32)dead_heap_malloc(0x780));
     D_80248380 = -1;
     func_8012DFE8(0, &func_802413C0_EA9EA0);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 
