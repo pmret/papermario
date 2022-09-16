@@ -146,9 +146,4 @@
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
 
-#ifdef PERMUTER
-#undef SCRIPT
-#define SCRIPT(...) {}
-#endif
-
 #endif
