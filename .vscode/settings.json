@@ -9,7 +9,6 @@
         "-Iver/current/build/include",
         "-Isrc",
         "-D_LANGUAGE_C",
-        "-DSCRIPT(...)={}",
         "-Wall"
     ],
     "clang-tidy.blacklist": [
