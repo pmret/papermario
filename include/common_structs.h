@@ -190,7 +190,7 @@ typedef struct Npc {
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
-    /* 0x02C */ s32 animNotifyValue;
+    /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -1534,7 +1534,7 @@ typedef struct ActorPart {
     /* 0x80 */ s32 partFlags3;
     /* 0x84 */ s32 unk_84;
     /* 0x88 */ u32 currentAnimation;
-    /* 0x8C */ s32 animNotifyValue;
+    /* 0x8C */ s32 unk_8C;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
@@ -1734,10 +1734,10 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
+    /* 0x24 */ f32 currentDegAngle;
+    /* 0x28 */ f32 angularVelocity;
     /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Vec3f unk_30;
+    /* 0x30 */ Vec3f velocityVector;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 velocity;
@@ -1897,10 +1897,10 @@ typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 currentStateTime;
-    /* 0x00A */ s8 shiverTime;
+    /* 0x00A */ s8 unk_0A;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
-    /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
+    /* 0x00D */ s8 unk_0D;
     /* 0x00E */ u8 alpha1;
     /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 blinkTimer;
@@ -1939,13 +1939,13 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ AnimID anim;
-    /* 0x0BC */ u16 animNotifyValue;
+    /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ s8 peachItemHeld;
-    /* 0x0C5 */ s8 camResetDelay;
+    /* 0x0C5 */ s8 unk_C5;
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;

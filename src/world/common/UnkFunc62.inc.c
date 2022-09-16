@@ -59,16 +59,16 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        state->unk_30.x = (state->goalPos.x - state->currentPos.x) / state->moveTime;
-        state->unk_30.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
-        state->unk_30.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
+        state->velocityVector.x = (state->goalPos.x - state->currentPos.x) / state->moveTime;
+        state->velocityVector.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
+        state->velocityVector.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
         state->velocity = 0.0f;
         state->speed += phi_f8 / state->moveTime;
 
         if (state->moveArcAmplitude < 3) {
-            state->unk_24 = 90.0f;
-            state->unk_28 = 360 / state->moveTime;
+            state->currentDegAngle = 90.0f;
+            state->angularVelocity = 360 / state->moveTime;
             phi_f8 = state->distance;
             phi_f8 -= 20.0;
             phi_f8 /= 6.0;
@@ -81,12 +81,12 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             phi_f20 = state->velocity;
             temp_f22_2 = state->acceleration;
-            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
+            phi_f0 = sin_rad(state->currentDegAngle * TAU / 360.0f);
             phi_f2 = 0.53;
             state->velocity = phi_f20 + ((phi_f0 * phi_f2 * temp_f22_2) + temp_f22_2);
         } else {
-            state->unk_24 = 90.0f;
-            state->unk_28 = 360 / state->moveTime;
+            state->currentDegAngle = 90.0f;
+            state->angularVelocity = 360 / state->moveTime;
             phi_f8 = state->distance;
             phi_f8 -= 20.0;
             phi_f8 /= 6.0;
@@ -99,7 +99,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             velocity = state->velocity;
             temp_f22_3 = state->acceleration;
-            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
+            phi_f0 = sin_rad(state->currentDegAngle * TAU / 360.0f);
             phi_f2 = 0.8;
             state->velocity = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
@@ -115,9 +115,9 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             }
             oldActorX = actor->currentPos.x;
             oldActorY = actor->currentPos.y;
-            state->currentPos.x += state->unk_30.x;
-            state->currentPos.y = state->currentPos.y + state->unk_30.y;
-            state->currentPos.z = state->currentPos.z + state->unk_30.z;
+            state->currentPos.x += state->velocityVector.x;
+            state->currentPos.y = state->currentPos.y + state->velocityVector.y;
+            state->currentPos.z = state->currentPos.z + state->velocityVector.z;
             state->unk_18.x = actor->currentPos.y;
             actor->currentPos.x = state->currentPos.x;
             actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->velocity));
@@ -131,19 +131,19 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             if (state->moveArcAmplitude < 3) {
                 phi_f20_2 = state->velocity;
                 temp_f22_5 = state->acceleration;
-                phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
+                phi_f0_2 = sin_rad((state->currentDegAngle * TAU) / 360.0f);
                 phi_f2_2 = 0.53;
                 state->velocity = phi_f20_2 + ((phi_f0_2 * phi_f2_2 * temp_f22_5) + temp_f22_5);
             } else {
                 temp_f20_6 = state->velocity;
                 temp_f22_6 = state->acceleration;
-                phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
+                phi_f0_2 = sin_rad((state->currentDegAngle * TAU) / 360.0f);
                 phi_f2_2 = 0.8;
                 state->velocity = temp_f20_6 + ((phi_f0_2 * phi_f2_2 * temp_f22_6) + temp_f22_6);
             }
 
-            state->unk_24 += state->unk_28;
-            state->unk_24 = clamp_angle(state->unk_24);
+            state->currentDegAngle += state->angularVelocity;
+            state->currentDegAngle = clamp_angle(state->currentDegAngle);
             state->moveTime--;
             if (state->moveTime == 0) {
                 actor->currentPos.y = state->goalPos.y;
@@ -156,10 +156,10 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
         case 2:
             state->moveTime = 1;
             state->acceleration = 1.8f;
-            state->unk_24 = 90.0f;
+            state->currentDegAngle = 90.0f;
             state->velocity = -(state->unk_18.x - state->unk_18.y);
             state->bounceDivisor = fabsf(state->unk_18.x - state->unk_18.y) / 16.5;
-            state->unk_28 = 360 / state->moveTime;
+            state->angularVelocity = 360 / state->moveTime;
             state->currentPos.x = actor->currentPos.x;
             state->currentPos.y = actor->currentPos.y;
             state->currentPos.z = actor->currentPos.z;
@@ -167,10 +167,10 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             // fallthrough
         case 3:
             currentPosX64 = state->currentPos.x; // required to match
-            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
-            state->currentPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
-            state->unk_24 += state->unk_28;
-            state->unk_24 = clamp_angle(state->unk_24);
+            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad((state->currentDegAngle * TAU) / 360.0f) / 33.0;
+            state->currentPos.y -= state->bounceDivisor * sin_rad((state->currentDegAngle * TAU) / 360.0f);
+            state->currentDegAngle += state->angularVelocity;
+            state->currentDegAngle = clamp_angle(state->currentDegAngle);
             actor->currentPos.x = state->currentPos.x;
             actor->currentPos.y = state->currentPos.y;
             actor->currentPos.z = state->currentPos.z;

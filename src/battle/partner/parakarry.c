@@ -119,8 +119,8 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             state->goalPos.x += targetActorPart->unk_75 * targetActor->scalingFactor;
             state->goalPos.y += targetActorPart->unk_76 * targetActor->scalingFactor;
             state->goalPos.z = state->goalPos.z;
-            state->unk_24 = (targetActorPart->size.y + targetActorPart->size.x) / 2 / 24.0;
-            hud_element_set_scale(D_8023BDB4, state->unk_24 * targetActor->scalingFactor);
+            state->currentDegAngle = (targetActorPart->size.y + targetActorPart->size.x) / 2 / 24.0;
+            hud_element_set_scale(D_8023BDB4, state->currentDegAngle * targetActor->scalingFactor);
             state->currentPos.x = parakarry->currentPos.x + 8.0f;
             state->currentPos.y = parakarry->currentPos.y + 16.0f;
             state->currentPos.z = parakarry->currentPos.z;
@@ -201,7 +201,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             } else {
                 if (D_8023BDBC == 0) {
                     targetActor = get_actor(parakarry->targetActorID);
-                    tempAngle = fabsf(get_clamped_angle_diff(state->angle, state->bounceDivisor)) / state->unk_24 * targetActor->scalingFactor;
+                    tempAngle = fabsf(get_clamped_angle_diff(state->angle, state->bounceDivisor)) / state->currentDegAngle * targetActor->scalingFactor;
 
                     if (tempAngle < 3.0f) {
                         evt->functionTemp[0] = 3;
@@ -227,7 +227,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
         case 3:
             targetActor = get_actor(parakarry->targetActorID);
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
-            tempAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
+            tempAngle = fabsf(clampedAngleDiff) / state->currentDegAngle * targetActor->scalingFactor;
 
             if (state->velocity >= 0.0f) {
                 if (clampedAngleDiff < 0.0f) {
@@ -269,7 +269,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             hudID = D_8023BDC0;
             targetActor = get_actor(parakarry->targetActorID);
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
-            tempAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
+            tempAngle = fabsf(clampedAngleDiff) / state->currentDegAngle * targetActor->scalingFactor;
 
             if (tempAngle < 7.0f) {
                 hud_element_set_script(hudID, &HES_StickNeutral);
@@ -408,7 +408,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
             parakarry->state.currentPos.x += parakarry->state.speed;
             *animationRatePtr = 1.0f;
             y = parakarry->state.currentPos.y;
-            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(DEG_TO_RAD(parakarry->state.moveTime)) * PI_S) * D_8023BD60_703AE0 + 0.5);
+            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(parakarry->state.moveTime * TAU / 360.0f) * PI_S) * D_8023BD60_703AE0 + 0.5);
             parakarry->state.moveTime += 6;
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 

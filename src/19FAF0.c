@@ -1142,7 +1142,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     playerState->currentPos.y += playerVel;
     playerState->velocity -= playerState->acceleration;
     temp_f20_2 = playerState->speed;
-    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24), playerState->angle);
+    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad((playerState->unk_24 * TAU) / 360.0f), playerState->angle);
     playerState->unk_24 += playerState->unk_28;
     playerState->unk_24 = clamp_angle(playerState->unk_24);
     player->currentPos.x = playerState->currentPos.x;
@@ -1712,211 +1712,213 @@ ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
 }
 
 // INCLUDE_ASM(s32, "19FAF0", func_80274A18);
+// Jump on an enemy
 s32 func_80274A18(Evt *script, s32 isInitialCall) {
-    Actor *temp_s2;
-    ActorState *temp_s0;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f12;
-    f32 temp_f12_2;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 temp_f24;
-    f32 temp_f26;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f6;
-    f32 temp_f6_2;
-    f32 temp_f8;
-    f32 temp_f8_2;
-    f32 var_f8;
-    f64 temp_f20_2;
-    f64 var_f0;
-    f64 var_f0_2;
-    f64 var_f20;
-    f64 var_f20_2;
-    f64 var_f22;
-    f64 var_f22_2;
+    Actor* player;
+    ActorState* playerState;
+    f32 distance;
+    f32 currentPosY;
+    f32 rotatedAngle_1;
+    f32 rotatedAngle;
+    f32 currentPosZ;
+    f32 currentPosX;
+    f32 goalPosX;
+    f32 goalPosZ;
+    f32 speed;
+    f32 goalPosY;
+    f32 playerMoveTime_2;
+    f32 updatedPosX;
+    f32 bounceDivisor;
+    f32 bounceDivisor_2;
+    f32 remainingDistance;
+    f64 currentPosX_2;
+    f64 sine;
+    f64 sine_2;
+    f64 velocity;
+    f64 velocity_2;
+    f64 acceleration;
+    f64 acceleration_2;
     f64 var_f2;
     f64 var_f2_2;
-    s16 temp_v0;
-    s16 temp_v0_2;
-    s16 temp_v1;
-    s16 temp_v1_3;
-    s32 *temp_s1;
-    s32 temp_f10;
-    s32 temp_v1_2;
-    s32 var_v0;
+    s16 playerMoveTime;
+    s16 playerMoveTime_3;
+    s16 playerMoveTime_1;
+    s16 playerMoveTime_4;
+    Bytecode* args;
+    s32 time;
+    s32 eventScriptSection;
+    s32 defaultReturnValue;
 
-    temp_s2 = gBattleStatus.playerActor;
-    temp_s1 = script->ptrReadPos;
-    temp_s0 = &temp_s2->state;
+    player = gBattleStatus.playerActor;
+    args = script->ptrReadPos;
+    playerState = &player->state;
     if (isInitialCall != 0) {
-        temp_s2->state.moveTime = evt_get_variable(script, *temp_s1);
-        temp_s2->state.moveArcAmplitude = evt_get_variable(script, *(temp_s1 + 4));
+        player->state.moveTime = evt_get_variable(script, *args);
+        player->state.moveArcAmplitude = evt_get_variable(script, *(args + 4));
         script->functionTemp[1] = 0;
         script->functionTemp[0] = 0;
-        if (temp_s2->state.moveArcAmplitude == 1) {
+        if (player->state.moveArcAmplitude == 1) {
             script->functionTemp[0] = 2;
         }
     }
     if (script->functionTemp[0] == 0) {
-        temp_f24 = temp_s0->goalPos.x;
-        temp_f26 = temp_s0->goalPos.z;
-        temp_s0->currentPos.x = temp_s2->currentPos.x;
-        temp_f22 = temp_s0->currentPos.x;
-        temp_s0->currentPos.y = temp_s2->currentPos.y;
-        temp_f20 = temp_s2->currentPos.z;
-        temp_s0->currentPos.z = temp_f20;
-        temp_s0->angle = atan2(temp_f22, temp_f20, temp_f24, temp_f26);
-        temp_f0 = dist2D(temp_f22, temp_f20, temp_f24, temp_f26);
-        temp_v0 = temp_s0->moveTime;
-        temp_s0->distance = temp_f0;
-        if (temp_v0 == 0) {
-            temp_f10 = (s32) (temp_f0 / temp_s0->speed);
-            temp_s0->moveTime = (s16) temp_f10;
-            var_f8 = temp_f0 - ((f32) (s16) temp_f10 * temp_s0->speed);
+        goalPosX = playerState->goalPos.x;
+        goalPosZ = playerState->goalPos.z;
+        playerState->currentPos.x = player->currentPos.x;
+        currentPosX = playerState->currentPos.x;
+        playerState->currentPos.y = player->currentPos.y;
+        currentPosZ = player->currentPos.z;
+        playerState->currentPos.z = currentPosZ;
+        playerState->angle = atan2(currentPosX, currentPosZ, goalPosX, goalPosZ);
+        distance = dist2D(currentPosX, currentPosZ, goalPosX, goalPosZ);
+        playerMoveTime = playerState->moveTime;
+        playerState->distance = distance;
+        if (playerMoveTime == 0) {
+            time = (s32) (distance / playerState->speed);
+            playerState->moveTime = (s16) time;
+            remainingDistance = distance - ((f32) (s16) time * playerState->speed);
         } else {
-            temp_f2 = temp_f0 / (f32) temp_v0;
-            temp_s0->speed = temp_f2;
-            var_f8 = temp_s0->distance - ((f32) temp_s0->moveTime * temp_f2);
+            speed = distance / (f32) playerMoveTime;
+            playerState->speed = speed;
+            remainingDistance = playerState->distance - ((f32) playerState->moveTime * speed);
         }
-        temp_v1 = temp_s0->moveTime;
-        var_v0 = 2;
-        if (temp_v1 != 0) {
-            temp_f6 = (f32) temp_s0->moveTime;
-            temp_s0->acceleration = 3.14159f / temp_f6;
-            temp_s0->unk_30.x = (temp_s0->goalPos.x - temp_s0->currentPos.x) / (f32) temp_v1;
-            temp_s0->velocity = 0.0f;
-            temp_s0->unk_30.y = (temp_s0->goalPos.y - temp_s0->currentPos.y) / temp_f6;
-            temp_s0->unk_30.z = (temp_s0->goalPos.z - temp_s0->currentPos.z) / temp_f6;
-            temp_s0->speed += var_f8 / temp_f6;
-            if (temp_s0->moveArcAmplitude < 3) {
-                temp_f8 = (f32) ((f64) (f32) ((f64) (f32) ((f64) temp_s0->distance - 20.0) / 6.0) + 47.0);
-                temp_s0->unk_24 = 90.0f;
-                temp_s0->bounceDivisor = temp_f8;
-                temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
-                if (temp_s0->moveArcAmplitude == 2) {
-                    temp_s0->bounceDivisor = (f32) ((f64) temp_f8 * 1.12);
+        playerMoveTime_1 = playerState->moveTime;
+
+        defaultReturnValue = 2;
+        if (playerMoveTime_1 != 0) {
+            playerMoveTime_2 = (f32) playerState->moveTime;
+            playerState->acceleration = 3.14159f / playerMoveTime_2;
+            playerState->velocityVector.x = (playerState->goalPos.x - playerState->currentPos.x) / (f32) playerMoveTime_1;
+            playerState->velocity = 0.0f;
+            playerState->velocityVector.y = (playerState->goalPos.y - playerState->currentPos.y) / playerMoveTime_2;
+            playerState->velocityVector.z = (playerState->goalPos.z - playerState->currentPos.z) / playerMoveTime_2;
+            playerState->speed += remainingDistance / playerMoveTime_2;
+            if (playerState->moveArcAmplitude < 3) {
+                bounceDivisor = (f32) ((f64) (f32) ((f64) (f32) ((f64) playerState->distance - 20.0) / 6.0) + 47.0);
+                playerState->currentDegAngle = 90.0f;
+                playerState->bounceDivisor = bounceDivisor;
+                playerState->angularVelocity = (f32) (0x168 / (s16) playerState->moveTime);
+                if (playerState->moveArcAmplitude == 2) {
+                    playerState->bounceDivisor = (f32) ((f64) bounceDivisor * 1.12);
                 }
-                temp_s0->unk_18.x = 0.0f;
-                temp_s0->unk_18.y = 0.0f;
-                var_f20 = (f64) temp_s0->velocity;
-                var_f22 = (f64) temp_s0->acceleration;
+                playerState->unk_18.x = 0.0f;
+                playerState->unk_18.y = 0.0f;
+                velocity = (f64) playerState->velocity;
+                acceleration = (f64) playerState->acceleration;
                 var_f2 = 0.53;
-                var_f0 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+                sine = (f64) sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f);
             } else {
-                temp_f8_2 = (f32) ((f64) (f32) ((f64) (f32) ((f64) temp_s0->distance - 20.0) / 6.0) + 47.0);
-                temp_s0->unk_24 = 90.0f;
-                temp_s0->bounceDivisor = temp_f8_2;
-                temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
-                if (temp_s0->moveArcAmplitude == 4) {
-                    temp_s0->bounceDivisor = (f32) ((f64) temp_f8_2 * 1.25);
+                bounceDivisor_2 = (f32) ((f64) (f32) ((f64) (f32) ((f64) playerState->distance - 20.0) / 6.0) + 47.0);
+                playerState->currentDegAngle = 90.0f;
+                playerState->bounceDivisor = bounceDivisor_2;
+                playerState->angularVelocity = (f32) (0x168 / (s16) playerState->moveTime);
+                if (playerState->moveArcAmplitude == 4) {
+                    playerState->bounceDivisor = (f32) ((f64) bounceDivisor_2 * 1.25);
                 }
-                temp_s0->unk_18.x = 0.0f;
-                temp_s0->unk_18.y = 0.0f;
-                var_f20 = (f64) temp_s0->velocity;
-                var_f22 = (f64) temp_s0->acceleration;
+                playerState->unk_18.x = 0.0f;
+                playerState->unk_18.y = 0.0f;
+                velocity = (f64) playerState->velocity;
+                acceleration = (f64) playerState->acceleration;
                 var_f2 = 0.8;
-                var_f0 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+                sine = (f64) sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f);
             }
-            temp_s0->velocity = (f32) (var_f20 + ((var_f0 * var_f2 * var_f22) + var_f22));
-            set_animation(0, 0, temp_s0->animJumpRise);
-            sfx_play_sound_at_position(0x160, 0, temp_s2->currentPos.x, temp_s2->currentPos.y, temp_s2->currentPos.z);
+            playerState->velocity = (f32) (velocity + ((sine * var_f2 * acceleration) + acceleration));
+            set_animation(0, 0, playerState->animJumpRise);
+            sfx_play_sound_at_position(0x160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
             script->functionTemp[0] = 1;
             goto block_16;
         }
         /* Duplicate return node #38. Try simplifying control flow for better match */
-        return var_v0;
+        return defaultReturnValue;
     }
 block_16:
-    temp_v1_2 = script->functionTemp[0];
-    if (temp_v1_2 != 2) {
-        if (temp_v1_2 < 3) {
-            if (temp_v1_2 != 1) {
+    eventScriptSection = script->functionTemp[0];
+    if (eventScriptSection != 2) {
+        if (eventScriptSection < 3) {
+            if (eventScriptSection != 1) {
                 return 0;
             }
-            if (temp_s0->velocity > 1.570795f) {
-                set_animation(0, 0, temp_s0->animJumpFall);
+            if (playerState->velocity > 1.570795f) {
+                set_animation(0, 0, playerState->animJumpFall);
             }
-            temp_f6_2 = temp_s0->currentPos.x + temp_s0->unk_30.x;
-            temp_s0->currentPos.x = temp_f6_2;
-            temp_s0->currentPos.y += temp_s0->unk_30.y;
-            temp_s0->currentPos.z += temp_s0->unk_30.z;
-            temp_s0->unk_18.x = temp_s2->currentPos.y;
-            temp_s2->currentPos.x = temp_f6_2;
-            temp_s2->currentPos.y = temp_s0->currentPos.y + (temp_s0->bounceDivisor * sin_rad(temp_s0->velocity));
-            temp_s2->currentPos.z = temp_s0->currentPos.z;
-            temp_f2_2 = temp_s0->goalPos.y;
-            if ((temp_s2->currentPos.y < temp_f2_2) && (temp_s0->moveTime < 3)) {
-                temp_s2->currentPos.y = temp_f2_2;
+            updatedPosX = playerState->currentPos.x + playerState->velocityVector.x;
+            playerState->currentPos.x = updatedPosX;
+            playerState->currentPos.y += playerState->velocityVector.y;
+            playerState->currentPos.z += playerState->velocityVector.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = updatedPosX;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            goalPosY = playerState->goalPos.y;
+            if ((player->currentPos.y < goalPosY) && (playerState->moveTime < 3)) {
+                player->currentPos.y = goalPosY;
             }
-            temp_s0->unk_18.y = temp_s2->currentPos.y;
-            if (temp_s0->moveArcAmplitude < 3) {
-                var_f20_2 = (f64) temp_s0->velocity;
-                var_f22_2 = (f64) temp_s0->acceleration;
+            playerState->unk_18.y = player->currentPos.y;
+            if (playerState->moveArcAmplitude < 3) {
+                velocity_2 = (f64) playerState->velocity;
+                acceleration_2 = (f64) playerState->acceleration;
                 var_f2_2 = 0.53;
-                var_f0_2 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+                sine_2 = (f64) sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f);
             } else {
-                var_f20_2 = (f64) temp_s0->velocity;
-                var_f22_2 = (f64) temp_s0->acceleration;
+                velocity_2 = (f64) playerState->velocity;
+                acceleration_2 = (f64) playerState->acceleration;
                 var_f2_2 = 0.8;
-                var_f0_2 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+                sine_2 = (f64) sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f);
             }
-            temp_s0->velocity = (f32) (var_f20_2 + ((var_f0_2 * var_f2_2 * var_f22_2) + var_f22_2));
-            temp_f12 = temp_s0->unk_24 + temp_s0->unk_28;
-            temp_s0->unk_24 = temp_f12;
-            temp_s0->unk_24 = clamp_angle(temp_f12);
-            temp_v0_2 = (u16) temp_s0->moveTime - 1;
-            temp_s0->moveTime = temp_v0_2;
-            var_v0 = 0;
-            if ((temp_v0_2 << 0x10) == 0) {
-                temp_s2->currentPos.y = temp_s0->goalPos.y;
-                temp_s0->acceleration = 1.8f;
-                temp_s0->velocity = -(temp_s0->unk_18.x - temp_s0->unk_18.y);
-                set_animation(0, 0, temp_s0->animJumpLand);
+            playerState->velocity = (f32) (velocity_2 + ((sine_2 * var_f2_2 * acceleration_2) + acceleration_2));
+            rotatedAngle_1 = playerState->currentDegAngle + playerState->angularVelocity;
+            playerState->currentDegAngle = rotatedAngle_1;
+            playerState->currentDegAngle = clamp_angle(rotatedAngle_1);
+            playerMoveTime_3 = (u16) playerState->moveTime - 1;
+            playerState->moveTime = playerMoveTime_3;
+            defaultReturnValue = 0;
+            if ((playerMoveTime_3 << 0x10) == 0) {
+                player->currentPos.y = playerState->goalPos.y;
+                playerState->acceleration = 1.8f;
+                playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+                set_animation(0, 0, playerState->animJumpLand);
                 return 1;
             }
             /* Duplicate return node #38. Try simplifying control flow for better match */
-            return var_v0;
+            return defaultReturnValue;
         }
-        if (temp_v1_2 != 3) {
+        if (eventScriptSection != 3) {
             return 0;
         }
         goto block_34;
     }
     if (gBattleStatus.unk_83 != 0) {
-        temp_s0->moveTime = 1;
-        temp_s0->acceleration = 1.8f;
-        temp_s0->unk_24 = 90.0f;
-        temp_s0->velocity = -(temp_s0->unk_18.x - temp_s0->unk_18.y);
-        temp_s0->bounceDivisor = (f32) ((f64) fabsf(temp_s0->unk_18.x - temp_s0->unk_18.y) / 16.5);
-        temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
-        temp_s0->currentPos.x = temp_s2->currentPos.x;
-        temp_s0->currentPos.y = temp_s2->currentPos.y;
-        temp_s0->currentPos.z = temp_s2->currentPos.z;
+        playerState->moveTime = 1;
+        playerState->acceleration = 1.8f;
+        playerState->currentDegAngle = 90.0f;
+        playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+        playerState->bounceDivisor = (f32) ((f64) fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5);
+        playerState->angularVelocity = (f32) (0x168 / (s16) playerState->moveTime);
+        playerState->currentPos.x = player->currentPos.x;
+        playerState->currentPos.y = player->currentPos.y;
+        playerState->currentPos.z = player->currentPos.z;
         script->functionTemp[0] = 3;
 block_34:
-        temp_f20_2 = (f64) temp_s0->currentPos.x;
-        temp_s0->currentPos.x = (f32) (temp_f20_2 + ((f64) (temp_s0->bounceDivisor * sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f)) / 33.0));
-        temp_f12_2 = temp_s0->unk_24 + temp_s0->unk_28;
-        temp_f0_2 = temp_s0->currentPos.y - (temp_s0->bounceDivisor * sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f));
-        temp_s0->unk_24 = temp_f12_2;
-        temp_s0->currentPos.y = temp_f0_2;
-        temp_s0->unk_24 = clamp_angle(temp_f12_2);
-        temp_s2->currentPos.x = temp_s0->currentPos.x;
-        temp_s2->currentPos.y = temp_s0->currentPos.y;
-        temp_s2->currentPos.z = temp_s0->currentPos.z;
+        currentPosX_2 = (f64) playerState->currentPos.x;
+        playerState->currentPos.x = (f32) (currentPosX_2 + ((f64) (playerState->bounceDivisor * sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f)) / 33.0));
+        rotatedAngle = playerState->currentDegAngle + playerState->angularVelocity;
+        currentPosY = playerState->currentPos.y - (playerState->bounceDivisor * sin_rad((playerState->currentDegAngle * 6.28318f) / 360.0f));
+        playerState->currentDegAngle = rotatedAngle;
+        playerState->currentPos.y = currentPosY;
+        playerState->currentDegAngle = clamp_angle(rotatedAngle);
+        player->currentPos.x = playerState->currentPos.x;
+        player->currentPos.y = playerState->currentPos.y;
+        player->currentPos.z = playerState->currentPos.z;
         if (gBattleStatus.flags1 & 0x2000) {
-            goto block_35;
+            return 2;
         }
-        temp_v1_3 = (u16) temp_s0->moveTime - 1;
-        temp_s0->moveTime = temp_v1_3;
-        var_v0 = 1;
-        if ((temp_v1_3 << 0x10) != 0) {
-            var_v0 = 0;
+        playerMoveTime_4 = (u16) playerState->moveTime - 1;
+        playerState->moveTime = playerMoveTime_4;
+        defaultReturnValue = 1;
+        if ((playerMoveTime_4 << 0x10) != 0) {
+            defaultReturnValue = 0;
         }
-        return var_v0;
+        return defaultReturnValue;
     }
 block_35:
     return 2;
