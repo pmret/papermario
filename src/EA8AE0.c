@@ -36,7 +36,7 @@ ApiStatus func_80240DA4_EA9884(Evt* script, s32 isInitialCall) {
     dead_evt_get_variable(script, *args++);
     dead_evt_get_variable(script, *args++);
     dead_evt_get_variable(script, *args++);
-    dead_evt_get_variable(NULL, -50000000);
+    dead_evt_get_variable(NULL, MapVar(0));
     return ApiStatus_DONE2;
 }
 
