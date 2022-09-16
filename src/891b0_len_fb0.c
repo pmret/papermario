@@ -165,7 +165,7 @@ void func_800F09EC(void) {
 
     if (D_801094AC++ >= 4) {
         D_801094AC = 0;
-        sin_cos_rad((clamp_angle(-playerStatus->currentYaw) * TAU) / 360.0f, &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
         fx_falling_leaves(
             0,
             playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
@@ -191,7 +191,7 @@ void func_800F0B3C(void) {
 
     if (D_801094AE++ >= 4) {
         D_801094AE = 0;
-        sin_cos_rad((clamp_angle(-playerStatus->currentYaw) * TAU) / 360.0f, &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
         fx_rising_bubble(
             0,
             playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
