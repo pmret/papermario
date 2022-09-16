@@ -538,7 +538,16 @@ typedef struct PurpleRingFXData {
 typedef struct FlameFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-} FlameFXData; // size = 0x??
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+} FlameFXData; // size = 0x34
 
 typedef struct StarsBurstFXData {
     /* 0x00 */ char todo[0];
