@@ -1711,7 +1711,216 @@ ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", func_80274A18);
+// INCLUDE_ASM(s32, "19FAF0", func_80274A18);
+s32 func_80274A18(Evt *script, s32 isInitialCall) {
+    Actor *temp_s2;
+    ActorState *temp_s0;
+    f32 temp_f0;
+    f32 temp_f0_2;
+    f32 temp_f12;
+    f32 temp_f12_2;
+    f32 temp_f20;
+    f32 temp_f22;
+    f32 temp_f24;
+    f32 temp_f26;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f6;
+    f32 temp_f6_2;
+    f32 temp_f8;
+    f32 temp_f8_2;
+    f32 var_f8;
+    f64 temp_f20_2;
+    f64 var_f0;
+    f64 var_f0_2;
+    f64 var_f20;
+    f64 var_f20_2;
+    f64 var_f22;
+    f64 var_f22_2;
+    f64 var_f2;
+    f64 var_f2_2;
+    s16 temp_v0;
+    s16 temp_v0_2;
+    s16 temp_v1;
+    s16 temp_v1_3;
+    s32 *temp_s1;
+    s32 temp_f10;
+    s32 temp_v1_2;
+    s32 var_v0;
+
+    temp_s2 = gBattleStatus.playerActor;
+    temp_s1 = script->ptrReadPos;
+    temp_s0 = &temp_s2->state;
+    if (isInitialCall != 0) {
+        temp_s2->state.moveTime = evt_get_variable(script, *temp_s1);
+        temp_s2->state.moveArcAmplitude = evt_get_variable(script, *(temp_s1 + 4));
+        script->functionTemp[1] = 0;
+        script->functionTemp[0] = 0;
+        if (temp_s2->state.moveArcAmplitude == 1) {
+            script->functionTemp[0] = 2;
+        }
+    }
+    if (script->functionTemp[0] == 0) {
+        temp_f24 = temp_s0->goalPos.x;
+        temp_f26 = temp_s0->goalPos.z;
+        temp_s0->currentPos.x = temp_s2->currentPos.x;
+        temp_f22 = temp_s0->currentPos.x;
+        temp_s0->currentPos.y = temp_s2->currentPos.y;
+        temp_f20 = temp_s2->currentPos.z;
+        temp_s0->currentPos.z = temp_f20;
+        temp_s0->angle = atan2(temp_f22, temp_f20, temp_f24, temp_f26);
+        temp_f0 = dist2D(temp_f22, temp_f20, temp_f24, temp_f26);
+        temp_v0 = temp_s0->moveTime;
+        temp_s0->distance = temp_f0;
+        if (temp_v0 == 0) {
+            temp_f10 = (s32) (temp_f0 / temp_s0->speed);
+            temp_s0->moveTime = (s16) temp_f10;
+            var_f8 = temp_f0 - ((f32) (s16) temp_f10 * temp_s0->speed);
+        } else {
+            temp_f2 = temp_f0 / (f32) temp_v0;
+            temp_s0->speed = temp_f2;
+            var_f8 = temp_s0->distance - ((f32) temp_s0->moveTime * temp_f2);
+        }
+        temp_v1 = temp_s0->moveTime;
+        var_v0 = 2;
+        if (temp_v1 != 0) {
+            temp_f6 = (f32) temp_s0->moveTime;
+            temp_s0->acceleration = 3.14159f / temp_f6;
+            temp_s0->unk_30.x = (temp_s0->goalPos.x - temp_s0->currentPos.x) / (f32) temp_v1;
+            temp_s0->velocity = 0.0f;
+            temp_s0->unk_30.y = (temp_s0->goalPos.y - temp_s0->currentPos.y) / temp_f6;
+            temp_s0->unk_30.z = (temp_s0->goalPos.z - temp_s0->currentPos.z) / temp_f6;
+            temp_s0->speed += var_f8 / temp_f6;
+            if (temp_s0->moveArcAmplitude < 3) {
+                temp_f8 = (f32) ((f64) (f32) ((f64) (f32) ((f64) temp_s0->distance - 20.0) / 6.0) + 47.0);
+                temp_s0->unk_24 = 90.0f;
+                temp_s0->bounceDivisor = temp_f8;
+                temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
+                if (temp_s0->moveArcAmplitude == 2) {
+                    temp_s0->bounceDivisor = (f32) ((f64) temp_f8 * 1.12);
+                }
+                temp_s0->unk_18.x = 0.0f;
+                temp_s0->unk_18.y = 0.0f;
+                var_f20 = (f64) temp_s0->velocity;
+                var_f22 = (f64) temp_s0->acceleration;
+                var_f2 = 0.53;
+                var_f0 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+            } else {
+                temp_f8_2 = (f32) ((f64) (f32) ((f64) (f32) ((f64) temp_s0->distance - 20.0) / 6.0) + 47.0);
+                temp_s0->unk_24 = 90.0f;
+                temp_s0->bounceDivisor = temp_f8_2;
+                temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
+                if (temp_s0->moveArcAmplitude == 4) {
+                    temp_s0->bounceDivisor = (f32) ((f64) temp_f8_2 * 1.25);
+                }
+                temp_s0->unk_18.x = 0.0f;
+                temp_s0->unk_18.y = 0.0f;
+                var_f20 = (f64) temp_s0->velocity;
+                var_f22 = (f64) temp_s0->acceleration;
+                var_f2 = 0.8;
+                var_f0 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+            }
+            temp_s0->velocity = (f32) (var_f20 + ((var_f0 * var_f2 * var_f22) + var_f22));
+            set_animation(0, 0, temp_s0->animJumpRise);
+            sfx_play_sound_at_position(0x160, 0, temp_s2->currentPos.x, temp_s2->currentPos.y, temp_s2->currentPos.z);
+            script->functionTemp[0] = 1;
+            goto block_16;
+        }
+        /* Duplicate return node #38. Try simplifying control flow for better match */
+        return var_v0;
+    }
+block_16:
+    temp_v1_2 = script->functionTemp[0];
+    if (temp_v1_2 != 2) {
+        if (temp_v1_2 < 3) {
+            if (temp_v1_2 != 1) {
+                return 0;
+            }
+            if (temp_s0->velocity > 1.570795f) {
+                set_animation(0, 0, temp_s0->animJumpFall);
+            }
+            temp_f6_2 = temp_s0->currentPos.x + temp_s0->unk_30.x;
+            temp_s0->currentPos.x = temp_f6_2;
+            temp_s0->currentPos.y += temp_s0->unk_30.y;
+            temp_s0->currentPos.z += temp_s0->unk_30.z;
+            temp_s0->unk_18.x = temp_s2->currentPos.y;
+            temp_s2->currentPos.x = temp_f6_2;
+            temp_s2->currentPos.y = temp_s0->currentPos.y + (temp_s0->bounceDivisor * sin_rad(temp_s0->velocity));
+            temp_s2->currentPos.z = temp_s0->currentPos.z;
+            temp_f2_2 = temp_s0->goalPos.y;
+            if ((temp_s2->currentPos.y < temp_f2_2) && (temp_s0->moveTime < 3)) {
+                temp_s2->currentPos.y = temp_f2_2;
+            }
+            temp_s0->unk_18.y = temp_s2->currentPos.y;
+            if (temp_s0->moveArcAmplitude < 3) {
+                var_f20_2 = (f64) temp_s0->velocity;
+                var_f22_2 = (f64) temp_s0->acceleration;
+                var_f2_2 = 0.53;
+                var_f0_2 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+            } else {
+                var_f20_2 = (f64) temp_s0->velocity;
+                var_f22_2 = (f64) temp_s0->acceleration;
+                var_f2_2 = 0.8;
+                var_f0_2 = (f64) sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f);
+            }
+            temp_s0->velocity = (f32) (var_f20_2 + ((var_f0_2 * var_f2_2 * var_f22_2) + var_f22_2));
+            temp_f12 = temp_s0->unk_24 + temp_s0->unk_28;
+            temp_s0->unk_24 = temp_f12;
+            temp_s0->unk_24 = clamp_angle(temp_f12);
+            temp_v0_2 = (u16) temp_s0->moveTime - 1;
+            temp_s0->moveTime = temp_v0_2;
+            var_v0 = 0;
+            if ((temp_v0_2 << 0x10) == 0) {
+                temp_s2->currentPos.y = temp_s0->goalPos.y;
+                temp_s0->acceleration = 1.8f;
+                temp_s0->velocity = -(temp_s0->unk_18.x - temp_s0->unk_18.y);
+                set_animation(0, 0, temp_s0->animJumpLand);
+                return 1;
+            }
+            /* Duplicate return node #38. Try simplifying control flow for better match */
+            return var_v0;
+        }
+        if (temp_v1_2 != 3) {
+            return 0;
+        }
+        goto block_34;
+    }
+    if (gBattleStatus.unk_83 != 0) {
+        temp_s0->moveTime = 1;
+        temp_s0->acceleration = 1.8f;
+        temp_s0->unk_24 = 90.0f;
+        temp_s0->velocity = -(temp_s0->unk_18.x - temp_s0->unk_18.y);
+        temp_s0->bounceDivisor = (f32) ((f64) fabsf(temp_s0->unk_18.x - temp_s0->unk_18.y) / 16.5);
+        temp_s0->unk_28 = (f32) (0x168 / (s16) temp_s0->moveTime);
+        temp_s0->currentPos.x = temp_s2->currentPos.x;
+        temp_s0->currentPos.y = temp_s2->currentPos.y;
+        temp_s0->currentPos.z = temp_s2->currentPos.z;
+        script->functionTemp[0] = 3;
+block_34:
+        temp_f20_2 = (f64) temp_s0->currentPos.x;
+        temp_s0->currentPos.x = (f32) (temp_f20_2 + ((f64) (temp_s0->bounceDivisor * sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f)) / 33.0));
+        temp_f12_2 = temp_s0->unk_24 + temp_s0->unk_28;
+        temp_f0_2 = temp_s0->currentPos.y - (temp_s0->bounceDivisor * sin_rad((temp_s0->unk_24 * 6.28318f) / 360.0f));
+        temp_s0->unk_24 = temp_f12_2;
+        temp_s0->currentPos.y = temp_f0_2;
+        temp_s0->unk_24 = clamp_angle(temp_f12_2);
+        temp_s2->currentPos.x = temp_s0->currentPos.x;
+        temp_s2->currentPos.y = temp_s0->currentPos.y;
+        temp_s2->currentPos.z = temp_s0->currentPos.z;
+        if (gBattleStatus.flags1 & 0x2000) {
+            goto block_35;
+        }
+        temp_v1_3 = (u16) temp_s0->moveTime - 1;
+        temp_s0->moveTime = temp_v1_3;
+        var_v0 = 1;
+        if ((temp_v1_3 << 0x10) != 0) {
+            var_v0 = 0;
+        }
+        return var_v0;
+    }
+block_35:
+    return 2;
+}
 
 INCLUDE_ASM(s32, "19FAF0", func_802752AC);
 
