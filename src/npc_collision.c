@@ -97,7 +97,7 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
     hitYBehindLeft = hitYBehindRight = hitYAhead = -32767.0f;
     minDepth = fabsf(*hitDepth);
 
-    theta = clamp_angle(yaw + 0.0f) * TAU / 360.0f;
+    theta = DEG_TO_RAD(clamp_angle(yaw + 0.0f));
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
     deltaX = radius * sinTheta;
@@ -120,7 +120,7 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         }
     }
 
-    theta = clamp_angle(yaw + 120.0f) * TAU / 360.0f;
+    theta = DEG_TO_RAD(clamp_angle(yaw + 120.0f));
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
     deltaX = radius * sinTheta;
@@ -143,7 +143,7 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         }
     }
 
-    theta = clamp_angle(yaw - 120.0f) * TAU / 360.0f;
+    theta = DEG_TO_RAD(clamp_angle(yaw - 120.0f));
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
     deltaX = radius * sinTheta;
@@ -210,7 +210,7 @@ s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     yaw = 0.0f;
 
     minDepth = fabsf(*hitDepth);
-    theta = clamp_angle(yaw) * TAU / 360.0f;
+    theta = DEG_TO_RAD(clamp_angle(yaw));
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
 
@@ -236,7 +236,7 @@ s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
         }
     }
 
-    theta = clamp_angle(yaw + 180.0f) * TAU / 360.0f;
+    theta = DEG_TO_RAD(clamp_angle(yaw + 180.0f));
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
     deltaX = radius * sinTheta;
@@ -384,7 +384,7 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     s32 hitID;
     f32 temp;
 
-    theta = (yaw * TAU) / 360.0f;
+    theta = DEG_TO_RAD(yaw);
     deltaX = radius * sin_rad(theta);
     temp = -radius; // needed to match
     deltaZ = temp * cos_rad(theta);
@@ -493,7 +493,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
     s32 phi_s2 = -1;
     f32 a, b;
 
-    sin_cos_rad((yaw * TAU) / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     aX = length * outSinTheta;
     temp_f22 = length + radius + (radius * 0.5f);
     inverseOutCosTheta = -outCosTheta;
@@ -541,7 +541,7 @@ s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 
     f32 temp1;
     f32 temp2;
 
-    sin_cos_rad(yaw * TAU / 360.0f, &dirY, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &dirY, &cosTheta);
     cosTheta = -cosTheta;
     originalDepth = length + radius + (radius * 0.5f);
     depth = originalDepth;

@@ -2274,9 +2274,9 @@ void btl_state_update_peach_menu(void) {
                 partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
             }
 
-            player->currentPos.z -= sin_rad(player->state.angle * TAU / 360.0f) * 16.0f;
+            player->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             player->yaw = clamp_angle(-player->state.angle);
-            partner->currentPos.z += sin_rad(player->state.angle * TAU / 360.0f) * 16.0f;
+            partner->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             partner->yaw = clamp_angle(-player->state.angle);
             player->state.angle += 90.0f;
 
@@ -2483,9 +2483,9 @@ void btl_state_update_twink_menu(void) {
                 partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
                 partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
             }
-            player->currentPos.z += sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+            player->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             player->yaw = clamp_angle(-player->state.angle);
-            partner->currentPos.z -= sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+            partner->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             partner->yaw = clamp_angle(-player->state.angle);
             player->state.angle += 90.0f;
             if (player->state.moveTime != 0) {
@@ -2665,7 +2665,7 @@ void btl_state_update_select_target(void) {
                 }
             }
 
-            if (battleStatus->currentTargetListFlags < 0) {
+            if (battleStatus->currentTargetListFlags & 0x80000000) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
                     gBattleState2 = battleStatus->unk_6E;
                     if (gBattleStatus.flags2 & BS_FLAGS2_40) {

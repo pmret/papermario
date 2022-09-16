@@ -82,7 +82,7 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 height = evt_get_variable(script, *args++);
-    s32 radius = evt_get_variable(script, *args);
+    s32 radius = evt_get_variable(script, *args++);
 
     playerNpc->collisionHeight = height;
     playerNpc->collisionRadius = radius;
@@ -94,27 +94,26 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->moveSpeed = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->moveSpeed = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall) {
-    playerNpc->jumpScale = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->jumpScale = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 currentAnim = evt_get_variable(script, *args++);
-    s32 shakeAnim = 0x80003;
+    AnimID anim = evt_get_variable(script, *args++);
 
-    playerNpc->currentAnim.w = currentAnim;
+    gPlayerStatus.anim = playerNpc->currentAnim = anim;
 
-    do { } while (0); // Needed to match for some reason
-
-    gPlayerStatus.anim = playerNpc->currentAnim.w;
-
-    if (gPlayerStatus.anim == shakeAnim) {
+    if (gPlayerStatus.anim == ANIM_Mario_80003) {
         exec_ShakeCam1(0, 0, 2);
     }
 
@@ -122,12 +121,16 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall) {
-    set_action_state(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    set_action_state(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimationSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->animationSpeed = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->animationSpeed = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -216,7 +219,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     f32 zTemp;
     f32 jumpVelocity;
     s32 duration;
-    s32 animID;
+    AnimID anim;
     f32 dist;
 
     if (isInitialCall) {
@@ -252,20 +255,20 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         }
 
         playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
-        playerStatus->flags |= 8;
-        playerStatus->animFlags |= 0x10000000;
+        playerStatus->flags |= PS_FLAGS_FLYING;
+        playerStatus->animFlags |= PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & 0x4000)) {
-                if (!(playerStatus->animFlags & 1)) {
-                    animID = 0x10007;
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                    anim = ANIM_Mario_AnimMidairStill;
                 } else {
-                    animID = 0x60009;
+                    anim = ANIM_Mario_60009;
                 }
             } else {
-                animID = 0x90005;
+                anim = ANIM_Mario_90005;
             }
-            suggest_player_anim_clearUnkFlag(animID);
+            suggest_player_anim_clearUnkFlag(anim);
             sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
         }
         script->functionTemp[0] = 1;
@@ -277,16 +280,16 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     playerNpc->jumpVelocity -= playerNpc->jumpScale;
 
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
-        if (!(playerStatus->animFlags & 0x4000)) {
-            if (!(playerStatus->animFlags & 1)) {
-                animID = 0x10008;
+        if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                anim = ANIM_Mario_AnimMidair;
             } else {
-                animID = 0x6000A;
+                anim = ANIM_Mario_6000A;
             }
         } else {
-            animID = 0x90005;
+            anim = ANIM_Mario_90005;
         }
-        suggest_player_anim_clearUnkFlag(animID);
+        suggest_player_anim_clearUnkFlag(anim);
     }
 
     playerStatus->position.x = playerNpc->pos.x;
@@ -299,20 +302,20 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
     playerNpc->duration--;
     if (playerNpc->duration == 0) {
-        playerStatus->flags &= -9;
-        playerStatus->animFlags &= ~0x10000000;
+        playerStatus->flags &= ~PS_FLAGS_FLYING;
+        playerStatus->animFlags &= ~PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & 0x4000)) {
-                if (!(playerStatus->animFlags & 1)) {
-                    animID = 0x10009;
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                    anim = ANIM_Mario_10009;
                 } else {
-                    animID = 0x6000B;
+                    anim = ANIM_Mario_6000B;
                 }
             } else {
-                animID = 0x10003;
+                anim = ANIM_Mario_AnimPanting;
             }
-            suggest_player_anim_clearUnkFlag(animID);
+            suggest_player_anim_clearUnkFlag(anim);
             func_8003D660(playerNpc, 2);
         }
 
@@ -581,8 +584,8 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
 s32 func_802D23F8(void) {
     if (gPlayerStatus.actionState == ACTION_STATE_IDLE || gPlayerStatus.actionState == ACTION_STATE_WALK ||
         gPlayerStatus.actionState == ACTION_STATE_RUN || gPlayerStatus.actionState == ACTION_STATE_LAND ||
-        gPlayerStatus.actionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerStatus.actionState == ACTION_STATE_GROUND_POUND ||
-        gPlayerStatus.actionState == ACTION_STATE_ULTRA_POUND || gPlayerStatus.actionState == ACTION_STATE_SPIN) {
+        gPlayerStatus.actionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerStatus.actionState == ACTION_STATE_SPIN_POUND ||
+        gPlayerStatus.actionState == ACTION_STATE_TORNADO_POUND || gPlayerStatus.actionState == ACTION_STATE_SPIN) {
         return TRUE;
     }
     return FALSE;
@@ -743,9 +746,9 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos)) {
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags &= ~PA_FLAGS_USING_PULSE_STONE;
     } else {
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags |= PA_FLAGS_USING_PULSE_STONE;
     }
 
     return ApiStatus_DONE2;
@@ -768,14 +771,14 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
 ApiStatus func_802D2B50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8;
+    playerStatus->animFlags |= PA_FLAGS_8;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+    playerStatus->animFlags |= PA_FLAGS_4;
     return ApiStatus_DONE2;
 }
 
@@ -786,13 +789,13 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO;
+        playerStatus->animFlags &= ~PA_FLAGS_8BIT_MARIO;
     } else {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO
-            | PLAYER_STATUS_ANIM_FLAGS_40000
-            | PLAYER_STATUS_ANIM_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
+            | PA_FLAGS_40000
+            | PA_FLAGS_4;
     }
 
     return ApiStatus_DONE2;
@@ -851,7 +854,7 @@ void virtual_entity_render_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
 }
 
 void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 magnitude, f32 angle) {
-    f32 theta = (angle * TAU) / 360.0f;
+    f32 theta = DEG_TO_RAD(angle);
     f32 sinTheta = sin_rad(theta);
     f32 cosTheta = cos_rad(theta);
 

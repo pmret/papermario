@@ -97,9 +97,9 @@ ApiStatus func_80241AF0_994220(Evt* script, s32 isInitialCall) {
     ambush->rot.x = 0;
     ambush->rot.y = 0;
     ambush->rot.z = 0;
-    ambush->scale.x = SPRITE_WORLD_SCALE;
-    ambush->scale.y = SPRITE_WORLD_SCALE;
-    ambush->scale.z = SPRITE_WORLD_SCALE;
+    ambush->scale.x = SPRITE_WORLD_SCALE_F;
+    ambush->scale.y = SPRITE_WORLD_SCALE_F;
+    ambush->scale.z = SPRITE_WORLD_SCALE_F;
     ambush->renderYaw = 270.0f;
 
     ambush->foldID = 0;

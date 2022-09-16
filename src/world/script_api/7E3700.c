@@ -226,10 +226,10 @@ ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
     s32 collider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
 
     if (gCollisionStatus.pushingAgainstWall == collider) {
-        if (playerStatus->actionState == ACTION_STATE_14
+        if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
         || playerStatus->actionState == ACTION_STATE_WALK
         || playerStatus->actionState == ACTION_STATE_RUN) {
-            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
+            if (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) {
                 script->varTable[13] = FALSE;
             } else {
                 script->varTable[13] = TRUE;
@@ -351,7 +351,7 @@ ApiStatus GetPushBlock(Evt* script, s32 isInitialCall) {
     s32 cellIndex;
 
     if (gridX >= blockGrid->numCellsX || gridX < 0 || gridZ >= blockGrid->numCellsZ || gridZ < 0) {
-         // bug: sets error value and then performs lookup anyway -- return statement forgotten here
+         // @bug: sets error value and then performs lookup anyway -- return statement forgotten here
         evt_set_variable(script, outVar, PUSH_GRID_OUT_OF_BOUNDS);
     }
     cellIndex = gridX + (gridZ * blockGrid->numCellsX);

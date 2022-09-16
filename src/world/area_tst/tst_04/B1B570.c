@@ -48,14 +48,14 @@ ApiStatus func_802400FC_B1B66C(Evt *script, s32 isInitialCall)
     dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
     
     angle = evt_get_variable(script, LVar0) - 1;
-    sinAngle = sin_rad((angle * TAU) / 360.0f);
-    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    sinAngle = sin_rad(DEG_TO_RAD(angle));
+    cosAngle = cos_rad(DEG_TO_RAD(angle));
     x0 = dist * cosAngle;
     z0 = dist * -sinAngle;
     
     angle = evt_get_variable(script, LVar0);
-    sinAngle = sin_rad((angle * TAU) / 360.0f);
-    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    sinAngle = sin_rad(DEG_TO_RAD(angle));
+    cosAngle = cos_rad(DEG_TO_RAD(angle));
     x1 = dist * cosAngle;
     z1 = dist * -sinAngle;
     
@@ -109,7 +109,7 @@ void func_80240360_B1B8D0(void* data) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);

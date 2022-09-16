@@ -5,8 +5,8 @@
 #include "enums.h"
 #include "script_api/map.h"
 
-#define GET_MACRO(_1,_2,_3,NAME,...) NAME
-#define NPC_GROUP(...) GET_MACRO(__VA_ARGS__, NPC_GROUP_3, NPC_GROUP_2, NPC_GROUP_1)(__VA_ARGS__)
+#define GET_MACRO(_1,_2,_3,NAME,ARGS...) NAME
+#define NPC_GROUP(ARGS...) GET_MACRO(ARGS, NPC_GROUP_3, NPC_GROUP_2, NPC_GROUP_1)(ARGS)
 
 // battle and stage are optional in overloaded NPC_GROUP macros
 #define NPC_GROUP_1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
@@ -404,11 +404,11 @@ void init_npc_list(void);
 /// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void);
 
-s32 _create_npc(NpcBlueprint* blueprint, u32** animList, s32 skipLoadingAnims);
+s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims);
 
 s32 _create_npc_basic(NpcBlueprint* blueprint);
 
-s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList);
+s32 _create_npc_standard(NpcBlueprint* blueprint, AnimID** animList);
 
 s32 _create_npc_partner(NpcBlueprint* blueprint);
 

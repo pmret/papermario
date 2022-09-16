@@ -125,7 +125,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             data->rotationSpeed = 65.0f;
             set_time_freeze_mode(TIME_FREEZE_PARTIAL);
             disable_player_static_collisions();
-            gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_800;
+            gPlayerStatusPtr->animFlags |= PA_FLAGS_800;
             if (data->needSpawnItem) {
                 data->needSpawnItem = FALSE;
                 data->spawnedItemIndex = make_item_entity_nodelay(data->itemID, entity->position.x, entity->position.y + 2.0, entity->position.z, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, data->pickupVar);
@@ -133,7 +133,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             entity->flags &= ~ENTITY_FLAGS_HIDDEN;
             break;
         case 1:
-            entity->position.y += data->riseVelocity * sin_rad(data->riseInterpPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             if (entity->position.y <= data->initialY) {
                 entity->position.y = data->initialY;
                 entity->rotation.x = 0.0f;
@@ -182,7 +182,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 rotAngle = 360.0f;
             }
 
-            entity->position.y += data->riseVelocity * sin_rad(data->riseInterpPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             data->riseInterpPhase += 10.0f;
             if (data->riseInterpPhase > 270.0f) {
                 data->riseInterpPhase = 270.0f;
@@ -232,7 +232,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 exec_entity_commandlist(entity);
                 if (data->unk_02) {
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
-                    gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_800;
+                    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_800;
                 }
                 entity->flags &= ~ENTITY_FLAGS_DISABLE_COLLISION;
                 if (data->standingNpcIndex >= 0) {

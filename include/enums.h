@@ -654,11 +654,11 @@ enum SoundIDs {
     SOUND_139                       = 0x00000139,
     SOUND_13D                       = 0x0000013D,
     SOUND_13E                       = 0x0000013E,
-    SOUND_STEP1                     = 0x00000141,
-    SOUND_STEP2                     = 0x00000142,
-    SOUND_143                       = 0x00000143,
-    SOUND_144                       = 0x00000144,
-    SOUND_146                       = 0x00000146,
+    SOUND_STEP_NORMAL1              = 0x00000141,
+    SOUND_STEP_NORMAL2              = 0x00000142,
+    SOUND_STEP_CRUNCHY1             = 0x00000143,
+    SOUND_STEP_CRUNCHY2             = 0x00000144,
+    SOUND_SPIN_JUMP                 = 0x00000146,
     SOUND_TORNADO_JUMP              = 0x00000147,
     SOUND_SOFT_LAND                 = 0x00000148,
     SOUND_149                       = 0x00000149,
@@ -679,7 +679,7 @@ enum SoundIDs {
     SOUND_166                       = 0x00000166,
     SOUND_167                       = 0x00000167,
     SOUND_168                       = 0x00000168,
-    SOUND_172                       = 0x00000172,
+    SOUND_DUST_OFF                  = 0x00000172,
     SOUND_173                       = 0x00000173,
     SOUND_174                       = 0x00000174,
     SOUND_175                       = 0x00000175,
@@ -872,7 +872,7 @@ enum SoundIDs {
     SOUND_2F1                       = 0x000002F1,
     SOUND_2F3                       = 0x000002F3,
     SOUND_2F4                       = 0x000002F4,
-    SOUND_2F6                       = 0x000002F6,
+    SOUND_TWEESTER_LAUNCH           = 0x000002F6,
     SOUND_2F7                       = 0x000002F7,
     SOUND_2F9                       = 0x000002F9,
     SOUND_CLOSE_SHELL               = 0x000002FF,
@@ -1268,6 +1268,9 @@ enum SoundIDs {
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
     SOUND_B000000A                  = 0xB000000A,
+    SOUND_B000000C                  = 0xB000000C,
+    SOUND_B000000D                  = 0xB000000D,
+    SOUND_B000000E                  = 0xB000000E,
     SOUND_B0000010                  = 0xB0000010,
     SOUND_B0000011                  = 0xB0000011,
     SOUND_B0000012                  = 0xB0000012,
@@ -1374,9 +1377,9 @@ enum AuxCameraParams {
 
 enum ItemIDs {
     ITEM_NONE                         = 0x00000000,
-    ITEM_JUMP                         = 0x00000001,
-    ITEM_SPIN_JUMP                    = 0x00000002,
-    ITEM_TORNADO_JUMP                 = 0x00000003,
+    ITEM_BOOTS                        = 0x00000001,
+    ITEM_SUPER_BOOTS                  = 0x00000002,
+    ITEM_ULTRA_BOOTS                  = 0x00000003,
     ITEM_HAMMER                       = 0x00000004,
     ITEM_SUPER_HAMMER                 = 0x00000005,
     ITEM_ULTRA_HAMMER                 = 0x00000006,
@@ -1619,7 +1622,7 @@ enum ItemIDs {
     ITEM_ATTACK_FX_A                  = 0x000000F3,
     ITEM_ALLOR_NOTHING                = 0x000000F4,
     ITEM_HP_DRAIN                     = 0x000000F5,
-    ITEM_JUMP_CHARGE0                 = 0x000000F6,
+    ITEM_BOOTS_CHARGE0                 = 0x000000F6,
     ITEM_SLOW_GO                      = 0x000000F7,
     ITEM_FP_PLUS_A                    = 0x000000F8,
     ITEM_MEGA_RUSH                    = 0x000000F9,
@@ -1639,7 +1642,7 @@ enum ItemIDs {
     ITEM_HAMMER_THROW                 = 0x00000107,
     ITEM_MEGA_QUAKE                   = 0x00000108,
     ITEM_SMASH_CHARGE                 = 0x00000109,
-    ITEM_JUMP_CHARGE                  = 0x0000010A,
+    ITEM_BOOTS_CHARGE                  = 0x0000010A,
     ITEM_S_SMASH_CHG                  = 0x0000010B,
     ITEM_S_JUMP_CHG                   = 0x0000010C,
     ITEM_POWER_RUSH                   = 0x0000010D,
@@ -1781,6 +1784,22 @@ enum ItemTargetFlags {
     ITEM_TARGET_FLAG_2                  = 0x0002,
     ITEM_TARGET_FLAG_PLAYER             = 0x0008,
     ITEM_TARGET_FLAG_8000               = 0x8000
+};
+
+enum PlayerSprites {
+    SPR_Mario_1                         = 0x1,
+    SPR_Mario_2                         = 0x2,
+    SPR_Mario_3                         = 0x3,
+    SPR_Mario_4                         = 0x4,
+    SPR_Mario_5                         = 0x5,
+    SPR_Mario_6                         = 0x6,
+    SPR_Mario_7                         = 0x7,
+    SPR_Mario_8                         = 0x8,
+    SPR_Mario_9                         = 0x9,
+    SPR_Peach_A                         = 0xA,
+    SPR_Peach_B                         = 0xB,
+    SPR_Peach_C                         = 0xC,
+    SPR_Peach_D                         = 0xD,
 };
 
 // TODO: extract player sprite + animations
@@ -2638,13 +2657,13 @@ enum ActionStates {
     // Following action states prohibit movement (see set_action_state())
     ACTION_STATE_TALK                           = 0x0000000C,  ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP                      = 0x0000000D,
-    ACTION_STATE_GROUND_POUND                   = 0x0000000E,
-    ACTION_STATE_ULTRA_JUMP                     = 0x0000000F,
-    ACTION_STATE_ULTRA_POUND                    = 0x00000010,
+    ACTION_STATE_SPIN_POUND                     = 0x0000000E,
+    ACTION_STATE_TORNADO_JUMP                   = 0x0000000F,
+    ACTION_STATE_TORNADO_POUND                  = 0x00000010,
     ACTION_STATE_SLIDING                        = 0x00000011,
     ACTION_STATE_HAMMER                         = 0x00000012,
     ACTION_STATE_13                             = 0x00000013,
-    ACTION_STATE_14                             = 0x00000014,
+    ACTION_STATE_PUSHING_BLOCK                  = 0x00000014,
     ACTION_STATE_HIT_FIRE                       = 0x00000015,  ///< Causes Mario to fly up and take damage. Used for fire bars.
     ACTION_STATE_KNOCKBACK                      = 0x00000016,  // some kind of knockback, does no damage
     ACTION_STATE_HIT_LAVA                       = 0x00000017,
@@ -2661,8 +2680,19 @@ enum ActionStates {
     ACTION_STATE_STEP_UP                        = 0x00000022,
     ACTION_STATE_23                             = 0x00000023,
     ACTION_STATE_24                             = 0x00000024,
-    ACTION_STATE_25                             = 0x00000025,
+    ACTION_STATE_INVALID_25                     = 0x00000025,
     ACTION_STATE_USE_SPRING                     = 0x00000026,
+};
+
+enum JumpSubstate {
+    JUMP_SUBSTATE_0                 = 0,
+    JUMP_SUBSTATE_1                 = 1,
+};
+
+enum LandOnSwitchSubstate {
+    LANDING_ON_SWITCH_SUBSTATE_0    = 0,
+    LANDING_ON_SWITCH_SUBSTATE_1    = 1,
+    LANDING_ON_SWITCH_SUBSTATE_2    = 2,
 };
 
 /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
@@ -2670,6 +2700,7 @@ enum PeachStatusFlags {
     PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
     PEACH_STATUS_FLAG_DISGUISED         = 0x02,
     PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
+    PEACH_STATUS_FLAG_8                 = 0x08,
     PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
 };
 
@@ -3093,72 +3124,73 @@ enum NpcFlags {
 };
 
 enum PlayerStatusFlags {
-    PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
-    PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
-    PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
-    PLAYER_STATUS_FLAGS_10                               = 0x00000010,
-    PLAYER_STATUS_FLAGS_20                               = 0x00000020,
-    PLAYER_STATUS_FLAGS_40                               = 0x00000040,
-    PLAYER_STATUS_FLAGS_80                               = 0x00000080,
-    PLAYER_STATUS_FLAGS_100                              = 0x00000100,
-    PLAYER_STATUS_FLAGS_200                              = 0x00000200,
-    PLAYER_STATUS_FLAGS_400                              = 0x00000400,
-    PLAYER_STATUS_FLAGS_800                              = 0x00000800,
-    PLAYER_STATUS_FLAGS_1000                             = 0x00001000,
-    PLAYER_STATUS_FLAGS_INPUT_DISABLED                   = 0x00002000,
-    PLAYER_STATUS_FLAGS_4000                             = 0x00004000,
-    PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
-    PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
-    PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
-    PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
-    PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
-    PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?
-    PLAYER_STATUS_FLAGS_400000                           = 0x00400000, // taking quiz?
-    PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
-    PLAYER_STATUS_FLAGS_1000000                          = 0x01000000,
-    PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
-    PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
-    PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
-    PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
-    PLAYER_STATUS_FLAGS_20000000                         = 0x20000000, // done hammer?
-    PLAYER_STATUS_FLAGS_40000000                         = 0x40000000,
-    PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
+    PS_FLAGS_AIRBORNE                         = 0x0000000E,
+    PS_FLAGS_JUMPING                          = 0x00000002,
+    PS_FLAGS_FALLING                          = 0x00000004,
+    PS_FLAGS_FLYING                           = 0x00000008,
+    PS_FLAGS_10                               = 0x00000010,
+    PS_FLAGS_20                               = 0x00000020,
+    PS_FLAGS_40                               = 0x00000040,
+    PS_FLAGS_80                               = 0x00000080,
+    PS_FLAGS_100                              = 0x00000100,
+    PS_FLAGS_200                              = 0x00000200,
+    PS_FLAGS_400                              = 0x00000400,
+    PS_FLAGS_800                              = 0x00000800,
+    PS_FLAGS_1000                             = 0x00001000,
+    PS_FLAGS_INPUT_DISABLED                   = 0x00002000,
+    PS_FLAGS_4000                             = 0x00004000,
+    PS_FLAGS_8000                             = 0x00008000,
+    PS_FLAGS_20000                            = 0x00020000,
+    PS_FLAGS_40000                            = 0x00040000, // physics and animations run at half speed
+    PS_FLAGS_80000                            = 0x00080000,
+    PS_FLAGS_100000                           = 0x00100000,
+    PS_FLAGS_200000                           = 0x00200000, // using hammer?
+    PS_FLAGS_400000                           = 0x00400000, // taking quiz?
+    PS_FLAGS_800000                           = 0x00800000,
+    PS_FLAGS_1000000                          = 0x01000000,
+    PS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
+    PS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
+    PS_FLAGS_8000000                          = 0x08000000,
+    PS_FLAGS_10000000                         = 0x10000000,
+    PS_FLAGS_20000000                         = 0x20000000, // done hammer?
+    PS_FLAGS_40000000                         = 0x40000000,
+    PS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
 
 /// @see PlayerStatus::animFlags
 enum PlayerStatusAnimFlags {
-    PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT                          = 0x00000001,
-    PLAYER_STATUS_ANIM_FLAGS_2                                     = 0x00000002,
-    PLAYER_STATUS_ANIM_FLAGS_4                                     = 0x00000004,
-    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008, ///< triggers partner use when set
-    PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE             = 0x00000010, ///< ! prompt
-    PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE               = 0x00000020, ///< (...) prompt
-    PLAYER_STATUS_ANIM_FLAGS_40                                    = 0x00000040,
-    PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE                     = 0x00000080,
-    PLAYER_STATUS_ANIM_FLAGS_100                                   = 0x00000100,
-    PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS                           = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
-    PLAYER_STATUS_ANIM_FLAGS_SHIVERING                             = 0x00000400,
-    PLAYER_STATUS_ANIM_FLAGS_800                                   = 0x00000800,
-    PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS                   = 0x00001000,
-    PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE                           = 0x00002000,
-    PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO                            = 0x00004000,
-    PLAYER_STATUS_ANIM_FLAGS_8000                                  = 0x00008000,
-    PLAYER_STATUS_ANIM_FLAGS_SPINNING                              = 0x00010000,
-    PLAYER_STATUS_ANIM_FLAGS_20000                                 = 0x00020000,
-    PLAYER_STATUS_ANIM_FLAGS_40000                                 = 0x00040000,
-    PLAYER_STATUS_ANIM_FLAGS_80000                                 = 0x00080000,
-    PLAYER_STATUS_ANIM_FLAGS_100000                                = 0x00100000, ///< set when using pipes
-    PLAYER_STATUS_ANIM_FLAGS_200000                                = 0x00200000,
-    PLAYER_STATUS_ANIM_FLAGS_400000                                = 0x00400000,
-    PLAYER_STATUS_ANIM_FLAGS_800000                                = 0x00800000,
-    PLAYER_STATUS_ANIM_FLAGS_1000000                               = 0x01000000,
-    PLAYER_STATUS_ANIM_FLAGS_2000000                               = 0x02000000,
-    PLAYER_STATUS_ANIM_FLAGS_4000000                               = 0x04000000,
-    PLAYER_STATUS_ANIM_FLAGS_8000000                               = 0x08000000,
-    PLAYER_STATUS_ANIM_FLAGS_10000000                              = 0x10000000,
-    PLAYER_STATUS_ANIM_FLAGS_20000000                              = 0x20000000,
-    PLAYER_STATUS_ANIM_FLAGS_40000000                              = 0x40000000,
-    PLAYER_STATUS_ANIM_FLAGS_80000000                              = 0x80000000,
+    PA_FLAGS_HOLDING_WATT                     = 0x00000001,
+    PA_FLAGS_2                                = 0x00000002,
+    PA_FLAGS_4                                = 0x00000004,
+    PA_FLAGS_8                                = 0x00000008, ///< triggers partner use when set
+    PA_FLAGS_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
+    PA_FLAGS_SPEECH_PROMPT_AVAILABLE          = 0x00000020, ///< (...) prompt
+    PA_FLAGS_40                               = 0x00000040,
+    PA_FLAGS_USING_PULSE_STONE                = 0x00000080,
+    PA_FLAGS_100                              = 0x00000100,
+    PA_FLAGS_RAISED_ARMS                      = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
+    PA_FLAGS_SHIVERING                        = 0x00000400,
+    PA_FLAGS_800                              = 0x00000800,
+    PA_FLAGS_USING_PEACH_PHYSICS              = 0x00001000,
+    PA_FLAGS_IN_DISGUISE                      = 0x00002000,
+    PA_FLAGS_8BIT_MARIO                       = 0x00004000,
+    PA_FLAGS_8000                             = 0x00008000,
+    PA_FLAGS_SPINNING                         = 0x00010000,
+    PA_FLAGS_20000                            = 0x00020000,
+    PA_FLAGS_40000                            = 0x00040000,
+    PA_FLAGS_80000                            = 0x00080000,
+    PA_FLAGS_100000                           = 0x00100000, ///< set when using pipes
+    PA_FLAGS_200000                           = 0x00200000,
+    PA_FLAGS_400000                           = 0x00400000,
+    PA_FLAGS_800000                           = 0x00800000,
+    PA_FLAGS_1000000                          = 0x01000000,
+    PA_FLAGS_2000000                          = 0x02000000,
+    PA_FLAGS_4000000                          = 0x04000000,
+    PA_FLAGS_8000000                          = 0x08000000,
+    PA_FLAGS_10000000                         = 0x10000000,
+    PA_FLAGS_20000000                         = 0x20000000,
+    PA_FLAGS_40000000                         = 0x40000000,
+    PA_FLAGS_80000000                         = 0x80000000,
 };
 
 enum PopupType {
@@ -3405,6 +3437,13 @@ enum ActionCommand {
     ACTION_COMMAND_SPOOK                     = 0x00000015,
     ACTION_COMMAND_WATER_BLOCK               = 0x00000016,
     ACTION_COMMAND_TIDAL_WAVE                = 0x00000017,
+};
+
+enum HazardType {
+    HAZARD_TYPE_NONE        = 0,
+    HAZARD_TYPE_LAVA        = 1,
+    HAZARD_TYPE_SPIKES      = 2,
+    HAZARD_TYPE_FIRE_BAR    = 3,
 };
 
 enum EffectGfxDataFlags {
@@ -4078,16 +4117,23 @@ enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_80000000          = 0x80000000,
 };
 
+// the lower byte of Collider::flags
+enum SurfaceType {
+    SURFACE_TYPE_DEFAULT            = 0,
+    SURFACE_TYPE_WATER              = 1,
+    SURFACE_TYPE_SPIKES             = 2,
+    SURFACE_TYPE_LAVA               = 3,
+    SURFACE_TYPE_DOCK_WALL          = 4,
+    SURFACE_TYPE_SLIDE              = 5,
+    SURFACE_TYPE_FLOWERS            = 6,
+    SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
+    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
+};
+
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
-    COLLIDER_FLAGS_WATER_FLOOR       = 0x00000001,
-    COLLIDER_FLAGS_LAVA_FLOOR        = 0x00000002,
-    COLLIDER_FLAGS_SUSHIE_DOCK_WALL  = 0x00000004,
-    COLLIDER_FLAGS_SNOW_FLOOR        = 0x00000008,
-    COLLIDER_FLAGS_10                = 0x00000010,
-    COLLIDER_FLAGS_20                = 0x00000020,
-    COLLIDER_FLAGS_40                = 0x00000040,
-    COLLIDER_FLAGS_80                = 0x00000080,
+    COLLIDER_FLAGS_SURFACE_TYPE_MASK = 0x000000FF,
     COLLIDER_FLAGS_100               = 0x00000100,
     COLLIDER_FLAGS_200               = 0x00000200,
     COLLIDER_FLAGS_400               = 0x00000400,

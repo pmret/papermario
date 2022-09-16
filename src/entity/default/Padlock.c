@@ -60,7 +60,7 @@ void entity_Padlock_push_player(Entity* entity) {
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         if (data->pushSpeed == 0.0f) {
-            suggest_player_anim_clearUnkFlag(0x10005);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
         }
 
         data->pushSpeed += 0.5;
@@ -69,8 +69,8 @@ void entity_Padlock_push_player(Entity* entity) {
             data->pushSpeed = 2.5f;
         }
 
-        deltaX = data->pushSpeed * sin_rad((180.0f - entity->rotation.y) * TAU / 360.0f);
-        deltaZ = data->pushSpeed * cos_rad((180.0f - entity->rotation.y) * TAU / 360.0f);
+        deltaX = data->pushSpeed * sin_rad(DEG_TO_RAD(180.0f - entity->rotation.y));
+        deltaZ = data->pushSpeed * cos_rad(DEG_TO_RAD(180.0f - entity->rotation.y));
 
         playerStatus->position.x += deltaX;
         playerStatus->position.z -= deltaZ;

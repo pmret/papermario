@@ -38,7 +38,7 @@ extern AnimScript Entity_MunchlesiaReset1_Animation;
 extern StaticAnimatorNode* Entity_MunchlesiaReset1_Mesh[];
 
 void entity_BellbellPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_BellbellPlant_AnimationUse);
@@ -46,7 +46,7 @@ void entity_BellbellPlant_idle(Entity* entity) {
 }
 
 void entity_TrumpetPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_TrumpetPlant_AnimationUse);
@@ -56,7 +56,7 @@ void entity_TrumpetPlant_idle(Entity* entity) {
 void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+    angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
     xOffset = -26.0 * cos_rad(angle);
     zOffset = 6.0 * sin_rad(angle);
     fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
@@ -69,7 +69,7 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
     if (data->numCoins < 3) {
         f32 xOffset, zOffset, angle;
 
-        angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+        angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 
@@ -147,8 +147,8 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
     entity_Munchlesia_create_child(entity, &Entity_MunchlesiaBeginChew);
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
-    gPlayerStatus.flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-    suggest_player_anim_setUnkFlag(0x8001F);
+    gPlayerStatus.flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    suggest_player_anim_setUnkFlag(ANIM_Mario_8001F);
 }
 
 void func_802BC308_E2EC38(Entity* entity) {
@@ -182,7 +182,7 @@ void entity_MunchlesiaChewing_init(Entity* entity) {
 
 void func_802BC3E4_E2ED14(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    gPlayerStatus.position.y = data->unk_0C + (sin_rad((data->unk_10 * TAU) / 360.0f) * 3.0f);
+    gPlayerStatus.position.y = data->unk_0C + (sin_rad(DEG_TO_RAD(data->unk_10)) * 3.0f);
 
     data->unk_10 += 24.0f;
     if (data->unk_10 > 360.0f) {

@@ -189,11 +189,8 @@ typedef struct Npc {
                 NpcQuizmoBlur* quizmo;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
-    /* 0x028 */ union {
-    /*       */     u16 h;
-    /*       */     u32 w;
-    /*       */ } currentAnim;
-    /* 0x02C */ s32 unk_2C;
+    /* 0x028 */ AnimID currentAnim;
+    /* 0x02C */ s32 animNotifyValue;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -989,7 +986,7 @@ typedef struct CollisionData {
     /* 0x04 */ Collider* colliderList;
     /* 0x08 */ union {
                    struct ColliderBoundingBox* aabbs;
-                   CameraControlSettings* camSettings;
+                   struct CameraControlSettings* camSettings;
                };
     /* 0x0C */ s16 numColliders;
     /* 0x0E */ char unk_0E[2];
@@ -1537,7 +1534,7 @@ typedef struct ActorPart {
     /* 0x80 */ s32 partFlags3;
     /* 0x84 */ s32 unk_84;
     /* 0x88 */ u32 currentAnimation;
-    /* 0x8C */ s32 unk_8C;
+    /* 0x8C */ s32 animNotifyValue;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
@@ -1888,14 +1885,22 @@ typedef struct FontData {
     /* 0x00 */ char unk_00[24];
 } FontData; // size = 0x18
 
+typedef struct SlideParams {
+    f32 heading;
+    f32 maxDescendAccel;
+    f32 launchVelocity;
+    f32 maxDescendVelocity;
+    f32 integrator[4];
+} SlideParams;
+
 typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 currentStateTime;
-    /* 0x00A */ s8 unk_0A;
+    /* 0x00A */ s8 shiverTime;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
-    /* 0x00D */ s8 unk_0D;
+    /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
     /* 0x00E */ u8 alpha1;
     /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 blinkTimer;
@@ -1922,31 +1927,31 @@ typedef struct PlayerStatus {
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 overlapPushYaw;
     /* 0x08C */ f32 pitch;
-    /* 0x090 */ f32 unk_90[4];
+    /* 0x090 */ f32 flipYaw[4];
     /* 0x0A0 */ f32 heading;
-    /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
+    /* 0x0A4 */ AnimID trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ s8 prevActionState;
-    /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
+    /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
-    /* 0x0B8 */ u32 anim;
-    /* 0x0BC */ u16 unk_BC;
+    /* 0x0B8 */ AnimID anim;
+    /* 0x0BC */ u16 animNotifyValue;
     /* 0x0BE */ s8 renderMode;
-    /* 0x0BF */ s8 unk_BF;
+    /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
-    /* 0x0C4 */ char unk_C4;
-    /* 0x0C5 */ s8 unk_C5;
+    /* 0x0C4 */ s8 peachItemHeld;
+    /* 0x0C5 */ s8 camResetDelay;
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ f32* unk_D0;
+    /* 0x0D0 */ SlideParams* slideParams;
     /* 0x0D4 */ f32 spinRate;
-    /* 0x0D8 */ struct EffectInstance* unk_D8; // effect 46
+    /* 0x0D8 */ struct EffectInstance* specialDecorationEffect;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;
@@ -1958,7 +1963,7 @@ typedef struct PlayerStatus {
     /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
     /* 0x1BC */ char unk_1BC[196];
-    /* 0x280 */ s8 unk_280;
+    /* 0x280 */ s8 poundImpactDelay; // governs period of immobility after landing a ground pound
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 

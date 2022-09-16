@@ -45,8 +45,8 @@ void func_802BD100_31DE70(void) {
         phi_v1 = 8;
     }
 
-    playerStatus->position.z -= cos_rad((cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1) *
-                                        TAU / 360.0f) * -4.0f;
+    playerStatus->position.z -= cos_rad(DEG_TO_RAD(
+        cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1)) * -4.0f;
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
@@ -97,7 +97,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
     s32 hitResult;
 
-    sin_cos_rad((*yaw * TAU) / 360.0f, &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(*yaw), &sinAngle, &cosAngle);
     cosAngle = -cosAngle;
     totalLength = radius + length;
     hitResult = test_ray_colliders(0x10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
@@ -179,7 +179,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((SushieTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
             sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
             SushieTweesterPhysicsPtr->angle = clamp_angle(SushieTweesterPhysicsPtr->angle - SushieTweesterPhysicsPtr->angularVelocity);
@@ -190,7 +190,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
                 SushieTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((SushieTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (SushieTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -248,7 +248,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_init_put_away(sushie);
-        gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+        gPlayerStatusPtr->animFlags &= ~PA_FLAGS_400000;
     }
 
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
@@ -309,7 +309,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
             temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
-            partnerNPC->currentAnim.w = 0x7000A;
+            partnerNPC->currentAnim = 0x7000A;
             partnerNPC->yaw = temp_f0;
             partnerNPC->jumpScale = 0.0f;
             partnerNPC->moveSpeed = 3.0f;
@@ -324,7 +324,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
             } else {
-                suggest_player_anim_setUnkFlag(0x8000F);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
                     partnerNPC->isFacingAway = 1;

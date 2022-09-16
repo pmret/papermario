@@ -284,7 +284,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
                 e21_y = triangle->e21.y;
                 e21_z = triangle->e21.z;
 
-                // vector product
+                // cross product
                 normalX = e13_y * e21_z - e13_z * e21_y;
                 normalY = e13_z * e21_x - e13_x * e21_z;
                 normalZ = e13_x * e21_y - e13_y * e21_x;
@@ -465,7 +465,7 @@ void update_collider_transform(s16 colliderID) {
     }
 }
 
-s32 get_collider_type_by_id(s32 colliderID) {
+s32 get_collider_flags(s32 colliderID) {
     if (colliderID & COLLISION_WITH_ENTITY_BIT) {
         return 0;
     } else {
@@ -908,7 +908,7 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     s32 i;
     f32 ret;
 
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     collider = &collisionData->colliderList[colliderID];
 
     gCollisionRayDirY = 0;

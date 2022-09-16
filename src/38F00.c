@@ -105,7 +105,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
             npc->duration = evt_get_variable(script, LVar1);
             script->functionTemp[1] = evt_get_variable(script, LVar2);
             script->functionTemp[2] = evt_get_variable(script, LVar3) / 2;
-            npc->currentAnim.w = script->varTable[10];
+            npc->currentAnim = script->varTable[10];
             script->functionTemp[0] = 1;
             break;
         case 1:

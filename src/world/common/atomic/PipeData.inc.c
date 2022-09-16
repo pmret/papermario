@@ -153,11 +153,11 @@ EvtScript N(Pipe_ScriptD) = {
     EVT_SET(LVar0, LVarA)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_ANIM_FLAGS_200000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PA_FLAGS_200000, TRUE)
     EVT_CALL(N(Pipe_GetCameraYaw))
     EVT_CALL(InterpPlayerYaw, LVar0, 0)
     EVT_WAIT(2)
-    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_ANIM_FLAGS_200000, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PA_FLAGS_200000, FALSE)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_THREAD

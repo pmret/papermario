@@ -26,9 +26,9 @@ void func_802BD100_320C50(void) {
     f32 playerSpeedCopy;
     s32 temp_v0_2;
 
-    if (playerFlags & PLAYER_STATUS_FLAGS_4000) {
+    if (playerFlags & PS_FLAGS_4000) {
         playerSpeedCopy = playerStatus->currentSpeed;
-        if (playerFlags & PLAYER_STATUS_FLAGS_40000) {
+        if (playerFlags & PS_FLAGS_40000) {
             playerSpeedCopy *= 0.5f;
         }
 
@@ -114,7 +114,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((LakilesterTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
             lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
             LakilesterTweesterPhysicsPtr->angle = clamp_angle(LakilesterTweesterPhysicsPtr->angle - LakilesterTweesterPhysicsPtr->angularVelocity);
@@ -125,7 +125,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
                 LakilesterTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((LakilesterTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             LakilesterTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (LakilesterTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -206,8 +206,8 @@ s32 func_802BD7DC(void) {
     s32 raycastResult;
     s32 ret;
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_20000000) {
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_20000000;
+    if (playerStatus->animFlags & PA_FLAGS_20000000) {
+        playerStatus->animFlags &= ~PA_FLAGS_20000000;
         return TRUE;
     }
 
@@ -225,10 +225,10 @@ s32 func_802BD7DC(void) {
     //TODO find better match
     if (outLength <= 16.0f && colliderTypeID >= 0) {
         if (!(colliderTypeID & COLLISION_WITH_ENTITY_BIT) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
-            colliderTypeID = get_collider_type_by_id(colliderTypeID) & 0xFF;
-            if (colliderTypeID - 1 >= 3U) {
+            colliderTypeID = get_collider_flags(colliderTypeID) & 0xFF; //TODO surface type
+            if (!(colliderTypeID == SURFACE_TYPE_WATER || colliderTypeID == SURFACE_TYPE_SPIKES || colliderTypeID == SURFACE_TYPE_LAVA)) { //
                 ret = FALSE;
-                if (colliderTypeID != 5) {
+                if (colliderTypeID != SURFACE_TYPE_SLIDE) {
                     npc->moveToPos.x = outX;
                     npc->moveToPos.y = outY;
                     npc->moveToPos.z = outZ;
@@ -342,19 +342,21 @@ void func_802BDDD8_321928(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    f32 sp3C, sp40, sp44, sp48, sp4C, sp50, sp54;
+    f32 hitDepth, sp40, sp44, sp48, sp4C, sp50, sp54;
     f32 yaw = 0.0f;
     f32 moveSpeed = 0.0f;
     f32 x, y, z;
     f32 temp_f0_3;
     s32 raycastBelowResult;
-    s32 phi_a3;
-    f32 phi_f20;
-
+    s32 currentSurfaceType;
+    s32 belowSurfaceType;
+    s32 pitchShift;
+    f32 height;
 
     func_802BD6BC_32120C(&yaw, &moveSpeed);
 
-    if ((u8)(get_collider_type_by_id(npc->currentFloor)) == 3) {
+    currentSurfaceType = get_collider_flags(npc->currentFloor) & 0xFF;
+    if (currentSurfaceType == SURFACE_TYPE_LAVA) {
         moveSpeed *= 0.5f;
     }
 
@@ -373,11 +375,11 @@ void func_802BDDD8_321928(Npc* npc) {
             }
 
             if (D_802BFF20 < 0x3C) {
-                phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
+                pitchShift = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, pitchShift);
             } else {
-                phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
+                pitchShift = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, pitchShift);
             }
         }
     }
@@ -466,26 +468,26 @@ void func_802BDDD8_321928(Npc* npc) {
 
     func_802BDA90_3215E0(npc);
     npc->moveToPos.y -= npc->jumpScale;
-    sp3C = npc->collisionHeight + 2;
+    hitDepth = npc->collisionHeight + 2;
     y = npc->moveToPos.y + 12.0f;
     x = playerStatus->position.x;
     z = playerStatus->position.z;
     add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
-    raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &sp3C, &sp40,
+    raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &hitDepth, &sp40,
                                                             &sp44, &sp48, &sp4C);
     D_802BFF28 = get_player_normal_pitch();
-    phi_f20 = 12.0f;
+    height = 12.0f;
 
     if (D_802BFF28 != 0.0f) {
-        phi_f20 = 32.0f;
+        height = 32.0f;
     }
 
     if (D_802BFF28 > 0.0f && raycastBelowResult >= 0) {
-        sin_cos_rad((D_802BFF28 * TAU) / 360.0f, &sp50, &sp54);
+        sin_cos_rad(DEG_TO_RAD(D_802BFF28), &sp50, &sp54);
         npc->pos.y = (npc->pos.y + fabs((sp50 / sp54) * playerStatus->runSpeed));
     }
 
-    if (sp3C <= phi_f20 && raycastBelowResult >= 0) {
+    if (hitDepth <= height && raycastBelowResult >= 0) {
         playerStatus->lastGoodPosition.x = npc->pos.x;
         playerStatus->lastGoodPosition.y = npc->pos.y;
         playerStatus->lastGoodPosition.z = npc->pos.z;
@@ -498,12 +500,12 @@ void func_802BDDD8_321928(Npc* npc) {
         npc->jumpScale = 0.0f;
         playerStatus->timeInAir = 0;
 
-        if ((get_collider_type_by_id(raycastBelowResult) & 0xFF) == 3) {
-
-            npc->currentAnim.w = 0x80006;
+        belowSurfaceType = get_collider_flags(raycastBelowResult) & 0xFF;
+        if (belowSurfaceType == SURFACE_TYPE_LAVA) {
+            npc->currentAnim = 0x80006;
             npc->moveSpeed = moveSpeed * 0.5f;
         } else {
-            npc->currentAnim.w = 0x80005;
+            npc->currentAnim = 0x80005;
             npc->moveSpeed = moveSpeed;
         }
         return;
@@ -543,20 +545,20 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     f32 yaw, camYaw;
     s32 i;
 
-    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+    playerStatus->animFlags &= ~PA_FLAGS_400000;
 
     if (isInitialCall) {
         func_802BD678_3211C8(npc);
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
-            npc->flags = npc->flags & ~PLAYER_STATUS_ANIM_FLAGS_40;
+        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
+            npc->flags = npc->flags & ~PA_FLAGS_40;
             npc->moveToPos.x = npc->pos.x;
             npc->moveToPos.y = npc->pos.y;
             npc->moveToPos.z = npc->pos.z;
 
             if (gGameStatusPtr->keepUsingPartnerOnMapChange ||
-                (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_200000)) {
-                if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_200000) {
-                    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_200000;
+                (playerStatus->animFlags & PA_FLAGS_200000)) {
+                if (playerStatus->animFlags & PA_FLAGS_200000) {
+                    playerStatus->animFlags &= ~PA_FLAGS_200000;
                 }
                 D_802BFF14 = 100;
             } else {
@@ -571,19 +573,19 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                         playerStatus->actionState == ACTION_STATE_RUN ||
                         playerStatus->actionState == ACTION_STATE_FALLING) {
 
-                        playerStatus->flags |= PLAYER_STATUS_ANIM_FLAGS_100;
+                        playerStatus->flags |= PA_FLAGS_100;
                     } else {
                         return ApiStatus_DONE2;
                     }
                 }
             } else {
                 partnerActionStatus->partnerAction_unk_1 = 0;
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                playerStatus->flags &= ~PS_FLAGS_100;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= NPC_FLAG_100;
                 set_action_state(ACTION_STATE_RIDE);
-                suggest_player_anim_setUnkFlag(0x8000E);
-                npc->currentAnim.w = 0x80005;
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
+                npc->currentAnim = 0x80005;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= (NPC_FLAG_100 | NPC_FLAG_400000);
@@ -593,12 +595,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->pos.x = playerStatus->position.x;
                 npc->pos.y = npc->moveToPos.y;
                 npc->pos.z = playerStatus->position.z;
-                npc->currentAnim.w = 0x80005;
+                npc->currentAnim = 0x80005;
                 playerStatus->position.y = npc->pos.y + 10.0f;
                 npc->moveSpeed = 3.0f;
                 npc->jumpScale = 0.0f;
                 npc->yaw = playerStatus->targetYaw;
-                suggest_player_anim_setUnkFlag(0x8000E);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
                 D_802BFF08 = 1;
@@ -619,7 +621,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
     switch (D_802BFF14) {
         case 40:
-            if (playerStatus->flags & PLAYER_STATUS_FLAGS_800 ||
+            if (playerStatus->flags & PS_FLAGS_800 ||
                 playerStatus->inputEnabledCounter) {
 
                 playerStatus->flags &= ~NPC_FLAG_100;
@@ -631,7 +633,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14 += 1;
             break;
         case 41:
-            if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800) {
+            if (playerStatus->flags & PA_FLAGS_800) {
                 playerStatus->flags &= ~NPC_FLAG_100;
                 if (D_802BFF04 != 0) {
                     enable_player_input();
@@ -640,12 +642,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) {
+            if (playerStatus->animFlags & PA_FLAGS_100000) {
                 if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     enable_player_input();
                     D_802BFF04 = 0;
                 }
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                playerStatus->flags &= ~PS_FLAGS_100;
                 return ApiStatus_DONE2;
             }
 
@@ -653,7 +655,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     enable_player_input();
                     D_802BFF04 = 0;
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_100;
                     return ApiStatus_DONE2;
                 }
                 D_802BFF14 = 100;
@@ -697,21 +699,21 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
             npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->duration = 12;
-            npc->currentAnim.w = 0x80005;
+            npc->currentAnim = 0x80005;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF14 = 101;
             break;
         case 101:
             sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             /* fallthrough */
         case 102:
             D_802BFF14 += 1;
             /* fallthrough */
         case 103:
-            if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800)) {
+            if (!(playerStatus->flags & PA_FLAGS_800)) {
                 npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
                 npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
                 npc->pos.y += (npc->moveToPos.y - npc->pos.y) / npc->duration;
@@ -723,7 +725,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->jumpVelocity -= npc->jumpScale;
 
                 if (npc->jumpVelocity <= 0.0f) {
-                    suggest_player_anim_clearUnkFlag(0x10008);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
                 }
 
                 npc->duration--;
@@ -740,24 +742,24 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     npc->yaw = playerStatus->targetYaw;
                     npc->duration = 3;
                     set_action_state(ACTION_STATE_RIDE);
-                    suggest_player_anim_setUnkFlag(0x8000E);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                     disable_player_shadow();
                     partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_100;
                     gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                     D_802BFF18 = 0;
                     D_802BFF0C = 2;
                     func_802BFB44_323694(2.0f);
                     D_802BFF14 = 104;
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
+                    playerStatus->animFlags |= PA_FLAGS_400000;
                 }
             } else {
                 D_802BFF14 = 10;
             }
             break;
         case 104:
-            if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800) {
+            if (playerStatus->flags & PA_FLAGS_800) {
                 D_802BFF14 = 10;
                 break;
             } else {
@@ -774,7 +776,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
         case 1:
             func_802BDDD8_321928(npc);
-            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
+            playerStatus->animFlags |= PA_FLAGS_400000;
             D_802BFF18++;
             npc->pos.y = npc->moveToPos.y + 2.0f;
 
@@ -786,15 +788,15 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 playerStatus->targetYaw = npc->yaw;
             }
 
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+            if (!(playerStatus->flags & PS_FLAGS_800)) {
                 if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
                     if (func_802BD7DC()) {
                         D_802BFF14 = 3;
                     } else {
-                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000000)) {
+                        if (!(playerStatus->animFlags & PA_FLAGS_40000000)) {
                             sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
                         }
-                        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000000;
+                        playerStatus->animFlags &= ~PA_FLAGS_40000000;
                     }
                 }
             } else {
@@ -827,11 +829,11 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             npc->moveSpeed = sp2C / npc->duration;
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF14 += 1;
             break;
         case 4:
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             D_802BFF14++;
             /* fallthrough */
         case 5:
@@ -877,7 +879,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             enable_player_shadow();
             gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
 
-            if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+            if (playerStatus->flags & PS_FLAGS_800) {
                 partnerActionStatus->actingPartner = PARTNER_NONE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
 
@@ -888,7 +890,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
                 partner_clear_player_tracking(npc);
                 set_action_state(ACTION_STATE_HIT_FIRE);
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                playerStatus->flags &= ~PS_FLAGS_100;
                 return ApiStatus_DONE1;
             }
 
@@ -902,7 +904,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_400000 | NPC_FLAG_ENABLE_HIT_SCRIPT);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+            playerStatus->flags &= ~PS_FLAGS_100;
             if (D_802BFF04 != 0) {
                 D_802BFF04 = 0;
                 enable_player_input();
@@ -935,8 +937,8 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
         D_802BFF00 = (D_802BFF0C == 0) ? 3 : 0;
         partner_init_put_away(lakilester);
         func_802BD7DC();
-        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
-        playerStatus->flags |= PLAYER_STATUS_FLAGS_100;
+        playerStatus->animFlags &= ~PA_FLAGS_400000;
+        playerStatus->flags |= PS_FLAGS_100;
     }
 
     switch (D_802BFF00) {
@@ -962,11 +964,11 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             lakilester->moveSpeed = sp2C / lakilester->duration;
             lakilester->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
                                  lakilester->moveToPos.x, lakilester->moveToPos.z);
-            suggest_player_anim_clearUnkFlag(0x10006);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
             D_802BFF00++;
             break;
         case 1:
-            suggest_player_anim_clearUnkFlag(0x10007);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             D_802BFF00++;
         case 2:
             playerStatus->position.y += lakilester->jumpVelocity;
@@ -975,7 +977,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
                             lakilester->moveSpeed, lakilester->yaw);
             func_800E4AD8(0);
             if (lakilester->jumpVelocity <= 0.0f) {
-                playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+                playerStatus->flags |= PS_FLAGS_FALLING;
                 if (lakilester->jumpVelocity < -10.0) {
                     lakilester->jumpVelocity = -10.0f;
                 }
@@ -1008,7 +1010,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
 
             enable_player_shadow();
 
-            if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+            if (playerStatus->flags & PS_FLAGS_800) {
                 partnerActionStatus->actingPartner = PARTNER_NONE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 if (D_802BFF04) {
@@ -1035,7 +1037,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
         case 4:
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+            playerStatus->flags &= ~PS_FLAGS_100;
 
             if (D_802BFF04) {
                 D_802BFF04 = FALSE;
@@ -1149,9 +1151,9 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             }
 
             sfx_play_sound_at_npc(SOUND_295, 0, -4);
-            playerStatus->anim = 0x8000E;
-            playerStatus->unk_BC = 0;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;
+            playerStatus->anim = ANIM_Mario_8000E;
+            playerStatus->animNotifyValue = 0;
+            playerStatus->flags |= PS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             npc->flags |= NPC_FLAG_100;

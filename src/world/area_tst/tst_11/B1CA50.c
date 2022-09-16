@@ -51,11 +51,11 @@ void func_80240100_B1CB50(void* data) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
-    spr_update_player_sprite(1, playerStatus->trueAnimation ^ 0x1000000, 1.0f);
+    spr_update_player_sprite(1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 
@@ -104,7 +104,7 @@ void func_802403B8_B1CE08(void* data) {
     guMtxCatF(sp20, spA0, sp20);
     guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp20, spA0, sp20);
-    guScaleF(spE0, SPRITE_PIXEL_SCALE, -SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+    guScaleF(spE0, SPRITE_WORLD_SCALE_D, -SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
     guMtxCatF(sp20, spE0, sp20);
     guTranslateF(sp60, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
     guMtxCatF(sp20, sp60, sp20);
@@ -116,7 +116,7 @@ void func_802403B8_B1CE08(void* data) {
     guMtxCatF(sp20, spA0, sp20);
     guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp20, spA0, sp20);
-    guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+    guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
     guMtxCatF(sp20, spE0, sp20);
     guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, 0.0f);
     guMtxCatF(sp20, sp60, sp20);

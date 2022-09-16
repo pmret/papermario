@@ -1436,7 +1436,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     if (!(item->flags & ITEM_ENTITY_FLAGS_1000000)) {
                         temp = rand_int(2000);
                         temp = (temp / 1000.0f) + 1.5;
-                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = temp * sinAngle;
@@ -1444,7 +1444,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     } else {
                         temp = rand_int(2000);
                         temp = (temp / 1000.0f) + 2.0;
-                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = temp * sinAngle;
@@ -1457,7 +1457,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     } else {
                         temp = 2.1f;
                     }
-                    theta = physData->moveAngle * TAU / 360.0f;
+                    theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
                     physData->velx = temp * sinAngle;
@@ -1589,7 +1589,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                         item->position.y = outY;
                         item->position.z = outZ;
                         physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
-                        theta = physData->moveAngle * TAU / 360.0f;
+                        theta = DEG_TO_RAD(physData->moveAngle);
                         sinAngle = sin_rad(theta);
                         cosAngle = cos_rad(theta);
                         physData->velx = sinAngle * 2.0;
@@ -1845,7 +1845,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
             if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_2000000)) {
                 s32 actionState = playerStatus->actionState;
 
-                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_10000000) &&
+                if (!(playerStatus->animFlags & PA_FLAGS_10000000) &&
                         ((playerStatus->timeInAir == 0 &&
                         actionState != ACTION_STATE_JUMP &&
                         actionState != ACTION_STATE_FALLING) ||
@@ -1854,7 +1854,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     actionState != ACTION_STATE_LAUNCH &&
                     actionState != ACTION_STATE_RIDE &&
                     actionState != ACTION_STATE_IDLE &&
-                    (actionState != ACTION_STATE_USE_SPINNING_FLOWER || playerStatus->fallState != 1)
+                    !(actionState == ACTION_STATE_USE_SPINNING_FLOWER && playerStatus->actionSubstate == 1)
                 ) {
                     break;
                 }
@@ -1874,7 +1874,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                 }
             }
             D_801568E0 = hud_element_create(gItemHudScripts[gItemTable[itemEntity->itemID].hudElemID].enabled);
-            hud_element_set_flags(D_801568E0, 0x80);
+            hud_element_set_flags(D_801568E0, HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(D_801568E0, -100, -100);
             itemEntity->state = 2;
 
@@ -1942,9 +1942,9 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     playerData->hammerLevel = itemEntity->itemID - 4;
                 }
 
-                if (itemEntity->itemID == ITEM_JUMP ||
-                    itemEntity->itemID == ITEM_SPIN_JUMP ||
-                    itemEntity->itemID == ITEM_TORNADO_JUMP)
+                if (itemEntity->itemID == ITEM_BOOTS ||
+                    itemEntity->itemID == ITEM_SUPER_BOOTS ||
+                    itemEntity->itemID == ITEM_ULTRA_BOOTS)
                 {
                     playerData->bootsLevel = itemEntity->itemID - 1;
                 }
@@ -1975,7 +1975,7 @@ block_47: // TODO required to match
                     itemEntity->position.x = playerStatus->position.x;
                     itemEntity->position.y = playerStatus->position.y + playerStatus->colliderHeight;
                     itemEntity->position.z = playerStatus->position.z;
-                    suggest_player_anim_setUnkFlag(0x6000C);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 }
 
                 if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
@@ -1998,7 +1998,7 @@ block_47: // TODO required to match
                     (itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) ||
                     (itemEntity->pickupMsgFlags & 2))
                 {
-                    suggest_player_anim_setUnkFlag(0x6000C);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 }
             }
 
@@ -2033,7 +2033,7 @@ block_47: // TODO required to match
                 item_entity_disable_shadow(itemEntity);
                 if (func_800DFCF4() &&
                     playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER &&
-                    !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_10000000))
+                    !(playerStatus->animFlags & PA_FLAGS_10000000))
                 {
                     set_action_state(ACTION_STATE_IDLE);
                 }
@@ -2170,7 +2170,7 @@ block_47: // TODO required to match
                     sort_items();
                     add_item(itemEntity->itemID);
                 }
-                suggest_player_anim_setUnkFlag(0x6000C);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
                 func_801363A0(itemEntity);
                 set_window_update(0xC, (s32) basic_window_update);
                 D_801568E4 = 50;
@@ -2192,7 +2192,7 @@ block_47: // TODO required to match
             }
             break;
         case 15:
-            suggest_player_anim_setUnkFlag(0x10002);
+            suggest_player_anim_setUnkFlag(ANIM_Mario_10002);
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             enable_player_input();
             partner_enable_input();

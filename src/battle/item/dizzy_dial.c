@@ -29,7 +29,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
             camera->flags |= CAM_FLAG_SHAKING;
             a = script->functionTemp[1];
             guRotateF(camera->viewMtxShaking, a, 0.0f, 0.0f, 1.0f);
-            script->functionTemp[1] = 2.0 * ((1.0 - sin_rad(((script->functionTemp[2] + 90) * 6.28318f) / 360.0f)) * 360.0);
+            script->functionTemp[1] = 2.0 * ((1.0 - sin_rad(DEG_TO_RAD(script->functionTemp[2] + 90))) * 360.0);
             script->functionTemp[2]++;
             if (script->functionTemp[2] <= 90) {
                 return ApiStatus_BLOCK;

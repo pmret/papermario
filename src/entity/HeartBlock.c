@@ -157,7 +157,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
         exec_entity_commandlist(entity);
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
-        gPlayerStatus.animFlags |= PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS;
+        gPlayerStatus.animFlags |= PA_FLAGS_RAISED_ARMS;
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
@@ -197,7 +197,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             break;
         case 2:
-            entity->position.y += sin_rad((data->bouncePhase * TAU) / 360.0f) * 0.5f;
+            entity->position.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
             data->bouncePhase -= 30.0f;
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
@@ -229,8 +229,8 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             if (data->sparkleTrailAngle >= 360.0f) {
                 data->sparkleTrailAngle -= 360.0f;
             }
-            offsetX = data->sparkleTrailRadius * sin_rad((data->sparkleTrailAngle * TAU) / 360.0f);
-            offsetZ = data->sparkleTrailRadius * cos_rad((data->sparkleTrailAngle * TAU) / 360.0f);
+            offsetX = data->sparkleTrailRadius * sin_rad(DEG_TO_RAD(data->sparkleTrailAngle));
+            offsetZ = data->sparkleTrailRadius * cos_rad(DEG_TO_RAD(data->sparkleTrailAngle));
             offsetY = data->sparkleTrailPosY;
 
             data->sparkleTrailPosY -= 0.7;
@@ -248,7 +248,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             // fallthrough
         case 4:
-            entity->position.y += sin_rad((data->bouncePhase * TAU) / 360.0f) * 0.5f;
+            entity->position.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
             data->bouncePhase -= 30.0f;
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
@@ -275,7 +275,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             break;
         case 5:
-            playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS;
+            playerStatus->animFlags &= ~PA_FLAGS_RAISED_ARMS;
             enable_player_input();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

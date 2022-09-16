@@ -37,7 +37,7 @@ static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
             }
             cur++;
         }
-        // bug? can cur ever be NULL here?
+        // @bug? can cur ever be NULL here?
         // condition should probably be if (cur->musicEventID != -1)
         if (cur != NULL) {
             EvtScript* newSource = cur->scripts[scriptSelector];

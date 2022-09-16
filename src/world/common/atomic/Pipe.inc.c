@@ -2,7 +2,7 @@
 #include "npc.h"
 
 ApiStatus N(Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall) {
-    gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_100000;
+    gPlayerStatusPtr->animFlags |= PA_FLAGS_100000;
     return ApiStatus_DONE2;
 }
 

@@ -121,7 +121,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         }
     } else {
         if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) {
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING)) {
+            if (!(playerStatus->flags & PS_FLAGS_JUMPING)) {
                 Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
                 if (shadow != NULL) {
                     f32 temp2 = entity->position.y - shadow->position.y;
@@ -212,7 +212,7 @@ void entity_inactive_block_hit_anim(Entity* entity) {
 
     entity_MulticoinBlock_update_timer(entity);
     currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad((data->recoilInterpPhase * 6.28318f) / 360.0f) * 2);
+    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)) * 2);
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase > 450.0f) {
         data->recoilInterpPhase = clamp_angle(data->recoilInterpPhase);
@@ -226,7 +226,7 @@ void entity_inactive_block_recoil_anim(Entity* entity) {
 
     entity_MulticoinBlock_update_timer(entity);
     currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad((data->recoilInterpPhase * 6.28318f) / 360.0f));
+    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)));
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase >= 360.0f) {
         data->recoilInterpPhase = 0.0f;
@@ -331,7 +331,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return FALSE;
         }
 
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_JUMPING) {
+        if (playerStatus->flags & PS_FLAGS_JUMPING) {
             exec_entity_commandlist(entity);
         }
         return TRUE;
@@ -343,11 +343,11 @@ s32 entity_block_handle_collision(Entity* entity) {
 
     breakBlock = FALSE;
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if (playerStatus->actionState == ACTION_STATE_SPIN_JUMP || playerStatus->actionState == ACTION_STATE_ULTRA_JUMP) {
+        if (playerStatus->actionState == ACTION_STATE_SPIN_JUMP || playerStatus->actionState == ACTION_STATE_TORNADO_JUMP) {
             return FALSE;
         }
 
-        if (playerStatus->actionState == ACTION_STATE_GROUND_POUND || playerStatus->actionState == ACTION_STATE_ULTRA_POUND) {
+        if (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) {
             breakBlock = TRUE;
         } else {
             return TRUE;
@@ -356,7 +356,7 @@ s32 entity_block_handle_collision(Entity* entity) {
         if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_HAMMER)) {
             return TRUE;
         }
-        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_1000000)) {
+        if (!(playerStatus->flags & PS_FLAGS_1000000)) {
             return TRUE;
         }
     }

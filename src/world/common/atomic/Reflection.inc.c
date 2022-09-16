@@ -23,11 +23,11 @@ void N(SetPartnerFlags80000)(void);
 void N(SetPartnerFlags20000)(void);
 
 s32 N(reflection_unk_resolve_anim)(s32 playerAnim) {
-    u32 val;
+    AnimID temp;
 
-    playerAnim &= ~0x1000000;
-    val = playerAnim + ~0x6000B;
-    if (val < 0x10 && val & 1) {
+    playerAnim &= ~SPRITE_ID_BACK_FACING;
+    temp = playerAnim + ~ANIM_Mario_6000B;
+    if (temp < 16 && temp & 1) {
         playerAnim--;
     }
 
@@ -35,32 +35,31 @@ s32 N(reflection_unk_resolve_anim)(s32 playerAnim) {
 }
 
 s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
-    s32 temp_v1 = playerAnim >> 0x10;
-    u32 temp_v1_2;
+    s32 sprIndex = (playerAnim >> 0x10) & 0xFF;
+    u32 temp;
 
-    switch ((u8)temp_v1) {
-        case 1:
-            if (playerAnim > 0x1000C) {
+    switch (sprIndex) {
+        case SPR_Mario_1:
+            if (playerAnim > ANIM_Mario_1000C) {
                 return playerAnim;
             }
             break;
-        case 6:
-            // above function, inlined
-            temp_v1_2 = playerAnim + 0xFFF9FFF4; // + ~0x0006000B
-            if (temp_v1_2 < 16) {
-                if (temp_v1_2 & 1) {
+        case SPR_Mario_6:
+            temp = playerAnim + ~ANIM_Mario_6000B;
+            if (temp < 16) {
+                if (temp & 1) {
                     return playerAnim;
                 } else {
                     return playerAnim + 1;
                 }
             }
             break;
-        case 8:
-        case 9:
+        case SPR_Mario_8:
+        case SPR_Mario_9:
             return playerAnim;
     }
 
-    return playerAnim | 0x1000000;
+    return playerAnim | SPRITE_ID_BACK_FACING;
 }
 
 ApiStatus N(ReflectWall)(Evt* script, s32 isInitialCall) {
@@ -94,7 +93,7 @@ void N(reflection_setup_wall)(void) {
 
         spr_update_player_sprite(2, anim, 1.0f);
 
-        if (!(playerStatus->flags & 0x20000)) {
+        if (!(playerStatus->flags & PS_FLAGS_20000)) {
             if (playerStatus->alpha1 != D_802D9D70) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -132,7 +131,7 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
     guMtxCatF(main, translation, main);
@@ -159,9 +158,7 @@ void N(reflection_setup_floor)(void) {
     s32 renderMode = playerStatus->renderMode;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
-    s32 screenX;
-    s32 screenY;
-    s32 screenZ;
+    s32 screenX, screenY, screenZ;
 
     if (playerStatus->flags & 1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
@@ -171,7 +168,7 @@ void N(reflection_setup_floor)(void) {
 
         spr_update_player_sprite(1, playerStatus->trueAnimation, 1.0f);
 
-        if (!(playerStatus->flags & 0x20000)) {
+        if (!(playerStatus->flags & PS_FLAGS_20000)) {
             if (playerStatus->alpha1 != D_802D9D71) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -191,7 +188,7 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
-            !(playerStatus->flags & 0x20000)
+            !(playerStatus->flags & PS_FLAGS_20000)
                 ? N(reflection_render_floor)
                 : N(reflection_render_floor_fancy)
         );
@@ -214,7 +211,7 @@ void N(reflection_render_floor)(PlayerStatus* playerStatus) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, -SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, -SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
     guMtxCatF(main, translation, main);
@@ -303,15 +300,14 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
         guMtxCatF(mtx, rotation, mtx);
         guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(mtx, translation, mtx);
-        guScaleF(scale, SPRITE_WORLD_SCALE, -SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+        guScaleF(scale, SPRITE_WORLD_SCALE_F, -SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
         guMtxCatF(mtx, scale, mtx);
         guTranslateF(translation, px, -py, pz);
         guMtxCatF(mtx, translation, mtx);
 
+        flags = 1;
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            flags = 0x10000001;
-        } else {
-            flags = 1;
+            flags |= 0x10000000;
         }
 
         spr_draw_player_sprite(flags, 0, 0, NULL, mtx);

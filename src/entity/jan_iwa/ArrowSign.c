@@ -39,7 +39,7 @@ void entity_ArrowSign_init(Entity* entity) {
 }
 
 s32 entity_ArrowSign_handle_collision(Entity* entity) {
-    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) &&
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_HOLDING_WATT) &&
         (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
         entity_start_script(entity);
     }

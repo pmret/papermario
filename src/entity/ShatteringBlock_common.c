@@ -107,7 +107,7 @@ void entity_shattering_idle(Entity* entity) {
         data->fragmentPosY[i] += data->fragmentFallSpeed[i];
 
         angle = data->fragmentMoveAngle[i] * 360.0 / 256;
-        sin_cos_rad(angle * TAU / 360.0f, &sinTheta, &cosTheta);
+        sin_cos_rad(DEG_TO_RAD(angle), &sinTheta, &cosTheta);
         data->fragmentPosX[i] += lateralSpeed * sinTheta;
         data->fragmentPosZ[i] += lateralSpeed * cosTheta;
 
@@ -120,7 +120,7 @@ void entity_shattering_idle(Entity* entity) {
             data->fragmentPosZ[i] = hitZ;
             data->fragmentMoveAngle[i] += 0x80; // inverse yaw
 
-            sin_cos_rad(data->fragmentMoveAngle[i] * 360.0 / 256 * TAU / 360.0f, &sinTheta, &cosTheta);
+            sin_cos_rad(DEG_TO_RAD(data->fragmentMoveAngle[i] * 360.0 / 256), &sinTheta, &cosTheta);
             lateralSpeed = 8.0f;
             data->fragmentPosX[i] += lateralSpeed * sinTheta;
             data->fragmentPosZ[i] += lateralSpeed * cosTheta;
@@ -180,8 +180,8 @@ void entity_shattering_setupGfx(s32 entityIndex) {
         }
 
         guTranslateF(mtxTransInv, x_inv, y_inv, z_inv);
-        guRotateF(mtxRotX, data->fragmentRotX[i] * 360.0f * 0.00390625f, 1.0f, 0.0f, 0.0f);
-        guRotateF(mtxRotY, data->fragmentRotY[i] * 360.0f * 0.00390625f, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotX, data->fragmentRotX[i] * 360.0f / 256, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, data->fragmentRotY[i] * 360.0f / 256, 0.0f, 1.0f, 0.0f);
         guMtxCatF(mtxRotX, mtxRotY, mtxRotY);
         guMtxCatF(mtxRotY, mtxTransInv, mtxTransInv);
         guTranslateF(mtx, data->fragmentPosX[i], data->fragmentPosY[i], data->fragmentPosZ[i]);

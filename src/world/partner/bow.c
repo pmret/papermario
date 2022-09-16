@@ -71,7 +71,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((BowTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
             bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
             BowTweesterPhysicsPtr->angle = clamp_angle(BowTweesterPhysicsPtr->angle - BowTweesterPhysicsPtr->angularVelocity);
@@ -81,7 +81,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
                 BowTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((BowTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             BowTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (BowTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -169,10 +169,10 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         func_802BD4FC_323E4C(bow);
-        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
             if (func_800EA52C(9)) {
-                if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_200000) {
-                    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_200000;
+                if (playerStatus->animFlags & PA_FLAGS_200000) {
+                    playerStatus->animFlags &= ~PA_FLAGS_200000;
                     script->functionTemp[2] = disable_player_input();
                     D_802BE0C4 = TRUE;
                     script->functionTemp[0] = 20;
@@ -193,7 +193,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_100;
+            playerStatus->flags |= PS_FLAGS_100;
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             D_802BE0C4 = TRUE;
@@ -206,7 +206,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
                 enable_player_input();
                 D_802BE0C4 = FALSE;
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                playerStatus->flags &= ~PS_FLAGS_100;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1]--;
@@ -216,7 +216,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
                     }
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_100;
                     return ApiStatus_DONE2;
                 }
                 script->functionTemp[0] = 20;
@@ -226,8 +226,8 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 20:
-            if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
-                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+            if (playerStatus->flags & PS_FLAGS_800) {
+                playerStatus->flags &= ~PS_FLAGS_100;
                 if (D_802BE0C4) {
                     enable_player_input();
                     D_802BE0C4 = FALSE;
@@ -242,12 +242,12 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             partnerActionStatus->partnerActionState = 1;
             partnerActionStatus->actingPartner = 9;
-            playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
+            playerStatus->flags |= PS_FLAGS_8000;
             func_800EF4E0();
             bow->moveToPos.x = playerStatus->position.x;
             bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
             bow->moveToPos.z = playerStatus->position.z;
-            bow->currentAnim.w = 0x50002;
+            bow->currentAnim = 0x50002;
             bow->yaw = playerStatus->targetYaw;
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z,
@@ -255,12 +255,12 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->duration = 5;
             bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
             set_action_state(ACTION_STATE_RIDE);
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             script->functionTemp[0]++;
             break;
         case 21:
             if (collisionStatus->currentFloor >= 0 &&
-               (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) == 0) {
+               (playerStatus->animFlags & PA_FLAGS_100000) == 0) {
                 bow->moveToPos.x = playerStatus->position.x;
                 bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
                 bow->moveToPos.z = playerStatus->position.z;
@@ -274,7 +274,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
                     func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
-                    suggest_player_anim_setUnkFlag(0x10014);
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_Crouch);
                     sfx_play_sound_at_npc(SOUND_BOW_VANISH, 0, -4);
                     script->functionTemp[0] = 1;
                 }
@@ -290,7 +290,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     playerStatus->alpha1 = 128;
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->functionTemp[0]++;
-                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_100;
                     bow->flags |= 0x40;
                 }
 
@@ -317,7 +317,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             distance = dist2D(0.0f, 0.0f, partnerActionStatus->stickX, partnerActionStatus->stickY);
             if ((collisionStatus->currentFloor < 0) || distance > 10.0f ||
                  partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN) ||
-                 playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+                 playerStatus->flags & PS_FLAGS_800) {
                 if (func_802BD540_323E90() < 0) {
                     script->functionTemp[0]++;
                     script->functionTemp[1] = 3;
@@ -363,19 +363,19 @@ void func_802BDDF0_324740(Npc* bow) {
         enable_player_input();
     }
 
-    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_8000 | PLAYER_STATUS_FLAGS_JUMPING);
+    playerStatus->flags &= ~(PS_FLAGS_8000 | PS_FLAGS_JUMPING);
     bow->flags &= ~(NPC_FLAG_40 | NPC_FLAG_2);
     D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+    if (playerStatus->flags & PS_FLAGS_800) {
         actionState = ACTION_STATE_HIT_LAVA;
     }
 
     set_action_state(actionState);
     partnerActionStatus->partnerActionState = 0;
     partnerActionStatus->actingPartner = 0;
-    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+    playerStatus->flags &= ~PS_FLAGS_100;
     partner_clear_player_tracking(bow);
     D_802BE0C0 = FALSE;
 }

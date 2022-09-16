@@ -117,7 +117,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
             kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((KooperTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
 
             kooper->pos.x = entity->position.x + (sinAngle * KooperTweesterPhysicsPtr->radius);
             kooper->pos.z = entity->position.z - (cosAngle * KooperTweesterPhysicsPtr->radius);
@@ -129,7 +129,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
                 KooperTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((KooperTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
 
             KooperTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
@@ -215,7 +215,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                 partnerActionStatus->actingPartner = PARTNER_KOOPER;
                 script->functionTemp[0] = 5;
-                kooper->currentAnim.w = 0x20009;
+                kooper->currentAnim = 0x20009;
                 D_802BEC50 = 30;
             }
         }
@@ -254,15 +254,15 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             case 21:
                 //TODO: make if statement less bad
                 if ((((u8)playerStatus->actionState - 0x15) < 3U) || (playerStatus->timeInAir != 0)) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     script->functionTemp[0] = 0;
                     break;
                 } else {
-                    suggest_player_anim_clearUnkFlag(0x10006);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
                     kooper->moveToPos.x = D_802BEC70 = playerStatus->position.x;
                     kooper->moveToPos.y = D_802BEC74 = playerStatus->position.y;
                     kooper->moveToPos.z = D_802BEC78 = playerStatus->position.z;
-                    kooper->currentAnim.w = 0x20005;
+                    kooper->currentAnim = 0x20005;
                     add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
                                     playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
                     clamp = clamp_angle(playerStatus->targetYaw + ((D_802BEC58 != 0) ? 90.0f : -90.0f));
@@ -278,10 +278,10 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     }
                     disable_npc_blur(kooper);
                     if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
-                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
-                            suggest_player_anim_clearUnkFlag(0x10002);
+                        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                         } else {
-                            suggest_player_anim_clearUnkFlag(0x10005);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
                         }
                         script->functionTemp[0] = 0;
                         break;
@@ -289,15 +289,15 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->yaw = playerStatus->targetYaw;
                         kooper->jumpVelocity = 18.0f;
                         kooper->jumpScale = 3.0f;
-                        kooper->currentAnim.w = 0x2000A;
+                        kooper->currentAnim = 0x2000A;
                         kooper->collisionHeight = 12;
 
                         kooper->moveToPos.y = playerStatus->position.y;
                         kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
-                        playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
+                        playerStatus->flags |= PS_FLAGS_JUMPING;
                         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
 
-                        suggest_player_anim_clearUnkFlag(0x10007);
+                        suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
                         D_802BEC60 = 0;
                         sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, -4);
                         script->functionTemp[0] = 2;
@@ -315,7 +315,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     if (kooper->jumpVelocity < 0.0f) {
                         if (D_802BEC60 == 0) {
                             D_802BEC60 = 1;
-                            suggest_player_anim_clearUnkFlag(0x10008);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
                         }
                     }
 
@@ -339,7 +339,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->rotation.z = 0.0f;
                         kooper->planarFlyDist = 0.0f;
                         kooper->moveSpeed = 8.0f;
-                        kooper->currentAnim.w = 0x20009;
+                        kooper->currentAnim = 0x20009;
                         D_802BEB40_31CB60 = 1;
                         fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                 sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
@@ -577,7 +577,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             kooper->jumpVelocity = 0.0f;
             kooper->collisionHeight = 24;
-            kooper->currentAnim.w = 0x20000 | 4;
+            kooper->currentAnim = 0x20000 | 4;
             sfx_stop_sound(0x284);
             disable_npc_blur(kooper);
 
@@ -693,7 +693,7 @@ void world_kooper_pre_battle(Npc* kooper) {
         }
 
         D_802BEB40_31CB60 = 0;
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_JUMPING;
+        playerStatus->flags &= ~PS_FLAGS_JUMPING;
 
         kooper->jumpVelocity = 0.0f;
         kooper->flags &= ~NPC_FLAG_JUMPING;

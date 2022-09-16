@@ -348,9 +348,9 @@ void appendGfx_player_actor_blur(Actor* actor) {
                 guRotateF(mtxRotZ, rotZ, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(mtxRotX, mtxRotY, mtxTransform);
                 guMtxCatF(mtxTransform, mtxRotZ, mtxRotation);
-                guScaleF(mtxScale, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                                actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor * partTable->verticalStretch,
-                                actor->scale.z * SPRITE_PIXEL_SCALE);
+                guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                                actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * SPRITE_WORLD_SCALE_D);
                 guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
                 guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
                 guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
@@ -424,9 +424,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
     guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotX, mtxRotY, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
-    guScaleF(mtxScale, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.z * SPRITE_PIXEL_SCALE);
+    guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                    actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                    actor->scale.z * SPRITE_WORLD_SCALE_D);
     guMtxCatF(mtxScale, mtxRotation, mtxActor);
 
     numParts = actor->numParts;
@@ -453,7 +453,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
         }
 
         if (partTable->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
-            guScaleF(mtxPartScale, actor->scale.x * SPRITE_PIXEL_SCALE, actor->scale.y * SPRITE_PIXEL_SCALE, actor->scale.z * SPRITE_PIXEL_SCALE);
+            guScaleF(mtxPartScale, actor->scale.x * SPRITE_WORLD_SCALE_D, actor->scale.y * SPRITE_WORLD_SCALE_D, actor->scale.z * SPRITE_WORLD_SCALE_D);
         }
 
         j = decorationTable->unk_7D9;
@@ -608,7 +608,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                     spriteID = actorPart->unk_84;
                     if (spriteID >= 0) {
                         spr_update_sprite(spriteID, actorPart->currentAnimation, actorPart->animationRate);
-                        actorPart->unk_8C = func_802DE5C8(actorPart->unk_84);
+                        actorPart->animNotifyValue = spr_get_notify_value(actorPart->unk_84);
                     }
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
@@ -1057,7 +1057,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         if (part->unk_84 >= 0) {
             if (lastAnim != part->currentAnimation) {
                 spr_update_sprite(part->unk_84, part->currentAnimation, part->animationRate);
-                part->unk_8C = func_802DE5C8(part->unk_84);
+                part->animNotifyValue = spr_get_notify_value(part->unk_84);
             }
         }
         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
@@ -1293,7 +1293,7 @@ void update_player_actor_shadow(void) {
     Shadow* shadow;
     f32 x, y, z, distance;
 
-    parts->unk_8C = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
+    parts->animNotifyValue = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
 
     if (player->flags & ACTOR_FLAG_BLUR_ENABLED) {
         func_802549F4(player);
@@ -3675,7 +3675,7 @@ void func_8025D90C(ActorPart* part, s32 decorationIndex) {
             decor->stateResetTimer[decorationIndex]++;
             if (decor->stateResetTimer[decorationIndex] >= 4) {
                 decor->stateResetTimer[decorationIndex] = 0;
-                angle = (clamp_angle(-part->yaw) * TAU) / 360.0f;
+                angle = DEG_TO_RAD(clamp_angle(-part->yaw));
                 sinA = sin_rad(angle);
                 cosA = cos_rad(angle);
                 fx_walking_dust(0,
@@ -3705,7 +3705,7 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
                 x = part->currentPos.x;
                 y = part->currentPos.y + (part->size.y / 2);
                 z = part->currentPos.z - 5.0f;
-                // bug? perhaps this should be % 4?
+                // @bug? perhaps this should be % 4?
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }

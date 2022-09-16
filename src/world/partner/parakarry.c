@@ -73,7 +73,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((ParakarryTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
             parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
             ParakarryTweesterPhysicsPtr->angle = clamp_angle(ParakarryTweesterPhysicsPtr->angle - ParakarryTweesterPhysicsPtr->angularVelocity);
@@ -84,7 +84,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
                 ParakarryTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((ParakarryTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             ParakarryTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (ParakarryTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -140,6 +140,7 @@ s32 func_802BD558_319AC8(void) {
     f32 sp28, sp2C, sp30, sp34, sp38, sp3C, sp40, sp44;
     f32 colliderBaseHeight = gPlayerStatus.colliderHeight;
     s32 raycastResult;
+    s32 surfaceType;
 
     sp28 = gPlayerStatus.position.x;
     sp2C = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
@@ -149,10 +150,11 @@ s32 func_802BD558_319AC8(void) {
     raycastResult = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38,
                                                       &sp3C, &sp40, &sp44);
 
-    if (((get_collider_type_by_id(raycastResult) & 0xFF) - 2) < 2U) {
-        gPlayerStatus.unk_BF = 2;
+    surfaceType = get_collider_flags(raycastResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
+        gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         D_802BEBC0_31CBE0 = 0x15;
-        gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800;
+        gPlayerStatus.flags |= PS_FLAGS_800;
     }
 
     return raycastResult;
@@ -177,7 +179,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
     if (gCurrentEncounter.unk_08 == 0) {
         if (isInitialCall) {
             func_802BD514_319A84(parakarry);
-            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
                 if (partnerActionStatus->partnerAction_unk_1 == 0) {
                     if (!func_800EA52C(4)) {
                         return ApiStatus_DONE2;
@@ -191,7 +193,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
                     gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
-                    parakarry->currentAnim.w = 0x40009;
+                    parakarry->currentAnim = 0x40009;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                     parakarry->flags &= ~NPC_FLAG_4000;
@@ -251,11 +253,11 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     disable_npc_blur(parakarry);
                     D_802BEBC0_31CBE0 = 0x15;
                 } else {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     parakarry->moveToPos.x = playerStatus->position.x;
                     parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
                     parakarry->moveToPos.z = playerStatus->position.z;
-                    parakarry->currentAnim.w = 0x40003;
+                    parakarry->currentAnim = 0x40003;
                     add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
                     tempYaw = playerStatus->targetYaw;
 
@@ -276,9 +278,9 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         disable_npc_blur(parakarry);
                         parakarry->yaw = playerStatus->targetYaw;
                         parakarry->moveSpeed = 0.2f;
-                        parakarry->currentAnim.w = 0x4000A;
+                        parakarry->currentAnim = 0x4000A;
                         parakarry->planarFlyDist = 0;
-                        suggest_player_anim_setUnkFlag(0x8000D);
+                        suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
                         sfx_play_sound_at_npc(SOUND_2009, 0, -4);
                         gCollisionStatus.lastTouchedFloor = -1;
                         gCollisionStatus.currentFloor = -1;
@@ -292,7 +294,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
                     if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
                         D_802BEBC0_31CBE0 = (partnerActionStatus->pressedButtons & BUTTON_A) ? 0x14 : 0x15;
-                        suggest_player_anim_clearUnkFlag(0x10002);
+                        suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     } else {
                         tempFrameCounter = gGameStatusPtr->frameCounter;
                         tempFrameCounterU32 = tempFrameCounter;
@@ -300,7 +302,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         if (!((tempFrameCounter - tempFrameCounterU32 * 6) & 0xFFFF)) {
                             sfx_play_sound_at_npc(SOUND_2009, 0, -4);
                         }
-                        sp2C = fabsf(sin_rad((20 - D_802BEBC4) * 18 * TAU / 360.0f)) * 1.3;
+                        sp2C = fabsf(sin_rad(DEG_TO_RAD((20 - D_802BEBC4) * 18))) * 1.3;
                         playerStatus->position.y += sp2C;
                         parakarry->pos.y += sp2C;
                         x = parakarry->pos.x;
@@ -321,7 +323,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         y = playerStatus->position.y + playerStatus->colliderHeight * 0.5f;
                         halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
                         if (player_raycast_up_corners(playerStatus, &x, &y, &z, &sp2C, halfCollisionHeight) >= 0) {
-                            suggest_player_anim_clearUnkFlag(0x10002);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                             D_802BEBC0_31CBE0 = 0x15;
                             break;
                         }
@@ -362,7 +364,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             }
                         }
 
-                        if (testMove == 0 && !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8000)) {
+                        if (testMove == 0 && !(playerStatus->animFlags & PA_FLAGS_8000)) {
                             add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
                             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
                             parakarry->planarFlyDist += parakarry->moveSpeed;
@@ -373,11 +375,11 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         z = playerStatus->position.z;
                         sp2C = playerStatus->colliderHeight * 0.5f;
                         if (npc_raycast_down_around(0x10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
-                            u32 colliderType = (u8) get_collider_type_by_id(D_8010C978);
-                            if (colliderType == 2 || colliderType == 3) {
-                                playerStatus->unk_BF = 2;
+                            s32 surfaceType = get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+                            if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
+                                playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 D_802BEBC0_31CBE0 = 0x15;
-                                playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
+                                playerStatus->flags |= PS_FLAGS_800;
                             }
 
                             playerStatus->position.y += (y - playerStatus->position.y) * 0.25f;
@@ -394,13 +396,13 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                 parakarry->jumpScale = -0.01f;
                                 parakarry->moveToPos.y = playerStatus->position.y;
                                 parakarry->duration = 0;
-                                parakarry->currentAnim.w = 0x4000A;
+                                parakarry->currentAnim = 0x4000A;
                                 parakarry->animationSpeed = 1.8f;
                                 gCollisionStatus.currentFloor = -1;
                                 D_802BEBC0_31CBE0++;
                             }
                         } else {
-                            suggest_player_anim_clearUnkFlag(0x10002);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                             D_802BEBC0_31CBE0 = 0x15;
                         }
                     }
@@ -411,8 +413,8 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             case 2:
                 gCollisionStatus.currentFloor = func_802BD558_319AC8();
                 if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
-                    suggest_player_anim_setUnkFlag(0x8000D);
-                    if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+                    suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
+                    if (!(playerStatus->flags & PS_FLAGS_800)) {
                         if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
                             if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
                                 if (!parakarry->pos.x) {
@@ -436,7 +438,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
 
                             parakarry->pos.y += parakarry->jumpVelocity;
                             playerStatus->position.y += parakarry->jumpVelocity;
-                            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8000)) {
+                            if (!(playerStatus->animFlags & PA_FLAGS_8000)) {
                                 parakarry->moveSpeed += 0.1;
                                 if (parakarry->moveSpeed > 2.0) {
                                     parakarry->moveSpeed = 2.0f;
@@ -452,12 +454,12 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                 if (parakarry->planarFlyDist > 80.0f) {
                                     parakarry->animationSpeed += 0.5;
                                 }
-                                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8000)) {
+                                if (!(playerStatus->animFlags & PA_FLAGS_8000)) {
                                     x = playerStatus->position.x;
                                     y = playerStatus->position.y;
                                     z = playerStatus->position.z;
                                     if (npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter)) {
-                                        suggest_player_anim_clearUnkFlag(0x10002);
+                                        suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                                         D_802BEBC0_31CBE0 = 0x15;
                                     } else {
                                         x = parakarry->pos.x;
@@ -507,13 +509,13 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                 break;
                                             }
                                         }
-                                        suggest_player_anim_clearUnkFlag(0x10002);
+                                        suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                                         D_802BEBC0_31CBE0 = 0x15;
                                     }
                                     break;
                                 }
                             }
-                            suggest_player_anim_clearUnkFlag(0x10002);
+                            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                             D_802BEBC0_31CBE0 = 0x15;
                         }
                     } else {
@@ -533,7 +535,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
         }
 
         if (D_802BEBC0_31CBE0 == 0x16 || D_802BEBC0_31CBE0 == 0x15 || D_802BEBC0_31CBE0 == 0x14) {
-            parakarry->currentAnim.w = 0x40001;
+            parakarry->currentAnim = 0x40001;
             D_802BEBB0 = 0;
             parakarry->jumpVelocity = 0.0f;
             parakarry->flags &= ~ACTOR_FLAG_HP_OFFSET_BELOW;
@@ -549,13 +551,13 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             if (D_802BEBB8 != 0) {
                 enable_player_static_collisions();
             }
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+            if (!(playerStatus->flags & PS_FLAGS_800)) {
                 if (D_802BEBC0_31CBE0 == 0x14) {
                     start_bounce_b();
                 } else if (D_802BEBC0_31CBE0 == 0x15) {
                     start_falling();
                     gravity_use_fall_parms();
-                    playerStatus->flags |= PLAYER_STATUS_FLAGS_800000;
+                    playerStatus->flags |= PS_FLAGS_800000;
                 } else {
                     set_action_state(ACTION_STATE_IDLE);
                 }

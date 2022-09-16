@@ -14,7 +14,7 @@ ApiStatus func_80240960_86F460(Evt* script, s32 isInitialCall) {
         if (gCollisionStatus.currentFloor != D_80242930_871430[i]) {
             continue;
         }
-        if ((player->actionState == ACTION_STATE_GROUND_POUND) || (player->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((player->actionState == ACTION_STATE_SPIN_POUND) || (player->actionState == ACTION_STATE_TORNADO_POUND)) {
             return ApiStatus_BLOCK;
         }
     }

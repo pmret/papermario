@@ -1,7 +1,7 @@
 #include "kkj_23.h"
 #include "effects.h"
 
-void func_800E63A4(s32);
+void peach_force_disguise_action(s32);
 
 ApiStatus func_80240910_B03190(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -18,6 +18,6 @@ ApiStatus func_80240910_B03190(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802409AC_B0322C(Evt* script, s32 isInitialCall) {
-    func_800E63A4(0);
+    peach_force_disguise_action(FALSE);
     return ApiStatus_DONE2;
 }

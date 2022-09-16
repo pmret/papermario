@@ -31,7 +31,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 1:
             enemy->varTable[0] = 2;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_F;
+            npc->currentAnim = NPC_ANIM_jungle_guy_Palette_00_Anim_F;
         case 2:
             enemy->varTable[1]++;
             if (enemy->varTable[1] > 50) {
@@ -41,7 +41,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 3:
             enemy->varTable[0] = 4;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_10;
+            npc->currentAnim = NPC_ANIM_jungle_guy_Palette_00_Anim_10;
         case 4:
             enemy->varTable[1]++;
             if (enemy->varTable[1] == 25) {
@@ -54,7 +54,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 5:
             enemy->varTable[0] = 6;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_3;
+            npc->currentAnim = NPC_ANIM_jungle_guy_Palette_00_Anim_3;
             fx_sweat(0, npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionHeight, 0, 10);
         case 6:
             enemy->varTable[1]++;
@@ -100,7 +100,7 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
 
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

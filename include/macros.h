@@ -20,6 +20,8 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define PTR_LIST_END ((void*) -1)
+
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
@@ -79,12 +81,12 @@
 // Angle conversion macros
 #define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
 #define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+#define DEG_TO_RAD(deg) (((deg) * TAU) / 360.0f)
 
 // Should be 1.0f / 0x7FFF, but precision is wrong for a double
 #define SHT_MINV 3.051851e-05
 
-
-#define SPRITE_WORLD_SCALE   (5.0f/7.0f)
+#define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
 #define BATTLE_ENTITY_ID_MASK 0x800
@@ -112,9 +114,15 @@
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
-#define SPRITE_PIXEL_SCALE (5.0 / 7.0)
-
 #define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+
+// loads integrator with standard parameter set used for falling
+
+#define LOAD_INTEGRATOR_FALL(ptr) \
+    (ptr)[0] =  0.11430f; \
+    (ptr)[1] = -0.28710f; \
+    (ptr)[2] = -0.18230f; \
+    (ptr)[3] =  0.01152f; \
 
 /* common AI function and script variables */
 // ai script
@@ -137,10 +145,5 @@
 // projectile hitbox
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
-
-#ifdef PERMUTER
-#undef SCRIPT
-#define SCRIPT(...) {}
-#endif
 
 #endif

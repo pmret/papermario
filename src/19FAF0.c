@@ -1142,7 +1142,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     playerState->currentPos.y += playerVel;
     playerState->velocity -= playerState->acceleration;
     temp_f20_2 = playerState->speed;
-    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad((playerState->unk_24 * TAU) / 360.0f), playerState->angle);
+    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24), playerState->angle);
     playerState->unk_24 += playerState->unk_28;
     playerState->unk_24 = clamp_angle(playerState->unk_24);
     player->currentPos.x = playerState->currentPos.x;
@@ -1351,9 +1351,9 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
         player->footStepCounter++;
         playerState->distance = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
-            sfx_play_sound_at_position(SOUND_STEP1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
-            sfx_play_sound_at_position(SOUND_STEP2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
     }
 
@@ -1426,9 +1426,9 @@ ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
         player->footStepCounter++;
         playerState->distance = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
-            sfx_play_sound_at_position(SOUND_STEP1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
-            sfx_play_sound_at_position(SOUND_STEP2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
     }
 

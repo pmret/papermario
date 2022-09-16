@@ -408,7 +408,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
             parakarry->state.currentPos.x += parakarry->state.speed;
             *animationRatePtr = 1.0f;
             y = parakarry->state.currentPos.y;
-            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(parakarry->state.moveTime * TAU / 360.0f) * PI_S) * D_8023BD60_703AE0 + 0.5);
+            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(DEG_TO_RAD(parakarry->state.moveTime)) * PI_S) * D_8023BD60_703AE0 + 0.5);
             parakarry->state.moveTime += 6;
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 

@@ -40,9 +40,9 @@ ApiStatus func_80243380_803C00(Evt* script, s32 isInitialCall) {
     temp_v0->rot.x = 0.0f;
     temp_v0->rot.y = 0.0f;
     temp_v0->rot.z = 0.0f;
-    temp_v0->scale.x = SPRITE_WORLD_SCALE;
-    temp_v0->scale.y = SPRITE_WORLD_SCALE;
-    temp_v0->scale.z = SPRITE_WORLD_SCALE;
+    temp_v0->scale.x = SPRITE_WORLD_SCALE_F;
+    temp_v0->scale.y = SPRITE_WORLD_SCALE_F;
+    temp_v0->scale.z = SPRITE_WORLD_SCALE_F;
     temp_v0->foldID = func_8013A704(1);
     temp_v0->entityID = create_generic_entity_world(NULL, mac_01_UnkFoldFunc);
     evt_set_variable(script, MapVar(10), (s32) temp_v0);

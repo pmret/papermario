@@ -72,7 +72,7 @@ extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
-extern s16 D_800F7B80;
+extern s16 FootstepSoundSelector;
 extern u8* D_801512F0;
 extern u16 D_80151308;
 extern s32 gEntityHideMode;
@@ -192,11 +192,11 @@ extern UNK_FUN_PTR(D_8010C940);
 extern Entity* TweesterTouchingPartner;
 extern Entity* TweesterTouchingPlayer;
 extern UNK_FUN_PTR(D_8010C958);
-extern s32 D_8010C95C;
-extern s32 D_8010C96C;
+extern s32 PrevPlayerDirection;
+extern s32 PeachDisguiseNpcIndex;
 extern s32 D_8010C980;
 extern s32 D_8010C9A0;
-extern s32 D_800F7B40;
+extern s32 PrevPlayerCamRelativeYaw;
 extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
@@ -258,8 +258,8 @@ extern s32 D_80292110[];
 
 extern s32 D_8029FBD0;
 
-extern s32 KoopatrolDisguiseExtraAnims[];
-extern s32 HammerBroDisguiseExtraAnims[];
+extern AnimID KoopatrolDisguiseExtraAnims[];
+extern AnimID HammerBroDisguiseExtraAnims[];
 
 //various
 extern s32 D_802C05CC;

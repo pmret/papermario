@@ -36,7 +36,7 @@ extern ActorPartBlueprint bMarioParts[];
 
 extern PartnerDMAData D_80283F10[];
 
-s32 func_80265CE8(u32*, s32);
+s32 func_80265CE8(AnimID*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
@@ -605,7 +605,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
@@ -613,7 +613,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
         }
@@ -634,7 +634,7 @@ void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_sprite(part->unk_84, anim, part->animationRate);
-                    part->unk_8C = func_802DE5C8(part->unk_84);
+                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
                 }
                 break;
         }
@@ -713,7 +713,7 @@ void clear_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
 }
 
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -722,7 +722,7 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
 }
 
 void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -731,7 +731,7 @@ void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
 }
 
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 angleRad = DEG_TO_RAD(angleDeg);
     f32 sinAngleRad = sin_rad(angleRad);
     f32 cosAngleRad = cos_rad(angleRad);
 
@@ -752,7 +752,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
         D_802938A8 = 4;
     } else if (D_802938A8++ >= 4) {
         D_802938A8 = 0;
-        temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-angleDeg));
         temp_f20_2 = sin_rad(temp_f20);
         temp_f0 = cos_rad(temp_f20);
         fx_walking_dust(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
@@ -1218,7 +1218,7 @@ void load_partner_actor(void) {
 
             if (part->idleAnimations != NULL) {
                 part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
-                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | 0x80000000, NULL);
+                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | SPRITE_ID_TAIL_ALLOCATE, NULL);
             }
 
             if (i + 1 >= partCount) {
@@ -1484,7 +1484,7 @@ Actor* create_actor(Formation formation) {
         part->unk_84 = -1;
 
         if (part->idleAnimations != NULL) {
-            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~0x80000000;
+            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~SPRITE_ID_TAIL_ALLOCATE;
             part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 

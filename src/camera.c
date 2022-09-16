@@ -76,7 +76,7 @@ void func_80032970(Camera* camera, f32 arg1) {
         camera->unk_514 = 1.0f;
         camera->unk_510 = 0.0f;
     } else {
-        if (gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_400000) {
+        if (gPlayerStatusPtr->animFlags & PA_FLAGS_400000) {
             stickX = gPartnerActionStatus.stickX;
         } else {
             stickX = gPlayerStatusPtr->stickAxis[0];

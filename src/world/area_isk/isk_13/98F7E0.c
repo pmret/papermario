@@ -107,9 +107,9 @@ ApiStatus func_80241BA8_991388(Evt* script, s32 isInitialCall) {
     ambush->rot.x = 0.0f;
     ambush->rot.y = 0.0f;
     ambush->rot.z = 90.0f;
-    ambush->scale.x = SPRITE_WORLD_SCALE;
-    ambush->scale.y = SPRITE_WORLD_SCALE;
-    ambush->scale.z = SPRITE_WORLD_SCALE;
+    ambush->scale.x = SPRITE_WORLD_SCALE_F;
+    ambush->scale.y = SPRITE_WORLD_SCALE_F;
+    ambush->scale.z = SPRITE_WORLD_SCALE_F;
     ambush->renderYaw = 60.0f;
     ambush->color.r = 255.0f;
     ambush->color.g = 128.0f;

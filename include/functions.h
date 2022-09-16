@@ -201,7 +201,7 @@ s32 collision_main_above(void);
 void collision_lava_reset_check_additional_overlaps(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
-void peach_set_disguise_anim(s32);
+void peach_set_disguise_anim(AnimID);
 
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(void*),
@@ -608,9 +608,9 @@ s32 add_star_pieces(s32 amt);
 s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags);
 
 void set_action_state(s32 actionState);
-s32 get_collider_type_by_id(s32 colliderID);
-void suggest_player_anim_setUnkFlag(s32 arg0);
-void suggest_player_anim_clearUnkFlag(s32 arg0);
+s32 get_collider_flags(s32 colliderID);
+void suggest_player_anim_setUnkFlag(AnimID anim);
+void suggest_player_anim_clearUnkFlag(AnimID anim);
 void subtract_hp(s32 amt);
 void draw_status_ui(void);
 void open_status_menu_long(void);
@@ -732,7 +732,6 @@ void func_802B2000(void);
 void func_802B203C(void);
 void func_802B2078(void);
 void func_802B20B4(void);
-void func_802B6CF0_E2B3A0(void);
 void func_802B7000_E225B0(void);
 void func_802B70B4_E201C4(void);
 void func_802B7140(void);
@@ -740,7 +739,7 @@ void func_802B71C8(void);
 void func_802B71D4(void);
 void func_802B72C0_E22870(void);
 s32 func_802BD7DC(void);
-void func_802BE070_31DBE0(void);
+void world_watt_sync_held_position(void);
 void func_802BFB44_323694(f32 arg0);
 
 void initialize_curtains(void);

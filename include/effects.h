@@ -437,8 +437,19 @@ typedef struct GatherEnergyPinkFXData {
 } GatherEnergyPinkFXData; // size = 0x60
 
 typedef struct DropLeavesFXData {
-    /* 0x00 */ char todo[0];
-} DropLeavesFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+} DropLeavesFXData; // size = 0x30
 
 typedef struct DustFXData {
     /* 0x00 */ s32 unk_00;
@@ -526,10 +537,17 @@ typedef struct PurpleRingFXData {
 
 typedef struct FlameFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-} FlameFXData; // size = 0x??
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+} FlameFXData; // size = 0x34
 
 typedef struct StarsBurstFXData {
     /* 0x00 */ char todo[0];
@@ -775,8 +793,28 @@ typedef struct Effect3DFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ Vec3f pos;
-    /* 0x00 */ char todo[0];
-} Effect3DFXData; // size = unknown
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ s32 unk_58;
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ s32 unk_60;
+    /* 0x64 */ s32 unk_64;
+} Effect3DFXData; // size = 0x68
 
 typedef struct BlastFXData {
     /* 0x00 */ s16 unk_00;
@@ -872,9 +910,28 @@ typedef struct SnowfallFXData {
 } SnowfallFXData; // size = unknown
 
 typedef struct Effect46FXData {
-    /* 0x00 */ char unk_00[0x24];
-    /* 0x04 */ s32 unk_24;
-} Effect46FXData; // size = 0x44
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32* unk_04; // pointer to another struct?
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ s8 unk_44;
+    /* 0x45 */ s8 unk_45;
+    /* 0x46 */ s8 unk_46;
+    /* 0x47 */ char unk_47;
+} Effect46FXData; // size = 0x48
 
 typedef struct GatherMagicFXData {
     /* 0x00 */ s32 unk_00;
@@ -1281,8 +1338,35 @@ typedef struct ColdBreathFXData {
 } ColdBreathFXData; // size = 0x44
 
 typedef struct EmbersFXData {
-    /* 0x00 */ char todo[0];
-} EmbersFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ f32 unk_6C;
+} EmbersFXData; // size = 0x70
 
 typedef struct HieroglyphsFXData {
     /* 0x00 */ char todo[0];
@@ -1324,7 +1408,35 @@ typedef struct Effect75FXData {
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
-} Effect75FXData; // size = ?
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ f32 unk_6C;
+    /* 0x70 */ f32 unk_70;
+    /* 0x74 */ f32 unk_74;
+    /* 0x78 */ f32 unk_78;
+    /* 0x7C */ f32 unk_7C;
+} Effect75FXData; // size = 0x80
 
 typedef struct Effect76FXData {
     /* 0x00 */ char todo[0];

@@ -16,14 +16,14 @@ ApiStatus func_80240000_ABB290(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80240040_ABB2D0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerStatus *status = &gPlayerStatus;
+    PlayerStatus* status = &gPlayerStatus;
 
     if (evt_get_variable(script, *args++) == 0) {
-        status->unk_D0 = &D_8024160C_ABC89C;
+        status->slideParams = &D_8024160C_ABC89C;
     } else {
-        status->unk_D0 = &D_8024162C_ABC8BC;
+        status->slideParams = &D_8024162C_ABC8BC;
     }
 
-    status->flags |= PLAYER_STATUS_FLAGS_10;
+    status->flags |= PS_FLAGS_10;
     return ApiStatus_DONE2;
 }

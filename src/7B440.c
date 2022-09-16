@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) {
+    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -31,7 +31,7 @@ void update_player_input(void) {
     }
 
     if (playerStatus->animFlags & 8) {
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_200000;
+        playerStatus->animFlags |= PA_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }
 }
@@ -42,19 +42,19 @@ void reset_player_status(void) {
     f32 one;
     f32* floatsTemp;
 
-    D_8010C96C = -1;
+    PeachDisguiseNpcIndex = -1;
     TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
     D_8010C92C = 0;
-    D_8010C95C = 0;
+    PrevPlayerDirection = 0;
     D_8010C980 = 0;
-    D_800F7B40 = 0;
+    PrevPlayerCamRelativeYaw = 0;
     D_800F7B44 = 0;
     D_8010C938 = 0;
     D_8010C990 = 0.0f;
-    playerStatus->unk_0D = 1;
+    playerStatus->availableDisguiseType = 1;
     playerStatus->renderMode = 0xD;
 
     playerStatus->alpha1 = 255;
@@ -97,10 +97,10 @@ void reset_player_status(void) {
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
-    playerStatus->unk_90[CAM_DEFAULT] = 0.0f;
-    playerStatus->unk_90[CAM_BATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_TATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_3] = 0.0f;
+    playerStatus->flipYaw[CAM_DEFAULT] = 0.0f;
+    playerStatus->flipYaw[CAM_BATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_TATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_3] = 0.0f;
 
     mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 

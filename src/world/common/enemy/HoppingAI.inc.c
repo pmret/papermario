@@ -118,7 +118,7 @@ void N(HoppingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
     script->AI_TEMP_STATE = 3;
 }
 

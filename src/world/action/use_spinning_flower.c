@@ -1,54 +1,58 @@
 #include "common.h"
 
-extern s32 D_802B6ED0;          // some entity index
+extern s32 SpinningFlower_EntityIndex;
 extern f32 D_802B6ED4;
 extern f32 D_802B6ED8;
 extern f32 D_802B6EDC;
 extern f32 D_802B6EE0;
 extern f32 D_802B6EE4;
 extern f32 D_802B6EE8;
-extern f32 D_802B6EEC;
+extern f32 SpinningFlower_AngleToCenter;
 extern f32 D_802B6EF0;
 extern f32 D_802B6EF4;
 extern s16 D_802BCE30;
 extern s16 D_802BCE32;
 extern s16 D_802BCE34;
 
-s32 func_802B6000_E29470(void) {
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
-    f32 sp38;
-    f32 sp3C;
-    f32 sp40;
-    f32 sp44;
+enum {
+    SUBSTATE_ATTRACT    = 1,
+    SUBSTATE_EJECT      = 2,
+    SUBSTATE_SPIN_UP    = 3,
+    SUBSTATE_ASCEND_A   = 4,
+    SUBSTATE_ASCEND_B   = 5,
+    SUBSTATE_BOOST      = 10,
+    SUBSTATE_FINISH     = 11,
+};
 
-    sp28 = gPlayerStatus.position.x;
-    sp34 = gPlayerStatus.colliderHeight;
-    sp30 = gPlayerStatus.position.z;
-    sp2C = gPlayerStatus.position.y + (sp34 * 0.5);
-    return player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
+static s32 get_entity_below_spinning_flower(void) {
+    f32 posX, posY, posZ, height;
+    f32 hitRx, hitRz, hitDirX, hitDirZ;
+
+    posX = gPlayerStatus.position.x;
+    posZ = gPlayerStatus.position.z;
+    height = gPlayerStatus.colliderHeight;
+    posY = gPlayerStatus.position.y + (height * 0.5);
+    return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }
 
-void func_802B60A4_E29514(void) {
+void action_update_use_spinning_flower(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Entity* entityByIndex;
     s32* TempPointer;
-    s32 sp20;
-    f32 sp1C;
-    f32 sp18;
-    f32 sp14;
-    f32 sp10;
-    f32 tempY;
-    f32 tempDistance;
+    s32 entityID;
+    f32 inputMagnitude;
+    f32 inputAngle;
+    f32 dz;
+    f32 dx;
+    f32 ascentVelocity;
+    f32 distToCenter;
     s8 switchCondition;
 
-    if (playerStatus->flags & (1 << 31)) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
-        playerStatus->fallState = 1;
+        playerStatus->actionSubstate = SUBSTATE_ATTRACT;
         playerStatus->currentStateTime = 0;
         D_802B6EE4 = 0.0f;
         D_802B6EE8 = 0.0f;
@@ -56,27 +60,29 @@ void func_802B60A4_E29514(void) {
         D_802B6EDC = 3.0f;
         disable_player_static_collisions();
         disable_player_input();
-        playerStatus->flags |= 0x100000;
-        sp20 = gCollisionStatus.currentFloor;
+        playerStatus->flags |= PS_FLAGS_100000;
+        entityID = gCollisionStatus.currentFloor;
 
-        TempPointer = &D_802B6ED0;
-        if (sp20 >= 0){
-            if (!(sp20 & COLLISION_WITH_ENTITY_BIT)) {
-                D_802B6ED0 = -1;
+        TempPointer = &SpinningFlower_EntityIndex;
+        if (entityID >= 0){
+            if (!(entityID & COLLISION_WITH_ENTITY_BIT)) {
+                SpinningFlower_EntityIndex = -1;
             } else {
-                D_802B6ED0 = sp20 & 0x3FF;
+                SpinningFlower_EntityIndex = entityID & 0x3FF;
             }
         } else {
-            D_802B6ED0 = -1;
+            SpinningFlower_EntityIndex = -1;
         }
-        if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-            suggest_player_anim_clearUnkFlag(0x1002B);
+        if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_1002B);
         }
     }
-    switch (playerStatus->fallState) {
-        case 1:
+
+    switch (playerStatus->actionSubstate) {
+        case SUBSTATE_ATTRACT:
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
-            if (++D_802B6EE4 >= 20.0f) {
+            D_802B6EE4 += 1.0f;
+            if (D_802B6EE4 >= 20.0f) {
                 D_802B6EE4 = 20.0f;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
@@ -85,73 +91,74 @@ void func_802B60A4_E29514(void) {
                 D_802B6EF4++;
             }
             D_802B6EE8 += 8.0f;
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
-            if (D_802B6ED0 >= 0) {
-                entityByIndex = get_entity_by_index(D_802B6ED0);
-                tempDistance = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                D_802B6EEC = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                if (tempDistance > 4.0f) {
-                    tempDistance--;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
+            if (SpinningFlower_EntityIndex >= 0) {
+                entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
+                distToCenter = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                SpinningFlower_AngleToCenter = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                if (distToCenter > 4.0f) {
+                    distToCenter--;
                 }
-                sin_cos_rad(D_802B6EEC * TAU / 360.0f, &sp10, &sp14);
-                playerStatus->position.x = entityByIndex->position.x + (sp10 * tempDistance);
-                playerStatus->position.z = entityByIndex->position.z - (sp14 * tempDistance);
-                sin_cos_rad((D_802B6EEC - 91.0f) * TAU / 360.0f, &sp10, &sp14);
-                D_802B6ED4 = sp10 * D_802B6EDC;
-                D_802B6ED8 = -sp14 * D_802B6EDC;
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
+                playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
+                playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
+                D_802B6ED4 =  dx * D_802B6EDC;
+                D_802B6ED8 = -dz * D_802B6EDC;
             }
-            game_input_to_move_vector(&sp18, &sp1C);
-            if (sp1C != 0.0f) {
-                sin_cos_rad((sp18 * TAU) / 360.0f, &sp10, &sp14);
-                sp1C *= 0.03125f;
-                if (sp1C < 0.1) {
-                    sp1C = 0.1f;
+            game_input_to_move_vector(&inputAngle, &inputMagnitude);
+            if (inputMagnitude != 0.0f) {
+                sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
+                inputMagnitude *= 0.03125f;
+                if (inputMagnitude < 0.1) {
+                    inputMagnitude = 0.1f;
                 }
-                playerStatus->position.x += sp10 * sp1C;
-                playerStatus->position.z -= sp14 * sp1C;
+                playerStatus->position.x += dx * inputMagnitude;
+                playerStatus->position.z -= dz * inputMagnitude;
             }
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-            sp20 = func_802B6000_E29470();
-            if (sp20 < 0 || !(sp20 & COLLISION_WITH_ENTITY_BIT)) {
+            entityID = get_entity_below_spinning_flower();
+            if (entityID < 0 || !(entityID & COLLISION_WITH_ENTITY_BIT)) {
                 playerStatus->currentStateTime = 20;
                 D_802B6EE8 = 0.0f;
                 D_802B6EF4 = playerStatus->position.y;
-                playerStatus->fallState++;
+                playerStatus->actionSubstate++;
                 D_802B6EF0 = 1.6f;
-                playerStatus->flags |= 0x800000;
+                playerStatus->flags |= PS_FLAGS_800000;
             }
-            if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
-                suggest_player_anim_setUnkFlag(0x10007);
-                playerStatus->fallState = 3;
+            if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z &&
+                !(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+                suggest_player_anim_setUnkFlag(ANIM_Mario_AnimMidairStill);
+                playerStatus->actionSubstate = SUBSTATE_SPIN_UP;
                 playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;
                 gCollisionStatus.currentFloor = -1;
-                exec_entity_commandlist(get_entity_by_index(D_802B6ED0));
+                exec_entity_commandlist(get_entity_by_index(SpinningFlower_EntityIndex));
             }
             break;
-        case 2:
+        case SUBSTATE_EJECT:
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (--D_802B6EE4 < 0.0f) {
                 D_802B6EE4 = 0.0f;
-                playerStatus->flags &= ~0x100000;
+                playerStatus->flags &= ~PS_FLAGS_100000;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            sin_cos_rad((D_802B6EEC - 60.0f) * TAU / 360.0f, &sp10, &sp14);
+            sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 60.0f), &dx, &dz);
             D_802B6EDC += 0.2;
             D_802B6EF0 -= 0.72;
-            D_802B6ED4 = sp10 * D_802B6EDC;
-            D_802B6ED8 = -sp14 * D_802B6EDC;
+            D_802B6ED4 =  dx * D_802B6EDC;
+            D_802B6ED8 = -dz * D_802B6EDC;
             playerStatus->position.x += D_802B6ED4;
             playerStatus->position.z += D_802B6ED8;
             collision_lava_reset_check_additional_overlaps();
-            playerStatus->position.y = player_check_collision_below(D_802B6EF0, &sp20);
+            playerStatus->position.y = player_check_collision_below(D_802B6EF0, &entityID);
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-            if (sp20 >= 0) {
-                playerStatus->flags &= ~0x100000;
+            if (entityID >= 0) {
+                playerStatus->flags &= ~PS_FLAGS_100000;
                 enable_player_input();
                 enable_player_static_collisions();
                 set_action_state(ACTION_STATE_LAND);
@@ -161,26 +168,25 @@ void func_802B60A4_E29514(void) {
             }
     }
 
-    switchCondition = playerStatus->fallState - 3;
-    switch (switchCondition) {
-        case 0:
-            if (D_802B6ED0 >= 0) {
-                entityByIndex = get_entity_by_index(D_802B6ED0);
-                tempDistance = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                D_802B6EEC = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                if (tempDistance > 4.0f) {
-                    tempDistance -= 1.0f;
+    switch (playerStatus->actionSubstate) {
+        case SUBSTATE_SPIN_UP:
+            if (SpinningFlower_EntityIndex >= 0) {
+                entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
+                distToCenter = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                SpinningFlower_AngleToCenter = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                if (distToCenter > 4.0f) {
+                    distToCenter -= 1.0f;
                 }
-                sin_cos_rad(D_802B6EEC * TAU / 360.0f, &sp10, &sp14);
-                playerStatus->position.x = entityByIndex->position.x + (sp10 * tempDistance);
-                playerStatus->position.z = entityByIndex->position.z - (sp14 * tempDistance);
-                sin_cos_rad((D_802B6EEC - 91.0f) * TAU / 360.0f, &sp10, &sp14);
-                D_802B6ED4 = sp10 * D_802B6EDC;
-                D_802B6ED8 = -sp14 * D_802B6EDC;
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
+                playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
+                playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
+                D_802B6ED4 =  dx * D_802B6EDC;
+                D_802B6ED8 = -dz * D_802B6EDC;
             }
             D_802B6EE8 += 8.0f;
 
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -193,11 +199,11 @@ void func_802B60A4_E29514(void) {
                 playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
                 break;
             }
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++; // SUBSTATE_ASCEND_A
             playerStatus->currentStateTime = 30;
             phys_adjust_cam_on_landing();
             break;
-        case 1:
+        case SUBSTATE_ASCEND_A:
             D_802B6EE4 += 2.0f;
             if (D_802B6EE4 >= 45.0f) {
                 D_802B6EE4 = 45.0f;
@@ -208,51 +214,52 @@ void func_802B60A4_E29514(void) {
                 D_802B6EE0 = 45.0f;
             }
 
-            tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 4.0f;
-            playerStatus->position.y += tempY;
+            ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 4.0f;
+            playerStatus->position.y += ascentVelocity;
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-            tempDistance = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->position.x, playerStatus->position.z));
-            if (tempDistance > 40.0f) {
+            distToCenter = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->position.x, playerStatus->position.z));
+            if (distToCenter > 40.0f) {
                 if (D_802BCE30 + 30 < playerStatus->position.y) {
-                    playerStatus->fallState++;
-                    sp18 = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
-                    sin_cos_rad(sp18 * TAU / 360.0f, &sp10, &sp14);
+                    playerStatus->actionSubstate++; // SUBSTATE_ASCEND_B
+                    inputAngle = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
+                    sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                     playerStatus->currentStateTime = 64;
-                    D_802B6EEC = sp18;
-                    D_802B6ED4 = (sp10 * tempDistance) * 0.015625;
-                    D_802B6ED8 = (-sp14 * tempDistance) * 0.015625;
+                    SpinningFlower_AngleToCenter = inputAngle;
+                    D_802B6ED4 = (dx * distToCenter) * 0.015625;
+                    D_802B6ED8 = (-dz * distToCenter) * 0.015625;
                 }
                 break;
             }
             if (playerStatus->currentStateTime == 0) {
-                playerStatus->fallState = 0xA;
+                playerStatus->actionSubstate = SUBSTATE_BOOST;
                 playerStatus->currentStateTime = 20;
             } else {
                 playerStatus->currentStateTime--;
             }
             break;
-        case 2:
+        case SUBSTATE_ASCEND_B:
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
             if (playerStatus->currentStateTime != 0) {
                 playerStatus->currentStateTime--;
                 if (D_802B6EE0-- < 0.0f) {
                     D_802B6EE0 = 0.0f;
                 }
-                tempY = 2.0f * sin_rad(D_802B6EE0 * TAU / 360.0f);
+                ascentVelocity = 2.0f * sin_rad(DEG_TO_RAD(D_802B6EE0));
                 playerStatus->position.x += D_802B6ED4;
-                playerStatus->position.y += tempY;
+                playerStatus->position.y += ascentVelocity;
                 playerStatus->position.z += D_802B6ED8;
             } else {
-                playerStatus->fallState = 0xB;
+                playerStatus->actionSubstate = SUBSTATE_FINISH;
             }
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             break;
-        case 7:
-            if (++D_802B6EE4 >= 45.0f) {
+        case SUBSTATE_BOOST:
+            D_802B6EE4 += 1.0f;
+            if (D_802B6EE4 >= 45.0f) {
                 D_802B6EE4 = 45.0f;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
@@ -260,13 +267,13 @@ void func_802B60A4_E29514(void) {
             if (D_802B6EE0 > 45.0f) {
                 D_802B6EE0 = 45.0f;
             }
-            tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 3.0f;
-            playerStatus->position.y += tempY;
+            ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 3.0f;
+            playerStatus->position.y += ascentVelocity;
             if (playerStatus->currentStateTime != 0) {
                 playerStatus->currentStateTime--;
                 break;
             }
-        case 8:
+        case SUBSTATE_FINISH:
             enable_player_static_collisions();
             enable_player_input();
             playerStatus->flags &= ~0x100000;

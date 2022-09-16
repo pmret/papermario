@@ -68,7 +68,7 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2) {
     var_s2 = animData->rastersOffset + temp_v0_2;
     animData->rastersOffset = var_s2;
 
-    while (*var_s2 != (s32* )-1) {
+    while (*var_s2 != PTR_LIST_END) {
         temp_a1_3 = *var_s2 + temp_v0_2;
         *var_s2 = temp_a1_3;
         var_s2++;
@@ -201,7 +201,7 @@ void** spr_allocate_components(s32 arg0) {
         new_var++;
         var_a0_2 += 0x50;
     }
-    *new_var = (void* )-1;
+    *new_var = PTR_LIST_END;
     return heap;
 }
 #else

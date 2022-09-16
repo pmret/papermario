@@ -2,17 +2,16 @@
 #include "world/actions.h"
 #include "world/partner/goombario.h"
 
-s32 func_802B6000_E28A30(void) {
+s32 action_update_ride(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 oldFlags = playerStatus->flags;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
-            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_FLYING |
-            PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
+            PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE
         );
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -20,7 +19,7 @@ s32 func_802B6000_E28A30(void) {
         playerStatus->pitch = 0.0f;
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_400000) {  
+    if (playerStatus->animFlags & PA_FLAGS_400000) {  
         if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
             return func_802BD100_317020(oldFlags);
         }
@@ -36,7 +35,7 @@ s32 func_802B6000_E28A30(void) {
 
 extern f32 D_802B6770_E27C80;
 
-void func_802B609C_E28ACC(void) {
+void action_update_state_23(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 hitDirZ;
     f32 hitDirX;
@@ -54,12 +53,10 @@ void func_802B609C_E28ACC(void) {
     f32 zDelta;
     f32 playerOffsetTempVar;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(
-            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_FLYING | 
-            PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
-        );
-        playerStatus->fallState = 0;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED
+            | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
+        playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
@@ -68,21 +65,21 @@ void func_802B609C_E28ACC(void) {
         D_802B6770_E27C80 = D_8010C938;
     }
 
-    switch (playerStatus->fallState) {
+    switch (playerStatus->actionSubstate) {
         case 0:
-            playerStatus->fallState++;
+            playerStatus->actionSubstate++;
         case 1:
             break;
         default:
             return;
     }
 
-    sin_cos_rad((D_8010C990 * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(D_8010C990), &sinTheta, &cosTheta);
 
     miscTempVariable = 3.0f;
     miscTempVariable = sinTheta * miscTempVariable;
 
-    sin_cos_rad((D_802B6770_E27C80 * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(D_802B6770_E27C80), &sinTheta, &cosTheta);
     
     playerXOffset = sinTheta * miscTempVariable;
     playerZOffset = cosTheta * miscTempVariable;
@@ -125,19 +122,19 @@ void func_802B609C_E28ACC(void) {
     }
 }
 
-void func_802B6350_E28D80(void) {
+void action_update_launch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(0x80000000 | 0x80000 | 0x8 | 0x4 | 0x2);
-        playerStatus->fallState = 0;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
+        playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
-        if (playerStatus->animFlags & 0x1000) {
+        if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
             return;
         }
         playerStatus->currentStateTime = 5;
@@ -149,17 +146,17 @@ void func_802B6350_E28D80(void) {
     }
 }
 
-void func_802B63D4_E28E04(void) {
+void action_update_first_strike(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(0x80000000 | 0x8 | 0x4 | 0x2);
-        playerStatus->fallState = 0;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_AIRBORNE);
+        playerStatus->actionSubstate = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
-        suggest_player_anim_setUnkFlag(0x10017);
+        suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);
         playerStatus->currentStateTime = 30;
     }
 
@@ -170,48 +167,48 @@ void func_802B63D4_E28E04(void) {
     }
 }
 
-void func_802B6478_E28EA8(void) {
+void action_update_raise_arms(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->flags |= 0x80000;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags |= PS_FLAGS_80000;
         playerStatus->currentStateTime = 0;
-        playerStatus->fallState = 0;
+        playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
-        suggest_player_anim_setUnkFlag(0x1001F);
+        suggest_player_anim_setUnkFlag(ANIM_Mario_GotItem);
     }
 
-    if (!(playerStatus->animFlags & 0x200)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_RAISED_ARMS)) {
         set_action_state(ACTION_STATE_IDLE);
-        playerStatus->flags &= ~0x80000;
+        playerStatus->flags &= ~PS_FLAGS_80000;
     }
 }
 
-void func_802B6508_E28F38(void) {
+void action_update_pushing_block(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         f32 angle;
         f32 magnitude;
 
-        playerStatus->flags &= ~0x80000000;
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_60 = 0;
         playerStatus->currentStateTime = 5;
         player_input_to_move_vector(&angle, &magnitude);
 
         if (((angle >= 45.0f) && (angle <= 135.0f)) || ((angle >= 225.0f) && (angle <= 315.0f))) {
-            suggest_player_anim_setUnkFlag(0x80000 | 0x20);
+            suggest_player_anim_setUnkFlag(ANIM_Mario_80020);
         } else {
-            suggest_player_anim_clearUnkFlag(0x60000 | 0x4);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_60004);
         }
     }
 
     check_input_jump();
 
-    if (playerStatus->animFlags & 0x800000) {
+    if (playerStatus->animFlags & PA_FLAGS_800000) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
             if (playerStatus->currentStateTime == 0) {
@@ -221,19 +218,19 @@ void func_802B6508_E28F38(void) {
     }
 }
 
-void func_802B6638_E29068(void) {
+void action_update_talk(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_60 = 0;
 
-        if (!(playerStatus->animFlags & 0x1000)) {
-            suggest_player_anim_setUnkFlag(0x80007);
-        } else if (playerStatus->unk_C4 == 0) {
-            if (!(playerStatus->animFlags & 0x2000)) {
-                suggest_player_anim_setUnkFlag(0xC0000);
+        if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
+            suggest_player_anim_setUnkFlag(ANIM_Mario_80007);
+        } else if (playerStatus->peachItemHeld == 0) {
+            if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+                suggest_player_anim_setUnkFlag(ANIM_Peach_C0000);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
             }
@@ -241,12 +238,12 @@ void func_802B6638_E29068(void) {
         playerStatus->currentStateTime = 30;
     }
 
-    if (playerStatus->animFlags & 0x1000) {
+    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
-        } else if (playerStatus->unk_C4 == 0) {
-            if (!(playerStatus->animFlags & 0x2000)) {
-                suggest_player_anim_setUnkFlag(0xA0001);
+        } else if (playerStatus->peachItemHeld == 0) {
+            if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+                suggest_player_anim_setUnkFlag(ANIM_Peach_A0001);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);
             }

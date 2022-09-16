@@ -23,6 +23,6 @@ extern f32 D_800F7B90;
 extern Action PlayerActionsTable[39];
 
 extern DisguiseAnims BasicPeachDisguiseAnims[4];
-extern s32* PeachDisguiseExtraAnims[4];
+extern AnimID* PeachDisguiseExtraAnims[4];
 
 #endif

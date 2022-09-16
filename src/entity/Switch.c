@@ -15,8 +15,8 @@ void entity_GreenStompSwitch_idle(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
-            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_SPIN_POUND)
+            || (playerStatus->actionState == ACTION_STATE_TORNADO_POUND)) {
             exec_entity_commandlist(entity);
             data->greenMotionTimer = 8;
         }
@@ -75,8 +75,8 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
-            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_SPIN_POUND)
+            || (playerStatus->actionState == ACTION_STATE_TORNADO_POUND)) {
             exec_entity_commandlist(entity);
         }
     }
@@ -436,7 +436,7 @@ void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_1000000;
+    playerStatus->animFlags |= PA_FLAGS_1000000;
     data->baseScale.x = 1.0f;
     data->baseScale.y = 1.0f;
     data->baseScale.z = 1.0f;
