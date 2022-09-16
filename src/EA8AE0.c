@@ -39,7 +39,7 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024140C_EA9EEC(Evt* script) {
+ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
     dead_evt_set_variable(script, -0x02FAF080, (s32)dead_heap_malloc(0x780));
     D_80248380 = -1;
     func_8012DFE8(0, &func_802413C0_EA9EA0);
