@@ -221,10 +221,10 @@ void phys_update_action_state(void) {
         return;
     }
 
-    if (playerStatus->unk_C5 != 0) {
-        playerStatus->unk_C5--;
-        if (playerStatus->unk_C5 == 0) {
-            gCameras[CAM_DEFAULT].moveFlags |= 4;
+    if (playerStatus->camResetDelay != 0) {
+        playerStatus->camResetDelay--;
+        if (playerStatus->camResetDelay == 0) {
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_4;
         }
     }
 
@@ -540,24 +540,24 @@ void check_input_spin(void) {
     }
 }
 
-void peach_set_disguise_anim(s32 arg0) {
-    s32 listIndex = D_8010C96C;
+void peach_set_disguise_anim(AnimID anim) {
+    s32 listIndex = PeachDisguiseNpcIndex;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim = arg0;
+        get_npc_by_index(listIndex)->currentAnim = anim;
     }
 }
 
-void func_800E63A4(s32 arg0) {
+void peach_force_disguise_action(s32 useParasol) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (arg0 != 0) {
+    if (useParasol) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
         playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
-        gGameStatusPtr->peachFlags &= ~0x2;
+        gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
         playerStatus->peachDisguise = 0;
-        free_npc_by_index(D_8010C96C);
+        free_npc_by_index(PeachDisguiseNpcIndex);
         set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
@@ -573,9 +573,9 @@ void peach_check_for_parasol_input(void) {
         if (D_8010C92C != 0) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
-                if (gGameStatusPtr->peachFlags & 2) {
+                if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
                     playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
-                    gGameStatusPtr->peachFlags |= 2;
+                    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
@@ -583,7 +583,7 @@ void peach_check_for_parasol_input(void) {
                     }
                 }
             }
-        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_PARASOL && playerStatus->pressedButtons & B_BUTTON) {
             set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
         }
     }
@@ -592,8 +592,8 @@ void peach_check_for_parasol_input(void) {
 void peach_sync_disguise_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8010C96C >= 0) {
-        Npc* npc = get_npc_by_index(D_8010C96C);
+    if (PeachDisguiseNpcIndex >= 0) {
+        Npc* npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
         if (npc->flags & NPC_FLAG_40000) {
             npc->renderYaw = playerStatus->spriteFacingAngle;
@@ -628,8 +628,8 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     bpPtr->onUpdate = NULL;
     bpPtr->onRender = NULL;
 
-    D_8010C96C = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
-    npc = get_npc_by_index(D_8010C96C);
+    PeachDisguiseNpcIndex = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
+    npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
     disable_npc_shadow(npc);
 
@@ -648,13 +648,12 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     return npc;
 }
 
-void peach_disguise_check_overlaps(void) {
+s32 peach_disguise_check_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 yaw;
-    f32 sinTheta;
-    f32 cosTheta;
-    s32 phi_s1;
+    f32 yaw, dx, dy;
+    s32 radius;
+    s32 hitID;
     s32 i;
 
     if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
@@ -662,14 +661,17 @@ void peach_disguise_check_overlaps(void) {
     } else {
         yaw = camera->currentYaw - 90.0f;
     }
-    sin_cos_rad(clamp_angle(yaw) * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(clamp_angle(yaw)), &dx, &dy);
 
-    for (phi_s1 = 2, i = 2; i > 0; i--, phi_s1 += 18) {
-        f32 x = playerStatus->position.x + (sinTheta * phi_s1);
+    for (radius = 2, i = 2; i > 0; radius += 18, i--) {
+        f32 x = playerStatus->position.x + (dx * radius);
         f32 y = playerStatus->position.y + 4.0f;
-        f32 z = playerStatus->position.z - (cosTheta * phi_s1);
-        if (player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw) >= 0) {
+        f32 z = playerStatus->position.z - (dy * radius);
+        hitID = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        if (hitID >= 0) {
             break;
         }
     }
+
+    return hitID;
 }

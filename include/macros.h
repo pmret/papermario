@@ -20,6 +20,8 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define PTR_LIST_END ((void*) -1)
+
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
@@ -79,6 +81,7 @@
 // Angle conversion macros
 #define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
 #define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+#define DEG_TO_RAD(deg) (((deg) * TAU) / 360.0f)
 
 // Should be 1.0f / 0x7FFF, but precision is wrong for a double
 #define SHT_MINV 3.051851e-05

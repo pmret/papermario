@@ -66,7 +66,7 @@ void action_update_use_munchlesia(void) {
             }
             break;
         case SUBSTATE_CRASH:
-            if (playerStatus->unk_BC != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
                 playerStatus->actionSubstate = SUBSTATE_GET_UP;
                 playerStatus->currentStateTime = 15;

@@ -66,7 +66,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
         soundID = SOUND_2118;
     }
 
-    theta = (func_800E5348() * TAU) / 360.0f;
+    theta = DEG_TO_RAD(func_800E5348());
     sinTheta = sin_rad(theta) * 25.0f;
     cosTheta = cos_rad(theta) * -25.0f;
 
@@ -133,7 +133,7 @@ s32 func_802B62A4_E25174(void) {
         }
     }
 
-    sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
@@ -163,7 +163,7 @@ s32 func_802B62A4_E25174(void) {
             }
         }
 
-        sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+        sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
             y = playerY;
@@ -236,7 +236,7 @@ void action_update_hammer(void) {
         HammerHit->timer = 0;
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_BC = 0;
+        playerStatus->animNotifyValue = 0;
         HammerHit->hitID = func_802B62A4_E25174();
 
         if (gPlayerData.hammerLevel == 2) {
@@ -309,7 +309,7 @@ void func_802B6820_E256F0(void) {
         }
     }
 
-    sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
@@ -344,7 +344,7 @@ void func_802B6820_E256F0(void) {
                 yaw += -15.0f;
             }
         }
-        sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
+        sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
 
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
@@ -406,10 +406,9 @@ void func_802B6820_E256F0(void) {
         playerStatus->flags &= ~PS_FLAGS_200000;
     }
 
-    unk_BC = playerStatus->unk_BC;
-    if (unk_BC == 1) {
+    if (playerStatus->animNotifyValue == 1) {
         if (HammerHit->timer >= 7 && (playerStatus->pressedButtons & BUTTON_B)) {
-            HammerHit->unk_1C = unk_BC;
+            HammerHit->unk_1C = 1;
         }
 
         HammerHit->unk_14 = 0;

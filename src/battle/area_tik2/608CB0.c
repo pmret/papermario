@@ -31,7 +31,7 @@ ApiStatus func_802186D8_609188(Evt* script, s32 isInitialCall) {
     do {} while(0);
     var0 = evt_get_float_variable(script, arg0);
 
-    evt_set_float_variable(script, arg0, var1 * sin_rad(var0 * TAU / 360.0f));
+    evt_set_float_variable(script, arg0, var1 * sin_rad(DEG_TO_RAD(var0)));
 
     return ApiStatus_DONE2;
 }

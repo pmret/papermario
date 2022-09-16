@@ -102,7 +102,7 @@ void action_update_sliding(void) {
             } else {
                 playerStatus->actionSubstate = SUBSTATE_LAUNCH;
             }
-            sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sinA, &cosA);
+            sin_cos_rad(DEG_TO_RAD(D_802B6790), &sinA, &cosA);
             playerStatus->position.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
             snd_stop_sound(SOUND_167);
             break;
@@ -158,7 +158,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            if (playerStatus->unk_BC != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
                 playerStatus->actionSubstate++; // SUBSTATE_GET_UP
             }
@@ -168,7 +168,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            if (playerStatus->unk_BC != 0) {
+            if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                 sfx_play_sound_at_player(SOUND_DUST_OFF, 0);
                 playerStatus->currentStateTime = 15;

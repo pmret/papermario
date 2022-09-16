@@ -9,7 +9,7 @@ ApiStatus N(UnkAngleFunc2)(Evt* script, s32 isInitialCall) {
     s32 a4 = *args++;
     s32 a5 = *args++;
     s32 a6 = *args++;
-    f32 temp1 = var0 * TAU / 360.0f;
+    f32 temp1 = DEG_TO_RAD(var0);
     f32 fout1 = sin_rad(temp1) * 150.0f + 0.0f;
     f32 fout2 = sin_rad(temp1 * 8.0f) * 10.0f + 0.0f;
     f32 fout3 = cos_rad(temp1) * 150.0f / 20.0f + -50.0f;

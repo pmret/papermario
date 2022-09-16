@@ -672,7 +672,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta) {
     f32 sinTheta;
     f32 cosTheta;
 
-    sin_cos_rad((theta * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(theta), &sinTheta, &cosTheta);
     *x += r * sinTheta;
     *y -= r * cosTheta;
 }

@@ -92,8 +92,8 @@ void action_update_hit_lava(void) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }
             if (playerStatus->position.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
-                sin_cos_rad((LaunchInterpPhase * TAU) / 360.0f, &dx, &dy);
-                LaunchVelocity = sin_rad((LaunchInterpPhase * TAU) / 360.0f) * 16.0f;
+                sin_cos_rad(DEG_TO_RAD(LaunchInterpPhase), &dx, &dy);
+                LaunchVelocity = sin_rad(DEG_TO_RAD(LaunchInterpPhase)) * 16.0f;
                 if (LaunchVelocity < -1.0f) {
                     LaunchVelocity = -1.0f;
                 }
@@ -129,7 +129,7 @@ void action_update_hit_lava(void) {
             break;
         case SUBSTATE_RETURN_MOTION:
             ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
-            returnRadians = ReturnAngle * TAU  / 360.0f;
+            returnRadians = DEG_TO_RAD(ReturnAngle);
             // update motion along x axis
             componentSpeed = playerStatus->currentSpeed * sin_rad(returnRadians);
             playerStatus->position.x += componentSpeed;

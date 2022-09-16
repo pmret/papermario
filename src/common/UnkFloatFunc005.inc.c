@@ -65,11 +65,11 @@ ApiStatus N(UnkFloatFunc005)(Evt* script, s32 isInitialCall) {
             vt2 = script->varTable[5];
             vt3 = script->varTable[6];
             vt4 = script->varTable[7];
-            temp_f20 = vt0 * (1.0 - sin_rad((script->varTable[9] * TAU) / 360.0f));
-            vt0 = (temp_f20 + (vt3 * sin_rad((script->varTable[9] * TAU) / 360.0f)));
-            vt1 = vt1 + (sin_rad(((script->varTable[9] * 2) * TAU) / 360.0f) * 90.0f);
-            temp_f20_2 = vt2 * (1.0 - sin_rad((script->varTable[9] * TAU) / 360.0f));
-            vt2 = temp_f20_2 + (vt4 * sin_rad((script->varTable[9] * TAU) / 360.0f));
+            temp_f20 = vt0 * (1.0 - sin_rad(DEG_TO_RAD(script->varTable[9])));
+            vt0 = (temp_f20 + (vt3 * sin_rad(DEG_TO_RAD(script->varTable[9]))));
+            vt1 = vt1 + sin_rad(DEG_TO_RAD(script->varTable[9] * 2)) * 90.0f;
+            temp_f20_2 = vt2 * (1.0 - sin_rad(DEG_TO_RAD(script->varTable[9])));
+            vt2 = temp_f20_2 + (vt4 * sin_rad(DEG_TO_RAD(script->varTable[9])));
             if (script->varTable[9] == 45) {
                 script->varTable[11] = 1;
             }
@@ -84,11 +84,11 @@ ApiStatus N(UnkFloatFunc005)(Evt* script, s32 isInitialCall) {
             vt2 = script->varTable[5];
             vt3 = script->varTable[6];
             vt4 = script->varTable[7];
-            temp_f20_3 = vt0 * (1.0 - sin_rad((script->varTable[9] * TAU) / 360.0f));
-            vt0 = (temp_f20_3 + (vt3 * sin_rad((script->varTable[9] * TAU) / 360.0f)));
-            vt1 = vt1 + (sin_rad(((script->varTable[9] * 2) * TAU) / 360.0f) * 90.0f);
-            temp_f20_4 = vt2 * (1.0 - sin_rad((script->varTable[9] * TAU) / 360.0f));
-            vt2 = temp_f20_4 + (vt4 * sin_rad((script->varTable[9] * TAU) / 360.0f));
+            temp_f20_3 = vt0 * (1.0 - sin_rad(DEG_TO_RAD(script->varTable[9])));
+            vt0 = (temp_f20_3 + (vt3 * sin_rad(DEG_TO_RAD(script->varTable[9]))));
+            vt1 = vt1 + sin_rad(DEG_TO_RAD(script->varTable[9] * 2)) * 90.0f;
+            temp_f20_4 = vt2 * (1.0 - sin_rad(DEG_TO_RAD(script->varTable[9])));
+            vt2 = temp_f20_4 + (vt4 * sin_rad(DEG_TO_RAD(script->varTable[9])));
             if (script->varTable[9] == 90) {
                 script->varTable[11] = 2;
             }

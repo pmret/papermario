@@ -56,7 +56,7 @@ void entity_TrumpetPlant_idle(Entity* entity) {
 void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+    angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
     xOffset = -26.0 * cos_rad(angle);
     zOffset = 6.0 * sin_rad(angle);
     fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
@@ -69,7 +69,7 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
     if (data->numCoins < 3) {
         f32 xOffset, zOffset, angle;
 
-        angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+        angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 
@@ -182,7 +182,7 @@ void entity_MunchlesiaChewing_init(Entity* entity) {
 
 void func_802BC3E4_E2ED14(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    gPlayerStatus.position.y = data->unk_0C + (sin_rad((data->unk_10 * TAU) / 360.0f) * 3.0f);
+    gPlayerStatus.position.y = data->unk_0C + (sin_rad(DEG_TO_RAD(data->unk_10)) * 3.0f);
 
     data->unk_10 += 24.0f;
     if (data->unk_10 > 360.0f) {

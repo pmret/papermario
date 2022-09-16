@@ -2700,6 +2700,7 @@ enum PeachStatusFlags {
     PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
     PEACH_STATUS_FLAG_DISGUISED         = 0x02,
     PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
+    PEACH_STATUS_FLAG_8                 = 0x08,
     PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
 };
 

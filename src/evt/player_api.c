@@ -854,7 +854,7 @@ void virtual_entity_render_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
 }
 
 void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 magnitude, f32 angle) {
-    f32 theta = (angle * TAU) / 360.0f;
+    f32 theta = DEG_TO_RAD(angle);
     f32 sinTheta = sin_rad(theta);
     f32 cosTheta = cos_rad(theta);
 

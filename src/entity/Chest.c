@@ -182,7 +182,7 @@ void entity_Chest_open(Entity* entity) {
             if (data->lidAnimInterpPhase >= 180.0f) {
                 data->openState++;
             }
-            temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 3.0f;
+            temp = sin_rad(DEG_TO_RAD(data->lidAnimInterpPhase)) * 3.0f;
             data->lidAngle -= temp;
             break;
         case 3:
@@ -191,7 +191,7 @@ void entity_Chest_open(Entity* entity) {
                 data->postLidAnimDelay = 10;
                 data->openState++;
             }
-            temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 2.0f;
+            temp = sin_rad(DEG_TO_RAD(data->lidAnimInterpPhase)) * 2.0f;
             data->lidAngle -= temp;
             break;
         case 4:
@@ -225,7 +225,7 @@ void entity_Chest_close(Entity* entity) {
                 data->lidAnimInterpPhase = 180.0f;
                 data->state++;
             }
-            delta = 2.6f * sin_rad(data->lidAnimInterpPhase * TAU / 360.0f);
+            delta = 2.6f * sin_rad(DEG_TO_RAD(data->lidAnimInterpPhase));
             data->lidAngle += delta;
             break;
         case 2:
@@ -235,7 +235,7 @@ void entity_Chest_close(Entity* entity) {
                 data->postLidAnimDelay = 10;
                 data->state++;
             }
-            delta = 2.0f * sin_rad(data->lidAnimInterpPhase * TAU / 360.0f);
+            delta = 2.0f * sin_rad(DEG_TO_RAD(data->lidAnimInterpPhase));
             data->lidAngle += delta;
             break;
         case 3:
@@ -299,7 +299,7 @@ void entity_GiantChest_open(Entity* entity) {
             break;
         case 2:
             if (chest->giveItemHeightInterpPhase < 140.0f) {
-                chest->itemEntityPos.y += cos_rad(chest->giveItemHeightInterpPhase * TAU / 360.0f) * 3.0f;
+                chest->itemEntityPos.y += cos_rad(DEG_TO_RAD(chest->giveItemHeightInterpPhase)) * 3.0f;
             } else {
                 dy = (chest->itemEntityPos.y - playerStatus->position.y - 30.0f) * 0.25f;
                 if (dy <= 0.4) {
@@ -307,7 +307,7 @@ void entity_GiantChest_open(Entity* entity) {
                 }
                 chest->itemEntityPos.y -= dy;
             }
-            giveItemLerpAlpha = sin_rad(chest->giveItemRadiusInterpPhase * TAU / 360.0f);
+            giveItemLerpAlpha = sin_rad(DEG_TO_RAD(chest->giveItemRadiusInterpPhase));
             theta = intermediateTheta = clamp_angle(atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z));
 
             if (gGameStatusPtr->areaID == AREA_KZN) {
@@ -331,8 +331,8 @@ void entity_GiantChest_open(Entity* entity) {
                 chest->state++;
                 if (chest->itemID != 0) {
                     suggest_player_anim_setUnkFlag(ANIM_Mario_6000C);
-                    sin_cos_rad((90.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinRight, &cosRight);
-                    sin_cos_rad((180.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinFwd, &cosFwd);
+                    sin_cos_rad(DEG_TO_RAD(90.0f - gCameras[CAM_DEFAULT].currentYaw), &sinRight, &cosRight);
+                    sin_cos_rad(DEG_TO_RAD(180.0f - gCameras[CAM_DEFAULT].currentYaw), &sinFwd, &cosFwd);
                     horizontalOffset = 0.0f;
                     depthOffset = 4.0f;
                     //RadialFlowOut
@@ -381,7 +381,7 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
 
     if (data->itemID != 0) {
-        angle = (entity->rotation.y * TAU) / 360.0f;
+        angle = DEG_TO_RAD(entity->rotation.y);
         data->itemEntityPos.x = entity->position.x + (sin_rad(angle) * 10.0f);
         data->itemEntityPos.y = entity->position.y;
         data->itemEntityPos.z = entity->position.z + (cos_rad(angle) * 10.0f);

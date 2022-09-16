@@ -71,7 +71,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((BowTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
             bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
             BowTweesterPhysicsPtr->angle = clamp_angle(BowTweesterPhysicsPtr->angle - BowTweesterPhysicsPtr->angularVelocity);
@@ -81,7 +81,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
                 BowTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((BowTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             BowTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (BowTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
