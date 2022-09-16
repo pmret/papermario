@@ -1,9 +1,9 @@
 #include "common.h"
 #include "effects.h"
 
-#define NAMESPACE b_area_kzn2
+#define NAMESPACE b_area_kzn2_petit_piranha
 
-ApiStatus func_80218D40_59F420(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetFlameUnk2C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;
@@ -14,7 +14,7 @@ ApiStatus func_80218D40_59F420(Evt* script, s32 isInitialCall) {
 }
 
 
-ApiStatus func_80218D90_59F470(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetFlameX)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;
