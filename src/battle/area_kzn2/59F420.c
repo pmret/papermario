@@ -13,7 +13,6 @@ ApiStatus N(SetFlameUnk2C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus N(SetFlameX)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
