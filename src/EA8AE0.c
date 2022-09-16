@@ -40,12 +40,11 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
-    dead_evt_set_variable(script, -0x02FAF080, (s32)dead_heap_malloc(0x780));
+    dead_evt_set_variable(script, -0x02FAF080, (s32) dead_heap_malloc(0x780));
     D_80248380 = -1;
-    func_8012DFE8(0, func_802413C0_EA9EA0);
+    func_8012DFE8(0, &func_802413C0_EA9EA0); // & required to match
     return ApiStatus_DONE2;
 }
-
 
 #include "world/common/StashVars.inc.c"
 
@@ -55,10 +54,10 @@ ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-#ifdef NON_MATCHING 
+#ifdef NON_MATCHING
 ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos; 
-    
+    Bytecode* args = script->ptrReadPos;
+
     if (isInitialCall) {
         D_80243DD8_EAC8B8 = 0;
     }
@@ -66,15 +65,15 @@ ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
         D_80243DD8_EAC8B8 = 0;
 
         dead_evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
-                
+
         return ApiStatus_DONE2;
     }
 
     return ApiStatus_BLOCK;
 }
-#else 
+#else
 INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
-#endif 
+#endif
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
