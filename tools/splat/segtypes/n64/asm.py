@@ -13,7 +13,8 @@ class N64SegAsm(CommonSegAsm):
         ret.append("# assembler directives")
         ret.append(".set noat      # allow manual use of $at")
         ret.append(".set noreorder # don't insert nops after branches")
-        ret.append(".set gp=64     # allow use of 64-bit general purpose registers")
+        if options.get_add_set_gp_64():
+            ret.append(".set gp=64     # allow use of 64-bit general purpose registers")
         ret.append("")
         preamble = options.get_generated_s_preamble()
         if preamble:

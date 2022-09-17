@@ -27217,7 +27217,6 @@ D_802DFEB0 = 0x802DFEB0; // type:data
 D_802DFEB8 = 0x802DFEB8; // type:data
 PlayerRasterSetsLoaded = 0x802E004C; // type:data
 PlayerRasterBufferSetOffsets = 0x802E0050; // type:data
-D_802E0080 = 0x802E0080; // type:data
 D_802E0090 = 0x802E0090; // type:data
 PlayerRasterHeader = 0x802E0C10; // type:data
 D_802E0C14 = 0x802E0C14; // type:data

@@ -193,7 +193,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + gHudElementSizes[preset].size);
-                        nuPiReadRom((s32)icon_present_VRAM + raster, entry->data, gHudElementSizes[preset].size);
+                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, gHudElementSizes[preset].size);
                         *gHudElementCacheSize += gHudElementSizes[preset].size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
@@ -229,7 +229,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + 32);
-                        nuPiReadRom((s32)icon_present_VRAM + palette, entry->data, 32);
+                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 32);
                         *gHudElementCacheSize += 32;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;

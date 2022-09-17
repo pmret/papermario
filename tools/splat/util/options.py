@@ -256,14 +256,9 @@ def linker_discard_section() -> bool:
     return opts.get("linker_discard_section", True)
 
 
-# Determines whether to use a silly hack in the linker script to maybe help enforce alignment (DO NOT USE?)
-def enable_ld_alignment_hack() -> bool:
-    return opts.get("enable_ld_alignment_hack", False)
-
-
 # Determines the list of section labels that are to be added to the linker script
 def ld_section_labels() -> List[str]:
-    return opts.get("ld_section_labels", [".text", ".data", ".bss"])
+    return opts.get("ld_section_labels", [".text", ".data", ".rodata", ".bss"])
 
 
 ################################################################################
@@ -362,6 +357,11 @@ def get_mips_abi_gpr() -> str:
 # For more info, see https://gist.github.com/EllipticEllipsis/27eef11205c7a59d8ea85632bc49224d
 def get_mips_abi_float_regs() -> str:
     return opts.get("mips_abi_float_regs", "numeric")
+
+
+# Determines whether to ad ".set gp=64 to asm/hasm files"
+def get_add_set_gp_64() -> bool:
+    return opts.get("add_set_gp_64", True)
 
 
 ################################################################################

@@ -14,7 +14,7 @@ NUPiOverlaySegment D_8007798C = {
     .textStart = filemenu_TEXT_START,
     .textEnd = filemenu_TEXT_END,
     .dataStart = filemenu_DATA_START,
-    .dataEnd = filemenu_DATA_END,
+    .dataEnd = filemenu_RODATA_END,
     .bssStart = filemenu_BSS_START,
     .bssEnd = filemenu_BSS_END,
 };
