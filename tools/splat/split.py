@@ -20,7 +20,7 @@ from util.symbols import Symbol
 
 from intervaltree import Interval, IntervalTree
 
-VERSION = "0.9.5"
+VERSION = "0.10.0"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -57,7 +57,7 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
     segment_roms = IntervalTree()
     segment_rams = IntervalTree()
 
-    seen_segment_names: Set[str] = set()
+    segments_by_name: Dict[str, Segment] = {}
     ret = []
 
     for i, seg_yaml in enumerate(config_segments):
@@ -77,10 +77,10 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         )
 
         if segment.require_unique_name:
-            if segment.name in seen_segment_names:
+            if segment.name in segments_by_name:
                 log.error(f"segment name '{segment.name}' is not unique")
 
-            seen_segment_names.add(segment.name)
+            segments_by_name[segment.name] = segment
 
         ret.append(segment)
         if (
@@ -95,6 +95,14 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
             and segment.vram_start != segment.vram_end
         ):
             segment_rams.addi(segment.vram_start, segment.vram_end, segment)
+
+    for segment in ret:
+        if segment.follows_vram:
+            if segment.follows_vram not in segments_by_name:
+                log.error(
+                    f"segment '{segment.name}' follows_vram segment'{segment.follows_vram}' does not exist"
+                )
+            segment.follows_vram_segment = segments_by_name[segment.follows_vram]
 
     return ret
 

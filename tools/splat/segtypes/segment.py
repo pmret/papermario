@@ -43,6 +43,12 @@ def parse_segment_section_order(segment: Union[dict, list]) -> List[str]:
     return default
 
 
+def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict):
+        return segment.get("follows_vram", None)
+    return None
+
+
 class Segment:
     require_unique_name = True
 
@@ -177,12 +183,14 @@ class Segment:
             int, List[Symbol]
         ] = {}  # Symbols known to be in this segment
         self.given_section_order: List[str] = options.get_section_order()
+        self.follows_vram: Optional[str] = None
 
         self.given_symbol_name_format = symbol_name_format
         self.given_symbol_name_format_no_rom = symbol_name_format_no_rom
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
+        self.follows_vram_segment: Optional[Segment] = None
 
         self.args: List[str] = args
         self.yaml = yaml
@@ -241,6 +249,9 @@ class Segment:
             yaml=yaml,
         )
         ret.given_section_order = parse_segment_section_order(yaml)
+
+        if not ret.follows_vram:
+            ret.follows_vram = parse_segment_follows_vram(yaml)
 
         if not ret.align:
             ret.align = parse_segment_align(yaml)

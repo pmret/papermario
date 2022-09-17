@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, Optional, Union, List
+from typing import Dict, Optional, OrderedDict, Union, List
 from pathlib import Path
 from segtypes.common.data import CommonSegData
 from segtypes.n64.img import N64SegImg
@@ -128,33 +128,44 @@ class LinkerWriter:
         entries = segment.get_linker_entries()
         self.entries.extend(entries)
 
-        self._begin_segment(segment)
-
         seg_name = get_segment_cname(segment)
 
-        section_label_types = options.ld_section_labels()
+        section_labels: OrderedDict[str, LinkerSection] = OrderedDict(
+            {
+                l: LinkerSection(l)
+                for l in options.get_section_order()
+                if l in options.ld_section_labels()
+            }
+        )
 
-        section_labels = [
-            LinkerSection(l)
-            for l in options.get_section_order()
-            if l in section_label_types
-        ]
+        # Start the first linker section
 
-        force_new_section = False
-        cur_section = None
+        self._write_symbol(f"{seg_name}_ROM_START", "__romPos")
+
+        if entries[0].section_type == ".bss":
+            self._begin_bss_segment(segment, is_first=True)
+            self._write_symbol(f"{seg_name}_BSS_START", ".")
+            if ".bss" in section_labels:
+                section_labels[".bss"].started = True
+        else:
+            self._begin_segment(segment)
 
         last_seen_sections: Dict[LinkerEntry, str] = {}
 
+        # Find where sections are last seen
         for entry in reversed(entries):
             if (
-                entry.section_type in section_label_types
+                entry.section_type in section_labels.keys()
                 and entry.section_type not in last_seen_sections.values()
             ):
                 last_seen_sections[entry] = entry.section_type
 
+        cur_section = None
+        prev_section = None
         for entry in entries:
-            new_section = False
-            cur_section = entry.section_type
+            entering_bss = False
+            leaving_bss = False
+            cur_section = entry.section
 
             if cur_section == "linker":
                 self._end_block()
@@ -164,26 +175,21 @@ class LinkerWriter:
                 self._write_symbol(f"{get_segment_cname(entry.segment)}_OFFSET", f".")
                 continue
 
-            for i, section in enumerate(section_labels):
-                if not section.started and section.section_type == cur_section:
-                    section.started = True
-                    new_section = True
-                    if cur_section != ".bss":  # BSS sections are handled differently
+            for i, section in enumerate(section_labels.values()):
+                # If we haven't seen this section yet
+                if not section.started and section.section_type == entry.section_type:
+                    if prev_section == ".bss":
+                        leaving_bss = True
+                    elif cur_section == ".bss":
+                        entering_bss = True
+
+                    if not (
+                        entering_bss or leaving_bss
+                    ):  # Don't write a START symbol if we are about to end the section
                         self._write_symbol(
-                            f"{seg_name}{cur_section.upper()}_START", "."
+                            f"{seg_name}{entry.section_type.upper()}_START", "."
                         )
-
-            # Create new sections for non-subalign alignment (hack)
-            if options.enable_ld_alignment_hack():
-                start = entry.segment.rom_start
-                if isinstance(start, int):
-                    if start % 0x10 != 0 and i != 0 or force_new_section:
-                        self._end_block()
-                        self._begin_segment(entry.segment, mid_segment=True)
-                        force_new_section = False
-
-                    if start % 0x10 != 0 and i != 0:
-                        force_new_section = True
+                        section_labels[entry.section_type].started = True
 
             if (
                 entry.object_path
@@ -198,24 +204,24 @@ class LinkerWriter:
                 )
                 self._write_symbol(path_cname, ".")
 
-            # Write out manual entries for images inside .data segments
-            seg = entry.segment
-            if isinstance(seg, CommonSegData):
-                for subseg in seg.subsegments:
-                    if isinstance(subseg, N64SegImg):
-                        self._write_symbol(
-                            get_segment_cname(subseg), f"0x{subseg.rom_start:X}"
-                        )
-
             # Create new linker section for BSS
-            if new_section and cur_section == ".bss":
+            if entering_bss or leaving_bss:
                 # If this is the last entry of its type, add the END marker for the section we're ending
-                if entry in last_seen_sections:
-                    self._write_symbol(f"{seg_name}{cur_section.upper()}_END", ".")
+                if entry in last_seen_sections and section_labels[entry.section_type].started:
+                    self._write_symbol(
+                        f"{seg_name}{last_seen_sections[entry].upper()}_END", "."
+                    )
+                    section_labels[last_seen_sections[entry]].ended = True
 
                 self._end_block()
-                self._begin_bss_segment(segment)
-                self._write_symbol(f"{seg_name}{cur_section.upper()}_START", ".")
+
+                if entering_bss:
+                    self._begin_bss_segment(segment)
+                else:
+                    self._begin_segment(segment)
+
+                self._write_symbol(f"{seg_name}{entry.section_type.upper()}_START", ".")
+                section_labels[cur_section].started = True
 
                 # Write THIS linker entry
                 self._writeln(f"{entry.object_path}({cur_section});")
@@ -226,17 +232,17 @@ class LinkerWriter:
                 # If this is the last entry of its type, add the END marker for the section we're ending
                 if entry in last_seen_sections:
                     self._write_symbol(f"{seg_name}{cur_section.upper()}_END", ".")
+                    section_labels[cur_section].ended = True
 
-        for section in section_labels:
-            if (
-                section.started
-                and section.section_type not in last_seen_sections.values()
-            ):
-                self._write_symbol(
-                    f"{seg_name}_{section.name.upper()}_END", "."
-                )
+            prev_section = cur_section
 
-        self._end_segment(segment, next_segment)
+        # End all un-ended sections
+        for section in section_labels.values():
+            if (section.started and not section.ended):
+                self._write_symbol(f"{seg_name}_{section.name.upper()}_END", ".")
+
+        all_bss = all(e.section == ".bss" for e in entries)
+        self._end_segment(segment, next_segment, all_bss)
 
     def save_linker_script(self):
         if self.linker_discard_section:
@@ -294,23 +300,14 @@ class LinkerWriter:
         if symbol not in self.symbols:
             self.symbols.append(symbol)
 
-    def _begin_segment(self, segment: Segment, mid_segment=False):
-        # Align directive
-        if segment.align:
-            self._writeln(
-                f"__romPos = (__romPos + {segment.align - 1}) & ~{segment.align - 1}; /* align {segment.align} */"
-            )
-
-        # TODO shiftable ram
-        vram = segment.vram_start
-        vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
+    def _begin_segment(self, segment: Segment):
+        if segment.follows_vram_segment:
+            vram_str = get_segment_cname(segment.follows_vram_segment) + "_VRAM_END "
+        else:
+            vram_str = f"0x{segment.vram_start:X} " if isinstance(segment.vram_start, int) else ""
 
         name = get_segment_cname(segment)
 
-        if mid_segment:
-            name += to_cname(segment.type)
-
-        self._write_symbol(f"{name}_ROM_START", "__romPos")
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
 
         self._writeln(
@@ -318,26 +315,42 @@ class LinkerWriter:
         )
         self._begin_block()
 
-    def _begin_bss_segment(self, segment: Segment):
+    def _begin_bss_segment(self, segment: Segment, is_first: bool = False):
+        if segment.follows_vram_segment:
+            vram_str = get_segment_cname(segment.follows_vram_segment) + "_VRAM_END "
+        else:
+            vram_str = f"0x{segment.vram_start:X} " if isinstance(segment.vram_start, int) else ""
+
         name = get_segment_cname(segment) + "_bss"
 
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
 
-        self._writeln(f".{name} (NOLOAD) : SUBALIGN({segment.subalign})")
+        if is_first:
+            addr_str = vram_str + "(NOLOAD)"
+        else:
+            addr_str = "(NOLOAD)"
+
+        self._writeln(f".{name} {addr_str} : SUBALIGN({segment.subalign})")
         self._begin_block()
 
-    def _end_segment(self, segment: Segment, next_segment: Optional[Segment] = None):
+    def _end_segment(
+        self, segment: Segment, next_segment: Optional[Segment] = None, all_bss=False
+    ):
         self._end_block()
 
         name = get_segment_cname(segment)
 
-        self._writeln(f"__romPos += SIZEOF(.{name});")
+        if not all_bss:
+            self._writeln(f"__romPos += SIZEOF(.{name});")
 
-        if next_segment:
-            rom_end_val = get_segment_cname(next_segment) + "_ROM_START"
-        else:
-            rom_end_val = "__romPos"
+        # Align directive
+        if segment.align:
+            self._writeln(
+                f"__romPos = (__romPos + {segment.align - 1}) & ~{segment.align - 1}; /* align {segment.align} */"
+            )
 
-        self._write_symbol(f"{name}_ROM_END", rom_end_val)
+        self._write_symbol(f"{name}_ROM_END", "__romPos")
+
+        self._write_symbol(f"{name}_VRAM_END", ".")
 
         self._writeln("")
