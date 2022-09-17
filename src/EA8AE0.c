@@ -30,28 +30,29 @@ typedef struct unk {
     f32 unk8;
 } unk;
 
-// INCLUDE_ASM(s32, "EA8AE0", func_80240BD4_EA96B4);
-void func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
+s32 func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 *temp_s0_2;
-    s32 *temp_s0_3;
-    s32 *temp_s0_4;
     s32 temp_s0_5;
+    s32 temp_s0;
     s32 temp_s1;
     s32 temp_s2;
     s32 temp_s3;
     s32 temp_s4;
-    unk *temp_a0;
+    unk* temp_a0;
+    s32 temp;
     
-    temp_s1 = dead_evt_get_variable(script, *args++);
+    temp_s3 = dead_evt_get_variable(script, *args++);
     temp_s2 = dead_evt_get_variable(script, *args++);
-    temp_s4 = dead_evt_get_variable(script, *temp_s0_3);
-    temp_s1 = dead_evt_get_variable(script, *temp_s0_4);
-    temp_s0_5 = dead_evt_get_variable(script, *(temp_s0_4 + 4));
+    temp_s4 = dead_evt_get_variable(script, *args++);
+    temp_s1 = dead_evt_get_variable(script, *args++);
+    temp_s0 = dead_evt_get_variable(script, *args++);
+
     temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 0x1E0) + (temp_s2 * 0xC);
-    temp_a0->unk0 = (f32) temp_s4;
-    temp_a0->unk4 = (f32) temp_s1;
-    temp_a0->unk8 = (f32) temp_s0_5;
+    temp_a0->unk0 = temp_s4;
+    temp_a0->unk4 = temp_s1;
+    temp_a0->unk8 = temp_s0;
+
+    return 2;
 }
 
 
