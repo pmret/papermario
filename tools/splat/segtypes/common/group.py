@@ -1,5 +1,4 @@
 from typing import List, Optional
-from segtypes.common.linker_section import dotless_type
 from segtypes.common.segment import CommonSegment
 from segtypes.segment import RomAddr, Segment
 from util import log

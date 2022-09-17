@@ -23,7 +23,6 @@ void action_update_hit_lava(void) {
     f32 componentSpeed;
     s32 completeAxes; // number of axes along which the 'return motion' is complete
 
-    static s32 pad[2]; // curious
     static f32 LaunchVelocity;
     static f32 LaunchInterpPhase; // used to interp launch velocity
     static f32 ReturnAngle;

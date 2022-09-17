@@ -1,5 +1,20 @@
 # splat Release Notes
 
+### 0.10.0: The Linker Script Update
+
+Linker scripts splat produces are now capable of being shift-friendly. Rom addresses will automatically shift, and ram addresses will still be hard-coded unless the new segment option `follows_vram` is specified. The value of this option should be the name of a segment (a) that this segment (b) should follow in memory. If a grows or shrinks, b's start address will also do so to accommodate it.
+
+The `enable_ld_alignment_hack` option and corresponding behavior has been removed. This proved to add too much complexity to the linker script generation code and was becoming quite a burden to keep dealing with. Apologies for any inconvenience this may cause. But trust me: in the long run, it's good you won't be depending on that madness.
+
+### 0.9.5
+* Changes have been made to the linker script such that it is more shiftable. Rather than setting the rom position to hard-coded addresses, it increments the position by the size of the previous segment. Some projects may experience some alignment-related issues after this change. If specified, the new segment option `align: n` will add an `ALIGN(n)` directive for that section's linker segment.
+
+### 0.9.4
+* A new linker script section is now automatically created when the .bss section begins, using NOLOAD as opposed to the previous hacky rom rewinding we were previously doing. Additionally, `ld_section_labels` now includes `.rodata` by default.
+
+### 0.9.3
+* Added `add_set_gp_64` option (true by default), which allows controlling whether to add ".set gp=64" to asm/hasm files
+
 ### 0.9.2
 * Added "palette" argument to ci4/ci8 segments so that segments' palettes can be manually specified
 
