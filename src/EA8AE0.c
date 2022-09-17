@@ -28,7 +28,18 @@ INCLUDE_ASM(s32, "EA8AE0", func_80240BD4_EA96B4);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80240CD8_EA97B8);
 
-INCLUDE_ASM(s32, "EA8AE0", func_80240DA4_EA9884);
+ApiStatus func_80240DA4_EA9884(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    dead_evt_get_variable(script, *args++);
+    dead_evt_get_variable(script, *args++);
+    dead_evt_get_variable(script, *args++);
+    dead_evt_get_variable(script, *args++);
+    dead_evt_get_variable(script, *args++);
+    dead_evt_get_variable(NULL, MapVar(0));
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "EA8AE0", func_80240E2C_EA990C);
 
