@@ -47,15 +47,15 @@ Vp gPausePartnersViewport = {
 };
 s32 gPausePartnersSpriteAnims[][4] = {
     {
-        ANIM_WorldGoombario_Anim0,
-        ANIM_WorldGoombario_Anim2,
-        ANIM_WorldGoombario_Anim8,
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Walk,
+        ANIM_WorldGoombario_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldKooper_Anim0,
-        ANIM_WorldKooper_Anim4,
-        ANIM_WorldKooper_AnimD,
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Walk,
+        ANIM_WorldKooper_Talk,
         ANIM_LIST_END
     },
     {

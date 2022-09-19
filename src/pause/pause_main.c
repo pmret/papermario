@@ -77,9 +77,9 @@ s32 gPauseTutorialSpriteAnims[][4] = {
         ANIM_LIST_END
     },
     {
-        ANIM_WorldGoombario_Anim0,
-        ANIM_WorldGoombario_Anim1,
-        ANIM_WorldGoombario_Anim8,
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Talk,
         ANIM_LIST_END
     },
     {
