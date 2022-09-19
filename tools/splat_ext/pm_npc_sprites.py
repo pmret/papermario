@@ -68,10 +68,17 @@ class Sprite:
         return l
 
     def write_to_dir(self, path):
-        SpriteSheet = ET.Element("SpriteSheet", {
-            "maxComponents": str(self.max_components),
-            "paletteGroups": str(self.num_variations),
-        })
+        if len(self.variation_names) > 1:
+            SpriteSheet = ET.Element("SpriteSheet", {
+                "maxComponents": str(self.max_components),
+                "paletteGroups": str(self.num_variations),
+                "variations": ",".join(self.variation_names),
+            })
+        else
+            SpriteSheet = ET.Element("SpriteSheet", {
+                "maxComponents": str(self.max_components),
+                "paletteGroups": str(self.num_variations),
+            })
 
         PaletteList = ET.SubElement(SpriteSheet, "PaletteList")
         RasterList = ET.SubElement(SpriteSheet, "RasterList")
@@ -140,6 +147,7 @@ class Sprite:
         true_max_components = 0
         self.max_components = int(SpriteSheet.get("a") or SpriteSheet.get("maxComponents")) # ignored
         self.num_variations = int(SpriteSheet.get("b") or SpriteSheet.get("paletteGroups"))
+        self.variation_names = SpriteSheet.get("variations", default="").split(",")
 
         for Palette in SpriteSheet.findall("./PaletteList/Palette"):
             if read_images:
@@ -312,6 +320,7 @@ class N64SegPm_npc_sprites(N64Segment):
                 sprite.image_names = self.sprite_cfg[sprite_name].get("frames", [])
                 sprite.palette_names = self.sprite_cfg[sprite_name].get("palettes", [])
                 sprite.animation_names = self.sprite_cfg[sprite_name].get("animations", [])
+                sprite.variation_names = self.sprite_cfg[sprite_name].get("variations", [])
 
             sprite.write_to_dir(sprite_dir)
 
