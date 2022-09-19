@@ -22,7 +22,6 @@ if __name__ == "__main__":
 
         sprite = Sprite.from_dir(sprite_dir, read_images=False)
         sprite_name = sprite_dir.stem
-        useVariationNames = len(sprite.palette_names) == (4 * len(sprite.variation_names) + 1):
 
         f.write(f"#ifndef _NPC_SPRITE_{sprite_name.upper()}_H_\n")
         f.write(f"#define _NPC_SPRITE_{sprite_name.upper()}_H_\n")
@@ -31,11 +30,7 @@ if __name__ == "__main__":
         f.write("\n")
 
         # sprite definition
-        if useVariationNames:
-            for variation_name in enumerate(sprite.variation_names):
-                f.write(f"#define SPR_{variation_name} 0x{s:02X}\n")
-        else
-            f.write(f"#define SPR_{sprite_name} 0x{s:02X}\n")
+        f.write(f"#define SPR_{sprite_name} 0x{s:02X}\n")
         f.write("\n")
 
         # definitions for images
@@ -45,20 +40,19 @@ if __name__ == "__main__":
 
         # definitions for palettes 
         for p, palette_name in enumerate(sprite.palette_names):
-            namespace = sprite_name
-            if useVariationNames:
-                namespace = sprite.variation_names[p % len(sprite.variation_names)]
-
-            f.write(f"#define SPR_PAL_{namespace}_{palette_name} 0x{p:X}\n")
+            if palette_name == "Default":
+                f.write(f"#define SPR_PAL_{sprite_name} 0x{p:X}\n")
+            else:
+                f.write(f"#define SPR_PAL_{sprite_name}_{palette_name} 0x{p:X}\n")
+        f.write("\n")
 
         # definitions for animations 
         for p, palette_name in enumerate(sprite.palette_names):
-            namespace = sprite_name
-            if useVariationNames:
-                namespace = sprite.variation_names[p % len(sprite.variation_names)]
-
             for a, name in enumerate(sprite.animation_names):
-                f.write(f"#define ANIM_{namespace}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
+                if palette_name == "Default":
+                    f.write(f"#define ANIM_{sprite_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
+                else:
+                    f.write(f"#define ANIM_{sprite_name}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
+            f.write("\n")
 
-        f.write("\n")
         f.write("#endif\n")

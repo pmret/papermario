@@ -24,6 +24,7 @@ class Sprite:
         self.image_names = []
         self.palette_names = []
         self.animation_names = []
+        self.variation_names = []
 
     @staticmethod
     def from_bytes(data):
@@ -74,7 +75,7 @@ class Sprite:
                 "paletteGroups": str(self.num_variations),
                 "variations": ",".join(self.variation_names),
             })
-        else
+        else:
             SpriteSheet = ET.Element("SpriteSheet", {
                 "maxComponents": str(self.max_components),
                 "paletteGroups": str(self.num_variations),
@@ -87,7 +88,7 @@ class Sprite:
         palette_to_raster = {}
 
         for i, image in enumerate(self.images):
-            name = self.image_names[i] if self.image_names else f"Raster_{i:02X}"
+            name = self.image_names[i] if self.image_names else f"Raster{i:02X}"
             image.write(path / (name + ".png"), self.palettes[image.palette_index])
 
             if image.palette_index not in palette_to_raster:
@@ -101,7 +102,7 @@ class Sprite:
             })
 
         for i, palette in enumerate(self.palettes):
-            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Palette_{i:02X}"
+            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Pal{i:X}"
 
             if i in palette_to_raster:
                 img = palette_to_raster[i][0]
@@ -117,7 +118,7 @@ class Sprite:
 
         for i, components in enumerate(self.animations):
             Animation = ET.SubElement(AnimationList, "Animation", {
-                "name": self.animation_names[i] if self.animation_names else f"Anim_{i:X}",
+                "name": self.animation_names[i] if self.animation_names else f"Anim{i:X}",
             })
 
             for j, comp in enumerate(components):
