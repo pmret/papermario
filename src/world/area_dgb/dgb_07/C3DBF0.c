@@ -1,7 +1,7 @@
 #include "dgb_07.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/world_clubba.h"
+#include "sprite/npc/WorldClubba.h"
 
 enum {
     NPC_WORLD_CLUBBA0,

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/WorldGoombario.h"
 #include "goombario.h"
 #include "../src/world/partners.h"
 

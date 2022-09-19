@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_lakilester.h"
+#include "sprite/npc/BattleLakilester.h"
 
 extern EvtScript N(lakilester_init);
 extern EvtScript N(lakilester_handleEvent);

@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
-#include "sprite/npc/battle_goombario.h"
+#include "sprite/npc/BattleGoombario.h"
 
 #define NAMESPACE b_area_hos_goombario_tutor
 

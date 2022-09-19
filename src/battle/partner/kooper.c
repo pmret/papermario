@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_kooper.h"
+#include "sprite/npc/BattleKooper.h"
 #include "battle/action_cmd/hammer.h"
 #include "battle/action_cmd/fire_shell.h"
 #include "battle/action_cmd/dizzy_shell.h"

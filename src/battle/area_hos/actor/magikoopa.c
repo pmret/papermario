@@ -1,8 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/flying_magikoopa.h"
-#include "sprite/npc/magikoopa.h"
+#include "sprite/npc/FlyingMagikoopa.h"
+#include "sprite/npc/Magikoopa.h"
 
 #define NAMESPACE b_area_hos_magikoopa
 

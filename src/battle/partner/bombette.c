@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_bombette.h"
+#include "sprite/npc/BattleBombette.h"
 #include "battle/action_cmd/bomb.h"
 #include "battle/action_cmd/body_slam.h"
 

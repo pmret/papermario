@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_bow.h"
+#include "sprite/npc/BattleBow.h"
 
 extern EvtScript N(bow_takeTurn);
 extern EvtScript N(bow_idle);

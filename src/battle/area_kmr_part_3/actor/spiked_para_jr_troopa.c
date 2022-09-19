@@ -2,8 +2,8 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/jr_troopa.h"
-#include "sprite/npc/spiked_para_jr_troopa.h"
+#include "sprite/npc/JrTroopa.h"
+#include "sprite/npc/SpikedParaJrTroopa.h"
 
 #define NAMESPACE b_area_kmr_part_3_spiked_para_jr_troopa
 

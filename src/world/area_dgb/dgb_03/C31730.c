@@ -1,5 +1,5 @@
 #include "dgb_03.h"
-#include "sprite/npc/world_clubba.h"
+#include "sprite/npc/WorldClubba.h"
 #include "message_ids.h"
 #include "entity.h"
 

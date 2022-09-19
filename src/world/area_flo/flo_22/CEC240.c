@@ -1,7 +1,7 @@
 #include "flo_22.h"
 #include "message_ids.h"
-#include "sprite/npc/bzzap.h"
-#include "sprite/npc/dayzee.h"
+#include "sprite/npc/Bzzap.h"
+#include "sprite/npc/Dayzee.h"
 
 enum {
     NPC_BZZAP,

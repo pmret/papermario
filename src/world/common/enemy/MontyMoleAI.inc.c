@@ -1,6 +1,6 @@
 #include "common.h"
 #include "npc.h"
-#include "sprite/npc/monty_mole.h"
+#include "sprite/npc/MontyMole.h"
 
 // prerequisites
 #include "world/common/enemy/ProjectileHitbox.inc.c"

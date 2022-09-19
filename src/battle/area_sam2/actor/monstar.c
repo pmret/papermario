@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite.h"
-#include "sprite/npc/monstar.h"
+#include "sprite/npc/Monstar.h"
 #include "battle/area_sam2/actor/img.png.h"
 
 #define NAMESPACE b_area_sam2_monstar

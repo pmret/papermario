@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/shy_guy.h"
-#include "sprite/npc/sky_guy.h"
+#include "sprite/npc/ShyGuy.h"
+#include "sprite/npc/SkyGuy.h"
 
 #define NAMESPACE b_area_omo_sky_guy
 

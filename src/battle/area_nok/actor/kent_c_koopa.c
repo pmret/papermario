@@ -1,8 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/coin.h"
-#include "sprite/npc/kent_c_koopa.h"
+#include "sprite/npc/Coin.h"
+#include "sprite/npc/KentCKoopa.h"
 
 #define NAMESPACE b_area_nok_kent_c_koopa
 

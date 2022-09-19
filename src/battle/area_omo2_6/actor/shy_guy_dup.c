@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/tank_guy.h"
+#include "sprite/npc/TankGuy.h"
 
 #define NAMESPACE b_area_omo2_6_shy_guy_dup
 

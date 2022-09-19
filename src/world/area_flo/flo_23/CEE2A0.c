@@ -1,7 +1,7 @@
 #include "flo_23.h"
 #include "message_ids.h"
-#include "sprite/npc/gate_flower.h"
-#include "sprite/npc/spiny.h"
+#include "sprite/npc/GateFlower.h"
+#include "sprite/npc/Spiny.h"
 #include "effects.h"
 #include "entity.h"
 

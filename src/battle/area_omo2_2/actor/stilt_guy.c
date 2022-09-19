@@ -1,10 +1,10 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/stilt_guy.h"
-#include "sprite/npc/stilt_guy_unfold.h"
-#include "sprite/npc/shy_guy.h"
-#include "sprite/npc/general_guy.h"
+#include "sprite/npc/StiltGuy.h"
+#include "sprite/npc/StiltGuyUnfold.h"
+#include "sprite/npc/ShyGuy.h"
+#include "sprite/npc/GeneralGuy.h"
 
 #define NAMESPACE b_area_omo2_2_stilt_guy
 

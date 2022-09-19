@@ -1,5 +1,5 @@
 #include "common.h"
-#include "sprite/npc/stone_chomp.h"
+#include "sprite/npc/StoneChomp.h"
 
 ApiStatus N(StoneChompFXA)(Evt* script, s32 isInitialCall) {
     NpcBlueprint bp;

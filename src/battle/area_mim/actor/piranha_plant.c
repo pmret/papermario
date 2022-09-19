@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/piranha_plant.h"
+#include "sprite/npc/SmallPiranha.h"
 
 #define NAMESPACE b_area_mim_piranha_plant
 

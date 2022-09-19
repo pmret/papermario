@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/koopa_bros.h"
+#include "sprite/npc/KoopaBros.h"
 
 #define NAMESPACE b_area_trd_part_2_green_ninja_koopa
 

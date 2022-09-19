@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/pyro_guy.h"
+#include "sprite/npc/PyroGuy.h"
 
 #define NAMESPACE b_area_omo_pyro_guy
 

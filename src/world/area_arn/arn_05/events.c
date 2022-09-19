@@ -1,8 +1,8 @@
 #include "arn_05.h"
 #include "entity.h"
-#include "sprite/npc/boo.h"
-#include "sprite/npc/world_bow.h"
-#include "sprite/npc/world_tubba.h"
+#include "sprite/npc/Boo.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/WorldTubba.h"
 
 enum {
     NPC_BOO0,

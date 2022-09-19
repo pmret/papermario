@@ -1,7 +1,7 @@
 #include "arn_04.h"
-#include "sprite/npc/paragoomba.h"
-#include "sprite/npc/goomba.h"
-#include "sprite/npc/cleft.h"
+#include "sprite/npc/Paragoomba.h"
+#include "sprite/npc/Goomba.h"
+#include "sprite/npc/Cleft.h"
 #include "effects.h"
 #include "entity.h"
 

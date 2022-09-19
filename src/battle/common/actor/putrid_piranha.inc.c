@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/putrid_piranha.h"
+#include "sprite/npc/LargePiranha.h"
 
 extern EvtScript N(init_8021B1F8);
 extern EvtScript N(takeTurn_8021B8A8);

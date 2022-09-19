@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_watt.h"
+#include "sprite/npc/BattleWatt.h"
 #include "effects.h"
 
 ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {

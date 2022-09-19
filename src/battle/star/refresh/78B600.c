@@ -1,7 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_eldstar.h"
+#include "sprite/npc/BattleEldstar.h"
 
 #define NAMESPACE battle_star_refresh
 

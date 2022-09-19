@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_klevar.h"
+#include "sprite/npc/BattleKlevar.h"
 
 #define NAMESPACE battle_star_time_out
 

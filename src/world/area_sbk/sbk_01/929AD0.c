@@ -1,5 +1,5 @@
 #include "sbk_01.h"
-#include "sprite/npc/pokey.h"
+#include "sprite/npc/Pokey.h"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

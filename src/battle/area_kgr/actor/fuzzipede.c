@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/fuzzipede.h"
+#include "sprite/npc/Fuzzipede.h"
 
 #define NAMESPACE b_area_kgr_fuzzipede
 

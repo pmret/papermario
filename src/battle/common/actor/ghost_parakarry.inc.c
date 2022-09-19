@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_parakarry.h"
+#include "sprite/npc/BattleParakarry.h"
 
 extern EvtScript N(parakarry_init);
 extern EvtScript N(parakarry_takeTurn);

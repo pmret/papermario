@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/world_bombette.h"
+#include "sprite/npc/WorldBombette.h"
 #include "battle/action_cmd/hammer.h"
 
 #define NAMESPACE battle_move_hammer

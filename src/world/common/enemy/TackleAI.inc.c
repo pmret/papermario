@@ -4,7 +4,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "sprite/npc/bony_beetle.h"
+#include "sprite/npc/BonyBeetle.h"
 
 // prerequisites
 #include "world/common/enemy/States_TackleAI.inc.c"

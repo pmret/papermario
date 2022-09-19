@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/koopa_troopa.h"
+#include "sprite/npc/KoopaTroopa.h"
 
 s32 N(defenseTable_8021C960)[] = {
     ELEMENT_NORMAL, 1,

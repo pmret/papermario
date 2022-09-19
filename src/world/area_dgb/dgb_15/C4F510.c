@@ -1,6 +1,6 @@
 #include "dgb_15.h"
 #include "message_ids.h"
-#include "sprite/npc/world_tubba.h"
+#include "sprite/npc/WorldTubba.h"
 #include "entity.h"
 
 enum {

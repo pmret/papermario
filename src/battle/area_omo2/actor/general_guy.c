@@ -3,8 +3,8 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "animation_script.h"
-#include "sprite/npc/general_guy.h"
-#include "sprite/npc/general_guy_bomb.h"
+#include "sprite/npc/GeneralGuy.h"
+#include "sprite/npc/GeneralGuyBomb.h"
 
 #define NAMESPACE b_area_omo2_general_guy
 

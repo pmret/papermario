@@ -2,11 +2,11 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/shy_stack_guy.h"
-#include "sprite/npc/shy_stack_damage.h"
-#include "sprite/npc/shy_stack_rock.h"
-#include "sprite/npc/general_guy.h"
-#include "sprite/npc/shy_guy.h"
+#include "sprite/npc/ShyStackGuy.h"
+#include "sprite/npc/ShyStackDamage.h"
+#include "sprite/npc/ShyStackRock.h"
+#include "sprite/npc/GeneralGuy.h"
+#include "sprite/npc/ShyGuy.h"
 
 #define NAMESPACE b_area_omo2_3_shy_stack
 

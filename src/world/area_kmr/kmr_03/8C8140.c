@@ -1,5 +1,5 @@
 #include "kmr_03.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goompa.h"
 #include "entity.h"
 
 enum {

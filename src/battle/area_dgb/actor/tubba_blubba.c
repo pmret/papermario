@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_tubba.h"
+#include "sprite/npc/BattleTubba.h"
 
 #define NAMESPACE b_area_dgb_tubba_blubba
 

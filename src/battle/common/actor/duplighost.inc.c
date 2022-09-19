@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/duplighost.h"
+#include "sprite/npc/Duplighost.h"
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

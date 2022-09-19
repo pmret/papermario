@@ -3,8 +3,8 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "message_ids.h"
-#include "sprite/npc/general_guy.h"
-#include "sprite/npc/tank_guy.h"
+#include "sprite/npc/GeneralGuy.h"
+#include "sprite/npc/TankGuy.h"
 #include "mapfs/omo_bt07_shape.h"
 
 #define NAMESPACE b_area_omo2_toy_tank

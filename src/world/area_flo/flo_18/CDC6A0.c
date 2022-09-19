@@ -1,9 +1,9 @@
 #include "flo_18.h"
 #include "message_ids.h"
-#include "sprite/npc/flying_magikoopa.h"
-#include "sprite/npc/lakitu.h"
-#include "sprite/npc/magikoopa.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/FlyingMagikoopa.h"
+#include "sprite/npc/Lakitu.h"
+#include "sprite/npc/Magikoopa.h"
+#include "sprite/npc/WorldLakilester.h"
 #include "effects.h"
 
 enum {

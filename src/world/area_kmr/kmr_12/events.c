@@ -1,7 +1,7 @@
 #include "kmr_12.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/goomba.h"
+#include "sprite/npc/Goomba.h"
 
 EvtScript N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
 EvtScript N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);

@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/fuzzy.h"
+#include "sprite/npc/Fuzzy.h"
 #include "battle/action_cmd/stop_leech.h"
 
 #define NAMESPACE b_area_jan_jungle_fuzzy

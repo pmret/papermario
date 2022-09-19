@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/crystal_king.h"
+#include "sprite/npc/CrystalKing.h"
 
 #define NAMESPACE b_area_pra2_crystal_king
 

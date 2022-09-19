@@ -1,7 +1,7 @@
 #include "arn_03.h"
 #include "entity.h"
-#include "sprite/npc/boo.h"
-#include "sprite/npc/world_bow.h"
+#include "sprite/npc/Boo.h"
+#include "sprite/npc/WorldBow.h"
 
 
 static s32 N(KeyItemChoiceList)[112];

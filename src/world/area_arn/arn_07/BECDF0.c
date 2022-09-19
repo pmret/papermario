@@ -1,7 +1,7 @@
 #include "arn_07.h"
 #include "effects.h"
-#include "sprite/npc/world_tubba.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/WorldTubba.h"
+#include "sprite/npc/TubbasHeart.h"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 

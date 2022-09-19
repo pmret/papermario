@@ -1,12 +1,12 @@
 #include "arn_07.h"
 #include "entity.h"
-#include "sprite/npc/world_tubba.h"
-#include "sprite/npc/paragoomba.h"
-#include "sprite/npc/world_skolar.h"
-#include "sprite/npc/world_bow.h"
-#include "sprite/npc/tubbas_heart.h"
-#include "sprite/npc/boo.h"
-#include "sprite/npc/bootler.h"
+#include "sprite/npc/WorldTubba.h"
+#include "sprite/npc/Paragoomba.h"
+#include "sprite/npc/WorldSkolar.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/TubbasHeart.h"
+#include "sprite/npc/Boo.h"
+#include "sprite/npc/Bootler.h"
 
 EvtScript N(80243790) = {
     EVT_EXEC(N(802437AC))

@@ -3,8 +3,8 @@
 #include "effects.h"
 #include "model.h"
 #include "entity.h"
-#include "sprite/npc/bob_omb.h"
-#include "sprite/npc/fuzzy.h"
+#include "sprite/npc/Bobomb.h"
+#include "sprite/npc/Fuzzy.h"
 
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 void delete_entity(s32);

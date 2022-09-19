@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_kalmar.h"
+#include "sprite/npc/BattleKalmar.h"
 
 #define NAMESPACE battle_star_up_and_away
 

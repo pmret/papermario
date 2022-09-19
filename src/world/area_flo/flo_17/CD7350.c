@@ -1,8 +1,8 @@
 #include "flo_17.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/lakitu.h"
-#include "sprite/npc/spiny.h"
+#include "sprite/npc/Lakitu.h"
+#include "sprite/npc/Spiny.h"
 
 enum {
     NPC_LAKITU0,

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/goomba_bros.h"
+#include "sprite/npc/GoombaBros.h"
 
 #define NAMESPACE b_area_kmr_part_2_red_goomba_2
 

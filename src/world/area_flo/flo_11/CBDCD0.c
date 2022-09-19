@@ -1,6 +1,6 @@
 #include "flo_11.h"
 #include "message_ids.h"
-#include "sprite/npc/lakitu.h"
+#include "sprite/npc/Lakitu.h"
 #include "entity.h"
 
 enum {

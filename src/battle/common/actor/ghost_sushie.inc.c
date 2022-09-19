@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_sushie.h"
+#include "sprite/npc/BattleSushie.h"
 
 extern EvtScript N(sushie_handleEvent);
 extern EvtScript N(sushie_takeTurn);

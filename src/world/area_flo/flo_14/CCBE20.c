@@ -1,6 +1,6 @@
 #include "flo_14.h"
-#include "sprite/npc/bubulb.h"
-#include "sprite/npc/bzzap.h"
+#include "sprite/npc/Bubulb.h"
+#include "sprite/npc/Bzzap.h"
 
 enum {
     NPC_BUBULB,

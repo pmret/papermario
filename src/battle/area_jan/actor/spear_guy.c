@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/shy_guy.h"
-#include "sprite/npc/jungle_guy.h"
+#include "sprite/npc/ShyGuy.h"
+#include "sprite/npc/JungleGuy.h"
 
 #define NAMESPACE b_area_jan_spear_guy
 

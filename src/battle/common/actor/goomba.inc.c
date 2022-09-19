@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/goomba.h"
+#include "sprite/npc/Goomba.h"
 
 s32 N(defenseTable_80219750)[] = {
     ELEMENT_NORMAL, 0,

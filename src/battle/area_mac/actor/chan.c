@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/chan.h"
+#include "sprite/npc/Chan.h"
 
 #define NAMESPACE b_area_mac_chan
 

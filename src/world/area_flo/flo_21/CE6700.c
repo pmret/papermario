@@ -1,7 +1,7 @@
 #include "flo_21.h"
 #include "message_ids.h"
-#include "sprite/npc/huff_n_puff.h"
-#include "sprite/npc/tuff_puff.h"
+#include "sprite/npc/HuffNPuff.h"
+#include "sprite/npc/TuffPuff.h"
 
 enum {
     NPC_HUFF_N_PUFF0,

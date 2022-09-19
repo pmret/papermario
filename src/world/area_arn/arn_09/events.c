@@ -1,6 +1,6 @@
 #include "arn_09.h"
 #include "entity.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/TubbasHeart.h"
 
 extern s16 Entity_ScriptSpring_AnimLaunch[];
 

@@ -1,7 +1,7 @@
 #include "flo_16.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/tuff_puff.h"
+#include "sprite/npc/TuffPuff.h"
 
 enum {
     NPC_TUFF_PUFF0,

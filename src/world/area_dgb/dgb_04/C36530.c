@@ -1,7 +1,7 @@
 #include "dgb_04.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/sentinel.h"
+#include "sprite/npc/Sentinel.h"
 #include "message_ids.h"
 #include "entity.h"
 

@@ -1,6 +1,6 @@
 #include "arn_08.h"
-#include "sprite/npc/tubbas_heart.h"
-#include "sprite/npc/yakkey.h"
+#include "sprite/npc/TubbasHeart.h"
+#include "sprite/npc/Yakkey.h"
 #include "world/partners.h"
 #include "entity.h"
 

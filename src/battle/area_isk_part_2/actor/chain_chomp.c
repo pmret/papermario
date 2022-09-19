@@ -1,8 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/chain_chomp.h"
-#include "sprite/npc/tutankoopa.h"
+#include "sprite/npc/ChainChomp.h"
+#include "sprite/npc/Tutankoopa.h"
 
 #define NAMESPACE b_area_isk_part_2_chain_chomp
 

@@ -1,9 +1,9 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 #include "pause_common.h"
-#include "sprite/npc/goombaria.h"
-#include "sprite/npc/world_goombario.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goombaria.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/Goompa.h"
 
 extern MenuPanel gPausePanelTabs;
 extern MenuPanel gPausePanelStats;

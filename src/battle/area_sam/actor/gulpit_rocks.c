@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/gulpit.h"
+#include "sprite/npc/Gulpit.h"
 
 #define NAMESPACE b_area_sam_gulpit_rocks
 

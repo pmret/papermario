@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/marshal_guy.h"
+#include "sprite/npc/MarshalGuy.h"
 
 #define NAMESPACE b_area_omo2_4_signal_guy
 

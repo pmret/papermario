@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/stone_chomp.h"
+#include "sprite/npc/StoneChomp.h"
 
 #define NAMESPACE b_area_isk_part_1_stone_chomp
 

@@ -1,7 +1,7 @@
 #include "flo_15.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/sun.h"
+#include "sprite/npc/Sun.h"
 
 enum {
     NPC_SUN0 = 10,

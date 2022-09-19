@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/monty_mole.h"
+#include "sprite/npc/MontyMole.h"
 
 #define NAMESPACE b_area_iwa_monty_mole
 

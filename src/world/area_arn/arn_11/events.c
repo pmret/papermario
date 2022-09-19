@@ -1,5 +1,5 @@
 #include "arn_11.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/TubbasHeart.h"
 
 enum {
     NPC_TUBBAS_HEART,

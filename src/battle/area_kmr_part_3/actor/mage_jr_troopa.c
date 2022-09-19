@@ -2,8 +2,8 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/jr_troopa.h"
-#include "sprite/npc/mage_jr_troopa.h"
+#include "sprite/npc/JrTroopa.h"
+#include "sprite/npc/MageJrTroopa.h"
 
 #define NAMESPACE b_area_kmr_part_3_mage_jr_troopa
 

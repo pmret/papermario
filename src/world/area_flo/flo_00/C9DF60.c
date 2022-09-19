@@ -3,12 +3,12 @@
 #include "message_ids.h"
 #include "effects.h"
 #include "entity.h"
-#include "sprite/npc/bubulb.h"
-#include "sprite/npc/lakilulu.h"
-#include "sprite/npc/tolielup.h"
-#include "sprite/npc/world_klevar.h"
-#include "sprite/npc/world_lakilester.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/Bubulb.h"
+#include "sprite/npc/Lakilulu.h"
+#include "sprite/npc/Tolielup.h"
+#include "sprite/npc/WorldKlevar.h"
+#include "sprite/npc/WorldLakilester.h"
+#include "sprite/npc/WorldParakarry.h"
 
 
 enum {

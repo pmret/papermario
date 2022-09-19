@@ -2,8 +2,8 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/magikoopa.h"
-#include "sprite/npc/flying_magikoopa.h"
+#include "sprite/npc/Magikoopa.h"
+#include "sprite/npc/FlyingMagikoopa.h"
 
 extern EvtScript N(8022E6A0);
 extern EvtScript N(8022E558);

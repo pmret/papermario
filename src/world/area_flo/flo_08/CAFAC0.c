@@ -1,7 +1,7 @@
 #include "flo_08.h"
 #include "message_ids.h"
-#include "sprite/npc/dayzee.h"
-#include "sprite/npc/gate_flower.h"
+#include "sprite/npc/Dayzee.h"
+#include "sprite/npc/GateFlower.h"
 #include "effects.h"
 #include "entity.h"
 

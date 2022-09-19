@@ -1,8 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/flying_magikoopa.h"
-#include "sprite/npc/magikoopa.h"
+#include "sprite/npc/FlyingMagikoopa.h"
+#include "sprite/npc/Magikoopa.h"
 
 extern s32 N(idleAnimations_80223D70)[];
 extern s32 N(idleAnimations_80223DBC)[];

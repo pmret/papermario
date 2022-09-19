@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_bow.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/BattleBow.h"
+#include "sprite/npc/TubbasHeart.h"
 
 #define NAMESPACE b_area_arn_tubbas_heart
 

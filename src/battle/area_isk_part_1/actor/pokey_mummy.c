@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/pokey.h"
+#include "sprite/npc/Pokey.h"
 
 #define NAMESPACE b_area_isk_part_1_pokey_mummy
 

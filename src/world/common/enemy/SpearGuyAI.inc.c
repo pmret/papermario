@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "sprite/npc/jungle_guy.h"
+#include "sprite/npc/JungleGuy.h"
 
 void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;

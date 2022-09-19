@@ -1,10 +1,10 @@
 #include "flo_13.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/lakilulu.h"
-#include "sprite/npc/lakitu.h"
-#include "sprite/npc/spiny.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/Lakilulu.h"
+#include "sprite/npc/Lakitu.h"
+#include "sprite/npc/Spiny.h"
+#include "sprite/npc/WorldLakilester.h"
 
 enum {
     NPC_WORLD_LAKILESTER,

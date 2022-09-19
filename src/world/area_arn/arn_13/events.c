@@ -1,7 +1,7 @@
 #include "arn_13.h"
 #include "entity.h"
-#include "sprite/npc/goomba.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/Goomba.h"
+#include "sprite/npc/TubbasHeart.h"
 
 EvtScript N(exitSingleDoor_80240100) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

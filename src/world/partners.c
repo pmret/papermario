@@ -86,37 +86,37 @@ BSS s8 gSpinHistoryPosAngle[0x18];
 #include "hud_element.h"
 
 #include "partner/goombario.h"
-#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/WorldGoombario.h"
 
 #include "partner/kooper.h"
-#include "sprite/npc/world_kooper.h"
+#include "sprite/npc/WorldKooper.h"
 
 #include "partner/bombette.h"
-#include "sprite/npc/world_bombette.h"
+#include "sprite/npc/WorldBombette.h"
 
 #include "partner/parakarry.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/WorldParakarry.h"
 
 #include "partner/goompa.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goompa.h"
 
 #include "partner/watt.h"
-#include "sprite/npc/world_watt.h"
+#include "sprite/npc/WorldWatt.h"
 
 #include "partner/sushie.h"
-#include "sprite/npc/world_sushie.h"
+#include "sprite/npc/WorldSushie.h"
 
 #include "partner/lakilester.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/WorldLakilester.h"
 
 #include "partner/bow.h"
-#include "sprite/npc/world_bow.h"
+#include "sprite/npc/WorldBow.h"
 
 #include "partner/goombaria.h"
-#include "sprite/npc/goombaria.h"
+#include "sprite/npc/Goombaria.h"
 
 #include "partner/twink.h"
-#include "sprite/npc/twink.h"
+#include "sprite/npc/Twink.h"
 
 extern HudScript HES_Partner0;
 extern HudScript HES_Goombario;

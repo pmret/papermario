@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_skolar.h"
+#include "sprite/npc/BattleSkolar.h"
 
 #define NAMESPACE battle_star_star_storm
 

@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/tank_guy.h"
+#include "sprite/npc/TankGuy.h"
 
 #define NAMESPACE b_area_omo2_5_shy_squad_dup
 

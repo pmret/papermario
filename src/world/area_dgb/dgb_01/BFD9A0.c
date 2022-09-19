@@ -1,6 +1,6 @@
 #include "dgb_01.h"
-#include "sprite/npc/sentinel.h"
-#include "sprite/npc/world_tubba.h"
+#include "sprite/npc/Sentinel.h"
+#include "sprite/npc/WorldTubba.h"
 #include "message_ids.h"
 #include "effects.h"
 #include "entity.h"

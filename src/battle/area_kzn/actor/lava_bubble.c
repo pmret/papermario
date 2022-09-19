@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bubble.h"
+#include "sprite/npc/LavaBubble.h"
 
 #define NAMESPACE b_area_kzn_lava_bubble
 
@@ -138,20 +138,20 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_80218FC4)[] = {
-    STATUS_NORMAL,    ANIM_Bubble_Pal0_Anim1,
-    STATUS_STONE,     ANIM_Bubble_Pal0_Anim0,
-    STATUS_SLEEP,     ANIM_Bubble_Pal0_Anim1,
-    STATUS_POISON,    ANIM_Bubble_Pal0_Anim1,
-    STATUS_STOP,      ANIM_Bubble_Pal0_Anim0,
-    STATUS_STATIC,    ANIM_Bubble_Pal0_Anim1,
-    STATUS_PARALYZE,  ANIM_Bubble_Pal0_Anim0,
-    STATUS_DIZZY,     ANIM_Bubble_Pal0_AnimA,
-    STATUS_FEAR,      ANIM_Bubble_Pal0_AnimA,
+    STATUS_NORMAL,    ANIM_LavaBubble_Anim1,
+    STATUS_STONE,     ANIM_LavaBubble_Anim0,
+    STATUS_SLEEP,     ANIM_LavaBubble_Anim1,
+    STATUS_POISON,    ANIM_LavaBubble_Anim1,
+    STATUS_STOP,      ANIM_LavaBubble_Anim0,
+    STATUS_STATIC,    ANIM_LavaBubble_Anim1,
+    STATUS_PARALYZE,  ANIM_LavaBubble_Anim0,
+    STATUS_DIZZY,     ANIM_LavaBubble_AnimA,
+    STATUS_FEAR,      ANIM_LavaBubble_AnimA,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80219010)[] = {
-    STATUS_NORMAL,    ANIM_Bubble_Pal0_Anim1,
+    STATUS_NORMAL,    ANIM_LavaBubble_Anim1,
     STATUS_END,
 };
 
@@ -228,14 +228,14 @@ EvtScript N(idle_802191E4) = {
 #include "common/UnkSfxFunc.inc.c"
 
 EvtScript N(80219464) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim3)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim1)
     EVT_RETURN
     EVT_END
 };
@@ -248,51 +248,51 @@ EvtScript N(handleEvent_80219500) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim8)
-            EVT_SET_CONST(LVar2, ANIM_Bubble_Pal0_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim8)
+            EVT_SET_CONST(LVar2, ANIM_LavaBubble_Anim9)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim8)
-            EVT_SET_CONST(LVar2, ANIM_Bubble_Pal0_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim8)
+            EVT_SET_CONST(LVar2, ANIM_LavaBubble_Anim9)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim9)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_759)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(80219464))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_759)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -300,15 +300,15 @@ EvtScript N(handleEvent_80219500) = {
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_BURN_TAUNT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim1)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
@@ -319,21 +319,21 @@ EvtScript N(handleEvent_80219500) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim3)
-            EVT_SET_CONST(LVar2, ANIM_Bubble_Pal0_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim3)
+            EVT_SET_CONST(LVar2, ANIM_LavaBubble_Anim7)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim3)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Bubble_Pal0_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim3)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UP_AND_AWAY)
@@ -352,7 +352,7 @@ EvtScript N(fireTackle) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim3)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 30)
@@ -363,13 +363,13 @@ EvtScript N(fireTackle) = {
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim1)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim4)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
@@ -402,7 +402,7 @@ EvtScript N(fireTackle) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim4)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 1)
@@ -480,22 +480,22 @@ EvtScript N(fireballs_Partner) = {
         EVT_SET(LVar1, 50)
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim3)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim1)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim5)
     EVT_WAIT(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim6)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 5)
             EVT_ADD(LVar1, 4)
@@ -521,7 +521,7 @@ EvtScript N(fireballs_Partner) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim6)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_ADD(LVar1, 4)
@@ -554,7 +554,7 @@ EvtScript N(fireballs_Player) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim3)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
@@ -572,7 +572,7 @@ EvtScript N(fireballs_Player) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2CF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim4)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
@@ -584,7 +584,7 @@ EvtScript N(fireballs_Player) = {
             EVT_ADD(LVar2, 2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim4)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -606,7 +606,7 @@ EvtScript N(fireballs_Player) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2CF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bubble_Pal0_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim4)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)

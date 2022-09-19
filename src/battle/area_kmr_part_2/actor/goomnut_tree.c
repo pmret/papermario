@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/spiky_goomnut.h"
+#include "sprite/npc/SpikyGoomnut.h"
 
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 

@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/koopa_troopa.h"
-#include "sprite/npc/para_troopa.h"
+#include "sprite/npc/KoopaTroopa.h"
+#include "sprite/npc/ParaTroopa.h"
 
 s32 N(defenseTable_8021EAD0)[] = {
     ELEMENT_NORMAL, 1,

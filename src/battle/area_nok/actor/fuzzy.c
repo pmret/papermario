@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/fuzzy.h"
+#include "sprite/npc/Fuzzy.h"
 
 #define NAMESPACE b_area_nok_fuzzy
 

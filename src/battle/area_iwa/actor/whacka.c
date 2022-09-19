@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/whacka.h"
+#include "sprite/npc/Whacka.h"
 
 #define NAMESPACE b_area_iwa_whacka
 

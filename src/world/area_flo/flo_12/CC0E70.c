@@ -1,6 +1,6 @@
 #include "flo_12.h"
 #include "message_ids.h"
-#include "sprite/npc/rosie.h"
+#include "sprite/npc/Rosie.h"
 
 enum {
     NPC_ROSIE0,

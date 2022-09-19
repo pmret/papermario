@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/spy_guy.h"
+#include "sprite/npc/SpyGuy.h"
 
 #define NAMESPACE b_area_omo_spy_guy
 

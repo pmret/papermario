@@ -2,9 +2,9 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/shy_guy.h"
-#include "sprite/npc/medi_guy.h"
-#include "sprite/npc/groove_guy.h"
+#include "sprite/npc/ShyGuy.h"
+#include "sprite/npc/MediGuy.h"
+#include "sprite/npc/GrooveGuy.h"
 
 #define AREA b_area_omo
 #define NAMESPACE A(groove_guy)

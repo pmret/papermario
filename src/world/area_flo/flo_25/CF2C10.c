@@ -1,9 +1,9 @@
 #include "flo_25.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/bzzap.h"
-#include "sprite/npc/gate_flower.h"
-#include "sprite/npc/tuff_puff.h"
+#include "sprite/npc/Bzzap.h"
+#include "sprite/npc/GateFlower.h"
+#include "sprite/npc/TuffPuff.h"
 
 enum {
     NPC_GATE_FLOWER,

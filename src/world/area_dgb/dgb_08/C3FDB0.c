@@ -2,9 +2,9 @@
 #include "message_ids.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/sentinel.h"
-#include "sprite/npc/world_clubba.h"
-#include "sprite/npc/world_tubba.h"
+#include "sprite/npc/Sentinel.h"
+#include "sprite/npc/WorldClubba.h"
+#include "sprite/npc/WorldTubba.h"
 
 enum {
     NPC_WORLD_CLUBBA7,

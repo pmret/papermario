@@ -1,6 +1,6 @@
 #include "common.h"
 #include "npc.h"
-#include "sprite/npc/lakitu.h"
+#include "sprite/npc/Lakitu.h"
 
 // required include args
 #ifndef AI_LAKITU_FIRST_SPINY_ID

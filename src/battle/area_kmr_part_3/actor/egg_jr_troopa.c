@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/jr_troopa.h"
+#include "sprite/npc/JrTroopa.h"
 
 #define NAMESPACE b_area_kmr_part_3_egg_jr_troopa
 

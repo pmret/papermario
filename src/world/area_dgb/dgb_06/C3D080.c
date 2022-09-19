@@ -1,6 +1,6 @@
 #include "dgb_06.h"
 #include "entity.h"
-#include "sprite/npc/boo.h"
+#include "sprite/npc/Boo.h"
 #include "message_ids.h"
 
 enum {

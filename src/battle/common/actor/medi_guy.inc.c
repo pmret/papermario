@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/medi_guy.h"
+#include "sprite/npc/MediGuy.h"
 
 extern EvtScript N(init_8021F9E8);
 extern EvtScript N(takeTurn_80220DCC);

@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_misstar.h"
+#include "sprite/npc/BattleMisstar.h"
 
 #define NAMESPACE battle_star_smooch
 

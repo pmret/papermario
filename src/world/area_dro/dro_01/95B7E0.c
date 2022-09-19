@@ -3,12 +3,12 @@
 #include "script_api/battle.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/artist_toad.h"
-#include "sprite/npc/chuck_quizmo.h"
-#include "sprite/npc/dryite.h"
-#include "sprite/npc/mouser.h"
-#include "sprite/npc/three_sisters.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/Musician.h"
+#include "sprite/npc/ChuckQuizmo.h"
+#include "sprite/npc/Dryite.h"
+#include "sprite/npc/Mouser.h"
+#include "sprite/npc/Toadette.h"
+#include "sprite/npc/WorldParakarry.h"
 
 #define CHUCK_QUIZMO_NPC_ID 10
 

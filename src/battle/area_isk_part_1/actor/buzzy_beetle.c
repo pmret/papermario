@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/buzzy_beetle.h"
+#include "sprite/npc/BuzzyBeetle.h"
 
 #define NAMESPACE b_area_isk_part_1_buzzy_beetle
 

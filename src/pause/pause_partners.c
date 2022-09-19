@@ -1,14 +1,14 @@
 #include "pause_common.h"
 #include "message_ids.h"
 #include "sprite.h"
-#include "sprite/npc/world_goombario.h"
-#include "sprite/npc/world_kooper.h"
-#include "sprite/npc/world_bombette.h"
-#include "sprite/npc/world_parakarry.h"
-#include "sprite/npc/world_bow.h"
-#include "sprite/npc/world_watt.h"
-#include "sprite/npc/world_sushie.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/WorldKooper.h"
+#include "sprite/npc/WorldBombette.h"
+#include "sprite/npc/WorldParakarry.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/WorldWatt.h"
+#include "sprite/npc/WorldSushie.h"
+#include "sprite/npc/WorldLakilester.h"
 
 extern s32 gPartnerPopupProperties[13][4];
 extern s8 gPauseBufferPal1[512];

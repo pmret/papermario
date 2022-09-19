@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_muskular.h"
+#include "sprite/npc/BattleMuskular.h"
 
 #define NAMESPACE battle_star_chill_out
 

@@ -1,7 +1,7 @@
 #include "flo_10.h"
 #include "message_ids.h"
 #include "effects.h"
-#include "sprite/npc/lily.h"
+#include "sprite/npc/Lily.h"
 
 enum {
     NPC_LILY,

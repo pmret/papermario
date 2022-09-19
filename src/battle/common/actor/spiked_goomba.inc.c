@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/spiked_goomba.h"
+#include "sprite/npc/SpikedGoomba.h"
 
 s32 N(defenseTable_8021E3B0)[] = {
     ELEMENT_NORMAL, 0,

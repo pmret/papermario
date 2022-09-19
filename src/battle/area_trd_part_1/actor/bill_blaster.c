@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bill_blaster.h"
+#include "sprite/npc/BillBlaster.h"
 
 #define AREA b_area_trd_part_1
 

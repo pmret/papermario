@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_kooper.h"
+#include "sprite/npc/BattleKooper.h"
 
 extern EvtScript N(kooper_init);
 extern EvtScript N(kooper_takeTurn);

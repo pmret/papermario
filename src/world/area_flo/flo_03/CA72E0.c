@@ -1,9 +1,9 @@
 #include "flo_03.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/dayzee.h"
-#include "sprite/npc/monty_mole.h"
-#include "sprite/npc/petunia.h"
+#include "sprite/npc/Dayzee.h"
+#include "sprite/npc/MontyMole.h"
+#include "sprite/npc/Petunia.h"
 
 enum {
     NPC_PETUNIA,

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goompa.h"
 
 #define NAMESPACE battle_partner_goombario
 

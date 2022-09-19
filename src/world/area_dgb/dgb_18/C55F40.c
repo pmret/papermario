@@ -1,13 +1,13 @@
 #include "dgb_18.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/world_bombette.h"
-#include "sprite/npc/world_bow.h"
-#include "sprite/npc/world_goombario.h"
-#include "sprite/npc/world_kooper.h"
-#include "sprite/npc/world_parakarry.h"
-#include "sprite/npc/world_tubba.h"
-#include "sprite/npc/yakkey.h"
+#include "sprite/npc/WorldBombette.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/WorldKooper.h"
+#include "sprite/npc/WorldParakarry.h"
+#include "sprite/npc/WorldTubba.h"
+#include "sprite/npc/Yakkey.h"
 
 enum {
     NPC_WORLD_TUBBA,

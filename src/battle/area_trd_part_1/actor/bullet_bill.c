@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bullet_bill.h"
+#include "sprite/npc/BulletBill.h"
 
 #define NAMESPACE b_area_trd_part_1_bullet_bill
 

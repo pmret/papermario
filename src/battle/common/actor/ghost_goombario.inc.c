@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_goombario.h"
+#include "sprite/npc/BattleGoombario.h"
 
 extern EvtScript N(goombario_init);
 extern EvtScript N(goombario_takeTurn);

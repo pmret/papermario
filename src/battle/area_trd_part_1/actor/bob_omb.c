@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bob_omb.h"
+#include "sprite/npc/Bobomb.h"
 
 #define NAMESPACE b_area_trd_part_1_bob_omb
 

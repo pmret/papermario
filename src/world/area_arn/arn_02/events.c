@@ -1,6 +1,6 @@
 #include "arn_02.h"
-#include "sprite/npc/cleft.h"
-#include "sprite/npc/goomba.h"
+#include "sprite/npc/Cleft.h"
+#include "sprite/npc/Goomba.h"
 #include "effects.h"
 #include "entity.h"
 

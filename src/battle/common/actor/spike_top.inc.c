@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/spike_top.h"
+#include "sprite/npc/SpikeTop.h"
 
 extern s32 N(idleAnimations_8021CA1C)[];
 extern EvtScript N(init_8021CAAC);

@@ -1,4 +1,4 @@
-#include "sprite/npc/battle_bombette.h"
+#include "sprite/npc/BattleBombette.h"
 
 extern EvtScript N(bombette_init);
 extern EvtScript N(bombette_takeTurn);

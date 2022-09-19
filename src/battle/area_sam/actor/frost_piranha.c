@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/putrid_piranha.h"
+#include "sprite/npc/LargePiranha.h"
 
 #define NAMESPACE b_area_sam_frost_piranha
 

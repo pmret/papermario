@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/goomba.h"
-#include "sprite/npc/paragoomba.h"
+#include "sprite/npc/Goomba.h"
+#include "sprite/npc/Paragoomba.h"
 
 s32 N(defenseTable_8021B110)[] = {
     ELEMENT_NORMAL, 0,

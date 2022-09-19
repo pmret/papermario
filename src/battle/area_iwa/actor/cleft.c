@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/cleft.h"
+#include "sprite/npc/Cleft.h"
 
 #define NAMESPACE b_area_iwa_cleft
 

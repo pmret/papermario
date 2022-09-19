@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_mamar.h"
+#include "sprite/npc/BattleMamar.h"
 
 #define NAMESPACE battle_star_lullaby
 

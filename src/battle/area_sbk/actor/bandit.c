@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_bandit.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/Bandit.h"
+#include "sprite/npc/WorldParakarry.h"
 
 #define NAMESPACE b_area_sbk_bandit
 

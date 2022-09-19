@@ -1,13 +1,14 @@
 #include "common.h"
 #include "ld_addrs.h"
-#include "sprite/npc/battle_goombario.h"
-#include "sprite/npc/battle_kooper.h"
-#include "sprite/npc/battle_bombette.h"
-#include "sprite/npc/battle_parakarry.h"
-#include "sprite/npc/battle_watt.h"
-#include "sprite/npc/battle_sushie.h"
-#include "sprite/npc/battle_lakilester.h"
-#include "sprite/npc/battle_bow.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/BattleKooper.h"
+#include "sprite/npc/BattleBombette.h"
+#include "sprite/npc/BattleParakarry.h"
+#include "sprite/npc/BattleWatt.h"
+#include "sprite/npc/BattleSushie.h"
+#include "sprite/npc/BattleLakilester.h"
+#include "sprite/npc/BattleBow.h"
 
 typedef struct StarPowerEntry {
     /* 0x04 */ void* dmaStart;
@@ -45,7 +46,7 @@ StarPowerEntry D_8029C7D0[] = {
 };
 
 s32 D_8029C890[10][5] = {
-    { 0x1001F,                                      0x1002C,                                      0x1002A,                                      0x10005,                                      0, }, // Junk? These IDs should be in world_goombario, but don't exist.
+    { SPRITE_ID(SPR_WorldGoombario, 0x1F), SPRITE_ID(SPR_WorldGoombario, 0x2C), SPRITE_ID(SPR_WorldGoombario, 0x2A), SPRITE_ID(SPR_WorldGoombario, 0x5), }, // Junk? These IDs should be in world_goombario, but don't exist.
     { ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim1, },
     { ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim4, },
     { ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim4, },

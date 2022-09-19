@@ -1,13 +1,13 @@
 #include "pause_common.h"
 #include "message_ids.h"
 #include "sprite.h"
-#include "sprite/npc/world_eldstar.h"
-#include "sprite/npc/world_mamar.h"
-#include "sprite/npc/world_skolar.h"
-#include "sprite/npc/world_muskular.h"
-#include "sprite/npc/world_misstar.h"
-#include "sprite/npc/world_klevar.h"
-#include "sprite/npc/world_kalmar.h"
+#include "sprite/npc/WorldEldstar.h"
+#include "sprite/npc/WorldMamar.h"
+#include "sprite/npc/WorldSkolar.h"
+#include "sprite/npc/WorldMuskular.h"
+#include "sprite/npc/WorldMisstar.h"
+#include "sprite/npc/WorldKlevar.h"
+#include "sprite/npc/WorldKalmar.h"
 
 extern Gfx gPauseDLSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
