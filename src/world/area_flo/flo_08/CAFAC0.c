@@ -316,7 +316,7 @@ EvtScript N(interact_80243214) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0042)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim2, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0042)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
         EVT_SET(LVar0, EVT_PTR(N(FlowerGuard_ItemChoiceList)))
@@ -325,22 +325,22 @@ EvtScript N(interact_80243214) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0043)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim2, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0043)
             EVT_CASE_DEFAULT
                 EVT_SET(LVar8, LVar0)
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
                 EVT_CALL(MakeItemEntity, LVar8, -695, 20, -29, 1, 0)
                 EVT_SET(LVar7, LVar0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_3)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim3)
                 EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0046)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim4, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0046)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x21C, 0)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_7)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Yellow_Anim9, ANIM_GateFlower_Yellow_Anim8, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim7)
                         EVT_CALL(PlaySoundAtCollider, 17, 457, 0)
                         EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
@@ -361,17 +361,17 @@ EvtScript N(interact_80243214) = {
                                 EVT_BREAK_LOOP
                             EVT_END_IF
                         EVT_END_LOOP
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim5)
                         EVT_SET(GF_FLO08_GaveYellowBerry, 1)
                     EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0045)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim4, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0045)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim1)
                     EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0045)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim4, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0045)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim1)
                     EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MSG_CH6_0044)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_6)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim4, ANIM_GateFlower_Yellow_Anim1, 0, MSG_CH6_0044)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim6)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, LVar8, 125, 20, 0, 1, 0)
                         EVT_SET(LVar7, LVar0)
@@ -416,10 +416,10 @@ EvtScript N(interact_80243214) = {
                                 EVT_END_IF
                             EVT_END_LOOP
                         EVT_END_IF
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim1)
                         EVT_CALL(RemoveItemEntity, LVar7)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim1)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Yellow_Anim2, ANIM_GateFlower_Yellow_Anim1, 0)
                 EVT_END_SWITCH
         EVT_END_SWITCH
         EVT_THREAD
@@ -428,9 +428,9 @@ EvtScript N(interact_80243214) = {
         EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0, MSG_CH6_0047)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim9, ANIM_GateFlower_Yellow_Anim8, 0, MSG_CH6_0047)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0, MSG_CH6_0048)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Anim9, ANIM_GateFlower_Yellow_Anim8, 0, MSG_CH6_0048)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -442,7 +442,7 @@ EvtScript N(interact_80243214) = {
 EvtScript N(init_80243B20) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243214)))
     EVT_IF_EQ(GF_FLO08_GaveYellowBerry, 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Anim5)
         EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
         EVT_CALL(RotateModel, 103, 50, 0, 1, 0)
         EVT_CALL(RotateModel, 104, 50, 0, 1, 0)
@@ -468,22 +468,22 @@ StaticNpc N(npcGroup_80243C48) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
-        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
+        ANIM_GateFlower_Yellow_Anim1,
     },
     .tattle = MSG_NpcTattle_YellowGateFlower,
 };
@@ -507,22 +507,22 @@ StaticNpc N(npcGroup_80243E38) = {
     },
 	.territory = { .temp = { 205, 0, -80, 30, 0, -32767, 0, 205, 0, -80, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -546,22 +546,22 @@ StaticNpc N(npcGroup_80244028) = {
     },
 	.territory = { .temp = { 275, 0, -115, 30, 0, -32767, 0, 275, 0, -115, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -585,22 +585,22 @@ StaticNpc N(npcGroup_80244218) = {
     },
 	.territory = { .temp = { -230, 60, -110, 30, 0, -32767, 0, -230, 60, -110, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -624,22 +624,22 @@ StaticNpc N(npcGroup_80244408) = {
     },
 	.territory = { .temp = { -330, 60, -110, 30, 0, -32767, 0, -330, 60, -110, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -663,22 +663,22 @@ StaticNpc N(npcGroup_802445F8) = {
     },
 	.territory = { .temp = { -430, 60, -110, 30, 0, -32767, 0, -430, 60, -110, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -702,22 +702,22 @@ StaticNpc N(npcGroup_802447E8) = {
     },
 	.territory = { .temp = { -530, 60, -110, 30, 0, -32767, 0, -530, 60, -110, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -741,22 +741,22 @@ StaticNpc N(npcGroup_802449D8) = {
     },
 	.territory = { .temp = { -630, 60, -110, 30, 0, -32767, 0, -630, 60, -110, 150, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_2,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_3,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_8,
-        NPC_ANIM_dayzee_Palette_00_Anim_6,
-        NPC_ANIM_dayzee_Palette_00_Anim_7,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
-        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim2,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim3,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim8,
+        ANIM_Dayzee_Anim6,
+        ANIM_Dayzee_Anim7,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -804,22 +804,22 @@ StaticNpc N(npcGroup_80244CD4) = {
     },
 	.territory = { .temp = { 240, 0, -90, 30, 0, -32767, 0, 240, 0, -90, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_2,
-        NPC_ANIM_dayzee_Palette_01_Anim_3,
-        NPC_ANIM_dayzee_Palette_01_Anim_3,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_8,
-        NPC_ANIM_dayzee_Palette_01_Anim_8,
-        NPC_ANIM_dayzee_Palette_01_Anim_6,
-        NPC_ANIM_dayzee_Palette_01_Anim_7,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
-        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim2,
+        ANIM_Dayzee_Amazy_Anim3,
+        ANIM_Dayzee_Amazy_Anim3,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim8,
+        ANIM_Dayzee_Amazy_Anim8,
+        ANIM_Dayzee_Amazy_Anim6,
+        ANIM_Dayzee_Amazy_Anim7,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
+        ANIM_Dayzee_Amazy_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

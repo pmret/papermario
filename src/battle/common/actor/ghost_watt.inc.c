@@ -141,15 +141,15 @@ extern EvtScript N(watt_idle);
 extern EvtScript N(watt_handleEvent);
 
 s32 N(watt_idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_battle_watt_Palette_00_Anim_1,
-    STATUS_STONE, NPC_ANIM_battle_watt_Palette_00_Anim_0,
-    STATUS_SLEEP, NPC_ANIM_battle_watt_Palette_00_Anim_0,
-    STATUS_POISON, NPC_ANIM_battle_watt_Palette_00_Anim_1,
-    STATUS_STOP, NPC_ANIM_battle_watt_Palette_00_Anim_0,
-    STATUS_STATIC, NPC_ANIM_battle_watt_Palette_00_Anim_1,
-    STATUS_PARALYZE, NPC_ANIM_battle_watt_Palette_00_Anim_0,
-    STATUS_DIZZY, NPC_ANIM_battle_watt_Palette_00_Anim_F,
-    STATUS_FEAR, NPC_ANIM_battle_watt_Palette_00_Anim_F,
+    STATUS_NORMAL, ANIM_BattleWatt_Anim1,
+    STATUS_STONE, ANIM_BattleWatt_Anim0,
+    STATUS_SLEEP, ANIM_BattleWatt_Anim0,
+    STATUS_POISON, ANIM_BattleWatt_Anim1,
+    STATUS_STOP, ANIM_BattleWatt_Anim0,
+    STATUS_STATIC, ANIM_BattleWatt_Anim1,
+    STATUS_PARALYZE, ANIM_BattleWatt_Anim0,
+    STATUS_DIZZY, ANIM_BattleWatt_AnimF,
+    STATUS_FEAR, ANIM_BattleWatt_AnimF,
     STATUS_END,
 };
 
@@ -261,74 +261,74 @@ EvtScript N(watt_handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_D)
-            EVT_SET_CONST(LVar2, NPC_ANIM_battle_watt_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimD)
+            EVT_SET_CONST(LVar2, ANIM_BattleWatt_AnimE)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_D)
-            EVT_SET_CONST(LVar2, NPC_ANIM_battle_watt_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimD)
+            EVT_SET_CONST(LVar2, ANIM_BattleWatt_AnimE)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_CALL(N(UnkWattEffectFunc2))
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimE)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_CALL(N(UnkWattEffectFunc2))
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_Anim1)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(N(UnkWattEffectFunc2))
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_3)
-            EVT_SET_CONST(LVar2, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_Anim3)
+            EVT_SET_CONST(LVar2, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_Anim3)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_watt_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_BattleWatt_AnimC)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -350,17 +350,17 @@ EvtScript N(watt_takeTurn) = {
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim3)
     EVT_CALL(N(UnkWattEffectFunc5), 1)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 15, -10, 5)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim1)
     EVT_CALL(N(UnkWattEffectFunc5), 0)
     EVT_WAIT(5)
     EVT_CALL(N(UnkWattEffectFunc3), 0)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 25, 20, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 15, -20, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim5)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 5, 0, 10)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -370,7 +370,7 @@ EvtScript N(watt_takeTurn) = {
             EVT_SET(LVarA, LVar0)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim1)
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -40, 10, 0)
@@ -384,9 +384,9 @@ EvtScript N(watt_takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim3)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -409,7 +409,7 @@ EvtScript N(watt_takeTurn) = {
     EVT_END_IF
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim6)
     EVT_LOOP(LVarA)
         EVT_ADD(LVar9, 3)
         EVT_IF_GT(LVar9, 200)
@@ -418,7 +418,7 @@ EvtScript N(watt_takeTurn) = {
         EVT_CALL(N(SetBackgroundAlpha), LVar9)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim1)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 9)
     EVT_CALL(AddBattleCamZoom, 75)
     EVT_CALL(MoveBattleCamOver, 5)
@@ -449,9 +449,9 @@ EvtScript N(watt_takeTurn) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim3)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_watt_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Anim1)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

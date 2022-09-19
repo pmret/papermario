@@ -340,9 +340,9 @@ EvtScript N(802A267C) = {
 EvtScript N(usePower) = {
     EVT_CALL(func_802A1518_7905E8)
     EVT_EXEC_WAIT(N(802A18F0))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_muskular_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleMuskular_Anim1)
     EVT_EXEC_WAIT(N(802A2020))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_muskular_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleMuskular_Anim2)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(PlaySound, 0x244)

@@ -175,33 +175,33 @@ ActorBlueprint N(flying) = {
 };
 
 s32 N(idleAnimations_80223D70)[] = {
-    STATUS_NORMAL,    NPC_ANIM_magikoopa_Palette_03_Anim_1,
-    STATUS_STONE,     NPC_ANIM_magikoopa_Palette_03_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_magikoopa_Palette_03_Anim_8,
-    STATUS_POISON,    NPC_ANIM_magikoopa_Palette_03_Anim_1,
-    STATUS_STOP,      NPC_ANIM_magikoopa_Palette_03_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_magikoopa_Palette_03_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_magikoopa_Palette_03_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_magikoopa_Palette_03_Anim_7,
-    STATUS_FEAR,      NPC_ANIM_magikoopa_Palette_03_Anim_7,
+    STATUS_NORMAL,    ANIM_Magikoopa_White_Anim1,
+    STATUS_STONE,     ANIM_Magikoopa_White_Anim0,
+    STATUS_SLEEP,     ANIM_Magikoopa_White_Anim8,
+    STATUS_POISON,    ANIM_Magikoopa_White_Anim1,
+    STATUS_STOP,      ANIM_Magikoopa_White_Anim0,
+    STATUS_STATIC,    ANIM_Magikoopa_White_Anim1,
+    STATUS_PARALYZE,  ANIM_Magikoopa_White_Anim0,
+    STATUS_DIZZY,     ANIM_Magikoopa_White_Anim7,
+    STATUS_FEAR,      ANIM_Magikoopa_White_Anim7,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80223DBC)[] = {
-    STATUS_NORMAL,    NPC_ANIM_flying_magikoopa_Palette_03_Anim_1,
-    STATUS_STONE,     NPC_ANIM_flying_magikoopa_Palette_03_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_flying_magikoopa_Palette_03_Anim_8,
-    STATUS_POISON,    NPC_ANIM_flying_magikoopa_Palette_03_Anim_1,
-    STATUS_STOP,      NPC_ANIM_flying_magikoopa_Palette_03_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_flying_magikoopa_Palette_03_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_flying_magikoopa_Palette_03_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_flying_magikoopa_Palette_03_Anim_7,
-    STATUS_FEAR,      NPC_ANIM_flying_magikoopa_Palette_03_Anim_7,
+    STATUS_NORMAL,    ANIM_FlyingMagikoopa_White_Anim1,
+    STATUS_STONE,     ANIM_FlyingMagikoopa_White_Anim0,
+    STATUS_SLEEP,     ANIM_FlyingMagikoopa_White_Anim8,
+    STATUS_POISON,    ANIM_FlyingMagikoopa_White_Anim1,
+    STATUS_STOP,      ANIM_FlyingMagikoopa_White_Anim0,
+    STATUS_STATIC,    ANIM_FlyingMagikoopa_White_Anim1,
+    STATUS_PARALYZE,  ANIM_FlyingMagikoopa_White_Anim0,
+    STATUS_DIZZY,     ANIM_FlyingMagikoopa_White_Anim7,
+    STATUS_FEAR,      ANIM_FlyingMagikoopa_White_Anim7,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80223E08)[] = {
-    STATUS_NORMAL,    NPC_ANIM_flying_magikoopa_Palette_03_Anim_A,
+    STATUS_NORMAL,    ANIM_FlyingMagikoopa_White_AnimA,
     STATUS_END,
 };
 
@@ -232,68 +232,68 @@ EvtScript N(handleEvent_80223E24) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_5)
-            EVT_SET_CONST(LVar2, NPC_ANIM_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim5)
+            EVT_SET_CONST(LVar2, ANIM_Magikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_5)
-            EVT_SET_CONST(LVar2, NPC_ANIM_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim5)
+            EVT_SET_CONST(LVar2, ANIM_Magikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim1)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim4)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim2)
             EVT_EXEC_WAIT(N(run_away))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim2)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -305,7 +305,7 @@ EvtScript N(handleEvent_80223E24) = {
                 EVT_END_IF
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -343,12 +343,12 @@ EvtScript N(8022433C) = {
 EvtScript N(80224448) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim4)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(GetLastElement, LVar0)
     EVT_IF_FLAG(LVar0, DAMAGE_TYPE_POW)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim4)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_RETURN
@@ -379,7 +379,7 @@ EvtScript N(80224448) = {
     EVT_END_THREAD
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar3)
     EVT_IF_EQ(LVar3, EVENT_15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim4)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_ADD(LVar4, 10)
         EVT_ADD(LVar5, 5)
@@ -396,7 +396,7 @@ EvtScript N(80224448) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_WHITE_MAGIKOOPA)
@@ -424,13 +424,13 @@ EvtScript N(handleEvent_80224A44) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_EXEC_WAIT(N(8022433C))
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_FALL_TRIGGER)
             EVT_EXEC_WAIT(N(8022433C))
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(80224448))
         EVT_END_CASE_GROUP
@@ -438,75 +438,75 @@ EvtScript N(handleEvent_80224A44) = {
         EVT_CASE_OR_EQ(EVENT_15)
             EVT_EXEC_WAIT(N(8022433C))
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_5)
-            EVT_SET_CONST(LVar2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim5)
+            EVT_SET_CONST(LVar2, ANIM_FlyingMagikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(80224448))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_5)
-            EVT_SET_CONST(LVar2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim5)
+            EVT_SET_CONST(LVar2, ANIM_FlyingMagikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim6)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim1)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim1)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim1)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim2)
             EVT_EXEC_WAIT(N(run_away))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim2)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -518,7 +518,7 @@ EvtScript N(handleEvent_80224A44) = {
                 EVT_END_IF
             EVT_END_IF
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_flying_magikoopa_Palette_03_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim4)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -552,7 +552,7 @@ EvtScript N(wMagikoopa_ShapeSpell) = {
         EVT_ADD(LVar1, 36)
     EVT_END_IF
     EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim2)
     EVT_WAIT(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -560,7 +560,7 @@ EvtScript N(wMagikoopa_ShapeSpell) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim3)
             EVT_WAIT(5)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar9)
@@ -591,7 +591,7 @@ EvtScript N(wMagikoopa_ShapeSpell) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim3)
     EVT_WAIT(5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
@@ -631,7 +631,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2DB)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim2)
         EVT_SET(LVar0, 200)
         EVT_LOOP(20)
             EVT_SUB(LVar0, 10)
@@ -658,7 +658,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim3)
     EVT_WAIT(11)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2DC)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -679,7 +679,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
             EVT_END_LOOP
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim1)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
             EVT_SET(LVar0, 55)
             EVT_LOOP(20)
@@ -709,7 +709,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
             EVT_END_LOOP
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim1)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
             EVT_SET(LVar0, 55)
             EVT_LOOP(20)
@@ -944,9 +944,9 @@ EvtScript N(healOne) = {
     EVT_WAIT(15)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim2)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim2)
     EVT_END_IF
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
@@ -983,9 +983,9 @@ EvtScript N(healOne) = {
     EVT_WAIT(30)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim1)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim1)
     EVT_END_IF
     EVT_WAIT(5)
     EVT_THREAD
@@ -1030,9 +1030,9 @@ EvtScript N(healAll) = {
     EVT_WAIT(15)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim2)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim2)
     EVT_END_IF
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
@@ -1069,9 +1069,9 @@ EvtScript N(healAll) = {
     EVT_WAIT(30)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim1)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_White_Anim1)
     EVT_END_IF
     EVT_WAIT(5)
     EVT_CALL(EnemyCreateTargetList, 32770)

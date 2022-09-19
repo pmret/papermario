@@ -47,51 +47,51 @@ Vp gPausePartnersViewport = {
 };
 s32 gPausePartnersSpriteAnims[][4] = {
     {
-        NPC_ANIM_world_goombario_normal_still,
-        NPC_ANIM_world_goombario_normal_walk,
-        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_WorldGoombario_Anim0,
+        ANIM_WorldGoombario_Anim2,
+        ANIM_WorldGoombario_Anim8,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_kooper_normal_still,
-        NPC_ANIM_world_kooper_normal_walk,
-        NPC_ANIM_world_kooper_normal_talk,
+        ANIM_WorldKooper_Anim0,
+        ANIM_WorldKooper_Anim4,
+        ANIM_WorldKooper_AnimD,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_bombette_normal_still,
-        NPC_ANIM_world_bombette_normal_walk,
-        NPC_ANIM_world_bombette_normal_idle_fast,
+        ANIM_WorldBombette_Anim0,
+        ANIM_WorldBombette_Anim5,
+        ANIM_WorldBombette_AnimE,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_parakarry_Palette_00_Anim_0,
-        NPC_ANIM_world_parakarry_Palette_00_Anim_2,
-        NPC_ANIM_world_parakarry_Palette_00_Anim_6,
+        ANIM_WorldParakarry_Anim0,
+        ANIM_WorldParakarry_Anim2,
+        ANIM_WorldParakarry_Anim6,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_bow_Palette_00_Anim_0,
-        NPC_ANIM_world_bow_Palette_00_Anim_2,
-        NPC_ANIM_world_bow_Palette_00_Anim_4,
+        ANIM_WorldBow_Anim0,
+        ANIM_WorldBow_Anim2,
+        ANIM_WorldBow_Anim4,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_watt_Palette_00_Anim_0,
-        NPC_ANIM_world_watt_Palette_00_Anim_2,
-        NPC_ANIM_world_watt_Palette_00_Anim_4,
+        ANIM_WorldWatt_Anim0,
+        ANIM_WorldWatt_Anim2,
+        ANIM_WorldWatt_Anim4,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_sushie_Palette_00_Anim_0,
-        NPC_ANIM_world_sushie_Palette_00_Anim_2,
-        NPC_ANIM_world_sushie_Palette_00_Anim_4,
+        ANIM_WorldSushie_Anim0,
+        ANIM_WorldSushie_Anim2,
+        ANIM_WorldSushie_Anim4,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_lakilester_Palette_00_Anim_0,
-        NPC_ANIM_world_lakilester_Palette_00_Anim_5,
-        NPC_ANIM_world_lakilester_Palette_00_Anim_9,
+        ANIM_WorldLakilester_Anim0,
+        ANIM_WorldLakilester_Anim5,
+        ANIM_WorldLakilester_Anim9,
         ANIM_LIST_END
     }
 };

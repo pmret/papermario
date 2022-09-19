@@ -148,51 +148,51 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_80218DC8)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pokey_Palette_01_Anim_4,
-    STATUS_STONE,     NPC_ANIM_pokey_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_pokey_Palette_01_Anim_25,
-    STATUS_STOP,      NPC_ANIM_pokey_Palette_01_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_pokey_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_pokey_Palette_01_Anim_21,
-    STATUS_FEAR,      NPC_ANIM_pokey_Palette_01_Anim_21,
+    STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim4,
+    STATUS_STONE,     ANIM_Pokey_Mummy_Anim0,
+    STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim25,
+    STATUS_STOP,      ANIM_Pokey_Mummy_Anim0,
+    STATUS_PARALYZE,  ANIM_Pokey_Mummy_Anim0,
+    STATUS_DIZZY,     ANIM_Pokey_Mummy_Anim21,
+    STATUS_FEAR,      ANIM_Pokey_Mummy_Anim21,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218E04)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pokey_Palette_01_Anim_5,
-    STATUS_STONE,     NPC_ANIM_pokey_Palette_01_Anim_1,
-    STATUS_SLEEP,     NPC_ANIM_pokey_Palette_01_Anim_26,
-    STATUS_STOP,      NPC_ANIM_pokey_Palette_01_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_pokey_Palette_01_Anim_1,
-    STATUS_DIZZY,     NPC_ANIM_pokey_Palette_01_Anim_22,
-    STATUS_FEAR,      NPC_ANIM_pokey_Palette_01_Anim_22,
+    STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim5,
+    STATUS_STONE,     ANIM_Pokey_Mummy_Anim1,
+    STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim26,
+    STATUS_STOP,      ANIM_Pokey_Mummy_Anim1,
+    STATUS_PARALYZE,  ANIM_Pokey_Mummy_Anim1,
+    STATUS_DIZZY,     ANIM_Pokey_Mummy_Anim22,
+    STATUS_FEAR,      ANIM_Pokey_Mummy_Anim22,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218E40)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pokey_Palette_01_Anim_6,
-    STATUS_STONE,     NPC_ANIM_pokey_Palette_01_Anim_2,
-    STATUS_SLEEP,     NPC_ANIM_pokey_Palette_01_Anim_27,
-    STATUS_STOP,      NPC_ANIM_pokey_Palette_01_Anim_2,
-    STATUS_PARALYZE,  NPC_ANIM_pokey_Palette_01_Anim_2,
-    STATUS_DIZZY,     NPC_ANIM_pokey_Palette_01_Anim_23,
-    STATUS_FEAR,      NPC_ANIM_pokey_Palette_01_Anim_23,
+    STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim6,
+    STATUS_STONE,     ANIM_Pokey_Mummy_Anim2,
+    STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim27,
+    STATUS_STOP,      ANIM_Pokey_Mummy_Anim2,
+    STATUS_PARALYZE,  ANIM_Pokey_Mummy_Anim2,
+    STATUS_DIZZY,     ANIM_Pokey_Mummy_Anim23,
+    STATUS_FEAR,      ANIM_Pokey_Mummy_Anim23,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218E7C)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pokey_Palette_01_Anim_7,
-    STATUS_STONE,     NPC_ANIM_pokey_Palette_01_Anim_3,
-    STATUS_SLEEP,     NPC_ANIM_pokey_Palette_01_Anim_28,
-    STATUS_STOP,      NPC_ANIM_pokey_Palette_01_Anim_3,
-    STATUS_PARALYZE,  NPC_ANIM_pokey_Palette_01_Anim_3,
-    STATUS_DIZZY,     NPC_ANIM_pokey_Palette_01_Anim_24,
-    STATUS_FEAR,      NPC_ANIM_pokey_Palette_01_Anim_24,
+    STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim7,
+    STATUS_STONE,     ANIM_Pokey_Mummy_Anim3,
+    STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim28,
+    STATUS_STOP,      ANIM_Pokey_Mummy_Anim3,
+    STATUS_PARALYZE,  ANIM_Pokey_Mummy_Anim3,
+    STATUS_DIZZY,     ANIM_Pokey_Mummy_Anim24,
+    STATUS_FEAR,      ANIM_Pokey_Mummy_Anim24,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218EB8)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pokey_Palette_01_Anim_16,
+    STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim16,
     STATUS_END,
 };
 
@@ -413,19 +413,19 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_CASE_EQ(0)
                     EVT_SET(LVar0, 0)
                     EVT_SET(LVar1, 77)
-                    EVT_SET_CONST(LVar2, NPC_ANIM_pokey_Palette_01_Anim_21)
+                    EVT_SET_CONST(LVar2, ANIM_Pokey_Mummy_Anim21)
                 EVT_CASE_EQ(1)
                     EVT_SET(LVar0, 0)
                     EVT_SET(LVar1, 59)
-                    EVT_SET_CONST(LVar2, NPC_ANIM_pokey_Palette_01_Anim_22)
+                    EVT_SET_CONST(LVar2, ANIM_Pokey_Mummy_Anim22)
                 EVT_CASE_EQ(2)
                     EVT_SET(LVar0, 0)
                     EVT_SET(LVar1, 41)
-                    EVT_SET_CONST(LVar2, NPC_ANIM_pokey_Palette_01_Anim_23)
+                    EVT_SET_CONST(LVar2, ANIM_Pokey_Mummy_Anim23)
                 EVT_CASE_EQ(3)
                     EVT_SET(LVar0, 0)
                     EVT_SET(LVar1, 23)
-                    EVT_SET_CONST(LVar2, NPC_ANIM_pokey_Palette_01_Anim_24)
+                    EVT_SET_CONST(LVar2, ANIM_Pokey_Mummy_Anim24)
             EVT_END_SWITCH
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP)
@@ -481,7 +481,7 @@ EvtScript N(takeTurn_80219D88) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetPartPos, ACTOR_SELF, 6, LVar0, LVar1, LVar2)
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(2.2))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 6, NPC_ANIM_pokey_Palette_01_Anim_16)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_Pokey_Mummy_Anim16)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
         EVT_SWITCH(LVarA)
@@ -540,7 +540,7 @@ EvtScript N(takeTurn_80219D88) = {
             EVT_SUB(LVar1, 5)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 6, EVT_FLOAT(20.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.1))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 6, NPC_ANIM_pokey_Palette_01_Anim_16)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_Pokey_Mummy_Anim16)
             EVT_CALL(JumpPartTo, ACTOR_SELF, 6, LVar0, LVar1, LVar2, 0, 1)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 6, ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar1)
@@ -553,7 +553,7 @@ EvtScript N(takeTurn_80219D88) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 6, EVT_FLOAT(20.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.1))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 6, NPC_ANIM_pokey_Palette_01_Anim_16)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_Pokey_Mummy_Anim16)
     EVT_CALL(JumpPartTo, ACTOR_SELF, 6, LVar0, LVar1, LVar2, 0, 1)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0x00000008 | 0x00000020 | STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_POISON | STATUS_FLAG_80000000, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar1)
@@ -596,18 +596,18 @@ EvtScript N(8021A6C8) = {
     EVT_ADD(LVar0, 50)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_AnimB)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_Anim7)
     EVT_WAIT(4)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(4)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_AnimB)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -659,11 +659,11 @@ EvtScript N(8021A6C8) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_B)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_AnimB)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(D_8029C12C)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_Anim7)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -681,7 +681,7 @@ EvtScript N(8021A6C8) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0x00000004 | 0x00000020 | 0x00000040 | STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_POISON | STATUS_FLAG_80000000, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_Anim7)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
@@ -702,14 +702,14 @@ EvtScript N(8021A6C8) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_SUB(LVar0, 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_Anim7)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_B)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_AnimB)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(D_8029C12C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pokey_Palette_01_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Mummy_Anim7)
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -919,7 +919,7 @@ EvtScript N(8021BDE4) = {
     EVT_SWITCH(LVar1)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 6, NPC_ANIM_pokey_Palette_00_Anim_20)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_Pokey_Anim20)
             EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar1)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT

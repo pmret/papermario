@@ -11,25 +11,25 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_duplighost_Palette_00_Anim_2,
-    STATUS_STONE, NPC_ANIM_duplighost_Palette_00_Anim_0,
-    STATUS_SLEEP, NPC_ANIM_duplighost_Palette_00_Anim_D,
-    STATUS_POISON, NPC_ANIM_duplighost_Palette_00_Anim_2,
-    STATUS_STOP, NPC_ANIM_duplighost_Palette_00_Anim_0,
-    STATUS_STATIC, NPC_ANIM_duplighost_Palette_00_Anim_2,
-    STATUS_PARALYZE, NPC_ANIM_duplighost_Palette_00_Anim_0,
-    STATUS_DIZZY, NPC_ANIM_duplighost_Palette_00_Anim_E,
-    STATUS_FEAR, NPC_ANIM_duplighost_Palette_00_Anim_E,
+    STATUS_NORMAL, ANIM_Duplighost_Anim2,
+    STATUS_STONE, ANIM_Duplighost_Anim0,
+    STATUS_SLEEP, ANIM_Duplighost_AnimD,
+    STATUS_POISON, ANIM_Duplighost_Anim2,
+    STATUS_STOP, ANIM_Duplighost_Anim0,
+    STATUS_STATIC, ANIM_Duplighost_Anim2,
+    STATUS_PARALYZE, ANIM_Duplighost_Anim0,
+    STATUS_DIZZY, ANIM_Duplighost_AnimE,
+    STATUS_FEAR, ANIM_Duplighost_AnimE,
     STATUS_END,
 };
 
 s32 N(idleAnimations2)[] = {
-    STATUS_NORMAL, NPC_ANIM_duplighost_Palette_00_Anim_A,
+    STATUS_NORMAL, ANIM_Duplighost_AnimA,
     STATUS_END,
 };
 
 s32 N(idleAnimations3)[] = {
-    STATUS_NORMAL, NPC_ANIM_duplighost_Palette_00_Anim_4,
+    STATUS_NORMAL, ANIM_Duplighost_Anim4,
     STATUS_END,
 };
 
@@ -134,7 +134,7 @@ EvtScript N(idle) = {
 
 EvtScript N(returnHome) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_4)
+    EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim4)
     EVT_EXEC_WAIT(DoReturnHome)
     EVT_RETURN
     EVT_END
@@ -148,85 +148,85 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimC)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimC)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimC)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim2)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim2)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_4)
-            EVT_SET_CONST(LVar2, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim4)
+            EVT_SET_CONST(LVar2, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim4)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_Duplighost_AnimA)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -244,7 +244,7 @@ EvtScript N(attack) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim7)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 715, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -253,7 +253,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim8)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
@@ -264,7 +264,7 @@ EvtScript N(attack) = {
             EVT_WAIT(10)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim2)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
@@ -278,7 +278,7 @@ EvtScript N(attack) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim8)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
@@ -296,7 +296,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_9)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim9)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
             EVT_ADD(LVar0, 30)
@@ -355,7 +355,7 @@ EvtScript N(OnHitElectric) = {
     EVT_CALL(SetActorVar, LVarA, 8, 2)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations2)))
-    EVT_CALL(SetAnimation, LVarA, 1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_AnimA)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(GetActorPos, LVarA, LVarB, LVarC, LVarD)
@@ -374,7 +374,7 @@ EvtScript N(OnHitElectric) = {
     EVT_CALL(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
-    EVT_CALL(SetAnimation, LVarA, 1, NPC_ANIM_duplighost_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim2)
     EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -424,7 +424,7 @@ EvtScript N(OnShockHit) = {
     EVT_CALL(SetActorVar, LVarA, 8, 3)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, 1)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations2)))
-    EVT_CALL(SetAnimation, LVarA, 1, NPC_ANIM_duplighost_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_AnimA)
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(0.5))
@@ -443,13 +443,13 @@ EvtScript N(OnShockHit) = {
     EVT_CALL(AddActorDecoration, LVarA, 1, 0, 2)
     EVT_CALL(SetActorYaw, LVarA, 180)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations3)))
-    EVT_CALL(SetAnimation, LVarA, 1, NPC_ANIM_duplighost_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim4)
     EVT_CALL(SetActorSpeed, LVarA, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(SetGoalPos, LVarA, LVarB, 0, LVarD)
     EVT_CALL(RunToGoal, LVarA, 0, FALSE)
-    EVT_CALL(SetAnimation, LVarA, 1, NPC_ANIM_duplighost_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim2)
     EVT_CALL(SetActorYaw, LVarA, 0)
     EVT_CALL(RemoveActorDecoration, LVarA, 1, 0)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
@@ -611,7 +611,7 @@ EvtScript N(copyPartner) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_duplighost_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim6)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)

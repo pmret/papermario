@@ -71,21 +71,21 @@ u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6,
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
-        NPC_ANIM_goombaria_Palette_00_Anim_0,
-        NPC_ANIM_goombaria_Palette_00_Anim_1,
-        NPC_ANIM_goombaria_Palette_00_Anim_B,
+        ANIM_Goombaria_Anim0,
+        ANIM_Goombaria_Anim1,
+        ANIM_Goombaria_AnimB,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_goombario_normal_still,
-        NPC_ANIM_world_goombario_normal_idle,
-        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_WorldGoombario_Anim0,
+        ANIM_WorldGoombario_Anim1,
+        ANIM_WorldGoombario_Anim8,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_goompa_Palette_00_Anim_0,
-        NPC_ANIM_goompa_Palette_00_Anim_1,
-        NPC_ANIM_goompa_Palette_00_Anim_8,
+        ANIM_Goompa_Anim0,
+        ANIM_Goompa_Anim1,
+        ANIM_Goompa_Anim8,
         ANIM_LIST_END
     }
 };

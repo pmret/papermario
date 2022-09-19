@@ -261,13 +261,13 @@ EvtScript N(idle_80242238) = {
     EVT_END_THREAD
     EVT_SET(GB_ARN_Tubba_MapID, 15)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 88)
-    EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_9)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_Anim9)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
     EVT_CALL(NpcMoveTo, NPC_SELF, -53, 180, 60)
     EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_6)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim6)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MSG_CH3_00F3)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim6, 0, MSG_CH3_00F3)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -339,7 +339,7 @@ MobileAISettings N(npcAISettings_8024271C) = {
 EvtScript N(npcAI_8024274C) = {
     EVT_EXEC(N(80242184))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE)
-    EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_C)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_AnimC)
     EVT_EXEC(N(802424E8))
     EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024271C)))
     EVT_RETURN
@@ -393,22 +393,22 @@ StaticNpc N(npcGroup_802428C0) = {
     },
 	.territory = { .temp = { 7, -500, 0, 200, -700, 0, 200, -900, 0, 200, -1000, 0, 200, -800, 0, 200, -600, 0, 200, -400, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -500, 0, 200, 1000, 250, 1, 1 }},
     .animations = {
-        NPC_ANIM_world_tubba_Palette_00_Anim_6,
-        NPC_ANIM_world_tubba_Palette_00_Anim_9,
-        NPC_ANIM_world_tubba_Palette_00_Anim_C,
-        NPC_ANIM_world_tubba_Palette_00_Anim_C,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
-        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        ANIM_WorldTubba_Anim6,
+        ANIM_WorldTubba_Anim9,
+        ANIM_WorldTubba_AnimC,
+        ANIM_WorldTubba_AnimC,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
+        ANIM_WorldTubba_Anim0,
     },
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

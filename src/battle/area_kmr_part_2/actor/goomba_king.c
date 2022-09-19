@@ -7,50 +7,50 @@
 #define NAMESPACE b_area_kmr_part_2_goomba_king
 
 s32 N(idleAnimations_80220800)[] = {
-    STATUS_NORMAL,    NPC_ANIM_goomba_king_Palette_00_Anim_1,
-    STATUS_STONE,     NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_goomba_king_Palette_00_Anim_8,
-    STATUS_POISON,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STOP,      NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_goomba_king_Palette_00_Anim_7,
+    STATUS_NORMAL,    ANIM_GoombaKing_Anim1,
+    STATUS_STONE,     ANIM_GoombaKing_Anim0,
+    STATUS_SLEEP,     ANIM_GoombaKing_Anim8,
+    STATUS_POISON,    ANIM_GoombaKing_Anim0,
+    STATUS_STOP,      ANIM_GoombaKing_Anim0,
+    STATUS_STATIC,    ANIM_GoombaKing_Anim0,
+    STATUS_PARALYZE,  ANIM_GoombaKing_Anim0,
+    STATUS_DIZZY,     ANIM_GoombaKing_Anim7,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80220844)[] = {
-    STATUS_NORMAL,    NPC_ANIM_goomba_king_Palette_00_Anim_4,
-    STATUS_STONE,     NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_goomba_king_Palette_00_Anim_8,
-    STATUS_POISON,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STOP,      NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_goomba_king_Palette_00_Anim_7,
+    STATUS_NORMAL,    ANIM_GoombaKing_Anim4,
+    STATUS_STONE,     ANIM_GoombaKing_Anim0,
+    STATUS_SLEEP,     ANIM_GoombaKing_Anim8,
+    STATUS_POISON,    ANIM_GoombaKing_Anim0,
+    STATUS_STOP,      ANIM_GoombaKing_Anim0,
+    STATUS_STATIC,    ANIM_GoombaKing_Anim0,
+    STATUS_PARALYZE,  ANIM_GoombaKing_Anim0,
+    STATUS_DIZZY,     ANIM_GoombaKing_Anim7,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80220888)[] = {
-    STATUS_NORMAL,   NPC_ANIM_goomba_king_Palette_00_Anim_7,
-    STATUS_STONE,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_SLEEP,    NPC_ANIM_goomba_king_Palette_00_Anim_8,
-    STATUS_POISON,   NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STOP,     NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STATIC,   NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_PARALYZE, NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_DIZZY,    NPC_ANIM_goomba_king_Palette_00_Anim_7,
+    STATUS_NORMAL,   ANIM_GoombaKing_Anim7,
+    STATUS_STONE,    ANIM_GoombaKing_Anim0,
+    STATUS_SLEEP,    ANIM_GoombaKing_Anim8,
+    STATUS_POISON,   ANIM_GoombaKing_Anim0,
+    STATUS_STOP,     ANIM_GoombaKing_Anim0,
+    STATUS_STATIC,   ANIM_GoombaKing_Anim0,
+    STATUS_PARALYZE, ANIM_GoombaKing_Anim0,
+    STATUS_DIZZY,    ANIM_GoombaKing_Anim7,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802208CC)[] = {
-    STATUS_NORMAL,   NPC_ANIM_goomba_king_Palette_00_Anim_9,
-    STATUS_STONE,    NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_SLEEP,    NPC_ANIM_goomba_king_Palette_00_Anim_8,
-    STATUS_POISON,   NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STOP,     NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_STATIC,   NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_PARALYZE, NPC_ANIM_goomba_king_Palette_00_Anim_0,
-    STATUS_DIZZY,    NPC_ANIM_goomba_king_Palette_00_Anim_7,
+    STATUS_NORMAL,   ANIM_GoombaKing_Anim9,
+    STATUS_STONE,    ANIM_GoombaKing_Anim0,
+    STATUS_SLEEP,    ANIM_GoombaKing_Anim8,
+    STATUS_POISON,   ANIM_GoombaKing_Anim0,
+    STATUS_STOP,     ANIM_GoombaKing_Anim0,
+    STATUS_STATIC,   ANIM_GoombaKing_Anim0,
+    STATUS_PARALYZE, ANIM_GoombaKing_Anim0,
+    STATUS_DIZZY,    ANIM_GoombaKing_Anim7,
     STATUS_END,
 };
 
@@ -238,96 +238,96 @@ EvtScript N(handleEvent_80220F34) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(9)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_D)
-            EVT_SET_CONST(LVar2, NPC_ANIM_goomba_king_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_AnimD)
+            EVT_SET_CONST(LVar2, ANIM_GoombaKing_AnimE)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(47)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(N(80220DB0))
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim4)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(GetActorVar, -127, 4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim1)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_CALL(GetActorVar, -127, 4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_D)
-            EVT_SET_CONST(LVar2, NPC_ANIM_goomba_king_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_AnimD)
+            EVT_SET_CONST(LVar2, ANIM_GoombaKing_AnimE)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_WAIT(10)
             EVT_CALL(GetActorVar, -127, 4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_E)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_AnimE)
             EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(33)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_CALL(GetActorVar, -127, 4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim6)
             EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(42)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim6)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim4)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
         EVT_CASE_EQ(53)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim1)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_GoombaKing_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -388,16 +388,16 @@ EvtScript N(80221680) = {
         EVT_CALL(AddGoalPos, ACTOR_SELF, 12, 0, 0)
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim4)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
     EVT_WAIT(8)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20ED)
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20ED)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim5)
     EVT_SET(LVar0, 0)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 18)
@@ -412,7 +412,7 @@ EvtScript N(80221680) = {
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0x80000000, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim7)
             EVT_SET(LVar0, 0)
             EVT_LOOP(20)
                 EVT_ADD(LVar0, 18)
@@ -422,12 +422,12 @@ EvtScript N(80221680) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim4)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -441,16 +441,16 @@ EvtScript N(80221680) = {
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
     EVT_SWITCH(LVarA)
         EVT_CASE_DEFAULT
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim4)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -464,7 +464,7 @@ EvtScript N(80221CD4) = {
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(15)
     EVT_CALL(func_8024ECF8, 0, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_9)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim9)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -472,14 +472,14 @@ EvtScript N(80221CD4) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim0)
     EVT_THREAD
         EVT_CALL(StartRumble, 11)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, 0x80000)
             EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(4.0))
         EVT_END_IF
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Anim1)
         EVT_CALL(PlayEffect, 0x14, 0, -80, 125, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(PlayEffect, 0x14, 0, -15, 135, 0, 85, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(PlayEffect, 0x14, 0, 100, 103, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0)

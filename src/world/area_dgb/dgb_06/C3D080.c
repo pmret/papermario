@@ -111,10 +111,10 @@ NpcSettings N(npcSettings_80240840) = {
 
 EvtScript N(interact_8024086C) = {
     EVT_IF_EQ(AreaFlag(4), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F0)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim4, ANIM_Boo_Tan_Anim1, 0, MSG_CH3_00F0)
         EVT_SET(AreaFlag(4), 1)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F1)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim4, ANIM_Boo_Tan_Anim1, 0, MSG_CH3_00F1)
         EVT_SET(AreaFlag(4), 0)
     EVT_END_IF
     EVT_RETURN
@@ -143,22 +143,22 @@ StaticNpc N(npcGroup_80240954) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_2,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_0,
-        NPC_ANIM_boo_Palette_01_Anim_0,
-        NPC_ANIM_boo_Palette_01_Anim_A,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
+        ANIM_Boo_Tan_Anim1,
+        ANIM_Boo_Tan_Anim2,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim1,
+        ANIM_Boo_Tan_Anim1,
+        ANIM_Boo_Tan_Anim0,
+        ANIM_Boo_Tan_Anim0,
+        ANIM_Boo_Tan_AnimA,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim3,
     },
     .tattle = MSG_NpcTattle_HidingBoo,
 };

@@ -207,8 +207,8 @@ EvtScript world_goombario_use_ability = {
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk,
-                 NPC_ANIM_world_goombario_normal_idle, 0, LVar0)
+        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Anim8,
+                 ANIM_WorldGoombario_Anim1, 0, LVar0)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(func_802BDB30_317A50)

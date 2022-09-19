@@ -143,41 +143,41 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_8021ED00)[] = {
-    STATUS_NORMAL,    NPC_ANIM_para_troopa_Palette_01_Anim_1,
-    STATUS_STONE,     NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_para_troopa_Palette_01_Anim_12,
-    STATUS_POISON,    NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STOP,      NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_para_troopa_Palette_01_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_para_troopa_Palette_01_Anim_13,
-    STATUS_FEAR,      NPC_ANIM_para_troopa_Palette_01_Anim_13,
+    STATUS_NORMAL,    ANIM_ParaTroopa_Anim1,
+    STATUS_STONE,     ANIM_ParaTroopa_Anim0,
+    STATUS_SLEEP,     ANIM_ParaTroopa_Anim12,
+    STATUS_POISON,    ANIM_ParaTroopa_Anim0,
+    STATUS_STOP,      ANIM_ParaTroopa_Anim0,
+    STATUS_STATIC,    ANIM_ParaTroopa_Anim1,
+    STATUS_PARALYZE,  ANIM_ParaTroopa_Anim0,
+    STATUS_DIZZY,     ANIM_ParaTroopa_Anim13,
+    STATUS_FEAR,      ANIM_ParaTroopa_Anim13,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021ED4C)[] = {
-    STATUS_NORMAL,    NPC_ANIM_para_troopa_Palette_01_Anim_1,
-    STATUS_STONE,     NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_para_troopa_Palette_01_Anim_12,
-    STATUS_POISON,    NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STOP,      NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_para_troopa_Palette_01_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_para_troopa_Palette_01_Anim_13,
-    STATUS_FEAR,      NPC_ANIM_para_troopa_Palette_01_Anim_13,
+    STATUS_NORMAL,    ANIM_ParaTroopa_Anim1,
+    STATUS_STONE,     ANIM_ParaTroopa_Anim0,
+    STATUS_SLEEP,     ANIM_ParaTroopa_Anim12,
+    STATUS_POISON,    ANIM_ParaTroopa_Anim0,
+    STATUS_STOP,      ANIM_ParaTroopa_Anim0,
+    STATUS_STATIC,    ANIM_ParaTroopa_Anim1,
+    STATUS_PARALYZE,  ANIM_ParaTroopa_Anim0,
+    STATUS_DIZZY,     ANIM_ParaTroopa_Anim13,
+    STATUS_FEAR,      ANIM_ParaTroopa_Anim13,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021ED98)[] = {
-    STATUS_NORMAL,    NPC_ANIM_para_troopa_Palette_01_Anim_F,
-    STATUS_STONE,     NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_para_troopa_Palette_01_Anim_12,
-    STATUS_POISON,    NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STOP,      NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_para_troopa_Palette_01_Anim_F,
-    STATUS_PARALYZE,  NPC_ANIM_para_troopa_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_para_troopa_Palette_01_Anim_13,
-    STATUS_FEAR,      NPC_ANIM_para_troopa_Palette_01_Anim_13,
+    STATUS_NORMAL,    ANIM_ParaTroopa_AnimF,
+    STATUS_STONE,     ANIM_ParaTroopa_Anim0,
+    STATUS_SLEEP,     ANIM_ParaTroopa_Anim12,
+    STATUS_POISON,    ANIM_ParaTroopa_Anim0,
+    STATUS_STOP,      ANIM_ParaTroopa_Anim0,
+    STATUS_STATIC,    ANIM_ParaTroopa_AnimF,
+    STATUS_PARALYZE,  ANIM_ParaTroopa_Anim0,
+    STATUS_DIZZY,     ANIM_ParaTroopa_Anim13,
+    STATUS_FEAR,      ANIM_ParaTroopa_Anim13,
     STATUS_END,
 };
 
@@ -273,11 +273,11 @@ EvtScript N(idle_8021EF5C) = {
 };
 
 EvtScript N(8021F26C) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim3)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim1)
     EVT_RETURN
     EVT_END
 };
@@ -292,11 +292,11 @@ EvtScript N(handleEvent_8021F2EC) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -307,66 +307,66 @@ EvtScript N(handleEvent_8021F2EC) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim6)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_8)
-            EVT_SET_CONST(LVar2, NPC_ANIM_para_troopa_Palette_01_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim8)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Anim9)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_8)
-            EVT_SET_CONST(LVar2, NPC_ANIM_para_troopa_Palette_01_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim8)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Anim9)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim9)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FALL_TRIGGER)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(802204DC))
         EVT_CASE_EQ(EVENT_15)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_8)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim9)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(802204DC))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim6)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(8021F26C))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim6)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_AnimB)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_AnimB)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -378,11 +378,11 @@ EvtScript N(handleEvent_8021F2EC) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim6)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
@@ -393,22 +393,22 @@ EvtScript N(handleEvent_8021F2EC) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_3)
-            EVT_SET_CONST(LVar2, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim3)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim3)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Anim7)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -427,7 +427,7 @@ EvtScript N(takeTurn_8021FA24) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_F)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim3)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
@@ -441,7 +441,7 @@ EvtScript N(takeTurn_8021FA24) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim4)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 6, 6, 0)
@@ -455,7 +455,7 @@ EvtScript N(takeTurn_8021FA24) = {
             EVT_SET(LVar1, 0)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_AnimC)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
@@ -480,13 +480,13 @@ EvtScript N(takeTurn_8021FA24) = {
             EVT_SUB(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim7)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim7)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -510,7 +510,7 @@ EvtScript N(takeTurn_8021FA24) = {
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim4)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 6, 6, 0)
@@ -521,7 +521,7 @@ EvtScript N(takeTurn_8021FA24) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_AnimC)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -532,7 +532,7 @@ EvtScript N(takeTurn_8021FA24) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_AnimD)
             EVT_THREAD
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 10, 0)
                 EVT_SET(LVar0, 0)
@@ -546,7 +546,7 @@ EvtScript N(takeTurn_8021FA24) = {
                 EVT_END_LOOP
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, -10, 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_para_troopa_Palette_01_Anim_1)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim1)
             EVT_END_THREAD
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 30, 0)
             EVT_WAIT(10)
@@ -573,7 +573,7 @@ EvtScript N(802204DC) = {
     EVT_ADD(LVar1, 8)
     EVT_SUB(LVar2, 2)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_AnimB)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 769, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
     EVT_IF_EQ(LVarA, 0)
@@ -624,7 +624,7 @@ EvtScript N(802204DC) = {
     EVT_CALL(SetGoalToIndex, ACTOR_SELF, LVar0)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021EB14)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
@@ -641,41 +641,41 @@ EvtScript N(802204DC) = {
 };
 
 s32 N(idleAnimations_80220AA0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_koopa_troopa_Palette_01_Anim_1,
-    STATUS_STONE,     NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_koopa_troopa_Palette_01_Anim_11,
-    STATUS_POISON,    NPC_ANIM_koopa_troopa_Palette_01_Anim_1,
-    STATUS_STOP,      NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_koopa_troopa_Palette_01_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_koopa_troopa_Palette_01_Anim_13,
-    STATUS_FEAR,      NPC_ANIM_koopa_troopa_Palette_01_Anim_13,
+    STATUS_NORMAL,    ANIM_KoopaTroopa_Anim1,
+    STATUS_STONE,     ANIM_KoopaTroopa_Anim0,
+    STATUS_SLEEP,     ANIM_KoopaTroopa_Anim11,
+    STATUS_POISON,    ANIM_KoopaTroopa_Anim1,
+    STATUS_STOP,      ANIM_KoopaTroopa_Anim0,
+    STATUS_STATIC,    ANIM_KoopaTroopa_Anim1,
+    STATUS_PARALYZE,  ANIM_KoopaTroopa_Anim0,
+    STATUS_DIZZY,     ANIM_KoopaTroopa_Anim13,
+    STATUS_FEAR,      ANIM_KoopaTroopa_Anim13,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80220AEC)[] = {
-    STATUS_NORMAL,    NPC_ANIM_koopa_troopa_Palette_01_Anim_3,
-    STATUS_STONE,     NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_koopa_troopa_Palette_01_Anim_11,
-    STATUS_POISON,    NPC_ANIM_koopa_troopa_Palette_01_Anim_3,
-    STATUS_STOP,      NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_koopa_troopa_Palette_01_Anim_3,
-    STATUS_PARALYZE,  NPC_ANIM_koopa_troopa_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_koopa_troopa_Palette_01_Anim_13,
-    STATUS_FEAR,      NPC_ANIM_koopa_troopa_Palette_01_Anim_13,
+    STATUS_NORMAL,    ANIM_KoopaTroopa_Anim3,
+    STATUS_STONE,     ANIM_KoopaTroopa_Anim0,
+    STATUS_SLEEP,     ANIM_KoopaTroopa_Anim11,
+    STATUS_POISON,    ANIM_KoopaTroopa_Anim3,
+    STATUS_STOP,      ANIM_KoopaTroopa_Anim0,
+    STATUS_STATIC,    ANIM_KoopaTroopa_Anim3,
+    STATUS_PARALYZE,  ANIM_KoopaTroopa_Anim0,
+    STATUS_DIZZY,     ANIM_KoopaTroopa_Anim13,
+    STATUS_FEAR,      ANIM_KoopaTroopa_Anim13,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80220B38)[] = {
-    STATUS_NORMAL,    NPC_ANIM_koopa_troopa_Palette_01_Anim_F,
-    STATUS_STONE,     NPC_ANIM_koopa_troopa_Palette_01_Anim_10,
-    STATUS_SLEEP,     NPC_ANIM_koopa_troopa_Palette_01_Anim_12,
-    STATUS_POISON,    NPC_ANIM_koopa_troopa_Palette_01_Anim_F,
-    STATUS_STOP,      NPC_ANIM_koopa_troopa_Palette_01_Anim_10,
-    STATUS_STATIC,    NPC_ANIM_koopa_troopa_Palette_01_Anim_F,
-    STATUS_PARALYZE,  NPC_ANIM_koopa_troopa_Palette_01_Anim_10,
-    STATUS_DIZZY,     NPC_ANIM_koopa_troopa_Palette_01_Anim_14,
-    STATUS_FEAR,      NPC_ANIM_koopa_troopa_Palette_01_Anim_14,
+    STATUS_NORMAL,    ANIM_KoopaTroopa_AnimF,
+    STATUS_STONE,     ANIM_KoopaTroopa_Anim10,
+    STATUS_SLEEP,     ANIM_KoopaTroopa_Anim12,
+    STATUS_POISON,    ANIM_KoopaTroopa_AnimF,
+    STATUS_STOP,      ANIM_KoopaTroopa_Anim10,
+    STATUS_STATIC,    ANIM_KoopaTroopa_AnimF,
+    STATUS_PARALYZE,  ANIM_KoopaTroopa_Anim10,
+    STATUS_DIZZY,     ANIM_KoopaTroopa_Anim14,
+    STATUS_FEAR,      ANIM_KoopaTroopa_Anim14,
     STATUS_END,
 };
 
@@ -808,33 +808,33 @@ EvtScript N(handleEvent_80221228) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_C)
-            EVT_SET_CONST(LVar2, NPC_ANIM_koopa_troopa_Palette_01_Anim_D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimC)
+            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_AnimD)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_C)
-            EVT_SET_CONST(LVar2, NPC_ANIM_koopa_troopa_Palette_01_Anim_D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimC)
+            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_AnimD)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimD)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
@@ -845,7 +845,7 @@ EvtScript N(handleEvent_80221228) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_AnimB)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_CHILD_THREAD
@@ -870,26 +870,26 @@ EvtScript N(handleEvent_80221228) = {
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_AnimF)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim4)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -897,33 +897,33 @@ EvtScript N(handleEvent_80221228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_7)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim7)
                 EVT_EXEC_WAIT(DoImmune)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_8)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim8)
                     EVT_WAIT(10)
                 EVT_END_IF
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimB)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_4)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim4)
                 EVT_EXEC_WAIT(DoReturnHome)
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -933,44 +933,44 @@ EvtScript N(handleEvent_80221228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim1)
                 EVT_EXEC_WAIT(DoRecover)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_4)
-                EVT_SET_CONST(LVar2, NPC_ANIM_koopa_troopa_Palette_01_Anim_B)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim4)
+                EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_AnimB)
                 EVT_EXEC_WAIT(DoScareAway)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_17)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim17)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
             EVT_END_IF
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_17)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim17)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
             EVT_END_IF
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
@@ -978,11 +978,11 @@ EvtScript N(handleEvent_80221228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim1)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_AnimF)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
     EVT_END_SWITCH
@@ -998,7 +998,7 @@ EvtScript N(takeTurn_80221DAC) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_6)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim6)
     EVT_ELSE
         EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -1019,7 +1019,7 @@ EvtScript N(takeTurn_80221DAC) = {
                 EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
                 EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_F)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_AnimF)
                 EVT_SET(LVar0, 0)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
                 EVT_CHILD_THREAD
@@ -1037,7 +1037,7 @@ EvtScript N(takeTurn_80221DAC) = {
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
                 EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220AA0)))
                 EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021EAD0)))
@@ -1053,7 +1053,7 @@ EvtScript N(takeTurn_80221DAC) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_7)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim7)
         EVT_WAIT(10)
         EVT_CHILD_THREAD
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1065,7 +1065,7 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_END_CHILD_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_6)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim6)
         EVT_WAIT(10)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_END_IF
@@ -1088,7 +1088,7 @@ EvtScript N(takeTurn_80221DAC) = {
                 EVT_CALL(MoveBattleCamOver, 10)
                 EVT_CALL(func_8024ECF8, -1, 1, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim8)
             EVT_WAIT(8)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -1096,15 +1096,15 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_15)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim15)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_16)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim16)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_17)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim17)
             EVT_WAIT(6)
             EVT_SUB(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1113,11 +1113,11 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_17)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim17)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim1)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetPartYaw, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -1148,13 +1148,13 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim8)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_koopa_troopa_Palette_01_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Anim4)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim1)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

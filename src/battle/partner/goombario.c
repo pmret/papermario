@@ -310,13 +310,13 @@ ApiStatus N(func_80239190_6F2270)(Evt* script, s32 isInitialCall) {
 }
 
 s32 N(idleAnimations_802391B0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_battle_goombario_default_walk,
-    STATUS_STONE,     NPC_ANIM_battle_goombario_default_still,
-    STATUS_SLEEP,     NPC_ANIM_battle_goombario_default_sleep,
-    STATUS_POISON,    NPC_ANIM_battle_goombario_default_still,
-    STATUS_STOP,      NPC_ANIM_battle_goombario_default_still,
-    STATUS_DAZE,      NPC_ANIM_battle_goombario_default_daze,
-    STATUS_TURN_DONE, NPC_ANIM_battle_goombario_default_still,
+    STATUS_NORMAL,    ANIM_BattleGoombario_Anim2,
+    STATUS_STONE,     ANIM_BattleGoombario_Anim0,
+    STATUS_SLEEP,     ANIM_BattleGoombario_Anim13,
+    STATUS_POISON,    ANIM_BattleGoombario_Anim0,
+    STATUS_STOP,      ANIM_BattleGoombario_Anim0,
+    STATUS_DAZE,      ANIM_BattleGoombario_Anim14,
+    STATUS_TURN_DONE, ANIM_BattleGoombario_Anim0,
     STATUS_END,
 };
 

@@ -274,9 +274,9 @@ EvtScript N(802A23AC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1620))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_mamar_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleMamar_Anim1)
     EVT_EXEC_WAIT(N(802A1D50))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_mamar_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleMamar_Anim2)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_WAIT(15)

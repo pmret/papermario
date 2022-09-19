@@ -83,7 +83,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_marshal_guy_Palette_00_Anim_1,
+    STATUS_NORMAL, ANIM_MarshalGuy_Anim1,
     STATUS_END,
 };
 
@@ -95,17 +95,17 @@ EvtScript N(init) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, 180, 0, 0)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_F)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_AnimF)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim4)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_5)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim5)
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim9)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -135,16 +135,16 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
         EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_AnimA)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 35)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim2)
             EVT_WAIT(24)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim3)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 5)
             EVT_ADD(LVar1, 10)
@@ -154,7 +154,7 @@ EvtScript N(handleEvent) = {
             EVT_END_LOOP
             EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_AnimC)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 8)
             EVT_CALL(SetGoalPos, ACTOR_SELF, -200, 0, 20)
@@ -167,21 +167,21 @@ EvtScript N(handleEvent) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_marshal_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_marshal_guy_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_AnimA)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_marshal_guy_Palette_00_Anim_1)
-            EVT_SET_CONST(LVar2, NPC_ANIM_marshal_guy_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim1)
+            EVT_SET_CONST(LVar2, ANIM_MarshalGuy_AnimA)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar1, NPC_ANIM_marshal_guy_Palette_00_Anim_A)
+            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_AnimA)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar1)
             EVT_WAIT(20)
     EVT_END_SWITCH

@@ -32,45 +32,45 @@ Vp gPauseSpiritsViewport = {
 };
 s32 gPauseSpiritsSpriteAnims[][4] = {
     {
-        NPC_ANIM_world_eldstar_Palette_00_Anim_0,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_1,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_2,
+        ANIM_WorldEldstar_Anim0,
+        ANIM_WorldEldstar_Anim1,
+        ANIM_WorldEldstar_Anim2,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_mamar_Palette_00_Anim_0,
-        NPC_ANIM_world_mamar_Palette_00_Anim_1,
-        NPC_ANIM_world_mamar_Palette_00_Anim_2,
+        ANIM_WorldMamar_Anim0,
+        ANIM_WorldMamar_Anim1,
+        ANIM_WorldMamar_Anim2,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_skolar_Palette_00_Anim_0,
-        NPC_ANIM_world_skolar_Palette_00_Anim_1,
-        NPC_ANIM_world_skolar_Palette_00_Anim_2,
+        ANIM_WorldSkolar_Anim0,
+        ANIM_WorldSkolar_Anim1,
+        ANIM_WorldSkolar_Anim2,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_muskular_Palette_00_Anim_0,
-        NPC_ANIM_world_muskular_Palette_00_Anim_1,
-        NPC_ANIM_world_muskular_Palette_00_Anim_2,
+        ANIM_WorldMuskular_Anim0,
+        ANIM_WorldMuskular_Anim1,
+        ANIM_WorldMuskular_Anim2,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_misstar_Palette_00_Anim_0,
-        NPC_ANIM_world_misstar_Palette_00_Anim_1,
-        NPC_ANIM_world_misstar_Palette_00_Anim_2,
+        ANIM_WorldMisstar_Anim0,
+        ANIM_WorldMisstar_Anim1,
+        ANIM_WorldMisstar_Anim2,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_klevar_Palette_00_Anim_0,
-        NPC_ANIM_world_klevar_Palette_00_Anim_1,
-        NPC_ANIM_world_klevar_Palette_00_Anim_3,
+        ANIM_WorldKlevar_Anim0,
+        ANIM_WorldKlevar_Anim1,
+        ANIM_WorldKlevar_Anim3,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_kalmar_Palette_00_Anim_0,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_1,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_2,
+        ANIM_WorldKalmar_Anim0,
+        ANIM_WorldKalmar_Anim1,
+        ANIM_WorldKalmar_Anim2,
         ANIM_LIST_END
     }
 };

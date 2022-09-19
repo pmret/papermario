@@ -81,28 +81,28 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_8021C5B4)[] = {
-    STATUS_NORMAL,    NPC_ANIM_swooper_Palette_00_Anim_C,
-    STATUS_STONE,     NPC_ANIM_swooper_Palette_00_Anim_B,
-    STATUS_SLEEP,     NPC_ANIM_swooper_Palette_00_Anim_F,
-    STATUS_POISON,    NPC_ANIM_swooper_Palette_00_Anim_C,
-    STATUS_STOP,      NPC_ANIM_swooper_Palette_00_Anim_B,
-    STATUS_STATIC,    NPC_ANIM_swooper_Palette_00_Anim_C,
-    STATUS_PARALYZE,  NPC_ANIM_swooper_Palette_00_Anim_B,
-    STATUS_DIZZY,     NPC_ANIM_swooper_Palette_00_Anim_10,
-    STATUS_FEAR,      NPC_ANIM_swooper_Palette_00_Anim_10,
+    STATUS_NORMAL,    ANIM_Swooper_AnimC,
+    STATUS_STONE,     ANIM_Swooper_AnimB,
+    STATUS_SLEEP,     ANIM_Swooper_AnimF,
+    STATUS_POISON,    ANIM_Swooper_AnimC,
+    STATUS_STOP,      ANIM_Swooper_AnimB,
+    STATUS_STATIC,    ANIM_Swooper_AnimC,
+    STATUS_PARALYZE,  ANIM_Swooper_AnimB,
+    STATUS_DIZZY,     ANIM_Swooper_Anim10,
+    STATUS_FEAR,      ANIM_Swooper_Anim10,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021C600)[] = {
-    STATUS_NORMAL,    NPC_ANIM_swooper_Palette_00_Anim_2,
-    STATUS_STONE,     NPC_ANIM_swooper_Palette_00_Anim_1,
-    STATUS_SLEEP,     NPC_ANIM_swooper_Palette_00_Anim_13,
-    STATUS_POISON,    NPC_ANIM_swooper_Palette_00_Anim_2,
-    STATUS_STOP,      NPC_ANIM_swooper_Palette_00_Anim_1,
-    STATUS_STATIC,    NPC_ANIM_swooper_Palette_00_Anim_2,
-    STATUS_PARALYZE,  NPC_ANIM_swooper_Palette_00_Anim_1,
-    STATUS_DIZZY,     NPC_ANIM_swooper_Palette_00_Anim_14,
-    STATUS_FEAR,      NPC_ANIM_swooper_Palette_00_Anim_14,
+    STATUS_NORMAL,    ANIM_Swooper_Anim2,
+    STATUS_STONE,     ANIM_Swooper_Anim1,
+    STATUS_SLEEP,     ANIM_Swooper_Anim13,
+    STATUS_POISON,    ANIM_Swooper_Anim2,
+    STATUS_STOP,      ANIM_Swooper_Anim1,
+    STATUS_STATIC,    ANIM_Swooper_Anim2,
+    STATUS_PARALYZE,  ANIM_Swooper_Anim1,
+    STATUS_DIZZY,     ANIM_Swooper_Anim14,
+    STATUS_FEAR,      ANIM_Swooper_Anim14,
     STATUS_END,
 };
 
@@ -126,20 +126,20 @@ EvtScript N(8021C6C0) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -24, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C5B4)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_AnimC)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 24)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
@@ -156,77 +156,77 @@ EvtScript N(8021C880) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_17)
-            EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim17)
+            EVT_SET_CONST(LVar2, ANIM_Swooper_Anim18)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_17)
-            EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim17)
+            EVT_SET_CONST(LVar2, ANIM_Swooper_Anim18)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim18)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_EXEC_WAIT(N(8021C6C0))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_THREAD
                 EVT_WAIT(30)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_END_THREAD
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim2)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim2)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_2)
-            EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim2)
+            EVT_SET_CONST(LVar2, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim2)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
     EVT_END_SWITCH
@@ -243,7 +243,7 @@ EvtScript N(8021CD04) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -294,22 +294,22 @@ EvtScript N(handleEvent_8021D064) = {
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_E)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_AnimE)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_E)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_AnimE)
                 EVT_EXEC_WAIT(DoNormalHit)
                 EVT_EXEC_WAIT(N(8021CD04))
             EVT_END_IF
@@ -317,13 +317,13 @@ EvtScript N(handleEvent_8021D064) = {
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_17)
-                EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_18)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim17)
+                EVT_SET_CONST(LVar2, ANIM_Swooper_Anim18)
                 EVT_EXEC_WAIT(DoBurnHit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_11)
-                EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_12)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim11)
+                EVT_SET_CONST(LVar2, ANIM_Swooper_Anim12)
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_EXEC_WAIT(N(8021CD04))
             EVT_END_IF
@@ -331,72 +331,72 @@ EvtScript N(handleEvent_8021D064) = {
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_17)
-                EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_18)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim17)
+                EVT_SET_CONST(LVar2, ANIM_Swooper_Anim18)
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_18)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim18)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_11)
-                EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_12)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim11)
+                EVT_SET_CONST(LVar2, ANIM_Swooper_Anim12)
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_12)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim12)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(D_8029A76C)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_EXEC_WAIT(N(8021C6C0))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(D_8029A76C)
             EVT_THREAD
                 EVT_WAIT(30)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_END_THREAD
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_C)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_AnimC)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
                 EVT_EXEC_WAIT(DoNormalHit)
                 EVT_WAIT(10)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_15)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_Anim15)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_E)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_AnimE)
                 EVT_EXEC_WAIT(DoNormalHit)
                 EVT_WAIT(10)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_E)
+                EVT_SET_CONST(LVar1, ANIM_Swooper_AnimE)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C600)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
@@ -408,8 +408,8 @@ EvtScript N(handleEvent_8021D064) = {
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -24, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_swooper_Palette_00_Anim_2)
-            EVT_SET_CONST(LVar2, NPC_ANIM_swooper_Palette_00_Anim_15)
+            EVT_SET_CONST(LVar1, ANIM_Swooper_Anim2)
+            EVT_SET_CONST(LVar2, ANIM_Swooper_Anim15)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
     EVT_END_SWITCH
@@ -425,7 +425,7 @@ EvtScript N(8021D7E4) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -435,7 +435,7 @@ EvtScript N(8021D7E4) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -449,7 +449,7 @@ EvtScript N(8021D7E4) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
@@ -458,7 +458,7 @@ EvtScript N(8021D7E4) = {
             EVT_SUB(LVar0, 50)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
             EVT_WAIT(15)
@@ -488,13 +488,13 @@ EvtScript N(8021D7E4) = {
     EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -502,7 +502,7 @@ EvtScript N(8021D7E4) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
@@ -525,7 +525,7 @@ EvtScript N(takeTurn_8021DED4) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -538,12 +538,12 @@ EvtScript N(takeTurn_8021DED4) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, 0)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
             EVT_WAIT(15)
@@ -573,10 +573,10 @@ EvtScript N(takeTurn_8021DED4) = {
     EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim6)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, 0)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -584,7 +584,7 @@ EvtScript N(takeTurn_8021DED4) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)

@@ -46,15 +46,15 @@ StarPowerEntry D_8029C7D0[] = {
 
 s32 D_8029C890[10][5] = {
     { 0x1001F,                                      0x1002C,                                      0x1002A,                                      0x10005,                                      0, }, // Junk? These IDs should be in world_goombario, but don't exist.
-    { NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_idle, },
-    { NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_4, },
-    { NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_4, },
-    { NPC_ANIM_battle_parakarry_Palette_00_Anim_3,  NPC_ANIM_battle_parakarry_Palette_00_Anim_18, NPC_ANIM_battle_parakarry_Palette_00_Anim_18, NPC_ANIM_battle_parakarry_Palette_00_Anim_3,  NPC_ANIM_battle_parakarry_Palette_00_Anim_1, },
+    { ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim1, },
+    { ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim4, },
+    { ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim4, },
+    { ANIM_BattleParakarry_Anim3,  ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim3,  ANIM_BattleParakarry_Anim1, },
     {}, // Goompa
-    { NPC_ANIM_battle_watt_Palette_00_Anim_3,       NPC_ANIM_battle_watt_Palette_00_Anim_A,       NPC_ANIM_battle_watt_Palette_00_Anim_A,       NPC_ANIM_battle_watt_Palette_00_Anim_3,       NPC_ANIM_battle_parakarry_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_sushie_Palette_00_Anim_3,     NPC_ANIM_battle_sushie_Palette_00_Anim_13,    NPC_ANIM_battle_sushie_Palette_00_Anim_13,    NPC_ANIM_battle_sushie_Palette_00_Anim_3,     NPC_ANIM_battle_sushie_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_lakilester_Palette_00_Anim_3, NPC_ANIM_battle_lakilester_Palette_00_Anim_9, NPC_ANIM_battle_lakilester_Palette_00_Anim_9, NPC_ANIM_battle_lakilester_Palette_00_Anim_3, NPC_ANIM_battle_lakilester_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_bow_Palette_00_Anim_3,        NPC_ANIM_battle_bow_Palette_00_Anim_13,       NPC_ANIM_battle_bow_Palette_00_Anim_13,       NPC_ANIM_battle_bow_Palette_00_Anim_3,        NPC_ANIM_battle_bow_Palette_00_Anim_1, },
+    { ANIM_BattleWatt_Anim3,       ANIM_BattleWatt_AnimA,       ANIM_BattleWatt_AnimA,       ANIM_BattleWatt_Anim3,       ANIM_BattleParakarry_Anim1, },
+    { ANIM_BattleSushie_Anim3,     ANIM_BattleSushie_Anim13,    ANIM_BattleSushie_Anim13,    ANIM_BattleSushie_Anim3,     ANIM_BattleSushie_Anim1, },
+    { ANIM_BattleLakilester_Anim3, ANIM_BattleLakilester_Anim9, ANIM_BattleLakilester_Anim9, ANIM_BattleLakilester_Anim3, ANIM_BattleLakilester_Anim1, },
+    { ANIM_BattleBow_Anim3,        ANIM_BattleBow_Anim13,       ANIM_BattleBow_Anim13,       ANIM_BattleBow_Anim3,        ANIM_BattleBow_Anim1, },
 };
 
 ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {

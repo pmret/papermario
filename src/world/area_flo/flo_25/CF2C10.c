@@ -248,7 +248,7 @@ EvtScript N(interact_80242C58) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003B)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim2, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003B)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
         EVT_SET(LVar0, EVT_PTR(N(FlowerGuard_ItemChoiceList)))
@@ -257,22 +257,22 @@ EvtScript N(interact_80242C58) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003C)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim2, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003C)
             EVT_CASE_DEFAULT
                 EVT_SET(LVar8, LVar0)
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
                 EVT_CALL(MakeItemEntity, LVar8, 505, 20, -24, 1, 0)
                 EVT_SET(LVar7, LVar0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_3)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim3)
                 EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003F)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim4, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003F)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x21C, 0)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_7)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Anim9, ANIM_GateFlower_Red_Anim8, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim7)
                         EVT_CALL(PlaySoundAtCollider, 14, 457, 0)
                         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
@@ -293,17 +293,17 @@ EvtScript N(interact_80242C58) = {
                                 EVT_BREAK_LOOP
                             EVT_END_IF
                         EVT_END_LOOP
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim5)
                         EVT_SET(GF_FLO25_GaveRedBerry, 1)
                     EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003E)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim4, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim1)
                     EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003E)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim4, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim1)
                     EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MSG_CH6_003D)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_6)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim4, ANIM_GateFlower_Red_Anim1, 0, MSG_CH6_003D)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim6)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, LVar8, -125, 20, 0, 1, 0)
                         EVT_SET(LVar7, LVar0)
@@ -348,10 +348,10 @@ EvtScript N(interact_80242C58) = {
                                 EVT_END_IF
                             EVT_END_LOOP
                         EVT_END_IF
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim1)
                         EVT_CALL(RemoveItemEntity, LVar7)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim1)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Anim2, ANIM_GateFlower_Red_Anim1, 0)
                 EVT_END_SWITCH
         EVT_END_SWITCH
         EVT_THREAD
@@ -360,9 +360,9 @@ EvtScript N(interact_80242C58) = {
         EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0, MSG_CH6_0040)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim9, ANIM_GateFlower_Red_Anim8, 0, MSG_CH6_0040)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0, MSG_CH6_0041)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim9, ANIM_GateFlower_Red_Anim8, 0, MSG_CH6_0041)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -374,7 +374,7 @@ EvtScript N(interact_80242C58) = {
 EvtScript N(init_80243564) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
     EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim5)
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
         EVT_CALL(RotateModel, 86, 50, 0, -1, 0)
         EVT_CALL(RotateModel, 87, 50, 0, -1, 0)
@@ -400,22 +400,22 @@ StaticNpc N(npcGroup_8024368C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
+        ANIM_GateFlower_Red_Anim1,
     },
     .tattle = MSG_NpcTattle_RedGateFlower,
 };
@@ -438,22 +438,22 @@ StaticNpc N(npcGroup_8024387C) = {
     },
 	.territory = { .temp = { -200, 45, 0, 30, 0, -32767, 0, -200, 45, 0, 200 }},
     .animations = {
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_6,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_6,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
+        ANIM_TuffPuff_Anim0,
+        ANIM_TuffPuff_Anim0,
+        ANIM_TuffPuff_Anim5,
+        ANIM_TuffPuff_Anim5,
+        ANIM_TuffPuff_Anim0,
+        ANIM_TuffPuff_Anim0,
+        ANIM_TuffPuff_Anim6,
+        ANIM_TuffPuff_Anim6,
+        ANIM_TuffPuff_Anim5,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
+        ANIM_TuffPuff_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -478,22 +478,22 @@ StaticNpc N(npcGroup_80243A6C) = {
     },
 	.territory = { .temp = { 150, 50, 0, 30, 0, -32767, 0, 150, 50, 0, 200, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_3,
-        NPC_ANIM_bzzap_Palette_00_Anim_3,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_6,
-        NPC_ANIM_bzzap_Palette_00_Anim_6,
-        NPC_ANIM_bzzap_Palette_00_Anim_4,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        ANIM_Bzzap_Anim2,
+        ANIM_Bzzap_Anim2,
+        ANIM_Bzzap_Anim3,
+        ANIM_Bzzap_Anim3,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim2,
+        ANIM_Bzzap_Anim6,
+        ANIM_Bzzap_Anim6,
+        ANIM_Bzzap_Anim4,
+        ANIM_Bzzap_Anim2,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim1,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
