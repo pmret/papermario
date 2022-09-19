@@ -2,13 +2,17 @@ from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 import typing
 from segtypes.common.group import CommonSegGroup
-from segtypes.common.linker_section import dotless_type
 from segtypes.segment import RomAddr, Segment
 from util import log, options
 from util.range import Range
 from util.symbols import Symbol
 
 CODE_TYPES = ["c", "asm", "hasm"]
+
+
+def dotless_type(type: str) -> str:
+    return type[1:] if type[0] == "." else type
+
 
 # code group
 class CommonSegCode(CommonSegGroup):
@@ -50,6 +54,7 @@ class CommonSegCode(CommonSegGroup):
         self.jtbl_glabels_to_add = set()
         self.jumptables: Dict[int, Tuple[int, int]] = {}
         self.rodata_syms: Dict[int, List[Symbol]] = {}
+        self.align = 0x10
 
     @property
     def needs_symbols(self) -> bool:

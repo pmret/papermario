@@ -1,7 +1,11 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+#ifdef VERSION_US
 s16 D_80074010 = 8; // might be an array, could be size 1-8
+#else
+extern s16 D_80074010;
+#endif
 
 void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);

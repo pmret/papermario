@@ -4,7 +4,6 @@
 
 #define NAMESPACE b_area_isk_part_1_isk_05
 
-BSS char N(pad)[8]; // BSS has bad alignment. Should be 0x10 aligned.
 BSS EffectInstance* N(D_80224D70);
 BSS EffectInstance* N(D_80224D74);
 

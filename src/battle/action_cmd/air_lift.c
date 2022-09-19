@@ -15,7 +15,6 @@ extern s32 D_80294340;
 
 s32 D_802A9852_4292C0[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
-BSS s32 air_lift_bss_pre[2];
 BSS s32 air_lift_bss_0;
 
 ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {

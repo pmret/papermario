@@ -1,7 +1,24 @@
 #include "common.h"
+#include "effects.h"
 
-#define NAMESPACE b_area_kzn2
+#define NAMESPACE b_area_kzn2_petit_piranha
 
-INCLUDE_ASM(s32, "battle/area_kzn2/59F420", func_80218D40_59F420);
+ApiStatus N(SetFlameUnk2C)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    FlameFXData* flame = effect->data.flame;
 
-INCLUDE_ASM(s32, "battle/area_kzn2/59F420", func_80218D90_59F470);
+    flame->unk_2C = evt_get_float_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(SetFlameX)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    FlameFXData* flame = effect->data.flame;
+
+    flame->pos.x = evt_get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}

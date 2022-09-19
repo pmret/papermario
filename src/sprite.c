@@ -1,20 +1,26 @@
 #include "sprite.h"
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
-extern s32 D_802DF540;
-extern SpriteAnimData* spr_playerSprites[13];
-extern s32 D_802DF57C;
-extern s32 spr_playerMaxComponents;
-extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
-extern SpriteAnimData* NpcSpriteData[0xEA];
-extern u8 NpcSpriteInstanceCount[0xEA];
-extern SpriteInstance SpriteInstances[51];
-
-extern Quad* D_802DFE44;
-extern s32 D_802DFE48[22];
-extern s32 D_802DFEA0[3];
-extern s32 SpriteUpdateNotifyValue;
-extern s32 MaxLoadedSpriteInstanceID;
+BSS s32 D_802DF520; // unused?
+BSS s32 spr_allocateBtlComponentsOnWorldHeap;
+BSS s32 D_802DF528[2]; // unused?
+BSS s32 MaxLoadedSpriteInstanceID;
+BSS s32 D_802DF534[3]; // unused?
+BSS s32 D_802DF540;
+BSS s32 D_802DF544; // unused?
+BSS SpriteAnimData* spr_playerSprites[13];
+BSS s32 D_802DF57C;
+BSS s32 spr_playerMaxComponents;
+BSS s32 D_802DF584; // unused?
+BSS PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
+BSS s32 D_802DF5AC; // unused?
+BSS SpriteAnimData* NpcSpriteData[234];
+BSS u8 NpcSpriteInstanceCount[234];
+BSS s32 D_802DFA44; // unused?
+BSS SpriteInstance SpriteInstances[51];
+BSS Quad* D_802DFE44;
+BSS s32 D_802DFE48[22];
+BSS s32 D_802DFEA0[3];
+BSS s32 SpriteUpdateNotifyValue;
 
 SpriteComponent** spr_allocate_components(s32);
 void spr_load_npc_extra_anims(SpriteAnimData*, u32*);
@@ -379,7 +385,7 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
     f32 rotX, rotY, rotZ;
     f32 scaleX, scaleY, scaleZ;
     s32 changedFlags;
-    
+
     u16* bufPos;
     u16* gotoPos;
     s32 cmdValue;
@@ -389,19 +395,19 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
         scaleY = 1.0f;
         scaleX = 1.0f;
         changedFlags = 0;
-  
+
         bufPos = comp->readPos;
         gotoPos = (u16*) -1;
-        
+
         comp->waitTime -= spr_animUpdateTimeScale;
-        
+
         while (comp->waitTime <= 0.0f) {
             // overflow check
             if (bufPos >= &anim->cmdList[anim->cmdListSize / 2]) {
                 bufPos = anim->cmdList;
                 break;
             }
-            
+
             switch (*bufPos & 0xF000) {
                 // 0VVV
                 // Wait
@@ -530,7 +536,7 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
                     break;
             }
         } // end loop
-        
+
         comp->readPos = bufPos;
         if (changedFlags & 1) {
             comp->posOffset.x = posX;
@@ -655,7 +661,7 @@ void spr_load_player_sprite(s32 spriteIndex) {
 void spr_init_sprites(s32 playerSpriteSet) {
     s32 loadedFlags;
     s32 i;
-    
+
     spr_allocateBtlComponentsOnWorldHeap = FALSE;
     _heap_create(&gSpriteHeapPtr, 0x40000);
     fold_init();
@@ -730,13 +736,13 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
 
     camRelativeYaw = yaw;
     spriteAnimIndex = spriteInstanceID & 0xFF;
-    
+
     animID = spr_playerCurrentAnimInfo[spriteAnimIndex].animID;
 
     if (animID == -1) {
         return 0;
     }
-    
+
     spriteIndex = ((animID >> 0x10) & 0xFF) - 1;
     D_802DF57C = spriteIndex;
     if (spr_playerSprites[spriteIndex] == NULL) {
@@ -756,7 +762,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
                 break;
         }
     }
-    
+
     if (!(spriteInstanceID & 0x40000000)) {
         camRelativeYaw += (s32) -gCameras[gCurrentCamID].currentYaw;
         if (camRelativeYaw > 360) {
@@ -771,15 +777,15 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
     } else {
         zscale = 1.5f;
     }
-    
+
     if (spriteInstanceID & 0x10000000) {
         zscale = 0.0f - zscale;
     }
-    
+
     D_802DFEA0[0] = 0;
     D_802DFEA0[1] = camRelativeYaw;
     D_802DFEA0[2] = 0;
-    
+
     if (spriteInstanceID & 0x80000000) {
         if (arg2 == 0) {
             return 0;
@@ -788,7 +794,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
     } else {
         alpha = 255;
     }
-    
+
     compList = spr_playerCurrentAnimInfo[spriteAnimIndex].componentList;
     if (spriteInstanceID & 0x20000000) {
         drawPalettes = paletteList;
@@ -875,7 +881,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
 
     s32 spriteIndex = (animID >> 0x10) & 0x7FFF;
     s32 useTailAlloc = (u32)animID >> 0x1F;
-    
+
     for (i = 0; i < ARRAY_COUNT(SpriteInstances); i++) {
         if (SpriteInstances[i].spriteIndex == 0) {
             break;
@@ -924,7 +930,7 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 palID;
     s32 i = spriteInstanceID & 0xFF;
     s32 animIndex = animID & 0xFF;
-    
+
     animData = SpriteInstances[i].spriteData;
     compList = SpriteInstances[i].componentList;
     animList = &animData->animListStart[animIndex];

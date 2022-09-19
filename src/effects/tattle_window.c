@@ -38,6 +38,7 @@ D_E00D8818_Entry D_E00D8818[] = {
     { .unk_00 = 0x0000, .unk_02 = 0x00, .unk_03 = 0xAA },
     { .unk_00 = 0x0000, .unk_02 = 0x00, .unk_03 = 0x78 },
     { .unk_00 = 0x0000, .unk_02 = 0x00, .unk_03 = 0x3C },
+    { .unk_00 = 0x0000, .unk_02 = 0x00, .unk_03 = 0x00 },
 };
 
 EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 arg5) {
