@@ -5,3 +5,4 @@ stringcase
 watchdog
 gitpython
 colour
+ahocorasick-rs
