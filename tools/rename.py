@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
 import os
-import re
 from tqdm import tqdm
+
+import ahocorasick_rs
+from ahocorasick_rs import *
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.join(script_dir, "..")
@@ -11,6 +13,7 @@ include_dir = os.path.join(root_dir, "include")
 asm_dir = os.path.join(root_dir, "ver", "us", "asm")
 
 renames = {}
+patterns = []
 deletes = []
 
 def handle_file(f_path, try_rename_file=False):
@@ -23,25 +26,41 @@ def handle_file(f_path, try_rename_file=False):
             deletes.append(f_path)
             f_path = f_path.replace(extless, renames[extless])
 
+    # find all matches in one pass with aho-corasick algorithm
     f_text = f_text_orig
-    for rename in renames:
-        if "(" in rename or "," in rename:
-            f_text = f_text.replace(rename, renames[rename])
-        else:
-            f_text = re.sub(r"(?:\b)" + re.escape(rename) + r"(?:\b)", renames[rename], f_text)
+    matches = ac.find_matches_as_indexes(f_text)
+    if matches:
+        to_join = []
+        pos = 0
+        # replace all matches
+        for match in matches:
+            # head part
+            to_join.append(f_text[pos:match[1]])
+            to_replace = patterns[match[0]]
+            to_join.append(renames[to_replace])
+            pos = match[2]
+        # tail part
+        to_join.append(f_text[pos:])
+        f_text = ''.join(to_join);
+        # save changes
+        with open(f_path, "w", newline="\n") as f:
+            f.write(f_text)
 
-    with open(f_path, "w", newline="\n") as f:
-        f.write(f_text)
-
-
-# Read Star Rod's output file (one rename per line, old and new, delimited by a space)
+# Read input file
+# One valid whitespace-separated find-replace pair is given per line
 with open(os.path.join(script_dir, "to_rename.txt")) as f:
     renames_text = f.readlines()
 
 # Create dict of old -> new names
 for line in renames_text:
     split = line.split()
-    renames[split[0]] = split[1]
+    if len(split) == 2:
+        renames[split[0]] = split[1]
+        patterns.append(split[0])
+    elif len(split) != 0:
+        raise Exception("input contains invalid rename pattern: \n\"" + line.strip() + "\"")
+
+ac = ahocorasick_rs.AhoCorasick(patterns, matchkind=MATCHKIND_LEFTMOST_LONGEST)
 
 # Walk through asm files and rename stuff
 print("Walking through asm files")
