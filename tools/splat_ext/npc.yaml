@@ -10017,64 +10017,60 @@ WorldMerlee:
     - Anim0C
     - Anim0D
 BattleMerlee:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
   frames:
-    - Raster00
-    - Raster01
+    - Release
+    - Gather
   palettes:
     - Default
     - Brighter
     - Brightest
   animations:
-    - Anim00
-    - Anim01
+    - Release
+    - Gather
 DisguisedMoustafa:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Still
+    - Talk
+    - Blink1
+    - Blink2
+    - GrabCloak1
+    - GrabCloak2
+    - ThrownCloak1
+    - ThrownCloak2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - BlinkOnce
+    - BlinkLoop
+    - Talk
+    - GrabCloak
+    - ThrownCloak
+    - TalkAlt
 Moustafa:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
+    - Step1
+    - Step2
+    - Step3
+    - Still
+    - Shout
+    - Talk
+    - Blink1
+    - Blink2
+    - Toss
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - BlinkOnce
+    - BlinkLoop
+    - Run
+    - Shout
+    - Talk
+    - Toss
+    - ShoutAlt
 Oaklie:
   frames:
     - Raster00
@@ -10528,9 +10524,6 @@ Rosie:
     - Anim05
     - Anim06
 Sun:
-  variations:
-    - Variant00
-    - Variant01
   frames:
     - Raster00
     - Raster01
