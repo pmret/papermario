@@ -556,7 +556,7 @@ s32 N(extraAnimationList_80245200)[] = {
 };
 
 s32 N(extraAnimationList_80245208)[] = {
-    ANIM_Bootler_Anim01,
+    ANIM_Bootler_Idle,
     ANIM_LIST_END,
 };
 
@@ -1033,22 +1033,22 @@ StaticNpc N(npcGroup_80246E7C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Bootler_Anim01,
-        ANIM_Bootler_Anim02,
-        ANIM_Bootler_Anim03,
-        ANIM_Bootler_Anim03,
-        ANIM_Bootler_Anim01,
-        ANIM_Bootler_Anim01,
-        ANIM_Bootler_Anim00,
-        ANIM_Bootler_Anim00,
-        ANIM_Bootler_Anim05,
-        ANIM_Bootler_Anim06,
-        ANIM_Bootler_Anim07,
-        ANIM_Bootler_Anim08,
-        ANIM_Bootler_Anim05,
-        ANIM_Bootler_Anim06,
-        ANIM_Bootler_Anim07,
-        ANIM_Bootler_Anim08,
+        ANIM_Bootler_Idle,
+        ANIM_Bootler_Walk,
+        ANIM_Bootler_Run,
+        ANIM_Bootler_Run,
+        ANIM_Bootler_Idle,
+        ANIM_Bootler_Idle,
+        ANIM_Bootler_Still,
+        ANIM_Bootler_Still,
+        ANIM_Bootler_Shock,
+        ANIM_Bootler_Panic,
+        ANIM_Bootler_Dejected,
+        ANIM_Bootler_Quaver,
+        ANIM_Bootler_Shock,
+        ANIM_Bootler_Panic,
+        ANIM_Bootler_Dejected,
+        ANIM_Bootler_Quaver,
     },
     .extraAnimations = N(extraAnimationList_80245208),
 };

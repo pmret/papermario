@@ -481,14 +481,14 @@ EvtScript N(idle_80242A24) = {
     EVT_CALL(SetCamPosB, 0, 800, 245)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 5, MSG_CH3_00F6)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 5, MSG_CH3_00F6)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 5, MSG_CH3_00F7)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 5, MSG_CH3_00F7)
     EVT_CALL(ShowChoice, MSG_Choice_000D)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00F8)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00F8)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00F9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00F9)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
@@ -499,7 +499,7 @@ EvtScript N(idle_80242A24) = {
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_SET(MapFlag(0), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 517, MSG_CH3_00FA)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 517, MSG_CH3_00FA)
         EVT_SET(MapFlag(0), 1)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -627,22 +627,22 @@ StaticNpc N(npcGroup_802434C4) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
     },
 };
 

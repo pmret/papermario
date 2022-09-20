@@ -338,15 +338,15 @@ EvtScript N(init_80241288) = {
 EvtScript N(interact_802412E8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(8)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BA)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BA)
         EVT_CASE_LT(42)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BB)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BB)
         EVT_CASE_LT(61)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BC)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BC)
         EVT_CASE_LT(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BD)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BD)
         EVT_CASE_GE(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BE)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -407,22 +407,22 @@ StaticNpc N(npcGroup_80241638) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
-        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
+        ANIM_Yakkey_Idle,
     },
     .tattle = MSG_NpcTattle_Yakkey,
 };

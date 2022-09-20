@@ -680,13 +680,13 @@ EvtScript N(80247AA0) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(SetNpcRotation, 4, 0, 0, 0)
-        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Anim0A)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Gather)
         EVT_WAIT(200)
-        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Anim09)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Bow)
         EVT_WAIT(40)
-        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Anim0A)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Gather)
         EVT_WAIT(75)
-        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Anim0B)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Release)
     EVT_END_THREAD
     EVT_WAIT(60)
     EVT_CALL(PlaySoundAtNpc, 4, 0x202, 0)
@@ -824,7 +824,7 @@ EvtScript N(802482F8) = {
         EVT_ADD(LVar0, 1)
     EVT_END_IF
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00DC)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
         EVT_SET(LVar0, 39)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
@@ -835,32 +835,32 @@ EvtScript N(802482F8) = {
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00D6)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D6)
     EVT_CALL(ShowChoice, MSG_Choice_0011)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00D7)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00D8)
+    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D8)
     EVT_CALL(ShowCoinCounter, 1)
     EVT_CALL(ShowChoice, MSG_Choice_0018)
     EVT_CALL(ShowCoinCounter, 0)
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00D7)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(func_80241394_96A554), LVar0, LVar1)
     EVT_IF_NE(LVar1, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00D9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D9)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00DA)
+    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
     EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
@@ -873,9 +873,9 @@ EvtScript N(802482F8) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Anim04)
+    EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Idle)
     EVT_CALL(PlayerMoveTo, -100, -370, 8)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Anim07, ANIM_WorldMerlee_Anim04, 0, MSG_CH2_00DB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DB)
     EVT_EXEC(N(80243AF0))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(func_802D2C14, 0)
@@ -2130,22 +2130,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim05,
-            ANIM_WorldMerlee_Anim06,
-            ANIM_WorldMerlee_Anim06,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
-            ANIM_WorldMerlee_Anim04,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Walk,
+            ANIM_WorldMerlee_Run,
+            ANIM_WorldMerlee_Run,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
         },
         .tattle = MSG_NpcTattle_Merlee,
     },
