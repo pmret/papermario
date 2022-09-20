@@ -9921,45 +9921,45 @@ Kolorado:
     - Anim0E
 BattleKolorado:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Head
+    - Idle1
+    - Idle2
+    - Panic1
+    - Panic2
+    - Shout1
+    - Shout2
+    - Injured
+    - Hurt
+    - SadHead
+    - Walk1
+    - Walk2
+    - Walk3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Idle
+    - ShoutStill
+    - WalkSad
+    - Run
+    - Shout
+    - Hurt
+    - Injured
 Archeologist:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Talk
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 Nomadimouse:
   frames:
     - Idle1

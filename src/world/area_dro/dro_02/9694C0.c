@@ -1438,22 +1438,22 @@ EvtScript N(interact_8024B8F0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Anim04, ANIM_Archeologist_Anim01, 0, MSG_CH2_00B2)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B2)
             EVT_ELSE
                 EVT_SWITCH(AreaByte(3))
                     EVT_CASE_EQ(0)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Anim04, ANIM_Archeologist_Anim01, 0, MSG_CH2_00AF)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00AF)
                         EVT_SET(AreaByte(3), 1)
                     EVT_CASE_EQ(1)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Anim04, ANIM_Archeologist_Anim01, 0, MSG_CH2_00B0)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B0)
                         EVT_SET(AreaByte(3), 2)
                     EVT_CASE_EQ(2)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Anim04, ANIM_Archeologist_Anim01, 0, MSG_CH2_00B1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B1)
                         EVT_SET(AreaByte(3), 1)
                 EVT_END_SWITCH
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Anim04, ANIM_Archeologist_Anim01, 0, MSG_CH2_00B3)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B3)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -2001,22 +2001,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         },
 	    .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim02,
-            ANIM_Archeologist_Anim03,
-            ANIM_Archeologist_Anim03,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
-            ANIM_Archeologist_Anim01,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Walk,
+            ANIM_Archeologist_Run,
+            ANIM_Archeologist_Run,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
         },
         .tattle = MSG_NpcTattle_Archeologist,
     },
