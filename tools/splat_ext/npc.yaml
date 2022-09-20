@@ -1093,341 +1093,341 @@ KooperWithoutShell:
     - Bow
 WorldEldstar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Idle1
+    - Idle2
+    - Wave1
+    - Wave2
+    - Leap1
+    - Leap2
+    - Panic
+    - Angry1
+    - Angry2
+    - Hurt1
+    - Hurt2
+    - Back1
+    - Back2
+    - Talk
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Wave
+    - Leap
+    - Panic
+    - Angry
+    - Hurt
+    - Back
+    - Talk
 WorldMamar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Idle1
+    - Idle2
+    - Back1
+    - Back2
+    - TalkHappy
+    - Panic
+    - Angry1
+    - Angry2
+    - Leap1
+    - Leap2
+    - Talk
+    - Hurt1
+    - Hurt2
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - TalkHappy
+    - Leap
+    - LeanLeft
+    - LeanRight
+    - LeanLeftAlt
+    - Back
+    - Panic
+    - Angry
+    - Hurt
+    - Talk
 WorldSkolar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Idle1
+    - Idle2
+    - Talk1
+    - Talk2
+    - Leap1
+    - Leap2
+    - Hurt1
+    - Hurt2
+    - Back1
+    - Back2
+    - IdleSad1
+    - IdleSad2
+    - TalkSad
+    - Panic
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - TalkAngry
+    - Leap
+    - Talk
+    - TalkRelaxed
+    - Back
+    - Hurt
+    - Panic
+    - IdleSad
 WorldMuskular:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Idle1
+    - Idle2
+    - Talk
+    - Happy1
+    - Happy2
+    - Leap1
+    - Leap2
+    - Panic1
+    - Panic2
+    - Hurt1
+    - Hurt2
+    - Back1
+    - Back2
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Talk
+    - Leap
+    - Happy
+    - Back
+    - Hurt
+    - Panic
 WorldMisstar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - Idle1
+    - Idle2
+    - Talk
+    - Leap1
+    - Leap2
+    - Happy1
+    - Happy2
+    - Panic1
+    - Panic2
+    - IdleAngry1
+    - IdleAngry2
+    - TalkAngry
+    - Back1
+    - Back2
+    - Hurt1
+    - Hurt2
+    - Fly
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Talk
+    - Leap
+    - Happy
+    - Panic
+    - Hurt
+    - Back
+    - IdleAngry
+    - TalkAngry
+    - Fly
 WorldKlevar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
+    - Idle1
+    - Idle2
+    - Talk
+    - Leap1
+    - Leap2
+    - Panic1
+    - Panic2
+    - TalkHappy1
+    - TalkHappy2
+    - Back1
+    - Back2
+    - Hurt1
+    - Hurt2
+    - IdleHappy1
+    - IdleHappy2
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - IdleHappy
+    - Talk
+    - Leap
+    - TalkHappy
+    - Panic
+    - Back
+    - Hurt
 WorldKalmar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Idle1
+    - Idle2
+    - Talk
+    - Leap1
+    - Leap2
+    - TalkHappy1
+    - TalkHappy2
+    - Panic1
+    - Panic2
+    - Back1
+    - Back2
+    - Hurt1
+    - Hurt2
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Talk
+    - Leap
+    - LeanLeft
+    - LeanRight
+    - LeanLeftAlt
+    - TalkHappy
+    - Panic
+    - Back
+    - Hurt
 BattleEldstar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleMamar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleSkolar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleMuskular:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleMisstar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleKlevar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 BattleKalmar:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - Glowing
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Shout
   palettes:
     - Default
     - Glowing
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Shout
 Twink:
   variations:
     - Variant00

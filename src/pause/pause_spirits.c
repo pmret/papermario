@@ -32,45 +32,45 @@ Vp gPauseSpiritsViewport = {
 };
 s32 gPauseSpiritsSpriteAnims[][4] = {
     {
-        ANIM_WorldEldstar_Anim00,
-        ANIM_WorldEldstar_Anim01,
-        ANIM_WorldEldstar_Anim02,
+        ANIM_WorldEldstar_Still,
+        ANIM_WorldEldstar_Idle,
+        ANIM_WorldEldstar_Wave,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldMamar_Anim00,
-        ANIM_WorldMamar_Anim01,
-        ANIM_WorldMamar_Anim02,
+        ANIM_WorldMamar_Still,
+        ANIM_WorldMamar_Idle,
+        ANIM_WorldMamar_TalkHappy,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldSkolar_Anim00,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim02,
+        ANIM_WorldSkolar_Still,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_TalkAngry,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldMuskular_Anim00,
-        ANIM_WorldMuskular_Anim01,
-        ANIM_WorldMuskular_Anim02,
+        ANIM_WorldMuskular_Still,
+        ANIM_WorldMuskular_Idle,
+        ANIM_WorldMuskular_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldMisstar_Anim00,
-        ANIM_WorldMisstar_Anim01,
-        ANIM_WorldMisstar_Anim02,
+        ANIM_WorldMisstar_Still,
+        ANIM_WorldMisstar_Idle,
+        ANIM_WorldMisstar_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldKlevar_Anim00,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim03,
+        ANIM_WorldKlevar_Still,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldKalmar_Anim00,
-        ANIM_WorldKalmar_Anim01,
-        ANIM_WorldKalmar_Anim02,
+        ANIM_WorldKalmar_Still,
+        ANIM_WorldKalmar_Idle,
+        ANIM_WorldKalmar_Talk,
         ANIM_LIST_END
     }
 };

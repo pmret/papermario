@@ -601,7 +601,7 @@ EvtScript N(80245304) = {
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_Anim02, ANIM_WorldSkolar_Anim01, 512, MSG_CH3_00D3)
+    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D3)
     EVT_CALL(SetCamDistance, 0, EVT_FLOAT(300.0))
     EVT_CALL(SetCamPitch, 0, 18, -9)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
@@ -617,7 +617,7 @@ EvtScript N(80245304) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(EnableNpcAI, 13, 0)
-    EVT_CALL(SetNpcAnimation, 13, ANIM_WorldSkolar_Anim03)
+    EVT_CALL(SetNpcAnimation, 13, ANIM_WorldSkolar_Leap)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
     EVT_CALL(PlaySoundAtPlayer, 313, 0)
@@ -639,7 +639,7 @@ EvtScript N(80245304) = {
     EVT_CALL(PlayEffect, 0x52, 4, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SetNpcAnimation, 13, ANIM_WorldSkolar_Anim01)
+    EVT_CALL(SetNpcAnimation, 13, ANIM_WorldSkolar_Idle)
     EVT_CALL(EnableNpcAI, 13, 1)
     EVT_CALL(PostChapter3StatUpdate)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0193, 160, 40)
@@ -650,7 +650,7 @@ EvtScript N(80245304) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_Anim02, ANIM_WorldSkolar_Anim01, 512, MSG_CH3_00D4)
+    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D4)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -25)
@@ -660,7 +660,7 @@ EvtScript N(80245304) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_Anim02, ANIM_WorldSkolar_Anim01, 512, MSG_CH3_00D5)
+    EVT_CALL(SpeakToPlayer, 13, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D5)
     EVT_CALL(SetNpcFlagBits, 13, ((NPC_FLAG_40000)), TRUE)
     EVT_THREAD
         EVT_LOOP(25)
@@ -1193,22 +1193,22 @@ StaticNpc N(npcGroup_8024768C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim00,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
-        ANIM_WorldSkolar_Anim01,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Still,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_Idle,
     },
 };
 

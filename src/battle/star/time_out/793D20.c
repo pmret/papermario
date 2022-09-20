@@ -246,9 +246,9 @@ EvtScript N(802A22AC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1520))
-    EVT_SET_CONST(LVar0, ANIM_BattleKlevar_Anim01)
+    EVT_SET_CONST(LVar0, ANIM_BattleKlevar_Idle)
     EVT_EXEC_WAIT(N(802A1C50))
-    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKlevar_Anim02)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKlevar_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(PlaySound, SOUND_246)

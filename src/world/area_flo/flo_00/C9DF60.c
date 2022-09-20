@@ -854,7 +854,7 @@ EvtScript N(8024427C) = {
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Anim03, ANIM_WorldKlevar_Anim01, 512, MSG_CH6_00D8)
+    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, 512, MSG_CH6_00D8)
     EVT_CALL(SetCamDistance, 0, EVT_FLOAT(300.0))
     EVT_CALL(SetCamPitch, 0, 18, -9)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
@@ -870,7 +870,7 @@ EvtScript N(8024427C) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(EnableNpcAI, 6, 0)
-    EVT_CALL(SetNpcAnimation, 6, ANIM_WorldKlevar_Anim04)
+    EVT_CALL(SetNpcAnimation, 6, ANIM_WorldKlevar_Leap)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
     EVT_CALL(PlaySoundAtPlayer, 313, 0)
@@ -892,7 +892,7 @@ EvtScript N(8024427C) = {
     EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SetNpcAnimation, 6, ANIM_WorldKlevar_Anim01)
+    EVT_CALL(SetNpcAnimation, 6, ANIM_WorldKlevar_Idle)
     EVT_CALL(EnableNpcAI, 6, 1)
     EVT_CALL(N(PostChapter6StatUpdate))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0196, 160, 40)
@@ -903,7 +903,7 @@ EvtScript N(8024427C) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Anim03, ANIM_WorldKlevar_Anim01, 512, MSG_CH6_00D9)
+    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, 512, MSG_CH6_00D9)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -25)
@@ -913,7 +913,7 @@ EvtScript N(8024427C) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Anim03, ANIM_WorldKlevar_Anim01, 512, MSG_CH6_00DA)
+    EVT_CALL(SpeakToPlayer, 6, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, 512, MSG_CH6_00DA)
     EVT_CALL(SetNpcFlagBits, 6, NPC_FLAG_40000, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
@@ -1227,22 +1227,22 @@ StaticNpc N(npcGroup_80245A04) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim00,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
-        ANIM_WorldKlevar_Anim01,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Still,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Idle,
     },
 };
 

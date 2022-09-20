@@ -303,9 +303,9 @@ EvtScript N(802A245C) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A16D0))
-    EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Anim01)
+    EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Idle)
     EVT_EXEC_WAIT(N(802A1E00))
-    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKalmar_Anim02)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKalmar_Shout)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(20)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
