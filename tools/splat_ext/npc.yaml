@@ -98,51 +98,51 @@ WorldKooper:
     - Read
 WorldBombette:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
+    - Default
+    - Fuse
+    - Rusty
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
+    - Still
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Jump
+    - Fall
+    - GearAngled
+    - LitStill
+    - LitStep1
+    - LitStep2
+    - LitStep3
+    - AboutToExplode
+    - Hurt1
+    - Hurt2
+    - Talk
+    - IdleHappy1
+    - IdleHappy2
+    - IdleHappy3
+    - IdleHappy4
+    - IdleHappy5
+    - JumpHappy
+    - FallHappy
+    - FuseLit1
+    - FuseLit2
+    - FuseLit3
+    - FuseEnd1
+    - FuseEnd2
+    - FuseEnd3
+    - GearNeutral
+    - GearSpin1
+    - GearSpin2
+    - GearSpin3
+    - GearSpin4
+    - GearSpin5
+    - GearSpin6
+    - GearSpin7
   palettes:
     - Default
     - Fuse
@@ -158,24 +158,24 @@ WorldBombette:
     - Rusty_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
-    - Anim10
-    - Anim11
+    - Still
+    - HappyStill
+    - LitStill
+    - Idle
+    - HappyIdle
+    - Walk
+    - WalkLit
+    - Run
+    - RunLit
+    - Jump
+    - Fall
+    - HappyJump
+    - HappyFall
+    - Hurt
+    - Talk
+    - Celebrate
+    - AboutToExplode
+    - Aftermath
 WorldParakarry:
   frames:
     - Raster00
@@ -462,11 +462,11 @@ BattleGoombario:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Headbonk
     - Anim5
     - Anim6
     - Anim7
@@ -477,12 +477,12 @@ BattleGoombario:
     - AnimC
     - AnimD
     - AnimE
-    - AnimF
+    - Talk
     - Anim10
     - Anim11
     - Anim12
-    - Anim13
-    - Anim14
+    - Sleep
+    - Injured
 BattleKooper:
   frames:
     - Raster00
@@ -1047,50 +1047,50 @@ BattleLakilester:
     - Anim1A
 KooperWithoutShell:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - TalkAngry
+    - Bow
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Celebrate1
+    - Celebrate2
+    - Celebrate3
+    - StepAngry1
+    - StepAngry2
+    - StepAngry3
+    - Shout1
+    - Shout2
+    - Happy
+    - IdleAngry1
+    - IdleAngry2
+    - IdleAngry3
+    - IdleAngry4
+    - ShoutAngry1
+    - ShoutAngry2
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Still
+    - StillHappy
+    - StillAngry
+    - Idle
+    - IdleAngry
+    - Walk
+    - WalkAngry
+    - Run
+    - RunAngry
+    - Talk
+    - TalkAngry
+    - Shout
+    - ShoutAngry
+    - Celebrate
+    - CelebrateLoop
+    - Bow
 WorldEldstar:
   variations:
     - Variant00

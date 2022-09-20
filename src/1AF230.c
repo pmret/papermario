@@ -47,7 +47,7 @@ StarPowerEntry D_8029C7D0[] = {
 
 s32 D_8029C890[10][5] = {
     { SPRITE_ID(SPR_WorldGoombario, 0x1F), SPRITE_ID(SPR_WorldGoombario, 0x2C), SPRITE_ID(SPR_WorldGoombario, 0x2A), SPRITE_ID(SPR_WorldGoombario, 0x5), }, // Junk? These IDs should be in world_goombario, but don't exist.
-    { ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim13,      ANIM_BattleGoombario_Anim3,        ANIM_BattleGoombario_Anim1, },
+    { ANIM_BattleGoombario_Run,    ANIM_BattleGoombario_Sleep, ANIM_BattleGoombario_Sleep, ANIM_BattleGoombario_Run,    ANIM_BattleGoombario_Idle, },
     { ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim6,     ANIM_BattleKooper_Anim4, },
     { ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim8,   ANIM_BattleBombette_Anim4, },
     { ANIM_BattleParakarry_Anim3,  ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim3,  ANIM_BattleParakarry_Anim1, },

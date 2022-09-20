@@ -451,15 +451,15 @@ EvtScript N(8021E5DC) = {
 Vec3i N(vector3D_8021E940) = { 0, -1000, 0 };
 
 s32 N(idleAnimations_8021E94C)[] = {
-    STATUS_NORMAL,    ANIM_BattleGoombario_Anim1,
-    STATUS_STONE,     ANIM_BattleGoombario_Anim0,
-    STATUS_SLEEP,     ANIM_BattleGoombario_Anim0,
-    STATUS_POISON,    ANIM_BattleGoombario_Anim1,
-    STATUS_STOP,      ANIM_BattleGoombario_Anim0,
-    STATUS_STATIC,    ANIM_BattleGoombario_Anim1,
-    STATUS_PARALYZE,  ANIM_BattleGoombario_Anim0,
-    STATUS_DIZZY,     ANIM_BattleGoombario_Anim14,
-    STATUS_FEAR,      ANIM_BattleGoombario_Anim14,
+    STATUS_NORMAL,    ANIM_BattleGoombario_Idle,
+    STATUS_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_SLEEP,     ANIM_BattleGoombario_Still,
+    STATUS_POISON,    ANIM_BattleGoombario_Idle,
+    STATUS_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_STATIC,    ANIM_BattleGoombario_Idle,
+    STATUS_PARALYZE,  ANIM_BattleGoombario_Still,
+    STATUS_DIZZY,     ANIM_BattleGoombario_Injured,
+    STATUS_FEAR,      ANIM_BattleGoombario_Injured,
     STATUS_END,
 };
 
@@ -601,7 +601,7 @@ EvtScript N(handleEvent_8021EB24) = {
             EVT_EXEC_WAIT(N(8021E5DC))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CASE_EQ(38)
             EVT_EXEC_WAIT(N(8021E0E0))
@@ -617,7 +617,7 @@ EvtScript N(handleEvent_8021EB24) = {
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
@@ -632,17 +632,17 @@ EvtScript N(handleEvent_8021EB24) = {
             EVT_RETURN
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(57)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Run)
             EVT_SET_CONST(LVar2, ANIM_BattleGoombario_AnimA)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(58)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(22)
             EVT_SET_CONST(LVar0, 0x00000001)
@@ -659,7 +659,7 @@ EvtScript N(handleEvent_8021EB24) = {
 
 EvtScript N(8021F08C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_THREAD
         EVT_CALL(SetActorRotationOffset, -127, 0, 12, 0)
         EVT_SET(LVar0, 180)
@@ -690,7 +690,7 @@ EvtScript N(8021F08C) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_ADD(LVar0, 20)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
@@ -698,7 +698,7 @@ EvtScript N(8021F08C) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
     EVT_WAIT(1)
     EVT_ADD(LVar0, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
@@ -706,13 +706,13 @@ EvtScript N(8021F08C) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -724,10 +724,10 @@ EvtScript N(8021F514) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_RETURN
     EVT_END
 };

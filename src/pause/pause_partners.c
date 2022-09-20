@@ -59,9 +59,9 @@ s32 gPausePartnersSpriteAnims[][4] = {
         ANIM_LIST_END
     },
     {
-        ANIM_WorldBombette_Anim0,
-        ANIM_WorldBombette_Anim5,
-        ANIM_WorldBombette_AnimE,
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Walk,
+        ANIM_WorldBombette_Talk,
         ANIM_LIST_END
     },
     {
