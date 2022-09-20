@@ -1636,10 +1636,10 @@ EvtScript N(8024C248) = {
     EVT_CALL(SetNpcYaw, 5, 270)
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Anim05)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_GrabCloak)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Anim06)
-    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Anim07)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_ThrownCloak)
+    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Toss)
     EVT_CALL(SetNpcPos, 5, -335, 163, -260)
     EVT_EXEC(N(80243B9C))
     EVT_CALL(MakeLerp, 0, 80, 30, 5)
@@ -1656,7 +1656,7 @@ EvtScript N(8024C248) = {
     EVT_END_IF
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(SetNpcPos, 2, 0, -1000, -250)
-    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Anim01)
+    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Idle)
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), FALSE)
     EVT_WAIT(30)
@@ -1679,21 +1679,21 @@ EvtScript N(idle_8024C450) = {
 
 EvtScript N(interact_8024C4EC) = {
     EVT_IF_EQ(GF_DRO02_Moustafa_UnusedDialogOverride, 1)
-        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CF)
+        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CF)
         EVT_RETURN
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-64)
             EVT_SET(LVarB, 0)
-            EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B4)
+            EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B4)
             EVT_LABEL(0)
             EVT_CALL(ShowChoice, MSG_Choice_0019)
             EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B6)
+                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B6)
                 EVT_EXEC(N(8024C1F8))
                 EVT_RETURN
             EVT_ELSE
-                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0)
+                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0)
             EVT_END_IF
             EVT_LABEL(1)
             EVT_SET(LVar0, 0)
@@ -1701,11 +1701,11 @@ EvtScript N(interact_8024C4EC) = {
             EVT_EXEC_WAIT(N(80248A50))
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B8)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B8)
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
                 EVT_CASE_EQ(-1)
-                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B7)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B7)
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
             EVT_END_SWITCH
@@ -1714,55 +1714,55 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_IF_EQ(LVarA, 156)
                     EVT_SET(GB_DRO02_SheekLemonGiftCount, 1)
                     EVT_SET(GB_DRO02_SheekGiftCount, 10)
-                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BB)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BB)
                     EVT_CALL(ShowChoice, MSG_Choice_001C)
                 EVT_ELSE
                     EVT_ADD(GB_DRO02_SheekGiftCount, 1)
                     EVT_IF_LE(GB_DRO02_SheekGiftCount, 2)
-                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B5)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B5)
                         EVT_GOTO(0)
                     EVT_END_IF
                     EVT_IF_EQ(GB_DRO02_SheekGiftCount, 3)
-                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B9)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B9)
                         EVT_CALL(ShowChoice, MSG_Choice_001B)
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BA)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BA)
                         EVT_CALL(ShowChoice, MSG_Choice_001B)
                         EVT_SET(GB_DRO02_SheekGiftCount, 10)
                     EVT_END_IF
                 EVT_END_IF
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BA)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BA)
                 EVT_CALL(ShowChoice, MSG_Choice_001C)
             EVT_END_IF
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BC)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BC)
                 EVT_CASE_EQ(1)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BD)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BD)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutDesert, 1)
                 EVT_CASE_EQ(2)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BE)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BE)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutRuins, 1)
                 EVT_CASE_EQ(3)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00BF)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BF)
                 EVT_CASE_EQ(4)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00C1)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C1)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
                     EVT_SET(LVarB, 1)
             EVT_END_SWITCH
             EVT_SET(GF_DRO02_Sheek_SpokeTo, 1)
-            EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00C0)
+            EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C0)
             EVT_CALL(ShowChoice, MSG_Choice_001A)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0)
+                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0)
                 EVT_GOTO(1)
             EVT_ELSE
-                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00B6)
+                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B6)
             EVT_END_IF
             EVT_IF_EQ(LVarB, 1)
                 EVT_IF_EQ(MapFlag(0), 0)
@@ -1771,7 +1771,7 @@ EvtScript N(interact_8024C4EC) = {
                         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                         EVT_CALL(AwaitPlayerLeave, LVar0, LVar2, 50)
                         EVT_CALL(DisablePlayerInput, TRUE)
-                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00C2)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C2)
                         EVT_CALL(DisablePlayerInput, FALSE)
                         EVT_SET(MapFlag(0), 0)
                     EVT_END_THREAD
@@ -1792,54 +1792,54 @@ EvtScript N(interact_8024C4EC) = {
             EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(FadeOutMusic, 0, 500)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00C3)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C3)
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00C4)
+                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C4)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Anim04, ANIM_DisguisedMoustafa_Anim01, 0, MSG_CH2_00C5)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C5)
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00C6)
+                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C6)
             EVT_END_IF
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -337, 140, -200, 20)
-            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00C7)
-            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00C8)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C7)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C8)
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -335, 163, -260, 20)
-            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00C9)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C9)
             EVT_SET(LVar0, 18)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddKeyItem, ITEM_PULSE_STONE)
             EVT_SET(GB_StoryProgress, -63)
-            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CA)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CA)
             EVT_KILL_THREAD(LVarA)
             EVT_EXEC(N(80243AF0))
         EVT_CASE_GE(-63)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(-62)
-                    EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CB)
+                    EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CB)
                 EVT_CASE_GE(-62)
                     EVT_IF_GE(GB_StoryProgress, -56)
                         EVT_IF_EQ(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 0)
-                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CD)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CD)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                             EVT_WAIT(15)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
                             EVT_WAIT(30)
-                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CE)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CE)
                             EVT_SET(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 1)
                         EVT_ELSE
-                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00D0)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00D0)
                         EVT_END_IF
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Anim05, ANIM_Moustafa_Anim01, 0, MSG_CH2_00CC)
+                        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CC)
                     EVT_END_IF
             EVT_END_SWITCH
     EVT_END_SWITCH
@@ -1855,7 +1855,7 @@ EvtScript N(init_8024D04C) = {
             EVT_CALL(SetNpcPos, NPC_SELF, 200, 0, -15)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_200000)), TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_DisguisedMoustafa_Anim05)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_DisguisedMoustafa_GrabCloak)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024C450)))
@@ -1875,7 +1875,7 @@ EvtScript N(idle_8024D154) = {
     EVT_CALL(InterpNpcYaw, 2, 270, 0)
     EVT_LABEL(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Anim07)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Anim01)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Idle)
     EVT_LOOP(50)
         EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -1884,7 +1884,7 @@ EvtScript N(idle_8024D154) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Anim01)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Anim07)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_TalkAlt)
     EVT_LOOP(50)
         EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -1894,7 +1894,7 @@ EvtScript N(idle_8024D154) = {
     EVT_END_LOOP
     EVT_GOTO(10)
     EVT_LABEL(20)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Anim01)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Idle)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Anim04)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Anim04)
@@ -2066,22 +2066,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
-            ANIM_DisguisedMoustafa_Anim01,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
         },
         .tattle = MSG_NpcTattle_Sheek,
     },
@@ -2162,22 +2162,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim04,
-            ANIM_Moustafa_Anim04,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
-            ANIM_Moustafa_Anim01,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Run,
+            ANIM_Moustafa_Run,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
         },
         .tattle = MSG_NpcTattle_Moustafa,
     },
