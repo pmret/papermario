@@ -1931,26 +1931,26 @@ Goomba:
     - Frost
     - Dark
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
+    - Step1
+    - Step2
+    - Step3
+    - Hurt1
+    - Hurt2
+    - Headbonk
+    - Idle1
+    - Idle2
+    - Sleep
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - Hurt_Burnt1
+    - Hurt_Burnt2
+    - Dead_Burnt
+    - Tense
+    - Toadstool
+    - Mushroom
+    - XRay
   palettes:
     - Default
     - Red
@@ -9554,331 +9554,325 @@ RussT:
     - Anim08
     - Anim09
 TayceT:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Talk1
+    - Talk2
+    - Carry1
+    - Carry2
+    - Carry3
+    - Happy1
+    - Happy2
+    - Sad1
+    - Sad2
+    - FaceForward
+    - IdleBack1
+    - IdleBack2
+    - IdleBack3
+    - TurnAround1
+    - TalkForward
+    - TurnAround2
+    - Pan
   palettes:
     - Default
     - Pan
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - TalkHappy
+    - IdleSad
+    - Cooking
+    - TurnBack
+    - TurnAway
+    - TalkForward
+    - Carry
+    - Pan
 FiceT:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
+    - Idle1
+    - Idle2
+    - Idle3
+    - Shiver1
+    - Shiver2
+    - Talk
+    - LookUp
+    - Read
+    - Panic1
+    - Panic2
+    - Step1
+    - Step2
+    - Step3
+    - Tear1
+    - Tear2
+    - Tear3
   palettes:
     - Default
     - Sweat
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Read
+    - Afraid
+    - LookUp
+    - Panic
 Bartender:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Idle5
+    - Talk
+    - StrumGuitar1
+    - StrumGuitar2
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - StrumGuitar
+    - Talk
 Chanterelle:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Idle5
+    - Blink
+    - Sing1
+    - Sing2
+    - Sing3
+    - Talk
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Sing
 RipCheato:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Idle1
+    - Idle2
+    - Talk
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 ChuckQuizmo:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Step1
+    - Step2
+    - Talk
+    - Wrong
+    - Open1
+    - Open2
+    - Open3
+    - Correct1
+    - Correct2
+    - Vanish01
+    - Vanish02
+    - Vanish03
+    - Vanish04
+    - Vanish05
+    - Vanish06
+    - Vanish07
+    - Vanish08
+    - Vanish09
+    - Vanish10
+    - Vanish11
+    - Vanish12
+    - Vanish13
+    - QuestionIcon1
+    - QuestionIcon2
+    - QuestionIcon3
+    - CorrectIcon1
+    - CorrectIcon2
+    - CorrectIcon3
+    - OpenHat1
+    - WrongIcon1
+    - WrongIcon2
+    - WrongIcon3
+    - OrangeDot
+    - OpenHat2
+    - YellowDot
+    - OpenHat3
+    - BlueDot
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - OpenHat
+    - CloseHat
+    - OpenCorrect
+    - CloseCorrect
+    - OpenWrong
+    - CloseWrong
+    - Question
+    - Vanish
+    - OrangeDot
+    - YellowDot
+    - BlueDot
 Merluvlee:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
+    - Idle1
+    - Idle2
+    - Happy
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Think1
+    - Think2
+    - Gather1
+    - Gather2
+    - Gather3
+    - Gather4
+    - Release1
+    - Release2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Happy
+    - Think
+    - Gather
+    - Release
 Merlar:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Idle
+    - Talk
+    - Gather1
+    - Gather2
+    - Gather3
+    - Gather4
+    - Release1
+    - Release2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Hover
+    - Talk
+    - Gather
+    - Release
 Merlow:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
+    - Idle1
+    - Idle2
+    - Idle3
+    - Step1
+    - Step2
+    - Talk
+    - GiveItem1
+    - GiveItem2
+    - GiveItem3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - GiveItem
 StarKid:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Idle1
+    - Idle2
+    - Talk
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Talk
 KoloradoWife:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
+    - Blink
+    - Talk
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 KoopaKoot:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Idle1
+    - Idle2
+    - Idle3
+    - Step1
+    - Step2
+    - Step3
+    - Celebrate1
+    - Celebrate2
+    - Celebrate3
+    - HoldCane
+    - TalkCane
+    - IdleCane1
+    - IdleCane2
+    - RaiseCane
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - SwingCane
+    - StillCane
+    - TalkCane
+    - IdleCane
 Kolorado:
   frames:
     - Raster00
@@ -10796,49 +10790,40 @@ Herringway:
     - Anim09
 Merle:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk
+    - Step1
+    - Step2
+    - Step3
+    - Gather1
+    - Gather2
+    - Release1
+    - Release2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Gather
+    - Release
 StarRod:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
+    - Still
   palettes:
     - Default
     - Inert
   animations:
-    - Anim00
+    - Still
 Fire:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Burn1
+    - Burn2
+    - Burn3
   palettes:
     - Brighest
     - Brighter
@@ -10846,27 +10831,27 @@ Fire:
     - Dimmer
     - Dimmest
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Burn
 Coin:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
+    - Rotate01
+    - Rotate02
+    - Rotate03
+    - Rotate04
+    - Rotate05
+    - Rotate06
+    - Rotate07
+    - Rotate08
+    - Rotate09
+    - Rotate10
   palettes:
     - Default
     - Unused1
     - Unused2
     - Unused3
   animations:
-    - Anim00
+    - Rotate
 ParadePeach:
   variations:
     - Variant00

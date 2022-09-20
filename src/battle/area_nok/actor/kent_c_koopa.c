@@ -33,7 +33,7 @@ s32 N(idleAnimations_802279B4)[] = {
 };
 
 s32 N(idleAnimations_802279D0)[] = {
-    STATUS_NORMAL,    ANIM_Coin_Anim00,
+    STATUS_NORMAL,    ANIM_Coin_Rotate,
     STATUS_END,
 };
 
