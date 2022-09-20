@@ -91,38 +91,38 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_8021E5E0)[] = {
-    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim1,
-    STATUS_STONE,     ANIM_BuzzyBeetle_Anim0,
-    STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim9,
-    STATUS_POISON,    ANIM_BuzzyBeetle_Anim1,
-    STATUS_STOP,      ANIM_BuzzyBeetle_Anim0,
-    STATUS_STATIC,    ANIM_BuzzyBeetle_Anim1,
-    STATUS_PARALYZE,  ANIM_BuzzyBeetle_Anim0,
-    STATUS_DIZZY,     ANIM_BuzzyBeetle_AnimA,
-    STATUS_FEAR,      ANIM_BuzzyBeetle_AnimA,
+    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim01,
+    STATUS_STONE,     ANIM_BuzzyBeetle_Anim00,
+    STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim09,
+    STATUS_POISON,    ANIM_BuzzyBeetle_Anim01,
+    STATUS_STOP,      ANIM_BuzzyBeetle_Anim00,
+    STATUS_STATIC,    ANIM_BuzzyBeetle_Anim01,
+    STATUS_PARALYZE,  ANIM_BuzzyBeetle_Anim00,
+    STATUS_DIZZY,     ANIM_BuzzyBeetle_Anim0A,
+    STATUS_FEAR,      ANIM_BuzzyBeetle_Anim0A,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021E62C)[] = {
-    STATUS_NORMAL,    ANIM_BuzzyBeetle_AnimF,
-    STATUS_STONE,     ANIM_BuzzyBeetle_AnimE,
+    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim0F,
+    STATUS_STONE,     ANIM_BuzzyBeetle_Anim0E,
     STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim14,
-    STATUS_POISON,    ANIM_BuzzyBeetle_AnimF,
-    STATUS_STOP,      ANIM_BuzzyBeetle_AnimE,
-    STATUS_STATIC,    ANIM_BuzzyBeetle_AnimF,
-    STATUS_PARALYZE,  ANIM_BuzzyBeetle_AnimE,
+    STATUS_POISON,    ANIM_BuzzyBeetle_Anim0F,
+    STATUS_STOP,      ANIM_BuzzyBeetle_Anim0E,
+    STATUS_STATIC,    ANIM_BuzzyBeetle_Anim0F,
+    STATUS_PARALYZE,  ANIM_BuzzyBeetle_Anim0E,
     STATUS_DIZZY,     ANIM_BuzzyBeetle_Anim15,
     STATUS_FEAR,      ANIM_BuzzyBeetle_Anim15,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021E678)[] = {
-    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim2,
+    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim02,
     STATUS_STONE,     ANIM_BuzzyBeetle_Anim1A,
     STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim1B,
-    STATUS_POISON,    ANIM_BuzzyBeetle_Anim2,
+    STATUS_POISON,    ANIM_BuzzyBeetle_Anim02,
     STATUS_STOP,      ANIM_BuzzyBeetle_Anim1A,
-    STATUS_STATIC,    ANIM_BuzzyBeetle_Anim2,
+    STATUS_STATIC,    ANIM_BuzzyBeetle_Anim02,
     STATUS_DIZZY,     ANIM_BuzzyBeetle_Anim1C,
     STATUS_FEAR,      ANIM_BuzzyBeetle_Anim1C,
     STATUS_END,
@@ -176,7 +176,7 @@ EvtScript N(8021E89C) = {
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, 0)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, 1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim08)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -204,7 +204,7 @@ EvtScript N(8021E89C) = {
     EVT_ADD(LVar1, LVarE)
     EVT_ADD(LVar2, LVarF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim02)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -253,17 +253,17 @@ EvtScript N(handleEvent_8021ECD0) = {
             EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim13)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim13)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -326,7 +326,7 @@ EvtScript N(handleEvent_8021F228) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoNormalHit)
@@ -335,8 +335,8 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_NE(LVar0, 2)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimB)
-                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0B)
+                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim0B)
                 EVT_EXEC_WAIT(DoBurnHit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -348,11 +348,11 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_NE(LVar0, 2)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimB)
-                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0B)
+                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim0B)
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0B)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -366,7 +366,7 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoSpinSmashHit)
@@ -378,7 +378,7 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021E4DC)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021E678)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim07)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
                 EVT_WAIT(1)
@@ -405,46 +405,46 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim19)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimC)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(DoImmune)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim17)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimC)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(DoImmune)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimD)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0D)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
@@ -460,25 +460,25 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_WAIT(20)
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim19)
             EVT_EXEC_WAIT(N(8021F18C))
             EVT_EXEC_WAIT(DoDeath)
@@ -487,40 +487,40 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim01)
                 EVT_EXEC_WAIT(DoRecover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
-                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim7)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
+                EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim07)
                 EVT_EXEC_WAIT(DoScareAway)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
             EVT_END_IF
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim7)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim8)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim08)
             EVT_END_IF
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
@@ -528,13 +528,13 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_AnimC)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(DoImmune)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimD)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0D)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
+                EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_DEFAULT
@@ -573,7 +573,7 @@ EvtScript N(takeTurn_8021FF8C) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar4, LVar2)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimE)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0E)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim11)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -582,7 +582,7 @@ EvtScript N(takeTurn_8021FF8C) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar4, LVar2)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimE)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0E)
         EVT_WAIT(8)
     EVT_END_IF
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 769, 0)
@@ -601,7 +601,7 @@ EvtScript N(takeTurn_8021FF8C) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(SetPartYaw, ACTOR_SELF, 1, 180)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim08)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar1, 24)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -619,7 +619,7 @@ EvtScript N(takeTurn_8021FF8C) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -629,10 +629,10 @@ EvtScript N(takeTurn_8021FF8C) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim04)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim01)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -641,7 +641,7 @@ EvtScript N(takeTurn_8021FF8C) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim08)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -666,7 +666,7 @@ EvtScript N(takeTurn_8021FF8C) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -674,9 +674,9 @@ EvtScript N(takeTurn_8021FF8C) = {
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim01)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LABEL(10)
@@ -704,8 +704,8 @@ EvtScript N(takeTurn_80220A44) = {
             EVT_WAIT(20)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim2)
-            EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim02)
+            EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim01)
             EVT_EXEC_WAIT(D_8029BBB4)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -724,9 +724,9 @@ EvtScript N(takeTurn_80220A44) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimC)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0C)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim06)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
@@ -736,7 +736,7 @@ EvtScript N(takeTurn_80220A44) = {
         EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim05)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20D3)
@@ -777,7 +777,7 @@ EvtScript N(takeTurn_80220A44) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_AnimD)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim0D)
             EVT_WAIT(10)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -806,14 +806,14 @@ EvtScript N(takeTurn_80220A44) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim01)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim01)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

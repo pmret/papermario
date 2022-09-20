@@ -56,21 +56,21 @@ EvtScript N(8024049C) = {
                 EVT_CALL(SetNpcPos, NPC_PARTNER, 1000, 1000, 0)
                 EVT_CALL(RotateModel, 0, 80, 0, -1, 0)
                 EVT_CALL(RotateModel, 1, 80, 0, -1, 0)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim6)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim06)
                 EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
                 EVT_CALL(NpcJump0, 0, -50, 0, 50, 10)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim7)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim07)
                 EVT_WAIT(1)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim6)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim06)
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
                 EVT_CALL(NpcJump0, 0, -110, 0, 110, 10)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim7)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim07)
                 EVT_WAIT(1)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim6)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim06)
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
                 EVT_CALL(NpcJump0, 0, -180, 0, 180, 10)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim7)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_TubbasHeart_Anim07)
                 EVT_WAIT(1)
                 EVT_CALL(MakeLerp, 80, 0, 10, 0)
                 EVT_LOOP(0)
@@ -338,15 +338,15 @@ EvtScript N(init_80241288) = {
 EvtScript N(interact_802412E8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(8)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00BA)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BA)
         EVT_CASE_LT(42)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00BB)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BB)
         EVT_CASE_LT(61)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00BC)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BC)
         EVT_CASE_LT(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00BD)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BD)
         EVT_CASE_GE(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00BE)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00BE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -375,22 +375,22 @@ StaticNpc N(npcGroup_80241448) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
     },
 };
 
@@ -407,22 +407,22 @@ StaticNpc N(npcGroup_80241638) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
     },
     .tattle = MSG_NpcTattle_Yakkey,
 };

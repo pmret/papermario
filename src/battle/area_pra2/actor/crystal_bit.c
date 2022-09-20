@@ -13,17 +13,17 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(idleAnimations_1)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_AnimA,
+    STATUS_NORMAL, ANIM_CrystalKing_Anim0A,
     STATUS_END,
 };
 
 s32 N(idleAnimations_2)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_AnimB,
+    STATUS_NORMAL, ANIM_CrystalKing_Anim0B,
     STATUS_END,
 };
 
 s32 N(idleAnimations_3)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_AnimC,
+    STATUS_NORMAL, ANIM_CrystalKing_Anim0C,
     STATUS_END,
 };
 
@@ -309,15 +309,15 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetOwnerID, LVar0)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim5)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim05)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim6)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim06)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim7)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim07)
             EVT_END_IF
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_CALL(RandInt, 360, LVar0)

@@ -11,15 +11,15 @@ extern EvtScript N(idle_8021819C);
 extern EvtScript N(handleEvent_802181AC);
 
 s32 N(idleAnimations_80218000)[] = {
-    STATUS_NORMAL,    ANIM_BattleClubba_Anim1,
-    STATUS_STONE,     ANIM_BattleClubba_Anim0,
-    STATUS_SLEEP,     ANIM_BattleClubba_Anim3,
-    STATUS_POISON,    ANIM_BattleClubba_Anim1,
-    STATUS_STOP,      ANIM_BattleClubba_Anim0,
-    STATUS_STATIC,    ANIM_BattleClubba_Anim1,
-    STATUS_PARALYZE,  ANIM_BattleClubba_Anim0,
-    STATUS_DIZZY,     ANIM_BattleClubba_Anim5,
-    STATUS_FEAR,      ANIM_BattleClubba_Anim5,
+    STATUS_NORMAL,    ANIM_BattleClubba_Anim01,
+    STATUS_STONE,     ANIM_BattleClubba_Anim00,
+    STATUS_SLEEP,     ANIM_BattleClubba_Anim03,
+    STATUS_POISON,    ANIM_BattleClubba_Anim01,
+    STATUS_STOP,      ANIM_BattleClubba_Anim00,
+    STATUS_STATIC,    ANIM_BattleClubba_Anim01,
+    STATUS_PARALYZE,  ANIM_BattleClubba_Anim00,
+    STATUS_DIZZY,     ANIM_BattleClubba_Anim05,
+    STATUS_FEAR,      ANIM_BattleClubba_Anim05,
     STATUS_END,
 };
 
@@ -113,86 +113,86 @@ EvtScript N(handleEvent_802181AC) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim6)
-            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim06)
+            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim07)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim6)
-            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim06)
+            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim07)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim2)
-            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
+            EVT_SET_CONST(LVar2, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim04)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -220,7 +220,7 @@ EvtScript N(takeTurn_802186BC) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_WAIT(15)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim02)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -230,7 +230,7 @@ EvtScript N(takeTurn_802186BC) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 10, 0, -6)
         EVT_END_IF
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim01)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -239,7 +239,7 @@ EvtScript N(takeTurn_802186BC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim08)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -250,7 +250,7 @@ EvtScript N(takeTurn_802186BC) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -259,10 +259,10 @@ EvtScript N(takeTurn_802186BC) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim9)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim09)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_AnimA)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -277,7 +277,7 @@ EvtScript N(takeTurn_802186BC) = {
             EVT_WAIT(19)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

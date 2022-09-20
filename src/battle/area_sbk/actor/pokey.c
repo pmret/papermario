@@ -150,44 +150,44 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_80218438)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim4,
-    STATUS_STONE,     ANIM_Pokey_Anim0,
+    STATUS_NORMAL,    ANIM_Pokey_Anim04,
+    STATUS_STONE,     ANIM_Pokey_Anim00,
     STATUS_SLEEP,     ANIM_Pokey_Anim25,
-    STATUS_STOP,      ANIM_Pokey_Anim0,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim0,
+    STATUS_STOP,      ANIM_Pokey_Anim00,
+    STATUS_PARALYZE,  ANIM_Pokey_Anim00,
     STATUS_DIZZY,     ANIM_Pokey_Anim21,
     STATUS_FEAR,      ANIM_Pokey_Anim21,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218474)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim5,
-    STATUS_STONE,     ANIM_Pokey_Anim1,
+    STATUS_NORMAL,    ANIM_Pokey_Anim05,
+    STATUS_STONE,     ANIM_Pokey_Anim01,
     STATUS_SLEEP,     ANIM_Pokey_Anim26,
-    STATUS_STOP,      ANIM_Pokey_Anim1,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim1,
+    STATUS_STOP,      ANIM_Pokey_Anim01,
+    STATUS_PARALYZE,  ANIM_Pokey_Anim01,
     STATUS_DIZZY,     ANIM_Pokey_Anim22,
     STATUS_FEAR,      ANIM_Pokey_Anim22,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802184B0)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim6,
-    STATUS_STONE,     ANIM_Pokey_Anim2,
+    STATUS_NORMAL,    ANIM_Pokey_Anim06,
+    STATUS_STONE,     ANIM_Pokey_Anim02,
     STATUS_SLEEP,     ANIM_Pokey_Anim27,
-    STATUS_STOP,      ANIM_Pokey_Anim2,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim2,
+    STATUS_STOP,      ANIM_Pokey_Anim02,
+    STATUS_PARALYZE,  ANIM_Pokey_Anim02,
     STATUS_DIZZY,     ANIM_Pokey_Anim23,
     STATUS_FEAR,      ANIM_Pokey_Anim23,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802184EC)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim7,
-    STATUS_STONE,     ANIM_Pokey_Anim3,
+    STATUS_NORMAL,    ANIM_Pokey_Anim07,
+    STATUS_STONE,     ANIM_Pokey_Anim03,
     STATUS_SLEEP,     ANIM_Pokey_Anim28,
-    STATUS_STOP,      ANIM_Pokey_Anim3,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim3,
+    STATUS_STOP,      ANIM_Pokey_Anim03,
+    STATUS_PARALYZE,  ANIM_Pokey_Anim03,
     STATUS_DIZZY,     ANIM_Pokey_Anim24,
     STATUS_FEAR,      ANIM_Pokey_Anim24,
     STATUS_END,
@@ -469,10 +469,10 @@ EvtScript N(802193B8) = {
             EVT_ELSE
                 EVT_CALL(AddGoalPos, ACTOR_SELF, 24, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim08)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim04)
         EVT_CASE_EQ(1)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
@@ -480,10 +480,10 @@ EvtScript N(802193B8) = {
             EVT_ELSE
                 EVT_CALL(AddGoalPos, ACTOR_SELF, 16, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim9)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim09)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim05)
         EVT_CASE_EQ(2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
@@ -491,10 +491,10 @@ EvtScript N(802193B8) = {
             EVT_ELSE
                 EVT_CALL(AddGoalPos, ACTOR_SELF, 8, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimA)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0A)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim06)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x342)
     EVT_CALL(MakeLerp, 0, -40, 20, 10)
@@ -539,23 +539,23 @@ EvtScript N(802193B8) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim8)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim08)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim4)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim04)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim09)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim5)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim05)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimA)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0A)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim6)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim06)
             EVT_END_SWITCH
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -590,23 +590,23 @@ EvtScript N(802193B8) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim8)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim08)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim4)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim04)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim09)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim5)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim05)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimA)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0A)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim6)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim06)
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -876,7 +876,7 @@ EvtScript N(8021AE2C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim04)
     EVT_CALL(MakeLerp, 0, -20, 20, 10)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -936,14 +936,14 @@ EvtScript N(8021AE2C) = {
     EVT_CHILD_THREAD
         EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 2, LVar0, 0, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(UseIdleAnimation, LVarB, FALSE)
-        EVT_CALL(SetAnimation, LVarB, 1, ANIM_Pokey_AnimC)
+        EVT_CALL(SetAnimation, LVarB, 1, ANIM_Pokey_Anim0C)
         EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
         EVT_CALL(SetActorJumpGravity, LVarB, EVT_FLOAT(1.2))
         EVT_CALL(SetGoalPos, LVarB, LVar0, 0, LVar2)
         EVT_CALL(JumpToGoal, LVarB, 20, FALSE, TRUE, FALSE)
         EVT_WAIT(20)
         EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
-        EVT_CALL(SetAnimation, LVarB, 1, ANIM_Pokey_Anim4)
+        EVT_CALL(SetAnimation, LVarB, 1, ANIM_Pokey_Anim04)
         EVT_CALL(SetHomePos, LVarB, LVar0, LVar1, LVar2)
         EVT_CALL(HPBarToHome, LVarB)
         EVT_CALL(UseIdleAnimation, LVarB, TRUE)
@@ -976,7 +976,7 @@ EvtScript N(8021AE2C) = {
         EVT_GOTO(5)
     EVT_END_IF
     EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim04)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -997,18 +997,18 @@ EvtScript N(8021B590) = {
     EVT_ADD(LVar0, 50)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimB)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0B)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
     EVT_WAIT(4)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(4)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimB)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0B)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1060,11 +1060,11 @@ EvtScript N(8021B590) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimB)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0B)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(D_8029C12C)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1082,7 +1082,7 @@ EvtScript N(8021B590) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_POISON | STATUS_FLAG_80000000, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
@@ -1103,14 +1103,14 @@ EvtScript N(8021B590) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_SUB(LVar0, 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_AnimB)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim0B)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(D_8029C12C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

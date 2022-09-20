@@ -361,9 +361,9 @@ EvtScript N(802A27FC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1A70))
-    EVT_SET_CONST(LVar0, ANIM_BattleEldstar_Anim1)
+    EVT_SET_CONST(LVar0, ANIM_BattleEldstar_Anim01)
     EVT_EXEC_WAIT(N(802A21A0))
-    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleEldstar_Anim2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleEldstar_Anim02)
     EVT_WAIT(16)
     EVT_THREAD
         EVT_WAIT(10)

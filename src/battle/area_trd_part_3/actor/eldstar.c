@@ -15,7 +15,7 @@ extern EvtScript N(80218424);
 BSS s32 D_80219040;
 
 s32 N(idleAnimations_80218280)[] = {
-    STATUS_NORMAL,    ANIM_WorldEldstar_Anim1,
+    STATUS_NORMAL,    ANIM_WorldEldstar_Anim01,
     STATUS_END,
 };
 
@@ -208,7 +208,7 @@ EvtScript N(80218424) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
         EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
@@ -225,14 +225,14 @@ EvtScript N(80218424) = {
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_CALL(func_802180C8_4CF278)
     EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
-    EVT_CALL(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 2)
@@ -263,7 +263,7 @@ EvtScript N(80218424) = {
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
-    EVT_CALL(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
@@ -271,12 +271,12 @@ EvtScript N(80218424) = {
     EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
-    EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(SetBattleState, 6)
     EVT_CALL(WaitForState, 5)
     EVT_WAIT(20)
-    EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_THREAD
@@ -297,9 +297,9 @@ EvtScript N(80218424) = {
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
-    EVT_CALL(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 1)
@@ -331,7 +331,7 @@ EvtScript N(80218424) = {
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
-    EVT_CALL(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
@@ -339,7 +339,7 @@ EvtScript N(80218424) = {
     EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
-    EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim2, ANIM_WorldEldstar_Anim1)
+    EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, 1, ANIM_WorldEldstar_Anim02, ANIM_WorldEldstar_Anim01)
     EVT_CALL(WaitForState, 0)
     EVT_CALL(SetBattleState, 30)
     EVT_WAIT(10000)

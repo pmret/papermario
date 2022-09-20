@@ -244,13 +244,13 @@ ApiStatus func_80238590_6FB2A0(Evt* script, s32 isInitialCall) {
 }
 
 s32 N(idleAnimations_80238640)[] = {
-    STATUS_NORMAL,    ANIM_BattleBombette_Anim6,
-    STATUS_STONE,     ANIM_BattleBombette_Anim0,
+    STATUS_NORMAL,    ANIM_BattleBombette_Anim06,
+    STATUS_STONE,     ANIM_BattleBombette_Anim00,
     STATUS_SLEEP,     ANIM_BattleBombette_Anim1D,
-    STATUS_POISON,    ANIM_BattleBombette_Anim0,
-    STATUS_STOP,      ANIM_BattleBombette_Anim0,
+    STATUS_POISON,    ANIM_BattleBombette_Anim00,
+    STATUS_STOP,      ANIM_BattleBombette_Anim00,
     STATUS_DAZE,      ANIM_BattleBombette_Anim1E,
-    STATUS_TURN_DONE, ANIM_BattleBombette_Anim0,
+    STATUS_TURN_DONE, ANIM_BattleBombette_Anim00,
     STATUS_END,
 };
 
@@ -505,7 +505,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_SET(LVar1, LVarA)
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802977BC)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimB)
+            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0B)
             EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -562,8 +562,8 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_EXEC_WAIT(D_80296014)
         EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBombette_Anim4)
-            EVT_SET_CONST(LVar2, ANIM_BattleBombette_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_BattleBombette_Anim04)
+            EVT_SET_CONST(LVar2, ANIM_BattleBombette_Anim08)
             EVT_SET(LVar3, 0)
             EVT_EXEC_WAIT(D_80295EC4)
         EVT_CASE_OR_EQ(EVENT_18)
@@ -603,7 +603,7 @@ EvtScript N(80239B64) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_Anim18)
     EVT_SET_CONST(LVar2, ANIM_BattleBombette_Anim19)
-    EVT_SET_CONST(LVar3, ANIM_BattleBombette_Anim4)
+    EVT_SET_CONST(LVar3, ANIM_BattleBombette_Anim04)
     EVT_EXEC_WAIT(D_80294720)
     EVT_RETURN
     EVT_END
@@ -654,7 +654,7 @@ EvtScript N(80239D08) = {
 
 EvtScript N(80239D8C) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, ANIM_BattleBombette_Anim8)
+    EVT_SET_CONST(LVar1, ANIM_BattleBombette_Anim08)
     EVT_EXEC_WAIT(D_80294AFC)
     EVT_RETURN
     EVT_END
@@ -664,10 +664,10 @@ EvtScript N(80239DC8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim08)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_RETURN
     EVT_END
@@ -689,33 +689,33 @@ EvtScript N(80239E8C) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 25, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 30)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 20)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 10)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_WAIT(8)
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim08)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_RETURN
     EVT_END
 };
@@ -730,46 +730,46 @@ EvtScript N(8023A1AC) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 30)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 20)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim11)
     EVT_SUB(LVar0, 10)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0E)
     EVT_WAIT(1)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_WAIT(8)
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim08)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8023A4BC) = {
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim08)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 35)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8023A4F8) = {
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AnimF)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim0F)
     EVT_LOOP(15)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
         EVT_WAIT(1)
@@ -929,7 +929,7 @@ EvtScript N(8023A5F8) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
         EVT_CALL(SetActorSounds, ACTOR_PARTNER, 0, 0, 0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_THREAD
             EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 15, 0)
@@ -943,17 +943,17 @@ EvtScript N(8023A5F8) = {
         EVT_END_THREAD
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, 60, 0, 0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 10)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
         EVT_THREAD
             EVT_CALL(func_80238244_6FAF54)
         EVT_END_THREAD
         EVT_WAIT(20)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim8)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim08)
         EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -975,14 +975,14 @@ EvtScript N(8023A5F8) = {
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim10)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 3)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_ELSE
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim10)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -1060,7 +1060,7 @@ EvtScript N(8023B228) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0x287)
     EVT_CHILD_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim9)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim09)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_SWITCH(LVar2)
             EVT_CASE_EQ(146)
@@ -1321,7 +1321,7 @@ EvtScript N(8023B228) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.6))
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim1B)
             EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -1418,7 +1418,7 @@ EvtScript N(8023C990) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.6))
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim1B)
             EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Anim04)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

@@ -16,16 +16,16 @@ extern EvtScript N(80226B88);
 extern EvtScript N(80227878);
 
 s32 N(idleAnimations_80225C40)[] = {
-    STATUS_NORMAL,    ANIM_BattleTubba_Anim1,
-    STATUS_STONE,     ANIM_BattleTubba_Anim0,
+    STATUS_NORMAL,    ANIM_BattleTubba_Anim01,
+    STATUS_STONE,     ANIM_BattleTubba_Anim00,
     STATUS_SLEEP,     ANIM_BattleTubba_Anim18,
-    STATUS_POISON,    ANIM_BattleTubba_Anim1,
-    STATUS_STOP,      ANIM_BattleTubba_Anim0,
-    STATUS_STATIC,    ANIM_BattleTubba_Anim0,
-    STATUS_PARALYZE,  ANIM_BattleTubba_Anim0,
-    STATUS_PARALYZE,  ANIM_BattleTubba_Anim0,
+    STATUS_POISON,    ANIM_BattleTubba_Anim01,
+    STATUS_STOP,      ANIM_BattleTubba_Anim00,
+    STATUS_STATIC,    ANIM_BattleTubba_Anim00,
+    STATUS_PARALYZE,  ANIM_BattleTubba_Anim00,
+    STATUS_PARALYZE,  ANIM_BattleTubba_Anim00,
     STATUS_DIZZY,     ANIM_BattleTubba_Anim18,
-    STATUS_FEAR,      ANIM_BattleTubba_Anim0,
+    STATUS_FEAR,      ANIM_BattleTubba_Anim00,
     STATUS_END,
 };
 
@@ -119,10 +119,10 @@ EvtScript N(80225E08) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar0)
-    EVT_IF_EQ(LVar0, ANIM_BattleTubba_Anim6)
+    EVT_IF_EQ(LVar0, ANIM_BattleTubba_Anim06)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_IF_EQ(LVar0, ANIM_BattleTubba_Anim7)
+    EVT_IF_EQ(LVar0, ANIM_BattleTubba_Anim07)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_GOTO(0)
@@ -211,7 +211,7 @@ EvtScript N(handleEvent_802260D0) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
@@ -236,7 +236,7 @@ EvtScript N(handleEvent_802260D0) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -364,9 +364,9 @@ EvtScript N(80226B88) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimA)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0A)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimB)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0B)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 999, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -375,7 +375,7 @@ EvtScript N(80226B88) = {
             EVT_SET(LVarA, LVar0)
             EVT_THREAD
                 EVT_WAIT(12)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimC)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0C)
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -387,7 +387,7 @@ EvtScript N(80226B88) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 23, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20EA)
             EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 0, LVar0, 0, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimD)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0D)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0, 0, 0, 0, 0)
@@ -414,7 +414,7 @@ EvtScript N(80226B88) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_WAIT(8)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0E)
             EVT_WAIT(4)
             EVT_EXEC_WAIT(N(80225FD4))
             EVT_RETURN
@@ -422,7 +422,7 @@ EvtScript N(80226B88) = {
         EVT_CASE_DEFAULT
             EVT_THREAD
                 EVT_WAIT(9)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimC)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0C)
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -462,7 +462,7 @@ EvtScript N(80226B88) = {
             EVT_LABEL(0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 0, LVar0, 0, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimD)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0D)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0, 0, 0, 0, 0)
@@ -499,7 +499,7 @@ EvtScript N(80226B88) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_THREAD
                 EVT_WAIT(8)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_AnimE)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim0E)
             EVT_END_THREAD
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)

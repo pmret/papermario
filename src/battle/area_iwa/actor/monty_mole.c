@@ -105,20 +105,20 @@ ActorBlueprint N(1) = {
 };
 
 s32 N(idleAnimations_8021A59C)[] = {
-    STATUS_NORMAL,    ANIM_MontyMole_Anim1,
-    STATUS_STONE,     ANIM_MontyMole_Anim0,
+    STATUS_NORMAL,    ANIM_MontyMole_Anim01,
+    STATUS_STONE,     ANIM_MontyMole_Anim00,
     STATUS_SLEEP,     ANIM_MontyMole_Anim14,
-    STATUS_POISON,    ANIM_MontyMole_Anim1,
-    STATUS_STOP,      ANIM_MontyMole_Anim0,
-    STATUS_STATIC,    ANIM_MontyMole_Anim1,
-    STATUS_PARALYZE,  ANIM_MontyMole_Anim0,
+    STATUS_POISON,    ANIM_MontyMole_Anim01,
+    STATUS_STOP,      ANIM_MontyMole_Anim00,
+    STATUS_STATIC,    ANIM_MontyMole_Anim01,
+    STATUS_PARALYZE,  ANIM_MontyMole_Anim00,
     STATUS_DIZZY,     ANIM_MontyMole_Anim14,
     STATUS_FEAR,      ANIM_MontyMole_Anim14,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021A5E8)[] = {
-    STATUS_NORMAL,    ANIM_MontyMole_AnimF,
+    STATUS_NORMAL,    ANIM_MontyMole_Anim0F,
     STATUS_END,
 };
 
@@ -227,32 +227,32 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SMASH)
                 EVT_CHILD_THREAD
                     EVT_WAIT(8)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim7)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim07)
                 EVT_END_CHILD_THREAD
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim6)
+                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim06)
                 EVT_EXEC_WAIT(DoNormalHit)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim8)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
                 EVT_WAIT(10)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_AnimA)
-            EVT_SET_CONST(LVar2, ANIM_MontyMole_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0A)
+            EVT_SET_CONST(LVar2, ANIM_MontyMole_Anim0B)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_AnimA)
-            EVT_SET_CONST(LVar2, ANIM_MontyMole_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0A)
+            EVT_SET_CONST(LVar2, ANIM_MontyMole_Anim0B)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(8021A6FC))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_AnimC)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -271,41 +271,41 @@ EvtScript N(handleEvent_8021A824) = {
                 EVT_WAIT(20)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim01)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim5)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
             EVT_WAIT(10)
             EVT_EXEC_WAIT(N(8021A6FC))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim09)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
             EVT_WAIT(8)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim07)
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
             EVT_WAIT(8)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim7)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim07)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
             EVT_WAIT(15)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_APPLY, 1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A5F4)))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim5)
+            EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_EXEC_WAIT(N(8021A6FC))
@@ -319,7 +319,7 @@ EvtScript N(handleEvent_8021A824) = {
                 EVT_ELSE
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -23, 0)
                 EVT_END_IF
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim9)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim09)
             EVT_END_IF
             EVT_WAIT(1000)
             EVT_RETURN
@@ -359,7 +359,7 @@ EvtScript N(takeTurn_8021AFAC) = {
         EVT_WAIT(20)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_SURFACE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim04)
     EVT_WAIT(37)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
@@ -386,7 +386,7 @@ EvtScript N(takeTurn_8021AFAC) = {
             EVT_SET(LVar1, -5)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(12.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_MontyMole_AnimF)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_MontyMole_Anim0F)
             EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LVar0, LVar1, LVar2, 0, 30, 0)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
@@ -403,7 +403,7 @@ EvtScript N(takeTurn_8021AFAC) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(12.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_MontyMole_AnimF)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_MontyMole_Anim0F)
     EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LVar0, LVar1, LVar2, 0, 20, 0)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)

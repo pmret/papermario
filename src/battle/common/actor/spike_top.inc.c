@@ -88,38 +88,38 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_8021C9D0)[] = {
-    STATUS_NORMAL,    ANIM_SpikeTop_Anim3,
-    STATUS_STONE,     ANIM_SpikeTop_Anim0,
+    STATUS_NORMAL,    ANIM_SpikeTop_Anim03,
+    STATUS_STONE,     ANIM_SpikeTop_Anim00,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1B,
-    STATUS_POISON,    ANIM_SpikeTop_Anim3,
-    STATUS_STOP,      ANIM_SpikeTop_Anim0,
-    STATUS_STATIC,    ANIM_SpikeTop_Anim3,
-    STATUS_PARALYZE,  ANIM_SpikeTop_Anim0,
+    STATUS_POISON,    ANIM_SpikeTop_Anim03,
+    STATUS_STOP,      ANIM_SpikeTop_Anim00,
+    STATUS_STATIC,    ANIM_SpikeTop_Anim03,
+    STATUS_PARALYZE,  ANIM_SpikeTop_Anim00,
     STATUS_DIZZY,     ANIM_SpikeTop_Anim1E,
     STATUS_FEAR,      ANIM_SpikeTop_Anim1E,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021CA1C)[] = {
-    STATUS_NORMAL,    ANIM_SpikeTop_Anim4,
-    STATUS_STONE,     ANIM_SpikeTop_Anim1,
+    STATUS_NORMAL,    ANIM_SpikeTop_Anim04,
+    STATUS_STONE,     ANIM_SpikeTop_Anim01,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1C,
-    STATUS_POISON,    ANIM_SpikeTop_Anim4,
-    STATUS_STOP,      ANIM_SpikeTop_Anim1,
-    STATUS_STATIC,    ANIM_SpikeTop_Anim4,
-    STATUS_PARALYZE,  ANIM_SpikeTop_Anim1,
+    STATUS_POISON,    ANIM_SpikeTop_Anim04,
+    STATUS_STOP,      ANIM_SpikeTop_Anim01,
+    STATUS_STATIC,    ANIM_SpikeTop_Anim04,
+    STATUS_PARALYZE,  ANIM_SpikeTop_Anim01,
     STATUS_DIZZY,     ANIM_SpikeTop_Anim1F,
     STATUS_FEAR,      ANIM_SpikeTop_Anim1F,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021CA68)[] = {
-    STATUS_NORMAL,    ANIM_SpikeTop_Anim5,
-    STATUS_STONE,     ANIM_SpikeTop_Anim2,
+    STATUS_NORMAL,    ANIM_SpikeTop_Anim05,
+    STATUS_STONE,     ANIM_SpikeTop_Anim02,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1D,
-    STATUS_POISON,    ANIM_SpikeTop_Anim5,
-    STATUS_STOP,      ANIM_SpikeTop_Anim2,
-    STATUS_STATIC,    ANIM_SpikeTop_Anim5,
+    STATUS_POISON,    ANIM_SpikeTop_Anim05,
+    STATUS_STOP,      ANIM_SpikeTop_Anim02,
+    STATUS_STATIC,    ANIM_SpikeTop_Anim05,
     STATUS_DIZZY,     ANIM_SpikeTop_Anim20,
     STATUS_FEAR,      ANIM_SpikeTop_Anim20,
     STATUS_END,
@@ -201,7 +201,7 @@ EvtScript N(spikeTop_FallDown) = {
     EVT_ADD(LVar1, LVarE)
     EVT_ADD(LVar2, LVarF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim05)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -253,7 +253,7 @@ EvtScript N(spikeTop_HandleEvent_Ceiling) = {
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim13)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
@@ -265,11 +265,11 @@ EvtScript N(spikeTop_HandleEvent_Ceiling) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_AnimD)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0D)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_AnimD)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0D)
             EVT_EXEC_WAIT(DoImmune)
             EVT_WAIT(2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -289,7 +289,7 @@ EvtScript N(spikeTop_HandleEvent_Ceiling) = {
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 1)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim09)
             EVT_SET_CONST(LVar2, ANIM_SpikeTop_Anim14)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
@@ -410,7 +410,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim13)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
@@ -424,26 +424,26 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(DoImmune)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimE)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0E)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(DoImmune)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimC)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
@@ -486,30 +486,30 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim3)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim03)
                 EVT_EXEC_WAIT(DoRecover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
                 EVT_SET_CONST(LVar2, ANIM_SpikeTop_Anim13)
                 EVT_EXEC_WAIT(DoScareAway)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
             EVT_END_IF
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
@@ -528,13 +528,13 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_AnimB)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(DoImmune)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimC)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
+                EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
                 EVT_EXEC_WAIT(DoImmune)
             EVT_END_IF
         EVT_CASE_DEFAULT
@@ -573,16 +573,16 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar4, LVar2)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim01)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim09)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar4, LVar2)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim01)
         EVT_WAIT(8)
     EVT_END_IF
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 769, 0)
@@ -619,7 +619,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -629,10 +629,10 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim08)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -666,7 +666,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -674,9 +674,9 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LABEL(10)
@@ -704,8 +704,8 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_WAIT(20)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim5)
-            EVT_SET_CONST(LVar2, ANIM_SpikeTop_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
+            EVT_SET_CONST(LVar2, ANIM_SpikeTop_Anim03)
             EVT_EXEC_WAIT(D_8029BBB4)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -725,9 +725,9 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimB)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0B)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimF)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0F)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
@@ -737,7 +737,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
         EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimA)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0A)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20D3)
@@ -778,7 +778,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_AnimC)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
             EVT_WAIT(10)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -807,14 +807,14 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim8)
+            EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

@@ -160,7 +160,7 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, E
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->alertOffsetDist)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
-            npc->currentAnim = ANIM_MontyMole_Anim1; // cancel attack
+            npc->currentAnim = ANIM_MontyMole_Anim01; // cancel attack
             npc->duration = 30;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_PRE_BURROW;
         } else {
@@ -191,7 +191,7 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, 
     }
     if (moleNpc->duration <= 0) {
         if (moleNpc->currentAnim != ANIM_MontyMole_Anim15) {
-            moleNpc->currentAnim = ANIM_MontyMole_Anim1;
+            moleNpc->currentAnim = ANIM_MontyMole_Anim01;
         }
         moleNpc->duration = 15;
         script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_BURROW;

@@ -27,33 +27,33 @@ extern EvtScript N(8021F80C);
 extern EvtScript N(8021FA54);
 
 s32 N(idleAnimations_8021B960)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_Anim1,
-    STATUS_STONE,     ANIM_Tutankoopa_Anim0,
-    STATUS_SLEEP,     ANIM_Tutankoopa_AnimC,
-    STATUS_POISON,    ANIM_Tutankoopa_Anim1,
-    STATUS_STOP,      ANIM_Tutankoopa_Anim0,
-    STATUS_STATIC,    ANIM_Tutankoopa_Anim0,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim0,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim0,
-    STATUS_DIZZY,     ANIM_Tutankoopa_AnimA,
+    STATUS_NORMAL,    ANIM_Tutankoopa_Anim01,
+    STATUS_STONE,     ANIM_Tutankoopa_Anim00,
+    STATUS_SLEEP,     ANIM_Tutankoopa_Anim0C,
+    STATUS_POISON,    ANIM_Tutankoopa_Anim01,
+    STATUS_STOP,      ANIM_Tutankoopa_Anim00,
+    STATUS_STATIC,    ANIM_Tutankoopa_Anim00,
+    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim00,
+    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim00,
+    STATUS_DIZZY,     ANIM_Tutankoopa_Anim0A,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021B9AC)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_AnimA,
-    STATUS_STONE,     ANIM_Tutankoopa_Anim7,
-    STATUS_SLEEP,     ANIM_Tutankoopa_AnimD,
-    STATUS_POISON,    ANIM_Tutankoopa_AnimA,
-    STATUS_STOP,      ANIM_Tutankoopa_Anim7,
-    STATUS_STATIC,    ANIM_Tutankoopa_AnimA,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_AnimA,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_AnimA,
-    STATUS_DIZZY,     ANIM_Tutankoopa_AnimA,
+    STATUS_NORMAL,    ANIM_Tutankoopa_Anim0A,
+    STATUS_STONE,     ANIM_Tutankoopa_Anim07,
+    STATUS_SLEEP,     ANIM_Tutankoopa_Anim0D,
+    STATUS_POISON,    ANIM_Tutankoopa_Anim0A,
+    STATUS_STOP,      ANIM_Tutankoopa_Anim07,
+    STATUS_STATIC,    ANIM_Tutankoopa_Anim0A,
+    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim0A,
+    STATUS_PARALYZE,  ANIM_Tutankoopa_Anim0A,
+    STATUS_DIZZY,     ANIM_Tutankoopa_Anim0A,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021B9F8)[] = {
-    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim6,
+    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim06,
     STATUS_END,
 };
 
@@ -296,11 +296,11 @@ EvtScript N(handleEvent_8021BFD0) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(GetActorVar, ACTOR_SELF, 13, LVar2)
             EVT_IF_NE(LVar2, 0)
@@ -327,14 +327,14 @@ EvtScript N(handleEvent_8021BFD0) = {
             EVT_EXEC_WAIT(N(8021C748))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_AnimE)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim0E)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -346,12 +346,12 @@ EvtScript N(handleEvent_8021BFD0) = {
             EVT_IF_EQ(LVar1, 1)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar1)
                 EVT_IF_NE(LVar1, 0)
-                    EVT_SET_CONST(LVar1, ANIM_Tutankoopa_AnimA)
+                    EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim0A)
                 EVT_ELSE
-                    EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim1)
+                    EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim01)
                 EVT_END_IF
             EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim01)
             EVT_END_IF
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
@@ -369,44 +369,44 @@ EvtScript N(handleEvent_8021BFD0) = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
         EVT_CASE_OR_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(N(8021FA54))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_WAIT(N(8021C748))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim06)
             EVT_EXEC_WAIT(N(8021FA54))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim06)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim06)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim01)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -417,7 +417,7 @@ EvtScript N(handleEvent_8021BFD0) = {
 };
 
 EvtScript N(8021C748) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim06)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.1))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -429,17 +429,17 @@ EvtScript N(8021C748) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, 130, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim07)
     EVT_WAIT(15)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim08)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
     EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_RETURN
     EVT_END
 };
@@ -451,7 +451,7 @@ EvtScript N(8021C974) = {
     EVT_END_IF
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E3)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim06)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.9))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
@@ -468,12 +468,12 @@ EvtScript N(8021C974) = {
     EVT_END_THREAD
     EVT_CALL(StartRumble, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E4)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim07)
     EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_CALL(PlayEffect, EFFECT_STARS_ORBITING, 0, LVar0, LVar1, LVar2, 20, 4, LVarF, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_AnimA)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim0A)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)
@@ -568,15 +568,15 @@ EvtScript N(8021D04C) = {
     EVT_CALL(SetBattleCamZoom, 320)
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(BattleCamTargetActorPart, ACTOR_SELF, LVar9)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_SUB(LVar2, 3)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim04)
     EVT_WAIT(7)
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
@@ -591,7 +591,7 @@ EvtScript N(8021D04C) = {
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim05)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar9, EVT_FLOAT(14.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar9, EVT_FLOAT(0.2))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -611,12 +611,12 @@ EvtScript N(8021D04C) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim05)
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar9, EVT_FLOAT(14.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar9, EVT_FLOAT(0.2))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -643,9 +643,9 @@ EvtScript N(8021D04C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(YieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim02)
     EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_RETURN
     EVT_END
 };
@@ -664,12 +664,12 @@ EvtScript N(8021D81C) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(ActorSpeak, MSG_CH2_00E5, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3, ANIM_Tutankoopa_Anim3)
+        EVT_CALL(ActorSpeak, MSG_CH2_00E5, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03, ANIM_Tutankoopa_Anim03)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_CALL(PlayEffect, EFFECT_HIEROGLYPHS, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
@@ -686,7 +686,7 @@ EvtScript N(8021D81C) = {
         EVT_WAIT(49)
         EVT_CALL(PlaySound, 0x20E9)
         EVT_WAIT(5)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim5)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim05)
         EVT_WAIT(8)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Crouch)
         EVT_WAIT(5)
@@ -916,17 +916,17 @@ EvtScript N(8021E9C8) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3)
-        EVT_CALL(ActorSpeak, MSG_CH2_00E6, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3, ANIM_Tutankoopa_Anim3)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH2_00E6, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03, ANIM_Tutankoopa_Anim03)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3)
-        EVT_CALL(ActorSpeak, MSG_CH2_00E7, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim3, ANIM_Tutankoopa_Anim3)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH2_00E7, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim03, ANIM_Tutankoopa_Anim03)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
@@ -973,7 +973,7 @@ EvtScript N(8021E9C8) = {
     EVT_CALL(SetActorDispOffset, LVarB, 0, 0, 0)
     EVT_CALL(UseIdleAnimation, LVarB, FALSE)
     EVT_CALL(EnableIdleScript, LVarB, 0)
-    EVT_CALL(SetAnimation, LVarB, 1, ANIM_ChainChomp_Anim5)
+    EVT_CALL(SetAnimation, LVarB, 1, ANIM_ChainChomp_Anim05)
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, LVarB, EVT_FLOAT(0.8))
     EVT_SET(LVar0, 90)
@@ -1099,7 +1099,7 @@ EvtScript N(8021F5E8) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim08)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_CALL(PlayEffect, EFFECT_HIEROGLYPHS, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
@@ -1125,7 +1125,7 @@ EvtScript N(8021F5E8) = {
 };
 
 EvtScript N(8021F80C) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim08)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1135,7 +1135,7 @@ EvtScript N(8021F80C) = {
         EVT_WAIT(1)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3B4)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021B960)))
     EVT_WAIT(10)
     EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
@@ -1144,7 +1144,7 @@ EvtScript N(8021F80C) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(ActorSpeak, MSG_CH2_00E4, ACTOR_SELF, 1, ANIM_Tutankoopa_AnimB, ANIM_Tutankoopa_Anim1)
+        EVT_CALL(ActorSpeak, MSG_CH2_00E4, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim0B, ANIM_Tutankoopa_Anim01)
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 1)
     EVT_END_IF
     EVT_RETURN
@@ -1174,7 +1174,7 @@ EvtScript N(8021FA54) = {
                 EVT_CALL(func_8027D32C, ACTOR_ENEMY1)
                 EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_ENEMY1, 1, ANIM_ChainChomp_Anim6)
+                EVT_CALL(SetAnimation, ACTOR_ENEMY1, 1, ANIM_ChainChomp_Anim06)
                 EVT_WAIT(10)
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)

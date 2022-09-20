@@ -132,8 +132,8 @@ EvtScript N(802404D8) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(6.5))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim9, ANIM_Sun_Anim9, 517, MSG_CH6_00C3)
-    EVT_CALL(SetNpcAnimation, 10, ANIM_Sun_Anim9)
+    EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim09, ANIM_Sun_Anim09, 517, MSG_CH6_00C3)
+    EVT_CALL(SetNpcAnimation, 10, ANIM_Sun_Anim09)
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 1000)
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(5.0))
@@ -219,25 +219,25 @@ EvtScript N(8024094C) = {
 EvtScript N(interact_80240B28) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(50)
-            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009A)
+            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009A)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
             EVT_WAIT(20)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(20)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009B)
+            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009B)
             EVT_SET(GB_StoryProgress, 50)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009C)
+            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009C)
         EVT_CASE_LT(57)
             EVT_IF_EQ(GF_FLO15_SunThankedPlayer, 0)
-                EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009D)
+                EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009D)
                 EVT_SET(GF_FLO15_SunThankedPlayer, 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009E)
+                EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009E)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim7, ANIM_Sun_Anim1, 517, MSG_CH6_009F)
+            EVT_CALL(SpeakToPlayer, 10, ANIM_Sun_Anim07, ANIM_Sun_Anim01, 517, MSG_CH6_009F)
     EVT_END_SWITCH
     EVT_SET(AreaFlag(38), 1)
     EVT_RETURN
@@ -263,7 +263,7 @@ EvtScript N(init_80240CD0) = {
 
 EvtScript N(init_80240DB4) = {
     EVT_CALL(EnableNpcShadow, 11, FALSE)
-    EVT_CALL(SetNpcAnimation, 11, ANIM_Sun_Anim2)
+    EVT_CALL(SetNpcAnimation, 11, ANIM_Sun_Anim02)
     EVT_CALL(SetNpcPaletteSwapMode, 10, 3)
     EVT_CALL(SetNpcPaletteSwapMode, 11, 3)
     EVT_CALL(SetNpcPaletteSwapping, 10, 0, 1, 5, 5, 13, 5, 0, 0)
@@ -292,22 +292,22 @@ StaticNpc N(npcGroup_80240EE0)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
         },
         .tattle = MSG_NpcTattle_TheSun,
     },
@@ -324,22 +324,22 @@ StaticNpc N(npcGroup_80240EE0)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
-            ANIM_Sun_Anim1,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
+            ANIM_Sun_Anim01,
         },
         .tattle = MSG_NpcTattle_TheSun,
     },

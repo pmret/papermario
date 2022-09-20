@@ -101,7 +101,7 @@ EvtScript N(defeat_802405E4) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CASE_EQ(2)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Anim1)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Anim01)
             EVT_CALL(SetNpcPos, NPC_SELF, 30, 60, 0)
             EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
@@ -148,13 +148,13 @@ EvtScript N(defeat_80240810) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CASE_EQ(3)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim1)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
             EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
             EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CASE_EQ(2)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim1)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
             EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
             EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
@@ -184,22 +184,22 @@ StaticNpc N(npcGroup_80240A04) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Bzzap_Anim2,
-        ANIM_Bzzap_Anim2,
-        ANIM_Bzzap_Anim3,
-        ANIM_Bzzap_Anim3,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim2,
-        ANIM_Bzzap_Anim6,
-        ANIM_Bzzap_Anim6,
-        ANIM_Bzzap_Anim4,
-        ANIM_Bzzap_Anim2,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim1,
-        ANIM_Bzzap_Anim1,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim03,
+        ANIM_Bzzap_Anim03,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim06,
+        ANIM_Bzzap_Anim06,
+        ANIM_Bzzap_Anim04,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
     },
 };
 
@@ -222,22 +222,22 @@ StaticNpc N(npcGroup_80240BF4) = {
         .maxCoinBonus = 3,
     },
 	.animations = {
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim2,
-        ANIM_Dayzee_Anim3,
-        ANIM_Dayzee_Anim3,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim8,
-        ANIM_Dayzee_Anim8,
-        ANIM_Dayzee_Anim6,
-        ANIM_Dayzee_Anim7,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
-        ANIM_Dayzee_Anim1,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim02,
+        ANIM_Dayzee_Anim03,
+        ANIM_Dayzee_Anim03,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim08,
+        ANIM_Dayzee_Anim08,
+        ANIM_Dayzee_Anim06,
+        ANIM_Dayzee_Anim07,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
+        ANIM_Dayzee_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -349,17 +349,17 @@ EvtScript N(80241028) = {
                 EVT_CALL(NpcFacePlayer, 0, 0)
                 EVT_WAIT(1)
                 EVT_CALL(SetNpcPos, 0, 30, 0, 0)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_Bzzap_Anim1)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_Bzzap_Anim01)
                 EVT_CALL(NpcJump0, 0, 30, 60, 0, 20)
                 EVT_WAIT(10)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_Bzzap_Anim4)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_Bzzap_Anim04)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 20)
                 EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 5)
                 EVT_SET(MapVar(10), 1)
             EVT_ELSE
                 EVT_CALL(SetNpcPos, 1, 30, 0, 0)
-                EVT_CALL(SetNpcAnimation, 1, ANIM_Dayzee_AnimE)
+                EVT_CALL(SetNpcAnimation, 1, ANIM_Dayzee_Anim0E)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 20)
                 EVT_CALL(SetNpcJumpscale, 1, EVT_FLOAT(2.0))

@@ -23,16 +23,16 @@ EvtScript N(802401BC) = {
     EVT_WAIT(30)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, 6, 0, 0)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_AnimB, ANIM_TubbasHeart_Anim1, 0, MSG_CH3_00BF)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01, 0, MSG_CH3_00BF)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
     EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_AnimB, ANIM_TubbasHeart_Anim1, 0, MSG_CH3_00C0)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01, 0, MSG_CH3_00C0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, 589824)
     EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_AnimB, ANIM_TubbasHeart_Anim1, 0, MSG_CH3_00C1)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01, 0, MSG_CH3_00C1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, 589824)
@@ -46,7 +46,7 @@ EvtScript N(802401BC) = {
         EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 10)
     EVT_END_THREAD
     EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_AnimB, ANIM_TubbasHeart_Anim1, 0, MSG_CH3_00C2)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01, 0, MSG_CH3_00C2)
     EVT_CALL(SetPlayerAnimation, 589824)
     EVT_WAIT(10)
     EVT_CALL(SetNpcVar, 0, 0, 1)
@@ -284,22 +284,22 @@ StaticNpc N(npcGroup_80240EEC) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
-        ANIM_TubbasHeart_Anim1,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
     },
 };
 

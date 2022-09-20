@@ -207,17 +207,17 @@ WorldParakarry:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 WorldBow:
   variations:
     - Variant00
@@ -263,19 +263,19 @@ WorldBow:
     - Fan_Shocked
     - Patch_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 WorldWatt:
   frames:
     - Raster00
@@ -304,16 +304,16 @@ WorldWatt:
     - Brightest
     - Brighter
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 WorldSushie:
   frames:
     - Raster00
@@ -343,20 +343,20 @@ WorldSushie:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 WorldLakilester:
   variations:
     - Variant00
@@ -414,20 +414,20 @@ WorldLakilester:
     - Golden_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 BattleGoombario:
   frames:
     - Raster00
@@ -467,16 +467,16 @@ BattleGoombario:
     - Walk
     - Run
     - Headbonk
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
     - Talk
     - Anim10
     - Anim11
@@ -534,22 +534,22 @@ BattleKooper:
     - Red3
     - Red4
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -634,22 +634,22 @@ BattleBombette:
     - Rusty_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -709,22 +709,22 @@ BattleParakarry:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -798,22 +798,22 @@ BattleBow:
     - Fan_Shocked
     - Patch_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -873,22 +873,22 @@ BattleWatt:
     - Brightest
     - Brighter
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -931,22 +931,22 @@ BattleSushie:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -1018,22 +1018,22 @@ BattleLakilester:
     - Golden_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -1114,15 +1114,15 @@ WorldEldstar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 WorldMamar:
   variations:
     - Variant00
@@ -1145,18 +1145,18 @@ WorldMamar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 WorldSkolar:
   variations:
     - Variant00
@@ -1180,16 +1180,16 @@ WorldSkolar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 WorldMuskular:
   variations:
     - Variant00
@@ -1212,14 +1212,14 @@ WorldMuskular:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 WorldMisstar:
   variations:
     - Variant00
@@ -1246,17 +1246,17 @@ WorldMisstar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 WorldKlevar:
   variations:
     - Variant00
@@ -1281,15 +1281,15 @@ WorldKlevar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 WorldKalmar:
   variations:
     - Variant00
@@ -1312,17 +1312,17 @@ WorldKalmar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 BattleEldstar:
   variations:
     - Variant00
@@ -1335,9 +1335,9 @@ BattleEldstar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleMamar:
   variations:
     - Variant00
@@ -1350,9 +1350,9 @@ BattleMamar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleSkolar:
   variations:
     - Variant00
@@ -1365,9 +1365,9 @@ BattleSkolar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleMuskular:
   variations:
     - Variant00
@@ -1380,9 +1380,9 @@ BattleMuskular:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleMisstar:
   variations:
     - Variant00
@@ -1395,9 +1395,9 @@ BattleMisstar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleKlevar:
   variations:
     - Variant00
@@ -1410,9 +1410,9 @@ BattleKlevar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 BattleKalmar:
   variations:
     - Variant00
@@ -1425,9 +1425,9 @@ BattleKalmar:
     - Default
     - Glowing
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 Twink:
   variations:
     - Variant00
@@ -1507,22 +1507,22 @@ Twink:
     - Unused3_Shocked
     - Unused4_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -1631,22 +1631,22 @@ JrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -1720,22 +1720,22 @@ SpikedJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
 SpikedParaJrTroopa:
   variations:
@@ -1788,22 +1788,22 @@ SpikedParaJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -1851,22 +1851,22 @@ MageJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 ParaJrTroopa:
   variations:
     - Variant00
@@ -1909,20 +1909,20 @@ ParaJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 Goomba:
   variations:
     - Variant00
@@ -1976,21 +1976,21 @@ Goomba:
     - Mushroom
     - Toadstool
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 SpikedGoomba:
   variations:
     - Variant00
@@ -2026,19 +2026,19 @@ SpikedGoomba:
     - Dark_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 Paragoomba:
   variations:
     - Variant00
@@ -2088,22 +2088,22 @@ Paragoomba:
     - Dark_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 KoopaTroopa:
   variations:
     - Variant00
@@ -2167,22 +2167,22 @@ KoopaTroopa:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2244,22 +2244,22 @@ ParaTroopa:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2314,22 +2314,22 @@ Fuzzy:
     - Jungle_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2411,22 +2411,22 @@ Bobomb:
     - Fuse_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2469,14 +2469,14 @@ BulletBill:
     - Gold_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 BillBlaster:
   variations:
     - Variant00
@@ -2504,14 +2504,14 @@ BillBlaster:
     - Burnt
     - Gold_Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 MontyMole:
   variations:
     - Variant00
@@ -2565,22 +2565,22 @@ MontyMole:
     - Dark_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2655,22 +2655,22 @@ Cleft:
     - Hyper_Blend3
     - Rock
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2715,22 +2715,22 @@ Pokey:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2811,22 +2811,22 @@ Bandit:
     - Burnt
     - Coin
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2892,22 +2892,22 @@ BuzzyBeetle:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -2981,22 +2981,22 @@ Swooper:
     - Grey_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3027,18 +3027,18 @@ StoneChomp:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 LargePiranha:
   variations:
     - Variant00
@@ -3092,22 +3092,22 @@ LargePiranha:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3143,18 +3143,18 @@ SmallPiranha:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 Sentinel:
   variations:
     - Variant00
@@ -3198,16 +3198,16 @@ Sentinel:
     - Glow2
     - Smoke
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 WorldClubba:
   variations:
     - Variant00
@@ -3272,22 +3272,22 @@ WorldClubba:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3343,17 +3343,17 @@ BattleClubba:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 ShyGuy:
   variations:
     - Variant00
@@ -3431,22 +3431,22 @@ ShyGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3491,22 +3491,22 @@ GrooveGuy:
     - Unused_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 SkyGuy:
@@ -3570,22 +3570,22 @@ SkyGuy:
     - OnlyRed
     - OnlyBlue
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3670,16 +3670,16 @@ PyroGuy:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 SpyGuy:
   frames:
     - Raster00
@@ -3726,22 +3726,22 @@ SpyGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3797,18 +3797,18 @@ MediGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 Fuzzipede:
   frames:
     - Raster00
@@ -3859,22 +3859,22 @@ Fuzzipede:
     - Dizzy
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -3988,22 +3988,22 @@ JungleGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4042,8 +4042,8 @@ HeartPlant:
     - Default
     - Grey
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 HurtPlant:
   frames:
     - Raster00
@@ -4110,21 +4110,21 @@ HurtPlant:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 MBush:
   frames:
     - Raster00
@@ -4163,18 +4163,18 @@ MBush:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 LavaBubble:
   variations:
     - Variant00
@@ -4229,18 +4229,18 @@ LavaBubble:
     - BlueGlow_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 KentCKoopa:
   variations:
     - Variant00
@@ -4356,22 +4356,22 @@ KentCKoopa:
     - Tear_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4432,22 +4432,22 @@ Dayzee:
     - Amazy_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 Lakitu:
   variations:
     - Variant00
@@ -4516,22 +4516,22 @@ Lakitu:
     - Spiny_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4595,22 +4595,22 @@ Spiny:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4681,18 +4681,18 @@ Bzzap:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 RuffPuff:
   frames:
     - Raster00
@@ -4715,22 +4715,22 @@ RuffPuff:
     - Missing2
     - Missing3
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4782,22 +4782,22 @@ SpikeTop:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -4852,21 +4852,21 @@ Duplighost:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 AlbinoDino:
   frames:
     - Raster00
@@ -4898,20 +4898,20 @@ AlbinoDino:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 Blooper:
   variations:
     - Variant00
@@ -4953,21 +4953,21 @@ Blooper:
     - Supercharged_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 BabyBlooper:
   frames:
     - Raster00
@@ -4995,15 +4995,15 @@ BabyBlooper:
     - Dizzy
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Gulpit:
   variations:
     - Variant00
@@ -5050,22 +5050,22 @@ Gulpit:
     - Rock_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5115,22 +5115,22 @@ DryBones:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 ThrownBone:
   frames:
     - Raster00
@@ -5140,7 +5140,7 @@ ThrownBone:
     - Dizzy
     - Shocked
   animations:
-    - Anim0
+    - Anim00
 BonyBeetle:
   frames:
     - Raster00
@@ -5231,22 +5231,22 @@ BonyBeetle:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5334,15 +5334,15 @@ Magikoopa:
     - Grey_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 FlyingMagikoopa:
   variations:
     - Variant00
@@ -5402,17 +5402,17 @@ FlyingMagikoopa:
     - Grey_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 WorldKoopatrol:
   frames:
     - Raster00
@@ -5469,22 +5469,22 @@ WorldKoopatrol:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5548,22 +5548,22 @@ Koopatrol:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5621,22 +5621,22 @@ HammerBros:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5654,40 +5654,40 @@ BushBasic:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 BushBlocky:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 BushDry:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 BushLeafy:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 BushMatted:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 WorldKammy:
   frames:
     - Raster00
@@ -5742,22 +5742,22 @@ WorldKammy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -5810,20 +5810,20 @@ BattleKammy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 GoombaBros:
   variations:
     - Variant00
@@ -5871,22 +5871,22 @@ GoombaBros:
     - Blue_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 GoombaKing:
   frames:
     - Raster00
@@ -5933,28 +5933,28 @@ GoombaKing:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 SpikyGoomnut:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
+    - Anim00
 DarkToad:
   variations:
     - Variant00
@@ -5981,13 +5981,13 @@ DarkToad:
     - Yellow
     - Green
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 KoopaBros:
   variations:
     - Variant00
@@ -6063,22 +6063,22 @@ KoopaBros:
     - Green_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6188,22 +6188,22 @@ Buzzar:
     - Dizzy
     - Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6272,22 +6272,22 @@ Tutankoopa:
     - Burnt
     - Rock
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6310,15 +6310,15 @@ ChainChomp:
     - Dizzy
     - Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 WorldTubba:
   variations:
     - Variant00
@@ -6414,22 +6414,22 @@ WorldTubba:
     - Shocked
     - Tear_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6541,22 +6541,22 @@ BattleTubba:
     - Shocked
     - Tear_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6605,22 +6605,22 @@ TubbasHeart:
     - Glow1
     - Glow2
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6693,22 +6693,22 @@ BigLanternGhost:
     - Burnt
     - Grey
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6788,22 +6788,22 @@ ShySquadGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -6845,22 +6845,22 @@ MarshalGuy:
     - Dizzy
     - Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 StiltGuy:
   frames:
     - Raster00
@@ -6889,17 +6889,17 @@ StiltGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 StiltGuyUnfold:
   variations:
     - Variant00
@@ -6916,12 +6916,12 @@ StiltGuyUnfold:
     - Darker
     - Dark
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 ShyStackGuy:
   variations:
     - Variant00
@@ -6975,22 +6975,22 @@ ShyStackGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -7026,12 +7026,12 @@ ShyStackUnfold:
     - Darker
     - Dark
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 ShyStackDamage:
   variations:
     - Variant00
@@ -7071,15 +7071,15 @@ ShyStackDamage:
     - Unused11
     - Unused12
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 ShyStackRock:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
+    - Anim00
 GeneralGuy:
   frames:
     - Raster00
@@ -7116,22 +7116,22 @@ GeneralGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 GeneralGuyBomb:
@@ -7146,9 +7146,9 @@ GeneralGuyBomb:
     - Grey
     - Fuse
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 TankGuy:
   variations:
     - Variant00
@@ -7204,17 +7204,17 @@ TankGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 LavaPiranha:
   variations:
     - Variant00
@@ -7253,22 +7253,22 @@ LavaPiranha:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
 PetitPiranha:
   frames:
@@ -7292,13 +7292,13 @@ PetitPiranha:
     - Dizzy
     - Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 LavaBud:
   variations:
     - Variant00
@@ -7343,22 +7343,22 @@ LavaBud:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
 HuffNPuff:
   variations:
@@ -7431,22 +7431,22 @@ HuffNPuff:
     - Unused5
     - Unused6
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -7506,20 +7506,20 @@ TuffPuff:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 Monstar:
   variations:
     - Variant00
@@ -7563,21 +7563,21 @@ Monstar:
     - Unused5
     - Unused6
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 CrystalKing:
   variations:
     - Variant00
@@ -7665,22 +7665,22 @@ CrystalKing:
     - Rocks_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -7800,22 +7800,22 @@ WorldBowser:
     - Unused5
     - Unused6
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -7924,22 +7924,22 @@ BattleBowser:
     - StarRod_Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -8008,22 +8008,22 @@ Luigi:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -8073,15 +8073,15 @@ Toad:
     - Yellow
     - Pink
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Toadette:
   variations:
     - Variant00
@@ -8110,14 +8110,14 @@ Toadette:
     - Green
     - Purple
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 VannaT:
   frames:
     - Raster00
@@ -8135,12 +8135,12 @@ VannaT:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 ToadKid:
   variations:
     - Variant00
@@ -8165,13 +8165,13 @@ ToadKid:
     - Blue
     - Yellow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 ToadGuard:
   variations:
     - Variant00
@@ -8192,11 +8192,11 @@ ToadGuard:
     - Blue
     - Yellow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 HarryT:
   frames:
     - Raster00
@@ -8212,13 +8212,13 @@ HarryT:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 ToadMinister:
   frames:
     - Raster00
@@ -8236,14 +8236,14 @@ ToadMinister:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 Postmaster:
   frames:
     - Raster00
@@ -8262,16 +8262,16 @@ Postmaster:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 ConductorToad:
   frames:
     - Raster00
@@ -8288,12 +8288,12 @@ ConductorToad:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 TrainStationToad:
   variations:
     - Variant00
@@ -8325,13 +8325,13 @@ TrainStationToad:
     - Red
     - White
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 Fishmael:
   frames:
     - Raster00
@@ -8345,10 +8345,10 @@ Fishmael:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
 Musician:
   variations:
     - Variant00
@@ -8380,14 +8380,14 @@ Musician:
     - Composer
     - Poet_Dark
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 Koopa:
   variations:
     - Variant00
@@ -8416,18 +8416,18 @@ Koopa:
     - Default
     - Red
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 KoopaWithoutShell:
   variations:
     - Variant00
@@ -8465,19 +8465,19 @@ KoopaWithoutShell:
     - Default
     - Tear
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 WorldBobomb:
   variations:
     - Variant00
@@ -8501,11 +8501,11 @@ WorldBobomb:
     - Red
     - Blue
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 Whacka:
   variations:
     - Variant00
@@ -8532,12 +8532,12 @@ Whacka:
     - Default
     - Hole
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 Dryite:
   variations:
     - Variant00
@@ -8556,11 +8556,11 @@ Dryite:
     - Blue
     - Yellow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 Mouser:
   variations:
     - Variant00
@@ -8578,15 +8578,15 @@ Mouser:
     - Blue
     - Purple
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Boo:
   variations:
     - Variant00
@@ -8629,22 +8629,22 @@ Boo:
     - Default
     - Tan
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 Yoshi:
@@ -8678,18 +8678,18 @@ Yoshi:
     - Yellow
     - Red
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 YoshiKid:
   variations:
     - Variant00
@@ -8743,22 +8743,22 @@ YoshiKid:
     - Red
     - Dirt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 Raven:
@@ -8782,14 +8782,14 @@ Raven:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 Bubulb:
   variations:
     - Variant00
@@ -8849,22 +8849,22 @@ Bubulb:
     - Cycle3
     - Cycle4
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 Penguin:
   frames:
     - Raster00
@@ -8883,13 +8883,13 @@ Penguin:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 ShiverToad:
   variations:
     - Variant00
@@ -8915,11 +8915,11 @@ ShiverToad:
     - Blue
     - Yellow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 AltBandit:
   variations:
     - Variant00
@@ -8957,21 +8957,21 @@ AltBandit:
     - Red
     - Smoke
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 Goompa:
   frames:
     - Raster00
@@ -9003,20 +9003,20 @@ Goompa:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 Goombaria:
   variations:
     - Variant00
@@ -9062,22 +9062,22 @@ Goombaria:
     - Default
     - Tear
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -9093,11 +9093,11 @@ Gooma:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 Goompapa:
   frames:
     - Raster00
@@ -9121,18 +9121,18 @@ Goompapa:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 Goomama:
   frames:
     - Raster00
@@ -9146,11 +9146,11 @@ Goomama:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 TheMaster:
   variations:
     - Variant00
@@ -9244,22 +9244,22 @@ TheMaster:
     - Shocked
     - Ascended_Shocked
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -9319,22 +9319,22 @@ Chan:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -9377,22 +9377,22 @@ Lee:
     - Shocked
     - Burnt
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 Merlon:
   frames:
     - Raster00
@@ -9414,18 +9414,18 @@ Merlon:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 ChetRippo:
   frames:
     - Raster00
@@ -9443,15 +9443,15 @@ ChetRippo:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Rowf:
   frames:
     - Raster00
@@ -9480,20 +9480,20 @@ Rowf:
     - Default
     - Packed
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 MinhT:
   frames:
     - Raster00
@@ -9511,12 +9511,12 @@ MinhT:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 RussT:
   frames:
     - Raster00
@@ -9543,16 +9543,16 @@ RussT:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 TayceT:
   variations:
     - Variant00
@@ -9584,19 +9584,19 @@ TayceT:
     - Default
     - Pan
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 FiceT:
   variations:
     - Variant00
@@ -9622,15 +9622,15 @@ FiceT:
     - Default
     - Sweat
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Bartender:
   frames:
     - Raster00
@@ -9647,12 +9647,12 @@ Bartender:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 Chanterelle:
   frames:
     - Raster00
@@ -9671,12 +9671,12 @@ Chanterelle:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 RipCheato:
   frames:
     - Raster00
@@ -9688,11 +9688,11 @@ RipCheato:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 ChuckQuizmo:
   frames:
     - Raster00
@@ -9739,22 +9739,22 @@ ChuckQuizmo:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
 Merluvlee:
   frames:
     - Raster00
@@ -9775,15 +9775,15 @@ Merluvlee:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Merlar:
   frames:
     - Raster00
@@ -9797,11 +9797,11 @@ Merlar:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 Merlow:
   frames:
     - Raster00
@@ -9816,12 +9816,12 @@ Merlow:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 StarKid:
   frames:
     - Raster00
@@ -9830,9 +9830,9 @@ StarKid:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 KoloradoWife:
   frames:
     - Raster00
@@ -9845,11 +9845,11 @@ KoloradoWife:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 KoopaKoot:
   frames:
     - Raster00
@@ -9869,16 +9869,16 @@ KoopaKoot:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 Kolorado:
   frames:
     - Raster00
@@ -9910,21 +9910,21 @@ Kolorado:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 BattleKolorado:
   frames:
     - Raster00
@@ -9943,13 +9943,13 @@ BattleKolorado:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 Archeologist:
   frames:
     - Raster00
@@ -9961,11 +9961,11 @@ Archeologist:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 Nomadimouse:
   frames:
     - Raster00
@@ -9975,11 +9975,11 @@ Nomadimouse:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 WorldMerlee:
   variations:
     - Variant00
@@ -10008,20 +10008,20 @@ WorldMerlee:
     - Brighter
     - Brightest
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 BattleMerlee:
   variations:
     - Variant00
@@ -10035,8 +10035,8 @@ BattleMerlee:
     - Brighter
     - Brightest
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 DisguisedMoustafa:
   frames:
     - Raster00
@@ -10050,14 +10050,14 @@ DisguisedMoustafa:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 Moustafa:
   frames:
     - Raster00
@@ -10072,15 +10072,15 @@ Moustafa:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Oaklie:
   frames:
     - Raster00
@@ -10101,15 +10101,15 @@ Oaklie:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
 Bootler:
   frames:
     - Raster00
@@ -10130,19 +10130,19 @@ Bootler:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 Yakkey:
   frames:
     - Raster00
@@ -10160,10 +10160,10 @@ Yakkey:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
 GourmetGuy:
   frames:
     - Raster00
@@ -10190,20 +10190,20 @@ GourmetGuy:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 VillageLeader:
   frames:
     - Raster00
@@ -10234,22 +10234,22 @@ VillageLeader:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -10275,19 +10275,19 @@ LeadersFriend:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 RafaelRaven:
   variations:
     - Variant00
@@ -10333,21 +10333,21 @@ RafaelRaven:
     - Angry
     - Furious
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
 Tolielup:
   frames:
     - Raster00
@@ -10380,10 +10380,10 @@ Tolielup:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
 GateFlower:
   variations:
     - Variant00
@@ -10406,16 +10406,16 @@ GateFlower:
     - Red
     - Yellow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 Petunia:
   frames:
     - Raster00
@@ -10441,17 +10441,17 @@ Petunia:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 Posie:
   frames:
     - Raster00
@@ -10470,13 +10470,13 @@ Posie:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 Lily:
   frames:
     - Raster00
@@ -10500,16 +10500,16 @@ Lily:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 Rosie:
   frames:
     - Raster00
@@ -10526,13 +10526,13 @@ Rosie:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 Sun:
   variations:
     - Variant00
@@ -10557,19 +10557,19 @@ Sun:
     - Default
     - Bright
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
 Lakilulu:
   variations:
     - Variant00
@@ -10608,20 +10608,20 @@ Lakilulu:
     - Default
     - Spiny
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
 Ninji:
   variations:
     - Variant00
@@ -10645,11 +10645,11 @@ Ninji:
     - Purple
     - Brown
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 MayorPenguin:
   frames:
     - Raster00
@@ -10681,18 +10681,18 @@ MayorPenguin:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 MayorPenguinWife:
   frames:
     - Raster00
@@ -10720,17 +10720,17 @@ MayorPenguinWife:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 PenguinPatrol:
   frames:
     - Raster00
@@ -10750,14 +10750,14 @@ PenguinPatrol:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 Herringway:
   frames:
     - Raster00
@@ -10784,16 +10784,16 @@ Herringway:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 Merle:
   frames:
     - Raster00
@@ -10810,13 +10810,13 @@ Merle:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 StarRod:
   variations:
     - Variant00
@@ -10827,7 +10827,7 @@ StarRod:
     - Default
     - Inert
   animations:
-    - Anim0
+    - Anim00
 Fire:
   variations:
     - Variant00
@@ -10846,8 +10846,8 @@ Fire:
     - Dimmer
     - Dimmest
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 Coin:
   frames:
     - Raster00
@@ -10866,7 +10866,7 @@ Coin:
     - Unused2
     - Unused3
   animations:
-    - Anim0
+    - Anim00
 ParadePeach:
   variations:
     - Variant00
@@ -10926,22 +10926,22 @@ ParadePeach:
     - Shocked
     - Unused3
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -10990,12 +10990,12 @@ ParadeKoopa:
     - Koopatrol
     - Banner
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 ParadeBurntBowser:
   variations:
     - Variant00
@@ -11023,11 +11023,11 @@ ParadeBurntBowser:
     - Default
     - Shadow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 ParadeLuigi:
   frames:
     - Raster00
@@ -11051,11 +11051,11 @@ ParadeLuigi:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
 ParadePartner:
   frames:
     - Raster00
@@ -11110,14 +11110,14 @@ ParadePartner:
     - BowPatch
     - Lakilester
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 ParadeYoshi:
   variations:
     - Variant00
@@ -11149,16 +11149,16 @@ ParadeYoshi:
     - Yellow
     - Chief
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
 ParadeKolorado:
   variations:
     - Variant00
@@ -11184,12 +11184,12 @@ ParadeKolorado:
     - Default
     - Wife
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
 ParadeChick:
   frames:
     - Raster00
@@ -11207,14 +11207,14 @@ ParadeChick:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
 ParadeIceShow:
   variations:
     - Variant00
@@ -11269,22 +11269,22 @@ ParadeIceShow:
     - Mayor
     - MayorsWife
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
     - Anim12
@@ -11338,22 +11338,22 @@ ParadeToad:
     - Baton
     - BatonGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 ParadeTwirler:
@@ -11383,13 +11383,13 @@ ParadeTwirler:
     - BatonDark
     - BatonDarkGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
 ParadeDrummer:
   variations:
     - Variant00
@@ -11406,9 +11406,9 @@ ParadeDrummer:
     - Dark
     - DarkGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 ParadeBanner:
   variations:
     - Variant00
@@ -11435,9 +11435,9 @@ ParadeBanner:
     - BannerDark
     - BannerDarkGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 ParadeHorn:
   variations:
     - Variant00
@@ -11454,9 +11454,9 @@ ParadeHorn:
     - Dark
     - DarkGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
+    - Anim00
+    - Anim01
+    - Anim02
 ParadeTubbaBalloon:
   frames:
     - Raster00
@@ -11468,7 +11468,7 @@ ParadeTubbaBalloon:
   palettes:
     - Default
   animations:
-    - Anim0
+    - Anim00
 ParadeWizard:
   variations:
     - Variant00
@@ -11520,18 +11520,18 @@ ParadeWizard:
     - Merlar
     - MerlarGlow
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
 ParadeMario:
   frames:
     - Raster00
@@ -11558,17 +11558,17 @@ ParadeMario:
   palettes:
     - Default
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
 ParadeShyGuy:
   frames:
     - Raster00
@@ -11612,22 +11612,22 @@ ParadeShyGuy:
     - DarkGlow
     - Dark
   animations:
-    - Anim0
-    - Anim1
-    - Anim2
-    - Anim3
-    - Anim4
-    - Anim5
-    - Anim6
-    - Anim7
-    - Anim8
-    - Anim9
-    - AnimA
-    - AnimB
-    - AnimC
-    - AnimD
-    - AnimE
-    - AnimF
+    - Anim00
+    - Anim01
+    - Anim02
+    - Anim03
+    - Anim04
+    - Anim05
+    - Anim06
+    - Anim07
+    - Anim08
+    - Anim09
+    - Anim0A
+    - Anim0B
+    - Anim0C
+    - Anim0D
+    - Anim0E
+    - Anim0F
     - Anim10
     - Anim11
 ParadeTwink:
@@ -11640,12 +11640,12 @@ ParadeTwink:
     - Unused2
     - Unused3
   animations:
-    - Anim0
-    - Anim1
+    - Anim00
+    - Anim01
 Leaf:
   frames:
     - Raster00
   palettes:
     - Default
   animations:
-    - Anim0
+    - Anim00

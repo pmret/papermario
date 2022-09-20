@@ -193,10 +193,10 @@ EvtScript N(idle_80241654) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim9)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim09)
     EVT_CALL(SetNpcPos, NPC_SELF, -210, 0, 180)
     EVT_CALL(NpcMoveTo, NPC_SELF, -60, 180, 30)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim6)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim06)
     EVT_THREAD
         EVT_CALL(MakeLerp, 80, 0, 10, 0)
         EVT_LOOP(0)
@@ -211,9 +211,9 @@ EvtScript N(idle_80241654) = {
         EVT_CALL(PlaySoundAtCollider, 17, 456, 0)
     EVT_END_THREAD
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim6, 5, MSG_CH3_00F4)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 5, MSG_CH3_00F4)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim9)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim09)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_THREAD
         EVT_LOOP(0)
@@ -249,10 +249,10 @@ EvtScript N(idle_80241654) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, 140, 245, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, 615, 245, 0)
     EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim6)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim06)
     EVT_WAIT(15)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim6, 5, MSG_CH3_00F5)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 5, MSG_CH3_00F5)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim14)
@@ -268,7 +268,7 @@ EvtScript N(idle_80241654) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.3))
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim5)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim05)
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.2), EVT_FLOAT(1.25))
     EVT_WAIT(1)
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.35), EVT_FLOAT(1.15), EVT_FLOAT(1.25))
@@ -314,7 +314,7 @@ EvtScript N(idle_80241654) = {
     EVT_CALL(SetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
     EVT_CALL(func_802CDE68, -1, 0)
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim2)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim02)
     EVT_WAIT(15)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim24)
     EVT_WAIT(30)
@@ -357,7 +357,7 @@ EvtScript N(idle_80242494) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 600, 50, 115)
     EVT_CALL(func_802CDE68, -1, 0)
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim2)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim02)
     EVT_WAIT(15)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim24)
     EVT_WAIT(30)
@@ -413,7 +413,7 @@ EvtScript N(npcAI_802426B0) = {
 
 EvtScript N(npcAI_80242834) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_AnimD)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_Anim0D)
     EVT_THREAD
         EVT_LOOP(0)
             EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(2.0))
@@ -481,14 +481,14 @@ EvtScript N(idle_80242A24) = {
     EVT_CALL(SetCamPosB, 0, 800, 245)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 5, MSG_CH3_00F6)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 5, MSG_CH3_00F6)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 5, MSG_CH3_00F7)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 5, MSG_CH3_00F7)
     EVT_CALL(ShowChoice, MSG_Choice_000D)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00F8)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00F8)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 0, MSG_CH3_00F9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 0, MSG_CH3_00F9)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
@@ -499,7 +499,7 @@ EvtScript N(idle_80242A24) = {
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_SET(MapFlag(0), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim2, ANIM_Yakkey_Anim1, 517, MSG_CH3_00FA)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Anim02, ANIM_Yakkey_Anim01, 517, MSG_CH3_00FA)
         EVT_SET(MapFlag(0), 1)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -536,8 +536,8 @@ EvtScript N(idle_80242A24) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_Anim5)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldTubba_Anim13, ANIM_WorldTubba_Anim5, 5, MSG_CH3_00FB)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldTubba_Anim05)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldTubba_Anim13, ANIM_WorldTubba_Anim05, 5, MSG_CH3_00FB)
     EVT_WAIT(15)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
@@ -549,9 +549,9 @@ EvtScript N(idle_80242A24) = {
         EVT_CASE_EQ(3)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH3_00FE)
         EVT_CASE_EQ(4)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Anim6, ANIM_WorldParakarry_Anim1, 0, MSG_CH3_00FF)
+            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Anim06, ANIM_WorldParakarry_Anim01, 0, MSG_CH3_00FF)
         EVT_CASE_EQ(9)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Anim4, ANIM_WorldBow_Anim1, 0, MSG_CH3_0100)
+            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_0100)
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(15)
@@ -595,22 +595,22 @@ StaticNpc N(npcGroup_802432D4) = {
     },
 	.territory = { .temp = { 5, 0, 0, 240, 175, 0, 240, 350, 0, 240, 525, 0, 240, 700, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 300, 0, 240, 1000, 250, 1, 1 }},
     .animations = {
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_AnimA,
-        ANIM_WorldTubba_AnimD,
-        ANIM_WorldTubba_AnimD,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim0A,
+        ANIM_WorldTubba_Anim0D,
+        ANIM_WorldTubba_Anim0D,
         ANIM_WorldTubba_Anim19,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
-        ANIM_WorldTubba_Anim7,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
     },
 };
 
@@ -627,22 +627,22 @@ StaticNpc N(npcGroup_802434C4) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
-        ANIM_Yakkey_Anim1,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
+        ANIM_Yakkey_Anim01,
     },
 };
 

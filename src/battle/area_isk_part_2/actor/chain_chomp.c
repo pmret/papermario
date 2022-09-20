@@ -16,55 +16,55 @@ extern EvtScript N(8021B41C);
 extern EvtScript N(8021B50C);
 
 s32 N(idleAnimations_80218B40)[] = {
-    STATUS_NORMAL,    ANIM_ChainChomp_Anim1,
-    STATUS_STONE,     ANIM_ChainChomp_Anim0,
-    STATUS_SLEEP,     ANIM_ChainChomp_Anim7,
-    STATUS_POISON,    ANIM_ChainChomp_Anim1,
-    STATUS_STOP,      ANIM_ChainChomp_Anim0,
-    STATUS_STATIC,    ANIM_ChainChomp_Anim0,
-    STATUS_PARALYZE,  ANIM_ChainChomp_Anim0,
-    STATUS_DIZZY,     ANIM_ChainChomp_Anim8,
+    STATUS_NORMAL,    ANIM_ChainChomp_Anim01,
+    STATUS_STONE,     ANIM_ChainChomp_Anim00,
+    STATUS_SLEEP,     ANIM_ChainChomp_Anim07,
+    STATUS_POISON,    ANIM_ChainChomp_Anim01,
+    STATUS_STOP,      ANIM_ChainChomp_Anim00,
+    STATUS_STATIC,    ANIM_ChainChomp_Anim00,
+    STATUS_PARALYZE,  ANIM_ChainChomp_Anim00,
+    STATUS_DIZZY,     ANIM_ChainChomp_Anim08,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218B84)[] = {
-    STATUS_NORMAL,    ANIM_ChainChomp_Anim3,
-    STATUS_POISON,    ANIM_ChainChomp_Anim3,
-    STATUS_STOP,      ANIM_ChainChomp_Anim0,
-    STATUS_STONE,     ANIM_ChainChomp_Anim0,
-    STATUS_SLEEP,     ANIM_ChainChomp_Anim7,
-    STATUS_STATIC,    ANIM_ChainChomp_Anim0,
-    STATUS_PARALYZE,  ANIM_ChainChomp_Anim0,
-    STATUS_DIZZY,     ANIM_ChainChomp_Anim8,
+    STATUS_NORMAL,    ANIM_ChainChomp_Anim03,
+    STATUS_POISON,    ANIM_ChainChomp_Anim03,
+    STATUS_STOP,      ANIM_ChainChomp_Anim00,
+    STATUS_STONE,     ANIM_ChainChomp_Anim00,
+    STATUS_SLEEP,     ANIM_ChainChomp_Anim07,
+    STATUS_STATIC,    ANIM_ChainChomp_Anim00,
+    STATUS_PARALYZE,  ANIM_ChainChomp_Anim00,
+    STATUS_DIZZY,     ANIM_ChainChomp_Anim08,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218BC8)[] = {
-    STATUS_NORMAL,    ANIM_ChainChomp_Anim4,
-    STATUS_POISON,    ANIM_ChainChomp_Anim4,
-    STATUS_STOP,      ANIM_ChainChomp_Anim0,
-    STATUS_STONE,     ANIM_ChainChomp_Anim0,
-    STATUS_SLEEP,     ANIM_ChainChomp_Anim7,
-    STATUS_STATIC,    ANIM_ChainChomp_Anim0,
-    STATUS_PARALYZE,  ANIM_ChainChomp_Anim0,
-    STATUS_DIZZY,     ANIM_ChainChomp_Anim8,
+    STATUS_NORMAL,    ANIM_ChainChomp_Anim04,
+    STATUS_POISON,    ANIM_ChainChomp_Anim04,
+    STATUS_STOP,      ANIM_ChainChomp_Anim00,
+    STATUS_STONE,     ANIM_ChainChomp_Anim00,
+    STATUS_SLEEP,     ANIM_ChainChomp_Anim07,
+    STATUS_STATIC,    ANIM_ChainChomp_Anim00,
+    STATUS_PARALYZE,  ANIM_ChainChomp_Anim00,
+    STATUS_DIZZY,     ANIM_ChainChomp_Anim08,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218C0C)[] = {
-    STATUS_NORMAL,    ANIM_ChainChomp_Anim5,
-    STATUS_POISON,    ANIM_ChainChomp_Anim5,
-    STATUS_STOP,      ANIM_ChainChomp_Anim0,
-    STATUS_STONE,     ANIM_ChainChomp_Anim0,
-    STATUS_SLEEP,     ANIM_ChainChomp_Anim7,
-    STATUS_STATIC,    ANIM_ChainChomp_Anim0,
-    STATUS_PARALYZE,  ANIM_ChainChomp_Anim0,
-    STATUS_DIZZY,     ANIM_ChainChomp_Anim8,
+    STATUS_NORMAL,    ANIM_ChainChomp_Anim05,
+    STATUS_POISON,    ANIM_ChainChomp_Anim05,
+    STATUS_STOP,      ANIM_ChainChomp_Anim00,
+    STATUS_STONE,     ANIM_ChainChomp_Anim00,
+    STATUS_SLEEP,     ANIM_ChainChomp_Anim07,
+    STATUS_STATIC,    ANIM_ChainChomp_Anim00,
+    STATUS_PARALYZE,  ANIM_ChainChomp_Anim00,
+    STATUS_DIZZY,     ANIM_ChainChomp_Anim08,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80218C50)[] = {
-    STATUS_NORMAL,    ANIM_ChainChomp_Anim2,
+    STATUS_NORMAL,    ANIM_ChainChomp_Anim02,
     STATUS_END,
 };
 
@@ -534,42 +534,42 @@ EvtScript N(handleEvent_802197C4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(N(8021A200))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -588,7 +588,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2062)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim5)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim05)
             EVT_EXEC_WAIT(N(8021B41C))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -615,60 +615,60 @@ EvtScript N(handleEvent_802197C4) = {
                 EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoAirLift)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
             EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(N(8021A200))
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -697,7 +697,7 @@ EvtScript N(8021A200) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_LABEL(0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim06)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_ENEMY0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -736,7 +736,7 @@ EvtScript N(8021A200) = {
     EVT_WAIT(15)
     EVT_GOTO(10)
     EVT_LABEL(1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim06)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.1))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -763,9 +763,9 @@ EvtScript N(8021A200) = {
     EVT_WAIT(15)
     EVT_LABEL(10)
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+    EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
     EVT_EXEC_WAIT(N(8021B41C))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
     EVT_RETURN
     EVT_END
 };
@@ -791,7 +791,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim05)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x10F)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -800,7 +800,7 @@ EvtScript N(takeTurn_8021A7C4) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySound, 0x10F)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
@@ -837,7 +837,7 @@ EvtScript N(takeTurn_8021A7C4) = {
                     EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim04)
             EVT_WAIT(20)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -847,9 +847,9 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(N(8021B41C))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -858,7 +858,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
@@ -879,7 +879,7 @@ EvtScript N(takeTurn_8021A7C4) = {
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim04)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
@@ -922,7 +922,7 @@ EvtScript N(takeTurn_8021A7C4) = {
                     EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
             EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
@@ -932,9 +932,9 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_END_IF
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(N(8021B41C))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
     EVT_END_SWITCH
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -946,7 +946,7 @@ EvtScript N(takeTurn_8021A7C4) = {
 
 EvtScript N(8021B41C) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim04)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)

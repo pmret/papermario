@@ -439,13 +439,13 @@ EvtScript N(80242240) = {
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
     EVT_EXEC(N(80241E4C))
     EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim1, 0, MSG_CH6_0088)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 0, MSG_CH6_0088)
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim1, 0, MSG_CH6_0089)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 0, MSG_CH6_0089)
     EVT_CALL(InterpNpcYaw, 0, 0, 1)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim1, 0, MSG_CH6_008A)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim1, 0, MSG_CH6_008B)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 0, MSG_CH6_008A)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 0, MSG_CH6_008B)
     EVT_CALL(SetCamType, 0, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -580,22 +580,22 @@ StaticNpc N(npcGroup_80242CF4)[] = {
             .maxCoinBonus = 2,
         },
 	.animations = {
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim2,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim4,
-            ANIM_Lakitu_Anim4,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim02,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim04,
+            ANIM_Lakitu_Anim04,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
         },
     },
     {
@@ -619,22 +619,22 @@ StaticNpc N(npcGroup_80242CF4)[] = {
             .maxCoinBonus = 2,
         },
 	.animations = {
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim2,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim4,
-            ANIM_Lakitu_Anim4,
-            ANIM_Lakitu_Anim3,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
-            ANIM_Lakitu_Anim1,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim02,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim04,
+            ANIM_Lakitu_Anim04,
+            ANIM_Lakitu_Anim03,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
+            ANIM_Lakitu_Anim01,
         },
     },
 };

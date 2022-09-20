@@ -135,7 +135,7 @@ EvtScript N(handleEvent_802191E0) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim0A)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(23)
@@ -146,7 +146,7 @@ EvtScript N(handleEvent_802191E0) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(48)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Anim0A)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_DEFAULT
@@ -175,7 +175,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim06)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
@@ -196,7 +196,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim6)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim06)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(LoadActionCommand, 1)
@@ -207,7 +207,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_JUMP_3E2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Anim06)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))

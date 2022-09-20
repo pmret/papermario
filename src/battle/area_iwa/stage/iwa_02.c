@@ -46,15 +46,15 @@ Formation N(specialFormation_whacka) = {
 };
 
 s32 N(idleAnimations_8022161C)[] = {
-    STATUS_NORMAL,    ANIM_Whacka_Anim1,
-    STATUS_STONE,     ANIM_Whacka_Anim0,
-    STATUS_SLEEP,     ANIM_Whacka_Anim1,
-    STATUS_POISON,    ANIM_Whacka_Anim1,
-    STATUS_STOP,      ANIM_Whacka_Anim0,
-    STATUS_STATIC,    ANIM_Whacka_Anim1,
-    STATUS_PARALYZE,  ANIM_Whacka_Anim0,
-    STATUS_DIZZY,     ANIM_Whacka_Anim1,
-    STATUS_FEAR,      ANIM_Whacka_Anim1,
+    STATUS_NORMAL,    ANIM_Whacka_Anim01,
+    STATUS_STONE,     ANIM_Whacka_Anim00,
+    STATUS_SLEEP,     ANIM_Whacka_Anim01,
+    STATUS_POISON,    ANIM_Whacka_Anim01,
+    STATUS_STOP,      ANIM_Whacka_Anim00,
+    STATUS_STATIC,    ANIM_Whacka_Anim01,
+    STATUS_PARALYZE,  ANIM_Whacka_Anim00,
+    STATUS_DIZZY,     ANIM_Whacka_Anim01,
+    STATUS_FEAR,      ANIM_Whacka_Anim01,
     STATUS_END,
 };
 
@@ -158,11 +158,11 @@ EvtScript N(handleEvent_8022185C) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim04)
             EVT_EXEC_WAIT(N(80222050))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
@@ -172,8 +172,8 @@ EvtScript N(handleEvent_8022185C) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
+            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(N(80222050))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
@@ -183,8 +183,8 @@ EvtScript N(handleEvent_8022185C) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
+            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(N(80222050))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_IF_GE(100, 100)
@@ -192,13 +192,13 @@ EvtScript N(handleEvent_8022185C) = {
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
                 EVT_EXEC_WAIT(DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
@@ -207,42 +207,42 @@ EvtScript N(handleEvent_8022185C) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_IF_GE(100, 100)
                 EVT_EXEC_WAIT(N(80222130))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
                 EVT_EXEC_WAIT(DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
@@ -251,7 +251,7 @@ EvtScript N(handleEvent_8022185C) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
@@ -260,7 +260,7 @@ EvtScript N(handleEvent_8022185C) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim04)
             EVT_EXEC_WAIT(N(80222050))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
@@ -269,27 +269,27 @@ EvtScript N(handleEvent_8022185C) = {
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+                EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
                 EVT_EXEC_WAIT(DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
+            EVT_SET_CONST(LVar2, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Whacka_Anim01)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -315,7 +315,7 @@ EvtScript N(80222050) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Anim1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Anim01)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 20)
@@ -330,7 +330,7 @@ EvtScript N(80222130) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Anim03)
     EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_NE(LVar0, 0)

@@ -56,11 +56,11 @@ extern EvtScript N(NormalAttack);
 extern EvtScript N(Heal);
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_Anim9,
+    STATUS_NORMAL, ANIM_CrystalKing_Anim09,
     STATUS_SLEEP, ANIM_CrystalKing_Anim1B,
     STATUS_DIZZY, ANIM_CrystalKing_Anim1A,
-    STATUS_PARALYZE, ANIM_CrystalKing_Anim0,
-    STATUS_STOP, ANIM_CrystalKing_Anim0,
+    STATUS_PARALYZE, ANIM_CrystalKing_Anim00,
+    STATUS_STOP, ANIM_CrystalKing_Anim00,
     STATUS_END,
 };
 
@@ -459,11 +459,11 @@ EvtScript N(OnHit) = {
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_AnimE)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim0E)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 70, 0, 5)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -562,7 +562,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
                     EVT_EXEC_WAIT(DoNormalHit)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -573,7 +573,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
                     EVT_EXEC_WAIT(DoNormalHit)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
@@ -588,7 +588,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
                     EVT_EXEC_WAIT(DoNormalHit)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -599,7 +599,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
                     EVT_EXEC_WAIT(DoNormalHit)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
@@ -638,11 +638,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
             EVT_IF_FLAG(LVar0, N(FLAG_IGNORE_IMMUNE))
@@ -769,15 +769,15 @@ EvtScript N(handleEvent) = {
                 EVT_END_SWITCH
             EVT_END_THREAD
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
             EVT_EXEC_WAIT(DoRecover)
             EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x8002, LVar0)
             EVT_IF_LE(LVar0, 1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_AnimE)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim0E)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
                 EVT_CALL(SetGoalPos, ACTOR_SELF, 70, 0, 5)
                 EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1256,7 +1256,7 @@ EvtScript N(MakeIllusions) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
         EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_FLYING, 1)
@@ -1272,17 +1272,17 @@ EvtScript N(MakeIllusions) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVarA)
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim9)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim0)
-    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim9)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim00)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim09)
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim0)
-    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim9)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim00)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim09)
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
@@ -2054,8 +2054,8 @@ EvtScript N(Heal) = {
             EVT_CALL(HealActor, LVarB, 20, 1)
             EVT_CALL(func_8026BF48, 0)
         EVT_END_THREAD
-        EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim9)
-        EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim9)
+        EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim09)
+        EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim09)
     EVT_END_IF
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

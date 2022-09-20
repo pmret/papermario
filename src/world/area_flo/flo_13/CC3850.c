@@ -410,7 +410,7 @@ EvtScript N(802446AC) = {
 
 EvtScript N(80244888) = {
     EVT_EXEC(N(802446AC))
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_AnimC)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim0C)
     EVT_CALL(GetNpcPos, 1, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, -5)
     EVT_ADD(LVar2, 30)
@@ -433,7 +433,7 @@ EvtScript N(80244888) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_AnimD)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim0D)
     EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, 5)
     EVT_ADD(LVar2, 20)
@@ -461,7 +461,7 @@ EvtScript N(80244888) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim1)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim01)
     EVT_RETURN
     EVT_END
 };
@@ -484,7 +484,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim7)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim07)
     EVT_THREAD
         EVT_CALL(N(func_802434D4_CC6CE4))
     EVT_END_THREAD
@@ -498,7 +498,7 @@ EvtScript N(idle_80244BF8) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim1)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
     EVT_CALL(PlayerFaceNpc, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(GetNpcPos, 0, LVar0, LVar1, LVar2)
@@ -513,10 +513,10 @@ EvtScript N(idle_80244BF8) = {
         EVT_CALL(PlayerMoveTo, -75, 65, 10)
         EVT_CALL(PlayerFaceNpc, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00A1)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim7)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00A1)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim07)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim1)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 1000)
         EVT_CALL(SetCamPitch, 0, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
@@ -543,7 +543,7 @@ EvtScript N(80245014) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 0, MSG_CH6_00B4)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_00B4)
     EVT_CALL(NpcFaceNpc, NPC_PARTNER, 1, 1)
     EVT_CALL(SetCamDistance, 0, 600)
     EVT_CALL(SetCamPitch, 0, EVT_FLOAT(10.0), EVT_FLOAT(-8.0))
@@ -580,7 +580,7 @@ EvtScript N(80245014) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 5, MSG_CH6_00B5)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5, MSG_CH6_00B5)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -592,17 +592,17 @@ EvtScript N(80245014) = {
 EvtScript N(80245444) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_AnimA, ANIM_WorldLakilester_Anim4, 0, MSG_CH6_00A2)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0A, ANIM_WorldLakilester_Anim04, 0, MSG_CH6_00A2)
     EVT_CALL(SetNpcPos, 1, -290, 120, 45)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim1)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim01)
         EVT_CALL(SetPlayerAnimation, 65578)
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 5, MSG_CH6_00A3)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim7)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 5, MSG_CH6_00A3)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim07)
     EVT_CALL(UseSettingsFrom, 0, 0, 0, 0)
     EVT_CALL(SetPanTarget, 0, 0, 0, 0)
     EVT_CALL(SetCamDistance, 0, 500)
@@ -633,7 +633,7 @@ EvtScript N(80245444) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim9)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim09)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_WAIT(20)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
@@ -645,7 +645,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00A4)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00A4)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -653,7 +653,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim8, ANIM_Lakilulu_Anim8, 0, MSG_CH6_00A5)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim08, ANIM_Lakilulu_Anim08, 0, MSG_CH6_00A5)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -661,9 +661,9 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_AnimB, ANIM_WorldLakilester_Anim3, 0, MSG_CH6_00A6)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim1)
-    EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00A6)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
+    EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -672,15 +672,15 @@ EvtScript N(80245444) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_LABEL(10)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_AnimA, ANIM_Lakilulu_Anim9, 0, MSG_CH6_00A7)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 0, MSG_CH6_00A7)
     EVT_CALL(ShowChoice, MSG_Choice_0020)
     EVT_IF_NE(LVar0, 0)
         EVT_EXEC_WAIT(N(80244888))
         EVT_WAIT(10)
         EVT_GOTO(10)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 0, MSG_CH6_00A9)
-        EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim1)
+        EVT_CALL(ContinueSpeech, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_00A9)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim01)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
@@ -692,9 +692,9 @@ EvtScript N(80245444) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_AnimB, ANIM_WorldLakilester_Anim3, 0, MSG_CH6_00AA)
-        EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim1)
-        EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0)
+        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00AA)
+        EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
+        EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 40)
         EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -703,28 +703,28 @@ EvtScript N(80245444) = {
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_AnimB, ANIM_WorldLakilester_Anim3, 0, MSG_CH6_00AB)
+        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00AB)
         EVT_WAIT(10)
         EVT_CALL(ShowChoice, MSG_Choice_0021)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(-1)
             EVT_CASE_EQ(0)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00AC)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AC)
             EVT_CASE_EQ(1)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00AD)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AD)
             EVT_CASE_EQ(2)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00AE)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AE)
             EVT_CASE_EQ(3)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00AF)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AF)
         EVT_END_SWITCH
     EVT_END_IF
     EVT_CALL(InterpNpcYaw, 1, 90, 1)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim9)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_AnimA, ANIM_Lakilulu_Anim9, 5, MSG_CH6_00B0)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00B1)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim09)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 5, MSG_CH6_00B0)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B1)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_AnimA, ANIM_Lakilulu_Anim9, 5, MSG_CH6_00B2)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim9, ANIM_WorldLakilester_Anim1, 0, MSG_CH6_00B3)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 5, MSG_CH6_00B2)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B3)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -753,7 +753,7 @@ EvtScript N(defeat_80246038) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim4)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim04)
             EVT_CALL(SetCamType, 0, 6, 1)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar1, LVar2)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -776,13 +776,13 @@ EvtScript N(defeat_80246038) = {
 
 EvtScript N(interact_802461C0) = {
     EVT_IF_LE(GB_StoryProgress, 53)
-        EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 0, MSG_CH6_0032)
+        EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_NE(LVar0, 8)
-            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 0, MSG_CH6_0034)
+            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0034)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim4, ANIM_Lakilulu_Anim1, 0, MSG_CH6_0032)
+            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -814,7 +814,7 @@ EvtScript N(init_802462D0) = {
 
 EvtScript N(init_80246370) = {
     EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_Lakilulu_AnimB)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_Lakilulu_Anim0B)
     EVT_RETURN
     EVT_END
 };
@@ -849,22 +849,22 @@ StaticNpc N(npcGroup_80246434) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
-        ANIM_WorldLakilester_Anim1,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim01,
     },
 };
 
@@ -881,22 +881,22 @@ StaticNpc N(npcGroup_80246624) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
     },
     .tattle = MSG_NpcTattle_Lakilulu,
 };
@@ -914,22 +914,22 @@ StaticNpc N(npcGroup_80246814) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
-        ANIM_Lakilulu_Anim1,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Anim01,
     },
 };
 
@@ -955,22 +955,22 @@ StaticNpc N(npcGroup_80246A04) = {
     },
 	.territory = { .temp = { 335, 90, 45, 30, 0, -32767, 0, 335, 90, 45, 250, 0, 0, 1 }},
     .animations = {
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim2,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim4,
-        ANIM_Lakitu_Anim4,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim02,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim04,
+        ANIM_Lakitu_Anim04,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -997,22 +997,22 @@ StaticNpc N(npcGroup_80246BF4) = {
     },
 	.territory = { .temp = { -320, 90, 0, 30, 0, -32767, 0, -320, 90, 0, 200, 0, 0, 1 }},
     .animations = {
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim2,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim4,
-        ANIM_Lakitu_Anim4,
-        ANIM_Lakitu_Anim3,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
-        ANIM_Lakitu_Anim1,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim02,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim04,
+        ANIM_Lakitu_Anim04,
+        ANIM_Lakitu_Anim03,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
+        ANIM_Lakitu_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1032,22 +1032,22 @@ StaticNpc N(npcGroup_80246DE4) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1067,22 +1067,22 @@ StaticNpc N(npcGroup_80246FD4) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1102,22 +1102,22 @@ StaticNpc N(npcGroup_802471C4) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1137,22 +1137,22 @@ StaticNpc N(npcGroup_802473B4) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1172,22 +1172,22 @@ StaticNpc N(npcGroup_802475A4) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -1207,22 +1207,22 @@ StaticNpc N(npcGroup_80247794) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim3,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim4,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim9,
-        ANIM_Spiny_Anim6,
-        ANIM_Spiny_Anim8,
-        ANIM_Spiny_Anim7,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
-        ANIM_Spiny_Anim1,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim03,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim04,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim09,
+        ANIM_Spiny_Anim06,
+        ANIM_Spiny_Anim08,
+        ANIM_Spiny_Anim07,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
+        ANIM_Spiny_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

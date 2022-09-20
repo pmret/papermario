@@ -274,9 +274,9 @@ EvtScript N(802A247C) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A16F0))
-    EVT_SET_CONST(LVar0, ANIM_BattleSkolar_Anim1)
+    EVT_SET_CONST(LVar0, ANIM_BattleSkolar_Anim01)
     EVT_EXEC_WAIT(N(802A1E20))
-    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleSkolar_Anim2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleSkolar_Anim02)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_THREAD

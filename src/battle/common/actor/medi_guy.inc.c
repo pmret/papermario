@@ -14,15 +14,15 @@ extern EvtScript N(handleEvent_8021FC60);
 #include "common/MediGuySpriteRotationFunc.inc.c"
 
 s32 N(idleAnimations_8021F890)[] = {
-    STATUS_NORMAL,    ANIM_MediGuy_Anim1,
-    STATUS_STONE,     ANIM_MediGuy_Anim0,
-    STATUS_SLEEP,     ANIM_MediGuy_Anim4,
-    STATUS_POISON,    ANIM_MediGuy_Anim1,
-    STATUS_STOP,      ANIM_MediGuy_Anim0,
-    STATUS_STATIC,    ANIM_MediGuy_Anim1,
-    STATUS_PARALYZE,  ANIM_MediGuy_Anim0,
-    STATUS_DIZZY,     ANIM_MediGuy_AnimA,
-    STATUS_FEAR,      ANIM_MediGuy_AnimA,
+    STATUS_NORMAL,    ANIM_MediGuy_Anim01,
+    STATUS_STONE,     ANIM_MediGuy_Anim00,
+    STATUS_SLEEP,     ANIM_MediGuy_Anim04,
+    STATUS_POISON,    ANIM_MediGuy_Anim01,
+    STATUS_STOP,      ANIM_MediGuy_Anim00,
+    STATUS_STATIC,    ANIM_MediGuy_Anim01,
+    STATUS_PARALYZE,  ANIM_MediGuy_Anim00,
+    STATUS_DIZZY,     ANIM_MediGuy_Anim0A,
+    STATUS_FEAR,      ANIM_MediGuy_Anim0A,
     STATUS_END,
 };
 
@@ -130,10 +130,10 @@ EvtScript N(8021FB9C) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim03)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim01)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -147,67 +147,67 @@ EvtScript N(handleEvent_8021FC60) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim8)
-            EVT_SET_CONST(LVar2, ANIM_MediGuy_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim08)
+            EVT_SET_CONST(LVar2, ANIM_MediGuy_Anim09)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim8)
-            EVT_SET_CONST(LVar2, ANIM_MediGuy_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim08)
+            EVT_SET_CONST(LVar2, ANIM_MediGuy_Anim09)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim09)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(8021FB9C))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
@@ -219,22 +219,22 @@ EvtScript N(handleEvent_8021FC60) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim3)
-            EVT_SET_CONST(LVar2, ANIM_MediGuy_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim03)
+            EVT_SET_CONST(LVar2, ANIM_MediGuy_Anim0B)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -260,7 +260,7 @@ EvtScript N(flyingAttack) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim03)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
@@ -273,7 +273,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -295,7 +295,7 @@ EvtScript N(flyingAttack) = {
             EVT_ADD(LVar2, 1)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -316,7 +316,7 @@ EvtScript N(flyingAttack) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -330,7 +330,7 @@ EvtScript N(flyingAttack) = {
     EVT_ADD(LVar2, 1)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -366,12 +366,12 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x214)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
     EVT_ADD(LVar2, 50)
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 1, LVar1, LVar2, LVar3, 10, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, EFFECT_RECOVER, 2, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim01)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, LVarA)

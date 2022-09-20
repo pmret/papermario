@@ -81,7 +81,7 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->currentAnim == ANIM_BonyBeetle_Anim2E ||
                 npc->currentAnim == ANIM_BonyBeetle_Anim2F)
             {
-                npc->currentAnim = ANIM_BonyBeetle_AnimC;
+                npc->currentAnim = ANIM_BonyBeetle_Anim0C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -139,9 +139,9 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
         }
         if (enemy->varTable[8] != 0) {
             switch (npc->currentAnim) {
-                case ANIM_BonyBeetle_Anim4:
-                case ANIM_BonyBeetle_AnimC:
-                case ANIM_BonyBeetle_AnimE:
+                case ANIM_BonyBeetle_Anim04:
+                case ANIM_BonyBeetle_Anim0C:
+                case ANIM_BonyBeetle_Anim0E:
                 case ANIM_BonyBeetle_Anim10:
                 case ANIM_BonyBeetle_Anim12:
                 case ANIM_BonyBeetle_Anim16:

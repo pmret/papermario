@@ -6,30 +6,30 @@
 #define NAMESPACE b_area_kmr_part_3_egg_jr_troopa
 
 s32 N(idleAnimations_80224380)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Anim3,
+    STATUS_NORMAL,    ANIM_JrTroopa_Anim03,
     STATUS_SLEEP,     ANIM_JrTroopa_Anim1C,
-    STATUS_STONE,     ANIM_JrTroopa_Anim0,
-    STATUS_POISON,    ANIM_JrTroopa_Anim0,
-    STATUS_STOP,      ANIM_JrTroopa_Anim0,
-    STATUS_STATIC,    ANIM_JrTroopa_Anim0,
-    STATUS_PARALYZE,  ANIM_JrTroopa_Anim0,
+    STATUS_STONE,     ANIM_JrTroopa_Anim00,
+    STATUS_POISON,    ANIM_JrTroopa_Anim00,
+    STATUS_STOP,      ANIM_JrTroopa_Anim00,
+    STATUS_STATIC,    ANIM_JrTroopa_Anim00,
+    STATUS_PARALYZE,  ANIM_JrTroopa_Anim00,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802243BC)[] = {
-    STATUS_NORMAL,   ANIM_JrTroopa_Anim3,
-    STATUS_SLEEP,    ANIM_JrTroopa_Anim0,
-    STATUS_STONE,    ANIM_JrTroopa_Anim0,
-    STATUS_POISON,   ANIM_JrTroopa_Anim0,
-    STATUS_STOP,     ANIM_JrTroopa_Anim0,
-    STATUS_STATIC,   ANIM_JrTroopa_Anim0,
-    STATUS_PARALYZE, ANIM_JrTroopa_Anim0,
+    STATUS_NORMAL,   ANIM_JrTroopa_Anim03,
+    STATUS_SLEEP,    ANIM_JrTroopa_Anim00,
+    STATUS_STONE,    ANIM_JrTroopa_Anim00,
+    STATUS_POISON,   ANIM_JrTroopa_Anim00,
+    STATUS_STOP,     ANIM_JrTroopa_Anim00,
+    STATUS_STATIC,   ANIM_JrTroopa_Anim00,
+    STATUS_PARALYZE, ANIM_JrTroopa_Anim00,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802243F8)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Anim4,
-    STATUS_STOP,      ANIM_JrTroopa_Anim2,
+    STATUS_NORMAL,    ANIM_JrTroopa_Anim04,
+    STATUS_STOP,      ANIM_JrTroopa_Anim02,
     STATUS_END,
 };
 
@@ -295,7 +295,7 @@ EvtScript N(handleEvent_80224B58) = {
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim09)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_EXEC_WAIT(N(80224964))
         EVT_CASE_EQ(38)
@@ -315,17 +315,17 @@ EvtScript N(handleEvent_80224B58) = {
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim4)
+            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim04)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(53)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim03)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_JrTroopa_Anim03)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -381,7 +381,7 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_OPEN_SHELL)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
     EVT_WAIT(20)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -389,26 +389,26 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim9)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim09)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim0E)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, 16)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(5)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_AnimF)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim0F)
             EVT_THREAD
                 EVT_WAIT(8)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim10)
@@ -428,7 +428,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 25)
@@ -436,9 +436,9 @@ EvtScript N(takeTurn_80225314) = {
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_AnimB)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim0B)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_EXEC_WAIT(N(80224964))
@@ -450,7 +450,7 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_AnimF)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim0F)
         EVT_WAIT(5)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim10)
     EVT_END_THREAD
@@ -473,13 +473,13 @@ EvtScript N(takeTurn_80225314) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
             EVT_WAIT(10)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim9)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim09)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim03)
             EVT_EXEC_WAIT(N(80224964))
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -501,7 +501,7 @@ EvtScript N(nextTurn_80225B4C) = {
                 EVT_EXEC_WAIT(N(80224510))
                 EVT_WAIT(10)
                 EVT_CALL(ActorSpeak, 786728, -127, 1, 2162714, 2162715)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_AnimB)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Anim0B)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B9)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 16)

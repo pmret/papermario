@@ -186,17 +186,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_TankGuy_Anim1,
-    STATUS_STONE, ANIM_TankGuy_Anim0,
-    STATUS_SLEEP, ANIM_TankGuy_Anim0,
-    STATUS_POISON, ANIM_TankGuy_Anim1,
-    STATUS_STOP, ANIM_TankGuy_Anim0,
-    STATUS_STATIC, ANIM_TankGuy_Anim0,
-    STATUS_PARALYZE, ANIM_TankGuy_Anim0,
-    STATUS_PARALYZE, ANIM_TankGuy_Anim0,
-    STATUS_DIZZY, ANIM_TankGuy_Anim1,
-    STATUS_DIZZY, ANIM_TankGuy_Anim1,
-    STATUS_FEAR, ANIM_TankGuy_Anim0,
+    STATUS_NORMAL, ANIM_TankGuy_Anim01,
+    STATUS_STONE, ANIM_TankGuy_Anim00,
+    STATUS_SLEEP, ANIM_TankGuy_Anim00,
+    STATUS_POISON, ANIM_TankGuy_Anim01,
+    STATUS_STOP, ANIM_TankGuy_Anim00,
+    STATUS_STATIC, ANIM_TankGuy_Anim00,
+    STATUS_PARALYZE, ANIM_TankGuy_Anim00,
+    STATUS_PARALYZE, ANIM_TankGuy_Anim00,
+    STATUS_DIZZY, ANIM_TankGuy_Anim01,
+    STATUS_DIZZY, ANIM_TankGuy_Anim01,
+    STATUS_FEAR, ANIM_TankGuy_Anim00,
     STATUS_END,
 };
 
@@ -228,7 +228,7 @@ EvtScript N(init) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, 20, 0, -10)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_SET(LVar0, 2)
-    EVT_SET(LVar1, ANIM_TankGuy_Anim3)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
     EVT_SET(LVar4, EVT_FLOAT(4.0))
     EVT_SET(LVar5, 5)
     EVT_LOOP(8)
@@ -237,7 +237,7 @@ EvtScript N(init) = {
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 1, LVar3)
             EVT_SET(LVar5, 20)
             EVT_EXEC_WAIT(N(run_to_pos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
         EVT_END_THREAD
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP

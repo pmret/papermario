@@ -6,15 +6,15 @@ extern EvtScript N(lakilester_idle);
 extern EvtScript N(lakilester_takeTurn);
 
 s32 N(lakilester_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleLakilester_Anim1,
-    STATUS_STONE, ANIM_BattleLakilester_Anim0,
-    STATUS_SLEEP, ANIM_BattleLakilester_Anim0,
-    STATUS_POISON, ANIM_BattleLakilester_Anim1,
-    STATUS_STOP, ANIM_BattleLakilester_Anim0,
-    STATUS_STATIC, ANIM_BattleLakilester_Anim1,
-    STATUS_PARALYZE, ANIM_BattleLakilester_Anim0,
-    STATUS_DIZZY, ANIM_BattleLakilester_Anim8,
-    STATUS_FEAR, ANIM_BattleLakilester_Anim1,
+    STATUS_NORMAL, ANIM_BattleLakilester_Anim01,
+    STATUS_STONE, ANIM_BattleLakilester_Anim00,
+    STATUS_SLEEP, ANIM_BattleLakilester_Anim00,
+    STATUS_POISON, ANIM_BattleLakilester_Anim01,
+    STATUS_STOP, ANIM_BattleLakilester_Anim00,
+    STATUS_STATIC, ANIM_BattleLakilester_Anim01,
+    STATUS_PARALYZE, ANIM_BattleLakilester_Anim00,
+    STATUS_DIZZY, ANIM_BattleLakilester_Anim08,
+    STATUS_FEAR, ANIM_BattleLakilester_Anim01,
     STATUS_END,
 };
 
@@ -128,97 +128,97 @@ EvtScript N(lakilester_handleEvent) = {
             EVT_CALL(GetLastElement, LVar1)
             EVT_IF_FLAG(LVar1, DAMAGE_TYPE_ELECTRIC)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+                EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
                 EVT_EXEC_WAIT(N(OnHitElectric))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+                EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimC)
-            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_AnimD)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0C)
+            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_Anim0D)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimC)
-            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_AnimD)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0C)
+            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_Anim0D)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimD)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0D)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoJumpBack)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim03)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim3)
-            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim03)
+            EVT_SET_CONST(LVar2, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim03)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_AnimA)
+            EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Anim0A)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -236,11 +236,11 @@ EvtScript N(lakilester_takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim03)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, 20, 30, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim01)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
@@ -258,7 +258,7 @@ EvtScript N(lakilester_takeTurn) = {
     EVT_WAIT(1)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_BattleLakilester_Anim14)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_AnimF)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim0F)
     EVT_LOOP(4)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
         EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
@@ -330,7 +330,7 @@ EvtScript N(lakilester_takeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 60)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim03)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -367,7 +367,7 @@ EvtScript N(lakilester_takeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 8)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_Anim03)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
         EVT_END_CASE_GROUP

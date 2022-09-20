@@ -71,9 +71,9 @@ u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6,
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
-        ANIM_Goombaria_Anim0,
-        ANIM_Goombaria_Anim1,
-        ANIM_Goombaria_AnimB,
+        ANIM_Goombaria_Anim00,
+        ANIM_Goombaria_Anim01,
+        ANIM_Goombaria_Anim0B,
         ANIM_LIST_END
     },
     {
@@ -83,9 +83,9 @@ s32 gPauseTutorialSpriteAnims[][4] = {
         ANIM_LIST_END
     },
     {
-        ANIM_Goompa_Anim0,
-        ANIM_Goompa_Anim1,
-        ANIM_Goompa_Anim8,
+        ANIM_Goompa_Anim00,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim08,
         ANIM_LIST_END
     }
 };

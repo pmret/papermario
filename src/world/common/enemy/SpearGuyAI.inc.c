@@ -31,7 +31,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 1:
             enemy->varTable[0] = 2;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_JungleGuy_AnimF;
+            npc->currentAnim = ANIM_JungleGuy_Anim0F;
         case 2:
             enemy->varTable[1]++;
             if (enemy->varTable[1] > 50) {
@@ -54,7 +54,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 5:
             enemy->varTable[0] = 6;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_JungleGuy_Anim3;
+            npc->currentAnim = ANIM_JungleGuy_Anim03;
             fx_sweat(0, npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionHeight, 0, 10);
         case 6:
             enemy->varTable[1]++;

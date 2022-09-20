@@ -111,10 +111,10 @@ NpcSettings N(npcSettings_80240840) = {
 
 EvtScript N(interact_8024086C) = {
     EVT_IF_EQ(AreaFlag(4), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim4, ANIM_Boo_Tan_Anim1, 0, MSG_CH3_00F0)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_00F0)
         EVT_SET(AreaFlag(4), 1)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim4, ANIM_Boo_Tan_Anim1, 0, MSG_CH3_00F1)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_00F1)
         EVT_SET(AreaFlag(4), 0)
     EVT_END_IF
     EVT_RETURN
@@ -143,22 +143,22 @@ StaticNpc N(npcGroup_80240954) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Boo_Tan_Anim1,
-        ANIM_Boo_Tan_Anim2,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim1,
-        ANIM_Boo_Tan_Anim1,
-        ANIM_Boo_Tan_Anim0,
-        ANIM_Boo_Tan_Anim0,
-        ANIM_Boo_Tan_AnimA,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
-        ANIM_Boo_Tan_Anim3,
+        ANIM_Boo_Tan_Anim01,
+        ANIM_Boo_Tan_Anim02,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim01,
+        ANIM_Boo_Tan_Anim01,
+        ANIM_Boo_Tan_Anim00,
+        ANIM_Boo_Tan_Anim00,
+        ANIM_Boo_Tan_Anim0A,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Anim03,
     },
     .tattle = MSG_NpcTattle_HidingBoo,
 };

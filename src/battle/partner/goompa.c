@@ -15,7 +15,7 @@ extern EvtScript N(80238510);
 extern EvtScript N(8023859C);
 
 s32 N(idleAnimations_80238000)[] = {
-    STATUS_NORMAL, ANIM_Goompa_Anim2,
+    STATUS_NORMAL, ANIM_Goompa_Anim02,
     STATUS_END,
 };
 
@@ -96,37 +96,37 @@ EvtScript N(handleEvent_8023819C) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim07)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySound, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim07)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim7)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim3)
-            EVT_SET_CONST(LVar3, ANIM_Goompa_Anim1)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim07)
+            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim03)
+            EVT_SET_CONST(LVar3, ANIM_Goompa_Anim01)
             EVT_EXEC_WAIT(D_80294FE4)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
-            EVT_SET_CONST(LVar0, ANIM_Goompa_Anim7)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim7)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim7)
-            EVT_SET_CONST(LVar3, ANIM_Goompa_Anim3)
-            EVT_SET_CONST(LVar4, ANIM_Goompa_Anim1)
+            EVT_SET_CONST(LVar0, ANIM_Goompa_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim07)
+            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim07)
+            EVT_SET_CONST(LVar3, ANIM_Goompa_Anim03)
+            EVT_SET_CONST(LVar4, ANIM_Goompa_Anim01)
             EVT_EXEC_WAIT(D_80294C68)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 0)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim07)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_33)
         EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim1)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim3)
+            EVT_SET_CONST(LVar1, ANIM_Goompa_Anim01)
+            EVT_SET_CONST(LVar2, ANIM_Goompa_Anim03)
             EVT_EXEC_WAIT(D_80295EC4)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -153,8 +153,8 @@ EvtScript N(takeTurn_802383F4) = {
 
 EvtScript N(80238488) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, ANIM_Goompa_Anim9)
-    EVT_SET_CONST(LVar2, ANIM_Goompa_Anim2)
+    EVT_SET_CONST(LVar1, ANIM_Goompa_Anim09)
+    EVT_SET_CONST(LVar2, ANIM_Goompa_Anim02)
     EVT_EXEC_WAIT(D_80294720)
     EVT_RETURN
     EVT_END
@@ -162,7 +162,7 @@ EvtScript N(80238488) = {
 
 EvtScript N(802384D4) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, ANIM_Goompa_Anim3)
+    EVT_SET_CONST(LVar1, ANIM_Goompa_Anim03)
     EVT_EXEC_WAIT(D_80294AFC)
     EVT_RETURN
     EVT_END
@@ -171,10 +171,10 @@ EvtScript N(802384D4) = {
 EvtScript N(80238510) = {
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Anim3)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Anim03)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Anim1)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Anim01)
     EVT_RETURN
     EVT_END
 };

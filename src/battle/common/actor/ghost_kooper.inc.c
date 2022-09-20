@@ -6,13 +6,13 @@ extern EvtScript N(kooper_idle);
 extern EvtScript N(kooper_handleEvent);
 
 s32 N(kooper_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleKooper_Anim4,
-    STATUS_STONE, ANIM_BattleKooper_Anim0,
-    STATUS_SLEEP, ANIM_BattleKooper_Anim0,
-    STATUS_POISON, ANIM_BattleKooper_Anim4,
-    STATUS_STOP, ANIM_BattleKooper_Anim0,
-    STATUS_STATIC, ANIM_BattleKooper_Anim4,
-    STATUS_PARALYZE, ANIM_BattleKooper_Anim0,
+    STATUS_NORMAL, ANIM_BattleKooper_Anim04,
+    STATUS_STONE, ANIM_BattleKooper_Anim00,
+    STATUS_SLEEP, ANIM_BattleKooper_Anim00,
+    STATUS_POISON, ANIM_BattleKooper_Anim04,
+    STATUS_STOP, ANIM_BattleKooper_Anim00,
+    STATUS_STATIC, ANIM_BattleKooper_Anim04,
+    STATUS_PARALYZE, ANIM_BattleKooper_Anim00,
     STATUS_DIZZY, ANIM_BattleKooper_Anim1C,
     STATUS_FEAR, ANIM_BattleKooper_Anim1C,
     STATUS_END,
@@ -20,12 +20,12 @@ s32 N(kooper_idleAnimations)[] = {
 
 s32 N(kooper_idleAnimations2)[] = {
     STATUS_NORMAL, ANIM_BattleKooper_Anim19,
-    STATUS_STONE, ANIM_BattleKooper_Anim3,
-    STATUS_SLEEP, ANIM_BattleKooper_Anim3,
+    STATUS_STONE, ANIM_BattleKooper_Anim03,
+    STATUS_SLEEP, ANIM_BattleKooper_Anim03,
     STATUS_POISON, ANIM_BattleKooper_Anim19,
-    STATUS_STOP, ANIM_BattleKooper_Anim3,
+    STATUS_STOP, ANIM_BattleKooper_Anim03,
     STATUS_STATIC, ANIM_BattleKooper_Anim19,
-    STATUS_PARALYZE, ANIM_BattleKooper_Anim3,
+    STATUS_PARALYZE, ANIM_BattleKooper_Anim03,
     STATUS_DIZZY, ANIM_BattleKooper_Anim19,
     STATUS_FEAR, ANIM_BattleKooper_Anim19,
     STATUS_END,
@@ -255,7 +255,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim4)
+                    EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim04)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
                     EVT_SET_CONST(LVar0, 1)
@@ -281,12 +281,12 @@ EvtScript N(kooper_handleEvent) = {
                 EVT_EXEC_WAIT(DoImmune)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim4)
+                EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim04)
                 EVT_EXEC_WAIT(DoRecover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim6)
+            EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim06)
             EVT_SET_CONST(LVar2, ANIM_BattleKooper_Anim11)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
@@ -295,7 +295,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim6)
+                    EVT_SET_CONST(LVar1, ANIM_BattleKooper_Anim06)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(3.0))
                     EVT_SET_CONST(LVar0, 1)
@@ -368,7 +368,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim04)
             EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(kooper_defenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(kooper_idleAnimations)))
@@ -379,10 +379,10 @@ EvtScript N(kooper_takeTurn) = {
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0E)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0)
     EVT_WAIT(15)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimA)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0A)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200C)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -402,25 +402,25 @@ EvtScript N(kooper_takeTurn) = {
         EVT_ADD(LVar9, 1)
         EVT_SWITCH(LVar9)
             EVT_CASE_LT(20)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimA)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0A)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
             EVT_CASE_EQ(20)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
                 EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar4, LVar5, LVar6, 32, 4, 0, 10, 0, 0, 0, 0, 0)
             EVT_CASE_LT(40)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimB)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0B)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
             EVT_CASE_EQ(40)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
                 EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar4, LVar5, LVar6, 32, 4, 0, 10, 0, 0, 0, 0, 0)
             EVT_CASE_LT(50)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimC)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0C)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(14.0))
             EVT_CASE_EQ(50)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
                 EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar4, LVar5, LVar6, 32, 4, 0, 10, 0, 0, 0, 0, 0)
             EVT_CASE_LT(60)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimD)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0D)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
             EVT_CASE_EQ(60)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
@@ -445,7 +445,7 @@ EvtScript N(kooper_takeTurn) = {
                 EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
             EVT_END_THREAD
             EVT_WAIT(4)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim9)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim09)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, -8, 0, 0)
             EVT_SET(LVar0, 0)
             EVT_LOOP(2)
@@ -471,12 +471,12 @@ EvtScript N(kooper_takeTurn) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimF)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0F)
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim06)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.5))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -518,11 +518,11 @@ EvtScript N(kooper_takeTurn) = {
             EVT_ADD(LVar0, 10)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_AnimF)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim0F)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Anim06)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.5))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)

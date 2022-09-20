@@ -71,7 +71,7 @@ EvtScript N(8024097C) = {
         EVT_CALL(EnableNpcAI, 0, 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(SetNpcSpeed, 0, EVT_FLOAT(4.0))
-        EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim3)
+        EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim03)
         EVT_CALL(N(func_802401B0_8C8140))
         EVT_CALL(GetAngleToPlayer, 0, LVar2)
         EVT_LOOP(LVar1)
@@ -111,7 +111,7 @@ EvtScript N(npcAI_80240B50) = {
             EVT_WAIT(15)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 5)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim8, ANIM_Goompa_Anim1, 0, MSG_CH0_00A6)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim08, ANIM_Goompa_Anim01, 0, MSG_CH0_00A6)
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
             EVT_CALL(SetPanTarget, 0, -20, 0, 68)
             EVT_CALL(SetCamPitch, 0, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
@@ -125,16 +125,16 @@ EvtScript N(npcAI_80240B50) = {
             EVT_END_THREAD
             EVT_CALL(GetNpcPos, 0, LVar7, LVar8, LVar9)
             EVT_CALL(SetNpcSpeed, 0, EVT_FLOAT(4.0))
-            EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim3)
+            EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim03)
             EVT_CALL(NpcMoveTo, 0, 0, 70, 0)
-            EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim1)
+            EVT_CALL(SetNpcAnimation, 0, ANIM_Goompa_Anim01)
             EVT_CALL(InterpNpcYaw, 0, 276, 20)
             EVT_WAIT(30)
-            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim8, ANIM_Goompa_Anim1, 0, MSG_CH0_00A7)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim08, ANIM_Goompa_Anim01, 0, MSG_CH0_00A7)
             EVT_WAIT(5)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(30)
-            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim8, ANIM_Goompa_Anim1, 0, MSG_CH0_00A8)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Anim08, ANIM_Goompa_Anim01, 0, MSG_CH0_00A8)
             EVT_CALL(N(UnkFunc41), 0, 5)
             EVT_SET(GB_StoryProgress, -121)
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
@@ -153,9 +153,9 @@ EvtScript N(npcAI_80240B50) = {
 };
 
 EvtScript N(hit_80240F64) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim07)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim1)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim01)
     EVT_ADD(MapVar(0), 1)
     EVT_IF_LT(MapVar(0), 3)
         EVT_CALL(GetOwnerEncounterTrigger, LVar0)
@@ -176,7 +176,7 @@ EvtScript N(hit_80240F64) = {
                 EVT_END_IF
         EVT_END_SWITCH
         EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim3)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Anim03)
     EVT_ELSE
         EVT_WAIT(10)
         EVT_CALL(GetNpcPos, 0, LVar0, LVar1, LVar2)
@@ -219,22 +219,22 @@ StaticNpc N(npcGroup_80241260) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Goompa_Anim1,
-        ANIM_Goompa_Anim2,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim1,
-        ANIM_Goompa_Anim1,
-        ANIM_Goompa_Anim0,
-        ANIM_Goompa_Anim0,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
-        ANIM_Goompa_Anim3,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim02,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim00,
+        ANIM_Goompa_Anim00,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim03,
     },
     .tattle = MSG_NpcTattle_Goompa,
 };

@@ -102,7 +102,7 @@ class Sprite:
             })
 
         for i, palette in enumerate(self.palettes):
-            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Pal{i:X}"
+            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Pal{i:02X}"
 
             if i in palette_to_raster:
                 img = palette_to_raster[i][0]
@@ -118,7 +118,7 @@ class Sprite:
 
         for i, components in enumerate(self.animations):
             Animation = ET.SubElement(AnimationList, "Animation", {
-                "name": self.animation_names[i] if self.animation_names else f"Anim{i:X}",
+                "name": self.animation_names[i] if self.animation_names else f"Anim{i:02X}",
             })
 
             for j, comp in enumerate(components):

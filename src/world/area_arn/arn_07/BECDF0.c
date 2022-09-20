@@ -219,7 +219,7 @@ EvtScript N(80242A30) = {
         EVT_CALL(PlaySoundAtCollider, 10, 450, 0)
     EVT_END_THREAD
     EVT_CALL(NpcFaceNpc, 0, 1, 0)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_AnimA, ANIM_TubbasHeart_Anim1, 5, MSG_CH3_00C7)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0A, ANIM_TubbasHeart_Anim01, 5, MSG_CH3_00C7)
     EVT_CALL(SetNpcVar, 0, 0, 1)
     EVT_LOOP(0)
         EVT_CALL(GetNpcVar, 0, 0, LVar0)
@@ -253,7 +253,7 @@ EvtScript N(80242A30) = {
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim23)
         EVT_WAIT(20)
-        EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim6)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim06)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_THREAD
@@ -297,7 +297,7 @@ EvtScript N(80242A30) = {
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, 200, 0, 35)
     EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim6, 0, MSG_CH3_00C8)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00C8)
     EVT_CALL(SetNpcVar, 1, 0, 1)
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)

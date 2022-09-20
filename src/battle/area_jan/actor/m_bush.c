@@ -11,15 +11,15 @@ extern EvtScript N(idle_802219D4);
 extern EvtScript N(handleEvent_80221A74);
 
 s32 N(idleAnimations_80221830)[] = {
-    STATUS_NORMAL,    ANIM_MBush_Anim2,
-    STATUS_STONE,     ANIM_MBush_Anim1,
-    STATUS_SLEEP,     ANIM_MBush_Anim8,
-    STATUS_POISON,    ANIM_MBush_Anim2,
-    STATUS_STOP,      ANIM_MBush_Anim1,
-    STATUS_STATIC,    ANIM_MBush_Anim2,
-    STATUS_PARALYZE,  ANIM_MBush_Anim1,
-    STATUS_DIZZY,     ANIM_MBush_Anim9,
-    STATUS_FEAR,      ANIM_MBush_Anim9,
+    STATUS_NORMAL,    ANIM_MBush_Anim02,
+    STATUS_STONE,     ANIM_MBush_Anim01,
+    STATUS_SLEEP,     ANIM_MBush_Anim08,
+    STATUS_POISON,    ANIM_MBush_Anim02,
+    STATUS_STOP,      ANIM_MBush_Anim01,
+    STATUS_STATIC,    ANIM_MBush_Anim02,
+    STATUS_PARALYZE,  ANIM_MBush_Anim01,
+    STATUS_DIZZY,     ANIM_MBush_Anim09,
+    STATUS_FEAR,      ANIM_MBush_Anim09,
     STATUS_END,
 };
 
@@ -107,10 +107,10 @@ EvtScript N(idle_802219D4) = {
 
 EvtScript N(802219E4) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim05)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -124,85 +124,85 @@ EvtScript N(handleEvent_80221A74) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_AnimA)
-            EVT_SET_CONST(LVar2, ANIM_MBush_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim0A)
+            EVT_SET_CONST(LVar2, ANIM_MBush_Anim0B)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_AnimA)
-            EVT_SET_CONST(LVar2, ANIM_MBush_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim0A)
+            EVT_SET_CONST(LVar2, ANIM_MBush_Anim0B)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_AnimB)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim0B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(802219E4))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim02)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim7)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim2)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim02)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim5)
-            EVT_SET_CONST(LVar2, ANIM_MBush_Anim9)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim05)
+            EVT_SET_CONST(LVar2, ANIM_MBush_Anim09)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim5)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim05)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_MBush_Anim5)
+            EVT_SET_CONST(LVar1, ANIM_MBush_Anim05)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -220,7 +220,7 @@ EvtScript N(takeTurn_80221F78) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim04)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -234,7 +234,7 @@ EvtScript N(takeTurn_80221F78) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim06)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -250,7 +250,7 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
@@ -263,7 +263,7 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim06)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -281,7 +281,7 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
