@@ -1925,11 +1925,11 @@ ParaJrTroopa:
     - Anim0D
 Goomba:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
+    - Default
+    - Red
+    - Hyper
+    - Frost
+    - Dark
   frames:
     - Raster00
     - Raster01
@@ -1976,21 +1976,21 @@ Goomba:
     - Mushroom
     - Toadstool
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Headbonk
+    - Hurt
+    - Dead
+    - Dizzy
+    - Sleep
+    - Hurt_Burnt
+    - Dead_Burnt
+    - Tense
+    - FakeToadstool
+    - FakeMushroom
+    - Shocked
 SpikedGoomba:
   variations:
     - Variant00
@@ -11644,8 +11644,8 @@ ParadeTwink:
     - Anim01
 Leaf:
   frames:
-    - Raster00
+    - Still
   palettes:
     - Default
   animations:
-    - Anim00
+    - Pivot
