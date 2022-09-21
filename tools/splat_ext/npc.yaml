@@ -10338,7 +10338,7 @@ RafaelRaven:
     - Feathers3
     - EyesHappy
     - EyesAngry
-    - Raster05
+    - EyesSquint
     - Eyes
     - Beak1
     - Beak2
@@ -10457,40 +10457,40 @@ GateFlower:
     - HappyTalk
 Petunia:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
+    - LeavesIdle1
+    - LeavesIdle2
+    - LeavesRaised
+    - LeavesGiveItem1
+    - LeavesGiveItem2
+    - LeavesDance1
+    - LeavesDance2
+    - LeavesDance3
+    - LeavesDance4
+    - LeavesBashful1
+    - LeavesBashful2
+    - HappyTalk1
+    - HappyTalk2
+    - Bashful
+    - Blink
+    - Angry
+    - AngryTalk
+    - Horror
+    - Sad
+    - Happy
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Talk
+    - Dance
+    - GiveItem
+    - Bashful
+    - Angry
+    - AngryTalk
+    - HappyTalk
+    - Sad
+    - Horror
 Posie:
   frames:
     - Neutral
@@ -10518,146 +10518,146 @@ Posie:
     - Strain
 Lily:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
+    - Happy
+    - TalkHappy
+    - Dread1
+    - Dread2
+    - Idle
+    - Talk
+    - LilyPad
+    - Petals1
+    - Petals2
+    - Petals3
+    - PetalsGiveItem1
+    - PetalsGiveItem2
+    - PetalsGiveItem3
+    - Plead1
+    - Plead2
+    - Plead3
+    - Plead4
+    - Dread3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Talk
+    - TalkHappy
+    - TalkPlead
+    - Dread
+    - GiveItem
+    - IdleHappy
+    - IdlePlead
+    - DreadLoop
 Rosie:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - HeadBlink
+    - Head1
+    - Head2
+    - VinesPullBack
+    - VinesExtend1
+    - VinesExtend2
+    - VinesGiveItem
+    - VinesHalfExtend
+    - VinesTalk
+    - VinesIdle1
+    - VinesIdle2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - IdleHold
+    - Talk
+    - TalkHold
+    - TakeOut
+    - GiveItem
 Sun:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
+    - EyesClosed
+    - Blink1
+    - Blink2
+    - TalkSad1
+    - TalkSad2
+    - TalkJoy1
+    - TalkJoy2
+    - TalkJoy3
+    - TalkHappy1
+    - TalkHappy2
+    - TalkHappy3
+    - MajorFlame1
+    - MajorFlame2
+    - MinorFlame1
+    - MinorFlame2
   palettes:
     - Default
     - Bright
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
+    - Combined
+    - Idle
+    - FireIdle
+    - Happy
+    - FireHappy
+    - IdleAlt
+    - FireIdleAlt
+    - TalkSad
+    - FireTalkSad
+    - TalkJoy
+    - FireTalkJoy
+    - TalkPleased
+    - FireTalkPleased
 Lakilulu:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Talk1
+    - Talk2
+    - HappyNod1
+    - HappyNod2
+    - HappyTalk1
+    - HappyTalk2
+    - Panic1
+    - Panic2
+    - Panic3
+    - Panic4
+    - NeutralInhale
+    - Shout1
+    - Shout2
+    - ConcernedNod1
+    - ConcernedNod2
+    - ConcernedTalk1
+    - ConcernedTalk2
+    - Lift1
+    - Lift2
+    - Throw1
+    - Throw2
+    - Throw3
+    - Throw4
+    - Spiny
   palettes:
     - Default
     - Spiny
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - HappyNod
+    - HappyTalk
+    - Panic
+    - Shout
+    - ConcernedNod
+    - ConcernedTalk
+    - Spiny
+    - Lift
+    - Throw
 Ninji:
   variations:
     - Default

@@ -235,8 +235,8 @@ EvtScript N(80240FFC) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_00C8)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Anim03)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_00C8)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Dance)
     EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_18"), 1)
     EVT_WAIT(100)
@@ -280,11 +280,11 @@ EvtScript N(interact_802412BC) = {
             EVT_SET(MapVar(14), 1)
             EVT_SET(LVar4, EVT_FLOAT(3.5))
             EVT_EXEC_WAIT(N(8024122C))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0050)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Anim06)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0050)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Angry)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
             EVT_WAIT(20)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0051)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0051)
             EVT_CALL(SetNpcAnimation, 2, ANIM_MontyMole_Dark_Anim12)
             EVT_CALL(SetNpcYaw, 2, 270)
             EVT_CALL(GetNpcPos, 2, LVar0, LVar1, LVar2)
@@ -302,7 +302,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(PlaySoundAtNpc, 2, 0x263, 0)
             EVT_CALL(ShowEmote, 2, EMOTE_QUESTION, -45, 30, 1, 0, 0, 0, 0)
             EVT_CALL(GetNpcPos, 3, LVar0, LVar1, LVar2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0052)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0052)
             EVT_CALL(SetNpcYaw, 3, 90)
             EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -317,7 +317,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(SetNpcPos, 3, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, 3, ANIM_MontyMole_Dark_Anim10)
             EVT_WAIT(20)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0053)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0053)
             EVT_CALL(SetNpcYaw, 4, 270)
             EVT_CALL(GetNpcPos, 4, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -328,7 +328,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
             EVT_WAIT(20)
             EVT_CALL(SetNpcAnimation, 4, ANIM_MontyMole_Dark_Anim14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0054)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0054)
             EVT_CALL(SetNpcYaw, 5, 270)
             EVT_CALL(GetNpcPos, 5, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -344,7 +344,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(SetNpcAnimation, 5, ANIM_MontyMole_Dark_Anim08)
             EVT_WAIT(20)
             EVT_CALL(SetNpcAnimation, 5, ANIM_MontyMole_Dark_Anim16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0055)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0055)
             EVT_CALL(SetNpcPos, 1, -233, 0, -217)
             EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -357,10 +357,10 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(PlaySoundAtNpc, 1, SOUND_262, 0)
             EVT_CALL(ShowEmote, 1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0)
             EVT_WAIT(15)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0056)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0056)
             EVT_SET(LVar4, EVT_FLOAT(90.0))
             EVT_EXEC_WAIT(N(8024122C))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0057)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0057)
             EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
@@ -372,35 +372,35 @@ EvtScript N(interact_802412BC) = {
             EVT_SET(GB_StoryProgress, 44)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0, MSG_CH6_0058)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Anim06)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0058)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Angry)
             EVT_ELSE
                 EVT_SET(LVar4, EVT_FLOAT(3.5))
                 EVT_EXEC_WAIT(N(8024122C))
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim08, ANIM_Petunia_Anim03, 0, MSG_CH6_0059)
-                EVT_CALL(EndSpeech, -1, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Anim04)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_HappyTalk, ANIM_Petunia_Dance, 0, MSG_CH6_0059)
+                EVT_CALL(EndSpeech, -1, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_GiveItem)
                 EVT_WAIT(20)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Anim01)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Idle)
                 EVT_SET(LVar0, 88)
                 EVT_SET(LVar1, 1)
                 EVT_EXEC_WAIT(N(80240F0C))
                 EVT_CALL(AddKeyItem, ITEM_MAGICAL_BEAN)
                 EVT_WAIT(20)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_005A)
-                EVT_CALL(EndSpeech, -1, ANIM_Petunia_Anim07, ANIM_Petunia_Anim06, 0)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005A)
+                EVT_CALL(EndSpeech, -1, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0)
                 EVT_SET(GB_StoryProgress, 45)
             EVT_END_IF
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_005B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005B)
         EVT_CASE_LT(60)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_005C)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005C)
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaByte(1), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_005D)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005D)
                 EVT_SET(AreaByte(1), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Anim02, ANIM_Petunia_Anim01, 0, MSG_CH6_005E)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005E)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(ResetCam, 0, EVT_FLOAT(8.0))
@@ -412,9 +412,9 @@ EvtScript N(interact_802412BC) = {
 EvtScript N(init_80241DA4) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412BC)))
     EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
-        EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Anim06)
+        EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Angry)
     EVT_ELSE
-        EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Anim01)
+        EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Idle)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -470,9 +470,9 @@ EvtScript N(defeat_80241F64) = {
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleC)
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleD)
             EVT_IF_NE(LVar0, 4)
-                EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Anim06)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Angry)
             EVT_ELSE
-                EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Anim01)
+                EVT_CALL(SetNpcAnimation, 0, ANIM_Petunia_Idle)
                 EVT_SET(GF_FLO03_DefeatedAll_MontyMoles, 1)
                 EVT_EXEC_WAIT(N(802406A0))
             EVT_END_IF
@@ -914,22 +914,22 @@ StaticNpc N(npcGroup_8024388C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
-        ANIM_Petunia_Anim01,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
+        ANIM_Petunia_Idle,
     },
     .tattle = MSG_NpcTattle_Petunia,
 };

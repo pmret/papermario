@@ -983,11 +983,11 @@ EvtScript N(init_80244BF4) = {
 
 EvtScript N(interact_80244C98) = {
     EVT_IF_LE(GB_StoryProgress, 53)
-        EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
+        EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_EQ(LVar0, 8)
-            EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
+            EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
             EVT_WAIT(10)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 5, MSG_CH6_0033)
@@ -995,7 +995,7 @@ EvtScript N(interact_80244C98) = {
             EVT_CALL(EndSpeech, -4, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5)
             EVT_CALL(EnablePartnerAI)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0034)
+            EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -1259,22 +1259,22 @@ StaticNpc N(npcGroup_80245BF4) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
     },
     .tattle = MSG_NpcTattle_Lakilulu,
 };
@@ -1420,22 +1420,22 @@ StaticNpc N(npcGroup_80246264)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
-            ANIM_Lakilulu_Anim01,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
+            ANIM_Lakilulu_Idle,
         },
     },
     {

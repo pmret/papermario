@@ -410,7 +410,7 @@ EvtScript N(802446AC) = {
 
 EvtScript N(80244888) = {
     EVT_EXEC(N(802446AC))
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim0C)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Lift)
     EVT_CALL(GetNpcPos, 1, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, -5)
     EVT_ADD(LVar2, 30)
@@ -433,7 +433,7 @@ EvtScript N(80244888) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim0D)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Throw)
     EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, 5)
     EVT_ADD(LVar2, 20)
@@ -461,7 +461,7 @@ EvtScript N(80244888) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim01)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -543,7 +543,7 @@ EvtScript N(80245014) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_00B4)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00B4)
     EVT_CALL(NpcFaceNpc, NPC_PARTNER, 1, 1)
     EVT_CALL(SetCamDistance, 0, 600)
     EVT_CALL(SetCamPitch, 0, EVT_FLOAT(10.0), EVT_FLOAT(-8.0))
@@ -601,8 +601,8 @@ EvtScript N(80245444) = {
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 5, MSG_CH6_00A3)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim07)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 5, MSG_CH6_00A3)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Panic)
     EVT_CALL(UseSettingsFrom, 0, 0, 0, 0)
     EVT_CALL(SetPanTarget, 0, 0, 0, 0)
     EVT_CALL(SetCamDistance, 0, 500)
@@ -633,7 +633,7 @@ EvtScript N(80245444) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim09)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_ConcernedNod)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_WAIT(20)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
@@ -653,7 +653,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim08, ANIM_Lakilulu_Anim08, 0, MSG_CH6_00A5)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Shout, ANIM_Lakilulu_Shout, 0, MSG_CH6_00A5)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -672,15 +672,15 @@ EvtScript N(80245444) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_LABEL(10)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 0, MSG_CH6_00A7)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 0, MSG_CH6_00A7)
     EVT_CALL(ShowChoice, MSG_Choice_0020)
     EVT_IF_NE(LVar0, 0)
         EVT_EXEC_WAIT(N(80244888))
         EVT_WAIT(10)
         EVT_GOTO(10)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_00A9)
-        EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim01)
+        EVT_CALL(ContinueSpeech, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00A9)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Idle)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
@@ -719,11 +719,11 @@ EvtScript N(80245444) = {
         EVT_END_SWITCH
     EVT_END_IF
     EVT_CALL(InterpNpcYaw, 1, 90, 1)
-    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_Anim09)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 5, MSG_CH6_00B0)
+    EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_ConcernedNod)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B0)
     EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B1)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim0A, ANIM_Lakilulu_Anim09, 5, MSG_CH6_00B2)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B2)
     EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B3)
     EVT_WAIT(10)
     EVT_THREAD
@@ -776,13 +776,13 @@ EvtScript N(defeat_80246038) = {
 
 EvtScript N(interact_802461C0) = {
     EVT_IF_LE(GB_StoryProgress, 53)
-        EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
+        EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_NE(LVar0, 8)
-            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0034)
+            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Anim04, ANIM_Lakilulu_Anim01, 0, MSG_CH6_0032)
+            EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -814,7 +814,7 @@ EvtScript N(init_802462D0) = {
 
 EvtScript N(init_80246370) = {
     EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_Lakilulu_Anim0B)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_Lakilulu_Spiny)
     EVT_RETURN
     EVT_END
 };
@@ -881,22 +881,22 @@ StaticNpc N(npcGroup_80246624) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
     },
     .tattle = MSG_NpcTattle_Lakilulu,
 };
@@ -914,22 +914,22 @@ StaticNpc N(npcGroup_80246814) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
-        ANIM_Lakilulu_Anim01,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
+        ANIM_Lakilulu_Idle,
     },
 };
 
