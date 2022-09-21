@@ -745,61 +745,61 @@ EvtScript N(interact_80243C4C) = {
         EVT_CASE_LT(45)
             EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0035)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0035)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(47)
             EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0036)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0036)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(53)
             EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0037)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0037)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(57)
             EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
                     EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Anim02, ANIM_Tolielup_Anim01, 0, MSG_CH6_003A)
-            EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Anim03, ANIM_Tolielup_Anim03, 0)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_003A)
+            EVT_CALL(EndSpeech, -1, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
     EVT_END_SWITCH
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
     EVT_RETURN
@@ -1194,22 +1194,22 @@ StaticNpc N(npcGroup_80245814) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
-        ANIM_Tolielup_Anim01,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
+        ANIM_Tolielup_Idle,
     },
     .tattle = MSG_NpcTattle_Tolielup,
 };

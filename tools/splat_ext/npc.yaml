@@ -10368,9 +10368,9 @@ Tolielup:
     - Laugh
 GateFlower:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
+    - Blue
+    - Red
+    - Yellow
   frames:
     - Raster00
     - Raster01
@@ -10603,19 +10603,19 @@ Lakilulu:
     - Anim0D
 Ninji:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
-    - Variant05
+    - Default
+    - Pink
+    - Green
+    - Blue
+    - Purple
+    - Brown
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Idle1
+    - Talk
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
     - Pink
@@ -10624,155 +10624,155 @@ Ninji:
     - Purple
     - Brown
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 MayorPenguin:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
+    - Idle1
+    - Idle2
+    - Walk1
+    - Walk2
+    - Walk3
+    - Run1
+    - Run2
+    - Run3
+    - Talk
+    - Carry1
+    - Carry2
+    - Carry3
+    - CarryTalk1
+    - CarryTalk2
+    - PickUp1
+    - PickUp2
+    - Give1
+    - Give2
+    - Give3
+    - ReachDown
+    - Dead
+    - WakeUp1
+    - WakeUp2
+    - GetUp1
+    - GetUp2
+    - Twitch
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Dead
+    - Twitch
+    - WakeUp
+    - Carry
+    - Give
+    - PickUp
+    - CarryTalk
 MayorPenguinWife:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - Idle1
+    - Talk
+    - Idle2
+    - Laugh1
+    - Laugh2
+    - Step1
+    - Step2
+    - Step3
+    - Inspect1
+    - Inspect2
+    - Panic1
+    - Panic2
+    - Panic3
+    - Horror1
+    - Horror2
+    - Point1
+    - Point2
+    - Point3
+    - Surprise1
+    - Surprise2
+    - Surprise3
+    - Surprise4
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Walk
+    - Panic
+    - Talk
+    - Laugh
+    - Inspect
+    - Point
+    - PointTalk
+    - Horror
+    - Surprise
 PenguinPatrol:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Idle1
+    - Idle2
+    - Run1
+    - Run2
+    - Run3
+    - Walk1
+    - Walk2
+    - Walk3
+    - Talk1
+    - Talk2
+    - Inspect1
+    - Inspect2
+    - TalkThink1
+    - TalkThink2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - TalkThink
+    - Inspect
+    - StillThink
 Herringway:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
+    - Neutral
+    - TalkCarry1
+    - TalkCarry2
+    - IdleCarry
+    - Recieve1
+    - Recieve2
+    - WalkCarry1
+    - WalkCarry2
+    - WalkCarry3
+    - RunCarry1
+    - RunCarry2
+    - RunCarry3
+    - Walk1
+    - Walk2
+    - Walk3
+    - Idle
+    - Run1
+    - Run2
+    - Run3
+    - Talk1
+    - Talk2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Recieve
+    - IdleCarry
+    - TalkCarry
+    - WalkCarry
+    - RunCarry
 Merle:
   frames:
     - Idle1
