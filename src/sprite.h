@@ -55,7 +55,7 @@ typedef struct SpriteAnimData {
     /* 0x04 */ PAL_PTR* palettesOffset;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
-    /* 0x10 */ SpriteAnimComponent** animListStart;
+    /* 0x10 */ SpriteAnimComponent** animListStart[0];
 } SpriteAnimData; // size = 0x14
 
 typedef struct SpriteInstance {
