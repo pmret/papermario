@@ -6,7 +6,14 @@ void fx_65_update(EffectInstance* effect);
 void fx_65_render(EffectInstance* effect);
 void fx_65_appendGfx(void* effect);
 
-EffectInstance* fx_65_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* fx_65_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    s32 arg5
+) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect65FXData* data;

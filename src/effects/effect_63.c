@@ -9,7 +9,18 @@ void fx_63_update(EffectInstance* effect);
 void fx_63_render(EffectInstance* effect);
 void fx_63_appendGfx(void* effect);
 
-EffectInstance* fx_63_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8, s32 arg9) {
+EffectInstance* fx_63_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    f32 arg5,
+    f32 arg6,
+    f32 arg7,
+    s32 arg8,
+    s32 arg9
+) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
