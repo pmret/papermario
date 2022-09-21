@@ -1,14 +1,15 @@
 # This file describes what to name the frame images, palettes, and animations of sprites when splitting.
 
-# GENERAL NAME CONVENTIONS
+# GENERAL NAME CONVENTIONS:
 # 
 # - Names should be short, one or two words, in PascalCase with no underscores.
 # - Sequential names start counting in decimal from 1, not 0.
 # - If you can't figure out a name, SKIP IT and leave the default one.
 #
 # These apply to all sprite name types.
+#
 
-# ANIMATION NAME CONVENTIONS
+# ANIMATION NAME CONVENTIONS:
 #
 # - Names should be in the simple present tense:
 #     Sleep     GOOD
@@ -25,13 +26,36 @@
 #     Shout
 #     Read      Looking at a piece of paper
 #     Inspect   Looking closely at something else
+#     Jump
+#     Fall
+#     Land
+#
+# - Consider names based on emotions:
+#     Happy
+#     Horror
+#     Afriad
+#     Surprise
+#
+# - In general. simple is better!
+#     Use 'Eat' instead of 'Munch' or 'Consume'
+#
 
-# FRAME NAME CONVENTIONS
+# FRAME NAME CONVENTIONS:
 #
 # - Names must not share names with palettes, unless you know what you're doing.
+#
 # - If frames are only used for certain animations, they should use the same name, suffixed with 1,2,3,...
+#
 # - Frames for Walk/Run animations should be called Step1,Step2,... if they are used by both.
 #   If different frames are used, they should be names Walk1,Walk2,... and Run1,Run2,... respectively.
+#
+# - For sprites which are assembled from many body part components, the names for body part frames may be merely
+#   descriptive, and not related to particular animations.
+#   e.g., Mouth1,Mouth2,... Eyes1,Eyes2,... AngryEyes1,AngryEyes2,...
+#
+# - Body parts that come in left/right pairs are prefixed with L and R, based on their screen orientation.
+#   e.g., RArm is the arm on the right, even though its the character's left arm from their own perspective.
+#
 
 WorldGoombario:
   frames:
@@ -10405,32 +10429,32 @@ GateFlower:
     - Red
     - Yellow
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - Head
+    - HeadDisgust
+    - HeadHappy
+    - HeadEat
+    - LPetal
+    - RPetal
+    - JawPetal
+    - Stem1
+    - Stem2
+    - Stem3
+    - Stem4
   palettes:
     - Blue
     - Red
     - Yellow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Talk
+    - Eat
+    - Chew
+    - HappyDance
+    - Disgust
+    - OpenGate
+    - HappyIdle
+    - HappyTalk
 Petunia:
   frames:
     - Raster00
@@ -10469,29 +10493,29 @@ Petunia:
     - Anim0A
 Posie:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Neutral
+    - Idle1
+    - Idle2
+    - Talk
+    - TalkAngry1
+    - TalkAngry2
+    - Confused1
+    - Confused2
+    - GiveItem1
+    - GiveItem2
+    - GiveItem3
+    - Strain1
+    - Strain2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Talk
+    - TalkAngry
+    - Confused
+    - GiveItem
+    - Strain
 Lily:
   frames:
     - Raster00

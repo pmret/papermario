@@ -248,7 +248,7 @@ EvtScript N(interact_80242C58) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim02, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003B)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003B)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
         EVT_SET(LVar0, EVT_PTR(N(FlowerGuard_ItemChoiceList)))
@@ -257,22 +257,22 @@ EvtScript N(interact_80242C58) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim02, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003C)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003C)
             EVT_CASE_DEFAULT
                 EVT_SET(LVar8, LVar0)
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
                 EVT_CALL(MakeItemEntity, LVar8, 505, 20, -24, 1, 0)
                 EVT_SET(LVar7, LVar0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim03)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Eat)
                 EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim04, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003F)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003F)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x21C, 0)
-                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Anim09, ANIM_GateFlower_Red_Anim08, 0)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim07)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_OpenGate)
                         EVT_CALL(PlaySoundAtCollider, 14, 457, 0)
                         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
@@ -293,17 +293,17 @@ EvtScript N(interact_80242C58) = {
                                 EVT_BREAK_LOOP
                             EVT_END_IF
                         EVT_END_LOOP
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim05)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_HappyDance)
                         EVT_SET(GF_FLO25_GaveRedBerry, 1)
                     EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim04, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003E)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim01)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
                     EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim04, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003E)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim01)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
                     EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim04, ANIM_GateFlower_Red_Anim01, 0, MSG_CH6_003D)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim06)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003D)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Disgust)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, LVar8, -125, 20, 0, 1, 0)
                         EVT_SET(LVar7, LVar0)
@@ -348,10 +348,10 @@ EvtScript N(interact_80242C58) = {
                                 EVT_END_IF
                             EVT_END_LOOP
                         EVT_END_IF
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim01)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
                         EVT_CALL(RemoveItemEntity, LVar7)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim01)
-                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Anim02, ANIM_GateFlower_Red_Anim01, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0)
                 EVT_END_SWITCH
         EVT_END_SWITCH
         EVT_THREAD
@@ -360,9 +360,9 @@ EvtScript N(interact_80242C58) = {
         EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim09, ANIM_GateFlower_Red_Anim08, 0, MSG_CH6_0040)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0, MSG_CH6_0040)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Anim09, ANIM_GateFlower_Red_Anim08, 0, MSG_CH6_0041)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0, MSG_CH6_0041)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -374,7 +374,7 @@ EvtScript N(interact_80242C58) = {
 EvtScript N(init_80243564) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
     EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_HappyDance)
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
         EVT_CALL(RotateModel, 86, 50, 0, -1, 0)
         EVT_CALL(RotateModel, 87, 50, 0, -1, 0)
@@ -400,22 +400,22 @@ StaticNpc N(npcGroup_8024368C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
-        ANIM_GateFlower_Red_Anim01,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
     },
     .tattle = MSG_NpcTattle_RedGateFlower,
 };
