@@ -1,9 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx* D_E00269F0[];
+extern Gfx* D_E00269F8[];
+extern u8 D_E0026A00[];
+
 void gather_energy_pink_init(EffectInstance* effect);
-void gather_energy_pink_render(EffectInstance* effect);
 void gather_energy_pink_update(EffectInstance* effect);
+void gather_energy_pink_render(EffectInstance* effect);
 void gather_energy_pink_appendGfx(void* effect);
 
 void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, s32 duration) {
@@ -65,7 +69,71 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
 void gather_energy_pink_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/gather_energy_pink", gather_energy_pink_update);
+void gather_energy_pink_update(EffectInstance* effect) {
+    GatherEnergyPinkFXData* part = effect->data.gatherEnergyPink;
+    s32 unk_28;
+    s32 unk_2C;
+    f32 sp28;
+    f32 sp2C;
+    f32 sp30;
+    f32 sp34;
+    s32 i;
+
+    part->unk_28--;
+    part->unk_2C++;
+
+    if (part->unk_28 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    unk_28 = part->unk_28;
+    unk_2C = part->unk_2C;
+
+    if (unk_2C < 11) {
+        part->unk_24 = (unk_2C * 255) / 10;
+    }
+
+    if (unk_28 < 6) {
+        part->unk_24 = (unk_28 * 255) / 6;
+    }
+
+    if (unk_28 < 10 && part->unk_00 == 0) {
+        part->unk_1C *= 0.7;
+    }
+
+    if (part->unk_00 == 1) {
+        part->unk_1C += (part->unk_20 + shim_sin_deg(unk_28 * 10) * 0.1 * part->unk_20 - part->unk_1C) * 0.4;
+    } else {
+        part->unk_1C += (part->unk_20 + shim_sin_deg(unk_28 * 10) * 0.1 * part->unk_20 - part->unk_1C) * 0.3;
+    }
+
+    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->posA.x, part->posA.y, part->posA.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
+
+    sp34 = 1.0f / sp34;
+    sp28 *= sp34;
+    sp2C *= sp34;
+    sp30 *= sp34;
+
+    part->posB.x = sp28;
+    part->posB.y = sp2C;
+    part->posB.z = 0;
+
+    for (i = 0; i < effect->numParts; i++, part++) {
+        part->unk_30 += part->unk_34;
+        part->unk_38 += part->unk_3C;
+        part->unk_40 += part->unk_44;
+        part->unk_48 += part->unk_4C;
+        part->unk_58 += part->unk_5C;
+        part->unk_50 += part->unk_54;
+        if (part->unk_40 < 0) {
+            part->unk_40 += 256;
+        }
+        if (part->unk_48 < 0) {
+            part->unk_48 += 256;
+        }
+    }
+}
 
 void gather_energy_pink_render(EffectInstance* effect) {
     RenderTask renderTask;
@@ -80,4 +148,72 @@ void gather_energy_pink_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/gather_energy_pink", gather_energy_pink_appendGfx);
+void gather_energy_pink_appendGfx(void* effect) {
+    GatherEnergyPinkFXData* part = ((EffectInstance*)effect)->data.gatherEnergyPink;
+    s32 unk_00 = part->unk_00;
+    Gfx* dlist = D_E00269F8[unk_00];
+    Gfx* dlist2 = D_E00269F0[unk_00];
+    Camera* camera = &gCameras[gCurrentCameraID];
+    Matrix4f sp20;
+    Matrix4f sp60;
+    Matrix4f unused;
+    u16 perspNorm;
+    s32 alpha;
+    s32 idx;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, dlist);
+
+    shim_guTranslateF(sp20, part->posB.x, part->posB.y, part->posB.z);
+    shim_guScaleF(sp60, part->unk_1C, part->unk_1C, 1.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guPerspectiveF(sp60, &perspNorm, unk_00 == 1 ? 130.0f : 30.0f, (f32) camera->viewportW / camera->viewportH, 4.0f, 16384.0f, 1.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+
+    switch (unk_00) {
+        case 1:
+            shim_guTranslateF(sp20, 0.0f, 0.0f, -70.0f);
+            break;
+        case 0:
+            shim_guTranslateF(sp20, 0.0f, 0.0f, -80.0f);
+            break;
+    }
+
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    idx = part->unk_2C * 3;
+    alpha = part->unk_24;
+
+    for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
+        s32 tempX;
+        s32 tempY;
+        s32 tempX2;
+        s32 tempY2;
+
+        idx += 30;
+        idx %= 24;
+
+        gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha / 2);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0026A00[idx], 0, D_E0026A00[idx + 2], alpha);
+
+        tempX = part->unk_30;
+        tempY = part->unk_40;
+        tempX2 = part->unk_38;
+        tempY2 = part->unk_48;
+
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, tempX, tempY, tempX + 256, tempY + 256);
+        gDPSetTileSize(gMasterGfxPos++, 1, tempX2, tempY2, tempX2 + 256, tempY2 + 256);
+        gSPDisplayList(gMasterGfxPos++, dlist2);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gDPPipeSync(gMasterGfxPos++);
+}
