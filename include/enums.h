@@ -3374,7 +3374,6 @@ enum ActorEventFlags {
     ACTOR_EVENT_FLAG_80000000         = 0x80000000,
 };
 
-// TODO alex struct
 enum PartnerAnimIndices {
     PARTNER_ANIM_INDEX_STILL      = 0x0,
     PARTNER_ANIM_INDEX_WALK       = 0x1,

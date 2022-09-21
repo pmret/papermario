@@ -398,7 +398,7 @@ WorldPartner wPartners[12] = {
         .update = &world_twink_update,
         .useAbility = &world_twink_use_ability,
         .putAway = &world_twink_put_away,
-        .idle = ANIM_Twink_Anim01,
+        .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -409,18 +409,130 @@ f32 wSavedPartnerPosY = 0;
 f32 wSavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
-    {{0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000}},
-    {{0x00010000, 0x00010002, 0x00010004, 0x00010005, 0x00010001, 0x00010001, 0x00010003, 0x00010008, 0x00010007}},
-    {{0x00020000, 0x00020004, 0x00020006, 0x00020007, 0x00020000, 0x00020003, 0x00020005, 0x0002000D, 0x0002000C}},
-    {{0x00030000, 0x00030005, 0x00030009, 0x0003000A, 0x00030000, 0x00030003, 0x00030007, 0x0003000E, 0x0003000D}},
-    {{0x00040000, 0x00040002, 0x00040008, 0x00040002, 0x00040002, 0x00040001, 0x00040003, 0x00040006, 0x00040005}},
-    {{0x009D0000, 0x009D0002, 0x009D0004, 0x009D0005, 0x009D0001, 0x009D0001, 0x009D0003, 0x009D0008, 0x009D0001}},
-    {{0x00060000, 0x00060002, 0x00060002, 0x00060002, 0x00060000, 0x00060001, 0x00060003, 0x00060004, 0x00060007}},
-    {{0x00070000, 0x00070002, 0x00070002, 0x00070002, 0x00070000, 0x00070001, 0x00070003, 0x00070004, 0x00070008}},
-    {{0x00080000, 0x00080005, 0x00080005, 0x00080005, 0x00080000, 0x00080001, 0x00080007, 0x00080009, 0x0008000A}},
-    {{0x00050000, 0x00050002, 0x00050002, 0x00050002, 0x00050000, 0x00050001, 0x00050003, 0x00050004, 0x0005000C}},
-    {{0x009E0000, 0x009E0005, 0x009E0012, 0x009E0013, 0x009E0001, 0x009E0001, 0x009E0007, 0x009E000B, 0x009E0001}},
-    {{0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020}},
+    [PARTNER_NONE] {
+        // all values are blank
+    },
+    [PARTNER_GOOMBARIO] {{
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Walk,
+        ANIM_WorldGoombario_Jump,
+        ANIM_WorldGoombario_Fall,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Run,
+        ANIM_WorldGoombario_Talk,
+        ANIM_WorldGoombario_Hurt
+    }},
+    [PARTNER_KOOPER] {{
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Walk,
+        ANIM_WorldKooper_Jump,
+        ANIM_WorldKooper_Fall,
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Idle,
+        ANIM_WorldKooper_Run,
+        ANIM_WorldKooper_Talk,
+        ANIM_WorldKooper_Hurt
+    }},
+    [PARTNER_BOMBETTE] {{
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Walk,
+        ANIM_WorldBombette_Jump,
+        ANIM_WorldBombette_Fall,
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Idle,
+        ANIM_WorldBombette_Run,
+        ANIM_WorldBombette_Talk,
+        ANIM_WorldBombette_Hurt
+    }},
+    [PARTNER_PARAKARRY] {{
+        ANIM_WorldParakarry_Anim00,
+        ANIM_WorldParakarry_Anim02,
+        ANIM_WorldParakarry_Anim08,
+        ANIM_WorldParakarry_Anim02,
+        ANIM_WorldParakarry_Anim02,
+        ANIM_WorldParakarry_Anim01,
+        ANIM_WorldParakarry_Anim03,
+        ANIM_WorldParakarry_Anim06,
+        ANIM_WorldParakarry_Anim05
+    }},
+    [PARTNER_GOOMPA] {{
+        ANIM_Goompa_Anim00,
+        ANIM_Goompa_Anim02,
+        ANIM_Goompa_Anim04,
+        ANIM_Goompa_Anim05,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim01,
+        ANIM_Goompa_Anim03,
+        ANIM_Goompa_Anim08,
+        ANIM_Goompa_Anim01
+    }},
+    [PARTNER_WATT] {{
+        ANIM_WorldWatt_Anim00,
+        ANIM_WorldWatt_Anim02,
+        ANIM_WorldWatt_Anim02,
+        ANIM_WorldWatt_Anim02,
+        ANIM_WorldWatt_Anim00,
+        ANIM_WorldWatt_Anim01,
+        ANIM_WorldWatt_Anim03,
+        ANIM_WorldWatt_Anim04,
+        ANIM_WorldWatt_Anim07
+    }},
+    [PARTNER_SUSHIE] {{
+        ANIM_WorldSushie_Anim00,
+        ANIM_WorldSushie_Anim02,
+        ANIM_WorldSushie_Anim02,
+        ANIM_WorldSushie_Anim02,
+        ANIM_WorldSushie_Anim00,
+        ANIM_WorldSushie_Anim01,
+        ANIM_WorldSushie_Anim03,
+        ANIM_WorldSushie_Anim04,
+        ANIM_WorldSushie_Anim08
+    }},
+    [PARTNER_LAKILESTER] {{
+        ANIM_WorldLakilester_Anim00,
+        ANIM_WorldLakilester_Anim05,
+        ANIM_WorldLakilester_Anim05,
+        ANIM_WorldLakilester_Anim05,
+        ANIM_WorldLakilester_Anim00,
+        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Anim07,
+        ANIM_WorldLakilester_Anim09,
+        ANIM_WorldLakilester_Anim0A
+    }},
+    [PARTNER_BOW] {{
+        ANIM_WorldBow_Anim00,
+        ANIM_WorldBow_Anim02,
+        ANIM_WorldBow_Anim02,
+        ANIM_WorldBow_Anim02,
+        ANIM_WorldBow_Anim00,
+        ANIM_WorldBow_Anim01,
+        ANIM_WorldBow_Anim03,
+        ANIM_WorldBow_Anim04,
+        ANIM_WorldBow_Anim0C
+    }},
+    [PARTNER_GOOMBARIA] {{
+        ANIM_Goombaria_Anim00,
+        ANIM_Goombaria_Anim05,
+        ANIM_Goombaria_Anim12,
+        ANIM_Goombaria_Anim13,
+        ANIM_Goombaria_Anim01,
+        ANIM_Goombaria_Anim01,
+        ANIM_Goombaria_Anim07,
+        ANIM_Goombaria_Anim0B,
+        ANIM_Goombaria_Anim01
+    }},
+    [PARTNER_TWINK] {{
+        ANIM_Twink_Still,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Talk,
+        ANIM_Twink_Hurt
+    }},
 };
 
 f32 D_800F84F8 = 0.0f;
@@ -767,7 +879,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
-                    wPartnerNpc->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FLY];
+                    wPartnerNpc->currentAnim = gPartnerAnimations[D_8010CFD8].fly;
                     enable_player_input();
                     break;
             }
@@ -1102,7 +1214,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+    partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
     partner->collisionChannel = 0x10000;
     partner->jumpVelocity = 0.0f;
@@ -1206,7 +1318,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+    partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
     partner->collisionChannel = 0x10000;
     partner->flags |= NPC_FLAG_100;
@@ -1693,7 +1805,7 @@ s32 partner_put_away(Npc* partner) {
             partner->moveSpeed = partner->planarFlyDist / divisor;
             tempMoveToY = tempPosY - tempMoveToY;
             partner->jumpVelocity = (tempMoveToY + partner->jumpScale * partner->duration * partner->duration * 0.5f) / partner->duration;
-            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_JUMP];
+            partner->currentAnim = gPartnerAnimations[D_8010CFD8].jump;
             enable_npc_blur(partner);
             D_8010CFC8 = 1;
             break;
@@ -1701,7 +1813,7 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpVelocity -= partner->jumpScale;
             partner->pos.y += partner->jumpVelocity;
             if (partner->jumpVelocity <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FALL];
+                partner->currentAnim = gPartnerAnimations[D_8010CFD8].fall;
             }
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             tempDuration = partner->duration;
@@ -1717,7 +1829,7 @@ s32 partner_put_away(Npc* partner) {
             }
             break;
         case 2:
-            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FLY];
+            partner->currentAnim = gPartnerAnimations[D_8010CFD8].fly;
             partner->jumpVelocity = 0.0f;
             partner->pos.y = partner->moveToPos.y;
             disable_npc_blur(partner);
@@ -2023,7 +2135,7 @@ void partner_move_to_goal(Npc* partner, s32 arg1) {
                         partner->jumpVelocity -= partner->jumpScale;
                         partner->pos.y += partner->jumpVelocity;
                         if (partner->jumpVelocity <= 0.0f) {
-                            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FALL];
+                            partner->currentAnim = gPartnerAnimations[D_8010CFD8].fall;
                         }
 
                         if (partner->jumpVelocity <= 0.0f) {
@@ -2068,7 +2180,7 @@ void partner_move_to_goal(Npc* partner, s32 arg1) {
                 func_8003D660(partner, var_a1);
             } else {
                 partner->flags &= ~NPC_FLAG_40;
-                partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+                partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
                 D_8010CFCE++;
             }
             break;

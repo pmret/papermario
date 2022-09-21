@@ -29,6 +29,8 @@
 #     Jump
 #     Fall
 #     Land
+#     Hurt
+#     Injured
 #
 # - Consider names based on emotions:
 #     Happy
@@ -1506,16 +1508,16 @@ Twink:
     - Raster0A
     - Raster0B
     - Raster0C
-    - Raster0D
-    - Raster0E
+    - ShoutJoy1
+    - ShoutJoy2
     - Raster0F
     - Raster10
     - Raster11
     - Raster12
     - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
+    - Wink1
+    - Wink2
+    - Wink3
     - Raster17
     - Raster18
     - Raster19
@@ -1526,22 +1528,22 @@ Twink:
     - Raster1E
     - Raster1F
     - Raster20
-    - Raster21
-    - Raster22
+    - Shout1
+    - Shout2
     - Raster23
     - Raster24
     - Raster25
     - Raster26
     - Raster27
     - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
+    - LiftBook
+    - CarryBook
+    - BookHalfOpen
+    - BookOpen
+    - BookClosed
     - Raster2E
-    - Raster2F
-    - Raster30
+    - Hurt1
+    - Hurt2
   palettes:
     - Default
     - Unused1
@@ -1564,39 +1566,39 @@ Twink:
     - Unused3_Shocked
     - Unused4_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Sad
+    - Lean
+    - IdleBook
     - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - SadAlt
+    - CarryBook
+    - Angry
+    - Talk
+    - Shout
     - Anim0B
     - Anim0C
     - Anim0D
     - Anim0E
-    - Anim0F
+    - ShoutJoy
     - Anim10
     - Anim11
     - Anim12
-    - Anim13
+    - Wink
     - Anim14
     - Anim15
     - Anim16
-    - Anim17
-    - Anim18
+    - Wink
+    - WinkTalk
     - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
+    - Back
+    - Angry
+    - TakeBook
+    - OpenBook
+    - ReadBook
+    - CloseBook
+    - Hurt
 JrTroopa:
   variations:
     - Variant00
