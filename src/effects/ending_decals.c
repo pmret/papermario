@@ -1,14 +1,97 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09001E40;
+extern Gfx* D_E00685B0[];
+extern Gfx* D_E00685BC[];
+extern Gfx* D_E00685F4[];
+
+void ending_decals_init(EffectInstance* effect);
+void ending_decals_update(EffectInstance* effect);
+void ending_decals_render(EffectInstance* effect);
 void ending_decals_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/ending_decals", ending_decals_main);
+void ending_decals_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance** outEffect) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+    EndingDecalsFXData* data;
+    s32 numParts = 1;
 
-void ending_decals_init(void) {
+    bp.init = ending_decals_init;
+    bp.update = ending_decals_update;
+    bp.renderWorld = ending_decals_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_ENDING_DECALS;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->numParts = numParts;
+    data = effect->data.endingDecals = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.endingDecals != NULL);
+
+    data->unk_00 = arg0;
+    data->pos.x = arg1;
+    data->pos.y = arg2;
+    data->pos.z = arg3;
+    data->unk_18 = 255;
+    data->unk_14 = arg4;
+    data->unk_10 = arg4;
+    data->unk_1C = 100;
+    data->unk_20 = 0;
+
+    switch (arg0) {
+        case 0:
+        case 1:
+            data->unk_24 = 0;
+            data->unk_25 = 0;
+            data->unk_26 = 0;
+            data->unk_27 = 255;
+            data->unk_28 = 255;
+            data->unk_29 = 255;
+            break;
+        case 2:
+        default:
+            data->unk_24 = 255;
+            data->unk_25 = 255;
+            data->unk_26 = 255;
+            data->unk_27 = 225;
+            data->unk_28 = 255;
+            data->unk_29 = 235;
+            break;
+    }
+
+    *outEffect = effect;
 }
 
-INCLUDE_ASM(s32, "effects/ending_decals", ending_decals_update);
+void ending_decals_init(EffectInstance* effect) {
+}
+
+void ending_decals_update(EffectInstance* effect) {
+    EndingDecalsFXData* data = effect->data.endingDecals;
+
+    if (effect->flags & 0x10) {
+        effect->flags &= ~0x10;
+        data->unk_1C = 10;
+    }
+
+    if (data->unk_1C < 11) {
+        data->unk_1C--;
+    }
+
+    data->unk_20++;
+
+    if (data->unk_1C < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    if (data->unk_1C < 10) {
+        data->unk_18 -= 25;
+        if (data->unk_18 < 0) {
+            data->unk_18 = 0;
+        }
+    }
+}
 
 void ending_decals_render(EffectInstance* effect) {
     EndingDecalsFXData* data = effect->data.endingDecals;
@@ -29,4 +112,49 @@ void ending_decals_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/ending_decals", ending_decals_appendGfx);
+void ending_decals_appendGfx(void* effect) {
+    EndingDecalsFXData* data = ((EffectInstance*)effect)->data.endingDecals;
+    Gfx* dlist1;
+    Gfx* dlist2;
+    u32 unk_20;
+    s32 alpha;
+    f64 temp_f64;
+    Matrix4f sp20;
+
+    unk_20 = data->unk_20;
+    dlist1 = D_E00685F4[data->unk_00];
+    dlist2 = D_E00685B0[data->unk_00];
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    temp_f64 = data->unk_18;
+    if (unk_20 % 2 == 0) {
+        alpha = temp_f64 * 0.97;
+    } else {
+        alpha = temp_f64;
+    }
+
+    gDPSetEnvColor(gMasterGfxPos++, 26, 121, 29, 158);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_BAYER);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+    gSPDisplayList(gMasterGfxPos++, dlist1);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_24, data->unk_25, data->unk_26, alpha);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_27, data->unk_28, data->unk_29, 0);
+
+    if (dlist2 == &D_09001E40) {
+        dlist2 = D_E00685BC[unk_20 % 14];
+    }
+
+    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+    gDPPipeSync(gMasterGfxPos++);
+}

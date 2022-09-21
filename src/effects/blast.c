@@ -103,8 +103,8 @@ void blast_appendGfx(void* effect) {
     dlist = D_090017B0;
     dlist2 = D_09001300;
 
-    temp_f4 = data->unk_20;
-    temp_f2 = temp_f4;
+    temp_f2 = data->unk_20;
+    temp_f4 = temp_f2;
     alpha = (temp_f2 - temp_f4) * 256.0f;
 
     gDPPipeSync(gMasterGfxPos++);

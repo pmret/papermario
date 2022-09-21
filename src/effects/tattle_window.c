@@ -64,7 +64,7 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
     part->unk_00 = arg0;
     part->unk_14 = 0;
     if (arg5 <= 0) {
-        part->unk_10 = 0x3E8;
+        part->unk_10 = 1000;
     } else {
         part->unk_10 = arg5;
     }
