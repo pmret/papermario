@@ -39,25 +39,25 @@ void ending_decals_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, Effect
     data->unk_1C = 100;
     data->unk_20 = 0;
 
-    if (arg0 >= 0) {
-        if (arg0 < 2) {
+    switch (arg0) {
+        case 0:
+        case 1:
             data->unk_24 = 0;
             data->unk_25 = 0;
             data->unk_26 = 0;
             data->unk_27 = 255;
             data->unk_28 = 255;
             data->unk_29 = 255;
-        } else {
-            goto block_6;
-        }
-    } else {
-block_6:
-        data->unk_24 = 255;
-        data->unk_25 = 255;
-        data->unk_26 = 255;
-        data->unk_27 = 225;
-        data->unk_28 = 255;
-        data->unk_29 = 235;
+            break;
+        case 2:
+        default:
+            data->unk_24 = 255;
+            data->unk_25 = 255;
+            data->unk_26 = 255;
+            data->unk_27 = 225;
+            data->unk_28 = 255;
+            data->unk_29 = 235;
+            break;
     }
 
     *outEffect = effect;

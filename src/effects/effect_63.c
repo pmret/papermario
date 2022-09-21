@@ -131,7 +131,7 @@ void fx_63_update(EffectInstance* effect) {
         part->unk_20 = 0x10;
     }
 
-    if (part->unk_20 < 0x3E8) {
+    if (part->unk_20 < 1000) {
         part->unk_20--;
     }
 
