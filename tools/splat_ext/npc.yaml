@@ -1495,14 +1495,14 @@ Twink:
     - Variant03
     - Variant04
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Idle1
+    - Idle2
+    - IdleAngry1
+    - IdleAngry2
+    - IdleAngry3
+    - Talk
+    - Shout1
+    - Shout2
     - Raster08
     - Raster09
     - Raster0A
@@ -1513,8 +1513,8 @@ Twink:
     - Raster0F
     - Raster10
     - Raster11
-    - Raster12
-    - Raster13
+    - Carry1
+    - Carry2
     - Wink1
     - Wink2
     - Wink3
@@ -1527,12 +1527,12 @@ Twink:
     - Raster1D
     - Raster1E
     - Raster1F
-    - Raster20
-    - Shout1
-    - Shout2
-    - Raster23
-    - Raster24
-    - Raster25
+    - IdleSad1
+    - IdleSad2
+    - TalkAngry
+    - IdleLean1
+    - IdleLean2
+    - TalkLean
     - Raster26
     - Raster27
     - Raster28
@@ -1576,22 +1576,22 @@ Twink:
     - CarryBook
     - Angry
     - Talk
+    - TalkAngry
+    - TalkLean
     - Shout
-    - Anim0B
-    - Anim0C
     - Anim0D
     - Anim0E
     - ShoutJoy
     - Anim10
     - Anim11
     - Anim12
-    - Wink
+    - IdleWink
     - Anim14
     - Anim15
     - Anim16
     - Wink
-    - WinkTalk
-    - Anim19
+    - TalkWink
+    - Carry
     - Back
     - Angry
     - TakeBook

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/npc/ChuckQuizmo.h"
 
 #ifndef CHUCK_QUIZMO_NPC_ID
 #  error CHUCK_QUIZMO_NPC_ID must be defined for QuizmoData.inc.c
@@ -650,7 +651,7 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, FALSE)
-    EVT_CALL(SetNpcSprite, -1, 0x00AF0001)
+    EVT_CALL(SetNpcSprite, -1, ANIM_ChuckQuizmo_Idle)
     EVT_CALL(N(Quizmo_RenderInit))
     EVT_RETURN
     EVT_END
@@ -690,7 +691,7 @@ EvtScript N(EVS_Quizmo_Npc_AI) = {
 
 // primary quizmo NpcSettings
 NpcSettings N(Quizmo_NpcSettings) = {
-    .defaultAnim = 0x00AF0001,
+    .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
     .radius = 28,
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
@@ -702,7 +703,7 @@ NpcSettings N(Quizmo_NpcSettings) = {
 
 // alternate (unused?) variant of quizmo with AI and NPC_FLAG_100 unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
-    .defaultAnim = 0x00AF0001,
+    .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
     .radius = 28,
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
