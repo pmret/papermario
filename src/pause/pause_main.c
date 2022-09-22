@@ -71,9 +71,9 @@ u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6,
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
-        ANIM_Goombaria_Anim00,
-        ANIM_Goombaria_Anim01,
-        ANIM_Goombaria_Anim0B,
+        ANIM_Goombaria_Still,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Talk,
         ANIM_LIST_END
     },
     {

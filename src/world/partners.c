@@ -383,7 +383,7 @@ WorldPartner wPartners[12] = {
         .update = &world_goombaria_update,
         .useAbility = &world_goombaria_use_ability,
         .putAway = &world_goombaria_put_away,
-        .idle = ANIM_Goombaria_Anim01,
+        .idle = ANIM_Goombaria_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -512,15 +512,15 @@ PartnerAnimations gPartnerAnimations[] = {
         ANIM_WorldBow_Anim0C
     }},
     [PARTNER_GOOMBARIA] {{
-        ANIM_Goombaria_Anim00,
-        ANIM_Goombaria_Anim05,
-        ANIM_Goombaria_Anim12,
-        ANIM_Goombaria_Anim13,
-        ANIM_Goombaria_Anim01,
-        ANIM_Goombaria_Anim01,
-        ANIM_Goombaria_Anim07,
-        ANIM_Goombaria_Anim0B,
-        ANIM_Goombaria_Anim01
+        ANIM_Goombaria_Still,
+        ANIM_Goombaria_Walk,
+        ANIM_Goombaria_Jump,
+        ANIM_Goombaria_Fall,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Run,
+        ANIM_Goombaria_Talk,
+        ANIM_Goombaria_Idle
     }},
     [PARTNER_TWINK] {{
         ANIM_Twink_Still,

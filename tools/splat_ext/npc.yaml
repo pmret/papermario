@@ -3,6 +3,7 @@
 # GENERAL NAME CONVENTIONS:
 # 
 # - Names should be short, one or two words, in PascalCase with no underscores.
+# - Prefer names to describe the actions or states depicted rather than how they are used.
 # - Sequential names start counting in decimal from 1, not 0.
 # - If you can't figure out a name, SKIP IT and leave the default one.
 # - If there are duplicate animations and you can't figure out how they're different
@@ -583,7 +584,7 @@ BattleKooper:
     - Pray2
     - BurnHurt1
     - BurnHurt2
-    - BurnDead
+    - BurnStill
     - Think
     - Sad
   palettes:
@@ -616,7 +617,7 @@ BattleKooper:
     - LowerShell
     - Hurt
     - BurnHurt
-    - BurnDead
+    - BurnStill
     - Talk
     - Shout
     - Celebrate
@@ -717,8 +718,8 @@ BattleBombette:
     - Backfire2
     - Hurt
     - BurnHurt
-    - BurnDead
-    - BurnDeadAlt
+    - BurnStill
+    - BurnStillAlt
     - Block
     - Talk
     - CelebrateLoop
@@ -764,7 +765,7 @@ BattleParakarry:
     - Injured2
     - BurnHurt1
     - BurnHurt2
-    - BurnDead
+    - BurnStill
   palettes:
     - Default
     - Poisoned
@@ -788,8 +789,8 @@ BattleParakarry:
     - HurtStill
     - Hurt
     - BurnHurt
-    - BurnDead
-    - BurnDeadAlt
+    - BurnStill
+    - BurnStillAlt
     - Talk
     - Celebrate
     - FlyFast
@@ -884,9 +885,9 @@ BattleBow:
     - Fan
     - Hurt
     - BurnHurt
-    - BurnDead
+    - BurnStill
     - BurnHurtAlt
-    - BurnDeadAlt
+    - BurnStillAlt
     - Injured
     - Block
 BattleWatt:
@@ -918,7 +919,7 @@ BattleWatt:
     - BurnHurt1
     - BurnHurt2
     - BurnHurt3
-    - BurnDead
+    - BurnStill
     - Injured1
     - Injured2
     - Injured3
@@ -950,7 +951,7 @@ BattleWatt:
     - Think
     - Hurt
     - BurnHurt
-    - BurnDead
+    - BurnStill
     - Injured
     - Bolts1
     - Bolts2
@@ -976,7 +977,7 @@ BattleSushie:
     - Hurt2
     - BurnHurt1
     - BurnHurt2
-    - BurnDead
+    - BurnStill
     - Injured1
     - Injured2
     - Injured3
@@ -1009,7 +1010,7 @@ BattleSushie:
     - SpitArc
     - Hurt
     - BurnHurt
-    - BurnDead
+    - BurnStill
     - Injured
     - Celebrate
     - Think
@@ -1094,7 +1095,7 @@ BattleLakilester:
     - Hurt
     - Dead
     - BurnHurt
-    - BurnDead
+    - BurnStill
     - StillAlt
     - LiftSpiny
     - HoldSpiny
@@ -9057,9 +9058,9 @@ Goompa:
     - WearyIdle1
     - WearyIdle2
     - WearyIdle3
-    - WearyWalk1
-    - WearyWalk2
-    - WearyWalk3
+    - WearyStep1
+    - WearyStep2
+    - WearyStep3
     - Rummage1
     - Rummage2
     - Rummage3
@@ -9081,9 +9082,6 @@ Goompa:
     - WearyWalk
     - Rummage
 Goombaria:
-  variations:
-    - Variant00
-    - Variant01
   frames:
     - Raster00
     - Raster01
@@ -9117,103 +9115,103 @@ Goombaria:
     - Raster1D
     - Raster1E
     - Raster1F
-    - Raster20
-    - Raster21
+    - Tear1
+    - Tear2
     - Raster22
     - Raster23
   palettes:
     - Default
     - Tear
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
+    - Still
+    - Idle
+    - SadIdle
+    - LookUp
+    - Stand
+    - Walk
+    - SadWalk
+    - Run
+    - SadRun
+    - JumpEyesClosed
+    - Hurt
+    - Talk
+    - SadTalk
+    - LookUpTalk
+    - Celebrate
+    - LeanOver
+    - Inspect
+    - Shock
+    - Jump
+    - Fall
 Gooma:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Talk1
+    - Talk2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 Goompapa:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Talk1
+    - Talk2
+    - Angry
+    - AngryTalk1
+    - AngryTalk2
+    - Shock1
+    - Shock2
+    - Step3
+    - LookUpTalk
+    - LookUp1
+    - LookUp2
+    - SideEye
+    - TapFoot1
+    - TapFoot2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - LookUp
+    - LookUpTalk
+    - Angry
+    - AngryTalk
+    - Shock
+    - SideEye
+    - TapFoot
 Goomama:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Talk1
+    - Talk2
+    - Talk3
+    - Step3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 TheMaster:
   variations:
     - Variant00
@@ -9994,9 +9992,9 @@ BattleKolorado:
     - Injured
     - Hurt
     - SadHead
-    - Walk1
-    - Walk2
-    - Walk3
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
   animations:
