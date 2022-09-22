@@ -56,8 +56,8 @@ s32 D_8029C890[][5] = {
     },
     [PARTNER_GOOMBARIO] {
         ANIM_BattleGoombario_Run,
-        ANIM_BattleGoombario_Sleep,
-        ANIM_BattleGoombario_Sleep,
+        ANIM_BattleGoombario_CloseEyes,
+        ANIM_BattleGoombario_CloseEyes,
         ANIM_BattleGoombario_Run,
         ANIM_BattleGoombario_Idle,
     },
@@ -101,8 +101,8 @@ s32 D_8029C890[][5] = {
     },
     [PARTNER_LAKILESTER] {
         ANIM_BattleLakilester_Run,
-        ANIM_BattleLakilester_Anim09,
-        ANIM_BattleLakilester_Anim09,
+        ANIM_BattleLakilester_Pray,
+        ANIM_BattleLakilester_Pray,
         ANIM_BattleLakilester_Run,
         ANIM_BattleLakilester_Idle,
     },
