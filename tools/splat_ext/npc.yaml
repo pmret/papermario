@@ -1605,85 +1605,82 @@ Twink:
     - CloseBook
     - Hurt
 JrTroopa:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Step3
     - Raster05
     - Raster06
     - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
+    - Jump
+    - Midair
+    - Fall
+    - PointTalk
+    - PointNeutral
+    - PointTapFoot
+    - EnterEgg1
+    - EnterEgg2
+    - EggNeutral
+    - EnterEgg4
     - Raster12
     - Raster13
     - Raster14
     - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
+    - BurnStill
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
     - Raster1E
     - Raster1F
     - Raster20
     - Raster21
     - Raster22
     - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
+    - ScamperBack1
+    - ScamperBack2
+    - Defeated1
+    - Defeated2
+    - Defeated3
+    - Defeated4
+    - Charge1
+    - Charge2
+    - Charge3
     - Raster2D
     - Raster2E
     - Raster2F
-    - Raster30
-    - Raster31
+    - BurnHurt1
+    - BurnHurt2
     - Raster32
     - Raster33
-    - Raster34
+    - EggIdle
     - Raster35
     - Raster36
     - Raster37
     - Raster38
     - Raster39
-    - Raster3A
-    - Raster3B
-    - Raster3C
-    - Raster3D
-    - Raster3E
-    - Raster3F
-    - Raster40
-    - Raster41
-    - Raster42
-    - Raster43
-    - Raster44
-    - Raster45
-    - Raster46
-    - Raster47
-    - Raster48
-    - Raster49
-    - Raster4A
+    - StepBack1
+    - StepBack2
+    - StepBack3
+    - ClimbUpBack1
+    - ClimbUpBack2
+    - ClimbUpBack3
+    - ChargeArmsUp1
+    - ChargeArmsUp2
+    - ChargeArmsUp3
+    - ChargeTripped1
+    - ChargeTripped2
+    - ChargeTripped3
+    - PointIdle
+    - Punch1
+    - Punch2
+    - Punch3
+    - Punch4
   palettes:
     - Default
     - Ashen
@@ -1695,36 +1692,36 @@ JrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - PointStill
+    - EggStill
+    - Idle
+    - EggIdle
     - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
+    - PointIdle
+    - Walk
+    - WalkBack
+    - Run
+    - Charge
+    - ChargeArmsUp
+    - ChargeTripped
+    - RunBack
+    - Jump
+    - Midair
+    - Fall
     - Anim11
-    - Anim12
+    - EnterEgg
     - Anim13
-    - Anim14
+    - Defeated
     - Anim15
     - Anim16
     - Anim17
     - Anim18
     - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
+    - PointTalk
+    - PointTapFoot
+    - Sleep
+    - Dizzy
     - Anim1E
     - Anim1F
     - Anim20
@@ -1732,13 +1729,13 @@ JrTroopa:
     - Anim22
     - Anim23
     - Anim24
-    - Anim25
-    - Anim26
+    - ScamperBack
+    - ClimbUpBack
     - Anim27
-    - Anim28
-    - Anim29
+    - BurnHurt
+    - BurnStill
     - Anim2A
-    - Anim2B
+    - Punch
 SpikedJrTroopa:
   variations:
     - Variant00
@@ -1749,30 +1746,30 @@ SpikedJrTroopa:
     - Raster02
     - Raster03
     - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Sleep1
+    - Sleep2
+    - Sleep3
     - Raster08
     - Raster09
     - Raster0A
     - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
+    - Land1
+    - Land2
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - PointTalk
+    - PointNeutral
+    - Angry1
+    - Angry2
+    - Angry3
+    - BurnHurt1
+    - BurnHurt2
+    - PointIdle
   palettes:
     - Default
     - Ashen
@@ -1784,23 +1781,23 @@ SpikedJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
+    - Still
+    - PointStill
+    - Idle
+    - PointIdle
+    - Walk
+    - Run
+    - Jump
+    - Midair
+    - Fall
+    - Land
+    - Angry
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Dizzy
+    - PointTalk
 SpikedParaJrTroopa:
   variations:
     - Variant00
@@ -9083,42 +9080,42 @@ Goompa:
     - Rummage
 Goombaria:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
+    - Step1
+    - Step2
+    - Step3
+    - Hurt
+    - JumpEyesClosed
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk1
+    - Talk2
+    - Jump
+    - Fall
+    - Celebrate1
+    - Celebrate2
+    - LeanOver1
+    - LeanOver2
+    - LeanOver3
+    - Inspect1
+    - Inspect2
+    - Blink1
+    - Blink2
+    - LookUp1
+    - LookUp2
+    - LookUp3
+    - LookUpTalk1
+    - SadTalk1
+    - SadStep1
+    - SadStep2
+    - SadStep3
+    - SadTalk2
+    - SadTalk3
+    - LookUpTalk2
     - Tear1
     - Tear2
-    - Raster22
-    - Raster23
+    - Shock1
+    - Shock2
   palettes:
     - Default
     - Tear
@@ -9456,164 +9453,164 @@ Lee:
     - Anim0F
 Merlon:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - HappyStep1
+    - HappyStep2
+    - HappyStep3
+    - Think1
+    - Gather1
+    - Gather2
+    - RaiseArms1
+    - RaiseArms2
+    - RaiseArms3
+    - Think2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Sprint
+    - Think
+    - CastSpell
+    - Gather1
+    - Gather2
+    - RaiseArms
+    - LowerArms
 ChetRippo:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Blink
+    - Idle1
+    - Idle2
+    - Talk
+    - Spread1
+    - Spread2
+    - Shake1
+    - Shake2
+    - Swim1
+    - Swim2
+    - Swim3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Swim
+    - SwimFaster
+    - Talk
+    - Spread
+    - ShakeSlow
+    - ShakeFast
+    - Revert
 Rowf:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - Idle1
+    - Idle2
+    - Talk1
+    - Talk2
+    - WaveOff1
+    - WaveOff2
+    - WaveOff3
+    - WaveOff4
+    - Step1
+    - Step2
+    - Cheer1
+    - Cheer2
+    - Think1
+    - Think2
+    - PackedIdle1
+    - PackedIdle2
+    - PackedStep1
+    - PackedStep2
+    - PackedTalk1
+    - PackedTalk2
+    - PackedCheer1
+    - PackedCheer2
   palettes:
     - Default
     - Packed
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Cheer
+    - Think
+    - WaveOff
+    - PackedStill
+    - PackedIdle
+    - PackedWalk
+    - PackedRun
+    - PackedTalk
+    - PackedCheer
 MinhT:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Talk
+    - Step1
+    - Step2
+    - Step3
+    - Cheer1
+    - Cheer2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Cheer
 RussT:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Lecture1
+    - Lecture2
+    - Think1
+    - Think2
+    - AdjustGlasses1
+    - AdjustGlasses2
+    - Disappointed1
+    - Disappointed2
+    - Panic1
+    - Panic2
+    - Panic3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Think
+    - Lecture
+    - AdjustGlasses
+    - Panic
+    - Disappointed
 TayceT:
   frames:
     - Idle1

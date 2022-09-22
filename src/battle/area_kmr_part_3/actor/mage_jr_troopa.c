@@ -32,19 +32,19 @@ s32 N(idleAnimations_8022A594)[] = {
 };
 
 s32 N(idleAnimations_8022A5D8)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Anim03,
-    STATUS_SLEEP,     ANIM_JrTroopa_Anim1C,
-    STATUS_STONE,     ANIM_JrTroopa_Anim00,
-    STATUS_POISON,    ANIM_JrTroopa_Anim00,
-    STATUS_STOP,      ANIM_JrTroopa_Anim00,
-    STATUS_STATIC,    ANIM_JrTroopa_Anim00,
-    STATUS_PARALYZE,  ANIM_JrTroopa_Anim00,
-    STATUS_DIZZY,     ANIM_JrTroopa_Anim1D,
+    STATUS_NORMAL,    ANIM_JrTroopa_Idle,
+    STATUS_SLEEP,     ANIM_JrTroopa_Sleep,
+    STATUS_STONE,     ANIM_JrTroopa_Still,
+    STATUS_POISON,    ANIM_JrTroopa_Still,
+    STATUS_STOP,      ANIM_JrTroopa_Still,
+    STATUS_STATIC,    ANIM_JrTroopa_Still,
+    STATUS_PARALYZE,  ANIM_JrTroopa_Still,
+    STATUS_DIZZY,     ANIM_JrTroopa_Dizzy,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8022A61C)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Anim14,
+    STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
 
@@ -572,7 +572,7 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Anim14)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Defeated)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8022A61C)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)

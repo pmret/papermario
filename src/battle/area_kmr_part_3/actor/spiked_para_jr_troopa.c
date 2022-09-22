@@ -25,7 +25,7 @@ s32 N(idleAnimations_80227F44)[] = {
 };
 
 s32 N(idleAnimations_80227F50)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Anim14,
+    STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
 
@@ -672,7 +672,7 @@ EvtScript N(8022A018) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Anim14)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Defeated)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_80227F50)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4194304, 1)
