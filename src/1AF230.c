@@ -45,17 +45,74 @@ StarPowerEntry D_8029C7D0[] = {
     { battle_star_peach_dash_ROM_START,  battle_star_peach_dash_ROM_END,  battle_star_peach_dash_VRAM,  battle_star_peach_dash_usePower, },
 };
 
-s32 D_8029C890[10][5] = {
-    { SPRITE_ID(SPR_WorldGoombario, 0x1F), SPRITE_ID(SPR_WorldGoombario, 0x2C), SPRITE_ID(SPR_WorldGoombario, 0x2A), SPRITE_ID(SPR_WorldGoombario, 0x5), }, // Junk? These IDs should be in world_goombario, but don't exist.
-    { ANIM_BattleGoombario_Run,    ANIM_BattleGoombario_Sleep, ANIM_BattleGoombario_Sleep, ANIM_BattleGoombario_Run,    ANIM_BattleGoombario_Idle, },
-    { ANIM_BattleKooper_Anim06,     ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim1B,    ANIM_BattleKooper_Anim06,     ANIM_BattleKooper_Anim04, },
-    { ANIM_BattleBombette_Anim08,   ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim1D,  ANIM_BattleBombette_Anim08,   ANIM_BattleBombette_Anim04, },
-    { ANIM_BattleParakarry_Anim03,  ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim18, ANIM_BattleParakarry_Anim03,  ANIM_BattleParakarry_Anim01, },
-    {}, // Goompa
-    { ANIM_BattleWatt_Anim03,       ANIM_BattleWatt_Anim0A,       ANIM_BattleWatt_Anim0A,       ANIM_BattleWatt_Anim03,       ANIM_BattleParakarry_Anim01, },
-    { ANIM_BattleSushie_Anim03,     ANIM_BattleSushie_Anim13,    ANIM_BattleSushie_Anim13,    ANIM_BattleSushie_Anim03,     ANIM_BattleSushie_Anim01, },
-    { ANIM_BattleLakilester_Anim03, ANIM_BattleLakilester_Anim09, ANIM_BattleLakilester_Anim09, ANIM_BattleLakilester_Anim03, ANIM_BattleLakilester_Anim01, },
-    { ANIM_BattleBow_Anim03,        ANIM_BattleBow_Anim13,       ANIM_BattleBow_Anim13,       ANIM_BattleBow_Anim03,        ANIM_BattleBow_Anim01, },
+s32 D_8029C890[][5] = {
+    [PARTNER_NONE] {
+        // Junk? These animation IDs don't exist in WorldGoombario
+        SPRITE_ID(SPR_WorldGoombario, 0x1F),
+        SPRITE_ID(SPR_WorldGoombario, 0x2C),
+        SPRITE_ID(SPR_WorldGoombario, 0x2A),
+        SPRITE_ID(SPR_WorldGoombario, 0x5),
+        0,
+    },
+    [PARTNER_GOOMBARIO] {
+        ANIM_BattleGoombario_Run,
+        ANIM_BattleGoombario_Sleep,
+        ANIM_BattleGoombario_Sleep,
+        ANIM_BattleGoombario_Run,
+        ANIM_BattleGoombario_Idle,
+    },
+    [PARTNER_KOOPER] {
+        ANIM_BattleKooper_Anim06,
+        ANIM_BattleKooper_Anim1B,
+        ANIM_BattleKooper_Anim1B,
+        ANIM_BattleKooper_Anim06,
+        ANIM_BattleKooper_Anim04,
+    },
+   [PARTNER_BOMBETTE] {
+        ANIM_BattleBombette_Anim08,
+        ANIM_BattleBombette_Anim1D,
+        ANIM_BattleBombette_Anim1D,
+        ANIM_BattleBombette_Anim08,
+        ANIM_BattleBombette_Anim04,
+    },
+    [PARTNER_PARAKARRY] {
+        ANIM_BattleParakarry_Anim03,
+        ANIM_BattleParakarry_Anim18,
+        ANIM_BattleParakarry_Anim18,
+        ANIM_BattleParakarry_Anim03,
+        ANIM_BattleParakarry_Anim01,
+    },
+    [PARTNER_GOOMPA] {
+        // no data
+    },
+    [PARTNER_WATT] {
+        ANIM_BattleWatt_Anim03,
+        ANIM_BattleWatt_Anim0A,
+        ANIM_BattleWatt_Anim0A,
+        ANIM_BattleWatt_Anim03,
+        ANIM_BattleParakarry_Anim01,
+    },
+    [PARTNER_SUSHIE] {
+        ANIM_BattleSushie_Anim03,
+        ANIM_BattleSushie_Anim13,
+        ANIM_BattleSushie_Anim13,
+        ANIM_BattleSushie_Anim03,
+        ANIM_BattleSushie_Anim01,
+    },
+    [PARTNER_LAKILESTER] {
+        ANIM_BattleLakilester_Run,
+        ANIM_BattleLakilester_Anim09,
+        ANIM_BattleLakilester_Anim09,
+        ANIM_BattleLakilester_Run,
+        ANIM_BattleLakilester_Idle,
+    },
+    [PARTNER_BOW] {
+        ANIM_BattleBow_Anim03,
+        ANIM_BattleBow_Anim13,
+        ANIM_BattleBow_Anim13,
+        ANIM_BattleBow_Anim03,
+        ANIM_BattleBow_Anim01,
+    },
 };
 
 ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {

@@ -14,7 +14,9 @@
 # - Names should be in the simple present tense:
 #     Sleep     GOOD
 #     Sleeping  BAD
-#     Slept     BAD
+#   
+# - Present perfect is sometimes OK when describing a state of being:
+#     e.g., Injured, Disappointed
 #
 # - Prefer to use the following standard names where appropriate:
 #     Still     Character is frozen
@@ -1077,28 +1079,28 @@ BattleLakilester:
     - Golden_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - CloudNineIdle
+    - CloudNineBegin
+    - CloudNineEnd
+    - Celebrate
+    - Dizzy
     - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Hurt
+    - Dead
+    - BurnHurt
+    - BurnDead
     - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
+    - LiftSpiny
+    - HoldSpiny
+    - StrainHoldSpiny
+    - ThrowSpiny
+    - ThrowSpinyAlt
+    - Spiny
+    - SpinySpin
     - Anim16
     - Anim17
     - Anim18
@@ -1503,45 +1505,45 @@ Twink:
     - Talk
     - Shout1
     - Shout2
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Cringe1
+    - Cringe2
+    - Cringe3
+    - TalkSad1
+    - TalkSad2
     - ShoutJoy1
     - ShoutJoy2
-    - Raster0F
-    - Raster10
-    - Raster11
     - Carry1
     - Carry2
+    - Carry3
+    - Tense1
+    - Tense2
     - Wink1
     - Wink2
-    - Wink3
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
+    - TossItem
+    - Pleased1
+    - Pleased2
+    - Pleased3
+    - Disappointed1
+    - Disappointed2
+    - Back1
+    - Back2
+    - AngryAlt1
+    - AngryAlt2
     - IdleSad1
     - IdleSad2
     - TalkAngry
     - IdleLean1
     - IdleLean2
     - TalkLean
-    - Raster26
-    - Raster27
-    - Raster28
     - LiftBook
-    - CarryBook
+    - OpenBook1
+    - OpenBook2
+    - BookLifted
+    - BookHeld
     - BookHalfOpen
     - BookOpen
     - BookClosed
-    - Raster2E
+    - ShoutAngry
     - Hurt1
     - Hurt2
   palettes:
@@ -1571,7 +1573,7 @@ Twink:
     - Sad
     - Lean
     - IdleBook
-    - Anim05
+    - Fly
     - SadAlt
     - CarryBook
     - Angry
@@ -1579,21 +1581,21 @@ Twink:
     - TalkAngry
     - TalkLean
     - Shout
-    - Anim0D
-    - Anim0E
+    - ShoutAngry
+    - Cringe
     - ShoutJoy
-    - Anim10
-    - Anim11
-    - Anim12
+    - TalkSad
+    - Carry
+    - Blink
     - IdleWink
-    - Anim14
-    - Anim15
-    - Anim16
+    - TossItem
+    - Pleased
+    - Disappointed
     - Wink
     - TalkWink
-    - Carry
+    - Tense
     - Back
-    - Angry
+    - AngryAlt
     - TakeBook
     - OpenBook
     - ReadBook
