@@ -165,7 +165,7 @@ WorldBombette:
     - Fuse
     - Rusty
   frames:
-    - Still
+    - Neutral
     - Step1
     - Step2
     - Step3
@@ -632,56 +632,56 @@ BattleBombette:
     - Variant01
     - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Jump
+    - Fall
+    - GearAngled
+    - LitStill
+    - LitStep1
+    - LitStep2
+    - LitStep3
+    - Brace
+    - Hurt1
+    - Hurt2
+    - Block
+    - Talk
+    - BodySlam
+    - IdleHappy1
+    - IdleHappy2
+    - IdleHappy3
+    - IdleHappy4
+    - IdleHappy5
+    - JumpHappy
+    - FallHappy
+    - FuseLit1
+    - FuseLit2
+    - FuseLit3
+    - FuseEnd1
+    - FuseEnd2
+    - FuseEnd3
+    - GearNeutral
+    - GearSpin1
+    - GearSpin2
+    - GearSpin3
+    - GearSpin4
+    - GearSpin5
+    - GearSpin6
+    - GearSpin7
+    - Sleep
+    - Injured1
+    - Injured2
+    - BurnHurt1
+    - BurnHurt2
+    - GearBurnHurt1
+    - GearBurnHurt2
   palettes:
     - Default
     - Fuse
@@ -697,74 +697,74 @@ BattleBombette:
     - Rusty_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
+    - Still
+    - StillHappy
+    - StillLit
+    - StillLitAlt
+    - Idle
+    - IdleHappy
+    - Walk
+    - WalkLit
+    - Run
+    - RunLit
+    - Jump
+    - Fall
+    - JumpHappy
+    - FallHappy
+    - Backfire1
+    - Brace
+    - BodySlam
+    - Backfire2
+    - Hurt
+    - BurnHurt
+    - BurnDead
+    - BurnDeadAlt
+    - Block
+    - Talk
+    - CelebrateLoop
+    - Celebrate
+    - AboutToExplode
+    - Aftermath
     - Think
-    - Anim1D
-    - Anim1E
+    - Sleep
+    - Injured
 BattleParakarry:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
+    - LWingFlap1
+    - LWingFlap2
+    - LWingFlap3
+    - LWingFlap4
+    - Shell
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - Talk1
+    - Talk2
+    - Celebrate1
+    - Celebrate2
+    - Hurt1
+    - Hurt2
+    - Lift1
+    - Lift2
+    - EnterShell4
+    - PreDive
+    - Dive
+    - PostDive
+    - RWingFlap1
+    - RWingFlap2
+    - RWingFlap3
+    - RWingFlap4
+    - RWingFlap5
+    - LWingFlap5
+    - Blink1
+    - Blink2
+    - RaisedArm
+    - Pray
+    - Injured1
+    - Injured2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnDead
   palettes:
     - Default
     - Poisoned
@@ -772,32 +772,32 @@ BattleParakarry:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - PreDive
+    - Dive
+    - PostDive
+    - EnterShell
+    - ShellFly
+    - ShellFlyFaster
+    - ShellFlyFastest
+    - ExitShell
+    - OrientShell
+    - HurtStill
+    - Hurt
+    - BurnHurt
+    - BurnDead
+    - BurnDeadAlt
+    - Talk
+    - Celebrate
+    - FlyFast
+    - LiftLight
+    - LiftHeavy
     - Think
-    - Anim18
-    - Anim19
+    - Pray
+    - Injured
 BattleBow:
   variations:
     - Variant00

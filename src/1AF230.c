@@ -47,11 +47,10 @@ StarPowerEntry D_8029C7D0[] = {
 
 s32 D_8029C890[][5] = {
     [PARTNER_NONE] {
-        // Junk? These animation IDs don't exist in WorldGoombario
-        SPRITE_ID(SPR_WorldGoombario, 0x1F),
-        SPRITE_ID(SPR_WorldGoombario, 0x2C),
-        SPRITE_ID(SPR_WorldGoombario, 0x2A),
-        SPRITE_ID(SPR_WorldGoombario, 0x5),
+        ANIM_Mario_GotItem,
+        ANIM_Mario_AnimPray,
+        ANIM_Mario_1002A,
+        ANIM_Mario_Running,
         0,
     },
     [PARTNER_GOOMBARIO] {
@@ -69,18 +68,18 @@ s32 D_8029C890[][5] = {
         ANIM_BattleKooper_Anim04,
     },
    [PARTNER_BOMBETTE] {
-        ANIM_BattleBombette_Anim08,
-        ANIM_BattleBombette_Anim1D,
-        ANIM_BattleBombette_Anim1D,
-        ANIM_BattleBombette_Anim08,
-        ANIM_BattleBombette_Anim04,
+        ANIM_BattleBombette_Run,
+        ANIM_BattleBombette_Sleep,
+        ANIM_BattleBombette_Sleep,
+        ANIM_BattleBombette_Run,
+        ANIM_BattleBombette_Idle,
     },
     [PARTNER_PARAKARRY] {
-        ANIM_BattleParakarry_Anim03,
-        ANIM_BattleParakarry_Anim18,
-        ANIM_BattleParakarry_Anim18,
-        ANIM_BattleParakarry_Anim03,
-        ANIM_BattleParakarry_Anim01,
+        ANIM_BattleParakarry_Run,
+        ANIM_BattleParakarry_Pray,
+        ANIM_BattleParakarry_Pray,
+        ANIM_BattleParakarry_Run,
+        ANIM_BattleParakarry_Idle,
     },
     [PARTNER_GOOMPA] {
         // no data
@@ -90,7 +89,7 @@ s32 D_8029C890[][5] = {
         ANIM_BattleWatt_Sleep,
         ANIM_BattleWatt_Sleep,
         ANIM_BattleWatt_Run,
-        ANIM_BattleParakarry_Anim01,
+        ANIM_BattleParakarry_Idle, // @bug uses wrong sprite!
     },
     [PARTNER_SUSHIE] {
         ANIM_BattleSushie_Run,
