@@ -83,9 +83,9 @@ s32 gPauseTutorialSpriteAnims[][4] = {
         ANIM_LIST_END
     },
     {
-        ANIM_Goompa_Anim00,
-        ANIM_Goompa_Anim01,
-        ANIM_Goompa_Anim08,
+        ANIM_Goompa_Still,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Talk,
         ANIM_LIST_END
     }
 };

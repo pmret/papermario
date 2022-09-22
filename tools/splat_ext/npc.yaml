@@ -543,7 +543,7 @@ BattleGoombario:
     - Talk
     - Anim10
     - Anim11
-    - Anim12
+    - Think
     - CloseEyes
     - Injured
 BattleKooper:
@@ -623,7 +623,7 @@ BattleKooper:
     - Anim17
     - Anim18
     - Anim19
-    - Anim1A
+    - Think
     - Anim1B
     - Anim1C
 BattleBombette:
@@ -725,7 +725,7 @@ BattleBombette:
     - Anim19
     - Anim1A
     - Anim1B
-    - Anim1C
+    - Think
     - Anim1D
     - Anim1E
 BattleParakarry:
@@ -795,7 +795,7 @@ BattleParakarry:
     - Anim14
     - Anim15
     - Anim16
-    - Anim17
+    - Think
     - Anim18
     - Anim19
 BattleBow:
@@ -947,7 +947,7 @@ BattleWatt:
     - Anim08
     - Anim09
     - Anim0A
-    - Anim0B
+    - Think
     - Anim0C
     - Anim0D
     - Anim0E
@@ -9037,49 +9037,49 @@ AltBandit:
     - Anim0E
 Goompa:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
+    - Step1
+    - Step2
+    - Step3
+    - Injured
+    - Hurt
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk1
+    - Talk2
+    - Jump
+    - Fall
+    - Happy1
+    - Happy2
+    - WearyTalk1
+    - WearyTalk2
+    - WearyTalk3
+    - WearyIdle1
+    - WearyIdle2
+    - WearyIdle3
+    - WearyWalk1
+    - WearyWalk2
+    - WearyWalk3
+    - Rummage1
+    - Rummage2
+    - Rummage3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Jump
+    - Fall
+    - Hurt
+    - Injured
+    - Talk
+    - Celebrate
+    - WearyIdle
+    - WearyTalk
+    - WearyWalk
+    - Rummage
 Goombaria:
   variations:
     - Variant00

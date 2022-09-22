@@ -303,7 +303,7 @@ WorldPartner wPartners[12] = {
         .update = &world_goompa_update,
         .useAbility = &world_goompa_use_ability,
         .putAway = &world_goompa_put_away,
-        .idle = ANIM_Goompa_Anim01,
+        .idle = ANIM_Goompa_Idle,
     },
     {
         // Watt
@@ -457,15 +457,15 @@ PartnerAnimations gPartnerAnimations[] = {
         ANIM_WorldParakarry_Anim05
     }},
     [PARTNER_GOOMPA] {{
-        ANIM_Goompa_Anim00,
-        ANIM_Goompa_Anim02,
-        ANIM_Goompa_Anim04,
-        ANIM_Goompa_Anim05,
-        ANIM_Goompa_Anim01,
-        ANIM_Goompa_Anim01,
-        ANIM_Goompa_Anim03,
-        ANIM_Goompa_Anim08,
-        ANIM_Goompa_Anim01
+        ANIM_Goompa_Still,
+        ANIM_Goompa_Walk,
+        ANIM_Goompa_Jump,
+        ANIM_Goompa_Fall,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Run,
+        ANIM_Goompa_Talk,
+        ANIM_Goompa_Idle
     }},
     [PARTNER_WATT] {{
         ANIM_WorldWatt_Anim00,
