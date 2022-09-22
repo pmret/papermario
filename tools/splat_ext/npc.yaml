@@ -1611,9 +1611,9 @@ JrTroopa:
     - Step1
     - Step2
     - Step3
-    - Raster05
-    - Raster06
-    - Raster07
+    - Talk
+    - Shout1
+    - Shout2
     - Jump
     - Midair
     - Fall
@@ -1623,11 +1623,11 @@ JrTroopa:
     - EnterEgg1
     - EnterEgg2
     - EggNeutral
-    - EnterEgg4
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - EggSqueeze
+    - Hurt1
+    - Hurt2
+    - Panic1
+    - Panic2
     - BurnStill
     - Sleep1
     - Sleep2
@@ -1636,12 +1636,12 @@ JrTroopa:
     - Dizzy2
     - Dizzy3
     - Dizzy4
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
+    - LandAlt
+    - JumpAlt
+    - MidairAlt
+    - Trip1
+    - Trip2
+    - Slide
     - ScamperBack1
     - ScamperBack2
     - Defeated1
@@ -1651,19 +1651,19 @@ JrTroopa:
     - Charge1
     - Charge2
     - Charge3
-    - Raster2D
-    - Raster2E
-    - Raster2F
+    - Collapse1
+    - Collapse2
+    - FallHeadfirstBack
     - BurnHurt1
     - BurnHurt2
-    - Raster32
-    - Raster33
+    - Flail1
+    - Flail2
     - EggIdle
-    - Raster35
-    - Raster36
-    - Raster37
-    - Raster38
-    - Raster39
+    - OutOfBreath1
+    - OutOfBreath2
+    - OutOfBreath3
+    - TiredTalk1
+    - TiredTalk2
     - StepBack1
     - StepBack2
     - StepBack3
@@ -1697,7 +1697,7 @@ JrTroopa:
     - EggStill
     - Idle
     - EggIdle
-    - Anim05
+    - OutOfBreath
     - PointIdle
     - Walk
     - WalkBack
@@ -1709,50 +1709,50 @@ JrTroopa:
     - Jump
     - Midair
     - Fall
-    - Anim11
+    - Hurt
     - EnterEgg
-    - Anim13
+    - Panic
     - Defeated
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
+    - DefeatedBegin
+    - Talk
+    - EggTalk
+    - TiredTalk
+    - Shout
     - PointTalk
     - PointTapFoot
     - Sleep
     - Dizzy
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
-    - Anim23
-    - Anim24
+    - JumpAlt
+    - MidairAlt
+    - LandAlt
+    - Trip
+    - Slide
+    - FallHeadfirstBack
+    - PanicFast
     - ScamperBack
     - ClimbUpBack
-    - Anim27
+    - Collapse
     - BurnHurt
     - BurnStill
-    - Anim2A
+    - Flail
     - Punch
 SpikedJrTroopa:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
     - Sleep1
     - Sleep2
     - Sleep3
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Jump1
+    - Jump2
+    - Midair
+    - Fall
     - Land1
     - Land2
     - Hurt1
@@ -1762,7 +1762,7 @@ SpikedJrTroopa:
     - Dizzy2
     - Dizzy3
     - Dizzy4
-    - PointTalk
+    - Talk
     - PointNeutral
     - Angry1
     - Angry2
@@ -1797,47 +1797,47 @@ SpikedJrTroopa:
     - BurnStill
     - Sleep
     - Dizzy
-    - PointTalk
+    - Talk
 SpikedParaJrTroopa:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
+    - UpperBodyNeutral
+    - UpperBodyTalk
+    - UpperBodyPoint
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - WingsFlap1
+    - WingsFlap2
+    - WingsFlap3
+    - WingsFlap4
+    - LowerBody1
+    - LowerBody2
+    - LowerBodyRaised
+    - Dive1
+    - Dive2
+    - Flail1
+    - Flail2
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - BurnHurt1
+    - BurnHurt2
+    - EnterEgg
+    - EggNeutral
+    - BurnWingsFlap1
+    - BurnWingsFlap2
+    - BurnWingsFlap3
+    - BurnWingsFlap4
+    - BurnEgg
+    - Angry1
+    - Angry2
   palettes:
     - Default
     - Ashen
@@ -1849,58 +1849,58 @@ SpikedParaJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
+    - Still
+    - PointStill
+    - EggStill
+    - Idle
+    - PointIdle
+    - EggIdle
+    - FlySlow
+    - FlyFast
+    - Dive
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - BurnEgg
+    - Sleep
+    - Dizzy
+    - Talk
+    - Flail
+    - EnterEgg
+    - ExitEgg
+    - Angry
 MageJrTroopa:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Point1
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - BurnStill
+    - BurnHurt1
+    - BurnHurt2
+    - Hurt1
+    - Hurt2
+    - Flail1
+    - Flail2
+    - RaiseStaff
+    - ExtendStaff1
+    - ExtendStaff2
+    - Point2
+    - BurnStaff1
+    - BurnStaff2
   palettes:
     - Default
     - Ashen
@@ -1912,53 +1912,53 @@ MageJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - PointStill
+    - Idle
+    - PointIdle
+    - Walk
+    - Run
+    - RaiseStaff
+    - SwingStaff
+    - BurnStaff
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Dizzy
+    - Talk
+    - Flail
 ParaJrTroopa:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
+    - UpperBodyNeutral
+    - UpperBodyTalk
+    - UpperBodyPoint
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - WingsFlap1
+    - WingsFlap2
+    - WingsFlap3
+    - WingsFlap4
+    - LowerBody1
+    - LowerBody2
+    - LowerBodyRaised
+    - Dive1
+    - Dive2
+    - Flail1
+    - Flail2
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - BurnHurt1
+    - BurnHurt2
   palettes:
     - Default
     - Ashen
@@ -1970,20 +1970,20 @@ ParaJrTroopa:
     - Ashen_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - PointStill
+    - Idle
+    - PointIdle
+    - FlySlow
+    - FlyFast
+    - Dive
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Dizzy
+    - Talk
+    - Flail
 Goomba:
   variations:
     - Default
@@ -2005,9 +2005,9 @@ Goomba:
     - Dizzy2
     - Dizzy3
     - Dizzy4
-    - Hurt_Burnt1
-    - Hurt_Burnt2
-    - Dead_Burnt
+    - BurnHurt1
+    - BurnHurt2
+    - BurnStill
     - Tense
     - Toadstool
     - Mushroom
@@ -2046,8 +2046,8 @@ Goomba:
     - Dead
     - Dizzy
     - Sleep
-    - Hurt_Burnt
-    - Dead_Burnt
+    - BurnHurt
+    - BurnStill
     - Tense
     - FakeToadstool
     - FakeMushroom
@@ -2167,9 +2167,9 @@ Paragoomba:
     - Anim0F
 KoopaTroopa:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
+    - DarkTroopa
+    - Default
+    - FrostTroopa
   frames:
     - Raster00
     - Raster01

@@ -776,7 +776,7 @@ EvtScript N(8021D9F4) = {
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 4, 11, 7, -2)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_EQ(LVar0, EVENT_15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Dead_Burnt)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_BurnStill)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Hurt)
     EVT_END_IF
@@ -1189,16 +1189,16 @@ EvtScript N(handleEvent_8021F41C) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Hurt_Burnt)
-            EVT_SET_CONST(LVar2, ANIM_Goomba_Hyper_Dead_Burnt)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Goomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Hurt_Burnt)
-            EVT_SET_CONST(LVar2, ANIM_Goomba_Hyper_Dead_Burnt)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Goomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Dead_Burnt)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
