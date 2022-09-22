@@ -93,11 +93,11 @@ s32 D_8029C890[][5] = {
         ANIM_BattleParakarry_Anim01,
     },
     [PARTNER_SUSHIE] {
-        ANIM_BattleSushie_Anim03,
-        ANIM_BattleSushie_Anim13,
-        ANIM_BattleSushie_Anim13,
-        ANIM_BattleSushie_Anim03,
-        ANIM_BattleSushie_Anim01,
+        ANIM_BattleSushie_Run,
+        ANIM_BattleSushie_Pray,
+        ANIM_BattleSushie_Pray,
+        ANIM_BattleSushie_Run,
+        ANIM_BattleSushie_Idle,
     },
     [PARTNER_LAKILESTER] {
         ANIM_BattleLakilester_Run,

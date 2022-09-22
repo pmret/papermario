@@ -13,7 +13,7 @@ s32 N(lakilester_idleAnimations)[] = {
     STATUS_STOP, ANIM_BattleLakilester_Still,
     STATUS_STATIC, ANIM_BattleLakilester_Idle,
     STATUS_PARALYZE, ANIM_BattleLakilester_Still,
-    STATUS_DIZZY, ANIM_BattleLakilester_Dizzy,
+    STATUS_DIZZY, ANIM_BattleLakilester_Injured,
     STATUS_FEAR, ANIM_BattleLakilester_Idle,
     STATUS_END,
 };

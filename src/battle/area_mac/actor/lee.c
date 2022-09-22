@@ -3106,15 +3106,15 @@ Formation N(formation_watt) = {
 };
 
 s32 N(idleAnimations_8022697C)[] = {
-    STATUS_NORMAL,    ANIM_BattleSushie_Anim01,
-    STATUS_STONE,     ANIM_BattleSushie_Anim00,
-    STATUS_SLEEP,     ANIM_BattleSushie_Anim00,
-    STATUS_POISON,    ANIM_BattleSushie_Anim01,
-    STATUS_STOP,      ANIM_BattleSushie_Anim00,
-    STATUS_STATIC,    ANIM_BattleSushie_Anim01,
-    STATUS_PARALYZE,  ANIM_BattleSushie_Anim00,
-    STATUS_DIZZY,     ANIM_BattleSushie_Anim10,
-    STATUS_FEAR,      ANIM_BattleSushie_Anim10,
+    STATUS_NORMAL,    ANIM_BattleSushie_Idle,
+    STATUS_STONE,     ANIM_BattleSushie_Still,
+    STATUS_SLEEP,     ANIM_BattleSushie_Still,
+    STATUS_POISON,    ANIM_BattleSushie_Idle,
+    STATUS_STOP,      ANIM_BattleSushie_Still,
+    STATUS_STATIC,    ANIM_BattleSushie_Idle,
+    STATUS_PARALYZE,  ANIM_BattleSushie_Still,
+    STATUS_DIZZY,     ANIM_BattleSushie_Injured,
+    STATUS_FEAR,      ANIM_BattleSushie_Injured,
     STATUS_END,
 };
 
@@ -3216,91 +3216,91 @@ EvtScript N(handleEvent_80226B54) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0E)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Anim0F)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_BattleSushie_BurnDead)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0E)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Anim0F)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_BattleSushie_BurnDead)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(8021E0E0))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0F)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnDead)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(33)
             EVT_EXEC_WAIT(N(8021E0E0))
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(47)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET(LVar2, 20)
             EVT_EXEC_WAIT(N(8021E5DC))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CASE_EQ(38)
             EVT_EXEC_WAIT(N(8021E0E0))
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET(LVar2, 20)
             EVT_EXEC_WAIT(N(8021E5DC))
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
             EVT_EXEC_WAIT(N(8021E0E0))
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(57)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim03)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Run)
+            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(58)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(22)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -3329,18 +3329,18 @@ EvtScript N(takeTurn_802270BC) = {
         EVT_MUL(LVarA, -1)
     EVT_END_IF
     EVT_CALL(MoveBattleCamOver, LVarA)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
     EVT_CALL(RunToGoal, ACTOR_SELF, LVarA, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Idle)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_I)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(AddBattleCamZoom, -50)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(func_8024ECF8, 1, 1, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Tense1)
     EVT_WAIT(15)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim08)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Tense2)
     EVT_WAIT(15)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, 16)
     EVT_SWITCH(LVar0)
@@ -3349,7 +3349,7 @@ EvtScript N(takeTurn_802270BC) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
             EVT_THREAD
                 EVT_CALL(SetActorRotationOffset, -127, 0, 12, 0)
                 EVT_SET(LVar0, 0)
@@ -3402,13 +3402,13 @@ EvtScript N(takeTurn_802270BC) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2034)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_THREAD
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim05)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
                 EVT_WAIT(10)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim06)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Fall)
             EVT_END_THREAD
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Land)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotationOffset, -127, 0, 0, 0)
             EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -3428,7 +3428,7 @@ EvtScript N(takeTurn_802270BC) = {
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -3439,7 +3439,7 @@ EvtScript N(takeTurn_802270BC) = {
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
     EVT_THREAD
         EVT_CALL(SetActorRotationOffset, -127, 0, 12, 0)
         EVT_SET(LVar0, 0)
@@ -3492,13 +3492,13 @@ EvtScript N(takeTurn_802270BC) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2034)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim05)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Fall)
     EVT_END_THREAD
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Land)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotationOffset, -127, 0, 0, 0)
     EVT_THREAD
@@ -3520,7 +3520,7 @@ EvtScript N(takeTurn_802270BC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Fall)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 60)
             EVT_SET(LVar1, 0)
@@ -3540,11 +3540,11 @@ EvtScript N(takeTurn_802270BC) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x29A)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Idle)
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -3567,7 +3567,7 @@ EvtScript N(nextTurn_8022831C) = {
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(N(8021E118))
             EVT_RETURN
     EVT_END_SWITCH
@@ -3587,7 +3587,7 @@ s32 N(idleAnimations_8022840C)[] = {
     STATUS_STOP,      ANIM_BattleLakilester_Still,
     STATUS_STATIC,    ANIM_BattleLakilester_Idle,
     STATUS_PARALYZE,  ANIM_BattleLakilester_Still,
-    STATUS_DIZZY,     ANIM_BattleLakilester_Dizzy,
+    STATUS_DIZZY,     ANIM_BattleLakilester_Injured,
     STATUS_FEAR,      ANIM_BattleLakilester_Idle,
     STATUS_END,
 };
