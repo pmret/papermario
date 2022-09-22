@@ -86,10 +86,10 @@ s32 D_8029C890[][5] = {
         // no data
     },
     [PARTNER_WATT] {
-        ANIM_BattleWatt_Anim03,
-        ANIM_BattleWatt_Anim0A,
-        ANIM_BattleWatt_Anim0A,
-        ANIM_BattleWatt_Anim03,
+        ANIM_BattleWatt_Run,
+        ANIM_BattleWatt_Sleep,
+        ANIM_BattleWatt_Sleep,
+        ANIM_BattleWatt_Run,
         ANIM_BattleParakarry_Anim01,
     },
     [PARTNER_SUSHIE] {
@@ -107,11 +107,11 @@ s32 D_8029C890[][5] = {
         ANIM_BattleLakilester_Idle,
     },
     [PARTNER_BOW] {
-        ANIM_BattleBow_Anim03,
-        ANIM_BattleBow_Anim13,
-        ANIM_BattleBow_Anim13,
-        ANIM_BattleBow_Anim03,
-        ANIM_BattleBow_Anim01,
+        ANIM_BattleBow_Run,
+        ANIM_BattleBow_Pray,
+        ANIM_BattleBow_Pray,
+        ANIM_BattleBow_Run,
+        ANIM_BattleBow_Idle,
     },
 };
 

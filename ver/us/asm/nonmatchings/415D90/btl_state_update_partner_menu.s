@@ -387,9 +387,9 @@ glabel btl_state_update_partner_menu
 /* 41D4E4 802A8754 82E20012 */  lb        $v0, 0x12($s7)
 /* 41D4E8 802A8758 24040100 */  addiu     $a0, $zero, 0x100
 /* 41D4EC 802A875C 00021080 */  sll       $v0, $v0, 2
-/* 41D4F0 802A8760 3C06802B */  lui       $a2, %hi(D_802AB520)
+/* 41D4F0 802A8760 3C06802B */  lui       $a2, %hi(battle_menu_partnerChooseMoveAnimations)
 /* 41D4F4 802A8764 00C23021 */  addu      $a2, $a2, $v0
-/* 41D4F8 802A8768 8CC6B520 */  lw        $a2, %lo(D_802AB520)($a2)
+/* 41D4F8 802A8768 8CC6B520 */  lw        $a2, %lo(battle_menu_partnerChooseMoveAnimations)($a2)
 /* 41D4FC 802A876C 0C098F3F */  jal       set_animation
 /* 41D500 802A8770 0000282D */   daddu    $a1, $zero, $zero
 /* 41D504 802A8774 24020003 */  addiu     $v0, $zero, 3

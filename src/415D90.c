@@ -123,7 +123,7 @@ s16 D_802AB344[] = { 0, -2 };
 
 HudScript* battle_menu_JumpHudScripts[] = {
     &HES_MenuBoots1Disabled, &HES_MenuBoots1Disabled,
-    &HES_MenuBoots1,&HES_MenuBoots1Disabled,
+    &HES_MenuBoots1, &HES_MenuBoots1Disabled,
     &HES_MenuBoots2, &HES_MenuBoots2Disabled,
     &HES_MenuBoots3, &HES_MenuBoots3Disabled };
 
@@ -160,9 +160,7 @@ HudScript* battle_menu_DisabledPartnerHudScripts[] = {
     &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled
 };
 
-HudScript* battle_menu_StrategiesHudScript[] = { &HES_MenuStrategies };
-
-HudScript* battle_menu_DisabledStrategiesHudScript[] = { &HES_MenuStrategiesDisabled };
+HudScript* battle_menu_StrategiesHudScript[] = { &HES_MenuStrategies, &HES_MenuStrategiesDisabled };
 
 HudScript* battle_menu_DoNothingHudScripts[] = { &HES_MenuDoNothing, &HES_MenuDoNothingDisabled };
 
@@ -193,7 +191,7 @@ s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 
 
 // s8 D_802AB513
 
-AnimID D_802AB520[] = {
+AnimID battle_menu_partnerChooseMoveAnimations[] = {
     [PARTNER_NONE]       0, 
     [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Think, 
     [PARTNER_KOOPER]     ANIM_BattleKooper_Think, 
@@ -203,7 +201,7 @@ AnimID D_802AB520[] = {
     [PARTNER_WATT]       ANIM_BattleWatt_Think, 
     [PARTNER_SUSHIE]     ANIM_BattleSushie_Think,
     [PARTNER_LAKILESTER] ANIM_BattleLakilester_Run,
-    [PARTNER_BOW]        ANIM_BattleBow_Anim00, 
+    [PARTNER_BOW]        ANIM_BattleBow_Still, 
     [PARTNER_GOOMBARIA]  0, 
     [PARTNER_TWINK]      0, 
     0x00000000, 
@@ -217,10 +215,10 @@ AnimID D_802AB558[] = {
     [PARTNER_BOMBETTE]   ANIM_BattleBombette_Anim06, 
     [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Anim02, 
     [PARTNER_GOOMPA]     ANIM_Goompa_Walk, 
-    [PARTNER_WATT]       ANIM_BattleWatt_Anim02, 
+    [PARTNER_WATT]       ANIM_BattleWatt_Walk, 
     [PARTNER_SUSHIE]     ANIM_BattleSushie_Walk, 
     [PARTNER_LAKILESTER] ANIM_BattleLakilester_Walk,
-    [PARTNER_BOW]        ANIM_BattleBow_Anim02, 
+    [PARTNER_BOW]        ANIM_BattleBow_Walk, 
     [PARTNER_GOOMBARIA]  0, 
     [PARTNER_TWINK]      0, 
     0x00000000, 

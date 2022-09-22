@@ -6,15 +6,15 @@ extern EvtScript N(bow_handleEvent);
 extern EvtScript N(bow_init);
 
 s32 N(bow_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleBow_Anim01,
-    STATUS_STONE, ANIM_BattleBow_Anim00,
-    STATUS_SLEEP, ANIM_BattleBow_Anim00,
-    STATUS_POISON, ANIM_BattleBow_Anim01,
-    STATUS_STOP, ANIM_BattleBow_Anim00,
-    STATUS_STATIC, ANIM_BattleBow_Anim01,
-    STATUS_PARALYZE, ANIM_BattleBow_Anim00,
-    STATUS_DIZZY, ANIM_BattleBow_Anim1A,
-    STATUS_FEAR, ANIM_BattleBow_Anim1A,
+    STATUS_NORMAL, ANIM_BattleBow_Idle,
+    STATUS_STONE, ANIM_BattleBow_Still,
+    STATUS_SLEEP, ANIM_BattleBow_Still,
+    STATUS_POISON, ANIM_BattleBow_Idle,
+    STATUS_STOP, ANIM_BattleBow_Still,
+    STATUS_STATIC, ANIM_BattleBow_Idle,
+    STATUS_PARALYZE, ANIM_BattleBow_Still,
+    STATUS_DIZZY, ANIM_BattleBow_Injured,
+    STATUS_FEAR, ANIM_BattleBow_Injured,
     STATUS_END,
 };
 
@@ -123,95 +123,95 @@ EvtScript N(bow_handleEvent) = {
             EVT_CALL(GetLastElement, LVar1)
             EVT_IF_FLAG(LVar1, DAMAGE_TYPE_ELECTRIC)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+                EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
                 EVT_EXEC_WAIT(N(OnHitElectric))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+                EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
                 EVT_EXEC_WAIT(DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim18)
-            EVT_SET_CONST(LVar2, ANIM_BattleBow_Anim19)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurtAlt)
+            EVT_SET_CONST(LVar2, ANIM_BattleBow_BurnDeadAlt)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim18)
-            EVT_SET_CONST(LVar2, ANIM_BattleBow_Anim19)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurtAlt)
+            EVT_SET_CONST(LVar2, ANIM_BattleBow_BurnDeadAlt)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim19)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnDeadAlt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(N(OnShockHit))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
             EVT_EXEC_WAIT(N(OnShockDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim03)
-            EVT_SET_CONST(LVar2, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Run)
+            EVT_SET_CONST(LVar2, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BattleBow_Anim15)
+            EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -240,7 +240,7 @@ EvtScript N(bow_takeTurn) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim03)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Run)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
         EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 4, -4, 0)
@@ -248,7 +248,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 10, -10, 0)
         EVT_END_IF
         EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
@@ -263,7 +263,7 @@ EvtScript N(bow_takeTurn) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_PreSlap)
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(15)
@@ -274,7 +274,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapOnce)
             EVT_WAIT(2)
             EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_SET(LVar0, 0)
@@ -287,11 +287,11 @@ EvtScript N(bow_takeTurn) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim1A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Injured)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 3)
             EVT_WAIT(30)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_APPEAR)
             EVT_THREAD
@@ -305,9 +305,9 @@ EvtScript N(bow_takeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Run)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH)
             EVT_CALL(YieldTurn)
             EVT_SET(LVar0, 55)
@@ -338,7 +338,7 @@ EvtScript N(bow_takeTurn) = {
         EVT_ADD(LVarA, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
         EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapOnce)
             EVT_SET(LocalFlag(0), 1)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(func_80269EAC, 12)
@@ -346,7 +346,7 @@ EvtScript N(bow_takeTurn) = {
                 EVT_CALL(func_80269EAC, 10)
             EVT_END_IF
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapBack)
             EVT_SET(LocalFlag(0), 0)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(func_80269EAC, 13)
@@ -375,7 +375,7 @@ EvtScript N(bow_takeTurn) = {
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
         EVT_END_SWITCH
         EVT_WAIT(8)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
         EVT_CALL(GetActorHP, ACTOR_PLAYER, LVar1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -397,9 +397,9 @@ EvtScript N(bow_takeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Run)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH)
             EVT_CALL(YieldTurn)
             EVT_SET(LVar0, 55)
