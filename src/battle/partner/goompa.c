@@ -127,7 +127,7 @@ EvtScript N(handleEvent_8023819C) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Idle)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
-            EVT_EXEC_WAIT(D_80295EC4)
+            EVT_EXEC_WAIT(DoPartnerRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)

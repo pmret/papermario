@@ -421,7 +421,7 @@ EvtScript N(handleEvent_80239360) = {
             EVT_CALL(PlaySoundAtActor, 256, 8332)
             EVT_SET_CONST(LVar0, 0x1)
             EVT_SET_CONST(LVar1, 0x9000A)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(42)
             EVT_SET_CONST(LVar1, 0x9000A)
@@ -455,13 +455,13 @@ EvtScript N(handleEvent_80239360) = {
             EVT_SET_CONST(LVar1, 0x90001)
             EVT_SET_CONST(LVar2, 0x90003)
             EVT_SET(LVar3, 0)
-            EVT_EXEC_WAIT(D_80295EC4)
+            EVT_EXEC_WAIT(DoPartnerRecover)
         EVT_CASE_OR_EQ(24)
         EVT_CASE_OR_EQ(26)
             EVT_CALL(PlaySoundAtActor, 256, 8332)
             EVT_SET_CONST(LVar0, 0x1)
             EVT_SET_CONST(LVar1, 0x9000E)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT

@@ -493,31 +493,31 @@ WorldLakilester:
     - Anim0D
 BattleGoombario:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
+    - Step1
+    - Step2
+    - Step3
+    - Hurt
+    - Headbonk
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk1
+    - Talk2
+    - Jump
+    - Fall
+    - Celebrate1
+    - Celebrate2
+    - PreHeadbonk
+    - Injured1
+    - Injured2
+    - CloseEyes1
+    - CloseEyes2
+    - BurnStand
+    - BurnHurt1
+    - BurnHurt2
+    - Think
+    - Block1
+    - Block2
   palettes:
     - Default
     - Poisoned
@@ -529,20 +529,20 @@ BattleGoombario:
     - Idle
     - Walk
     - Run
+    - Jump
+    - Fall
     - Headbonk
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
+    - PreHeadbonk
+    - OffsetHeadbonk
+    - BlockAlt
+    - HurtStill
+    - BurnHurt1
+    - BurnHurt2
+    - BurnStand
+    - Block
     - Talk
-    - Anim10
-    - Anim11
+    - CelebrateLoop
+    - Celebrate
     - Think
     - CloseEyes
     - Injured

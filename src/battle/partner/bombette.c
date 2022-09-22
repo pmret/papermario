@@ -355,7 +355,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
@@ -425,7 +425,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
             EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.1))
-            EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, 720915, 720915, 720915)
+            EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleBombette_BurnHurt, ANIM_BattleBombette_BurnHurt, ANIM_BattleBombette_BurnHurt)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_BurnHurt)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
@@ -565,13 +565,13 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Idle)
             EVT_SET_CONST(LVar2, ANIM_BattleBombette_Run)
             EVT_SET(LVar3, 0)
-            EVT_EXEC_WAIT(D_80295EC4)
+            EVT_EXEC_WAIT(DoPartnerRecover)
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Block)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
