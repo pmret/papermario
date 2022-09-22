@@ -242,28 +242,28 @@ WorldBombette:
     - Aftermath
 WorldParakarry:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - LWingFlap1
+    - LWingFlap2
+    - LWingFlap3
+    - LWingFlap4
+    - LegsBack
+    - LegsForward
+    - Talk
+    - Celebrate1
+    - Celebrate2
+    - Hurt1
+    - Hurt2
+    - Lift1
+    - Lift2
+    - RWingFlap1
+    - RWingFlap2
+    - RWingFlap3
+    - RWingFlap4
+    - RWingFlap5
+    - LWingFlap5
+    - Blink1
+    - Blink2
+    - RaisedArm
   palettes:
     - Default
     - Poisoned
@@ -271,48 +271,48 @@ WorldParakarry:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - HurtStill
+    - Hurt
+    - Talk
+    - Celebrate
+    - FlyFast
+    - CarryLight
+    - CarryHeavy
 WorldBow:
   variations:
     - Variant00
     - Variant01
     - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
+    - Neutral
+    - Step1
+    - Step2
+    - Talk1
+    - Talk2
+    - Spook1
+    - Spook2
+    - Spook3
+    - Spook4
+    - Spook5
+    - Laugh1
+    - Laugh2
+    - Celebrate1
+    - Celebrate2
+    - Celebrate3
+    - Celebrate4
+    - Flail1
+    - Flail2
+    - TailDown
+    - Read
+    - FanAcrossBody1
+    - FanAcrossBody2
+    - ArmHoldingFan1
+    - ArmHoldingFan2
+    - SmallPatch
   palettes:
     - Default
     - Fan
@@ -327,38 +327,38 @@ WorldBow:
     - Fan_Shocked
     - Patch_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Read
+    - Conceal
+    - SpookBegin
+    - SpookLoop
+    - Laugh
+    - CelebrateSlow
+    - Celebrate
+    - Flail
 WorldWatt:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk
+    - Happy1
+    - Happy2
+    - Happy3
+    - Hurt1
+    - Hurt2
+    - Hurt3
+    - Strain1
+    - Strain2
+    - Strain3
+    - ULBolt
+    - LLBolt
+    - URBolt
+    - LRBolt
   palettes:
     - Default
     - Poisoned
@@ -368,38 +368,38 @@ WorldWatt:
     - Brightest
     - Brighter
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Strain
+    - Celebrate
+    - Hurt
+    - Bolts1
+    - Bolts2
 WorldSushie:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
+    - Idle1
+    - Idle2
+    - Idle3
+    - Talk1
+    - Talk2
+    - HappyTalk1
+    - HappyTalk2
+    - Sad1
+    - Sad2
+    - Hurt1
+    - Hurt2
+    - Celebrate1
+    - Celebrate2
+    - Ride1
+    - Ride2
+    - Dive1
+    - Dive2
+    - Rise1
+    - Rise2
+    - Read
   palettes:
     - Default
     - Poisoned
@@ -407,62 +407,62 @@ WorldSushie:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - HappyTalk
+    - Celebrate
+    - Sad
+    - Hurt
+    - RideStill
+    - Ride
+    - Dive
+    - Rise
+    - Read
 WorldLakilester:
   variations:
     - Variant00
     - Variant01
     - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
+    - CloudIdle1
+    - CloudIdle2
+    - CloudIdle3
+    - Vanish1
+    - Vanish2
+    - Vanish3
+    - Vanish4
+    - Vanish5
+    - Vanish6
+    - Vanish7
+    - Vanish8
+    - CloudStrain1
+    - CloudStrain2
+    - CloudStrain3
+    - CloudTough1
+    - CloudTough2
+    - CloudHappy
+    - TiredTalk
+    - Idle
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Tough
+    - Pant1
+    - Pant2
+    - Strain1
+    - Strain2
+    - Strain3
+    - Shout1
+    - Shout2
+    - Happy1
+    - Happy2
+    - Tired
+    - CloudTired1
+    - CloudTired2
   palettes:
     - Default
     - Spiny
@@ -478,20 +478,20 @@ WorldLakilester:
     - Golden_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - Idle
+    - StrainIdle
+    - IdleTough
+    - Tired
+    - Walk
+    - StrainWalk
+    - Run
+    - StrainRun
+    - Talk
+    - TiredTalk
+    - Shout
+    - Vanish
+    - Celebrate
 BattleGoombario:
   frames:
     - Step1
@@ -738,9 +738,9 @@ BattleParakarry:
     - Shell
     - EnterShell1
     - EnterShell2
-    - EnterShell3
-    - Talk1
-    - Talk2
+    - LegsBack
+    - LegsForward
+    - Talk
     - Celebrate1
     - Celebrate2
     - Hurt1

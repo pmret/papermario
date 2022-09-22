@@ -28,38 +28,37 @@ BSS PlayerSpriteCacheEntry PlayerRasterCache[18];
 #define ALIGN4(v) (((u32)(v) >> 2) << 2)
 #define SPR_SWIZZLE(base,offset) ((void*)((s32)(offset) + (s32)(base)))
 
-#ifdef NON_EQUIVALENT
-void spr_swizzle_anim_offsets(s32 arg0, s32 base, SpriteAnimData* spriteData) {
-    SpriteAnimComponent*** animList = spriteData->animListStart;
+void spr_swizzle_anim_offsets(s32 arg0, s32 base, void* spriteData) {
+    u8* buffer;
+    SpriteAnimComponent*** animList;
     SpriteAnimComponent** compList;
     SpriteAnimComponent* comp;
-    s32 alignedBase;
-    s32 alignedData;
     s32 animOffset;
     s32 compOffset;
-    s32 endOfList = -1;
-
-    alignedBase = ALIGN4(base);
-    alignedData = ALIGN4(spriteData);
+    s32 temp;
+    
+    // required to match, spriteData->animList would be nicer
+    animList = (SpriteAnimComponent***) spriteData;
+    animList += 4;
+    
     while (TRUE) {
-        if ((animOffset = *(s32*) animList) == endOfList) {
+        if (*animList == PTR_LIST_END) {
             break;
         }
-        *animList = compList = SPR_SWIZZLE(alignedData, animOffset - alignedBase);
+        compList = (SpriteAnimComponent**) ((s32)*animList - ALIGN4(base));
+        compList = SPR_SWIZZLE(ALIGN4(spriteData), compList);
+        *animList = compList;
         while (TRUE) {
-            if ((compOffset = *(s32*) compList) == endOfList) {
+            if (*compList == PTR_LIST_END) {
                 break;
             }
-            *compList = comp = SPR_SWIZZLE(alignedData, compOffset - alignedBase);
-            comp->cmdList = SPR_SWIZZLE(alignedData, (s32)comp->cmdList - alignedBase);
+            *compList = comp = SPR_SWIZZLE(ALIGN4(spriteData), (s32)*compList - ALIGN4(base));
+            comp->cmdList = SPR_SWIZZLE(ALIGN4(spriteData), (s32)comp->cmdList - ALIGN4(base));
             compList++;
         }
         animList++;
     }
 }
-#else
-INCLUDE_ASM(s32, "101b90_len_8f0", spr_swizzle_anim_offsets);
-#endif
 
 #ifdef NON_EQUIVALENT
 SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2) {

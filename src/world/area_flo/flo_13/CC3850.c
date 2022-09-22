@@ -484,7 +484,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim07)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Run)
     EVT_THREAD
         EVT_CALL(N(func_802434D4_CC6CE4))
     EVT_END_THREAD
@@ -498,7 +498,7 @@ EvtScript N(idle_80244BF8) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Idle)
     EVT_CALL(PlayerFaceNpc, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(GetNpcPos, 0, LVar0, LVar1, LVar2)
@@ -513,10 +513,10 @@ EvtScript N(idle_80244BF8) = {
         EVT_CALL(PlayerMoveTo, -75, 65, 10)
         EVT_CALL(PlayerFaceNpc, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00A1)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim07)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A1)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Run)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Idle)
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 1000)
         EVT_CALL(SetCamPitch, 0, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
@@ -580,7 +580,7 @@ EvtScript N(80245014) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5, MSG_CH6_00B5)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00B5)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -592,11 +592,11 @@ EvtScript N(80245014) = {
 EvtScript N(80245444) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0A, ANIM_WorldLakilester_Anim04, 0, MSG_CH6_00A2)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_TiredTalk, ANIM_WorldLakilester_Tired, 0, MSG_CH6_00A2)
     EVT_CALL(SetNpcPos, 1, -290, 120, 45)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim01)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Idle)
         EVT_CALL(SetPlayerAnimation, 65578)
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 1)
@@ -645,7 +645,7 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00A4)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A4)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -661,9 +661,9 @@ EvtScript N(80245444) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00A6)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
-    EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00A6)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Idle)
+    EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -692,9 +692,9 @@ EvtScript N(80245444) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00AA)
-        EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
-        EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0)
+        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AA)
+        EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Idle)
+        EVT_CALL(EndSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 40)
         EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -703,28 +703,28 @@ EvtScript N(80245444) = {
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 0, MSG_CH6_00AB)
+        EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AB)
         EVT_WAIT(10)
         EVT_CALL(ShowChoice, MSG_Choice_0021)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(-1)
             EVT_CASE_EQ(0)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AC)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AC)
             EVT_CASE_EQ(1)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AD)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AD)
             EVT_CASE_EQ(2)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AE)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AE)
             EVT_CASE_EQ(3)
-                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00AF)
+                EVT_CALL(ContinueSpeech, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AF)
         EVT_END_SWITCH
     EVT_END_IF
     EVT_CALL(InterpNpcYaw, 1, 90, 1)
     EVT_CALL(SetNpcAnimation, 1, ANIM_Lakilulu_ConcernedNod)
     EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B0)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B1)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B1)
     EVT_WAIT(15)
     EVT_CALL(SpeakToPlayer, 1, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B2)
-    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 0, MSG_CH6_00B3)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B3)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
@@ -753,7 +753,7 @@ EvtScript N(defeat_80246038) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Anim04)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Tired)
             EVT_CALL(SetCamType, 0, 6, 1)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar1, LVar2)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -849,22 +849,22 @@ StaticNpc N(npcGroup_80246434) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
-        ANIM_WorldLakilester_Anim01,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Idle,
     },
 };
 

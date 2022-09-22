@@ -577,7 +577,7 @@ EvtScript N(80242C50) = {
         EVT_END_LOOP
     EVT_END_IF
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_00A3)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00A3)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(5)

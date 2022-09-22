@@ -324,7 +324,7 @@ EvtScript N(80243FE8) = {
             EVT_WAIT(5)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Anim0B, ANIM_WorldBow_Anim0B, 0, MSG_CH3_00CD)
+    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CD)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, LVar5, LVar0, LVar1, LVar2)
@@ -332,14 +332,14 @@ EvtScript N(80243FE8) = {
     EVT_CALL(SetCamProperties, 0, EVT_FLOAT(2.0), LVar0, LVar1, LVar2, EVT_FLOAT(300.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
     EVT_CALL(PlayerFaceNpc, LVar5, 0)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_00CE)
+    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00CE)
     EVT_CALL(ShowChoice, MSG_Choice_000D)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Anim0B, ANIM_WorldBow_Anim0B, 0, MSG_CH3_00CF)
+        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CF)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Anim0B, ANIM_WorldBow_Anim0B, 0, MSG_CH3_00D0)
+        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00D0)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_00D1)
+    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D1)
     EVT_CALL(UseSettingsFrom, 0, 175, 0, 0)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(SetPanTarget, 0, 175, 0, 0)
@@ -370,7 +370,7 @@ EvtScript N(80243FE8) = {
             EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_00D2)
+    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D2)
     EVT_THREAD
         EVT_IF_NE(LVar6, 9)
             EVT_WAIT(12)
@@ -1001,22 +1001,22 @@ StaticNpc N(npcGroup_80246C8C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_WorldBow_Anim01,
-        ANIM_WorldBow_Anim02,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim01,
-        ANIM_WorldBow_Anim01,
-        ANIM_WorldBow_Anim00,
-        ANIM_WorldBow_Anim00,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
-        ANIM_WorldBow_Anim03,
+        ANIM_WorldBow_Idle,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Idle,
+        ANIM_WorldBow_Idle,
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Run,
     },
 };
 

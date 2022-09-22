@@ -1019,7 +1019,7 @@ EvtScript N(80244058) = {
     EVT_END_IF
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5, MSG_CH6_00C9)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00C9)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
@@ -1145,7 +1145,7 @@ EvtScript N(80244774) = {
     EVT_END_IF
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5, MSG_CH6_00C1)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00C1)
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(20)
     EVT_CALL(PutPartnerAway)
@@ -1167,7 +1167,7 @@ EvtScript N(80244774) = {
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5, MSG_CH6_00C2)
+    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00C2)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))

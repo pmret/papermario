@@ -472,7 +472,7 @@ EvtScript N(handleEvent_8021DF88) = {
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
-            EVT_SET_CONST(LVar2, ANIM_WorldParakarry_Anim00)
+            EVT_SET_CONST(LVar2, ANIM_WorldParakarry_Still)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT

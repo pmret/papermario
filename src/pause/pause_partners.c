@@ -65,33 +65,33 @@ s32 gPausePartnersSpriteAnims[][4] = {
         ANIM_LIST_END
     },
     {
-        ANIM_WorldParakarry_Anim00,
-        ANIM_WorldParakarry_Anim02,
-        ANIM_WorldParakarry_Anim06,
+        ANIM_WorldParakarry_Still,
+        ANIM_WorldParakarry_Walk,
+        ANIM_WorldParakarry_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldBow_Anim00,
-        ANIM_WorldBow_Anim02,
-        ANIM_WorldBow_Anim04,
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldWatt_Anim00,
-        ANIM_WorldWatt_Anim02,
-        ANIM_WorldWatt_Anim04,
+        ANIM_WorldWatt_Still,
+        ANIM_WorldWatt_Walk,
+        ANIM_WorldWatt_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldSushie_Anim00,
-        ANIM_WorldSushie_Anim02,
-        ANIM_WorldSushie_Anim04,
+        ANIM_WorldSushie_Still,
+        ANIM_WorldSushie_Walk,
+        ANIM_WorldSushie_Talk,
         ANIM_LIST_END
     },
     {
-        ANIM_WorldLakilester_Anim00,
-        ANIM_WorldLakilester_Anim05,
-        ANIM_WorldLakilester_Anim09,
+        ANIM_WorldLakilester_Still,
+        ANIM_WorldLakilester_Walk,
+        ANIM_WorldLakilester_Talk,
         ANIM_LIST_END
     }
 };

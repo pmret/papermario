@@ -549,9 +549,9 @@ EvtScript N(idle_80242A24) = {
         EVT_CASE_EQ(3)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH3_00FE)
         EVT_CASE_EQ(4)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Anim06, ANIM_WorldParakarry_Anim01, 0, MSG_CH3_00FF)
+            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH3_00FF)
         EVT_CASE_EQ(9)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Anim04, ANIM_WorldBow_Anim01, 0, MSG_CH3_0100)
+            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_0100)
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(15)

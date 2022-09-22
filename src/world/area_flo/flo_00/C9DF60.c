@@ -990,9 +990,9 @@ EvtScript N(interact_80244C98) = {
             EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
             EVT_WAIT(10)
             EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Anim0B, ANIM_WorldLakilester_Anim03, 5, MSG_CH6_0033)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldLakilester_Anim01)
-            EVT_CALL(EndSpeech, -4, ANIM_WorldLakilester_Anim09, ANIM_WorldLakilester_Anim01, 5)
+            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 5, MSG_CH6_0033)
+            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldLakilester_Idle)
+            EVT_CALL(EndSpeech, -4, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5)
             EVT_CALL(EnablePartnerAI)
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, 7, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
@@ -1335,12 +1335,12 @@ EvtScript N(80245EB8) = {
     EVT_WAIT(70)
     EVT_CALL(InterpNpcYaw, 0, 90, 0)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim09)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Talk)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Anim01)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_WorldParakarry_Anim06)
+    EVT_CALL(SetNpcAnimation, 0, ANIM_WorldLakilester_Idle)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_WorldParakarry_Talk)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, 2, ANIM_WorldParakarry_Anim01)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_WorldParakarry_Idle)
     EVT_CALL(InterpNpcYaw, 2, 90, 0)
     EVT_CALL(NpcFlyTo, 2, 400, 200, 287, 80, -5, 0)
     EVT_CALL(InterpNpcYaw, 0, 270, 0)
@@ -1389,22 +1389,22 @@ StaticNpc N(npcGroup_80246264)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
-            ANIM_WorldLakilester_Anim01,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
+            ANIM_WorldLakilester_Idle,
         },
     },
     {
@@ -1451,22 +1451,22 @@ StaticNpc N(npcGroup_80246264)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim02,
-            ANIM_WorldParakarry_Anim03,
-            ANIM_WorldParakarry_Anim03,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim00,
-            ANIM_WorldParakarry_Anim00,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
-            ANIM_WorldParakarry_Anim01,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Walk,
+            ANIM_WorldParakarry_Run,
+            ANIM_WorldParakarry_Run,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Still,
+            ANIM_WorldParakarry_Still,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
+            ANIM_WorldParakarry_Idle,
         },
     },
 };
