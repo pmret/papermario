@@ -211,7 +211,7 @@ AnimID battle_menu_partnerChooseMoveAnimations[] = {
 AnimID D_802AB558[] = {
     [PARTNER_NONE]       0, 
     [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Walk, 
-    [PARTNER_KOOPER]     ANIM_BattleKooper_Anim05, 
+    [PARTNER_KOOPER]     ANIM_BattleKooper_Walk, 
     [PARTNER_BOMBETTE]   ANIM_BattleBombette_Walk, 
     [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Walk, 
     [PARTNER_GOOMPA]     ANIM_Goompa_Walk, 

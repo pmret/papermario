@@ -61,11 +61,11 @@ s32 D_8029C890[][5] = {
         ANIM_BattleGoombario_Idle,
     },
     [PARTNER_KOOPER] {
-        ANIM_BattleKooper_Anim06,
-        ANIM_BattleKooper_Anim1B,
-        ANIM_BattleKooper_Anim1B,
-        ANIM_BattleKooper_Anim06,
-        ANIM_BattleKooper_Anim04,
+        ANIM_BattleKooper_Run,
+        ANIM_BattleKooper_Pray,
+        ANIM_BattleKooper_Pray,
+        ANIM_BattleKooper_Run,
+        ANIM_BattleKooper_Idle,
     },
    [PARTNER_BOMBETTE] {
         ANIM_BattleBombette_Run,

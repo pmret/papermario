@@ -548,44 +548,44 @@ BattleGoombario:
     - Injured
 BattleKooper:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Shell1
+    - Shell2
+    - Shell3
+    - Shell4
+    - Shell5
+    - Shell6
+    - Shell7
+    - Shell8
+    - Hurt1
+    - Hurt2
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - Talk
+    - Shout1
+    - Shout2
+    - Pleased
+    - Celebrate1
+    - Celebrate2
+    - Celebrate3
+    - Jump
+    - Fall
+    - Toppled1
+    - Toppled2
+    - Pray1
+    - Pray2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnDead
+    - Think
+    - Sad
   palettes:
     - Default
     - Poisoned
@@ -597,35 +597,35 @@ BattleKooper:
     - Red3
     - Red4
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
+    - Still
+    - StillHappy
+    - StillSad
+    - StillToppled
+    - Idle
+    - Walk
+    - Run
+    - Jump
+    - Fall
+    - ShellStill
+    - ShellSpinSlowest
+    - ShellSpinSlower
+    - ShellSpinFaster
+    - ShellSpinFastest
+    - EnterShell
+    - ExitShell
+    - LowerShell
+    - Hurt
+    - BurnHurt
+    - BurnDead
+    - Talk
+    - Shout
+    - Celebrate
+    - CelebrateLoop
+    - ShellStillAlt
+    - Toppled
     - Think
-    - Anim1B
-    - Anim1C
+    - Pray
+    - Injured
 BattleBombette:
   variations:
     - Variant00
@@ -3035,13 +3035,13 @@ Swooper:
     - Raster2A
   palettes:
     - Default
-    - Grey
+    - Gray
     - Poisoned
-    - Grey_Poisoned
+    - Gray_Poisoned
     - Dizzy
-    - Grey_Dizzy
+    - Gray_Dizzy
     - Shocked
-    - Grey_Shocked
+    - Gray_Shocked
     - Burnt
   animations:
     - Anim00
@@ -4103,7 +4103,7 @@ HeartPlant:
     - Raster13
   palettes:
     - Default
-    - Grey
+    - Gray
   animations:
     - Anim00
     - Anim01
@@ -5376,25 +5376,25 @@ Magikoopa:
     - Yellow
     - White
     - Green
-    - Grey
+    - Gray
     - Poisoned
     - Red_Poisoned
     - Yellow_Poisoned
     - White_Poisoned
     - Green_Poisoned
-    - Grey_Poisoned
+    - Gray_Poisoned
     - Dizzy
     - Red_Dizzy
     - Yellow_Dizzy
     - White_Dizzy
     - Green_Dizzy
-    - Grey_Dizzy
+    - Gray_Dizzy
     - Shocked
     - Red_Shocked
     - Yellow_Shocked
     - White_Shocked
     - Green_Shocked
-    - Grey_Shocked
+    - Gray_Shocked
     - Burnt
   animations:
     - Anim00
@@ -5444,25 +5444,25 @@ FlyingMagikoopa:
     - Yellow
     - White
     - Green
-    - Grey
+    - Gray
     - Poisoned
     - Red_Poisoned
     - Yellow_Poisoned
     - White_Poisoned
     - Green_Poisoned
-    - Grey_Poisoned
+    - Gray_Poisoned
     - Dizzy
     - Red_Dizzy
     - Yellow_Dizzy
     - White_Dizzy
     - Green_Dizzy
-    - Grey_Dizzy
+    - Gray_Dizzy
     - Shocked
     - Red_Shocked
     - Yellow_Shocked
     - White_Shocked
     - Green_Shocked
-    - Grey_Shocked
+    - Gray_Shocked
     - Burnt
   animations:
     - Anim00
@@ -6754,7 +6754,7 @@ BigLanternGhost:
     - Dim_Shocked
     - Unlit_Shocked
     - Burnt
-    - Grey
+    - Gray
   animations:
     - Anim00
     - Anim01
@@ -7206,7 +7206,7 @@ GeneralGuyBomb:
     - Raster04
   palettes:
     - Default
-    - Grey
+    - Gray
     - Fuse
   animations:
     - Anim00
