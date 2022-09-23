@@ -98,7 +98,7 @@ void filemenu_draw_contents_file_create_header(
     s32 tempAmt;
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_ENTER_A_FILE_NAME), baseX + 10, baseY + 6, 255, 0, 0);
-    filemenu_draw_file_name(filemenu_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
+    filemenu_draw_file_name(filemenu_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 11);
     xOffset = 41;
 
     for (i = 0; i < 8; i++) {
@@ -122,141 +122,129 @@ void filemenu_draw_contents_file_create_header(
     }
 }
 
-/*
 void filemenu_draw_contents_choose_name(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
     s32 width, s32 height,
     s32 opacity, s32 darkening
-);
-*/
-
-#ifdef NON_MATCHING
-void filemenu_draw_contents_choose_name(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
-                                        s32 darkening)
-{
+) {
     s32 sp18;
-    s32 menuPage;
-    s32 pageNotOne;
-    s32 page;
-    s32 temp_s2;
-    s32 new_var;
+    s32 sp1C;
+    s32 sp20;
+    s32 sp24;
 
-    s32 gridData;
-    s32 xOffset;
-    s32 yOffset;
-    s32 color;
-    s32 flags;
-    s32 i;
-    s32 r;
-    s32 c;
+    s32 s6;
+    s32 s2;
+    s32 s4;
+    s32 s7;
+    s32 s3;
+    s32 t0;
+    s32 v1;
+    s32 s5;
+    s32 s0;
+    s32 s1;
+    Window* window = &gWindows[49];
 
-    s32 new_var2;
-
-    if ((D_8015A370.unk_00 & 8) && D_8015A370.unk_04 == func_80248170) {
-        sp18 = D_8015A370.unk_1C * 2;
-        menuPage = menu->page;
-        pageNotOne = menu->page != 1;
+    if ((window->flags & WINDOW_FLAGS_INITIAL_ANIMATION) && window->fpUpdate.func == func_80248170) {
+        sp18 = window->updateCounter * 2;
+        sp1C = menu->page;
+        sp20 = menu->page != 1;
         if (sp18 > 0x10) {
             sp18 = 0x10;
         }
 
-        for (r = 0; r < menu->numRows; r++) {
-            temp_s2 = (r * 15); // ???
-
-            for (i = 0; i < 2; i++) {
-                if (i == 0) {
-                    temp_s2 += 4;
-                    page = menuPage;
+        for (s6 = 0; s6 < menu->numRows; s6++) {
+            for (t0 = 0; t0 < 2; t0++) {
+                s2 = 15 * s6 + 4;
+                if (t0 == 0) {
+                    sp24 = sp1C;
                     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
                                   baseX,
-                                  baseY + temp_s2,
+                                  baseY + s2,
                                   baseX + width,
-                                  baseY + temp_s2 + sp18);
+                                  baseY + s2 + sp18);
                 } else {
-                    temp_s2 += 4;
-                    page = pageNotOne;
+                    sp24 = sp20;
                     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
                                   baseX,
-                                  baseY + temp_s2 + sp18,
+                                  baseY + s2 + sp18,
                                   baseX + width,
-                                  baseY + temp_s2 + 0x10);
+                                  baseY + s2 + 0x10);
                 }
 
-                for (c = 0; c < menu->numCols; c++) {
-                    gridData = menu->gridData[(page * menu->numCols * menu->numRows) + (menu->numCols * r) + c];
-                    if (gridData != 0xF7) {
-                        if (r == menu->col && c == menu->row) {
-                            flags = 8;
-                            color = 0;
+                for (s4 = 0; s4 < menu->numCols; s4++) {
+                    s3 = menu->gridData[sp24 * menu->numCols * menu->numRows + menu->numCols * s6 + s4];
+                    if (s3 != 0xF7) {
+                        if (s4 == menu->col && s6 == menu->row) {
+                            v1 = 8;
+                            s5 = 0;
                         } else {
-                            flags = 0;
-                            color = 10;
+                            v1 = 0;
+                            s5 = 10;
                         }
-                        xOffset = (c * 19) + 12;
-                        yOffset = (r * 17) + 5;
-                        if ((u32) (gridData - 0xA2) < 0x4EU) {
-                            if (gridData >= 0xC6) {
-                                hud_element_set_render_pos(D_8024C108, baseX + xOffset + 22, baseY + yOffset + 8);
+                        s0 = 19 * s4 + 12;
+                        s2 = 17 * s6 + 5;
+                        s1 = s3;
+                        if (s3 >= 0xA2 && s3 < 0xF0) {
+                            if (s3 >= 0xC6) {
+                                hud_element_set_render_pos(D_8024C108, baseX + s0 + 22, baseY + s2 + 8);
                                 hud_element_draw_without_clipping(D_8024C108);
-                                flags = 0;
+                                v1 = 0;
                             }
                         }
-                        if (gridData == 0xC6) {
-                            xOffset -= 1;
+                        if (s1 == 0xC6) {
+                            s0 -= 1;
                         }
-                        if (gridData == 0xC9) {
-                            xOffset += 5;
+                        if (s1 == 0xC9) {
+                            s0 += 5;
                         }
-                        if (gridData == 0xCA) {
-                            xOffset += 8;
+                        if (s1 == 0xCA) {
+                            s0 += 8;
                         }
-                        if (gridData == 0xC6 || gridData == 0xCA || gridData == 0xC9) {
-                            yOffset -= 1;
+                        if (s1 == 0xC6 || s1 == 0xCA || s1 == 0xC9) {
+                            s2 -= 1;
                         }
-                        filemenu_draw_message((Message* ) gridData, baseX + xOffset, baseY + yOffset, 255, color, flags);
+                        filemenu_draw_message(s3, baseX + s0, baseY + s2, 255, s5, v1);
                     }
                 }
             }
         }
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX, baseY, baseX + width, baseY + height);
     } else {
-        for (r = 0; r < menu->numCols; r++) {
-            for (c = 0; c < menu->numRows; c++) {
-                gridData = menu->gridData[(menu->page * menu->numCols * menu->numRows) + (menu->numCols * c) + r];
-                if (gridData != 0xF7) {
-                    if (r == menu->col && c == menu->row) {
-                        flags = 8;
-                        color = 0;
+        for (s4 = 0; s4 < menu->numCols; s4++) {
+            for (s6 = 0; s6 < menu->numRows; s6++) {
+                s3 = menu->gridData[menu->page * menu->numCols * menu->numRows + menu->numCols * s6 + s4];
+                if (s3 != 0xF7) {
+                    if (s4 == menu->col && s6 == menu->row) {
+                        v1 = 8;
+                        s5 = 0;
                     } else {
-                        flags = 0;
-                        color = 10;
+                        v1 = 0;
+                        s5 = 10;
                     }
-                    xOffset = (r * 19) + 12;
-                    yOffset = (c * 17) + 5;
-
-                    new_var2 = gridData; // ???
-
-                    if ((u32) (gridData - 0xA2) < 0x4EU) {
-                        if (gridData >= 0xC6) {
-                            hud_element_set_render_pos(D_8024C108, baseX + xOffset + 22, baseY + yOffset + 8);
+                    s0 = s4 * 19 + 12;
+                    s2 = s6 * 17 + 5;
+                    s1 = s3;
+                    if (s3 >= 0xA2 && s3 < 0xF0) {
+                        if (s3 >= 0xC6) {
+                            hud_element_set_render_pos(D_8024C108, baseX + s0 + 22, baseY + s2 + 8);
                             hud_element_draw_without_clipping(D_8024C108);
-                            flags = 0;
+                            v1 = 0;
                         }
                     }
-                    if (gridData == 0xC6) {
-                        xOffset -= 1;
+                    if (s1 == 0xC6) {
+                        s0 -= 1;
                     }
-                    if (gridData == 0xC9) {
-                        xOffset += 5;
+                    if (s1 == 0xC9) {
+                        s0 += 5;
                     }
-                    if (gridData == 0xCA) {
-                        xOffset += 8;
+                    if (s1 == 0xCA) {
+                        s0 += 8;
                     }
-                    if (gridData == 0xC6 || gridData == 0xCA || gridData == 0xC9) {
-                        yOffset -= 1;
+                    if (s1 == 0xC6 || s1 == 0xCA || s1 == 0xC9) {
+                        s2 -= 1;
                     }
-                    filemenu_draw_message((Message* ) new_var2, baseX + xOffset, baseY + yOffset, 255, color, flags);
+                    filemenu_draw_message(s3, baseX + s0, baseY + s2, 255, s5, v1);
                 }
             }
         }
@@ -267,12 +255,9 @@ void filemenu_draw_contents_choose_name(MenuPanel* menu, s32 baseX, s32 baseY, s
             D_8024A18C = -4;
         }
         D_8024A18C += 1;
-        filemenu_set_cursor_goal_pos(0x31, baseX + 2 + (menu->col * 19), baseY + 13 + (menu->row * 17));
+        filemenu_set_cursor_goal_pos(49, baseX + 2 + menu->col * 19, baseY + 13 + menu->row * 17);
     }
 }
-#else
-INCLUDE_ASM(s32, "168590", filemenu_draw_contents_choose_name);
-#endif
 
 void filemenu_choose_name_init(MenuPanel* menu) {
     s32 i;
