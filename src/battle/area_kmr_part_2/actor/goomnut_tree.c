@@ -6,7 +6,7 @@
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 
 s32 N(idleAnimations_802232D0)[] = {
-    STATUS_NORMAL,    ANIM_SpikyGoomnut_Anim00,
+    STATUS_NORMAL,    ANIM_SpikyGoomnut_Still,
     STATUS_END,
 };
 

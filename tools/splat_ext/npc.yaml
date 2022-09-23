@@ -6011,44 +6011,39 @@ GoombaKing:
     - Anim0E
 SpikyGoomnut:
   frames:
-    - Raster00
+    - Still
   palettes:
     - Default
   animations:
-    - Anim00
+    - Still
 DarkToad:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Neutral
+    - Talk1
+    - Talk2
+    - Idle1
+    - Idle2
+    - Idle3
+    - Step1
+    - Step2
+    - Step3
+    - Hurt1
+    - Hurt2
+    - Dismiss1
+    - Dismiss2
   palettes:
     - Black
     - Red
     - Yellow
     - Green
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Dismiss
+    - Hurt
 KoopaBros:
   variations:
     - Variant00
@@ -8170,158 +8165,148 @@ Toadette:
     - GiveItem
 VannaT:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Happy1
+    - Happy2
+    - Clap1
+    - Clap2
+    - Shrug1
+    - Shrug2
+    - Wave1
+    - Wave2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Walk
+    - Happy
+    - Clap
+    - Shrug
+    - Wave
 ToadKid:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Disappointed1
+    - Disappointed2
+    - Celebrate1
+    - Celebrate2
+    - Celebrate3
   palettes:
     - Red
     - Green
     - Blue
     - Yellow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Disappointed
 ToadGuard:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
+    - Neutral
+    - Idle1
+    - Idle2
+    - Talk
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Red
     - Green
     - Blue
     - Yellow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 HarryT:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Talk
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Unused1
+    - Unused2
 ToadMinister:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Think1
+    - Think2
+    - Talk
+    - RaiseArms
+    - Invite1
+    - Invite2
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - RaiseArm
+    - Think
+    - Invite
 Postmaster:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Neutral
+    - Talk
+    - GiveItem
+    - LWingFlap1
+    - RWingFlap1
+    - LWingFlap2
+    - RWingFlap2
+    - LWingFlap3
+    - RWingFlap3
+    - LWingFlap4
+    - RWingFlap4
+    - LWingFlap5
+    - RWingFlap5
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Talk
+    - GiveItem
+    - IdleAlt
+    - Unused1
+    - Unused2
+    - Unused3
+    - Unused4
+    - Unused5
 ConductorToad:
   frames:
     - Raster00
