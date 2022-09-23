@@ -3,8 +3,6 @@
 #include "ld_addrs.h"
 #include "entity.h"
 
-extern u32 HeartBlockPrinterClosed;
-
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptIdle;
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit;
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptHit;
@@ -15,6 +13,8 @@ extern Gfx Entity_HeartBlock_Render[];
 extern Gfx Entity_HeartBlockContent_RenderHeartSleeping[];
 extern Gfx Entity_HeartBlockContent_RenderHeartAwake[];
 extern Gfx Entity_HeartBlockContent_RenderHeartHappy[];
+
+BSS u32 HeartBlockPrinterClosed;
 
 f32 entity_HeartBlockContent_get_previous_yaw(HeartBlockContentData* data, s32 lagTime) {
     s32 bufIdx = data->yawBufferPos - lagTime;

@@ -74,12 +74,6 @@ extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
-extern s32 SaveBlockTutorialPrinterClosed;
-extern s32 SaveBlockResultPrinterClosed;
-extern MessagePrintState* SaveBlockTutorialPrinter;
-extern MessagePrintState* SaveBlockResultPrinter;
-
-extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[4];
 
 extern f32 D_800F7B74;
@@ -195,7 +189,6 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern struct EffectInstance* TriggerBlockVanishEffect;
 extern s32 D_802EA310[];
 extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 

@@ -925,6 +925,7 @@ segments:
     type: code
     start: 0x10CC10
     vram: 0x802EB3D0
+    follows_vram: entity
     subsegments:
     - [0x10CC10, data] # font width data
   - type: group

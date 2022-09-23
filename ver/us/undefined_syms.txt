@@ -1119,13 +1119,6 @@ mdl_clearRenderTasks = 0x802B7E00;
 D_802C0000 = 0x802C0000;
 D_802C05CC = 0x802C05CC;
 
-SaveBlockTutorialPrinterClosed = 0x802EB390;
-SaveBlockResultPrinterClosed = 0x802EB394;
-SaveBlockTutorialPrinter = 0x802EB398;
-SaveBlockResultPrinter = 0x802EB39C;
-SwitchToLink = 0x802EB3A0;
-TriggerBlockVanishEffect = 0x802EB3B0;
-HeartBlockPrinterClosed = 0x802EB3C0;
 D_802ED970 = 0x802ED970;
 D_802EE8D0 = 0x802EE8D0;
 D_802F39D0 = 0x802F39D0;
