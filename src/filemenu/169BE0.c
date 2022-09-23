@@ -202,14 +202,9 @@ void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 
 INCLUDE_ASM(s32, "169BE0", filemenu_draw_message);
 #endif
 
-// data migration
-#ifdef NON_MATCHING
 u8* filemenu_get_menu_message(s32 idx) {
     return gFileMenuMessages[idx];
 }
-#else
-INCLUDE_ASM(s32, "169BE0", filemenu_get_menu_message);
-#endif
 
 void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, s32 arg5, s32 arg6, s32 charWidth) {
     s32 i;
