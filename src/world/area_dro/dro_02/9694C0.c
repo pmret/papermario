@@ -1248,14 +1248,14 @@ EvtScript N(interact_8024ADE4) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_SET(LVar8, LVar0)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Anim04, ANIM_Toad_Red_Anim01, 0, LVar8)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar8)
     EVT_CALL(ShowChoice, MSG_Choice_0006)
     EVT_WAIT(3)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Anim04, ANIM_Toad_Red_Anim01, 0, LVar9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar9)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Anim04, ANIM_Toad_Red_Anim01, 0, LVarA)
+    EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
@@ -1295,7 +1295,7 @@ EvtScript N(interact_8024ADE4) = {
     EVT_EXEC_WAIT(N(8024D700))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Anim04, ANIM_Toad_Red_Anim01, 0, LVarB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
     EVT_END
@@ -2098,22 +2098,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            ANIM_Toad_Red_Anim01,
-            ANIM_Toad_Red_Anim02,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim01,
-            ANIM_Toad_Red_Anim01,
-            ANIM_Toad_Red_Anim06,
-            ANIM_Toad_Red_Anim06,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
-            ANIM_Toad_Red_Anim03,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Walk,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Disappointed,
+            ANIM_Toad_Red_Disappointed,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
         },
         .tattle = MSG_NpcTattle_DRO_ToadHouseToad,
     },

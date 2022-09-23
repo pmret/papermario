@@ -8101,32 +8101,26 @@ Luigi:
     - Anim1D
     - Anim1E
 Toad:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Disappointed1
+    - Disappointed2
+    - Disappointed3
+    - Celebrate1
+    - Celebrate2
+    - GiveItem
+    - Panic1
+    - Panic2
+    - Panic3
   palettes:
     - Red
     - Green
@@ -8134,51 +8128,46 @@ Toad:
     - Yellow
     - Pink
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Disappointed
+    - GiveItem
+    - Panic
 Toadette:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
+    - Neutral
+    - Idle1
+    - Idle2
+    - Disappointed1
+    - Idle3
+    - Idle4
+    - Blink
+    - Disappointed2
+    - Step1
+    - Step2
+    - Step3
+    - GiveItem
+    - Celebrate1
+    - Celebrate2
+    - Talk
   palettes:
     - Orange
     - Pink
     - Green
     - Purple
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Disappointed
+    - GiveItem
 VannaT:
   frames:
     - Raster00
