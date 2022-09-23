@@ -8902,59 +8902,54 @@ Bubulb:
     - Anim0F
 Penguin:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Step1
+    - Step2
+    - Step3
+    - Talk1
+    - Talk2
+    - Happy1
+    - Celebrate
+    - Happy2
+    - Idle
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Happy
 ShiverToad:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink1
+    - Blink2
+    - Blink3
+    - Talk
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Red
     - Green
     - Blue
     - Yellow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 AltBandit:
   variations:
     - Variant00
