@@ -607,24 +607,24 @@ EvtScript N(init_80243474) = {
 EvtScript N(interact_8024352C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim03, ANIM_Bubulb_Pink_Anim02, 0, MSG_CH6_0016)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0016)
         EVT_CASE_LT(46)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim03, ANIM_Bubulb_Pink_Anim02, 0, MSG_CH6_0017)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0017)
         EVT_CASE_LT(49)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim03, ANIM_Bubulb_Pink_Anim02, 0, MSG_CH6_0018)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0018)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim03, ANIM_Bubulb_Pink_Anim02, 0, MSG_CH6_0019)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0019)
         EVT_CASE_LT(57)
             EVT_SWITCH(AreaFlag(18))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim09, ANIM_Bubulb_Pink_Anim08, 0, MSG_CH6_001A)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001A)
                     EVT_SET(AreaFlag(18), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim09, ANIM_Bubulb_Pink_Anim08, 0, MSG_CH6_001B)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001B)
                     EVT_SET(AreaFlag(18), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Anim09, ANIM_Bubulb_Pink_Anim08, 0, MSG_CH6_001C)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001C)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -633,24 +633,24 @@ EvtScript N(interact_8024352C) = {
 EvtScript N(interact_802436C0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_001D)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001D)
         EVT_CASE_LT(46)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_001E)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001E)
         EVT_CASE_LT(49)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_001F)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001F)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_0020)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0020)
         EVT_CASE_LT(57)
             EVT_SWITCH(AreaFlag(19))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_0021)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0021)
                     EVT_SET(AreaFlag(19), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_0022)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0022)
                     EVT_SET(AreaFlag(19), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Anim03, ANIM_Bubulb_Purple_Anim02, 0, MSG_CH6_0023)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0023)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -659,24 +659,24 @@ EvtScript N(interact_802436C0) = {
 EvtScript N(interact_80243854) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim03, ANIM_Bubulb_Green_Anim02, 0, MSG_CH6_0024)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0024)
         EVT_CASE_LT(46)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim03, ANIM_Bubulb_Green_Anim02, 0, MSG_CH6_0025)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0025)
         EVT_CASE_LT(49)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim03, ANIM_Bubulb_Green_Anim02, 0, MSG_CH6_0026)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0026)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim03, ANIM_Bubulb_Green_Anim02, 0, MSG_CH6_0027)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0027)
         EVT_CASE_LT(57)
             EVT_SWITCH(AreaFlag(20))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim09, ANIM_Bubulb_Green_Anim08, 0, MSG_CH6_0028)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0028)
                     EVT_SET(AreaFlag(20), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim09, ANIM_Bubulb_Green_Anim08, 0, MSG_CH6_0029)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0029)
                     EVT_SET(AreaFlag(20), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Anim09, ANIM_Bubulb_Green_Anim08, 0, MSG_CH6_002A)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_002A)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -685,24 +685,24 @@ EvtScript N(interact_80243854) = {
 EvtScript N(interact_802439E8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim03, ANIM_Bubulb_Yellow_Anim02, 0, MSG_CH6_002B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002B)
         EVT_CASE_LT(46)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim03, ANIM_Bubulb_Yellow_Anim02, 0, MSG_CH6_002C)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002C)
         EVT_CASE_LT(49)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim03, ANIM_Bubulb_Yellow_Anim02, 0, MSG_CH6_002D)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002D)
         EVT_CASE_LT(53)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim03, ANIM_Bubulb_Yellow_Anim02, 0, MSG_CH6_002E)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002E)
         EVT_CASE_LT(57)
             EVT_SWITCH(AreaFlag(21))
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim09, ANIM_Bubulb_Yellow_Anim08, 0, MSG_CH6_002F)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_002F)
                     EVT_SET(AreaFlag(21), 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim09, ANIM_Bubulb_Yellow_Anim08, 0, MSG_CH6_0030)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0030)
                     EVT_SET(AreaFlag(21), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Anim09, ANIM_Bubulb_Yellow_Anim08, 0, MSG_CH6_0031)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0031)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1027,22 +1027,22 @@ StaticNpc N(npcGroup_80244E64) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim0E,
-        ANIM_Bubulb_Pink_Anim0E,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
-        ANIM_Bubulb_Pink_Anim02,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Walk,
+        ANIM_Bubulb_Pink_Walk,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
+        ANIM_Bubulb_Pink_Idle,
     },
 };
 
@@ -1061,22 +1061,22 @@ StaticNpc N(npcGroup_80245054)[] = {
         },
 	.territory = { .temp = { 2, -59, 0, -40, -80, 0, -40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim0E,
-            ANIM_Bubulb_Pink_Anim0E,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
-            ANIM_Bubulb_Pink_Anim02,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Walk,
+            ANIM_Bubulb_Pink_Walk,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
+            ANIM_Bubulb_Pink_Idle,
         },
         .tattle = MSG_NpcTattle_FLO_BulbulbA,
     },
@@ -1094,22 +1094,22 @@ StaticNpc N(npcGroup_80245054)[] = {
         },
 	.territory = { .temp = { 2, 67, 0, 85, 97, 0, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim0E,
-            ANIM_Bubulb_Purple_Anim0E,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
-            ANIM_Bubulb_Purple_Anim02,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Walk,
+            ANIM_Bubulb_Purple_Walk,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
+            ANIM_Bubulb_Purple_Idle,
         },
         .tattle = MSG_NpcTattle_FLO_BulbulbB,
     },
@@ -1127,22 +1127,22 @@ StaticNpc N(npcGroup_80245054)[] = {
         },
 	.territory = { .temp = { 2, 90, 0, 410, 120, 0, 410, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim0E,
-            ANIM_Bubulb_Green_Anim0E,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
-            ANIM_Bubulb_Green_Anim02,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Walk,
+            ANIM_Bubulb_Green_Walk,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
+            ANIM_Bubulb_Green_Idle,
         },
         .tattle = MSG_NpcTattle_FLO_BulbulbC,
     },
@@ -1160,22 +1160,22 @@ StaticNpc N(npcGroup_80245054)[] = {
         },
 	.territory = { .temp = { 2, 200, 0, 430, 240, 0, 430, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim0E,
-            ANIM_Bubulb_Yellow_Anim0E,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
-            ANIM_Bubulb_Yellow_Anim02,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Walk,
+            ANIM_Bubulb_Yellow_Walk,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
+            ANIM_Bubulb_Yellow_Idle,
         },
         .tattle = MSG_NpcTattle_FLO_BulbulbD,
     },

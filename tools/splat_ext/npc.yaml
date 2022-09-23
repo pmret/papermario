@@ -8669,29 +8669,23 @@ Boo:
     - CarryTalk
     - CarryHappy
 Yoshi:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Talk
+    - Celebrate1
+    - Celebrate2
+    - Disappointed1
+    - Disappointed2
+    - Panic1
+    - Panic2
+    - Panic3
+    - Cry1
+    - Cry2
+    - Cry3
   palettes:
     - Green
     - Blue
@@ -8699,118 +8693,112 @@ Yoshi:
     - Yellow
     - Red
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Disappointed
+    - Panic
+    - Cry
+    - CryTalk
+    - Jump
+    - Land
 YoshiKid:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - Idle1
+    - Idle2
+    - Talk
+    - Step1
+    - Step2
+    - Step3
+    - Land
+    - Jump
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Cry1
+    - Cry2
+    - Cry3
+    - Cry4
+    - SadIdle1
+    - SadIdle2
+    - SadTalk
+    - LookUp
+    - Exhale1
+    - Exhale2
+    - Exhale3
+    - Eat1
+    - Eat2
+    - Eat3
+    - Eat4
+    - Tongue1
+    - Tongue2
+    - Food1
+    - Food2
+    - Food3
+    - Food4
+    - Food5
+    - Food6
+    - Tear1
+    - Tear2
+    - Tear3
   palettes:
     - Green
     - Blue
     - Purple
     - Yellow
     - Red
-    - Dirt
+    - Food
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Celebrate
+    - Cry
+    - Sleep
+    - Jump
+    - Land
+    - SadIdle
+    - SadTalk
+    - LookUp
+    - EatMiss
+    - EatAim
+    - EatGrab
+    - EatDone
+    - Exhale
 Raven:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
+    - Idle1
+    - Idle2
+    - Idle3
+    - Step1
+    - Step2
+    - Talk
+    - Flail1
+    - Flail2
+    - Flail3
+    - Crash1
+    - Crash2
+    - Crash3
+    - Crash4
+    - IdleBack1
+    - IdleBack2
+    - IdleBack3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - IdleBack
+    - Walk
+    - Run
+    - Talk
+    - Flail
+    - Crash
 Bubulb:
   variations:
     - Variant00
@@ -8820,44 +8808,44 @@ Bubulb:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - NoseTwitch
+    - Talk1
+    - Talk2
+    - Happy1
+    - Happy2
+    - BuriedNeutral
+    - PopUp1
+    - PopUp2
+    - PopUp3
+    - Hole
+    - HoleOpen1
+    - HoleOpen2
+    - BuriedIdle1
+    - BuriedIdle2
+    - HappyGentle1
+    - HappyGentle2
+    - HappyGentle3
+    - HappyTalk1
+    - HappyTalk2
+    - DarkStep1
+    - DarkStep2
+    - DarkStep3
+    - Bloom1
+    - Bloom2
+    - Bloom3
+    - Bloom4
+    - EmbedIdle1
+    - EmbedIdle2
+    - EmbedIdle3
+    - EmbedIdle4
+    - EmbedIdle5
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Pink
     - Purple
@@ -8865,27 +8853,27 @@ Bubulb:
     - Yellow
     - Lighter
     - Hole
-    - Cycle1
-    - Cycle2
-    - Cycle3
-    - Cycle4
+    - Darker
+    - Unused1
+    - Unused2
+    - Unused3
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - BuriedStill
+    - Idle
+    - Talk
+    - HappyUpbeat
+    - PopUp
+    - Bloom
+    - BuriedIdle
+    - HappyGentle
+    - HappyTalk
+    - EmbedIdle # for embedding in messages
+    - DarkWalk
+    - DarkStepLeft
+    - DarkStepRight
+    - Walk
+    - Run
 Penguin:
   frames:
     - Neutral
@@ -8941,53 +8929,53 @@ AltBandit:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
+    - Step1
+    - Step2
+    - Step3
+    - Neutral
+    - CarryStep1
+    - CarryStep2
+    - CarryStep3
+    - CarryNeutral
+    - LookUp
+    - Taunt
+    - Tackle
+    - Hurt1
+    - Idle1
+    - Idle2
+    - CarryIdle1
+    - CarryIdle2
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnStill
+    - Talk
+    - SmokeCloud1
+    - SmokeCloud2
+    - SmokeCloud3
+    - SmokeCloud4
+    - SmokeCloud5
+    - SmokeCloud6
   palettes:
     - Blue
     - Red
     - Smoke
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
+    - Still
+    - Idle
+    - CarryIdle
+    - Walk
+    - CarryWalk
+    - Run
+    - CarryRun
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - SmokeCloud
+    - Tackle
+    - LookUp
+    - Taunt
+    - Talk
 Goompa:
   frames:
     - Step1
