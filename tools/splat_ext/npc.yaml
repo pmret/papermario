@@ -10836,54 +10836,51 @@ Coin:
   animations:
     - Rotate
 ParadePeach:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
+    - ShadeNeutral
+    - RaiseArms1
+    - RaiseArms2
+    - Talk1
+    - Talk2
+    - Talk3
+    - RaisedArms
+    - RaisedArmsBlink1
+    - RaisedArmsBlink2
+    - Horror1
+    - Horror2
+    - Horror3
+    - Weep1
+    - Weep2
+    - Weep3
+    - ShadeWave1
+    - ShadeWave2
+    - ShadeWave3
+    - ShadeFaceSide
+    - ShadeKiss1
+    - ShadeKiss2
+    - ShadeSlightBow
+    - LeanBack
+    - ShadeNeutral
+    - ShadeStep1
+    - ShadeStep2
+    - ShadeStep3
+    - ShadeNeutralBack
+    - ShadeStepBack1
+    - ShadeStepBack2
+    - ShadeStepBack3
+    - ShadeRaiseArms1
+    - ShadeRaiseArms2
+    - ShadeTalk1
+    - ShadeTalk2
+    - ShadeTalk3
+    - ShadeBlink1
+    - ShadeBlink2
+    - Bow1
+    - Bow2
+    - Run1
+    - Run2
+    - Run3
+    - Run4
   palettes:
     - Default
     - Dark
@@ -10894,178 +10891,175 @@ ParadePeach:
     - Shocked
     - Unused3
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-ParadeKoopa:
+    - Still
+    - RaiseArms
+    - Talk
+    - LowerArms
+    - IdleRaisedArms
+    - HorrorBegin
+    - HorrorLoop
+    - Weep
+    - EndWeep
+    - Run
+    - Bow
+    - LeanBack
+    - ShadeStill
+    - ShadeIdle
+    - ShadeBack
+    - ShadeWalk
+    - ShadeWalkBack
+    - ShadeRaiseArms
+    - ShadeTalk
+    - ShadeLowerArms
+    - ShadeWaveSlow
+    - ShadeWaveFast
+    - ShadeSlightBow
+    - ShadeFaceSide
+    - ShadeKiss
+    - ShadeEndKiss
+ParadeKoopas:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
+    - ClownCar
+    - Propeller1
+    - Propeller2
+    - Propeller3
+    - Propeller4
+    - Propeller5
+    - BowserHair
+    - BowserHead
+    - BowserArmsCrossed
+    - BowserBody
+    - HammerBrosJuggle1
+    - HammerBrosJuggle2
+    - HammerBrosJuggle3
+    - HammerBrosPanic1
+    - HammerBrosPanic2
+    - HammerBrosPanic3
+    - Hammer
+    - KoopatrolMarch1
+    - KoopatrolMarch2
+    - KoopatrolMarch3
+    - KoopatrolPanic1
+    - KoopatrolPanic2
+    - KoopatrolPanic3
+    - KoopatrolFlagMarch1
+    - KoopatrolFlagMarch2
+    - KoopatrolFlagMarch3
+    - KoopatrolFlagPanic1
+    - KoopatrolFlagPanic2
+    - KoopatrolFlagPanic3
+    - KoopatrolFlagPanic4
   palettes:
     - Bowser
     - HammerBros
     - Koopatrol
     - Banner
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Bowser
+    - Propeller
+    - HammerBrosJuggle
+    - KoopatrolMarch
+    - HammerBrosPanic
+    - KoopatrolPanic
 ParadeBurntBowser:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
+    - ClownCar
+    - Hair
+    - Head
+    - HeadBlink
+    - ArmsCrossed
+    - Body
+    - Propeller1
+    - Propeller2
+    - Propeller3
+    - Propeller4
+    - Propeller5
+    - ShadowIdle1
+    - ShadowIdle2
+    - ShadowPropeller1
+    - ShadowPropeller2
+    - ShadowPropeller3
+    - ShadowPropeller4
+    - ShadowPropeller5
   palettes:
     - Default
     - Shadow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - BurntIdle
+    - BurntDrawBack
+    - BurntPropeller
+    - ShadowStill
+    - ShadowFly
 ParadeLuigi:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
+    - Idle1
+    - Idle2
+    - Blink
+    - BlowWhistle1
+    - March1
+    - March2
+    - March3
+    - MarchInPlace1
+    - MarchInPlace2
+    - MarchInPlace3
+    - BlowWhistle2
+    - BatonIdle
+    - BatonWave1
+    - BatonWave2
+    - BatonShake1
+    - BatonShake2
+    - BatonShake3
+    - BatonShake4
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - March
+    - MarchInPlace
+    - BlowWhistle
 ParadePartner:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
+    - Goombario1
+    - Goombario2
+    - Kooper1
+    - Kooper2
+    - Kooper3
+    - Bombette1
+    - Bombette2
+    - Parakarry1
+    - Parakarry2
+    - Parakarry3
+    - LWingFlap1
+    - RWingFlap1
+    - LWingFlap2
+    - RWingFlap2
+    - LWingFlap3
+    - RWingFlap3
+    - LWingFlap4
+    - RWingFlap4
+    - Sushie1
+    - Sushie2
+    - Sushie3
+    - LWingFlap5
+    - RWingFlap5
+    - Watt1
+    - Watt2
+    - Watt3
+    - Bow1
+    - Bow2
+    - BowFan1
+    - BowFan2
+    - BowArm1
+    - BowArm2
+    - BowPatch
+    - LakilesterCloud1
+    - LakilesterCloud2
+    - LakilesterCloud3
+    - Lakilester1
+    - Lakilester2
+    - Lakilester3
+    - BombetteGear
   palettes:
     - Goombario
     - Kooper
@@ -11078,38 +11072,33 @@ ParadePartner:
     - BowPatch
     - Lakilester
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Goombario
+    - Kooper
+    - Bombette
+    - Parakarry
+    - Bow
+    - Watt
+    - Sushie
+    - Lakilester
 ParadeYoshi:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - IdleBrown1
+    - IdleBrown2
+    - BlinkBrown
+    - BlinkGreen
+    - BlinkBlue
+    - BlinkYellow
+    - IdleGreen1
+    - IdleBlue1
+    - IdleYellow1
+    - IdleGreen2
+    - IdleBlue2
+    - IdleYellow2
+    - IdleChief1
+    - IdleChief2
+    - IdleChief3
+    - IdleBlink1
+    - IdleBlink2
   palettes:
     - Brown
     - Green
@@ -11117,115 +11106,109 @@ ParadeYoshi:
     - Yellow
     - Chief
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - StillBlue
+    - StillYellow
+    - StillBrown
+    - StillLeader
+    - Idle
+    - IdleBlue
+    - IdleYellow
+    - IdleBrown
+    - IdleLeader
 ParadeKolorado:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
+    - Idle1
+    - Idle2
+    - Idle3
+    - IdleForward1
+    - IdleForward2
+    - IdleForward3
+    - WifeIdle1
+    - WifeIdle2
+    - WifeIdle3
+    - WifeIdleForward1
+    - WifeIdleForward2
+    - WifeIdleForward3
+    - Wave1
+    - Wave2
+    - WifeWave1
+    - WifeWave2
   palettes:
     - Default
     - Wife
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Idle
+    - IdleForward
+    - Wave
+    - WifeIdle
+    - WifeIdleForward
+    - WifeWave
 ParadeChick:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Chirp1
+    - Chirp2
+    - ChirpForward1
+    - ChirpForward2
+    - BreakEgg
+    - BreakEggForward
+    - Egg
+    - EggShatter1
+    - EggShatter2
+    - EggShatter3
+    - EggShatter4
+    - EggShatter5
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - StillForward
+    - Egg
+    - Chirp
+    - ChirpForward
+    - BreakEgg
+    - BreakEggForward
+    - EggTremble
 ParadeIceShow:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
+    - ViolinPlay1
+    - ViolinPlay2
+    - ViolinPlay3
+    - ViolinPlayUpright1
+    - ViolinPlayUpright2
+    - ViolinPlayUpright3
+    - Skate1
+    - Skate2
+    - Skate3
+    - SkateStand
+    - DivaIdle1
+    - DivaIdle2
+    - DivaIdle3
+    - DivaIdle4
+    - DivaIdle5
+    - DivaBlink
+    - DivaSing1
+    - DivaSing2
+    - DivaSing3
+    - ShadeDivaIdle1
+    - ShadeDivaIdle2
+    - ShadeDivaIdle3
+    - ShadeDivaIdle4
+    - ShadeDivaIdle5
+    - ShadeDivaBlink
+    - ShadeDivaSing1
+    - ShadeDivaSing2
+    - ShadeDivaSing3
+    - ShadeMayorIdle1
+    - ShadeMayorIdle2
+    - ShadeMayorWifeIdle1
+    - ShadeMayorWifeIdle2
+    - ShadeMayorStep1
+    - ShadeMayorStep2
+    - ShadeMayorStep3
+    - ShadeMayorWifeStep1
+    - ShadeMayorWifeStep2
+    - ShadeMayorWifeStep3
   palettes:
     - Violin
     - ViolinGlow
@@ -11237,61 +11220,58 @@ ParadeIceShow:
     - Mayor
     - MayorsWife
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
+    - ViolinStill
+    - ViolinStillUpright
+    - ViolinPlay
+    - ViolinPlayUpright
+    - SkateStill
+    - SkateIdle
+    - SkateKickLeft
+    - SkateKickRight
+    - DivaStill
+    - DivaIdle
+    - DivaSing
+    - ShadeDivaStill
+    - ShadeDivaIdle
+    - ShadeDivaSing
+    - ShadeMayorStill
+    - ShadeMayorIdle
+    - ShadeMayorWalk
+    - ShadeMayorWifeStill
+    - ShadeMayorWifeIdle
+    - ShadeMayorWifeWalk
 ParadeToad:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
+    - HornStep1
+    - HornStep2
+    - HornStep3
+    - DrummerStep1
+    - DrummerStep2
+    - DrummerStep3
+    - BannerStep1
+    - BannerStep2
+    - BannerStep3
+    - BannerWave1
+    - BannerWave2
+    - BannerNeutral
+    - BannerWave3
+    - ToadStill
+    - ToadetteStill
+    - TwirlerStep1
+    - TwirlerStep2
+    - TwirlerStep3
+    - TwirlerJoy
+    - TwirlerToss1
+    - TwirlerToss2
+    - Baton
+    - HornIdle1
+    - HornIdle2
+    - DrummerIdle1
+    - DrummerIdle2
+    - BannerIdle1
+    - BannerIdle2
+    - TwirlerIdle1
+    - TwirlerIdle2
   palettes:
     - Red
     - RedGlow
@@ -11306,43 +11286,36 @@ ParadeToad:
     - Baton
     - BatonGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
+    - ToadStill
+    - ToadetteStill
+    - HornWalk
+    - DrummerWalk
+    - BannerWalk
+    - TwirlerWalk
+    - TwirlerToss
+    - TwirlerCatch
+    - TwirlerSpin
+    - BatonSpin
+    - HornStill
+    - DrummerStill
+    - BannerStill
+    - TwirlerStill
+    - HornIdle
+    - DrummerIdle
+    - BannerIdle
+    - TwirlerIdle
 ParadeTwirler:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
-    - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Joy
+    - Toss1
+    - Toss2
+    - Baton
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Dark
@@ -11351,50 +11324,39 @@ ParadeTwirler:
     - BatonDark
     - BatonDarkGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Walk
+    - Toss
+    - Spin
+    - Catch
+    - BatonSpin
 ParadeDrummer:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Dark
     - DarkGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Walk
 ParadeBanner:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
-    - Variant04
-    - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
+    - Step1
+    - Step2
+    - Step3
+    - BannerWave1
+    - BannerWave2
+    - BannerNeutral
+    - BannerWave3
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Dark
@@ -11403,76 +11365,69 @@ ParadeBanner:
     - BannerDark
     - BannerDarkGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Walk
 ParadeHorn:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Dark
     - DarkGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Idle
+    - Walk
 ParadeTubbaBalloon:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Arm
+    - Hair
+    - Foot
+    - Body
+    - Eyes
+    - Mouth
   palettes:
     - Default
   animations:
-    - Anim00
+    - Still
 ParadeWizard:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
+    - MerleGather1
+    - MerleGather2
+    - MerleRelease3
+    - MerleRelease4
+    - MerleeGather1
+    - MerleeGather2
+    - MerleeGather3
+    - MerleeGather4
+    - MerleeRelease1
+    - MerleeRelease2
+    - MerlonGather1
+    - MerlonGather2
+    - MerlonRelease3
+    - MerlonRelease4
+    - MerlonRelease5
+    - MerluvleeGather1
+    - MerluvleeGather2
+    - MerluvleeGather3
+    - MerluvleeGather4
+    - MerluvleeRelease1
+    - MerluvleeRelease2
+    - MerlarGather1
+    - MerlarGather2
+    - MerlarGather3
+    - MerlarGather4
+    - MerlarRelease1
+    - MerlarRelease2
+    - MerlowGather1
+    - MerlowGather2
+    - MerlowRelease3
+    - MerlowRelease4
   palettes:
     - Merle
     - MerleGlow
@@ -11488,87 +11443,87 @@ ParadeWizard:
     - Merlar
     - MerlarGlow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - MerleGather
+    - MerleRelease
+    - MerleeGather
+    - MerleeRelease
+    - MerlonGather
+    - MerlonRelease
+    - MerluvleeGather
+    - MerluvleeRelease
+    - MerlowGather
+    - MerlowRelease
+    - MerlarGather
+    - MerlarRelease
 ParadeMario:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
+    - Neutral
+    - Step1
+    - Step2
+    - Step3
+    - Blink
+    - Surprise
+    - NeutralBack
+    - SurpriseBlink
+    - LookUp
+    - LookDown
+    - Wave1
+    - Wave2
+    - Wave3
+    - Wave4
+    - WaveUp1
+    - WaveUp2
+    - WaveUp3
+    - WaveUp4
+    - StepBack1
+    - StepBack2
+    - StepBack3
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - StillBack
+    - Idle
+    - Walk
+    - WalkBack
+    - Wave
+    - LookUp
+    - StillUp
+    - WaveUp
+    - NodYes
+    - Surprise
 ParadeShyGuy:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
+    - GrooveNeutral
+    - GrooveLeanLeft
+    - GroovePivot
+    - GrooveLeanRight
+    - StackNeutral
+    - StackPointUp
+    - StackHold1
+    - StackHold2
+    - StackLand1
+    - StackLand2
+    - StackLand3
+    - StackLand4
+    - MarshallNeutral
+    - MarshallBeckon1
+    - MarshallBeckon2
+    - MarshallBeckon3
+    - MarshallBeckon4
+    - MarshallStep1
+    - MarshallStep2
+    - MarshallStep3
+    - MarshallStep4
+    - GeneralNeutral
+    - GeneralPoint1
+    - GeneralPoint2
+    - ShadeStep1
+    - ShadeStep2
+    - ShadeStep3
+    - ShadeStep4
+    - ShadePointUp
+    - ShadeNeutral
   palettes:
     - Default
     - Burnt
@@ -11580,36 +11535,36 @@ ParadeShyGuy:
     - DarkGlow
     - Dark
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
+    - GrooveStill
+    - GrooveLeanLeft
+    - GroovePivot
+    - GrooveLeanRight
+    - StackStill1
+    - StackStill2
+    - StackPointUp
+    - StackHold
+    - StackLand
+    - MarshallStill
+    - MarshallWalk
+    - MarshallBeckon
+    - MarshallPanic
+    - GeneralStill
+    - GeneralPoint
+    - ShadeWalk
+    - ShadeStill
+    - ShadePointUp
 ParadeTwink:
   frames:
-    - Raster00
-    - Raster01
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Unused1
     - Unused2
     - Unused3
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Idle
 Leaf:
   frames:
     - Still
