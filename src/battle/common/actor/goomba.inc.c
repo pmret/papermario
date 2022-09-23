@@ -202,7 +202,7 @@ EvtScript N(handleEvent_80219C14) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Shocked)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hurt)
@@ -220,7 +220,7 @@ EvtScript N(handleEvent_80219C14) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Shocked)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Dead)
@@ -299,7 +299,7 @@ EvtScript N(takeTurn_8021A440) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Midair)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -327,7 +327,7 @@ EvtScript N(takeTurn_8021A440) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Sleep)
@@ -346,7 +346,7 @@ EvtScript N(takeTurn_8021A440) = {
             EVT_END_IF
             EVT_WAIT(5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Headbonk)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Midair)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 20)
@@ -361,7 +361,7 @@ EvtScript N(takeTurn_8021A440) = {
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Dizzy)
@@ -403,7 +403,7 @@ EvtScript N(takeTurn_8021A440) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Tense)

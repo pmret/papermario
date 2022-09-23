@@ -1987,17 +1987,17 @@ ParaJrTroopa:
 Goomba:
   variations:
     - Default
-    - Red
-    - Hyper
-    - Frost
-    - Dark
+    - RedGoomba
+    - HyperGoomba
+    - FrostGoomba
+    - Gloomba
   frames:
     - Step1
     - Step2
     - Step3
     - Hurt1
     - Hurt2
-    - Headbonk
+    - Midair
     - Idle1
     - Idle2
     - Sleep
@@ -2041,7 +2041,7 @@ Goomba:
     - Idle
     - Walk
     - Run
-    - Headbonk
+    - Midair
     - Hurt
     - Dead
     - Dizzy
@@ -2051,31 +2051,31 @@ Goomba:
     - Tense
     - FakeToadstool
     - FakeMushroom
-    - Shocked
+    - Electrocute
 SpikedGoomba:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - SpikedGloomba
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
+    - Step1
+    - Step2
+    - Step3
+    - Hurt1
+    - Midair
+    - Idle1
+    - Idle2
+    - Idle3
+    - Sleep
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - BurnEyesClosed
+    - BurnEyesOpen
+    - Laugh1
+    - Laugh2
+    - Hurt2
+    - Electrocute
   palettes:
     - Default
     - Dark
@@ -2087,49 +2087,49 @@ SpikedGoomba:
     - Dark_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Midair
+    - HurtStill
+    - Hurt
+    - BurnEyesClosed
+    - BurnEyesOpen
+    - Dizzy
+    - Sleep
+    - Laugh
+    - Electrocute
 Paragoomba:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
+    - Default
+    - RedParagoomba
+    - HyperParagoomba
+    - Paragloomba
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
+    - Idle1
+    - Idle2
+    - Idle3
+    - Dive
+    - HurtStill
+    - WingsBurn
+    - WingsFlap1
+    - WingsFlap2
+    - WingsFlap3
+    - WingsDive
+    - LWing
+    - RWing
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - EyesClosed
+    - BurnHurt1
+    - BurnHurt2
+    - BurnEyesOpen
+    - Hurt1
+    - Hurt2
+    - Electrocute
   palettes:
     - Default
     - Red
@@ -2149,22 +2149,22 @@ Paragoomba:
     - Dark_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - Idle
+    - Miss
+    - Walk
+    - Run
+    - Dive
+    - Hurt
+    - HurtStill
+    - WingsStill
+    - LWingStill
+    - RWingStill
+    - Sleep
+    - Dizzy
+    - BurnHurt
+    - BurnStill
+    - Electrocute
 KoopaTroopa:
   variations:
     - DarkTroopa
@@ -2254,8 +2254,8 @@ KoopaTroopa:
     - Anim17
 ParaTroopa:
   variations:
-    - Variant00
-    - Variant01
+    - DarkTroopa
+    - Default
   frames:
     - Raster00
     - Raster01
@@ -2327,10 +2327,10 @@ ParaTroopa:
     - Anim13
 Fuzzy:
   variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
+    - Default
+    - ForestFuzzy
+    - BlueFuzzy
+    - JungleFuzzy
   frames:
     - Raster00
     - Raster01

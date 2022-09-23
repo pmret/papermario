@@ -161,15 +161,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_8021B518)[] = {
-    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Anim02,
-    STATUS_STONE,     ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Anim0B,
-    STATUS_POISON,    ANIM_Paragoomba_Hyper_Anim02,
-    STATUS_STOP,      ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Anim02,
-    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Anim0C,
-    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Anim0C,
+    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Miss,
+    STATUS_STONE,     ANIM_Paragoomba_Hyper_Still,
+    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Sleep,
+    STATUS_POISON,    ANIM_Paragoomba_Hyper_Miss,
+    STATUS_STOP,      ANIM_Paragoomba_Hyper_Still,
+    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Miss,
+    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
+    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
+    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_END,
 };
 
@@ -211,7 +211,7 @@ EvtScript N(8021B678) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 10)
         EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Miss)
         EVT_WAIT(30)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 20)
@@ -303,11 +303,11 @@ EvtScript N(8021B678) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 2, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C594)))
@@ -354,7 +354,7 @@ EvtScript N(8021B678) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_400000, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_EXEC_WAIT(N(8021C94C))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
@@ -412,38 +412,38 @@ EvtScript N(takeTurn_8021C36C) = {
 };
 
 s32 N(idleAnimations_8021C594)[] = {
-    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Anim01,
-    STATUS_STONE,     ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Anim0B,
-    STATUS_POISON,    ANIM_Paragoomba_Hyper_Anim01,
-    STATUS_STOP,      ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Anim01,
-    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Anim0C,
-    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Anim0C,
+    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Idle,
+    STATUS_STONE,     ANIM_Paragoomba_Hyper_Still,
+    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Sleep,
+    STATUS_POISON,    ANIM_Paragoomba_Hyper_Idle,
+    STATUS_STOP,      ANIM_Paragoomba_Hyper_Still,
+    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Idle,
+    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
+    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
+    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021C5E0)[] = {
-    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Anim04,
-    STATUS_STONE,     ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Anim0B,
-    STATUS_POISON,    ANIM_Paragoomba_Hyper_Anim01,
-    STATUS_STOP,      ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Anim04,
-    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Anim00,
-    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Anim0C,
-    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Anim0C,
+    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Run,
+    STATUS_STONE,     ANIM_Paragoomba_Hyper_Still,
+    STATUS_SLEEP,     ANIM_Paragoomba_Hyper_Sleep,
+    STATUS_POISON,    ANIM_Paragoomba_Hyper_Idle,
+    STATUS_STOP,      ANIM_Paragoomba_Hyper_Still,
+    STATUS_STATIC,    ANIM_Paragoomba_Hyper_Run,
+    STATUS_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
+    STATUS_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
+    STATUS_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021C62C)[] = {
-    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Anim09,
+    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_LWingStill,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021C638)[] = {
-    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_Anim0A,
+    STATUS_NORMAL,    ANIM_Paragoomba_Hyper_RWingStill,
     STATUS_END,
 };
 
@@ -508,7 +508,7 @@ EvtScript N(8021C94C) = {
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -521,7 +521,7 @@ EvtScript N(handleEvent_8021C9C4) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -533,27 +533,27 @@ EvtScript N(handleEvent_8021C9C4) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0D)
-            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0D)
-            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FALL_TRIGGER)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(8021D9F4))
         EVT_CASE_EQ(EVENT_15)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0D)
-            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(8021D9F4))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
@@ -564,12 +564,12 @@ EvtScript N(handleEvent_8021C9C4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C594)))
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0F)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoJumpBack)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim0C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Dizzy)
             EVT_EXEC_WAIT(N(8021C94C))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
@@ -579,10 +579,10 @@ EvtScript N(handleEvent_8021C9C4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C594)))
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim0F)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_STAR_BEAM)
@@ -596,49 +596,49 @@ EvtScript N(handleEvent_8021C9C4) = {
                 EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C594)))
             EVT_END_IF
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_EXEC_WAIT(N(8021C94C))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim04)
-            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Run)
+            EVT_SET_CONST(LVar2, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -657,7 +657,7 @@ EvtScript N(takeTurn_8021D1DC) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -676,7 +676,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Dive)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
@@ -687,7 +687,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_SET(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Dive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
             EVT_THREAD
                 EVT_LOOP(4)
@@ -695,7 +695,7 @@ EvtScript N(takeTurn_8021D1DC) = {
                     EVT_WAIT(4)
                 EVT_END_LOOP
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Miss)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 2, EVT_FLOAT(3.0))
             EVT_WAIT(10)
@@ -707,7 +707,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(8021C94C))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -726,7 +726,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Dive)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
@@ -734,7 +734,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Dive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
     EVT_END_SWITCH
     EVT_WAIT(2)
@@ -746,12 +746,12 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Paragoomba_Hyper_Run)
             EVT_EXEC_WAIT(N(8021C94C))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1221,7 +1221,7 @@ EvtScript N(handleEvent_8021F41C) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021F05C)))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Shocked)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Hurt)
@@ -1245,7 +1245,7 @@ EvtScript N(handleEvent_8021F41C) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021F05C)))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Shocked)
+            EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Dead)
@@ -1336,7 +1336,7 @@ EvtScript N(takeTurn_8021FE6C) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Midair)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1364,7 +1364,7 @@ EvtScript N(takeTurn_8021FE6C) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Sleep)
@@ -1383,7 +1383,7 @@ EvtScript N(takeTurn_8021FE6C) = {
             EVT_END_IF
             EVT_WAIT(5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Headbonk)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Midair)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 20)
@@ -1398,7 +1398,7 @@ EvtScript N(takeTurn_8021FE6C) = {
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Dizzy)
@@ -1440,7 +1440,7 @@ EvtScript N(takeTurn_8021FE6C) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Headbonk)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Tense)
