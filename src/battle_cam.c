@@ -2,34 +2,34 @@
 #include "script_api/battle.h"
 
 #define LERP(a, b, alpha) ((a) * (alpha) + (b) * (1.0f-(alpha)))
-// battle cam
-extern f32 BattleCam_PosX;
-extern f32 BattleCam_PosY;
-extern f32 BattleCam_PosZ;
-extern s16 BattleCam_TargetActor;
-extern s16 BattleCam_TargetActorPart;
-extern s16 BattleCam_BoomLength;
-extern s16 BattleCam_BoomYaw;
-extern s16 BattleCam_BoomPitch;
-extern s16 BattleCam_BoomZOffset;
-extern f32 D_8029F288;
-extern f32 BattleCam_InitialBoomLength;
-extern f32 BattleCam_InitialBoomYaw;
-extern f32 BattleCam_InitialBoomPitch;
-extern f32 BattleCam_InitialBoomZOffset;
-extern s8 BattleCam_DoneMoving;
-extern s16 BattleCam_MoveTimeLeft;
-extern s16 BattleCam_MoveTimeTotal;
-extern s8 BattleCam_ModeY;
-extern s8 BattleCam_ModeX;
-extern s8 BattleCam_SetImmediately;
-extern s8 BattleCam_UseLinearInterp;
-extern s8 D_8029F2A6;
-extern s8 D_8029F2A7;
-extern f32 BattleCam_InitialPosX;
-extern f32 BattleCam_InitialPosY;
-extern f32 BattleCam_InitialPosZ;
-extern EvtScript* BattleCam_ControlScript;
+
+static f32 BattleCam_PosX;
+static f32 BattleCam_PosY;
+static f32 BattleCam_PosZ;
+static s16 BattleCam_TargetActor;
+static s16 BattleCam_TargetActorPart;
+static s16 BattleCam_BoomLength;
+static s16 BattleCam_BoomYaw;
+static s16 BattleCam_BoomPitch;
+static s16 BattleCam_BoomZOffset;
+static f32 D_8029F288;
+static f32 BattleCam_InitialBoomLength;
+static f32 BattleCam_InitialBoomYaw;
+static f32 BattleCam_InitialBoomPitch;
+static f32 BattleCam_InitialBoomZOffset;
+static s8 BattleCam_DoneMoving;
+static s16 BattleCam_MoveTimeLeft;
+static s16 BattleCam_MoveTimeTotal;
+static s8 BattleCam_ModeY;
+static s8 BattleCam_ModeX;
+static s8 BattleCam_SetImmediately;
+static s8 BattleCam_UseLinearInterp;
+static s8 D_8029F2A6;
+static s8 D_8029F2A7;
+static f32 BattleCam_InitialPosX;
+static f32 BattleCam_InitialPosY;
+static f32 BattleCam_InitialPosZ;
+static EvtScript* BattleCam_ControlScript;
 
 s8 BattleCam_IsFrozen = FALSE;
 s32 BattleCam_CurrentPresetID = -1;

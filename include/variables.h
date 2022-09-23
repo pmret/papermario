@@ -222,13 +222,8 @@ extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 
-extern s32 D_8029FBD0;
-
 extern AnimID KoopatrolDisguiseExtraAnims[];
 extern AnimID HammerBroDisguiseExtraAnims[];
-
-//various
-extern s32 D_802C05CC;
 
 extern s16 gCurrentCamID;
 

@@ -220,114 +220,133 @@ s32 D_802AB738[] = {
     0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000
 };
 
-extern s32 D_802ACC60;
-extern s32 D_802ACC64;
-extern s32 D_802ACC68;
-extern s32 D_802ACC6C;
-extern s32 D_802ACC70[];
-extern s8 D_802AD000;
-extern s8 D_802AD001;
-extern s8 D_802AD002;
-extern s8 D_802AD003;
-extern s8 D_802AD004;
-extern s16 D_802AD006;
-extern s16 D_802AD008;
-extern s16 D_802AD00A;
-extern s32 D_802AD010[];
-extern s32 D_802AD028[];
-extern s32 D_802AD040;
-extern s32 D_802AD044;
-extern s32 D_802AD048;
-extern s32 D_802AD04C;
-extern s32 D_802AD05C;
-extern s32 D_802AD050;
-extern s32 D_802AD054;
-extern s32 D_802AD058;
-extern s32 D_802AD060;
-extern s32 D_802AD064;
-extern s8 D_802AD068;
-extern s8 D_802AD069;
-extern s8 D_802AD06A;
-extern s8 D_802AD06B;
-extern f32 D_802AD06C;
-extern f32 D_802AD070;
-extern HudScript* main_battle_menu_JumpHudScripts[];
-extern s32 battle_menu_messageIDs[];
-extern s32 main_menu_numOptions;
-extern s32 D_802AD0A8;
-extern s32 D_802AD0B0;
-extern s8 D_802AD0B3;
-extern s32 battle_menu_submenuIDs[];
-extern s32 battle_menu_isEnabled[];
-extern s32 battle_menu_isMessageDisabled[];
-extern s32 D_802AD100;
-extern s32 D_802AD104;
-extern s8 battle_menu_moveState;
-extern s8 battle_menu_moveCursorPos;
-extern s8 D_802AD10A;
-extern s8 D_802AD10B;
-extern s8 battle_menu_moveScrollLine;
-extern s8 D_802AD10D;
-extern s8 D_802AD10E;
-extern s8 D_802AD10F;
-extern s16 battle_menu_moveScrollOffset;
-extern s16 D_802AD112;
-extern s16 battle_menu_moveTextColor;
-extern s16 battle_menu_moveTextOpacity;
-extern s32 battle_menu_moveCursorIcon;
-extern s32 battle_menu_moveUpArrowIcon;
-extern s32 battle_menu_moveDownArrowIcon;
-extern s32 battle_menu_moveOptionIconIDs[24];
-extern s32 battle_menu_moveTitleIcon;
-extern s32 battle_menu_moveOptionCostUnitIconIDs[24];
-extern s16 battle_menu_moveX;
-extern s16 battle_menu_moveY;
-extern s32 battle_menu_moveOptionIndexMap[24];
-extern s32 D_802AD258;
-extern HudScript* battle_menu_moveOptionIconScripts[];
-extern s32 battle_menu_moveOptionNames[];
-extern s32 battle_menu_moveOptionDisplayCosts[];
-extern s32 battle_menu_moveOptionDisplayCostReductions[];
-extern s32 battle_menu_moveOptionDisplayCostReductionColors[];
-extern s32 battle_menu_moveOptionBPCosts[];
-extern s32 battle_menu_hasSpiritsMenu;
-extern s32 battle_menu_moveOptionCount;
-extern s32 D_802AD4A8;
-extern s32 battle_menu_moveOptionsEnabled[];
-extern s32 battle_menu_moveOptionDescriptions[24];
-extern s8 battle_menu_moveOptionSortPriorities[];
-extern s8 battle_menu_moveOptionCantUseTypes[];
-extern s32 battle_menu_moveOptionActive;
-extern s8 D_802AD604;
-extern s8 D_802AD605;
-extern s8 D_802AD606;
-extern s8 D_802AD607;
-extern s8 D_802AD608;
-extern s8 D_802AD609;
-extern s8 D_802AD60A;
-extern s8 D_802AD60B;
-extern s16 D_802AD60C;
-extern s16 D_802AD60E;
-extern s16 D_802AD610;
-extern s16 D_802AD612;
-extern s8 D_802AD614;
-extern s32 D_802AD618;
-extern s32 D_802AD61C;
-extern s32 D_802AD620;
-extern s32 D_802AD624;
-extern s32 D_802AD628[];
-extern s16 D_802AD63C;
-extern s16 D_802AD63E;
-extern HudScript* D_802AD640[];
-extern s32 D_802AD658[]; // msg IDs
-extern s32 D_802AD66C;
-extern u8 D_802AD66F;
-extern s8 D_802AD673;
-extern s32 D_802AD678[];
-extern s32 D_802AD690[];
-extern s32 D_802AD6A8[];
-extern s32 D_802AD6C0[];
-extern s32 D_802AD6D4;
+BSS s32 D_802ACC60;
+BSS s32 D_802ACC64;
+BSS s32 D_802ACC68;
+BSS s32 D_802ACC6C;
+BSS s32 D_802ACC70[24];
+BSS s32 D_802ACCD0;
+BSS s32 D_802ACCD4[0xC5]; // unused?
+BSS s32 D_802ACFE8;
+BSS s32 D_802ACFEC;
+BSS s32 D_802ACFF0;
+BSS s32 D_802ACFF4;
+BSS s32 D_802ACFF8;
+BSS s8 D_802ACFFC;
+BSS s8 D_802ACFFD;
+BSS s16 D_802ACFFE; // unused?
+BSS s8 D_802AD000;
+BSS s8 D_802AD001;
+BSS s8 D_802AD002;
+BSS s8 D_802AD003;
+BSS s8 D_802AD004;
+BSS s16 D_802AD006;
+BSS s16 D_802AD008;
+BSS s16 D_802AD00A;
+BSS s16 D_802AD00C; // unused?
+BSS s32 D_802AD010[6];
+BSS s32 D_802AD028[6];
+BSS s32 D_802AD040;
+BSS s32 D_802AD044;
+BSS s32 D_802AD048;
+BSS s32 D_802AD04C;
+BSS s32 D_802AD050;
+BSS s32 D_802AD054;
+BSS s32 D_802AD058;
+BSS s32 D_802AD05C;
+BSS s32 D_802AD060;
+BSS s32 D_802AD064;
+BSS s8 D_802AD068;
+BSS s8 D_802AD069;
+BSS s8 D_802AD06A;
+BSS s8 D_802AD06B;
+BSS f32 D_802AD06C;
+BSS f32 D_802AD070;
+BSS s32 D_802AD074; // unused?
+BSS HudScript* main_battle_menu_JumpHudScripts[6];
+BSS s32 battle_menu_messageIDs[6];
+BSS s32 D_802AD0A8;
+BSS s32 main_menu_numOptions;
+BSS s32 D_802AD0B0;
+BSS s32 D_802AD0B4; // unused?
+BSS s32 battle_menu_submenuIDs[6];
+BSS s32 battle_menu_isEnabled[6];
+BSS s32 battle_menu_isMessageDisabled[6];
+BSS s32 D_802AD100;
+BSS s32 D_802AD104;
+BSS s8 battle_menu_moveState;
+BSS s8 battle_menu_moveCursorPos;
+BSS s8 D_802AD10A;
+BSS s8 D_802AD10B;
+BSS s8 battle_menu_moveScrollLine;
+BSS s8 D_802AD10D;
+BSS s8 D_802AD10E;
+BSS s8 D_802AD10F;
+BSS s16 battle_menu_moveScrollOffset;
+BSS s16 D_802AD112;
+BSS s16 battle_menu_moveTextColor;
+BSS s16 battle_menu_moveTextOpacity;
+BSS s32 battle_menu_moveCursorIcon;
+BSS s32 battle_menu_moveUpArrowIcon;
+BSS s32 battle_menu_moveDownArrowIcon;
+BSS s32 D_802AD124; // unused?
+BSS s32 battle_menu_moveOptionIconIDs[24];
+BSS s32 battle_menu_moveTitleIcon;
+BSS s32 D_802AD18C; // unused?
+BSS s32 battle_menu_moveOptionCostUnitIconIDs[24];
+BSS s16 battle_menu_moveX;
+BSS s16 battle_menu_moveY;
+BSS s32 D_802AD1F4; // unused?
+BSS s32 battle_menu_moveOptionIndexMap[24];
+BSS s32 D_802AD258;
+BSS s32 D_802AD25C; // unused?
+BSS HudScript* battle_menu_moveOptionIconScripts[24];
+BSS s32 battle_menu_moveOptionNames[24];
+BSS s32 battle_menu_moveOptionDisplayCosts[24];
+BSS s32 battle_menu_moveOptionDisplayCostReductions[24];
+BSS s32 battle_menu_moveOptionDisplayCostReductionColors[24];
+BSS s32 battle_menu_moveOptionBPCosts[24];
+BSS s32 battle_menu_hasSpiritsMenu;
+BSS s32 battle_menu_moveOptionCount;
+BSS s32 D_802AD4A8;
+BSS s32 D_802AD4AC; // unused?
+BSS s32 battle_menu_moveIndices[24];
+BSS s32 battle_menu_moveOptionsEnabled[24];
+BSS s32 battle_menu_moveOptionDescriptions[24];
+BSS s8 battle_menu_moveOptionSortPriorities[24];
+BSS s8 battle_menu_moveOptionCantUseTypes[24];
+BSS s32 battle_menu_moveOptionActive;
+BSS s8 D_802AD604;
+BSS s8 D_802AD605;
+BSS s8 D_802AD606;
+BSS s8 D_802AD607;
+BSS s8 D_802AD608;
+BSS s8 D_802AD609;
+BSS s8 D_802AD60A;
+BSS s8 D_802AD60B;
+BSS s16 D_802AD60C;
+BSS s16 D_802AD60E;
+BSS s16 D_802AD610;
+BSS s16 D_802AD612;
+BSS s8 D_802AD614;
+BSS s32 D_802AD618;
+BSS s32 D_802AD61C;
+BSS s32 D_802AD620;
+BSS s32 D_802AD624;
+BSS s32 D_802AD628[5];
+BSS s16 D_802AD63C;
+BSS s16 D_802AD63E;
+BSS HudScript* D_802AD640[6];
+BSS s32 D_802AD658[5]; // msg IDs
+BSS s32 D_802AD66C;
+BSS char D_802AD670[3];
+BSS s8 D_802AD673;
+BSS s32 D_802AD674; // unused?
+BSS s32 D_802AD678[6];
+BSS s32 D_802AD690[6];
+BSS s32 D_802AD6A8[6];
+BSS s32 D_802AD6C0[5];
+BSS s32 D_802AD6D4;
 
 void func_802A3C98(s32 x, s32 y);
 void func_802A43DC(s32 arg0, s32 x, s32 y);
@@ -405,10 +424,10 @@ s32 func_802A11B0(void) {
             D_802AD064 = 173;
             D_802AD070 = 0.3f;
             D_802AD004 = 0;
-            D_802AD06B = D_802AD0B3;
-            D_802AD069 = -D_802AD0B3;
+            D_802AD06B = D_802AD0B0;
+            D_802AD069 = -D_802AD0B0;
             D_802AD06A = main_menu_numOptions - 1;
-            D_802AD06A -= D_802AD0B3;
+            D_802AD06A -= D_802AD0B0;
 
             for (i = 0; i < main_menu_numOptions; i++) {
                 D_802AD010[i] = id = hud_element_create(main_battle_menu_JumpHudScripts[i]);
@@ -1771,7 +1790,7 @@ s32 func_802A4A54(void) {
                 }
 
                 if (D_802AD605 < 0) {
-                    D_802AD605 = D_802AD66F - 1;
+                    D_802AD605 = D_802AD66C - 1;
                 }
                 if (D_802AD66C - 1 < D_802AD605) {
                     D_802AD605 = 0;
@@ -2342,7 +2361,7 @@ void btl_state_update_peach_menu(void) {
             }
             if (temp_s0_2 != 0) {
                 set_animation(0, 0, 0xA0002);
-                battleStatus->currentSubmenu = D_802AD0BB[temp_s0_2 - 1];
+                battleStatus->currentSubmenu = battle_menu_submenuIDs[temp_s0_2 - 1];
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
