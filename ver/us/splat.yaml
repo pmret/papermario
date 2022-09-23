@@ -1137,10 +1137,10 @@ segments:
       - [0x1619F0, ci4,        stats_bar, 160, 8]
       - [0x161C70, palette,    stats_bar]
       - [0x161E70, .data,      pause_gfx]
-    - [0x162D30, .data,      pause_styles]
+    - [0x162D30, .data, pause_styles]
     - [0x1632A0]
-  - name: filemenu
-    type: code
+  - type: code
+    dir: filemenu
     start: 0x163400
     vram: 0x80242BA0
     subsegments:
@@ -1148,9 +1148,23 @@ segments:
     - [0x165490, c, 165490]
     - [0x167570, c, 167570]
     - [0x168590, c, 168590]
-    - [0x169BE0, c]
+    - [0x1689D0, c, 168590_copy]
+    - [0x169BE0, c, 169BE0]
     - [0x16A3E0, .data, 163400]
-    - [0x16A680, data]
+    - [0x16A680, .data, 165490]
+    - [0x16A920, .data, 167570]
+    - [0x16A990, .data, 168590]
+    - [0x16A9E0, .data, 168590_copy]
+    - start: 0x16AA60
+      type: .data
+      name: filemenu_gfx
+      subsegments:
+      - [0x16AA60, ia4, image_16AA60, 64, 16]
+      - [0x16AC60, rgba32, image_16AC60, 16, 64]
+      - [0x16BC60, ia8, image_16BC60, 16, 32]
+      - [0x16BE60, .data, filemenu_gfx]
+    - [0x16BF90, .data, 169BE0]
+    - [0x16C2C0, .data, filemenu_styles]
     - [0x16C7D0]
   - type: code
     start: 0x16C8E0

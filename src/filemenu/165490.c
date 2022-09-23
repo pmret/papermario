@@ -4,8 +4,257 @@
 #include "audio/public.h"
 #include "fio.h"
 
-extern HudScript* filemenu_hudElemScripts[14];
-extern MenuWindowBP filemenu_windowBPs[14];
+extern HudScript HES_Spirit1;
+extern HudScript HES_Spirit2;
+extern HudScript HES_Spirit3;
+extern HudScript HES_Spirit4;
+extern HudScript HES_Spirit5;
+extern HudScript HES_Spirit6;
+extern HudScript HES_Spirit7;
+extern HudScript HES_Spirit1Missing;
+extern HudScript HES_Spirit2Missing;
+extern HudScript HES_Spirit3Missing;
+extern HudScript HES_Spirit4Missing;
+extern HudScript HES_Spirit5Missing;
+extern HudScript HES_Spirit6Missing;
+extern HudScript HES_Spirit7Missing;
+extern HudScript HES_JpFile;
+extern HudScript HES_JpFileDisabled;
+extern HudScript HES_OptionMonoOn;
+extern HudScript HES_OptionMonoOff;
+extern HudScript HES_OptionStereoOn;
+extern HudScript HES_OptionStereoOff;
+
+HudScript* filemenu_hudElemScripts[] = {
+    &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+    &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+    &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn, &HES_OptionMonoOff,
+    &HES_OptionStereoOn, &HES_OptionStereoOff,
+};
+
+u8 D_80249E70[] = {
+    0, 0, 1, 2, 2, 3, 4, 5, 6,
+    0, 0, 1, 2, 2, 3, 6, 6, 6,
+    0, 0, 1, 2, 2, 3, 6, 6, 6,
+    0, 0, 1, 2, 2, 3, 6, 6, 6,
+    0, 0, 1, 2, 2, 3, 6, 6, 6,
+};
+
+MenuWindowBP filemenu_windowBPs[] = {
+    {
+        .windowID = WINDOW_ID_45,
+        .unk_01 = 0,
+        .pos = { .x = 0, .y = 0 },
+        .width = 0,
+        .height = 0,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_title },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BB08 }
+    },
+    {
+        .windowID = WINDOW_ID_51,
+        .unk_01 = 0,
+        .pos = { .x = -2, .y = 6 },
+        .width = 68,
+        .height = 20,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_stereo,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_left },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BAD0 }
+    },
+    {
+        .windowID = WINDOW_ID_52,
+        .unk_01 = 0,
+        .pos = { .x = 221, .y = 6 },
+        .width = 68,
+        .height = 20,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_mono,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_right },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BAD0 }
+    },
+    {
+        .windowID = WINDOW_ID_53,
+        .unk_01 = 0,
+        .pos = { .x = 5, .y = 171 },
+        .width = 88,
+        .height = 16,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_option_left,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_bottom },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BB40 }
+    },
+    {
+        .windowID = WINDOW_ID_54,
+        .unk_01 = 0,
+        .pos = { .x = 0, .y = 171 },
+        .width = 88,
+        .height = 16,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_option_center,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_bottom },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BB78 }
+    },
+    {
+        .windowID = WINDOW_ID_55,
+        .unk_01 = 0,
+        .pos = { .x = 195, .y = 171 },
+        .width = 88,
+        .height = 16,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_option_right,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_bottom },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BBB0 }
+    },
+    {
+        .windowID = WINDOW_ID_58,
+        .unk_01 = 0,
+        .pos = { .x = 9, .y = 110 },
+        .width = 130,
+        .height = 54,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_2_info,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_left },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BC58 }
+    },
+    {
+        .windowID = WINDOW_ID_62,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = -8 },
+        .width = 124,
+        .height = 15,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_2_title ,
+        .tab = NULL,
+        .parentID = WINDOW_ID_58,
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BD38 }
+    },
+    {
+        .windowID = WINDOW_ID_59,
+        .unk_01 = 0,
+        .pos = { .x = 149, .y = 110 },
+        .width = 130,
+        .height = 54,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_3_info,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_right },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BC90 }
+    },
+    {
+        .windowID = WINDOW_ID_63,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = -8 },
+        .width = 124,
+        .height = 15,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_3_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_59,
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BD70 }
+    },
+    {
+        .windowID = WINDOW_ID_56,
+        .unk_01 = 0,
+        .pos = { .x = 9, .y = 41 },
+        .width = 130,
+        .height = 54,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_0_info,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_left },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BBE8 }
+    },
+    {
+        .windowID = WINDOW_ID_60,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = -8 },
+        .width = 124,
+        .height = 15,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_0_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_56,
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BCC8 }
+    },
+    {
+        .windowID = WINDOW_ID_57,
+        .unk_01 = 0,
+        .pos = { .x = 149, .y = 41 },
+        .width = 130,
+        .height = 54,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_1_info,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_CURSOR,
+        .fpUpdate = { .func = &filemenu_update_show_options_right },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BC20 }
+    },
+    {
+        .windowID = WINDOW_ID_61,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = -8 },
+        .width = 124,
+        .height = 15,
+        .priority = 0,
+        .fpDrawContents = &filemenu_draw_contents_file_1_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_57,
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &D_8024BD00 }
+    },
+};
+
+MenuPanel D_8024A098 = {
+    .initialized = FALSE,
+    .col = 0,
+    .row = 0,
+    .selected = 0,
+    .page = 0,
+    .numCols = 3,
+    .numRows = 3,
+    .numPages = 0,
+    .gridData = D_80249E70,
+    .fpInit = &filemenu_main_init,
+    .fpHandleInput = &filemenu_main_handle_input,
+    .fpUpdate = &filemenu_main_update,
+    .fpCleanup = &filemenu_main_cleanup
+};
+
 extern WindowStyleCustom D_8024BDA8[];
 extern s8 D_8024C090;
 
@@ -853,7 +1102,7 @@ void filemenu_main_update(MenuPanel* menu) {
     }
 }
 
-void filemenu_main_cleanup(void) {
+void filemenu_main_cleanup(MenuPanel* menu) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
