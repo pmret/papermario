@@ -869,7 +869,7 @@ segments:
     type: code
     start: 0xFEE30
     vram: 0x802DBD40
-    # follows_vram: evt
+    follows_vram: evt
     subsegments:
     - [0x0FEE30, c, sprite]
     - [0x101B90, c, 101b90_len_8f0]

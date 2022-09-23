@@ -1,14 +1,16 @@
 #include "common.h"
 
+extern u32* gMapFlags;
+extern s32* gMapVars;
+
+extern char evtDebugPrintBuffer[0x100];
+
 Bytecode* evt_find_label(Evt* script, s32 arg1);
 Bytecode* evt_skip_if(Evt* script);
 Bytecode* evt_skip_else(Evt* script);
 Bytecode* evt_goto_end_case(Evt* script);
 Bytecode* evt_goto_next_case(Evt* script);
 Bytecode* evt_goto_end_loop(Evt* script);
-
-// BSS
-extern char evtDebugPrintBuffer[];
 
 f32 evt_fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= EVT_FIXED_CUTOFF) {

@@ -2,12 +2,14 @@
 #include "npc.h"
 #include "sprite.h"
 
-Npc* playerNpc = (Npc*) 0x802DB270; // TODO: raw ptr, shiftability
-
+extern Npc playerNpcData;
 extern u16 D_802DB5B0;
+extern s32 D_802DB5B4[3]; // unused
 extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
+
+Npc* playerNpc = &playerNpcData;
 
 void virtual_entity_list_render_world(void);
 void virtual_entity_list_render_UI(void);

@@ -35,17 +35,7 @@ extern s32 gBattleDmaDest;
 
 extern ActionCommandStatus gActionCommandStatus;
 
-extern ScriptList gWorldScriptList;
-extern ScriptList gBattleScriptList;
-extern ScriptList* gCurrentScriptListPtr;
-
-extern s32 gNumScripts;
 extern s32 D_802DAC98;
-
-extern s32 gScriptListCount;
-
-extern s32 gScriptIdList[MAX_SCRIPTS];
-extern s32 gScriptIndexList[MAX_SCRIPTS];
 
 extern s32 gMoveScriptTable[][4];
 
@@ -84,10 +74,6 @@ extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
-extern MessagePrintState* gCurrentPrintContext;
-extern s32 D_802DB264;
-extern MessagePrintState* D_802DB268;
-
 extern s32 SaveBlockTutorialPrinterClosed;
 extern s32 SaveBlockResultPrinterClosed;
 extern MessagePrintState* SaveBlockTutorialPrinter;
@@ -104,10 +90,6 @@ extern CollisionData gZoneCollisionData;
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
 
 extern PartnerAnimations gPartnerAnimations[12];
-
-extern AnimatedModelList gBattleMeshAnimationList;
-extern AnimatedModelList gWorldMeshAnimationList;
-extern AnimatedModelList* gCurrentMeshAnimationListPtr;
 
 // Triggers
 extern s16 gTriggerCount;
@@ -204,15 +186,6 @@ extern s32 D_8010C978;
 extern Vec3s btl_actorHomePositions[];
 
 extern SaveData gCurrentSaveFile;
-
-extern u32* gMapFlags;
-extern s32* gMapVars;
-
-extern u32 gWorldMapVars[MAX_MAPVARS];
-extern u32 gBattleMapVars[MAX_MAPVARS];
-
-extern u32 gWorldMapFlags[MAX_MAPFLAGS];
-extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
 extern s32 D_8009A5D0;
 extern s32 timeFreezeMode;
