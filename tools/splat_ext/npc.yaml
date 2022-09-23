@@ -5711,44 +5711,44 @@ HammerBros:
     - Anim1A
 BushBasic:
   frames:
-    - Raster00
+    - Bush
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Shake
 BushBlocky:
   frames:
-    - Raster00
+    - Bush
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Shake
 BushDry:
   frames:
-    - Raster00
+    - Bush
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Shake
 BushLeafy:
   frames:
-    - Raster00
+    - Bush
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Shake
 BushMatted:
   frames:
-    - Raster00
+    - Bush
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
+    - Still
+    - Shake
 WorldKammy:
   frames:
     - Raster00
@@ -9340,36 +9340,36 @@ TheMaster:
     - Anim23
 Chan:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
+    - Idle1
+    - Idle2
+    - Idle3
+    - ToppledIdle1
+    - ToppledIdle2
+    - Hurt1
+    - Hurt2
+    - Step1
+    - Step2
+    - ShellSpin1
+    - ShellSpin2
+    - ShellSpin3
+    - ShellSpin4
+    - ShellSpin5
+    - ShellSpin6
+    - Empty1 # removed BurnHurt1
+    - Empty2 # removed BurnHurt2
+    - Step3
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - Sleep
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - ToppledHurt1
+    - ToppledHurt2
+    - ToppledBurnHurt1
+    - ToppledBurnHurt2
   palettes:
     - Default
     - Poisoned
@@ -9377,28 +9377,28 @@ Chan:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
+    - Still
+    - Idle
+    - Toppled
+    - Walk
+    - Run
+    - ShellSpin
+    - Hurt
+    - ToppledHurt
+    - HurtAlt
+    - ShellStill
+    - Sleep
+    - Dizzy
+    - EnterShell
+    - ExitShell
+    - ToppledHurtAlt
+    - ToppledStill
+    - ToppledSleep
+    - ToppledDizzy
+    - Empty       # removed BurnHurt
+    - EmptyStill  # removed BurnHurtStill
+    - ToppledBurnHurt
+    - ToppledBurnStill
 Lee:
   frames:
     - Idle1
