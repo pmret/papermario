@@ -14,20 +14,20 @@
 #define NAMESPACE b_area_mac_lee
 
 s32 N(idleAnimations_8021D360)[] = {
-    STATUS_NORMAL,    ANIM_Lee_Anim02,
-    STATUS_STONE,     ANIM_Lee_Anim00,
-    STATUS_SLEEP,     ANIM_Lee_Anim0E,
-    STATUS_POISON,    ANIM_Lee_Anim02,
-    STATUS_STOP,      ANIM_Lee_Anim00,
-    STATUS_STATIC,    ANIM_Lee_Anim02,
-    STATUS_PARALYZE,  ANIM_Lee_Anim00,
-    STATUS_DIZZY,     ANIM_Lee_Anim0F,
-    STATUS_DIZZY,     ANIM_Lee_Anim0F,
+    STATUS_NORMAL,    ANIM_Lee_Idle,
+    STATUS_STONE,     ANIM_Lee_Still,
+    STATUS_SLEEP,     ANIM_Lee_Sleep,
+    STATUS_POISON,    ANIM_Lee_Idle,
+    STATUS_STOP,      ANIM_Lee_Still,
+    STATUS_STATIC,    ANIM_Lee_Idle,
+    STATUS_PARALYZE,  ANIM_Lee_Still,
+    STATUS_DIZZY,     ANIM_Lee_Dizzy,
+    STATUS_DIZZY,     ANIM_Lee_Dizzy,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8021D3AC)[] = {
-    STATUS_NORMAL,    ANIM_Lee_Anim0B,
+    STATUS_NORMAL,    ANIM_Lee_Hurt,
     STATUS_END,
 };
 
@@ -150,7 +150,7 @@ EvtScript N(idle_8021D5B4) = {
 
 EvtScript N(8021D5C4) = {
     EVT_SET_CONST(LVar0, 0x00000001)
-    EVT_SET_CONST(LVar1, ANIM_Lee_Anim04)
+    EVT_SET_CONST(LVar1, ANIM_Lee_Run)
     EVT_EXEC_WAIT(DoReturnHome)
     EVT_RETURN
     EVT_END
@@ -165,85 +165,85 @@ EvtScript N(handleEvent_8021D600) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Burned)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Burned)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Burned)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(33)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(47)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(8021D5C4))
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim02)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim02)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(57)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim04)
-            EVT_SET_CONST(LVar2, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Run)
+            EVT_SET_CONST(LVar2, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(58)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim04)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(22)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_Lee_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -262,7 +262,7 @@ EvtScript N(flyingTackle) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim08)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Crouch)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, -127, 2, 715, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, 16)
@@ -272,7 +272,7 @@ EvtScript N(flyingTackle) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Midair)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
@@ -283,7 +283,7 @@ EvtScript N(flyingTackle) = {
             EVT_WAIT(10)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Idle)
             EVT_CALL(ResetActorSounds, -127, 2)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
@@ -297,7 +297,7 @@ EvtScript N(flyingTackle) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim09)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Midair)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, 0x80000)
@@ -315,7 +315,7 @@ EvtScript N(flyingTackle) = {
         EVT_CASE_OR_EQ(2)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(ResetActorSounds, -127, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim0A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Land)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
             EVT_ADD(LVar0, 30)
@@ -4029,7 +4029,7 @@ EvtScript N(copyPartner) = {
     EVT_CALL(ActorSpeak, 131111, -127, 1, 10747910, 10747907)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Lee_RaisedArmsTalk)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, 0x80000)
