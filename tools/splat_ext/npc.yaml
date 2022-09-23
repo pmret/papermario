@@ -293,11 +293,11 @@ WorldBow:
     - Step2
     - Talk1
     - Talk2
+    - Conceal
     - Spook1
     - Spook2
     - Spook3
     - Spook4
-    - Spook5
     - Laugh1
     - Laugh2
     - Celebrate1
@@ -815,11 +815,11 @@ BattleBow:
     - Slap1
     - Slap2
     - Slap3
+    - Conceal
     - Spook1
     - Spook2
     - Spook3
     - Spook4
-    - Spook5
     - Laugh1
     - Laugh2
     - Celebrate1
@@ -8539,146 +8539,135 @@ WorldBobomb:
     - Run
     - Talk
 Whacka:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - Neutral
+    - Popup1
+    - Popup2
+    - Popup3
+    - Idle
+    - Talk
+    - Hurt1
+    - Hurt2
+    - Hurt3
+    - Hurt4
+    - Hurt5
+    - Hurt6
+    - Hurt7
+    - Hurt8
+    - HoleOpening1
+    - HoleOpening2
+    - HoleOpen
   palettes:
     - Default
     - Hole
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - PopUp
+    - Burrow
+    - Hurt
+    - Talk
 Dryite:
-  variations:
-    - Variant00
-    - Variant01
-    - Variant02
-    - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Talk
   palettes:
     - Green
     - Brown
     - Blue
     - Yellow
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
 Mouser:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
+    - Idle3
+    - Blink1
+    - Blink2
   palettes:
     - Blue
     - Purple
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Blink
+    - IdleOnlyBlink
+    - Run
+    - Talk
+    - Whisper
+    - Gossip
+    - GossipWhisper
 Boo:
   variations:
-    - Variant00
-    - Variant01
+    - Default
+    - GustyBoo
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Carry1
+    - Carry2
+    - Carry3
+    - Carry4
+    - Conceal
+    - Spook1
+    - Spook2
+    - Spook3
+    - Flail1
+    - Flail2
+    - CarryTalk
+    - Cower1
+    - Cower2
+    - Talk1
+    - Talk2
+    - Wave1
+    - Wave2
+    - Wave3
+    - Wave4
+    - Confused1
+    - Confused2
+    - Throw1
+    - Throw2
+    - Blink
+    - CarryBlink
+    - CarryHappy1
+    - CarryHappy2
+    - CarryHappy3
+    - CarryHappy4
   palettes:
     - Default
     - Tan
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Wave
+    - Flail
+    - Conceal
+    - Spook
+    - Cower
+    - Confused
+    - Throw
+    - CarryStill
+    - CarryIdle
+    - CarryWalk
+    - CarryRun
+    - CarryTalk
+    - CarryHappy
 Yoshi:
   variations:
     - Variant00

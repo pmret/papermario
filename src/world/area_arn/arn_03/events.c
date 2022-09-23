@@ -270,25 +270,25 @@ EvtScript N(interact_80241EB0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0073)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0073)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0074)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0074)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
         EVT_CASE_LT(-16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0075)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0075)
         EVT_CASE_LT(-14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0076)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0076)
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0077)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0077)
         EVT_CASE_GE(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0078)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0078)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_WAIT(10)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(20)
-            EVT_CALL(EndSpeech, -1, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0)
+            EVT_CALL(EndSpeech, -1, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -329,13 +329,13 @@ EvtScript N(idle_80242064) = {
     EVT_WAIT(15)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(InterpNpcYaw, NPC_SELF, -4, 0)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 5, MSG_CH3_006E)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_006E)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, -1, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 5, MSG_CH3_006F)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 5, MSG_CH3_0070)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_0070)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, -1, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 5, MSG_CH3_0071)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 5, MSG_CH3_0072)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_0072)
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(10)
     EVT_CALL(GetCurrentPartnerID, LVar6)
@@ -373,7 +373,7 @@ EvtScript N(init_802424E0) = {
 EvtScript N(interact_8024254C) = {
     EVT_IF_NE(MapVar(0), 0)
         EVT_IF_GE(MapVar(0), MapVar(1))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0081)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0081)
             EVT_SET(LVar0, 118)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(80241C6C))
@@ -383,33 +383,33 @@ EvtScript N(interact_8024254C) = {
             EVT_SET(GF_ARN03_WaitingForPackage, 0)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0080)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0080)
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(AreaFlag(3), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0079)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0079)
                 EVT_SET(AreaFlag(3), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007A)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007A)
                 EVT_SET(AreaFlag(3), 0)
             EVT_END_IF
         EVT_CASE_LT(-16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007B)
         EVT_CASE_LT(-14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007C)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007C)
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007D)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007D)
         EVT_CASE_GE(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007E)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007E)
     EVT_END_SWITCH
     EVT_IF_EQ(GF_ARN03_RecievedPackage, 0)
         EVT_IF_EQ(GB_KootFavor_Current, 18)
             EVT_EXEC_WAIT(N(80241E68))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_007F)
-            EVT_CALL(EndSpeech, -1, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
+            EVT_CALL(EndSpeech, -1, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
             EVT_SET(MapVar(0), 0)
             EVT_SET(MapVar(1), 450)
             EVT_SET(GF_ARN03_WaitingForPackage, 1)
@@ -506,7 +506,7 @@ EvtScript N(80242C60) = {
     EVT_THREAD
         EVT_WAIT(25)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Anim09)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Cower)
         EVT_LOOP(0)
             EVT_IF_EQ(MapVar(2), 1)
                 EVT_BREAK_LOOP
@@ -514,12 +514,12 @@ EvtScript N(80242C60) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Anim01)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Idle)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, 4, ANIM_Boo_Tan_Anim08)
-    EVT_CALL(EndSpeech, 4, ANIM_Boo_Tan_Anim08, ANIM_Boo_Tan_Anim08, 5)
+    EVT_CALL(SetNpcAnimation, 4, ANIM_Boo_Tan_Spook)
+    EVT_CALL(EndSpeech, 4, ANIM_Boo_Tan_Spook, ANIM_Boo_Tan_Spook, 5)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, 4, ANIM_Boo_Tan_Anim01)
+    EVT_CALL(SetNpcAnimation, 4, ANIM_Boo_Tan_Idle)
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(80242B0C))
     EVT_SET(MapVar(2), 1)
@@ -532,16 +532,16 @@ EvtScript N(interact_80242DC4) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0082)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0082)
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0083)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0083)
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
         EVT_CASE_LT(-16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0084)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0084)
         EVT_CASE_LT(-14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0085)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0085)
         EVT_CASE_LT(39)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -552,13 +552,13 @@ EvtScript N(interact_80242DC4) = {
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 0)
                 EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 1)
             EVT_END_THREAD
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0086)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0086)
             EVT_EXEC_WAIT(N(802428CC))
             EVT_CALL(PlayerFaceNpc, 4, 1)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, 4, 1)
-            EVT_CALL(SpeakToPlayer, 4, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 5, MSG_CH3_0087)
+            EVT_CALL(SpeakToPlayer, 4, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_0087)
             EVT_EXEC_WAIT(N(80242C60))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0088)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0088)
             EVT_CALL(DisablePlayerPhysics, FALSE)
             EVT_CALL(EnablePartnerAI)
         EVT_CASE_GE(39)
@@ -571,13 +571,13 @@ EvtScript N(interact_80242DC4) = {
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 0)
                 EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 1)
             EVT_END_THREAD
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0089)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0089)
             EVT_EXEC_WAIT(N(802428CC))
             EVT_CALL(PlayerFaceNpc, 4, 1)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, 4, 1)
-            EVT_CALL(SpeakToPlayer, 4, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 5, MSG_CH3_008A)
+            EVT_CALL(SpeakToPlayer, 4, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_008A)
             EVT_EXEC_WAIT(N(80242C60))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_008B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008B)
             EVT_CALL(DisablePlayerPhysics, FALSE)
             EVT_CALL(EnablePartnerAI)
     EVT_END_SWITCH
@@ -595,20 +595,20 @@ EvtScript N(interact_802431C8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(AreaFlag(5), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_008C)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008C)
                 EVT_SET(AreaFlag(5), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_008D)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008D)
                 EVT_SET(AreaFlag(5), 0)
             EVT_END_IF
         EVT_CASE_LT(-16)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_008E)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008E)
         EVT_CASE_LT(-14)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_008F)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008F)
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0090)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0090)
         EVT_CASE_GE(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Anim04, ANIM_Boo_Tan_Anim01, 0, MSG_CH3_0091)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0091)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -640,22 +640,22 @@ StaticNpc N(npcGroup_80243378) = {
     },
 	.territory = { .temp = { 2, 36, 10, 185, 56, 10, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 479, 215, 198, 150 }},
     .animations = {
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim02,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim0A,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
     .tattle = MSG_NpcTattle_ARN_LovesBow,
 };
@@ -673,22 +673,22 @@ StaticNpc N(npcGroup_80243568) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim02,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim0A,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
     .tattle = MSG_NpcTattle_ARN_BooA,
 };
@@ -707,22 +707,22 @@ StaticNpc N(npcGroup_80243758) = {
     },
 	.territory = { .temp = { 2, 379, 10, 186, 399, 10, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 479, 215, 198, 150 }},
     .animations = {
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim02,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim0A,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
     .tattle = MSG_NpcTattle_ARN_BooB,
 };
@@ -740,22 +740,22 @@ StaticNpc N(npcGroup_80243948) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim02,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim0A,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
     .tattle = MSG_NpcTattle_ARN_BooC,
 };
@@ -773,22 +773,22 @@ StaticNpc N(npcGroup_80243B38) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim02,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim01,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim00,
-        ANIM_Boo_Tan_Anim0A,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
-        ANIM_Boo_Tan_Anim03,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
 };
 
@@ -858,22 +858,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim02,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim0A,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Walk,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Confused,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
         },
     },
     {
@@ -889,22 +889,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim02,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim0A,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Walk,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Confused,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
         },
     },
     {
@@ -920,22 +920,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim02,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim0A,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Walk,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Confused,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
         },
     },
     {
@@ -951,22 +951,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim02,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim01,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim00,
-            ANIM_Boo_Tan_Anim0A,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
-            ANIM_Boo_Tan_Anim03,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Walk,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Idle,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Still,
+            ANIM_Boo_Tan_Confused,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
+            ANIM_Boo_Tan_Run,
         },
     },
 };
