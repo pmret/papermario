@@ -5194,14 +5194,14 @@ DryBones:
     - Anim0F
 ThrownBone:
   frames:
-    - Raster00
+    - Still
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
+    - Still
 BonyBeetle:
   frames:
     - Raster00
@@ -9210,88 +9210,85 @@ Goomama:
     - Run
     - Talk
 TheMaster:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
-    - Raster32
-    - Raster33
-    - Raster34
-    - Raster35
-    - Raster36
-    - Raster37
-    - Raster38
-    - Raster39
-    - Raster3A
-    - Raster3B
-    - Raster3C
-    - Raster3D
-    - Raster3E
-    - Raster3F
-    - Raster40
-    - Raster41
-    - Raster42
-    - Raster43
-    - Raster44
-    - Raster45
-    - Raster46
-    - Raster47
-    - Raster48
-    - Raster49
-    - Raster4A
-    - Raster4B
-    - Raster4C
-    - Raster4D
+    - Neutral
+    - Idle
+    - Blink
+    - Cough1
+    - Cough2
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Talk
+    - Beckon1
+    - Beckon2
+    - Beckon3
+    - OpenMouth
+    - AscendedNeutral
+    - AscendedDownwardStance1
+    - AscendedDownwardStance2
+    - AscendedDefeated1
+    - AscendedDefeated2
+    - AscendeHurt1
+    - AscendeHurt2
+    - BurnStill
+    - AscendedGuard1
+    - AscendedGuard2
+    - AscendedGuard3
+    - AscendedGuard4
+    - AscendedUppercut1
+    - AscendedUppercut2
+    - AscendedUppercut3
+    - AscendedUppercut4
+    - AscendedStep1
+    - AscendedStep2
+    - AscendedStep3
+    - AscendedStep4
+    - AscendedIdle1
+    - AscendedIdle2
+    - AscendedIdle3
+    - AscendedTalk
+    - AscendedPunch1
+    - AscendedPunch2
+    - AscendedPunch3
+    - AscendedPunch4
+    - AscendedPunch5
+    - AscendedPunch6
+    - AscendedKick1
+    - AscendedKick2
+    - AscendedKick3
+    - AscendedPalmStance1
+    - AscendedPalmStance2
+    - AscendedPalmStance3
+    - AscendedPalmStance4
+    - BurnHurt1
+    - BurnHurt2
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - AscendedSleep1
+    - AscendedSleep2
+    - AscendedSleep3
+    - AscendedDizzy1
+    - AscendedDizzy2
+    - AscendedDizzy3
+    - AscendedDizzy4
+    - Defeated1
+    - Defeated2
+    - Hurt1
+    - Hurt2
+    - AscendedCrouch
+    - AscendedMidair
+    - AscendedDive
+    - WindUp1
+    - WindUp2
+    - DownwardStrike1
+    - DownwardStrike2
   palettes:
     - Default
     - Ascended
@@ -9302,42 +9299,42 @@ TheMaster:
     - Shocked
     - Ascended_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
-    - Anim23
+    - Still
+    - AscendedStill
+    - Idle
+    - AscendedIdle
+    - AscendedGuard
+    - Walk
+    - AscendedWalk
+    - Run
+    - AscendedRun
+    - Talk
+    - AscendedTalk
+    - Beckon
+    - OpenMouth
+    - Cough
+    - AscendedPunch
+    - AscendedKick
+    - WindUpLoop
+    - WindUpStill
+    - DownwardStrike
+    - AscendedPalmStance
+    - AscendedUppercut
+    - AscendedDownwardStance
+    - AscendedHurt
+    - Hurt
+    - AscendedDefeated
+    - Defeated
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - AscendedSleep
+    - Dizzy
+    - AscendedDizzy
+    - AscendedCrouch
+    - AscendedMidair
+    - AscendedDive
+    - AscendedLand
 Chan:
   frames:
     - Idle1
