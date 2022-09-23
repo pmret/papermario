@@ -719,16 +719,16 @@ EvtScript N(interact_80248D54) = {
     EVT_IF_EQ(GF_DRO01_Gift_Melody, 1)
         EVT_CALL(FindKeyItem, ITEM_MELODY, LVar0)
         EVT_IF_NE(LVar0, -1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0084)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0084)
             EVT_RETURN
         EVT_ELSE
             EVT_IF_EQ(GF_DRO01_Gift_ToldComposerAboutMelody, 0)
                 EVT_IF_LT(GB_StoryProgress, 88)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0085)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0085)
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
                     EVT_WAIT(30)
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0086)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0086)
                     EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, 1)
                     EVT_RETURN
                 EVT_END_IF
@@ -738,26 +738,26 @@ EvtScript N(interact_80248D54) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_007C)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007C)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_007D)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007D)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_007E)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007E)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_007F)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007F)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaFlag(2), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0080)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0080)
                 EVT_SET(AreaFlag(2), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0081)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0081)
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
     EVT_END_SWITCH
@@ -768,11 +768,11 @@ EvtScript N(interact_80248D54) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0082)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Musician_Composer_Anim03)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0082)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Musician_Composer_Write)
             EVT_WAIT(60)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Musician_Composer_Anim01)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Anim02, ANIM_Musician_Composer_Anim01, 0, MSG_CH2_0083)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Musician_Composer_Idle)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0083)
             EVT_SET(LVar0, 104)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
@@ -1129,22 +1129,22 @@ StaticNpc N(npcGroup_80249B34)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            ANIM_Musician_Composer_Anim01,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
-            ANIM_Musician_Composer_Anim00,
+            ANIM_Musician_Composer_Idle,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
+            ANIM_Musician_Composer_Still,
         },
         .tattle = MSG_NpcTattle_Composer,
     },

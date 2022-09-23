@@ -8309,26 +8309,26 @@ Postmaster:
     - Unused5
 ConductorToad:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
+    - Neutral
+    - Idle
+    - Step1
+    - Step2
+    - Step3
+    - BlowWhistle1
+    - BlowWhistle2
+    - BlowWhistle3
+    - BlowWhistle4
+    - BlowWhistle5
+    - Talk
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - BlowWhistle
 TrainStationToad:
   variations:
     - Variant00
@@ -8338,20 +8338,20 @@ TrainStationToad:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Talk
+    - Sadden
+    - SadNeutral
+    - SadTalk
+    - SadIdle
+    - Step1
+    - Step2
+    - Step3
   palettes:
     - Default
     - Pink
@@ -8360,69 +8360,69 @@ TrainStationToad:
     - Red
     - White
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - SadIdle
+    - Walk
+    - Talk
+    - LowerHead
+    - SadTalk
 Fishmael:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Neutral
+    - Idle
+    - Reel1
+    - Talk1
+    - Reel2
+    - Talk2
+    - Reel3
+    - Reel4
   palettes:
     - Default
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
+    - Still
+    - Idle
+    - Talk
+    - Reel
 Musician:
   variations:
     - Variant00
     - Variant01
     - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Blink
+    - Pensive1
+    - Pensive2
+    - Pensive3
+    - Talk
+    - Write1
+    - Write2
+    - ConductSlow1
+    - ConductSlow2
+    - ConductSlow3
+    - ConductFast1
+    - ConductFast2
+    - ConductFast3
+    - GivePaper1
+    - GivePaper2
   palettes:
     - Poet
     - Composer
     - Poet_Dark
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Talk
+    - Write
+    - GivePaper
+    - Pensive
+    - ConductFast
+    - ConductSlow
 Koopa:
   variations:
     - Variant00
