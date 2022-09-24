@@ -1,11 +1,173 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "script_api/battle.h"
 #include "npc.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "world/partners.h"
 
-extern s32 D_80077C40;
-extern EnemyDrops D_80077EB8;
+ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
+ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);
+ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall);
+ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall);
+ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall);
+ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall);
+ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall);
+ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall);
+
+void spawn_drops(Enemy* enemy);
+
+s32 D_80077C40 = 0;
+
+EvtScript D_80077C44 = {
+    EVT_WAIT(10)
+    EVT_CALL(FadeBackgroundToBlack)
+    EVT_WAIT(10)
+    EVT_CALL(CreateNpc, -10, 12255233)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
+    EVT_CALL(GetCamLookAtObjVector)
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_THREAD
+        EVT_CALL(MerleeUpdateFX)
+    EVT_END_THREAD
+    EVT_CALL(FadeInMerlee)
+    EVT_WAIT(30)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, 0xBB0000)
+    EVT_CALL(MerleeStopFX)
+    EVT_CALL(UnfadeBackgroundFromBlack)
+    EVT_WAIT(20)
+    EVT_THREAD
+        EVT_CALL(FadeOutMerlee)
+        EVT_CALL(DeleteNpc, -10)
+    EVT_END_THREAD
+    EVT_CALL(PlaySound, 0x2075)
+    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(PlayMerleeGatherFX, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(PlayMerleeOrbFX, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_WAIT(15)
+    EVT_CALL(ShowMerleeCoinMessage)
+    EVT_WAIT(15)
+    EVT_CALL(HasMerleeCasts)
+    EVT_IF_EQ(LocalVar(0), 1)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(ShowMerleeRanOutMessage)
+    EVT_WAIT(15)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript SCRIPT_NpcDefeat = {
+    EVT_CALL(GetBattleOutcome, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
+        EVT_CASE_EQ(0)
+            EVT_CALL(OnDefeatEnemy)
+        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(2)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80077E9C = {
+    EVT_CALL(OnFleeBattleDrops)
+    EVT_RETURN
+    EVT_END
+};
+
+EnemyDrops D_80077EB8 = {
+    .dropFlags = 0x80,
+    .itemDropChance = 10,
+    .itemDrops = {
+        {
+            .item = ITEM_MUSHROOM,
+            .weight = 50,
+            .unk_04 = -1,
+        },
+    },
+    .heartDrops = {
+        {
+            .cutoff = F16(75),
+            .generalChance = F16(100),
+            .attempts = 0,
+            .chancePerAttempt = 1,
+        },
+        {
+            .cutoff = F16(50),
+            .generalChance = F16(75),
+            .attempts = 0,
+            .chancePerAttempt = 2,
+        },
+        {
+            .cutoff = F16(25),
+            .generalChance = F16(50),
+            .attempts = 0,
+            .chancePerAttempt = 3,
+        },
+        {
+            .cutoff = F16(0),
+            .generalChance = F16(25),
+            .attempts = 0,
+            .chancePerAttempt = 4,
+        },
+    },
+    .flowerDrops = {
+        {
+            .cutoff = 1,
+            .generalChance = 3,
+            .attempts = 0,
+            .chancePerAttempt = 0,
+        },
+    },
+    .minCoinBonus = 0,
+    .maxCoinBonus = 0,
+};
+
+extern EvtScript D_800936DC;
+
+EvtScript EnemyNpcHit = {
+    EVT_CALL(GetOwnerEncounterTrigger, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
+        EVT_CASE_EQ(1)
+        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(4)
+        EVT_CASE_OR_EQ(6)
+            EVT_CALL(GetSelfAnimationFromTable, 7, LocalVar(0))
+            EVT_EXEC_WAIT(D_800936DC)
+        EVT_CASE_EQ(3)
+            EVT_THREAD
+                EVT_CALL(func_800458CC, LocalVar(0))
+                EVT_IF_EQ(LocalVar(0), 0)
+                    EVT_SET(LocalVar(10), 0)
+                    EVT_LOOP(30)
+                        EVT_ADD(LocalVar(10), 40)
+                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LocalVar(10), 0)
+                        EVT_WAIT(1)
+                    EVT_END_LOOP
+                EVT_END_IF
+            EVT_END_THREAD
+        EVT_END_CASE_GROUP
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript EnemyNpcDefeat = {
+    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    EVT_CALL(GetBattleOutcome, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
+        EVT_CASE_EQ(0)
+            EVT_CALL(DoNpcDefeat)
+        EVT_CASE_EQ(2)
+            EVT_CALL(func_80045900, 0)
+        EVT_CASE_EQ(3)
+            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+            EVT_CALL(RemoveNpc, NPC_SELF)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
 extern s8 D_8009A654;
 extern s16 D_8009A668;

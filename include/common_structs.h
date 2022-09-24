@@ -127,9 +127,9 @@ typedef struct CamPosSettings {
 } CamPosSettings; // size = 0x1C
 
 typedef struct DmaTable {
-    /* 0x00 */ s32 dmaStart;
-    /* 0x04 */ s32 dmaEnd;
-    /* 0x08 */ s32 dmaDest;
+    /* 0x00 */ s32 start;
+    /* 0x04 */ s32 end;
+    /* 0x08 */ s32 dest;
 } DmaTable;
 
 typedef struct UseItemStruct {
