@@ -3989,7 +3989,7 @@ enum EnemyFlags {
 enum EnemyAIFlags {
     ENEMY_AI_FLAGS_1              = 0x00000001,
     ENEMY_AI_FLAGS_2              = 0x00000002, // do not move; do not sense player
-    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai
+    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai? reset ai?
     ENEMY_AI_FLAGS_8              = 0x00000008,
     ENEMY_AI_FLAGS_10             = 0x00000010,
     ENEMY_AI_FLAGS_20             = 0x00000020,

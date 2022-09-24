@@ -1039,7 +1039,7 @@ ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(9)) {
         Enemy* enemy = get_enemy(9);
-        enemy->aiFlags |= 0x80;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_80;
         return ApiStatus_DONE2;
     }
 
