@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bill_blaster.h"
+#include "sprite/npc/BillBlaster.h"
 
 #define AREA b_area_trd_part_1
 
@@ -92,10 +92,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_80219E48)[] = {
-    STATUS_NORMAL,    NPC_ANIM_bill_blaster_Palette_00_Anim_1,
-    STATUS_STONE,     NPC_ANIM_bill_blaster_Palette_00_Anim_0,
-    STATUS_STOP,      NPC_ANIM_bill_blaster_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_bill_blaster_Palette_00_Anim_0,
+    STATUS_NORMAL,    ANIM_BillBlaster_Anim01,
+    STATUS_STONE,     ANIM_BillBlaster_Anim00,
+    STATUS_STOP,      ANIM_BillBlaster_Anim00,
+    STATUS_PARALYZE,  ANIM_BillBlaster_Anim00,
     STATUS_END,
 };
 
@@ -125,50 +125,50 @@ EvtScript N(handleEvent_80219EE0) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -209,7 +209,7 @@ ApiStatus func_80218000_4A10A0(Evt* script, s32 isInitialCall) {
 
 
 EvtScript N(8021A2BC) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bill_blaster_Palette_00_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Anim02)
     EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))

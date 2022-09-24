@@ -1,13 +1,14 @@
 #include "common.h"
 #include "ld_addrs.h"
-#include "sprite/npc/battle_goombario.h"
-#include "sprite/npc/battle_kooper.h"
-#include "sprite/npc/battle_bombette.h"
-#include "sprite/npc/battle_parakarry.h"
-#include "sprite/npc/battle_watt.h"
-#include "sprite/npc/battle_sushie.h"
-#include "sprite/npc/battle_lakilester.h"
-#include "sprite/npc/battle_bow.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/BattleKooper.h"
+#include "sprite/npc/BattleBombette.h"
+#include "sprite/npc/BattleParakarry.h"
+#include "sprite/npc/BattleWatt.h"
+#include "sprite/npc/BattleSushie.h"
+#include "sprite/npc/BattleLakilester.h"
+#include "sprite/npc/BattleBow.h"
 
 typedef struct StarPowerEntry {
     /* 0x04 */ void* dmaStart;
@@ -44,17 +45,73 @@ StarPowerEntry D_8029C7D0[] = {
     { battle_star_peach_dash_ROM_START,  battle_star_peach_dash_ROM_END,  battle_star_peach_dash_VRAM,  battle_star_peach_dash_usePower, },
 };
 
-s32 D_8029C890[10][5] = {
-    { 0x1001F,                                      0x1002C,                                      0x1002A,                                      0x10005,                                      0, }, // Junk? These IDs should be in world_goombario, but don't exist.
-    { NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_idle, },
-    { NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_4, },
-    { NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_4, },
-    { NPC_ANIM_battle_parakarry_Palette_00_Anim_3,  NPC_ANIM_battle_parakarry_Palette_00_Anim_18, NPC_ANIM_battle_parakarry_Palette_00_Anim_18, NPC_ANIM_battle_parakarry_Palette_00_Anim_3,  NPC_ANIM_battle_parakarry_Palette_00_Anim_1, },
-    {}, // Goompa
-    { NPC_ANIM_battle_watt_Palette_00_Anim_3,       NPC_ANIM_battle_watt_Palette_00_Anim_A,       NPC_ANIM_battle_watt_Palette_00_Anim_A,       NPC_ANIM_battle_watt_Palette_00_Anim_3,       NPC_ANIM_battle_parakarry_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_sushie_Palette_00_Anim_3,     NPC_ANIM_battle_sushie_Palette_00_Anim_13,    NPC_ANIM_battle_sushie_Palette_00_Anim_13,    NPC_ANIM_battle_sushie_Palette_00_Anim_3,     NPC_ANIM_battle_sushie_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_lakilester_Palette_00_Anim_3, NPC_ANIM_battle_lakilester_Palette_00_Anim_9, NPC_ANIM_battle_lakilester_Palette_00_Anim_9, NPC_ANIM_battle_lakilester_Palette_00_Anim_3, NPC_ANIM_battle_lakilester_Palette_00_Anim_1, },
-    { NPC_ANIM_battle_bow_Palette_00_Anim_3,        NPC_ANIM_battle_bow_Palette_00_Anim_13,       NPC_ANIM_battle_bow_Palette_00_Anim_13,       NPC_ANIM_battle_bow_Palette_00_Anim_3,        NPC_ANIM_battle_bow_Palette_00_Anim_1, },
+s32 D_8029C890[][5] = {
+    [PARTNER_NONE] {
+        ANIM_Mario_GotItem,
+        ANIM_Mario_AnimPray,
+        ANIM_Mario_1002A,
+        ANIM_Mario_Running,
+        0,
+    },
+    [PARTNER_GOOMBARIO] {
+        ANIM_BattleGoombario_Run,
+        ANIM_BattleGoombario_CloseEyes,
+        ANIM_BattleGoombario_CloseEyes,
+        ANIM_BattleGoombario_Run,
+        ANIM_BattleGoombario_Idle,
+    },
+    [PARTNER_KOOPER] {
+        ANIM_BattleKooper_Run,
+        ANIM_BattleKooper_Pray,
+        ANIM_BattleKooper_Pray,
+        ANIM_BattleKooper_Run,
+        ANIM_BattleKooper_Idle,
+    },
+   [PARTNER_BOMBETTE] {
+        ANIM_BattleBombette_Run,
+        ANIM_BattleBombette_Sleep,
+        ANIM_BattleBombette_Sleep,
+        ANIM_BattleBombette_Run,
+        ANIM_BattleBombette_Idle,
+    },
+    [PARTNER_PARAKARRY] {
+        ANIM_BattleParakarry_Run,
+        ANIM_BattleParakarry_Pray,
+        ANIM_BattleParakarry_Pray,
+        ANIM_BattleParakarry_Run,
+        ANIM_BattleParakarry_Idle,
+    },
+    [PARTNER_GOOMPA] {
+        // no data
+    },
+    [PARTNER_WATT] {
+        ANIM_BattleWatt_Run,
+        ANIM_BattleWatt_Sleep,
+        ANIM_BattleWatt_Sleep,
+        ANIM_BattleWatt_Run,
+        ANIM_BattleParakarry_Idle, // @bug uses wrong sprite!
+    },
+    [PARTNER_SUSHIE] {
+        ANIM_BattleSushie_Run,
+        ANIM_BattleSushie_Pray,
+        ANIM_BattleSushie_Pray,
+        ANIM_BattleSushie_Run,
+        ANIM_BattleSushie_Idle,
+    },
+    [PARTNER_LAKILESTER] {
+        ANIM_BattleLakilester_Run,
+        ANIM_BattleLakilester_Pray,
+        ANIM_BattleLakilester_Pray,
+        ANIM_BattleLakilester_Run,
+        ANIM_BattleLakilester_Idle,
+    },
+    [PARTNER_BOW] {
+        ANIM_BattleBow_Run,
+        ANIM_BattleBow_Pray,
+        ANIM_BattleBow_Pray,
+        ANIM_BattleBow_Run,
+        ANIM_BattleBow_Idle,
+    },
 };
 
 ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {

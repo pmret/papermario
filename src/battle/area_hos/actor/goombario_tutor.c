@@ -2,20 +2,20 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
-#include "sprite/npc/battle_goombario.h"
+#include "sprite/npc/BattleGoombario.h"
 
 #define NAMESPACE b_area_hos_goombario_tutor
 
 s32 N(idleAnimations_80219010)[] = {
-    STATUS_NORMAL,    NPC_ANIM_battle_goombario_default_idle,
-    STATUS_STONE,     NPC_ANIM_battle_goombario_default_still,
-    STATUS_SLEEP,     NPC_ANIM_battle_goombario_default_still,
-    STATUS_POISON,    NPC_ANIM_battle_goombario_default_idle,
-    STATUS_STOP,      NPC_ANIM_battle_goombario_default_still,
-    STATUS_STATIC,    NPC_ANIM_battle_goombario_default_still,
-    STATUS_PARALYZE,  NPC_ANIM_battle_goombario_default_still,
-    STATUS_DIZZY,     NPC_ANIM_battle_goombario_default_still,
-    STATUS_DIZZY,     NPC_ANIM_battle_goombario_default_still,
+    STATUS_NORMAL,    ANIM_BattleGoombario_Idle,
+    STATUS_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_SLEEP,     ANIM_BattleGoombario_Still,
+    STATUS_POISON,    ANIM_BattleGoombario_Idle,
+    STATUS_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_STATIC,    ANIM_BattleGoombario_Still,
+    STATUS_PARALYZE,  ANIM_BattleGoombario_Still,
+    STATUS_DIZZY,     ANIM_BattleGoombario_Still,
+    STATUS_DIZZY,     ANIM_BattleGoombario_Still,
     STATUS_END,
 };
 
@@ -135,18 +135,18 @@ EvtScript N(handleEvent_802191E0) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_goombario_default_pain)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_goombario_default_idle)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(48)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_battle_goombario_default_pain)
+            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_DEFAULT
@@ -164,18 +164,18 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
@@ -196,7 +196,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(LoadActionCommand, 1)
@@ -207,7 +207,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_JUMP_3E2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
@@ -241,7 +241,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_WAIT(1)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
@@ -256,16 +256,16 @@ EvtScript N(takeTurn_80219444) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_SUB(LVar0, 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
             EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

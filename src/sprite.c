@@ -874,7 +874,7 @@ PAL_PTR* spr_get_player_palettes(s32 spriteIndex) {
 }
 
 s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
-    SpriteAnimData* animData;
+    SpriteAnimData* header;
     SpriteComponent** compList;
     s32 listIndex;
     s32 i;
@@ -896,18 +896,18 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
     listIndex = i;
     if (NpcSpriteData[spriteIndex] != NULL) {
         NpcSpriteInstanceCount[spriteIndex]++;
-        animData = NpcSpriteData[spriteIndex];
-        SpriteInstances[listIndex].spriteData = animData;
+        header = NpcSpriteData[spriteIndex];
+        SpriteInstances[listIndex].spriteData = header;
     } else {
         NpcSpriteInstanceCount[spriteIndex] = 1;
-        animData = spr_load_sprite(spriteIndex - 1, FALSE, useTailAlloc);
-        SpriteInstances[listIndex].spriteData = animData;
-        NpcSpriteData[spriteIndex] = animData;
+        header = spr_load_sprite(spriteIndex - 1, FALSE, useTailAlloc);
+        SpriteInstances[listIndex].spriteData = header;
+        NpcSpriteData[spriteIndex] = header;
         if (extraAnimList != NULL) {
-            spr_load_npc_extra_anims(animData, extraAnimList);
+            spr_load_npc_extra_anims(header, extraAnimList);
         }
     }
-    compList = spr_allocate_components(animData->maxComponents);
+    compList = spr_allocate_components(header->maxComponents);
     SpriteInstances[listIndex].componentList = compList;
     while (*compList != PTR_LIST_END) {
         SpriteComponent* comp = *compList;

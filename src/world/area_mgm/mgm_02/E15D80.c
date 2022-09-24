@@ -3,8 +3,8 @@
 #include "effects.h"
 #include "model.h"
 #include "entity.h"
-#include "sprite/npc/bob_omb.h"
-#include "sprite/npc/fuzzy.h"
+#include "sprite/npc/Bobomb.h"
+#include "sprite/npc/Fuzzy.h"
 
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 void delete_entity(s32);
@@ -436,7 +436,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                 case BOX_STATE_FUZZY_IDLE:
                     data->box[i].stateTimer--;
                     if (data->box[i].stateTimer <= 0) {
-                        npc->currentAnim = NPC_ANIM_fuzzy_Palette_00_Anim_2;
+                        npc->currentAnim = ANIM_Fuzzy_Anim02;
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
                         sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -482,7 +482,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
                     gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
-                    npc->currentAnim = NPC_ANIM_fuzzy_Palette_00_Anim_3;
+                    npc->currentAnim = ANIM_Fuzzy_Anim03;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
                     npc->pos.y = centerY;
@@ -509,7 +509,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
-                        npc->currentAnim = NPC_ANIM_fuzzy_Palette_00_Anim_F;
+                        npc->currentAnim = ANIM_Fuzzy_Anim0F;
                         gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->position.x;
@@ -535,7 +535,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                         hud_element_set_script(data->hudElemID_AButton, &HES_AButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 160);
                         hud_element_set_alpha(data->hudElemID_Meter, 160);
-                        npc->currentAnim = NPC_ANIM_fuzzy_Palette_00_Anim_8;
+                        npc->currentAnim = ANIM_Fuzzy_Anim08;
                         npc->pos.y += 3.0;
                     }
                     break;
@@ -600,7 +600,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                 case BOX_STATE_BOMB_HIT:
                     enable_npc_shadow(npc);
                     npc->duration = 15;
-                    npc->currentAnim = NPC_ANIM_bob_omb_Palette_00_Anim_5;
+                    npc->currentAnim = ANIM_Bobomb_Anim05;
                     data->stunFlags |= (STUN_FLAGS_STUNNED | STUN_FLAGS_CHANGED);
                     data->box[i].state = BOX_STATE_BOMB_ATTACK;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -934,7 +934,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
                     if (data->box[i].state != BOX_STATE_FUZZY_END) {
                         data->box[i].state = BOX_STATE_FUZZY_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = NPC_ANIM_fuzzy_Palette_00_Anim_E;
+                        npc->currentAnim = ANIM_Fuzzy_Anim0E;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -943,7 +943,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
                     if (data->box[i].state != BOX_STATE_BOMB_END) {
                         data->box[i].state = BOX_STATE_BOMB_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = NPC_ANIM_bob_omb_Palette_00_Anim_1C;
+                        npc->currentAnim = ANIM_Bobomb_Anim1C;
                         enable_npc_shadow(npc);
                     }
                     break;

@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_klevar.h"
+#include "sprite/npc/BattleKlevar.h"
 
 #define NAMESPACE battle_star_time_out
 
@@ -246,9 +246,9 @@ EvtScript N(802A22AC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1520))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_klevar_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleKlevar_Idle)
     EVT_EXEC_WAIT(N(802A1C50))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_klevar_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKlevar_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(PlaySound, SOUND_246)

@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_bow.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/BattleBow.h"
+#include "sprite/npc/TubbasHeart.h"
 
 #define NAMESPACE b_area_arn_tubbas_heart
 
@@ -18,32 +18,32 @@ extern EvtScript N(80225258);
 extern EvtScript N(802255D8);
 
 s32 N(idleAnimations_80223BC0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-    STATUS_STONE,     NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_tubbas_heart_Palette_00_Anim_4,
-    STATUS_POISON,    NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-    STATUS_STOP,      NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_tubbas_heart_Palette_00_Anim_D,
-    STATUS_DIZZY,     NPC_ANIM_tubbas_heart_Palette_00_Anim_D,
-    STATUS_FEAR,      NPC_ANIM_tubbas_heart_Palette_00_Anim_A,
+    STATUS_NORMAL,    ANIM_TubbasHeart_Anim01,
+    STATUS_STONE,     ANIM_TubbasHeart_Anim00,
+    STATUS_SLEEP,     ANIM_TubbasHeart_Anim04,
+    STATUS_POISON,    ANIM_TubbasHeart_Anim01,
+    STATUS_STOP,      ANIM_TubbasHeart_Anim00,
+    STATUS_STATIC,    ANIM_TubbasHeart_Anim00,
+    STATUS_PARALYZE,  ANIM_TubbasHeart_Anim00,
+    STATUS_PARALYZE,  ANIM_TubbasHeart_Anim00,
+    STATUS_DIZZY,     ANIM_TubbasHeart_Anim0D,
+    STATUS_DIZZY,     ANIM_TubbasHeart_Anim0D,
+    STATUS_FEAR,      ANIM_TubbasHeart_Anim0A,
     STATUS_END,
 };
 
 s32 N(idleAnimations_80223C1C)[] = {
-    STATUS_NORMAL,    NPC_ANIM_tubbas_heart_Palette_00_Anim_B,
-    STATUS_STONE,     NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_tubbas_heart_Palette_00_Anim_4,
-    STATUS_POISON,    NPC_ANIM_tubbas_heart_Palette_00_Anim_B,
-    STATUS_STOP,      NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_tubbas_heart_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_tubbas_heart_Palette_00_Anim_D,
-    STATUS_DIZZY,     NPC_ANIM_tubbas_heart_Palette_00_Anim_D,
-    STATUS_FEAR,      NPC_ANIM_tubbas_heart_Palette_00_Anim_A,
+    STATUS_NORMAL,    ANIM_TubbasHeart_Anim0B,
+    STATUS_STONE,     ANIM_TubbasHeart_Anim00,
+    STATUS_SLEEP,     ANIM_TubbasHeart_Anim04,
+    STATUS_POISON,    ANIM_TubbasHeart_Anim0B,
+    STATUS_STOP,      ANIM_TubbasHeart_Anim00,
+    STATUS_STATIC,    ANIM_TubbasHeart_Anim00,
+    STATUS_PARALYZE,  ANIM_TubbasHeart_Anim00,
+    STATUS_PARALYZE,  ANIM_TubbasHeart_Anim00,
+    STATUS_DIZZY,     ANIM_TubbasHeart_Anim0D,
+    STATUS_DIZZY,     ANIM_TubbasHeart_Anim0D,
+    STATUS_FEAR,      ANIM_TubbasHeart_Anim0A,
     STATUS_END,
 };
 
@@ -208,8 +208,8 @@ EvtScript N(handleEvent_80224038) = {
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tubbas_heart_Palette_00_Anim_10)
-            EVT_SET_CONST(LVar2, NPC_ANIM_tubbas_heart_Palette_00_Anim_11)
+            EVT_SET_CONST(LVar1, ANIM_TubbasHeart_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_TubbasHeart_Anim11)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -224,7 +224,7 @@ EvtScript N(handleEvent_80224038) = {
             EVT_EXEC_WAIT(N(80223FD8))
             EVT_SET_CONST(LVar0, 1)
             EVT_EXEC_WAIT(DoJumpBack)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -250,12 +250,12 @@ EvtScript N(handleEvent_80224038) = {
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_TubbasHeart_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -275,7 +275,7 @@ EvtScript N(80224414) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(40)
-    EVT_CALL(ActorSpeak, MSG_CH3_00C6, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_D, NPC_ANIM_tubbas_heart_Palette_00_Anim_D)
+    EVT_CALL(ActorSpeak, MSG_CH3_00C6, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0D, ANIM_TubbasHeart_Anim0D)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 25)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
@@ -295,7 +295,7 @@ EvtScript N(802244DC) = {
     EVT_EXEC_WAIT(D_8029C12C)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim01)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -317,15 +317,15 @@ EvtScript N(takeTurn_802245C8) = {
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 40)
                 EVT_WAIT(40)
-                EVT_CALL(ActorSpeak, MSG_CH3_00C3, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
+                EVT_CALL(ActorSpeak, MSG_CH3_00C3, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_PARTNER)
                 EVT_CALL(MoveBattleCamOver, 25)
                 EVT_WAIT(25)
                 EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_PARTNER, 1, NPC_ANIM_battle_bow_Palette_00_Anim_4)
-                EVT_CALL(ActorSpeak, MSG_CH3_00C4, ACTOR_PARTNER, 1, NPC_ANIM_battle_bow_Palette_00_Anim_4, NPC_ANIM_battle_bow_Palette_00_Anim_1)
-                EVT_CALL(SetAnimation, ACTOR_PARTNER, 1, NPC_ANIM_battle_bow_Palette_00_Anim_F)
+                EVT_CALL(SetAnimation, ACTOR_PARTNER, 1, ANIM_BattleBow_Talk)
+                EVT_CALL(ActorSpeak, MSG_CH3_00C4, ACTOR_PARTNER, 1, ANIM_BattleBow_Talk, ANIM_BattleBow_Idle)
+                EVT_CALL(SetAnimation, ACTOR_PARTNER, 1, ANIM_BattleBow_Laugh)
                 EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, -1, -1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -352,7 +352,7 @@ EvtScript N(takeTurn_802245C8) = {
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 40)
                 EVT_WAIT(40)
-                EVT_CALL(ActorSpeak, MSG_CH3_00C5, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
+                EVT_CALL(ActorSpeak, MSG_CH3_00C5, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
             EVT_END_IF
             EVT_EXEC_WAIT(N(80225258))
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
@@ -390,7 +390,7 @@ EvtScript N(80224B3C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 45)
@@ -404,10 +404,10 @@ EvtScript N(80224B3C) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_16)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim16)
     EVT_WAIT(5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_15)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim15)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -434,7 +434,7 @@ EvtScript N(80224B3C) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -452,7 +452,7 @@ EvtScript N(80224B3C) = {
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim01)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -475,7 +475,7 @@ EvtScript N(80224B3C) = {
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -490,7 +490,7 @@ EvtScript N(80225258) = {
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(40)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0B)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar4)
     EVT_IF_NOT_FLAG(LVar4, STATUS_FLAG_SHRINK)
@@ -537,7 +537,7 @@ EvtScript N(802255D8) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -549,7 +549,7 @@ EvtScript N(802255D8) = {
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0B)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))

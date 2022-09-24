@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/tank_guy.h"
+#include "sprite/npc/TankGuy.h"
 
 #define NAMESPACE b_area_omo2_5_shy_squad_dup
 
@@ -288,14 +288,14 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_tank_guy_Palette_00_Anim_1,
-    STATUS_STOP, NPC_ANIM_tank_guy_Palette_00_Anim_0,
+    STATUS_NORMAL, ANIM_TankGuy_Anim01,
+    STATUS_STOP, ANIM_TankGuy_Anim00,
     STATUS_END,
 };
 
 s32 N(idleAnimations_watt)[] = {
-    STATUS_NORMAL, NPC_ANIM_tank_guy_Palette_00_Anim_7,
-    STATUS_STOP, NPC_ANIM_tank_guy_Palette_00_Anim_0,
+    STATUS_NORMAL, ANIM_TankGuy_Anim07,
+    STATUS_STOP, ANIM_TankGuy_Anim00,
     STATUS_END,
 };
 
@@ -410,7 +410,7 @@ EvtScript N(init) = {
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
     EVT_SET(LVar0, 2)
-    EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_3)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
     EVT_SET(LVar2, 55)
     EVT_SET(LVar3, 47)
     EVT_SET(LVar4, EVT_FLOAT(4.0))
@@ -424,7 +424,7 @@ EvtScript N(init) = {
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 1, LVar3)
             EVT_SET(LVar5, 20)
             EVT_EXEC_WAIT(N(move_guy_to_pos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
         EVT_END_THREAD
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVarF, 5)
@@ -734,105 +734,105 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onSpinSmash))
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_5)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim05)
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET(LVar0, 2)
             EVT_LOOP(15)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_tank_guy_Palette_00_Anim_5)
+                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
                 EVT_ADD(LVar0, 1)
             EVT_END_LOOP
             EVT_WAIT(20)
             EVT_SET(LVar0, 2)
             EVT_LOOP(15)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_tank_guy_Palette_00_Anim_5)
+                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
                 EVT_ADD(LVar0, 1)
             EVT_END_LOOP
             EVT_WAIT(15)
             EVT_IF_EQ(LVar0, 36)
                 EVT_WAIT(10)
-                EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_5)
+                EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim05)
                 EVT_EXEC_WAIT(N(onDeath))
                 EVT_RETURN
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onSpinSmash))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onShock))
             EVT_WAIT(40)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_EXEC_WAIT(N(run_squad_to_pos))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onShock))
             EVT_WAIT(40)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(set_squad_animation))
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim01)
     EVT_EXEC_WAIT(N(set_squad_animation))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1042,7 +1042,7 @@ EvtScript N(run_away) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 15, 1)
             EVT_THREAD
                 EVT_WAIT(LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_tank_guy_Palette_00_Anim_3)
+                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim03)
                 EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 180)
                 EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 55, 0, 47, 20)
                 EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 185, 0, 47, 30)
@@ -1080,7 +1080,7 @@ EvtScript N(attack) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_SET(LVar0, 2)
-    EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_3)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
     EVT_LOOP(15)
         EVT_THREAD
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
@@ -1113,9 +1113,9 @@ EvtScript N(attack) = {
         EVT_END_IF
         EVT_CALL(RandInt, 100, LVar7)
         EVT_IF_LT(LVar7, 50)
-            EVT_SET(LVar7, NPC_ANIM_tank_guy_Palette_00_Anim_4)
+            EVT_SET(LVar7, ANIM_TankGuy_Anim04)
         EVT_ELSE
-            EVT_SET(LVar7, NPC_ANIM_tank_guy_Palette_00_Anim_7)
+            EVT_SET(LVar7, ANIM_TankGuy_Anim07)
         EVT_END_IF
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar7)
         EVT_ADD(LVar0, 1)
@@ -1144,7 +1144,7 @@ EvtScript N(attack) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 30)
             EVT_EXEC_WAIT(N(run_squad_to_pos))
-            EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_SET(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(set_squad_animation))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -1186,7 +1186,7 @@ EvtScript N(attack) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(run_squad_to_pos))
-    EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim01)
     EVT_EXEC_WAIT(N(set_squad_animation))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -1196,7 +1196,7 @@ EvtScript N(attack) = {
 
 EvtScript N(run_squad_to_pos) = {
     EVT_SET(LVar0, 2)
-    EVT_SET(LVar1, NPC_ANIM_tank_guy_Palette_00_Anim_3)
+    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
     EVT_LOOP(15)
         EVT_THREAD
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -1208,7 +1208,7 @@ EvtScript N(run_squad_to_pos) = {
             EVT_SETF(LVar4, EVT_FLOAT(6.0))
             EVT_SET(LVar5, 30)
             EVT_EXEC_WAIT(N(move_guy_to_pos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
             EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 0)
         EVT_END_THREAD
         EVT_ADD(LVar0, 1)

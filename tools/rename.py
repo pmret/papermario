@@ -55,8 +55,9 @@ with open(os.path.join(script_dir, "to_rename.txt")) as f:
 for line in renames_text:
     split = line.split()
     if len(split) == 2:
-        renames[split[0]] = split[1]
-        patterns.append(split[0])
+        if split[0] and split[1]:
+            renames[split[0]] = split[1]
+            patterns.append(split[0])
     elif len(split) != 0:
         raise Exception("input contains invalid rename pattern: \n\"" + line.strip() + "\"")
 

@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite.h"
-#include "sprite/npc/monstar.h"
+#include "sprite/npc/Monstar.h"
 #include "battle/area_sam2/actor/img.png.h"
 
 #define NAMESPACE b_area_sam2_monstar
@@ -104,21 +104,21 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_monstar_Palette_00_Anim_1,
-    STATUS_STONE, NPC_ANIM_monstar_Palette_00_Anim_0,
-    STATUS_SLEEP, NPC_ANIM_monstar_Palette_00_Anim_1,
-    STATUS_POISON, NPC_ANIM_monstar_Palette_00_Anim_1,
-    STATUS_STOP, NPC_ANIM_monstar_Palette_00_Anim_0,
-    STATUS_STATIC, NPC_ANIM_monstar_Palette_00_Anim_1,
-    STATUS_PARALYZE, NPC_ANIM_monstar_Palette_00_Anim_0,
-    STATUS_PARALYZE, NPC_ANIM_monstar_Palette_00_Anim_0,
-    STATUS_DIZZY, NPC_ANIM_monstar_Palette_00_Anim_1,
-    STATUS_DIZZY, NPC_ANIM_monstar_Palette_00_Anim_1,
+    STATUS_NORMAL, ANIM_Monstar_Idle1,
+    STATUS_STONE, ANIM_Monstar_Still,
+    STATUS_SLEEP, ANIM_Monstar_Idle1,
+    STATUS_POISON, ANIM_Monstar_Idle1,
+    STATUS_STOP, ANIM_Monstar_Still,
+    STATUS_STATIC, ANIM_Monstar_Idle1,
+    STATUS_PARALYZE, ANIM_Monstar_Still,
+    STATUS_PARALYZE, ANIM_Monstar_Still,
+    STATUS_DIZZY, ANIM_Monstar_Idle1,
+    STATUS_DIZZY, ANIM_Monstar_Idle1,
     STATUS_END,
 };
 
 s32 N(idleAnimations2)[] = {
-    STATUS_NORMAL, NPC_ANIM_monstar_Palette_00_Anim_4,
+    STATUS_NORMAL, ANIM_Monstar_GatherStrength1,
     STATUS_END,
 };
 
@@ -238,21 +238,21 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET(LVar1, ANIM_Monstar_Hurt)
             EVT_SET(LVar2, -1)
             EVT_EXEC_WAIT(N(OnBurn))
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET(LVar1, ANIM_Monstar_Hurt)
             EVT_SET(LVar2, -1)
             EVT_EXEC_WAIT(N(OnBurn))
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -260,10 +260,10 @@ EvtScript N(handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_1)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_4)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_IMMUNE)
@@ -271,34 +271,34 @@ EvtScript N(handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_1)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_4)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_1)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_4)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
@@ -306,10 +306,10 @@ EvtScript N(handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_1)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, NPC_ANIM_monstar_Palette_00_Anim_4)
+                    EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoImmune)
     EVT_END_SWITCH
@@ -328,7 +328,7 @@ EvtScript N(unused) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
@@ -356,11 +356,11 @@ EvtScript N(attack) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_5)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength2)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_6)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength3)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc3))
@@ -418,14 +418,14 @@ EvtScript N(attack) = {
     EVT_ADD(LVar1, 50)
     EVT_ADD(LVar2, 5)
     EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 11, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 160, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Release)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(170)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, 0)
             EVT_LABEL(1)
@@ -451,7 +451,7 @@ EvtScript N(attack) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, 0)
             EVT_LABEL(2)
@@ -487,13 +487,13 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(2)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_DEFAULT
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_9, NPC_ANIM_monstar_Palette_00_Anim_9)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
     EVT_END_SWITCH
     EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

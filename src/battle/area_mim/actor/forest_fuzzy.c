@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/fuzzy.h"
+#include "sprite/npc/Fuzzy.h"
 
 #define NAMESPACE b_area_mim_forest_fuzzy
 
@@ -82,15 +82,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_802184C4)[] = {
-    STATUS_NORMAL,    NPC_ANIM_fuzzy_Palette_01_Anim_1,
-    STATUS_STONE,     NPC_ANIM_fuzzy_Palette_01_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_fuzzy_Palette_01_Anim_E,
-    STATUS_POISON,    NPC_ANIM_fuzzy_Palette_01_Anim_1,
-    STATUS_STOP,      NPC_ANIM_fuzzy_Palette_01_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_fuzzy_Palette_01_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_fuzzy_Palette_01_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_fuzzy_Palette_01_Anim_F,
-    STATUS_FEAR,      NPC_ANIM_fuzzy_Palette_01_Anim_F,
+    STATUS_NORMAL,    ANIM_Fuzzy_Forest_Anim01,
+    STATUS_STONE,     ANIM_Fuzzy_Forest_Anim00,
+    STATUS_SLEEP,     ANIM_Fuzzy_Forest_Anim0E,
+    STATUS_POISON,    ANIM_Fuzzy_Forest_Anim01,
+    STATUS_STOP,      ANIM_Fuzzy_Forest_Anim00,
+    STATUS_STATIC,    ANIM_Fuzzy_Forest_Anim01,
+    STATUS_PARALYZE,  ANIM_Fuzzy_Forest_Anim00,
+    STATUS_DIZZY,     ANIM_Fuzzy_Forest_Anim0F,
+    STATUS_FEAR,      ANIM_Fuzzy_Forest_Anim0F,
     STATUS_END,
 };
 
@@ -120,110 +120,110 @@ EvtScript N(handleEvent_80218584) = {
             EVT_CALL(GetLastElement, LVar0)
             EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
             EVT_END_IF
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_10)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzy_Palette_01_Anim_12)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzy_Forest_Anim12)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_10)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzy_Palette_01_Anim_12)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzy_Forest_Anim12)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_12)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim12)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim03)
             EVT_EXEC_WAIT(D_8029C0A4)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(func_80269470)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(GetLastElement, LVar0)
             EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
                 EVT_EXEC_WAIT(DoNormalHit)
                 EVT_WAIT(10)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_13)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim13)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
                 EVT_EXEC_WAIT(DoNormalHit)
                 EVT_WAIT(10)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_8)
+                EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim08)
                 EVT_EXEC_WAIT(DoDeath)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzy_Palette_01_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim03)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzy_Forest_Anim09)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim03)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim03)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzy_Forest_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -255,9 +255,9 @@ EvtScript N(80218C48) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2070)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim0D)
     EVT_WAIT(130)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim02)
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -265,20 +265,20 @@ EvtScript N(80218C48) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim02)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_WAIT(1)
-    EVT_CALL(SetAnimation, LVar0, 1, NPC_ANIM_fuzzy_Palette_01_Anim_2)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_Fuzzy_Forest_Anim02)
     EVT_CALL(SetActorJumpGravity, LVar0, EVT_FLOAT(1.4))
     EVT_CALL(JumpToGoal, LVar0, 14, FALSE, TRUE, FALSE)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(ForceHomePos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(HPBarToHome, LVar0)
-    EVT_CALL(SetAnimation, LVar0, 1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, LVar0, 1, ANIM_Fuzzy_Forest_Anim01)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -310,7 +310,7 @@ EvtScript N(80219054) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim03)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -318,10 +318,10 @@ EvtScript N(80219054) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim01)
     EVT_LABEL(100)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -337,11 +337,11 @@ EvtScript N(80219054) = {
             EVT_SET(LVar1, 0)
             EVT_SUB(LVar2, 5)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim05)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 11, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_9)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim09)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
@@ -363,7 +363,7 @@ EvtScript N(80219054) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim03)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -386,7 +386,7 @@ EvtScript N(80219054) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -3, -12, -15)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim05)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_IF_EQ(LocalFlag(0), 1)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -396,9 +396,9 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3E0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_7)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim07)
     EVT_WAIT(21)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim00)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3E0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -3, -2, 0)
@@ -418,7 +418,7 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim01)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
     EVT_IF_NE(LVar3, 0)
@@ -494,13 +494,13 @@ EvtScript N(80219054) = {
     EVT_WAIT(5)
     EVT_CALL(YieldTurn)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim03)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_01_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim01)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

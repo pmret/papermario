@@ -29,13 +29,30 @@ if __name__ == "__main__":
         f.write('#include "types.h"\n')
         f.write("\n")
 
-        seen_palette_names = set()
-        for p, palette_name in enumerate(sprite.palette_names):
-            if palette_name not in seen_palette_names:
-                seen_palette_names.add(palette_name)
-
-                for a, name in enumerate(sprite.animation_names):
-                    f.write(f"#define NPC_ANIM_{sprite_name}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
-
+        # sprite definition
+        f.write(f"#define SPR_{sprite_name} 0x{s:02X}\n")
         f.write("\n")
+
+        # definitions for images
+        for i, image_name in enumerate(sprite.image_names):
+            f.write(f"#define SPR_IMG_{sprite_name}_{image_name} 0x{i:X}\n")
+        f.write("\n")
+
+        # definitions for palettes 
+        for p, palette_name in enumerate(sprite.palette_names):
+            if palette_name == "Default":
+                f.write(f"#define SPR_PAL_{sprite_name} 0x{p:X}\n")
+            else:
+                f.write(f"#define SPR_PAL_{sprite_name}_{palette_name} 0x{p:X}\n")
+        f.write("\n")
+
+        # definitions for animations 
+        for p, palette_name in enumerate(sprite.palette_names):
+            for a, name in enumerate(sprite.animation_names):
+                if palette_name == "Default":
+                    f.write(f"#define ANIM_{sprite_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
+                else:
+                    f.write(f"#define ANIM_{sprite_name}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
+            f.write("\n")
+
         f.write("#endif\n")

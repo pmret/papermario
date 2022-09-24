@@ -2,6 +2,16 @@
 #include "battle/battle.h"
 #include "hud_element.h"
 
+#include "sprite/npc/Goompa.h"
+#include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/BattleKooper.h"
+#include "sprite/npc/BattleBombette.h"
+#include "sprite/npc/BattleParakarry.h"
+#include "sprite/npc/BattleBow.h"
+#include "sprite/npc/BattleWatt.h"
+#include "sprite/npc/BattleSushie.h"
+#include "sprite/npc/BattleLakilester.h"
+
 extern HudScript HES_YellowArrow;
 
 extern HudScript HES_MenuFlee;
@@ -113,7 +123,7 @@ s16 D_802AB344[] = { 0, -2 };
 
 HudScript* battle_menu_JumpHudScripts[] = {
     &HES_MenuBoots1Disabled, &HES_MenuBoots1Disabled,
-    &HES_MenuBoots1,&HES_MenuBoots1Disabled,
+    &HES_MenuBoots1, &HES_MenuBoots1Disabled,
     &HES_MenuBoots2, &HES_MenuBoots2Disabled,
     &HES_MenuBoots3, &HES_MenuBoots3Disabled };
 
@@ -150,47 +160,69 @@ HudScript* battle_menu_DisabledPartnerHudScripts[] = {
     &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled
 };
 
-HudScript* battle_menu_StrategiesHudScript[] = { &HES_MenuStrategies };
-
-HudScript* battle_menu_DisabledStrategiesHudScript[] = { &HES_MenuStrategiesDisabled };
+HudScript* battle_menu_StrategiesHudScript[] = { &HES_MenuStrategies, &HES_MenuStrategiesDisabled };
 
 HudScript* battle_menu_DoNothingHudScripts[] = { &HES_MenuDoNothing, &HES_MenuDoNothingDisabled };
 
 HudScript* battle_menu_FleeHudScripts[] = { &HES_MenuFlee, &HES_MenuFleeDisabled };
 
 // Jump, Hammer, Items, RunAway, Defense
-s32 battle_menu_leftJustfiedMessagesA[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
+s32 battle_menu_leftJustfiedMessagesA[] = { MSG_Menus_0039, MSG_Menus_0038, MSG_Menus_003F, MSG_Menus_003B, MSG_Menus_0044 };
 
 // Change Member, Abilities, Strategies, Star Spirits
-s32 battle_menu_leftJustfiedMessagesB[] = { 0x001D003E, 0x001D0045, 0x001D0043, 0x001D003A };
+s32 battle_menu_leftJustfiedMessagesB[] = { MSG_Menus_003E, MSG_Menus_0045, MSG_Menus_0043, MSG_Menus_003A };
 
 // Do Nothing, Act Later, Focus
-s32 battle_menu_leftJustfiedMessagesC[] = { 0x001D003C, 0x001D0046, 0x001D0048 };
+s32 battle_menu_leftJustfiedMessagesC[] = { MSG_Menus_003C, MSG_Menus_0046, MSG_Menus_0048 };
 
 // Jump, Hammer
-s32 battle_menu_centeredMessagesA[] = { 0x001D004B, 0x001D004A };
+s32 battle_menu_centeredMessagesA[] = { MSG_Menus_004B, MSG_Menus_004A };
 
 // Items, RunAway, Defense, Change Member, Abilities
-s32 battle_menu_centeredMessagesB[] = { 0x001D0050, 0x001D004D, 0x001D0052, 0x001D004F, 0x001D0053 };
+s32 battle_menu_centeredMessagesB[] = { MSG_Menus_0050, MSG_Menus_004D, MSG_Menus_0052, MSG_Menus_004F, MSG_Menus_0053 };
 
 // Strategies
-s32 battle_menu_centeredMessagesC[] = { 0x001D0051 };
+s32 battle_menu_centeredMessagesC[] = { MSG_Menus_0051 };
 
 // Star Spirits, Do Nothing, Act Later, Focus
-s32 battle_menu_centeredMessagesD[] = { 0x001D004C, 0x001D004E, 0x001D0056, 0x001D0055 };
+s32 battle_menu_centeredMessagesD[] = { MSG_Menus_004C, MSG_Menus_004E, MSG_Menus_0056, MSG_Menus_0055 };
 
 s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 0x37 };
 
 // s8 D_802AB513
 
-s32 D_802AB520[] = {
-    0x00000000, 0x00090012, 0x000A001A, 0x000B001C, 0x000C0017, 0x009D0001, 0x000E000B, 0x000F0012, 0x00100003,
-    0x000D0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+AnimID battle_menu_partnerChooseMoveAnimations[] = {
+    [PARTNER_NONE]       0, 
+    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Think, 
+    [PARTNER_KOOPER]     ANIM_BattleKooper_Think, 
+    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Think, 
+    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Think, 
+    [PARTNER_GOOMPA]     ANIM_Goompa_Idle, 
+    [PARTNER_WATT]       ANIM_BattleWatt_Think, 
+    [PARTNER_SUSHIE]     ANIM_BattleSushie_Think,
+    [PARTNER_LAKILESTER] ANIM_BattleLakilester_Run,
+    [PARTNER_BOW]        ANIM_BattleBow_Still, 
+    [PARTNER_GOOMBARIA]  0, 
+    [PARTNER_TWINK]      0, 
+    0x00000000, 
+    0x00000000
 };
 
-s32 D_802AB558[] = {
-    0x00000000, 0x00090002, 0x000A0005, 0x000B0006, 0x000C0002, 0x009D0002, 0x000E0002, 0x000F0002, 0x00100002,
-    0x000D0002, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+AnimID D_802AB558[] = {
+    [PARTNER_NONE]       0, 
+    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Walk, 
+    [PARTNER_KOOPER]     ANIM_BattleKooper_Walk, 
+    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Walk, 
+    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Walk, 
+    [PARTNER_GOOMPA]     ANIM_Goompa_Walk, 
+    [PARTNER_WATT]       ANIM_BattleWatt_Walk, 
+    [PARTNER_SUSHIE]     ANIM_BattleSushie_Walk, 
+    [PARTNER_LAKILESTER] ANIM_BattleLakilester_Walk,
+    [PARTNER_BOW]        ANIM_BattleBow_Walk, 
+    [PARTNER_GOOMBARIA]  0, 
+    [PARTNER_TWINK]      0, 
+    0x00000000, 
+    0x00000000
 };
 
 HudScript* battle_menu_PartnerMoveHudScripts[] = {
@@ -208,16 +240,16 @@ HudScript* battle_menu_PartnerMoveHudScripts[] = {
 HudScript* battle_menu_PeachStarPowerHudScripts[] = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
 // Focus
-s32 D_802AB728[] = { 0x001D0055 };
+s32 D_802AB728[] = { MSG_Menus_0055 };
 
 HudScript* battle_menu_TwinkStarPowerHudScripts[] = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
 // Dash
-s32 D_802AB734[] = { 0x001D0057 };
+s32 D_802AB734[] = { MSG_Menus_0057 };
 
 s32 D_802AB738[] = {
-    0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E,
-    0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000
+    0x00000000, MSG_Menus_Party_Goombario, MSG_Menus_Party_Kooper, MSG_Menus_Party_Bombette, MSG_Menus_Party_Parakarry, MSG_Menus_Party_Goompa, MSG_Menus_Party_Watt, MSG_Menus_Party_Sushie, MSG_Menus_Party_Lakilester,
+    MSG_Menus_Party_Bow, MSG_Menus_Party_Goombaria, MSG_Menus_Party_Twink, MSG_Menus_Party_Peach, 0x00000000
 };
 
 extern s32 D_802ACC60;

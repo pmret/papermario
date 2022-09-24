@@ -166,19 +166,78 @@ s32 D_8008EEF0[] = {
 const char D_800989A0[] = "なし";
 
 s32 gPartnerPopupProperties[][4] = {
-    {&D_800989A0, 0x00000000, 0x00000000, 0x00000000},
-    {0x001D0007, 0x00000002, 0x00280000, 0x00280001},
-    {0x001D0008, 0x00000003, 0x0028000D, 0x0028000E},
-    {0x001D0009, 0x00000004, 0x0028001A, 0x0028001B},
-    {0x001D000A, 0x00000005, 0x00280027, 0x00280028},
-    {0x001D000B, 0x00000001, 0x00000000, 0x00000000},
-    {0x001D000C, 0x00000007, 0x00280041, 0x00280042},
-    {0x001D000D, 0x00000008, 0x0028004E, 0x0028004F},
-    {0x001D000E, 0x00000009, 0x0028005B, 0x0028005C},
-    {0x001D000F, 0x00000006, 0x00280034, 0x00280035},
-    {0x001D0010, 0x00000001, 0x00000000, 0x00000000},
-    {0x001D0011, 0x00000001, 0x00000000, 0x00000000},
-    {0x00000000, 0x00000000, 0x00000000, 0x00000000}
+    [PARTNER_NONE] {
+        &D_800989A0,
+        0x00000000,
+        0x00000000,
+        0x00000000,
+    },
+    [PARTNER_GOOMBARIO] {
+        MSG_Menus_Party_Goombario,
+        0x00000002,
+        MSG_PartnerDesc_Goombario_World,
+        MSG_PartnerDesc_Goombario_Battle,
+    },
+    [PARTNER_KOOPER] {
+        MSG_Menus_Party_Kooper,
+        0x00000003,
+        MSG_PartnerDesc_Kooper_World,
+        MSG_PartnerDesc_Kooper_Battle,
+    },
+    [PARTNER_BOMBETTE] {
+        MSG_Menus_Party_Bombette,
+        0x00000004,
+        MSG_PartnerDesc_Bombette_World,
+        MSG_PartnerDesc_Bombette_Battle,
+    },
+    [PARTNER_PARAKARRY] {
+        MSG_Menus_Party_Parakarry,
+        0x00000005,
+        MSG_PartnerDesc_Parakarry_World,
+        MSG_PartnerDesc_Parakarry_Battle,
+    },
+    [PARTNER_GOOMPA] {
+        MSG_Menus_Party_Goompa,
+        0x00000001,
+        0x00000000,
+        0x00000000,
+    },
+    [PARTNER_WATT] {
+        MSG_Menus_Party_Watt,
+        0x00000007,
+        MSG_PartnerDesc_Watt_World,
+        MSG_PartnerDesc_Watt_Battle,
+    },
+    [PARTNER_SUSHIE] {
+        MSG_Menus_Party_Sushie,
+        0x00000008,
+        MSG_PartnerDesc_Sushie_World,
+        MSG_PartnerDesc_Sushie_Battle,
+    },
+    [PARTNER_LAKILESTER] {
+        MSG_Menus_Party_Lakilester,
+        0x00000009,
+        MSG_PartnerDesc_Lakilester_World,
+        MSG_PartnerDesc_Lakilester_Battle,
+    },
+    [PARTNER_BOW] {
+        MSG_Menus_Party_Bow,
+        0x00000006,
+        MSG_PartnerDesc_Bow_World,
+        MSG_PartnerDesc_Bow_Battle,
+    },
+    [PARTNER_GOOMBARIA] {
+        MSG_Menus_Party_Goombaria,
+        0x00000001,
+        0x00000000,
+        0x00000000,
+    },
+    [PARTNER_TWINK] {
+        MSG_Menus_Party_Twink,
+        0x00000001,
+        0x00000000,
+        0x00000000,
+    }
 };
 
 //TODO padding

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_eldstar.h"
+#include "sprite/npc/BattleEldstar.h"
 
 #define NAMESPACE battle_star_refresh
 
@@ -361,9 +361,9 @@ EvtScript N(802A27FC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1A70))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_eldstar_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleEldstar_Idle)
     EVT_EXEC_WAIT(N(802A21A0))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_eldstar_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleEldstar_Shout)
     EVT_WAIT(16)
     EVT_THREAD
         EVT_WAIT(10)

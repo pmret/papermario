@@ -1420,9 +1420,19 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
-// PartnerAnims
-typedef struct PartnerAnimations {
-    /* 0x00 */ s32 anims[9];
+typedef union PartnerAnimations {
+    /* 0x00 */ s32 anims[9]; // see enum PartnerAnimIndices
+    struct {
+    /* 0x00 */ s32 still;
+    /* 0x04 */ s32 walk;
+    /* 0x08 */ s32 jump;
+    /* 0x0C */ s32 fall;
+    /* 0x10 */ s32 fly;
+    /* 0x14 */ s32 idle;
+    /* 0x18 */ s32 run;
+    /* 0x1C */ s32 talk;
+    /* 0x20 */ s32 hurt;
+    };
 } PartnerAnimations; // size = 0x24
 
 typedef s32 (*PushBlockFallCallback)(Entity* block, Evt* script);

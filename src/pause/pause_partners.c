@@ -1,14 +1,14 @@
 #include "pause_common.h"
 #include "message_ids.h"
 #include "sprite.h"
-#include "sprite/npc/world_goombario.h"
-#include "sprite/npc/world_kooper.h"
-#include "sprite/npc/world_bombette.h"
-#include "sprite/npc/world_parakarry.h"
-#include "sprite/npc/world_bow.h"
-#include "sprite/npc/world_watt.h"
-#include "sprite/npc/world_sushie.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/WorldKooper.h"
+#include "sprite/npc/WorldBombette.h"
+#include "sprite/npc/WorldParakarry.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/WorldWatt.h"
+#include "sprite/npc/WorldSushie.h"
+#include "sprite/npc/WorldLakilester.h"
 
 extern s32 gPartnerPopupProperties[13][4];
 extern s8 gPauseBufferPal1[512];
@@ -47,51 +47,51 @@ Vp gPausePartnersViewport = {
 };
 s32 gPausePartnersSpriteAnims[][4] = {
     {
-        NPC_ANIM_world_goombario_normal_still,
-        NPC_ANIM_world_goombario_normal_walk,
-        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Walk,
+        ANIM_WorldGoombario_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_kooper_normal_still,
-        NPC_ANIM_world_kooper_normal_walk,
-        NPC_ANIM_world_kooper_normal_talk,
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Walk,
+        ANIM_WorldKooper_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_bombette_normal_still,
-        NPC_ANIM_world_bombette_normal_walk,
-        NPC_ANIM_world_bombette_normal_idle_fast,
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Walk,
+        ANIM_WorldBombette_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_parakarry_Palette_00_Anim_0,
-        NPC_ANIM_world_parakarry_Palette_00_Anim_2,
-        NPC_ANIM_world_parakarry_Palette_00_Anim_6,
+        ANIM_WorldParakarry_Still,
+        ANIM_WorldParakarry_Walk,
+        ANIM_WorldParakarry_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_bow_Palette_00_Anim_0,
-        NPC_ANIM_world_bow_Palette_00_Anim_2,
-        NPC_ANIM_world_bow_Palette_00_Anim_4,
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_watt_Palette_00_Anim_0,
-        NPC_ANIM_world_watt_Palette_00_Anim_2,
-        NPC_ANIM_world_watt_Palette_00_Anim_4,
+        ANIM_WorldWatt_Still,
+        ANIM_WorldWatt_Walk,
+        ANIM_WorldWatt_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_sushie_Palette_00_Anim_0,
-        NPC_ANIM_world_sushie_Palette_00_Anim_2,
-        NPC_ANIM_world_sushie_Palette_00_Anim_4,
+        ANIM_WorldSushie_Still,
+        ANIM_WorldSushie_Walk,
+        ANIM_WorldSushie_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_lakilester_Palette_00_Anim_0,
-        NPC_ANIM_world_lakilester_Palette_00_Anim_5,
-        NPC_ANIM_world_lakilester_Palette_00_Anim_9,
+        ANIM_WorldLakilester_Still,
+        ANIM_WorldLakilester_Walk,
+        ANIM_WorldLakilester_Talk,
         ANIM_LIST_END
     }
 };
