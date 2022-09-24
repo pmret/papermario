@@ -195,7 +195,7 @@ void check_input_open_menus(void) {
     s32 currentButtons;
 
     if (gGameStatusPtr->disableScripts ||
-        (gGameStatusPtr->peachFlags & 1) ||
+        (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) ||
         evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO)
     {
         return;

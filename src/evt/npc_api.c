@@ -83,7 +83,7 @@ ApiStatus SetNpcPos(Evt* script, s32 isInitialCall) {
     npc->colliderPos.x = npc->pos.x;
     npc->colliderPos.y = npc->pos.y;
     npc->colliderPos.z = npc->pos.z;
-    npc->flags |= 0x10000;
+    npc->flags |= NPC_FLAG_DIRTY_SHADOW;
 
     return ApiStatus_DONE2;
 }
@@ -332,7 +332,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
             npc->moveSpeed = dist / npc->duration;
         }
 
-        npc->flags |= 0x800;
+        npc->flags |= NPC_FLAG_JUMPING;
         npc->jumpVelocity = (npc->jumpScale * npc->duration * 0.5f) + (goalY / npc->duration);
         script->functionTemp[0] =1;
     }
@@ -349,7 +349,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
         npc->pos.x = npc->moveToPos.x;
         npc->pos.y = npc->moveToPos.y;
         npc->pos.z = npc->moveToPos.z;
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         func_8003D660(npc, 2);
         return ApiStatus_DONE1;
     }
@@ -734,7 +734,7 @@ ApiStatus GetPartnerPos(Evt* script, s32 isInitialCall) {
     Bytecode posX = *ptrReadPos++;
     Bytecode posY = *ptrReadPos++;
     Bytecode posZ = *ptrReadPos++;
-    Npc* npc = get_npc_unsafe(-4);
+    Npc* npc = get_npc_unsafe(NPC_PARTNER);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
@@ -886,8 +886,8 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         if (wExtraPartnerID != 0) {
-            partner->flags &= ~0x200;
-            partner->flags &= ~8;
+            partner->flags &= ~NPC_FLAG_GRAVITY;
+            partner->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
             targetX = playerStatus->position.x;
             partner->moveToPos.x = targetX;
             partnerX = partner->pos.x;

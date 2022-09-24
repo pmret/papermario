@@ -1216,7 +1216,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->jumpVelocity = 0.0f;
     partner->flags |= NPC_FLAG_400000 | NPC_FLAG_GRAVITY | NPC_FLAG_100;
     partner->jumpScale = 1.8f;
@@ -1320,7 +1320,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->flags |= NPC_FLAG_100;
     partner->flags &= ~NPC_FLAG_GRAVITY;
 }
@@ -1763,9 +1763,9 @@ INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 #endif
 
 s32 partner_init_put_away(Npc* partner) {
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     D_8010CFC8 = 0;
-    partner->flags |= 0x100;
+    partner->flags |= NPC_FLAG_100;
     return D_8010CFC8;
 }
 
@@ -1785,8 +1785,8 @@ s32 partner_put_away(Npc* partner) {
             tempMoveToX = partner->pos.x;
             tempMoveToY = partner->pos.y;
             tempMoveToZ = partner->pos.z;
-            partner->flags &= ~0x200;
-            partner->flags &= ~8;
+            partner->flags &= ~NPC_FLAG_GRAVITY;
+            partner->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
             tempPosX = playerStatus->position.x;
             partner->moveToPos.x = tempPosX;
             tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
@@ -1839,7 +1839,7 @@ s32 partner_put_away(Npc* partner) {
 }
 
 s32 partner_init_get_out(Npc* npc) {
-    npc->collisionChannel = 0x10000;
+    npc->collisionChannel = COLLISION_CHANNEL_10000;
     D_8010CFC8 = 0;
     npc->flags |= NPC_FLAG_100;
     return D_8010CFC8;

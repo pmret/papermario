@@ -45,7 +45,7 @@ void func_802B70B4(void) {
     D_802B79A8_E21858->unk_2A = 0;
     D_802B79A8_E21858->unk_14 = 0.1f;
     D_8010C940 = func_802B742C;
-    playerStatus->animFlags |= 0x20;
+    playerStatus->animFlags |= PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
     temp = D_802B79A8_E21858;
     temp->unk_2A = 0;
     temp->unk_14 = 0.4f;
@@ -57,7 +57,7 @@ void func_802B71C8(void) {
     FoldImageRecPart sp20;
     Matrix4f sp38, sp78;
 
-    if (gPlayerStatus.animFlags & 0x20) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) {
         guScaleF(sp38, D_802B79A8_E21858->unk_14, D_802B79A8_E21858->unk_14, D_802B79A8_E21858->unk_14);
         guRotateF(sp78, D_802B79A8_E21858->unk_10 - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp38, sp78, sp38);
@@ -91,11 +91,9 @@ void func_802B742C(void) {
     f32 unk10;
     Npc* npc;
 
-    if (((playerStatus->flags &
-            (PS_FLAGS_HAS_CONVERSATION_NPC |
-             PS_FLAGS_40000 |
-             PS_FLAGS_20)) != PS_FLAGS_HAS_CONVERSATION_NPC) ||
-        (gGameState == 4) ||
+    if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_40000 | PS_FLAGS_20))
+            != PS_FLAGS_HAS_CONVERSATION_NPC) ||
+        (gGameState == GAME_MODE_CHANGE_MAP) ||
         (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) ||
         (playerStatus->inputEnabledCounter != 0) ||
         (playerStatus->animFlags & PA_FLAGS_SPINNING))

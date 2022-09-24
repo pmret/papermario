@@ -8,7 +8,7 @@ ApiStatus func_80240020_AB62B0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240090_AB6320(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags |= 1;
+    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
     script->varTable[0] = gPlayerData.currentPartner;
     gPlayerData.currentPartner = PARTNER_TWINK;
     return ApiStatus_DONE2;

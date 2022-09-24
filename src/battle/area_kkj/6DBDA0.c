@@ -81,8 +81,8 @@ ApiStatus func_8021849C_6DC23C(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(entityIndex);
 
     entity->collisionTimer = 0;
-    collisionStatus->lastWallHammered = entityIndex | 0x4000;
-    playerStatus->flags |= 0x1000000;
+    collisionStatus->lastWallHammered = entityIndex | COLLISION_WITH_ENTITY_BIT;
+    playerStatus->flags |= PS_FLAGS_1000000;
     entity->collisionFlags = ENTITY_COLLISION_PLAYER_HAMMER;
     playerStatus->actionState = ACTION_STATE_HAMMER;
     entity->blueprint->fpHandleCollision(entity);

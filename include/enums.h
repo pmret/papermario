@@ -1034,6 +1034,8 @@ enum SoundIDs {
     SOUND_2019                      = 0x00002019,
     SOUND_201B                      = 0x0000201B,
     SOUND_2020                      = 0x00002020,
+    SOUND_202A                      = 0x0000202A,
+    SOUND_202B                      = 0x0000202B,
     SOUND_202C                      = 0x0000202C,
     SOUND_202D                      = 0x0000202D,
     SOUND_202E                      = 0x0000202E,
@@ -1182,6 +1184,8 @@ enum SoundIDs {
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
     SOUND_8161                      = 0x00008161,
+    SOUND_80000000                  = 0x80000000,
+    SOUND_80000001                  = 0x80000001,
     SOUND_80000002                  = 0x80000002,
     SOUND_80000003                  = 0x80000003,
     SOUND_80000004                  = 0x80000004,
@@ -1231,6 +1235,8 @@ enum SoundIDs {
     SOUND_80000038                  = 0x80000038,
     SOUND_80000039                  = 0x80000039,
     SOUND_80000040                  = 0x80000040,
+    SOUND_80000041                  = 0x80000041,
+    SOUND_80000042                  = 0x80000042,
     SOUND_80000043                  = 0x80000043,
     SOUND_80000044                  = 0x80000044,
     SOUND_80000045                  = 0x80000045,
@@ -3126,6 +3132,7 @@ enum NpcFlags {
 
 enum PlayerStatusFlags {
     PS_FLAGS_AIRBORNE                         = 0x0000000E,
+    PS_FLAGS_1                                = 0x00000001,
     PS_FLAGS_JUMPING                          = 0x00000002,
     PS_FLAGS_FALLING                          = 0x00000004,
     PS_FLAGS_FLYING                           = 0x00000008,
@@ -3141,7 +3148,7 @@ enum PlayerStatusFlags {
     PS_FLAGS_INPUT_DISABLED                   = 0x00002000,
     PS_FLAGS_4000                             = 0x00004000,
     PS_FLAGS_8000                             = 0x00008000,
-    PS_FLAGS_20000                            = 0x00020000,
+    PS_FLAGS_20000                            = 0x00020000, // spinning?
     PS_FLAGS_40000                            = 0x00040000, // physics and animations run at half speed
     PS_FLAGS_80000                            = 0x00080000,
     PS_FLAGS_100000                           = 0x00100000,
@@ -3982,7 +3989,7 @@ enum EnemyFlags {
 enum EnemyAIFlags {
     ENEMY_AI_FLAGS_1              = 0x00000001,
     ENEMY_AI_FLAGS_2              = 0x00000002, // do not move; do not sense player
-    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai
+    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai? reset ai?
     ENEMY_AI_FLAGS_8              = 0x00000008,
     ENEMY_AI_FLAGS_10             = 0x00000010,
     ENEMY_AI_FLAGS_20             = 0x00000020,
@@ -4158,6 +4165,12 @@ enum ColliderFlags {
     COLLIDER_FLAGS_20000000          = 0x20000000,
     COLLIDER_FLAGS_40000000          = 0x40000000,
     COLLIDER_FLAGS_80000000          = 0x80000000
+};
+
+enum CollisionChannels {
+    COLLISION_CHANNEL_10000         = 0x00010000,
+    COLLISION_CHANNEL_20000         = 0x00020000,
+    COLLISION_CHANNEL_40000         = 0x00040000,
 };
 
 enum CameraInitDataFlags {

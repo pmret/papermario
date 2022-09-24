@@ -176,7 +176,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_JUMPING;
     }
 
     switch (script->functionTemp[0]) {

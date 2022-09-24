@@ -125,11 +125,11 @@ void func_800F0864(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
-    if (playerStatus->actionState != ACTION_STATE_WALK &&
-        playerStatus->actionState != ACTION_STATE_RUN &&
-        (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->actionSubstate != 0) &&
-        ((playerStatus->actionState != ACTION_STATE_LAND && playerStatus->actionState != ACTION_STATE_IDLE) ||
-          playerStatus->flags >= 0)
+    if (!(playerStatus->actionState == ACTION_STATE_WALK ||
+          playerStatus->actionState == ACTION_STATE_RUN ||
+         (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
+        ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
+            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
     ) {
         D_801094A4 = 4;
         return;
@@ -153,11 +153,11 @@ void func_800F09EC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
-    if (playerStatus->actionState != ACTION_STATE_WALK &&
-        playerStatus->actionState != ACTION_STATE_RUN &&
-        (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->actionSubstate != 0) &&
-        ((playerStatus->actionState != ACTION_STATE_LAND && playerStatus->actionState != ACTION_STATE_IDLE) ||
-          playerStatus->flags >= 0)
+    if (!(playerStatus->actionState == ACTION_STATE_WALK ||
+          playerStatus->actionState == ACTION_STATE_RUN ||
+         (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
+        ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
+            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
     ) {
         D_801094AC = 4;
         return;
@@ -179,11 +179,11 @@ void func_800F0B3C(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
-    if (playerStatus->actionState != ACTION_STATE_WALK &&
-        playerStatus->actionState != ACTION_STATE_RUN &&
-        (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->actionSubstate != 0) &&
-        ((playerStatus->actionState != ACTION_STATE_LAND && playerStatus->actionState != ACTION_STATE_IDLE) ||
-          playerStatus->flags >= 0)
+    if (!(playerStatus->actionState == ACTION_STATE_WALK ||
+          playerStatus->actionState == ACTION_STATE_RUN ||
+         (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
+        ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
+            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
     ) {
         D_801094AE = 4;
         return;

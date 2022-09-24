@@ -172,7 +172,7 @@ void action_update_spin(void) {
         if ((playerStatus->currentStateTime) == 0) {
             playerSpinState->stopSoundTimer = 4;
             set_action_state(ACTION_STATE_IDLE);
-            playerStatus->flags &= ~PA_FLAGS_20000;
+            playerStatus->flags &= ~PS_FLAGS_20000;
             playerStatus->animFlags &= ~PA_FLAGS_SPINNING;
             sfx_stop_sound(playerSpinState->spinSoundID);
         }

@@ -120,7 +120,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims
     npc->renderYaw = 0.0f;
     npc->unk_98 = 0;
     npc->unk_A2 = 0;
-    npc->collisionChannel = 0x20000;
+    npc->collisionChannel = COLLISION_CHANNEL_20000;
     npc->isFacingAway = 0;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
@@ -523,9 +523,9 @@ void update_npcs(void) {
 
                     npc->onUpdate(npc);
                     if (npc->flags & NPC_FLAG_8000) {
-                        npc->collisionChannel |= 0x40000;
+                        npc->collisionChannel |= COLLISION_CHANNEL_40000;
                     } else {
-                        npc->collisionChannel &= ~0x40000;
+                        npc->collisionChannel &= ~COLLISION_CHANNEL_40000;
                     }
 
                     npc->currentFloor = -1;

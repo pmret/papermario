@@ -673,7 +673,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
 
     spr_playerMaxComponents = 0;
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         playerSpriteSet = 4;
     }
 

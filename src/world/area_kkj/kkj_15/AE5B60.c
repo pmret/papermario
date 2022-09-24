@@ -3,13 +3,13 @@
 ApiStatus func_802405D0_AE5B60(void) {
     GameStatus* gameStatus = gGameStatusPtr;
 
-    gameStatus->peachFlags |= 0x10;
+    gameStatus->peachFlags |= PEACH_STATUS_FLAG_HAS_INGREDIENT;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802405EC_AE5B7C(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
 
-    gameStatus->peachFlags &= ~0x10;
+    gameStatus->peachFlags &= ~PEACH_STATUS_FLAG_HAS_INGREDIENT;
     return ApiStatus_DONE2;
 }

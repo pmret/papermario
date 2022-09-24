@@ -189,7 +189,7 @@ void initialize_battle(void) {
         battleStatus->tattleFlags[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         gBattleStatus.flags2 |= BS_FLAGS2_40;
         increment_status_menu_disabled();
     } else {

@@ -30,7 +30,7 @@ ApiStatus N(func_802408B4_97BEE4)(Evt* script, s32 isInitialCall) {
         npc->verticalRenderOffset = 0;
     }
 
-    if (npc->flags & 0x1000) {
+    if (npc->flags & NPC_FLAG_1000) {
         currentEncounter->encounterList[enemy->encounterIndex]->battle = enemy->varTable[0];
         return ApiStatus_DONE2;
     }

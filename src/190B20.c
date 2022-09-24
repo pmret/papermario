@@ -512,7 +512,7 @@ s32 count_power_plus(s32 damageType) {
     s32 count;
     s32 i;
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         return 0;
     }
 

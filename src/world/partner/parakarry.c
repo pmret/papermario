@@ -1,5 +1,6 @@
 #include "common.h"
 #include "../src/world/partners.h"
+#include "sprite/npc/WorldParakarry.h"
 
 BSS s32 D_802BEBB0;
 BSS s32 D_802BEBB4;
@@ -193,7 +194,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
                     gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
-                    parakarry->currentAnim = 0x40009;
+                    parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                     parakarry->flags &= ~NPC_FLAG_4000;
@@ -205,19 +206,19 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
         }
 
         switch (D_802BEBC0_31CBE0) {
-            case 0x28:
+            case 40:
                 if (playerStatus->inputEnabledCounter == 0) {
                     D_802BEBC4 = 3;
-                    D_802BEBC0_31CBE0 = 0x29;
+                    D_802BEBC0_31CBE0 = 41;
                     evt->functionTemp[2] = playerStatus->inputEnabledCounter;
                 } else {
                     goto block_end_return_ApiStatus_DONE2; // TODO remove this goto
                 }
-            case 0x29:
+            case 41:
                 if (D_802BEBC4 == 0) {
                     if (evt->functionTemp[2] >= playerStatus->inputEnabledCounter) {
                         if (func_800EA52C(4)) {
-                            D_802BEBC0_31CBE0 = 0x1E;
+                            D_802BEBC0_31CBE0 = 30;
                             break;
                         }
                     }
@@ -228,7 +229,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
         }
 
         switch (D_802BEBC0_31CBE0) {
-            case 0x1E:
+            case 30:
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_input();
                 disable_player_static_collisions();
@@ -247,17 +248,17 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 parakarry->duration = 4;
                 D_802BEBC0_31CBE0++;
                 break;
-            case 0x1F:
+            case 31:
                 if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_HIT_LAVA || playerStatus->actionState == ACTION_STATE_KNOCKBACK
                         || playerStatus->actionState == ACTION_STATE_JUMP  || playerStatus->actionState == ACTION_STATE_HOP) {
                     disable_npc_blur(parakarry);
-                    D_802BEBC0_31CBE0 = 0x15;
+                    D_802BEBC0_31CBE0 = 21;
                 } else {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     parakarry->moveToPos.x = playerStatus->position.x;
                     parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
                     parakarry->moveToPos.z = playerStatus->position.z;
-                    parakarry->currentAnim = 0x40003;
+                    parakarry->currentAnim = ANIM_WorldParakarry_Run;
                     add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
                     tempYaw = playerStatus->targetYaw;
 
@@ -278,7 +279,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         disable_npc_blur(parakarry);
                         parakarry->yaw = playerStatus->targetYaw;
                         parakarry->moveSpeed = 0.2f;
-                        parakarry->currentAnim = 0x4000A;
+                        parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
                         parakarry->planarFlyDist = 0;
                         suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
                         sfx_play_sound_at_npc(SOUND_2009, 0, -4);
@@ -396,7 +397,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                 parakarry->jumpScale = -0.01f;
                                 parakarry->moveToPos.y = playerStatus->position.y;
                                 parakarry->duration = 0;
-                                parakarry->currentAnim = 0x4000A;
+                                parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
                                 parakarry->animationSpeed = 1.8f;
                                 gCollisionStatus.currentFloor = -1;
                                 D_802BEBC0_31CBE0++;
@@ -505,37 +506,37 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                     break;
                                                 }
                                             } else {
-                                                D_802BEBC0_31CBE0 = 0x15;
+                                                D_802BEBC0_31CBE0 = 21;
                                                 break;
                                             }
                                         }
                                         suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
-                                        D_802BEBC0_31CBE0 = 0x15;
+                                        D_802BEBC0_31CBE0 = 21;
                                     }
                                     break;
                                 }
                             }
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
-                            D_802BEBC0_31CBE0 = 0x15;
+                            D_802BEBC0_31CBE0 = 21;
                         }
                     } else {
-                        D_802BEBC0_31CBE0 = 0x14;
+                        D_802BEBC0_31CBE0 = 20;
                     }
                 } else {
-                    D_802BEBC0_31CBE0 = 0x15;
+                    D_802BEBC0_31CBE0 = 21;
                 }
                 break;
             case 6:
                 if (D_802BEBC4 != 0) {
                     D_802BEBC4--;
                 } else {
-                    D_802BEBC0_31CBE0 = 0x15;
+                    D_802BEBC0_31CBE0 = 21;
                 }
                 break;
         }
 
         if (D_802BEBC0_31CBE0 == 0x16 || D_802BEBC0_31CBE0 == 0x15 || D_802BEBC0_31CBE0 == 0x14) {
-            parakarry->currentAnim = 0x40001;
+            parakarry->currentAnim = ANIM_WorldParakarry_Idle;
             D_802BEBB0 = 0;
             parakarry->jumpVelocity = 0.0f;
             parakarry->flags &= ~ACTOR_FLAG_HP_OFFSET_BELOW;
