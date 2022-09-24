@@ -23,4 +23,4 @@ jobs:
     - name: mypy
       run: mypy --show-column-numbers --hide-error-context .
     - name: black
-      run: black .
+      run: black --check .

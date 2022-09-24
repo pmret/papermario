@@ -51,6 +51,10 @@ def verbose() -> bool:
     return opts.get("verbose", False)
 
 
+def dump_symbols() -> bool:
+    return opts.get("dump_symbols", False)
+
+
 ################################################################################
 # Global options
 #
@@ -303,11 +307,6 @@ def get_symbol_name_format_no_rom() -> str:
 # Determines whether to detect and hint to the user about likely file splits when disassembling
 def find_file_boundaries() -> bool:
     return opts.get("find_file_boundaries", True)
-
-
-# Determines the maximum number of instructions to attempt to match hi/lo pairs for symbols when disassembling
-def hi_lo_max_distance() -> int:
-    return opts.get("hi_lo_max_distance", 6)
 
 
 # Determines whether to attempt to automatically migrate rodata into functions (only works in certain circumstances)

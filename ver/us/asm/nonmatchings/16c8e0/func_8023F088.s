@@ -51,8 +51,8 @@ glabel func_8023F088
 /* 16DA20 8023F140 0000902D */   daddu    $s2, $zero, $zero
 /* 16DA24 8023F144 0280182D */  daddu     $v1, $s4, $zero
 /* 16DA28 8023F148 0040902D */  daddu     $s2, $v0, $zero
-/* 16DA2C 8023F14C 3C02802A */  lui       $v0, %hi(D_8029F236)
-/* 16DA30 8023F150 2442F236 */  addiu     $v0, $v0, %lo(D_8029F236)
+/* 16DA2C 8023F14C 3C02802A */  lui       $v0, %hi(D_8029F038+0x1FE)
+/* 16DA30 8023F150 2442F236 */  addiu     $v0, $v0, %lo(D_8029F038+0x1FE)
 .L8023F154:
 /* 16DA34 8023F154 A4430000 */  sh        $v1, ($v0)
 /* 16DA38 8023F158 2652FFFF */  addiu     $s2, $s2, -1

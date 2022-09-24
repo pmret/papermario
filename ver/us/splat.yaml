@@ -869,7 +869,7 @@ segments:
     type: code
     start: 0xFEE30
     vram: 0x802DBD40
-    # follows_vram: evt
+    follows_vram: evt
     subsegments:
     - [0x0FEE30, c, sprite]
     - [0x101B90, c, 101b90_len_8f0]
@@ -925,6 +925,7 @@ segments:
     type: code
     start: 0x10CC10
     vram: 0x802EB3D0
+    follows_vram: entity
     subsegments:
     - [0x10CC10, data] # font width data
   - type: group
@@ -1185,7 +1186,7 @@ segments:
     - [0x1776B0, c, battle_cam]
     - [0x17D6A0, c, 17D6A0]
     - [0x17FEB0, c]
-    - [0x181810, c]
+    - [0x181810, c, 181810]
     - [0x182B30, c, 182B30]
     - [0x18C790, c, 18C790]
     - [0x18F340, c, 18F340]
@@ -2402,6 +2403,7 @@ segments:
   - type: code
     start: 0x316A70
     vram: 0x80200080
+    follows_vram: 3169F0
     subsegments:
     - [0x316A70, c, 316a70]
   - type: code

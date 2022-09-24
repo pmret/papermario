@@ -272,9 +272,9 @@ glabel btl_state_update_peach_menu
 /* 41ECB4 802A9F24 34C60002 */   ori      $a2, $a2, 2
 /* 41ECB8 802A9F28 2602FFFF */  addiu     $v0, $s0, -1
 /* 41ECBC 802A9F2C 00021080 */  sll       $v0, $v0, 2
-/* 41ECC0 802A9F30 3C01802B */  lui       $at, %hi(D_802AD0BB)
+/* 41ECC0 802A9F30 3C01802B */  lui       $at, %hi(battle_menu_submenuIDs+0x3)
 /* 41ECC4 802A9F34 00220821 */  addu      $at, $at, $v0
-/* 41ECC8 802A9F38 9022D0BB */  lbu       $v0, %lo(D_802AD0BB)($at)
+/* 41ECC8 802A9F38 9022D0BB */  lbu       $v0, %lo(battle_menu_submenuIDs+0x3)($at)
 /* 41ECCC 802A9F3C 0C0A840C */  jal       func_802A1030
 /* 41ECD0 802A9F40 A2420048 */   sb       $v0, 0x48($s2)
 /* 41ECD4 802A9F44 24020008 */  addiu     $v0, $zero, 8

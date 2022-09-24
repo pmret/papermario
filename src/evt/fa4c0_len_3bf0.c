@@ -3,12 +3,14 @@
 #include "hud_element.h"
 #include "world/partners.h"
 
+ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
 AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
-static ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
 
 extern MusicEvent* MusicEventList;
+extern s32 D_802DB7D4; // unused?
 extern Evt* RunningMusicEvents[10];
 extern s32 RunningMusicEventIDs[10];
+extern s32 D_802DB828[2]; // unused?
 extern PopupMenu D_802DB830;
 
 s32 MusicEventPollCount = 0;
@@ -19,14 +21,14 @@ static EvtScript EVS_MusicEventMonitor = {
     EVT_END
 };
 
-static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
+ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall) {
     MusicEventTrigger* list;
     s32 musicEventID, scriptSelector;
     u32 count;
     s32 i;
 
     bgm_poll_music_events(&list, &count);
-    
+
     for (i = 0; i < count; i++, list++) {
         MusicEvent* cur = MusicEventList;
         musicEventID = (*list & 0xFF0000) >> 0x10;
@@ -107,7 +109,7 @@ ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
     s16 fadeStartVolume = evt_get_variable(script, *args++);
     s16 fadeEndVolume = evt_get_variable(script, *args++);
 
-    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) { 
+    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 
+extern s32 D_8029FBD0;
 extern s8 D_8029FBD4;
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
