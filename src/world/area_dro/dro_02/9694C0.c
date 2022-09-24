@@ -2555,12 +2555,12 @@ void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_8024303C_96C1FC)(Evt* script, s32 isInitialCall) {
-    sfx_play_sound_with_params(0x202A, 0, 0x18, 0);
+    sfx_play_sound_with_params(SOUND_202A, 0, 24, 0);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
-    sfx_play_sound_with_params(0x202B, 0, 0x68, 0);
+    sfx_play_sound_with_params(SOUND_202B, 0, 104, 0);
     return ApiStatus_DONE2;
 }
 

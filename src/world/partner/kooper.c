@@ -1,5 +1,6 @@
 #include "common.h"
 #include "../src/world/partners.h"
+#include "sprite/npc/WorldKooper.h"
 
 extern s16 D_8010C97A;
 
@@ -215,7 +216,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                 partnerActionStatus->actingPartner = PARTNER_KOOPER;
                 script->functionTemp[0] = 5;
-                kooper->currentAnim = 0x20009;
+                kooper->currentAnim = ANIM_WorldKooper_SpinShell;
                 D_802BEC50 = 30;
             }
         }
@@ -262,7 +263,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     kooper->moveToPos.x = D_802BEC70 = playerStatus->position.x;
                     kooper->moveToPos.y = D_802BEC74 = playerStatus->position.y;
                     kooper->moveToPos.z = D_802BEC78 = playerStatus->position.z;
-                    kooper->currentAnim = 0x20005;
+                    kooper->currentAnim = ANIM_WorldKooper_Run;
                     add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
                                     playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
                     clamp = clamp_angle(playerStatus->targetYaw + ((D_802BEC58 != 0) ? 90.0f : -90.0f));
@@ -289,7 +290,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->yaw = playerStatus->targetYaw;
                         kooper->jumpVelocity = 18.0f;
                         kooper->jumpScale = 3.0f;
-                        kooper->currentAnim = 0x2000A;
+                        kooper->currentAnim = ANIM_WorldKooper_EnterShell;
                         kooper->collisionHeight = 12;
 
                         kooper->moveToPos.y = playerStatus->position.y;
@@ -339,7 +340,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->rotation.z = 0.0f;
                         kooper->planarFlyDist = 0.0f;
                         kooper->moveSpeed = 8.0f;
-                        kooper->currentAnim = 0x20009;
+                        kooper->currentAnim = ANIM_WorldKooper_SpinShell;
                         D_802BEB40_31CB60 = 1;
                         fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                 sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
@@ -578,8 +579,8 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             kooper->jumpVelocity = 0.0f;
             kooper->collisionHeight = 24;
-            kooper->currentAnim = 0x20000 | 4;
-            sfx_stop_sound(0x284);
+            kooper->currentAnim = ANIM_WorldKooper_Walk;
+            sfx_stop_sound(SOUND_284);
             disable_npc_blur(kooper);
 
             if (D_802BEC6C != 0) {
@@ -700,7 +701,7 @@ void world_kooper_pre_battle(Npc* kooper) {
         kooper->flags &= ~NPC_FLAG_JUMPING;
         kooper->flags &= ~NPC_FLAG_40;
 
-        sfx_stop_sound(0x284);
+        sfx_stop_sound(SOUND_284);
         set_action_state(0);
         partner_clear_player_tracking(kooper);
         disable_npc_blur(kooper);

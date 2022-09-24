@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "sprite/npc/GrooveGuy.h"
 
 void N(GrooveGuyAI_02)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -20,20 +21,20 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         case 0:
             enemy->varTable[0] = 1;
             enemy->varTable[1] = 0;
-            npc->currentAnim = 0x3C000C;
+            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             set_npc_yaw(npc, 270.0f);
             npc->rotation.y = 0.0f;
             // fallthrough
         case 1:
             phase = enemy->varTable[1] % 16;
             if (phase < 4) {
-                npc->currentAnim = 0x3C000C;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             } else if (phase < 8) {
-                npc->currentAnim = 0x3C000B;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0B;
             } else if (phase < 12) {
-                npc->currentAnim = 0x3C000C;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             } else  if (phase < 16) {
-                npc->currentAnim = 0x3C000D;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0D;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x41) {
@@ -44,7 +45,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             enemy->varTable[0] = 3;
             enemy->varTable[1] = 0;
             npc->rotation.y = 0.0f;
-            npc->currentAnim = 0x3C000C;
+            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             // fallthrough
         case 3:
             npc->rotation.y += 35.0;

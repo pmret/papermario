@@ -1114,7 +1114,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         playerState->unk_28 = 180 / playerState->moveTime;
         playerState->unk_2C = playerState->goalPos.y;
         if (script->functionTemp[1] != 2) {
-            sfx_play_sound_at_position(0x160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
         script->functionTemp[0] = TRUE;
     }

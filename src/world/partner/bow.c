@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../partners.h"
 #include "npc.h"
+#include "sprite/npc/WorldBow.h"
 
 BSS s32 D_802BE0C0;
 BSS s32 D_802BE0C4;
@@ -247,7 +248,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->moveToPos.x = playerStatus->position.x;
             bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
             bow->moveToPos.z = playerStatus->position.z;
-            bow->currentAnim = 0x50002;
+            bow->currentAnim = ANIM_WorldBow_Walk;
             bow->yaw = playerStatus->targetYaw;
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z,
