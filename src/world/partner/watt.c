@@ -362,7 +362,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
         D_802BE304 = 20;
         npc_set_palswap_mode_A(npc, 0);
-        if (!(playerStatus->flags & 0x800)) {
+        if (!(playerStatus->flags & PS_FLAGS_800)) {
             set_action_state(0);
         }
         return ApiStatus_DONE1;

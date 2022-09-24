@@ -79,7 +79,7 @@ void func_8024029C_B1B80C(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= MODEL_FLAGS_FLAG_200;
 

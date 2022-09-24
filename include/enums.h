@@ -3126,6 +3126,7 @@ enum NpcFlags {
 
 enum PlayerStatusFlags {
     PS_FLAGS_AIRBORNE                         = 0x0000000E,
+    PS_FLAGS_1                                = 0x00000001,
     PS_FLAGS_JUMPING                          = 0x00000002,
     PS_FLAGS_FALLING                          = 0x00000004,
     PS_FLAGS_FLYING                           = 0x00000008,
@@ -3141,7 +3142,7 @@ enum PlayerStatusFlags {
     PS_FLAGS_INPUT_DISABLED                   = 0x00002000,
     PS_FLAGS_4000                             = 0x00004000,
     PS_FLAGS_8000                             = 0x00008000,
-    PS_FLAGS_20000                            = 0x00020000,
+    PS_FLAGS_20000                            = 0x00020000, // spinning?
     PS_FLAGS_40000                            = 0x00040000, // physics and animations run at half speed
     PS_FLAGS_80000                            = 0x00080000,
     PS_FLAGS_100000                           = 0x00100000,

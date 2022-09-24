@@ -179,7 +179,8 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
 void entity_PinkFlower_idle(Entity* entity) {
     PinkFlowerData* data = entity->dataBuf.pinkFlower;
 
-    if ((gPlayerStatus.animFlags & 0x10) && (entity->collisionFlags & 0x48)) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE
+            && entity->collisionFlags & (ENTITY_COLLISION_PLAYER_TOUCH_WALL | ENTITY_COLLISION_PLAYER_HAMMER)) {
         if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
             entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
             data = get_entity_by_index(data->linkedEntityIndex)->dataBuf.pinkFlower;

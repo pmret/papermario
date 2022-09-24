@@ -37,7 +37,7 @@ void func_802B7000_E225B0(void) {
     struct802B7C78* localD_802B7C78_E23228;
     u16 oldMatrixListPos;
 
-    if (gPlayerStatus.animFlags & 0x100) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_100) {
         guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale,
             D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -100,7 +100,7 @@ void func_802B72C0_E22870(void) {
 
     D_802B7C78_E23228->unk_28 = 0xFF;
 
-    gPlayerStatus.animFlags |= 0x100;
+    gPlayerStatus.animFlags |= PA_FLAGS_100;
     D_8010C93C = &func_802B735C_E2290C;
 }
 
@@ -126,7 +126,7 @@ void func_802B735C_E2290C(void) {
             if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
                 phi_v0 = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
-                phi_v0 = playerStatus->flags & 0x3000;
+                phi_v0 = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000);
             }
             if (phi_v0 == 0) {
                 temp_v1_3 = D_802B7C78_E23228;
@@ -135,7 +135,7 @@ void func_802B735C_E2290C(void) {
             }
             break;
         case 1:
-            if (playerStatus->flags & 0x20) {
+            if (playerStatus->flags & PS_FLAGS_20) {
                 temp_a0->unk_24 = 3;
                 return;
             }
@@ -152,7 +152,7 @@ void func_802B735C_E2290C(void) {
             break;
         case 3:
             temp_a0->scale = 0.53f;
-            if (temp_a0->unk_18 >= 0x2F || playerStatus->flags & 0x20) {
+            if (temp_a0->unk_18 >= 0x2F || playerStatus->flags & PS_FLAGS_20) {
                 temp_a0->unk_28 -= 0x40;
                 if (temp_a0->unk_28 < 0) {
                     temp_a0->unk_28 = 0;
@@ -163,7 +163,7 @@ void func_802B735C_E2290C(void) {
             if (D_802B7C78_E23228->unk_18++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
                 D_8010C93C = NULL;
-                playerStatus->animFlags &= ~0x100;
+                playerStatus->animFlags &= ~PA_FLAGS_100;
             }
             break;
     }

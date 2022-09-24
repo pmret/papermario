@@ -200,7 +200,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     if (currentEncounter->unk_08 == 0) {
         if (isInitialCall) {
             func_802BD5F4_31B614(kooper);
-            if (playerStatus->animFlags & 0x100000) {
+            if (playerStatus->animFlags & PA_FLAGS_100000) {
                 return ApiStatus_DONE2;
             }
 
@@ -405,13 +405,13 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             kooper->moveSpeed = 14.0f;
                         }
 
-                        if ((func_800397E8(kooper, 6.0f) == 0) && ((playerStatus->flags & 6) == 0)) {
+                        if (!(func_800397E8(kooper, 6.0f) || playerStatus->flags & (PS_FLAGS_JUMPING | PS_FLAGS_FALLING))) {
                             kooper->pos.y = (kooper->pos.y + ((playerStatus->position.y - kooper->pos.y) / 10.0f));
                         }
 
                         npc_do_other_npc_collision(kooper);
 
-                        if ((kooper->flags & 0x2000000) == 0) {
+                        if (!(kooper->flags & NPC_FLAG_SIMPLIFIED_PHYSICS)) {
                             if (func_802BD17C_31B19C(kooper) != 0) {
                                 sfx_play_sound_at_npc(SOUND_286, 0, -4);
                                 temp_f20_3 = sin_deg(kooper->yaw);
@@ -449,6 +449,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                                 break;
                             }
                         } else {
+                            //TODO get rid of label
                             goto label2;
                         }
                     } else {

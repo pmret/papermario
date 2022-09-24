@@ -623,7 +623,7 @@ void update_player(void) {
     playerStatus->flags &= ~PS_FLAGS_400;
     update_player_blink();
 
-    if (playerStatus->flags & PA_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->flags & PS_FLAGS_1000) {
         phys_update_action_state();
         if (!func_800E0208()) {
             collision_main_lateral();
@@ -680,7 +680,7 @@ void check_input_use_partner(void) {
     if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
         if (playerStatus->animFlags & PA_FLAGS_8 || playerStatus->inputEnabledCounter == 0) {
             if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_80) &&
-                !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PS_FLAGS_1000) &&
+                !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) &&
                 actionState <= ACTION_STATE_RUN) {
 
                 if (playerData->currentPartner == PARTNER_GOOMBARIO) {
@@ -761,7 +761,7 @@ void player_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     mem_clear(playerStatus, sizeof(PlayerStatus));
-    playerStatus->flags = 1;
+    playerStatus->flags = PS_FLAGS_1;
     reset_player_status();
     playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y,
                              playerStatus->position.z);
@@ -1263,14 +1263,14 @@ void check_for_interactables(void) {
 void func_802B71E8_E202F8(void);
 
 void func_800E0AD0(void) {
-    if ((gPlayerStatusPtr->animFlags & PS_FLAGS_10) && (D_8010C958 != 0)) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) && (D_8010C958 != 0)) {
         func_802B71E8_E202F8();
     }
 }
 
 void func_800E0B14(void) {
     D_8010C958 = 0;
-    gPlayerStatusPtr->animFlags &= ~PS_FLAGS_10;
+    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
 }
 
 void update_partner_timers(void) {
@@ -1483,7 +1483,7 @@ void render_player_model(void) {
             rtPtr->renderMode = playerStatus->renderMode;
 
 
-            if (!(playerStatus->flags & PA_FLAGS_20000)) {
+            if (!(playerStatus->flags & PS_FLAGS_20000)) {
                 appendGfx = appendGfx_player;
             } else {
                 appendGfx = appendGfx_player_spin;
@@ -1691,7 +1691,7 @@ void update_player_shadow(void) {
     shadow->position.y = y;
     shadow->alpha = (f64)playerStatus->alpha1 / 2;
 
-    if (!(gGameStatusPtr->peachFlags & 1)) {
+    if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)) {
         set_standard_shadow_scale(shadow, shadowScale);
     } else {
         set_peach_shadow_scale(shadow, shadowScale);

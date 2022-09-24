@@ -259,8 +259,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             script->functionTemp[0]++;
             break;
         case 21:
-            if (collisionStatus->currentFloor >= 0 &&
-               (playerStatus->animFlags & PA_FLAGS_100000) == 0) {
+            if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAGS_100000)) {
                 bow->moveToPos.x = playerStatus->position.x;
                 bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
                 bow->moveToPos.z = playerStatus->position.z;
