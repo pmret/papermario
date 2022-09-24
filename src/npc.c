@@ -380,7 +380,7 @@ void npc_do_other_npc_collision(Npc* npc) {
         for (i = 0; i < 0x40; i++) {
             otherNpc = get_npc_by_index(i);
             if (otherNpc != NULL && npc != otherNpc) {
-                if (otherNpc->flags != 0 && !(otherNpc->flags & (0x80000000 | NPC_FLAG_100))) {
+                if (otherNpc->flags != 0 && !(otherNpc->flags & (NPC_FLAG_80000000 | NPC_FLAG_100))) {
                     if (!(otherNpc->pos.y + otherNpc->collisionHeight < thisY) &&
                         !(thisY + npc->collisionHeight < otherNpc->pos.y))
                     {
@@ -523,9 +523,9 @@ void update_npcs(void) {
 
                     npc->onUpdate(npc);
                     if (npc->flags & NPC_FLAG_8000) {
-                        npc->collisionChannel |= COLLISION_CHANNEL_40000;
+                        npc->collisionChannel |= COLLISION_IGNORE_ENTITIES;
                     } else {
-                        npc->collisionChannel &= ~COLLISION_CHANNEL_40000;
+                        npc->collisionChannel &= ~COLLISION_IGNORE_ENTITIES;
                     }
 
                     npc->currentFloor = -1;
