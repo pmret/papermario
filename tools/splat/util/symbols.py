@@ -1,6 +1,5 @@
 from typing import Dict, List, Optional, TYPE_CHECKING, Set
 import spimdisasm
-import rabbitizer
 import tqdm
 
 # circular import
@@ -373,8 +372,6 @@ class Symbol:
         self.type = type
         self.given_size = given_size
         self.given_name = given_name
-        self.access_mnemonic: Optional[rabbitizer.Enum] = None
-        self.disasm_str: Optional[str] = None
         self.dead: bool = False
         self.extract: bool = True
         self.user_declared: bool = False

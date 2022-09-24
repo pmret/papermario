@@ -1,6 +1,16 @@
 # splat Release Notes
 
-### 0.10.0: The Linker Script Update
+## 0.11.0: Spimdisasm Returns
+
+Spimdisasm now handles data (data, rodata, bss) disassembly in splat! This includes a few changes in behavior:
+
+* Rodata will be migrated to c files' asm function files when a .rodata subsegment is used that corresponds with an identically-named c file. Some symbols may not be automatically migrated to functions when it is not clear if they belong to the function itself (an example of which being const arrays). In this case, the `partial_migration` option can be enabled for the given .rodata subsegment and splat will create .s files for these unmigrated rodata symbols. These files can then be included in your c files, or you can go ahead and migrate these symbols to c and disable the `partial_migration` feature.
+
+* BSS can now be disassembled as well, and the size of a code segment's bss section can be specified with the `bss_size` option. This option will tell splat how large the bss section is in bytes so BSS can properly be handled during disassembly. For bss subsegments, the rom address will of course not change, but the vram address should still be specified. This currently can only be done in the dict form of segment representation, rather than the list form.
+
+Thanks again to [AngheloAlf](https://github.com/AngheloAlf) for adding this functionality and continuing to improve splat's disassembler.
+
+## 0.10.0: The Linker Script Update
 
 Linker scripts splat produces are now capable of being shift-friendly. Rom addresses will automatically shift, and ram addresses will still be hard-coded unless the new segment option `follows_vram` is specified. The value of this option should be the name of a segment (a) that this segment (b) should follow in memory. If a grows or shrinks, b's start address will also do so to accommodate it.
 

@@ -129,3 +129,17 @@ class CommonSegGroup(CommonSegment):
             if sub.contains_vram(addr):
                 return sub
         return None
+
+    def get_next_subsegment_for_ram(self, addr: int) -> Optional[Segment]:
+        """
+        Returns the first subsegment which comes after the specified address,
+        or None in case this address belongs to the last subsegment of this group
+        """
+
+        for sub in self.subsegments:
+            if sub.vram_start == "auto":
+                continue
+            assert isinstance(sub.vram_start, int)
+            if sub.vram_start > addr:
+                return sub
+        return None
