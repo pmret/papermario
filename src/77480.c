@@ -427,19 +427,22 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
             ret = entityID | COLLISION_WITH_ENTITY_BIT;
         }
     } else if (mode == 3) {
-        ret = test_ray_colliders(COLLIDER_FLAGS_IGNORE_SHELL, startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth,
-                                 hitNx, hitNy, hitNz);
+        ret = test_ray_colliders(COLLIDER_FLAGS_IGNORE_SHELL, startX, startY, startZ, dirX, dirY, dirZ,
+            hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
     }
 
-    if (mode == 1 || mode == 3)
+    if (mode == 1 || mode == 3) {
         return ret;
-
-    ignoreFlags = COLLIDER_FLAGS_IGNORE_PLAYER;
-    if (mode == 4) {
-            ignoreFlags = 0x80000;
     }
-    colliderID = test_ray_colliders(ignoreFlags, startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth,
-                                    hitNx, hitNy, hitNz);
+
+    if (mode == 4) {
+        ignoreFlags = COLLISION_CHANNEL_80000;
+    } else {
+        ignoreFlags = COLLIDER_FLAGS_IGNORE_PLAYER;
+    }
+
+    colliderID = test_ray_colliders(ignoreFlags, startX, startY, startZ, dirX, dirY, dirZ,
+        hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
 
     if (ret < 0) {
         ret = colliderID;

@@ -8,7 +8,7 @@ typedef struct LavaReset {
 } LavaReset; // size = 0x10;
 
 extern LavaReset* gLavaResetList;
-extern s32 D_802DADA4;
+extern s32 LastSafeFloor;
 
 ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -546,16 +546,16 @@ ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (mode) {
-        case 0:
+        case MODIFY_COLLIDER_FLAGS_SET_BITS:
             collider->flags |= flags;
             break;
-        case 1:
+        case MODIFY_COLLIDER_FLAGS_CLEAR_BITS:
             collider->flags &= ~flags;
             break;
-        case 2:
+        case MODIFY_COLLIDER_FLAGS_SET_VALUE:
             collider->flags = flags;
             break;
-        case 3:
+        case MODIFY_COLLIDER_FLAGS_SET_SURFACE:
             collider->flags &= ~0xFF;
             collider->flags |= flags & 0xFF;
             break;
@@ -564,6 +564,7 @@ ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+//TODO rename to MonitorLastSafeFloor
 ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -579,19 +580,19 @@ ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
             }
             collider = &gCollisionData.colliderList[lavaReset->colliderID];
             if (collider->firstChild >= 0) {
-                modify_collider_family_flags(collider->firstChild, 0x100, 0);
+                modify_collider_family_flags(collider->firstChild, COLLIDER_FLAGS_SAFE_FLOOR, 0);
             }
-            collider->flags |= 0x100;
+            collider->flags |= COLLIDER_FLAGS_SAFE_FLOOR;
             lavaReset++;
         }
 
-        D_802DADA4 = -1;
+        LastSafeFloor = -1;
     }
 
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         collider = &gCollisionData.colliderList[collisionStatus->currentFloor];
-        if (collider->flags & 0x100) {
-            D_802DADA4 = collisionStatus->currentFloor;
+        if (collider->flags & COLLIDER_FLAGS_SAFE_FLOOR) {
+            LastSafeFloor = collisionStatus->currentFloor;
             return ApiStatus_BLOCK;
         }
     }
@@ -604,7 +605,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
     s32 temp_a0;
     LavaReset* lavaReset = gLavaResetList;
 
-    if (D_802DADA4 == -1) {
+    if (LastSafeFloor == -1) {
         temp_v0 = &(*get_current_map_settings()->entryList)[gGameStatusPtr->entryID];
         *outX = temp_v0->x;
         *outY = temp_v0->y;
@@ -617,7 +618,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
             break;
         }
 
-        if (lavaReset->colliderID == D_802DADA4) {
+        if (lavaReset->colliderID == LastSafeFloor) {
             *outX = lavaReset->pos.x;
             *outY = lavaReset->pos.y;
             *outZ = lavaReset->pos.z;
