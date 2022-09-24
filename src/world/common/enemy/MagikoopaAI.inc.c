@@ -19,7 +19,7 @@ void N(MagikoopaAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
-        npc->flags &= ~2;
+        npc->flags &= ~NPC_FLAG_2;
         npc->duration = 0;
         script->AI_TEMP_STATE = 1;
     }
@@ -43,7 +43,7 @@ void N(MagikoopaAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         npc->scale.x = 1.0f;
         npc->scale.y = 1.0f;
         npc->scale.z = 1.0f;
-        npc->flags |= 2;
+        npc->flags |= NPC_FLAG_2;
         script->AI_TEMP_STATE = 5;
     }
 }
@@ -78,11 +78,11 @@ void N(MagikoopaAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     enemy->varTable[0] = 1;
     npc->currentAnim = enemy->animList[8];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->flags &= ~2;
+    npc->flags &= ~NPC_FLAG_2;
     npc->scale.x = 0.1f;
     npc->scale.y = 0.1f;
     npc->scale.z = 0.1f;
-    if ((npc->flags & 8) == 0) {
+    if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
         posX = npc->pos.x;
         dist = 200.0f;
         posZ = npc->pos.z;
@@ -247,9 +247,9 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     
     if (isInitialCall || (enemy->aiFlags & 4)) {
         npc->currentAnim = enemy->animList[0];
-        npc->flags &= ~0x800;
-        npc->flags |= 0x200000;
-        enemy->flags |= 0x200000;
+        npc->flags &= ~NPC_FLAG_JUMPING;
+        npc->flags |= NPC_FLAG_200000;
+        enemy->flags |= ENEMY_FLAGS_200000;
         npc->duration = 0;
         if ((enemy->aiFlags & 4) != 0) {
             enemy->aiFlags &= ~4;

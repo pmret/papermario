@@ -127,8 +127,8 @@ ApiStatus func_80240510_B1BA80(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    partner->flags |= 0x20000;
-    partner->flags |= 0x80000;
+    partner->flags |= NPC_FLAG_REFLECT_WALL;
+    partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     return ApiStatus_DONE2;
 }
 
@@ -136,8 +136,8 @@ void func_80240574_B1BAE4(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0x20000;
-        partner->flags |= 0x80000;
+        partner->flags |= NPC_FLAG_REFLECT_WALL;
+        partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     }
 }
 

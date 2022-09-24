@@ -2429,7 +2429,7 @@ ApiStatus N(func_802414C0_96A680)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
             if (npc != 0 && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
-                npc->flags |= 0x800000;
+                npc->flags |= NPC_FLAG_NO_DROPS;
             }
         }
         script->functionTemp[0] = 0;
@@ -2467,7 +2467,7 @@ ApiStatus N(func_802415CC_96A78C)(Evt* script, s32 isInitialCall) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
-                npc->flags &= ~0x00800000;
+                npc->flags &= ~NPC_FLAG_NO_DROPS;
             }
         }
         return ApiStatus_DONE2;

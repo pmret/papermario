@@ -291,7 +291,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->functionTemp[0]++;
                     playerStatus->flags &= ~PS_FLAGS_100;
-                    bow->flags |= 0x40;
+                    bow->flags |= NPC_FLAG_40;
                 }
 
                 get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;

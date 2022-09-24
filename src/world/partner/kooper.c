@@ -60,7 +60,7 @@ s32 func_802BD17C_31B19C(Npc* kooper) {
 void world_kooper_init(Npc* kooper) {
     kooper->collisionHeight = 37;
     kooper->collisionRadius = 24;
-    kooper->collisionChannel = 0x00010000;
+    kooper->collisionChannel = COLLISION_CHANNEL_10000;
     D_802BEC54 = 0;
 }
 
@@ -225,14 +225,14 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             case 20:
                 if (playerStatus->inputEnabledCounter == 0) {
                     if (playerStatus->timeInAir == 0) {
-                        if (kooper->flags & 0x1000) {
+                        if (kooper->flags & NPC_FLAG_1000) {
                             disable_player_input();
                             script->functionTemp[2] = playerStatus->inputEnabledCounter;
                             D_802BEC64 = 1;
                             D_802BEB40_31CB60 = 0;
                             D_802BEC6C = 0;
-                            kooper->flags &= ~0xA08;
-                            kooper->flags |= 0x140;
+                            kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT);
+                            kooper->flags |= (NPC_FLAG_100 | NPC_FLAG_40);
                             partnerActionStatus->actingPartner = PARTNER_KOOPER;
                             partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                             D_802BEC58 = func_800EF4E0();

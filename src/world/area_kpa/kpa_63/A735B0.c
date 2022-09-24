@@ -44,7 +44,7 @@ ApiStatus func_80240000_A735B0(Evt* script, s32 isInitialCall) {
                 partner->colliderPos.x = partner->pos.x;
                 partner->colliderPos.y = partner->pos.y;
                 partner->colliderPos.z = partner->pos.z;
-                partner->flags |= 0x10000;
+                partner->flags |= NPC_FLAG_DIRTY_SHADOW;
             }
             break;
         default:

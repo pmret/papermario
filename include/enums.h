@@ -4167,6 +4167,12 @@ enum ColliderFlags {
     COLLIDER_FLAGS_80000000          = 0x80000000
 };
 
+enum CollisionChannels {
+    COLLISION_CHANNEL_10000         = 0x00010000,
+    COLLISION_CHANNEL_20000         = 0x00020000,
+    COLLISION_CHANNEL_40000         = 0x00040000,
+};
+
 enum CameraInitDataFlags {
     CAMERA_INIT_DATA_FLAGS_1                 = 0x00000001,
     CAMERA_INIT_DATA_FLAGS_2                 = 0x00000002,

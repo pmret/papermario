@@ -48,7 +48,7 @@ void func_802BD100_320C50(void) {
 void world_lakilester_init(Npc* npc) {
     npc->collisionHeight = 38;
     npc->collisionRadius = 36;
-    npc->collisionChannel = 0x10000;
+    npc->collisionChannel = COLLISION_CHANNEL_10000;
     D_802BFF18 = 0;
     D_802BFF04 = 0;
     D_802BFF08 = 0;
@@ -249,16 +249,16 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
     f32 outLength = zOffset;
     f32 hitRx, hitRz;
     f32 hitDirX, hitDirZ;
-    f32 temp_f4;
+    f32 deltaY;
 
     D_802BFF24 = 0;
 
     if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
                                           &hitDirX, &hitDirZ) >= 0) {
-        temp_f4 = outY - partner->moveToPos.y;
-        if (temp_f4 != 0.0f) {
-            if (fabs(temp_f4) < 10.0) {
-                D_802BFF24 = temp_f4;
+        deltaY = outY - partner->moveToPos.y;
+        if (deltaY != 0.0f) {
+            if (fabs(deltaY) < 10.0) {
+                D_802BFF24 = deltaY;
                 partner->moveToPos.y = outY;
                 return TRUE;
             } else {

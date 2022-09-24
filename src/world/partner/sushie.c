@@ -122,7 +122,7 @@ EvtScript world_sushie_use_ability = {
 void world_sushie_init(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
-    sushie->collisionChannel = 0x10000;
+    sushie->collisionChannel = COLLISION_CHANNEL_10000;
     D_802BFEEC = 0;
     bss_802BFEE4 = 0;
     bss_802BFEE8 = 0;

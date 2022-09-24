@@ -1062,7 +1062,7 @@ s32 has_valid_conversation_npc(void) {
     s32 ret = FALSE;
     s32 cond;
 
-    if (npc != NULL && !(npc->flags & 0x10000000)) {
+    if (npc != NULL && !(npc->flags & NPC_FLAG_10000000)) {
         cond = (playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_INPUT_DISABLED))
         == PS_FLAGS_HAS_CONVERSATION_NPC;
         ret = cond;
@@ -1136,7 +1136,7 @@ s32 func_800E06D8(void) {
     } else if (!phys_can_player_interact()) {
         playerStatus->interactingWithID = -1;
         return FALSE;
-    } else if (get_entity_type(wall) == 0xC) {
+    } else if (get_entity_type(wall) == ENTITY_TYPE_PUSH_BLOCK) {
         return FALSE;
     }
 
