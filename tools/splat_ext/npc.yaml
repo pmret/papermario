@@ -5,9 +5,12 @@
 # - Names should be short, one or two words, in PascalCase with no underscores.
 # - Prefer names to describe the actions or states depicted rather than how they are used.
 # - Sequential names start counting in decimal from 1, not 0.
+# - If a name is suffixed with a number, the number always goes last.
 # - If you can't figure out a name, SKIP IT and leave the default one.
 # - If there are duplicate animations and you can't figure out how they're different
 #   contextually, suffix the extra ones with Alt, or Alt1,Alt2,... if there are many.
+# - When describing the orientation of a sprite that faces away from the camera or directly
+#   toward it, use the suffixes Back and Fwd respectively.
 #
 # These apply to all sprite name types.
 #
@@ -5886,41 +5889,38 @@ BattleKammy:
     - Anim0C
     - Anim0D
 GoombaBros:
-  variations:
-    - Variant00
-    - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
+    - Step1
+    - Step2
+    - Step3
+    - Midair
+    - Idle1
+    - Idle2
+    - Idle3
+    - Hurt1
+    - Hurt2
+    - Talk1
+    - Talk2
+    - CryStep1
+    - CryStep2
+    - CryStep3
+    - CryIdle1
+    - CryIdle2
+    - CryIdle3
+    - CryTalk1
+    - CryTalk2
+    - Tear1
+    - Tear2
+    - Tear3
+    - Tear4
+    - Sleep
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - BurnHurt1
+    - BurnHurt2
+    - BurnStill
   palettes:
     - Red
     - Blue
@@ -5932,61 +5932,61 @@ GoombaBros:
     - Blue_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - CryStill
+    - Idle
+    - CryIdle
+    - Walk
+    - CryWalk
+    - Run
+    - CryRun
+    - Midair
+    - Hurt
+    - Talk
+    - CryTalk
+    - Dizzy
+    - Sleep
+    - BurnHurt
+    - BurnStill
 GoombaKing:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - Body
+    - Pants
+    - LEyebrow
+    - REyebrow
+    - LMustache
+    - RMustache
+    - Crown1
+    - Crown2
+    - EyesCrossed1
+    - EyesCrossed2
+    - EyesApart
+    - EyesCrossedOut
+    - EyesOpen
+    - MouthOpen
+    - MouthClose
+    - MouthFrown
+    - LFoot1
+    - RFoot1
+    - LFoot2
+    - RFoot2
+    - MouthHalfOpen
+    - BurnedBody
+    - BurnedPants
+    - BurnedLMustache
+    - BurnedRMustache
+    - BurnedCrown1
+    - BurnedEyes
+    - BurnedMouthOpen
+    - BurnedMouthClosed
+    - BurnedLFoot1
+    - BurnedRFoot1
+    - BurnedLFoot2
+    - BurnedRFoot2
+    - BurnedLEyebrow
+    - BurnedREyebrow
+    - BurnedCrown2
+    - EyesClosed
   palettes:
     - Default
     - Poisoned
@@ -5994,21 +5994,21 @@ GoombaKing:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
+    - Still
+    - Idle
+    - TapFeet
+    - Walk
+    - Run
+    - Kick
+    - Dead
+    - Dizzy
+    - Sleep
+    - Angry
+    - Talk
+    - LeanBack
+    - LeanBackSurprise
+    - BurnHurt
+    - BurnStill
 SpikyGoomnut:
   frames:
     - Still
@@ -9561,12 +9561,12 @@ TayceT:
     - Happy2
     - Sad1
     - Sad2
-    - FaceForward
+    - IdleFwd
     - IdleBack1
     - IdleBack2
     - IdleBack3
     - TurnAround1
-    - TalkForward
+    - TalkFwd
     - TurnAround2
     - Pan
   palettes:
@@ -9583,7 +9583,7 @@ TayceT:
     - Cooking
     - TurnBack
     - TurnAway
-    - TalkForward
+    - TalkFwd
     - Carry
     - Pan
 FiceT:
@@ -11115,15 +11115,15 @@ ParadeKolorado:
     - Idle1
     - Idle2
     - Idle3
-    - IdleForward1
-    - IdleForward2
-    - IdleForward3
+    - IdleFwd1
+    - IdleFwd2
+    - IdleFwd3
     - WifeIdle1
     - WifeIdle2
     - WifeIdle3
-    - WifeIdleForward1
-    - WifeIdleForward2
-    - WifeIdleForward3
+    - WifeIdleFwd1
+    - WifeIdleFwd2
+    - WifeIdleFwd3
     - Wave1
     - Wave2
     - WifeWave1
@@ -11133,19 +11133,19 @@ ParadeKolorado:
     - Wife
   animations:
     - Idle
-    - IdleForward
+    - IdleFwd
     - Wave
     - WifeIdle
-    - WifeIdleForward
+    - WifeIdleFwd
     - WifeWave
 ParadeChick:
   frames:
     - Chirp1
     - Chirp2
-    - ChirpForward1
-    - ChirpForward2
+    - ChirpFwd1
+    - ChirpFwd2
     - BreakEgg
-    - BreakEggForward
+    - BreakEggFwd
     - Egg
     - EggShatter1
     - EggShatter2
@@ -11156,12 +11156,12 @@ ParadeChick:
     - Default
   animations:
     - Still
-    - StillForward
+    - StillFwd
     - Egg
     - Chirp
-    - ChirpForward
+    - ChirpFwd
     - BreakEgg
-    - BreakEggForward
+    - BreakEggFwd
     - EggTremble
 ParadeIceShow:
   frames:
