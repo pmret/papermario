@@ -12755,7 +12755,7 @@ segments:
     - [0xEA0900, c]
     - [0xEA0C10, c, EA0C10]
     - [0xEA36E0, c, EA36E0]
-    - [0xEA3A80, data]
+    - [0xEA3A80, data, dead/EA3A80]
     - [0xEA6D70]
   - type: code
     start: 0xEA6FD0
@@ -12764,13 +12764,13 @@ segments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
-    - [0xEA7390, data]
+    - [0xEA7390, data, dead/EA7390]
   - type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
     - [0xEA8AE0, c]
-    - [0xEAA810, data]
+    - [0xEAA810, data, dead/EAA810]
     - [0xEB0E20]
   - type: code
     start: 0xEB0E60
@@ -12778,21 +12778,21 @@ segments:
     subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
-    - [0xEB1920, data]
+    - [0xEB1920, data, dead/EB1920]
   - type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
-    - [0xEB54C0, data]
+    - [0xEB54C0, data, dead/EB54C0]
   - type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
     - [0xEB7230, c]
     - [0xEB7540, c, EB7540]
-    - [0xEB7850, data]
+    - [0xEB7850, data, dead/EB7850]
     - [0xEB8E40]
   - type: code
     start: 0xEB8E50
@@ -12801,7 +12801,7 @@ segments:
     - [0xEB8E50, c, EB8E50]
     - [0xEB8E90, c, EB8E90]
     - [0xEB9D90, c]
-    - [0xEBA260, data]
+    - [0xEBA260, data, dead/EBA260]
     - [0xEC2000]
   - type: code
     start: 0xEC2200
@@ -12810,7 +12810,7 @@ segments:
     - [0xEC2200, c, EC2200]
     - [0xEC2240, c, EC2240]
     - [0xEC2610, c]
-    - [0xEC2850, data]
+    - [0xEC2850, data, dead/EC2850]
     - [0xEC7170]
   - type: code
     start: 0xEC71B0
@@ -12818,7 +12818,7 @@ segments:
     subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
-    - [0xEC78F0, data]
+    - [0xEC78F0, data, dead/EC78F0]
   - type: code
     start: 0xEC9D00
     vram: 0x80240000
@@ -12828,7 +12828,7 @@ segments:
     - [0xECAA80, c, ECAA80]
     - [0xECB930, c]
     - [0xECBB70, c]
-    - [0xECBC10, data]
+    - [0xECBC10, data, dead/ECBC10]
     - [0xECFE60]
   - type: code
     start: 0xECFFF0
@@ -12838,7 +12838,7 @@ segments:
     - [0xED0030, c]
     - [0xED00D0, c]
     - [0xED0310, c]
-    - [0xED1840, data]
+    - [0xED1840, data, dead/ED1840]
     - [0xED41C0]
   - type: code
     start: 0xED4220
@@ -12849,13 +12849,13 @@ segments:
     - [0xED42A0, c]
     - [0xED46D0, c]
     - [0xED5540, c]
-    - [0xED5780, data]
+    - [0xED5780, data, dead/ED5780]
   - type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
     - [0xED8E20, c, ED8E20]
-    - [0xED9170, data]
+    - [0xED9170, data, dead/ED9170]
     - [0xEDBF90]
   - type: code
     start: 0xEDBFE0
@@ -12863,7 +12863,7 @@ segments:
     subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
-    - [0xEDC6D0, data]
+    - [0xEDC6D0, data, dead/EDC6D0]
   - type: code
     start: 0xEDE9C0
     vram: 0x80240000
@@ -12871,7 +12871,7 @@ segments:
     - [0xEDE9C0, c]
     - [0xEDEA00, c, EDEA00]
     - [0xEE2040, c, EE2040]
-    - [0xEE20E0, data]
+    - [0xEE20E0, data, dead/EE20E0]
     - [0xEE64B0]
   - type: code
     start: 0xEE65B0
@@ -12880,7 +12880,7 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data]
+    - [0xEE8970, data, dead/EE8970]
     - [0xEEB900]
   - type: code
     start: 0xEED100
@@ -12891,7 +12891,7 @@ segments:
     - [0xEED1E0, c]
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
-    - [0xEEFAD0, data]
+    - [0xEEFAD0, data, dead/EEFAD0]
     - [0xEF2550]
   - type: code
     start: 0xEF2610
@@ -12900,7 +12900,7 @@ segments:
     - [0xEF2610, c]
     - [0xEF2650, c]
     - [0xEF2680, c, EF2680]
-    - [0xEF58E0, data]
+    - [0xEF58E0, data, dead/EF58E0]
     - [0xEF79C0]
   - type: code
     start: 0xEF7A80
@@ -12909,7 +12909,7 @@ segments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
-    - [0xEF8250, data]
+    - [0xEF8250, data, dead/EF8250]
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
