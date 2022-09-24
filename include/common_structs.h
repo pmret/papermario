@@ -2476,18 +2476,4 @@ typedef struct CreditsUnkBeta {
     /* 0x02 */ s16 size;
 } CreditsUnkBeta; // size = 0x4
 
-typedef struct TempE20110 {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C */ f32 scale;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ char unk_14[0x4];
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s8 unk_20;
-    /* 0x21 */ s8 unk_21;
-    /* 0x22 */ s8 unk_22;
-    /* 0x23 */ s8 unk_23;
-    /* 0x24 */ s32 unk_24;
-} TempE20110; // size = 0x28
-
 #endif

@@ -11409,7 +11409,14 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE20110, c, E20110]
-    - [0xE20B30, data]
+    - start: 0xE20B30
+      type: .data
+      name: E20110
+      subsegments:
+      - [0xE20B30, ci4, inspect_icon, 32, 32]
+      - [0xE20D30, palette, inspect_icon]
+      - [0xE20D50, gfx, inspect_icon_dlist]
+      - [0xE20DC8]
     - [0xE20DD0]
   - type: code
     start: 0xE20EB0
@@ -11430,14 +11437,31 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE21870, c, E21870]
-    - [0xE21EB0, data]
+    - start: 0xE21EB0
+      type: .data
+      name: E21870
+      subsegments:
+      - [0xE21EB0, ci4, pulse_stone, 56, 56]
+      - [0xE224D0, palette, pulse_stone]
+      - [0xE224F0, palette, pulse_stone.flash]
+      - [0xE22510, gfx, pulse_stone_dlist]
+      - [0xE22588]
     - [0xE22590]
   - type: code
     start: 0xE225B0
     vram: 0x802B7000
     subsegments:
     - [0xE225B0, c, E225B0]
-    - [0xE22B30, data]
+    - start: 0xE22B30
+      type: .data
+      name: E225B0
+      subsegments:
+      - [0xE22B30, ci4, i_spy, 56, 56]
+      - [0xE23150, palette, i_spy]
+      - [0xE23170, palette, i_spy.2]
+      - [0xE23190, palette, i_spy.flash]
+      - [0xE231B0, gfx, i_spy_dlist]
+      - [0xE23228]
     - [0xE23230]
   - type: code
     name: world_action_idle
