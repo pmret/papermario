@@ -1,5 +1,5 @@
 #include "common.h"
-#include "sprite/npc/stone_chomp.h"
+#include "sprite/npc/StoneChomp.h"
 
 ApiStatus N(StoneChompFXA)(Evt* script, s32 isInitialCall) {
     NpcBlueprint bp;
@@ -15,7 +15,7 @@ ApiStatus N(StoneChompFXA)(Evt* script, s32 isInitialCall) {
 
     bp.flags = NPC_FLAG_8000 | NPC_FLAG_100 | NPC_FLAG_40
         | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_2;
-    bp.initialAnim = NPC_ANIM_stone_chomp_Palette_00_Anim_2;
+    bp.initialAnim = ANIM_StoneChomp_Anim02;
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 

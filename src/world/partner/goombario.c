@@ -1,7 +1,8 @@
 #include "common.h"
-#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/WorldGoombario.h"
 #include "goombario.h"
 #include "../src/world/partners.h"
+#include "message_ids.h"
 
 extern s32* D_802B79A8_E21858;
 
@@ -14,17 +15,45 @@ BSS s32 D_802BDF5C;
 BSS s32 GoombarioGetTattleID;
 BSS s32 D_802BDF64;
 
-s32 D_802BDC40_317B60[] = {
-    0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
-    0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
-    0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
-    0x00000014, 0x001B0009, 0x0000002E, 0x001B000A, 0x0000002F, 0x001B000A, 0x00000007, 0x001B000B,
-    0x00000008, 0x001B000B, 0x00000009, 0x001B000C, 0x0000000A, 0x001B000E, 0x0000002B, 0x001B0010,
-    0x00000003, 0x001B0011, 0x00000004, 0x001B0011, 0x00000005, 0x001B0011, 0x00000006, 0x001B0011,
-    0x00000033, 0x001B0012, 0x00000034, 0x001B0013, 0x00000026, 0x001B0014, 0x00000032, 0x001B0015,
-    0x00000024, 0x001B0017, 0x00000025, 0x001B001A, 0x00000031, 0x001B001D, 0x00000035, 0x001B001F,
-    0x00000036, 0x001B0020, 0x00000038, 0x001B0021, 0x00000037, 0x001B0022, 0x0000003A, 0x001B0023,
-    0x00000039, 0x001B0024, 0xFFFFFFFF
+s32 EntityTattles[] = {
+    ENTITY_TYPE_HAMMER1_BLOCK,        MSG_EntityTattle_HammerBlock1_CanBreak,
+    ENTITY_TYPE_HAMMER1_BLOCK_TINY,   MSG_EntityTattle_HammerBlock1_CanBreak,
+    ENTITY_TYPE_HAMMER2_BLOCK,        MSG_EntityTattle_HammerBlock2_CantBreak,
+    ENTITY_TYPE_HAMMER2_BLOCK_TINY,   MSG_EntityTattle_HammerBlock2_CantBreak,
+    ENTITY_TYPE_HAMMER3_BLOCK,        MSG_EntityTattle_HammerBlock3_CantBreak,
+    ENTITY_TYPE_HAMMER3_BLOCK_TINY,   MSG_EntityTattle_HammerBlock3_CantBreak,
+    ENTITY_TYPE_BRICK_BLOCK,          MSG_EntityTattle_BrickBlock,
+    ENTITY_TYPE_MULTI_COIN_BRICK,     MSG_EntityTattle_BrickBlock,
+    ENTITY_TYPE_YELLOW_BLOCK,         MSG_EntityTattle_ItemBlock,
+    ENTITY_TYPE_SINGLE_TRIGGER_BLOCK, MSG_EntityTattle_ItemBlock,
+    ENTITY_TYPE_MULTI_TRIGGER_BLOCK,  MSG_EntityTattle_InertBlock,
+    ENTITY_TYPE_PUSH_BLOCK,           MSG_EntityTattle_PushBlock,
+    ENTITY_TYPE_RED_BLOCK,            MSG_EntityTattle_BadgeBlock,
+    ENTITY_TYPE_SIMPLE_SPRING,        MSG_EntityTattle_Spring,
+    ENTITY_TYPE_SCRIPT_SPRING,        MSG_EntityTattle_Spring,
+    ENTITY_TYPE_BLUE_SWITCH,          MSG_EntityTattle_Switch,
+    ENTITY_TYPE_RED_SWITCH,           MSG_EntityTattle_Switch,
+    ENTITY_TYPE_HUGE_BLUE_SWITCH,     MSG_EntityTattle_BigSwitch_SpinJump,
+    ENTITY_TYPE_GREEN_STOMP_SWITCH,   MSG_EntityTattle_FloorSwitch_SpinJump,
+    ENTITY_TYPE_BLUE_WARP_PIPE,       MSG_EntityTattle_Pipe,
+    ENTITY_TYPE_PADLOCK,              MSG_EntityTattle_PadLock,
+    ENTITY_TYPE_PADLOCK_RED_FRAME,    MSG_EntityTattle_PadLock,
+    ENTITY_TYPE_PADLOCK_RED_FACE,     MSG_EntityTattle_PadLock,
+    ENTITY_TYPE_PADLOCK_BLUE_FACE,    MSG_EntityTattle_PadLock,
+    ENTITY_TYPE_SIGNPOST,             MSG_EntityTattle_0012,
+    ENTITY_TYPE_RED_ARROW_SIGNS,      MSG_EntityTattle_Sign,
+    ENTITY_TYPE_BOMBABLE_ROCK,        MSG_EntityTattle_BombableRock,
+    ENTITY_TYPE_CHEST,                MSG_EntityTattle_Chest,
+    ENTITY_TYPE_WOODEN_CRATE,         MSG_EntityTattle_WoodenCrate_CantBreak,
+    ENTITY_TYPE_BOARDED_FLOOR,        MSG_EntityTattle_BoardedFloor_CantBreak,
+    ENTITY_TYPE_STAR_BOX_LAUCHER,     MSG_EntityTattle_JackInTheBox_SpinJump,
+    ENTITY_TYPE_BELLBELL_PLANT,       MSG_EntityTattle_BellbellPlant,
+    ENTITY_TYPE_TRUMPET_PLANT,        MSG_EntityTattle_TrumpetPlant,
+    ENTITY_TYPE_CYMBAL_PLANT,         MSG_EntityTattle_CymbalBush,
+    ENTITY_TYPE_MUNCHLESIA,           MSG_EntityTattle_Munchlesia,
+    ENTITY_TYPE_SPINNING_FLOWER,      MSG_EntityTattle_SpinningFlower,
+    ENTITY_TYPE_PINK_FLOWER,          MSG_EntityTattle_BulbBush,
+    -1
 };
 
 s32 func_802BD100_317020(s32 arg0) {
@@ -207,8 +236,8 @@ EvtScript world_goombario_use_ability = {
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk,
-                 NPC_ANIM_world_goombario_normal_idle, 0, LVar0)
+        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk,
+                 ANIM_WorldGoombario_Idle, 0, LVar0)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(func_802BDB30_317A50)

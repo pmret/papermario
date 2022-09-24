@@ -1,7 +1,7 @@
 #include "kmr_12.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/goomba.h"
+#include "sprite/npc/Goomba.h"
 
 EvtScript N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
 EvtScript N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
@@ -93,7 +93,7 @@ EvtScript N(GoombaIdle) = {
     EVT_WAIT(1)
 
     EVT_CALL(SetSelfVar, 0, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_fake_mushroom) // TODO: work out why palette 0 is used here
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_FakeMushroom) // TODO: work out why palette 0 is used here
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfEnemyFlagBits, NPC_FLAG_NO_AI, TRUE)
 
@@ -114,15 +114,15 @@ EvtScript N(GoombaIdle) = {
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_still)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
     EVT_LOOP(9)
         EVT_ADDF(LVar0, EVT_FLOAT(10.0))
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_dizzy)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Dizzy)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_idle)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Idle)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0xF8, 0)
     EVT_CALL(func_802CFE2C, NPC_SELF, 8192)
     EVT_CALL(func_802CFD30, NPC_SELF, 5, 6, 1, 1, 0)
@@ -182,22 +182,22 @@ StaticNpc N(goombaNpc) = {
         /* flying? */ TRUE,
     }},
     .animations = {
-        NPC_ANIM_goomba_normal_idle,
-        NPC_ANIM_goomba_normal_walk,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_idle,
-        NPC_ANIM_goomba_normal_idle,
-        NPC_ANIM_goomba_normal_pain,
-        NPC_ANIM_goomba_normal_pain,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
-        NPC_ANIM_goomba_normal_run,
+        ANIM_Goomba_Idle,
+        ANIM_Goomba_Walk,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Idle,
+        ANIM_Goomba_Idle,
+        ANIM_Goomba_Hurt,
+        ANIM_Goomba_Hurt,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
+        ANIM_Goomba_Run,
     },
 };
 

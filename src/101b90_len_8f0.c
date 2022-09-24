@@ -25,7 +25,40 @@ BSS s32 D_802E0C68;
 BSS s32 D_802E0C6C; // unused?
 BSS PlayerSpriteCacheEntry PlayerRasterCache[18];
 
-INCLUDE_ASM(s32, "101b90_len_8f0", spr_swizzle_anim_offsets);
+#define ALIGN4(v) (((u32)(v) >> 2) << 2)
+#define SPR_SWIZZLE(base,offset) ((void*)((s32)(offset) + (s32)(base)))
+
+void spr_swizzle_anim_offsets(s32 arg0, s32 base, void* spriteData) {
+    u8* buffer;
+    SpriteAnimComponent*** animList;
+    SpriteAnimComponent** compList;
+    SpriteAnimComponent* comp;
+    s32 animOffset;
+    s32 compOffset;
+    s32 temp;
+    
+    // required to match, spriteData->animList would be nicer
+    animList = (SpriteAnimComponent***) spriteData;
+    animList += 4;
+    
+    while (TRUE) {
+        if (*animList == PTR_LIST_END) {
+            break;
+        }
+        compList = (SpriteAnimComponent**) ((s32)*animList - ALIGN4(base));
+        compList = SPR_SWIZZLE(ALIGN4(spriteData), compList);
+        *animList = compList;
+        while (TRUE) {
+            if (*compList == PTR_LIST_END) {
+                break;
+            }
+            *compList = comp = SPR_SWIZZLE(ALIGN4(spriteData), (s32)*compList - ALIGN4(base));
+            comp->cmdList = SPR_SWIZZLE(ALIGN4(spriteData), (s32)comp->cmdList - ALIGN4(base));
+            compList++;
+        }
+        animList++;
+    }
+}
 
 #ifdef NON_EQUIVALENT
 SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2) {
@@ -175,34 +208,39 @@ void spr_update_player_raster_cache(void) {
 INCLUDE_ASM(s32, "101b90_len_8f0", spr_load_npc_extra_anims);
 
 #ifdef NON_MATCHING
-void** spr_allocate_components(s32 arg0) {
-    s32 temp_s1;
+SpriteComponent** spr_allocate_components(s32 count) {
+    s32 listSize;
     void** heap;
-    void* var_a0_2;
-    void** new_var;
-    u32 size;
+    SpriteComponent** listStart;
+    SpriteComponent* component;
+    SpriteComponent** listPos;
+    u32 totalSize;
     s32 i;
 
-    temp_s1 = (arg0 + 1) * 4;
-    size = (arg0 * 0x50) + (temp_s1);
+    // data will contain a -1 terminated list, followed by the SpriteComponents
+    // corresponding to that list
+    listSize = (count + 1) * 4;
+    totalSize = (count * sizeof(SpriteComponent)) + listSize;
 
     if (spr_allocateBtlComponentsOnWorldHeap) {
-        heap = _heap_malloc(&heap_generalHead, size);
+        heap = _heap_malloc(&heap_generalHead, totalSize);
     } else {
-        heap = _heap_malloc(&gSpriteHeapPtr, size);
+        heap = _heap_malloc(&gSpriteHeapPtr, totalSize);
     }
 
-    new_var = heap;
+    listStart = (SpriteComponent**) heap;
+    listPos = listStart;
+    component = (SpriteComponent*)(heap + (listSize / 4));
 
-    var_a0_2 = heap + (temp_s1 / 4);
-
-    for (i = 0; i < arg0; i++) {
-        *new_var = var_a0_2;
-        new_var++;
-        var_a0_2 += 0x50;
+    // fill list values
+    for (i = 0; i < count; i++) {
+        *listPos = component;
+        listPos++;
+        component++;
     }
-    *new_var = PTR_LIST_END;
-    return heap;
+    *listPos = PTR_LIST_END;
+    
+    return listStart;
 }
 #else
 INCLUDE_ASM(s32, "101b90_len_8f0", spr_allocate_components);

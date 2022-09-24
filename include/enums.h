@@ -1151,6 +1151,7 @@ enum SoundIDs {
     SOUND_20E5                      = 0x000020E5,
     SOUND_20E7                      = 0x000020E7,
     SOUND_20EC                      = 0x000020EC,
+    SOUND_20ED                      = 0x000020ED,
     SOUND_20EE                      = 0x000020EE,
     SOUND_20EF                      = 0x000020EF,
     SOUND_20F3                      = 0x000020F3,
@@ -3374,7 +3375,6 @@ enum ActorEventFlags {
     ACTOR_EVENT_FLAG_80000000         = 0x80000000,
 };
 
-// TODO alex struct
 enum PartnerAnimIndices {
     PARTNER_ANIM_INDEX_STILL      = 0x0,
     PARTNER_ANIM_INDEX_WALK       = 0x1,

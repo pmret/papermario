@@ -1,6 +1,6 @@
 #include "flo_07.h"
 #include "message_ids.h"
-#include "sprite/npc/posie.h"
+#include "sprite/npc/Posie.h"
 
 enum {
     NPC_POSIE,
@@ -255,7 +255,7 @@ EvtScript N(80241C14) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_00C5)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_00C5)
     EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_10"), 1)
     EVT_WAIT(100)
@@ -276,7 +276,7 @@ EvtScript N(80241DBC) = {
     EVT_IF_EQ(AreaFlag(6), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0068)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0068)
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 300)
         EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
@@ -285,7 +285,7 @@ EvtScript N(80241DBC) = {
     EVT_END_THREAD
     EVT_CALL(PlaySound, 0x8000006B)
     EVT_EXEC_GET_TID(N(80241D6C), MapVar(0))
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_6, NPC_ANIM_posie_Palette_00_Anim_6, 0, MSG_CH6_0069)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Strain, ANIM_Posie_Strain, 0, MSG_CH6_0069)
     EVT_KILL_THREAD(MapVar(0))
     EVT_CALL(SetCamDistance, 0, 350)
     EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
@@ -305,7 +305,7 @@ EvtScript N(80241DBC) = {
     EVT_CALL(func_802D62E4, 956)
     EVT_SET(AreaFlag(6), 1)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006A)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)
     EVT_SET(GB_StoryProgress, 47)
     EVT_RETURN
     EVT_END
@@ -317,23 +317,23 @@ EvtScript N(interact_80242044) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
             EVT_IF_EQ(AreaFlag(5), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0070)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0070)
                 EVT_SET(AreaFlag(5), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0071)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0071)
             EVT_END_IF
         EVT_CASE_LT(46)
             EVT_CALL(AdjustCam, 0, EVT_FLOAT(4.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0065)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_5)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0065)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Posie_GiveItem)
             EVT_WAIT(20)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_0)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Posie_Still)
             EVT_SET(LVar0, 89)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(80241BB4))
             EVT_CALL(AddKeyItem, ITEM_FERTILE_SOIL)
             EVT_SET(GB_StoryProgress, 46)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0066)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0066)
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_EXEC_WAIT(N(80241DBC))
             EVT_END_IF
@@ -345,26 +345,26 @@ EvtScript N(interact_80242044) = {
                     EVT_EXEC_WAIT(N(80241DBC))
                     EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
                 EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0072)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0072)
                 EVT_END_IF
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0072)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0072)
             EVT_END_IF
         EVT_CASE_LT(53)
             EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0072)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0072)
             EVT_ELSE
                 EVT_IF_LT(GB_StoryProgress, 48)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0073)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0073)
                 EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0074)
+                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0074)
                 EVT_END_IF
-                EVT_CALL(ContinueSpeech, -1, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0075)
+                EVT_CALL(ContinueSpeech, -1, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0075)
             EVT_END_IF
         EVT_CASE_LT(60)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0076)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0076)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0077)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0077)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(80240890))
     EVT_RETURN
@@ -392,12 +392,12 @@ EvtScript N(802424F4) = {
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_WAIT(10)
         EVT_IF_LT(AreaByte(3), 5)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006E)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006E)
             EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
             EVT_CALL(PlayerMoveTo, 410, LVar3, 10)
             EVT_ADD(AreaByte(3), 1)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006F)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006F)
             EVT_SET(AreaByte(3), 0)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -413,7 +413,7 @@ EvtScript N(tree1_Callback) = {
     EVT_IF_LT(GB_StoryProgress, 47)
         EVT_CALL(NpcFacePlayer, 0, 1)
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0067)
+        EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Confused, ANIM_Posie_Idle, 0, MSG_CH6_0067)
         EVT_IF_EQ(GB_StoryProgress, 46)
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_CALL(UseSettingsFrom, 0, -250, 0, 0)
@@ -428,16 +428,16 @@ EvtScript N(tree1_Callback) = {
         EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
             EVT_CALL(NpcFacePlayer, 0, 1)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_0067)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_Confused, ANIM_Posie_Idle, 0, MSG_CH6_0067)
         EVT_ELSE
             EVT_ADD(AreaByte(2), 1)
             EVT_SWITCH(AreaByte(2))
                 EVT_CASE_LT(2)
-                    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006B)
+                    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_TalkAngry, ANIM_Posie_Idle, 0, MSG_CH6_006B)
                 EVT_CASE_LT(5)
-                    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006C)
+                    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_TalkAngry, ANIM_Posie_Idle, 0, MSG_CH6_006C)
                 EVT_CASE_GE(5)
-                    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MSG_CH6_006D)
+                    EVT_CALL(SpeakToPlayer, 0, ANIM_Posie_TalkAngry, ANIM_Posie_Idle, 0, MSG_CH6_006D)
                     EVT_SET(AreaByte(3), 1)
                     EVT_CALL(GotoMap, EVT_PTR(N(flo_25_name_hack)), 1)
                     EVT_WAIT(100)
@@ -489,22 +489,22 @@ StaticNpc N(npcGroup_8024291C) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
-        NPC_ANIM_posie_Palette_00_Anim_1,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
+        ANIM_Posie_Idle,
     },
     .tattle = MSG_NpcTattle_Posie,
 };

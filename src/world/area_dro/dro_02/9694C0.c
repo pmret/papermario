@@ -3,15 +3,15 @@
 #include "script_api/battle.h"
 #include "message_ids.h"
 #include "entity.h"
-#include "sprite/npc/archeologist.h"
-#include "sprite/npc/chuck_quizmo.h"
-#include "sprite/npc/disguised_moustafa.h"
-#include "sprite/npc/dryite.h"
-#include "sprite/npc/mouser.h"
-#include "sprite/npc/moustafa.h"
-#include "sprite/npc/toad.h"
-#include "sprite/npc/world_merlee.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/Archeologist.h"
+#include "sprite/npc/ChuckQuizmo.h"
+#include "sprite/npc/DisguisedMoustafa.h"
+#include "sprite/npc/Dryite.h"
+#include "sprite/npc/Mouser.h"
+#include "sprite/npc/Moustafa.h"
+#include "sprite/npc/Toad.h"
+#include "sprite/npc/WorldMerlee.h"
+#include "sprite/npc/WorldParakarry.h"
 
 #define CHUCK_QUIZMO_NPC_ID 10
 
@@ -680,13 +680,13 @@ EvtScript N(80247AA0) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(SetNpcRotation, 4, 0, 0, 0)
-        EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_A)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Gather)
         EVT_WAIT(200)
-        EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_9)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Bow)
         EVT_WAIT(40)
-        EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_A)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Gather)
         EVT_WAIT(75)
-        EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_B)
+        EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Release)
     EVT_END_THREAD
     EVT_WAIT(60)
     EVT_CALL(PlaySoundAtNpc, 4, 0x202, 0)
@@ -824,7 +824,7 @@ EvtScript N(802482F8) = {
         EVT_ADD(LVar0, 1)
     EVT_END_IF
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00DC)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
         EVT_SET(LVar0, 39)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
@@ -835,32 +835,32 @@ EvtScript N(802482F8) = {
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00D6)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D6)
     EVT_CALL(ShowChoice, MSG_Choice_0011)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00D7)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00D8)
+    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D8)
     EVT_CALL(ShowCoinCounter, 1)
     EVT_CALL(ShowChoice, MSG_Choice_0018)
     EVT_CALL(ShowCoinCounter, 0)
     EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00D7)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(func_80241394_96A554), LVar0, LVar1)
     EVT_IF_NE(LVar1, 0)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00D9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D9)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00DA)
+    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
     EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
@@ -873,9 +873,9 @@ EvtScript N(802482F8) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_world_merlee_Palette_00_Anim_4)
+    EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Idle)
     EVT_CALL(PlayerMoveTo, -100, -370, 8)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_merlee_Palette_00_Anim_7, NPC_ANIM_world_merlee_Palette_00_Anim_4, 0, MSG_CH2_00DB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DB)
     EVT_EXEC(N(80243AF0))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(func_802D2C14, 0)
@@ -1248,14 +1248,14 @@ EvtScript N(interact_8024ADE4) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_SET(LVar8, LVar0)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVar8)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar8)
     EVT_CALL(ShowChoice, MSG_Choice_0006)
     EVT_WAIT(3)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVar9)
+        EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar9)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVarA)
+    EVT_CALL(ContinueSpeech, -1, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
@@ -1295,7 +1295,7 @@ EvtScript N(interact_8024ADE4) = {
     EVT_EXEC_WAIT(N(8024D700))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, LVarB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
     EVT_END
@@ -1327,7 +1327,7 @@ EvtScript N(8024B20C) = {
             EVT_BITWISE_OR_CONST(LVar0, 0x50000)
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_EXEC_GET_TID(N(8024B18C), LVarA)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_2)
+            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Walk)
             EVT_CALL(GetAngleBetweenNPCs, LVar9, -4, LVarB)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
             EVT_CALL(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
@@ -1348,7 +1348,7 @@ EvtScript N(8024B20C) = {
             EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
             EVT_WAIT(5)
             EVT_CALL(NpcJump1, NPC_PARTNER, LVar3, LVar4, LVar5, 20)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_1)
+            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
             EVT_WAIT(5)
             EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), FALSE)
@@ -1397,13 +1397,13 @@ EvtScript N(8024B5A0) = {
                 EVT_CASE_EQ(-1)
                     EVT_CALL(DisablePartnerAI, 0)
                     EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 5, LVar8)
+                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar8)
                     EVT_CALL(EnablePartnerAI)
                     EVT_SET(LVarC, 1)
                 EVT_CASE_DEFAULT
                     EVT_CALL(DisablePartnerAI, 0)
                     EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 5, LVar9)
+                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar9)
                     EVT_IF_NE(LVarA, 0)
                         EVT_CALL(SpeakToPlayer, LVar2, LVar3, LVar4, 0, LVarA)
                     EVT_END_IF
@@ -1438,22 +1438,22 @@ EvtScript N(interact_8024B8F0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MSG_CH2_00B2)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B2)
             EVT_ELSE
                 EVT_SWITCH(AreaByte(3))
                     EVT_CASE_EQ(0)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MSG_CH2_00AF)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00AF)
                         EVT_SET(AreaByte(3), 1)
                     EVT_CASE_EQ(1)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MSG_CH2_00B0)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B0)
                         EVT_SET(AreaByte(3), 2)
                     EVT_CASE_EQ(2)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MSG_CH2_00B1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B1)
                         EVT_SET(AreaByte(3), 1)
                 EVT_END_SWITCH
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MSG_CH2_00B3)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B3)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1472,14 +1472,14 @@ EvtScript N(interact_8024BA9C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutDesert, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0091)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0091)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0092)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0092)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0093)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0093)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MSG_CH2_0094)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0094)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(8024B8A0))
     EVT_IF_NE(LVarC, 0)
@@ -1499,16 +1499,16 @@ EvtScript N(interact_8024BBD0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(3), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_00A1)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A1)
                 EVT_SET(AreaFlag(3), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_00A2)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A2)
                 EVT_SET(AreaFlag(3), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_00A3)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A3)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_00A4)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A4)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1521,7 +1521,7 @@ EvtScript N(init_8024BCD4) = {
 };
 
 EvtScript N(interact_8024BCF8) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MSG_CH2_00A0)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A0)
     EVT_RETURN
     EVT_END
 };
@@ -1536,26 +1536,26 @@ EvtScript N(interact_8024BD4C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00A5)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A5)
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00A6)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A6)
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00A7)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A7)
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00A8)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A8)
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AreaFlag(4), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00A9)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A9)
                 EVT_SET(AreaFlag(4), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00AA)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AA)
                 EVT_SET(AreaFlag(4), 0)
             EVT_END_IF
     EVT_END_SWITCH
@@ -1573,16 +1573,16 @@ EvtScript N(interact_8024BF34) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(AreaFlag(5), 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00AB)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AB)
                 EVT_SET(AreaFlag(5), 1)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00AC)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AC)
                 EVT_SET(AreaFlag(5), 0)
             EVT_END_IF
         EVT_CASE_LT(39)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00AD)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AD)
         EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MSG_CH2_00AE)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1636,10 +1636,10 @@ EvtScript N(8024C248) = {
     EVT_CALL(SetNpcYaw, 5, 270)
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_5)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_GrabCloak)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_6)
-    EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_moustafa_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_ThrownCloak)
+    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Toss)
     EVT_CALL(SetNpcPos, 5, -335, 163, -260)
     EVT_EXEC(N(80243B9C))
     EVT_CALL(MakeLerp, 0, 80, 30, 5)
@@ -1656,7 +1656,7 @@ EvtScript N(8024C248) = {
     EVT_END_IF
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(SetNpcPos, 2, 0, -1000, -250)
-    EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_moustafa_Palette_00_Anim_1)
+    EVT_CALL(SetNpcAnimation, 5, ANIM_Moustafa_Idle)
     EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), FALSE)
     EVT_WAIT(30)
@@ -1679,21 +1679,21 @@ EvtScript N(idle_8024C450) = {
 
 EvtScript N(interact_8024C4EC) = {
     EVT_IF_EQ(GF_DRO02_Moustafa_UnusedDialogOverride, 1)
-        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CF)
+        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CF)
         EVT_RETURN
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-64)
             EVT_SET(LVarB, 0)
-            EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B4)
+            EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B4)
             EVT_LABEL(0)
             EVT_CALL(ShowChoice, MSG_Choice_0019)
             EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B6)
+                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B6)
                 EVT_EXEC(N(8024C1F8))
                 EVT_RETURN
             EVT_ELSE
-                EVT_CALL(EndSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0)
+                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0)
             EVT_END_IF
             EVT_LABEL(1)
             EVT_SET(LVar0, 0)
@@ -1701,11 +1701,11 @@ EvtScript N(interact_8024C4EC) = {
             EVT_EXEC_WAIT(N(80248A50))
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B8)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B8)
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
                 EVT_CASE_EQ(-1)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B7)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B7)
                     EVT_EXEC(N(8024C1F8))
                     EVT_RETURN
             EVT_END_SWITCH
@@ -1714,55 +1714,55 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_IF_EQ(LVarA, 156)
                     EVT_SET(GB_DRO02_SheekLemonGiftCount, 1)
                     EVT_SET(GB_DRO02_SheekGiftCount, 10)
-                    EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BB)
+                    EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BB)
                     EVT_CALL(ShowChoice, MSG_Choice_001C)
                 EVT_ELSE
                     EVT_ADD(GB_DRO02_SheekGiftCount, 1)
                     EVT_IF_LE(GB_DRO02_SheekGiftCount, 2)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B5)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B5)
                         EVT_GOTO(0)
                     EVT_END_IF
                     EVT_IF_EQ(GB_DRO02_SheekGiftCount, 3)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B9)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B9)
                         EVT_CALL(ShowChoice, MSG_Choice_001B)
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BA)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BA)
                         EVT_CALL(ShowChoice, MSG_Choice_001B)
                         EVT_SET(GB_DRO02_SheekGiftCount, 10)
                     EVT_END_IF
                 EVT_END_IF
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BA)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BA)
                 EVT_CALL(ShowChoice, MSG_Choice_001C)
             EVT_END_IF
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BC)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BC)
                 EVT_CASE_EQ(1)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BD)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BD)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutDesert, 1)
                 EVT_CASE_EQ(2)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BE)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BE)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutRuins, 1)
                 EVT_CASE_EQ(3)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00BF)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00BF)
                 EVT_CASE_EQ(4)
                     EVT_EXEC_WAIT(N(8024C0B8))
-                    EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C1)
+                    EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C1)
                     EVT_SET(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
                     EVT_SET(LVarB, 1)
             EVT_END_SWITCH
             EVT_SET(GF_DRO02_Sheek_SpokeTo, 1)
-            EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C0)
+            EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C0)
             EVT_CALL(ShowChoice, MSG_Choice_001A)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(EndSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0)
+                EVT_CALL(EndSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0)
                 EVT_GOTO(1)
             EVT_ELSE
-                EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00B6)
+                EVT_CALL(ContinueSpeech, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B6)
             EVT_END_IF
             EVT_IF_EQ(LVarB, 1)
                 EVT_IF_EQ(MapFlag(0), 0)
@@ -1771,7 +1771,7 @@ EvtScript N(interact_8024C4EC) = {
                         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                         EVT_CALL(AwaitPlayerLeave, LVar0, LVar2, 50)
                         EVT_CALL(DisablePlayerInput, TRUE)
-                        EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C2)
+                        EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C2)
                         EVT_CALL(DisablePlayerInput, FALSE)
                         EVT_SET(MapFlag(0), 0)
                     EVT_END_THREAD
@@ -1792,54 +1792,54 @@ EvtScript N(interact_8024C4EC) = {
             EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(FadeOutMusic, 0, 500)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C3)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C3)
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C4)
+                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C4)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C5)
+                EVT_CALL(SpeakToPlayer, 2, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C5)
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
-                EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C6)
+                EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C6)
             EVT_END_IF
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -337, 140, -200, 20)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C7)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C8)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C7)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C8)
             EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -335, 163, -260, 20)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00C9)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C9)
             EVT_SET(LVar0, 18)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddKeyItem, ITEM_PULSE_STONE)
             EVT_SET(GB_StoryProgress, -63)
-            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CA)
+            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CA)
             EVT_KILL_THREAD(LVarA)
             EVT_EXEC(N(80243AF0))
         EVT_CASE_GE(-63)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(-62)
-                    EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CB)
+                    EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CB)
                 EVT_CASE_GE(-62)
                     EVT_IF_GE(GB_StoryProgress, -56)
                         EVT_IF_EQ(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 0)
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CD)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CD)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                             EVT_WAIT(15)
                             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
                             EVT_WAIT(30)
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CE)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CE)
                             EVT_SET(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 1)
                         EVT_ELSE
-                            EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00D0)
+                            EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00D0)
                         EVT_END_IF
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MSG_CH2_00CC)
+                        EVT_CALL(SpeakToPlayer, 5, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00CC)
                     EVT_END_IF
             EVT_END_SWITCH
     EVT_END_SWITCH
@@ -1855,7 +1855,7 @@ EvtScript N(init_8024D04C) = {
             EVT_CALL(SetNpcPos, NPC_SELF, 200, 0, -15)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_200000)), TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_disguised_moustafa_Palette_00_Anim_5)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_DisguisedMoustafa_GrabCloak)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024C450)))
@@ -1874,8 +1874,8 @@ EvtScript N(init_8024D130) = {
 EvtScript N(idle_8024D154) = {
     EVT_CALL(InterpNpcYaw, 2, 270, 0)
     EVT_LABEL(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_7)
-    EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Gossip)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Idle)
     EVT_LOOP(50)
         EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -1883,8 +1883,8 @@ EvtScript N(idle_8024D154) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_1)
-    EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Idle)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_TalkAlt)
     EVT_LOOP(50)
         EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -1894,10 +1894,10 @@ EvtScript N(idle_8024D154) = {
     EVT_END_LOOP
     EVT_GOTO(10)
     EVT_LABEL(20)
-    EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_4)
+    EVT_CALL(SetNpcAnimation, 2, ANIM_DisguisedMoustafa_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_4)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 150, 18, 20)
     EVT_CALL(EnableNpcBlur, -1, 1)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x174, 0)
@@ -2001,22 +2001,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         },
 	    .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_2,
-            NPC_ANIM_archeologist_Palette_00_Anim_3,
-            NPC_ANIM_archeologist_Palette_00_Anim_3,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
-            NPC_ANIM_archeologist_Palette_00_Anim_1,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Walk,
+            ANIM_Archeologist_Run,
+            ANIM_Archeologist_Run,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
+            ANIM_Archeologist_Idle,
         },
         .tattle = MSG_NpcTattle_Archeologist,
     },
@@ -2034,22 +2034,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         },
 	    .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_2,
-            NPC_ANIM_dryite_Palette_02_Anim_3,
-            NPC_ANIM_dryite_Palette_02_Anim_3,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_0,
-            NPC_ANIM_dryite_Palette_02_Anim_0,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
-            NPC_ANIM_dryite_Palette_02_Anim_1,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Walk,
+            ANIM_Dryite_Blue_Run,
+            ANIM_Dryite_Blue_Run,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Still,
+            ANIM_Dryite_Blue_Still,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
+            ANIM_Dryite_Blue_Idle,
         },
         .tattle = MSG_NpcTattle_DRO_DryiteE,
     },
@@ -2066,22 +2066,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_disguised_moustafa_Palette_00_Anim_1,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
+            ANIM_DisguisedMoustafa_Idle,
         },
         .tattle = MSG_NpcTattle_Sheek,
     },
@@ -2098,22 +2098,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_toad_Palette_00_Anim_1,
-            NPC_ANIM_toad_Palette_00_Anim_2,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_1,
-            NPC_ANIM_toad_Palette_00_Anim_1,
-            NPC_ANIM_toad_Palette_00_Anim_6,
-            NPC_ANIM_toad_Palette_00_Anim_6,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
-            NPC_ANIM_toad_Palette_00_Anim_3,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Walk,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Idle,
+            ANIM_Toad_Red_Disappointed,
+            ANIM_Toad_Red_Disappointed,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
+            ANIM_Toad_Red_Run,
         },
         .tattle = MSG_NpcTattle_DRO_ToadHouseToad,
     },
@@ -2130,22 +2130,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_5,
-            NPC_ANIM_world_merlee_Palette_00_Anim_6,
-            NPC_ANIM_world_merlee_Palette_00_Anim_6,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
-            NPC_ANIM_world_merlee_Palette_00_Anim_4,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Walk,
+            ANIM_WorldMerlee_Run,
+            ANIM_WorldMerlee_Run,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
+            ANIM_WorldMerlee_Idle,
         },
         .tattle = MSG_NpcTattle_Merlee,
     },
@@ -2162,22 +2162,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_4,
-            NPC_ANIM_moustafa_Palette_00_Anim_4,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
-            NPC_ANIM_moustafa_Palette_00_Anim_1,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Run,
+            ANIM_Moustafa_Run,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
+            ANIM_Moustafa_Idle,
         },
         .tattle = MSG_NpcTattle_Moustafa,
     },
@@ -2194,22 +2194,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_2,
-            NPC_ANIM_dryite_Palette_00_Anim_3,
-            NPC_ANIM_dryite_Palette_00_Anim_3,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_0,
-            NPC_ANIM_dryite_Palette_00_Anim_0,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Walk,
+            ANIM_Dryite_Green_Run,
+            ANIM_Dryite_Green_Run,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Still,
+            ANIM_Dryite_Green_Still,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
         },
         .tattle = MSG_NpcTattle_DRO_DryiteF,
     },
@@ -2226,22 +2226,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_2,
-            NPC_ANIM_dryite_Palette_00_Anim_3,
-            NPC_ANIM_dryite_Palette_00_Anim_3,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_0,
-            NPC_ANIM_dryite_Palette_00_Anim_0,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
-            NPC_ANIM_dryite_Palette_00_Anim_1,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Walk,
+            ANIM_Dryite_Green_Run,
+            ANIM_Dryite_Green_Run,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Still,
+            ANIM_Dryite_Green_Still,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
+            ANIM_Dryite_Green_Idle,
         },
         .tattle = MSG_NpcTattle_DRO_VisitedShootingStarSummit,
     },
@@ -2258,22 +2258,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
         },
         .tattle = MSG_NpcTattle_DRO_CrushingOnMerlee,
     },
@@ -2290,22 +2290,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_4,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
-            NPC_ANIM_mouser_Palette_00_Anim_1,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Run,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
+            ANIM_Mouser_Blue_Idle,
         },
         .tattle = MSG_NpcTattle_DRO_TellsTales,
     },
@@ -2322,22 +2322,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_4,
-            NPC_ANIM_mouser_Palette_01_Anim_4,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
-            NPC_ANIM_mouser_Palette_01_Anim_1,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Run,
+            ANIM_Mouser_Purple_Run,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
+            ANIM_Mouser_Purple_Idle,
         },
     },
     {
@@ -2354,22 +2354,22 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
             .flowerDrops = NO_DROPS,
         },
 	    .animations = {
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_1,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_2,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_1,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_1,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_0,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_0,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
-            NPC_ANIM_chuck_quizmo_Palette_00_Anim_3,
+            ANIM_ChuckQuizmo_Idle,
+            ANIM_ChuckQuizmo_Walk,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Idle,
+            ANIM_ChuckQuizmo_Idle,
+            ANIM_ChuckQuizmo_Still,
+            ANIM_ChuckQuizmo_Still,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
+            ANIM_ChuckQuizmo_Run,
         },
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },

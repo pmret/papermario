@@ -3,7 +3,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
-#include "sprite/npc/battle_goombario.h"
+#include "sprite/npc/BattleGoombario.h"
 
 #define NAMESPACE battle_partner_goombario
 
@@ -310,13 +310,13 @@ ApiStatus N(func_80239190_6F2270)(Evt* script, s32 isInitialCall) {
 }
 
 s32 N(idleAnimations_802391B0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_battle_goombario_default_walk,
-    STATUS_STONE,     NPC_ANIM_battle_goombario_default_still,
-    STATUS_SLEEP,     NPC_ANIM_battle_goombario_default_sleep,
-    STATUS_POISON,    NPC_ANIM_battle_goombario_default_still,
-    STATUS_STOP,      NPC_ANIM_battle_goombario_default_still,
-    STATUS_DAZE,      NPC_ANIM_battle_goombario_default_daze,
-    STATUS_TURN_DONE, NPC_ANIM_battle_goombario_default_still,
+    STATUS_NORMAL,    ANIM_BattleGoombario_Walk,
+    STATUS_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_SLEEP,     ANIM_BattleGoombario_CloseEyes,
+    STATUS_POISON,    ANIM_BattleGoombario_Still,
+    STATUS_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_DAZE,      ANIM_BattleGoombario_Injured,
+    STATUS_TURN_DONE, ANIM_BattleGoombario_Still,
     STATUS_END,
 };
 
@@ -421,7 +421,7 @@ EvtScript N(handleEvent_80239360) = {
             EVT_CALL(PlaySoundAtActor, 256, 8332)
             EVT_SET_CONST(LVar0, 0x1)
             EVT_SET_CONST(LVar1, 0x9000A)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(42)
             EVT_SET_CONST(LVar1, 0x9000A)
@@ -455,13 +455,13 @@ EvtScript N(handleEvent_80239360) = {
             EVT_SET_CONST(LVar1, 0x90001)
             EVT_SET_CONST(LVar2, 0x90003)
             EVT_SET(LVar3, 0)
-            EVT_EXEC_WAIT(D_80295EC4)
+            EVT_EXEC_WAIT(DoPartnerRecover)
         EVT_CASE_OR_EQ(24)
         EVT_CASE_OR_EQ(26)
             EVT_CALL(PlaySoundAtActor, 256, 8332)
             EVT_SET_CONST(LVar0, 0x1)
             EVT_SET_CONST(LVar1, 0x9000E)
-            EVT_EXEC_WAIT(D_80297814)
+            EVT_EXEC_WAIT(DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT

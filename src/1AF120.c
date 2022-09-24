@@ -352,7 +352,7 @@ EvtScript D_80295AC0 = {
     EVT_END
 };
 
-EvtScript D_80295EC4 = {
+EvtScript DoPartnerRecover = {
     EVT_SET(LVar6, LVar3)
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.8))
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar7, LVar8, LVar9)
@@ -734,7 +734,7 @@ EvtScript D_802977BC = {
     EVT_END
 };
 
-EvtScript D_80297814 = {
+EvtScript DoPartnerBlock = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(AddActorPos, -127, -2, 0, 0)

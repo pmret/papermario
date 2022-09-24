@@ -2,9 +2,9 @@
 #include "message_ids.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/sentinel.h"
-#include "sprite/npc/world_clubba.h"
-#include "sprite/npc/world_tubba.h"
+#include "sprite/npc/Sentinel.h"
+#include "sprite/npc/WorldClubba.h"
+#include "sprite/npc/WorldTubba.h"
 
 enum {
     NPC_WORLD_CLUBBA7,
@@ -188,20 +188,20 @@ EvtScript N(802441D4) = {
 };
 
 s32 N(extraAnimationList_80244290)[] = {
-    NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    NPC_ANIM_world_clubba_Palette_00_Anim_2,
-    NPC_ANIM_world_clubba_Palette_00_Anim_3,
-    NPC_ANIM_world_clubba_Palette_00_Anim_4,
-    NPC_ANIM_world_clubba_Palette_00_Anim_C,
-    NPC_ANIM_world_clubba_Palette_00_Anim_7,
-    NPC_ANIM_world_clubba_Palette_00_Anim_8,
-    NPC_ANIM_world_clubba_Palette_00_Anim_11,
-    NPC_ANIM_world_clubba_Palette_00_Anim_12,
+    ANIM_WorldClubba_Anim00,
+    ANIM_WorldClubba_Anim02,
+    ANIM_WorldClubba_Anim03,
+    ANIM_WorldClubba_Anim04,
+    ANIM_WorldClubba_Anim0C,
+    ANIM_WorldClubba_Anim07,
+    ANIM_WorldClubba_Anim08,
+    ANIM_WorldClubba_Anim11,
+    ANIM_WorldClubba_Anim12,
     ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_802442B8)[] = {
-    NPC_ANIM_world_clubba_Palette_00_Anim_0,
+    ANIM_WorldClubba_Anim00,
     ANIM_LIST_END,
 };
 
@@ -315,7 +315,7 @@ EvtScript N(npcAI_802444E4) = {
     EVT_ADD(LVar2, 2)
     EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(func_80045838, -1, 759, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim08)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
@@ -411,7 +411,7 @@ EvtScript N(idle_80244A54) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, 9, NPC_ANIM_world_tubba_Palette_00_Anim_A)
+    EVT_CALL(SetNpcAnimation, 9, ANIM_WorldTubba_Anim0A)
     EVT_CALL(SetNpcPos, NPC_SELF, -665, 210, 180)
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_CALL(NpcMoveTo, NPC_SELF, -530, 180, 30)
@@ -530,22 +530,22 @@ StaticNpc N(npcGroup_802450A0) = {
     },
 	.territory = { .temp = { 10, -400, 210, 80, -100, 210, 80, 100, 210, 80, 400, 210, 80, 820, 100, 80, 820, 100, 260, 400, 0, 260, 100, 0, 200, -100, 0, 175, -450, 0, 175, -32767, 150, 0, 175, 1450, 200, 1 }},
     .animations = {
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_A,
-        NPC_ANIM_world_tubba_Palette_00_Anim_D,
-        NPC_ANIM_world_tubba_Palette_00_Anim_D,
-        NPC_ANIM_world_tubba_Palette_00_Anim_19,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
-        NPC_ANIM_world_tubba_Palette_00_Anim_7,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim0A,
+        ANIM_WorldTubba_Anim0D,
+        ANIM_WorldTubba_Anim0D,
+        ANIM_WorldTubba_Anim19,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
+        ANIM_WorldTubba_Anim07,
     },
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -570,22 +570,22 @@ StaticNpc N(npcGroup_80245290)[] = {
         },
 	.territory = { .temp = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 }},
         .animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
@@ -602,22 +602,22 @@ StaticNpc N(npcGroup_80245290)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .extraAnimations = N(extraAnimationList_802442B8),
     },
@@ -643,22 +643,22 @@ StaticNpc N(npcGroup_80245670)[] = {
         },
 	.territory = { .temp = { 220, 0, 155, 30, 0, -32767, 0, 220, 0, 155, 250, 0, 0, 1 }},
         .animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
@@ -675,22 +675,22 @@ StaticNpc N(npcGroup_80245670)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .extraAnimations = N(extraAnimationList_802442B8),
     },
@@ -716,22 +716,22 @@ StaticNpc N(npcGroup_80245A50)[] = {
         },
 	.territory = { .temp = { 825, 100, 200, 25, 0, -32767, 0, 825, 100, 200, 150, 0, 0, 1 }},
         .animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
@@ -748,22 +748,22 @@ StaticNpc N(npcGroup_80245A50)[] = {
             .flowerDrops = NO_DROPS,
         },
 	.animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .extraAnimations = N(extraAnimationList_802442B8),
     },
@@ -782,22 +782,22 @@ StaticNpc N(npcGroup_80245E30) = {
     },
 	.territory = { .temp = { 75, 310, 85, 30, 0, -32767, 0, 75, 0, 85, 250, 55, 1, 1 }},
     .animations = {
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_2,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_5,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_8,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim02,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim05,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim08,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
     },
 };
 
@@ -814,42 +814,42 @@ StaticNpc N(npcGroup_80246020) = {
     },
 	.territory = { .temp = { -451, 310, 81, 30, 0, -32767, 0, -310, 0, 175, 250, 145, 1, 1 }},
     .animations = {
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_2,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_5,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_8,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim02,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim05,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim08,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
     },
 };
 
 EvtScript N(idle_80246210) = {
     EVT_LABEL(0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
     EVT_WAIT(30)
     EVT_LOOP(15)
         EVT_CALL(N(func_80243C50_C43A00))
         EVT_WAIT(60)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_C)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
     EVT_WAIT(30)
     EVT_LOOP(5)
         EVT_CALL(N(func_80243C50_C43A00))
         EVT_WAIT(60)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_C)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
     EVT_WAIT(15)
     EVT_GOTO(0)
     EVT_RETURN
@@ -857,10 +857,10 @@ EvtScript N(idle_80246210) = {
 };
 
 EvtScript N(interact_80246310) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_8)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, 0)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
     EVT_WAIT(20)
     EVT_CALL(GetNpcYaw, -1, LVar0)
     EVT_ADD(LVar0, 180)
@@ -875,18 +875,18 @@ EvtScript N(interact_80246310) = {
     EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
     EVT_WAIT(15)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_5, NPC_ANIM_world_clubba_Palette_00_Anim_2, 0, MSG_CH3_00F2)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH3_00F2)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_6)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim06)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_802464C4) = {
     EVT_CALL(SetNpcCollisionSize, -1, 36, 30)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80246310)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80246210)))
     EVT_RETURN
@@ -907,22 +907,22 @@ StaticNpc N(npcGroup_80246528) = {
     },
 	.territory = { .temp = { 0, 0, 0, 0, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_3,
-        NPC_ANIM_world_clubba_Palette_00_Anim_4,
-        NPC_ANIM_world_clubba_Palette_00_Anim_4,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_C,
-        NPC_ANIM_world_clubba_Palette_00_Anim_C,
-        NPC_ANIM_world_clubba_Palette_00_Anim_11,
-        NPC_ANIM_world_clubba_Palette_00_Anim_12,
-        NPC_ANIM_world_clubba_Palette_00_Anim_7,
-        NPC_ANIM_world_clubba_Palette_00_Anim_8,
-        NPC_ANIM_world_clubba_Palette_00_Anim_1,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim03,
+        ANIM_WorldClubba_Anim04,
+        ANIM_WorldClubba_Anim04,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim0C,
+        ANIM_WorldClubba_Anim0C,
+        ANIM_WorldClubba_Anim11,
+        ANIM_WorldClubba_Anim12,
+        ANIM_WorldClubba_Anim07,
+        ANIM_WorldClubba_Anim08,
+        ANIM_WorldClubba_Anim01,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
     },
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     .tattle = MSG_NpcTattle_LastClubba,
@@ -960,22 +960,22 @@ StaticNpc N(npcGroup_80246768) = {
     },
 	.territory = { .temp = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_3,
-        NPC_ANIM_world_clubba_Palette_00_Anim_4,
-        NPC_ANIM_world_clubba_Palette_00_Anim_4,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_C,
-        NPC_ANIM_world_clubba_Palette_00_Anim_C,
-        NPC_ANIM_world_clubba_Palette_00_Anim_11,
-        NPC_ANIM_world_clubba_Palette_00_Anim_12,
-        NPC_ANIM_world_clubba_Palette_00_Anim_7,
-        NPC_ANIM_world_clubba_Palette_00_Anim_8,
-        NPC_ANIM_world_clubba_Palette_00_Anim_1,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
-        NPC_ANIM_world_clubba_Palette_00_Anim_2,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim03,
+        ANIM_WorldClubba_Anim04,
+        ANIM_WorldClubba_Anim04,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim0C,
+        ANIM_WorldClubba_Anim0C,
+        ANIM_WorldClubba_Anim11,
+        ANIM_WorldClubba_Anim12,
+        ANIM_WorldClubba_Anim07,
+        ANIM_WorldClubba_Anim08,
+        ANIM_WorldClubba_Anim01,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim02,
     },
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     .extraAnimations = N(extraAnimationList_80244290),

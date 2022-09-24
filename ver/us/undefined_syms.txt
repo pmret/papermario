@@ -575,6 +575,7 @@ D_8024A290 = 0x8024A290;
 D_8024A2A0 = 0x8024A2A0;
 D_8024A2C4 = 0x8024A2C4;
 end_01_CreditsMessageBuffers = 0x8024A2D0;
+sam_01_Quizmo_Worker = 0x8024DEF8;
 sam_02_Quizmo_Worker = 0x8024B990;
 sam_02_Quizmo_AudienceEffect = 0x8024B9B4;
 sam_02_Quizmo_VannaTEffect = 0x8024B9B8;

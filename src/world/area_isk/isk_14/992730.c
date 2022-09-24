@@ -1,6 +1,6 @@
 #include "isk_14.h"
 #include "sprite.h"
-#include "sprite/npc/stone_chomp.h"
+#include "sprite/npc/StoneChomp.h"
 
 static char* N(exit_str_0) = "isk_10";
 static char* N(exit_str_1) = "";

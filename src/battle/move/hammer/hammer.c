@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/world_bombette.h"
+#include "sprite/npc/WorldBombette.h"
 #include "battle/action_cmd/hammer.h"
 
 #define NAMESPACE battle_move_hammer
@@ -726,8 +726,8 @@ EvtScript D_802A369C_00736C3C = {
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
             EVT_SET(LVar9, 1)
-            EVT_SET_CONST(LVarA, NPC_ANIM_world_bombette_normal_celebrate)
-            EVT_SET_CONST(LVarB, NPC_ANIM_world_bombette_normal_anim_11)
+            EVT_SET_CONST(LVarA, ANIM_WorldBombette_Celebrate)
+            EVT_SET_CONST(LVarB, ANIM_WorldBombette_Aftermath)
             EVT_SET_CONST(LVarC, ANIM_Mario_30012)
         EVT_CASE_EQ(1)
             EVT_SET(LVar9, 2)

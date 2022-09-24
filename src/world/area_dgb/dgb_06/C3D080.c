@@ -1,6 +1,6 @@
 #include "dgb_06.h"
 #include "entity.h"
-#include "sprite/npc/boo.h"
+#include "sprite/npc/Boo.h"
 #include "message_ids.h"
 
 enum {
@@ -111,10 +111,10 @@ NpcSettings N(npcSettings_80240840) = {
 
 EvtScript N(interact_8024086C) = {
     EVT_IF_EQ(AreaFlag(4), 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F0)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00F0)
         EVT_SET(AreaFlag(4), 1)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MSG_CH3_00F1)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00F1)
         EVT_SET(AreaFlag(4), 0)
     EVT_END_IF
     EVT_RETURN
@@ -143,22 +143,22 @@ StaticNpc N(npcGroup_80240954) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_2,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_1,
-        NPC_ANIM_boo_Palette_01_Anim_0,
-        NPC_ANIM_boo_Palette_01_Anim_0,
-        NPC_ANIM_boo_Palette_01_Anim_A,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
-        NPC_ANIM_boo_Palette_01_Anim_3,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Walk,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Idle,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Still,
+        ANIM_Boo_Tan_Confused,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
+        ANIM_Boo_Tan_Run,
     },
     .tattle = MSG_NpcTattle_HidingBoo,
 };
