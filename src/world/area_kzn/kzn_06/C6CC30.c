@@ -25,3 +25,4 @@ s32 func_80240310_C6CC30(Entity* block, Evt* source) {
 #else
 INCLUDE_ASM(s32, "world/area_kzn/kzn_06/C6CC30", func_80240310_C6CC30);
 #endif
+
