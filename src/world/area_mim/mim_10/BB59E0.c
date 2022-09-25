@@ -5,7 +5,10 @@ static char* N(exit_str_1) = "mim_01";
 static char* N(exit_str_2) = "kmr_22";
 static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240000_BB59E0);
+s32 func_80240000_BB59E0(void) {
+    return !(gPlayerStatus.position.x < 100.0f) ? 2 : 0;
+}
+
 
 INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240030_BB5A10);
 
