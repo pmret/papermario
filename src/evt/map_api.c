@@ -2,11 +2,6 @@
 #include "model.h"
 #include "evt.h"
 
-typedef struct LavaReset {
-    /* 0x00 */ s32 colliderID;
-    /* 0x04 */ Vec3f pos;
-} LavaReset; // size = 0x10;
-
 extern LavaReset* gLavaResetList;
 extern s32 LastSafeFloor;
 

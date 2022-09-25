@@ -1,5 +1,7 @@
 #include "kzn_06.h"
 
+extern f32 D_80241120_C6DA40[27];
+
 // push block gravity
 #ifdef NON_NATCHING
 extern f32 D_80241120_C6DA40[27];

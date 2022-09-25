@@ -1692,6 +1692,11 @@ typedef struct PlayerPathElement {
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
 
+typedef struct LavaReset {
+    /* 0x00 */ s32 colliderID;
+    /* 0x04 */ Vec3f pos;
+} LavaReset; // size = 0x10;
+
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
     /* 0x04 */ Vec3f pos;

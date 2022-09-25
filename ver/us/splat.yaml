@@ -10229,8 +10229,7 @@ segments:
     - [0xC6C920, c]
     - [0xC6CC30, c]
     - [0xC6CD10, c]
-    - [0xC6D390, data]
-    - [0xC6E300]
+    - [0xC6D390]
   - name: kzn_07
     dir: world/area_kzn/kzn_07
     type: code
