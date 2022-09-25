@@ -27,6 +27,52 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
+EvtScript N(EVS_StartTexPanner3) = {
+    EVT_SET_GROUP(EVT_GROUP_00)
+    EVT_CALL(SetTexPanner, LVar0, 3)
+    EVT_THREAD
+        EVT_SET(LVar0, 3)
+        EVT_SET(LVar1, -200)
+        EVT_SET(LVar2, 0)
+        EVT_SET(LVar3, 600)
+        EVT_SET(LVar4, -400)
+        EVT_SET(LVar5, 1)
+        EVT_SET(LVar6, 0)
+        EVT_SET(LVar7, 1)
+        EVT_SET(LVar8, 1)
+        EVT_SET(LVar9, 0)
+        EVT_SET(LVarA, 0)
+        EVT_SET(LVarB, 0)
+        EVT_SET(LVarC, 0)
+        EVT_EXEC(N(EVS_UpdateTexturePan))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_StartTexPanner4) = {
+    EVT_SET_GROUP(EVT_GROUP_00)
+    EVT_CALL(SetTexPanner, LVar0, 4)
+    EVT_THREAD
+        EVT_SET(LVar0, 4)
+        EVT_SET(LVar1, 500)
+        EVT_SET(LVar2, 0)
+        EVT_SET(LVar3, 0)
+        EVT_SET(LVar4, -400)
+        EVT_SET(LVar5, 1)
+        EVT_SET(LVar6, 0)
+        EVT_SET(LVar7, 0)
+        EVT_SET(LVar8, 1)
+        EVT_SET(LVar9, 0)
+        EVT_SET(LVarA, 0)
+        EVT_SET(LVarB, 0)
+        EVT_SET(LVarC, 0)
+        EVT_EXEC(N(EVS_UpdateTexturePan))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
 EvtScript N(EVS_ExitWalk_jan_22) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_0, "jan_22",  jan_22_ENTRY_2);
 
 EvtScript N(EVS_ExitWalk_kzn_02) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
@@ -54,19 +100,19 @@ EvtScript N(EVS_Main) = {
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(ClearAmbientSounds, 250)
-    EVT_SET(LVar0, 21)
-    EVT_EXEC(N(D_8024040C_C59DDC))
+    EVT_SET(LVar0, MODEL_kem1)
+    EVT_EXEC(N(EVS_StartTexPanner3))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(PutridPiranhaNpcSettings) = {
+NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 30,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(UnusedNpcSettings) = {
+NpcSettings N(NpcSettings_Unused) = {
     .height = 23,
     .radius = 19,
     .level = 99,
@@ -117,7 +163,7 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
 
 StaticNpc N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(PutridPiranhaNpcSettings),
+    .settings = &N(NpcSettings_PutridPiranha),
     .pos = { 0.0f, -1000.0f, 0.0f },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_200000,
