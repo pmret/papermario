@@ -41,7 +41,7 @@ EvtScript N(EVS_StartTexPanner3) = {
         EVT_SET(LVarA, 0)
         EVT_SET(LVarB, 0)
         EVT_SET(LVarC, 0)
-        EVT_EXEC(EVT_PTR(N(EVS_UpdateTexturePan)))
+        EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -64,7 +64,7 @@ EvtScript N(EVS_StartTexPanner4) = {
         EVT_SET(LVarA, 0)
         EVT_SET(LVarB, 0)
         EVT_SET(LVarC, 0)
-        EVT_EXEC(EVT_PTR(N(EVS_UpdateTexturePan)))
+        EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -75,8 +75,8 @@ EvtScript N(EVS_ExitWalk_jan_22) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_0, "jan_22
 EvtScript N(EVS_ExitWalk_kzn_02) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_jan_22)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kzn_02)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_jan_22), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_02), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -92,13 +92,13 @@ EvtScript N(EVS_Main) = {
         EVT_SET(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
     EVT_END_IF
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
+    EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(EVT_PTR(N(EVS_StartTexPanner3)))
+    EVT_EXEC(N(EVS_StartTexPanner3))
     EVT_RETURN
     EVT_END
 };
