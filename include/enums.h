@@ -3950,6 +3950,25 @@ enum ModelFlags {
     MODEL_FLAGS_FLAG_8000               = 0x8000,
 };
 
+enum TexPanner {
+    TEX_PANNER_0    = 0x0,
+    TEX_PANNER_1    = 0x1,
+    TEX_PANNER_2    = 0x2,
+    TEX_PANNER_3    = 0x3,
+    TEX_PANNER_4    = 0x4,
+    TEX_PANNER_5    = 0x5,
+    TEX_PANNER_6    = 0x6,
+    TEX_PANNER_7    = 0x7,
+    TEX_PANNER_8    = 0x8,
+    TEX_PANNER_9    = 0x9,
+    TEX_PANNER_A    = 0xA,
+    TEX_PANNER_B    = 0xB,
+    TEX_PANNER_C    = 0xC,
+    TEX_PANNER_D    = 0xD,
+    TEX_PANNER_E    = 0xE,
+    TEX_PANNER_F    = 0xF
+};
+
 enum EnemyFlags {
     ENEMY_FLAGS_1                 = 0x00000001,
     ENEMY_FLAGS_2                 = 0x00000002,

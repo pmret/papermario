@@ -1,8 +1,5 @@
 #include "kzn_01.h"
-#include "mapfs/kzn_01_shape.h"
-#include "mapfs/kzn_01_hit.h"
 #include "sprite/npc/LargePiranha.h"
-#include "message_ids.h"
 #include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
@@ -29,9 +26,9 @@ MapSettings N(settings) = {
 
 EvtScript N(EVS_StartTexPanner3) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, 3)
+    EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_3)
     EVT_THREAD
-        EVT_SET(LVar0, 3)
+        EVT_SET(LVar0, TEX_PANNER_3)
         EVT_SET(LVar1, -200)
         EVT_SET(LVar2, 0)
         EVT_SET(LVar3, 600)
@@ -44,7 +41,7 @@ EvtScript N(EVS_StartTexPanner3) = {
         EVT_SET(LVarA, 0)
         EVT_SET(LVarB, 0)
         EVT_SET(LVarC, 0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
+        EVT_EXEC(EVT_PTR(N(EVS_UpdateTexturePan)))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -52,9 +49,9 @@ EvtScript N(EVS_StartTexPanner3) = {
 
 EvtScript N(EVS_StartTexPanner4) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, 4)
+    EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_4)
     EVT_THREAD
-        EVT_SET(LVar0, 4)
+        EVT_SET(LVar0, TEX_PANNER_4)
         EVT_SET(LVar1, 500)
         EVT_SET(LVar2, 0)
         EVT_SET(LVar3, 0)
@@ -67,7 +64,7 @@ EvtScript N(EVS_StartTexPanner4) = {
         EVT_SET(LVarA, 0)
         EVT_SET(LVarB, 0)
         EVT_SET(LVarC, 0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
+        EVT_EXEC(EVT_PTR(N(EVS_UpdateTexturePan)))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -78,8 +75,8 @@ EvtScript N(EVS_ExitWalk_jan_22) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_0, "jan_22
 EvtScript N(EVS_ExitWalk_kzn_02) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_jan_22), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_02), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_jan_22)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kzn_02)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -95,13 +92,13 @@ EvtScript N(EVS_Main) = {
         EVT_SET(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
     EVT_END_IF
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
-    EVT_SET(LVar0, N(EVS_BindExitTriggers))
+    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(N(EVS_StartTexPanner3))
+    EVT_EXEC(EVT_PTR(N(EVS_StartTexPanner3)))
     EVT_RETURN
     EVT_END
 };
@@ -171,7 +168,9 @@ StaticNpc N(NpcPutridPiranha) = {
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
-        .itemDrops = {{ ITEM_FIRE_FLOWER, 10, 0 }},
+        .itemDrops = {
+            { ITEM_FIRE_FLOWER, 10, 0 }
+        },
         .heartDrops  = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
         .minCoinBonus = 0,
