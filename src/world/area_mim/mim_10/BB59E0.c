@@ -13,7 +13,6 @@ ApiStatus func_80240000_BB59E0(Evt* script, s32 isInitialCall) {
     }
 }
 
-
 INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240030_BB5A10);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240080_BB5A60);
