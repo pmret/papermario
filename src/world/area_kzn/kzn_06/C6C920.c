@@ -33,8 +33,6 @@ EvtScript N(D_80240BD8_C6D4F8) = EXIT_WALK_SCRIPT(60,  kzn_06_ENTRY_2, "kzn_08",
 
 EvtScript N(D_80240C34_C6D554) = EXIT_WALK_SCRIPT(60,  kzn_06_ENTRY_1, "kzn_07",  kzn_07_ENTRY_0);
 
-static f32 N(exit_str_3)[] = { 0.0f };
-
 EvtScript N(D_80240C90_C6D5B0) = {
     EVT_BIND_TRIGGER(N(D_80240B7C_C6D49C), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
     EVT_BIND_TRIGGER(N(D_80240BD8_C6D4F8), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
@@ -260,3 +258,5 @@ EvtScript N(D_80241880_C6E1A0) = {
     EVT_RETURN
     EVT_END
 };
+
+static s32 N(exit_str_3) = 0;
