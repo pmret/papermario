@@ -10170,7 +10170,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC599D0, c]
-    - [0xC5A730]
+    - [0xC59CE0]
   - name: kzn_02
     dir: world/area_kzn/kzn_02
     type: code
@@ -10219,7 +10219,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC6C0D0, c]
-    - [0xC6C910]
+    - [0xC6C3E0]
   - name: kzn_06
     dir: world/area_kzn/kzn_06
     type: code
