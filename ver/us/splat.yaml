@@ -1,7 +1,7 @@
 name: Paper Mario (North America)
-basename: papermario
 sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0
 options:
+  basename: papermario
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10

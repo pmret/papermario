@@ -1,6 +1,6 @@
 name: Mario Story
-basename: papermario
 options:
+  basename: papermario
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
