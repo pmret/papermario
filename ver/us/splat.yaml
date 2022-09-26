@@ -10249,12 +10249,11 @@ segments:
     start: 0xC71480
     vram: 0x80240000
     subsegments:
-    - [0xC71480, c]
-    - [0xC71C10, c]
-    - [0xC71ED0, c]
-    - [0xC755A0, data]
-    - [0xC76030, data]
-    - [0xC76A50]
+    - [0xC71480, c, kzn_08_1_main]
+    - [0xC71C10, c, kzn_08_2_entity]
+    - [0xC71ED0, c, kzn_08_3_enemy]
+    - [0xC75360, c, kzn_08_4_extra]
+    - [0xC755A0]
   - name: kzn_09
     dir: world/area_kzn/kzn_09
     type: code

@@ -6,7 +6,7 @@
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(EVS_SetupLavaPuzzle);
-extern s32 kzn_06_push_block_handle_fall(Entity* block, Evt* source);
+extern s32 N(push_block_handle_fall)(Entity* block, Evt* source);
 extern API_FUNC(N(AdjustFog));
 extern API_FUNC(func_80240A44_C6D364);
 extern API_FUNC(N(LavaBlockageFunc1));

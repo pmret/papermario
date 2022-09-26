@@ -582,4 +582,17 @@
         EVT_END \
     }
 
+// alternate version of EVT_EXIT_WALK which includes a call to DisablePlayerInput
+#define EVT_EXIT_WALK_FIXED(walkDistance, exitIdx, map, entryIdx) \
+    { \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
+        EVT_CALL(DisablePlayerInput, TRUE) \
+        EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
+        EVT_EXEC(ExitWalk) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
+        EVT_WAIT(100) \
+        EVT_RETURN \
+        EVT_END \
+    }
+
 #endif

@@ -2,8 +2,16 @@
 /// @brief Mt Lavalava - Dizzy Stomp Room
 
 #include "common.h"
-#include "../kzn.h"
 #include "message_ids.h"
 #include "map.h"
+
+#include "../kzn.h"
+#include "mapfs/kzn_08_shape.h"
+#include "mapfs/kzn_08_hit.h"
+
+enum {
+	NPC_PutridPiranha_01        = 0,
+	NPC_PutridPiranha_02        = 1,
+};
 
 #define NAMESPACE kzn_08

@@ -1,15 +1,11 @@
 #include "kzn_08.h"
 
+extern API_FUNC(N(func_80243EE0_C75360));
+
 void get_model_fog_color_parameters(u8*, u8*, u8*, u8*, u8*, u8*, u8*, s32*, s32*);
 
-#include "world/common/enemy/FlyingAI.inc.c"
-
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
-
-#include "world/common/enemy/PiranhaPlantAI.inc.c"
-
 // modified DarkRoomUpdate
-ApiStatus func_80243EE0_C75360(Evt* script, s32 isInitialCall) {
+ApiStatus N(func_80243EE0_C75360)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     u8 primR, primG, primB, primA;
@@ -69,3 +65,11 @@ ApiStatus func_80243EE0_C75360(Evt* script, s32 isInitialCall) {
     set_screen_overlay_params_back(0xB, alpha);
     return ApiStatus_BLOCK;
 }
+
+EvtScript N(EVS_802455A0) = {
+    EVT_THREAD
+        EVT_CALL(N(func_80243EE0_C75360))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
