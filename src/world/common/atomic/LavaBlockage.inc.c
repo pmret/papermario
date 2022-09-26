@@ -1,13 +1,11 @@
-#include "kzn_08.h"
+#include "common.h"
 #include "model.h"
 
 void set_model_fog_color_parameters(u8, u8, u8, u8, u8, u8, u8, s32, s32);
-void disable_world_fog(void);
 
-extern f32 D_80244170_C755F0;
+extern f32 N(LavaBlockageTime);
 
-//TODO LavaBlockageFunc1
-s32 func_80240000_C71480(Evt* script, s32 isInitialCall) {
+s32 N(LavaBlockageFunc1)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
@@ -38,9 +36,9 @@ s32 func_80240000_C71480(Evt* script, s32 isInitialCall) {
         }
     }
     
-    D_80244170_C755F0 += 1.0f;
-    if (D_80244170_C755F0 > 360.0f) {
-        D_80244170_C755F0 -= 360.0f;
+    N(LavaBlockageTime) += 1.0f;
+    if (N(LavaBlockageTime) > 360.0f) {
+        N(LavaBlockageTime) -= 360.0f;
     }
 
     switch (mode) {
@@ -71,15 +69,15 @@ s32 func_80240000_C71480(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    slowOsc = sin_deg(D_80244170_C755F0 * 3.0f);
-    fastOsc = sin_deg(D_80244170_C755F0 * 8.0f);
+    slowOsc = sin_deg(N(LavaBlockageTime) * 3.0f);
+    fastOsc = sin_deg(N(LavaBlockageTime) * 8.0f);
     primA = baseAlpha + baseAlpha * (slowOsc * 0.5 + fastOsc * 0.5);
 
     set_model_fog_color_parameters(60, 50, 30, primA, 20, 20, 20, fogStart, 1000);
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80240348_C717C8(Evt* script, s32 isInitialCall) {
+ApiStatus N(LavaBlockageFunc2)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     s32 i;
@@ -102,22 +100,55 @@ ApiStatus func_80240348_C717C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/atomic/TexturePan.inc.c"
-
-ApiStatus func_80240718_C71B98(Evt* script, s32 isInitialCall) {
+ApiStatus N(LavaBlockageFunc3)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 dist = evt_get_variable(script, *args++);
-
-    if (dist != 0) {
-        enable_world_fog();
-        set_world_fog_dist(995 - dist, 1000);
-    } else {
-        disable_world_fog();
-        set_world_fog_dist(995, 1000);
+    ModelIDList* modelIDs;
+    ModelIDList* iterList;
+    s32 colR, colG, colB;
+    s32 duration;
+    s32 mode;
+    s32 i;
+    
+    modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
+    colR = evt_get_variable(script, *args++);
+    colG = evt_get_variable(script, *args++);
+    colB = evt_get_variable(script, *args++);
+    duration = evt_get_variable(script, *args++);
+    mode = evt_get_variable(script, *args++);
+    iterList = modelIDs; 
+    
+    if (isInitialCall) {
+        for (i = 0; i < iterList->count; i++) {
+            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
+            Model* mdl = get_model_from_list_index(treeIndex);
+            set_mdl_custom_gfx_set(mdl, -1, 3);
+            if (mode) {
+                mdl->flags &= ~MODEL_FLAGS_ENABLED;
+            }
+        }
+        script->functionTemp[0] = duration;
     }
-    set_world_fog_color(0, 0, 0, 0);
-
-    return ApiStatus_DONE2;
+    
+    if (mode) {
+        set_background_color_blend(colR, colG, colB, 
+            (script->functionTemp[0] * 255) / duration);
+    } else {
+        set_background_color_blend(colR, colG, colB, 
+            255 - ((script->functionTemp[0] * 255) / duration));
+    }
+    
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] < 0) {
+        for (i = 0; i < iterList->count; i++) {
+            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
+            Model* mdl = get_model_from_list_index(treeIndex);
+            set_mdl_custom_gfx_set(mdl, -1, 0);
+            if (!mode) {
+                mdl->flags |= MODEL_FLAGS_ENABLED;
+            }
+        }
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
-
-static char* kzn_06 = "kzn_06";
