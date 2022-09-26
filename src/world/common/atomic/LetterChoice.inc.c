@@ -1,5 +1,32 @@
 #include "common.h"
 
+s32 N(HasLetterChoiceResult) = FALSE;
+s32 N(LetterChoiceResult) = ITEM_NONE;
+
+ApiStatus N(AwaitLetterChoiceResult)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        N(HasLetterChoiceResult) = FALSE;
+    }
+
+    if (N(HasLetterChoiceResult)) {
+        N(HasLetterChoiceResult) = FALSE;
+        evt_set_variable(script, *args++, N(LetterChoiceResult));
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus N(SetLetterChoiceResult)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(LetterChoiceResult) = evt_get_variable(script, *args++);
+    N(HasLetterChoiceResult) = TRUE;
+    return ApiStatus_DONE2;
+}
+
 ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* allowedItemList = (s32*)evt_get_variable(script, *args++);

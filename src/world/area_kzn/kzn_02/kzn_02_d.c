@@ -1,53 +1,17 @@
 #include "kzn_02.h"
+#include "message_ids.h"
 
 extern API_CALLABLE(ShowSweat);
 extern s32 N(LetterDelivery_SavedNpcAnim);
 
 extern EvtScript N(D_80243270_C5D9B0);
 
-API_CALLABLE(func_80242310_C5CA50);
-API_CALLABLE(func_80242364_C5CAA4);
-API_CALLABLE(func_8024239C_C5CADC);
+API_CALLABLE(N(AwaitLetterChoiceResult));
+API_CALLABLE(N(SetLetterChoiceResult));
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/enemy/FlyingNoAttackAI.inc.c"
-
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
-static s32 N(ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1]; // extra entry for list terminator
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242310_C5CA50);
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242364_C5CAA4);
-
-ApiStatus func_8024239C_C5CADC(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args++);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(KeyItemChoiceList)[i] = ptr[i];
-        }
-        N(KeyItemChoiceList)[i] = 0;
-    } else {
-        for (i = 0; i < 112; i++) {
-            N(KeyItemChoiceList)[i] = i + 16;
-            N(KeyItemChoiceList)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/LetterDelivery.inc.c"
 
 f32 N(FlyingAI_JumpVels)[] = {
     4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
@@ -79,9 +43,9 @@ NpcSettings N(D_802449B8_C5F0F8) = {
     .height = 20,
     .radius = 22,
     .level = 17,
-    .ai = N(D_80244948_C5F088),
-    .onHit = 0x80077F70,
-    .onDefeat = 0x8007809C,
+    .ai = &N(D_80244948_C5F088),
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
 };
 
 NpcSettings N(D_802449E4_C5F124) = {
@@ -106,9 +70,19 @@ EvtScript N(EVS_80244A44) = {
     EVT_END
 };
 
-s32 D_80244A74_C5F1B4 = 0;
+static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
 
-s32 D_80244A78_C5F1B8 = 0;
+#include "world/common/StashVars.inc.c"
+
+#include "world/common/GetItemName.inc.c"
+
+#include "world/common/GetNpcCollisionHeight.inc.c"
+
+#include "world/common/AddPlayerHandsOffset.inc.c"
+
+#include "world/common/atomic/LetterChoice.inc.c"
+
+#include "world/common/LetterDelivery.inc.c"
 
 EvtScript N(D_80244A7C_C5F1BC) = {
     EVT_SET(LVar9, LVar1)
@@ -128,7 +102,7 @@ EvtScript N(D_80244A7C_C5F1BC) = {
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
-    EVT_CALL(func_80242364_C5CAA4, LVarA)
+    EVT_CALL(N(SetLetterChoiceResult), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -136,9 +110,9 @@ EvtScript N(D_80244A7C_C5F1BC) = {
 };
 
 EvtScript N(EVS_80244BC0) = {
-    EVT_CALL(func_8024239C_C5CADC, LVar0)
+    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(D_80244A7C_C5F1BC), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(func_80242310_C5CA50, LVar0)
+    EVT_CALL(N(AwaitLetterChoiceResult), LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -197,7 +171,7 @@ EvtScript N(D_80244C90_C5F3D0) = {
             EVT_CALL(EnablePartnerAI)
             EVT_WAIT(5)
     EVT_END_SWITCH
-    EVT_CALL(func_80242364_C5CAA4, LVarA)
+    EVT_CALL(N(SetLetterChoiceResult), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -207,9 +181,9 @@ EvtScript N(D_80244C90_C5F3D0) = {
 EvtScript N(D_80244FB4_C5F6F4) = {
     EVT_SET(LVar0, LVarB)
     EVT_SET(LVar1, LVar2)
-    EVT_CALL(func_8024239C_C5CADC, LVar0)
+    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(D_80244C90_C5F3D0), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(func_80242310_C5CA50, LVar0)
+    EVT_CALL(N(AwaitLetterChoiceResult), LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -271,7 +245,11 @@ s32 N(D_8024531C_C5FA5C)[] = {
 };
 
 EvtScript N(D_80245324_C5FA64) = {
-    EVT_CALL(N(LetterDelivery_Init), 0, 0x00B60008, 0x00B60001, 84, 0, 0x001000E4, 0x001000E5, 0x001000E6, 0x001000E7, N(D_8024531C_C5FA5C))
+    EVT_CALL(N(LetterDelivery_Init),
+        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+        ITEM_LETTER25, 0,
+        MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
+        EVT_PTR(N(D_8024531C_C5FA5C)))
     EVT_EXEC_WAIT(N(D_80245024_C5F764))
     EVT_RETURN
     EVT_END
@@ -279,7 +257,7 @@ EvtScript N(D_80245324_C5FA64) = {
 
 EvtScript N(D_80245374_C5FAB4) = {
     EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, 348)
+        EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
         EVT_EXEC_WAIT(N(D_80244A14_C5F154))
         EVT_CALL(AddStarPieces, 1)
@@ -417,12 +395,12 @@ EvtScript N(D_80245C9C_C603DC) = {
 EvtScript N(D_80245D80_C604C0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH5_KOLORADO_FELL_IN_LAVA)
-            EVT_CALL(BindNpcIdle, NPC_SELF, N(D_802453D8_C5FB18))
-            EVT_CALL(BindNpcInteract, NPC_SELF, N(D_80245C9C_C603DC))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802453D8_C5FB18)))
+            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245C9C_C603DC)))
         EVT_CASE_LT(STORY_CH5_LAVA_STREAM_BLOCKED)
             EVT_IF_EQ(GF_KZN06_Visited, FALSE)
                 EVT_CALL(SetNpcPos, NPC_SELF, -760, 20, -40)
-                EVT_CALL(BindNpcInteract, NPC_SELF, N(D_80245C9C_C603DC))
+                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245C9C_C603DC)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
             EVT_END_IF
