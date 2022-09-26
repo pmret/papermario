@@ -1,5 +1,31 @@
 #include "common.h"
 
+s32** N(varStash) = NULL;
+
+EvtScript N(D_80244A14_C5F154) = {
+    EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_80244A44) = {
+    EVT_CALL(ShowGotItem, LVar0, TRUE, 0x10)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
+
+static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
+
+#include "world/common/StashVars.inc.c"
+
+#include "world/common/GetItemName.inc.c"
+
+#include "world/common/GetNpcCollisionHeight.inc.c"
+
+#include "world/common/AddPlayerHandsOffset.inc.c"
+
 s32 N(HasLetterChoiceResult) = FALSE;
 s32 N(LetterChoiceResult) = ITEM_NONE;
 
@@ -45,3 +71,5 @@ ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
+
+#include "world/common/LetterDelivery.inc.c"

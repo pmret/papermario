@@ -54,35 +54,7 @@ NpcSettings N(D_802449E4_C5F124) = {
     .level = 99,
 };
 
-s32** N(varStash) = NULL;
-
-EvtScript N(D_80244A14_C5F154) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_80244A44) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0x10)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
-
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
 #include "world/common/atomic/LetterChoice.inc.c"
-
-#include "world/common/LetterDelivery.inc.c"
 
 EvtScript N(D_80244A7C_C5F1BC) = {
     EVT_SET(LVar9, LVar1)
