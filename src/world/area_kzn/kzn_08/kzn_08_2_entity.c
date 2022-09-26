@@ -24,12 +24,6 @@ EvtScript N(D_80244BB4_C76034) = {
     EVT_END
 };
 
-enum GotItemType {
-    ITEM_TYPE_CONSUMABLE    = 0,
-    ITEM_TYPE_KEY           = 1,
-    ITEM_TYPE_BADGE         = 2
-};
-
 EvtScript N(D_80244C1C_C7609C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(LVar0, LVarA)

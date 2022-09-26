@@ -1,15 +1,24 @@
-#include "kzn_07.h"
+#include "common.h"
 #include "model.h"
+
+// REQUIRES:
+// MapVar:  MV_GlowIntensity
+
+enum {
+    LAVA_GLOW_MODE_0     = 0,
+    LAVA_GLOW_MODE_1     = 1,
+    LAVA_GLOW_MODE_2     = 2,
+    LAVA_GLOW_MODE_END   = 10
+};
 
 void set_model_fog_color_parameters(u8, u8, u8, u8, u8, u8, u8, s32, s32);
 
-extern f32 D_802423E0_C70710;
+f32 N(LavaGlowLightTime) = 0.0f;
 
-//TODO LavaBlockageFunc1
-s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
+ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 mode = evt_get_variable(script, *args++);
+    s32 glowMode = evt_get_variable(script, *args++);
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     f32 deltaX;
     f32 scale;
@@ -21,6 +30,7 @@ s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
     
     if (isInitialCall) {
         if (modelIDs != NULL) {
+            // apply effect to models in the list
             u16* idList = modelIDs->list;
             for (i = 0; i < modelIDs->count; i++, idList++) {
                 s32 treeIndex = get_model_list_index_from_tree_index(*idList);
@@ -28,6 +38,7 @@ s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
                 set_mdl_custom_gfx_set(mdl, -1, 2);
             }
         } else {
+            // list is NULL -> apply effect to ALL models
             Model** models = (Model**) gCurrentModels;
             for (i = 0; i < MAX_MODELS; i++, models++) {
                 if (*models != NULL) {
@@ -37,14 +48,14 @@ s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
         }
     }
     
-    D_802423E0_C70710 += 1.0f;
-    if (D_802423E0_C70710 > 360.0f) {
-        D_802423E0_C70710 -= 360.0f;
+    N(LavaGlowLightTime) += 1.0f;
+    if (N(LavaGlowLightTime) > 360.0f) {
+        N(LavaGlowLightTime) -= 360.0f;
     }
 
-    switch (mode) {
-        case 1:
-            if (evt_get_float_variable(NULL, MapVar(0)) <= 0.0f) {
+    switch (glowMode) {
+        case LAVA_GLOW_MODE_1:
+            if (evt_get_float_variable(NULL, MV_GlowIntensity) <= 0.0f) {
                 return ApiStatus_DONE2;
             }
             deltaX = -75.0f - playerStatus->position.x;
@@ -56,13 +67,13 @@ s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
                 baseAlpha = 0.0f;
             }
             fogStart = 970;
-            baseAlpha *= 0.2 * evt_get_float_variable(NULL, MapVar(0));
+            baseAlpha *= 0.2 * evt_get_float_variable(NULL, MV_GlowIntensity);
             break;
-        case 2:
+        case LAVA_GLOW_MODE_2:
             baseAlpha = 100.0f;
-            fogStart = 995 - evt_get_variable(NULL, MapVar(0));
+            fogStart = 995 - evt_get_variable(NULL, MV_GlowIntensity);
             break;   
-        case 10:
+        case LAVA_GLOW_MODE_END:
             return 0;
         default:
             baseAlpha = 100.0f;
@@ -70,20 +81,21 @@ s32 func_80240000_C6E330(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    slowOsc = sin_deg(D_802423E0_C70710 * 3.0f);
-    fastOsc = sin_deg(D_802423E0_C70710 * 8.0f);
+    slowOsc = sin_deg(N(LavaGlowLightTime) * 3.0f);
+    fastOsc = sin_deg(N(LavaGlowLightTime) * 8.0f);
     primA = baseAlpha + baseAlpha * (slowOsc * 0.5 + fastOsc * 0.5);
 
     set_model_fog_color_parameters(60, 50, 30, primA, 20, 20, 20, fogStart, 1000);
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80240348_C6E678(Evt* script, s32 isInitialCall) {
+ApiStatus N(ClearLavaGlowLighting)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     s32 i;
         
     if (modelIDs != NULL) {
+        // clear effect from models in the list
         u16* idList = modelIDs->list;
         for (i = 0; i < modelIDs->count; i++, idList++) {
             s32 treeIndex = get_model_list_index_from_tree_index(*idList);
@@ -91,6 +103,7 @@ ApiStatus func_80240348_C6E678(Evt* script, s32 isInitialCall) {
             set_mdl_custom_gfx_set(mdl, -1, 0);
         }
     } else {
+        // list is NULL -> clear effect from ALL models
         Model** models = (Model**) gCurrentModels;
         for (i = 0; i < MAX_MODELS; i++, models++) {
             if (*models != NULL) {
@@ -100,7 +113,3 @@ ApiStatus func_80240348_C6E678(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-
-#include "world/common/atomic/TexturePan.inc.c"
-
-static char* kzn_06 = "kzn_06";

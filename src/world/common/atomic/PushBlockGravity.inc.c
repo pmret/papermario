@@ -1,10 +1,14 @@
-#include "kzn_07.h"
-#include "effects.h"
+#include "common.h"
 #include "entity.h"
 
-extern f32 N(PushBlockFallCurve)[28];
+f32 N(PushBlockFallCurve)[] = {
+    0.02, 0.02, 0.04, 0.08, 0.11, 0.2, 0.3, 0.31, 
+    0.42, 0.46, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 
+    0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 
+    0.92, 0.95, 0.98, 1.0, 
+};
 
-s32 func_80240720_C6EA50(Entity* block, Evt* source) {
+s32 N(push_block_handle_fall)(Entity* block, Evt* source) {
     
     block->position.y = source->varTable[0] - (N(PushBlockFallCurve)[source->functionTemp[0]] * BLOCK_GRID_SIZE);
     if (source->functionTemp[0] == 0) {
@@ -21,12 +25,3 @@ s32 func_80240720_C6EA50(Entity* block, Evt* source) {
 
     return source->functionTemp[0] == ARRAY_COUNT(N(PushBlockFallCurve));
 }
-
-ApiStatus func_802407F4_C6EB24(Evt* script, s32 isInitialCall) {
-    get_entity_by_index(script->varTable[0])->dataBuf.chest->gotItemDone = TRUE;
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/enemy/FlyingAI.inc.c"
-
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"

@@ -9,10 +9,9 @@ extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(DefaultNpcs);
 extern EvtScript N(EVS_802455A0);
-extern API_FUNC(kzn_08_LavaBlockageFunc1);
-extern API_FUNC(kzn_08_LavaBlockageFunc2);
+extern API_FUNC(N(ApplyLavaGlowLighting));
+extern API_FUNC(N(ClearLavaGlowLighting));
 
-void set_model_fog_color_parameters(u8, u8, u8, u8, u8, u8, u8, s32, s32);
 void disable_world_fog(void);
 
 EntryList N(Entrances) = {
@@ -26,8 +25,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_kzn_08 },
 };
 
-#include "world/common/atomic/LavaBlockage.data.inc.c"
-#include "world/common/atomic/LavaBlockage.inc.c"
+#include "world/common/atomic/LavaGlowLighting.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
@@ -48,7 +46,7 @@ ApiStatus func_80240718_C71B98(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80244210_C75690) = {
+EvtScript N(EVS_StartTexPanner3) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_3)
     EVT_THREAD
@@ -62,7 +60,7 @@ EvtScript N(D_80244210_C75690) = {
     EVT_END
 };
 
-EvtScript N(D_8024432C_C757AC) = {
+EvtScript N(EVS_StartTexPanner4) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_4)
     EVT_THREAD
@@ -76,20 +74,20 @@ EvtScript N(D_8024432C_C757AC) = {
     EVT_END
 };
 
-ModelIDList N(D_80244448_C758C8) = {
+ModelIDList N(LavaModelIDs) = {
     .count = 1,
     .list = { MODEL_yougan }
 };
 
 EvtScript N(EVS_ExitWalk_kzn_06) = EVT_EXIT_WALK_FIXED(60, kzn_08_ENTRY_0, "kzn_06",  kzn_06_ENTRY_2);
 
-EvtScript N(D_802444B8_C75938) = {
+EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_06), TRIGGER_FLOOR_TOUCH, COLLIDER_deili1, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802444E4_C75964) = {
+EvtScript N(EVS_StartTexPanner0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, MODEL_yougan1, TEX_PANNER_0)
     EVT_THREAD
@@ -103,7 +101,7 @@ EvtScript N(D_802444E4_C75964) = {
     EVT_END
 };
 
-EvtScript N(D_80244600_C75A80) = {
+EvtScript N(EVS_StartTexPanner1) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, MODEL_yougan, TEX_PANNER_1)
     EVT_CALL(SetTexPanner, MODEL_o640, TEX_PANNER_1)
@@ -136,7 +134,7 @@ EvtScript N(EVS_80244790) = {
     EVT_CALL(ScaleModel, MODEL_yougan1, LVar0, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_MULF(LVar0, EVT_FLOAT(-5.0))
     EVT_ADDF(LVar0, EVT_FLOAT(100.0))
-    EVT_SET(MapVar(0), LVar0)
+    EVT_SET(MV_GlowIntensity, LVar0)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(0)
@@ -147,7 +145,7 @@ EvtScript N(EVS_80244790) = {
     EVT_CALL(TranslateModel, MODEL_yougan, 0, LVar0, 0)
     EVT_MULF(LVar0, EVT_FLOAT(-1.25))
     EVT_ADDF(LVar0, EVT_FLOAT(50.0))
-    EVT_SET(MapVar(0), LVar0)
+    EVT_SET(MV_GlowIntensity, LVar0)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
@@ -166,14 +164,12 @@ EvtScript N(EVS_80244790) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_08)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
+    EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
-    EVT_SET(LVar0, N(D_802444B8_C75938))
+    EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_802455A0))
@@ -183,20 +179,20 @@ EvtScript N(EVS_Main) = {
     EVT_END_THREAD
     EVT_CALL(ScaleModel, MODEL_yougan1, EVT_FLOAT(10.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(TranslateModel, MODEL_yougan, 0, 40, 0)
-    EVT_SET(MapVar(0), 0)
+    EVT_SET(MV_GlowIntensity, 0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(kzn_08_LavaBlockageFunc1, 2, 0)
+        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_2, NULL)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(kzn_08_LavaBlockageFunc2, EVT_PTR(N(D_80244448_C758C8)))
+        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModelIDs)))
     EVT_END_THREAD
-    EVT_EXEC(N(D_802444E4_C75964))
-    EVT_EXEC(N(D_80244600_C75A80))
-    EVT_SET(LVar0, 27)
-    EVT_EXEC(N(D_80244210_C75690))
-    EVT_SET(LVar0, 28)
-    EVT_EXEC(N(D_8024432C_C757AC))
+    EVT_EXEC(N(EVS_StartTexPanner0))
+    EVT_EXEC(N(EVS_StartTexPanner1))
+    EVT_SET(LVar0, MODEL_kem1)
+    EVT_EXEC(N(EVS_StartTexPanner3))
+    EVT_SET(LVar0, MODEL_kem2)
+    EVT_EXEC(N(EVS_StartTexPanner4))
     EVT_RETURN
     EVT_END
 };

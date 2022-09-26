@@ -4,8 +4,7 @@
 extern API_FUNC(N(AdjustFog));
 extern API_FUNC(func_80240A44_C6D364);
 
-#include "world/common/atomic/LavaBlockage.data.inc.c"
-#include "world/common/atomic/LavaBlockage.inc.c"
+#include "world/common/atomic/LavaGlowLighting.inc.c"
 
 ModelIDList D_80241374_C6DC94 = {
     .count = 1,
@@ -45,7 +44,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     EVT_WAIT(15)
     EVT_THREAD
         EVT_LOOP(40)
-            EVT_ADDF(MapVar(0), EVT_FLOAT(-0.015625))
+            EVT_ADDF(MV_GlowIntensity, EVT_FLOAT(-0.015625))
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -113,7 +112,7 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
         EVT_CALL(EnableGroup, MODEL_i_off, FALSE)
         EVT_EXEC(N(EVS_MonitorPushBlockPuzzle))
-        EVT_SETF(MapVar(0), EVT_FLOAT(1.0))
+        EVT_SETF(MV_GlowIntensity, EVT_FLOAT(1.0))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableGroup, MODEL_i_on, FALSE)
@@ -121,14 +120,14 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
         EVT_CALL(TranslateModel, MODEL_yougan, 0, -25, -50)
         EVT_CALL(TranslateModel, MODEL_spot, 0, -25, 0)
         EVT_CALL(TranslateModel, MODEL_o349, 0, -25, -40)
-        EVT_SETF(MapVar(0), EVT_FLOAT(0.5))
+        EVT_SETF(MV_GlowIntensity, EVT_FLOAT(0.5))
     EVT_END_IF
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(N(LavaBlockageFunc1), 1, 0)
+        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(N(LavaBlockageFunc2), EVT_PTR(D_80241374_C6DC94))
+        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(D_80241374_C6DC94))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END

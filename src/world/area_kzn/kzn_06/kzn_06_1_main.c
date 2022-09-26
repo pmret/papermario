@@ -69,9 +69,7 @@ LavaReset N(SafeFloorColliders)[] = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_06)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
+    EVT_SETUP_CAMERA_DEFAULT()
     EVT_SET(GF_KZN06_Visited, TRUE)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)

@@ -1773,6 +1773,13 @@ enum ItemIDs {
 #define IS_ITEM(itemID) (itemID >= ITEM_FIRST_KEY && itemID <= ITEM_LAST_CONSUMABLE)
 #define IS_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
 
+// used for chest and give item events
+enum GotItemType {
+    ITEM_TYPE_CONSUMABLE    = 0,
+    ITEM_TYPE_KEY           = 1,
+    ITEM_TYPE_BADGE         = 2
+};
+
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
     ITEM_TYPE_FLAG_BATTLE_USABLE        = 0x0002,

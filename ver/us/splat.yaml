@@ -10237,13 +10237,11 @@ segments:
     start: 0xC6E330
     vram: 0x80240000
     subsegments:
-    - [0xC6E330, c]
-    - [0xC6EA50, c]
-    - [0xC70640, data]
-    - [0xC70710, data]
-    - [0xC70C60, data]
-    - [0xC70EC0, data]
-    - [0xC713B0]
+    - [0xC6E330, c, kzn_07_0_header]
+    - [0xC6E330, c, kzn_07_1_main]
+    - [0xC6EA50, c, kzn_07_2_entity]
+    - [0xC6EB50, c, kzn_07_3_enemy]
+    - [0xC70640]
   - name: kzn_08
     dir: world/area_kzn/kzn_08
     type: code

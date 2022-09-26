@@ -1,5 +1,7 @@
 #include "kzn_08.h"
 
+extern EvtScript D_800936DC;
+
 #include "sprite/npc/LargePiranha.h"
 
 #include "world/common/enemy/FlyingAI.inc.c"
@@ -109,19 +111,19 @@ EvtScript N(EVS_802450F0) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(0x800936DC)
+            EVT_EXEC_WAIT(D_800936DC)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(D_8024517C_C765FC) = {
+NpcSettings N(NpcSettings_MeleeHitbox) = {
     .height = 20,
     .radius = 28,
     .level = 17,
-    .ai = N(D_80245070_C764F0),
-    .onDefeat = N(D_80244E84_C76304),
+    .ai = &N(D_80245070_C764F0),
+    .onDefeat = &N(D_80244E84_C76304),
 };
 
 StaticNpc N(D_802451A8_C76628)[] = {
@@ -177,7 +179,7 @@ StaticNpc N(D_802451A8_C76628)[] = {
     },
     {
         .id = NPC_PutridPiranha_02,
-        .settings = &N(D_8024517C_C765FC),
+        .settings = &N(NpcSettings_MeleeHitbox),
         .pos = { 0.0f, -1000.0f, 0.0f },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
