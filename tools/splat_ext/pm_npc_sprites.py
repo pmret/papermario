@@ -300,7 +300,7 @@ class N64SegPm_npc_sprites(N64Segment):
             self.sprite_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
-        out_dir = options.get_asset_path() / self.dir / self.name
+        out_dir = options.opts.asset_path / self.dir / self.name
 
         data = rom_bytes[self.rom_start:self.rom_end]
         pos = 0
@@ -328,8 +328,8 @@ class N64SegPm_npc_sprites(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        basepath = options.get_asset_path() / "sprite" / f"{self.name}"
-        out_paths = [options.get_asset_path() / "sprite" / self.name / (f["name"] if type(f) is dict else f)
+        basepath = options.opts.asset_path / "sprite" / f"{self.name}"
+        out_paths = [options.opts.asset_path / "sprite" / self.name / (f["name"] if type(f) is dict else f)
                      for f in self.files]
 
         return [LinkerEntry(self, out_paths, basepath, ".data")]

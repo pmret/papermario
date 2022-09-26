@@ -248,8 +248,6 @@ class Configure:
 
         split.main(
             splat_file,
-            None,
-            str(self.version_path / "baserom.z64"),
             modes,
             verbose=False,
         )
@@ -401,9 +399,9 @@ class Configure:
                     for seg in seg.subsegments:
                         if isinstance(seg, segtypes.n64.img.N64SegImg):
                             flags = ""
-                            if seg.flip_horizontal:
+                            if seg.n64img.flip_h:
                                 flags += "--flip-x "
-                            if seg.flip_vertical:
+                            if seg.n64img.flip_v:
                                 flags += "--flip-y "
 
                             src_paths = [seg.out_path().relative_to(ROOT)]
@@ -444,9 +442,9 @@ class Configure:
                 build(entry.object_path, [compressed_path], "bin")
             elif isinstance(seg, segtypes.n64.img.N64SegImg):
                 flags = ""
-                if seg.flip_horizontal:
+                if seg.n64img.flip_h:
                     flags += "--flip-x "
-                if seg.flip_vertical:
+                if seg.n64img.flip_v:
                     flags += "--flip-y "
 
                 bin_path = entry.object_path.with_suffix(".bin")
