@@ -1,8 +1,9 @@
 from pathlib import Path
-from typing import Optional
+from typing import Type
+
+from n64img.image import Image
 from segtypes.n64.segment import N64Segment
-from util import options
-from util import log
+from util import log, options
 
 
 class N64SegImg(N64Segment):
@@ -21,6 +22,7 @@ class N64SegImg(N64Segment):
         symbol_name_format_no_rom,
         args,
         yaml,
+        img_cls: Type[Image],
     ):
         super().__init__(
             rom_start,
@@ -38,26 +40,15 @@ class N64SegImg(N64Segment):
             yaml=yaml,
         )
 
+        self.n64img: Image = img_cls(None, 0, 0)
+
         if isinstance(yaml, dict):
             if self.extract:
                 self.width = yaml["width"]
                 self.height = yaml["height"]
 
-            self.flip_horizontal = bool(yaml.get("flip_x", False))
-            self.flip_vertical = bool(yaml.get("flip_y", False))
-
-            if yaml.get("flip"):
-                self.warn(
-                    f"'flip' parameter for img segments is deprecated; use flip_x and flip_y instead"
-                )
-                flip = yaml.get("flip")
-
-                self.flip_vertical = (
-                    flip == "both" or flip.startswith("v") or flip == "y"
-                )
-                self.flip_horizontal = (
-                    flip == "both" or flip.startswith("h") or flip == "x"
-                )
+            self.n64img.flip_h = bool(yaml.get("flip_x", False))
+            self.n64img.flip_v = bool(yaml.get("flip_y", False))
         else:
             if self.extract:
                 if len(yaml) < 5:
@@ -67,22 +58,33 @@ class N64SegImg(N64Segment):
                 self.width = yaml[3]
                 self.height = yaml[4]
 
-            self.flip_horizontal = False
-            self.flip_vertical = False
+        self.n64img.width = self.width
+        self.n64img.height = self.height
 
-        if self.extract and self.max_length() is not None:
-            expected_len = int(self.max_length())
+        self.check_len()
+
+    def check_len(self) -> None:
+        if self.extract:
+            expected_len = int(self.n64img.size())
+            assert isinstance(self.rom_start, int)
+            assert isinstance(self.rom_end, int)
             actual_len = self.rom_end - self.rom_start
             if actual_len > expected_len and actual_len - expected_len > self.subalign:
                 log.error(
                     f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)"
                 )
 
-    def out_path(self) -> Optional[Path]:
-        return options.get_asset_path() / self.dir / f"{self.name}.png"
+    def out_path(self) -> Path:
+        return options.opts.asset_path / self.dir / f"{self.name}.png"
 
     def should_split(self) -> bool:
-        return self.extract and options.mode_active("img")
+        return self.extract and options.opts.is_mode_active("img")
 
-    def max_length(self) -> Optional[int]:
-        return None
+    def split(self, rom_bytes):
+        path = self.out_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        self.n64img.data = rom_bytes[self.rom_start : self.rom_end]
+        self.n64img.write(path)
+
+        self.log(f"Wrote {self.name} to {path}")
