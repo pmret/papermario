@@ -5,9 +5,9 @@
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(D_80241880_C6E1A0);
+extern EvtScript N(EVS_SetupLavaPuzzle);
 extern API_FUNC(func_80240310_C6CC30);
-extern API_FUNC(N(LavaBlockageFunc3));
+extern API_FUNC(N(AdjustFog));
 extern API_FUNC(func_80240A44_C6D364);
 extern API_FUNC(N(LavaBlockageFunc1));
 extern API_FUNC(N(LavaBlockageFunc2));
@@ -28,16 +28,14 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-EvtScript N(D_80240B7C_C6D49C) = EXIT_WALK_SCRIPT(60,  N(ENTRY_0), "kzn_05",  kzn_05_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_05) = EXIT_WALK_SCRIPT(60, kzn_06_ENTRY_0, "kzn_05",  kzn_05_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_08) = EXIT_WALK_SCRIPT(60, kzn_06_ENTRY_2, "kzn_08",  kzn_08_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_07) = EXIT_WALK_SCRIPT(60, kzn_06_ENTRY_1, "kzn_07\0\0\0",  kzn_07_ENTRY_0);
 
-EvtScript N(D_80240BD8_C6D4F8) = EXIT_WALK_SCRIPT(60,  N(ENTRY_2), "kzn_08",  kzn_08_ENTRY_0);
-
-EvtScript N(D_80240C34_C6D554) = EXIT_WALK_SCRIPT(60,  N(ENTRY_1), "kzn_07\0\0\0",  kzn_07_ENTRY_0);
-
-EvtScript N(D_80240C90_C6D5B0) = {
-    EVT_BIND_TRIGGER(N(D_80240B7C_C6D49C), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(N(D_80240BD8_C6D4F8), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
-    EVT_BIND_TRIGGER(N(D_80240C34_C6D554), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
+EvtScript N(EVS_BindExitTriggers) = {
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_05), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_08), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_07), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -89,7 +87,7 @@ EvtScript N(EVS_Main) = {
     EVT_ELSE
         EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
     EVT_END_IF
-    EVT_SET(LVar0, N(D_80240C90_C6D5B0))
+    EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_yougan, SURFACE_TYPE_LAVA)
@@ -98,7 +96,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
     EVT_EXEC(N(EVS_StartTexPanners))
-    EVT_EXEC(N(D_80241880_C6E1A0))
+    EVT_EXEC(N(EVS_SetupLavaPuzzle))
     EVT_RETURN
     EVT_END
 };
@@ -157,16 +155,16 @@ ModelIDList D_80241378_C6DC98 = {
 
 EvtScript N(EVS_8024137C) = {
     EVT_LABEL(0)
-    EVT_CALL(N(LavaBlockageFunc3), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 1)
+    EVT_CALL(N(AdjustFog), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 1)
     EVT_WAIT(30)
-    EVT_CALL(N(LavaBlockageFunc3), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 0)
+    EVT_CALL(N(AdjustFog), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 0)
     EVT_WAIT(30)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80241404_C6DD24) = {
+EvtScript N(EVS_LowerMainLavaLevel) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(3)
     EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -219,13 +217,15 @@ EvtScript N(D_80241404_C6DD24) = {
     EVT_END
 };
 
-EvtScript N(D_80241744_C6E064) = {
+EvtScript N(EVS_MonitorPushBlockPuzzle) = {
+    // wait for grid pos 11,0 to be occupied
     EVT_LABEL(10)
     EVT_CALL(GetPushBlock, 0, 11, 0, LVar2)
-    EVT_IF_EQ(LVar2, 0)
+    EVT_IF_EQ(LVar2, PUSH_GRID_EMPTY)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_IF
+    // begin the scene
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(40)
     EVT_THREAD
@@ -238,17 +238,17 @@ EvtScript N(D_80241744_C6E064) = {
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_EXEC_WAIT(N(D_80241404_C6DD24))
+    EVT_EXEC_WAIT(N(EVS_LowerMainLavaLevel))
     EVT_SET(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80241880_C6E1A0) = {
+EvtScript N(EVS_SetupLavaPuzzle) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
         EVT_CALL(EnableGroup, MODEL_i_off, FALSE)
-        EVT_EXEC(N(D_80241744_C6E064))
+        EVT_EXEC(N(EVS_MonitorPushBlockPuzzle))
         EVT_SETF(MapVar(0), EVT_FLOAT(1.0))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)

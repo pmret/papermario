@@ -53,7 +53,6 @@ EvtScript N(EVS_StartTexPanner4) = {
 };
 
 EvtScript N(EVS_ExitWalk_jan_22) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_0, "jan_22",  jan_22_ENTRY_2);
-
 EvtScript N(EVS_ExitWalk_kzn_02) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
