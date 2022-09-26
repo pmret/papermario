@@ -656,13 +656,14 @@ MapConfig dgb_maps[] = {
 };
 
 /// Mt. Lavalava
+#include "area_kzn/kzn.h"
 MapConfig kzn_maps[] = {
-    { MAP_UNSPLIT(kzn_01, 0x80240330), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_01), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_02, 0x80242850), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_03, 0x802430E0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_04, 0x80241770), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_05, 0x80240330), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_06, 0x80240AA0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_05), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_07, 0x80242320), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_08, 0x80244130), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_09, 0x80243A40), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },

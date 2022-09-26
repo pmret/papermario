@@ -1,13 +1,13 @@
 #include "kzn_06.h"
 #include "effects.h"
 
-extern f32 D_80241120_C6DA40[27];
+extern f32 PushBlockFallCurve[28];
 
 s32 func_80240310_C6CC30(Entity* block, Evt* source) {
     
-    block->position.y = source->varTable[0] - (D_80241120_C6DA40[source->functionTemp[0]] * 25);
+    block->position.y = source->varTable[0] - (PushBlockFallCurve[source->functionTemp[0]] * 25);
     if (source->functionTemp[0] == 0) {
-        sfx_play_sound_at_position(0x1DA, 0, block->position.x, block->position.y, block->position.z);
+        sfx_play_sound_at_position(SOUND_1DA, 0, block->position.x, block->position.y, block->position.z);
     }
     
     if ((source->functionTemp[0] > 4) && (source->functionTemp[0] & 1)) {
@@ -18,5 +18,5 @@ s32 func_80240310_C6CC30(Entity* block, Evt* source) {
         source->functionTemp[0]++;
     } while(0); // required to match
 
-    return source->functionTemp[0] == 28;
+    return source->functionTemp[0] == ARRAY_COUNT(PushBlockFallCurve);
 }

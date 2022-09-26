@@ -22,4 +22,8 @@ enum {
 
 #define AF_KZN(index) AreaFlag(index)
 
+extern MapSettings kzn_01_settings;
+extern MapSettings kzn_05_settings;
+extern MapSettings kzn_06_settings;
+
 #endif

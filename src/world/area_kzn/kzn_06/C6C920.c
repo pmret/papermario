@@ -6,13 +6,13 @@
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(EVS_SetupLavaPuzzle);
-extern API_FUNC(func_80240310_C6CC30);
+extern s32 func_80240310_C6CC30(Entity* block, Evt* source);
 extern API_FUNC(N(AdjustFog));
 extern API_FUNC(func_80240A44_C6D364);
 extern API_FUNC(N(LavaBlockageFunc1));
 extern API_FUNC(N(LavaBlockageFunc2));
 
-EntryList N(entryList) = {
+EntryList N(Entrances) = {
     {  385.0,  115.0,   55.0,  270.0 },  /* N(ENTRY_0) */
     { -385.0,   75.0,   68.0,   90.0 },  /* N(ENTRY_1) */
     {  400.0,    5.0,  175.0,  270.0 },  /* N(ENTRY_2) */
@@ -20,8 +20,8 @@ EntryList N(entryList) = {
 
 MapSettings N(settings) = {
     .main = &N(EVS_Main),
-    .entryList = &N(entryList),
-    .entryCount = ENTRY_COUNT(N(entryList)),
+    .entryList = &N(Entrances),
+    .entryCount = ENTRY_COUNT(N(Entrances)),
     .tattle = { MSG_MapTattle_kzn_06 },
 };
 
@@ -103,7 +103,7 @@ EvtScript N(EVS_Main) = {
 
 // data split? begin entity setup
 
-f32 D_80241120_C6DA40[] = {
+f32 PushBlockFallCurve[] = {
     0.02, 0.02, 0.04, 0.08, 0.11, 0.20, 0.30, 0.31, 
     0.42, 0.46, 0.50, 0.53, 0.56, 0.59, 0.62, 0.65, 
     0.68, 0.71, 0.74, 0.77, 0.80, 0.83, 0.86, 0.89, 
@@ -218,7 +218,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
 };
 
 EvtScript N(EVS_MonitorPushBlockPuzzle) = {
-    // wait for grid pos 11,0 to be occupied
+    // wait for grid pos (11,0) to be occupied
     EVT_LABEL(10)
     EVT_CALL(GetPushBlock, 0, 11, 0, LVar2)
     EVT_IF_EQ(LVar2, PUSH_GRID_EMPTY)
@@ -269,4 +269,3 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
     EVT_RETURN
     EVT_END
 };
-
