@@ -6,7 +6,7 @@
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(EVS_SetupLavaPuzzle);
-extern s32 func_80240310_C6CC30(Entity* block, Evt* source);
+extern s32 kzn_06_push_block_handle_fall(Entity* block, Evt* source);
 extern API_FUNC(N(AdjustFog));
 extern API_FUNC(func_80240A44_C6D364);
 extern API_FUNC(N(LavaBlockageFunc1));
@@ -103,7 +103,7 @@ EvtScript N(EVS_Main) = {
 
 // data split? begin entity setup
 
-f32 PushBlockFallCurve[] = {
+f32 N(PushBlockFallCurve)[] = {
     0.02, 0.02, 0.04, 0.08, 0.11, 0.20, 0.30, 0.31, 
     0.42, 0.46, 0.50, 0.53, 0.56, 0.59, 0.62, 0.65, 
     0.68, 0.71, 0.74, 0.77, 0.80, 0.83, 0.86, 0.89, 
@@ -125,7 +125,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
         EVT_CALL(CreatePushBlockGrid, 0, 12, 1, -330, 145, -90, 0)
-        EVT_CALL(SetPushBlockFallEffect, 0, EVT_PTR(func_80240310_C6CC30))
+        EVT_CALL(SetPushBlockFallEffect, 0, EVT_PTR(N(push_block_handle_fall)))
         EVT_CALL(SetPushBlock, 0, 4, 0, 1)
         EVT_CALL(SetPushBlock, 0, 6, 0, 1)
         EVT_CALL(SetPushBlock, 0, 8, 0, 1)

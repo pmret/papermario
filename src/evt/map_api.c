@@ -354,9 +354,10 @@ ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args);
-    s32 index = get_transform_group_index(var1);
+    s32 modelIndex = evt_get_variable(script, *args);
+    s32 index = get_transform_group_index(modelIndex);
     ModelTransformGroup* transformGroup;
+    Matrix4f mtx;
     f32 x, y, z;
 
     if (index == -1) {
@@ -377,8 +378,6 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
         guTranslateF(transformGroup->matrixB, x, y, z);
         transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {
-        Matrix4f mtx;
-
         guTranslateF(mtx, x, y, z);
         guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
     }

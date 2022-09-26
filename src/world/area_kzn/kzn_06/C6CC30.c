@@ -1,11 +1,12 @@
 #include "kzn_06.h"
 #include "effects.h"
+#include "entity.h"
 
-extern f32 PushBlockFallCurve[28];
+extern f32 N(PushBlockFallCurve)[28];
 
-s32 func_80240310_C6CC30(Entity* block, Evt* source) {
+s32 N(push_block_handle_fall)(Entity* block, Evt* source) {
     
-    block->position.y = source->varTable[0] - (PushBlockFallCurve[source->functionTemp[0]] * 25);
+    block->position.y = source->varTable[0] - (N(PushBlockFallCurve)[source->functionTemp[0]] * BLOCK_GRID_SIZE);
     if (source->functionTemp[0] == 0) {
         sfx_play_sound_at_position(SOUND_1DA, 0, block->position.x, block->position.y, block->position.z);
     }
@@ -18,5 +19,5 @@ s32 func_80240310_C6CC30(Entity* block, Evt* source) {
         source->functionTemp[0]++;
     } while(0); // required to match
 
-    return source->functionTemp[0] == ARRAY_COUNT(PushBlockFallCurve);
+    return source->functionTemp[0] == ARRAY_COUNT(N(PushBlockFallCurve));
 }
