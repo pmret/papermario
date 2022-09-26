@@ -14,7 +14,7 @@ ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
-    if (gPartnerActionStatus.partnerActionState != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         script->varTable[0] = gPartnerActionStatus.actingPartner;
     } else {
         script->varTable[0] = -1;
