@@ -10226,9 +10226,9 @@ segments:
     start: 0xC6C920
     vram: 0x80240000
     subsegments:
-    - [0xC6C920, c]
-    - [0xC6CC30, c]
-    - [0xC6CD10, c]
+    - [0xC6C920, c, kzn_06_1_main]
+    - [0xC6CC30, c, kzn_06_2_entity]
+    - [0xC6CD10, c, kzn_06_3_extra]
     - [0xC6D390]
   - name: kzn_07
     dir: world/area_kzn/kzn_07

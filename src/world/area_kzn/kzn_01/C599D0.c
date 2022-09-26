@@ -5,10 +5,6 @@
 extern EvtScript N(EVS_Main);
 extern NpcGroupList N(DefaultNpcs);
 
-enum {
-	NPC_PutridPiranha   = 0,
-};
-
 EntryList N(Entrances) = {
     { -445.0,    0.0,    0.0,   90.0 },  /* kzn_01_ENTRY_0 */
     {  425.0, -255.0,    0.0,  270.0 },  /* kzn_01_ENTRY_1 */
@@ -83,6 +79,8 @@ EvtScript N(EVS_Main) = {
     EVT_RETURN
     EVT_END
 };
+
+//MAPTODO possible data split here at C5A250
 
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 30,
