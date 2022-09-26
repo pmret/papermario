@@ -9,8 +9,8 @@ extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(DefaultNpcs);
 extern EvtScript N(EVS_802455A0);
-extern API_FUNC(N(ApplyLavaGlowLighting));
-extern API_FUNC(N(ClearLavaGlowLighting));
+extern API_CALLABLE(N(ApplyLavaGlowLighting));
+extern API_CALLABLE(N(ClearLavaGlowLighting));
 
 void disable_world_fog(void);
 

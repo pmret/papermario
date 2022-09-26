@@ -10178,14 +10178,11 @@ segments:
     start: 0xC5A740
     vram: 0x80240000
     subsegments:
-    - [0xC5A740, c]
-    - [0xC5AA50, c]
-    - [0xC5AC20, c]
-    - [0xC5CE70, c]
-    - [0xC5CF60, data]
-    - [0xC5D9B0, data]
-    - [0xC609C0, data]
-    - [0xC60C30]
+    - [0xC5A740, c, kzn_02_a]
+    - [0xC5AA50, c, kzn_02_b]
+    - [0xC5AC20, c, kzn_02_d]
+    - [0xC5CE70, c, kzn_02_demo]
+    - [0xC5CF60]
   - name: kzn_03
     dir: world/area_kzn/kzn_03
     type: code

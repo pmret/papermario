@@ -9,9 +9,7 @@
 
 #include "world/common/CheckItemFlags40.inc.c"
 
-s32** N(varStash) = {
-    0
-};
+s32** N(varStash) = NULL;
 
 EvtScript N(D_80244BB4_C76034) = {
     EVT_SET_GROUP(EVT_GROUP_00)

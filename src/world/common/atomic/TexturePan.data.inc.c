@@ -1,7 +1,7 @@
 #include "common.h"
 
-//extern API_FUNC(N(UpdateTexturePanSmooth));
-//extern API_FUNC(N(UpdateTexturePanStepped));
+//extern API_CALLABLE(N(UpdateTexturePanSmooth));
+//extern API_CALLABLE(N(UpdateTexturePanStepped));
 
 #define TEX_PAN_PARAMS_ID(panID) \
         EVT_SET(LVar0, (panID))

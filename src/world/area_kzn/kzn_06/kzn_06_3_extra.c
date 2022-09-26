@@ -1,8 +1,8 @@
 #include "kzn_06.h"
 #include "model.h"
 
-extern API_FUNC(N(AdjustFog));
-extern API_FUNC(func_80240A44_C6D364);
+extern API_CALLABLE(N(AdjustFog));
+extern API_CALLABLE(func_80240A44_C6D364);
 
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
