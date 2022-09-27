@@ -69,6 +69,9 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define CAM_NEAR_CLIP 16
+#define CAM_FAR_CLIP 4096
+
 // Size of tmem in bytes (4kB)
 #define TMEM_SIZE 0x1000
 // Height of tiles to use when copying fullscreen images (6)

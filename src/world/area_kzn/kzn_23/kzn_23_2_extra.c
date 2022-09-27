@@ -40,7 +40,7 @@ ApiStatus N(SetPyroclastPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnsetCamera0MoveFlag1)(Evt* script, s32 isInitialCall) {
+ApiStatus N(AllowCameraInterpY)(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
     camera->moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
@@ -69,13 +69,13 @@ ApiStatus N(AnimateChestSize)(Evt* script, s32 isInitialCall) {
     }
 }
 
-NpcSettings N(D_80240D20_C9D020) = {
+NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(D_80240D4C_C9D04C) = {
+NpcSettings N(NpcSettings_Misstar) = {
     .height = 26,
     .radius = 24,
     .level = 99,
@@ -226,7 +226,7 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(AllowCameraInterpY))
     EVT_EXEC(N(EVS_CameraFollowMisstar))
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_THREAD
@@ -299,7 +299,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
 
 StaticNpc N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(D_80240D20_C9D020),
+    .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
@@ -332,7 +332,7 @@ StaticNpc N(NpcData_Kolorado) = {
 
 StaticNpc N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(D_80240D4C_C9D04C),
+    .settings = &N(NpcSettings_Misstar),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_8000000 | NPC_FLAG_10000000,

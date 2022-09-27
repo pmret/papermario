@@ -15,11 +15,11 @@ void update_camera_mode_0(Camera* camera) {
     f32 yTemp;
     f32 zTemp;
 
-    if (camera->unk_06 != 0) {
+    if (camera->unk_06) {
         camera->lookAt_obj.x = 0.0f;
         camera->lookAt_obj.y = 0.0f;
         camera->lookAt_obj.z = 0.0f;
-        camera->unk_06 = 0;
+        camera->unk_06 = FALSE;
         camera->lookAt_eye.x = camera->lookAt_obj.x;
         camera->lookAt_eye.y = camera->lookAt_obj.y;
         camera->lookAt_eye.z = camera->lookAt_obj.z - (1000.0f / D_8009A5EC);

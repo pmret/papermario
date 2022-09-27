@@ -717,9 +717,9 @@ typedef struct Camera {
     /* 0x014 */ s16 farClip;
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
-    /* 0x01C */ s16 unk_1C;
+    /* 0x01C */ s16 auxPitch;
     /* 0x01E */ s16 auxBoomLength;
-    /* 0x020 */ s16 unk_20;
+    /* 0x020 */ s16 lookAt_dist;
     /* 0x022 */ s16 auxBoomPitch;
     /* 0x024 */ s16 auxBoomYaw;
     /* 0x026 */ s16 auxBoomZOffset;
@@ -731,7 +731,7 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ Vec3f auxPos;
+    /* 0x054 */ Vec3f lookAt_obj_target;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
