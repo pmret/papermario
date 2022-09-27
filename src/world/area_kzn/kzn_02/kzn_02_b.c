@@ -1,43 +1,43 @@
 #include "kzn_02.h"
 
-API_CALLABLE(N(func_80240310_C5AA50));
-API_CALLABLE(N(GetFloorCollider));
-API_CALLABLE(N(func_802403B0_C5AAF0));
-API_CALLABLE(N(func_802403DC_C5AB1C));
+API_CALLABLE(N(GetModelLateralPos));
+API_CALLABLE(N(GetCurrentFloor));
+API_CALLABLE(N(GetActingPartner));
+API_CALLABLE(N(AddPushVelocity));
 
 EvtScript N(D_80243270_C5D9B0) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LABEL(0)
-    EVT_CALL(TranslateModel, MODEL_o29, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_o30, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_o31, 0, LVar0, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o146)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o147)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o148)
-    EVT_WAIT(1)
-    EVT_SUBF(LVar0, EVT_FLOAT(0.7))
-    EVT_IF_GE(LVar0, -22)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(TranslateModel, MODEL_o29, 0, LVar0, 0)
+        EVT_CALL(TranslateModel, MODEL_o30, 0, LVar0, 0)
+        EVT_CALL(TranslateModel, MODEL_o31, 0, LVar0, 0)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o146)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o147)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o148)
+        EVT_WAIT(1)
+        EVT_SUBF(LVar0, EVT_FLOAT(0.7))
+        EVT_IF_GE(LVar0, -22)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_LABEL(1)
-    EVT_ADDF(LVar0, EVT_FLOAT(1.1))
-    EVT_CALL(TranslateModel, MODEL_o29, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_o30, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_o31, 0, LVar0, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o146)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o147)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o148)
-    EVT_WAIT(1)
-    EVT_IF_LT(LVar0, 0)
-        EVT_GOTO(1)
-    EVT_END_IF
+        EVT_ADDF(LVar0, EVT_FLOAT(1.1))
+        EVT_CALL(TranslateModel, MODEL_o29, 0, LVar0, 0)
+        EVT_CALL(TranslateModel, MODEL_o30, 0, LVar0, 0)
+        EVT_CALL(TranslateModel, MODEL_o31, 0, LVar0, 0)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o146)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o147)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_o148)
+        EVT_WAIT(1)
+        EVT_IF_LT(LVar0, 0)
+            EVT_GOTO(1)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_80243430_C5DB70) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(N(GetFloorCollider), LVarA)
+    EVT_CALL(N(GetCurrentFloor), LVarA)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LABEL(0)
     EVT_CALL(TranslateModel, LVar1, 0, LVar0, 0)
@@ -51,7 +51,7 @@ EvtScript N(D_80243430_C5DB70) = {
         EVT_SET(LVar0, -30)
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(N(GetFloorCollider), LVarB)
+    EVT_CALL(N(GetCurrentFloor), LVarB)
     EVT_CALL(GetPlayerActionState, LVarC)
     EVT_IF_EQ(LVarB, LVar4)
         EVT_IF_NE(LVarC, ACTION_STATE_JUMP)
@@ -79,10 +79,10 @@ EvtScript N(D_80243430_C5DB70) = {
     EVT_CALL(UpdateColliderTransform, LVar5)
     EVT_CALL(UpdateColliderTransform, LVar6)
     EVT_WAIT(1)
-    EVT_CALL(N(GetFloorCollider), LVarB)
+    EVT_CALL(N(GetCurrentFloor), LVarB)
     EVT_CALL(GetPlayerActionState, LVarC)
-    EVT_CALL(N(func_802403B0_C5AAF0), LVarD)
-    EVT_IF_EQ(LVarD, 8)
+    EVT_CALL(N(GetActingPartner), LVarD)
+    EVT_IF_EQ(LVarD, PARTNER_LAKILESTER)
         EVT_CALL(IsPlayerWithin, LVar7, LVar8, LVar9, LVarD)
         EVT_IF_EQ(LVarD, 1)
             EVT_GOTO(0)
@@ -113,13 +113,13 @@ EvtScript N(D_80243834_C5DF74) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(1), 0)
         EVT_SET(ArrayVar(1), 1)
-        EVT_SET(LVar1, 9)
-        EVT_SET(LVar2, 11)
-        EVT_SET(LVar3, 10)
-        EVT_SET(LVar4, 31)
-        EVT_SET(LVar5, 32)
-        EVT_SET(LVar6, 33)
-        EVT_CALL(N(func_80240310_C5AA50), 11)
+        EVT_SET(LVar1, MODEL_o29)
+        EVT_SET(LVar2, MODEL_o30)
+        EVT_SET(LVar3, MODEL_o31)
+        EVT_SET(LVar4, COLLIDER_o146)
+        EVT_SET(LVar5, COLLIDER_o147)
+        EVT_SET(LVar6, COLLIDER_o148)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o30)
         EVT_SET(LVar9, 50)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(1), 0)
@@ -132,13 +132,13 @@ EvtScript N(D_80243914_C5E054) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(2), 0)
         EVT_SET(ArrayVar(2), 1)
-        EVT_SET(LVar1, 13)
-        EVT_SET(LVar2, 15)
-        EVT_SET(LVar3, 14)
-        EVT_SET(LVar4, 35)
-        EVT_SET(LVar5, 36)
-        EVT_SET(LVar6, 37)
-        EVT_CALL(N(func_80240310_C5AA50), 15)
+        EVT_SET(LVar1, MODEL_o26)
+        EVT_SET(LVar2, MODEL_o27)
+        EVT_SET(LVar3, MODEL_o28)
+        EVT_SET(LVar4, COLLIDER_o143)
+        EVT_SET(LVar5, COLLIDER_o144)
+        EVT_SET(LVar6, COLLIDER_o145)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o27)
         EVT_SET(LVar9, 60)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(2), 0)
@@ -151,13 +151,13 @@ EvtScript N(D_802439F4_C5E134) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(3), 0)
         EVT_SET(ArrayVar(3), 1)
-        EVT_SET(LVar1, 17)
-        EVT_SET(LVar2, 19)
-        EVT_SET(LVar3, 18)
-        EVT_SET(LVar4, 39)
-        EVT_SET(LVar5, 40)
-        EVT_SET(LVar6, 41)
-        EVT_CALL(N(func_80240310_C5AA50), 19)
+        EVT_SET(LVar1, MODEL_o21)
+        EVT_SET(LVar2, MODEL_o22)
+        EVT_SET(LVar3, MODEL_o18)
+        EVT_SET(LVar4, COLLIDER_o140)
+        EVT_SET(LVar5, COLLIDER_o141)
+        EVT_SET(LVar6, COLLIDER_o142)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o22)
         EVT_SET(LVar9, 50)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(3), 0)
@@ -170,13 +170,13 @@ EvtScript N(D_80243AD4_C5E214) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(4), 0)
         EVT_SET(ArrayVar(4), 1)
-        EVT_SET(LVar1, 30)
-        EVT_SET(LVar2, 29)
-        EVT_SET(LVar3, 31)
-        EVT_SET(LVar4, 47)
-        EVT_SET(LVar5, 48)
-        EVT_SET(LVar6, 49)
-        EVT_CALL(N(func_80240310_C5AA50), 29)
+        EVT_SET(LVar1, MODEL_o70)
+        EVT_SET(LVar2, MODEL_o71)
+        EVT_SET(LVar3, MODEL_o72)
+        EVT_SET(LVar4, COLLIDER_o131)
+        EVT_SET(LVar5, COLLIDER_o132)
+        EVT_SET(LVar6, COLLIDER_o133)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o71)
         EVT_SET(LVar9, 50)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(4), 0)
@@ -189,13 +189,13 @@ EvtScript N(D_80243BB4_C5E2F4) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(5), 0)
         EVT_SET(ArrayVar(5), 1)
-        EVT_SET(LVar1, 26)
-        EVT_SET(LVar2, 25)
-        EVT_SET(LVar3, 27)
-        EVT_SET(LVar4, 51)
-        EVT_SET(LVar5, 52)
-        EVT_SET(LVar6, 53)
-        EVT_CALL(N(func_80240310_C5AA50), 25)
+        EVT_SET(LVar1, MODEL_o67)
+        EVT_SET(LVar2, MODEL_o68)
+        EVT_SET(LVar3, MODEL_o69)
+        EVT_SET(LVar4, COLLIDER_o134)
+        EVT_SET(LVar5, COLLIDER_o135)
+        EVT_SET(LVar6, COLLIDER_o136)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o68)
         EVT_SET(LVar9, 60)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(5), 0)
@@ -208,13 +208,13 @@ EvtScript N(D_80243C94_C5E3D4) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(6), 0)
         EVT_SET(ArrayVar(6), 1)
-        EVT_SET(LVar1, 22)
-        EVT_SET(LVar2, 21)
-        EVT_SET(LVar3, 23)
-        EVT_SET(LVar4, 55)
-        EVT_SET(LVar5, 56)
-        EVT_SET(LVar6, 57)
-        EVT_CALL(N(func_80240310_C5AA50), 21)
+        EVT_SET(LVar1, MODEL_o64)
+        EVT_SET(LVar2, MODEL_o65)
+        EVT_SET(LVar3, MODEL_o66)
+        EVT_SET(LVar4, COLLIDER_o137)
+        EVT_SET(LVar5, COLLIDER_o138)
+        EVT_SET(LVar6, COLLIDER_o139)
+        EVT_CALL(N(GetModelLateralPos), MODEL_o65)
         EVT_SET(LVar9, 50)
         EVT_EXEC_WAIT(N(D_80243430_C5DB70))
         EVT_SET(ArrayVar(6), 0)
@@ -226,36 +226,36 @@ EvtScript N(D_80243C94_C5E3D4) = {
 EvtScript N(D_80243D74_C5E4B4) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_LABEL(0)
-    EVT_CALL(MakeLerp, 0, -3, 30, EASING_LINEAR)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, LVar3, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, LVar4, 0, LVar0, 0)
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(MakeLerp, -3, 0, 30, EASING_LINEAR)
-    EVT_LABEL(2)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, LVar3, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, LVar4, 0, LVar0, 0)
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(2)
-    EVT_END_IF
-    EVT_GOTO(0)
+        EVT_CALL(MakeLerp, 0, -3, 30, EASING_LINEAR)
+        EVT_LABEL(1)
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
+            EVT_CALL(TranslateModel, LVar3, 0, LVar0, 0)
+            EVT_CALL(TranslateModel, LVar4, 0, LVar0, 0)
+            EVT_WAIT(1)
+            EVT_IF_NE(LVar1, 0)
+                EVT_GOTO(1)
+            EVT_END_IF
+        EVT_CALL(MakeLerp, -3, 0, 30, EASING_LINEAR)
+        EVT_LABEL(2)
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
+            EVT_CALL(TranslateModel, LVar3, 0, LVar0, 0)
+            EVT_CALL(TranslateModel, LVar4, 0, LVar0, 0)
+            EVT_WAIT(1)
+            EVT_IF_NE(LVar1, 0)
+                EVT_GOTO(2)
+            EVT_END_IF
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_80243F18_C5E658) = {
     EVT_WAIT(5)
-    EVT_SET(LVar2, 9)
-    EVT_SET(LVar3, 11)
-    EVT_SET(LVar4, 10)
+    EVT_SET(LVar2, MODEL_o29)
+    EVT_SET(LVar3, MODEL_o30)
+    EVT_SET(LVar4, MODEL_o31)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -263,9 +263,9 @@ EvtScript N(D_80243F18_C5E658) = {
 
 EvtScript N(D_80243F70_C5E6B0) = {
     EVT_WAIT(10)
-    EVT_SET(LVar2, 13)
-    EVT_SET(LVar3, 15)
-    EVT_SET(LVar4, 14)
+    EVT_SET(LVar2, MODEL_o26)
+    EVT_SET(LVar3, MODEL_o27)
+    EVT_SET(LVar4, MODEL_o28)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -273,9 +273,9 @@ EvtScript N(D_80243F70_C5E6B0) = {
 
 EvtScript N(D_80243FC8_C5E708) = {
     EVT_WAIT(5)
-    EVT_SET(LVar2, 17)
-    EVT_SET(LVar3, 19)
-    EVT_SET(LVar4, 18)
+    EVT_SET(LVar2, MODEL_o21)
+    EVT_SET(LVar3, MODEL_o22)
+    EVT_SET(LVar4, MODEL_o18)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -283,9 +283,9 @@ EvtScript N(D_80243FC8_C5E708) = {
 
 EvtScript N(D_80244020_C5E760) = {
     EVT_WAIT(10)
-    EVT_SET(LVar2, 30)
-    EVT_SET(LVar3, 29)
-    EVT_SET(LVar4, 31)
+    EVT_SET(LVar2, MODEL_o70)
+    EVT_SET(LVar3, MODEL_o71)
+    EVT_SET(LVar4, MODEL_o72)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -293,9 +293,9 @@ EvtScript N(D_80244020_C5E760) = {
 
 EvtScript N(D_80244078_C5E7B8) = {
     EVT_WAIT(5)
-    EVT_SET(LVar2, 26)
-    EVT_SET(LVar3, 25)
-    EVT_SET(LVar4, 27)
+    EVT_SET(LVar2, MODEL_o67)
+    EVT_SET(LVar3, MODEL_o68)
+    EVT_SET(LVar4, MODEL_o69)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -303,9 +303,9 @@ EvtScript N(D_80244078_C5E7B8) = {
 
 EvtScript N(D_802440D0_C5E810) = {
     EVT_WAIT(10)
-    EVT_SET(LVar2, 22)
-    EVT_SET(LVar3, 21)
-    EVT_SET(LVar4, 23)
+    EVT_SET(LVar2, MODEL_o64)
+    EVT_SET(LVar3, MODEL_o65)
+    EVT_SET(LVar4, MODEL_o66)
     EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
     EVT_RETURN
     EVT_END
@@ -329,12 +329,12 @@ EvtScript N(D_80244128_C5E868) = {
             EVT_SET(LVar4, LVar0)
             EVT_SUB(LVar4, LVar3)
             EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(func_802403DC_C5AB1C), LVar4, 43, 44)
+            EVT_CALL(N(AddPushVelocity), LVar4, COLLIDER_o128, COLLIDER_o129)
             EVT_IF_GT(LVar0, 95)
-                EVT_CALL(N(func_802403B0_C5AAF0), LVar9)
-                EVT_IF_EQ(LVar9, 8)
-                    EVT_CALL(N(GetFloorCollider), LVar2)
-                    EVT_IF_EQ(LVar2, 86)
+                EVT_CALL(N(GetActingPartner), LVar9)
+                EVT_IF_EQ(LVar9, PARTNER_LAKILESTER)
+                    EVT_CALL(N(GetCurrentFloor), LVar2)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp2)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF
@@ -355,12 +355,12 @@ EvtScript N(D_80244128_C5E868) = {
             EVT_SET(LVar4, LVar0)
             EVT_SUB(LVar4, LVar3)
             EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(func_802403DC_C5AB1C), LVar4, 43, 44)
+            EVT_CALL(N(AddPushVelocity), LVar4, COLLIDER_o128, COLLIDER_o129)
             EVT_IF_LT(LVar0, -90)
-                EVT_CALL(N(func_802403B0_C5AAF0), LVar9)
-                EVT_IF_EQ(LVar9, 8)
-                    EVT_CALL(N(GetFloorCollider), LVar2)
-                    EVT_IF_EQ(LVar2, 85)
+                EVT_CALL(N(GetActingPartner), LVar9)
+                EVT_IF_EQ(LVar9, PARTNER_LAKILESTER)
+                    EVT_CALL(N(GetCurrentFloor), LVar2)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF
@@ -438,8 +438,9 @@ EvtScript N(EVS_802444A4) = {
     EVT_END
 };
 
-ApiStatus N(func_80240310_C5AA50)(Evt* script, s32 isInitialCall) {
+ApiStatus N(GetModelLateralPos)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 modelID = evt_get_variable(script, *args++);
     f32 centerX;
     f32 centerY;
     f32 centerZ;
@@ -447,36 +448,45 @@ ApiStatus N(func_80240310_C5AA50)(Evt* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
 
-    get_model_center_and_size(evt_get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+    get_model_center_and_size(modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
     script->varTable[7] = centerX;
     script->varTable[8] = centerZ;
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
-
-ApiStatus N(func_802403B0_C5AAF0)(Evt* script, s32 isInitialCall) {
+ApiStatus N(GetCurrentFloor)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    evt_set_variable(script, *args++, gPartnerActionStatus.actingPartner);
+    s32 outVar = *args++;
+
+    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802403DC_C5AB1C)(Evt* script, s32 isInitialCall) {
+ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s2 = evt_get_variable(script, *args++);
-    s32 temp_s1 = evt_get_variable(script, *args++);
-    s32 temp_s0_3 = evt_get_variable(script, *args++);
+    s32 outVar = *args++;
+
+    evt_set_variable(script, outVar, gPartnerActionStatus.actingPartner);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(AddPushVelocity)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 velX = evt_get_variable(script, *args++);
+    s32 floorA = evt_get_variable(script, *args++);
+    s32 floorB = evt_get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus= &gCollisionStatus;
     Npc* partner;
 
-    if ((collisionStatus->currentFloor == temp_s1) || ((collisionStatus->lastTouchedFloor == temp_s1)) || (collisionStatus->currentFloor == temp_s0_3) || (collisionStatus->lastTouchedFloor == temp_s0_3)) {
-        playerStatus->extraVelocity.x = temp_s2;
+    if ((collisionStatus->currentFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
+     || (collisionStatus->currentFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
+        playerStatus->pushVelocity.x = velX;
     }
     if (gPlayerData.currentPartner != PARTNER_NONE){
         partner = get_npc_unsafe(NPC_PARTNER);
-        if ((partner->currentFloor == temp_s1) || (partner->currentFloor == temp_s0_3)) {
-            partner->pos.x += temp_s2;
+        if ((partner->currentFloor == floorA) || (partner->currentFloor == floorB)) {
+            partner->pos.x += velX;
         }
     }
     return ApiStatus_DONE2;

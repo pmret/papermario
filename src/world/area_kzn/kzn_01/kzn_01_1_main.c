@@ -2,7 +2,7 @@
 #include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
-extern NpcGroupList N(DefaultNpcs);
+extern NpcGroupList N(DefaultNPCs);
 
 EntryList N(Entrances) = {
     { -445.0,    0.0,    0.0,   90.0 },  /* kzn_01_ENTRY_0 */
@@ -47,8 +47,8 @@ EvtScript N(EVS_StartTexPanner4) = {
     EVT_END
 };
 
-EvtScript N(EVS_ExitWalk_jan_22) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_0, "jan_22",  jan_22_ENTRY_2);
-EvtScript N(EVS_ExitWalk_kzn_02) = EXIT_WALK_SCRIPT(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
+EvtScript N(EVS_ExitWalk_jan_22) = EVT_EXIT_WALK(60,  kzn_01_ENTRY_0, "jan_22",  jan_22_ENTRY_2);
+EvtScript N(EVS_ExitWalk_kzn_02) = EVT_EXIT_WALK(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_jan_22), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Main) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
         EVT_SET(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
     EVT_END_IF
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
+    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)

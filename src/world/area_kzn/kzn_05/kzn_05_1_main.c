@@ -46,8 +46,8 @@ EvtScript N(EVS_StartTexPanner4) = {
     EVT_END
 };
 
-EvtScript N(EVS_ExitWalk_kzn_06) = EXIT_WALK_SCRIPT(60,  kzn_05_ENTRY_0, "kzn_06",  kzn_06_ENTRY_0);
-EvtScript N(EVS_ExitWalk_kzn_03) = EXIT_WALK_SCRIPT(60,  kzn_05_ENTRY_1, "kzn_03",  kzn_03_ENTRY_3);
+EvtScript N(EVS_ExitWalk_kzn_06) = EVT_EXIT_WALK(60,  kzn_05_ENTRY_0, "kzn_06",  kzn_06_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_03) = EVT_EXIT_WALK(60,  kzn_05_ENTRY_1, "kzn_03",  kzn_03_ENTRY_3);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_06), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)

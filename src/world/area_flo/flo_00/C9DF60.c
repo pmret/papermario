@@ -195,17 +195,17 @@ EvtScript N(80241B90) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80241D7C) = EXIT_WALK_SCRIPT(60,  1, "flo_14",  0);
+EvtScript N(exitWalk_80241D7C) = EVT_EXIT_WALK(60,  1, "flo_14",  0);
 
-EvtScript N(exitWalk_80241DD8) = EXIT_WALK_SCRIPT(60,  2, "flo_23",  0);
+EvtScript N(exitWalk_80241DD8) = EVT_EXIT_WALK(60,  2, "flo_23",  0);
 
-EvtScript N(exitWalk_80241E34) = EXIT_WALK_SCRIPT(60,  3, "flo_25",  0);
+EvtScript N(exitWalk_80241E34) = EVT_EXIT_WALK(60,  3, "flo_25",  0);
 
-EvtScript N(exitWalk_80241E90) = EXIT_WALK_SCRIPT(60,  4, "flo_16",  0);
+EvtScript N(exitWalk_80241E90) = EVT_EXIT_WALK(60,  4, "flo_16",  0);
 
-EvtScript N(exitWalk_80241EEC) = EXIT_WALK_SCRIPT(60,  5, "flo_09",  0);
+EvtScript N(exitWalk_80241EEC) = EVT_EXIT_WALK(60,  5, "flo_09",  0);
 
-EvtScript N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
+EvtScript N(exitWalk_80241F48) = EVT_EXIT_WALK(60,  6, "flo_08",  0);
 
 const s32 N(pad_XXXX)[] = { 0, 0};
 

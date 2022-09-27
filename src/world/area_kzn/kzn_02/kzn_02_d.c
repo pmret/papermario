@@ -54,6 +54,8 @@ NpcSettings N(D_802449E4_C5F124) = {
     .level = 99,
 };
 
+//SPLIT ? separate enemy and npc?
+
 #include "world/common/atomic/LetterChoice.inc.c"
 
 EvtScript N(D_80244A7C_C5F1BC) = {
@@ -119,7 +121,7 @@ EvtScript N(D_80244C90_C5F3D0) = {
             EVT_CALL(GetAngleBetweenNPCs, LVar9, NPC_PARTNER, LVarB)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
             EVT_CALL(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, 256, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
             EVT_IF_LE(LVarB, 180)
                 EVT_ADD(LVar6, 20)
             EVT_ELSE
@@ -139,7 +141,7 @@ EvtScript N(D_80244C90_C5F3D0) = {
             EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
             EVT_WAIT(5)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, 256, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, FALSE)
             EVT_CALL(EnablePartnerAI)
             EVT_WAIT(5)
     EVT_END_SWITCH
@@ -317,24 +319,24 @@ EvtScript N(D_802453D8_C5FB18) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 2)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 512, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
     EVT_CALL(NpcJump0, NPC_SELF, -760, 50, -40, 10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_WAIT(4)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 512, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_WAIT(8)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 2)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 512, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
     EVT_CALL(NpcJump0, NPC_SELF, -760, 40, -40, 10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_WAIT(4)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 512, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_WAIT(8)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 512, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 4)
@@ -374,10 +376,10 @@ EvtScript N(D_80245D80_C604C0) = {
                 EVT_CALL(SetNpcPos, NPC_SELF, -760, 20, -40)
                 EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245C9C_C603DC)))
             EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -467,7 +469,7 @@ StaticNpc N(D_80246064_C607A4) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-NpcGroupList N(DefaultNpcs) = {
+NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(D_80245E74_C605B4)),
     NPC_GROUP(N(D_80246064_C607A4), BTL_KZN_FORMATION_00, BTL_KZN_STAGE_02),
     {}

@@ -81,9 +81,9 @@ EvtScript N(80240450) = {
 
 #include "world/common/atomic/PipeData.inc.c"
 
-EvtScript N(exitWalk_8024142C) = EXIT_WALK_SCRIPT(60,  0, "flo_23",  1);
+EvtScript N(exitWalk_8024142C) = EVT_EXIT_WALK(60,  0, "flo_23",  1);
 
-EvtScript N(exitWalk_80241488) = EXIT_WALK_SCRIPT(60,  1, "flo_12",  0);
+EvtScript N(exitWalk_80241488) = EVT_EXIT_WALK(60,  1, "flo_12",  0);
 
 EvtScript N(802414E4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

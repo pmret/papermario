@@ -571,7 +571,7 @@
 
 /****** COMMON SCRIPTS ************************************************************************************************/
 
-#define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
+#define EVT_EXIT_WALK(walkDistance, exitIdx, map, entryIdx) \
     { \
         EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \

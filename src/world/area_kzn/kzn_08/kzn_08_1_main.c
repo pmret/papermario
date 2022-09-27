@@ -7,7 +7,7 @@
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
 
-extern NpcGroupList N(DefaultNpcs);
+extern NpcGroupList N(DefaultNPCs);
 extern EvtScript N(EVS_802455A0);
 extern API_CALLABLE(N(ApplyLavaGlowLighting));
 extern API_CALLABLE(N(ClearLavaGlowLighting));
@@ -165,7 +165,7 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_08)
     EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
+    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)

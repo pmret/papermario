@@ -42,9 +42,9 @@ EvtScript N(updateTexturePan_80242460) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
+EvtScript N(exitWalk_802424FC) = EVT_EXIT_WALK(60,  0, "flo_00",  1);
 
-EvtScript N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
+EvtScript N(exitWalk_80242558) = EVT_EXIT_WALK(60,  1, "flo_13",  0);
 
 EvtScript N(802425B4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242558), TRIGGER_FLOOR_ABOVE, 0, 1, 0)

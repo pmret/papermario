@@ -525,52 +525,52 @@ void collision_main_lateral(void) {
             break;
         case ACTION_STATE_RIDE:
             if (get_current_partner_id() == PARTNER_BOW) {
-                playerStatus->position.x += playerStatus->extraVelocity.x;
-                playerStatus->position.y += playerStatus->extraVelocity.y;
-                playerStatus->position.z += playerStatus->extraVelocity.z;
+                playerStatus->position.x += playerStatus->pushVelocity.x;
+                playerStatus->position.y += playerStatus->pushVelocity.y;
+                playerStatus->position.z += playerStatus->pushVelocity.z;
 
-                if (playerStatus->extraVelocity.x != 0.0f ||
-                    playerStatus->extraVelocity.y != 0.0f ||
-                    playerStatus->extraVelocity.z != 0.0f)
+                if (playerStatus->pushVelocity.x != 0.0f ||
+                    playerStatus->pushVelocity.y != 0.0f ||
+                    playerStatus->pushVelocity.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                     if (playerStatus->alpha1 != 128) {
                         collision_check_player_intersecting_world(0, 0,
-                            atan2(0.0f, 0.0f, playerStatus->extraVelocity.x, playerStatus->extraVelocity.z));
+                            atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z));
                     }
                 }
             }
             break;
         case ACTION_STATE_SPIN_POUND:
         case ACTION_STATE_TORNADO_POUND:
-            playerStatus->position.x += playerStatus->extraVelocity.x;
-            playerStatus->position.y += playerStatus->extraVelocity.y;
-            playerStatus->position.z += playerStatus->extraVelocity.z;
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            playerStatus->position.x += playerStatus->pushVelocity.x;
+            playerStatus->position.y += playerStatus->pushVelocity.y;
+            playerStatus->position.z += playerStatus->pushVelocity.z;
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                 gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             }
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
             }
             break;
         case ACTION_STATE_HAMMER:
-            playerStatus->position.x += playerStatus->extraVelocity.x;
-            playerStatus->position.y += playerStatus->extraVelocity.y;
-            playerStatus->position.z += playerStatus->extraVelocity.z;
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            playerStatus->position.x += playerStatus->pushVelocity.x;
+            playerStatus->position.y += playerStatus->pushVelocity.y;
+            playerStatus->position.z += playerStatus->pushVelocity.z;
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -589,9 +589,9 @@ void collision_main_lateral(void) {
                 player_test_move_with_slipping(playerStatus, &playerX, &playerY, &playerZ,
                                                playerStatus->colliderDiameter * 0.5f, yaw);
 
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
@@ -650,16 +650,16 @@ void collision_main_lateral(void) {
                     }
                 }
 
-                playerStatus->position.x += playerStatus->extraVelocity.x;
-                playerStatus->position.z += playerStatus->extraVelocity.z;
+                playerStatus->position.x += playerStatus->pushVelocity.x;
+                playerStatus->position.z += playerStatus->pushVelocity.z;
                 if (playerStatus->timeInAir == 0) {
-                    playerStatus->position.y += playerStatus->extraVelocity.y;
+                    playerStatus->position.y += playerStatus->pushVelocity.y;
                 }
 
                 if (
-                    playerStatus->extraVelocity.x != 0.0f ||
-                    playerStatus->extraVelocity.y != 0.0f ||
-                    playerStatus->extraVelocity.z != 0.0f)
+                    playerStatus->pushVelocity.x != 0.0f ||
+                    playerStatus->pushVelocity.y != 0.0f ||
+                    playerStatus->pushVelocity.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;

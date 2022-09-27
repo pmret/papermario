@@ -1923,7 +1923,7 @@ typedef struct PlayerStatus {
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 inputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ Vec3s lastGoodPosition;
-    /* 0x01C */ Vec3f extraVelocity;
+    /* 0x01C */ Vec3f pushVelocity;
     /* 0x028 */ Vec3f position;
     /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
     /* 0x03C */ VecXZf jumpFromPos;

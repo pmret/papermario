@@ -668,9 +668,9 @@ void update_player(void) {
     check_for_pulse_stone();
     check_for_ispy();
 
-    playerStatus->extraVelocity.x = 0.0f;
-    playerStatus->extraVelocity.y = 0.0f;
-    playerStatus->extraVelocity.z = 0.0f;
+    playerStatus->pushVelocity.x = 0.0f;
+    playerStatus->pushVelocity.y = 0.0f;
+    playerStatus->pushVelocity.z = 0.0f;
     playerStatus->flags &= ~PS_FLAGS_10;
     playerStatus->animFlags &= ~PA_FLAGS_8;
 }

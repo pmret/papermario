@@ -143,8 +143,8 @@ s32 func_802BD540_323E90(void) {
     if (gGameStatusPtr->areaID != AREA_OMO) {
         return -1;
     } else {
-        if (gPlayerStatus.extraVelocity.x != 0.0f || gPlayerStatus.extraVelocity.z != 0.0f) {
-            temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.extraVelocity.x, gPlayerStatus.extraVelocity.z);
+        if (gPlayerStatus.pushVelocity.x != 0.0f || gPlayerStatus.pushVelocity.z != 0.0f) {
+            temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.pushVelocity.x, gPlayerStatus.pushVelocity.z);
             temp_f12 = temp_f22 + 180.0f;
             sp20 = gPlayerStatus.position.x;
             sp24 = gPlayerStatus.position.z;

@@ -39,7 +39,7 @@ static s32 N(pad_1B8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtScript N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
+EvtScript N(exitWalk_802401C0) = EVT_EXIT_WALK(60,  0, "arn_04",  1);
 
 EvtScript N(exitDoubleDoor_8024021C) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

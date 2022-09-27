@@ -94,7 +94,7 @@ StaticNpc N(NpcPutridPiranha) = {
     },
 };
 
-NpcGroupList N(DefaultNpcs) = {
+NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcPutridPiranha)),
     {}
 };

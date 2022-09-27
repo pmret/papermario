@@ -210,7 +210,7 @@ StaticNpc N(D_802451A8_C76628)[] = {
     },
 };
 
-NpcGroupList N(DefaultNpcs) = {
+NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(D_802451A8_C76628), BTL_KZN_FORMATION_11, BTL_KZN_STAGE_04),
     {}
 };

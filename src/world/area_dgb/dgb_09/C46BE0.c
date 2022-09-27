@@ -92,7 +92,7 @@ EvtScript N(exitSingleDoor_80243A88) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
+EvtScript N(exitWalk_80243B3C) = EVT_EXIT_WALK(40,  3, "dgb_10",  0);
 
 EvtScript N(80243B98) = {
     EVT_BIND_TRIGGER(N(exitWalk_80243B3C), TRIGGER_FLOOR_ABOVE, 11, 1, 0)

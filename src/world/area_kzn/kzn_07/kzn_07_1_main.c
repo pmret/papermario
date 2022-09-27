@@ -3,7 +3,7 @@
 #include "world/entrances.h"
 
 extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNpcs);
+extern NpcGroupList N(DefaultNPCs);
 extern EvtScript N(EVS_SetupMusic);
 
 #include "world/common/atomic/LavaGlowLighting.inc.c"
@@ -16,7 +16,7 @@ ModelIDList N(LavaModelIDs) = {
     .list = { MODEL_yougan }
 };
 
-EvtScript N(EVS_ExitWalk_kzn_06) = EXIT_WALK_SCRIPT(60, kzn_07_ENTRY_0, "kzn_06",  kzn_06_ENTRY_1);
+EvtScript N(EVS_ExitWalk_kzn_06) = EVT_EXIT_WALK(60, kzn_07_ENTRY_0, "kzn_06",  kzn_06_ENTRY_1);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_06), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
@@ -60,7 +60,7 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_07)
     EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNpcs)))
+    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_doro, SURFACE_TYPE_LAVA)

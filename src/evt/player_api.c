@@ -823,9 +823,9 @@ ApiStatus func_802D2C40(Evt* script) {
     f32 y;
     f32 z;
 
-    playerStatus->extraVelocity.x = x;
-    playerStatus->extraVelocity.y = evt_get_variable(script, *args++);
-    playerStatus->extraVelocity.z = evt_get_variable(script, *args++);
+    playerStatus->pushVelocity.x = x;
+    playerStatus->pushVelocity.y = evt_get_variable(script, *args++);
+    playerStatus->pushVelocity.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }

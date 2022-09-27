@@ -17,9 +17,9 @@ enum {
     NPC_BOO8,
 };
 
-EvtScript N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
+EvtScript N(exitWalk_80241430) = EVT_EXIT_WALK(60,  0, "arn_03",  1);
 
-EvtScript N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
+EvtScript N(exitWalk_8024148C) = EVT_EXIT_WALK(60,  1, "arn_02",  0);
 
 EvtScript N(802414E8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80241430), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
