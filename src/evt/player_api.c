@@ -785,10 +785,10 @@ ApiStatus func_802D2B50(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
+ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PA_FLAGS_4;
+    playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
     return ApiStatus_DONE2;
 }
 
@@ -805,37 +805,38 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
         playerStatus->colliderDiameter = 26;
         playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
             | PA_FLAGS_40000
-            | PA_FLAGS_4;
+            | PA_FLAGS_INTERRUPT_USE_PARTNER;
     }
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2C14(Evt* script, s32 isInitialCall) {
-    func_800EF3D4(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    func_800EF3D4(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(Evt* script) {
+ApiStatus SetPlayerPushVelocity(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_variable(script, *args++);
-    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 y;
     f32 z;
 
-    playerStatus->pushVelocity.x = x;
-    playerStatus->pushVelocity.y = evt_get_variable(script, *args++);
-    playerStatus->pushVelocity.z = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVelocity.x = x;
+    gPlayerStatus.pushVelocity.y = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVelocity.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 soundID = evt_get_variable(script, *args++);
+    s32 flags = evt_get_variable(script, *args++);
 
-    sfx_play_sound_at_player(var, var2);
+    sfx_play_sound_at_player(soundID, flags);
     return ApiStatus_DONE2;
 }
 

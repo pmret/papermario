@@ -153,7 +153,7 @@ EvtScript D_802C05CC_32579C = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetCurrentPartner, LVar0)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
         EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(func_802C02E4)

@@ -11389,8 +11389,8 @@ segments:
     start: 0xE1E460
     vram: 0x80240000
     subsegments:
-    - [0xE1E460, c]
-    - [0xE1EC20, data]
+    - [0xE1E460, c, gv_01]
+    - [0xE1EC20]
   - type: code
     start: 0xE20110
     vram: 0x802B7000

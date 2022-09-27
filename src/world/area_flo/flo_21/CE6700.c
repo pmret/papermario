@@ -343,7 +343,7 @@ EvtScript N(80241B98) = {
     EVT_EXEC_GET_TID(N(802418C0), LVar9)
     EVT_CALL(GetCurrentPartner, LVar0)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
         EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)

@@ -15,7 +15,7 @@ void action_update_hit_fire(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
 
-        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
         playerStatus->flags |= (PS_FLAGS_800 | PS_FLAGS_FLYING);
 
         suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);

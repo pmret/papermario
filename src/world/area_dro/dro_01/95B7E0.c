@@ -1894,7 +1894,7 @@ EvtScript N(8024CCC4) = {
         EVT_IF_NE(LVar1, 6)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -1954,7 +1954,7 @@ EvtScript N(8024CF7C) = {
         EVT_IF_NE(LVar1, 6)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE

@@ -802,8 +802,9 @@ MapConfig mgm_maps[] = {
 };
 
 /// Game Over
+#include "area_gv/gv.h"
 MapConfig gv_maps[] = {
-    { MAP_UNSPLIT(gv_01, 0x802407D0) },
+    { MAP(gv_01) },
 };
 
 AreaConfig gAreas[] = {

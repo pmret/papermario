@@ -3176,7 +3176,7 @@ enum PlayerStatusFlags {
 enum PlayerStatusAnimFlags {
     PA_FLAGS_HOLDING_WATT                     = 0x00000001,
     PA_FLAGS_2                                = 0x00000002,
-    PA_FLAGS_4                                = 0x00000004,
+    PA_FLAGS_INTERRUPT_USE_PARTNER            = 0x00000004, ///< forces actions with bow, parakarry, watt, and lakilester to end (sushie not tested)
     PA_FLAGS_8                                = 0x00000008, ///< triggers partner use when set
     PA_FLAGS_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
     PA_FLAGS_SPEECH_PROMPT_AVAILABLE          = 0x00000020, ///< (...) prompt

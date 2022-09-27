@@ -31,7 +31,7 @@ void action_update_hit_lava(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= (PS_FLAGS_800000 | PS_FLAGS_FLYING);
-        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
         playerStatus->flags |= PS_FLAGS_800;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;

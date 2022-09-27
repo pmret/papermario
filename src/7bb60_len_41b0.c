@@ -35,7 +35,7 @@ s32 can_trigger_loading_zone(void) {
             if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
                 return TRUE;
             } else {
-                gPlayerStatusPtr->animFlags |= PA_FLAGS_4;
+                gPlayerStatusPtr->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
         } else {
@@ -43,7 +43,7 @@ s32 can_trigger_loading_zone(void) {
                 return partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE;
             }
             if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
-                gPlayerStatusPtr->animFlags |= PA_FLAGS_4;
+                gPlayerStatusPtr->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
         }

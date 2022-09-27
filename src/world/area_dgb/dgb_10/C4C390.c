@@ -252,7 +252,7 @@ EvtScript N(80240E68) = {
     EVT_CALL(N(func_8024013C_C4C4CC))
     EVT_CALL(func_802CA988, 0, LVar2, LVar3, LVar4, LVar5)
     EVT_CALL(N(func_802401C0_C4C550))
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(GotoMap, EVT_PTR("dgb_11"), LVar0)
     EVT_WAIT(100)
     EVT_RETURN

@@ -55,7 +55,7 @@ void func_802BB000_E2D930(Entity* entity) {
 
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && !is_picking_up_item()) {
         if (playerStatus->actionState == ACTION_STATE_RIDE) {
-            playerStatus->animFlags |= PA_FLAGS_4;
+            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
         } else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
             D_802BCE34 = data->unk_28;
             D_802BCE30 = data->unk_2A;
@@ -275,7 +275,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
         case 0:
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
                 if (partnerActionStatus->actingPartner != 0) {
-                    playerStatus->animFlags |= PA_FLAGS_4;
+                    playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 }
                 func_800EF300();
                 playerStatus->animFlags |= PA_FLAGS_40000;

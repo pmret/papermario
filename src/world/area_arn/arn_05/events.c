@@ -771,7 +771,7 @@ EvtScript N(802441FC) = {
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
         EVT_EXEC_WAIT(N(80242C50))
         EVT_CALL(BindNpcInteract, 0, EVT_PTR(N(interact_802418F4)))
         EVT_CALL(BindNpcInteract, 1, EVT_PTR(N(interact_80241A84)))

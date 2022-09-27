@@ -156,7 +156,7 @@ EvtScript N(npcAI_802435E4) = {
         EVT_GOTO(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)

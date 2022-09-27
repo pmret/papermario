@@ -284,7 +284,7 @@ ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall);
 ApiStatus func_80045900(Evt* script, s32 isInitialCall);
 ApiStatus ShowKeyChoicePopup(Evt* script, s32 isInitialCall);
 ApiStatus CloseChoicePopup(Evt* script, s32 isInitialCall);
-ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall);
+ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall);
 ApiStatus func_80045838(Evt* script, s32 isInitialCall);
 ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 isInitialCall);
 ApiStatus func_802CF56C(Evt* script, s32 isInitialCall);

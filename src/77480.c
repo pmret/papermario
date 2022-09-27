@@ -605,7 +605,7 @@ void update_player(void) {
             if (playerStatus->animFlags & PA_FLAGS_400000) {
                 Npc* partner;
 
-                playerStatus->animFlags |= PA_FLAGS_20000000 | PA_FLAGS_4;
+                playerStatus->animFlags |= PA_FLAGS_20000000 | PA_FLAGS_INTERRUPT_USE_PARTNER;
                 partner = get_npc_unsafe(NPC_PARTNER);
                 partner->pos.x = playerStatus->lastGoodPosition.x;
                 partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;

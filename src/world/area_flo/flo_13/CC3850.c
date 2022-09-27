@@ -475,7 +475,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_CALL(SetNpcPos, 0, -250, 120, 45)
     EVT_CALL(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(SetPlayerAnimation, 65578)
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 270, 1)

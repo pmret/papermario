@@ -266,7 +266,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(AwaitPlayerLeave, -455, -60, 85)
     EVT_CALL(GetCurrentPartner, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_100, TRUE)
