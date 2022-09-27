@@ -1,5 +1,4 @@
 #include "kzn_02.h"
-#include "world/entrances.h"
 #include "world/partners.h"
 
 API_CALLABLE(func_80242730_C5CE70);

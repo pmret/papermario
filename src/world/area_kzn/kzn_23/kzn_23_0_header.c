@@ -1,5 +1,4 @@
 #include "kzn_23.h"
-#include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
 

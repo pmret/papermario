@@ -1,7 +1,6 @@
 #include "kzn_23.h"
 #include "entity.h"
 #include "effects.h"
-#include "world/entrances.h"
 
 ApiStatus N(SetChestPosition)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

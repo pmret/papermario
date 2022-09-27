@@ -1,5 +1,4 @@
 #include "kzn_02.h"
-#include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_802444A4);
@@ -7,9 +6,9 @@ extern EvtScript N(EVS_802464A8);
 extern NpcGroupList N(DefaultNPCs);
 
 EntryList N(Entrances) = {
-    { -810.0,   20.0,  -10.0,   90.0 },  /* kzn_02_ENTRY_0 */
-    {  810.0,   20.0,  -10.0,  270.0 },  /* kzn_02_ENTRY_1 */
-    { -810.0,   20.0,  -10.0,   90.0 },  /* kzn_02_ENTRY_2 */
+    [kzn_02_ENTRY_0]    { -810.0,   20.0,  -10.0,   90.0 },
+    [kzn_02_ENTRY_1]    {  810.0,   20.0,  -10.0,  270.0 },
+    [kzn_02_ENTRY_2]    { -810.0,   20.0,  -10.0,   90.0 },
 };
 
 MapSettings N(settings) = {

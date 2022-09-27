@@ -1,14 +1,13 @@
 #include "kzn_06.h"
-#include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(EVS_SetupLavaPuzzle);
 
 EntryList N(Entrances) = {
-    {  385.0,  115.0,   55.0,  270.0 },  /* N(ENTRY_0) */
-    { -385.0,   75.0,   68.0,   90.0 },  /* N(ENTRY_1) */
-    {  400.0,    5.0,  175.0,  270.0 },  /* N(ENTRY_2) */
+    [kzn_06_ENTRY_0]    {  385.0,  115.0,   55.0,  270.0 },
+    [kzn_06_ENTRY_1]    { -385.0,   75.0,   68.0,   90.0 },
+    [kzn_06_ENTRY_2]    {  400.0,    5.0,  175.0,  270.0 },
 };
 
 MapSettings N(settings) = {
@@ -23,7 +22,7 @@ MapSettings N(settings) = {
 
 EvtScript N(EVS_ExitWalk_kzn_05) = EVT_EXIT_WALK(60, kzn_06_ENTRY_0, "kzn_05",  kzn_05_ENTRY_0);
 EvtScript N(EVS_ExitWalk_kzn_08) = EVT_EXIT_WALK(60, kzn_06_ENTRY_2, "kzn_08",  kzn_08_ENTRY_0);
-EvtScript N(EVS_ExitWalk_kzn_07) = EVT_EXIT_WALK(60, kzn_06_ENTRY_1, "kzn_07\0\0\0",  kzn_07_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_07) = EVT_EXIT_WALK(60, kzn_06_ENTRY_1, "kzn_07",  kzn_07_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_05), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)

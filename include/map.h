@@ -3,6 +3,7 @@
 
 #include "common_structs.h"
 #include "enums.h"
+#include "world/entrances.h"
 #include "script_api/map.h"
 #include "npc.h"
 

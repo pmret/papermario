@@ -1,5 +1,4 @@
 #include "kzn_08.h"
-#include "world/entrances.h"
 #include "model.h"
 
 // header and utility includes
@@ -15,7 +14,7 @@ extern API_CALLABLE(N(ClearLavaGlowLighting));
 void disable_world_fog(void);
 
 EntryList N(Entrances) = {
-    { -315.0,    0.0,   85.0,   90.0 },  /* kzn_08_ENTRY_0 */
+    [kzn_08_ENTRY_0]    { -315.0,    0.0,   85.0,   90.0 },
 };
 
 MapSettings N(settings) = {

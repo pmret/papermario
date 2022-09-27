@@ -1,6 +1,5 @@
 #include "kzn_07.h"
 #include "model.h"
-#include "world/entrances.h"
 
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);

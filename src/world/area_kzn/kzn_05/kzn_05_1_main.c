@@ -1,11 +1,10 @@
 #include "kzn_05.h"
-#include "world/entrances.h"
 
 extern EvtScript N(EVS_Main);
 
 EntryList N(Entrances) = {
-    { -430.0, -259.0,   10.0,   90.0 },  /* kzn_05_ENTRY_0 */
-    {  450.0,    0.0,   10.0,  270.0 },  /* kzn_05_ENTRY_1 */
+    [kzn_05_ENTRY_0]    { -430.0, -259.0,   10.0,   90.0 },
+    [kzn_05_ENTRY_1]    {  450.0,    0.0,   10.0,  270.0 },
 };
 
 MapSettings N(settings) = {

@@ -1,5 +1,4 @@
 #include "kzn_10.h"
-#include "world/entrances.h"
 #include "effects.h"
 
 #define UNK_FUNC_50_LVar1 -469.0

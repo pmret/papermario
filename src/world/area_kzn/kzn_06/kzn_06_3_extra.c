@@ -4,6 +4,8 @@
 extern API_CALLABLE(N(AdjustFog));
 extern API_CALLABLE(func_80240A44_C6D364);
 
+const s32 pad_rodata_C6E318 = 0;
+
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
 ModelIDList D_80241374_C6DC94 = {
