@@ -193,7 +193,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     set_action_state(ACTION_STATE_RIDE);
                     parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
-                    gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+                    gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
                     parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
@@ -237,7 +237,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 D_802BEBB4 = 1;
                 D_802BEBB8 = 1;
                 D_802BEBB0 = 1;
-                gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+                gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
                 parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                 parakarry->flags |= NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 partnerActionStatus->actingPartner = PARTNER_PARAKARRY;

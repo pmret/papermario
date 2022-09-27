@@ -48,7 +48,7 @@ void action_update_jump(void) {
         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
             phys_adjust_cam_on_landing();
         } else {
-            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         }
 
         if (playerStatus->actionState == ACTION_STATE_JUMP) {
@@ -105,7 +105,7 @@ void action_update_landing_on_switch(void) {
         }
 
         suggest_player_anim_clearUnkFlag(anim);
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
 
     playerStatus->actionSubstate++;
@@ -133,7 +133,7 @@ void action_update_falling(void) {
             anim = ANIM_Mario_6000A;
         }
         suggest_player_anim_clearUnkFlag(anim);
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     playerStatus->timeInAir++;
 }
@@ -155,7 +155,7 @@ void action_update_step_down(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_JUMPING | PS_FLAGS_FLYING);
         playerStatus->flags |= PS_FLAGS_FALLING;
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
 
     playerStatus->timeInAir++;
@@ -190,7 +190,7 @@ void action_update_peach_falling(void) {
         }
 
         suggest_player_anim_clearUnkFlag(anim);
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     playerStatus->timeInAir++;
 }
@@ -202,7 +202,7 @@ void action_update_peach_step_down(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags &= ~(PS_FLAGS_JUMPING | PS_FLAGS_FLYING);
         playerStatus->flags |= PS_FLAGS_FALLING;
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
         if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
             suggest_player_anim_clearUnkFlag(ANIM_Peach_A0006);

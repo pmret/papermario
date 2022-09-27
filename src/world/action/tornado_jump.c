@@ -41,7 +41,7 @@ void action_update_tornado_jump(void) {
         suggest_player_anim_setUnkFlag(ANIM_Mario_80000);
         disable_player_input();
         playerStatus->flags |= PS_FLAGS_200;
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         cameraRelativeYaw = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         if (cameraRelativeYaw <= 180.0f) {
             spinRate = 60.0f;

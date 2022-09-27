@@ -4265,7 +4265,7 @@ enum CameraFlags {
 };
 
 enum CameraMoveFlags {
-    CAMERA_MOVE_FLAGS_1             = 0x00000001,
+    CAMERA_MOVE_IGNORE_PLAYER_Y             = 0x00000001,
     CAMERA_MOVE_FLAGS_2             = 0x00000002,
     CAMERA_MOVE_FLAGS_4             = 0x00000004
 };

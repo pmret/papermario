@@ -4,15 +4,15 @@ extern EvtScript D_800936DC;
 
 #include "sprite/npc/LargePiranha.h"
 
+f32 N(FlyingAI_JumpVels)[] = {
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
+};
+
 #include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
 #include "world/common/enemy/PiranhaPlantAI.inc.c"
-
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
-};
 
 MobileAISettings N(D_80244DB8_C76238) = {
     .moveSpeed = 0.8f,
@@ -133,7 +133,6 @@ StaticNpc N(D_802451A8_C76628)[] = {
         .pos = { 80.0f, 0.0f, 135.0f },
         .yaw = 270,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS,
-        .init = NULL,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -183,7 +182,6 @@ StaticNpc N(D_802451A8_C76628)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
-        .init = NULL,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,

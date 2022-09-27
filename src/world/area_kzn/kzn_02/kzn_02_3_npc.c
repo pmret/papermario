@@ -270,7 +270,6 @@ StaticNpc N(EnemyNPC_Bubble) = {
     .pos = { 250.0f, 50.0f, 0.0f },
     .yaw = 90,
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = NULL,
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,

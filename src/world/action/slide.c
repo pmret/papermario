@@ -57,7 +57,7 @@ void action_update_sliding(void) {
         D_802B679C = 0;
         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
         sfx_play_sound_at_player(SOUND_167, 0);
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     speed = playerStatus->currentSpeed;
     posX = playerStatus->position.x;

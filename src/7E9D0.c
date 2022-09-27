@@ -148,10 +148,10 @@ s32 phys_adjust_cam_on_landing(void) {
         s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
 
         if (surfaceType == SURFACE_TYPE_LAVA) {
-            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             ret = 0;
         } else {
-            gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
+            gCameras[0].moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
         }
     } else if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
         gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_2;

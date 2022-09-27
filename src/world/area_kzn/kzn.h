@@ -24,6 +24,7 @@ enum {
     AF_KZN_02      = AreaFlag(2),
     AF_KZN_03      = AreaFlag(3),
     AF_KZN_04      = AreaFlag(4),
+    AF_KZN_11      = AreaFlag(0x11),
 };
 
 extern MapSettings kzn_01_settings;

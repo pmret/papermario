@@ -10349,12 +10349,10 @@ segments:
     start: 0xC9C300
     vram: 0x80240000
     subsegments:
-    - [0xC9C300, c]
-    - [0xC9C610, c]
-    - [0xC9C920, data]
-    - [0xC9C9B0, data]
-    - [0xC9D020, data]
-    - [0xC9DF10]
+    - [0xC9C300, c, kzn_23_0_header]
+    - [0xC9C300, c, kzn_23_1_main]
+    - [0xC9C610, c, kzn_23_2_extra]
+    - [0xC9C920]
   - name: flo_00
     dir: world/area_flo/flo_00
     type: code

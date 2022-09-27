@@ -43,7 +43,7 @@ void action_update_hit_lava(void) {
         playerStatus->currentSpeed = 0.0f;
         LaunchVelocity = 0.0f;
 
-        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_FLAGS_1 | CAMERA_MOVE_FLAGS_2);
+        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_FLAGS_2);
         LaunchInterpPhase = 90.0f;
         subtract_hp(1);
         open_status_menu_long();

@@ -7,7 +7,7 @@ extern f32 D_800A08E4;
 extern f32 D_800A08E8;
 extern f32 D_800A08EC;
 
-void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3);
+void func_80030210(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
 void func_8003034C(Camera* camera);
 
 void update_camera_mode_unused(Camera* camera);
@@ -112,12 +112,12 @@ void update_camera_mode_5(Camera* camera) {
         camera->auxPos.y = camera->targetPos.y + camera->currentYOffset;
         camera->auxPos.z = camera->targetPos.z;
         func_8003034C(camera);
-        if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_1)) {
-            func_80030210(camera, temp_f20, temp_f22, 0);
+        if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
+            func_80030210(camera, temp_f20, temp_f22, FALSE);
         } else {
             lookXDelta = temp_f22; // needed to match
 
-            func_80030210(camera, temp_f20, lookXDelta, 1);
+            func_80030210(camera, temp_f20, lookXDelta, TRUE);
         }
     }
 
@@ -129,7 +129,7 @@ void update_camera_mode_5(Camera* camera) {
     camera->currentPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 
-void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3) {
+void func_80030210(Camera* camera, f32 arg1, f32 arg2, s16 lockPosY) {
     f32 xDelta = (camera->auxPos.x - camera->lookAt_obj.x) * arg1;
     f32 theta;
     f32 cosTheta;
@@ -143,13 +143,13 @@ void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3) {
     }
 
     camera->lookAt_obj.x = camera->lookAt_eye.x = camera->lookAt_obj.x + xDelta;
-    theta = DEG_TO_RAD(camera->currentBoomYaw);
 
-    cosTheta = cos_rad(theta);
+    theta = DEG_TO_RAD(camera->currentBoomYaw);
+    cosTheta = cos_rad(DEG_TO_RAD(camera->currentBoomYaw));
     camera->lookAt_obj.z += (camera->auxPos.z - camera->lookAt_obj.z) * arg1;
     camera->lookAt_eye.z = camera->lookAt_obj.z + (camera->currentBoomLength * cosTheta);
 
-    if (arg3 << 16 == 0) {
+    if (!lockPosY) {
         sinTheta = sin_rad(theta);
         camera->lookAt_obj.y += (camera->auxPos.y - camera->lookAt_obj.y) * 0.125f;
         camera->lookAt_eye.y = camera->lookAt_obj.y + (camera->currentBoomLength * sinTheta);
@@ -763,7 +763,7 @@ void update_camera_zone_interp(Camera* camera) {
         camera->linearInterpScale = 1.0f;
     }
     temp = targetX;
-    if (camera->moveFlags & CAMERA_MOVE_FLAGS_1) {
+    if (camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y) {
         camera->unk_498 = 0.0f;
     } else if (camera->unk_494 != targetY) {
         camera->unk_494 = targetY;
