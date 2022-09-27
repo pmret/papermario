@@ -5,7 +5,7 @@ extern u8 D_E0086AC0[];
 extern u8 D_E0086AC4[];
 extern u8 D_E0086AD4[];
 
-void func_E00863B4();
+void func_E00863B4(void);
 
 INCLUDE_ASM(s32, "effects/firework", firework_main);
 
