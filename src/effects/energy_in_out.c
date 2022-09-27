@@ -63,7 +63,7 @@ void energy_in_out_update(EffectInstance* effect) {
         part->unk_3C += part->unk_40;
 
         angle = (part->unk_14 * 180) / part->unk_10;
-        if ((angle < 0.0f) || (angle > 180.0f)) {
+        if (angle < 0.0f || angle > 180.0f) {
             part->unk_24 = 0;
         } else {
             part->unk_24 = shim_sin_deg(angle) * 255.0f;

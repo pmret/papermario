@@ -92,8 +92,7 @@ EffectInstance* chapter_change_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     data->unk_30 = 0;
     data->unk_34 = 0;
     data->unk_38 = 0;
-    if (arg0 == 0 || (arg0 >= 10 && arg0 <= 18))
-    {
+    if (arg0 == 0 || (arg0 >= 10 && arg0 <= 18)) {
         data->unk_3C = 0;
     } else {
         data->unk_3C = 255;
