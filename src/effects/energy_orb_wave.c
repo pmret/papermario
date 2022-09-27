@@ -1,6 +1,12 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09001000[];
+extern Gfx D_090010A8[];
+extern Gfx D_090011D0[];
+extern Gfx D_090011F0[];
+extern Gfx D_09001210[];
+
 void energy_orb_wave_init(EffectInstance* effect);
 void energy_orb_wave_update(EffectInstance* effect);
 void energy_orb_wave_render(EffectInstance* effect);
@@ -96,4 +102,52 @@ void energy_orb_wave_render(EffectInstance* effect) {
 void func_E00A4648(void) {
 }
 
-INCLUDE_ASM(s32, "effects/energy_orb_wave", energy_orb_wave_appendGfx);
+void energy_orb_wave_appendGfx(void* effect) {
+    EnergyOrbWaveFXData* data = ((EffectInstance*)effect)->data.energyOrbWave;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_14 = data->unk_14;
+    s32 unk_2C = data->unk_2C;
+    s32 unk_00 = data->unk_00;
+    Matrix4f sp18;
+    Matrix4f sp58;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guScaleF(sp58, data->scale, data->scale, data->scale);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_20, data->unk_24, data->unk_28, unk_2C);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_BAYER);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+
+    if (unk_00 < 3) {
+        gSPDisplayList(gMasterGfxPos++, D_09001000);
+
+        shim_guRotateF(sp18, unk_14, 0.0f, 0.0f, 1.0f);
+        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, D_090011D0);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+
+        shim_guRotateF(sp18, -unk_14 * 8, 0.0f, 0.0f, 1.0f);
+        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, D_090011F0);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    } else {
+        gSPDisplayList(gMasterGfxPos++, D_090010A8);
+        gSPDisplayList(gMasterGfxPos++, D_09001210);
+    }
+
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

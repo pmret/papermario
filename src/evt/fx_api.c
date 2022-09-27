@@ -143,8 +143,8 @@ ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
-    // function is never called, so the effect type is assumed
-    effect->data.gotItemOutline->unk_30 = 5;
+    // function is never called, so the effect type can't be inferred
+    effect->data.any[12] = 5;
     return ApiStatus_DONE2;
 }
 

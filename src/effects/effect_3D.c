@@ -165,7 +165,7 @@ void fx_3D_update(EffectInstance* effect) {
                 }
             }
 
-            if (unk_5C - 4 < 3U) {
+            if (unk_5C >= 4 && unk_5C <= 6) {
                 part->unk_14 += part->unk_2C;
                 part->unk_18 += part->unk_30;
                 part->unk_1C += part->unk_34;
