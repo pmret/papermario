@@ -2,8 +2,11 @@
 /// @brief Mt Lavalava - Descent Toward Boss
 
 #include "common.h"
-#include "../kzn.h"
 #include "message_ids.h"
 #include "map.h"
+
+#include "../kzn.h"
+#include "mapfs/kzn_10_shape.h"
+#include "mapfs/kzn_10_hit.h"
 
 #define NAMESPACE kzn_10

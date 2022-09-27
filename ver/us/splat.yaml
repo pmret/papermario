@@ -10267,11 +10267,9 @@ segments:
     start: 0xC7E180
     vram: 0x80240000
     subsegments:
-    - [0xC7E180, c]
-    - [0xC7E4B0, c]
-    - [0xC7E850, data]
-    - [0xC7EE90, data]
-    - [0xC80170]
+    - [0xC7E180, c, kzn_10_1_main]
+    - [0xC7E4B0, c, kzn_10_2_extra]
+    - [0xC7E850]
   - name: kzn_11
     dir: world/area_kzn/kzn_11
     type: code

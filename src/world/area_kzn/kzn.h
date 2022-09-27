@@ -20,7 +20,11 @@ enum {
     AB_KZN_F       = AreaByte(15),
 };
 
-#define AF_KZN(index) AreaFlag(index)
+enum {
+    AF_KZN_02      = AreaFlag(2),
+    AF_KZN_03      = AreaFlag(3),
+    AF_KZN_04      = AreaFlag(4),
+};
 
 extern MapSettings kzn_01_settings;
 extern MapSettings kzn_02_settings;

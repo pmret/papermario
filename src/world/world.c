@@ -141,7 +141,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gPlayerStatus.targetYaw = gPlayerStatus.currentYaw;
 
-    func_801497FC(D_8008FF60[mapConfig->unk_1C.word % 4]);
+    func_801497FC(D_8008FF60[mapConfig->unk_1C.word & 0x3]);
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
