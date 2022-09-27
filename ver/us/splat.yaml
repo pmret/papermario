@@ -10178,10 +10178,10 @@ segments:
     start: 0xC5A740
     vram: 0x80240000
     subsegments:
-    - [0xC5A740, c, kzn_02_a]
-    - [0xC5AA50, c, kzn_02_b]
-    - [0xC5AC20, c, kzn_02_d]
-    - [0xC5CE70, c, kzn_02_demo]
+    - [0xC5A740, c, kzn_02_1_main]
+    - [0xC5AA50, c, kzn_02_2_platforms]
+    - [0xC5AC20, c, kzn_02_3_npc]
+    - [0xC5CE70, c, kzn_02_4_demo]
     - [0xC5CF60]
   - name: kzn_03
     dir: world/area_kzn/kzn_03
@@ -10256,13 +10256,11 @@ segments:
     start: 0xC76CE0
     vram: 0x80240000
     subsegments:
-    - [0xC76CE0, c]
-    - [0xC77A20, c]
-    - [0xC77D00, c]
-    - [0xC7A6F0, data]
-    - [0xC7A9E0, data]
-    - [0xC7B0D0, data]
-    - [0xC7DF40]
+    - [0xC76CE0, c, kzn_09_1_main]
+    - [0xC76CE0, c, kzn_09_2_entity]
+    - [0xC77A20, c, kzn_09_3_zipline]
+    - [0xC77D00, c, kzn_09_4_npc]
+    - [0xC7A6F0]
   - name: kzn_10
     dir: world/area_kzn/kzn_10
     type: code

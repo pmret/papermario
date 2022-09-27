@@ -1,4 +1,5 @@
 #include "common.h"
+#include "message_ids.h"
 #include "SuperBlock.inc.h"
 
 // map-specific parameters for this data

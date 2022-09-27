@@ -27,7 +27,7 @@ EvtScript N(D_80246280_C609C0) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, "kzn_02", kzn_02_ENTRY_2, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kzn_02"), kzn_02_ENTRY_2, TRANSITION_2)
     EVT_WAIT(110)
     EVT_RETURN
     EVT_END
@@ -46,7 +46,7 @@ EvtScript N(D_802463E4_C60B24) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, "kzn_02", kzn_02_ENTRY_2, TRANSITION_3)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kzn_02"), kzn_02_ENTRY_2, TRANSITION_3)
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END

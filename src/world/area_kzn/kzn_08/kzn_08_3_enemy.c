@@ -51,7 +51,7 @@ EvtScript N(D_80244E84_C76304) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_CALL(func_80045900, 1)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
@@ -180,7 +180,7 @@ StaticNpc N(D_802451A8_C76628)[] = {
     {
         .id = NPC_PutridPiranha_02,
         .settings = &N(NpcSettings_MeleeHitbox),
-        .pos = { 0.0f, -1000.0f, 0.0f },
+        .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .init = NULL,
