@@ -1699,7 +1699,7 @@ typedef struct LavaReset {
 
 typedef struct BombTrigger {
     /* 0x00 */ Vec3f pos;
-    /* 0x0C */ s32 radius; // usually set to zero
+    /* 0x0C */ s32 radius; // effective 'size' of the object, usually set to zero because bombettes explosion radius is large enough
 } BombTrigger; // size = 0x10;
 
 typedef struct AnimatedModel {
