@@ -16,7 +16,23 @@ extern s32 D_80244630_EEABE0;
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
+// Needs data migrated
+#ifdef NON_MATCHING
+ApiStatus func_80242260_EE8810(Evt *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    if (isInitialCall != 0) {
+        D_8024462C_EEABDC = 0;
+    }
+    if (D_8024462C_EEABDC != 0) {
+        D_8024462C_EEABDC = 0;
+        dead_evt_set_variable(script, *args++, D_80244630_EEABE0);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
+#endif
 
 ApiStatus EE70C0_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
