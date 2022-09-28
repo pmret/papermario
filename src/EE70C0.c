@@ -16,7 +16,18 @@ extern s32 D_80244630_EEABE0;
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
+// INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
+? func_80242260_EE8810(Evt *arg0, s32 arg1) {
+    if (arg1 != 0) {
+        D_8024462C_EEABDC = 0;
+    }
+    if (D_8024462C_EEABDC != 0) {
+        D_8024462C_EEABDC = 0;
+        dead_evt_set_variable(arg0, *arg0->ptrReadPos, D_80244630_EEABE0);
+        return 2;
+    }
+    return 0;
+}
 
 ApiStatus EE70C0_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
