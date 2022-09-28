@@ -10326,11 +10326,9 @@ segments:
     start: 0xC95F30
     vram: 0x80240000
     subsegments:
-    - [0xC95F30, c]
-    - [0xC96240, c]
-    - [0xC969F0, data]
-    - [0xC97600, data]
-    - [0xC9A1F0]
+    - [0xC95F30, c, kzn_20_1_main]
+    - [0xC96240, c, kzn_20_2_npc]
+    - [0xC969F0]
   - name: kzn_22
     dir: world/area_kzn/kzn_22
     type: code

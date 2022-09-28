@@ -1,7 +1,5 @@
 #include "kzn_09.h"
 
-extern s32 N(LetterDelivery_SavedNpcAnim);
-
 extern EvtScript D_800936DC;
 
 #include "world/common/enemy/PiranhaPlantAI.inc.c"
@@ -224,8 +222,6 @@ NpcSettings N(NpcSettings_Dummy) = {
     .level = 99,
 };
 
-// BEGIN LETTER DELIVERY?
-
 #include "world/common/atomic/LetterChoice.inc.c"
 
 s32 N(LetterList)[] = {
@@ -248,7 +244,7 @@ EvtScript N(D_80245BB4_C7C894) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(D_80244A14_C5F154))
+        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
         EVT_CALL(AddStarPieces, 1)
     EVT_END_IF
     EVT_RETURN

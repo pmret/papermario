@@ -1697,6 +1697,11 @@ typedef struct LavaReset {
     /* 0x04 */ Vec3f pos;
 } LavaReset; // size = 0x10;
 
+typedef struct BombTrigger {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s32 radius; // usually set to zero
+} BombTrigger; // size = 0x10;
+
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
     /* 0x04 */ Vec3f pos;

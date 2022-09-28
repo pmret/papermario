@@ -1,8 +1,6 @@
 #include "kzn_02.h"
 #include "message_ids.h"
 
-extern s32 N(LetterDelivery_SavedNpcAnim);
-
 extern EvtScript N(D_80243270_C5D9B0);
 
 API_CALLABLE(N(AwaitLetterChoiceResult));
@@ -53,11 +51,9 @@ NpcSettings N(D_802449E4_C5F124) = {
     .level = 99,
 };
 
-//SPLIT ? separate enemy and npc?
-
 #include "world/common/atomic/LetterChoice.inc.c"
 
-s32 N(D_8024531C_C5FA5C)[] = {
+s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
@@ -67,7 +63,7 @@ EvtScript N(D_80245324_C5FA64) = {
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER25, 0,
         MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-        EVT_PTR(N(D_8024531C_C5FA5C)))
+        EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(DoLetterDelivery))
     EVT_RETURN
     EVT_END
@@ -77,7 +73,7 @@ EvtScript N(D_80245374_C5FAB4) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(D_80244A14_C5F154))
+        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
         EVT_CALL(AddStarPieces, 1)
     EVT_END_IF
     EVT_RETURN

@@ -2182,6 +2182,7 @@ enum AmbientSounds {
     AMBIENT_WIND               = 1,
     AMBIENT_BEACH              = 2,
     AMBIENT_JUNGLE             = 3,
+    // actually, 'undersea' are all lava-related. sort these out when map data is done
     AMBIENT_UNDER_SEA1         = 4,
     AMBIENT_UNDER_SEA2         = 5,
     AMBIENT_SILENCE            = 6,

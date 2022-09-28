@@ -1,10 +1,13 @@
 #include "common.h"
 
+//TODO remove
+extern s32 N(LetterDelivery_SavedNpcAnim);
+
 s32** N(varStash) = NULL;
 
 #include "world/common/StashVars.inc.c"
 
-EvtScript N(D_80244A14_C5F154) = {
+EvtScript N(Delivery_ShowGotStarPiece) = {
     EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
     EVT_RETURN
     EVT_RETURN
@@ -19,6 +22,7 @@ EvtScript N(EVS_80244A44) = {
 };
 
 static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
+//static s32 N(LetterDelivery_SavedNpcAnim);
 
 #include "world/common/GetItemName.inc.c"
 
@@ -149,6 +153,7 @@ EvtScript N(D_802452BC_C7BF9C) = {
     EVT_END
 };
 
+// unused
 EvtScript N(EVS_80245400) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(D_802452BC_C7BF9C), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
@@ -267,7 +272,7 @@ EvtScript N(DoLetterDelivery) = {
                     EVT_IF_NE(LVar6, 0)
                         EVT_SET(LVar0, LVar6)
                         EVT_SET(LVar1, 1)
-                        EVT_EXEC_WAIT(N(D_80244A14_C5F154))
+                        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
                         EVT_CALL(AddKeyItem, LVar6)
                     EVT_END_IF
                     EVT_SET(LVarC, 2)

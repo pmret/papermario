@@ -24,12 +24,15 @@ enum {
     AF_KZN_02       = AreaFlag(2),
     AF_KZN_03       = AreaFlag(3),
     AF_KZN_04       = AreaFlag(4),
-    AF_KZN_0C       = AreaFlag(0xC),
-    AF_KZN_0D       = AreaFlag(0xD),
-    AF_KZN_0E       = AreaFlag(0xE),
-    AF_KZN_0F       = AreaFlag(0xF),
-    AF_KZN_10       = AreaFlag(0x10),
-    AF_KZN_11       = AreaFlag(0x11),
+    AF_KZN_09       = AreaFlag(9),
+    AF_KZN_0A       = AreaFlag(10),
+    AF_KZN_0B       = AreaFlag(11),
+    AF_KZN_0C       = AreaFlag(12),
+    AF_KZN_0D       = AreaFlag(13),
+    AF_KZN_0E       = AreaFlag(14),
+    AF_KZN_0F       = AreaFlag(15),
+    AF_KZN_10       = AreaFlag(16),
+    AF_KZN_11       = AreaFlag(17),
 };
 
 extern MapSettings kzn_01_settings;
