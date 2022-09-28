@@ -8,27 +8,19 @@ INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_main);
 void smoke_burst_init(void) {
 }
 
-typedef struct Unk {
-    s32 unk14;
-    s32 unk18;
-    f32 unk20;
-    f32 unk1C;
-} Unk;
-
 // INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_update);
 void smoke_burst_update(EffectInstance *effect) {
-    Unk *temp_v0;
-    s32 temp_a0;
-    s32 temp_v1;
+    SmokeBurstFXData* data = ((EffectInstance*)effect)->data.smokeBurst;
+    s32 timeAlive = data->unk18;
+    s32 timeLeft = data->unk14 - 1;
 
-    temp_v0 = effect->data.any;
-    temp_v1 = temp_v0->unk18;
-    temp_a0 = temp_v0->unk14 - 1;
-    temp_v0->unk18 = (s32) (temp_v1 + 1);
-    temp_v0->unk14 = temp_a0;
-    temp_v0->unk20 = (f32) (((f32) temp_v1 * 8.0f) / (f32) temp_v0->unk1C);
-    if (temp_a0 < 0) {
+    data->unk14--;    
+    data->unk18++;
+    
+    data->unk20 = (f32) (((f32) timeAlive * 8.0f) / (f32) data->unk1C);
+    if (timeLeft < 0) {
         shim_remove_effect(effect);
+        return;
     }
 }
 
