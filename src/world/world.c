@@ -308,9 +308,10 @@ MapConfig tik_maps[] = {
 };
 
 /// Inside the Whale
+#include "area_kgr/kgr.h"
 MapConfig kgr_maps[] = {
-    { MAP_UNSPLIT(kgr_01, 0x80240540), .unk_1C = { .bytes = { .flags = 1 } } },
-    { MAP_UNSPLIT(kgr_02, 0x80240790), .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kgr_01), .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kgr_02), .unk_1C = { .bytes = { .flags = 1 } } },
 };
 
 /// Goomba Region
