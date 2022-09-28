@@ -1,10 +1,10 @@
 
 #include "kzn_03.h"
 
-extern EvtScript N(EVS_802451E4);
-extern EvtScript N(EVS_80245240);
+extern EvtScript N(EVS_SyncZiplineDummyNPC1);
+extern EvtScript N(EVS_SyncZiplineDummyNPC2);
 
-ApiStatus N(func_80242DB0_C63AC0)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Zipline_AdjustMoveDownSound)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (*args++ != 0) {
@@ -16,7 +16,7 @@ ApiStatus N(func_80242DB0_C63AC0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80242E54_C63B64)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Zipline_AdjustMoveUpSound)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (*args++ != 0) {
@@ -28,39 +28,61 @@ ApiStatus N(func_80242E54_C63B64)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80242EF8_C63C08);
+ApiStatus N(Zipline_UpdatePlayerPos)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 temp_v0 = evt_get_variable(script, *args++);
+    f32* array = *(f32**) script->array;
+    f32 dx = array[3] - array[0];
+    f32 dy = array[4] - array[1];
+    f32 dz = array[5] - array[2];
+    
+    script->varTable[5] = (dx / 1000.0f) * script->varTable[0];
+    script->varTable[6] = (dy / 1000.0f) * script->varTable[0];
+    script->varTable[7] = (dz / 1000.0f) * script->varTable[0];
+    if (temp_v0 == 0) {
+        Npc* partner = get_npc_safe(NPC_PARTNER);
+        gPlayerStatus.position.x = script->varTable[2] + script->varTable[5];
+        gPlayerStatus.position.y = script->varTable[3] + script->varTable[6];
+        gPlayerStatus.position.z = script->varTable[4] + script->varTable[7];
+        gPlayerStatus.targetYaw = atan2(array[0], array[2], array[3], array[5]);
+        partner->pos.x = gPlayerStatus.position.x;
+        partner->pos.y = gPlayerStatus.position.y - 10.0f;
+        partner->pos.z = gPlayerStatus.position.z - 5.0f;
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242EF8_C63C08);
-
-ApiStatus N(func_80243070_C63D80)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Zipline_CheckInputForJumpOff)(Evt* script, s32 isInitialCall) {
     script->varTable[8] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     return ApiStatus_DONE2;
 }
 
-f32 N(D_80246990_C676A0)[] = {
-    -327.5, 1008.7, -55.0, 233.9, 914.0, -55.0, 
+Vec3f N(Zipline_Endpoints1)[] = {
+    { -327.5, 1008.7, -55.0 },
+    {  233.9,  914.0, -55.0 },
 };
 
-f32 N(D_802469A8_C676B8)[] = {
-    297.0, 608.0, 255.0, -362.0, 267.0, 255.0, 
+Vec3f N(Zipline_Endpoints2)[] = {
+    {  297.0, 608.0, 255.0 },
+    { -362.0, 267.0, 255.0 }, 
 };
 
-EvtScript N(D_802469C0_C676D0) = {
+EvtScript N(EVS_Zipline_TetherCameraToPlayer) = {
     EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80246A28_C67738) = {
+EvtScript N(EVS_RideZipline) = {
     EVT_CALL(GetCurrentPartner, LVar9)
-    EVT_IF_EQ(LVar9, 2)
+    EVT_IF_EQ(LVar9, PARTNER_KOOPER)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LVar9, 3)
+    EVT_IF_EQ(LVar9, PARTNER_BOMBETTE)
         EVT_RETURN
     EVT_END_IF
     EVT_USE_ARRAY(LVar0)
@@ -68,7 +90,7 @@ EvtScript N(D_80246A28_C67738) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
-    EVT_EXEC_GET_TID(N(D_802469C0_C676D0), LVar9)
+    EVT_EXEC_GET_TID(N(EVS_Zipline_TetherCameraToPlayer), LVar9)
     EVT_THREAD
         EVT_WAIT(7)
         EVT_CALL(DisablePartnerAI, 0)
@@ -80,7 +102,7 @@ EvtScript N(D_80246A28_C67738) = {
         EVT_ADD(LVar1, -5)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.5))
         EVT_CALL(NpcJump0, NPC_PARTNER, ArrayVar(3), LVar0, LVar1, 8)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_END_THREAD
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.2))
     EVT_CALL(PlayerJump, ArrayVar(3), ArrayVar(4), ArrayVar(5), 5)
@@ -96,7 +118,7 @@ EvtScript N(D_80246A28_C67738) = {
         EVT_SET(AB_KZN_0, ArrayVar(6))
         EVT_LOOP(0)
             EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(func_80242DB0_C63AC0), MF_Unk_0A, LVar1, LVar2, LVar3)
+            EVT_CALL(N(Zipline_AdjustMoveDownSound), MF_Unk_0A, LVar1, LVar2, LVar3)
             EVT_IF_NE(AB_KZN_0, LVar0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -106,11 +128,11 @@ EvtScript N(D_80246A28_C67738) = {
     EVT_CALL(MakeLerp, 0, 1000, 70, EASING_QUADRATIC_IN)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(func_80242EF8_C63C08, 0)
+    EVT_CALL(N(Zipline_UpdatePlayerPos), 0)
     EVT_CALL(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
     EVT_CALL(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80243070_C63D80))
+    EVT_CALL(N(Zipline_CheckInputForJumpOff))
     EVT_IF_EQ(LVar8, 0x00008000)
         EVT_GOTO(10)
     EVT_END_IF
@@ -135,7 +157,7 @@ EvtScript N(D_80246A28_C67738) = {
         EVT_SET(AB_KZN_1, ArrayVar(6))
         EVT_LOOP(0)
             EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(func_80242E54_C63B64), MF_Unk_0B, LVar1, LVar2, LVar3)
+            EVT_CALL(N(Zipline_AdjustMoveUpSound), MF_Unk_0B, LVar1, LVar2, LVar3)
             EVT_IF_NE(AB_KZN_1, LVar0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -147,7 +169,7 @@ EvtScript N(D_80246A28_C67738) = {
     EVT_CALL(MakeLerp, LVar0, 0, LVar2, EASING_LINEAR)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(func_80242EF8_C63C08, 1)
+    EVT_CALL(N(Zipline_UpdatePlayerPos), 1)
     EVT_CALL(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
     EVT_CALL(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
     EVT_WAIT(1)
@@ -160,29 +182,29 @@ EvtScript N(D_80246A28_C67738) = {
     EVT_END
 };
 
-EvtScript N(EVS_80247044) = {
+EvtScript N(EVS_SetupZiplines) = {
     EVT_MALLOC_ARRAY(7, LVar0)
     EVT_USE_ARRAY(LVar0)
-    EVT_SET(ArrayVar(0), EVT_PTR(N(D_80246990_C676A0)))
-    EVT_SET(ArrayVar(1), 53)
-    EVT_SET(ArrayVar(2), 55)
+    EVT_SET(ArrayVar(0), EVT_PTR(N(Zipline_Endpoints1)))
+    EVT_SET(ArrayVar(1), MODEL_kassya_koma)
+    EVT_SET(ArrayVar(2), MODEL_kassya_himo)
     EVT_SET(ArrayVar(3), -327)
     EVT_SET(ArrayVar(4), 895)
     EVT_SET(ArrayVar(5), -46)
-    EVT_SET(ArrayVar(6), 1)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80246A28_C67738)), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway1, 1, 0)
-    EVT_EXEC(N(EVS_802451E4))
+    EVT_SET(ArrayVar(6), NPC_ZiplineDummy1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_RideZipline)), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway1, 1, 0)
+    EVT_EXEC(N(EVS_SyncZiplineDummyNPC1))
     EVT_MALLOC_ARRAY(7, LVar0)
     EVT_USE_ARRAY(LVar0)
-    EVT_SET(ArrayVar(0), EVT_PTR(N(D_802469A8_C676B8)))
-    EVT_SET(ArrayVar(1), 59)
-    EVT_SET(ArrayVar(2), 57)
+    EVT_SET(ArrayVar(0), EVT_PTR(N(Zipline_Endpoints2)))
+    EVT_SET(ArrayVar(1), MODEL_kssya2_koma)
+    EVT_SET(ArrayVar(2), MODEL_kassya2_himo)
     EVT_SET(ArrayVar(3), 298)
     EVT_SET(ArrayVar(4), 495)
     EVT_SET(ArrayVar(5), 265)
-    EVT_SET(ArrayVar(6), 2)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80246A28_C67738)), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway2, 1, 0)
-    EVT_EXEC(N(EVS_80245240))
+    EVT_SET(ArrayVar(6), NPC_ZiplineDummy2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_RideZipline)), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway2, 1, 0)
+    EVT_EXEC(N(EVS_SyncZiplineDummyNPC2))
     EVT_RETURN
     EVT_END
 };

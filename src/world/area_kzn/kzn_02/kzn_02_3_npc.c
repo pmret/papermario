@@ -260,7 +260,7 @@ StaticNpc N(PassiveNPCs) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(EnemyNPC_Bubble) = {
+StaticNpc N(NpcData_Bubble) = {
     .id = NPC_Bubble,
     .settings = &N(D_802449B8_C5F0F8),
     .pos = { 250.0f, 50.0f, 0.0f },
@@ -312,6 +312,6 @@ StaticNpc N(EnemyNPC_Bubble) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(PassiveNPCs)),
-    NPC_GROUP(N(EnemyNPC_Bubble), BTL_KZN_FORMATION_00, BTL_KZN_STAGE_02),
+    NPC_GROUP(N(NpcData_Bubble), BTL_KZN_FORMATION_00, BTL_KZN_STAGE_02),
     {}
 };

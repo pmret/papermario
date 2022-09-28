@@ -2,13 +2,23 @@
 #include "entity.h"
 
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
-
 #include "world/common/SetCamera0MoveFlag1.inc.c"
 
-API_CALLABLE(func_80242D38_C63A48);
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242D38_C63A48);
-
+ApiStatus N(IsPlayerOnFirstCliff)(Evt* script, s32 isInitialCall) {
+    s32 result = -1;
+    
+    if (gPlayerStatus.lastGoodPosition.y > 800.0) {
+        result = 0;
+    }
+    if (gPlayerStatus.lastGoodPosition.y < 680.0) {
+        result = 1;
+    }
+    if (result >= 0) {
+        evt_set_variable(script, MV_Unk_09, result);
+    }
+    
+    return ApiStatus_BLOCK;
+}
 
 EvtScript N(D_802462B0_C66FC0) = {
     EVT_LOOP(0)
@@ -20,7 +30,7 @@ EvtScript N(D_802462B0_C66FC0) = {
     EVT_END
 };
 
-EvtScript N(D_80246314_C67024) = {
+EvtScript N(EVS_UseSpringA) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
@@ -40,7 +50,7 @@ EvtScript N(D_80246314_C67024) = {
     EVT_END
 };
 
-EvtScript N(D_80246410_C67120) = {
+EvtScript N(EVS_UseSpringB) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
     EVT_WAIT(1)
@@ -59,7 +69,7 @@ EvtScript N(D_80246410_C67120) = {
     EVT_END
 };
 
-EvtScript N(D_802464F8_C67208) = {
+EvtScript N(EVS_UseSpringC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
@@ -84,7 +94,7 @@ EvtScript N(D_802464F8_C67208) = {
     EVT_END
 };
 
-EvtScript N(D_8024663C_C6734C) = {
+EvtScript N(EVS_OnBreakBlock) = {
     EVT_SET(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
     EVT_RETURN
     EVT_END
@@ -106,7 +116,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinD)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block), 490, 470, 210, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(D_8024663C_C6734C)))
+        EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnBreakBlock)))
         EVT_THREAD
             EVT_LOOP(0)
                 EVT_IF_GE(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
@@ -114,20 +124,20 @@ EvtScript N(EVS_MakeEntities) = {
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_THREAD
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 160, 30, 350, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_80246314_C67024)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringA)))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 335, 265, 360, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_80246410_C67120)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringB)))
     EVT_THREAD
-        EVT_CALL(func_80242D38_C63A48)
+        EVT_CALL(N(IsPlayerOnFirstCliff))
     EVT_END_THREAD
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), -410, 645, 120, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_802464F8_C67208)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringC)))
     EVT_RETURN
     EVT_END
 };

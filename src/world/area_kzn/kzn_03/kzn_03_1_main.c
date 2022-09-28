@@ -2,7 +2,7 @@
 #include "entity.h"
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80247044);
+extern EvtScript N(EVS_SetupZiplines);
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
 
@@ -21,36 +21,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_kzn_03 },
 };
 
-#include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
-
-EvtScript N(D_802431BC_C63ECC) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, 3)
-    EVT_THREAD
-        TEX_PAN_PARAMS_ID(TEX_PANNER_3)
-        TEX_PAN_PARAMS_STEP( -200,    0,  600, -400)
-        TEX_PAN_PARAMS_FREQ(    1,    0,    1,    1)
-        TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_802432D8_C63FE8) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, 4)
-    EVT_THREAD
-        TEX_PAN_PARAMS_ID(TEX_PANNER_4)
-        TEX_PAN_PARAMS_STEP(  500,    0,    0, -400)
-        TEX_PAN_PARAMS_FREQ(    1,    0,    0,    1)
-        TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 EvtScript N(EVS_ExitWalk_kzn_02_1) = EVT_EXIT_WALK(60, kzn_03_ENTRY_0, "kzn_02", kzn_02_ENTRY_1);
 EvtScript N(EVS_ExitWalk_kzn_04_0) = EVT_EXIT_WALK(60, kzn_03_ENTRY_1, "kzn_04", kzn_04_ENTRY_0);
@@ -68,7 +39,7 @@ EvtScript N(EVS_BindTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_8024365C_C6436C) = {
+EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(EnableTexPanning, MODEL_o112, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o151, TRUE)
@@ -89,6 +60,7 @@ EvtScript N(D_8024365C_C6436C) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_THREAD
+        // animate lava bubbles (real ones, not the enemies)
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
             EVT_CALL(SetTexPanOffset, 13, 0, LVar0, 0)
@@ -117,12 +89,12 @@ EvtScript N(EVS_Main) = {
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
-    EVT_EXEC(N(D_8024365C_C6436C))
+    EVT_EXEC(N(EVS_StartTexPanners_Lava))
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(N(D_802431BC_C63ECC))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)
-    EVT_EXEC(N(D_802432D8_C63FE8))
-    EVT_EXEC_WAIT(N(EVS_80247044))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeRight))
+    EVT_EXEC_WAIT(N(EVS_SetupZiplines))
     EVT_RETURN
     EVT_END
 };

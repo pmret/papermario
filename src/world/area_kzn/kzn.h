@@ -46,7 +46,7 @@ enum {
 
 extern MapSettings kzn_01_settings;
 extern MapSettings kzn_02_settings;
-//extern MapSettings kzn_03_settings;
+extern MapSettings kzn_03_settings;
 extern MapSettings kzn_04_settings;
 extern MapSettings kzn_05_settings;
 extern MapSettings kzn_06_settings;

@@ -86,7 +86,7 @@ EvtScript N(EVS_80243C38) = {
     EVT_END
 };
 
-NpcSettings N(NpcSettings_Piranha_Hitbox) = {
+NpcSettings N(NpcSettings_PiranhaHitbox) = {
     .height = 20,
     .radius = 28,
     .level = 17,
@@ -449,7 +449,7 @@ StaticNpc N(NpcData_Piranha)[] = {
     },
     {
         .id = NPC_Piranha_Hitbox,
-        .settings = &N(NpcSettings_Piranha_Hitbox),
+        .settings = &N(NpcSettings_PiranhaHitbox),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,

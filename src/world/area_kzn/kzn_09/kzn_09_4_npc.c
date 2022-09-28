@@ -14,7 +14,7 @@ NpcSettings N(NpcSettings_Kolorado) = {
     .level = 99,
 };
 
-EvtScript N(D_80244B7C_C7B85C) = {
+EvtScript N(EVS_NpcDefeat_PiranhaHitbox) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
@@ -37,7 +37,7 @@ MobileAISettings N(D_80244C38_C7B918) = {
     .playerSearchInterval = 1,
 };
 
-EvtScript N(D_80244C68_C7B948) = {
+EvtScript N(EVS_NpcAI_Piranha) = {
     EVT_CALL(SetSelfVar, 7, 1)
     EVT_CALL(SetSelfVar, 8, 10)
     EVT_CALL(SetSelfVar, 9, 9)
@@ -52,16 +52,16 @@ EvtScript N(D_80244C68_C7B948) = {
     EVT_END
 };
 
-NpcSettings N(D_80244D3C_C7BA1C) = {
+NpcSettings N(NpcSettings_Piranha) = {
     .height = 50,
     .radius = 36,
     .level = 17,
-    .ai = &N(D_80244C68_C7B948),
+    .ai = &N(EVS_NpcAI_Piranha),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
 
-EvtScript N(D_80244D68_C7BA48) = {
+EvtScript N(EVS_NpcAI_PiranhaHitbox) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 14)
     EVT_CALL(SetSelfVar, 1, 28)
@@ -87,12 +87,12 @@ EvtScript N(EVS_80244DE8) = {
     EVT_END
 };
 
-NpcSettings N(D_80244E74_C7BB54) = {
+NpcSettings N(NpcSettings_PiranhaHitbox) = {
     .height = 20,
     .radius = 28,
     .level = 17,
-    .ai = &N(D_80244D68_C7BA48),
-    .onDefeat = &N(D_80244B7C_C7B85C),
+    .ai = &N(EVS_NpcAI_PiranhaHitbox),
+    .onDefeat = &N(EVS_NpcDefeat_PiranhaHitbox),
 };
 
 MobileAISettings N(D_80244EA0_C7BB80) = {
@@ -455,7 +455,7 @@ EvtScript N(EVS_Dummy_Init) = {
     EVT_END
 };
 
-StaticNpc N(PassiveNPCs)[] = {
+StaticNpc N(NpcData_PassiveNPCs)[] = {
     {
         .id = NPC_Kolorado,
         .settings = &N(NpcSettings_Kolorado),
@@ -522,7 +522,7 @@ StaticNpc N(PassiveNPCs)[] = {
     },
 };
 
-StaticNpc N(EnemyNPC_SpikeTop) = {
+StaticNpc N(NpcData_SpikeTop) = {
     .id = NPC_SpikeTop,
     .settings = &N(D_802451CC_C7BEAC),
     .pos = { -100.0f, 350.0f, 50.0f },
@@ -572,10 +572,10 @@ StaticNpc N(EnemyNPC_SpikeTop) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(EnemyNPC_PutridPiranha)[] = {
+StaticNpc N(NpcData_Piranha)[] = {
     {
-        .id = NPC_PutridPiranha,
-        .settings = &N(D_80244D3C_C7BA1C),
+        .id = NPC_Piranha,
+        .settings = &N(NpcSettings_Piranha),
         .pos = { 200.0f, 350.0f, 100.0f },
         .yaw = 270,
         .flags = NPC_FLAG_LOCK_ANIMS,
@@ -623,8 +623,8 @@ StaticNpc N(EnemyNPC_PutridPiranha)[] = {
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
-        .id = NPC_PutridPiranha_Hitbox,
-        .settings = &N(D_80244E74_C7BB54),
+        .id = NPC_Piranha_Hitbox,
+        .settings = &N(NpcSettings_PiranhaHitbox),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
@@ -655,8 +655,8 @@ StaticNpc N(EnemyNPC_PutridPiranha)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(PassiveNPCs)),
-    NPC_GROUP(N(EnemyNPC_SpikeTop), BTL_KZN_FORMATION_0B, BTL_KZN_STAGE_01),
-    NPC_GROUP(N(EnemyNPC_PutridPiranha), BTL_KZN_FORMATION_0F, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_PassiveNPCs)),
+    NPC_GROUP(N(NpcData_SpikeTop), BTL_KZN_FORMATION_0B, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_Piranha), BTL_KZN_FORMATION_0F, BTL_KZN_STAGE_01),
     {}
 };

@@ -49,6 +49,7 @@ EvtScript N(EVS_StartTexPanners_Lava) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_THREAD
+        // animate lava bubbles (real ones, not the enemies)
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
             EVT_CALL(SetTexPanOffset, 13, 0, LVar0, 0)

@@ -17,7 +17,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(EVS_UpdateTexPanners_Lava) = {
+EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_off1, TRUE)
@@ -91,7 +91,7 @@ EvtScript N(EVS_Main) = {
     EVT_THREAD
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
-    EVT_EXEC(N(EVS_UpdateTexPanners_Lava))
+    EVT_EXEC(N(EVS_StartTexPanners_Lava))
     EVT_SET(LVar0, MODEL_kem1)
     EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)

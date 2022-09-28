@@ -1,11 +1,13 @@
 #include "kzn_03.h"
 
+extern EvtScript D_800936DC;
+
 // spike top
 #include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-#include "world/common/enemy/PiranhaPlantAI.inc.c"
+// spike top data
 
 MobileAISettings N(D_80243AA0_C647B0) = {
     .moveSpeed = 1.0f,
@@ -92,7 +94,9 @@ EvtScript N(D_80243C80_C64990) = {
     EVT_END
 };
 
-NpcSettings N(80243D74) = {
+// different spike top prefabs
+
+NpcSettings N(NpcSettings_Unused1) = {
     .height = 20,
     .radius = 22,
     .level = 10,
@@ -101,7 +105,7 @@ NpcSettings N(80243D74) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(80243DA0) = {
+NpcSettings N(NpcSettings_Unused2) = {
     .height = 20,
     .radius = 22,
     .level = 10,
@@ -119,7 +123,7 @@ NpcSettings N(NpcSettings_SpikeTop_01) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(80243DF8) = {
+NpcSettings N(NpcSettings_Unused3) = {
     .height = 24,
     .radius = 24,
     .level = 25,
@@ -128,13 +132,18 @@ NpcSettings N(80243DF8) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-EvtScript N(EVS_NpcDefeat_PutridPiranha_02) = {
+
+#include "world/common/enemy/PiranhaPlantAI.inc.c"
+
+// piranha plant data
+
+EvtScript N(EVS_NpcDefeat_PiranhaHitbox) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_CALL(func_80045900, 1)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
@@ -144,14 +153,14 @@ EvtScript N(EVS_NpcDefeat_PutridPiranha_02) = {
     EVT_END
 };
 
-MobileAISettings N(D_80243EE0_C64BF0) = {
+MobileAISettings N(AISettings_Piranha) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 150.0f,
     .playerSearchInterval = 1,
 };
 
-EvtScript N(EVS_NpcAI_PutridPiranha_01) = {
+EvtScript N(EVS_NpcAI_Piranha) = {
     EVT_CALL(SetSelfVar, 7, 1)
     EVT_CALL(SetSelfVar, 8, 10)
     EVT_CALL(SetSelfVar, 9, 9)
@@ -161,26 +170,26 @@ EvtScript N(EVS_NpcAI_PutridPiranha_01) = {
     EVT_CALL(SetSelfVar, 13, 15)
     EVT_CALL(SetSelfVar, 14, 18)
     EVT_CALL(SetSelfVar, 15, 15)
-    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(D_80243EE0_C64BF0)))
+    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(AISettings_Piranha)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_PutridPiranha_01) = {
+NpcSettings N(NpcSettings_Piranha) = {
     .height = 50,
     .radius = 36,
     .level = 17,
-    .ai = &N(EVS_NpcAI_PutridPiranha_01),
+    .ai = &N(EVS_NpcAI_Piranha),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
 
-EvtScript N(EVS_NpcAI_PutridPiranha_02) = {
+EvtScript N(EVS_NpcAI_PiranhaHitbox) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 14)
     EVT_CALL(SetSelfVar, 1, 28)
     EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, 0x000020DE)
+    EVT_CALL(SetSelfVar, 15, SOUND_20DE)
     EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END
@@ -194,28 +203,28 @@ EvtScript N(EVS_80244090) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(0x800936DC)
+            EVT_EXEC_WAIT(D_800936DC)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_PutridPiranha_02) = {
+NpcSettings N(NpcSettings_PiranhaHitbox) = {
     .height = 20,
     .radius = 28,
     .level = 17,
-    .ai = &N(EVS_NpcAI_PutridPiranha_02),
-    .onDefeat = &N(EVS_NpcDefeat_PutridPiranha_02),
+    .ai = &N(EVS_NpcAI_PiranhaHitbox),
+    .onDefeat = &N(EVS_NpcDefeat_PiranhaHitbox),
 };
 
-NpcSettings N(NpcSettings_Kolorado_02) = {
+NpcSettings N(NpcSettings_ZiplineDummy) = {
     .height = 24,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Kolorado_01) = {
+NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
     .level = 99,
@@ -250,7 +259,7 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_END
 };
 
-EvtScript N(D_80244B68_C65878) = {
+EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar4, LVar5, LVar6)
@@ -310,7 +319,7 @@ EvtScript N(D_80244B68_C65878) = {
     EVT_END
 };
 
-EvtScript N(D_80244EF8_C65C08) = {
+EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
         EVT_IF_EQ(GF_KZN03_SpokeWithKolorado, FALSE)
@@ -346,16 +355,16 @@ EvtScript N(D_80244EF8_C65C08) = {
     EVT_END
 };
 
-EvtScript N(D_80245134_C65E44) = {
+EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH5_SMASHED_ULTRA_BLOCK)
             EVT_IF_EQ(GF_KZN06_Visited, TRUE)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_80244B68_C65878)))
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80244EF8_C65C08)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
+                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(STORY_CH5_SMASHED_ULTRA_BLOCK)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80244EF8_C65C08)))
+            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(RemoveNpc, NPC_SELF)
@@ -363,7 +372,7 @@ EvtScript N(D_80245134_C65E44) = {
     EVT_END
 };
 
-EvtScript N(EVS_802451E4) = {
+EvtScript N(EVS_SyncZiplineDummyNPC1) = {
     EVT_LOOP(0)
         EVT_CALL(GetModelCenter, MODEL_kassya_koma)
         EVT_CALL(SetNpcPos, NPC_ZiplineDummy1, LVar0, LVar1, LVar2)
@@ -373,7 +382,7 @@ EvtScript N(EVS_802451E4) = {
     EVT_END
 };
 
-EvtScript N(EVS_80245240) = {
+EvtScript N(EVS_SyncZiplineDummyNPC2) = {
     EVT_LOOP(0)
         EVT_CALL(GetModelCenter, MODEL_kssya2_koma)
         EVT_CALL(SetNpcPos, NPC_ZiplineDummy2, LVar0, LVar1, LVar2)
@@ -383,7 +392,7 @@ EvtScript N(EVS_80245240) = {
     EVT_END
 };
 
-EvtScript N(D_8024529C_C65FAC) = {
+EvtScript N(EVS_NpcInit_ZiplineDummy) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.3), 1, EVT_FLOAT(0.3))
     EVT_RETURN
@@ -393,11 +402,11 @@ EvtScript N(D_8024529C_C65FAC) = {
 StaticNpc N(NpcData_PassiveNPCs)[] = {
     {
         .id = NPC_Kolorado,
-        .settings = &N(NpcSettings_Kolorado_01),
+        .settings = &N(NpcSettings_Kolorado),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
-        .init = &N(D_80245134_C65E44),
+        .init = &N(EVS_NpcInit_Kolorado),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -425,11 +434,11 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
     {
         .id = NPC_ZiplineDummy1,
-        .settings = &N(NpcSettings_Kolorado_02),
+        .settings = &N(NpcSettings_ZiplineDummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
-        .init = &N(D_8024529C_C65FAC),
+        .init = &N(EVS_NpcInit_ZiplineDummy),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -457,11 +466,11 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
     {
         .id = NPC_ZiplineDummy2,
-        .settings = &N(NpcSettings_Kolorado_02),
+        .settings = &N(NpcSettings_ZiplineDummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
-        .init = &N(D_8024529C_C65FAC),
+        .init = &N(EVS_NpcInit_ZiplineDummy),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -489,7 +498,7 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
 };
 
-StaticNpc N(D_802458B0_C665C0) = {
+StaticNpc N(NpcData_SpikeTop_01) = {
     .id = NPC_SpikeTop_01,
     .settings = &N(NpcSettings_SpikeTop_01),
     .pos = { 140.0f, 670.0f, -20.0f },
@@ -539,7 +548,7 @@ StaticNpc N(D_802458B0_C665C0) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(D_80245AA0_C667B0) = {
+StaticNpc N(NpcData_SpikeTop_02) = {
     .id = NPC_SpikeTop_02,
     .settings = &N(NpcSettings_SpikeTop_01),
     .pos = { -200.0f, 670.0f, -35.0f },
@@ -589,7 +598,7 @@ StaticNpc N(D_80245AA0_C667B0) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(D_80245C90_C669A0) = {
+StaticNpc N(NpcData_SpikeTop_03) = {
     .id = NPC_SpikeTop_03,
     .settings = &N(NpcSettings_SpikeTop_01),
     .pos = { 30.0f, 20.0f, 320.0f },
@@ -639,10 +648,10 @@ StaticNpc N(D_80245C90_C669A0) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(D_80245E80_C66B90)[] = {
+StaticNpc N(NpcData_Piranha)[] = {
     {
-        .id = NPC_PutridPiranha_01,
-        .settings = &N(NpcSettings_PutridPiranha_01),
+        .id = NPC_Piranha,
+        .settings = &N(NpcSettings_Piranha),
         .pos = { 260.0f, 20.0f, 255.0f },
         .yaw = 270,
         .flags = NPC_FLAG_LOCK_ANIMS,
@@ -690,9 +699,9 @@ StaticNpc N(D_80245E80_C66B90)[] = {
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
-        .id = NPC_PutridPiranha_02,
-        .settings = &N(NpcSettings_PutridPiranha_02),
-        .pos = { 0.0f, -1000.0f, 0.0f },
+        .id = NPC_Piranha_Hitbox,
+        .settings = &N(NpcSettings_PiranhaHitbox),
+        .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .drops = {
@@ -723,9 +732,9 @@ StaticNpc N(D_80245E80_C66B90)[] = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_PassiveNPCs)),
-    NPC_GROUP(N(D_802458B0_C665C0), BTL_KZN_FORMATION_08, BTL_KZN_STAGE_01),
-    NPC_GROUP(N(D_80245AA0_C667B0), BTL_KZN_FORMATION_09, BTL_KZN_STAGE_01),
-    NPC_GROUP(N(D_80245C90_C669A0), BTL_KZN_FORMATION_0A, BTL_KZN_STAGE_01),
-    NPC_GROUP(N(D_80245E80_C66B90), BTL_KZN_FORMATION_13, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_SpikeTop_01), BTL_KZN_FORMATION_08, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_SpikeTop_02), BTL_KZN_FORMATION_09, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_SpikeTop_03), BTL_KZN_FORMATION_0A, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_Piranha), BTL_KZN_FORMATION_13, BTL_KZN_STAGE_01),
     {}
 };
