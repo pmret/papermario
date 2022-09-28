@@ -215,9 +215,9 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
     }
 
     if (gBattleDmaDest == 0) {
-            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, moveScript->dmaDest);
+            dma_copy(moveScript->start, moveScript->end, moveScript->dest);
         } else {
-            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, gBattleDmaDest);
+            dma_copy(moveScript->start, moveScript->end, gBattleDmaDest);
     }
 
     return ApiStatus_DONE2;

@@ -1,9 +1,9 @@
 PyYAML
 pylibyaml
-pypng
-colorama
-spimdisasm>=1.5.3
-rabbitizer>=1.2.0
-pygfxd
 tqdm
 intervaltree
+colorama
+spimdisasm>=1.5.5
+rabbitizer>=1.2.0
+pygfxd
+n64img>=0.1.2

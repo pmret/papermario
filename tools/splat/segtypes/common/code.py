@@ -131,7 +131,7 @@ class CommonSegCode(CommonSegGroup):
         section_order.remove(".text")
 
         for i, section in enumerate(section_order):
-            if section not in options.auto_all_sections():
+            if section not in options.opts.auto_all_sections:
                 continue
 
             if not found_sections[section].has_start():
@@ -159,7 +159,7 @@ class CommonSegCode(CommonSegGroup):
         )  # Used to manually add "all_" types for sections not otherwise defined in the yaml
 
         self.section_boundaries = OrderedDict(
-            (s_name, Range()) for s_name in options.get_section_order()
+            (s_name, Range()) for s_name in options.opts.section_order
         )
 
         found_sections = OrderedDict(
@@ -223,7 +223,21 @@ class CommonSegCode(CommonSegGroup):
 
             # Add dummy segments to be expanded later
             if typ.startswith("all_"):
-                ret.append(Segment(start, "auto", typ, "", "auto"))
+                ret.append(
+                    Segment(
+                        start,
+                        "auto",
+                        typ,
+                        "",
+                        "auto",
+                        False,
+                        self.given_subalign,
+                        self.exclusive_ram_id,
+                        self.given_dir,
+                        self.symbol_name_format,
+                        self.symbol_name_format_no_rom,
+                    )
+                )
                 continue
 
             segment_class = Segment.get_class_for_type(typ)
@@ -292,6 +306,12 @@ class CommonSegCode(CommonSegGroup):
                         "all_" + section,
                         "",
                         vram_start,
+                        False,
+                        self.given_subalign,
+                        self.exclusive_ram_id,
+                        self.given_dir,
+                        self.symbol_name_format,
+                        self.symbol_name_format_no_rom,
                     )
                 ),
             )

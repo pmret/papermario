@@ -148,7 +148,7 @@ typedef struct NpcSettings {
 typedef struct ItemDrop {
     /* 0x00 */ s16 item;
     /* 0x02 */ s16 weight;
-    /* 0x04 */ s16 unk_08;
+    /* 0x04 */ s16 unk_04;
 } ItemDrop; // size = 0x06
 
 /// @brief Describes heart/flower drop chances after defeating an Npc in the overworld.
