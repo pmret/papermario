@@ -10301,11 +10301,10 @@ segments:
     start: 0xC8C0A0
     vram: 0x80240000
     subsegments:
-    - [0xC8C0A0, c]
-    - [0xC8C0E0, c]
-    - [0xC8C3F0, c]
-    - [0xC8C460, data]
-    - [0xC8DBA0]
+    - [0xC8C0A0, c, kzn_18_0_header]
+    - [0xC8C0E0, c, kzn_18_1_main]
+    - [0xC8C3F0, c, kzn_18_2_extra]
+    - [0xC8C460]
   - name: kzn_19
     dir: world/area_kzn/kzn_19
     type: code
