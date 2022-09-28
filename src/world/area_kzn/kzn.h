@@ -36,15 +36,18 @@ enum {
     AF_KZN_0F       = AreaFlag(15),
     AF_KZN_10       = AreaFlag(16),
     AF_KZN_11       = AreaFlag(17),
-    AF_KZN_15       = AreaFlag(0x15),
-    AF_KZN_16       = AreaFlag(0x16),
-    AF_KZN_17       = AreaFlag(0x17),
+    AF_KZN_12       = AreaFlag(18),
+    AF_KZN_13       = AreaFlag(19),
+    AF_KZN_14       = AreaFlag(20),
+    AF_KZN_15       = AreaFlag(21),
+    AF_KZN_16       = AreaFlag(22),
+    AF_KZN_17       = AreaFlag(23),
 };
 
 extern MapSettings kzn_01_settings;
 extern MapSettings kzn_02_settings;
 //extern MapSettings kzn_03_settings;
-//extern MapSettings kzn_04_settings;
+extern MapSettings kzn_04_settings;
 extern MapSettings kzn_05_settings;
 extern MapSettings kzn_06_settings;
 extern MapSettings kzn_07_settings;

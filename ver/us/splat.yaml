@@ -10199,13 +10199,10 @@ segments:
     start: 0xC68130
     vram: 0x80240000
     subsegments:
-    - [0xC68130, c]
-    - [0xC68440, c]
-    - [0xC69180, c]
-    - [0xC69890, data]
-    - [0xC69D70, data]
-    - [0xC6A420, data]
-    - [0xC6C0C0]
+    - [0xC68130, c, kzn_04_1_main]
+    - [0xC68440, c, kzn_04_2_entity]
+    - [0xC69180, c, kzn_04_3_npc]
+    - [0xC69890]
   - name: kzn_05
     dir: world/area_kzn/kzn_05
     type: code
