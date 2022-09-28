@@ -1274,6 +1274,17 @@ enum SoundIDs {
     SOUND_8000006A                  = 0x8000006A,
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
+
+    SOUND_FireBar0                  = 0xB0000000,
+    SOUND_FireBar1                  = 0xB0000001,
+    SOUND_FireBar2                  = 0xB0000002,
+    SOUND_FireBar3                  = 0xB0000003,
+    SOUND_FireBar4                  = 0xB0000004,
+    SOUND_FireBar5                  = 0xB0000005,
+    SOUND_FireBar6                  = 0xB0000006,
+    SOUND_FireBar7                  = 0xB0000007,
+    SOUND_FireBar8                  = 0xB0000008,
+    SOUND_FireBar9                  = 0xB0000009,
     SOUND_B000000A                  = 0xB000000A,
     SOUND_B000000C                  = 0xB000000C,
     SOUND_B000000D                  = 0xB000000D,
@@ -4167,6 +4178,7 @@ enum MusicSettingsFlags {
 // the lower byte of Collider::flags
 enum SurfaceType {
     SURFACE_TYPE_DEFAULT            = 0,
+    /*
     SURFACE_TYPE_WATER              = 1,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_LAVA               = 3,
@@ -4176,22 +4188,40 @@ enum SurfaceType {
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
     SURFACE_TYPE_SNOW               = 8, 
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
+    */
 };
 
+//TODO -- enums temporarily combined for map dumper
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
     COLLIDER_FLAGS_SURFACE_TYPE_MASK = 0x000000FF,
+
+//    SURFACE_TYPE_DEFAULT            = 0,
+    SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
+    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
+    SURFACE_TYPE_FLOWERS            = 6,
+    SURFACE_TYPE_SLIDE              = 5,
+    SURFACE_TYPE_DOCK_WALL          = 4,
+    SURFACE_TYPE_LAVA               = 3,
+    SURFACE_TYPE_SPIKES             = 2,
+    SURFACE_TYPE_WATER              = 1,
+
     COLLIDER_FLAGS_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
     COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
     COLLIDER_FLAGS_HAS_MODEL_PARENT  = 0x80000000
 };
 
+
+//TODO reversed for map dumper with 0 separated
 enum ColliderFlagsModifyMode {
-    MODIFY_COLLIDER_FLAGS_SET_BITS       = 0,
-    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
-    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
     MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
+    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
+    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
+};
+enum TempColliderFlagsModifyMode {
+    MODIFY_COLLIDER_FLAGS_SET_BITS       = 0,
 };
 
 enum CollisionChannels {

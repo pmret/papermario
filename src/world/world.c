@@ -669,7 +669,7 @@ MapConfig kzn_maps[] = {
     { MAP(kzn_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP(kzn_09), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP(kzn_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_11, 0x80242680), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_11), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_17, 0x802430C0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP(kzn_18), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_19, 0x80241D70), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },

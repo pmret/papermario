@@ -10272,13 +10272,10 @@ segments:
     start: 0xC801A0
     vram: 0x80240000
     subsegments:
-    - [0xC801A0, c]
-    - [0xC804B0, c]
-    - [0xC80600, c]
-    - [0xC82800, data]
-    - [0xC83180, data]
-    - [0xC83870, data]
-    - [0xC859E0]
+    - [0xC801A0, c, kzn_11_1_main]
+    - [0xC804B0, c, kzn_11_2_platforms]
+    - [0xC80600, c, kzn_11_3_npc]
+    - [0xC82800]
   - name: kzn_17
     dir: world/area_kzn/kzn_17
     type: code
