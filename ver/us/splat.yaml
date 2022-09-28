@@ -6402,10 +6402,10 @@ segments:
     start: 0x8AA450
     vram: 0x80240000
     subsegments:
-    - [0x8AA450, c, kgr_02_1]
-    - [0x8AA5B0, c, kgr_02_2]
-    - [0x8AAB80, c, kgr_02_3]
-    - [0x8AABB0, c, kgr_02_4] 
+    - [0x8AA450, c, kgr_02_1_main]
+    - [0x8AA5B0, c, kgr_02_2_unused]
+    - [0x8AAB80, c, kgr_02_3_npc]
+    - [0x8AABB0, c, kgr_02_4_extra] 
     - [0x8AABD0]
   - name: kmr_00
     dir: world/area_kmr/kmr_00
