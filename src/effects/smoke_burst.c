@@ -8,7 +8,22 @@ INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_main);
 void smoke_burst_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_update);
+// INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_update);
+void smoke_burst_update(EffectInstance *arg0) {
+    s32 *temp_v0;
+    s32 temp_a0;
+    s32 temp_v1;
+
+    temp_v0 = arg0->data.any;
+    temp_v1 = temp_v0->unk18;
+    temp_a0 = temp_v0->unk14 - 1;
+    temp_v0->unk18 = (s32) (temp_v1 + 1);
+    temp_v0->unk14 = temp_a0;
+    temp_v0->unk20 = (f32) (((f32) temp_v1 * 8.0f) / (f32) temp_v0->unk1C);
+    if (temp_a0 < 0) {
+        shim_remove_effect(arg0);
+    }
+}
 
 void smoke_burst_render(EffectInstance* effect) {
     RenderTask renderTask;
