@@ -694,7 +694,7 @@ ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SyncOverrideEnemyPos(Evt* script, s32 isInitialCall) {
+ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner2.npcID);

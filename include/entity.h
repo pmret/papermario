@@ -399,6 +399,7 @@ extern EntityBlueprint Entity_Hammer2Block;
 extern EntityBlueprint Entity_Hammer2Block_WideHitbox;
 extern EntityBlueprint Entity_Hammer2Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer2BlockTiny;
+extern EntityBlueprint Entity_Hammer3Block;
 extern EntityBlueprint Entity_Hammer3Block_WideHitbox;
 extern EntityBlueprint Entity_Hammer3Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer3BlockTiny;

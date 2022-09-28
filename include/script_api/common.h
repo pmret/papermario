@@ -39,7 +39,7 @@ ApiStatus GetNpcVar(Evt* script, s32 isInitialCall);
 ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall);
 ApiStatus SetSelfEnemyFlags(Evt* script, s32 isInitialCall);
 ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall);
-ApiStatus SyncOverrideEnemyPos(Evt* script, s32 isInitialCall);
+ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall);
 ApiStatus GetSelfNpcID(Evt* script, s32 isInitialCall);
 ApiStatus ClearDefeatedEnemies(Evt* script, s32 isInitialCall);
 ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall);
