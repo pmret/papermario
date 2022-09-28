@@ -18,6 +18,8 @@ extern EntityBlueprint Entity_HitGroundedYellowBlock;
 extern EntityBlueprint Entity_HitFloatingYellowBlock;
 extern EntityBlueprint Entity_HitRedBlock;
 
+BSS EffectInstance* TriggerBlockVanishEffect;
+
 f32 player_get_camera_facing_angle(void);
 void entity_inactive_block_hit_init(Entity*);
 void entity_inactive_block_hit_anim(Entity*);

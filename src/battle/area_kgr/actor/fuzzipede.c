@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/fuzzipede.h"
+#include "sprite/npc/Fuzzipede.h"
 
 #define NAMESPACE b_area_kgr_fuzzipede
 
@@ -15,28 +15,28 @@ extern EvtScript N(nextTurn_80218C58);
 extern EvtScript N(8021A2E8);
 
 s32 N(idleAnimations_802189B0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_fuzzipede_Palette_00_Anim_4,
-    STATUS_STONE,     NPC_ANIM_fuzzipede_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_fuzzipede_Palette_00_Anim_29,
-    STATUS_POISON,    NPC_ANIM_fuzzipede_Palette_00_Anim_4,
-    STATUS_STOP,      NPC_ANIM_fuzzipede_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_fuzzipede_Palette_00_Anim_4,
-    STATUS_PARALYZE,  NPC_ANIM_fuzzipede_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_fuzzipede_Palette_00_Anim_26,
-    STATUS_FEAR,      NPC_ANIM_fuzzipede_Palette_00_Anim_26,
+    STATUS_NORMAL,    ANIM_Fuzzipede_Anim04,
+    STATUS_STONE,     ANIM_Fuzzipede_Anim00,
+    STATUS_SLEEP,     ANIM_Fuzzipede_Anim29,
+    STATUS_POISON,    ANIM_Fuzzipede_Anim04,
+    STATUS_STOP,      ANIM_Fuzzipede_Anim00,
+    STATUS_STATIC,    ANIM_Fuzzipede_Anim04,
+    STATUS_PARALYZE,  ANIM_Fuzzipede_Anim00,
+    STATUS_DIZZY,     ANIM_Fuzzipede_Anim26,
+    STATUS_FEAR,      ANIM_Fuzzipede_Anim26,
     STATUS_END,
 };
 
 s32 N(idleAnimations_802189FC)[] = {
-    STATUS_NORMAL,    NPC_ANIM_fuzzipede_Palette_00_Anim_6,
-    STATUS_STONE,     NPC_ANIM_fuzzipede_Palette_00_Anim_2,
-    STATUS_SLEEP,     NPC_ANIM_fuzzipede_Palette_00_Anim_2A,
-    STATUS_POISON,    NPC_ANIM_fuzzipede_Palette_00_Anim_6,
-    STATUS_STOP,      NPC_ANIM_fuzzipede_Palette_00_Anim_2,
-    STATUS_STATIC,    NPC_ANIM_fuzzipede_Palette_00_Anim_6,
-    STATUS_PARALYZE,  NPC_ANIM_fuzzipede_Palette_00_Anim_2,
-    STATUS_DIZZY,     NPC_ANIM_fuzzipede_Palette_00_Anim_27,
-    STATUS_FEAR,      NPC_ANIM_fuzzipede_Palette_00_Anim_27,
+    STATUS_NORMAL,    ANIM_Fuzzipede_Anim06,
+    STATUS_STONE,     ANIM_Fuzzipede_Anim02,
+    STATUS_SLEEP,     ANIM_Fuzzipede_Anim2A,
+    STATUS_POISON,    ANIM_Fuzzipede_Anim06,
+    STATUS_STOP,      ANIM_Fuzzipede_Anim02,
+    STATUS_STATIC,    ANIM_Fuzzipede_Anim06,
+    STATUS_PARALYZE,  ANIM_Fuzzipede_Anim02,
+    STATUS_DIZZY,     ANIM_Fuzzipede_Anim27,
+    STATUS_FEAR,      ANIM_Fuzzipede_Anim27,
     STATUS_END,
 };
 
@@ -149,7 +149,7 @@ EvtScript N(nextTurn_80218C58) = {
         EVT_CALL(SetBattleCamOffsetZ, 10)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
-        EVT_CALL(ActorSpeak, MSG_MAC_Port_009C, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_24, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+        EVT_CALL(ActorSpeak, MSG_MAC_Port_009C, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
@@ -168,7 +168,7 @@ EvtScript N(80218D68) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim0A)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 60)
@@ -177,7 +177,7 @@ EvtScript N(80218D68) = {
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
@@ -199,7 +199,7 @@ EvtScript N(80218FC8) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim0A)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_EXEC_WAIT(D_8029C12C)
@@ -224,7 +224,7 @@ EvtScript N(802191AC) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim0A)
     EVT_SET(LVar0, 65)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, -15)
@@ -262,7 +262,7 @@ EvtScript N(802191AC) = {
     EVT_END_LOOP
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189FC)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_6)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim06)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219ED4)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 1)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
@@ -317,77 +317,77 @@ EvtScript N(handleEvent_802197FC) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1E)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzipede_Palette_00_Anim_1F)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1E)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzipede_Anim1F)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1E)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzipede_Palette_00_Anim_1F)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1E)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzipede_Anim1F)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1F)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1F)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim08)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(80219668))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim04)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim04)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SWAP_PARTNER)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_19)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim19)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -435,62 +435,62 @@ EvtScript N(handleEvent_80219ED4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1C)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1C)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1C)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1C)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(80219D68))
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_20)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzipede_Palette_00_Anim_21)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim20)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzipede_Anim21)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(80219D68))
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_20)
-            EVT_SET_CONST(LVar2, NPC_ANIM_fuzzipede_Palette_00_Anim_21)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim20)
+            EVT_SET_CONST(LVar2, ANIM_Fuzzipede_Anim21)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_21)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim21)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_8)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim08)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(80219668))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim06)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1C)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1C)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_fuzzipede_Palette_00_Anim_1C)
+            EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -516,7 +516,7 @@ EvtScript N(8021A2E8) = {
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(4)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_HP_OFFSET_BELOW, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 180)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.001953125))
@@ -568,7 +568,7 @@ EvtScript N(8021A6D8) = {
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_EXEC_WAIT(N(8021A2E8))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim0A)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -576,7 +576,7 @@ EvtScript N(8021A6D8) = {
     EVT_ADD(LVar0, 50)
     EVT_SET(LVar1, 0)
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_12)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim12)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DA)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
@@ -585,7 +585,7 @@ EvtScript N(8021A6D8) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim05)
             EVT_THREAD
                 EVT_SET(LVar0, 0)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -608,7 +608,7 @@ EvtScript N(8021A6D8) = {
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_END_THREAD
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -623,7 +623,7 @@ EvtScript N(8021A6D8) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim05)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -650,7 +650,7 @@ EvtScript N(8021A6D8) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_THREAD
                 EVT_SET(LVar0, 180)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -734,7 +734,7 @@ EvtScript N(8021B22C) = {
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_EXEC_WAIT(N(8021A2E8))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim0A)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -742,7 +742,7 @@ EvtScript N(8021B22C) = {
     EVT_ADD(LVar0, 80)
     EVT_SET(LVar1, 0)
     EVT_EXEC_WAIT(D_8029C12C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_12)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim12)
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DB)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
@@ -750,7 +750,7 @@ EvtScript N(8021B22C) = {
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_11)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim11)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.001953125))
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -762,7 +762,7 @@ EvtScript N(8021B22C) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_THREAD
                 EVT_SET(LVar0, 90)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -801,7 +801,7 @@ EvtScript N(8021B22C) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_11)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim11)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.001953125))
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -843,7 +843,7 @@ EvtScript N(8021B22C) = {
             EVT_IF_EQ(LocalFlag(0), 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                 EVT_EXEC(N(8021B008))
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 40)
                 EVT_SET(LVar1, 0)
@@ -859,7 +859,7 @@ EvtScript N(8021B22C) = {
                 EVT_ADD(LVar0, 10)
                 EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
                 EVT_WAIT(8)
                 EVT_LABEL(0)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
@@ -878,11 +878,11 @@ EvtScript N(8021B22C) = {
                 EVT_CALL(PlayEffect, EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_CALL(N(StartRumbleWithParams), 200, 10)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DC)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_13)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim13)
                 EVT_WAIT(20)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_ELSE
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 40)
                 EVT_SET(LVar1, 0)
@@ -898,7 +898,7 @@ EvtScript N(8021B22C) = {
                 EVT_ADD(LVar0, 10)
                 EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
                 EVT_WAIT(8)
                 EVT_WAIT(10)
             EVT_END_IF
@@ -919,9 +919,9 @@ EvtScript N(8021C004) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_12)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim12)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)

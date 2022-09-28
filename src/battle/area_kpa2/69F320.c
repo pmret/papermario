@@ -1,6 +1,6 @@
 #include "common.h"
-#include "sprite/npc/battle_bowser.h"
-#include "sprite/npc/parade_peach.h"
+#include "sprite/npc/BattleBowser.h"
+#include "sprite/npc/ParadePeach.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"

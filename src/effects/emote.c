@@ -44,15 +44,42 @@ s8 D_E0020D94[] = {
     64, 0, 0, 32, 0, 32, 0, 0, 64, 0, 32, 32, 0, 64, 0, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
-void func_E0020000(EmoteFXData* part, s32 arg1);
 void emote_init(EffectInstance* effect);
 void emote_update(EffectInstance* effect);
 void emote_render(EffectInstance* effect);
 void emote_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/emote", func_E0020000);
+void func_E0020000(EmoteFXData* part, s32 arg1) {
+    f32 unk_1C = part->unk_1C;
+    f32 unk_20 = part->unk_20;
+    Npc* npc = part->unk_3C;
+    Matrix4f sp18;
+    f32 sin;
+    f32 cos;
 
-void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
+    sin = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
+    cos = shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
+    shim_guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
+
+    if (npc == PTR_LIST_END) {
+        part->unk_04 = gPlayerStatus.position.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = gPlayerStatus.position.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = gPlayerStatus.position.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    } else if (npc != NULL) {
+        part->unk_04 = npc->pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = npc->pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = npc->pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    } else {
+        part->unk_04 = part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    }
+
+    part->unk_24 = unk_1C - 20.0f + arg1 * 20;
+    part->unk_28 = (unk_20 / 12.0f) * 0.5f + 0.5;
+}
+
+void emote_main(s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EmoteFXData* data;
@@ -142,7 +169,7 @@ void emote_update(EffectInstance* effect) {
         return;
     }
 
-    if (part->unk_3C != 0) {
+    if (part->unk_3C != NULL) {
         if (type == 1) {
             s32 i;
 

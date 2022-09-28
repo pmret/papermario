@@ -78,7 +78,7 @@ void N(reflection_setup_wall)(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
@@ -160,7 +160,7 @@ void N(reflection_setup_floor)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,

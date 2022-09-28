@@ -308,9 +308,9 @@ glabel btl_state_update_twink_menu
 /* 41F29C 802AA50C 34C60008 */   ori      $a2, $a2, 8
 /* 41F2A0 802AA510 2602FFFF */  addiu     $v0, $s0, -1
 /* 41F2A4 802AA514 00021080 */  sll       $v0, $v0, 2
-/* 41F2A8 802AA518 3C01802B */  lui       $at, %hi(D_802AD0BB)
+/* 41F2A8 802AA518 3C01802B */  lui       $at, %hi(battle_menu_submenuIDs+0x3)
 /* 41F2AC 802AA51C 00220821 */  addu      $at, $at, $v0
-/* 41F2B0 802AA520 9022D0BB */  lbu       $v0, %lo(D_802AD0BB)($at)
+/* 41F2B0 802AA520 9022D0BB */  lbu       $v0, %lo(battle_menu_submenuIDs+0x3)($at)
 /* 41F2B4 802AA524 0C0A840C */  jal       func_802A1030
 /* 41F2B8 802AA528 A2420048 */   sb       $v0, 0x48($s2)
 /* 41F2BC 802AA52C 24020008 */  addiu     $v0, $zero, 8

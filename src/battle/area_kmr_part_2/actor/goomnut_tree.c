@@ -1,12 +1,12 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/spiky_goomnut.h"
+#include "sprite/npc/SpikyGoomnut.h"
 
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 
 s32 N(idleAnimations_802232D0)[] = {
-    STATUS_NORMAL,    NPC_ANIM_spiky_goomnut_Palette_00_Anim_0,
+    STATUS_NORMAL,    ANIM_SpikyGoomnut_Still,
     STATUS_END,
 };
 

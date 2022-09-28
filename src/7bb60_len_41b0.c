@@ -681,7 +681,7 @@ void collision_main_lateral(void) {
                                                             playerStatus->colliderDiameter, yaw2);
                 }
                 collisionStatus->currentWall = result;
-                if (!(playerStatus->flags & 0x400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
+                if (!(playerStatus->flags & PS_FLAGS_400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
 
                     if (speed == 0.0f) {
                         collision_check_player_intersecting_world(0, 0,

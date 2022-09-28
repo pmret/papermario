@@ -11,6 +11,11 @@ extern Gfx Entity_SaveBlock_RenderNone[];
 
 extern s32 Entity_SaveBlock_ScriptResume[];
 
+BSS s32 SaveBlockTutorialPrinterClosed;
+BSS s32 SaveBlockResultPrinterClosed;
+BSS MessagePrintState* SaveBlockTutorialPrinter;
+BSS MessagePrintState* SaveBlockResultPrinter;
+
 void entity_SaveBlock_setupGfx(s32 index) {
     Gfx* gfxPos = gMasterGfxPos;
     Entity* entity = get_entity_by_index(index);
@@ -149,6 +154,7 @@ EntityScript Entity_SaveBlock_Script = {
     es_Restart
     es_End
 };
+
 EntityScript Entity_SaveBlock_ScriptResume = {
     es_Call(entity_SaveBlock_resume_game)
     es_SetCallback(NULL, 2)

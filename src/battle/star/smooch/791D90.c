@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_misstar.h"
+#include "sprite/npc/BattleMisstar.h"
 
 #define NAMESPACE battle_star_smooch
 
@@ -265,7 +265,7 @@ s32 N(intTable_802A24E8)[] = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1630))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_misstar_Palette_00_Anim_0)
+    EVT_SET_CONST(LVar0, ANIM_BattleMisstar_Still)
     EVT_EXEC_WAIT(N(802A1D60))
     EVT_WAIT(16)
     EVT_THREAD
@@ -289,7 +289,7 @@ EvtScript N(usePower) = {
     EVT_ADD(LVar0, 30)
     EVT_CALL(NpcFlyTo, 100, LVar0, LVar1, LVar2, 20, 0, 10)
     EVT_WAIT(15)
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_misstar_Palette_00_Anim_1)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleMisstar_Idle)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 15)
     EVT_ADD(LVar1, 15)

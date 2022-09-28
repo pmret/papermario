@@ -47,7 +47,7 @@ void action_update_walk(void) {
         playerStatus->unk_60 = 0;
         changedAnim = TRUE;
 
-        if (!(playerStatus->flags & PA_FLAGS_8BIT_MARIO)) {
+        if (!(playerStatus->flags & PS_FLAGS_4000)) {
             playerStatus->currentSpeed = playerStatus->walkSpeed;
         }
 
@@ -63,7 +63,7 @@ void action_update_walk(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->flags & PA_FLAGS_8BIT_MARIO) {
+    if (playerStatus->flags & PS_FLAGS_4000) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(8);
         return;
@@ -206,7 +206,7 @@ void action_update_run(void) {
 
 void func_802B6550_E23C30(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAGS_IN_DISGUISE)) {
-        if (!(gGameStatusPtr->peachFlags & 0x10)) {
+        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
             return;
         }

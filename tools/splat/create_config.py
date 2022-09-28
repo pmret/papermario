@@ -36,7 +36,6 @@ options:
   # undefined_syms_auto: True
   # undefined_syms_auto_path: undefined_syms_auto.txt
   # symbol_addrs_path: symbol_addrs.txt
-  # undefined_syms_path: undefined_syms.txt
   # asm_path: asm
   # src_path: src
   # build_path: build

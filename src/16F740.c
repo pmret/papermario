@@ -18,16 +18,16 @@ extern s32 D_80281454[];
 extern EvtScript D_80284A20[];
 extern EvtScript D_80284A30[];
 
-extern s32 D_8029F240;
-extern u8 D_8029F244;
-extern s32 D_8029F248;
-extern s32 D_8029F24C;
-extern s32 D_8029F250;
-extern s32 D_8029F254;
-extern s32 D_8029F258;
-extern s32 D_8029F25C;
-extern s32 D_8029F260;
-extern s32 D_8029F264;
+BSS s32 D_8029F240;
+BSS u8 D_8029F244;
+BSS s32 D_8029F248;
+BSS s32 D_8029F24C;
+BSS s32 D_8029F250;
+BSS s32 D_8029F254;
+BSS s32 D_8029F258;
+BSS s32 D_8029F25C;
+BSS s32 D_8029F260;
+BSS s32 D_8029F264;
 
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;

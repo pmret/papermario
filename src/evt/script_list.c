@@ -1,8 +1,85 @@
 #include "common.h"
+#include "hud_element.h"
 
 s32 gStaticScriptCounter = 1;
 s32 gIsUpdatingScripts = 0;
 f32 gGlobalTimeSpace = 1.0f;
+
+// script_list
+BSS u32* gMapFlags;
+BSS s32* gMapVars;
+BSS s32 gNumScripts;
+BSS s32 D_802DA48C; // unused?
+BSS ScriptList gWorldScriptList;
+BSS ScriptList gBattleScriptList;
+BSS ScriptList* gCurrentScriptListPtr;
+BSS s32 D_802DA894; // unused?
+BSS s32 gScriptIndexList[MAX_SCRIPTS];
+BSS s32 gScriptIdList[MAX_SCRIPTS];
+BSS s32 gScriptListCount;
+BSS s32 D_802DAC9C; // unused?
+
+// evt
+BSS char evtDebugPrintBuffer[0x100];
+
+// map_api
+BSS struct LavaReset* gLavaResetList;
+BSS s32 LastSafeFloor;
+BSS s32 D_802DADA8[2]; // unused?
+
+// model_api
+BSS AnimatedModelList gBattleMeshAnimationList;
+BSS AnimatedModelList gWorldMeshAnimationList;
+BSS AnimatedModelList* gCurrentMeshAnimationListPtr;
+BSS s32 D_802DAE34[3]; // unused?
+
+// npc_api
+BSS s32 wExtraPartnerID;
+BSS s32 wExtraPartnerNpcID;
+BSS s32 D_802DAE4C[2]; // unused?
+
+// msg_api
+BSS s32 D_802DAE50;
+BSS s32 D_802DAE54;
+BSS s32 D_802DAE58[2]; // unused?
+BSS char D_802DAE60[0x400]; // unused?
+BSS MessagePrintState* gCurrentPrintContext;
+BSS s32 D_802DB264;
+BSS MessagePrintState* D_802DB268;
+BSS s32 D_802DB26C; // unused?
+
+// player_api
+BSS Npc playerNpcData;
+BSS u16 D_802DB5B0;
+BSS s32 D_802DB5B4[3]; // unused
+BSS VirtualEntityList D_802DB5C0;
+BSS VirtualEntityList D_802DB6C0;
+BSS VirtualEntityList* D_802DB7C0;
+BSS s32 D_802DB7C4[3]; // unused
+
+// fa4c0_len_3bf0
+BSS MusicEvent* MusicEventList;
+BSS s32 D_802DB7D4; // unused?
+BSS Evt* RunningMusicEvents[10];
+BSS s32 RunningMusicEventIDs[10];
+BSS s32 D_802DB828[2]; // unused?
+BSS PopupMenu D_802DB830;
+
+// demo_api
+BSS s32 D_802DBB60;
+BSS s32 D_802DBB64; // unused?
+BSS s32 D_802DBB68;
+BSS s32 D_802DB8B6C; // unused?
+BSS char D_802DBB70[0x100];
+
+// why is this at the end? com section vs bss?
+BSS u32 gWorldMapFlags[MAX_MAPFLAGS];
+BSS s32 DoorModelsSwingCW[3];
+BSS PushBlockGrid* D_802DBC88[8];
+BSS u32 gWorldMapVars[MAX_MAPVARS];
+BSS u32 gBattleMapVars[MAX_MAPVARS];
+BSS s32 DoorModelsSwingCCW[3];
+BSS u32 gBattleMapFlags[MAX_MAPFLAGS];
 
 void sort_scripts(void) {
     s32 temp_a0;

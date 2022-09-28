@@ -11,11 +11,11 @@ ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
     if (player->scalingFactor == 1.0) {
         s32 var = script->varTable[10];
         get_entity_by_index(var);
-        collisionStatus->currentCeiling = var | 0x4000;
-        playerStatus->flags |= 2;
+        collisionStatus->currentCeiling = var | COLLISION_WITH_ENTITY_BIT;
+        playerStatus->flags |= PS_FLAGS_JUMPING;
         update_entities();
         collisionStatus->currentCeiling = -1;
-        playerStatus->flags &= ~2;
+        playerStatus->flags &= ~PS_FLAGS_JUMPING;
         return ApiStatus_DONE2;
     }
 

@@ -13,6 +13,23 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
+BSS s32 bSavedPartner;
+BSS s32 bSavedOverrideFlags;
+BSS s32 D_8029DA38[2]; // unused?
+BSS s32 D_8029DA40;
+BSS s32 D_8029DA44;
+BSS s32 D_8029DA48;
+BSS s32 D_8029DA4C;
+BSS Camera D_8029DA50[ARRAY_COUNT(gCameras)];
+BSS f32 D_8029EFB0;
+BSS f32 D_8029EFB4;
+BSS f32 D_8029EFB8;
+BSS s32 D_8029EFBC;
+BSS s32 D_8029EFC0[10];
+BSS s32 D_8029EFE8[10];
+BSS s32 D_8029F010[10];
+BSS s16 D_8029F038[0x100];
+
 extern HudScript HES_HPDigit0;
 extern HudScript HES_HPDigit1;
 extern HudScript HES_HPDigit2;
@@ -77,24 +94,6 @@ EvtScript BtlBringPartnerOut = {
     EVT_RETURN
     EVT_END
 };
-
-
-extern s32 bSavedPartner;
-extern s32 bSavedOverrideFlags;
-extern s32 D_8029DA40;
-extern s32 D_8029DA44;
-extern s32 D_8029DA48;
-extern s32 D_8029DA4C;
-extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
-extern f32 D_8029EFB0;
-extern f32 D_8029EFB4;
-extern f32 D_8029EFB8;
-extern s32 D_8029EFBC;
-extern s32 D_8029EFC0[10];
-extern s32 D_8029EFE8[10];
-extern s32 D_8029F010[10];
-
-extern s16 D_8029F038[0x100];
 
 extern HudScript HES_HPBar;
 extern HudScript HES_Item_SmallStarPoint;
@@ -190,7 +189,7 @@ void initialize_battle(void) {
         battleStatus->tattleFlags[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         gBattleStatus.flags2 |= BS_FLAGS2_40;
         increment_status_menu_disabled();
     } else {

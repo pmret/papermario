@@ -1,13 +1,13 @@
 #include "pause_common.h"
 #include "message_ids.h"
 #include "sprite.h"
-#include "sprite/npc/world_eldstar.h"
-#include "sprite/npc/world_mamar.h"
-#include "sprite/npc/world_skolar.h"
-#include "sprite/npc/world_muskular.h"
-#include "sprite/npc/world_misstar.h"
-#include "sprite/npc/world_klevar.h"
-#include "sprite/npc/world_kalmar.h"
+#include "sprite/npc/WorldEldstar.h"
+#include "sprite/npc/WorldMamar.h"
+#include "sprite/npc/WorldSkolar.h"
+#include "sprite/npc/WorldMuskular.h"
+#include "sprite/npc/WorldMisstar.h"
+#include "sprite/npc/WorldKlevar.h"
+#include "sprite/npc/WorldKalmar.h"
 
 extern Gfx gPauseDLSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
@@ -32,45 +32,45 @@ Vp gPauseSpiritsViewport = {
 };
 s32 gPauseSpiritsSpriteAnims[][4] = {
     {
-        NPC_ANIM_world_eldstar_Palette_00_Anim_0,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_1,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_2,
+        ANIM_WorldEldstar_Still,
+        ANIM_WorldEldstar_Idle,
+        ANIM_WorldEldstar_Wave,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_mamar_Palette_00_Anim_0,
-        NPC_ANIM_world_mamar_Palette_00_Anim_1,
-        NPC_ANIM_world_mamar_Palette_00_Anim_2,
+        ANIM_WorldMamar_Still,
+        ANIM_WorldMamar_Idle,
+        ANIM_WorldMamar_TalkHappy,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_skolar_Palette_00_Anim_0,
-        NPC_ANIM_world_skolar_Palette_00_Anim_1,
-        NPC_ANIM_world_skolar_Palette_00_Anim_2,
+        ANIM_WorldSkolar_Still,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_TalkAngry,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_muskular_Palette_00_Anim_0,
-        NPC_ANIM_world_muskular_Palette_00_Anim_1,
-        NPC_ANIM_world_muskular_Palette_00_Anim_2,
+        ANIM_WorldMuskular_Still,
+        ANIM_WorldMuskular_Idle,
+        ANIM_WorldMuskular_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_misstar_Palette_00_Anim_0,
-        NPC_ANIM_world_misstar_Palette_00_Anim_1,
-        NPC_ANIM_world_misstar_Palette_00_Anim_2,
+        ANIM_WorldMisstar_Still,
+        ANIM_WorldMisstar_Idle,
+        ANIM_WorldMisstar_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_klevar_Palette_00_Anim_0,
-        NPC_ANIM_world_klevar_Palette_00_Anim_1,
-        NPC_ANIM_world_klevar_Palette_00_Anim_3,
+        ANIM_WorldKlevar_Still,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_kalmar_Palette_00_Anim_0,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_1,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_2,
+        ANIM_WorldKalmar_Still,
+        ANIM_WorldKalmar_Idle,
+        ANIM_WorldKalmar_Talk,
         ANIM_LIST_END
     }
 };

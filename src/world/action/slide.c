@@ -1,13 +1,13 @@
 #include "common.h"
 
-static f32 SlideAcceleration;
-static f32 MaxSlideAccel;
-static f32 MaxSlideVelocity;
-static f32 SlideLaunchSpeed;
-static f32 D_802B6790;
-static f32 D_802B6794;
-static f32 D_802B6798;
-static s32 D_802B679C;
+BSS f32 SlideAcceleration;
+BSS f32 MaxSlideAccel;
+BSS f32 MaxSlideVelocity;
+BSS f32 SlideLaunchSpeed;
+BSS f32 D_802B6790;
+BSS f32 D_802B6794;
+BSS f32 D_802B6798;
+BSS s32 D_802B679C;
 
 enum {
     SUBSTATE_SLIDING     = 0,
@@ -48,7 +48,7 @@ void action_update_sliding(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_SLIDING;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->animFlags |= 4;
+        playerStatus->animFlags |= PA_FLAGS_4;
         func_802B6000_E27510();
         SlideAcceleration = 0.0f;
         D_802B6790 = 0.0f;

@@ -294,10 +294,10 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
     
     if (isInitialCall) {
-        npc->flags &= ~0x200;
-        npc->flags |= 0x8;
-        npc->flags |= 0x200000;
-        enemy->flags |= 0x200000;
+        npc->flags &= ~NPC_FLAG_GRAVITY;
+        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        npc->flags |= NPC_FLAG_200000;
+        enemy->flags |= ENEMY_FLAGS_200000;
         enemy->varTable[1] = npc->pos.y * 100.0;
         enemy->varTable[0] = 0;
         enemy->varTable[2] = 0;

@@ -15,39 +15,40 @@ extern HudScript* D_802841C0[3][10];
 extern HudScript* D_80284238[3][10];
 extern EvtScript D_802842B0;
 extern EvtScript D_80284880;
+extern EvtScript PlayerScriptDispatcher;
+extern HudScript HES_ProjectorBeam;
 
-extern s32 D_8029FA88;
-extern s32 D_8029FAA8;
-extern s32 D_8029FAC4;
-extern s32 D_8029FB4C;
-extern s32 D_8029FB50;
-extern s32 D_8029FB54;
-extern s32 D_8029FB6C;
-extern s32 D_8029FB70;
-extern s32 D_8029FB74;
-extern Evt* D_8029FB7C;
-extern s32 D_8029FB80;
-extern s32 D_8029FB84;
+BSS s32 D_8029FA80[4];
+BSS s32 D_8029FA90[3][7];
+BSS s32 D_8029FAE4; // unused?
+BSS s32 D_8029FAE8;
+BSS s32 D_8029FAEC[23]; // unused?
+
+BSS s32 D_8029FB48;
+BSS s32 D_8029FB4C;
+BSS s32 D_8029FB50;
+BSS s32 D_8029FB54;
+BSS s32 D_8029FB58[2]; // unused?
+BSS s32 D_8029FB60[3];
+BSS s32 D_8029FB6C;
+BSS s32 D_8029FB70;
+BSS s32 D_8029FB74;
+BSS s32 D_8029FB78;
+BSS Evt* D_8029FB7C;
+BSS s32 D_8029FB80;
+BSS s32 D_8029FB84;
+BSS s32 D_8029FB88;
+BSS s32 D_8029FB8C;
+
+extern HudScript D_802A9F34;
+extern HudScript D_802A9F5C;
+extern HudScript D_802A9F84;
 extern HudScript D_802A9F0C;
+extern HudScript D_802A9FAC;
 extern HudScript D_802AA320;
 extern HudScript D_802AA694;
 extern HudScript D_802AAA08;
 extern HudScript D_802AAA30;
-extern HudScript HES_ProjectorBeam;
-extern EvtScript PlayerScriptDispatcher;
-
-extern s32 D_8029FA80[4];
-extern s32 D_8029FA90[3][7];
-extern s32 D_8029FAE8;
-extern s32 D_8029FB48;
-extern s32 D_8029FB60[];
-extern s32 D_8029FB78;
-extern s32 D_8029FB88;
-extern s32 D_8029FB8C;
-extern HudScript D_802A9F34;
-extern HudScript D_802A9F5C;
-extern HudScript D_802A9F84;
-extern HudScript D_802A9FAC;
 
 s32* virtual_entity_get_by_index(s32);
 
@@ -421,7 +422,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 if (is_ability_active(ABILITY_FP_PLUS)) {
-                    id = D_8029FAA8;
+                    id = D_8029FA90[0][6];
                     hud_element_set_script(id, gItemHudScripts[gItemTable[248].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
@@ -490,7 +491,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 if (is_ability_active(ABILITY_HP_PLUS)) {
-                    id = D_8029FAC4;
+                    id = D_8029FA90[1][6];
                     hud_element_set_script(id, gItemHudScripts[gItemTable[231].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
@@ -601,7 +602,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_render_pos(id, x, y);
             }
 
-            id = D_8029FA88;
+            id = D_8029FA80[2];
             hud_element_get_render_pos(id, &x, &y);
             x += 20;
             hud_element_set_render_pos(id, x, y);
@@ -722,7 +723,7 @@ void btl_state_update_celebration(void) {
                         hud_element_set_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        hud_element_set_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(D_8029FA80[2], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             } else {
@@ -735,7 +736,7 @@ void btl_state_update_celebration(void) {
                         hud_element_clear_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        hud_element_clear_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(D_8029FA80[2], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             }

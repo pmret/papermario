@@ -1101,13 +1101,13 @@ s32 bMessages[] = {
     MSG_Menus_PlayerDazed, MSG_Menus_PlayerAsleep, MSG_Menus_PlayerFrozen, MSG_Menus_PlayerPoisoned, MSG_Menus_PlayerShrunk, MSG_Menus_PlayerParalyzed, MSG_Menus_PlayerElectricCharge, MSG_Menus_PlayerTransparent,
     MSG_Menus_EnemyDazed, MSG_Menus_EnemyAsleep, MSG_Menus_EnemyFrozen, MSG_Menus_EnemyPoisoned, MSG_Menus_EnemyShrunk, MSG_Menus_EnemyParalyzed, MSG_Menus_EnemyElectrified, MSG_Menus_EnemyCantMove,
     MSG_Menus_StarEnergyRecharged, MSG_Menus_StarEnergyMaxedOut, MSG_Menus_StarEnergyFilled,
-    MSG_Menus_AttackUp, MSG_Menus_DefenseUp, 0x001D0084, 0x001D0085,
+    MSG_Menus_AttackUp, MSG_Menus_DefenseUp, MSG_Menus_0084, MSG_Menus_0085,
     MSG_Menus_EnemyTransparent, MSG_Menus_EnemyElectricCharge,
     MSG_Menus_PartnerInjured, MSG_Menus_ChargeGoombario, MSG_Menus_ChargeGoombarioMore, MSG_Menus_WaterBlockBegin, MSG_Menus_WaterBlockEnd, MSG_Menus_CloudNineBegin, MSG_Menus_CloudNineEnd, MSG_Menus_TurboChargeBegin, MSG_Menus_TurboChargeEnd, MSG_Menus_ChillOutBegin, MSG_Menus_CloudNineBegin,
-    MSG_Menus_00AF, MSG_Menus_00B0, 0x001D00B1, 0x001D00B2, 0x001D00B3, 0x001D00B4, 0x001D00AF, 0x001D00AF, 0x001D00B5, 0x001D00B6, 0x001D00B7, 0x001D00B8, 0x001D00B9, 0x001D00AF, 0x001D00BA, 0x001D00BB, 0x001D00BC, 0x001D00AF, 0x001D00BD, 0x001D00BE, 0x001D00BF,
+    MSG_Menus_00AF, MSG_Menus_00B0, MSG_Menus_00B1, MSG_Menus_00B2, MSG_Menus_00B3, MSG_Menus_00B4, MSG_Menus_00AF, MSG_Menus_00AF, MSG_Menus_00B5, MSG_Menus_00B6, MSG_Menus_00B7, MSG_Menus_00B8, MSG_Menus_00B9, MSG_Menus_00AF, MSG_Menus_00BA, MSG_Menus_00BB, MSG_Menus_00BC, MSG_Menus_00AF, MSG_Menus_00BD, MSG_Menus_00BE, MSG_Menus_00BF,
     MSG_Menus_Battle_NoTarget_Jump, MSG_Menus_Battle_NoTarget_Hammer, MSG_Menus_Battle_NoTarget_Item, 0x00000000, 0x00000000,
-    0x001D00C3, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C8,
-    MSG_Menus_00C9, MSG_Menus_00CA, MSG_Menus_00C9, MSG_Menus_00CA, 0x001D00C3,
+    MSG_Menus_00C3, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C8,
+    MSG_Menus_00C9, MSG_Menus_00CA, MSG_Menus_00C9, MSG_Menus_00CA, MSG_Menus_00C3,
 };
 
 s32 bActorMessages[] = {
@@ -1115,19 +1115,19 @@ s32 bActorMessages[] = {
 };
 PopupMessage* D_802838F8 = NULL;
 
-// BSS
 extern s16 D_80159E7E;
 
-extern PopupMessage popupMessages[32];
-extern s16 D_8029F640;
-extern s16 D_8029F642;
-extern s16 D_8029F644;
-extern s16 D_8029F646;
-extern s16 D_8029F648;
-extern s16 D_8029F64A;
-extern s16 D_8029F64C;
-extern s16 D_8029F64E;
-extern s16 D_8029F650;
+// BSS
+BSS PopupMessage popupMessages[32];
+BSS s16 D_8029F640;
+BSS s16 D_8029F642;
+BSS s16 D_8029F644;
+BSS s16 D_8029F646;
+BSS s16 D_8029F648;
+BSS s16 D_8029F64A;
+BSS s16 D_8029F64C;
+BSS s16 D_8029F64E;
+BSS s16 D_8029F650;
 
 extern HudScript HES_AButton;
 extern HudScript HES_AButtonDown;

@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_skolar.h"
+#include "sprite/npc/BattleSkolar.h"
 
 #define NAMESPACE battle_star_star_storm
 
@@ -274,9 +274,9 @@ EvtScript N(802A247C) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A16F0))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_skolar_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleSkolar_Idle)
     EVT_EXEC_WAIT(N(802A1E20))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_skolar_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleSkolar_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_THREAD

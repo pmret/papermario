@@ -186,7 +186,7 @@ void action_update_spin_jump(void) {
 
     if (landed) {
         set_action_state(ACTION_STATE_LAND);
-        playerStatus->flags &= ~PA_FLAGS_8;
+        playerStatus->flags &= ~PS_FLAGS_FLYING;
     }
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
         belowColliderID = get_collider_below_spin_jump();

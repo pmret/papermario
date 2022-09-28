@@ -3,6 +3,7 @@
 #include "npc.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 extern s32 D_80077C40;
 extern EnemyDrops D_80077EB8;
@@ -772,12 +773,12 @@ s32 check_conversation_trigger(void) {
 
             if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
                 angle = clamp_angle(camera->currentYaw - 120.0f);
-                if (playerStatus->trueAnimation & 0x1000000) {
+                if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
                     angle = clamp_angle(angle + 60.0f);
                 }
             } else {
                 angle = clamp_angle(camera->currentYaw + 120.0f);
-                if (playerStatus->trueAnimation & 0x1000000) {
+                if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
                     angle = clamp_angle(angle - 60.0f);
                 }
             }
@@ -786,7 +787,7 @@ s32 check_conversation_trigger(void) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & ENEMY_FLAGS_10000) && encounterNpc->flags & 0x20000000) {
+            if (!(encounterEnemy->flags & ENEMY_FLAGS_10000) && encounterNpc->flags & NPC_FLAG_20000000) {
                 xTemp = npcX;
                 yTemp = npcY;
                 zTemp = npcZ;

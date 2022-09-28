@@ -1,6 +1,6 @@
 #include "arn_09.h"
 #include "entity.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/TubbasHeart.h"
 
 extern s16 Entity_ScriptSpring_AnimLaunch[];
 
@@ -134,13 +134,13 @@ NpcSettings N(npcSettings_802405D0) = {
 
 EvtScript N(idle_802405FC) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 25, -10, 6)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2086, 0)
     EVT_CALL(N(func_80240000_BF6060))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 200, 0, 15)
@@ -173,22 +173,22 @@ StaticNpc N(npcGroup_80240784) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
     },
 };
 

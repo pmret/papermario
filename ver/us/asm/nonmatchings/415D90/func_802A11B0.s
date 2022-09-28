@@ -67,8 +67,8 @@ glabel func_802A11B0
 /* 416028 802A1298 3C013E99 */  lui       $at, 0x3e99
 /* 41602C 802A129C 3421999A */  ori       $at, $at, 0x999a
 /* 416030 802A12A0 44810000 */  mtc1      $at, $f0
-/* 416034 802A12A4 3C04802B */  lui       $a0, %hi(D_802AD0B3)
-/* 416038 802A12A8 9084D0B3 */  lbu       $a0, %lo(D_802AD0B3)($a0)
+/* 416034 802A12A4 3C04802B */  lui       $a0, %hi(D_802AD0B0+0x3)
+/* 416038 802A12A8 9084D0B3 */  lbu       $a0, %lo(D_802AD0B0+0x3)($a0)
 /* 41603C 802A12AC 3C05802B */  lui       $a1, %hi(main_menu_numOptions)
 /* 416040 802A12B0 24A5D0AC */  addiu     $a1, $a1, %lo(main_menu_numOptions)
 /* 416044 802A12B4 3C01802B */  lui       $at, %hi(D_802AD064)
@@ -567,9 +567,9 @@ glabel func_802A11B0
 /* 4167D4 802A1A44 82430000 */  lb        $v1, ($s2)
 /* 4167D8 802A1A48 00431021 */  addu      $v0, $v0, $v1
 /* 4167DC 802A1A4C 00021080 */  sll       $v0, $v0, 2
-/* 4167E0 802A1A50 3C03802B */  lui       $v1, %hi(D_802AD0EB)
+/* 4167E0 802A1A50 3C03802B */  lui       $v1, %hi(battle_menu_isMessageDisabled+0x3)
 /* 4167E4 802A1A54 00621821 */  addu      $v1, $v1, $v0
-/* 4167E8 802A1A58 9063D0EB */  lbu       $v1, %lo(D_802AD0EB)($v1)
+/* 4167E8 802A1A58 9063D0EB */  lbu       $v1, %lo(battle_menu_isMessageDisabled+0x3)($v1)
 /* 4167EC 802A1A5C 24020064 */  addiu     $v0, $zero, 0x64
 /* 4167F0 802A1A60 A2020000 */  sb        $v0, ($s0)
 /* 4167F4 802A1A64 3C01802B */  lui       $at, %hi(D_802AD068)

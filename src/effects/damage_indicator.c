@@ -39,19 +39,19 @@ u8 D_E003CCD0[] = {
   0x9B, 0x91, 0x82, 0x6E, 0x55, 0x37, 0x19, 0x00
 };
 
-Color_RGB8 D_E003CCF8[] = {
-    { 254, 172, 172 },
-    { 254, 172, 213 },
-    { 254, 180, 154 },
-    { 213, 180, 254 },
-    { 180, 180, 254 },
-    { 180, 221, 254 },
-    { 180, 254, 254 },
-    { 180, 254, 213 },
-    { 180, 254, 180 },
-    { 213, 254, 180 },
-    { 254, 254, 180 },
-    { 254, 213, 172 }
+u8 D_E003CCF8[] = {
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172
 };
 
 f32 D_E003CD1C[] = {
@@ -189,30 +189,28 @@ void func_E003C47C(EffectInstance* effect) {
     func_E003C498(effect);
 }
 
-#ifdef NON_MATCHING
 void func_E003C498(EffectInstance* effect) {
+    DamageIndicatorFXData* part = effect->data.damageIndicator;
     Matrix4f sp20;
     Matrix4f sp60;
-    DamageIndicatorFXData* part = effect->data;
-    s32 i;
-    s32 numParts;
     s32 spA0;
-    s32 spA4;
-    s32 spA8;
+    s32 lastPartIdx;
+    s32 numParts = part->numParts;
+    s32 i;
 
-    spA8 = part->numParts;
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, OS_PHYSICAL_TO_K0(effect->graphics->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+
     shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
     shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    numParts = effect->numParts;
     spA0 = part->unk_34 - 1;
-    spA4 = numParts - 1;
-    part = &((DamageIndicatorFXData*)effect->data)[numParts - 1];
+    lastPartIdx = effect->numParts - 1;
+    part = &(effect->data.damageIndicator)[effect->numParts - 1];
 
     if (part->alpha == 255) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
@@ -221,45 +219,57 @@ void func_E003C498(EffectInstance* effect) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     }
-    for (i = 1; i < effect->numParts; i++, part--) {
-        s32 index = (i + spA0);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[index % 12].r, D_E003CCF8[index % 12].g, D_E003CCF8[index % 12].b, part->alpha);
+
+    for(i = 1; i < effect->numParts; i++, part--) {
+        s32 rIdx = ((i + spA0) % 12) * 3;
+
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[rIdx], D_E003CCF8[rIdx + 1], D_E003CCF8[rIdx + 2], part->alpha);
         gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
-        if (i == spA4) {
+
+        if (i == lastPartIdx) {
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, part->unk_10.x, part->unk_10.y, part->unk_10.z);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, D_09002150_352370);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, (part->unk_10.x + part->unk_04.x) * 0.5, (part->unk_10.y + part->unk_04.y) * 0.5, (part->unk_10.z + part->unk_04.z) * 0.5);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, D_09002160_352380);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
+
         gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
+
         shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        shim_guScaleF(sp20, part->unk_38, part->unk_38, 1.0f);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        if (i == spA4) {
-            gSPDisplayList(gMasterGfxPos++, &D_09002170_352390);
+        shim_guScaleF(sp20, part->unk_38, part->unk_38, 1.0f);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+        if (i == lastPartIdx) {
+            gSPDisplayList(gMasterGfxPos++, D_09002170_352390);
         } else {
-            gSPDisplayList(gMasterGfxPos++, &D_09002180_3523A0);
+            gSPDisplayList(gMasterGfxPos++, D_09002180_3523A0);
         }
-        if (i == spA4) {
+
+        if (i == lastPartIdx) {
             gSPDisplayList(gMasterGfxPos++, D_090021A8_3523C8);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_090021E0_352400);
-            if (spA8 < 10) {
+            gSPDisplayList(gMasterGfxPos++, D_09001DE0_352000);
+            if (numParts < 10) {
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[i]);
                 gSPDisplayList(gMasterGfxPos++, D_090021C0_3523E0);
             } else {
-                s32 temp = spA8 % 10;
-                s32 temp2 = spA8 / 10;
+                s32 temp = numParts % 10;
+                s32 temp2 = numParts / 10;
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp]);
                 gSPDisplayList(gMasterGfxPos++, D_09002200_352420);
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp2]);
@@ -269,10 +279,9 @@ void func_E003C498(EffectInstance* effect) {
             gSPDisplayList(gMasterGfxPos++, D_09002190_3523B0);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
+
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
-#else
-INCLUDE_ASM(s32, "effects/damage_indicator", func_E003C498);
-#endif

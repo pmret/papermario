@@ -89,12 +89,12 @@
 #define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
+#define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
+
 #define BATTLE_ENTITY_ID_MASK 0x800
 
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000
-#define COLLISION_IGNORE_ENTITIES 0x40000
-#define COLLISION_ONLY_ENTITIES 0x100000
 
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 #define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)

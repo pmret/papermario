@@ -26,7 +26,7 @@ enum {
     SUBSTATE_DISGUISE_FINISH_SPIN       = 7,
     SUBSTATE_DISGUISE_DONE              = 8,
     SUBSTATE_REVERT_INIT                = 20, // begin undisguise process
-    SUBSTATE_REVERT_WAIT_FOR_ANGLE      = 21, 
+    SUBSTATE_REVERT_WAIT_FOR_ANGLE      = 21,
     SUBSTATE_SPIN_DOWN                  = 22,
     SUBSTATE_FINISH_SPIN                = 23,
     SUBSTATE_REVERT_DONE                = 24,
@@ -35,7 +35,7 @@ enum {
     SUBSTATE_BLOCKED                    = 50, // cant raise parasol due to collisions with world
 };
 
-extern TransformationData ParasolTransformation;
+BSS TransformationData ParasolTransformation;
 
 void parasol_update_spin(void);
 
@@ -88,7 +88,7 @@ void action_update_parasol(void) {
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0;
         playerStatus->pitch = 0;
-        
+
         if (playerStatus->spriteFacingAngle >= 90 && playerStatus->spriteFacingAngle < 270) {
             phi_f4 = 2;
         } else {
@@ -346,13 +346,13 @@ void action_update_parasol(void) {
         }
         if (transformation->disguiseTime <= 10 && transformation->disguiseTime & 1) {
             f64 tempX, tempZ;
-            
+
             fx_sparkles(FX_SPARKLES_3,
                 transformation->position.x - 8,
                 transformation->position.y + 50,
                 transformation->position.z,
                 2);
-            
+
             /*
             TODO something like:
             angle = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
@@ -360,8 +360,8 @@ void action_update_parasol(void) {
             transformation->position.z -= (10.0 * cos_rad(angle));
             */
 
-            angle = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);        
-            
+            angle = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
+
             tempX = transformation->position.x;
             tempX += 10.0 * sin_rad(angle);
             transformation->position.x = tempX;

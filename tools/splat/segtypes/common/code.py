@@ -67,21 +67,6 @@ class CommonSegCode(CommonSegGroup):
         else:
             return None
 
-    # def ram_to_rom(self, ram_addr: int) -> Optional[int]:
-    #     size_no_bss = self.vram_start + self.size
-
-    #     # Do not return a rom address if this is a BSS symbol
-    #     if ram_addr > size_no_bss:
-    #         return None
-
-    #     if not self.contains_vram(ram_addr) and ram_addr != self.vram_end:
-    #         return None
-
-    #     if self.vram_start is not None and isinstance(self.rom_start, int):
-    #         return self.rom_start + ram_addr - self.vram_start
-    #     else:
-    #         return None
-
     # Prepare symbol for migration to the function
     def check_rodata_sym(self, func_addr: int, sym: Symbol):
         if self.section_boundaries[".rodata"].is_complete():

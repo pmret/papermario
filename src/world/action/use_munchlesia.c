@@ -1,10 +1,10 @@
 #include "common.h"
 
-extern f32 Munchlesia_LaunchVelocity;
-extern f32 Munchlesia_LateralVelocity;
-extern f32 Munchlesia_LaunchAccel;
-extern f32 Munchlesia_LaunchYaw;
-extern s32 D_802B62E0;
+BSS f32 Munchlesia_LaunchVelocity;
+BSS f32 Munchlesia_LateralVelocity;
+BSS f32 Munchlesia_LaunchAccel;
+BSS f32 Munchlesia_LaunchYaw;
+BSS s32 D_802B62E0;
 
 enum {
     SUBSTATE_INIT       = 0,

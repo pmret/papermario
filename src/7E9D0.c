@@ -212,8 +212,8 @@ void phys_update_action_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
 
-    if (!(playerStatus->flags & PA_FLAGS_40000)) {
-        playerStatus->flags &= ~PA_FLAGS_20000000;
+    if (!(playerStatus->flags & PS_FLAGS_40000)) {
+        playerStatus->flags &= ~PS_FLAGS_20000000;
     }
 
     if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
@@ -436,7 +436,7 @@ void start_bounce_b(void) {
     playerStatus->gravityIntegrator[1] = -1.0f;
     playerStatus->gravityIntegrator[2] = 0;
     playerStatus->gravityIntegrator[3] = 0;
-    playerStatus->flags |= 0x800000;
+    playerStatus->flags |= PS_FLAGS_800000;
 }
 
 s32 check_input_hammer(void) {
@@ -510,10 +510,10 @@ void check_input_spin(void) {
     PlayerSpinState* spinState = &gPlayerSpinState;
     PlayerSpinState* temp2 = spinState;
 
-    if (!(playerStatus->flags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_USING_PEACH_PHYSICS)) &&
-        !(playerStatus->animFlags & 1) &&
-        !(playerStatus->currentButtons & D_CBUTTONS) &&
-        !is_ability_active(ABILITY_SLOW_GO)) {
+    if (!((playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_4000)) ||
+          (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) ||
+          (playerStatus->currentButtons & BUTTON_C_DOWN) ||
+          is_ability_active(ABILITY_SLOW_GO))) {
 
         s32 actionState = playerStatus->actionState;
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;

@@ -1,15 +1,16 @@
 #include "common.h"
 
-extern s32 SpinningFlower_EntityIndex;
-extern f32 D_802B6ED4;
-extern f32 D_802B6ED8;
-extern f32 D_802B6EDC;
-extern f32 D_802B6EE0;
-extern f32 D_802B6EE4;
-extern f32 D_802B6EE8;
-extern f32 SpinningFlower_AngleToCenter;
-extern f32 D_802B6EF0;
-extern f32 D_802B6EF4;
+BSS s32 SpinningFlower_EntityIndex;
+BSS f32 D_802B6ED4;
+BSS f32 D_802B6ED8;
+BSS f32 D_802B6EDC;
+BSS f32 D_802B6EE0;
+BSS f32 D_802B6EE4;
+BSS f32 D_802B6EE8;
+BSS f32 SpinningFlower_AngleToCenter;
+BSS f32 D_802B6EF0;
+BSS f32 D_802B6EF4;
+
 extern s16 D_802BCE30;
 extern s16 D_802BCE32;
 extern s16 D_802BCE34;
@@ -276,8 +277,8 @@ void action_update_use_spinning_flower(void) {
         case SUBSTATE_FINISH:
             enable_player_static_collisions();
             enable_player_input();
-            playerStatus->flags &= ~0x100000;
-            playerStatus->flags |= 0x800000;
+            playerStatus->flags &= ~PS_FLAGS_100000;
+            playerStatus->flags |= PS_FLAGS_800000;
             start_falling();
             enable_partner_ai();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

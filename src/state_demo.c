@@ -149,7 +149,7 @@ void state_step_demo(void) {
             gGameStatusPtr->areaID = areaID;
             gGameStatusPtr->mapID = mapID;
             gGameStatusPtr->entryID = demoSceneData->entryID;
-            gGameStatusPtr->peachFlags = 1;
+            gGameStatusPtr->peachFlags = PEACH_STATUS_FLAG_IS_PEACH;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->unk_6);

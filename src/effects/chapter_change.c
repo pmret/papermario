@@ -81,10 +81,8 @@ EffectInstance* chapter_change_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     } else {
         data->unk_18 = arg5;
     }
-    data->unk_10 = arg1;
-    data->unk_04 = arg1;
-    data->unk_14 = arg2;
-    data->unk_08 = arg2;
+    data->unk_04 = data->unk_10 = arg1;
+    data->unk_08 = data->unk_14 = arg2;
     data->unk_0C = arg3;
     data->unk_50 = arg4;
     data->unk_20 = 255;
@@ -94,7 +92,7 @@ EffectInstance* chapter_change_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     data->unk_30 = 0;
     data->unk_34 = 0;
     data->unk_38 = 0;
-    if (arg0 == 0 || arg0 - 10 < 9U) {
+    if (arg0 == 0 || (arg0 >= 10 && arg0 <= 18)) {
         data->unk_3C = 0;
     } else {
         data->unk_3C = 255;

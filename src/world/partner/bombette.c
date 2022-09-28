@@ -1,6 +1,7 @@
 #include "common.h"
 #include "world/partners.h"
 #include "effects.h"
+#include "sprite/npc/WorldBombette.h"
 
 BSS s32 D_802BE920;
 BSS s32 D_802BE924;
@@ -255,7 +256,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->moveToPos.x = playerStatus->position.x;
             npc->moveToPos.y = playerStatus->position.y;
             npc->moveToPos.z = playerStatus->position.z;
-            npc->currentAnim = 0x30007;
+            npc->currentAnim = ANIM_WorldBombette_Run;
             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 0.0f, playerStatus->targetYaw);
 
             temp_f0 = clamp_angle(playerStatus->targetYaw + ((D_802BE920 != 0) ? -90.0f : 90.0f));
@@ -279,7 +280,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 disable_npc_blur(npc);
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_6000C);
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim = 0x30005;
+                npc->currentAnim = ANIM_WorldBombette_Walk;
                 evt->functionTemp[0] = 1;
                 evt->functionTemp[1] = 10;
             }
@@ -296,10 +297,10 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                     break;
                 }
 
-                sfx_play_sound_at_npc(0x80000000, 0, -4);
+                sfx_play_sound_at_npc(SOUND_80000000, 0, -4);
                 D_802BE924 = 1;
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
-                npc->currentAnim = 0x30006;
+                npc->currentAnim = ANIM_WorldBombette_WalkLit;
                 npc->jumpVelocity = 0.0f;
                 D_802BE938 = 0;
                 npc->flags = (npc->flags | 0x200) & ~0x100;
@@ -333,7 +334,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 if (playerStatus->actionState == 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
-                npc->currentAnim = 0x30010;
+                npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
                 npc->flags &= ~0x200;
                 evt->functionTemp[1] = 2;
                 evt->functionTemp[0] = 3;
@@ -344,9 +345,9 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             } else {
                 if (!(evt->functionTemp[1] & 3)) {
                     if (gGameStatusPtr->frameCounter & 1) {
-                        sfx_play_sound_at_npc(0x141, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_141, 0, -4);
                     } else {
-                        sfx_play_sound_at_npc(0x142, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_142, 0, -4);
                     }
                 }
                 if (evt->functionTemp[1] == 40) {
@@ -372,8 +373,8 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                     }
                 }
 
-                npc->currentAnim = 0x30000 | 0x10;
-                evt->functionTemp[1] = 0x14;
+                npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
+                evt->functionTemp[1] = 20;
                 evt->functionTemp[0] = 3;
                 if (playerStatus->actionState == 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
@@ -390,19 +391,19 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
 
             if (D_802BE924 != 0) {
                 D_802BE924 = 0;
-                sfx_stop_sound(0x80000000);
+                sfx_stop_sound(SOUND_80000000);
             }
             fx_explosion(gPlayerData.partners[gPlayerData.currentPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
 
             switch (gPlayerData.partners[gPlayerData.currentPartner].level) {
                 case 0:
-                    sfx_play_sound_at_npc(0x2016, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_2016, 0, -4);
                     break;
                 case 1:
-                    sfx_play_sound_at_npc(0x2017, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_2017, 0, -4);
                     break;
                 case 2:
-                    sfx_play_sound_at_npc(0x2018, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_2018, 0, -4);
                     break;
             }
 
@@ -436,7 +437,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
-            npc->currentAnim = 0x30011;
+            npc->currentAnim = ANIM_WorldBombette_Aftermath;
             temp1 = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             if (!(get_clamped_angle_diff(camera->currentYaw, temp1) < 0.0f)) {
                 evt->functionTemp[2] = 1;
@@ -463,7 +464,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 10.0f, npc->yaw);
             npc->jumpVelocity = 0.0f;
-            npc->currentAnim = 0x30011;
+            npc->currentAnim = ANIM_WorldBombette_Aftermath;
             npc->flags |= 0x800;
             evt->functionTemp[0] = 6;
             break;
@@ -506,13 +507,13 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
             npc->rotation.z = 0.0f;
-            npc->currentAnim = 0x30003;
+            npc->currentAnim = ANIM_WorldBombette_Idle;
             partner_clear_player_tracking(npc);
             if (D_802BE924 == 0) {
                 return ApiStatus_DONE2;
             }
             D_802BE924 = 0;
-            sfx_stop_sound(0x80000000);
+            sfx_stop_sound(SOUND_80000000);
             return ApiStatus_DONE2;
         case 8:
             if (D_802BE92C != 0) {
@@ -525,7 +526,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
             npc->rotation.z = 0.0f;
-            npc->currentAnim = 0x30003;
+            npc->currentAnim = ANIM_WorldBombette_Idle;
             npc->pos.x = playerStatus->position.x;
             npc->pos.y = playerStatus->position.y;
             npc->pos.z = playerStatus->position.z;
@@ -546,7 +547,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
             D_802BE924 = 0;
-            sfx_stop_sound(0x80000000);
+            sfx_stop_sound(SOUND_80000000);
             break;
     }
 
@@ -663,13 +664,13 @@ void world_bombette_pre_battle(Npc* bombette) {
         bombette->pos.y = playerStatus->position.y;
         bombette->rotation.x = 0.0f;
         bombette->rotation.z = 0.0f;
-        bombette->currentAnim = 0x30003;
+        bombette->currentAnim = ANIM_WorldBombette_Idle;
         partner_clear_player_tracking(bombette);
         disable_npc_blur(bombette);
 
         if (D_802BE924) {
             D_802BE924 = 0;
-            sfx_stop_sound(0x80000000);
+            sfx_stop_sound(SOUND_80000000);
         }
     }
 }

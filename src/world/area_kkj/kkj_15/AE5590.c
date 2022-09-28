@@ -10,7 +10,7 @@ static char* N(exit_str_5) = "";
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_8024030C_AE589C(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags &= ~0x1;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_IS_PEACH;
     gPlayerData.currentPartner = script->varTable[0];
 
     return ApiStatus_DONE2;

@@ -2,6 +2,11 @@
 
 extern s32 D_802DAE50;
 extern s32 D_802DAE54;
+extern s32 D_802DAE58[2]; // unused?
+extern char D_802DAE60[0x400]; // unused?
+extern MessagePrintState* gCurrentPrintContext;
+extern s32 D_802DB264;
+extern MessagePrintState* D_802DB268;
 
 ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 arg2);
 
