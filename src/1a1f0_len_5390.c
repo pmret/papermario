@@ -21,6 +21,8 @@ void spawn_drops(Enemy* enemy);
 
 s32 D_80077C40 = 0;
 
+extern EvtScript D_800936DC;
+
 EvtScript D_80077C44 = {
     EVT_WAIT(10)
     EVT_CALL(FadeBackgroundToBlack)
@@ -125,8 +127,6 @@ EnemyDrops D_80077EB8 = {
     .minCoinBonus = 0,
     .maxCoinBonus = 0,
 };
-
-extern EvtScript D_800936DC;
 
 EvtScript EnemyNpcHit = {
     EVT_CALL(GetOwnerEncounterTrigger, LocalVar(0))
