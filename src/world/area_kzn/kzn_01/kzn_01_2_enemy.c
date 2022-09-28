@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
     EVT_WAIT(25)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_SET(GF_KZN01_IntruderAlert, TRUE)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -59,7 +59,7 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
 StaticNpc N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
     .settings = &N(NpcSettings_PutridPiranha),
-    .pos = { 0.0f, -1000.0f, 0.0f },
+    .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_200000,
     .init = &N(EVS_NpcInit_PutridPiranha),

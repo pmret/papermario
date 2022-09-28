@@ -3724,10 +3724,15 @@ enum GameModeIDs {
     GAME_MODE_DEMO                        = 0x00000011,
 };
 
-enum DemoStates {
+enum DemoState {
     DEMO_STATE_NONE         = 0,
     DEMO_STATE_ACTIVE       = 1,
     DEMO_STATE_CHANGE_MAP   = 2,
+};
+
+enum MapLoadType {
+    LOAD_FROM_MAP           = 0,
+    LOAD_FROM_FILE_SELECT   = 1,
 };
 
 enum IntroStates {

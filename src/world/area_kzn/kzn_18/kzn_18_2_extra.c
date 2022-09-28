@@ -7,13 +7,13 @@
 
 #include "world/common/GetFloorCollider.inc.c"
 
-NpcSettings N(D_80240DC0_C8CE60) = {
+NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(D_80240DEC_C8CE8C) = {
+NpcSettings N(NpcSettings_Piranha) = {
     .height = 30,
     .radius = 24,
     .level = 99,
@@ -25,14 +25,14 @@ NpcSettings N(NpcSettings_Unused1) = {
     .level = 99,
 };
 
-EvtScript N(D_80240E44_C8CEE4) = {
+EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
         EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar0, -125)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
+            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+            EVT_IF_LT(LVar0, -125)
+                EVT_WAIT(1)
+                EVT_GOTO(0)
+            EVT_END_IF
         EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
         EVT_CALL(SetNpcPos, NPC_SELF, -280, 250, -360)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -53,10 +53,10 @@ EvtScript N(D_80240E44_C8CEE4) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(N(GetFloorCollider), LVar0)
-        EVT_IF_EQ(LVar0, 32)
+        EVT_IF_EQ(LVar0, COLLIDER_o442)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_IF_EQ(LVar0, 42)
+        EVT_IF_EQ(LVar0, COLLIDER_o405)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -94,7 +94,7 @@ EvtScript N(D_80240E44_C8CEE4) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
     EVT_CALL(NpcMoveTo, NPC_SELF, 530, -360, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_WAIT(15)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
@@ -103,9 +103,9 @@ EvtScript N(D_80240E44_C8CEE4) = {
     EVT_END
 };
 
-EvtScript N(D_80241360_C8D400) = {
+EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_80240E44_C8CEE4)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -113,16 +113,16 @@ EvtScript N(D_80241360_C8D400) = {
     EVT_END
 };
 
-EvtScript N(D_802413B4_C8D454) = {
+EvtScript N(EVS_NpcIdle_Piranha) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_GT(LVar1, 100)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_IF_LT(LVar0, 100)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_IF_GT(LVar1, 100)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_IF_LT(LVar0, 100)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(SetCamera0Flag1000))
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -142,7 +142,7 @@ EvtScript N(D_802413B4_C8D454) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
     EVT_WAIT(25)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(N(UnsetCamera0Flag1000))
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_SET(GF_KZN18_IntruderAlert, TRUE)
@@ -151,9 +151,9 @@ EvtScript N(D_802413B4_C8D454) = {
     EVT_END
 };
 
-EvtScript N(D_80241618_C8D6B8) = {
+EvtScript N(EVS_NpcInit_Piranha) = {
     EVT_IF_EQ(GF_KZN18_IntruderAlert, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802413B4_C8D454)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Piranha)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -161,13 +161,13 @@ EvtScript N(D_80241618_C8D6B8) = {
     EVT_END
 };
 
-StaticNpc N(D_8024166C_C8D70C) = {
+StaticNpc N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(D_80240DC0_C8CE60),
-    .pos = { 0.0f, -1000.0f, 0.0f },
+    .settings = &N(NpcSettings_Kolorado),
+    .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
-    .init = &N(D_80241360_C8D400),
+    .init = &N(EVS_NpcInit_Kolorado),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -194,13 +194,13 @@ StaticNpc N(D_8024166C_C8D70C) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(D_8024185C_C8D8FC) = {
+StaticNpc N(NpcData_Piranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(D_80240DEC_C8CE8C),
-    .pos = { 0.0f, -1000.0f, 0.0f },
+    .settings = &N(NpcSettings_Piranha),
+    .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_200000,
-    .init = &N(D_80241618_C8D6B8),
+    .init = &N(EVS_NpcInit_Piranha),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
@@ -233,8 +233,8 @@ StaticNpc N(D_8024185C_C8D8FC) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(D_8024166C_C8D70C)),
-    NPC_GROUP(N(D_8024185C_C8D8FC)),
+    NPC_GROUP(N(NpcData_Kolorado)),
+    NPC_GROUP(N(NpcData_Piranha)),
     {}
 };
 

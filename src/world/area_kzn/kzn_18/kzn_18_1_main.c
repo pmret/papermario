@@ -5,61 +5,44 @@ extern NpcGroupList N(DefaultNPCs);
 
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
-EvtScript N(D_80240704_C8C7A4) = EVT_EXIT_WALK(60, kzn_18_ENTRY_0, "kzn_17", kzn_17_ENTRY_1);
-EvtScript N(D_80240760_C8C800) = EVT_EXIT_WALK(60, kzn_18_ENTRY_1, "kzn_19", kzn_19_ENTRY_0);
-EvtScript N(D_802407BC_C8C85C) = EVT_EXIT_WALK(60, kzn_18_ENTRY_2, "kzn_19", kzn_19_ENTRY_1);
+EvtScript N(EVS_ExitWalk_kzn_17_1) = EVT_EXIT_WALK(60, kzn_18_ENTRY_0, "kzn_17", kzn_17_ENTRY_1);
+EvtScript N(EVS_ExitWalk_kzn_19_0) = EVT_EXIT_WALK(60, kzn_18_ENTRY_1, "kzn_19", kzn_19_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_19_1) = EVT_EXIT_WALK(60, kzn_18_ENTRY_2, "kzn_19", kzn_19_ENTRY_1);
 
-EvtScript N(D_80240818_C8C8B8) = {
-    EVT_BIND_TRIGGER(N(D_80240704_C8C7A4), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
-    EVT_BIND_TRIGGER(N(D_80240760_C8C800), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
-    EVT_BIND_TRIGGER(N(D_802407BC_C8C85C), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+EvtScript N(EVS_BindExitTriggers) = {
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_17_1), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_19_0), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_19_1), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024087C_C8C91C) = {
+EvtScript N(EVS_UpdateTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_off1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_toro, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_poko, TRUE)
     EVT_THREAD
-        EVT_SET(LVar0, 2)
-        EVT_SET(LVar1, 200)
-        EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 400)
-        EVT_SET(LVar4, -100)
-        EVT_SET(LVar5, 1)
-        EVT_SET(LVar6, 0)
-        EVT_SET(LVar7, 1)
-        EVT_SET(LVar8, 1)
-        EVT_SET(LVar9, 0)
-        EVT_SET(LVarA, 0)
-        EVT_SET(LVarB, 0)
-        EVT_SET(LVarC, 0)
+        TEX_PAN_PARAMS_ID(TEX_PANNER_2)
+        TEX_PAN_PARAMS_STEP( 200,    0,  400, -100)
+        TEX_PAN_PARAMS_FREQ(   1,    0,    1,    1)
+        TEX_PAN_PARAMS_INIT(   0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(LVar0, 5)
-        EVT_SET(LVar1, 300)
-        EVT_SET(LVar2, -500)
-        EVT_SET(LVar3, 0)
-        EVT_SET(LVar4, 0)
-        EVT_SET(LVar5, 1)
-        EVT_SET(LVar6, 1)
-        EVT_SET(LVar7, 0)
-        EVT_SET(LVar8, 0)
-        EVT_SET(LVar9, 0)
-        EVT_SET(LVarA, 0)
-        EVT_SET(LVarB, 0)
-        EVT_SET(LVarC, 0)
+        TEX_PAN_PARAMS_ID(TEX_PANNER_5)
+        TEX_PAN_PARAMS_STEP( 300, -500,    0,    0)
+        TEX_PAN_PARAMS_FREQ(   1,    1,    0,    0)
+        TEX_PAN_PARAMS_INIT(   0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_THREAD
+        // animate lava bubbles (real ones, not the enemies)
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
-            EVT_CALL(SetTexPanOffset, 13, 0, LVar0, 0)
-            EVT_ADD(LVar0, 0x00008000)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
+            EVT_ADD(LVar0, 0x8000)
             EVT_WAIT(6)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -72,14 +55,14 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = -1 }
 };
 
-EvtScript N(D_80240B4C_C8CBEC) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, 1)
+    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
         EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(D_80240818_C8C8B8))
+        EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LVar0, N(D_80240818_C8C8B8))
+    EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -92,7 +75,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(D_80240B4C_C8CBEC))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
@@ -108,7 +91,7 @@ EvtScript N(EVS_Main) = {
     EVT_THREAD
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
-    EVT_EXEC(N(D_8024087C_C8C91C))
+    EVT_EXEC(N(EVS_UpdateTexPanners_Lava))
     EVT_SET(LVar0, MODEL_kem1)
     EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)
