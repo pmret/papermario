@@ -49,7 +49,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
-            playerStatus->animFlags |= 0x40000;
+            playerStatus->animFlags |= PA_FLAGS_40000;
         }
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     } else {
@@ -534,13 +534,13 @@ ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
 
     blah = &script->varTable[5];
     *blah = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
-    gPlayerStatus.flags |= 0x4000000;
+    gPlayerStatus.flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2148(Evt* script, s32 isInitialCall) {
-    gPlayerStatus.flags &= ~0x4000000;
+    gPlayerStatus.flags &= ~PS_FLAGS_CAMERA_DOESNT_FOLLOW;
     return ApiStatus_DONE2;
 }
 
@@ -575,8 +575,8 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
         script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
         script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
-        playerStatus->animFlags |= 0x100000;
-        playerStatus->flags |= 0x4000000;
+        playerStatus->animFlags |= PA_FLAGS_100000;
+        playerStatus->flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
         return ApiStatus_DONE2;
     }
 
@@ -596,9 +596,9 @@ s32 func_802D23F8(void) {
 ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
         return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
     }
-
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
@@ -607,22 +607,30 @@ ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
 
 ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 val = 0;
+    s32 result = FALSE;
 
     if (gCollisionStatus.currentFloor >= 0) {
-        val = func_802D23F8() != 0;
+        result = (func_802D23F8() != 0);
     }
-    evt_set_variable(script, *args, val);
+    evt_set_variable(script, *args, result);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall) {
-    return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
+    if (gPlayerStatus.moveFrames == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
-    return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
+    if (gPlayerStatus.flags & PS_FLAGS_INPUT_DISABLED) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {

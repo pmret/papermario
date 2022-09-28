@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 #include "sprite.h"
+#include "battle/battle.h"
 
 s32 D_800778A0[] = {
     &D_8038F800, &D_803B5000, &heap_battleHead,
@@ -52,8 +53,8 @@ void state_step_battle(void) {
             currentBattleSelection = gCurrentBattleSection;
             temp = D_800DC4EB;
 
-            if (gGameStatusPtr->peachFlags & 1 || (currentBattleSelection == 0x26 && temp == 0)) {
-                gGameStatusPtr->peachFlags |= 1;
+            if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH || (currentBattleSelection == BTL_AREA_KKJ && temp == 0)) {
+                gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
                 spr_init_sprites(6);
             } else {
                 spr_init_sprites(5);
@@ -133,7 +134,7 @@ void state_step_end_battle(void) {
             func_8005AF84();
             func_8002ACDC();
             sfx_clear_env_sounds(1);
-            gGameStatusPtr->peachFlags &= ~0x1;
+            gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_IS_PEACH;
             battle_heap_create();
             spr_init_sprites(gGameStatusPtr->playerSpriteSet);
             init_model_data();

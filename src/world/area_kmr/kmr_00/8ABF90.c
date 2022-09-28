@@ -134,7 +134,7 @@ ApiStatus func_802405F0_8AC580(Evt* script, s32 isInitialCall) {
                 npc->pos.y = 100.0f;
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
                 npc->pos.y += (-npc->pos.z + -50.0f + 70.0f) * 0.15f;
-                sfx_play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+                sfx_play_sound_at_position(SOUND_B000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
                 fx_sparkles(FX_SPARKLES_0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 20.0f);
                 script->functionTemp[0] = FUNC_STATE_1;
             }

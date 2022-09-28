@@ -2429,7 +2429,7 @@ ApiStatus N(func_802414C0_96A680)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
             if (npc != 0 && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
-                npc->flags |= 0x800000;
+                npc->flags |= NPC_FLAG_NO_DROPS;
             }
         }
         script->functionTemp[0] = 0;
@@ -2467,7 +2467,7 @@ ApiStatus N(func_802415CC_96A78C)(Evt* script, s32 isInitialCall) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
-                npc->flags &= ~0x00800000;
+                npc->flags &= ~NPC_FLAG_NO_DROPS;
             }
         }
         return ApiStatus_DONE2;
@@ -2555,12 +2555,12 @@ void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_8024303C_96C1FC)(Evt* script, s32 isInitialCall) {
-    sfx_play_sound_with_params(0x202A, 0, 0x18, 0);
+    sfx_play_sound_with_params(SOUND_202A, 0, 24, 0);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
-    sfx_play_sound_with_params(0x202B, 0, 0x68, 0);
+    sfx_play_sound_with_params(SOUND_202B, 0, 104, 0);
     return ApiStatus_DONE2;
 }
 

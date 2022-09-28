@@ -1266,7 +1266,7 @@ ApiStatus N(func_802433C0_CC6BD0)(Evt* script, s32 isInitialCall) {
         sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
                                          &param1, &param2, 0x200002);
 
-        sfx_play_sound_with_params(0x295, param1, param2,
+        sfx_play_sound_with_params(SOUND_295, param1, param2,
                                    update_lerp(0, 500.0f, 0.0f, script->functionTemp[0], script->functionTemp[1]));
     }
 
@@ -1287,7 +1287,7 @@ ApiStatus N(func_802434D4_CC6CE4)(Evt* script, s32 isInitialCall) {
         sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
                                          &param1, &param2, 0x200002);
 
-        sfx_play_sound_with_params(0x295, param1, param2,
+        sfx_play_sound_with_params(SOUND_295, param1, param2,
                                    update_lerp(0, 500.0f, 0.0f, script->functionTemp[0], 0x50));
     }
 

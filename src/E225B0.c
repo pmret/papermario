@@ -33,7 +33,7 @@ void func_802B7000_E225B0(void) {
     FoldImageRecPart foldImage;
     s32 temp;
 
-    if (gPlayerStatus.animFlags & 0x100) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_100) {
         guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale,
             D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -95,7 +95,7 @@ void func_802B72C0_E22870(void) {
 
     D_802B7C78_E23228->unk_28 = 0xFF;
 
-    gPlayerStatus.animFlags |= 0x100;
+    gPlayerStatus.animFlags |= PA_FLAGS_100;
     D_8010C93C = &func_802B735C_E2290C;
 }
 
@@ -116,7 +116,7 @@ void func_802B735C_E2290C(void) {
             {
                 cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
-                cond = playerStatus->flags & 0x3000;
+                cond = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000);
             }
 
             if (!cond) {
@@ -125,7 +125,7 @@ void func_802B735C_E2290C(void) {
             }
             break;
         case 1:
-            if (playerStatus->flags & 0x20) {
+            if (playerStatus->flags & PS_FLAGS_20) {
                 D_802B7C78_E23228->unk_24 = 3;
                 return;
             }
@@ -142,7 +142,7 @@ void func_802B735C_E2290C(void) {
             break;
         case 3:
             D_802B7C78_E23228->scale = 0.53f;
-            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & 0x20) {
+            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAGS_20) {
                 D_802B7C78_E23228->unk_28 -= 64;
                 if (D_802B7C78_E23228->unk_28 < 0) {
                     D_802B7C78_E23228->unk_28 = 0;
@@ -153,7 +153,7 @@ void func_802B735C_E2290C(void) {
             if (D_802B7C78_E23228->unk_18++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
                 D_8010C93C = NULL;
-                playerStatus->animFlags &= ~0x100;
+                playerStatus->animFlags &= ~PA_FLAGS_100;
             }
             break;
     }

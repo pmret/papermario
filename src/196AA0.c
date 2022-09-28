@@ -698,7 +698,7 @@ ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
         }
     }
 
-    sfx_stop_sound(0x80000041);
+    sfx_stop_sound(SOUND_80000041);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;

@@ -24,7 +24,7 @@ BSS char evtDebugPrintBuffer[0x100];
 
 // map_api
 BSS struct LavaReset* gLavaResetList;
-BSS s32 D_802DADA4;
+BSS s32 LastSafeFloor;
 BSS s32 D_802DADA8[2]; // unused?
 
 // model_api

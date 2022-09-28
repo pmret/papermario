@@ -186,7 +186,7 @@ ApiStatus func_802803C8(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if ((playerStatus->flags & 0x100)) {
+    if ((playerStatus->flags & PS_FLAGS_100)) {
         return ApiStatus_DONE2;
     }
 

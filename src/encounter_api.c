@@ -383,32 +383,32 @@ ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall) {
 
 ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* npc = script->owner1.enemy;
-    s32 npcId = evt_get_variable(script, *args++);
+    Enemy* enemy = script->owner1.enemy;
+    s32 npcID = evt_get_variable(script, *args++);
     Evt* newScript;
     s32 groupFlags;
 
-    if (npcId == NPC_SELF) {
-        npcId = npc->npcID;
+    if (npcID == NPC_SELF) {
+        npcID = enemy->npcID;
     }
 
-    npc = get_enemy(npcId);
+    enemy = get_enemy(npcID);
 
-    if (npc->flags & 1) {
+    if (enemy->flags & ENEMY_FLAGS_1) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
-    if (npc->aiScript != NULL) {
-        kill_script_by_ID(npc->aiScriptID);
+    if (enemy->aiScript != NULL) {
+        kill_script_by_ID(enemy->aiScriptID);
     }
 
-    npc->unk_C8 = 100;
-    newScript = start_script(npc->aiBytecode, EVT_PRIORITY_A, 0);
-    npc->aiScript = newScript;
-    npc->aiScriptID = newScript->id;
-    newScript->owner1.enemy = npc;
+    enemy->unk_C8 = 100;
+    newScript = start_script(enemy->aiBytecode, EVT_PRIORITY_A, 0);
+    enemy->aiScript = newScript;
+    enemy->aiScriptID = newScript->id;
+    newScript->owner1.enemy = enemy;
     newScript->owner2.npc = script->owner2.npc;
     newScript->groupFlags = groupFlags;
 
@@ -512,7 +512,7 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
 
     enemy = get_enemy(npcID);
 
-    if (enemy->flags & 1) {
+    if (enemy->flags & ENEMY_FLAGS_1) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -819,7 +819,7 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 
-        if ((npc->flags & 0xA08) == 0x808) {
+        if ((npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT)) == (NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT)) {
             f32 x = npc->pos.x;
             f32 y = npc->pos.y + npc->collisionHeight;
             f32 z = npc->pos.z;
@@ -828,7 +828,7 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
             if (npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &a) != 0) {
                 npc->pos.y = y;
             }
-            npc->flags &= ~0x800;
+            npc->flags &= ~NPC_FLAG_JUMPING;
         }
     }
 

@@ -277,8 +277,8 @@ void action_update_use_spinning_flower(void) {
         case SUBSTATE_FINISH:
             enable_player_static_collisions();
             enable_player_input();
-            playerStatus->flags &= ~0x100000;
-            playerStatus->flags |= 0x800000;
+            playerStatus->flags &= ~PS_FLAGS_100000;
+            playerStatus->flags |= PS_FLAGS_800000;
             start_falling();
             enable_partner_ai();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

@@ -1,6 +1,10 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_090004C0[];
+extern Gfx D_090005E0[];
+extern u8 D_E0030E90[];
+
 void damage_stars_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/damage_stars", damage_stars_main);
@@ -73,4 +77,39 @@ void damage_stars_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/damage_stars", damage_stars_appendGfx);
+void damage_stars_appendGfx(void* effect) {
+    DamageStarsFXData* part = ((EffectInstance*)effect)->data.damageStars;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    s32 baseIdx;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_090004C0);
+
+    baseIdx = (part->unk_2C - 1) * 3;
+    baseIdx %= 36;
+
+    for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
+        s32 rIdx = baseIdx + i * 3;
+        s32 gIdx = baseIdx + 1 + i * 3;
+        s32 bIdx = baseIdx + 2 + i * 3;
+
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0030E90[rIdx % 36], D_E0030E90[gIdx % 36], D_E0030E90[bIdx % 36], part->unk_24);
+        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        shim_guMtxCatF(sp58, sp18, sp18);
+        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+        shim_guRotateF(sp18, part->unk_1C, 0.0f, 0.0f, 1.0f);
+        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, D_090005E0);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+}

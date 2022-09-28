@@ -59,7 +59,9 @@ void falling_leaves_update(EffectInstance* effect) {
     f32 temp;
     s32 i;
 
-    if (part->unk_2C - 5 < 10U && unk_00 == 0 && gPlayerStatus.actionState == ACTION_STATE_IDLE) {
+    if (part->unk_2C >= 5 && part->unk_2C <= 14 &&
+        unk_00 == 0 && gPlayerStatus.actionState == ACTION_STATE_IDLE)
+    {
         return;
     }
 

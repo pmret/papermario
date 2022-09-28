@@ -88,7 +88,7 @@ void func_802B75E8_E206F8(void) {
     yTemp = playerStatus->position.y + playerStatus->colliderHeight;
     unk_21 = D_802B7CB8_E20DC8->unk_21;
     y = D_802B7CB8_E20DC8->pos.y;
-    if (!(playerStatus->animFlags & 0x1000)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
         delta = (yTemp + 8.0f + unk_21 - y) * 0.25f;
     } else {
         delta = (yTemp + 2.0f + unk_21 - y) * 0.25f;
@@ -103,7 +103,7 @@ void func_802B79C8_E20AD8(void) {
     gPlayerStatusPtr->interactingWithID = -1;
     D_8010C958 = 0;
     gPlayerStatusPtr->encounteredNPC = NULL;
-    gPlayerStatusPtr->animFlags &= ~0x10;
+    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);
     repartner_set_tether_distance();
 }

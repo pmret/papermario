@@ -133,7 +133,7 @@ void restore_map_collision_data(void) {
         collider->flags = backupEntry->flags;
         collider->parentModelIndex = backupEntry->parentModelIndex;
 
-        if (collider->flags != -1 && collider->flags & 0x80000000) {
+        if (collider->flags != -1 && collider->flags & COLLIDER_FLAGS_HAS_MODEL_PARENT) {
             parent_collider_to_model(i, collider->parentModelIndex);
             update_collider_transform(i);
         }
@@ -316,9 +316,9 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
 
     collider = &gCollisionData.colliderList[colliderID];
     collider->parentModelIndex = modelIndex;
-    collider->flags |= 0x80000000;
+    collider->flags |= COLLIDER_FLAGS_HAS_MODEL_PARENT;
 
-    vertexBuffer = collision_heap_malloc(collider->numTriangles * 0xC);
+    vertexBuffer = collision_heap_malloc(collider->numTriangles * sizeof(Vec3f));
     vertexBufferSize = 0;
     vertexPtr = vertexBuffer;
 
@@ -329,7 +329,7 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
     }
 
     collider->numVertices = vertexBufferSize;
-    collider->vertexTable = collision_heap_malloc(vertexBufferSize * 0x18);
+    collider->vertexTable = collision_heap_malloc(vertexBufferSize * 2 * sizeof(Vec3f));
     for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; vertexPtr++, vertexTable += 2, i++) {
         vertex = *vertexPtr;
         vertexTable[0].x = vertexTable[1].x = vertex->x;
@@ -871,7 +871,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
     for (i = 0; i < collisionData->numColliders; i++) {
         collider = &collisionData->colliderList[i];
 
-        if (collider->flags & 0x10000)
+        if (collider->flags & COLLIDER_FLAGS_IGNORE_PLAYER)
             continue;
 
         if (collider->numTriangles == 0 || collider->aabb == NULL)

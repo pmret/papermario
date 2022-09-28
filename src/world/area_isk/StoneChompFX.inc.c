@@ -52,7 +52,7 @@ ApiStatus N(StoneChompFXB)(Evt* script, s32 isInitialCall) {
     posZ = ownerNpc->pos.z;
     add_vec2D_polar(&posX, &posZ, ownerNpc->collisionRadius * 0.3f, clamp_angle(ownerNpc->renderYaw + 180.0f));
     
-    if (ownerNpc->flags & 2) {
+    if (ownerNpc->flags & NPC_FLAG_2) {
         for (i = 0; i < 8; i++, blurData++) {
             childNpc = blurData->npc;
             childNpc->pos.x = posX;

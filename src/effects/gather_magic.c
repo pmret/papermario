@@ -1,6 +1,9 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000080[];
+extern Gfx* D_E008E890[];
+
 void gather_magic_appendGfx(void* effect);
 void gather_magic_init(EffectInstance* effect);
 void gather_magic_update(EffectInstance* effect);
@@ -70,7 +73,67 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
 void gather_magic_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/gather_magic", gather_magic_update);
+void gather_magic_update(EffectInstance* effect) {
+    GatherMagicFXData* part = effect->data.gatherMagic;
+    s32 unk_1C;
+    s32 i;
+
+    if (part->unk_18 < 100) {
+        part->unk_18--;
+    }
+
+    part->unk_1C++;
+
+    if (part->unk_18 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    unk_1C = part->unk_1C;
+
+    if (unk_1C < 21) {
+        part->unk_14 = unk_1C * 12;
+    } else {
+        part->unk_14 = 255;
+    }
+
+    if (unk_1C % 2) {
+        part->unk_14 *= 0.5;
+    }
+
+    unk_1C = part->unk_1C;
+
+    part++;
+    for (i = 1; i < effect->numParts; i++, part++) {
+        f32 unk_20 = part->unk_20;
+        f32 unk_2C = part->unk_2C;
+        f32 unk_24 = part->unk_24;
+        f32 sin_20 = shim_sin_deg(unk_20);
+        f32 cos_20 = shim_cos_deg(unk_20);
+        f32 sin_24 = shim_sin_deg(unk_24);
+        f32 cos_24 = shim_cos_deg(unk_24);
+
+        part->unk_08 = unk_2C * sin_20 * cos_24;
+        part->unk_0C = unk_2C * cos_20 * cos_24;
+        part->unk_10 = unk_2C * sin_24;
+
+        part->unk_14 = ((100.0f - part->unk_2C) * 255.0f * 2.0f) / 100.0f;
+        if (part->unk_14 >= 256) {
+            part->unk_14 = 255;
+        }
+
+        part->unk_28 = part->unk_2C / 80.0f + 0.2;
+        part->unk_2C -= (i & 3) * 2 + 2;
+
+        if (part->unk_2C < 0.0f) {
+            part->unk_2C = 0.0f;
+            part->unk_28 = 0.0f;
+        }
+
+        part->unk_20 += (unk_1C % 2) ? 5.0f : 2.0f;
+        part->unk_24 += (unk_1C % 2) ? 2.0f : 5.0f;
+    }
+}
 
 void gather_magic_render(EffectInstance* effect) {
     RenderTask renderTask;
@@ -85,4 +148,45 @@ void gather_magic_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/gather_magic", gather_magic_appendGfx);
+void gather_magic_appendGfx(void* effect) {
+    GatherMagicFXData* part = ((EffectInstance*)effect)->data.gatherMagic;
+    s32 unk_30 = part->unk_30;
+    s32 unk_34 = part->unk_34;
+    s32 unk_38 = part->unk_38;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+    shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp98, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_09000080);
+    gDPSetEnvColor(gMasterGfxPos++, part->unk_3C, part->unk_40, part->unk_44, 0);
+
+    part++;
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
+        f32 scale = part->unk_28;
+
+        if (scale != 0.0f) {
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_30, unk_34, unk_38, part->unk_14);
+
+            shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+            shim_guScaleF(sp58, scale, scale, scale);
+            shim_guMtxCatF(sp58, sp18, sp18);
+            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_E008E890[i & 1]);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

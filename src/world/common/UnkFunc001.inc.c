@@ -24,7 +24,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        enemy->aiFlags |= 0x10;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_10;
         hitDepth = 1000.0f;
         x = npc->pos.x;
         y = npc->pos.y;
@@ -33,9 +33,9 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
         enemy->varTable[1] = y;
     }
 
-    if (enemy->aiFlags & 4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->aiPaused == 0) {
-            enemy->aiFlags &= ~4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else {
             return ApiStatus_BLOCK;
         }

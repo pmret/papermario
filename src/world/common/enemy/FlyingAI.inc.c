@@ -56,7 +56,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     temp_f24 = vt3 + vt7;
 
     if ((enemy->varTable[0] & 0x11) == 1) {
-        if (npc->flags & 8) {
+        if (npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) {
             if (vt1 < temp_f24 - npc->pos.y) {
                 enemy->varTable[0] |= 0x10;
             }
@@ -77,7 +77,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         f32 yTemp;
 
         do {
-            if (npc->flags & 8) {
+            if (npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) {
                 yTemp = temp_f24;
                 test = vt4 + ((temp_f24 - vt4) * 0.09);
                 npc->pos.y = test;
@@ -106,7 +106,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             f32 sinTemp = sin_deg(enemy->varTable[2]);
             s32 hit;
 
-            if (npc->flags & 8) {
+            if (npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) {
                 hit = FALSE;
             } else {
                 posX = npc->pos.x;
@@ -375,7 +375,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
             npc->yaw = clamp_angle(angle);
         }
 
-        if (npc->flags & 8) {
+        if (npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) {
             if (npc->pos.y + npc->jumpVelocity < temp_f22) {
                 npc->pos.y = temp_f22;
                 npc->jumpVelocity = 0.0f;

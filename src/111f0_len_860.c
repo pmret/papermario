@@ -185,7 +185,7 @@ void func_80036430(void) {
     gMapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
-    gPlayerStatus.flags |= 0x1000;
+    gPlayerStatus.flags |= PS_FLAGS_1000;
 }
 
 void func_8003646C(void) {

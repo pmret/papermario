@@ -191,11 +191,13 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = AI_STATE_SUSPEND;
