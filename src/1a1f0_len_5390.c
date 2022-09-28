@@ -6,6 +6,7 @@
 #include "hud_element.h"
 #include "world/partners.h"
 #include "sprite.h"
+#include "sprite/npc/BattleMerlee.h"
 
 ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);
@@ -24,7 +25,7 @@ EvtScript D_80077C44 = {
     EVT_WAIT(10)
     EVT_CALL(FadeBackgroundToBlack)
     EVT_WAIT(10)
-    EVT_CALL(CreateNpc, -10, 12255233)
+    EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
     EVT_CALL(GetCamLookAtObjVector)
@@ -34,15 +35,15 @@ EvtScript D_80077C44 = {
     EVT_END_THREAD
     EVT_CALL(FadeInMerlee)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, 0xBB0000)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(MerleeStopFX)
     EVT_CALL(UnfadeBackgroundFromBlack)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(FadeOutMerlee)
-        EVT_CALL(DeleteNpc, -10)
+        EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, 0x2075)
+    EVT_CALL(PlaySound, SOUND_2075)
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(PlayMerleeGatherFX, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(PlayMerleeOrbFX, LocalVar(0), LocalVar(1), LocalVar(2))

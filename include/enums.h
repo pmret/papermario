@@ -1086,6 +1086,7 @@ enum SoundIDs {
     SOUND_2072                      = 0x00002072,
     SOUND_2073                      = 0x00002073,
     SOUND_2074                      = 0x00002074,
+    SOUND_2075                      = 0x00002075,
     SOUND_BOMB_BLAST                = 0x00002076,
     SOUND_207A                      = 0x0000207A,
     SOUND_207B                      = 0x0000207B,
@@ -4134,7 +4135,7 @@ enum SurfaceType {
     SURFACE_TYPE_SLIDE              = 5,
     SURFACE_TYPE_FLOWERS            = 6,
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
-    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_SNOW               = 8,
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
 };
 
