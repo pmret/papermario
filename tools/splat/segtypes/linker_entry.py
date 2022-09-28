@@ -370,9 +370,7 @@ class LinkerWriter:
 
         # Align directive
         if segment.align:
-            self._writeln(
-                f"__romPos = (__romPos + {segment.align - 1}) & ~{segment.align - 1}; /* align {segment.align} */"
-            )
+            self._writeln(f"__romPos = ALIGN(__romPos, {segment.align});")
 
         self._write_symbol(f"{name}_ROM_END", "__romPos")
 

@@ -1,5 +1,13 @@
 # splat Release Notes
 
+# 0.12.0: Performance Boost
+
+In this release, we bring many performance improvements, making splat dramatically faster. We have observed speedups of 10-20x, though your results may vary.
+
+* Linker script `_romPos` alignment statements now take a form that is friendlier to different assemblers.
+
+* Fixed the default value of `use_legacy_include_asm` to be what it was before 0.11.2
+
 ### 0.11.2
 * The way options are parsed and accessed has been completely refactored. The following option names have changed:
 

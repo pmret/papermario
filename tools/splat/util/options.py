@@ -348,7 +348,7 @@ def parse_yaml(
             ["f3d", "f3db", "f3dex", "f3dexb", "f3dex2"],
             "f3dex2",
         ),
-        use_legacy_include_asm=parse_opt(yaml, "use_legacy_include_asm", bool, False),
+        use_legacy_include_asm=parse_opt(yaml, "use_legacy_include_asm", bool, True),
     )
 
 

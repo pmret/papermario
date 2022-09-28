@@ -1,26 +1,22 @@
 #! /usr/bin/env python3
 
-import hashlib
-from typing import Dict, List, Optional, Union, Set, Any
 import argparse
-import spimdisasm
+import hashlib
+import pickle
+from typing import Any, Dict, List, Optional, Set, Union
+
 import rabbitizer
+import spimdisasm
 import tqdm
 import yaml
-import pickle
-from colorama import Style, Fore
-from segtypes.segment import Segment
-from segtypes.linker_entry import LinkerWriter, to_cname
-from util import log
-from util import options
-from util import symbols
-from util import palettes
-from util import compiler
-from util.symbols import Symbol
-
+from colorama import Fore, Style
 from intervaltree import Interval, IntervalTree
 
-VERSION = "0.11.2"
+from segtypes.linker_entry import LinkerWriter, to_cname
+from segtypes.segment import Segment
+from util import compiler, log, options, palettes, symbols
+
+VERSION = "0.12.0"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -106,8 +102,6 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
 
 
 def assign_symbols_to_segments():
-    seg_syms: dict[int, list[Symbol]] = {}
-
     for symbol in symbols.all_symbols:
         if symbol.rom:
             cands = segment_roms[symbol.rom]
@@ -356,6 +350,8 @@ def main(config_path, modes, verbose, use_cache=True):
             processed_segments.append(segment)
 
             seg_split[typ] += 1
+
+    symbols.mark_c_funcs_as_defined()
 
     # Split
     for segment in tqdm.tqdm(
