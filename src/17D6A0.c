@@ -1115,16 +1115,17 @@ s32 bActorMessages[] = {
 };
 PopupMessage* D_802838F8 = NULL;
 
-extern PopupMessage popupMessages[32];
-extern s16 D_8029F640;
-extern s16 D_8029F642;
-extern s16 D_8029F644;
-extern s16 D_8029F646;
-extern s16 D_8029F648;
-extern s16 D_8029F64A;
-extern s16 D_8029F64C;
-extern s16 D_8029F64E;
-extern s16 D_8029F650;
+// BSS
+BSS PopupMessage popupMessages[32];
+BSS s16 D_8029F640;
+BSS s16 D_8029F642;
+BSS s16 D_8029F644;
+BSS s16 D_8029F646;
+BSS s16 D_8029F648;
+BSS s16 D_8029F64A;
+BSS s16 D_8029F64C;
+BSS s16 D_8029F64E;
+BSS s16 D_8029F650;
 
 extern HudScript HES_AButton;
 extern HudScript HES_AButtonDown;
