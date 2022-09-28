@@ -25,7 +25,7 @@ void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 
 // ECAA80_ItemChoice_WaitForSelection (needs data?)
 // INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
-? func_8024199C_ECB69C(Evt *arg0, s32 arg1) {
+ApiStatus func_8024199C_ECB69C(Evt *arg0, s32 arg1) {
     if (arg1 != 0) {
         ECAA80_ItemChoice_HasSelectedItem = 0;
     }
