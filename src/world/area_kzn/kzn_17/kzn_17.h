@@ -17,8 +17,8 @@
 
 enum {
 	NPC_Kolorado                = 0,
-	NPC_PutridPiranha_01        = 1,
-	NPC_PutridPiranha_02        = 2,
+	NPC_Piranha                 = 1,
+	NPC_Piranha_Hitbox          = 2,
 	NPC_SpikeTop                = 3,
 };
 

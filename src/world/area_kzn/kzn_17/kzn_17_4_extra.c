@@ -7,83 +7,7 @@ extern API_CALLABLE(N(D_80244B1C_C8A5CC));
 #define UNK_FUNC_50_LVar1 -583.0
 #define UNK_FUNC_50_LVar2 165.0
 
-//func_80242D00_C887B0
-ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
-    subtract_hp(1);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80242D20_C887D0)(Evt* script, s32 isInitialCall) {
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        script->varTable[0] = gPartnerActionStatus.actingPartner;
-    } else {
-        script->varTable[0] = -1;
-    }
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/UnkFunc46.inc.c"
-
-#include "world/common/UnkFunc47.inc.c"
-
-#include "world/common/UnkFunc48.inc.c"
-
-#include "world/common/UnkFunc49.inc.c"
-
-#include "world/common/UnkFunc50.inc.c"
-
-#include "world/common/UnkFunc51.inc.c"
-
-EvtScript N(D_80245840_C8B2F0) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LABEL(10)
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(InterruptUsePartner)
-    EVT_END_IF
-    EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOW)
-            EVT_GOTO(2)
-        EVT_ELSE
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_NE(LVar0, ACTION_STATE_IDLE)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(GetPlayerTargetYaw, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_CALL(InterpPlayerYaw, 90, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), 20)
-    EVT_ELSE
-        EVT_CALL(InterpPlayerYaw, 270, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), -20)
-    EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
-    EVT_WAIT(1)
-    EVT_CALL(N(SpinyTrompHit))
-    EVT_CALL(func_802D2520, 0x0001000F, 4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_LABEL(1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(AF_KZN_02, FALSE)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_WAIT(30)
-    EVT_CALL(func_802D2520, 0x0001000F, 0, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)
-    EVT_CALL(N(UnkFunc48), 0)
-    EVT_LABEL(2)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/kzn_SpinyTromp.inc.c"
 
 EvtScript N(D_80245AE0_C8B590) = {
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -124,7 +48,7 @@ EvtScript N(D_80245CA8_C8B758) = {
     EVT_END
 };
 
-EvtScript N(EVS_80245CE8) = {
+EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_IF_GE(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
         EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
@@ -209,10 +133,10 @@ EvtScript N(EVS_80245CE8) = {
         EVT_CALL(N(UnkFunc47))
         EVT_IF_LT(LVar4, 80)
             EVT_IF_EQ(AF_KZN_03, FALSE)
-                EVT_CALL(N(func_80242D20_C887D0))
-                EVT_IF_NE(LVar0, 9)
+                EVT_CALL(N(SpinyTromp_GetActingPartner))
+                EVT_IF_NE(LVar0, PARTNER_BOW)
                     EVT_SET(AF_KZN_03, TRUE)
-                    EVT_EXEC(N(D_80245840_C8B2F0))
+                    EVT_EXEC(N(D_80240D10_C7EE90))
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF

@@ -4,82 +4,7 @@
 #define UNK_FUNC_50_LVar1 -469.0
 #define UNK_FUNC_50_LVar2 46.0
 
-ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
-    subtract_hp(1);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80240350_C7E4D0)(Evt* script, s32 isInitialCall) {
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        script->varTable[0] = gPartnerActionStatus.actingPartner;
-    } else {
-        script->varTable[0] = -1;
-    }
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/UnkFunc46.inc.c"
-
-#include "world/common/UnkFunc47.inc.c"
-
-#include "world/common/UnkFunc48.inc.c"
-
-#include "world/common/UnkFunc49.inc.c"
-
-#include "world/common/UnkFunc50.inc.c"
-
-#include "world/common/UnkFunc51.inc.c"
-
-EvtScript N(D_80240D10_C7EE90) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LABEL(10)
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(InterruptUsePartner)
-    EVT_END_IF
-    EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOW)
-            EVT_GOTO(2)
-        EVT_ELSE
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_NE(LVar0, ACTION_STATE_IDLE)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(GetPlayerTargetYaw, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_CALL(InterpPlayerYaw, 90, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), 20)
-    EVT_ELSE
-        EVT_CALL(InterpPlayerYaw, 270, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), -20)
-    EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
-    EVT_WAIT(1)
-    EVT_CALL(N(SpinyTrompHit))
-    EVT_CALL(func_802D2520, ANIM_Mario_DeadStill, 4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_LABEL(1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(AF_KZN_02, FALSE)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_WAIT(30)
-    EVT_CALL(func_802D2520, ANIM_Mario_DeadStill, 0, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)
-    EVT_CALL(N(UnkFunc48), 0)
-    EVT_LABEL(2)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/kzn_SpinyTromp.inc.c"
 
 EvtScript N(D_80240FB0_C7F130) = {
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -90,10 +15,10 @@ EvtScript N(D_80240FB0_C7F130) = {
     EVT_LOOP(0)
         EVT_IF_EQ(AF_KZN_03, FALSE)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, MapVar(0))
+            EVT_ADD(LVar0, MV_Unk_0)
             EVT_DIV(LVar0, 2)
         EVT_ELSE
-            EVT_SET(LVar0, MapVar(0))
+            EVT_SET(LVar0, MV_Unk_0)
         EVT_END_IF
         EVT_SET(LVar3, LVar0)
         EVT_SWITCH(LVar3)
@@ -185,33 +110,33 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_CALL(SetGroupEnabled, MODEL_goron, 1)
     EVT_CALL(EnableModel, MODEL_me, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, -469)
+    EVT_SET(LVar0, UNK_FUNC_50_LVar1)
     EVT_SET(LVar2, 0)
     EVT_CALL(N(UnkFunc46))
     EVT_CALL(MakeLerp, 200, LVar2, 20, EASING_QUADRATIC_IN)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
-    EVT_SET(MapVar(0), -469)
-    EVT_CALL(TranslateGroup, MODEL_goron, -469, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_me, -469, LVar0, 0)
+    EVT_SET(MV_Unk_0, UNK_FUNC_50_LVar1)
+    EVT_CALL(TranslateGroup, MODEL_goron, UNK_FUNC_50_LVar1, LVar0, 0)
+    EVT_CALL(TranslateModel, MODEL_me, UNK_FUNC_50_LVar1, LVar0, 0)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SUB(LVar2, 55)
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, -469, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, UNK_FUNC_50_LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_EXEC(N(D_80241224_C7F3A4))
     EVT_THREAD
         EVT_CALL(GetCurrentPartner, LVar0)
         EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(4)
-            EVT_CASE_EQ(9)
+            EVT_CASE_EQ(PARTNER_PARAKARRY)
+            EVT_CASE_EQ(PARTNER_BOW)
             EVT_CASE_DEFAULT
                 EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.5))
                 EVT_CALL(PlayerJump1, LVar1, LVar2, LVar3, 8)
                 EVT_CALL(InterpPlayerYaw, 270, 0)
-                EVT_IF_NE(LVar0, 8)
+                EVT_IF_NE(LVar0, PARTNER_LAKILESTER)
                     EVT_WAIT(3)
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
                     EVT_WAIT(10)
@@ -225,16 +150,16 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_EXEC_GET_TID(N(D_80240FB0_C7F130), LVarA)
-    EVT_EXEC_GET_TID(N(D_80241424_C7F5A4), MapVar(10))
+    EVT_EXEC_GET_TID(N(D_80241424_C7F5A4), MV_Unk_A)
     EVT_CALL(PlaySoundAt, SOUND_8000001B, 0, -465, 0, 0)
     EVT_SET(LVar2, 0)
     EVT_SET(LVar3, 0)
-    EVT_CALL(MakeLerp, -469, 418, 180, EASING_QUADRATIC_IN)
+    EVT_CALL(MakeLerp, UNK_FUNC_50_LVar1, 418, 180, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(UnkFunc46))
         EVT_CALL(N(UnkFunc51), LVar0, LVar1, LVar2)
-        EVT_SET(MapVar(0), LVar0)
+        EVT_SET(MV_Unk_0, LVar0)
         EVT_CALL(TranslateGroup, MODEL_goron, LVar0, LVar2, 0)
         EVT_CALL(TranslateModel, MODEL_me, LVar0, LVar2, 0)
         EVT_SET(LVar8, LVar0)
@@ -248,8 +173,8 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_CALL(N(UnkFunc47))
         EVT_IF_LT(LVar4, 80)
             EVT_IF_EQ(AF_KZN_03, FALSE)
-                EVT_CALL(N(func_80240350_C7E4D0))
-                EVT_IF_NE(LVar0, 9)
+                EVT_CALL(N(SpinyTromp_GetActingPartner))
+                EVT_IF_NE(LVar0, PARTNER_BOW)
                     EVT_EXEC(N(D_80240D10_C7EE90))
                     EVT_IF_EQ(AF_KZN_03, FALSE)
                         EVT_KILL_THREAD(LVarA)
@@ -268,7 +193,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_SET(AF_KZN_04, TRUE)
-    EVT_KILL_THREAD(MapVar(10))
+    EVT_KILL_THREAD(MV_Unk_A)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 35, EVT_FLOAT(2.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))

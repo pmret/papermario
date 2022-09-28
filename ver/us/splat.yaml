@@ -10283,8 +10283,9 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC85AB0, c, kzn_17_1_main]
-    - [0xC85DC0, c, kzn_17_2_npc]
-    - [0xC887B0, c, kzn_17_3_extra]
+    - [0xC85AB0, c, kzn_17_2_entity]
+    - [0xC85DC0, c, kzn_17_3_npc]
+    - [0xC887B0, c, kzn_17_4_extra]
     - [0xC88B50]
   - name: kzn_18
     dir: world/area_kzn/kzn_18

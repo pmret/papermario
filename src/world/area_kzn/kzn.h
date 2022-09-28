@@ -52,7 +52,7 @@ extern MapSettings kzn_08_settings;
 extern MapSettings kzn_09_settings;
 extern MapSettings kzn_10_settings;
 extern MapSettings kzn_11_settings;
-//extern MapSettings kzn_17_settings;
+extern MapSettings kzn_17_settings;
 extern MapSettings kzn_18_settings;
 //extern MapSettings kzn_19_settings;
 extern MapSettings kzn_20_settings;
