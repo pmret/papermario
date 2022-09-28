@@ -1,13 +1,15 @@
 #include "common.h"
 #include "battle/battle.h"
 
-extern MessagePrintState* gSpeakingActorPrintCtx;
-extern MessagePrintState* D_8029FA64;
-extern s32 gSpeakingActorPrintIsDone; // unk_08
-extern s32 gSpeakingActorTalkAnim;
-extern s32 gSpeakingActorIdleAnim;
-extern Actor* gSpeakingActor;
-extern ActorPart* gSpeakingActorPart;
+BSS char D_8029FA660[0x400]; // unused?
+
+BSS MessagePrintState* gSpeakingActorPrintCtx;
+BSS MessagePrintState* D_8029FA64;
+BSS s32 gSpeakingActorPrintIsDone; // unk_08
+BSS s32 gSpeakingActorTalkAnim;
+BSS s32 gSpeakingActorIdleAnim;
+BSS Actor* gSpeakingActor;
+BSS ActorPart* gSpeakingActorPart;
 
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

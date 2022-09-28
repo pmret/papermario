@@ -30,7 +30,7 @@ void update_player_input(void) {
         playerStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & 8) {
+    if (playerStatus->animFlags & PA_FLAGS_8) {
         playerStatus->animFlags |= PA_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }
@@ -42,7 +42,7 @@ void reset_player_status(void) {
     f32 one;
     f32* floatsTemp;
 
-    D_8010C96C = -1;
+    PeachDisguiseNpcIndex = -1;
     TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;
@@ -54,22 +54,22 @@ void reset_player_status(void) {
     D_800F7B44 = 0;
     D_8010C938 = 0;
     D_8010C990 = 0.0f;
-    playerStatus->unk_0D = 1;
-    playerStatus->renderMode = 0xD;
+    playerStatus->availableDisguiseType = 1;
+    playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
     playerStatus->alpha1 = 255;
     playerStatus->alpha2 = 255;
-    gGameStatusPtr->peachFlags &= ~0x8;
-    gGameStatusPtr->peachFlags &= ~0x10;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_HAS_INGREDIENT;
 
     one = 1.0f;
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
-        playerStatus->animFlags |= 0x1000;
+        playerStatus->animFlags |= PA_FLAGS_USING_PEACH_PHYSICS;
 
-        if (gGameStatusPtr->peachFlags & 2) {
+        if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
             D_8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }

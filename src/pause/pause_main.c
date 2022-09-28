@@ -1,9 +1,9 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 #include "pause_common.h"
-#include "sprite/npc/goombaria.h"
-#include "sprite/npc/world_goombario.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goombaria.h"
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/Goompa.h"
 
 extern MenuPanel gPausePanelTabs;
 extern MenuPanel gPausePanelStats;
@@ -71,21 +71,21 @@ u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6,
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
-        NPC_ANIM_goombaria_Palette_00_Anim_0,
-        NPC_ANIM_goombaria_Palette_00_Anim_1,
-        NPC_ANIM_goombaria_Palette_00_Anim_B,
+        ANIM_Goombaria_Still,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_goombario_normal_still,
-        NPC_ANIM_world_goombario_normal_idle,
-        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Talk,
         ANIM_LIST_END
     },
     {
-        NPC_ANIM_goompa_Palette_00_Anim_0,
-        NPC_ANIM_goompa_Palette_00_Anim_1,
-        NPC_ANIM_goompa_Palette_00_Anim_8,
+        ANIM_Goompa_Still,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Talk,
         ANIM_LIST_END
     }
 };

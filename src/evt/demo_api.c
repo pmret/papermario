@@ -6,6 +6,10 @@ u8 D_802D9D71 = 0xFE;
 u8 D_802D9D72 = 0x00;
 u8 D_802D9D73 = 0xFF;
 
+extern s32 D_802DBB60;
+extern s32 D_802DBB64; // unused?
+extern s32 D_802DBB68;
+
 INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, Evt* script, s32 isInitialCall);
 
 ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {

@@ -983,7 +983,7 @@ s32 is_ability_active(s32 ability) {
         attackFXArray[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         return 0;
     }
 

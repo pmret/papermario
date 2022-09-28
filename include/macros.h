@@ -20,6 +20,8 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define PTR_LIST_END ((void*) -1)
+
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
@@ -79,6 +81,7 @@
 // Angle conversion macros
 #define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
 #define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+#define DEG_TO_RAD(deg) (((deg) * TAU) / 360.0f)
 
 // Should be 1.0f / 0x7FFF, but precision is wrong for a double
 #define SHT_MINV 3.051851e-05
@@ -86,12 +89,12 @@
 #define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
+#define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
+
 #define BATTLE_ENTITY_ID_MASK 0x800
 
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000
-#define COLLISION_IGNORE_ENTITIES 0x40000
-#define COLLISION_ONLY_ENTITIES 0x100000
 
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 #define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
@@ -142,10 +145,5 @@
 // projectile hitbox
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
-
-#ifdef PERMUTER
-#undef SCRIPT
-#define SCRIPT(...) {}
-#endif
 
 #endif

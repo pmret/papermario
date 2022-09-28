@@ -5,15 +5,15 @@
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
-extern s32 D_8029FB90;
-extern f32 D_8029FB94;
-extern EffectInstance* BattleMerleeOrbEffect;
-extern EffectInstance* BattleMerleeWaveEffect;
-extern s32 D_8029FBA0;
-extern s16 D_8029FBA4;
-extern s32 D_8029FBA8;
-extern s32 D_8029FBAC;
-extern s32 D_8029FBB0[];
+BSS s32 D_8029FB90;
+BSS f32 D_8029FB94;
+BSS EffectInstance* BattleMerleeOrbEffect;
+BSS EffectInstance* BattleMerleeWaveEffect;
+BSS s32 D_8029FBA0;
+BSS s16 D_8029FBA4;
+BSS s32 D_8029FBA8;
+BSS s32 D_8029FBAC;
+BSS s32 D_8029FBB0[3];
 
 void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -338,7 +338,7 @@ ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
         D_8029FB90 = 12;
         sfx_play_sound(SOUND_2074);
     }
-    merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
+    merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);

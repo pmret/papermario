@@ -6,8 +6,6 @@
 #include "battle/item/strange_cake2.png.h"
 #include "battle/item/strange_cake3.png.h"
 
-BSS s32 D_802A2DC8[2];
-
 #include "ItemRefund.inc.c"
 
 extern HudScript* N(D_802A2848_732B48)[];

@@ -3,6 +3,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "sprite/npc/Spiny.h"
 
 // prerequisites
 #include "world/common/enemy/TackleAI.inc.c"
@@ -64,7 +65,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->collisionHeight = enemy->varTable[6];
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->currentAnim = 0x4A0018;
+            npc->currentAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;
             npc->jumpVelocity = 0.0f;
             npc->jumpScale = 1.0f;
@@ -134,7 +135,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
-            npc->currentAnim = 0x4A0018;
+            npc->currentAnim = ANIM_Spiny_Anim18;
             script->AI_TEMP_STATE = 101;
         case 101:
             if (enemy->varTable[10] != 3) {
@@ -192,7 +193,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
                     npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVelocity = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                    npc->currentAnim = 0x4A001A;
+                    npc->currentAnim = ANIM_Spiny_Anim1A;
                     npc->duration = 3;
                     script->AI_TEMP_STATE = 103;
                     break;
@@ -205,7 +206,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags &= ~NPC_FLAG_40000;
-                npc->currentAnim = 0x4A0001;
+                npc->currentAnim = ANIM_Spiny_Anim01;
                 script->AI_TEMP_STATE = 0;
             }
             break;

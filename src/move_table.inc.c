@@ -1782,7 +1782,7 @@ MoveData gMoveTable[] = {
 {   // move B2: Hurricane
     .nameMsg = MSG_PartnerMoveName_Hurricane,
     .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_Hurricane,
-    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_0060,
+    .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_Hurricane,
     .flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_PARTNER,
     .actionTip = MOVE_ACTION_TIP_12,

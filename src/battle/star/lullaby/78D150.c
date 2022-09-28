@@ -1,6 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "sprite/npc/battle_mamar.h"
+#include "sprite/npc/BattleMamar.h"
 
 #define NAMESPACE battle_star_lullaby
 
@@ -21,7 +21,7 @@ ApiStatus func_802A1518_78D668(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 1;
         case 1:
             temp = script->functionTemp[2];
-            temp2 = (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 30.0f) + 30.0f;
+            temp2 = (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 30.0f) + 30.0f;
             fx_music_note(0, temp, temp2, 50.0f);
 
             script->functionTemp[2] += 14;
@@ -274,9 +274,9 @@ EvtScript N(802A23AC) = {
 
 EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1620))
-    EVT_SET_CONST(LVar0, NPC_ANIM_battle_mamar_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar0, ANIM_BattleMamar_Idle)
     EVT_EXEC_WAIT(N(802A1D50))
-    EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_mamar_Palette_00_Anim_2)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleMamar_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_WAIT(15)

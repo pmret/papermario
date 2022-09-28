@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 
+extern s32 D_8029FBD0;
 extern s8 D_8029FBD4;
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
@@ -2154,7 +2155,7 @@ ApiStatus func_8026DF88(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->unk_8C);
+    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->animNotifyValue);
 
     return ApiStatus_DONE2;
 }

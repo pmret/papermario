@@ -1,7 +1,7 @@
 #include "arn_10.h"
 #include "entity.h"
-#include "sprite/npc/tubbas_heart.h"
-#include "sprite/npc/goomba.h"
+#include "sprite/npc/TubbasHeart.h"
+#include "sprite/npc/Goomba.h"
 
 EvtScript N(exitSingleDoor_80240100) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
@@ -125,22 +125,22 @@ NpcSettings N(npcSettings_802404CC) = {
 };
 
 EvtScript N(idle_802404F8) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 30)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
     EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_SUB(LVar0, 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
     EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_SUB(LVar0, 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
@@ -193,22 +193,22 @@ StaticNpc N(npcGroup_802407D8) = {
         .flowerDrops = NO_DROPS,
     },
 	.animations = {
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
+        ANIM_TubbasHeart_Anim01,
     },
 };
 
@@ -228,22 +228,22 @@ StaticNpc N(npcGroup_802409C8) = {
     },
 	.territory = { .temp = { 0, 0, 0, 20, 0, -32767, 0, 0, 0, 0, 150, 0, 0, 1 }},
     .animations = {
-        NPC_ANIM_goomba_hyper_idle,
-        NPC_ANIM_goomba_hyper_walk,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_idle,
-        NPC_ANIM_goomba_hyper_idle,
-        NPC_ANIM_goomba_hyper_pain,
-        NPC_ANIM_goomba_hyper_pain,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
-        NPC_ANIM_goomba_hyper_run,
+        ANIM_Goomba_Hyper_Idle,
+        ANIM_Goomba_Hyper_Walk,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Idle,
+        ANIM_Goomba_Hyper_Idle,
+        ANIM_Goomba_Hyper_Hurt,
+        ANIM_Goomba_Hyper_Hurt,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
+        ANIM_Goomba_Hyper_Run,
     },
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

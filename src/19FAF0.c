@@ -1114,7 +1114,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         playerState->unk_28 = 180 / playerState->moveTime;
         playerState->unk_2C = playerState->goalPos.y;
         if (script->functionTemp[1] != 2) {
-            sfx_play_sound_at_position(0x160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1142,7 +1142,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     playerState->currentPos.y += playerVel;
     playerState->velocity -= playerState->acceleration;
     temp_f20_2 = playerState->speed;
-    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad((playerState->unk_24 * TAU) / 360.0f), playerState->angle);
+    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24), playerState->angle);
     playerState->unk_24 += playerState->unk_28;
     playerState->unk_24 = clamp_angle(playerState->unk_24);
     player->currentPos.x = playerState->currentPos.x;

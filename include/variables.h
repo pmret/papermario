@@ -35,17 +35,7 @@ extern s32 gBattleDmaDest;
 
 extern ActionCommandStatus gActionCommandStatus;
 
-extern ScriptList gWorldScriptList;
-extern ScriptList gBattleScriptList;
-extern ScriptList* gCurrentScriptListPtr;
-
-extern s32 gNumScripts;
 extern s32 D_802DAC98;
-
-extern s32 gScriptListCount;
-
-extern s32 gScriptIdList[MAX_SCRIPTS];
-extern s32 gScriptIndexList[MAX_SCRIPTS];
 
 extern s32 gMoveScriptTable[][4];
 
@@ -84,16 +74,6 @@ extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
-extern MessagePrintState* gCurrentPrintContext;
-extern s32 D_802DB264;
-extern MessagePrintState* D_802DB268;
-
-extern s32 SaveBlockTutorialPrinterClosed;
-extern s32 SaveBlockResultPrinterClosed;
-extern MessagePrintState* SaveBlockTutorialPrinter;
-extern MessagePrintState* SaveBlockResultPrinter;
-
-extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[4];
 
 extern f32 D_800F7B74;
@@ -104,10 +84,6 @@ extern CollisionData gZoneCollisionData;
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
 
 extern PartnerAnimations gPartnerAnimations[12];
-
-extern AnimatedModelList gBattleMeshAnimationList;
-extern AnimatedModelList gWorldMeshAnimationList;
-extern AnimatedModelList* gCurrentMeshAnimationListPtr;
 
 // Triggers
 extern s16 gTriggerCount;
@@ -193,7 +169,7 @@ extern Entity* TweesterTouchingPartner;
 extern Entity* TweesterTouchingPlayer;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 PrevPlayerDirection;
-extern s32 D_8010C96C;
+extern s32 PeachDisguiseNpcIndex;
 extern s32 D_8010C980;
 extern s32 D_8010C9A0;
 extern s32 PrevPlayerCamRelativeYaw;
@@ -205,15 +181,6 @@ extern Vec3s btl_actorHomePositions[];
 
 extern SaveData gCurrentSaveFile;
 
-extern u32* gMapFlags;
-extern s32* gMapVars;
-
-extern u32 gWorldMapVars[MAX_MAPVARS];
-extern u32 gBattleMapVars[MAX_MAPVARS];
-
-extern u32 gWorldMapFlags[MAX_MAPFLAGS];
-extern u32 gBattleMapFlags[MAX_MAPFLAGS];
-
 extern s32 D_8009A5D0;
 extern s32 timeFreezeMode;
 extern s32 D_8009A678;
@@ -222,7 +189,6 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern struct EffectInstance* TriggerBlockVanishEffect;
 extern s32 D_802EA310[];
 extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 
@@ -256,13 +222,8 @@ extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 
-extern s32 D_8029FBD0;
-
 extern AnimID KoopatrolDisguiseExtraAnims[];
 extern AnimID HammerBroDisguiseExtraAnims[];
-
-//various
-extern s32 D_802C05CC;
 
 extern s16 gCurrentCamID;
 

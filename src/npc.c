@@ -120,7 +120,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID** animList, s32 skipLoadingAnims
     npc->renderYaw = 0.0f;
     npc->unk_98 = 0;
     npc->unk_A2 = 0;
-    npc->collisionChannel = 0x20000;
+    npc->collisionChannel = COLLISION_CHANNEL_20000;
     npc->isFacingAway = 0;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
@@ -380,7 +380,7 @@ void npc_do_other_npc_collision(Npc* npc) {
         for (i = 0; i < 0x40; i++) {
             otherNpc = get_npc_by_index(i);
             if (otherNpc != NULL && npc != otherNpc) {
-                if (otherNpc->flags != 0 && !(otherNpc->flags & (0x80000000 | NPC_FLAG_100))) {
+                if (otherNpc->flags != 0 && !(otherNpc->flags & (NPC_FLAG_80000000 | NPC_FLAG_100))) {
                     if (!(otherNpc->pos.y + otherNpc->collisionHeight < thisY) &&
                         !(thisY + npc->collisionHeight < otherNpc->pos.y))
                     {
@@ -400,7 +400,7 @@ void npc_do_other_npc_collision(Npc* npc) {
                             }
 
                             if (collision) {
-                                temp_f20_2 = atan2(otherX, otherZ, thisX, thisZ) * TAU / 360.0f;
+                                temp_f20_2 = DEG_TO_RAD(atan2(otherX, otherZ, thisX, thisZ));
                                 temp_f24_2 = thisBuf + otherBuf - dist;
                                 temp_f22_3 = temp_f24_2 * sin_rad(temp_f20_2);
                                 temp_f22_4 = -temp_f24_2 * cos_rad(temp_f20_2);
@@ -523,9 +523,9 @@ void update_npcs(void) {
 
                     npc->onUpdate(npc);
                     if (npc->flags & NPC_FLAG_8000) {
-                        npc->collisionChannel |= 0x40000;
+                        npc->collisionChannel |= COLLISION_IGNORE_ENTITIES;
                     } else {
-                        npc->collisionChannel &= ~0x40000;
+                        npc->collisionChannel &= ~COLLISION_IGNORE_ENTITIES;
                     }
 
                     npc->currentFloor = -1;
@@ -744,11 +744,11 @@ void appendGfx_npc(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim != 0) && (npc->spriteInstanceID >= 0)) {
             npc_draw_with_palswap(npc, renderYaw, mtx1);
-            npc->unk_2C = func_802DE5C8(npc->spriteInstanceID);
+            npc->animNotifyValue = spr_get_notify_value(npc->spriteInstanceID);
         }
     } else {
         npc_draw_with_palswap(npc, renderYaw, mtx1);
-        npc->unk_2C = func_802DDEC4(1);
+        npc->animNotifyValue = func_802DDEC4(1);
     }
 
     if (npc->flags & NPC_FLAG_REFLECT_WALL) {
@@ -874,7 +874,7 @@ void render_npcs(void) {
 }
 
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
-    f32 angle = (yaw * TAU) / 360.0f;
+    f32 angle = DEG_TO_RAD(yaw);
     f32 sin = sin_rad(angle);
     f32 cos = cos_rad(angle);
 
@@ -1664,11 +1664,11 @@ void func_8003D788(Npc* npc, s32 arg1) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
             if (phi_a2 == 0) {
-                sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-npc->yaw)), &sinTheta, &cosTheta);
                 fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f), sinTheta, cosTheta);
             } else {
-                sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(npc->yaw)), &sinTheta, &cosTheta);
                 fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * sinTheta), npc->pos.y + 1.5f,
                               npc->pos.z + (npc->collisionRadius * cosTheta), 5.0f, 10.0f, 1.0f, 5, 30);
             }
@@ -1698,7 +1698,7 @@ void func_8003DA38(Npc* npc, s32 arg1) {
 
     if (D_80077C1C++ > 0) {
         D_80077C1C = 0;
-        theta = clamp_angle(-npc->yaw) * TAU / 360.0f;
+        theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
 
@@ -1723,7 +1723,7 @@ void func_8003DFA0(Npc* npc, s32 arg1) {
         f32 z;
 
         D_80077C30 = 0;
-        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
         fx_footprint(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
@@ -1739,7 +1739,7 @@ void func_8003E0D4(Npc* npc, s32 arg1) {
         f32 cosTheta;
 
         D_80077C38 = 0;
-        theta = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
         fx_falling_leaves(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
@@ -1754,7 +1754,7 @@ void func_8003E1D0(Npc* npc, s32 arg1) {
         f32 z;
 
         D_80077C3A = 0;
-        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
         fx_rising_bubble(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,

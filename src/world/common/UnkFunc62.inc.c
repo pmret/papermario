@@ -81,7 +81,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             phi_f20 = state->velocity;
             temp_f22_2 = state->acceleration;
-            phi_f0 = sin_rad(state->unk_24 * TAU / 360.0f);
+            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.53;
             state->velocity = phi_f20 + ((phi_f0 * phi_f2 * temp_f22_2) + temp_f22_2);
         } else {
@@ -99,7 +99,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->unk_18.y = 0.0f;
             velocity = state->velocity;
             temp_f22_3 = state->acceleration;
-            phi_f0 = sin_rad(state->unk_24 * TAU / 360.0f);
+            phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.8;
             state->velocity = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
@@ -131,13 +131,13 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             if (state->moveArcAmplitude < 3) {
                 phi_f20_2 = state->velocity;
                 temp_f22_5 = state->acceleration;
-                phi_f0_2 = sin_rad((state->unk_24 * TAU) / 360.0f);
+                phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
                 phi_f2_2 = 0.53;
                 state->velocity = phi_f20_2 + ((phi_f0_2 * phi_f2_2 * temp_f22_5) + temp_f22_5);
             } else {
                 temp_f20_6 = state->velocity;
                 temp_f22_6 = state->acceleration;
-                phi_f0_2 = sin_rad((state->unk_24 * TAU) / 360.0f);
+                phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
                 phi_f2_2 = 0.8;
                 state->velocity = temp_f20_6 + ((phi_f0_2 * phi_f2_2 * temp_f22_6) + temp_f22_6);
             }
@@ -167,8 +167,8 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             // fallthrough
         case 3:
             currentPosX64 = state->currentPos.x; // required to match
-            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad((state->unk_24 * TAU) / 360.0f) / 33.0;
-            state->currentPos.y -= state->bounceDivisor * sin_rad((state->unk_24 * TAU) / 360.0f);
+            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
+            state->currentPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
             state->unk_24 += state->unk_28;
             state->unk_24 = clamp_angle(state->unk_24);
             actor->currentPos.x = state->currentPos.x;

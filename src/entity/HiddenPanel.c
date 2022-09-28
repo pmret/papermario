@@ -133,7 +133,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             entity->flags &= ~ENTITY_FLAGS_HIDDEN;
             break;
         case 1:
-            entity->position.y += data->riseVelocity * sin_rad(data->riseInterpPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             if (entity->position.y <= data->initialY) {
                 entity->position.y = data->initialY;
                 entity->rotation.x = 0.0f;
@@ -182,7 +182,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 rotAngle = 360.0f;
             }
 
-            entity->position.y += data->riseVelocity * sin_rad(data->riseInterpPhase * TAU / 360.0f);
+            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             data->riseInterpPhase += 10.0f;
             if (data->riseInterpPhase > 270.0f) {
                 data->riseInterpPhase = 270.0f;

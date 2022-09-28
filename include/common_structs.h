@@ -190,7 +190,7 @@ typedef struct Npc {
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
-    /* 0x02C */ s32 unk_2C;
+    /* 0x02C */ s32 animNotifyValue;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -1420,9 +1420,19 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
-// PartnerAnims
-typedef struct PartnerAnimations {
-    /* 0x00 */ s32 anims[9];
+typedef union PartnerAnimations {
+    /* 0x00 */ s32 anims[9]; // see enum PartnerAnimIndices
+    struct {
+    /* 0x00 */ s32 still;
+    /* 0x04 */ s32 walk;
+    /* 0x08 */ s32 jump;
+    /* 0x0C */ s32 fall;
+    /* 0x10 */ s32 fly;
+    /* 0x14 */ s32 idle;
+    /* 0x18 */ s32 run;
+    /* 0x1C */ s32 talk;
+    /* 0x20 */ s32 hurt;
+    };
 } PartnerAnimations; // size = 0x24
 
 typedef s32 (*PushBlockFallCallback)(Entity* block, Evt* script);
@@ -1534,7 +1544,7 @@ typedef struct ActorPart {
     /* 0x80 */ s32 partFlags3;
     /* 0x84 */ s32 unk_84;
     /* 0x88 */ u32 currentAnimation;
-    /* 0x8C */ s32 unk_8C;
+    /* 0x8C */ s32 animNotifyValue;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
@@ -1897,10 +1907,10 @@ typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 currentStateTime;
-    /* 0x00A */ s8 unk_0A;
+    /* 0x00A */ s8 shiverTime;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
-    /* 0x00D */ s8 unk_0D;
+    /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
     /* 0x00E */ u8 alpha1;
     /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 blinkTimer;
@@ -1939,13 +1949,13 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ s8 actionSubstate;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ AnimID anim;
-    /* 0x0BC */ u16 unk_BC;
+    /* 0x0BC */ u16 animNotifyValue;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ s8 peachItemHeld;
-    /* 0x0C5 */ s8 unk_C5;
+    /* 0x0C5 */ s8 camResetDelay;
     /* 0x0C6 */ s16 interactingWithID;
     /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;

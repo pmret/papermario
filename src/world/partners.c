@@ -86,37 +86,37 @@ BSS s8 gSpinHistoryPosAngle[0x18];
 #include "hud_element.h"
 
 #include "partner/goombario.h"
-#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/WorldGoombario.h"
 
 #include "partner/kooper.h"
-#include "sprite/npc/world_kooper.h"
+#include "sprite/npc/WorldKooper.h"
 
 #include "partner/bombette.h"
-#include "sprite/npc/world_bombette.h"
+#include "sprite/npc/WorldBombette.h"
 
 #include "partner/parakarry.h"
-#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/WorldParakarry.h"
 
 #include "partner/goompa.h"
-#include "sprite/npc/goompa.h"
+#include "sprite/npc/Goompa.h"
 
 #include "partner/watt.h"
-#include "sprite/npc/world_watt.h"
+#include "sprite/npc/WorldWatt.h"
 
 #include "partner/sushie.h"
-#include "sprite/npc/world_sushie.h"
+#include "sprite/npc/WorldSushie.h"
 
 #include "partner/lakilester.h"
-#include "sprite/npc/world_lakilester.h"
+#include "sprite/npc/WorldLakilester.h"
 
 #include "partner/bow.h"
-#include "sprite/npc/world_bow.h"
+#include "sprite/npc/WorldBow.h"
 
 #include "partner/goombaria.h"
-#include "sprite/npc/goombaria.h"
+#include "sprite/npc/Goombaria.h"
 
 #include "partner/twink.h"
-#include "sprite/npc/twink.h"
+#include "sprite/npc/Twink.h"
 
 extern HudScript HES_Partner0;
 extern HudScript HES_Goombario;
@@ -236,7 +236,7 @@ WorldPartner wPartners[12] = {
         .update = &world_goombario_update,
         .useAbility = &world_goombario_use_ability,
         .putAway = &world_goombario_put_away,
-        .idle = NPC_ANIM_world_goombario_normal_idle,
+        .idle = ANIM_WorldGoombario_Idle,
         .canUseAbility = world_goombario_can_pause,
         .canPlayerPause = world_goombario_can_pause,
         .preBattle = world_goombario_pre_battle,
@@ -252,7 +252,7 @@ WorldPartner wPartners[12] = {
         .update = &world_kooper_update,
         .useAbility = &world_kooper_use_ability,
         .putAway = &world_kooper_put_away,
-        .idle = NPC_ANIM_world_kooper_normal_idle,
+        .idle = ANIM_WorldKooper_Idle,
         .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -270,7 +270,7 @@ WorldPartner wPartners[12] = {
         .update = &world_bombette_update,
         .useAbility = &world_bombette_use_ability,
         .putAway = &world_bombette_put_away,
-        .idle = NPC_ANIM_world_bombette_normal_idle,
+        .idle = ANIM_WorldBombette_Idle,
         .testFirstStrike = world_bombette_test_first_strike,
         .canUseAbility = world_bombette_can_use_ability,
         .canPlayerPause = world_bombette_can_player_pause,
@@ -287,7 +287,7 @@ WorldPartner wPartners[12] = {
         .update = &world_parakarry_update,
         .useAbility = &world_parakarry_use_ability,
         .putAway = &world_parakarry_put_away,
-        .idle = NPC_ANIM_world_parakarry_Palette_00_Anim_1,
+        .idle = ANIM_WorldParakarry_Idle,
         .canPlayerPause = partner_is_idle,
         .preBattle = world_parakarry_pre_battle,
         .postBattle = world_parakarry_post_battle,
@@ -303,7 +303,7 @@ WorldPartner wPartners[12] = {
         .update = &world_goompa_update,
         .useAbility = &world_goompa_use_ability,
         .putAway = &world_goompa_put_away,
-        .idle = NPC_ANIM_goompa_Palette_00_Anim_1,
+        .idle = ANIM_Goompa_Idle,
     },
     {
         // Watt
@@ -316,7 +316,7 @@ WorldPartner wPartners[12] = {
         .update = &world_watt_update,
         .useAbility = &world_watt_use_ability,
         .putAway = &world_watt_put_away,
-        .idle = NPC_ANIM_world_watt_Palette_00_Anim_1,
+        .idle = ANIM_WorldWatt_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
@@ -333,7 +333,7 @@ WorldPartner wPartners[12] = {
         .update = &world_sushie_update,
         .useAbility = &world_sushie_use_ability,
         .putAway = &world_sushie_put_away,
-        .idle = NPC_ANIM_world_sushie_Palette_00_Anim_1,
+        .idle = ANIM_WorldSushie_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
@@ -350,7 +350,7 @@ WorldPartner wPartners[12] = {
         .update = &world_lakilester_update,
         .useAbility = &world_lakilester_use_ability,
         .putAway = &world_lakilester_put_away,
-        .idle = NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        .idle = ANIM_WorldLakilester_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
@@ -367,7 +367,7 @@ WorldPartner wPartners[12] = {
         .update = &world_bow_update,
         .useAbility = &world_bow_use_ability,
         .putAway = &world_bow_put_away,
-        .idle = NPC_ANIM_world_bow_Palette_00_Anim_1,
+        .idle = ANIM_WorldBow_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_bow_pre_battle,
@@ -383,7 +383,7 @@ WorldPartner wPartners[12] = {
         .update = &world_goombaria_update,
         .useAbility = &world_goombaria_use_ability,
         .putAway = &world_goombaria_put_away,
-        .idle = NPC_ANIM_goombaria_Palette_00_Anim_1,
+        .idle = ANIM_Goombaria_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -398,7 +398,7 @@ WorldPartner wPartners[12] = {
         .update = &world_twink_update,
         .useAbility = &world_twink_use_ability,
         .putAway = &world_twink_put_away,
-        .idle = NPC_ANIM_twink_Palette_00_Anim_1,
+        .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -409,18 +409,130 @@ f32 wSavedPartnerPosY = 0;
 f32 wSavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
-    {{0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000}},
-    {{0x00010000, 0x00010002, 0x00010004, 0x00010005, 0x00010001, 0x00010001, 0x00010003, 0x00010008, 0x00010007}},
-    {{0x00020000, 0x00020004, 0x00020006, 0x00020007, 0x00020000, 0x00020003, 0x00020005, 0x0002000D, 0x0002000C}},
-    {{0x00030000, 0x00030005, 0x00030009, 0x0003000A, 0x00030000, 0x00030003, 0x00030007, 0x0003000E, 0x0003000D}},
-    {{0x00040000, 0x00040002, 0x00040008, 0x00040002, 0x00040002, 0x00040001, 0x00040003, 0x00040006, 0x00040005}},
-    {{0x009D0000, 0x009D0002, 0x009D0004, 0x009D0005, 0x009D0001, 0x009D0001, 0x009D0003, 0x009D0008, 0x009D0001}},
-    {{0x00060000, 0x00060002, 0x00060002, 0x00060002, 0x00060000, 0x00060001, 0x00060003, 0x00060004, 0x00060007}},
-    {{0x00070000, 0x00070002, 0x00070002, 0x00070002, 0x00070000, 0x00070001, 0x00070003, 0x00070004, 0x00070008}},
-    {{0x00080000, 0x00080005, 0x00080005, 0x00080005, 0x00080000, 0x00080001, 0x00080007, 0x00080009, 0x0008000A}},
-    {{0x00050000, 0x00050002, 0x00050002, 0x00050002, 0x00050000, 0x00050001, 0x00050003, 0x00050004, 0x0005000C}},
-    {{0x009E0000, 0x009E0005, 0x009E0012, 0x009E0013, 0x009E0001, 0x009E0001, 0x009E0007, 0x009E000B, 0x009E0001}},
-    {{0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020}},
+    [PARTNER_NONE] {
+        // all values are blank
+    },
+    [PARTNER_GOOMBARIO] {{
+        ANIM_WorldGoombario_Still,
+        ANIM_WorldGoombario_Walk,
+        ANIM_WorldGoombario_Jump,
+        ANIM_WorldGoombario_Fall,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Idle,
+        ANIM_WorldGoombario_Run,
+        ANIM_WorldGoombario_Talk,
+        ANIM_WorldGoombario_Hurt
+    }},
+    [PARTNER_KOOPER] {{
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Walk,
+        ANIM_WorldKooper_Jump,
+        ANIM_WorldKooper_Fall,
+        ANIM_WorldKooper_Still,
+        ANIM_WorldKooper_Idle,
+        ANIM_WorldKooper_Run,
+        ANIM_WorldKooper_Talk,
+        ANIM_WorldKooper_Hurt
+    }},
+    [PARTNER_BOMBETTE] {{
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Walk,
+        ANIM_WorldBombette_Jump,
+        ANIM_WorldBombette_Fall,
+        ANIM_WorldBombette_Still,
+        ANIM_WorldBombette_Idle,
+        ANIM_WorldBombette_Run,
+        ANIM_WorldBombette_Talk,
+        ANIM_WorldBombette_Hurt
+    }},
+    [PARTNER_PARAKARRY] {{
+        ANIM_WorldParakarry_Still,
+        ANIM_WorldParakarry_Walk,
+        ANIM_WorldParakarry_FlyFast,
+        ANIM_WorldParakarry_Walk,
+        ANIM_WorldParakarry_Walk,
+        ANIM_WorldParakarry_Idle,
+        ANIM_WorldParakarry_Run,
+        ANIM_WorldParakarry_Talk,
+        ANIM_WorldParakarry_Hurt
+    }},
+    [PARTNER_GOOMPA] {{
+        ANIM_Goompa_Still,
+        ANIM_Goompa_Walk,
+        ANIM_Goompa_Jump,
+        ANIM_Goompa_Fall,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Idle,
+        ANIM_Goompa_Run,
+        ANIM_Goompa_Talk,
+        ANIM_Goompa_Idle
+    }},
+    [PARTNER_WATT] {{
+        ANIM_WorldWatt_Still,
+        ANIM_WorldWatt_Walk,
+        ANIM_WorldWatt_Walk,
+        ANIM_WorldWatt_Walk,
+        ANIM_WorldWatt_Still,
+        ANIM_WorldWatt_Idle,
+        ANIM_WorldWatt_Run,
+        ANIM_WorldWatt_Talk,
+        ANIM_WorldWatt_Hurt
+    }},
+    [PARTNER_SUSHIE] {{
+        ANIM_WorldSushie_Still,
+        ANIM_WorldSushie_Walk,
+        ANIM_WorldSushie_Walk,
+        ANIM_WorldSushie_Walk,
+        ANIM_WorldSushie_Still,
+        ANIM_WorldSushie_Idle,
+        ANIM_WorldSushie_Run,
+        ANIM_WorldSushie_Talk,
+        ANIM_WorldSushie_Hurt
+    }},
+    [PARTNER_LAKILESTER] {{
+        ANIM_WorldLakilester_Still,
+        ANIM_WorldLakilester_Walk,
+        ANIM_WorldLakilester_Walk,
+        ANIM_WorldLakilester_Walk,
+        ANIM_WorldLakilester_Still,
+        ANIM_WorldLakilester_Idle,
+        ANIM_WorldLakilester_Run,
+        ANIM_WorldLakilester_Talk,
+        ANIM_WorldLakilester_TiredTalk
+    }},
+    [PARTNER_BOW] {{
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Walk,
+        ANIM_WorldBow_Still,
+        ANIM_WorldBow_Idle,
+        ANIM_WorldBow_Run,
+        ANIM_WorldBow_Talk,
+        ANIM_WorldBow_Flail
+    }},
+    [PARTNER_GOOMBARIA] {{
+        ANIM_Goombaria_Still,
+        ANIM_Goombaria_Walk,
+        ANIM_Goombaria_Jump,
+        ANIM_Goombaria_Fall,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Idle,
+        ANIM_Goombaria_Run,
+        ANIM_Goombaria_Talk,
+        ANIM_Goombaria_Idle
+    }},
+    [PARTNER_TWINK] {{
+        ANIM_Twink_Still,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Idle,
+        ANIM_Twink_Talk,
+        ANIM_Twink_Hurt
+    }},
 };
 
 f32 D_800F84F8 = 0.0f;
@@ -767,7 +879,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
-                    wPartnerNpc->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FLY];
+                    wPartnerNpc->currentAnim = gPartnerAnimations[D_8010CFD8].fly;
                     enable_player_input();
                     break;
             }
@@ -1102,9 +1214,9 @@ void partner_walking_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+    partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->jumpVelocity = 0.0f;
     partner->flags |= NPC_FLAG_400000 | NPC_FLAG_GRAVITY | NPC_FLAG_100;
     partner->jumpScale = 1.8f;
@@ -1206,9 +1318,9 @@ void partner_flying_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+    partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
     func_800EA5B8(&partner->flags);
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->flags |= NPC_FLAG_100;
     partner->flags &= ~NPC_FLAG_GRAVITY;
 }
@@ -1651,9 +1763,9 @@ INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 #endif
 
 s32 partner_init_put_away(Npc* partner) {
-    partner->collisionChannel = 0x10000;
+    partner->collisionChannel = COLLISION_CHANNEL_10000;
     D_8010CFC8 = 0;
-    partner->flags |= 0x100;
+    partner->flags |= NPC_FLAG_100;
     return D_8010CFC8;
 }
 
@@ -1673,8 +1785,8 @@ s32 partner_put_away(Npc* partner) {
             tempMoveToX = partner->pos.x;
             tempMoveToY = partner->pos.y;
             tempMoveToZ = partner->pos.z;
-            partner->flags &= ~0x200;
-            partner->flags &= ~8;
+            partner->flags &= ~NPC_FLAG_GRAVITY;
+            partner->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
             tempPosX = playerStatus->position.x;
             partner->moveToPos.x = tempPosX;
             tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
@@ -1693,7 +1805,7 @@ s32 partner_put_away(Npc* partner) {
             partner->moveSpeed = partner->planarFlyDist / divisor;
             tempMoveToY = tempPosY - tempMoveToY;
             partner->jumpVelocity = (tempMoveToY + partner->jumpScale * partner->duration * partner->duration * 0.5f) / partner->duration;
-            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_JUMP];
+            partner->currentAnim = gPartnerAnimations[D_8010CFD8].jump;
             enable_npc_blur(partner);
             D_8010CFC8 = 1;
             break;
@@ -1701,7 +1813,7 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpVelocity -= partner->jumpScale;
             partner->pos.y += partner->jumpVelocity;
             if (partner->jumpVelocity <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FALL];
+                partner->currentAnim = gPartnerAnimations[D_8010CFD8].fall;
             }
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             tempDuration = partner->duration;
@@ -1717,7 +1829,7 @@ s32 partner_put_away(Npc* partner) {
             }
             break;
         case 2:
-            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FLY];
+            partner->currentAnim = gPartnerAnimations[D_8010CFD8].fly;
             partner->jumpVelocity = 0.0f;
             partner->pos.y = partner->moveToPos.y;
             disable_npc_blur(partner);
@@ -1727,7 +1839,7 @@ s32 partner_put_away(Npc* partner) {
 }
 
 s32 partner_init_get_out(Npc* npc) {
-    npc->collisionChannel = 0x10000;
+    npc->collisionChannel = COLLISION_CHANNEL_10000;
     D_8010CFC8 = 0;
     npc->flags |= NPC_FLAG_100;
     return D_8010CFC8;
@@ -2023,7 +2135,7 @@ void partner_move_to_goal(Npc* partner, s32 arg1) {
                         partner->jumpVelocity -= partner->jumpScale;
                         partner->pos.y += partner->jumpVelocity;
                         if (partner->jumpVelocity <= 0.0f) {
-                            partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_FALL];
+                            partner->currentAnim = gPartnerAnimations[D_8010CFD8].fall;
                         }
 
                         if (partner->jumpVelocity <= 0.0f) {
@@ -2068,7 +2180,7 @@ void partner_move_to_goal(Npc* partner, s32 arg1) {
                 func_8003D660(partner, var_a1);
             } else {
                 partner->flags &= ~NPC_FLAG_40;
-                partner->currentAnim = gPartnerAnimations[D_8010CFD8].anims[PARTNER_ANIM_INDEX_IDLE];
+                partner->currentAnim = gPartnerAnimations[D_8010CFD8].idle;
                 D_8010CFCE++;
             }
             break;

@@ -61,13 +61,13 @@ void update_camera_mode_unused(Camera* camera) {
         }
         camera->vfov = fovTemp >> 2;
 
-        theta = (camera->currentBoomYaw * TAU) / 360.0f;
+        theta = DEG_TO_RAD(camera->currentBoomYaw);
         sinTheta1 = sin_rad(theta);
         cosTheta1 = cos_rad(theta);
         temp_f30 = (cosTheta1 * 0.0f) + (camera->currentBoomLength * sinTheta1);
         temp_f24_2 = (sinTheta1 * -0.0f) + (camera->currentBoomLength * cosTheta1);
 
-        theta = (camera->trueRotation.x * TAU) / 360.0f;
+        theta = DEG_TO_RAD(camera->trueRotation.x);
         sinTheta2 = sin_rad(theta);
         cosTheta2 = cos_rad(theta);
         camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosTheta2 * 0.0f) - (temp_f24_2 * sinTheta2));
@@ -143,7 +143,7 @@ void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3) {
     }
 
     camera->lookAt_obj.x = camera->lookAt_eye.x = camera->lookAt_obj.x + xDelta;
-    theta = (camera->currentBoomYaw * TAU) / 360.0f;
+    theta = DEG_TO_RAD(camera->currentBoomYaw);
 
     cosTheta = cos_rad(theta);
     camera->lookAt_obj.z += (camera->auxPos.z - camera->lookAt_obj.z) * arg1;

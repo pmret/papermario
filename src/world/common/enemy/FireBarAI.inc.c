@@ -67,7 +67,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.z = data->centerPos.z + dZ;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
         }
-        if (!(data->flags & 2) && !(playerStatus->flags & PA_FLAGS_8000)) {
+        if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAGS_8000)) {
             dY = playerStatus->position.y - npc->pos.y;
             if (partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
                 if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
@@ -84,7 +84,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
             }
         }
     }
-    if (playerStatus->flags & PA_FLAGS_8000) {
+    if (playerStatus->flags & PS_FLAGS_8000) {
         hitDetected = -1;
     }
     data->yaw += data->rotationRate;

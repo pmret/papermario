@@ -228,5 +228,5 @@ segments:
     - [0x4AC70, c, jp/4AC70]
   - [0x4E580, bin]
   - [0x1E00000, pm_map_data, mapfs]
-  - [0x027BCB14, bin]
+  - [0x27BCB14, bin]
   - [0x2800000]

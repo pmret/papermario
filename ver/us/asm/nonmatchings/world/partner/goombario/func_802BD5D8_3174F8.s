@@ -157,8 +157,8 @@ glabel func_802BD5D8_3174F8
 /* 317704 802BD7E4 0C0441A9 */  jal       get_entity_type
 /* 317708 802BD7E8 2410FFFF */   addiu    $s0, $zero, -1
 /* 31770C 802BD7EC 0040282D */  daddu     $a1, $v0, $zero
-/* 317710 802BD7F0 3C03802C */  lui       $v1, %hi(D_802BDC40_317B60)
-/* 317714 802BD7F4 2463DC40 */  addiu     $v1, $v1, %lo(D_802BDC40_317B60)
+/* 317710 802BD7F0 3C03802C */  lui       $v1, %hi(EntityTattles)
+/* 317714 802BD7F4 2463DC40 */  addiu     $v1, $v1, %lo(EntityTattles)
 /* 317718 802BD7F8 8C620000 */  lw        $v0, ($v1)
 /* 31771C 802BD7FC 10500066 */  beq       $v0, $s0, .L802BD998
 /* 317720 802BD800 24A4FFF7 */   addiu    $a0, $a1, -9

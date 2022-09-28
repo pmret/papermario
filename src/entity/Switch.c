@@ -10,6 +10,8 @@ extern Gfx Entity_RedSwitch_Render[];
 extern Gfx Entity_BlueSwitch_Render[];
 extern Gfx Entity_GreenStompSwitch_Render[];
 
+BSS Entity* SwitchToLink;
+
 void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;

@@ -80,7 +80,7 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
     
-   if (isInitialCall || enemy->aiFlags & 4) {
+   if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
@@ -94,13 +94,13 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
        
-        if (enemy->aiFlags & 4) {
-            script->functionTemp[0] = 0x63;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~4;
-        } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0] = 0xC;
-            enemy->flags &= ~0x40000000;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            script->functionTemp[0] = 12;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;

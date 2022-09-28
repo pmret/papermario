@@ -32,7 +32,7 @@ void action_update_knockback(void) {
         playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
     }
 
-    sin_cos_rad((ReturnAngle * TAU) / 360.0f, &dx, &dy);
+    sin_cos_rad(DEG_TO_RAD(ReturnAngle), &dx, &dy);
 
     speed = playerStatus->currentSpeed;
 

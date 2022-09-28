@@ -616,7 +616,7 @@ void collision_main_lateral(void) {
                             speed *= 0.5f;
                         }
                     }
-                    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
 
                     if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK) {
                         if (fabsf(sinTheta) > fabsf(cosTheta)) {
@@ -634,7 +634,7 @@ void collision_main_lateral(void) {
                         zBump = 0.0f;
                     }
 
-                    sin_cos_rad(playerStatus->targetYaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
                     speed = playerStatus->currentSpeed;
                     if (playerStatus->flags & PS_FLAGS_40000) {
                         speed *= 0.5f;
@@ -673,7 +673,7 @@ void collision_main_lateral(void) {
                                                         playerStatus->colliderDiameter * 0.5f, playerStatus->targetYaw);
                 if (speed == 0.0f && result < 0) {
                     yaw2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
-                    sin_cos_rad((yaw2 + 180.0f) * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw2 + 180.0f), &sinTheta, &cosTheta);
                     playerX = playerStatus->position.x + (sinTheta * playerStatus->colliderDiameter * 0.5f);
                     playerY = playerStatus->position.y;
                     playerZ = playerStatus->position.z - (cosTheta * playerStatus->colliderDiameter * 0.5f);
@@ -681,7 +681,7 @@ void collision_main_lateral(void) {
                                                             playerStatus->colliderDiameter, yaw2);
                 }
                 collisionStatus->currentWall = result;
-                if (!(playerStatus->flags & 0x400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
+                if (!(playerStatus->flags & PS_FLAGS_400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
 
                     if (speed == 0.0f) {
                         collision_check_player_intersecting_world(0, 0,
@@ -1080,7 +1080,7 @@ void func_800E4F10(void) {
 
 void check_input_midair_jump(void) {
     if (!(gPlayerStatus.flags & (PS_FLAGS_800000 | PS_FLAGS_10 | PS_FLAGS_FLYING)) &&
-        !(gPlayerStatus.animFlags & 0x4001) &&
+        !(gPlayerStatus.animFlags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_HOLDING_WATT)) &&
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.timeInAir < 18 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
@@ -1090,11 +1090,11 @@ void check_input_midair_jump(void) {
                 break;
             case 1:
                 set_action_state(ACTION_STATE_SPIN_JUMP);
-                gPlayerStatus.flags |= 8;
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
             case 2:
                 set_action_state(ACTION_STATE_TORNADO_JUMP);
-                gPlayerStatus.flags |= 8;
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
         }
     }

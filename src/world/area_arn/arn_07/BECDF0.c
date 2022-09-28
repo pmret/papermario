@@ -1,7 +1,7 @@
 #include "arn_07.h"
 #include "effects.h"
-#include "sprite/npc/world_tubba.h"
-#include "sprite/npc/tubbas_heart.h"
+#include "sprite/npc/WorldTubba.h"
+#include "sprite/npc/TubbasHeart.h"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
@@ -219,7 +219,7 @@ EvtScript N(80242A30) = {
         EVT_CALL(PlaySoundAtCollider, 10, 450, 0)
     EVT_END_THREAD
     EVT_CALL(NpcFaceNpc, 0, 1, 0)
-    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_A, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 5, MSG_CH3_00C7)
+    EVT_CALL(SpeakToPlayer, 0, ANIM_TubbasHeart_Anim0A, ANIM_TubbasHeart_Anim01, 5, MSG_CH3_00C7)
     EVT_CALL(SetNpcVar, 0, 0, 1)
     EVT_LOOP(0)
         EVT_CALL(GetNpcVar, 0, 0, LVar0)
@@ -244,16 +244,16 @@ EvtScript N(80242A30) = {
         EVT_CALL(SetCamPosC, 0, 0, 0)
         EVT_CALL(SetPanTarget, 0, 65, 0, -137)
         EVT_CALL(PanToTarget, 0, 0, 1)
-        EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_world_tubba_Palette_00_Anim_22)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim22)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
     EVT_CALL(NpcJump0, 0, 298, 56, 31, 18)
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
     EVT_CALL(EnableNpcShadow, 0, FALSE)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_world_tubba_Palette_00_Anim_23)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim23)
         EVT_WAIT(20)
-        EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_world_tubba_Palette_00_Anim_6)
+        EVT_CALL(SetNpcAnimation, 1, ANIM_WorldTubba_Anim06)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_THREAD
@@ -297,7 +297,7 @@ EvtScript N(80242A30) = {
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, 200, 0, 35)
     EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MSG_CH3_00C8)
+    EVT_CALL(SpeakToPlayer, 1, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00C8)
     EVT_CALL(SetNpcVar, 1, 0, 1)
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)

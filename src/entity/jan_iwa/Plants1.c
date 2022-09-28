@@ -157,7 +157,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     guScaleF(sp18, entity->scale.x, entity->scale.x, entity->scale.x);
     guMtxCatF(sp18, sp58, sp58);
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A001098_E9C598));
-    sin_cos_rad((gCameras[CAM_DEFAULT].currentYaw + 180.0f) * TAU / 360.0f, &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(gCameras[CAM_DEFAULT].currentYaw + 180.0f), &sinAngle, &cosAngle);
     sp18[3][1] += 10.0f;
     sp18[3][2] -= 10.0f;
     guMtxCatF(sp58, sp18, sp18);
@@ -179,7 +179,8 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
 void entity_PinkFlower_idle(Entity* entity) {
     PinkFlowerData* data = entity->dataBuf.pinkFlower;
 
-    if ((gPlayerStatus.animFlags & 0x10) && (entity->collisionFlags & 0x48)) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE
+            && entity->collisionFlags & (ENTITY_COLLISION_PLAYER_TOUCH_WALL | ENTITY_COLLISION_PLAYER_HAMMER)) {
         if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
             entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
             data = get_entity_by_index(data->linkedEntityIndex)->dataBuf.pinkFlower;

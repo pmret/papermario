@@ -166,13 +166,13 @@ void action_update_spin(void) {
         }
 
         angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
-        playerSpinState->spinDirection.x = sin_rad(angle * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
-        playerSpinState->spinDirection.y = -cos_rad((angle * TAU) / 360.0f) * playerSpinState->spinDirectionMagnitude;
+        playerSpinState->spinDirection.x = sin_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
+        playerSpinState->spinDirection.y = -cos_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
         playerStatus->currentStateTime--;
         if ((playerStatus->currentStateTime) == 0) {
             playerSpinState->stopSoundTimer = 4;
             set_action_state(ACTION_STATE_IDLE);
-            playerStatus->flags &= ~PA_FLAGS_20000;
+            playerStatus->flags &= ~PS_FLAGS_20000;
             playerStatus->animFlags &= ~PA_FLAGS_SPINNING;
             sfx_stop_sound(playerSpinState->spinSoundID);
         }
@@ -200,8 +200,8 @@ void action_update_spin(void) {
         }
 
         angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
-        playerSpinState->spinDirection.x = sin_rad(angle * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
-        playerSpinState->spinDirection.y = -cos_rad(angle * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
+        playerSpinState->spinDirection.x = sin_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
+        playerSpinState->spinDirection.y = -cos_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
     } else {
         speedModifier = playerSpinState->speedScale - (playerStatus->currentStateTime - playerSpinState->fullSpeedSpinTime - 1) * playerSpinState->frictionScale;
         if (speedModifier < 0.1) {

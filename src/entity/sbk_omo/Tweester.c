@@ -153,7 +153,7 @@ void entity_Tweester_select_target_point(Entity* entity) {
     paths = data->paths;
 
     if (pathOffset == 0) {
-        for (i = 0; (s32)*paths != -1; paths++, i++) {
+        for (i = 0; *paths != PTR_LIST_END; paths++, i++) {
         }
         j = rand_int(i * 10 - 1) / 10;
         paths = data->paths;
@@ -190,7 +190,7 @@ void entity_Tweester_move(Entity* entity) {
     }
 
     data->yaw = clamp_angle(data->yaw + temp_f4);
-    yawRad = data->yaw * TAU / 360.0f;
+    yawRad = DEG_TO_RAD(data->yaw);
     entity->position.x += sin_rad(yawRad);
     entity->position.z -= cos_rad(yawRad);
 

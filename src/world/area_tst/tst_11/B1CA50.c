@@ -21,7 +21,7 @@ void func_8024003C_B1CA8C(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
@@ -73,7 +73,7 @@ void func_802402F4_B1CD44(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
@@ -137,7 +137,7 @@ ApiStatus func_802406D4_B1D124(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
+    npc->flags |= (NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR);
 
     return ApiStatus_DONE2;
 }
@@ -146,6 +146,6 @@ void N(SetPartnerFlagsA0000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
+        partner->flags |= (NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR);
     }
 }

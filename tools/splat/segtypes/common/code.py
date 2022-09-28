@@ -2,13 +2,17 @@ from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 import typing
 from segtypes.common.group import CommonSegGroup
-from segtypes.common.linker_section import dotless_type
 from segtypes.segment import RomAddr, Segment
 from util import log, options
 from util.range import Range
 from util.symbols import Symbol
 
 CODE_TYPES = ["c", "asm", "hasm"]
+
+
+def dotless_type(type: str) -> str:
+    return type[1:] if type[0] == "." else type
+
 
 # code group
 class CommonSegCode(CommonSegGroup):
@@ -50,6 +54,7 @@ class CommonSegCode(CommonSegGroup):
         self.jtbl_glabels_to_add = set()
         self.jumptables: Dict[int, Tuple[int, int]] = {}
         self.rodata_syms: Dict[int, List[Symbol]] = {}
+        self.align = 0x10
 
     @property
     def needs_symbols(self) -> bool:
@@ -61,21 +66,6 @@ class CommonSegCode(CommonSegGroup):
             return self.vram_start + self.size + self.bss_size
         else:
             return None
-
-    # def ram_to_rom(self, ram_addr: int) -> Optional[int]:
-    #     size_no_bss = self.vram_start + self.size
-
-    #     # Do not return a rom address if this is a BSS symbol
-    #     if ram_addr > size_no_bss:
-    #         return None
-
-    #     if not self.contains_vram(ram_addr) and ram_addr != self.vram_end:
-    #         return None
-
-    #     if self.vram_start is not None and isinstance(self.rom_start, int):
-    #         return self.rom_start + ram_addr - self.vram_start
-    #     else:
-    #         return None
 
     # Prepare symbol for migration to the function
     def check_rodata_sym(self, func_addr: int, sym: Symbol):

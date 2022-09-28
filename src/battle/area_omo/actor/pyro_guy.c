@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/pyro_guy.h"
+#include "sprite/npc/PyroGuy.h"
 
 #define NAMESPACE b_area_omo_pyro_guy
 
@@ -12,15 +12,15 @@ extern EvtScript N(idle_8022CCCC);
 extern EvtScript N(handleEvent_8022CE60);
 
 s32 N(idleAnimations_8022CB00)[] = {
-    STATUS_NORMAL,    NPC_ANIM_pyro_guy_Palette_00_Anim_1,
-    STATUS_STONE,     NPC_ANIM_pyro_guy_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_pyro_guy_Palette_00_Anim_7,
-    STATUS_POISON,    NPC_ANIM_pyro_guy_Palette_00_Anim_1,
-    STATUS_STOP,      NPC_ANIM_pyro_guy_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_pyro_guy_Palette_00_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_pyro_guy_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_pyro_guy_Palette_00_Anim_8,
-    STATUS_FEAR,      NPC_ANIM_pyro_guy_Palette_00_Anim_8,
+    STATUS_NORMAL,    ANIM_PyroGuy_Anim01,
+    STATUS_STONE,     ANIM_PyroGuy_Anim00,
+    STATUS_SLEEP,     ANIM_PyroGuy_Anim07,
+    STATUS_POISON,    ANIM_PyroGuy_Anim01,
+    STATUS_STOP,      ANIM_PyroGuy_Anim00,
+    STATUS_STATIC,    ANIM_PyroGuy_Anim01,
+    STATUS_PARALYZE,  ANIM_PyroGuy_Anim00,
+    STATUS_DIZZY,     ANIM_PyroGuy_Anim08,
+    STATUS_FEAR,      ANIM_PyroGuy_Anim08,
     STATUS_END,
 };
 
@@ -131,8 +131,8 @@ EvtScript N(8022CDDC) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
     EVT_SET_CONST(LVar0, 1)
-    EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_4)
-    EVT_SET_CONST(LVar2, NPC_ANIM_pyro_guy_Palette_00_Anim_1)
+    EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim04)
+    EVT_SET_CONST(LVar2, ANIM_PyroGuy_Anim01)
     EVT_EXEC_WAIT(DoReturnHome)
     EVT_RETURN
     EVT_END
@@ -145,84 +145,84 @@ EvtScript N(handleEvent_8022CE60) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(8022CDDC))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_6)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_3)
-            EVT_SET_CONST(LVar2, NPC_ANIM_pyro_guy_Palette_00_Anim_9)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim03)
+            EVT_SET_CONST(LVar2, ANIM_PyroGuy_Anim09)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim03)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, NPC_ANIM_pyro_guy_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim03)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UP_AND_AWAY)
@@ -240,7 +240,7 @@ EvtScript N(takeTurn_8022D344) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pyro_guy_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim03)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -250,7 +250,7 @@ EvtScript N(takeTurn_8022D344) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pyro_guy_Palette_00_Anim_4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim04)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -264,7 +264,7 @@ EvtScript N(takeTurn_8022D344) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 751, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pyro_guy_Palette_00_Anim_5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim05)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -294,7 +294,7 @@ EvtScript N(takeTurn_8022D344) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2EF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pyro_guy_Palette_00_Anim_5)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim05)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
@@ -315,7 +315,7 @@ EvtScript N(takeTurn_8022D344) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_pyro_guy_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim01)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))

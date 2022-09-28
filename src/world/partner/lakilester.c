@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../partners.h"
 #include "effects.h"
+#include "sprite/npc/WorldLakilester.h"
 
 extern s16 D_8010C97A;
 
@@ -47,7 +48,7 @@ void func_802BD100_320C50(void) {
 void world_lakilester_init(Npc* npc) {
     npc->collisionHeight = 38;
     npc->collisionRadius = 36;
-    npc->collisionChannel = 0x10000;
+    npc->collisionChannel = COLLISION_CHANNEL_10000;
     D_802BFF18 = 0;
     D_802BFF04 = 0;
     D_802BFF08 = 0;
@@ -114,7 +115,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((LakilesterTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
             lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
             LakilesterTweesterPhysicsPtr->angle = clamp_angle(LakilesterTweesterPhysicsPtr->angle - LakilesterTweesterPhysicsPtr->angularVelocity);
@@ -125,7 +126,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
                 LakilesterTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((LakilesterTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             LakilesterTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (LakilesterTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -248,16 +249,16 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
     f32 outLength = zOffset;
     f32 hitRx, hitRz;
     f32 hitDirX, hitDirZ;
-    f32 temp_f4;
+    f32 deltaY;
 
     D_802BFF24 = 0;
 
     if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
                                           &hitDirX, &hitDirZ) >= 0) {
-        temp_f4 = outY - partner->moveToPos.y;
-        if (temp_f4 != 0.0f) {
-            if (fabs(temp_f4) < 10.0) {
-                D_802BFF24 = temp_f4;
+        deltaY = outY - partner->moveToPos.y;
+        if (deltaY != 0.0f) {
+            if (fabs(deltaY) < 10.0) {
+                D_802BFF24 = deltaY;
                 partner->moveToPos.y = outY;
                 return TRUE;
             } else {
@@ -483,7 +484,7 @@ void func_802BDDD8_321928(Npc* npc) {
     }
 
     if (D_802BFF28 > 0.0f && raycastBelowResult >= 0) {
-        sin_cos_rad((D_802BFF28 * TAU) / 360.0f, &sp50, &sp54);
+        sin_cos_rad(DEG_TO_RAD(D_802BFF28), &sp50, &sp54);
         npc->pos.y = (npc->pos.y + fabs((sp50 / sp54) * playerStatus->runSpeed));
     }
 
@@ -502,10 +503,10 @@ void func_802BDDD8_321928(Npc* npc) {
 
         belowSurfaceType = get_collider_flags(raycastBelowResult) & 0xFF;
         if (belowSurfaceType == SURFACE_TYPE_LAVA) {
-            npc->currentAnim = 0x80006;
+            npc->currentAnim = ANIM_WorldLakilester_StrainWalk;
             npc->moveSpeed = moveSpeed * 0.5f;
         } else {
-            npc->currentAnim = 0x80005;
+            npc->currentAnim = ANIM_WorldLakilester_Walk;
             npc->moveSpeed = moveSpeed;
         }
         return;
@@ -573,7 +574,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                         playerStatus->actionState == ACTION_STATE_RUN ||
                         playerStatus->actionState == ACTION_STATE_FALLING) {
 
-                        playerStatus->flags |= PA_FLAGS_100;
+                        playerStatus->flags |= PS_FLAGS_100;
                     } else {
                         return ApiStatus_DONE2;
                     }
@@ -585,7 +586,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->flags |= NPC_FLAG_100;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
-                npc->currentAnim = 0x80005;
+                npc->currentAnim = ANIM_WorldLakilester_Walk;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= (NPC_FLAG_100 | NPC_FLAG_400000);
@@ -595,7 +596,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->pos.x = playerStatus->position.x;
                 npc->pos.y = npc->moveToPos.y;
                 npc->pos.z = playerStatus->position.z;
-                npc->currentAnim = 0x80005;
+                npc->currentAnim = ANIM_WorldLakilester_Walk;
                 playerStatus->position.y = npc->pos.y + 10.0f;
                 npc->moveSpeed = 3.0f;
                 npc->jumpScale = 0.0f;
@@ -624,7 +625,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             if (playerStatus->flags & PS_FLAGS_800 ||
                 playerStatus->inputEnabledCounter) {
 
-                playerStatus->flags &= ~NPC_FLAG_100;
+                playerStatus->flags &= ~PS_FLAGS_100;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
@@ -633,8 +634,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14 += 1;
             break;
         case 41:
-            if (playerStatus->flags & PA_FLAGS_800) {
-                playerStatus->flags &= ~NPC_FLAG_100;
+            if (playerStatus->flags & PS_FLAGS_800) {
+                playerStatus->flags &= ~PS_FLAGS_100;
                 if (D_802BFF04 != 0) {
                     enable_player_input();
                     D_802BFF04 = 0;
@@ -699,7 +700,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
             npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->duration = 12;
-            npc->currentAnim = 0x80005;
+            npc->currentAnim = ANIM_WorldLakilester_Walk;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
             suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
@@ -710,10 +711,10 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             /* fallthrough */
         case 102:
-            D_802BFF14 += 1;
+            D_802BFF14++;
             /* fallthrough */
         case 103:
-            if (!(playerStatus->flags & PA_FLAGS_800)) {
+            if (!(playerStatus->flags & PS_FLAGS_800)) {
                 npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
                 npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
                 npc->pos.y += (npc->moveToPos.y - npc->pos.y) / npc->duration;
@@ -759,7 +760,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
             break;
         case 104:
-            if (playerStatus->flags & PA_FLAGS_800) {
+            if (playerStatus->flags & PS_FLAGS_800) {
                 D_802BFF14 = 10;
                 break;
             } else {
@@ -806,7 +807,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             npc->flags &= ~NPC_FLAG_40;
-            playerStatus->flags |= NPC_FLAG_100;
+            playerStatus->flags |= PS_FLAGS_100;
             func_802BD7DC();
             camYaw = camera->currentYaw;
             if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
@@ -1152,7 +1153,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
             sfx_play_sound_at_npc(SOUND_295, 0, -4);
             playerStatus->anim = ANIM_Mario_8000E;
-            playerStatus->unk_BC = 0;
+            playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;

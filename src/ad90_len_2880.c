@@ -47,13 +47,13 @@ void update_camera_mode_6(Camera* camera) {
         }
         camera->vfov = (f32) (temp_lo >> 2);
 
-        boomYaw = (camera->currentBoomYaw * TAU) / 360.0f;
+        boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         temp_f30 = (cosBoom * 0.0f) + (camera->currentBoomLength * sinBoom);
         temp_f24_2 = (sinBoom * -0.0f) + (camera->currentBoomLength * cosBoom);
 
-        rotation = (camera->trueRotation.x * TAU) / 360.0f;
+        rotation = DEG_TO_RAD(camera->trueRotation.x);
         sinRotation = sin_rad(rotation);
         cosRotation = cos_rad(rotation);
 

@@ -13,7 +13,7 @@ class Compiler:
 
 GCC = Compiler(
     "GCC",
-    asm_inc_header=".set noat      # allow manual use of $at\n.set noreorder # don't insert nops after branches\n\n",
+    asm_inc_header=".set noat      /* allow manual use of $at */\n.set noreorder /* don't insert nops after branches */\n\n",
 )
 
 SN64 = Compiler(

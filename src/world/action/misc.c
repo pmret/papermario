@@ -2,6 +2,8 @@
 #include "world/actions.h"
 #include "world/partner/goombario.h"
 
+BSS f32 D_802B6770_E27C80;
+
 s32 action_update_ride(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -19,7 +21,7 @@ s32 action_update_ride(void) {
         playerStatus->pitch = 0.0f;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_400000) {  
+    if (playerStatus->animFlags & PA_FLAGS_400000) {
         if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
             return func_802BD100_317020(oldFlags);
         }
@@ -32,8 +34,6 @@ s32 action_update_ride(void) {
         return 0;
     #endif
 }
-
-extern f32 D_802B6770_E27C80;
 
 void action_update_state_23(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -74,13 +74,13 @@ void action_update_state_23(void) {
             return;
     }
 
-    sin_cos_rad((D_8010C990 * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(D_8010C990), &sinTheta, &cosTheta);
 
     miscTempVariable = 3.0f;
     miscTempVariable = sinTheta * miscTempVariable;
 
-    sin_cos_rad((D_802B6770_E27C80 * TAU) / 360.0f, &sinTheta, &cosTheta);
-    
+    sin_cos_rad(DEG_TO_RAD(D_802B6770_E27C80), &sinTheta, &cosTheta);
+
     playerXOffset = sinTheta * miscTempVariable;
     playerZOffset = cosTheta * miscTempVariable;
 
@@ -91,7 +91,7 @@ void action_update_state_23(void) {
         }
         playerXOffset = playerOffsetTempVar;
     }
-    
+
     if (fabs(playerZOffset) < 0.1) {
         playerOffsetTempVar = 0.1f;
         if (playerZOffset < 0.0f) {
@@ -99,7 +99,7 @@ void action_update_state_23(void) {
         }
         playerZOffset = playerOffsetTempVar;
     }
-    
+
     playerStatus->position.x += playerXOffset;
     playerStatus->position.z -= playerZOffset;
     outX = playerStatus->position.x;

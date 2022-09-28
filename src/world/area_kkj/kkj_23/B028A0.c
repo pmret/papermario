@@ -1,7 +1,7 @@
 #include "kkj_23.h"
 
 ApiStatus func_80240020_B028A0(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags &= ~0x1;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_IS_PEACH;
     gPlayerData.currentPartner = script->varTable[0];
 
     return ApiStatus_DONE2;
@@ -10,7 +10,7 @@ ApiStatus func_80240020_B028A0(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240048_B028C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    gPlayerStatus.unk_0D = evt_get_float_variable(script, *args++);
+    gPlayerStatus.availableDisguiseType = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -31,7 +31,7 @@ ApiStatus func_80240080_B02900(Evt* script, s32 isInitialCall) {
 #include "world/common/GetPeachDisguise.inc.c"
 
 ApiStatus func_80240784_B03004(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags |= 8;
+    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_8;
     return ApiStatus_DONE2;
 }
 

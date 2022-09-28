@@ -1,15 +1,16 @@
 #include "common.h"
 
-extern s32 SpinningFlower_EntityIndex;
-extern f32 D_802B6ED4;
-extern f32 D_802B6ED8;
-extern f32 D_802B6EDC;
-extern f32 D_802B6EE0;
-extern f32 D_802B6EE4;
-extern f32 D_802B6EE8;
-extern f32 SpinningFlower_AngleToCenter;
-extern f32 D_802B6EF0;
-extern f32 D_802B6EF4;
+BSS s32 SpinningFlower_EntityIndex;
+BSS f32 D_802B6ED4;
+BSS f32 D_802B6ED8;
+BSS f32 D_802B6EDC;
+BSS f32 D_802B6EE0;
+BSS f32 D_802B6EE4;
+BSS f32 D_802B6EE8;
+BSS f32 SpinningFlower_AngleToCenter;
+BSS f32 D_802B6EF0;
+BSS f32 D_802B6EF4;
+
 extern s16 D_802BCE30;
 extern s16 D_802BCE32;
 extern s16 D_802BCE34;
@@ -91,7 +92,7 @@ void action_update_use_spinning_flower(void) {
                 D_802B6EF4++;
             }
             D_802B6EE8 += 8.0f;
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
             if (SpinningFlower_EntityIndex >= 0) {
                 entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
                 distToCenter = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
@@ -99,16 +100,16 @@ void action_update_use_spinning_flower(void) {
                 if (distToCenter > 4.0f) {
                     distToCenter--;
                 }
-                sin_cos_rad(SpinningFlower_AngleToCenter * TAU / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
                 playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
                 playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
-                sin_cos_rad((SpinningFlower_AngleToCenter - 91.0f) * TAU / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
                 D_802B6ED4 =  dx * D_802B6EDC;
                 D_802B6ED8 = -dz * D_802B6EDC;
             }
             game_input_to_move_vector(&inputAngle, &inputMagnitude);
             if (inputMagnitude != 0.0f) {
-                sin_cos_rad((inputAngle * TAU) / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                 inputMagnitude *= 0.03125f;
                 if (inputMagnitude < 0.1) {
                     inputMagnitude = 0.1f;
@@ -145,7 +146,7 @@ void action_update_use_spinning_flower(void) {
                 playerStatus->flags &= ~PS_FLAGS_100000;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            sin_cos_rad((SpinningFlower_AngleToCenter - 60.0f) * TAU / 360.0f, &dx, &dz);
+            sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 60.0f), &dx, &dz);
             D_802B6EDC += 0.2;
             D_802B6EF0 -= 0.72;
             D_802B6ED4 =  dx * D_802B6EDC;
@@ -177,16 +178,16 @@ void action_update_use_spinning_flower(void) {
                 if (distToCenter > 4.0f) {
                     distToCenter -= 1.0f;
                 }
-                sin_cos_rad(SpinningFlower_AngleToCenter * TAU / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
                 playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
                 playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
-                sin_cos_rad((SpinningFlower_AngleToCenter - 91.0f) * TAU / 360.0f, &dx, &dz);
+                sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
                 D_802B6ED4 =  dx * D_802B6EDC;
                 D_802B6ED8 = -dz * D_802B6EDC;
             }
             D_802B6EE8 += 8.0f;
 
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -214,7 +215,7 @@ void action_update_use_spinning_flower(void) {
                 D_802B6EE0 = 45.0f;
             }
 
-            ascentVelocity = sin_rad(D_802B6EE0 * TAU / 360.0f) * 4.0f;
+            ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 4.0f;
             playerStatus->position.y += ascentVelocity;
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -224,7 +225,7 @@ void action_update_use_spinning_flower(void) {
                 if (D_802BCE30 + 30 < playerStatus->position.y) {
                     playerStatus->actionSubstate++; // SUBSTATE_ASCEND_B
                     inputAngle = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
-                    sin_cos_rad(inputAngle * TAU / 360.0f, &dx, &dz);
+                    sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                     playerStatus->currentStateTime = 64;
                     SpinningFlower_AngleToCenter = inputAngle;
                     D_802B6ED4 = (dx * distToCenter) * 0.015625;
@@ -246,7 +247,7 @@ void action_update_use_spinning_flower(void) {
                 if (D_802B6EE0-- < 0.0f) {
                     D_802B6EE0 = 0.0f;
                 }
-                ascentVelocity = 2.0f * sin_rad(D_802B6EE0 * TAU / 360.0f);
+                ascentVelocity = 2.0f * sin_rad(DEG_TO_RAD(D_802B6EE0));
                 playerStatus->position.x += D_802B6ED4;
                 playerStatus->position.y += ascentVelocity;
                 playerStatus->position.z += D_802B6ED8;
@@ -267,7 +268,7 @@ void action_update_use_spinning_flower(void) {
             if (D_802B6EE0 > 45.0f) {
                 D_802B6EE0 = 45.0f;
             }
-            ascentVelocity = sin_rad(D_802B6EE0 * TAU / 360.0f) * 3.0f;
+            ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 3.0f;
             playerStatus->position.y += ascentVelocity;
             if (playerStatus->currentStateTime != 0) {
                 playerStatus->currentStateTime--;
@@ -276,8 +277,8 @@ void action_update_use_spinning_flower(void) {
         case SUBSTATE_FINISH:
             enable_player_static_collisions();
             enable_player_input();
-            playerStatus->flags &= ~0x100000;
-            playerStatus->flags |= 0x800000;
+            playerStatus->flags &= ~PS_FLAGS_100000;
+            playerStatus->flags |= PS_FLAGS_800000;
             start_falling();
             enable_partner_ai();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

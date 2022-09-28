@@ -166,7 +166,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        if (!phi_s7 && (!(npc->flags & 8) || phi_fp)) {
+        if (!phi_s7 && (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || phi_fp)) {
             sp20 = npc->pos.x;
             sp38 = 400.0f;
             sp28 = npc->pos.z;

@@ -1,7 +1,7 @@
 #include "dgb_04.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/sentinel.h"
+#include "sprite/npc/Sentinel.h"
 #include "message_ids.h"
 #include "entity.h"
 
@@ -165,7 +165,7 @@ EvtScript N(npcAI_802435E4) = {
     EVT_ADD(LVar2, 2)
     EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(func_80045838, -1, 759, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim08)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
@@ -247,22 +247,22 @@ StaticNpc N(npcGroup_80243B28) = {
     },
 	.territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
     .animations = {
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_2,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_3,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_5,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_8,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
-        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim02,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim03,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim05,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim08,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
+        ANIM_Sentinel_Anim01,
     },
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

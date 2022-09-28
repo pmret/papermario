@@ -137,8 +137,8 @@ void entity_BombableRock_update_fragments(Entity* entity) {
             }
 
             data->fragmentPosY[i] += data->fragmentFallSpeed[i];
-            yawRad = data->fragmentMoveAngle[i] * 360.0f * 0.00390625f;
-            moveAngle = yawRad * TAU / 360.0f;
+            yawRad = data->fragmentMoveAngle[i] * 360.0f / 256;
+            moveAngle = DEG_TO_RAD(yawRad);
             data->fragmentPosX[i] += lateralSpeed * sin_rad(moveAngle);
             data->fragmentPosZ[i] += lateralSpeed * cos_rad(moveAngle);
 
@@ -151,7 +151,7 @@ void entity_BombableRock_update_fragments(Entity* entity) {
                 data->fragmentPosZ[i] = hitZ;
                 data->fragmentMoveAngle[i] += 0x80; // inverse yaw
 
-                moveAngle = data->fragmentMoveAngle[i] * 360.0f * 0.00390625f * TAU / 360.0f;
+                moveAngle = DEG_TO_RAD(data->fragmentMoveAngle[i] * 360.0f / 256);
                 lateralSpeed = 8.0f;
                 data->fragmentPosX[i] += lateralSpeed * sin_rad(moveAngle);
                 data->fragmentPosZ[i] += lateralSpeed * cos_rad(moveAngle);
@@ -211,8 +211,8 @@ void entity_BombableRock_setupGfx(s32 entityIndex) {
         }
 
         guTranslateF(mtxTransInv, x_inv, y_inv, z_inv);
-        guRotateF(mtxRotX, data->fragmentRotX[i] * 360.0f * 0.00390625f, 1.0f, 0.0f, 0.0f);
-        guRotateF(mtxRotY, data->fragmentRotY[i] * 360.0f * 0.00390625f, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotX, data->fragmentRotX[i] * 360.0f / 256, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, data->fragmentRotY[i] * 360.0f / 256, 0.0f, 1.0f, 0.0f);
         guMtxCatF(mtxRotX, mtxRotY, mtxRotY);
         guMtxCatF(mtxRotY, mtxTransInv, mtxTransInv);
         guTranslateF(mtx, data->fragmentPosX[i], data->fragmentPosY[i], data->fragmentPosZ[i]);

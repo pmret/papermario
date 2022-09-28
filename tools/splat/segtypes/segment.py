@@ -23,6 +23,12 @@ def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
         return None
 
 
+def parse_segment_align(segment: Union[dict, list]) -> Optional[int]:
+    if isinstance(segment, dict) and "align" in segment:
+        return int(segment["align"])
+    return None
+
+
 def parse_segment_subalign(segment: Union[dict, list]) -> int:
     default = options.get_subalign()
     if isinstance(segment, dict):
@@ -35,6 +41,12 @@ def parse_segment_section_order(segment: Union[dict, list]) -> List[str]:
     if isinstance(segment, dict):
         return segment.get("section_order", default)
     return default
+
+
+def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict):
+        return segment.get("follows_vram", None)
+    return None
 
 
 class Segment:
@@ -163,6 +175,7 @@ class Segment:
         self.vram_start = vram_start
         self.extract = extract
 
+        self.align: Optional[int] = None
         self.given_subalign = given_subalign
         self.exclusive_ram_id = exclusive_ram_id
         self.given_dir = given_dir
@@ -170,12 +183,14 @@ class Segment:
             int, List[Symbol]
         ] = {}  # Symbols known to be in this segment
         self.given_section_order: List[str] = options.get_section_order()
+        self.follows_vram: Optional[str] = None
 
         self.given_symbol_name_format = symbol_name_format
         self.given_symbol_name_format_no_rom = symbol_name_format_no_rom
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
+        self.follows_vram_segment: Optional[Segment] = None
 
         self.args: List[str] = args
         self.yaml = yaml
@@ -233,7 +248,13 @@ class Segment:
             args=args,
             yaml=yaml,
         )
-        cls.given_section_order = parse_segment_section_order(yaml)
+        ret.given_section_order = parse_segment_section_order(yaml)
+
+        if not ret.follows_vram:
+            ret.follows_vram = parse_segment_follows_vram(yaml)
+
+        if not ret.align:
+            ret.align = parse_segment_align(yaml)
         return ret
 
     @property

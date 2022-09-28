@@ -1,33 +1,33 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/the_master.h"
+#include "sprite/npc/TheMaster.h"
 
 #define NAMESPACE b_area_mac_master2
 
 s32 N(idleAnimations_8022B640)[] = {
-    STATUS_NORMAL,    NPC_ANIM_the_master_Palette_00_Anim_5,
-    STATUS_STONE,     NPC_ANIM_the_master_Palette_00_Anim_0,
-    STATUS_SLEEP,     NPC_ANIM_the_master_Palette_00_Anim_1C,
-    STATUS_POISON,    NPC_ANIM_the_master_Palette_00_Anim_0,
-    STATUS_STOP,      NPC_ANIM_the_master_Palette_00_Anim_0,
-    STATUS_STATIC,    NPC_ANIM_the_master_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_the_master_Palette_00_Anim_0,
-    STATUS_DIZZY,     NPC_ANIM_the_master_Palette_00_Anim_1E,
-    STATUS_DIZZY,     NPC_ANIM_the_master_Palette_00_Anim_1E,
+    STATUS_NORMAL,    ANIM_TheMaster_Walk,
+    STATUS_STONE,     ANIM_TheMaster_Still,
+    STATUS_SLEEP,     ANIM_TheMaster_Sleep,
+    STATUS_POISON,    ANIM_TheMaster_Still,
+    STATUS_STOP,      ANIM_TheMaster_Still,
+    STATUS_STATIC,    ANIM_TheMaster_Still,
+    STATUS_PARALYZE,  ANIM_TheMaster_Still,
+    STATUS_DIZZY,     ANIM_TheMaster_Dizzy,
+    STATUS_DIZZY,     ANIM_TheMaster_Dizzy,
     STATUS_END,
 };
 
 s32 N(idleAnimations_8022B68C)[] = {
-    STATUS_NORMAL,    NPC_ANIM_the_master_Palette_00_Anim_6,
-    STATUS_STONE,     NPC_ANIM_the_master_Palette_00_Anim_1,
-    STATUS_SLEEP,     NPC_ANIM_the_master_Palette_00_Anim_1D,
-    STATUS_POISON,    NPC_ANIM_the_master_Palette_00_Anim_1,
-    STATUS_STOP,      NPC_ANIM_the_master_Palette_00_Anim_1,
-    STATUS_STATIC,    NPC_ANIM_the_master_Palette_00_Anim_1,
-    STATUS_PARALYZE,  NPC_ANIM_the_master_Palette_00_Anim_1,
-    STATUS_DIZZY,     NPC_ANIM_the_master_Palette_00_Anim_1F,
-    STATUS_DIZZY,     NPC_ANIM_the_master_Palette_00_Anim_1F,
+    STATUS_NORMAL,    ANIM_TheMaster_AscendedWalk,
+    STATUS_STONE,     ANIM_TheMaster_AscendedStill,
+    STATUS_SLEEP,     ANIM_TheMaster_AscendedSleep,
+    STATUS_POISON,    ANIM_TheMaster_AscendedStill,
+    STATUS_STOP,      ANIM_TheMaster_AscendedStill,
+    STATUS_STATIC,    ANIM_TheMaster_AscendedStill,
+    STATUS_PARALYZE,  ANIM_TheMaster_AscendedStill,
+    STATUS_DIZZY,     ANIM_TheMaster_AscendedDizzy,
+    STATUS_DIZZY,     ANIM_TheMaster_AscendedDizzy,
     STATUS_END,
 };
 
@@ -134,90 +134,90 @@ EvtScript N(8022B8C0) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_1A)
-            EVT_SET_CONST(LVar2, NPC_ANIM_the_master_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_TheMaster_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_1A)
-            EVT_SET_CONST(LVar2, NPC_ANIM_the_master_Palette_00_Anim_1B)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_TheMaster_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(47)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_6)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedWalk)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(33)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_18)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(53)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(57)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, NPC_ANIM_the_master_Palette_00_Anim_8)
-            EVT_SET_CONST(LVar2, NPC_ANIM_the_master_Palette_00_Anim_16)
+            EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedRun)
+            EVT_SET_CONST(LVar2, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -233,21 +233,21 @@ EvtScript N(singleStrike2) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.8))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BD)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BD)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_E)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedPunch)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_F)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedKick)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BC)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BB)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, 16)
@@ -259,18 +259,18 @@ EvtScript N(singleStrike2) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_CALL(EnableActorBlur, -127, 0)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -302,29 +302,29 @@ EvtScript N(singleStrike2) = {
             EVT_ADD(LVar0, 50)
             EVT_SET(LVar1, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.2))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_21)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BA)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_23)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedLand)
             EVT_CALL(SetActorRotationOffset, -127, 0, 0, 0)
             EVT_WAIT(3)
             EVT_ADD(LVar0, 20)
             EVT_SET(LVar1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_21)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3B4)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_23)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedLand)
             EVT_WAIT(20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -338,7 +338,7 @@ EvtScript N(doubleStrike2) = {
     EVT_CALL(SetBattleCamZoom, 200)
     EVT_CALL(SetBattleCamOffsetZ, 13)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_15)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedDownwardStance)
     EVT_WAIT(40)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
@@ -355,27 +355,27 @@ EvtScript N(doubleStrike2) = {
             EVT_CALL(EnableActorBlur, -127, 1)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_13)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedPalmStance)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_CALL(EnableActorBlur, -127, 0)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableActorBlur, -127, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_13)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedPalmStance)
     EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
     EVT_CALL(EnableActorBlur, -127, 0)
     EVT_THREAD
@@ -395,7 +395,7 @@ EvtScript N(doubleStrike2) = {
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
         EVT_CALL(EnableActorBlur, -127, 1)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_14)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedUppercut)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.9))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 25, FALSE, TRUE, FALSE)
         EVT_CALL(EnableActorBlur, -127, 0)
@@ -432,29 +432,29 @@ EvtScript N(doubleStrike2) = {
             EVT_ADD(LVar0, 50)
             EVT_SET(LVar1, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_21)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 30, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BA)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_23)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedLand)
             EVT_CALL(SetActorRotationOffset, -127, 0, 0, 0)
             EVT_WAIT(3)
             EVT_ADD(LVar0, 20)
             EVT_SET(LVar1, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_21)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3B4)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_23)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedLand)
             EVT_WAIT(20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_3)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedIdle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -491,23 +491,23 @@ EvtScript N(nextTurn_8022CFFC) = {
                 EVT_WAIT(10)
                 EVT_CALL(ActorSpeak, 131118, -127, 1, 10616841, 10616837)
                 EVT_CALL(SetActorVar, -127, 0, 1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_D)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_Cough)
                 EVT_WAIT(15)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_C)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_OpenMouth)
                 EVT_WAIT(5)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B8)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 20)
                 EVT_CALL(PlayEffect, 0x13, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
                 EVT_SET(LVar0, 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_Still)
                 EVT_LOOP(15)
                     EVT_ADD(LVar0, 24)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, LVar0, 0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_SET(LVar0, 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_Still)
                 EVT_LOOP(5)
                     EVT_ADD(LVar0, 18)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, LVar0, 0)
@@ -522,13 +522,13 @@ EvtScript N(nextTurn_8022CFFC) = {
                         EVT_WAIT(3)
                     EVT_END_LOOP
                 EVT_END_THREAD
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_0)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_Still)
                 EVT_LOOP(5)
                     EVT_ADD(LVar0, 36)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, LVar0, 0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_1)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedStill)
                 EVT_LOOP(5)
                     EVT_ADD(LVar0, 18)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, LVar0, 0)
@@ -536,7 +536,7 @@ EvtScript N(nextTurn_8022CFFC) = {
                 EVT_END_LOOP
                 EVT_WAIT(15)
                 EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022B68C)))
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
                 EVT_WAIT(15)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(MoveBattleCamOver, 10)

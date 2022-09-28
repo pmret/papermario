@@ -18,16 +18,16 @@ extern s32 D_80281454[];
 extern EvtScript D_80284A20[];
 extern EvtScript D_80284A30[];
 
-extern s32 D_8029F240;
-extern u8 D_8029F244;
-extern s32 D_8029F248;
-extern s32 D_8029F24C;
-extern s32 D_8029F250;
-extern s32 D_8029F254;
-extern s32 D_8029F258;
-extern s32 D_8029F25C;
-extern s32 D_8029F260;
-extern s32 D_8029F264;
+BSS s32 D_8029F240;
+BSS u8 D_8029F244;
+BSS s32 D_8029F248;
+BSS s32 D_8029F24C;
+BSS s32 D_8029F250;
+BSS s32 D_8029F254;
+BSS s32 D_8029F258;
+BSS s32 D_8029F25C;
+BSS s32 D_8029F260;
+BSS s32 D_8029F264;
 
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1397,9 +1397,9 @@ block_52:
             player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x) / partner->state.moveTime;
             player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z) / partner->state.moveTime;
         }
-        partner->currentPos.z -= sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->currentPos.z -= sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         partner->yaw = clamp_angle(partner->state.angle);
-        player->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        player->currentPos.z += sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         player->yaw = clamp_angle(partner->state.angle);
         partner->state.angle += 90.0f;
 
@@ -1592,9 +1592,9 @@ void btl_state_update_end_turn(void) {
             player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x) / partner->state.moveTime;
             player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z) / partner->state.moveTime;
         }
-        partner->currentPos.z -= sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->currentPos.z -= sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         partner->yaw = clamp_angle(partner->state.angle);
-        player->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        player->currentPos.z += sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         player->yaw = clamp_angle(partner->state.angle);
         partner->state.angle += 90.0f;
         if (partner->state.moveTime != 0) {
@@ -1813,9 +1813,9 @@ void btl_state_update_victory(void) {
             player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z)
                                                             / partner->state.moveTime;
         }
-        partner->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->currentPos.z += sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         partner->yaw = clamp_angle(-partner->state.angle);
-        player->currentPos.z -= sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        player->currentPos.z -= sin_rad(DEG_TO_RAD(partner->state.angle)) * 16.0f;
         player->yaw = clamp_angle(-partner->state.angle);
         partner->state.angle += 90.0f;
 
@@ -2983,9 +2983,9 @@ void btl_state_update_end_player_turn(void) {
             partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
             partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
         }
-        player->currentPos.z += sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+        player->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
         player->yaw = clamp_angle(-player->state.angle);
-        partner->currentPos.z -= sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
         partner->yaw = clamp_angle(-player->state.angle);
         player->state.angle += 90.0f;
 

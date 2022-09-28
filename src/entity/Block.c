@@ -212,7 +212,7 @@ void entity_inactive_block_hit_anim(Entity* entity) {
 
     entity_MulticoinBlock_update_timer(entity);
     currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad((data->recoilInterpPhase * 6.28318f) / 360.0f) * 2);
+    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)) * 2);
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase > 450.0f) {
         data->recoilInterpPhase = clamp_angle(data->recoilInterpPhase);
@@ -226,7 +226,7 @@ void entity_inactive_block_recoil_anim(Entity* entity) {
 
     entity_MulticoinBlock_update_timer(entity);
     currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad((data->recoilInterpPhase * 6.28318f) / 360.0f));
+    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)));
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase >= 360.0f) {
         data->recoilInterpPhase = 0.0f;

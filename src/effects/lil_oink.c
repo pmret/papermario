@@ -178,6 +178,7 @@ void lil_oink_appendGfx(void* effect) {
             shim_guPositionF(sp20, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
                              data->x[i], data->y[i] + data->jumpOffset[i], data->z[i]);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, D_E0114718[data->type[i]]);

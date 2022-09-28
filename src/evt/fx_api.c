@@ -49,8 +49,8 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
     offsetX = rand_int(10) - 5;
     offsetZ = rand_int(10) - 5;
     offsetY = -2.0f - ((SQ(offsetX) + SQ(offsetZ)) / 5.0f);
-    sinA = sin_rad(angle * TAU / 360.0f);
-    cosA = cos_rad(angle * TAU / 360.0f);
+    sinA = sin_rad(DEG_TO_RAD(angle));
+    cosA = cos_rad(DEG_TO_RAD(angle));
     fx_cloud_trail(
         posX + ((sinA * magnitude * script->functionTemp[0]) / duration) + offsetX,
         posY + 15.5f + offsetY,
@@ -143,8 +143,8 @@ ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
-    // function is never called, so the effect type is assumed
-    effect->data.gotItemOutline->unk_30 = 5;
+    // function is never called, so the effect type can't be inferred
+    effect->data.any[12] = 5;
     return ApiStatus_DONE2;
 }
 

@@ -26,7 +26,11 @@
 // TODO: move to src/battle/action_cmd.c
 
 extern void* actionCommandDmaTable[23];
-extern s32 D_8029FBC0;
+
+BSS s32 D_8029FBC0;
+BSS s32 D_8029FBC4[3]; // unused?
+BSS s32 D_8029FBD0;
+BSS s8 D_8029FBD4;
 
 void action_command_jump_draw_hud_elements(void);
 void action_command_hammer_draw_hud_elements(void);
@@ -613,7 +617,7 @@ ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
         }
     }
 
-    sfx_stop_sound(0x80000041);
+    sfx_stop_sound(SOUND_80000041);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;

@@ -33,7 +33,7 @@ void action_update_use_tweester(void) {
 
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_LAUNCH:
-            sin_cos_rad((PlayerTweesterPhysics->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(PlayerTweesterPhysics->angle), &sinAngle, &cosAngle);
 
             playerStatus->position.x = entity->position.x + (sinAngle * PlayerTweesterPhysics->radius);
             playerStatus->position.z = entity->position.z - (cosAngle * PlayerTweesterPhysics->radius);
@@ -46,7 +46,7 @@ void action_update_use_tweester(void) {
                 PlayerTweesterPhysics->radius++;
             }
 
-            liftoffVelocity = sin_rad((PlayerTweesterPhysics->liftoffVelocityPhase * TAU) / 360.0f)  * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(PlayerTweesterPhysics->liftoffVelocityPhase))  * 3.0f;
             PlayerTweesterPhysics->liftoffVelocityPhase += 3.0f;
             if (PlayerTweesterPhysics->liftoffVelocityPhase > 150.0f) {
                 PlayerTweesterPhysics->liftoffVelocityPhase = 150.0f;
