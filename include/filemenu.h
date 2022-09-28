@@ -7,17 +7,17 @@ extern MenuPanel* filemenu_menus[4];
 
 extern BSS s32 filemenu_iterFileIdx;
 extern BSS s32 filemenu_pressedButtons;
-extern BSS s32 filemenu_8024C088;
+extern BSS s32 filemenu_cursorHudElem;
 extern BSS s32 filemenu_heldButtons;
-extern BSS s32 filemenu_8024C090;
+extern BSS s8 filemenu_filename_pos;
 extern BSS s32 filemenu_loadedFileIdx;
-extern BSS s8 filemenu_8024C098;
+extern BSS s8 filemenu_currentMenu;
 extern BSS s32 filemenu_8024C09C;
 extern BSS s32 filemenu_cursorHudElemID[1];
 extern BSS s32 filemenu_8024C0A4[3];
 extern BSS s32 filemenu_hudElemIDs[20];
-extern BSS s32 filemenu_8024C100[4];
-extern BSS u8 filemenu_8024C110[8];
+extern BSS s32 filemenu_createfile_hudElems[4];
+extern BSS u8 filemenu_filename[8];
 
 #define WINDOW_UPDATE_FUNC(name) void (name)( \
     s32 windowIdx,\
@@ -71,6 +71,8 @@ void filemenu_yesno_draw_prompt_contents(MenuPanel*, s32, s32, s32, s32, s32, s3
 void filemenu_info_draw_message_contents(MenuPanel*, s32, s32, s32, s32, s32, s32);
 void filemenu_draw_contents_file_create_header(MenuPanel*, s32, s32, s32, s32, s32, s32);
 void filemenu_draw_contents_choose_name(MenuPanel*, s32, s32, s32, s32, s32, s32);
+void filemenu_draw_cursor(MenuPanel*, s32, s32, s32, s32, s32, s32);
+void filemenu_draw_contents_copy_arrow(MenuPanel*, s32, s32, s32, s32, s32, s32);
 
 void filemenu_main_init(MenuPanel*);
 void filemenu_main_handle_input(MenuPanel*);
@@ -89,22 +91,10 @@ void filemenu_choose_name_handle_input(MenuPanel*);
 void filemenu_choose_name_update(MenuPanel*);
 void filemenu_choose_name_cleanup(MenuPanel*);
 
-extern WindowStyleCustom D_8024BB08;
-extern WindowStyleCustom D_8024BAD0;
-extern WindowStyleCustom D_8024BB40;
-extern WindowStyleCustom D_8024BB78;
-extern WindowStyleCustom D_8024BBB0;
-extern WindowStyleCustom D_8024BC58;
-extern WindowStyleCustom D_8024BD38;
-extern WindowStyleCustom D_8024BC90;
-extern WindowStyleCustom D_8024BD70;
-extern WindowStyleCustom D_8024BBE8;
-extern WindowStyleCustom D_8024BCC8;
-extern WindowStyleCustom D_8024BC20;
-extern WindowStyleCustom D_8024BD00;
-extern WindowStyleCustom D_8024BE88;
-extern WindowStyleCustom D_8024BEF8;
-extern WindowStyleCustom D_8024BF30;
-extern WindowStyleCustom D_8024BEC0;
+void filemenu_draw_message(u8*, s32, s32, s32, s32, u32);
+void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+
+extern WindowStyleCustom filemenu_windowStyles[];
+extern u8 filemenu_createfile_gridData[];
 
 #endif

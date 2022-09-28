@@ -1,10 +1,10 @@
 #include "common.h"
 
-#include "filemenu/image_16AA60.png.inc.c"
-#include "filemenu/image_16AC60.png.inc.c"
-#include "filemenu/image_16BC60.png.inc.c"
+#include "filemenu/copyarrow.png.inc.c"
+#include "filemenu/corners_yellow.png.inc.c"
+#include "filemenu/corners_gray.png.inc.c"
 
-Gfx D_8024B600[] = {
+Gfx filemenu_dl_copyarrow[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_2CYCLE),

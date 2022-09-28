@@ -1115,9 +1115,6 @@ s32 bActorMessages[] = {
 };
 PopupMessage* D_802838F8 = NULL;
 
-// BSS
-extern s16 D_80159E7E;
-
 extern PopupMessage popupMessages[32];
 extern s16 D_8029F640;
 extern s16 D_8029F642;
@@ -1915,7 +1912,7 @@ void func_8024FB3C(void* data) {
                             }
                         }
 
-                        D_80159E7E = D_8029F64E + D_8029F650;
+                        gWindows[9].pos.y = D_8029F64E + D_8029F650;
 
                         duration = &popup->duration; // TODO required to match
                         if (*duration != -1) {

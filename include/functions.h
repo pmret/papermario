@@ -108,7 +108,6 @@ void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
 void pause_cleanup(void);
 
 // file menu stuff
-void func_80248170(s32 idx);
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
 void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);

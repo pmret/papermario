@@ -2,44 +2,28 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
-typedef struct UnkStruct8015A370 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ char unk_01[0x3];
-    /* 0x04 */ void (*unk_04)(s32);
-    /* 0x08 */ char unk_08[0x14];
-    /* 0x1C */ u8 unk_1C;
-} UnkStruct8015A370;
-
-extern UnkStruct8015A370 D_8015A370;
-
-extern s32 D_8024C108;
-extern MenuWindowBP D_8024A190[2];
-extern s8 D_8024C090;
-extern s32 D_8024C100_C09980[3];
-extern u8 D_8024C117;
-
-u8 D_8024A130[] = {
-    0, 0, 0, 0 // TODO find it's length
+u8 filemenu_info_gridData[] = {
+    0, 0, 0, 0
 };
 
-MenuWindowBP D_8024A134[] = {
+MenuWindowBP filemenu_info_windowBPs[] = {
     {
-        .windowID = WINDOW_ID_47,
+        .windowID = WINDOW_ID_FILEMENU_INFO,
         .unk_01 = 0,
         .pos = { .x = 0, .y = 0 },
         .width = 0,
         .height = 0,
-        .priority = 0x40,
+        .priority = 64,
         .fpDrawContents = &filemenu_info_draw_message_contents,
         .tab = NULL,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
-        .style = { .customStyle = &D_8024BEC0 }
+        .style = { .customStyle = &filemenu_windowStyles[20] }
     },
 };
 
-MenuPanel D_8024A158 = {
+MenuPanel filemenu_info_menuBP = {
     .initialized = FALSE,
     .col = 0,
     .row = 0,
@@ -48,7 +32,7 @@ MenuPanel D_8024A158 = {
     .numCols = 1,
     .numRows = 1,
     .numPages = 0,
-    .gridData = D_8024A130,
+    .gridData = filemenu_info_gridData,
     .fpInit = &filemenu_info_init,
     .fpHandleInput = &filemenu_info_handle_input,
     .fpUpdate = &filemenu_info_update,
@@ -91,11 +75,11 @@ void filemenu_info_draw_message_contents(
 void filemenu_info_init(MenuPanel* tab) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_8024A134); i++) {
-        D_8024A134[i].tab = tab;
+    for (i = 0; i < ARRAY_COUNT(filemenu_info_windowBPs); i++) {
+        filemenu_info_windowBPs[i].tab = tab;
     }
 
-    setup_pause_menu_tab(D_8024A134, ARRAY_COUNT(D_8024A134));
+    setup_pause_menu_tab(filemenu_info_windowBPs, ARRAY_COUNT(filemenu_info_windowBPs));
     tab->initialized = TRUE;
 }
 
@@ -103,23 +87,23 @@ void filemenu_info_handle_input(MenuPanel* menu) {
     if (filemenu_pressedButtons & (BUTTON_A | BUTTON_B)) {
         MenuPanel* menu = filemenu_menus[0];
 
-        filemenu_8024C098 = 0;
+        filemenu_currentMenu = 0;
 
         switch (menu->page) {
             case 1:
                 menu->page = 0;
-                set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
-                set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_options_right);
-                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_options_bottom);
-                set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case 4:
                 menu->page = 0;
-                set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
-                set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_options_right);
-                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_options_bottom);
-                set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case 2:
@@ -127,7 +111,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
         }
-        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_FILEMENU_INFO, WINDOW_UPDATE_HIDE);
     }
 }
 
