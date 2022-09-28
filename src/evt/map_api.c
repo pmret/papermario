@@ -216,17 +216,17 @@ ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode var1 = evt_get_variable(script, *args++);
-    Bytecode var2 = evt_get_variable(script, *args++);
-    Bytecode var3 = evt_get_variable(script, *args++);
-    Bytecode var4 = evt_get_variable(script, *args++);
+    Bytecode texPanner = evt_get_variable(script, *args++);
+    Bytecode tileSelect = evt_get_variable(script, *args++);
+    Bytecode u = evt_get_variable(script, *args++);
+    Bytecode v = evt_get_variable(script, *args++);
 
-    if (var2 == 0) {
-        set_main_pan_u(var1, var3);
-        set_main_pan_v(var1, var4);
+    if (tileSelect == 0) {
+        set_main_pan_u(texPanner, u);
+        set_main_pan_v(texPanner, v);
     } else {
-        set_aux_pan_u(var1, var3);
-        set_aux_pan_v(var1, var4);
+        set_aux_pan_u(texPanner, u);
+        set_aux_pan_v(texPanner, v);
     }
 
     return ApiStatus_DONE2;

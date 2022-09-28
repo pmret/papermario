@@ -17,7 +17,7 @@
 
 enum {
 	NPC_Kolorado                = 0,
-	NPC_ZiplineDummy            = 1,	// only used to make the zipline have a shadow
+	NPC_ZiplineDummy            = 1,	// used to give the zipline a shadow
 	NPC_SpikeTop                = 2,
 	NPC_PutridPiranha           = 3,
 	NPC_PutridPiranha_Hitbox    = 4,

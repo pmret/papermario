@@ -21,7 +21,7 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-EvtScript N(D_8024292C_C5D06C) = {
+EvtScript N(EVS_UpdateTexPanner3) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_3)
     EVT_THREAD
@@ -35,7 +35,7 @@ EvtScript N(D_8024292C_C5D06C) = {
     EVT_END
 };
 
-EvtScript N(D_80242A48_C5D188) = {
+EvtScript N(EVS_UpdateTexPanner4) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_4)
     EVT_THREAD
@@ -71,7 +71,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-EvtScript N(D_80242CCC_C5D40C) = {
+EvtScript N(EVS_UpdateLavaTexPanners) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_2, TRUE)
@@ -94,7 +94,7 @@ EvtScript N(D_80242CCC_C5D40C) = {
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_D, 0, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
             EVT_ADD(LVar0, 0x8000)
             EVT_WAIT(6)
         EVT_END_LOOP
@@ -132,14 +132,14 @@ EvtScript N(EVS_Main) = {
     EVT_THREAD
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
-    EVT_EXEC(N(D_80242CCC_C5D40C))
+    EVT_EXEC(N(EVS_UpdateLavaTexPanners))
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(N(D_8024292C_C5D06C))
+    EVT_EXEC(N(EVS_UpdateTexPanner3))
     EVT_SET(LVar0, MODEL_kem2)
-    EVT_EXEC(N(D_80242A48_C5D188))
+    EVT_EXEC(N(EVS_UpdateTexPanner4))
     EVT_EXEC_WAIT(N(EVS_802444A4))
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_EXEC_WAIT(N(EVS_802464A8))
         EVT_RETURN
     EVT_END_IF

@@ -3,36 +3,7 @@
 extern EvtScript N(EVS_SetupMusic);
 extern NpcGroupList N(DefaultNPCs);
 
-#include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
-
-EvtScript N(EVS_StartTexPanner3) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_3)
-    EVT_THREAD
-        TEX_PAN_PARAMS_ID(TEX_PANNER_3)
-        TEX_PAN_PARAMS_STEP(-200, 0, 600, -400)
-        TEX_PAN_PARAMS_FREQ(   1, 0,   1,    1)
-        TEX_PAN_PARAMS_INIT(   0, 0,   0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_StartTexPanner4) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_4)
-    EVT_THREAD
-        TEX_PAN_PARAMS_ID(TEX_PANNER_4)
-        TEX_PAN_PARAMS_STEP(500, 0, 0, -400)
-        TEX_PAN_PARAMS_FREQ(  1, 0, 0,    1)
-        TEX_PAN_PARAMS_INIT(  0, 0, 0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 // should add to zero over a full cycle
 s32 N(LavaFluctuationOffsets)[] = {
@@ -67,8 +38,8 @@ EvtScript N(EVS_RaiseLava) = {
     EVT_CALL(TranslateModel, MODEL_yu, 0, MV_LavaLevel, 0)
     EVT_WAIT(6)
     EVT_LABEL(10)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, 0, LVar0, LVar1)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, 1, LVar2, LVar3)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, LVar0, LVar1)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_AUX, LVar2, LVar3)
         EVT_SUB(LVar0, 700)
         EVT_ADD(LVar1, 700)
         EVT_ADD(LVar2, 200)
@@ -102,9 +73,9 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_RaiseLava))
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(N(EVS_StartTexPanner3))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)
-    EVT_EXEC(N(EVS_StartTexPanner4))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeRight))
     EVT_RETURN
     EVT_END
 };

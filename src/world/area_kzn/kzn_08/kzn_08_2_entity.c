@@ -1,6 +1,8 @@
 #include "kzn_08.h"
 #include "entity.h"
 
+s32** N(varStash) = NULL;
+
 #include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
@@ -8,8 +10,6 @@
 #include "world/common/SomeItemEntityFunc.inc.c"
 
 #include "world/common/CheckItemFlags40.inc.c"
-
-s32** N(varStash) = NULL;
 
 EvtScript N(D_80244BB4_C76034) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -42,7 +42,7 @@ EvtScript N(D_80244C1C_C7609C) = {
     EVT_END
 };
 
-EvtScript N(D_80244CFC_C7617C) = {
+EvtScript N(EVS_OpenChest) = {
     EVT_SET(LVarA, ITEM_DIZZY_STOMP)
     EVT_SET(LVarB, ITEM_TYPE_BADGE)
     EVT_SET(GF_KZN08_Chest_DizzyStomp, TRUE)
@@ -54,7 +54,7 @@ EvtScript N(D_80244CFC_C7617C) = {
 EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), 120, 100, -55, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_KZN08_Chest_DizzyStomp)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_80244CFC_C7617C)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_OpenChest)))
     EVT_RETURN
     EVT_END
 };

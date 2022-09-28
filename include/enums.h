@@ -3979,7 +3979,9 @@ enum TexPanner {
     TEX_PANNER_C    = 0xC,
     TEX_PANNER_D    = 0xD,
     TEX_PANNER_E    = 0xE,
-    TEX_PANNER_F    = 0xF
+    TEX_PANNER_F    = 0xF,
+    TEX_PANNER_MAIN = 0,
+    TEX_PANNER_AUX  = 1,
 };
 
 enum EnemyFlags {

@@ -13,7 +13,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_kzn_22 },
 };
 
-EvtScript N(EVS_802403E0) = {
+EvtScript N(EVS_SetupMusic) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH5_MT_LAVA_LAVA_ERUPTING)
         EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_END_IF

@@ -29,6 +29,7 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
+// can't use kzn_SmokeTexPanners include in this file because of this function
 ApiStatus func_80240718_C71B98(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 dist = evt_get_variable(script, *args++);
@@ -45,7 +46,7 @@ ApiStatus func_80240718_C71B98(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_StartTexPanner3) = {
+EvtScript N(EVS_StartTexPanner_SmokeLeft) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_3)
     EVT_THREAD
@@ -59,7 +60,7 @@ EvtScript N(EVS_StartTexPanner3) = {
     EVT_END
 };
 
-EvtScript N(EVS_StartTexPanner4) = {
+EvtScript N(EVS_StartTexPanner_SmokeRight) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_4)
     EVT_THREAD
@@ -189,9 +190,9 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_StartTexPanner0))
     EVT_EXEC(N(EVS_StartTexPanner1))
     EVT_SET(LVar0, MODEL_kem1)
-    EVT_EXEC(N(EVS_StartTexPanner3))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)
-    EVT_EXEC(N(EVS_StartTexPanner4))
+    EVT_EXEC(N(EVS_StartTexPanner_SmokeRight))
     EVT_RETURN
     EVT_END
 };

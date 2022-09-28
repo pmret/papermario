@@ -1,7 +1,7 @@
 #include "kzn_22.h"
 #include "entity.h"
 
-EvtScript N(EVS_80240ED0) = {
+EvtScript N(EVS_OpenChest) = {
     EVT_RETURN
     EVT_END
 };

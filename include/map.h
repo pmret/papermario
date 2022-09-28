@@ -7,6 +7,11 @@
 #include "script_api/map.h"
 #include "npc.h"
 
+// temporary: some standard script names
+#define EVS_MakeEntities        EVS_MakeEntities
+#define EVS_SetupMusic          EVS_SetupMusic
+#define EVS_BindExitTriggers    EVS_BindExitTriggers
+
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
