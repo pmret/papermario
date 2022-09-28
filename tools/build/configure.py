@@ -123,6 +123,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         deps="gcc",
     )
 
+    ninja.rule("dead_cc",
+        description="dead_cc $in",
+        command=f"mips-linux-gnu-objcopy --redefine-sym sqrtf=dead_sqrtf $in $out",
+    )
+
     ninja.rule("bin",
         description="bin $in",
         command=f"{cross}ld -r -b binary $in -o $out",
@@ -389,10 +394,27 @@ class Configure:
 
                 cflags = cflags.replace("gcc_272", "")
 
-                build(entry.object_path, entry.src_paths, task, variables={
-                    "cflags": cflags,
-                    "cppflags": f"-DVERSION_{self.version.upper()}",
-                })
+                if isinstance(seg.rom_start, int) and seg.rom_start >= 0xEA0900:
+                    dog = 5
+
+                # Dead cod
+                if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
+                    obj_path = str(entry.object_path)
+                    init_obj_path = Path(obj_path + ".dead")
+                    build(init_obj_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
+                    build(
+                        entry.object_path,
+                        [init_obj_path],
+                        "dead_cc",
+                    )
+                else:
+                    build(entry.object_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
                 if isinstance(seg, segtypes.common.group.CommonSegGroup):
