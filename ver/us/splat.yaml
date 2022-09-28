@@ -10185,14 +10185,11 @@ segments:
     start: 0xC60D10
     vram: 0x80240000
     subsegments:
-    - [0xC60D10, c]
-    - [0xC61020, c]
-    - [0xC63A10, c]
-    - [0xC63DA0, data]
-    - [0xC647B0, data]
-    - [0xC66FC0, data]
-    - [0xC676A0, data]
-    - [0xC67ED0]
+    - [0xC60D10, c, kzn_03_1_main]
+    - [0xC61020, c, kzn_03_2_npc]
+    - [0xC63A10, c, kzn_03_3_entity]
+    - [0xC63A10, c, kzn_03_4_ziplines]
+    - [0xC63DA0]
   - name: kzn_04
     dir: world/area_kzn/kzn_04
     type: code
