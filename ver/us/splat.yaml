@@ -6392,12 +6392,10 @@ segments:
     start: 0x8A9A10
     vram: 0x80240000
     subsegments:
-    - [0x8A9A10, c]
-    - [0x8A9B70, c]
-    - [0x8A9F30, data]
-    - [0x8AA1D0, data]
-    - [0x8AA310, data]
-    - [0x8AA430]
+    - [0x8A9A10, c, kgr_01_1_main]
+    - [0x8A9B70, c, kgr_01_2_wiggle]
+    - [0x8A9F10, c, kgr_01_3_extra]
+    - [0x8A9F30]
   - name: kgr_02
     dir: world/area_kgr/kgr_02
     type: code

@@ -1,8 +1,10 @@
 #include "kgr_01.h"
 
 #define TONGUE_WIGGLE_RATE 10
+#define TONGUE_COPY_MODEL_ID 10000
 
-extern u16 N(TongueWiggleTime); // tongue wiggle rate
+// tongue wiggle rate
+u16 N(TongueWiggleTime) = 0;
 
 void N(add_tongue_deformation)(Vtx* src, Vtx* dest, s32 numVertices, s32 time) {
     PlayerStatus* player = &gPlayerStatus;
@@ -87,9 +89,27 @@ ApiStatus N(GetEffectiveTongueOffset)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(HasBombetteExploded)(Evt* script, s32 isInitialCall) {
-    if (gCollisionStatus.bombetteExploded >= 0) {
-        script->varTable[1] = TRUE;
-    }
-    return ApiStatus_DONE2;
-}
+EvtScript N(EVS_WiggleTongue) = {
+    EVT_LABEL(0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_CALL(N(GetEffectiveTongueOffset))
+        EVT_CALL(TranslateModel, TONGUE_COPY_MODEL_ID, 0, LVar0, 0)
+        EVT_CALL(UpdateColliderTransform, COLLIDER_sita)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_StartTongueWiggle) = {
+    EVT_CALL(CloneModel, MODEL_sita, TONGUE_COPY_MODEL_ID)
+    EVT_CALL(ParentColliderToModel, COLLIDER_sita, TONGUE_COPY_MODEL_ID)
+    EVT_CALL(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
+    EVT_EXEC(N(EVS_WiggleTongue))
+    EVT_CALL(MakeLocalVertexCopy, 1, MODEL_sita, TRUE)
+    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(make_tongue_gfx)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_sita, 1, -1)
+    EVT_CALL(HidePlayerShadow, TRUE)
+    EVT_RETURN
+    EVT_END
+};

@@ -667,14 +667,14 @@ MapConfig kzn_maps[] = {
     { MAP(kzn_07), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP(kzn_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP(kzn_09), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_10, 0x802406F0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_11, 0x80242680), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_17, 0x802430C0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_18, 0x802403F0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_18), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(kzn_19, 0x80241D70), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_20, 0x80240AE0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_22, 0x802403A0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_23, 0x80240630), .bgName = "yos_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_20), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_22), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_23), .bgName = "yos_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
 };
 
 /// Flower Fields
