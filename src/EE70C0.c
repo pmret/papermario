@@ -17,7 +17,7 @@ extern s32 D_80244630_EEABE0;
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
 // INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
-? func_80242260_EE8810(Evt *arg0, s32 arg1) {
+ApiStatus func_80242260_EE8810(Evt *arg0, s32 arg1) {
     if (arg1 != 0) {
         D_8024462C_EEABDC = 0;
     }
