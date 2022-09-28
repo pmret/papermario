@@ -394,9 +394,6 @@ class Configure:
 
                 cflags = cflags.replace("gcc_272", "")
 
-                if isinstance(seg.rom_start, int) and seg.rom_start >= 0xEA0900:
-                    dog = 5
-
                 # Dead cod
                 if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
                     obj_path = str(entry.object_path)
@@ -410,6 +407,7 @@ class Configure:
                         [init_obj_path],
                         "dead_cc",
                     )
+                # Not dead cod
                 else:
                     build(entry.object_path, entry.src_paths, task, variables={
                         "cflags": cflags,
