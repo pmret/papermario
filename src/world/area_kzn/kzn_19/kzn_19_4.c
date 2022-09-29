@@ -5,9 +5,9 @@ extern API_CALLABLE(GetAnimatedPositionByTreeIndex);
 extern API_CALLABLE(GetAnimatedRotationByTreeIndex);
 
 extern EvtScript N(D_80242164_C8FD14);
-extern StaticAnimatorNode* N(D_802431F8_C90DA8);
-extern StaticAnimatorNode* N(D_80243388_C90F38);
-extern StaticAnimatorNode* N(D_802434B8_C91068);
+extern StaticAnimatorNode* N(D_802431F8_C90DA8)[];
+extern StaticAnimatorNode* N(D_80243388_C90F38)[];
+extern StaticAnimatorNode* N(D_802434B8_C91068)[];
 
 extern NpcSettings N(NpcSettings_Kolorado);
 extern NpcSettings N(NpcSettings_Misstar);
@@ -16,6 +16,10 @@ extern NpcSettings N(NpcSettings_LavaPiranhaHead);
 extern API_CALLABLE(func_80241BC0_C8F770);
 extern API_CALLABLE(func_802413FC_C8EFAC);
 extern API_CALLABLE(func_80240DA4_C8E954);
+
+#include "./kzn_19_anim1.c"
+#include "./kzn_19_anim2.c"
+#include "./kzn_19_anim3.c"
 
 s32 N(D_802434D8_C91088)[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 
@@ -148,6 +152,8 @@ typedef struct UnkStruct_kzn_19_len780 {
 
 static s32 D_80248380_kzn_19;
 
+static s32 unk_static_pad;
+
 void func_80240B00_C8E6B0(UnkStruct_kzn_19_len1E0* sub) {
     Evt dummyEvt;
     Evt* dummyEvtPtr = &dummyEvt;
@@ -253,6 +259,7 @@ API_CALLABLE(func_8024140C_C8EFBC) {
 #include "world/common/atomic/LetterChoice.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241BC0_C8F770);
+__asm__(".section .data\n");
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,

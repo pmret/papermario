@@ -1,5 +1,4 @@
-#include "kzn_19.h",
-#include "animation_script.h",
+#include "animation_script.h"
 
 StaticAnimatorNode N(D_80243040_C90BF0) = {
 	.pos = { 102.0, 99.0, -10.0 },
@@ -69,8 +68,8 @@ StaticAnimatorNode N(D_802431CC_C90D7C) = {
 	.child = &N(D_802431A0_C90D50),
 };
 
-StaticAnimatorNode* N(D_802431F8_C90DA8) = {
+StaticAnimatorNode* N(D_802431F8_C90DA8)[] = {
     &N(D_802431CC_C90D7C), &N(D_802431A0_C90D50), &N(D_80243174_C90D24), &N(D_80243148_C90CF8),
     &N(D_8024311C_C90CCC), &N(D_802430F0_C90CA0), &N(D_802430C4_C90C74), &N(D_80243098_C90C48),
-    &N(D_8024306C_C90C1C), &N(D_80243040_C90BF0), NULL
+    &N(D_8024306C_C90C1C), &N(D_80243040_C90BF0), NULL, NULL
 };
