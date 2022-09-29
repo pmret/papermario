@@ -228,11 +228,12 @@ void phys_update_action_state(void) {
         }
     }
 
+    // if midair, look for velocity inflection
     if (playerStatus->timeInAir != 0) {
-        if (playerStatus->gravityIntegrator[0] <= 0.0f && D_800F7B90 > 0.0f) {
-            playerStatus->unk_C2 = playerStatus->timeInAir;
+        if (playerStatus->gravityIntegrator[0] <= 0.0f && LastMidairPlayerVelY > 0.0f) {
+            playerStatus->peakJumpTime = playerStatus->timeInAir;
         }
-        D_800F7B90 = playerStatus->gravityIntegrator[0];
+        LastMidairPlayerVelY = playerStatus->gravityIntegrator[0];
     }
 
     func_800E24F8();

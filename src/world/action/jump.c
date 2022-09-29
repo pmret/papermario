@@ -15,7 +15,7 @@ void initialize_jump(void) {
 
     playerStatus->actionSubstate = JUMP_SUBSTATE_0;
     playerStatus->timeInAir = 0;
-    playerStatus->unk_C2 = 0;
+    playerStatus->peakJumpTime = 0;
     playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_FLYING);
     playerStatus->flags |= PS_FLAGS_JUMPING;
     playerStatus->jumpFromPos.x = playerStatus->position.x;

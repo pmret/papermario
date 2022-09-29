@@ -70,7 +70,7 @@ void action_update_hit_lava(void) {
             suggest_player_anim_setUnkFlag(ANIM_Mario_80002);
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
-            playerStatus->unk_C2 = 0;
+            playerStatus->peakJumpTime = 0;
             playerStatus->actionSubstate = SUBSTATE_LAUNCH;
             playerStatus->currentStateTime = 1;
             playerStatus->gravityIntegrator[0] = 20.0f;

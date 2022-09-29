@@ -1963,7 +1963,7 @@ typedef struct PlayerStatus {
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
-    /* 0x0C2 */ s16 unk_C2;
+    /* 0x0C2 */ s16 peakJumpTime; // frame of current jump when player Y velocity went from position to negative
     /* 0x0C4 */ s8 peachItemHeld;
     /* 0x0C5 */ s8 camResetDelay;
     /* 0x0C6 */ s16 interactingWithID;

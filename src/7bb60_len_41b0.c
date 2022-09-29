@@ -383,7 +383,7 @@ void phys_player_land(void) {
     f32 moveMagnitude;
 
     playerStatus->timeInAir = 0;
-    playerStatus->unk_C2 = 0;
+    playerStatus->peakJumpTime = 0;
     playerStatus->flags &= ~PS_FLAGS_800000;
     playerStatus->landPos.x = playerStatus->position.x;
     playerStatus->landPos.z = playerStatus->position.z;
@@ -1081,7 +1081,7 @@ void func_800E4F10(void) {
 void check_input_midair_jump(void) {
     if (!(gPlayerStatus.flags & (PS_FLAGS_800000 | PS_FLAGS_10 | PS_FLAGS_FLYING)) &&
         !(gPlayerStatus.animFlags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_HOLDING_WATT)) &&
-        gPlayerStatus.unk_C2 >= 6 &&
+        gPlayerStatus.peakJumpTime >= 6 &&
         gPlayerStatus.timeInAir < 18 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
 
