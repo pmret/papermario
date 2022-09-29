@@ -1,7 +1,7 @@
 name: Paper Mario (North America)
-basename: papermario
 sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0
 options:
+  basename: papermario
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
@@ -14,7 +14,7 @@ options:
   extensions_path: tools/splat_ext
   symbol_addrs_path: ver/us/symbol_addrs.txt
   ld_script_path: ver/us/papermario.ld
-  linker_symbol_header_path: ver/us/build/include/ld_addrs.h
+  ld_symbol_header_path: ver/us/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/us/asm
   asset_path: assets/us
@@ -320,13 +320,15 @@ segments:
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
     - [0x52EE0, .data, state_demo]
-    - [0x52FF0, data]
+    - [0x52FF0, .data, npc]
+    - [0x53040, .data, 1a1f0_len_5390]
+    - [0x53560, .data, status_icons]
     - [0x53570, .data, audio/25f00_len_940]
     - [0x53590, .data, audio/sfx_player]
     - [0x541B0, .data, audio/30450]
     - [0x54250, .data, audio/31650]
     - [0x54260, .data, audio/33450]
-    - [0x54360, data]
+    - [0x54360, data] # some audio table
     - [0x5A3E0, .data, audio/reverb]
     - [0x5A610, .data, effects]
     - [0x5B320, .data, 5B320]
@@ -350,7 +352,7 @@ segments:
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/osSetThreadPri]
-    - [0x6FA70, data] # has scripts?
+    - [0x6FA70, data] # libultra data
     - [0x70E30, .data, battle/battle]
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
@@ -1378,6 +1380,7 @@ segments:
       - [0x1C0560, ia8, ui/battle/swap_background, 48, 16]
       - [0x1C0860]
     - [0x1C2100, data, 1C2100]
+    - [0x1C2A70, .data, 196AA0]
     - [0x1C2EC0, .data, 19FAF0]
     - [0x1C2FC0, .data, 1A5830]
     - [0x1C3000, .data, 1AF120]
@@ -11420,7 +11423,14 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE20110, c, E20110]
-    - [0xE20B30, data]
+    - start: 0xE20B30
+      type: .data
+      name: E20110
+      subsegments:
+      - [0xE20B30, ci4, inspect_icon, 32, 32]
+      - [0xE20D30, palette, inspect_icon]
+      - [0xE20D50, gfx, inspect_icon_dlist]
+      - [0xE20DC8]
     - [0xE20DD0]
   - type: code
     start: 0xE20EB0
@@ -11441,14 +11451,31 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE21870, c, E21870]
-    - [0xE21EB0, data]
+    - start: 0xE21EB0
+      type: .data
+      name: E21870
+      subsegments:
+      - [0xE21EB0, ci4, pulse_stone, 56, 56]
+      - [0xE224D0, palette, pulse_stone]
+      - [0xE224F0, palette, pulse_stone.flash]
+      - [0xE22510, gfx, pulse_stone_dlist]
+      - [0xE22588]
     - [0xE22590]
   - type: code
     start: 0xE225B0
     vram: 0x802B7000
     subsegments:
     - [0xE225B0, c, E225B0]
-    - [0xE22B30, data]
+    - start: 0xE22B30
+      type: .data
+      name: E225B0
+      subsegments:
+      - [0xE22B30, ci4, i_spy, 56, 56]
+      - [0xE23150, palette, i_spy]
+      - [0xE23170, palette, i_spy.2]
+      - [0xE23190, palette, i_spy.flash]
+      - [0xE231B0, gfx, i_spy_dlist]
+      - [0xE23228]
     - [0xE23230]
   - type: code
     name: world_action_idle
@@ -12766,7 +12793,7 @@ segments:
     - [0xEA0900, c]
     - [0xEA0C10, c, EA0C10]
     - [0xEA36E0, c, EA36E0]
-    - [0xEA3A80, data]
+    - [0xEA3A80, data, dead/EA3A80]
     - [0xEA6D70]
   - type: code
     start: 0xEA6FD0
@@ -12775,13 +12802,13 @@ segments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
-    - [0xEA7390, data]
+    - [0xEA7390, data, dead/EA7390]
   - type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
     - [0xEA8AE0, c]
-    - [0xEAA810, data]
+    - [0xEAA810, data, dead/EAA810]
     - [0xEB0E20]
   - type: code
     start: 0xEB0E60
@@ -12789,21 +12816,21 @@ segments:
     subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
-    - [0xEB1920, data]
+    - [0xEB1920, data, dead/EB1920]
   - type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
-    - [0xEB54C0, data]
+    - [0xEB54C0, data, dead/EB54C0]
   - type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
     - [0xEB7230, c]
     - [0xEB7540, c, EB7540]
-    - [0xEB7850, data]
+    - [0xEB7850, data, dead/EB7850]
     - [0xEB8E40]
   - type: code
     start: 0xEB8E50
@@ -12812,7 +12839,7 @@ segments:
     - [0xEB8E50, c, EB8E50]
     - [0xEB8E90, c, EB8E90]
     - [0xEB9D90, c]
-    - [0xEBA260, data]
+    - [0xEBA260, data, dead/EBA260]
     - [0xEC2000]
   - type: code
     start: 0xEC2200
@@ -12821,7 +12848,7 @@ segments:
     - [0xEC2200, c, EC2200]
     - [0xEC2240, c, EC2240]
     - [0xEC2610, c]
-    - [0xEC2850, data]
+    - [0xEC2850, data, dead/EC2850]
     - [0xEC7170]
   - type: code
     start: 0xEC71B0
@@ -12829,7 +12856,7 @@ segments:
     subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
-    - [0xEC78F0, data]
+    - [0xEC78F0, data, dead/EC78F0]
   - type: code
     start: 0xEC9D00
     vram: 0x80240000
@@ -12839,7 +12866,7 @@ segments:
     - [0xECAA80, c, ECAA80]
     - [0xECB930, c]
     - [0xECBB70, c]
-    - [0xECBC10, data]
+    - [0xECBC10, data, dead/ECBC10]
     - [0xECFE60]
   - type: code
     start: 0xECFFF0
@@ -12849,7 +12876,7 @@ segments:
     - [0xED0030, c]
     - [0xED00D0, c]
     - [0xED0310, c]
-    - [0xED1840, data]
+    - [0xED1840, data, dead/ED1840]
     - [0xED41C0]
   - type: code
     start: 0xED4220
@@ -12860,13 +12887,13 @@ segments:
     - [0xED42A0, c]
     - [0xED46D0, c]
     - [0xED5540, c]
-    - [0xED5780, data]
+    - [0xED5780, data, dead/ED5780]
   - type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
     - [0xED8E20, c, ED8E20]
-    - [0xED9170, data]
+    - [0xED9170, data, dead/ED9170]
     - [0xEDBF90]
   - type: code
     start: 0xEDBFE0
@@ -12874,7 +12901,7 @@ segments:
     subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
-    - [0xEDC6D0, data]
+    - [0xEDC6D0, data, dead/EDC6D0]
   - type: code
     start: 0xEDE9C0
     vram: 0x80240000
@@ -12882,7 +12909,7 @@ segments:
     - [0xEDE9C0, c]
     - [0xEDEA00, c, EDEA00]
     - [0xEE2040, c, EE2040]
-    - [0xEE20E0, data]
+    - [0xEE20E0, data, dead/EE20E0]
     - [0xEE64B0]
   - type: code
     start: 0xEE65B0
@@ -12891,7 +12918,7 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data]
+    - [0xEE8970, data, dead/EE8970]
     - [0xEEB900]
   - type: code
     start: 0xEED100
@@ -12902,7 +12929,7 @@ segments:
     - [0xEED1E0, c]
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
-    - [0xEEFAD0, data]
+    - [0xEEFAD0, data, dead/EEFAD0]
     - [0xEF2550]
   - type: code
     start: 0xEF2610
@@ -12911,7 +12938,7 @@ segments:
     - [0xEF2610, c]
     - [0xEF2650, c]
     - [0xEF2680, c, EF2680]
-    - [0xEF58E0, data]
+    - [0xEF58E0, data, dead/EF58E0]
     - [0xEF79C0]
   - type: code
     start: 0xEF7A80
@@ -12920,7 +12947,7 @@ segments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
-    - [0xEF8250, data]
+    - [0xEF8250, data, dead/EF8250]
   - type: code
     start: 0xEFEB00
     vram: 0x80240000

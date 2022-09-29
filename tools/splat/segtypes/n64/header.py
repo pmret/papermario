@@ -1,11 +1,10 @@
 from segtypes.common.header import CommonSegHeader
-from pathlib import Path
 from util import options
 
 
 class N64SegHeader(CommonSegHeader):
     def parse_header(self, rom_bytes):
-        encoding = options.get_header_encoding()
+        encoding = options.opts.header_encoding
 
         header_lines = []
         header_lines.append(f".section .data\n")

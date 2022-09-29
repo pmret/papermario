@@ -1,8 +1,7 @@
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Dict, Optional, OrderedDict, Union, List
 from pathlib import Path
-from segtypes.common.data import CommonSegData
-from segtypes.n64.img import N64SegImg
 from segtypes.n64.palette import N64SegPalette
 from util import options
 from segtypes.segment import Segment
@@ -10,9 +9,10 @@ import os
 import re
 
 # clean 'foo/../bar' to 'bar'
+@lru_cache(maxsize=None)
 def clean_up_path(path: Path) -> Path:
     path_resolved = path.resolve()
-    base_resolved = options.get_base_path().resolve()
+    base_resolved = options.opts.base_path.resolve()
     try:
         return path_resolved.relative_to(base_resolved)
     except ValueError:
@@ -31,11 +31,11 @@ def clean_up_path(path: Path) -> Path:
 
 def path_to_object_path(path: Path) -> Path:
     path = clean_up_path(path)
-    if options.use_o_as_suffix():
+    if options.opts.use_o_as_suffix:
         full_suffix = ".o"
     else:
         full_suffix = path.suffix + ".o"
-    return clean_up_path(options.get_build_path() / path.with_suffix(full_suffix))
+    return clean_up_path(options.opts.build_path / path.with_suffix(full_suffix))
 
 
 def write_file_if_different(path: Path, new_content: str):
@@ -107,8 +107,7 @@ class LinkerEntry:
 
 class LinkerWriter:
     def __init__(self):
-        self.shiftable: bool = options.get_shiftable()
-        self.linker_discard_section: bool = options.linker_discard_section()
+        self.linker_discard_section: bool = options.opts.ld_discard_section
         self.entries: List[LinkerEntry] = []
 
         self.buffer: List[str] = []
@@ -120,8 +119,8 @@ class LinkerWriter:
         self._begin_block()
         self._writeln(f"__romPos = 0;")
 
-        if options.get_gp() is not None:
-            self._writeln("_gp = " + f"0x{options.get_gp():X};")
+        if options.opts.gp is not None:
+            self._writeln("_gp = " + f"0x{options.opts.gp:X};")
 
     # Adds all the entries of a segment to the linker script buffer
     def add(self, segment: Segment, next_segment: Optional[Segment]):
@@ -133,8 +132,8 @@ class LinkerWriter:
         section_labels: OrderedDict[str, LinkerSection] = OrderedDict(
             {
                 l: LinkerSection(l)
-                for l in options.get_section_order()
-                if l in options.ld_section_labels()
+                for l in options.opts.section_order
+                if l in options.opts.ld_section_labels
             }
         )
 
@@ -274,11 +273,11 @@ class LinkerWriter:
         assert self._indent_level == 0
 
         write_file_if_different(
-            options.get_ld_script_path(), "\n".join(self.buffer) + "\n"
+            options.opts.ld_script_path, "\n".join(self.buffer) + "\n"
         )
 
     def save_symbol_header(self):
-        path = options.get_linker_symbol_header_path()
+        path = options.opts.ld_symbol_header_path
 
         if path:
             write_file_if_different(

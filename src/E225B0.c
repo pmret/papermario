@@ -1,9 +1,7 @@
 #include "common.h"
 
 typedef struct struct802B7C78 {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
+    /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 scale;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
@@ -14,14 +12,18 @@ typedef struct struct802B7C78 {
     /* 0x28 */ s32 unk_28;
 } struct802B7C78;
 
-extern u8 D_802B7580_E22B30[];
-extern u8 D_802B7BA0_E23150[];
-extern u8 D_802B7BC0_E23170[];
-extern u8 D_802B7BE0_E23190[];
-extern Gfx D_802B7C00_E231B0[];
+#include "i_spy.png.h"
+#include "i_spy.png.inc.c"
+#include "i_spy.pal.inc.c"
+#include "i_spy.2.pal.inc.c"
+#include "i_spy.flash.pal.inc.c"
+#include "i_spy_dlist.gfx.inc.c"
+
+BSS struct802B7C78 D_802B7CB0;
+
+struct802B7C78* D_802B7C78_E23228 = &D_802B7CB0;
 
 extern void (*D_8010C93C)(void);
-extern struct802B7C78* D_802B7C78_E23228;
 
 void func_802B735C_E2290C(void);
 
@@ -29,29 +31,22 @@ void func_802B7000_E225B0(void) {
     Matrix4f matrix1;
     Matrix4f matrix2;
     FoldImageRecPart foldImage;
-
-    Gfx* oldMasterGfxPos;
-    f32 scale;
     s32 temp;
-    s32 matrixIndex;
-    struct802B7C78* localD_802B7C78_E23228;
-    u16 oldMatrixListPos;
 
     if (gPlayerStatus.animFlags & PA_FLAGS_100) {
         guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale,
             D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
-        guTranslateF(matrix2, D_802B7C78_E23228->x, D_802B7C78_E23228->y, D_802B7C78_E23228->z);
+        guTranslateF(matrix2, D_802B7C78_E23228->pos.x, D_802B7C78_E23228->pos.y, D_802B7C78_E23228->pos.z);
         guMtxCatF(matrix1, matrix2, matrix2);
         guMtxF2L(matrix2, (Mtx*) &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
         gSPDisplayList(gMasterGfxPos++, D_802B7C00_E231B0);
 
-        localD_802B7C78_E23228 = D_802B7C78_E23228;
-        if (localD_802B7C78_E23228->unk_18 < 47) {
-            localD_802B7C78_E23228->unk_20 += 1;
+        if (D_802B7C78_E23228->unk_18 < 47) {
+            D_802B7C78_E23228->unk_20 += 1;
         }
 
         temp = D_802B7C78_E23228->unk_20;
@@ -94,9 +89,9 @@ void func_802B7000_E225B0(void) {
 void func_802B72C0_E22870(void) {
     mem_clear(D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
 
-    D_802B7C78_E23228->x = gPlayerStatus.position.x;
-    D_802B7C78_E23228->y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
-    D_802B7C78_E23228->z = gPlayerStatus.position.z;
+    D_802B7C78_E23228->pos.x = gPlayerStatus.position.x;
+    D_802B7C78_E23228->pos.y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
+    D_802B7C78_E23228->pos.z = gPlayerStatus.position.z;
 
     D_802B7C78_E23228->unk_28 = 0xFF;
 
@@ -105,58 +100,53 @@ void func_802B72C0_E22870(void) {
 }
 
 void func_802B735C_E2290C(void) {
-    f32 temp_f2;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    struct802B7C78* temp_a0;
-    struct802B7C78* temp_v1_3;
-    s32 phi_v0;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    s32 cond;
 
-    temp_a0 = D_802B7C78_E23228;
-    temp_f2 = temp_a0->y;
-    temp_v1 = temp_a0->unk_24;
-    temp_a0->y = temp_f2 + (((playerStatus->position.y + playerStatus->colliderHeight + 10.0f) - temp_f2) / 1.5f);
-    temp_a0->x = playerStatus->position.x;
-    temp_a0->z = playerStatus->position.z;
+    D_802B7C78_E23228->pos.y +=
+        (playerStatus->position.y + playerStatus->colliderHeight + 10.0f - D_802B7C78_E23228->pos.y) / 1.5f;
+    D_802B7C78_E23228->pos.x = playerStatus->position.x;
+    D_802B7C78_E23228->pos.z = playerStatus->position.z;
 
-    switch (temp_v1) {
+    switch (D_802B7C78_E23228->unk_24) {
         case 0:
-            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
-                phi_v0 = gGameStatusPtr->keepUsingPartnerOnMapChange;
+            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE &&
+                partnerActionStatus->actingPartner == PARTNER_LAKILESTER)
+            {
+                cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
-                phi_v0 = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000);
+                cond = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000);
             }
-            if (phi_v0 == 0) {
-                temp_v1_3 = D_802B7C78_E23228;
-                temp_v1_3->unk_24 += 1;
+
+            if (!cond) {
+                D_802B7C78_E23228->unk_24++;
                 return;
             }
             break;
         case 1:
             if (playerStatus->flags & PS_FLAGS_20) {
-                temp_a0->unk_24 = 3;
+                D_802B7C78_E23228->unk_24 = 3;
                 return;
             }
 
-            if (temp_a0->unk_18++ >= 0x10) {
-                temp_a0->scale = 0.36f;
-                temp_a0->unk_24 += 1;
+            if (D_802B7C78_E23228->unk_18++ >= 16) {
+                D_802B7C78_E23228->scale = 0.36f;
+                D_802B7C78_E23228->unk_24++;
             }
             break;
         case 2:
-            temp_a0->scale = 0.57f;
-            temp_a0->unk_24 += 1;
+            D_802B7C78_E23228->scale = 0.57f;
+            D_802B7C78_E23228->unk_24++;
             sfx_play_sound_at_player(SOUND_17B, 0);
             break;
         case 3:
-            temp_a0->scale = 0.53f;
-            if (temp_a0->unk_18 >= 0x2F || playerStatus->flags & PS_FLAGS_20) {
-                temp_a0->unk_28 -= 0x40;
-                if (temp_a0->unk_28 < 0) {
-                    temp_a0->unk_28 = 0;
-                    temp_a0->unk_18 = 0x33;
+            D_802B7C78_E23228->scale = 0.53f;
+            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAGS_20) {
+                D_802B7C78_E23228->unk_28 -= 64;
+                if (D_802B7C78_E23228->unk_28 < 0) {
+                    D_802B7C78_E23228->unk_28 = 0;
+                    D_802B7C78_E23228->unk_18 = 51;
                 }
             }
 

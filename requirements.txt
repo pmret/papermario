@@ -10,3 +10,4 @@ spimdisasm
 pygfxd
 intervaltree
 rabbitizer
+n64img

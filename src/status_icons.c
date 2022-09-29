@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "hud_element.h"
+#include "message_ids.h"
 
 #define MAX_ICONS (64)
 
@@ -69,9 +70,12 @@ typedef struct HudStatusIcon {
     /* 0xA8 */ HudSimpleStatusIcon danger;
 } HudStatusIcon; // size = 0xB0
 
-extern s16 D_80078160[];
-extern s16 D_80078164[];
-extern s32 D_80078168[];
+s16 D_80078160[] = { 28, 40 };
+s16 D_80078164[] = { 0, -2 };
+s32 D_80078168[] = {
+    MSG_Menus_Merlee_IncreaseCoins,
+    MSG_Menus_Merlee_Exhausted,
+};
 
 extern HudScript HES_Item_Present;
 
@@ -108,7 +112,6 @@ extern HudScript HES_BoostPartner;
 extern HudScript HES_Surprise;
 extern HudScript HES_Peril;
 extern HudScript HES_Danger;
-
 
 void update_merlee_message(void* popup);
 void draw_merlee_message(void* popup);

@@ -389,6 +389,7 @@ D_80246894 = 0x80246894;
 dead_gCurrentCameraID = 0x8007C760;
 dead_gGameStatusPtr = 0x80079430;
 D_80079540 = 0x80079540;
+dead_gPartnerPopupProperties = 0x80094900;
 
 // TODO below
 

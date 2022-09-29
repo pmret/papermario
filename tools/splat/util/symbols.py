@@ -52,7 +52,7 @@ def initialize(all_segments: "List[Segment]"):
         return None
 
     # Manual list of func name / addrs
-    for path in options.get_symbol_addrs_paths():
+    for path in options.opts.symbol_addrs_paths:
         if path.exists():
             with open(path) as f:
                 sym_addrs_lines = f.readlines()
@@ -410,9 +410,9 @@ class Symbol:
                 suffix = self.format_name(self.segment.symbol_name_format_no_rom)
         else:
             if isinstance(self.rom, int):
-                suffix = self.format_name(options.get_symbol_name_format())
+                suffix = self.format_name(options.opts.symbol_name_format)
             else:
-                suffix = self.format_name(options.get_symbol_name_format_no_rom())
+                suffix = self.format_name(options.opts.symbol_name_format_no_rom)
 
         if self.type == "func":
             prefix = "func"
