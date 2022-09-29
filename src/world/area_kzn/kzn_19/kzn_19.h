@@ -25,6 +25,7 @@ enum {
 };
 
 enum {
+	MV_Unk_00					= MapVar(0),
 	MV_Unk_0A					= MapVar(10),
 };
 

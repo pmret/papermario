@@ -5,7 +5,29 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 s32** N(varStash) = NULL;
 
-#include "world/common/StashVars.inc.c"
+//TODO temporarily moved from #include "world/common/StashVars.inc.c" to suppresse warnings
+ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
+    //static s32** varTable = NULL;
+    s32 i;
+
+    if (N(varStash) == NULL) {
+        N(varStash) = heap_malloc(sizeof(script->varTable));
+
+        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+            N(varStash)[i] = (s32*) script->varTable[i];
+        }
+    } else {
+        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+            script->varTable[i] = (s32) N(varStash)[i];
+        }
+
+        heap_free(N(varStash));
+        N(varStash) = NULL;
+    }
+
+    return ApiStatus_DONE2;
+}
+
 
 EvtScript N(Delivery_ShowGotStarPiece) = {
     EVT_CALL(ShowGotItem, LVar0, TRUE, 0)

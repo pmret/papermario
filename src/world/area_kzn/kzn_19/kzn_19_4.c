@@ -14,10 +14,7 @@ extern NpcSettings N(NpcSettings_Misstar);
 extern NpcSettings N(NpcSettings_LavaPiranhaHead);
 
 extern API_CALLABLE(func_80241BC0_C8F770);
-extern API_CALLABLE(func_8024140C_C8EFBC);
 extern API_CALLABLE(func_802413FC_C8EFAC);
-extern API_CALLABLE(func_80240BD4_C8E784);
-extern API_CALLABLE(func_80240CD8_C8E888);
 extern API_CALLABLE(func_80240DA4_C8E954);
 
 s32 N(D_802434D8_C91088)[] = {
@@ -136,21 +133,122 @@ s32 D_80243BB8_C91768[] = {
     0x007E03B0, 0x007E0E80, 0x80234000, 
 };
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240B00_C8E6B0);
+typedef struct UnkStruct_kzn_19_len1E0 {
+    /* 0x000 */ Vec3f unk_00[9];
+    /* 0x06C */ f32 unk_6C[9];
+    /* 0x090 */ s32 unk90;
+    /* 0x094 */ char pad94[4];
+    /* 0x098 */ Vec3f points[27];
+    /* 0x1DC */ s32 numPoints;
+} UnkStruct_kzn_19_len1E0;
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240BD4_C8E784);
+typedef struct UnkStruct_kzn_19_len780 {
+    UnkStruct_kzn_19_len1E0 unk_00[4];
+} UnkStruct_kzn_19_len780; // size = 0x780
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240CD8_C8E888);
+static s32 D_80248380_kzn_19;
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240DA4_C8E954);
+void func_80240B00_C8E6B0(UnkStruct_kzn_19_len1E0* sub) {
+    Evt dummyEvt;
+    Evt* dummyEvtPtr = &dummyEvt;
+    s32 args[4];
+    s32 count;
+
+    // setup dummy call to LoadPath
+    args[0] = sub->unk90 * 3;        // time
+    args[1] = (s32) &sub->unk_00;    // points
+    args[2] = sub->unk90;            // num vectors
+    args[3] = EASING_LINEAR;
+    dummyEvtPtr->ptrReadPos = args;
+    LoadPath(dummyEvtPtr, 1);
+
+    count = 0;
+    do {
+        GetNextPathPos(dummyEvtPtr, 1);
+        sub->points[count].x = evt_get_float_variable(dummyEvtPtr, LocalVar(1));
+        sub->points[count].y = evt_get_float_variable(dummyEvtPtr, LocalVar(2));
+        sub->points[count].z = evt_get_float_variable(dummyEvtPtr, LocalVar(3));
+        count++;
+    } while (dummyEvtPtr->varTable[0] != 0);
+    sub->numPoints = count;
+}
+
+API_CALLABLE(func_80240BD4_C8E784) {
+    UnkStruct_kzn_19_len780* data;
+    UnkStruct_kzn_19_len1E0* sub;
+    Bytecode* args = script->ptrReadPos;
+    s32 i = evt_get_variable(script, *args++);
+    s32 j = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+
+    data = (UnkStruct_kzn_19_len780*) evt_get_variable(NULL, MapVar(0));
+    sub = &data->unk_00[i];
+    sub->unk_00[j].x = x;
+    sub->unk_00[j].y = y;
+    sub->unk_00[j].z = z;
+
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(func_80240CD8_C8E888) {
+    Bytecode* args = script->ptrReadPos;    
+    UnkStruct_kzn_19_len780* data;
+    UnkStruct_kzn_19_len1E0* sub;
+    s32 value;
+    
+    s32 i = evt_get_variable(script, *args++);
+    s32 j = evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    value = evt_get_variable(script, *args++);
+    data = (UnkStruct_kzn_19_len780*) evt_get_variable(NULL, MapVar(0));
+    sub = &data->unk_00[i];
+    sub->unk_6C[j] = value;
+    
+    return ApiStatus_DONE2;
+}
+
+// what the...
+API_CALLABLE(func_80240DA4_C8E954) {
+    Bytecode* args = script->ptrReadPos;
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(NULL, MapVar(0));
+    return ApiStatus_DONE2;
+}
+
+void func_80240E2C_C8E9DC(void *data);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240E2C_C8E9DC);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802413C0_C8EF70);
+void func_802413C0_C8EF70(void) {
+    RenderTask renderTask;
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802413FC_C8EFAC);
+    renderTask.appendGfx = &func_80240E2C_C8E9DC;
+    renderTask.appendGfxArg = 0;
+    renderTask.distance = 10;
+    renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_8024140C_C8EFBC);
+    queue_render_task(&renderTask);
+}
+
+API_CALLABLE(func_802413FC_C8EFAC) {
+    D_80248380_kzn_19 = 0;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(func_8024140C_C8EFBC) {
+    UnkStruct_kzn_19_len780* data = heap_malloc(sizeof(*data));
+    evt_set_variable(script, MV_Unk_00, (s32) data);
+    D_80248380_kzn_19 = -1;
+    create_generic_entity_world(NULL, &func_802413C0_C8EF70);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/atomic/LetterChoice.inc.c"
 
