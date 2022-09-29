@@ -182,7 +182,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             func_802BD514_319A84(parakarry);
             if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
                 if (partnerActionStatus->partnerAction_unk_1 == 0) {
-                    if (!func_800EA52C(4)) {
+                    if (!func_800EA52C(PARTNER_PARAKARRY)) {
                         return ApiStatus_DONE2;
                     }
                     D_802BEBC0_31CBE0 = 0x28;
@@ -217,7 +217,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             case 41:
                 if (D_802BEBC4 == 0) {
                     if (evt->functionTemp[2] >= playerStatus->inputEnabledCounter) {
-                        if (func_800EA52C(4)) {
+                        if (func_800EA52C(PARTNER_PARAKARRY)) {
                             D_802BEBC0_31CBE0 = 30;
                             break;
                         }
