@@ -27,6 +27,7 @@ enum {
     AF_KZN_05       = AreaFlag(5),
     AF_KZN_06       = AreaFlag(6),
     AF_KZN_07       = AreaFlag(7),
+    AF_KZN_08       = AreaFlag(8),
     AF_KZN_09       = AreaFlag(9),
     AF_KZN_0A       = AreaFlag(10),
     AF_KZN_0B       = AreaFlag(11),
