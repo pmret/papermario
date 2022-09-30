@@ -20,7 +20,7 @@ API_CALLABLE(N(AdjustFog)) {
     colB = evt_get_variable(script, *args++);
     duration = evt_get_variable(script, *args++);
     mode = evt_get_variable(script, *args++);
-    iterList = modelIDs; 
+    iterList = modelIDs;
     
     if (isInitialCall) {
         for (i = 0; i < iterList->count; i++) {
@@ -35,10 +35,10 @@ API_CALLABLE(N(AdjustFog)) {
     }
     
     if (mode) {
-        set_background_color_blend(colR, colG, colB, 
+        set_background_color_blend(colR, colG, colB,
             (script->functionTemp[0] * 255) / duration);
     } else {
-        set_background_color_blend(colR, colG, colB, 
+        set_background_color_blend(colR, colG, colB,
             255 - ((script->functionTemp[0] * 255) / duration));
     }
     

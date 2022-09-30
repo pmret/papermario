@@ -79,7 +79,7 @@ EvtScript N(EVS_UpdateEruption) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_ELSE
-        // GB_StoryProgress == STORY_CH5_MT_LAVA_LAVA_ERUPTING 
+        // GB_StoryProgress == STORY_CH5_MT_LAVA_LAVA_ERUPTING
         EVT_EXEC(N(EVS_SetFloorCracked))
     EVT_END_IF
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hoshi, COLLIDER_FLAGS_UPPER_MASK)

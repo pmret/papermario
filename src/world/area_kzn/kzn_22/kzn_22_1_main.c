@@ -59,7 +59,7 @@ EvtScript N(EVS_InterruptPartnersInLava) = {
         EVT_END_LOOP
         EVT_CALL(GetCurrentPartnerID, LVar1)
         EVT_IF_NE(LVar1, PARTNER_LAKILESTER)
-            EVT_CALL(InterruptUsePartner) 
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(SetPlayerActionState, ACTION_STATE_HIT_LAVA)
             EVT_WAIT(30)
         EVT_END_IF

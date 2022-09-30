@@ -234,7 +234,7 @@ NpcSettings N(NpcSettings_Kolorado) = {
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_Kolorado_LetterDelivery) = {

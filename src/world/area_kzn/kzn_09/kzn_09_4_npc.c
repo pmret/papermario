@@ -226,7 +226,7 @@ NpcSettings N(NpcSettings_Dummy) = {
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(D_80245B64_C7C844) = {

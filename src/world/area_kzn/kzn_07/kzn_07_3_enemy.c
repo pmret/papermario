@@ -7,7 +7,7 @@
 #include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
 f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
 };
 
 MobileAISettings N(D_80242BA8_C70ED8) = {

@@ -48,7 +48,7 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_Kolorado_LetterDelivery) = {
-    EVT_CALL(N(LetterDelivery_Init), 
+    EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER25, 0,
         MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
@@ -125,19 +125,19 @@ EvtScript N(EVS_ShakingWorld) = {
 s32 N(Kolorado_Wander1)[] = {
     // speed, moveToX, moveToZ, loiter time
     2,  -75, 195, 35,
-    2,  -60, 175, 25, 
+    2,  -60, 175, 25,
     1,  -95, 165, 15,
-    1, -110, 120, 35, 
-    -1, 
+    1, -110, 120, 35,
+    -1,
 };
 
 s32 N(Kolorado_Wander2)[] = {
     // speed, moveToX, moveToZ, loiter time
     1,  -25, 195, 20,
     2,  -75, 195, 35,
-    1,  -60, 175, 25, 
-    2, -120, 140, 15, 
-    -1, 
+    1,  -60, 175, 25,
+    2, -120, 140, 15,
+    -1,
 };
 
 EvtScript N(EVS_Kolorado_CalmIdle) = {

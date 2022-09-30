@@ -7,7 +7,7 @@ API_CALLABLE(N(AwaitLetterChoiceResult));
 API_CALLABLE(N(SetLetterChoiceResult));
 
 f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
 };
 
 #include "world/common/enemy/FlyingAI.inc.c"

@@ -4,9 +4,9 @@
 #include "world/common/enemy/FireBarAI.inc.c"
 
 s32 N(FireBar_Sounds)[] = {
-    SOUND_FireBar0, SOUND_FireBar1, SOUND_FireBar2, SOUND_FireBar3, 
-    SOUND_FireBar4, SOUND_FireBar5, SOUND_FireBar6, SOUND_FireBar7, 
-    SOUND_FireBar8, SOUND_FireBar9, SOUND_FireBar9, 
+    SOUND_FireBar0, SOUND_FireBar1, SOUND_FireBar2, SOUND_FireBar3,
+    SOUND_FireBar4, SOUND_FireBar5, SOUND_FireBar6, SOUND_FireBar7,
+    SOUND_FireBar8, SOUND_FireBar9, SOUND_FireBar9,
 };
 
 EvtScript N(EVS_FireBar_Defeated) = {

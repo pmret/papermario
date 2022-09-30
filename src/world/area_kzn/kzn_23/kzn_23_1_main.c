@@ -8,7 +8,7 @@ extern NpcGroupList N(DefaultNPCs);
 // should add to zero over a full cycle
 s32 N(LavaFluctuationOffsets)[] = {
      1,  2,  3,  3,  2,  1,
-    -1, -2, -3, -3, -2, -1, 
+    -1, -2, -3, -3, -2, -1,
 };
 
 // overlay a sinusoidal offset to the lava level

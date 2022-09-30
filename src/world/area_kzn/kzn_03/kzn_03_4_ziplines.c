@@ -64,7 +64,7 @@ Vec3f N(Zipline_Endpoints1)[] = {
 
 Vec3f N(Zipline_Endpoints2)[] = {
     {  297.0, 608.0, 255.0 },
-    { -362.0, 267.0, 255.0 }, 
+    { -362.0, 267.0, 255.0 },
 };
 
 EvtScript N(EVS_Zipline_TetherCameraToPlayer) = {

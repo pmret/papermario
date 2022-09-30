@@ -155,7 +155,7 @@ Vec3f N(PyroclastPathD)[] = {
 };
 
 s32 N(SoundXPositions)[] = {
-    130, -150, 130, -150, 
+    130, -150, 130, -150,
 };
 
 EvtScript N(EVS_PlayPyroclastSounds) = {

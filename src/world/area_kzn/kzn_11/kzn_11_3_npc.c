@@ -1,7 +1,7 @@
 #include "kzn_11.h"
 
 f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
 };
 
 #include "world/common/enemy/FlyingAI.inc.c"
@@ -42,9 +42,9 @@ NpcSettings N(NpcSettings_Bubble) = {
 };
 
 s32 N(FireBar_Sounds)[] = {
-    SOUND_FireBar0, SOUND_FireBar1, SOUND_FireBar2, SOUND_FireBar3, 
-    SOUND_FireBar4, SOUND_FireBar5, SOUND_FireBar6, SOUND_FireBar7, 
-    SOUND_FireBar8, SOUND_FireBar9, SOUND_FireBar9, 
+    SOUND_FireBar0, SOUND_FireBar1, SOUND_FireBar2, SOUND_FireBar3,
+    SOUND_FireBar4, SOUND_FireBar5, SOUND_FireBar6, SOUND_FireBar7,
+    SOUND_FireBar8, SOUND_FireBar9, SOUND_FireBar9,
 };
 
 EvtScript N(EVS_FireBar_Defeated) = {
