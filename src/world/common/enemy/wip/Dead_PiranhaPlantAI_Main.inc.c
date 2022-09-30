@@ -51,7 +51,7 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
             N(PiranhaPlantAI_01)(script, settings, territoryPtr);
             break;
         case 10:
-            func_80240DC4_EA16C4(script, settings, territoryPtr);
+            N(PiranhaPlantAI_10)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 11) {
                 break;
             }

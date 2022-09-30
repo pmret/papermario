@@ -5,7 +5,7 @@ from util import options
 
 class CommonSegHeader(CommonSegment):
     def should_split(self):
-        return self.extract and options.mode_active("code")
+        return self.extract and options.opts.is_mode_active("code")
 
     @staticmethod
     def get_line(typ, data, comment):
@@ -21,7 +21,7 @@ class CommonSegHeader(CommonSegment):
         return f".{typ} {dstr} /* {comment} */"
 
     def out_path(self) -> Path:
-        return options.get_asm_path() / self.dir / f"{self.name}.s"
+        return options.opts.asm_path / self.dir / f"{self.name}.s"
 
     def parse_header(self, rom_bytes):
         return []

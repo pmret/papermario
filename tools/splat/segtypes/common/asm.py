@@ -7,7 +7,7 @@ from util import options
 
 class CommonSegAsm(CommonSegCodeSubsegment):
     def out_path(self) -> Optional[Path]:
-        return options.get_asm_path() / self.dir / f"{self.name}.s"
+        return options.opts.asm_path / self.dir / f"{self.name}.s"
 
     def scan(self, rom_bytes: bytes):
         if (

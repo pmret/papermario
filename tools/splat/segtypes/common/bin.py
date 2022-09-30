@@ -7,7 +7,7 @@ from util import log
 
 class CommonSegBin(CommonSegment):
     def out_path(self) -> Optional[Path]:
-        return options.get_asset_path() / self.dir / f"{self.name}.bin"
+        return options.opts.asset_path / self.dir / f"{self.name}.bin"
 
     def split(self, rom_bytes):
         path = self.out_path()

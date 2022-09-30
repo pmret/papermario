@@ -3,20 +3,29 @@
 #include "effects.h"
 #include "sprite.h"
 
+
+s8 D_80077BF0[] = {
+    0x01, 0x02, 0x00, 0x34, 0x01, 0x04, 0x00, 0x36, 0x00, 0x36, 0x01, 0x02, 0x00, 0x1C, 0x01, 0x02, 0x00, 0x06, 0x01, 0x02, 0x00, 0x2C, 0x01, 0x02, 0x00, 0x2C, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+f32 D_80077C10 = 0.0f;
+s16 D_80077C14 = 4;
+s16 D_80077C16 = 0; // padding?
+f32 D_80077C18 = 0;
+s16 D_80077C1C = 4;
+s16 D_80077C1E = 5;
+s32 D_80077C20 = 0;
+s32 D_80077C24 = 0;
+s16 D_80077C28 = 4;
+s16 D_80077C2A = 0; // padding?
+s32 D_80077C2C = 0;
+s16 D_80077C30 = 4;
+s16 D_80077C32 = 0; // padding?
+s32 D_80077C34 = 0;
+s16 D_80077C38 = 4;
+s16 D_80077C3A = 4;
+
 extern s16 D_8010C97A;
-
-extern f32 D_80077C10;
-extern s16 D_80077C14;
-
-extern f32 D_80077C18;
-extern s16 D_80077C1C;
-extern s16 D_80077C1E;
-extern s32 D_80077C20;
-
-extern s16 D_80077C30;
-extern s32 D_80077C34;
-extern s16 D_80077C38;
-extern s16 D_80077C3A;
 
 void STUB_npc_callback(Npc* npc) {
 }

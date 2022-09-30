@@ -217,7 +217,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
         if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
             if (partnerActionStatus->partnerAction_unk_1 == 0) {
                 if ((partnerActionStatus->partnerActionState != ACTION_STATE_IDLE) ||
-                    (func_800EA52C(6) && !is_starting_conversation()))
+                    (func_800EA52C(PARTNER_WATT) && !is_starting_conversation()))
                 {
                     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
                         if (playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2)) {
@@ -259,7 +259,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[1] == 0) {
                 if (script->functionTemp[2] >= playerStatus->inputEnabledCounter) {
                     if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
-                        if (func_800EA52C(6)) {
+                        if (func_800EA52C(PARTNER_WATT)) {
                             if (!is_starting_conversation()) {
                                 D_802BE304 = 20;
                                 break;
