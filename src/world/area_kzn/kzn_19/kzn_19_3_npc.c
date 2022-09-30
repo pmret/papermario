@@ -16,16 +16,19 @@ enum {
 };
 
 typedef struct LavaPiranhaVine {
-    /* 0x000 */ Vec3f unk_00[9];
-    /* 0x06C */ f32 unk_6C[9];
-    /* 0x090 */ s32 unk_90;
-    /* 0x094 */ f32 unk_94;
+    /* 0x000 */ Vec3f bonePos[9];
+    /* 0x06C */ f32 boneRot[9];
+    /* 0x090 */ s32 boneCount;
+    /* 0x094 */ f32 boneLength;
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
 
+//TODO use this instead of LavaPiranhaVineSet
+typedef LavaPiranhaVine LavaPiranhaVines[NUM_VINES];
+
 typedef struct LavaPiranhaVineSet {
-    LavaPiranhaVine unk_00[NUM_VINES];
+    LavaPiranhaVine vines[NUM_VINES];
 } LavaPiranhaVineSet; // size = 0x780
 
 extern API_CALLABLE(SetAnimatorFlags);
@@ -172,9 +175,9 @@ void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     s32 count;
 
     // setup dummy call to LoadPath
-    args[0] = 3 * vine->unk_90;       // generate three output samples per input
-    args[1] = (s32) &vine->unk_00;    // points
-    args[2] = vine->unk_90;           // num vectors
+    args[0] = 3 * vine->boneCount;      // generate three output samples per input
+    args[1] = (s32) &vine->bonePos;     // points
+    args[2] = vine->boneCount;          // num vectors
     args[3] = EASING_LINEAR;
     dummyEvtPtr->ptrReadPos = args;
     LoadPath(dummyEvtPtr, 1);
@@ -190,7 +193,7 @@ void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     vine->numPoints = count;
 }
 
-API_CALLABLE(N(SetVineJointPos)) {
+API_CALLABLE(N(SetVineBonePos)) {
     Bytecode* args = script->ptrReadPos;
     s32 vineIdx = evt_get_variable(script, *args++);
     s32 jointIdx = evt_get_variable(script, *args++);
@@ -198,15 +201,15 @@ API_CALLABLE(N(SetVineJointPos)) {
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
     LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
+    LavaPiranhaVine* vine = &data->vines[vineIdx];
 
-    vine->unk_00[jointIdx].x = x;
-    vine->unk_00[jointIdx].y = y;
-    vine->unk_00[jointIdx].z = z;
+    vine->bonePos[jointIdx].x = x;
+    vine->bonePos[jointIdx].y = y;
+    vine->bonePos[jointIdx].z = z;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetVineJointRot)) {
+API_CALLABLE(N(SetVineBoneRot)) {
     Bytecode* args = script->ptrReadPos;
     s32 vineIdx = evt_get_variable(script, *args++);
     s32 jointIdx = evt_get_variable(script, *args++);
@@ -214,13 +217,13 @@ API_CALLABLE(N(SetVineJointRot)) {
     s32 ry = evt_get_variable(script, *args++);
     s32 rz = evt_get_variable(script, *args++);
     LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
+    LavaPiranhaVine* vine = &data->vines[vineIdx];
 
-    vine->unk_6C[jointIdx] = rz;
+    vine->boneRot[jointIdx] = rz;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetVineJointScale)) {
+API_CALLABLE(N(SetVineBoneScale)) {
     Bytecode* args = script->ptrReadPos;
     s32 vineIdx = evt_get_variable(script, *args++);
     s32 jointIdx = evt_get_variable(script, *args++);
@@ -228,7 +231,7 @@ API_CALLABLE(N(SetVineJointScale)) {
     s32 sy = evt_get_variable(script, *args++);
     s32 sz = evt_get_variable(script, *args++);
     LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
+    LavaPiranhaVine* vine = &data->vines[vineIdx];
 
     // do nothing
     return ApiStatus_DONE2;
@@ -238,8 +241,8 @@ void N(appendGfx_piranha_vines)(void* data) {
     Vtx_t* vtxBuffer;
     Vtx_t* vtx;
 
-    f32 segLength;
-    s32 segCount;
+    f32 boneLength;
+    s32 boneCount;
 
     f32 angle;
     f32 nextAngle;
@@ -263,45 +266,45 @@ void N(appendGfx_piranha_vines)(void* data) {
     if (N(VineRenderState) == 0) {
         for (i = 0; i < 4; i++) {
             LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
-            LavaPiranhaVine* vine = &vineData->unk_00[i];
+            LavaPiranhaVine* vine = &vineData->vines[i];
             
             switch (i) {
                 default:
                     return;
                 case 0:
-                    segCount = 9;
-                    segLength = 10.0f;
+                    boneCount = 9;
+                    boneLength = 10.0f;
                     break;
                 case 1:
-                    segCount = 7;
-                    segLength = 8.0f;
+                    boneCount = 7;
+                    boneLength = 8.0f;
                     break;
                 case 2:
-                    segCount = 7;
-                    segLength = 8.0f;
+                    boneCount = 7;
+                    boneLength = 8.0f;
                     break;
                 case 3:
-                    segCount = 5;
-                    segLength = 8.0f;
+                    boneCount = 5;
+                    boneLength = 8.0f;
                     break;
             }
 
-            vine->unk_90 = segCount;
-            vine->unk_94 = segLength;
+            vine->boneCount = boneCount;
+            vine->boneLength = boneLength;
             
-            for (j = 0; j < segCount; j++) {
-                if (j == (segCount - 1)) {
-                    vine->unk_6C[j] += 90.0f;
+            for (j = 0; j < boneCount; j++) {
+                if (j == (boneCount - 1)) {
+                    vine->boneRot[j] += 90.0f;
                 } else {
-                    curAngle1 = vine->unk_6C[j];
-                    nextAngle = vine->unk_6C[j + 1];
+                    curAngle1 = vine->boneRot[j];
+                    nextAngle = vine->boneRot[j + 1];
                     if (nextAngle - curAngle1 > 180.0f) {
                         curAngle1 += 360.0f;
                     } else if (nextAngle - curAngle1 < -180.0f) {
                         nextAngle += 360.0f;
                     }
                     // average cur and next angles
-                    vine->unk_6C[j] = ((curAngle1 + nextAngle) / 2.0) + 90.0;
+                    vine->boneRot[j] = ((curAngle1 + nextAngle) / 2.0) + 90.0;
                 }
             }
             
@@ -316,10 +319,10 @@ void N(appendGfx_piranha_vines)(void* data) {
 
     for (i = 0; i < 4; i++) {
         LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
-        LavaPiranhaVine* vine = &vineData->unk_00[i];
+        LavaPiranhaVine* vine = &vineData->vines[i];
         
-        segLength = vine->unk_94;
-        segCount = vine->unk_90;
+        boneLength = vine->boneLength;
+        boneCount = vine->boneCount;
         numPoints = vine->numPoints;
 
         // we'll build the vertex data and place it in the display list, so jump forward
@@ -336,15 +339,15 @@ void N(appendGfx_piranha_vines)(void* data) {
             posY = vine->points[j].y;
             posZ = vine->points[j].z;
             
-            alphaCoord = ((f32) j * (f32) segCount) / (f32) numPoints;
+            alphaCoord = ((f32) j * boneCount) / numPoints;
             nearest = (s32) alphaCoord;
             alphaFrac = alphaCoord - (f32)nearest;
             
-            if (nearest + 1 >= segCount) {
-                angle = vine->unk_6C[segCount - 1];
+            if (nearest + 1 >= boneCount) {
+                angle = vine->boneRot[boneCount - 1];
             } else {
-                curAngle2 = vine->unk_6C[nearest];
-                nextAngle = vine->unk_6C[nearest + 1];
+                curAngle2 = vine->boneRot[nearest];
+                nextAngle = vine->boneRot[nearest + 1];
                 if (nextAngle - curAngle2 > 180.0f) {
                     nextAngle -= 360.0f;
                 }
@@ -354,8 +357,8 @@ void N(appendGfx_piranha_vines)(void* data) {
                 angle = ((nextAngle - curAngle2) * alphaFrac) + curAngle2;
             }
             
-            deltaX =  sin_deg(angle) * segLength;
-            deltaY = -cos_deg(angle) * segLength;
+            deltaX =  sin_deg(angle) * boneLength;
+            deltaY = -cos_deg(angle) * boneLength;
             
             vtx->ob[0] = posX + deltaX;
             vtx->ob[1] = posY + deltaY;
@@ -826,158 +829,158 @@ EvtScript N(EVS_NpcAux_LavaPiranha) = {
     EVT_CALL(SetNpcRotation, NPC_LavaPiranhaHead, LVar0, 0, LVar2)
     EVT_CALL(N(MarkVineInterpolationDirty))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 0, LVar0, 0, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 9, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 9, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 7, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 7, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 7, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 7, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 7, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_0, 8, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_0, 8, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_0, 8, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_0, 8, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_0, 8, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_LavaBud_01, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaBud_01, LVar0, 0, LVar2)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 0, LVar0, 0, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 4, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_1, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_1, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_1, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_1, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_1, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_LavaBud_02, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaBud_02, LVar0, 0, LVar2)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 0, LVar0, 0, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 4, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_2, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_2, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_2, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_2, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_2, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_3, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_3, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_3, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_3, 0, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_3, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_3, 0, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_3, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_3, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_3, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_3, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_3, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_3, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_3, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_3, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_3, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_3, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_3, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_3, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_3, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_3, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_3, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_3, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointPos), VINE_3, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBonePos), VINE_3, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointRot), VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(N(SetVineJointScale), VINE_3, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineBoneRot), VINE_3, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineBoneScale), VINE_3, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN

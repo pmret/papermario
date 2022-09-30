@@ -18,16 +18,16 @@ enum {
 };
 
 typedef struct LavaPiranhaVine {
-    /* 0x000 */ Vec3f unk_00[9];
-    /* 0x06C */ f32 unk_6C[9];
-    /* 0x090 */ s32 unk_90;
-    /* 0x094 */ f32 unk_94;
+    /* 0x000 */ Vec3f bonePos[9];
+    /* 0x06C */ f32 boneRot[9];
+    /* 0x090 */ s32 boneCount;
+    /* 0x094 */ f32 boneLength;
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
 
 typedef struct LavaPiranhaVineSet {
-    LavaPiranhaVine unk_00[NUM_VINES];
+    LavaPiranhaVine vines[NUM_VINES];
 } LavaPiranhaVineSet; // size = 0x780
 
 #include "common/StartRumbleWithParams.inc.c"
@@ -38,13 +38,13 @@ extern s32 N(VineRenderState); // TODO static
 // N(make_vine_interpolation)
 INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_80218058_59E738);
 
-// N(SetVineJointPos)
+// N(SetVineBonePos)
 INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_8021812C_59E80C);
 
-// N(SetVineJointRot)
+// N(SetVineBoneRot)
 INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_80218224_59E904);
 
-// N(SetVineJointScale)
+// N(SetVineBoneScale)
 INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_802182E4_59E9C4);
 
 void func_8021835C_59EA3C(void* data);
