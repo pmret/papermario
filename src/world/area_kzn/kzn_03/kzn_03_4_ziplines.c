@@ -4,7 +4,7 @@
 extern EvtScript N(EVS_SyncZiplineDummyNPC1);
 extern EvtScript N(EVS_SyncZiplineDummyNPC2);
 
-ApiStatus N(Zipline_AdjustMoveDownSound)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Zipline_AdjustMoveDownSound)) {
     Bytecode* args = script->ptrReadPos;
 
     if (*args++ != 0) {
@@ -16,7 +16,7 @@ ApiStatus N(Zipline_AdjustMoveDownSound)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Zipline_AdjustMoveUpSound)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Zipline_AdjustMoveUpSound)) {
     Bytecode* args = script->ptrReadPos;
 
     if (*args++ != 0) {
@@ -28,7 +28,7 @@ ApiStatus N(Zipline_AdjustMoveUpSound)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Zipline_UpdatePlayerPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Zipline_UpdatePlayerPos)) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_v0 = evt_get_variable(script, *args++);
     f32* array = *(f32**) script->array;
@@ -52,7 +52,7 @@ ApiStatus N(Zipline_UpdatePlayerPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Zipline_CheckInputForJumpOff)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Zipline_CheckInputForJumpOff)) {
     script->varTable[8] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     return ApiStatus_DONE2;
 }
@@ -113,13 +113,13 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_CALL(PlaySound, SOUND_80000019)
     EVT_CHILD_THREAD
-        EVT_SET(MF_Unk_0A, TRUE)
+        EVT_SET(MF_RidingZipline1, TRUE)
         EVT_SET(LVar0, ArrayVar(6))
-        EVT_SET(AB_KZN_0, ArrayVar(6))
+        EVT_SET(AB_KZN_LastZiplineNpc1, ArrayVar(6))
         EVT_LOOP(0)
             EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(Zipline_AdjustMoveDownSound), MF_Unk_0A, LVar1, LVar2, LVar3)
-            EVT_IF_NE(AB_KZN_0, LVar0)
+            EVT_CALL(N(Zipline_AdjustMoveDownSound), MF_RidingZipline1, LVar1, LVar2, LVar3)
+            EVT_IF_NE(AB_KZN_LastZiplineNpc1, LVar0)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -142,7 +142,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(PlaySound, SOUND_2087)
     EVT_LABEL(10)
     EVT_CALL(SetPlayerFlagBits, PS_FLAGS_800000, TRUE)
-    EVT_SET(MF_Unk_0A, FALSE)
+    EVT_SET(MF_RidingZipline1, FALSE)
     EVT_CALL(StopSound, SOUND_80000019)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
     EVT_CALL(EnablePartnerAI)
@@ -152,13 +152,13 @@ EvtScript N(EVS_RideZipline) = {
     EVT_WAIT(20)
     EVT_CALL(PlaySound, SOUND_8000001A)
     EVT_CHILD_THREAD
-        EVT_SET(MF_Unk_0B, TRUE)
+        EVT_SET(MF_RidingZipline2, TRUE)
         EVT_SET(LVar0, ArrayVar(6))
-        EVT_SET(AB_KZN_1, ArrayVar(6))
+        EVT_SET(AB_KZN_LastZiplineNpc2, ArrayVar(6))
         EVT_LOOP(0)
             EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(Zipline_AdjustMoveUpSound), MF_Unk_0B, LVar1, LVar2, LVar3)
-            EVT_IF_NE(AB_KZN_1, LVar0)
+            EVT_CALL(N(Zipline_AdjustMoveUpSound), MF_RidingZipline2, LVar1, LVar2, LVar3)
+            EVT_IF_NE(AB_KZN_LastZiplineNpc2, LVar0)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -176,7 +176,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_SET(MF_Unk_0B, FALSE)
+    EVT_SET(MF_RidingZipline2, FALSE)
     EVT_CALL(StopSound, SOUND_8000001A)
     EVT_RETURN
     EVT_END

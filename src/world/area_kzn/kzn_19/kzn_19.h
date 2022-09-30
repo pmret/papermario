@@ -26,7 +26,7 @@ enum {
 
 enum {
 	MV_VinesData				= MapVar(0),
-	MV_Unk_0A					= MapVar(10),
+	MV_BossDefeated				= MapVar(10),
 };
 
 #define NAMESPACE kzn_19

@@ -23,8 +23,8 @@ enum {
 };
 
 enum {
-    MV_Unk_00                   = MapVar(0),
-    MV_Unk_0A                   = MapVar(10),
+    MV_TrompPosX                = MapVar(0),
+    MV_ScreenShakeTID           = MapVar(10),
 };
 
 #define NAMESPACE kzn_17

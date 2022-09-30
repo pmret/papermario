@@ -39,25 +39,25 @@ EvtScript N(EVS_FireBar_Defeated) = {
         EVT_ADD(LVar2, LVar5)
         EVT_CALL(PlayEffect, EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_IF_EQ(LVarA, 0)
-        EVT_IF_EQ(AF_KZN_12, FALSE)
-            EVT_SET(AF_KZN_12, TRUE)
+    EVT_IF_EQ(LVarA, NPC_FireBar_1A)
+        EVT_IF_EQ(AF_KZN04_FireBar1_Coins, FALSE)
+            EVT_SET(AF_KZN04_FireBar1_Coins, TRUE)
             EVT_LOOP(10)
                 EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
             EVT_END_LOOP
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LVarA, 5)
-        EVT_IF_EQ(AF_KZN_13, FALSE)
-            EVT_SET(AF_KZN_13, TRUE)
+    EVT_IF_EQ(LVarA, NPC_FireBar_2A)
+        EVT_IF_EQ(AF_KZN04_FireBar2_Coins, FALSE)
+            EVT_SET(AF_KZN04_FireBar2_Coins, TRUE)
             EVT_LOOP(10)
                 EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
             EVT_END_LOOP
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LVarA, 10)
-        EVT_IF_EQ(AF_KZN_14, FALSE)
-            EVT_SET(AF_KZN_14, TRUE)
+    EVT_IF_EQ(LVarA, NPC_FireBar_3A)
+        EVT_IF_EQ(AF_KZN04_FireBar3_Coins, FALSE)
+            EVT_SET(AF_KZN04_FireBar3_Coins, TRUE)
             EVT_LOOP(10)
                 EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
             EVT_END_LOOP

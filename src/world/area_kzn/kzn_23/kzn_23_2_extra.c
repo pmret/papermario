@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "effects.h"
 
-ApiStatus N(SetChestPosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetChestPosition)) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIndex = evt_get_variable(script, *args++);
     f32 x = evt_get_variable(script, *args++);
@@ -16,7 +16,7 @@ ApiStatus N(SetChestPosition)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetChestPosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetChestPosition)) {
     Bytecode* args = script->ptrReadPos;
     Entity* entity = get_entity_by_index(evt_get_variable(script, *args++));
 
@@ -26,7 +26,7 @@ ApiStatus N(GetChestPosition)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SetPyroclastPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetPyroclastPos)) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);
@@ -39,14 +39,14 @@ ApiStatus N(SetPyroclastPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AllowCameraInterpY)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AllowCameraInterpY)) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
     camera->moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AnimateChestSize)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AnimateChestSize)) {
     Entity* entity = get_entity_by_index(script->varTable[0xA]);
     
     if (isInitialCall != 0) {
@@ -164,12 +164,12 @@ EvtScript N(EVS_PlayPyroclastSounds) = {
     EVT_LOOP(LVar0)
         EVT_BUF_READ1(LVar1)
     EVT_END_LOOP
-    EVT_IF_EQ(AF_KZN_11, FALSE)
+    EVT_IF_EQ(AF_KZN23_UseAlternateSound, FALSE)
         EVT_CALL(PlaySoundAt, SOUND_1AD, 0, LVar1, 2800, 0)
-        EVT_SET(AF_KZN_11, TRUE)
+        EVT_SET(AF_KZN23_UseAlternateSound, TRUE)
     EVT_ELSE
         EVT_CALL(PlaySoundAt, SOUND_1AE, 0, LVar1, 2800, 0)
-        EVT_SET(AF_KZN_11, FALSE)
+        EVT_SET(AF_KZN23_UseAlternateSound, FALSE)
     EVT_END_IF
     EVT_RETURN
     EVT_END

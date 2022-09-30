@@ -5,7 +5,7 @@ extern API_CALLABLE(N(func_80243EE0_C75360));
 void get_model_fog_color_parameters(u8*, u8*, u8*, u8*, u8*, u8*, u8*, s32*, s32*);
 
 // modified DarkRoomUpdate
-ApiStatus N(func_80243EE0_C75360)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80243EE0_C75360)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     u8 primR, primG, primB, primA;

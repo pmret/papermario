@@ -27,7 +27,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-ApiStatus N(func_8024030C_C7E48C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024030C_C7E48C)) {
     if (gPlayerStatus.flags & PS_FLAGS_CAMERA_DOESNT_FOLLOW) {
         return ApiStatus_BLOCK;
     } else {

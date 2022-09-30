@@ -31,7 +31,7 @@ EvtScript N(EVS_CrackFloor) = {
         EVT_CALL(TranslateModel, MODEL_o6, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SET(AF_EruptionBreakFloor, FALSE)
+    EVT_SET(AF_KZN_BossRoomFloorBroken, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -46,7 +46,7 @@ EvtScript N(EVS_SetFloorCracked) = {
 };
 
 EvtScript N(EVS_UpdateEruption) = {
-    EVT_SET(AF_EruptionBreakFloor, FALSE)
+    EVT_SET(AF_KZN_BossRoomFloorBroken, FALSE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
         EVT_RETURN
     EVT_END_IF
@@ -54,7 +54,7 @@ EvtScript N(EVS_UpdateEruption) = {
         // wait for card pickup
         EVT_LOOP(0)
             EVT_WAIT(1)
-            EVT_IF_NE(AF_EruptionBreakFloor, FALSE)
+            EVT_IF_NE(AF_KZN_BossRoomFloorBroken, FALSE)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP

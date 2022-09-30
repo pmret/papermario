@@ -6,7 +6,7 @@ extern EvtScript N(EVS_PlayUpgradeFanfare);
 
 #include "world/common/atomic/PushBlockGravity.inc.c"
 
-ApiStatus func_802407F4_C6EB24(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802407F4_C6EB24) {
     get_entity_by_index(script->varTable[0])->dataBuf.chest->gotItemDone = TRUE;
     return ApiStatus_DONE2;
 }

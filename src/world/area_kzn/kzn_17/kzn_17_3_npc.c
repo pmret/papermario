@@ -255,7 +255,7 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_END
 };
 
-Vec3f N(D_80244A8C_C8A53C)[] = {
+Vec3f N(KoloradoThrownPath)[] = {
     {  447.0,     0.0,   39.0 },
     {  432.0,     5.0,   47.0 },
     {  427.0,    20.0,   55.0 },
@@ -263,7 +263,7 @@ Vec3f N(D_80244A8C_C8A53C)[] = {
     {  447.0,     0.0,   70.0 },
 };
 
-EvtScript N(D_80244AC8_C8A578) = {
+EvtScript N(EVS_Kolorado_TrompPanic) = {
     EVT_CALL(SetNpcPos, NPC_Kolorado, 447, 0, 39)
     EVT_CALL(SetNpcYaw, NPC_Kolorado, 270)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
@@ -271,7 +271,7 @@ EvtScript N(D_80244AC8_C8A578) = {
     EVT_END
 };
 
-EvtScript N(D_80244B1C_C8A5CC) = {
+EvtScript N(EVS_Kolorado_TrompImpact) = {
     EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAGS_400000, 1)
     EVT_CALL(func_802CDE68, 0, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
@@ -280,7 +280,7 @@ EvtScript N(D_80244B1C_C8A5CC) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, 0)
     EVT_THREAD
         EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(D_80244A8C_C8A53C)), ARRAY_COUNT(N(D_80244A8C_C8A53C)), EASING_LINEAR)
+        EVT_CALL(LoadPath, 30, EVT_PTR(N(KoloradoThrownPath)), ARRAY_COUNT(N(KoloradoThrownPath)), EASING_LINEAR)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Kolorado, LVar1, LVar2, LVar3)

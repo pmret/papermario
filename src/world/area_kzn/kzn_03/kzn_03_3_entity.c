@@ -4,7 +4,7 @@
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 #include "world/common/SetCamera0MoveFlag1.inc.c"
 
-ApiStatus N(IsPlayerOnFirstCliff)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsPlayerOnFirstCliff)) {
     s32 result = -1;
     
     if (gPlayerStatus.lastGoodPosition.y > 800.0) {
@@ -14,7 +14,7 @@ ApiStatus N(IsPlayerOnFirstCliff)(Evt* script, s32 isInitialCall) {
         result = 1;
     }
     if (result >= 0) {
-        evt_set_variable(script, MV_Unk_09, result);
+        evt_set_variable(script, MV_PlayerCliffState, result);
     }
     
     return ApiStatus_BLOCK;
@@ -78,7 +78,7 @@ EvtScript N(EVS_UseSpringC) = {
     EVT_WAIT(1)
     EVT_CALL(N(UnsetCamera0MoveFlag1))
     EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
-    EVT_IF_EQ(MV_Unk_09, 0)
+    EVT_IF_EQ(MV_PlayerCliffState, 0)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.4))
         EVT_CALL(PlayerJump, -470, 670, 71, 18)
     EVT_ELSE

@@ -14,15 +14,15 @@
 #include "sprite/npc/WorldMisstar.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_Misstar                 = 1,
+    NPC_Kolorado                = 0,
+    NPC_Misstar                 = 1,
 };
 
 enum {
-	MV_LavaPosOffset           	= MapVar(10),
-	MV_WaveScaleOffset        	= MapVar(11),
-	MV_PosScaleCoeff			= MapVar(12),
-	MV_MisstarHintState			= MapVar(13),
+    MV_LavaPosOffset            = MapVar(10),
+    MV_WaveScaleOffset          = MapVar(11),
+    MV_PosScaleCoeff            = MapVar(12),
+    MV_SceneState               = MapVar(13),
 };
 
 #define NAMESPACE kzn_20

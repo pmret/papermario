@@ -27,12 +27,12 @@ enum {
 };
 
 enum {
-    MV_Unk_09                   = MapVar(9)
+    MV_PlayerCliffState         = MapVar(9)
 };
 
 enum {
-    MF_Unk_0A                   = MapFlag(10),
-    MF_Unk_0B                   = MapFlag(11),
+    MF_RidingZipline1           = MapFlag(10),
+    MF_RidingZipline2           = MapFlag(11),
 };
 
 #define NAMESPACE kzn_03

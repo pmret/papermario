@@ -1,6 +1,21 @@
 #include "kzn_20.h"
 #include "effects.h"
 
+enum {
+
+    SCENE_STATE_BEGIN    = 15,
+    SCENE_STATE_STARFISH_REMARK         = 20,
+    SCENE_STATE_KOLORADO_LOOKS_AROUND   = 25,
+    SCENE_STATE_KOLORADO_WENT_BACK      = 30,
+    SCENE_STATE_KOLORADO_CAM_SYNC       = 31,
+    SCENE_STATE_KOLORADO_WARNED         = 35,
+    SCENE_STATE_KOLORADO_BURNED         = 36,
+    SCENE_STATE_MISSTAR_SPEAKS          = 40,
+    SCENE_STATE_KOLORADO_RETURN         = 45,
+    SCENE_STATE_SEARCH_FOR_EXIT         = 50,
+    SCENE_STATE_DONE                    = -1,
+};
+
 NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
@@ -76,7 +91,7 @@ EvtScript N(EVS_ShakingWorld) = {
     EVT_ELSE
         EVT_LOOP(0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.5))
-            EVT_IF_NE(AF_KZN_0B, FALSE)
+            EVT_IF_NE(AF_KZN_RumblingIntensified, FALSE)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -185,152 +200,154 @@ EvtScript N(EVS_KoloradoBurned_PlayerReaction) = {
     EVT_END
 };
 
-ApiStatus N(func_80240A68_C96998)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240A68_C96998)) {
     snd_ambient_80055618(0, 1);
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_EXEC_GET_TID(N(EVS_Kolorado_CalmIdle), LVar9)
+    // wait for scene to begin
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_IF_NE(MV_MisstarHintState, 15)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_IF_NE(MV_SceneState, SCENE_STATE_BEGIN)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(10)
+    // cutscene actions
     EVT_LABEL(10)
-    EVT_SWITCH(MV_MisstarHintState)
-        EVT_CASE_EQ(15)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, -30, 100, 40)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, -25, 125, -20, 10)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, 20, 150, 5, 10)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(NpcMoveTo, NPC_SELF, 40, 35, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_010A)
-            EVT_SET(MV_MisstarHintState, 20)
-        EVT_CASE_EQ(25)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
-            EVT_ADD(LVar3, -30)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 4)
-            EVT_WAIT(10)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 4)
-            EVT_WAIT(10)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 4)
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(NpcMoveTo, NPC_SELF, 20, 0, 0)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, -35, 125, -20, 12)
-            EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_LABEL(25)
-            EVT_CALL(NpcMoveTo, NPC_SELF, -15, -20, 0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, -40, -20, 0)
-            EVT_IF_EQ(AF_KZN_0A, FALSE)
-                EVT_WAIT(1)
-                EVT_GOTO(25)
-            EVT_END_IF
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010B)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
-            EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
-            EVT_WAIT(15)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.5))
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-            EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 8)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-            EVT_THREAD
-                EVT_WAIT(8)
-                EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-            EVT_END_THREAD
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010C)
-            EVT_SET(AF_KZN_0B, TRUE)
-            EVT_CALL(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
-            EVT_WAIT(20)
-            EVT_THREAD
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
-                EVT_WAIT(60)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_END_THREAD
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_010D)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_SET(MV_MisstarHintState, 30)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, -30, 100, 40, 10)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, -15, 75, 80, 10)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, 35, 50, 120, 10)
-        EVT_CASE_EQ(35)
-            EVT_CALL(N(func_80240A68_C96998))
-            EVT_EXEC(N(EVS_KoloradoBurned_PlayerReaction))
-            EVT_THREAD
+        EVT_SWITCH(MV_SceneState)
+            EVT_CASE_EQ(SCENE_STATE_BEGIN)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+                EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
+                EVT_CALL(SetNpcPos, NPC_SELF, -30, 100, 40)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, -25, 125, -20, 10)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, 20, 150, 5, 10)
+                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
+                EVT_CALL(NpcMoveTo, NPC_SELF, 40, 35, 0)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_010A)
+                EVT_SET(MV_SceneState, SCENE_STATE_STARFISH_REMARK)
+            EVT_CASE_EQ(SCENE_STATE_KOLORADO_LOOKS_AROUND)
+                EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
+                EVT_ADD(LVar3, -30)
+                EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
+                EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
+                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
+                EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 4)
+                EVT_WAIT(10)
+                EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 4)
+                EVT_WAIT(10)
+                EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 4)
+                EVT_WAIT(10)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0))
+                EVT_CALL(NpcMoveTo, NPC_SELF, 20, 0, 0)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, -35, 125, -20, 12)
                 EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_010F, 160, 40)
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_LOOP(0)
+                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.0))
+                EVT_LABEL(25)
+                EVT_CALL(NpcMoveTo, NPC_SELF, -15, -20, 0)
+                EVT_CALL(NpcMoveTo, NPC_SELF, -40, -20, 0)
+                EVT_IF_EQ(AF_KZN20_SceneSync, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                    EVT_ADD(LVar2, -10)
-                    EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10, 0, 0, 0, 0, 0, 0, 0)
-                    EVT_IF_EQ(MV_MisstarHintState, 36)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Hurt)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_E8, 0)
-            EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 60)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-            EVT_SET(MV_MisstarHintState, 36)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 100, 25, 100)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, 100, 25, 100)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Panic, ANIM_Kolorado_Panic, 0, MSG_CH5_0110)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_SET(MV_MisstarHintState, 40)
-        EVT_CASE_EQ(45)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-            EVT_CALL(SetNpcPos, NPC_SELF, -30, 100, 40)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, -25, 125, -20, 10)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, 20, 150, 5, 8)
-            EVT_SET(MV_MisstarHintState, 50)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(NpcMoveTo, NPC_SELF, 75, -30, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_GOTO(10)
+                    EVT_GOTO(25)
+                EVT_END_IF
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010B)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
+                EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
+                EVT_WAIT(15)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.5))
+                EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+                EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+                EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 8)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+                EVT_THREAD
+                    EVT_WAIT(8)
+                    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
+                EVT_END_THREAD
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010C)
+                EVT_SET(AF_KZN_RumblingIntensified, TRUE)
+                EVT_CALL(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
+                EVT_WAIT(20)
+                EVT_THREAD
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                    EVT_WAIT(60)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                EVT_END_THREAD
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_010D)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
+                EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_WENT_BACK)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, -30, 100, 40, 10)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, -15, 75, 80, 10)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, 35, 50, 120, 10)
+            EVT_CASE_EQ(SCENE_STATE_KOLORADO_WARNED)
+                EVT_CALL(N(func_80240A68_C96998))
+                EVT_EXEC(N(EVS_KoloradoBurned_PlayerReaction))
+                EVT_THREAD
+                    EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
+                    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_010F, 160, 40)
+                EVT_END_THREAD
+                EVT_THREAD
+                    EVT_LOOP(0)
+                        EVT_WAIT(1)
+                        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                        EVT_ADD(LVar2, -10)
+                        EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_IF_EQ(MV_SceneState, SCENE_STATE_KOLORADO_BURNED)
+                            EVT_BREAK_LOOP
+                        EVT_END_IF
+                    EVT_END_LOOP
+                EVT_END_THREAD
+                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Hurt)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_E8, 0)
+                EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 60)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+                EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_BURNED)
+                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 100, 25, 100)
+                EVT_CALL(SetPanTarget, CAM_DEFAULT, 100, 25, 100)
+                EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
+                EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
+                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
+                EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Panic, ANIM_Kolorado_Panic, 0, MSG_CH5_0110)
+                EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
+                EVT_SET(MV_SceneState, SCENE_STATE_MISSTAR_SPEAKS)
+            EVT_CASE_EQ(SCENE_STATE_KOLORADO_RETURN)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+                EVT_CALL(SetNpcPos, NPC_SELF, -30, 100, 40)
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, -25, 125, -20, 10)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+                EVT_CALL(NpcJump0, NPC_SELF, 20, 150, 5, 8)
+                EVT_SET(MV_SceneState, SCENE_STATE_SEARCH_FOR_EXIT)
+                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
+                EVT_CALL(NpcMoveTo, NPC_SELF, 75, -30, 0)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+        EVT_END_SWITCH
+        EVT_WAIT(1)
+        EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
@@ -382,7 +399,7 @@ Vec3f N(FlightPath2)[] = {
     { 270.0, 175.0, -30.0 },
 };
 
-ApiStatus N(GetFloorCollider)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetFloorCollider)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -391,10 +408,10 @@ ApiStatus N(GetFloorCollider)(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(EVS_NpcIdle_Misstar) = {
-    EVT_IF_EQ(AF_KZN_09, FALSE)
+    EVT_IF_EQ(AF_KZN20_MisstarFlightDone, FALSE)
         EVT_CALL(SetNpcPos, NPC_SELF, -120, 70, 45)
         EVT_WAIT(30)
-        EVT_SET(AF_KZN_09, TRUE)
+        EVT_SET(AF_KZN20_MisstarFlightDone, TRUE)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
         EVT_CALL(LoadPath, 60, EVT_PTR(N(FlightPath1)), ARRAY_COUNT(N(FlightPath1)), EASING_LINEAR)
         EVT_LOOP(0)
@@ -427,18 +444,18 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_SET(AF_KZN_0B, FALSE)
-    EVT_SET(MV_MisstarHintState, 15)
+    EVT_SET(AF_KZN_RumblingIntensified, FALSE)
+    EVT_SET(MV_SceneState, SCENE_STATE_BEGIN)
     EVT_LABEL(10)
-        EVT_SWITCH(MV_MisstarHintState)
-            EVT_CASE_EQ(20)
-                EVT_SET(AF_KZN_0A, FALSE)
+        EVT_SWITCH(MV_SceneState)
+            EVT_CASE_EQ(SCENE_STATE_STARFISH_REMARK)
+                EVT_SET(AF_KZN20_SceneSync, FALSE)
                 EVT_THREAD
                     EVT_WAIT(30)
-                    EVT_SET(MV_MisstarHintState, 25)
+                    EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_LOOKS_AROUND)
                 EVT_END_THREAD
-                EVT_SET(AF_KZN_0A, TRUE)
-            EVT_CASE_EQ(30)
+                EVT_SET(AF_KZN20_SceneSync, TRUE)
+            EVT_CASE_EQ(SCENE_STATE_KOLORADO_WENT_BACK)
                 EVT_THREAD
                     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -447,20 +464,20 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
                     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
                     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
                     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                    EVT_SET(MV_MisstarHintState, 31)
+                    EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_CAM_SYNC)
                 EVT_END_THREAD
                 EVT_WAIT(10)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMisstar_TalkAngry, ANIM_WorldMisstar_IdleAngry, 5, MSG_CH5_010E)
                 EVT_LABEL(30)
-                EVT_IF_EQ(MV_MisstarHintState, 30)
-                    EVT_WAIT(1)
-                    EVT_GOTO(30)
-                EVT_END_IF
-                EVT_SET(MV_MisstarHintState, 35)
-            EVT_CASE_EQ(40)
+                    EVT_IF_EQ(MV_SceneState, SCENE_STATE_KOLORADO_WENT_BACK)
+                        EVT_WAIT(1)
+                        EVT_GOTO(30)
+                    EVT_END_IF
+                EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_WARNED)
+            EVT_CASE_EQ(SCENE_STATE_MISSTAR_SPEAKS)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMisstar_TalkAngry, ANIM_WorldMisstar_IdleAngry, 0, MSG_CH5_0111)
-                EVT_SET(MV_MisstarHintState, 45)
-            EVT_CASE_EQ(50)
+                EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_RETURN)
+            EVT_CASE_EQ(SCENE_STATE_SEARCH_FOR_EXIT)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
                 EVT_WAIT(15)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
@@ -486,9 +503,9 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
                 EVT_CALL(NpcJump1, NPC_SELF, 145, 160, -10, 5)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMisstar_TalkAngry, ANIM_WorldMisstar_IdleAngry, 0, MSG_CH5_0112)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-                EVT_SET(MV_MisstarHintState, -1)
+                EVT_SET(MV_SceneState, SCENE_STATE_DONE)
         EVT_END_SWITCH
-        EVT_IF_NE(MV_MisstarHintState, -1)
+        EVT_IF_NE(MV_SceneState, SCENE_STATE_DONE)
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF

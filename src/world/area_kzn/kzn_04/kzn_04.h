@@ -26,4 +26,8 @@ enum {
 	NPC_FireBar_3D              = 13,
 };
 
+enum {
+	MV_SuperBlock				= MapVar(0),
+};
+
 #define NAMESPACE kzn_04

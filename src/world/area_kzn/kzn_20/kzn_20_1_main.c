@@ -116,7 +116,7 @@ EvtScript N(EVS_UpdateLavaWaves) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yu, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ParentColliderToModel, COLLIDER_yu, MODEL_yu)
     EVT_LABEL(0)
-        EVT_IF_EQ(AF_KZN_0B, FALSE)
+        EVT_IF_EQ(AF_KZN_RumblingIntensified, FALSE)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF

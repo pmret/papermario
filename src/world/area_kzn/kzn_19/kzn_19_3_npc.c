@@ -264,8 +264,8 @@ void N(appendGfx_piranha_vines)(void* data) {
     }
     
     if (N(VineRenderState) == 0) {
-        for (i = 0; i < 4; i++) {
-            LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
+        for (i = 0; i < NUM_VINES; i++) {
+            LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
             LavaPiranhaVine* vine = &vineData->vines[i];
             
             switch (i) {
@@ -317,8 +317,8 @@ void N(appendGfx_piranha_vines)(void* data) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_80243AD8_C91688);
 
-    for (i = 0; i < 4; i++) {
-        LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
+    for (i = 0; i < NUM_VINES; i++) {
+        LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
         LavaPiranhaVine* vine = &vineData->vines[i];
         
         boneLength = vine->boneLength;
@@ -473,10 +473,10 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
 
 EvtScript N(EVS_Kolorado_Escape) = {
     EVT_LABEL(0)
-    EVT_IF_EQ(MV_Unk_0A, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_IF_EQ(MV_BossDefeated, FALSE)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(60)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
@@ -553,11 +553,11 @@ EvtScript N(EVS_Misstar_Escape) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
-    EVT_SET(AF_EruptionBreakFloor, TRUE)
+    EVT_SET(AF_KZN_BossRoomFloorBroken, TRUE)
     EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_NE(AF_EruptionBreakFloor, TRUE)
+        EVT_IF_NE(AF_KZN_BossRoomFloorBroken, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1011,7 +1011,7 @@ EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
             EVT_EXEC(N(EVS_PlayVinesAnim_Defeat))
             EVT_WAIT(1)
             EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_LavaPiranha)))
-            EVT_SET(MV_Unk_0A, TRUE)
+            EVT_SET(MV_BossDefeated, TRUE)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
     EVT_END_SWITCH

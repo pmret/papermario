@@ -16,7 +16,7 @@ EvtScript N(EVS_TryingSpawningStarCard) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
             EVT_SET(LVar0, FALSE)
-            EVT_IF_EQ(MV_Unk_0A, FALSE)
+            EVT_IF_EQ(MV_BossDefeated, FALSE)
                 EVT_RETURN
             EVT_END_IF
             EVT_SET(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)

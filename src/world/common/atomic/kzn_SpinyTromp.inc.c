@@ -17,7 +17,7 @@ ApiStatus N(SpinyTromp_GetActingPartner)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc46.inc.c"
 
-#include "world/common/UnkFunc47.inc.c"
+#include "world/common/SpinyTromp_CheckDist.inc.c"
 
 #include "world/common/UnkFunc48.inc.c"
 
@@ -64,10 +64,10 @@ EvtScript N(D_80240D10_C7EE90) = {
     EVT_CALL(N(SpinyTrompHit))
     EVT_CALL(func_802D2520, ANIM_Mario_DeadStill, 4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
     EVT_LABEL(1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(AF_KZN_02, FALSE)
-        EVT_GOTO(1)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_IF_EQ(AF_KZN_TrompRollingDone, FALSE)
+            EVT_GOTO(1)
+        EVT_END_IF
     EVT_WAIT(30)
     EVT_CALL(func_802D2520, ANIM_Mario_DeadStill, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)

@@ -6,19 +6,19 @@
 
 #include "world/common/atomic/kzn_SpinyTromp.inc.c"
 
-EvtScript N(D_80240FB0_C7F130) = {
+EvtScript N(EVS_SpinyTromp_ManageCamera) = {
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_LOOP(0)
-        EVT_IF_EQ(AF_KZN_03, FALSE)
+        EVT_IF_EQ(AF_KZN_TrompHitPlayer, FALSE)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, MV_Unk_0)
+            EVT_ADD(LVar0, MV_TrompPosX)
             EVT_DIV(LVar0, 2)
         EVT_ELSE
-            EVT_SET(LVar0, MV_Unk_0)
+            EVT_SET(LVar0, MV_TrompPosX)
         EVT_END_IF
         EVT_SET(LVar3, LVar0)
         EVT_SWITCH(LVar3)
@@ -64,7 +64,7 @@ EvtScript N(D_80241224_C7F3A4) = {
     EVT_ADD(LVar1, 50)
     EVT_CALL(PlayEffect, EFFECT_DUST, 1, LVar0, LVar1, LVar2, 40, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(20)
-    EVT_IF_EQ(AF_KZN_04, FALSE)
+    EVT_IF_EQ(AF_KZN_Tromp1_ShakingDone, FALSE)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_LOOP(8)
@@ -75,7 +75,7 @@ EvtScript N(D_80241224_C7F3A4) = {
     EVT_END
 };
 
-EvtScript N(D_80241424_C7F5A4) = {
+EvtScript N(EVS_SpinyTromp_ShakeCam) = {
     EVT_LOOP(0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.0))
     EVT_END_LOOP
@@ -89,9 +89,9 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_CALL(TranslateGroup, MODEL_goron, 0, 0, 0)
     EVT_CALL(RotateGroup, MODEL_goron, 0, 0, 0, 1)
-    EVT_SET(AF_KZN_04, FALSE)
-    EVT_SET(AF_KZN_03, FALSE)
-    EVT_SET(AF_KZN_02, FALSE)
+    EVT_SET(AF_KZN_Tromp1_ShakingDone, FALSE)
+    EVT_SET(AF_KZN_TrompHitPlayer, FALSE)
+    EVT_SET(AF_KZN_TrompRollingDone, FALSE)
     EVT_CALL(GetEntryID, LVar3)
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -116,7 +116,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_CALL(MakeLerp, 200, LVar2, 20, EASING_QUADRATIC_IN)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
-    EVT_SET(MV_Unk_0, UNK_FUNC_50_LVar1)
+    EVT_SET(MV_TrompPosX, UNK_FUNC_50_LVar1)
     EVT_CALL(TranslateGroup, MODEL_goron, UNK_FUNC_50_LVar1, LVar0, 0)
     EVT_CALL(TranslateModel, MODEL_me, UNK_FUNC_50_LVar1, LVar0, 0)
     EVT_WAIT(1)
@@ -149,8 +149,8 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.2))
     EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_EXEC_GET_TID(N(D_80240FB0_C7F130), LVarA)
-    EVT_EXEC_GET_TID(N(D_80241424_C7F5A4), MV_Unk_A)
+    EVT_EXEC_GET_TID(N(EVS_SpinyTromp_ManageCamera), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_SpinyTromp_ShakeCam), MV_ScreenShakeTID)
     EVT_CALL(PlaySoundAt, SOUND_8000001B, 0, -465, 0, 0)
     EVT_SET(LVar2, 0)
     EVT_SET(LVar3, 0)
@@ -159,7 +159,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(UnkFunc46))
         EVT_CALL(N(UnkFunc51), LVar0, LVar1, LVar2)
-        EVT_SET(MV_Unk_0, LVar0)
+        EVT_SET(MV_TrompPosX, LVar0)
         EVT_CALL(TranslateGroup, MODEL_goron, LVar0, LVar2, 0)
         EVT_CALL(TranslateModel, MODEL_me, LVar0, LVar2, 0)
         EVT_SET(LVar8, LVar0)
@@ -170,20 +170,20 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_CALL(TranslateModel, MODEL_me, LVar5, LVar6, 0)
         EVT_CALL(N(UnkFunc50))
         EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc47))
+        EVT_CALL(N(SpinyTromp_CheckDist))
         EVT_IF_LT(LVar4, 80)
-            EVT_IF_EQ(AF_KZN_03, FALSE)
+            EVT_IF_EQ(AF_KZN_TrompHitPlayer, FALSE)
                 EVT_CALL(N(SpinyTromp_GetActingPartner))
                 EVT_IF_NE(LVar0, PARTNER_BOW)
                     EVT_EXEC(N(D_80240D10_C7EE90))
-                    EVT_IF_EQ(AF_KZN_03, FALSE)
+                    EVT_IF_EQ(AF_KZN_TrompHitPlayer, FALSE)
                         EVT_KILL_THREAD(LVarA)
-                        EVT_SET(AF_KZN_03, TRUE)
+                        EVT_SET(AF_KZN_TrompHitPlayer, TRUE)
                     EVT_END_IF
                     EVT_THREAD
                         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(2.0))
                         EVT_WAIT(45)
-                        EVT_SET(AF_KZN_02, TRUE)
+                        EVT_SET(AF_KZN_TrompRollingDone, TRUE)
                     EVT_END_THREAD
                 EVT_END_IF
             EVT_END_IF
@@ -192,8 +192,8 @@ EvtScript N(EVS_SetupSpinyTromp) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(AF_KZN_04, TRUE)
-    EVT_KILL_THREAD(MV_Unk_A)
+    EVT_SET(AF_KZN_Tromp1_ShakingDone, TRUE)
+    EVT_KILL_THREAD(MV_ScreenShakeTID)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 35, EVT_FLOAT(2.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
@@ -246,10 +246,10 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_WAIT(10)
-    EVT_IF_EQ(AF_KZN_03, FALSE)
+    EVT_IF_EQ(AF_KZN_TrompHitPlayer, FALSE)
         EVT_KILL_THREAD(LVarA)
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_SET(AF_KZN_02, TRUE)
+        EVT_SET(AF_KZN_TrompRollingDone, TRUE)
     EVT_END_IF
     EVT_RETURN
     EVT_END

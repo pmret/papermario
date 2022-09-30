@@ -24,7 +24,7 @@ ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc46.inc.c"
 
-#include "world/common/UnkFunc47.inc.c"
+#include "world/common/SpinyTromp_CheckDist.inc.c"
 
 #include "world/common/UnkFunc48.inc.c"
 

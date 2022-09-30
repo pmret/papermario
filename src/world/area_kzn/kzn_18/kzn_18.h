@@ -18,4 +18,8 @@ enum {
 	NPC_PutridPiranha           = 1,
 };
 
+enum {
+    MV_KoloradoJumpDone         = MapVar(10),
+};
+
 #define NAMESPACE kzn_18

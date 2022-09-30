@@ -1,6 +1,6 @@
 #include "kzn_22.h"
 
-ApiStatus N(GetFloorCollider2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetFloorCollider2)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -8,7 +8,7 @@ ApiStatus N(GetFloorCollider2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024036C_C9A56C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024036C_C9A56C)) {
     snd_ambient_80055618(0, 1);
     return ApiStatus_DONE2;
 }
@@ -54,7 +54,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-    // start scene
+    // start scene (but wait for player to stop being hurt if they fell in the lava)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetPlayerAnimation, LVar0)
     EVT_IF_EQ(LVar0, ANIM_Mario_8001A)
@@ -63,15 +63,16 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_WAIT(10)
 EVT_END_IF //@bug unmatched endif
     EVT_CALL(PlayerFaceNpc, NPC_Kolorado, FALSE)
-    EVT_SET(AF_KZN_0C, TRUE)
+    EVT_SET(AF_KZN23_SceneStarted, TRUE)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        // repeatedly jump for the treasure chest
         EVT_LABEL(1)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
             EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-            EVT_IF_EQ(AF_KZN_0E, FALSE)
+            EVT_IF_EQ(AF_KZN23_GrabbedKolorado, FALSE)
                 EVT_WAIT(1)
                 EVT_GOTO(1)
             EVT_END_IF
@@ -93,7 +94,7 @@ EVT_END_IF //@bug unmatched endif
     EVT_WAIT(20)
     EVT_CALL(ShowMessageAtWorldPos, MSG_CH5_0116, 440, 240, 165)
     EVT_WAIT(20)
-    EVT_SET(AF_KZN_0D, TRUE)
+    EVT_SET(AF_KZN23_MessageClosed, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -145,20 +146,20 @@ EvtScript N(EVS_ControlCamera) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_LABEL(10)
-    EVT_WAIT(1)
-    EVT_IF_EQ(AF_KZN_0E, FALSE)
-        EVT_GOTO(10)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_IF_EQ(AF_KZN23_GrabbedKolorado, FALSE)
+            EVT_GOTO(10)
+        EVT_END_IF
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 300, 150, 170)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_LABEL(20)
-    EVT_WAIT(1)
-    EVT_IF_EQ(AF_KZN_10, FALSE)
-        EVT_GOTO(20)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_IF_EQ(AF_KZN22_FlewAway, FALSE)
+            EVT_GOTO(20)
+        EVT_END_IF
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 368, 310, 170)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
@@ -172,7 +173,7 @@ EvtScript N(EVS_SetCharacterPositions) = {
     EVT_ADD(LVar4, 10)
     EVT_SUB(LVar3, 5)
     EVT_CALL(SetNpcPos, NPC_Kolorado, LVar4, LVar2, LVar3)
-    EVT_IF_EQ(AF_KZN_0F, TRUE)
+    EVT_IF_EQ(AF_KZN23_GrabbedPlayer, TRUE)
         EVT_SUB(LVar4, 20)
         EVT_ADD(LVar3, 10)
         EVT_CALL(SetPlayerPos, LVar4, LVar2, LVar3)
@@ -187,7 +188,7 @@ EvtScript N(EVS_SetCharacterPositions) = {
 EvtScript N(EVS_NpcIdle_Misstar) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_NE(AF_KZN_0D, FALSE)
+        EVT_IF_NE(AF_KZN23_MessageClosed, FALSE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -210,7 +211,7 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
         EVT_IF_EQ(LVar0, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_SET(AF_KZN_0E, TRUE)
+    EVT_SET(AF_KZN23_GrabbedKolorado, TRUE)
     EVT_CALL(func_802CDE68, 0, 10)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 180)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
@@ -233,12 +234,12 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
         EVT_IF_EQ(LVar0, 1)
             EVT_GOTO(20)
         EVT_END_IF
-    EVT_SET(AF_KZN_0F, TRUE)
+    EVT_SET(AF_KZN23_GrabbedPlayer, TRUE)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80000)
     EVT_THREAD
         EVT_WAIT(25)
-        EVT_SET(AF_KZN_10, TRUE)
+        EVT_SET(AF_KZN22_FlewAway, TRUE)
         EVT_CALL(N(func_8024036C_C9A56C))
     EVT_END_THREAD
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
@@ -272,11 +273,11 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
 EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 300, 180, 80)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-    EVT_SET(AF_KZN_0C, FALSE)
-    EVT_SET(AF_KZN_0D, FALSE)
-    EVT_SET(AF_KZN_0E, FALSE)
-    EVT_SET(AF_KZN_0F, FALSE)
-    EVT_SET(AF_KZN_10, FALSE)
+    EVT_SET(AF_KZN23_SceneStarted, FALSE)
+    EVT_SET(AF_KZN23_MessageClosed, FALSE)
+    EVT_SET(AF_KZN23_GrabbedKolorado, FALSE)
+    EVT_SET(AF_KZN23_GrabbedPlayer, FALSE)
+    EVT_SET(AF_KZN22_FlewAway, FALSE)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Misstar)))
     EVT_RETURN
     EVT_END

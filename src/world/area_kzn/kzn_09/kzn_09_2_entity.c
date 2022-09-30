@@ -1,7 +1,7 @@
 #include "kzn_09.h"
 #include "entity.h"
 
-#define SUPER_BLOCK_MAPVAR MapVar(0)
+#define SUPER_BLOCK_MAPVAR MV_SuperBlock
 #define SUPER_BLOCK_GAMEFLAG GF_KZN09_SuperBlock
 #include "world/common/atomic/SuperBlock.inc.c"
 #include "world/common/atomic/SuperBlock.data.inc.c"

@@ -30,7 +30,7 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 // can't use kzn_SmokeTexPanners include in this file because of this function
-ApiStatus func_80240718_C71B98(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80240718_C71B98) {
     Bytecode* args = script->ptrReadPos;
     s32 dist = evt_get_variable(script, *args++);
 

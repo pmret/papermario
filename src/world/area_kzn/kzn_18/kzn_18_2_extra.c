@@ -71,19 +71,19 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FD)
     EVT_WAIT(15)
-    EVT_SET(MapVar(10), 0)
+    EVT_SET(MV_KoloradoJumpDone, FALSE)
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
         EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-        EVT_SET(MapVar(10), 1)
+        EVT_SET(MV_KoloradoJumpDone, TRUE)
     EVT_END_THREAD
     EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00FE)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(MapVar(10), 1)
+        EVT_IF_EQ(MV_KoloradoJumpDone, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

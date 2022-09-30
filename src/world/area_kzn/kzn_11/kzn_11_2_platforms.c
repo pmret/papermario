@@ -1,6 +1,6 @@
 #include "kzn_11.h"
 
-ApiStatus N(AddPushVelocity)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AddPushVelocity)) {
     Bytecode* args = script->ptrReadPos;
     s32 velX = evt_get_variable(script, *args++);
     s32 floorA = evt_get_variable(script, *args++);
@@ -22,7 +22,7 @@ ApiStatus N(AddPushVelocity)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetCurrentFloor)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetCurrentFloor)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -30,7 +30,7 @@ ApiStatus N(GetCurrentFloor)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(IsPartnerLakilester)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsPartnerLakilester)) {
     if (gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER) {
         script->varTable[9] = TRUE;
     } else {

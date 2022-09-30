@@ -68,7 +68,7 @@ EvtScript N(EVS_InterruptPartnersInLava) = {
     EVT_END
 };
 
-ApiStatus N(GetFloorCollider1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetFloorCollider1)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -114,7 +114,7 @@ EvtScript N(EVS_UpdateLavaLevel) = {
                 EVT_IF_LT(LVar4, 140)
                     EVT_SET(LVar5, EVT_FLOAT(1.5))
                 EVT_ELSE
-                    EVT_IF_EQ(AF_KZN_10, FALSE)
+                    EVT_IF_EQ(AF_KZN22_FlewAway, FALSE)
                         EVT_SET(LVar5, EVT_FLOAT(0.0))
                     EVT_ELSE
                         EVT_IF_LT(LVar4, 285)
