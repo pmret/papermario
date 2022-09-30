@@ -165,7 +165,7 @@ static s32 N(VineRenderState);
 
 static s32 N(unk_static_pad);
 
-void N(func_80240B00_C8E6B0)(LavaPiranhaVine* vine) {
+void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;
     Evt* dummyEvtPtr = &dummyEvt;
     s32 args[4];
@@ -305,7 +305,7 @@ void N(appendGfx_piranha_vines)(void* data) {
                 }
             }
             
-            N(func_80240B00_C8E6B0)(vine);
+            N(make_vine_interpolation)(vine);
         }
 
         N(VineRenderState) = 1;
