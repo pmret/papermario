@@ -4,6 +4,7 @@ import argparse
 from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
 from Levenshtein import ratio
 import os
@@ -19,11 +20,23 @@ rom_path = root_dir / "ver/current/baserom.z64"
 @dataclass
 class Symbol:
     name: str
-    rom: int
+    rom_start: int
     ram: int
     current_file: str
     prev_sym: str
     is_decompiled: bool
+    rom_end: Optional[int] = None
+
+    def size(self):
+        assert(self.rom_end is not None)
+        return self.rom_end - self.rom_start
+
+@dataclass
+class Bytes:
+    offset: int
+    normalized: str
+    bytes: list[int]
+
 
 def read_rom() -> bytes:
     with open(rom_path, "rb") as f:
@@ -38,18 +51,11 @@ def get_all_unmatched_functions():
     return ret
 
 
-def get_symbol_length(sym_name):
-    if "end" in map_offsets[sym_name] and "start" in map_offsets[sym_name]:
-        return map_offsets[sym_name]["end"] - map_offsets[sym_name]["start"]
-    return 0
-
-
-def get_symbol_bytes(offsets, func):
-    if func not in offsets or "start" not in offsets[func] or "end" not in offsets[func]:
+def get_symbol_bytes(func: str) -> Optional[Bytes]:
+    if func not in syms or syms[func].rom_end is None:
         return None
-    start = offsets[func]["start"]
-    end = offsets[func]["end"]
-    bs = list(rom_bytes[start:end])
+    sym = syms[func]
+    bs = list(rom_bytes[sym.rom_start:sym.rom_end])
 
     while len(bs) > 0 and bs[-1] == 0:
         bs.pop()
@@ -60,14 +66,13 @@ def get_symbol_bytes(offsets, func):
     for ins in insns:
         ret.append(ins >> 2)
 
-    return bytes(ret).decode('utf-8'), bs
+    return Bytes(0, bytes(ret).decode('utf-8'), bs)
 
 
-
-def parse_map():
+def parse_map() -> OrderedDict[str, Symbol]:
     ram_offset = None
     cur_file = "<no file>"
-    syms = {}
+    syms: OrderedDict[str, Symbol] = OrderedDict()
     prev_sym = ""
     prev_line = ""
     with open(map_file_path) as f:
@@ -99,68 +104,55 @@ def parse_map():
             else:
                 syms[fn] = Symbol(
                     name=fn,
-                    rom=rom,
+                    rom_start=rom,
                     ram=ram,
                     current_file=cur_file,
                     prev_sym=prev_sym,
-                    is_decompiled=False
+                    is_decompiled=not fn in unmatched_functions,
                 )
                 prev_sym = fn
+
+    # Calc end offsets
+    for sym in syms:
+        prev_sym = syms[sym].prev_sym
+        if prev_sym:
+            syms[prev_sym].rom_end = syms[sym].rom_start
+
     return syms
 
 
-def get_map_offsets(syms):
-    offsets = {}
-    for sym in syms:
-        prev_sym = syms[sym][2]
-        if sym not in offsets:
-            offsets[sym] = {}
-        if prev_sym not in offsets:
-            offsets[prev_sym] = {}
-        offsets[sym]["start"] = syms[sym][0]
-        offsets[prev_sym]["end"] = syms[sym][0]
-    return offsets
-
-
-def is_zeros(vals):
-    for val in vals:
-        if val != 0:
-            return False
-    return True
-
-
-def diff_syms(qb, tb):
-    if len(tb[1]) < 8:
+def diff_syms(qb: Bytes, tb: Bytes) -> float:
+    if len(tb.bytes) < 8:
         return 0
 
     # The minimum edit distance for two strings of different lengths is `abs(l1 - l2)`
     # Quickly check if it's impossible to beat the threshold. If it is, then return 0
-    l1, l2 = len(qb[0]), len(tb[0])
+    l1, l2 = len(qb.normalized), len(tb.normalized)
     if abs(l1 - l2) / (l1 + l2) > 1.0 - args.threshold:
         return 0
-    r = ratio(qb[0], tb[0])
+    r = ratio(qb.normalized, tb.normalized)
 
-    if r == 1.0 and qb[1] != tb[1]:
+    if r == 1.0 and qb.bytes != tb.bytes:
         r = 0.99
     return r
 
 
-def get_pair_score(query_bytes, b):
-    b_bytes = get_symbol_bytes(map_offsets, b)
+def get_pair_score(query_bytes: Bytes, b) -> float:
+    b_bytes: Optional[Bytes] = get_symbol_bytes(b)
 
     if query_bytes and b_bytes:
         return diff_syms(query_bytes, b_bytes)
     return 0
 
 
-def get_matches(query):
-    query_bytes = get_symbol_bytes(map_offsets, query)
+def get_matches(query: str):
+    query_bytes: Optional[Bytes] = get_symbol_bytes(query)
     if query_bytes is None:
         sys.exit("Symbol '" + query + "' not found")
 
-    ret = {}
-    for symbol in map_offsets:
-        if symbol is not None and query != symbol:
+    ret: dict[str, float] = {}
+    for symbol in syms:
+        if query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
                 ret[symbol] = score
@@ -185,7 +177,7 @@ def do_query(query):
         if i == args.num_out:
             break
         match_str = "{:.3f} - {}".format(matches[match], match)
-        if match not in unmatched_functions:
+        if syms[match].is_decompiled:
            match_str += " (decompiled)"
         print(match_str)
         i += 1
@@ -195,13 +187,13 @@ parser = argparse.ArgumentParser(description="Tool to find duplicate portions of
 parser.add_argument("query", help="function")
 parser.add_argument("-t", "--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
 parser.add_argument("-n", "--num-out", help="number of results to display", type=int, default=100, required=False)
+parser.add_argument("-w", "--window-size", help="number of bytes to compare", type=int, default=20, required=False)
 
 args = parser.parse_args()
 
 if __name__ == "__main__":
     rom_bytes = read_rom()
     unmatched_functions = get_all_unmatched_functions()
-    map_syms = parse_map()
-    map_offsets = get_map_offsets(map_syms)
+    syms = parse_map()
 
     do_query(args.query)
