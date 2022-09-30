@@ -1,4 +1,5 @@
 #include "kzn_19.h"
+#include "ld_addrs.h"
 
 enum {
     VINE_0      = 0,
@@ -125,8 +126,8 @@ Gfx D_80243AD8_C91688[] = {
 };
 
 s32 VineAnimationsDmaTable[] = {
-    0x007B6690, 0x007B70E0, 0x80234000,
-    0x007B5960, 0x007B6690, 0x80234000,
+    (s32) world_model_anim_kzn_00_OFFSET, (s32) world_model_anim_kzn_04_OFFSET, 0x80234000,
+    (s32) world_model_anim_kzn_01_OFFSET, (s32) world_model_anim_kzn_00_OFFSET, 0x80234000,
     0x007C4F50, 0x007C7410, 0x80234000,
     0x007C7410, 0x007C7E50, 0x80234000,
     0x007B70E0, 0x007B8030, 0x80234000,
@@ -258,16 +259,16 @@ void N(appendGfx_piranha_vines)(void* data) {
 
     f32 deltaX, deltaY;
     f32 posX, posY, posZ;
-    
+
     if (N(VineRenderState) == -1) {
         return;
     }
-    
+
     if (N(VineRenderState) == 0) {
         for (i = 0; i < NUM_VINES; i++) {
             LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
             LavaPiranhaVine* vine = &vineData->vines[i];
-            
+
             switch (i) {
                 default:
                     return;
@@ -291,7 +292,7 @@ void N(appendGfx_piranha_vines)(void* data) {
 
             vine->boneCount = boneCount;
             vine->boneLength = boneLength;
-            
+
             for (j = 0; j < boneCount; j++) {
                 if (j == (boneCount - 1)) {
                     vine->boneRot[j] += 90.0f;
@@ -307,20 +308,20 @@ void N(appendGfx_piranha_vines)(void* data) {
                     vine->boneRot[j] = ((curAngle1 + nextAngle) / 2.0) + 90.0;
                 }
             }
-            
+
             N(make_vine_interpolation)(vine);
         }
 
         N(VineRenderState) = 1;
     }
-    
+
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_80243AD8_C91688);
 
     for (i = 0; i < NUM_VINES; i++) {
         LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
         LavaPiranhaVine* vine = &vineData->vines[i];
-        
+
         boneLength = vine->boneLength;
         boneCount = vine->boneCount;
         numPoints = vine->numPoints;
@@ -328,7 +329,7 @@ void N(appendGfx_piranha_vines)(void* data) {
         // we'll build the vertex data and place it in the display list, so jump forward
         // here and leave space behind for the gSPBranchList command followed by two vertices
         // for each point in numPoints
-        
+
         vtxBuffer = (Vtx_t*)(gMasterGfxPos + 1);
         gSPBranchList(gMasterGfxPos, &gMasterGfxPos[1 + 2 * (2 * numPoints)]);
         vtx = (Vtx_t*) (++gMasterGfxPos);
@@ -338,11 +339,11 @@ void N(appendGfx_piranha_vines)(void* data) {
             posX = vine->points[j].x;
             posY = vine->points[j].y;
             posZ = vine->points[j].z;
-            
+
             alphaCoord = ((f32) j * boneCount) / numPoints;
             nearest = (s32) alphaCoord;
             alphaFrac = alphaCoord - (f32)nearest;
-            
+
             if (nearest + 1 >= boneCount) {
                 angle = vine->boneRot[boneCount - 1];
             } else {
@@ -356,10 +357,10 @@ void N(appendGfx_piranha_vines)(void* data) {
                 }
                 angle = ((nextAngle - curAngle2) * alphaFrac) + curAngle2;
             }
-            
+
             deltaX =  sin_deg(angle) * boneLength;
             deltaY = -cos_deg(angle) * boneLength;
-            
+
             vtx->ob[0] = posX + deltaX;
             vtx->ob[1] = posY + deltaY;
             vtx->ob[2] = posZ;
@@ -369,7 +370,7 @@ void N(appendGfx_piranha_vines)(void* data) {
             vtx->cn[1] = j * 120;;
             vtx->cn[2] = j * 30;
             vtx++;
-            
+
             vtx->ob[0] = posX - deltaX;
             vtx->ob[1] = posY - deltaY;
             vtx->ob[2] = posZ;
@@ -597,7 +598,7 @@ API_CALLABLE(N(LoadAnimationFromTable)) {
     Bytecode* args = script->ptrReadPos;
     s32 type = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
-    
+
     switch (type) {
         case VINE_0:
             dma_copy(
