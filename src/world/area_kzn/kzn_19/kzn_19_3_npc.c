@@ -322,7 +322,7 @@ void N(appendGfx_piranha_vines)(void* data) {
         segCount = vine->unk_90;
         numPoints = vine->numPoints;
 
-        // we'll build the vertex data and place it in the diaplay list, so jump forward
+        // we'll build the vertex data and place it in the display list, so jump forward
         // here and leave space behind for the gSPBranchList command followed by two vertices
         // for each point in numPoints
         

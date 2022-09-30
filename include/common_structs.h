@@ -1006,8 +1006,8 @@ typedef struct ModelDisplayData {
 } ModelDisplayData; // size = 0x8
 
 typedef struct AnimatorNode {
-    /* 0x00 */ Gfx* displayList;
-    /* 0x04 */ struct AnimatorNode* children[0x20];
+    /* 0x00 */ void* displayList;
+    /* 0x04 */ struct AnimatorNode* children[32];
     /* 0x84 */ Vec3f basePos; // ?
     /* 0x90 */ Vec3f pos;
     /* 0x9C */ Vec3f rotation;
@@ -1024,14 +1024,14 @@ typedef struct AnimatorNode {
 } AnimatorNode; // size = 0x100
 
 typedef struct AnimatorNodeBlueprint {
-    /* 0x00 */ Gfx* displayList;
+    /* 0x00 */ void* displayList;
     /* 0x04 */ Vec3f basePos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ char unk_1C[0x4];
 } AnimatorNodeBlueprint; // size = 0x20
 
 typedef struct StaticAnimatorNode {
-    /* 0x00 */ Gfx* displayList; // can sometime point to a node???
+    /* 0x00 */ void* displayList; // sometimes StaticAnimatorNode*, sometimes Gfx*???
     /* 0x04 */ Vec3s rot; /* range = -180,180 */
     /* 0x0A */ char unk_0A[0x2];
     /* 0x0C */ Vec3f pos;
