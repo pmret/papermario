@@ -76,7 +76,7 @@ Gfx D_80243AD8_C91688[] = {
     gsSPEndDisplayList(),
 };
 
-s32 D_80243BB8_C91768[] = {
+s32 VineAnimationsDmaTable[] = {
     0x007B6690, 0x007B70E0, 0x80234000,
     0x007B5960, 0x007B6690, 0x80234000,
     0x007C4F50, 0x007C7410, 0x80234000, 
