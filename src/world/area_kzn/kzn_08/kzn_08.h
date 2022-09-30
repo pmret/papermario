@@ -10,12 +10,12 @@
 #include "mapfs/kzn_08_hit.h"
 
 enum {
-	NPC_PutridPiranha_01        = 0,
-	NPC_PutridPiranha_02        = 1
+    NPC_PutridPiranha_01        = 0,
+    NPC_PutridPiranha_02        = 1
 };
 
 enum {
-	MV_GlowIntensity		= MapVar(0),
+    MV_GlowIntensity        = MapVar(0),
 };
 
 #define NAMESPACE kzn_08

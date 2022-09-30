@@ -11,7 +11,7 @@
 
 // map variables
 enum {
-	MV_GlowIntensity		= MapVar(0),
+    MV_GlowIntensity        = MapVar(0),
 };
 
 #define NAMESPACE kzn_06

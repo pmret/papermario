@@ -16,10 +16,10 @@
 #include "sprite/npc/SpikeTop.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_Piranha                 = 1,
-	NPC_Piranha_Hitbox          = 2,
-	NPC_SpikeTop                = 3,
+    NPC_Kolorado                = 0,
+    NPC_Piranha                 = 1,
+    NPC_Piranha_Hitbox          = 2,
+    NPC_SpikeTop                = 3,
 };
 
 enum {

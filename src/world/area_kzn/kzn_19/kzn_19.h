@@ -16,17 +16,17 @@
 #include "sprite/npc/LavaBud.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_Misstar                 = 1,
-	NPC_LavaPiranhaHead         = 2,
-	NPC_LavaBud_01              = 3,
-	NPC_LavaBud_02              = 4,
-	NPC_05                      = 5,
+    NPC_Kolorado                = 0,
+    NPC_Misstar                 = 1,
+    NPC_LavaPiranhaHead         = 2,
+    NPC_LavaBud_01              = 3,
+    NPC_LavaBud_02              = 4,
+    NPC_05                      = 5,
 };
 
 enum {
-	MV_VinesData				= MapVar(0),
-	MV_BossDefeated				= MapVar(10),
+    MV_VinesData                = MapVar(0),
+    MV_BossDefeated             = MapVar(10),
 };
 
 #define NAMESPACE kzn_19

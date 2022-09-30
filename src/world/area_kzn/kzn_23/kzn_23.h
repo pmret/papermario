@@ -13,12 +13,12 @@
 #include "sprite/npc/WorldMisstar.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_Misstar                 = 1,
+    NPC_Kolorado                = 0,
+    NPC_Misstar                 = 1,
 };
 
 enum {
-	MV_LavaLevel				= MapVar(10),
+    MV_LavaLevel                = MapVar(10),
 };
 
 #define NAMESPACE kzn_23

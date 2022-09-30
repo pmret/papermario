@@ -12,22 +12,22 @@
 #include "sprite/npc/Fire.h"
 
 enum {
-	NPC_FireBar_1A              = 0,
-	NPC_FireBar_1B              = 1,
-	NPC_FireBar_1C              = 2,
-	NPC_FireBar_1D              = 3,
-	NPC_FireBar_2A              = 5,
-	NPC_FireBar_2B              = 6,
-	NPC_FireBar_2C              = 7,
-	NPC_FireBar_2D              = 8,
-	NPC_FireBar_3A              = 10,
-	NPC_FireBar_3B              = 11,
-	NPC_FireBar_3C              = 12,
-	NPC_FireBar_3D              = 13,
+    NPC_FireBar_1A              = 0,
+    NPC_FireBar_1B              = 1,
+    NPC_FireBar_1C              = 2,
+    NPC_FireBar_1D              = 3,
+    NPC_FireBar_2A              = 5,
+    NPC_FireBar_2B              = 6,
+    NPC_FireBar_2C              = 7,
+    NPC_FireBar_2D              = 8,
+    NPC_FireBar_3A              = 10,
+    NPC_FireBar_3B              = 11,
+    NPC_FireBar_3C              = 12,
+    NPC_FireBar_3D              = 13,
 };
 
 enum {
-	MV_SuperBlock				= MapVar(0),
+    MV_SuperBlock               = MapVar(0),
 };
 
 #define NAMESPACE kzn_04

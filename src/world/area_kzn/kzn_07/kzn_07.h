@@ -10,13 +10,13 @@
 #include "mapfs/kzn_07_hit.h"
 
 enum {
-	NPC_Bubble_01               = 0,
-	NPC_Bubble_02               = 1,
+    NPC_Bubble_01               = 0,
+    NPC_Bubble_02               = 1,
 };
 
 // map variables
 enum {
-	MV_GlowIntensity		= MapVar(0),
+    MV_GlowIntensity        = MapVar(0),
 };
 
 #define NAMESPACE kzn_07

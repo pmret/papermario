@@ -16,14 +16,14 @@
 #include "sprite/npc/LargePiranha.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_ZiplineDummy1           = 1,
-	NPC_ZiplineDummy2           = 2,
-	NPC_SpikeTop_01             = 3,
-	NPC_SpikeTop_02             = 4,
-	NPC_SpikeTop_03             = 5,
-	NPC_Piranha                 = 6,
-	NPC_Piranha_Hitbox          = 7,
+    NPC_Kolorado                = 0,
+    NPC_ZiplineDummy1           = 1,
+    NPC_ZiplineDummy2           = 2,
+    NPC_SpikeTop_01             = 3,
+    NPC_SpikeTop_02             = 4,
+    NPC_SpikeTop_03             = 5,
+    NPC_Piranha                 = 6,
+    NPC_Piranha_Hitbox          = 7,
 };
 
 enum {

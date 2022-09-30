@@ -14,8 +14,8 @@
 #include "sprite/npc/LavaBubble.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_LavaBubble              = 1,
+    NPC_Kolorado                = 0,
+    NPC_LavaBubble              = 1,
 };
 
 #define NAMESPACE kzn_02

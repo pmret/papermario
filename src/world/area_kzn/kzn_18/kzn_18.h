@@ -14,8 +14,8 @@
 #include "sprite/npc/LargePiranha.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_PutridPiranha           = 1,
+    NPC_Kolorado                = 0,
+    NPC_PutridPiranha           = 1,
 };
 
 enum {
