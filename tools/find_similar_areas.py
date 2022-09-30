@@ -145,10 +145,19 @@ def get_pair_score(query_bytes: Bytes, b) -> float:
     return 0
 
 
-def get_matches(query: str):
+def get_hashes(query_bytes: Bytes, window_size: int):
+    ret = []
+    for i in range(0, len(query_bytes.normalized) - window_size, window_size):
+        ret.append(query_bytes.normalized[i : i + window_size])
+    return ret
+
+def get_matches(query: str, window_size: int):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
+
     if query_bytes is None:
         sys.exit("Symbol '" + query + "' not found")
+
+    query_hashes = get_hashes(query_bytes, window_size)
 
     ret: dict[str, float] = {}
     for symbol in syms:
@@ -159,8 +168,8 @@ def get_matches(query: str):
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
-def do_query(query):
-    matches = get_matches(query)
+def do_query(query, window_size):
+    matches = get_matches(query, window_size)
     num_matches = len(matches)
 
     if num_matches == 0:
@@ -196,4 +205,4 @@ if __name__ == "__main__":
     unmatched_functions = get_all_unmatched_functions()
     syms = parse_map()
 
-    do_query(args.query)
+    do_query(args.query, args.window_size)
