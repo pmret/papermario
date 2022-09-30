@@ -165,7 +165,7 @@ static s32 N(VineRenderState);
 
 static s32 N(unk_static_pad);
 
-void func_80240B00_C8E6B0(LavaPiranhaVine* vine) {
+void N(func_80240B00_C8E6B0)(LavaPiranhaVine* vine) {
     Evt dummyEvt;
     Evt* dummyEvtPtr = &dummyEvt;
     s32 args[4];
@@ -234,12 +234,8 @@ API_CALLABLE(N(SetVineJointScale)) {
     return ApiStatus_DONE2;
 }
 
-void func_80240E2C_C8E9DC(void *data);
-
-#ifdef NON_MATCHING
-void func_80240E2C_C8E9DC(void* data) {
-    Gfx* nextGfx;
-    Gfx* afterVtx;
+void N(appendGfx_piranha_vines)(void* data) {
+    Vtx_t* vtxBuffer;
     Vtx_t* vtx;
 
     f32 segLength;
@@ -260,11 +256,11 @@ void func_80240E2C_C8E9DC(void* data) {
     f32 deltaX, deltaY;
     f32 posX, posY, posZ;
     
-    if (D_80248380_kzn_19 == -1) {
+    if (N(VineRenderState) == -1) {
         return;
     }
     
-    if (D_80248380_kzn_19 == 0) {
+    if (N(VineRenderState) == 0) {
         for (i = 0; i < 4; i++) {
             LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
             LavaPiranhaVine* vine = &vineData->unk_00[i];
@@ -309,10 +305,10 @@ void func_80240E2C_C8E9DC(void* data) {
                 }
             }
             
-            func_80240B00_C8E6B0(vine);
+            N(func_80240B00_C8E6B0)(vine);
         }
 
-        D_80248380_kzn_19 = 1;
+        N(VineRenderState) = 1;
     }
     
     gDPPipeSync(gMasterGfxPos++);
@@ -329,11 +325,11 @@ void func_80240E2C_C8E9DC(void* data) {
         // we'll build the vertex data and place it in the diaplay list, so jump forward
         // here and leave space behind for the gSPBranchList command followed by two vertices
         // for each point in numPoints
-        nextGfx = gMasterGfxPos + 1;
-        afterVtx = nextGfx + 2 * (2 * numPoints);
-        gSPBranchList(gMasterGfxPos++, (gMasterGfxPos + 1) + 2 * (2 * numPoints));
-        vtx = (Vtx_t*) gMasterGfxPos;
-        gMasterGfxPos = afterVtx;
+        
+        vtxBuffer = (Vtx_t*)(gMasterGfxPos + 1);
+        gSPBranchList(gMasterGfxPos, &gMasterGfxPos[1 + 2 * (2 * numPoints)]);
+        vtx = (Vtx_t*) (++gMasterGfxPos);
+        gMasterGfxPos = &gMasterGfxPos[2 * (2 * numPoints)];
 
         for (j = 0; j < numPoints; j++) {
             posX = vine->points[j].x;
@@ -383,21 +379,18 @@ void func_80240E2C_C8E9DC(void* data) {
         }
 
         for (j = 0; j < numPoints - 1; j++) {
-            gSPVertex(gMasterGfxPos++, &afterVtx[4*j], 4, 0);
+            gSPVertex(gMasterGfxPos++, &vtxBuffer[2*j], 4, 0);
             gSP2Triangles(gMasterGfxPos++, 1, 0, 2, 0, 1, 2, 3, 0);
         }
     }
 
     gDPPipeSync(gMasterGfxPos++);
 }
-#else
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/kzn_19_4", func_80240E2C_C8E9DC);
-#endif
 
-void N(worker_render_vine)(void) {
+void N(worker_render_piranha_vines)(void) {
     RenderTask renderTask;
 
-    renderTask.appendGfx = &func_80240E2C_C8E9DC;
+    renderTask.appendGfx = &N(appendGfx_piranha_vines);
     renderTask.appendGfxArg = 0;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
@@ -405,7 +398,7 @@ void N(worker_render_vine)(void) {
     queue_render_task(&renderTask);
 }
 
-API_CALLABLE(N(MarkInterpolationDirty)) {
+API_CALLABLE(N(MarkVineInterpolationDirty)) {
     N(VineRenderState) = 0;
     return ApiStatus_DONE2;
 }
@@ -414,7 +407,7 @@ API_CALLABLE(N(CreateVineRenderer)) {
     LavaPiranhaVineSet* data = heap_malloc(sizeof(*data));
     evt_set_variable(script, MV_VinesData, (s32) data);
     N(VineRenderState) = -1;
-    create_generic_entity_world(NULL, &N(worker_render_vine));
+    create_generic_entity_world(NULL, &N(worker_render_piranha_vines));
     return ApiStatus_DONE2;
 }
 
@@ -475,7 +468,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_END
 };
 
-EvtScript N(D_802448BC_C9246C) = {
+EvtScript N(EVS_Kolorado_Escape) = {
     EVT_LABEL(0)
     EVT_IF_EQ(MV_Unk_0A, FALSE)
         EVT_WAIT(1)
@@ -527,7 +520,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
                 EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
             EVT_CASE_EQ(kzn_19_ENTRY_1)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802448BC_C9246C)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Kolorado_Escape)))
         EVT_END_SWITCH
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -598,7 +591,7 @@ EvtScript N(EVS_Misstar_Escape) = {
 };
 
 API_CALLABLE(N(LoadAnimationFromTable)) {
-    Bytecode*  args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 type = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
     
@@ -631,7 +624,7 @@ API_CALLABLE(N(LoadAnimationFromTable)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80245010_C92BC0) = {
+EvtScript N(EVS_PlayVinesAnim_Emerge) = {
     EVT_THREAD
         EVT_CALL(N(LoadAnimationFromTable), VINE_0, 15)
         EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -665,7 +658,7 @@ EvtScript N(D_80245010_C92BC0) = {
     EVT_END
 };
 
-EvtScript N(D_8024522C_C92DDC) = {
+EvtScript N(EVS_PlayVinesAnim_Idle) = {
     EVT_CALL(N(LoadAnimationFromTable), VINE_0, 0)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
     EVT_CALL(N(LoadAnimationFromTable), VINE_1, 31)
@@ -679,7 +672,7 @@ EvtScript N(D_8024522C_C92DDC) = {
     EVT_END
 };
 
-EvtScript N(D_802452E8_C92E98) = {
+EvtScript N(EVS_PlayVinesAnim_Talk) = {
     EVT_CALL(N(LoadAnimationFromTable), VINE_0, 17)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
     EVT_RETURN
@@ -757,7 +750,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
         EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAt, SOUND_3C5, 0, 330, 25, -50)
-    EVT_EXEC(N(D_80245010_C92BC0))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Emerge))
     EVT_WAIT(59)
     EVT_THREAD
         EVT_CALL(MakeLerp, 40, 0, 80, EASING_QUADRATIC_OUT)
@@ -778,21 +771,21 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_EXEC(N(D_802452E8_C92E98))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Talk))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30, MSG_CH5_0102)
-    EVT_EXEC(N(D_8024522C_C92DDC))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Idle))
     EVT_WAIT(10)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 256, -30, 30)
-    EVT_EXEC(N(D_802452E8_C92E98))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Talk))
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30, MSG_CH5_0103)
-    EVT_EXEC(N(D_8024522C_C92DDC))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Idle))
     EVT_WAIT(10)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
-    EVT_EXEC(N(D_802452E8_C92E98))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Talk))
     EVT_WAIT(10)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
-    EVT_EXEC(N(D_8024522C_C92DDC))
+    EVT_EXEC(N(EVS_PlayVinesAnim_Idle))
     EVT_WAIT(10)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
     EVT_CHILD_THREAD
@@ -831,7 +824,7 @@ EvtScript N(EVS_NpcAux_LavaPiranha) = {
     EVT_CALL(SetNpcPos, NPC_LavaPiranhaHead, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaPiranhaHead, LVar0, 0, LVar2)
-    EVT_CALL(N(MarkInterpolationDirty))
+    EVT_CALL(N(MarkVineInterpolationDirty))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
     EVT_CALL(N(SetVineJointPos), VINE_0, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
