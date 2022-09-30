@@ -863,7 +863,7 @@ D_802F4560 = 0x802F4560;
 
 kzn_02_KeyItemChoiceList = 0x802465D0;
 D_80247420_kzn_03 = 0x80247420;
-D_80248380_kzn_19 = 0x80248380;
+kzn_19_VineRenderState = 0x80248380;
 kzn_19_LetterDelivery_SavedNpcAnim = 0x8024854C;
 D_80247BB8_pra_19 = 0x80247BB8;
 pra_01_80243178 = 0x80243178;

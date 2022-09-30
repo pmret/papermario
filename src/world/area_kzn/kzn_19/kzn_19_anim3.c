@@ -40,7 +40,7 @@ StaticAnimatorNode N(D_8024348C_C9103C) = {
 	.child = &N(D_80243460_C91010),
 };
 
-StaticAnimatorNode* N(D_802434B8_C91068)[] = {
+StaticAnimatorNode* N(AnimModel_ExtraVine)[] = {
     &N(D_8024348C_C9103C), &N(D_80243460_C91010), &N(D_80243434_C90FE4), &N(D_80243408_C90FB8),
     &N(D_802433DC_C90F8C), &N(D_802433B0_C90F60), NULL, NULL
 };

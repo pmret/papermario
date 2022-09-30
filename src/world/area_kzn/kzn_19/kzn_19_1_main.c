@@ -1,21 +1,22 @@
 #include "kzn_19.h"
 
 extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_80248068);
-extern EvtScript N(EVS_80244C78);
+extern EvtScript N(EVS_UpdateEruption);
+extern EvtScript N(EVS_Misstar_Escape);
 extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
+extern NpcGroupList N(BossNPCs);
+extern NpcGroupList N(EscapeNPCs);
 
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
-EvtScript N(D_80242164_C8FD14) = {
+EvtScript N(EVS_TryingSpawningStarCard) = {
+    // determine if card should be spawned
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-            EVT_SET(LVar0, 0)
-            EVT_IF_EQ(MV_Unk_0A, 0)
+            EVT_SET(LVar0, FALSE)
+            EVT_IF_EQ(MV_Unk_0A, FALSE)
                 EVT_RETURN
             EVT_END_IF
             EVT_SET(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
@@ -24,11 +25,12 @@ EvtScript N(D_80242164_C8FD14) = {
             EVT_IF_EQ(LVar0, kzn_19_ENTRY_3)
                 EVT_RETURN
             EVT_END_IF
-            EVT_SET(LVar0, 1)
+            EVT_SET(LVar0, TRUE)
         EVT_CASE_DEFAULT
             EVT_RETURN
     EVT_END_SWITCH
     EVT_IF_EQ(LVar0, 0)
+        // card appearing scene
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 185, 110, -30)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.44))
@@ -78,12 +80,14 @@ EvtScript N(D_80242164_C8FD14) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_ELSE
+        // just make the card spawn
         EVT_CALL(N(StarSpiritEffectFunc5), 4, 185, 55, -30, 25)
         EVT_THREAD
             EVT_CALL(N(StarSpiritEffectFunc6))
         EVT_END_THREAD
         EVT_WAIT(1)
     EVT_END_IF
+    // wait for pickup
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
     EVT_CALL(PlaySoundAtPlayer, SOUND_138, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -97,7 +101,7 @@ EvtScript N(EVS_ExitWalk_kzn_18_1) = EVT_EXIT_WALK(60, kzn_19_ENTRY_0, "kzn_18",
 EvtScript N(EVS_ExitWalk_kzn_18_2) = EVT_EXIT_WALK(60, kzn_19_ENTRY_1, "kzn_18", kzn_18_ENTRY_2);
 EvtScript N(EVS_ExitWalk_kzn_20_0) = EVT_EXIT_WALK(60, kzn_19_ENTRY_2, "kzn_20", kzn_20_ENTRY_0);
 
-EvtScript N(D_80242750_C90300) = {
+EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kzn_18_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kzn_18_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kzn_20_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
@@ -105,7 +109,7 @@ EvtScript N(D_80242750_C90300) = {
     EVT_END
 };
 
-EvtScript N(D_802427B4_C90364) = {
+EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, MODEL_yougan1_1, 2)
     EVT_CALL(EnableTexPanning, MODEL_toro, TRUE)
@@ -145,7 +149,7 @@ EvtScript N(D_802427B4_C90364) = {
     EVT_END
 };
 
-EvtScript N(D_80242AD0_C90680) = {
+EvtScript N(EVS_UpdateLavaWaves) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_LOOP(0)
         EVT_CALL(MakeLerp, 0, 180, 40, EASING_COS_IN)
@@ -181,19 +185,19 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kzn_19_ENTRY_3)
-        EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
+        EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(EscapeNPCs)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup1)))
+        EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(BossNPCs)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kzn_19_ENTRY_3)
         EVT_THREAD
-            EVT_EXEC_WAIT(N(EVS_80244C78))
-            EVT_EXEC(N(D_80242750_C90300))
+            EVT_EXEC_WAIT(N(EVS_Misstar_Escape))
+            EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_END_THREAD
     EVT_ELSE
-        EVT_SET(LVar0, EVT_PTR(N(D_80242750_C90300)))
+        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
         EVT_EXEC(EnterWalk)
         EVT_WAIT(1)
     EVT_END_IF
@@ -214,15 +218,15 @@ EvtScript N(EVS_Main) = {
             EVT_CALL(EnableGroup, MODEL_naka, FALSE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
-    EVT_EXEC(N(D_802427B4_C90364))
+    EVT_EXEC(N(EVS_StartTexPanners_Lava))
     EVT_SET(LVar0, MODEL_kem1)
     EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_SET(LVar0, MODEL_kem2)
     EVT_EXEC(N(EVS_StartTexPanner_SmokeRight))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(D_80242AD0_C90680))
-    EVT_EXEC(N(EVS_80248068))
-    EVT_EXEC(N(D_80242164_C8FD14))
+    EVT_EXEC(N(EVS_UpdateLavaWaves))
+    EVT_EXEC(N(EVS_UpdateEruption))
+    EVT_EXEC(N(EVS_TryingSpawningStarCard))
     EVT_RETURN
     EVT_END
 };

@@ -10297,12 +10297,12 @@ segments:
     start: 0xC8DBB0
     vram: 0x80240000
     subsegments:
-    - [0xC8DBB0, c, kzn_19_0]
-    - [0xC8DBB0, c, kzn_19_1]
-    - [0xC8E6B0, c, kzn_19_2]
-    - [0xC8E6B0, c, kzn_19_4]
-    - [0xC8E6B0, c, kzn_19_5]
-    - [0xC8E6B0, c, kzn_19_6]
+    - [0xC8DBB0, c, kzn_19_0_header]
+    - [0xC8DBB0, c, kzn_19_1_main]
+    - [0xC8E6B0, c, kzn_19_2_npc_settings]
+    - [0xC8E6B0, c, kzn_19_3_npc]
+    - [0xC8E6B0, c, kzn_19_4_eruption]
+    - [0xC8E6B0, c, kzn_19_5_entity]
     - [0xC8F8E0]
   - name: kzn_20
     dir: world/area_kzn/kzn_20

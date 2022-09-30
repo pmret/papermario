@@ -10,8 +10,8 @@ dlabel D_80248370_C95F20
 
 glabel func_80240E2C_C8E9DC
 /* C8E9DC 80240E2C 27BDFF70 */  addiu     $sp, $sp, -0x90
-/* C8E9E0 80240E30 3C038025 */  lui       $v1, %hi(D_80248380_kzn_19)
-/* C8E9E4 80240E34 8C638380 */  lw        $v1, %lo(D_80248380_kzn_19)($v1)
+/* C8E9E0 80240E30 3C038025 */  lui       $v1, %hi(kzn_19_VineRenderState)
+/* C8E9E4 80240E34 8C638380 */  lw        $v1, %lo(kzn_19_VineRenderState)($v1)
 /* C8E9E8 80240E38 2402FFFF */  addiu     $v0, $zero, -1
 /* C8E9EC 80240E3C AFBF005C */  sw        $ra, 0x5c($sp)
 /* C8E9F0 80240E40 AFBE0058 */  sw        $fp, 0x58($sp)
@@ -135,8 +135,8 @@ glabel func_80240E2C_C8E9DC
 /* C8EB94 80240FE4 1440FFB1 */  bnez      $v0, .L80240EAC
 /* C8EB98 80240FE8 261001E0 */   addiu    $s0, $s0, 0x1e0
 /* C8EB9C 80240FEC 24020001 */  addiu     $v0, $zero, 1
-/* C8EBA0 80240FF0 3C018025 */  lui       $at, %hi(D_80248380_kzn_19)
-/* C8EBA4 80240FF4 AC228380 */  sw        $v0, %lo(D_80248380_kzn_19)($at)
+/* C8EBA0 80240FF0 3C018025 */  lui       $at, %hi(kzn_19_VineRenderState)
+/* C8EBA4 80240FF4 AC228380 */  sw        $v0, %lo(kzn_19_VineRenderState)($at)
 /* C8EBA8 80240FF8 0000382D */  daddu     $a3, $zero, $zero
 .L80240FFC:
 /* C8EBAC 80240FFC 3C02800A */  lui       $v0, %hi(gMasterGfxPos)

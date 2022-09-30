@@ -32,10 +32,10 @@ extern API_CALLABLE(SetAnimatorFlags);
 extern API_CALLABLE(GetAnimatedPositionByTreeIndex);
 extern API_CALLABLE(GetAnimatedRotationByTreeIndex);
 
-extern EvtScript N(D_80242164_C8FD14);
-extern StaticAnimatorNode* N(D_802431F8_C90DA8)[];
-extern StaticAnimatorNode* N(D_80243388_C90F38)[];
-extern StaticAnimatorNode* N(D_802434B8_C91068)[];
+extern EvtScript N(EVS_TryingSpawningStarCard);
+extern StaticAnimatorNode* N(AnimModel_MainHeadVine)[];
+extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
+extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];
 
 extern NpcSettings N(NpcSettings_Kolorado);
 extern NpcSettings N(NpcSettings_Misstar);
@@ -161,20 +161,20 @@ s32 VineAnimationsDmaTable[] = {
     0x007E03B0, 0x007E0E80, 0x80234000, 
 };
 
-static s32 D_80248380_kzn_19;
+static s32 N(VineRenderState);
 
-static s32 unk_static_pad;
+static s32 N(unk_static_pad);
 
-void func_80240B00_C8E6B0(LavaPiranhaVine* sub) {
+void func_80240B00_C8E6B0(LavaPiranhaVine* vine) {
     Evt dummyEvt;
     Evt* dummyEvtPtr = &dummyEvt;
     s32 args[4];
     s32 count;
 
     // setup dummy call to LoadPath
-    args[0] = 3 * sub->unk_90;       // generate three output samples per input
-    args[1] = (s32) &sub->unk_00;    // points
-    args[2] = sub->unk_90;           // num vectors
+    args[0] = 3 * vine->unk_90;       // generate three output samples per input
+    args[1] = (s32) &vine->unk_00;    // points
+    args[2] = vine->unk_90;           // num vectors
     args[3] = EASING_LINEAR;
     dummyEvtPtr->ptrReadPos = args;
     LoadPath(dummyEvtPtr, 1);
@@ -182,68 +182,219 @@ void func_80240B00_C8E6B0(LavaPiranhaVine* sub) {
     count = 0;
     do {
         GetNextPathPos(dummyEvtPtr, 1);
-        sub->points[count].x = evt_get_float_variable(dummyEvtPtr, LocalVar(1));
-        sub->points[count].y = evt_get_float_variable(dummyEvtPtr, LocalVar(2));
-        sub->points[count].z = evt_get_float_variable(dummyEvtPtr, LocalVar(3));
+        vine->points[count].x = evt_get_float_variable(dummyEvtPtr, LVar1);
+        vine->points[count].y = evt_get_float_variable(dummyEvtPtr, LVar2);
+        vine->points[count].z = evt_get_float_variable(dummyEvtPtr, LVar3);
         count++;
     } while (dummyEvtPtr->varTable[0] != 0);
-    sub->numPoints = count;
+    vine->numPoints = count;
 }
 
-API_CALLABLE(func_80240BD4_C8E784) {
-    LavaPiranhaVineSet* data;
-    LavaPiranhaVine* sub;
+API_CALLABLE(N(SetVineJointPos)) {
     Bytecode* args = script->ptrReadPos;
-    s32 i = evt_get_variable(script, *args++);
-    s32 j = evt_get_variable(script, *args++);
+    s32 vineIdx = evt_get_variable(script, *args++);
+    s32 jointIdx = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
+    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
 
-    data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
-    sub = &data->unk_00[i];
-    sub->unk_00[j].x = x;
-    sub->unk_00[j].y = y;
-    sub->unk_00[j].z = z;
-
+    vine->unk_00[jointIdx].x = x;
+    vine->unk_00[jointIdx].y = y;
+    vine->unk_00[jointIdx].z = z;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80240CD8_C8E888) {
-    Bytecode* args = script->ptrReadPos;    
-    LavaPiranhaVineSet* data;
-    LavaPiranhaVine* sub;
-    s32 value;
-    
-    s32 i = evt_get_variable(script, *args++);
-    s32 j = evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    value = evt_get_variable(script, *args++);
-    data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
-    sub = &data->unk_00[i];
-    sub->unk_6C[j] = value;
-    
-    return ApiStatus_DONE2;
-}
-
-// what the...
-API_CALLABLE(func_80240DA4_C8E954) {
+API_CALLABLE(N(SetVineJointRot)) {
     Bytecode* args = script->ptrReadPos;
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(NULL, MapVar(0));
+    s32 vineIdx = evt_get_variable(script, *args++);
+    s32 jointIdx = evt_get_variable(script, *args++);
+    s32 rx = evt_get_variable(script, *args++);
+    s32 ry = evt_get_variable(script, *args++);
+    s32 rz = evt_get_variable(script, *args++);
+    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
+
+    vine->unk_6C[jointIdx] = rz;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(SetVineJointScale)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 vineIdx = evt_get_variable(script, *args++);
+    s32 jointIdx = evt_get_variable(script, *args++);
+    s32 sx = evt_get_variable(script, *args++);
+    s32 sy = evt_get_variable(script, *args++);
+    s32 sz = evt_get_variable(script, *args++);
+    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &data->unk_00[vineIdx];
+
+    // do nothing
     return ApiStatus_DONE2;
 }
 
 void func_80240E2C_C8E9DC(void *data);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/kzn_19_4", func_80240E2C_C8E9DC);
+#ifdef NON_MATCHING
+void func_80240E2C_C8E9DC(void* data) {
+    Gfx* nextGfx;
+    Gfx* afterVtx;
+    Vtx_t* vtx;
 
-void func_802413C0_C8EF70(void) {
+    f32 segLength;
+    s32 segCount;
+
+    f32 angle;
+    f32 nextAngle;
+    f32 curAngle1;
+    f32 curAngle2; 
+
+    f32 alphaCoord;
+    f32 alphaFrac;
+    s32 nearest;
+
+    s32 numPoints;
+    s32 i, j;
+
+    f32 deltaX, deltaY;
+    f32 posX, posY, posZ;
+    
+    if (D_80248380_kzn_19 == -1) {
+        return;
+    }
+    
+    if (D_80248380_kzn_19 == 0) {
+        for (i = 0; i < 4; i++) {
+            LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
+            LavaPiranhaVine* vine = &vineData->unk_00[i];
+            
+            switch (i) {
+                default:
+                    return;
+                case 0:
+                    segCount = 9;
+                    segLength = 10.0f;
+                    break;
+                case 1:
+                    segCount = 7;
+                    segLength = 8.0f;
+                    break;
+                case 2:
+                    segCount = 7;
+                    segLength = 8.0f;
+                    break;
+                case 3:
+                    segCount = 5;
+                    segLength = 8.0f;
+                    break;
+            }
+
+            vine->unk_90 = segCount;
+            vine->unk_94 = segLength;
+            
+            for (j = 0; j < segCount; j++) {
+                if (j == (segCount - 1)) {
+                    vine->unk_6C[j] += 90.0f;
+                } else {
+                    curAngle1 = vine->unk_6C[j];
+                    nextAngle = vine->unk_6C[j + 1];
+                    if (nextAngle - curAngle1 > 180.0f) {
+                        curAngle1 += 360.0f;
+                    } else if (nextAngle - curAngle1 < -180.0f) {
+                        nextAngle += 360.0f;
+                    }
+                    // average cur and next angles
+                    vine->unk_6C[j] = ((curAngle1 + nextAngle) / 2.0) + 90.0;
+                }
+            }
+            
+            func_80240B00_C8E6B0(vine);
+        }
+
+        D_80248380_kzn_19 = 1;
+    }
+    
+    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMasterGfxPos++, D_80243AD8_C91688);
+
+    for (i = 0; i < 4; i++) {
+        LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MapVar(0));
+        LavaPiranhaVine* vine = &vineData->unk_00[i];
+        
+        segLength = vine->unk_94;
+        segCount = vine->unk_90;
+        numPoints = vine->numPoints;
+
+        // we'll build the vertex data and place it in the diaplay list, so jump forward
+        // here and leave space behind for the gSPBranchList command followed by two vertices
+        // for each point in numPoints
+        nextGfx = gMasterGfxPos + 1;
+        afterVtx = nextGfx + 2 * (2 * numPoints);
+        gSPBranchList(gMasterGfxPos++, (gMasterGfxPos + 1) + 2 * (2 * numPoints));
+        vtx = (Vtx_t*) gMasterGfxPos;
+        gMasterGfxPos = afterVtx;
+
+        for (j = 0; j < numPoints; j++) {
+            posX = vine->points[j].x;
+            posY = vine->points[j].y;
+            posZ = vine->points[j].z;
+            
+            alphaCoord = ((f32) j * (f32) segCount) / (f32) numPoints;
+            nearest = (s32) alphaCoord;
+            alphaFrac = alphaCoord - (f32)nearest;
+            
+            if (nearest + 1 >= segCount) {
+                angle = vine->unk_6C[segCount - 1];
+            } else {
+                curAngle2 = vine->unk_6C[nearest];
+                nextAngle = vine->unk_6C[nearest + 1];
+                if (nextAngle - curAngle2 > 180.0f) {
+                    nextAngle -= 360.0f;
+                }
+                if (nextAngle - curAngle2 < -180.0f) {
+                    nextAngle += 360.0f;
+                }
+                angle = ((nextAngle - curAngle2) * alphaFrac) + curAngle2;
+            }
+            
+            deltaX =  sin_deg(angle) * segLength;
+            deltaY = -cos_deg(angle) * segLength;
+            
+            vtx->ob[0] = posX + deltaX;
+            vtx->ob[1] = posY + deltaY;
+            vtx->ob[2] = posZ;
+            vtx->tc[0] = j * 0x140;
+            vtx->tc[1] = 0;
+            vtx->cn[0] = j * 50;
+            vtx->cn[1] = j * 120;;
+            vtx->cn[2] = j * 30;
+            vtx++;
+            
+            vtx->ob[0] = posX - deltaX;
+            vtx->ob[1] = posY - deltaY;
+            vtx->ob[2] = posZ;
+            vtx->tc[0] = j * 0x140;
+            vtx->tc[1] = 0x400;
+            vtx->cn[0] = j * 50;
+            vtx->cn[1] = j * 120;;
+            vtx->cn[2] = j * 30;
+            vtx++;
+        }
+
+        for (j = 0; j < numPoints - 1; j++) {
+            gSPVertex(gMasterGfxPos++, &afterVtx[4*j], 4, 0);
+            gSP2Triangles(gMasterGfxPos++, 1, 0, 2, 0, 1, 2, 3, 0);
+        }
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+}
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_19/kzn_19_4", func_80240E2C_C8E9DC);
+#endif
+
+void N(worker_render_vine)(void) {
     RenderTask renderTask;
 
     renderTask.appendGfx = &func_80240E2C_C8E9DC;
@@ -254,16 +405,16 @@ void func_802413C0_C8EF70(void) {
     queue_render_task(&renderTask);
 }
 
-API_CALLABLE(func_802413FC_C8EFAC) {
-    D_80248380_kzn_19 = 0;
+API_CALLABLE(N(MarkInterpolationDirty)) {
+    N(VineRenderState) = 0;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_8024140C_C8EFBC) {
+API_CALLABLE(N(CreateVineRenderer)) {
     LavaPiranhaVineSet* data = heap_malloc(sizeof(*data));
-    evt_set_variable(script, MV_Unk_00, (s32) data);
-    D_80248380_kzn_19 = -1;
-    create_generic_entity_world(NULL, &func_802413C0_C8EF70);
+    evt_set_variable(script, MV_VinesData, (s32) data);
+    N(VineRenderState) = -1;
+    create_generic_entity_world(NULL, &N(worker_render_vine));
     return ApiStatus_DONE2;
 }
 
@@ -274,7 +425,7 @@ s32 N(LetterList)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(D_80244688_C92238) = {
+EvtScript N(EVS_Kolorado_LetterDelivery) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER25, 0,
@@ -285,7 +436,7 @@ EvtScript N(D_80244688_C92238) = {
     EVT_END
 };
 
-EvtScript N(D_802446D8_C92288) = {
+EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
@@ -296,7 +447,7 @@ EvtScript N(D_802446D8_C92288) = {
     EVT_END
 };
 
-EvtScript N(D_8024473C_C922EC) = {
+EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_IF_EQ(GF_KZN19_KoloradoDeadEnd, FALSE)
         EVT_LABEL(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -326,7 +477,7 @@ EvtScript N(D_8024473C_C922EC) = {
 
 EvtScript N(D_802448BC_C9246C) = {
     EVT_LABEL(0)
-    EVT_IF_EQ(MV_Unk_0A, 0)
+    EVT_IF_EQ(MV_Unk_0A, FALSE)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -352,29 +503,29 @@ EvtScript N(D_802448BC_C9246C) = {
     EVT_CALL(SetNpcAux, NPC_LavaPiranhaHead, 0)
     EVT_WAIT(10)
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_EXEC(N(D_80242164_C8FD14))
+    EVT_EXEC(N(EVS_TryingSpawningStarCard))
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244B1C_C926CC) = {
+EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_TalkSad, ANIM_Kolorado_IdleSad, 0, MSG_CH5_0101)
     EVT_CALL(SetSelfVar, 0, 1)
-    EVT_EXEC_WAIT(N(D_80244688_C92238))
-    EVT_EXEC_WAIT(N(D_802446D8_C92288))
+    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
+    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244B78_C92728) = {
+EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
         EVT_CALL(GetEntryID, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(kzn_19_ENTRY_0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024473C_C922EC)))
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80244B1C_C926CC)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
+                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
             EVT_CASE_EQ(kzn_19_ENTRY_1)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802448BC_C9246C)))
         EVT_END_SWITCH
@@ -385,7 +536,7 @@ EvtScript N(D_80244B78_C92728) = {
     EVT_END
 };
 
-Vec3f N(D_80244C3C_C927EC)[] = {
+Vec3f N(FlightPath)[] = {
     {  250.0,    40.0,  -35.0 },
     {  410.0,    30.0,    0.0 },
     {  460.0,    40.0,  -30.0 },
@@ -393,7 +544,7 @@ Vec3f N(D_80244C3C_C927EC)[] = {
     {  540.0,    60.0, -115.0 },
 };
 
-EvtScript N(EVS_80244C78) = {
+EvtScript N(EVS_Misstar_Escape) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetPlayerPos, 185, 25, -35)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 155, 25, -35)
@@ -406,11 +557,11 @@ EvtScript N(EVS_80244C78) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
-    EVT_SET(AF_KZN_08, TRUE)
+    EVT_SET(AF_EruptionBreakFloor, TRUE)
     EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_NE(AF_KZN_08, TRUE)
+        EVT_IF_NE(AF_EruptionBreakFloor, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -428,7 +579,7 @@ EvtScript N(EVS_80244C78) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(InterpNpcYaw, NPC_Misstar, 90, 0)
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(D_80244C3C_C927EC)), 5, EASING_LINEAR)
+    EVT_CALL(LoadPath, 45, EVT_PTR(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Misstar, LVar1, LVar2, LVar3)
@@ -446,7 +597,7 @@ EvtScript N(EVS_80244C78) = {
     EVT_END
 };
 
-API_CALLABLE(func_80241BC0_C8F770) {
+API_CALLABLE(N(LoadAnimationFromTable)) {
     Bytecode*  args = script->ptrReadPos;
     s32 type = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
@@ -482,73 +633,73 @@ API_CALLABLE(func_80241BC0_C8F770) {
 
 EvtScript N(D_80245010_C92BC0) = {
     EVT_THREAD
-        EVT_CALL(func_80241BC0_C8F770, VINE_0, 15)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_0, 15)
         EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
         EVT_CALL(SetAnimatedModelRootPosition, VINE_0, 220, 20, -40)
-        EVT_CALL(func_80241BC0_C8F770, VINE_3, 36)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_3, 36)
         EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
         EVT_CALL(SetAnimatedModelRootPosition, VINE_3, 220, 20, -40)
         EVT_WAIT(59)
-        EVT_CALL(func_80241BC0_C8F770, VINE_0, 0)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_0, 0)
         EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
-        EVT_CALL(func_80241BC0_C8F770, VINE_3, 34)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_3, 34)
         EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
     EVT_END_THREAD
     EVT_WAIT(5)
     EVT_THREAD
-        EVT_CALL(func_80241BC0_C8F770, VINE_1, 32)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_1, 32)
         EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
         EVT_CALL(SetAnimatedModelRootPosition, VINE_1, 220, 20, -40)
         EVT_WAIT(59)
-        EVT_CALL(func_80241BC0_C8F770, VINE_1, 31)
+        EVT_CALL(N(LoadAnimationFromTable), VINE_1, 31)
         EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
     EVT_END_THREAD
     EVT_WAIT(7)
-    EVT_CALL(func_80241BC0_C8F770, VINE_2, 32)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_2, 32)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_2, 270, 34, -20)
     EVT_WAIT(62)
-    EVT_CALL(func_80241BC0_C8F770, VINE_2, 31)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_2, 31)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024522C_C92DDC) = {
-    EVT_CALL(func_80241BC0_C8F770, VINE_0, 0)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_0, 0)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
-    EVT_CALL(func_80241BC0_C8F770, VINE_1, 31)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_1, 31)
     EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
-    EVT_CALL(func_80241BC0_C8F770, VINE_3, 34)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_3, 34)
     EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
     EVT_WAIT(10)
-    EVT_CALL(func_80241BC0_C8F770, VINE_2, 31)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_2, 31)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_802452E8_C92E98) = {
-    EVT_CALL(func_80241BC0_C8F770, VINE_0, 17)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_0, 17)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245320_C92ED0) = {
-    EVT_CALL(func_80241BC0_C8F770, VINE_0, 16)
+EvtScript N(EVS_PlayVinesAnim_Defeat) = {
+    EVT_CALL(N(LoadAnimationFromTable), VINE_0, 16)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
-    EVT_CALL(func_80241BC0_C8F770, VINE_1, 33)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_1, 33)
     EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
-    EVT_CALL(func_80241BC0_C8F770, VINE_2, 33)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_2, 33)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
-    EVT_CALL(func_80241BC0_C8F770, VINE_3, 35)
+    EVT_CALL(N(LoadAnimationFromTable), VINE_3, 35)
     EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802453D0_C92F80) = {
+EvtScript N(EVS_NpcIdle_LavaPiranha) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
@@ -558,27 +709,27 @@ EvtScript N(D_802453D0_C92F80) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_LAVA_PIRANHA_THEME, 0, 8)
-    EVT_CALL(LoadAnimatedModel, VINE_0, EVT_PTR(N(D_802431F8_C90DA8)))
-    EVT_CALL(func_80241BC0_C8F770, VINE_0, 0)
+    EVT_CALL(LoadAnimatedModel, VINE_0, EVT_PTR(N(AnimModel_MainHeadVine)))
+    EVT_CALL(N(LoadAnimationFromTable), VINE_0, 0)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_0, 220, -100, -40)
     EVT_CALL(SetAnimatorFlags, VINE_0, 128, 1)
-    EVT_CALL(LoadAnimatedModel, VINE_1, EVT_PTR(N(D_80243388_C90F38)))
-    EVT_CALL(func_80241BC0_C8F770, VINE_1, 31)
+    EVT_CALL(LoadAnimatedModel, VINE_1, EVT_PTR(N(AnimModel_SideHeadVine)))
+    EVT_CALL(N(LoadAnimationFromTable), VINE_1, 31)
     EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_1, 220, -100, -40)
     EVT_CALL(SetAnimatorFlags, VINE_1, 128, 1)
-    EVT_CALL(LoadAnimatedModel, VINE_2, EVT_PTR(N(D_80243388_C90F38)))
-    EVT_CALL(func_80241BC0_C8F770, VINE_2, 31)
+    EVT_CALL(LoadAnimatedModel, VINE_2, EVT_PTR(N(AnimModel_SideHeadVine)))
+    EVT_CALL(N(LoadAnimationFromTable), VINE_2, 31)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_2, 270, -100, -20)
     EVT_CALL(SetAnimatorFlags, VINE_2, 128, 1)
-    EVT_CALL(LoadAnimatedModel, VINE_3, EVT_PTR(N(D_802434B8_C91068)))
-    EVT_CALL(func_80241BC0_C8F770, VINE_3, 34)
+    EVT_CALL(LoadAnimatedModel, VINE_3, EVT_PTR(N(AnimModel_ExtraVine)))
+    EVT_CALL(N(LoadAnimationFromTable), VINE_3, 34)
     EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_3, 220, -100, -40)
     EVT_CALL(SetAnimatorFlags, VINE_3, 128, 1)
-    EVT_CALL(func_8024140C_C8EFBC)
+    EVT_CALL(N(CreateVineRenderer))
     EVT_CALL(SetSelfVar, 1, 1)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_THREAD
@@ -665,7 +816,7 @@ EvtScript N(D_802453D0_C92F80) = {
     EVT_END
 };
 
-EvtScript N(D_80245BDC_C9378C) = {
+EvtScript N(EVS_NpcAux_LavaPiranha) = {
     EVT_CALL(GetSelfVar, 0, LVar0)
     EVT_USE_ARRAY(LVar0)
     EVT_LOOP(0)
@@ -680,171 +831,171 @@ EvtScript N(D_80245BDC_C9378C) = {
     EVT_CALL(SetNpcPos, NPC_LavaPiranhaHead, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaPiranhaHead, LVar0, 0, LVar2)
-    EVT_CALL(func_802413FC_C8EFAC)
+    EVT_CALL(N(MarkInterpolationDirty))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 0, LVar0, 0, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineJointRot), VINE_0, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 9, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 9, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 7, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 7, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 7, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 7, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 7, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_0, 8, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_0, 8, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_0, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_0, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_0, 8, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_0, 8, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_0, 8, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_LavaBud_01, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaBud_01, LVar0, 0, LVar2)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 8, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 0, LVar0, 0, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineJointRot), VINE_1, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 4, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_1, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_1, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_1, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_1, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_1, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_1, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_1, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_LavaBud_02, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_LavaBud_02, LVar0, 0, LVar2)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 8, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 90)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 0, LVar0, 0, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 0, 1, 1, 1)
+    EVT_CALL(N(SetVineJointRot), VINE_2, 0, LVar0, 0, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 0, 1, 1, 1)
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 4, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 7, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 5, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 5, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 5, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_2, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_2, 6, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_2, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_2, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_2, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_2, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_2, 6, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_3, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_3, 0, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_3, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_3, 0, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_3, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_3, 0, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_3, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_3, 1, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 6, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_3, 1, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_3, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_3, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_3, 1, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_3, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_3, 2, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_3, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_3, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_3, 2, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_3, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_3, 3, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_3, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_3, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_3, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_3, 3, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240BD4_C8E784, VINE_3, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointPos), VINE_3, 4, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimatedRotationByTreeIndex, VINE_3, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240CD8_C8E888, VINE_3, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(func_80240DA4_C8E954, VINE_3, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
+    EVT_CALL(N(SetVineJointRot), VINE_3, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetVineJointScale), VINE_3, 4, EVT_FLOAT(0.71484375), EVT_FLOAT(0.71484375), EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80246FC8_C94B78) = {
+EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, 2, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
             EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
             EVT_CALL(SetPlayerPos, 125, 25, -35)
             EVT_CALL(SetNpcPos, NPC_PARTNER, 100, 25, -35)
@@ -859,12 +1010,12 @@ EvtScript N(D_80246FC8_C94B78) = {
             EVT_CALL(EnableGroup, MODEL_naka, TRUE)
             EVT_CALL(EnableGroup, MODEL_mae, FALSE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ato, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(PlaySoundAt, SOUND_3C6, 0, 330, 25, -50)
-            EVT_EXEC(N(D_80245320_C92ED0))
+            EVT_EXEC(N(EVS_PlayVinesAnim_Defeat))
             EVT_WAIT(1)
-            EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(D_80245BDC_C9378C)))
-            EVT_SET(MV_Unk_0A, 1)
+            EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_LavaPiranha)))
+            EVT_SET(MV_Unk_0A, TRUE)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
     EVT_END_SWITCH
@@ -872,7 +1023,7 @@ EvtScript N(D_80246FC8_C94B78) = {
     EVT_END
 };
 
-EvtScript N(D_802471F0_C94DA0) = {
+EvtScript N(EVS_NpcInit_LavaPiranha) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kzn_19_ENTRY_1)
         EVT_IF_LT(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
@@ -883,9 +1034,9 @@ EvtScript N(D_802471F0_C94DA0) = {
             EVT_CALL(SetSelfVar, 0, LVar0)
             EVT_USE_ARRAY(LVar0)
             EVT_CALL(SetSelfVar, 1, 0)
-            EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(D_80245BDC_C9378C)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802453D0_C92F80)))
-            EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(D_80246FC8_C94B78)))
+            EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_LavaPiranha)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_LavaPiranha)))
+            EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_LavaPiranha)))
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
@@ -895,7 +1046,7 @@ EvtScript N(D_802471F0_C94DA0) = {
     EVT_END
 };
 
-EvtScript N(D_8024733C_C94EEC) = {
+EvtScript N(EVS_NpcDefeat_LavaBud) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
@@ -906,9 +1057,9 @@ EvtScript N(D_8024733C_C94EEC) = {
     EVT_END
 };
 
-EvtScript N(D_80247394_C94F44) = {
+EvtScript N(EVS_NpcInit_LavaBud) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(D_8024733C_C94EEC)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_LavaBud)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
@@ -916,13 +1067,13 @@ EvtScript N(D_80247394_C94F44) = {
     EVT_END
 };
 
-StaticNpc N(D_802473F4_C94FA4) = {
+StaticNpc N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { 380.0f, 250.0f, -330.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR | NPC_FLAG_400000,
-    .init = &N(D_80244B78_C92728),
+    .init = &N(EVS_NpcInit_Kolorado),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -949,7 +1100,7 @@ StaticNpc N(D_802473F4_C94FA4) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(D_802475E4_C95194) = {
+StaticNpc N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_Misstar),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -981,25 +1132,25 @@ StaticNpc N(D_802475E4_C95194) = {
     .tattle = MSG_NpcTattle_Misstar,
 };
 
-s32 N(D_802477D4_C95384)[] = {
+s32 N(ExtraAnims_LavaPiranha)[] = {
     ANIM_LavaPiranha_Anim03,
     ANIM_LavaPiranha_Anim0E,
     -1
 };
 
-s32 N(D_802477E0_C95390)[] = {
+s32 N(ExtraAnims_LavaBud)[] = {
     ANIM_LavaBud_Anim03,
     -1
 };
 
-StaticNpc N(D_802477E8_C95398)[] = {
+StaticNpc N(NpcData_LavaPiranha)[] = {
     {
         .id = NPC_LavaPiranhaHead,
         .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
         .flags = NPC_FLAG_4 | NPC_FLAG_JUMPING | NPC_FLAG_40000,
-        .init = &N(D_802471F0_C94DA0),
+        .init = &N(EVS_NpcInit_LavaPiranha),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -1029,7 +1180,7 @@ StaticNpc N(D_802477E8_C95398)[] = {
             .anim_E = ANIM_LavaPiranha_Anim03,
             .anim_F = ANIM_LavaPiranha_Anim03,
         },
-        .extraAnimations = N(D_802477D4_C95384),
+        .extraAnimations = N(ExtraAnims_LavaPiranha),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
@@ -1038,7 +1189,7 @@ StaticNpc N(D_802477E8_C95398)[] = {
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_40000,
-        .init = &N(D_80247394_C94F44),
+        .init = &N(EVS_NpcInit_LavaBud),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -1068,7 +1219,7 @@ StaticNpc N(D_802477E8_C95398)[] = {
             .anim_E = ANIM_LavaBud_Anim03,
             .anim_F = ANIM_LavaBud_Anim03,
         },
-        .extraAnimations = N(D_802477E0_C95390),
+        .extraAnimations = N(ExtraAnims_LavaBud),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
@@ -1077,7 +1228,7 @@ StaticNpc N(D_802477E8_C95398)[] = {
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_40000,
-        .init = &N(D_80247394_C94F44),
+        .init = &N(EVS_NpcInit_LavaBud),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -1107,18 +1258,18 @@ StaticNpc N(D_802477E8_C95398)[] = {
             .anim_E = ANIM_LavaBud_Anim03,
             .anim_F = ANIM_LavaBud_Anim03,
         },
-        .extraAnimations = N(D_802477E0_C95390),
+        .extraAnimations = N(ExtraAnims_LavaBud),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
 };
 
-NpcGroupList N(NpcGroup1) = {
-    NPC_GROUP(N(D_802473F4_C94FA4)),
-    NPC_GROUP(N(D_802477E8_C95398), BTL_KZN2_FORMATION_00, BTL_KZN2_STAGE_06),
+NpcGroupList N(BossNPCs) = {
+    NPC_GROUP(N(NpcData_Kolorado)),
+    NPC_GROUP(N(NpcData_LavaPiranha), BTL_KZN2_FORMATION_00, BTL_KZN2_STAGE_06),
     {}
 };
 
-NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(D_802475E4_C95194)),
+NpcGroupList N(EscapeNPCs) = {
+    NPC_GROUP(N(NpcData_Misstar)),
     {}
 };
