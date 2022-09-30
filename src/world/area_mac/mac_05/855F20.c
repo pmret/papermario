@@ -15,7 +15,7 @@ void func_80243F0C_85607C(s32 index) {
     mdl_get_copied_vertices(3, &first, &copied, &numCopied);
 
     for (i = 0; i < numCopied; i++) {
-        u8* colors = &copied[i].v.cn;
+        u8* colors = copied[i].v.cn;
         f32 temp = D_80252744_8648B4 + (f32)i / (f32)numCopied;
         if (temp > 1.0) {
             temp -= 1.0;
