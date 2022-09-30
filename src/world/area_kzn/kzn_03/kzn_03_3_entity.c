@@ -20,7 +20,7 @@ ApiStatus N(IsPlayerOnFirstCliff)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(D_802462B0_C66FC0) = {
+EvtScript N(EVS_TetherCameraToPlayer) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -38,7 +38,7 @@ EvtScript N(EVS_UseSpringA) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
     EVT_WAIT(1)
     EVT_CALL(N(UnsetCamera0MoveFlag1))
-    EVT_EXEC_GET_TID(N(D_802462B0_C66FC0), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, 335, 290, 360, 40)
     EVT_CALL(SetPlayerFlagBits, PS_FLAGS_FLYING, TRUE)
@@ -57,7 +57,7 @@ EvtScript N(EVS_UseSpringB) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
     EVT_CALL(N(UnsetCamera0MoveFlag1))
-    EVT_EXEC_GET_TID(N(D_802462B0_C66FC0), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, 350, 470, 210, 40)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
@@ -77,7 +77,7 @@ EvtScript N(EVS_UseSpringC) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
     EVT_CALL(N(UnsetCamera0MoveFlag1))
-    EVT_EXEC_GET_TID(N(D_802462B0_C66FC0), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_IF_EQ(MV_Unk_09, 0)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.4))
         EVT_CALL(PlayerJump, -470, 670, 71, 18)

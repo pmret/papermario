@@ -1,8 +1,8 @@
 #include "kzn_02.h"
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_802444A4);
-extern EvtScript N(EVS_802464A8);
+extern EvtScript N(EVS_InitializePlatforms);
+extern EvtScript N(EVS_PlayDemoScene);
 extern NpcGroupList N(DefaultNPCs);
 
 EntryList N(Entrances) = {
@@ -49,12 +49,12 @@ EvtScript N(EVS_UpdateTexPanner4) = {
     EVT_END
 };
 
-EvtScript N(EVS_ExitWalk_kzn_01) = EVT_EXIT_WALK(60, kzn_02_ENTRY_0, "kzn_01", kzn_01_ENTRY_1);
-EvtScript N(EVS_ExitWalk_kzn_03) = EVT_EXIT_WALK(60, kzn_02_ENTRY_1, "kzn_03", kzn_03_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_01_1) = EVT_EXIT_WALK(60, kzn_02_ENTRY_0, "kzn_01", kzn_01_ENTRY_1);
+EvtScript N(EVS_ExitWalk_kzn_03_0) = EVT_EXIT_WALK(60, kzn_02_ENTRY_1, "kzn_03", kzn_03_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_01), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_03), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_01_1), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_03_0), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -71,7 +71,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-EvtScript N(EVS_UpdateLavaTexPanners) = {
+EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_yougan1_2, TRUE)
@@ -132,15 +132,15 @@ EvtScript N(EVS_Main) = {
     EVT_THREAD
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
-    EVT_EXEC(N(EVS_UpdateLavaTexPanners))
+    EVT_EXEC(N(EVS_StartTexPanners_Lava))
     EVT_SET(LVar0, MODEL_kem1)
     EVT_EXEC(N(EVS_UpdateTexPanner3))
     EVT_SET(LVar0, MODEL_kem2)
     EVT_EXEC(N(EVS_UpdateTexPanner4))
-    EVT_EXEC_WAIT(N(EVS_802444A4))
+    EVT_EXEC_WAIT(N(EVS_InitializePlatforms))
     EVT_CALL(GetDemoState, LVar0)
     EVT_IF_NE(LVar0, DEMO_STATE_NONE)
-        EVT_EXEC_WAIT(N(EVS_802464A8))
+        EVT_EXEC_WAIT(N(EVS_PlayDemoScene))
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))

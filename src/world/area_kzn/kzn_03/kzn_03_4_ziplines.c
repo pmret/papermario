@@ -133,7 +133,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
     EVT_WAIT(1)
     EVT_CALL(N(Zipline_CheckInputForJumpOff))
-    EVT_IF_EQ(LVar8, 0x00008000)
+    EVT_IF_EQ(LVar8, BUTTON_A)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_IF_EQ(LVar1, 1)

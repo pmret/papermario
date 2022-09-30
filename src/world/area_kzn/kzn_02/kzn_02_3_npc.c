@@ -1,20 +1,20 @@
 #include "kzn_02.h"
 #include "message_ids.h"
 
-extern EvtScript N(D_80243270_C5D9B0);
+extern EvtScript N(EVS_KoloradoSinkingPlatform);
 
 API_CALLABLE(N(AwaitLetterChoiceResult));
 API_CALLABLE(N(SetLetterChoiceResult));
-
-#include "world/common/enemy/FlyingAI.inc.c"
-
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
 f32 N(FlyingAI_JumpVels)[] = {
     4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
 };
 
-MobileAISettings N(D_80244918_C5F058) = {
+#include "world/common/enemy/FlyingAI.inc.c"
+
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"
+
+MobileAISettings N(AISettings_LavaBubble) = {
     .moveSpeed = 0.8f,
     .moveTime = 100,
     .alertRadius = 90.0f,
@@ -26,26 +26,26 @@ MobileAISettings N(D_80244918_C5F058) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(D_80244948_C5F088) = {
+EvtScript N(EVS_NpcAI_LavaBubble) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 150)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(D_80244918_C5F058)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_LavaBubble)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(D_802449B8_C5F0F8) = {
+NpcSettings N(NpcSettings_LavaBubble) = {
     .height = 20,
     .radius = 22,
     .level = 17,
-    .ai = &N(D_80244948_C5F088),
+    .ai = &N(EVS_NpcAI_LavaBubble),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(D_802449E4_C5F124) = {
+NpcSettings N(NpSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
     .level = 99,
@@ -58,7 +58,7 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(D_80245324_C5FA64) = {
+EvtScript N(EVS_Kolorado_LetterDelivery) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER25, 0,
@@ -69,7 +69,7 @@ EvtScript N(D_80245324_C5FA64) = {
     EVT_END
 };
 
-EvtScript N(D_80245374_C5FAB4) = {
+EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
@@ -82,7 +82,7 @@ EvtScript N(D_80245374_C5FAB4) = {
 
 // END LETTER DELIVERY?
 
-EvtScript N(D_802453D8_C5FB18) = {
+EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -122,7 +122,7 @@ EvtScript N(D_802453D8_C5FB18) = {
     EVT_WAIT(5)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
     EVT_WAIT(10)
-    EVT_EXEC(N(D_80243270_C5D9B0))
+    EVT_EXEC(N(EVS_KoloradoSinkingPlatform))
     EVT_SET(LVar0, 2)
     EVT_LOOP(3)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -191,7 +191,7 @@ EvtScript N(D_802453D8_C5FB18) = {
     EVT_END
 };
 
-EvtScript N(D_80245C9C_C603DC) = {
+EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
@@ -202,21 +202,21 @@ EvtScript N(D_80245C9C_C603DC) = {
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 7)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     EVT_CALL(CloseMessage)
-    EVT_EXEC_WAIT(N(D_80245324_C5FA64))
-    EVT_EXEC_WAIT(N(D_80245374_C5FAB4))
+    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
+    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245D80_C604C0) = {
+EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH5_KOLORADO_FELL_IN_LAVA)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_802453D8_C5FB18)))
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245C9C_C603DC)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
+            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
         EVT_CASE_LT(STORY_CH5_LAVA_STREAM_BLOCKED)
             EVT_IF_EQ(GF_KZN06_Visited, FALSE)
                 EVT_CALL(SetNpcPos, NPC_SELF, -760, 20, -40)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245C9C_C603DC)))
+                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_END_IF
@@ -227,13 +227,13 @@ EvtScript N(D_80245D80_C604C0) = {
     EVT_END
 };
 
-StaticNpc N(PassiveNPCs) = {
+StaticNpc N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(D_802449E4_C5F124),
+    .settings = &N(NpSettings_Kolorado),
     .pos = { -740.0f, 20.0f, 0.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
-    .init = &N(D_80245D80_C604C0),
+    .init = &N(EVS_NpcInit_Kolorado),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -260,9 +260,9 @@ StaticNpc N(PassiveNPCs) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Bubble) = {
-    .id = NPC_Bubble,
-    .settings = &N(D_802449B8_C5F0F8),
+StaticNpc N(NpcData_LavaBubble) = {
+    .id = NPC_LavaBubble,
+    .settings = &N(NpcSettings_LavaBubble),
     .pos = { 250.0f, 50.0f, 0.0f },
     .yaw = 90,
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
@@ -311,7 +311,7 @@ StaticNpc N(NpcData_Bubble) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(PassiveNPCs)),
-    NPC_GROUP(N(NpcData_Bubble), BTL_KZN_FORMATION_00, BTL_KZN_STAGE_02),
+    NPC_GROUP(N(NpcData_Kolorado)),
+    NPC_GROUP(N(NpcData_LavaBubble), BTL_KZN_FORMATION_00, BTL_KZN_STAGE_02),
     {}
 };

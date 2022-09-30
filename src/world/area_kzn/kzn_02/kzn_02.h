@@ -15,7 +15,7 @@
 
 enum {
 	NPC_Kolorado                = 0,
-	NPC_Bubble                  = 1,
+	NPC_LavaBubble              = 1,
 };
 
 #define NAMESPACE kzn_02

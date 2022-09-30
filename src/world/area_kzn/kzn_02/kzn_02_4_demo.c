@@ -1,9 +1,7 @@
 #include "kzn_02.h"
 #include "world/partners.h"
 
-API_CALLABLE(func_80242730_C5CE70);
-
-EvtScript N(D_80246280_C609C0) = {
+EvtScript N(EVS_ProvideDemoInputs) = {
     EVT_CALL(DemoJoystickXY, 87, 0)
     EVT_WAIT(17)
     EVT_CALL(DemoSetButtons, BUTTON_A)
@@ -32,7 +30,7 @@ EvtScript N(D_80246280_C609C0) = {
     EVT_END
 };
 
-EvtScript N(D_802463E4_C60B24) = {
+EvtScript N(EVS_MonitorDemoState) = {
     EVT_WAIT(10)
     EVT_LOOP(0)
         EVT_CALL(GetDemoState, LVar0)
@@ -51,27 +49,18 @@ EvtScript N(D_802463E4_C60B24) = {
     EVT_END
 };
 
-s32 N(D_802464A4) = 0;
+s32 N(DemoSceneState) = 0;
 
-EvtScript N(EVS_802464A8) = {
-    EVT_CALL(func_80242730_C5CE70)
-    EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(D_802463E4_C60B24))
-    EVT_EXEC(N(D_80246280_C609C0))
-    EVT_RETURN
-    EVT_END
-};
-
-ApiStatus func_80242730_C5CE70(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetupDemoScene) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    switch (N(D_802464A4)) {
+    switch (N(DemoSceneState)) {
         case 0:
-            N(D_802464A4) = 1;
+            N(DemoSceneState) = 1;
             break;
         case 1:
         case 2:
-            N(D_802464A4)++;
+            N(DemoSceneState)++;
             break;
         case 3:
             partner_clear_player_tracking(wPartnerNpc);
@@ -86,3 +75,12 @@ ApiStatus func_80242730_C5CE70(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+EvtScript N(EVS_PlayDemoScene) = {
+    EVT_CALL(SetupDemoScene)
+    EVT_SET(GF_DemoSceneDone, FALSE)
+    EVT_EXEC(N(EVS_MonitorDemoState))
+    EVT_EXEC(N(EVS_ProvideDemoInputs))
+    EVT_RETURN
+    EVT_END
+};

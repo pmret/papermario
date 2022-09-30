@@ -1,11 +1,60 @@
 #include "kzn_02.h"
 
-API_CALLABLE(N(GetModelLateralPos));
-API_CALLABLE(N(GetCurrentFloor));
-API_CALLABLE(N(GetActingPartner));
-API_CALLABLE(N(AddPushVelocity));
+API_CALLABLE(N(GetModelLateralPos)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 modelID = evt_get_variable(script, *args++);
+    f32 centerX;
+    f32 centerY;
+    f32 centerZ;
+    f32 sizeX;
+    f32 sizeY;
+    f32 sizeZ;
 
-EvtScript N(D_80243270_C5D9B0) = {
+    get_model_center_and_size(modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+    script->varTable[7] = centerX;
+    script->varTable[8] = centerZ;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(GetCurrentFloor)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+
+    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(GetActingPartner)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+
+    evt_set_variable(script, outVar, gPartnerActionStatus.actingPartner);
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(AddPushVelocity)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 velX = evt_get_variable(script, *args++);
+    s32 floorA = evt_get_variable(script, *args++);
+    s32 floorB = evt_get_variable(script, *args++);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus= &gCollisionStatus;
+    Npc* partner;
+
+    if ((collisionStatus->currentFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
+     || (collisionStatus->currentFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
+        playerStatus->pushVelocity.x = velX;
+    }
+    if (gPlayerData.currentPartner != PARTNER_NONE){
+        partner = get_npc_unsafe(NPC_PARTNER);
+        if ((partner->currentFloor == floorA) || (partner->currentFloor == floorB)) {
+            partner->pos.x += velX;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_KoloradoSinkingPlatform) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LABEL(0)
         EVT_CALL(TranslateModel, MODEL_o29, 0, LVar0, 0)
@@ -35,7 +84,7 @@ EvtScript N(D_80243270_C5D9B0) = {
     EVT_END
 };
 
-EvtScript N(D_80243430_C5DB70) = {
+EvtScript N(EVS_UpdateSinkingPlatform) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_CALL(N(GetCurrentFloor), LVarA)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
@@ -109,7 +158,7 @@ EvtScript N(D_80243430_C5DB70) = {
     EVT_END
 };
 
-EvtScript N(D_80243834_C5DF74) = {
+EvtScript N(EVS_OnTouchSinkingPlatform1) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(1), 0)
         EVT_SET(ArrayVar(1), 1)
@@ -121,14 +170,14 @@ EvtScript N(D_80243834_C5DF74) = {
         EVT_SET(LVar6, COLLIDER_o148)
         EVT_CALL(N(GetModelLateralPos), MODEL_o30)
         EVT_SET(LVar9, 50)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(1), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243914_C5E054) = {
+EvtScript N(EVS_OnTouchSinkingPlatform2) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(2), 0)
         EVT_SET(ArrayVar(2), 1)
@@ -140,14 +189,14 @@ EvtScript N(D_80243914_C5E054) = {
         EVT_SET(LVar6, COLLIDER_o145)
         EVT_CALL(N(GetModelLateralPos), MODEL_o27)
         EVT_SET(LVar9, 60)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(2), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802439F4_C5E134) = {
+EvtScript N(EVS_OnTouchSinkingPlatform3) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(3), 0)
         EVT_SET(ArrayVar(3), 1)
@@ -159,14 +208,14 @@ EvtScript N(D_802439F4_C5E134) = {
         EVT_SET(LVar6, COLLIDER_o142)
         EVT_CALL(N(GetModelLateralPos), MODEL_o22)
         EVT_SET(LVar9, 50)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(3), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243AD4_C5E214) = {
+EvtScript N(EVS_OnTouchSinkingPlatform4) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(4), 0)
         EVT_SET(ArrayVar(4), 1)
@@ -178,14 +227,14 @@ EvtScript N(D_80243AD4_C5E214) = {
         EVT_SET(LVar6, COLLIDER_o133)
         EVT_CALL(N(GetModelLateralPos), MODEL_o71)
         EVT_SET(LVar9, 50)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(4), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243BB4_C5E2F4) = {
+EvtScript N(EVS_OnTouchSinkingPlatform5) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(5), 0)
         EVT_SET(ArrayVar(5), 1)
@@ -197,14 +246,14 @@ EvtScript N(D_80243BB4_C5E2F4) = {
         EVT_SET(LVar6, COLLIDER_o136)
         EVT_CALL(N(GetModelLateralPos), MODEL_o68)
         EVT_SET(LVar9, 60)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(5), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243C94_C5E3D4) = {
+EvtScript N(EVS_OnTouchSinkingPlatform6) = {
     EVT_USE_ARRAY(LVar0)
     EVT_IF_EQ(ArrayVar(6), 0)
         EVT_SET(ArrayVar(6), 1)
@@ -216,14 +265,14 @@ EvtScript N(D_80243C94_C5E3D4) = {
         EVT_SET(LVar6, COLLIDER_o139)
         EVT_CALL(N(GetModelLateralPos), MODEL_o65)
         EVT_SET(LVar9, 50)
-        EVT_EXEC_WAIT(N(D_80243430_C5DB70))
+        EVT_EXEC_WAIT(N(EVS_UpdateSinkingPlatform))
         EVT_SET(ArrayVar(6), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243D74_C5E4B4) = {
+EvtScript N(EVS_UpdatePlatformBobbing) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_LABEL(0)
         EVT_CALL(MakeLerp, 0, -3, 30, EASING_LINEAR)
@@ -251,67 +300,67 @@ EvtScript N(D_80243D74_C5E4B4) = {
     EVT_END
 };
 
-EvtScript N(D_80243F18_C5E658) = {
+EvtScript N(EVS_StartBobbingPlatform1) = {
     EVT_WAIT(5)
     EVT_SET(LVar2, MODEL_o29)
     EVT_SET(LVar3, MODEL_o30)
     EVT_SET(LVar4, MODEL_o31)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243F70_C5E6B0) = {
+EvtScript N(EVS_StartBobbingPlatform2) = {
     EVT_WAIT(10)
     EVT_SET(LVar2, MODEL_o26)
     EVT_SET(LVar3, MODEL_o27)
     EVT_SET(LVar4, MODEL_o28)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243FC8_C5E708) = {
+EvtScript N(EVS_StartBobbingPlatform3) = {
     EVT_WAIT(5)
     EVT_SET(LVar2, MODEL_o21)
     EVT_SET(LVar3, MODEL_o22)
     EVT_SET(LVar4, MODEL_o18)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244020_C5E760) = {
+EvtScript N(EVS_StartBobbingPlatform4) = {
     EVT_WAIT(10)
     EVT_SET(LVar2, MODEL_o70)
     EVT_SET(LVar3, MODEL_o71)
     EVT_SET(LVar4, MODEL_o72)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244078_C5E7B8) = {
+EvtScript N(EVS_StartBobbingPlatform5) = {
     EVT_WAIT(5)
     EVT_SET(LVar2, MODEL_o67)
     EVT_SET(LVar3, MODEL_o68)
     EVT_SET(LVar4, MODEL_o69)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802440D0_C5E810) = {
+EvtScript N(EVS_StartBobbingPlatform6) = {
     EVT_WAIT(10)
     EVT_SET(LVar2, MODEL_o64)
     EVT_SET(LVar3, MODEL_o65)
     EVT_SET(LVar4, MODEL_o66)
-    EVT_EXEC_WAIT(N(D_80243D74_C5E4B4))
+    EVT_EXEC_WAIT(N(EVS_UpdatePlatformBobbing))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244128_C5E868) = {
+EvtScript N(EVS_UpdateMovingPlatform) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_CALL(ParentColliderToModel, COLLIDER_o128, MODEL_o123)
     EVT_CALL(ParentColliderToModel, COLLIDER_o129, MODEL_o124)
@@ -376,7 +425,7 @@ EvtScript N(D_80244128_C5E868) = {
     EVT_END
 };
 
-EvtScript N(EVS_802444A4) = {
+EvtScript N(EVS_InitializePlatforms) = {
     EVT_MALLOC_ARRAY(6, LVarA)
     EVT_SET(ArrayVar(0), 0)
     EVT_SET(ArrayVar(1), 0)
@@ -389,105 +438,51 @@ EvtScript N(EVS_802444A4) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_o147, MODEL_o30)
     EVT_CALL(ParentColliderToModel, COLLIDER_o148, MODEL_o31)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243834_C5DF74), TRIGGER_FLOOR_TOUCH, COLLIDER_o146, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform1), TRIGGER_FLOOR_TOUCH, COLLIDER_o146, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243834_C5DF74), TRIGGER_FLOOR_TOUCH, COLLIDER_o147, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform1), TRIGGER_FLOOR_TOUCH, COLLIDER_o147, 1, 0)
     EVT_CALL(ParentColliderToModel, COLLIDER_o143, MODEL_o26)
     EVT_CALL(ParentColliderToModel, COLLIDER_o144, MODEL_o27)
     EVT_CALL(ParentColliderToModel, COLLIDER_o145, MODEL_o28)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243914_C5E054), TRIGGER_FLOOR_TOUCH, COLLIDER_o143, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform2), TRIGGER_FLOOR_TOUCH, COLLIDER_o143, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243914_C5E054), TRIGGER_FLOOR_TOUCH, COLLIDER_o144, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform2), TRIGGER_FLOOR_TOUCH, COLLIDER_o144, 1, 0)
     EVT_CALL(ParentColliderToModel, COLLIDER_o140, MODEL_o21)
     EVT_CALL(ParentColliderToModel, COLLIDER_o141, MODEL_o22)
     EVT_CALL(ParentColliderToModel, COLLIDER_o142, MODEL_o18)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_802439F4_C5E134), TRIGGER_FLOOR_TOUCH, COLLIDER_o140, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform3), TRIGGER_FLOOR_TOUCH, COLLIDER_o140, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_802439F4_C5E134), TRIGGER_FLOOR_TOUCH, COLLIDER_o141, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform3), TRIGGER_FLOOR_TOUCH, COLLIDER_o141, 1, 0)
     EVT_CALL(ParentColliderToModel, COLLIDER_o131, MODEL_o70)
     EVT_CALL(ParentColliderToModel, COLLIDER_o132, MODEL_o71)
     EVT_CALL(ParentColliderToModel, COLLIDER_o133, MODEL_o72)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243AD4_C5E214), TRIGGER_FLOOR_TOUCH, COLLIDER_o131, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform4), TRIGGER_FLOOR_TOUCH, COLLIDER_o131, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243AD4_C5E214), TRIGGER_FLOOR_TOUCH, COLLIDER_o132, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform4), TRIGGER_FLOOR_TOUCH, COLLIDER_o132, 1, 0)
     EVT_CALL(ParentColliderToModel, COLLIDER_o134, MODEL_o67)
     EVT_CALL(ParentColliderToModel, COLLIDER_o135, MODEL_o68)
     EVT_CALL(ParentColliderToModel, COLLIDER_o136, MODEL_o69)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243BB4_C5E2F4), TRIGGER_FLOOR_TOUCH, COLLIDER_o134, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform5), TRIGGER_FLOOR_TOUCH, COLLIDER_o134, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243BB4_C5E2F4), TRIGGER_FLOOR_TOUCH, COLLIDER_o135, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform5), TRIGGER_FLOOR_TOUCH, COLLIDER_o135, 1, 0)
     EVT_CALL(ParentColliderToModel, COLLIDER_o137, MODEL_o64)
     EVT_CALL(ParentColliderToModel, COLLIDER_o138, MODEL_o65)
     EVT_CALL(ParentColliderToModel, COLLIDER_o139, MODEL_o66)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243C94_C5E3D4), TRIGGER_FLOOR_TOUCH, COLLIDER_o137, 1, 0)
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform6), TRIGGER_FLOOR_TOUCH, COLLIDER_o137, 1, 0)
     EVT_SET(LVar0, LVarA)
-    EVT_BIND_TRIGGER(N(D_80243C94_C5E3D4), TRIGGER_FLOOR_TOUCH, COLLIDER_o138, 1, 0)
-    EVT_EXEC(N(D_80243F18_C5E658))
-    EVT_EXEC(N(D_80243F70_C5E6B0))
-    EVT_EXEC(N(D_80243FC8_C5E708))
-    EVT_EXEC(N(D_80244020_C5E760))
-    EVT_EXEC(N(D_80244078_C5E7B8))
-    EVT_EXEC(N(D_802440D0_C5E810))
-    EVT_EXEC(N(D_80244128_C5E868))
+    EVT_BIND_TRIGGER(N(EVS_OnTouchSinkingPlatform6), TRIGGER_FLOOR_TOUCH, COLLIDER_o138, 1, 0)
+    EVT_EXEC(N(EVS_StartBobbingPlatform1))
+    EVT_EXEC(N(EVS_StartBobbingPlatform2))
+    EVT_EXEC(N(EVS_StartBobbingPlatform3))
+    EVT_EXEC(N(EVS_StartBobbingPlatform4))
+    EVT_EXEC(N(EVS_StartBobbingPlatform5))
+    EVT_EXEC(N(EVS_StartBobbingPlatform6))
+    EVT_EXEC(N(EVS_UpdateMovingPlatform))
     EVT_RETURN
     EVT_END
 };
-
-ApiStatus N(GetModelLateralPos)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 modelID = evt_get_variable(script, *args++);
-    f32 centerX;
-    f32 centerY;
-    f32 centerZ;
-    f32 sizeX;
-    f32 sizeY;
-    f32 sizeZ;
-
-    get_model_center_and_size(modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-    script->varTable[7] = centerX;
-    script->varTable[8] = centerZ;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(GetCurrentFloor)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 outVar = *args++;
-
-    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 outVar = *args++;
-
-    evt_set_variable(script, outVar, gPartnerActionStatus.actingPartner);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(AddPushVelocity)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 velX = evt_get_variable(script, *args++);
-    s32 floorA = evt_get_variable(script, *args++);
-    s32 floorB = evt_get_variable(script, *args++);
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    CollisionStatus* collisionStatus= &gCollisionStatus;
-    Npc* partner;
-
-    if ((collisionStatus->currentFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
-     || (collisionStatus->currentFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
-        playerStatus->pushVelocity.x = velX;
-    }
-    if (gPlayerData.currentPartner != PARTNER_NONE){
-        partner = get_npc_unsafe(NPC_PARTNER);
-        if ((partner->currentFloor == floorA) || (partner->currentFloor == floorB)) {
-            partner->pos.x += velX;
-        }
-    }
-    return ApiStatus_DONE2;
-}

@@ -32,7 +32,7 @@ EvtScript N(D_80243AD0_C647E0) = {
     EVT_END
 };
 
-MobileAISettings N(D_80243B40_C64850) = {
+MobileAISettings N(AISettings_SpikeTop) = {
     .moveSpeed = 1.0f,
     .moveTime = 60,
     .waitTime = 60,
@@ -45,12 +45,12 @@ MobileAISettings N(D_80243B40_C64850) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(EVS_NpcAI_SpikeTop_01) = {
+EvtScript N(EVS_NpcAI_SpikeTop) = {
     EVT_CALL(SetSelfVar, 2, 4)
     EVT_CALL(SetSelfVar, 3, 10)
     EVT_CALL(SetSelfVar, 5, 4)
     EVT_CALL(SetSelfVar, 7, 3)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243B40_C64850)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_SpikeTop)))
     EVT_RETURN
     EVT_END
 };
@@ -114,11 +114,11 @@ NpcSettings N(NpcSettings_Unused2) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_SpikeTop_01) = {
+NpcSettings N(NpcSettings_SpikeTop) = {
     .height = 20,
     .radius = 22,
     .level = 17,
-    .ai = &N(EVS_NpcAI_SpikeTop_01),
+    .ai = &N(EVS_NpcAI_SpikeTop),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -500,7 +500,7 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
 
 StaticNpc N(NpcData_SpikeTop_01) = {
     .id = NPC_SpikeTop_01,
-    .settings = &N(NpcSettings_SpikeTop_01),
+    .settings = &N(NpcSettings_SpikeTop),
     .pos = { 140.0f, 670.0f, -20.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -550,7 +550,7 @@ StaticNpc N(NpcData_SpikeTop_01) = {
 
 StaticNpc N(NpcData_SpikeTop_02) = {
     .id = NPC_SpikeTop_02,
-    .settings = &N(NpcSettings_SpikeTop_01),
+    .settings = &N(NpcSettings_SpikeTop),
     .pos = { -200.0f, 670.0f, -35.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -600,7 +600,7 @@ StaticNpc N(NpcData_SpikeTop_02) = {
 
 StaticNpc N(NpcData_SpikeTop_03) = {
     .id = NPC_SpikeTop_03,
-    .settings = &N(NpcSettings_SpikeTop_01),
+    .settings = &N(NpcSettings_SpikeTop),
     .pos = { 30.0f, 20.0f, 320.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,

@@ -1,28 +1,84 @@
 #include "kzn_06.h"
 #include "model.h"
 
-extern API_CALLABLE(N(AdjustFog));
-extern API_CALLABLE(func_80240A44_C6D364);
-
 const s32 pad_rodata_C6E318 = 0;
 
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
-ModelIDList D_80241374_C6DC94 = {
+API_CALLABLE(N(AdjustFog)) {
+    Bytecode* args = script->ptrReadPos;
+    ModelIDList* modelIDs;
+    ModelIDList* iterList;
+    s32 colR, colG, colB;
+    s32 duration;
+    s32 mode;
+    s32 i;
+    
+    modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
+    colR = evt_get_variable(script, *args++);
+    colG = evt_get_variable(script, *args++);
+    colB = evt_get_variable(script, *args++);
+    duration = evt_get_variable(script, *args++);
+    mode = evt_get_variable(script, *args++);
+    iterList = modelIDs; 
+    
+    if (isInitialCall) {
+        for (i = 0; i < iterList->count; i++) {
+            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
+            Model* mdl = get_model_from_list_index(treeIndex);
+            set_mdl_custom_gfx_set(mdl, -1, 3);
+            if (mode) {
+                mdl->flags &= ~MODEL_FLAGS_ENABLED;
+            }
+        }
+        script->functionTemp[0] = duration;
+    }
+    
+    if (mode) {
+        set_background_color_blend(colR, colG, colB, 
+            (script->functionTemp[0] * 255) / duration);
+    } else {
+        set_background_color_blend(colR, colG, colB, 
+            255 - ((script->functionTemp[0] * 255) / duration));
+    }
+    
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] < 0) {
+        for (i = 0; i < iterList->count; i++) {
+            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
+            Model* mdl = get_model_from_list_index(treeIndex);
+            set_mdl_custom_gfx_set(mdl, -1, 0);
+            if (!mode) {
+                mdl->flags |= MODEL_FLAGS_ENABLED;
+            }
+        }
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+API_CALLABLE(N(func_80240A44_C6D364)) {
+    snd_ambient_80055618(0, 1);
+    return ApiStatus_DONE2;
+}
+
+ModelIDList N(LavaModels) = {
     .count = 1,
     .list = { MODEL_g41 }
 };
 
-ModelIDList D_80241378_C6DC98 = {
+ //@bug modelID 0x12 when it should be 12
+ModelIDList N(InvalidLavaModels) = {
     .count = 1,
     .list = { MODEL_o238 }
 };
 
 EvtScript N(EVS_8024137C) = {
     EVT_LABEL(0)
-    EVT_CALL(N(AdjustFog), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 1)
+    EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 1)
     EVT_WAIT(30)
-    EVT_CALL(N(AdjustFog), EVT_PTR(D_80241378_C6DC98), 0, 0, 255, 60, 0)
+    EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 0)
     EVT_WAIT(30)
     EVT_GOTO(0)
     EVT_RETURN
@@ -33,7 +89,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(3)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(func_80240A44_C6D364)
+    EVT_CALL(N(func_80240A44_C6D364))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -20)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -129,66 +185,8 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
         EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(D_80241374_C6DC94))
+        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModels)))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
 };
-
-ApiStatus N(AdjustFog)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    ModelIDList* modelIDs;
-    ModelIDList* iterList;
-    s32 colR, colG, colB;
-    s32 duration;
-    s32 mode;
-    s32 i;
-    
-    modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
-    colR = evt_get_variable(script, *args++);
-    colG = evt_get_variable(script, *args++);
-    colB = evt_get_variable(script, *args++);
-    duration = evt_get_variable(script, *args++);
-    mode = evt_get_variable(script, *args++);
-    iterList = modelIDs; 
-    
-    if (isInitialCall) {
-        for (i = 0; i < iterList->count; i++) {
-            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
-            Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, 3);
-            if (mode) {
-                mdl->flags &= ~MODEL_FLAGS_ENABLED;
-            }
-        }
-        script->functionTemp[0] = duration;
-    }
-    
-    if (mode) {
-        set_background_color_blend(colR, colG, colB, 
-            (script->functionTemp[0] * 255) / duration);
-    } else {
-        set_background_color_blend(colR, colG, colB, 
-            255 - ((script->functionTemp[0] * 255) / duration));
-    }
-    
-    script->functionTemp[0]--;
-    if (script->functionTemp[0] < 0) {
-        for (i = 0; i < iterList->count; i++) {
-            s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
-            Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, 0);
-            if (!mode) {
-                mdl->flags |= MODEL_FLAGS_ENABLED;
-            }
-        }
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-}
-
-ApiStatus func_80240A44_C6D364(Evt* script, s32 isInitialCall) {
-    snd_ambient_80055618(0, 1);
-    return ApiStatus_DONE2;
-}
