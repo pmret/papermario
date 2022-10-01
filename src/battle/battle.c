@@ -193,14 +193,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_SAM2] = {
         BTL_AREA(area_sam2),
         .name = "エリア ＳＡＭ２",
-        .battles = 0x802234F0,
-        .stages = 0x8022352C,
+        .battles = &b_area_sam2_formationTable,
+        .stages = &b_area_sam2_stageTable,
     },
     [BTL_AREA_PRA] = {
         BTL_AREA(area_pra),
         .name = "エリア ＰＲＡ",
-        .battles = 0x8022F4D4,
-        .stages = 0x8022F614,
+        .battles = &b_area_pra_formationTable,
+        .stages = &b_area_pra_stageTable,
     },
     [BTL_AREA_PRA2] = {
         BTL_AREA(area_pra2),

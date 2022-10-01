@@ -73,6 +73,12 @@ extern StageList b_area_kzn_stageTable;
 extern BattleList b_area_sam_formationTable;
 extern StageList b_area_sam_stageTable;
 
+extern BattleList b_area_sam2_formationTable;
+extern StageList b_area_sam2_stageTable;
+
+extern BattleList b_area_pra_formationTable;
+extern StageList b_area_pra_stageTable;
+
 extern BattleList b_area_pra2_formationTable;
 extern StageList b_area_pra2_stageTable;
 

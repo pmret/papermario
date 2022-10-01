@@ -866,6 +866,7 @@ enum SoundIDs {
     SOUND_POWER_UP                  = 0x000002D8,
     SOUND_2DB                       = 0x000002DB,
     SOUND_2DC                       = 0x000002DC,
+    SOUND_2DD                       = 0x000002DD,
     SOUND_2DE                       = 0x000002DE,
     SOUND_2DF                       = 0x000002DF,
     SOUND_2E0                       = 0x000002E0,
@@ -873,6 +874,7 @@ enum SoundIDs {
     SOUND_2E8                       = 0x000002E8,
     SOUND_2EA                       = 0x000002EA,
     SOUND_2EF                       = 0x000002EF,
+    SOUND_2F0                       = 0x000002F0,
     SOUND_2F1                       = 0x000002F1,
     SOUND_2F3                       = 0x000002F3,
     SOUND_2F4                       = 0x000002F4,
@@ -4220,7 +4222,7 @@ enum ColliderFlags {
 
 //    SURFACE_TYPE_DEFAULT            = 0,
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
-    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_SNOW               = 8,
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
     SURFACE_TYPE_FLOWERS            = 6,
     SURFACE_TYPE_SLIDE              = 5,
