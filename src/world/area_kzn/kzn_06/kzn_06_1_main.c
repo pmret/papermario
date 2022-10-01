@@ -20,9 +20,9 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-EvtScript N(EVS_ExitWalk_kzn_05) = EVT_EXIT_WALK(60, kzn_06_ENTRY_0, "kzn_05",  kzn_05_ENTRY_0);
-EvtScript N(EVS_ExitWalk_kzn_08) = EVT_EXIT_WALK(60, kzn_06_ENTRY_2, "kzn_08",  kzn_08_ENTRY_0);
-EvtScript N(EVS_ExitWalk_kzn_07) = EVT_EXIT_WALK(60, kzn_06_ENTRY_1, "kzn_07",  kzn_07_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_05) = EVT_EXIT_WALK(60, kzn_06_ENTRY_0, "kzn_05", kzn_05_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_08) = EVT_EXIT_WALK(60, kzn_06_ENTRY_2, "kzn_08", kzn_08_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kzn_07) = EVT_EXIT_WALK(60, kzn_06_ENTRY_1, "kzn_07", kzn_07_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_05), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)

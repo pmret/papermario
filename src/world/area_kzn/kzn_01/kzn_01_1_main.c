@@ -17,8 +17,8 @@ MapSettings N(settings) = {
 
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
-EvtScript N(EVS_ExitWalk_jan_22_2) = EVT_EXIT_WALK(60,  kzn_01_ENTRY_0, "jan_22",  jan_22_ENTRY_2);
-EvtScript N(EVS_ExitWalk_kzn_02_0) = EVT_EXIT_WALK(60,  kzn_01_ENTRY_1, "kzn_02",  kzn_02_ENTRY_0);
+EvtScript N(EVS_ExitWalk_jan_22_2) = EVT_EXIT_WALK(60, kzn_01_ENTRY_0, "jan_22", jan_22_ENTRY_2);
+EvtScript N(EVS_ExitWalk_kzn_02_0) = EVT_EXIT_WALK(60, kzn_01_ENTRY_1, "kzn_02", kzn_02_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(N(EVS_ExitWalk_jan_22_2), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)

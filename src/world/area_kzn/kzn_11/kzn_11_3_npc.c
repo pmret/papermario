@@ -42,9 +42,9 @@ NpcSettings N(NpcSettings_Bubble) = {
 };
 
 s32 N(FireBar_Sounds)[] = {
-    SOUND_FireBar0, SOUND_FireBar1, SOUND_FireBar2, SOUND_FireBar3,
-    SOUND_FireBar4, SOUND_FireBar5, SOUND_FireBar6, SOUND_FireBar7,
-    SOUND_FireBar8, SOUND_FireBar9, SOUND_FireBar9,
+    SOUND_FIRE_BAR_0, SOUND_FIRE_BAR_1, SOUND_FIRE_BAR_2, SOUND_FIRE_BAR_3,
+    SOUND_FIRE_BAR_4, SOUND_FIRE_BAR_5, SOUND_FIRE_BAR_6, SOUND_FIRE_BAR_7,
+    SOUND_FIRE_BAR_8, SOUND_FIRE_BAR_9, SOUND_FIRE_BAR_9,
 };
 
 EvtScript N(EVS_FireBar_Defeated) = {
