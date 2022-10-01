@@ -121,34 +121,29 @@ def parse_map() -> OrderedDict[str, Symbol]:
     return syms
 
 
-def diff_syms(qb: Bytes, tb: Bytes) -> float:
-    if len(tb.bytes) < 8:
-        return 0
 
-    # The minimum edit distance for two strings of different lengths is `abs(l1 - l2)`
-    # Quickly check if it's impossible to beat the threshold. If it is, then return 0
-    l1, l2 = len(qb.normalized), len(tb.normalized)
-    if abs(l1 - l2) / (l1 + l2) > 1.0 - args.threshold:
-        return 0
-    r = ratio(qb.normalized, tb.normalized)
+@dataclass
+class Match:
+    query_offset: int
+    target_offset: int
+    length: int
 
-    if r == 1.0 and qb.bytes != tb.bytes:
-        r = 0.99
-    return r
+    def __str__(self):
+        return f"{self.query_offset} {self.target_offset} {self.length}"
 
-
-def get_pair_score(query_bytes: Bytes, b) -> float:
-    b_bytes: Optional[Bytes] = get_symbol_bytes(b)
-
-    if query_bytes and b_bytes:
-        return diff_syms(query_bytes, b_bytes)
-    return 0
-
-
-def get_hashes(query_bytes: Bytes, window_size: int):
+def get_pair_matches(query_hashes: list[int], sym_hashes: list[int]) -> list[Match]:
     ret = []
-    for i in range(0, len(query_bytes.normalized) - window_size, window_size):
-        ret.append(query_bytes.normalized[i : i + window_size])
+
+    matching_hashes = set(query_hashes).intersection(sym_hashes)
+    for hash in matching_hashes:
+        ret.append(Match(query_hashes.index(hash), sym_hashes.index(hash), 1))
+    return ret
+
+
+def get_hashes(bytes: Bytes, window_size: int) -> list[int]:
+    ret = []
+    for i in range(0, len(bytes.normalized) - window_size):
+        ret.append(bytes.normalized[i : i + window_size])
     return ret
 
 def get_matches(query: str, window_size: int):
@@ -161,10 +156,22 @@ def get_matches(query: str, window_size: int):
 
     ret: dict[str, float] = {}
     for symbol in syms:
-        if query != symbol:
-            score = get_pair_score(query_bytes, symbol)
-            if score >= args.threshold:
-                ret[symbol] = score
+        if query == symbol:
+            continue
+
+        sym_bytes: Optional[Bytes] = get_symbol_bytes(symbol)
+        if not sym_bytes:
+            continue
+
+        if len(sym_bytes.bytes) < window_size:
+            continue
+
+        sym_hashes = get_hashes(sym_bytes, window_size)
+
+        matches: list[Match] = get_pair_matches(query_hashes, sym_hashes)
+        for match in matches:
+            print(f"{query} {symbol} {match}")
+
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
