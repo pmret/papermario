@@ -221,6 +221,7 @@ ApiStatus FadeInMusic(Evt* script, s32 isInitialCall);
 ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall);
 ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall);
 ApiStatus PlaySound(Evt* script, s32 isInitialCall);
+ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall);
 ApiStatus StopSound(Evt* script, s32 isInitialCall);
 ApiStatus UseDoorSounds(Evt* script, s32 isInitialCall);

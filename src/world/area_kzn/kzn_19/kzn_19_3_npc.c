@@ -58,7 +58,7 @@ extern NpcSettings N(NpcSettings_LavaPiranhaHead);
     (s32) world_model_anim_kzn_##name##_ROM_END,\
     (s32) world_model_anim_kzn_##name##_VRAM
 
-s32 VineAnimationsDmaTable[] = {
+s32 N(VineAnimationsDmaTable)[] = {
     PIRANHA_DMA_ENTRY(00),
     PIRANHA_DMA_ENTRY(01),
     PIRANHA_DMA_ENTRY(02),
@@ -535,26 +535,26 @@ API_CALLABLE(N(LoadAnimationFromTable)) {
     switch (type) {
         case VINE_0:
             dma_copy(
-                (u8*) VineAnimationsDmaTable[3 * index + 0],
-                (u8*) VineAnimationsDmaTable[3 * index + 1],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
                 (void*) VINE_0_BASE);
             break;
         case VINE_1:
             dma_copy(
-                (u8*) VineAnimationsDmaTable[3 * index + 0],
-                (u8*) VineAnimationsDmaTable[3 * index + 1],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
                 (void*) VINE_1_BASE);
             break;
         case VINE_2:
             dma_copy(
-                (u8*) VineAnimationsDmaTable[3 * index + 0],
-                (u8*) VineAnimationsDmaTable[3 * index + 1],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
                 (void*) VINE_2_BASE);
             break;
         case VINE_3:
             dma_copy(
-                (u8*) VineAnimationsDmaTable[3 * index + 0],
-                (u8*) VineAnimationsDmaTable[3 * index + 1],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
+                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
                 (void*) VINE_3_BASE);
             break;
     }

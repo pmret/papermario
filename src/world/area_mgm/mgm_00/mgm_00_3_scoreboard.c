@@ -2,11 +2,10 @@
 
 void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
 
-extern Gfx D_80243C50_E123F0[];
+extern Gfx N(Gfx_RecordDisplay_Init)[];
 
-#define RECORD_DISPLAY_MAP_VAR  0xA
-#define MINIGAME_TYPE_SMASH     0
 #define MINIGAME_TYPE_JUMP      1
+#define MINIGAME_TYPE_SMASH     2
 
 #define FADE_IN_TIME  5
 #define FADE_OUT_TIME 5
@@ -31,7 +30,7 @@ typedef struct RecordDisplayData {
 
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
-        gSPDisplayList(gMasterGfxPos++, D_80243C50_E123F0);
+        gSPDisplayList(gMasterGfxPos++, N(Gfx_RecordDisplay_Init));
         gDPPipeSync(gMasterGfxPos++);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
         gDPFillRectangle(gMasterGfxPos++, 48, 53, 272, 129);
@@ -59,7 +58,7 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
 }
 
 void N(animate_and_draw_record)(void* renderData) {
-    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MapVar(RECORD_DISPLAY_MAP_VAR));
+    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MV_RecordDisplayData);
 
     switch (data->state) {
         case RECORD_START_SHOW:
@@ -114,7 +113,7 @@ void N(work_draw_record)(void) {
     queue_render_task(&task);
 }
 
-ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateRecordDisplay)) {
     RecordDisplayData* data;
     Bytecode* args = script->ptrReadPos;
     s32 gameType = evt_get_variable(script, *args++);
@@ -126,7 +125,7 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
         data->alpha = 255;
         data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
-        evt_set_variable(script, MapVar(RECORD_DISPLAY_MAP_VAR), (s32)data);
+        evt_set_variable(script, MV_RecordDisplayData, (s32)data);
     }
     data = script->functionTempPtr[0];
     if (data->state == RECORD_STATE_DONE) {
@@ -136,3 +135,52 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+
+EvtScript N(D_80243C40_E123E0) = {
+    EVT_RETURN
+    EVT_END
+};
+
+Gfx N(Gfx_RecordDisplay_Init)[] = {
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPNoOp(),
+    gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
+    gsDPFillRectangle(44, 49, 276, 51),
+    gsDPFillRectangle(44, 49, 46, 133),
+    gsDPFillRectangle(275, 49, 276, 133),
+    gsDPFillRectangle(44, 132, 276, 133),
+    gsSPEndDisplayList(),
+};
+
+EvtScript N(EVS_OnInteract_JumpRecords) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(N(UpdateRecordDisplay), MINIGAME_TYPE_JUMP)
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_CALL(DisablePlayerPhysics, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_OnInteract_SmashRecords) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(N(UpdateRecordDisplay), MINIGAME_TYPE_SMASH)
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_CALL(DisablePlayerPhysics, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_BindInteractTriggers) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInteract_JumpRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score1, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInteract_SmashRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score2, 1, 0)
+    EVT_RETURN
+    EVT_END
+};

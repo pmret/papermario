@@ -11611,12 +11611,10 @@ segments:
     start: 0xE0E7A0
     vram: 0x80240000
     subsegments:
-    - [0xE0E7A0, c]
-    - [0xE0F980, c]
-    - [0xE0FF60, data]
-    - [0xE111A0, data]
-    - [0xE123E0, data]
-    - [0xE12570]
+    - [0xE0E7A0, c, mgm_00_1_main]
+    - [0xE0EA80, c, mgm_00_2_npc]
+    - [0xE0F980, c, mgm_00_3_scoreboard]
+    - [0xE0FF60]
   - name: mgm_01
     dir: world/area_mgm/mgm_01
     type: code
