@@ -683,19 +683,19 @@ void init_hud_element_list(void) {
 void func_801413F8(void) {
     set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[CAM_3].updateMode = 2;
-    gCameras[CAM_3].unk_06 = 1;
-    gCameras[CAM_3].unk_20 = 0x3CBF;
-    gCameras[CAM_3].nearClip = 0x10;
-    gCameras[CAM_3].unk_1C = 0;
+    gCameras[CAM_3].unk_06 = TRUE;
+    gCameras[CAM_3].lookAt_dist = 15551;
+    gCameras[CAM_3].nearClip = CAM_NEAR_CLIP;
+    gCameras[CAM_3].auxPitch = 0;
     gCameras[CAM_3].auxBoomLength = 0;
     gCameras[CAM_3].auxBoomPitch = 0;
-    gCameras[CAM_3].auxPos.z = 0;
+    gCameras[CAM_3].lookAt_obj_target.z = 0;
     gCameras[CAM_3].farClip = 0x4000;
     gCameras[CAM_3].bgColor[0] = 0;
     gCameras[CAM_3].bgColor[1] = 0;
     gCameras[CAM_3].bgColor[2] = 0;
-    gCameras[CAM_3].auxPos.x = 160.0f;
-    gCameras[CAM_3].auxPos.y = -120.0f;
+    gCameras[CAM_3].lookAt_obj_target.x = 160.0f;
+    gCameras[CAM_3].lookAt_obj_target.y = -120.0f;
     gCameras[CAM_3].vfov = 1.0f;
     gCameras[CAM_3].flags &= ~0x6;
 }

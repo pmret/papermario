@@ -12,6 +12,7 @@
 #include "sprite/npc/Toad.h"
 #include "sprite/npc/WorldMerlee.h"
 #include "sprite/npc/WorldParakarry.h"
+#include "sprite.h"
 
 #define CHUCK_QUIZMO_NPC_ID 10
 
@@ -41,7 +42,7 @@ typedef struct {
     f32 unk_08;
     f32 unk_0C;
     f32 unk_10;
-    s32 unk_14;
+    f32 unk_14;
     s32 unk_18;
     s32 unk_1C;
     s32 unk_20;
@@ -127,7 +128,7 @@ static s32 N(pad_3C3C) = {
     0x00000000,
 };
 
-EvtScript N(exitWalk_80243C40) = EXIT_WALK_SCRIPT(60,  0, "dro_01",  1);
+EvtScript N(exitWalk_80243C40) = EVT_EXIT_WALK(60,  0, "dro_01",  1);
 
 EvtScript N(80243C9C) = {
     EVT_BIND_TRIGGER(N(exitWalk_80243C40), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
@@ -2506,8 +2507,89 @@ ApiStatus N(func_80241874_96AA34)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-u32 N(func_8024190C_96AACC)(D_8024F010_Struct*, Matrix4f);
-INCLUDE_ASM(u32, "world/area_dro/dro_02/9694C0", dro_02_func_8024190C_96AACC, D_8024F010_Struct* ptr, Matrix4f matrix);
+u32 N(func_8024190C_96AACC)(D_8024F010_Struct* arg0, Matrix4f matrix) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    FoldImageRecPart foldImage;
+    SpriteRasterInfo rasterInfo;
+    s32 ret;
+
+    if (arg0->unk_00 == 0) {
+        return 1;
+    }
+
+    gSPDisplayList(gMasterGfxPos++, N(D_802478C8_970A88));
+
+    if (arg0->unk_00 == 1 || arg0->unk_00 == 4 || arg0->unk_00 == 5) {
+        guTranslateF(sp58, arg0->unk_04, arg0->unk_08, arg0->unk_0C);
+        guMtxCatF(sp58, matrix, sp18);
+        guRotateF(sp58, arg0->unk_10, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guRotateF(sp58, arg0->unk_14, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+        if (arg0->unk_00 == 1 || arg0->unk_00 == 4) {
+            gSPDisplayList(gMasterGfxPos++, N(D_802479B8_970B78));
+        }
+
+        if (arg0->unk_00 == 1 || arg0->unk_00 == 5) {
+            spr_get_player_raster_info(&rasterInfo, arg0->unk_18, arg0->unk_1C);
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, rasterInfo.defaultPal);
+            gDPLoadTextureTile_4b(gMasterGfxPos++, rasterInfo.raster, G_IM_FMT_CI, rasterInfo.width, rasterInfo.height,
+                                    0, 0, rasterInfo.width - 1, rasterInfo.height - 1, 0,
+                                    G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD);
+            guTranslateF(sp18, arg0->unk_20 + 30 - rasterInfo.width / 2, 0.0f, 0.0f);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, N(D_80247A38_970BF8));
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        return 1;
+    }
+
+    if (arg0->unk_00 == 2) {
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
+        guTranslateF(sp58, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(sp58, matrix, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        ret = fold_appendGfx_component(evt_get_variable(N(D_8024EFCC), ArrayVar(0)), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, sp18);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        return ret;
+    }
+
+    if (arg0->unk_00 == 3) {
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
+        guTranslateF(sp58, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(sp58, matrix, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        fold_appendGfx_component(evt_get_variable(N(D_8024EFCC), ArrayVar(1)), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, sp18);
+        fold_appendGfx_component(evt_get_variable(N(D_8024EFCC), ArrayVar(2)), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, sp18);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        guTranslateF(sp58, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(sp58, matrix, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        spr_get_player_raster_info(&rasterInfo, arg0->unk_18, arg0->unk_1C);
+        foldImage.raster = rasterInfo.raster;
+        foldImage.palette = rasterInfo.defaultPal;
+        foldImage.width = rasterInfo.width;
+        foldImage.height = rasterInfo.height;
+        foldImage.xOffset = -(rasterInfo.width / 2);
+        foldImage.yOffset = rasterInfo.height / 2;
+        foldImage.opacity = 255;
+        ret = fold_appendGfx_component(evt_get_variable(N(D_8024EFCC), ArrayVar(3)), &foldImage, FOLD_STATE_FLAG_10, sp18);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        return ret;
+    }
+
+    return 1;
+}
 
 void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4) {
     D_8024F010_Struct* F010_ptr;

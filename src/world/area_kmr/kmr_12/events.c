@@ -3,8 +3,8 @@
 #include "entity.h"
 #include "sprite/npc/Goomba.h"
 
-EvtScript N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-EvtScript N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+EvtScript N(ExitWest) = EVT_EXIT_WALK(60, 0, "kmr_07", 1);
+EvtScript N(ExitEast) = EVT_EXIT_WALK(60, 1, "kmr_11", 0);
 
 EvtScript N(BindExits) = {
     EVT_BIND_TRIGGER(N(ExitWest), TRIGGER_FLOOR_ABOVE, 0, 1, 0) // deili1

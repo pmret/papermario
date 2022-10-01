@@ -3,8 +3,8 @@
 
 glabel func_8021835C_59EA3C
 /* 59EA3C 8021835C 27BDFF78 */  addiu     $sp, $sp, -0x88
-/* 59EA40 80218360 3C038023 */  lui       $v1, %hi(D_8022B550)
-/* 59EA44 80218364 8C63B550 */  lw        $v1, %lo(D_8022B550)($v1)
+/* 59EA40 80218360 3C038023 */  lui       $v1, %hi(b_area_kzn2_VineRenderState)
+/* 59EA44 80218364 8C63B550 */  lw        $v1, %lo(b_area_kzn2_VineRenderState)($v1)
 /* 59EA48 80218368 2402FFFF */  addiu     $v0, $zero, -1
 /* 59EA4C 8021836C AFBF0054 */  sw        $ra, 0x54($sp)
 /* 59EA50 80218370 AFBE0050 */  sw        $fp, 0x50($sp)
@@ -123,8 +123,8 @@ glabel func_8021835C_59EA3C
 /* 59EBE0 80218500 1440FFB7 */  bnez      $v0, .L802183E0
 /* 59EBE4 80218504 261001E0 */   addiu    $s0, $s0, 0x1e0
 /* 59EBE8 80218508 24020001 */  addiu     $v0, $zero, 1
-/* 59EBEC 8021850C 3C018023 */  lui       $at, %hi(D_8022B550)
-/* 59EBF0 80218510 AC22B550 */  sw        $v0, %lo(D_8022B550)($at)
+/* 59EBEC 8021850C 3C018023 */  lui       $at, %hi(b_area_kzn2_VineRenderState)
+/* 59EBF0 80218510 AC22B550 */  sw        $v0, %lo(b_area_kzn2_VineRenderState)($at)
 /* 59EBF4 80218514 0000382D */  daddu     $a3, $zero, $zero
 .L80218518:
 /* 59EBF8 80218518 3C02800A */  lui       $v0, %hi(gMasterGfxPos)

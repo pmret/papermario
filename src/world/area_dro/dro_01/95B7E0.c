@@ -122,7 +122,7 @@ EvtScript N(exitWalk_80244960) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_802449CC) = EXIT_WALK_SCRIPT(60,  1, "dro_02",  0);
+EvtScript N(exitWalk_802449CC) = EVT_EXIT_WALK(60,  1, "dro_02",  0);
 
 EvtScript N(80244A28) = {
     EVT_BIND_TRIGGER(N(exitWalk_80244960), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
@@ -1894,7 +1894,7 @@ EvtScript N(8024CCC4) = {
         EVT_IF_NE(LVar1, 6)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -1954,7 +1954,7 @@ EvtScript N(8024CF7C) = {
         EVT_IF_NE(LVar1, 6)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE
