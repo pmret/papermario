@@ -296,7 +296,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->moveToPos.y = playerStatus->position.y;
                         kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
                         playerStatus->flags |= PS_FLAGS_JUMPING;
-                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
+                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
                         D_802BEC60 = 0;
@@ -353,7 +353,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         script->functionTemp[0] = 3;
                         D_802BEC60 = 0;
-                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
+                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
                         sfx_play_sound_at_npc(SOUND_283, 0, -4);
                         sfx_play_sound_at_npc(SOUND_284, 0, -4);
                     }

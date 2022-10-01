@@ -409,7 +409,7 @@ void entity_Chest_enable_player_input(Entity* entity) {
 void entity_GiantChest_await_got_item(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
     if (data->itemID != 0) {
-        if (data->unk_30 != 0) {
+        if (data->gotItemDone) {
             exec_entity_commandlist(entity);
             remove_item_entity_by_index(data->itemEntityIndex);
             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);

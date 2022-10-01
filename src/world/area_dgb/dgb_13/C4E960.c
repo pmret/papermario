@@ -29,7 +29,7 @@ static s32 N(pad_E8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtScript N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
+EvtScript N(exitWalk_802400F0) = EVT_EXIT_WALK(26,  0, "dgb_03",  5);
 
 EvtScript N(8024014C) = {
     EVT_BIND_TRIGGER(N(exitWalk_802400F0), TRIGGER_FLOOR_ABOVE, 5, 1, 0)

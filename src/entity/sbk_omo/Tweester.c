@@ -280,7 +280,7 @@ void entity_Tweester_idle(Entity* entity) {
             fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) <= 50.0
             ) {
             TweesterTouchingPlayer = entity;
-            playerStatus->animFlags |= PA_FLAGS_4;
+            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
             set_action_state(ACTION_STATE_USE_TWEESTER);
         }
     }

@@ -41,7 +41,7 @@ static s32 N(pad_11C) = {
     0x00000000,
 };
 
-EvtScript N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
+EvtScript N(exitWalk_80240120) = EVT_EXIT_WALK(60,  0, "flo_13",  1);
 
 EvtScript N(8024017C) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240120), TRIGGER_FLOOR_ABOVE, 0, 1, 0)

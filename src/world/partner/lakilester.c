@@ -838,7 +838,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14++;
             /* fallthrough */
         case 5:
-            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             playerStatus->position.y += npc->jumpVelocity;
             sp2C = playerStatus->colliderHeight * 0.5f;
 

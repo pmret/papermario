@@ -129,7 +129,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
-    ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
+    ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
     npc->duration = 10;
@@ -204,7 +204,7 @@ static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, 
     
     npc->duration--;
     if (npc->duration <= 0) {
-        ai_enemy_play_sound(npc, SOUND_MOLE_DIG, 0);
+        ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
         npc->duration = 11;
         npc->currentAnim = ANIM_MontyMole_Anim11; // retreat into ground
         script->AI_TEMP_STATE = AI_STATE_MOLE_BURROW;

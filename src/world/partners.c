@@ -697,8 +697,8 @@ void _use_partner_ability(void) {
         partnerActionStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_4) {
-        playerStatus->animFlags &= ~PA_FLAGS_4;
+    if (playerStatus->animFlags & PA_FLAGS_INTERRUPT_USE_PARTNER) {
+        playerStatus->animFlags &= ~PA_FLAGS_INTERRUPT_USE_PARTNER;
         partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
         playerStatus->animFlags |= PA_FLAGS_40000000;
     }

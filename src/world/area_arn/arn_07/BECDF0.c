@@ -162,9 +162,9 @@ EvtScript N(exitSingleDoor_802428D4) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
+EvtScript N(exitWalk_80242978) = EVT_EXIT_WALK(60,  1, "arn_03",  0);
 
-EvtScript N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
+EvtScript N(exitWalk_802429D4) = EVT_EXIT_WALK(60,  2, "mim_12",  1);
 
 static const f64 rodata_alignment = 0.0;
 

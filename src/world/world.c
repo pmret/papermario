@@ -141,7 +141,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gPlayerStatus.targetYaw = gPlayerStatus.currentYaw;
 
-    func_801497FC(D_8008FF60[mapConfig->unk_1C.word % 4]);
+    func_801497FC(D_8008FF60[mapConfig->unk_1C.word & 0x3]);
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
@@ -308,9 +308,10 @@ MapConfig tik_maps[] = {
 };
 
 /// Inside the Whale
+#include "area_kgr/kgr.h"
 MapConfig kgr_maps[] = {
-    { MAP_UNSPLIT(kgr_01, 0x80240540), .unk_1C = { .bytes = { .flags = 1 } } },
-    { MAP_UNSPLIT(kgr_02, 0x80240790), .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kgr_01), .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kgr_02), .unk_1C = { .bytes = { .flags = 1 } } },
 };
 
 /// Goomba Region
@@ -656,24 +657,25 @@ MapConfig dgb_maps[] = {
 };
 
 /// Mt. Lavalava
+#include "area_kzn/kzn.h"
 MapConfig kzn_maps[] = {
-    { MAP_UNSPLIT(kzn_01, 0x80240330), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_02, 0x80242850), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_03, 0x802430E0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_04, 0x80241770), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_05, 0x80240330), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_06, 0x80240AA0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_07, 0x80242320), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_08, 0x80244130), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_09, 0x80243A40), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_10, 0x802406F0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_11, 0x80242680), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_17, 0x802430C0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_18, 0x802403F0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_19, 0x80241D70), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_20, 0x80240AE0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_22, 0x802403A0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(kzn_23, 0x80240630), .bgName = "yos_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_01), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_02), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_03), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_04), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_05), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_07), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_09), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_11), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_17), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_18), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_19), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_20), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_22), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(kzn_23), .bgName = "yos_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
 };
 
 /// Flower Fields
@@ -801,8 +803,9 @@ MapConfig mgm_maps[] = {
 };
 
 /// Game Over
+#include "area_gv/gv.h"
 MapConfig gv_maps[] = {
-    { MAP_UNSPLIT(gv_01, 0x802407D0) },
+    { MAP(gv_01) },
 };
 
 AreaConfig gAreas[] = {

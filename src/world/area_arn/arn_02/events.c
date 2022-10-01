@@ -4,9 +4,9 @@
 #include "effects.h"
 #include "entity.h"
 
-EvtScript N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
+EvtScript N(exitWalk_802410F0) = EVT_EXIT_WALK(60,  0, "arn_05",  1);
 
-EvtScript N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+EvtScript N(exitWalk_8024114C) = EVT_EXIT_WALK(60,  1, "arn_04",  0);
 
 EvtScript N(802411A8) = {
     EVT_BIND_TRIGGER(N(exitWalk_802410F0), TRIGGER_FLOOR_ABOVE, 1, 1, 0)

@@ -131,7 +131,7 @@ EvtScript N(Pipe_ExitVertical) = {
         EVT_IF_NE(LVar1, PARTNER_WATT)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -191,7 +191,7 @@ EvtScript N(Pipe_ExitHorizontal) = {
         EVT_IF_NE(LVar1, PARTNER_WATT)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(func_802D2B6C)
+            EVT_CALL(InterruptUsePartner)
             EVT_CALL(DisablePlayerInput, TRUE)
         EVT_END_IF
     EVT_ELSE

@@ -14,7 +14,7 @@ ApiStatus func_8024037C_A54CCC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (gCollisionStatus.currentFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
-        playerStatus->extraVelocity.x = velocity;
+        playerStatus->pushVelocity.x = velocity;
     }
 
     if (gPlayerData.currentPartner != PARTNER_NONE) {

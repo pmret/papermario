@@ -113,9 +113,9 @@ EvtScript N(80240880) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
+EvtScript N(exitWalk_80240B2C) = EVT_EXIT_WALK(60,  0, "flo_09",  1);
 
-EvtScript N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
+EvtScript N(exitWalk_80240B88) = EVT_EXIT_WALK(60,  1, "flo_22",  0);
 
 EvtScript N(80240BE4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240B2C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
@@ -296,7 +296,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(PanToTarget, 0, 0, 1)
             EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
             EVT_WAIT(20)
-            EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_SURFACE, 0)
+            EVT_CALL(PlaySoundAtNpc, 2, SOUND_BURROW_SURFACE, 0)
             EVT_CALL(SetNpcAnimation, 2, ANIM_MontyMole_Dark_Anim16)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtNpc, 2, 0x263, 0)
@@ -313,7 +313,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
             EVT_CALL(SetNpcAnimation, 3, ANIM_MontyMole_Dark_Anim00)
             EVT_WAIT(20)
-            EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_SURFACE, 0)
+            EVT_CALL(PlaySoundAtNpc, 3, SOUND_BURROW_SURFACE, 0)
             EVT_CALL(SetNpcPos, 3, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, 3, ANIM_MontyMole_Dark_Anim10)
             EVT_WAIT(20)
@@ -533,7 +533,7 @@ EvtScript N(idle_8024219C) = {
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
                 EVT_END_IF
-                EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_DIG, 0)
+                EVT_CALL(PlaySoundAtNpc, 2, SOUND_BURROW_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 2, ANIM_MontyMole_Dark_Anim11)
                 EVT_WAIT(20)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
@@ -556,7 +556,7 @@ EvtScript N(idle_8024219C) = {
                 EVT_SET(AreaFlag(23), 0)
                 EVT_CALL(NpcFacePlayer, 2, 1)
                 EVT_WAIT(1)
-                EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(PlaySoundAtNpc, 2, SOUND_BURROW_SURFACE, 0)
                 EVT_CALL(SetNpcAnimation, 2, ANIM_MontyMole_Dark_Anim10)
                 EVT_WAIT(10)
                 EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
@@ -611,7 +611,7 @@ EvtScript N(idle_80242618) = {
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
                 EVT_END_IF
-                EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_DIG, 0)
+                EVT_CALL(PlaySoundAtNpc, 3, SOUND_BURROW_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 3, ANIM_MontyMole_Dark_Anim11)
                 EVT_WAIT(20)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
@@ -634,7 +634,7 @@ EvtScript N(idle_80242618) = {
                 EVT_SET(AreaFlag(24), 0)
                 EVT_CALL(NpcFacePlayer, 3, 1)
                 EVT_WAIT(1)
-                EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(PlaySoundAtNpc, 3, SOUND_BURROW_SURFACE, 0)
                 EVT_CALL(SetNpcAnimation, 3, ANIM_MontyMole_Dark_Anim10)
                 EVT_WAIT(10)
                 EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
@@ -689,7 +689,7 @@ EvtScript N(idle_80242A94) = {
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
                 EVT_END_IF
-                EVT_CALL(PlaySoundAtNpc, 4, SOUND_MOLE_DIG, 0)
+                EVT_CALL(PlaySoundAtNpc, 4, SOUND_BURROW_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 4, ANIM_MontyMole_Dark_Anim11)
                 EVT_WAIT(20)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
@@ -712,7 +712,7 @@ EvtScript N(idle_80242A94) = {
                 EVT_SET(AreaFlag(25), 0)
                 EVT_CALL(NpcFacePlayer, 4, 1)
                 EVT_WAIT(1)
-                EVT_CALL(PlaySoundAtNpc, 4, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(PlaySoundAtNpc, 4, SOUND_BURROW_SURFACE, 0)
                 EVT_CALL(SetNpcAnimation, 4, ANIM_MontyMole_Dark_Anim10)
                 EVT_WAIT(10)
                 EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
@@ -767,7 +767,7 @@ EvtScript N(idle_80242F10) = {
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
                 EVT_END_IF
-                EVT_CALL(PlaySoundAtNpc, 5, SOUND_MOLE_DIG, 0)
+                EVT_CALL(PlaySoundAtNpc, 5, SOUND_BURROW_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 5, ANIM_MontyMole_Dark_Anim11)
                 EVT_WAIT(20)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
@@ -790,7 +790,7 @@ EvtScript N(idle_80242F10) = {
                 EVT_SET(AreaFlag(26), 0)
                 EVT_CALL(NpcFacePlayer, 5, 1)
                 EVT_WAIT(1)
-                EVT_CALL(PlaySoundAtNpc, 5, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(PlaySoundAtNpc, 5, SOUND_BURROW_SURFACE, 0)
                 EVT_CALL(SetNpcAnimation, 5, ANIM_MontyMole_Dark_Anim10)
                 EVT_WAIT(10)
                 EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)

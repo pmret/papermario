@@ -17,9 +17,9 @@ enum {
     NPC_BOO8,
 };
 
-EvtScript N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
+EvtScript N(exitWalk_80241430) = EVT_EXIT_WALK(60,  0, "arn_03",  1);
 
-EvtScript N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
+EvtScript N(exitWalk_8024148C) = EVT_EXIT_WALK(60,  1, "arn_02",  0);
 
 EvtScript N(802414E8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80241430), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
@@ -771,7 +771,7 @@ EvtScript N(802441FC) = {
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
         EVT_EXEC_WAIT(N(80242C50))
         EVT_CALL(BindNpcInteract, 0, EVT_PTR(N(interact_802418F4)))
         EVT_CALL(BindNpcInteract, 1, EVT_PTR(N(interact_80241A84)))

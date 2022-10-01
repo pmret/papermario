@@ -85,7 +85,7 @@ void action_update_parasol(void) {
         disable_player_static_collisions();
         tempUnk_1C = &transformation->playerRotationRate;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0;
         playerStatus->pitch = 0;
 
