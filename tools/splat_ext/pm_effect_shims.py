@@ -25,7 +25,7 @@ glabel {name}
 """
 
     def shim_path(self, shim):
-        return options.get_build_path() / "asm" / "effect_shims" / f"{shim}.s"
+        return options.opts.build_path / "asm" / "effect_shims" / f"{shim}.s"
 
     def __init__(
         self,
@@ -59,7 +59,7 @@ glabel {name}
             yaml=yaml,
         )
 
-        with open(options.get_asm_path() / ".." / "effect_shims.yaml") as f:
+        with open(options.opts.asm_path / ".." / "effect_shims.yaml") as f:
             self.shims = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):

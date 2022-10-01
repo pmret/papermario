@@ -65,9 +65,9 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
 
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_BULLET_INIT:
-            npc->pos.x = 0.0f;
-            npc->pos.y = -1000.0f;
-            npc->pos.z = 0.0f;
+            npc->pos.x = NPC_DISPOSE_POS_X;
+            npc->pos.y = NPC_DISPOSE_POS_Y;
+            npc->pos.z = NPC_DISPOSE_POS_Z;
             npc->rotation.y = 0.0f;
             npc->duration = 0;
             npc->flags |= NPC_FLAG_2;

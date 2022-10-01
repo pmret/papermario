@@ -31,7 +31,7 @@ void action_update_land(void) {
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -93,7 +93,7 @@ void action_update_step_down_land(void) {
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -127,7 +127,7 @@ void action_update_peach_land(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
@@ -171,7 +171,7 @@ void action_update_peach_step_down_land(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;

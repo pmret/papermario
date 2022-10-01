@@ -6,9 +6,9 @@
 
 static s32 N(KeyItemChoiceList)[112];
 
-EvtScript N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
+EvtScript N(exitWalk_80241830) = EVT_EXIT_WALK(60,  0, "arn_07",  1);
 
-EvtScript N(exitWalk_8024188C) = EXIT_WALK_SCRIPT(60,  1, "arn_05",  0);
+EvtScript N(exitWalk_8024188C) = EVT_EXIT_WALK(60,  1, "arn_05",  0);
 
 EvtScript N(802418E8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80241830), TRIGGER_FLOOR_ABOVE, 1, 1, 0)

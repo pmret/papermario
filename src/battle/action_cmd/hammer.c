@@ -17,7 +17,7 @@ extern HudScript HES_StickTapNeutral;
 extern HudScript HES_RightOn;
 extern HudScript HES_TimingReady;
 
-extern s32 D_802941E0;
+extern s32 D_802941E0[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -25,7 +25,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     s32 id;
 
     battleStatus->unk_82 = 1;
-    battleStatus->unk_434 = &D_802941E0;
+    battleStatus->unk_434 = D_802941E0;
     battleStatus->unk_86 = 0;
 
     if (battleStatus->unk_83 == 0) {

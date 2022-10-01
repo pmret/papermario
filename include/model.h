@@ -81,6 +81,11 @@ typedef struct ModelTransformGroup {
 typedef Model* ModelList[MAX_MODELS];
 typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS];
 
+typedef struct ModelIDList {
+    u16 count;
+    u16 list[0];
+} ModelIDList;
+
 typedef struct ModelLocalVertexCopy {
     /* 0x00 */ s32 numVertices;
     /* 0x04 */ Vtx* minVertexAddr;

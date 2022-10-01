@@ -25,7 +25,7 @@ void action_update_knockback(void) {
         playerStatus->gravityIntegrator[2] = 0.8059f;
         playerStatus->gravityIntegrator[3] = -0.0987f;
 
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
         ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x,
                            playerStatus->lastGoodPosition.z);

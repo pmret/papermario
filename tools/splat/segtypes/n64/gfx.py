@@ -50,13 +50,13 @@ class N64SegGfx(CommonSegCodeSubsegment):
         return ".data"
 
     def out_path(self) -> Path:
-        return options.get_asset_path() / self.dir / f"{self.name}.gfx.inc.c"
+        return options.opts.asset_path / self.dir / f"{self.name}.gfx.inc.c"
 
     def scan(self, rom_bytes: bytes):
         self.file_text = self.disassemble_data(rom_bytes)
 
     def get_gfxd_target(self):
-        opt = options.get_gfx_ucode()
+        opt = options.opts.gfx_ucode
 
         if opt == "f3d":
             return gfxd_f3d  # type: ignore
@@ -155,7 +155,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
                 f"Error: gfx segment {self.name} length ({segment_length}) is not a multiple of 8!"
             )
 
-        out_str = options.get_generated_c_premble() + "\n\n"
+        out_str = options.opts.generated_c_preamble + "\n\n"
 
         sym = self.create_symbol(
             addr=self.vram_start, in_segment=True, type="data", define=True
@@ -169,7 +169,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
 
         gfxd_target(self.get_gfxd_target())
         gfxd_endian(
-            GfxdEndian.big if options.get_endianess() == "big" else GfxdEndian.little, 4
+            GfxdEndian.big if options.opts.endianness == "big" else GfxdEndian.little, 4
         )
 
         # Callbacks
@@ -205,10 +205,10 @@ class N64SegGfx(CommonSegCodeSubsegment):
 
     def should_scan(self) -> bool:
         return (
-            options.mode_active("gfx")
+            options.opts.is_mode_active("gfx")
             and self.rom_start != "auto"
             and self.rom_end != "auto"
         )
 
     def should_split(self) -> bool:
-        return self.extract and options.mode_active("gfx")
+        return self.extract and options.opts.is_mode_active("gfx")

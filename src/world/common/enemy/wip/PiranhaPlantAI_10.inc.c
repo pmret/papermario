@@ -178,7 +178,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         }
 
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
+        ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
         npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
         npc->duration = enemy->varTable[10];
         script->functionTemp[0] = 11;

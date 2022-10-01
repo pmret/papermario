@@ -22,4 +22,7 @@ enum {
 
 #define AF_KGR(index) AreaFlag(index)
 
+extern MapSettings kgr_01_settings;
+extern MapSettings kgr_02_settings;
+
 #endif

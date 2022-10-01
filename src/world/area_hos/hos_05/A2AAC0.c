@@ -1,5 +1,7 @@
 #include "hos_05.h"
 
+extern Gfx D_8024AA28_A34C68[];
+
 void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
 void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
 void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
@@ -40,7 +42,7 @@ ApiStatus func_802409C4_A2AC04(Evt* script, s32 isInitialCall) {
         duration = evt_get_variable(script, *args++);
         time = 0;
     }
-    
+
     if (duration > 0) {
         if(time >= duration) {
             return ApiStatus_DONE2;
@@ -144,11 +146,74 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024301C_A2D25C);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243100_A2D340);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243164_A2D3A4);
+void func_80243164_A2D3A4(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s32 alpha, s32 width, s32 height, s32 lineHeight) {
+    u8 overlayType;
+    f32 overlayZoomBack;
+    f32 overlayZoomFront;
+    s32 i;
+
+    if (alpha == 0) {
+        return;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMasterGfxPos++, D_8024AA28_A34C68);
+
+    if (pal != NULL) {
+        gDPLoadTLUT_pal256(gMasterGfxPos++, pal);
+    } else {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    }
+
+    get_screen_overlay_params(1, &overlayType, &overlayZoomBack);
+    get_screen_overlay_params(0, &overlayType, &overlayZoomFront);
+    alpha = alpha * (255.0f - overlayZoomBack) * (255.0f - overlayZoomFront) / 255.0f / 255.0f;
+    if (alpha != 255) {
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
+    } else {
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    }
+
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+
+
+    for (i = 0; i < height / lineHeight; i++) {
+        gDPLoadTextureTile(gMasterGfxPos++, img, pal != NULL ? G_IM_FMT_CI : G_IM_FMT_IA, G_IM_SIZ_8b, width, height,
+                           0, i * lineHeight, width - 1, i * lineHeight + lineHeight - 1, 0,
+                           G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPScisTextureRectangle(gMasterGfxPos++, baseX * 4, (baseY + i * lineHeight) * 4, (baseX + width) * 4, (baseY + i * lineHeight + lineHeight) * 4,
+                                G_TX_RENDERTILE, 0, (i * lineHeight) * 32, 1024, 1024);
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024370C_A2D94C);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243758_A2D998);
+void func_80243758_A2D998(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal) {
+    s32 i;
+    s32 m = 1;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPLoadTLUT_pal256(gMasterGfxPos++, pal);
+    for (i = 0; i < 23; i++) {
+        gDPLoadTextureTile(gMasterGfxPos++, img, G_IM_FMT_CI, G_IM_SIZ_8b, 264, 162,
+                           0, i * 7, 263, i * 7 + 7 - 1, 0,
+                           G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPScisTextureRectangle(gMasterGfxPos++, baseX * 4, (baseY + i * 7) * 4, (baseX + 264) * 4, (baseY + i * 7 + 7) * 4,
+                                G_TX_RENDERTILE, 0, (i * 7) << 5, 1024, 1024);
+    }
+    if (m != 0) {
+        gDPLoadTextureTile(gMasterGfxPos++, img, G_IM_FMT_CI, G_IM_SIZ_8b, 264, 0,
+                           0, i * 7, 263, i * 7 + m - 1, 0,
+                           G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPScisTextureRectangle(gMasterGfxPos++, baseX * 4, (baseY + i * 7) * 4, (baseX + 264) * 4, (baseY + i * 7 + m) * 4,
+                                G_TX_RENDERTILE, 0, (i * 7) << 5, 1024, 1024);
+    }
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243CC0_A2DF00);
 

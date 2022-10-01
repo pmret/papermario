@@ -16,7 +16,7 @@ class PsxSegAsm(CommonSegAsm):
         ret.append(".set noat      /* allow manual use of $at */")
         ret.append(".set noreorder /* don't insert nops after branches */")
         ret.append("")
-        preamble = options.get_generated_s_preamble()
+        preamble = options.opts.generated_s_preamble
         if preamble:
             ret.append(preamble)
             ret.append("")

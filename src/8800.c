@@ -361,7 +361,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
     camera->updateMode = initData->type;
-    camera->unk_06 = 1;
+    camera->unk_06 = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;
@@ -373,9 +373,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
     camera->unk_C0 = 0;
-    camera->auxPos.x = 0;
-    camera->auxPos.y = 0;
-    camera->auxPos.z = 0;
+    camera->lookAt_obj_target.x = 0;
+    camera->lookAt_obj_target.y = 0;
+    camera->lookAt_obj_target.z = 0;
     camera->targetPos.x = 0;
     camera->targetPos.y = 0;
     camera->targetPos.z = 0;

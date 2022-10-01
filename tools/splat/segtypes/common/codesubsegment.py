@@ -7,46 +7,18 @@ from segtypes.segment import Segment
 from segtypes import segment
 from util import symbols
 
-
 # abstract class for c, asm, data, etc
 class CommonSegCodeSubsegment(Segment):
-    def __init__(
-        self,
-        rom_start,
-        rom_end,
-        type,
-        name,
-        vram_start,
-        extract,
-        given_subalign,
-        exclusive_ram_id,
-        given_dir,
-        symbol_name_format,
-        symbol_name_format_no_rom,
-        args,
-        yaml,
-    ):
-        vram = segment.parse_segment_vram(yaml)
-        if vram is not None:
-            vram_start = vram
-        self.partial_migration: bool = (
-            yaml.get("partial_migration", False) if isinstance(yaml, dict) else False
-        )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        super().__init__(
-            rom_start,
-            rom_end,
-            type,
-            name,
-            vram_start,
-            extract,
-            given_subalign,
-            exclusive_ram_id=exclusive_ram_id,
-            given_dir=given_dir,
-            symbol_name_format=symbol_name_format,
-            symbol_name_format_no_rom=symbol_name_format_no_rom,
-            args=args,
-            yaml=yaml,
+        vram = segment.parse_segment_vram(self.yaml)
+        if vram is not None:
+            self.vram_start = vram
+        self.partial_migration: bool = (
+            self.yaml.get("partial_migration", False)
+            if isinstance(self.yaml, dict)
+            else False
         )
 
         self.spim_section: Optional[spimdisasm.mips.sections.SectionBase] = None
@@ -151,7 +123,7 @@ class CommonSegCodeSubsegment(Segment):
                         self.parent.check_rodata_sym(func_spim.vram, sym)
 
     def print_file_boundaries(self):
-        if not options.find_file_boundaries() or not self.spim_section:
+        if not options.opts.find_file_boundaries or not self.spim_section:
             return
 
         assert isinstance(self.rom_start, int)
@@ -193,7 +165,7 @@ class CommonSegCodeSubsegment(Segment):
 
             while rom_offset:
                 word = rom_bytes[rom_offset : rom_offset + 4]
-                word_int = int.from_bytes(word, options.get_endianess())
+                word_int = int.from_bytes(word, options.opts.endianness)
                 if word_int >= start and word_int <= end:
                     self.parent.jtbl_glabels_to_add.add(word_int)
                 else:
@@ -203,10 +175,12 @@ class CommonSegCodeSubsegment(Segment):
 
     def should_scan(self) -> bool:
         return (
-            options.mode_active("code")
+            options.opts.is_mode_active("code")
             and self.rom_start != "auto"
             and self.rom_end != "auto"
         )
 
     def should_split(self) -> bool:
-        return self.extract and (self.partial_migration or options.mode_active("code"))
+        return self.extract and (
+            self.partial_migration or options.opts.is_mode_active("code")
+        )

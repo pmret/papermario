@@ -15,7 +15,7 @@ void action_update_hit_fire(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
 
-        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
         playerStatus->flags |= (PS_FLAGS_800 | PS_FLAGS_FLYING);
 
         suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
@@ -25,7 +25,7 @@ void action_update_hit_fire(void) {
         playerStatus->gravityIntegrator[1] = -3.738f;
         playerStatus->gravityIntegrator[2] = 0.8059f;
         playerStatus->gravityIntegrator[3] = -0.0987f;
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
         playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
         subtract_hp(1);
