@@ -46,8 +46,8 @@ extern s32 D_8024143C_9EF02C;
 extern s32 D_80243254_9F0E44;
 extern EvtScript D_80241470_9EF060;
 extern EvtScript D_8024161C_9EF20C;
-extern s32 D_80241768_9EF358;
-extern s32 D_80241748_9EF338;
+extern Gfx D_80241768_9EF358[];
+extern Vtx D_80241748_9EF338[];
 
 /*
 trees in this room are labeled with a 0 through 5 system, meaning there are "6" tree values
@@ -68,7 +68,7 @@ ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
     s32 temp_s2 = evt_get_variable(script, *args++);
     s32 temp_s0_3 = evt_get_variable(script, *args++);
     f32 temp_f6 = evt_get_variable(script, *args++);
- 
+
     D_802413F8_9EEFE8.unk_00.x = temp_s2;
     D_802413F8_9EEFE8.unk_00.y = temp_s0_3 + 4.0f;
     D_802413F8_9EEFE8.unk_00.z = temp_f6;
@@ -110,7 +110,7 @@ ApiStatus func_802403C0_9EDFB0(Evt* script, s32 isInitialCall) {
         D_802413F8_9EEFE8.unk_20 = temp_f8;
         D_802413F8_9EEFE8.unk_30 = temp_f10;
     }
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -191,7 +191,7 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     }
 
     phi_a0 = &D_80241470_9EF060;
-    
+
     switch (temp_s2) {
         case 0:
             phi_a0 = &D_80241470_9EF060;
@@ -222,13 +222,84 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240814_9EE404);
+void func_80240814_9EE404(s32 index) {
+    f32 x = D_802413F8_9EEFE8.unk_00.x;
+    f32 y = D_802413F8_9EEFE8.unk_00.y;
+    f32 z = D_802413F8_9EEFE8.unk_00.z;
+    s32 i;
+    f32 angle, deltaY, fs3;
+
+    D_802413F8_9EEFE8.unk_14 += 0.2;
+    if (D_802413F8_9EEFE8.unk_30 != 0.0f) {
+        D_802413F8_9EEFE8.unk_10 += D_802413F8_9EEFE8.unk_38;
+        if (D_802413F8_9EEFE8.unk_0C < D_802413F8_9EEFE8.unk_10) {
+            D_802413F8_9EEFE8.unk_14 += (D_802413F8_9EEFE8.unk_0C - D_802413F8_9EEFE8.unk_10) * 0.5f;
+        }
+        D_802413F8_9EEFE8.unk_34 += 1.0f;
+        D_802413F8_9EEFE8.unk_1C = (D_802413F8_9EEFE8.unk_1C + (D_802413F8_9EEFE8.unk_18 - D_802413F8_9EEFE8.unk_20) / 10.0f) * 0.92;
+        D_802413F8_9EEFE8.unk_20 += D_802413F8_9EEFE8.unk_3C;
+        if (D_802413F8_9EEFE8.unk_30 <= D_802413F8_9EEFE8.unk_34) {
+            D_802413F8_9EEFE8.unk_30 = 0.0f;
+        }
+    } else {
+        D_802413F8_9EEFE8.unk_10 += D_802413F8_9EEFE8.unk_14;
+        if (D_802413F8_9EEFE8.unk_0C < D_802413F8_9EEFE8.unk_10) {
+            D_802413F8_9EEFE8.unk_14 += (D_802413F8_9EEFE8.unk_0C - D_802413F8_9EEFE8.unk_10) * 0.5f;
+        }
+        D_802413F8_9EEFE8.unk_1C = (D_802413F8_9EEFE8.unk_1C + (D_802413F8_9EEFE8.unk_18 - D_802413F8_9EEFE8.unk_20) / 10.0f) * 0.92;
+        D_802413F8_9EEFE8.unk_20 += D_802413F8_9EEFE8.unk_1C;
+    }
+    D_802413F8_9EEFE8.unk_14 *= 0.5;
+
+    gSPDisplayList(gMasterGfxPos++, D_80241768_9EF358);
+    guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], D_802413F8_9EEFE8.unk_00.x, D_802413F8_9EEFE8.unk_00.y, D_802413F8_9EEFE8.unk_00.z);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    angle = D_802413F8_9EEFE8.unk_20;
+    deltaY = -D_802413F8_9EEFE8.unk_10;
+    x += -deltaY * sin_rad(D_802413F8_9EEFE8.unk_20 * 0 / 180.0f * PI);
+    y += deltaY * cos_rad(D_802413F8_9EEFE8.unk_20 * 0 / 180.0f * PI);
+
+    guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, angle, 1.0f, 0.0f, deltaY, 0.0f);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    for (i = 1; i < 16; i++) {
+        angle = D_802413F8_9EEFE8.unk_20;
+        deltaY = -D_802413F8_9EEFE8.unk_10;
+        x += -deltaY * sin_rad(D_802413F8_9EEFE8.unk_20 * i / 180.0f * PI);
+        y += deltaY * cos_rad(D_802413F8_9EEFE8.unk_20 * i / 180.0f * PI);
+        gSPVertex(gMasterGfxPos++, D_80241748_9EF338, 2, 0);
+        guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, angle, 1.0f, 0.0f, deltaY, 0.0f);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPVertex(gMasterGfxPos++, D_80241748_9EF338, 2, 2);
+        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 2, 3, 1, 0);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+
+    D_802413F8_9EEFE8.unk_24 = x;
+    D_802413F8_9EEFE8.unk_28 = y;
+    D_802413F8_9EEFE8.unk_2C = z;
+
+    if (D_802413F8_9EEFE8.unk_40 != NULL) {
+        D_802413F8_9EEFE8.unk_40->unk_38 = x;
+        D_802413F8_9EEFE8.unk_40->unk_3C = y - 4.0f;
+        D_802413F8_9EEFE8.unk_40->unk_40 = z + 6.0f;
+    }
+
+    if (D_802413F8_9EEFE8.unk_44 != NULL) {
+        D_802413F8_9EEFE8.unk_44->unk_38 = x;
+        D_802413F8_9EEFE8.unk_44->unk_3C = y - 4.0f;
+        D_802413F8_9EEFE8.unk_44->unk_40 = z + 3.0f;
+    }
+}
 
 ApiStatus func_80240E4C_9EEA3C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         D_80243254_9F0E44 = FALSE;
     }
-    
+
     if (D_80243254_9F0E44) {
         return ApiStatus_DONE2;
     } else {
