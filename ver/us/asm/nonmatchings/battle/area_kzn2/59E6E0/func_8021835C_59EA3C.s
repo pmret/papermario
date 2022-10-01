@@ -115,7 +115,7 @@ glabel func_8021835C_59EA3C
 /* 59EBC4 802184E4 24840004 */   addiu    $a0, $a0, 4
 .L802184E8:
 /* 59EBC8 802184E8 0200202D */  daddu     $a0, $s0, $zero
-/* 59EBCC 802184EC 0C086016 */  jal       func_80218058_59E738
+/* 59EBCC 802184EC 0C086016 */  jal       b_area_kzn2_make_vine_interpolation
 /* 59EBD0 802184F0 AFA70028 */   sw       $a3, 0x28($sp)
 /* 59EBD4 802184F4 8FA70028 */  lw        $a3, 0x28($sp)
 /* 59EBD8 802184F8 24E70001 */  addiu     $a3, $a3, 1
