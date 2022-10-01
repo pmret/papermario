@@ -265,218 +265,1490 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
 s32 D_80281454[] = { 0x78, 0x93, 0x99, 0xB2, -1 };
 
 ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
-    [ACTOR_TYPE_RED_GOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_RED_PARAGOOMBA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GLOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PARAGLOOMBA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPIKED_GLOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_DARK_KOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_DARK_PARATROOPA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PARAGOOMBA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPIKED_GOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FUZZY] = { .walk = { 0x0331, 0x0331 }, .fly = { 0x0331, 0x0331 }, .jump = 0x0331, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_KOOPA_TROOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PARATROOPA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOB_OMB] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOB_OMB_DUP] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BULLET_BILL] = { .walk = { 0x02C9, 0x02C9 }, .fly = { 0x02C9, 0x02C9 }, .jump = 0x02C9, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BILL_BLASTER] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CLEFT] = { .walk = { 0x20D0, 0x20D0 }, .fly = { 0x20D0, 0x20D0 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MONTY_MOLE] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BANDIT] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x20C1, 0x20C1 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_POKEY] = { .walk = { 0x0343, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_POKEY_MUMMY] = { .walk = { 0x0343, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SWOOPER] = { .walk = { 0x0351, 0x0351 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BUZZY_BEETLE] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_STONE_CHOMP] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PIRANHA_PLANT] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FOREST_FUZZY] = { .walk = { 0x0331, 0x0331 }, .fly = { 0x0331, 0x0331 }, .jump = 0x0331, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HYPER_GOOMBA] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HYPER_PARAGOOMBA] = { .walk = { 0x20DF, 0x20DF }, .fly = { 0x20DF, 0x20DF }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HYPER_CLEFT] = { .walk = { 0x20D0, 0x20D0 }, .fly = { 0x20D0, 0x20D0 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CLUBBA] = { .walk = { 0x20C4, 0x20C4 }, .fly = { 0x20C4, 0x20C4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SHY_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GROOVE_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SKY_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MEDI_GUY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0380, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PYRO_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPY_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FUZZIPEDE] = { .walk = { 0x20D9, 0x20D9 }, .fly = { 0x20D9, 0x20D9 }, .jump = 0x20D9, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HURT_PLANT] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_M_BUSH] = { .walk = { 0x20C6, 0x20C6 }, .fly = { 0x20C6, 0x20C6 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_AQUA_FUZZY] = { .walk = { 0x0331, 0x0331 }, .fly = { 0x0331, 0x0331 }, .jump = 0x0331, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JUNGLE_FUZZY] = { .walk = { 0x0331, 0x0331 }, .fly = { 0x0331, 0x0331 }, .jump = 0x0331, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPEAR_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAVA_BUBBLE] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPIKE_TOP] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PUTRID_PIRANHA] = { .walk = { 0x03CE, 0x03CE }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAKITU] = { .walk = { 0x0295, 0x0295 }, .fly = { 0x0295, 0x0295 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { -5, -5 } },
-    [ACTOR_TYPE_SPINY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MONTY_MOLE_BOSS] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BZZAP] = { .walk = { 0x0357, 0x0000 }, .fly = { 0x0357, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CRAZEE_DAYZEE] = { .walk = { 0x02D6, 0x02D6 }, .fly = { 0x02D6, 0x02D6 }, .jump = 0x02D5, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_AMAZY_DAYZEE] = { .walk = { 0x02D6, 0x02D6 }, .fly = { 0x02D6, 0x02D6 }, .jump = 0x02D5, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_RUFF_PUFF] = { .walk = { 0x0295, 0x0000 }, .fly = { 0x0295, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SPIKE] = { .walk = { 0x0295, 0x0000 }, .fly = { 0x0295, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GULPIT] = { .walk = { 0x20C4, 0x20C4 }, .fly = { 0x20C4, 0x20C4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GULPIT_ROCKS] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_WHITE_CLUBBA] = { .walk = { 0x20C4, 0x20C4 }, .fly = { 0x20C4, 0x20C4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FROST_PIRANHA] = { .walk = { 0x03CE, 0x03CE }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SWOOPULA] = { .walk = { 0x0351, 0x0351 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_DUPLIGHOST] = { .walk = { 0x02CA, 0x02CA }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_GOOMBARIO] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_KOOPER] = { .walk = { 0x0100, 0x0100 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_BOMBETTE] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_PARAKARRY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_BOW] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_WATT] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_SUSHIE] = { .walk = { 0x029A, 0x029A }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GHOST_LAKILESTER] = { .walk = { 0x0295, 0x0295 }, .fly = { 0x0295, 0x0295 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { -5, -5 } },
-    [ACTOR_TYPE_ALBINO_DINO] = { .walk = { 0x030B, 0x02FD }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_EMBER] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BONY_BEETLE] = { .walk = { 0x20CD, 0x20CD }, .fly = { 0x20CD, 0x20CD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_DRY_BONES] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_DRY_BONES2] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOMBSHELL_BLASTER] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOMBSHELL_BILL] = { .walk = { 0x02C9, 0x02C9 }, .fly = { 0x02C9, 0x02C9 }, .jump = 0x02C9, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HAMMER_BROS] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_KOOPATROL] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MAGICLONE] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_MAGICLONE] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_RED_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_RED_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GREEN_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_YELLOW_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GRAY_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_WHITE_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_5B] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_5C] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_5D] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_5E] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_5F] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_60] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_61] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_62] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_63] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_64] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_65] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_66] = { .walk = { 0x0295, 0x0295 }, .fly = { 0x0295, 0x0295 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { -5, -5 } },
-    [ACTOR_TYPE_UNUSED_67] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x20DD, 0x20DD }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_68] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_69] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_6A] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MONTY_HOLE] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_6C] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_6D] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PLAYER] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBARIO] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_KOOPER] = { .walk = { 0x0100, 0x0100 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOMBETTE] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PARAKARRY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOW] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_WATT] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SUSHIE] = { .walk = { 0x029A, 0x029A }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAKILESTER] = { .walk = { 0x0295, 0x0295 }, .fly = { 0x0295, 0x0295 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { -5, -5 } },
-    [ACTOR_TYPE_TWINK] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { -5, -5 } },
-    [ACTOR_TYPE_UNUSED_78] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_UNUSED_79] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_THE_MASTER_1] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_THE_MASTER_2] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_THE_MASTER_3] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CHAN] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE] = { .walk = { 0x02CA, 0x02CA }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_GOOMBARIO] = { .walk = { 0x20DD, 0x20DD }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_KOOPER] = { .walk = { 0x0100, 0x0100 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_BOMBETTE] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_PARAKARRY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_BOW] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_WATT] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_SUSHIE] = { .walk = { 0x029A, 0x029A }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LEE_LAKILESTER] = { .walk = { 0x0295, 0x0295 }, .fly = { 0x0295, 0x0295 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { -5, -5 } },
-    [ACTOR_TYPE_KAMMY_KOOPA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA1] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA2] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA3] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA4] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA5] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA6] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA_DUP1] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_JR_TROOPA_DUP2] = { .walk = { 0x20C1, 0x20C1 }, .fly = { 0x0351, 0x0351 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BLUE_GOOMBA_BOSS] = { .walk = { 0x03AC, 0x03AC }, .fly = { 0x0000, 0x0000 }, .jump = 0x010F, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_RED_GOOMBA_BOSS] = { .walk = { 0x03AC, 0x03AC }, .fly = { 0x0000, 0x0000 }, .jump = 0x010F, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBA_KING] = { .walk = { 0x20EC, 0x20EC }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 22, 30 } },
-    [ACTOR_TYPE_GOOMNUT_TREE] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBARIO_TUTOR1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MAGIKOOPA_BOSS] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MAGIKOOPA_DUP1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MAGIKOOPA_DUP2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_FAKE_BOWSER] = { .walk = { 0x03EA, 0x03EA }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_KOOPA_BROS] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GREEN_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_RED_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_YELLOW_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_ELDSTAR] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BUZZAR] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x20EF, 0x20EF }, .jump = 0x0000, .hurt = 0x0000, .delay = { -14, -14 } },
-    [ACTOR_TYPE_TUTANKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { -3, -3 } },
-    [ACTOR_TYPE_CHOMP] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE] = { .walk = { 0x20F6, 0x20F6 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_TUBBA_BLUBBA] = { .walk = { 0x20F6, 0x20F6 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_TUBBA_HEART] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x20C8, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_STILT_GUY] = { .walk = { 0x2066, 0x2066 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SHY_STACK] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 10, 10 } },
-    [ACTOR_TYPE_SHY_SQUAD] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GENERAL_GUY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_TOY_TANK] = { .walk = { 0x037E, 0x037E }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LIGHT_BULB] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SIGNAL_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SHY_SQUAD_DUP] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SHY_GUY_DUP] = { .walk = { 0x20BA, 0x20BA }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_ANTI_GUY] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_ANTI_GUY_DUP] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BIG_LANTERN_GHOST] = { .walk = { 0x037D, 0x037D }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBA_KING_DUP] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAVA_PIRANHA_PHASE_1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAVA_PIRANHA_PHASE_2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAVA_BUD_PHASE_1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAVA_BUD_PHASE_2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PETIT_PIRANHA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_PETIT_PIRANHA_BOMB] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_KENT_C_KOOPA] = { .walk = { 0x20EC, 0x20EC }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_HUFF_N_PUFF] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x03D1, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_TUFF_PUFF] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_MONSTAR] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CRYSTAL_KING] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CRYSTAL_CLONE] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_CRYSTAL_BIT] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_INTRO_BOWSER] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E7, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_PHASE_1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E7, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_DUP1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_PHASE_2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E7, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_DUP2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_PHASE_3] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E7, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BOWSER_DUP3] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_BLOOPER] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 25, 25 } },
-    [ACTOR_TYPE_ELECTRO_BLOOPER1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 25, 25 } },
-    [ACTOR_TYPE_ELECTRO_BLOOPER2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 25, 25 } },
-    [ACTOR_TYPE_SUPER_BLOOPER1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 25, 25 } },
-    [ACTOR_TYPE_SUPER_BLOOPER2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 25, 25 } },
-    [ACTOR_TYPE_BLOOPER_BABY] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_LAKILESTER_DUP] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SLOT_MACHINE_START] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SLOT_MACHINE_STOP] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x20BA, 0x03B4 }, .jump = 0x03E2, .hurt = 0x010F, .delay = { 30, 30 } },
-    [ACTOR_TYPE_WHACKA] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SLOT_MACHINE_START_DUP1] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SLOT_MACHINE_START_DUP2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_SLOT_MACHINE_START_DUP3] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
+    [ACTOR_TYPE_RED_GOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_RED_PARAGOOMBA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GLOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PARAGLOOMBA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPIKED_GLOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_DARK_KOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_DARK_PARATROOPA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PARAGOOMBA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPIKED_GOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FUZZY] = {
+		.walk = { SOUND_331, SOUND_331 },
+		.fly = { SOUND_331, SOUND_331 },
+		.jump = SOUND_331,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_KOOPA_TROOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PARATROOPA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOB_OMB] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOB_OMB_DUP] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BULLET_BILL] = {
+		.walk = { SOUND_2C9, SOUND_2C9 },
+		.fly = { SOUND_2C9, SOUND_2C9 },
+		.jump = SOUND_2C9,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BILL_BLASTER] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CLEFT] = {
+		.walk = { SOUND_20D0, SOUND_20D0 },
+		.fly = { SOUND_20D0, SOUND_20D0 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MONTY_MOLE] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BANDIT] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_20C1, SOUND_20C1 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_POKEY] = {
+		.walk = { SOUND_343, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_POKEY_MUMMY] = {
+		.walk = { SOUND_343, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SWOOPER] = {
+		.walk = { SOUND_351, SOUND_351 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BUZZY_BEETLE] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_STONE_CHOMP] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PIRANHA_PLANT] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FOREST_FUZZY] = {
+		.walk = { SOUND_331, SOUND_331 },
+		.fly = { SOUND_331, SOUND_331 },
+		.jump = SOUND_331,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HYPER_GOOMBA] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HYPER_PARAGOOMBA] = {
+		.walk = { SOUND_20DF, SOUND_20DF },
+		.fly = { SOUND_20DF, SOUND_20DF },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HYPER_CLEFT] = {
+		.walk = { SOUND_20D0, SOUND_20D0 },
+		.fly = { SOUND_20D0, SOUND_20D0 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CLUBBA] = {
+		.walk = { SOUND_20C4, SOUND_20C4 },
+		.fly = { SOUND_20C4, SOUND_20C4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SHY_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GROOVE_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SKY_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MEDI_GUY] = {
+		.walk = { NULL, NULL },
+		.fly = { SOUND_380, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PYRO_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPY_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FUZZIPEDE] = {
+		.walk = { SOUND_20D9, SOUND_20D9 },
+		.fly = { SOUND_20D9, SOUND_20D9 },
+		.jump = SOUND_20D9,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HURT_PLANT] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_M_BUSH] = {
+		.walk = { SOUND_20C6, SOUND_20C6 },
+		.fly = { SOUND_20C6, SOUND_20C6 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_AQUA_FUZZY] = {
+		.walk = { SOUND_331, SOUND_331 },
+		.fly = { SOUND_331, SOUND_331 },
+		.jump = SOUND_331,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JUNGLE_FUZZY] = {
+		.walk = { SOUND_331, SOUND_331 },
+		.fly = { SOUND_331, SOUND_331 },
+		.jump = SOUND_331,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPEAR_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAVA_BUBBLE] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPIKE_TOP] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PUTRID_PIRANHA] = {
+		.walk = { SOUND_3CE, SOUND_3CE },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAKITU] = {
+		.walk = { SOUND_295, SOUND_295 },
+		.fly = { SOUND_295, SOUND_295 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_SPINY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MONTY_MOLE_BOSS] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BZZAP] = {
+		.walk = { SOUND_357, NULL },
+		.fly = { SOUND_357, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CRAZEE_DAYZEE] = {
+		.walk = { SOUND_2D6, SOUND_2D6 },
+		.fly = { SOUND_2D6, SOUND_2D6 },
+		.jump = SOUND_2D5,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_AMAZY_DAYZEE] = {
+		.walk = { SOUND_2D6, SOUND_2D6 },
+		.fly = { SOUND_2D6, SOUND_2D6 },
+		.jump = SOUND_2D5,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_RUFF_PUFF] = {
+		.walk = { SOUND_295, NULL },
+		.fly = { SOUND_295, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SPIKE] = {
+		.walk = { SOUND_295, NULL },
+		.fly = { SOUND_295, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GULPIT] = {
+		.walk = { SOUND_20C4, SOUND_20C4 },
+		.fly = { SOUND_20C4, SOUND_20C4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GULPIT_ROCKS] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_WHITE_CLUBBA] = {
+		.walk = { SOUND_20C4, SOUND_20C4 },
+		.fly = { SOUND_20C4, SOUND_20C4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FROST_PIRANHA] = {
+		.walk = { SOUND_3CE, SOUND_3CE },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SWOOPULA] = {
+		.walk = { SOUND_351, SOUND_351 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_DUPLIGHOST] = {
+		.walk = { SOUND_2CA, SOUND_2CA },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_GOOMBARIO] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_KOOPER] = {
+		.walk = { SOUND_100, SOUND_100 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_BOMBETTE] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_PARAKARRY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_BOW] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_WATT] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_SUSHIE] = {
+		.walk = { SOUND_29A, SOUND_29A },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GHOST_LAKILESTER] = {
+		.walk = { SOUND_295, SOUND_295 },
+		.fly = { SOUND_295, SOUND_295 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_ALBINO_DINO] = {
+		.walk = { SOUND_30B, SOUND_2FD },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_EMBER] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BONY_BEETLE] = {
+		.walk = { SOUND_20CD, SOUND_20CD },
+		.fly = { SOUND_20CD, SOUND_20CD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_DRY_BONES] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_DRY_BONES2] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOMBSHELL_BLASTER] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOMBSHELL_BILL] = {
+		.walk = { SOUND_2C9, SOUND_2C9 },
+		.fly = { SOUND_2C9, SOUND_2C9 },
+		.jump = SOUND_2C9,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HAMMER_BROS] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_KOOPATROL] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MAGICLONE] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_MAGICLONE] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_RED_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_RED_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GREEN_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_YELLOW_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GRAY_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_WHITE_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_5B] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_5C] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_5D] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_5E] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_5F] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_60] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_61] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_62] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_63] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_64] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_65] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_66] = {
+		.walk = { SOUND_295, SOUND_295 },
+		.fly = { SOUND_295, SOUND_295 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_UNUSED_67] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { SOUND_20DD, SOUND_20DD },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_68] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_69] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_6A] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MONTY_HOLE] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_6C] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_6D] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PLAYER] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GOOMBARIO] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_KOOPER] = {
+		.walk = { SOUND_100, SOUND_100 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOMBETTE] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PARAKARRY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOW] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_WATT] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SUSHIE] = {
+		.walk = { SOUND_29A, SOUND_29A },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAKILESTER] = {
+		.walk = { SOUND_295, SOUND_295 },
+		.fly = { SOUND_295, SOUND_295 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_TWINK] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_UNUSED_78] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_UNUSED_79] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_THE_MASTER_1] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_THE_MASTER_2] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_THE_MASTER_3] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CHAN] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE] = {
+		.walk = { SOUND_2CA, SOUND_2CA },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_GOOMBARIO] = {
+		.walk = { SOUND_20DD, SOUND_20DD },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_KOOPER] = {
+		.walk = { SOUND_100, SOUND_100 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_BOMBETTE] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_PARAKARRY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_BOW] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_WATT] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_SUSHIE] = {
+		.walk = { SOUND_29A, SOUND_29A },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LEE_LAKILESTER] = {
+		.walk = { SOUND_295, SOUND_295 },
+		.fly = { SOUND_295, SOUND_295 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { -5, -5 }
+	},
+    [ACTOR_TYPE_KAMMY_KOOPA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA1] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA2] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA3] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA4] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA5] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA6] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA_DUP1] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_JR_TROOPA_DUP2] = {
+		.walk = { SOUND_20C1, SOUND_20C1 },
+		.fly = { SOUND_351, SOUND_351 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BLUE_GOOMBA_BOSS] = {
+		.walk = { SOUND_3AC, SOUND_3AC },
+		.fly = { NULL, NULL },
+		.jump = SOUND_10F,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_RED_GOOMBA_BOSS] = {
+		.walk = { SOUND_3AC, SOUND_3AC },
+		.fly = { NULL, NULL },
+		.jump = SOUND_10F,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GOOMBA_KING] = {
+		.walk = { SOUND_20EC, SOUND_20EC },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 22, 30 }
+	},
+    [ACTOR_TYPE_GOOMNUT_TREE] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GOOMBARIO_TUTOR1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MAGIKOOPA_BOSS] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MAGIKOOPA_DUP1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MAGIKOOPA_DUP2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_FAKE_BOWSER] = {
+		.walk = { SOUND_3EA, SOUND_3EA },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_KOOPA_BROS] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GREEN_NINJAKOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_RED_NINJAKOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BLUE_NINJAKOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_YELLOW_NINJAKOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_ELDSTAR] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BUZZAR] = {
+		.walk = { NULL, NULL },
+		.fly = { SOUND_20EF, SOUND_20EF },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { -14, -14 }
+	},
+    [ACTOR_TYPE_TUTANKOOPA] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { -3, -3 }
+	},
+    [ACTOR_TYPE_CHOMP] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE] = {
+		.walk = { SOUND_20F6, SOUND_20F6 },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_TUBBA_BLUBBA] = {
+		.walk = { SOUND_20F6, SOUND_20F6 },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_TUBBA_HEART] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_20C8,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_STILT_GUY] = {
+		.walk = { SOUND_2066, SOUND_2066 },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SHY_STACK] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 10, 10 }
+	},
+    [ACTOR_TYPE_SHY_SQUAD] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GENERAL_GUY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_TOY_TANK] = {
+		.walk = { SOUND_37E, SOUND_37E },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LIGHT_BULB] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SIGNAL_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SHY_SQUAD_DUP] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SHY_GUY_DUP] = {
+		.walk = { SOUND_20BA, SOUND_20BA },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_ANTI_GUY] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_ANTI_GUY_DUP] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { NULL, NULL },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BIG_LANTERN_GHOST] = {
+		.walk = { SOUND_37D, SOUND_37D },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_GOOMBA_KING_DUP] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAVA_PIRANHA_PHASE_1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAVA_PIRANHA_PHASE_2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAVA_BUD_PHASE_1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAVA_BUD_PHASE_2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PETIT_PIRANHA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_PETIT_PIRANHA_BOMB] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_KENT_C_KOOPA] = {
+		.walk = { SOUND_20EC, SOUND_20EC },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_HUFF_N_PUFF] = {
+		.walk = { NULL, NULL },
+		.fly = { SOUND_3D1, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_TUFF_PUFF] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_MONSTAR] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CRYSTAL_KING] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CRYSTAL_CLONE] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_CRYSTAL_BIT] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_INTRO_BOWSER] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_3E7,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_PHASE_1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_3E7,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_DUP1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_PHASE_2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_3E7,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_DUP2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_PHASE_3] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = SOUND_3E7,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BOWSER_DUP3] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_BLOOPER] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 25, 25 }
+	},
+    [ACTOR_TYPE_ELECTRO_BLOOPER1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 25, 25 }
+	},
+    [ACTOR_TYPE_ELECTRO_BLOOPER2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 25, 25 }
+	},
+    [ACTOR_TYPE_SUPER_BLOOPER1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 25, 25 }
+	},
+    [ACTOR_TYPE_SUPER_BLOOPER2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 25, 25 }
+	},
+    [ACTOR_TYPE_BLOOPER_BABY] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_LAKILESTER_DUP] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SLOT_MACHINE_START] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SLOT_MACHINE_STOP] = {
+		.walk = { SOUND_20BA, SOUND_3B4 },
+		.fly = { SOUND_20BA, SOUND_3B4 },
+		.jump = SOUND_JUMP_3E2,
+		.hurt = SOUND_10F,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_WHACKA] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SLOT_MACHINE_START_DUP1] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SLOT_MACHINE_START_DUP2] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
+    [ACTOR_TYPE_SLOT_MACHINE_START_DUP3] = {
+		.walk = { NULL, NULL },
+		.fly = { NULL, NULL },
+		.jump = NULL,
+		.hurt = NULL,
+		.delay = { 30, 30 }
+	},
 };
 
 s32 bActorTattles[ACTOR_TYPE_COUNT] = {

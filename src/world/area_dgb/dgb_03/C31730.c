@@ -93,7 +93,7 @@ EvtScript N(exitDoubleDoor_80242A78) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80242B2C) = EXIT_WALK_SCRIPT(26,  2, "dgb_13",  0);
+EvtScript N(exitWalk_80242B2C) = EVT_EXIT_WALK(26,  2, "dgb_13",  0);
 
 EvtScript N(exitSingleDoor_80242B88) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

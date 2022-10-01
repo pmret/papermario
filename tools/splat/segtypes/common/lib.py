@@ -55,7 +55,7 @@ class CommonSegLib(N64Segment):
         return self.section
 
     def get_linker_entries(self):
-        path = options.get_lib_path() / self.name
+        path = options.opts.lib_path / self.name
 
         object_path = f"{path}.a:{self.object}.o"
 

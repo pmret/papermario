@@ -256,7 +256,7 @@ EvtScript N(80243EF0) = {
     EVT_CALL(N(func_80240000_BFD880))
     EVT_CALL(InitAnimatedModels)
     EVT_WAIT(1)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(SetPlayerAnimation, 524298)
     EVT_THREAD
         EVT_CALL(PlaySoundAtNpc, 4, SOUND_20F6, 0)
@@ -528,7 +528,7 @@ EvtScript N(npcAI_80244D54) = {
         EVT_GOTO(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)

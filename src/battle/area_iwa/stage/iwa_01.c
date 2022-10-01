@@ -334,7 +334,7 @@ EvtScript N(80221334) = {
 EvtScript N(80221414) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_DIG)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Burrow)
     EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

@@ -123,6 +123,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         deps="gcc",
     )
 
+    ninja.rule("dead_cc",
+        description="dead_cc $in",
+        command=f"mips-linux-gnu-objcopy --redefine-sym sqrtf=dead_sqrtf $in $out",
+    )
+
     ninja.rule("bin",
         description="bin $in",
         command=f"{cross}ld -r -b binary $in -o $out",
@@ -248,8 +253,6 @@ class Configure:
 
         split.main(
             splat_file,
-            None,
-            str(self.version_path / "baserom.z64"),
             modes,
             verbose=False,
         )
@@ -391,19 +394,34 @@ class Configure:
 
                 cflags = cflags.replace("gcc_272", "")
 
-                build(entry.object_path, entry.src_paths, task, variables={
-                    "cflags": cflags,
-                    "cppflags": f"-DVERSION_{self.version.upper()}",
-                })
+                # Dead cod
+                if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
+                    obj_path = str(entry.object_path)
+                    init_obj_path = Path(obj_path + ".dead")
+                    build(init_obj_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
+                    build(
+                        entry.object_path,
+                        [init_obj_path],
+                        "dead_cc",
+                    )
+                # Not dead cod
+                else:
+                    build(entry.object_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
                 if isinstance(seg, segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
                         if isinstance(seg, segtypes.n64.img.N64SegImg):
                             flags = ""
-                            if seg.flip_horizontal:
+                            if seg.n64img.flip_h:
                                 flags += "--flip-x "
-                            if seg.flip_vertical:
+                            if seg.n64img.flip_v:
                                 flags += "--flip-y "
 
                             src_paths = [seg.out_path().relative_to(ROOT)]
@@ -444,9 +462,9 @@ class Configure:
                 build(entry.object_path, [compressed_path], "bin")
             elif isinstance(seg, segtypes.n64.img.N64SegImg):
                 flags = ""
-                if seg.flip_horizontal:
+                if seg.n64img.flip_h:
                     flags += "--flip-x "
-                if seg.flip_vertical:
+                if seg.n64img.flip_v:
                     flags += "--flip-y "
 
                 bin_path = entry.object_path.with_suffix(".bin")

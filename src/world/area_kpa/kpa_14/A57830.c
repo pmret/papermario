@@ -32,7 +32,7 @@ ApiStatus func_8024073C_A57BEC(Evt* script, s32 isInitialCall) {
             playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
             temp_a0 == 0)
         {
-            playerStatus->extraVelocity.x = xVel;
+            playerStatus->pushVelocity.x = xVel;
         }
     }
     if (gPlayerData.currentPartner != PARTNER_NONE) {

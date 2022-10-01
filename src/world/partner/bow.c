@@ -143,8 +143,8 @@ s32 func_802BD540_323E90(void) {
     if (gGameStatusPtr->areaID != AREA_OMO) {
         return -1;
     } else {
-        if (gPlayerStatus.extraVelocity.x != 0.0f || gPlayerStatus.extraVelocity.z != 0.0f) {
-            temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.extraVelocity.x, gPlayerStatus.extraVelocity.z);
+        if (gPlayerStatus.pushVelocity.x != 0.0f || gPlayerStatus.pushVelocity.z != 0.0f) {
+            temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.pushVelocity.x, gPlayerStatus.pushVelocity.z);
             temp_f12 = temp_f22 + 180.0f;
             sp20 = gPlayerStatus.position.x;
             sp24 = gPlayerStatus.position.z;
@@ -171,7 +171,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_802BD4FC_323E4C(bow);
         if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
-            if (func_800EA52C(9)) {
+            if (func_800EA52C(PARTNER_BOW)) {
                 if (playerStatus->animFlags & PA_FLAGS_200000) {
                     playerStatus->animFlags &= ~PA_FLAGS_200000;
                     script->functionTemp[2] = disable_player_input();
@@ -201,7 +201,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             script->functionTemp[0]++;
             break;
         case 41:
-            if ((!func_800EA52C(9) || is_starting_conversation()) &&
+            if ((!func_800EA52C(PARTNER_BOW) || is_starting_conversation()) &&
                  script->functionTemp[2] < playerStatus->inputEnabledCounter
                  && D_802BE0C4) {
 

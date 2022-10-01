@@ -46,7 +46,7 @@ void action_update_step_up(void) {
         }
         playerStatus->actionSubstate = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->gravityIntegrator[0] = 17.7566f;
         playerStatus->gravityIntegrator[1] = -11.3862f;
         playerStatus->gravityIntegrator[2] = 3.5f;

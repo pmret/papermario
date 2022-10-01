@@ -45,11 +45,11 @@ class CommonSegRodata(CommonSegData):
         # Disassemble the file itself
         super().split(rom_bytes)
 
-        if options.get_migrate_rodata_to_functions():
+        if options.opts.migrate_rodata_to_functions:
             if self.spim_section and (
                 not self.type.startswith(".") or self.partial_migration
             ):
-                path_folder = options.get_data_path() / self.dir
+                path_folder = options.opts.data_path / self.dir
                 path_folder.parent.mkdir(parents=True, exist_ok=True)
 
                 for rodataSym in self.spim_section.symbolList:

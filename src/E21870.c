@@ -3,19 +3,22 @@
 typedef struct TempE21870 {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 scale;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ char unk_14[0x4];
+    /* 0x10 */ char unk_10[0x8];
     /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x1C */ char unk_1C[0x4];
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
 } TempE21870; // size = 0x28
 
-extern u8 D_802B7640_E21EB0[];
-extern u16 D_802B7C60_E224D0[];
-extern u16 D_802B7C80_E224F0[];
-extern Gfx D_802B7CA0_E22510[];
-extern TempE21870* D_802B7D18_E22588;
+BSS TempE21870 D_802B7D40;
+
+#include "pulse_stone.png.h"
+#include "pulse_stone.png.inc.c"
+#include "pulse_stone.pal.inc.c"
+#include "pulse_stone.flash.pal.inc.c"
+#include "pulse_stone_dlist.gfx.inc.c"
+
+TempE21870* D_802B7D18_E22588 = &D_802B7D40;
 
 void func_802B74F0(void);
 

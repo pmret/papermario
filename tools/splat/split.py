@@ -20,14 +20,12 @@ from util.symbols import Symbol
 
 from intervaltree import Interval, IntervalTree
 
-VERSION = "0.11.0"
+VERSION = "0.11.2"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
 )
 parser.add_argument("config", help="path to a compatible config .yaml file", nargs="+")
-parser.add_argument("--target", help="path to a file to split (.z64 rom)")
-parser.add_argument("--basedir", help="a directory in which to extract the rom")
 parser.add_argument("--modes", nargs="+", default="all")
 parser.add_argument("--verbose", action="store_true", help="Enable debug logging")
 parser.add_argument(
@@ -189,7 +187,7 @@ def configure_disassembler():
     spimdisasm.common.GlobalConfig.TRUST_JAL_FUNCTIONS = True
     spimdisasm.common.GlobalConfig.GLABEL_ASM_COUNT = False
 
-    if options.rom_address_padding():
+    if options.opts.rom_address_padding:
         spimdisasm.common.GlobalConfig.ASM_COMMENT_OFFSET_WIDTH = 6
     else:
         spimdisasm.common.GlobalConfig.ASM_COMMENT_OFFSET_WIDTH = 0
@@ -203,23 +201,23 @@ def configure_disassembler():
     rabbitizer.config.regNames_userFpcCsr = False
     rabbitizer.config.regNames_vr4300Cop0NamedRegisters = False
 
-    rabbitizer.config.misc_opcodeLJust = options.mnemonic_ljust() - 1
+    rabbitizer.config.misc_opcodeLJust = options.opts.mnemonic_ljust - 1
 
     rabbitizer.config.regNames_gprAbiNames = rabbitizer.Abi.fromStr(
-        options.get_mips_abi_gpr()
+        options.opts.mips_abi_gpr
     )
     rabbitizer.config.regNames_fprAbiNames = rabbitizer.Abi.fromStr(
-        options.get_mips_abi_float_regs()
+        options.opts.mips_abi_float_regs
     )
 
-    if options.get_endianess() == "big":
+    if options.opts.endianness == "big":
         spimdisasm.common.GlobalConfig.ENDIAN = spimdisasm.common.InputEndian.BIG
     else:
         spimdisasm.common.GlobalConfig.ENDIAN = spimdisasm.common.InputEndian.LITTLE
 
     rabbitizer.config.pseudos_pseudoMove = False
 
-    selectedCompiler = options.get_compiler()
+    selectedCompiler = options.opts.compiler
     if selectedCompiler == compiler.SN64:
         rabbitizer.config.regNames_namedRegisters = False
         rabbitizer.config.toolchainTweaks_sn64DivFix = True
@@ -233,19 +231,22 @@ def configure_disassembler():
     elif selectedCompiler == compiler.IDO:
         spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.IDO
 
-    spimdisasm.common.GlobalConfig.GP_VALUE = options.get_gp()
+    spimdisasm.common.GlobalConfig.GP_VALUE = options.opts.gp
 
-    spimdisasm.common.GlobalConfig.ASM_TEXT_LABEL = options.get_asm_function_macro()
-    spimdisasm.common.GlobalConfig.ASM_DATA_LABEL = options.get_asm_data_macro()
-    spimdisasm.common.GlobalConfig.ASM_TEXT_END_LABEL = options.get_asm_end_label()
+    spimdisasm.common.GlobalConfig.ASM_TEXT_LABEL = options.opts.asm_function_macro
+    spimdisasm.common.GlobalConfig.ASM_DATA_LABEL = options.opts.asm_data_macro
+    spimdisasm.common.GlobalConfig.ASM_TEXT_END_LABEL = options.opts.asm_end_label
 
     if spimdisasm.common.GlobalConfig.ASM_TEXT_LABEL == ".globl":
         spimdisasm.common.GlobalConfig.ASM_TEXT_ENT_LABEL = ".ent"
         spimdisasm.common.GlobalConfig.ASM_TEXT_FUNC_AS_LABEL = True
 
-    spimdisasm.common.GlobalConfig.LINE_ENDS = options.c_newline()
+    if spimdisasm.common.GlobalConfig.ASM_TEXT_LABEL == ".globl":
+        spimdisasm.common.GlobalConfig.ASM_DATA_SYM_AS_LABEL = True
 
-    if options.get_platform() == "n64":
+    spimdisasm.common.GlobalConfig.LINE_ENDS = options.opts.c_newline
+
+    if options.opts.platform == "n64":
         symbols.spim_context.fillDefaultBannedSymbols()
 
 
@@ -256,7 +257,7 @@ def brief_seg_name(seg: Segment, limit: int, ellipsis="…") -> str:
     return s
 
 
-def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
+def main(config_path, modes, verbose, use_cache=True):
     global config
 
     log.write(f"splat {VERSION} (powered by spimdisasm {spimdisasm.__version__})")
@@ -268,13 +269,9 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
             additional_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
         config = merge_configs(config, additional_config)
 
-    options.initialize(config, config_path, base_dir, target_path)
-    options.set("modes", modes)
+    options.initialize(config, config_path, modes, verbose)
 
-    if verbose:
-        options.set("verbose", True)
-
-    with options.get_target_path().open("rb") as f2:
+    with options.opts.target_path.open("rb") as f2:
         rom_bytes = f2.read()
 
     if "sha1" in config:
@@ -284,7 +281,7 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
             log.error(f"sha1 mismatch: expected {e_sha1}, was {sha1}")
 
     # Create main output dir
-    options.get_base_path().mkdir(parents=True, exist_ok=True)
+    options.opts.base_path.mkdir(parents=True, exist_ok=True)
 
     processed_segments: List[Segment] = []
 
@@ -295,7 +292,7 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     # Load cache
     if use_cache:
         try:
-            with options.get_cache_path().open("rb") as f3:
+            with options.opts.cache_path.open("rb") as f3:
                 cache = pickle.load(f3)
 
             if verbose:
@@ -325,11 +322,11 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     # Assign symbols to segments
     assign_symbols_to_segments()
 
-    if options.mode_active("code"):
+    if options.opts.is_mode_active("code"):
         symbols.initialize_spim_context(all_segments)
 
     # Resolve raster/palette siblings
-    if options.mode_active("img"):
+    if options.opts.is_mode_active("img"):
         palettes.initialize(all_segments)
 
     # Scan
@@ -380,7 +377,7 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         if segment.should_split():
             segment.split(rom_bytes)
 
-    if options.mode_active("ld"):
+    if options.opts.is_mode_active("ld"):
         global linker_writer
         linker_writer = LinkerWriter()
         for i, segment in enumerate(
@@ -399,15 +396,15 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
 
         # write elf_sections.txt - this only lists the generated sections in the elf, not subsections
         # that the elf combines into one section
-        if options.get_create_elf_section_list_auto():
+        if options.opts.elf_section_list_path:
             section_list = ""
             for segment in all_segments:
                 section_list += "." + to_cname(segment.name) + "\n"
-            with open(options.get_elf_section_list_path(), "w", newline="\n") as f:
+            with open(options.opts.elf_section_list_path, "w", newline="\n") as f:
                 f.write(section_list)
 
     # Write undefined_funcs_auto.txt
-    if options.get_create_undefined_funcs_auto():
+    if options.opts.create_undefined_funcs_auto:
         to_write = [
             s
             for s in symbols.all_symbols
@@ -415,12 +412,12 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         ]
         to_write.sort(key=lambda x: x.vram_start)
 
-        with open(options.get_undefined_funcs_auto_path(), "w", newline="\n") as f:
+        with open(options.opts.undefined_funcs_auto_path, "w", newline="\n") as f:
             for symbol in to_write:
                 f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
     # write undefined_syms_auto.txt
-    if options.get_create_undefined_syms_auto():
+    if options.opts.create_undefined_syms_auto:
         to_write = [
             s
             for s in symbols.all_symbols
@@ -431,7 +428,7 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         ]
         to_write.sort(key=lambda x: x.vram_start)
 
-        with open(options.get_undefined_syms_auto_path(), "w", newline="\n") as f:
+        with open(options.opts.undefined_syms_auto_path, "w", newline="\n") as f:
             for symbol in to_write:
                 f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
@@ -454,10 +451,10 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     if cache != {} and use_cache:
         if verbose:
             log.write("Writing cache")
-        with open(options.get_cache_path(), "wb") as f4:
+        with open(options.opts.cache_path, "wb") as f4:
             pickle.dump(cache, f4)
 
-    if options.dump_symbols():
+    if options.opts.dump_symbols:
         from pathlib import Path
 
         splat_hidden_folder = Path(".splat/")
@@ -487,6 +484,4 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    main(
-        args.config, args.basedir, args.target, args.modes, args.verbose, args.use_cache
-    )
+    main(args.config, args.modes, args.verbose, args.use_cache)

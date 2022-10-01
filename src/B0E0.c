@@ -7,7 +7,7 @@ extern f32 D_800A08E4;
 extern f32 D_800A08E8;
 extern f32 D_800A08EC;
 
-void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3);
+void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
 void func_8003034C(Camera* camera);
 
 void update_camera_mode_unused(Camera* camera);
@@ -94,30 +94,30 @@ void update_camera_mode_5(Camera* camera) {
     camera->currentBoomLength = 690.0f;
     camera->currentYOffset = 47.0f;
 
-    if (camera->unk_06 != 0) {
+    if (camera->unk_06) {
         camera->unk_550 = 0.0f;
         camera->unk_70 = 0.0f;
         camera->trueRotation.x = 0.0f;
-        camera->unk_06 = 0;
+        camera->unk_06 = FALSE;
         camera->unk_554 = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
         camera->lookAt_obj.y = camera->targetPos.y + camera->currentYOffset;
         camera->lookAt_obj.z = camera->targetPos.z;
-        func_80030210(camera, 0.0f, 0.0f, 0);
+        cam_interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
     } else {
-        f32 temp_f22 = (playerStatus->currentSpeed * 1.5f) + 1.0f;
-        f32 temp_f20 = (playerStatus->currentSpeed * 0.05f) + 0.05f;
+        f32 maxInterpSpeed = (playerStatus->currentSpeed * 1.5f) + 1.0f;
+        f32 interpRate = (playerStatus->currentSpeed * 0.05f) + 0.05f;
 
-        camera->auxPos.x = camera->targetPos.x + camera->unk_550;
-        camera->auxPos.y = camera->targetPos.y + camera->currentYOffset;
-        camera->auxPos.z = camera->targetPos.z;
+        camera->lookAt_obj_target.x = camera->targetPos.x + camera->unk_550;
+        camera->lookAt_obj_target.y = camera->targetPos.y + camera->currentYOffset;
+        camera->lookAt_obj_target.z = camera->targetPos.z;
         func_8003034C(camera);
-        if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_1)) {
-            func_80030210(camera, temp_f20, temp_f22, 0);
+        if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
+            cam_interp_lookat_pos(camera, interpRate, maxInterpSpeed, FALSE);
         } else {
-            lookXDelta = temp_f22; // needed to match
+            lookXDelta = maxInterpSpeed; // needed to match
 
-            func_80030210(camera, temp_f20, lookXDelta, 1);
+            cam_interp_lookat_pos(camera, interpRate, lookXDelta, TRUE);
         }
     }
 
@@ -129,29 +129,29 @@ void update_camera_mode_5(Camera* camera) {
     camera->currentPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 
-void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3) {
-    f32 xDelta = (camera->auxPos.x - camera->lookAt_obj.x) * arg1;
+void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {
+    f32 xDelta = (camera->lookAt_obj_target.x - camera->lookAt_obj.x) * interpAmtXZ;
     f32 theta;
     f32 cosTheta;
     f32 sinTheta;
 
-    if (xDelta < -arg2) {
-        xDelta = -arg2;
+    if (xDelta < -maxDeltaXZ) {
+        xDelta = -maxDeltaXZ;
     }
-    if (xDelta > arg2) {
-        xDelta = arg2;
+    if (xDelta > maxDeltaXZ) {
+        xDelta = maxDeltaXZ;
     }
 
     camera->lookAt_obj.x = camera->lookAt_eye.x = camera->lookAt_obj.x + xDelta;
-    theta = DEG_TO_RAD(camera->currentBoomYaw);
 
-    cosTheta = cos_rad(theta);
-    camera->lookAt_obj.z += (camera->auxPos.z - camera->lookAt_obj.z) * arg1;
+    theta = DEG_TO_RAD(camera->currentBoomYaw);
+    cosTheta = cos_rad(DEG_TO_RAD(camera->currentBoomYaw));
+    camera->lookAt_obj.z += (camera->lookAt_obj_target.z - camera->lookAt_obj.z) * interpAmtXZ;
     camera->lookAt_eye.z = camera->lookAt_obj.z + (camera->currentBoomLength * cosTheta);
 
-    if (arg3 << 16 == 0) {
+    if (!lockPosY) {
         sinTheta = sin_rad(theta);
-        camera->lookAt_obj.y += (camera->auxPos.y - camera->lookAt_obj.y) * 0.125f;
+        camera->lookAt_obj.y += (camera->lookAt_obj_target.y - camera->lookAt_obj.y) * 0.125f;
         camera->lookAt_eye.y = camera->lookAt_obj.y + (camera->currentBoomLength * sinTheta);
     }
 }
@@ -763,7 +763,7 @@ void update_camera_zone_interp(Camera* camera) {
         camera->linearInterpScale = 1.0f;
     }
     temp = targetX;
-    if (camera->moveFlags & CAMERA_MOVE_FLAGS_1) {
+    if (camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y) {
         camera->unk_498 = 0.0f;
     } else if (camera->unk_494 != targetY) {
         camera->unk_494 = targetY;
@@ -1048,8 +1048,8 @@ void update_camera_zone_interp(Camera* camera) {
     camera->currentBoomLength = blendedCamSettings.boomLength;
     camera->currentBlendedYawNegated = -blendedCamSettings.boomYaw;
     camera->currentPitch = -blendedCamSettings.boomPitch - blendedCamSettings.viewPitch;
-    camera->auxPos.x = camera->lookAt_obj.x;
-    camera->auxPos.y = camera->lookAt_obj.y;
-    camera->auxPos.z = camera->lookAt_obj.z;
+    camera->lookAt_obj_target.x = camera->lookAt_obj.x;
+    camera->lookAt_obj_target.y = camera->lookAt_obj.y;
+    camera->lookAt_obj_target.z = camera->lookAt_obj.z;
     camera->currentYOffset = 0.0f;
 }

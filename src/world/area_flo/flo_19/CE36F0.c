@@ -94,7 +94,7 @@ EvtScript N(updateTexturePan_80240B00) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
+EvtScript N(exitWalk_80240B9C) = EVT_EXIT_WALK(60,  1, "flo_21",  0);
 
 EvtScript N(80240BF8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240B9C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
@@ -512,7 +512,7 @@ EvtScript N(80241CC4) = {
 EvtScript N(802423F8) = {
     EVT_IF_EQ(AreaFlag(44), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(func_802D2B6C)
+        EVT_CALL(InterruptUsePartner)
         EVT_WAIT(15)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_SET(AreaFlag(44), 1)

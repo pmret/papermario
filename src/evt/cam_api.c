@@ -52,7 +52,7 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
 
     camera->farClip = farClip;
     camera->updateMode = mode;
-    camera->unk_06 = 1;
+    camera->unk_06 = TRUE;
     camera->changingMap = TRUE;
     camera->vfov = vfov;
     camera->nearClip = nearClip;
@@ -66,7 +66,7 @@ ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     camera->updateMode = mode;
-    camera->unk_06 = 0;
+    camera->unk_06 = FALSE;
     return ApiStatus_DONE2;
 }
 
@@ -80,23 +80,23 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     f32 dx, dy, dz;
 
     gCameras[id].updateMode = 2;
-    gCameras[id].unk_06 = 0;
-    gCameras[id].unk_1C = -round(gCameras[id].currentPitch);
+    gCameras[id].unk_06 = FALSE;
+    gCameras[id].auxPitch = -round(gCameras[id].currentPitch);
     gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;
 
     dx = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
     dy = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
     dz = gCameras[id].lookAt_obj.z - gCameras[id].lookAt_eye.z;
 
-    gCameras[id].unk_20 = round(sqrtf(SQ(dx) + SQ(dy) + SQ(dz)));
+    gCameras[id].lookAt_dist = round(sqrtf(SQ(dx) + SQ(dy) + SQ(dz)));
     gCameras[id].auxBoomPitch = 0;
-    gCameras[id].auxPos.x = gCameras[id].lookAt_obj.x;
-    gCameras[id].auxPos.y = gCameras[id].lookAt_obj.y;
-    gCameras[id].auxPos.z = gCameras[id].lookAt_obj.z;
+    gCameras[id].lookAt_obj_target.x = gCameras[id].lookAt_obj.x;
+    gCameras[id].lookAt_obj_target.y = gCameras[id].lookAt_obj.y;
+    gCameras[id].lookAt_obj_target.z = gCameras[id].lookAt_obj.z;
 
-    evt_set_variable(script, outVar1, gCameras[id].unk_1C);
+    evt_set_variable(script, outVar1, gCameras[id].auxPitch);
     evt_set_variable(script, outVar2, gCameras[id].auxBoomLength);
-    evt_set_variable(script, outVar3, gCameras[id].unk_20);
+    evt_set_variable(script, outVar3, gCameras[id].lookAt_dist);
     evt_set_variable(script, outVar4, gCameras[id].auxBoomPitch);
     return ApiStatus_DONE2;
 }
@@ -123,9 +123,9 @@ ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     camera->auxBoomPitch = value4;
-    camera->unk_1C = value1;
+    camera->auxPitch = value1;
     camera->auxBoomLength = value2;
-    camera->unk_20 = value3;
+    camera->lookAt_dist = value3;
     return ApiStatus_DONE2;
 }
 
@@ -167,9 +167,9 @@ ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
     s32 value3 = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->auxPos.x = value1;
-    camera->auxPos.y = value2;
-    camera->auxPos.z = value3;
+    camera->lookAt_obj_target.x = value1;
+    camera->lookAt_obj_target.y = value2;
+    camera->lookAt_obj_target.z = value3;
     return ApiStatus_DONE2;
 }
 
@@ -216,9 +216,9 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
         
         switch (data->useTarget) {
             case 0:
-                data->vel.x = (posX - cam->auxPos.x) / data->time;
-                data->vel.y = (posY - cam->auxPos.y) / data->time;
-                data->vel.z = (posZ - cam->auxPos.z) / data->time;
+                data->vel.x = (posX - cam->lookAt_obj_target.x) / data->time;
+                data->vel.y = (posY - cam->lookAt_obj_target.y) / data->time;
+                data->vel.z = (posZ - cam->lookAt_obj_target.z) / data->time;
                 break;
             case 1:
                 data->vel.x = (posX - cam->targetPos.x) / data->time;
@@ -232,9 +232,9 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
     cam = data->cam;
     switch (data->useTarget) {
         case 0:
-            cam->auxPos.x += data->vel.x;
-            cam->auxPos.y += data->vel.y;
-            cam->auxPos.z += data->vel.z;
+            cam->lookAt_obj_target.x += data->vel.x;
+            cam->lookAt_obj_target.y += data->vel.y;
+            cam->lookAt_obj_target.z += data->vel.z;
             break;
         case 1:
             cam->targetPos.x += data->vel.x;

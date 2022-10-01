@@ -79,7 +79,7 @@
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_msg dead_set_message_msg
 #define gPlayerData dead_gPlayerData
-#define gPartnerPopupProperties D_80094900
+#define gPartnerPopupProperties dead_gPartnerPopupProperties
 #define increment_status_menu_disabled dead_increment_status_menu_disabled
 #define decrement_status_menu_disabled dead_decrement_status_menu_disabled
 #define sync_status_menu dead_sync_status_menu

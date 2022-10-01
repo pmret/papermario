@@ -49,7 +49,7 @@ f32 D_800F7B7C = -32.0f; // ???
 
 s16 FootstepSoundSelector = 0;
 s32 D_800F7B84[] = { 0, 0, 0};
-f32 D_800F7B90 = 0.0;
+f32 LastMidairPlayerVelY = 0.0;
 
 AnimID ClubbaDisguiseExtraAnims[] = { 0x00390000, 0x00390002, 0x00390003, 0x00390004, 0x00390005, 0x00390008, 0x00390007, 0x00390013, 0x00390014, ANIM_LIST_END };
 

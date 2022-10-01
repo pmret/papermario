@@ -642,6 +642,7 @@ enum SoundIDs {
     SOUND_FD                        = 0x000000FD,
     SOUND_FE                        = 0x000000FE,
     SOUND_FF                        = 0x000000FF,
+    SOUND_100                       = 0x00000100,
     SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
@@ -855,9 +856,12 @@ enum SoundIDs {
     SOUND_2A7                       = 0x000002A7,
     SOUND_UNUSED_2C1                = 0x000002C1,
     SOUND_2C5                       = 0x000002C5,
+    SOUND_2C9                       = 0x000002C9,
     SOUND_2CA                       = 0x000002CA,
     SOUND_2CB                       = 0x000002CB,
     SOUND_SMOKE_BURST               = 0x000002CD,
+    SOUND_2D5                       = 0x000002D5,
+    SOUND_2D6                       = 0x000002D6,
     SOUND_DAYZEE_SONG               = 0x000002D7,
     SOUND_POWER_UP                  = 0x000002D8,
     SOUND_2DB                       = 0x000002DB,
@@ -875,12 +879,14 @@ enum SoundIDs {
     SOUND_TWEESTER_LAUNCH           = 0x000002F6,
     SOUND_2F7                       = 0x000002F7,
     SOUND_2F9                       = 0x000002F9,
+    SOUND_2FD                       = 0x000002FD,
     SOUND_CLOSE_SHELL               = 0x000002FF,
     SOUND_301                       = 0x00000301,
     SOUND_302                       = 0x00000302,
     SOUND_303                       = 0x00000303,
     SOUND_305                       = 0x00000305,
     SOUND_306                       = 0x00000306,
+    SOUND_30B                       = 0x0000030B,
     SOUND_SHY_GUY_SCREAMS1          = 0x0000030C,
     SOUND_SHY_GUY_SCREAMS2          = 0x0000030D,
     SOUND_SHY_GUY_SCREAMS3          = 0x0000030E,
@@ -888,8 +894,8 @@ enum SoundIDs {
     SOUND_TOY_TANK_MOVE2            = 0x00000310,
     SOUND_311                       = 0x00000311,
     SOUND_315                       = 0x00000315,
-    SOUND_MOLE_SURFACE              = 0x00000321,
-    SOUND_MOLE_DIG                  = 0x00000322,
+    SOUND_BURROW_SURFACE            = 0x00000321,
+    SOUND_BURROW_DIG                = 0x00000322,
     SOUND_MOLE_POP                  = 0x00000323,
     SOUND_328                       = 0x00000328,
     SOUND_32B                       = 0x0000032B,
@@ -900,10 +906,13 @@ enum SoundIDs {
     SOUND_332                       = 0x00000332,
     SOUND_333                       = 0x00000333,
     SOUND_334                       = 0x00000334,
+    SOUND_343                       = 0x00000343,
     SOUND_349                       = 0x00000349,
     SOUND_34A                       = 0x0000034A,
     SOUND_34E                       = 0x0000034E,
+    SOUND_351                       = 0x00000351,
     SOUND_356                       = 0x00000356,
+    SOUND_357                       = 0x00000357,
     SOUND_359                       = 0x00000359,
     SOUND_35D                       = 0x0000035D,
     SOUND_361                       = 0x00000361,
@@ -927,6 +936,9 @@ enum SoundIDs {
     SOUND_HIT_PLAYER_SHOCK          = 0x0000037A,
     SOUND_HIT_SHOCK                 = 0x0000037B,
     SOUND_37C                       = 0x0000037C,
+    SOUND_37D                       = 0x0000037D,
+    SOUND_37E                       = 0x0000037E,
+    SOUND_380                       = 0x00000380,
     SOUND_381                       = 0x00000381,
     SOUND_382                       = 0x00000382,
     SOUND_383                       = 0x00000383,
@@ -969,6 +981,8 @@ enum SoundIDs {
     SOUND_3C0                       = 0x000003C0,
     SOUND_3C5                       = 0x000003C5,
     SOUND_3C6                       = 0x000003C6,
+    SOUND_3CE                       = 0x000003CE,
+    SOUND_3D1                       = 0x000003D1,
     SOUND_3D2                       = 0x000003D2,
     SOUND_OPEN_SHELL                = 0x000003D4,
     SOUND_3D5                       = 0x000003D5,
@@ -986,6 +1000,7 @@ enum SoundIDs {
     SOUND_3E7                       = 0x000003E7,
     SOUND_MOLE_THROW                = 0x000003E8,
     SOUND_3E9                       = 0x000003E9,
+    SOUND_3EA                       = 0x000003EA,
     SOUND_3EB                       = 0x000003EB,
     SOUND_3EC                       = 0x000003EC,
     SOUND_3ED                       = 0x000003ED,
@@ -1086,6 +1101,7 @@ enum SoundIDs {
     SOUND_2072                      = 0x00002072,
     SOUND_2073                      = 0x00002073,
     SOUND_2074                      = 0x00002074,
+    SOUND_2075                      = 0x00002075,
     SOUND_BOMB_BLAST                = 0x00002076,
     SOUND_207A                      = 0x0000207A,
     SOUND_207B                      = 0x0000207B,
@@ -1139,15 +1155,21 @@ enum SoundIDs {
     SOUND_20BA                      = 0x000020BA,
     SOUND_20C1                      = 0x000020C1,
     SOUND_20C3                      = 0x000020C3,
+    SOUND_20C4                      = 0x000020C4,
     SOUND_20C5                      = 0x000020C5,
+    SOUND_20C6                      = 0x000020C6,
     SOUND_20C8                      = 0x000020C8,
+    SOUND_20CD                      = 0x000020CD,
+    SOUND_20D0                      = 0x000020D0,
     SOUND_SPELL_CAST1               = 0x000020D4,
     SOUND_SPELL_CAST2               = 0x000020D5,
     SOUND_SPELL_CAST3               = 0x000020D6,
     SOUND_SPELL_CAST4               = 0x000020D7,
     SOUND_SPELL_CAST5               = 0x000020D8,
     SOUND_20D9                      = 0x000020D9,
+    SOUND_20DD                      = 0x000020DD,
     SOUND_20DE                      = 0x000020DE,
+    SOUND_20DF                      = 0x000020DF,
     SOUND_20E3                      = 0x000020E3,
     SOUND_20E4                      = 0x000020E4,
     SOUND_20E5                      = 0x000020E5,
@@ -1274,6 +1296,17 @@ enum SoundIDs {
     SOUND_8000006A                  = 0x8000006A,
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
+
+    SOUND_FIRE_BAR_0                = 0xB0000000,
+    SOUND_FIRE_BAR_1                = 0xB0000001,
+    SOUND_FIRE_BAR_2                = 0xB0000002,
+    SOUND_FIRE_BAR_3                = 0xB0000003,
+    SOUND_FIRE_BAR_4                = 0xB0000004,
+    SOUND_FIRE_BAR_5                = 0xB0000005,
+    SOUND_FIRE_BAR_6                = 0xB0000006,
+    SOUND_FIRE_BAR_7                = 0xB0000007,
+    SOUND_FIRE_BAR_8                = 0xB0000008,
+    SOUND_FIRE_BAR_9                = 0xB0000009,
     SOUND_B000000A                  = 0xB000000A,
     SOUND_B000000C                  = 0xB000000C,
     SOUND_B000000D                  = 0xB000000D,
@@ -1773,6 +1806,13 @@ enum ItemIDs {
 #define IS_ITEM(itemID) (itemID >= ITEM_FIRST_KEY && itemID <= ITEM_LAST_CONSUMABLE)
 #define IS_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
 
+// used for chest and give item events
+enum GotItemType {
+    ITEM_TYPE_CONSUMABLE    = 0,
+    ITEM_TYPE_KEY           = 1,
+    ITEM_TYPE_BADGE         = 2
+};
+
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
     ITEM_TYPE_FLAG_BATTLE_USABLE        = 0x0002,
@@ -2175,6 +2215,7 @@ enum AmbientSounds {
     AMBIENT_WIND               = 1,
     AMBIENT_BEACH              = 2,
     AMBIENT_JUNGLE             = 3,
+    // actually, 'undersea' are all lava-related. sort these out when map data is done
     AMBIENT_UNDER_SEA1         = 4,
     AMBIENT_UNDER_SEA2         = 5,
     AMBIENT_SILENCE            = 6,
@@ -3169,7 +3210,7 @@ enum PlayerStatusFlags {
 enum PlayerStatusAnimFlags {
     PA_FLAGS_HOLDING_WATT                     = 0x00000001,
     PA_FLAGS_2                                = 0x00000002,
-    PA_FLAGS_4                                = 0x00000004,
+    PA_FLAGS_INTERRUPT_USE_PARTNER            = 0x00000004, ///< forces actions with bow, parakarry, watt, and lakilester to end (sushie not tested)
     PA_FLAGS_8                                = 0x00000008, ///< triggers partner use when set
     PA_FLAGS_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
     PA_FLAGS_SPEECH_PROMPT_AVAILABLE          = 0x00000020, ///< (...) prompt
@@ -3716,6 +3757,17 @@ enum GameModeIDs {
     GAME_MODE_DEMO                        = 0x00000011,
 };
 
+enum DemoState {
+    DEMO_STATE_NONE         = 0,
+    DEMO_STATE_ACTIVE       = 1,
+    DEMO_STATE_CHANGE_MAP   = 2,
+};
+
+enum MapLoadType {
+    LOAD_FROM_MAP           = 0,
+    LOAD_FROM_FILE_SELECT   = 1,
+};
+
 enum IntroStates {
     INTRO_STATE_0                        = 0x00000000,
     INTRO_STATE_1                        = 0x00000001,
@@ -3950,6 +4002,27 @@ enum ModelFlags {
     MODEL_FLAGS_FLAG_8000               = 0x8000,
 };
 
+enum TexPanner {
+    TEX_PANNER_0    = 0x0,
+    TEX_PANNER_1    = 0x1,
+    TEX_PANNER_2    = 0x2,
+    TEX_PANNER_3    = 0x3,
+    TEX_PANNER_4    = 0x4,
+    TEX_PANNER_5    = 0x5,
+    TEX_PANNER_6    = 0x6,
+    TEX_PANNER_7    = 0x7,
+    TEX_PANNER_8    = 0x8,
+    TEX_PANNER_9    = 0x9,
+    TEX_PANNER_A    = 0xA,
+    TEX_PANNER_B    = 0xB,
+    TEX_PANNER_C    = 0xC,
+    TEX_PANNER_D    = 0xD,
+    TEX_PANNER_E    = 0xE,
+    TEX_PANNER_F    = 0xF,
+    TEX_PANNER_MAIN = 0,
+    TEX_PANNER_AUX  = 1,
+};
+
 enum EnemyFlags {
     ENEMY_FLAGS_1                 = 0x00000001,
     ENEMY_FLAGS_2                 = 0x00000002,
@@ -4127,6 +4200,7 @@ enum MusicSettingsFlags {
 // the lower byte of Collider::flags
 enum SurfaceType {
     SURFACE_TYPE_DEFAULT            = 0,
+    /*
     SURFACE_TYPE_WATER              = 1,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_LAVA               = 3,
@@ -4136,22 +4210,40 @@ enum SurfaceType {
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
     SURFACE_TYPE_SNOW               = 8,
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
+    */
 };
 
+//TODO -- enums temporarily combined for map dumper
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
     COLLIDER_FLAGS_SURFACE_TYPE_MASK = 0x000000FF,
+
+//    SURFACE_TYPE_DEFAULT            = 0,
+    SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
+    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
+    SURFACE_TYPE_FLOWERS            = 6,
+    SURFACE_TYPE_SLIDE              = 5,
+    SURFACE_TYPE_DOCK_WALL          = 4,
+    SURFACE_TYPE_LAVA               = 3,
+    SURFACE_TYPE_SPIKES             = 2,
+    SURFACE_TYPE_WATER              = 1,
+
     COLLIDER_FLAGS_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
     COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
     COLLIDER_FLAGS_HAS_MODEL_PARENT  = 0x80000000
 };
 
+
+//TODO reversed for map dumper with 0 separated
 enum ColliderFlagsModifyMode {
-    MODIFY_COLLIDER_FLAGS_SET_BITS       = 0,
-    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
-    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
     MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
+    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
+    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
+};
+enum TempColliderFlagsModifyMode {
+    MODIFY_COLLIDER_FLAGS_SET_BITS       = 0,
 };
 
 enum CollisionChannels {
@@ -4233,7 +4325,7 @@ enum CameraFlags {
 };
 
 enum CameraMoveFlags {
-    CAMERA_MOVE_FLAGS_1             = 0x00000001,
+    CAMERA_MOVE_IGNORE_PLAYER_Y             = 0x00000001,
     CAMERA_MOVE_FLAGS_2             = 0x00000002,
     CAMERA_MOVE_FLAGS_4             = 0x00000004
 };

@@ -1,19 +1,19 @@
 from typing import Dict, Union
-from segtypes.n64.ci4 import N64SegCi4, N64SegCi8
+from segtypes.n64.ci import N64SegCi
 from segtypes.n64.palette import N64SegPalette as Palette
 from segtypes.common.group import CommonSegGroup
 
 # Resolve Raster#palette and Palette#raster links
 def initialize(all_segments):
     def process(segments):
-        raster_map: Dict[str, Union[N64SegCi4, N64SegCi8]] = {}
+        raster_map: Dict[str, N64SegCi] = {}
         palette_map: Dict[str, Palette] = {}
 
         for segment in segments:
             if isinstance(segment, Palette):
                 palette_map[segment.name] = segment
 
-            if isinstance(segment, N64SegCi4) or isinstance(segment, N64SegCi8):
+            if isinstance(segment, N64SegCi):
                 raster_map[segment.name] = segment
 
             if isinstance(segment, CommonSegGroup):

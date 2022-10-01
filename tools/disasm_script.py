@@ -565,8 +565,7 @@ replace_funcs = {
 }
 
 def trim_lw(arg):
-    arg = arg[3:-1]
-    return arg
+    return arg[arg.find("(")+1:arg.find(")")]
 
 
 def replace_constants(self, func, args):
@@ -1117,8 +1116,8 @@ if __name__ == "__main__":
                             f.seek(offset)
                             print(ScriptDisassembler(f).disassemble(), end="")
                             break
-                except:
-                    break
+                except Exception as e:
+                    print(e)
 
                 loffset = script.end_pos
                 LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]

@@ -21,11 +21,11 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_sbk_01 },
 };
 
-EvtScript N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);
+EvtScript N(exitWalk_802400E0) = EVT_EXIT_WALK(60,  0, "sbk_00",  1);
 
-EvtScript N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  1, "sbk_02",  0);
+EvtScript N(exitWalk_8024013C) = EVT_EXIT_WALK(60,  1, "sbk_02",  0);
 
-EvtScript N(exitWalk_80240198) = EXIT_WALK_SCRIPT(60,  3, "sbk_11",  2);
+EvtScript N(exitWalk_80240198) = EVT_EXIT_WALK(60,  3, "sbk_11",  2);
 
 EvtScript N(802401F4) = {
     EVT_BIND_TRIGGER(N(exitWalk_802400E0), TRIGGER_FLOOR_ABOVE, 7, 1, 0)

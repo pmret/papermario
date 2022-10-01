@@ -15,9 +15,9 @@ ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-EvtScript N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
+EvtScript N(exitWalk_802406F0) = EVT_EXIT_WALK(60,  0, "kmr_04",  0);
 
-EvtScript N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
+EvtScript N(exitWalk_8024074C) = EVT_EXIT_WALK(60,  1, "kmr_05",  0);
 
 EvtScript N(802407A8) = {
     EVT_BIND_TRIGGER(N(exitWalk_802406F0), TRIGGER_FLOOR_ABOVE, 3, 1, 0)

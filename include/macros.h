@@ -15,12 +15,15 @@
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
-#define A(sym) NS(AREA, sym)
-#define N(sym) NS(NAMESPACE, sym)
+#define NAMESUFFIX
+#define A(sym) NS(AREA, sym, NAMESUFFIX)
+#define N(sym) NS(NAMESPACE, sym, NAMESUFFIX)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
 #define PTR_LIST_END ((void*) -1)
+
+#define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)
 
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
@@ -67,6 +70,9 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define CAM_NEAR_CLIP 16
+#define CAM_FAR_CLIP 4096
+
 // Size of tmem in bytes (4kB)
 #define TMEM_SIZE 0x1000
 // Height of tiles to use when copying fullscreen images (6)
@@ -96,6 +102,11 @@
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000
 
+#define NPC_DISPOSE_LOCATION    0,-1000,0
+#define NPC_DISPOSE_POS_X   0
+#define NPC_DISPOSE_POS_Y   -1000
+#define NPC_DISPOSE_POS_Z   0
+
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 #define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
 
@@ -109,8 +120,8 @@
 /// X.10 fixed-point literal
 #define X10(f) (s32)(f * 1024.0f)
 
-#define _NS(x, y) x ## _ ## y
-#define NS(x, y) _NS(x, y)
+#define _NS(x, y, z) x ## _ ## y ## z
+#define NS(x, y, z) _NS(x, y, z)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
