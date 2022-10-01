@@ -36,8 +36,8 @@ typedef struct LavaPiranhaVine {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-extern LavaPiranhaVine D_8022ADD0[NUM_VINES];
-extern s32 N(VineRenderState); // TODO static
+static LavaPiranhaVine N(VineData)[NUM_VINES];
+static s32 N(VineRenderState);
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;
@@ -71,7 +71,7 @@ API_CALLABLE(N(SetVineBonePos)) {
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vine = &D_8022ADD0[vineIdx];
+    LavaPiranhaVine* vine = &N(VineData)[vineIdx];
 
     vine->bonePos[jointIdx].x = x;
     vine->bonePos[jointIdx].y = y;
@@ -86,7 +86,7 @@ API_CALLABLE(N(SetVineBoneRot)) {
     s32 rx = evt_get_variable(script, *args++);
     s32 ry = evt_get_variable(script, *args++);
     f32 rz = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vine = &D_8022ADD0[vineIdx];
+    LavaPiranhaVine* vine = &N(VineData)[vineIdx];
 
     vine->boneRot[jointIdx] = rz; 
     return ApiStatus_DONE2;
@@ -99,12 +99,13 @@ API_CALLABLE(N(SetVineBoneScale)) {
     s32 sx = evt_get_variable(script, *args++);
     s32 sy = evt_get_variable(script, *args++);
     s32 sz = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vine = &D_8022ADD0[vineIdx];
+    LavaPiranhaVine* vine = &N(VineData)[vineIdx];
 
     // do nothing
     return ApiStatus_DONE2;
 }
 
+// the f64 90.0 ends up in the wrong place
 #ifdef NON_MATCHING
 // N(appendGfx_piranha_vines)
 void func_8021835C_59EA3C(void* data) {
@@ -135,7 +136,7 @@ void func_8021835C_59EA3C(void* data) {
 
     if (N(VineRenderState) == 0) {
         for (i = 0; i < NUM_VINES; i++) {
-            LavaPiranhaVine* vine = &D_8022ADD0[i];
+            LavaPiranhaVine* vine = &N(VineData)[i];
 
             switch (i) {
                 default:
@@ -187,7 +188,7 @@ void func_8021835C_59EA3C(void* data) {
     gSPDisplayList(gMasterGfxPos++, D_8021CF40_5A3620);
 
     for (i = 0; i < NUM_VINES; i++) {
-        LavaPiranhaVine* vine = &D_8022ADD0[i];
+        LavaPiranhaVine* vine = &N(VineData)[i];
 
         boneLength = vine->boneLength;
         boneCount = vine->boneCount;

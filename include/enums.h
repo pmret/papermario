@@ -3173,7 +3173,7 @@ enum NpcFlags {
 
 enum PlayerStatusFlags {
     PS_FLAGS_AIRBORNE                         = 0x0000000E,
-    PS_FLAGS_1                                = 0x00000001,
+    PS_FLAGS_HAS_REFLECTION                   = 0x00000001,
     PS_FLAGS_JUMPING                          = 0x00000002,
     PS_FLAGS_FALLING                          = 0x00000004,
     PS_FLAGS_FLYING                           = 0x00000008,

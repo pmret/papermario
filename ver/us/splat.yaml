@@ -9220,9 +9220,9 @@ segments:
     start: 0xB1CA50
     vram: 0x80240000
     subsegments:
-    - [0xB1CA50, c]
-    - [0xB1D1C0, data]
-    - [0xB1D2A0, data]
+    - [0xB1CA50, c, tst_11_1_main]
+    - [0xB1CA50, c, tst_11_2_extra]
+    - [0xB1D1C0]
   - name: tst_12
     dir: world/area_tst/tst_12
     type: code

@@ -25,13 +25,6 @@ typedef struct LavaPiranhaVine {
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
 
-//TODO use this instead of LavaPiranhaVineSet
-typedef LavaPiranhaVine LavaPiranhaVines[NUM_VINES];
-
-typedef struct LavaPiranhaVineSet {
-    LavaPiranhaVine vines[NUM_VINES];
-} LavaPiranhaVineSet; // size = 0x780
-
 extern API_CALLABLE(SetAnimatorFlags);
 extern API_CALLABLE(GetAnimatedPositionByTreeIndex);
 extern API_CALLABLE(GetAnimatedRotationByTreeIndex);
@@ -134,8 +127,8 @@ API_CALLABLE(N(SetVineBonePos)) {
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
-    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->vines[vineIdx];
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &vines[vineIdx];
 
     vine->bonePos[jointIdx].x = x;
     vine->bonePos[jointIdx].y = y;
@@ -150,8 +143,8 @@ API_CALLABLE(N(SetVineBoneRot)) {
     s32 rx = evt_get_variable(script, *args++);
     s32 ry = evt_get_variable(script, *args++);
     s32 rz = evt_get_variable(script, *args++);
-    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->vines[vineIdx];
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &vines[vineIdx];
 
     vine->boneRot[jointIdx] = rz;
     return ApiStatus_DONE2;
@@ -164,8 +157,8 @@ API_CALLABLE(N(SetVineBoneScale)) {
     s32 sx = evt_get_variable(script, *args++);
     s32 sy = evt_get_variable(script, *args++);
     s32 sz = evt_get_variable(script, *args++);
-    LavaPiranhaVineSet* data = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-    LavaPiranhaVine* vine = &data->vines[vineIdx];
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
+    LavaPiranhaVine* vine = &vines[vineIdx];
 
     // do nothing
     return ApiStatus_DONE2;
@@ -199,8 +192,8 @@ void N(appendGfx_piranha_vines)(void* data) {
 
     if (N(VineRenderState) == 0) {
         for (i = 0; i < NUM_VINES; i++) {
-            LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-            LavaPiranhaVine* vine = &vineData->vines[i];
+            LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
+            LavaPiranhaVine* vine = &vines[i];
 
             switch (i) {
                 default:
@@ -252,8 +245,8 @@ void N(appendGfx_piranha_vines)(void* data) {
     gSPDisplayList(gMasterGfxPos++, N(lava_piranha_vine_gfx));
 
     for (i = 0; i < NUM_VINES; i++) {
-        LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
-        LavaPiranhaVine* vine = &vineData->vines[i];
+        LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
+        LavaPiranhaVine* vine = &vines[i];
 
         boneLength = vine->boneLength;
         boneCount = vine->boneCount;
@@ -341,7 +334,7 @@ API_CALLABLE(N(MarkVineInterpolationDirty)) {
 }
 
 API_CALLABLE(N(CreateVineRenderer)) {
-    LavaPiranhaVineSet* data = heap_malloc(sizeof(*data));
+    LavaPiranhaVine* data = heap_malloc(NUM_VINES * sizeof(*data));
     evt_set_variable(script, MV_VinesData, (s32) data);
     N(VineRenderState) = -1;
     create_generic_entity_world(NULL, &N(worker_render_piranha_vines));

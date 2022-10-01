@@ -25,8 +25,8 @@ glabel func_8021835C_59EA3C
 /* 59EA8C 802183AC F7B40058 */   sdc1     $f20, 0x58($sp)
 /* 59EA90 802183B0 14600059 */  bnez      $v1, .L80218518
 /* 59EA94 802183B4 0000382D */   daddu    $a3, $zero, $zero
-/* 59EA98 802183B8 3C108023 */  lui       $s0, %hi(D_8022ADD0)
-/* 59EA9C 802183BC 2610ADD0 */  addiu     $s0, $s0, %lo(D_8022ADD0)
+/* 59EA98 802183B8 3C108023 */  lui       $s0, %hi(b_area_kzn2_VineData)
+/* 59EA9C 802183BC 2610ADD0 */  addiu     $s0, $s0, %lo(b_area_kzn2_VineData)
 /* 59EAA0 802183C0 3C0142B4 */  lui       $at, 0x42b4
 /* 59EAA4 802183C4 4481E000 */  mtc1      $at, $f28
 /* 59EAA8 802183C8 3C014334 */  lui       $at, 0x4334
@@ -135,8 +135,8 @@ glabel func_8021835C_59EA3C
 /* 59EC0C 8021852C AFA90018 */  sw        $t1, 0x18($sp)
 /* 59EC10 80218530 3C090602 */  lui       $t1, 0x602
 /* 59EC14 80218534 35290004 */  ori       $t1, $t1, 4
-/* 59EC18 80218538 3C158023 */  lui       $s5, %hi(D_8022ADD0)
-/* 59EC1C 8021853C 26B5ADD0 */  addiu     $s5, $s5, %lo(D_8022ADD0)
+/* 59EC18 80218538 3C158023 */  lui       $s5, %hi(b_area_kzn2_VineData)
+/* 59EC1C 8021853C 26B5ADD0 */  addiu     $s5, $s5, %lo(b_area_kzn2_VineData)
 /* 59EC20 80218540 AFA9001C */  sw        $t1, 0x1c($sp)
 /* 59EC24 80218544 8D030000 */  lw        $v1, ($t0)
 /* 59EC28 80218548 3C02E700 */  lui       $v0, 0xe700

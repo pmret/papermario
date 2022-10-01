@@ -720,7 +720,7 @@ s32 func_802DDA84(void) {
 INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 arg2);
 
 #ifdef NON_EQUIVALENT
-s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** paletteList, Matrix4f mtx) {
+s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** paletteList, Matrix4f mtx) {
     PlayerCurrentAnimInfo* animInfo;
     SpriteComponent** compList;
     SpriteAnimComponent** animList;
@@ -751,7 +751,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
     rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
     animList = &spr_playerSprites[spriteIndex]->animListStart[animID & 0xFF];
     drawPalettes = spr_playerSprites[spriteIndex]->palettesOffset;
-    if (animID & 0x01000000) {
+    if (animID & SPRITE_ID_BACK_FACING) {
         switch (spriteIndex) {
             case 0:
             case 5:
@@ -763,7 +763,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
         }
     }
 
-    if (!(spriteInstanceID & 0x40000000)) {
+    if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
         camRelativeYaw += (s32) -gCameras[gCurrentCamID].currentYaw;
         if (camRelativeYaw > 360) {
             camRelativeYaw -= 360;
@@ -778,7 +778,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
         zscale = 1.5f;
     }
 
-    if (spriteInstanceID & 0x10000000) {
+    if (spriteInstanceID & DRAW_SPRITE_UPSIDE_DOWN) {
         zscale = 0.0f - zscale;
     }
 
@@ -786,17 +786,17 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, u16** palett
     D_802DFEA0[1] = camRelativeYaw;
     D_802DFEA0[2] = 0;
 
-    if (spriteInstanceID & 0x80000000) {
-        if (arg2 == 0) {
+    if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
+        if (alphaIn == 0) {
             return 0;
         }
-        alpha = arg2 & 0xFF;
+        alpha = alphaIn & 0xFF;
     } else {
         alpha = 255;
     }
 
     compList = spr_playerCurrentAnimInfo[spriteAnimIndex].componentList;
-    if (spriteInstanceID & 0x20000000) {
+    if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_PALETTES) {
         drawPalettes = paletteList;
     }
     while (*compList != PTR_LIST_END) {
