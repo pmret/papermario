@@ -8705,10 +8705,9 @@ segments:
     start: 0xAA2180
     vram: 0x80240000
     subsegments:
-    - [0xAA2180, c]
-    - [0xAA2180, data]
-    - [0xAA2240, data]
-    - [0xAA23B0]
+    - [0xAA2180, c, kpa_117_0_header]
+    - [0xAA2180, c, kpa_117_1_main]
+    - [0xAA2180]
   - name: kpa_118
     dir: world/area_kpa/kpa_118
     type: code
@@ -11645,7 +11644,7 @@ segments:
     start: 0xE1E380
     vram: 0x80240000
     subsegments:
-    - [0xE1E380, data]
+    - [0xE1E380, c, mgm_03_1_main]
   - name: gv_01
     dir: world/area_gv/gv_01
     type: code
