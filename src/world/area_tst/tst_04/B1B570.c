@@ -47,15 +47,15 @@ ApiStatus func_802400FC_B1B66C(Evt *script, s32 isInitialCall)
     
     dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
     
-    angle = evt_get_variable(script, LW(0)) - 1;
-    sinAngle = sin_rad((angle * TAU) / 360.0f);
-    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    angle = evt_get_variable(script, LVar0) - 1;
+    sinAngle = sin_rad(DEG_TO_RAD(angle));
+    cosAngle = cos_rad(DEG_TO_RAD(angle));
     x0 = dist * cosAngle;
     z0 = dist * -sinAngle;
     
-    angle = evt_get_variable(script, LW(0));
-    sinAngle = sin_rad((angle * TAU) / 360.0f);
-    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    angle = evt_get_variable(script, LVar0);
+    sinAngle = sin_rad(DEG_TO_RAD(angle));
+    cosAngle = cos_rad(DEG_TO_RAD(angle));
     x1 = dist * cosAngle;
     z1 = dist * -sinAngle;
     
@@ -79,7 +79,7 @@ void func_8024029C_B1B80C(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & 1) {
+    if (playerStatus->flags & PS_FLAGS_1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
@@ -109,7 +109,7 @@ void func_80240360_B1B8D0(void* data) {
     guMtxCatF(main, rotation, main);
     guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
-    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
@@ -127,8 +127,8 @@ ApiStatus func_80240510_B1BA80(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    partner->flags |= 0x20000;
-    partner->flags |= 0x80000;
+    partner->flags |= NPC_FLAG_REFLECT_WALL;
+    partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     return ApiStatus_DONE2;
 }
 
@@ -136,8 +136,8 @@ void func_80240574_B1BAE4(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0x20000;
-        partner->flags |= 0x80000;
+        partner->flags |= NPC_FLAG_REFLECT_WALL;
+        partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     }
 }
 

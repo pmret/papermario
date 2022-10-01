@@ -8,7 +8,7 @@ ApiStatus func_80240000_B1D760(Evt* script, s32 isInitialCall) {
     f32 dist = dist2D(playerStatus->position.x, playerStatus->position.z, script->array[2], script->array[3]);
 
     script->varTable[0] = 1;
-    if (playerStatus->actionState != ACTION_STATE_GROUND_POUND && playerStatus->actionState != ACTION_STATE_ULTRA_POUND) {
+    if (playerStatus->actionState != ACTION_STATE_SPIN_POUND && playerStatus->actionState != ACTION_STATE_TORNADO_POUND) {
         script->varTable[0] = 0;
     }
     if (script->array[4] <= dist) {
@@ -37,7 +37,7 @@ void func_8024013C_B1D89C(void) {
     guScaleF(sp50, x, y, z);
     guMtxCatF(sp50, sp10, sp10);
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
-    mdl_project_tex_coords(1, D_80242860_B1FFC0, &sp10, NULL);
+    mdl_project_tex_coords(1, D_80242860_B1FFC0, sp10, NULL);
 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);

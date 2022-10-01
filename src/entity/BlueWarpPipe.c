@@ -1,8 +1,13 @@
 #include "common.h"
 #include "npc.h"
 #include "sprite.h"
+#include "ld_addrs.h"
+#include "entity.h"
 
-void entity_BlueWarpPipe_setupGfx(void* renderData);
+extern Gfx Entity_BlueWarpPipe_RenderPipe[];
+extern Gfx Entity_BlueWarpPipe_RenderBase[];
+
+void entity_BlueWarpPipe_setupGfx(s32 entityIndex);
 
 void entity_BlueWarpPipe_check_if_active(Entity* entity) {
     BlueWarpPipeData* pipeData;
@@ -56,7 +61,7 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) != 0) {
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
 
-        if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))) {
+        if (!(playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED))) {
             s32 stickAxisX = abs(playerStatus->stickAxis[0]);
             s32 stickAxisZ = playerStatus->stickAxis[1];
 
@@ -74,20 +79,20 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
 void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     f32 angle;
     f32 entryX;
     f32 entryZ;
 
-    entryX = (*mapConfig->entryList)[pipeData->entryID].x;
-    entryZ = (*mapConfig->entryList)[pipeData->entryID].z;
+    entryX = (*mapSettings->entryList)[pipeData->entryID].x;
+    entryZ = (*mapSettings->entryList)[pipeData->entryID].z;
     pipeData->timer = get_xz_dist_to_player(entryX, entryZ) / playerStatus->runSpeed;
     if (pipeData->timer == 0) {
         pipeData->timer = 1;
     }
 
-    entryX = (*mapConfig->entryList)[pipeData->entryID].x;
-    entryZ = (*mapConfig->entryList)[pipeData->entryID].z;
+    entryX = (*mapSettings->entryList)[pipeData->entryID].x;
+    entryZ = (*mapSettings->entryList)[pipeData->entryID].z;
     angle = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
@@ -138,9 +143,24 @@ void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
     entity_start_script(entity);
 }
 
-INCLUDE_ASM(s32, "entity/BlueWarpPipe", entity_BlueWarpPipe_setupGfx);
+void entity_BlueWarpPipe_setupGfx(s32 entityIndex) {
+    Gfx* gfxPos = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(entityIndex);
+    BlueWarpPipeData* data = entity->dataBuf.bluePipe;
+    Matrix4f sp10;
+    Matrix4f sp50;
 
-f32 entity_init_BlueWarpPipe(Entity* entity) {
+    guScaleF(sp10, entity->scale.x, entity->scale.y, entity->scale.z);
+    guTranslateF(sp50, entity->position.x, data->finalPosY + 1.0f, entity->position.z);
+    guMtxCatF(sp10, sp50, sp50);
+    guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gfxPos++, Entity_BlueWarpPipe_RenderBase);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+    gMasterGfxPos = gfxPos;
+}
+
+void entity_init_BlueWarpPipe(Entity* entity) {
     BlueWarpPipeData* data;
     s32 entryID = CreateEntityVarArgBuffer[0];
     EvtScript* enterPipeEvt = (EvtScript*)CreateEntityVarArgBuffer[1];
@@ -157,3 +177,31 @@ f32 entity_init_BlueWarpPipe(Entity* entity) {
 
     entity->position.y -= (data->isRaised ? 15.0 : 52.0);
 }
+
+EntityScript Entity_BlueWarpPipe_Script = {
+    es_SetCallback(entity_BlueWarpPipe_check_if_active, 0)
+    es_SetCallback(entity_BlueWarpPipe_rise_up, 0)
+    es_SetCallback(entity_BlueWarpPipe_wait_for_player_to_get_off, 0)
+    es_SetCallback(entity_BlueWarpPipe_idle, 0)
+    es_Call(entity_BlueWarpPipe_set_player_move_to_center)
+    es_SetCallback(entity_BlueWarpPipe_wait_player_move_to_center, 0)
+    es_Call(entity_BlueWarpPipe_enter_pipe_init)
+    es_SetCallback(entity_BlueWarpPipe_enter_pipe_update, 0)
+    es_Call(entity_BlueWarpPipe_start_bound_script)
+    es_End
+};
+
+EntityModelScript Entity_BlueWarpPipe_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BlueWarpPipe_RenderPipe, RENDER_MODE_SURFACE_OPA);
+
+EntityBlueprint Entity_BlueWarpPipe = {
+    .flags = 0,
+    .typeDataSize = sizeof(BlueWarpPipeData),
+    .renderCommandList = Entity_BlueWarpPipe_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_BlueWarpPipe,
+    .updateEntityScript = Entity_BlueWarpPipe_Script,
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(BlueWarpPipe) },
+    .entityType = ENTITY_TYPE_BLUE_WARP_PIPE,
+    .aabbSize = { 40, 50, 40}
+};

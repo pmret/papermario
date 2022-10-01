@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "hud_element.h"
+#include "message_ids.h"
 
 #define MAX_ICONS (64)
 
@@ -54,7 +55,7 @@ typedef struct HudStatusIcon {
     /* 0x28 */ s32 status4Radius;
     /* 0x2C */ s32 status4OffsetY;
     /* 0x30 */ s32 offsetY;
-    /* 0x34 */ f32 unk_34;
+    /* 0x34 */ s32 offsetX;
     /* 0x38 */ HudComplexStatusIcon status1;
     /* 0x48 */ HudComplexStatusIcon status2;
     /* 0x58 */ HudComplexStatusIcon status3;
@@ -69,9 +70,12 @@ typedef struct HudStatusIcon {
     /* 0xA8 */ HudSimpleStatusIcon danger;
 } HudStatusIcon; // size = 0xB0
 
-extern s16 D_80078160[];
-extern s16 D_80078164[];
-extern s32 D_80078168[];
+s16 D_80078160[] = { 28, 40 };
+s16 D_80078164[] = { 0, -2 };
+s32 D_80078168[] = {
+    MSG_Menus_Merlee_IncreaseCoins,
+    MSG_Menus_Merlee_Exhausted,
+};
 
 extern HudScript HES_Item_Present;
 
@@ -109,13 +113,12 @@ extern HudScript HES_Surprise;
 extern HudScript HES_Peril;
 extern HudScript HES_Danger;
 
-
-void update_merlee_message(PopupMessage* popup);
-void draw_merlee_message(PopupMessage* popup);
+void update_merlee_message(void* popup);
+void draw_merlee_message(void* popup);
 void func_80045BC8(void);
 void init_all_status_icons(void);
-void update_all_status_icons(PopupMessage* popup);
-void draw_all_status_icons(PopupMessage* popup);
+void update_all_status_icons(void* popup);
+void draw_all_status_icons(void* popup);
 
 void func_80045AC0(void) {
     s32 i;
@@ -158,8 +161,8 @@ void func_80045BC8(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->unk_08 != NULL) {
-            popup->unk_08(popup);
+        if (popup->active && popup->renderWorldFunc != NULL) {
+            popup->renderWorldFunc(popup);
         }
     }
 }
@@ -169,8 +172,8 @@ void draw_merlee_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->drawFunc != NULL) {
-            popup->drawFunc(popup);
+        if (popup->active && popup->renderUIFunc != NULL) {
+            popup->renderUIFunc(popup);
         }
     }
 }
@@ -202,10 +205,10 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
 
     if (popup != NULL) {
         popup->updateFunc = update_merlee_message;
-        popup->drawFunc = draw_merlee_message;
+        popup->renderUIFunc = draw_merlee_message;
         popup->unk_17 = 1;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
+        popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
@@ -213,7 +216,8 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
     }
 }
 
-void update_merlee_message(PopupMessage* popup) {
+void update_merlee_message(void* data) {
+    PopupMessage* popup = data;
     s32 closeMessage = FALSE;
 
     switch (popup->unk_16) {
@@ -259,7 +263,8 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
     draw_msg(messageID, posX, posY, 255, 15, 0);
 }
 
-void draw_merlee_message(PopupMessage* popup) {
+void draw_merlee_message(void* data) {
+    PopupMessage* popup = data;
     s32 messageID;
     s32 xPos;
     s32 width;
@@ -269,7 +274,7 @@ void draw_merlee_message(PopupMessage* popup) {
         messageID = D_80078168[popup->messageIndex];
         width = get_msg_width(messageID, 0) + 30;
         xPos = 160 - (width / 2);
-        set_window_properties(9, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
+        set_window_properties(WINDOW_ID_9, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
         set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
     }
 }
@@ -284,10 +289,10 @@ void init_all_status_icons(void) {
     PopupMessage* popup = get_current_merlee_message();
 
     if (popup != NULL) {
-        popup->updateFunc = &update_all_status_icons;
+        popup->updateFunc = update_all_status_icons;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
-        popup->drawFunc = &draw_all_status_icons;
+        popup->renderWorldFunc = NULL;
+        popup->renderUIFunc = draw_all_status_icons;
         popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
         icons = D_800A0F44 = (HudStatusIcon*)(popup->message);
         ASSERT(icons != NULL);
@@ -297,7 +302,8 @@ void init_all_status_icons(void) {
     }
 }
 
-void update_all_status_icons(PopupMessage* popup) {
+void update_all_status_icons(void* data) {
+    PopupMessage* popup = data;
     HudStatusIcon* icon;
     int i;
     s32 elementID;
@@ -435,7 +441,7 @@ void update_all_status_icons(PopupMessage* popup) {
 
         if (icon->status3.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status3.active) {
-                case STATUS_E:
+                case STATUS_TRANSPARENT:
                     elementID = icon->status3.activeElementID = hud_element_create(&HES_TransparentBegin);
                     break;
                 default:
@@ -453,7 +459,7 @@ void update_all_status_icons(PopupMessage* popup) {
                 break;
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status3.removing) {
-                    case STATUS_E:
+                    case STATUS_TRANSPARENT:
                         hud_element_set_script(icon->status3.removingElementID, &HES_TransparentEnd);
                         break;
                     default:
@@ -525,7 +531,8 @@ void update_all_status_icons(PopupMessage* popup) {
     }
 }
 
-void draw_all_status_icons(PopupMessage* popup) {
+void draw_all_status_icons(void* data) {
+    PopupMessage* popup = data;
     HudStatusIcon* icon;
     s32 elementId;
     f32 x, y, z;
@@ -979,11 +986,11 @@ void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 a
     icon->status4OffsetY = offsetY + 51;
 }
 
-void set_status_icons_offset(s32 iconID, s32 offsetY, f32 arg2) {
+void set_status_icons_offset(s32 iconID, s32 offsetY, s32 offsetX) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->offsetY = offsetY;
-    statusIcon->unk_34 = arg2;
+    statusIcon->offsetX = offsetX;
 }
 
 void create_status_debuff(s32 iconID, s32 statusID) {

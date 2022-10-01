@@ -127,7 +127,7 @@ void func_802A9208_429F28(void) {
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
             // fallthrough
         case 11:
@@ -190,7 +190,7 @@ void func_802A9208_429F28(void) {
                 func_80269160();
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(0x80000041);
+            sfx_stop_sound(SOUND_80000041);
             actionCommandStatus->unk_54 = 5;
             actionCommandStatus->state = 12;
             break;
@@ -221,7 +221,7 @@ void N(draw_hud_elements)(void) {
 }
 
 void N(free_hud_elements)(void) {
-    sfx_stop_sound(0x80000041);
+    sfx_stop_sound(SOUND_80000041);
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
 }

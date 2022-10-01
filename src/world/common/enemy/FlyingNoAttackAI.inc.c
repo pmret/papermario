@@ -10,14 +10,14 @@
 // - Ruff Puff
 // - Ember
 
-void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;
     f32 angleDiff;
 
     npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -37,7 +37,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = 13;
 }
 
-void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -47,7 +47,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 30;
         script->functionTemp[0] = 20;
         enemy->varTable[9] = 30;
@@ -56,7 +56,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     flag = 0;
-    if (!(npc->flags & 8)) {
+    if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
         x = npc->pos.x;
         y = npc->pos.y + npc->collisionHeight;
         z = npc->pos.z;
@@ -82,7 +82,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = 12;
 }
 
-void N(FlyingNoAttackAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_20)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -104,14 +104,14 @@ ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
+    MobileAISettings* aiSettings =(MobileAISettings*) evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
 

@@ -3,13 +3,12 @@
 
 extern f32 GravityParamsStartJump[];
 extern f32 D_8010C928;
-extern f32 D_8010C960;
-extern f32 D_8010C97C;
+extern f32 JumpedOnSwitchX;
+extern f32 JumpedOnSwitchZ;
 extern f32 D_8010C984;
 
 void func_800E315C(s32 colliderID);
 s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2);
-s8 get_current_partner_id(void);
 s32 phys_check_interactable_collision(void);
 void phys_save_ground_pos(void);
 
@@ -36,7 +35,7 @@ s32 can_trigger_loading_zone(void) {
             if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
                 return TRUE;
             } else {
-                gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+                gPlayerStatusPtr->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
         } else {
@@ -44,7 +43,7 @@ s32 can_trigger_loading_zone(void) {
                 return partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE;
             }
             if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
-                gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+                gPlayerStatusPtr->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
         }
@@ -53,12 +52,12 @@ s32 can_trigger_loading_zone(void) {
 }
 
 void move_player(s32 duration, f32 heading, f32 speed) {
-    gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_4000;
+    gPlayerStatus.flags |= PS_FLAGS_4000;
     gPlayerStatus.heading = heading;
     gPlayerStatus.moveFrames = duration;
     gPlayerStatus.currentSpeed = speed;
 
-    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_400000)) {
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_400000)) {
         set_action_state(speed > gPlayerStatus.walkSpeed ? ACTION_STATE_RUN : ACTION_STATE_WALK);
     }
 }
@@ -104,7 +103,7 @@ s32 collision_main_above(void) {
                 } while (0);
 
                 playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
-                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
                     playerStatus->actionState != ACTION_STATE_SPIN_JUMP)
                     {
                     playerStatus->gravityIntegrator[0] = 0.0f;
@@ -122,16 +121,16 @@ s32 collision_main_above(void) {
 void func_800E29C8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
-    f32 temp_f20;
-    s32 phi_a0;
+    f32 groundPosY;
+    AnimID anim;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->fallState = 0;
+    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->actionSubstate = LANDING_ON_SWITCH_SUBSTATE_0;
     }
 
-    if (playerStatus->fallState == 0) {
-        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+    if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_0) {
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
         integrate_gravity();
@@ -139,26 +138,26 @@ void func_800E29C8(void) {
             record_jump_apex();
             gravity_use_fall_parms();
             integrate_gravity();
-            playerStatus->fallState = 1;
+            playerStatus->actionSubstate = LANDING_ON_SWITCH_SUBSTATE_1;
         }
         if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
             playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
         }
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
-    } else if (playerStatus->fallState == 2) {
-        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+    } else if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_2) {
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
         }
-        temp_f20 = player_check_collision_below(func_800E34D8(), &colliderID);
+        groundPosY = player_check_collision_below(func_800E34D8(), &colliderID);
         func_800E315C(colliderID);
-        playerStatus->position.y = temp_f20;
+        playerStatus->position.y = groundPosY;
         if (colliderID >= 0) {
-            if (!(playerStatus->animFlags & 1)) {
-                phi_a0 = 0x10009;
+            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                anim = ANIM_Mario_10009;
             } else {
-                phi_a0 = 0x6000B;
+                anim = ANIM_Mario_6000B;
             }
-            suggest_player_anim_clearUnkFlag(phi_a0);
+            suggest_player_anim_clearUnkFlag(anim);
             enable_player_input();
             phys_player_land();
         }
@@ -193,10 +192,7 @@ void func_800E2BB0(void) {
 
     if (cond) {
         record_jump_apex();
-        playerStatus->gravityIntegrator[0] = 0.1143f;
-        playerStatus->gravityIntegrator[1] = -0.2871f;
-        playerStatus->gravityIntegrator[2] = -0.1823f;
-        playerStatus->gravityIntegrator[3] = 0.01152f;
+        LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
         set_action_state(ACTION_STATE_FALLING);
     }
 }
@@ -247,7 +243,7 @@ void phys_update_jump(void) {
                     record_jump_apex();
                     set_action_state(ACTION_STATE_HOP);
                     integrate_gravity();
-                    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+                    if (playerStatus->flags & PS_FLAGS_40000) {
                         playerStatus->gravityIntegrator[1] *= 0.5f;
                         playerStatus->gravityIntegrator[2] *= 0.5f;
                         playerStatus->gravityIntegrator[3] *= 0.5f;
@@ -273,7 +269,7 @@ void phys_update_jump(void) {
 
 void phys_init_integrator_for_current_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* temp_a0;
+    f32* params;
 
     switch (playerStatus->actionState) {
         case ACTION_STATE_LANDING_ON_SWITCH:
@@ -284,22 +280,22 @@ void phys_init_integrator_for_current_state(void) {
             break;
         case ACTION_STATE_JUMP:
         case ACTION_STATE_SPIN_JUMP:
-        case ACTION_STATE_GROUND_POUND:
-        case ACTION_STATE_ULTRA_JUMP:
-        case ACTION_STATE_ULTRA_POUND:
+        case ACTION_STATE_SPIN_POUND:
+        case ACTION_STATE_TORNADO_JUMP:
+        case ACTION_STATE_TORNADO_POUND:
         case ACTION_STATE_HIT_FIRE:
         case ACTION_STATE_HIT_LAVA:
-            temp_a0 = GravityParamsStartJump;
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
-                playerStatus->gravityIntegrator[0] = *temp_a0++;
-                playerStatus->gravityIntegrator[1] = *temp_a0++;
-                playerStatus->gravityIntegrator[2] = *temp_a0++;
-                playerStatus->gravityIntegrator[3] = *temp_a0++;
+            params = GravityParamsStartJump;
+            if (!(playerStatus->flags & PS_FLAGS_40000)) {
+                playerStatus->gravityIntegrator[0] = *params++;
+                playerStatus->gravityIntegrator[1] = *params++;
+                playerStatus->gravityIntegrator[2] = *params++;
+                playerStatus->gravityIntegrator[3] = *params++;
             } else {
-                playerStatus->gravityIntegrator[0] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[1] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[2] = *temp_a0++ * 0.5f;
-                playerStatus->gravityIntegrator[3] = *temp_a0++ * 0.5f;
+                playerStatus->gravityIntegrator[0] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[1] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[2] = *params++ * 0.5f;
+                playerStatus->gravityIntegrator[3] = *params++ * 0.5f;
             }
             break;
     }
@@ -309,21 +305,21 @@ static const f32 padding = 0.0f;
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
-    f32* floats = GravityParamsStartFall;
+    f32* params = GravityParamsStartFall;
     PlayerStatus* playerStatus;
     do {} while (0);
     playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & 0x40000) {
-        playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[3] = *floats++ / 12.0f;
+    if (playerStatus->flags & PS_FLAGS_40000) {
+        playerStatus->gravityIntegrator[0] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[1] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[2] = *params++ / 12.0f;
+        playerStatus->gravityIntegrator[3] = *params++ / 12.0f;
     } else {
-        playerStatus->gravityIntegrator[0] = *floats++;
-        playerStatus->gravityIntegrator[1] = *floats++;
-        playerStatus->gravityIntegrator[2] = *floats++;
-        playerStatus->gravityIntegrator[3] = *floats++;
+        playerStatus->gravityIntegrator[0] = *params++;
+        playerStatus->gravityIntegrator[1] = *params++;
+        playerStatus->gravityIntegrator[2] = *params++;
+        playerStatus->gravityIntegrator[3] = *params++;
     }
 }
 
@@ -332,9 +328,7 @@ void phys_update_falling(void) {
         gPlayerStatus.actionState != ACTION_STATE_BOUNCE)
     {
         s32 colliderID;
-
         gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
-
         func_800E315C(colliderID);
     }
 }
@@ -344,19 +338,18 @@ void func_800E315C(s32 colliderID) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (colliderID >= 0) {
-        u8 colliderType = get_collider_type_by_id(colliderID);
-
-        switch (colliderType) {
-            case 1:
-            case 4:
-            case 5:
+        s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+        switch (surfaceType) {
+            case SURFACE_TYPE_WATER:
+            case SURFACE_TYPE_DOCK_WALL:
+            case SURFACE_TYPE_SLIDE:
                 set_action_state(ACTION_STATE_LAND);
                 break;
-            case 3:
+            case SURFACE_TYPE_LAVA:
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                            playerStatus->unk_BF = 1;
+                            playerStatus->hazardType = HAZARD_TYPE_LAVA;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                     } else {
@@ -364,11 +357,11 @@ void func_800E315C(s32 colliderID) {
                     }
                 }
                 break;
-            case 2:
+            case SURFACE_TYPE_SPIKES:
                 if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
-                            playerStatus->unk_BF = 2;
+                            playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                         break;
@@ -390,11 +383,11 @@ void phys_player_land(void) {
     f32 moveMagnitude;
 
     playerStatus->timeInAir = 0;
-    playerStatus->unk_C2 = 0;
-    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800000;
+    playerStatus->peakJumpTime = 0;
+    playerStatus->flags &= ~PS_FLAGS_800000;
     playerStatus->landPos.x = playerStatus->position.x;
     playerStatus->landPos.z = playerStatus->position.z;
-    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+    playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
     sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         phys_adjust_cam_on_landing();
@@ -409,22 +402,22 @@ void phys_player_land(void) {
                 Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
 
                 entity->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
-                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_ULTRA_POUND &&
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
+                    playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
                     playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_GROUND_POUND)
+                    playerStatus->actionState != ACTION_STATE_SPIN_POUND)
                 {
                     set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
                 } else {
                     disable_player_input();
-                    playerStatus->fallState = 0xB;
+                    playerStatus->actionSubstate = 11;
                 }
                 return;
             }
         }
     }
 
-    if (playerStatus->flags & 0x4000) {
+    if (playerStatus->flags & PS_FLAGS_4000) {
         set_action_state(ACTION_STATE_RUN);
         return;
     }
@@ -453,7 +446,7 @@ void phys_player_land(void) {
 f32 integrate_gravity(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+    if (playerStatus->flags & PS_FLAGS_40000) {
         playerStatus->gravityIntegrator[2] += playerStatus->gravityIntegrator[3] / 1.7f;
         playerStatus->gravityIntegrator[1] += playerStatus->gravityIntegrator[2] / 1.7f;
         playerStatus->gravityIntegrator[0] += playerStatus->gravityIntegrator[1] / 1.7f;
@@ -466,19 +459,19 @@ f32 integrate_gravity(void) {
 }
 
 f32 func_800E34D8(void) {
-    f32 ret = integrate_gravity();
+    f32 velocity = integrate_gravity();
 
     if (func_800E0208()) {
-        ret = 0.0f;
+        velocity = 0.0f;
     }
-    return ret;
+    return velocity;
 }
 
-f32 player_check_collision_below(f32 arg0, s32* colliderID) {
+f32 player_check_collision_below(f32 offset, s32* colliderID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 temp_f4 = playerStatus->colliderHeight * 0.5f;
-    f32 outLength = fabsf(arg0) + temp_f4;
+    f32 outLength = fabsf(offset) + temp_f4;
     f32 x = playerStatus->position.x;
     f32 y = playerStatus->position.y + temp_f4;
     f32 z = playerStatus->position.z;
@@ -487,10 +480,10 @@ f32 player_check_collision_below(f32 arg0, s32* colliderID) {
                                                               &sp38, &sp3C, &sp40, &sp44);
 
     if (hit < 0) {
-        if (arg0 >= 0.0f && collisionStatus->currentCeiling >= 0) {
+        if (offset >= 0.0f && collisionStatus->currentCeiling >= 0) {
             return playerStatus->position.y;
         }
-        y = playerStatus->position.y + arg0;
+        y = playerStatus->position.y + offset;
     } else {
         collisionStatus->currentFloor = hit;
         collisionStatus->lastTouchedFloor = -1;
@@ -516,9 +509,9 @@ void collision_main_lateral(void) {
     f32 zBump;
 
     gCollisionStatus.pushingAgainstWall = -1;
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_4000) {
+    if (playerStatus->flags & PS_FLAGS_4000) {
         speed = playerStatus->currentSpeed;
-        if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+        if (playerStatus->flags & PS_FLAGS_40000) {
             speed *= 0.5f;
         }
         add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, speed, playerStatus->heading);
@@ -532,52 +525,52 @@ void collision_main_lateral(void) {
             break;
         case ACTION_STATE_RIDE:
             if (get_current_partner_id() == PARTNER_BOW) {
-                playerStatus->position.x += playerStatus->extraVelocity.x;
-                playerStatus->position.y += playerStatus->extraVelocity.y;
-                playerStatus->position.z += playerStatus->extraVelocity.z;
+                playerStatus->position.x += playerStatus->pushVelocity.x;
+                playerStatus->position.y += playerStatus->pushVelocity.y;
+                playerStatus->position.z += playerStatus->pushVelocity.z;
 
-                if (playerStatus->extraVelocity.x != 0.0f ||
-                    playerStatus->extraVelocity.y != 0.0f ||
-                    playerStatus->extraVelocity.z != 0.0f)
+                if (playerStatus->pushVelocity.x != 0.0f ||
+                    playerStatus->pushVelocity.y != 0.0f ||
+                    playerStatus->pushVelocity.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                     if (playerStatus->alpha1 != 128) {
                         collision_check_player_intersecting_world(0, 0,
-                            atan2(0.0f, 0.0f, playerStatus->extraVelocity.x, playerStatus->extraVelocity.z));
+                            atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z));
                     }
                 }
             }
             break;
-        case ACTION_STATE_GROUND_POUND:
-        case ACTION_STATE_ULTRA_POUND:
-            playerStatus->position.x += playerStatus->extraVelocity.x;
-            playerStatus->position.y += playerStatus->extraVelocity.y;
-            playerStatus->position.z += playerStatus->extraVelocity.z;
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+        case ACTION_STATE_SPIN_POUND:
+        case ACTION_STATE_TORNADO_POUND:
+            playerStatus->position.x += playerStatus->pushVelocity.x;
+            playerStatus->position.y += playerStatus->pushVelocity.y;
+            playerStatus->position.z += playerStatus->pushVelocity.z;
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                 gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             }
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
             }
             break;
         case ACTION_STATE_HAMMER:
-            playerStatus->position.x += playerStatus->extraVelocity.x;
-            playerStatus->position.y += playerStatus->extraVelocity.y;
-            playerStatus->position.z += playerStatus->extraVelocity.z;
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            playerStatus->position.x += playerStatus->pushVelocity.x;
+            playerStatus->position.y += playerStatus->pushVelocity.y;
+            playerStatus->position.z += playerStatus->pushVelocity.z;
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -596,36 +589,36 @@ void collision_main_lateral(void) {
                 player_test_move_with_slipping(playerStatus, &playerX, &playerY, &playerZ,
                                                playerStatus->colliderDiameter * 0.5f, yaw);
 
-            if (playerStatus->extraVelocity.x != 0.0f ||
-                playerStatus->extraVelocity.y != 0.0f ||
-                playerStatus->extraVelocity.z != 0.0f)
+            if (playerStatus->pushVelocity.x != 0.0f ||
+                playerStatus->pushVelocity.y != 0.0f ||
+                playerStatus->pushVelocity.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
             }
             break;
         default:
-            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING)) {
+            if (!(playerStatus->flags & PS_FLAGS_FLYING)) {
                 f32 new_var;
 
                 speed = 0.0f;
-                if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))) {
+                if (!(playerStatus->flags & (PS_FLAGS_800000 | PS_FLAGS_INPUT_DISABLED))) {
                     player_input_to_move_vector(&yaw, &speed);
-                    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING)) {
+                    if (!(playerStatus->animFlags & PA_FLAGS_SPINNING)) {
                         speed *= 0.03125f;
-                        if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING))) {
+                        if (!(playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING))) {
                             speed *= 0.25;
                         }
                         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
                             speed *= 1.5;
                         }
-                        if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+                        if (playerStatus->flags & PS_FLAGS_40000) {
                             speed *= 0.5f;
                         }
                     }
-                    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
 
-                    if (playerStatus->actionState == ACTION_STATE_14) {
+                    if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK) {
                         if (fabsf(sinTheta) > fabsf(cosTheta)) {
                             xBump = speed * sinTheta;
                             zBump = 0.0f;
@@ -633,7 +626,7 @@ void collision_main_lateral(void) {
                             xBump = 0.0f;
                             zBump = -speed * cosTheta;
                         }
-                    } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING)) {
+                    } else if (!(playerStatus->animFlags & PA_FLAGS_SPINNING)) {
                         xBump = speed * sinTheta;
                         zBump = -speed * cosTheta;
                     } else {
@@ -641,32 +634,32 @@ void collision_main_lateral(void) {
                         zBump = 0.0f;
                     }
 
-                    sin_cos_rad(playerStatus->targetYaw * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
                     speed = playerStatus->currentSpeed;
-                    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+                    if (playerStatus->flags & PS_FLAGS_40000) {
                         speed *= 0.5f;
                     }
                     playerX = xBump + (speed * sinTheta);
                     playerZ = zBump - (speed * cosTheta);
                     yaw = atan2(0.0f, 0.0f, playerX, playerZ);
                     speed = sqrtf(SQ(playerX) + SQ(playerZ));
-                    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+                    if (playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING)) {
                         if (speed > playerStatus->runSpeed) {
                             speed = playerStatus->runSpeed;
                         }
                     }
                 }
 
-                playerStatus->position.x += playerStatus->extraVelocity.x;
-                playerStatus->position.z += playerStatus->extraVelocity.z;
+                playerStatus->position.x += playerStatus->pushVelocity.x;
+                playerStatus->position.z += playerStatus->pushVelocity.z;
                 if (playerStatus->timeInAir == 0) {
-                    playerStatus->position.y += playerStatus->extraVelocity.y;
+                    playerStatus->position.y += playerStatus->pushVelocity.y;
                 }
 
                 if (
-                    playerStatus->extraVelocity.x != 0.0f ||
-                    playerStatus->extraVelocity.y != 0.0f ||
-                    playerStatus->extraVelocity.z != 0.0f)
+                    playerStatus->pushVelocity.x != 0.0f ||
+                    playerStatus->pushVelocity.y != 0.0f ||
+                    playerStatus->pushVelocity.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -680,7 +673,7 @@ void collision_main_lateral(void) {
                                                         playerStatus->colliderDiameter * 0.5f, playerStatus->targetYaw);
                 if (speed == 0.0f && result < 0) {
                     yaw2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
-                    sin_cos_rad((yaw2 + 180.0f) * TAU / 360.0f, &sinTheta, &cosTheta);
+                    sin_cos_rad(DEG_TO_RAD(yaw2 + 180.0f), &sinTheta, &cosTheta);
                     playerX = playerStatus->position.x + (sinTheta * playerStatus->colliderDiameter * 0.5f);
                     playerY = playerStatus->position.y;
                     playerZ = playerStatus->position.z - (cosTheta * playerStatus->colliderDiameter * 0.5f);
@@ -688,7 +681,7 @@ void collision_main_lateral(void) {
                                                             playerStatus->colliderDiameter, yaw2);
                 }
                 collisionStatus->currentWall = result;
-                if (!(playerStatus->flags & 0x400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
+                if (!(playerStatus->flags & PS_FLAGS_400000) && playerStatus->actionState != ACTION_STATE_HAMMER) {
 
                     if (speed == 0.0f) {
                         collision_check_player_intersecting_world(0, 0,
@@ -737,7 +730,7 @@ void collision_main_lateral(void) {
                     }
 
                     if (playerStatus->enableCollisionOverlapsCheck == 0) {
-                        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING) {
+                        if (playerStatus->animFlags & PA_FLAGS_SPINNING) {
                             yaw2 = playerStatus->targetYaw;
                         } else {
                             yaw2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
@@ -752,7 +745,7 @@ void collision_main_lateral(void) {
         case ACTION_STATE_LANDING_ON_SWITCH:
         case ACTION_STATE_LAND:
         case ACTION_STATE_STEP_DOWN_LAND:
-        case ACTION_STATE_ULTRA_JUMP:
+        case ACTION_STATE_TORNADO_JUMP:
         case ACTION_STATE_SLIDING:
         case ACTION_STATE_HIT_FIRE:
         case ACTION_STATE_HIT_LAVA:
@@ -837,7 +830,32 @@ void collision_check_player_overlaps(void) {
     }
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_should_player_be_sliding);
+s32 phys_should_player_be_sliding(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Shadow* shadow = get_shadow_by_index(playerStatus->shadowID);
+    s32 ret = FALSE;
+
+    if (gGameStatusPtr->areaID == AREA_IWA) {
+        f32 temp_f0 = shadow->rotation.z + 180.0;
+
+        if (temp_f0 != 0.0f) {
+            ret = TRUE;
+            switch (gGameStatusPtr->mapID) {
+                case 0:
+                    if (fabsf(temp_f0) < 20.0f) {
+                        ret = FALSE;
+                    }
+                    break;
+                case 1:
+                    if (playerStatus->position.x >= -300.0f && playerStatus->position.x <= -140.0f) {
+                        ret = FALSE;
+                    }
+                    break;
+            }
+        }
+    }
+    return ret;
+}
 
 s32 phys_is_on_sloped_ground(void) {
     Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
@@ -864,20 +882,20 @@ void phys_main_collision_below(void) {
     f32 temp_f24 = (2.0f * playerStatus->colliderHeight) / 7.0f;
     f32 hitRx, hitRz;
     f32 hitDirX, hitDirZ;
-    s32 result;
+    s32 colliderID;
     s32 cond;
 
-    result = player_raycast_below_cam_relative(playerStatus, &playerX, &playerY, &playerZ, &outLength, &hitRx, &hitRz,
+    colliderID = player_raycast_below_cam_relative(playerStatus, &playerX, &playerY, &playerZ, &outLength, &hitRx, &hitRz,
                                                &hitDirX, &hitDirZ);
     playerStatus->groundNormalPitch = get_player_normal_pitch();
 
     if (collHeightHalf + (temp_f24 * 0.5f) < outLength) {
-        result = -1;
+        colliderID = -1;
     }
     if (playerStatus->timeInAir == 0) {
-        collisionStatus->currentFloor = result;
+        collisionStatus->currentFloor = colliderID;
     }
-    if (result >= 0) {
+    if (colliderID >= 0) {
         playerStatus->groundAnglesXZ.x = hitDirX;
         playerStatus->groundAnglesXZ.y = hitDirZ;
     }
@@ -886,7 +904,7 @@ void phys_main_collision_below(void) {
         return;
     }
 
-    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+    if (playerStatus->flags & PS_FLAGS_AIRBORNE) {
         return;
     }
 
@@ -894,17 +912,18 @@ void phys_main_collision_below(void) {
         return;
     }
 
-    if ((!(playerStatus->flags & PLAYER_STATUS_FLAGS_10) ||
+    if ((!(playerStatus->flags & PS_FLAGS_10) ||
         (phys_adjust_cam_on_landing(), !phys_should_player_be_sliding()) ||
         (set_action_state(ACTION_STATE_SLIDING), (playerStatus->actionState != ACTION_STATE_SLIDING))))
     {
-        if (result >= 0) {
-            switch (get_collider_type_by_id(result) & 0xFF) {
-                case 2:
+        if (colliderID >= 0) {
+            s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+            switch (surfaceType) {
+                case SURFACE_TYPE_SPIKES:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                                playerStatus->unk_BF = 2;
+                                playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 set_action_state(ACTION_STATE_HIT_LAVA);
                             }
                         } else {
@@ -912,11 +931,11 @@ void phys_main_collision_below(void) {
                         }
                     }
                     break;
-                case 3:
+                case SURFACE_TYPE_LAVA:
                     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-                                playerStatus->unk_BF = 1;
+                                playerStatus->hazardType = HAZARD_TYPE_LAVA;
                                 set_action_state(ACTION_STATE_HIT_LAVA);
                             }
                         } else {
@@ -931,7 +950,7 @@ void phys_main_collision_below(void) {
                     }
 
                     if (playerStatus->actionState != ACTION_STATE_STEP_UP && !cond) {
-                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+                        if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
                             if (playerY - playerStatus->position.y < 6.0f) {
                                 playerStatus->position.y = playerY;
                             } else {
@@ -946,7 +965,7 @@ void phys_main_collision_below(void) {
                     }
                     break;
             }
-        } else if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING) &&
+        } else if (!(playerStatus->flags & PS_FLAGS_FLYING) &&
                     playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER)
         {
             if (outLength <= collHeightHalf + temp_f24 && hitDirX == 0.0f && hitDirZ == 0.0f) {
@@ -976,7 +995,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     f32 x, y, z;
     f32 temp_f0;
 
-    if (playerStatus->animFlags & 0x1000) {
+    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
         func_800E4F10();
         return;
     }
@@ -1060,9 +1079,9 @@ void func_800E4F10(void) {
 }
 
 void check_input_midair_jump(void) {
-    if (!(gPlayerStatus.flags & (PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_10 | PLAYER_STATUS_FLAGS_FLYING)) &&
-        !(gPlayerStatus.animFlags & 0x4001) &&
-        gPlayerStatus.unk_C2 >= 6 &&
+    if (!(gPlayerStatus.flags & (PS_FLAGS_800000 | PS_FLAGS_10 | PS_FLAGS_FLYING)) &&
+        !(gPlayerStatus.animFlags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_HOLDING_WATT)) &&
+        gPlayerStatus.peakJumpTime >= 6 &&
         gPlayerStatus.timeInAir < 18 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
 
@@ -1071,11 +1090,11 @@ void check_input_midair_jump(void) {
                 break;
             case 1:
                 set_action_state(ACTION_STATE_SPIN_JUMP);
-                gPlayerStatus.flags |= 8;
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
             case 2:
-                set_action_state(ACTION_STATE_ULTRA_JUMP);
-                gPlayerStatus.flags |= 8;
+                set_action_state(ACTION_STATE_TORNADO_JUMP);
+                gPlayerStatus.flags |= PS_FLAGS_FLYING;
                 break;
         }
     }
@@ -1085,26 +1104,25 @@ s8 get_current_partner_id(void) {
     return gPlayerData.currentPartner;
 }
 
-void try_player_footstep_sounds(s32 arg0) {
-    if (gGameStatusPtr->frameCounter % arg0 == 0) {
-        u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
-        s32 soundID;
-        s32 soundID2;
+void try_player_footstep_sounds(s32 interval) {
+    if (gGameStatusPtr->frameCounter % interval == 0) {
+        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+        s32 soundID, altSoundID;
 
-        if (colliderType == 6 || colliderType == 9) {
-            soundID = SOUND_143;
-            soundID2 = SOUND_144;
+        if (surfaceType == SURFACE_TYPE_FLOWERS || surfaceType == SURFACE_TYPE_HEDGES) {
+            soundID = SOUND_STEP_CRUNCHY1;
+            altSoundID = SOUND_STEP_CRUNCHY2;
         } else {
-            soundID = SOUND_STEP1;
-            soundID2 = SOUND_STEP2;
+            soundID = SOUND_STEP_NORMAL1;
+            altSoundID = SOUND_STEP_NORMAL2;
         }
 
-        if (D_800F7B80 == 0) {
-            soundID = soundID2;
+        if (FootstepSoundSelector == 0) {
+            soundID = altSoundID;
         }
 
         sfx_play_sound_at_player(soundID, 0);
-        D_800F7B80 ^= 1;
+        FootstepSoundSelector ^= 1;
     }
 }
 
@@ -1117,7 +1135,7 @@ s32 phys_check_interactable_collision(void) {
     f32 x, y, z, yaw;
     s32 ret = -1;
 
-    if (playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED) {
+    if (playerStatus->flags & PS_FLAGS_INPUT_DISABLED) {
         return ret;
     }
 
@@ -1162,19 +1180,19 @@ s32 phys_can_player_interact(void) {
 }
 
 f32 func_800E5348(void) {
-    f32 temp_f0 = get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, gPlayerStatus.currentYaw);
+    f32 deltaYaw = get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, gPlayerStatus.currentYaw);
 
-    if (temp_f0 < -5.0f && temp_f0 > -175.0f) {
-        temp_f0 = 0.0f;
-    } else if (temp_f0 > 5.0f && temp_f0 < 175.0f) {
-        temp_f0 = 180.0f;
+    if (deltaYaw < -5.0f && deltaYaw > -175.0f) {
+        deltaYaw = 0.0f;
+    } else if (deltaYaw > 5.0f && deltaYaw < 175.0f) {
+        deltaYaw = 180.0f;
     } else {
-        temp_f0 = D_800F7B40;
+        deltaYaw = PrevPlayerCamRelativeYaw;
     }
-    return clamp_angle(temp_f0 - 90.0f + gCameras[gCurrentCameraID].currentYaw);
+    return clamp_angle(deltaYaw - 90.0f + gCameras[gCurrentCameraID].currentYaw);
 }
 
-void player_get_camera_facing_angle(void) {
+f32 player_get_camera_facing_angle(void) {
     f32 angle = 0.0f;
 
     if (gPlayerStatus.spriteFacingAngle >= 90.0f && gPlayerStatus.spriteFacingAngle < 270.0f) {
@@ -1183,7 +1201,7 @@ void player_get_camera_facing_angle(void) {
 
     angle = angle + gCameras[CAM_DEFAULT].currentYaw + 90.0f;
 
-    clamp_angle(angle);
+    return clamp_angle(angle);
 }
 
 void phys_save_ground_pos(void) {

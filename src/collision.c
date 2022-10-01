@@ -103,7 +103,7 @@ void initialize_collision(void) {
 
 void load_map_hit_asset(void) {
     u32 assetSize;
-    MapConfig* map = get_current_map_header();
+    MapSettings* map = get_current_map_settings();
     void* compressedData = load_asset_by_name(&wMapHitName, &assetSize);
     HitFile* uncompressedData = heap_malloc(assetSize);
 
@@ -133,7 +133,7 @@ void restore_map_collision_data(void) {
         collider->flags = backupEntry->flags;
         collider->parentModelIndex = backupEntry->parentModelIndex;
 
-        if (collider->flags != -1 && collider->flags & 0x80000000) {
+        if (collider->flags != -1 && collider->flags & COLLIDER_FLAGS_HAS_MODEL_PARENT) {
             parent_collider_to_model(i, collider->parentModelIndex);
             update_collider_transform(i);
         }
@@ -155,7 +155,7 @@ void load_battle_hit_asset(const char* hitName) {
         gCollisionData.numColliders = 0;
     } else {
         u32 assetSize;
-        MapConfig* map = get_current_map_header();
+        MapSettings* map = get_current_map_settings();
         void* compressedData = load_asset_by_name(hitName, &assetSize);
         HitFile* uncompressedData = heap_malloc(assetSize);
 
@@ -172,7 +172,7 @@ void load_battle_hit_asset(const char* hitName) {
 
 void load_hit_data(s32 idx, HitFile* hit) {
     s32 collisionOffset;
-    MapConfig* map;
+    MapSettings* map;
     CollisionData* collisionData;
     HitFileHeader* assetCollisionData;
     Vec3f* vertices;
@@ -190,7 +190,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
     assetCollisionData = NULL;
     collisionData = NULL;
 
-    map = get_current_map_header();
+    map = get_current_map_settings();
 
     switch (idx) {
         case 0: // Colliders
@@ -284,7 +284,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
                 e21_y = triangle->e21.y;
                 e21_z = triangle->e21.z;
 
-                // vector product
+                // cross product
                 normalX = e13_y * e21_z - e13_z * e21_y;
                 normalY = e13_z * e21_x - e13_x * e21_z;
                 normalZ = e13_x * e21_y - e13_y * e21_x;
@@ -316,9 +316,9 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
 
     collider = &gCollisionData.colliderList[colliderID];
     collider->parentModelIndex = modelIndex;
-    collider->flags |= 0x80000000;
+    collider->flags |= COLLIDER_FLAGS_HAS_MODEL_PARENT;
 
-    vertexBuffer = collision_heap_malloc(collider->numTriangles * 0xC);
+    vertexBuffer = collision_heap_malloc(collider->numTriangles * sizeof(Vec3f));
     vertexBufferSize = 0;
     vertexPtr = vertexBuffer;
 
@@ -329,7 +329,7 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
     }
 
     collider->numVertices = vertexBufferSize;
-    collider->vertexTable = collision_heap_malloc(vertexBufferSize * 0x18);
+    collider->vertexTable = collision_heap_malloc(vertexBufferSize * 2 * sizeof(Vec3f));
     for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; vertexPtr++, vertexTable += 2, i++) {
         vertex = *vertexPtr;
         vertexTable[0].x = vertexTable[1].x = vertex->x;
@@ -465,7 +465,7 @@ void update_collider_transform(s16 colliderID) {
     }
 }
 
-s32 get_collider_type_by_id(s32 colliderID) {
+s32 get_collider_flags(s32 colliderID) {
     if (colliderID & COLLISION_WITH_ENTITY_BIT) {
         return 0;
     } else {
@@ -871,7 +871,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
     for (i = 0; i < collisionData->numColliders; i++) {
         collider = &collisionData->colliderList[i];
 
-        if (collider->flags & 0x10000)
+        if (collider->flags & COLLIDER_FLAGS_IGNORE_PLAYER)
             continue;
 
         if (collider->numTriangles == 0 || collider->aabb == NULL)
@@ -908,7 +908,7 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     s32 i;
     f32 ret;
 
-    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(yaw), &sinTheta, &cosTheta);
     collider = &collisionData->colliderList[colliderID];
 
     gCollisionRayDirY = 0;
@@ -965,7 +965,7 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
-        if (entity == NULL || (entity->flags & 0x40000020)) {
+        if (entity == NULL || (entity->flags & (ENTITY_FLAGS_SKIP_UPDATE | ENTITY_FLAGS_DISABLE_COLLISION))) {
             continue;
         }
 

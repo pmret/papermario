@@ -28,22 +28,22 @@ def get_flag_name(arg):
     v = arg - 2**32 # convert to s32
     if v > -250000000:
         if v <= -220000000: return str((v + 230000000) / 1024)
-        elif v <= -200000000: return f"EVT_ARRAY_FLAG({v + 210000000})"
-        elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
+        elif v <= -200000000: return f"ArrayFlag({v + 210000000})"
+        elif v <= -180000000: return f"ArrayVar({v + 190000000})"
         elif v <= -160000000:
             if v + 170000000 == 0:
-                return "EVT_STORY_PROGRESS"
+                return "GB_StoryProgress"
             elif v + 170000000 == 425:
-                return "EVT_WORLD_LOCATION"
+                return "GB_WorldLocation"
             else:
-                return f"EVT_SAVE_VAR({v + 170000000})"
-        elif v <= -140000000: return f"EVT_AREA_VAR({v + 150000000})"
-        elif v <= -120000000: return f"EVT_SAVE_FLAG({v + 130000000})"
-        elif v <= -100000000: return f"EVT_AREA_FLAG({v + 110000000})"
-        elif v <= -80000000: return f"EVT_MAP_FLAG({v + 90000000})"
-        elif v <= -60000000: return f"EVT_FLAG({v + 70000000})"
-        elif v <= -40000000: return f"EVT_MAP_VAR({v + 50000000})"
-        elif v <= -20000000: return f"EVT_VAR({v + 30000000})"
+                return f"GameByte({v + 170000000})"
+        elif v <= -140000000: return f"AreaByte({v + 150000000})"
+        elif v <= -120000000: return f"GameFlag({v + 130000000})"
+        elif v <= -100000000: return f"AreaFlag({v + 110000000})"
+        elif v <= -80000000: return f"MapFlag({v + 90000000})"
+        elif v <= -60000000: return f"LocalFlag({v + 70000000})"
+        elif v <= -40000000: return f"MapVar({v + 50000000})"
+        elif v <= -20000000: return f"LocalVar({v + 30000000})"
 
     if arg == 0xFFFFFFFF:
         return "-1"
@@ -192,7 +192,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if "GotoMap" in script_text[4]:
                     map_, entryIdx = script_text[4].split("(",1)[1].split(")",1)[0].split(",")
                 if walkDistance and exitIdx and map_ and entryIdx:
-                    out += f"EvtScript {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
+                    out += f"EvtScript {name} = EVT_EXIT_WALK({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
                 else:
                     print(f"Unable to macro replace exit script {name}")
                     out += "\n".join(script_text) + "\n"
@@ -260,7 +260,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             tmp_out += "};\n"
             out += tmp_out
         elif struct["type"] == "AISettings":
-            tmp_out = f"NpcAISettings {name} = {{\n"
+            tmp_out = f"MobileAISettings {name} = {{\n"
             npcAISettings = bytes.read(struct["length"])
 
             i = x = 0
@@ -419,7 +419,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                             for x,datum in enumerate(data):
                                 if not datum == 0:
                                     end_pos = x
-                            tmp_out += INDENT + f".movement = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }},\n"
+                            tmp_out += INDENT + f".territory = { .temp = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }}},\n"
                     elif i == 0x1A0:
                         tmp_out += INDENT + f".{var_names[15]} = {{\n"
                         for x in range(16):
@@ -462,7 +462,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             while i < struct["length"]:
                 anim = unpack_from(">I", extraAnimations, i)[0]
                 if anim == 0xFFFFFFFF:
-                    tmp_out += INDENT + f"ANIM_END,\n"
+                    tmp_out += INDENT + f"ANIM_LIST_END,\n"
                 elif not anim == 0:
                     sprite_id =  (anim & 0x00FF0000) >> 16
                     palette_id = (anim & 0x0000FF00) >> 8
@@ -652,7 +652,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f" {entry[0]:.01f}f, {entry[1]:.01f}f, {entry[2]:.01f}f, {entry[3]:.01f}f }};\n"
 
         elif struct["type"] == "Header":
-            out += f"MapConfig N(config) = {{\n"
+            out += f"MapSettings N(settings) = {{\n"
 
             bytes.read(0x10)
 
@@ -667,7 +667,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             if bg == 0x80200000:
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
-                raise Exception(f"unknown MapConfig background {bg:X}")
+                raise Exception(f"unknown MapSettings background {bg:X}")
             #out += f"    .tattle = 0x{tattle:X},\n"
             INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
             out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"

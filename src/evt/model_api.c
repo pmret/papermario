@@ -1,5 +1,9 @@
 #include "model.h"
 
+extern AnimatedModelList gBattleMeshAnimationList;
+extern AnimatedModelList gWorldMeshAnimationList;
+extern AnimatedModelList* gCurrentMeshAnimationListPtr;
+
 void update_animated_models(void) {
     s32 i;
 

@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0124C00
+.double 0.1
+
+dlabel D_E0124C08
+.double 0.04
+
+dlabel D_E0124C10
+.double 0.001
+
+.section .text
+
 glabel pink_sparkles_main
 /* 412730 E0124000 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 412734 E0124004 F7B40050 */  sdc1      $f20, 0x50($sp)

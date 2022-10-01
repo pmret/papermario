@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E002C9D0
+.double 0.1
+
+.section .text
+
 glabel shattering_stones_main
 /* 33FE80 E002C000 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 33FE84 E002C004 F7B40050 */  sdc1      $f20, 0x50($sp)

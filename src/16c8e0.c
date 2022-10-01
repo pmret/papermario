@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nu/nusys.h"
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
@@ -11,6 +12,23 @@ s8 D_802809F5 = 0;
 s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
+
+BSS s32 bSavedPartner;
+BSS s32 bSavedOverrideFlags;
+BSS s32 D_8029DA38[2]; // unused?
+BSS s32 D_8029DA40;
+BSS s32 D_8029DA44;
+BSS s32 D_8029DA48;
+BSS s32 D_8029DA4C;
+BSS Camera D_8029DA50[ARRAY_COUNT(gCameras)];
+BSS f32 D_8029EFB0;
+BSS f32 D_8029EFB4;
+BSS f32 D_8029EFB8;
+BSS s32 D_8029EFBC;
+BSS s32 D_8029EFC0[10];
+BSS s32 D_8029EFE8[10];
+BSS s32 D_8029F010[10];
+BSS s16 D_8029F038[0x100];
 
 extern HudScript HES_HPDigit0;
 extern HudScript HES_HPDigit1;
@@ -34,19 +52,19 @@ s32 D_80280A30 = 0xFF;
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
+        EVT_SETF(LVar0, EVT_FLOAT(1.0))
         EVT_LOOP(10)
-            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
-            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, 256, LVar0, LVar0, EVT_FLOAT(1.0))
+            EVT_SUBF(LVar0, EVT_FLOAT(0.1))
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CALL(EnablePartnerBlur)
     EVT_CALL(PlaySoundAtActor, 0, 14)
-    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
-    EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
+    EVT_CALL(SetGoalPos, 256, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, 256, 10, 0, 0, 1)
     EVT_CALL(DisablePartnerBlur)
     EVT_RETURN
@@ -55,44 +73,28 @@ EvtScript BtlPutPartnerAway = {
 
 EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
+        EVT_SETF(LVar0, EVT_FLOAT(0.1))
         EVT_LOOP(20)
-            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05))
-            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, 256, LVar0, LVar0, EVT_FLOAT(1.0))
+            EVT_ADDF(LVar0, EVT_FLOAT(0.05))
+            EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, 0, 13)
-    EVT_CALL(GetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
-    EVT_IF_EQ(EVT_VAR(1), 0)
+    EVT_CALL(GetGoalPos, 256, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
+    EVT_IF_EQ(LVar1, 0)
         EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
     EVT_ELSE
         EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
     EVT_END_IF
-    EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ForceHomePos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetActorPos, 256, LVar0, LVar1, LVar2)
+    EVT_CALL(ForceHomePos, 256, LVar0, LVar1, LVar2)
     EVT_RETURN
     EVT_END
 };
 
-
-extern s32 D_8029DA30;
-extern s8 D_8029DA33;
-extern s32 D_8029DA34;
-extern s32 D_8029DA40;
-extern s32 D_8029DA44;
-extern s32 D_8029DA48;
-extern s32 D_8029DA4C;
-extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
-extern f32 D_8029EFB0;
-extern f32 D_8029EFB4;
-extern f32 D_8029EFB8;
-extern s32 D_8029EFBC;
-extern s32 D_8029EFC0[10];
-extern s32 D_8029EFE8[10];
-extern s32 D_8029F010[10];
 extern HudScript HES_HPBar;
 extern HudScript HES_Item_SmallStarPoint;
 extern HudScript HES_Item_StarPoint;
@@ -158,7 +160,7 @@ void initialize_battle(void) {
     gBattleStatus.flags1 = 0;
     gBattleStatus.flags2 = 0;
     gBattleStatus.flags1 = 0;
-    D_8029DA34 = gOverrideFlags;
+    bSavedOverrideFlags = gOverrideFlags;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     gBattleStatus.inputBitmask = -1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
@@ -187,7 +189,7 @@ void initialize_battle(void) {
         battleStatus->tattleFlags[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         gBattleStatus.flags2 |= BS_FLAGS2_40;
         increment_status_menu_disabled();
     } else {
@@ -195,7 +197,7 @@ void initialize_battle(void) {
     }
 
     create_generic_entity_world(NULL, func_8023ED5C);
-    func_8024EDC0();
+    btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = hud_element_create(&HES_HPBar);
@@ -226,7 +228,7 @@ void initialize_battle(void) {
         playerData->battlesCount++;
     }
 
-    D_8029DA30 = playerData->currentPartner;
+    bSavedPartner = playerData->currentPartner;
     if (gBattleStatus.flags2 & BS_FLAGS2_40) {
         playerData->currentPartner = PARTNER_TWINK;
     }
@@ -251,7 +253,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if (battleStatus->flags1 & BS_FLAGS1_80000 && gGameStatusPtr->unk_81 != 0) {
+        if ((battleStatus->flags1 & BS_FLAGS1_80000) && gGameStatusPtr->multiplayerEnabled != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[1] & inputBitmask;
@@ -406,7 +408,7 @@ void btl_update(void) {
     func_80266684();
     func_80266978();
     func_80266B14();
-    func_8024EE48();
+    btl_popup_messages_update();
     update_actor_shadows();
 
     if (battleStatus->unk_432 != -2) {
@@ -605,7 +607,7 @@ void btl_draw_ui(void) {
                 break;
         }
     }
-    btl_draw_popup_messages();
+    btl_popup_messages_draw_ui();
     draw_status_ui();
 }
 
@@ -617,7 +619,7 @@ void func_8023ED5C(void) {
     s32 i;
 
     if (gBattleState != BATTLE_STATE_0) {
-        func_8024EEA8();
+        btl_popup_messages_draw_world_geometry();
         if (battleStatus->initBattleCallback != NULL) {
             battleStatus->initBattleCallback();
         }
@@ -630,14 +632,14 @@ void func_8023ED5C(void) {
 
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                         renderTaskPtr->appendGfxArg = (void*)i;
-                        renderTaskPtr->appendGfx = func_80257B28;
+                        renderTaskPtr->appendGfx = appendGfx_enemy_actor;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
 
-                        if (actor->flags & ACTOR_FLAG_10000000) {
+                        if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                             renderTaskPtr->appendGfxArg = actor;
-                            renderTaskPtr->appendGfx = func_8025595C;
+                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_blur;
                             renderTaskPtr->distance = actor->currentPos.z;
                             renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                             queue_render_task(renderTaskPtr);
@@ -645,7 +647,7 @@ void func_8023ED5C(void) {
 
                         if (battleStatus->unk_92 & 1) {
                             renderTaskPtr->appendGfxArg = actor;
-                            renderTaskPtr->appendGfx = func_80257B68;
+                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_decorations;
                             renderTaskPtr->distance = actor->currentPos.z;
                             renderTaskPtr->renderMode = actor->renderMode;
                             queue_render_task(renderTaskPtr);
@@ -656,14 +658,14 @@ void func_8023ED5C(void) {
                 actor = battleStatus->partnerActor;
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
-                    renderTaskPtr->appendGfx = func_80257B48;
+                    renderTaskPtr->appendGfx = appendGfx_partner_actor;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & ACTOR_FLAG_10000000) {
+                    if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
-                        renderTaskPtr->appendGfx = func_8025599C;
+                        renderTaskPtr->appendGfx = appendGfx_partner_actor_blur;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
@@ -681,14 +683,14 @@ void func_8023ED5C(void) {
                 actor = battleStatus->playerActor;
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
-                    renderTaskPtr->appendGfx = func_80257DA4;
+                    renderTaskPtr->appendGfx = appendGfx_player_actor;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & ACTOR_FLAG_10000000) {
+                    if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
-                        renderTaskPtr->appendGfx = func_80254C50;
+                        renderTaskPtr->appendGfx = appendGfx_player_actor_blur;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
@@ -901,8 +903,8 @@ void btl_update_starpoints_display(void) {
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], 2);
-                hud_element_set_flags(D_8029EFE8[i], 2);
+                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
 
             posX = D_8029DA40;
@@ -926,7 +928,7 @@ void btl_update_starpoints_display(void) {
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], 2);
+                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
         }
     }
@@ -965,14 +967,14 @@ void btl_restore_world_cameras(void) {
     playerStatus->position.y = D_8029EFB4;
     playerStatus->position.z = D_8029EFB8;
 
-    if (D_8029DA34 & 0x80) {
+    if (bSavedOverrideFlags & GLOBAL_OVERRIDES_80) {
         gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
         gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     if (gBattleStatus.flags2 & 0x40) {
-        playerData->currentPartner = D_8029DA33;
+        playerData->currentPartner = bSavedPartner;
     }
 }
 
@@ -1024,10 +1026,10 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow.id);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->debuffEffect);
+    remove_effect(actor->disableEffect);
 
-    if (actor->unk_200 != NULL) {
-        actor->unk_200[3][9] = 0;
+    if (actor->attackResultEffect != NULL) {
+        actor->attackResultEffect->data.attackResultText->unk_24 = 0;
     }
 
     battleStatus = &gBattleStatus;
@@ -1067,10 +1069,10 @@ void btl_delete_player_actor(Actor* player) {
 
     delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
-    remove_effect(player->debuffEffect);
+    remove_effect(player->disableEffect);
 
-    if (player->unk_200 != NULL) {
-        player->unk_200[3][9] = 0;
+    if (player->attackResultEffect != NULL) {
+        player->attackResultEffect->data.attackResultText->unk_24 = 0;
     }
 
     heap_free(movement);

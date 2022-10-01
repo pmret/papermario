@@ -3,7 +3,7 @@
 
 #define NAMESPACE action_command_jump
 
-extern s32 D_802941C0;
+extern s32 D_802941C0[];
 
 // icon IDs for hud elements
 extern HudScript HES_AButton;
@@ -15,7 +15,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     gBattleStatus.unk_82 = 1;
-    gBattleStatus.unk_434 = &D_802941C0;
+    gBattleStatus.unk_434 = D_802941C0;
     gBattleStatus.unk_86 = 0;
 
     if (gBattleStatus.unk_83 == 0) {
@@ -191,13 +191,13 @@ void N(update)(void) {
 }
 
 void N(draw_hud_elements)(void) {
-	hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
-	if (!(gGameStatusPtr->demoFlags & 1)) {
-		hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
-	}
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
+    if (!(gGameStatusPtr->demoFlags & 1)) {
+        hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
+    }
 }
 
 void N(free_hud_elements)(void) {
-	hud_element_free(gActionCommandStatus.hudElements[0]);
-	hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[1]);
 }

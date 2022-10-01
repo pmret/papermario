@@ -1,13 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct FlameFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-} FlameFXData; // size = 0x??
-
 void flame_appendGfx(void* effect);
 
 u32 D_E0040840[2] = { 0xFF6DFF5C, 0x66BFFF4B };
@@ -24,7 +17,7 @@ void flame_init(void) {
 INCLUDE_ASM(s32, "effects/flame", flame_update);
 
 void flame_render(EffectInstance* effect) {
-    FlameFXData* effect32 = effect->data;
+    FlameFXData* data = effect->data.flame;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
@@ -34,8 +27,8 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], effect32->unk_04, effect32->unk_08, effect32->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
-    
+    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], data->pos.x, data->pos.y, data->pos.z, 1.0f, &outX, &outY, &outZ, &outS);
+
     outDist = outZ + 5000;
     if (outDist < 0) {
         outDist = 0;
@@ -46,7 +39,7 @@ void flame_render(EffectInstance* effect) {
     if (outS < 0.01 && -0.01 < outS) {
         outDist = 0;
     }
-    
+
     renderTaskPtr->appendGfx = flame_appendGfx;
     renderTaskPtr->distance = -outDist;
     renderTaskPtr->appendGfxArg = effect;

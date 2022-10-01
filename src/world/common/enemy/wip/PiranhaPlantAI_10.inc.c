@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 phi_s7 = FALSE;
@@ -166,7 +166,7 @@ void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
             }
         }
 
-        if (!phi_s7 && (!(npc->flags & 8) || phi_fp)) {
+        if (!phi_s7 && (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || phi_fp)) {
             sp20 = npc->pos.x;
             sp38 = 400.0f;
             sp28 = npc->pos.z;
@@ -178,8 +178,8 @@ void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
         }
 
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+        ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
         npc->duration = enemy->varTable[10];
         script->functionTemp[0] = 11;
     }

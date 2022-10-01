@@ -11,5 +11,3 @@ dlabel D_E00685BC
 dlabel D_E00685F4
 .word 0x09001F78, 0x09001F78, 0x09002078
 
-dlabel D_E0068600
-.double 0.97, 0.0

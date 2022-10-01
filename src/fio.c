@@ -15,7 +15,7 @@ s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
 void fio_erase_flash(s32 pageNum);
 
 s32 get_spirits_rescued(void) {
-    s32 storyProgress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
+    s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
     s32 ret = 7;
 
     if (storyProgress < evt_get_variable(NULL, STORY_CH1_STAR_SPIRIT_RESCUED)) {

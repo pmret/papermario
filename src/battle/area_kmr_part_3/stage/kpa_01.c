@@ -4,15 +4,15 @@
 #define NAMESPACE b_area_kmr_part_3_kpa_01
 
 EvtScript N(80234CB0) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_CALL(SetTexPanner, LW(10), 1)
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_CALL(SetTexPanner, LVarA, 1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, 1, 0, LW(0), LW(1))
-        EVT_ADD(LW(0), 32768)
-        EVT_ADD(LW(1), 0)
-        EVT_WAIT_FRAMES(5)
+        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, LVar1)
+        EVT_ADD(LVar0, 32768)
+        EVT_ADD(LVar1, 0)
+        EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END

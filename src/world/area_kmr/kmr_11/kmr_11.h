@@ -2,6 +2,8 @@
 /// @brief Goomba Region - Goomba King's Castle
 
 #include "common.h"
+#include "../kmr.h"
+#include "message_ids.h"
 #include "map.h"
 #include "../kmr.h"
 

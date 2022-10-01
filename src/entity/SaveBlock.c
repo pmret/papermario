@@ -1,22 +1,57 @@
 #include "common.h"
 #include "fio.h"
+#include "ld_addrs.h"
+#include "entity.h"
+#include "message_ids.h"
 
-void entity_SaveBlock_setupGfx();
+extern Mtx Entity_SaveBlock_Mtx;
+extern Gfx Entity_SaveBlock_RenderContent[];
+extern Gfx Entity_SaveBlock_RenderBlock[];
+extern Gfx Entity_SaveBlock_RenderNone[];
 
-void entity_Shadow_init(Shadow* shadow) {
-    shadow->scale.x = 0.1f;
-    shadow->scale.y = 0.1f;
-    shadow->scale.z = 0.1f;
+extern s32 Entity_SaveBlock_ScriptResume[];
+
+BSS s32 SaveBlockTutorialPrinterClosed;
+BSS s32 SaveBlockResultPrinterClosed;
+BSS MessagePrintState* SaveBlockTutorialPrinter;
+BSS MessagePrintState* SaveBlockResultPrinter;
+
+void entity_SaveBlock_setupGfx(s32 index) {
+    Gfx* gfxPos = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(index);
+    SaveBlockData* blockData = entity->dataBuf.saveBlock;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Gfx* dlist;
+
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
+    sp18[3][1] += 12.5f;
+    guRotateF(sp58, blockData->angle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp58);
+    guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetRenderMode(gfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
+    gSPDisplayList(gfxPos++, Entity_SaveBlock_RenderContent);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+
+    dlist = ENTITY_ADDR(entity, Gfx*, Entity_SaveBlock_RenderBlock);
+    guMtxL2F(sp58, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
+    sp58[3][1] += 12.5f;
+    gDPPipeSync(gfxPos++);
+    guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetRenderMode(gfxPos++, G_RM_AA_XLU_SURF | Z_CMP, G_RM_AA_XLU_SURF2 | Z_CMP);
+    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
+    gSPDisplayList(gfxPos++, dlist);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+
+    gMasterGfxPos = gfxPos;
 }
-
-s32 entity_can_collide_with_jumping_player(Entity* entity) {
-    if ((entity->collisionFlags & 4) && (gPlayerStatus.flags & 2)) {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-INCLUDE_ASM(s32, "entity/SaveBlock", entity_SaveBlock_setupGfx);
 
 void entity_SaveBlock_idle(Entity* entity) {
     SaveBlockData* data;
@@ -45,10 +80,10 @@ void entity_SaveBlock_save_data(void) {
 }
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
-    if (!get_global_flag(EVT_SAVE_FLAG(95))) {
+    if (!get_global_flag(GF_Tutorial_SaveBlock)) {
         SaveBlockTutorialPrinterClosed = FALSE;
-        msg_get_printer_for_msg(MESSAGE_ID(0x1D, 0x0), &SaveBlockTutorialPrinterClosed);
-        set_global_flag(EVT_SAVE_FLAG(95));
+        msg_get_printer_for_msg(MSG_Menus_Tutorial_SaveBlock, &SaveBlockTutorialPrinterClosed);
+        set_global_flag(GF_Tutorial_SaveBlock);
         return;
     }
 
@@ -65,12 +100,12 @@ void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
 void entity_SaveBlock_show_choice_message(void) {
     SaveBlockTutorialPrinterClosed = FALSE;
     SaveBlockResultPrinterClosed = FALSE;
-    SaveBlockResultPrinter = msg_get_printer_for_msg(MESSAGE_ID(0x1D, 0x4), &SaveBlockResultPrinterClosed);
-    SaveBlockTutorialPrinter = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0xA), &SaveBlockTutorialPrinterClosed);
+    SaveBlockResultPrinter = msg_get_printer_for_msg(MSG_Menus_SavePrompt, &SaveBlockResultPrinterClosed);
+    SaveBlockTutorialPrinter = msg_get_printer_for_msg(MSG_Choice_000A, &SaveBlockTutorialPrinterClosed);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_msg(MESSAGE_ID(0x1D, 0x5), SaveBlockResultPrinter);
+    msg_printer_load_msg(MSG_Menus_SaveComplete, SaveBlockResultPrinter);
     sfx_play_sound(SOUND_10);
 }
 
@@ -83,7 +118,7 @@ void entity_SaveBlock_wait_for_close_result(Entity* entity) {
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
     if (SaveBlockTutorialPrinterClosed) {
         if (SaveBlockTutorialPrinter->currentOption == 1) {
-            set_entity_commandlist(entity, &D_802E99DC);
+            set_entity_commandlist(entity, Entity_SaveBlock_ScriptResume);
         } else {
             exec_entity_commandlist(entity);
         }
@@ -98,3 +133,46 @@ void entity_SaveBlock_init(Entity* entity) {
     entity->renderSetupFunc = entity_SaveBlock_setupGfx;
     data->angle = 8;
 }
+
+EntityScript Entity_SaveBlock_Script = {
+    es_SetCallback(entity_SaveBlock_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_SaveBlock_pause_game)
+    es_Call(entity_block_hit_init_scale)
+    es_SetCallback(entity_block_hit_animate_scale, 6)
+    es_SetCallback(NULL, 2)
+    es_Call(entity_SaveBlock_show_tutorial_message)
+    es_SetCallback(entity_SaveBlock_wait_for_close_tutorial, 0)
+    es_SetCallback(NULL, 14)
+    es_Call(entity_SaveBlock_show_choice_message)
+    es_SetCallback(entity_SaveBlock_wait_for_close_choice, 0)
+    es_Call(entity_SaveBlock_save_data)
+    es_Call(entity_SaveBlock_show_result_message)
+    es_SetCallback(entity_SaveBlock_wait_for_close_result, 0)
+    es_Call(entity_SaveBlock_resume_game)
+    es_SetCallback(NULL, 12)
+    es_Restart
+    es_End
+};
+
+EntityScript Entity_SaveBlock_ScriptResume = {
+    es_Call(entity_SaveBlock_resume_game)
+    es_SetCallback(NULL, 2)
+    es_Jump(Entity_SaveBlock_Script)
+    es_End
+};
+
+EntityModelScript Entity_SaveBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_SaveBlock_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER3);
+
+EntityBlueprint Entity_SavePoint = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .typeDataSize = sizeof(SaveBlockData),
+    .renderCommandList = Entity_SaveBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_SaveBlock_init,
+    .updateEntityScript = Entity_SaveBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    { .dma = ENTITY_ROM(SaveBlock) },
+    .entityType = ENTITY_TYPE_SAVE_POINT,
+    .aabbSize = { 25, 25, 25 }
+};

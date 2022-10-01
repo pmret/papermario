@@ -36,8 +36,8 @@ EffectInstance* fire_breath_main(
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data = shim_general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data != NULL);
+    data = effect->data.fireBreath = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.fireBreath != NULL);
 
     data->type = type;
     data->numChildren = numExtra;
@@ -59,8 +59,8 @@ EffectInstance* fire_breath_main(
     }
 
     data->unk_30 = data->scale;
-    data->maxLifetime = lifetime;
-    data->lifetime = lifetime;
+    data->lifeTime = lifetime;
+    data->timeLeft = lifetime;
     data->spawnTimer = 0;
     data->alpha = 255;
     data->unk_5C = 0.0f;
@@ -92,31 +92,31 @@ void fire_breath_init(EffectInstance* effect) {
 }
 
 void fire_breath_update(EffectInstance* effect) {
-    FireBreathFXData* data = effect->data;
-    s32 maxLifetime;
-    s32 lifetime;
+    FireBreathFXData* data = effect->data.fireBreath;
+    s32 lifeTime;
+    s32 timeLeft;
     s32 spawnTimer;
 
-    data->lifetime--;
+    data->timeLeft--;
     data->unk_5C = (data->spawnTimer * 4.0f) / 10.0f;
     data->spawnTimer++;
 
-    if (data->lifetime < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    lifetime = data->lifetime;
-    maxLifetime = data->maxLifetime;
+    timeLeft = data->timeLeft;
+    lifeTime = data->lifeTime;
     spawnTimer = data->spawnTimer;
 
-    if (lifetime >= 6 && data->type == FIRE_BREATH_LARGE) {
+    if (timeLeft >= 6 && data->type == FIRE_BREATH_LARGE) {
         data->scale += (2.5 - data->scale) * 0.05;
     }
 
-    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / maxLifetime);
-    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / maxLifetime);
-    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / maxLifetime);
+    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / lifeTime);
+    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / lifeTime);
+    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / lifeTime);
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->unk_60 += (f32) spawnTimer * 0.01;
@@ -129,37 +129,37 @@ void fire_breath_update(EffectInstance* effect) {
         shim_load_effect(EFFECT_FIRE_BREATH);
         spawned = fire_breath_main(
             data->type, data->initPos.x, data->initPos.y, data->initPos.z, data->endPos.x, data->endPos.y,
-            data->endPos.z, data->numChildren - 1, data->spawnDelay, maxLifetime
+            data->endPos.z, data->numChildren - 1, data->spawnDelay, lifeTime
         );
 
-        ((FireBreathFXData*)spawned->data)->primR = data->primR;
-        ((FireBreathFXData*)spawned->data)->primG = data->primG;
-        ((FireBreathFXData*)spawned->data)->primB = data->primB;
-        ((FireBreathFXData*)spawned->data)->envR = data->envR;
-        ((FireBreathFXData*)spawned->data)->envG = data->envG;
-        ((FireBreathFXData*)spawned->data)->envB = data->envB;
-        ((FireBreathFXData*)spawned->data)->unk_30 = ((FireBreathFXData*)spawned->data)->scale = data->unk_30;
-        ((FireBreathFXData*)spawned->data)->unk_34 = data->unk_34;
-        ((FireBreathFXData*)spawned->data)->scaleChangeFactor = data->scaleChangeFactor;
+        spawned->data.fireBreath->primR = data->primR;
+        spawned->data.fireBreath->primG = data->primG;
+        spawned->data.fireBreath->primB = data->primB;
+        spawned->data.fireBreath->envR = data->envR;
+        spawned->data.fireBreath->envG = data->envG;
+        spawned->data.fireBreath->envB = data->envB;
+        spawned->data.fireBreath->unk_30 = spawned->data.fireBreath->scale = data->unk_30;
+        spawned->data.fireBreath->unk_34 = data->unk_34;
+        spawned->data.fireBreath->scaleChangeFactor = data->scaleChangeFactor;
     }
 
-    if (lifetime < 10 && data->type == FIRE_BREATH_LARGE) {
-        data->alpha = lifetime * 25;
+    if (timeLeft < 10 && data->type == FIRE_BREATH_LARGE) {
+        data->alpha = timeLeft * 25;
     }
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->scale += (0.3 - data->scale) * 0.008;
-        data->alpha = (lifetime * 224) / maxLifetime;
+        data->alpha = (timeLeft * 224) / lifeTime;
     }
 
     if (data->type == FIRE_BREATH_TINY) {
         data->scale += (data->unk_34 - data->scale) * data->scaleChangeFactor;
-        data->alpha = (lifetime * 224) / maxLifetime;
+        data->alpha = (timeLeft * 224) / lifeTime;
     }
 }
 
 void fire_breath_render(EffectInstance* effect) {
-    FireBreathFXData* data = effect->data;
+    FireBreathFXData* data = effect->data.fireBreath;
     RenderTask renderTask;
     RenderTask* retTask;
     RenderTask* renderTaskPointer = &renderTask;
@@ -175,13 +175,13 @@ void fire_breath_render(EffectInstance* effect) {
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
     retTask = shim_queue_render_task(renderTaskPointer);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void fire_breath_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    FireBreathFXData* data = ((EffectInstance*)effect)->data;
+    FireBreathFXData* data = ((EffectInstance*)effect)->data.fireBreath;
     s32 type = data->type;
     s32 envAlpha = (data->unk_5C - (s32)data->unk_5C) * 256.0f;
     Gfx* dlist = D_E006EC00[type];

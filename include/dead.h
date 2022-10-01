@@ -1,7 +1,6 @@
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
-
 // There can be multiple invalid references to a symbol from the dead code,
 // so some symbols here have a "2" suffix.
 
@@ -80,12 +79,12 @@
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_msg dead_set_message_msg
 #define gPlayerData dead_gPlayerData
-#define gPartnerPopupProperties D_80094900
+#define gPartnerPopupProperties dead_gPartnerPopupProperties
 #define increment_status_menu_disabled dead_increment_status_menu_disabled
 #define decrement_status_menu_disabled dead_decrement_status_menu_disabled
 #define sync_status_menu dead_sync_status_menu
 #define set_max_SP dead_set_max_SP
-#define get_current_map_header dead_get_current_map_header
+#define get_current_map_settings dead_get_current_map_settings
 #define gGameStatusPtr dead_gGameStatusPtr
 #define guTranslateF dead_guTranslateF
 #define get_model_from_list_index dead_get_model_from_list_index

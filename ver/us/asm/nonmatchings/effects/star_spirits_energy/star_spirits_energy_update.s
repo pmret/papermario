@@ -1,6 +1,40 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0122CA0
+.double 0.04
+
+dlabel D_E0122CA8
+.double 1.235631
+
+dlabel D_E0122CB0
+.double 0.01
+
+dlabel D_E0122CB8
+.double 0.3
+
+dlabel D_E0122CC0
+.double 0.01
+
+dlabel D_E0122CC8
+.double 0.3
+
+dlabel D_E0122CD0
+.double 0.6
+
+dlabel D_E0122CD8
+.double 0.01
+
+dlabel D_E0122CE0
+.double 1.2
+
+dlabel D_E0122CE8
+.double 0.01
+
+.section .text
+
 glabel star_spirits_energy_update
 /* 40C71C E012217C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 40C720 E0122180 AFBF001C */  sw        $ra, 0x1c($sp)

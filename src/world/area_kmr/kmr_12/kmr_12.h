@@ -2,6 +2,8 @@
 /// @brief Goomba Region - Goomba Road 4
 
 #include "common.h"
+#include "../kmr.h"
+#include "message_ids.h"
 #include "map.h"
 #include "../kmr.h"
 
@@ -17,5 +19,3 @@ extern EvtScript N(PlayMusic);
 extern EvtScript N(MakeEntities);
 extern EvtScript N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);
-
-extern s32 D_802EAFDC;

@@ -30,8 +30,8 @@ void fx_86_appendGfx(void* effect);
 EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect134* data;
-    Effect134* part;
+    Effect86FXData* data;
+    Effect86FXData* part;
     s32 numParts = 1;
 
     bp.init = fx_86_init;
@@ -45,7 +45,7 @@ EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.unk_86 = data;
     part = data;
 
     ASSERT(data != NULL);
@@ -76,7 +76,7 @@ void fx_86_init(EffectInstance* effect) {
 }
 
 void fx_86_update(EffectInstance* effect) {
-    Effect134* data = effect->data;
+    Effect86FXData* data = effect->data.unk_86;
 
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
@@ -103,13 +103,13 @@ void fx_86_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void fx_86_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
-    Effect134* part = ((EffectInstance*)effect)->data;
+    Effect86FXData* part = ((EffectInstance*)effect)->data.unk_86;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 primAlpha = part->unk_24;
     s32 dlistIdx = part->unk_00;

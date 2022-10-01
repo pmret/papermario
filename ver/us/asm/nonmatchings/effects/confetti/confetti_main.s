@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E0088D30
+.word LE00881F4_38AFE4, LE00881FC_38AFEC, LE0088204_38AFF4, LE008820C_38AFFC, LE00881F4_38AFE4, LE00881FC_38AFEC, LE0088204_38AFF4, 0
+
+dlabel jtbl_E0088D50
+.word LE0088230_38B020, LE0088240_38B030, LE0088250_38B040, LE0088250_38B040, LE0088230_38B020, LE0088240_38B030, LE0088250_38B040, 0
+
+dlabel D_E0088D70
+.word 0xE0088374, 0xE0088374, 0xE0088374, 0xE0088374, 0xE0088374, 0xE0088374, 0xE0088374, 0x00000000
+
+dlabel D_E0088D90
+.double 0.02
+
+dlabel D_E0088D98
+.double -0.02
+
+.section .text
+
 glabel confetti_main
 /* 38AF6C E008817C 27BDFF78 */  addiu     $sp, $sp, -0x88
 /* 38AF70 E0088180 F7B40058 */  sdc1      $f20, 0x58($sp)

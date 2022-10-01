@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00BEB00
+.double 0.98
+
+dlabel D_E00BEB08
+.double -0.8
+
+dlabel D_E00BEB10
+.double -0.1
+
+dlabel D_E00BEB18
+.double 1.2
+
+dlabel D_E00BEB20
+.double 0.9, 0.0
+
+.section .text
+
 glabel water_splash_update
 /* 3BC304 E00BE3A4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3BC308 E00BE3A8 AFBF0010 */  sw        $ra, 0x10($sp)

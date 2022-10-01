@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
-    cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -x c -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -101,7 +101,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -118,9 +118,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
+    )
+
+    ninja.rule("dead_cc",
+        description="dead_cc $in",
+        command=f"mips-linux-gnu-objcopy --redefine-sym sqrtf=dead_sqrtf $in $out",
     )
 
     ninja.rule("bin",
@@ -146,6 +151,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("bin_inc_c",
         description="bin_inc_c $out",
         command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
+    )
+
+    ninja.rule("pal_inc_c",
+        description="pal_inc_c $out",
+        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out $c_name",
     )
 
     ninja.rule("yay0",
@@ -197,6 +207,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(f"compiler_type = \"gcc\"\n")
         f.write(
 """
 [preserve_macros]
@@ -242,8 +253,6 @@ class Configure:
 
         split.main(
             splat_file,
-            None,
-            str(self.version_path / "baserom.z64"),
             modes,
             verbose=False,
         )
@@ -322,7 +331,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c":
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c" or task == "pal_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -385,19 +394,34 @@ class Configure:
 
                 cflags = cflags.replace("gcc_272", "")
 
-                build(entry.object_path, entry.src_paths, task, variables={
-                    "cflags": cflags,
-                    "cppflags": f"-DVERSION_{self.version.upper()}",
-                })
+                # Dead cod
+                if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
+                    obj_path = str(entry.object_path)
+                    init_obj_path = Path(obj_path + ".dead")
+                    build(init_obj_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
+                    build(
+                        entry.object_path,
+                        [init_obj_path],
+                        "dead_cc",
+                    )
+                # Not dead cod
+                else:
+                    build(entry.object_path, entry.src_paths, task, variables={
+                        "cflags": cflags,
+                        "cppflags": f"-DVERSION_{self.version.upper()}",
+                    })
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
                 if isinstance(seg, segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
                         if isinstance(seg, segtypes.n64.img.N64SegImg):
                             flags = ""
-                            if seg.flip_horizontal:
+                            if seg.n64img.flip_h:
                                 flags += "--flip-x "
-                            if seg.flip_vertical:
+                            if seg.n64img.flip_v:
                                 flags += "--flip-y "
 
                             src_paths = [seg.out_path().relative_to(ROOT)]
@@ -429,7 +453,7 @@ class Configure:
                                 addr=seg.vram_start, in_segment=True, type="data", define=True
                             )
                             vars = {"c_name": c_sym.name}
-                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c", vars)
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "pal_inc_c", vars)
             elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
@@ -438,9 +462,9 @@ class Configure:
                 build(entry.object_path, [compressed_path], "bin")
             elif isinstance(seg, segtypes.n64.img.N64SegImg):
                 flags = ""
-                if seg.flip_horizontal:
+                if seg.n64img.flip_h:
                     flags += "--flip-x "
-                if seg.flip_vertical:
+                if seg.n64img.flip_v:
                     flags += "--flip-y "
 
                 bin_path = entry.object_path.with_suffix(".bin")
@@ -708,13 +732,13 @@ if __name__ == "__main__":
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
-        if "Free Software Foundation" in exec_shell(["cpp-11", "--version"]):
-            args.cpp = "cpp-11"
+        if "Free Software Foundation" in exec_shell(["cpp-12", "--version"]):
+            args.cpp = "cpp-12"
         else:
             print("error: system C preprocessor is not GNU!")
             print("This is a known issue on macOS - only clang's cpp is installed by default.")
             print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-            print("    ./configure --cpp cpp-11")
+            print("    ./configure --cpp cpp-12")
             exit(1)
 
     # default version behaviour is to only do those that exist

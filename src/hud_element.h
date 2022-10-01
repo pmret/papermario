@@ -1,7 +1,7 @@
 #ifndef HUD_ELEMENT_H
 #define HUD_ELEMENT_H
 
-#include "common.h"
+#include "common_structs.h"
 #include "icon_offsets.h"
 
 #define HUD_ELEMENT_BATTLE_ID_MASK 0x800
@@ -108,6 +108,11 @@ enum {
     HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING = 2,
 };
 
+typedef struct HudCacheEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ u8* data;
+} HudCacheEntry; // size = 0x08;
+
 typedef struct PopupMenu {
     /* 0x000 */ HudScript* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
@@ -138,7 +143,7 @@ typedef struct Shop {
     /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
-    /* 0x014 */ ShopItemLocation* ItemDataPositions;
+    /* 0x014 */ ShopItemLocation* itemDataPositions;
     /* 0x018 */ ShopItemData* staticInventory;
     /* 0x01C */ ShopSellPriceData* staticPriceList;
     /* 0x020 */ s32 costIconID;

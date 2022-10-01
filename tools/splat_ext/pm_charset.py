@@ -35,7 +35,7 @@ class N64SegPm_charset(N64Segment):
             self.rasters.append(raster)
 
     def split(self, rom_bytes):
-        fs_dir = options.get_asset_path() / self.dir / self.name
+        fs_dir = options.opts.asset_path / self.dir / self.name
         fs_dir.mkdir(parents=True, exist_ok=True)
 
         for i, raster in enumerate(self.rasters):
@@ -52,7 +52,7 @@ class N64SegPm_charset(N64Segment):
         self.width = self.yaml[3]
         self.height = self.yaml[4]
 
-        fs_dir = options.get_asset_path() / self.dir / self.name
+        fs_dir = options.opts.asset_path / self.dir / self.name
 
         return [LinkerEntry(
             self,

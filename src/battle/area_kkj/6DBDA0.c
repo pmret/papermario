@@ -9,7 +9,7 @@ ApiStatus func_80218000_6DBDA0(Evt* script, s32 isInitialCall) {
 
     D_802187E4_6DC584 += 9;
     D_802187E4_6DC584 = clamp_angle(D_802187E4_6DC584);
-    actor->unk_19A = sin_rad((D_802187E4_6DC584 * TAU) / 360.0f) * 3.0f;
+    actor->unk_19A = sin_rad(DEG_TO_RAD(D_802187E4_6DC584)) * 3.0f;
 
     return ApiStatus_DONE2;
 }
@@ -80,13 +80,13 @@ ApiStatus func_8021849C_6DC23C(Evt* script, s32 isInitialCall) {
     s32 entityIndex = script->varTable[9];
     Entity* entity = get_entity_by_index(entityIndex);
 
-    entity->unk_07 = 0;
-    collisionStatus->lastWallHammered = entityIndex | 0x4000;
-    playerStatus->flags |= 0x1000000;
-    entity->collisionFlags = 0x40;
+    entity->collisionTimer = 0;
+    collisionStatus->lastWallHammered = entityIndex | COLLISION_WITH_ENTITY_BIT;
+    playerStatus->flags |= PS_FLAGS_1000000;
+    entity->collisionFlags = ENTITY_COLLISION_PLAYER_HAMMER;
     playerStatus->actionState = ACTION_STATE_HAMMER;
     entity->blueprint->fpHandleCollision(entity);
-    entity->unk_07 = 0xA;
+    entity->collisionTimer = 10;
     entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
     collisionStatus->lastWallHammered = -1;
 

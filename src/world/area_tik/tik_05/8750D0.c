@@ -13,7 +13,7 @@
 
 #include "world/common/CheckItemFlags40.inc.c"
 
-extern s32 D_000001E4;
+extern s16 Entity_ScriptSpring_AnimLaunch[];
 
 ApiStatus func_8024093C_8756FC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -23,7 +23,7 @@ ApiStatus func_8024093C_8756FC(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, &D_000001E4);
+    play_model_animation(entity->virtualModelIndex, Entity_ScriptSpring_AnimLaunch);
     return ApiStatus_DONE2;
 }
 

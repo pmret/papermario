@@ -50,10 +50,10 @@ ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    u16 hasLocation = evt_get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 changedLocation = evt_get_variable(script, EVT_SAVE_FLAG(1769));
-    u16 locTown = evt_get_variable(script, EVT_SAVE_VAR(350));
-    u16 locMap = evt_get_variable(script, EVT_SAVE_VAR(351));
+    u16 hasLocation = evt_get_variable(script, GF_Quizmo_HasLocation);
+    u16 changedLocation = evt_get_variable(script, GF_Quizmo_ChangedLocation);
+    u16 locTown = evt_get_variable(script, GB_ChuckQuizmo_Town);
+    u16 locMap = evt_get_variable(script, GB_ChuckQuizmo_Map);
     s32 var;
     s32 i;
 
@@ -74,16 +74,16 @@ ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
         if (rand_int(100) < 30) {
             locMap = rand_int(numMaps - 1);
             locTown = curTown1;
-            evt_set_variable(script, EVT_SAVE_VAR(350), locTown);
-            evt_set_variable(script, EVT_SAVE_VAR(351), locMap);
+            evt_set_variable(script, GB_ChuckQuizmo_Town, locTown);
+            evt_set_variable(script, GB_ChuckQuizmo_Map, locMap);
             hasLocation = TRUE;
         }
     }
 
-    evt_set_variable(script, EVT_SAVE_FLAG(1768), hasLocation);
-    evt_set_variable(script, EVT_SAVE_FLAG(1769), changedLocation);
-    numAnswered = evt_get_variable(NULL, EVT_SAVE_VAR(352));
-    progress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
+    evt_set_variable(script, GF_Quizmo_HasLocation, hasLocation);
+    evt_set_variable(script, GF_Quizmo_ChangedLocation, changedLocation);
+    numAnswered = evt_get_variable(NULL, GB_CompletedQuizzes);
+    progress = evt_get_variable(NULL, GB_StoryProgress);
 
     // vanilla bug? never checks the final requirement in the list
     for (i = 0; i < 8; i++) {
@@ -111,8 +111,8 @@ ApiStatus N(Quizmo_RenderInit)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
     npc->onRender = N(Quizmo_NPC_OnRender);
-    npc->blurBuf = heap_malloc(8);
-    *((s32*)npc->blurBuf) = 0;
+    npc->blur.quizmo = heap_malloc(sizeof(*npc->blur.quizmo));
+    npc->blur.quizmo->flags = 0;
 
     return ApiStatus_DONE1;
 }
@@ -126,7 +126,7 @@ ApiStatus N(Quizmo_NPC_Aux_Impl)(Evt* script, s32 isInitialCall) {
 void N(Quizmo_NPC_OnRender)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
-    if (*((s32*)npc->blurBuf) & 1) {
+    if (npc->blur.quizmo->flags & 1) {
         clamp_angle(-camera->currentYaw);
     }
 }
@@ -150,8 +150,8 @@ ApiStatus N(Quizmo_HideWorld)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
 
-            if (itemEntity != NULL && itemEntity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX) {
-                itemEntity->flags |= ENTITY_FLAGS_8000000;
+            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAGS_10) {
+                itemEntity->flags |= ITEM_ENTITY_FLAGS_8000000;
             }
         }
 
@@ -222,7 +222,7 @@ ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall) {
         gPlayerData.quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
+    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(NULL, GB_CompletedQuizzes)]) {
         script->varTable[0] = 1;
         gPlayerData.quizzesCorrect++;
     } else {
@@ -233,24 +233,24 @@ ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
-    EffectDataQuizStage* stageData;
+    QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
         N(Quizmo_StageEffect) = fx_quizmo_stage(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)));
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)));
         N(Quizmo_AudienceEffect) = fx_quizmo_audience(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)));
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)));
         N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)),
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)),
             1.0f, 0);
 
-        stageData = N(Quizmo_StageEffect)->data;
+        stageData = N(Quizmo_StageEffect)->data.quizmoStage;
         stageData->microphoneRaiseAmt = 0;
         stageData->leftWallRaiseAmt = 0;
         stageData->rightWallRaiseAmt = 0;
@@ -258,7 +258,7 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
         stageData->rearWallRaiseAmt = 0;
     }
 
-    stageData = N(Quizmo_StageEffect)->data;
+    stageData = N(Quizmo_StageEffect)->data.quizmoStage;
 
     stageData->leftWallRaiseAmt += 10;
     stageData->podiumRaiseAmt += 10;
@@ -274,14 +274,14 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
-    EffectDataQuizStage* stageData;
+    QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
         N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
         N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
 
-    stageData = N(Quizmo_StageEffect)->data;
+    stageData = N(Quizmo_StageEffect)->data.quizmoStage;
     stageData->microphoneRaiseAmt -= 10;
     stageData->leftWallRaiseAmt -= 10;
     stageData->rightWallRaiseAmt -= 10;
@@ -299,13 +299,13 @@ ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_SetStageLightsDelay)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizStage*)N(Quizmo_StageEffect)->data)->lightScrollDelay = evt_get_variable(script, *script->ptrReadPos);
+    N(Quizmo_StageEffect)->data.quizmoStage->lightScrollDelay = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);
-    EffectDataQuizStage* stageData = N(Quizmo_StageEffect)->data;
+    QuizmoStageFXData* stageData = N(Quizmo_StageEffect)->data.quizmoStage;
 
     switch (var) {
         case 0:
@@ -326,22 +326,22 @@ ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Idle)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 0;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Clap)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 1;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 2;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 2;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_ShouldQuizmoLeave)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, EVT_VAR(0), gGameStatusPtr->debugQuizmo);
+    evt_set_variable(script, LVar0, gGameStatusPtr->debugQuizmo);
     return ApiStatus_DONE2;
 }
 
@@ -357,7 +357,7 @@ ApiStatus N(Quizmo_GetCamVfov)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, *args++, EVT_FIXED(gCameras[cameraID].vfov));
+    evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(gCameras[cameraID].vfov));
     return ApiStatus_DONE2;
 }
 
@@ -370,8 +370,8 @@ ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall) {
     Bytecode outVarZ = *args++;
 
     s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    s32 outX = evt_get_variable(script, EVT_ARRAY(1)) - (z * cos_deg(cameraYaw));
-    s32 outZ = evt_get_variable(script, EVT_ARRAY(3)) - (z * sin_deg(cameraYaw));
+    s32 outX = evt_get_variable(script, ArrayVar(1)) - (z * cos_deg(cameraYaw));
+    s32 outZ = evt_get_variable(script, ArrayVar(3)) - (z * sin_deg(cameraYaw));
 
     outX -= x;
     outZ -= y;
@@ -431,9 +431,9 @@ ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     f32* z = (f32*) &script->functionTemp[3];
 
     if (isInitialCall) {
-        *x = evt_get_float_variable(script, EVT_VAR(0)) / 60.0f;
-        *y = evt_get_float_variable(script, EVT_VAR(5)) / 60.0f;
-        *z = evt_get_float_variable(script, EVT_VAR(1)) / 60.0f;
+        *x = evt_get_float_variable(script, LVar0) / 60.0f;
+        *y = evt_get_float_variable(script, LVar5) / 60.0f;
+        *z = evt_get_float_variable(script, LVar1) / 60.0f;
         script->functionTemp[0] = 60;
     }
 

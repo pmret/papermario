@@ -5,53 +5,53 @@
 #define NAMESPACE b_area_pra3_pra_04
 
 EvtScript N(802320D0) = {
-    EVT_SET(LW(10), LW(1))
-    EVT_SET(LW(11), LW(2))
-    EVT_SET(LW(12), LW(3))
-    EVT_CALL(SetTexPanner, LW(0), LW(1))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar1)
+    EVT_SET(LVarB, LVar2)
+    EVT_SET(LVarC, LVar3)
+    EVT_CALL(SetTexPanner, LVar0, LVar1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LW(10), 0, LW(0), LW(1))
-        EVT_ADD(LW(0), LW(11))
-        EVT_ADD(LW(1), LW(12))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
+        EVT_ADD(LVar0, LVarB)
+        EVT_ADD(LVar1, LVarC)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802321A0) = {
-    EVT_SET(LW(10), LW(1))
-    EVT_SET(LW(11), LW(2))
-    EVT_SET(LW(12), LW(3))
-    EVT_CALL(SetTexPanner, LW(0), LW(1))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar1)
+    EVT_SET(LVarB, LVar2)
+    EVT_SET(LVarC, LVar3)
+    EVT_CALL(SetTexPanner, LVar0, LVar1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LW(10), 0, LW(0), 0)
-        EVT_CALL(SetTexPanOffset, LW(10), 1, LW(1), 0)
-        EVT_ADD(LW(0), LW(11))
-        EVT_ADD(LW(1), LW(12))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, LVarA, 1, LVar1, 0)
+        EVT_ADD(LVar0, LVarB)
+        EVT_ADD(LVar1, LVarC)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8023228C) = {
-    EVT_SET(LW(10), LW(1))
-    EVT_SET(LW(11), LW(2))
-    EVT_SET(LW(12), LW(3))
-    EVT_CALL(SetTexPanner, LW(0), LW(1))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 0)
+    EVT_SET(LVarA, LVar1)
+    EVT_SET(LVarB, LVar2)
+    EVT_SET(LVarC, LVar3)
+    EVT_CALL(SetTexPanner, LVar0, LVar1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LW(10), 0, 0, LW(0))
-        EVT_CALL(SetTexPanOffset, LW(10), 1, 0, LW(1))
-        EVT_ADD(LW(0), LW(11))
-        EVT_ADD(LW(1), LW(12))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetTexPanOffset, LVarA, 0, 0, LVar0)
+        EVT_CALL(SetTexPanOffset, LVarA, 1, 0, LVar1)
+        EVT_ADD(LVar0, LVarB)
+        EVT_ADD(LVar1, LVarC)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -60,15 +60,15 @@ EvtScript N(8023228C) = {
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_SET(LW(0), 1)
-    EVT_SET(LW(1), 0)
-    EVT_SET(LW(2), 3000)
-    EVT_SET(LW(3), 0)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar1, 0)
+    EVT_SET(LVar2, 3000)
+    EVT_SET(LVar3, 0)
     EVT_EXEC(N(802320D0))
-    EVT_SET(LW(0), 0)
-    EVT_SET(LW(1), 1)
-    EVT_SET(LW(2), 3000)
-    EVT_SET(LW(3), 0)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 1)
+    EVT_SET(LVar2, 3000)
+    EVT_SET(LVar3, 0)
     EVT_EXEC(N(802320D0))
     EVT_CALL(func_802536A8, 1)
     EVT_RETURN

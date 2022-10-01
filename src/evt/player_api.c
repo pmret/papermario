@@ -2,12 +2,14 @@
 #include "npc.h"
 #include "sprite.h"
 
-Npc* playerNpc = (Npc*) 0x802DB270; // TODO: raw ptr, shiftability
-
+extern Npc playerNpcData;
 extern u16 D_802DB5B0;
+extern s32 D_802DB5B4[3]; // unused
 extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
+
+Npc* playerNpc = &playerNpcData;
 
 void virtual_entity_list_render_world(void);
 void virtual_entity_list_render_UI(void);
@@ -47,7 +49,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
-            playerStatus->animFlags |= 0x40000;
+            playerStatus->animFlags |= PA_FLAGS_40000;
         }
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     } else {
@@ -82,7 +84,7 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 height = evt_get_variable(script, *args++);
-    s32 radius = evt_get_variable(script, *args);
+    s32 radius = evt_get_variable(script, *args++);
 
     playerNpc->collisionHeight = height;
     playerNpc->collisionRadius = radius;
@@ -94,27 +96,26 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->moveSpeed = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->moveSpeed = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall) {
-    playerNpc->jumpScale = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->jumpScale = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 currentAnim = evt_get_variable(script, *args++);
-    s32 shakeAnim = 0x80003;
+    AnimID anim = evt_get_variable(script, *args++);
 
-    playerNpc->currentAnim.w = currentAnim;
+    gPlayerStatus.anim = playerNpc->currentAnim = anim;
 
-    do { } while (0); // Needed to match for some reason
-
-    gPlayerStatus.anim = playerNpc->currentAnim.w;
-
-    if (gPlayerStatus.anim == shakeAnim) {
+    if (gPlayerStatus.anim == ANIM_Mario_80003) {
         exec_ShakeCam1(0, 0, 2);
     }
 
@@ -122,12 +123,16 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall) {
-    set_action_state(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    set_action_state(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimationSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->animationSpeed = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    playerNpc->animationSpeed = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -216,7 +221,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     f32 zTemp;
     f32 jumpVelocity;
     s32 duration;
-    s32 animID;
+    AnimID anim;
     f32 dist;
 
     if (isInitialCall) {
@@ -252,20 +257,20 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         }
 
         playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
-        playerStatus->flags |= 8;
-        playerStatus->animFlags |= 0x10000000;
+        playerStatus->flags |= PS_FLAGS_FLYING;
+        playerStatus->animFlags |= PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & 0x4000)) {
-                if (!(playerStatus->animFlags & 1)) {
-                    animID = 0x10007;
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                    anim = ANIM_Mario_AnimMidairStill;
                 } else {
-                    animID = 0x60009;
+                    anim = ANIM_Mario_60009;
                 }
             } else {
-                animID = 0x90005;
+                anim = ANIM_Mario_90005;
             }
-            suggest_player_anim_clearUnkFlag(animID);
+            suggest_player_anim_clearUnkFlag(anim);
             sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
         }
         script->functionTemp[0] = 1;
@@ -277,16 +282,16 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     playerNpc->jumpVelocity -= playerNpc->jumpScale;
 
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
-        if (!(playerStatus->animFlags & 0x4000)) {
-            if (!(playerStatus->animFlags & 1)) {
-                animID = 0x10008;
+        if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                anim = ANIM_Mario_AnimMidair;
             } else {
-                animID = 0x6000A;
+                anim = ANIM_Mario_6000A;
             }
         } else {
-            animID = 0x90005;
+            anim = ANIM_Mario_90005;
         }
-        suggest_player_anim_clearUnkFlag(animID);
+        suggest_player_anim_clearUnkFlag(anim);
     }
 
     playerStatus->position.x = playerNpc->pos.x;
@@ -299,20 +304,20 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
     playerNpc->duration--;
     if (playerNpc->duration == 0) {
-        playerStatus->flags &= -9;
-        playerStatus->animFlags &= ~0x10000000;
+        playerStatus->flags &= ~PS_FLAGS_FLYING;
+        playerStatus->animFlags &= ~PA_FLAGS_10000000;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & 0x4000)) {
-                if (!(playerStatus->animFlags & 1)) {
-                    animID = 0x10009;
+            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                    anim = ANIM_Mario_10009;
                 } else {
-                    animID = 0x6000B;
+                    anim = ANIM_Mario_6000B;
                 }
             } else {
-                animID = 0x10003;
+                anim = ANIM_Mario_AnimPanting;
             }
-            suggest_player_anim_clearUnkFlag(animID);
+            suggest_player_anim_clearUnkFlag(anim);
             func_8003D660(playerNpc, 2);
         }
 
@@ -395,7 +400,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
 
         if (npcID == NPC_SELF) {
             npc = get_npc_safe(script->owner2.npcID);
-        } else if (npcID < -270000000) {
+        } else if (npcID < EVT_LIMIT) {
             npc = (Npc*)npcID;
         } else {
             npc = get_npc_safe(npcID);
@@ -510,18 +515,18 @@ ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
 
 ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
-    f32 entryX = script->varTable[1] = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
-    f32 entryY = script->varTable[2] = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
-    f32 entryZ = script->varTable[3] = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
+    f32 entryX = script->varTable[1] = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+    f32 entryY = script->varTable[2] = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+    f32 entryZ = script->varTable[3] = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
     f32 cosTheta;
     f32 sinTheta;
     f32 exitTangentFrac;
     f32* blah;
 
-    sin_cos_deg(clamp_angle((*mapConfig->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
+    sin_cos_deg(clamp_angle((*mapSettings->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
 
     exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
     gPlayerStatus.position.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
@@ -529,27 +534,27 @@ ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
 
     blah = &script->varTable[5];
     *blah = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
-    gPlayerStatus.flags |= 0x4000000;
+    gPlayerStatus.flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2148(Evt* script, s32 isInitialCall) {
-    gPlayerStatus.flags &= ~0x4000000;
+    gPlayerStatus.flags &= ~PS_FLAGS_CAMERA_DOESNT_FOLLOW;
     return ApiStatus_DONE2;
 }
 
 ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     f32* varTableVar5 = &script->varTable[5];
 
     if (can_trigger_loading_zone()) {
         s32 var1 = evt_get_variable(script, *args++);
         s32 entryID = evt_get_variable(script, *args++);
-        f32 entryX = (*mapConfig->entryList)[entryID].x;
-        f32 entryZ = (*mapConfig->entryList)[entryID].z;
+        f32 entryX = (*mapSettings->entryList)[entryID].x;
+        f32 entryZ = (*mapSettings->entryList)[entryID].z;
         f32 temp = (var1 + 10.0f) / 2;
         f32 temp_f2 = dist2D(entryX, entryZ, playerStatus->position.x, playerStatus->position.z) - temp;
         f32 sinTheta;
@@ -563,15 +568,15 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
             var1 -= temp_f2 / 2;
         }
 
-        sin_cos_deg(clamp_angle((*mapConfig->entryList)[entryID].yaw + 180.0f), &sinTheta, &cosTheta);
+        sin_cos_deg(clamp_angle((*mapSettings->entryList)[entryID].yaw + 180.0f), &sinTheta, &cosTheta);
         gGameStatusPtr->exitTangent = (cosTheta * (playerStatus->position.x - entryX)) - (sinTheta * (entryZ - playerStatus->position.z));
         exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
         script->varTable[1] = (playerStatus->position.x + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
         script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
-        script->varTable[2] = (*mapConfig->entryList)[entryID].y;
+        script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
-        playerStatus->animFlags |= 0x100000;
-        playerStatus->flags |= 0x4000000;
+        playerStatus->animFlags |= PA_FLAGS_100000;
+        playerStatus->flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
         return ApiStatus_DONE2;
     }
 
@@ -581,8 +586,8 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
 s32 func_802D23F8(void) {
     if (gPlayerStatus.actionState == ACTION_STATE_IDLE || gPlayerStatus.actionState == ACTION_STATE_WALK ||
         gPlayerStatus.actionState == ACTION_STATE_RUN || gPlayerStatus.actionState == ACTION_STATE_LAND ||
-        gPlayerStatus.actionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerStatus.actionState == ACTION_STATE_GROUND_POUND ||
-        gPlayerStatus.actionState == ACTION_STATE_ULTRA_POUND || gPlayerStatus.actionState == ACTION_STATE_SPIN) {
+        gPlayerStatus.actionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerStatus.actionState == ACTION_STATE_SPIN_POUND ||
+        gPlayerStatus.actionState == ACTION_STATE_TORNADO_POUND || gPlayerStatus.actionState == ACTION_STATE_SPIN) {
         return TRUE;
     }
     return FALSE;
@@ -591,9 +596,9 @@ s32 func_802D23F8(void) {
 ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
         return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
     }
-
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
@@ -602,22 +607,30 @@ ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
 
 ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 val = 0;
+    s32 result = FALSE;
 
     if (gCollisionStatus.currentFloor >= 0) {
-        val = func_802D23F8() != 0;
+        result = (func_802D23F8() != 0);
     }
-    evt_set_variable(script, *args, val);
+    evt_set_variable(script, *args, result);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall) {
-    return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
+    if (gPlayerStatus.moveFrames == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
-    return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
+    if (gPlayerStatus.flags & PS_FLAGS_INPUT_DISABLED) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
@@ -743,9 +756,9 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos)) {
-        playerStatus->animFlags &= ~0x80;
+        playerStatus->animFlags &= ~PA_FLAGS_USING_PULSE_STONE;
     } else {
-        playerStatus->animFlags |= 0x80;
+        playerStatus->animFlags |= PA_FLAGS_USING_PULSE_STONE;
     }
 
     return ApiStatus_DONE2;
@@ -753,7 +766,7 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode a0 = *args;
+    Bytecode outVar = *args++;
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = 0;
 
@@ -761,21 +774,21 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
         currentPartner = playerData->currentPartner;
     }
 
-    evt_set_variable(script, a0, currentPartner);
+    evt_set_variable(script, outVar, currentPartner);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2B50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= 8;
+    playerStatus->animFlags |= PA_FLAGS_8;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
+ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= 4;
+    playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
     return ApiStatus_DONE2;
 }
 
@@ -786,41 +799,44 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags &= ~0x4000;
+        playerStatus->animFlags &= ~PA_FLAGS_8BIT_MARIO;
     } else {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags |= 0x44004;
+        playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
+            | PA_FLAGS_40000
+            | PA_FLAGS_INTERRUPT_USE_PARTNER;
     }
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2C14(Evt* script, s32 isInitialCall) {
-    func_800EF3D4(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    func_800EF3D4(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(Evt* script) {
+ApiStatus SetPlayerPushVelocity(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_variable(script, *args++);
-    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 y;
     f32 z;
 
-    playerStatus->extraVelocity.x = x;
-    playerStatus->extraVelocity.y = evt_get_variable(script, *args++);
-    playerStatus->extraVelocity.z = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVelocity.x = x;
+    gPlayerStatus.pushVelocity.y = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVelocity.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 soundID = evt_get_variable(script, *args++);
+    s32 flags = evt_get_variable(script, *args++);
 
-    sfx_play_sound_at_player(var, var2);
+    sfx_play_sound_at_player(soundID, flags);
     return ApiStatus_DONE2;
 }
 
@@ -848,13 +864,13 @@ void virtual_entity_render_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
     virtual_entity_appendGfx_quad(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 arg1, f32 arg2) {
-    f32 theta = (arg2 * TAU) / 360.0f;
+void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 magnitude, f32 angle) {
+    f32 theta = DEG_TO_RAD(angle);
     f32 sinTheta = sin_rad(theta);
     f32 cosTheta = cos_rad(theta);
 
-    virtualEntity->pos.x += arg1 * sinTheta;
-    virtualEntity->pos.z += -arg1 * cosTheta;
+    virtualEntity->pos.x += magnitude * sinTheta;
+    virtualEntity->pos.z += -magnitude * cosTheta;
 }
 
 void virtual_entity_list_update(void) {
@@ -874,11 +890,11 @@ void virtual_entity_list_render_world(void) {
     Matrix4f xRot;
     Matrix4f yRot;
     Matrix4f zRot;
-    Matrix4f sp118;
-    Matrix4f sp158;
-    Matrix4f sp198;
+    Matrix4f rotation;
+    Matrix4f temp;
+    Matrix4f transform;
     Matrix4f scale;
-    Mtx sp218;
+    Mtx transformMtxL;
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -891,12 +907,12 @@ void virtual_entity_list_render_world(void) {
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
                 guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
                 guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
-                guMtxCatF(zRot, xRot, sp158);
-                guMtxCatF(sp158, yRot, sp118);
-                guMtxCatF(scale, sp118, sp158);
-                guMtxCatF(sp158, translation, sp198);
-                guMtxF2L(sp198, &sp218);
-                draw_entity_model_A(virtualEntity->entityModelIndex, &sp218);
+                guMtxCatF(zRot, xRot, temp);
+                guMtxCatF(temp, yRot, rotation);
+                guMtxCatF(scale, rotation, temp);
+                guMtxCatF(temp, translation, transform);
+                guMtxF2L(transform, &transformMtxL);
+                draw_entity_model_A(virtualEntity->entityModelIndex, &transformMtxL);
             }
         }
     }
@@ -907,11 +923,11 @@ void virtual_entity_list_render_UI(void) {
     Matrix4f xRot;
     Matrix4f yRot;
     Matrix4f zRot;
-    Matrix4f sp118;
-    Matrix4f sp158;
-    Matrix4f sp198;
+    Matrix4f rotation;
+    Matrix4f temp;
+    Matrix4f transform;
     Matrix4f scale;
-    Mtx sp218;
+    Mtx transformMtxL;
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -924,12 +940,12 @@ void virtual_entity_list_render_UI(void) {
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
                 guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
                 guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
-                guMtxCatF(zRot, xRot, sp158);
-                guMtxCatF(sp158, yRot, sp118);
-                guMtxCatF(scale, sp118, sp158);
-                guMtxCatF(sp158, translation, sp198);
-                guMtxF2L(sp198, &sp218);
-                draw_entity_model_E(virtualEntity->entityModelIndex, &sp218);
+                guMtxCatF(zRot, xRot, temp);
+                guMtxCatF(temp, yRot, rotation);
+                guMtxCatF(scale, rotation, temp);
+                guMtxCatF(temp, translation, transform);
+                guMtxF2L(transform, &transformMtxL);
+                draw_entity_model_E(virtualEntity->entityModelIndex, &transformMtxL);
             }
         }
     }

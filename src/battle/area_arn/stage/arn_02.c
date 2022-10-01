@@ -5,15 +5,15 @@
 #define NAMESPACE b_area_arn_arn_02
 
 EvtScript N(80227960) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_SET(LW(0), 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVar0, 0)
     EVT_LABEL(0)
-    EVT_ADD(LW(0), 1)
-    EVT_IF_GT(LW(0), 359)
-        EVT_SUB(LW(0), 360)
+    EVT_ADD(LVar0, 1)
+    EVT_IF_GT(LVar0, 359)
+        EVT_SUB(LVar0, 360)
     EVT_END_IF
-    EVT_CALL(RotateModel, LW(10), LW(0), 0, 0, 1)
-    EVT_WAIT_FRAMES(1)
+    EVT_CALL(RotateModel, LVarA, LVar0, 0, 0, 1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -21,7 +21,7 @@ EvtScript N(80227960) = {
 
 EvtScript N(beforeBattle_80227A0C) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LW(0), 8)
+    EVT_SET(LVar0, 8)
     EVT_EXEC_WAIT(N(80227960))
     EVT_RETURN
     EVT_END

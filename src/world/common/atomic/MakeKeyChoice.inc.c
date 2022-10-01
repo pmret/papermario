@@ -11,9 +11,9 @@ ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall) {
         }
         N(KeyItemChoiceList)[i] = ITEM_NONE;
     } else {
-        for (i = 0; i <= (ITEM_LAST_KEY - ITEM_FIRST_VALID_KEY); i++) {
-            N(KeyItemChoiceList)[i] = ITEM_FIRST_VALID_KEY + i;
-            N(KeyItemChoiceList)[(ITEM_LAST_KEY - ITEM_FIRST_VALID_KEY) + 1] = ITEM_NONE; // vanilla oddity -- should be after the loop!
+        for (i = 0; i < ITEM_NUM_KEYS; i++) {
+            N(KeyItemChoiceList)[i] = ITEM_FIRST_KEY + i;
+            N(KeyItemChoiceList)[ITEM_NUM_KEYS] = ITEM_NONE; // vanilla oddity -- should be after the loop!
         }
     }
     return ApiStatus_DONE2;

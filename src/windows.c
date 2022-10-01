@@ -20,7 +20,7 @@ typedef struct WindowGroup {
     /* 0x01 */ u8 max;
 } WindowGroup; // size = 0x02
 
-WindowStyle gWindowStyles[] = {
+WindowStyle gWindowStyles[64] = {
     { 3 }, { 3 }, { 11 }, { 12 }, { 13 }, { 14 }, { 3 }, { 21 }, { 3 }, { 0 }, { 9 }, { 3 }, { 0 }, { 1 }, { 3 }, { 9 },
     { 10 }, { 7 }, { 8 }, { 3 }, { 3 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
     { 0 }, { 0 }, { 0 }, { 0 }, { 3 }, { 11 }, { 12 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
@@ -112,10 +112,10 @@ u8 gWindowDisappearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FL
                                DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0 };
 
 WindowGroup gWindowGroups[] = {
-    { WINDOW_ID_0, WINDOW_ID_63 }, // all windows
+    { WINDOW_ID_0, WINDOW_ID_FILEMENU_FILE3_TITLE }, // all windows
     { WINDOW_ID_8, WINDOW_ID_9 }, // battle ?
     { WINDOW_ID_PAUSE_MAIN, WINDOW_ID_PAUSE_TAB_INVIS }, // pause menu
-    { WINDOW_ID_PAUSE_CURSOR, WINDOW_ID_63 } // file menu
+    { WINDOW_ID_PAUSE_CURSOR, WINDOW_ID_FILEMENU_FILE3_TITLE } // file menu
 };
 
 void clear_windows(void) {

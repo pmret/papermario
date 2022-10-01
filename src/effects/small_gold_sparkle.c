@@ -42,7 +42,7 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.smallGoldSparkle = data;
     part = data;
 
     ASSERT(data != NULL);
@@ -70,7 +70,7 @@ void small_gold_sparkle_init(EffectInstance* effect) {
 }
 
 void small_gold_sparkle_update(EffectInstance* effect) {
-    SmallGoldSparkleFXData* part = (SmallGoldSparkleFXData*) effect->data;
+    SmallGoldSparkleFXData* part = effect->data.smallGoldSparkle;
     s32 i;
 
     part->unk_14--;
@@ -106,11 +106,11 @@ void small_gold_sparkle_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void small_gold_sparkle_appendGfx(void* effect) {
-    SmallGoldSparkleFXData* part = ((EffectInstance*)effect)->data;
+    SmallGoldSparkleFXData* part = ((EffectInstance*)effect)->data.smallGoldSparkle;
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;

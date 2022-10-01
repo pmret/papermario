@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "audio/public.h"
 
 #define NAMESPACE action_command_mega_shock
 
@@ -81,7 +82,7 @@ ApiStatus func_802A91A0_42DBB0(Evt* script, s32 isInitialCall) {
 
         actionCommandStatus->unk_50 = arg;
         actionCommandStatus->unk_50 = func_80268224(arg);
-        actionCommandStatus->unk_64 = evt_get_variable(script, *readPos++);
+        actionCommandStatus->easyVersion = evt_get_variable(script, *readPos++);
         actionCommandStatus->unk_60 = 0;
         actionCommandStatus->barFillLevel = 0;
         actionCommandStatus->unk_48 = 0;
@@ -168,14 +169,14 @@ void func_802A92A0_42DCB0(void) {
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_68 == 0) {
                 s16 newFillLevel;
 
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     s8 mashMeterIntervals = actionCommandStatus->mashMeterIntervals;
                     s16* mashMeterCutoffs = actionCommandStatus->mashMeterCutoffs;
                     s32 index;
@@ -213,10 +214,10 @@ void func_802A92A0_42DCB0(void) {
 
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     s32 fillLevel;
 
-                    fillLevel = actionCommandStatus->unk_64 * 780;
+                    fillLevel = actionCommandStatus->easyVersion * 780;
                     fillLevel = fillLevel / 100 * battleStatus->unk_434[actionCommandStatus->unk_50];
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
@@ -272,7 +273,7 @@ void func_802A92A0_42DCB0(void) {
                 //
                 // TODO: Find a way to avoid reusing buttonsPushed.
                 buttonsPushed = actionCommandStatus->barFillLevel;
-                if (actionCommandStatus->unk_64 == 0) {
+                if (actionCommandStatus->easyVersion == 0) {
                     buttonsPushed = 0;
                 }
 
@@ -296,7 +297,7 @@ void func_802A92A0_42DCB0(void) {
                     func_80269160();
                 }
 
-                sfx_stop_sound(0x80000041);
+                sfx_stop_sound(SOUND_80000041);
                 btl_set_popup_duration(0);
                 actionCommandStatus->unk_54 = 5;
                 actionCommandStatus->state = 12;
@@ -305,7 +306,7 @@ void func_802A92A0_42DCB0(void) {
             }
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;

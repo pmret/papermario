@@ -1,8 +1,9 @@
 #include "flo_25.h"
 #include "message_ids.h"
-#include "sprite/npc/bzzap.h"
-#include "sprite/npc/gate_flower.h"
-#include "sprite/npc/tuff_puff.h"
+#include "entity.h"
+#include "sprite/npc/Bzzap.h"
+#include "sprite/npc/GateFlower.h"
+#include "sprite/npc/TuffPuff.h"
 
 enum {
     NPC_GATE_FLOWER,
@@ -19,16 +20,16 @@ EntryList N(entryList) = {
     { -620.0f, 0.0f, 0.0f,  90.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = { MSG_flo_25_tattle },
+    .tattle = { MSG_MapTattle_flo_25 },
 };
 
 EvtScript N(80242330) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -40,48 +41,48 @@ EvtScript N(80242330) = {
 
 EvtScript N(802423A0) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SET(EVT_VAR(11), EVT_VAR(1))
-    EVT_SET(EVT_VAR(12), EVT_VAR(2))
-    EVT_SET(EVT_VAR(13), EVT_VAR(3))
-    EVT_SET(EVT_VAR(14), EVT_VAR(4))
-    EVT_SUB(EVT_VAR(12), EVT_VAR(0))
-    EVT_SUB(EVT_VAR(13), EVT_VAR(1))
-    EVT_SETF(EVT_VAR(0), EVT_VAR(12))
-    EVT_DIVF(EVT_VAR(0), EVT_FIXED(100.0))
-    EVT_SETF(EVT_VAR(15), EVT_FIXED(100.0))
-    EVT_DIVF(EVT_VAR(15), EVT_VAR(0))
-    EVT_ADD(EVT_VAR(15), 11)
-    EVT_SET(EVT_VAR(5), 200)
-    EVT_DIV(EVT_VAR(5), EVT_VAR(15))
-    EVT_ADD(EVT_VAR(5), 1)
-    EVT_LOOP(EVT_VAR(5))
-        EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
-        EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
-        EVT_CALL(RandInt, 199, EVT_VAR(2))
-        EVT_SET(EVT_VAR(3), 210)
-        EVT_SUB(EVT_VAR(3), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(0), EVT_VAR(10))
-        EVT_ADD(EVT_VAR(1), EVT_VAR(11))
-        EVT_ADD(EVT_VAR(2), EVT_VAR(14))
-        EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVarB, LVar1)
+    EVT_SET(LVarC, LVar2)
+    EVT_SET(LVarD, LVar3)
+    EVT_SET(LVarE, LVar4)
+    EVT_SUB(LVarC, LVar0)
+    EVT_SUB(LVarD, LVar1)
+    EVT_SETF(LVar0, LVarC)
+    EVT_DIVF(LVar0, EVT_FLOAT(100.0))
+    EVT_SETF(LVarF, EVT_FLOAT(100.0))
+    EVT_DIVF(LVarF, LVar0)
+    EVT_ADD(LVarF, 11)
+    EVT_SET(LVar5, 200)
+    EVT_DIV(LVar5, LVarF)
+    EVT_ADD(LVar5, 1)
+    EVT_LOOP(LVar5)
+        EVT_CALL(RandInt, LVarC, LVar0)
+        EVT_CALL(RandInt, LVarD, LVar1)
+        EVT_CALL(RandInt, 199, LVar2)
+        EVT_SET(LVar3, 210)
+        EVT_SUB(LVar3, LVar2)
+        EVT_ADD(LVar0, LVarA)
+        EVT_ADD(LVar1, LVarB)
+        EVT_ADD(LVar2, LVarE)
+        EVT_CALL(PlayEffect, 0xD, LVar0, LVar2, LVar1, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(LVarF)
     EVT_LABEL(0)
-    EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
-    EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
-    EVT_ADD(EVT_VAR(0), EVT_VAR(10))
-    EVT_ADD(EVT_VAR(1), EVT_VAR(11))
-    EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_CALL(RandInt, LVarC, LVar0)
+    EVT_CALL(RandInt, LVarD, LVar1)
+    EVT_ADD(LVar0, LVarA)
+    EVT_ADD(LVar1, LVarB)
+    EVT_CALL(PlayEffect, 0xD, LVar0, LVarE, LVar1, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT(LVarF)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(exitWalk_8024264C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  3);
+EvtScript N(exitWalk_8024264C) = EVT_EXIT_WALK(60,  0, "flo_00",  3);
 
-EvtScript N(exitWalk_802426A8) = EXIT_WALK_SCRIPT(60,  1, "flo_07",  0);
+EvtScript N(exitWalk_802426A8) = EVT_EXIT_WALK(60,  1, "flo_07",  0);
 
 EvtScript N(80242704) = {
     EVT_BIND_TRIGGER(N(exitWalk_802426A8), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
@@ -91,7 +92,7 @@ EvtScript N(80242704) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -101,18 +102,18 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80244D0C))
     EVT_EXEC(N(802446BC))
-    EVT_SET(EVT_VAR(0), -270)
-    EVT_SET(EVT_VAR(1), -190)
-    EVT_SET(EVT_VAR(2), 640)
-    EVT_SET(EVT_VAR(3), -60)
-    EVT_SET(EVT_VAR(4), 60)
+    EVT_SET(LVar0, -270)
+    EVT_SET(LVar1, -190)
+    EVT_SET(LVar2, 640)
+    EVT_SET(LVar3, -60)
+    EVT_SET(LVar4, 60)
     EVT_EXEC(N(802423A0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(80242704)))
+    EVT_SET(LVar0, EVT_PTR(N(80242704)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80242330))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CF2BD0))
     EVT_END_IF
     EVT_RETURN
@@ -130,7 +131,7 @@ f32 N(FlyingAI_JumpVels)[] = {
     1.5f, 20.0f,
 };
 
-NpcAISettings N(npcAISettings_80242934) = {
+MobileAISettings N(npcAISettings_80242934) = {
     .moveSpeed = 1.0f,
     .moveTime = 45,
     .waitTime = 60,
@@ -162,7 +163,7 @@ NpcSettings N(npcSettings_802429D4) = {
     .level = 19,
 };
 
-NpcAISettings N(npcAISettings_80242A00) = {
+MobileAISettings N(npcAISettings_80242A00) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 5,
@@ -205,23 +206,23 @@ s32 N(ItemChoice_SelectedItemID) = {
 };
 
 EvtScript N(80242AD4) = {
-    EVT_SET(EVT_VAR(9), EVT_VAR(1))
+    EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_SET(LVarA, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
         EVT_CASE_DEFAULT
-            EVT_CALL(RemoveItemAt, EVT_VAR(1))
-            EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
+            EVT_CALL(RemoveItemAt, LVar1)
+            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
+            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
+            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
-            EVT_CALL(RemoveItemEntity, EVT_VAR(0))
+            EVT_WAIT(30)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -229,101 +230,101 @@ EvtScript N(80242AD4) = {
 };
 
 EvtScript N(80242C08) = {
-    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
-    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
+    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(interact_80242C58) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1363), 0)
-        EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(GF_FLO25_GaveRedBerry, 0)
+        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, 0, 350)
-        EVT_CALL(SetCamPitch, 0, EVT_FIXED(18.5), EVT_FIXED(-7.5))
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+        EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.5), EVT_FLOAT(-7.5))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
-        EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003B))
-        EVT_CALL(SetPlayerAnimation, ANIM_THINKING)
+        EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(FlowerGuard_ItemChoiceList)))
-        EVT_SET(EVT_VAR(1), 0)
+        EVT_SET(LVar0, EVT_PTR(N(FlowerGuard_ItemChoiceList)))
+        EVT_SET(LVar1, 0)
         EVT_EXEC_WAIT(N(80242C08))
-        EVT_SWITCH(EVT_VAR(0))
+        EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
-                EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003C))
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003C)
             EVT_CASE_DEFAULT
-                EVT_SET(EVT_VAR(8), EVT_VAR(0))
-                EVT_CALL(N(FlowerGuard_JudgeItemTastiness), EVT_VAR(0))
-                EVT_CALL(MakeItemEntity, EVT_VAR(8), 505, 20, -24, 1, 0)
-                EVT_SET(EVT_VAR(7), EVT_VAR(0))
+                EVT_SET(LVar8, LVar0)
+                EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
+                EVT_CALL(MakeItemEntity, LVar8, 505, 20, -24, 1, 0)
+                EVT_SET(LVar7, LVar0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_3)
-                EVT_WAIT_FRAMES(20)
-                EVT_CALL(RemoveItemEntity, EVT_VAR(7))
-                EVT_SWITCH(EVT_VAR(8))
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Eat)
+                EVT_WAIT(20)
+                EVT_CALL(RemoveItemEntity, LVar7)
+                EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003F))
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003F)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x21C, 0)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_7)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_OpenGate)
                         EVT_CALL(PlaySoundAtCollider, 14, 457, 0)
                         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
                         EVT_LOOP(0)
                             EVT_CALL(UpdateLerp)
-                            EVT_SETF(EVT_VAR(8), EVT_VAR(0))
-                            EVT_SETF(EVT_VAR(9), EVT_VAR(0))
-                            EVT_MULF(EVT_VAR(8), EVT_FIXED(0.5))
-                            EVT_MULF(EVT_VAR(9), EVT_FIXED(1.2))
-                            EVT_CALL(RotateModel, 86, EVT_VAR(8), 0, -1, 0)
-                            EVT_CALL(RotateModel, 87, EVT_VAR(8), 0, -1, 0)
-                            EVT_CALL(RotateModel, 88, EVT_VAR(8), 0, -1, 0)
-                            EVT_CALL(RotateModel, 82, EVT_VAR(9), 0, 1, 0)
-                            EVT_CALL(RotateModel, 83, EVT_VAR(9), 0, 1, 0)
-                            EVT_CALL(RotateModel, 84, EVT_VAR(9), 0, 1, 0)
-                            EVT_WAIT_FRAMES(1)
-                            EVT_IF_NE(EVT_VAR(1), 1)
+                            EVT_SETF(LVar8, LVar0)
+                            EVT_SETF(LVar9, LVar0)
+                            EVT_MULF(LVar8, EVT_FLOAT(0.5))
+                            EVT_MULF(LVar9, EVT_FLOAT(1.2))
+                            EVT_CALL(RotateModel, 86, LVar8, 0, -1, 0)
+                            EVT_CALL(RotateModel, 87, LVar8, 0, -1, 0)
+                            EVT_CALL(RotateModel, 88, LVar8, 0, -1, 0)
+                            EVT_CALL(RotateModel, 82, LVar9, 0, 1, 0)
+                            EVT_CALL(RotateModel, 83, LVar9, 0, 1, 0)
+                            EVT_CALL(RotateModel, 84, LVar9, 0, 1, 0)
+                            EVT_WAIT(1)
+                            EVT_IF_NE(LVar1, 1)
                                 EVT_BREAK_LOOP
                             EVT_END_IF
                         EVT_END_LOOP
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
-                        EVT_SET(EVT_SAVE_FLAG(1363), 1)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_HappyDance)
+                        EVT_SET(GF_FLO25_GaveRedBerry, 1)
                     EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003E))
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
                     EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003E))
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003E)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
                     EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003D))
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_6)
+                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003D)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Disgust)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
-                        EVT_CALL(MakeItemEntity, EVT_VAR(8), -125, 20, 0, 1, 0)
-                        EVT_SET(EVT_VAR(7), EVT_VAR(0))
-                        EVT_WAIT_FRAMES(5)
-                        EVT_CALL(GetAngleToPlayer, -1, EVT_VAR(0))
-                        EVT_IF_LT(EVT_VAR(0), 180)
+                        EVT_CALL(MakeItemEntity, LVar8, -125, 20, 0, 1, 0)
+                        EVT_SET(LVar7, LVar0)
+                        EVT_WAIT(5)
+                        EVT_CALL(GetAngleToPlayer, -1, LVar0)
+                        EVT_IF_LT(LVar0, 180)
                             EVT_CALL(MakeLerp, 0, 100, 7, 0)
                             EVT_LOOP(0)
                                 EVT_CALL(UpdateLerp)
-                                EVT_SETF(EVT_VAR(2), EVT_FIXED(-0.5))
-                                EVT_SETF(EVT_VAR(3), EVT_FIXED(-0.2))
-                                EVT_SETF(EVT_VAR(4), EVT_FIXED(0.9))
-                                EVT_MULF(EVT_VAR(2), EVT_VAR(0))
-                                EVT_MULF(EVT_VAR(3), EVT_VAR(0))
-                                EVT_MULF(EVT_VAR(4), EVT_VAR(0))
-                                EVT_ADDF(EVT_VAR(2), EVT_FIXED(500.0))
-                                EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
-                                EVT_ADDF(EVT_VAR(4), EVT_FIXED(-20.0))
-                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
-                                EVT_IF_NE(EVT_VAR(1), 1)
+                                EVT_SETF(LVar2, EVT_FLOAT(-0.5))
+                                EVT_SETF(LVar3, EVT_FLOAT(-0.2))
+                                EVT_SETF(LVar4, EVT_FLOAT(0.9))
+                                EVT_MULF(LVar2, LVar0)
+                                EVT_MULF(LVar3, LVar0)
+                                EVT_MULF(LVar4, LVar0)
+                                EVT_ADDF(LVar2, EVT_FLOAT(500.0))
+                                EVT_ADDF(LVar3, EVT_FLOAT(15.0))
+                                EVT_ADDF(LVar4, EVT_FLOAT(-20.0))
+                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
+                                EVT_WAIT(1)
+                                EVT_IF_NE(LVar1, 1)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
                             EVT_END_LOOP
@@ -331,37 +332,37 @@ EvtScript N(interact_80242C58) = {
                             EVT_CALL(MakeLerp, 0, 100, 7, 0)
                             EVT_LOOP(0)
                                 EVT_CALL(UpdateLerp)
-                                EVT_SETF(EVT_VAR(2), EVT_FIXED(0.5))
-                                EVT_SETF(EVT_VAR(3), EVT_FIXED(-0.2))
-                                EVT_SETF(EVT_VAR(4), EVT_FIXED(0.9))
-                                EVT_MULF(EVT_VAR(2), EVT_VAR(0))
-                                EVT_MULF(EVT_VAR(3), EVT_VAR(0))
-                                EVT_MULF(EVT_VAR(4), EVT_VAR(0))
-                                EVT_ADDF(EVT_VAR(2), EVT_FIXED(510.0))
-                                EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
-                                EVT_ADDF(EVT_VAR(4), EVT_FIXED(-20.0))
-                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
-                                EVT_IF_NE(EVT_VAR(1), 1)
+                                EVT_SETF(LVar2, EVT_FLOAT(0.5))
+                                EVT_SETF(LVar3, EVT_FLOAT(-0.2))
+                                EVT_SETF(LVar4, EVT_FLOAT(0.9))
+                                EVT_MULF(LVar2, LVar0)
+                                EVT_MULF(LVar3, LVar0)
+                                EVT_MULF(LVar4, LVar0)
+                                EVT_ADDF(LVar2, EVT_FLOAT(510.0))
+                                EVT_ADDF(LVar3, EVT_FLOAT(15.0))
+                                EVT_ADDF(LVar4, EVT_FLOAT(-20.0))
+                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
+                                EVT_WAIT(1)
+                                EVT_IF_NE(LVar1, 1)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
                             EVT_END_LOOP
                         EVT_END_IF
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
-                        EVT_CALL(RemoveItemEntity, EVT_VAR(7))
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
-                        EVT_CALL(EndSpeech, -1, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
+                        EVT_CALL(RemoveItemEntity, LVar7)
+                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_Idle)
+                        EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0)
                 EVT_END_SWITCH
         EVT_END_SWITCH
         EVT_THREAD
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
         EVT_END_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
     EVT_ELSE
-        EVT_IF_LT(EVT_SAVE_VAR(0), 57)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0, MESSAGE_ID(0x11, 0x0040))
+        EVT_IF_LT(GB_StoryProgress, 57)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0, MSG_CH6_0040)
         EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_9, NPC_ANIM_gate_flower_Palette_01_Anim_8, 0, MESSAGE_ID(0x11, 0x0041))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0, MSG_CH6_0041)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -372,8 +373,8 @@ EvtScript N(interact_80242C58) = {
 
 EvtScript N(init_80243564) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1363), 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
+    EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_HappyDance)
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
         EVT_CALL(RotateModel, 86, 50, 0, -1, 0)
         EVT_CALL(RotateModel, 87, 50, 0, -1, 0)
@@ -393,28 +394,30 @@ StaticNpc N(npcGroup_8024368C) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
     .init = &N(init_80243564),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
-        NPC_ANIM_gate_flower_Palette_01_Anim_1,
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
     },
-    .tattle = MESSAGE_ID(0x1A, 0x00DA),
+	.animations = {
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+        ANIM_GateFlower_Red_Idle,
+    },
+    .tattle = MSG_NpcTattle_RedGateFlower,
 };
 
 StaticNpc N(npcGroup_8024387C) = {
@@ -423,34 +426,36 @@ StaticNpc N(npcGroup_8024387C) = {
     .pos = { -200.0f, 45.0f, 0.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 10,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 10,
+        .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .movement = { -200, 45, 0, 30, 0, -32767, 0, -200, 45, 0, 200 },
-    .animations = {
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_0,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_6,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_6,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_5,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
-        NPC_ANIM_tuff_puff_Palette_00_Anim_1,
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+	.territory = { .temp = { -200, 45, 0, 30, 0, -32767, 0, -200, 45, 0, 200 }},
+    .animations = {
+        ANIM_TuffPuff_Still,
+        ANIM_TuffPuff_Still,
+        ANIM_TuffPuff_Grin,
+        ANIM_TuffPuff_Grin,
+        ANIM_TuffPuff_Still,
+        ANIM_TuffPuff_Still,
+        ANIM_TuffPuff_Hurt,
+        ANIM_TuffPuff_Hurt,
+        ANIM_TuffPuff_Grin,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+        ANIM_TuffPuff_Idle,
+    },
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80243A6C) = {
@@ -459,42 +464,44 @@ StaticNpc N(npcGroup_80243A6C) = {
     .pos = { 150.0f, 55.0f, 0.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 4,
-    .movement = { 150, 50, 0, 30, 0, -32767, 0, 150, 50, 0, 200, 0, 0, 1 },
-    .animations = {
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_3,
-        NPC_ANIM_bzzap_Palette_00_Anim_3,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_6,
-        NPC_ANIM_bzzap_Palette_00_Anim_6,
-        NPC_ANIM_bzzap_Palette_00_Anim_4,
-        NPC_ANIM_bzzap_Palette_00_Anim_2,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
-        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 4,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+	.territory = { .temp = { 150, 50, 0, 30, 0, -32767, 0, 150, 50, 0, 200, 0, 0, 1 }},
+    .animations = {
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim03,
+        ANIM_Bzzap_Anim03,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim06,
+        ANIM_Bzzap_Anim06,
+        ANIM_Bzzap_Anim04,
+        ANIM_Bzzap_Anim02,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+        ANIM_Bzzap_Anim01,
+    },
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcGroupList N(npcGroupList_80243C5C) = {
-    NPC_GROUP(N(npcGroup_8024387C), BATTLE_ID(24, 34, 0, 6)),
-    NPC_GROUP(N(npcGroup_80243A6C), BATTLE_ID(24, 26, 0, 2)),
-    NPC_GROUP(N(npcGroup_8024368C), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_8024387C), 0x1822, 0x05),
+    NPC_GROUP(N(npcGroup_80243A6C), 0x181A, 0x01),
+    NPC_GROUP(N(npcGroup_8024368C)),
     {},
 };
 
@@ -503,8 +510,8 @@ static s32 N(pad_3C8C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAB04, -390, 0, 0, 0, 8, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1407))
+    EVT_CALL(MakeEntity, &Entity_HiddenPanel, -390, 0, 0, 0, 8, MAKE_ENTITY_END)
+    EVT_CALL(AssignPanelFlag, GF_FLO25_HiddenPanel)
     EVT_RETURN
     EVT_END
 };

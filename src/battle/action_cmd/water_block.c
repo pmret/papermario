@@ -141,7 +141,7 @@ ApiStatus func_802A9000_42A4F0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
-    actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
+    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
     battleStatus->unk_84 = 1;
     actionCommandStatus->unk_6C = 30;
     actionCommandStatus->hudElementX = -48;
@@ -207,7 +207,7 @@ ApiStatus func_802A9000_42A4F0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[12] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
 
-    switch (actionCommandStatus->unk_64) {
+    switch (actionCommandStatus->easyVersion) {
         case 0:
             actionCommandStatus->hudElements[13] = hud_element_create(&HES_WaterBlockBlock);
             id = actionCommandStatus->hudElements[13];
@@ -328,7 +328,7 @@ void func_802A948C_42A97C(void) {
             hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudElementX + 61, actionCommandStatus->hudElementY + 24);
 
             id = actionCommandStatus->hudElements[10];
-            switch (actionCommandStatus->unk_64) {
+            switch (actionCommandStatus->easyVersion) {
                 case 0:
                     hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 91, actionCommandStatus->hudElementY + 7);
                     break;

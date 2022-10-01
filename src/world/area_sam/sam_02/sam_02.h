@@ -2,6 +2,8 @@
 /// @brief Mt Shiver - Shiver City Center
 
 #include "common.h"
+#include "../sam.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE sam_02

@@ -1,13 +1,9 @@
 #include "common.h"
 #include "model.h"
-
-typedef struct LavaReset {
-    /* 0x00 */ s32 colliderID;
-    /* 0x04 */ Vec3f pos;
-} LavaReset; // size = 0x10;
+#include "evt.h"
 
 extern LavaReset* gLavaResetList;
-extern s32 D_802DADA4;
+extern s32 LastSafeFloor;
 
 ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -220,17 +216,17 @@ ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode var1 = evt_get_variable(script, *args++);
-    Bytecode var2 = evt_get_variable(script, *args++);
-    Bytecode var3 = evt_get_variable(script, *args++);
-    Bytecode var4 = evt_get_variable(script, *args++);
+    Bytecode texPanner = evt_get_variable(script, *args++);
+    Bytecode tileSelect = evt_get_variable(script, *args++);
+    Bytecode u = evt_get_variable(script, *args++);
+    Bytecode v = evt_get_variable(script, *args++);
 
-    if (var2 == 0) {
-        set_main_pan_u(var1, var3);
-        set_main_pan_v(var1, var4);
+    if (tileSelect == 0) {
+        set_main_pan_u(texPanner, u);
+        set_main_pan_v(texPanner, v);
     } else {
-        set_aux_pan_u(var1, var3);
-        set_aux_pan_v(var1, var4);
+        set_aux_pan_u(texPanner, u);
+        set_aux_pan_v(texPanner, v);
     }
 
     return ApiStatus_DONE2;
@@ -238,11 +234,11 @@ ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
+    Gfx* pre = (Gfx*) evt_get_variable(script, *args++);
+    Gfx* post = (Gfx*) evt_get_variable(script, *args++);
 
-    set_custom_gfx(var1, var2, var3);
+    set_custom_gfx(idx, pre, post);
     return ApiStatus_DONE2;
 }
 
@@ -278,7 +274,65 @@ ApiStatus SetModelFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", apply_transform_to_children);
+void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
+    Evt localEvt;
+    ModelTreeInfo* parentModelInfo;
+    ModelTreeInfo* childModelInfo;
+    s32 parentModelID;
+    s32 originalArg;
+    s32* argsPtr;
+    s32 modelIndex;
+    s32 firstChild;
+    s32 lastChild;
+    s32 i;
+
+    firstChild = -1;
+    parentModelID = evt_get_variable(script, *script->ptrReadPos);
+    modelIndex = (*mdl_currentModelTreeNodeInfo)[parentModelID].modelIndex;
+    lastChild = -1;
+
+    if (modelIndex < 0xFF) {
+        firstChild = lastChild = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[parentModelID].treeDepth;
+
+        // check all models with a lowerID in the tree
+        for (i = parentModelID - 1; i >= 0; i--) {
+            childModelInfo = &(*mdl_currentModelTreeNodeInfo)[i];
+
+            if (treeDepth < childModelInfo->treeDepth) {
+                s32 childModelIndex = childModelInfo->modelIndex;
+
+                if (childModelIndex < 0xFF) {
+                    if (lastChild == -1) {
+                        lastChild = childModelIndex;
+                    }
+                    firstChild = childModelIndex;
+                }
+            } else {
+                // if node is no longer deeper than parent, we've exhausted the children
+                break;
+            }
+        }
+    }
+
+    // copy the input script into a local one we will modify
+    localEvt = *script;
+
+    argsPtr = localEvt.ptrReadPos;
+    originalArg = *argsPtr;
+
+    for (i = firstChild; i <= lastChild; i++) {
+        Model* model = (*gCurrentModels)[i];
+
+        localEvt.ptrReadPos = argsPtr;
+        *argsPtr = model->modelID;
+
+        apiFunc(&localEvt, TRUE);
+    }
+
+    *argsPtr = originalArg;
+}
 
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall) {
     make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));
@@ -300,9 +354,10 @@ ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args);
-    s32 index = get_transform_group_index(var1);
+    s32 modelIndex = evt_get_variable(script, *args);
+    s32 index = get_transform_group_index(modelIndex);
     ModelTransformGroup* transformGroup;
+    Matrix4f mtx;
     f32 x, y, z;
 
     if (index == -1) {
@@ -323,8 +378,6 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
         guTranslateF(transformGroup->matrixB, x, y, z);
         transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {
-        Matrix4f mtx;
-
         guTranslateF(mtx, x, y, z);
         guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
     }
@@ -487,16 +540,16 @@ ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (mode) {
-        case 0:
+        case MODIFY_COLLIDER_FLAGS_SET_BITS:
             collider->flags |= flags;
             break;
-        case 1:
+        case MODIFY_COLLIDER_FLAGS_CLEAR_BITS:
             collider->flags &= ~flags;
             break;
-        case 2:
+        case MODIFY_COLLIDER_FLAGS_SET_VALUE:
             collider->flags = flags;
             break;
-        case 3:
+        case MODIFY_COLLIDER_FLAGS_SET_SURFACE:
             collider->flags &= ~0xFF;
             collider->flags |= flags & 0xFF;
             break;
@@ -505,6 +558,7 @@ ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+//TODO rename to MonitorLastSafeFloor
 ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -520,19 +574,19 @@ ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
             }
             collider = &gCollisionData.colliderList[lavaReset->colliderID];
             if (collider->firstChild >= 0) {
-                modify_collider_family_flags(collider->firstChild, 0x100, 0);
+                modify_collider_family_flags(collider->firstChild, COLLIDER_FLAGS_SAFE_FLOOR, 0);
             }
-            collider->flags |= 0x100;
+            collider->flags |= COLLIDER_FLAGS_SAFE_FLOOR;
             lavaReset++;
         }
 
-        D_802DADA4 = -1;
+        LastSafeFloor = -1;
     }
 
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         collider = &gCollisionData.colliderList[collisionStatus->currentFloor];
-        if (collider->flags & 0x100) {
-            D_802DADA4 = collisionStatus->currentFloor;
+        if (collider->flags & COLLIDER_FLAGS_SAFE_FLOOR) {
+            LastSafeFloor = collisionStatus->currentFloor;
             return ApiStatus_BLOCK;
         }
     }
@@ -545,8 +599,8 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
     s32 temp_a0;
     LavaReset* lavaReset = gLavaResetList;
 
-    if (D_802DADA4 == -1) {
-        temp_v0 = &(*get_current_map_header()->entryList)[gGameStatusPtr->entryID];
+    if (LastSafeFloor == -1) {
+        temp_v0 = &(*get_current_map_settings()->entryList)[gGameStatusPtr->entryID];
         *outX = temp_v0->x;
         *outY = temp_v0->y;
         *outZ = temp_v0->z;
@@ -558,7 +612,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
             break;
         }
 
-        if (lavaReset->colliderID == D_802DADA4) {
+        if (lavaReset->colliderID == LastSafeFloor) {
             *outX = lavaReset->pos.x;
             *outY = lavaReset->pos.y;
             *outZ = lavaReset->pos.z;

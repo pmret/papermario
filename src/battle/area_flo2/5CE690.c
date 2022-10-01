@@ -3,27 +3,15 @@
 
 #define NAMESPACE b_area_flo2
 
-typedef struct Flo02Struct {
-    /* 0x00 */ Vec3f actorPos;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ Vec3f enemyPos;
-} Flo02Struct; // size = 0x24
-
-typedef struct Flo02Struct3 {
-    /* 0x00 */ char unk_00[4];
-    /* 0x04 */ Vec3f pos;
-} Flo02Struct3; // size = 0x10
-
-typedef struct Flo02Struct2 {
-    /* 0x00 */ char unk_00[12];
-    /* 0x0C */ Flo02Struct3* unk_0C;
-} Flo02Struct2; // size = 0x10
+typedef struct SuctionPath {
+    /* 0x00 */ Vec3f start;
+    /* 0x0C */ Vec3f mid;
+    /* 0x18 */ Vec3f end;
+} SuctionPath; // size = 0x24
 
 extern s32 D_8021A35C_5D09EC;
 extern s32 D_8021A378_5D0A08;
-extern Flo02Struct D_80235E00[];
+extern SuctionPath D_80235E00[];
 
 #include "common/StartRumbleWithParams.inc.c"
 
@@ -62,7 +50,66 @@ ApiStatus func_802182A4_5CE934(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218440_5CEAD0);
+ApiStatus func_80218440_5CEAD0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 arr[10];
+    s32 flags = evt_get_variable(script, *args++);
+    s32 count = 0;
+    s32 var_a2;
+
+    if (!(flags & 2)) {
+        arr[count] = 2;
+        count++;
+    }
+    if (!(flags & 8)) {
+        arr[count] = 8;
+        count++;
+    }
+    if (!(flags & 0x20)) {
+        arr[count] = 0x20;
+        count++;
+    }
+    if (!(flags & 0x80)) {
+        arr[count] = 0x80;
+        count++;
+    }
+    if (!(flags & 0x200)) {
+        arr[count] = 0x200;
+        count++;
+    }
+    if (!(flags & 1)) {
+        arr[count] = 1;
+        count++;
+    }
+    if (!(flags & 4)) {
+        arr[count] = 4;
+        count++;
+    }
+    if (!(flags & 0x10)) {
+        arr[count] = 0x10;
+        count++;
+    }
+
+    if (count == 0) {
+        if (!(flags & 0x100)) {
+            arr[count] = 0x100;
+            count++;
+        }
+        if (!(flags & 0x40)) {
+            arr[count] = 0x40;
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        var_a2 = -1;
+    } else {
+        var_a2 = arr[rand_int(count - 1)];
+    }
+
+    evt_set_variable(script, *args++, var_a2);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802185D4_5CEC64(Evt* script, s32 isInitialCall) {
     s32* actorID = &script->owner1.actorID;
@@ -71,19 +118,19 @@ ApiStatus func_802185D4_5CEC64(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218620_5CECB0(Evt* script, s32 isInitialCall) {
+ApiStatus N(MakeSuctionPath)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Flo02Struct* temp_s1 = &D_80235E00[evt_get_variable(script, *args++)];
+    SuctionPath* path = &D_80235E00[evt_get_variable(script, *args++)];
 
-    temp_s1->actorPos.x = evt_get_variable(script, *args++);
-    temp_s1->actorPos.y = evt_get_variable(script, *args++);
-    temp_s1->actorPos.z = evt_get_variable(script, *args++);
-    temp_s1->unk_0C = -rand_int(20);
-    temp_s1->unk_10 = rand_int(40) + 60;
-    temp_s1->unk_14 = 0;
-    temp_s1->enemyPos.x = evt_get_variable(script, *args++);
-    temp_s1->enemyPos.y = evt_get_variable(script, *args++);
-    temp_s1->enemyPos.z = evt_get_variable(script, *args++);
+    path->start.x = evt_get_variable(script, *args++);
+    path->start.y = evt_get_variable(script, *args++);
+    path->start.z = evt_get_variable(script, *args++);
+    path->mid.x = -rand_int(20);
+    path->mid.y = rand_int(40) + 60;
+    path->mid.z = 0;
+    path->end.x = evt_get_variable(script, *args++);
+    path->end.y = evt_get_variable(script, *args++);
+    path->end.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -121,14 +168,14 @@ ApiStatus func_80218924_5CEFB4(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802189FC_5CF08C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Flo02Struct2* temp_s2 = evt_get_variable(script, *args++);
+    EffectInstance* effect = evt_get_variable(script, *args++);
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
     f32 posZ = evt_get_float_variable(script, *args++);
 
-    temp_s2->unk_0C->pos.x = posX;
-    temp_s2->unk_0C->pos.y = posY;
-    temp_s2->unk_0C->pos.z = posZ;
+    effect->data.snakingStatic->pos.x = posX;
+    effect->data.snakingStatic->pos.y = posY;
+    effect->data.snakingStatic->pos.z = posZ;
     return ApiStatus_DONE2;
 }
 

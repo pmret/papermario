@@ -22,11 +22,95 @@
 #include "battle/action_cmd/spook.h"
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/tidal_wave.h"
+#include "ld_addrs.h"
+
+s32 D_80294190[] = { 0x2121751D, 0x23A3460C, 0xB46B0078, 0x730D1300, };
+
+s32 D_802941A0[] = { 0x00E4862E, 0xB4F27570, 0xFFF304BC, 0xF70D0500, };
+
+s32 D_802941B0[] = { 0x2D38D254, 0x28D17D2C, 0xB5A11B55, 0xFFFFFF00, };
+
+s32 D_802941C0[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
+
+s32 D_802941E0[] = { 11, 10, 9, 8, 7, 6, 5, 4 };
+
+s32 D_80294200[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294220[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294240[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294260[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294280[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802942A0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802942C0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802942E0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294300[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294320[] = { 9, 8, 7, 6, 5, 4, 3, 2 };
+
+s32 D_80294340[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294360[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294380[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802943A0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802943C0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_802943E0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294400[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294420[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294440[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+s32 D_80294460[] = { 6, 3, 5, 3, 4, 3, 2, 3, 1, 3, 0, 3, 0, 2, 0, 1 };
+
+s32 D_802944A0[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+
+#define AC_TBL_ENTRY(name) \
+    action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
 
 // TODO: move to src/battle/action_cmd.c
+void* actionCommandDmaTable[] = {
+    NULL, NULL, NULL,
+    AC_TBL_ENTRY(jump),
+    AC_TBL_ENTRY(hammer),
+    AC_TBL_ENTRY(flee),
+    AC_TBL_ENTRY(break_free),
+    AC_TBL_ENTRY(whirlwind),
+    AC_TBL_ENTRY(stop_leech),
+    AC_TBL_ENTRY(07),
+    AC_TBL_ENTRY(dizzy_shell),
+    AC_TBL_ENTRY(fire_shell),
+    AC_TBL_ENTRY(0A),
+    AC_TBL_ENTRY(bomb),
+    AC_TBL_ENTRY(body_slam),
+    AC_TBL_ENTRY(air_lift),
+    AC_TBL_ENTRY(air_raid),
+    AC_TBL_ENTRY(squirt),
+    AC_TBL_ENTRY(power_shock),
+    AC_TBL_ENTRY(mega_shock),
+    AC_TBL_ENTRY(smack),
+    AC_TBL_ENTRY(spiny_surge),
+    AC_TBL_ENTRY(hurricane),
+    AC_TBL_ENTRY(spook),
+    AC_TBL_ENTRY(water_block),
+    AC_TBL_ENTRY(tidal_wave),
+};
 
-extern void* actionCommandDmaTable[23];
-extern s32 D_8029FBC0;
+BSS s32 D_8029FBC0;
+BSS s32 D_8029FBC4[3]; // unused?
+BSS s32 D_8029FBD0;
+BSS s8 D_8029FBD4;
 
 void action_command_jump_draw_hud_elements(void);
 void action_command_hammer_draw_hud_elements(void);
@@ -75,14 +159,15 @@ void action_command_water_block_free_hud_elements(void);
 void action_command_tidal_wave_free_hud_elements(void);
 
 ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
-    s32 cmd = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 cmd = evt_get_variable(script, *args++);
 
-    dma_copy(actionCommandDmaTable[cmd * 3], actionCommandDmaTable[cmd * 3 + 1], actionCommandDmaTable[cmd * 3 + 2]);
+    dma_copy(actionCommandDmaTable[cmd * 3 + 0], actionCommandDmaTable[cmd * 3 + 1], actionCommandDmaTable[cmd * 3 + 2]);
     return ApiStatus_DONE2;
 }
 
 s32 func_80268224(s32 arg0) {
-    if (!(gBattleStatus.flags1 & 0x80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
         arg0 -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
     }
 
@@ -613,7 +698,7 @@ ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
         }
     }
 
-    sfx_stop_sound(0x80000041);
+    sfx_stop_sound(SOUND_80000041);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;

@@ -119,7 +119,7 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    Bytecode outVar = EVT_VAR(0);
+    Bytecode outVar = LVar0;
 
     if (isInitialCall) {
         *targetX = evt_get_variable(script, *args++);
@@ -391,10 +391,10 @@ s32 LoadPath(Evt* script, s32 isInitialCall) {
 
     script->varTablePtr[15] = path;
     path->numVectors = numVectors;
-    path->unk_04 = heap_malloc(numVectors * sizeof(f32));
+    path->lengths = heap_malloc(numVectors * sizeof(f32));
     path->staticVectorList = vectorList;
     path->vectors = heap_malloc(numVectors * sizeof(Vec3f));
-    load_path_data(path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
+    load_path_data(path->numVectors, path->lengths, path->staticVectorList, path->vectors);
 
     path->timeElapsed = 0;
     path->timeLeft = time - 1;
@@ -428,7 +428,7 @@ ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    get_path_position(alpha, &pos, path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
+    get_path_position(alpha, &pos, path->numVectors, path->lengths, path->staticVectorList, path->vectors);
     script->varTable[1] = (pos.x * 1024.0f) + -2.3e8f;
     script->varTable[2] = (pos.y * 1024.0f) + -2.3e8f;
     script->varTable[3] = (pos.z * 1024.0f) + -2.3e8f;
@@ -437,7 +437,7 @@ ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall) {
         path->timeElapsed = path->timeElapsed + 1;
         script->varTable[0] = 1;
     } else {
-        heap_free(path->unk_04);
+        heap_free(path->lengths);
         heap_free(path->vectors);
         heap_free(script->varTablePtr[15]);
         script->varTable[0] = 0;

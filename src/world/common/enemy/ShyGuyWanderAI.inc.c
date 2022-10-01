@@ -1,17 +1,17 @@
 #include "common.h"
 #include "npc.h"
 
-void N(ShyGuyWanderAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
+void N(ShyGuyWanderAI_14)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->moveSpeed *= 0.6;
-    npc->currentAnim.w = enemy->animList[12];
+    npc->currentAnim = enemy->animList[12];
     npc->duration = 5;
     script->functionTemp[0] = 0xF;
 }
 
-void N(ShyGuyWanderAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 yaw = npc->yaw;
@@ -24,13 +24,13 @@ void N(ShyGuyWanderAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     if (npc->duration == 0) {
         npc->moveSpeed *= 0.6;
 
-        npc->currentAnim.w = enemy->animList[11];
+        npc->currentAnim = enemy->animList[11];
         npc->duration = 10;
         script->functionTemp[0] = 16;
     }
 }
 
-void N(ShyGuyWanderAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
@@ -46,13 +46,13 @@ void N(ShyGuyWanderAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-void N(ShyGuyWanderAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim.w = *enemy->animList;
+        npc->currentAnim = *enemy->animList;
         script->functionTemp[0] = 0;
     }
 }
@@ -63,7 +63,7 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*) evt_get_variable(script, *args++);
     f32 posX;
     f32 posY;
     f32 posZ;
@@ -71,17 +71,17 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
     
-   if (isInitialCall || enemy->aiFlags & 4) {
+   if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
@@ -92,14 +92,14 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
        
-        if (enemy->aiFlags & 4) {
-            script->functionTemp[0] = 0x63;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-        } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0] = 0xC;
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            script->functionTemp[0] = 12;
         }
-        enemy->aiFlags &= ~4;
-        enemy->flags &= ~0x40000000;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->flags &= ~ENEMY_FLAGS_40000000;
 
         hitDepth = 100.0f;
         posX = npc->pos.x;

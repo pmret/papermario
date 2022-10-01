@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/bill_blaster.h"
+#include "sprite/npc/BillBlaster.h"
 
 #define AREA b_area_trd_part_1
 
@@ -92,10 +92,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations_80219E48)[] = {
-    STATUS_NORMAL,    NPC_ANIM_bill_blaster_Palette_00_Anim_1,
-    STATUS_STONE,     NPC_ANIM_bill_blaster_Palette_00_Anim_0,
-    STATUS_STOP,      NPC_ANIM_bill_blaster_Palette_00_Anim_0,
-    STATUS_PARALYZE,  NPC_ANIM_bill_blaster_Palette_00_Anim_0,
+    STATUS_NORMAL,    ANIM_BillBlaster_Anim01,
+    STATUS_STONE,     ANIM_BillBlaster_Anim00,
+    STATUS_STOP,      ANIM_BillBlaster_Anim00,
+    STATUS_PARALYZE,  ANIM_BillBlaster_Anim00,
     STATUS_END,
 };
 
@@ -104,9 +104,9 @@ extern EvtScript N(idle_80219ED0);
 extern EvtScript N(handleEvent_80219EE0);
 
 EvtScript N(init_80219E6C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A200)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219ED0)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219EE0)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A200)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219ED0)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219EE0)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_RETURN
     EVT_END
@@ -120,55 +120,55 @@ EvtScript N(idle_80219ED0) = {
 EvtScript N(handleEvent_80219EE0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
-            EVT_SET_CONST(LW(2), -1)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
-            EVT_SET_CONST(LW(2), -1)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_WAIT(10)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_1)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -185,8 +185,8 @@ extern EvtScript N(8021A470);
 EvtScript N(takeTurn_8021A200) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_EXEC_WAIT(N(8021A2BC))
         EVT_CASE_EQ(1)
@@ -209,32 +209,32 @@ ApiStatus func_80218000_4A10A0(Evt* script, s32 isInitialCall) {
 
 
 EvtScript N(8021A2BC) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bill_blaster_Palette_00_Anim_2)
-    EVT_WAIT_FRAMES(13)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Anim02)
+    EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(StartRumble, 9)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2C8)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_SUB(LW(0), 33)
-    EVT_ADD(LW(1), 19)
-    EVT_ADD(LW(2), 3)
-    EVT_CALL(PlayEffect, EFFECT_00, LW(0), LW(1), LW(2), 2, 5, 0, 2, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_00, LW(0), LW(1), LW(2), 2, 5, 2, 2, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_SUB(LVar0, 33)
+    EVT_ADD(LVar1, 19)
+    EVT_ADD(LVar2, 3)
+    EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 0, 2, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT(2)
     EVT_CALL(func_80218000_4A10A0)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A4E8)), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LW(0))
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A4E8)), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8021A470) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
-    EVT_CALL(ActorExists, LW(0), LW(1))
-    EVT_IF_EQ(LW(1), FALSE)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(ActorExists, LVar0, LVar1)
+    EVT_IF_EQ(LVar1, FALSE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_END_IF
     EVT_RETURN

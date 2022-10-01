@@ -4,7 +4,7 @@
 #include "dead_structs.h"
 #endif
 
-void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -27,7 +27,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     f32 posZCCW;
     
     npc->duration = npcAISettings->chaseUpdateInterval / 2 + rand_int(npcAISettings->chaseUpdateInterval / 2 + 1);
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     detectedPlayer = FALSE;
 
@@ -116,23 +116,23 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     }
     if (detectedPlayer) {
         npc->duration = 10;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     }
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
-void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
 
     if (!basic_ai_check_player_dist(territory, enemy, npcAISettings->chaseRadius, npcAISettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
-        if (npc->currentAnim.w != enemy->animList[ENEMY_ANIM_MELEE_PRE]) {
+        if (npc->currentAnim != enemy->animList[ENEMY_ANIM_MELEE_PRE]) {
             if (npc->moveSpeed < 4.0) {
                 func_8003D660(npc, 0);
             } else {
@@ -148,7 +148,7 @@ void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVol
     }
 }
 
-void N(UnkFloAI_LosePlayer)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -168,14 +168,14 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
 
@@ -190,12 +190,14 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
-        npc->flags &= ~0x800;
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = AI_STATE_SUSPEND;

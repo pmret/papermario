@@ -23,18 +23,30 @@ def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
         return None
 
 
+def parse_segment_align(segment: Union[dict, list]) -> Optional[int]:
+    if isinstance(segment, dict) and "align" in segment:
+        return int(segment["align"])
+    return None
+
+
 def parse_segment_subalign(segment: Union[dict, list]) -> int:
-    default = options.get_subalign()
+    default = options.opts.subalign
     if isinstance(segment, dict):
         return int(segment.get("subalign", default))
     return default
 
 
 def parse_segment_section_order(segment: Union[dict, list]) -> List[str]:
-    default = options.get_section_order()
+    default = options.opts.section_order
     if isinstance(segment, dict):
         return segment.get("section_order", default)
     return default
+
+
+def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict):
+        return segment.get("follows_vram", None)
+    return None
 
 
 class Segment:
@@ -54,7 +66,7 @@ class Segment:
 
     @staticmethod
     def get_base_segment_class(seg_type):
-        platform = options.get_platform()
+        platform = options.opts.platform
         is_platform_seg = False
 
         # heirarchy is platform -> common -> fail
@@ -72,9 +84,9 @@ class Segment:
 
     @staticmethod
     def get_extension_segment_class(seg_type):
-        platform = options.get_platform()
+        platform = options.opts.platform
 
-        ext_path = options.get_extensions_path()
+        ext_path = options.opts.extensions_path
         if not ext_path:
             log.error(
                 f"could not load presumed extended segment type '{seg_type}' because no extensions path is configured"
@@ -131,14 +143,14 @@ class Segment:
         if isinstance(segment, dict) and "symbol_name_format" in segment:
             return str(segment["symbol_name_format"])
         else:
-            return options.get_symbol_name_format()
+            return options.opts.symbol_name_format
 
     @staticmethod
     def parse_segment_symbol_name_format_no_rom(segment: Union[dict, list]) -> str:
         if isinstance(segment, dict) and "symbol_name_format_no_rom" in segment:
             return str(segment["symbol_name_format_no_rom"])
         else:
-            return options.get_symbol_name_format_no_rom()
+            return options.opts.symbol_name_format_no_rom
 
     def __init__(
         self,
@@ -147,12 +159,12 @@ class Segment:
         type: str,
         name: str,
         vram_start: Any,
-        extract: bool = True,
-        given_subalign: int = options.get_subalign(),
-        exclusive_ram_id: Optional[str] = None,
-        given_dir: Path = Path(),
-        symbol_name_format: str = options.get_symbol_name_format(),
-        symbol_name_format_no_rom: str = options.get_symbol_name_format_no_rom(),
+        extract: bool,
+        given_subalign: Optional[int],
+        exclusive_ram_id: Optional[str],
+        given_dir: Path,
+        symbol_name_format: str,
+        symbol_name_format_no_rom: str,
         args=[],
         yaml={},
     ):
@@ -163,19 +175,22 @@ class Segment:
         self.vram_start = vram_start
         self.extract = extract
 
-        self.given_subalign = given_subalign
-        self.exclusive_ram_id = exclusive_ram_id
-        self.given_dir = given_dir
+        self.align: Optional[int] = None
+        self.given_subalign = given_subalign or options.opts.subalign
+        self.exclusive_ram_id: Optional[str] = exclusive_ram_id
+        self.given_dir: Path = given_dir
         self.given_seg_symbols: Dict[
             int, List[Symbol]
         ] = {}  # Symbols known to be in this segment
-        self.given_section_order: List[str] = options.get_section_order()
+        self.given_section_order: List[str] = options.opts.section_order
+        self.follows_vram: Optional[str] = None
 
         self.given_symbol_name_format = symbol_name_format
         self.given_symbol_name_format_no_rom = symbol_name_format_no_rom
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
+        self.follows_vram_segment: Optional[Segment] = None
 
         self.args: List[str] = args
         self.yaml = yaml
@@ -233,7 +248,13 @@ class Segment:
             args=args,
             yaml=yaml,
         )
-        cls.given_section_order = parse_segment_section_order(yaml)
+        ret.given_section_order = parse_segment_section_order(yaml)
+
+        if not ret.follows_vram:
+            ret.follows_vram = parse_segment_follows_vram(yaml)
+
+        if not ret.align:
+            ret.align = parse_segment_align(yaml)
         return ret
 
     @property
@@ -339,7 +360,7 @@ class Segment:
         return self.should_split()
 
     def should_split(self) -> bool:
-        return self.extract and options.mode_active(self.type)
+        return self.extract and options.opts.is_mode_active(self.type)
 
     def scan(self, rom_bytes: bytes):
         pass
@@ -375,7 +396,7 @@ class Segment:
             return []
 
     def log(self, msg):
-        if options.verbose():
+        if options.opts.verbose:
             log.write(f"{self.type} {self.name}: {msg}")
 
     def warn(self, msg: str):

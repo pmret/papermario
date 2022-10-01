@@ -159,7 +159,7 @@ def get_constants():
     CONSTANTS["NPC_SPRITE"] = {}
     CONSTANTS["MAP_NPCS"] = {}
 
-    [SAVE_VARS.add(x) for x in ["EVT_WORLD_LOCATION", "EVT_STORY_PROGRESS"]]
+    [SAVE_VARS.add(x) for x in ["GB_WorldLocation", "GB_StoryProgress"]]
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
@@ -565,8 +565,7 @@ replace_funcs = {
 }
 
 def trim_lw(arg):
-    arg = arg[3:-1]
-    return arg
+    return arg[arg.find("(")+1:arg.find(")")]
 
 
 def replace_constants(self, func, args):
@@ -670,21 +669,21 @@ class ScriptDisassembler:
     def var(self, arg, prefer_hex = False, use_evt_ptr = True):
         if arg in self.symbol_map:
             s = self.symbol_map[arg][0][1]
-            return f"EVT_ADDR({s})" if use_evt_ptr else s
+            return f"EVT_PTR({s})" if use_evt_ptr else s
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
             if v <= -220000000: return f"EVT_FLOAT({round_fixed((v + 230000000) / 1024)})"
-            elif v <= -200000000: return f"UF({v + 210000000})"
-            elif v <= -180000000: return f"UW({v + 190000000})"
-            elif v <= -160000000: return f"GSW({v + 170000000})"
-            elif v <= -140000000: return f"LSW({v + 150000000})"
-            elif v <= -120000000: return f"GSWF({v + 130000000})"
-            elif v <= -100000000: return f"LSWF({v + 110000000})"
-            elif v <= -80000000: return f"GF({v + 90000000})"
-            elif v <= -60000000: return f"LF({v + 70000000})"
-            elif v <= -40000000: return f"GW({v + 50000000})"
-            elif v <= -20000000: return f"LW({v + 30000000})"
+            elif v <= -200000000: return f"ArrayFlag({v + 210000000})"
+            elif v <= -180000000: return f"ArrayVar({v + 190000000})"
+            elif v <= -160000000: return f"GameByte({v + 170000000})"
+            elif v <= -140000000: return f"AreaByte({v + 150000000})"
+            elif v <= -120000000: return f"GameFlag({v + 130000000})"
+            elif v <= -100000000: return f"AreaFlag({v + 110000000})"
+            elif v <= -80000000: return f"MapFlag({v + 90000000})"
+            elif v <= -60000000: return f"LocalFlag({v + 70000000})"
+            elif v <= -40000000: return f"MapVar({v + 50000000})"
+            elif v <= -20000000: return f"LocalVar({v + 30000000})"
 
         if arg == 0xFFFFFFFF:
             return "-1"
@@ -719,7 +718,7 @@ class ScriptDisassembler:
                 prefix = "ApiStatus "
                 suffix = "(Evt* script, s32 isInitialCall)"
             elif name.startswith("N(npcAISettings_"):
-                prefix = "NpcAISettings "
+                prefix = "MobileAISettings "
             elif name.startswith("N(npcSettings_"):
                 prefix = "NpcSettings "
             elif name.startswith("N(npcGroup_"):
@@ -790,7 +789,7 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line("EVT_END_LOOP")
         elif opcode == 0x07: self.write_line(f"EVT_BREAK_LOOP")
-        elif opcode == 0x08: self.write_line(f"EVT_WAIT_FRAMES({self.var(argv[0])})")
+        elif opcode == 0x08: self.write_line(f"EVT_WAIT({self.var(argv[0])})")
         elif opcode == 0x09: self.write_line(f"EVT_WAIT_SECS({self.var(argv[0])})")
         elif opcode == 0x0A:
             if self.var(argv[0]).startswith("LW"):
@@ -1058,7 +1057,7 @@ if __name__ == "__main__":
                     script_text = script.disassemble()
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
-                            potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
+                            potential_struct_sizes = { "StaticNpc": 0x1F0, "MobileAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
                             gap_size = offset - gap_start
                             potential_struct = "Unknown data"
                             potential_count = 1
@@ -1117,8 +1116,8 @@ if __name__ == "__main__":
                             f.seek(offset)
                             print(ScriptDisassembler(f).disassemble(), end="")
                             break
-                except:
-                    break
+                except Exception as e:
+                    print(e)
 
                 loffset = script.end_pos
                 LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]

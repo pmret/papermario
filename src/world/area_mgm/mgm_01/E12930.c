@@ -1,6 +1,7 @@
 #include "mgm_01.h"
 #include "hud_element.h"
 #include "effects.h"
+#include "entity.h"
 
 void delete_entity(s32 entityIndex);
 void set_message_images(MessageImageData* images);
@@ -67,8 +68,6 @@ typedef struct JumpGameData {
     /* 0x074 */ JumpGamePanel panels[NUM_BLOCKS];
 } JumpGameData; /* size = 0x468 */
 
-extern EntityBlueprint D_802EA0C4;
-
 extern s32 MessagePlural;
 extern s32 MessageSingular;
 extern MessageImageData N(MsgImgs_Panels);
@@ -119,7 +118,7 @@ void N(draw_score_display) (void* renderData) {
             }
         }
     }
-    
+
     if (data->scoreWindowPosX < SCREEN_WIDTH + 1) {
         draw_box(0, 9, data->scoreWindowPosX, 28, 0, 72, 20, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
         hudElemID = data->hudElemID;
@@ -182,10 +181,10 @@ ApiStatus N(GetPanelInfo)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, LW(0), data->panels[index].state);
-    evt_set_variable(script, LW(1), data->panels[index].modelID);
-    evt_set_variable(script, LW(2), data->panels[index].type);
-    evt_set_variable(script, LW(3), data->panels[index].tallyPosIndex);
+    evt_set_variable(script, LVar0, data->panels[index].state);
+    evt_set_variable(script, LVar1, data->panels[index].modelID);
+    evt_set_variable(script, LVar2, data->panels[index].type);
+    evt_set_variable(script, LVar3, data->panels[index].tallyPosIndex);
 
     return ApiStatus_DONE2;
 }
@@ -227,7 +226,7 @@ ApiStatus N(InitPanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     data->panels[index].endPos.z = data->panels[index].curPos.z;
 
     data->panels[index].curAngle = 0;
-    
+
     data->panels[index].endScale = 2.0;
     data->panels[index].curScale = 1.0;
     data->panels[index].startScale = 1.0;
@@ -260,9 +259,9 @@ ApiStatus N(UpdatePanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     data->panels[index].lerpElapsed++;
 
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LVar3, TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LVar3, FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -288,9 +287,9 @@ ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
 
     data->panels[index].lerpElapsed++;
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LVar3, TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LVar3, FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -366,9 +365,9 @@ ApiStatus N(UpdatePanelMoveToTally)(Evt* script, s32 isInitialCall) {
         data->panels[index].lerpElapsed, data->panels[index].lerpDuration);
 
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LVar3, TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LVar3, FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -456,10 +455,10 @@ ApiStatus N(EndBowserPanelAnimation)(Evt* script, s32 isInitialCall) {
     data->panels[i].curPos.y = N(TallyPosY)[data->panels[i].tallyPosIndex];
     data->panels[i].curPos.z = 110.0f;
 
-    evt_set_variable(script, LW(1), data->panels[i].modelID);
-    evt_set_float_variable(script, LW(5), data->panels[i].curPos.x);
-    evt_set_float_variable(script, LW(6), data->panels[i].curPos.y);
-    evt_set_float_variable(script, LW(7), data->panels[i].curPos.z);
+    evt_set_variable(script, LVar1, data->panels[i].modelID);
+    evt_set_float_variable(script, LVar5, data->panels[i].curPos.x);
+    evt_set_float_variable(script, LVar6, data->panels[i].curPos.y);
+    evt_set_float_variable(script, LVar7, data->panels[i].curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -470,11 +469,11 @@ ApiStatus N(GetPanelPos)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    evt_set_float_variable(script, LW(5), data->panels[index].curPos.x);
-    evt_set_float_variable(script, LW(6), data->panels[index].curPos.y);
-    evt_set_float_variable(script, LW(7), data->panels[index].curPos.z);
-    evt_set_float_variable(script, LW(8), data->panels[index].curAngle);
-    evt_set_float_variable(script, LW(9), data->panels[index].curScale);
+    evt_set_float_variable(script, LVar5, data->panels[index].curPos.x);
+    evt_set_float_variable(script, LVar6, data->panels[index].curPos.y);
+    evt_set_float_variable(script, LVar7, data->panels[index].curPos.z);
+    evt_set_float_variable(script, LVar8, data->panels[index].curAngle);
+    evt_set_float_variable(script, LVar9, data->panels[index].curScale);
 
     return ApiStatus_DONE2;
 }
@@ -565,7 +564,7 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
                 data->type[indexA] = temp;
             }
         }
-        
+
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
     }
@@ -573,14 +572,14 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
     script->functionTemp[0]--;
     if (script->functionTemp[0] <= 0) {
         curBlockIdx = script->functionTemp[1];
-        entityIndex = create_entity(&D_802EA0C4,
+        entityIndex = create_entity(&Entity_BrickBlock,
             N(BlockPosX)[curBlockIdx],
             N(BlockPosY)[curBlockIdx],
             N(BlockPosZ)[curBlockIdx],
             0, 0, 0, 0, MAKE_ENTITY_END);
         data->panels[curBlockIdx].entityIndex = entityIndex;
         get_entity_by_index(entityIndex)->boundScriptBytecode = scriptArray[curBlockIdx];
-        fx_sparkles(3,
+        fx_sparkles(FX_SPARKLES_3,
             N(BlockPosX)[curBlockIdx],
             N(BlockPosY)[curBlockIdx] + 13,
             N(BlockPosZ)[curBlockIdx] + 5,
@@ -666,7 +665,7 @@ ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LW(0xA), gPlayerData.coins);
+    evt_set_variable(script, LVarA, gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 

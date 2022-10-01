@@ -8,23 +8,23 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     f32 x, y, z, hitDepth;
     f32 y2;
 
     detectVolumePtr->skipPlayerDetectChance = 0;
     detectVolumePtr->shape = enemy->territory->wander.detectShape;
-    detectVolumePtr->pointX = enemy->territory->wander.detect.x;
-    detectVolumePtr->pointZ = enemy->territory->wander.detect.z;
-    detectVolumePtr->sizeX = enemy->territory->wander.detectSizeX;
-    detectVolumePtr->sizeZ = enemy->territory->wander.detectSizeZ;
+    detectVolumePtr->pointX = enemy->territory->wander.detectPos.x;
+    detectVolumePtr->pointZ = enemy->territory->wander.detectPos.z;
+    detectVolumePtr->sizeX = enemy->territory->wander.detectSize.x;
+    detectVolumePtr->sizeZ = enemy->territory->wander.detectSize.z;
     detectVolumePtr->halfHeight = 500.0f;
     detectVolumePtr->detectFlags = 0;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        enemy->aiFlags |= 0x10;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_10;
         hitDepth = 1000.0f;
         x = npc->pos.x;
         y = npc->pos.y;
@@ -33,9 +33,9 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
         enemy->varTable[1] = y;
     }
 
-    if (enemy->aiFlags & 4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->aiPaused == 0) {
-            enemy->aiFlags &= ~4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else {
             return ApiStatus_BLOCK;
         }
@@ -43,7 +43,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim = enemy->animList[0];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             script->functionTemp[1] = 0;
@@ -63,7 +63,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
                 break;
             }
         case 10:
-            npc->currentAnim.w = enemy->animList[3];
+            npc->currentAnim = enemy->animList[3];
             npc->planarFlyDist = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             npc->jumpScale = 1.3f;
             npc->jumpVelocity = 0.0f;
@@ -173,7 +173,7 @@ ApiStatus N(UnkFunc001)(Evt* script, s32 isInitialCall) {
                 break;
             }
         case 14:
-            npc->currentAnim.w = enemy->animList[8];
+            npc->currentAnim = enemy->animList[8];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             npc->duration = 15;

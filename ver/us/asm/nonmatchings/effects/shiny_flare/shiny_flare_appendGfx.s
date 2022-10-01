@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel shiny_flare_appendGfx
 /* 3D7470 E00DA230 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 3D7474 E00DA234 0080302D */  daddu     $a2, $a0, $zero

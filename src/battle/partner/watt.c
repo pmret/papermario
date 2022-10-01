@@ -86,7 +86,7 @@ ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
-    data = D_8023C1B4->data;
+    data = D_8023C1B4->data.thunderboltRing;
     data->unk_30 = 3;
 
     return ApiStatus_DONE2;
@@ -106,7 +106,7 @@ ApiStatus func_80238668_704158(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
-        ((BulbGlowFXData*)D_8023C1B0->data)->unk_14 = 5;
+        D_8023C1B0->data.bulbGlow->unk_14 = 5;
         return ApiStatus_DONE2;
     }
 
@@ -120,7 +120,7 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 statusChance = lookup_status_chance(targetActor->statusTable, 5);
 
-    if (targetActor->transStatus == 14) {
+    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
         statusChance = 0;
     }
     if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -142,7 +142,7 @@ ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
-    data = D_8023C1B4->data;
+    data = D_8023C1B4->data.thunderboltRing;
     data->unk_30 = 2;
 
     return ApiStatus_DONE2;
@@ -163,7 +163,7 @@ ApiStatus func_80238C08_7046F8(Evt* script, s32 isInitialCall) {
     if (battleStatus->turboChargeTurnsLeft < var1) {
         battleStatus->turboChargeTurnsLeft = var1;
         battleStatus->turboChargeAmount = 1;
-        battleStatus->unk_43C->unk_0C->unk_24 = battleStatus->turboChargeTurnsLeft;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
     }
 
     if (gBattleStatus.flags2 & 2) {
@@ -190,7 +190,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
-        if (targetActor->transStatus == 14) {
+        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

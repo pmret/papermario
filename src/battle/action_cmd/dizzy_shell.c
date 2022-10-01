@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "audio/public.h"
 
 #define NAMESPACE action_command_dizzy_shell
 
@@ -103,12 +104,12 @@ void func_802A928C_4263FC(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_68 == 0) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
 
                     actionCommandStatus->barFillLevel -= D_802A9800_426970[actionCommandStatus->barFillLevel / cutoff / 20];
@@ -125,7 +126,7 @@ void func_802A928C_4263FC(void) {
 
             if (battleStatus->currentButtonsPressed & A_BUTTON) {
                 s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
-                s32 b = actionCommandStatus->unk_64 * 850;
+                s32 b = actionCommandStatus->easyVersion * 850;
                 s32 temp_v1_2 = (a * b) / 10000;
 
                 if (temp_v1_2 != 0) {
@@ -155,7 +156,7 @@ void func_802A928C_4263FC(void) {
             }
 
             fillLevel = actionCommandStatus->barFillLevel;
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 fillLevel = 0;
             }
 
@@ -176,13 +177,13 @@ void func_802A928C_4263FC(void) {
             if (battleStatus->actionSuccess == 100) {
                 func_80269160();
             }
-            sfx_stop_sound(0x80000041);
+            sfx_stop_sound(SOUND_80000041);
             btl_set_popup_duration(0);
             actionCommandStatus->unk_54 = 5;
             actionCommandStatus->state = 12;
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;

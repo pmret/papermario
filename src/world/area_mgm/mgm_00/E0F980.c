@@ -1,6 +1,5 @@
 #include "mgm_00.h"
 
-void snd_start_sound(s32 soundID, u8 volume, u8 pan);
 void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
 
 extern Gfx D_80243C50_E123F0[];
@@ -39,28 +38,28 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
         gDPPipeSync(gMasterGfxPos++);
         msg_draw_frame(45, 50, 230, 82, 6, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
         if (data->gameType == MINIGAME_TYPE_JUMP) {
-            draw_msg(MESSAGE_ID(0x8,0x1C), 66, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_msg(MSG_MGM_001C, 66, 57, alpha, MSG_PAL_TEAL, 0);
             draw_number(gPlayerData.jumpGamePlays,   219, 78,  TRUE, MSG_PAL_WHITE, alpha, 3);
             draw_number(gPlayerData.jumpGameTotal,   219, 93,  TRUE, MSG_PAL_WHITE, alpha, 3);
             draw_number(gPlayerData.jumpGameRecord,  219, 108, TRUE, MSG_PAL_WHITE, alpha, 3);
         } else {
-            draw_msg(MESSAGE_ID(0x8,0x1D), 64, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_msg(MSG_MGM_001D, 64, 57, alpha, MSG_PAL_TEAL, 0);
             draw_number(gPlayerData.smashGamePlays,  219, 78,  TRUE, MSG_PAL_WHITE, alpha, 3);
             draw_number(gPlayerData.smashGameTotal,  219, 93,  TRUE, MSG_PAL_WHITE, alpha, 3);
             draw_number(gPlayerData.smashGameRecord, 219, 108, TRUE, MSG_PAL_WHITE, alpha, 3);
         }
 
-        draw_msg(MESSAGE_ID(0x8,0x1E), 58,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MESSAGE_ID(0x8,0x23), 223, 78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MESSAGE_ID(0x8,0x1F), 58,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MESSAGE_ID(0x8,0x21), 223, 93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MESSAGE_ID(0x8,0x20), 58,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MESSAGE_ID(0x8,0x21), 223, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_001E, 58,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0023, 223, 78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_001F, 58,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, 223, 93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0020, 58,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, 223, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
     }
 }
 
 void N(animate_and_draw_record)(void* renderData) {
-    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, GW(RECORD_DISPLAY_MAP_VAR));
+    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MapVar(RECORD_DISPLAY_MAP_VAR));
 
     switch (data->state) {
         case RECORD_START_SHOW:
@@ -127,7 +126,7 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
         data->alpha = 255;
         data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
-        evt_set_variable(script, GW(RECORD_DISPLAY_MAP_VAR), (s32)data);
+        evt_set_variable(script, MapVar(RECORD_DISPLAY_MAP_VAR), (s32)data);
     }
     data = script->functionTempPtr[0];
     if (data->state == RECORD_STATE_DONE) {

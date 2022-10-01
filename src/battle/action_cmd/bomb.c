@@ -109,7 +109,7 @@ void func_802A928C_427CFC(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
 
             // fallthrough
@@ -126,7 +126,7 @@ void func_802A928C_427CFC(void) {
             }
 
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                switch(actionCommandStatus->unk_64) {
+                switch (actionCommandStatus->easyVersion) {
                     case 0: {
                         s32 fillOffset = battleStatus->unk_434[actionCommandStatus->unk_50] * 235 * 4;
                         actionCommandStatus->barFillLevel += fillOffset / 100;
@@ -173,7 +173,7 @@ void func_802A928C_427CFC(void) {
                     func_80269160();
                 }
 
-                sfx_stop_sound(0x80000041);
+                sfx_stop_sound(SOUND_80000041);
                 btl_set_popup_duration(0);
                 actionCommandStatus->unk_54 = 5;
                 actionCommandStatus->state = 12;

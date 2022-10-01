@@ -1,7 +1,20 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 TimesHudScript;
+extern HudScript* TimesHudScript;
+extern HudScript* SPIncrementHudScripts[];
+extern HudScript* SPStarHudScripts[];
+extern s32 D_800F7FE8;
+extern s32 D_800F7FEC;
+extern s32 D_800F7FF0;
+extern s32 D_800F7FF4;
+extern s32 D_800F7FF8;
+extern s32 D_800F7FFC;
+extern s32 D_800F8000[];
+
+extern s16 D_8010CD10;
+extern s16 D_8010CD12;
+
 extern s32 DigitHudScripts[10];
 
 extern HudScript HES_StatusHP;
@@ -13,6 +26,10 @@ extern HudScript HES_StatusStarPoint;
 extern HudScript HES_StatusStar1;
 extern HudScript HES_StatusTimes;
 extern HudScript HES_StatusSPShine;
+extern HudScript HES_StatusSPEmptyIncrement;
+extern HudScript HES_StatusStarEmpty;
+
+extern HudScript SlashHudScript;
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -320,10 +337,10 @@ void initialize_status_menu(void) {
     uiStatus->starpointsBlinkCounter = 0;
     uiStatus->unk_6C[2] = -1;
     uiStatus->unk_3B[1] = 0;
-    uiStatus->unk_57[0] = 0;
-    uiStatus->unk_57[1] = 0;
-    uiStatus->unk_57[2] = 0;
-    uiStatus->unk_57[3] = 0;
+    uiStatus->unk_57 = 0;
+    uiStatus->unk_58 = 0;
+    uiStatus->unk_59 = 0;
+    uiStatus->spBarsToBlink = 0;
     uiStatus->unk_6C[0] = 0;
     uiStatus->unk_6C[1] = 0;
     uiStatus->iconIndex12 = -1;
@@ -445,8 +462,75 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
 #endif
 
-INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
+// close but some ordering / reg issues
+#ifdef NON_MATCHING
+void status_menu_draw_stat(s32 id, s32 x, s32 y, s32 arg3, s32 arg4) {
+    s8 digits[4];
+    s32 sp18;
+    s32 sp1C;
+    s32 cond;
+    s32 digit;
+    s32 numDigits;
+    s32 localX;
+    s32 localY;
+    s32 i;
 
+    numDigits = 2;
+
+    sp18 = x + 8;
+    sp1C = y + 8;
+    i = 0;
+    hud_element_set_script(id, SlashHudScript);
+    hud_element_set_render_pos(id, x + 22, y + 9);
+    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_draw_next(id);
+
+
+    for (; i < numDigits; i++) {
+        s32 num = arg3 % 10;
+
+        digits[numDigits - i - 1] = num;
+        arg3 /= 10;
+    }
+
+    localX = sp18;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+
+    for (i = 0; i < numDigits; i++) {
+        digits[numDigits - i - 1] = arg4 % 10;
+        arg4 /= 10;
+    }
+
+    localX = sp18 + 26;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+}
+#else
+INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
+#endif
+
+void update_status_menu(void);
 INCLUDE_ASM(s32, "80850_len_3060", update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
@@ -526,7 +610,7 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(0x14, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
+        set_window_properties(WINDOW_ID_20, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
         set_window_update(WINDOW_ID_20, (s32)basic_window_update);
         index = hud_element_create(&HES_MenuTimes);
         uiStatus->iconIndex10 = index;
@@ -883,13 +967,14 @@ void reset_status_menu(void) {
 // Weird order of loading stuff
 #ifdef NON_EQUIVALENT
 s32 is_ability_active(s32 ability) {
-    s32 abilityMoveID;
     PlayerData* playerData = &gPlayerData;
     s32 attackFXArray[6];
+    s32 abilityMoveID;
     s32 ret;
     s32 attackFXIndex;
-    s32 badgeMoveID;
     s32 i;
+    s32 badgeMoveID;
+    u8* moveID;
 
     ret = 0;
     attackFXIndex = 0;
@@ -898,21 +983,19 @@ s32 is_ability_active(s32 ability) {
         attackFXArray[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         return 0;
     }
 
-
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-        s32 b = playerData->equippedBadges[i];
+        badgeMoveID = playerData->equippedBadges[i];
 
-        if (b != 0) {
-            badgeMoveID = gItemTable[b].moveID;
+        if (badgeMoveID != 0) {
+            moveID = &gItemTable[badgeMoveID].moveID;
+            badgeMoveID = *moveID;
         }
 
         switch (ability) {
-            default:
-                continue;
             case ABILITY_DODGE_MASTER:
                 abilityMoveID = 0x4c;
                 break;
@@ -1106,6 +1189,9 @@ s32 is_ability_active(s32 ability) {
             case ABILITY_HEALTHY_HEALTHY:
                 abilityMoveID = 0x4a;
                 break;
+            default:
+                do { } while (0);
+                continue;
         }
         if (badgeMoveID == abilityMoveID) {
             ret++;
@@ -1120,7 +1206,6 @@ s32 is_ability_active(s32 ability) {
 #else
 INCLUDE_ASM(s32, "80850_len_3060", is_ability_active);
 #endif
-
 
 s32 is_partner_ability_active(s32 ability) {
     return 0;
@@ -1147,7 +1232,7 @@ s32 add_coins(s32 amt) {
     return playerData->coins;
 }
 
-s8 add_star_points(s32 amt) {
+s32 add_star_points(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
@@ -1165,7 +1250,7 @@ s8 add_star_points(s32 amt) {
     return gPlayerData.starPoints;
 }
 
-u8 add_star_pieces(s32 amt) {
+s32 add_star_pieces(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
@@ -1202,14 +1287,14 @@ void add_SP(s32 amt) {
     s32 phi_v1;
     s32 maxPower;
 
-    uiStatus->unk_57[0] = 1;
-    uiStatus->unk_57[1] = 60;
+    uiStatus->unk_57 = 1;
+    uiStatus->unk_58 = 60;
 
     phi_v1 = playerData->specialBarsFilled;
     if (playerData->specialBarsFilled < 0) {
         phi_v1 = playerData->specialBarsFilled + 31;
     }
-    uiStatus->unk_57[2] = phi_v1 >> 5;
+    uiStatus->unk_59 = phi_v1 >> 5;
 
     playerData->specialBarsFilled += amt;
 
@@ -1291,7 +1376,7 @@ s8 add_fortress_keys(s32 amt) {
     return gPlayerData.fortressKeyCount;
 }
 
-s8 subtract_fortress_keys(s8 amt) {
+s32 subtract_fortress_keys(s32 amt) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->fortressKeyCount -= amt;
@@ -1302,6 +1387,6 @@ s8 subtract_fortress_keys(s8 amt) {
     return playerData->fortressKeyCount;
 }
 
-s8 get_fortress_key_count(void) {
+s32 get_fortress_key_count(void) {
     return gPlayerData.fortressKeyCount;
 }

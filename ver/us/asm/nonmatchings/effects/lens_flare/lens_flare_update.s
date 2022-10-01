@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00347B0
+.double 0.78
+
+dlabel D_E00347B8
+.double 0.93
+
+dlabel D_E00347C0
+.double 0.29
+
+dlabel D_E00347C8
+.double 0.9
+
+.section .text
+
 glabel lens_flare_update
 /* 344B20 E0034110 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 344B24 E0034114 AFBF0018 */  sw        $ra, 0x18($sp)

@@ -1,18 +1,24 @@
 #include "common.h"
 #include "effects.h"
+#include "ld_addrs.h"
+#include "entity.h"
 
 #define REFLECTED_SWITCH_HIDDEN 1
 #define REFLECTED_SWITCH_LINKED 2
 
-void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2);
+extern Gfx Entity_RedSwitch_Render[];
+extern Gfx Entity_BlueSwitch_Render[];
+extern Gfx Entity_GreenStompSwitch_Render[];
+
+BSS Entity* SwitchToLink;
 
 void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
-            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_SPIN_POUND)
+            || (playerStatus->actionState == ACTION_STATE_TORNADO_POUND)) {
             exec_entity_commandlist(entity);
             data->greenMotionTimer = 8;
         }
@@ -71,8 +77,8 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
-            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_SPIN_POUND)
+            || (playerStatus->actionState == ACTION_STATE_TORNADO_POUND)) {
             exec_entity_commandlist(entity);
         }
     }
@@ -109,8 +115,8 @@ void entity_small_switch_idle(Entity* entity) {
         return;
     }
 
-    if (!(entity->collisionFlags & 1)) {
-        if (!(entity->collisionFlags & 0x80)) {
+    if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
+        if (!(entity->collisionFlags & ENTITY_COLLISION_PARTNER)) {
             return;
         }
     }
@@ -125,34 +131,32 @@ void entity_small_switch_idle(Entity* entity) {
 }
 
 void entity_RedSwitch_wait_and_reset(Entity* entity) {
-    if (!(entity->collisionFlags & 1)) {
+    if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_base_switch_anim_init(Entity* entity) {
-    SwitchData* temp = entity->dataBuf.swtch;
+    SwitchData* data = entity->dataBuf.swtch;
 
-    temp->fallVelocity = 1.0f;
-    temp->deltaScaleX = 0.1f;
-    temp->deltaScaleY = -0.1f;
-    temp->animStateScaleX = 0;
-    temp->animStateScaleY = 0;
+    data->fallVelocity = 1.0f;
+    data->deltaScaleX = 0.1f;
+    data->deltaScaleY = -0.1f;
+    data->animStateScaleX = 0;
+    data->animStateScaleY = 0;
 }
 
 s32 entity_RedSwitch_animate_scale(Entity* entity) {
-    f32 temp_f4;
+    f32 phi_f4;
     f32 temp_f6;
     SwitchData* data = entity->dataBuf.swtch;
-    f32 phi_f4;
     s32 phi_s2 = 0;
 
     switch (data->animStateScaleX) {
         case 0:
             temp_f6 = data->baseScale.z * 0.3;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -164,9 +168,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 1:
             temp_f6 = data->baseScale.z * -0.2;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -178,9 +181,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 2:
             temp_f6 = data->baseScale.z * 0.15;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -192,9 +194,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 3:
             temp_f6 = data->baseScale.z * -0.1;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -205,9 +206,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             }
             break;
         case 4:
-            temp_f4 = (data->baseScale.x - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = (data->baseScale.x - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -228,9 +228,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
     switch (data->animStateScaleY) {
         case 0:
             temp_f6 = data->baseScale.z * -0.5;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -242,9 +241,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 1:
             temp_f6 = data->baseScale.z * 0.1;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -256,9 +254,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 2:
             temp_f6 = data->baseScale.z * -0.3;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -270,9 +267,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 3:
             temp_f6 = data->baseScale.z * 0.0;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -283,9 +279,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             }
             break;
         case 4:
-            temp_f4 = (data->baseScale.y - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = (data->baseScale.y - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -316,18 +311,16 @@ void entity_base_switch_start_bound_script(Entity* entity) {
 }
 
 void entity_base_switch_animate_scale(Entity* entity) {
-    f32 temp_f4;
+    f32 phi_f4;
     f32 scaleChange;
     SwitchData* data = entity->dataBuf.swtch;
-    f32 phi_f4;
     s32 phi_s2 = 0;
 
     switch (data->animStateScaleX) {
         case 0:
             scaleChange = data->baseScale.z * 0.3;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -337,12 +330,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 1:
             scaleChange = (data->baseScale.z * -0.2);
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -352,12 +343,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 2:
             scaleChange = data->baseScale.z * 0.15;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -367,12 +356,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 3:
             scaleChange = data->baseScale.z * -0.1;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -382,7 +369,6 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 4:
             phi_s2++;
             break;
@@ -393,9 +379,8 @@ void entity_base_switch_animate_scale(Entity* entity) {
     switch (data->animStateScaleY) {
         case 0:
             scaleChange = data->baseScale.z * -0.5;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -405,12 +390,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 1:
             scaleChange = data->baseScale.z * 0.1;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -420,12 +403,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 2:
             scaleChange = data->baseScale.z * -0.3;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -435,7 +416,6 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 3:
             phi_s2++;
             break;
@@ -458,7 +438,7 @@ void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;
 
-    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_1000000;
+    playerStatus->animFlags |= PA_FLAGS_1000000;
     data->baseScale.x = 1.0f;
     data->baseScale.y = 1.0f;
     data->baseScale.z = 1.0f;
@@ -496,3 +476,103 @@ void entity_HugeBlueSwitch_init(Entity* entity) {
     data->baseScale.y = 3.0f;
     data->baseScale.z = 3.0f;
 }
+
+EntityScript Entity_RedSwitch_Script = {
+    es_SetCallback(entity_small_switch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_RedSwitch_animate_scale, 0)
+    es_SetCallback(entity_RedSwitch_wait_and_reset, 0)
+    es_Restart
+    es_End
+};
+
+EntityScript Entity_HugeBlueSwitch_Script = {
+    es_SetCallback(entity_HugeBlueSwitch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_base_switch_animate_scale, 0)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+
+EntityScript Entity_BlueSwitch_Script = {
+    es_SetCallback(entity_small_switch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_base_switch_animate_scale, 0)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+
+EntityScript Entity_GreenStompSwitch_Script = {
+    es_SetCallback(entity_GreenStompSwitch_idle, 0)
+    es_SetCallback(entity_GreenStompSwitch_retract, 0)
+    es_PlaySound(SOUND_152)
+    es_SetCallback(NULL, 128)
+    es_SetCallback(entity_GreenStompSwitch_extend, 0)
+    es_Restart
+};
+
+EntityModelScript Entity_BlueSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BlueSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
+
+EntityModelScript Entity_HugeBlueSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BlueSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
+
+EntityModelScript Entity_RedSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
+
+EntityModelScript Entity_GreenStompSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_GreenStompSwitch_Render, RENDER_MODE_SURFACE_OPA);
+
+EntityBlueprint Entity_RedSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA,
+    .typeDataSize = sizeof(SwitchData),
+    .renderCommandList = Entity_RedSwitch_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_switch_init,
+    .updateEntityScript = Entity_RedSwitch_Script,
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(RedSwitch) },
+    .entityType = ENTITY_TYPE_RED_SWITCH,
+    .aabbSize = {22, 23, 22}
+};
+
+EntityBlueprint Entity_BlueSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .typeDataSize = sizeof(SwitchData),
+    .renderCommandList = Entity_BlueSwitch_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_BlueSwitch_init,
+    .updateEntityScript = Entity_BlueSwitch_Script,
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(BlueSwitch) },
+    .entityType = ENTITY_TYPE_BLUE_SWITCH,
+    .aabbSize = {22, 23, 22}
+};
+
+EntityBlueprint Entity_HugeBlueSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .typeDataSize = sizeof(SwitchData),
+    .renderCommandList = Entity_HugeBlueSwitch_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_HugeBlueSwitch_init,
+    .updateEntityScript = Entity_HugeBlueSwitch_Script,
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(BlueSwitch) },
+    .entityType = ENTITY_TYPE_HUGE_BLUE_SWITCH,
+    .aabbSize = {66, 75, 66}
+};
+
+EntityBlueprint Entity_GreenStompSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(SwitchData),
+    .renderCommandList = Entity_GreenStompSwitch_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_switch_init,
+    .updateEntityScript = Entity_GreenStompSwitch_Script,
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(GreenStompSwitch) },
+    .entityType = ENTITY_TYPE_GREEN_STOMP_SWITCH,
+    .aabbSize = {50, 15, 50}
+};

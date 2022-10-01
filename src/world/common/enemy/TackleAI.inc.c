@@ -4,7 +4,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "sprite/npc/bony_beetle.h"
+#include "sprite/npc/BonyBeetle.h"
 
 // prerequisites
 #include "world/common/enemy/States_TackleAI.inc.c"
@@ -19,14 +19,14 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
 
@@ -49,7 +49,7 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->varTable[9] = 0;
@@ -78,10 +78,10 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if (npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2E ||
-                npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2F)
+            if (npc->currentAnim == ANIM_BonyBeetle_Anim2E ||
+                npc->currentAnim == ANIM_BonyBeetle_Anim2F)
             {
-                npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_C;
+                npc->currentAnim = ANIM_BonyBeetle_Anim0C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -102,11 +102,11 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->unk_B5 = 0;
-                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2F;
+                        npc->currentAnim = ANIM_BonyBeetle_Anim2F;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->unk_B5 = 1;
-                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2E;
+                        npc->currentAnim = ANIM_BonyBeetle_Anim2E;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -138,15 +138,15 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
             enemy->unk_B5 = 0;
         }
         if (enemy->varTable[8] != 0) {
-            switch (npc->currentAnim.w) {
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_4:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_C:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_E:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_10:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_12:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_16:
-                case NPC_ANIM_bony_beetle_Palette_00_Anim_18:
-                    npc->currentAnim.w++;
+            switch (npc->currentAnim) {
+                case ANIM_BonyBeetle_Anim04:
+                case ANIM_BonyBeetle_Anim0C:
+                case ANIM_BonyBeetle_Anim0E:
+                case ANIM_BonyBeetle_Anim10:
+                case ANIM_BonyBeetle_Anim12:
+                case ANIM_BonyBeetle_Anim16:
+                case ANIM_BonyBeetle_Anim18:
+                    npc->currentAnim++;
                     break;
             }
         }

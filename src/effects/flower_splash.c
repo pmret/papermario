@@ -8,47 +8,47 @@ void flower_splash_update(EffectInstance* effect);
 void flower_splash_render(EffectInstance* effect);
 void flower_splash_appendGfx(void* effect);
 
-void func_E0010000(FlowerFXData* effect) {
-    Matrix4f sp18;
-    Matrix4f sp58;
+void flower_splash_update_part_transform(FlowerFXData* effect) {
+    Matrix4f transformMtx;
+    Matrix4f tempMtx;
 
-    shim_guRotateF(sp18, effect->unk_24, 1.0f, 0.0f, 0.0f);
-    shim_guRotateF(sp58, effect->unk_2C, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, effect->unk_28, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guScaleF(sp58, effect->unk_18, effect->unk_1C, effect->unk_20);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guTranslateF(sp58, effect->unk_0C, effect->unk_10, effect->unk_14);
-    shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guMtxF2L(sp18, &effect->unk_30);
+    shim_guRotateF(transformMtx, effect->rot.x, 1.0f, 0.0f, 0.0f);
+    shim_guRotateF(tempMtx, effect->rot.z, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
+    shim_guRotateF(tempMtx, effect->rot.y, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
+    shim_guScaleF(tempMtx, effect->scale.x, effect->scale.y, effect->scale.z);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
+    shim_guTranslateF(tempMtx, effect->pos.x, effect->pos.y, effect->pos.z);
+    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
+    shim_guMtxF2L(transformMtx, &effect->transformMtx);
 }
 
-void func_E0010104(FlowerFXData* effect) {
-    effect->unk_70 *= 0.85;
-    effect->unk_0C += effect->unk_70 * effect->unk_90;
-    effect->unk_88 += effect->unk_8C;
-    effect->unk_84 += effect->unk_88;
-    effect->unk_80 += effect->unk_84;
-    effect->unk_10 += effect->unk_80;
-    effect->unk_14 += effect->unk_70 * effect->unk_94;
+void flower_splash_update_part(FlowerFXData* effect) {
+    effect->velocityScaleA *= 0.85;
+    effect->pos.x += effect->velocityScaleA * effect->velocity.x;
+    effect->integrator[2] += effect->integrator[3];
+    effect->integrator[1] += effect->integrator[2];
+    effect->integrator[0] += effect->integrator[1];
+    effect->pos.y += effect->integrator[0];
+    effect->pos.z += effect->velocityScaleA * effect->velocity.z;
 
-    if (effect->unk_80 < 0.0f) {
-        effect->unk_88 = 0.004f;
+    if (effect->integrator[0] < 0.0f) {
+        effect->integrator[2] = 0.004f;
     }
 
-    effect->unk_24 -= 1.0f;
-    if (effect->unk_24 < -100.0f) {
-        effect->unk_24 = -100.0f;
+    effect->rot.x -= 1.0f;
+    if (effect->rot.x < -100.0f) {
+        effect->rot.x = -100.0f;
     }
 }
 
-void flower_splash_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    FlowerFXData* data;
+    FlowerFXData* part;
     s32 numParts = 5;
-    f32 angle;
+    f32 partAngle;
     s32 i;
 
     bp.init = flower_splash_init;
@@ -61,36 +61,41 @@ void flower_splash_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    part = effect->data.flowerSplash = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.flowerSplash != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(*data));
+    shim_mem_clear(part, numParts * sizeof(*part));
 
-    for (i = 0; i < numParts; i++, data++) {
-        data->unk_00 = 1;
-        data->unk_28 = arg3 + (i * 72);
-        data->unk_74 = 0.29999998f;
-        data->unk_78 = 0.0f;
-        data->unk_7C = 0.0f;
-        data->unk_0C = arg0;
-        data->unk_10 = arg1;
-        data->unk_14 = arg2;
-        data->unk_18 = 1.0f;
-        data->unk_1C = 1.0f;
-        data->unk_20 = 1.0f;
-        data->primAlpha = 255;
-        data->unk_06 = 60;
-        data->unk_24 = 0.0f;
-        data->unk_2C = 0.0f;
-        data->unk_80 = 1.75f;
-        data->unk_84 = -0.08f;
-        data->unk_70 = -3.9f;
-        data->unk_88 = 0;
-        data->unk_8C = 0;
-        angle = shim_clamp_angle(data->unk_28);
-        data->unk_90 = shim_sin_deg(angle);
-        data->unk_94 = shim_cos_deg(angle);
+    for (i = 0; i < numParts; i++, part++) {
+        part->alive = TRUE;
+        part->rot.y = angle + (i * 72);
+        part->velocityScaleB = 0.29999998f;
+        part->visibilityAmt = 0.0f;
+        part->unk_7C = 0.0f;
+
+        part->pos.x = posX;
+        part->pos.y = posY;
+        part->pos.z = posZ;
+
+        part->scale.x = 1.0f;
+        part->scale.y = 1.0f;
+        part->scale.z = 1.0f;
+        
+        part->primAlpha = 255;
+        part->timeLeft = 60;
+
+        part->rot.x = 0.0f;
+        part->rot.z = 0.0f;
+
+        part->integrator[0] = 1.75f;
+        part->integrator[1] = -0.08f;
+        part->integrator[2] = 0.0f;
+        part->integrator[3] = 0.0f;
+
+        part->velocityScaleA = -3.9f;
+        partAngle = shim_clamp_angle(part->rot.y);
+        part->velocity.x = shim_sin_deg(partAngle);
+        part->velocity.z = shim_cos_deg(partAngle);
     }
 }
 
@@ -98,24 +103,24 @@ void flower_splash_init(EffectInstance* effect) {
 }
 
 void flower_splash_update(EffectInstance* effect) {
-    FlowerFXData* data = (FlowerFXData*)effect->data;
-    s32 cond = FALSE;
+    FlowerFXData* data = effect->data.flowerSplash;
+    s32 anyAlive = FALSE;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, data++) {
-        if (data->unk_00 != 0) {
-            data->unk_06--;
-            if (data->unk_06 <= 0) {
-                data->unk_00 = 0;
+        if (data->alive) {
+            data->timeLeft--;
+            if (data->timeLeft <= 0) {
+                data->alive = FALSE;
             } else {
-                cond = TRUE;
-                func_E0010104(data);
-                func_E0010000(data);
+                anyAlive = TRUE;
+                flower_splash_update_part(data);
+                flower_splash_update_part_transform(data);
             }
         }
     }
 
-    if (!cond) {
+    if (!anyAlive) {
         shim_remove_effect(effect);
     }
 }
@@ -130,26 +135,26 @@ void flower_splash_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-void func_E00104F4(EffectInstance* effect) {
+void flower_splash_dispose(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
 void flower_splash_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    FlowerFXData* data = effectTemp->data;
+    FlowerFXData* data = effectTemp->data.flowerSplash;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
     for (i = 0; i < effectTemp->numParts; i++, data++) {
-        if (data->unk_00 != 0) {
+        if (data->alive) {
             Gfx* dlist = D_09000E08_32DCC8;
 
-            gDisplayContext->matrixStack[gMatrixListPos] = data->unk_30;
+            gDisplayContext->matrixStack[gMatrixListPos] = data->transformMtx;
 
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, data->primAlpha);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

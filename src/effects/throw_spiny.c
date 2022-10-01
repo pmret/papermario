@@ -17,34 +17,6 @@ Gfx* D_E00C8710[2] = { D_09000800_3D02F0, D_090008D8_3D03C8 };
 u8 D_E00C8718[8] = { 110, 150, 130, 110, 100, 95, 100, 0 };
 u8 D_E00C8720[8] = { 80, 60, 80, 100, 120, 110, 100, 0 };
 
-typedef struct ThrowSpinyFXData {
-/* 0x00 */ s32 unk_00;
-/* 0x04 */ Vec3f pos;
-/* 0x10 */ f32 unk_10;
-/* 0x14 */ f32 unk_14;
-/* 0x18 */ f32 unk_18;
-/* 0x1C */ f32 unk_1C;
-/* 0x20 */ f32 unk_20;
-/* 0x24 */ f32 unk_24;
-/* 0x28 */ s32 life;
-/* 0x2C */ s32 lifeDuration;
-/* 0x30 */ s32 unk_30;
-/* 0x34 */ s32 unk_34;
-/* 0x38 */ s32 unk_38;
-/* 0x3C */ s32 rgba;
-/* 0x40 */ f32 unk_40;
-/* 0x44 */ f32 unk_44;
-/* 0x48 */ f32 gravity;
-/* 0x4C */ f32 unk_4C;
-/* 0x50 */ f32 yaw;
-/* 0x54 */ f32 rotationSpeed;
-/* 0x58 */ f32 xScale;
-/* 0x5C */ f32 yScale;
-/* 0x60 */ u32 state;
-/* 0x64 */ s32 unk_64;
-/* 0x68 */ s32 timeUntilFall; //how long until spiny falls to ground?
-} ThrowSpinyFXData; //sizeof 0x6C
-
 //during spiny surge
 EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 time) {
     EffectBlueprint bp;
@@ -63,8 +35,8 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
     effect = (EffectInstance*)shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    spinyObject = effect->data = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
-    ASSERT(effect->data != NULL);
+    spinyObject = effect->data.throwSpiny = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
+    ASSERT(effect->data.throwSpiny != NULL);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
 
@@ -114,7 +86,7 @@ void throw_spiny_init(EffectInstance* effect) {
 }
 
 void throw_spiny_update(EffectInstance* effectInstance) {
-    ThrowSpinyFXData* spinyObject = effectInstance->data;
+    ThrowSpinyFXData* spinyObject = effectInstance->data.throwSpiny;
     u32 state;
     f32 gravity;
     s32 lifeDuration;
@@ -178,7 +150,7 @@ void throw_spiny_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00C844C(void) {
@@ -188,10 +160,10 @@ void throw_spiny_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
     Camera* camera = &gCameras[gCurrentCameraID];
-    ThrowSpinyFXData* data = ((EffectInstance*)effect)->data;
+    ThrowSpinyFXData* data = ((EffectInstance*)effect)->data.throwSpiny;
     s32 temp_s5 = data->rgba;
     s32 temp_s6 = data->unk_00;
-    f32 scale = data->unk_40 * SPRITE_PIXEL_SCALE;
+    f32 scale = data->unk_40 * SPRITE_WORLD_SCALE_D;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));

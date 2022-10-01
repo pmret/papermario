@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "audio/public.h"
 
 #define NAMESPACE action_command_spook
 
@@ -105,12 +106,12 @@ void func_802A9298_4302B8(void) {
             battleStatus->unk_84 = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_68 == 0) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
 
                     actionCommandStatus->barFillLevel -= D_802A9920_430940[actionCommandStatus->barFillLevel / cutoff / 20];
@@ -125,7 +126,7 @@ void func_802A9298_4302B8(void) {
                 }
 
                  if (actionCommandStatus->unk_68 == 0) {
-                    if (actionCommandStatus->unk_64 != 0) {
+                    if (actionCommandStatus->easyVersion != 0) {
 
                         if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
                             actionCommandStatus->unk_5C = TRUE;
@@ -133,7 +134,7 @@ void func_802A9298_4302B8(void) {
 
                         if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
                             s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
-                            s32 b = actionCommandStatus->unk_64 * 850;
+                            s32 b = actionCommandStatus->easyVersion * 850;
 
                             actionCommandStatus->barFillLevel += (a * b) / 10000;
                             actionCommandStatus->unk_5C = 0;
@@ -141,7 +142,7 @@ void func_802A9298_4302B8(void) {
 
                         if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
                             s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
-                            s32 b = actionCommandStatus->unk_64 * 850;
+                            s32 b = actionCommandStatus->easyVersion * 850;
 
                             actionCommandStatus->barFillLevel -= (a * b) / 10000;
                         }
@@ -185,7 +186,7 @@ void func_802A9298_4302B8(void) {
             }
 
             fillLevel = actionCommandStatus->barFillLevel;
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 fillLevel = 0;
             }
 
@@ -207,12 +208,12 @@ void func_802A9298_4302B8(void) {
                 func_80269160();
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(0x80000041);
+            sfx_stop_sound(SOUND_80000041);
             actionCommandStatus->unk_54 = 5;
             actionCommandStatus->state = 12;
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;

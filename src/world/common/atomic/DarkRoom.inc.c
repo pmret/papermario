@@ -6,15 +6,15 @@ ApiStatus N(DarkRoomUpdate)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 255;
-        script->functionTemp[1] = 0;
+        script->functionTemp[1] = FALSE;
     }
     
     set_screen_overlay_center_worldpos(1, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
     
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->currentPartner == PARTNER_WATT) {
-            if (script->functionTemp[1] == 0) {
-                script->functionTemp[1] = 1;
+            if (!script->functionTemp[1]) {
+                script->functionTemp[1] = TRUE;
                 sfx_play_sound(SOUND_WATT_REPEL_DARKNESS);
             }
             script->functionTemp[0] -= 8;
@@ -23,8 +23,8 @@ ApiStatus N(DarkRoomUpdate)(Evt* script, s32 isInitialCall) {
             }
         }
     } else if (playerData->currentPartner == PARTNER_WATT) {
-        if (script->functionTemp[1] != 0) {
-            script->functionTemp[1] = 0;
+        if (script->functionTemp[1]) {
+            script->functionTemp[1] = FALSE;
             if (script->functionTemp[0] < 255) {
                 sfx_play_sound(SOUND_WATT_RESUME_DARKNESS);
             }

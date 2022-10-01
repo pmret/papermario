@@ -5,7 +5,10 @@
 
 #include "world/common/GetPeachDisguise.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_10/ACB3C0", func_80240F44_ACBA64);
+ApiStatus func_80240F44_ACBA64(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_8;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/UnkGooberFunc.inc.c"
 #define NAMESPACE kkj_10

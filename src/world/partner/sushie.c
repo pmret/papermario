@@ -2,12 +2,13 @@
 #include "../src/world/partners.h"
 #include "npc.h"
 #include "effects.h"
+#include "sprite/npc/WorldSushie.h"
 
 extern s16 D_8010C97A;
 
 void partner_kill_ability_script(void);
 
-BSS f32 D_802BFEE0;
+BSS f32 OriginalPlayerY;
 BSS s32 bss_802BFEE4;
 BSS s32 bss_802BFEE8;
 BSS s32 D_802BFEEC;
@@ -45,8 +46,8 @@ void func_802BD100_31DE70(void) {
         phi_v1 = 8;
     }
 
-    playerStatus->position.z -= cos_rad((cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1) *
-                                        TAU / 360.0f) * -4.0f;
+    playerStatus->position.z -= cos_rad(DEG_TO_RAD(
+        cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1)) * -4.0f;
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
@@ -87,7 +88,7 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
         collisionStatus->currentFloor = -1;
     } else {
         collisionStatus->currentFloor = D_8010C97A;
-        D_802BFEE0 = arg2;
+        OriginalPlayerY = arg2;
     }
 }
 
@@ -97,7 +98,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
     s32 hitResult;
 
-    sin_cos_rad((*yaw * TAU) / 360.0f, &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(*yaw), &sinAngle, &cosAngle);
     cosAngle = -cosAngle;
     totalLength = radius + length;
     hitResult = test_ray_colliders(0x10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
@@ -121,7 +122,7 @@ EvtScript world_sushie_use_ability = {
 void world_sushie_init(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
-    sushie->collisionChannel = 0x10000;
+    sushie->collisionChannel = COLLISION_CHANNEL_10000;
     D_802BFEEC = 0;
     bss_802BFEE4 = 0;
     bss_802BFEE8 = 0;
@@ -179,7 +180,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((SushieTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
             sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
             SushieTweesterPhysicsPtr->angle = clamp_angle(SushieTweesterPhysicsPtr->angle - SushieTweesterPhysicsPtr->angularVelocity);
@@ -190,7 +191,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
                 SushieTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad((SushieTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
             if (SushieTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
@@ -248,7 +249,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_init_put_away(sushie);
-        gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+        gPlayerStatusPtr->animFlags &= ~PA_FLAGS_400000;
     }
 
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
@@ -265,7 +266,7 @@ void world_sushie_pre_battle(Npc* sushie) {
 
     if (D_802BFEEC) {
         sushieActionStatus->npc = *sushie;
-        sushieActionStatus->partnerAction_unk_1 = 1;
+        sushieActionStatus->partnerAction_unk_1 = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
@@ -278,7 +279,7 @@ void world_sushie_pre_battle(Npc* sushie) {
 void world_sushie_post_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
-    if (sushieActionStatus->partnerAction_unk_1 != 0) {
+    if (sushieActionStatus->partnerAction_unk_1) {
         *sushie = sushieActionStatus->npc;
         partner_use_ability();
     }
@@ -287,17 +288,13 @@ void world_sushie_post_battle(Npc* sushie) {
 s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 temp_f0;
-    s32 funcTemp0;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        D_802BFEE0 = playerStatus->position.y;
+        OriginalPlayerY = playerStatus->position.y;
     }
 
-    funcTemp0 = script->functionTemp[0];
-
-    switch (funcTemp0) {
+    switch (script->functionTemp[0]) {
         case 0:
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             disable_player_static_collisions();
@@ -307,10 +304,9 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->pos.y = playerStatus->position.y;
             func_802BD368_31E0D8(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
-            partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
-            temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
-            partnerNPC->currentAnim.w = 0x7000A;
-            partnerNPC->yaw = temp_f0;
+            partnerNPC->pos.y = OriginalPlayerY - (partnerNPC->collisionHeight * 0.5f);
+            partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
+            partnerNPC->currentAnim = ANIM_WorldSushie_Ride;
             partnerNPC->jumpScale = 0.0f;
             partnerNPC->moveSpeed = 3.0f;
             partnerNPC->moveToPos.x = partnerNPC->pos.x;
@@ -324,14 +320,14 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
             } else {
-                suggest_player_anim_setUnkFlag(0x8000F);
+                suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
                     partnerNPC->isFacingAway = 1;
                 }
             }
 
-            script->functionTemp[1] = 0x19;
+            script->functionTemp[1] = 25;
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -345,7 +341,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
 
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->varTable[12] == funcTemp0) {
+                if (script->varTable[12] == 1) {
                     set_action_state(ACTION_STATE_RIDE);
                     partner_use_ability();
                     return ApiStatus_DONE2;

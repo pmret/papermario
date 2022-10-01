@@ -1,21 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct ShapeSpellFXData {
-    /* 0x00 */ s32 isChild;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 timeLeft;
-    /* 0x34 */ s32 unk_34;
-} ShapeSpellFXData; // size = 0x38
-
 s32 D_E0024CC0[] = { 0x00FFD01A, 0x09001128, 0x090011A0, 0x784DD0FE, 0x09001150, 0x090011C8, 0xF0FE4C6E, 0x09001178, 0x090011F0, 0x00000000, 0x00000000, 0x00000000 };
 
 void shape_spell_appendGfx(void* effect);
@@ -39,9 +24,9 @@ EffectInstance* shape_spell_main(s32 isChild, f32 x, f32 y, f32 z, f32 arg4, f32
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.shapeSpell = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.shapeSpell != NULL);
 
     part->unk_2C = 0;
     part->isChild = isChild;
@@ -76,7 +61,7 @@ void shape_spell_init(EffectInstance* effect) {
 
 void shape_spell_update(EffectInstance* effect) {
     s32 flags = effect->flags;
-    ShapeSpellFXData* part = effect->data;
+    ShapeSpellFXData* part = effect->data.shapeSpell;
     s32 isChild;
 
     if (flags & 0x10) {
@@ -101,7 +86,7 @@ void shape_spell_update(EffectInstance* effect) {
             part->pos.y + part->unk_14,
             part->pos.z + part->unk_18,
             0.0f, 0.0f, 0.0f, 0x18
-        )->data;
+        )->data.shapeSpell;
         newPart->unk_28 = part->unk_28;
     }
 
@@ -124,12 +109,12 @@ void shape_spell_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 s32 func_E0024324(s32 arg0, s32 arg1) {
     s32 frameCounter = gGameStatusPtr->frameCounter * 32;
-    
+
     return (f32)((shim_sin_deg(frameCounter + arg1) * (255 - arg0) + (255 - arg0)) * 0.5 + arg0);
 }
 

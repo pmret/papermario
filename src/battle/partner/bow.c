@@ -32,7 +32,7 @@ ApiStatus func_8023808C_710F7C(Evt* script, s32 isInitialCall) {
         gBattleStatus.outtaSightActive = -1;
     }
 
-    playerActorPartTable->idleAnimations = &bMarioHideAnims;
+    playerActorPartTable->idleAnimations = bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
     gBattleStatus.flags1 &= ~0x04000000;
 
@@ -67,7 +67,7 @@ ApiStatus N(IsPartnerImmobile)(Evt* script, s32 isInitialCall) {
                      || playerActor->debuff == STATUS_FROZEN
                      || playerActor->debuff == STATUS_STOP;
 
-    if (playerActor->stoneStatus == 12) {
+    if (playerActor->stoneStatus == STATUS_STONE) {
         isImmobile = TRUE;
     }
 
@@ -79,7 +79,7 @@ ApiStatus func_802381C8_7110B8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     ActorPart* playerActorPartTable = battleStatus->playerActor->partsTable;
-    playerActorPartTable->idleAnimations = &bMarioIdleAnims;
+    playerActorPartTable->idleAnimations = bMarioIdleAnims;
 
     return ApiStatus_DONE2;
 }
@@ -102,7 +102,7 @@ ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
         targetActorBlueprint = targetActor->actorBlueprint;
         targetActorBlueprintBaseStatusChance = targetActorBlueprint->baseStatusChance;
 
-        if (targetActor->transStatus == 14) {
+        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

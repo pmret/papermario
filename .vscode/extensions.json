@@ -1,11 +1,12 @@
 {
     "recommendations": [
         "ms-vscode.cpptools",
-        "nanaian.papermario",
+        "nanaian.vscode-star-rod",
         "notskm.clang-tidy",
         "EditorConfig.EditorConfig",
     ],
     "unwantedRecommendations": [
         "llvm-vs-code-extensions.vscode-clangd",
+        "nanaian.papermario",
     ],
 }

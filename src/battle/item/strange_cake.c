@@ -6,8 +6,6 @@
 #include "battle/item/strange_cake2.png.h"
 #include "battle/item/strange_cake3.png.h"
 
-BSS s32 D_802A2DC8[2];
-
 #include "ItemRefund.inc.c"
 
 extern HudScript* N(D_802A2848_732B48)[];
@@ -223,7 +221,7 @@ ApiStatus N(func_802A1B14_731E14)(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, STATUS_E, 3);
+    inflict_status(player, STATUS_TRANSPARENT, 3);
     player->status = 0;
     part->flags |= ACTOR_PART_FLAG_100;
 
@@ -251,30 +249,9 @@ static s32 _pad = 0; // XXX
 #include "battle/item/strange_cake3.png.inc.c"
 #include "battle/item/strange_cake3.pal.inc.c"
 
-HudScript N(D_802A27D0) = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32, HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake1_png, (s32) battle_item_strange_cake1_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End,
-};
-
-HudScript N(D_802A27F8) = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32, HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake2_png, (s32) battle_item_strange_cake2_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End,
-};
-
-HudScript N(D_802A2820) = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake3_png, (s32) battle_item_strange_cake3_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript N(D_802A27D0) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake1, 32, 32);
+HudScript N(D_802A27F8) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake2, 32, 32);
+HudScript N(D_802A2820) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake3, 32, 32);
 
 HudScript* N(D_802A2848_732B48)[] = {
     &N(D_802A27F8), &N(D_802A2820), &N(D_802A27D0), &N(D_802A27F8)
@@ -286,64 +263,64 @@ s32 N(D_802A2858_732B58)[] = {
 };
 
 EvtScript N(script6) = {
-    EVT_CALL(GetMenuSelection, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_IF_EQ(EVT_VAR(1), 211)
-        EVT_SET_CONST(EVT_VAR(10), 0xD3)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_EXEC_WAIT(battle_item_strange_cake_UseItemWithEffect)
-        EVT_EXEC_WAIT(battle_item_strange_cake_EatItem)
-        EVT_CALL(battle_item_strange_cake_func_802A1A8C_731D8C)
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(0), 20)
-        EVT_ADD(EVT_VAR(1), 25)
-        EVT_CALL(battle_item_strange_cake_func_802A18D8_731BD8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 25)
-        EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_CALL(battle_item_strange_cake_AddFP, EVT_VAR(3))
-        EVT_WAIT_FRAMES(10)
-        EVT_CALL(SetAnimation, 0, 0, 65586)
-        EVT_WAIT_FRAMES(30)
-        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_CALL(SetAnimation, 0, 0, 65538)
-        EVT_WAIT_FRAMES(20)
-        EVT_CALL(SetAnimation, 0, 0, 65567)
+    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
+    EVT_IF_EQ(LVar1, ITEM_KOOKY_COOKIE)
+        EVT_SET_CONST(LVarA, ITEM_KOOKY_COOKIE)
+        EVT_SET(LVar1, 0)
+        EVT_EXEC_WAIT(N(UseItemWithEffect))
+        EVT_EXEC_WAIT(N(EatItem))
+        EVT_CALL(N(func_802A1A8C_731D8C))
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 20)
+        EVT_ADD(LVar1, 25)
+        EVT_CALL(N(func_802A18D8_731BD8), LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 25)
+        EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(N(AddFP), LVar3)
+        EVT_WAIT(10)
+        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_ThumbsUp)
+        EVT_WAIT(30)
+        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
+        EVT_WAIT(20)
+        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_GotItem)
     EVT_ELSE
-        EVT_SET_CONST(EVT_VAR(10), 0xD2)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_EXEC_WAIT(battle_item_strange_cake_UseItemWithEffect)
-        EVT_EXEC_WAIT(battle_item_strange_cake_EatItem)
-        EVT_CALL(SetAnimation, 0, 0, 65567)
+        EVT_SET_CONST(LVarA, ITEM_STRANGE_CAKE)
+        EVT_SET(LVar1, 0)
+        EVT_EXEC_WAIT(N(UseItemWithEffect))
+        EVT_EXEC_WAIT(N(EatItem))
+        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_GotItem)
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_THREAD
-        EVT_WAIT_FRAMES(220)
-        EVT_CALL(PlaySoundAtActor, 0, 1011)
+        EVT_WAIT(220)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3F3)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, 0, 872)
-    EVT_CALL(battle_item_strange_cake_func_802A13E4_7316E4)
-    EVT_WAIT_FRAMES(2)
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_368)
+    EVT_CALL(N(func_802A13E4_7316E4))
+    EVT_WAIT(2)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(battle_item_strange_cake_script7)
+            EVT_EXEC_WAIT(N(script7))
         EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(battle_item_strange_cake_script8)
+            EVT_EXEC_WAIT(N(script8))
         EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(battle_item_strange_cake_script9)
+            EVT_EXEC_WAIT(N(script9))
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(battle_item_strange_cake_PlayerGoHome)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(script7) = {
-    EVT_CALL(SetAnimation, 0, 0, 65538)
-    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 20)
-    EVT_CALL(PlayEffect, 87, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(battle_item_strange_cake_func_802A1AD8_731DD8)
-    EVT_WAIT_FRAMES(20)
+    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
+    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 20)
+    EVT_CALL(PlayEffect, 87, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(func_802A1AD8_731DD8))
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 16, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -351,12 +328,12 @@ EvtScript N(script7) = {
 };
 
 EvtScript N(script8) = {
-    EVT_CALL(SetAnimation, 0, 0, 65538)
-    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 20)
-    EVT_CALL(PlayEffect, 51, 6, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(battle_item_strange_cake_func_802A1B14_731E14)
-    EVT_WAIT_FRAMES(20)
+    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
+    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 20)
+    EVT_CALL(PlayEffect, 51, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(func_802A1B14_731E14))
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 17, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -364,12 +341,12 @@ EvtScript N(script8) = {
 };
 
 EvtScript N(script9) = {
-    EVT_CALL(SetAnimation, 0, 0, 196612)
+    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_30004)
     EVT_CALL(SetGoalToTarget, 0)
-    EVT_CALL(GetGoalPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetGoalPos, 0, LVar0, LVar1, LVar2)
     EVT_EXEC(DoSleepHit)
-    EVT_CALL(battle_item_strange_cake_func_802A1B68_731E68)
-    EVT_WAIT_FRAMES(20)
+    EVT_CALL(N(func_802A1B68_731E68))
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 11, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN

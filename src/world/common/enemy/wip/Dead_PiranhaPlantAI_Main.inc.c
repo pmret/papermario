@@ -9,16 +9,16 @@
 ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);
+    MobileAISettings* settings = (MobileAISettings*) evt_get_variable(script, *script->ptrReadPos);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 200.0f;
     territory.detectFlags = 0;
 
@@ -33,7 +33,7 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         enemy->varTable[0] = 0;
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
@@ -51,7 +51,7 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
             N(PiranhaPlantAI_01)(script, settings, territoryPtr);
             break;
         case 10:
-            func_80240DC4_EA16C4(script, settings, territoryPtr);
+            N(PiranhaPlantAI_10)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 11) {
                 break;
             }

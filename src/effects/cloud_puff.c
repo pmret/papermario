@@ -27,8 +27,8 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
-    ASSERT(effect->data != NULL);
+    effect->data.cloudPuff = part;
+    ASSERT(effect->data.cloudPuff != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -45,7 +45,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_24 = (shim_rand_int(10) * 0.03) + 1.0;
         part->unk_28 = (shim_rand_int(10) * 0.03) + 1.7;
         part->unk_2C = func_E0200000(60);
-        part->lifetime = 30;
+        part->timeLeft = 30;
         part->unk_34 = 0.5f;
         part->unk_38 = -0.02f;
         part->unk_3C = 0.00005f;
@@ -60,14 +60,14 @@ void cloud_puff_init(EffectInstance* effect) {
 }
 
 void cloud_puff_update(EffectInstance* effect) {
-    CloudPuffFXData* part = (CloudPuffFXData*)effect->data;
+    CloudPuffFXData* part = effect->data.cloudPuff;
     s32 cond = FALSE;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
-            part->lifetime--;
-            if (part->lifetime <= 0) {
+            part->timeLeft--;
+            if (part->timeLeft <= 0) {
                 part->alive = FALSE;
             } else {
                 cond = TRUE;
@@ -83,11 +83,11 @@ void cloud_puff_update(EffectInstance* effect) {
                 part->unk_10 += part->unk_34;
                 part->unk_28 *= 0.98;
 
-                if (part->lifetime < 10) {
+                if (part->timeLeft < 10) {
                     part->unk_28 *= 0.9;
                 }
 
-                if (part->lifetime < 15) {
+                if (part->timeLeft < 15) {
                     part->alpha -= 16;
                 }
             }
@@ -109,12 +109,12 @@ void cloud_puff_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void cloud_puff_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    CloudPuffFXData* part = effectTemp->data;
+    CloudPuffFXData* part = effectTemp->data.cloudPuff;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;

@@ -28,38 +28,38 @@ HudScript* gPauseMapIconScripts[] = { &HES_MapWalk0 };
 s32 D_8024FA34 = -1;
 Vec2b gPauseMapPaths[][32] = {
     { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 }, },
-	{ { -1, 24 }, { 1, -8 }, { 2, -7 } },
-	{ { -3, 7 }, { -7, 4 }, { -8, 2 } },
-	{ },
-	{ },
-	{ { -8, -3 }, { -7, 0 }, { -8, 1 }, { -7, 2 } },
-	{ { -9, 0 }, { -6, -1 }, { -7, 0 }, { -8, 1 }, { -1, 8 } },
-	{ { 1, 6 }, { -3, 6 } },
-	{ { -7, 1 }, { -7, 3 }, { -7, 3 }, { -7, 3 }, { -7, 1 }, { -7, 2 }, { -7, 0 } },
-	{ { -9, 3 }, { -8, 0 }, { -8, 0 }, { -9, -2 }, { -7, -4 }, { -7, -4 }, { -6, -5 }, { -5, -6 }, { -1, -7 }, { -3, -6 }, { -3, -6 }, { -7, -4 }, { -7, 0 }, { -8, 0 }, { -8, 0 }, { -8, 0 }, { -8, 0 }, { 0, -6 }, { 0, -6 } },
-	{ { -6, 5 }, { -6, 3 }, { -8, 0 }, { -8, -4 }, { -5, -5 }, { -8, -3 }, { -8, 1 }, { -5, 5 }, { -2, 7 }, { 2, 7 }, { 5, 5 }, { 6, 5 }, { 6, 3 } },
-	{ { -2, 6 }, { -4, 4 } },
-	{ { 4, 6 }, { 4, 5 } },
-	{ { -8, -1 }, { -10, -2 }, { -8, -2 }, { -9, -1 }, { -8, -1 }, { -10, 0 }, { -9, 0 } },
-	{ { 8, 6 } },
-	{ { -7, 4 }, { -7, 5 }, { -7, 4 }, { -7, 5 } },
-	{ { -8, 2 }, { -8, 3 }, { -8, 3 }, { -8, 3 } },
-	{ { 10, -1 } },
-	{ { 6, 6 }, { 6, 6 }, { 8, 2 }, { 7, -1 } },
-	{ { 11, 2 }, { 11, 0 }, { 11, -2 }, { 10, -3 }, { 7, -7 }, { 3, -8 }, { 0, -9 }, { -4, -7 }, { -9, -3 }, { -10, -2 }, { -9, -2 }, { -7, -6 }, { -2, -9 }, { 1, -9 }, { 0, -9 }, { -8, -5 }, { -9, -2 }, { 1, -8 }, { 9, -2 }, { 9, -2 }, { 8, -5 } },
-	{ { -9, 3 }, { -5, 5 } },
-	{ { -5, 6 }, { -2, 9 }, { 2, 8 }, { 7, 6 }, { 7, 4 } },
-	{ },
-	{ { -3, 6 }, { 0, 7 }, { 5, 6 }, { 1, 7 } },
-	{ },
-	{ { -9, -2 } },
-	{ { -11, 1 }, { -9, -2 } },
-	{ { -7, 3 }, { -6, 5 } },
-	{ { 0, 7 } },
-	{ { -9, 3 }, { -8, 1 }, { -7, 1 }, { -7, 4 }, { 2, 6 }, { 8, 3 } },
-	{ { -3, 6 }, { 2, 6 }, { 8, 3 }, { 6, 5 }, { -2, 6 }, { -6, 3 } },
-	{ { -6, 5 }, { -2, 7 }, { 2, 7 }, { 6, 6 }, { 8, 3 }, { 8, 0 }, { 8, -3 }, { 8, -5 }, { 6, -5 }, { 7, -4 }, { 8, -1 }, { 8, 3 }, { 2, 8 } },
-	{ { -3, 7 }, { 0, 6 }, { 4, 7 } },
+    { { -1, 24 }, { 1, -8 }, { 2, -7 } },
+    { { -3, 7 }, { -7, 4 }, { -8, 2 } },
+    { },
+    { },
+    { { -8, -3 }, { -7, 0 }, { -8, 1 }, { -7, 2 } },
+    { { -9, 0 }, { -6, -1 }, { -7, 0 }, { -8, 1 }, { -1, 8 } },
+    { { 1, 6 }, { -3, 6 } },
+    { { -7, 1 }, { -7, 3 }, { -7, 3 }, { -7, 3 }, { -7, 1 }, { -7, 2 }, { -7, 0 } },
+    { { -9, 3 }, { -8, 0 }, { -8, 0 }, { -9, -2 }, { -7, -4 }, { -7, -4 }, { -6, -5 }, { -5, -6 }, { -1, -7 }, { -3, -6 }, { -3, -6 }, { -7, -4 }, { -7, 0 }, { -8, 0 }, { -8, 0 }, { -8, 0 }, { -8, 0 }, { 0, -6 }, { 0, -6 } },
+    { { -6, 5 }, { -6, 3 }, { -8, 0 }, { -8, -4 }, { -5, -5 }, { -8, -3 }, { -8, 1 }, { -5, 5 }, { -2, 7 }, { 2, 7 }, { 5, 5 }, { 6, 5 }, { 6, 3 } },
+    { { -2, 6 }, { -4, 4 } },
+    { { 4, 6 }, { 4, 5 } },
+    { { -8, -1 }, { -10, -2 }, { -8, -2 }, { -9, -1 }, { -8, -1 }, { -10, 0 }, { -9, 0 } },
+    { { 8, 6 } },
+    { { -7, 4 }, { -7, 5 }, { -7, 4 }, { -7, 5 } },
+    { { -8, 2 }, { -8, 3 }, { -8, 3 }, { -8, 3 } },
+    { { 10, -1 } },
+    { { 6, 6 }, { 6, 6 }, { 8, 2 }, { 7, -1 } },
+    { { 11, 2 }, { 11, 0 }, { 11, -2 }, { 10, -3 }, { 7, -7 }, { 3, -8 }, { 0, -9 }, { -4, -7 }, { -9, -3 }, { -10, -2 }, { -9, -2 }, { -7, -6 }, { -2, -9 }, { 1, -9 }, { 0, -9 }, { -8, -5 }, { -9, -2 }, { 1, -8 }, { 9, -2 }, { 9, -2 }, { 8, -5 } },
+    { { -9, 3 }, { -5, 5 } },
+    { { -5, 6 }, { -2, 9 }, { 2, 8 }, { 7, 6 }, { 7, 4 } },
+    { },
+    { { -3, 6 }, { 0, 7 }, { 5, 6 }, { 1, 7 } },
+    { },
+    { { -9, -2 } },
+    { { -11, 1 }, { -9, -2 } },
+    { { -7, 3 }, { -6, 5 } },
+    { { 0, 7 } },
+    { { -9, 3 }, { -8, 1 }, { -7, 1 }, { -7, 4 }, { 2, 6 }, { 8, 3 } },
+    { { -3, 6 }, { 2, 6 }, { 8, 3 }, { 6, 5 }, { -2, 6 }, { -6, 3 } },
+    { { -6, 5 }, { -2, 7 }, { 2, 7 }, { 6, 6 }, { 8, 3 }, { 8, 0 }, { 8, -3 }, { 8, -5 }, { 6, -5 }, { 7, -4 }, { 8, -1 }, { 8, 3 }, { 2, 8 } },
+    { { -3, 7 }, { 0, 6 }, { 4, 7 } },
     {}
 };
 PauseMapSpace gPauseMapSpaces[] = {
@@ -266,7 +266,7 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
         posY = mapSpace->pos.y;
 
 
-        if (evt_get_variable(NULL, EVT_SAVE_FLAG(1962 + i)) == 0) {
+        if (evt_get_variable(NULL, GF_MAP_ToadTown + i) == 0) {
             continue;
         }
 
@@ -373,8 +373,8 @@ void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
 
     if (gPauseMenuCurrentTab == 6) {
         if (gPauseMapCursorCurrentOption != -1) {
-            msgWidth = get_msg_width(MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3), 0);
-            msgID = MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3);
+            msgWidth = get_msg_width(MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3), 0);
+            msgID = MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3);
             draw_msg(msgID, baseX + ((width - msgWidth) >> 1), baseY + 1, 255, 0, 0);
         }
     }
@@ -397,7 +397,7 @@ void pause_map_init(MenuPanel* tab) {
     gPauseMapCursorCurrentOption = -1;
     gPauseMapSpacesInSnapRange = 0;
     gPauseMapCursorCurrentOptionCopy = -1;
-    currentLocation = evt_get_variable(0, EVT_SAVE_VAR(425));
+    currentLocation = evt_get_variable(0, GB_WorldLocation);
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapSpaces); i++) {
         if (gPauseMapSpaces[i].id == currentLocation) {
@@ -521,10 +521,10 @@ void pause_map_handle_input(MenuPanel* tab) {
         return;
     }
 
-    gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (gPauseMapCursorCurrentOption * 3);
+    gPauseCurrentDescMsg = MSG_Menus_00F3 + (gPauseMapCursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
-    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= gPauseMapSpaces[gPauseMapCursorCurrentOption].afterRequirement) {
+    if (evt_get_variable(0, GB_StoryProgress) >= gPauseMapSpaces[gPauseMapCursorCurrentOption].afterRequirement) {
         gPauseCurrentDescMsg++;
     }
 }
@@ -539,7 +539,7 @@ void pause_map_update(MenuPanel* tab) {
     gPauseMapSpacesInSnapRange = 0;
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapSpaces); i++, mapSpace++) {
-        if (evt_get_variable(0, EVT_SAVE_FLAG_PLACES_VISITED + i) != 0) {
+        if (evt_get_variable(0, GF_MAP_ToadTown + i) != 0) {
             f32 deltaX = gPauseMapTargetX - mapSpace->pos.x;
             f32 deltaY = gPauseMapTargetY - mapSpace->pos.y;
             f32 sqSum = SQ(deltaX) + SQ(deltaY);

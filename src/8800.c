@@ -361,7 +361,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
     camera->updateMode = initData->type;
-    camera->unk_06 = 1;
+    camera->unk_06 = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;
@@ -373,9 +373,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
     camera->unk_C0 = 0;
-    camera->auxPos.x = 0;
-    camera->auxPos.y = 0;
-    camera->auxPos.z = 0;
+    camera->lookAt_obj_target.x = 0;
+    camera->lookAt_obj_target.y = 0;
+    camera->lookAt_obj_target.z = 0;
     camera->targetPos.x = 0;
     camera->targetPos.y = 0;
     camera->targetPos.z = 0;
@@ -413,9 +413,9 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vp.vp.vscale[2] = 0x1FF;
     camera->vp.vp.vscale[3] = 0;
 
-    camera->vp.vp.vtrans[0] = (((u16)camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14;
-    camera->vp.vp.vtrans[1] = ((u16)camera->viewportStartY + (camera->viewportH / 2));
-    camera->vp.vp.vtrans[1] = (camera->vp.vp.vtrans[1] << 16) >> 14; // needed to match
+    camera->vp.vp.vtrans[0] = 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
+    camera->vp.vp.vtrans[1] = (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
+    camera->vp.vp.vtrans[1] = 4 * camera->vp.vp.vtrans[1];
     camera->vp.vp.vtrans[2] = 0x1FF;
     camera->vp.vp.vtrans[3] = 0;
 
@@ -424,8 +424,8 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vpAlt.vp.vscale[2] = 0x1FF;
     camera->vpAlt.vp.vscale[3] = 0;
 
-    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82 + ((((u16) camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
-    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_83 + ((((u16) camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82 + 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
+    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_83 + 4 * (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
     camera->vpAlt.vp.vtrans[2] = 0x200;
     camera->vpAlt.vp.vtrans[3] = 0;
 }

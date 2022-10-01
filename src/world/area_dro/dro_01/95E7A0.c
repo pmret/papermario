@@ -23,7 +23,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_COIN,
             .pos = { 120, 92, -18 },
             .spawnMode = 0xF,
-            .pickupFlag = EVT_SAVE_FLAG(760),
+            .pickupFlag = GF_DRO01_Tree1_Coin,
         },
     }
 };
@@ -37,7 +37,7 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
 EvtScript N(8024DD78) = {
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_SET(LVar0, EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 11, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024DD68)), 1, 0)
     EVT_RETURN

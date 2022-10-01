@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00C0C00
+.double 0.01
+
+dlabel D_E00C0C08
+.double 0.01
+
+dlabel D_E00C0C10
+.double 0.01
+
+dlabel D_E00C0C18
+.double 0.01
+
+dlabel jtbl_E00C0C20
+.word LE00C0500_3BD260, LE00C0508_3BD268, LE00C0518_3BD278, LE00C0548_3BD2A8, LE00C0570_3BD2D0, 0, 0, 0
+
+.section .text
+
 glabel snowman_doll_update
 /* 3BCEC0 E00C0160 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 3BCEC4 E00C0164 AFBF002C */  sw        $ra, 0x2c($sp)

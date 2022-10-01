@@ -9,7 +9,7 @@
 ApiStatus func_80240F44_ACF084(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
 
-    gameStatus->peachFlags |= 8;
+    gameStatus->peachFlags |= PEACH_STATUS_FLAG_8;
     return ApiStatus_DONE2;
 }
 

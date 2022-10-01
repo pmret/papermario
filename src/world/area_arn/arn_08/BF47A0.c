@@ -7,7 +7,7 @@ ApiStatus N(func_80240000_BF47A0)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        suggest_player_anim_clearUnkFlag(0x10007);
+        suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
     }
 
     temp_f20 = func_800E34D8();

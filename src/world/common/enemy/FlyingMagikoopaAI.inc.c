@@ -3,7 +3,7 @@
 
 #include "world/common/enemy/MagikoopaSpellAI.inc.c"
 
-void N(FlyingMagikoopaAI_10)(Evt* script, NpcAISettings* arg1, EnemyDetectVolume* arg2) {
+void N(FlyingMagikoopaAI_10)(Evt* script, MobileAISettings* arg1, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -11,7 +11,7 @@ void N(FlyingMagikoopaAI_10)(Evt* script, NpcAISettings* arg1, EnemyDetectVolume
     script->AI_TEMP_STATE = 11;
 }
 
-void N(FlyingMagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(FlyingMagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);    
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
@@ -41,7 +41,7 @@ enum MagikoopaMoveResult {
     RESULT_NONE_FOUND      = 3
 };
 
-void N(FlyingMagikoopaAI_15)(Evt* arg0, NpcAISettings* arg1, EnemyDetectVolume* arg2) {
+void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolume* arg2) {
     f32 dist;
     f32 distToHit;
     f32 randomDist;
@@ -60,9 +60,9 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, NpcAISettings* arg1, EnemyDetectVolume* 
     if (npc->duration <= 0) {
         randomDist = rand_int(30) + 180.0;
         isCCW = FALSE;
-        if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) - iterations;
-            moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) - iterations;
+            moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             if (randomDist > moveDist) {
                 randomDist = moveDist;
             }
@@ -131,7 +131,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, NpcAISettings* arg1, EnemyDetectVolume* 
     }
 }
 
-void N(FlyingMagikoopaAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
@@ -145,7 +145,7 @@ void N(FlyingMagikoopaAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(FlyingMagikoopaAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 limitY = (f32)enemy->varTable[1] / 100.0;
@@ -177,7 +177,7 @@ void N(FlyingMagikoopaAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(FlyingMagikoopaAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_20)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -185,7 +185,7 @@ void N(FlyingMagikoopaAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     script->functionTemp[0] = 21;
 }
 
-void N(FlyingMagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -193,14 +193,14 @@ void N(FlyingMagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         npc->duration = 15;
         script->functionTemp[0] = 50;
     } else if ((N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory) == 1) && (npc->turnAroundYawAdjustment == 0)) {
         ai_enemy_play_sound(npc, 0x20D4, 0);
-        npc->currentAnim.w = enemy->animList[8];
+        npc->currentAnim = enemy->animList[8];
         posX = npc->pos.x;
         posY = npc->pos.y + 29.0f;
         posZ = npc->pos.z + 1.0f;
@@ -211,19 +211,19 @@ void N(FlyingMagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(FlyingMagikoopaAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_22)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[9];
+        npc->currentAnim = enemy->animList[9];
         npc->duration = 7;
         script->functionTemp[0] = 0x17;
     }
 }
 
-void N(FlyingMagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp_s1;
@@ -234,7 +234,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
         temp_s1 = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory);
         if (temp_s1 != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim = enemy->animList[0];
             npc->duration = 15;
             script->functionTemp[0] =  50;
         } else {
@@ -246,7 +246,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(FlyingMagikoopaAI_24)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
@@ -256,13 +256,13 @@ void N(FlyingMagikoopaAI_24)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim = enemy->animList[0];
         npc->duration = 3;
         script->AI_TEMP_STATE = 50;
     }
 }
 
-void N(FlyingMagikoopaAI_50)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingMagikoopaAI_50)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
@@ -282,22 +282,22 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
     
     if (isInitialCall) {
-        npc->flags &= ~0x200;
-        npc->flags |= 0x8;
-        npc->flags |= 0x200000;
-        enemy->flags |= 0x200000;
+        npc->flags &= ~NPC_FLAG_GRAVITY;
+        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        npc->flags |= NPC_FLAG_200000;
+        enemy->flags |= ENEMY_FLAGS_200000;
         enemy->varTable[1] = npc->pos.y * 100.0;
         enemy->varTable[0] = 0;
         enemy->varTable[2] = 0;
@@ -361,7 +361,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 ApiStatus N(FlyingMagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    evt_set_variable(script, EVT_VAR(0), gCurrentEncounter.currentEnemy == enemy);
+    evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
     return ApiStatus_DONE2;
 }
 

@@ -347,9 +347,9 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
-    s32 temp = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
+    s32 hpPercentLost = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
 
-    if (targetActor->transStatus == 14) {
+    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
         airLiftChance = 0;
     }
 
@@ -358,7 +358,7 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     }
 
     if (airLiftChance > 0) {
-        airLiftChance = airLiftChance + ((airLiftChance * temp) / 100);
+        airLiftChance = airLiftChance + ((airLiftChance * hpPercentLost) / 100);
 
         if (airLiftChance > 100) {
             airLiftChance = 100;
@@ -408,7 +408,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
             parakarry->state.currentPos.x += parakarry->state.speed;
             *animationRatePtr = 1.0f;
             y = parakarry->state.currentPos.y;
-            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(parakarry->state.moveTime * TAU / 360.0f) * PI_S) * D_8023BD60_703AE0 + 0.5);
+            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(DEG_TO_RAD(parakarry->state.moveTime)) * PI_S) * D_8023BD60_703AE0 + 0.5);
             parakarry->state.moveTime += 6;
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 

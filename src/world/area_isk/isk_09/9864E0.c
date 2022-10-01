@@ -1,4 +1,5 @@
 #include "isk_09.h"
+#include "entity.h"
 
 static char* N(exit_str_0) = "isk_08";
 static char* N(exit_str_1) = "";
@@ -11,4 +12,8 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/CheckItemFlags40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_09/9864E0", func_802402BC_98679C);
+ApiStatus func_802402BC_98679C(Evt* script, s32 isInitialCall) {
+    Entity* bigChest = get_entity_by_index(script->varTable[0]);
+    bigChest->dataBuf.chest->gotItemDone = TRUE;
+    return ApiStatus_DONE2;
+}

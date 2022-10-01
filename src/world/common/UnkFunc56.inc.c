@@ -55,7 +55,7 @@ ApiStatus N(UnkFunc56)(Evt* script, s32 isInitialCall) {
 
             for (part = actor->partsTable; part != NULL; part = part->nextPart) {
                 if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)) {
-                    if (part->flags & ACTOR_PART_FLAG_100000) {
+                    if (part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
                         xDiff = part->currentPos.x - model->center.x;
                         yDiff = part->currentPos.y + part->size.y - 1.5f - model->center.y;
                         zDiff = part->currentPos.z - model->center.z;

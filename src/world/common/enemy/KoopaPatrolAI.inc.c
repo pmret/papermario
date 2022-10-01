@@ -12,14 +12,14 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* settings = (MobileAISettings*) evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;
-    territory.pointX = enemy->territory->patrol.detect.x;
-    territory.pointZ = enemy->territory->patrol.detect.z;
-    territory.sizeX = enemy->territory->patrol.detectSizeX;
-    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.pointX = enemy->territory->patrol.detectPos.x;
+    territory.pointZ = enemy->territory->patrol.detectPos.z;
+    territory.sizeX = enemy->territory->patrol.detectSize.x;
+    territory.sizeZ = enemy->territory->patrol.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
 
@@ -32,7 +32,7 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
         npc->duration = 0;
         script->functionTemp[0] = 0;
         enemy->unk_07 = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->unk_B5 = 0;

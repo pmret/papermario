@@ -5,20 +5,15 @@
 // todo consider symbol
 #define MSG_ROM_START 0x1B83000
 
-typedef struct UnkMsgStruct8 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ char unk_02[0xE];
-} UnkMsgStruct8; // size = 0x16
-
 typedef MessageImageData* MessageImageDataList[1];
 
-extern s32 D_802EF0D0;
+extern IMG_BIN D_802EF0D0;
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 
-s32 MessagePlural = 0x53FD0000;
+u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 
-s16 MessageSingular = 0xF0FD;
+u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
 s16 gNextMessageBuffer = 0;
 
@@ -133,8 +128,8 @@ u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 
 // unsorted
 extern s32 D_8015131C;
 extern MessageDrawState D_80155D20;
-extern s32 D_80159B50;
-extern s32 D_8015C7E0;
+extern IMG_BIN D_80159B50[];
+extern PAL_BIN D_8015C7E0[];
 
 // BSS
 extern s32 gMsgBGScrollAmtX;
@@ -150,25 +145,25 @@ extern MessageDrawState* msg_drawState;
 
 // another file?
 extern s16 D_802EB644[22];
-extern s32 D_802EB670;
-extern s32 D_802EBA70;
-extern s32 D_802EBB70;
-extern s32 D_802EC3F0;
-extern s32 D_802EC5F0;
-extern s32 D_802EC670;
-extern s32 D_802EC6F0;
-extern s32 D_802EC770;
-extern s32 D_802EC7F0;
-extern s32 D_802EC870[];
-extern s32 D_802EC970[];
-extern s32 D_802ECAB0[];
-extern s32 D_802ECBF0[];
-extern s32 D_802ECCF0[];
-extern s32 D_802ECD10;
-extern s32 D_802ECD30;
+extern IMG_BIN D_802EB670[];
+extern IMG_BIN D_802EBA70[];
+extern IMG_BIN D_802EBB70[];
+extern PAL_BIN D_802EC3F0[]; // array of several in series
+extern IMG_BIN D_802EC5F0[];
+extern IMG_BIN D_802EC670[];
+extern IMG_BIN D_802EC6F0[];
+extern IMG_BIN D_802EC770[];
+extern IMG_BIN D_802EC7F0[];
+extern IMG_BIN D_802EC870[];
+extern IMG_BIN D_802EC970[];
+extern IMG_BIN D_802ECAB0[];
+extern IMG_BIN D_802ECBF0[];
+extern IMG_BIN D_802ECCF0[];
+extern PAL_BIN D_802ECD10[];
+extern PAL_BIN D_802ECD30[];
 
-extern s32 D_802ED550;
-extern s32 D_802ED670;
+extern IMG_BIN D_802ED550[];
+extern PAL_BIN D_802ED670[];
 extern s32 D_802ED970;
 extern s32 D_802EE8D0;
 extern MessageCharset* gMsgCharsets[5];
@@ -812,12 +807,12 @@ void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y) 
 }
 
 s32 cancel_message(MessagePrintState* msgPrintState) {
-    if ((msgPrintState->stateFlags & MSG_STATE_FLAG_2) == 0) {
-        return 0;
+    if (!(msgPrintState->stateFlags & MSG_STATE_FLAG_2)) {
+        return FALSE;
     }
 
     msgPrintState->stateFlags |= MSG_STATE_FLAG_1;
-    return 1;
+    return TRUE;
 }
 
 void set_message_images(MessageImageData* images) {
@@ -1012,7 +1007,7 @@ void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style)
             mallocSpace = general_heap_malloc(0x400);
             dma_load_msg(msgID, mallocSpace);
             printer->srcBuffer = mallocSpace;
-            get_msg_properties((s32)printer->srcBuffer, 0, &width, 0, 0, 0, 0, charset);
+            get_msg_properties((s32) printer->srcBuffer, 0, &width, 0, 0, 0, 0, charset);
             printer->msgWidth = width;
         }
 
@@ -1059,7 +1054,7 @@ void msg_draw_rewind_arrow(s32 printerIndex) {
     MessagePrintState* printer = &gMessagePrinters[printerIndex];
 
     if (printer->rewindArrowBlinkCounter < 6) {
-        draw_ci_image_with_clipping(&D_802ED550, 24, 24, G_IM_FMT_CI, G_IM_SIZ_4b, &D_802ED670, printer->rewindArrowPos.x,
+        draw_ci_image_with_clipping(D_802ED550, 24, 24, G_IM_FMT_CI, G_IM_SIZ_4b, D_802ED670, printer->rewindArrowPos.x,
                                     printer->rewindArrowPos.y, 10, 10, SCREEN_WIDTH - 20, SCREEN_HEIGHT - 20, 255);
     }
 
@@ -1093,7 +1088,9 @@ void draw_digit(u32 img, s32 charset, s32 posX, s32 posY) {
 
 INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
-void drawbox_message_delegate(MessagePrintState* printer) {
+void drawbox_message_delegate(void* data) {
+    MessagePrintState* printer = data;
+
     appendGfx_message(printer, 0, 0, 0, 0, 4, 0);
 }
 
@@ -1148,7 +1145,6 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     u16 spB6;
     u8 spB8;
     f32 windowScaleX;
-    s32* spC0;
     MessageCharset* msgCharset;
     f32 temp_f10;
     f32 temp_f20;
@@ -1197,7 +1193,8 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     s32 frameAlpha;
     u16 fading;
     s32 phi_s0_5;
-    s32* phi_s6;
+    IMG_PTR signRaster;
+    PAL_PTR signPalette;
     s8 phi_s2_4;
     s32 phi_s3_2;
     s32 phi_v0_3;
@@ -1575,14 +1572,14 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         msg_drawState->framePalette = 15;
                         temp_s1_5 = 0xFF;
                         if (printer->style == MSG_STYLE_SIGN) {
-                            spC0 = &D_802EC770;
+                            signRaster = D_802EC770;
                             printer->windowSize.y = 72;
                             msg_drawState->textColor = MSG_PAL_18;
-                            phi_s6 = &D_802ECD10;
+                            signPalette = D_802ECD10;
                         } else {
-                            spC0 = &D_802EC7F0;
+                            signRaster = D_802EC7F0;
                             msg_drawState->textColor = MSG_PAL_1C;
-                            phi_s6 = &D_802ECD30;
+                            signPalette = D_802ECD30;
                         }
                         msg_drawState->clipX[0] = 34;
                         msg_drawState->clipY[0] = 40;
@@ -1609,11 +1606,11 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             }
                         }
                         spAE = (u8)temp_s1_5;
-                        draw_ci_image_with_clipping(&D_802EC5F0, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, phi_s6, 20, 28, 10, 10, 310, 230, temp_s1_5);
-                        draw_ci_image_with_clipping(&D_802EC670, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, phi_s6, 284, 28, 10, 10, 310, 230, temp_s1_5);
-                        draw_ci_image_with_clipping(&D_802EC6F0, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, phi_s6, 20, printer->windowSize.y + 12, 10, 10, 310, 230,
+                        draw_ci_image_with_clipping(D_802EC5F0, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(D_802EC670, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 284, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(D_802EC6F0, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, printer->windowSize.y + 12, 10, 10, 310, 230,
                                                     temp_s1_5);
-                        draw_ci_image_with_clipping(spC0, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, phi_s6, 284, printer->windowSize.y + 12, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(signRaster, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 284, printer->windowSize.y + 12, 10, 10, 310, 230, temp_s1_5);
                         gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EC870, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0090, 0x0070, 0x0470, 0x00B0, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
@@ -1868,7 +1865,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             imgDrawPosY = (s16)((msg_drawState->nextPos[1] + (msg_drawState->textStartPos[1] + (printer->windowBasePos.y + posY))) -
                                        additionalOffsetY);
 
-                            draw_ci_image_with_clipping(&D_80159B50, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &D_8015C7E0, imgDrawPosX, imgDrawPosY, msg_drawState->clipX[0],
+                            draw_ci_image_with_clipping(D_80159B50, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, D_8015C7E0, imgDrawPosX, imgDrawPosY, msg_drawState->clipX[0],
                                                         msg_drawState->clipY[0], msg_drawState->clipX[1] - msg_drawState->clipX[0],
                                                         msg_drawState->clipY[1] - msg_drawState->clipY[0], phi_t3);
                             msg_drawState->printModeFlags |= MSG_PRINT_FLAG_10;
@@ -2583,22 +2580,22 @@ void msg_draw_speech_bubble(
 
     gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
     gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1,
-                       (msg_drawState->framePalette << 5) + (s8*)&D_802EC3F0); // TODO fix (array?)
+                       &D_802EC3F0[16 * msg_drawState->framePalette]);
     gDPTileSync(gMasterGfxPos++);
     gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0,
                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
     gDPLoadSync(gMasterGfxPos++);
     gDPLoadTLUTCmd(gMasterGfxPos++, G_TX_LOADTILE, 15);
     gDPPipeSync(gMasterGfxPos++);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EB670, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EB670, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxLQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EBA70, G_IM_FMT_CI, 8, 0, 0, 0, 7, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EBA70, G_IM_FMT_CI, 8, 0, 0, 0, 7, 63, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 3, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxMQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EBB70, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EBB70, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxRQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);

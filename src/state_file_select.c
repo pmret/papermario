@@ -14,7 +14,7 @@ NUPiOverlaySegment D_8007798C = {
     .textStart = filemenu_TEXT_START,
     .textEnd = filemenu_TEXT_END,
     .dataStart = filemenu_DATA_START,
-    .dataEnd = filemenu_DATA_END,
+    .dataEnd = filemenu_RODATA_END,
     .bssStart = filemenu_BSS_START,
     .bssEnd = filemenu_BSS_END,
 };
@@ -55,14 +55,14 @@ void state_init_file_select(void) {
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
-    gCameras[CAM_DEFAULT].auxPos.z = 150.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
-    gCameras[CAM_DEFAULT].auxPos.x = 25.0f;
-    gCameras[CAM_DEFAULT].auxPos.y = 25.0f;
-    gCameras[CAM_DEFAULT].unk_1C = 0;
-    gCameras[CAM_DEFAULT].unk_20 = 100;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
+    gCameras[CAM_DEFAULT].auxPitch = 0;
+    gCameras[CAM_DEFAULT].lookAt_dist = 100;
     gCameras[CAM_DEFAULT].auxBoomPitch = 0;
     gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
 }
@@ -136,7 +136,7 @@ void state_step_language_select(void) {
                     clear_entity_data(0);
                     clear_trigger_data();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(1);
+                    filemenu_init(TRUE);
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     set_screen_overlay_params_front(255, 255.0f);
                 }
@@ -175,7 +175,7 @@ void state_step_file_select(void) {
                     D_800A0930 = -1;
                     battle_heap_create();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(0);
+                    filemenu_init(FALSE);
                 }
             }
 
@@ -257,8 +257,8 @@ void state_step_exit_language_select(void) {
             if (D_800A0930 >= 0) {
                 D_800A0930--;
                 if (D_800A0930 == 0) {
+                    MapSettings* mapSettings;
                     MapConfig* mapConfig;
-                    Map* map;
                     u32 mapShapeSize;
                     void* mapShape;
                     BackgroundHeader* bgHeader;
@@ -267,8 +267,8 @@ void state_step_exit_language_select(void) {
                     nuGfxSetCfb(D_80077980, ARRAY_COUNT(D_80077980));
                     filemenu_cleanup();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                    mapConfig = get_current_map_header();
-                    map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                    mapSettings = get_current_map_settings();
+                    mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;
                     func_8005AF84();
                     func_8002ACDC();
@@ -284,7 +284,7 @@ void state_step_exit_language_select(void) {
                     init_item_entity_list();
                     init_script_list();
                     init_npc_list();
-                    func_80110E58();
+                    init_entity_data();
                     init_trigger_list();
                     mapShape = load_asset_by_name(&wMapShapeName, &mapShapeSize);
                     decode_yay0(mapShape, &D_80210000);
@@ -292,13 +292,13 @@ void state_step_exit_language_select(void) {
                     initialize_collision();
                     restore_map_collision_data();
 
-                    if (map->dmaStart != NULL) {
-                        dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                    if (mapConfig->dmaStart != NULL) {
+                        dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                     }
 
-                    load_map_bg(map->bgName);
+                    load_map_bg(mapConfig->bgName);
 
-                    bgHeader = mapConfig->background;
+                    bgHeader = mapSettings->background;
                     if (bgHeader != NULL) {
                         read_background_size(bgHeader);
                     } else {
@@ -308,7 +308,7 @@ void state_step_exit_language_select(void) {
                     calculate_model_sizes();
                     npc_reload_all();
                     func_800E98C4();
-                    set_time_freeze_mode(1);
+                    set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                 }
                 set_windows_visible(WINDOW_GROUP_ALL);
                 D_800A0931 = 3;
@@ -341,7 +341,7 @@ void state_step_exit_language_select(void) {
             }
             break;
         case 4:
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             update_player();
             update_npcs();
             update_encounters();
@@ -384,7 +384,7 @@ void state_step_exit_file_select(void) {
             set_windows_visible(WINDOW_GROUP_ALL);
             D_800A0931 = 3;
         case 3:
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             if (temp_s0 == 0) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;

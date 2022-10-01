@@ -1,6 +1,6 @@
 #include "world/common/enemy/HoppingAI.inc.c"
 
-void N(StoneChompAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StoneChompAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_wander_init(script, aiSettings, territory);
@@ -8,7 +8,7 @@ void N(StoneChompAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     npc->jumpScale = 1.5f;
 }
 
-void N(StoneChompAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StoneChompAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
@@ -22,14 +22,14 @@ ApiStatus N(StoneChompAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
 

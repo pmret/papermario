@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/world_eldstar.h"
+#include "sprite/npc/WorldEldstar.h"
 
 #define NAMESPACE b_area_trd_part_3_eldstar
 
@@ -15,7 +15,7 @@ extern EvtScript N(80218424);
 BSS s32 D_80219040;
 
 s32 N(idleAnimations_80218280)[] = {
-    STATUS_NORMAL,    NPC_ANIM_world_eldstar_Palette_00_Anim_1,
+    STATUS_NORMAL,    ANIM_WorldEldstar_Idle,
     STATUS_END,
 };
 
@@ -88,9 +88,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_80218390) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80218414)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802183E8)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80218404)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80218414)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802183E8)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218404)))
     EVT_EXEC(N(80218424))
     EVT_RETURN
     EVT_END
@@ -107,7 +107,7 @@ ApiStatus func_80218000_4CF1B0(Evt* script, s32 isInitialCall) {
     sym = &D_80219040;
     *sym += 15;
     *sym = clamp_angle(*sym);
-    actor->unk_19A = sin_rad(*sym * TAU / 360.0f) * 3.0f;
+    actor->unk_19A = sin_rad(DEG_TO_RAD(*sym)) * 3.0f;
 
     return ApiStatus_BLOCK;
 }
@@ -205,10 +205,10 @@ EvtScript N(80218424) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
     EVT_CALL(func_80218158_4CF308)
     EVT_CALL(WaitForState, 13)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_WAIT_FRAMES(15)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0114), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
+    EVT_CALL(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
         EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
@@ -216,35 +216,35 @@ EvtScript N(80218424) = {
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(func_802180C8_4CF278)
-    EVT_WAIT_FRAMES(120)
+    EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0115), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_CALL(func_802180C8_4CF278)
-    EVT_WAIT_FRAMES(120)
+    EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0116), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 2)
     EVT_CALL(WaitForState, 18)
-    EVT_SET(LW(0), 255)
+    EVT_SET(LVar0, 255)
     EVT_LOOP(10)
-        EVT_SUB(LW(0), 25)
-        EVT_IF_LT(LW(0), 0)
-            EVT_SET(LW(0), 0)
+        EVT_SUB(LVar0, 25)
+        EVT_IF_LT(LVar0, 0)
+            EVT_SET(LVar0, 0)
         EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
@@ -252,32 +252,32 @@ EvtScript N(80218424) = {
         EVT_CALL(func_80218170_4CF320)
     EVT_END_THREAD
     EVT_CALL(WaitForState, 22)
-    EVT_SET(LW(0), 0)
+    EVT_SET(LVar0, 0)
     EVT_LOOP(10)
-        EVT_ADD(LW(0), 25)
-        EVT_IF_GT(LW(0), 255)
-            EVT_SET(LW(0), 255)
+        EVT_ADD(LVar0, 25)
+        EVT_IF_GT(LVar0, 255)
+            EVT_SET(LVar0, 255)
         EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0117), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_CALL(func_802180C8_4CF278)
-    EVT_WAIT_FRAMES(120)
+    EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0118), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(SetBattleState, 6)
     EVT_CALL(WaitForState, 5)
-    EVT_WAIT_FRAMES(20)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0119), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(20)
+    EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
@@ -286,33 +286,33 @@ EvtScript N(80218424) = {
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_CALL(func_802180C8_4CF278)
-    EVT_WAIT_FRAMES(120)
+    EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x011A), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x011B), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
+    EVT_CALL(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 1)
     EVT_CALL(func_80218158_4CF308)
     EVT_CALL(WaitForState, 18)
-    EVT_SET(LW(0), 255)
+    EVT_SET(LVar0, 255)
     EVT_LOOP(10)
-        EVT_SUB(LW(0), 25)
-        EVT_IF_LT(LW(0), 0)
-            EVT_SET(LW(0), 0)
+        EVT_SUB(LVar0, 25)
+        EVT_IF_LT(LVar0, 0)
+            EVT_SET(LVar0, 0)
         EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
@@ -320,29 +320,29 @@ EvtScript N(80218424) = {
         EVT_CALL(func_80218170_4CF320)
     EVT_END_THREAD
     EVT_CALL(WaitForState, 22)
-    EVT_SET(LW(0), 0)
+    EVT_SET(LVar0, 0)
     EVT_LOOP(10)
-        EVT_ADD(LW(0), 25)
-        EVT_IF_GT(LW(0), 255)
-            EVT_SET(LW(0), 255)
+        EVT_ADD(LVar0, 25)
+        EVT_IF_GT(LVar0, 255)
+            EVT_SET(LVar0, 255)
         EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x011C), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(10)
+    EVT_CALL(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_CALL(func_802180C8_4CF278)
-    EVT_WAIT_FRAMES(120)
+    EVT_WAIT(120)
     EVT_CALL(func_802180E8_4CF298)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x011D), ACTOR_SELF, 1, NPC_ANIM_world_eldstar_Palette_00_Anim_2, NPC_ANIM_world_eldstar_Palette_00_Anim_1)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_CALL(WaitForState, 0)
     EVT_CALL(SetBattleState, 30)
-    EVT_WAIT_FRAMES(10000)
+    EVT_WAIT(10000)
     EVT_RETURN
     EVT_END
 };

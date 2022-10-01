@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(HoppingAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z;
@@ -15,12 +15,12 @@ void N(HoppingAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     ai_enemy_play_sound(npc, SOUND_B0000017, 0);
     
     if (is_point_within_region(enemy->territory->wander.wanderShape, 
-                               enemy->territory->wander.point.x, 
-                               enemy->territory->wander.point.z, 
+                               enemy->territory->wander.centerPos.x, 
+                               enemy->territory->wander.centerPos.z, 
                                npc->pos.x, npc->pos.z, 
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) 
+                               enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) 
     {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;
@@ -39,7 +39,7 @@ void N(HoppingAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-void N(HoppingAI_Hop)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
@@ -112,17 +112,17 @@ void N(HoppingAI_Hop)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
     npc->jumpVelocity -= npc->jumpScale;
 }
 
-void N(HoppingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
     script->AI_TEMP_STATE = 3;
 }
 
-void N(HoppingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -146,7 +146,7 @@ void N(HoppingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolu
     }
 }
 
-void N(HoppingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
@@ -159,7 +159,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     ai_enemy_play_sound(enemy, SOUND_B0000017, 0);
 }
 
-void N(HoppingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -209,7 +209,7 @@ void N(HoppingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     npc->jumpVelocity -= npc->jumpScale;
 }
 
-void N(HoppingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(HoppingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -222,17 +222,17 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr;
 
     enemy->varTable[10] = evt_get_variable(script, *args++);
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
     territoryPtr = &territory;

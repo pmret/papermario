@@ -21,7 +21,7 @@ ApiStatus N(StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall) {
         StarSpiritData* ptr = heap_malloc(sizeof(*ptr));
 
         script->varTablePtr[0] = ptr;
-        evt_set_variable(NULL, EVT_MAP_VAR(1), script->varTable[0]);
+        evt_set_variable(NULL, MapVar(1), script->varTable[0]);
         ptr->unk_38 = evt_get_variable(script, *args++);
         ptr->unk_3C = evt_get_variable(script, *args++);
         ptr->unk_0C = evt_get_float_variable(script, *args++);
@@ -52,9 +52,9 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
             ptr->unk_04 = update_lerp(5, ptr->unk_10, ptr->unk_1C, ptr->unk_46, ptr->unk_3C);
             ptr->unk_00 = update_lerp(0, ptr->unk_0C, ptr->unk_18, ptr->unk_46, ptr->unk_3C);
             ptr->unk_08 = update_lerp(0, ptr->unk_14, ptr->unk_20, ptr->unk_46, ptr->unk_3C);
-            ((StarSpiritsEnergyFXData*)ptr->unk_50->data)->unk_08 = ptr->unk_00;
-            ((StarSpiritsEnergyFXData*)ptr->unk_50->data)->unk_0C = ptr->unk_04;
-            ((StarSpiritsEnergyFXData*)ptr->unk_50->data)->unk_10 = ptr->unk_08;
+            ptr->unk_50->data.starSpiritsEnergy->unk_08 = ptr->unk_00;
+            ptr->unk_50->data.starSpiritsEnergy->unk_0C = ptr->unk_04;
+            ptr->unk_50->data.starSpiritsEnergy->unk_10 = ptr->unk_08;
             ptr->unk_46++;
             if (ptr->unk_46 >= ptr->unk_3C) {
                 ptr->unk_44 = 1;
@@ -66,16 +66,16 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
             if (ptr->unk_46 >= 60) {
                 ptr->unk_44 = 2;
                 ptr->unk_46 = 0;
-                ((StarSpiritsEnergyFXData*)ptr->unk_50->data)->unk_70 = 1;
-                ((StarSpiritsEnergyFXData*)ptr->unk_50->data)->unk_74 = 0;
+                ptr->unk_50->data.starSpiritsEnergy->unk_70 = 1;
+                ptr->unk_50->data.starSpiritsEnergy->unk_74 = 0;
             }
             break;
         case 2:
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
                 ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
-                ((SpiritCardFXData*)ptr->unk_54->data)->unk_34 = ptr->unk_38;
-                ((SpiritCardFXData*)ptr->unk_54->data)->unk_20 = 0;
+                ptr->unk_54->data.spiritCard->unk_34 = ptr->unk_38;
+                ptr->unk_54->data.spiritCard->unk_20 = 0;
                 ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
                 ptr->unk_44 = 3;
                 ptr->unk_46 = 0;
@@ -126,10 +126,10 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
         case 1:
             ptr->unk_2C = clamp_angle(ptr->unk_2C + ptr->unk_30);
         case 2:
-            ((SpiritCardFXData*)ptr->unk_54->data)->unk_24 = ptr->unk_2C;
-            ((SpiritCardFXData*)ptr->unk_54->data)->unk_04 = ptr->unk_18;
-            ((SpiritCardFXData*)ptr->unk_54->data)->unk_08 = ptr->unk_04;
-            ((SpiritCardFXData*)ptr->unk_54->data)->unk_0C = ptr->unk_20;
+            ptr->unk_54->data.spiritCard->unk_24 = ptr->unk_2C;
+            ptr->unk_54->data.spiritCard->unk_04 = ptr->unk_18;
+            ptr->unk_54->data.spiritCard->unk_08 = ptr->unk_04;
+            ptr->unk_54->data.spiritCard->unk_0C = ptr->unk_20;
             break;
     }
 
@@ -155,8 +155,8 @@ ApiStatus N(StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall) {
         ptr->unk_20 = evt_get_float_variable(script, *args++);
         ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
-        ((SpiritCardFXData*)ptr->unk_54->data)->unk_34 = ptr->unk_38;
-        ((SpiritCardFXData*)ptr->unk_54->data)->unk_20 = 0;
+        ptr->unk_54->data.spiritCard->unk_34 = ptr->unk_38;
+        ptr->unk_54->data.spiritCard->unk_20 = 0;
         ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
         ptr->unk_4C = 270;
     }
@@ -174,9 +174,9 @@ ApiStatus N(StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall) {
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }
-    ((SpiritCardFXData*)ptr->unk_54->data)->unk_04 = ptr->unk_18;
-    ((SpiritCardFXData*)ptr->unk_54->data)->unk_08 = ptr->unk_04;
-    ((SpiritCardFXData*)ptr->unk_54->data)->unk_0C = ptr->unk_20;
+    ptr->unk_54->data.spiritCard->unk_04 = ptr->unk_18;
+    ptr->unk_54->data.spiritCard->unk_08 = ptr->unk_04;
+    ptr->unk_54->data.spiritCard->unk_0C = ptr->unk_20;
 
     return ApiStatus_BLOCK;
 }

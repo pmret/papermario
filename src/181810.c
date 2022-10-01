@@ -1,13 +1,15 @@
 #include "common.h"
 #include "battle/battle.h"
 
-extern MessagePrintState* gSpeakingActorPrintCtx;
-extern MessagePrintState* D_8029FA64;
-extern s32 gSpeakingActorPrintIsDone; // unk_08
-extern s32 gSpeakingActorTalkAnim;
-extern s32 gSpeakingActorIdleAnim;
-extern Actor* gSpeakingActor;
-extern ActorPart* gSpeakingActorPart;
+BSS char D_8029FA660[0x400]; // unused?
+
+BSS MessagePrintState* gSpeakingActorPrintCtx;
+BSS MessagePrintState* D_8029FA64;
+BSS s32 gSpeakingActorPrintIsDone; // unk_08
+BSS s32 gSpeakingActorTalkAnim;
+BSS s32 gSpeakingActorIdleAnim;
+BSS Actor* gSpeakingActor;
+BSS ActorPart* gSpeakingActorPart;
 
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -213,9 +215,9 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
     }
 
     if (gBattleDmaDest == 0) {
-            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, moveScript->dmaDest);
+            dma_copy(moveScript->start, moveScript->end, moveScript->dest);
         } else {
-            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, gBattleDmaDest);
+            dma_copy(moveScript->start, moveScript->end, gBattleDmaDest);
     }
 
     return ApiStatus_DONE2;
@@ -326,7 +328,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->unk_438[idx] = soundID;
+    actor->loopingSoundID[idx] = soundID;
     sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
@@ -344,12 +346,12 @@ ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->unk_438[idx] == 0) {
+    if (actor->loopingSoundID[idx] == 0) {
         return ApiStatus_DONE2;
     }
 
-    sfx_stop_sound(actor->unk_438[idx]);
-    actor->unk_438[idx] = 0;
+    sfx_stop_sound(actor->loopingSoundID[idx]);
+    actor->loopingSoundID[idx] = 0;
     return ApiStatus_DONE2;
 }
 
@@ -425,7 +427,7 @@ INCLUDE_ASM(s32, "181810", load_tattle_flags);
 
 ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = 3;
-    btl_set_state(0x20);
+    btl_set_state(BATTLE_STATE_END_BATTLE);
 
     return ApiStatus_DONE2;
 }

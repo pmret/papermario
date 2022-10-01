@@ -1,12 +1,13 @@
 #include "pause_common.h"
+#include "message_ids.h"
 #include "sprite.h"
-#include "sprite/npc/world_eldstar.h"
-#include "sprite/npc/world_mamar.h"
-#include "sprite/npc/world_skolar.h"
-#include "sprite/npc/world_muskular.h"
-#include "sprite/npc/world_misstar.h"
-#include "sprite/npc/world_klevar.h"
-#include "sprite/npc/world_kalmar.h"
+#include "sprite/npc/WorldEldstar.h"
+#include "sprite/npc/WorldMamar.h"
+#include "sprite/npc/WorldSkolar.h"
+#include "sprite/npc/WorldMuskular.h"
+#include "sprite/npc/WorldMisstar.h"
+#include "sprite/npc/WorldKlevar.h"
+#include "sprite/npc/WorldKalmar.h"
 
 extern Gfx gPauseDLSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
@@ -31,46 +32,46 @@ Vp gPauseSpiritsViewport = {
 };
 s32 gPauseSpiritsSpriteAnims[][4] = {
     {
-        NPC_ANIM_world_eldstar_Palette_00_Anim_0,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_1,
-        NPC_ANIM_world_eldstar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldEldstar_Still,
+        ANIM_WorldEldstar_Idle,
+        ANIM_WorldEldstar_Wave,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_mamar_Palette_00_Anim_0,
-        NPC_ANIM_world_mamar_Palette_00_Anim_1,
-        NPC_ANIM_world_mamar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldMamar_Still,
+        ANIM_WorldMamar_Idle,
+        ANIM_WorldMamar_TalkHappy,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_skolar_Palette_00_Anim_0,
-        NPC_ANIM_world_skolar_Palette_00_Anim_1,
-        NPC_ANIM_world_skolar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldSkolar_Still,
+        ANIM_WorldSkolar_Idle,
+        ANIM_WorldSkolar_TalkAngry,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_muskular_Palette_00_Anim_0,
-        NPC_ANIM_world_muskular_Palette_00_Anim_1,
-        NPC_ANIM_world_muskular_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldMuskular_Still,
+        ANIM_WorldMuskular_Idle,
+        ANIM_WorldMuskular_Talk,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_misstar_Palette_00_Anim_0,
-        NPC_ANIM_world_misstar_Palette_00_Anim_1,
-        NPC_ANIM_world_misstar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldMisstar_Still,
+        ANIM_WorldMisstar_Idle,
+        ANIM_WorldMisstar_Talk,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_klevar_Palette_00_Anim_0,
-        NPC_ANIM_world_klevar_Palette_00_Anim_1,
-        NPC_ANIM_world_klevar_Palette_00_Anim_3,
-        ANIM_END
+        ANIM_WorldKlevar_Still,
+        ANIM_WorldKlevar_Idle,
+        ANIM_WorldKlevar_Talk,
+        ANIM_LIST_END
     },
     {
-        NPC_ANIM_world_kalmar_Palette_00_Anim_0,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_1,
-        NPC_ANIM_world_kalmar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_WorldKalmar_Still,
+        ANIM_WorldKalmar_Idle,
+        ANIM_WorldKalmar_Talk,
+        ANIM_LIST_END
     }
 };
 s8 gPauseSpiritsGridData[] = {
@@ -249,7 +250,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
 
     if (gPauseMenuCurrentTab == 5) {
         if (playerData->maxStarPower > gPauseSpiritsIndexes[menu->selected]) {
-            msgID = gPauseSpiritsIndexes[menu->selected] + MESSAGE_ID(0x1D, 0x2A);
+            msgID = gPauseSpiritsIndexes[menu->selected] + MSG_Menus_SpiritName_Eldstar;
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
@@ -374,7 +375,7 @@ void pause_spirits_handle_input(MenuPanel* panel) {
     if (get_player_data()->maxStarPower <= gPauseSpiritsIndexes[panel->selected]) {
         gPauseCurrentDescMsg = pause_get_menu_msg(0x56);
     } else {
-        gPauseCurrentDescMsg = MESSAGE_ID(0x1D, 0x31) + gPauseSpiritsIndexes[panel->selected];
+        gPauseCurrentDescMsg = MSG_Menus_SpiritDesc_Eldstar + gPauseSpiritsIndexes[panel->selected];
     }
 }
 

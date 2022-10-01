@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E004AE80
+.word LE004A1AC_35866C, LE004A1AC_35866C, LE004A1D4_358694, LE004A200_3586C0, LE004A25C_35871C, LE004A22C_3586EC
+
+.section .text
+
 glabel shockwave_main
 /* 3584C0 E004A000 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 3584C4 E004A004 F7B40040 */  sdc1      $f20, 0x40($sp)

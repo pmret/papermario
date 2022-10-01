@@ -1,6 +1,7 @@
 #include "dgb_07.h"
 #include "message_ids.h"
-#include "sprite/npc/world_clubba.h"
+#include "entity.h"
+#include "sprite/npc/WorldClubba.h"
 
 enum {
     NPC_WORLD_CLUBBA0,
@@ -12,15 +13,15 @@ EntryList N(entryList) = {
     {  250.0f, 190.0f, -250.0f, 180.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = { MSG_dgb_07_tattle },
+    .tattle = { MSG_MapTattle_dgb_07 },
 };
 
 EvtScript N(80241490) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -40,25 +41,25 @@ EvtScript N(exitSingleDoor_80241530) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 6)
-    EVT_SET(EVT_VAR(2), 22)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 6)
+    EVT_SET(LVar2, 22)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(enterSingleDoor_802415E4) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 22)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LVar2, 22)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -66,13 +67,13 @@ EvtScript N(enterSingleDoor_802415E4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -15)
+    EVT_IF_LT(GB_StoryProgress, -15)
         EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80241E5C)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
@@ -84,9 +85,9 @@ EvtScript N(main) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, -220, 75, -210, 17, EVT_SAVE_FLAG(1050))
-    EVT_CALL(MakeEntity, 0x802EAED4, -370, 0, -200, 0, -1, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, 0x802EAED4, -410, 0, -200, 0, -1, MAKE_ENTITY_END)
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, -220, 75, -210, 17, GF_DGB07_Item_StarPiece)
+    EVT_CALL(MakeEntity, &Entity_WoodenCrate, -370, 0, -200, 0, -1, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_WoodenCrate, -410, 0, -200, 0, -1, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };
@@ -96,8 +97,8 @@ static s32 N(pad_17E4)[] = {
 };
 
 EvtScript N(802417F0) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
@@ -112,24 +113,24 @@ EvtScript N(802417F0) = {
 };
 
 s32 N(extraAnimationList_802418AC)[] = {
-    NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    NPC_ANIM_world_clubba_Palette_00_Anim_2,
-    NPC_ANIM_world_clubba_Palette_00_Anim_3,
-    NPC_ANIM_world_clubba_Palette_00_Anim_4,
-    NPC_ANIM_world_clubba_Palette_00_Anim_C,
-    NPC_ANIM_world_clubba_Palette_00_Anim_7,
-    NPC_ANIM_world_clubba_Palette_00_Anim_8,
-    NPC_ANIM_world_clubba_Palette_00_Anim_11,
-    NPC_ANIM_world_clubba_Palette_00_Anim_12,
-    ANIM_END,
+    ANIM_WorldClubba_Anim00,
+    ANIM_WorldClubba_Anim02,
+    ANIM_WorldClubba_Anim03,
+    ANIM_WorldClubba_Anim04,
+    ANIM_WorldClubba_Anim0C,
+    ANIM_WorldClubba_Anim07,
+    ANIM_WorldClubba_Anim08,
+    ANIM_WorldClubba_Anim11,
+    ANIM_WorldClubba_Anim12,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_802418D4)[] = {
-    NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_WorldClubba_Anim00,
+    ANIM_LIST_END,
 };
 
-NpcAISettings N(npcAISettings_802418DC) = {
+MobileAISettings N(npcAISettings_802418DC) = {
     .moveSpeed = 1.0f,
     .moveTime = 120,
     .waitTime = 30,
@@ -182,7 +183,7 @@ NpcSettings N(npcSettings_80241A50) = {
     .ai = &N(npcAI_802419A8),
     .onDefeat = &N(802417F0),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 StaticNpc N(npcGroup_80241A7C)[] = {
@@ -192,35 +193,37 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .pos = { -500.0f, 0.0f, -240.0f },
         .flags = NPC_FLAG_JUMPING,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { -500, 0, -240, 40, 0, -32767, 0, -500, 0, -240, 200, 0, 0, 1 },
-        .animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+	.territory = { .temp = { -500, 0, -240, 40, 0, -32767, 0, -500, 0, -240, 200, 0, 0, 1 }},
+        .animations = {
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+        },
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_802418AC),
     },
     {
@@ -229,33 +232,35 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_3,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_4,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_C,
-            NPC_ANIM_world_clubba_Palette_00_Anim_11,
-            NPC_ANIM_world_clubba_Palette_00_Anim_12,
-            NPC_ANIM_world_clubba_Palette_00_Anim_7,
-            NPC_ANIM_world_clubba_Palette_00_Anim_8,
-            NPC_ANIM_world_clubba_Palette_00_Anim_1,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
-            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim03,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim04,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim0C,
+            ANIM_WorldClubba_Anim11,
+            ANIM_WorldClubba_Anim12,
+            ANIM_WorldClubba_Anim07,
+            ANIM_WorldClubba_Anim08,
+            ANIM_WorldClubba_Anim01,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
+            ANIM_WorldClubba_Anim02,
         },
         .extraAnimations = N(extraAnimationList_802418D4),
     },
 };
 
 NpcGroupList N(npcGroupList_80241E5C) = {
-    NPC_GROUP(N(npcGroup_80241A7C), BATTLE_ID(15, 1, 0, 3)),
+    NPC_GROUP(N(npcGroup_80241A7C), 0x0F01, 0x02),
     {},
 };
 

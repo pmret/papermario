@@ -3,7 +3,7 @@
 
 u16 heap_nextMallocID = 0;
 
-f32 D_80074274[] = {
+f32 sCosineTable[] = {
     0.0f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f, 0.139173f,
     0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f, 0.275637f, 0.292372f, 0.309017f,
     0.325568f, 0.34202f, 0.358368f, 0.374607f, 0.390731f, 0.406737f, 0.422618f, 0.438371f, 0.45399f, 0.469472f,
@@ -15,7 +15,8 @@ f32 D_80074274[] = {
     0.984808f, 0.987688f, 0.990268f, 0.992546f, 0.994522f, 0.996195f, 0.997564f, 0.99863f, 0.999391f, 0.999848f, 1.0f
 };
 
-u8 D_800743E0[] = {
+// Digits for bases up to 36
+u8 sIntegerDigits[] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
     'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
@@ -25,7 +26,7 @@ u8 D_800743E0[] = {
 
 s32 gRandSeed = 1;
 
-f32 D_80074414[] = {
+f32 sAtanFactors[] = {
     1.0f, 1.273187f, 1.27303f, 1.272768f, 1.272402f, 1.271932f, 1.271358f, 1.270681f, 1.269902f, 1.269021f, 1.268038f,
     1.266956f, 1.265774f, 1.264494f, 1.263116f, 1.261643f, 1.260075f, 1.258413f, 1.256659f, 1.254815f, 1.252881f,
     1.250859f, 1.248752f, 1.24656f, 1.244285f, 1.241929f, 1.239494f, 1.236981f, 1.234393f, 1.231731f, 1.228997f,
@@ -50,7 +51,7 @@ Gfx D_80074580[] = {
     gsSPEndDisplayList(),
 };
 
-void dma_write_block(s32 dramAddr, s32 devAddr, s32 size);
+void dma_write_block(Addr dramAddr, u32 devAddr, s32 size);
 
 #define ROM_CHUNK_SIZE 0x2000
 
@@ -62,9 +63,9 @@ HeapNode* _heap_create(HeapNode* addr, u32 size) {
     if (size < 32) {
         return (HeapNode*)-1;
     } else {
-        HeapNode* heapNode = ALIGN16((s32)addr);
+        HeapNode* heapNode = (HeapNode*)ALIGN16((u32)addr);
 
-        size -= ((s8*)heapNode - (s8*)addr);
+        size -= ((u8*)heapNode - (u8*)addr);
         heapNode->next = NULL;
         heapNode->length = size - sizeof(HeapNode);
         heapNode->allocated = 0;
@@ -361,9 +362,9 @@ f32 cosine(s16 arg0) {
     }
 
     if (temp360 >= 180) {
-        return -D_80074274[idx];
+        return -sCosineTable[idx];
     } else {
-        return D_80074274[idx];
+        return sCosineTable[idx];
     }
 }
 
@@ -376,54 +377,44 @@ s32 sign(s32 val) {
     return sign;
 }
 
-// D_800743E0 index needs to add the upper 32 bits from func_8006DDC0 ret
-#ifdef NON_EQUIVALENT
+// Writes integer in base as a string to dest. base can range from 2 to 36
+char* int_to_string(s32 integer, char* dest, s32 base) {
+    u8 string[40]; // Even for binary this is a little long: 34 would suffice
+    s32 i = ARRAY_COUNT(string) - 2;
+    s32 negative = FALSE;
+    s64 longInteger = integer;
 
-typedef struct {
-    u8 unk_00[39];
-    u8 unk_39;
-} Unk_struct_43F0;
-
-u32 func_8006DDC0(s64 arg0, s64 arg1);
-u64 func_8006D800(s64 arg0, s64 arg1);
-
-char* int_to_string(s32 arg01, char* arg1, s32 arg2) {
-    Unk_struct_43F0 unk_struct;
-    s32 phi_s4 = 0x26;
-    s32 phi_fp = 0;
-    s64 arg0 = arg01;
-
-    if (arg0 < 0) {
-        phi_fp = 1;
-        arg0 *= -1;
+    // handle negative integers
+    if (longInteger < 0) {
+        negative = TRUE;
+        longInteger *= -1;
     }
-    unk_struct.unk_39 = 0;
 
+    // null-terminate string
+    string[ARRAY_COUNT(string) - 1] = '\0';
+
+    // extract digits, filling string from the back
     while (TRUE) {
-        u8(*new_var)[];
-
-        unk_struct.unk_00[phi_s4] = (*(new_var = &D_800743E0))[func_8006DDC0(arg0, arg2)];
-        arg0 = func_8006D800(arg0, arg2);
-        if (arg0 == 0 || phi_s4 == 0) {
+        string[i] = sIntegerDigits[longInteger % base];
+        longInteger /= base;
+        if (longInteger == 0 || i == 0) {
             break;
         }
-        phi_s4--;
+        i--;
     }
 
-    if (phi_fp) {
-        phi_s4--;
-        unk_struct.unk_00[phi_s4] = 0x2D;
+    // Add - to negatives
+    if (negative) {
+        i--;
+        string[i] = '-';
     }
 
-    strcpy(arg1, &unk_struct.unk_00[phi_s4]);
+    // copy only populated part of string
+    strcpy(dest, &string[i]);
 
-    return arg1;
+    return dest;
 }
-#else
-INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char* arg1, s32 arg2);
-#endif
 
-// should maybe be called bzero
 void mem_clear(void* data, s32 numBytes) {
     u8* addressableData = data;
 
@@ -445,39 +436,39 @@ void copy_matrix(Matrix4f src, Matrix4f dest) {
 }
 
 // maybe u32
-s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
+u32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
     osInvalICache(vramDest, length);
 
     for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
-        nuPiReadRom(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+        nuPiReadRom((u32)romStart + i, vramDest + i, ROM_CHUNK_SIZE);
     }
 
     if (i != length) {
-        nuPiReadRom(romStart + i, vramDest + i, length - i);
+        nuPiReadRom((u32)romStart + i, vramDest + i, length - i);
     }
 
     return length;
 }
 
-s32 dma_write(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_write(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
     for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
-        dma_write_block(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+        dma_write_block(romStart + i, (u32)vramDest + i, ROM_CHUNK_SIZE);
     }
 
     if (i != length) {
-        dma_write_block(romStart + i, vramDest + i, length - i);
+        dma_write_block(romStart + i, (u32)vramDest + i, length - i);
     }
 
     return length;
 }
 
-void dma_write_block(s32 dramAddr, s32 devAddr, s32 size) {
+void dma_write_block(Addr dramAddr, u32 devAddr, s32 size) {
     OSIoMesg osIoMesg;
     OSMesg osMesg;
     OSMesgQueue osMesgQueue;
@@ -564,11 +555,11 @@ f32 signF(f32 val) {
     return sign;
 }
 
-s32 round(f32 arg0) {
-    if (!(arg0 >= 0.0f)) {
-        return -(s32)(0.5 - arg0);
+s32 round(f32 x) {
+    if (!(x >= 0.0f)) {
+        return -(s32)(0.5 - x);
     } else {
-        return (s32)(0.5 + arg0);
+        return (s32)(0.5 + x);
     }
 }
 
@@ -614,40 +605,40 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
     f32 zDiff = endZ - startZ;
     f32 absXDiff = fabsf(xDiff);
     f32 absZDiff = fabsf(zDiff);
-    f32 temp_f20;
+    f32 ret;
 
     if (absZDiff < absXDiff) {
-        temp_f20 = (absZDiff / absXDiff) * 45.0f;
-        temp_f20 *= D_80074414[round(2.0f * temp_f20)];
+        ret = (absZDiff / absXDiff) * 45.0f;
+        ret *= sAtanFactors[round(2.0f * ret)];
         if (xDiff >= 0.0f) {
             if (zDiff >= 0.0f) {
-                return temp_f20 + 90.0f;
+                return ret + 90.0f;
             } else {
-                return 90.0f - temp_f20;
+                return 90.0f - ret;
             }
         }
         if (zDiff >= 0.0f) {
-            return 270.0f - temp_f20;
+            return 270.0f - ret;
         } else {
-            return temp_f20 + 270.0f;
+            return ret + 270.0f;
         }
     } else {
         if (absZDiff == 0.0f) {
             return 0.0f;
         }
-        temp_f20 = (absXDiff / absZDiff) * 45.0f;
-        temp_f20 *= D_80074414[round(2.0f * temp_f20)];
+        ret = (absXDiff / absZDiff) * 45.0f;
+        ret *= sAtanFactors[round(2.0f * ret)];
         if (zDiff >= 0.0f) {
             if (xDiff >= 0.0f) {
-                return 180.0f - temp_f20;
+                return 180.0f - ret;
             } else {
-                return temp_f20 + 180.0f;
+                return ret + 180.0f;
             }
         } else if (!(xDiff >= 0.0f)) {
-            return 360.0f - temp_f20;
+            return 360.0f - ret;
         }
     }
-    return temp_f20;
+    return ret;
 }
 
 f32 get_player_normal_yaw(void) {
@@ -681,50 +672,50 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta) {
     f32 sinTheta;
     f32 cosTheta;
 
-    sin_cos_rad((theta * 6.28318f) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(theta), &sinTheta, &cosTheta);
     *x += r * sinTheta;
     *y -= r * cosTheta;
 }
 
+// Effectively computes theta % 0x100000
 u16 _wrap_trig_lookup_value(f32 theta) {
     f32 ret = theta;
 
-    if (theta >= 1048576.0f || theta <= -1048576.0f) {
-        ret = theta * 0.0000009536743f;
-        ret = theta - ((s32) ret) * 1048576.0f;
+    if (theta >= 0x100000 || theta <= -0x100000) {
+        ret = theta / 0x100000;
+        ret = theta - (f32)(s32)ret * 0x100000;
     }
 
     return (s32) ret;
 }
 
-void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta) {
-    u16 theta = _wrap_trig_lookup_value(rad * 10430.378f);
+void sin_cos_rad(f32 theta, f32* outSinTheta, f32* outCosTheta) {
+    u16 binang = _wrap_trig_lookup_value(RAD_TO_BINANG(theta));
 
-    *outSinTheta = sins(theta) * 3.051851e-05;
-    *outCosTheta = coss(theta) * 3.051851e-05;
+    *outSinTheta = sins(binang) * SHT_MINV;
+    *outCosTheta = coss(binang) * SHT_MINV;
 }
 
-f32 sin_rad(f32 angle) {
-    return sins(_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05;
+f32 sin_rad(f32 theta) {
+    return sins(_wrap_trig_lookup_value(RAD_TO_BINANG(theta))) * SHT_MINV;
 }
 
-f32 cos_rad(f32 angle) {
-    return coss(_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05;
+f32 cos_rad(f32 theta) {
+    return coss(_wrap_trig_lookup_value(RAD_TO_BINANG(theta))) * SHT_MINV;
+}
+void sin_cos_deg(f32 theta, f32* outSinTheta, f32* outCosTheta) {
+    u16 binang = _wrap_trig_lookup_value(DEG_TO_BINANG(theta));
+
+    *outSinTheta = sins(binang) * SHT_MINV;
+    *outCosTheta = coss(binang) * SHT_MINV;
 }
 
-void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta) {
-    u16 theta = _wrap_trig_lookup_value(rad * 182.04445f);
-
-    *outSinTheta = sins(theta) * 3.051851e-05;
-    *outCosTheta = coss(theta) * 3.051851e-05;
+f32 sin_deg(f32 theta) {
+    return sins(_wrap_trig_lookup_value(DEG_TO_BINANG(theta))) * SHT_MINV;
 }
 
-f32 sin_deg(f32 angle) {
-    return sins(_wrap_trig_lookup_value(angle * 182.04445f)) * 3.051851e-05;
-}
-
-f32 cos_deg(f32 angle) {
-    return coss(_wrap_trig_lookup_value(angle * 182.04445f)) * 3.051851e-05;
+f32 cos_deg(f32 theta) {
+    return coss(_wrap_trig_lookup_value(DEG_TO_BINANG(theta))) * SHT_MINV;
 }
 
 f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {

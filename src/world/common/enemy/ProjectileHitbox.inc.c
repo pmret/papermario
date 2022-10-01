@@ -10,7 +10,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[gCurrentCamID];
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     f32 facingAngle;
     f32 angleToPlayer;
     f32 deltaAngle;
@@ -58,14 +58,14 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* terri
         s32 sp28;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 20;
         script->functionTemp[0] = 33;
     } else {
         s32 npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
 
         if (npcID != NPC_SELF && get_enemy(npcID)->varTable[0] == 0 && npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
             npc->duration = enemy->varTable[1];
             script->functionTemp[0] = 30;
         }
@@ -84,11 +84,11 @@ void N(ProjectileHitbox_30)(Evt* script) {
             s32 emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         } else {
             Enemy* hitboxEnemy;
 
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_HIT];
             hitboxEnemy = get_enemy(npcID);
             hitboxEnemy->varTable[4] = enemy->npcID;
             hitboxEnemy->varTable[0] = 1;
@@ -113,7 +113,7 @@ void N(ProjectileHitbox_32)(Evt* script) {
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
     if (enemy2->varTable[0] == 0) {
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = enemy->varTable[2];
         script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
     }
@@ -137,12 +137,12 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     f32 hitDepth;
     Npc* npc;
     Npc* npc2;
-    NpcAISettings* aiSettings;
+    MobileAISettings* aiSettings;
     u32 vt0;
 
     if (get_enemy_safe(enemy->npcID) != NULL) {
         if (enemy->varTable[0] != 5) {
-            aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+            aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
             npc = get_npc_unsafe(enemy->npcID);
 
             if (enemy->varTable[1] & 2) {
@@ -283,15 +283,15 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
     }
 
     if (get_enemy_safe(enemy->npcID) == NULL) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
     if (enemy->varTable[0] == 5) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
     if (get_enemy_safe(enemy->npcID) == NULL) {
-        evt_set_variable(script, EVT_VAR(0), 0);
+        evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
 
@@ -363,7 +363,7 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
-                evt_set_variable(script, EVT_VAR(0), 1);
+                evt_set_variable(script, LVar0, 1);
                 return ApiStatus_DONE2;
             }
             if (enemy->varTable[1] & 1) {

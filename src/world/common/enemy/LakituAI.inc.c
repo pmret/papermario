@@ -1,6 +1,6 @@
 #include "common.h"
 #include "npc.h"
-#include "sprite/npc/lakitu.h"
+#include "sprite/npc/Lakitu.h"
 
 // required include args
 #ifndef AI_LAKITU_FIRST_SPINY_ID
@@ -27,7 +27,7 @@ s32 N(LakituAI_GetAvailableSpiny)(void) {
     return -1;
 }
 
-void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -75,10 +75,10 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
         script->functionTemp[1]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x,
-                               enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX,
-                               enemy->territory->wander.wanderSizeZ) != 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x,
+                               enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x,
+                               enemy->territory->wander.wanderSize.z) != 0) {
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
@@ -113,7 +113,7 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     }
 }
 
-void N(LakituAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(LakituAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
@@ -170,15 +170,15 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args);
     Enemy* spinyEnemy;
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
 
@@ -230,7 +230,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             spinyEnemy->varTable[10] = 1;
             spinyEnemy->varTable[11] = enemy->npcID;
             npc->duration = 15;
-            npc->currentAnim.w = NPC_ANIM_lakitu_Palette_00_Anim_14;
+            npc->currentAnim = ANIM_Lakitu_Anim14;
             script->AI_TEMP_STATE = 30;
         }
     }
@@ -263,7 +263,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->duration > 0) {
                 break;
             }
-            npc->currentAnim.w = NPC_ANIM_lakitu_Palette_00_Anim_15;
+            npc->currentAnim = ANIM_Lakitu_Anim15;
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 3;
             npc->duration = 10;

@@ -139,7 +139,7 @@ void func_802A9298_42E638(void) {
             battleStatus->unk_85 = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0U, 0U, 0U);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
 
             // fallthrough
@@ -161,7 +161,7 @@ void func_802A9298_42E638(void) {
                     }
 
                     if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
-                        if (actionCommandStatus->unk_64 == 0) {
+                        if (actionCommandStatus->easyVersion == 0) {
                             actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 13;
                         } else {
                             actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 850 / 100;
@@ -218,7 +218,7 @@ void func_802A9298_42E638(void) {
                     }
                     break;
                 case 2:
-                    if (actionCommandStatus->unk_64 == 0) {
+                    if (actionCommandStatus->easyVersion == 0) {
                         if (battleStatus->unk_84 >= D_802A9A08_42EDA8[battleStatus->unk_85]) {
                             battleStatus->unk_85++;
                         }
@@ -266,7 +266,7 @@ void func_802A9298_42E638(void) {
                 }
 
                 btl_set_popup_duration(0);
-                sfx_stop_sound(0x80000041);
+                sfx_stop_sound(SOUND_80000041);
                 actionCommandStatus->unk_54 = 5;
                 actionCommandStatus->state = 12;
                 break;

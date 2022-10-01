@@ -13,11 +13,17 @@
 #endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
+#define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
-#define A(sym) NS(AREA, sym)
-#define N(sym) NS(NAMESPACE, sym)
+#define NAMESUFFIX
+#define A(sym) NS(AREA, sym, NAMESUFFIX)
+#define N(sym) NS(NAMESPACE, sym, NAMESUFFIX)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
+
+#define PTR_LIST_END ((void*) -1)
+
+#define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)
 
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
@@ -64,26 +70,49 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define CAM_NEAR_CLIP 16
+#define CAM_FAR_CLIP 4096
+
+// Size of tmem in bytes (4kB)
+#define TMEM_SIZE 0x1000
+// Height of tiles to use when copying fullscreen images (6)
+#define SCREEN_COPY_TILE_HEIGHT ((TMEM_SIZE) / ((SCREEN_WIDTH) * (2)))
+
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI      3.141592f
 #define PI_D    3.141592
 #define TAU     6.28318f
 #define PI_S    3.14159f // Shorter PI
 
-#define SPRITE_WORLD_SCALE 0.71428573f
+// Angle conversion macros
+#define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
+#define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+#define DEG_TO_RAD(deg) (((deg) * TAU) / 360.0f)
+
+// Should be 1.0f / 0x7FFF, but precision is wrong for a double
+#define SHT_MINV 3.051851e-05
+
+#define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
+#define SPRITE_WORLD_SCALE_D (5.0/7.0)
+
+#define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
 
 #define BATTLE_ENTITY_ID_MASK 0x800
 
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000
-#define COLLISION_IGNORE_ENTITIES 0x40000
-#define COLLISION_ONLY_ENTITIES 0x100000
+
+#define NPC_DISPOSE_LOCATION    0,-1000,0
+#define NPC_DISPOSE_POS_X   0
+#define NPC_DISPOSE_POS_Y   -1000
+#define NPC_DISPOSE_POS_Z   0
 
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
+#define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
 
-#define SQ(x) (x*x)
-#define CUBE(x) (x*x*x)
-#define QUART(x) (x*x*x*x)
+#define SQ(x) ((x) * (x))
+#define CUBE(x) ((x) * (x) * (x))
+#define QUART(x) ((x) * (x) * (x) * (x))
 
 /// Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
@@ -91,12 +120,20 @@
 /// X.10 fixed-point literal
 #define X10(f) (s32)(f * 1024.0f)
 
-#define _NS(x, y) x ## _ ## y
-#define NS(x, y) _NS(x, y)
+#define _NS(x, y, z) x ## _ ## y ## z
+#define NS(x, y, z) _NS(x, y, z)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
-#define SPRITE_PIXEL_SCALE (5.0 / 7.0)
+#define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+
+// loads integrator with standard parameter set used for falling
+
+#define LOAD_INTEGRATOR_FALL(ptr) \
+    (ptr)[0] =  0.11430f; \
+    (ptr)[1] = -0.28710f; \
+    (ptr)[2] = -0.18230f; \
+    (ptr)[3] =  0.01152f; \
 
 /* common AI function and script variables */
 // ai script
@@ -119,10 +156,5 @@
 // projectile hitbox
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
-
-#ifdef PERMUTER
-#undef SCRIPT
-#define SCRIPT(...) {}
-#endif
 
 #endif

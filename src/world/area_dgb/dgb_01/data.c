@@ -1328,7 +1328,7 @@ Gfx D_8024DEC0_C0B740[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx sam_01_Quizmo_Worker[] = {
+Gfx D_8024DEF8_dgb_01[] = {
     gsSPSetLights1(dgb_01_D_80253140_C109C0),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1510,7 +1510,7 @@ Gfx D_8024E440_C0BCC0[] = {
     gsSPDisplayList(D_8024E0A8_C0B928),
     gsSPDisplayList(D_8024E020_C0B8A0),
     gsSPDisplayList(D_8024DFA0_C0B820),
-    gsSPDisplayList(sam_01_Quizmo_Worker),
+    gsSPDisplayList(D_8024DEF8_dgb_01),
     gsSPDisplayList(D_8024DEC0_C0B740),
     gsSPDisplayList(D_8024DD28_C0B5A8),
     gsSPEndDisplayList(),
@@ -3666,7 +3666,7 @@ StaticAnimatorNode N(D_802523C8_C0FC48) = {
 };
 
 StaticAnimatorNode N(D_802523F4_C0FC74) = {
-    .displayList = sam_01_Quizmo_Worker,
+    .displayList = D_8024DEF8_dgb_01,
 };
 
 StaticAnimatorNode N(D_80252420_C0FCA0) = {

@@ -24,10 +24,10 @@ ApiStatus func_80240000_E12760(Evt* script, s32 isInitialCall) {
     lightBeamRotX = spotLightPosZ * -0.35 * 0.3;
     lightBeamRotZ = spotLightPosX * 0.35;
     
-    evt_set_float_variable(script, LW(0), spotLightPosX);
-    evt_set_float_variable(script, LW(1), spotLightPosZ);
-    evt_set_float_variable(script, LW(2), lightBeamRotX);
-    evt_set_float_variable(script, LW(3), lightBeamRotZ);
+    evt_set_float_variable(script, LVar0, spotLightPosX);
+    evt_set_float_variable(script, LVar1, spotLightPosZ);
+    evt_set_float_variable(script, LVar2, lightBeamRotX);
+    evt_set_float_variable(script, LVar3, lightBeamRotZ);
     
     shading = D_80151328;
     shading->sources[0].pos.x = gPlayerStatusPtr->position.x * 0.8;

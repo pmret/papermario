@@ -1,9 +1,9 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "sprite/npc/jungle_guy.h"
+#include "sprite/npc/JungleGuy.h"
 
-void N(SpearGuyAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -13,7 +13,7 @@ void N(SpearGuyAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetec
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
-void N(SpearGuyAI_Loiter)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 d100;
@@ -31,7 +31,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVol
         case 1:
             enemy->varTable[0] = 2;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_F;
+            npc->currentAnim = ANIM_JungleGuy_Anim0F;
         case 2:
             enemy->varTable[1]++;
             if (enemy->varTable[1] > 50) {
@@ -41,7 +41,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVol
         case 3:
             enemy->varTable[0] = 4;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_10;
+            npc->currentAnim = ANIM_JungleGuy_Anim10;
         case 4:
             enemy->varTable[1]++;
             if (enemy->varTable[1] == 25) {
@@ -54,7 +54,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVol
         case 5:
             enemy->varTable[0] = 6;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = NPC_ANIM_jungle_guy_Palette_00_Anim_3;
+            npc->currentAnim = ANIM_JungleGuy_Anim03;
             fx_sweat(0, npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionHeight, 0, 10);
         case 6:
             enemy->varTable[1]++;
@@ -86,21 +86,21 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
 
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

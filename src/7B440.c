@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) {
+    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -30,47 +30,46 @@ void update_player_input(void) {
         playerStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & 8) {
-        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_200000;
+    if (playerStatus->animFlags & PA_FLAGS_8) {
+        playerStatus->animFlags |= PA_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }
 }
 
-#ifdef NON_MATCHING
 void reset_player_status(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    MapConfig* mapConfig;
+    MapSettings* mapSettings;
     f32 one;
     f32* floatsTemp;
 
-    D_8010C96C = -1;
+    PeachDisguiseNpcIndex = -1;
     TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
     D_8010C92C = 0;
-    D_8010C95C = 0;
+    PrevPlayerDirection = 0;
     D_8010C980 = 0;
-    D_800F7B40 = 0;
+    PrevPlayerCamRelativeYaw = 0;
     D_800F7B44 = 0;
     D_8010C938 = 0;
     D_8010C990 = 0.0f;
-    playerStatus->unk_0D = 1;
-    playerStatus->renderMode = 0xD;
+    playerStatus->availableDisguiseType = 1;
+    playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
     playerStatus->alpha1 = 255;
     playerStatus->alpha2 = 255;
-    gGameStatusPtr->peachFlags &= ~0x8;
-    gGameStatusPtr->peachFlags &= ~0x10;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_HAS_INGREDIENT;
 
     one = 1.0f;
 
-    if (gGameStatusPtr->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
-        playerStatus->animFlags |= 0x1000;
+        playerStatus->animFlags |= PA_FLAGS_USING_PEACH_PHYSICS;
 
-        if (gGameStatusPtr->peachFlags & 2) {
+        if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
             D_8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }
@@ -80,11 +79,11 @@ void reset_player_status(void) {
         gGameStatusPtr->peachCookingIngredient = 0;
     }
 
-    // This grossness is needed for matching
-    floatsTemp = &DefaultMoveSpeeds[0];
-    playerStatus->walkSpeed = *(floatsTemp++) * one;
-    playerStatus->runSpeed = *(floatsTemp++) * one;
-    playerStatus->maxJumpSpeed = *(floatsTemp++) * one;
+    // TODO required to match
+    floatsTemp = &(&D_800F7B74)[-1]; // index of 0 does not work
+    playerStatus->walkSpeed = *floatsTemp++ * one;
+    playerStatus->runSpeed = *floatsTemp++ * one;
+    playerStatus->maxJumpSpeed = *floatsTemp++ * one;
 
     set_action_state(ACTION_STATE_IDLE);
 
@@ -98,19 +97,19 @@ void reset_player_status(void) {
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
-    playerStatus->unk_90[CAM_DEFAULT] = 0.0f;
-    playerStatus->unk_90[CAM_BATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_TATTLE] = 0.0f;
-    playerStatus->unk_90[CAM_3] = 0.0f;
+    playerStatus->flipYaw[CAM_DEFAULT] = 0.0f;
+    playerStatus->flipYaw[CAM_BATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_TATTLE] = 0.0f;
+    playerStatus->flipYaw[CAM_3] = 0.0f;
 
-    mapConfig = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].config;
+    mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 
-    if (mapConfig->entryList != NULL) {
-        if (gGameStatusPtr->entryID < mapConfig->entryCount) {
-            playerStatus->position.x = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
-            playerStatus->position.y = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
-            playerStatus->position.z = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
-            playerStatus->currentYaw = (*mapConfig->entryList)[gGameStatusPtr->entryID].yaw;
+    if (mapSettings->entryList != NULL) {
+        if (gGameStatusPtr->entryID < mapSettings->entryCount) {
+            playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+            playerStatus->position.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+            playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+            playerStatus->currentYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
@@ -118,12 +117,9 @@ void reset_player_status(void) {
     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
-    phys_reset_spin_history(mapConfig);
+    phys_reset_spin_history();
     mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));
 }
-#else
-INCLUDE_ASM(s32, "7B440", reset_player_status);
-#endif
 
 void get_packed_buttons(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -221,7 +217,7 @@ void func_800E24F8(void) {
                 break;
         }
     } else {
-        switch(gPlayerStatus.actionState) {
+        switch (gPlayerStatus.actionState) {
             case ACTION_STATE_WALK:
             case ACTION_STATE_RUN:
             case ACTION_STATE_JUMP:

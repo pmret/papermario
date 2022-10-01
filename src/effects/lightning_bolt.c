@@ -21,7 +21,7 @@ f32 func_E00BC1D8(f32 arg0) {
 INCLUDE_ASM(s32, "effects/lightning_bolt", lightning_bolt_update);
 
 void lightning_bolt_render(EffectInstance *effect) {
-    LightningBoltFXData* effect94 = effect->data;
+    LightningBoltFXData* effect94 = effect->data.lightningBolt;
     RenderTask renderTask;
     RenderTask* retTask;
     RenderTask* renderTaskPointer = &renderTask;
@@ -36,7 +36,7 @@ void lightning_bolt_render(EffectInstance *effect) {
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
     retTask = shim_queue_render_task(renderTaskPointer);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00BC36C(void) {

@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00D2510
+.double 0.6
+
+dlabel D_E00D2518
+.double 0.01
+
+.section .text
+
 glabel floating_cloud_puff_update
 /* 3D4A90 E00D2120 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3D4A94 E00D2124 AFBF0010 */  sw        $ra, 0x10($sp)

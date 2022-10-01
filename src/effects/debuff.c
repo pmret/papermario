@@ -29,7 +29,7 @@ EffectInstance* debuff_main(s32 arg0, f32 x, f32 y, f32 z) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    effect->data = data = shim_general_heap_malloc(numParts * sizeof(*data));
+    effect->data.debuff = data = shim_general_heap_malloc(numParts * sizeof(*data));
 
     ASSERT(data != NULL);
 
@@ -83,11 +83,11 @@ void debuff_init(EffectInstance* effect) {
 }
 
 void debuff_update(EffectInstance* effect) {
-    DebuffFXData* data = effect->data;
+    DebuffFXData* data = effect->data.debuff;
     s32 temp;
     s32 i;
 
-    data->unk_28 += 1;
+    data->unk_28++;
     data->unk_24--;
     if (data->unk_24 < 0) {
         shim_remove_effect(effect);
@@ -127,12 +127,12 @@ void debuff_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void debuff_appendGfx(void* effect) {
     EffectInstance* eff = (EffectInstance*)effect;
-    DebuffFXData* data = eff->data;
+    DebuffFXData* data = eff->data.debuff;
     Gfx* dlist = D_E00628C0[0];
     Gfx* dlist2 = D_E00628C4[0];
     Matrix4f sp18;

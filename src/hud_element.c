@@ -11,11 +11,6 @@ typedef struct HudElementSize {
     s16 size;
 } HudElementSize;
 
-typedef struct HudCacheEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8* data;
-} HudCacheEntry; // size = 0x08;
-
 u8* gHudElementAuxCache = NULL;
 s32 gHudElementCacheCapacity = 0x11000;
 
@@ -198,7 +193,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + gHudElementSizes[preset].size);
-                        nuPiReadRom((s32)icon_present_VRAM + raster, entry->data, gHudElementSizes[preset].size);
+                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, gHudElementSizes[preset].size);
                         *gHudElementCacheSize += gHudElementSizes[preset].size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
@@ -234,7 +229,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + 32);
-                        nuPiReadRom((s32)icon_present_VRAM + palette, entry->data, 32);
+                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 32);
                         *gHudElementCacheSize += 32;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
@@ -310,7 +305,6 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
         baseY = tempY + 2;
     }
 
-
     flags1 = (hudElement->flags & HUD_ELEMENT_FLAGS_FMT_CI4);
     isFmtCI4 = flags1 != 0;
     flags1 = (hudElement->flags & HUD_ELEMENT_FLAGS_FMT_IA8);
@@ -320,8 +314,8 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     flags2 = (hudElement->flags & HUD_ELEMENT_FLAGS_FLIPY);
     flipY = flags2 != 0;
 
-    fmt = 0; // stays the same if (isFmtCI4 == FALSE && isFmtIA8 == FALSE)
-    if (isFmtCI4 == TRUE && isFmtIA8 == TRUE) {
+    fmt = 0;
+    if (isFmtCI4 == FALSE && isFmtIA8 == FALSE) {
         fmt = 0; // RGBA
     }
     if (isFmtCI4 == TRUE && isFmtIA8 == FALSE) {
@@ -689,19 +683,19 @@ void init_hud_element_list(void) {
 void func_801413F8(void) {
     set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[CAM_3].updateMode = 2;
-    gCameras[CAM_3].unk_06 = 1;
-    gCameras[CAM_3].unk_20 = 0x3CBF;
-    gCameras[CAM_3].nearClip = 0x10;
-    gCameras[CAM_3].unk_1C = 0;
+    gCameras[CAM_3].unk_06 = TRUE;
+    gCameras[CAM_3].lookAt_dist = 15551;
+    gCameras[CAM_3].nearClip = CAM_NEAR_CLIP;
+    gCameras[CAM_3].auxPitch = 0;
     gCameras[CAM_3].auxBoomLength = 0;
     gCameras[CAM_3].auxBoomPitch = 0;
-    gCameras[CAM_3].auxPos.z = 0;
+    gCameras[CAM_3].lookAt_obj_target.z = 0;
     gCameras[CAM_3].farClip = 0x4000;
     gCameras[CAM_3].bgColor[0] = 0;
     gCameras[CAM_3].bgColor[1] = 0;
     gCameras[CAM_3].bgColor[2] = 0;
-    gCameras[CAM_3].auxPos.x = 160.0f;
-    gCameras[CAM_3].auxPos.y = -120.0f;
+    gCameras[CAM_3].lookAt_obj_target.x = 160.0f;
+    gCameras[CAM_3].lookAt_obj_target.y = -120.0f;
     gCameras[CAM_3].vfov = 1.0f;
     gCameras[CAM_3].flags &= ~0x6;
 }
@@ -1512,9 +1506,9 @@ void render_hud_element(HudElement* hudElement) {
         case 1:
             if (hudElement->flags & HUD_ELEMENT_FLAGS_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAGS_TRANSPARENT) {
-                    fold_update(0, 7, 255, 255, 255, hudElement->opacity, 0);
+                    fold_update(0, FOLD_TYPE_7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(0, 0, 0, 0, 0, 0, 0);
+                    fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAGS_TRANSPARENT) {

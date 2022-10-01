@@ -2,6 +2,8 @@
 /// @brief Flower Fields - (NW) Bubble Flower
 
 #include "common.h"
+#include "../flo.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE flo_14

@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001280[];
-extern Gfx D_09001358[];
-extern Gfx D_09001430[];
-extern Gfx D_09001508[];
+extern Gfx D_09001280_3958F0[];
+extern Gfx D_09001358_3959C8[];
+extern Gfx D_09001430_395AA0[];
+extern Gfx D_09001508_395B78[];
 
-Gfx* D_E00963E0[] = { D_09001280, D_09001358, D_09001430 };
+Gfx* D_E00963E0[] = { D_09001280_3958F0, D_09001358_3959C8, D_09001430_395AA0 };
 
 void balloon_init(EffectInstance* effect);
 void balloon_update(EffectInstance* effect);
@@ -31,7 +31,7 @@ EffectInstance* balloon_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.balloon = data;
     part = data;
 
     ASSERT(data != NULL);
@@ -53,7 +53,7 @@ void balloon_init(EffectInstance* effect) {
 }
 
 void balloon_update(EffectInstance* effect) {
-    BalloonFXData* part = (BalloonFXData*)effect->data;
+    BalloonFXData* part = effect->data.balloon;
 
     part->unk_1C--;
     part->unk_20++;
@@ -80,13 +80,13 @@ void balloon_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void balloon_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    BalloonFXData* data = ((EffectInstance*)effect)->data;
+    BalloonFXData* data = ((EffectInstance*)effect)->data.balloon;
     s32 idx = data->unk_00;
 
     gDPPipeSync(gMasterGfxPos++);
@@ -102,7 +102,7 @@ void balloon_appendGfx(void* effect) {
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, D_E00963E0[idx]);
-    gSPDisplayList(gMasterGfxPos++, D_09001508);
+    gSPDisplayList(gMasterGfxPos++, D_09001508_395B78);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
 }

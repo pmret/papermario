@@ -2,6 +2,8 @@
 /// @brief Tubba's Castle - Study (1F)
 
 #include "common.h"
+#include "../dgb.h"
+#include "message_ids.h"
 #include "map.h"
 
 #define NAMESPACE dgb_07

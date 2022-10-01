@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
-#include "sprite/npc/gulpit.h"
+#include "sprite/npc/Gulpit.h"
 
 #define NAMESPACE b_area_sam_gulpit_rocks
 
@@ -12,12 +12,12 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, NPC_ANIM_gulpit_Palette_00_Anim_10,
+    STATUS_NORMAL, ANIM_Gulpit_Anim10,
     STATUS_END,
 };
 
 s32 N(idleAnimations2)[] = {
-    STATUS_NORMAL, NPC_ANIM_gulpit_Palette_00_Anim_12,
+    STATUS_NORMAL, ANIM_Gulpit_Anim12,
     STATUS_END,
 };
 
@@ -91,19 +91,19 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_10)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim10)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations2)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_12)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim12)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)
     EVT_END_SWITCH
@@ -117,11 +117,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(setAnim) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(10))
-    EVT_SWITCH(LW(10))
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
+    EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
-            EVT_SET_CONST(LW(1), LW(2))
+            EVT_SET_CONST(LVar1, LVar2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -130,14 +130,14 @@ EvtScript N(setAnim) = {
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
-    EVT_SWITCH(LW(0))
+    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
-            EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
@@ -145,30 +145,30 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_BEGIN_AIR_LIFT)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
-            EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
         EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LW(0), 1)
-            EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
-            EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
+            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
-            EVT_SWITCH(LW(0))
+            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_11)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim11)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_13)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim13)
             EVT_END_SWITCH
-            EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(30)
+            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_WAIT(30)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_END_CASE_GROUP

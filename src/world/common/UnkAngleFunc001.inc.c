@@ -20,10 +20,10 @@ ApiStatus N(UnkAngleFunc001)(Evt* script, s32 isInitialCall) {
     }
 
     y = npc->pos.y;
-    if (npc->currentAnim.w == 0xB60000 ||
-        npc->currentAnim.w == 0xB60004 ||
-        npc->currentAnim.w == 0xB60008 ||
-        npc->currentAnim.w == 0xB6000C)
+    if (npc->currentAnim == 0xB60000 ||
+        npc->currentAnim == 0xB60004 ||
+        npc->currentAnim == 0xB60008 ||
+        npc->currentAnim == 0xB6000C)
     {
         y += 2.0f * sin_deg(N(unkAngle1));
     }

@@ -44,18 +44,45 @@ s8 D_E0020D94[] = {
     64, 0, 0, 32, 0, 32, 0, 0, 64, 0, 32, 32, 0, 64, 0, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
-void func_E0020000(EmoteFXData* part, s32 arg1);
 void emote_init(EffectInstance* effect);
 void emote_update(EffectInstance* effect);
 void emote_render(EffectInstance* effect);
 void emote_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/emote", func_E0020000);
+void func_E0020000(EmoteFXData* part, s32 arg1) {
+    f32 unk_1C = part->unk_1C;
+    f32 unk_20 = part->unk_20;
+    Npc* npc = part->unk_3C;
+    Matrix4f sp18;
+    f32 sin;
+    f32 cos;
 
-void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
+    sin = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
+    cos = shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
+    shim_guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
+
+    if (npc == PTR_LIST_END) {
+        part->unk_04 = gPlayerStatus.position.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = gPlayerStatus.position.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = gPlayerStatus.position.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    } else if (npc != NULL) {
+        part->unk_04 = npc->pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = npc->pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = npc->pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    } else {
+        part->unk_04 = part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+    }
+
+    part->unk_24 = unk_1C - 20.0f + arg1 * 20;
+    part->unk_28 = (unk_20 / 12.0f) * 0.5f + 0.5;
+}
+
+void emote_main(s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
-    EmoteFXData* part;
+    EmoteFXData* data;
     EffectInstance* effect;
     s32 numParts;
 
@@ -74,39 +101,39 @@ void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    data = effect->data.emote = shim_general_heap_malloc(numParts * sizeof(*data));
 
-    ASSERT(effect->data != NULL);
-    part->unk_3C = arg1;
-    part->unk_00 = arg0;
-    part->unk_30 = arg0;
+    ASSERT(effect->data.emote != NULL);
+    data->unk_3C = arg1;
+    data->unk_00 = arg0;
+    data->unk_30 = arg0;
 
     if (arg7 <= 0) {
         arg7 = 10000;
     }
-    part->unk_2C = arg7;
-    part->unk_34 = 0;
+    data->unk_2C = arg7;
+    data->unk_34 = 0;
 
     if (arg0 == 1) {
         s32 i;
 
-        for (i = 0; i < numParts; i++, part++) {
-            part->unk_10 = arg2;
-            part->unk_14 = arg3;
-            part->unk_18 = arg4;
-            part->unk_1C = arg6;
-            part->unk_20 = arg5;
-            part->unk_3C = arg1;
-            func_E0020000(part, i);
+        for (i = 0; i < numParts; i++, data++) {
+            data->unk_10 = arg2;
+            data->unk_14 = arg3;
+            data->unk_18 = arg4;
+            data->unk_1C = arg6;
+            data->unk_20 = arg5;
+            data->unk_3C = arg1;
+            func_E0020000(data, i);
         }
     } else {
-        part->unk_10 = arg2;
-        part->unk_14 = arg3;
-        part->unk_18 = arg4;
-        part->unk_1C = arg6;
-        part->unk_20 = arg5;
-        part->unk_3C = arg1;
-        func_E0020000(part, 1);
+        data->unk_10 = arg2;
+        data->unk_14 = arg3;
+        data->unk_18 = arg4;
+        data->unk_1C = arg6;
+        data->unk_20 = arg5;
+        data->unk_3C = arg1;
+        func_E0020000(data, 1);
     }
     *arg8 = effect;
 }
@@ -115,7 +142,7 @@ void emote_init(EffectInstance* effect) {
 }
 
 void emote_update(EffectInstance* effect) {
-    EmoteFXData* part = effect->data;
+    EmoteFXData* part = effect->data.emote;
     s32 temp_a0 = D_E0020D80[part->unk_30][part->unk_34];
     s32 type = part->unk_00;
 
@@ -142,7 +169,7 @@ void emote_update(EffectInstance* effect) {
         return;
     }
 
-    if (part->unk_3C != 0) {
+    if (part->unk_3C != NULL) {
         if (type == 1) {
             s32 i;
 
@@ -165,7 +192,7 @@ void emote_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 // lots of issues

@@ -26,9 +26,9 @@ void floating_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.floatingFlower = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.floatingFlower != NULL);
 
     part->unk_00 = arg0;
     part->unk_04 = arg1;
@@ -76,7 +76,7 @@ void floating_flower_init(EffectInstance* effect) {
 }
 
 void floating_flower_update(EffectInstance* effect) {
-    FloatingFlowerFXData* data = effect->data;
+    FloatingFlowerFXData* data = effect->data.floatingFlower;
     s32 unk_00 = data->unk_00;
 
     if (data->unk_34 < 150) {
@@ -137,13 +137,13 @@ void floating_flower_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void floating_flower_appendGfx(void* effect) {
     Matrix4f sp20, other;
     EffectInstance* effectTemp = effect;
-    FloatingFlowerFXData* part = effectTemp->data;
+    FloatingFlowerFXData* part = effectTemp->data.floatingFlower;
     u32 alpha;
     u8 rgb, a;
 

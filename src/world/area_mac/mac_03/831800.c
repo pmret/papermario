@@ -7,4 +7,12 @@ static char* N(exit_str_3) = "mac_03";
 
 #include "world/common/atomic/Pipe.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_03/831800", func_802402E0_831AE0);
+ApiStatus func_802402E0_831AE0(Evt* script, s32 isInitialCall) {
+    if (script->varTable[15] > 720) {
+        script->varTable[15] = 0;
+    }
+
+    script->varTable[0] = script->varTable[15] * 6;
+    script->varTable[1] = script->varTable[15] / 2;
+    return ApiStatus_DONE2;
+}

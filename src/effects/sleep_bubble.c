@@ -24,9 +24,9 @@ void sleep_bubble_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.sleepBubble = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.sleepBubble != NULL);
 
     part->unk_00 = arg0;
     part->pos.x = arg1;
@@ -46,7 +46,7 @@ void sleep_bubble_init(EffectInstance* effect) {
 
 // seems extremely fake
 void sleep_bubble_update(EffectInstance* effect) {
-    SleepBubbleFXData* part = effect->data;
+    SleepBubbleFXData* part = effect->data.sleepBubble;
     f32* xPtr = &part->points->x;
     f32* yPtr;
     s32 xAngle, yAngle, i, timeLeft, unk_20;
@@ -65,7 +65,7 @@ void sleep_bubble_update(EffectInstance* effect) {
         shim_remove_effect(effect);
         return;
     }
-    
+
     unk_20 = part->unk_20;
     timeLeft = part->timeLeft;
 
@@ -79,7 +79,7 @@ void sleep_bubble_update(EffectInstance* effect) {
 
     do {
         angle = i * 360.0f / 21.0f + 17.0f;
-        
+
         *xPtr = temp2 * shim_sin_deg(angle);
         *yPtr = -temp2 * shim_cos_deg(angle);
 
@@ -112,7 +112,7 @@ void sleep_bubble_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 INCLUDE_ASM(s32, "effects/sleep_bubble", sleep_bubble_appendGfx);

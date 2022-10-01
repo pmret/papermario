@@ -15,7 +15,6 @@ extern s32 D_80294340;
 
 s32 D_802A9852_4292C0[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
-BSS s32 air_lift_bss_pre[2];
 BSS s32 air_lift_bss_0;
 
 ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
@@ -76,7 +75,7 @@ ApiStatus func_802A9184_428BF4(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
+    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
 
     actionCommandStatus->unk_60 = 0;
     battleStatus->actionSuccess = 0;
@@ -144,7 +143,7 @@ void func_802A9278_428CE8(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             air_lift_bss_0 = 1;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 0xB;
             // fallthrough
         case 11:
@@ -216,7 +215,7 @@ void func_802A9278_428CE8(void) {
                 func_80269160();
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(0x80000041);
+            sfx_stop_sound(SOUND_80000041);
             actionCommandStatus->unk_54 = 20;
             actionCommandStatus->state = 0xC;
             break;

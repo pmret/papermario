@@ -18,36 +18,36 @@ ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
 ApiStatus func_802712A0(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 200;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 120;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 234;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 193;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    debuffEffect->data.debuff->unk_38 = 200;
+    debuffEffect->data.debuff->unk_39 = 120;
+    debuffEffect->data.debuff->unk_3A = 0;
+    debuffEffect->data.debuff->unk_3B = 234;
+    debuffEffect->data.debuff->unk_3C = 193;
+    debuffEffect->data.debuff->unk_3D = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271328(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 60;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 160;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 90;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 240;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    debuffEffect->data.debuff->unk_38 = 60;
+    debuffEffect->data.debuff->unk_39 = 160;
+    debuffEffect->data.debuff->unk_3A = 0;
+    debuffEffect->data.debuff->unk_3B = 90;
+    debuffEffect->data.debuff->unk_3C = 240;
+    debuffEffect->data.debuff->unk_3D = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802713B0(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 205;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 40;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 205;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 32;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 242;
+    debuffEffect->data.debuff->unk_38 = 205;
+    debuffEffect->data.debuff->unk_39 = 0;
+    debuffEffect->data.debuff->unk_3A = 40;
+    debuffEffect->data.debuff->unk_3B = 205;
+    debuffEffect->data.debuff->unk_3C = 32;
+    debuffEffect->data.debuff->unk_3D = 242;
     return ApiStatus_DONE2;
 }
 
@@ -112,9 +112,9 @@ EvtScript DoStopHit = {
 
 EvtScript DoFreezeHit = {
     EVT_CALL(func_8027143C)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(func_8027143C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(func_80271484)
     EVT_RETURN
     EVT_END
@@ -189,26 +189,26 @@ s32 calc_player_test_enemy(void) {
 
     target = get_actor(currentTargetID);
     if (target == NULL) {
-        return 0;
+        return HIT_RESULT_HIT;
     }
 
     part = get_actor_part(target, targetPart);
     ASSERT(part != NULL);
 
     if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-        return 6;
-    } else if (target->transStatus == STATUS_E || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
+        return HIT_RESULT_MISS;
+    } else if (target->transparentStatus == STATUS_TRANSPARENT || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
                !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)))
     {
-        return 6;
+        return HIT_RESULT_MISS;
     } else if (target->stoneStatus == STATUS_STONE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        return 8;
+        return HIT_RESULT_IMMUNE;
     } else if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP) &&
                !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD))
     {
         sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        return 4;
+        return HIT_RESULT_LANDED_ON_SPIKE;
     } else if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP)) &&
                (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT) &&
                (!(battleStatus->currentAttackEventSuppression & 4) &&
@@ -217,12 +217,12 @@ s32 calc_player_test_enemy(void) {
         sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         dispatch_damage_event_player_1(1, EVENT_SPIKE_CONTACT);
         dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
-        return -1;
+        return HIT_RESULT_TRIGGERED_EXPLODE;
     } else if (player->staticStatus != STATUS_STATIC && target->staticStatus == STATUS_STATIC) {
-        return 7;
+        return HIT_RESULT_HIT_STATIC;
     }
 
-    return 0;
+    return HIT_RESULT_HIT;
 }
 
 s32 calc_player_damage_enemy(void) {
@@ -243,6 +243,7 @@ s32 calc_player_damage_enemy(void) {
     s32 sp24;
     s32 isFireDamage;
     s32 isElectricDamage;
+    s32 isWaterDamage;
     s32 isIceDamage;
     s32 tempBinary;
     s32 wasStatusInflicted;
@@ -285,7 +286,7 @@ s32 calc_player_damage_enemy(void) {
             }
         }
 
-        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transStatus == STATUS_E ||
+        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transparentStatus == STATUS_TRANSPARENT ||
                 targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))) {
             return 6;
         }
@@ -343,7 +344,7 @@ s32 calc_player_damage_enemy(void) {
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-            fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z * 5.0f, 1.0f, 0x18);
+            fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z * 5.0f, 1.0f, 24);
             isFireDamage = TRUE;
         }
 
@@ -353,7 +354,8 @@ s32 calc_player_damage_enemy(void) {
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
-            fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
+            fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
+            isWaterDamage = TRUE;
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
@@ -364,7 +366,7 @@ s32 calc_player_damage_enemy(void) {
         attackFxType = player_team_is_ability_active(player, ABILITY_ATTACK_FX);
 
         if (attackFxType) {
-            fx_breaking_junk(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x1E);
+            fx_breaking_junk(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 30);
 
             switch (attackFxType) {
                 case 1:
@@ -483,14 +485,14 @@ s32 calc_player_damage_enemy(void) {
 
         if (gBattleStatus.flags2 & BS_FLAGS2_8000000 && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
                 battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)) {
-            if (battleStatus->rushFlags & 2) {
-                currentAttackDamage = currentAttackDamage + 2;
+            if (battleStatus->rushFlags & RUSH_FLAG_POWER) {
+                currentAttackDamage += 2;
             }
 
-            if (battleStatus->rushFlags & 1) {
-                currentAttackDamage = currentAttackDamage + 4;
+            if (battleStatus->rushFlags & RUSH_FLAG_MEGA) {
+                currentAttackDamage += 4;
             }
-            fx_radial_shimmer(9, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0.5f, 0x14);
+            fx_radial_shimmer(9, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0.5f, 20);
         }
 
         if (!(gBattleStatus.flags2 & BS_FLAGS2_1000000) && player_team_is_ability_active(player, ABILITY_ALL_OR_NOTHING)) {
@@ -635,7 +637,6 @@ s32 calc_player_damage_enemy(void) {
     } else if (dispatchEvent == EVENT_DEATH) {
         dispatchEvent = EVENT_HIT_COMBO;
     }
-
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE ||
         (func_80266E14(targetPart), gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {    // TODO remove func_80266E14 from conditional
@@ -1056,7 +1057,116 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// float regz
+#ifdef NON_MATCHING
+ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = battleStatus->playerActor;
+    ActorState* playerState = &player->state;
+    f32 playerVel;
+    f32 currentX;
+    f32 currentY;
+    f32 currentZ;
+    f32 goalX;
+    f32 goalY;
+    f32 goalZ;
+    f32 var_f8;
+    f64 temp_f20_2;
+    f32 sub;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        player->state.moveArcAmplitude = evt_get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+
+        goalX = player->state.goalPos.x;
+        goalY = player->state.goalPos.y;
+        goalZ = player->state.goalPos.z;
+        player->state.currentPos.x = player->currentPos.x;
+        player->state.currentPos.y = player->currentPos.y;
+        player->state.currentPos.z = player->currentPos.z;
+        currentX = player->currentPos.x;
+        currentY = player->currentPos.y;
+        currentZ = player->currentPos.z;
+
+        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
+        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+
+        sub = goalY - currentY;
+
+        if (player->state.moveTime == 0) {
+            player->state.moveTime = player->state.distance / player->state.speed;
+            var_f8 = player->state.distance - (player->state.moveTime * player->state.speed);
+        } else {
+            player->state.speed = player->state.distance / player->state.moveTime;
+            var_f8 = player->state.distance - (player->state.moveTime * player->state.speed);
+        }
+
+        playerState->speed += var_f8 / playerState->moveTime;
+        playerState->velocity = (playerState->acceleration * playerState->moveTime * 0.5f) + (sub / playerState->moveTime);
+        set_animation(0, 0, playerState->animJumpRise);
+        playerState->unk_24 = 90.0f;
+        playerState->unk_28 = 180 / playerState->moveTime;
+        playerState->unk_2C = playerState->goalPos.y;
+        if (script->functionTemp[1] != 2) {
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        }
+        script->functionTemp[0] = TRUE;
+    }
+
+    if (playerState->velocity < 0.0f) {
+        set_animation(0, 0, playerState->animJumpFall);
+    }
+
+    playerVel = playerState->velocity;
+    switch (playerState->moveArcAmplitude) {
+        case 0:
+            break;
+        case 1:
+            if (playerState->currentPos.y - playerState->unk_2C > 45.0f) {
+                playerVel *= 0.25f;
+            }
+            break;
+        case 2:
+            if (playerState->currentPos.y - playerState->unk_2C > 54.9) {
+                playerVel *= 0.25f;
+            }
+            break;
+    }
+
+    playerState->currentPos.y += playerVel;
+    playerState->velocity -= playerState->acceleration;
+    temp_f20_2 = playerState->speed;
+    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24), playerState->angle);
+    playerState->unk_24 += playerState->unk_28;
+    playerState->unk_24 = clamp_angle(playerState->unk_24);
+    player->currentPos.x = playerState->currentPos.x;
+    player->currentPos.y = playerState->currentPos.y;
+    player->currentPos.z = playerState->currentPos.z;
+    playerState->moveTime--;
+
+    if (playerState->moveTime >= 0) {
+        return ApiStatus_BLOCK;
+    }
+
+    player->currentPos.y = playerState->goalPos.y;
+    if (script->functionTemp[1] != 1) {
+        play_movement_dust_effects(2, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+    }
+    if (script->functionTemp[1] != 2) {
+        sfx_play_sound_at_position(SOUND_SOFT_LAND, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+    }
+
+    return ApiStatus_DONE1;
+}
+#else
 INCLUDE_ASM(s32, "19FAF0", func_80273444);
+#endif
 
 //float bs
 #ifdef NON_MATCHING
@@ -1187,9 +1297,168 @@ ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "19FAF0", PlayerRunToGoal, Evt* script, s32 isInitialCall);
+ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = battleStatus->playerActor;
+    ActorState* playerState = &player->state;
+    f32 currentX, currentZ, goalX, goalZ;
 
-INCLUDE_ASM(s32, "19FAF0", CancelablePlayerRunToGoal, Evt* script, s32 isInitialCall);
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        player->state.currentPos.x = player->currentPos.x;
+        player->state.currentPos.y = player->currentPos.y;
+        player->state.currentPos.z = player->currentPos.z;
+
+        goalX = player->state.goalPos.x;
+        goalZ = player->state.goalPos.z;
+        currentX = player->state.currentPos.x;
+        currentZ = player->state.currentPos.z;
+
+        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
+        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+        if (player->state.moveTime == 0) {
+            player->state.moveTime = player->state.distance / player->state.speed;
+            if (player->state.moveTime == 0) {
+                player->state.moveTime = 1;
+            }
+            player->state.speed += (player->state.distance - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
+        } else {
+            player->state.speed = player->state.distance / player->state.moveTime;
+        }
+        playerState->distance = player->actorTypeData1b[0] + 1;
+        script->functionTemp[0] = TRUE;
+    }
+
+    add_xz_vec3f(&playerState->currentPos, playerState->speed, playerState->angle);
+
+    player->currentPos.x = playerState->currentPos.x;
+    player->currentPos.y = playerState->currentPos.y;
+    player->currentPos.z = playerState->currentPos.z;
+
+    if (playerState->speed < 4.0f) {
+        play_movement_dust_effects(0, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+    } else {
+        play_movement_dust_effects(1, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+    }
+
+    playerState->distance += playerState->speed;
+    if (playerState->distance > player->actorTypeData1b[0]) {
+        player->footStepCounter++;
+        playerState->distance = 0.0f;
+        if ((player->footStepCounter % 2) != 0) {
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        } else {
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        }
+    }
+
+    playerState->moveTime--;
+
+    if (playerState->moveTime <= 0) {
+        player->currentPos.x = playerState->goalPos.x;
+        player->currentPos.z = playerState->goalPos.z;
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;;
+}
+
+ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = battleStatus->playerActor;
+    ActorState* playerState = &player->state;
+    f32 currentX, currentZ, goalX, goalZ;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        script->functionTemp[1] = *args++;
+        player->state.currentPos.x = player->currentPos.x;
+        player->state.currentPos.y = player->currentPos.y;
+        player->state.currentPos.z = player->currentPos.z;
+
+        goalX = player->state.goalPos.x;
+        goalZ = player->state.goalPos.z;
+        currentX = player->state.currentPos.x;
+        currentZ = player->state.currentPos.z;
+
+        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
+        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+        if (player->state.moveTime == 0) {
+            player->state.moveTime = player->state.distance / player->state.speed;
+            player->state.speed += (player->state.distance - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
+        } else {
+            player->state.speed = player->state.distance / player->state.moveTime;
+        }
+        playerState->distance = player->actorTypeData1b[0] + 1;
+
+        if (playerState->moveTime == 0) {
+            return ApiStatus_DONE2;
+        }
+
+        script->functionTemp[2] = FALSE;
+        script->functionTemp[3] = 0;
+        script->functionTemp[0] = TRUE;
+    }
+
+    add_xz_vec3f(&playerState->currentPos, playerState->speed, playerState->angle);
+
+    player->currentPos.x = playerState->currentPos.x;
+    player->currentPos.y = playerState->currentPos.y;
+    player->currentPos.z = playerState->currentPos.z;
+
+    if (playerState->speed < 4.0f) {
+        play_movement_dust_effects(0, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+    } else {
+        play_movement_dust_effects(1, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+    }
+
+    playerState->distance += playerState->speed;
+    if (playerState->distance > player->actorTypeData1b[0]) {
+        player->footStepCounter++;
+        playerState->distance = 0.0f;
+        if ((player->footStepCounter % 2) != 0) {
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL1, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        } else {
+            sfx_play_sound_at_position(SOUND_STEP_NORMAL2, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        }
+    }
+
+    if (script->functionTemp[3] > 12) {
+        if (!script->functionTemp[2]) {
+            if (!(battleStatus->currentButtonsDown & BUTTON_A)) {
+                script->functionTemp[2] = TRUE;
+            }
+        }
+
+        if (script->functionTemp[2]) {
+            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                evt_set_variable(script, script->functionTemp[1], 1);
+                return ApiStatus_DONE2;
+            }
+        }
+    }
+
+    script->functionTemp[3]++;
+
+    playerState->moveTime--;
+    if (playerState->moveTime > 0) {
+        return ApiStatus_BLOCK;
+    }
+
+    player->currentPos.x = playerState->goalPos.x;
+    player->currentPos.z = playerState->goalPos.z;
+    evt_set_variable(script, script->functionTemp[1], 0);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gPlayerData.curHP);

@@ -1,6 +1,6 @@
 #include "common.h"
 #include "npc.h"
-#include "sprite/npc/monty_mole.h"
+#include "sprite/npc/MontyMole.h"
 
 // prerequisites
 #include "world/common/enemy/ProjectileHitbox.inc.c"
@@ -63,7 +63,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
     return retVal;
 }
 
-static void N(MontyMoleAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_Init)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -80,17 +80,17 @@ static void N(MontyMoleAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyDet
     script->AI_TEMP_STATE = AI_STATE_MOLE_WANDER;
 }
 
-static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Npc dummyNpc;
     f32 hitDepth;
     
     if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+            enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
     }
     dummyNpc.pos.x = npc->pos.x;
     dummyNpc.pos.y = npc->pos.y + 1.0f;
@@ -124,19 +124,19 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyD
     }
 }
 
-static void N(MontyMoleAI_PreSurface)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
-    ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
+    ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_10; // emerge from ground
+    npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
     npc->duration = 10;
     script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;
 }
 
-static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -145,13 +145,13 @@ static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, Enemy
         enemy->flags &= ~MONTY_MOLE_UNK_NPC_FLAGS;
     }
     if (npc->duration <= 0) {
-        npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_18; // get and throw rock
+        npc->currentAnim = ANIM_MontyMole_Anim18; // get and throw rock
         npc->duration = 10;
         script->AI_TEMP_STATE = AI_STATE_MOLE_DRAW_ROCK;
     }
 }
 
-static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteOut;
@@ -160,18 +160,18 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, Enem
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->alertOffsetDist)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
-            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
+            npc->currentAnim = ANIM_MontyMole_Anim01; // cancel attack
             npc->duration = 30;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_PRE_BURROW;
         } else {
-            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1B; // throw rock
+            npc->currentAnim = ANIM_MontyMole_Anim1B; // throw rock
             npc->duration = 15;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_THROW_ROCK;
         }
     }
 }
 
-static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* moleEnemy;
     Enemy* rockEnemy;
     Npc* moleNpc;
@@ -186,32 +186,32 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, Ene
     }
     if (moleNpc->duration < 8) {
         if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > 100.0) {
-            moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_15; // clap
+            moleNpc->currentAnim = ANIM_MontyMole_Anim15; // clap
         }
     }
     if (moleNpc->duration <= 0) {
-        if (moleNpc->currentAnim.w != NPC_ANIM_monty_mole_Palette_00_Anim_15) {
-            moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
+        if (moleNpc->currentAnim != ANIM_MontyMole_Anim15) {
+            moleNpc->currentAnim = ANIM_MontyMole_Anim01;
         }
         moleNpc->duration = 15;
         script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_BURROW;
     }
 }
 
-static void N(MontyMoleAI_PreBurrow)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->duration--;
     if (npc->duration <= 0) {
-        ai_enemy_play_sound(npc, SOUND_MOLE_DIG, 0);
+        ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
         npc->duration = 11;
-        npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_11; // retreat into ground
+        npc->currentAnim = ANIM_MontyMole_Anim11; // retreat into ground
         script->AI_TEMP_STATE = AI_STATE_MOLE_BURROW;
     }
 }
 
-static void N(MontyMoleAI_Burrow)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+static void N(MontyMoleAI_Burrow)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -231,14 +231,14 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0; 
 

@@ -41,21 +41,22 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
     s32 duration = evt_get_variable(script, *args++);
     f32 offsetX, offsetY, offsetZ;
     f32 sinA, cosA;
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
-    
+
     offsetX = rand_int(10) - 5;
     offsetZ = rand_int(10) - 5;
     offsetY = -2.0f - ((SQ(offsetX) + SQ(offsetZ)) / 5.0f);
-    sinA = sin_rad(angle * TAU / 360.0f);
-    cosA = cos_rad(angle * TAU / 360.0f);
+    sinA = sin_rad(DEG_TO_RAD(angle));
+    cosA = cos_rad(DEG_TO_RAD(angle));
     fx_cloud_trail(
         posX + ((sinA * magnitude * script->functionTemp[0]) / duration) + offsetX,
         posY + 15.5f + offsetY,
         posZ + ((-cosA * magnitude * script->functionTemp[0]) / duration) + offsetZ,
-        0.0f);
+        0.0f
+    );
 
     script->functionTemp[0]++;
     if (script->functionTemp[0] < duration) {
@@ -80,7 +81,7 @@ ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
     Npc* npc;
     s32 emoteHandle;
     f32 x, y, z, r;
-    
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             // show emote from player
@@ -130,19 +131,20 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//TODO fix this!
 ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data))[5] = 10; // offset 0x14 in GotItemOutline effect data
+
+    effect->data.gotItemOutline->unk_14 = 10;
     return ApiStatus_DONE2;
 }
 
-//TODO fix this!
 ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data))[12] = 5; // offset 0x30 in unknown effect data
+
+    // function is never called, so the effect type can't be inferred
+    effect->data.any[12] = 5;
     return ApiStatus_DONE2;
 }
 
@@ -206,7 +208,7 @@ ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ShowSweat(Evt* script) {
+ApiStatus ShowSweat(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     s32 type = evt_get_variable(script, *args++);
@@ -220,12 +222,12 @@ ApiStatus ShowSweat(Evt* script) {
 
     Npc* npc;
     f32 x, y, z, r;
-    
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             x = gPlayerStatus.position.x;
             y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            z = gPlayerStatus.position.z;    
+            z = gPlayerStatus.position.z;
             r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:
@@ -245,7 +247,7 @@ ApiStatus ShowSweat(Evt* script) {
             r = radius;
             break;
     }
-    
+
     fx_sweat(type, x, y, z, r, pitch, duration);
     return ApiStatus_DONE2;
 }
@@ -253,7 +255,7 @@ ApiStatus ShowSweat(Evt* script) {
 ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32 type = evt_get_variable(script, *args++); 
+    s32 type = evt_get_variable(script, *args++);
     f32 pitch = evt_get_float_variable(script, *args++);
     s32 emoterType = evt_get_variable(script, *args++);
     f32 posX = evt_get_float_variable(script, *args++);
@@ -264,8 +266,8 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
 
     Npc* npc;
     f32 x, y, z, r;
-    s32 effectHandle;
-    
+    EffectInstance* effectHandle;
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             x = gPlayerStatus.position.x;
@@ -292,17 +294,16 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     }
 
     fx_sleep_bubble(type, x, y, z, r, pitch, &effectHandle);
-    evt_set_variable(script, outVar, effectHandle);
+    evt_set_variable(script, outVar, (s32)effectHandle);
     return ApiStatus_DONE2;
 }
 
-//TODO rename after field is identified
-ApiStatus SetSleepBubbleUnk1C(Evt* script, s32 isInitialCall) {
+ApiStatus SetSleepBubbleTimeLeft(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     s32 value = evt_get_variable(script, *args++);
 
-    ((s32*)(effect->data))[7] = value; // offset 0x1C in SleepBubbleFX data
+    effect->data.sleepBubble->timeLeft = value;
     return ApiStatus_DONE2;
 }
 
@@ -481,7 +482,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_sweat(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7);
             break;
         case EFFECT_SLEEP_BUBBLE:
-            fx_sleep_bubble(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, &sp38);
+            fx_sleep_bubble(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, (EffectInstance**)&sp38);
             evt_set_variable(script, a7, sp38);
             break;
         case EFFECT_WINDY_LEAVES:
@@ -517,7 +518,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_radial_shimmer(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_ENDING_DECALS:
-            fx_ending_decals(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            fx_ending_decals(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**)&sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_LIGHT_RAYS:
@@ -763,7 +764,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     }
 
     if (effectRet != NULL) {
-        evt_set_variable(script, EVT_VAR(15), (s32)effectRet);
+        evt_set_variable(script, LVarF, (s32)effectRet);
     }
 
     return ApiStatus_DONE2;

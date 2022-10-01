@@ -80,7 +80,7 @@ ApiStatus func_802A91A0_42F880(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
+    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
 
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->barFillLevel = 0;
@@ -170,7 +170,7 @@ void func_802A92A0_42F980(void) {
             if (actionCommandStatus->unk_68 == 0) {
                 s16 newFillLevel;
 
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     s8 mashMeterIntervals = actionCommandStatus->mashMeterIntervals;
                     s16* mashMeterCutoffs = actionCommandStatus->mashMeterCutoffs;
                     s32 index;
@@ -208,10 +208,10 @@ void func_802A92A0_42F980(void) {
 
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     s32 fillLevel;
 
-                    fillLevel = actionCommandStatus->unk_64 * 650;
+                    fillLevel = actionCommandStatus->easyVersion * 650;
                     fillLevel = fillLevel / 100 * battleStatus->unk_434[actionCommandStatus->unk_50];
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
@@ -266,7 +266,7 @@ void func_802A92A0_42F980(void) {
                 //
                 // TODO: Find a way to avoid reusing buttonsPushed.
                 buttonsPushed = actionCommandStatus->barFillLevel;
-                if (actionCommandStatus->unk_64 == 0) {
+                if (actionCommandStatus->easyVersion == 0) {
                     buttonsPushed = 0;
                 }
 
@@ -298,7 +298,7 @@ void func_802A92A0_42F980(void) {
             }
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;

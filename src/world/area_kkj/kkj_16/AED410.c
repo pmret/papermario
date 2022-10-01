@@ -3,9 +3,18 @@
 static char* N(exit_str_0) = "sbk_02";
 static char* N(exit_str_1) = "kkj_11";
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AED410", func_80240000_AED410);
+ApiStatus func_80240000_AED410(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_IS_PEACH;
+    gPlayerData.currentPartner = script->varTable[0];
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AED410", func_80240028_AED438);
+ApiStatus func_80240028_AED438(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    gPlayerStatus.availableDisguiseType = evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 

@@ -1,7 +1,16 @@
 #include "kpa_16.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_16/A5A340", func_80240310_A5A340);
+ApiStatus func_80240310_A5A340(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 zoom = evt_get_variable(script, *args++);
+    
+    set_screen_overlay_params_front(0, zoom);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_16/A5A340", func_8024034C_A5A37C);
+ApiStatus func_8024034C_A5A37C(Evt* script, s32 isInitialCall) {
+    snd_ambient_80055618(0, 1);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetFloorCollider.inc.c"

@@ -7,10 +7,10 @@
 extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
 
 // probably should be at 0x8009A630, unless D_8009A630 (what's technically used in boot_idle) isn't nuIdleFunc
-BSS void (*nuIdleFunc)(void);
+extern void (*nuIdleFunc)(void);
 
 void nuBoot(void) {
-    osInitialize(); // osInitialize
+    osInitialize();
     osCreateThread(&D_800A4270, NU_IDLE_THREAD_ID, boot_idle, NULL, &nuScStack, 10);
     osStartThread(&D_800A4270);
 }

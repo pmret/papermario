@@ -19,10 +19,10 @@ typedef struct DisguiseAnims {
     /* 0x14 */ s32 hold;
 } DisguiseAnims; // size = 0x18
 
-extern f32 D_800F7B90;
+extern f32 LastMidairPlayerVelY;
 extern Action PlayerActionsTable[39];
 
 extern DisguiseAnims BasicPeachDisguiseAnims[4];
-extern s32* PeachDisguiseExtraAnims[4];
+extern AnimID* PeachDisguiseExtraAnims[4];
 
 #endif

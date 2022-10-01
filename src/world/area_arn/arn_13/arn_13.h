@@ -2,12 +2,11 @@
 /// @brief Gusty Gulch - Tunnel 3
 
 #include "common.h"
-#include "map.h"
 #include "../arn.h"
+#include "message_ids.h"
+#include "map.h"
 
 #define NAMESPACE arn_13
-
-extern s32 D_802EAFDC;
 
 extern EvtScript N(main);
 extern EvtScript N(80240060);

@@ -1,26 +1,29 @@
 #include "common.h"
 
+extern u32* gMapFlags;
+extern s32* gMapVars;
+
+extern char evtDebugPrintBuffer[0x100];
+
 Bytecode* evt_find_label(Evt* script, s32 arg1);
 Bytecode* evt_skip_if(Evt* script);
 Bytecode* evt_skip_else(Evt* script);
 Bytecode* evt_goto_end_case(Evt* script);
 Bytecode* evt_goto_next_case(Evt* script);
 Bytecode* evt_goto_end_loop(Evt* script);
-s32 evt_get_variable_index(Evt* script, s32 var);
-
-// BSS
-extern char evtDebugPrintBuffer[];
 
 f32 evt_fixed_var_to_float(Bytecode scriptVar) {
-    if (scriptVar <= -220000000) {
-        return (scriptVar + 230000000) / 1024.0f;
+    if (scriptVar <= EVT_FIXED_CUTOFF) {
+        return EVT_FIXED_TO_FLOAT(scriptVar);
     } else {
         return scriptVar;
     }
 }
 
 Bytecode evt_float_to_fixed_var(f32 value) {
-    return (s32)(value * 1024.0f) + -230000000;
+    // not equivalent to hte EVT_FLOAT_TO_FIXED() macro due to the s32 cast
+    // occuring *before* the add here and *after* the add in the macro
+    return (s32)(value * 1024.0f) + -EVT_FIXED_OFFSET;
 }
 
 ApiStatus evt_handle_return(Evt* script) {
@@ -1217,99 +1220,99 @@ ApiStatus evt_handle_print_debug_var(Evt* script);
 s32 evt_handle_print_debug_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
-    s32 phi_t0;
+    s32 flagBitPos;
 
     do {} while (0);
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         sprintf(evtDebugPrintBuffer, "ADDR     [%08X]", var);
-    } else if (var <= -220000000) {
+    } else if (var <= EVT_FIXED_CUTOFF) {
         sprintf(evtDebugPrintBuffer, "FLOAT    [%4.2f]", evt_fixed_var_to_float(var));
-    } else if (var <= -200000000) {
-        var += 210000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
-    } else if (var <= -180000000) {
+    } else if (var <= EVT_ARRAY_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_FLAG(var);
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << flagBitPos));
+    } else if (var <= EVT_ARRAY_VAR_CUTOFF) {
         s32 arrayVal;
 
-        var += 190000000;
+        var = EVT_INDEX_OF_ARRAY_VAR(var);
         arrayVal = script->array[var];
 
-        if (script->array[var] <= -270000000) {
+        if (script->array[var] <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "UW(%3d)  [%08X]", arrayVal);
-        } else if (arrayVal <= -220000000) {
+        } else if (arrayVal <= EVT_FIXED_CUTOFF) {
             sprintf(evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(arrayVal));
         } else {
             sprintf(evtDebugPrintBuffer, "UW(%3d)  [%d]", var, arrayVal);
         }
-    } else if (var <= -160000000) {
+    } else if (var <= EVT_GAME_BYTE_CUTOFF) {
         s32 globalByte;
 
-        var += 170000000;
+        var = EVT_INDEX_OF_GAME_BYTE(var);
         globalByte = get_global_byte(var);
 
-        if (globalByte <= -270000000) {
+        if (globalByte <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "GSW(%3d) [%08X]", globalByte);
-        } else if (globalByte <= -220000000) {
+        } else if (globalByte <= EVT_FIXED_CUTOFF) {
             sprintf(evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, evt_fixed_var_to_float(globalByte));
         } else {
             sprintf(evtDebugPrintBuffer, "GSW(%3d) [%d]", var, globalByte);
         }
-    } else if (var <= -140000000) {
+    } else if (var <= EVT_AREA_BYTE_CUTOFF) {
         s32 areaByte;
 
-        var += 150000000;
+        var = EVT_INDEX_OF_AREA_BYTE(var);
         areaByte = get_area_byte(var);
 
-        if (areaByte <= -270000000) {
+        if (areaByte <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "LSW(%3d) [%08X]", areaByte);
-        } else if (areaByte <= -220000000) {
+        } else if (areaByte <= EVT_FIXED_CUTOFF) {
             sprintf(evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(areaByte));
         } else {
             sprintf(evtDebugPrintBuffer, "LSW(%3d) [%d]", var, areaByte);
         }
-    } else if (var <= -120000000) {
-        var += 130000000;
+    } else if (var <= EVT_GAME_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_FLAG(var);
         sprintf(evtDebugPrintBuffer, "GSWF(%3d)[%d]", var, get_global_flag(var));
-    } else if (var <= -100000000) {
-        var += 110000000;
+    } else if (var <= EVT_AREA_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_FLAG(var);
         sprintf(evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
-    } else if (var <= -80000000) {
-        var += 90000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
-    } else if (var <= -60000000) {
-        var += 70000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
-    } else if (var <= -40000000) {
+    } else if (var <= EVT_MAP_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_FLAG(var);
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << flagBitPos));
+    } else if (var <= EVT_LOCAL_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_FLAG(var);
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << flagBitPos));
+    } else if (var <= EVT_MAP_VAR_CUTOFF) {
         s32 mapVar;
         s32 temp;
 
         do {
-            var += 50000000;
+            var = EVT_INDEX_OF_MAP_VAR(var);
             mapVar = gMapVars[var];
-            temp = -270000000;
+            temp = EVT_LIMIT;
         } while (0);
 
         if (mapVar <= temp) {
             sprintf(evtDebugPrintBuffer, "GW(%3d)  [%08X]", mapVar);
-        } else if (mapVar <= -220000000) {
+        } else if (mapVar <= EVT_FIXED_CUTOFF) {
             sprintf(evtDebugPrintBuffer, "GW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(mapVar));
         } else {
             sprintf(evtDebugPrintBuffer, "GW(%3d)  [%d]", var, mapVar);
         }
-    } else if (var <= -20000000) {
+    } else if (var <= EVT_LOCAL_VAR_CUTOFF) {
         s32 tableVar;
 
-        var += 30000000;
+        var = EVT_INDEX_OF_LOCAL_VAR(var);
         tableVar = script->varTable[var];
 
         do {} while (0);
 
-        if (tableVar <= -270000000) {
+        if (tableVar <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%08X]", tableVar);
-        } else if (tableVar <= -220000000) {
+        } else if (tableVar <= EVT_FIXED_CUTOFF) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(tableVar));
         } else {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%d]", var, tableVar);
@@ -1680,64 +1683,64 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
     s32 bitIdx;
     s32 temp;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return var;
-    } else if (var <= EVT_LIMIT) {
+    } else if (var <= EVT_IGNORE_ARG) {
         return var;
-    } else if (var <= -220000000) {
+    } else if (var <= EVT_FIXED_CUTOFF) {
         return evt_fixed_var_to_float(var);
-    } else if (var <= -200000000) {
-        var += 210000000;
+    } else if (var <= EVT_ARRAY_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_FLAG(var);
         wordIdx = var / 32;
         bitIdx = var % 32;
         var = (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
         return var;
-    } else if (var <= -180000000) {
-        var += 190000000;
+    } else if (var <= EVT_ARRAY_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_VAR(var);
         var = script->array[var];
-        if (var > -270000000) {
-            if (var <= -220000000){
+        if (var > EVT_LIMIT) {
+            if (var <= EVT_FIXED_CUTOFF){
                 var = evt_fixed_var_to_float(var);
             }
         }
-    } else if (var <= -160000000) {
-        var += 170000000;
+    } else if (var <= EVT_GAME_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_BYTE(var);
         return get_global_byte(var);
-    } else if (var <= -140000000) {
-        var += 150000000;
+    } else if (var <= EVT_AREA_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_BYTE(var);
         return get_area_byte(var);
-    } else if (var <= -120000000) {
-        var += 130000000;
+    } else if (var <= EVT_GAME_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_FLAG(var);
         return get_global_flag(var);
-    } else if (var <= -100000000) {
-        var += 110000000;
+    } else if (var <= EVT_AREA_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_FLAG(var);
         return get_area_flag(var);
-    } else if (var <= -80000000) {
-        var += 90000000;
+    } else if (var <= EVT_MAP_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_FLAG(var);
         wordIdx = var;
         bitIdx = var % 32;
         var = (gMapFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
         return var;
-    } else if (var <= -60000000) {
-        var += 70000000;
+    } else if (var <= EVT_LOCAL_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_FLAG(var);
         wordIdx = var;
         bitIdx = var % 32;
         var = (script->varFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
         return var;
-    } else if (var <= -40000000) {
-        var += 50000000;
+    } else if (var <= EVT_MAP_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_VAR(var);
         var = gMapVars[var];
-        if (var > -270000000) {
-            temp = -220000000;
+        if (var > EVT_LIMIT) {
+            temp = EVT_FIXED_CUTOFF;
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
             }
         }
-    } else if (var <= -20000000) {
-        var += 30000000;
+    } else if (var <= EVT_LOCAL_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_VAR(var);
         var = script->varTable[var];
-        if (var > -270000000) {
-            temp = -220000000;
+        if (var > EVT_LIMIT) {
+            temp = EVT_FIXED_CUTOFF;
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
             }
@@ -1747,125 +1750,125 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
 }
 
 s32 evt_get_variable_index(Evt* script, s32 var) {
-    if (-270000000 >= var) {
-        return var;
-    }
     if (EVT_LIMIT >= var) {
         return var;
     }
-    if (-220000000 >= var) {
+    if (EVT_IGNORE_ARG >= var) {
         return var;
     }
-    if (-200000000 >= var) {
-        return var + 210000000;
+    if (EVT_FIXED_CUTOFF >= var) {
+        return var;
     }
-    if (-180000000 >= var) {
-        return var + 190000000;
+    if (EVT_ARRAY_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_ARRAY_FLAG(var);
     }
-    if (-160000000 >= var) {
-        return var + 170000000;
+    if (EVT_ARRAY_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_ARRAY_VAR(var);
     }
-    if (-140000000 >= var) {
-        return var + 150000000;
+    if (EVT_GAME_BYTE_CUTOFF >= var) {
+        return EVT_INDEX_OF_GAME_BYTE(var);
     }
-    if (-120000000 >= var) {
-        return var + 130000000;
+    if (EVT_AREA_BYTE_CUTOFF >= var) {
+        return EVT_INDEX_OF_AREA_BYTE(var);
     }
-    if (-100000000 >= var) {
-        return var + 110000000;
+    if (EVT_GAME_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_GAME_FLAG(var);
     }
-    if (-80000000 >= var) {
-        return var + 90000000;
+    if (EVT_AREA_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_AREA_FLAG(var);
     }
-    if (-60000000 >= var) {
-        return var + 70000000;
+    if (EVT_MAP_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_MAP_FLAG(var);
     }
-    if (-40000000 >= var) {
-        return var + 50000000;
+    if (EVT_LOCAL_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_LOCAL_FLAG(var);
     }
-    if (-20000000 >= var) {
-        return var + 30000000;
+    if (EVT_MAP_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_MAP_VAR(var);
+    }
+    if (EVT_LOCAL_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_LOCAL_VAR(var);
     }
     return var;
 }
 
 s32 evt_get_variable_index_alt(s32 var) {
-    if (-270000000 >= var) {
-        return var;
-    }
     if (EVT_LIMIT >= var) {
         return var;
     }
-    if (-220000000 >= var) {
+    if (EVT_IGNORE_ARG >= var) {
         return var;
     }
-    if (-200000000 >= var) {
-        return var + 210000000;
+    if (EVT_FIXED_CUTOFF >= var) {
+        return var;
     }
-    if (-180000000 >= var) {
-        return var + 190000000;
+    if (EVT_ARRAY_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_ARRAY_FLAG(var);
     }
-    if (-160000000 >= var) {
-        return var + 170000000;
+    if (EVT_ARRAY_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_ARRAY_VAR(var);
     }
-    if (-140000000 >= var) {
-        return var + 150000000;
+    if (EVT_GAME_BYTE_CUTOFF >= var) {
+        return EVT_INDEX_OF_GAME_BYTE(var);
     }
-    if (-120000000 >= var) {
-        return var + 130000000;
+    if (EVT_AREA_BYTE_CUTOFF >= var) {
+        return EVT_INDEX_OF_AREA_BYTE(var);
     }
-    if (-100000000 >= var) {
-        return var + 110000000;
+    if (EVT_GAME_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_GAME_FLAG(var);
     }
-    if (-80000000 >= var) {
-        return var + 90000000;
+    if (EVT_AREA_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_AREA_FLAG(var);
     }
-    if (-60000000 >= var) {
-        return var + 70000000;
+    if (EVT_MAP_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_MAP_FLAG(var);
     }
-    if (-40000000 >= var) {
-        return var + 50000000;
+    if (EVT_LOCAL_FLAG_CUTOFF >= var) {
+        return EVT_INDEX_OF_LOCAL_FLAG(var);
     }
-    if (-20000000 >= var) {
-        return var + 30000000;
+    if (EVT_MAP_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_MAP_VAR(var);
+    }
+    if (EVT_LOCAL_VAR_CUTOFF >= var) {
+        return EVT_INDEX_OF_LOCAL_VAR(var);
     }
     return var;
 }
 
 s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
-    s32 temp;
+    s32 flagBitPos;
     s32 oldValue;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return value;
-    } else if (var <= -220000000) {
+    } else if (var <= EVT_FIXED_CUTOFF) {
         return evt_fixed_var_to_float(value);
-    } else if (var <= -200000000) {
-        var += 210000000;
-        temp = var % 32;
+    } else if (var <= EVT_ARRAY_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_FLAG(var);
+        flagBitPos = var % 32;
         if (value) {
-            script->flagArray[var / 32] |= 1 << temp;
+            script->flagArray[var / 32] |= 1 << flagBitPos;
         } else {
-            script->flagArray[var / 32] &= ~(1 << temp);
+            script->flagArray[var / 32] &= ~(1 << flagBitPos);
         }
         return value;
-    } else if (var <= -180000000) {
-        var += 190000000;
+    } else if (var <= EVT_ARRAY_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_VAR(var);
         oldValue = script->array[var];
         script->array[var] = value;
         return oldValue;
-    } else if (var <= -160000000) {
-        var += 170000000;
+    } else if (var <= EVT_GAME_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_BYTE(var);
         oldValue = get_global_byte(var);
         set_global_byte(var, value);
         return oldValue;
-    } else if (var <= -140000000) {
-        var += 150000000;
+    } else if (var <= EVT_AREA_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_BYTE(var);
         oldValue = get_area_byte(var);
         set_area_byte(var, value);
         return oldValue;
-    } else if (var <= -120000000) {
-        var += 130000000;
+    } else if (var <= EVT_GAME_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_FLAG(var);
         oldValue = get_global_flag(var);
         if (value) {
             set_global_flag(var);
@@ -1873,8 +1876,8 @@ s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
             clear_global_flag(var);
         }
         return oldValue;
-    } else if (var <= -100000000) {
-        var += 110000000;
+    } else if (var <= EVT_AREA_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_FLAG(var);
         oldValue = get_area_flag(var);
         if (value) {
             set_area_flag(var);
@@ -1882,31 +1885,31 @@ s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
             clear_area_flag(var);
         }
         return oldValue;
-    } else if (var <= -80000000) {
-        var += 90000000;
-        temp = var % 32;
+    } else if (var <= EVT_MAP_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_FLAG(var);
+        flagBitPos = var % 32;
         if (value) {
-            gMapFlags[var / 32] |= 1 << temp;
+            gMapFlags[var / 32] |= 1 << flagBitPos;
         } else {
-            gMapFlags[var / 32] &= ~(1 << temp);
+            gMapFlags[var / 32] &= ~(1 << flagBitPos);
         }
         return value;
-    } else if (var <= -60000000) {
-        var += 70000000;
-        temp = var % 32;
+    } else if (var <= EVT_LOCAL_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_FLAG(var);
+        flagBitPos = var % 32;
         if (value) {
-            script->varFlags[var / 32] |= 1 << temp;
+            script->varFlags[var / 32] |= 1 << flagBitPos;
         } else {
-            script->varFlags[var / 32] &= ~(1 << temp);
+            script->varFlags[var / 32] &= ~(1 << flagBitPos);
         }
         return value;
-    } else if (var <= -40000000) {
-        var += 50000000;
+    } else if (var <= EVT_MAP_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_VAR(var);
         oldValue = gMapVars[var];
         gMapVars[var] = value;
         return oldValue;
-    } else if (var <= -20000000) {
-        var += 30000000;
+    } else if (var <= EVT_LOCAL_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_VAR(var);
         oldValue = script->varTable[var];
         script->varTable[var] = value;
         return oldValue;
@@ -1918,23 +1921,23 @@ s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
 f32 evt_get_float_variable(Evt* script, Bytecode var) {
     s32 temp;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return var;
-    } else if (var <= EVT_LIMIT) {
+    } else if (var <= EVT_IGNORE_ARG) {
         return var;
-    } else if (var <= -220000000) {
+    } else if (var <= EVT_FIXED_CUTOFF) {
         return evt_fixed_var_to_float(var);
-    } else if (var <= -180000000) {
-        var += 190000000;
+    } else if (var <= EVT_ARRAY_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_VAR(var);
         return evt_fixed_var_to_float(script->array[var]);
-    } else if (var <= -160000000) {
-        var += 170000000;
+    } else if (var <= EVT_GAME_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_GAME_BYTE(var);
         return evt_fixed_var_to_float(get_global_byte(var));
-    } else if (var <= -140000000) {
-        var += 150000000;
+    } else if (var <= EVT_AREA_BYTE_CUTOFF) {
+        var = EVT_INDEX_OF_AREA_BYTE(var);
         return evt_fixed_var_to_float(get_area_byte(var));
-    } else if (var <= -80000000) {
-        var += 90000000;
+    } else if (var <= EVT_MAP_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_FLAG(var);
         temp = var % 32;
         var = gMapFlags[var / 32] & (1 << temp);
         if (var) {
@@ -1942,8 +1945,8 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
         } else {
             return 0.0f;
         }
-    } else if (var <= -60000000) {
-        var += 70000000;
+    } else if (var <= EVT_LOCAL_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_FLAG(var);
         temp = var % 32;
         var = script->varFlags[var / 32] & (1 << temp);
         if (var) {
@@ -1951,11 +1954,11 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
         } else {
             return 0.0f;
         }
-    } else if (var <= -40000000) {
-        var += 50000000;
+    } else if (var <= EVT_MAP_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_VAR(var);
         return evt_fixed_var_to_float(gMapVars[var]);
-    } else if (var <= -20000000) {
-        var += 30000000;
+    } else if (var <= EVT_LOCAL_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_VAR(var);
         return evt_fixed_var_to_float(script->varTable[var]);
     } else {
         return evt_fixed_var_to_float(var);
@@ -1966,17 +1969,17 @@ f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value) {
     s32 temp;
     s32 oldValue;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return value;
-    } else if (var <= -220000000) {
+    } else if (var <= EVT_FIXED_CUTOFF) {
         return value;
-    } else if (var <= -180000000) {
-        var += 190000000;
+    } else if (var <= EVT_ARRAY_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_ARRAY_VAR(var);
         oldValue = script->array[var];
         script->array[var] = evt_float_to_fixed_var(value);
         return evt_fixed_var_to_float(oldValue);
-    } else if (var <= -80000000) {
-        var += 90000000;
+    } else if (var <= EVT_MAP_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_FLAG(var);
         temp = var % 32;
         if (value) {
             gMapFlags[var / 32] |= 1 << temp;
@@ -1984,8 +1987,8 @@ f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value) {
             gMapFlags[var / 32] &= ~(1 << temp);
         }
         return value;
-    } else if (var <= -60000000) {
-        var += 70000000;
+    } else if (var <= EVT_LOCAL_FLAG_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_FLAG(var);
         temp = var % 32;
         if (value) {
             script->varFlags[var / 32] |= 1 << temp;
@@ -1993,13 +1996,13 @@ f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value) {
             script->varFlags[var / 32] &= ~(1 << temp);
         }
         return value;
-    } else if (var <= -40000000) {
-        var += 50000000;
+    } else if (var <= EVT_MAP_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_MAP_VAR(var);
         oldValue = gMapVars[var];
         gMapVars[var] = evt_float_to_fixed_var(value);
         return evt_fixed_var_to_float(oldValue);
-    } else if (var <= -20000000) {
-        var += 30000000;
+    } else if (var <= EVT_LOCAL_VAR_CUTOFF) {
+        var = EVT_INDEX_OF_LOCAL_VAR(var);
         oldValue = script->varTable[var];
         script->varTable[var] = evt_float_to_fixed_var(value);
         return evt_fixed_var_to_float(oldValue);
@@ -2012,7 +2015,7 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
     Bytecode* ret = script->ptrReadPos;
     s32 i;
 
-    if (arg1 < -270000000) {
+    if (arg1 < EVT_LIMIT) {
         return arg1;
     }
 

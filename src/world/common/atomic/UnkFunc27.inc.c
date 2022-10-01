@@ -2,47 +2,45 @@
 #include "npc.h"
 #include "model.h"
 
-void func_8011B950(u16, s32, s32, s32);
-
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 testS2 = evt_get_variable(script, *args++);
+    s32 mode = evt_get_variable(script, *args++);
     s32 testS0 = evt_get_variable(script, *args++);
     s32 testS1 = evt_get_variable(script, *args++);
-    s32* temp_s0_3 = (s32*) testS0;
-    s32 temp_s1 = testS1;
-    s32 temp_s2 = testS2;
+    s32* modelIDList = (s32*) testS0;
+    s32 listIndex;
+    Model* mdl;
 
-    if ((s32) temp_s0_3 == -1) {
-        mdl_set_all_fog_mode(temp_s1);
+    if (modelIDList == PTR_LIST_END) {
+        mdl_set_all_fog_mode(testS1);
         return ApiStatus_DONE2;
     }
 
-    switch (temp_s2) {
+    switch (mode) {
         case 0:
-            temp_s2 = 0xFFFF;
             while (TRUE) {
-                if (*temp_s0_3 == temp_s2) {
+                if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(*temp_s0_3)), -1, temp_s1);
-                temp_s0_3++;
+                listIndex = get_model_list_index_from_tree_index(*modelIDList);
+                mdl = get_model_from_list_index(listIndex);
+                set_mdl_custom_gfx_set(mdl, -1, testS1);
+                modelIDList++;
             };
             break;
 
         case 1:
-            temp_s2 = 0xFFFF;
             while (TRUE) {
-                if (*temp_s0_3 == temp_s2) {
+                if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                func_8011B950(*temp_s0_3, -1, temp_s1, 0);
-                temp_s0_3++;
+                func_8011B950(*modelIDList, -1, testS1, 0);
+                modelIDList++;
             };
             break;
 
         case 2:
-            *D_801512F0 = temp_s1;
+            *D_801512F0 = testS1;
             break;
 
     }

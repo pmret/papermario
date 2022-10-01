@@ -1,7 +1,8 @@
 #include "common.h"
 #include "npc.h"
+#include "sprite/npc/GrooveGuy.h"
 
-void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GrooveGuyAI_02)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -11,7 +12,7 @@ void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     script->functionTemp[0] = 3;
 }
 
-void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     s32 phase;
@@ -20,20 +21,20 @@ void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
         case 0:
             enemy->varTable[0] = 1;
             enemy->varTable[1] = 0;
-            npc->currentAnim.w = 0x3C000C;
+            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             set_npc_yaw(npc, 270.0f);
             npc->rotation.y = 0.0f;
             // fallthrough
         case 1:
             phase = enemy->varTable[1] % 16;
             if (phase < 4) {
-                npc->currentAnim.w = 0x3C000C;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             } else if (phase < 8) {
-                npc->currentAnim.w = 0x3C000B;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0B;
             } else if (phase < 12) {
-                npc->currentAnim.w = 0x3C000C;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             } else  if (phase < 16) {
-                npc->currentAnim.w = 0x3C000D;
+                npc->currentAnim = ANIM_GrooveGuy_Anim0D;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x41) {
@@ -44,7 +45,7 @@ void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
             enemy->varTable[0] = 3;
             enemy->varTable[1] = 0;
             npc->rotation.y = 0.0f;
-            npc->currentAnim.w = 0x3C000C;
+            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             // fallthrough
         case 3:
             npc->rotation.y += 35.0;
@@ -70,7 +71,7 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*) evt_get_variable(script, *args++);
     f32 posX;
     f32 posY;
     f32 posZ;
@@ -78,17 +79,17 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
     
-    if (isInitialCall || enemy->aiFlags & 4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
         
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
@@ -99,14 +100,14 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         
-        if (enemy->aiFlags & 4) {
-            script->functionTemp[0] = 0x63;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-        } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0] = 0xC;
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            script->functionTemp[0] = 12;
         }
-        enemy->aiFlags &= ~4;
-        enemy->flags &= ~0x40000000;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->flags &= ~ENEMY_FLAGS_40000000;
         
         hitDepth = 100.0f;
         posX = npc->pos.x;

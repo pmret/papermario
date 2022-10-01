@@ -32,23 +32,23 @@ void N(UnkModelStuff_func1)(s32 arg0) {
 EvtScript N(UnkModelStuffScript1) = {
     EVT_CALL(N(Set80071270_0_16))
     EVT_LOOP(0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(UnkModelStuffScript2) = {
-    EVT_SET(LW(10), LW(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
-    EVT_CALL(RandInt, 30, LW(0))
-    EVT_ADD(LW(0), 30)
-    EVT_WAIT_FRAMES(LW(0))
-    EVT_SET(LW(1), 0)
+    EVT_CALL(RandInt, 30, LVar0)
+    EVT_ADD(LVar0, 30)
+    EVT_WAIT(LVar0)
+    EVT_SET(LVar1, 0)
     EVT_LOOP(10)
-        EVT_ADD(LW(1), 36)
-        EVT_CALL(RotateModel, LW(10), LW(1), 0, 1, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_ADD(LVar1, 36)
+        EVT_CALL(RotateModel, LVarA, LVar1, 0, 1, 0)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_GOTO(0)
     EVT_RETURN
@@ -56,34 +56,34 @@ EvtScript N(UnkModelStuffScript2) = {
 };
 
 EvtScript N(UnkModelStuffScript3) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_SET(LW(11), LW(1))
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVarB, LVar1)
     EVT_EXEC(N(UnkModelStuffScript2))
-    EVT_SET(LW(7), 0)
+    EVT_SET(LVar7, 0)
     EVT_LABEL(0)
-    EVT_ADD(LW(7), 4)
-    EVT_IF_GT(LW(7), 3599)
-        EVT_SUB(LW(7), 3600)
+    EVT_ADD(LVar7, 4)
+    EVT_IF_GT(LVar7, 3599)
+        EVT_SUB(LVar7, 3600)
     EVT_END_IF
-    EVT_CALL(N(UnkFloatFunc2), LW(7), LW(0), LW(1), LW(2))
-    EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
-    EVT_WAIT_FRAMES(1)
+    EVT_CALL(N(UnkFloatFunc2), LVar7, LVar0, LVar1, LVar2)
+    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(UnkModelStuffScript4) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_SET(LW(7), 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVar7, 0)
     EVT_LABEL(0)
-    EVT_ADD(LW(7), 4)
-    EVT_IF_GT(LW(7), 3599)
-        EVT_SUB(LW(7), 3600)
+    EVT_ADD(LVar7, 4)
+    EVT_IF_GT(LVar7, 3599)
+        EVT_SUB(LVar7, 3600)
     EVT_END_IF
-    EVT_CALL(N(UnkFloatFunc2), LW(7), LW(0), LW(1), LW(2))
-    EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
-    EVT_WAIT_FRAMES(1)
+    EVT_CALL(N(UnkFloatFunc2), LVar7, LVar0, LVar1, LVar2)
+    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END

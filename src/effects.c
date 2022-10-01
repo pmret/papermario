@@ -102,7 +102,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x48 */ FX_ENTRY(attack_result_text, _3903D0),
     /* 0x49 */ FX_ENTRY(small_gold_sparkle, effect_gfx_small_gold_sparkle),
     /* 0x4A */ FX_ENTRY(flashing_box_shockwave, _3930A0),
-    /* 0x4B */ FX_ENTRY(balloon, _394670),
+    /* 0x4B */ FX_ENTRY(balloon, effect_gfx_balloon),
     /* 0x4C */ FX_ENTRY(floating_rock, _3960F0),
     /* 0x4D */ FX_ENTRY(chomp_drop, _397040),
     /* 0x4E */ FX_ENTRY(quizmo_stage, _398BC0),
@@ -122,7 +122,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x5C */ FX_ENTRY(water_fountain, _3B8860),
     /* 0x5D */ FX_ENTRY(underwater, _3B9A70),
     /* 0x5E */ FX_ENTRY(lightning_bolt, _3BAEA0),
-    /* 0x5F */ FX_ENTRY(water_splash, _3BCA90),
+    /* 0x5F */ FX_ENTRY(water_splash, effect_gfx_water_splash),
     /* 0x60 */ FX_ENTRY(snowman_doll, _3BD9A0),
     /* 0x61 */ FX_ENTRY(fright_jar, _3C1BA0),
     /* 0x62 */ FX_ENTRY(stop_watch, _3CB890),
@@ -147,13 +147,13 @@ EffectTableEntry gEffectTable[] = {
     /* 0x75 */ FX_ENTRY_NUMBERED(75, _3E2960),
     /* 0x76 */ {},
     /* 0x77 */ FX_ENTRY(firework_rocket, _3E5350),
-    /* 0x78 */ FX_ENTRY(peach_star_beam, _3E5F30),
+    /* 0x78 */ FX_ENTRY(peach_star_beam, effect_gfx_peach_star_beam),
     /* 0x79 */ FX_ENTRY(chapter_change, _3EBE60),
     /* 0x7A */ FX_ENTRY(ice_shard, _3F8CC0),
     /* 0x7B */ FX_ENTRY(spirit_card, _3FA4B0),
     /* 0x7C */ FX_ENTRY(lil_oink, _3FF250),
     /* 0x7D */ FX_ENTRY(something_rotating, _3FA4B0),
-    /* 0x7E */ FX_ENTRY(breaking_junk, _403BF0),
+    /* 0x7E */ FX_ENTRY(breaking_junk, effect_gfx_breaking_junk),
     /* 0x7F */ FX_ENTRY(partner_buff, _404F40),
     /* 0x80 */ FX_ENTRY(quizmo_assistant, _407080),
     /* 0x81 */ FX_ENTRY(ice_pillar, _40A1C0),
@@ -173,15 +173,16 @@ s32 D_8007FEB8[] = {
 };
 
 /// Used for unbound function points in effect structs.
-void stub_effect_delegate(EffectInstance* effectInst) {
+void stub_effect_delegate(EffectInstance* effect) {
 }
 
-void set_effect_pos_offset(EffectGraphics* effect, f32 x, f32 y, f32 z) {
-    EffectInstanceData* instanceData = effect->freeDelay;
 
-    instanceData->pos.x = x;
-    instanceData->pos.y = y;
-    instanceData->pos.z = z;
+void set_effect_pos_offset(EffectInstance* effect, f32 x, f32 y, f32 z) {
+    s32* data = effect->data.any;
+
+    ((f32*)data)[1] = x;
+    ((f32*)data)[2] = y;
+    ((f32*)data)[3] = z;
 }
 
 void clear_effect_data(void) {
@@ -391,23 +392,23 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     return newEffectInst;
 }
 
-void remove_effect(EffectInstance* effectInstsance) {
+void remove_effect(EffectInstance* effectInstance) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        if (gEffectInstances[i] == effectInstsance) {
+        if (gEffectInstances[i] == effectInstance) {
             break;
         }
     }
 
     ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
-    if (effectInstsance->data == NULL) {
-        general_heap_free(effectInstsance);
+    if (effectInstance->data.any == NULL) {
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     } else {
-        general_heap_free(effectInstsance->data);
-        general_heap_free(effectInstsance);
+        general_heap_free(effectInstance->data.any);
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     }
 }
@@ -419,8 +420,8 @@ void remove_all_effects(void) {
         EffectInstance* effect = gEffectInstances[i];
 
         if (effect != NULL && effect->flags & 4) {
-            if (effect->data != NULL) {
-                general_heap_free(effect->data);
+            if (effect->data.any != NULL) {
+                general_heap_free(effect->data.any);
             }
             general_heap_free(effect);
             gEffectInstances[i] = NULL;

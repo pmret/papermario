@@ -8,10 +8,10 @@ if __name__ == "__main__":
     infile, outfile, cname = argv[1:]
 
     with open(outfile, "w") as f:
-        f.write(f"unsigned char {cname}[] = {{")
+        f.write(f"unsigned char {cname}[] = {{ ")
 
         with open(infile, "rb") as i:
             for char in i.read():
-                f.write(f"{char},")
+                f.write(f'0x{char:02X}, ')
 
         f.write(f"}};\n")
