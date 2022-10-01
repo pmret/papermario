@@ -11620,12 +11620,26 @@ segments:
     start: 0xE12760
     vram: 0x80240000
     subsegments:
-    - [0xE12760, c]
-    - [0xE12930, c]
-    - [0xE13F10, data]
-    - [0xE141D0, data]
-    - [0xE15440, data]
-    - [0xE15D10]
+    - [0xE12760, c, mgm_01_1_main]
+    - [0xE12930, c, mgm_01_2_npc]
+    - [0xE12930, c, mgm_01_3_entity]
+    - [0xE12930, c, mgm_01_4_images]
+    - [0xE13F10, .data, mgm_01_1_main]
+    - [0xE141D0, .data, mgm_01_2_npc]
+    - [0xE153A0, .data, mgm_01_3_entity]
+    - start: 0xE15440
+      type: .data
+      name: mgm_01_4_images
+      subsegments:
+      - [0xE15440, ci4, panel_1_coin, 32, 32]
+      - [0xE15640, palette, panel_1_coin]
+      - [0xE15660, ci4, panel_5_coins, 32, 32]
+      - [0xE15860, palette, panel_5_coins]
+      - [0xE15880, ci4, panel_times_5, 32, 32]
+      - [0xE15A80, palette, panel_times_5]
+      - [0xE15AA0, ci4, panel_bowser, 32, 32]
+      - [0xE15CA0, palette, panel_bowser]
+      - [0xE15CC0]
   - name: mgm_02
     dir: world/area_mgm/mgm_02
     type: code
