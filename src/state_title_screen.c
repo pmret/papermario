@@ -97,9 +97,9 @@ void state_init_title_screen(void) {
 
     create_cameras_a();
     gCameras[CAM_DEFAULT].updateMode = 6;
-    gCameras[CAM_DEFAULT].unk_06 = 1;
-    gCameras[CAM_DEFAULT].nearClip = 0x10;
-    gCameras[CAM_DEFAULT].farClip = 0x1000;
+    gCameras[CAM_DEFAULT].unk_06 = TRUE;
+    gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
+    gCameras[CAM_DEFAULT].farClip = CAM_FAR_CLIP;
     gCurrentCameraID = CAM_DEFAULT;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
     gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
@@ -111,15 +111,15 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
-    gCameras[CAM_DEFAULT].auxPos.x = 25.0f;
-    gCameras[CAM_DEFAULT].auxPos.y = 25.0f;
-    gCameras[CAM_DEFAULT].unk_1C = 0;
-    gCameras[CAM_DEFAULT].unk_20 = 100;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
+    gCameras[CAM_DEFAULT].auxPitch = 0;
+    gCameras[CAM_DEFAULT].lookAt_dist = 100;
     gCameras[CAM_DEFAULT].auxBoomPitch = 0;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
-    gCameras[CAM_DEFAULT].auxPos.z = 150.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
     clear_script_list();
     clear_generic_entity_list();
     clear_render_tasks();

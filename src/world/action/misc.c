@@ -16,7 +16,7 @@ s32 action_update_ride(void) {
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
     }
@@ -59,7 +59,7 @@ void action_update_state_23(void) {
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
         D_802B6770_E27C80 = D_8010C938;
@@ -130,7 +130,7 @@ void action_update_launch(void) {
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
@@ -153,7 +153,7 @@ void action_update_first_strike(void) {
         playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
         suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);

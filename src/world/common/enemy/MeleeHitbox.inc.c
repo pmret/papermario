@@ -125,9 +125,9 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
         hitboxNpc->duration = 0;
         hitboxNpc->flags |= (NPC_FLAG_2 | NPC_FLAG_100);
         hitboxEnemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
-        hitboxNpc->pos.x = 0.0f;
-        hitboxNpc->pos.y = -1000.0f;
-        hitboxNpc->pos.z = 0.0f;
+        hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
+        hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
+        hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
         if (hitboxEnemy->aiFlags & ENEMY_AI_FLAGS_4) {
             hitboxEnemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }

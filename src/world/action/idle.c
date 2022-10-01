@@ -55,7 +55,7 @@ void action_update_idle(void) {
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
@@ -106,7 +106,7 @@ void action_update_idle_peach(void) {
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
-        playerStatus->unk_C2 = 0;
+        playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
 

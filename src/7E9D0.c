@@ -148,10 +148,10 @@ s32 phys_adjust_cam_on_landing(void) {
         s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
 
         if (surfaceType == SURFACE_TYPE_LAVA) {
-            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+            gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             ret = 0;
         } else {
-            gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
+            gCameras[0].moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
         }
     } else if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
         gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_2;
@@ -228,11 +228,12 @@ void phys_update_action_state(void) {
         }
     }
 
+    // if midair, look for velocity inflection
     if (playerStatus->timeInAir != 0) {
-        if (playerStatus->gravityIntegrator[0] <= 0.0f && D_800F7B90 > 0.0f) {
-            playerStatus->unk_C2 = playerStatus->timeInAir;
+        if (playerStatus->gravityIntegrator[0] <= 0.0f && LastMidairPlayerVelY > 0.0f) {
+            playerStatus->peakJumpTime = playerStatus->timeInAir;
         }
-        D_800F7B90 = playerStatus->gravityIntegrator[0];
+        LastMidairPlayerVelY = playerStatus->gravityIntegrator[0];
     }
 
     func_800E24F8();
@@ -358,7 +359,7 @@ void set_action_state(s32 actionState) {
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-                playerStatus->animFlags |= PA_FLAGS_4;
+                playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 playerStatus->flags |= PS_FLAGS_800;
                 return;
             }
@@ -377,7 +378,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ACTION_STATE_ENEMY_FIRST_STRIKE) {
-        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
     }
     playerStatus->actionState = actionState;
     playerStatus->flags |= PS_FLAGS_ACTION_STATE_CHANGED;

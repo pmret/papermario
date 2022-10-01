@@ -62,6 +62,8 @@ enum {
 #define ENTITY_ADDR(entity, type, data) (type)((s32)(entity->gfxBaseAddr) + ((s32)(data) & 0xFFFF))
 #define ENTITY_ROM(name) { entity_model_##name##_ROM_START, entity_model_##name##_ROM_END }
 
+#define BLOCK_GRID_SIZE 25
+
 typedef struct SaveBlockData {
     /* 0x000 */ char unk_0[4];
     /* 0x004 */ s16 angle;
@@ -197,7 +199,7 @@ typedef struct ChestData {
     /* 0x24 */ f32 giveItemRadiusInterpPhase;
     /* 0x28 */ f32 giveItemHeightInterpPhase;
     /* 0x2C */ f32 itemVelY;
-    /* 0x30 */ s8 unk_30;
+    /* 0x30 */ s8 gotItemDone;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ struct EffectInstance* gotItemEffect;
 } ChestData; // size = 0x38
@@ -397,6 +399,7 @@ extern EntityBlueprint Entity_Hammer2Block;
 extern EntityBlueprint Entity_Hammer2Block_WideHitbox;
 extern EntityBlueprint Entity_Hammer2Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer2BlockTiny;
+extern EntityBlueprint Entity_Hammer3Block;
 extern EntityBlueprint Entity_Hammer3Block_WideHitbox;
 extern EntityBlueprint Entity_Hammer3Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer3BlockTiny;

@@ -4217,8 +4217,7 @@ void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
     *a = mdl_bgMultiplyColorA;
 }
 
-void set_model_fog_color_parameters(s8 primR, s8 primG, s8 primB, s8 primA, s32 fogR, s32 fogG, s32 fogB, s32 fogStart,
-                                    s32 fogEnd) {
+void set_model_fog_color_parameters(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd) {
     mdl_renderModelFogPrimColorR = primR;
     mdl_renderModelFogPrimColorG = primG;
     mdl_renderModelFogPrimColorB = primB;

@@ -38,7 +38,7 @@ void action_update_spin_jump(void) {
         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
         disable_player_input();
         playerStatus->flags |= PS_FLAGS_200;
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         sfx_play_sound_at_player(SOUND_SPIN_JUMP, 0);
     }
 

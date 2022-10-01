@@ -31,7 +31,7 @@ void action_update_hit_lava(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= (PS_FLAGS_800000 | PS_FLAGS_FLYING);
-        playerStatus->animFlags |= PA_FLAGS_4;
+        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
         playerStatus->flags |= PS_FLAGS_800;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;
@@ -43,7 +43,7 @@ void action_update_hit_lava(void) {
         playerStatus->currentSpeed = 0.0f;
         LaunchVelocity = 0.0f;
 
-        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_FLAGS_1 | CAMERA_MOVE_FLAGS_2);
+        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_FLAGS_2);
         LaunchInterpPhase = 90.0f;
         subtract_hp(1);
         open_status_menu_long();
@@ -70,7 +70,7 @@ void action_update_hit_lava(void) {
             suggest_player_anim_setUnkFlag(ANIM_Mario_80002);
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
-            playerStatus->unk_C2 = 0;
+            playerStatus->peakJumpTime = 0;
             playerStatus->actionSubstate = SUBSTATE_LAUNCH;
             playerStatus->currentStateTime = 1;
             playerStatus->gravityIntegrator[0] = 20.0f;

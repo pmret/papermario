@@ -518,10 +518,10 @@ void sfx_play_sound(s32 soundID) {
     sfx_play_sound_with_params(soundID, 0, 0, 0);
 }
 
-void sfx_play_sound_at_player(s32 soundID, s32 arg1) {
+void sfx_play_sound_at_player(s32 soundID, s32 flags) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    sfx_play_sound_at_position(soundID, arg1, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+    sfx_play_sound_at_position(soundID, flags, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
 }
 
 void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {

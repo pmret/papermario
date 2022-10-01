@@ -208,7 +208,7 @@ ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ShowSweat(Evt* script) {
+ApiStatus ShowSweat(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     s32 type = evt_get_variable(script, *args++);

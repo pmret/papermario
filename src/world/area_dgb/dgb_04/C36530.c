@@ -156,7 +156,7 @@ EvtScript N(npcAI_802435E4) = {
         EVT_GOTO(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
@@ -274,7 +274,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_DGB04_SuperBlock
-#include "world/common/atomic/SuperBlockData.inc.c"
+#include "world/common/atomic/SuperBlock.data.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), 500, -360, 110, 0, MAKE_ENTITY_END)

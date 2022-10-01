@@ -717,9 +717,9 @@ typedef struct Camera {
     /* 0x014 */ s16 farClip;
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
-    /* 0x01C */ s16 unk_1C;
+    /* 0x01C */ s16 auxPitch;
     /* 0x01E */ s16 auxBoomLength;
-    /* 0x020 */ s16 unk_20;
+    /* 0x020 */ s16 lookAt_dist;
     /* 0x022 */ s16 auxBoomPitch;
     /* 0x024 */ s16 auxBoomYaw;
     /* 0x026 */ s16 auxBoomZOffset;
@@ -731,7 +731,7 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ Vec3f auxPos;
+    /* 0x054 */ Vec3f lookAt_obj_target;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
@@ -1006,8 +1006,8 @@ typedef struct ModelDisplayData {
 } ModelDisplayData; // size = 0x8
 
 typedef struct AnimatorNode {
-    /* 0x00 */ Gfx* displayList;
-    /* 0x04 */ struct AnimatorNode* children[0x20];
+    /* 0x00 */ void* displayList;
+    /* 0x04 */ struct AnimatorNode* children[32];
     /* 0x84 */ Vec3f basePos; // ?
     /* 0x90 */ Vec3f pos;
     /* 0x9C */ Vec3f rotation;
@@ -1024,14 +1024,14 @@ typedef struct AnimatorNode {
 } AnimatorNode; // size = 0x100
 
 typedef struct AnimatorNodeBlueprint {
-    /* 0x00 */ Gfx* displayList;
+    /* 0x00 */ void* displayList;
     /* 0x04 */ Vec3f basePos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ char unk_1C[0x4];
 } AnimatorNodeBlueprint; // size = 0x20
 
 typedef struct StaticAnimatorNode {
-    /* 0x00 */ Gfx* displayList; // can sometime point to a node???
+    /* 0x00 */ void* displayList; // sometimes StaticAnimatorNode*, sometimes Gfx*???
     /* 0x04 */ Vec3s rot; /* range = -180,180 */
     /* 0x0A */ char unk_0A[0x2];
     /* 0x0C */ Vec3f pos;
@@ -1692,6 +1692,16 @@ typedef struct PlayerPathElement {
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
 
+typedef struct LavaReset {
+    /* 0x00 */ s32 colliderID;
+    /* 0x04 */ Vec3f pos;
+} LavaReset; // size = 0x10;
+
+typedef struct BombTrigger {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s32 radius; // effective 'size' of the object, usually set to zero because bombettes explosion radius is large enough
+} BombTrigger; // size = 0x10;
+
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
     /* 0x04 */ Vec3f pos;
@@ -1918,7 +1928,7 @@ typedef struct PlayerStatus {
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 inputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ Vec3s lastGoodPosition;
-    /* 0x01C */ Vec3f extraVelocity;
+    /* 0x01C */ Vec3f pushVelocity;
     /* 0x028 */ Vec3f position;
     /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
     /* 0x03C */ VecXZf jumpFromPos;
@@ -1953,7 +1963,7 @@ typedef struct PlayerStatus {
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 hazardType;
     /* 0x0C0 */ s16 timeInAir;
-    /* 0x0C2 */ s16 unk_C2;
+    /* 0x0C2 */ s16 peakJumpTime; // frame of current jump when player Y velocity went from position to negative
     /* 0x0C4 */ s8 peachItemHeld;
     /* 0x0C5 */ s8 camResetDelay;
     /* 0x0C6 */ s16 interactingWithID;

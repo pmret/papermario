@@ -605,7 +605,7 @@ void update_player(void) {
             if (playerStatus->animFlags & PA_FLAGS_400000) {
                 Npc* partner;
 
-                playerStatus->animFlags |= PA_FLAGS_20000000 | PA_FLAGS_4;
+                playerStatus->animFlags |= PA_FLAGS_20000000 | PA_FLAGS_INTERRUPT_USE_PARTNER;
                 partner = get_npc_unsafe(NPC_PARTNER);
                 partner->pos.x = playerStatus->lastGoodPosition.x;
                 partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;
@@ -668,9 +668,9 @@ void update_player(void) {
     check_for_pulse_stone();
     check_for_ispy();
 
-    playerStatus->extraVelocity.x = 0.0f;
-    playerStatus->extraVelocity.y = 0.0f;
-    playerStatus->extraVelocity.z = 0.0f;
+    playerStatus->pushVelocity.x = 0.0f;
+    playerStatus->pushVelocity.y = 0.0f;
+    playerStatus->pushVelocity.z = 0.0f;
     playerStatus->flags &= ~PS_FLAGS_10;
     playerStatus->animFlags &= ~PA_FLAGS_8;
 }

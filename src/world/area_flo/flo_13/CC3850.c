@@ -159,9 +159,9 @@ EvtScript N(80243A40) = {
     EVT_END
 };
 
-EvtScript N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
+EvtScript N(exitWalk_80243CEC) = EVT_EXIT_WALK(60,  0, "flo_14",  1);
 
-EvtScript N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
+EvtScript N(exitWalk_80243D48) = EVT_EXIT_WALK(60,  1, "flo_15",  0);
 
 EvtScript N(80243DA4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80243D48), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
@@ -475,7 +475,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_CALL(SetNpcPos, 0, -250, 120, 45)
     EVT_CALL(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
-    EVT_CALL(func_802D2B6C)
+    EVT_CALL(InterruptUsePartner)
     EVT_CALL(SetPlayerAnimation, 65578)
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 270, 1)

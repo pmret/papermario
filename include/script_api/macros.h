@@ -571,7 +571,7 @@
 
 /****** COMMON SCRIPTS ************************************************************************************************/
 
-#define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
+#define EVT_EXIT_WALK(walkDistance, exitIdx, map, entryIdx) \
     { \
         EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
@@ -581,5 +581,30 @@
         EVT_RETURN \
         EVT_END \
     }
+
+// alternate version of EVT_EXIT_WALK which includes a call to DisablePlayerInput
+#define EVT_EXIT_WALK_FIXED(walkDistance, exitIdx, map, entryIdx) \
+    { \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
+        EVT_CALL(DisablePlayerInput, TRUE) \
+        EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
+        EVT_EXEC(ExitWalk) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
+        EVT_WAIT(100) \
+        EVT_RETURN \
+        EVT_END \
+    }
+
+
+#define EVT_SETUP_CAMERA_DEFAULT() \
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096) \
+    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
+    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE) \
+
+#define EVT_SETUP_CAMERA_NO_LEAD() \
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096) \
+    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
+    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE) \
+    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE) \
 
 #endif
