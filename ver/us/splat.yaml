@@ -10578,7 +10578,20 @@ segments:
     - [0xC8E6B0, c, kzn_19_3_npc]
     - [0xC8E6B0, c, kzn_19_4_eruption]
     - [0xC8E6B0, c, kzn_19_5_entity]
-    - [0xC8F8E0]
+    - [0xC8F8E0, .data, kzn_19_0_header]
+    - [0xC8FA40, .data, kzn_19_1_main]
+    - [0xC90B10, .data, kzn_19_2_npc_settings]
+    - start: 0xC90BF0
+      type: .data
+      name: kzn_19_3_npc
+      subsegments:
+      - [0xC90BF0]
+      - [0xC91088, ci4, lava_piranha_vine, 64, 32]
+      - [0xC91488, palette, lava_piranha_vine]
+      - [0xC91688, gfx, lava_piranha_vine]
+      - [0xC91768]
+    - [0xC959B0, .data, kzn_19_4_eruption]
+    - [0xC95E70, .data, kzn_19_5_entity]
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code

@@ -49,81 +49,9 @@ extern NpcSettings N(NpcSettings_LavaPiranhaHead);
 #include "./kzn_19_anim2.c"
 #include "./kzn_19_anim3.c"
 
-s32 N(D_802434D8_C91088)[] = {
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 0x11000000, 0, 0, 0, 0, 0,
-    0, 17, 0x21100000, 0, 0, 0, 0, 0,
-    0, 18, 0x22100000, 0, 0, 0, 0, 0,
-    0, 274, 0x22110000, 0, 0, 0, 0, 0,
-    0, 290, 0x22210000, 0, 0, 0, 0, 0,
-    0, 0x00001122, 0x22211000, 0, 0, 0, 0, 0,
-    0, 0x00001222, 0x22221000, 0, 0, 0, 0, 0,
-    0x33333333, 0x33311222, 0x22221133, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333,
-    0x33333333, 0x33312222, 0x22222133, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333,
-    0x33333333, 0x33112222, 0x22222113, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444, 0x44444444,
-    0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x31122222, 0x22222113, 0x33333333,
-    0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33122222, 0x22222133, 0x33333333,
-    0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33333333, 0x33112222, 0x22221133, 0x33333333,
-    0, 0, 0, 0, 0, 0x00012222, 0x22221000, 0,
-    0, 0, 0, 0, 0, 0x00011222, 0x22211000, 0,
-    0, 0, 0, 0, 0, 0x00001222, 0x22210000, 0,
-    0, 0, 0, 0, 0, 0x00001122, 0x22110000, 0,
-    0, 0, 0, 0, 0, 290, 0x22100000, 0,
-    0, 0, 0, 0, 0, 274, 0x21100000, 0,
-    0, 0, 0, 0, 0, 17, 0x11000000, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-};
-
-s32 N(D_802438D8_C91488)[] = {
-    0x014041C1, 0xE7390241, 0x044F0000, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-};
-
-Gfx D_80243AD8_C91688[] = {
-    gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureFilter(G_TF_BILERP),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetRenderMode(
-        AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
-        AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)),
-    gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0),
-    gsDPSetPrimColor(0, 0, 255, 160, 160, 0),
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, 0x802438D8), //TODO fix pointers
-    gsDPLoadTextureTile_4b(0x802434D8, G_IM_FMT_CI, 64, 0, 0, 0, 63, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH | G_CLIPPING | 0x0040F9FA),
-    gsSPSetGeometryMode(G_ZBUFFER | G_SHADE),
-    gsSPEndDisplayList(),
-};
+#include "world/area_kzn/kzn_19/lava_piranha_vine.png.inc.c"
+#include "world/area_kzn/kzn_19/lava_piranha_vine.pal.inc.c"
+#include "world/area_kzn/kzn_19/lava_piranha_vine.gfx.inc.c"
 
 #define PIRANHA_DMA_ENTRY(name) \
     (s32) world_model_anim_kzn_##name##_ROM_START,\
@@ -321,7 +249,7 @@ void N(appendGfx_piranha_vines)(void* data) {
     }
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPDisplayList(gMasterGfxPos++, D_80243AD8_C91688);
+    gSPDisplayList(gMasterGfxPos++, N(lava_piranha_vine_gfx));
 
     for (i = 0; i < NUM_VINES; i++) {
         LavaPiranhaVineSet* vineData = (LavaPiranhaVineSet*) evt_get_variable(NULL, MV_VinesData);
