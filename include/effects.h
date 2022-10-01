@@ -607,7 +607,11 @@ typedef struct MusicNoteFXData {
 } MusicNoteFXData; // size = 0x34
 
 typedef struct SmokeBurstFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk00[0x14];
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ s32 unk18;
+    /* 0x1C */ s32 unk1C;
+    /* 0x20 */ f32 unk20;
 } SmokeBurstFXData; // size = unknown
 
 typedef struct SweatFXData {

@@ -8,7 +8,17 @@ INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_main);
 void smoke_burst_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/smoke_burst", smoke_burst_update);
+void smoke_burst_update(EffectInstance *effect) {
+    SmokeBurstFXData* fxData = effect->data.smokeBurst;
+    fxData->unk20 = (f32) (((f32) fxData->unk18 * 8.0f) / (f32) fxData->unk1C);
+
+    fxData->unk18++;
+    fxData->unk14--;
+    
+    if (fxData->unk14 < 0) {
+        shim_remove_effect(effect);
+    }
+}
 
 void smoke_burst_render(EffectInstance* effect) {
     RenderTask renderTask;
