@@ -68,7 +68,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x26 */ FX_ENTRY(music_note, _35A5E0),
     /* 0x27 */ FX_ENTRY(smoke_burst, _328EA0),
     /* 0x28 */ FX_ENTRY(sweat, _35C550),
-    /* 0x29 */ FX_ENTRY(sleep_bubble, _35D510),
+    /* 0x29 */ FX_ENTRY(sleep_bubble, effect_gfx_sleep_bubble),
     /* 0x2A */ {},
     /* 0x2B */ FX_ENTRY(windy_leaves, _33D610),
     /* 0x2C */ FX_ENTRY(falling_leaves, _35F0E0),

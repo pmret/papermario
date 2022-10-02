@@ -3057,7 +3057,25 @@ segments:
     subsegments:
     - [0x35CA80, c, sleep_bubble]
     - [0x35D460]
-  - [0x35D510, bin] # sleep_bubble gfx
+  - name: effect_gfx_sleep_bubble
+    dir: effects/gfx
+    type: code
+    start: 0x35D510
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x35D510, c, sleep_bubble]
+    - start: 0x35D510
+      type: .data
+      name: sleep_bubble
+      subsegments:
+      - [0x35D510, i4, D_09000000_35D510, 16, 16]
+      - [0x35D590, i4, D_09000080_35D590, 16, 16]
+      - [0x35D610, i4, D_09000100_35D610, 16, 16]
+      - [0x35D690, vtx, D_09000180_35D690]
+      - [0x35D7F0, gfx, D_090002E0_35D7F0]
+      - [0x35D8A0, gfx, D_09000390_35D8A0]
+      - [0x35D950, gfx, D_09000440_35D950]
   - name: effect_windy_leaves
     dir: effects
     type: code
