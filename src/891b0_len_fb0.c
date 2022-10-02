@@ -10,7 +10,8 @@ void func_800F0B3C(void);
 
 s32 D_80109480 = 0;
 f32 D_80109484 = 0.0f;
-s16 D_80109488[] = {4, 0};
+s16 D_80109488 = 4;
+s16 D_8010948A = 0; // unused?
 f32 D_8010948C = 0.0f;
 s16 D_80109490 = 4;
 s16 D_80109492 = 5;
@@ -119,7 +120,60 @@ void func_800F0248(void) {
     }
 }
 
-INCLUDE_ASM(s32, "891b0_len_fb0", func_800F0490);
+void func_800F0490(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 sinTheta, cosTheta;
+    f32 xTemp, xTemp2;
+    f32 yTemp, yTemp2;
+    f32 zTemp, zTemp2;
+    s32 i;
+
+    D_801094A0 += 0.1f;
+
+    if (((playerStatus->actionState == ACTION_STATE_LAND && (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED)) ||
+        ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_400))) &&
+        D_8010CFF4 >= 10)
+    {
+        fx_cloud_puff(
+            playerStatus->position.x,
+            (playerStatus->position.y + 14.0f) - 5.0f,
+            playerStatus->position.z, D_80109498
+        );
+        D_80109498 = clamp_angle(D_80109498 + 35.0f);
+
+        for (i = 0; i < 4; i++) {
+            xTemp = rand_int(10) - 5;
+            zTemp = rand_int(10) - 5;
+            yTemp = -2.0f - ((SQ(xTemp) + SQ(zTemp)) / 5.0f);
+            D_8010949C = 0;
+            sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw + (i * 90))), &sinTheta, &cosTheta);
+            fx_cloud_trail(
+                0,
+                playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp,
+                playerStatus->position.y + 15.5f + yTemp,
+                playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp
+            );
+        }
+    } else {
+        if (!(playerStatus->actionState == ACTION_STATE_WALK || playerStatus->actionState == ACTION_STATE_RUN) &&
+            !(playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0))
+        {
+            D_8010949C = 0;
+            return;
+        }
+        xTemp2 = rand_int(10) - 5;
+        zTemp2 = rand_int(10) - 5;
+        yTemp2 = -2.0f - ((SQ(xTemp2) + SQ(zTemp2)) / 5.0f);
+        D_8010949C = 0;
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+        fx_cloud_trail(
+            1,
+            playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp2,
+            playerStatus->position.y + 15.5f + yTemp2,
+            playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp2
+        );
+    }
+}
 
 void func_800F0864(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
