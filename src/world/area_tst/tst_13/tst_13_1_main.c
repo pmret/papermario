@@ -17,7 +17,7 @@ extern NpcGroupList N(DefaultNPCs);
 extern Gfx N(shockwave_gfx)[];
 extern s32 N(D_80242BF8_B20358);
 
-ApiStatus N(func_80240000_B1D760)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240000_B1D760)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 dist = dist2D(playerStatus->position.x, playerStatus->position.z, script->array[2], script->array[3]);
 

@@ -85,7 +85,7 @@ EvtScript N(EVS_GotoMap_tst_03_1) = {
     EVT_END
 };
 
-EvtScript N(D_802407B0_B1BD20) = {
+EvtScript N(EVS_UpdateMovingFloor) = {
     EVT_LABEL(0)
         EVT_CALL(MakeLerp, 0, 100, 50, EASING_COS_IN_OUT)
         EVT_LABEL(10)
@@ -110,7 +110,7 @@ EvtScript N(D_802407B0_B1BD20) = {
     EVT_END
 };
 
-EvtScript N(D_802408F8_B1BE68) = {
+EvtScript N(EVS_UpdateSpinningFloor) = {
     EVT_LABEL(0)
         EVT_CALL(MakeLerp, 0, 360, 360, EASING_LINEAR)
         EVT_LABEL(10)
@@ -137,7 +137,7 @@ EvtScript N(D_802408F8_B1BE68) = {
     EVT_END
 };
 
-EvtScript N(D_80240A60_B1BFD0) = {
+EvtScript N(EVS_UpdateSpinningWall) = {
     EVT_LABEL(0)
         EVT_CALL(MakeLerp, 0, 360, 360, EASING_LINEAR)
         EVT_LABEL(10)
@@ -165,9 +165,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_o1, MODEL_o1)
     EVT_CALL(ParentColliderToModel, COLLIDER_o2, MODEL_o2)
     EVT_CALL(ParentColliderToModel, COLLIDER_o18, MODEL_o18)
-    EVT_EXEC(N(D_802407B0_B1BD20))
-    EVT_EXEC(N(D_802408F8_B1BE68))
-    EVT_EXEC(N(D_80240A60_B1BFD0))
+    EVT_EXEC(N(EVS_UpdateMovingFloor))
+    EVT_EXEC(N(EVS_UpdateSpinningFloor))
+    EVT_EXEC(N(EVS_UpdateSpinningWall))
     EVT_EXEC(N(EVS_SetupReflection))
     EVT_RETURN
     EVT_END

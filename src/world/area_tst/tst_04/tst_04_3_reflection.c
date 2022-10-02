@@ -2,11 +2,11 @@
 #include "sprite.h"
 #include "model.h"
 
-static s32 N(B_80240FD0);
-
 void N(worker_render_player_reflection)(void);
 void N(appendGfx_test_player_reflection)(void* data);
-void N(func_80240574_B1BAE4)(void);
+void N(worker_update_partner_reflection)(void);
+
+static s32 N(Animator);
 
 API_CALLABLE(N(EnablePlayerReflection)) {
     script->array[0] = (s32) create_generic_entity_frontUI(NULL, &N(worker_render_player_reflection));
@@ -60,10 +60,10 @@ void N(appendGfx_test_player_reflection)(void* data) {
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 
-API_CALLABLE(N(func_80240510_B1BA80)) {
+API_CALLABLE(N(EnablePartnerReflection)) {
     Npc* partner;
 
-    script->array[1] = create_generic_entity_world(&N(func_80240574_B1BAE4), NULL);
+    script->array[1] = create_generic_entity_world(&N(worker_update_partner_reflection), NULL);
     partner = get_npc_safe(NPC_PARTNER);
 
     if (partner == NULL) {
@@ -75,7 +75,7 @@ API_CALLABLE(N(func_80240510_B1BA80)) {
     return ApiStatus_DONE2;
 }
 
-void N(func_80240574_B1BAE4)(void) {
+void N(worker_update_partner_reflection)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
@@ -84,11 +84,11 @@ void N(func_80240574_B1BAE4)(void) {
     }
 }
 
-void N(func_802405B0_B1BB20)(void) {
-    update_model_animator(N(B_80240FD0));
+void N(worker_update_animator)(void) {
+    update_model_animator(N(Animator));
 }
 
-void N(func_802405D4_B1BB44)(void) {
+void N(worker_render_animator)(void) {
     Matrix4f m0;
     Matrix4f m1;
     Matrix4f m2;
@@ -97,19 +97,19 @@ void N(func_802405D4_B1BB44)(void) {
 
     guTranslateF(m1, -484.0f, 25.0f, -40.0f);
     guMtxF2L(m1, &m4);
-    render_animated_model(N(B_80240FD0), &m4);
+    render_animated_model(N(Animator), &m4);
 }
 
-API_CALLABLE(N(func_80240628_B1BB98)) {
-    create_generic_entity_world(N(func_802405B0_B1BB20), N(func_802405D4_B1BB44));
+API_CALLABLE(N(SetupAnimatedModel)) {
+    create_generic_entity_world(N(worker_update_animator), N(worker_render_animator));
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_SetupReflection) = {
-    EVT_CALL(N(func_80240628_B1BB98))
+    EVT_CALL(N(SetupAnimatedModel))
     EVT_MALLOC_ARRAY(16, LVarA)
     EVT_CALL(N(EnablePlayerReflection))
-    EVT_CALL(N(func_80240510_B1BA80))
+    EVT_CALL(N(EnablePartnerReflection))
     EVT_RETURN
     EVT_END
 };
