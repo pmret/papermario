@@ -10,8 +10,8 @@ void smoke_burst_init(void) {
 
 void smoke_burst_update(EffectInstance *effect) {
     SmokeBurstFXData* data = effect->data.smokeBurst;
-    data->unk_20 = (f32) (((f32) data->unk_18 * 8.0f) / (f32) data->unk_1C);
 
+    data->unk_20 = (data->unk_18 * 8.0f) / data->unk_1C;
     data->unk_18++;
     data->unk_14--;
     

@@ -32,14 +32,12 @@ typedef struct Unk80240BD4 {
 
 ApiStatus func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s0_5;
     s32 temp_s3 = dead_evt_get_variable(script, *args++);
     s32 temp_s2 = dead_evt_get_variable(script, *args++);
     s32 temp_s4 = dead_evt_get_variable(script, *args++);
     s32 temp_s1 = dead_evt_get_variable(script, *args++);
     s32 temp_s0 = dead_evt_get_variable(script, *args++);
     Unk80240BD4* temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 480) + (temp_s2 * 12);
-    s32 temp;
     
     temp_a0->unk_0 = temp_s4;
     temp_a0->unk_4 = temp_s1;

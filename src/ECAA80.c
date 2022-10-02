@@ -29,10 +29,10 @@ ApiStatus ECAA80_ItemChoice_WaitForSelection(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     if (isInitialCall) {
-        ECAA80_ItemChoice_HasSelectedItem = 0;
+        ECAA80_ItemChoice_HasSelectedItem = FALSE;
     }
-    if (ECAA80_ItemChoice_HasSelectedItem != 0) {
-        ECAA80_ItemChoice_HasSelectedItem = 0;
+    if (ECAA80_ItemChoice_HasSelectedItem) {
+        ECAA80_ItemChoice_HasSelectedItem = FALSE;
         dead_evt_set_variable(script, *args++, ECAA80_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
@@ -48,7 +48,7 @@ ApiStatus ECAA80_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     ECAA80_ItemChoice_SelectedItemID = dead_evt_get_variable(script, *args++);
-    ECAA80_ItemChoice_HasSelectedItem = 1;
+    ECAA80_ItemChoice_HasSelectedItem = TRUE;
     return ApiStatus_DONE2;
 }
 
