@@ -2,6 +2,12 @@
 
 void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 
+//TODO remove these when splat can deal with vtx arrays better
+// also remove them from undefined_syms
+extern Vtx D_802423D0[];
+extern Vtx D_80242310[];
+extern Vtx flo_23_ConsumableChoiceList[];
+
 extern EvtScript N(EVS_Main);
 extern EvtScript N(D_80240510_B1DC70);
 extern EvtScript N(D_80240894_B1DFF4);
@@ -472,10 +478,6 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(D_80240F38_B1E698)),
     {}
 };
-
-extern Vtx D_802423D0[];
-extern Vtx D_80242310[];
-extern Vtx flo_23_ConsumableChoiceList[];
 
 #include "world/area_tst/tst_13/shockwave.vtx.inc.c"
 #include "world/area_tst/tst_13/shockwave.gfx.inc.c"

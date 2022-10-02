@@ -9167,44 +9167,38 @@ segments:
     start: 0xB1A900
     vram: 0x80240000
     subsegments:
-    - [0xB1A900, c]
-    - [0xB1A900, data]
-    - [0xB1AB20, data]
-    - [0xB1AC20]
+    - [0xB1A900, c, tst_01_1_main]
+    - [0xB1A900, c, tst_01_2_entity]
+    - [0xB1A900]
   - name: tst_02
     dir: world/area_tst/tst_02
     type: code
     start: 0xB1AC30
     vram: 0x80240000
     subsegments:
-    - [0xB1AC30, c]
-    - [0xB1AC30, data]
-    - [0xB1AE50, data]
-    - [0xB1AF70]
+    - [0xB1AC30, c, tst_02_1_main]
+    - [0xB1AC30, c, tst_02_2_entity]
+    - [0xB1AC30]
   - name: tst_03
     dir: world/area_tst/tst_03
     type: code
     start: 0xB1AF80
     vram: 0x80240000
     subsegments:
-    - [0xB1AF80, c]
-    - [0xB1AF80, data]
-    - [0xB1B240, data]
-    - [0xB1B560]
+    - [0xB1AF80, c, tst_03_1_main]
+    - [0xB1AF80, c, tst_03_2_entity]
+    - [0xB1AF80]
   - name: tst_04
     dir: world/area_tst/tst_04
     type: code
     start: 0xB1B570
     vram: 0x80240000
     subsegments:
-    - [0xB1B570, c]
-    - [0xB1BBD0, c]
-    - [0xB1BC00, data]
-    - [0xB1C1E0, data]
-    - [0xB1C220, data]
-    - [0xB1C270, data]
-    - [0xB1C510, data]
-    - [0xB1C530]
+    - [0xB1B570, c, tst_04_1_main]
+    - [0xB1B7D0, c, tst_04_2_entity]
+    - [0xB1B8D0, c, tst_04_3_reflection]
+    - [0xB1BBD0, c, tst_04_4_npc]
+    - [0xB1BC00]
   - name: tst_10
     dir: world/area_tst/tst_10
     type: code

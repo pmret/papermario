@@ -1,6 +1,0 @@
-.include "macro.inc"
-
-.section .data
-
-dlabel D_80240FA0_B1C510
-.word 0x00000001, 0x80240DB0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000

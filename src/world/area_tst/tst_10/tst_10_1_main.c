@@ -62,7 +62,7 @@ EvtScript N(EVS_ExitWalk_tst_10_1) = {
     EVT_END
 };
 
-EvtScript N(D_80240200_B1C740) = {
+EvtScript N(EVS_DisableExitCameraZones) = {
     EVT_CALL(SetZoneEnabled, ZONE_north, FALSE)
     EVT_CALL(SetZoneEnabled, ZONE_west,  FALSE)
     EVT_CALL(SetZoneEnabled, ZONE_south, FALSE)
@@ -94,7 +94,7 @@ EvtScript N(EVS_Main) = {
         EVT_SET(AF_TST_00, FALSE)
     EVT_ELSE
         EVT_SET(AF_TST_00, TRUE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_80240200_B1C740)), TRIGGER_FLOOR_TOUCH, COLLIDER_change, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DisableExitCameraZones)), TRIGGER_FLOOR_TOUCH, COLLIDER_change, 1, 0)
     EVT_END_IF
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
