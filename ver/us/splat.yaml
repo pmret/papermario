@@ -9211,9 +9211,8 @@ segments:
     start: 0xB1C540
     vram: 0x80240000
     subsegments:
-    - [0xB1C540, c]
-    - [0xB1C540, data]
-    - [0xB1CA40]
+    - [0xB1C540, c, tst_10_1_main]
+    - [0xB1C540]
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code

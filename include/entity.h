@@ -64,6 +64,9 @@ enum {
 
 #define BLOCK_GRID_SIZE 25
 
+#define TWEETSER_PATH_STOP 0x80000000
+#define TWEETSER_PATH_LOOP 0x80000001
+
 typedef struct SaveBlockData {
     /* 0x000 */ char unk_0[4];
     /* 0x004 */ s16 angle;

@@ -20,6 +20,8 @@ enum {
     AB_TST_F       = AreaByte(15),
 };
 
-#define AF_TST(index) AreaFlag(index)
+enum {
+    AF_TST_00           = AreaFlag(0),
+};
 
 #endif
