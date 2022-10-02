@@ -8,28 +8,17 @@ INCLUDE_ASM(s32, "effects/huff_puff_breath", huff_puff_breath_main);
 void huff_puff_breath_init(void) {
 }
 
-typedef struct unk {
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_24;
-    f32 unk_38;
-    f32 unk_3C;
-    f32 unk_40;
-    f32 unk_44;
-} unk;
-// INCLUDE_ASM(s32, "effects/huff_puff_breath", huff_puff_breath_update);
 void huff_puff_breath_update(EffectInstance* effect) {
+    HuffPuffBreathFXData* data = effect->data.huffPuffBreath;
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f0_3;
     f32 temp_f0_4;
-    unk *data = effect->data.huffPuffBreath;
-    s32 temp_a1;
+    s32 temp_a1 = effect->flags;
     s32 temp_a1_2;
     s32 temp_a1_3;
     s32 temp_a2;
 
-    temp_a1 = effect->flags;
     if (temp_a1 & 16) {
         effect->flags = temp_a1 & ~16;
         data->unk_10 = 16;
