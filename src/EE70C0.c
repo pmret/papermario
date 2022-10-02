@@ -18,14 +18,14 @@ extern s32 D_80244630_EEABE0;
 
 // Needs data migrated
 #ifdef NON_MATCHING
-ApiStatus func_80242260_EE8810(Evt *script, s32 isInitialCall) {
+ApiStatus EE70C0_ItemChoice_WaitForSelection(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_8024462C_EEABDC = 0;
+        D_8024462C_EEABDC = FALSE;
     }
-    if (D_8024462C_EEABDC != 0) {
-        D_8024462C_EEABDC = 0;
+    if (D_8024462C_EEABDC) {
+        D_8024462C_EEABDC = FALSE;
         dead_evt_set_variable(script, *args++, D_80244630_EEABE0);
         return ApiStatus_DONE2;
     }
@@ -37,9 +37,9 @@ INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 
 ApiStatus EE70C0_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80244630_EEABE0 = dead_evt_get_variable(script, *args++);
-    D_8024462C_EEABDC = 1;
+    D_8024462C_EEABDC = TRUE;
     return ApiStatus_DONE2;
 }
 

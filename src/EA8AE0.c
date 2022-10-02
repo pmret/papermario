@@ -25,9 +25,9 @@ static char* N(exit_str_2) = "kzn_20";
 INCLUDE_ASM(s32, "EA8AE0", func_80240B00_EA95E0);
 
 typedef struct Unk80240BD4 {
-    f32 unk_0;
-    f32 unk_4;
-    f32 unk_8;
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
 } Unk80240BD4;
 
 ApiStatus func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
@@ -39,9 +39,9 @@ ApiStatus func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
     s32 temp_s0 = dead_evt_get_variable(script, *args++);
     Unk80240BD4* temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 480) + (temp_s2 * 12);
     
-    temp_a0->unk_0 = temp_s4;
-    temp_a0->unk_4 = temp_s1;
-    temp_a0->unk_8 = temp_s0;
+    temp_a0->unk_00 = temp_s4;
+    temp_a0->unk_04 = temp_s1;
+    temp_a0->unk_08 = temp_s0;
 
     return ApiStatus_DONE2;
 }
