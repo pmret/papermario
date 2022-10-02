@@ -27,6 +27,7 @@ void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 #ifdef NON_MATCHING
 ApiStatus ECAA80_ItemChoice_WaitForSelection(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    
     if (isInitialCall) {
         ECAA80_ItemChoice_HasSelectedItem = 0;
     }
