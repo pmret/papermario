@@ -129,9 +129,10 @@ class N64SegGfx(CommonSegCodeSubsegment):
 
     def vtx_handler(self, addr, count):
         sym = self.create_symbol(
-            addr=addr, in_segment=True, type="data", reference=True
+            addr=addr, in_segment=True, type="data", reference=True, offsets=True
         )
-        gfxd_printf(sym.name)
+        index = int((addr - sym.vram_start) / 0x10)
+        gfxd_printf(f"&{sym.name}[{index}]")
         return 1
 
     def vp_handler(self, addr):

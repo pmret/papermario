@@ -9229,23 +9229,29 @@ segments:
     start: 0xB1D2F0
     vram: 0x80240000
     subsegments:
-    - [0xB1D2F0, data]
+    - [0xB1D2F0, c, tst_12_1_main]
   - name: tst_13
     dir: world/area_tst/tst_13
     type: code
     start: 0xB1D760
     vram: 0x80240000
     subsegments:
-    - [0xB1D760, c]
-    - [0xB1DB20, data]
-    - [0xB20460]
+    - [0xB1D760, c, tst_13_1_main]
+    - start: 0xB1DB20
+      type: .data
+      name: tst_13_1_main
+      subsegments:
+      - [0xB1DB20]
+      - [0xB1FA10, vtx, shockwave]
+      - [0xB1FFC0, gfx, shockwave]
+      - [0xB20350]
   - name: tst_20
     dir: world/area_tst/tst_20
     type: code
     start: 0xB20470
     vram: 0x80240000
     subsegments:
-    - [0xB20470, data]
+    - [0xB20470, c, tst_20_1_main]
   - name: jan_00
     dir: world/area_jan/jan_00
     type: code
