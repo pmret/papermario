@@ -38,7 +38,7 @@ extern PAL_BIN N(panel_peach_pal);
 
 API_CALLABLE(N(SetMsgImgs_Panel));
 
-extern EvtScript N(D_80242A3C_E187BC); // EVT_ReadSign
+extern EvtScript N(read_sign_instructions); // EVT_ReadSign
 
 typedef enum SmashGameBoxCotent {
     BOX_CONTENT_FUZZY       = 0,
@@ -110,7 +110,7 @@ typedef struct SmashGameData {
     /* 0x02C */ SmashGameBoxData box[NUM_BOXES];
 } SmashGameData; /* size = 0x400 */
 
-void N(draw_score_display)(void* renderData) {
+void N(appendGfx_score_display)(void* renderData) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     SmashGameData* data = scorekeeper->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 hudElemA;
@@ -181,12 +181,12 @@ void N(draw_score_display)(void* renderData) {
     draw_msg(MSG_MGM_0024, data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
 }
 
-void N(work_draw_score)(void) {
+void N(worker_draw_score)(void) {
     RenderTask task;
 
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
-    task.appendGfx = &N(draw_score_display);
+    task.appendGfx = &N(appendGfx_score_display);
     task.distance = 0;
 
     queue_render_task(&task);
@@ -197,7 +197,7 @@ API_CALLABLE(N(CreateScoreDisplay)) {
     s32 hudElemA, hudElemMeter;
 
     if (isInitialCall) {
-        data->workerID = create_generic_entity_world(NULL, &N(work_draw_score));
+        data->workerID = create_generic_entity_world(NULL, &N(worker_draw_score));
 
         hudElemA = hud_element_create(&HES_AButton);
         data->hudElemID_AButton = hudElemA;
@@ -237,7 +237,7 @@ API_CALLABLE(N(CreateSignpost)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 entityIndex = create_entity(&Entity_Signpost, 355, 20, -180, 0, 0, 0, 0, MAKE_ENTITY_END);
     data->signpostEntity = entityIndex;
-    get_entity_by_index(entityIndex)->boundScriptBytecode = &N(D_80242A3C_E187BC);
+    get_entity_by_index(entityIndex)->boundScriptBytecode = &N(read_sign_instructions);
 
     return ApiStatus_DONE2;
 }
@@ -429,7 +429,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_FUZZY_INIT:
                     data->box[i].state = BOX_STATE_FUZZY_IDLE;
                     data->box[i].stateTimer = rand_int(210);
-                    npc->pos.y = -1000.0f;
+                    npc->pos.y = NPC_DISPOSE_POS_Y;
                     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
                     disable_npc_shadow(npc);
                     // fallthrough
@@ -461,7 +461,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
                         data->box[i].state = BOX_STATE_FUZZY_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
-                        npc->pos.y = -1000.0f;
+                        npc->pos.y = NPC_DISPOSE_POS_Y;
                         if (rand_int(100) < 50) {
                             npc->yaw = 270.0f;
                         } else {
@@ -557,7 +557,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_BOMB_INIT:
                     data->box[i].state = BOX_STATE_BOMB_IDLE;
                     data->box[i].stateTimer = rand_int(210);
-                    npc->pos.y = -1000.0f;
+                    npc->pos.y = NPC_DISPOSE_POS_Y;
                     disable_npc_shadow(npc);
                     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
                     // fallthrough
@@ -588,7 +588,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
                         data->box[i].state = BOX_STATE_BOMB_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
-                        npc->pos.y = -1000.0f;
+                        npc->pos.y = NPC_DISPOSE_POS_Y;
                         if (rand_int(100) < 50) {
                             npc->yaw = 270.0f;
                         } else {
@@ -621,7 +621,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
                         npc->duration = 30;
-                        npc->pos.y = -1000.0f;
+                        npc->pos.y = NPC_DISPOSE_POS_Y;
                         data->box[i].state = BOX_STATE_BOMB_STUN;
                         sfx_play_sound(SOUND_BOMB_BLAST);
                     }
@@ -632,7 +632,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
                         npc->duration = 30;
-                        npc->pos.y = -1000.0f;
+                        npc->pos.y = NPC_DISPOSE_POS_Y;
                         data->box[i].state = BOX_STATE_BOMB_STUN;
                         sfx_play_sound(SOUND_BOMB_BLAST);
                     }
@@ -999,7 +999,7 @@ API_CALLABLE(N(HideCoinCounter)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80242650_E183D0) = {
+EvtScript N(EVS_Dummy) = {
     EVT_RETURN
     EVT_END
 };
@@ -1010,19 +1010,19 @@ NpcSettings N(NpcSettings_Toad) = {
     .level = 99,
 };
 
-NpcSettings N(missing_8024268C_268C) = {
+NpcSettings N(NpcSettings_Unused) = {
     .height = 23,
     .radius = 19,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Luigi_01) = {
+NpcSettings N(NpcSettings_Luigi) = {
     .height = 24,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Fuzzy_01) = {
+NpcSettings N(NpcSettings_Fuzzy) = {
     .height = 20,
     .radius = 22,
     .level = 6,
@@ -1030,7 +1030,7 @@ NpcSettings N(NpcSettings_Fuzzy_01) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Bombomb_01) = {
+NpcSettings N(NpcSettings_Bombomb) = {
     .height = 23,
     .radius = 20,
     .level = 6,
@@ -1060,13 +1060,13 @@ s32 N(PanelModelIDs)[NUM_PANELS] = {
     52, 54, 56, 58, 60, 62, 64, 66, 68, 70
 };
 
-EvtScript N(D_80242A20_E187A0) = {
+EvtScript N(EVS_CreateScoreDisplay) = {
     EVT_CALL(N(CreateScoreDisplay))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242A3C_E187BC) = {
+EvtScript N(read_sign_instructions) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(SetMsgImgs_Panel))
     EVT_CALL(ShowMessageAtScreenPos, MSG_MGM_0046, 160, 40)
@@ -1075,7 +1075,7 @@ EvtScript N(D_80242A3C_E187BC) = {
     EVT_END
 };
 
-EvtScript N(D_80242A90_E18810) = {
+EvtScript N(EVS_ShowBox) = {
     EVT_CALL(EnableModel, LVar0, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, LVar1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(TranslateModel, LVar0, 0, 0, 0)
@@ -1083,8 +1083,8 @@ EvtScript N(D_80242A90_E18810) = {
     EVT_END
 };
 
-EvtScript N(D_80242AE8_E18868) = {
-    EVT_EXEC(N(D_80242A90_E18810))
+EvtScript N(EVS_MakeBoxAppear) = {
+    EVT_EXEC(N(EVS_ShowBox))
     EVT_SET(LVarA, -25)
     EVT_LOOP(13)
         EVT_ADD(LVarA, 2)
@@ -1096,16 +1096,16 @@ EvtScript N(D_80242AE8_E18868) = {
     EVT_END
 };
 
-EvtScript N(D_80242B7C_E188FC) = {
+EvtScript N(EVS_HideBox) = {
     EVT_CALL(TranslateModel, LVar0, 0, 0, 0)
     EVT_CALL(EnableModel, LVar0, FALSE)
-    EVT_CALL(ModifyColliderFlags, 0, LVar1, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242BD4_E18954) = {
-    EVT_EXEC(N(D_80242B7C_E188FC))
+EvtScript N(EVS_HideBoxWithSmoke) = {
+    EVT_EXEC(N(EVS_HideBox))
     EVT_WAIT(1)
     EVT_CALL(GetColliderCenter, LVar1)
     EVT_SUB(LVar1, 5)
@@ -1114,337 +1114,337 @@ EvtScript N(D_80242BD4_E18954) = {
     EVT_END
 };
 
-EvtScript N(D_80242C60_E189E0) = {
-    EVT_SET(LVar0, 9)
-    EVT_SET(LVar1, 9)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 10)
-    EVT_SET(LVar1, 10)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 11)
-    EVT_SET(LVar1, 11)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 12)
-    EVT_SET(LVar1, 12)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 13)
-    EVT_SET(LVar1, 13)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 15)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 16)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 17)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 18)
-    EVT_SET(LVar1, 18)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 19)
-    EVT_SET(LVar1, 19)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 21)
-    EVT_SET(LVar1, 21)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 22)
-    EVT_SET(LVar1, 22)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 23)
-    EVT_SET(LVar1, 23)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 24)
-    EVT_SET(LVar1, 24)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 25)
-    EVT_SET(LVar1, 25)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 27)
-    EVT_SET(LVar1, 27)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 28)
-    EVT_SET(LVar1, 28)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 29)
-    EVT_SET(LVar1, 29)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 30)
-    EVT_SET(LVar1, 30)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 31)
-    EVT_SET(LVar1, 31)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 33)
-    EVT_SET(LVar1, 33)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 34)
-    EVT_SET(LVar1, 34)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 35)
-    EVT_SET(LVar1, 35)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 36)
-    EVT_SET(LVar1, 36)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 37)
-    EVT_SET(LVar1, 37)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 39)
-    EVT_SET(LVar1, 39)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 40)
-    EVT_SET(LVar1, 40)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 41)
-    EVT_SET(LVar1, 41)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 42)
-    EVT_SET(LVar1, 42)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 43)
-    EVT_SET(LVar1, 43)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 45)
-    EVT_SET(LVar1, 45)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 46)
-    EVT_SET(LVar1, 46)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 47)
-    EVT_SET(LVar1, 47)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 48)
-    EVT_SET(LVar1, 48)
-    EVT_EXEC(N(D_80242B7C_E188FC))
-    EVT_SET(LVar0, 49)
-    EVT_SET(LVar1, 49)
-    EVT_EXEC(N(D_80242B7C_E188FC))
+EvtScript N(EVS_HideAllBoxes) = {
+    EVT_SET(LVar0, MODEL_a1)
+    EVT_SET(LVar1, MODEL_a1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_a2)
+    EVT_SET(LVar1, MODEL_a2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_a3)
+    EVT_SET(LVar1, MODEL_a3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_a4)
+    EVT_SET(LVar1, MODEL_a4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_a5)
+    EVT_SET(LVar1, MODEL_a5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_b1)
+    EVT_SET(LVar1, MODEL_b1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_b2)
+    EVT_SET(LVar1, MODEL_b2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_b3)
+    EVT_SET(LVar1, MODEL_b3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_b4)
+    EVT_SET(LVar1, MODEL_b4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_b5)
+    EVT_SET(LVar1, MODEL_b5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_c1)
+    EVT_SET(LVar1, MODEL_c1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_c2)
+    EVT_SET(LVar1, MODEL_c2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_c3)
+    EVT_SET(LVar1, MODEL_c3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_c4)
+    EVT_SET(LVar1, MODEL_c4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_c5)
+    EVT_SET(LVar1, MODEL_c5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_d1)
+    EVT_SET(LVar1, MODEL_d1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_d2)
+    EVT_SET(LVar1, MODEL_d2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_d3)
+    EVT_SET(LVar1, MODEL_d3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_d4)
+    EVT_SET(LVar1, MODEL_d4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_d5)
+    EVT_SET(LVar1, MODEL_d5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_e1)
+    EVT_SET(LVar1, MODEL_e1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_e2)
+    EVT_SET(LVar1, MODEL_e2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_e3)
+    EVT_SET(LVar1, MODEL_e3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_e4)
+    EVT_SET(LVar1, MODEL_e4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_e5)
+    EVT_SET(LVar1, MODEL_e5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_f1)
+    EVT_SET(LVar1, MODEL_f1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_f2)
+    EVT_SET(LVar1, MODEL_f2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_f3)
+    EVT_SET(LVar1, MODEL_f3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_f4)
+    EVT_SET(LVar1, MODEL_f4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_f5)
+    EVT_SET(LVar1, MODEL_f5)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_g1)
+    EVT_SET(LVar1, MODEL_g1)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_g2)
+    EVT_SET(LVar1, MODEL_g2)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_g3)
+    EVT_SET(LVar1, MODEL_g3)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_g4)
+    EVT_SET(LVar1, MODEL_g4)
+    EVT_EXEC(N(EVS_HideBox))
+    EVT_SET(LVar0, MODEL_g5)
+    EVT_SET(LVar1, MODEL_g5)
+    EVT_EXEC(N(EVS_HideBox))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243274_E18FF4) = {
-    EVT_SET(LVar0, 9)
-    EVT_SET(LVar1, 9)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 10)
-    EVT_SET(LVar1, 10)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 11)
-    EVT_SET(LVar1, 11)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 12)
-    EVT_SET(LVar1, 12)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 13)
-    EVT_SET(LVar1, 13)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 15)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 16)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 17)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 18)
-    EVT_SET(LVar1, 18)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 19)
-    EVT_SET(LVar1, 19)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 21)
-    EVT_SET(LVar1, 21)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 22)
-    EVT_SET(LVar1, 22)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 23)
-    EVT_SET(LVar1, 23)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 24)
-    EVT_SET(LVar1, 24)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 25)
-    EVT_SET(LVar1, 25)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 27)
-    EVT_SET(LVar1, 27)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 28)
-    EVT_SET(LVar1, 28)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 29)
-    EVT_SET(LVar1, 29)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 30)
-    EVT_SET(LVar1, 30)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 31)
-    EVT_SET(LVar1, 31)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 33)
-    EVT_SET(LVar1, 33)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 34)
-    EVT_SET(LVar1, 34)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 35)
-    EVT_SET(LVar1, 35)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 36)
-    EVT_SET(LVar1, 36)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 37)
-    EVT_SET(LVar1, 37)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 39)
-    EVT_SET(LVar1, 39)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 40)
-    EVT_SET(LVar1, 40)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 41)
-    EVT_SET(LVar1, 41)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 42)
-    EVT_SET(LVar1, 42)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 43)
-    EVT_SET(LVar1, 43)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 45)
-    EVT_SET(LVar1, 45)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 46)
-    EVT_SET(LVar1, 46)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 47)
-    EVT_SET(LVar1, 47)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 48)
-    EVT_SET(LVar1, 48)
-    EVT_EXEC(N(D_80242BD4_E18954))
-    EVT_SET(LVar0, 49)
-    EVT_SET(LVar1, 49)
-    EVT_EXEC(N(D_80242BD4_E18954))
+EvtScript N(EVS_HideAllBoxesWithSmoke) = {
+    EVT_SET(LVar0, MODEL_a1)
+    EVT_SET(LVar1, MODEL_a1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_a2)
+    EVT_SET(LVar1, MODEL_a2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_a3)
+    EVT_SET(LVar1, MODEL_a3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_a4)
+    EVT_SET(LVar1, MODEL_a4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_a5)
+    EVT_SET(LVar1, MODEL_a5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_b1)
+    EVT_SET(LVar1, MODEL_b1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_b2)
+    EVT_SET(LVar1, MODEL_b2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_b3)
+    EVT_SET(LVar1, MODEL_b3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_b4)
+    EVT_SET(LVar1, MODEL_b4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_b5)
+    EVT_SET(LVar1, MODEL_b5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_c1)
+    EVT_SET(LVar1, MODEL_c1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_c2)
+    EVT_SET(LVar1, MODEL_c2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_c3)
+    EVT_SET(LVar1, MODEL_c3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_c4)
+    EVT_SET(LVar1, MODEL_c4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_c5)
+    EVT_SET(LVar1, MODEL_c5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_d1)
+    EVT_SET(LVar1, MODEL_d1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_d2)
+    EVT_SET(LVar1, MODEL_d2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_d3)
+    EVT_SET(LVar1, MODEL_d3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_d4)
+    EVT_SET(LVar1, MODEL_d4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_d5)
+    EVT_SET(LVar1, MODEL_d5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_e1)
+    EVT_SET(LVar1, MODEL_e1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_e2)
+    EVT_SET(LVar1, MODEL_e2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_e3)
+    EVT_SET(LVar1, MODEL_e3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_e4)
+    EVT_SET(LVar1, MODEL_e4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_e5)
+    EVT_SET(LVar1, MODEL_e5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_f1)
+    EVT_SET(LVar1, MODEL_f1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_f2)
+    EVT_SET(LVar1, MODEL_f2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_f3)
+    EVT_SET(LVar1, MODEL_f3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_f4)
+    EVT_SET(LVar1, MODEL_f4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_f5)
+    EVT_SET(LVar1, MODEL_f5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_g1)
+    EVT_SET(LVar1, MODEL_g1)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_g2)
+    EVT_SET(LVar1, MODEL_g2)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_g3)
+    EVT_SET(LVar1, MODEL_g3)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_g4)
+    EVT_SET(LVar1, MODEL_g4)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
+    EVT_SET(LVar0, MODEL_g5)
+    EVT_SET(LVar1, MODEL_g5)
+    EVT_EXEC(N(EVS_HideBoxWithSmoke))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243888_E19608) = {
-    EVT_SET(LVar0, 9)
-    EVT_SET(LVar1, 9)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 10)
-    EVT_SET(LVar1, 10)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 11)
-    EVT_SET(LVar1, 11)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 12)
-    EVT_SET(LVar1, 12)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 13)
-    EVT_SET(LVar1, 13)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 15)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 16)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 17)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 18)
-    EVT_SET(LVar1, 18)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 19)
-    EVT_SET(LVar1, 19)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 21)
-    EVT_SET(LVar1, 21)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 22)
-    EVT_SET(LVar1, 22)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 23)
-    EVT_SET(LVar1, 23)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 24)
-    EVT_SET(LVar1, 24)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 25)
-    EVT_SET(LVar1, 25)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 27)
-    EVT_SET(LVar1, 27)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 28)
-    EVT_SET(LVar1, 28)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 29)
-    EVT_SET(LVar1, 29)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 30)
-    EVT_SET(LVar1, 30)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 31)
-    EVT_SET(LVar1, 31)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 33)
-    EVT_SET(LVar1, 33)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 34)
-    EVT_SET(LVar1, 34)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 35)
-    EVT_SET(LVar1, 35)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 36)
-    EVT_SET(LVar1, 36)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 37)
-    EVT_SET(LVar1, 37)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 39)
-    EVT_SET(LVar1, 39)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 40)
-    EVT_SET(LVar1, 40)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 41)
-    EVT_SET(LVar1, 41)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 42)
-    EVT_SET(LVar1, 42)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 43)
-    EVT_SET(LVar1, 43)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 45)
-    EVT_SET(LVar1, 45)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 46)
-    EVT_SET(LVar1, 46)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 47)
-    EVT_SET(LVar1, 47)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 48)
-    EVT_SET(LVar1, 48)
-    EVT_EXEC(N(D_80242AE8_E18868))
-    EVT_SET(LVar0, 49)
-    EVT_SET(LVar1, 49)
-    EVT_EXEC(N(D_80242AE8_E18868))
+EvtScript N(EVS_MakeAllBoxesAppear) = {
+    EVT_SET(LVar0, MODEL_a1)
+    EVT_SET(LVar1, MODEL_a1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_a2)
+    EVT_SET(LVar1, MODEL_a2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_a3)
+    EVT_SET(LVar1, MODEL_a3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_a4)
+    EVT_SET(LVar1, MODEL_a4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_a5)
+    EVT_SET(LVar1, MODEL_a5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_b1)
+    EVT_SET(LVar1, MODEL_b1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_b2)
+    EVT_SET(LVar1, MODEL_b2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_b3)
+    EVT_SET(LVar1, MODEL_b3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_b4)
+    EVT_SET(LVar1, MODEL_b4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_b5)
+    EVT_SET(LVar1, MODEL_b5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_c1)
+    EVT_SET(LVar1, MODEL_c1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_c2)
+    EVT_SET(LVar1, MODEL_c2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_c3)
+    EVT_SET(LVar1, MODEL_c3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_c4)
+    EVT_SET(LVar1, MODEL_c4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_c5)
+    EVT_SET(LVar1, MODEL_c5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_d1)
+    EVT_SET(LVar1, MODEL_d1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_d2)
+    EVT_SET(LVar1, MODEL_d2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_d3)
+    EVT_SET(LVar1, MODEL_d3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_d4)
+    EVT_SET(LVar1, MODEL_d4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_d5)
+    EVT_SET(LVar1, MODEL_d5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_e1)
+    EVT_SET(LVar1, MODEL_e1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_e2)
+    EVT_SET(LVar1, MODEL_e2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_e3)
+    EVT_SET(LVar1, MODEL_e3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_e4)
+    EVT_SET(LVar1, MODEL_e4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_e5)
+    EVT_SET(LVar1, MODEL_e5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_f1)
+    EVT_SET(LVar1, MODEL_f1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_f2)
+    EVT_SET(LVar1, MODEL_f2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_f3)
+    EVT_SET(LVar1, MODEL_f3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_f4)
+    EVT_SET(LVar1, MODEL_f4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_f5)
+    EVT_SET(LVar1, MODEL_f5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_g1)
+    EVT_SET(LVar1, MODEL_g1)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_g2)
+    EVT_SET(LVar1, MODEL_g2)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_g3)
+    EVT_SET(LVar1, MODEL_g3)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_g4)
+    EVT_SET(LVar1, MODEL_g4)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
+    EVT_SET(LVar0, MODEL_g5)
+    EVT_SET(LVar1, MODEL_g5)
+    EVT_EXEC(N(EVS_MakeBoxAppear))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243E9C_E19C1C) = {
+EvtScript N(EVS_HidePeachPanels) = {
     EVT_CALL(EnableModel, MODEL_o50, FALSE)
     EVT_CALL(EnableModel, MODEL_o51, FALSE)
     EVT_CALL(EnableModel, MODEL_o52, FALSE)
@@ -1459,7 +1459,7 @@ EvtScript N(D_80243E9C_E19C1C) = {
     EVT_END
 };
 
-EvtScript N(D_80243F74_E19CF4) = {
+EvtScript N(EVS_OnHitBox) = {
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_CALL(N(OnHitBox))
@@ -1493,140 +1493,140 @@ EvtScript N(D_80243F74_E19CF4) = {
 };
 
 EvtScript N(D_802441E4_E19F64) = {
-    EVT_SET(LVar0, 9)
-    EVT_SET(LVar1, 9)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 10)
-    EVT_SET(LVar1, 10)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 11)
-    EVT_SET(LVar1, 11)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 12)
-    EVT_SET(LVar1, 12)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 13)
-    EVT_SET(LVar1, 13)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 15)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 16)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 17)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 18)
-    EVT_SET(LVar1, 18)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 19)
-    EVT_SET(LVar1, 19)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 21)
-    EVT_SET(LVar1, 21)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 22)
-    EVT_SET(LVar1, 22)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 23)
-    EVT_SET(LVar1, 23)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 24)
-    EVT_SET(LVar1, 24)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 25)
-    EVT_SET(LVar1, 25)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 27)
-    EVT_SET(LVar1, 27)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 28)
-    EVT_SET(LVar1, 28)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 29)
-    EVT_SET(LVar1, 29)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 30)
-    EVT_SET(LVar1, 30)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 31)
-    EVT_SET(LVar1, 31)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 33)
-    EVT_SET(LVar1, 33)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 34)
-    EVT_SET(LVar1, 34)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 35)
-    EVT_SET(LVar1, 35)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 36)
-    EVT_SET(LVar1, 36)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 37)
-    EVT_SET(LVar1, 37)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 39)
-    EVT_SET(LVar1, 39)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 40)
-    EVT_SET(LVar1, 40)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 41)
-    EVT_SET(LVar1, 41)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 42)
-    EVT_SET(LVar1, 42)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 43)
-    EVT_SET(LVar1, 43)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 45)
-    EVT_SET(LVar1, 45)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 46)
-    EVT_SET(LVar1, 46)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 47)
-    EVT_SET(LVar1, 47)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 48)
-    EVT_SET(LVar1, 48)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
-    EVT_SET(LVar0, 49)
-    EVT_SET(LVar1, 49)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243F74_E19CF4)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_a1)
+    EVT_SET(LVar1, MODEL_a1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_a2)
+    EVT_SET(LVar1, MODEL_a2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_a3)
+    EVT_SET(LVar1, MODEL_a3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_a4)
+    EVT_SET(LVar1, MODEL_a4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_a5)
+    EVT_SET(LVar1, MODEL_a5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_b1)
+    EVT_SET(LVar1, MODEL_b1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_b2)
+    EVT_SET(LVar1, MODEL_b2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_b3)
+    EVT_SET(LVar1, MODEL_b3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_b4)
+    EVT_SET(LVar1, MODEL_b4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_b5)
+    EVT_SET(LVar1, MODEL_b5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_c1)
+    EVT_SET(LVar1, MODEL_c1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_c2)
+    EVT_SET(LVar1, MODEL_c2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_c3)
+    EVT_SET(LVar1, MODEL_c3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_c4)
+    EVT_SET(LVar1, MODEL_c4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_c5)
+    EVT_SET(LVar1, MODEL_c5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_d1)
+    EVT_SET(LVar1, MODEL_d1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_d2)
+    EVT_SET(LVar1, MODEL_d2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_d3)
+    EVT_SET(LVar1, MODEL_d3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_d4)
+    EVT_SET(LVar1, MODEL_d4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_d5)
+    EVT_SET(LVar1, MODEL_d5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_e1)
+    EVT_SET(LVar1, MODEL_e1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_e2)
+    EVT_SET(LVar1, MODEL_e2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_e3)
+    EVT_SET(LVar1, MODEL_e3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_e4)
+    EVT_SET(LVar1, MODEL_e4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_e5)
+    EVT_SET(LVar1, MODEL_e5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_f1)
+    EVT_SET(LVar1, MODEL_f1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_f2)
+    EVT_SET(LVar1, MODEL_f2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_f3)
+    EVT_SET(LVar1, MODEL_f3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_f4)
+    EVT_SET(LVar1, MODEL_f4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_f5)
+    EVT_SET(LVar1, MODEL_f5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_g1)
+    EVT_SET(LVar1, MODEL_g1)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_g2)
+    EVT_SET(LVar1, MODEL_g2)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_g3)
+    EVT_SET(LVar1, MODEL_g3)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_g4)
+    EVT_SET(LVar1, MODEL_g4)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
+    EVT_SET(LVar0, MODEL_g5)
+    EVT_SET(LVar1, MODEL_g5)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnHitBox)), TRIGGER_WALL_HAMMER, LVar1, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244A28_E1A7A8) = {
+EvtScript N(EVS_SetBoxContents) = {
     EVT_CALL(N(SetBoxContents))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244A44_E1A7C4) = {
+EvtScript N(EVS_CleanupGame) = {
     EVT_CALL(N(CleanupGame))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244A60_E1A7E0) = {
+EvtScript N(EVS_Toad_GovernGame) = {
     EVT_CALL(N(DisableMenus))
     EVT_CALL(N(RunMinigame))
     EVT_CALL(N(EnableMenus))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetSelfVar, 3, 3)
     EVT_CALL(PopSong)
-    EVT_EXEC(N(D_80244A44_E1A7C4))
+    EVT_EXEC(N(EVS_CleanupGame))
     EVT_CALL(ShowMessageAtScreenPos, MSG_MGM_0041, 160, 40)
     EVT_WAIT(5)
     EVT_CALL(SetSelfVar, 3, 4)
-    EVT_EXEC(N(D_80243E9C_E19C1C))
-    EVT_EXEC(N(D_80243274_E18FF4))
+    EVT_EXEC(N(EVS_HidePeachPanels))
+    EVT_EXEC(N(EVS_HideAllBoxesWithSmoke))
     EVT_WAIT(15)
     EVT_THREAD
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 358, -20, 185)
@@ -1690,18 +1690,18 @@ EvtScript N(D_80244A60_E1A7E0) = {
     EVT_END
 };
 
-EvtScript N(EVS_80244FD4) = {
+EvtScript N(EVS_InitializeMinigame) = {
     EVT_CALL(N(CreateMinigame))
-    EVT_EXEC(N(D_80242C60_E189E0))
+    EVT_EXEC(N(EVS_HideAllBoxes))
     EVT_CALL(N(CreateSignpost))
-    EVT_EXEC(N(D_80242A20_E187A0))
+    EVT_EXEC(N(EVS_CreateScoreDisplay))
     EVT_EXEC(N(D_802441E4_E19F64))
-    EVT_EXEC(N(D_80243E9C_E19C1C))
+    EVT_EXEC(N(EVS_HidePeachPanels))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024502C_E1ADAC) = {
+EvtScript N(EVS_DestroyMinigame) = {
     EVT_CALL(N(DestroyMinigame))
     EVT_RETURN
     EVT_END
@@ -1721,7 +1721,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_003E)
         EVT_CALL(N(HideCoinCounter))
         EVT_WAIT(12)
-        EVT_EXEC(N(D_8024502C_E1ADAC))
+        EVT_EXEC(N(EVS_DestroyMinigame))
         EVT_CALL(GotoMap, EVT_PTR("mgm_00"), mgm_00_ENTRY_2)
         EVT_WAIT(100)
         EVT_RETURN
@@ -1743,7 +1743,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
             EVT_CALL(N(HideCoinCounter))
             EVT_WAIT(5)
             EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0040)
-            EVT_EXEC(N(D_8024502C_E1ADAC))
+            EVT_EXEC(N(EVS_DestroyMinigame))
             EVT_CALL(GotoMap, EVT_PTR("mgm_00"), mgm_00_ENTRY_2)
             EVT_WAIT(100)
             EVT_RETURN
@@ -1757,8 +1757,8 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(SetSelfVar, 3, 1)
     EVT_CALL(PlaySoundWithVolume, SOUND_2108, 80)
-    EVT_EXEC(N(D_80243888_E19608))
-    EVT_EXEC(N(D_80244A28_E1A7A8))
+    EVT_EXEC(N(EVS_MakeAllBoxesAppear))
+    EVT_EXEC(N(EVS_SetBoxContents))
     EVT_WAIT(25)
     EVT_THREAD
         EVT_WAIT(12)
@@ -1774,7 +1774,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetSelfVar, 3, 2)
-    EVT_EXEC(N(D_80244A60_E1A7E0))
+    EVT_EXEC(N(EVS_Toad_GovernGame))
     EVT_RETURN
     EVT_END
 };
@@ -1821,7 +1821,7 @@ StaticNpc N(NpcData_GuideToad) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-EvtScript N(EVS_NpcInit_Fuzzy_01) = {
+EvtScript N(EVS_NpcInit_Fuzzy) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Anim03)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(GetSelfNpcID, LVar0)
@@ -1850,7 +1850,7 @@ EvtScript N(EVS_NpcInit_Fuzzy_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_01) = {
+EvtScript N(EVS_NpcInit_Bombomb) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bobomb_Anim0B)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
@@ -1877,7 +1877,7 @@ EvtScript N(EVS_NpcInit_Bombomb_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Luigi_01) = {
+EvtScript N(EVS_NpcInit_Luigi) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Jump)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
@@ -1893,13 +1893,13 @@ EvtScript N(EVS_NpcInit_Luigi_01) = {
     EVT_END
 };
 
-StaticNpc N(D_80245B38_E1B8B8) = {
+StaticNpc N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_Fuzzy_01),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -1926,13 +1926,13 @@ StaticNpc N(D_80245B38_E1B8B8) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80245D28_E1BAA8) = {
+StaticNpc N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_Fuzzy_01),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -1959,13 +1959,13 @@ StaticNpc N(D_80245D28_E1BAA8) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80245F18_E1BC98) = {
+StaticNpc N(NpcData_Fuzzy_03) = {
     .id = NPC_Fuzzy_03,
-    .settings = &N(NpcSettings_Fuzzy_01),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -1992,13 +1992,13 @@ StaticNpc N(D_80245F18_E1BC98) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80246108_E1BE88) = {
+StaticNpc N(NpcData_Fuzzy_04) = {
     .id = NPC_Fuzzy_04,
-    .settings = &N(NpcSettings_Fuzzy_01),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2025,13 +2025,13 @@ StaticNpc N(D_80246108_E1BE88) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_802462F8_E1C078) = {
+StaticNpc N(NpcData_Fuzzy_05) = {
     .id = NPC_Fuzzy_05,
-    .settings = &N(NpcSettings_Fuzzy_01),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2058,13 +2058,13 @@ StaticNpc N(D_802462F8_E1C078) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_802464E8_E1C268) = {
+StaticNpc N(NpcData_Bombomb_01) = {
     .id = NPC_Bombomb_01,
-    .settings = &N(NpcSettings_Bombomb_01),
+    .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb_01),
+    .init = &N(EVS_NpcInit_Bombomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2091,13 +2091,13 @@ StaticNpc N(D_802464E8_E1C268) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_802466D8_E1C458) = {
+StaticNpc N(NpcData_Bombomb_02) = {
     .id = NPC_Bombomb_02,
-    .settings = &N(NpcSettings_Bombomb_01),
+    .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb_01),
+    .init = &N(EVS_NpcInit_Bombomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2124,13 +2124,13 @@ StaticNpc N(D_802466D8_E1C458) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_802468C8_E1C648) = {
+StaticNpc N(NpcData_Bombomb_03) = {
     .id = NPC_Bombomb_03,
-    .settings = &N(NpcSettings_Bombomb_01),
+    .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb_01),
+    .init = &N(EVS_NpcInit_Bombomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2157,13 +2157,13 @@ StaticNpc N(D_802468C8_E1C648) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80246AB8_E1C838) = {
+StaticNpc N(NpcData_Bombomb_04) = {
     .id = NPC_Bombomb_04,
-    .settings = &N(NpcSettings_Bombomb_01),
+    .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb_01),
+    .init = &N(EVS_NpcInit_Bombomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2190,13 +2190,13 @@ StaticNpc N(D_80246AB8_E1C838) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80246CA8_E1CA28) = {
+StaticNpc N(NpcData_Bombomb_05) = {
     .id = NPC_Bombomb_05,
-    .settings = &N(NpcSettings_Bombomb_01),
+    .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb_01),
+    .init = &N(EVS_NpcInit_Bombomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2223,14 +2223,14 @@ StaticNpc N(D_80246CA8_E1CA28) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(D_80246E98_E1CC18)[] = {
+StaticNpc N(NpcData_Luigis)[] = {
     {
         .id = NPC_Luigi_01,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2258,11 +2258,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_02,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2290,11 +2290,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_03,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2322,11 +2322,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_04,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2354,11 +2354,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_05,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2386,11 +2386,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_06,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2418,11 +2418,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_07,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2450,11 +2450,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_08,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2482,11 +2482,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_09,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2514,11 +2514,11 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
     },
     {
         .id = NPC_Luigi_10,
-        .settings = &N(NpcSettings_Luigi_01),
+        .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-        .init = &N(EVS_NpcInit_Luigi_01),
+        .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -2548,16 +2548,16 @@ StaticNpc N(D_80246E98_E1CC18)[] = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_GuideToad)),
-    NPC_GROUP(N(D_80245B38_E1B8B8)),
-    NPC_GROUP(N(D_80245D28_E1BAA8)),
-    NPC_GROUP(N(D_80245F18_E1BC98)),
-    NPC_GROUP(N(D_80246108_E1BE88)),
-    NPC_GROUP(N(D_802462F8_E1C078)),
-    NPC_GROUP(N(D_802464E8_E1C268)),
-    NPC_GROUP(N(D_802466D8_E1C458)),
-    NPC_GROUP(N(D_802468C8_E1C648)),
-    NPC_GROUP(N(D_80246AB8_E1C838)),
-    NPC_GROUP(N(D_80246CA8_E1CA28)),
-    NPC_GROUP(N(D_80246E98_E1CC18)),
+    NPC_GROUP(N(NpcData_Fuzzy_01)),
+    NPC_GROUP(N(NpcData_Fuzzy_02)),
+    NPC_GROUP(N(NpcData_Fuzzy_03)),
+    NPC_GROUP(N(NpcData_Fuzzy_04)),
+    NPC_GROUP(N(NpcData_Fuzzy_05)),
+    NPC_GROUP(N(NpcData_Bombomb_01)),
+    NPC_GROUP(N(NpcData_Bombomb_02)),
+    NPC_GROUP(N(NpcData_Bombomb_03)),
+    NPC_GROUP(N(NpcData_Bombomb_04)),
+    NPC_GROUP(N(NpcData_Bombomb_05)),
+    NPC_GROUP(N(NpcData_Luigis)),
     {}
 };

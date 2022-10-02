@@ -1,8 +1,8 @@
 #include "mgm_02.h"
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(D_80242650_E183D0);
-extern EvtScript N(EVS_80244FD4);
+extern EvtScript N(EVS_Dummy);
+extern EvtScript N(EVS_InitializeMinigame);
 extern NpcGroupList N(DefaultNPCs);
 
 EntryList N(Entrances) = {
@@ -16,7 +16,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_mgm_02 },
 };
 
-EvtScript N(D_80242450_E181D0) = {
+EvtScript N(EVS_SetupCamera) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -300, -20, 200)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 250, -20, 220)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
@@ -40,10 +40,10 @@ EvtScript N(D_80242450_E181D0) = {
 EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_EXEC(N(D_80242450_E181D0))
+    EVT_EXEC(N(EVS_SetupCamera))
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(D_80242650_E183D0))
-    EVT_EXEC_WAIT(N(EVS_80244FD4))
+    EVT_EXEC_WAIT(N(EVS_Dummy))
+    EVT_EXEC_WAIT(N(EVS_InitializeMinigame))
     EVT_RETURN
     EVT_END
 };

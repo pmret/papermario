@@ -98,7 +98,7 @@ extern EvtScript N(EVS_OnBreakBlock_10);
 
 extern EvtScript N(EVS_InitializePanels);
 
-void N(draw_score_display) (void* renderData) {
+void N(appendGfx_score_display) (void* renderData) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = (JumpGameData*)scorekeeper->varTable[JUMP_DATA_VAR_IDX];
     s32 hudElemID;
@@ -153,12 +153,12 @@ void N(draw_score_display) (void* renderData) {
     }
 }
 
-void N(work_draw_score)(void) {
+void N(worker_draw_score)(void) {
     RenderTask task;
 
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
-    task.appendGfx = &mgm_01_draw_score_display;
+    task.appendGfx = &mgm_01_appendGfx_score_display;
     task.distance = 0;
 
     queue_render_task(&task);
@@ -630,7 +630,7 @@ API_CALLABLE(N(CreateMinigame)) {
     s32 hudElemID;
 
     scorekeeper->varTablePtr[JUMP_DATA_VAR_IDX] = data;
-    data->workerID = create_generic_entity_world(NULL, &mgm_01_work_draw_score);
+    data->workerID = create_generic_entity_world(NULL, &mgm_01_worker_draw_score);
 
     hudElemID = hud_element_create(&HES_StatusCoin);
     data->hudElemID = hudElemID;
