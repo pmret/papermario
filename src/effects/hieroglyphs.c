@@ -8,36 +8,42 @@ INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_main);
 void hieroglyphs_init(void) {
 }
 
+typedef struct UnkHieroglyphsFXData {
+    s32 unk_10;
+    s32 unk_14;
+    s32 unk_24;
+} UnkHieroglyphsFXData;
+
 // INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_update);
-void hieroglyphs_update(EffectInstance *arg0) {
-    s32 *temp_a1;
+void hieroglyphs_update(EffectInstance *effect) {
+    UnkHieroglyphsFXData* data;
     s32 temp_a2;
     s32 temp_v1;
     s32 temp_v1_2;
     s32 temp_v1_3;
 
-    temp_v1 = arg0->flags;
-    temp_a1 = arg0->data.any;
-    if (temp_v1 & 0x10) {
-        arg0->flags = temp_v1 & ~0x10;
-        temp_a1->unk10 = 0x10;
+    temp_v1 = effect->flags;
+    data = effect->data.hieroglyphs;
+    if (temp_v1 & 16) {
+        effect->flags = temp_v1 & ~16;
+        data->unk_10 = 16;
     }
-    temp_v1_2 = temp_a1->unk10;
-    if (temp_v1_2 < 0x3E8) {
-        temp_a1->unk10 = (s32) (temp_v1_2 - 1);
+    temp_v1_2 = data->unk_10;
+    if (temp_v1_2 < 1000) {
+        data->unk_10 = (s32) (temp_v1_2 - 1);
     }
-    temp_v1_3 = temp_a1->unk10;
-    temp_a2 = temp_a1->unk14 + 1;
-    temp_a1->unk14 = temp_a2;
+    temp_v1_3 = data->unk_10;
+    temp_a2 = data->unk_14 + 1;
+    data->unk_14 = temp_a2;
     if (temp_v1_3 < 0) {
-        shim_remove_effect(arg0);
+        shim_remove_effect(effect);
         return;
     }
     if (temp_v1_3 < 0x10) {
-        temp_a1->unk24 = (s32) (temp_v1_3 * 0x10);
+        data->unk_24 = (s32) (temp_v1_3 * 0x10);
     }
     if (temp_a2 < 0x10) {
-        temp_a1->unk24 = (s32) ((temp_a2 * 0x10) + 0xF);
+        data->unk_24 = (s32) ((temp_a2 * 0x10) + 0xF);
     }
 }
 
