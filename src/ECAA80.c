@@ -27,7 +27,7 @@ void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 #ifdef NON_MATCHING
 ApiStatus ECAA80_ItemChoice_WaitForSelection(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         ECAA80_ItemChoice_HasSelectedItem = 0;
     }
     if (ECAA80_ItemChoice_HasSelectedItem != 0) {
@@ -45,6 +45,7 @@ INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
 
 ApiStatus ECAA80_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+
     ECAA80_ItemChoice_SelectedItemID = dead_evt_get_variable(script, *args++);
     ECAA80_ItemChoice_HasSelectedItem = 1;
     return ApiStatus_DONE2;

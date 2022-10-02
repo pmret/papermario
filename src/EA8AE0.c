@@ -24,33 +24,26 @@ static char* N(exit_str_2) = "kzn_20";
 
 INCLUDE_ASM(s32, "EA8AE0", func_80240B00_EA95E0);
 
-typedef struct unk {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-} unk;
+typedef struct Unk80240BD4 {
+    f32 unk_0;
+    f32 unk_4;
+    f32 unk_8;
+} Unk80240BD4;
 
 ApiStatus func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s0_5;
-    s32 temp_s0;
-    s32 temp_s1;
-    s32 temp_s2;
-    s32 temp_s3;
-    s32 temp_s4;
-    unk* temp_a0;
+    s32 temp_s3 = dead_evt_get_variable(script, *args++);
+    s32 temp_s2 = dead_evt_get_variable(script, *args++);
+    s32 temp_s4 = dead_evt_get_variable(script, *args++);
+    s32 temp_s1 = dead_evt_get_variable(script, *args++);
+    s32 temp_s0 = dead_evt_get_variable(script, *args++);
+    Unk80240BD4* temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 480) + (temp_s2 * 12);
     s32 temp;
     
-    temp_s3 = dead_evt_get_variable(script, *args++);
-    temp_s2 = dead_evt_get_variable(script, *args++);
-    temp_s4 = dead_evt_get_variable(script, *args++);
-    temp_s1 = dead_evt_get_variable(script, *args++);
-    temp_s0 = dead_evt_get_variable(script, *args++);
-
-    temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 480) + (temp_s2 * 12);
-    temp_a0->unk0 = temp_s4;
-    temp_a0->unk4 = temp_s1;
-    temp_a0->unk8 = temp_s0;
+    temp_a0->unk_0 = temp_s4;
+    temp_a0->unk_4 = temp_s1;
+    temp_a0->unk_8 = temp_s0;
 
     return ApiStatus_DONE2;
 }

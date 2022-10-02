@@ -20,7 +20,7 @@ extern s32 D_80244630_EEABE0;
 #ifdef NON_MATCHING
 ApiStatus func_80242260_EE8810(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         D_8024462C_EEABDC = 0;
     }
     if (D_8024462C_EEABDC != 0) {
