@@ -38,7 +38,7 @@ ApiStatus func_80240BD4_EA96B4(Evt *script, s32 isInitialCall) {
     s32 temp_s1 = dead_evt_get_variable(script, *args++);
     s32 temp_s0 = dead_evt_get_variable(script, *args++);
     Unk80240BD4* temp_a0 = dead_evt_get_variable(NULL, MapVar(0)) + (temp_s3 * 480) + (temp_s2 * 12);
-    
+
     temp_a0->unk_00 = temp_s4;
     temp_a0->unk_04 = temp_s1;
     temp_a0->unk_08 = temp_s0;
@@ -91,10 +91,10 @@ ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80243DD8_EAC8B8 = 0;
+        D_80243DD8_EAC8B8 = FALSE;
     }
-    if (D_80243DD8_EAC8B8 != 0) {
-        D_80243DD8_EAC8B8 = 0;
+    if (D_80243DD8_EAC8B8) {
+        D_80243DD8_EAC8B8 = FALSE;
 
         dead_evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
 
