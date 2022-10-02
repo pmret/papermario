@@ -242,7 +242,7 @@ API_CALLABLE(N(CreateSignpost)) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
+API_CALLABLE(N(OnHitBox)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 hitModelID = evt_get_variable(script, LVarA);
     s32 hitColliderID = evt_get_variable(script, LVarB); // unused
@@ -1045,19 +1045,24 @@ s32 N(InitialConfigurations)[3][NUM_BOXES] = {
 };
 
 s32 N(BoxModelIDs)[NUM_BOXES] = {
-    9, 15, 21, 27, 33, 39, 45, 10, 16, 22, 28, 34, 40, 46, 11, 
-    17, 23, 29, 35, 41, 47, 12, 18, 24, 30, 36, 42, 48, 13, 19, 
-    25, 31, 37, 43, 49
+    MODEL_a1, MODEL_b1, MODEL_c1, MODEL_d1, MODEL_e1, MODEL_f1, MODEL_g1,
+    MODEL_a2, MODEL_b2, MODEL_c2, MODEL_d2, MODEL_e2, MODEL_f2, MODEL_g2,
+    MODEL_a3, MODEL_b3, MODEL_c3, MODEL_d3, MODEL_e3, MODEL_f3, MODEL_g3,
+    MODEL_a4, MODEL_b4, MODEL_c4, MODEL_d4, MODEL_e4, MODEL_f4, MODEL_g4,
+    MODEL_a5, MODEL_b5, MODEL_c5, MODEL_d5, MODEL_e5, MODEL_f5, MODEL_g5,
 };
 
 s32 N(BoxColliderIDs)[NUM_BOXES] = {
-    9, 15, 21, 27, 33, 39, 45, 10, 16, 22, 28, 34, 40, 46, 11,
-    17, 23, 29, 35, 41, 47, 12, 18, 24, 30, 36, 42, 48, 13, 19,
-    25, 31, 37, 43, 49
+    COLLIDER_a1, COLLIDER_b1, COLLIDER_c1, COLLIDER_d1, COLLIDER_e1, COLLIDER_f1, COLLIDER_g1,
+    COLLIDER_a2, COLLIDER_b2, COLLIDER_c2, COLLIDER_d2, COLLIDER_e2, COLLIDER_f2, COLLIDER_g2,
+    COLLIDER_a3, COLLIDER_b3, COLLIDER_c3, COLLIDER_d3, COLLIDER_e3, COLLIDER_f3, COLLIDER_g3,
+    COLLIDER_a4, COLLIDER_b4, COLLIDER_c4, COLLIDER_d4, COLLIDER_e4, COLLIDER_f4, COLLIDER_g4,
+    COLLIDER_a5, COLLIDER_b5, COLLIDER_c5, COLLIDER_d5, COLLIDER_e5, COLLIDER_f5, COLLIDER_g5,
 };
 
 s32 N(PanelModelIDs)[NUM_PANELS] = {
-    52, 54, 56, 58, 60, 62, 64, 66, 68, 70
+    MODEL_o50, MODEL_o51, MODEL_o52, MODEL_o53, MODEL_o54,
+    MODEL_o55, MODEL_o56, MODEL_o57, MODEL_o58, MODEL_o59
 };
 
 EvtScript N(EVS_CreateScoreDisplay) = {

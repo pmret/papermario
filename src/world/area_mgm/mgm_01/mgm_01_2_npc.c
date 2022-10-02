@@ -469,7 +469,7 @@ API_CALLABLE(N(GetPanelPos)) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DestroyBlockEntities) (Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DestroyBlockEntities)) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
@@ -645,7 +645,7 @@ API_CALLABLE(N(CreateMinigame)) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DestroyMinigame)) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
 
     free_generic_entity(data->workerID);
