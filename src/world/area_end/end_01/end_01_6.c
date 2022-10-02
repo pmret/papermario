@@ -1,5 +1,7 @@
 #include "end_01.h"
 
+#include "world/common/atomic/UnkFunc27.inc.c"
+
 API_CALLABLE(N(UnkFunc26));
 API_CALLABLE(N(UnkFunc27));
 API_CALLABLE(N(func_80242840_E07BA0));
@@ -34,7 +36,7 @@ EvtScript N(D_80246E18_E0C178) = {
     EVT_END
 };
 
-s32 N(D_80246EAC_E0C20C) = {
+s32 N(D_80246EAC_E0C20C)[] = {
     56, 58, 59, 60, 61, 62, 63, 0x0000FFFF 
 };
 
