@@ -74,7 +74,96 @@ void func_800EFD08(void) {
     }
 }
 
-INCLUDE_ASM(s32, "891b0_len_fb0", func_800EFE2C);
+void func_800EFE2C(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 sinTheta, cosTheta;
+    f32 x, y, z;
+    s32 cond;
+
+    cond = FALSE;
+    if (gGameStatusPtr->areaID == AREA_HOS) {
+        cond = gGameStatusPtr->mapID == 2;
+    }
+
+    if (playerStatus->actionState == ACTION_STATE_LAND &&
+        (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) &&
+        D_8010CFF4 >= 10)
+    {
+        x = playerStatus->position.x;
+        y = playerStatus->position.y + 0.0f;
+        z = playerStatus->position.z;
+        if (!cond) {
+            fx_landing_dust(0, x, y, z, D_80109484);
+        } else {
+            fx_misc_particles(3, x, y, z, 13.0f, 10.0f, 1.0f, 5, 30);
+
+        }
+    } else if (
+        (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_400))
+    {
+        x = playerStatus->position.x;
+        y = playerStatus->position.y + 0.0f;
+        z = playerStatus->position.z;
+        if (!cond) {
+            fx_landing_dust(0, x, y, z, D_80109484);
+        } else {
+            fx_misc_particles(3, x, y, z, playerStatus->colliderDiameter, 10.0f, 1.0f, 5, 40);
+        }
+    } else if (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->currentSpeed != 0.0f) {
+        if (D_80109488++ >= 4) {
+            D_80109488 = 2;
+            if (cond) {
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(playerStatus->targetYaw)), &sinTheta, &cosTheta);
+                fx_misc_particles(
+                    3,
+                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta),
+                    playerStatus->position.y + 1.5f,
+                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta),
+                    13.0f, 10.0f, 1.0f, 5, 30
+                );
+            } else {
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+                fx_walking_dust(
+                    0,
+                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
+                    playerStatus->position.y + 1.5f,
+                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
+                    sinTheta, cosTheta
+                );
+            }
+        }
+    } else {
+        if (playerStatus->actionState != ACTION_STATE_RUN &&
+            !(playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0))
+        {
+            D_80109488 = 4;
+            return;
+        }
+
+        if (D_80109488++ >= 4) {
+            D_80109488 = 0;
+            if (!cond) {
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+                fx_walking_dust(
+                    0,
+                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
+                    playerStatus->position.y + 1.5f,
+                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
+                    sinTheta, cosTheta
+                );
+            } else {
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(playerStatus->targetYaw)), &sinTheta, &cosTheta);
+                fx_misc_particles(
+                    3,
+                    playerStatus->position.x + (playerStatus->currentSpeed * sinTheta),
+                    playerStatus->position.y + 1.5f,
+                    playerStatus->position.z + (playerStatus->currentSpeed * cosTheta),
+                    13.0f, 10.0f, 1.0f, 5, 30
+                );
+            }
+        }
+    }
+}
 
 void func_800F0248(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
