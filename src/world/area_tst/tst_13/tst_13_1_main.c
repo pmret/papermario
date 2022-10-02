@@ -473,6 +473,10 @@ NpcGroupList N(DefaultNPCs) = {
     {}
 };
 
+extern Vtx D_802423D0[];
+extern Vtx D_80242310[];
+extern Vtx flo_23_ConsumableChoiceList[];
+
 #include "world/area_tst/tst_13/shockwave.vtx.inc.c"
 #include "world/area_tst/tst_13/shockwave.gfx.inc.c"
 
