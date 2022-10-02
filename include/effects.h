@@ -1583,8 +1583,7 @@ typedef struct HieroglyphsFXData {
     /* 0x00 */ char unk_00[0x10];
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ char unk_18[0x09];
-    /* 0x21 */ char unk_21[0x03];
+    /* 0x18 */ char unk_18[0xC];
     /* 0x24 */ s32 unk_24;
 } HieroglyphsFXData; // size = 0x28
 
