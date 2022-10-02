@@ -82,7 +82,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x34 */ FX_ENTRY(ending_decals, _36AEE0),
     /* 0x35 */ FX_ENTRY(light_rays, _36DF90),
     /* 0x36 */ FX_ENTRY(lightning, _36ED60),
-    /* 0x37 */ FX_ENTRY(fire_breath, _3733E0),
+    /* 0x37 */ FX_ENTRY(fire_breath, effect_gfx_fire_breath),
     /* 0x38 */ FX_ENTRY(shimmer_burst, _337FC0),
     /* 0x39 */ FX_ENTRY(energy_shockwave, _375510),
     /* 0x3A */ FX_ENTRY(shimmer_wave, _337FC0),
