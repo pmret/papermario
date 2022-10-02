@@ -2409,7 +2409,7 @@ typedef struct MusicEvent {
 
 typedef struct ParadeNpcInfo {
     /* 0x00 */ u32 initialAnim;
-    /* 0x04 */ u32** animList;
+    /* 0x04 */ u32* animList;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ f32 yaw;
 } ParadeNpcInfo; // size = 0x18

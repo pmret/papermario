@@ -11592,17 +11592,18 @@ segments:
     start: 0xE05360
     vram: 0x80240000
     subsegments:
-    - [0xE05360, c]
-    - [0xE05370, c]
-    - [0xE05390, c]
-    - [0xE07C20, c]
-    - [0xE08050, c]
-    - [0xE08350, data]
-    - [0xE08470, data]
-    - [0xE0B5F0, data]
-    - [0xE0C0C0, data]
-    - [0xE0D510, data]
-    - [0xE0E740]
+    - [0xE05360, c, end_01_code_1]
+    - [0xE05370, c, end_01_code_2]
+    - [0xE05390, c, end_01_code_3]
+    - [0xE079F0, c, end_01_code_4]
+    - [0xE07C20, c, end_01_code_5]
+    - [0xE08050, c, end_01_code_6]
+    - [0xE08350, .data, end_01_data_1]
+    - [0xE08470, .data, end_01_data_2]
+    - [0xE0B5F0, .data, end_01_data_3]
+    - [0xE0C0C0, .data, end_01_data_4]
+    - [0xE0D510, .data, end_01_data_5]
+    - [0xE0E700]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
     type: code

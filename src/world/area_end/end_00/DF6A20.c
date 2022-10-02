@@ -253,7 +253,7 @@ void N(credits_update_line)(CreditsLine* line) {
 
 #include "world/common/atomic/Credits_2.inc.c"
 
-ApiStatus func_80242680_DF9080(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242680_DF9080)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     ParadeNpcInfo* npcInfo = &N(ParadeNpcsTable)[npcID];
@@ -277,7 +277,7 @@ ApiStatus func_80242680_DF9080(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80242744_DF9144(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242744_DF9144)) {
     Bytecode* args = script->ptrReadPos;
     s32 heapSize = evt_get_variable(script, *args++);
     s32 outVar = *args++;
@@ -286,7 +286,7 @@ ApiStatus func_80242744_DF9144(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802427A4_DF91A4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802427A4_DF91A4)) {
     Bytecode* args = script->ptrReadPos;
     s32 pointer = *args++;
 
@@ -294,7 +294,7 @@ ApiStatus func_802427A4_DF91A4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802427D8_DF91D8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802427D8_DF91D8)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     camera->unk_506 = 1;
@@ -302,7 +302,7 @@ ApiStatus func_802427D8_DF91D8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetNpcShadowScale)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     f32 newShadowScale = evt_get_float_variable(script, *args++);
@@ -311,7 +311,7 @@ ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80242898_DF9298(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242898_DF9298)) {
     Bytecode* args = script->ptrReadPos;
     Npc** npc = (Npc**)&script->functionTempPtr[1];
 
