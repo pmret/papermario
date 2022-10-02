@@ -8,22 +8,13 @@ INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_main);
 void hieroglyphs_init(void) {
 }
 
-typedef struct UnkHieroglyphsFXData {
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_24;
-} UnkHieroglyphsFXData;
-
-// INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_update);
-void hieroglyphs_update(EffectInstance *effect) {
-    UnkHieroglyphsFXData* data;
+void hieroglyphs_update(EffectInstance* effect) {
+    HieroglyphsFXData* data = effect->data.hieroglyphs;
     s32 temp_a2;
-    s32 temp_v1;
+    s32 temp_v1 = effect->flags;
     s32 temp_v1_2;
     s32 temp_v1_3;
 
-    temp_v1 = effect->flags;
-    data = effect->data.hieroglyphs;
     if (temp_v1 & 16) {
         effect->flags = temp_v1 & ~16;
         data->unk_10 = 16;
@@ -39,11 +30,11 @@ void hieroglyphs_update(EffectInstance *effect) {
         shim_remove_effect(effect);
         return;
     }
-    if (temp_v1_3 < 0x10) {
-        data->unk_24 = (s32) (temp_v1_3 * 0x10);
+    if (temp_v1_3 < 16) {
+        data->unk_24 = (s32) (temp_v1_3 * 16);
     }
-    if (temp_a2 < 0x10) {
-        data->unk_24 = (s32) ((temp_a2 * 0x10) + 0xF);
+    if (temp_a2 < 16) {
+        data->unk_24 = (s32) ((temp_a2 * 16) + 15);
     }
 }
 
