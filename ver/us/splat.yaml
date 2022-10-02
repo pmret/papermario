@@ -11645,12 +11645,18 @@ segments:
     start: 0xE15D80
     vram: 0x80240000
     subsegments:
-    - [0xE15D80, c]
-    - [0xE18150, c]
-    - [0xE18180, data]
-    - [0xE183D0, data]
-    - [0xE1E020, data]
-    - [0xE1E260]
+      - [0xE15D80, c, mgm_02_1_main]
+      - [0xE15D80, c, mgm_02_2_npc]
+      - [0xE15D80, c, mgm_02_3_images]
+      - [0xE18180, .data, mgm_02_1_main]
+      - [0xE183D0, .data, mgm_02_2_npc]
+      - start: 0xE1E020
+        type: .data
+        name: mgm_02_3_images
+        subsegments:
+        - [0xE1E020, ci4, panel_peach, 32, 32]
+        - [0xE1E220, palette, panel_peach]
+        - [0xE1E240]
   - name: mgm_03
     dir: world/area_mgm/mgm_03
     type: code
