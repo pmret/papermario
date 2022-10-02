@@ -1587,8 +1587,12 @@ typedef struct EmbersFXData {
 } EmbersFXData; // size = 0x70
 
 typedef struct HieroglyphsFXData {
-    /* 0x00 */ char todo[0];
-} HieroglyphsFXData; // size = unknown
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char unk_18[0xC];
+    /* 0x24 */ s32 unk_24;
+} HieroglyphsFXData; // size = 0x28
 
 typedef struct MiscParticlesFXData {
     char unk_00[0x4];
