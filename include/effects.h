@@ -1539,7 +1539,7 @@ typedef struct HuffPuffBreathFXData {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
-} HuffPuffBreathFXData; // size = 0x44
+} HuffPuffBreathFXData; // size = 0x48
 
 typedef struct ColdBreathFXData {
     /* 0x00 */ s32 unk_00;
