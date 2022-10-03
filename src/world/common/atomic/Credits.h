@@ -1,5 +1,5 @@
-#ifndef _CREDITS_COMMON_H_
-#define _CREDITS_COMMON_H_
+#ifndef _CREDITS_H_
+#define _CREDITS_H_
 
 #include "common.h"
 #include "message_ids.h"
