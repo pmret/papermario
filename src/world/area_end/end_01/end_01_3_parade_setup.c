@@ -212,352 +212,352 @@ AnimID N(ExtraAnims_ShyGuy)[] = {
 };
 
 ParadeNpcInfo N(ParadeNpcsTable)[] = {
-    [NPC_00] {
+    [NPC_Eldstar] {
         .initialAnim = ANIM_BattleEldstar_Idle,
         .animList = N(ExtraAnims_Eldstar),
         .pos = { -3135.0f, 210.0f, -120.0f },
         .yaw = 270.0f
     },
-    [NPC_01] {
+    [NPC_Mamar] {
         .initialAnim = ANIM_BattleMamar_Idle,
         .animList = N(ExtraAnims_Mamar),
         .pos = { -3195.0f, 200.0f, -120.0f },
         .yaw = 270.0f
     },
-    [NPC_02] {
+    [NPC_Skolar] {
         .initialAnim = ANIM_BattleSkolar_Idle,
         .animList = N(ExtraAnims_Skolar),
         .pos = { -3075.0f, 195.0f, -120.0f },
         .yaw = 270.0f
     },
-    [NPC_03] {
+    [NPC_Muskular] {
         .initialAnim = ANIM_BattleMuskular_Idle,
         .animList = N(ExtraAnims_Muskular),
         .pos = { -3045.0f, 148.0f, -104.0f },
         .yaw = 270.0f
     },
-    [NPC_04] {
+    [NPC_Misstar] {
         .initialAnim = ANIM_BattleMisstar_Still,
         .animList = N(ExtraAnims_Misstar),
         .pos = { -3105.0f, 158.0f, -104.0f },
         .yaw = 270.0f
     },
-    [NPC_05] {
+    [NPC_Klevar] {
         .initialAnim = ANIM_BattleKlevar_Idle,
         .animList = N(ExtraAnims_Klevar),
         .pos = { -3165.0f, 158.0f, -104.0f },
         .yaw = 270.0f
     },
-    [NPC_06] {
+    [NPC_Kalmar] {
         .initialAnim = ANIM_BattleKalmar_Idle,
         .animList = N(ExtraAnims_Kalmar),
         .pos = { -3225.0f, 148.0f, -104.0f },
         .yaw = 270.0f
     },
-    [NPC_07] {
+    [NPC_PenguinSkater1] {
         .initialAnim = ANIM_ParadeIceShow_Violin_SkateStill,
         .pos = { -2700.0f, 0.0f, -37.0f },
         .yaw = 270.0f
     },
-    [NPC_08] {
+    [NPC_PenguinSkater2] {
         .initialAnim = ANIM_ParadeIceShow_Violin_SkateStill,
         .pos = { -2700.0f, 0.0f, 37.0f },
         .yaw = 270.0f
     },
-    [NPC_09] {
+    [NPC_PenguinMayor] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ShadeMayorWalk,
         .pos = { -2650.0f, 0.0f, -77.0f },
         .yaw = 270.0f
     },
-    [NPC_0A] {
+    [NPC_PenguinMayorWife] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ShadeMayorWifeWalk,
         .pos = { -2610.0f, 0.0f, -77.0f },
         .yaw = 270.0f
     },
-    [NPC_0B] {
+    [NPC_ViolinPlayer1] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ViolinPlay,
         .pos = { -2555.0f, 5.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_0C] {
+    [NPC_ViolinPlayer2] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ViolinPlayUpright,
         .pos = { -2527.0f, 5.0f, 35.0f },
         .yaw = 270.0f
     },
-    [NPC_0D] {
+    [NPC_ViolinPlayer3] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ViolinPlay,
         .pos = { -2495.0f, 5.0f, 30.0f },
         .yaw = 90.0f
     },
-    [NPC_0E] {
+    [NPC_Conductor] {
         .initialAnim = ANIM_Musician_Poet_Dark_ConductSlow,
         .pos = { -2624.0f, 20.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_0F] {
+    [NPC_Singer] {
         .initialAnim = ANIM_ParadeIceShow_Violin_ShadeDivaIdle,
         .pos = { -2529.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_10] {
+    [NPC_AmayzeDayzee1] {
         .initialAnim = ANIM_Dayzee_Amazy_Anim02,
         .pos = { -2210.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_11] {
+    [NPC_AmayzeDayzee2] {
         .initialAnim = ANIM_Dayzee_Amazy_Anim02,
         .pos = { -2210.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_12] {
+    [NPC_Merle] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerleGather,
         .pos = { -2025.0f, 20.0f, 28.0f },
         .yaw = 270.0f
     },
-    [NPC_13] {
+    [NPC_Merlee] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerleeGather,
         .pos = { -1995.0f, 20.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_14] {
+    [NPC_Merlon] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerlonGather,
         .pos = { -2055.0f, 20.0f, 35.0f },
         .yaw = 270.0f
     },
-    [NPC_15] {
+    [NPC_Merluvlee] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerluvleeGather,
         .pos = { -2085.0f, 20.0f, 28.0f },
         .yaw = 270.0f
     },
-    [NPC_16] {
+    [NPC_Merlow] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerlowGather,
         .pos = { -2110.0f, 20.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_17] {
+    [NPC_Merlar] {
         .initialAnim = ANIM_ParadeWizard_Merle_MerlarGather,
         .pos = { -1980.0f, 60.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_18] {
+    [NPC_SunSad] {
         .initialAnim = ANIM_Sun_TalkSad,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_19] {
+    [NPC_SunHappy] {
         .initialAnim = ANIM_Sun_FireTalkSad,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_1A] {
+    [NPC_Bulbulb1] {
         .initialAnim = ANIM_Bubulb_Pink_DarkWalk,
         .pos = { -1850.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_1B] {
+    [NPC_Bulbulb2] {
         .initialAnim = ANIM_Bubulb_Pink_DarkWalk,
         .pos = { -1850.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_1C] {
+    [NPC_ShyGuyMarshall] {
         .initialAnim = ANIM_ParadeShyGuy_MarshallWalk,
         .pos = { -1548.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_1D] {
+    [NPC_GeneralGuy] {
         .initialAnim = ANIM_ParadeShyGuy_GeneralPoint,
         .pos = { -1448.0f, 57.0f, -25.0f },
         .yaw = 270.0f
     },
-    [NPC_1E] {
+    [NPC_BackupDancer1] {
         .initialAnim = ANIM_ParadeShyGuy_StackHold,
         .pos = { -1483.0f, 24.0f, -40.0f },
         .yaw = 90.0f
     },
-    [NPC_1F] {
+    [NPC_BackupDancer2] {
         .initialAnim = ANIM_ParadeShyGuy_StackHold,
         .pos = { -1413.0f, 24.0f, -40.0f },
         .yaw = 270.0f
     },
-    [NPC_20] {
+    [NPC_GrooveGuy1] {
         .initialAnim = ANIM_ParadeShyGuy_GroovePivot,
         .pos = { -1468.0f, 24.0f, -5.0f },
         .yaw = 270.0f
     },
-    [NPC_21] {
+    [NPC_GrooveGuy2] {
         .initialAnim = ANIM_ParadeShyGuy_GroovePivot,
         .pos = { -1458.0f, 24.0f, -5.0f },
         .yaw = 270.0f
     },
-    [NPC_22] {
+    [NPC_GrooveGuy3] {
         .initialAnim = ANIM_ParadeShyGuy_GroovePivot,
         .pos = { -1438.0f, 24.0f, -5.0f },
         .yaw = 90.0f
     },
-    [NPC_23] {
+    [NPC_GrooveGuy4] {
         .initialAnim = ANIM_ParadeShyGuy_GroovePivot,
         .pos = { -1428.0f, 24.0f, -5.0f },
         .yaw = 90.0f
     },
-    [NPC_24] {
+    [NPC_PyroGuy1] {
         .initialAnim = ANIM_PyroGuy_Anim03,
         .animList = N(ExtraAnims_PyroGuy),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_25] {
+    [NPC_PyroGuy2] {
         .initialAnim = ANIM_PyroGuy_Anim03,
         .animList = N(ExtraAnims_PyroGuy),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_26] {
+    [NPC_ShyGuyFormation11] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1048.0f, 0.0f, -30.0f },
         .yaw = 270.0f
     },
-    [NPC_27] {
+    [NPC_ShyGuyFormation12] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1048.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_28] {
+    [NPC_ShyGuyFormation13] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1048.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_29] {
+    [NPC_ShyGuyFormation21] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1018.0f, 0.0f, -30.0f },
         .yaw = 270.0f
     },
-    [NPC_2A] {
+    [NPC_ShyGuyFormation22] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1018.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_2B] {
+    [NPC_ShyGuyFormation23] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -1018.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_2C] {
+    [NPC_ShyGuyFormation31] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -988.0f, 0.0f, -30.0f },
         .yaw = 270.0f
     },
-    [NPC_2D] {
+    [NPC_ShyGuyFormation32] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -988.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_2E] {
+    [NPC_ShyGuyFormation33] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -988.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_2F] {
+    [NPC_ShyGuyFormation41] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -958.0f, 0.0f, -30.0f },
         .yaw = 270.0f
     },
-    [NPC_30] {
+    [NPC_ShyGuyFormation42] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -958.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_31] {
+    [NPC_ShyGuyFormation43] {
         .initialAnim = ANIM_ParadeShyGuy_ShadeWalk,
         .pos = { -958.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_32] {
+    [NPC_Pratfaller] {
         .initialAnim = ANIM_ShyGuy_Red_Anim04,
         .animList = N(ExtraAnims_ShyGuy),
         .pos = { -788.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_33] {
+    [NPC_HornPlayer1] {
         .initialAnim = ANIM_ParadeHorn_Walk,
         .pos = { -689.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_34] {
+    [NPC_HornPlayer2] {
         .initialAnim = ANIM_ParadeHorn_Walk,
         .pos = { -689.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_35] {
+    [NPC_Drummer1] {
         .initialAnim = ANIM_ParadeDrummer_Walk,
         .pos = { -639.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_36] {
+    [NPC_Drummer2] {
         .initialAnim = ANIM_ParadeDrummer_Walk,
         .pos = { -639.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_37] {
+    [NPC_StandardBearer1] {
         .initialAnim = ANIM_ParadeBanner_Walk,
         .pos = { -589.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_38] {
+    [NPC_StandardBearer2] {
         .initialAnim = ANIM_ParadeBanner_Walk,
         .pos = { -589.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_39] {
+    [NPC_Mario] {
         .initialAnim = ANIM_ParadeMario_Wave,
         .pos = { -329.0f, 37.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_3A] {
+    [NPC_Peach] {
         .initialAnim = ANIM_ParadePeach_ShadeWaveSlow,
         .pos = { -289.0f, 37.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_3B] {
+    [NPC_Twink] {
         .initialAnim = ANIM_ParadeTwink_Idle,
         .pos = { -389.0f, 120.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_3C] {
+    [NPC_Twirler1] {
         .initialAnim = ANIM_ParadeTwirler_Walk,
         .pos = { -109.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_3D] {
+    [NPC_Twirler2] {
         .initialAnim = ANIM_ParadeTwirler_Walk,
         .pos = { -69.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_3E] {
+    [NPC_Twirler3] {
         .initialAnim = ANIM_ParadeTwirler_Walk,
         .pos = { -29.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_3F] {
+    [NPC_Baton1] {
         .initialAnim = ANIM_ParadeTwirler_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_40] {
+    [NPC_Baton2] {
         .initialAnim = ANIM_ParadeTwirler_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_41] {
+    [NPC_Baton3] {
         .initialAnim = ANIM_ParadeTwirler_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_42] {
+    [NPC_StandardBearer3] {
         .initialAnim = ANIM_ParadeBanner_Walk,
         .pos = { 41.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_43] {
+    [NPC_StandardBearer4] {
         .initialAnim = ANIM_ParadeBanner_Walk,
         .pos = { 41.0f, 0.0f, 20.0f },
         .yaw = 270.0f
@@ -565,25 +565,25 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
 };
 
 EvtScript N(EVS_ManageNpcPool) = {
-    EVT_CALL(N(CreateParadeNPC), NPC_00)
-    EVT_CALL(N(CreateParadeNPC), NPC_01)
-    EVT_CALL(N(CreateParadeNPC), NPC_02)
-    EVT_CALL(N(CreateParadeNPC), NPC_03)
-    EVT_CALL(N(CreateParadeNPC), NPC_04)
-    EVT_CALL(N(CreateParadeNPC), NPC_05)
-    EVT_CALL(N(CreateParadeNPC), NPC_06)
-    EVT_CALL(N(CreateParadeNPC), NPC_09)
-    EVT_CALL(N(CreateParadeNPC), NPC_0A)
-    EVT_CALL(N(CreateParadeNPC), NPC_07)
-    EVT_CALL(N(CreateParadeNPC), NPC_08)
-    EVT_CALL(N(CreateParadeNPC), NPC_0B)
-    EVT_CALL(N(CreateParadeNPC), NPC_0C)
-    EVT_CALL(N(CreateParadeNPC), NPC_0D)
-    EVT_CALL(N(CreateParadeNPC), NPC_0E)
-    EVT_CALL(N(CreateParadeNPC), NPC_0F)
+    EVT_CALL(N(CreateParadeNPC), NPC_Eldstar)
+    EVT_CALL(N(CreateParadeNPC), NPC_Mamar)
+    EVT_CALL(N(CreateParadeNPC), NPC_Skolar)
+    EVT_CALL(N(CreateParadeNPC), NPC_Muskular)
+    EVT_CALL(N(CreateParadeNPC), NPC_Misstar)
+    EVT_CALL(N(CreateParadeNPC), NPC_Klevar)
+    EVT_CALL(N(CreateParadeNPC), NPC_Kalmar)
+    EVT_CALL(N(CreateParadeNPC), NPC_PenguinMayor)
+    EVT_CALL(N(CreateParadeNPC), NPC_PenguinMayorWife)
+    EVT_CALL(N(CreateParadeNPC), NPC_PenguinSkater1)
+    EVT_CALL(N(CreateParadeNPC), NPC_PenguinSkater2)
+    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer3)
+    EVT_CALL(N(CreateParadeNPC), NPC_Conductor)
+    EVT_CALL(N(CreateParadeNPC), NPC_Singer)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x13400, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_10)
-    EVT_CALL(N(CreateParadeNPC), NPC_11)
+    EVT_CALL(N(CreateParadeNPC), NPC_AmayzeDayzee1)
+    EVT_CALL(N(CreateParadeNPC), NPC_AmayzeDayzee2)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -592,134 +592,134 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_00)
-    EVT_CALL(DeleteNpc, NPC_01)
-    EVT_CALL(DeleteNpc, NPC_02)
-    EVT_CALL(DeleteNpc, NPC_03)
-    EVT_CALL(DeleteNpc, NPC_04)
-    EVT_CALL(DeleteNpc, NPC_05)
-    EVT_CALL(DeleteNpc, NPC_06)
-    EVT_CALL(DeleteNpc, NPC_09)
-    EVT_CALL(DeleteNpc, NPC_0A)
-    EVT_CALL(DeleteNpc, NPC_07)
-    EVT_CALL(DeleteNpc, NPC_08)
-    EVT_CALL(DeleteNpc, NPC_0B)
-    EVT_CALL(DeleteNpc, NPC_0C)
-    EVT_CALL(DeleteNpc, NPC_0D)
-    EVT_CALL(DeleteNpc, NPC_0E)
-    EVT_CALL(DeleteNpc, NPC_0F)
+    EVT_CALL(DeleteNpc, NPC_Eldstar)
+    EVT_CALL(DeleteNpc, NPC_Mamar)
+    EVT_CALL(DeleteNpc, NPC_Skolar)
+    EVT_CALL(DeleteNpc, NPC_Muskular)
+    EVT_CALL(DeleteNpc, NPC_Misstar)
+    EVT_CALL(DeleteNpc, NPC_Klevar)
+    EVT_CALL(DeleteNpc, NPC_Kalmar)
+    EVT_CALL(DeleteNpc, NPC_PenguinMayor)
+    EVT_CALL(DeleteNpc, NPC_PenguinMayorWife)
+    EVT_CALL(DeleteNpc, NPC_PenguinSkater1)
+    EVT_CALL(DeleteNpc, NPC_PenguinSkater2)
+    EVT_CALL(DeleteNpc, NPC_ViolinPlayer1)
+    EVT_CALL(DeleteNpc, NPC_ViolinPlayer2)
+    EVT_CALL(DeleteNpc, NPC_ViolinPlayer3)
+    EVT_CALL(DeleteNpc, NPC_Conductor)
+    EVT_CALL(DeleteNpc, NPC_Singer)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_12)
-    EVT_CALL(N(CreateParadeNPC), NPC_13)
-    EVT_CALL(N(CreateParadeNPC), NPC_14)
-    EVT_CALL(N(CreateParadeNPC), NPC_15)
-    EVT_CALL(N(CreateParadeNPC), NPC_16)
-    EVT_CALL(N(CreateParadeNPC), NPC_17)
-    EVT_CALL(N(CreateParadeNPC), NPC_18)
-    EVT_CALL(N(CreateParadeNPC), NPC_19)
-    EVT_CALL(N(CreateParadeNPC), NPC_1A)
-    EVT_CALL(N(CreateParadeNPC), NPC_1B)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merle)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merlee)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merlon)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merluvlee)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merlow)
+    EVT_CALL(N(CreateParadeNPC), NPC_Merlar)
+    EVT_CALL(N(CreateParadeNPC), NPC_SunSad)
+    EVT_CALL(N(CreateParadeNPC), NPC_SunHappy)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bulbulb1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bulbulb2)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_5)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_10)
-    EVT_CALL(DeleteNpc, NPC_11)
+    EVT_CALL(DeleteNpc, NPC_AmayzeDayzee1)
+    EVT_CALL(DeleteNpc, NPC_AmayzeDayzee2)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x4700, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_24)
-    EVT_CALL(N(CreateParadeNPC), NPC_25)
-    EVT_CALL(N(CreateParadeNPC), NPC_32)
-    EVT_CALL(N(CreateParadeNPC), NPC_1C)
-    EVT_CALL(N(CreateParadeNPC), NPC_1D)
-    EVT_CALL(N(CreateParadeNPC), NPC_1E)
-    EVT_CALL(N(CreateParadeNPC), NPC_1F)
-    EVT_CALL(N(CreateParadeNPC), NPC_20)
-    EVT_CALL(N(CreateParadeNPC), NPC_21)
-    EVT_CALL(N(CreateParadeNPC), NPC_22)
-    EVT_CALL(N(CreateParadeNPC), NPC_23)
-    EVT_CALL(N(CreateParadeNPC), NPC_26)
-    EVT_CALL(N(CreateParadeNPC), NPC_27)
-    EVT_CALL(N(CreateParadeNPC), NPC_28)
-    EVT_CALL(N(CreateParadeNPC), NPC_29)
-    EVT_CALL(N(CreateParadeNPC), NPC_2A)
-    EVT_CALL(N(CreateParadeNPC), NPC_2B)
-    EVT_CALL(N(CreateParadeNPC), NPC_2C)
-    EVT_CALL(N(CreateParadeNPC), NPC_2D)
-    EVT_CALL(N(CreateParadeNPC), NPC_2E)
-    EVT_CALL(N(CreateParadeNPC), NPC_2F)
-    EVT_CALL(N(CreateParadeNPC), NPC_30)
-    EVT_CALL(N(CreateParadeNPC), NPC_31)
+    EVT_CALL(N(CreateParadeNPC), NPC_PyroGuy1)
+    EVT_CALL(N(CreateParadeNPC), NPC_PyroGuy2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Pratfaller)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyMarshall)
+    EVT_CALL(N(CreateParadeNPC), NPC_GeneralGuy)
+    EVT_CALL(N(CreateParadeNPC), NPC_BackupDancer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_BackupDancer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy1)
+    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy2)
+    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy3)
+    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy4)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation11)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation12)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation13)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation21)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation22)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation23)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation31)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation32)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation33)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation41)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation42)
+    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation43)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_7)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOADS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_12)
-    EVT_CALL(DeleteNpc, NPC_13)
-    EVT_CALL(DeleteNpc, NPC_14)
-    EVT_CALL(DeleteNpc, NPC_15)
-    EVT_CALL(DeleteNpc, NPC_16)
-    EVT_CALL(DeleteNpc, NPC_17)
-    EVT_CALL(DeleteNpc, NPC_18)
-    EVT_CALL(DeleteNpc, NPC_19)
-    EVT_CALL(DeleteNpc, NPC_1A)
-    EVT_CALL(DeleteNpc, NPC_1B)
+    EVT_CALL(DeleteNpc, NPC_Merle)
+    EVT_CALL(DeleteNpc, NPC_Merlee)
+    EVT_CALL(DeleteNpc, NPC_Merlon)
+    EVT_CALL(DeleteNpc, NPC_Merluvlee)
+    EVT_CALL(DeleteNpc, NPC_Merlow)
+    EVT_CALL(DeleteNpc, NPC_Merlar)
+    EVT_CALL(DeleteNpc, NPC_SunSad)
+    EVT_CALL(DeleteNpc, NPC_SunHappy)
+    EVT_CALL(DeleteNpc, NPC_Bulbulb1)
+    EVT_CALL(DeleteNpc, NPC_Bulbulb2)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_33)
-    EVT_CALL(N(CreateParadeNPC), NPC_34)
-    EVT_CALL(N(CreateParadeNPC), NPC_35)
-    EVT_CALL(N(CreateParadeNPC), NPC_36)
-    EVT_CALL(N(CreateParadeNPC), NPC_37)
-    EVT_CALL(N(CreateParadeNPC), NPC_38)
+    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Drummer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Drummer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer2)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_8)
+        EVT_IF_GT(LVar0, PARADE_PHASE_PEACH)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_24)
-    EVT_CALL(DeleteNpc, NPC_25)
-    EVT_CALL(DeleteNpc, NPC_32)
-    EVT_CALL(DeleteNpc, NPC_1C)
-    EVT_CALL(DeleteNpc, NPC_1D)
-    EVT_CALL(DeleteNpc, NPC_1E)
-    EVT_CALL(DeleteNpc, NPC_1F)
-    EVT_CALL(DeleteNpc, NPC_20)
-    EVT_CALL(DeleteNpc, NPC_21)
-    EVT_CALL(DeleteNpc, NPC_22)
-    EVT_CALL(DeleteNpc, NPC_23)
-    EVT_CALL(DeleteNpc, NPC_26)
-    EVT_CALL(DeleteNpc, NPC_27)
-    EVT_CALL(DeleteNpc, NPC_28)
-    EVT_CALL(DeleteNpc, NPC_29)
-    EVT_CALL(DeleteNpc, NPC_2A)
-    EVT_CALL(DeleteNpc, NPC_2B)
-    EVT_CALL(DeleteNpc, NPC_2C)
-    EVT_CALL(DeleteNpc, NPC_2D)
-    EVT_CALL(DeleteNpc, NPC_2E)
-    EVT_CALL(DeleteNpc, NPC_2F)
-    EVT_CALL(DeleteNpc, NPC_30)
-    EVT_CALL(DeleteNpc, NPC_31)
+    EVT_CALL(DeleteNpc, NPC_PyroGuy1)
+    EVT_CALL(DeleteNpc, NPC_PyroGuy2)
+    EVT_CALL(DeleteNpc, NPC_Pratfaller)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyMarshall)
+    EVT_CALL(DeleteNpc, NPC_GeneralGuy)
+    EVT_CALL(DeleteNpc, NPC_BackupDancer1)
+    EVT_CALL(DeleteNpc, NPC_BackupDancer2)
+    EVT_CALL(DeleteNpc, NPC_GrooveGuy1)
+    EVT_CALL(DeleteNpc, NPC_GrooveGuy2)
+    EVT_CALL(DeleteNpc, NPC_GrooveGuy3)
+    EVT_CALL(DeleteNpc, NPC_GrooveGuy4)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation11)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation12)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation13)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation21)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation22)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation23)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation31)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation32)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation33)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation41)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation42)
+    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation43)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_39)
-    EVT_CALL(N(CreateParadeNPC), NPC_3A)
-    EVT_CALL(N(CreateParadeNPC), NPC_3B)
-    EVT_CALL(N(CreateParadeNPC), NPC_3C)
-    EVT_CALL(N(CreateParadeNPC), NPC_3D)
-    EVT_CALL(N(CreateParadeNPC), NPC_3E)
-    EVT_CALL(N(CreateParadeNPC), NPC_3F)
-    EVT_CALL(N(CreateParadeNPC), NPC_40)
-    EVT_CALL(N(CreateParadeNPC), NPC_41)
-    EVT_CALL(N(CreateParadeNPC), NPC_42)
-    EVT_CALL(N(CreateParadeNPC), NPC_43)
+    EVT_CALL(N(CreateParadeNPC), NPC_Mario)
+    EVT_CALL(N(CreateParadeNPC), NPC_Peach)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twink)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler3)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton3)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer3)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer4)
     EVT_RETURN
     EVT_END
 };
@@ -753,7 +753,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_1)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SKATERS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -761,7 +761,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_2)
+        EVT_IF_GT(LVar0, PARADE_PHASE_MAYOR)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -769,7 +769,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_3)
+        EVT_IF_GT(LVar0, PARADE_PHASE_OPERA)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -777,7 +777,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_4)
+        EVT_IF_GT(LVar0, PARADE_PHASE_WIZARDS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -785,7 +785,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_5)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -793,7 +793,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_6)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_MARCH)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -801,7 +801,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_7)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOADS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -809,7 +809,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_8)
+        EVT_IF_GT(LVar0, PARADE_PHASE_PEACH)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -817,7 +817,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_9)
+        EVT_IF_GT(LVar0, PARADE_PHASE_EXIT)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

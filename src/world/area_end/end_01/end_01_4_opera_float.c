@@ -117,7 +117,7 @@ void N(gfx_build_set_spotlight_alpha)(void) {
 }
 
 EvtScript N(MakeSpiritAppear) = {
-    EVT_CALL(SetNpcFlagBits, NPC_07, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_40000, TRUE)
     EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
     EVT_SUB(LVar3, 120)
     EVT_SET(LVar5, LVar3)
@@ -132,25 +132,25 @@ EvtScript N(MakeSpiritAppear) = {
 EvtScript N(EVS_ParadePhase_StarSpirits) = {
     EVT_CALL(N(SetWorldDark))
     EVT_WAIT(20)
-    EVT_SET(LVarA, NPC_00)
+    EVT_SET(LVarA, NPC_Eldstar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(2)
-    EVT_SET(LVarA, NPC_01)
+    EVT_SET(LVarA, NPC_Mamar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(2)
-    EVT_SET(LVarA, NPC_02)
+    EVT_SET(LVarA, NPC_Skolar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(3)
-    EVT_SET(LVarA, NPC_04)
+    EVT_SET(LVarA, NPC_Misstar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(5)
-    EVT_SET(LVarA, NPC_05)
+    EVT_SET(LVarA, NPC_Klevar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(3)
-    EVT_SET(LVarA, NPC_03)
+    EVT_SET(LVarA, NPC_Muskular)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(7)
-    EVT_SET(LVarA, NPC_06)
+    EVT_SET(LVarA, NPC_Kalmar)
     EVT_EXEC(N(MakeSpiritAppear))
     EVT_WAIT(30)
     EVT_CALL(N(FadeInWorld))
@@ -160,43 +160,43 @@ EvtScript N(EVS_ParadePhase_StarSpirits) = {
 };
 
 EvtScript N(EVS_SkatingPenguin1) = {
-    EVT_CALL(SetNpcFlagBits, NPC_07, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_40000, TRUE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(SetNpcAnimation, NPC_07, ANIM_ParadeIceShow_Violin_SkateKickLeft)
+            EVT_CALL(SetNpcAnimation, NPC_PenguinSkater1, ANIM_ParadeIceShow_Violin_SkateKickLeft)
             EVT_WAIT(30)
-            EVT_CALL(SetNpcAnimation, NPC_07, ANIM_ParadeIceShow_Violin_SkateKickRight)
+            EVT_CALL(SetNpcAnimation, NPC_PenguinSkater1, ANIM_ParadeIceShow_Violin_SkateKickRight)
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(GetNpcPos, NPC_07, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_PenguinSkater1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -180)
-    EVT_CALL(NpcMoveTo, NPC_07, LVar0, LVar2, 120)
-    EVT_CALL(N(SkateInCirclePenguin1), NPC_07)
-    EVT_CALL(GetNpcPos, NPC_07, LVar0, LVar1, LVar2)
+    EVT_CALL(NpcMoveTo, NPC_PenguinSkater1, LVar0, LVar2, 120)
+    EVT_CALL(N(SkateInCirclePenguin1), NPC_PenguinSkater1)
+    EVT_CALL(GetNpcPos, NPC_PenguinSkater1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -180)
-    EVT_CALL(NpcMoveTo, NPC_07, LVar0, LVar2, 120)
+    EVT_CALL(NpcMoveTo, NPC_PenguinSkater1, LVar0, LVar2, 120)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_SkatingPenguin2) = {
-    EVT_CALL(SetNpcFlagBits, NPC_08, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater2, NPC_FLAG_40000, TRUE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(SetNpcAnimation, NPC_08, ANIM_ParadeIceShow_Violin_SkateKickLeft)
+            EVT_CALL(SetNpcAnimation, NPC_PenguinSkater2, ANIM_ParadeIceShow_Violin_SkateKickLeft)
             EVT_WAIT(30)
-            EVT_CALL(SetNpcAnimation, NPC_08, ANIM_ParadeIceShow_Violin_SkateKickRight)
+            EVT_CALL(SetNpcAnimation, NPC_PenguinSkater2, ANIM_ParadeIceShow_Violin_SkateKickRight)
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(GetNpcPos, NPC_08, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_PenguinSkater2, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -210)
-    EVT_CALL(NpcMoveTo, NPC_08, LVar0, LVar2, 140)
-    EVT_CALL(N(SkateInCirclePenguin2), NPC_08)
-    EVT_CALL(GetNpcPos, NPC_08, LVar0, LVar1, LVar2)
+    EVT_CALL(NpcMoveTo, NPC_PenguinSkater2, LVar0, LVar2, 140)
+    EVT_CALL(N(SkateInCirclePenguin2), NPC_PenguinSkater2)
+    EVT_CALL(GetNpcPos, NPC_PenguinSkater2, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -180)
-    EVT_CALL(NpcMoveTo, NPC_08, LVar0, LVar2, 120)
+    EVT_CALL(NpcMoveTo, NPC_PenguinSkater2, LVar0, LVar2, 120)
     EVT_RETURN
     EVT_END
 };
@@ -219,14 +219,14 @@ EvtScript N(EVS_ParadePhase_SkatingPenguins) = {
 
 EvtScript N(EVS_ParadePhase_MayorPenguin) = {
     EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_09, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_PenguinMayor, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, -300)
-        EVT_CALL(NpcMoveTo, NPC_09, LVar0, LVar2, 500)
+        EVT_CALL(NpcMoveTo, NPC_PenguinMayor, LVar0, LVar2, 500)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_0A, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_PenguinMayorWife, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, -300)
-        EVT_CALL(NpcMoveTo, NPC_0A, LVar0, LVar2, 500)
+        EVT_CALL(NpcMoveTo, NPC_PenguinMayorWife, LVar0, LVar2, 500)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -307,13 +307,13 @@ EvtScript N(EVS_ParadePhase_Opera) = {
     EVT_SET(LVar0, 1)
     EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_MainStageLights), LVarA)
     EVT_EXEC_GET_TID(N(EVS_UpdateLightshow), LVarC)
-    EVT_CALL(SetNpcFlagBits, NPC_0F, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Singer, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
     EVT_CALL(MakeLerp, 0, 55, 90, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, MODEL_kino1, 0, LVar0, 0)
         EVT_ADD(LVar0, -19)
-        EVT_CALL(SetNpcPos, NPC_0F, -2529, LVar0, 0)
+        EVT_CALL(SetNpcPos, NPC_Singer, -2529, LVar0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -323,7 +323,7 @@ EvtScript N(EVS_ParadePhase_Opera) = {
     EVT_SET(LVar0, 8)
     EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_MainStageLights), LVarA)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_0F, ANIM_ParadeIceShow_Violin_ShadeDivaSing)
+    EVT_CALL(SetNpcAnimation, NPC_Singer, ANIM_ParadeIceShow_Violin_ShadeDivaSing)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
