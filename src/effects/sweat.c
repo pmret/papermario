@@ -8,29 +8,38 @@ INCLUDE_ASM(s32, "effects/sweat", sweat_main);
 void sweat_init(void) {
 }
 
+typedef struct {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C*/ f32 unkC;
+    /* 0x10 */
+    s32 unk24;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+} _SweatFXData;
+
 // INCLUDE_ASM(s32, "effects/sweat", sweat_update);
-void sweat_update(EffectInstance *arg0) {
+void sweat_update(EffectInstance *effect) {
     f32 temp_f0;
-    s32 *temp_v1;
+    _SweatFXData* data = effect->data.sweat;
     s32 temp_v0;
 
-    temp_v1 = arg0->data.any;
-    temp_v0 = temp_v1->unk24 - 1;
-    temp_v1->unk24 = temp_v0;
+    temp_v0 = data->unk24 - 1;
+    data->unk24 = temp_v0;
     if (temp_v0 < 0) {
-        shim_remove_effect(arg0);
+        shim_remove_effect(effect);
         return;
     }
-    temp_v1->unk4 = (f32) (temp_v1->unk4 + temp_v1->unk18);
-    temp_v1->unk8 = (f32) (temp_v1->unk8 + temp_v1->unk1C);
-    temp_v1->unkC = (f32) (temp_v1->unkC + temp_v1->unk20);
-    temp_f0 = (f32) ((f64) temp_v1->unk1C - 0.05);
-    temp_v1->unk1C = temp_f0;
-    temp_v1->unk18 = (f32) ((f64) temp_v1->unk18 * 0.94);
+    data->pos.x = (f32) (data->pos.x + data->unk18);
+    data->pos.y = (f32) (data->pos.y + data->unk1C);
+    data->pos.z = (f32) (data->pos.z + data->unk20);
+    temp_f0 = (f32) ((f64) data->unk1C - 0.05);
+    data->unk1C = temp_f0;
+    data->unk18 = (f32) ((f64) data->unk18 * 0.94);
     if ((f64) temp_f0 < -0.1) {
-        temp_v1->unk1C = -0.1f;
+        data->unk1C = -0.1f;
     }
-    temp_v1->unk20 = (f32) ((f64) temp_v1->unk20 * 0.94);
+    data->unk20 = (f32) ((f64) data->unk20 * 0.94);
 }
 
 void sweat_render(EffectInstance* effect) {
