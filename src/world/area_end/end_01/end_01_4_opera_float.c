@@ -29,7 +29,7 @@ API_CALLABLE(N(FadeInWorld)) {
     }
 }
 
-API_CALLABLE(N(UpdateSpiritRotation)) {
+API_CALLABLE(N(UpdateStarSpiritRotation)) {
     Npc* npc;
 
     if (isInitialCall) {
@@ -37,11 +37,11 @@ API_CALLABLE(N(UpdateSpiritRotation)) {
         script->functionTemp[0] = 0;
     }
     npc = script->functionTempPtr[2];
-    npc->rotation.y = update_lerp(4, 810.0f, 0.0f, script->functionTemp[0], 45);
-    npc->alpha = update_lerp(4, 0.0f, 255.0f, script->functionTemp[0], 45);
+    npc->rotation.y = update_lerp(EASING_QUADRATIC_OUT, 810.0f, 0.0f, script->functionTemp[0], 45);
+    npc->alpha = update_lerp(EASING_QUADRATIC_OUT, 0.0f, 255.0f, script->functionTemp[0], 45);
 
     script->functionTemp[0]++;
-    if (script->functionTemp[0] < 46) {
+    if (script->functionTemp[0] <= 45) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE1;
@@ -110,9 +110,10 @@ API_CALLABLE(N(SetSpotlightsAlpha)) {
 }
 
 void N(gfx_build_set_spotlight_alpha)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, SHADE, 0,
-                      PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(SpotlightsAlpha) & 0xFF);
+    gDPSetCombineLERP(gMasterGfxPos++,
+        TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0,
+        TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(SpotlightsAlpha));
 }
 
 EvtScript N(MakeSpiritAppear) = {
@@ -123,7 +124,7 @@ EvtScript N(MakeSpiritAppear) = {
     EVT_ADD(LVar5, 15)
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar2, LVar5, LVar4, 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, LVarA, LVar2, LVar3, LVar4)
-    EVT_CALL(N(UpdateSpiritRotation))
+    EVT_CALL(N(UpdateStarSpiritRotation))
     EVT_RETURN
     EVT_END
 };
@@ -216,7 +217,7 @@ EvtScript N(EVS_ParadePhase_SkatingPenguins) = {
     EVT_END
 };
 
-EvtScript N(D_80245C74_E0AFD4) = {
+EvtScript N(EVS_ParadePhase_MayorPenguin) = {
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_09, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, -300)
@@ -233,7 +234,7 @@ EvtScript N(D_80245C74_E0AFD4) = {
 
 s32 N(SpotlightsAlpha) = 0;
 
-EvtScript N(EVS_UpdateMainStageLights) = {
+EvtScript N(EVS_TexPan_OperaFloat_MainStageLights) = {
     EVT_CALL(EnableTexPanning, MODEL_kino3, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_kino5, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_kino6, TRUE)
@@ -248,7 +249,7 @@ EvtScript N(EVS_UpdateMainStageLights) = {
     EVT_END
 };
 
-EvtScript N(EVS_UpdateBlueStageLights) = {
+EvtScript N(EVS_TexPan_OperaFloat_StageLights) = {
     EVT_CALL(EnableTexPanning, MODEL_kino4, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
@@ -289,12 +290,12 @@ EvtScript N(EVS_UpdateLightshow) = {
     EVT_END
 };
 
-EvtScript N(D_80245FF0_E0B350) = {
+EvtScript N(EVS_ParadePhase_Opera) = {
     EVT_CALL(EnableModel, MODEL_kino7, FALSE)
     EVT_CALL(EnableModel, MODEL_kino8, FALSE)
     EVT_SET(LVar0, 8)
-    EVT_EXEC_GET_TID(N(EVS_UpdateMainStageLights), LVarA)
-    EVT_EXEC_GET_TID(N(EVS_UpdateBlueStageLights), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_MainStageLights), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_StageLights), LVarB)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -304,7 +305,7 @@ EvtScript N(D_80245FF0_E0B350) = {
     EVT_END_LOOP
     EVT_KILL_THREAD(LVarA)
     EVT_SET(LVar0, 1)
-    EVT_EXEC_GET_TID(N(EVS_UpdateMainStageLights), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_MainStageLights), LVarA)
     EVT_EXEC_GET_TID(N(EVS_UpdateLightshow), LVarC)
     EVT_CALL(SetNpcFlagBits, NPC_0F, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
     EVT_CALL(MakeLerp, 0, 55, 90, EASING_LINEAR)
@@ -320,7 +321,7 @@ EvtScript N(D_80245FF0_E0B350) = {
     EVT_END_LOOP
     EVT_KILL_THREAD(LVarA)
     EVT_SET(LVar0, 8)
-    EVT_EXEC_GET_TID(N(EVS_UpdateMainStageLights), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_OperaFloat_MainStageLights), LVarA)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_0F, ANIM_ParadeIceShow_Violin_ShadeDivaSing)
     EVT_LOOP(0)

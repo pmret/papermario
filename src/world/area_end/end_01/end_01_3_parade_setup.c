@@ -7,7 +7,7 @@ extern ParadeNpcInfo N(ParadeNpcsTable)[];
 API_CALLABLE(N(InitCredits));
 API_CALLABLE(N(ShowCreditList));
 
-extern EvtScript N(EVS_80246A60);
+extern EvtScript N(EVS_ParadePhase_Wizards);
 extern EvtScript N(EVS_ParadePhase_ShyGuyDancing);
 extern EvtScript N(EVS_ParadePhase_ShyGuyFormation);
 extern EvtScript N(EVS_ParadePhase_Toads1);
@@ -16,8 +16,8 @@ extern EvtScript N(EVS_ParadePhase_Toads2);
 extern EvtScript N(EVS_MarioPeachExit);
 extern EvtScript N(EVS_ParadePhase_StarSpirits);
 extern EvtScript N(EVS_ParadePhase_SkatingPenguins);
-extern EvtScript N(D_80245FF0_E0B350);
-extern EvtScript N(D_80245C74_E0AFD4);
+extern EvtScript N(EVS_ParadePhase_Opera);
+extern EvtScript N(EVS_ParadePhase_MayorPenguin);
 
 extern EvtScript N(EVS_InitCredits);
 extern EvtScript N(EVS_ShowCredits_Jobs);
@@ -765,7 +765,7 @@ EvtScript N(EVS_ManageParade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_80245C74_E0AFD4))
+    EVT_EXEC(N(EVS_ParadePhase_MayorPenguin))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -773,7 +773,7 @@ EvtScript N(EVS_ManageParade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_80245FF0_E0B350))
+    EVT_EXEC(N(EVS_ParadePhase_Opera))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -781,7 +781,7 @@ EvtScript N(EVS_ManageParade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80246A60))
+    EVT_EXEC(N(EVS_ParadePhase_Wizards))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)

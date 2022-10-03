@@ -1,7 +1,7 @@
 #include "end_01.h"
 #include "effects.h"
 
-EvtScript N(D_80246290_E0B5F0) = {
+EvtScript N(EVS_TexPan_FlowerFloat_Base) = {
     EVT_CALL(EnableTexPanning, MODEL_flo1, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
@@ -13,7 +13,7 @@ EvtScript N(D_80246290_E0B5F0) = {
     EVT_END
 };
 
-EvtScript N(D_80246310_E0B670) = {
+EvtScript N(EVS_TexPan_FlowerFloat_WisterwoodBody) = {
     EVT_CALL(EnableTexPanning, MODEL_flo2, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_flo4, TRUE)
     EVT_SET(LVar0, 0)
@@ -26,7 +26,7 @@ EvtScript N(D_80246310_E0B670) = {
     EVT_END
 };
 
-EvtScript N(D_802463A4_E0B704) = {
+EvtScript N(EVS_TexPan_FlowerFloat_WisterwoodBlink) = {
     EVT_CALL(EnableTexPanning, MODEL_flo3, TRUE)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0x8000, 0)
     EVT_LOOP(0)
@@ -50,7 +50,7 @@ EvtScript N(D_802463A4_E0B704) = {
     EVT_END
 };
 
-EvtScript N(D_802464F8_E0B858) = {
+EvtScript N(EVS_Amayze_Dayzee) = {
     EVT_CALL(GetNpcPos, NPC_10, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_SUB(LVar2, 2)
@@ -66,7 +66,7 @@ EvtScript N(D_802464F8_E0B858) = {
     EVT_END
 };
 
-EvtScript N(D_80246628_E0B988) = {
+EvtScript N(EVS_Sun) = {
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_18, -2185, 130, -30)
         EVT_CALL(NpcFlyTo, NPC_18, -2185, 50, -30, 10, 0, EASING_LINEAR)
@@ -87,7 +87,7 @@ EvtScript N(D_80246628_E0B988) = {
     EVT_END
 };
 
-EvtScript N(D_802467E0_E0BB40) = {
+EvtScript N(EVS_Bulbulbs) = {
     EVT_CALL(GetNpcPos, NPC_1A, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar0)
     EVT_ADD(LVar3, -120)
@@ -132,8 +132,8 @@ EvtScript N(D_802467E0_E0BB40) = {
     EVT_END
 };
 
-EvtScript N(EVS_80246A60) = {
-    EVT_EXEC_GET_TID(N(D_802464F8_E0B858), LVarD)
+EvtScript N(EVS_ParadePhase_Wizards) = {
+    EVT_EXEC_GET_TID(N(EVS_Amayze_Dayzee), LVarD)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -142,8 +142,8 @@ EvtScript N(EVS_80246A60) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(1)
-    EVT_EXEC_GET_TID(N(D_80246290_E0B5F0), LVarA)
-    EVT_EXEC(N(D_802467E0_E0BB40))
+    EVT_EXEC_GET_TID(N(EVS_TexPan_FlowerFloat_Base), LVarA)
+    EVT_EXEC(N(EVS_Bulbulbs))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -160,9 +160,9 @@ EvtScript N(EVS_80246A60) = {
     EVT_CALL(GetNpcPos, NPC_14, LVar0, LVar1, LVar2)
     EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, 1, 20, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
-    EVT_EXEC(N(D_80246628_E0B988))
-    EVT_EXEC_GET_TID(N(D_80246310_E0B670), LVarB)
-    EVT_EXEC_GET_TID(N(D_802463A4_E0B704), LVarC)
+    EVT_EXEC(N(EVS_Sun))
+    EVT_EXEC_GET_TID(N(EVS_TexPan_FlowerFloat_WisterwoodBody), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_FlowerFloat_WisterwoodBlink), LVarC)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
