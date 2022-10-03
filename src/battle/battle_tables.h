@@ -88,4 +88,7 @@ extern StageList b_area_pra2_stageTable;
 extern BattleList b_area_pra3_formationTable;
 extern StageList b_area_pra3_stageTable;
 
+extern BattleList b_area_dig_formationTable;
+extern StageList b_area_dig_stageTable;
+
 #endif

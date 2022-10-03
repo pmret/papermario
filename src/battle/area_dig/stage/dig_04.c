@@ -3,9 +3,9 @@
 #include "script_api/battle.h"
 #include "mapfs/omo_bt04_shape.h"
 
-#define NAMESPACE b_area_omo_omo_04
+#define NAMESPACE b_area_dig_dig_04
 
-extern Formation N(fromation_slot_machine);
+extern Formation N(formation_slot_machine);
 extern ActorBlueprint N(slot_machine_stop);
 extern ActorBlueprint N(slot_machine_start);
 
@@ -43,7 +43,7 @@ Stage NAMESPACE = {
     .postBattle = &N(afterBattle),
     .foregroundModelList = N(foregroundModelList),
     .specialFormationSize = 4,
-    .specialFormation = &N(fromation_slot_machine),
+    .specialFormation = &N(formation_slot_machine),
 };
 
 Vec3i N(slot_machine_pos1) = { -49, 56, -68 };
@@ -51,13 +51,11 @@ Vec3i N(slot_machine_pos2) = { -13, 56, -68 };
 Vec3i N(slot_machine_pos3) = { 20, 56, -68 };
 Vec3i N(slot_machine_pos4) = { 53, 56, -68 };
 
-Formation N(fromation_slot_machine) = {
+Formation N(formation_slot_machine) = {
     { .actor = &N(slot_machine_start), .home = { .vec = &N(slot_machine_pos1) }, .var0 = 0 },
     { .actor = &N(slot_machine_stop), .home = { .vec = &N(slot_machine_pos2) }, .var0 = 1 },
     { .actor = &N(slot_machine_stop), .home = { .vec = &N(slot_machine_pos3) }, .var0 = 2 },
     { .actor = &N(slot_machine_stop), .home = { .vec = &N(slot_machine_pos4) }, .var0 = 3 },
 };
-
-BSS char N(unused)[0x250];
 
 #include "battle/common/actor/slot_machine.inc.c"

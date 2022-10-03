@@ -1,9 +1,10 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/omo_bt06_shape.h"
 
 #define NAMESPACE b_area_omo_omo_06
 
-EvtScript N(8022F630) = {
+EvtScript N(updateModels) = {
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVar9, LVar1)
     EVT_SET(LVar8, LVar2)
@@ -31,31 +32,31 @@ EvtScript N(8022F630) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_8022F790) = {
+EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 26)
         EVT_SET(LVar1, -50)
         EVT_SET(LVar2, 120)
-        EVT_EXEC(N(8022F630))
+        EVT_EXEC(N(updateModels))
         EVT_WAIT(10)
         EVT_SET(LVar0, 30)
         EVT_SET(LVar1, -80)
         EVT_SET(LVar2, 150)
-        EVT_EXEC(N(8022F630))
+        EVT_EXEC(N(updateModels))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8022F860) = {
+EvtScript N(afterBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8022F870)[] = {
-    0x00000027, 0x00000026, 0x00000000,
+s32 N(foregroundModelList)[] = {
+    MODEL_kuruma, MODEL_hosi, 0,
 };
 
 Stage NAMESPACE = {
@@ -63,7 +64,7 @@ Stage NAMESPACE = {
     .shape = "omo_bt06_shape",
     .hit = "omo_bt06_hit",
     .bg = "omo_bg",
-    .preBattle = &N(beforeBattle_8022F790),
-    .postBattle = &N(afterBattle_8022F860),
-    .foregroundModelList = N(foregroundModelList_8022F870),
+    .preBattle = &N(beforeBattle),
+    .postBattle = &N(afterBattle),
+    .foregroundModelList = N(foregroundModelList),
 };

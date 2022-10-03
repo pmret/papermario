@@ -247,8 +247,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_DIG] = {
         BTL_AREA(area_dig),
         .name = "エリア ＤＩＧ",
-        .battles = 0x8022A7C4,
-        .stages = 0x8022A83C,
+        .battles = &b_area_dig_formationTable,
+        .stages = &b_area_dig_stageTable,
     },
     [BTL_AREA_OMO2_1] = {
         BTL_AREA(area_omo2_1),

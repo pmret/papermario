@@ -315,6 +315,7 @@ ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall);
 ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall);
+ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall);
 ApiStatus func_802693F0(Evt* script, s32 isInitialCall);
 ApiStatus WaitForState(Evt* script, s32 isInitialCall);
 ApiStatus func_8026E020(Evt* script, s32 isInitialCall);

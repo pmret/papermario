@@ -1,6 +1,7 @@
 #include "common.h"
+#include "script_api/battle.h"
 
-#define NAMESPACE b_area_dig
+#define NAMESPACE b_area_dig_dig_01_script
 
 #include "common/Set80218630_Var0.inc.c"
 
@@ -22,3 +23,17 @@ ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+EvtScript NAMESPACE = {
+    EVT_WAIT(3)
+    EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
+    EVT_CALL(func_802535B4, 0)
+    EVT_SET(LocalVar(0), 15)
+    EVT_CALL(N(Set80218630_Var0))
+    EVT_CALL(WaitForState, 13)
+    EVT_CALL(func_80218644_6DE404)
+    EVT_CALL(SetBattleState, 18)
+    EVT_WAIT(10000)
+    EVT_RETURN
+    EVT_END
+};
