@@ -88,7 +88,7 @@ s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
-EvtScript script = {
+EvtScript N(main) = {
     EVT_SET_CONST(LVarA, 0x00000087)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
