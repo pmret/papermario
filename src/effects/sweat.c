@@ -8,7 +8,24 @@ INCLUDE_ASM(s32, "effects/sweat", sweat_main);
 void sweat_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/sweat", sweat_update);
+void sweat_update(EffectInstance *effect) {
+    SweatFXData* data = effect->data.sweat;
+
+    data->unk_24--;
+    if (data->unk_24 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    data->pos.x += data->unk_18;
+    data->pos.y += data->unk_1C;
+    data->pos.z += data->unk_20;
+    data->unk_1C -= 0.05;
+    data->unk_18 *= 0.94;
+    if (data->unk_1C < -0.1) {
+        data->unk_1C = -0.1f;
+    }
+    data->unk_20 *= 0.94;
+}
 
 void sweat_render(EffectInstance* effect) {
     RenderTask renderTask;
