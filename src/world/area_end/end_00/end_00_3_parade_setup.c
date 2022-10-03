@@ -174,7 +174,7 @@ EvtScript N(EVS_UpdateTexPan_Ground) = {
     EVT_END
 };
 
-EvtScript N(D_80244AE4_DFB4E4) = {
+EvtScript N(EVS_TexPan_Clouds) = {
     EVT_CALL(EnableTexPanning, MODEL_cloud, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
@@ -186,7 +186,7 @@ EvtScript N(D_80244AE4_DFB4E4) = {
     EVT_END
 };
 
-EvtScript N(D_80244B64_DFB564) = {
+EvtScript N(EVS_TexPan_Water) = {
     EVT_CALL(EnableTexPanning, MODEL_umi, TRUE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
@@ -1167,8 +1167,8 @@ EvtScript N(EVS_ManageParade) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
-    EVT_EXEC(N(D_80244AE4_DFB4E4))
-    EVT_EXEC(N(D_80244B64_DFB564))
+    EVT_EXEC(N(EVS_TexPan_Clouds))
+    EVT_EXEC(N(EVS_TexPan_Water))
     EVT_EXEC(N(EVS_SetupInitialCamera))
     EVT_EXEC(N(EVS_ManageNpcPool))
     EVT_EXEC_GET_TID(N(EVS_ParadePhase_Luigi), LVarA)

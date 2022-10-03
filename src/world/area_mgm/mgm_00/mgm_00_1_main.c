@@ -69,7 +69,7 @@ EvtScript N(EVS_GotoMap_SmashAttack) = {
     EVT_END
 };
 
-const s32 N(rodata_pad) = 0;
+MAP_RODATA_PAD(1, unk);
 
 EvtScript N(EVS_OnEnterPipe_SmashAttack) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

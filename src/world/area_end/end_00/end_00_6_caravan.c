@@ -1,6 +1,6 @@
 #include "end_00.h"
 
-EvtScript N(CaravanStopMarching) = {
+EvtScript N(EVS_CaravanStopMarching) = {
     EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
     EVT_SETF(LVar1, LVar1)
     EVT_LOOP(0)
@@ -13,7 +13,7 @@ EvtScript N(CaravanStopMarching) = {
 };
 
 // unused
-EvtScript N(MoustafaStopMarching) = {
+EvtScript N(EVS_MoustafaStopMarching) = {
     EVT_CALL(GetNpcPos, NPC_Moustafa, LVar0, LVar1, LVar2)
     EVT_SETF(LVar0, LVar0)
     EVT_LOOP(0)
@@ -30,7 +30,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Rowf, -1447, -2, 200)
         EVT_SET(LVar0, NPC_Rowf)
-        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_PackedIdle)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_PackedTalk)
@@ -53,7 +53,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Rhuff, -1412, -2, 200)
         EVT_SET(LVar0, NPC_Rhuff)
-        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_PackedIdle)
         EVT_WAIT(220)
         EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_PackedWalk)
@@ -64,7 +64,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Moustafa, -1380, 2, 180)
         EVT_SET(LVar0, NPC_Moustafa)
-        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_Moustafa, ANIM_Moustafa_Idle)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_Moustafa, ANIM_Moustafa_Toss)
@@ -95,7 +95,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
         EVT_WAIT(10)
         EVT_CALL(NpcMoveTo, NPC_Mouser1, -1342, 2, 180)
         EVT_SET(LVar0, NPC_Mouser1)
-        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_Mouser1, ANIM_Mouser_Blue_IdleOnlyBlink)
         EVT_WAIT(110)
         EVT_CALL(SetNpcAnimation, NPC_Mouser1, ANIM_Mouser_Blue_Whisper)
@@ -110,7 +110,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
         EVT_WAIT(10)
         EVT_CALL(NpcMoveTo, NPC_Mouser2, -1312, 2, 180)
         EVT_SET(LVar0, NPC_Mouser2)
-        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_Mouser2, ANIM_Mouser_Blue_IdleOnlyBlink)
         EVT_WAIT(230)
         EVT_CALL(SetNpcAnimation, NPC_Mouser2, ANIM_Mouser_Blue_Run)

@@ -4,18 +4,21 @@ extern u32 N(unkAngle1);
 extern s32 N(unkAngle2);
 extern s32 N(unkAngle3);
 
-void N(unkVtxFunc001)(Vtx* firstVertex, Vtx* copiedVertices, s32 numVertices, s32* arg3);
+#include "world/common/atomic/WhaleAnim.inc.c"
 
-#include "world/common/resolve_npc.inc.c"
+ApiStatus N(UnkPlayerPosFunc)(Evt* script, s32 isInitialCall) {
+    Npc* player = get_npc_safe(ACTOR_PLAYER);
+    f32 yaw = -player->yaw;
+    f32 x = player->pos.x + 30.0f + (sin_deg(yaw) * 70.0f);
+    f32 z = player->pos.z + (cos_deg(yaw) * 70.0f);
+    f32 y = player->pos.y + 50.0f;
 
-#include "world/common/UnkAngleFunc001.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", mac_05_unkVtxFunc001);
-
-#include "world/common/unkAngleFuncs023.inc.c"
-
-#include "world/common/UnkFloatFunc001.inc.c"
-
-#include "world/common/UnkPlayerPosFunc.inc.c"
+    evt_set_float_variable(script, LVar0, x);
+    evt_set_float_variable(script, LVar1, y);
+    evt_set_float_variable(script, LVar2, z);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/atomic/WhaleGeyser.inc.c"
+
+MAP_RODATA_PAD(2, unk);

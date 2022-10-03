@@ -93,7 +93,7 @@ s32 N(VineAnimationsDmaTable)[] = {
 
 static s32 N(VineRenderState);
 
-static s32 N(unk_static_pad);
+MAP_STATIC_PAD(1, unk_static_pad);
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;

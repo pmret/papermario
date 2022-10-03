@@ -6365,13 +6365,10 @@ segments:
     start: 0x864B40
     vram: 0x80240000
     subsegments:
-    - [0x864B40, c]
-    - [0x865000, c]
-    - [0x8659C0, c]
-    - [0x8661D0, data]
-    - [0x8666A0, data]
-    - [0x867EF0, data]
-    - [0x869450]
+    - [0x864B40, c, mac_06_1_main]
+    - [0x865000, c, mac_06_2]
+    - [0x8659C0, c, mac_06_3]
+    - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01
     type: code
