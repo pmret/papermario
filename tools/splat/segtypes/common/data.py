@@ -101,7 +101,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                         f"Data segment {self.name}, symbol at vram {symbol.contextSym.vram:X} is a jumptable, indicating the start of the rodata section _may_ be near here."
                     )
                     print(
-                        f"Please note the real start of the rodata section may be way before this point."
+                        "Please note the real start of the rodata section may be way before this point."
                     )
                     if symbol.contextSym.vromAddress is not None:
                         print(f"      - [0x{symbol.contextSym.vromAddress:X}, rodata]")

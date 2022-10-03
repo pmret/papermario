@@ -1,8 +1,8 @@
-import dataclasses
+from dataclasses import dataclass
 from typing import Optional
 
 
-@dataclasses.dataclass
+@dataclass
 class Range:
     start: Optional[int] = None
     end: Optional[int] = None

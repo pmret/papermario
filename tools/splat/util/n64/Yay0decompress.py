@@ -23,7 +23,7 @@ def setup_lib():
         )
         return True
     except Exception:
-        print(f"Failed to load C library; falling back to python method")
+        print("Failed to load C library; falling back to python method")
         tried_loading = True
         return False
 

@@ -1,5 +1,4 @@
 from segtypes.n64.img import N64SegImg
-from segtypes.n64.img import N64SegImg
 import n64img.image
 
 
