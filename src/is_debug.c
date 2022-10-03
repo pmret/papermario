@@ -13,7 +13,7 @@ typedef struct {
 
 #define gISVDbgPrnAdrs ((ISVDbg*) 0xb3ff0000)
 
-u32 is_debug_print(void* arg0, const unsigned char* str, u32 count);
+char* is_debug_print(char* arg0, const char* str, size_t count);
 
 void is_debug_init(void) {
     osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->put, 0);
@@ -42,7 +42,7 @@ void rmonPrintf(const char* fmt, ...) {
     _Printf(is_debug_print, NULL, fmt, args);
 }
 
-u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
+char* is_debug_print(char* arg0, const char* str, size_t count) {
     u32 data;
     s32 pos;
     s32 start;
@@ -50,7 +50,7 @@ u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
 
     osEPiReadIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->magic, &data);
     if (data != ASCII_TO_U32('I', 'S', '6', '4')) {
-        return 1;
+        return (char*) 1;
     }
     osEPiReadIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->get, &data);
     pos = data;
@@ -60,20 +60,22 @@ u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
     if (end >= 0xffe0) {
         end -= 0xffe0;
         if (pos < end || start < pos) {
-            return 1;
+            return (char*) 1;
         }
     } else {
         if (start < pos && pos < end) {
-            return 1;
+            return (char*) 1;
         }
     }
     while (count) {
-        if (*str) {
+        u8 c = *str;
+
+        if (c != 0) {
             u32 addr = (u32) &gISVDbgPrnAdrs->data + (start & 0xffffffc);
             s32 shift = ((3 - (start & 3)) * 8);
 
             osEPiReadIo(nuPiCartHandle, addr, &data);
-            osEPiWriteIo(nuPiCartHandle, addr, (data & ~(0xff << shift)) | (*str << shift));
+            osEPiWriteIo(nuPiCartHandle, addr, (data & ~(0xff << shift)) | ((u8)*str << shift));
 
             start++;
             if (start >= 0xffe0) {
@@ -84,19 +86,14 @@ u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
         str++;
     }
     osEPiWriteIo(nuPiCartHandle, (u32)&gISVDbgPrnAdrs->put, start);
-    return 1;
+    return (char*) 1;
 }
 
 #ifdef VERSION_US
-// Nop issue with the rodata string
-    #ifdef NON_MATCHING
 void func_80025F44(const char* message, char* file, s32 line) {
     osSyncPrintf("File:%s Line:%d  %s \n", file, line, message);
     PANIC();
 }
-    #else
-INCLUDE_ASM(void, "is_debug", func_80025F44, char* arg0, char* file, s32 line);
-    #endif
 #elif VERSION_JP
 extern const char D_80097D10[]; // "File:%s Line:%d  %s \n\0\0\0"
 void func_80025F44(char* arg0, char* file, s32 line, char* arg3) {

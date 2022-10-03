@@ -44,7 +44,7 @@ segments:
     subsegments:
     - [0x1000, hasm, bss]
     - [0x1000, hasm, entry_point]
-    - [0x1060, c, is_debug]
+    - [0x1060, c, is_debug, -g -fforce-addr]
     - [0x1370, c, main_pre]
     - [0x1370, c, main]
     - [0x1B40, c, main_loop]
