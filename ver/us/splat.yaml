@@ -42,7 +42,7 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
-    - [0x1000, c, bss]
+    - [0x1000, hasm, bss]
     - [0x1000, hasm, entry_point]
     - [0x1060, c, is_debug]
     - [0x1370, c, main_pre]
@@ -364,7 +364,7 @@ segments:
     vram: 0x800DC500
     follows_vram: main
     subsegments:
-    - [0x759B0, c, bss2]
+    - [0x759B0, hasm, bss2]
     - [0x759B0, c, npc_collision]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
@@ -803,7 +803,7 @@ segments:
     vram: 0x8010F6D0
     follows_vram: engine1
     subsegments:
-    - [0xA5DD0, c, bss3]
+    - [0xA5DD0, hasm, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity_model]
