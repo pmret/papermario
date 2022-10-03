@@ -780,31 +780,33 @@ MapConfig omo_maps[] = {
 };
 
 /// Debug
+#include "area_tst/tst.h"
 MapConfig tst_maps[] = {
-    { MAP_UNSPLIT(tst_01, 0x802400B0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_02, 0x802400B0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_03, 0x802400B0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_04, 0x80240740), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_10, 0x80240040), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_11, 0x80240780), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_12, 0x80240010), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_13, 0x802403D0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(tst_20, 0x80240010), .bgName = "nok_bg" },
+    { MAP(tst_01), .bgName = "nok_bg" },
+    { MAP(tst_02), .bgName = "nok_bg" },
+    { MAP(tst_03), .bgName = "nok_bg" },
+    { MAP(tst_04), .bgName = "nok_bg" },
+    { MAP(tst_10), .bgName = "nok_bg" },
+    { MAP(tst_11), .bgName = "nok_bg" },
+    { MAP(tst_12), .bgName = "nok_bg" },
+    { MAP(tst_13), .bgName = "nok_bg" },
+    { MAP(tst_20), .bgName = "nok_bg" },
 };
 
 /// Credits
 #include "area_end/end.h"
 MapConfig end_maps[] = {
-    { MAP_UNSPLIT(end_00, 0x80242B50), .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(end_00) },
     { MAP_WITH_INIT(end_01) },
 };
 
 /// Toad Town Playroom
+#include "area_mgm/mgm.h"
 MapConfig mgm_maps[] = {
-    { MAP_UNSPLIT(mgm_00, 0x80241810) },
-    { MAP_UNSPLIT(mgm_01, 0x802417C0) },
-    { MAP_UNSPLIT(mgm_02, 0x80242410) },
-    { MAP_UNSPLIT(mgm_03, 0x80240010) },
+    { MAP(mgm_00) },
+    { MAP(mgm_01) },
+    { MAP(mgm_02) },
+    { MAP(mgm_03) },
 };
 
 /// Game Over

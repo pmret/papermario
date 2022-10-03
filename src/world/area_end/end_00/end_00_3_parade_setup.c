@@ -350,42 +350,42 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Goombario] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Goombario,
+        .initialAnim = ANIM_ParadePartner_Goombario,
         .pos = { -2585.0f, 70.0f, 15.0f },
         .yaw = 270.0f
     },
     [NPC_Kooper] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Kooper,
+        .initialAnim = ANIM_ParadePartner_Kooper,
         .pos = { -2517.0f, 40.0f, 7.0f },
         .yaw = 90.0f
     },
     [NPC_Bombette] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Bombette,
+        .initialAnim = ANIM_ParadePartner_Bombette,
         .pos = { -2536.0f, 50.0f, 38.0f },
         .yaw = 270.0f
     },
     [NPC_Parakarry] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Parakarry,
+        .initialAnim = ANIM_ParadePartner_Parakarry,
         .pos = { -2515.0f, 80.0f, 5.0f },
         .yaw = 270.0f
     },
     [NPC_Bow] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Bow,
+        .initialAnim = ANIM_ParadePartner_Bow,
         .pos = { -2475.0f, 56.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_Watt] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Watt,
+        .initialAnim = ANIM_ParadePartner_Watt,
         .pos = { -2575.0f, 20.0f, 48.0f },
         .yaw = 270.0f
     },
     [NPC_Sushie] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Sushie,
+        .initialAnim = ANIM_ParadePartner_Sushie,
         .pos = { -2570.0f, 61.0f, 7.0f },
         .yaw = 90.0f
     },
     [NPC_Lakilester] {
-        .initialAnim = ANIM_ParadePartner_Goombario_Lakilester,
+        .initialAnim = ANIM_ParadePartner_Lakilester,
         .pos = { -2635.0f, 40.0f, 0.0f },
         .yaw = 270.0f
     },
@@ -609,27 +609,27 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Yoshi1] {
-        .initialAnim = ANIM_ParadeYoshi_Brown_Idle,
+        .initialAnim = ANIM_ParadeYoshi_IdleGreen,
         .pos = { 212.0f, 40.0f, 35.0f },
         .yaw = 270.0f
     },
     [NPC_Yoshi2] {
-        .initialAnim = ANIM_ParadeYoshi_Brown_IdleBlue,
+        .initialAnim = ANIM_ParadeYoshi_IdleBlue,
         .pos = { 247.0f, 40.0f, 35.0f },
         .yaw = 270.0f
     },
     [NPC_Yoshi3] {
-        .initialAnim = ANIM_ParadeYoshi_Brown_IdleYellow,
+        .initialAnim = ANIM_ParadeYoshi_IdleYellow,
         .pos = { 282.0f, 40.0f, 35.0f },
         .yaw = 90.0f
     },
     [NPC_Yoshi4] {
-        .initialAnim = ANIM_ParadeYoshi_Brown_IdleBrown,
+        .initialAnim = ANIM_ParadeYoshi_IdleBrown,
         .pos = { 272.0f, 50.0f, 25.0f },
         .yaw = 90.0f
     },
     [NPC_YoshiChief] {
-        .initialAnim = ANIM_ParadeYoshi_Brown_IdleLeader,
+        .initialAnim = ANIM_ParadeYoshi_IdleLeader,
         .pos = { 232.0f, 50.0f, 25.0f },
         .yaw = 270.0f
     },

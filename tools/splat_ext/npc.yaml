@@ -11055,7 +11055,7 @@ ParadePartner:
     - Lakilester3
     - BombetteGear
   palettes:
-    - Goombario
+    - Default
     - Kooper
     - Bombette
     - Parakarry
@@ -11094,18 +11094,18 @@ ParadeYoshi:
     - IdleBlink1
     - IdleBlink2
   palettes:
-    - Brown
+    - Default
     - Green
     - Blue
     - Yellow
     - Chief
   animations:
-    - Still
+    - StillGreen
     - StillBlue
     - StillYellow
     - StillBrown
     - StillLeader
-    - Idle
+    - IdleGreen
     - IdleBlue
     - IdleYellow
     - IdleBrown
