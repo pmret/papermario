@@ -1,4 +1,4 @@
-#include "credits_common.h"
+#include "../credits_common.h"
 
 CreditsEntry N(Credits_Jobs)[] = {
     {

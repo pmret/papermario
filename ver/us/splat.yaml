@@ -11576,16 +11576,16 @@ segments:
     start: 0xDF6A00
     vram: 0x80240000
     subsegments:
-    - [0xDF6A00, c]
-    - [0xDF6A20, c]
-    - [0xDF9300, c]
-    - [0xDF9510, c]
-    - [0xDF9540, data]
-    - [0xDFB0B0, data]
-    - [0xDFE5B0, data]
-    - [0xE019E0, data]
-    - [0xE04180, data]
-    - [0xE052C0]
+    - [0xDF6A00, c, end_00_0_init]
+    - [0xDF6A20, c, end_00_1_main]
+    - [0xDF6A20, c, end_00_2_credits]
+    - [0xDF9080, c, end_00_3_parade_setup]
+    - [0xDF9080, c, end_00_data_5]
+    - [0xDF9300, c, end_00_data_6]
+    - [0xDF9510, c, end_00_data_7]
+    - [0xDF9510, c, end_00_data_8]
+    - [0xDF9510, c, end_00_data_9]
+    - [0xDF9540]
   - name: end_01
     dir: world/area_end/end_01
     type: code

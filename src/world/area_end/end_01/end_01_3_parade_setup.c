@@ -4,9 +4,6 @@
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern ParadeNpcInfo N(ParadeNpcsTable)[];
 
-API_CALLABLE(N(InitCredits));
-API_CALLABLE(N(ShowCreditList));
-
 extern EvtScript N(EVS_ParadePhase_Wizards);
 extern EvtScript N(EVS_ParadePhase_ShyGuyDancing);
 extern EvtScript N(EVS_ParadePhase_ShyGuyFormation);

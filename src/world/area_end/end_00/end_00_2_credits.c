@@ -1,12 +1,9 @@
 #include "end_00.h"
+#include "../credits_common.h"
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
-extern ParadeNpcInfo N(ParadeNpcsTable)[];
-
-extern CreditsUnkBeta N(Font4Patterns)[16];
-extern CreditsUnkBeta N(Font3Patterns)[16];
-extern Vp N(CreditsViewport);
-extern s32 N(CreditsBufferIndex);
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
+void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
+void dma_load_msg(u32 msgID, void* dest);
 
 // start of BSS:
 extern CreditsData N(CreditsData);
@@ -14,9 +11,88 @@ extern CreditsData* N(CreditsDataPtr);
 extern u8 N(CreditsMessageBuffers)[23][256];
 extern Mtx N(CreditsProjMatrices)[2];
 
-s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
-void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
-void dma_load_msg(u32 msgID, void* dest);
+/*
+static CreditsData N(CreditsData);
+static CreditsData* N(CreditsDataPtr);
+static s32 N(BSS_PAD_1)[2];
+static u8 N(CreditsMessageBuffers)[23][256];
+static Mtx N(CreditsProjMatrices)[2];
+*/
+
+CreditsUnkBeta N(Font4Patterns)[] = {
+    { .unk_00 = 0x02, .unk_01 = 0x07, .size = 1 },
+    { .unk_00 = 0x02, .unk_01 = 0x0A, .size = 1 },
+    { .unk_00 = 0x03, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x07, .unk_01 = 0x0D, .size = 1 },
+    { .unk_00 = 0x09, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x0C, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x0C, .unk_01 = 0x0C, .size = 1 },
+    { .unk_00 = 0x0C, .unk_01 = 0x14, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x03, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x0A, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x14, .size = 1 },
+    { .unk_00 = 0x0E, .unk_01 = 0x0D, .size = 1 },
+    { .unk_00 = 0x0E, .unk_01 = 0x11, .size = 1 },
+    { .unk_00 = 0x11, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x11, .unk_01 = 0x0F, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x02, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x0D, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x0F, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x12, .size = 1 },
+    { .unk_00 = 0x12, .unk_01 = 0x02, .size = 1 },
+    { .unk_00 = 0x12, .unk_01 = 0x07, .size = 1 },
+    { .unk_00 = 0x12, .unk_01 = 0x0F, .size = 1 },
+    { .unk_00 = 0x15, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x16, .unk_01 = 0x11, .size = 1 },
+    {}
+};
+
+CreditsUnkBeta N(Font3Patterns)[] = {
+    { .unk_00 = 0x00, .unk_01 = 0x02, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x06, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x0E, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x03, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x0A, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x0D, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x13, .size = 1 },
+    { .unk_00 = 0x00, .unk_01 = 0x14, .size = 1 },
+    { .unk_00 = 0x07, .unk_01 = 0x00, .size = 1 },
+    { .unk_00 = 0x07, .unk_01 = 0x06, .size = 1 },
+    { .unk_00 = 0x07, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x02, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x06, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x0A, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x0D, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x0E, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x13, .size = 1 },
+    { .unk_00 = 0x08, .unk_01 = 0x18, .size = 1 },
+    { .unk_00 = 0x09, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x0C, .unk_01 = 0x0E, .size = 1 },
+    { .unk_00 = 0x0C, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x06, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x0E, .size = 1 },
+    { .unk_00 = 0x0D, .unk_01 = 0x13, .size = 1 },
+    { .unk_00 = 0x12, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x12, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x13, .unk_01 = 0x04, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x02, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x08, .size = 1 },
+    { .unk_00 = 0x14, .unk_01 = 0x0A, .size = 1 },
+    {}
+};
+
+Vp N(CreditsViewport) = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0 },
+        .vtrans = { 640, 480, 511, 0 }
+    }
+};
+
+s32 N(CreditsBufferIndex) = 0;
 
 #include "world/common/atomic/Credits_1.inc.c"
 
@@ -253,75 +329,30 @@ void N(credits_update_line)(CreditsLine* line) {
 
 #include "world/common/atomic/Credits_2.inc.c"
 
-API_CALLABLE(N(func_80242680_DF9080)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 npcID = evt_get_variable(script, *args++);
-    ParadeNpcInfo* npcInfo = &N(ParadeNpcsTable)[npcID];
-    NpcBlueprint bp;
-    Npc* npc;
+#include "credits_title.inc.c"
+#include "credits_jobs.inc.c"
+#include "credits_names.inc.c"
 
-    bp.flags = NPC_FLAG_100;
-    bp.initialAnim = npcInfo->initialAnim;
-    bp.onUpdate = NULL;
-    bp.onRender = NULL;
+EvtScript N(EVS_InitCredits) = {
+    EVT_CALL(N(InitCredits))
+    EVT_RETURN
+    EVT_END
+};
 
-    spr_allocateBtlComponentsOnWorldHeap = TRUE;
+EvtScript N(EVS_ShowCredits_Jobs) = {
+    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Jobs)))
+    EVT_RETURN
+    EVT_END
+};
 
-    npc = get_npc_by_index(_create_npc_standard(&bp, npcInfo->animList));
-    npc->npcID = npcID;
-    npc->flags &= ~NPC_FLAG_PARTICLE;
-    npc->pos.x = npcInfo->pos.x;
-    npc->pos.y = npcInfo->pos.y;
-    npc->pos.z = npcInfo->pos.z;
-    set_npc_yaw(npc, npcInfo->yaw);
-    return ApiStatus_DONE2;
-}
+EvtScript N(EVS_ShowCredits_Names) = {
+    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Names)))
+    EVT_RETURN
+    EVT_END
+};
 
-API_CALLABLE(N(func_80242744_DF9144)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 heapSize = evt_get_variable(script, *args++);
-    s32 outVar = *args++;
-
-    evt_set_variable(script, outVar, (s32) _heap_malloc(&gSpriteHeapPtr, heapSize));
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(func_802427A4_DF91A4)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 pointer = *args++;
-
-    _heap_free(&gSpriteHeapPtr, (void*) evt_get_variable(script, pointer));
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(func_802427D8_DF91D8)) {
-    Camera* camera = &gCameras[gCurrentCameraID];
-
-    camera->panActive = TRUE;
-    camera->movePos.x += 0.6666667f;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(SetNpcShadowScale)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 npcID = evt_get_variable(script, *args++);
-    f32 newShadowScale = evt_get_float_variable(script, *args++);
-
-    resolve_npc(script, npcID)->shadowScale = newShadowScale;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(func_80242898_DF9298)) {
-    Bytecode* args = script->ptrReadPos;
-    Npc** npc = (Npc**)&script->functionTempPtr[1];
-
-    if (isInitialCall) {
-        *npc = get_npc_unsafe(evt_get_variable(script, *args++));
-    }
-
-    (*npc)->pos.x += 0.6666667f;
-
-    return ApiStatus_BLOCK;
-}
-
-static char* N(exit_str_0) = "end_01";
+EvtScript N(EVS_ShowCredits_Title) = {
+    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Title)))
+    EVT_RETURN
+    EVT_END
+};

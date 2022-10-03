@@ -1,6 +1,6 @@
 #include "end_01.h"
 #include "effects.h"
-#include "credits_common.h"
+#include "../credits_common.h"
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
