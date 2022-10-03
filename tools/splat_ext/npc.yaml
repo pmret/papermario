@@ -11377,7 +11377,7 @@ ParadeHorn:
     - Still
     - Idle
     - Walk
-ParadeTubbaBalloon:
+ParadeTubba:
   frames:
     - Arm
     - Hair

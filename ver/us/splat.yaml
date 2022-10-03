@@ -11582,10 +11582,12 @@ segments:
     - [0xDF9080, c, end_00_3_parade_setup]
     - [0xDF9080, c, end_00_4_allies]
     - [0xDF9300, c, end_00_5_koopas]
-    - [0xDF9510, c, end_00_6]
-    - [0xDF9510, c, end_00_7_huff_n_puff]
-    - [0xDF9510, c, end_00_8_crystal_king]
-    - [0xDF9510, c, end_00_9_bowser]
+    - [0xDF9300, c, end_00_6_caravan]
+    - [0xDF9510, c, end_00_7_boos]
+    - [0xDF9510, c, end_00_8_yoshis]
+    - [0xDF9510, c, end_00_9_huff_n_puff]
+    - [0xDF9510, c, end_00_A_crystal_king]
+    - [0xDF9510, c, end_00_B_bowser]
     - [0xDF9540]
   - name: end_01
     dir: world/area_end/end_01
@@ -13630,7 +13632,7 @@ segments:
       - ParadeDrummer
       - ParadeBanner
       - ParadeHorn
-      - ParadeTubbaBalloon
+      - ParadeTubba
       - ParadeWizard
       - ParadeMario
       - ParadeShyGuy

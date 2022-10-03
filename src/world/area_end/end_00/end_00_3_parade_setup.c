@@ -314,481 +314,481 @@ s32 N(ExtraAnims_Kammy)[] = {
 };
 
 ParadeNpcInfo N(ParadeNpcsTable)[] = {
-    [NPC_00] {
+    [NPC_Luigi] {
         .initialAnim = ANIM_ParadeLuigi_March,
         .pos = { -2880.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_01] {
+    [NPC_HornPlayer1] {
         .initialAnim = ANIM_ParadeToad_Red_HornWalk,
         .pos = { -2880.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_02] {
+    [NPC_HornPlayer2] {
         .initialAnim = ANIM_ParadeToad_Red_HornWalk,
         .pos = { -2880.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_03] {
+    [NPC_Drummer1] {
         .initialAnim = ANIM_ParadeToad_Red_DrummerWalk,
         .pos = { -2830.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_04] {
+    [NPC_Drummer2] {
         .initialAnim = ANIM_ParadeToad_Red_DrummerWalk,
         .pos = { -2830.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_05] {
+    [NPC_StandardBearer1] {
         .initialAnim = ANIM_ParadeToad_Red_BannerWalk,
         .pos = { -2780.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_06] {
+    [NPC_StandardBearer2] {
         .initialAnim = ANIM_ParadeToad_Red_BannerWalk,
         .pos = { -2780.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },
-    [NPC_07] {
+    [NPC_Goombario] {
         .initialAnim = ANIM_ParadePartner_Goombario_Goombario,
         .pos = { -2585.0f, 70.0f, 15.0f },
         .yaw = 270.0f
     },
-    [NPC_08] {
+    [NPC_Kooper] {
         .initialAnim = ANIM_ParadePartner_Goombario_Kooper,
         .pos = { -2517.0f, 40.0f, 7.0f },
         .yaw = 90.0f
     },
-    [NPC_09] {
+    [NPC_Bombette] {
         .initialAnim = ANIM_ParadePartner_Goombario_Bombette,
         .pos = { -2536.0f, 50.0f, 38.0f },
         .yaw = 270.0f
     },
-    [NPC_0A] {
+    [NPC_Parakarry] {
         .initialAnim = ANIM_ParadePartner_Goombario_Parakarry,
         .pos = { -2515.0f, 80.0f, 5.0f },
         .yaw = 270.0f
     },
-    [NPC_0B] {
+    [NPC_Bow] {
         .initialAnim = ANIM_ParadePartner_Goombario_Bow,
         .pos = { -2475.0f, 56.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_0C] {
+    [NPC_Watt] {
         .initialAnim = ANIM_ParadePartner_Goombario_Watt,
         .pos = { -2575.0f, 20.0f, 48.0f },
         .yaw = 270.0f
     },
-    [NPC_0D] {
+    [NPC_Sushie] {
         .initialAnim = ANIM_ParadePartner_Goombario_Sushie,
         .pos = { -2570.0f, 61.0f, 7.0f },
         .yaw = 90.0f
     },
-    [NPC_0E] {
+    [NPC_Lakilester] {
         .initialAnim = ANIM_ParadePartner_Goombario_Lakilester,
         .pos = { -2635.0f, 40.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_0F] {
+    [NPC_Twirler1] {
         .initialAnim = ANIM_ParadeToad_Red_TwirlerWalk,
         .pos = { -2350.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_10] {
+    [NPC_Twirler2] {
         .initialAnim = ANIM_ParadeToad_Red_TwirlerWalk,
         .pos = { -2300.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_11] {
+    [NPC_Twirler3] {
         .initialAnim = ANIM_ParadeToad_Red_TwirlerWalk,
         .pos = { -2250.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_12] {
+    [NPC_Baton1] {
         .initialAnim = ANIM_ParadeToad_Red_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_13] {
+    [NPC_Baton2] {
         .initialAnim = ANIM_ParadeToad_Red_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_14] {
+    [NPC_Baton3] {
         .initialAnim = ANIM_ParadeToad_Red_BatonSpin,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_15] {
+    [NPC_ChuckQuizmo] {
         .initialAnim = ANIM_ChuckQuizmo_Walk,
         .pos = { -2120.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_16] {
+    [NPC_VannaT] {
         .initialAnim = ANIM_VannaT_Walk,
         .pos = { -2070.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_17] {
+    [NPC_KoopaBrosRed] {
         .initialAnim = ANIM_KoopaBros_Red_Anim1A,
         .pos = { -1860.0f, 65.0f, 10.0f },
         .yaw = 270.0f
     },
-    [NPC_18] {
+    [NPC_KoopaBrosBlack] {
         .initialAnim = ANIM_KoopaBros_Black_Anim1A,
         .pos = { -1840.0f, 65.0f, 10.0f },
         .yaw = 90.0f
     },
-    [NPC_19] {
+    [NPC_KoopaBrosYellow] {
         .initialAnim = ANIM_KoopaBros_Yellow_Anim1A,
         .pos = { -1870.0f, 12.0f, 37.0f },
         .yaw = 270.0f
     },
-    [NPC_1A] {
+    [NPC_KoopaBrosGreen] {
         .initialAnim = ANIM_KoopaBros_Green_Anim1A,
         .pos = { -1830.0f, 12.0f, 37.0f },
         .yaw = 90.0f
     },
-    [NPC_1B] {
+    [NPC_Bobomb1] {
         .initialAnim = ANIM_Bobomb_Anim05,
         .pos = { -1750.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
-    [NPC_1C] {
+    [NPC_Bobomb2] {
         .initialAnim = ANIM_Bobomb_Anim05,
         .pos = { -1720.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
-    [NPC_1D] {
+    [NPC_Bobomb3] {
         .initialAnim = ANIM_Bobomb_Anim05,
         .pos = { -1690.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
-    [NPC_1E] {
+    [NPC_Bobomb4] {
         .initialAnim = ANIM_Bobomb_Anim05,
         .pos = { -1660.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
-    [NPC_1F] {
+    [NPC_Kolorado] {
         .initialAnim = ANIM_ParadeKolorado_IdleFwd,
         .pos = { -1555.0f, 45.0f, -190.0f },
         .yaw = 270.0f
     },
-    [NPC_20] {
+    [NPC_KoloradoWife] {
         .initialAnim = ANIM_ParadeKolorado_WifeIdleFwd,
         .pos = { -1575.0f, 45.0f, -210.0f },
         .yaw = 270.0f
     },
-    [NPC_21] {
+    [NPC_Rowf] {
         .initialAnim = ANIM_Rowf_PackedWalk,
         .animList = N(ExtraAnims_Rowf),
         .pos = { -1775.0f, 0.0f, 2.0f },
         .yaw = 90.0f
     },
-    [NPC_22] {
+    [NPC_Rhuff] {
         .initialAnim = ANIM_Rowf_PackedWalk,
         .animList = N(ExtraAnims_Rowf),
         .pos = { -1740.0f, 0.0f, 2.0f },
         .yaw = 90.0f
     },
-    [NPC_23] {
+    [NPC_Moustafa] {
         .initialAnim = ANIM_Moustafa_Run,
         .animList = N(ExtraAnims_Moustafa),
         .pos = { -1240.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
-    [NPC_24] {
+    [NPC_Mouser1] {
         .initialAnim = ANIM_Mouser_Blue_Run,
         .animList = N(ExtraAnims_Mouser),
         .pos = { -1210.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
-    [NPC_25] {
+    [NPC_Mouser2] {
         .initialAnim = ANIM_Mouser_Blue_Run,
         .animList = N(ExtraAnims_Mouser),
         .pos = { -1180.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
-    [NPC_26] {
+    [NPC_Tutankoopa1] {
         .initialAnim = ANIM_Tutankoopa_Anim02,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { -1040.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_27] {
+    [NPC_ChainChomp1] {
         .initialAnim = ANIM_ChainChomp_Anim03,
         .pos = { -1000.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
-    [NPC_28] {
+    [NPC_Buzzar] {
         .initialAnim = ANIM_Buzzar_Anim05,
         .animList = N(ExtraAnims_Buzzar),
         .pos = { -855.0f, 70.0f, -140.0f },
         .yaw = 270.0f
     },
-    [NPC_29] {
+    [NPC_VultureChick1] {
         .initialAnim = ANIM_ParadeChick_Egg,
         .pos = { -875.0f, 70.0f, -165.0f },
         .yaw = 270.0f
     },
-    [NPC_2A] {
+    [NPC_VultureChick2] {
         .initialAnim = ANIM_ParadeChick_Egg,
         .pos = { -855.0f, 70.0f, -160.0f },
         .yaw = 90.0f
     },
-    [NPC_2B] {
+    [NPC_VultureChick3] {
         .initialAnim = ANIM_ParadeChick_Egg,
         .pos = { -835.0f, 70.0f, -165.0f },
         .yaw = 90.0f
     },
-    [NPC_2C] {
+    [NPC_Bootler] {
         .initialAnim = ANIM_Bootler_Idle,
         .pos = { -650.0f, 20.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_2D] {
+    [NPC_Tutankoopa2] {
         .initialAnim = ANIM_Tutankoopa_Anim02,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_2E] {
+    [NPC_ChainChomp2] {
         .initialAnim = ANIM_ChainChomp_Anim03,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_2F] {
+    [NPC_ChainChomp3] {
         .initialAnim = ANIM_ChainChomp_Anim03,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_30] {
+    [NPC_ChainChomp4] {
         .initialAnim = ANIM_ChainChomp_Anim03,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_31] {
-        .initialAnim = ANIM_ParadeTubbaBalloon_Still,
+    [NPC_TubbasBody] {
+        .initialAnim = ANIM_ParadeTubba_Still,
         .pos = { -310.0f, 35.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_32] {
+    [NPC_Boo1] {
         .initialAnim = ANIM_Boo_CarryIdle,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_33] {
+    [NPC_Boo2] {
         .initialAnim = ANIM_Boo_CarryIdle,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_34] {
+    [NPC_Boo3] {
         .initialAnim = ANIM_Boo_CarryIdle,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_35] {
+    [NPC_TubbasHeart] {
         .initialAnim = ANIM_TubbasHeart_Anim01,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_36] {
+    [NPC_GoombaKing] {
         .initialAnim = ANIM_GoombaKing_Still,
         .animList = N(ExtraAnims_GoombaKing),
         .pos = { -70.0f, 130.0f, -60.0f },
         .yaw = 270.0f
     },
-    [NPC_37] {
+    [NPC_RedGoombaBros] {
         .initialAnim = ANIM_GoombaBros_Red_Walk,
         .pos = { -110.0f, 0.0f, -28.0f },
         .yaw = 90.0f
     },
-    [NPC_38] {
+    [NPC_BlueGoombaBros] {
         .initialAnim = ANIM_GoombaBros_Blue_Walk,
         .pos = { -30.0f, 0.0f, -32.0f },
         .yaw = 270.0f
     },
-    [NPC_39] {
+    [NPC_Yoshi1] {
         .initialAnim = ANIM_ParadeYoshi_Brown_Idle,
         .pos = { 212.0f, 40.0f, 35.0f },
         .yaw = 270.0f
     },
-    [NPC_3A] {
+    [NPC_Yoshi2] {
         .initialAnim = ANIM_ParadeYoshi_Brown_IdleBlue,
         .pos = { 247.0f, 40.0f, 35.0f },
         .yaw = 270.0f
     },
-    [NPC_3B] {
+    [NPC_Yoshi3] {
         .initialAnim = ANIM_ParadeYoshi_Brown_IdleYellow,
         .pos = { 282.0f, 40.0f, 35.0f },
         .yaw = 90.0f
     },
-    [NPC_3C] {
+    [NPC_Yoshi4] {
         .initialAnim = ANIM_ParadeYoshi_Brown_IdleBrown,
         .pos = { 272.0f, 50.0f, 25.0f },
         .yaw = 90.0f
     },
-    [NPC_3D] {
+    [NPC_YoshiChief] {
         .initialAnim = ANIM_ParadeYoshi_Brown_IdleLeader,
         .pos = { 232.0f, 50.0f, 25.0f },
         .yaw = 270.0f
     },
-    [NPC_3E] {
+    [NPC_RafaelRaven] {
         .initialAnim = ANIM_RafaelRaven_IdleNoFeet,
         .animList = N(ExtraAnims_RafaelRaven),
         .pos = { 357.0f, -120.0f, -30.0f },
         .yaw = 90.0f
     },
-    [NPC_3F] {
+    [NPC_LavaPiranha] {
         .initialAnim = ANIM_LavaPiranha_Anim04,
         .animList = N(ExtraAnims_LavaPiranha),
         .pos = { 507.0f, 50.0f, -5.0f },
         .yaw = 90.0f
     },
-    [NPC_40] {
+    [NPC_YoshiKidGreen] {
         .initialAnim = ANIM_YoshiKid_Green_Walk,
         .pos = { 570.0f, 50.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_41] {
+    [NPC_YoshiKidBlue] {
         .initialAnim = ANIM_YoshiKid_Blue_Run,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_42] {
+    [NPC_YoshiKidPurple] {
         .initialAnim = ANIM_YoshiKid_Purple_Run,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_43] {
+    [NPC_YoshiKidYellow] {
         .initialAnim = ANIM_YoshiKid_Yellow_Run,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_44] {
+    [NPC_YoshiKidRed] {
         .initialAnim = ANIM_YoshiKid_Red_Run,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_45] {
+    [NPC_HuffNPuffBody] {
         .initialAnim = ANIM_HuffNPuff_Anim01,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_46] {
+    [NPC_HuffNPuffFace] {
         .initialAnim = ANIM_HuffNPuff_Anim02,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_47] {
+    [NPC_HuffNPuffArms] {
         .initialAnim = ANIM_HuffNPuff_Anim03,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_48] {
+    [NPC_TuffPuff1] {
         .initialAnim = ANIM_TuffPuff_Idle,
         .animList = N(ExtraAnims_TuffPuff),
         .pos = { 980.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_49] {
+    [NPC_TuffPuff2] {
         .initialAnim = ANIM_TuffPuff_Idle,
         .animList = N(ExtraAnims_TuffPuff),
         .pos = { 1140.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_4A] {
+    [NPC_GourmetGuy] {
         .initialAnim = ANIM_GourmetGuy_Walk,
         .animList = N(ExtraAnims_GourmetGuy),
         .pos = { 1270.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_4B] {
+    [NPC_Duplighost1] {
         .initialAnim = ANIM_Duplighost_Anim0A,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_4C] {
+    [NPC_Duplighost2] {
         .initialAnim = ANIM_Duplighost_Anim0A,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_4D] {
+    [NPC_TrueCrystalKing] {
         .initialAnim = ANIM_CrystalKing_Anim0E,
         .pos = { 1440.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_4E] {
+    [NPC_FakeCrystalKing] {
         .initialAnim = ANIM_CrystalKing_Anim0E,
         .pos = { 1600.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_4F] {
+    [NPC_CrystalBit1] {
         .initialAnim = ANIM_CrystalKing_Anim0A,
         .pos = { 2000.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_50] {
+    [NPC_CrystalBit2] {
         .initialAnim = ANIM_CrystalKing_Anim0B,
         .pos = { 2050.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_51] {
+    [NPC_CrystalBit3] {
         .initialAnim = ANIM_CrystalKing_Anim0C,
         .pos = { 2100.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_52] {
+    [NPC_Kammy] {
         .initialAnim = ANIM_WorldKammy_Anim14,
         .animList = N(ExtraAnims_Kammy),
         .pos = { 2160.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_53] {
+    [NPC_JrTroopa] {
         .initialAnim = ANIM_MageJrTroopa_RaiseStaff,
         .animList = N(ExtraAnims_MageJrTroopa),
         .pos = { 2060.0f, 0.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_54] {
+    [NPC_Bowser] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_Bowser,
         .pos = { 2390.0f, 10.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_55] {
+    [NPC_BowserPropeller] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_Propeller,
         .pos = { 2390.0f, 10.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_56] {
+    [NPC_HammerBros1] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_HammerBrosJuggle,
         .pos = { 2300.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_57] {
+    [NPC_HammerBros2] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_HammerBrosJuggle,
         .pos = { 2260.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_58] {
+    [NPC_Koopatrol1] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_KoopatrolMarch,
         .pos = { 2480.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_59] {
+    [NPC_Koopatrol2] {
         .initialAnim = ANIM_ParadeKoopas_Bowser_KoopatrolMarch,
         .pos = { 2520.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_5A] {
+    [NPC_BurntBowser] {
         .initialAnim = ANIM_ParadeBurntBowser_BurntIdle,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_5B] {
+    [NPC_BurntBowserPropeller] {
         .initialAnim = ANIM_ParadeBurntBowser_BurntPropeller,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
@@ -796,14 +796,14 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
 };
 
 EvtScript N(EVS_ManageNpcPool) = {
-    EVT_CALL(N(CreateParadeNPC), NPC_00)
+    EVT_CALL(N(CreateParadeNPC), NPC_Luigi)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x25000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_01)
-    EVT_CALL(N(CreateParadeNPC), NPC_02)
-    EVT_CALL(N(CreateParadeNPC), NPC_03)
-    EVT_CALL(N(CreateParadeNPC), NPC_04)
-    EVT_CALL(N(CreateParadeNPC), NPC_05)
-    EVT_CALL(N(CreateParadeNPC), NPC_06)
+    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Drummer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Drummer2)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer1)
+    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer2)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -812,15 +812,15 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_00)
-    EVT_CALL(N(CreateParadeNPC), NPC_07)
-    EVT_CALL(N(CreateParadeNPC), NPC_08)
-    EVT_CALL(N(CreateParadeNPC), NPC_09)
-    EVT_CALL(N(CreateParadeNPC), NPC_0A)
-    EVT_CALL(N(CreateParadeNPC), NPC_0B)
-    EVT_CALL(N(CreateParadeNPC), NPC_0C)
-    EVT_CALL(N(CreateParadeNPC), NPC_0D)
-    EVT_CALL(N(CreateParadeNPC), NPC_0E)
+    EVT_CALL(DeleteNpc, NPC_Luigi)
+    EVT_CALL(N(CreateParadeNPC), NPC_Goombario)
+    EVT_CALL(N(CreateParadeNPC), NPC_Kooper)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bombette)
+    EVT_CALL(N(CreateParadeNPC), NPC_Parakarry)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bow)
+    EVT_CALL(N(CreateParadeNPC), NPC_Watt)
+    EVT_CALL(N(CreateParadeNPC), NPC_Sushie)
+    EVT_CALL(N(CreateParadeNPC), NPC_Lakilester)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -828,20 +828,20 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_01)
-    EVT_CALL(DeleteNpc, NPC_02)
-    EVT_CALL(DeleteNpc, NPC_03)
-    EVT_CALL(DeleteNpc, NPC_04)
-    EVT_CALL(DeleteNpc, NPC_05)
-    EVT_CALL(DeleteNpc, NPC_06)
+    EVT_CALL(DeleteNpc, NPC_HornPlayer1)
+    EVT_CALL(DeleteNpc, NPC_HornPlayer2)
+    EVT_CALL(DeleteNpc, NPC_Drummer1)
+    EVT_CALL(DeleteNpc, NPC_Drummer2)
+    EVT_CALL(DeleteNpc, NPC_StandardBearer1)
+    EVT_CALL(DeleteNpc, NPC_StandardBearer2)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x25000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_0F)
-    EVT_CALL(N(CreateParadeNPC), NPC_10)
-    EVT_CALL(N(CreateParadeNPC), NPC_11)
-    EVT_CALL(N(CreateParadeNPC), NPC_12)
-    EVT_CALL(N(CreateParadeNPC), NPC_13)
-    EVT_CALL(N(CreateParadeNPC), NPC_14)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Twirler3)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Baton3)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_WAIT(60)
     EVT_LOOP(0)
@@ -851,17 +851,17 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_07)
-    EVT_CALL(DeleteNpc, NPC_08)
-    EVT_CALL(DeleteNpc, NPC_09)
-    EVT_CALL(DeleteNpc, NPC_0A)
-    EVT_CALL(DeleteNpc, NPC_0B)
-    EVT_CALL(DeleteNpc, NPC_0C)
-    EVT_CALL(DeleteNpc, NPC_0D)
-    EVT_CALL(DeleteNpc, NPC_0E)
+    EVT_CALL(DeleteNpc, NPC_Goombario)
+    EVT_CALL(DeleteNpc, NPC_Kooper)
+    EVT_CALL(DeleteNpc, NPC_Bombette)
+    EVT_CALL(DeleteNpc, NPC_Parakarry)
+    EVT_CALL(DeleteNpc, NPC_Bow)
+    EVT_CALL(DeleteNpc, NPC_Watt)
+    EVT_CALL(DeleteNpc, NPC_Sushie)
+    EVT_CALL(DeleteNpc, NPC_Lakilester)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_15)
-    EVT_CALL(N(CreateParadeNPC), NPC_16)
+    EVT_CALL(N(CreateParadeNPC), NPC_ChuckQuizmo)
+    EVT_CALL(N(CreateParadeNPC), NPC_VannaT)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -869,22 +869,22 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_0F)
-    EVT_CALL(DeleteNpc, NPC_10)
-    EVT_CALL(DeleteNpc, NPC_11)
-    EVT_CALL(DeleteNpc, NPC_12)
-    EVT_CALL(DeleteNpc, NPC_13)
-    EVT_CALL(DeleteNpc, NPC_14)
+    EVT_CALL(DeleteNpc, NPC_Twirler1)
+    EVT_CALL(DeleteNpc, NPC_Twirler2)
+    EVT_CALL(DeleteNpc, NPC_Twirler3)
+    EVT_CALL(DeleteNpc, NPC_Baton1)
+    EVT_CALL(DeleteNpc, NPC_Baton2)
+    EVT_CALL(DeleteNpc, NPC_Baton3)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xB000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_17)
-    EVT_CALL(N(CreateParadeNPC), NPC_18)
-    EVT_CALL(N(CreateParadeNPC), NPC_19)
-    EVT_CALL(N(CreateParadeNPC), NPC_1A)
-    EVT_CALL(N(CreateParadeNPC), NPC_1B)
-    EVT_CALL(N(CreateParadeNPC), NPC_1C)
-    EVT_CALL(N(CreateParadeNPC), NPC_1D)
-    EVT_CALL(N(CreateParadeNPC), NPC_1E)
+    EVT_CALL(N(CreateParadeNPC), NPC_KoopaBrosRed)
+    EVT_CALL(N(CreateParadeNPC), NPC_KoopaBrosBlack)
+    EVT_CALL(N(CreateParadeNPC), NPC_KoopaBrosYellow)
+    EVT_CALL(N(CreateParadeNPC), NPC_KoopaBrosGreen)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bobomb1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bobomb2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bobomb3)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bobomb4)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -893,11 +893,11 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_15)
-    EVT_CALL(DeleteNpc, NPC_16)
+    EVT_CALL(DeleteNpc, NPC_ChuckQuizmo)
+    EVT_CALL(DeleteNpc, NPC_VannaT)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_1F)
-    EVT_CALL(N(CreateParadeNPC), NPC_20)
+    EVT_CALL(N(CreateParadeNPC), NPC_Kolorado)
+    EVT_CALL(N(CreateParadeNPC), NPC_KoloradoWife)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -905,23 +905,23 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_17)
-    EVT_CALL(DeleteNpc, NPC_18)
-    EVT_CALL(DeleteNpc, NPC_19)
-    EVT_CALL(DeleteNpc, NPC_1A)
-    EVT_CALL(DeleteNpc, NPC_1B)
-    EVT_CALL(DeleteNpc, NPC_1C)
-    EVT_CALL(DeleteNpc, NPC_1D)
-    EVT_CALL(DeleteNpc, NPC_1E)
+    EVT_CALL(DeleteNpc, NPC_KoopaBrosRed)
+    EVT_CALL(DeleteNpc, NPC_KoopaBrosBlack)
+    EVT_CALL(DeleteNpc, NPC_KoopaBrosYellow)
+    EVT_CALL(DeleteNpc, NPC_KoopaBrosGreen)
+    EVT_CALL(DeleteNpc, NPC_Bobomb1)
+    EVT_CALL(DeleteNpc, NPC_Bobomb2)
+    EVT_CALL(DeleteNpc, NPC_Bobomb3)
+    EVT_CALL(DeleteNpc, NPC_Bobomb4)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x19F00, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_26)
-    EVT_CALL(N(CreateParadeNPC), NPC_21)
-    EVT_CALL(N(CreateParadeNPC), NPC_22)
-    EVT_CALL(N(CreateParadeNPC), NPC_23)
-    EVT_CALL(N(CreateParadeNPC), NPC_24)
-    EVT_CALL(N(CreateParadeNPC), NPC_25)
-    EVT_CALL(N(CreateParadeNPC), NPC_27)
+    EVT_CALL(N(CreateParadeNPC), NPC_Tutankoopa1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Rowf)
+    EVT_CALL(N(CreateParadeNPC), NPC_Rhuff)
+    EVT_CALL(N(CreateParadeNPC), NPC_Moustafa)
+    EVT_CALL(N(CreateParadeNPC), NPC_Mouser1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Mouser2)
+    EVT_CALL(N(CreateParadeNPC), NPC_ChainChomp1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x7000, LVarF)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
@@ -931,13 +931,13 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_1F)
-    EVT_CALL(DeleteNpc, NPC_20)
+    EVT_CALL(DeleteNpc, NPC_Kolorado)
+    EVT_CALL(DeleteNpc, NPC_KoloradoWife)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_28)
-    EVT_CALL(N(CreateParadeNPC), NPC_29)
-    EVT_CALL(N(CreateParadeNPC), NPC_2A)
-    EVT_CALL(N(CreateParadeNPC), NPC_2B)
+    EVT_CALL(N(CreateParadeNPC), NPC_Buzzar)
+    EVT_CALL(N(CreateParadeNPC), NPC_VultureChick1)
+    EVT_CALL(N(CreateParadeNPC), NPC_VultureChick2)
+    EVT_CALL(N(CreateParadeNPC), NPC_VultureChick3)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -945,21 +945,21 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_26)
-    EVT_CALL(DeleteNpc, NPC_21)
-    EVT_CALL(DeleteNpc, NPC_22)
-    EVT_CALL(DeleteNpc, NPC_23)
-    EVT_CALL(DeleteNpc, NPC_24)
-    EVT_CALL(DeleteNpc, NPC_25)
-    EVT_CALL(DeleteNpc, NPC_27)
+    EVT_CALL(DeleteNpc, NPC_Tutankoopa1)
+    EVT_CALL(DeleteNpc, NPC_Rowf)
+    EVT_CALL(DeleteNpc, NPC_Rhuff)
+    EVT_CALL(DeleteNpc, NPC_Moustafa)
+    EVT_CALL(DeleteNpc, NPC_Mouser1)
+    EVT_CALL(DeleteNpc, NPC_Mouser2)
+    EVT_CALL(DeleteNpc, NPC_ChainChomp1)
     EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x11F00, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_2D)
-    EVT_CALL(N(CreateParadeNPC), NPC_2E)
-    EVT_CALL(N(CreateParadeNPC), NPC_2F)
-    EVT_CALL(N(CreateParadeNPC), NPC_30)
-    EVT_CALL(N(CreateParadeNPC), NPC_2C)
+    EVT_CALL(N(CreateParadeNPC), NPC_Tutankoopa2)
+    EVT_CALL(N(CreateParadeNPC), NPC_ChainChomp2)
+    EVT_CALL(N(CreateParadeNPC), NPC_ChainChomp3)
+    EVT_CALL(N(CreateParadeNPC), NPC_ChainChomp4)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bootler)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xA000, LVarF)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
@@ -969,18 +969,18 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_28)
-    EVT_CALL(DeleteNpc, NPC_29)
-    EVT_CALL(DeleteNpc, NPC_2A)
-    EVT_CALL(DeleteNpc, NPC_2B)
+    EVT_CALL(DeleteNpc, NPC_Buzzar)
+    EVT_CALL(DeleteNpc, NPC_VultureChick1)
+    EVT_CALL(DeleteNpc, NPC_VultureChick2)
+    EVT_CALL(DeleteNpc, NPC_VultureChick3)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_35)
-    EVT_CALL(N(CreateParadeNPC), NPC_32)
-    EVT_CALL(N(CreateParadeNPC), NPC_33)
-    EVT_CALL(N(CreateParadeNPC), NPC_34)
-    EVT_CALL(N(CreateParadeNPC), NPC_31)
-    EVT_CALL(N(SetNpcShadowScale), NPC_31, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcFlagBits, NPC_31, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(N(CreateParadeNPC), NPC_TubbasHeart)
+    EVT_CALL(N(CreateParadeNPC), NPC_Boo1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Boo2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Boo3)
+    EVT_CALL(N(CreateParadeNPC), NPC_TubbasBody)
+    EVT_CALL(N(SetNpcShadowScale), NPC_TubbasBody, EVT_FLOAT(4.0))
+    EVT_CALL(SetNpcFlagBits, NPC_TubbasBody, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -988,20 +988,20 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_2C)
-    EVT_CALL(DeleteNpc, NPC_2D)
-    EVT_CALL(DeleteNpc, NPC_2E)
-    EVT_CALL(DeleteNpc, NPC_2F)
-    EVT_CALL(DeleteNpc, NPC_30)
+    EVT_CALL(DeleteNpc, NPC_Bootler)
+    EVT_CALL(DeleteNpc, NPC_Tutankoopa2)
+    EVT_CALL(DeleteNpc, NPC_ChainChomp2)
+    EVT_CALL(DeleteNpc, NPC_ChainChomp3)
+    EVT_CALL(DeleteNpc, NPC_ChainChomp4)
     EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xF000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_36)
-    EVT_CALL(N(CreateParadeNPC), NPC_37)
-    EVT_CALL(N(CreateParadeNPC), NPC_38)
+    EVT_CALL(N(CreateParadeNPC), NPC_GoombaKing)
+    EVT_CALL(N(CreateParadeNPC), NPC_RedGoombaBros)
+    EVT_CALL(N(CreateParadeNPC), NPC_BlueGoombaBros)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_CALL(N(SetNpcShadowScale), NPC_36, EVT_FLOAT(3.0))
-    EVT_CALL(SetNpcFlagBits, NPC_36, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(N(SetNpcShadowScale), NPC_GoombaKing, EVT_FLOAT(3.0))
+    EVT_CALL(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1009,19 +1009,19 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_31)
-    EVT_CALL(DeleteNpc, NPC_32)
-    EVT_CALL(DeleteNpc, NPC_33)
-    EVT_CALL(DeleteNpc, NPC_34)
-    EVT_CALL(DeleteNpc, NPC_35)
+    EVT_CALL(DeleteNpc, NPC_TubbasBody)
+    EVT_CALL(DeleteNpc, NPC_Boo1)
+    EVT_CALL(DeleteNpc, NPC_Boo2)
+    EVT_CALL(DeleteNpc, NPC_Boo3)
+    EVT_CALL(DeleteNpc, NPC_TubbasHeart)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_3E)
-    EVT_CALL(N(CreateParadeNPC), NPC_3F)
-    EVT_CALL(N(CreateParadeNPC), NPC_39)
-    EVT_CALL(N(CreateParadeNPC), NPC_3A)
-    EVT_CALL(N(CreateParadeNPC), NPC_3B)
-    EVT_CALL(N(CreateParadeNPC), NPC_3C)
-    EVT_CALL(N(CreateParadeNPC), NPC_3D)
+    EVT_CALL(N(CreateParadeNPC), NPC_RafaelRaven)
+    EVT_CALL(N(CreateParadeNPC), NPC_LavaPiranha)
+    EVT_CALL(N(CreateParadeNPC), NPC_Yoshi1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Yoshi2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Yoshi3)
+    EVT_CALL(N(CreateParadeNPC), NPC_Yoshi4)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiChief)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1029,16 +1029,16 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_36)
-    EVT_CALL(DeleteNpc, NPC_37)
-    EVT_CALL(DeleteNpc, NPC_38)
+    EVT_CALL(DeleteNpc, NPC_GoombaKing)
+    EVT_CALL(DeleteNpc, NPC_RedGoombaBros)
+    EVT_CALL(DeleteNpc, NPC_BlueGoombaBros)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x20000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_40)
-    EVT_CALL(N(CreateParadeNPC), NPC_41)
-    EVT_CALL(N(CreateParadeNPC), NPC_42)
-    EVT_CALL(N(CreateParadeNPC), NPC_43)
-    EVT_CALL(N(CreateParadeNPC), NPC_44)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiKidGreen)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiKidBlue)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiKidPurple)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiKidYellow)
+    EVT_CALL(N(CreateParadeNPC), NPC_YoshiKidRed)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -1047,24 +1047,24 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_39)
-    EVT_CALL(DeleteNpc, NPC_3A)
-    EVT_CALL(DeleteNpc, NPC_3B)
-    EVT_CALL(DeleteNpc, NPC_3C)
-    EVT_CALL(DeleteNpc, NPC_3D)
-    EVT_CALL(DeleteNpc, NPC_3E)
-    EVT_CALL(DeleteNpc, NPC_3F)
+    EVT_CALL(DeleteNpc, NPC_Yoshi1)
+    EVT_CALL(DeleteNpc, NPC_Yoshi2)
+    EVT_CALL(DeleteNpc, NPC_Yoshi3)
+    EVT_CALL(DeleteNpc, NPC_Yoshi4)
+    EVT_CALL(DeleteNpc, NPC_YoshiChief)
+    EVT_CALL(DeleteNpc, NPC_RafaelRaven)
+    EVT_CALL(DeleteNpc, NPC_LavaPiranha)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_45)
-    EVT_CALL(N(CreateParadeNPC), NPC_46)
-    EVT_CALL(N(CreateParadeNPC), NPC_47)
-    EVT_CALL(N(CreateParadeNPC), NPC_4A)
-    EVT_CALL(N(CreateParadeNPC), NPC_48)
-    EVT_CALL(N(CreateParadeNPC), NPC_49)
+    EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffBody)
+    EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffFace)
+    EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffArms)
+    EVT_CALL(N(CreateParadeNPC), NPC_GourmetGuy)
+    EVT_CALL(N(CreateParadeNPC), NPC_TuffPuff1)
+    EVT_CALL(N(CreateParadeNPC), NPC_TuffPuff2)
     EVT_CALL(N(SetNpcShadowScale), 69, EVT_FLOAT(6.0))
-    EVT_CALL(SetNpcFlagBits, NPC_45, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(N(SetNpcShadowScale), 74, EVT_FLOAT(3.0))
-    EVT_CALL(SetNpcFlagBits, NPC_4A, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1072,23 +1072,23 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_40)
-    EVT_CALL(DeleteNpc, NPC_41)
-    EVT_CALL(DeleteNpc, NPC_42)
-    EVT_CALL(DeleteNpc, NPC_43)
-    EVT_CALL(DeleteNpc, NPC_44)
+    EVT_CALL(DeleteNpc, NPC_YoshiKidGreen)
+    EVT_CALL(DeleteNpc, NPC_YoshiKidBlue)
+    EVT_CALL(DeleteNpc, NPC_YoshiKidPurple)
+    EVT_CALL(DeleteNpc, NPC_YoshiKidYellow)
+    EVT_CALL(DeleteNpc, NPC_YoshiKidRed)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x2000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_4D)
-    EVT_CALL(N(CreateParadeNPC), NPC_4E)
-    EVT_CALL(N(CreateParadeNPC), NPC_4F)
-    EVT_CALL(N(CreateParadeNPC), NPC_50)
-    EVT_CALL(N(CreateParadeNPC), NPC_51)
+    EVT_CALL(N(CreateParadeNPC), NPC_TrueCrystalKing)
+    EVT_CALL(N(CreateParadeNPC), NPC_FakeCrystalKing)
+    EVT_CALL(N(CreateParadeNPC), NPC_CrystalBit1)
+    EVT_CALL(N(CreateParadeNPC), NPC_CrystalBit2)
+    EVT_CALL(N(CreateParadeNPC), NPC_CrystalBit3)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_CALL(N(SetNpcShadowScale), NPC_4D, EVT_FLOAT(2.0))
-    EVT_CALL(SetNpcFlagBits, NPC_4D, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    EVT_CALL(N(SetNpcShadowScale), NPC_4E, EVT_FLOAT(2.0))
-    EVT_CALL(SetNpcFlagBits, NPC_4E, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(N(SetNpcShadowScale), NPC_TrueCrystalKing, EVT_FLOAT(2.0))
+    EVT_CALL(SetNpcFlagBits, NPC_TrueCrystalKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(N(SetNpcShadowScale), NPC_FakeCrystalKing, EVT_FLOAT(2.0))
+    EVT_CALL(SetNpcFlagBits, NPC_FakeCrystalKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1096,15 +1096,15 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_45)
-    EVT_CALL(DeleteNpc, NPC_46)
-    EVT_CALL(DeleteNpc, NPC_47)
-    EVT_CALL(DeleteNpc, NPC_4A)
-    EVT_CALL(DeleteNpc, NPC_48)
-    EVT_CALL(DeleteNpc, NPC_49)
+    EVT_CALL(DeleteNpc, NPC_HuffNPuffBody)
+    EVT_CALL(DeleteNpc, NPC_HuffNPuffFace)
+    EVT_CALL(DeleteNpc, NPC_HuffNPuffArms)
+    EVT_CALL(DeleteNpc, NPC_GourmetGuy)
+    EVT_CALL(DeleteNpc, NPC_TuffPuff1)
+    EVT_CALL(DeleteNpc, NPC_TuffPuff2)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_4B)
-    EVT_CALL(N(CreateParadeNPC), NPC_4C)
+    EVT_CALL(N(CreateParadeNPC), NPC_Duplighost1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Duplighost2)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1112,14 +1112,14 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_4D)
-    EVT_CALL(DeleteNpc, NPC_4E)
-    EVT_CALL(DeleteNpc, NPC_4F)
-    EVT_CALL(DeleteNpc, NPC_50)
-    EVT_CALL(DeleteNpc, NPC_51)
+    EVT_CALL(DeleteNpc, NPC_TrueCrystalKing)
+    EVT_CALL(DeleteNpc, NPC_FakeCrystalKing)
+    EVT_CALL(DeleteNpc, NPC_CrystalBit1)
+    EVT_CALL(DeleteNpc, NPC_CrystalBit2)
+    EVT_CALL(DeleteNpc, NPC_CrystalBit3)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_53)
-    EVT_CALL(N(CreateParadeNPC), NPC_52)
+    EVT_CALL(N(CreateParadeNPC), NPC_JrTroopa)
+    EVT_CALL(N(CreateParadeNPC), NPC_Kammy)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1127,23 +1127,23 @@ EvtScript N(EVS_ManageNpcPool) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_4B)
-    EVT_CALL(DeleteNpc, NPC_4C)
+    EVT_CALL(DeleteNpc, NPC_Duplighost1)
+    EVT_CALL(DeleteNpc, NPC_Duplighost2)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_54)
-    EVT_CALL(N(CreateParadeNPC), NPC_55)
-    EVT_CALL(N(CreateParadeNPC), NPC_56)
-    EVT_CALL(N(CreateParadeNPC), NPC_57)
-    EVT_CALL(N(CreateParadeNPC), NPC_58)
-    EVT_CALL(N(CreateParadeNPC), NPC_59)
-    EVT_CALL(N(CreateParadeNPC), NPC_5A)
-    EVT_CALL(N(CreateParadeNPC), NPC_5B)
-    EVT_CALL(N(SetNpcShadowScale), NPC_54, EVT_FLOAT(3.0))
-    EVT_CALL(SetNpcFlagBits, NPC_54, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    EVT_CALL(N(SetNpcShadowScale), NPC_5A, EVT_FLOAT(3.0))
-    EVT_CALL(SetNpcFlagBits, NPC_5A, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_55, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_5B, FALSE)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bowser)
+    EVT_CALL(N(CreateParadeNPC), NPC_BowserPropeller)
+    EVT_CALL(N(CreateParadeNPC), NPC_HammerBros1)
+    EVT_CALL(N(CreateParadeNPC), NPC_HammerBros2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Koopatrol1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Koopatrol2)
+    EVT_CALL(N(CreateParadeNPC), NPC_BurntBowser)
+    EVT_CALL(N(CreateParadeNPC), NPC_BurntBowserPropeller)
+    EVT_CALL(N(SetNpcShadowScale), NPC_Bowser, EVT_FLOAT(3.0))
+    EVT_CALL(SetNpcFlagBits, NPC_Bowser, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(N(SetNpcShadowScale), NPC_BurntBowser, EVT_FLOAT(3.0))
+    EVT_CALL(SetNpcFlagBits, NPC_BurntBowser, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    EVT_CALL(EnableNpcShadow, NPC_BowserPropeller, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_BurntBowserPropeller, FALSE)
     EVT_RETURN
     EVT_END
 };

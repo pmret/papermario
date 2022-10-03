@@ -6,33 +6,33 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_WAIT(80)
     EVT_THREAD
         EVT_LOOP(9)
-            EVT_CALL(PlaySoundAtNpc, NPC_00, SOUND_11, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_11, 0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_00, PARADE_START, 0, 120)
-    EVT_CALL(SetNpcAnimation, NPC_00, ANIM_ParadeLuigi_Idle)
+    EVT_CALL(NpcMoveTo, NPC_Luigi, PARADE_START, 0, 120)
+    EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_Idle)
     EVT_WAIT(10)
-    EVT_CALL(InterpNpcYaw, NPC_00, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Luigi, 90, 0)
     EVT_WAIT(25)
     EVT_CALL(StopSound, SOUND_89)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtNpc, NPC_00, SOUND_14, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_14, 0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_00, ANIM_ParadeLuigi_BlowWhistle)
+    EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_BlowWhistle)
     EVT_WAIT(30)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_00, ANIM_ParadeLuigi_MarchInPlace)
+    EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_MarchInPlace)
     EVT_WAIT(7)
     EVT_CALL(SetMusicTrack, 0, SONG_PARADE_DAY, 0, 8)
     EVT_WAIT(120)
     EVT_WAIT(100)
-    EVT_CALL(InterpNpcYaw, NPC_00, 270, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Luigi, 270, 0)
     EVT_WAIT(30)
     EVT_RETURN
     EVT_END
@@ -40,8 +40,8 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
 
 EvtScript N(EVS_ParadePhase_Partners) = {
     EVT_CALL(PlayEffect, EFFECT_CONFETTI, 3, -2545, 200, 0, 1, 800, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(EnableNpcShadow, NPC_07, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_09, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_Goombario, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_Bombette, FALSE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_WAIT(25)
@@ -50,11 +50,11 @@ EvtScript N(EVS_ParadePhase_Partners) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_0D, EVT_FLOAT(1.0))
+        EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
         EVT_LOOP(0)
-            EVT_CALL(NpcJump0, NPC_0D, -2550, 35, 7, 15)
+            EVT_CALL(NpcJump0, NPC_Sushie, -2550, 35, 7, 15)
             EVT_WAIT(10)
-            EVT_CALL(NpcJump0, NPC_0D, -2570, 61, 7, 15)
+            EVT_CALL(NpcJump0, NPC_Sushie, -2570, 61, 7, 15)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -105,17 +105,17 @@ EvtScript N(EVS_QuizCrew) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_15, ANIM_ChuckQuizmo_OpenHat)
+    EVT_CALL(SetNpcAnimation, NPC_ChuckQuizmo, ANIM_ChuckQuizmo_OpenHat)
     EVT_WAIT(10)
-    EVT_CALL(GetNpcPos, NPC_15, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_ChuckQuizmo, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 80)
     EVT_CALL(PlayEffect, EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_16, ANIM_VannaT_Clap)
+    EVT_CALL(SetNpcAnimation, NPC_VannaT, ANIM_VannaT_Clap)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, NPC_15, ANIM_ChuckQuizmo_CloseHat)
+    EVT_CALL(SetNpcAnimation, NPC_ChuckQuizmo, ANIM_ChuckQuizmo_CloseHat)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_15, ANIM_ChuckQuizmo_Walk)
-    EVT_CALL(SetNpcAnimation, NPC_16, ANIM_VannaT_Walk)
+    EVT_CALL(SetNpcAnimation, NPC_ChuckQuizmo, ANIM_ChuckQuizmo_Walk)
+    EVT_CALL(SetNpcAnimation, NPC_VannaT, ANIM_VannaT_Walk)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -123,11 +123,11 @@ EvtScript N(EVS_QuizCrew) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(InterpNpcYaw, NPC_16, 90, 5)
-    EVT_CALL(SetNpcAnimation, NPC_16, ANIM_VannaT_Wave)
+    EVT_CALL(InterpNpcYaw, NPC_VannaT, 90, 5)
+    EVT_CALL(SetNpcAnimation, NPC_VannaT, ANIM_VannaT_Wave)
     EVT_WAIT(30)
-    EVT_CALL(InterpNpcYaw, NPC_16, 270, 5)
-    EVT_CALL(SetNpcAnimation, NPC_16, ANIM_VannaT_Walk)
+    EVT_CALL(InterpNpcYaw, NPC_VannaT, 270, 5)
+    EVT_CALL(SetNpcAnimation, NPC_VannaT, ANIM_VannaT_Walk)
     EVT_RETURN
     EVT_END
 };
@@ -140,14 +140,14 @@ EvtScript N(EVS_ParadePhase_Toads) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(LVar0, NPC_0F)
-    EVT_SET(LVar1, NPC_12)
+    EVT_SET(LVar0, NPC_Twirler1)
+    EVT_SET(LVar1, NPC_Baton1)
     EVT_EXEC_GET_TID(N(EVS_Twirler), LVarA)
-    EVT_SET(LVar0, NPC_10)
-    EVT_SET(LVar1, NPC_13)
+    EVT_SET(LVar0, NPC_Twirler2)
+    EVT_SET(LVar1, NPC_Baton2)
     EVT_EXEC_GET_TID(N(EVS_Twirler), LVarB)
-    EVT_SET(LVar0, NPC_11)
-    EVT_SET(LVar1, NPC_14)
+    EVT_SET(LVar0, NPC_Twirler3)
+    EVT_SET(LVar1, NPC_Baton3)
     EVT_EXEC_GET_TID(N(EVS_Twirler), LVarC)
     EVT_LOOP(0)
         EVT_WAIT(1)
