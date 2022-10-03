@@ -23,15 +23,32 @@ void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-// ECAA80_ItemChoice_WaitForSelection (needs data?)
+// Needs data migrated
+#ifdef NON_MATCHING
+ApiStatus ECAA80_ItemChoice_WaitForSelection(Evt *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    if (isInitialCall) {
+        ECAA80_ItemChoice_HasSelectedItem = FALSE;
+    }
+    if (ECAA80_ItemChoice_HasSelectedItem) {
+        ECAA80_ItemChoice_HasSelectedItem = FALSE;
+        dead_evt_set_variable(script, *args++, ECAA80_ItemChoice_SelectedItemID);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
+#endif
 
 // ECAA80_ItemChoice_SaveSelected (needs data?)
 
 ApiStatus ECAA80_ItemChoice_SaveSelected(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+
     ECAA80_ItemChoice_SelectedItemID = dead_evt_get_variable(script, *args++);
-    ECAA80_ItemChoice_HasSelectedItem = 1;
+    ECAA80_ItemChoice_HasSelectedItem = TRUE;
     return ApiStatus_DONE2;
 }
 
