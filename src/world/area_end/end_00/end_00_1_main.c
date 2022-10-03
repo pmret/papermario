@@ -1,7 +1,7 @@
 #include "end_00.h"
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80246B28); // EVS_ManageParade
+extern EvtScript N(EVS_ManageParade); // EVS_ManageParade
 
 EntryList N(Entrances) = {
     [end_00_ENTRY_0]    {    0.0,    0.0,    0.0,    0.0 },
@@ -23,7 +23,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_CALL(EnableStatusMenu, FALSE)
     EVT_WAIT(30)
-    EVT_EXEC(N(EVS_80246B28))
+    EVT_EXEC(N(EVS_ManageParade))
     EVT_RETURN
     EVT_END
 };

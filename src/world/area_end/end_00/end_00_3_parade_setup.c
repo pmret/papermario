@@ -24,7 +24,7 @@ extern EvtScript N(EVS_ShowCredits_Title);
 extern EvtScript N(EVS_ShowCredits_Jobs);
 extern EvtScript N(EVS_ShowCredits_Names);
 
-API_CALLABLE(N(func_80242680_DF9080)) {
+API_CALLABLE(N(CreateParadeNPC)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     ParadeNpcInfo* npcInfo = &N(ParadeNpcsTable)[npcID];
@@ -48,7 +48,7 @@ API_CALLABLE(N(func_80242680_DF9080)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80242744_DF9144)) {
+API_CALLABLE(N(ParadeSpriteHeapMalloc)) {
     Bytecode* args = script->ptrReadPos;
     s32 heapSize = evt_get_variable(script, *args++);
     s32 outVar = *args++;
@@ -57,7 +57,7 @@ API_CALLABLE(N(func_80242744_DF9144)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802427A4_DF91A4)) {
+API_CALLABLE(N(ParadeSpriteHeapFree)) {
     Bytecode* args = script->ptrReadPos;
     s32 pointer = *args++;
 
@@ -65,7 +65,7 @@ API_CALLABLE(N(func_802427A4_DF91A4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802427D8_DF91D8)) {
+API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     camera->panActive = TRUE;
@@ -82,7 +82,7 @@ API_CALLABLE(N(SetNpcShadowScale)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80242898_DF9298)) {
+API_CALLABLE(N(AddScrollToNpcPos)) {
     Bytecode* args = script->ptrReadPos;
     Npc** npc = (Npc**)&script->functionTempPtr[1];
 
@@ -95,7 +95,7 @@ API_CALLABLE(N(func_80242898_DF9298)) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(D_802446B0_DFB0B0) = {
+EvtScript N(EVS_SetupInitialCamera) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -3080, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -3080, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
@@ -104,33 +104,33 @@ EvtScript N(D_802446B0_DFB0B0) = {
     EVT_END
 };
 
-EvtScript N(D_80244724_DFB124) = {
+EvtScript N(EVS_UpdateScrollPos) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(-3080.0), 0, 0)
     EVT_SETF(LVar1, EVT_FLOAT(0.0))
     EVT_LOOP(0)
-        EVT_CALL(N(func_802427D8_DF91D8))
+        EVT_CALL(N(UpdateCameraScroll))
         EVT_CALL(TranslateGroup, MODEL_bg, LVar1, 0, 0)
-        EVT_ADDF(LVar1, EVT_FLOAT(0.6669922))
+        EVT_ADDF(LVar1, EVT_FLOAT(PARADE_SCROLL_RATE))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_802447B8) = {
+EvtScript N(EVS_SetNpcShadowScale) = {
     EVT_CALL(N(SetNpcShadowScale), LVar0, LVar2)
     EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_802447F4) = {
-    EVT_CALL(N(func_80242898_DF9298), LVar0)
+EvtScript N(EVS_OffsetNpcScroll) = {
+    EVT_CALL(N(AddScrollToNpcPos), LVar0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80244814_DFB214) = {
+EvtScript N(EVS_UpdateTexPan_Ground) = {
     EVT_CALL(EnableTexPanning, MODEL_j1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_j2, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_j3, TRUE)
@@ -163,10 +163,10 @@ EvtScript N(D_80244814_DFB214) = {
         EVT_SET(LVar1, 0)
         EVT_LOOP(0)
             EVT_ADD(LVar0, 300)
-            EVT_IF_GT(LVar0, 0x00020000)
-                EVT_ADD(LVar0, 0xFFFE0000)
+            EVT_IF_GT(LVar0, 0x20000)
+                EVT_ADD(LVar0, -0x20000)
             EVT_END_IF
-            EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -205,7 +205,7 @@ EvtScript N(D_80244B64_DFB564) = {
     EVT_END
 };
 
-s32 N(D_80244C60_DFB660)[] = {
+s32 N(ExtraAnims_Tutankoopa)[] = {
     ANIM_Tutankoopa_Anim02,
     ANIM_Tutankoopa_Anim06,
     ANIM_Tutankoopa_Anim09,
@@ -214,7 +214,7 @@ s32 N(D_80244C60_DFB660)[] = {
     -1
 };
 
-s32 N(D_80244C78_DFB678)[] = {
+s32 N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_PackedStill,
     ANIM_Rowf_PackedIdle,
     ANIM_Rowf_PackedWalk,
@@ -224,7 +224,7 @@ s32 N(D_80244C78_DFB678)[] = {
     -1
 };
 
-s32 N(D_80244C94_DFB694)[] = {
+s32 N(ExtraAnims_Moustafa)[] = {
     ANIM_Moustafa_Run,
     ANIM_Moustafa_Shout,
     ANIM_Moustafa_Talk,
@@ -233,37 +233,37 @@ s32 N(D_80244C94_DFB694)[] = {
     -1
 };
 
-s32 N(D_80244CAC_DFB6AC)[] = {
+s32 N(ExtraAnims_Mouser)[] = {
     ANIM_Mouser_Blue_Run,
     ANIM_Mouser_Blue_IdleOnlyBlink,
     ANIM_Mouser_Blue_Whisper,
     -1
 };
 
-s32 N(D_80244CBC_DFB6BC)[] = {
+s32 N(ExtraAnims_Buzzar)[] = {
     ANIM_Buzzar_Anim05,
     ANIM_Buzzar_Anim03,
     -1
 };
 
-s32 N(D_80244CC8_DFB6C8)[] = {
+s32 N(ExtraAnims_GoombaKing)[] = {
     ANIM_GoombaKing_Still,
     ANIM_GoombaKing_Dead,
     ANIM_GoombaKing_Angry,
     -1
 };
 
-s32 N(D_80244CD8_DFB6D8)[] = {
+s32 N(ExtraAnims_RafaelRaven)[] = {
     ANIM_RafaelRaven_IdleNoFeet,
     -1
 };
 
-s32 N(D_80244CE0_DFB6E0)[] = {
+s32 N(ExtraAnims_LavaPiranha)[] = {
     ANIM_LavaPiranha_Anim04,
     -1
 };
 
-s32 N(D_80244CE8_DFB6E8)[] = {
+s32 N(ExtraAnims_HuffNPuff)[] = {
     ANIM_HuffNPuff_Anim01,
     ANIM_HuffNPuff_Anim02,
     ANIM_HuffNPuff_Anim03,
@@ -276,14 +276,14 @@ s32 N(D_80244CE8_DFB6E8)[] = {
     -1
 };
 
-s32 N(D_80244D10_DFB710)[] = {
+s32 N(ExtraAnims_TuffPuff)[] = {
     ANIM_TuffPuff_Idle,
     ANIM_TuffPuff_Hurt,
     ANIM_TuffPuff_Blush,
     -1
 };
 
-s32 N(D_80244D20_DFB720)[] = {
+s32 N(ExtraAnims_GourmetGuy)[] = {
     ANIM_GourmetGuy_Walk,
     ANIM_GourmetGuy_Leap,
     ANIM_GourmetGuy_TalkSurprise,
@@ -294,7 +294,7 @@ s32 N(D_80244D20_DFB720)[] = {
     -1
 };
 
-s32 N(D_80244D40_DFB740)[] = {
+s32 N(ExtraAnims_MageJrTroopa)[] = {
     ANIM_MageJrTroopa_Idle,
     ANIM_MageJrTroopa_Run,
     ANIM_MageJrTroopa_RaiseStaff,
@@ -303,7 +303,7 @@ s32 N(D_80244D40_DFB740)[] = {
     -1
 };
 
-s32 N(D_80244D58_DFB758)[] = {
+s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim14,
     ANIM_WorldKammy_Anim0C,
     ANIM_WorldKammy_Anim0E,
@@ -481,37 +481,37 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_21] {
         .initialAnim = ANIM_Rowf_PackedWalk,
-        .animList = N(D_80244C78_DFB678),
+        .animList = N(ExtraAnims_Rowf),
         .pos = { -1775.0f, 0.0f, 2.0f },
         .yaw = 90.0f
     },
     [NPC_22] {
         .initialAnim = ANIM_Rowf_PackedWalk,
-        .animList = N(D_80244C78_DFB678),
+        .animList = N(ExtraAnims_Rowf),
         .pos = { -1740.0f, 0.0f, 2.0f },
         .yaw = 90.0f
     },
     [NPC_23] {
         .initialAnim = ANIM_Moustafa_Run,
-        .animList = N(D_80244C94_DFB694),
+        .animList = N(ExtraAnims_Moustafa),
         .pos = { -1240.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
     [NPC_24] {
         .initialAnim = ANIM_Mouser_Blue_Run,
-        .animList = N(D_80244CAC_DFB6AC),
+        .animList = N(ExtraAnims_Mouser),
         .pos = { -1210.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
     [NPC_25] {
         .initialAnim = ANIM_Mouser_Blue_Run,
-        .animList = N(D_80244CAC_DFB6AC),
+        .animList = N(ExtraAnims_Mouser),
         .pos = { -1180.0f, 0.0f, -2.0f },
         .yaw = 270.0f
     },
     [NPC_26] {
         .initialAnim = ANIM_Tutankoopa_Anim02,
-        .animList = N(D_80244C60_DFB660),
+        .animList = N(ExtraAnims_Tutankoopa),
         .pos = { -1040.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
@@ -522,7 +522,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_28] {
         .initialAnim = ANIM_Buzzar_Anim05,
-        .animList = N(D_80244CBC_DFB6BC),
+        .animList = N(ExtraAnims_Buzzar),
         .pos = { -855.0f, 70.0f, -140.0f },
         .yaw = 270.0f
     },
@@ -548,7 +548,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_2D] {
         .initialAnim = ANIM_Tutankoopa_Anim02,
-        .animList = N(D_80244C60_DFB660),
+        .animList = N(ExtraAnims_Tutankoopa),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
@@ -594,7 +594,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_36] {
         .initialAnim = ANIM_GoombaKing_Still,
-        .animList = N(D_80244CC8_DFB6C8),
+        .animList = N(ExtraAnims_GoombaKing),
         .pos = { -70.0f, 130.0f, -60.0f },
         .yaw = 270.0f
     },
@@ -635,13 +635,13 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_3E] {
         .initialAnim = ANIM_RafaelRaven_IdleNoFeet,
-        .animList = N(D_80244CD8_DFB6D8),
+        .animList = N(ExtraAnims_RafaelRaven),
         .pos = { 357.0f, -120.0f, -30.0f },
         .yaw = 90.0f
     },
     [NPC_3F] {
         .initialAnim = ANIM_LavaPiranha_Anim04,
-        .animList = N(D_80244CE0_DFB6E0),
+        .animList = N(ExtraAnims_LavaPiranha),
         .pos = { 507.0f, 50.0f, -5.0f },
         .yaw = 90.0f
     },
@@ -672,37 +672,37 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_45] {
         .initialAnim = ANIM_HuffNPuff_Anim01,
-        .animList = N(D_80244CE8_DFB6E8),
+        .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_46] {
         .initialAnim = ANIM_HuffNPuff_Anim02,
-        .animList = N(D_80244CE8_DFB6E8),
+        .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_47] {
         .initialAnim = ANIM_HuffNPuff_Anim03,
-        .animList = N(D_80244CE8_DFB6E8),
+        .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_48] {
         .initialAnim = ANIM_TuffPuff_Idle,
-        .animList = N(D_80244D10_DFB710),
+        .animList = N(ExtraAnims_TuffPuff),
         .pos = { 980.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_49] {
         .initialAnim = ANIM_TuffPuff_Idle,
-        .animList = N(D_80244D10_DFB710),
+        .animList = N(ExtraAnims_TuffPuff),
         .pos = { 1140.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_4A] {
         .initialAnim = ANIM_GourmetGuy_Walk,
-        .animList = N(D_80244D20_DFB720),
+        .animList = N(ExtraAnims_GourmetGuy),
         .pos = { 1270.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
@@ -743,13 +743,13 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_52] {
         .initialAnim = ANIM_WorldKammy_Anim14,
-        .animList = N(D_80244D58_DFB758),
+        .animList = N(ExtraAnims_Kammy),
         .pos = { 2160.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_53] {
         .initialAnim = ANIM_MageJrTroopa_RaiseStaff,
-        .animList = N(D_80244D40_DFB740),
+        .animList = N(ExtraAnims_MageJrTroopa),
         .pos = { 2060.0f, 0.0f, 0.0f },
         .yaw = 90.0f
     },
@@ -795,16 +795,16 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
 };
 
-EvtScript N(D_80245614_DFC014) = {
-    EVT_CALL(N(func_80242680_DF9080), 0)
-    EVT_CALL(N(func_80242744_DF9144), 0x00025000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 1)
-    EVT_CALL(N(func_80242680_DF9080), 2)
-    EVT_CALL(N(func_80242680_DF9080), 3)
-    EVT_CALL(N(func_80242680_DF9080), 4)
-    EVT_CALL(N(func_80242680_DF9080), 5)
-    EVT_CALL(N(func_80242680_DF9080), 6)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+EvtScript N(EVS_ManageNpcPool) = {
+    EVT_CALL(N(CreateParadeNPC), NPC_00)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x25000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), NPC_01)
+    EVT_CALL(N(CreateParadeNPC), NPC_02)
+    EVT_CALL(N(CreateParadeNPC), NPC_03)
+    EVT_CALL(N(CreateParadeNPC), NPC_04)
+    EVT_CALL(N(CreateParadeNPC), NPC_05)
+    EVT_CALL(N(CreateParadeNPC), NPC_06)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -813,14 +813,14 @@ EvtScript N(D_80245614_DFC014) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DeleteNpc, NPC_00)
-    EVT_CALL(N(func_80242680_DF9080), 7)
-    EVT_CALL(N(func_80242680_DF9080), 8)
-    EVT_CALL(N(func_80242680_DF9080), 9)
-    EVT_CALL(N(func_80242680_DF9080), 10)
-    EVT_CALL(N(func_80242680_DF9080), 11)
-    EVT_CALL(N(func_80242680_DF9080), 12)
-    EVT_CALL(N(func_80242680_DF9080), 13)
-    EVT_CALL(N(func_80242680_DF9080), 14)
+    EVT_CALL(N(CreateParadeNPC), NPC_07)
+    EVT_CALL(N(CreateParadeNPC), NPC_08)
+    EVT_CALL(N(CreateParadeNPC), NPC_09)
+    EVT_CALL(N(CreateParadeNPC), 10)
+    EVT_CALL(N(CreateParadeNPC), 11)
+    EVT_CALL(N(CreateParadeNPC), 12)
+    EVT_CALL(N(CreateParadeNPC), 13)
+    EVT_CALL(N(CreateParadeNPC), 14)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -835,14 +835,14 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_05)
     EVT_CALL(DeleteNpc, NPC_06)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x00025000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 15)
-    EVT_CALL(N(func_80242680_DF9080), 16)
-    EVT_CALL(N(func_80242680_DF9080), 17)
-    EVT_CALL(N(func_80242680_DF9080), 18)
-    EVT_CALL(N(func_80242680_DF9080), 19)
-    EVT_CALL(N(func_80242680_DF9080), 20)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x25000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), NPC_0F)
+    EVT_CALL(N(CreateParadeNPC), NPC_10)
+    EVT_CALL(N(CreateParadeNPC), NPC_11)
+    EVT_CALL(N(CreateParadeNPC), NPC_12)
+    EVT_CALL(N(CreateParadeNPC), NPC_13)
+    EVT_CALL(N(CreateParadeNPC), NPC_14)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_WAIT(60)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -860,8 +860,8 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_0D)
     EVT_CALL(DeleteNpc, NPC_0E)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 21)
-    EVT_CALL(N(func_80242680_DF9080), 22)
+    EVT_CALL(N(CreateParadeNPC), NPC_15)
+    EVT_CALL(N(CreateParadeNPC), NPC_16)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -876,16 +876,16 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_13)
     EVT_CALL(DeleteNpc, NPC_14)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x0000B000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 23)
-    EVT_CALL(N(func_80242680_DF9080), 24)
-    EVT_CALL(N(func_80242680_DF9080), 25)
-    EVT_CALL(N(func_80242680_DF9080), 26)
-    EVT_CALL(N(func_80242680_DF9080), 27)
-    EVT_CALL(N(func_80242680_DF9080), 28)
-    EVT_CALL(N(func_80242680_DF9080), 29)
-    EVT_CALL(N(func_80242680_DF9080), 30)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0xB000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 23)
+    EVT_CALL(N(CreateParadeNPC), 24)
+    EVT_CALL(N(CreateParadeNPC), 25)
+    EVT_CALL(N(CreateParadeNPC), 26)
+    EVT_CALL(N(CreateParadeNPC), 27)
+    EVT_CALL(N(CreateParadeNPC), 28)
+    EVT_CALL(N(CreateParadeNPC), 29)
+    EVT_CALL(N(CreateParadeNPC), 30)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -896,8 +896,8 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_15)
     EVT_CALL(DeleteNpc, NPC_16)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 31)
-    EVT_CALL(N(func_80242680_DF9080), 32)
+    EVT_CALL(N(CreateParadeNPC), NPC_1F)
+    EVT_CALL(N(CreateParadeNPC), NPC_20)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -914,16 +914,16 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_1D)
     EVT_CALL(DeleteNpc, NPC_1E)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x00019F00, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 38)
-    EVT_CALL(N(func_80242680_DF9080), 33)
-    EVT_CALL(N(func_80242680_DF9080), 34)
-    EVT_CALL(N(func_80242680_DF9080), 35)
-    EVT_CALL(N(func_80242680_DF9080), 36)
-    EVT_CALL(N(func_80242680_DF9080), 37)
-    EVT_CALL(N(func_80242680_DF9080), 39)
-    EVT_CALL(N(func_80242744_DF9144), 0x00007000, LVarF)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x19F00, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 38)
+    EVT_CALL(N(CreateParadeNPC), 33)
+    EVT_CALL(N(CreateParadeNPC), 34)
+    EVT_CALL(N(CreateParadeNPC), 35)
+    EVT_CALL(N(CreateParadeNPC), 36)
+    EVT_CALL(N(CreateParadeNPC), 37)
+    EVT_CALL(N(CreateParadeNPC), 39)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x7000, LVarF)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -934,10 +934,10 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_1F)
     EVT_CALL(DeleteNpc, NPC_20)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 40)
-    EVT_CALL(N(func_80242680_DF9080), 41)
-    EVT_CALL(N(func_80242680_DF9080), 42)
-    EVT_CALL(N(func_80242680_DF9080), 43)
+    EVT_CALL(N(CreateParadeNPC), 40)
+    EVT_CALL(N(CreateParadeNPC), 41)
+    EVT_CALL(N(CreateParadeNPC), 42)
+    EVT_CALL(N(CreateParadeNPC), 43)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -952,16 +952,16 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_24)
     EVT_CALL(DeleteNpc, NPC_25)
     EVT_CALL(DeleteNpc, NPC_27)
-    EVT_CALL(N(func_802427A4_DF91A4), LVarF)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x00011F00, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 45)
-    EVT_CALL(N(func_80242680_DF9080), 46)
-    EVT_CALL(N(func_80242680_DF9080), 47)
-    EVT_CALL(N(func_80242680_DF9080), 48)
-    EVT_CALL(N(func_80242680_DF9080), 44)
-    EVT_CALL(N(func_80242744_DF9144), 0x0000A000, LVarF)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x11F00, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 45)
+    EVT_CALL(N(CreateParadeNPC), 46)
+    EVT_CALL(N(CreateParadeNPC), 47)
+    EVT_CALL(N(CreateParadeNPC), 48)
+    EVT_CALL(N(CreateParadeNPC), 44)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0xA000, LVarF)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -974,11 +974,11 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_2A)
     EVT_CALL(DeleteNpc, NPC_2B)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 53)
-    EVT_CALL(N(func_80242680_DF9080), 50)
-    EVT_CALL(N(func_80242680_DF9080), 51)
-    EVT_CALL(N(func_80242680_DF9080), 52)
-    EVT_CALL(N(func_80242680_DF9080), 49)
+    EVT_CALL(N(CreateParadeNPC), 53)
+    EVT_CALL(N(CreateParadeNPC), 50)
+    EVT_CALL(N(CreateParadeNPC), 51)
+    EVT_CALL(N(CreateParadeNPC), 52)
+    EVT_CALL(N(CreateParadeNPC), 49)
     EVT_CALL(N(SetNpcShadowScale), 49, EVT_FLOAT(4.0))
     EVT_CALL(SetNpcFlagBits, NPC_31, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
@@ -993,13 +993,13 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_2E)
     EVT_CALL(DeleteNpc, NPC_2F)
     EVT_CALL(DeleteNpc, NPC_30)
-    EVT_CALL(N(func_802427A4_DF91A4), LVarF)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x0000F000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 54)
-    EVT_CALL(N(func_80242680_DF9080), 55)
-    EVT_CALL(N(func_80242680_DF9080), 56)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0xF000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 54)
+    EVT_CALL(N(CreateParadeNPC), 55)
+    EVT_CALL(N(CreateParadeNPC), 56)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_CALL(N(SetNpcShadowScale), 54, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcFlagBits, NPC_36, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
@@ -1015,13 +1015,13 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_34)
     EVT_CALL(DeleteNpc, NPC_35)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 62)
-    EVT_CALL(N(func_80242680_DF9080), 63)
-    EVT_CALL(N(func_80242680_DF9080), 57)
-    EVT_CALL(N(func_80242680_DF9080), 58)
-    EVT_CALL(N(func_80242680_DF9080), 59)
-    EVT_CALL(N(func_80242680_DF9080), 60)
-    EVT_CALL(N(func_80242680_DF9080), 61)
+    EVT_CALL(N(CreateParadeNPC), 62)
+    EVT_CALL(N(CreateParadeNPC), 63)
+    EVT_CALL(N(CreateParadeNPC), 57)
+    EVT_CALL(N(CreateParadeNPC), 58)
+    EVT_CALL(N(CreateParadeNPC), 59)
+    EVT_CALL(N(CreateParadeNPC), 60)
+    EVT_CALL(N(CreateParadeNPC), 61)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1033,13 +1033,13 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_37)
     EVT_CALL(DeleteNpc, NPC_38)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x00020000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 64)
-    EVT_CALL(N(func_80242680_DF9080), 65)
-    EVT_CALL(N(func_80242680_DF9080), 66)
-    EVT_CALL(N(func_80242680_DF9080), 67)
-    EVT_CALL(N(func_80242680_DF9080), 68)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x20000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 64)
+    EVT_CALL(N(CreateParadeNPC), 65)
+    EVT_CALL(N(CreateParadeNPC), 66)
+    EVT_CALL(N(CreateParadeNPC), 67)
+    EVT_CALL(N(CreateParadeNPC), 68)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1055,12 +1055,12 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_3E)
     EVT_CALL(DeleteNpc, NPC_3F)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 69)
-    EVT_CALL(N(func_80242680_DF9080), 70)
-    EVT_CALL(N(func_80242680_DF9080), 71)
-    EVT_CALL(N(func_80242680_DF9080), 74)
-    EVT_CALL(N(func_80242680_DF9080), 72)
-    EVT_CALL(N(func_80242680_DF9080), 73)
+    EVT_CALL(N(CreateParadeNPC), 69)
+    EVT_CALL(N(CreateParadeNPC), 70)
+    EVT_CALL(N(CreateParadeNPC), 71)
+    EVT_CALL(N(CreateParadeNPC), 74)
+    EVT_CALL(N(CreateParadeNPC), 72)
+    EVT_CALL(N(CreateParadeNPC), 73)
     EVT_CALL(N(SetNpcShadowScale), 69, EVT_FLOAT(6.0))
     EVT_CALL(SetNpcFlagBits, NPC_45, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(N(SetNpcShadowScale), 74, EVT_FLOAT(3.0))
@@ -1078,13 +1078,13 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_43)
     EVT_CALL(DeleteNpc, NPC_44)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242744_DF9144), 0x00002000, LVar0)
-    EVT_CALL(N(func_80242680_DF9080), 77)
-    EVT_CALL(N(func_80242680_DF9080), 78)
-    EVT_CALL(N(func_80242680_DF9080), 79)
-    EVT_CALL(N(func_80242680_DF9080), 80)
-    EVT_CALL(N(func_80242680_DF9080), 81)
-    EVT_CALL(N(func_802427A4_DF91A4), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x2000, LVar0)
+    EVT_CALL(N(CreateParadeNPC), 77)
+    EVT_CALL(N(CreateParadeNPC), 78)
+    EVT_CALL(N(CreateParadeNPC), 79)
+    EVT_CALL(N(CreateParadeNPC), 80)
+    EVT_CALL(N(CreateParadeNPC), 81)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_CALL(N(SetNpcShadowScale), 77, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcFlagBits, NPC_4D, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(N(SetNpcShadowScale), 78, EVT_FLOAT(2.0))
@@ -1103,8 +1103,8 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_48)
     EVT_CALL(DeleteNpc, NPC_49)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 75)
-    EVT_CALL(N(func_80242680_DF9080), 76)
+    EVT_CALL(N(CreateParadeNPC), NPC_4B)
+    EVT_CALL(N(CreateParadeNPC), NPC_4C)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1118,8 +1118,8 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_50)
     EVT_CALL(DeleteNpc, NPC_51)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 83)
-    EVT_CALL(N(func_80242680_DF9080), 82)
+    EVT_CALL(N(CreateParadeNPC), NPC_53)
+    EVT_CALL(N(CreateParadeNPC), NPC_52)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1130,17 +1130,17 @@ EvtScript N(D_80245614_DFC014) = {
     EVT_CALL(DeleteNpc, NPC_4B)
     EVT_CALL(DeleteNpc, NPC_4C)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242680_DF9080), 84)
-    EVT_CALL(N(func_80242680_DF9080), 85)
-    EVT_CALL(N(func_80242680_DF9080), 86)
-    EVT_CALL(N(func_80242680_DF9080), 87)
-    EVT_CALL(N(func_80242680_DF9080), 88)
-    EVT_CALL(N(func_80242680_DF9080), 89)
-    EVT_CALL(N(func_80242680_DF9080), 90)
-    EVT_CALL(N(func_80242680_DF9080), 91)
-    EVT_CALL(N(SetNpcShadowScale), 84, EVT_FLOAT(3.0))
+    EVT_CALL(N(CreateParadeNPC), NPC_54)
+    EVT_CALL(N(CreateParadeNPC), NPC_55)
+    EVT_CALL(N(CreateParadeNPC), NPC_56)
+    EVT_CALL(N(CreateParadeNPC), NPC_57)
+    EVT_CALL(N(CreateParadeNPC), NPC_58)
+    EVT_CALL(N(CreateParadeNPC), NPC_59)
+    EVT_CALL(N(CreateParadeNPC), NPC_5A)
+    EVT_CALL(N(CreateParadeNPC), NPC_5B)
+    EVT_CALL(N(SetNpcShadowScale), NPC_54, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcFlagBits, NPC_54, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    EVT_CALL(N(SetNpcShadowScale), 90, EVT_FLOAT(3.0))
+    EVT_CALL(N(SetNpcShadowScale), NPC_5A, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcFlagBits, NPC_5A, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_55, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_5B, FALSE)
@@ -1158,19 +1158,19 @@ EvtScript N(EVS_ParadePhase_PlayCredits) = {
     EVT_END
 };
 
-EvtScript N(EVS_80246B28) = {
+EvtScript N(EVS_ManageParade) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_THREAD
         EVT_LABEL(0)
-        EVT_CALL(SetPlayerPos, 0, -1000, 0)
+        EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
     EVT_EXEC(N(D_80244AE4_DFB4E4))
     EVT_EXEC(N(D_80244B64_DFB564))
-    EVT_EXEC(N(D_802446B0_DFB0B0))
-    EVT_EXEC(N(D_80245614_DFC014))
+    EVT_EXEC(N(EVS_SetupInitialCamera))
+    EVT_EXEC(N(EVS_ManageNpcPool))
     EVT_EXEC_GET_TID(N(D_80247230_DFDC30), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -1180,8 +1180,8 @@ EvtScript N(EVS_80246B28) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_EXEC(N(EVS_ParadePhase_PlayCredits))
-    EVT_EXEC(N(D_80244724_DFB124))
-    EVT_EXEC(N(D_80244814_DFB214))
+    EVT_EXEC(N(EVS_UpdateScrollPos))
+    EVT_EXEC(N(EVS_UpdateTexPan_Ground))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)

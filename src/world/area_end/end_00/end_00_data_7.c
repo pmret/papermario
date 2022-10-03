@@ -3,9 +3,9 @@
 
 extern s32 N(D_80249D60_E00760);
 
-extern EvtScript N(EVS_802447F4);
+extern EvtScript N(EVS_OffsetNpcScroll);
 
-API_CALLABLE(N(func_80242898_DF9298));
+API_CALLABLE(N(AddScrollToNpcPos));
 
 ApiStatus N(func_80242B10_DF9510)(Evt *script, s32 isInitialCall) {
     N(D_80249D60_E00760) = evt_get_variable(script, *script->ptrReadPos);
@@ -257,15 +257,15 @@ EvtScript N(D_80249D64_E00764) = {
     EVT_CALL(SetNpcPos, NPC_33, LVar3, 20, -2)
     EVT_CALL(SetNpcPos, NPC_34, LVar4, 20, 2)
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 50)
+        EVT_CALL(N(AddScrollToNpcPos), 50)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 51)
+        EVT_CALL(N(AddScrollToNpcPos), 51)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 52)
+        EVT_CALL(N(AddScrollToNpcPos), 52)
     EVT_END_CHILD_THREAD
-    EVT_CALL(N(func_80242898_DF9298), 49)
+    EVT_CALL(N(AddScrollToNpcPos), 49)
     EVT_RETURN
     EVT_END
 };
@@ -305,7 +305,7 @@ EvtScript N(EVS_8024A044) = {
     EVT_END_LOOP
     EVT_CALL(InterpNpcYaw, NPC_2C, 90, 0)
     EVT_SET(LVar0, 44)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -329,7 +329,7 @@ EvtScript N(EVS_8024A044) = {
     EVT_CALL(NpcJump0, NPC_35, -290, 0, 0, 10)
     EVT_CALL(NpcJump0, NPC_35, -320, 0, 0, 10)
     EVT_SET(LVar0, 53)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarC)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarC)
     EVT_CALL(InterpNpcYaw, NPC_31, 90, 0)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 255, 30, EASING_LINEAR)

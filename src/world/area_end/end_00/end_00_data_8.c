@@ -1,10 +1,10 @@
 #include "end_00.h"
 #include "effects.h"
 
-extern EvtScript N(EVS_802447B8);
-extern EvtScript N(EVS_802447F4);
+extern EvtScript N(EVS_SetNpcShadowScale);
+extern EvtScript N(EVS_OffsetNpcScroll);
 
-API_CALLABLE(N(func_80242898_DF9298));
+API_CALLABLE(N(AddScrollToNpcPos));
 
 EvtScript N(D_8024AFE0_E019E0) = {
     EVT_CALL(GetNpcPos, NPC_40, LVar0, LVar1, LVar2)
@@ -23,18 +23,18 @@ EvtScript N(D_8024AFE0_E019E0) = {
     EVT_CALL(SetNpcPos, NPC_43, LVar5, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_44, LVar6, LVar1, LVar2)
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 65)
+        EVT_CALL(N(AddScrollToNpcPos), 65)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 66)
+        EVT_CALL(N(AddScrollToNpcPos), 66)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 67)
+        EVT_CALL(N(AddScrollToNpcPos), 67)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 68)
+        EVT_CALL(N(AddScrollToNpcPos), 68)
     EVT_END_CHILD_THREAD
-    EVT_CALL(N(func_80242898_DF9298), 64)
+    EVT_CALL(N(AddScrollToNpcPos), 64)
     EVT_RETURN
     EVT_END
 };
@@ -52,18 +52,18 @@ EvtScript N(D_8024B1B8_E01BB8) = {
     EVT_CALL(SetNpcPos, NPC_48, LVar3, 60, 0)
     EVT_CALL(SetNpcPos, NPC_49, LVar4, 60, 0)
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 70)
+        EVT_CALL(N(AddScrollToNpcPos), 70)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 71)
+        EVT_CALL(N(AddScrollToNpcPos), 71)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 72)
+        EVT_CALL(N(AddScrollToNpcPos), 72)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242898_DF9298), 73)
+        EVT_CALL(N(AddScrollToNpcPos), 73)
     EVT_END_CHILD_THREAD
-    EVT_CALL(N(func_80242898_DF9298), 69)
+    EVT_CALL(N(AddScrollToNpcPos), 69)
     EVT_RETURN
     EVT_END
 };
@@ -121,13 +121,13 @@ EvtScript N(D_8024B580_E01F80) = {
     EVT_CALL(SetNpcSpeed, NPC_4A, EVT_FLOAT(1.0))
     EVT_CALL(NpcMoveTo, NPC_4A, LVar0, -20, 0)
     EVT_CALL(SetNpcAnimation, NPC_4A, ANIM_GourmetGuy_Idle)
-    EVT_CALL(N(func_80242898_DF9298), 74)
+    EVT_CALL(N(AddScrollToNpcPos), 74)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024B65C_E0205C) = {
-    EVT_CALL(N(func_80242898_DF9298), 74)
+    EVT_CALL(N(AddScrollToNpcPos), 74)
     EVT_RETURN
     EVT_END
 };
@@ -267,7 +267,7 @@ EvtScript N(D_8024B67C_E0207C) = {
             EVT_SETF(LVar2, LVar0)
             EVT_DIVF(LVar2, 100)
             EVT_SET(LVar0, 69)
-            EVT_EXEC(N(EVS_802447B8))
+            EVT_EXEC(N(EVS_SetNpcShadowScale))
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -476,14 +476,14 @@ EvtScript N(EVS_8024CC78) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim09)
     EVT_SET(LVar0, 77)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_WAIT(10)
     EVT_CALL(InterpNpcYaw, NPC_4D, 90, 7)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim10)
     EVT_CALL(SetNpcAnimation, NPC_4E, ANIM_CrystalKing_Anim10)
     EVT_SET(LVar0, 78)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarB)
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_4E, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(10)
@@ -501,14 +501,14 @@ EvtScript N(EVS_8024CC78) = {
     EVT_CALL(NpcJump1, NPC_4B, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetNpcAnimation, NPC_4B, ANIM_Duplighost_Anim02)
     EVT_SET(LVar0, 75)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_KILL_THREAD(LVarB)
     EVT_CALL(SetNpcAnimation, NPC_4E, ANIM_CrystalKing_Anim0F)
     EVT_CALL(GetNpcPos, NPC_4E, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -80)
     EVT_CALL(NpcMoveTo, NPC_4E, LVar0, LVar2, 40)
     EVT_SET(LVar0, 78)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarB)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_4E, ANIM_CrystalKing_Anim10)
         EVT_WAIT(60)
@@ -530,7 +530,7 @@ EvtScript N(EVS_8024CC78) = {
     EVT_CALL(SetNpcAnimation, NPC_4E, ANIM_CrystalKing_Anim10)
     EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim10)
     EVT_SET(LVar0, 77)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarC)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarC)
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(10)
@@ -546,14 +546,14 @@ EvtScript N(EVS_8024CC78) = {
     EVT_CALL(NpcJump1, NPC_4C, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetNpcAnimation, NPC_4C, ANIM_Duplighost_Anim02)
     EVT_SET(LVar0, 76)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarB)
     EVT_KILL_THREAD(LVarC)
     EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim0F)
     EVT_CALL(GetNpcPos, NPC_4D, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -80)
     EVT_CALL(NpcMoveTo, NPC_4D, LVar0, LVar2, 40)
     EVT_SET(LVar0, 77)
-    EVT_EXEC_GET_TID(N(EVS_802447F4), LVarC)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarC)
     EVT_THREAD
         EVT_LOOP(6)
             EVT_CALL(SetNpcAnimation, NPC_4D, ANIM_CrystalKing_Anim10)
