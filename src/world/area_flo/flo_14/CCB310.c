@@ -242,9 +242,7 @@ EvtScript N(80242EAC) = {
     EVT_END
 };
 
-s32 N(D_802431CC_CCE4DC) = {
-    0x00000000,
-};
+s32 N(D_802431CC_CCE4DC) = FALSE;
 
 EvtScript N(802431D0) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -682,9 +680,9 @@ void N(func_802407D4_CCBAE4)(void) {
         }
     } else {
         if (((u32)N(D_80243B18_CCEE28) - 141) < 119) {
-            N(D_802431CC_CCE4DC) = 1;
+            N(D_802431CC_CCE4DC) = TRUE;
         } else {
-            N(D_802431CC_CCE4DC) = 0;
+            N(D_802431CC_CCE4DC) = FALSE;
         }
         N(D_80243B18_CCEE28) += 5;
     }

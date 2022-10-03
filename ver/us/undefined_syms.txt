@@ -301,7 +301,6 @@ dead_heap_malloc = 0x8002BFD4;
 dead_heap_free = 0x8002C01C;
 dead_general_heap_malloc = 0x8002BF18;
 dead_heap_free = 0x8002C01C;
-dead_func_80041080 = 0x80041080;
 dead_sin_deg = 0x8002B5DC;
 dead_cos_deg = 0x8002B640;
 dead_sin_cos_deg = 0x8002B524;
@@ -369,8 +368,6 @@ dead_gPlayerData = 0x80117840;
 dead_gCollisionStatus = 0x80169B10;
 dead_gOverrideFlags = 0x800A15A8;
 dead_fx_motion_blur_flame = 0x80076970;
-D_800A1530 = 0x800A1530;
-D_800A15A4 = 0x800A15A4;
 D_800A15C4 = 0x800A15C4;
 D_800A15CC = 0x800A15CC;
 dead_gCurrentEncounter = 0x800B7EF0;
@@ -384,6 +381,11 @@ dead_gCurrentCameraID = 0x8007C760;
 dead_gGameStatusPtr = 0x80079430;
 D_80079540 = 0x80079540;
 dead_gPartnerPopupProperties = 0x80094900;
+dead_nuGfxZBuffer = 0x800A1530;
+dead_osVirtualToPhysical = 0x80066FE0;
+dead_transform_point = 0x8002A910;
+dead_gMasterGfxPos = 0x800A15C4;
+dead_nuGfxCfb_ptr = 0x800A15A4;
 
 // TODO below
 
