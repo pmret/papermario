@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.12.2
+* Fixed bug where `given_dir` was possibly not a `Path`
+
 ### 0.12.1
 * The constructor for `Segment` takes far fewer arguments now, which will affect (and hopefully simplify) any custom segments that are implemented.
 

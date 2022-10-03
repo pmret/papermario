@@ -243,7 +243,7 @@ class Segment:
         if isinstance(yaml, dict):
             ret.extract = bool(yaml.get("extract", ret.extract))
             ret.exclusive_ram_id = yaml.get("exclusive_ram_id")
-            ret.given_dir = yaml.get("dir", "")
+            ret.given_dir = Path(yaml.get("dir", ""))
         ret.given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
         ret.given_symbol_name_format_no_rom = (
             Segment.parse_segment_symbol_name_format_no_rom(yaml)
