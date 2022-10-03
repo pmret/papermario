@@ -8,38 +8,25 @@ INCLUDE_ASM(s32, "effects/sweat", sweat_main);
 void sweat_init(void) {
 }
 
-typedef struct {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C*/ f32 unkC;
-    /* 0x10 */
-    s32 unk24;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-} _SweatFXData;
-
+// extern f32 D_E0050560;
 // INCLUDE_ASM(s32, "effects/sweat", sweat_update);
 void sweat_update(EffectInstance *effect) {
-    f32 temp_f0;
-    _SweatFXData* data = effect->data.sweat;
-    s32 temp_v0;
+    SweatFXData* data = effect->data.sweat;
 
-    temp_v0 = data->unk24 - 1;
-    data->unk24 = temp_v0;
-    if (temp_v0 < 0) {
+    data->unk_24--;
+    if (data->unk_24 < 0) {
         shim_remove_effect(effect);
         return;
     }
-    data->pos.x = (f32) (data->pos.x + data->unk18);
-    data->pos.y = (f32) (data->pos.y + data->unk1C);
-    data->pos.z = (f32) (data->pos.z + data->unk20);
-    temp_f0 = (f32) ((f64) data->unk1C - 0.05);
-    data->unk1C = temp_f0;
-    data->unk18 = (f32) ((f64) data->unk18 * 0.94);
-    if ((f64) temp_f0 < -0.1) {
-        data->unk1C = -0.1f;
+    data->pos.x = data->pos.x + data->unk_18;
+    data->pos.y = data->pos.y + data->unk_1C;
+    data->pos.z = data->pos.z + data->unk_20;
+    data->unk_1C -= 0.05;
+    data->unk_18 *= 0.94;
+    if (data->unk_1C < -0.1) {
+        data->unk_1C = -0.1f;
     }
-    data->unk20 = (f32) ((f64) data->unk20 * 0.94);
+    data->unk_20 *= 0.94;
 }
 
 void sweat_render(EffectInstance* effect) {
