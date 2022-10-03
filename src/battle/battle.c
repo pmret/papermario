@@ -120,8 +120,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_OMO3] = {
         BTL_AREA(area_omo3),
         .name = "エリア ＯＭＯ３",
-        .battles = 0x8022EA2C,
-        .stages = 0x8022EB1C,
+        .battles = &b_area_omo3_formationTable,
+        .stages = &b_area_omo3_stageTable,
     },
     [BTL_AREA_KGR] = {
         BTL_AREA(area_kgr),

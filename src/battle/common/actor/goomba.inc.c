@@ -3,12 +3,12 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Goomba.h"
 
-s32 N(defenseTable_80219750)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021975C)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -33,18 +33,18 @@ s32 N(statusTable_8021975C)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_80219854)[];
-extern EvtScript N(init_802198EC);
+extern s32 N(idleAnimations)[];
+extern EvtScript N(init);
 
-ActorPartBlueprint N(partsTable_80219808)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219854),
-        .defenseTable = N(defenseTable_80219750),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 246,
@@ -56,10 +56,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBA,
     .level = 5,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT(N(partsTable_80219808)),
-    .partsData = N(partsTable_80219808),
-    .script = &N(init_802198EC),
-    .statusTable = N(statusTable_8021975C),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 90,
     .airLiftChance = 100,
     .spookChance = 90,
@@ -74,7 +74,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80219854)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Idle,
     STATUS_STONE,     ANIM_Goomba_Still,
     STATUS_SLEEP,     ANIM_Goomba_Sleep,
@@ -87,7 +87,7 @@ s32 N(idleAnimations_80219854)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802198A0)[] = {
+s32 N(idleAnimations2)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Run,
     STATUS_STONE,     ANIM_Goomba_Still,
     STATUS_SLEEP,     ANIM_Goomba_Sleep,
@@ -100,19 +100,19 @@ s32 N(idleAnimations_802198A0)[] = {
     STATUS_END,
 };
 
-extern EvtScript N(takeTurn_8021A440);
-extern EvtScript N(idle_80219938);
-extern EvtScript N(handleEvent_80219C14);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
 
-EvtScript N(init_802198EC) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A440)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219938)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219C14)))
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_80219938) = {
+EvtScript N(idle) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -128,10 +128,10 @@ EvtScript N(idle_80219938) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802198A0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219854)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -144,10 +144,10 @@ EvtScript N(idle_80219938) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802198A0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219854)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -162,7 +162,7 @@ EvtScript N(idle_80219938) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80219C14) = {
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -281,7 +281,7 @@ EvtScript N(handleEvent_80219C14) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtScript N(takeTurn_8021A440) = {
+EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
