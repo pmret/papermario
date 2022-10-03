@@ -22,4 +22,7 @@ enum {
 
 #define AF_END(index) AreaFlag(index)
 
+extern MapSettings end_01_settings;
+s32 end_01_map_init(void);
+
 #endif

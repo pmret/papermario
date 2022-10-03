@@ -1,12 +1,12 @@
 #include "end_01.h"
 
-API_CALLABLE(N(func_80240010_E05370)) {
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_ManageParade);
+
+API_CALLABLE(N(WidenCameraFOV)) {
     gCameras[CAM_DEFAULT].vfov = 35.0f;
     return ApiStatus_DONE2;
 }
-
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_802451F8);
 
 EntryList N(Entrances) = {
     [end_01_ENTRY_0]    {    0.0,    0.0,    0.0,    0.0 },
@@ -24,9 +24,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(N(func_80240010_E05370))
+    EVT_CALL(N(WidenCameraFOV))
     EVT_CALL(EnableStatusMenu, FALSE)
-    EVT_EXEC(N(EVS_802451F8))
+    EVT_EXEC(N(EVS_ManageParade))
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END

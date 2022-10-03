@@ -8,22 +8,22 @@ API_CALLABLE(N(InitCredits));
 API_CALLABLE(N(ShowCreditList));
 
 extern EvtScript N(EVS_80246A60);
-extern EvtScript N(EVS_80247620);
-extern EvtScript N(EVS_80247D68);
-extern EvtScript N(D_802481B0_E0D510);
-extern EvtScript N(EVS_80248D1C);
-extern EvtScript N(EVS_80249034);
-extern EvtScript N(EVS_802492B0);
-extern EvtScript N(D_80245820_E0AB80);
-extern EvtScript N(D_80245BD0_E0AF30);
+extern EvtScript N(EVS_ParadePhase_ShyGuyDancing);
+extern EvtScript N(EVS_ParadePhase_ShyGuyFormation);
+extern EvtScript N(EVS_ParadePhase_Toads1);
+extern EvtScript N(EVS_ParadePhase_MarioPeach);
+extern EvtScript N(EVS_ParadePhase_Toads2);
+extern EvtScript N(EVS_MarioPeachExit);
+extern EvtScript N(EVS_ParadePhase_StarSpirits);
+extern EvtScript N(EVS_ParadePhase_SkatingPenguins);
 extern EvtScript N(D_80245FF0_E0B350);
 extern EvtScript N(D_80245C74_E0AFD4);
 
-extern EvtScript N(D_80243D74_E090D4);
-extern EvtScript N(D_80243D90_E090F0);
-extern EvtScript N(D_80243DB0_E09110);
+extern EvtScript N(EVS_InitCredits);
+extern EvtScript N(EVS_ShowCredits_Jobs);
+extern EvtScript N(EVS_ShowCredits_Names);
 
-API_CALLABLE(N(func_80242690_E079F0)) {
+API_CALLABLE(N(CreateParadeNPC)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     ParadeNpcInfo* npcInfo = &N(ParadeNpcsTable)[npcID];
@@ -47,7 +47,7 @@ API_CALLABLE(N(func_80242690_E079F0)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80242754_E07AB4)) {
+API_CALLABLE(N(ParadeSpriteHeapMalloc)) {
     Bytecode* args = script->ptrReadPos;
     s32 heapSize = evt_get_variable(script, *args++);
     s32 outVar = *args++;
@@ -56,7 +56,7 @@ API_CALLABLE(N(func_80242754_E07AB4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802427B4_E07B14)) {
+API_CALLABLE(N(ParadeSpriteHeapFree)) {
     Bytecode* args = script->ptrReadPos;
     s32 pointer = *args++;
 
@@ -64,15 +64,15 @@ API_CALLABLE(N(func_802427B4_E07B14)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802427E8_E07B48)) {
+API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    camera->unk_506 = 1;
-    camera->movePos.x += 0.6666667f;
+    camera->panActive = TRUE;
+    camera->movePos.x += PARADE_SCROLL_RATE;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80242840_E07BA0)) {
+API_CALLABLE(N(AddScrollToNpcPos)) {
     Bytecode* args = script->ptrReadPos;
     Npc** npc = (Npc**)&script->functionTempPtr[1];
 
@@ -80,12 +80,13 @@ API_CALLABLE(N(func_80242840_E07BA0)) {
         *npc = get_npc_unsafe(evt_get_variable(script, *args++));
     }
 
-    (*npc)->pos.x += 0.6666667f;
+    (*npc)->pos.x += PARADE_SCROLL_RATE;
 
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(N(func_8024289C_E07BFC)) {
+// unused
+API_CALLABLE(N(WaitForConfirmInput)) {
     if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_START)) {
         return ApiStatus_DONE2;
     } else {
@@ -93,8 +94,7 @@ API_CALLABLE(N(func_8024289C_E07BFC)) {
     }
 }
 
-
-EvtScript N(D_80243DD0_E09130) = {
+EvtScript N(EVS_SetupInitialCamera) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -3135, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -3135, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
@@ -103,20 +103,20 @@ EvtScript N(D_80243DD0_E09130) = {
     EVT_END
 };
 
-EvtScript N(D_80243E44_E091A4) = {
+EvtScript N(EVS_UpdateScrollPos) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(-3135.0), 0, 0)
     EVT_SETF(LVar1, EVT_FLOAT(0.0))
     EVT_LOOP(0)
-        EVT_CALL(N(func_802427E8_E07B48))
+        EVT_CALL(N(UpdateCameraScroll))
         EVT_CALL(TranslateGroup, MODEL_bg, LVar1, 0, 0)
-        EVT_ADDF(LVar1, EVT_FLOAT(0.6669922))
+        EVT_ADDF(LVar1, EVT_FLOAT(PARADE_SCROLL_RATE))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243ED8_E09238) = {
+EvtScript N(EVS_UpdateTexPan_Ground) = {
     EVT_CALL(EnableTexPanning, MODEL_o145, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o146, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_j2, TRUE)
@@ -150,7 +150,7 @@ EvtScript N(D_80243ED8_E09238) = {
             EVT_IF_GT(LVar0, 0x20000)
                 EVT_ADD(LVar0, -0x20000)
             EVT_END_IF
-            EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -158,53 +158,53 @@ EvtScript N(D_80243ED8_E09238) = {
     EVT_END
 };
 
-EvtScript N(EVS_80244180) = {
-    EVT_CALL(N(func_80242840_E07BA0), LVar0)
+EvtScript N(EVS_OffsetNpcScroll) = {
+    EVT_CALL(N(AddScrollToNpcPos), LVar0)
     EVT_RETURN
     EVT_END
 };
 
-AnimID N(D_802441A0_E09500)[] = {
+AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_BattleEldstar_Idle,
     -1
 };
 
-AnimID N(D_802441A8_E09508)[] = {
+AnimID N(ExtraAnims_Mamar)[] = {
     ANIM_BattleMamar_Idle,
     -1
 };
 
-AnimID N(D_802441B0_E09510)[] = {
+AnimID N(ExtraAnims_Skolar)[] = {
     ANIM_BattleSkolar_Idle,
     -1
 };
 
-AnimID N(D_802441B8_E09518)[] = {
+AnimID N(ExtraAnims_Muskular)[] = {
     ANIM_BattleMuskular_Idle,
     -1
 };
 
-AnimID N(D_802441C0_E09520)[] = {
+AnimID N(ExtraAnims_Misstar)[] = {
     ANIM_BattleMisstar_Still,
     -1
 };
 
-AnimID N(D_802441C8_E09528)[] = {
+AnimID N(ExtraAnims_Klevar)[] = {
     ANIM_BattleKlevar_Idle,
     -1
 };
 
-AnimID N(D_802441D0_E09530)[] = {
+AnimID N(ExtraAnims_Kalmar)[] = {
     ANIM_BattleKalmar_Idle,
     -1
 };
 
-AnimID N(D_802441D8_E09538)[] = {
+AnimID N(ExtraAnims_PyroGuy)[] = {
     ANIM_PyroGuy_Anim03,
     -1
 };
 
-AnimID N(D_802441E0_E09540)[] = {
+AnimID N(ExtraAnims_ShyGuy)[] = {
     ANIM_ShyGuy_Red_Anim04,
     ANIM_ShyGuy_Red_Anim10,
     ANIM_ShyGuy_Red_Anim01,
@@ -214,43 +214,43 @@ AnimID N(D_802441E0_E09540)[] = {
 ParadeNpcInfo N(ParadeNpcsTable)[] = {
     [NPC_00] {
         .initialAnim = ANIM_BattleEldstar_Idle,
-        .animList = N(D_802441A0_E09500),
+        .animList = N(ExtraAnims_Eldstar),
         .pos = { -3135.0f, 210.0f, -120.0f },
         .yaw = 270.0f
     },
     [NPC_01] {
         .initialAnim = ANIM_BattleMamar_Idle,
-        .animList = N(D_802441A8_E09508),
+        .animList = N(ExtraAnims_Mamar),
         .pos = { -3195.0f, 200.0f, -120.0f },
         .yaw = 270.0f
     },
     [NPC_02] {
         .initialAnim = ANIM_BattleSkolar_Idle,
-        .animList = N(D_802441B0_E09510),
+        .animList = N(ExtraAnims_Skolar),
         .pos = { -3075.0f, 195.0f, -120.0f },
         .yaw = 270.0f
     },
     [NPC_03] {
         .initialAnim = ANIM_BattleMuskular_Idle,
-        .animList = N(D_802441B8_E09518),
+        .animList = N(ExtraAnims_Muskular),
         .pos = { -3045.0f, 148.0f, -104.0f },
         .yaw = 270.0f
     },
     [NPC_04] {
         .initialAnim = ANIM_BattleMisstar_Still,
-        .animList = N(D_802441C0_E09520),
+        .animList = N(ExtraAnims_Misstar),
         .pos = { -3105.0f, 158.0f, -104.0f },
         .yaw = 270.0f
     },
     [NPC_05] {
         .initialAnim = ANIM_BattleKlevar_Idle,
-        .animList = N(D_802441C8_E09528),
+        .animList = N(ExtraAnims_Klevar),
         .pos = { -3165.0f, 158.0f, -104.0f },
         .yaw = 270.0f
     },
     [NPC_06] {
         .initialAnim = ANIM_BattleKalmar_Idle,
-        .animList = N(D_802441D0_E09530),
+        .animList = N(ExtraAnims_Kalmar),
         .pos = { -3225.0f, 148.0f, -104.0f },
         .yaw = 270.0f
     },
@@ -401,13 +401,13 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_24] {
         .initialAnim = ANIM_PyroGuy_Anim03,
-        .animList = N(D_802441D8_E09538),
+        .animList = N(ExtraAnims_PyroGuy),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_25] {
         .initialAnim = ANIM_PyroGuy_Anim03,
-        .animList = N(D_802441D8_E09538),
+        .animList = N(ExtraAnims_PyroGuy),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
@@ -473,7 +473,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
     [NPC_32] {
         .initialAnim = ANIM_ShyGuy_Red_Anim04,
-        .animList = N(D_802441E0_E09540),
+        .animList = N(ExtraAnims_ShyGuy),
         .pos = { -788.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
@@ -564,27 +564,27 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
     },
 };
 
-EvtScript N(D_80244850_E09BB0) = {
-    EVT_CALL(N(func_80242690_E079F0), NPC_00)
-    EVT_CALL(N(func_80242690_E079F0), NPC_01)
-    EVT_CALL(N(func_80242690_E079F0), NPC_02)
-    EVT_CALL(N(func_80242690_E079F0), NPC_03)
-    EVT_CALL(N(func_80242690_E079F0), NPC_04)
-    EVT_CALL(N(func_80242690_E079F0), NPC_05)
-    EVT_CALL(N(func_80242690_E079F0), NPC_06)
-    EVT_CALL(N(func_80242690_E079F0), NPC_09)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0A)
-    EVT_CALL(N(func_80242690_E079F0), NPC_07)
-    EVT_CALL(N(func_80242690_E079F0), NPC_08)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0B)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0C)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0D)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0E)
-    EVT_CALL(N(func_80242690_E079F0), NPC_0F)
-    EVT_CALL(N(func_80242754_E07AB4), 0x13400, LVar0)
-    EVT_CALL(N(func_80242690_E079F0), NPC_10)
-    EVT_CALL(N(func_80242690_E079F0), NPC_11)
-    EVT_CALL(N(func_802427B4_E07B14), LVar0)
+EvtScript N(EVS_ManageNpcPool) = {
+    EVT_CALL(N(CreateParadeNPC), NPC_00)
+    EVT_CALL(N(CreateParadeNPC), NPC_01)
+    EVT_CALL(N(CreateParadeNPC), NPC_02)
+    EVT_CALL(N(CreateParadeNPC), NPC_03)
+    EVT_CALL(N(CreateParadeNPC), NPC_04)
+    EVT_CALL(N(CreateParadeNPC), NPC_05)
+    EVT_CALL(N(CreateParadeNPC), NPC_06)
+    EVT_CALL(N(CreateParadeNPC), NPC_09)
+    EVT_CALL(N(CreateParadeNPC), NPC_0A)
+    EVT_CALL(N(CreateParadeNPC), NPC_07)
+    EVT_CALL(N(CreateParadeNPC), NPC_08)
+    EVT_CALL(N(CreateParadeNPC), NPC_0B)
+    EVT_CALL(N(CreateParadeNPC), NPC_0C)
+    EVT_CALL(N(CreateParadeNPC), NPC_0D)
+    EVT_CALL(N(CreateParadeNPC), NPC_0E)
+    EVT_CALL(N(CreateParadeNPC), NPC_0F)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x13400, LVar0)
+    EVT_CALL(N(CreateParadeNPC), NPC_10)
+    EVT_CALL(N(CreateParadeNPC), NPC_11)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -609,55 +609,55 @@ EvtScript N(D_80244850_E09BB0) = {
     EVT_CALL(DeleteNpc, NPC_0E)
     EVT_CALL(DeleteNpc, NPC_0F)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242690_E079F0), NPC_12)
-    EVT_CALL(N(func_80242690_E079F0), NPC_13)
-    EVT_CALL(N(func_80242690_E079F0), NPC_14)
-    EVT_CALL(N(func_80242690_E079F0), NPC_15)
-    EVT_CALL(N(func_80242690_E079F0), NPC_16)
-    EVT_CALL(N(func_80242690_E079F0), NPC_17)
-    EVT_CALL(N(func_80242690_E079F0), NPC_18)
-    EVT_CALL(N(func_80242690_E079F0), NPC_19)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1A)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1B)
+    EVT_CALL(N(CreateParadeNPC), NPC_12)
+    EVT_CALL(N(CreateParadeNPC), NPC_13)
+    EVT_CALL(N(CreateParadeNPC), NPC_14)
+    EVT_CALL(N(CreateParadeNPC), NPC_15)
+    EVT_CALL(N(CreateParadeNPC), NPC_16)
+    EVT_CALL(N(CreateParadeNPC), NPC_17)
+    EVT_CALL(N(CreateParadeNPC), NPC_18)
+    EVT_CALL(N(CreateParadeNPC), NPC_19)
+    EVT_CALL(N(CreateParadeNPC), NPC_1A)
+    EVT_CALL(N(CreateParadeNPC), NPC_1B)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1778)
+        EVT_IF_GT(LVar0, PARADE_PHASE_5)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DeleteNpc, NPC_10)
     EVT_CALL(DeleteNpc, NPC_11)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242754_E07AB4), 0x4700, LVar0)
-    EVT_CALL(N(func_80242690_E079F0), NPC_24)
-    EVT_CALL(N(func_80242690_E079F0), NPC_25)
-    EVT_CALL(N(func_80242690_E079F0), NPC_32)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1C)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1D)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1E)
-    EVT_CALL(N(func_80242690_E079F0), NPC_1F)
-    EVT_CALL(N(func_80242690_E079F0), NPC_20)
-    EVT_CALL(N(func_80242690_E079F0), NPC_21)
-    EVT_CALL(N(func_80242690_E079F0), NPC_22)
-    EVT_CALL(N(func_80242690_E079F0), NPC_23)
-    EVT_CALL(N(func_80242690_E079F0), NPC_26)
-    EVT_CALL(N(func_80242690_E079F0), NPC_27)
-    EVT_CALL(N(func_80242690_E079F0), NPC_28)
-    EVT_CALL(N(func_80242690_E079F0), NPC_29)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2A)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2B)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2C)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2D)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2E)
-    EVT_CALL(N(func_80242690_E079F0), NPC_2F)
-    EVT_CALL(N(func_80242690_E079F0), NPC_30)
-    EVT_CALL(N(func_80242690_E079F0), NPC_31)
-    EVT_CALL(N(func_802427B4_E07B14), LVar0)
+    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x4700, LVar0)
+    EVT_CALL(N(CreateParadeNPC), NPC_24)
+    EVT_CALL(N(CreateParadeNPC), NPC_25)
+    EVT_CALL(N(CreateParadeNPC), NPC_32)
+    EVT_CALL(N(CreateParadeNPC), NPC_1C)
+    EVT_CALL(N(CreateParadeNPC), NPC_1D)
+    EVT_CALL(N(CreateParadeNPC), NPC_1E)
+    EVT_CALL(N(CreateParadeNPC), NPC_1F)
+    EVT_CALL(N(CreateParadeNPC), NPC_20)
+    EVT_CALL(N(CreateParadeNPC), NPC_21)
+    EVT_CALL(N(CreateParadeNPC), NPC_22)
+    EVT_CALL(N(CreateParadeNPC), NPC_23)
+    EVT_CALL(N(CreateParadeNPC), NPC_26)
+    EVT_CALL(N(CreateParadeNPC), NPC_27)
+    EVT_CALL(N(CreateParadeNPC), NPC_28)
+    EVT_CALL(N(CreateParadeNPC), NPC_29)
+    EVT_CALL(N(CreateParadeNPC), NPC_2A)
+    EVT_CALL(N(CreateParadeNPC), NPC_2B)
+    EVT_CALL(N(CreateParadeNPC), NPC_2C)
+    EVT_CALL(N(CreateParadeNPC), NPC_2D)
+    EVT_CALL(N(CreateParadeNPC), NPC_2E)
+    EVT_CALL(N(CreateParadeNPC), NPC_2F)
+    EVT_CALL(N(CreateParadeNPC), NPC_30)
+    EVT_CALL(N(CreateParadeNPC), NPC_31)
+    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -889)
+        EVT_IF_GT(LVar0, PARADE_PHASE_7)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -672,16 +672,16 @@ EvtScript N(D_80244850_E09BB0) = {
     EVT_CALL(DeleteNpc, NPC_1A)
     EVT_CALL(DeleteNpc, NPC_1B)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242690_E079F0), NPC_33)
-    EVT_CALL(N(func_80242690_E079F0), NPC_34)
-    EVT_CALL(N(func_80242690_E079F0), NPC_35)
-    EVT_CALL(N(func_80242690_E079F0), NPC_36)
-    EVT_CALL(N(func_80242690_E079F0), NPC_37)
-    EVT_CALL(N(func_80242690_E079F0), NPC_38)
+    EVT_CALL(N(CreateParadeNPC), NPC_33)
+    EVT_CALL(N(CreateParadeNPC), NPC_34)
+    EVT_CALL(N(CreateParadeNPC), NPC_35)
+    EVT_CALL(N(CreateParadeNPC), NPC_36)
+    EVT_CALL(N(CreateParadeNPC), NPC_37)
+    EVT_CALL(N(CreateParadeNPC), NPC_38)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -689)
+        EVT_IF_GT(LVar0, PARADE_PHASE_8)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -709,37 +709,37 @@ EvtScript N(D_80244850_E09BB0) = {
     EVT_CALL(DeleteNpc, NPC_30)
     EVT_CALL(DeleteNpc, NPC_31)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80242690_E079F0), NPC_39)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3A)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3B)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3C)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3D)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3E)
-    EVT_CALL(N(func_80242690_E079F0), NPC_3F)
-    EVT_CALL(N(func_80242690_E079F0), NPC_40)
-    EVT_CALL(N(func_80242690_E079F0), NPC_41)
-    EVT_CALL(N(func_80242690_E079F0), NPC_42)
-    EVT_CALL(N(func_80242690_E079F0), NPC_43)
+    EVT_CALL(N(CreateParadeNPC), NPC_39)
+    EVT_CALL(N(CreateParadeNPC), NPC_3A)
+    EVT_CALL(N(CreateParadeNPC), NPC_3B)
+    EVT_CALL(N(CreateParadeNPC), NPC_3C)
+    EVT_CALL(N(CreateParadeNPC), NPC_3D)
+    EVT_CALL(N(CreateParadeNPC), NPC_3E)
+    EVT_CALL(N(CreateParadeNPC), NPC_3F)
+    EVT_CALL(N(CreateParadeNPC), NPC_40)
+    EVT_CALL(N(CreateParadeNPC), NPC_41)
+    EVT_CALL(N(CreateParadeNPC), NPC_42)
+    EVT_CALL(N(CreateParadeNPC), NPC_43)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802451B8_E0A518) = {
+EvtScript N(EVS_ParadePhase_PlayCredits) = {
     EVT_WAIT(60)
-    EVT_EXEC(N(D_80243D74_E090D4))
-    EVT_EXEC(N(D_80243D90_E090F0))
-    EVT_EXEC(N(D_80243DB0_E09110))
+    EVT_EXEC(N(EVS_InitCredits))
+    EVT_EXEC(N(EVS_ShowCredits_Jobs))
+    EVT_EXEC(N(EVS_ShowCredits_Names))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_802451F8) = {
+EvtScript N(EVS_ManageParade) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_PARADE_NIGHT, 0, 8)
-    EVT_EXEC(N(D_80243DD0_E09130))
-    EVT_EXEC(N(D_80244850_E09BB0))
-    EVT_EXEC_GET_TID(N(D_80245820_E0AB80), LVarA)
+    EVT_EXEC(N(EVS_SetupInitialCamera))
+    EVT_EXEC(N(EVS_ManageNpcPool))
+    EVT_EXEC_GET_TID(N(EVS_ParadePhase_StarSpirits), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IS_THREAD_RUNNING(LVarA, LVar0)
@@ -747,21 +747,21 @@ EvtScript N(EVS_802451F8) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_802451B8_E0A518))
-    EVT_EXEC_GET_TID(N(D_80243E44_E091A4), LVarA)
-    EVT_EXEC_GET_TID(N(D_80243ED8_E09238), LVarB)
+    EVT_EXEC(N(EVS_ParadePhase_PlayCredits))
+    EVT_EXEC_GET_TID(N(EVS_UpdateScrollPos), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_UpdateTexPan_Ground), LVarB)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -3000)
+        EVT_IF_GT(LVar0, PARADE_PHASE_1)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_80245BD0_E0AF30))
+    EVT_EXEC(N(EVS_ParadePhase_SkatingPenguins))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2950)
+        EVT_IF_GT(LVar0, PARADE_PHASE_2)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -769,7 +769,7 @@ EvtScript N(EVS_802451F8) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2945)
+        EVT_IF_GT(LVar0, PARADE_PHASE_3)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -777,7 +777,7 @@ EvtScript N(EVS_802451F8) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2450)
+        EVT_IF_GT(LVar0, PARADE_PHASE_4)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -785,39 +785,39 @@ EvtScript N(EVS_802451F8) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1778)
+        EVT_IF_GT(LVar0, PARADE_PHASE_5)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80247620))
+    EVT_EXEC(N(EVS_ParadePhase_ShyGuyDancing))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1248)
+        EVT_IF_GT(LVar0, PARADE_PHASE_6)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80247D68))
+    EVT_EXEC(N(EVS_ParadePhase_ShyGuyFormation))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -889)
+        EVT_IF_GT(LVar0, PARADE_PHASE_7)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_802481B0_E0D510))
+    EVT_EXEC(N(EVS_ParadePhase_Toads1))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -689)
+        EVT_IF_GT(LVar0, PARADE_PHASE_8)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC_GET_TID(N(EVS_80248D1C), LVarC)
+    EVT_EXEC_GET_TID(N(EVS_ParadePhase_MarioPeach), LVarC)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -330)
+        EVT_IF_GT(LVar0, PARADE_PHASE_9)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -830,9 +830,9 @@ EvtScript N(EVS_802451F8) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80249034))
+    EVT_EXEC(N(EVS_ParadePhase_Toads2))
     EVT_WAIT(150)
-    EVT_EXEC(N(EVS_802492B0))
+    EVT_EXEC(N(EVS_MarioPeachExit))
     EVT_WAIT(200)
     EVT_CALL(GotoMap, EVT_PTR("kmr_30"), kmr_30_ENTRY_0)
     EVT_WAIT(100)

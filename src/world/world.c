@@ -159,10 +159,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     gCurrentCameraID = CAM_DEFAULT;
-    gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_3].flags |= CAMERA_FLAGS_ENABLED;
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);
@@ -251,6 +251,10 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     .dmaStart = map##_ROM_START, \
     .dmaEnd = map##_ROM_END, \
     .dmaDest = map##_VRAM \
+
+#define MAP_WITH_INIT(map) \
+    MAP(map), \
+    .init = &map##_map_init \
 
 // Should be removed once the data section containing .init and .settings of all maps have been disassembled
 #define MAP_UNSPLIT(map, settingsVRAM) \
@@ -789,9 +793,10 @@ MapConfig tst_maps[] = {
 };
 
 /// Credits
+#include "area_end/end.h"
 MapConfig end_maps[] = {
     { MAP_UNSPLIT(end_00, 0x80242B50), .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(end_01, 0x80243000), .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(end_01) },
 };
 
 /// Toad Town Playroom

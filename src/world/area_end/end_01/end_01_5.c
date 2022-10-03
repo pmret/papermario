@@ -6,7 +6,7 @@ EvtScript N(D_80246290_E0B5F0) = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_ADD(LVar0, 0x2000)
-        EVT_CALL(SetTexPanOffset, 14, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar0, 0)
         EVT_WAIT(8)
     EVT_END_LOOP
     EVT_RETURN
@@ -19,7 +19,7 @@ EvtScript N(D_80246310_E0B670) = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_ADD(LVar0, 0x400)
-        EVT_CALL(SetTexPanOffset, 10, 1, LVar0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_AUX, LVar0, LVar0)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_RETURN
@@ -28,7 +28,7 @@ EvtScript N(D_80246310_E0B670) = {
 
 EvtScript N(D_802463A4_E0B704) = {
     EVT_CALL(EnableTexPanning, MODEL_flo3, TRUE)
-    EVT_CALL(SetTexPanOffset, 11, 0, 0x8000, 0)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0x8000, 0)
     EVT_LOOP(0)
         EVT_CALL(RandInt, 30, LVar0)
         EVT_ADD(LVar0, 10)
@@ -36,11 +36,11 @@ EvtScript N(D_802463A4_E0B704) = {
         EVT_CALL(RandInt, 1, LVar0)
         EVT_ADD(LVar0, 1)
         EVT_LOOP(LVar0)
-            EVT_CALL(SetTexPanOffset, 11, 0, 0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, 0)
             EVT_CALL(RandInt, 5, LVar1)
             EVT_ADD(LVar1, 2)
             EVT_WAIT(LVar1)
-            EVT_CALL(SetTexPanOffset, 11, 0, 0x8000, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0x8000, 0)
             EVT_CALL(RandInt, 5, LVar1)
             EVT_ADD(LVar1, 2)
             EVT_WAIT(LVar1)
@@ -166,7 +166,7 @@ EvtScript N(EVS_80246A60) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1778)
+        EVT_IF_GT(LVar0, PARADE_PHASE_5)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

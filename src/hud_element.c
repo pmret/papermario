@@ -1717,7 +1717,7 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
     Camera* camera = &gCameras[camID];
 
     if (arg1 > 0) {
-        if (!camera->flags || (camera->flags & 2)) {
+        if (!camera->flags || (camera->flags & CAMERA_FLAGS_ENABLED)) {
             return;
         }
 

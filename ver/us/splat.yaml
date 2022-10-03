@@ -11592,14 +11592,14 @@ segments:
     start: 0xE05360
     vram: 0x80240000
     subsegments:
-    - [0xE05360, c, end_01_0]
-    - [0xE05370, c, end_01_1]
-    - [0xE05390, c, end_01_2]
-    - [0xE079F0, c, end_01_3]
+    - [0xE05360, c, end_01_0_init]
+    - [0xE05370, c, end_01_1_main]
+    - [0xE05390, c, end_01_2_credits]
+    - [0xE079F0, c, end_01_3_parade_setup]
     - [0xE07C20, c, end_01_4]
     - [0xE07C20, c, end_01_5]
-    - [0xE08050, c, end_01_6]
-    - [0xE08050, c, end_01_7]
+    - [0xE08050, c, end_01_6_shy_guys]
+    - [0xE08050, c, end_01_7_peach]
     - [0xE08350]
   - name: mgm_00
     dir: world/area_mgm/mgm_00

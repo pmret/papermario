@@ -32,7 +32,7 @@ void func_80241610_990DF0(void) {
     Matrix4f transformMtx, tempMtx;
     
     gSPViewport(gMasterGfxPos++, &cam->vp);
-    if (!(cam->flags & CAMERA_FLAGS_10)) {
+    if (!(cam->flags & CAMERA_FLAGS_ORTHO)) {
         gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);

@@ -2,13 +2,11 @@
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-API_CALLABLE(N(UnkFunc26));
-API_CALLABLE(N(UnkFunc27));
-API_CALLABLE(N(func_80242840_E07BA0));
+API_CALLABLE(N(AddScrollToNpcPos));
 
-extern EvtScript N(EVS_80244180);
+extern EvtScript N(EVS_OffsetNpcScroll);
 
-EvtScript N(D_80246D60_E0C0C0) = {
+EvtScript N(EVS_TexPan_ShyGuyFloat_Sides) = {
     EVT_CALL(EnableTexPanning, MODEL_omo1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_omo4, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_omo6, TRUE)
@@ -16,31 +14,32 @@ EvtScript N(D_80246D60_E0C0C0) = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_ADD(LVar0, 0x1000)
-        EVT_CALL(SetTexPanOffset, 9, 1, LVar0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_9, TEX_PANNER_AUX, LVar0, LVar0)
         EVT_WAIT(LVar1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80246E18_E0C178) = {
+EvtScript N(EVS_TexPan_ShyGuyFloat_Top) = {
     EVT_CALL(EnableTexPanning, MODEL_omo8, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_omo13, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_ADD(LVar0, 0x4000)
-        EVT_CALL(SetTexPanOffset, 8, 0, LVar0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_8, TEX_PANNER_MAIN, LVar0, LVar0)
         EVT_WAIT(6)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_80246EAC_E0C20C)[] = {
-    56, 58, 59, 60, 61, 62, 63, 0x0000FFFF 
+s32 N(ShyGuyFloat_InteriorModels)[] = {
+    MODEL_omo7, MODEL_omo9, MODEL_omo10, MODEL_omo11,
+    MODEL_omo12, MODEL_omo13, MODEL_omo14, 0x0000FFFF 
 };
 
-EvtScript N(D_80246ECC_E0C22C) = {
+EvtScript N(EVS_ShyGuyFloat_Open) = {
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, -90, 30, EASING_LINEAR)
         EVT_LOOP(0)
@@ -63,7 +62,7 @@ EvtScript N(D_80246ECC_E0C22C) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_80246EAC_E0C20C)), 3)
+    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ShyGuyFloat_InteriorModels)), 3)
     EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 120, 120, 80, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 0, 0, 0, 0, 0, 0)
@@ -71,7 +70,7 @@ EvtScript N(D_80246ECC_E0C22C) = {
     EVT_END
 };
 
-EvtScript N(D_80247098_E0C3F8) = {
+EvtScript N(EVS_GeneralGuy) = {
     EVT_SET(LVar0, 270)
     EVT_LOOP(0)
         EVT_IF_EQ(LVar0, 270)
@@ -89,7 +88,7 @@ EvtScript N(D_80247098_E0C3F8) = {
     EVT_END
 };
 
-EvtScript N(D_80247164_E0C4C4) = {
+EvtScript N(EVS_ShyGuy_BackupDancer) = {
     EVT_SET(LVar2, LVar0)
     EVT_LOOP(0)
         EVT_LOOP(3)
@@ -115,7 +114,7 @@ EvtScript N(D_80247164_E0C4C4) = {
     EVT_END
 };
 
-EvtScript N(D_8024729C_E0C5FC) = {
+EvtScript N(EVS_GrooveGuy) = {
     EVT_WAIT(30)
     EVT_SET(LVar2, LVar0)
     EVT_SET(LVar3, LVar1)
@@ -148,28 +147,28 @@ EvtScript N(D_8024729C_E0C5FC) = {
     EVT_END
 };
 
-EvtScript N(D_80247450_E0C7B0) = {
-    EVT_EXEC_GET_TID(N(D_80247098_E0C3F8), LVar7)
-    EVT_SET(LVar0, 30)
-    EVT_EXEC_GET_TID(N(D_80247164_E0C4C4), LVar8)
-    EVT_SET(LVar0, 31)
-    EVT_EXEC_GET_TID(N(D_80247164_E0C4C4), LVar9)
-    EVT_SET(LVar0, 32)
-    EVT_SET(LVar1, 0xFFFFFA1C)
-    EVT_EXEC_GET_TID(N(D_8024729C_E0C5FC), LVarA)
-    EVT_SET(LVar0, 33)
-    EVT_SET(LVar1, 0xFFFFFA44)
-    EVT_EXEC_GET_TID(N(D_8024729C_E0C5FC), LVarB)
-    EVT_SET(LVar0, 34)
-    EVT_SET(LVar1, 0xFFFFFA6C)
-    EVT_EXEC_GET_TID(N(D_8024729C_E0C5FC), LVarC)
-    EVT_SET(LVar0, 35)
-    EVT_SET(LVar1, 0xFFFFFA94)
-    EVT_EXEC_GET_TID(N(D_8024729C_E0C5FC), LVarD)
+EvtScript N(EVS_ShyGuyFloat_Performers) = {
+    EVT_EXEC_GET_TID(N(EVS_GeneralGuy), LVar7)
+    EVT_SET(LVar0, NPC_1E)
+    EVT_EXEC_GET_TID(N(EVS_ShyGuy_BackupDancer), LVar8)
+    EVT_SET(LVar0, NPC_1F)
+    EVT_EXEC_GET_TID(N(EVS_ShyGuy_BackupDancer), LVar9)
+    EVT_SET(LVar0, NPC_20)
+    EVT_SET(LVar1, -1508)
+    EVT_EXEC_GET_TID(N(EVS_GrooveGuy), LVarA)
+    EVT_SET(LVar0, NPC_21)
+    EVT_SET(LVar1, -1468)
+    EVT_EXEC_GET_TID(N(EVS_GrooveGuy), LVarB)
+    EVT_SET(LVar0, NPC_22)
+    EVT_SET(LVar1, -1428)
+    EVT_EXEC_GET_TID(N(EVS_GrooveGuy), LVarC)
+    EVT_SET(LVar0, NPC_23)
+    EVT_SET(LVar1, -1388)
+    EVT_EXEC_GET_TID(N(EVS_GrooveGuy), LVarD)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFB66)
+        EVT_IF_GT(LVar0, -1178)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -184,10 +183,10 @@ EvtScript N(D_80247450_E0C7B0) = {
     EVT_END
 };
 
-EvtScript N(EVS_80247620) = {
+EvtScript N(EVS_ParadePhase_ShyGuyDancing) = {
     EVT_SET(LVar0, 4)
-    EVT_EXEC_GET_TID(N(D_80246D60_E0C0C0), LVarA)
-    EVT_EXEC_GET_TID(N(D_80246E18_E0C178), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_ShyGuyFloat_Sides), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_ShyGuyFloat_Top), LVarB)
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_1C, -1648, 0, 50)
     EVT_CALL(SetNpcAnimation, NPC_1C, ANIM_ParadeShyGuy_MarshallStill)
@@ -197,7 +196,7 @@ EvtScript N(EVS_80247620) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFA12)
+        EVT_IF_GT(LVar0, -1518)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -205,18 +204,18 @@ EvtScript N(EVS_80247620) = {
         EVT_CALL(SetNpcAnimation, NPC_1C, ANIM_ParadeShyGuy_MarshallWalk)
         EVT_CALL(NpcMoveTo, NPC_1C, -1748, 0, 50)
     EVT_END_THREAD
-    EVT_EXEC(N(D_80247450_E0C7B0))
+    EVT_EXEC(N(EVS_ShyGuyFloat_Performers))
     EVT_KILL_THREAD(LVarA)
     EVT_SET(LVar0, 2)
-    EVT_EXEC_GET_TID(N(D_80246D60_E0C0C0), LVarA)
-    EVT_EXEC_WAIT(N(D_80246ECC_E0C22C))
+    EVT_EXEC_GET_TID(N(EVS_TexPan_ShyGuyFloat_Sides), LVarA)
+    EVT_EXEC_WAIT(N(EVS_ShyGuyFloat_Open))
     EVT_KILL_THREAD(LVarA)
     EVT_SET(LVar0, 4)
-    EVT_EXEC_GET_TID(N(D_80246D60_E0C0C0), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_TexPan_ShyGuyFloat_Sides), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFB66)
+        EVT_IF_GT(LVar0, -1178)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -226,7 +225,7 @@ EvtScript N(EVS_80247620) = {
     EVT_END
 };
 
-EvtScript N(D_80247854_E0CBB4) = {
+EvtScript N(EVS_ShyGuy_PauseFormation) = {
     EVT_CALL(GetNpcPos, NPC_26, LVar0, LVar1, LVar2)
     EVT_SETF(LVar0, LVar0)
     EVT_SETF(LVar1, LVar0)
@@ -248,44 +247,44 @@ EvtScript N(D_80247854_E0CBB4) = {
     EVT_CALL(SetNpcPos, NPC_30, LVar3, 0, 0)
     EVT_CALL(SetNpcPos, NPC_31, LVar3, 0, 30)
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 39)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_27)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 40)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_28)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 41)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_29)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 42)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2A)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 43)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2B)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 44)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2C)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 45)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2D)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 46)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2E)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 47)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_2F)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 48)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_30)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(func_80242840_E07BA0), 49)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_31)
     EVT_END_CHILD_THREAD
-    EVT_CALL(N(func_80242840_E07BA0), 38)
+    EVT_CALL(N(AddScrollToNpcPos), NPC_26)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80247BB0_E0CF10) = {
+EvtScript N(EVS_ShyGuy_MarchInFormation) = {
     EVT_CALL(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
     EVT_ADD(LVar2, -180)
     EVT_CALL(NpcMoveTo, LVar0, LVar2, LVar4, 90)
@@ -314,44 +313,46 @@ EvtScript N(D_80247BB0_E0CF10) = {
     EVT_END
 };
 
-EvtScript N(EVS_80247D68) = {
+EvtScript N(EVS_ParadePhase_ShyGuyFormation) = {
     EVT_SET(LVar1, 0)
-    EVT_SET(LVar0, 38)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 39)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 40)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
+    EVT_SET(LVar0, NPC_26)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_27)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_28)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
     EVT_SET(LVar1, 8)
-    EVT_SET(LVar0, 41)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 42)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 43)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
+    EVT_SET(LVar0, NPC_29)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_2A)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_2B)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
     EVT_SET(LVar1, 10)
-    EVT_SET(LVar0, 44)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 45)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 46)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
+    EVT_SET(LVar0, NPC_2C)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_2D)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_2E)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
     EVT_SET(LVar1, 18)
-    EVT_SET(LVar0, 47)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 48)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
-    EVT_SET(LVar0, 49)
-    EVT_EXEC(N(D_80247BB0_E0CF10))
+    EVT_SET(LVar0, NPC_2F)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_30)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    EVT_SET(LVar0, NPC_31)
+    EVT_EXEC(N(EVS_ShyGuy_MarchInFormation))
+    // at a certain point, cause the formation to stop moving
     EVT_WAIT(90)
-    EVT_EXEC_GET_TID(N(D_80247854_E0CBB4), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_ShyGuy_PauseFormation), LVarA)
     EVT_WAIT(48)
     EVT_KILL_THREAD(LVarA)
     EVT_WAIT(130)
+    // formation resumes moving
     EVT_CALL(GetNpcPos, NPC_32, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -180)
     EVT_CALL(NpcMoveTo, NPC_32, LVar0, LVar2, 45)
-    EVT_CALL(func_802CDE68, 50, 10)
+    EVT_CALL(func_802CDE68, NPC_32, 10)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
@@ -366,10 +367,10 @@ EvtScript N(EVS_80247D68) = {
     EVT_CALL(GetNpcPos, NPC_32, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -45)
     EVT_CALL(NpcJump0, NPC_32, LVar0, LVar1, LVar2, 10)
-    EVT_SET(LVar0, 50)
-    EVT_EXEC_GET_TID(N(EVS_80244180), LVarA)
+    EVT_SET(LVar0, NPC_32)
+    EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_WAIT(80)
-    EVT_CALL(func_802CDE68, 50, 0)
+    EVT_CALL(func_802CDE68, NPC_32, 0)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(SetNpcAnimation, NPC_32, ANIM_ShyGuy_Red_Anim01)
     EVT_CALL(GetNpcPos, NPC_32, LVar0, LVar1, LVar2)

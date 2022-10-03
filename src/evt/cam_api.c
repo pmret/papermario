@@ -21,9 +21,9 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAM_FLAG_ENABLED;
+        gCameras[id].flags |= CAMERA_FLAGS_ENABLED;
     } else {
-        gCameras[id].flags &= ~CAM_FLAG_ENABLED;
+        gCameras[id].flags &= ~CAMERA_FLAGS_ENABLED;
     }
     return ApiStatus_DONE2;
 }
@@ -34,9 +34,9 @@ ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall) {
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAM_FLAG_80;
+        gCameras[id].flags |= CAMERA_FLAGS_80;
     } else {
-        gCameras[id].flags &= ~CAM_FLAG_80;
+        gCameras[id].flags &= ~CAMERA_FLAGS_80;
     }
     return ApiStatus_DONE2;
 }
@@ -296,7 +296,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
         }
     }
 
-    camera->flags |= CAM_FLAG_SHAKING;
+    camera->flags |= CAMERA_FLAGS_SHAKING;
     scale = script->functionTempF[3];
     switch (shakeMode) {
         case CAM_SHAKE_CONSTANT_VERTICAL:
@@ -318,7 +318,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1] == 0) {
-        camera->flags &= ~CAM_FLAG_SHAKING;
+        camera->flags &= ~CAMERA_FLAGS_SHAKING;
         return ApiStatus_DONE2;
     }
     script->functionTemp[1]--;
@@ -351,9 +351,9 @@ ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     if (enabled) {
-        camera->flags |= CAM_FLAG_LEAD_PLAYER;
+        camera->flags |= CAMERA_FLAGS_LEAD_PLAYER;
     } else {
-        camera->flags &= ~CAM_FLAG_LEAD_PLAYER;
+        camera->flags &= ~CAMERA_FLAGS_LEAD_PLAYER;
     }
     return ApiStatus_DONE2;
 }
@@ -375,7 +375,7 @@ ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
     s32 targetType = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->unk_506 = 1;
+    camera->panActive = TRUE;
     if (targetType != 0) {
         camera->followPlayer = TRUE;
         camera->panPhase = panPhase;
@@ -497,7 +497,7 @@ ApiStatus SetPanTarget(Evt* script, s32 isInitialCall) {
     camera->movePos.x = x;
     camera->movePos.y = y;
     camera->movePos.z = z;
-    camera->unk_506 = 1;
+    camera->panActive = TRUE;
     return ApiStatus_DONE2;
 }
 
@@ -634,7 +634,7 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
         camera->controlSettings.boomPitch = boomPitch;
         camera->controlSettings.viewPitch = viewPitch;
         camera->moveSpeed = moveSpeed;
-        camera->unk_506 = 1;
+        camera->panActive = TRUE;
         camera->followPlayer = TRUE;
         camera->panPhase = 0.0f;
         return ApiStatus_BLOCK;
@@ -677,7 +677,7 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
         camera->controlSettings.boomPitch = boomPitch;
         camera->controlSettings.viewPitch = viewPitch;
         camera->moveSpeed = moveSpeed;
-        camera->unk_506 = 1;
+        camera->panActive = TRUE;
         camera->followPlayer = TRUE;
         camera->panPhase = 0.0f;
         return ApiStatus_BLOCK;
@@ -717,14 +717,14 @@ ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
         camera->movePos.y = y;
         camera->movePos.z = z;
         camera->moveSpeed = moveSpeed;
-        camera->unk_506 = 1;
+        camera->panActive = TRUE;
         camera->followPlayer = TRUE;
         camera->panPhase = 0.0f;
         return ApiStatus_BLOCK;
     }
 
     if (camera->interpAlpha >= 1.0f) {
-        camera->unk_506 = 1;
+        camera->panActive = TRUE;
         camera->followPlayer = FALSE;
         camera->moveSpeed = 1.0f;
         camera->panPhase = 0.0f;

@@ -109,4 +109,18 @@ enum {
 	NPC_43                      = 67,
 };
 
+#define PARADE_SCROLL_RATE (2.0f/3.0f)
+
+enum {
+    PARADE_PHASE_1          = -3000,
+    PARADE_PHASE_2          = -2950,
+    PARADE_PHASE_3          = -2945,
+    PARADE_PHASE_4          = -2450,
+    PARADE_PHASE_5          = -1778,
+    PARADE_PHASE_6          = -1248,
+    PARADE_PHASE_7          = -889,
+    PARADE_PHASE_8          = -689,
+    PARADE_PHASE_9          = -330,
+};
+
 #define NAMESPACE end_01
