@@ -10,53 +10,42 @@ void huff_puff_breath_init(void) {
 
 void huff_puff_breath_update(EffectInstance* effect) {
     HuffPuffBreathFXData* data = effect->data.huffPuffBreath;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f0_3;
-    f32 temp_f0_4;
-    s32 temp_a1 = effect->flags;
-    s32 temp_a1_2;
-    s32 temp_a1_3;
+    s32 temp_a1;
     s32 temp_a2;
 
-    if (temp_a1 & 16) {
-        effect->flags = temp_a1 & ~16;
+    if (effect->flags & 16) {
+        effect->flags &= ~16;
         data->unk_10 = 16;
     }
-    temp_a1_2 = data->unk_10;
-    if (temp_a1_2 < 1000) {
-        data->unk_10 = (s32) (temp_a1_2 - 1);
+    if (data->unk_10 < 1000) {
+        data->unk_10--;
     }
-    temp_a1_3 = data->unk_10;
-    temp_a2 = data->unk_14 + 1;
-    data->unk_14 = temp_a2;
-    if (temp_a1_3 < 0) {
+    temp_a1 = data->unk_10;     // Needed for match?
+    temp_a2 = data->unk_14 + 1; // Needed for match?
+    data->unk_14++;
+    if (temp_a1 < 0) {
         shim_remove_effect(effect);
         return;
     }
-    if (temp_a1_3 < 16) {
-        data->unk_24 = (s32) (temp_a1_3 * 16);
+    if (temp_a1 < 16) {
+        data->unk_24 = temp_a1 * 16;
     }
     if (temp_a2 < 16) {
-        data->unk_24 = (s32) ((temp_a2 * 16) + 15);
+        data->unk_24 = (temp_a2 * 16) + 15;
     }
-    temp_f0 = data->unk_38 + data->unk_3C;
-    data->unk_38 = temp_f0;
-    if (temp_f0 >= 256.0f) {
-        data->unk_38 = (f32) (temp_f0 - 256.0f);
+    data->unk_38 += data->unk_3C;
+    if (data->unk_38 >= 256.0f) {
+        data->unk_38 -= 256.0f;
     }
-    temp_f0_2 = data->unk_38;
-    if (temp_f0_2 < 0.0f) {
-        data->unk_38 = (f32) (temp_f0_2 + 256.0f);
+    if (data->unk_38 < 0.0f) {
+        data->unk_38 += 256.0f;
     }
-    temp_f0_3 = data->unk_40 + data->unk_44;
-    data->unk_40 = temp_f0_3;
-    if (temp_f0_3 >= 256.0f) {
-        data->unk_40 = (f32) (temp_f0_3 - 256.0f);
+    data->unk_40 += data->unk_44;
+    if (data->unk_40 >= 256.0f) {
+        data->unk_40 -= 256.0f;
     }
-    temp_f0_4 = data->unk_40;
-    if (temp_f0_4 < 0.0f) {
-        data->unk_40 = (f32) (temp_f0_4 + 256.0f);
+    if (data->unk_40 < 0.0f) {
+        data->unk_40 += 256.0f;
     }
 }
 
