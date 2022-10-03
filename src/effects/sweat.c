@@ -8,8 +8,6 @@ INCLUDE_ASM(s32, "effects/sweat", sweat_main);
 void sweat_init(void) {
 }
 
-// extern f32 D_E0050560;
-// INCLUDE_ASM(s32, "effects/sweat", sweat_update);
 void sweat_update(EffectInstance *effect) {
     SweatFXData* data = effect->data.sweat;
 
@@ -18,9 +16,9 @@ void sweat_update(EffectInstance *effect) {
         shim_remove_effect(effect);
         return;
     }
-    data->pos.x = data->pos.x + data->unk_18;
-    data->pos.y = data->pos.y + data->unk_1C;
-    data->pos.z = data->pos.z + data->unk_20;
+    data->pos.x += data->unk_18;
+    data->pos.y += data->unk_1C;
+    data->pos.z += data->unk_20;
     data->unk_1C -= 0.05;
     data->unk_18 *= 0.94;
     if (data->unk_1C < -0.1) {
