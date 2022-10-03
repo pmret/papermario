@@ -893,7 +893,7 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     return i;
 }
 
-s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_frontUI(s32 (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 

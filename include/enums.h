@@ -3255,7 +3255,8 @@ enum PopupType {
     POPUP_MENU_TAKE_FROM_CHEST      = 0x9,
     POPUP_MENU_READ_DIARY_PAGE      = 0xA,
     POPUP_MENU_READ_POSTCARD        = 0xB,
-    POPUP_MENU_USEKEY               = 0xC
+    POPUP_MENU_USEKEY               = 0xC,
+    POPUP_MENU_D                    = 0xD,
 };
 
 /// not really
@@ -4220,7 +4221,7 @@ enum ColliderFlags {
 
 //    SURFACE_TYPE_DEFAULT            = 0,
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
-    SURFACE_TYPE_SNOW               = 8, 
+    SURFACE_TYPE_SNOW               = 8,
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
     SURFACE_TYPE_FLOWERS            = 6,
     SURFACE_TYPE_SLIDE              = 5,
