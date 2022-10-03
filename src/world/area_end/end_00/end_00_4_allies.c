@@ -1,7 +1,7 @@
 #include "end_00.h"
 #include "effects.h"
 
-EvtScript N(D_80247230_DFDC30) = {
+EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_CALL(PlaySound, SOUND_89)
     EVT_WAIT(80)
     EVT_THREAD
@@ -10,7 +10,7 @@ EvtScript N(D_80247230_DFDC30) = {
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_00, -3080, 0, 120)
+    EVT_CALL(NpcMoveTo, NPC_00, PARADE_START, 0, 120)
     EVT_CALL(SetNpcAnimation, NPC_00, ANIM_ParadeLuigi_Idle)
     EVT_WAIT(10)
     EVT_CALL(InterpNpcYaw, NPC_00, 90, 0)
@@ -38,14 +38,14 @@ EvtScript N(D_80247230_DFDC30) = {
     EVT_END
 };
 
-EvtScript N(D_80247418_DFDE18) = {
-    EVT_CALL(PlayEffect, EFFECT_CONFETTI, 3, 0xFFFFF60F, 200, 0, 1, 800, 0, 0, 0, 0, 0, 0, 0)
+EvtScript N(EVS_ParadePhase_Partners) = {
+    EVT_CALL(PlayEffect, EFFECT_CONFETTI, 3, -2545, 200, 0, 1, 800, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_07, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_09, FALSE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_WAIT(25)
-            EVT_CALL(PlayEffect, EFFECT_CONFETTI, 4, 0xFFFFF61E, 95, 5, 1, 20, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_CONFETTI, 4, -2530, 95, 5, 1, 20, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(20)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -61,7 +61,7 @@ EvtScript N(D_80247418_DFDE18) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF704)
+        EVT_IF_GT(LVar0, PARADE_PHASE_PARTNERS + 545)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -69,7 +69,7 @@ EvtScript N(D_80247418_DFDE18) = {
     EVT_END
 };
 
-EvtScript N(D_80247600_DFE000) = {
+EvtScript N(EVS_Twirler) = {
     EVT_CALL(EnableNpcShadow, LVar1, FALSE)
     EVT_CALL(SetNpcJumpscale, LVar1, EVT_FLOAT(0.5))
     EVT_LOOP(0)
@@ -97,11 +97,11 @@ EvtScript N(D_80247600_DFE000) = {
     EVT_END
 };
 
-EvtScript N(D_802477A0_DFE1A0) = {
+EvtScript N(EVS_QuizCrew) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF7AE)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN + 420)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -119,7 +119,7 @@ EvtScript N(D_802477A0_DFE1A0) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF862)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN + 600)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -132,35 +132,35 @@ EvtScript N(D_802477A0_DFE1A0) = {
     EVT_END
 };
 
-EvtScript N(D_802479C4_DFE3C4) = {
+EvtScript N(EVS_ParadePhase_Toads) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF60A)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 18)
-    EVT_EXEC_GET_TID(N(D_80247600_DFE000), LVarA)
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 19)
-    EVT_EXEC_GET_TID(N(D_80247600_DFE000), LVarB)
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 20)
-    EVT_EXEC_GET_TID(N(D_80247600_DFE000), LVarC)
+    EVT_SET(LVar0, NPC_0F)
+    EVT_SET(LVar1, NPC_12)
+    EVT_EXEC_GET_TID(N(EVS_Twirler), LVarA)
+    EVT_SET(LVar0, NPC_10)
+    EVT_SET(LVar1, NPC_13)
+    EVT_EXEC_GET_TID(N(EVS_Twirler), LVarB)
+    EVT_SET(LVar0, NPC_11)
+    EVT_SET(LVar1, NPC_14)
+    EVT_EXEC_GET_TID(N(EVS_Twirler), LVarC)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF704)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN + 250)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_802477A0_DFE1A0))
+    EVT_EXEC(N(EVS_QuizCrew))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF7EA)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN + 480)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

@@ -168,7 +168,7 @@ EvtScript N(EVS_ShyGuyFloat_Performers) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1178)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE + 600)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -196,7 +196,7 @@ EvtScript N(EVS_ParadePhase_ShyGuyDancing) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1518)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE + 260)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -215,7 +215,7 @@ EvtScript N(EVS_ParadePhase_ShyGuyDancing) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -1178)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE + 600)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

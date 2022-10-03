@@ -92,8 +92,8 @@ API_CALLABLE(N(WaitForConfirmInput)) {
 }
 
 EvtScript N(EVS_SetupInitialCamera) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -3135, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -3135, 0, 0)
+    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_RETURN
@@ -101,7 +101,7 @@ EvtScript N(EVS_SetupInitialCamera) = {
 };
 
 EvtScript N(EVS_UpdateScrollPos) = {
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(-3135.0), 0, 0)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(PARADE_START), 0, 0)
     EVT_SETF(LVar1, EVT_FLOAT(0.0))
     EVT_LOOP(0)
         EVT_CALL(N(UpdateCameraScroll))
@@ -585,7 +585,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2350)
+        EVT_IF_GT(LVar0, PARADE_PHASE_WIZARDS + 100)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

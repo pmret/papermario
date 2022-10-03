@@ -18,4 +18,4 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", mac_05_unkVtxFunc001);
 
 #include "world/common/UnkPlayerPosFunc.inc.c"
 
-#include "world/common/PlayFX3D.inc.c"
+#include "world/common/atomic/WhaleGeyser.inc.c"

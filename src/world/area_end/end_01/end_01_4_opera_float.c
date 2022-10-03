@@ -207,7 +207,7 @@ EvtScript N(EVS_ParadePhase_SkatingPenguins) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2800)
+        EVT_IF_GT(LVar0, PARADE_PHASE_SKATERS + 200)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -299,7 +299,7 @@ EvtScript N(EVS_ParadePhase_Opera) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2610)
+        EVT_IF_GT(LVar0, PARADE_PHASE_OPERA + 335)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -327,7 +327,7 @@ EvtScript N(EVS_ParadePhase_Opera) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -2345)
+        EVT_IF_GT(LVar0, PARADE_PHASE_OPERA + 600)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

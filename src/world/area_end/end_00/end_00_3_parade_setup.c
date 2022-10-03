@@ -4,20 +4,20 @@
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern ParadeNpcInfo N(ParadeNpcsTable)[];
 
-extern EvtScript N(D_80247230_DFDC30);
-extern EvtScript N(D_80247418_DFDE18);
-extern EvtScript N(D_802479C4_DFE3C4);
-extern EvtScript N(EVS_80248928);
-extern EvtScript N(EVS_80248BAC);
-extern EvtScript N(EVS_80249040);
-extern EvtScript N(EVS_80249A38);
-extern EvtScript N(EVS_80249EA4);
-extern EvtScript N(EVS_8024A044);
-extern EvtScript N(EVS_8024A804);
-extern EvtScript N(EVS_8024AD30);
-extern EvtScript N(EVS_8024C38C);
-extern EvtScript N(EVS_8024CC78);
-extern EvtScript N(EVS_8024D834);
+extern EvtScript N(EVS_ParadePhase_Luigi);
+extern EvtScript N(EVS_ParadePhase_Partners);
+extern EvtScript N(EVS_ParadePhase_Toads);
+extern EvtScript N(EVS_ParadePhase_KoopaBros);
+extern EvtScript N(EVS_ParadePhase_Kolorado);
+extern EvtScript N(EVS_ParadePhase_Caravan);
+extern EvtScript N(EVS_ParadePhase_BuzzarNest);
+extern EvtScript N(EVS_ParadePhase_Tutankoopa);
+extern EvtScript N(EVS_ParadePhase_Boos);
+extern EvtScript N(EVS_ParadePhase_GoombaKing);
+extern EvtScript N(EVS_ParadePhase_Yoshis);
+extern EvtScript N(EVS_ParadePhase_HuffNPuff);
+extern EvtScript N(EVS_ParadePhase_CrystalKing);
+extern EvtScript N(EVS_ParadePhase_Bowser);
 
 extern EvtScript N(EVS_InitCredits);
 extern EvtScript N(EVS_ShowCredits_Title);
@@ -96,8 +96,8 @@ API_CALLABLE(N(AddScrollToNpcPos)) {
 }
 
 EvtScript N(EVS_SetupInitialCamera) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -3080, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -3080, 0, 0)
+    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_RETURN
@@ -105,7 +105,7 @@ EvtScript N(EVS_SetupInitialCamera) = {
 };
 
 EvtScript N(EVS_UpdateScrollPos) = {
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(-3080.0), 0, 0)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(PARADE_START), 0, 0)
     EVT_SETF(LVar1, EVT_FLOAT(0.0))
     EVT_LOOP(0)
         EVT_CALL(N(UpdateCameraScroll))
@@ -178,8 +178,8 @@ EvtScript N(D_80244AE4_DFB4E4) = {
     EVT_CALL(EnableTexPanning, MODEL_cloud, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x00008000)
-        EVT_CALL(SetTexPanOffset, 2, 0, 0, LVar0)
+        EVT_ADD(LVar0, 0x8000)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, LVar0)
         EVT_WAIT(16)
     EVT_END_LOOP
     EVT_RETURN
@@ -195,10 +195,10 @@ EvtScript N(D_80244B64_DFB564) = {
     EVT_LOOP(0)
         EVT_ADD(LVar0, 50)
         EVT_ADD(LVar1, 50)
-        EVT_CALL(SetTexPanOffset, 3, 0, LVar0, LVar1)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, LVar0, LVar1)
         EVT_ADD(LVar2, -50)
         EVT_ADD(LVar3, -50)
-        EVT_CALL(SetTexPanOffset, 3, 1, LVar2, LVar3)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_AUX, LVar2, LVar3)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -808,7 +808,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF4E3)
+        EVT_IF_GT(LVar0, PARADE_PHASE_PARTNERS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -816,15 +816,15 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(N(CreateParadeNPC), NPC_07)
     EVT_CALL(N(CreateParadeNPC), NPC_08)
     EVT_CALL(N(CreateParadeNPC), NPC_09)
-    EVT_CALL(N(CreateParadeNPC), 10)
-    EVT_CALL(N(CreateParadeNPC), 11)
-    EVT_CALL(N(CreateParadeNPC), 12)
-    EVT_CALL(N(CreateParadeNPC), 13)
-    EVT_CALL(N(CreateParadeNPC), 14)
+    EVT_CALL(N(CreateParadeNPC), NPC_0A)
+    EVT_CALL(N(CreateParadeNPC), NPC_0B)
+    EVT_CALL(N(CreateParadeNPC), NPC_0C)
+    EVT_CALL(N(CreateParadeNPC), NPC_0D)
+    EVT_CALL(N(CreateParadeNPC), NPC_0E)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF60A)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -847,7 +847,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF704)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN + 250)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -865,7 +865,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF7EA)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOLORADO + 20)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -877,19 +877,19 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_14)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xB000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 23)
-    EVT_CALL(N(CreateParadeNPC), 24)
-    EVT_CALL(N(CreateParadeNPC), 25)
-    EVT_CALL(N(CreateParadeNPC), 26)
-    EVT_CALL(N(CreateParadeNPC), 27)
-    EVT_CALL(N(CreateParadeNPC), 28)
-    EVT_CALL(N(CreateParadeNPC), 29)
-    EVT_CALL(N(CreateParadeNPC), 30)
+    EVT_CALL(N(CreateParadeNPC), NPC_17)
+    EVT_CALL(N(CreateParadeNPC), NPC_18)
+    EVT_CALL(N(CreateParadeNPC), NPC_19)
+    EVT_CALL(N(CreateParadeNPC), NPC_1A)
+    EVT_CALL(N(CreateParadeNPC), NPC_1B)
+    EVT_CALL(N(CreateParadeNPC), NPC_1C)
+    EVT_CALL(N(CreateParadeNPC), NPC_1D)
+    EVT_CALL(N(CreateParadeNPC), NPC_1E)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF89E)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOLORADO + 200)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -901,7 +901,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFA24)
+        EVT_IF_GT(LVar0, PARADE_PHASE_CARAVAN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -915,33 +915,33 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_1E)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x19F00, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 38)
-    EVT_CALL(N(CreateParadeNPC), 33)
-    EVT_CALL(N(CreateParadeNPC), 34)
-    EVT_CALL(N(CreateParadeNPC), 35)
-    EVT_CALL(N(CreateParadeNPC), 36)
-    EVT_CALL(N(CreateParadeNPC), 37)
-    EVT_CALL(N(CreateParadeNPC), 39)
+    EVT_CALL(N(CreateParadeNPC), NPC_26)
+    EVT_CALL(N(CreateParadeNPC), NPC_21)
+    EVT_CALL(N(CreateParadeNPC), NPC_22)
+    EVT_CALL(N(CreateParadeNPC), NPC_23)
+    EVT_CALL(N(CreateParadeNPC), NPC_24)
+    EVT_CALL(N(CreateParadeNPC), NPC_25)
+    EVT_CALL(N(CreateParadeNPC), NPC_27)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x7000, LVarF)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFB64)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BUZZAR + 175)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DeleteNpc, NPC_1F)
     EVT_CALL(DeleteNpc, NPC_20)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), 40)
-    EVT_CALL(N(CreateParadeNPC), 41)
-    EVT_CALL(N(CreateParadeNPC), 42)
-    EVT_CALL(N(CreateParadeNPC), 43)
+    EVT_CALL(N(CreateParadeNPC), NPC_28)
+    EVT_CALL(N(CreateParadeNPC), NPC_29)
+    EVT_CALL(N(CreateParadeNPC), NPC_2A)
+    EVT_CALL(N(CreateParadeNPC), NPC_2B)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -960)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOOS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -955,17 +955,17 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x11F00, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 45)
-    EVT_CALL(N(CreateParadeNPC), 46)
-    EVT_CALL(N(CreateParadeNPC), 47)
-    EVT_CALL(N(CreateParadeNPC), 48)
-    EVT_CALL(N(CreateParadeNPC), 44)
+    EVT_CALL(N(CreateParadeNPC), NPC_2D)
+    EVT_CALL(N(CreateParadeNPC), NPC_2E)
+    EVT_CALL(N(CreateParadeNPC), NPC_2F)
+    EVT_CALL(N(CreateParadeNPC), NPC_30)
+    EVT_CALL(N(CreateParadeNPC), NPC_2C)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xA000, LVarF)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -540)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOOS + 420)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -974,17 +974,17 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_2A)
     EVT_CALL(DeleteNpc, NPC_2B)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), 53)
-    EVT_CALL(N(CreateParadeNPC), 50)
-    EVT_CALL(N(CreateParadeNPC), 51)
-    EVT_CALL(N(CreateParadeNPC), 52)
-    EVT_CALL(N(CreateParadeNPC), 49)
-    EVT_CALL(N(SetNpcShadowScale), 49, EVT_FLOAT(4.0))
+    EVT_CALL(N(CreateParadeNPC), NPC_35)
+    EVT_CALL(N(CreateParadeNPC), NPC_32)
+    EVT_CALL(N(CreateParadeNPC), NPC_33)
+    EVT_CALL(N(CreateParadeNPC), NPC_34)
+    EVT_CALL(N(CreateParadeNPC), NPC_31)
+    EVT_CALL(N(SetNpcShadowScale), NPC_31, EVT_FLOAT(4.0))
     EVT_CALL(SetNpcFlagBits, NPC_31, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -310)
+        EVT_IF_GT(LVar0, PARADE_PHASE_GOOMBA_KING)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -996,16 +996,16 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(N(ParadeSpriteHeapFree), LVarF)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0xF000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 54)
-    EVT_CALL(N(CreateParadeNPC), 55)
-    EVT_CALL(N(CreateParadeNPC), 56)
+    EVT_CALL(N(CreateParadeNPC), NPC_36)
+    EVT_CALL(N(CreateParadeNPC), NPC_37)
+    EVT_CALL(N(CreateParadeNPC), NPC_38)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_CALL(N(SetNpcShadowScale), 54, EVT_FLOAT(3.0))
+    EVT_CALL(N(SetNpcShadowScale), NPC_36, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcFlagBits, NPC_36, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -53)
+        EVT_IF_GT(LVar0, PARADE_PHASE_YOSHIS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1015,17 +1015,17 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_34)
     EVT_CALL(DeleteNpc, NPC_35)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), 62)
-    EVT_CALL(N(CreateParadeNPC), 63)
-    EVT_CALL(N(CreateParadeNPC), 57)
-    EVT_CALL(N(CreateParadeNPC), 58)
-    EVT_CALL(N(CreateParadeNPC), 59)
-    EVT_CALL(N(CreateParadeNPC), 60)
-    EVT_CALL(N(CreateParadeNPC), 61)
+    EVT_CALL(N(CreateParadeNPC), NPC_3E)
+    EVT_CALL(N(CreateParadeNPC), NPC_3F)
+    EVT_CALL(N(CreateParadeNPC), NPC_39)
+    EVT_CALL(N(CreateParadeNPC), NPC_3A)
+    EVT_CALL(N(CreateParadeNPC), NPC_3B)
+    EVT_CALL(N(CreateParadeNPC), NPC_3C)
+    EVT_CALL(N(CreateParadeNPC), NPC_3D)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 750)
+        EVT_IF_GT(LVar0, PARADE_PHASE_HUFF_PUFF)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1034,16 +1034,16 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_38)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x20000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 64)
-    EVT_CALL(N(CreateParadeNPC), 65)
-    EVT_CALL(N(CreateParadeNPC), 66)
-    EVT_CALL(N(CreateParadeNPC), 67)
-    EVT_CALL(N(CreateParadeNPC), 68)
+    EVT_CALL(N(CreateParadeNPC), NPC_40)
+    EVT_CALL(N(CreateParadeNPC), NPC_41)
+    EVT_CALL(N(CreateParadeNPC), NPC_42)
+    EVT_CALL(N(CreateParadeNPC), NPC_43)
+    EVT_CALL(N(CreateParadeNPC), NPC_44)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 800)
+        EVT_IF_GT(LVar0, PARADE_PHASE_HUFF_PUFF + 50)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1055,12 +1055,12 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_3E)
     EVT_CALL(DeleteNpc, NPC_3F)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), 69)
-    EVT_CALL(N(CreateParadeNPC), 70)
-    EVT_CALL(N(CreateParadeNPC), 71)
-    EVT_CALL(N(CreateParadeNPC), 74)
-    EVT_CALL(N(CreateParadeNPC), 72)
-    EVT_CALL(N(CreateParadeNPC), 73)
+    EVT_CALL(N(CreateParadeNPC), NPC_45)
+    EVT_CALL(N(CreateParadeNPC), NPC_46)
+    EVT_CALL(N(CreateParadeNPC), NPC_47)
+    EVT_CALL(N(CreateParadeNPC), NPC_4A)
+    EVT_CALL(N(CreateParadeNPC), NPC_48)
+    EVT_CALL(N(CreateParadeNPC), NPC_49)
     EVT_CALL(N(SetNpcShadowScale), 69, EVT_FLOAT(6.0))
     EVT_CALL(SetNpcFlagBits, NPC_45, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(N(SetNpcShadowScale), 74, EVT_FLOAT(3.0))
@@ -1068,7 +1068,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x000004B0)
+        EVT_IF_GT(LVar0, PARADE_PHASE_CRYSTAL_KING)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1079,20 +1079,20 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_44)
     EVT_WAIT(1)
     EVT_CALL(N(ParadeSpriteHeapMalloc), 0x2000, LVar0)
-    EVT_CALL(N(CreateParadeNPC), 77)
-    EVT_CALL(N(CreateParadeNPC), 78)
-    EVT_CALL(N(CreateParadeNPC), 79)
-    EVT_CALL(N(CreateParadeNPC), 80)
-    EVT_CALL(N(CreateParadeNPC), 81)
+    EVT_CALL(N(CreateParadeNPC), NPC_4D)
+    EVT_CALL(N(CreateParadeNPC), NPC_4E)
+    EVT_CALL(N(CreateParadeNPC), NPC_4F)
+    EVT_CALL(N(CreateParadeNPC), NPC_50)
+    EVT_CALL(N(CreateParadeNPC), NPC_51)
     EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_CALL(N(SetNpcShadowScale), 77, EVT_FLOAT(2.0))
+    EVT_CALL(N(SetNpcShadowScale), NPC_4D, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcFlagBits, NPC_4D, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    EVT_CALL(N(SetNpcShadowScale), 78, EVT_FLOAT(2.0))
+    EVT_CALL(N(SetNpcShadowScale), NPC_4E, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcFlagBits, NPC_4E, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x00000546)
+        EVT_IF_GT(LVar0, PARADE_PHASE_CRYSTAL_KING + 150)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1108,7 +1108,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x00000744)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOWSER)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1123,7 +1123,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x000007A8)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOWSER + 100)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1171,7 +1171,7 @@ EvtScript N(EVS_ManageParade) = {
     EVT_EXEC(N(D_80244B64_DFB564))
     EVT_EXEC(N(EVS_SetupInitialCamera))
     EVT_EXEC(N(EVS_ManageNpcPool))
-    EVT_EXEC_GET_TID(N(D_80247230_DFDC30), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_ParadePhase_Luigi), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IS_THREAD_RUNNING(LVarA, LVar0)
@@ -1185,111 +1185,111 @@ EvtScript N(EVS_ManageParade) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF4E3)
+        EVT_IF_GT(LVar0, PARADE_PHASE_PARTNERS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_80247418_DFDE18))
+    EVT_EXEC(N(EVS_ParadePhase_Partners))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF60A)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TOAD_TOWN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(D_802479C4_DFE3C4))
+    EVT_EXEC(N(EVS_ParadePhase_Toads))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF79A)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOOPA_BROS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80248928))
+    EVT_EXEC(N(EVS_ParadePhase_KoopaBros))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF7D6)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOLORADO)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80248BAC))
+    EVT_EXEC(N(EVS_ParadePhase_Kolorado))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFA24)
+        EVT_IF_GT(LVar0, PARADE_PHASE_CARAVAN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80249040))
+    EVT_EXEC(N(EVS_ParadePhase_Caravan))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFAB5)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BUZZAR)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80249A38))
+    EVT_EXEC(N(EVS_ParadePhase_BuzzarNest))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -760)
+        EVT_IF_GT(LVar0, PARADE_PHASE_TUTANKOOPA)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_80249EA4))
+    EVT_EXEC(N(EVS_ParadePhase_Tutankoopa))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -960)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOOS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024A044))
+    EVT_EXEC(N(EVS_ParadePhase_Boos))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -310)
+        EVT_IF_GT(LVar0, PARADE_PHASE_GOOMBA_KING)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024A804))
+    EVT_EXEC(N(EVS_ParadePhase_GoombaKing))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -53)
+        EVT_IF_GT(LVar0, PARADE_PHASE_YOSHIS)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024AD30))
+    EVT_EXEC(N(EVS_ParadePhase_Yoshis))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 750)
+        EVT_IF_GT(LVar0, PARADE_PHASE_HUFF_PUFF)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024C38C))
+    EVT_EXEC(N(EVS_ParadePhase_HuffNPuff))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x000004B0)
+        EVT_IF_GT(LVar0, PARADE_PHASE_CRYSTAL_KING)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024CC78))
+    EVT_EXEC(N(EVS_ParadePhase_CrystalKing))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x00000744)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BOWSER)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_EXEC(N(EVS_8024D834))
+    EVT_EXEC(N(EVS_ParadePhase_Bowser))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0x00000A14)
+        EVT_IF_GT(LVar0, PARADE_PHASE_DONE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

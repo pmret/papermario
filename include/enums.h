@@ -4003,6 +4003,7 @@ enum ModelFlags {
 };
 
 enum TexPanner {
+    //select pan unit
     TEX_PANNER_0    = 0x0,
     TEX_PANNER_1    = 0x1,
     TEX_PANNER_2    = 0x2,
@@ -4019,6 +4020,7 @@ enum TexPanner {
     TEX_PANNER_D    = 0xD,
     TEX_PANNER_E    = 0xE,
     TEX_PANNER_F    = 0xF,
+    // select texture component
     TEX_PANNER_MAIN = 0,
     TEX_PANNER_AUX  = 1,
 };

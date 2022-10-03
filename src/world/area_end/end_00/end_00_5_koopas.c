@@ -1,8 +1,8 @@
 #include "end_00.h"
 
-#include "world/common/PlayFX3D.inc.c"
+#include "world/common/atomic/WhaleGeyser.inc.c"
 
-EvtScript N(D_80247BB0_DFE5B0) = {
+EvtScript N(EVS_FakeBowserFloat) = {
     EVT_CALL(EnableModel, MODEL_o81, FALSE)
     EVT_LOOP(0)
         EVT_CALL(MakeLerp, 15, -15, 30, EASING_QUADRATIC_OUT)
@@ -28,7 +28,7 @@ EvtScript N(D_80247BB0_DFE5B0) = {
     EVT_END
 };
 
-EvtScript N(D_80247CF8_DFE6F8) = {
+EvtScript N(EVS_KoopaBros_Red) = {
     EVT_CALL(EnableNpcShadow, NPC_17, FALSE)
     EVT_WAIT(150)
     EVT_CALL(GetNpcPos, NPC_17, LVar0, LVar1, LVar2)
@@ -47,7 +47,7 @@ EvtScript N(D_80247CF8_DFE6F8) = {
     EVT_END
 };
 
-EvtScript N(D_80247E4C_DFE84C) = {
+EvtScript N(EVS_KoopaBros_Black) = {
     EVT_CALL(EnableNpcShadow, NPC_18, FALSE)
     EVT_WAIT(155)
     EVT_CALL(GetNpcPos, NPC_18, LVar0, LVar1, LVar2)
@@ -66,7 +66,7 @@ EvtScript N(D_80247E4C_DFE84C) = {
     EVT_END
 };
 
-EvtScript N(D_80247FA0_DFE9A0) = {
+EvtScript N(EVS_KoopaBros_Yellow) = {
     EVT_CALL(EnableNpcShadow, NPC_19, FALSE)
     EVT_WAIT(160)
     EVT_CALL(GetNpcPos, NPC_19, LVar0, LVar1, LVar2)
@@ -85,7 +85,7 @@ EvtScript N(D_80247FA0_DFE9A0) = {
     EVT_END
 };
 
-EvtScript N(D_802480F4_DFEAF4) = {
+EvtScript N(EVS_KoopaBros_Green) = {
     EVT_CALL(EnableNpcShadow, NPC_1A, FALSE)
     EVT_WAIT(165)
     EVT_CALL(GetNpcPos, NPC_1A, LVar0, LVar1, LVar2)
@@ -104,7 +104,7 @@ EvtScript N(D_802480F4_DFEAF4) = {
     EVT_END
 };
 
-EvtScript N(D_80248248_DFEC48) = {
+EvtScript N(EVS_Bobomb1) = {
     EVT_CALL(SetNpcFlagBits, NPC_1B, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_1B, -1900, 43, 70)
@@ -126,7 +126,7 @@ EvtScript N(D_80248248_DFEC48) = {
     EVT_END
 };
 
-EvtScript N(D_80248400_DFEE00) = {
+EvtScript N(EVS_Bobomb2) = {
     EVT_CALL(SetNpcFlagBits, NPC_1C, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_1C, -1870, 43, 70)
@@ -148,7 +148,7 @@ EvtScript N(D_80248400_DFEE00) = {
     EVT_END
 };
 
-EvtScript N(D_802485B8_DFEFB8) = {
+EvtScript N(EVS_Bobomb3) = {
     EVT_CALL(SetNpcFlagBits, NPC_1D, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_1D, -1840, 43, 70)
@@ -170,7 +170,7 @@ EvtScript N(D_802485B8_DFEFB8) = {
     EVT_END
 };
 
-EvtScript N(D_80248770_DFF170) = {
+EvtScript N(EVS_Bobomb4) = {
     EVT_CALL(SetNpcFlagBits, NPC_1E, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_1E, -1810, 43, 70)
@@ -192,28 +192,28 @@ EvtScript N(D_80248770_DFF170) = {
     EVT_END
 };
 
-EvtScript N(EVS_80248928) = {
-    EVT_EXEC_GET_TID(N(D_80247BB0_DFE5B0), LVarA)
+EvtScript N(EVS_ParadePhase_KoopaBros) = {
+    EVT_EXEC_GET_TID(N(EVS_FakeBowserFloat), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF7EA)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOOPA_BROS + 80)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(1)
-    EVT_EXEC(N(D_80247CF8_DFE6F8))
-    EVT_EXEC(N(D_80247E4C_DFE84C))
-    EVT_EXEC(N(D_80247FA0_DFE9A0))
-    EVT_EXEC(N(D_802480F4_DFEAF4))
-    EVT_EXEC(N(D_80248248_DFEC48))
-    EVT_EXEC(N(D_80248400_DFEE00))
-    EVT_EXEC(N(D_802485B8_DFEFB8))
-    EVT_EXEC(N(D_80248770_DFF170))
+    EVT_EXEC(N(EVS_KoopaBros_Red))
+    EVT_EXEC(N(EVS_KoopaBros_Black))
+    EVT_EXEC(N(EVS_KoopaBros_Yellow))
+    EVT_EXEC(N(EVS_KoopaBros_Green))
+    EVT_EXEC(N(EVS_Bobomb1))
+    EVT_EXEC(N(EVS_Bobomb2))
+    EVT_EXEC(N(EVS_Bobomb3))
+    EVT_EXEC(N(EVS_Bobomb4))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF9C0)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOOPA_BROS + 550)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -222,7 +222,7 @@ EvtScript N(EVS_80248928) = {
     EVT_END
 };
 
-EvtScript N(D_80248A78_DFF478) = {
+EvtScript N(EVS_Whale_WagTail) = {
     EVT_LOOP(0)
         EVT_CALL(MakeLerp, 20, -20, 40, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
@@ -247,17 +247,17 @@ EvtScript N(D_80248A78_DFF478) = {
     EVT_END
 };
 
-EvtScript N(EVS_80248BAC) = {
-    EVT_EXEC_GET_TID(N(D_80248A78_DFF478), LVarA)
+EvtScript N(EVS_ParadePhase_Kolorado) = {
+    EVT_EXEC_GET_TID(N(EVS_Whale_WagTail), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFF9CA)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOLORADO + 500)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_SET(LVar1, 15)
-    EVT_CALL(N(PlayFX3D), 0, 0xFFFFF9E3, LVar1, -200, 0, -1, 0, 30)
+    EVT_CALL(N(CreateWhaleGeyser), 0, -1565, LVar1, -200, 0, -1, 0, 30)
     EVT_CALL(GetNpcPos, NPC_1F, LVar2, LVar3, LVar4)
     EVT_CALL(GetNpcPos, NPC_20, LVar5, LVar6, LVar7)
     EVT_LOOP(5)
@@ -273,7 +273,7 @@ EvtScript N(EVS_80248BAC) = {
         EVT_LOOP(0)
             EVT_LOOP(20)
                 EVT_SUB(LVar1, 1)
-                EVT_CALL(N(UpdatePosFX3D), LVar0, 0xFFFFF9E3, LVar1, -200)
+                EVT_CALL(N(SetWhaleGeyserPos), LVar0, -1565, LVar1, -200)
                 EVT_SUB(LVar3, 1)
                 EVT_CALL(SetNpcPos, NPC_1F, LVar2, LVar3, LVar4)
                 EVT_SUB(LVar6, 1)
@@ -282,7 +282,7 @@ EvtScript N(EVS_80248BAC) = {
             EVT_END_LOOP
             EVT_LOOP(20)
                 EVT_ADD(LVar1, 1)
-                EVT_CALL(N(UpdatePosFX3D), LVar0, 0xFFFFF9E3, LVar1, -200)
+                EVT_CALL(N(SetWhaleGeyserPos), LVar0, -1565, LVar1, -200)
                 EVT_ADD(LVar3, 1)
                 EVT_CALL(SetNpcPos, NPC_1F, LVar2, LVar3, LVar4)
                 EVT_ADD(LVar6, 1)
@@ -295,11 +295,11 @@ EvtScript N(EVS_80248BAC) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFB5A)
+        EVT_IF_GT(LVar0, PARADE_PHASE_KOLORADO + 900)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(N(DisposeFX3D), LVar3)
+    EVT_CALL(N(DisposeWhaleGeyser), LVar3)
     EVT_KILL_THREAD(LVarA)
     EVT_RETURN
     EVT_END

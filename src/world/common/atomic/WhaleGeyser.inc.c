@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(PlayFX3D)(Evt* script, s32 isInitialStatus) {
+ApiStatus N(CreateWhaleGeyser)(Evt* script, s32 isInitialStatus) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     f32 var2 = evt_get_float_variable(script, *args++);
@@ -18,7 +18,7 @@ ApiStatus N(PlayFX3D)(Evt* script, s32 isInitialStatus) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UpdatePosFX3D)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetWhaleGeyserPos)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -31,7 +31,7 @@ ApiStatus N(UpdatePosFX3D)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DisposeFX3D)(Evt *script, s32 isInitialCall) {
+ApiStatus N(DisposeWhaleGeyser)(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 

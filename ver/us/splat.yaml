@@ -11580,11 +11580,12 @@ segments:
     - [0xDF6A20, c, end_00_1_main]
     - [0xDF6A20, c, end_00_2_credits]
     - [0xDF9080, c, end_00_3_parade_setup]
-    - [0xDF9080, c, end_00_data_5]
-    - [0xDF9300, c, end_00_data_6]
-    - [0xDF9510, c, end_00_data_7]
-    - [0xDF9510, c, end_00_data_8]
-    - [0xDF9510, c, end_00_data_9]
+    - [0xDF9080, c, end_00_4_allies]
+    - [0xDF9300, c, end_00_5_koopas]
+    - [0xDF9510, c, end_00_6]
+    - [0xDF9510, c, end_00_7_huff_n_puff]
+    - [0xDF9510, c, end_00_8_crystal_king]
+    - [0xDF9510, c, end_00_9_bowser]
     - [0xDF9540]
   - name: end_01
     dir: world/area_end/end_01

@@ -1,18 +1,11 @@
 #include "end_00.h"
 #include "effects.h"
 
-extern s32 N(D_80249D60_E00760);
-
 extern EvtScript N(EVS_OffsetNpcScroll);
 
 API_CALLABLE(N(AddScrollToNpcPos));
 
-ApiStatus N(func_80242B10_DF9510)(Evt *script, s32 isInitialCall) {
-    N(D_80249D60_E00760) = evt_get_variable(script, *script->ptrReadPos);
-    return ApiStatus_DONE2;
-}
-
-EvtScript N(D_80248F30_DFF930) = {
+EvtScript N(CaravanStopMarching) = {
     EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
     EVT_SETF(LVar1, LVar1)
     EVT_LOOP(0)
@@ -24,7 +17,8 @@ EvtScript N(D_80248F30_DFF930) = {
     EVT_END
 };
 
-EvtScript N(EVS_80248FB8) = {
+// unused
+EvtScript N(MoustafaStopMarching) = {
     EVT_CALL(GetNpcPos, NPC_23, LVar0, LVar1, LVar2)
     EVT_SETF(LVar0, LVar0)
     EVT_LOOP(0)
@@ -36,12 +30,12 @@ EvtScript N(EVS_80248FB8) = {
     EVT_END
 };
 
-EvtScript N(EVS_80249040) = {
+EvtScript N(EVS_ParadePhase_Caravan) = {
     EVT_CALL(SetNpcScale, NPC_22, EVT_FLOAT(0.75), EVT_FLOAT(0.75), EVT_FLOAT(0.75))
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_21, -1447, -2, 200)
-        EVT_SET(LVar0, 33)
-        EVT_EXEC_GET_TID(N(D_80248F30_DFF930), LVarA)
+        EVT_SET(LVar0, NPC_21)
+        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_21, ANIM_Rowf_PackedIdle)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_21, ANIM_Rowf_PackedTalk)
@@ -63,8 +57,8 @@ EvtScript N(EVS_80249040) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_22, -1412, -2, 200)
-        EVT_SET(LVar0, 34)
-        EVT_EXEC_GET_TID(N(D_80248F30_DFF930), LVarA)
+        EVT_SET(LVar0, NPC_22)
+        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_22, ANIM_Rowf_PackedIdle)
         EVT_WAIT(220)
         EVT_CALL(SetNpcAnimation, NPC_22, ANIM_Rowf_PackedWalk)
@@ -74,8 +68,8 @@ EvtScript N(EVS_80249040) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_23, -1380, 2, 180)
-        EVT_SET(LVar0, 35)
-        EVT_EXEC_GET_TID(N(D_80248F30_DFF930), LVarA)
+        EVT_SET(LVar0, NPC_23)
+        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_23, ANIM_Moustafa_Idle)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_23, ANIM_Moustafa_Toss)
@@ -105,8 +99,8 @@ EvtScript N(EVS_80249040) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(NpcMoveTo, NPC_24, -1342, 2, 180)
-        EVT_SET(LVar0, 36)
-        EVT_EXEC_GET_TID(N(D_80248F30_DFF930), LVarA)
+        EVT_SET(LVar0, NPC_24)
+        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_24, ANIM_Mouser_Blue_IdleOnlyBlink)
         EVT_WAIT(110)
         EVT_CALL(SetNpcAnimation, NPC_24, ANIM_Mouser_Blue_Whisper)
@@ -120,14 +114,15 @@ EvtScript N(EVS_80249040) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(NpcMoveTo, NPC_25, -1312, 2, 180)
-        EVT_SET(LVar0, 37)
-        EVT_EXEC_GET_TID(N(D_80248F30_DFF930), LVarA)
+        EVT_SET(LVar0, NPC_25)
+        EVT_EXEC_GET_TID(N(CaravanStopMarching), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_25, ANIM_Mouser_Blue_IdleOnlyBlink)
         EVT_WAIT(230)
         EVT_CALL(SetNpcAnimation, NPC_25, ANIM_Mouser_Blue_Run)
         EVT_KILL_THREAD(LVarA)
         EVT_CALL(NpcMoveTo, NPC_25, -1300, 2, 180)
     EVT_END_THREAD
+    // tutankoopa is chased around by chomp
     EVT_THREAD
         EVT_WAIT(240)
         EVT_CALL(NpcMoveTo, NPC_26, -1540, 30, 60)
@@ -183,7 +178,7 @@ EvtScript N(EVS_80249040) = {
     EVT_END
 };
 
-Vec3f N(D_802499FC_E003FC)[] = {
+Vec3f N(BuzzarFlightPath)[] = {
     { -805.0,   100.0,  -80.0 },
     { -675.0,   100.0, -230.0 },
     { -805.0,   100.0, -280.0 },
@@ -191,11 +186,11 @@ Vec3f N(D_802499FC_E003FC)[] = {
     { -805.0,   100.0,  -80.0 },
 };
 
-EvtScript N(EVS_80249A38) = {
+EvtScript N(EVS_ParadePhase_BuzzarNest) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 0xFFFFFB64)
+        EVT_IF_GT(LVar0, PARADE_PHASE_BUZZAR + 175)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -229,7 +224,7 @@ EvtScript N(EVS_80249A38) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(6)
-            EVT_CALL(LoadPath, 80, EVT_PTR(N(D_802499FC_E003FC)), 5, EASING_LINEAR)
+            EVT_CALL(LoadPath, 80, EVT_PTR(N(BuzzarFlightPath)), ARRAY_COUNT(N(BuzzarFlightPath)), EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(GetNextPathPos)
                 EVT_CALL(SetNpcPos, NPC_28, LVar1, LVar2, LVar3)
@@ -244,9 +239,14 @@ EvtScript N(EVS_80249A38) = {
     EVT_END
 };
 
-s32 N(D_80249D60_E00760) = 255;
+s32 N(UnusedAlpha) = 255;
 
-EvtScript N(D_80249D64_E00764) = {
+ApiStatus N(SetUnusedAlpha)(Evt *script, s32 isInitialCall) {
+    N(UnusedAlpha) = evt_get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_MoveBoosToTubbaBody) = {
     EVT_CALL(GetNpcPos, NPC_31, LVar0, LVar1, LVar2)
     EVT_SETF(LVar0, LVar0)
     EVT_SETF(LVar3, LVar0)
@@ -257,20 +257,20 @@ EvtScript N(D_80249D64_E00764) = {
     EVT_CALL(SetNpcPos, NPC_33, LVar3, 20, -2)
     EVT_CALL(SetNpcPos, NPC_34, LVar4, 20, 2)
     EVT_CHILD_THREAD
-        EVT_CALL(N(AddScrollToNpcPos), 50)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_32)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(AddScrollToNpcPos), 51)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_33)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(AddScrollToNpcPos), 52)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_34)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(AddScrollToNpcPos), 49)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80249EA4) = {
+EvtScript N(EVS_ParadePhase_Tutankoopa) = {
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_2D, -960, 0, 30)
         EVT_CALL(NpcMoveTo, NPC_2D, -240, 30, 90)
@@ -295,7 +295,7 @@ EvtScript N(EVS_80249EA4) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024A044) = {
+EvtScript N(EVS_ParadePhase_Boos) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -304,7 +304,7 @@ EvtScript N(EVS_8024A044) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(InterpNpcYaw, NPC_2C, 90, 0)
-    EVT_SET(LVar0, 44)
+    EVT_SET(LVar0, NPC_2C)
     EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -314,15 +314,15 @@ EvtScript N(EVS_8024A044) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(N(func_80242B10_DF9510), 255)
-    EVT_CALL(func_802CFD30, 50, 7, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 51, 7, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 52, 7, 0, 0, 0, 0)
+    EVT_CALL(N(SetUnusedAlpha), 255)
+    EVT_CALL(func_802CFD30, NPC_32, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_33, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_34, 7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_32, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_33, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_34, FALSE)
     EVT_CALL(NpcMoveTo, NPC_31, -460, 0, 100)
-    EVT_EXEC_GET_TID(N(D_80249D64_E00764), LVarB)
+    EVT_EXEC_GET_TID(N(EVS_MoveBoosToTubbaBody), LVarB)
     EVT_WAIT(20)
     EVT_CALL(SetNpcPos, NPC_35, -260, 0, 0)
     EVT_CALL(SetNpcJumpscale, NPC_35, EVT_FLOAT(1.0))
@@ -335,9 +335,9 @@ EvtScript N(EVS_8024A044) = {
         EVT_CALL(MakeLerp, 0, 255, 30, EASING_LINEAR)
         EVT_LOOP(30)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(func_802CFD30, 50, 7, LVar0, 0, 0, 0)
-            EVT_CALL(func_802CFD30, 51, 7, LVar0, 0, 0, 0)
-            EVT_CALL(func_802CFD30, 52, 7, LVar0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, NPC_32, 7, LVar0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, NPC_33, 7, LVar0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, NPC_34, 7, LVar0, 0, 0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(EnableNpcShadow, NPC_32, TRUE)
@@ -409,7 +409,7 @@ EvtScript N(EVS_8024A044) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024A804) = {
+EvtScript N(EVS_ParadePhase_GoombaKing) = {
     EVT_WAIT(1)
     EVT_CALL(SetNpcRotation, NPC_36, 0, 0, 180)
     EVT_THREAD
@@ -479,13 +479,13 @@ EvtScript N(EVS_8024A804) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024AD30) = {
+EvtScript N(EVS_ParadePhase_Yoshis) = {
     EVT_CHILD_THREAD
         EVT_CALL(EnableTexPanning, MODEL_o119, TRUE)
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
             EVT_ADD(LVar0, 512)
-            EVT_CALL(SetTexPanOffset, 4, 1, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_4, TEX_PANNER_AUX, LVar0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
