@@ -14,20 +14,19 @@ void hieroglyphs_update(EffectInstance* effect) {
 
     if (effect->flags & 16) {
         effect->flags &= ~16;
-        data->unk_10 = 16;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
-    temp_a2 = data->unk_14 + 1; // Needed for match?
-    data->unk_14++;
-    if (data->unk_10 < 0) {
+    temp_a2 = ++data->lifeTime;
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
-    if (data->unk_10 < 16) {
-        data->unk_24 = data->unk_10 * 16;
+    if (data->timeLeft < 16) {
+        data->unk_24 = data->timeLeft * 16;
     }
     if (temp_a2 < 16) {
         data->unk_24 = (temp_a2 * 16) + 15;

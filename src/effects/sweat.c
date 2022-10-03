@@ -11,8 +11,8 @@ void sweat_init(void) {
 void sweat_update(EffectInstance *effect) {
     SweatFXData* data = effect->data.sweat;
 
-    data->unk_24--;
-    if (data->unk_24 < 0) {
+    data->timeLeft--;
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }

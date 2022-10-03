@@ -621,7 +621,7 @@ typedef struct SweatFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
+    /* 0x24 */ s32 timeLeft;
 } SweatFXData; // size = 0x28
 
 typedef struct SleepBubbleFXData {
@@ -1525,8 +1525,8 @@ typedef struct ShinyFlareFXData {
 
 typedef struct HuffPuffBreathFXData {
     /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -1594,8 +1594,8 @@ typedef struct EmbersFXData {
 
 typedef struct HieroglyphsFXData {
     /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ char unk_18[0x0C];
     /* 0x24 */ s32 unk_24;
 } HieroglyphsFXData; // size = 0x28
