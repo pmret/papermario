@@ -3,19 +3,19 @@
 #include "script_api/battle.h"
 #include "sprite/npc/MontyMole.h"
 
-extern s32 N(idleAnimations_8021A59C)[];
-extern s32 N(idleAnimations_8021A5E8)[];
-extern EvtScript N(init_8021A7B0);
-extern EvtScript N(takeTurn_8021AFAC);
-extern EvtScript N(idle_8021A814);
-extern EvtScript N(handleEvent_8021A824);
+extern s32 N(idleAnimations)[];
+extern s32 N(idleAnimations2)[];
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
 
-s32 N(defenseTable_8021A450)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021A45C)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 90,
@@ -40,15 +40,15 @@ s32 N(statusTable_8021A45C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021A508)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021A59C),
-        .defenseTable = N(defenseTable_8021A450),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 249,
@@ -59,8 +59,8 @@ ActorPartBlueprint N(partsTable_8021A508)[] = {
         .posOffset = { 0, 0, -15 },
         .targetOffset = { -2, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021A59C),
-        .defenseTable = N(defenseTable_8021A450),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 249,
@@ -71,23 +71,23 @@ ActorPartBlueprint N(partsTable_8021A508)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021A5E8),
-        .defenseTable = N(defenseTable_8021A450),
+        .idleAnimations = N(idleAnimations2),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 0,
     },
 };
 
-ActorBlueprint N(1) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_MONTY_MOLE,
     .level = 8,
     .maxHP = 3,
-    .partCount = ARRAY_COUNT(N(partsTable_8021A508)),
-    .partsData = N(partsTable_8021A508),
-    .script = &N(init_8021A7B0),
-    .statusTable = N(statusTable_8021A45C),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 80,
     .airLiftChance = 70,
     .spookChance = 50,
@@ -102,7 +102,7 @@ ActorBlueprint N(1) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_8021A59C)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim01,
     STATUS_STONE,     ANIM_MontyMole_Anim00,
     STATUS_SLEEP,     ANIM_MontyMole_Anim14,
@@ -115,28 +115,30 @@ s32 N(idleAnimations_8021A59C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021A5E8)[] = {
+s32 N(idleAnimations2)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim0F,
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021A5F4)[] = {
+s32 N(idleAnimations_hole)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim12,
     STATUS_END,
 };
 
-s32 N(unk_missing_8021A600)[] = {
-    0x00000001, 0x002F0006, 0x00000000,
+
+s32 N(idleAnimations_unused)[] = {
+    STATUS_NORMAL,    ANIM_MontyMole_Anim06,
+    STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021A60C)[] = {
+ActorPartBlueprint N(parts_hole)[] = {
     {
         .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021A5F4),
+        .idleAnimations = N(idleAnimations_hole),
         .defenseTable = NULL,
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
@@ -144,7 +146,7 @@ ActorPartBlueprint N(partsTable_8021A60C)[] = {
     },
 };
 
-EvtScript N(init_8021A630) = {
+EvtScript N(init_hole) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
@@ -153,14 +155,14 @@ EvtScript N(init_8021A630) = {
     EVT_END
 };
 
-ActorBlueprint N(2) = {
+ActorBlueprint N(hole) = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(partsTable_8021A60C)),
-    .partsData = N(partsTable_8021A60C),
-    .script = &N(init_8021A630),
+    .partCount = ARRAY_COUNT(N(parts_hole)),
+    .partsData = N(parts_hole),
+    .script = &N(init_hole),
     .statusTable = NULL,
     .escapeChance = 80,
     .airLiftChance = 0,
@@ -176,22 +178,22 @@ ActorBlueprint N(2) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-Vec3i N(vector3D_8021A6B8) = { 0, 0xFFFFFC18, 0, };
+Vec3i N(hole_pos) = { 0, -1000, 0, };
 
-Formation N(specialFormation_8021A6C4) = {
-    { .actor = &N(2), .home = { .vec = &N(vector3D_8021A6B8) },},
+Formation N(formation_hole_1) = {
+    { .actor = &N(hole), .home = { .vec = &N(hole_pos) },},
 };
 
-Formation N(specialFormation_8021A6E0) = {
-    { .actor = &N(2), .home = { .vec = &N(vector3D_8021A6B8) }, .var0 = 1 },
+Formation N(formation_hole_2) = {
+    { .actor = &N(hole), .home = { .vec = &N(hole_pos) }, .var0 = 1 },
 };
 
-EvtScript N(8021A6FC) = {
+EvtScript N(makeHole) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A6E0)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_2)), 0)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A6C4)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_1)), 0)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_SUB(LVar3, 1)
@@ -200,21 +202,21 @@ EvtScript N(8021A6FC) = {
     EVT_END
 };
 
-EvtScript N(init_8021A7B0) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021AFAC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A814)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A824)))
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021A814) = {
+EvtScript N(idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8021A824) = {
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastElement, LVarE)
@@ -248,7 +250,7 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0A)
             EVT_SET_CONST(LVar2, ANIM_MontyMole_Anim0B)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_EXEC_WAIT(N(8021A6FC))
+            EVT_EXEC_WAIT(N(makeHole))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
@@ -279,7 +281,7 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(8021A6FC))
+            EVT_EXEC_WAIT(N(makeHole))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim09)
             EVT_EXEC_WAIT(DoDeath)
@@ -299,14 +301,14 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
             EVT_WAIT(15)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_APPLY, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A5F4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_hole)))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_EXEC_WAIT(N(8021A6FC))
+            EVT_EXEC_WAIT(N(makeHole))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -5, 0)
@@ -333,7 +335,7 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim14)
             EVT_WAIT(20)
         EVT_CASE_EQ(EVENT_UP_AND_AWAY)
-            EVT_EXEC_WAIT(N(8021A6FC))
+            EVT_EXEC_WAIT(N(makeHole))
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -342,7 +344,7 @@ EvtScript N(handleEvent_8021A824) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021AFAC) = {
+EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

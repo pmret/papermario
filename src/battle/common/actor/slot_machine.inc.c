@@ -104,8 +104,19 @@ ActorBlueprint N(slot_machine_start) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-// TODO move two functions to this file
-#include "common/IsGameStatusUnkAA_1.inc.c"
+ApiStatus N(IsDemoBattle)(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = 0;
+    if (gGameStatusPtr->demoFlags & 1) {
+        script->varTable[0] = 1;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(Add1Coin)(Evt* script, s32 isInitialCall) {
+    add_coins(1);
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(init) = {
     EVT_USE_ARRAY(N(slot_machine_buffer))
@@ -125,7 +136,7 @@ EvtScript N(init) = {
     EVT_CALL(RandInt, 8, LVar0)
     EVT_MUL(LVar0, 45)
     EVT_SET(ArrayVar(7), LVar0)
-    EVT_CALL(N(IsGameStatusUnkAA_1))
+    EVT_CALL(N(IsDemoBattle))
     EVT_IF_EQ(LVar0, 1)
         EVT_SET(ArrayVar(1), 1)
         EVT_SET(ArrayVar(2), 1)

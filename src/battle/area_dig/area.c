@@ -5,7 +5,7 @@
 #define NAMESPACE b_area_dig
 
 extern ActorBlueprint N(fuzzy);
-extern ActorBlueprint N(monty_mole_1);
+extern ActorBlueprint N(monty_mole);
 extern ActorBlueprint N(pokey);
 extern ActorBlueprint N(bandit);
 extern ActorBlueprint N(red_shy_guy);
@@ -31,9 +31,9 @@ Formation N(formation_00) = {
 };
 
 Formation N(formation_01) = {
-    { .actor = &N(monty_mole_1), .home = { .index = 1 }, .priority = 10, },
-    { .actor = &N(monty_mole_1), .home = { .index = 2 }, .priority = 9, },
-    { .actor = &N(monty_mole_1), .home = { .index = 3 }, .priority = 8, },
+    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 10, },
+    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 9, },
+    { .actor = &N(monty_mole), .home = { .index = 3 }, .priority = 8, },
 };
 
 Formation N(formation_02) = {

@@ -13,8 +13,8 @@ EvtScript NAMESPACE = {
     EVT_CALL(func_802535B4, 0)
     EVT_SET(LocalVar(0), 5)
     EVT_CALL(N(Set80218630_Var0))
-    EVT_CALL(WaitForState, 13)
-    EVT_CALL(SetBattleState, 20)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    EVT_CALL(SetBattleState, BATTLE_STATE_NEXT_ENEMY)
     EVT_RETURN
     EVT_END
 };

@@ -5,15 +5,15 @@
 #include "sprite/npc/Bandit.h"
 #include "sprite/npc/WorldParakarry.h"
 
-extern EvtScript N(init_8021D750);
-extern EvtScript N(init_8021D7C4);
-extern EvtScript N(takeTurn_8021E900);
-extern EvtScript N(idle_8021D810);
-extern EvtScript N(handleEvent_8021DF88);
+extern EvtScript N(init);
+extern EvtScript N(init_coin);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
 
-BSS s32 N(D_80220160)[1];
+BSS s32 N(thread_dropCoin)[1];
 
-s32 N(idleAnimations_8021D510)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim01,
     STATUS_STONE,     ANIM_Bandit_Anim00,
     STATUS_SLEEP,     ANIM_Bandit_Anim10,
@@ -26,7 +26,7 @@ s32 N(idleAnimations_8021D510)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021D55C)[] = {
+s32 N(idleAnimations_holdCoin)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim02,
     STATUS_STONE,     ANIM_Bandit_Anim04,
     STATUS_SLEEP,     ANIM_Bandit_Anim10,
@@ -39,17 +39,17 @@ s32 N(idleAnimations_8021D55C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021D5A8)[] = {
+s32 N(idleAnimations_coin)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim14,
     STATUS_END,
 };
 
-s32 N(defenseTable_8021D5B4)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021D5C0)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -74,15 +74,15 @@ s32 N(statusTable_8021D5C0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021D66C)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 28 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D510),
-        .defenseTable = N(defenseTable_8021D5B4),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 244,
@@ -93,23 +93,23 @@ ActorPartBlueprint N(partsTable_8021D66C)[] = {
         .posOffset = { 0, 30, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D5A8),
-        .defenseTable = N(defenseTable_8021D5B4),
+        .idleAnimations = N(idleAnimations_coin),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 0,
     },
 };
 
-ActorPartBlueprint N(partsTable_8021D6B4)[] = {
+ActorPartBlueprint N(parts_coin)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D5A8),
-        .defenseTable = N(defenseTable_8021D5B4),
+        .idleAnimations = N(idleAnimations_coin),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 0,
@@ -121,10 +121,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(partsTable_8021D66C)),
-    .partsData = N(partsTable_8021D66C),
-    .script = &N(init_8021D750),
-    .statusTable = N(statusTable_8021D5C0),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
     .spookChance = 90,
@@ -139,15 +139,15 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 25 },
 };
 
-ActorBlueprint N(2) = {
+ActorBlueprint N(coin) = {
     .flags = ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(partsTable_8021D6B4)),
-    .partsData = N(partsTable_8021D6B4),
-    .script = &N(init_8021D7C4),
-    .statusTable = N(statusTable_8021D5C0),
+    .partCount = ARRAY_COUNT(N(parts_coin)),
+    .partsData = N(parts_coin),
+    .script = &N(init_coin),
+    .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
     .spookChance = 90,
@@ -162,48 +162,48 @@ ActorBlueprint N(2) = {
     .statusMessageOffset = { 10, 25 },
 };
 
-Vec3i N(vector3D_8021D728) = { 0, 0xFFFFFC18, 0 };
+Vec3i N(coin_pos) = { 0, -1000, 0 };
 
-Formation N(specialFormation_8021D734) = {
-    { .actor = &N(2), .home = { .vec = &N(vector3D_8021D728) }},
+Formation N(formation_coin) = {
+    { .actor = &N(coin), .home = { .vec = &N(coin_pos) }},
 };
 
-EvtScript N(init_8021D750) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021E900)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D810)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021DF88)))
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8021D7B4) = {
+EvtScript N(dummy) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(init_8021D7C4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
+EvtScript N(init_coin) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(dummy)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(dummy)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(dummy)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021D810) = {
+EvtScript N(idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(8021D820) = {
+EvtScript N(dropCoin) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021D510)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021D734)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_coin)), 0)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LVar1, LVar2, LVar3)
             EVT_CALL(SetActorPos, LVarA, LVar1, LVar2, LVar3)
@@ -219,15 +219,15 @@ EvtScript N(8021D820) = {
             EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(40.0), LVar0)
             EVT_CALL(SetGoalPos, LVarA, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, LVarA, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
             EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(20.0), LVar0)
             EVT_CALL(SetGoalPos, LVarA, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, LVarA, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
             EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(10.0), LVar0)
             EVT_CALL(SetGoalPos, LVarA, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, LVarA, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
             EVT_LOOP(0)
                 EVT_CALL(GetBattleFlags, LVar1)
                 EVT_IF_FLAG(LVar1, BS_FLAGS1_80000)
@@ -255,13 +255,13 @@ EvtScript N(8021D820) = {
                 EVT_IF_LT(LVar4, 30)
                     EVT_CALL(SetGoalPos, LVarA, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, LVarA, 5, FALSE, TRUE, FALSE)
-                    EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+                    EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
                 EVT_ELSE
                     EVT_SET(LVar4, LVar3)
                     EVT_ADD(LVar3, 30)
                     EVT_CALL(SetGoalPos, LVarA, LVar3, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, LVarA, 0, FALSE, TRUE, FALSE)
-                    EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+                    EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
                 EVT_END_IF
             EVT_ELSE
                 EVT_SET(LVar4, LVar3)
@@ -269,12 +269,12 @@ EvtScript N(8021D820) = {
                 EVT_IF_LT(LVar4, 30)
                     EVT_CALL(SetGoalPos, LVarA, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, LVarA, 5, FALSE, TRUE, FALSE)
-                    EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+                    EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
                 EVT_ELSE
                     EVT_SUB(LVar3, 30)
                     EVT_CALL(SetGoalPos, LVarA, LVar3, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, LVarA, 0, FALSE, TRUE, FALSE)
-                    EVT_CALL(PlaySoundAtActor, LVarA, 0x212)
+                    EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
                 EVT_END_IF
             EVT_END_IF
             EVT_GOTO(5)
@@ -295,14 +295,14 @@ EvtScript N(8021D820) = {
 };
 
 
-EvtScript N(handleEvent_8021DF88) = {
-    EVT_USE_ARRAY(EVT_PTR(N(D_80220160)))
+EvtScript N(handleEvent) = {
+    EVT_USE_ARRAY(EVT_PTR(N(thread_dropCoin)))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoNormalHit)
@@ -315,7 +315,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoNormalHit)
@@ -328,7 +328,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim0A)
             EVT_SET_CONST(LVar2, ANIM_Bandit_Anim0B)
@@ -341,7 +341,7 @@ EvtScript N(handleEvent_8021DF88) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim0A)
             EVT_SET_CONST(LVar2, ANIM_Bandit_Anim0B)
@@ -358,7 +358,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoSpinSmashHit)
@@ -370,7 +370,7 @@ EvtScript N(handleEvent_8021DF88) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoSpinSmashHit)
@@ -420,7 +420,7 @@ EvtScript N(handleEvent_8021DF88) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoNormalHit)
@@ -442,7 +442,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim01)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim07)
             EVT_SET_CONST(LVar2, ANIM_Bandit_Anim09)
@@ -456,7 +456,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
+            EVT_EXEC_GET_TID(N(dropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoAirLift)
@@ -482,7 +482,7 @@ EvtScript N(handleEvent_8021DF88) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021E900) = {
+EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -523,7 +523,7 @@ EvtScript N(takeTurn_8021E900) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 35, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C2)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C2)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -627,7 +627,7 @@ EvtScript N(takeTurn_8021E900) = {
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0E)
                     EVT_WAIT(20)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C3)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim10)
                     EVT_WAIT(20)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim07)
@@ -652,14 +652,14 @@ EvtScript N(takeTurn_8021E900) = {
                     EVT_THREAD
                         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
                         EVT_LOOP(LVar0)
-                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x212)
+                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_212)
                             EVT_WAIT(1)
                         EVT_END_LOOP
                     EVT_END_THREAD
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021D55C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_holdCoin)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0E)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                     EVT_WAIT(7)

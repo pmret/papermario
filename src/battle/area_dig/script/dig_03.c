@@ -9,7 +9,6 @@ ApiStatus func_80218770_6DE530(Evt* script, s32 isInitialCall) {
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 6;
-    do {} while (0);
     battleStatus->selectedItemID = 0;
     battleStatus->selectedMoveID = MOVE_SHELL_SHOT;
     battleStatus->currentTargetListFlags = gMoveTable[MOVE_SHELL_SHOT].flags;
@@ -29,9 +28,9 @@ EvtScript NAMESPACE = {
     EVT_WAIT(3)
     EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
     EVT_CALL(func_802535B4, 0)
-    EVT_CALL(WaitForState, 13)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(func_80218770_6DE530)
-    EVT_CALL(SetBattleState, 19)
+    EVT_CALL(SetBattleState, BATTLE_STATE_PARTNER_MOVE)
     EVT_WAIT(90)
     EVT_RETURN
     EVT_END

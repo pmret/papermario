@@ -33,9 +33,9 @@ EvtScript NAMESPACE = {
     EVT_WAIT(3)
     EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
     EVT_CALL(func_802535B4, 0)
-    EVT_CALL(WaitForState, 13)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(func_802187F0_6DE5B0)
-    EVT_CALL(SetBattleState, 18)
+    EVT_CALL(SetBattleState, BATTLE_STATE_PLAYER_MOVE)
     EVT_RETURN
     EVT_END
 };

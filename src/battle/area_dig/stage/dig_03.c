@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "mapfs/sbk_bt02_shape.h"
 
 #define NAMESPACE b_area_dig_dig_03
 
@@ -9,7 +10,7 @@
 
 #include "common/GetModelPos.inc.c"
 
-EvtScript N(8021F720) = {
+EvtScript N(updateModels) = {
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVar7, LVar1)
     EVT_MUL(LVar7, 10)
@@ -27,29 +28,29 @@ EvtScript N(8021F720) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_8021F800) = {
+EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, MODEL_g60)
     EVT_SET(LVar1, 0)
-    EVT_EXEC(N(8021F720))
-    EVT_SET(LVar0, 3)
+    EVT_EXEC(N(updateModels))
+    EVT_SET(LVar0, MODEL_g63)
     EVT_SET(LVar1, 120)
-    EVT_EXEC(N(8021F720))
-    EVT_SET(LVar0, 5)
+    EVT_EXEC(N(updateModels))
+    EVT_SET(LVar0, MODEL_g62)
     EVT_SET(LVar1, 240)
-    EVT_EXEC(N(8021F720))
+    EVT_EXEC(N(updateModels))
     EVT_CALL(PlayEffect, EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8021F8E8) = {
+EvtScript N(afterBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8021F8F8)[] = {
-    0x00000028, 0x00000027, 0x00000026, 0x00000025, 0x00000000,
+s32 N(foregroundModelList)[] = {
+    MODEL_o322, MODEL_o321, MODEL_o320, MODEL_o319, 0,
 };
 
 Stage NAMESPACE = {
@@ -57,7 +58,7 @@ Stage NAMESPACE = {
     .shape = "sbk_bt02_shape",
     .hit = "sbk_bt02_hit",
     .bg = "sbk_bg",
-    .preBattle = &N(beforeBattle_8021F800),
-    .postBattle = &N(afterBattle_8021F8E8),
-    .foregroundModelList = N(foregroundModelList_8021F8F8),
+    .preBattle = &N(beforeBattle),
+    .postBattle = &N(afterBattle),
+    .foregroundModelList = N(foregroundModelList),
 };

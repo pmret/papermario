@@ -3,14 +3,14 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Whacka.h"
 
-extern EvtScript N(init_8021FDA0);
-extern EvtScript N(takeTurn_80220634);
-extern EvtScript N(idle_8021FE5C);
-extern EvtScript N(handleEvent_8021FE90);
-extern EvtScript N(80220684);
-extern EvtScript N(80220764);
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(spawnWhackasBump);
+extern EvtScript N(die);
 
-s32 N(idleAnimations_8021FC50)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Whacka_Idle,
     STATUS_STONE,     ANIM_Whacka_Still,
     STATUS_SLEEP,     ANIM_Whacka_Idle,
@@ -23,12 +23,12 @@ s32 N(idleAnimations_8021FC50)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021FC9C)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021FCA8)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -53,15 +53,15 @@ s32 N(statusTable_8021FCA8)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021FD54)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021FC50),
-        .defenseTable = N(defenseTable_8021FC9C),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 251,
@@ -73,10 +73,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(partsTable_8021FD54)),
-    .partsData = N(partsTable_8021FD54),
-    .script = &N(init_8021FDA0),
-    .statusTable = N(statusTable_8021FCA8),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,
@@ -91,14 +91,21 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 30 },
 };
 
-#include "common/IsSaveVar123.inc.c"
+ApiStatus N(IsHitEightTimes)(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = 0;
+    if (evt_get_variable(NULL, GB_IWA00_Whacka_HitCount) >= 8) {
+        script->varTable[0] = 1;
+    }
 
-EvtScript N(init_8021FDA0) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80220634)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021FE5C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021FE90)))
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(N(IsSaveVar123))
+    EVT_CALL(N(IsHitEightTimes))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, 1)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, 1)
@@ -107,7 +114,7 @@ EvtScript N(init_8021FDA0) = {
     EVT_END
 };
 
-EvtScript N(idle_8021FE5C) = {
+EvtScript N(idle) = {
     EVT_LABEL(0)
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -115,45 +122,45 @@ EvtScript N(idle_8021FE5C) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021FE90) = {
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
-            EVT_EXEC_WAIT(N(80220684))
+            EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(N(80220684))
+            EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(N(80220684))
+            EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -167,7 +174,7 @@ EvtScript N(handleEvent_8021FE90) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
@@ -175,7 +182,7 @@ EvtScript N(handleEvent_8021FE90) = {
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -211,7 +218,7 @@ EvtScript N(handleEvent_8021FE90) = {
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
@@ -220,17 +227,17 @@ EvtScript N(handleEvent_8021FE90) = {
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
-            EVT_EXEC_WAIT(N(80220684))
+            EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(80220764))
+                EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -265,19 +272,19 @@ EvtScript N(handleEvent_8021FE90) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80220634) = {
+EvtScript N(takeTurn) = {
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LE(LVar0, 100)
-        EVT_EXEC_WAIT(N(80220764))
+        EVT_EXEC_WAIT(N(die))
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80220684) = {
+EvtScript N(spawnWhackasBump) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Idle)
@@ -291,7 +298,7 @@ EvtScript N(80220684) = {
     EVT_END
 };
 
-EvtScript N(80220764) = {
+EvtScript N(die) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
@@ -299,7 +306,7 @@ EvtScript N(80220764) = {
     EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(SetBattleFlagBits2, 0x10000000, 1)
+        EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_10000000, 1)
     EVT_END_IF
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, 1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, 1)
