@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001E40;
+extern Gfx D_09001E40_36CD20[];
 extern Gfx* D_E00685B0[];
 extern Gfx* D_E00685BC[];
 extern Gfx* D_E00685F4[];
@@ -147,7 +147,7 @@ void ending_decals_appendGfx(void* effect) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_24, data->unk_25, data->unk_26, alpha);
     gDPSetEnvColor(gMasterGfxPos++, data->unk_27, data->unk_28, data->unk_29, 0);
 
-    if (dlist2 == &D_09001E40) {
+    if (dlist2 == D_09001E40_36CD20) {
         dlist2 = D_E00685BC[unk_20 % 14];
     }
 

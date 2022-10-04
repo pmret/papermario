@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090003A0[];
-extern Gfx D_09000420[];
+extern Gfx D_090003A0_38ED30[];
+extern Gfx D_09000420_38EDB0[];
 
 void fx_46_appendGfx(void* effect);
 
@@ -96,7 +96,7 @@ void fx_46_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000420);
+    gSPDisplayList(gMasterGfxPos++, D_09000420_38EDB0);
 
     shim_guTranslateF(sp20, part->unk_08, part->unk_0C, part->unk_10);
     shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -124,7 +124,7 @@ void fx_46_appendGfx(void* effect) {
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090003A0);
+        gSPDisplayList(gMasterGfxPos++, D_090003A0_38ED30);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 

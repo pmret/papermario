@@ -565,8 +565,20 @@ typedef struct FlameFXData {
 } FlameFXData; // size = 0x34
 
 typedef struct StarsBurstFXData {
-    /* 0x00 */ char todo[0];
-} StarsBurstFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ char unk_1C[8];
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+} StarsBurstFXData; // size = 0x38
 
 typedef struct StarsShimmerFXData {
     /* 0x00 */ char todo[0];

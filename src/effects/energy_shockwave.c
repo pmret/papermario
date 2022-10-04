@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000DC0[];
-extern Gfx D_09000E60[];
+extern Gfx D_09000DC0_3762D0[];
+extern Gfx D_09000E60_376370[];
 
 void energy_shockwave_init(EffectInstance* effect);
 void energy_shockwave_update(EffectInstance* effect);
@@ -146,7 +146,7 @@ void energy_shockwave_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000E60);
+    gSPDisplayList(gMasterGfxPos++, D_09000E60_376370);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 179, 30, data->unk_24);
     gDPSetEnvColor(gMasterGfxPos++, data->unk_50, data->unk_51, data->unk_52, 128);
 
@@ -164,7 +164,7 @@ void energy_shockwave_appendGfx(void* effect) {
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000DC0);
+    gSPDisplayList(gMasterGfxPos++, D_09000DC0_3762D0);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
 }

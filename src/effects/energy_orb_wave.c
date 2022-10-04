@@ -1,11 +1,11 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001000[];
-extern Gfx D_090010A8[];
-extern Gfx D_090011D0[];
-extern Gfx D_090011F0[];
-extern Gfx D_09001210[];
+extern Gfx D_09001000_3A5320[];
+extern Gfx D_090010A8_3A53C8[];
+extern Gfx D_090011D0_3A54F0[];
+extern Gfx D_090011F0_3A5510[];
+extern Gfx D_09001210_3A5530[];
 
 void energy_orb_wave_init(EffectInstance* effect);
 void energy_orb_wave_update(EffectInstance* effect);
@@ -126,13 +126,13 @@ void energy_orb_wave_appendGfx(void* effect) {
     gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
 
     if (unk_00 < 3) {
-        gSPDisplayList(gMasterGfxPos++, D_09001000);
+        gSPDisplayList(gMasterGfxPos++, D_09001000_3A5320);
 
         shim_guRotateF(sp18, unk_14, 0.0f, 0.0f, 1.0f);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090011D0);
+        gSPDisplayList(gMasterGfxPos++, D_090011D0_3A54F0);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
 
@@ -140,11 +140,11 @@ void energy_orb_wave_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090011F0);
+        gSPDisplayList(gMasterGfxPos++, D_090011F0_3A5510);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_090010A8);
-        gSPDisplayList(gMasterGfxPos++, D_09001210);
+        gSPDisplayList(gMasterGfxPos++, D_090010A8_3A53C8);
+        gSPDisplayList(gMasterGfxPos++, D_09001210_3A5530);
     }
 
     gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
