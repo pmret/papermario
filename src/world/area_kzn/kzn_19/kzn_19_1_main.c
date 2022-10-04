@@ -132,7 +132,7 @@ EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
-            EVT_CALL(SetTexPanOffset, 13, 0, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
             EVT_ADD(LVar0, 0x8000)
             EVT_WAIT(6)
         EVT_END_LOOP
@@ -140,7 +140,7 @@ EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
-            EVT_CALL(SetTexPanOffset, 14, 0, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar0, 0)
             EVT_ADD(LVar0, 0x8000)
             EVT_WAIT(4)
         EVT_END_LOOP

@@ -26,7 +26,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
             D_802A1CD0 = create_generic_entity_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0] = 1;
         case 1:
-            camera->flags |= CAM_FLAG_SHAKING;
+            camera->flags |= CAMERA_FLAGS_SHAKING;
             a = script->functionTemp[1];
             guRotateF(camera->viewMtxShaking, a, 0.0f, 0.0f, 1.0f);
             script->functionTemp[1] = 2.0 * ((1.0 - sin_rad(DEG_TO_RAD(script->functionTemp[2] + 90))) * 360.0);
@@ -35,7 +35,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
             camera->auxPitch = 0;
-            camera->flags &= ~CAM_FLAG_SHAKING;
+            camera->flags &= ~CAMERA_FLAGS_SHAKING;
             free_generic_entity(D_802A1CD0);
             return ApiStatus_DONE2;
     }

@@ -13,6 +13,13 @@ enum SpriteIDFields {
     SPRITE_ID_TAIL_ALLOCATE     = 0x80000000,
 };
 
+enum DrawSpriteOptions {
+    DRAW_SPRITE_UPSIDE_DOWN         = 0x10000000,
+    DRAW_SPRITE_OVERRIDE_PALETTES   = 0x20000000,
+    DRAW_SPRITE_OVERRIDE_YAW        = 0x40000000,
+    DRAW_SPRITE_OVERRIDE_ALPHA      = 0x80000000,
+};
+
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
     /* 0x04 */ s32 properties; ///< AABBCCCC : AA = unused?, BB = parent, CCCC = notify value
@@ -140,7 +147,7 @@ void func_802DE780(s32, s32, s32, s32, s32, s32, s32, s32);
 
 void func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-//s32 func_802DE8DC(); // TODO
+s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ);
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 

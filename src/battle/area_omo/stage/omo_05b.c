@@ -1,9 +1,10 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/omo_bt05_shape.h"
 
 #define NAMESPACE b_area_omo_omo_05b
 
-EvtScript N(beforeBattle_8022F580) = {
+EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 35, 0)
@@ -12,13 +13,13 @@ EvtScript N(beforeBattle_8022F580) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8022F5E4) = {
+EvtScript N(afterBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8022F5F4)[] = {
-    0x0000001B, 0x00000000,
+s32 N(foregroundModelList)[] = {
+    MODEL_mae2, 0,
 };
 
 Stage NAMESPACE = {
@@ -26,7 +27,7 @@ Stage NAMESPACE = {
     .shape = "omo_bt05_shape",
     .hit = "omo_bt05_hit",
     .bg = "omo_bg",
-    .preBattle = &N(beforeBattle_8022F580),
-    .postBattle = &N(afterBattle_8022F5E4),
-    .foregroundModelList = N(foregroundModelList_8022F5F4),
+    .preBattle = &N(beforeBattle),
+    .postBattle = &N(afterBattle),
+    .foregroundModelList = N(foregroundModelList),
 };

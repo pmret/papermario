@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_omo_omo_03
 
-EvtScript N(beforeBattle_8022DC20) = {
+EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 18, 0)
@@ -11,7 +11,7 @@ EvtScript N(beforeBattle_8022DC20) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8022DC70) = {
+EvtScript N(afterBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -21,6 +21,6 @@ Stage NAMESPACE = {
     .shape = "omo_bt03_shape",
     .hit = "omo_bt03_hit",
     .bg = "omo_bg",
-    .preBattle = &N(beforeBattle_8022DC20),
-    .postBattle = &N(afterBattle_8022DC70),
+    .preBattle = &N(beforeBattle),
+    .postBattle = &N(afterBattle),
 };

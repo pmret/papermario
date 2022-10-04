@@ -1,7 +1,7 @@
 #include "kzn_06.h"
 #include "model.h"
 
-const s32 pad_rodata_C6E318 = 0;
+MAP_RODATA_PAD(1, C6E318);
 
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 

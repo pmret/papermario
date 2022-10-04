@@ -13,14 +13,14 @@ enum Reflection {
     REFLECTION_WALL,
 };
 
-void N(reflection_setup_wall)(void);
-void N(reflection_setup_floor)(void);
-void N(reflection_render_wall)(PlayerStatus* playerStatus);
-void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus);
-void N(reflection_render_floor)(PlayerStatus* playerStatus);
-void N(SetPartnerFlagsA0000)(void);
-void N(SetPartnerFlags80000)(void);
-void N(SetPartnerFlags20000)(void);
+void N(worker_reflect_player_wall)(void);
+void N(worker_reflect_player_floor)(void);
+void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus);
+void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus);
+void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus);
+void N(worker_reflect_partner_all)(void);
+void N(worker_reflect_partner_floor)(void);
+void N(worker_reflect_partner_wall)(void);
 
 s32 N(reflection_unk_resolve_anim)(s32 playerAnim) {
     AnimID temp;
@@ -62,25 +62,23 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
     return playerAnim | SPRITE_ID_BACK_FACING;
 }
 
-ApiStatus N(ReflectWall)(Evt* script, s32 isInitialCall) {
-    script->array[0] = (s32) create_generic_entity_world(NULL, N(reflection_setup_wall));
+API_CALLABLE(N(EnableWallReflection)){
+    script->array[0] = (s32) create_generic_entity_world(NULL, N(worker_reflect_player_wall));
     return ApiStatus_DONE2;
 }
 
-void N(reflection_setup_wall)(void) {
+void N(worker_reflect_player_wall)(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 anim;
     EntityModel* entityModel;
     s32 renderMode = playerStatus->renderMode;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
-    s32 screenX;
-    s32 screenY;
-    s32 screenZ;
+    s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_1) {
+    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= MODEL_FLAGS_FLAG_200;
+        entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
@@ -111,13 +109,13 @@ void N(reflection_setup_wall)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = (void(*))N(reflection_render_wall);
+        renderTaskPtr->appendGfx = (void(*))N(appendGfx_reflect_player_wall);
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
 
-void N(reflection_render_wall)(PlayerStatus* playerStatus) {
+void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
     f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
@@ -138,11 +136,11 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(2, 0, 0, NULL, main);
 }
 
-ApiStatus N(ReflectFloor)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(EnableFloorReflection)){
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
-            script->array[0] = create_generic_entity_world(NULL, N(reflection_setup_floor));
+            script->array[0] = create_generic_entity_world(NULL, N(worker_reflect_player_floor));
             gOverrideFlags |= GLOBAL_OVERRIDES_80;
             break;
         case REFLECTION_WALL:
@@ -152,7 +150,7 @@ ApiStatus N(ReflectFloor)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(reflection_setup_floor)(void) {
+void N(worker_reflect_player_floor)(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     EntityModel* entityModel;
     s32 renderMode = playerStatus->renderMode;
@@ -160,7 +158,7 @@ void N(reflection_setup_floor)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_1) {
+    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
@@ -189,14 +187,14 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->distance = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
             !(playerStatus->flags & PS_FLAGS_20000)
-                ? N(reflection_render_floor)
-                : N(reflection_render_floor_fancy)
+                ? N(appendGfx_reflect_player_floor_basic)
+                : N(appendGfx_reflect_player_floor_fancy)
         );
         queue_render_task(renderTaskPtr);
     }
 }
 
-void N(reflection_render_floor)(PlayerStatus* playerStatus) {
+void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus) {
     f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
@@ -225,7 +223,7 @@ void N(reflection_render_floor)(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(flags, 0, 0, NULL, main);
 }
 
-void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
+void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
     Matrix4f mtx;
     Matrix4f translation;
     Matrix4f rotation;
@@ -307,7 +305,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
 
         flags = 1;
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            flags |= 0x10000000;
+            flags |= DRAW_SPRITE_UPSIDE_DOWN;
         }
 
         spr_draw_player_sprite(flags, 0, 0, NULL, mtx);
@@ -316,26 +314,26 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
 
 /// int var0 = reflection type
 /// bool var1 = enable wall reflection
-ApiStatus N(ReflectPartner)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(EnablePartnerReflection)){
     Npc* partner;
 
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                script->array[1] = create_generic_entity_world(N(SetPartnerFlagsA0000), NULL);
+                script->array[1] = create_generic_entity_world(N(worker_reflect_partner_all), NULL);
                 break;
             case REFLECTION_FLOOR:
-                script->array[1] = create_generic_entity_world(N(SetPartnerFlags80000), NULL);
+                script->array[1] = create_generic_entity_world(N(worker_reflect_partner_floor), NULL);
                 break;
             case REFLECTION_WALL:
-                script->array[1] = create_generic_entity_world(N(SetPartnerFlags20000), NULL);
+                script->array[1] = create_generic_entity_world(N(worker_reflect_partner_wall), NULL);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
-                script->array[1] = create_generic_entity_world(N(SetPartnerFlags80000), NULL);
+                script->array[1] = create_generic_entity_world(N(worker_reflect_partner_floor), NULL);
                 break;
             case REFLECTION_WALL:
                 break;
@@ -374,7 +372,7 @@ ApiStatus N(ReflectPartner)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(SetPartnerFlagsA0000)(void) {
+void N(worker_reflect_partner_all)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
@@ -382,7 +380,7 @@ void N(SetPartnerFlagsA0000)(void) {
     }
 }
 
-void N(SetPartnerFlags80000)(void) {
+void N(worker_reflect_partner_floor)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
@@ -390,7 +388,7 @@ void N(SetPartnerFlags80000)(void) {
     }
 }
 
-void N(SetPartnerFlags20000)(void) {
+void N(worker_reflect_partner_wall)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
@@ -408,14 +406,14 @@ void N(SetPartnerFlags20000)(void) {
    10:  If  *Var1  ==  00000000
    20:      Switch  *Var0
    2C:          Case  ==  00000000
-   38:              Call  $Function_802400EC ( )    // ReflectWall
+   38:              Call  $Function_802400EC ( )    // EnableWallReflection
    44:          Case  ==  00000001
    50:          Case  ==  00000002
-   5C:              Call  $Function_802400EC ( )    // ReflectWall
+   5C:              Call  $Function_802400EC ( )    // EnableWallReflection
    68:      EndSwitch
    70:  EndIf
-   78:  Call  $Function_8024049C    ( *Var0 )       // ReflectFloor
-   88:  Call  $Function_80240D3C    ( *Var0 )       // ReflectPartner
+   78:  Call  $Function_8024049C    ( *Var0 )       // EnableFloorReflection
+   88:  Call  $Function_80240D3C    ( *Var0 )       // EnablePartnerReflection
    98:  Return
    A0:  End
 }

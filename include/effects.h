@@ -615,8 +615,14 @@ typedef struct SmokeBurstFXData {
 } SmokeBurstFXData; // size = 0x24
 
 typedef struct SweatFXData {
-    /* 0x00 */ char todo[0];
-} SweatFXData; // size = unknown
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x08];
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 timeLeft;
+} SweatFXData; // size = 0x28
 
 typedef struct SleepBubbleFXData {
     /* 0x00 */ s32 unk_00;
@@ -1518,15 +1524,22 @@ typedef struct ShinyFlareFXData {
 } ShinyFlareFXData; // size = unknown
 
 typedef struct HuffPuffBreathFXData {
-    /* 0x00 */ char unk_00[0x18];
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk_24[0x4];
+    /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
-} HuffPuffBreathFXData; // size = ?
+    /* 0x34 */ char unk_34[0x04];
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+} HuffPuffBreathFXData; // size = 0x48
 
 typedef struct ColdBreathFXData {
     /* 0x00 */ s32 unk_00;
@@ -1580,8 +1593,12 @@ typedef struct EmbersFXData {
 } EmbersFXData; // size = 0x70
 
 typedef struct HieroglyphsFXData {
-    /* 0x00 */ char todo[0];
-} HieroglyphsFXData; // size = unknown
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ char unk_18[0x0C];
+    /* 0x24 */ s32 unk_24;
+} HieroglyphsFXData; // size = 0x28
 
 typedef struct MiscParticlesFXData {
     char unk_00[0x4];

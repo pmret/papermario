@@ -3,7 +3,7 @@
 
 extern s32 N(D_80240970_8AADC0);
 
-void func_80240160_8AA5B0(s32 x1, s32 y1, s32 x2, s32 y2, s32 arg4) {
+void N(func_80240160_8AA5B0)(s32 x1, s32 y1, s32 x2, s32 y2, s32 arg4) {
     s32 i;
     f32 f0;
     s32 n, m;

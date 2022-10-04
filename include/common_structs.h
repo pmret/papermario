@@ -784,7 +784,7 @@ typedef struct Camera {
     /* 0x4D6 */ u16 prevFollowFlags;
     /* 0x4D8 */ CameraControlSettings controlSettings;
     /* 0x504 */ u16 followPlayer;
-    /* 0x506 */ u16 unk_506;
+    /* 0x506 */ u16 panActive;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
     /* 0x510 */ f32 unk_510;
@@ -2409,7 +2409,7 @@ typedef struct MusicEvent {
 
 typedef struct ParadeNpcInfo {
     /* 0x00 */ u32 initialAnim;
-    /* 0x04 */ u32** animList;
+    /* 0x04 */ AnimID* animList;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ f32 yaw;
 } ParadeNpcInfo; // size = 0x18

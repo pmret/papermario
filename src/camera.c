@@ -63,7 +63,7 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
 void func_80032970(Camera* camera, f32 arg1) {
     f32 stickX;
     f32 deltaLeadAmount;
-    s32 flags = camera->flags & CAM_FLAG_1000;
+    s32 flags = camera->flags & CAMERA_FLAGS_1000;
     s32 a2 = flags != 0;
 
     if (camera->currentController != NULL && camera->currentController->type == CAMERA_SETTINGS_TYPE_4) {
@@ -283,7 +283,6 @@ void func_80032C64(Camera* camera) {
         }
     }
 }
-
 
 void create_camera_leadplayer_matrix(Camera* camera) {
     f32 xTemp = camera->lookAt_eye.x - camera->lookAt_obj.x;
