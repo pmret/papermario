@@ -157,8 +157,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_FLO] = {
         BTL_AREA(area_flo),
         .name = "エリア ＦＬＯ",
-        .battles = 0x80234574,
-        .stages = 0x8023486C,
+        .battles = &b_area_flo_formationTable,
+        .stages = &b_area_flo_stageTable,
     },
     [BTL_AREA_FLO2] = {
         BTL_AREA(area_flo2),

@@ -5046,9 +5046,22 @@ segments:
     start: 0x5CE690
     vram: 0x80218000
     subsegments:
-    - [0x5CE690, c]
-    - [0x5CF2D0, c]
-    - [0x5CFF00, data]
+    - [0x5CE690, c, actor/huff_n_puff]
+    - [0x5CF2D0, c, actor/tuff_puff]
+    - [0x5CF460, c, actor/monty_mole_boss]
+    - [0x5CF460, c, actor/spike]
+    - [0x5CF460, c, stage/flo_01]
+    - [0x5CF520, c, stage/flo_01b]
+    - [0x5CF5E0, c, stage/flo_01c]
+    - [0x5CF6A0, c, stage/flo_02]
+    - [0x5CF760, c, stage/flo_02b]
+    - [0x5CF820, c, stage/flo_02c]
+    - [0x5CF8E0, c, stage/flo_03]
+    - [0x5CFB30, c, stage/flo_04]
+    - [0x5CFD80, c, stage/flo_05]
+    - [0x5CFE40, c, stage/flo_06]
+    - [0x5CFF00, c, area]
+    - [0x5CFF00]
   - dir: battle/area_tik
     type: code
     start: 0x5EC490
