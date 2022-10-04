@@ -1,5 +1,5 @@
 #include "common.h"
-#include "../src/world/partners.h"
+#include "world/partners.h"
 #include "npc.h"
 #include "effects.h"
 #include "sprite/npc/WorldSushie.h"

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "battle/battle.h"
 
 extern f64 D_8023C060_70BD00;
 extern s32 D_8023C070;
