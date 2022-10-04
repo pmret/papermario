@@ -8,9 +8,9 @@
 
 typedef struct UnkE20EB0 {
     /* 0x00 */ Npc* unk_00;
-    /* 0x04 */ Vec3f unk_04;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
+    /* 0x14 */ f32 scale;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -38,17 +38,17 @@ void func_802B70B4(void) {
     npc = playerStatus->encounteredNPC;
     D_802B79A8_E21858->unk_00 = npc;
     D_802B79A8_E21858->unk_1C = npc->pos.y + npc->collisionHeight + 8.0f;
-    D_802B79A8_E21858->unk_04.y = D_802B79A8_E21858->unk_1C;
-    D_802B79A8_E21858->unk_04.x = npc->pos.x;
-    D_802B79A8_E21858->unk_04.z = npc->pos.z;
+    D_802B79A8_E21858->pos.y = D_802B79A8_E21858->unk_1C;
+    D_802B79A8_E21858->pos.x = npc->pos.x;
+    D_802B79A8_E21858->pos.z = npc->pos.z;
     D_802B79A8_E21858->unk_18 = 0;
     D_802B79A8_E21858->unk_2A = 0;
-    D_802B79A8_E21858->unk_14 = 0.1f;
+    D_802B79A8_E21858->scale = 0.1f;
     D_8010C940 = func_802B742C;
     playerStatus->animFlags |= PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
     temp = D_802B79A8_E21858;
     temp->unk_2A = 0;
-    temp->unk_14 = 0.4f;
+    temp->scale = 0.4f;
     D_802B79A8_E21858->unk_10 = -gCameras[gCurrentCameraID].currentYaw;
     D_802B79A8_E21858->unk_2B = 255;
 }
@@ -58,10 +58,10 @@ void func_802B71C8(void) {
     Matrix4f sp38, sp78;
 
     if (gPlayerStatus.animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) {
-        guScaleF(sp38, D_802B79A8_E21858->unk_14, D_802B79A8_E21858->unk_14, D_802B79A8_E21858->unk_14);
+        guScaleF(sp38, D_802B79A8_E21858->scale, D_802B79A8_E21858->scale, D_802B79A8_E21858->scale);
         guRotateF(sp78, D_802B79A8_E21858->unk_10 - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp38, sp78, sp38);
-        guTranslateF(sp78, D_802B79A8_E21858->unk_04.x, D_802B79A8_E21858->unk_04.y, D_802B79A8_E21858->unk_04.z);
+        guTranslateF(sp78, D_802B79A8_E21858->pos.x, D_802B79A8_E21858->pos.y, D_802B79A8_E21858->pos.z);
         guMtxCatF(sp38, sp78, sp78);
         guMtxF2L(sp78, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -104,9 +104,9 @@ void func_802B742C(void) {
     switch (D_802B79A8_E21858->unk_2A) {
         case 0:
             D_802B79A8_E21858->unk_10 = 0.0f;
-            D_802B79A8_E21858->unk_14 += 0.05;
-            if (D_802B79A8_E21858->unk_14 >= 0.55) {
-                D_802B79A8_E21858->unk_14 = 0.55f;
+            D_802B79A8_E21858->scale += 0.05;
+            if (D_802B79A8_E21858->scale >= 0.55) {
+                D_802B79A8_E21858->scale = 0.55f;
                 D_802B79A8_E21858->unk_2A++;
                 D_802B79A8_E21858->unk_20 = 12;
             }
@@ -153,7 +153,7 @@ void func_802B742C(void) {
 
     npc = D_802B79A8_E21858->unk_00;
     D_802B79A8_E21858->unk_1C = npc->pos.y + npc->collisionHeight + 8.0f;
-    D_802B79A8_E21858->unk_04.y = D_802B79A8_E21858->unk_1C;
-    D_802B79A8_E21858->unk_04.x = npc->pos.x;
-    D_802B79A8_E21858->unk_04.z = npc->pos.z;
+    D_802B79A8_E21858->pos.y = D_802B79A8_E21858->unk_1C;
+    D_802B79A8_E21858->pos.x = npc->pos.x;
+    D_802B79A8_E21858->pos.z = npc->pos.z;
 }
