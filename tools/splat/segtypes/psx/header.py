@@ -6,7 +6,7 @@ class PsxSegHeader(CommonSegHeader):
     # breakdown from https://psx-spx.consoledev.net/cdromdrive/#filenameexe-general-purpose-executable
     def parse_header(self, rom_bytes):
         header_lines = []
-        header_lines.append(f".section .data\n")
+        header_lines.append(".section .data\n")
         header_lines.append(
             self.get_line("ascii", rom_bytes[0x00:0x08], "Magic number")
         )

@@ -1,13 +1,18 @@
+from itertools import zip_longest
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
 from segtypes.n64.segment import N64Segment
 from util import log, options
 from util.color import unpack_color
-from util.iter import iter_in_groups
 
 if TYPE_CHECKING:
     from segtypes.n64.ci import N64SegCi as Raster
+
+
+def iter_in_groups(iterable, n, fillvalue=None):
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
 
 
 class N64SegPalette(N64Segment):

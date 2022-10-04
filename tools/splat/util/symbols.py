@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional, TYPE_CHECKING, Set
 import spimdisasm
 import tqdm
+from dataclasses import dataclass
 
 # circular import
 if TYPE_CHECKING:
@@ -12,6 +13,7 @@ all_symbols: List["Symbol"] = []
 all_symbols_dict: Dict[int, List["Symbol"]] = {}
 ignored_addresses: Set[int] = set()
 symbol_ranges: List["Symbol"] = []
+to_mark_as_defined: Set[str] = set()
 
 # Initialize a spimdisasm context, used to store symbols and functions
 spim_context = spimdisasm.common.Context()
@@ -194,48 +196,55 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
 
     spim_context.bannedSymbols |= ignored_addresses
 
+    from segtypes.common.code import CommonSegCode
+
     for segment in all_segments:
-        if segment.type == "code":
+        if not isinstance(segment, CommonSegCode):
             # We only care about the VRAMs of code segments
-            if isinstance(segment.vram_start, int) and isinstance(
-                segment.vram_end, int
-            ):
-                ram_id = segment.get_exclusive_ram_id()
-                if ram_id is None:
-                    if global_vram_start is None:
-                        global_vram_start = segment.vram_start
-                    else:
-                        if segment.vram_start < global_vram_start:
-                            global_vram_start = segment.vram_start
+            continue
 
-                    if global_vram_end is None:
-                        global_vram_end = segment.vram_end
-                    else:
-                        if global_vram_end < segment.vram_end:
-                            global_vram_end = segment.vram_end
+        if (
+            not isinstance(segment.vram_start, int)
+            or not isinstance(segment.vram_end, int)
+            or not isinstance(segment.rom_start, int)
+            or not isinstance(segment.rom_end, int)
+        ):
+            continue
 
-                    if isinstance(segment.rom_start, int):
-                        if global_vrom_start is None:
-                            global_vrom_start = segment.rom_start
-                        else:
-                            if segment.rom_start < global_vrom_start:
-                                global_vrom_start = segment.rom_start
+        ram_id = segment.get_exclusive_ram_id()
+        if ram_id is None:
+            if global_vram_start is None:
+                global_vram_start = segment.vram_start
+            elif segment.vram_start < global_vram_start:
+                global_vram_start = segment.vram_start
 
-                    if isinstance(segment.rom_end, int):
-                        if global_vrom_end is None:
-                            global_vrom_end = segment.rom_end
-                        else:
-                            if global_vrom_end < segment.rom_end:
-                                global_vrom_end = segment.rom_end
+            if global_vram_end is None:
+                global_vram_end = segment.vram_end
+            elif global_vram_end < segment.vram_end:
+                global_vram_end = segment.vram_end
 
-                else:
-                    spim_context.addOverlaySegment(
-                        ram_id,
-                        segment.rom_start,
-                        segment.rom_end,
-                        segment.vram_start,
-                        segment.vram_end,
-                    )
+            if global_vrom_start is None:
+                global_vrom_start = segment.rom_start
+            elif segment.rom_start < global_vrom_start:
+                global_vrom_start = segment.rom_start
+
+            if global_vrom_end is None:
+                global_vrom_end = segment.rom_end
+            elif global_vrom_end < segment.rom_end:
+                global_vrom_end = segment.rom_end
+
+        else:
+            spim_segment = spim_context.addOverlaySegment(
+                ram_id,
+                segment.rom_start,
+                segment.rom_end,
+                segment.vram_start,
+                segment.vram_end,
+            )
+            # Add the segment-specific symbols first
+            for symbols_list in segment.seg_symbols.values():
+                for sym in symbols_list:
+                    add_symbol_to_spim_segment(spim_segment, sym)
 
     if (
         global_vram_start is not None
@@ -247,9 +256,62 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
             global_vrom_start, global_vrom_end, global_vram_start, global_vram_end
         )
 
+    # pass the global symbols to spimdisasm
+    for segment in all_segments:
+        if not isinstance(segment, CommonSegCode):
+            # We only care about the VRAMs of code segments
+            continue
+
+        ram_id = segment.get_exclusive_ram_id()
+        if ram_id is not None:
+            continue
+
+        for symbols_list in segment.seg_symbols.values():
+            for sym in symbols_list:
+                add_symbol_to_spim_segment(spim_context.globalSegment, sym)
+
+
+def add_symbol_to_spim_segment(
+    segment: spimdisasm.common.SymbolsSegment, sym: "Symbol"
+) -> spimdisasm.common.ContextSymbol:
+    if sym.type == "func":
+        context_sym = segment.addFunction(
+            sym.vram_start, isAutogenerated=not sym.user_declared, vromAddress=sym.rom
+        )
+    elif sym.type == "jtbl":
+        context_sym = segment.addJumpTable(
+            sym.vram_start, isAutogenerated=not sym.user_declared, vromAddress=sym.rom
+        )
+    elif sym.type == "jtbl_label":
+        context_sym = segment.addJumpTableLabel(
+            sym.vram_start, isAutogenerated=not sym.user_declared, vromAddress=sym.rom
+        )
+    elif sym.type == "label":
+        context_sym = segment.addBranchLabel(
+            sym.vram_start, isAutogenerated=not sym.user_declared, vromAddress=sym.rom
+        )
+    else:
+        context_sym = segment.addSymbol(
+            sym.vram_start, isAutogenerated=not sym.user_declared, vromAddress=sym.rom
+        )
+        if sym.type is not None:
+            context_sym.type = sym.type
+
+    if sym.user_declared:
+        context_sym.isUserDeclared = True
+    if sym.defined:
+        context_sym.isDefined = True
+    if sym.rom is not None:
+        context_sym.vromAddress = sym.rom
+    if sym.given_size is not None:
+        context_sym.size = sym.size
+    context_sym.setNameGetCallbackIfUnset(lambda _: sym.name)
+
+    return context_sym
+
 
 def add_symbol_to_spim_section(
-    section: spimdisasm.common.ElementBase, sym: "Symbol"
+    section: spimdisasm.mips.sections.SectionBase, sym: "Symbol"
 ) -> spimdisasm.common.ContextSymbol:
     if sym.type == "func":
         context_sym = section.addFunction(
@@ -271,7 +333,7 @@ def add_symbol_to_spim_section(
         context_sym = section.addSymbol(
             sym.vram_start, isAutogenerated=not sym.user_declared, symbolVrom=sym.rom
         )
-        if sym.type and sym.type != "unknown":
+        if sym.type is not None:
             context_sym.type = sym.type
 
     if sym.user_declared:
@@ -355,27 +417,34 @@ def retrieve_from_ranges(vram, rom=None):
         return None
 
 
+def mark_c_funcs_as_defined():
+    for symbol in all_symbols:
+        if len(to_mark_as_defined) == 0:
+            return
+        sym_name = symbol.name
+        if sym_name in to_mark_as_defined:
+            symbol.defined = True
+            to_mark_as_defined.remove(sym_name)
+
+
+@dataclass
 class Symbol:
-    def __init__(
-        self,
-        vram: int,
-        given_name: Optional[str] = None,
-        rom: Optional[int] = None,
-        type: Optional[str] = "unknown",
-        given_size: Optional[int] = None,
-        segment: Optional["Segment"] = None,
-    ):
-        self.defined: bool = False
-        self.referenced: bool = False
-        self.vram_start = vram
-        self.rom = rom
-        self.type = type
-        self.given_size = given_size
-        self.given_name = given_name
-        self.dead: bool = False
-        self.extract: bool = True
-        self.user_declared: bool = False
-        self.segment: Optional["Segment"] = segment
+    vram_start: int
+
+    given_name: Optional[str] = None
+    rom: Optional[int] = None
+    type: Optional[str] = None
+    given_size: Optional[int] = None
+    segment: Optional["Segment"] = None
+
+    defined: bool = False
+    referenced: bool = False
+    dead: bool = False
+    extract: bool = True
+    user_declared: bool = False
+
+    _generated_default_name: Optional[str] = None
+    _last_type: Optional[str] = None
 
     def __str__(self):
         return self.name
@@ -403,6 +472,10 @@ class Symbol:
 
     @property
     def default_name(self) -> str:
+        if self._generated_default_name is not None:
+            if self.type == self._last_type:
+                return self._generated_default_name
+
         if self.segment:
             if isinstance(self.rom, int):
                 suffix = self.format_name(self.segment.symbol_name_format)
@@ -425,7 +498,9 @@ class Symbol:
         else:
             prefix = "D"
 
-        return f"{prefix}_{suffix}"
+        self._last_type = self.type
+        self._generated_default_name = f"{prefix}_{suffix}"
+        return self._generated_default_name
 
     @property
     def rom_end(self):

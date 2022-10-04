@@ -49,6 +49,12 @@ def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
     return None
 
 
+def parse_segment_follows_vram_symbol(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict):
+        return segment.get("follows_vram_symbol", None)
+    return None
+
+
 class Segment:
     require_unique_name = True
 
@@ -96,7 +102,9 @@ class Segment:
             ext_spec = importlib.util.spec_from_file_location(
                 f"{platform}.segtypes.{seg_type}", ext_path / f"{seg_type}.py"
             )
+            assert ext_spec is not None
             ext_mod = importlib.util.module_from_spec(ext_spec)
+            assert ext_spec.loader is not None
             ext_spec.loader.exec_module(ext_mod)
         except Exception as err:
             log.write(err, status="error")
@@ -159,34 +167,31 @@ class Segment:
         type: str,
         name: str,
         vram_start: Any,
-        extract: bool,
-        given_subalign: Optional[int],
-        exclusive_ram_id: Optional[str],
-        given_dir: Path,
-        symbol_name_format: str,
-        symbol_name_format_no_rom: str,
-        args=[],
-        yaml={},
+        args: list,
+        yaml,
     ):
         self.rom_start = rom_start
         self.rom_end = rom_end
         self.type = type
         self.name = name
         self.vram_start = vram_start
-        self.extract = extract
 
         self.align: Optional[int] = None
-        self.given_subalign = given_subalign or options.opts.subalign
-        self.exclusive_ram_id: Optional[str] = exclusive_ram_id
-        self.given_dir: Path = given_dir
-        self.given_seg_symbols: Dict[
-            int, List[Symbol]
-        ] = {}  # Symbols known to be in this segment
+        self.given_subalign: int = options.opts.subalign
+        self.exclusive_ram_id: Optional[str] = None
+        self.given_dir: Path = Path()
+
+        # Symbols known to be in this segment
+        self.given_seg_symbols: Dict[int, List[Symbol]] = {}
+
         self.given_section_order: List[str] = options.opts.section_order
         self.follows_vram: Optional[str] = None
+        self.follows_vram_symbol: Optional[str] = None
 
-        self.given_symbol_name_format = symbol_name_format
-        self.given_symbol_name_format_no_rom = symbol_name_format_no_rom
+        self.given_symbol_name_format: str = options.opts.symbol_name_format
+        self.given_symbol_name_format_no_rom: str = (
+            options.opts.symbol_name_format_no_rom
+        )
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
@@ -195,10 +200,10 @@ class Segment:
         self.args: List[str] = args
         self.yaml = yaml
 
+        self.extract: bool = True
         if self.rom_start == "auto":
             self.extract = False
-
-        if self.type.startswith("."):
+        elif self.type.startswith("."):
             self.extract = False
 
         self.warnings: List[str] = []
@@ -221,16 +226,7 @@ class Segment:
         type = Segment.parse_segment_type(yaml)
         name = Segment.parse_segment_name(cls, rom_start, yaml)
         vram_start = vram if vram is not None else parse_segment_vram(yaml)
-        extract = bool(yaml.get("extract", True)) if isinstance(yaml, dict) else True
-        given_subalign = parse_segment_subalign(yaml)
-        exclusive_ram_id: Optional[str] = (
-            yaml.get("exclusive_ram_id") if isinstance(yaml, dict) else None
-        )
-        given_dir = Path(yaml.get("dir", "")) if isinstance(yaml, dict) else Path()
-        given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
-        given_symbol_name_format_no_rom = (
-            Segment.parse_segment_symbol_name_format_no_rom(yaml)
-        )
+
         args: List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
         ret = cls(
@@ -239,19 +235,25 @@ class Segment:
             type=type,
             name=name,
             vram_start=vram_start,
-            extract=extract,
-            given_subalign=given_subalign,
-            exclusive_ram_id=exclusive_ram_id,
-            given_dir=given_dir,
-            symbol_name_format=given_symbol_name_format,
-            symbol_name_format_no_rom=given_symbol_name_format_no_rom,
             args=args,
             yaml=yaml,
         )
         ret.given_section_order = parse_segment_section_order(yaml)
+        ret.given_subalign = parse_segment_subalign(yaml)
+        if isinstance(yaml, dict):
+            ret.extract = bool(yaml.get("extract", ret.extract))
+            ret.exclusive_ram_id = yaml.get("exclusive_ram_id")
+            ret.given_dir = Path(yaml.get("dir", ""))
+        ret.given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
+        ret.given_symbol_name_format_no_rom = (
+            Segment.parse_segment_symbol_name_format_no_rom(yaml)
+        )
 
         if not ret.follows_vram:
             ret.follows_vram = parse_segment_follows_vram(yaml)
+
+        if not ret.follows_vram_symbol:
+            ret.follows_vram_symbol = parse_segment_follows_vram_symbol(yaml)
 
         if not ret.align:
             ret.align = parse_segment_align(yaml)

@@ -1,6 +1,6 @@
 from segtypes.n64.segment import N64Segment
+from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
-from util.iter import iter_in_groups
 from util import options
 import png
 

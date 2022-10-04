@@ -14,6 +14,7 @@ src_dir = root_dir + "src/"
 CPP_FLAGS = [
     "-Iinclude",
     "-Isrc",
+    "-Iassets/us",
     "-Iver/current/build/include",
     "-D_LANGUAGE_C",
     "-DF3DEX_GBI_2",

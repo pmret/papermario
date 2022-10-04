@@ -2,7 +2,7 @@ from segtypes.n64.segment import N64Segment
 from pathlib import Path
 import struct
 from util.n64 import Yay0decompress
-from util.iter import iter_in_groups
+from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
 from util import options
 import png
@@ -269,12 +269,6 @@ class N64SegPm_npc_sprites(N64Segment):
         type,
         name,
         vram_start,
-        extract,
-        given_subalign,
-        exclusive_ram_id,
-        given_dir,
-        symbol_name_format,
-        symbol_name_format_no_rom,
         args,
         yaml,
     ):
@@ -284,12 +278,6 @@ class N64SegPm_npc_sprites(N64Segment):
             type,
             name,
             vram_start,
-            extract,
-            given_subalign,
-            exclusive_ram_id,
-            given_dir,
-            symbol_name_format=symbol_name_format,
-            symbol_name_format_no_rom=symbol_name_format_no_rom,
             args=args,
             yaml=yaml,
         )

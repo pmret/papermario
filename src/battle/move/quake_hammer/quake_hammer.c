@@ -599,7 +599,7 @@ EvtScript D_802A2DA0_0073CC70 = {
     EVT_END
 };
 
-EvtScript D_802A3044_0073CF14 = {
+EvtScript battle_move_quake_hammer_main = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)

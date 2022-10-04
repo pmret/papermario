@@ -1688,7 +1688,7 @@ enum ItemIDs {
     ITEM_ATTACK_FX_A                  = 0x000000F3,
     ITEM_ALLOR_NOTHING                = 0x000000F4,
     ITEM_HP_DRAIN                     = 0x000000F5,
-    ITEM_BOOTS_CHARGE0                 = 0x000000F6,
+    ITEM_BOOTS_CHARGE0                = 0x000000F6,
     ITEM_SLOW_GO                      = 0x000000F7,
     ITEM_FP_PLUS_A                    = 0x000000F8,
     ITEM_MEGA_RUSH                    = 0x000000F9,
@@ -1708,7 +1708,7 @@ enum ItemIDs {
     ITEM_HAMMER_THROW                 = 0x00000107,
     ITEM_MEGA_QUAKE                   = 0x00000108,
     ITEM_SMASH_CHARGE                 = 0x00000109,
-    ITEM_BOOTS_CHARGE                  = 0x0000010A,
+    ITEM_BOOTS_CHARGE                 = 0x0000010A,
     ITEM_S_SMASH_CHG                  = 0x0000010B,
     ITEM_S_JUMP_CHG                   = 0x0000010C,
     ITEM_POWER_RUSH                   = 0x0000010D,
@@ -3281,7 +3281,8 @@ enum PopupType {
     POPUP_MENU_TAKE_FROM_CHEST      = 0x9,
     POPUP_MENU_READ_DIARY_PAGE      = 0xA,
     POPUP_MENU_READ_POSTCARD        = 0xB,
-    POPUP_MENU_USEKEY               = 0xC
+    POPUP_MENU_USEKEY               = 0xC,
+    POPUP_MENU_D                    = 0xD,
 };
 
 /// not really

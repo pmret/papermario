@@ -26,12 +26,14 @@ class CommonSegRodata(CommonSegData):
             self.get_exclusive_ram_id(),
         )
 
-        for symbol_list in self.seg_symbols.values():
-            symbols.add_symbol_to_spim_section(self.spim_section, symbol_list[0])
+        # Set rodata string encoding
+        # First check the global configuration
+        if options.opts.string_encoding is not None:
+            self.spim_section.stringEncoding = options.opts.string_encoding
 
-        for sym in symbols.all_symbols:
-            if sym.user_declared:
-                symbols.add_symbol_to_spim_section(self.spim_section, sym)
+        # Then check the per-segment configuration in case we want to override the global one
+        if self.str_encoding is not None:
+            self.spim_section.stringEncoding = self.str_encoding
 
         self.spim_section.analyze()
         self.spim_section.setCommentOffset(self.rom_start)

@@ -1,9 +1,7 @@
 import spimdisasm
-from typing import List
 
 from segtypes.common.data import CommonSegData
-from segtypes.linker_entry import LinkerEntry
-from util import options, symbols
+from util import symbols
 
 
 class CommonSegBss(CommonSegData):
@@ -34,13 +32,6 @@ class CommonSegBss(CommonSegData):
             segment_rom_start,
             self.get_exclusive_ram_id(),
         )
-
-        for symbol_list in self.seg_symbols.values():
-            symbols.add_symbol_to_spim_section(self.spim_section, symbol_list[0])
-
-        for sym in symbols.all_symbols:
-            if sym.user_declared:
-                symbols.add_symbol_to_spim_section(self.spim_section, sym)
 
         self.spim_section.analyze()
         self.spim_section.setCommentOffset(self.rom_start)
