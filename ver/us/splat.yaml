@@ -9273,15 +9273,13 @@ segments:
     start: 0xB20540
     vram: 0x80240000
     subsegments:
-    - [0xB20540, c]
-    - [0xB216E0, c]
-    - [0xB21EA0, c]
-    - [0xB220E0, data]
-    - [0xB22190, data]
-    - [0xB226D0, data]
-    - [0xB25E90, data]
-    - [0xB275B0, data]
-    - [0xB27FE0]
+    - [0xB20540, c, jan_00_0_header]
+    - [0xB20540, c, jan_00_1_main]
+    - [0xB20880, c, jan_00_2_npc]
+    - [0xB20880, c, jan_00_3_entity]
+    - [0xB216E0, c, jan_00_4_whale]
+    - [0xB21EA0, c, jan_00_5_foliage]
+    - [0xB220E0]
   - name: jan_01
     dir: world/area_jan/jan_01
     type: code

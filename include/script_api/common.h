@@ -148,7 +148,7 @@ ApiStatus EnablePartnerAI(Evt* script, s32 isInitialCall);
 ApiStatus BringPartnerOut(Evt* script, s32 isInitialCall);
 ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall);
 ApiStatus GetCurrentPartnerID(Evt* script, s32 isInitialCall);
-ApiStatus IsCurrentPartnerFlying(Evt* script, s32 isInitialCall);
+ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcDecoration(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall);
 ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall);
