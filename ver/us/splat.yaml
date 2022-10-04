@@ -5018,13 +5018,29 @@ segments:
     start: 0x5B14B0
     vram: 0x80218000
     subsegments:
-    - [0x5B14B0, c]
-    - [0x5B16A0, c]
-    - [0x5B1A10, c]
-    - [0x5B1D80, c]
-    - [0x5B20F0, c]
-    - [0x5B28D0, c]
-    - [0x5B3370, data]
+    - [0x5B14B0, c, actor/lakitu]
+    - [0x5B14B0, c, actor/spiny]
+    - [0x5B14B0, c, actor/crazee_dayzee]
+    - [0x5B14B0, c, actor/bzzap]
+    - [0x5B16A0, c, actor/amazy_dayzee]
+    - [0x5B16A0, c, actor/ruff_puff]
+    - [0x5B1830, c, actor/medi_guy]
+    - [0x5B1A10, c, actor/red_magikoopa]
+    - [0x5B1D80, c, actor/green_magikoopa]
+    - [0x5B20F0, c, actor/white_magikoopa]
+    - [0x5B2560, c, actor/yellow_magikoopa]
+    - [0x5B28D0, c, stage/flo_01]
+    - [0x5B2990, c, stage/flo_01b]
+    - [0x5B2A50, c, stage/flo_01c]
+    - [0x5B2B10, c, stage/flo_02]
+    - [0x5B2BD0, c, stage/flo_02b]
+    - [0x5B2C90, c, stage/flo_02c]
+    - [0x5B2D50, c, stage/flo_03]
+    - [0x5B2FA0, c, stage/flo_04]
+    - [0x5B31F0, c, stage/flo_05]
+    - [0x5B32B0, c, stage/flo_06]
+    - [0x5B3370, c, area]
+    - [0x5B3370]
   - dir: battle/area_flo2
     type: code
     start: 0x5CE690
