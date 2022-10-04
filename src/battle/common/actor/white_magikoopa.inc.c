@@ -316,7 +316,7 @@ EvtScript N(handleEvent_80223E24) = {
     EVT_END
 };
 
-EvtScript N(8022433C) = {
+EvtScript N(canBeKnockedOff) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
@@ -325,10 +325,10 @@ EvtScript N(8022433C) = {
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
         EVT_SWITCH(LVar0)
-            EVT_CASE_OR_EQ(131)
-            EVT_CASE_OR_EQ(132)
-            EVT_CASE_OR_EQ(133)
-            EVT_CASE_OR_EQ(136)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK1)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK2)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK3)
+            EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
@@ -340,7 +340,7 @@ EvtScript N(8022433C) = {
     EVT_END
 };
 
-EvtScript N(80224448) = {
+EvtScript N(knockOff) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim04)
@@ -367,7 +367,7 @@ EvtScript N(80224448) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -422,26 +422,26 @@ EvtScript N(handleEvent_80224A44) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_WAIT(N(8022433C))
+            EVT_EXEC_WAIT(N(canBeKnockedOff))
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_FALL_TRIGGER)
-            EVT_EXEC_WAIT(N(8022433C))
+            EVT_EXEC_WAIT(N(canBeKnockedOff))
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_EXEC_WAIT(N(80224448))
+            EVT_EXEC_WAIT(N(knockOff))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_15)
-            EVT_EXEC_WAIT(N(8022433C))
+            EVT_EXEC_WAIT(N(canBeKnockedOff))
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim05)
             EVT_SET_CONST(LVar2, ANIM_FlyingMagikoopa_White_Anim06)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_EXEC_WAIT(N(80224448))
+            EVT_EXEC_WAIT(N(knockOff))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 2)

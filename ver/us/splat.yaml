@@ -4918,16 +4918,25 @@ segments:
     start: 0x5573E0
     vram: 0x80218000
     subsegments:
-    - [0x5573E0, c]
-    - [0x557A80, c]
-    - [0x557AD0, c]
-    - [0x557EC0, c]
-    - [0x557F90, c]
-    - [0x5580C0, c]
-    - [0x558190, data]
-    - [0x56DF50, .rodata, 5573E0]
-    - [0x56DF90, rodata]
-    - [0x56E070]
+    - [0x5573E0, c, actor/big_lantern_ghost]
+    - [0x557870, c, stage/omo_01]
+    - [0x557A80, c, stage/omo_02]
+    - [0x557A80, c, stage/omo_03]
+    - [0x557A80, c, stage/omo_03b]
+    - [0x557A80, c, stage/omo_04]
+    - [0x557AD0, c, stage/omo_05]
+    - [0x557AD0, c, stage/omo_05b]
+    - [0x557AD0, c, stage/omo_06]
+    - [0x557AD0, c, stage/omo_07]
+    - [0x557AD0, c, actor/goomba]
+    - [0x557D50, c, actor/clubba]
+    - [0x557D50, c, actor/fuzzy]
+    - [0x557EC0, c, actor/hammer_bro]
+    - [0x557EC0, c, actor/pokey]
+    - [0x557F90, c, actor/koopatrol]
+    - [0x5580C0, c, actor/red_shy_guy]
+    - [0x558190, c, area]
+    - [0x558190]
   - dir: battle/area_kgr
     type: code
     start: 0x56E2A0
@@ -5125,13 +5134,21 @@ segments:
     start: 0x648E10
     vram: 0x80218000
     subsegments:
-    - [0x648E10, c]
-    - [0x649050, c]
-    - [0x649480, c]
-    - [0x6497F0, c]
-    - [0x649B60, c]
-    - [0x649ED0, c]
-    - [0x64A340, data]
+    - [0x648E10, c, actor/swoopula]
+    - [0x649050, c, actor/albino_dino]
+    - [0x649050, c, actor/white_clubba]
+    - [0x649050, c, actor/red_magikoopa]
+    - [0x649480, c, actor/green_magikoopa]
+    - [0x6497F0, c, actor/yellow_magikoopa]
+    - [0x649B60, c, actor/gray_magikoopa]
+    - [0x649ED0, c, actor/white_magikoopa]
+    - [0x64A340, c, stage/pra_01]
+    - [0x64A340, c, stage/pra_02]
+    - [0x64A340, c, stage/pra_03]
+    - [0x64A340, c, stage/pra_03b]
+    - [0x64A340, c, stage/pra_03c]
+    - [0x64A340, c, stage/pra_04]
+    - [0x64A340, c, area]
   - dir: battle/area_pra2
     type: code
     start: 0x660750
@@ -5209,17 +5226,25 @@ segments:
     start: 0x6DDDC0
     vram: 0x80218000
     subsegments:
-    - [0x6DDDC0, c]
-    - [0x6DDE90, c]
-    - [0x6DE000, c]
-    - [0x6DE0D0, c]
-    - [0x6DE1A0, c]
-    - [0x6DE1F0, c]
-    - [0x6DE3A0, c]
-    - [0x6DE3F0, c]
-    - [0x6DE4A0, c]
-    - [0x6DE650, c]
-    - [0x6DE670, data]
+    - [0x669D80, c, actor/koopa_troopa]
+    - [0x6DDE90, c, actor/fuzzy]
+    - [0x6DE000, c, actor/pokey]
+    - [0x6DE0D0, c, actor/bandit]
+    - [0x6DE0D0, c, actor/red_shy_guy]
+    - [0x6DE1A0, c, actor/tubba_blubba]
+    - [0x6DE1A0, c, actor/monty_mole]
+    - [0x6DE1A0, c, actor/whacka]
+    - [0x6DE1F0, c, stage/dig_01]
+    - [0x6DE1F0, c, stage/dig_02]
+    - [0x6DE1F0, c, stage/dig_03]
+    - [0x6DE3A0, c, stage/dig_04]
+    - [0x6DE3F0, c, stage/dig_05]
+    - [0x6DE3F0, c, area]
+    - [0x6DE3F0, c, script/dig_01]
+    - [0x6DE4A0, c, script/dig_02]
+    - [0x6DE530, c, script/dig_03]
+    - [0x6DE5B0, c, script/dig_04]
+    - [0x6DE650, c, script/dig_05]
 
 #######################
 ### Battle Partners ###

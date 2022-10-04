@@ -114,14 +114,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_OMO2] = {
         BTL_AREA(area_omo2),
         .name = "エリア ＯＭＯ２",
-        .battles = 0x8022FBF4,
-        .stages = 0x8022FC1C,
+        .battles = &b_area_omo2_formationTable,
+        .stages = &b_area_omo2_stageTable,
     },
     [BTL_AREA_OMO3] = {
         BTL_AREA(area_omo3),
         .name = "エリア ＯＭＯ３",
-        .battles = 0x8022EA2C,
-        .stages = 0x8022EB1C,
+        .battles = &b_area_omo3_formationTable,
+        .stages = &b_area_omo3_stageTable,
     },
     [BTL_AREA_KGR] = {
         BTL_AREA(area_kgr),
@@ -193,14 +193,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_SAM2] = {
         BTL_AREA(area_sam2),
         .name = "エリア ＳＡＭ２",
-        .battles = 0x802234F0,
-        .stages = 0x8022352C,
+        .battles = &b_area_sam2_formationTable,
+        .stages = &b_area_sam2_stageTable,
     },
     [BTL_AREA_PRA] = {
         BTL_AREA(area_pra),
         .name = "エリア ＰＲＡ",
-        .battles = 0x8022F4D4,
-        .stages = 0x8022F614,
+        .battles = &b_area_pra_formationTable,
+        .stages = &b_area_pra_stageTable,
     },
     [BTL_AREA_PRA2] = {
         BTL_AREA(area_pra2),
@@ -247,8 +247,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_DIG] = {
         BTL_AREA(area_dig),
         .name = "エリア ＤＩＧ",
-        .battles = 0x8022A7C4,
-        .stages = 0x8022A83C,
+        .battles = &b_area_dig_formationTable,
+        .stages = &b_area_dig_stageTable,
     },
     [BTL_AREA_OMO2_1] = {
         BTL_AREA(area_omo2_1),
