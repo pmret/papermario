@@ -441,7 +441,7 @@ D_800FBBE0 = 0x800FBBE0;
 D_80164000 = 0x80164000; // display contexts, part of bss3
 
 D_8022AD80_4C3F70 = 0x8022AD80;
-D_8022ADD0 = 0x8022ADD0;
+b_area_kzn2_VineData = 0x8022ADD0;
 b_area_kzn2_VineRenderState = 0x8022B550;
 D_80232C4C = 0x80232C4C;
 D_80235E00 = 0x80235E00;
@@ -941,3 +941,8 @@ end_01_CreditsDataPtr = 0x8024A2C4;
 D_80242568_filemenu = 0x80242568;
 D_80243390_omo_12 = 0x80243390;
 D_8024F580_hos_05 = 0x8024F580;
+
+// incorrectly-identified vtx addresses for tst_13
+D_802423D0 = 0x802423D0;
+D_80242310 = 0x80242310;
+flo_23_ConsumableChoiceList = 0x802426E0;

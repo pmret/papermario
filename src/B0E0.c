@@ -793,7 +793,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     temp2 = targetZ;
-    if (camera->unk_506 != 0 || camera->unk_4A4 != targetX || camera->unk_4A8 != targetY ||
+    if (camera->panActive || camera->unk_4A4 != targetX || camera->unk_4A8 != targetY ||
         camera->unk_4AC != targetZ || camera->changingMap) {
 
         if (camera->followPlayer) {
@@ -852,7 +852,7 @@ void update_camera_zone_interp(Camera* camera) {
             }
         }
 
-        if (camera->unk_506 != 0 || (!cond2 && cs2 != currentController)) {
+        if (camera->panActive || (!cond2 && cs2 != currentController)) {
             if (camera->interpAlpha == 1.0f) {
                 camera->prevController = camera->currentController;
             } else {
@@ -864,7 +864,7 @@ void update_camera_zone_interp(Camera* camera) {
             camera->currentController = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
-            camera->unk_506 = 0;
+            camera->panActive = FALSE;
             camera->linearInterpScale = camera->moveSpeed;
             camera->prevPrevFollowFlags = camera->prevFollowFlags;
             camera->prevFollowFlags = camera->followPlayer;

@@ -314,7 +314,7 @@ void render_effects_UI(void) {
                             gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
 
                             cond = FALSE;
-                            if (!(camera->flags & 0x10)) {
+                            if (!(camera->flags & CAMERA_FLAGS_ORTHO)) {
                                 gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
                                 gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
                                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);

@@ -252,9 +252,9 @@ void btl_state_update_normal_start(void) {
             battleStatus->damageTaken = 0;
             battleStatus->nextMerleeSpellType = 0;
             battleStatus->unk_83 = 0;
-            gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
-            gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_2;
-            gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_2;
+            gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_ENABLED;
+            gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_ENABLED;
+            gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_ENABLED;
             if (is_ability_active(ABILITY_MYSTERY_SCROLL)) {
                 battleStatus->unk_83 = 1;
             }

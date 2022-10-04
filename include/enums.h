@@ -3173,7 +3173,7 @@ enum NpcFlags {
 
 enum PlayerStatusFlags {
     PS_FLAGS_AIRBORNE                         = 0x0000000E,
-    PS_FLAGS_1                                = 0x00000001,
+    PS_FLAGS_HAS_REFLECTION                   = 0x00000001,
     PS_FLAGS_JUMPING                          = 0x00000002,
     PS_FLAGS_FALLING                          = 0x00000004,
     PS_FLAGS_FLYING                           = 0x00000008,
@@ -4003,6 +4003,7 @@ enum ModelFlags {
 };
 
 enum TexPanner {
+    //select pan unit
     TEX_PANNER_0    = 0x0,
     TEX_PANNER_1    = 0x1,
     TEX_PANNER_2    = 0x2,
@@ -4019,6 +4020,7 @@ enum TexPanner {
     TEX_PANNER_D    = 0xD,
     TEX_PANNER_E    = 0xE,
     TEX_PANNER_F    = 0xF,
+    // select texture component
     TEX_PANNER_MAIN = 0,
     TEX_PANNER_AUX  = 1,
 };
@@ -4232,6 +4234,7 @@ enum ColliderFlags {
     COLLIDER_FLAGS_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
     COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
+    COLLIDER_FLAGS_80000             = 0x00080000, // test version of DOCK walls?
     COLLIDER_FLAGS_HAS_MODEL_PARENT  = 0x80000000
 };
 
@@ -4291,16 +4294,16 @@ enum CameraInitDataFlags {
 
 enum CameraFlags {
     CAMERA_FLAGS_1                 = 0x00000001,
-    CAMERA_FLAGS_2                 = 0x00000002,
-    CAMERA_FLAGS_4                 = 0x00000004,
-    CAMERA_FLAGS_8                 = 0x00000008,
-    CAMERA_FLAGS_10                = 0x00000010,
+    CAMERA_FLAGS_ENABLED           = 0x00000002,
+    CAMERA_FLAGS_LEAD_PLAYER       = 0x00000004,
+    CAMERA_FLAGS_SHAKING           = 0x00000008,
+    CAMERA_FLAGS_ORTHO             = 0x00000010,
     CAMERA_FLAGS_20                = 0x00000020,
     CAMERA_FLAGS_40                = 0x00000040,
     CAMERA_FLAGS_80                = 0x00000080,
     CAMERA_FLAGS_100               = 0x00000100,
-    CAMERA_FLAGS_200               = 0x00000200,
-    CAMERA_FLAGS_400               = 0x00000400,
+    CAMERA_FLAGS_RENDER_ENTITIES   = 0x00000200,
+    CAMERA_FLAGS_RENDER_MODELS     = 0x00000400,
     CAMERA_FLAGS_800               = 0x00000800,
     CAMERA_FLAGS_1000              = 0x00001000,
     CAMERA_FLAGS_2000              = 0x00002000,

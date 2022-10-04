@@ -25,6 +25,10 @@
 
 #define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)
 
+// standardized padding macros for map overlays
+#define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
+#define MAP_STATIC_PAD(n,name) static s32 N(static_pad_##name)[n];
+
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 

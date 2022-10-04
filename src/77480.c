@@ -764,7 +764,7 @@ void player_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     mem_clear(playerStatus, sizeof(PlayerStatus));
-    playerStatus->flags = PS_FLAGS_1;
+    playerStatus->flags = PS_FLAGS_HAS_REFLECTION;
     reset_player_status();
     playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y,
                              playerStatus->position.z);

@@ -13,6 +13,13 @@ enum SpriteIDFields {
     SPRITE_ID_TAIL_ALLOCATE     = 0x80000000,
 };
 
+enum DrawSpriteOptions {
+    DRAW_SPRITE_UPSIDE_DOWN         = 0x10000000,
+    DRAW_SPRITE_OVERRIDE_PALETTES   = 0x20000000,
+    DRAW_SPRITE_OVERRIDE_YAW        = 0x40000000,
+    DRAW_SPRITE_OVERRIDE_ALPHA      = 0x80000000,
+};
+
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
     /* 0x04 */ s32 properties; ///< AABBCCCC : AA = unused?, BB = parent, CCCC = notify value

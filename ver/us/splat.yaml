@@ -6365,13 +6365,10 @@ segments:
     start: 0x864B40
     vram: 0x80240000
     subsegments:
-    - [0x864B40, c]
-    - [0x865000, c]
-    - [0x8659C0, c]
-    - [0x8661D0, data]
-    - [0x8666A0, data]
-    - [0x867EF0, data]
-    - [0x869450]
+    - [0x864B40, c, mac_06_1_main]
+    - [0x865000, c, mac_06_2]
+    - [0x8659C0, c, mac_06_3]
+    - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01
     type: code
@@ -8705,10 +8702,9 @@ segments:
     start: 0xAA2180
     vram: 0x80240000
     subsegments:
-    - [0xAA2180, c]
-    - [0xAA2180, data]
-    - [0xAA2240, data]
-    - [0xAA23B0]
+    - [0xAA2180, c, kpa_117_0_header]
+    - [0xAA2180, c, kpa_117_1_main]
+    - [0xAA2180]
   - name: kpa_118
     dir: world/area_kpa/kpa_118
     type: code
@@ -9168,85 +9164,84 @@ segments:
     start: 0xB1A900
     vram: 0x80240000
     subsegments:
-    - [0xB1A900, c]
-    - [0xB1A900, data]
-    - [0xB1AB20, data]
-    - [0xB1AC20]
+    - [0xB1A900, c, tst_01_1_main]
+    - [0xB1A900, c, tst_01_2_entity]
+    - [0xB1A900]
   - name: tst_02
     dir: world/area_tst/tst_02
     type: code
     start: 0xB1AC30
     vram: 0x80240000
     subsegments:
-    - [0xB1AC30, c]
-    - [0xB1AC30, data]
-    - [0xB1AE50, data]
-    - [0xB1AF70]
+    - [0xB1AC30, c, tst_02_1_main]
+    - [0xB1AC30, c, tst_02_2_entity]
+    - [0xB1AC30]
   - name: tst_03
     dir: world/area_tst/tst_03
     type: code
     start: 0xB1AF80
     vram: 0x80240000
     subsegments:
-    - [0xB1AF80, c]
-    - [0xB1AF80, data]
-    - [0xB1B240, data]
-    - [0xB1B560]
+    - [0xB1AF80, c, tst_03_1_main]
+    - [0xB1AF80, c, tst_03_2_entity]
+    - [0xB1AF80]
   - name: tst_04
     dir: world/area_tst/tst_04
     type: code
     start: 0xB1B570
     vram: 0x80240000
     subsegments:
-    - [0xB1B570, c]
-    - [0xB1BBD0, c]
-    - [0xB1BC00, data]
-    - [0xB1C1E0, data]
-    - [0xB1C220, data]
-    - [0xB1C270, data]
-    - [0xB1C510, data]
-    - [0xB1C530]
+    - [0xB1B570, c, tst_04_1_main]
+    - [0xB1B7D0, c, tst_04_2_entity]
+    - [0xB1B8D0, c, tst_04_3_reflection]
+    - [0xB1BBD0, c, tst_04_4_npc]
+    - [0xB1BC00]
   - name: tst_10
     dir: world/area_tst/tst_10
     type: code
     start: 0xB1C540
     vram: 0x80240000
     subsegments:
-    - [0xB1C540, c]
-    - [0xB1C540, data]
-    - [0xB1CA40]
+    - [0xB1C540, c, tst_10_1_main]
+    - [0xB1C540]
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code
     start: 0xB1CA50
     vram: 0x80240000
     subsegments:
-    - [0xB1CA50, c]
-    - [0xB1D1C0, data]
-    - [0xB1D2A0, data]
+    - [0xB1CA50, c, tst_11_1_main]
+    - [0xB1CA50, c, tst_11_2_extra]
+    - [0xB1D1C0]
   - name: tst_12
     dir: world/area_tst/tst_12
     type: code
     start: 0xB1D2F0
     vram: 0x80240000
     subsegments:
-    - [0xB1D2F0, data]
+    - [0xB1D2F0, c, tst_12_1_main]
   - name: tst_13
     dir: world/area_tst/tst_13
     type: code
     start: 0xB1D760
     vram: 0x80240000
     subsegments:
-    - [0xB1D760, c]
-    - [0xB1DB20, data]
-    - [0xB20460]
+    - [0xB1D760, c, tst_13_1_main]
+    - start: 0xB1DB20
+      type: .data
+      name: tst_13_1_main
+      subsegments:
+      - [0xB1DB20]
+      - [0xB1FA10, vtx, shockwave]
+      - [0xB1FFC0, gfx, shockwave]
+      - [0xB20350]
   - name: tst_20
     dir: world/area_tst/tst_20
     type: code
     start: 0xB20470
     vram: 0x80240000
     subsegments:
-    - [0xB20470, data]
+    - [0xB20470, c, tst_20_1_main]
   - name: jan_00
     dir: world/area_jan/jan_00
     type: code
@@ -11578,76 +11573,95 @@ segments:
     start: 0xDF6A00
     vram: 0x80240000
     subsegments:
-    - [0xDF6A00, c]
-    - [0xDF6A20, c]
-    - [0xDF9300, c]
-    - [0xDF9510, c]
-    - [0xDF9540, data]
-    - [0xDFB0B0, data]
-    - [0xDFE5B0, data]
-    - [0xE019E0, data]
-    - [0xE04180, data]
-    - [0xE052C0]
+    - [0xDF6A00, c, end_00_0_init]
+    - [0xDF6A20, c, end_00_1_main]
+    - [0xDF6A20, c, end_00_2_credits]
+    - [0xDF9080, c, end_00_3_parade_setup]
+    - [0xDF9080, c, end_00_4_allies]
+    - [0xDF9300, c, end_00_5_koopas]
+    - [0xDF9300, c, end_00_6_caravan]
+    - [0xDF9510, c, end_00_7_boos]
+    - [0xDF9510, c, end_00_8_yoshis]
+    - [0xDF9510, c, end_00_9_huff_n_puff]
+    - [0xDF9510, c, end_00_A_crystal_king]
+    - [0xDF9510, c, end_00_B_bowser]
+    - [0xDF9540]
   - name: end_01
     dir: world/area_end/end_01
     type: code
     start: 0xE05360
     vram: 0x80240000
     subsegments:
-    - [0xE05360, c]
-    - [0xE05370, c]
-    - [0xE05390, c]
-    - [0xE07C20, c]
-    - [0xE08050, c]
-    - [0xE08350, data]
-    - [0xE08470, data]
-    - [0xE0B5F0, data]
-    - [0xE0C0C0, data]
-    - [0xE0D510, data]
-    - [0xE0E740]
+    - [0xE05360, c, end_01_0_init]
+    - [0xE05370, c, end_01_1_main]
+    - [0xE05390, c, end_01_2_credits]
+    - [0xE079F0, c, end_01_3_parade_setup]
+    - [0xE07C20, c, end_01_4_opera_float]
+    - [0xE07C20, c, end_01_5_flower_float]
+    - [0xE08050, c, end_01_6_shyguy_float]
+    - [0xE08050, c, end_01_7_peach_float]
+    - [0xE08350]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
     type: code
     start: 0xE0E7A0
     vram: 0x80240000
     subsegments:
-    - [0xE0E7A0, c]
-    - [0xE0F980, c]
-    - [0xE0FF60, data]
-    - [0xE111A0, data]
-    - [0xE123E0, data]
-    - [0xE12570]
+    - [0xE0E7A0, c, mgm_00_1_main]
+    - [0xE0EA80, c, mgm_00_2_npc]
+    - [0xE0F980, c, mgm_00_3_scoreboard]
+    - [0xE0FF60]
   - name: mgm_01
     dir: world/area_mgm/mgm_01
     type: code
     start: 0xE12760
     vram: 0x80240000
     subsegments:
-    - [0xE12760, c]
-    - [0xE12930, c]
-    - [0xE13F10, data]
-    - [0xE141D0, data]
-    - [0xE15440, data]
-    - [0xE15D10]
+    - [0xE12760, c, mgm_01_1_main]
+    - [0xE12930, c, mgm_01_2_npc]
+    - [0xE12930, c, mgm_01_3_entity]
+    - [0xE12930, c, mgm_01_4_images]
+    - [0xE13F10, .data, mgm_01_1_main]
+    - [0xE141D0, .data, mgm_01_2_npc]
+    - [0xE153A0, .data, mgm_01_3_entity]
+    - start: 0xE15440
+      type: .data
+      name: mgm_01_4_images
+      subsegments:
+      - [0xE15440, ci4, panel_1_coin, 32, 32]
+      - [0xE15640, palette, panel_1_coin]
+      - [0xE15660, ci4, panel_5_coins, 32, 32]
+      - [0xE15860, palette, panel_5_coins]
+      - [0xE15880, ci4, panel_times_5, 32, 32]
+      - [0xE15A80, palette, panel_times_5]
+      - [0xE15AA0, ci4, panel_bowser, 32, 32]
+      - [0xE15CA0, palette, panel_bowser]
+      - [0xE15CC0]
   - name: mgm_02
     dir: world/area_mgm/mgm_02
     type: code
     start: 0xE15D80
     vram: 0x80240000
     subsegments:
-    - [0xE15D80, c]
-    - [0xE18150, c]
-    - [0xE18180, data]
-    - [0xE183D0, data]
-    - [0xE1E020, data]
-    - [0xE1E260]
+      - [0xE15D80, c, mgm_02_1_main]
+      - [0xE15D80, c, mgm_02_2_npc]
+      - [0xE15D80, c, mgm_02_3_images]
+      - [0xE18180, .data, mgm_02_1_main]
+      - [0xE183D0, .data, mgm_02_2_npc]
+      - start: 0xE1E020
+        type: .data
+        name: mgm_02_3_images
+        subsegments:
+        - [0xE1E020, ci4, panel_peach, 32, 32]
+        - [0xE1E220, palette, panel_peach]
+        - [0xE1E240]
   - name: mgm_03
     dir: world/area_mgm/mgm_03
     type: code
     start: 0xE1E380
     vram: 0x80240000
     subsegments:
-    - [0xE1E380, data]
+    - [0xE1E380, c, mgm_03_1_main]
   - name: gv_01
     dir: world/area_gv/gv_01
     type: code
@@ -13615,7 +13629,7 @@ segments:
       - ParadeDrummer
       - ParadeBanner
       - ParadeHorn
-      - ParadeTubbaBalloon
+      - ParadeTubba
       - ParadeWizard
       - ParadeMario
       - ParadeShyGuy

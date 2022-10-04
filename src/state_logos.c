@@ -65,10 +65,10 @@ void state_init_logos(void) {
     gCameras[CAM_DEFAULT].farClip = 4096;
     gCurrentCameraID = CAM_DEFAULT;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
-    gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_3].flags |= CAMERA_FLAGS_ENABLED;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
