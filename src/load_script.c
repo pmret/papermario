@@ -69,10 +69,10 @@ extern EvtScript battle_item_strange_cake_main;
 #define BTL_ITEM_TABLE_ENTRY(name) { name##_ROM_START, name##_ROM_END, name##_VRAM, &battle_item_##name##_main }
 
 typedef struct BattleTableEntry {
-    /* 0x0 */ u8* romStart;
-    /* 0x4 */ u8* romEnd;
-    /* 0x8 */ u8* vramStart;
-    /* 0xC */ EvtScript* mainScript;
+    /* 0x00 */ u8* romStart;
+    /* 0x04 */ u8* romEnd;
+    /* 0x08 */ u8* vramStart;
+    /* 0x0C */ EvtScript* mainScript;
 } BattleTableEntry; // size = 0x10
 
 BattleTableEntry gBattleItemTable[] = {
@@ -212,81 +212,3 @@ EvtScript UseMystery = {
     EVT_RETURN
     EVT_END
 };
-
-static s32 padding[] = {0, 0, 0};
-
-extern EvtScript D_802A3044_007365E4;
-extern EvtScript D_802A369C_00736C3C;
-extern EvtScript D_802A3B28_007370C8;
-extern EvtScript D_802A3124_7399B4;
-extern EvtScript D_802A3044_0073CF14;
-
-#define BTL_MOVE_TABLE_ENTRY(name, script) { battle_move_##name##_ROM_START, battle_move_##name##_ROM_END, battle_move_##name##_VRAM, script }
-
-BattleTableEntry gMoveScriptTable[] = {
-    { NULL, NULL, NULL, NULL },
-    { NULL, NULL, NULL, NULL },
-    { NULL, NULL, NULL, NULL },
-    BTL_MOVE_TABLE_ENTRY(hammer, &D_802A3044_007365E4),
-    BTL_MOVE_TABLE_ENTRY(hammer, &D_802A3044_007365E4),
-    BTL_MOVE_TABLE_ENTRY(hammer, &D_802A3044_007365E4),
-    BTL_MOVE_TABLE_ENTRY(hammer, &D_802A369C_00736C3C),
-    BTL_MOVE_TABLE_ENTRY(hammer, &D_802A3B28_007370C8),
-    BTL_MOVE_TABLE_ENTRY(spin_smash, &D_802A3124_7399B4),
-    BTL_MOVE_TABLE_ENTRY(quake_hammer, &D_802A3044_0073CF14),
-    BTL_MOVE_TABLE_ENTRY(d_down_pound, 0x802A3144),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_0, 0x802A38C4),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_0, 0x802A3234),
-    BTL_MOVE_TABLE_ENTRY(hammer_throw, 0x802A3D38),
-    BTL_MOVE_TABLE_ENTRY(mega_quake, 0x802A3114),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_1, 0x802A3944),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_1, 0x802A32B4),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_2, 0x802A3944),
-    BTL_MOVE_TABLE_ENTRY(hammer_charge_2, 0x802A32B4),
-    BTL_MOVE_TABLE_ENTRY(auto_smash, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(power_quake, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(power_smash, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(super_smash, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(mega_smash, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(shrink_smash, 0x802A3044),
-    BTL_MOVE_TABLE_ENTRY(shell_crack, 0x802A3124),
-    BTL_MOVE_TABLE_ENTRY(jump, 0x802A2650),
-    BTL_MOVE_TABLE_ENTRY(jump, 0x802A2650),
-    BTL_MOVE_TABLE_ENTRY(jump, 0x802A2650),
-    BTL_MOVE_TABLE_ENTRY(jump, 0x802A30F4),
-    BTL_MOVE_TABLE_ENTRY(jump, 0x802A3644),
-    BTL_MOVE_TABLE_ENTRY(multibounce, 0x802A2620),
-    BTL_MOVE_TABLE_ENTRY(power_bounce, 0x802A2734),
-    BTL_MOVE_TABLE_ENTRY(sleep_stomp, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(dizzy_stomp, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_0, 0x802A2800),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_0, 0x802A27F0),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_1, 0x802A2880),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_1, 0x802A2870),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_2, 0x802A2880),
-    BTL_MOVE_TABLE_ENTRY(jump_charge_2, 0x802A2870),
-    BTL_MOVE_TABLE_ENTRY(auto_jump, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(auto_multibounce, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(power_jump, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(super_jump, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(mega_jump, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(d_down_jump, 0x802A26E0),
-    BTL_MOVE_TABLE_ENTRY(shrink_stomp, 0x802A2600),
-    BTL_MOVE_TABLE_ENTRY(earthquake_jump, 0x802A2630),
-};
-
-ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    BattleTableEntry* moveTableEntry = &gMoveScriptTable[battleStatus->selectedMoveID];
-
-    dma_copy(moveTableEntry->romStart, moveTableEntry->romEnd, moveTableEntry->vramStart);
-    script->varTablePtr[0] = moveTableEntry->mainScript;
-
-    deduct_current_move_fp();
-
-    if (gBattleStatus.flags2 & BS_FLAGS2_8000000) {
-        enable_player_blur();
-    }
-
-    return ApiStatus_DONE2;
-}

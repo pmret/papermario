@@ -376,7 +376,7 @@ EvtScript D_802A23D4_73EC34 = {
     EVT_END
 };
 
-EvtScript D_802A2650_73EEB0 = {
+EvtScript N(802A2650) = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetBattleFlags2, LVar0)
     EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
@@ -569,7 +569,7 @@ EvtScript D_802A2DE8_73F648 = {
     EVT_END
 };
 
-EvtScript D_802A30F4_73F954 = {
+EvtScript N(802A30F4) = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -675,7 +675,7 @@ EvtScript D_802A34EC_73FD4C = {
     EVT_END
 };
 
-EvtScript D_802A3644_73FEA4 = {
+EvtScript N(802A3644) = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)

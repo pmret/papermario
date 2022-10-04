@@ -625,7 +625,7 @@ EvtScript D_802A2E80_739710 = {
     EVT_END
 };
 
-EvtScript D_802A3124_7399B4 = {
+EvtScript battle_move_spin_smash_main = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(func_80269EAC, 2)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

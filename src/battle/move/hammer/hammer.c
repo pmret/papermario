@@ -600,7 +600,7 @@ EvtScript D_802A2DA0_00736340 = {
     EVT_END
 };
 
-EvtScript D_802A3044_007365E4 = {
+EvtScript battle_move_hammer_802A3044 = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -721,7 +721,7 @@ EvtScript D_802A3168_00736708 = {
     EVT_END
 };
 
-EvtScript D_802A369C_00736C3C = {
+EvtScript battle_move_hammer_802A369C = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -796,7 +796,7 @@ EvtScript D_802A369C_00736C3C = {
     EVT_END
 };
 
-EvtScript D_802A3B28_007370C8 = {
+EvtScript battle_move_hammer_802A3B28 = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
