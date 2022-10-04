@@ -13,13 +13,17 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-BSS s32 bSavedPartner;
-BSS s32 bSavedOverrideFlags;
-BSS s32 D_8029DA38[2]; // unused?
-BSS s32 D_8029DA40;
-BSS s32 D_8029DA44;
-BSS s32 D_8029DA48;
-BSS s32 D_8029DA4C;
+BSS s32 bSavedPartner = 0;
+BSS s32 bSavedOverrideFlags = 0;
+BSS s32 D_8029DA38 = 0; // unused?
+BSS s32 D_8029DA3C = 0; // unused?
+BSS s32 D_8029DA40 = 0;
+BSS s32 D_8029DA44 = 0;
+BSS s32 D_8029DA48 = 0;
+// The following var has a nop issue, and the only way to fix it is by initializing it.
+// However, this puts it at the beginning of the BSS section, so all preceeding BSS needs to be initialized as well.
+BSS s32 D_8029DA4C = 0;
+
 BSS Camera D_8029DA50[ARRAY_COUNT(gCameras)];
 BSS f32 D_8029EFB0;
 BSS f32 D_8029EFB4;
@@ -810,8 +814,6 @@ void btl_draw_enemy_health_bars(void) {
     }
 }
 
-// needs insane amount of data migration (1AF2D0.c)
-#ifdef NON_MATCHING
 void btl_update_starpoints_display(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 cond;
@@ -885,7 +887,7 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < tens; i++) {
                 id = D_8029EFC0[i];
-                if (hud_element_get_script(id) != HES_Item_StarPoint) {
+                if (hud_element_get_script(id) != &HES_Item_StarPoint) {
                     hud_element_set_script(id, &HES_Item_StarPoint);
                 }
                 hud_element_clear_flags(id, 2);
@@ -893,7 +895,7 @@ void btl_update_starpoints_display(void) {
                 hud_element_draw_clipped(id);
 
                 id = D_8029EFE8[i];
-                if (hud_element_get_script(id) != HES_StatusSPShine) {
+                if (hud_element_get_script(id) != &HES_StatusSPShine) {
                     hud_element_set_script(id, &HES_StatusSPShine);
                 }
                 hud_element_clear_flags(id, 2);
@@ -903,8 +905,8 @@ void btl_update_starpoints_display(void) {
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
-                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             posX = D_8029DA40;
@@ -918,7 +920,7 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < ones; i++) {
                 id = D_8029F010[i];
-                if (hud_element_get_script(id) != HES_Item_SmallStarPoint) {
+                if (hud_element_get_script(id) != &HES_Item_SmallStarPoint) {
                     hud_element_set_script(id, &HES_Item_SmallStarPoint);
                 }
                 hud_element_clear_flags(id, 2);
@@ -928,14 +930,11 @@ void btl_update_starpoints_display(void) {
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_DISABLED);
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "16c8e0", btl_update_starpoints_display);
-#endif
 
 void btl_save_world_cameras(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

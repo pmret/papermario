@@ -2,6 +2,7 @@
 #include "nu/nusys.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "script_api/battle.h"
 #include "model.h"
 #include "sprite.h"
 
@@ -13,20 +14,46 @@ typedef struct PartnerDMAData {
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
-extern EvtScript D_80293820;
-extern f32 D_802938A4;
-extern s16 D_802938A8;
-extern EffectInstance* gDamageCountEffects[24];
-extern s32 gDamageCountTimers[24];
-extern Gfx D_80293970[];
-extern s32 D_802939C0;
-extern EvtScript D_802939C4;
-extern EvtScript D_80293A10;
-extern EvtScript D_80293A34;
-extern EvtScript D_80293A58;
-extern EvtScript D_80293A7C;
-extern EvtScript D_80293AA0;
-extern EvtScript D_80293AC4;
+EvtScript D_80293820 = {
+    EVT_WAIT(LocalVar(0))
+    EVT_LOOP(4)
+        EVT_CALL(SetBattleCamParam, 4, 11)
+        EVT_WAIT(1)
+        EVT_CALL(SetBattleCamParam, 4, 5)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(SetBattleCamParam, 4, 8)
+    EVT_RETURN
+    EVT_END
+};
+
+f32 D_802938A4 = 0.0f;
+
+s16 D_802938A8 = 4;
+
+EffectInstance* gDamageCountEffects[] = {
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL,
+};
+
+s32 gDamageCountTimers[] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
+Gfx D_80293970[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsSPEndDisplayList(),
+};
+
+s32 D_802939C0 = 0;
 
 // from 17D6A0
 extern s32 bMarioDefenseTable[];
@@ -2669,6 +2696,74 @@ void show_foreground_models(void) {
 
 
 #include "common/StartRumbleWithParams.inc.c"
+
+EvtScript D_802939C4 = {
+    EVT_CALL(N(StartRumbleWithParams), 256, 30)
+    EVT_CALL(N(StartRumbleWithParams), 200, 15)
+    EVT_CALL(N(StartRumbleWithParams), 50, 15)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293A10 = {
+    EVT_CALL(N(StartRumbleWithParams), 100, 20)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293A34 = {
+    EVT_CALL(N(StartRumbleWithParams), 150, 20)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293A58 = {
+    EVT_CALL(N(StartRumbleWithParams), 200, 30)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293A7C = {
+    EVT_CALL(N(StartRumbleWithParams), 256, 40)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293AA0 = {
+    EVT_CALL(N(StartRumbleWithParams), 256, 60)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293AC4 = {
+    EVT_CALL(N(StartRumbleWithParams), 100, 20)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293AE8 = {
+    EVT_CALL(N(StartRumbleWithParams), 150, 20)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293B0C = {
+    EVT_CALL(N(StartRumbleWithParams), 200, 30)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293B30 = {
+    EVT_CALL(N(StartRumbleWithParams), 256, 40)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80293B54 = {
+    EVT_CALL(N(StartRumbleWithParams), 256, 60)
+    EVT_RETURN
+    EVT_END
+};
 
 void start_rumble_type(u32 arg0) {
     if (D_802939C0 != 0) {

@@ -1,6 +1,4 @@
 from segtypes.common.asm import CommonSegAsm
-from typing import Optional
-from pathlib import Path
 
 from util import options
 

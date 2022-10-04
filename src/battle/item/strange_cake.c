@@ -262,7 +262,7 @@ s32 N(D_802A2858_732B58)[] = {
     0, 1, 2, 0, 1, 0
 };
 
-EvtScript N(script6) = {
+EvtScript N(main) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_IF_EQ(LVar1, ITEM_KOOKY_COOKIE)
         EVT_SET_CONST(LVarA, ITEM_KOOKY_COOKIE)

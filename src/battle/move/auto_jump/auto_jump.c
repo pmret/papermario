@@ -367,7 +367,7 @@ EvtScript D_802A2384 = {
     EVT_END
 };
 
-EvtScript D_802A2600 = {
+EvtScript N(main) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_1000, 1)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 1)

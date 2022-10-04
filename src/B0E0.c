@@ -25,62 +25,65 @@ void update_camera_mode_unused(Camera* camera) {
     f32 lookXDelta;
     f32 lookYDelta;
     f32 lookZDelta;
+    f32 zero;
 
-    if (camera->unk_06 != 0 || camera->unk_08 != 0) {
+    if (camera->unk_06 != 0 || camera->changingMap) {
         camera->unk_06 = 0;
-        camera->unk_08 = 0;
-        camera->unk_1C = 0;
-        camera->unk_1E = 100;
-        camera->unk_20 = 100;
-        camera->unk_22 = 0;
-        camera->unk_24 = 0;
-        camera->lookAt_obj.x = camera->unk_54;
-        camera->lookAt_obj.y = camera->unk_58;
-        camera->lookAt_obj.z = camera->unk_5C;
+        camera->changingMap = FALSE;
+        camera->auxPitch = 0;
+        camera->auxBoomLength = 100;
+        camera->lookAt_dist = 100;
+        camera->auxBoomPitch = 0;
+        camera->auxBoomYaw = 0;
+        camera->lookAt_obj.x = camera->lookAt_obj_target.x;
+        camera->lookAt_obj.y = camera->lookAt_obj_target.y;
+        camera->lookAt_obj.z = camera->lookAt_obj_target.z;
     }
 
-    if (!(playerStatus->flags & 6)) {
-        camera->unk_58 = playerStatus->position.y + 60.0f;
+    if (!(playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING))) {
+        camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
     }
 
-    camera->unk_54 = playerStatus->position.x;
-    camera->unk_5C = playerStatus->position.z + 400.0f;
+    camera->lookAt_obj_target.x = playerStatus->position.x;
+    camera->lookAt_obj_target.z = playerStatus->position.z + 400.0f;
 
-    if (camera->unk_1C == 0) {
-        s32 fovTemp = 10000 / camera->unk_20;
+    if (camera->auxPitch == 0) {
+        s32 fovTemp = 10000 / camera->lookAt_dist;
 
-        camera->lookAt_obj.x = camera->unk_54;
-        camera->lookAt_obj.y = camera->unk_58;
-        camera->lookAt_obj.z = camera->unk_5C;
-        camera->trueRotation.x = (f32) camera->unk_24;
-        camera->currentBoomYaw = (f32) camera->unk_22;
-        camera->currentBoomLength = (f32) camera->unk_1E;
+        camera->lookAt_obj.x = camera->lookAt_obj_target.x;
+        camera->lookAt_obj.y = camera->lookAt_obj_target.y;
+        camera->lookAt_obj.z = camera->lookAt_obj_target.z;
+        camera->trueRotation.x = camera->auxBoomYaw;
+        camera->currentBoomYaw = camera->auxBoomPitch;
+        camera->currentBoomLength = camera->auxBoomLength;
 
         if (fovTemp < 0) {
             fovTemp += 3;
         }
         camera->vfov = fovTemp >> 2;
 
+        zero = camera->currentBoomYaw;
+
         theta = DEG_TO_RAD(camera->currentBoomYaw);
         sinTheta1 = sin_rad(theta);
         cosTheta1 = cos_rad(theta);
-        temp_f30 = (cosTheta1 * 0.0f) + (camera->currentBoomLength * sinTheta1);
-        temp_f24_2 = (sinTheta1 * -0.0f) + (camera->currentBoomLength * cosTheta1);
+        temp_f30 = (zero * cosTheta1) + (camera->currentBoomLength * sinTheta1);
+        temp_f24_2 = ( -zero * sinTheta1) + (camera->currentBoomLength * cosTheta1);
 
         theta = DEG_TO_RAD(camera->trueRotation.x);
         sinTheta2 = sin_rad(theta);
         cosTheta2 = cos_rad(theta);
-        camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosTheta2 * 0.0f) - (temp_f24_2 * sinTheta2));
+        camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosTheta2 * zero) - (temp_f24_2 * sinTheta2));
         camera->lookAt_eye.y = camera->lookAt_obj.y + temp_f30;
-        camera->lookAt_eye.z = camera->lookAt_obj.z + ((sinTheta2 * 0.0f) + (temp_f24_2 * cosTheta2));
+        camera->lookAt_eye.z = camera->lookAt_obj.z + ((sinTheta2 * zero) + (temp_f24_2 * cosTheta2));
     }
 
     camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     lookXDelta = camera->lookAt_obj.x - camera->lookAt_eye.x;
     lookYDelta = camera->lookAt_obj.y - camera->lookAt_eye.y;
     lookZDelta = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
-    camera->currentPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
+    camera->currentBlendedYawNegated = -atan2(zero, zero, lookXDelta, lookZDelta);
+    camera->currentPitch = atan2(zero, zero, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 #else
 INCLUDE_ASM(void, "B0E0", update_camera_mode_unused, Camera* camera);

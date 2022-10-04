@@ -42,9 +42,9 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
-    - [0x1000, c, bss]
+    - [0x1000, hasm, bss]
     - [0x1000, hasm, entry_point]
-    - [0x1060, c, is_debug]
+    - [0x1060, c, is_debug, -g -fforce-addr]
     - [0x1370, c, main_pre]
     - [0x1370, c, main]
     - [0x1B40, c, main_loop]
@@ -364,7 +364,7 @@ segments:
     vram: 0x800DC500
     follows_vram: main
     subsegments:
-    - [0x759B0, c, bss2]
+    - [0x759B0, hasm, bss2]
     - [0x759B0, c, npc_collision]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
@@ -803,7 +803,7 @@ segments:
     vram: 0x8010F6D0
     follows_vram: engine1
     subsegments:
-    - [0xA5DD0, c, bss3]
+    - [0xA5DD0, hasm, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity_model]
@@ -1209,6 +1209,7 @@ segments:
     - [0x190A10, c]
     - [0x190B20, c, 190B20]
     - [0x1967B0, c, load_script]
+    - [0x196A10, c, move_script]
     - [0x196AA0, c, 196AA0]
     - [0x197F40, c, actor_api]
     - [0x19FAF0, c, 19FAF0]
@@ -1379,7 +1380,9 @@ segments:
       - [0x1C0558]
       - [0x1C0560, ia8, ui/battle/swap_background, 48, 16]
       - [0x1C0860]
-    - [0x1C2100, data, 1C2100]
+    - [0x1C2100, .data, 190B20]
+    - [0x1C2460, .data, load_script]
+    - [0x1C2760, .data, move_script]
     - [0x1C2A70, .data, 196AA0]
     - [0x1C2EC0, .data, 19FAF0]
     - [0x1C2FC0, .data, 1A5830]
@@ -3057,7 +3060,25 @@ segments:
     subsegments:
     - [0x35CA80, c, sleep_bubble]
     - [0x35D460]
-  - [0x35D510, bin] # sleep_bubble gfx
+  - name: effect_gfx_sleep_bubble
+    dir: effects/gfx
+    type: code
+    start: 0x35D510
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x35D510, c, sleep_bubble]
+    - start: 0x35D510
+      type: .data
+      name: sleep_bubble
+      subsegments:
+      - [0x35D510, i4, D_09000000_35D510, 16, 16]
+      - [0x35D590, i4, D_09000080_35D590, 16, 16]
+      - [0x35D610, i4, D_09000100_35D610, 16, 16]
+      - [0x35D690, vtx, D_09000180_35D690]
+      - [0x35D7F0, gfx, D_090002E0_35D7F0]
+      - [0x35D8A0, gfx, D_09000390_35D8A0]
+      - [0x35D950, gfx, D_09000440_35D950]
   - name: effect_windy_leaves
     dir: effects
     type: code
@@ -3208,7 +3229,29 @@ segments:
     subsegments:
     - [0x372790, c, fire_breath]
     - [0x373390]
-  - [0x3733E0, bin] # fire_breath gfx
+  - name: effect_gfx_fire_breath
+    dir: effects/gfx
+    type: code
+    start: 0x3733E0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3733E0, c, fire_breath]
+    - start: 0x3733E0
+      type: .data
+      name: fire_breath
+      subsegments:
+      - [0x3733E0, i4, D_09000000_3733E0, 128, 32]
+      - [0x373BE0, i4, D_09000800_373BE0, 32, 32]
+      - [0x373DE0, gfx, D_09000A00_373DE0]
+      - [0x373EC8, vtx, D_09000AE8_373EC8]
+      - [0x373F18, vtx, D_09000B38_373F18]
+      - [0x373F68, gfx, D_09000B88_373F68]
+      - [0x373F88, gfx, D_09000BA8_373F88]
+      - [0x373FA0, vtx, D_09000BC0_373FA0]
+      - [0x373FE0, gfx, D_09000C00_373FE0]
+      - [0x374000, gfx, D_09000C20_374000]
+      - [0x3740A8]
   - name: effect_shimmer_burst
     dir: effects
     type: code

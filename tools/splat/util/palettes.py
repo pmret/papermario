@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict
 from segtypes.n64.ci import N64SegCi
 from segtypes.n64.palette import N64SegPalette as Palette
 from segtypes.common.group import CommonSegGroup

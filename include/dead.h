@@ -1,9 +1,6 @@
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
-// There can be multiple invalid references to a symbol from the dead code,
-// so some symbols here have a "2" suffix.
-
 #define gCameras dead_gCameras
 #define evt_get_variable dead_evt_get_variable
 #define evt_set_variable dead_evt_set_variable
@@ -109,7 +106,11 @@
 #define destroy_popup_menu dead_destroy_popup_menu
 #define heap_free dead_heap_free
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
-#define func_8003D660 dead_func_80041080
 #define fx_misc_particles dead_fx_misc_particles
+#define transform_point dead_transform_point
+#define gMasterGfxPos dead_gMasterGfxPos
+#define osVirtualToPhysical dead_osVirtualToPhysical
+#define nuGfxZBuffer dead_nuGfxZBuffer
+#define nuGfxCfb_ptr dead_nuGfxCfb_ptr
 
 #endif
