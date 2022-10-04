@@ -1,15 +1,11 @@
 #include "mac_06.h"
+#include "model.h"
+#include "effects.h"
 
-#define CLONED_MODEL_GULL 11000
+#define CLONED_MODEL_GULL   11000
+#define CLONED_MODEL_UNUSED 10000
 
-API_CALLABLE(func_80241098_865BD8);
-API_CALLABLE(func_80240E80_8659C0);
-API_CALLABLE(func_80241290_865DD0);
-API_CALLABLE(func_802412AC_865DEC);
-API_CALLABLE(func_80241388_865EC8);
-API_CALLABLE(func_802415FC_86613C);
-
-NpcSettings N(NpcSettings_Kolorado_01) = {
+NpcSettings N(NpcSettings_Whale) = {
     .height = 24,
     .radius = 48,
     .level = 99,
@@ -28,14 +24,11 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 };
 
 f32 D_80243434_867F74 = 0.0f;
-
-s32 D_80243438_867F78 = 0;
-
+f32 D_80243438_867F78 = 0.0f;
 s32 D_8024343C_867F7C = 0;
-
 s32 D_80243440_867F80 = 0;
 
-s32 func_80240E80_8659C0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240E80_8659C0)) {
     Bytecode* args = script->ptrReadPos;
     Npc* whale = get_npc_safe(NPC_Whale);
     Npc* kolorado;
@@ -102,11 +95,91 @@ s32 func_80240E80_8659C0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/mac_06_3", func_80241098_865BD8);
+API_CALLABLE(N(func_80241098_865BD8)) {
+    u32 buttons = gGameStatusPtr->pressedButtons[0];
+    Npc* npc = get_npc_safe(NPC_Whale);
+    
+    switch (D_8024343C_867F7C) {
+        case 0:
+            if (buttons & BUTTON_A) {
+                D_8024343C_867F7C = 10;
+                break;
+            }
+            if (D_80243440_867F80 >= 150) {
+                return ApiStatus_DONE2;
+            }
+            D_80243440_867F80++;
+            break;
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/mac_06_3", func_80241290_865DD0);
+        case 10:
+            npc->currentAnim = ANIM_Kolorado_Shout;
+            D_80243434_867F74 = 0.0f;
+            D_80243438_867F78 = 5.0f;
+            D_8024343C_867F7C = 11;
+            break;
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/mac_06_3", func_802412AC_865DEC);
+        case 11:
+            D_80243434_867F74 += D_80243438_867F78;
+            if (D_80243434_867F74 < 70.0f) {
+                if (D_80243438_867F78 < 4.0f) {
+                    D_80243438_867F78 = 4.0f;
+                }
+                D_80243438_867F78 += 1.0f;
+            } else {
+                D_80243438_867F78 -= 2.0f;
+            }
+            if (npc->currentAnim == ANIM_Kolorado_Idle) {
+                D_80243438_867F78 = 4.0f;
+                D_8024343C_867F7C++;
+            }
+            break;
+        
+        case 12:
+            D_80243434_867F74 -= D_80243438_867F78;
+            if (D_80243434_867F74 < 0.0f) {
+                D_80243434_867F74 = 0.0f;
+                return ApiStatus_DONE2;
+            }
+            D_80243438_867F78 += 1.0f;
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(func_80241290_865DD0)) {
+    if(gGameStatusPtr->pressedButtons[0] & BUTTON_B) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+API_CALLABLE(N(func_802412AC_865DEC)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 modelID = evt_get_variable(script, *args++);
+    s32 outVarX = *args++;
+    s32 outVarY = *args++;
+    s32 outVarZ = *args++;
+    s32 modelIndex = get_model_list_index_from_tree_index(modelID);
+    Model* model = get_model_from_list_index(modelIndex);
+    f32 x, y, z;
+    
+    if (model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED) {
+        // get model translation from transform matrix
+        x = model->transformMatrix[3][0];
+        y = model->transformMatrix[3][1];
+        z = model->transformMatrix[3][2];
+    } else {
+        z = 0.0f;
+        y = 0.0f;
+        x = 0.0f;
+    }
+    
+    evt_set_float_variable(script, outVarX, x);
+    evt_set_float_variable(script, outVarY, y);
+    evt_set_float_variable(script, outVarZ, z);
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_NpcIdle_Whale) = {
     EVT_CALL(GetEntryID, LVar0)
@@ -114,7 +187,7 @@ EvtScript N(EVS_NpcIdle_Whale) = {
         EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
         EVT_CALL(NpcFlyTo, NPC_Whale, 50, LVar1, 500, 120, 0, EASING_SIN_OUT)
         EVT_THREAD
-            EVT_CALL(func_80241098_865BD8)
+            EVT_CALL(N(func_80241098_865BD8))
         EVT_END_THREAD
         EVT_WAIT(150)
         EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
@@ -137,7 +210,7 @@ EvtScript N(EVS_NpcIdle_Whale) = {
         EVT_END_IF
         EVT_CALL(NpcFlyTo, NPC_Whale, -70, LVar1, 500, 120, 0, EASING_SIN_OUT)
         EVT_THREAD
-            EVT_CALL(func_80241098_865BD8)
+            EVT_CALL(N(func_80241098_865BD8))
         EVT_END_THREAD
         EVT_WAIT(150)
         EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
@@ -148,9 +221,61 @@ EvtScript N(EVS_NpcIdle_Whale) = {
     EVT_END
 };
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/mac_06_3", func_80241388_865EC8);
+API_CALLABLE(N(SeagullYawInterp)) {
+    f32 x1 = evt_get_float_variable(script, LVar1);
+    f32 y1 = evt_get_float_variable(script, LVar3);
+    f32 x2 = evt_get_float_variable(script, LVar4);
+    f32 y2 = evt_get_float_variable(script, LVar5);
+    f32 lastYaw = evt_get_float_variable(script, LVar7);
+    f32 newYaw, deltaYaw;
+    
+    if (evt_get_variable(script, LocalFlag(0))) {
+        evt_set_float_variable(script, LVar6, 0.0f);
+        evt_set_float_variable(script, LVar7, 0.0f);
+        evt_set_variable(script, LocalFlag(0), 0);
+        evt_set_variable(script, LocalFlag(1), 1);
+        return ApiStatus_DONE2;
+    }
+    
+    if (x1 == x2 && y1 == y2) {
+        return ApiStatus_DONE2;
+    }
+    
+    if (evt_get_variable(script, LocalFlag(1))) {
+        newYaw = atan2(-x1, y1, -x2, y2);
+        evt_set_float_variable(script, LVar6, newYaw);
+        evt_set_float_variable(script, LVar7, newYaw);
+        evt_set_variable(script, LocalFlag(1), 0);
+        return ApiStatus_DONE2;
+    }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_06/mac_06_3", func_802415FC_86613C);
+    newYaw = atan2(-x1, y1, -x2, y2);
+    newYaw = clamp_angle(newYaw);
+    evt_set_float_variable(script, LVar6, newYaw);
+    
+    deltaYaw = lastYaw - newYaw;
+    if (deltaYaw >= 180.0f) {
+        lastYaw -= 360.0f;
+    } else if (deltaYaw <= -180.0f) {
+        lastYaw += 360.0f;
+    }
+    
+    evt_set_float_variable(script, LVar7, lastYaw + (f32)((newYaw - lastYaw) * 0.1));
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(MakeJrTroopaBubbles)) {
+    Npc* jrTroopa = get_npc_safe(NPC_JrTroopa);
+    f32 x = jrTroopa->pos.x + 10.0f;
+    f32 y = jrTroopa->pos.y;
+    f32 z = jrTroopa->pos.z;
+    
+    if (y < 0.0f) {
+        fx_rising_bubble(0, x, y, z, 0.0f);
+        sfx_adjust_env_sound_pos(0x46, 0, x, y, z);
+    }
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_NpcInit_Whale) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, TRUE)
@@ -178,17 +303,17 @@ EvtScript N(EVS_NpcInit_Whale) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_THREAD
-        EVT_CALL(func_80240E80_8659C0, 0)
+        EVT_CALL(N(func_80240E80_8659C0), 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_80240E80_8659C0, 1)
+        EVT_CALL(N(func_80240E80_8659C0), 1)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-                EVT_CALL(func_80240E80_8659C0, 2)
+                EVT_CALL(N(func_80240E80_8659C0), 2)
             EVT_CASE_EQ(STORY_CH5_TRADED_VASE_FOR_SEED)
-                EVT_CALL(func_80240E80_8659C0, 2)
+                EVT_CALL(N(func_80240E80_8659C0), 2)
         EVT_END_SWITCH
     EVT_END_THREAD
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
@@ -200,7 +325,7 @@ EvtScript N(EVS_NpcInit_Whale) = {
         EVT_END_IF
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(func_80241290_865DD0)
+        EVT_CALL(N(func_80241290_865DD0))
         EVT_CALL(GetEntryID, LVar0)
         EVT_IF_EQ(LVar0, mac_06_ENTRY_0)
             EVT_CALL(GotoMap, EVT_PTR("jan_00"), jan_00_ENTRY_0)
@@ -248,7 +373,7 @@ EvtScript N(EVS_FlyingGull) = {
             EVT_SETF(LVar8, LVar2)
             EVT_MULF(LVar8, -1)
             EVT_CALL(TranslateModel, CLONED_MODEL_GULL, LVar1, LVar8, LVar3)
-            EVT_CALL(func_80241388_865EC8)
+            EVT_CALL(N(SeagullYawInterp))
             EVT_CALL(RotateModel, MODEL_hontai, LVar7, 0, 1, 0)
             EVT_CALL(RotateModel, CLONED_MODEL_GULL, LVar7, 0, 1, 0)
             EVT_CALL(RotateModel, CLONED_MODEL_GULL, 180, 0, 0, 1)
@@ -263,8 +388,7 @@ EvtScript N(EVS_FlyingGull) = {
     EVT_END
 };
 
-// unused
-EvtScript N(EVS_80243CAC) = {
+EvtScript N(EVS_UnusedGull) = {
     EVT_CALL(CloneModel, MODEL_hontai, LVar0)
     EVT_SET(LVarF, LVar0)
     EVT_SET(LocalFlag(0), TRUE)
@@ -282,12 +406,12 @@ EvtScript N(EVS_80243CAC) = {
     EVT_LABEL(10)
     EVT_LABEL(0)
     EVT_SET(LVarE, LVarF)
-    EVT_IF_EQ(LVarE, 0x00002710)
+    EVT_IF_EQ(LVarE, CLONED_MODEL_UNUSED)
         EVT_SET(LVarE, 22)
     EVT_ELSE
         EVT_ADD(LVarE, -1)
     EVT_END_IF
-    EVT_CALL(func_802412AC_865DEC, LVarE, MV_Unk_00, MV_Unk_01, MV_Unk_02)
+    EVT_CALL(N(func_802412AC_865DEC), LVarE, MV_Unk_00, MV_Unk_01, MV_Unk_02)
     EVT_SETF(LVar0, MV_Unk_00)
     EVT_SUBF(LVar0, LVar1)
     EVT_IF_LT(LVar0, 0)
@@ -331,7 +455,7 @@ EvtScript N(EVS_80243CAC) = {
     EVT_END_IF
     EVT_ADDF(LVar3, LVarA)
     EVT_CALL(TranslateModel, LVarF, LVar1, LVar2, LVar3)
-    EVT_CALL(func_80241388_865EC8)
+    EVT_CALL(N(SeagullYawInterp))
     EVT_CALL(RotateModel, LVarF, LVar7, 0, 1, 0)
     EVT_SET(LVar4, LVar1)
     EVT_SET(LVar5, LVar3)
@@ -361,7 +485,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_WAIT(5)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(func_802415FC_86613C)
+            EVT_CALL(N(MakeJrTroopaBubbles))
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -387,7 +511,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
 
 StaticNpc N(NpcData_Whale) = {
     .id = NPC_Whale,
-    .settings = &N(NpcSettings_Kolorado_01),
+    .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
