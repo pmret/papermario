@@ -242,9 +242,7 @@ EvtScript N(80242EAC) = {
     EVT_END
 };
 
-s32 N(D_802431CC_CCE4DC) = {
-    0x00000000,
-};
+s32 N(D_802431CC_CCE4DC) = FALSE;
 
 EvtScript N(802431D0) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -572,10 +570,10 @@ EvtScript N(80243E78) = {
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-void fx_sun();
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
-    fx_sun(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -682,9 +680,9 @@ void N(func_802407D4_CCBAE4)(void) {
         }
     } else {
         if (((u32)N(D_80243B18_CCEE28) - 141) < 119) {
-            N(D_802431CC_CCE4DC) = 1;
+            N(D_802431CC_CCE4DC) = TRUE;
         } else {
-            N(D_802431CC_CCE4DC) = 0;
+            N(D_802431CC_CCE4DC) = FALSE;
         }
         N(D_80243B18_CCEE28) += 5;
     }

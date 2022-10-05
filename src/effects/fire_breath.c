@@ -1,13 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000A00[];
-extern Gfx D_09000B88[];
-extern Gfx D_09000C00[];
-extern Gfx D_09000C20[];
+extern Gfx D_09000A00_373DE0[];
+extern Gfx D_09000B88_373F68[];
+extern Gfx D_09000C00_373FE0[];
+extern Gfx D_09000C20_374000[];
 
-Gfx* D_E006EC00[] = { D_09000B88, D_09000B88, D_09000B88 };
-Gfx* D_E006EC0C[] = { D_09000A00, D_09000A00, D_09000A00 };
+Gfx* D_E006EC00[] = { D_09000B88_373F68, D_09000B88_373F68, D_09000B88_373F68 };
+Gfx* D_E006EC0C[] = { D_09000A00_373DE0, D_09000A00_373DE0, D_09000A00_373DE0 };
 
 void fire_breath_init(EffectInstance* effect);
 void fire_breath_update(EffectInstance* effect);
@@ -199,8 +199,8 @@ void fire_breath_appendGfx(void* effect) {
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09000C20);
-        gSPDisplayList(gMasterGfxPos++, D_09000C00);
+        gSPDisplayList(gMasterGfxPos++, D_09000C20_374000);
+        gSPDisplayList(gMasterGfxPos++, D_09000C00_373FE0);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 

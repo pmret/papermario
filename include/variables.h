@@ -37,8 +37,6 @@ extern ActionCommandStatus gActionCommandStatus;
 
 extern s32 D_802DAC98;
 
-extern s32 gMoveScriptTable[][4];
-
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
 extern EntityList* gCurrentEntityListPtr;

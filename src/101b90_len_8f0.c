@@ -36,11 +36,11 @@ void spr_swizzle_anim_offsets(s32 arg0, s32 base, void* spriteData) {
     s32 animOffset;
     s32 compOffset;
     s32 temp;
-    
+
     // required to match, spriteData->animList would be nicer
     animList = (SpriteAnimComponent***) spriteData;
     animList += 4;
-    
+
     while (TRUE) {
         if (*animList == PTR_LIST_END) {
             break;
@@ -205,6 +205,7 @@ void spr_update_player_raster_cache(void) {
     }
 }
 
+void spr_load_npc_extra_anims(SpriteAnimData*, u32*);
 INCLUDE_ASM(s32, "101b90_len_8f0", spr_load_npc_extra_anims);
 
 #ifdef NON_MATCHING
@@ -239,7 +240,7 @@ SpriteComponent** spr_allocate_components(s32 count) {
         component++;
     }
     *listPos = PTR_LIST_END;
-    
+
     return listStart;
 }
 #else

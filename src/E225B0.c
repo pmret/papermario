@@ -34,13 +34,12 @@ void func_802B7000_E225B0(void) {
     s32 temp;
 
     if (gPlayerStatus.animFlags & PA_FLAGS_100) {
-        guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale,
-            D_802B7C78_E23228->scale);
+        guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
         guTranslateF(matrix2, D_802B7C78_E23228->pos.x, D_802B7C78_E23228->pos.y, D_802B7C78_E23228->pos.z);
         guMtxCatF(matrix1, matrix2, matrix2);
-        guMtxF2L(matrix2, (Mtx*) &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(matrix2, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
         gSPDisplayList(gMasterGfxPos++, D_802B7C00_E231B0);
@@ -121,7 +120,6 @@ void func_802B735C_E2290C(void) {
 
             if (!cond) {
                 D_802B7C78_E23228->unk_24++;
-                return;
             }
             break;
         case 1:

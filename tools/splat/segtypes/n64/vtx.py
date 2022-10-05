@@ -5,7 +5,6 @@ Dumps out Vtx as a .inc.c file.
 Originally written by Mark Street (https://github.com/mkst)
 """
 
-import re
 import struct
 from pathlib import Path
 from util.log import error
@@ -22,12 +21,6 @@ class N64SegVtx(CommonSegCodeSubsegment):
         type,
         name,
         vram_start,
-        extract,
-        given_subalign,
-        exclusive_ram_id,
-        given_dir,
-        symbol_name_format,
-        symbol_name_format_no_rom,
         args,
         yaml,
     ):
@@ -37,12 +30,6 @@ class N64SegVtx(CommonSegCodeSubsegment):
             type,
             name,
             vram_start,
-            extract,
-            given_subalign,
-            exclusive_ram_id=exclusive_ram_id,
-            given_dir=given_dir,
-            symbol_name_format=symbol_name_format,
-            symbol_name_format_no_rom=symbol_name_format_no_rom,
             args=args,
             yaml=yaml,
         )

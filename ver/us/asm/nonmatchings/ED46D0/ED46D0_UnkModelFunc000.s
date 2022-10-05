@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802404B0_ED46D0
+glabel ED46D0_UnkModelFunc000
 /* ED46D0 802404B0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* ED46D4 802404B4 AFB60040 */  sw        $s6, 0x40($sp)
 /* ED46D8 802404B8 0080B02D */  daddu     $s6, $a0, $zero
@@ -90,8 +90,8 @@ glabel func_802404B0_ED46D0
 /* ED47FC 802405DC 004A1021 */  addu      $v0, $v0, $t2
 /* ED4800 802405E0 AFAA0014 */  sw        $t2, 0x14($sp)
 /* ED4804 802405E4 AFAA0010 */  sw        $t2, 0x10($sp)
-/* ED4808 802405E8 3C0A800A */  lui       $t2, %hi(D_800A15A4)
-/* ED480C 802405EC 8D4A15A4 */  lw        $t2, %lo(D_800A15A4)($t2)
+/* ED4808 802405E8 3C0A800A */  lui       $t2, %hi(dead_nuGfxCfb_ptr)
+/* ED480C 802405EC 8D4A15A4 */  lw        $t2, %lo(dead_nuGfxCfb_ptr)($t2)
 /* ED4810 802405F0 00021040 */  sll       $v0, $v0, 1
 /* ED4814 802405F4 AFAA0018 */  sw        $t2, 0x18($sp)
 /* ED4818 802405F8 8FAA0010 */  lw        $t2, 0x10($sp)

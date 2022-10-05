@@ -8,6 +8,7 @@ from pathlib import Path
 import spimdisasm
 
 from util import log, options
+from util import symbols
 from util.compiler import GCC, SN64
 from util.symbols import Symbol
 
@@ -112,9 +113,8 @@ class CommonSegC(CommonSegCodeSubsegment):
                     # TODO run cpp?
                     self.defined_funcs = self.get_funcs_defined_in_c(path)
                     self.global_asm_funcs = self.get_global_asm_funcs(path)
-                    self.mark_c_funcs_as_defined(
-                        {*self.defined_funcs, *self.global_asm_funcs}
-                    )
+                    symbols.to_mark_as_defined.update(self.defined_funcs)
+                    symbols.to_mark_as_defined.update(self.global_asm_funcs)
 
             self.scan_code(rom_bytes)
 
@@ -155,18 +155,6 @@ class CommonSegC(CommonSegCodeSubsegment):
         ret.append("")
 
         return ret
-
-    def mark_c_funcs_as_defined(self, c_funcs):
-        for func_name in c_funcs:
-            found = False
-            for symbols in self.seg_symbols.values():
-                for symbol in symbols:
-                    if symbol.name == func_name:
-                        symbol.defined = True
-                        found = True
-                        break
-                if found:
-                    break
 
     def create_c_asm_file(
         self,

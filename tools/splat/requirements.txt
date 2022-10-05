@@ -3,7 +3,7 @@ pylibyaml
 tqdm
 intervaltree
 colorama
-spimdisasm>=1.5.5
+spimdisasm>=1.5.6
 rabbitizer>=1.2.0
 pygfxd
 n64img>=0.1.2

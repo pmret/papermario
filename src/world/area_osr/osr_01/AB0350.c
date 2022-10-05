@@ -13,19 +13,19 @@ extern s32 D_80241220_AB1210;
 
 // Needs data migrated
 #ifdef NON_MATCHING
-ApiStatus func_802406A4_AB0694(Evt* script, s32 isInitialCall) { 
+ApiStatus func_802406A4_AB0694(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
-    if (isInitialCall != 0) {
+
+    if (isInitialCall) {
         D_8024121C_AB120C = 0;
     }
-    
+
     if (D_8024121C_AB120C != 0) {
         D_8024121C_AB120C = 0;
         evt_set_variable(script, *args++, D_80241220_AB1210);
         return ApiStatus_DONE2;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 #else

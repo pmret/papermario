@@ -2,151 +2,131 @@
 #include "nu/nusys.h"
 #include "model.h"
 
-void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-INCLUDE_ASM(void, "world/area_flo/flo_10/CB96B0", flo_10_func_802404B0_CB96B0);
+void N(UnkModelFunc000)(s32, s32, s32, s32);
 
-typedef struct {
-    /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk_08[0x14];
-    /* 0x1C */ s32 unk_1C;
-} N(UnkStruct2);
+INCLUDE_ASM(void, "world/area_flo/flo_10/CB96B0", flo_10_UnkModelFunc000);
 
-typedef struct {
-    /* 0x00 */ char unk_00[0xC];
-    /* 0x0C */ N(UnkStruct2)* unk_0C;
-} N(UnkStruct);
-
-void N(func_80240A98_CB9C98)(void) {
+void N(UnkModelFunc001)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(0x30));
-    // modelNode propertylist? Causes too many derefences and conflicts with the modelNode load below
-    N(UnkStruct2)* unk1 = ((N(UnkStruct)*)model->modelNode)->unk_0C;
+    ModelBoundingBox* bb = (ModelBoundingBox*) model->modelNode->propertyList;
+    f32 bbHalfX = bb->halfSizeX;
+    f32 bbHalfZ = bb->halfSizeZ;
+    f32 outX, outY, outZ, outS;
     f32 temp_f24;
     f32 temp_f26;
     f32 temp_f20;
     f32 temp_f22;
-    s32 test;
-
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 sp28;
-
-    sp3C = unk1->unk_04;
-    sp38 = unk1->unk_1C;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center.x - sp3C, model->center.y, model->center.z - sp38, 1.0f,
-                    &sp28, &sp2C, &sp30, &sp34);
+                    model->center.x - bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
+                    &outX, &outY, &outZ, &outS);
 
-    sp28 = sp28 * (1.0f / sp34);
-    sp2C = sp2C * -(1.0f / sp34);
-    sp30 = sp30 * (1.0f / sp34);
-    sp34 = (1.0f / sp34);
+    outX *= 1.0f / outS;
+    outY *= -(1.0f / outS);
+    outZ *= 1.0f / outS;
+    outS = 1.0f / outS;
 
-    if (sp34 < 0.0f) {
-        sp28 = 0.0f;
-        sp2C = 1.0f;
+    if (outS < 0.0f) {
+        outX = 0.0f;
+        outY = 1.0f;
     }
-    temp_f20 = sp28;
-    temp_f22 = sp2C;
+    temp_f20 = outX;
+    temp_f22 = outY;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center.x - sp3C, model->center.y, model->center.z + sp38, 1.0f,
-                    &sp28, &sp2C, &sp30, &sp34);
+                    model->center.x - bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
+                    &outX, &outY, &outZ, &outS);
 
-    sp28 = sp28 * (1.0f / sp34);
-    sp2C = sp2C * -(1.0f / sp34);
-    sp30 = sp30 * (1.0f / sp34);
-    sp34 = 1.0f / sp34;
+    outX *= 1.0f / outS;
+    outY *= -(1.0f / outS);
+    outZ *= 1.0f / outS;
+    outS = 1.0f / outS;
 
     temp_f24 = temp_f20;
     temp_f26 = temp_f22;
-    if (sp34 < 0.0f) {
-        sp28 = 0.0f;
-        sp2C = 1.0f;
+    if (outS < 0.0f) {
+        outX = 0.0f;
+        outY = 1.0f;
     }
 
-    if (sp28 < temp_f20) {
-        temp_f24 = sp28;
+    if (temp_f24 > outX) {
+        temp_f24 = outX;
     }
 
-    if (sp2C < temp_f22) {
-        temp_f26 = sp2C;
+    if (temp_f26 > outY) {
+        temp_f26 = outY;
     }
 
-    if (temp_f20 < sp28) {
-        temp_f20 = sp28;
+    if (temp_f20 < outX) {
+        temp_f20 = outX;
     }
 
-    if (temp_f22 < sp2C) {
-        temp_f22 = sp2C;
-    }
-
-    transform_point(camera->perspectiveMatrix,
-                    model->center.x + sp3C, model->center.y, model->center.z + sp38, 1.0f,
-                    &sp28, &sp2C, &sp30, &sp34);
-
-    sp28 = sp28 * (1.0f / sp34);
-    sp2C = sp2C * -(1.0f / sp34);
-    sp30 = sp30 * (1.0f / sp34);
-    sp34 = (1.0f / sp34);
-
-    if (sp34 < 0.0f) {
-        sp28 = 1.0f;
-        sp2C = 1.0f;
-    }
-
-    if (sp28 < temp_f24) {
-        temp_f24 = sp28;
-    }
-
-    if (sp2C < temp_f26) {
-        temp_f26 = sp2C;
-    }
-
-    if (temp_f20 < sp28) {
-        temp_f20 = sp28;
-    }
-
-    if (temp_f22 < sp2C) {
-        temp_f22 = sp2C;
+    if (temp_f22 < outY) {
+        temp_f22 = outY;
     }
 
     transform_point(camera->perspectiveMatrix,
-                    model->center.x + sp3C, model->center.y, model->center.z - sp38, 1.0f,
-                    &sp28, &sp2C, &sp30, &sp34);
+                    model->center.x + bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
+                    &outX, &outY, &outZ, &outS);
 
-    sp28 = sp28 * (1.0f / sp34);
-    sp2C = sp2C * -(1.0f / sp34);
-    sp30 = sp30 * (1.0f / sp34);
-    sp34 = (1.0f / sp34);
+    outX *= 1.0f / outS;
+    outY *= -(1.0f / outS);
+    outZ *= 1.0f / outS;
+    outS = 1.0f / outS;
 
-    if (sp34 < 0.0f) {
-        sp28 = 1.0f;
-        sp2C = 1.0f;
+    if (outS < 0.0f) {
+        outX = 1.0f;
+        outY = 1.0f;
     }
 
-    if (sp28 < temp_f24) {
-        temp_f24 = sp28;
+    if (temp_f24 > outX) {
+        temp_f24 = outX;
     }
 
-    if (sp2C < temp_f26) {
-        temp_f26 = sp2C;
+    if (temp_f26 > outY) {
+        temp_f26 = outY;
     }
 
-    if (temp_f20 < sp28) {
-        temp_f20 = sp28;
+    if (temp_f20 < outX) {
+        temp_f20 = outX;
     }
 
-    if (temp_f22 < sp2C) {
-        temp_f22 = sp2C;
+    if (temp_f22 < outY) {
+        temp_f22 = outY;
     }
 
-    if ((temp_f24 != temp_f20) || (temp_f26 != temp_f22)) {
+    transform_point(camera->perspectiveMatrix,
+                    model->center.x + bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
+                    &outX, &outY, &outZ, &outS);
+
+    outX *= 1.0f / outS;
+    outY *= -(1.0f / outS);
+    outZ *= 1.0f / outS;
+    outS = 1.0f / outS;
+
+    if (outS < 0.0f) {
+        outX = 1.0f;
+        outY = 1.0f;
+    }
+
+    if (temp_f24 > outX) {
+        temp_f24 = outX;
+    }
+
+    if (temp_f26 > outY) {
+        temp_f26 = outY;
+    }
+
+    if (temp_f20 < outX) {
+        temp_f20 = outX;
+    }
+
+    if (temp_f22 < outY) {
+        temp_f22 = outY;
+    }
+
+    if (temp_f24 != temp_f20 || temp_f26 != temp_f22) {
         temp_f24 = ((temp_f24 * camera->viewportW) + camera->viewportW) * 0.5f;
         temp_f26 = ((temp_f26 * camera->viewportH) + camera->viewportH) * 0.5f;
         temp_f20 = ((temp_f20 * camera->viewportW) + camera->viewportW) * 0.5f;
@@ -181,7 +161,7 @@ void N(func_80240A98_CB9C98)(void) {
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE);
         gDPPipeSync(gMasterGfxPos++);
 
-        N(func_802404B0_CB96B0)(temp_f24, temp_f26, temp_f20, temp_f22);
+        N(UnkModelFunc000)(temp_f24, temp_f26, temp_f20, temp_f22);
 
         gDPPipeSync(gMasterGfxPos++);
         gDPSetCycleType(gMasterGfxPos++, G_CYC_2CYCLE);
