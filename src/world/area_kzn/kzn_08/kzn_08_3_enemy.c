@@ -1,7 +1,5 @@
 #include "kzn_08.h"
 
-extern EvtScript D_800936DC;
-
 #include "world/common/enemy/complete/LavaBubble.inc.c"
 #include "world/common/enemy/complete/PutridPiranha.inc.c"
 

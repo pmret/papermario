@@ -1,7 +1,5 @@
 #include "kzn_09.h"
 
-extern EvtScript D_800936DC;
-
 NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
