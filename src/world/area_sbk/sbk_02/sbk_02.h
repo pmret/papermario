@@ -13,8 +13,8 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Mamar                   = 1,
-	NPC_Toad                    = 2,
+    NPC_Mamar                   = 1,
+    NPC_Toad                    = 2,
 };
 
 enum {

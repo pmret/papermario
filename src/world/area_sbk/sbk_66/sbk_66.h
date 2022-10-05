@@ -12,12 +12,12 @@
 #include "sprite/npc/Bandit.h"
 
 enum {
-	NPC_Bandit_01               = 0,
-	NPC_Bandit_02               = 1,
-	NPC_Bandit_03               = 2,
-	NPC_Bandit_04               = 3,
-	NPC_Bandit_05               = 4,
-	NPC_Bandit_06               = 5,
+    NPC_Bandit_01               = 0,
+    NPC_Bandit_02               = 1,
+    NPC_Bandit_03               = 2,
+    NPC_Bandit_04               = 3,
+    NPC_Bandit_05               = 4,
+    NPC_Bandit_06               = 5,
 };
 
 #define NAMESPACE sbk_66

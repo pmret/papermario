@@ -15,9 +15,9 @@
 #include "sprite/npc/Archeologist.h"
 
 enum {
-	NPC_Kolorado                = 0,
-	NPC_Archeologist_01         = 1,
-	NPC_Archeologist_02         = 2,
+    NPC_Kolorado                = 0,
+    NPC_Archeologist_01         = 1,
+    NPC_Archeologist_02         = 2,
 };
 
 enum {

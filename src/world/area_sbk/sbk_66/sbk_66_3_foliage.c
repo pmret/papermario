@@ -65,7 +65,7 @@ FoliageModelList N(Tree3_TrunkModels) = {
 };
 
 FoliageDropList N(Tree3_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,

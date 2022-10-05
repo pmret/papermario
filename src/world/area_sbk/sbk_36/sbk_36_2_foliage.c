@@ -17,7 +17,7 @@ FoliageModelList N(Tree1_TrunkModels) = {
 };
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -54,7 +54,7 @@ FoliageModelList N(Tree2_TrunkModels) = {
 };
 
 FoliageDropList N(Tree2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -163,7 +163,7 @@ FoliageModelList N(Tree6_TrunkModels) = {
 };
 
 FoliageDropList N(Tree6_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -248,7 +248,7 @@ FoliageModelList N(Tree9_TrunkModels) = {
 };
 
 FoliageDropList N(Tree9_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_LETTER03,

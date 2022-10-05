@@ -8,7 +8,7 @@
 
 // needs data
 #ifdef NON_MATCHING
-ApiStatus func_8024091C_92ABCC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8024091C_92ABCC) {
     Bytecode* args = script->ptrReadPos;
     if (isInitialCall) {
         D_8024404C_92E2FC = FALSE;
@@ -29,7 +29,7 @@ static s32 D_80245630[91];
 extern s32 D_8024404C_92E2FC;
 extern s32 D_80244050_92E300;
 
-ApiStatus func_80240970_92AC20(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80240970_92AC20) {
     Bytecode* args = script->ptrReadPos;
 
     D_80244050_92E300 = evt_get_variable(script, *args++);
@@ -37,7 +37,7 @@ ApiStatus func_80240970_92AC20(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802409A8_92AC58(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802409A8_92AC58) {
     Bytecode* args = script->ptrReadPos;
     s32* buf = (s32*) evt_get_variable(script, *args++);
     s32 i;
@@ -60,7 +60,7 @@ ApiStatus func_802409A8_92AC58(Evt* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-ApiStatus PostChapter2StatUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PostChapter2StatUpdate) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(2);
@@ -70,12 +70,12 @@ ApiStatus PostChapter2StatUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CheckTradeEventTime)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CheckTradeEventTime)) {
     script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetItemCount(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetItemCount) {
     script->varTable[0] = get_item_count();
     return ApiStatus_DONE2;
 }
@@ -88,10 +88,10 @@ NpcSettings N(NpcSettings_Mamar) = {
 };
 
 s32 N(missing_80243F9C_3F9C)[] = {
-    0x00000000, 0x00140014, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 
+    0x00000000, 0x00140014, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00630000,
     0x00000000,  0x00160018, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000, 
+    0x00000000, 0x00000000, 0x00630000,
 };
 
 NpcSettings N(NpcSettings_Toad) = {
@@ -101,8 +101,8 @@ NpcSettings N(NpcSettings_Toad) = {
 };
 
 s32 N(missing_80244020_4020)[] = {
-    0x00000000, 0x00170013, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 
+    0x00000000, 0x00170013, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00630000,
 };
 
 s32 N(D_8024404C_92E2FC) = 0;

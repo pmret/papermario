@@ -17,7 +17,7 @@ FoliageModelList N(Tree2_TrunkModels) = {
 };
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_LETTER02,

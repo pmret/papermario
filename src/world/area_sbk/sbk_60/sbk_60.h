@@ -12,7 +12,7 @@
 #include "sprite/npc/Pokey.h"
 
 enum {
-	NPC_Pokey                   = 0,
+    NPC_Pokey                   = 0,
 };
 
 

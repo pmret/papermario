@@ -3,14 +3,14 @@
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-ApiStatus N(func_80240338_92A5E8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240338_92A5E8)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MapVar(0));
     
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240364_92A614)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240364_92A614)) {
     static u8 savedPrimR, savedPrimG, savedPrimB;
     static u8 savedEnvR, savedEnvG, savedEnvB;
     static s32 targetPrimR, targetPrimG, targetPrimB;
@@ -84,11 +84,11 @@ EvtScript N(D_80241258_92B508) = {
 };
 
 s32 N(D_80241418_92B6C8)[] = {
-    MODEL_ruins, MODEL_step, 0x0000FFFF 
+    MODEL_ruins, MODEL_step, 0x0000FFFF
 };
 
 s32 N(D_80241424_92B6D4)[] = {
-    MODEL_upper_light, MODEL_o225, 0x0000FFFF 
+    MODEL_upper_light, MODEL_o225, 0x0000FFFF
 };
 
 EvtScript N(D_80241430_92B6E0) = {

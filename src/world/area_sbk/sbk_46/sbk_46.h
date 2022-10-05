@@ -13,9 +13,9 @@
 #include "sprite/npc/Pokey.h"
 
 enum {
-	NPC_Pokey                   = 0,
-	NPC_Bandit_01               = 1,
-	NPC_Bandit_02               = 2,
+    NPC_Pokey                   = 0,
+    NPC_Bandit_01               = 1,
+    NPC_Bandit_02               = 2,
 };
 
 #define NAMESPACE sbk_46

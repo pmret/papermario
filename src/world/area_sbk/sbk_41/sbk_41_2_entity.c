@@ -11,7 +11,7 @@ TweesterPath N(DefaultTweesterPath)[] = {
 
 TweesterPath* N(TweesterPaths)[] = {
     N(DefaultTweesterPath),
-    PTR_LIST_END 
+    PTR_LIST_END
 };
 
 EvtScript N(EVS_RideTweester) = {
