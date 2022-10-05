@@ -2,12 +2,18 @@
 /// @brief Dry Dry Desert - N3W3
 
 #include "common.h"
-#include "../sbk.h"
 #include "message_ids.h"
 #include "map.h"
 
-#define NAMESPACE sbk_00
+#include "../sbk.h"
+#include "mapfs/sbk_00_shape.h"
+#include "mapfs/sbk_00_hit.h"
 
-extern EvtScript N(main);
-extern NpcGroupList N(npcGroupList_80240768);
-extern EvtScript N(makeEntities);
+#include "sprite/npc/Pokey.h"
+
+enum {
+	NPC_Pokey_01                = 0,
+	NPC_Pokey_02                = 1,
+};
+
+#define NAMESPACE sbk_00

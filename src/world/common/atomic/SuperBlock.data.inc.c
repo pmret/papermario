@@ -12,10 +12,12 @@
     #define SUPER_BLOCK_MAPVAR MapVar(0)
 #endif
 
-// use this in a script macro calling MakeEntity for this super block
-#define EVT_SETUP_SUPER_BLOCK(mapVar,gameFlag) \
-    EVT_SET(mapVar, LVar0)\
-    EVT_CALL(AssignBlockFlag, gameFlag)\
+// use this in an EvtScript calling MakeEntity for this super block
+// expects SUPER_BLOCK_GAMEFLAG and SUPER_BLOCK_MAPVAR to be valid
+#define EVT_MAKE_SUPER_BLOCK(x, y, z, angle) \
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), x, y, z, angle, MAKE_ENTITY_END)\
+    EVT_SET(SUPER_BLOCK_MAPVAR, LVar0)\
+    EVT_CALL(AssignBlockFlag, SUPER_BLOCK_GAMEFLAG)\
     EVT_CALL(AssignScript, EVT_PTR(N(SuperBlock_OnHit)))
 
 s32 N(SuperBlock_CantUpgradeMessages)[2] = {

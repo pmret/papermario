@@ -7025,8 +7025,9 @@ segments:
     start: 0x929270
     vram: 0x80240000
     subsegments:
-    - [0x929270, c]
-    - [0x9292B0, c]
+    - [0x929270, c, sbk_00_1_main]
+    - [0x9292B0, c, sbk_00_2_npc]
+    - [0x9292B0, c, sbk_00_3_entity]
     - [0x9292D0]
   - name: sbk_01
     dir: world/area_sbk/sbk_01
@@ -7034,10 +7035,10 @@ segments:
     start: 0x929A90
     vram: 0x80240000
     subsegments:
-    - [0x929A90, c]
-    - [0x929AD0, c]
+    - [0x929A90, c, sbk_01_1_main]
+    - [0x929AD0, c, sbk_01_2_npc]
     - [0x929AF0]
-  - name: sbk_02
+  - name: sbk_02 #TODO
     dir: world/area_sbk/sbk_02
     type: code
     start: 0x92A2B0
@@ -7057,202 +7058,172 @@ segments:
     start: 0x92F8B0
     vram: 0x80240000
     subsegments:
-    - [0x92F8B0, c]
-    - [0x92F8F0, c]
-    - [0x92F910, data]
-    - [0x92FC20, data]
-    - [0x9304B0]
+    - [0x92F8B0, c, sbk_03_1_main]
+    - [0x92F8F0, c, sbk_03_2_npc]
+    - [0x92F910]
   - name: sbk_04
     dir: world/area_sbk/sbk_04
     type: code
     start: 0x9304D0
     vram: 0x80240000
     subsegments:
-    - [0x9304D0, c]
-    - [0x930510, c]
-    - [0x930530, data]
-    - [0x930840, data]
-    - [0x930CD0]
+    - [0x9304D0, c, sbk_04_1_main]
+    - [0x930510, c, sbk_04_2_npc]
+    - [0x930530]
   - name: sbk_05
     dir: world/area_sbk/sbk_05
     type: code
     start: 0x930CF0
     vram: 0x80240000
     subsegments:
-    - [0x930CF0, c]
-    - [0x930D30, c]
-    - [0x930D50, data]
-    - [0x9310F0, data]
-    - [0x931130, data]
-    - [0x9325A0]
+    - [0x930CF0, c, sbk_05_1_main]
+    - [0x930D30, c, sbk_05_2_entity]
+    - [0x930D30, c, sbk_05_3_npc]
+    - [0x930D50]
   - name: sbk_06
     dir: world/area_sbk/sbk_06
     type: code
     start: 0x9325C0
     vram: 0x80240000
     subsegments:
-    - [0x9325C0, c]
-    - [0x932600, c]
-    - [0x932940, data]
-    - [0x932BF0, data]
-    - [0x933160, data]
-    - [0x933C70]
+    - [0x9325C0, c, sbk_06_1_main]
+    - [0x932600, c, sbk_06_2_npc]
+    - [0x932600, c, sbk_06_3_foliage]
+    - [0x932600, c, sbk_06_4_entity]
+    - [0x932940]
   - name: sbk_10
     dir: world/area_sbk/sbk_10
     type: code
     start: 0x933C80
     vram: 0x80240000
     subsegments:
-    - [0x933C80, c]
-    - [0x933CC0, data]
-    - [0x933FD0, data]
-    - [0x934020]
+    - [0x933C80, c, sbk_10_1_main]
+    - [0x933C80, c, sbk_10_2_entity]
+    - [0x933CC0]
   - name: sbk_11
     dir: world/area_sbk/sbk_11
     type: code
     start: 0x934040
     vram: 0x80240000
     subsegments:
-    - [0x934040, c]
-    - [0x934080, c]
-    - [0x9341A0, data]
-    - [0x934530, data]
-    - [0x934D20]
+    - [0x934040, c, sbk_11_1_main]
+    - [0x934080, c, sbk_11_2_npc]
+    - [0x9341A0]
   - name: sbk_12
     dir: world/area_sbk/sbk_12
     type: code
     start: 0x934D40
     vram: 0x80240000
     subsegments:
-    - [0x934D40, c]
-    - [0x934D80, c]
-    - [0x934DA0, data]
-    - [0x935130, data]
-    - [0x9357C0]
+    - [0x934D40, c, sbk_12_1_main]
+    - [0x934D80, c, sbk_12_2_npc]
+    - [0x934DA0]
   - name: sbk_13
     dir: world/area_sbk/sbk_13
     type: code
     start: 0x9357E0
     vram: 0x80240000
     subsegments:
-    - [0x9357E0, c]
-    - [0x935820, c]
-    - [0x935940, data]
-    - [0x935CD0, data]
-    - [0x9366C0]
+    - [0x9357E0, c, sbk_13_1_main]
+    - [0x935820, c, sbk_13_2_npc]
+    - [0x935940]
   - name: sbk_14
     dir: world/area_sbk/sbk_14
     type: code
     start: 0x9366E0
     vram: 0x80240000
     subsegments:
-    - [0x9366E0, c]
-    - [0x936720, data]
-    - [0x936B20, data]
-    - [0x936CA0]
+    - [0x9366E0, c, sbk_14_1_main]
+    - [0x9366E0, c, sbk_14_2_entity]
+    - [0x936720]
   - name: sbk_15
     dir: world/area_sbk/sbk_15
     type: code
     start: 0x936CD0
     vram: 0x80240000
     subsegments:
-    - [0x936CD0, c]
-    - [0x936D10, c]
-    - [0x936D30, data]
-    - [0x9370C0, data]
-    - [0x937550]
+    - [0x936CD0, c, sbk_15_1_main]
+    - [0x936D10, c, sbk_15_2_npc]
+    - [0x936D30]
   - name: sbk_16
     dir: world/area_sbk/sbk_16
     type: code
     start: 0x937570
     vram: 0x80240000
     subsegments:
-    - [0x937570, c]
-    - [0x9375B0, c]
-    - [0x9377F0, data]
-    - [0x937B00, data]
-    - [0x938570]
+    - [0x937570, c, sbk_16_1_main]
+    - [0x9375B0, c, sbk_16_2_foliage]
+    - [0x9377F0]
   - name: sbk_20
     dir: world/area_sbk/sbk_20
     type: code
     start: 0x938590
     vram: 0x80240000
     subsegments:
-    - [0x938590, c]
-    - [0x9385D0, c]
-    - [0x9386D0, data]
-    - [0x9389F0, data]
-    - [0x938DD0, data]
-    - [0x939540]
+    - [0x938590, c, sbk_20_1_main]
+    - [0x9385D0, c, sbk_20_2_entity]
+    - [0x9385D0, c, sbk_20_2_npc]
+    - [0x9386D0]
   - name: sbk_21
     dir: world/area_sbk/sbk_21
     type: code
     start: 0x939560
     vram: 0x80240000
     subsegments:
-    - [0x939560, c]
-    - [0x9395A0, data]
-    - [0x939910]
+    - [0x939560, c, sbk_21_1_main]
+    - [0x9395A0]
   - name: sbk_22
     dir: world/area_sbk/sbk_22
     type: code
     start: 0x939930
     vram: 0x80240000
     subsegments:
-    - [0x939930, c]
-    - [0x939970, c]
-    - [0x939A90, data]
-    - [0x93A610, data]
-    - [0x93A740]
+    - [0x939930, c, sbk_22_1_main]
+    - [0x939970, c, sbk_22_2_npc]
+    - [0x939970, c, sbk_22_3_entity]
+    - [0x939A90]
   - name: sbk_23
     dir: world/area_sbk/sbk_23
     type: code
     start: 0x93A760
     vram: 0x80240000
     subsegments:
-    - [0x93A760, c]
-    - [0x93A7A0, data]
-    - [0x93AB20, data]
-    - [0x93AC00]
+    - [0x93A760, c, sbk_23_1_main]
+    - [0x93A760, c, sbk_23_2_entity]
+    - [0x93A7A0]
   - name: sbk_24
     dir: world/area_sbk/sbk_24
     type: code
     start: 0x93AC30
     vram: 0x80240000
     subsegments:
-    - [0x93AC30, c]
-    - [0x93AC70, c]
-    - [0x93AFB0, data]
-    - [0x93B3C0, data]
-    - [0x93B770, data]
-    - [0x93C260]
+    - [0x93AC30, c, sbk_24_1_main]
+    - [0x93AC70, c, sbk_24_2_npc]
+    - [0x93AC70, c, sbk_24_3_entity]
+    - [0x93AC70, c, sbk_24_4_foliage]
+    - [0x93AFB0]
   - name: sbk_25
     dir: world/area_sbk/sbk_25
     type: code
     start: 0x93C280
     vram: 0x80240000
     subsegments:
-    - [0x93C280, c]
-    - [0x93C2C0, c]
-    - [0x93C600, data]
-    - [0x93C9A0, data]
-    - [0x93D110, data]
-    - [0x93DB80, data]
-    - [0x93DCB0]
+    - [0x93C280, c, sbk_25_1_main]
+    - [0x93C2C0, c, sbk_25_2_npc]
+    - [0x93C2C0, c, sbk_25_3_foliage]
+    - [0x93C2C0, c, sbk_25_4_entity]
+    - [0x93C600]
   - name: sbk_26
     dir: world/area_sbk/sbk_26
     type: code
     start: 0x93DCD0
     vram: 0x80240000
     subsegments:
-    - [0x93DCD0, c]
-    - [0x93DD10, c]
-    - [0x93DE30, c]
-    - [0x93E070, data]
-    - [0x93E390, data]
-    - [0x93EB80, data]
-    - [0x93F590]
-  - name: sbk_30
+    - [0x93DCD0, c, sbk_26_1_main]
+    - [0x93DD10, c, sbk_26_2_npc]
+    - [0x93DE30, c, sbk_26_3_foliage]
+    - [0x93E070]
+  - name: sbk_30 #TODO
     dir: world/area_sbk/sbk_30
     type: code
     start: 0x93F5B0
@@ -7261,59 +7232,57 @@ segments:
     - [0x93F5B0, c]
     - [0x940DC0, data]
     - [0x943E20]
+#    - [0x93F5B0, c, sbk_30_1_main]
+#    - [0x93F5B0, c, sbk_30_2_npc]
+#    - [0x93F5B0, c, sbk_30_3_foliage]
+#    - [0x940DC0]
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code
     start: 0x944000
     vram: 0x80240000
     subsegments:
-    - [0x944000, c]
-    - [0x944040, c]
-    - [0x944140, data]
-    - [0x9444D0, data]
-    - [0x944A40]
+    - [0x944000, c, sbk_31_1_main]
+    - [0x944040, c, sbk_31_2_npc]
+    - [0x944140]
   - name: sbk_32
     dir: world/area_sbk/sbk_32
     type: code
     start: 0x944A60
     vram: 0x80240000
     subsegments:
-    - [0x944A60, c]
-    - [0x944AA0, c]
-    - [0x944BC0, data]
-    - [0x9459B0]
+    - [0x944A60, c, sbk_32_1_main]
+    - [0x944AA0, c, sbk_32_2_npc]
+    - [0x944BC0]
   - name: sbk_33
     dir: world/area_sbk/sbk_33
     type: code
     start: 0x9459D0
     vram: 0x80240000
-    subsegments:
-    - [0x9459D0, c]
-    - [0x945A10, data]
-    - [0x945BA0, data]
-    - [0x945EA0]
+    subsegments: # unusual organization
+    - [0x9459D0, c, sbk_33_0_header]
+    - [0x9459D0, c, sbk_33_1_entity]
+    - [0x9459D0, c, sbk_33_2_main]
+    - [0x945A10]
   - name: sbk_34
     dir: world/area_sbk/sbk_34
     type: code
     start: 0x945ED0
     vram: 0x80240000
     subsegments:
-    - [0x945ED0, c]
-    - [0x945F10, c]
-    - [0x946670, c]
-    - [0x9468B0, data]
-    - [0x947C80, data]
-    - [0x948690]
+    - [0x945ED0, c, sbk_34_1_main]
+    - [0x945F10, c, sbk_34_2_npc]
+    - [0x946670, c, sbk_34_3_foliage]
+    - [0x9468B0]
   - name: sbk_35
     dir: world/area_sbk/sbk_35
     type: code
     start: 0x9486B0
     vram: 0x80240000
     subsegments:
-    - [0x9486B0, c]
-    - [0x9486F0, c]
-    - [0x948A30, data]
-    - [0x949330, data]
+    - [0x9486B0, c, sbk_35_1_main]
+    - [0x9486F0, c, sbk_35_2_npc]
+    - [0x9486F0, c, sbk_35_3_foliage]
     - [0x949E40]
   - name: sbk_36
     dir: world/area_sbk/sbk_36
@@ -7321,249 +7290,214 @@ segments:
     start: 0x949E60
     vram: 0x80240000
     subsegments:
-    - [0x949E60, c]
-    - [0x949EA0, c]
-    - [0x94A0E0, data]
-    - [0x94A470, data]
-    - [0x94B380]
+    - [0x949E60, c, sbk_36_1_main]
+    - [0x949EA0, c, sbk_36_2_foliage]
+    - [0x949EA0, c, sbk_36_3_entity]
+    - [0x94A0E0]
   - name: sbk_40
     dir: world/area_sbk/sbk_40
     type: code
     start: 0x94B3A0
     vram: 0x80240000
     subsegments:
-    - [0x94B3A0, c]
-    - [0x94B3E0, c]
-    - [0x94B4E0, data]
-    - [0x94B800, data]
-    - [0x94BF70, data]
-    - [0x94C020]
+    - [0x94B3A0, c, sbk_40_1_main]
+    - [0x94B3E0, c, sbk_40_2_npc]
+    - [0x94B3E0, c, sbk_40_3_entity]
+    - [0x94B4E0]
   - name: sbk_41
     dir: world/area_sbk/sbk_41
     type: code
     start: 0x94C040
     vram: 0x80240000
     subsegments:
-    - [0x94C040, c]
-    - [0x94C080, data]
-    - [0x94C400, data]
-    - [0x94C4E0]
+    - [0x94C040, c, sbk_41_1_main]
+    - [0x94C040, c, sbk_41_2_entity]
+    - [0x94C080]
   - name: sbk_42
     dir: world/area_sbk/sbk_42
     type: code
     start: 0x94C510
     vram: 0x80240000
     subsegments:
-    - [0x94C510, c]
-    - [0x94C550, c]
-    - [0x94C650, data]
-    - [0x94C9E0, data]
-    - [0x94D150]
+    - [0x94C510, c, sbk_42_1_main]
+    - [0x94C550, c, sbk_42_2_npc]
+    - [0x94C650]
   - name: sbk_43
     dir: world/area_sbk/sbk_43
     type: code
     start: 0x94D170
     vram: 0x80240000
     subsegments:
-    - [0x94D170, c]
-    - [0x94D1B0, data]
-    - [0x94D530, data]
-    - [0x94D580]
+    - [0x94D170, c, sbk_43_1_main]
+    - [0x94D170, c, sbk_43_2_entity]
+    - [0x94D170]
   - name: sbk_44
     dir: world/area_sbk/sbk_44
     type: code
     start: 0x94D5A0
     vram: 0x80240000
     subsegments:
-    - [0x94D5A0, c]
-    - [0x94D5E0, c]
-    - [0x94D700, data]
-    - [0x94DA90, data]
-    - [0x94E480]
+    - [0x94D5A0, c, sbk_44_1_main]
+    - [0x94D5E0, c, sbk_44_2_npc]
+    - [0x94D700]
   - name: sbk_45
     dir: world/area_sbk/sbk_45
     type: code
     start: 0x94E4A0
     vram: 0x80240000
     subsegments:
-    - [0x94E4A0, c]
-    - [0x94E4E0, data]
-    - [0x94E8E0, data]
-    - [0x94E980]
+    - [0x94E4A0, c, sbk_45_1_main]
+    - [0x94E4A0, c, sbk_45_2_entity]
+    - [0x94E4E0]
   - name: sbk_46
     dir: world/area_sbk/sbk_46
     type: code
     start: 0x94E9A0
     vram: 0x80240000
     subsegments:
-    - [0x94E9A0, c]
-    - [0x94E9E0, c]
-    - [0x94EB00, c]
-    - [0x94ED40, data]
-    - [0x94F070, data]
-    - [0x94FA60, data]
-    - [0x950570, data]
-    - [0x9505F0]
+    - [0x94E9A0, c, sbk_46_1_main]
+    - [0x94E9E0, c, sbk_46_2_npc]
+    - [0x94EB00, c, sbk_46_3_foliage]
+    - [0x94EB00, c, sbk_46_4_entity]
+    - [0x94ED40]
   - name: sbk_50
     dir: world/area_sbk/sbk_50
     type: code
     start: 0x950610
     vram: 0x80240000
     subsegments:
-    - [0x950610, c]
-    - [0x950650, data]
-    - [0x950950]
+    - [0x950610, c, sbk_50_1_main]
+    - [0x950650]
   - name: sbk_51
     dir: world/area_sbk/sbk_51
     type: code
     start: 0x950970
     vram: 0x80240000
     subsegments:
-    - [0x950970, c]
-    - [0x9509B0, c]
-    - [0x950AD0, data]
-    - [0x950E60, data]
-    - [0x951650]
+    - [0x950970, c, sbk_51_1_main]
+    - [0x9509B0, c, sbk_51_2_npc]
+    - [0x950AD0]
   - name: sbk_52
     dir: world/area_sbk/sbk_52
     type: code
     start: 0x951670
     vram: 0x80240000
     subsegments:
-    - [0x951670, c]
-    - [0x9516B0, data]
-    - [0x951A30, data]
-    - [0x951AC0]
+    - [0x951670, c, sbk_52_1_main]
+    - [0x951670, c, sbk_52_2_entity]
+    - [0x9516B0]
   - name: sbk_53
     dir: world/area_sbk/sbk_53
     type: code
     start: 0x951AE0
     vram: 0x80240000
     subsegments:
-    - [0x951AE0, c]
-    - [0x951B20, c]
-    - [0x951B40, data]
-    - [0x951ED0, data]
-    - [0x952560]
+    - [0x951AE0, c, sbk_53_1_main]
+    - [0x951B20, c, sbk_53_2_npc]
+    - [0x951B40]
   - name: sbk_54
     dir: world/area_sbk/sbk_54
     type: code
     start: 0x952580
     vram: 0x80240000
     subsegments:
-    - [0x952580, c]
-    - [0x9525C0, data]
-    - [0x952940, data]
-    - [0x952A20]
+    - [0x952580, c, sbk_54_1_main]
+    - [0x952580, c, sbk_54_2_entity]
+    - [0x9525C0]
   - name: sbk_55
     dir: world/area_sbk/sbk_55
     type: code
     start: 0x952A50
     vram: 0x80240000
     subsegments:
-    - [0x952A50, c]
-    - [0x952A90, c]
-    - [0x952AB0, c]
-    - [0x952CF0, data]
-    - [0x953090, data]
-    - [0x953520, data]
-    - [0x953FA0]
+    - [0x952A50, c, sbk_55_1_main]
+    - [0x952A90, c, sbk_55_2_npc]
+    - [0x952AB0, c, sbk_55_3_foliage]
+    - [0x952AB0, c, sbk_55_4_entity]
+    - [0x952CF0]
   - name: sbk_56
     dir: world/area_sbk/sbk_56
     type: code
     start: 0x953FC0
     vram: 0x80240000
     subsegments:
-    - [0x953FC0, c]
-    - [0x954D80, c]
-    - [0x954FC0, data]
-    - [0x9553F0, data]
-    - [0x9569D0]
+    - [0x953FC0, c, sbk_56_1_main]
+    - [0x954D80, c, sbk_56_2_entity]
+    - [0x954D80, c, sbk_56_3_foliage]
+    - [0x954FC00]
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
     start: 0x9569F0
     vram: 0x80240000
     subsegments:
-    - [0x9569F0, c]
-    - [0x956A30, c]
-    - [0x956A50, data]
-    - [0x956CF0, data]
-    - [0x956F80]
+    - [0x9569F0, c, sbk_60_1_main]
+    - [0x956A30, c, sbk_60_2_npc]
+    - [0x956A50]
   - name: sbk_61
     dir: world/area_sbk/sbk_61
     type: code
     start: 0x956F90
     vram: 0x80240000
     subsegments:
-    - [0x956F90, c]
-    - [0x956FD0, data]
-    - [0x9572E0, data]
-    - [0x957330]
+    - [0x956F90, c, sbk_61_1_main]
+    - [0x956F90, c, sbk_61_2_entity]
+    - [0x956FD0]
   - name: sbk_62
     dir: world/area_sbk/sbk_62
     type: code
     start: 0x957350
     vram: 0x80240000
     subsegments:
-    - [0x957350, c]
-    - [0x957390, c]
-    - [0x9573B0, data]
-    - [0x9576C0, data]
-    - [0x957D50]
+    - [0x957350, c, sbk_62_1_main]
+    - [0x957390, c, sbk_62_2_npc]
+    - [0x9573B0]
   - name: sbk_63
     dir: world/area_sbk/sbk_63
     type: code
     start: 0x957D70
     vram: 0x80240000
     subsegments:
-    - [0x957D70, c]
-    - [0x957DB0, c]
-    - [0x957DD0, data]
-    - [0x9580E0, data]
-    - [0x958570]
+    - [0x957D70, c, sbk_63_1_main]
+    - [0x957DB0, c, sbk_63_2_npc]
+    - [0x957DD0]
   - name: sbk_64
     dir: world/area_sbk/sbk_64
     type: code
     start: 0x958590
     vram: 0x80240000
     subsegments:
-    - [0x958590, c]
-    - [0x9585D0, data]
-    - [0x9588E0, data]
-    - [0x958930]
+    - [0x958590, c, sbk_64_1_main]
+    - [0x958590, c, sbk_64_2_entity]
+    - [0x9585D0]
   - name: sbk_65
     dir: world/area_sbk/sbk_65
     type: code
     start: 0x958950
     vram: 0x80240000
     subsegments:
-    - [0x958950, c]
-    - [0x958990, data]
-    - [0x958C90]
+    - [0x958950, c, sbk_65_1_main]
+    - [0x958990]
   - name: sbk_66
     dir: world/area_sbk/sbk_66
     type: code
     start: 0x958CB0
     vram: 0x80240000
     subsegments:
-    - [0x958CB0, c]
-    - [0x958CF0, c]
-    - [0x959030, data]
-    - [0x9592E0, data]
-    - [0x95A240, data]
-    - [0x95AD50, data]
-    - [0x95AEA0]
+    - [0x958CB0, c, sbk_66_1_main]
+    - [0x958CF0, c, sbk_66_2_npc]
+    - [0x958CF0, c, sbk_66_3_foliage]
+    - [0x958CF0, c, sbk_66_4_entity]
+    - [0x959030]
   - name: sbk_99
     dir: world/area_sbk/sbk_99
     type: code
     start: 0x95AEB0
     vram: 0x80240000
     subsegments:
-    - [0x95AEB0, c]
-    - [0x95AEB0, data]
-    - [0x95B190, data]
-    - [0x95B1F0]
+    - [0x95AEB0, c, sbk_99_1_main]
+    - [0x95AEB0, c, sbk_99_2_entity]
+    - [0x95AEB0]
   - name: dro_01
     dir: world/area_dro/dro_01
     type: code

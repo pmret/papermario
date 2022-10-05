@@ -200,8 +200,7 @@ EvtScript N(EVS_OnBreakWall) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_20)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    EVT_SETUP_CAMERA_NO_LEAD()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)

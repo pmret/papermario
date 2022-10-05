@@ -235,7 +235,7 @@ EvtScript N(D_80245B64_C7C844) = {
         ITEM_LETTER25, 0,
         MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
         EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(DoLetterDelivery))
+    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };

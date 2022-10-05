@@ -28,7 +28,6 @@ ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(Delivery_ShowGotStarPiece) = {
     EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
     EVT_RETURN
@@ -175,8 +174,7 @@ EvtScript N(D_802452BC_C7BF9C) = {
     EVT_END
 };
 
-// unused
-EvtScript N(EVS_80245400) = {
+EvtScript N(EVS_ShowChoiceWindow) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(D_802452BC_C7BF9C), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(AwaitLetterChoiceResult), LVar0)
@@ -245,7 +243,7 @@ EvtScript N(D_802454D0_C7C1B0) = {
     EVT_END
 };
 
-EvtScript N(D_802457F4_C7C4D4) = {
+EvtScript N(EVS_ShowLetterChoice) = {
     EVT_SET(LVar0, LVarB)
     EVT_SET(LVar1, LVar2)
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
@@ -255,7 +253,7 @@ EvtScript N(D_802457F4_C7C4D4) = {
     EVT_END
 };
 
-EvtScript N(DoLetterDelivery) = {
+EvtScript N(EVS_DoLetterDelivery) = {
     EVT_SET(LVarC, 0)
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_PARAKARRY_JOINED_PARTY)
         EVT_RETURN
@@ -275,7 +273,7 @@ EvtScript N(DoLetterDelivery) = {
             EVT_CALL(NpcJump1, NPC_PARTNER, LVarD, LVar0, LVarF, 10)
             EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, LVar2, LVar7)
             EVT_CALL(EnablePartnerAI)
-            EVT_EXEC_WAIT(N(D_802457F4_C7C4D4))
+            EVT_EXEC_WAIT(N(EVS_ShowLetterChoice))
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(-1)
                     EVT_CALL(DisablePartnerAI, 0)
@@ -293,7 +291,7 @@ EvtScript N(DoLetterDelivery) = {
                     EVT_CALL(EnablePartnerAI)
                     EVT_IF_NE(LVar6, 0)
                         EVT_SET(LVar0, LVar6)
-                        EVT_SET(LVar1, 1)
+                        EVT_SET(LVar1, ITEM_TYPE_KEY)
                         EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
                         EVT_CALL(AddKeyItem, LVar6)
                     EVT_END_IF

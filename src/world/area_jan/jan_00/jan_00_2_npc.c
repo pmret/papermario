@@ -82,7 +82,7 @@ EvtScript N(EVS_Kolorado_LetterDelivery) = {
         ITEM_LETTER25, 0,
         MSG_CH5_001D, MSG_CH5_001E, MSG_CH5_001F, MSG_CH5_0020,
         EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(DoLetterDelivery))
+    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
@@ -115,7 +115,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240F14_B21454);
 API_CALLABLE(func_80241134_B21674);
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80241134_B21674);
 
-__asm__(".section .data\n");
+MAP_DATA_SECTION_START
 
 EvtScript N(D_80242D90_B232D0) = {
     EVT_CALL(func_80240CF8_B21238, LVar0)

@@ -51,8 +51,7 @@ EvtScript N(80241F40) = {
 #include "world/common/atomic/SuperBlock.data.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), -780, 120, -110, 0, MAKE_ENTITY_END)
-    EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
+    EVT_MAKE_SUPER_BLOCK(-780, 120, -110, 0)
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 510, 0, -90, 17, GF_FLO08_Item_StarPiece)
     EVT_RETURN
     EVT_END

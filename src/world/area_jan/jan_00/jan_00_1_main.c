@@ -15,7 +15,7 @@ API_CALLABLE(func_8024030C_B2084C);
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_8024030C_B2084C);
-__asm__(".section .data\n");
+MAP_DATA_SECTION_START
 
 EvtScript N(EVS_ExitWalk_jan_01_0) = EVT_EXIT_WALK(60, jan_00_ENTRY_1, "jan_01", jan_01_ENTRY_0);
 EvtScript N(EVS_ExitWalk_jan_08_0) = EVT_EXIT_WALK(60, jan_00_ENTRY_2, "jan_08", jan_08_ENTRY_0);

@@ -73,7 +73,6 @@ ApiStatus N(CheckTradeEventTime)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus GetItemCount(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_item_count();
     return ApiStatus_DONE2;

@@ -29,6 +29,10 @@
 #define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
 #define MAP_STATIC_PAD(n,name) static s32 N(static_pad_##name)[n];
 
+// standardized macro for reseting data section after a INCLUDE_ASM
+//TODO these should all be removed after map decomp is done
+#define MAP_DATA_SECTION_START __asm__(".section .data\n");
+
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 

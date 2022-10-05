@@ -62,8 +62,7 @@ EvtScript N(EVS_DropLastLetter) = {
 EvtScript N(EVS_Main) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_20000)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    EVT_SETUP_CAMERA_NO_LEAD()
     EVT_THREAD
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_NE(LVar0, PARTNER_NONE)
