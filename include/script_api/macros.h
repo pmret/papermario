@@ -633,4 +633,32 @@
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE) \
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
 
+#define EVT_PLAY_EFFECT(...) VFUNC(EVT_PLAY_EFFECT, __VA_ARGS__)
+#define EVT_PLAY_EFFECT2(effect, subtype) \
+    EVT_CALL(PlayEffect, effect, subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT3(effect, subtype, a) \
+    EVT_CALL(PlayEffect, effect, subtype, a, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT4(effect, subtype, a, b) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT5(effect, subtype, a, b, c) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT6(effect, subtype, a, b, c, d) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, 0, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT7(effect, subtype, a, b, c, d, e) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, 0, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT8(effect, subtype, a, b, c, d, e, f) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, 0, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT9(effect, subtype, a, b, c, d, e, f, g) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, 0, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT10(effect, subtype, a, b, c, d, e, f, g, h) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, 0, 0, 0, 0)
+#define EVT_PLAY_EFFECT11(effect, subtype, a, b, c, d, e, f, g, h, i) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, 0, 0, 0)
+#define EVT_PLAY_EFFECT12(effect, subtype, a, b, c, d, e, f, g, h, i, j) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, 0, 0)
+#define EVT_PLAY_EFFECT13(effect, subtype, a, b, c, d, e, f, g, h, i, j, k) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, 0)
+#define EVT_PLAY_EFFECT14(effect, subtype, a, b, c, d, e, f, g, h, i, j, k, l) \
+    EVT_CALL(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, l)
+
 #endif

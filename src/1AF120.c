@@ -393,7 +393,7 @@ EvtScript D_80296014 = {
     EVT_WAIT(8)
     EVT_LABEL(10)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2)
     EVT_RETURN
     EVT_END
 };
@@ -405,11 +405,11 @@ EvtScript D_8029621C = {
         EVT_ADD(LVar5, -5)
         EVT_ADD(LVar6, 18)
         EVT_ADD(LVar7, 5)
-        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
         EVT_WAIT(2)
         EVT_ADD(LVar5, 10)
         EVT_ADD(LVar6, -14)
-        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)

@@ -5,13 +5,11 @@
 #include "enums.h"
 #include "script_api/map.h"
 
-#define GET_MACRO(_1,_2,_3,NAME,ARGS...) NAME
-#define NPC_GROUP(ARGS...) GET_MACRO(ARGS, NPC_GROUP_3, NPC_GROUP_2, NPC_GROUP_1)(ARGS)
-
 // battle and stage are optional in overloaded NPC_GROUP macros
-#define NPC_GROUP_1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
-#define NPC_GROUP_2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
-#define NPC_GROUP_3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
+#define NPC_GROUP(...) VFUNC(NPC_GROUP, __VA_ARGS__)
+#define NPC_GROUP1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
+#define NPC_GROUP2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
+#define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
 
 #define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
