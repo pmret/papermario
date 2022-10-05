@@ -1,7 +1,52 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void hieroglyphs_init(void);
+void hieroglyphs_update(EffectInstance* effect);
+void hieroglyphs_render(EffectInstance* effect);
 void hieroglyphs_appendGfx(void* effect);
+
+EffectInstance* hieroglyphs_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 timeLeft) {
+    EffectBlueprint effectBp;
+    EffectInstance* effect;
+    HieroglyphsFXData* data;
+    s32 numParts = 1;
+
+    effectBp.init = (void*)hieroglyphs_init;
+    effectBp.update = hieroglyphs_update;
+    effectBp.renderWorld = hieroglyphs_render;
+    effectBp.unk_00 = 0;
+    effectBp.unk_14 = 0;
+    effectBp.effectID = EFFECT_HIEROGLYPHS;
+
+    effect = shim_create_effect_instance(&effectBp);
+    effect->numParts = numParts;
+
+    data = effect->data.hieroglyphs = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(data != NULL);
+
+    data->unk_00 = arg0;
+    data->lifeTime = 0;
+    if (timeLeft <= 0) {
+        data->timeLeft = 1000;
+    } else {
+        data->timeLeft = timeLeft;
+    }
+    data->unk_24 = 0;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->unk_38 = arg4;
+    data->unk_18 = 70;
+    data->unk_1C = 180;
+    data->unk_20 = 120;
+    data->unk_28 = 20;
+    data->unk_2C = 230;
+    data->unk_30 = 50;
+    data->unk_34 = 255;
+
+    return effect;
+}
 
 void hieroglyphs_init(void) {
 }
@@ -48,49 +93,3 @@ void func_E00E2210(void) {
 }
 
 INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_appendGfx);
-
-// INCLUDE_ASM(s32, "effects/hieroglyphs", hieroglyphs_main);
-void hieroglyphs_main(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {
-    s32 sp10;
-    s32 sp14;
-    void (*sp18)();
-    void (*sp1C)(EffectInstance *);
-    void (*sp20)(EffectInstance *);
-    s32 sp24;
-    EffectInstance* effect;
-    HieroglyphsFXData* data;
-
-    sp18 = hieroglyphs_init;
-    sp1C = hieroglyphs_update;
-    sp20 = hieroglyphs_render;
-    sp10 = 0;
-    sp24 = 0;
-    sp14 = 113;
-    effect = shim_create_effect_instance((EffectBlueprint *) &sp10);
-    effect->numParts = 1;
-    data = shim_general_heap_malloc(60);
-    effect->data.hieroglyphs = data;
-    if (data == NULL) {
-loop_1:
-        goto loop_1;
-    }
-    data->unk_00 = arg0;
-    data->lifeTime = 0;
-    if (arg5 <= 0) {
-        data->timeLeft = 1000;
-    } else {
-        data->timeLeft = arg5;
-    }
-    data->unk_24 = 0;
-    data->pos.x = (f32) arg1;
-    data->pos.y = (f32) arg2;
-    data->pos.z = (f32) arg3;
-    data->unk_18 = 70;
-    data->unk_1C = 180;
-    data->unk_20 = 120;
-    data->unk_28 = 20;
-    data->unk_2C = 230;
-    data->unk_30 = 50;
-    data->unk_34 = 255;
-    data->unk_38 = arg4;
-}

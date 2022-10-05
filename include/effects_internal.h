@@ -143,7 +143,7 @@ FX_MAIN(shiny_flare_main);
 FX_MAIN(huff_puff_breath_main);
 EffectInstance* cold_breath_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* embers_main(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
-void hieroglyphs_main(s32, s32, s32, s32, f32, s32);
+EffectInstance* hieroglyphs_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(misc_particles_main);
 FX_MAIN(static_status_main);
 FX_MAIN(moving_cloud_main);
