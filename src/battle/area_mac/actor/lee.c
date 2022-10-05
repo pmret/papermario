@@ -1288,7 +1288,7 @@ EvtScript N(handleEvent_80220908) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, 0x35D000)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                         EVT_IF_FLAG(LVar0, 0x80000)
                             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                         EVT_ELSE
@@ -2102,7 +2102,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(22)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 0x35D000)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_IF_FLAG(LVar0, 0x80000)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                 EVT_ELSE

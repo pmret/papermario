@@ -4,16 +4,16 @@
 #include "script_api/battle.h"
 #include "sprite/npc/MediGuy.h"
 
-extern EvtScript N(init_8021F9E8);
-extern EvtScript N(takeTurn_80220DCC);
-extern EvtScript N(idle_8021FA8C);
-extern EvtScript N(handleEvent_8021FC60);
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
 
 #include "common/UnkBattleFunc1.inc.c"
 
 #include "common/MediGuySpriteRotationFunc.inc.c"
 
-s32 N(idleAnimations_8021F890)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL,    ANIM_MediGuy_Anim01,
     STATUS_STONE,     ANIM_MediGuy_Anim00,
     STATUS_SLEEP,     ANIM_MediGuy_Anim04,
@@ -26,13 +26,13 @@ s32 N(idleAnimations_8021F890)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021F8DC)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021F8F0)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -57,15 +57,15 @@ s32 N(statusTable_8021F8F0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021F99C)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 38 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021F890),
-        .defenseTable = N(defenseTable_8021F8DC),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1C = 0xFF,
@@ -78,10 +78,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_MEDI_GUY,
     .level = 14,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_8021F99C)),
-    .partsData = N(partsTable_8021F99C),
-    .script = &N(init_8021F9E8),
-    .statusTable = N(statusTable_8021F8F0),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 90,
     .spookChance = 95,
@@ -96,10 +96,10 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 12, 31 },
 };
 
-EvtScript N(init_8021F9E8) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80220DCC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021FA8C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021FC60)))
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 5)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -108,7 +108,7 @@ EvtScript N(init_8021F9E8) = {
     EVT_END
 };
 
-EvtScript N(idle_8021FA8C) = {
+EvtScript N(idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
@@ -126,7 +126,7 @@ EvtScript N(idle_8021FA8C) = {
     EVT_END
 };
 
-EvtScript N(8021FB9C) = {
+EvtScript N(returnHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -139,7 +139,7 @@ EvtScript N(8021FB9C) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021FC60) = {
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -184,7 +184,7 @@ EvtScript N(handleEvent_8021FC60) = {
             EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_EXEC_WAIT(N(8021FB9C))
+            EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
@@ -215,7 +215,7 @@ EvtScript N(handleEvent_8021FC60) = {
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_EXEC_WAIT(N(8021FB9C))
+            EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -270,7 +270,7 @@ EvtScript N(flyingAttack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
@@ -278,7 +278,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F9)
             EVT_THREAD
                 EVT_WAIT(5)
                 EVT_SET(LVar0, 0)
@@ -305,7 +305,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
-            EVT_EXEC_WAIT(N(8021FB9C))
+            EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -313,7 +313,7 @@ EvtScript N(flyingAttack) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
@@ -324,7 +324,7 @@ EvtScript N(flyingAttack) = {
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 1)
@@ -346,7 +346,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(JumpWithBounce, ACTOR_SELF, 10, EVT_FLOAT(2.0))
             EVT_WAIT(20)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_EXEC_WAIT(N(8021FB9C))
+            EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -363,8 +363,8 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(GetOwnerID, LVar0)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x214)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
     EVT_ADD(LVar2, 50)
@@ -380,8 +380,8 @@ EvtScript N(healOneAlly) = {
     EVT_DIV(LVar4, 100)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, LVarA, 0x206D)
-        EVT_CALL(PlaySoundAtActor, LVarA, 0x214)
+        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_214)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, LVarA, SOUND_25C)
     EVT_END_THREAD
@@ -398,7 +398,7 @@ EvtScript N(healOneAlly) = {
     EVT_END
 };
 
-EvtScript N(80220CEC) = {
+EvtScript N(findTargetsToHeal) = {
     EVT_CALL(EnemyCreateTargetList, 2)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -417,8 +417,8 @@ EvtScript N(80220CEC) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80220DCC) = {
-    EVT_EXEC_WAIT(N(80220CEC))
+EvtScript N(takeTurn) = {
+    EVT_EXEC_WAIT(N(findTargetsToHeal))
     EVT_IF_EQ(LVar0, -1)
         EVT_EXEC_WAIT(N(flyingAttack))
     EVT_ELSE
