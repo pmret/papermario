@@ -1,9 +1,9 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000200[];
-extern Gfx D_09000688[];
-extern Gfx D_09000808[];
+extern Gfx D_09000200_3D6130[];
+extern Gfx D_09000688_3D65B8[];
+extern Gfx D_09000808_3D6738[];
 extern Gfx* D_E00D6E40[];
 
 void energy_in_out_appendGfx(void* effect);
@@ -108,7 +108,7 @@ void energy_in_out_appendGfx(void* effect) {
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_18, part->unk_1C, part->unk_20, unk_24);
     gDPSetEnvColor(gMasterGfxPos++, part->unk_28, part->unk_2C, part->unk_30, 0);
-    gSPDisplayList(gMasterGfxPos++, D_09000200);
+    gSPDisplayList(gMasterGfxPos++, D_09000200_3D6130);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
@@ -119,7 +119,7 @@ void energy_in_out_appendGfx(void* effect) {
         shim_guRotateF(sp20, part->unk_3C, 0.0f, 0.0f, 1.0f);
         shim_guTranslateF(sp60, part->pos.x + unk_38, 0.0f, 0.0f);
         shim_guMtxCatF(sp60, sp20, sp20);
-        if (D_E00D6E40[unk_00] == D_09000688 || D_E00D6E40[unk_00] == D_09000808) {
+        if (D_E00D6E40[unk_00] == D_09000688_3D65B8 || D_E00D6E40[unk_00] == D_09000808_3D6738) {
             shim_guScaleF(sp60, scale, 1.0f, 1.0f);
         } else {
             shim_guScaleF(sp60, scale, scale, 1.0f);

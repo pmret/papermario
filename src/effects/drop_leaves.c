@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001180[];
-extern Gfx D_09001230[];
+extern Gfx D_09001180_33E790[];
+extern Gfx D_09001230_33E840[];
 
 void drop_leaves_init(EffectInstance* effect);
 void drop_leaves_render(EffectInstance* effect);
@@ -134,7 +134,7 @@ void drop_leaves_appendGfx(void* effect) {
     s32 i;
 
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09001180);
+    gSPDisplayList(gMasterGfxPos++, D_09001180_33E790);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 20, 100, 20, part->unk_24);
 
     shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
@@ -152,7 +152,7 @@ void drop_leaves_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09001230);
+        gSPDisplayList(gMasterGfxPos++, D_09001230_33E840);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 }

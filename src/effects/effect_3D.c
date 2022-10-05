@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000240[];
-extern Gfx D_090002E8[];
+extern Gfx D_09000240_37D3C0[];
+extern Gfx D_090002E8_37D468[];
 
 void fx_3D_init(EffectInstance* effect);
 void fx_3D_update(EffectInstance* effect);
@@ -226,7 +226,7 @@ void fx_3D_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000240);
+    gSPDisplayList(gMasterGfxPos++, D_09000240_37D3C0);
 
     shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -247,7 +247,7 @@ void fx_3D_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090002E8);
+        gSPDisplayList(gMasterGfxPos++, D_090002E8_37D468);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 

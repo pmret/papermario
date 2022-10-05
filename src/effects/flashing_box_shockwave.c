@@ -1,10 +1,10 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000600[];
-extern Gfx D_090008E8[];
-extern Gfx D_09000950[];
-extern Gfx D_09000FF8[];
+extern Gfx D_09000600_3936A0[];
+extern Gfx D_090008E8_393988[];
+extern Gfx D_09000950_3939F0[];
+extern Gfx D_09000FF8_394098[];
 
 void flashing_box_shockwave_init(EffectInstance* effect);
 void flashing_box_shockwave_update(EffectInstance* effect);
@@ -160,9 +160,9 @@ void flashing_box_shockwave_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09000600);
+        gSPDisplayList(gMasterGfxPos++, D_09000600_3936A0);
         gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, unk_20 * 8, unk_20 * 8, unk_20 * 8 + 128, unk_20 * 8 + 128);
-        gSPDisplayList(gMasterGfxPos++, D_090008E8);
+        gSPDisplayList(gMasterGfxPos++, D_090008E8_393988);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 
@@ -177,8 +177,8 @@ void flashing_box_shockwave_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09000950);
-        gSPDisplayList(gMasterGfxPos++, D_09000FF8);
+        gSPDisplayList(gMasterGfxPos++, D_09000950_3939F0);
+        gSPDisplayList(gMasterGfxPos++, D_09000FF8_394098);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 

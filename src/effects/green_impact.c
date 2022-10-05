@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000540[];
+extern Gfx D_09000540_365EF0[];
 extern Gfx* D_E0064A60[];
 
 void green_impact_init(EffectInstance* effect);
@@ -190,7 +190,7 @@ void green_impact_appendGfx(void* effect) {
             shim_guMtxCatF(sp60, sp20, sp20);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            dlist2 = D_09000540;
+            dlist2 = D_09000540_365EF0;
 
             gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, (s32) part->unk_3C, 252, (s32) part->unk_3C + 124);
             gDPSetTileSize(gMasterGfxPos++, 1, 0, (s32) part->unk_44, 124, (s32) part->unk_44 + 124);

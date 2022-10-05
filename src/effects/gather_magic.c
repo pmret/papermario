@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000080[];
+extern Gfx D_09000080_38F790[];
 extern Gfx* D_E008E890[];
 
 void gather_magic_appendGfx(void* effect);
@@ -167,7 +167,7 @@ void gather_magic_appendGfx(void* effect) {
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000080);
+    gSPDisplayList(gMasterGfxPos++, D_09000080_38F790);
     gDPSetEnvColor(gMasterGfxPos++, part->unk_3C, part->unk_40, part->unk_44, 0);
 
     part++;

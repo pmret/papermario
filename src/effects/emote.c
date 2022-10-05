@@ -1,20 +1,20 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09002170[];
-extern Gfx D_09002238[];
-extern Gfx D_090022E0[];
-extern Gfx D_09002308[];
-extern Gfx D_090023B0[];
-extern Gfx D_090023D8[];
-extern Gfx D_09002480[];
-extern Gfx D_090024A8[];
-extern Gfx D_09002550[];
-extern Gfx D_09002578[];
+extern Gfx D_09002170_336DE0[];
+extern Gfx D_09002238_336EA8[];
+extern Gfx D_090022E0_336F50[];
+extern Gfx D_09002308_336F78[];
+extern Gfx D_090023B0_337020[];
+extern Gfx D_090023D8_337048[];
+extern Gfx D_09002480_3370F0[];
+extern Gfx D_090024A8_337118[];
+extern Gfx D_09002550_3371C0[];
+extern Gfx D_09002578_3371E8[];
 
-Gfx* D_E0020C90[] = { D_090022E0, NULL, D_090023B0, D_09002480, D_09002550 };
+Gfx* D_E0020C90[] = { D_090022E0_336F50, NULL, D_090023B0_337020, D_09002480_3370F0, D_09002550_3371C0 };
 
-Gfx* D_E0020CA4[] = { D_09002238, NULL, D_09002308, D_090023D8, D_090024A8 };
+Gfx* D_E0020CA4[] = { D_09002238_336EA8, NULL, D_09002308_336F78, D_090023D8_337048, D_090024A8_337118 };
 
 s8 D_E0020CB8[40] = {
     0, 0, 1, 2, 3, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
@@ -232,7 +232,7 @@ void emote_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09002170)
+        gSPDisplayList(gMasterGfxPos++, D_09002170_336DE0)
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     } else {
@@ -250,7 +250,7 @@ void emote_appendGfx(void* effect) {
                 shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, 235, 28, 0, 255);
                 gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gSPDisplayList(gMasterGfxPos++, D_09002578);
+                gSPDisplayList(gMasterGfxPos++, D_09002578_3371E8);
                 gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
             }
         }

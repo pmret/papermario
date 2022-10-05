@@ -1,9 +1,9 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern char D_09000000[][0x1000];
-extern char D_09004000[][0x1000];
-extern Gfx D_09008100[];
+extern char D_09000000_345B40[][0x1000];
+extern char D_09004000_349B40[][0x1000];
+extern Gfx D_09008100_34DC40[];
 extern Gfx* D_E0036630[];
 extern u8 D_E0036640[];
 extern u8 D_E0036648[];
@@ -110,7 +110,7 @@ void got_item_outline_appendGfx(void* effect) {
     if (unk_18 != 0.0f) {
         gDPPipeSync(gMasterGfxPos++);
         gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-        gSPDisplayList(gMasterGfxPos++, D_09008100);
+        gSPDisplayList(gMasterGfxPos++, D_09008100_34DC40);
 
         if (unk_00 == 0) {
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_1C);
@@ -138,9 +138,9 @@ void got_item_outline_appendGfx(void* effect) {
             char* temp;
 
             if (unk_00 == 0) {
-                temp = D_09000000[i];
+                temp = D_09000000_345B40[i];
             } else {
-                temp = D_09004000[i];
+                temp = D_09004000_349B40[i];
             }
 
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 128, temp);
