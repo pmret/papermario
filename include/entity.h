@@ -291,6 +291,8 @@ typedef struct BombableRockData {
     /* 0x88 */ f32 fragmentFallSpeed[6];
 } BombableRockData; // size = 0xA0
 
+typedef s32 TweesterPath[0];
+
 typedef struct TweesterData {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 faceAnimState;

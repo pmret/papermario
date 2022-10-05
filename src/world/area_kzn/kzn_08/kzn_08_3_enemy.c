@@ -1,135 +1,12 @@
 #include "kzn_08.h"
 
-extern EvtScript D_800936DC;
+#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/complete/PutridPiranha.inc.c"
 
-#include "sprite/npc/LargePiranha.h"
-
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
-};
-
-#include "world/common/enemy/FlyingAI.inc.c"
-
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
-
-#include "world/common/enemy/PiranhaPlantAI.inc.c"
-
-MobileAISettings N(D_80244DB8_C76238) = {
-    .moveSpeed = 0.8f,
-    .moveTime = 100,
-    .alertRadius = 90.0f,
-    .playerSearchInterval = 4,
-    .chaseSpeed = 3.2f,
-    .chaseTurnRate = 10,
-    .chaseUpdateInterval = 1,
-    .chaseRadius = 100.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_80244DE8_C76268) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 150)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(D_80244DB8_C76238)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(80244E58) = {
-    .height = 20,
-    .radius = 22,
-    .level = 17,
-    .ai = &N(D_80244DE8_C76268),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-EvtScript N(D_80244E84_C76304) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(func_80045900, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(D_80244F40_C763C0) = {
-    .moveTime = 30,
-    .waitTime = 30,
-    .alertRadius = 150.0f,
-    .playerSearchInterval = 1,
-};
-
-EvtScript N(D_80244F70_C763F0) = {
-    EVT_CALL(SetSelfVar, 7, 1)
-    EVT_CALL(SetSelfVar, 8, 10)
-    EVT_CALL(SetSelfVar, 9, 9)
-    EVT_CALL(SetSelfVar, 10, 12)
-    EVT_CALL(SetSelfVar, 11, 7)
-    EVT_CALL(SetSelfVar, 12, 30)
-    EVT_CALL(SetSelfVar, 13, 15)
-    EVT_CALL(SetSelfVar, 14, 18)
-    EVT_CALL(SetSelfVar, 15, 15)
-    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(D_80244F40_C763C0)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(D_80245044_C764C4) = {
-    .height = 50,
-    .radius = 36,
-    .level = 17,
-    .ai = &N(D_80244F70_C763F0),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-EvtScript N(D_80245070_C764F0) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 14)
-    EVT_CALL(SetSelfVar, 1, 28)
-    EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, SOUND_20DE)
-    EVT_CALL(EVT_PTR(N(MeleeHitbox_Main)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_802450F0) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(D_800936DC)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_MeleeHitbox) = {
-    .height = 20,
-    .radius = 28,
-    .level = 17,
-    .ai = &N(D_80245070_C764F0),
-    .onDefeat = &N(D_80244E84_C76304),
-};
-
-StaticNpc N(D_802451A8_C76628)[] = {
+StaticNpc N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_PutridPiranha_01,
-        .settings = &N(D_80245044_C764C4),
+        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 80.0f, 0.0f, 135.0f },
         .yaw = 270,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS,
@@ -178,7 +55,7 @@ StaticNpc N(D_802451A8_C76628)[] = {
     },
     {
         .id = NPC_PutridPiranha_02,
-        .settings = &N(NpcSettings_MeleeHitbox),
+        .settings = &N(NpcSettings_PutridPiranha_Hitbox),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
@@ -209,6 +86,6 @@ StaticNpc N(D_802451A8_C76628)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(D_802451A8_C76628), BTL_KZN_FORMATION_11, BTL_KZN_STAGE_04),
+    NPC_GROUP(N(NpcData_PutridPiranha), BTL_KZN_FORMATION_11, BTL_KZN_STAGE_04),
     {}
 };

@@ -20,6 +20,10 @@ enum {
     AB_JAN_F       = AreaByte(15),
 };
 
+enum {
+    AF_JAN_0D       = AreaFlag(0xD),
+};
+
 #define AF_JAN(index) AreaFlag(index)
 
 #endif

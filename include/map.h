@@ -10,7 +10,9 @@
 // temporary: some standard script names
 #define EVS_MakeEntities        EVS_MakeEntities
 #define EVS_SetupMusic          EVS_SetupMusic
+#define EVS_SetupFoliage        EVS_SetupFoliage
 #define EVS_BindExitTriggers    EVS_BindExitTriggers
+#define EVS_EnterMap            EVS_EnterMap
 
 // TODO: consider moving Npc here
 

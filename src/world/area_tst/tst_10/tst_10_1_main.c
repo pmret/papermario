@@ -103,20 +103,20 @@ EvtScript N(EVS_Main) = {
     EVT_END
 };
 
-s32 N(TweesterPath)[] = {
-     -65,  0,  217,
-    -262,  0,  -64,
-      57,  0, -286,
-      327, 0,    8,
-    TWEETSER_PATH_LOOP
+TweesterPath N(DefaultTweesterPath)[] = {
+    {  -65,  0,  217 },
+    { -262,  0,  -64 },
+    {   57,  0, -286 },
+    {  327,  0,    8 },
+    { TWEETSER_PATH_LOOP }
  };
  
- s32* N(UnusedTweesterPaths)[] = {
-    N(TweesterPath),
-    N(TweesterPath),
-    N(TweesterPath),
-    N(TweesterPath),
-    (s32*) -1 
+ TweesterPath* N(UnusedTweesterPaths)[] = {
+    N(DefaultTweesterPath),
+    N(DefaultTweesterPath),
+    N(DefaultTweesterPath),
+    N(DefaultTweesterPath),
+    PTR_LIST_END
 };
 
 EvtScript N(EVS_MakeEntities) = {

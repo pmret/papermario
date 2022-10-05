@@ -31,8 +31,10 @@ s32 N(get_tattle)(void) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
+// AwaitLetterChoiceResult
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
 
+// SetLetterChoiceResult
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);

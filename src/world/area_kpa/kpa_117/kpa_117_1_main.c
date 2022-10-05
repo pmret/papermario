@@ -16,7 +16,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
+    EVT_SETUP_CAMERA_ALT_NO_LEAD()
     EVT_EXEC_WAIT(N(EVS_Empty))
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)

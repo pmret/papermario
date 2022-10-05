@@ -1,45 +1,8 @@
 #include "kzn_11.h"
 
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
-};
-
-#include "world/common/enemy/FlyingAI.inc.c"
-
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
+#include "world/common/enemy/complete/LavaBubble.inc.c"
 
 #include "world/common/enemy/FireBarAI.inc.c"
-
-MobileAISettings N(AISettings_Bubble) = {
-    .moveSpeed = 0.8f,
-    .moveTime = 100,
-    .alertRadius = 90.0f,
-    .playerSearchInterval = 4,
-    .chaseSpeed = 3.2f,
-    .chaseTurnRate = 10,
-    .chaseUpdateInterval = 1,
-    .chaseRadius = 100.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Bubble) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 150)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_Bubble)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Bubble) = {
-    .height = 20,
-    .radius = 22,
-    .level = 17,
-    .ai = &N(EVS_NpcAI_Bubble),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
 
 s32 N(FireBar_Sounds)[] = {
     SOUND_FIRE_BAR_0, SOUND_FIRE_BAR_1, SOUND_FIRE_BAR_2, SOUND_FIRE_BAR_3,
@@ -310,7 +273,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
 
 StaticNpc N(NpcData_Bubble_01) = {
     .id = NPC_Bubble_01,
-    .settings = &N(NpcSettings_Bubble),
+    .settings = &N(NpcSettings_LavaBubble),
     .pos = { -150.0f, 50.0f, 10.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
@@ -360,7 +323,7 @@ StaticNpc N(NpcData_Bubble_01) = {
 
 StaticNpc N(NpcData_Bubble_02) = {
     .id = NPC_Bubble_02,
-    .settings = &N(NpcSettings_Bubble),
+    .settings = &N(NpcSettings_LavaBubble),
     .pos = { 150.0f, 50.0f, 10.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,

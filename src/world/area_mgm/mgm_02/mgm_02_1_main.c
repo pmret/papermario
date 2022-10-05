@@ -38,8 +38,7 @@ EvtScript N(EVS_SetupCamera) = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    EVT_SETUP_CAMERA_NO_LEAD()
     EVT_EXEC(N(EVS_SetupCamera))
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_Dummy))

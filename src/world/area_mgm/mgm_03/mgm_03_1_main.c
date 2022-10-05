@@ -15,8 +15,7 @@ MapSettings N(settings) = {
 
 EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_ARN_09)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    EVT_SETUP_CAMERA_NO_LEAD()
     EVT_RETURN
     EVT_END
 };
