@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001910[];
-extern Gfx D_09001A00[];
-extern Gfx D_09001A20[];
+extern Gfx D_09001910_3E4270[];
+extern Gfx D_09001A00_3E4360[];
+extern Gfx D_09001A20_3E4380[];
 
-Gfx* D_E00EAA50[2] = { D_09001A00, D_09001A20 };
-Gfx* D_E00EAA58[2] = { D_09001910, NULL };
+Gfx* D_E00EAA50[2] = { D_09001A00_3E4360, D_09001A20_3E4380 };
+Gfx* D_E00EAA58[2] = { D_09001910_3E4270, NULL };
 
 void fx_75_init(EffectInstance* effect);
 void fx_75_update(EffectInstance* effect);

@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090004C0[];
-extern Gfx D_090005E0[];
+extern Gfx D_090004C0_343500[];
+extern Gfx D_090005E0_343620[];
 extern u8 D_E0030E90[];
 
 void damage_stars_appendGfx(void* effect);
@@ -86,7 +86,7 @@ void damage_stars_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090004C0);
+    gSPDisplayList(gMasterGfxPos++, D_090004C0_343500);
 
     baseIdx = (part->unk_2C - 1) * 3;
     baseIdx %= 36;
@@ -108,7 +108,7 @@ void damage_stars_appendGfx(void* effect) {
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090005E0);
+        gSPDisplayList(gMasterGfxPos++, D_090005E0_343620);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }

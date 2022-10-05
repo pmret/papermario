@@ -1,16 +1,16 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09002780[];
-extern Gfx D_09002868[];
-extern Gfx D_09002950[];
-extern Gfx D_09002A38[];
-extern Gfx D_09002B20[];
-extern Gfx D_09002B40[];
-extern Gfx D_09002B60[];
+extern Gfx D_09002780_32B620[];
+extern Gfx D_09002868_32B708[];
+extern Gfx D_09002950_32B7F0[];
+extern Gfx D_09002A38_32B8D8[];
+extern Gfx D_09002B20_32B9C0[];
+extern Gfx D_09002B40_32B9E0[];
+extern Gfx D_09002B60_32BA00[];
 
-static Gfx* sDlists[] = { D_09002B20, D_09002B40, D_09002B60, D_09002B60, D_09002B60 };
-static Gfx* sDlists2[] = { D_09002780, D_09002868, D_09002950, D_09002A38, D_09002A38 };
+static Gfx* sDlists[] = { D_09002B20_32B9C0, D_09002B40_32B9E0, D_09002B60_32BA00, D_09002B60_32BA00, D_09002B60_32BA00 };
+static Gfx* sDlists2[] = { D_09002780_32B620, D_09002868_32B708, D_09002950_32B7F0, D_09002A38_32B8D8, D_09002A38_32B8D8 };
 
 static s8 D_E000CC38[] = { 0x00, 0x01, 0x02, 0x1A, 0x03, 0x1B, 0x04, 0x1C, 0x05, 0x15, 0x35, 0x46, 0x46, 0x46, 0xFF,
                            0x00 };

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000840[];
-extern Gfx D_090008F0[];
-extern Gfx D_09000910[];
+extern Gfx D_09000840_3447B0[];
+extern Gfx D_090008F0_344860[];
+extern Gfx D_09000910_344880[];
 extern Gfx* D_E00328B0[];
 
 void explosion_appendGfx(void* effect);
@@ -49,20 +49,20 @@ void explosion_appendGfx(void* effect) {
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (part->unk_00 != -1) {
-        gSPDisplayList(gMasterGfxPos++, D_09000840);
+        gSPDisplayList(gMasterGfxPos++, D_09000840_3447B0);
 
         shim_guScaleF(sp18, part->unk_20, part->unk_20, 1.0f);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 240, part->unk_38);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090008F0);
+        gSPDisplayList(gMasterGfxPos++, D_090008F0_344860);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 
     part++;
 
-    gSPDisplayList(gMasterGfxPos++, D_09000910);
+    gSPDisplayList(gMasterGfxPos++, D_09000910_344880);
 
     shim_guScaleF(sp18, part->unk_20, part->unk_20, part->unk_20);
     shim_guRotateF(sp58, part->unk_28, 0.0f, 0.0f, 1.0f);

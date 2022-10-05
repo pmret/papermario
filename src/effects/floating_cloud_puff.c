@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000080[];
-extern Gfx D_09000168[];
+extern Gfx D_09000080_3D4F10[];
+extern Gfx D_09000168_3D4FF8[];
 extern u8 D_E00D2500[];
 extern u8 D_E00D2508[];
 
@@ -137,7 +137,7 @@ void floating_cloud_puff_appendGfx(void* effect) {
     gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
     gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
-    gSPDisplayList(gMasterGfxPos++, D_09000080);
-    gSPDisplayList(gMasterGfxPos++, D_09000168);
+    gSPDisplayList(gMasterGfxPos++, D_09000080_3D4F10);
+    gSPDisplayList(gMasterGfxPos++, D_09000168_3D4FF8);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }

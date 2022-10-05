@@ -6,15 +6,16 @@ void music_note_init(EffectInstance* effect);
 void music_note_update(EffectInstance* effect);
 void music_note_render(EffectInstance* effect);
 
-extern Gfx D_09001038[];
-extern Gfx D_090010C0[];
-extern Gfx D_09001148[];
-extern Gfx D_090011D0[];
-extern Gfx D_09001258[];
-extern Gfx D_090012E0[];
-extern Gfx D_09001368[];
+extern Gfx D_09001038_35B618[];
+extern Gfx D_090010C0_35B6A0[];
+extern Gfx D_09001148_35B728[];
+extern Gfx D_090011D0_35B7B0[];
+extern Gfx D_09001258_35B838[];
+extern Gfx D_090012E0_35B8C0[];
+extern Gfx D_09001368_35B948[];
 
-Gfx* D_E004C660[] = { D_09001038, D_090010C0, D_09001148, D_090011D0, D_09001258, D_090012E0, D_09001368 };
+Gfx* D_E004C660[] = { D_09001038_35B618, D_090010C0_35B6A0, D_09001148_35B728, D_090011D0_35B7B0,
+                      D_09001258_35B838, D_090012E0_35B8C0, D_09001368_35B948 };
 
 s8 D_E004C67C[] = { 0xFE, 0xAC, 0xAC, 0xFE, 0xAC, 0xD5, 0xFE, 0xB4, 0x9A, 0xD5, 0xB4, 0xFE, 0xB4, 0xB4, 0xFE, 0xB4, 0xDD, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xB4, 0xFE, 0xB4, 0xD5, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xAC, };
 

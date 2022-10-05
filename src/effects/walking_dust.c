@@ -7,11 +7,11 @@ s8 D_E000E670[20] = { 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, -1, 0, 0, 
 
 s8* D_E000E684[2] = { D_E000E660, D_E000E670 };
 
-extern Gfx D_09002780[];
-extern Gfx D_09002868[];
-extern Gfx D_09002950[];
-extern Gfx D_09002B20[];
-extern Gfx D_09002B40[];
+extern Gfx D_09002780_32B620[];
+extern Gfx D_09002868_32B708[];
+extern Gfx D_09002950_32B7F0[];
+extern Gfx D_09002B20_32B9C0[];
+extern Gfx D_09002B40_32B9E0[];
 
 void walking_dust_init(EffectInstance* effect);
 void walking_dust_update(EffectInstance* effect);
@@ -108,20 +108,20 @@ void walking_dust_appendGfx(void* effect) {
     s32 i;
 
     if (temp_t3 == 0) {
-        dlist2 = D_09002B20;
+        dlist2 = D_09002B20_32B9C0;
     } else {
-        dlist2 = D_09002B40;
+        dlist2 = D_09002B40_32B9E0;
     }
 
     switch (temp_t3) {
         case 1:
-            dlist = D_09002868;
+            dlist = D_09002868_32B708;
             break;
         default:
-            dlist = D_09002950;
+            dlist = D_09002950_32B7F0;
             break;
         case 0:
-            dlist = D_09002780;
+            dlist = D_09002780_32B620;
             break;
     }
 
