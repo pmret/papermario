@@ -501,7 +501,7 @@ ApiStatus func_80239F84_70DC94(Evt* script, s32 isInitialCall) {
     f64 temp_f20;
 
     if (isInitialCall) {
-        script->functionTempPtr[1] = get_actor(script->varTablePtr[10]);
+        script->functionTempPtr[1] = get_actor(script->varTable[10]);
         script->functionTemp[0] = 0;
     }
 

@@ -3,7 +3,7 @@
 #include "battle/battle.h"
 
 extern f64 D_8023C060_70BD00;
-extern s32 D_8023C070;
+extern EffectInstance* D_8023C070;
 
 ApiStatus func_80238000_707CA0(Evt* script, s32 isInitialCall) {
     ActorPart* targetPart;
@@ -119,7 +119,7 @@ ApiStatus func_80238480_708120(Evt* script, s32 isInitialCall) {
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
     f32 posZ = evt_get_float_variable(script, *args++);
-    s32 effect = battleStatus->waterBlockEffect;
+    EffectInstance* effect = battleStatus->waterBlockEffect;
 
     if (effect != NULL) {
         remove_effect(effect);
