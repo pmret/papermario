@@ -2,7 +2,6 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-extern f64 D_8023C060_70BD00;
 extern EffectInstance* D_8023C070;
 
 ApiStatus func_80238000_707CA0(Evt* script, s32 isInitialCall) {
@@ -108,7 +107,7 @@ ApiStatus func_80238388_708028(Evt* script, s32 isInitialCall) {
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* playerActor = battleStatus->playerActor;
 
-    D_8023C070 = fx_squirt(1, partnerActor->currentPos.x - 5.5, partnerActor->currentPos.y + 15.5, partnerActor->currentPos.z + 5, playerActor->currentPos.x, playerActor->currentPos.y, playerActor->currentPos.z, rand_int(10) * D_8023C060_70BD00 + 1, 30);
+    D_8023C070 = fx_squirt(1, partnerActor->currentPos.x - 5.5, partnerActor->currentPos.y + 15.5, partnerActor->currentPos.z + 5, playerActor->currentPos.x, playerActor->currentPos.y, playerActor->currentPos.z, (rand_int(10) * 0.1) + 1, 30);
 
     return ApiStatus_DONE2;
 }
