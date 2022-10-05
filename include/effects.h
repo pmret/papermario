@@ -621,9 +621,10 @@ typedef struct SmokeBurstFXData {
 } SmokeBurstFXData; // size = 0x28
 
 typedef struct SweatFXData {
-    /* 0x00 */ char unk_00[0x4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x08];
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ char unk_14[0x04];
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;

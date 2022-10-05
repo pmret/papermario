@@ -72,7 +72,7 @@ FX_MAIN(ring_blast_main);
 FX_MAIN(shockwave_main);
 void music_note_main(s32, f32, f32, f32);
 void smoke_burst_main(s32, f32, f32, f32, f32, s32);
-FX_MAIN(sweat_main);
+void sweat_main(s32, f32, f32, f32, f32, f32, s32);
 void sleep_bubble_main(s32, f32, f32, f32, f32, f32, EffectInstance**);
 FX_MAIN(windy_leaves_main);
 void falling_leaves_main(s32, f32, f32, f32);
