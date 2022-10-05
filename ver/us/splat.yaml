@@ -2916,7 +2916,7 @@ segments:
       - [0x33E840, gfx, D_09001230_33E840]
       - [0x33E868, gfx, D_09001258_33E868]
       - [0x33E890, gfx, D_09001280_33E890]
-      - [0x33E8B8] # padding
+      - [0x33E8B8]
   - name: effect_dust
     dir: effects
     type: code
@@ -2947,7 +2947,7 @@ segments:
       - [0x33FE18, gfx, D_09000E18_33FE18]
       - [0x33FE38, gfx, D_09000E38_33FE38]
       - [0x33FE58, gfx, D_09000E58_33FE58]
-      - [0x33FE78] # padding
+      - [0x33FE78]
   - name: effect_shattering_stones
     dir: effects
     type: code
@@ -3025,7 +3025,7 @@ segments:
       - [0x3448E8, gfx, D_09000978_3448E8]
       - [0x344948, gfx, D_090009D8_344948]
       - [0x3449A8, gfx, D_09000A38_3449A8]
-      - [0x344A08] # padding
+      - [0x344A08]
   - name: effect_lens_flare
     dir: effects
     type: code
@@ -3069,7 +3069,7 @@ segments:
       - [0x34DCD0, gfx, D_09008190_34DCD0]
       - [0x34DCE8, gfx, D_090081A8_34DCE8]
       - [0x34DD00, gfx, D_090081C0_34DD00]
-      - [0x34DD18] # padding
+      - [0x34DD18]
   - name: effect_spiky_white_aura
     dir: effects
     type: code
@@ -3331,7 +3331,7 @@ segments:
       - [0x3600E0, vtx, D_09001000_3600E0]
       - [0x3601E0, gfx, D_09001100_3601E0]
       - [0x360290, gfx, D_090011B0_360290]
-      - [0x3602B8] # padding
+      - [0x3602B8]
   - name: effect_stars_spread
     dir: effects
     type: code
@@ -3480,7 +3480,7 @@ segments:
       - [0x36CEF8, vtx, D_09002018_36CEF8]
       - [0x36CF38, gfx, D_09002058_36CF38]
       - [0x36CF58, gfx, D_09002078_36CF58]
-      - [0x36D018] # padding
+      - [0x36D018]
   - name: effect_light_rays
     dir: effects
     type: code
@@ -3564,7 +3564,7 @@ segments:
       - [0x376110, vtx, D_09000C00_376110]
       - [0x3762D0, gfx, D_09000DC0_3762D0]
       - [0x376370, gfx, D_09000E60_376370]
-      - [0x376458] # padding
+      - [0x376458]
   - name: effect_shimmer_wave
     dir: effects
     type: code
@@ -3650,7 +3650,7 @@ segments:
       - [0x37D380, vtx, D_09000200_37D380]
       - [0x37D3C0, gfx, D_09000240_37D3C0]
       - [0x37D468, gfx, D_090002E8_37D468]
-      - [0x37D488] # padding
+      - [0x37D488]
   - name: effect_blast
     dir: effects
     type: code
@@ -3697,7 +3697,7 @@ segments:
       - [0x381258, gfx, D_09000EB8_381258]
       - [0x381278, gfx, D_09000ED8_381278]
       - [0x381298, gfx, D_09000EF8_381298]
-      - [0x3812B8] # padding
+      - [0x3812B8]
   - name: effect_recover
     dir: effects
     type: code
@@ -3906,7 +3906,7 @@ segments:
       - [0x38F878, vtx, D_09000168_38F878]
       - [0x38F8B8, gfx, D_090001A8_38F8B8]
       - [0x38F8D8, gfx, D_090001C8_38F8D8]
-      - [0x38F8F8] # padding
+      - [0x38F8F8]
   - name: effect_attack_result_text
     dir: effects
     type: code
@@ -4423,7 +4423,7 @@ segments:
       - [0x3D4F10, gfx, D_09000080_3D4F10]
       - [0x3D4FB8, vtx, D_09000128_3D4FB8]
       - [0x3D4FF8, gfx, D_09000168_3D4FF8]
-      - [0x3D5018] # padding
+      - [0x3D5018]
   - name: effect_energy_in_out
     dir: effects
     type: code
@@ -4478,7 +4478,7 @@ segments:
       - [0x3D6758, gfx, D_09000828_3D6758]
       - [0x3D6778, gfx, D_09000848_3D6778]
       - [0x3D6798, gfx, D_09000868_3D6798]
-      - [0x3D67B8] # padding
+      - [0x3D67B8]
   - name: effect_tattle_window
     dir: effects
     type: code
@@ -4929,7 +4929,7 @@ segments:
       - [0x4025F0, gfx, D_090033A0_4025F0]
       - [0x402608, gfx, D_090033B8_402608]
       - [0x402620, gfx, D_090033D0_402620]
-      - [0x402638] # padding
+      - [0x402638]
   - name: effect_something_rotating
     dir: effects
     type: code

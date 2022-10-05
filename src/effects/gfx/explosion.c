@@ -1,5 +1,3 @@
-#include "common.h"
-
 #include "effects/gfx/D_09000000_343F70.png.inc.c"
 #include "effects/gfx/D_09000200_344170.png.inc.c"
 #include "effects/gfx/D_09000400_344370.png.inc.c"
@@ -13,7 +11,3 @@
 #include "effects/gfx/D_09000978_3448E8.gfx.inc.c"
 #include "effects/gfx/D_090009D8_344948.gfx.inc.c"
 #include "effects/gfx/D_09000A38_3449A8.gfx.inc.c"
-
-u8 D_09000A98_344A08[] = {
-    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-};

@@ -1,5 +1,3 @@
-#include "common.h"
-
 #include "effects/gfx/D_09000000_381E00.png.inc.c"
 #include "effects/gfx/D_09000200_382000.png.inc.c"
 #include "effects/gfx/D_09000400_382200.png.inc.c"

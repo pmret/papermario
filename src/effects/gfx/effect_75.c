@@ -15,9 +15,7 @@
 #include "effects/gfx/D_090018D8_3E4238.gfx.inc.c"
 #include "effects/gfx/D_090018F8_3E4258.gfx.inc.c"
 
-u8 D_09001908_3E4268[] = {
-    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-};
+u8 D_09001908_3E4268[8] = {};
 
 #include "effects/gfx/D_09001910_3E4270.gfx.inc.c"
 #include "effects/gfx/D_09001A00_3E4360.gfx.inc.c"

@@ -26,7 +26,3 @@ u8 D_09000AA0_380E40[] = {
 #include "effects/gfx/D_09000EB8_381258.gfx.inc.c"
 #include "effects/gfx/D_09000ED8_381278.gfx.inc.c"
 #include "effects/gfx/D_09000EF8_381298.gfx.inc.c"
-
-u8 D_09000F18_3812B8[] = {
-    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-};
