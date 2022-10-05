@@ -434,16 +434,17 @@ MapConfig isk_maps[] = {
 };
 
 /// Koopa Bros. Fortress
+#include "area_trd/trd.h"
 MapConfig trd_maps[] = {
     { MAP_UNSPLIT(trd_00, 0x80240690), .bgName = "nok_bg" },
     { MAP_UNSPLIT(trd_01, 0x80241700), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_02, 0x80241AA0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_03, 0x80240A40), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_04, 0x80243900), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_04), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_05, 0x802407B0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_06, 0x80240D60), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_07, 0x80242910), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_08, 0x80240A30), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP_UNSPLIT(trd_09, 0x80240200), .bgName = "nok_bg" },
     { MAP_UNSPLIT(trd_10, 0x80240870), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
 };

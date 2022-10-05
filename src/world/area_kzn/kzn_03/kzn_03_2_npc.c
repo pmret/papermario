@@ -1,222 +1,8 @@
 #include "kzn_03.h"
 
-extern EvtScript D_800936DC;
+#include "world/common/enemy/complete/SpikeTop.inc.c"
 
-// spike top
-#include "world/common/enemy/TackleAI.inc.c"
-
-#include "world/common/AwaitPlayerNearNpc.inc.c"
-
-// spike top data
-
-MobileAISettings N(D_80243AA0_C647B0) = {
-    .moveSpeed = 1.0f,
-    .moveTime = 60,
-    .waitTime = 60,
-    .alertRadius = 90.0f,
-    .alertOffsetDist = 40.0f,
-    .playerSearchInterval = 1,
-    .chaseSpeed = 4.5f,
-    .chaseRadius = 100.0f,
-    .chaseOffsetDist = 40.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_80243AD0_C647E0) = {
-    EVT_CALL(SetSelfVar, 2, 5)
-    EVT_CALL(SetSelfVar, 3, 2)
-    EVT_CALL(SetSelfVar, 5, 5)
-    EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243AA0_C647B0)))
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(AISettings_SpikeTop) = {
-    .moveSpeed = 1.0f,
-    .moveTime = 60,
-    .waitTime = 60,
-    .alertRadius = 90.0f,
-    .alertOffsetDist = 40.0f,
-    .playerSearchInterval = 1,
-    .chaseSpeed = 7.0f,
-    .chaseRadius = 100.0f,
-    .chaseOffsetDist = 40.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_SpikeTop) = {
-    EVT_CALL(SetSelfVar, 2, 4)
-    EVT_CALL(SetSelfVar, 3, 10)
-    EVT_CALL(SetSelfVar, 5, 4)
-    EVT_CALL(SetSelfVar, 7, 3)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_SpikeTop)))
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(D_80243BE0_C648F0) = {
-    .moveSpeed = 1.0f,
-    .moveTime = 20,
-    .waitTime = 5,
-    .alertRadius = 120.0f,
-    .playerSearchInterval = 3,
-    .chaseSpeed = 6.0f,
-    .chaseRadius = 150.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_80243C10_C64920) = {
-    EVT_CALL(SetSelfVar, 2, 3)
-    EVT_CALL(SetSelfVar, 3, 8)
-    EVT_CALL(SetSelfVar, 5, 6)
-    EVT_CALL(SetSelfVar, 7, 6)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243BE0_C648F0)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80243C80_C64990) = {
-    EVT_CALL(N(func_80240814_97BE44))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
-    EVT_CALL(N(AwaitPlayerNearNpc))
-    EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim00)
-    EVT_CALL(N(func_802408B4_97BEE4))
-    EVT_CALL(SelfEnemyOverrideSyncPos, 0)
-    EVT_CALL(SetSelfVar, 2, 5)
-    EVT_CALL(SetSelfVar, 3, 2)
-    EVT_CALL(SetSelfVar, 5, 5)
-    EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243AA0_C647B0)))
-    EVT_RETURN
-    EVT_END
-};
-
-// different spike top prefabs
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 22,
-    .level = 10,
-    .ai = &N(D_80243AD0_C647E0),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 20,
-    .radius = 22,
-    .level = 10,
-    .ai = &N(D_80243C80_C64990),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_SpikeTop) = {
-    .height = 20,
-    .radius = 22,
-    .level = 17,
-    .ai = &N(EVS_NpcAI_SpikeTop),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Unused3) = {
-    .height = 24,
-    .radius = 24,
-    .level = 25,
-    .ai = &N(D_80243C10_C64920),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-
-#include "world/common/enemy/PiranhaPlantAI.inc.c"
-
-// piranha plant data
-
-EvtScript N(EVS_NpcDefeat_PiranhaHitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(func_80045900, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(AISettings_Piranha) = {
-    .moveTime = 30,
-    .waitTime = 30,
-    .alertRadius = 150.0f,
-    .playerSearchInterval = 1,
-};
-
-EvtScript N(EVS_NpcAI_Piranha) = {
-    EVT_CALL(SetSelfVar, 7, 1)
-    EVT_CALL(SetSelfVar, 8, 10)
-    EVT_CALL(SetSelfVar, 9, 9)
-    EVT_CALL(SetSelfVar, 10, 12)
-    EVT_CALL(SetSelfVar, 11, 7)
-    EVT_CALL(SetSelfVar, 12, 30)
-    EVT_CALL(SetSelfVar, 13, 15)
-    EVT_CALL(SetSelfVar, 14, 18)
-    EVT_CALL(SetSelfVar, 15, 15)
-    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(AISettings_Piranha)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Piranha) = {
-    .height = 50,
-    .radius = 36,
-    .level = 17,
-    .ai = &N(EVS_NpcAI_Piranha),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-EvtScript N(EVS_NpcAI_PiranhaHitbox) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 14)
-    EVT_CALL(SetSelfVar, 1, 28)
-    EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, SOUND_20DE)
-    EVT_CALL(N(MeleeHitbox_Main))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_80244090) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(D_800936DC)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_PiranhaHitbox) = {
-    .height = 20,
-    .radius = 28,
-    .level = 17,
-    .ai = &N(EVS_NpcAI_PiranhaHitbox),
-    .onDefeat = &N(EVS_NpcDefeat_PiranhaHitbox),
-};
+#include "world/common/enemy/complete/PutridPiranha.inc.c"
 
 NpcSettings N(NpcSettings_ZiplineDummy) = {
     .height = 24,
@@ -648,10 +434,10 @@ StaticNpc N(NpcData_SpikeTop_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Piranha)[] = {
+StaticNpc N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_Piranha,
-        .settings = &N(NpcSettings_Piranha),
+        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 260.0f, 20.0f, 255.0f },
         .yaw = 270,
         .flags = NPC_FLAG_LOCK_ANIMS,
@@ -700,7 +486,7 @@ StaticNpc N(NpcData_Piranha)[] = {
     },
     {
         .id = NPC_Piranha_Hitbox,
-        .settings = &N(NpcSettings_PiranhaHitbox),
+        .settings = &N(NpcSettings_PutridPiranha_Hitbox),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
@@ -735,6 +521,6 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_SpikeTop_01), BTL_KZN_FORMATION_08, BTL_KZN_STAGE_01),
     NPC_GROUP(N(NpcData_SpikeTop_02), BTL_KZN_FORMATION_09, BTL_KZN_STAGE_01),
     NPC_GROUP(N(NpcData_SpikeTop_03), BTL_KZN_FORMATION_0A, BTL_KZN_STAGE_01),
-    NPC_GROUP(N(NpcData_Piranha), BTL_KZN_FORMATION_13, BTL_KZN_STAGE_01),
+    NPC_GROUP(N(NpcData_PutridPiranha), BTL_KZN_FORMATION_13, BTL_KZN_STAGE_01),
     {}
 };

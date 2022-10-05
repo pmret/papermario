@@ -98,11 +98,6 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_END
 };
 
-
-
-
-
-
 API_CALLABLE(func_80240B4C_B2108C);
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B4C_B2108C);
 

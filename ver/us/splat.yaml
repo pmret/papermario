@@ -7795,13 +7795,11 @@ segments:
     start: 0x9A83F0
     vram: 0x80240000
     subsegments:
-    - [0x9A83F0, c]
-    - [0x9A8700, c]
-    - [0x9A88A0, c]
-    - [0x9ABC90, data]
-    - [0x9ABD70, data]
-    - [0x9AD960, data]
-    - [0x9AE2B0]
+    - [0x9A83F0, c, trd_04_0_header]
+    - [0x9A83F0, c, trd_04_1_main]
+    - [0x9A8700, c, trd_04_2_entity]
+    - [0x9A88A0, c, trd_04_3_npc]
+    - [0x9ABC90]
   - name: trd_05
     dir: world/area_trd/trd_05
     type: code
@@ -7848,12 +7846,11 @@ segments:
     start: 0x9BB2A0
     vram: 0x80240000
     subsegments:
-    - [0x9BB2A0, c]
-    - [0x9BB5B0, c]
-    - [0x9BBCC0, data]
-    - [0x9BBD50, data]
-    - [0x9BC1A0, data]
-    - [0x9BD650]
+    - [0x9BB2A0, c, trd_08_0_header]
+    - [0x9BB2A0, c, trd_08_1_main]
+    - [0x9BB2A0, c, trd_08_2_entity]
+    - [0x9BB5B0, c, trd_08_3_npc]
+    - [0x9BBCC0]
   - name: trd_09
     dir: world/area_trd/trd_09
     type: code
