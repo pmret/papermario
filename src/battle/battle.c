@@ -163,14 +163,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_FLO2] = {
         BTL_AREA(area_flo2),
         .name = "エリア ＦＬＯ２",
-        .battles = 0x802356FC,
-        .stages = 0x80235788,
+        .battles = &b_area_flo2_formationTable,
+        .stages = &b_area_flo2_stageTable,
     },
     [BTL_AREA_TIK] = {
         BTL_AREA(area_tik),
         .name = "エリア ＴＩＫ",
-        .battles = 0x802340B4,
-        .stages = 0x802342BC,
+        .battles = &b_area_tik_formationTable,
+        .stages = &b_area_tik_stageTable,
     },
     [BTL_AREA_TIK2] = {
         BTL_AREA(area_tik2),

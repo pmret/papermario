@@ -5067,16 +5067,21 @@ segments:
     start: 0x5EC490
     vram: 0x80218000
     subsegments:
-    - [0x5EC490, c]
-    - [0x5EC560, c]
-    - [0x5EC690, c]
-    - [0x5ECE70, c]
-    - [0x5ECF40, c]
-    - [0x5ED010, c]
-    - [0x5ED4B0, c]
-    - [0x5ED950, c]
-    - [0x5EDDF0, c]
-    - [0x5EE550, data]
+    - [0x5EC490, c, actor/dark_koopa]
+    - [0x5EC560, c, actor/dark_paratroopa]
+    - [0x5EC690, c, actor/gloomba]
+    - [0x5EC910, c, actor/spiked_gloomba]
+    - [0x5ECB90, c, actor/paragloomba]
+    - [0x5ECE70, c, actor/buzzy_beetle]
+    - [0x5ECF40, c, actor/spike_top]
+    - [0x5ED010, c, actor/spiny]
+    - [0x5ED010, c, stage/tik_01]
+    - [0x5ED4B0, c, stage/tik_02]
+    - [0x5ED950, c, stage/tik_03]
+    - [0x5EDDF0, c, stage/tik_04]
+    - [0x5EE240, c, stage/tik_05]
+    - [0x5EE550, c, area]
+    - [0x5EE550]
   - dir: battle/area_tik2
     type: code
     start: 0x608AB0

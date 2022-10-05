@@ -558,7 +558,7 @@ EvtScript N(handleEvent_8021E6D8) = {
         EVT_CASE_EQ(22)
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 0x35D000)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_IF_FLAG(LVar0, 0x80000)
                     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 1, 0, 2, 0)
                 EVT_ELSE
@@ -707,7 +707,7 @@ EvtScript N(handleEvent_8021EDF0) = {
         EVT_CASE_EQ(22)
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 0x35D000)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_IF_FLAG(LVar0, 0x80000)
                     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 2, -3, 0, 0)
                 EVT_ELSE
