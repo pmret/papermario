@@ -140,7 +140,7 @@ EffectInstance* floating_cloud_puff_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(energy_in_out_main);
 EffectInstance* tattle_window_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(shiny_flare_main);
-FX_MAIN(huff_puff_breath_main);
+EffectInstance* huff_puff_breath_main(s32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* cold_breath_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* embers_main(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
 EffectInstance* hieroglyphs_main(s32, f32, f32, f32, f32, s32);
