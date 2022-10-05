@@ -22,14 +22,14 @@ s32 N(get_tattle)(void) {
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-ApiStatus func_80240338_92A5E8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80240338_92A5E8) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MapVar(0));
     
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240364_92A614(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80240364_92A614) {
     static u8 savedPrimR, savedPrimG, savedPrimB;
     static u8 savedEnvR, savedEnvG, savedEnvB;
     static s32 targetPrimR, targetPrimG, targetPrimB;

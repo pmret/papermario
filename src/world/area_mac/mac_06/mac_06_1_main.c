@@ -2,7 +2,7 @@
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_FlyingGull);
-extern EvtScript N(EVS_80242A14);
+extern EvtScript N(EVS_WhaleMain);
 
 extern NpcGroupList N(DefaultNPCs);
 
@@ -69,7 +69,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC(N(EVS_FlyingGull))
-    EVT_EXEC(N(EVS_80242A14))
+    EVT_EXEC(N(EVS_WhaleMain))
     EVT_CALL(SetMusicTrack, 0, SONG_RIDING_THE_WHALE, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_BEACH)
     EVT_EXEC(N(EVS_AnimateWaves))

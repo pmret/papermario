@@ -129,6 +129,7 @@ enum {
     mac_05_ENTRY_2   = 2,
     mac_05_ENTRY_3   = 3,
     mac_06_ENTRY_0   = 0,
+    mac_06_ENTRY_1   = 1,
     tik_01_ENTRY_0   = 0,
     tik_01_ENTRY_1   = 1,
     tik_01_ENTRY_2   = 2,

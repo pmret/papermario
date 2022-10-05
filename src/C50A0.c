@@ -593,7 +593,7 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
     return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
 }
 
-s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
+s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     ItemEntity* item;
     Shadow* shadow;
@@ -619,7 +619,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     itemID &= 0xFFFF;
     item->renderGroup = -1;
     item->flags = (ITEM_ENTITY_FLAGS_CAM0 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_2000000);
-    if (arg1 != 0) {
+    if (category != ITEM_TYPE_CONSUMABLE) {
         item->flags |= ITEM_ENTITY_FLAGS_4000000;
     }
     item->pickupMsgFlags = pickupMsgFlags;

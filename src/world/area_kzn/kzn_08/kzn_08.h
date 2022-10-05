@@ -9,6 +9,8 @@
 #include "mapfs/kzn_08_shape.h"
 #include "mapfs/kzn_08_hit.h"
 
+#include "sprite/npc/LargePiranha.h"
+
 enum {
     NPC_PutridPiranha_01        = 0,
     NPC_PutridPiranha_02        = 1

@@ -9,6 +9,8 @@
 #include "mapfs/kzn_07_shape.h"
 #include "mapfs/kzn_07_hit.h"
 
+#include "sprite/npc/LavaBubble.h"
+
 enum {
     NPC_Bubble_01               = 0,
     NPC_Bubble_02               = 1,
