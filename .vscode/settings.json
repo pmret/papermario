@@ -46,7 +46,7 @@
         "ver/current": true,
         "expected": true,
         "**/*.i": true,
-        "docs/doxygen": true,
+        "docs/doxygen": true
     },
     "C_Cpp.default.cStandard": "c89",
 }

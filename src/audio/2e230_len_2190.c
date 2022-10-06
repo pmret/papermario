@@ -220,7 +220,7 @@ void au_update_clients_2(void) {
             bgmPlayer->unk_5C = au_bgm_player_update_main(bgmPlayer);
         }
     }
-    
+
     if (!PreventBGMPlayerUpdate) {
         if (globals->unk_80 != 0) {
             func_8004DFD4(globals);
@@ -996,14 +996,14 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
     fileData = vaddr;
     readState = BK_READ_FETCH_HEADER;
     keepReading = TRUE;
-    
+
     while (keepReading) {
         switch (readState) {
             case BK_READ_DONE:
                 keepReading = FALSE;
                 break;
             case BK_READ_FETCH_HEADER:
-                au_read_rom(*bkFileOffset, &localHeader, 0x40U); 
+                au_read_rom(*bkFileOffset, &localHeader, 0x40U);
                 if ((header->signature == AL_HEADER_SIG_BK) && (header->size != 0) && (header->format == AL_HEADER_SIG_CR)) {
                     readState = BK_READ_FETCH_DATA;
                 } else {
@@ -1015,10 +1015,10 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
                     fileData = alHeapAlloc(heap, 1, header->size);
                 }
                 au_read_rom(*bkFileOffset, fileData, header->size);
-                
+
                 instrCount = 0;
                 instrumentGroup = (Instrument**)au_get_BK_instruments(bankGroup, bankIndex);
-                
+
                 for (i = 0; i < 16; i++) {
                     if (header->instruments[i] != 0) {
                         instrumentGroup[i] = header->instruments[i] + fileData;
@@ -1027,7 +1027,7 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
                         instrumentGroup[i] = NULL;
                     }
                 }
-                
+
                 if (instrCount != 0) {
                     readState = BK_READ_SWIZZLE;
                 } else {
