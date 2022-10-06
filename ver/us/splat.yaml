@@ -6096,6 +6096,7 @@ segments:
     subsegments:
     - [0x707CA0, c, sushie]
     - [0x708B70, data]
+    - [0x70BD00]
   - name: battle_partner_lakilester
     dir: battle/partner
     type: code

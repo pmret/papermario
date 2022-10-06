@@ -1284,7 +1284,8 @@ typedef struct StatChangeFXData {
 typedef struct SnakingStaticFXData {
     /* 0x00 */ char unk_00[4];
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char todo[0];
+    /* 0x10 */ char unk_10[0x28];
+    /* 0x38 */ f32 unk_38;
 } SnakingStaticFXData; // size = unknown
 
 typedef struct ThunderboltRingFXData {
