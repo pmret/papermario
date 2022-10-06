@@ -1121,7 +1121,7 @@ EvtScript ForceNextTarget = {
 };
 
 EvtScript D_80298E20 = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2022)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2022)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
     EVT_DIVF(LVar3, EVT_FLOAT(40.0))
@@ -1150,7 +1150,7 @@ EvtScript D_80298E20 = {
         EVT_CASE_OR_EQ(17)
             EVT_WAIT(40)
             EVT_CALL(func_802D7B10, LVarF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2023)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2023)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

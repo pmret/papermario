@@ -575,9 +575,9 @@ EvtScript N(takeTurn_flying) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
             EVT_LOOP(2)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3E0)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_SET(LocalFlag(0), 0)
                 EVT_LOOP(1)
@@ -721,7 +721,7 @@ EvtScript N(takeTurn_flying) = {
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_SET(LocalFlag(0), 0)
             EVT_LOOP(1)
@@ -1024,7 +1024,7 @@ EvtScript N(takeTurn) = {
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))

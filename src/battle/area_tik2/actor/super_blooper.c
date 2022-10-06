@@ -5,6 +5,8 @@
 
 #define NAMESPACE b_area_tik2_super_blooper
 
+extern ActorBlueprint b_area_tik2_blooper_baby;
+
 EvtScript N(FloatToPos) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
@@ -888,8 +890,6 @@ EvtScript N(unEnrage) = {
     EVT_RETURN
     EVT_END
 };
-
-extern ActorBlueprint b_area_tik2_blooper_baby;
 
 Vec3i N(baby_pos) = { 400, 0, 0 };
 

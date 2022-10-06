@@ -5861,13 +5861,15 @@ segments:
     start: 0x6186F0
     vram: 0x80218000
     subsegments:
-    - [0x6186F0, c]
-    - [0x6187C0, c]
-    - [0x618A00, c]
-    - [0x618EA0, c]
-    - [0x619340, c]
-    - [0x6197E0, c]
-    - [0x619F40, data]
+    - [0x6186F0, c, actor/swooper]
+    - [0x6187C0, c, actor/swoopula]
+    - [0x618A00, c, stage/tik_01]
+    - [0x618EA0, c, stage/tik_02]
+    - [0x619340, c, stage/tik_03]
+    - [0x6197E0, c, stage/tik_04]
+    - [0x619C30, c, stage/tik_05]
+    - [0x619F40, c, area]
+    - [0x619F40]
   - dir: battle/area_sam
     type: code
     start: 0x623BA0
