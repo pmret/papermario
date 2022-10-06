@@ -7,7 +7,7 @@ void smoke_burst_render(EffectInstance* effect);
 void smoke_burst_appendGfx(void* effect);
 
 void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 timeLeft) {
-   EffectBlueprint effectBp;
+    EffectBlueprint effectBp;
     EffectInstance* effect;
     SmokeBurstFXData* data;
     s32 numParts = 1;
@@ -38,22 +38,22 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
 
     switch (arg0) {
         case 0:
-            data->unk_26 = 0;
-            data->unk_25 = 0;
-            data->unk_24 = 0;
-            data->unk_27 = 0x82;
+            data->rgba.b = 0;
+            data->rgba.g = 0;
+            data->rgba.r = 0;
+            data->rgba.a = 130;
             break;
         case 1:
-            data->unk_24 = 0xFF;
-            data->unk_26 = 0;
-            data->unk_25 = 0;
-            data->unk_27 = 0x82;
+            data->rgba.r = 255;
+            data->rgba.b = 0;
+            data->rgba.g = 0;
+            data->rgba.a = 130;
             break;
         default:
-            data->unk_24 = 0xE1;
-            data->unk_25 = 0xD7;
-            data->unk_26 = 0xFF;
-            data->unk_27 = 0xB4;
+            data->rgba.r = 225;
+            data->rgba.g = 215;
+            data->rgba.b = 255;
+            data->rgba.a = 180;
             break;
     }
 }

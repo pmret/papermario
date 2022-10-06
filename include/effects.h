@@ -626,10 +626,7 @@ typedef struct SmokeBurstFXData {
     /* 0x18 */ s32 lifeTime;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ u8 unk_24;
-    /* 0x25 */ u8 unk_25;
-    /* 0x26 */ u8 unk_26;
-    /* 0x27 */ u8 unk_27;
+    /* 0x24 */ Color_RGBA8 rgba;
 } SmokeBurstFXData; // size = 0x28
 
 typedef struct SweatFXData {
