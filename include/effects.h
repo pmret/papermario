@@ -142,6 +142,8 @@ enum EffectID {
     EFFECT_86                       = 0x86,
 };
 
+typedef struct EffectInstance EffectInstance;
+
 typedef struct Effect00FXData {
     /* 0x00 */ char todo[0];
 } Effect00FXData; // size = unknown
@@ -782,19 +784,64 @@ typedef struct EndingDecalsFXData {
 } EndingDecalsFXData; // size = 0x2C
 
 typedef struct LightRaysFXData {
-    /* 0x00 */ char todo[0];
-} LightRaysFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0xC];
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ char unk_30[4];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ char unk_44[4];
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ f32 unk_6C;
+    /* 0x70 */ f32 unk_70;
+    /* 0x74 */ f32 unk_74;
+    /* 0x78 */ f32 unk_78;
+    /* 0x7C */ s32 unk_7C;
+    /* 0x80 */ f32 unk_80;
+    /* 0x84 */ f32 unk_84;
+    /* 0x88 */ f32 unk_88;
+    /* 0x8C */ f32 unk_8C;
+    /* 0x90 */ s32 unk_90;
+} LightRaysFXData; // size = 0x94
 
 typedef struct LightningFXData {
-    /* 0x00 */ char unk_00[0x30];
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ char unk_3C[0x4];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32 unk_48;
-} LightningFXData; // size = ?
+    /* 0x44 */ EffectInstance* unk_44;
+    /* 0x48 */ EffectInstance* unk_48;
+} LightningFXData; // size = 0x4C
 
 typedef struct FireBreathFXData {
     /* 0x00 */ s32 type;
@@ -1281,7 +1328,15 @@ typedef struct StatChangeFXData {
 typedef struct SnakingStaticFXData {
     /* 0x00 */ char unk_00[4];
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x28];
+    /* 0x10 */ char unk_10[8];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ char unk_34[4];
     /* 0x38 */ f32 unk_38;
 } SnakingStaticFXData; // size = unknown
 
@@ -1322,17 +1377,33 @@ typedef struct UnderwaterFXData {
 } UnderwaterFXData; // size = unknown
 
 typedef struct LightningBoltFXData {
-    /* 0x00 */ char unk_00[0xC];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ char unk_3C[0x4];
-    /* 0x40 */ s32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32 unk_48;
-} LightningBoltFXData; // size = ?
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ f32 unk_04;
+    /* 0x008 */ f32 unk_08;
+    /* 0x00C */ f32 unk_0C;
+    /* 0x010 */ f32 unk_10;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ f32 unk_1C;
+    /* 0x020 */ f32 unk_20;
+    /* 0x024 */ f32 unk_24;
+    /* 0x028 */ s32 unk_28;
+    /* 0x02C */ s32 unk_2C;
+    /* 0x030 */ s32 unk_30;
+    /* 0x034 */ s32 unk_34;
+    /* 0x038 */ s32 unk_38;
+    /* 0x03C */ s32 unk_3C;
+    /* 0x040 */ s32 unk_40;
+    /* 0x044 */ s32 unk_44;
+    /* 0x048 */ s32 unk_48;
+    /* 0x04C */ f32 unk_4C;
+    /* 0x050 */ f32 unk_50[0xC];
+    /* 0x080 */ f32 unk_80[0xC];
+    /* 0x0B0 */ f32 unk_B0[0xC];
+    /* 0x0E0 */ f32 unk_E0[0xC];
+    /* 0x110 */ s32 unk_110;
+    /* 0x114 */ f32 unk_114;
+} LightningBoltFXData; // size = 0x118
 
 typedef struct WaterSplashFXData {
     /* 0x00 */ char todo[0];
@@ -2072,13 +2143,13 @@ typedef union {
     struct Effect86FXData*              unk_86;
 } EffectData;
 
-typedef struct EffectInstance {
+struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
     /* 0x0C */ EffectData data;
     /* 0x10 */ struct EffectGraphics* graphics;
-} EffectInstance; // size = 0x14
+}; // size = 0x14
 
 // composite struct for watt effects -- NOT the same as StaticStatusFXData
 typedef struct WattEffectData {
