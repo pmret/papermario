@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void hieroglyphs_init(void);
+void hieroglyphs_init(EffectInstance* effect);
 void hieroglyphs_update(EffectInstance* effect);
 void hieroglyphs_render(EffectInstance* effect);
 void hieroglyphs_appendGfx(void* effect);
@@ -12,7 +12,7 @@ EffectInstance* hieroglyphs_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg
     HieroglyphsFXData* data;
     s32 numParts = 1;
 
-    effectBp.init = (void*)hieroglyphs_init;
+    effectBp.init = hieroglyphs_init;
     effectBp.update = hieroglyphs_update;
     effectBp.renderWorld = hieroglyphs_render;
     effectBp.unk_00 = 0;
@@ -48,7 +48,7 @@ EffectInstance* hieroglyphs_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg
     return effect;
 }
 
-void hieroglyphs_init(void) {
+void hieroglyphs_init(EffectInstance* effect) {
 }
 
 void hieroglyphs_update(EffectInstance* effect) {

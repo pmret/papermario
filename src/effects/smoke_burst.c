@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void smoke_burst_init(void);
+void smoke_burst_init(EffectInstance* effect);
 void smoke_burst_update(EffectInstance* effect);
 void smoke_burst_render(EffectInstance* effect);
 void smoke_burst_appendGfx(void* effect);
@@ -12,7 +12,7 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
     SmokeBurstFXData* data;
     s32 numParts = 1;
 
-    effectBp.init = (void*)smoke_burst_init;
+    effectBp.init = smoke_burst_init;
     effectBp.update = smoke_burst_update;
     effectBp.renderWorld = smoke_burst_render;
     effectBp.unk_00 = 0;
@@ -58,7 +58,7 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
     }
 }
 
-void smoke_burst_init(void) {
+void smoke_burst_init(EffectInstance* effect) {
 }
 
 void smoke_burst_update(EffectInstance *effect) {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void huff_puff_breath_init(void);
+void huff_puff_breath_init(EffectInstance* effect);
 void huff_puff_breath_update(EffectInstance* effect);
 void huff_puff_breath_render(EffectInstance* effect);
 void huff_puff_breath_appendGfx(void* effect);
@@ -13,7 +13,7 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     s32 numParts = 1;
     f32 temp_f0;
 
-    effectBp.init = (void*)huff_puff_breath_init;
+    effectBp.init = huff_puff_breath_init;
     effectBp.update = huff_puff_breath_update;
     effectBp.renderWorld = huff_puff_breath_render;
     effectBp.unk_00 = 0;
@@ -50,11 +50,10 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     data->unk_44 = 0;
     data->unk_3C = arg5;
     data->unk_38 = shim_rand_int(32);
-    temp_f0 = shim_rand_int(16);
+    data->unk_40 = shim_rand_int(16);
     data->unk_20 = 150;
     data->unk_28 = 215;
     data->unk_2C = 210;
-    data->unk_40 = temp_f0;
     data->unk_18 = 255;
     data->unk_1C = 255;
     data->unk_30 = 10;
@@ -62,7 +61,7 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     return effect;
 }
 
-void huff_puff_breath_init(void) {
+void huff_puff_breath_init(EffectInstance* effect) {
 }
 
 void huff_puff_breath_update(EffectInstance* effect) {
