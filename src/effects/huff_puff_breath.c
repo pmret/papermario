@@ -11,7 +11,6 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     EffectInstance* effect;
     HuffPuffBreathFXData* data;
     s32 numParts = 1;
-    f32 temp_f0;
 
     effectBp.init = huff_puff_breath_init;
     effectBp.update = huff_puff_breath_update;
