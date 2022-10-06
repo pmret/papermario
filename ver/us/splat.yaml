@@ -5845,12 +5845,17 @@ segments:
     start: 0x608AB0
     vram: 0x80218000
     subsegments:
-    - [0x608AB0, c]
-    - [0x608CB0, c]
-    - [0x609B30, c]
-    - [0x609FD0, c]
-    - [0x60A470, c]
-    - [0x60ABD0, data]
+    - [0x608AB0, c, actor/blooper]
+    - [0x608CB0, c, actor/electro_blooper]
+    - [0x609130, c, actor/super_blooper]
+    - [0x6094D0, c, actor/blooper_baby]
+    - [0x609690, c, stage/tik_01]
+    - [0x609B30, c, stage/tik_02]
+    - [0x609FD0, c, stage/tik_03]
+    - [0x60A470, c, stage/tik_04]
+    - [0x60A8C0, c, stage/tik_05]
+    - [0x60ABD0, c, area]
+    - [0x60ABD0]
   - dir: battle/area_tik3
     type: code
     start: 0x6186F0

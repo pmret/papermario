@@ -175,8 +175,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_TIK2] = {
         BTL_AREA(area_tik2),
         .name = "エリア ＴＩＫ２",
-        .battles = 0x80227A90,
-        .stages = 0x80227AE0,
+        .battles = &b_area_tik2_formationTable,
+        .stages = &b_area_tik2_stageTable,
     },
     [BTL_AREA_TIK3] = {
         BTL_AREA(area_tik3),

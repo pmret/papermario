@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(UnkWaterFountainFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SpitInk)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect;
     f32 temp_f28;

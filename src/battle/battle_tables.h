@@ -82,6 +82,9 @@ extern StageList b_area_flo2_stageTable;
 extern BattleList b_area_tik_formationTable;
 extern StageList b_area_tik_stageTable;
 
+extern BattleList b_area_tik2_formationTable;
+extern StageList b_area_tik2_stageTable;
+
 extern BattleList b_area_sam_formationTable;
 extern StageList b_area_sam_stageTable;
 

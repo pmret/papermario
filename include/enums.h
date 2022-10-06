@@ -933,6 +933,7 @@ enum SoundIDs {
     SOUND_35B                       = 0x0000035B,
     SOUND_35C                       = 0x0000035C,
     SOUND_35D                       = 0x0000035D,
+    SOUND_35F                       = 0x0000035F,
     SOUND_361                       = 0x00000361,
     SOUND_362                       = 0x00000362,
     SOUND_363                       = 0x00000363,
@@ -1022,6 +1023,7 @@ enum SoundIDs {
     SOUND_3DB                       = 0x000003DB,
     SOUND_3DC                       = 0x000003DC,
     SOUND_3DD                       = 0x000003DD,
+    SOUND_3DE                       = 0x000003DE,
     SOUND_3E0                       = 0x000003E0,
     SOUND_3E1                       = 0x000003E1,
     SOUND_JUMP_3E2                  = 0x000003E2,
@@ -2441,6 +2443,7 @@ enum Events {
     EVENT_SPIKE_TAUNT                 = 0x0000001B,
     EVENT_BURN_TAUNT                  = 0x0000001C,
     EVENT_1D                          = 0x0000001D,
+    EVENT_1E                          = 0x0000001E,
     EVENT_AIR_LIFT_FAILED             = 0x0000001F,
     EVENT_DEATH                       = 0x00000020,
     EVENT_SPIN_SMASH_DEATH            = 0x00000021,
@@ -2469,6 +2472,7 @@ enum Events {
     EVENT_SWAP_PARTNER                = 0x0000003F,
     EVENT_LIFE_SHROOM_PROC            = 0x00000040,
     EVENT_REVIVE                      = 0x00000041,
+    EVENT_66                          = 0x00000042,
 };
 
 enum HitSounds {
