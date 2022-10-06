@@ -49,9 +49,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall);
 #ifdef NON_MATCHING
 ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 screenX;
-    s32 screenY;
-    s32 sp28;
+    s32 screenX, screenY, screenZ;
     Actor* partner = battleStatus->partnerActor;
     Actor* target;
     ActorPart* part;
@@ -170,7 +168,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
                 if (partner->state.speed != 0.0f) {
                     partner->state.speed += (D_8023D2AC / 8.5) / 3.0;
                 } else {
-                    partner->state.speed += (D_8023D2AC / 8.5) * 0.5;
+                    partner->state.speed += (D_8023D2AC / 8.5) / 2.0;
                 }
                 D_8023D2B4 = dpadX;
             } else {
@@ -182,7 +180,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
             if (partnerState->speed > 6.7) {
                 partnerState->speed = 6.7f;
             }
-            partnerState->speed = partnerState->speed - (f32) ((2.0 * (f64) (0x28 - dpadY)) / 40.0);
+            partnerState->speed = partnerState->speed - (f32) ((2.0 * (40 - dpadY)) / 40.0);
             if (partnerState->speed <= 0.0f) {
                 partnerState->speed = 0.0f;
                 D_8023D2AC = 0.0f;
@@ -242,7 +240,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
 
     get_screen_coords(gCurrentCameraID,
                       partnerState->goalPos.x, partnerState->goalPos.y, partnerState->goalPos.z,
-                      &screenX, &screenY, &sp28);
+                      &screenX, &screenY, &screenZ);
     id = D_8023D28C;
     hud_element_set_render_pos(id, screenX, screenY);
     hud_element_set_transform_rotation(id, 0.0f, 0.0f, D_8023D290);
@@ -250,7 +248,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
     D_8023D290 = clamp_angle(D_8023D290);
     get_screen_coords(gCurrentCameraID,
                       partnerState->currentPos.x, partnerState->currentPos.y, partnerState->currentPos.z,
-                      &screenX, &screenY, &sp28);
+                      &screenX, &screenY, &screenZ);
     hud_element_set_render_pos(D_8023D288, screenX, screenY);
 
     temp_v1_2 = script->functionTemp[0];
@@ -269,7 +267,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
             playerState->currentPos.y = partnerState->currentPos.y;
             playerState->currentPos.z = partnerState->currentPos.z;
             for (i = 0; i < 1; i++) {
-                get_screen_coords(gCurrentCameraID, playerState->currentPos.x, playerState->currentPos.y, playerState->currentPos.z, &screenX, &screenY, &sp28);
+                get_screen_coords(gCurrentCameraID, playerState->currentPos.x, playerState->currentPos.y, playerState->currentPos.z, &screenX, &screenY, &screenZ);
                 id = D_8023D2B8[i];
                 hud_element_set_render_pos(id, screenX, screenY);
             }

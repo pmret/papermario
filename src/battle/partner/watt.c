@@ -267,7 +267,6 @@ ApiStatus func_80238C08_7046F8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80238C84_704774(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    EffectInstance* temp_a0;
     s32 t1;
     s32 t2;
     s32 t3;
