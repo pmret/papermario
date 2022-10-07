@@ -2458,7 +2458,7 @@ void btl_state_update_change_partner(void) {
         case BATTLE_STATE2_UNK_3:
             if (!does_script_exist(battleStatus->controlScriptID)) {
                 btl_delete_actor(partner);
-                playerData->currentPartner = battleStatus->unk_1AA[2];
+                playerData->currentPartner = battleStatus->unk_1AC;
                 load_partner_actor();
                 partner = battleStatus->partnerActor;
                 partner->scale.x = 0.1f;

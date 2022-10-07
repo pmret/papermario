@@ -360,7 +360,7 @@ typedef struct EncounterStatus {
     /* 0x010 */ char unk_10;
     /* 0x011 */ s8 allowFleeing;
     /* 0x012 */ s8 unk_12;
-    /* 0x013 */ u8 dropWhackaBump;
+    /* 0x013 */ s8 dropWhackaBump;
     /* 0x014 */ s32 songID;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */

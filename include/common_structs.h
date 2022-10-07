@@ -173,6 +173,25 @@ typedef struct NpcQuizmoBlur {
     /* 0x04 */ char unk_04[0x4];
 } NpcQuizmoBlur; // size = 0x8;
 
+typedef struct Unk2A4Part {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ char unk_01[0x3];
+    /* 0x04 */ Vec3f pos;
+} Unk2A4Part; // size = 0x10
+
+typedef struct Unk2A4Blur {
+    /* 0x000 */ Unk2A4Part unk_00[40];
+    /* 0x280 */ s32 partIdx;
+    /* 0x284 */ s32 unk_284;
+    /* 0x288 */ s32 unk_288;
+    /* 0x28C */ s32 npcID;
+    /* 0x290 */ s32* animIDs;
+    /* 0x294 */ f32 unk_294;
+    /* 0x298 */ f32 unk_298;
+    /* 0x29C */ f32 unk_29C;
+    /* 0x2A0 */ f32 unk_2A0;
+} Unk2A4Blur; // size = 0x2A4
+
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -187,6 +206,7 @@ typedef struct Npc {
                 NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
+                Unk2A4Blur*    unk2A4;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
@@ -910,7 +930,9 @@ typedef struct BattleStatus {
     /* 0x1A6 */ s8 currentTargetPart2;
     /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
-    /* 0x1AA */ char unk_1AA[4];
+    /* 0x1AA */ s16 unk_1AA;
+    /* 0x1AC */ s8 unk_1AC;
+    /* 0x1AD */ char unk_1AD;
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
     /* 0x1F6 */ s8 submenuStatus[24]; ///< @see enum BattleSubmenuStatus
