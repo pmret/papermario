@@ -49,6 +49,7 @@ void N(appendGfx_FallingSprite)(void) {
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
+    //TODO use SPR_RASTER_Mario8_XYZ here once they are defined
     falling->playerSpriteID = SPR_Mario_8;
     animFrame = gGameStatusPtr->frameCounter % 4;
     if (animFrame == 0) {
