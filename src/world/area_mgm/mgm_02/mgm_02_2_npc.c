@@ -1030,7 +1030,7 @@ NpcSettings N(NpcSettings_Fuzzy) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Bombomb) = {
+NpcSettings N(NpcSettings_Bobomb) = {
     .height = 23,
     .radius = 20,
     .level = 6,
@@ -1855,7 +1855,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb) = {
+EvtScript N(EVS_NpcInit_Bobomb) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bobomb_Anim0B)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
@@ -2063,13 +2063,13 @@ StaticNpc N(NpcData_Fuzzy_05) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bombomb_01) = {
+StaticNpc N(NpcData_Bobomb_01) = {
     .id = NPC_Bobomb_01,
-    .settings = &N(NpcSettings_Bombomb),
+    .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb),
+    .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2096,13 +2096,13 @@ StaticNpc N(NpcData_Bombomb_01) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bombomb_02) = {
+StaticNpc N(NpcData_Bobomb_02) = {
     .id = NPC_Bobomb_02,
-    .settings = &N(NpcSettings_Bombomb),
+    .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb),
+    .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2129,13 +2129,13 @@ StaticNpc N(NpcData_Bombomb_02) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bombomb_03) = {
+StaticNpc N(NpcData_Bobomb_03) = {
     .id = NPC_Bobomb_03,
-    .settings = &N(NpcSettings_Bombomb),
+    .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb),
+    .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2162,13 +2162,13 @@ StaticNpc N(NpcData_Bombomb_03) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bombomb_04) = {
+StaticNpc N(NpcData_Bobomb_04) = {
     .id = NPC_Bobomb_04,
-    .settings = &N(NpcSettings_Bombomb),
+    .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb),
+    .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2195,13 +2195,13 @@ StaticNpc N(NpcData_Bombomb_04) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bombomb_05) = {
+StaticNpc N(NpcData_Bobomb_05) = {
     .id = NPC_Bobomb_05,
-    .settings = &N(NpcSettings_Bombomb),
+    .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000,
-    .init = &N(EVS_NpcInit_Bombomb),
+    .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,
@@ -2558,11 +2558,11 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Fuzzy_03)),
     NPC_GROUP(N(NpcData_Fuzzy_04)),
     NPC_GROUP(N(NpcData_Fuzzy_05)),
-    NPC_GROUP(N(NpcData_Bombomb_01)),
-    NPC_GROUP(N(NpcData_Bombomb_02)),
-    NPC_GROUP(N(NpcData_Bombomb_03)),
-    NPC_GROUP(N(NpcData_Bombomb_04)),
-    NPC_GROUP(N(NpcData_Bombomb_05)),
+    NPC_GROUP(N(NpcData_Bobomb_01)),
+    NPC_GROUP(N(NpcData_Bobomb_02)),
+    NPC_GROUP(N(NpcData_Bobomb_03)),
+    NPC_GROUP(N(NpcData_Bobomb_04)),
+    NPC_GROUP(N(NpcData_Bobomb_05)),
     NPC_GROUP(N(NpcData_Luigis)),
     {}
 };

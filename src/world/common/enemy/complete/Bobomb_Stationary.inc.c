@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/StationaryAI.inc.c"
 
-StationaryAISettings N(AISettings_Bombomb_Stationary) = {
+StationaryAISettings N(AISettings_Bobomb_Stationary) = {
     .unk_00 = 110.0f,
     .unk_04 = 65.0f,
     .playerSearchInterval = 8,
@@ -14,17 +14,17 @@ StationaryAISettings N(AISettings_Bombomb_Stationary) = {
     .unk_20 = 1,
 };
 
-EvtScript N(EVS_NpcAI_Bombomb_Stationary) = {
-    EVT_CALL(N(StationaryAI_Main), EVT_PTR(N(AISettings_Bombomb_Stationary)))
+EvtScript N(EVS_NpcAI_Bobomb_Stationary) = {
+    EVT_CALL(N(StationaryAI_Main), EVT_PTR(N(AISettings_Bobomb_Stationary)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_Bombomb_Stationary) = {
+NpcSettings N(NpcSettings_Bobomb_Stationary) = {
     .height = 23,
     .radius = 20,
     .level = 6,
-    .ai = &N(EVS_NpcAI_Bombomb_Stationary),
+    .ai = &N(EVS_NpcAI_Bobomb_Stationary),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

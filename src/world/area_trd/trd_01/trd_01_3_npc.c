@@ -293,9 +293,9 @@ StaticNpc N(NpcData_KoopaTroopa_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bombomb) = {
+StaticNpc N(NpcData_Bobomb) = {
     .id = NPC_Bobomb,
-    .settings = &N(NpcSettings_Bombomb_Stationary),
+    .settings = &N(NpcSettings_Bobomb_Stationary),
     .pos = { -255.0f, 640.0f, 35.0f },
     .yaw = 180,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -348,6 +348,6 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_KoopaTroopa_01), BTL_TRD_PART_1_FORMATION_03, BTL_TRD_PART_1_STAGE_02),
     NPC_GROUP(N(NpcData_KoopaTroopa_02), BTL_TRD_PART_1_FORMATION_01, BTL_TRD_PART_1_STAGE_07),
     NPC_GROUP(N(NpcData_KoopaTroopa_03), BTL_TRD_PART_1_FORMATION_00, BTL_TRD_PART_1_STAGE_07),
-    NPC_GROUP(N(NpcData_Bombomb), BTL_TRD_PART_1_FORMATION_10, BTL_TRD_PART_1_STAGE_07),
+    NPC_GROUP(N(NpcData_Bobomb), BTL_TRD_PART_1_FORMATION_10, BTL_TRD_PART_1_STAGE_07),
     {}
 };

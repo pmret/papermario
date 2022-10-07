@@ -150,36 +150,36 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Jailer_KoopaTroopa, -350, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Jailer_Bombomb_01, -370, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Jailer_Bombomb_02, -390, 0, 0)
+    EVT_CALL(SetNpcPos, NPC_Jailer_Bobomb_01, -370, 0, 0)
+    EVT_CALL(SetNpcPos, NPC_Jailer_Bobomb_02, -390, 0, 0)
     EVT_CALL(SetNpcSpeed, NPC_Jailer_KoopaTroopa, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcSpeed, NPC_Jailer_Bombomb_01, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcSpeed, NPC_Jailer_Bombomb_02, EVT_FLOAT(4.0))
+    EVT_CALL(SetNpcSpeed, NPC_Jailer_Bobomb_01, EVT_FLOAT(4.0))
+    EVT_CALL(SetNpcSpeed, NPC_Jailer_Bobomb_02, EVT_FLOAT(4.0))
     EVT_CALL(SetNpcAnimation, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_01, ANIM_Bobomb_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_02, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bombomb_01, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bombomb_02, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_02, NPC_FLAG_100, TRUE)
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Jailer_KoopaTroopa, -237, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_01, -274, 25, 0)
+        EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_01, -274, 25, 0)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_02, -266, -15, 0)
+    EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_02, -266, -15, 0)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -260, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -260, 0, 0)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_01, ANIM_Bobomb_Anim02)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_02, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim02)
     EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04, ANIM_KoopaTroopa_Anim01, 0, MSG_CH1_00F0)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_01, ANIM_Bobomb_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_02, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_THREAD
         EVT_WAIT(60)
@@ -199,21 +199,21 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
         EVT_CALL(NpcMoveTo, NPC_Jailer_KoopaTroopa, -167, 218, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_01, -254, 144, 0)
-        EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_01, -203, 222, 0)
+        EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_01, -254, 144, 0)
+        EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_01, -203, 222, 0)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_02, -265, 0, 0)
-    EVT_CALL(NpcMoveTo, NPC_Jailer_Bombomb_02, -186, 175, 0)
+    EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_02, -265, 0, 0)
+    EVT_CALL(NpcMoveTo, NPC_Jailer_Bobomb_02, -186, 175, 0)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcJumpscale, NPC_Jailer_KoopaTroopa, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_Jailer_KoopaTroopa, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Jailer_KoopaTroopa, LVar0, LVar1, LVar2, 10)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_01, ANIM_Bobomb_Anim02)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_02, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim02)
     EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04, ANIM_KoopaTroopa_Anim01, 0, MSG_CH1_00F1)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_01, ANIM_Bobomb_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bombomb_02, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
     EVT_RETURN
@@ -242,7 +242,7 @@ EvtScript N(EVS_NpcInit_KoopaTroopa) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_Jailer) = {
+EvtScript N(EVS_NpcInit_Bobomb_Jailer) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_DEFEATED_DUNGEON_GUARDS)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -250,7 +250,7 @@ EvtScript N(EVS_NpcInit_Bombomb_Jailer) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_01) = {
+EvtScript N(EVS_NpcInteract_Bobomb_01) = {
     EVT_IF_EQ(GF_TRD06_BombedWall, FALSE)
         EVT_IF_EQ(AF_TRD_MetPrisoner1, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_00E4)
@@ -266,7 +266,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_02) = {
+EvtScript N(EVS_NpcInteract_Bobomb_02) = {
     EVT_IF_EQ(GF_TRD06_BombedWall, FALSE)
         EVT_IF_EQ(AF_TRD_MetPrisoner2, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_00E7)
@@ -282,7 +282,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_03) = {
+EvtScript N(EVS_NpcInteract_Bobomb_03) = {
     EVT_IF_EQ(GF_TRD06_BombedWall, FALSE)
         EVT_IF_EQ(AF_TRD_MetPrisoner3, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EA)
@@ -298,7 +298,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_04) = {
+EvtScript N(EVS_NpcInteract_Bobomb_04) = {
     EVT_IF_EQ(GF_TRD06_BombedWall, FALSE)
         EVT_IF_EQ(AF_TRD_MetPrisoner4, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00ED)
@@ -315,25 +315,25 @@ EvtScript N(EVS_NpcInteract_Bombomb_04) = {
 };
 
 EvtScript N(EVS_NpcInit_Bobomb_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_01)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_01)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_02)))
+EvtScript N(EVS_NpcInit_Bobomb_02) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_02)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_03)))
+EvtScript N(EVS_NpcInit_Bobomb_03) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_03)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_04)))
+EvtScript N(EVS_NpcInit_Bobomb_04) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_04)))
     EVT_RETURN
     EVT_END
 };
@@ -409,12 +409,12 @@ StaticNpc N(NpcData_Jailers)[] = {
         },
     },
     {
-        .id = NPC_Jailer_Bombomb_01,
+        .id = NPC_Jailer_Bobomb_01,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING | NPC_FLAG_40000,
-        .init = &N(EVS_NpcInit_Bombomb_Jailer),
+        .init = &N(EVS_NpcInit_Bobomb_Jailer),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -440,12 +440,12 @@ StaticNpc N(NpcData_Jailers)[] = {
         },
     },
     {
-        .id = NPC_Jailer_Bombomb_02,
+        .id = NPC_Jailer_Bobomb_02,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING | NPC_FLAG_40000,
-        .init = &N(EVS_NpcInit_Bombomb_Jailer),
+        .init = &N(EVS_NpcInit_Bobomb_Jailer),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -474,7 +474,7 @@ StaticNpc N(NpcData_Jailers)[] = {
 
 StaticNpc N(NpcData_Inmates)[] = {
     {
-        .id = NPC_Bombomb_01,
+        .id = NPC_Bobomb_01,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { 25.0f, 0.0f, 127.0f },
         .yaw = 270,
@@ -510,15 +510,15 @@ StaticNpc N(NpcData_Inmates)[] = {
             .anim_E = ANIM_WorldBobomb_Red_Still,
             .anim_F = ANIM_WorldBobomb_Red_Still,
         },
-        .tattle = MSG_NpcTattle_TRD_BombombA,
+        .tattle = MSG_NpcTattle_TRD_BobombA,
     },
     {
-        .id = NPC_Bombomb_02,
+        .id = NPC_Bobomb_02,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { -30.0f, 0.0f, 130.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
-        .init = &N(EVS_NpcInit_Bombomb_02),
+        .init = &N(EVS_NpcInit_Bobomb_02),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -549,15 +549,15 @@ StaticNpc N(NpcData_Inmates)[] = {
             .anim_E = ANIM_WorldBobomb_Blue_Still,
             .anim_F = ANIM_WorldBobomb_Blue_Still,
         },
-        .tattle = MSG_NpcTattle_TRD_BombombB,
+        .tattle = MSG_NpcTattle_TRD_BobombB,
     },
     {
-        .id = NPC_Bombomb_03,
+        .id = NPC_Bobomb_03,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { -140.0f, 0.0f, -90.0f },
         .yaw = 270,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
-        .init = &N(EVS_NpcInit_Bombomb_03),
+        .init = &N(EVS_NpcInit_Bobomb_03),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -588,15 +588,15 @@ StaticNpc N(NpcData_Inmates)[] = {
             .anim_E = ANIM_WorldBobomb_Green_Still,
             .anim_F = ANIM_WorldBobomb_Green_Still,
         },
-        .tattle = MSG_NpcTattle_TRD_BombombC,
+        .tattle = MSG_NpcTattle_TRD_BobombC,
     },
     {
-        .id = NPC_Bombomb_04,
+        .id = NPC_Bobomb_04,
         .settings = &N(NpcSettings_Bobomb),
         .pos = { -75.0f, 0.0f, -80.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
-        .init = &N(EVS_NpcInit_Bombomb_04),
+        .init = &N(EVS_NpcInit_Bobomb_04),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
@@ -627,7 +627,7 @@ StaticNpc N(NpcData_Inmates)[] = {
             .anim_E = ANIM_WorldBobomb_Green_Still,
             .anim_F = ANIM_WorldBobomb_Green_Still,
         },
-        .tattle = MSG_NpcTattle_TRD_BombombD,
+        .tattle = MSG_NpcTattle_TRD_BobombD,
     },
 };
 
