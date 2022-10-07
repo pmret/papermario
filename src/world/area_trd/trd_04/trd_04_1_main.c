@@ -245,7 +245,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(AF_TRD_04, FALSE)
+    EVT_SET(AF_TRD04_LowerStairs, FALSE)
     EVT_CALL(ParentColliderToModel, COLLIDER_o86, MODEL_k_dan)
     EVT_CALL(ParentColliderToModel, COLLIDER_o87, MODEL_k_dan)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
@@ -254,7 +254,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(TranslateModel, MODEL_k_kusari, 0, 187, 0)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o86)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o87)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_LowerStairs)), TRIGGER_AREA_FLAG_SET, AF_TRD_04, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_LowerStairs)), TRIGGER_AREA_FLAG_SET, AF_TRD04_LowerStairs, 1, 0)
     EVT_END_IF
     EVT_EXEC(N(EVS_TexPan_Water))
     EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)

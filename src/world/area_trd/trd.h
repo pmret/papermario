@@ -23,7 +23,7 @@ enum {
 enum {
     AF_TRD01_RaiseStairs        = AreaFlag(1),
     AF_TRD02_LowerStairs        = AreaFlag(2),
-    AF_TRD_04                   = AreaFlag(4),
+    AF_TRD04_LowerStairs        = AreaFlag(4),
     AF_TRD_MetPrisoner1         = AreaFlag(6),
     AF_TRD_MetPrisoner2         = AreaFlag(7),
     AF_TRD_MetPrisoner3         = AreaFlag(8),
