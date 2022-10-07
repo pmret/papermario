@@ -5825,7 +5825,6 @@ segments:
       - [0x5A3420, palette, lava_piranha_vine]
       - [0x5A3620, gfx, lava_piranha_vine]
       - [0x5A36F8]
-    #- [0x5A2E80, .data, actor/lava_piranha]
     - [0x5AA5B0, .data, actor/petit_piranha]
     - [0x5AB7A0, .data, actor/lava_bud]
     - [0x5AEE00, .data, actor/petit_piranha_bomb]
@@ -6084,9 +6083,10 @@ segments:
     start: 0x6DBDA0
     vram: 0x80218000
     subsegments:
-    - [0x6DBDA0, c]
-    - [0x6DC2F0, c]
-    - [0x6DC340, data]
+    - [0x6DBDA0, c, area]
+    - [0x6DBDA0, c, actor/kammy_koopa]
+    - [0x6DC2F0, c, stage/kpa_05]
+    - [0x6DC340]
   - dir: battle/area_dig
     type: code
     start: 0x6DDDC0
