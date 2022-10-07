@@ -6,7 +6,7 @@
 #include "script_api/map.h"
 
 // battle and stage are optional in overloaded NPC_GROUP macros
-#define NPC_GROUP(...) VFUNC(NPC_GROUP, __VA_ARGS__)
+#define NPC_GROUP(args...) VFUNC(NPC_GROUP, args)
 #define NPC_GROUP1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
 #define NPC_GROUP2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
 #define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }

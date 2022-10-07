@@ -676,9 +676,9 @@
      9,8,7,6,5,4,3,2,1,0
 #define _VFUNC_(name, n) name##n
 #define _VFUNC(name, n) _VFUNC_(name, n)
-#define VFUNC(func, ...) _VFUNC(func, __NARG__(__VA_ARGS__)) (__VA_ARGS__)
+#define VFUNC(func, args...) _VFUNC(func, __NARG__(args)) (args)
 
-#define EVT_PLAY_EFFECT(...) VFUNC(EVT_PLAY_EFFECT, __VA_ARGS__)
+#define EVT_PLAY_EFFECT(args...) VFUNC(EVT_PLAY_EFFECT, args)
 #define EVT_PLAY_EFFECT1(effect) \
     EVT_CALL(PlayEffect, effect, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define EVT_PLAY_EFFECT2(effect, subtype) \
