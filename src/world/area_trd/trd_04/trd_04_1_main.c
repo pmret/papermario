@@ -12,22 +12,22 @@ extern NpcGroupList N(NpcGroupAfter);
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-EvtScript N(EVS_ExitDoors_trd_03_1) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_0,
-    COLLIDER_ttw2, MODEL_o6, MODEL_o7, "trd_03", trd_03_ENTRY_1);
+EvtScript N(EVS_ExitDoors_trd_03_1) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_0, "trd_03", trd_03_ENTRY_1,
+    COLLIDER_ttw2, MODEL_o6, MODEL_o7);
 
-EvtScript N(EVS_ExitDoors_trd_05_0) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_1,
-    COLLIDER_tte2, MODEL_o9, MODEL_o8, "trd_05", trd_05_ENTRY_0);
+EvtScript N(EVS_ExitDoors_trd_05_0) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_1, "trd_05", trd_05_ENTRY_0,
+    COLLIDER_tte2, MODEL_o9, MODEL_o8);
 
-EvtScript N(EVS_ExitDoors_trd_03_3) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_2,
-    COLLIDER_ttw3, MODEL_o13, MODEL_o12, "trd_03", trd_03_ENTRY_3);
+EvtScript N(EVS_ExitDoors_trd_03_3) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_2, "trd_03", trd_03_ENTRY_3,
+    COLLIDER_ttw3, MODEL_o13, MODEL_o12);
 
-EvtScript N(EVS_ExitDoors_trd_05_3) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_3,
-    COLLIDER_tte3, MODEL_o10, MODEL_o11, "trd_05", trd_05_ENTRY_3);
+EvtScript N(EVS_ExitDoors_trd_05_3) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_3, "trd_05", trd_05_ENTRY_3,
+    COLLIDER_tte3, MODEL_o10, MODEL_o11);
 
 EvtScript N(EVS_ExitWalk_trd_07_0) = EVT_EXIT_WALK(60, trd_04_ENTRY_4, "trd_07", trd_07_ENTRY_0);
 
-EvtScript N(EVS_ExitDoors_trd_06_1) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_5,
-    COLLIDER_tte, MODEL_o29, MODEL_o28, "trd_06", trd_06_ENTRY_1);
+EvtScript N(EVS_ExitDoors_trd_06_1) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_5, "trd_06", trd_06_ENTRY_1,
+    COLLIDER_tte, MODEL_o29, MODEL_o28);
 
 s32 N(KeyList)[] = {
     ITEM_KOOPA_FORTRESS_KEY,
@@ -245,7 +245,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(AF_TRD_04, FALSE)
+    EVT_SET(AF_TRD04_LowerStairs, FALSE)
     EVT_CALL(ParentColliderToModel, COLLIDER_o86, MODEL_k_dan)
     EVT_CALL(ParentColliderToModel, COLLIDER_o87, MODEL_k_dan)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
@@ -254,7 +254,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(TranslateModel, MODEL_k_kusari, 0, 187, 0)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o86)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o87)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_LowerStairs)), TRIGGER_AREA_FLAG_SET, AF_TRD_04, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_LowerStairs)), TRIGGER_AREA_FLAG_SET, AF_TRD04_LowerStairs, 1, 0)
     EVT_END_IF
     EVT_EXEC(N(EVS_TexPan_Water))
     EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)

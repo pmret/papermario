@@ -239,7 +239,7 @@ extern HudScript* wPartnerHudScripts[];
 #define hs_RandomRestart(max, cutoff) HUD_ELEMENT_OP_RandomRestart, max, cutoff,
 
 #define hs_op_15(arg0) HUD_ELEMENT_OP_op_15, arg0,
-#define hs_RandomBranch(...) HUD_ELEMENT_OP_RandomBranch, (sizeof((s32[]){__VA_ARGS__})/sizeof(s32)), __VA_ARGS__,
+#define hs_RandomBranch(args...) HUD_ELEMENT_OP_RandomBranch, (sizeof((s32[]){args})/sizeof(s32)), args,
 #define hs_SetFlags(arg0) HUD_ELEMENT_OP_SetFlags, arg0,
 #define hs_ClearFlags(arg0) HUD_ELEMENT_OP_ClearFlags, arg0,
 #define hs_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0,

@@ -4,7 +4,7 @@
 glabel func_8024027C_8DA37C
 /* 8DA37C 8024027C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8DA380 80240280 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8DA384 80240284 0C00D77C */  jal       func_80035DF0
+/* 8DA384 80240284 0C00D77C */  jal       set_map_change_fade_rate
 /* 8DA388 80240288 2404000A */   addiu    $a0, $zero, 0xa
 /* 8DA38C 8024028C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8DA390 80240290 24020002 */  addiu     $v0, $zero, 2

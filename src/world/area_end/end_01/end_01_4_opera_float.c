@@ -122,7 +122,7 @@ EvtScript N(EVS_MakeSpiritAppear) = {
     EVT_SUB(LVar3, 120)
     EVT_SET(LVar5, LVar3)
     EVT_ADD(LVar5, 15)
-    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar2, LVar5, LVar4, 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar2, LVar5, LVar4, 30)
     EVT_CALL(SetNpcPos, LVarA, LVar2, LVar3, LVar4)
     EVT_CALL(N(UpdateStarSpiritRotation))
     EVT_RETURN

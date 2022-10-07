@@ -59,7 +59,7 @@ trees in this room are labeled with a 0 through 5 system, meaning there are "6" 
 static char* N(exit_str_0) = "nok_03";
 static char* N(exit_str_1) = "";
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 

@@ -1,14 +1,49 @@
 
 #include "common.h"
 
-#include "world/common/Bandit_DropCoin.inc.c"
+API_CALLABLE(N(Bandit_DropStolenCoin)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 npcID;
+    Npc* npc;
+    s32 itemEntityIndex;
+    s32 areaFlag;
+
+    if (isInitialCall) {
+        npcID = evt_get_variable(script, *args++);
+        itemEntityIndex = evt_get_variable(script, *args++);
+        areaFlag = *args++;
+
+        if (npcID == -1) {
+            npc = get_npc_unsafe(script->owner2.npcID);
+        } else if (npcID >= EVT_LIMIT) {
+            npc = get_npc_unsafe(npcID);
+        } else {
+            npc = (Npc*)npcID;
+        }
+
+        script->functionTempPtr[0] = npc;
+        script->functionTemp[1] = itemEntityIndex;
+        script->functionTemp[2] = areaFlag;
+    }
+
+    npc = script->functionTempPtr[0];
+    itemEntityIndex = script->functionTemp[1];
+    areaFlag = script->functionTemp[2];
+
+    if (evt_get_variable(script, areaFlag)) {
+        set_item_entity_position(itemEntityIndex, npc->pos.x, npc->pos.y + 30.0f, npc->pos.z);
+        return ApiStatus_BLOCK;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_Bandit_CreateStolenCoin) = {
     EVT_SET(LVarA, LVar0)
     EVT_CALL(GetNpcPos, LVarA, LVar1, LVar2, LVar3)
     EVT_ADD(LVar2, 30)
     EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_CALL(N(Bandit_DropCoin), LVarA, LVar0, AF_SBK_01)
+    EVT_CALL(N(Bandit_DropStolenCoin), LVarA, LVar0, AF_SBK_01)
     EVT_CALL(RemoveItemEntity, LVar0)
     EVT_RETURN
     EVT_END
@@ -40,7 +75,7 @@ EvtScript N(EVS_NpcDefeat_Bandit) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(func_80045900, 0)
+            EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_SET(AF_SBK_01, TRUE)

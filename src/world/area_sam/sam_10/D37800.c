@@ -11,7 +11,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_802402BC_D37ABC);
 

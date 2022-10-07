@@ -9,7 +9,7 @@ s32** N(varStash) = NULL;
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"
 
 EvtScript N(D_80244BB4_C76034) = {
     EVT_SET_GROUP(EVT_GROUP_00)

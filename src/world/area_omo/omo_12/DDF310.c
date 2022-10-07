@@ -1,6 +1,6 @@
 #include "omo_12.h"
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #include "world/common/atomic/DarkRoom.inc.c"
 

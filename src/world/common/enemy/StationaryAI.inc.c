@@ -3,7 +3,7 @@
 // - kmr_07 GoombaBros
 // - kmr_11 GoombaBros/King
 // - sbk_30 (unused)
-// - trd_01 Bombomb <-- only real use case!
+// - trd_01 Bobomb <-- only real use case!
 // - nok_01 (unused)
 // - omo_02 (unused)
 

@@ -58,8 +58,8 @@ EvtScript N(EVS_Amayze_Dayzees) = {
     EVT_ADD(LVar4, 30)
     EVT_SUB(LVar5, 2)
     EVT_LOOP(0)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30, 0, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30)
         EVT_WAIT(15)
     EVT_END_LOOP
     EVT_RETURN
@@ -158,7 +158,7 @@ EvtScript N(EVS_ParadePhase_Wizards) = {
     EVT_CALL(SetNpcAnimation, NPC_Merlow, ANIM_ParadeWizard_Merle_MerlowRelease)
     EVT_CALL(SetNpcAnimation, NPC_Merlar, ANIM_ParadeWizard_Merle_MerlarRelease)
     EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, 1, 20, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, 1, 20, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_EXEC(N(EVS_Sun))
     EVT_EXEC_GET_TID(N(EVS_TexPan_FlowerFloat_WisterwoodBody), LVarB)

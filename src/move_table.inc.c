@@ -1119,7 +1119,7 @@ MoveData gMoveTable[] = {
     .costFP = 0,
     .costBP = 1
 },
-{   // move 70: Unused_FinalBombomb
+{   // move 70: Unused_FinalBobomb
     .nameMsg = "ファイナルボムヘイ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,

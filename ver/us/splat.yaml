@@ -8607,55 +8607,45 @@ segments:
     start: 0x999C70
     vram: 0x80240000
     subsegments:
-    - [0x999C70, c]
-    - [0x999F80, c]
-    - [0x99A240, c]
-    - [0x99A2A0, data]
-    - [0x99A410, data]
-    - [0x99AFB0, data]
-    - [0x99B280, data]
-    - [0x99C970]
+    - [0x999C70, c, trd_00_0_header]
+    - [0x999C70, c, trd_00_1_main]
+    - [0x999F80, c, trd_00_2_entity]
+    - [0x99A240, c, trd_00_3_npc]
+    - [0x99A2A0]
   - name: trd_01
     dir: world/area_trd/trd_01
     type: code
     start: 0x99C990
     vram: 0x80240000
     subsegments:
-    - [0x99C990, c]
-    - [0x99CCA0, c]
-    - [0x99CD80, c]
-    - [0x99E050, data]
-    - [0x99E110, data]
-    - [0x99F960, data]
-    - [0x99FD80, data]
-    - [0x9A0DB0]
+    - [0x99C990, c, trd_01_0_header]
+    - [0x99C990, c, trd_01_1_main]
+    - [0x99CCA0, c, trd_01_2_entity]
+    - [0x99CD80, c, trd_01_3_npc]
+    - [0x99E050]
   - name: trd_02
     dir: world/area_trd/trd_02
     type: code
     start: 0x9A0FE0
     vram: 0x80240000
     subsegments:
-    - [0x9A0FE0, c]
-    - [0x9A10C0, c]
-    - [0x9A2A30, data]
-    - [0x9A2B00, data]
-    - [0x9A3870, data]
-    - [0x9A3AB0, data]
-    - [0x9A42B0]
+    - [0x9A0FE0, c, trd_02_0_header]
+    - [0x9A0FE0, c, trd_02_1_main]
+    - [0x9A0FE0, c, trd_02_2_entity]
+    - [0x9A10C0, c, trd_02_3_npc]
+    - [0x9A2A30]
   - name: trd_03
     dir: world/area_trd/trd_03
     type: code
     start: 0x9A4650
     vram: 0x80240000
     subsegments:
-    - [0x9A4650, c]
-    - [0x9A46F0, c]
-    - [0x9A4ED0, c]
-    - [0x9A5040, data]
-    - [0x9A51A0, data]
-    - [0x9A5FF0, data]
-    - [0x9A60F0, data]
-    - [0x9A8380]
+    - [0x9A4650, c, trd_03_0_header]
+    - [0x9A4650, c, trd_03_1_main]
+    - [0x9A4650, c, trd_03_2_entity]
+    - [0x9A46F0, c, trd_03_3_npc]
+    - [0x9A4ED0, c, trd_03_4_puzzle]
+    - [0x9A5040]
   - name: trd_04
     dir: world/area_trd/trd_04
     type: code
@@ -8673,40 +8663,37 @@ segments:
     start: 0x9AE700
     vram: 0x80240000
     subsegments:
-    - [0x9AE700, c]
-    - [0x9AEE20, c]
-    - [0x9AEE70, data]
-    - [0x9AEFC0, data]
-    - [0x9AF7C0, data]
-    - [0x9AF820, data]
-    - [0x9B1760]
+    - [0x9AE700, c, trd_05_0_header]
+    - [0x9AE700, c, trd_05_1_main]
+    - [0x9AE700, c, trd_05_2_entity]
+    - [0x9AE720, c, trd_05_3_trap]
+    - [0x9AEE20, c, trd_05_4_npc]
+    - [0x9AEE70]
   - name: trd_06
     dir: world/area_trd/trd_06
     type: code
     start: 0x9B1790
     vram: 0x80240000
     subsegments:
-    - [0x9B1790, c]
-    - [0x9B1AA0, c]
-    - [0x9B2280, c]
-    - [0x9B2410, c]
-    - [0x9B24B0, data]
-    - [0x9B2610, data]
-    - [0x9B5FC0, data]
-    - [0x9B6940]
+    - [0x9B1790, c, trd_06_0_header]
+    - [0x9B1790, c, trd_06_1_main]
+    - [0x9B1AA0, c, trd_06_2_falling]
+    - [0x9B2280, c, trd_06_3_npc_prisoners]
+    - [0x9B2280, c, trd_06_4_npc_koopa_bros]
+    - [0x9B2280, c, trd_06_5_entity]
+    - [0x9B2410, c, trd_06_6_party_image]
+    - [0x9B24B0]
   - name: trd_07
     dir: world/area_trd/trd_07
     type: code
     start: 0x9B6980
     vram: 0x80240000
     subsegments:
-    - [0x9B6980, c]
-    - [0x9B6C90, c]
-    - [0x9B9270, data]
-    - [0x9B9310, data]
-    - [0x9B9760, data]
-    - [0x9BA050, data]
-    - [0x9BB190]
+    - [0x9B6980, c, trd_07_0_header]
+    - [0x9B6980, c, trd_07_1_main]
+    - [0x9B6C90, c, trd_07_2_npc]
+    - [0x9B8F80, c, trd_07_3_magic_doors]
+    - [0x9B9270]
   - name: trd_08
     dir: world/area_trd/trd_08
     type: code
@@ -8724,26 +8711,23 @@ segments:
     start: 0x9BD660
     vram: 0x80240000
     subsegments:
-    - [0x9BD660, c]
-    - [0x9BD720, c]
-    - [0x9BD830, data]
-    - [0x9BD960, data]
-    - [0x9BDD80, data]
-    - [0x9BDE80, data]
-    - [0x9C24C0, data]
-    - [0x9C28F0]
+    - [0x9BD660, c, trd_09_0_header]
+    - [0x9BD660, c, trd_09_1_main]
+    - [0x9BD660, c, trd_09_2_entity]
+    - [0x9BD660, c, trd_09_3_npcs]
+    - [0x9BD720, c, trd_09_4_demo]
+    - [0x9BD830]
   - name: trd_10
     dir: world/area_trd/trd_10
     type: code
     start: 0x9C2910
     vram: 0x80240000
     subsegments:
-    - [0x9C2910, c]
-    - [0x9C3130, c]
-    - [0x9C3160, data]
-    - [0x9C3A30, data]
-    - [0x9C4FC0, data]
-    - [0x9C53B0]
+    - [0x9C2910, c, trd_10_0_header]
+    - [0x9C2910, c, trd_10_1_main]
+    - [0x9C3130, c, trd_10_2_npc]
+    - [0x9C3130, c, trd_10_3_fake_bowser]
+    - [0x9C3160]
   - name: nok_01
     dir: world/area_nok/nok_01
     type: code

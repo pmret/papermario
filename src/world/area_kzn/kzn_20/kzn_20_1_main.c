@@ -187,7 +187,7 @@ BombTrigger N(WeakWallBombTrigger) = {
 };
 
 EvtScript N(EVS_OnBreakWall) = {
-    EVT_CALL(PlayEffect, EFFECT_BOMBETTE_BREAKING, 0, 2, 2, 1, 10, 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 2, 2, 1, 10, 30)
     EVT_CALL(EnableGroup, MODEL_bom_mae, FALSE)
     EVT_CALL(EnableGroup, MODEL_bom_ato, TRUE)
     EVT_CALL(ModifyColliderFlags, 0, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)

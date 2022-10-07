@@ -2,9 +2,10 @@
 #include "nu/nusys.h"
 
 void init_enter_world_shared(void);
+s16 update_enter_map_screen_overlay(s16* progress);
 
-void func_80035DF0(s16 arg0) {
-    D_800A0942 = arg0;
+void set_map_change_fade_rate(s16 fadeRate) {
+    gMapTransitionFadeRate = fadeRate;
 }
 
 void state_init_enter_demo(void) {
@@ -19,10 +20,10 @@ void state_init_enter_world(void) {
 }
 
 void init_enter_world_shared(void) {
-    D_800A0944 = 0;
-    D_800A0946 = 4;
+    gMapTransitionState = 0;
+    gMapTransitionStateTime = 4;
     gGameStatusPtr->exitTangent = 0.0f;
-    gMapTransitionAlpha = 0xFF;
+    gMapTransitionAlpha = 255;
     nuContRmbForceStopEnd();
     update_exit_map_screen_overlay(&gMapTransitionAlpha);
 
@@ -33,16 +34,16 @@ void init_enter_world_shared(void) {
 }
 
 void state_step_enter_world(void) {
-    switch (D_800A0944) {
+    switch (gMapTransitionState) {
         case 0:
-            if (D_800A0946 == 0) {
+            if (gMapTransitionStateTime == 0) {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
 
                 if (D_800A0948 == 0) {
-                    load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
+                    load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
                 } else {
-                    load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 1);
+                    load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_FILE_SELECT);
                 }
 
                 gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
@@ -51,10 +52,10 @@ void state_step_enter_world(void) {
                     disable_player_input();
                 }
                 update_cameras();
-                D_800A0946 = 2;
-                D_800A0944++;
+                gMapTransitionStateTime = 2;
+                gMapTransitionState++;
             } else {
-                D_800A0946--;
+                gMapTransitionStateTime--;
             }
             break;
         case 1:
@@ -63,11 +64,11 @@ void state_step_enter_world(void) {
             update_player();
             update_cameras();
 
-            if (D_800A0946 != 0) {
-                D_800A0946--;
+            if (gMapTransitionStateTime != 0) {
+                gMapTransitionStateTime--;
             } else if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                D_800A0944++;
+                gMapTransitionState++;
             }
             break;
         case 2:
@@ -76,7 +77,7 @@ void state_step_enter_world(void) {
             update_effects();
             update_cameras();
 
-            if ((update_enter_map_screen_overlay(&gMapTransitionAlpha) << 0x10) != 0) {
+            if (update_enter_map_screen_overlay(&gMapTransitionAlpha) != 0) {
                 if (gGameStatusPtr->demoState == 0) {
                     enable_player_input();
                 }
@@ -95,8 +96,8 @@ void state_drawUI_enter_world(void) {
 
 void state_init_change_map(void) {
     gMapTransitionAlpha = 0x00;
-    D_800A0942 = 0x14;
-    D_800A0944 = 0x00;
+    gMapTransitionFadeRate = 20;
+    gMapTransitionState = 0;
 
     if (gGameStatusPtr->prevArea != gGameStatusPtr->areaID) {
         gGameStatusPtr->didAreaChange = TRUE;
@@ -107,7 +108,7 @@ void state_init_change_map(void) {
 }
 
 void state_step_change_map(void) {
-    switch (D_800A0944) {
+    switch (gMapTransitionState) {
         case 0:
             update_npcs();
             update_player();
@@ -115,22 +116,22 @@ void state_step_change_map(void) {
             update_cameras();
 
             if ((update_exit_map_screen_overlay(&gMapTransitionAlpha) << 0x10) != 0) {
-                D_800A0944++;
+                gMapTransitionState++;
             }
             break;
         case 1:
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
             nuContRmbForceStop();
-            D_800A0946 = 4;
-            D_800A0944++;
+            gMapTransitionStateTime = 4;
+            gMapTransitionState++;
             break;
         case 2:
             if (gGameStatusPtr->demoState != 0) {
-                set_game_mode(0x11);
+                set_game_mode(GAME_MODE_DEMO);
             }
 
-            if (D_800A0946 != 0) {
-                D_800A0946--;
+            if (gMapTransitionStateTime != 0) {
+                gMapTransitionStateTime--;
             } else {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
@@ -141,8 +142,8 @@ void state_step_change_map(void) {
                     disable_player_input();
                 }
                 update_cameras();
-                D_800A0946 = 2;
-                D_800A0944++;
+                gMapTransitionStateTime = 2;
+                gMapTransitionState++;
             }
             break;
         case 3:
@@ -151,11 +152,11 @@ void state_step_change_map(void) {
             update_player();
             update_cameras();
 
-            if (D_800A0946 != 0) {
-                D_800A0946--;
+            if (gMapTransitionStateTime != 0) {
+                gMapTransitionStateTime--;
             } else if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                D_800A0944++;
+                gMapTransitionState++;
             }
             break;
         case 4:
@@ -164,7 +165,7 @@ void state_step_change_map(void) {
             update_effects();
             update_cameras();
 
-            if ((update_enter_map_screen_overlay(&gMapTransitionAlpha) << 0x10) != 0) {
+            if (update_enter_map_screen_overlay(&gMapTransitionAlpha) != 0) {
                 if (gGameStatusPtr->demoState == 0) {
                     enable_player_input();
                 }
@@ -176,35 +177,35 @@ void state_step_change_map(void) {
 }
 
 void state_drawUI_change_map(void) {
-    if (D_800A0944 == 4 || D_800A0944 == 0) {
+    if (gMapTransitionState == 4 || gMapTransitionState == 0) {
         draw_status_ui();
     }
 }
 
 void func_80036430(void) {
-    gMapTransitionAlpha = 0xFF;
-    D_800A0942 = 0x14;
-    D_800A0944 = 0x01;
+    gMapTransitionAlpha = 255;
+    gMapTransitionFadeRate = 20;
+    gMapTransitionState = 0x01;
     gPlayerStatus.flags |= PS_FLAGS_1000;
 }
 
 void func_8003646C(void) {
-    switch (D_800A0944) {
+    switch (gMapTransitionState) {
         case 1:
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
             nuContRmbForceStop();
-            D_800A0946 = 4;
-            D_800A0944++;
+            gMapTransitionStateTime = 4;
+            gMapTransitionState++;
             break;
         case 2:
-            if (D_800A0946 != 0) {
-                D_800A0946--;
+            if (gMapTransitionStateTime != 0) {
+                gMapTransitionStateTime--;
             } else {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
                 nuContRmbForceStopEnd();
-                D_800A0944++;
+                gMapTransitionState++;
             }
             break;
         case 3:
@@ -212,15 +213,15 @@ void func_8003646C(void) {
             update_npcs();
             if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                D_800A0944++;
+                gMapTransitionState++;
                 break;
             }
             return;
         case 4:
-            gMapTransitionAlpha -= D_800A0942;
+            gMapTransitionAlpha -= gMapTransitionFadeRate;
             if (gMapTransitionAlpha < 0) {
                 gMapTransitionAlpha = 0;
-                D_800A0944++;
+                gMapTransitionState++;
                 set_screen_overlay_params_front(255, -1.0f);
                 set_game_mode(GAME_MODE_CHANGE_MAP);
             }

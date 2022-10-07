@@ -51,7 +51,7 @@ EvtScript N(EVS_MonitorDemoState) = {
 
 s32 N(DemoSceneState) = 0;
 
-API_CALLABLE(SetupDemoScene) {
+API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     switch (N(DemoSceneState)) {
@@ -76,8 +76,9 @@ API_CALLABLE(SetupDemoScene) {
     return ApiStatus_BLOCK;
 }
 
+
 EvtScript N(EVS_PlayDemoScene) = {
-    EVT_CALL(SetupDemoScene)
+    EVT_CALL(N(SetupDemoScene))
     EVT_SET(GF_DemoSceneDone, FALSE)
     EVT_EXEC(N(EVS_MonitorDemoState))
     EVT_EXEC(N(EVS_ProvideDemoInputs))

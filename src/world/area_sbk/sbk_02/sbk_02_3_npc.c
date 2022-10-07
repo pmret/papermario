@@ -226,16 +226,16 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_ADD(LVar2, 10)
     EVT_ADD(LVar3, 30)
     EVT_LOOP(5)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
         EVT_WAIT(6)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
         EVT_WAIT(6)
     EVT_END_LOOP
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtPlayer, SOUND_188, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
@@ -266,7 +266,7 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-            EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -336,7 +336,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_WAIT(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-        EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_SET(GF_TradingEvent2_Active, FALSE)
         EVT_RETURN
@@ -365,7 +365,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
             EVT_WAIT(10)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-            EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_SET(GF_TradingEvent2_Active, FALSE)
             EVT_ADD(GB_TradingEvent_Count, 1)
