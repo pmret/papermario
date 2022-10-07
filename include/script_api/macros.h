@@ -654,10 +654,10 @@
 // allow macros with variable number of arguments
 // see https://stackoverflow.com/questions/11761703/overloading-macro-on-number-of-arguments
 // solution provided by R1tschY and edited by Gabriel Staples
-#define __NARG__(...) \
-    __NARG_I_(__VA_ARGS__,__RSEQ_N())
-#define __NARG_I_(...) \
-    __ARG_N(__VA_ARGS__)
+#define __NARG__(args...) \
+    __NARG_I_(args,__RSEQ_N())
+#define __NARG_I_(args...) \
+    __ARG_N(args)
 #define __ARG_N( \
       _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, \
      _11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
