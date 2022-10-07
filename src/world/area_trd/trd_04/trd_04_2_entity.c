@@ -149,7 +149,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_END_IF
     EVT_IF_LE(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TRD_04))
+        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TRD04_LowerStairs))
         EVT_SET(MV_Unk_02, LVar0)
         EVT_IF_EQ(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
             EVT_CALL(N(SetEntityPosition), MV_Unk_02, -180, 0, -35)

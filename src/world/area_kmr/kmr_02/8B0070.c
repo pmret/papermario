@@ -28,7 +28,7 @@ static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";
 static char* N(exit_str_6) = "\0\0\0\0";
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242014_8B2084);
 

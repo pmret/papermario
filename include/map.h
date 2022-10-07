@@ -14,6 +14,8 @@
 #define EVS_BindExitTriggers    EVS_BindExitTriggers
 #define EVS_EnterMap            EVS_EnterMap
 
+#define CLONED_MODEL(idx)       (10000+(idx))
+
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))

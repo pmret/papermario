@@ -9,7 +9,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"
 
 ApiStatus func_802402BC_918E6C(Evt* script, s32 isInitialCall) {
     s32 result = -1;

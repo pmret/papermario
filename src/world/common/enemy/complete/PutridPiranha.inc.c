@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite/npc/LargePiranha.h"
 
-extern EvtScript D_800936DC;
+extern EvtScript EVS_NpcHitRecoil;
 
 #include "world/common/enemy/PiranhaPlantAI.inc.c"
 
@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcDefeat_PutridPiranha_Hitbox) = {
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(func_80045900, 1)
+            EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -71,7 +71,7 @@ EvtScript N(EVS_80244090) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(D_800936DC)
+            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

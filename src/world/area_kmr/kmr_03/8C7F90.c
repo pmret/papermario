@@ -2,7 +2,7 @@
 #include "message_ids.h"
 #include "../../partners.h"
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #include "world/common/CheckPartnerFlags1000.inc.c"
 

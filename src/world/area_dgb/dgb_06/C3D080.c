@@ -88,7 +88,7 @@ EvtScript N(main) = {
 
 #define CHEST_ITEM  19
 #define CHEST_FLAG  1048
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/atomic/Chest.old.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
