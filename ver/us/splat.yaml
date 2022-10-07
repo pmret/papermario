@@ -5766,11 +5766,78 @@ segments:
     type: code
     start: 0x59E6E0
     vram: 0x80218000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
-    - [0x59E6E0, c]
-    - [0x59F420, c]
-    - [0x59F4D0, c]
-    - [0x59F530, data]
+    - [0x59E6E0, c, anim/unused_gfx]
+    - [0x59E6E0, c, anim/lava_piranha_anim]
+    - [0x59E6E0, c, actor/lava_piranha]
+    - [0x59F420, c, actor/petit_piranha]
+    - [0x59F4D0, c, actor/lava_bud]
+    - [0x59F530, c, actor/petit_piranha_bomb]
+    - [0x59F530, c, stage/kzn_01]
+    - [0x59F530, c, stage/kzn_01b]
+    - [0x59F530, c, stage/kzn_02]
+    - [0x59F530, c, stage/kzn_04]
+    - [0x59F530, c, stage/kzn_04b]
+    - [0x59F530, c, stage/kzn_04c]
+    - [0x59F530, c, stage/kzn_05]
+    - [0x59F530, c, area]
+    - start: 0x59F530
+      type: .data
+      name: anim/unused_gfx
+      subsegments:
+      - [0x59F530, vtx, vtx1]
+      - [0x59F6B0, vtx, vtx2]
+      - [0x59F7D0, vtx, vtx3]
+      - [0x59F930, vtx, vtx4]
+      - [0x59FA30, vtx, vtx5]
+      - [0x59FB90, vtx, vtx6]
+      - [0x59FD30, vtx, vtx7]
+      - [0x59FEB0, vtx, vtx8]
+      - [0x5A0030, vtx, vtx9]
+      - [0x5A0190, vtx, vtx10]
+      - [0x5A02B0, vtx, vtx11]
+      - [0x5A02E0, vtx, vtx12]
+      - [0x5A0310, vtx, vtx13]
+      - [0x5A0340, vtx, vtx14]
+      - [0x5A0370, vtx, vtx15]
+      - [0x5A03A0, vtx, vtx16]
+      - [0x5A03D0, vtx, vtx17]
+      - [0x5A0400, vtx, vtx18]
+      - [0x5A0430, gfx, gfx1]
+      - [0x5A0500, gfx, gfx2]
+      - [0x5A0540, gfx, gfx3]
+      - [0x5A0590, gfx, gfx4]
+      - [0x5A05E0, gfx, gfx5]
+      - [0x5A0630, gfx, gfx6]
+      - [0x5A0690, gfx, gfx7]
+      - [0x5A06E0, gfx, gfx8]
+      - [0x5A0720, gfx, gfx9]
+      - [0x5A0770, gfx, gfx10]
+      - [0x5A07B0, gfx, gfx11]
+    - [0x5A0800, .data, anim/lava_piranha_anim]
+    - start: 0x5A2E80
+      type: .data
+      name: actor/lava_piranha
+      subsegments:
+      - [0x5A2E80]
+      - [0x5A3020, ci4, lava_piranha_vine, 64, 32]
+      - [0x5A3420, palette, lava_piranha_vine]
+      - [0x5A3620, gfx, lava_piranha_vine]
+      - [0x5A36F8]
+    #- [0x5A2E80, .data, actor/lava_piranha]
+    - [0x5AA5B0, .data, actor/petit_piranha]
+    - [0x5AB7A0, .data, actor/lava_bud]
+    - [0x5AEE00, .data, actor/petit_piranha_bomb]
+    - [0x5AF060, .data, stage/kzn_01]
+    - [0x5AF100, .data, stage/kzn_01b]
+    - [0x5AF190, .data, stage/kzn_02]
+    - [0x5AF6C0, .data, stage/kzn_04]
+    - [0x5AFC50, .data, stage/kzn_04b]
+    - [0x5B01E0, .data, stage/kzn_04c]
+    - [0x5B0720, .data, stage/kzn_05]
+    - [0x5B1070, .data, area]
+    - [0x5B1240]
   - dir: battle/area_flo
     type: code
     start: 0x5B14B0

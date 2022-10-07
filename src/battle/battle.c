@@ -150,9 +150,9 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_KZN2] = {
         BTL_AREA(area_kzn2),
         .name = "エリア ＫＺＮ２",
-        .battles = 0x8022AA08,
-        .stages = 0x8022AA44,
-        .dmaTable = 0x8022AA84,
+        .battles = &b_area_kzn2_formationTable,
+        .stages = &b_area_kzn2_stageTable,
+        .dmaTable = b_area_kzn2_dmaTable,
     },
     [BTL_AREA_FLO] = {
         BTL_AREA(area_flo),
