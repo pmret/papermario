@@ -241,8 +241,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_KKJ] = {
         BTL_AREA(area_kkj),
         .name = "エリア ＫＫＪ",
-        .battles = 0x802185BC,
-        .stages = 0x802185E4,
+        .battles = &b_area_kkj_formationTable,
+        .stages = &b_area_kkj_stageTable,
     },
     [BTL_AREA_DIG] = {
         BTL_AREA(area_dig),
