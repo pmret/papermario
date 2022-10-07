@@ -1034,8 +1034,16 @@ typedef struct ConfettiFXData {
 } ConfettiFXData; // size = 0x34
 
 typedef struct SnowfallFXData {
-    /* 0x00 */ char todo[0];
-} SnowfallFXData; // size = unknown
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    char unk_0C[0x14];
+    s32 timeLeft;
+    s32 lifeTime;
+    s32 unk_28;
+    s32 unk_2C;
+    s32 unk_30;
+} SnowfallFXData; // size = 0x34
 
 typedef struct Effect46FXData {
     /* 0x00 */ s32 unk_00;

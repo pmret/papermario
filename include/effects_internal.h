@@ -100,7 +100,7 @@ EffectInstance* disable_x_main(s32, f32, f32, f32, s32);
 EffectInstance* bombette_breaking_main(s32, s32, s32, f32, s32, s32);
 FX_MAIN(firework_main);
 FX_MAIN(confetti_main);
-FX_MAIN(snowfall_main);
+EffectInstance* snowfall_main(s32, s32);
 FX_MAIN(fx_46_main);
 EffectInstance* gather_magic_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* attack_result_text_main(s32, f32, f32, f32, f32, s32);
