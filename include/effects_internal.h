@@ -119,7 +119,7 @@ FX_MAIN(quizmo_audience_main);
 EffectInstance* butterflies_main(s32, f32, f32, f32);
 EffectInstance* stat_change_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(snaking_static_main);
-FX_MAIN(thunderbolt_ring_main);
+EffectInstance* thunderbolt_ring_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(squirt_main);
 FX_MAIN(water_block_main);
 FX_MAIN(waterfall_main);
