@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_THREAD
         EVT_LABEL(15)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10)
         EVT_CALL(GetSelfVar, 0, LVar3)
         EVT_IF_EQ(LVar3, 1)
             EVT_WAIT(1)

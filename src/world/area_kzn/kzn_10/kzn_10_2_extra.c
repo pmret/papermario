@@ -52,23 +52,23 @@ EvtScript N(EVS_SpinyTromp_ManageCamera) = {
 EvtScript N(D_80241224_C7F3A4) = {
     EVT_SET_GROUP(EVT_GROUP_0A)
     EVT_LOOP(5)
-        EVT_CALL(PlayEffect, EFFECT_DUST, 1, -430, 100, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_DUST, 1, -430, 100, 0, 30)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_LABEL(0)
     EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 100)
-    EVT_CALL(PlayEffect, EFFECT_DUST, 1, LVar0, LVar1, LVar2, 40, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_DUST, 1, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(20)
     EVT_SUB(LVar0, 100)
     EVT_ADD(LVar1, 50)
-    EVT_CALL(PlayEffect, EFFECT_DUST, 1, LVar0, LVar1, LVar2, 40, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_DUST, 1, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(20)
     EVT_IF_EQ(AF_KZN_Tromp1_ShakingDone, FALSE)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_LOOP(8)
-        EVT_CALL(PlayEffect, EFFECT_DUST, 1, 400, -80, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_DUST, 1, 400, -80, 0, 40)
         EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
@@ -124,7 +124,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SUB(LVar2, 55)
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, UNK_FUNC_50_LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, UNK_FUNC_50_LVar1, LVar2, 0)
     EVT_EXEC(N(D_80241224_C7F3A4))
     EVT_THREAD
         EVT_CALL(GetCurrentPartner, LVar0)
@@ -206,7 +206,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_SET(LVar0, 418)
         EVT_SET(LVar2, 0)
         EVT_CALL(N(UnkFunc46))
-        EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar2, 0, 1, 20, 3, 8, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar2, 0, 1, 20, 3, 8)
     EVT_END_THREAD
     EVT_SET(LVar0, LVar8)
     EVT_SET(LVar1, LVar9)

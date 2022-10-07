@@ -3489,6 +3489,7 @@ enum AnyPartnerAnims {
     PARTNER_ANIM_RUN        = 0x106,
     PARTNER_ANIM_TALK       = 0x107,
     PARTNER_ANIM_HURT       = 0x108,
+    PARTNER_ANIM_9          = 0x109,
 };
 
 enum FirstStrikes {

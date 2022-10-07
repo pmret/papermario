@@ -74,10 +74,10 @@ EvtScript N(EVS_SpawnFallingDust) = {
     EVT_LOOP(0)
         EVT_CALL(RandInt, 100, LVar0)
         EVT_SUB(LVar0, 100)
-        EVT_CALL(PlayEffect, EFFECT_DUST, 1, LVar0, 350, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_DUST, 1, LVar0, 350, 0, 60)
         EVT_CALL(RandInt, 100, LVar0)
         EVT_WAIT(30)
-        EVT_CALL(PlayEffect, EFFECT_DUST, 1, LVar0, 350, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_DUST, 1, LVar0, 350, 0, 60)
         EVT_WAIT(30)
     EVT_END_LOOP
     EVT_RETURN
@@ -309,7 +309,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                         EVT_WAIT(1)
                         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                         EVT_ADD(LVar2, -10)
-                        EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 10)
                         EVT_IF_EQ(MV_SceneState, SCENE_STATE_KOLORADO_BURNED)
                             EVT_BREAK_LOOP
                         EVT_END_IF

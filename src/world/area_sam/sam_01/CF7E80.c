@@ -28,7 +28,7 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 #include "common/GetItemEntityPosition.inc.c"
 
-#include "world/common/UnkTrigFunc001.inc.c"
+#include "world/common/GetLeftRightPoints.inc.c"
 
 #define NAMESPACE dup_sam_01
 #include "world/common/StashVars.inc.c"
@@ -40,4 +40,4 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"

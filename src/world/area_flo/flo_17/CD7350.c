@@ -380,7 +380,7 @@ EvtScript N(80244590) = {
             EVT_CALL(SetSelfVar, 10, 100)
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(2)
-            EVT_CALL(func_80045900, 0)
+            EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(3)
             EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)

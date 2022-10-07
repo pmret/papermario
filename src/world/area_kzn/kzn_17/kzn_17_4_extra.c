@@ -118,7 +118,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
                 EVT_KILL_THREAD(MV_ScreenShakeTID)
                 EVT_CALL(ModifyColliderFlags, 0, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
                 EVT_CALL(PlaySoundAtCollider, COLLIDER_gogo, SOUND_1E4, 0)
-                EVT_CALL(PlayEffect, EFFECT_BOMBETTE_BREAKING, 2, 32, 32, 1, 10, 45, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 2, 32, 32, 1, 10, 45)
                 EVT_CALL(EnableModel, MODEL_mae, FALSE)
                 EVT_CALL(EnableModel, MODEL_ato, TRUE)
                 EVT_THREAD

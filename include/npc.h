@@ -93,7 +93,7 @@ typedef struct MobileAISettings {
 
 typedef struct StationaryAISettings {
     /* 0x00 */ f32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ f32 unk_04;
     /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
     /* 0x0C */ f32 chaseSpeed;
     /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing

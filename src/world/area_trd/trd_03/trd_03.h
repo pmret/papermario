@@ -2,11 +2,25 @@
 /// @brief Koopa Bros Fortress - Central Hall
 
 #include "common.h"
-#include "../trd.h"
 #include "message_ids.h"
 #include "map.h"
 
-#define NAMESPACE trd_03
+#include "../trd.h"
+#include "mapfs/trd_03_shape.h"
+#include "mapfs/trd_03_hit.h"
 
-#define COLLIDER_o84 35
-#define COLLIDER_o85 37
+#include "sprite/npc/KoopaBros.h"
+#include "sprite/npc/KoopaTroopa.h"
+
+enum {
+	NPC_KoopaBros               = 0,
+	NPC_KoopaTroopa_01          = 10,
+	NPC_KoopaTroopa_02          = 11,
+	NPC_KoopaTroopa_03          = 12,
+};
+
+enum {
+	MV_PlatformsExtended		= MapVar(0),
+};
+
+#define NAMESPACE trd_03

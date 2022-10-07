@@ -20,7 +20,7 @@ void partner_enable_input(void);
 #define SMASH_DATA_VAR_IDX 0
 
 #define FUZZY_NPC_ID_BASE  NPC_Fuzzy_01
-#define BOBOMB_NPC_ID_BASE NPC_Bombomb_01
+#define BOBOMB_NPC_ID_BASE NPC_Bobomb_01
 #define LUIGI_NPC_ID_BASE  NPC_Luigi_01
 
 extern HudScript HES_BlueMeter;
@@ -1114,7 +1114,7 @@ EvtScript N(EVS_HideBoxWithSmoke) = {
     EVT_WAIT(1)
     EVT_CALL(GetColliderCenter, LVar1)
     EVT_SUB(LVar1, 5)
-    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2)
     EVT_RETURN
     EVT_END
 };
@@ -1472,7 +1472,7 @@ EvtScript N(EVS_OnHitBox) = {
     EVT_SWITCH(LVarC)
         EVT_CASE_EQ(2)
             EVT_ADD(LVar1, 2)
-            EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 25, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 25)
         EVT_CASE_EQ(3)
             EVT_CALL(TranslateModel, LVarA, 0, -9, 0)
             EVT_WAIT(1)
@@ -1484,11 +1484,11 @@ EvtScript N(EVS_OnHitBox) = {
             EVT_CALL(ModifyColliderFlags, 0, LVarB, COLLIDER_FLAGS_UPPER_MASK)
             EVT_WAIT(4)
             EVT_SUB(LVar1, 5)
-            EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(1)
             EVT_SUB(LVar1, 5)
-            EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableModel, LVarA, FALSE)
@@ -1643,11 +1643,11 @@ EvtScript N(EVS_Toad_GovernGame) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcFlagBits, NPC_Toad, NPC_FLAG_100, TRUE)
     EVT_CALL(N(CreateSignpost))
-    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, 355, 45, -175, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, 355, 45, -175)
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_Toad, 358, -20, 185)
         EVT_CALL(EnableNpcShadow, NPC_Toad, TRUE)
-        EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, 358, 5, 189, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, 358, 5, 189)
         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000, 0)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -1767,11 +1767,11 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_WAIT(25)
     EVT_THREAD
         EVT_WAIT(12)
-        EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, 358, -10, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, 358, -10, 185)
         EVT_CALL(SetNpcPos, NPC_Toad, 358, 500, 185)
         EVT_CALL(EnableNpcShadow, NPC_Toad, FALSE)
         EVT_CALL(N(DestroySignpost))
-        EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, 355, 30, -180, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, 355, 30, -180)
     EVT_END_THREAD
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(PushSong, 133, 0)
@@ -2064,7 +2064,7 @@ StaticNpc N(NpcData_Fuzzy_05) = {
 };
 
 StaticNpc N(NpcData_Bombomb_01) = {
-    .id = NPC_Bombomb_01,
+    .id = NPC_Bobomb_01,
     .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
@@ -2097,7 +2097,7 @@ StaticNpc N(NpcData_Bombomb_01) = {
 };
 
 StaticNpc N(NpcData_Bombomb_02) = {
-    .id = NPC_Bombomb_02,
+    .id = NPC_Bobomb_02,
     .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
@@ -2130,7 +2130,7 @@ StaticNpc N(NpcData_Bombomb_02) = {
 };
 
 StaticNpc N(NpcData_Bombomb_03) = {
-    .id = NPC_Bombomb_03,
+    .id = NPC_Bobomb_03,
     .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
@@ -2163,7 +2163,7 @@ StaticNpc N(NpcData_Bombomb_03) = {
 };
 
 StaticNpc N(NpcData_Bombomb_04) = {
-    .id = NPC_Bombomb_04,
+    .id = NPC_Bobomb_04,
     .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
@@ -2196,7 +2196,7 @@ StaticNpc N(NpcData_Bombomb_04) = {
 };
 
 StaticNpc N(NpcData_Bombomb_05) = {
-    .id = NPC_Bombomb_05,
+    .id = NPC_Bobomb_05,
     .settings = &N(NpcSettings_Bombomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,

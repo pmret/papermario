@@ -213,7 +213,7 @@ EvtScript N(EVS_ParadePhase_GoombaKing) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, LVar0, 0, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, 0, LVar2)
     EVT_CALL(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, FALSE)
     EVT_WAIT(60)
     EVT_THREAD

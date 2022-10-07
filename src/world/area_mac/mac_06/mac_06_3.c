@@ -2,8 +2,8 @@
 #include "model.h"
 #include "effects.h"
 
-#define CLONED_MODEL_GULL   11000
-#define CLONED_MODEL_UNUSED 10000
+#define CLONED_MODEL_GULL   CLONED_MODEL(1000)
+#define CLONED_MODEL_UNUSED CLONED_MODEL(0)
 
 NpcSettings N(NpcSettings_Whale) = {
     .height = 24,
