@@ -614,6 +614,7 @@ void N(func_80240504_CCB814)(void) {
     Vtx* sp50;
     Vtx* sp54;
     s32 sp58;
+    s32 new_var;
 
     guMtxIdentF(matrix);
 
@@ -630,9 +631,13 @@ void N(func_80240504_CCB814)(void) {
     matrix[2][1] = cos_rad(N(D_80243B14_CCEE24) / 17.0f) * 0.04;
 
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
-
     mdl_get_copied_vertices(0, &sp50, &sp54, &sp58);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    new_var = 0;
+    do {} while (new_var); // dumb but it gets things so close
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
 
     N(D_80243B14_CCEE24) += 1.0f;
