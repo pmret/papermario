@@ -9,8 +9,8 @@ extern u8 D_E00DE910[];
 extern u8 D_E00DE96C[];
 
 void cold_breath_init(EffectInstance* effect);
-void cold_breath_render(EffectInstance* effect);
 void cold_breath_update(EffectInstance* effect);
+void cold_breath_render(EffectInstance* effect);
 void cold_breath_appendGfx(void* effect);
 
 EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {

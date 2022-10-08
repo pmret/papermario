@@ -1137,7 +1137,7 @@ EvtScript N(idle_8021D508) = {
             EVT_EXEC(N(8021C9A4))
         EVT_CASE_EQ(7)
         EVT_CASE_EQ(8)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3B5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B5)
             EVT_SET(ArrayVar(0), 9)
             EVT_EXEC(N(8021B0E4))
             EVT_EXEC(N(8021BD6C))
@@ -1425,9 +1425,9 @@ EvtScript N(takeTurn_8021EC98) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_SET(ArrayVar(0), 0)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20FD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20FD)
         EVT_WAIT(22)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20FE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20FE)
     EVT_END_THREAD
     EVT_SET(ArrayVar(0), 6)
     EVT_WAIT(24)
@@ -1545,9 +1545,9 @@ EvtScript N(nextTurn_8021F410) = {
                 EVT_WAIT(30)
                 EVT_CALL(ActorSpeak, MSG_CH1_00FD, ACTOR_SELF, 1, -00001, -00001)
                 EVT_THREAD
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20FD)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20FD)
                     EVT_WAIT(22)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20FE)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20FE)
                 EVT_END_THREAD
                 EVT_SET(ArrayVar(0), 6)
                 EVT_WAIT(30)

@@ -322,7 +322,7 @@ EvtScript N(takeTurn_8021DCD4) = {
             EVT_END_IF
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DE)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim07)
             EVT_WAIT(10)
@@ -345,7 +345,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_WAIT(2)
     EVT_THREAD
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim07)
     EVT_WAIT(10)

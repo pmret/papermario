@@ -401,7 +401,7 @@ EvtScript N(80219D88) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim15)
     EVT_WAIT(8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x35E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35E)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim16)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim17)
@@ -417,7 +417,7 @@ EvtScript N(80219D88) = {
             EVT_CALL(StartRumble, 1)
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(15.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20EA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -503,7 +503,7 @@ EvtScript N(8021A36C) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 23, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20EA)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleTubba_Anim12)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -546,12 +546,12 @@ EvtScript N(8021A36C) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_END_SWITCH
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20EA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
         EVT_CALL(func_80269EAC, 24)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20EA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)

@@ -502,7 +502,7 @@ EvtScript N(80225258) = {
     EVT_END_IF
     EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 1, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F7)
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)

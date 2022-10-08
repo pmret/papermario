@@ -238,7 +238,7 @@ EvtScript N(8021B678) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -672,7 +672,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetBattleCamZoom, 300)
             EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
             EVT_CALL(func_8024ECF8, -1, 1, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -691,7 +691,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
             EVT_THREAD
                 EVT_LOOP(4)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DF)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DF)
                     EVT_WAIT(4)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -722,7 +722,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(SetBattleCamZoom, 300)
             EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
             EVT_CALL(func_8024ECF8, -1, 1, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -910,7 +910,7 @@ EvtScript N(8021E218) = {
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DD)
         EVT_CALL(N(StartRumbleWithParams), 128, 10)
         EVT_THREAD
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
