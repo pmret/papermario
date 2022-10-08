@@ -447,6 +447,7 @@ sbk_30_LetterDelivery_SavedNpcAnim = 0x80244D88;
 sbk_34_LetterDelivery_SavedNpcAnim = 0x802429A4;
 obk_01_LetterDelivery_SavedNpcAnim = 0x80245AB4;
 obk_03_LetterDelivery_SavedNpcAnim = 0x80243DA4;
+D_80243370 = 0x80243370;
 D_80246990 = 0x80246990;
 D_80246BE8 = 0x80246BE8;
 D_80247050 = 0x80247050;

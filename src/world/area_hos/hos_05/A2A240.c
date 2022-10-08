@@ -18,6 +18,30 @@ ApiStatus N(AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
     }
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2A240", func_80240634_A2A874);
+ApiStatus func_80240634_A2A874(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2A240", func_80240690_A2A8D0);
+    script->varTable[idx] = evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240690_A2A8D0(Evt* script, s32 isInitialCall) {
+    f32 vt2 = script->varTable[2];
+    f32 temp_f20;
+    f32 temp_f26;
+
+    script->varTable[2] = -230000000;
+    script->varTable[3] = -229897600;
+    script->varTable[4] = -230000000;
+
+    temp_f26 = (script->varTable[1] * 180.0f) / 3.141592f;
+    temp_f20 = (rand_int(10) / vt2) + 3.0f;
+
+    script->varTable[10] = EVT_FLOAT_TO_FIXED(temp_f20 * cos_rad(temp_f26));
+    script->varTable[11] = EVT_FLOAT_TO_FIXED(rand_int(15) + 5);
+    script->varTable[12] = EVT_FLOAT_TO_FIXED(temp_f20 * sin_rad(temp_f26));
+    script->varTable[13] = EVT_FLOAT_TO_FIXED((f32)(rand_int(10) + 10) * -0.05);
+
+    return ApiStatus_DONE2;
+}
