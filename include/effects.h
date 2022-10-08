@@ -142,8 +142,6 @@ enum EffectID {
     EFFECT_86                       = 0x86,
 };
 
-typedef struct EffectInstance EffectInstance;
-
 typedef struct Effect00FXData {
     /* 0x00 */ char todo[0];
 } Effect00FXData; // size = unknown
@@ -839,8 +837,8 @@ typedef struct LightningFXData {
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-    /* 0x44 */ EffectInstance* unk_44;
-    /* 0x48 */ EffectInstance* unk_48;
+    /* 0x44 */ struct EffectInstance* unk_44;
+    /* 0x48 */ struct EffectInstance* unk_48;
 } LightningFXData; // size = 0x4C
 
 typedef struct FireBreathFXData {
@@ -2143,13 +2141,13 @@ typedef union {
     struct Effect86FXData*              unk_86;
 } EffectData;
 
-struct EffectInstance {
+typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
     /* 0x0C */ EffectData data;
     /* 0x10 */ struct EffectGraphics* graphics;
-}; // size = 0x14
+} EffectInstance; // size = 0x14
 
 // composite struct for watt effects -- NOT the same as StaticStatusFXData
 typedef struct WattEffectData {
