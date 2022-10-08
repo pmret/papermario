@@ -44,18 +44,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 5, 0 },
-            { ITEM_P_O_W_BLOCK, 5, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 1,
-    },
+    .drops = KOOPA_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -68,24 +57,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_KoopaTroopa_Anim01,
-        .walk   = ANIM_KoopaTroopa_Anim03,
-        .run    = ANIM_KoopaTroopa_Anim04,
-        .chase  = ANIM_KoopaTroopa_Anim04,
-        .anim_4 = ANIM_KoopaTroopa_Anim01,
-        .anim_5 = ANIM_KoopaTroopa_Anim01,
-        .death  = ANIM_KoopaTroopa_Anim0B,
-        .hit    = ANIM_KoopaTroopa_Anim0B,
-        .anim_8 = ANIM_KoopaTroopa_Anim07,
-        .anim_9 = ANIM_KoopaTroopa_Anim06,
-        .anim_A = ANIM_KoopaTroopa_Anim08,
-        .anim_B = ANIM_KoopaTroopa_Anim04,
-        .anim_C = ANIM_KoopaTroopa_Anim04,
-        .anim_D = ANIM_KoopaTroopa_Anim04,
-        .anim_E = ANIM_KoopaTroopa_Anim04,
-        .anim_F = ANIM_KoopaTroopa_Anim04,
-    },
+    .animations = KOOPA_TROOPA_ANIMS,
 };
 
 StaticNpc N(NpcData_ParaTroopa_01) = {
@@ -95,17 +67,7 @@ StaticNpc N(NpcData_ParaTroopa_01) = {
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_P_O_W_BLOCK, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 1,
-    },
+    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -118,24 +80,7 @@ StaticNpc N(NpcData_ParaTroopa_01) = {
             .detectSize = { 200 },
         }
     },
-    .animations = {
-        .idle   = ANIM_ParaTroopa_Anim01,
-        .walk   = ANIM_ParaTroopa_Anim02,
-        .run    = ANIM_ParaTroopa_Anim03,
-        .chase  = ANIM_ParaTroopa_Anim03,
-        .anim_4 = ANIM_ParaTroopa_Anim01,
-        .anim_5 = ANIM_ParaTroopa_Anim01,
-        .death  = ANIM_ParaTroopa_Anim06,
-        .hit    = ANIM_ParaTroopa_Anim06,
-        .anim_8 = ANIM_ParaTroopa_Anim04,
-        .anim_9 = ANIM_ParaTroopa_Anim0C,
-        .anim_A = ANIM_ParaTroopa_Anim0A,
-        .anim_B = ANIM_ParaTroopa_Anim0E,
-        .anim_C = ANIM_ParaTroopa_Anim03,
-        .anim_D = ANIM_ParaTroopa_Anim03,
-        .anim_E = ANIM_ParaTroopa_Anim03,
-        .anim_F = ANIM_ParaTroopa_Anim03,
-    },
+    .animations = PARATROOPA_ANIMS,
 };
 
 StaticNpc N(NpcData_ParaTroopa_02) = {
@@ -145,17 +90,7 @@ StaticNpc N(NpcData_ParaTroopa_02) = {
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_P_O_W_BLOCK, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 1,
-    },
+    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -168,24 +103,7 @@ StaticNpc N(NpcData_ParaTroopa_02) = {
             .detectSize = { 200 },
         }
     },
-    .animations = {
-        .idle   = ANIM_ParaTroopa_Anim01,
-        .walk   = ANIM_ParaTroopa_Anim02,
-        .run    = ANIM_ParaTroopa_Anim03,
-        .chase  = ANIM_ParaTroopa_Anim03,
-        .anim_4 = ANIM_ParaTroopa_Anim01,
-        .anim_5 = ANIM_ParaTroopa_Anim01,
-        .death  = ANIM_ParaTroopa_Anim06,
-        .hit    = ANIM_ParaTroopa_Anim06,
-        .anim_8 = ANIM_ParaTroopa_Anim04,
-        .anim_9 = ANIM_ParaTroopa_Anim0C,
-        .anim_A = ANIM_ParaTroopa_Anim0A,
-        .anim_B = ANIM_ParaTroopa_Anim0E,
-        .anim_C = ANIM_ParaTroopa_Anim03,
-        .anim_D = ANIM_ParaTroopa_Anim03,
-        .anim_E = ANIM_ParaTroopa_Anim03,
-        .anim_F = ANIM_ParaTroopa_Anim03,
-    },
+    .animations = PARATROOPA_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {

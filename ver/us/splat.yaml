@@ -10578,83 +10578,92 @@ segments:
     start: 0xBDD1B0
     vram: 0x80240000
     subsegments:
-    - [0xBDD1B0,       c, events]
-    - [0xBDE190,   .data, header]
-    - [0xBDE2A0,   .data, events]
-    - [0xBDEC80]
+    - [0xBDD1B0, c, arn_02_0_header]
+    - [0xBDD1B0, c, arn_02_1_main]
+    - [0xBDD1B0, c, arn_02_2_entity]
+    - [0xBDD1B0, c, arn_02_3_npc]
+    - [0xBDE190]
   - name: arn_03
     dir: world/area_arn/arn_03
     type: code
     start: 0xBDED90
     vram: 0x80240000
     subsegments:
-    - [0xBDED90,       c, events]
-    - [0xBE04B0,   .data, header]
-    - [0xBE05C0,   .data, events]
-    - [0xBE35E0]
+    - [0xBDED90, c, arn_03_0_header]
+    - [0xBDED90, c, arn_03_1_main]
+    - [0xBDED90, c, arn_03_2_npc]
+    - [0xBDED90, c, arn_03_3_entity]
+    - [0xBE04B0]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
     start: 0xBE37B0
     vram: 0x80240000
     subsegments:
-    - [0xBE37B0,       c, events]
-    - [0xBE6B20,   .data, header]
-    - [0xBE6C30,   .data, events]
-    - [0xBE78D0]
+    - [0xBE37B0, c, arn_04_0_header]
+    - [0xBE37B0, c, arn_04_1_main]
+    - [0xBE37B0, c, arn_04_2_npc]
+    - [0xBE37B0, c, arn_04_3_entity]
+    - [0xBE6B20]
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
     start: 0xBE7BE0
     vram: 0x80240000
     subsegments:
-    - [0xBE7BE0,       c, events]
-    - [0xBE8EE0,   .data, header]
-    - [0xBE9290,   .data, events]
-    - [0xBECC20]
+    - [0xBE7BE0, c, arn_05_0_header]
+    - [0xBE7BE0, c, arn_05_1_main]
+    - [0xBE7BE0, c, arn_05_2_npc]
+    - [0xBE7BE0, c, arn_05_3_entity]
+    - [0xBE8EE0]
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
     start: 0xBECDF0
     vram: 0x80240000
     subsegments:
-    - [0xBECDF0,       c, BECDF0]
-    - [0xBED5F0,       c, BED5F0]
-    - [0xBED660,       c, BED660]
-    - [0xBED740,       c, events]
-    - [0xBEEC80,   .data, header]
-    - [0xBEEE30,   .data, BECDF0]
-    - [0xBF0580,   .data, events]
-    - [0xBF46F0]
+    - [0xBECDF0, c, arn_07_0_header]
+    - [0xBECDF0, c, arn_07_1_main]
+    - [0xBED5F0, c, arn_07_2_windmill]
+    - [0xBED660, c, arn_07_3_entity]
+    - [0xBED740, c, arn_07_4_npc]
+    - [0xBEEC80]
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
     start: 0xBF47A0
     vram: 0x80240000
     subsegments:
-    - [0xBF47A0,       c, BF47A0]
-    - [0xBF4860,       c, events]
-    - [0xBF4A30,   .data, header]
-    - [0xBF4B50,   .data, events]
-    - [0xBF6040]
+    - [0xBF47A0, c, arn_08_0_header]
+    - [0xBF47A0, c, arn_08_1_main]
+    - [0xBF47A0, c, arn_08_2_well]
+    - [0xBF47A0, c, arn_08_3_gears]
+    - [0xBF4860, c, arn_08_4_demo]
+    - [0xBF4860, c, arn_08_5_npc]
+    - [0xBF4860, c, arn_08_6_entity]
+    - [0xBF4A30]
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
     start: 0xBF6060
     vram: 0x80240000
     subsegments:
-    - [0xBF6060,       c, events]
-    - [0xBF60A0,   .data, header]
-    - [0xBF61A0,   .data, events]
-    - [0xBF69F0]
+    - [0xBF6060, c, arn_09_0_header]
+    - [0xBF6060, c, arn_09_1_main]
+    - [0xBF6060, c, arn_09_2_entity]
+    - [0xBF6060, c, arn_09_3_launch]
+    - [0xBF6060, c, arn_09_4_npc]
+    - [0xBF60A0]
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
     start: 0xBF6A00
     vram: 0x80240000
     subsegments:
-    - [0xBF6A00, c, header]
-    - [0xBF6A00, c, events]
+    - [0xBF6A00, c, arn_10_0_header]
+    - [0xBF6A00, c, arn_10_1_main]
+    - [0xBF6A00, c, arn_10_2_npc]
+    - [0xBF6A00, c, arn_10_3_entity]
     - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
@@ -10662,8 +10671,9 @@ segments:
     start: 0xBF7680
     vram: 0x80240000
     subsegments:
-    - [0xBF7680, c, header]
-    - [0xBF7680, c, events]
+    - [0xBF7680, c, arn_11_0_header]
+    - [0xBF7680, c, arn_11_1_main]
+    - [0xBF7680, c, arn_11_2_npc]
     - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
@@ -10671,8 +10681,10 @@ segments:
     start: 0xBF8790
     vram: 0x80240000
     subsegments:
-    - [0xBF8790, c, header]
-    - [0xBF8790, c, events]
+    - [0xBF8790, c, arn_12_0_header]
+    - [0xBF8790, c, arn_12_1_main]
+    - [0xBF8790, c, arn_12_2_npc]
+    - [0xBF8790, c, arn_12_3_entity]
     - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
@@ -10680,8 +10692,10 @@ segments:
     start: 0xBF9410
     vram: 0x80240000
     subsegments:
-    - [0xBF9410, c, header]
-    - [0xBF9410, c, events]
+    - [0xBF9410, c, arn_13_0_header]
+    - [0xBF9410, c, arn_13_1_main]
+    - [0xBF9410, c, arn_13_2_npc]
+    - [0xBF9410, c, arn_13_3_entity]
     - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00

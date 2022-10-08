@@ -3,9 +3,6 @@
 
 extern EvtScript N(EVS_ExitDoors_trd_02_0);
 
-#include "world/common/SetEntityFlags100000.inc.c"
-#include "world/common/GetEntityPosition.inc.c"
-
 EvtScript N(EVS_FocusCamOnLock) = {
     EVT_LABEL(0)
         EVT_IF_EQ(GF_TRD01_Item_FortressKey, TRUE)
@@ -25,6 +22,9 @@ EvtScript N(EVS_FocusCamOnLock) = {
     EVT_RETURN
     EVT_END
 };
+
+#include "world/common/RemovePadlock.inc.c"
+#include "world/common/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_UnlockDoors) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -48,7 +48,7 @@ EvtScript N(EVS_UnlockDoors) = {
     EVT_CALL(N(GetEntityPosition), MV_Padlock_EntityIndex, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_RESUME_GROUP(1)
     EVT_UNBIND

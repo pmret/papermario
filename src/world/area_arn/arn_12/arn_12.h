@@ -2,13 +2,19 @@
 /// @brief Gusty Gulch - Tunnel 2
 
 #include "common.h"
-#include "../arn.h"
 #include "message_ids.h"
 #include "map.h"
 
-#define NAMESPACE arn_12
+#include "../arn.h"
+#include "mapfs/arn_12_shape.h"
+#include "mapfs/arn_12_hit.h"
 
-extern EvtScript N(main);
-extern EvtScript N(80240060);
-extern NpcGroupList N(npcGroupList_80240BBC);
-extern EvtScript N(makeEntities);
+#include "sprite/npc/TubbasHeart.h"
+#include "sprite/npc/Goomba.h"
+
+enum {
+	NPC_TubbasHeart             = 0,
+	NPC_Goomba                  = 1,
+};
+
+#define NAMESPACE arn_12

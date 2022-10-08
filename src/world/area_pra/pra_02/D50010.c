@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241274_D51264);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
-#include "world/common/SetEntityFlags100000.inc.c"
+#include "world/common/RemovePadlock.inc.c"
 
 #define NAMESPACE dup_pra_02
 #include "world/common/GetEntityPosition.inc.c"

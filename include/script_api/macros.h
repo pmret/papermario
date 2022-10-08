@@ -613,6 +613,39 @@
         EVT_END \
     }
 
+#define EVT_EXIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, modelID, swingDir) \
+    { \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
+        EVT_CALL(DisablePlayerInput, TRUE) \
+        EVT_SET(LVar0, exitIdx) \
+        EVT_SET(LVar1, colliderID) \
+        EVT_SET(LVar2, modelID) \
+        EVT_SET(LVar3, swingDir) \
+        EVT_EXEC(ExitSingleDoor) \
+        EVT_WAIT(17) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
+        EVT_WAIT(100) \
+        EVT_RETURN \
+        EVT_END \
+    }
+
+#define EVT_EXIT_SPLIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, topModelID, bottomModelID, swingDir) \
+    { \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
+        EVT_CALL(DisablePlayerInput, TRUE) \
+        EVT_SET(LVar0, exitIdx) \
+        EVT_SET(LVar1, colliderID) \
+        EVT_SET(LVar2, topModelID) \
+        EVT_SET(LVar4, bottomModelID) \
+        EVT_SET(LVar3, swingDir) \
+        EVT_EXEC(ExitSplitSingleDoor) \
+        EVT_WAIT(17) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
+        EVT_WAIT(100) \
+        EVT_RETURN \
+        EVT_END \
+    }
+
 #define EVT_EXIT_DOUBLE_DOOR(exitIdx, map, entryIdx, colliderID, leftDoorModelID, rightDoorModelID) \
     { \
         EVT_SET_GROUP(EVT_GROUP_1B) \

@@ -4,7 +4,7 @@
 extern EvtScript N(EVS_ExitDoors_trd_05_0);
 extern EvtScript N(EVS_ExitDoors_trd_03_3);
 
-#include "world/common/SetEntityFlags100000.inc.c"
+#include "world/common/RemovePadlock.inc.c"
 
 #include "world/common/SetEntityPosition.inc.c"
 
@@ -53,7 +53,7 @@ EvtScript N(EVS_UnlockUpperLeftDoors) = {
     EVT_CALL(N(GetEntityPosition), MV_Unk_00, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Unk_00)
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
     EVT_RETURN
@@ -81,7 +81,7 @@ EvtScript N(EVS_UnlockLowerRightDoors) = {
     EVT_CALL(N(GetEntityPosition), MV_Unk_01, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Unk_01)
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
     EVT_RETURN
