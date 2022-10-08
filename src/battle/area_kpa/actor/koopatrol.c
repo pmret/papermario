@@ -1,5 +1,5 @@
 #include "common.h"
 
-#define NAMESPACE b_area_omo3_koopatrol
+#define NAMESPACE b_area_kpa_koopatrol
 
 #include "battle/common/actor/koopatrol.inc.c"

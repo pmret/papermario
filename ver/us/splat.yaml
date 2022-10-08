@@ -5973,11 +5973,28 @@ segments:
     start: 0x684A30
     vram: 0x80218000
     subsegments:
-    - [0x684A30, c]
-    - [0x684B00, c]
-    - [0x684C30, c]
-    - [0x685130, c]
-    - [0x685260, data]
+    - [0x684A30, c, actor/bony_beetle]
+    - [0x684B00, c, actor/dry_bones]
+    - [0x684B00, c, actor/hammer_bro]
+    - [0x684B00, c, actor/koopatrol]
+    - [0x684C30, c, actor/magikoopa]
+    - [0x685130, c, actor/ember]
+    - [0x685260, c, stage/kpa_01]
+    - [0x685260, c, stage/kpa_01b]
+    - [0x685260, c, stage/kpa_02]
+    - [0x685260, c, stage/kpa_03]
+    - [0x685260, c, stage/kpa_04]
+    - [0x685260, c, stage/kpa_04b]
+    - [0x685260, c, stage/kpa_04c]
+    - [0x685260, c, stage/kpa_05]
+    - [0x685260, c, stage/kpa_07]
+    - [0x685260, c, stage/kpa_08]
+    - [0x685260, c, stage/kpa_09]
+    - [0x685260, c, stage/kpa_11]
+    - [0x685260, c, stage/kpa_13]
+    - [0x685260, c, stage/kpa_14]
+    - [0x685260, c, area]
+    - [0x685260]
   - dir: battle/area_kpa2
     type: code
     start: 0x69F200
