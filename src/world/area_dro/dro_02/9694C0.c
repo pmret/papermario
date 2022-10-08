@@ -2614,7 +2614,6 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
     *arg4 = clamp_angle(F010_ptr->unk_10);
 }
 
-// loops sux
 void dro_02_func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
     f32 sp18;
     f32 sp1C;
@@ -2826,7 +2825,7 @@ void dro_02_func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
 
             N(func_80242214_96B3D4)(1, &sp48, &sp4C, &sp50, &sp54);
 
-            for (j = 0; j < 4; j++) {
+            for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
                 s32 i;
 
                 N(D_8024EF90)[j] = fx_energy_in_out(2, sp48, sp4C + 20.0f, sp50, 8.0f, -1);
@@ -2842,7 +2841,7 @@ void dro_02_func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
         case 12:
             N(func_80242214_96B3D4)(1, &sp58, &sp5C, &sp60, &sp64);
 
-            for (j = 0; j < 4; j++) {
+            for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
                 s32 i;
 
                 N(D_8024EF90)[j]->data.energyInOut->pos.x = sp58;
@@ -2875,7 +2874,7 @@ void dro_02_func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
                 fx_sparkles(0, sp68, sp6C + 20.0f, sp70, 30.0f);
                 sfx_play_sound(0x206);
 
-                for (j = 0; j < 4; j++) {
+                for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
                     N(D_8024EF90)[j]->flags |= 0x10;
                 }
             }
