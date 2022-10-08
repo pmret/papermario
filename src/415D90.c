@@ -192,36 +192,36 @@ s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 
 // s8 D_802AB513
 
 AnimID battle_menu_partnerChooseMoveAnimations[] = {
-    [PARTNER_NONE]       0, 
-    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Think, 
-    [PARTNER_KOOPER]     ANIM_BattleKooper_Think, 
-    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Think, 
-    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Think, 
-    [PARTNER_GOOMPA]     ANIM_Goompa_Idle, 
-    [PARTNER_WATT]       ANIM_BattleWatt_Think, 
+    [PARTNER_NONE]       0,
+    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Think,
+    [PARTNER_KOOPER]     ANIM_BattleKooper_Think,
+    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Think,
+    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Think,
+    [PARTNER_GOOMPA]     ANIM_Goompa_Idle,
+    [PARTNER_WATT]       ANIM_BattleWatt_Think,
     [PARTNER_SUSHIE]     ANIM_BattleSushie_Think,
     [PARTNER_LAKILESTER] ANIM_BattleLakilester_Run,
-    [PARTNER_BOW]        ANIM_BattleBow_Still, 
-    [PARTNER_GOOMBARIA]  0, 
-    [PARTNER_TWINK]      0, 
-    0x00000000, 
+    [PARTNER_BOW]        ANIM_BattleBow_Still,
+    [PARTNER_GOOMBARIA]  0,
+    [PARTNER_TWINK]      0,
+    0x00000000,
     0x00000000
 };
 
 AnimID D_802AB558[] = {
-    [PARTNER_NONE]       0, 
-    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Walk, 
-    [PARTNER_KOOPER]     ANIM_BattleKooper_Walk, 
-    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Walk, 
-    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Walk, 
-    [PARTNER_GOOMPA]     ANIM_Goompa_Walk, 
-    [PARTNER_WATT]       ANIM_BattleWatt_Walk, 
-    [PARTNER_SUSHIE]     ANIM_BattleSushie_Walk, 
+    [PARTNER_NONE]       0,
+    [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Walk,
+    [PARTNER_KOOPER]     ANIM_BattleKooper_Walk,
+    [PARTNER_BOMBETTE]   ANIM_BattleBombette_Walk,
+    [PARTNER_PARAKARRY]  ANIM_BattleParakarry_Walk,
+    [PARTNER_GOOMPA]     ANIM_Goompa_Walk,
+    [PARTNER_WATT]       ANIM_BattleWatt_Walk,
+    [PARTNER_SUSHIE]     ANIM_BattleSushie_Walk,
     [PARTNER_LAKILESTER] ANIM_BattleLakilester_Walk,
-    [PARTNER_BOW]        ANIM_BattleBow_Walk, 
-    [PARTNER_GOOMBARIA]  0, 
-    [PARTNER_TWINK]      0, 
-    0x00000000, 
+    [PARTNER_BOW]        ANIM_BattleBow_Walk,
+    [PARTNER_GOOMBARIA]  0,
+    [PARTNER_TWINK]      0,
+    0x00000000,
     0x00000000
 };
 
@@ -842,7 +842,7 @@ void btl_draw_menu_wheel(void) {
                 draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, 0x35, 0);
             }
 
-            if ((gBattleStatus.flags1 & 0x02000000) || (gBattleStatus.flags2 & 0x40)) {
+            if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & 0x40)) {
                 D_802AD104 = 0;
             }
 

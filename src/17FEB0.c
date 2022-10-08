@@ -225,7 +225,7 @@ s32 calc_item_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
-        if (gBattleStatus.flags1 & 0x20) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
             if ((target->attackBoost > 0 || target->defenseBoost > 0) ||
                 ((target->staticStatus == 0 && target->transparentStatus != 0) || target->staticStatus != 0))
             {
@@ -380,10 +380,10 @@ s32 calc_item_damage_enemy(void) {
             dispatchEvent = EVENT_SCARE_AWAY;
             ret = 0;
             sp1C = TRUE;
-            gBattleStatus.flags1 |= 0x39;
+            gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_1;
             sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             wasStatusInflicted = TRUE;
-            gBattleStatus.flags1 |= 0x40;
+            gBattleStatus.flags1 |= BS_FLAGS1_40;
         } else {
             dispatchEvent = EVENT_IMMUNE;
             ret = 2;

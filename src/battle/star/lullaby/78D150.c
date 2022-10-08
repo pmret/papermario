@@ -290,7 +290,7 @@ EvtScript N(usePower) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(ItemDamageEnemy, LVar0, 1879048192, 0x80001364, 0, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 1879048192, 0x80001364, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, 0, LVar0)

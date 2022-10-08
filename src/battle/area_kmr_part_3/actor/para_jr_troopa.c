@@ -123,7 +123,7 @@ EvtScript N(80225F7C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
-    EVT_IF_FLAG(LVar2, 0x80000)
+    EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, 183)
             EVT_CALL(SetActorVar, -127, 1, 1)
@@ -401,7 +401,7 @@ EvtScript N(takeTurn_80226F58) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 5, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 5, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -463,7 +463,7 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
     EVT_END_SWITCH
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(0)

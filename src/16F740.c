@@ -541,7 +541,7 @@ void btl_state_update_begin_turn(void) {
         }
 
         if (battleStatus->hustleTurns != 0) {
-            gBattleStatus.flags1 |= BS_FLAGS1_4000000;
+            gBattleStatus.flags1 |= BS_FLAGS1_HUSTLE_DRINK_ON;
         }
 
         numEnemyActors = 0;
@@ -1322,7 +1322,7 @@ void func_80242FE0(void) {
                         actor->disableEffect->data.disableX->unk_3C = 0;
                     }
                     if (actor->debuff == 9) {
-                        gBattleStatus.flags1 |= 0x20;
+                        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
                         dispatch_damage_event_actor_0(actor, 1, 0xA);
                         D_8029F258 = 0x14;
                     }
@@ -1359,7 +1359,7 @@ block_52:
                 }
 
                 btl_cam_use_preset(2);
-                if (partner == NULL || !(gBattleStatus.flags1 & 0x100000)) {
+                if (partner == NULL || !(gBattleStatus.flags1 & BS_FLAGS1_100000)) {
                     gBattleState2 = 4;
                 } else if (gBattleStatus.flags2 & 0x40) {
                     gBattleState2 = 4;
@@ -1873,18 +1873,18 @@ void btl_state_update_victory(void) {
     }
 
     if (gBattleState2 == BATTLE_STATE2_UNK_4 && battleStatus->pendingStarPoints <= 0) {
-        if (gBattleStatus.flags1 & BS_FLAGS1_1000000) {
-            gBattleStatus.flags1 &= ~BS_FLAGS1_40000;
+        if (gBattleStatus.flags1 & BS_FLAGS1_STAR_POINTS_DROPPED) {
+            gBattleStatus.flags1 &= ~BS_FLAGS1_ENEMY_FLED;
         }
         if (playerData->battlesWon < 9999) {
             playerData->battlesWon++;
         }
-        if (gBattleStatus.flags1 & BS_FLAGS1_40000) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_ENEMY_FLED) {
             currentEncounter->battleOutcome = OUTCOME_ENEMY_FLED;
         } else {
             currentEncounter->battleOutcome = OUTCOME_PLAYER_WON;
         }
-        if (gBattleStatus.flags1 & BS_FLAGS1_20000) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_DISABLE_CELEBRATION) {
             if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
                 bgm_set_song(0, -1, 0, 1500, 8);
             }
@@ -2172,7 +2172,7 @@ void btl_state_update_run_away(void) {
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_0:
             battleStatus->unk_8C = 0;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_40000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_ENEMY_FLED;
             gBattleStatus.flags2 |= BS_FLAGS2_10 | BS_FLAGS2_8 | BS_FLAGS2_4 | BS_FLAGS2_2;
             playerData->unk_2A6++;
             btl_cam_use_preset(BTL_CAM_PRESET_25);
@@ -2222,7 +2222,7 @@ void btl_state_update_run_away(void) {
             break;
         case 2:
             if (!does_script_exist(player->takeTurnID) && battleStatus->unk_8C == 0) {
-                if (!(gBattleStatus.flags1 & BS_FLAGS1_40000)) {
+                if (!(gBattleStatus.flags1 & BS_FLAGS1_ENEMY_FLED)) {
                     gBattleState2 = BATTLE_STATE2_UNK_3;
                 } else {
                     currentEncounter->battleOutcome = 2;
@@ -3418,7 +3418,7 @@ void btl_state_update_next_enemy(void) {
 
             battleStatus->unk_8C = 0;
             gBattleStatus.flags1 &= ~BS_FLAGS1_2;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_40000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_ENEMY_FLED;
             gBattleStatus.flags1 &= ~BS_FLAGS1_1000;
             gBattleStatus.flags1 &= ~BS_FLAGS1_80000;
 
@@ -4092,7 +4092,7 @@ void btl_state_update_enemy_striking_first(void) {
             battleStatus->lastAttackDamage = 0;
             battleStatus->unk_19A = 0;
             playerData->enemyFirstStrikes++;
-            battleStatus->flags1 &= ~2;
+            battleStatus->flags1 &= ~BS_FLAGS1_2;
             D_8029F254 = 0;
             player->flags &= ~ACTOR_FLAG_8000000;
             if (partner != NULL) {

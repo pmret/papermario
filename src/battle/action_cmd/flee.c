@@ -89,7 +89,7 @@ ApiStatus func_802A92A0_422D70(Evt* script) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 127;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
-    battleStatus->flags1 &= ~0x8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_8000;
     actionCommandStatus->state = 10;
     return ApiStatus_DONE2;
 }

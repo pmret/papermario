@@ -227,7 +227,7 @@ EvtScript N(D_802A1B40) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(D_802A1204_007347A4)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, BS_FLAGS1_10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
@@ -313,7 +313,7 @@ EvtScript D_802A2000_007355A0 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(D_802A1388_00734928)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, BS_FLAGS1_10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
@@ -382,7 +382,7 @@ EvtScript D_802A23E8_735988 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(D_802A150C_00734AAC)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 0, 0, 0, BS_FLAGS1_10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
@@ -677,7 +677,7 @@ EvtScript D_802A3168_00736708 = {
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_WAIT(1)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_EXEC_WAIT(D_802A1A64_00735004)
         EVT_RETURN
@@ -694,7 +694,7 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
@@ -705,7 +705,7 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(1)
@@ -776,7 +776,7 @@ EvtScript battle_move_hammer_802A369C = {
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_WAIT(1)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_EXEC_WAIT(D_802A1A64_00735004)
         EVT_RETURN
@@ -790,7 +790,7 @@ EvtScript battle_move_hammer_802A369C = {
         EVT_CASE_EQ(2)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
     EVT_END_SWITCH
-    EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVar9, 48)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVar9, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_EXEC_WAIT(D_802A18AC_00734E4C)
     EVT_RETURN
     EVT_END
@@ -830,7 +830,7 @@ EvtScript D_802A3C4C_007371EC = {
         EVT_CASE_EQ(2)
             EVT_EXEC_WAIT(D_802A23E8_735988)
     EVT_END_SWITCH
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, LVar9, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, LVar9, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_SWITCH(LVar1)
@@ -897,7 +897,7 @@ EvtScript D_802A3C4C_007371EC = {
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_WAIT(1)
-    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, 16)
+    EVT_CALL(PlayerTestEnemy, LVar0, 64, 25, 0, 0, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_EXEC_WAIT(D_802A1A64_00735004)
         EVT_RETURN
@@ -914,7 +914,7 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
@@ -925,7 +925,7 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 64, 25, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(1)

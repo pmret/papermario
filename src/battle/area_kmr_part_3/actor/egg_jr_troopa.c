@@ -340,7 +340,7 @@ EvtScript N(802250E4) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(GetLastDamage, -127, LVar1)
         EVT_CALL(GetBattleFlags, LVar2)
-        EVT_IF_NOT_FLAG(LVar2, 0x80000)
+        EVT_IF_NOT_FLAG(LVar2, BS_FLAGS1_80000)
             EVT_IF_NE(LVar1, 0)
                 EVT_CALL(SetActorVar, -127, 1, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -402,7 +402,7 @@ EvtScript N(takeTurn_80225314) = {
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_Jump)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(5)
         EVT_CASE_OR_EQ(6)
@@ -456,7 +456,7 @@ EvtScript N(takeTurn_80225314) = {
     EVT_END_THREAD
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

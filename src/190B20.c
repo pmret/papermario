@@ -2492,7 +2492,7 @@ void remove_player_buffs(s32 buffs) {
     }
     if (buffs & 0x10) {
         battleStatus->hustleTurns = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_4000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
     }
     if (buffs & 0x20 && (player->staticStatus != 0)) {
         player->staticDuration = 0;

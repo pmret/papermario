@@ -3840,39 +3840,39 @@ enum IntroStates {
 };
 
 enum BattleStatusFlags1 {
-    BS_FLAGS1_0                = 0x00000000,
-    BS_FLAGS1_1                = 0x00000001, // show actors
-    BS_FLAGS1_2                = 0x00000002, // menu is open
-    BS_FLAGS1_4                = 0x00000004,
-    BS_FLAGS1_8                = 0x00000008,
-    BS_FLAGS1_10               = 0x00000010, // enable attack bonuses (power plus, etc)?
-    BS_FLAGS1_SP_EVT_ACTIVE    = 0x00000020, // enable special events (other than hit/death/immune?)
-    BS_FLAGS1_40               = 0x00000040,
-    BS_FLAGS1_80               = 0x00000080,
-    BS_FLAGS1_100              = 0x00000100,
-    BS_FLAGS1_200              = 0x00000200,
-    BS_FLAGS1_400              = 0x00000400,
-    BS_FLAGS1_800              = 0x00000800,
-    BS_FLAGS1_1000             = 0x00001000,
-    BS_FLAGS1_2000             = 0x00002000,
-    BS_FLAGS1_4000             = 0x00004000,
-    BS_FLAGS1_8000             = 0x00008000,
-    BS_FLAGS1_10000            = 0x00010000,
-    BS_FLAGS1_20000            = 0x00020000,
-    BS_FLAGS1_40000            = 0x00040000,
-    BS_FLAGS1_80000            = 0x00080000, // partner will act (partner turn?)
-    BS_FLAGS1_100000           = 0x00100000, // player in back (after pressing z)
-    BS_FLAGS1_200000           = 0x00200000, // enemy turn pending
-    BS_FLAGS1_PLAYER_DEFENDING = 0x00400000, // player is defending
-    BS_FLAGS1_800000           = 0x00800000, // don’t game over on loss
-    BS_FLAGS1_1000000          = 0x01000000,
-    BS_FLAGS1_2000000          = 0x02000000,
-    BS_FLAGS1_4000000          = 0x04000000,
-    BS_FLAGS1_8000000          = 0x08000000,
-    BS_FLAGS1_10000000         = 0x10000000, // prevent hammer charge
-    BS_FLAGS1_20000000         = 0x20000000, // prevent jump charge
-    BS_FLAGS1_40000000         = 0x40000000,
-    BS_FLAGS1_ATK_BLOCKED      = 0x80000000,
+    BS_FLAGS1_0                     = 0x00000000,
+    BS_FLAGS1_1                     = 0x00000001, // show actors
+    BS_FLAGS1_2                     = 0x00000002, // menu is open
+    BS_FLAGS1_4                     = 0x00000004,
+    BS_FLAGS1_8                     = 0x00000008,
+    BS_FLAGS1_10                    = 0x00000010, // enable attack bonuses (power plus, etc)?
+    BS_FLAGS1_SP_EVT_ACTIVE         = 0x00000020, // enable special events (other than hit/death/immune?)
+    BS_FLAGS1_40                    = 0x00000040,
+    BS_FLAGS1_80                    = 0x00000080,
+    BS_FLAGS1_100                   = 0x00000100,
+    BS_FLAGS1_200                   = 0x00000200,
+    BS_FLAGS1_400                   = 0x00000400,
+    BS_FLAGS1_800                   = 0x00000800,
+    BS_FLAGS1_1000                  = 0x00001000,
+    BS_FLAGS1_2000                  = 0x00002000,
+    BS_FLAGS1_4000                  = 0x00004000,
+    BS_FLAGS1_8000                  = 0x00008000,
+    BS_FLAGS1_10000                 = 0x00010000,
+    BS_FLAGS1_DISABLE_CELEBRATION   = 0x00020000,
+    BS_FLAGS1_ENEMY_FLED            = 0x00040000,
+    BS_FLAGS1_80000                 = 0x00080000, // partner will act (partner turn?)
+    BS_FLAGS1_100000                = 0x00100000, // player in back (after pressing z)
+    BS_FLAGS1_200000                = 0x00200000, // enemy turn pending
+    BS_FLAGS1_PLAYER_DEFENDING      = 0x00400000, // player is defending
+    BS_FLAGS1_800000                = 0x00800000, // don’t game over on loss
+    BS_FLAGS1_STAR_POINTS_DROPPED   = 0x01000000,
+    BS_FLAGS1_2000000               = 0x02000000,
+    BS_FLAGS1_HUSTLE_DRINK_ON       = 0x04000000,
+    BS_FLAGS1_8000000               = 0x08000000,
+    BS_FLAGS1_10000000              = 0x10000000, // prevent hammer charge
+    BS_FLAGS1_20000000              = 0x20000000, // prevent jump charge
+    BS_FLAGS1_40000000              = 0x40000000,
+    BS_FLAGS1_ATK_BLOCKED           = 0x80000000,
 };
 
 enum BattleStatusFlags2 {

@@ -31,7 +31,7 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[1] == 0) {
                 BattleStatus* battleStatus2 = &gBattleStatus;
 
-                battleStatus2->flags1 &= ~0x04000000;
+                battleStatus2->flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
                 battleStatus->hustleTurns = 0;
                 battleStatus->itemUsesLeft = 0;
 

@@ -107,7 +107,7 @@ EvtScript N(main) = {
     EVT_CALL(GetItemPower, ITEM_P_O_W_BLOCK, LVar3, LVar4)
     EVT_CALL(ApplyShrinkFromOwner, LVar3)
     EVT_CALL(func_80269EAC, 22)
-    EVT_CALL(ItemDamageEnemy, LVar0, 939525120, 0, LVar3, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 939525120, 0, LVar3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, 0, LVar0)
     EVT_IF_NE(LVar0, -1)

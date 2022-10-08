@@ -386,12 +386,12 @@ EvtScript N(usePower) = {
                     EVT_ADD(LVar1, 30)
                     EVT_WAIT(5)
                 EVT_END_LOOP
-                EVT_CALL(SetBattleFlagBits, 16777216, 1)
+                EVT_CALL(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, 1)
                 EVT_CALL(RemoveActor, LVarA)
             EVT_END_THREAD
         EVT_CASE_DEFAULT
             EVT_IF_EQ(LocalFlag(0), 0)
-                EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, 2080)
+                EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_800 | BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(5)

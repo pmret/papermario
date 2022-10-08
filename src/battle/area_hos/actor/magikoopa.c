@@ -219,8 +219,8 @@ EvtScript N(idle_8021D774) = {
 
 EvtScript N(8021D784) = {
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, 0x80000)
-        EVT_IF_FLAG(LVar0, 0x240)
+    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
             EVT_CALL(SetActorVar, -127, 2, 1)
         EVT_END_IF
     EVT_ELSE
@@ -231,7 +231,7 @@ EvtScript N(8021D784) = {
             EVT_CASE_OR_EQ(133)
             EVT_CASE_OR_EQ(136)
                 EVT_CALL(GetBattleFlags, LVar0)
-                EVT_IF_FLAG(LVar0, 0x240)
+                EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
                     EVT_CALL(SetActorVar, -127, 2, 1)
                 EVT_END_IF
             EVT_END_CASE_GROUP
@@ -433,7 +433,7 @@ EvtScript N(8021E46C) = {
     EVT_IF_FLAG(LVarA, 0x20000000)
         EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVarA)
-        EVT_IF_FLAG(LVarA, 0x100)
+        EVT_IF_FLAG(LVarA, BS_FLAGS1_100)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -1109,10 +1109,10 @@ EvtScript N(shapeSpell) = {
     EVT_WAIT(18)
     EVT_IF_EQ(LocalFlag(0), 1)
         EVT_WAIT(2)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 0, 32)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_ELSE
         EVT_WAIT(2)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 3, 32)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
