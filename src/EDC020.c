@@ -5,18 +5,7 @@
 
 #define NAMESPACE EDC020
 
-extern s32 D_802429E0[];
-//extern s32** EDC020_varStash = NULL;
-
-/*
-extern s32 D_80241850_EDD830 = {
-    0x00000000,
-};
-
-extern s32 D_80241850_EDD834 = {
-    0x00000000,
-};
-*/
+extern s32 EDC020_D_802429E0[];
 
 #include "common/foliage.inc.c"
 
@@ -67,13 +56,13 @@ ApiStatus func_8024064C_EDC62C(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_802429E0[i] = ptr[i];
+            EDC020_D_802429E0[i] = ptr[i];
         }
-        D_802429E0[i] = 0;
+        EDC020_D_802429E0[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            D_802429E0[i] = i + 16;
-            D_802429E0[112] = 0;
+            EDC020_D_802429E0[i] = i + 16;
+            EDC020_D_802429E0[112] = 0;
         }
     }
     return ApiStatus_DONE2;

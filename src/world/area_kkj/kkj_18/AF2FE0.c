@@ -3,8 +3,7 @@
 
 extern s32 D_80241F10_AF4BB0;
 extern s32 D_80241F14_AF4BB4;
-extern s32 D_80244E78[];
-extern s32 tik_07_FlyingAI_JumpVels[];
+extern s32 kkj_18_D_80244E78[];
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -40,6 +39,8 @@ ApiStatus func_802405C0_AF3260(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+extern s32 kkj_18_D_80244CB0[];
+
 ApiStatus func_802405F8_AF3298(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = (s32*)evt_get_variable(script, *args++);
@@ -47,13 +48,13 @@ ApiStatus func_802405F8_AF3298(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            tik_07_FlyingAI_JumpVels[i] = ptr[i];
+            kkj_18_D_80244CB0[i] = ptr[i];
         }
-        tik_07_FlyingAI_JumpVels[i] = 0;
+        kkj_18_D_80244CB0[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            tik_07_FlyingAI_JumpVels[i] = i + 16;
-            tik_07_FlyingAI_JumpVels[112] = 0;
+            kkj_18_D_80244CB0[i] = i + 16;
+            kkj_18_D_80244CB0[112] = 0;
         }
     }
 
@@ -67,13 +68,13 @@ ApiStatus func_80240694_AF3334(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_80244E78[i] = ptr[i];
+            kkj_18_D_80244E78[i] = ptr[i];
         }
-        D_80244E78[i] = 0;
+        kkj_18_D_80244E78[i] = 0;
     } else {
         for (i = 0; i < 91; i++) {
-            D_80244E78[i] = i + 128;
-            D_80244E78[91] = 0;
+            kkj_18_D_80244E78[i] = i + 128;
+            kkj_18_D_80244E78[91] = 0;
         }
     }
 

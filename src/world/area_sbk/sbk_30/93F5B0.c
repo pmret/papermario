@@ -37,9 +37,47 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
 // SetLetterChoiceResult
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);
+extern s32 sbk_30_D_80244A50[];
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248_9407F8);
+ApiStatus func_802411AC_94075C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            sbk_30_D_80244A50[i] = ptr[i];
+        }
+        sbk_30_D_80244A50[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            sbk_30_D_80244A50[i] = i + 16;
+            sbk_30_D_80244A50[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+extern s32 sbk_30_D_80244C18[];
+
+ApiStatus func_80241248_9407F8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            sbk_30_D_80244C18[i] = ptr[i];
+        }
+        sbk_30_D_80244C18[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            sbk_30_D_80244C18[i] = i + 128;
+            sbk_30_D_80244C18[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
