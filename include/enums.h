@@ -784,6 +784,7 @@ enum SoundIDs {
     SOUND_1FF                       = 0x000001FF,
     SOUND_201                       = 0x00000201,
     SOUND_202                       = 0x00000202,
+    SOUND_203                       = 0x00000203,
     SOUND_204                       = 0x00000204,
     SOUND_205                       = 0x00000205,
     SOUND_207                       = 0x00000207,
