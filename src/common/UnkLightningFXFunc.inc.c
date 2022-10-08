@@ -4,12 +4,12 @@
 ApiStatus N(UnkLightningFXFunc)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)script->varTable[15];
 
-    effect->data.lightning->unk_30 = 85;
-    effect->data.lightning->unk_34 = 42;
-    effect->data.lightning->unk_38 = 255;
-    effect->data.lightning->unk_40 = 255;
-    effect->data.lightning->unk_44 = 175;
-    effect->data.lightning->unk_48 = 239;
+    effect->data.any[12] = 85;
+    effect->data.any[13] = 42;
+    effect->data.any[14] = 255;
+    effect->data.any[16] = 255;
+    effect->data.any[17] = 175;
+    effect->data.any[18] = 239;
     
     return ApiStatus_DONE2;
 }
