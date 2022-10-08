@@ -3879,13 +3879,8 @@ EvtScript N(takeTurn_80228B78) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
     EVT_CALL(SetPartSounds, -127, 3, 2, 0, 0)
-<<<<<<< HEAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x201B)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
-=======
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_201B)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, 16)
->>>>>>> master
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
