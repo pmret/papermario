@@ -60,8 +60,8 @@ s32 N(D_80241250_92B500)[] = {
 };
 
 EvtScript N(D_80241258_92B508) = {
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, 0, 0, 0, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_DUST, 2, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 0, 0, 0, 20, 10, 0, 60)
+    EVT_PLAY_EFFECT(EFFECT_DUST, 2, 0, 0, 0, 60)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_iwa, SOUND_5F, 0)
     EVT_SET(LVar2, 0)
     EVT_CALL(MakeLerp, 0, -50, 50, EASING_LINEAR)
@@ -298,8 +298,8 @@ EvtScript N(D_80241DE0_92C090) = {
         EVT_LOOP(30)
             EVT_CALL(RandInt, 290, LVar0)
             EVT_ADD(LVar0, -110)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -35, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, LVar0, 0, -35, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -35, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, LVar0, 0, -35, 60)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -308,24 +308,24 @@ EvtScript N(D_80241DE0_92C090) = {
         EVT_LOOP(15)
             EVT_CALL(RandInt, 180, LVar0)
             EVT_ADD(LVar0, 170)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -300, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, LVar0, 0, -300, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -300, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, LVar0, 0, -300, 60)
             EVT_WAIT(20)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(100)
         EVT_LOOP(5)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, -180, 0, 260, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, -180, 0, 260, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, -180, 0, 260, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, -180, 0, 260, 60)
             EVT_WAIT(40)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(110)
         EVT_LOOP(4)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, 180, 0, 260, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, 180, 0, 260, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 180, 0, 260, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, 180, 0, 260, 60)
             EVT_WAIT(50)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -365,8 +365,8 @@ EvtScript N(D_802422F0_92C5A0) = {
         EVT_LOOP(10)
             EVT_CALL(RandInt, 290, LVar0)
             EVT_ADD(LVar0, -110)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -35, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, LVar0, 0, -35, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -35, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, LVar0, 0, -35, 60)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -375,23 +375,23 @@ EvtScript N(D_802422F0_92C5A0) = {
         EVT_LOOP(5)
             EVT_CALL(RandInt, 180, LVar0)
             EVT_ADD(LVar0, 170)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -300, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, LVar0, 0, -300, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 0, -300, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, LVar0, 0, -300, 60)
             EVT_WAIT(20)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(3)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, -180, 0, 260, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, -180, 0, 260, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, -180, 0, 260, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, -180, 0, 260, 60)
             EVT_WAIT(40)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(2)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, 180, 0, 260, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, EFFECT_DUST, 2, 180, 0, 260, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 180, 0, 260, 20, 10, 0, 60)
+            EVT_PLAY_EFFECT(EFFECT_DUST, 2, 180, 0, 260, 60)
             EVT_WAIT(50)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -568,11 +568,11 @@ EvtScript N(D_80243310_92D5C0) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, 61, 2, -83, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_DUST, 2, 61, 2, -83, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 61, 2, -83, 20, 10, 0, 60)
+    EVT_PLAY_EFFECT(EFFECT_DUST, 2, 61, 2, -83, 60)
     EVT_WAIT(3)
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, -61, 2, -83, 20, 10, 0, 60, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_DUST, 2, -61, 2, -83, 60, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, -61, 2, -83, 20, 10, 0, 60)
+    EVT_PLAY_EFFECT(EFFECT_DUST, 2, -61, 2, -83, 60)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END

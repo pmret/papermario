@@ -47,16 +47,16 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_script_list();
 
     switch (loadType) {
-        case 0:
+        case LOAD_FROM_MAP:
             clear_area_flags();
-            gGameStatusPtr->loadType = 0;
+            gGameStatusPtr->loadType = LOAD_FROM_MAP;
             break;
-        case 1:
+        case LOAD_FROM_FILE_SELECT:
             fio_deserialize_state();
             areaID = gGameStatusPtr->areaID;
             mapID = gGameStatusPtr->mapID;
             gGameStatusPtr->prevArea = areaID;
-            gGameStatusPtr->loadType = 1;
+            gGameStatusPtr->loadType = LOAD_FROM_FILE_SELECT;
             break;
     }
 
@@ -436,17 +436,17 @@ MapConfig isk_maps[] = {
 /// Koopa Bros. Fortress
 #include "area_trd/trd.h"
 MapConfig trd_maps[] = {
-    { MAP_UNSPLIT(trd_00, 0x80240690), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(trd_01, 0x80241700), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_02, 0x80241AA0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_03, 0x80240A40), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_00), .bgName = "nok_bg" },
+    { MAP(trd_01), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_02), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_03), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP(trd_04), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_05, 0x802407B0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_06, 0x80240D60), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_07, 0x80242910), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_05), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_07), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
     { MAP(trd_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
-    { MAP_UNSPLIT(trd_09, 0x80240200), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(trd_10, 0x80240870), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
+    { MAP(trd_09), .bgName = "nok_bg" },
+    { MAP(trd_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 3 } } },
 };
 
 /// Koopa Region

@@ -334,13 +334,13 @@ dlabel D_800A0934
 dlabel gMapTransitionAlpha
 .space 2
 
-dlabel D_800A0942
+dlabel gMapTransitionFadeRate
 .space 2
 
-dlabel D_800A0944
+dlabel gMapTransitionState
 .space 2
 
-dlabel D_800A0946
+dlabel gMapTransitionStateTime
 .space 2
 
 dlabel D_800A0948

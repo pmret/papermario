@@ -2,4 +2,4 @@
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/GetDefeatedEnemyCount.inc.c"
+#include "world/common/util/GetDefeatedEnemyCount.inc.c"

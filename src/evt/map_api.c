@@ -420,12 +420,12 @@ ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args);
-    s32 index = get_transform_group_index(var1);
+    s32 modelID = evt_get_variable(script, *args);
+    s32 transformIndex = get_transform_group_index(modelID);
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
 
-    if (index == -1) {
+    if (transformIndex == -1) {
         apply_transform_to_children(ScaleModel, script);
         return ApiStatus_DONE2;
     }
@@ -436,10 +436,10 @@ ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
     y = evt_get_float_variable(script, *args++);
     z = evt_get_float_variable(script, *args++);
 
-    transformGroup = get_transform_group(index);
+    transformGroup = get_transform_group(transformIndex);
 
-    index = transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAGS_400; // TODO fix weird match
-    if (!(index)) {
+    transformIndex = transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAGS_400; // TODO fix weird match
+    if (!(transformIndex)) {
         guScaleF(transformGroup->matrixB, x, y, z);
         transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {

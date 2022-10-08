@@ -400,7 +400,7 @@ EvtScript N(80243970) = {
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-            EVT_CALL(func_80045900, 1)
+            EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(3)
             EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)

@@ -668,7 +668,7 @@ s32 find_item(s32);
 
 void enable_background_wave(void);
 
-void func_80035DF0(s16);
+void set_map_change_fade_rate(s16);
 
 // State funcs
 void state_init_startup(void);

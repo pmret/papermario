@@ -5,7 +5,7 @@
 #include "world/partners.h"
 extern s32 D_80242288_97D8B8;
 
-// duplicate of func_802400C0_9BD720
+// duplicate of SetupDemoScene from trd_09
 ApiStatus func_8024095C_97BF8C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 

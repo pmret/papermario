@@ -801,14 +801,14 @@ ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
+ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var0 = evt_get_variable(script, *script->ptrReadPos);
+    s32 skipReaction = evt_get_variable(script, *script->ptrReadPos);
 
     enemy->aiFlags |= ENEMY_AI_FLAGS_4;
 
-    if (var0 == 0) {
+    if (!skipReaction) {
         s32 unk;
 
         if (!(enemy->aiFlags & ENEMY_AI_FLAGS_10)) {

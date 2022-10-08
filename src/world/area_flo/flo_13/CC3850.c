@@ -300,7 +300,7 @@ EvtScript N(802442B0) = {
             EVT_CALL(SetSelfVar, 10, 100)
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(2)
-            EVT_CALL(func_80045900, 0)
+            EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(3)
             EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -733,7 +733,7 @@ EvtScript N(80245444) = {
     EVT_ADD(LVar0, 30)
     EVT_CALL(SetNpcSpeed, 0, EVT_FLOAT(3.5))
     EVT_CALL(NpcMoveTo, 0, LVar0, 60, 0)
-    EVT_CALL(N(UnkFunc41), 0, 8)
+    EVT_CALL(N(ChangeNpcToPartner), 0, 8)
     EVT_CALL(N(LoadPartyImage))
     EVT_EXEC(N(802438CC))
     EVT_WAIT(15)
@@ -1242,7 +1242,7 @@ NpcGroupList N(npcGroupList_80247984) = {
     {},
 };
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     55

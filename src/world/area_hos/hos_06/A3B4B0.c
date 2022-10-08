@@ -10,7 +10,7 @@
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_8024228C_A3B76C);
 

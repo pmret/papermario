@@ -6,4 +6,4 @@
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-#include "world/common/CheckItemFlags40.inc.c"
+#include "world/common/IsItemBadge.inc.c"
