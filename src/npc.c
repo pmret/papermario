@@ -1723,7 +1723,59 @@ void func_8003DA38(Npc* npc, s32 arg1) {
 INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 #endif
 
+// floats suqqz
+#ifdef NON_EQUIVALENT
+void func_8003DC38(Npc* npc, s32 arg1) {
+    f32 temp_f0;
+    f32 xTemp;
+    f32 zTemp;
+    f32 yTemp;
+    f32 theta;
+    f32 sinTheta;
+    s32 i;
+    s32 var_v0;
+    f32 cosTheta;
+
+    D_80077C2C += 0.1f;
+    if (arg1 == 2) {
+        fx_cloud_puff(npc->pos.x, (npc->pos.y + 14.0f) - 5.0f, npc->pos.z, D_80077C24);
+
+        D_80077C24 = clamp_angle(D_80077C24 + 35.0f);
+
+        for (i = 0; i < 4; i++) {
+            xTemp = rand_int(10) - 5;
+            zTemp = rand_int(10) - 5;
+            yTemp = -2.0f - (SQ(xTemp) + SQ(zTemp) / 5.0f);
+            D_80077C28 = 0;
+            theta = DEG_TO_RAD(clamp_angle(-npc->yaw + (i * 90)));
+            sinTheta = sin_rad(theta);
+            cosTheta = cos_rad(theta);
+            fx_cloud_trail(
+                1,
+                npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp,
+                npc->pos.y + 15.5f + yTemp,
+                npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp
+            );
+        }
+    } else {
+        xTemp = rand_int(10) - 5;
+        zTemp = rand_int(10) - 5;
+        yTemp = -2.0f - (SQ(xTemp) + SQ(zTemp) / 5.0f);
+        D_80077C28 = 0;
+        theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
+        sinTheta = sin_rad(theta);
+        cosTheta = cos_rad(theta);
+        fx_cloud_trail(
+            1,
+            npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp,
+            npc->pos.y + 15.5f + yTemp,
+            npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp
+        );
+    }
+}
+#else
 INCLUDE_ASM(s32, "npc", func_8003DC38);
+#endif
 
 void func_8003DFA0(Npc* npc, s32 arg1) {
     if (D_80077C30++ >= 4) {

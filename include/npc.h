@@ -565,7 +565,7 @@ void func_8003D788(Npc* npc, s32);
 
 void func_8003DA38(Npc* npc, s32);
 
-s32 func_8003DC38(Npc*, s32);
+void func_8003DC38(Npc* npc, s32);
 
 void func_8003DFA0(Npc* npc, s32);
 
