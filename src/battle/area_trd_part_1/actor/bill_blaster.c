@@ -215,7 +215,7 @@ EvtScript N(8021A2BC) = {
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(StartRumble, 9)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2C8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2C8)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 33)
     EVT_ADD(LVar1, 19)

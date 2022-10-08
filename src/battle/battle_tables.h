@@ -73,6 +73,10 @@ extern StageList b_area_jan2_stageTable;
 extern BattleList b_area_kzn_formationTable;
 extern StageList b_area_kzn_stageTable;
 
+extern BattleList b_area_kzn2_formationTable;
+extern StageList b_area_kzn2_stageTable;
+extern DmaTable b_area_kzn2_dmaTable[];
+
 extern BattleList b_area_flo_formationTable;
 extern StageList b_area_flo_stageTable;
 
@@ -81,6 +85,12 @@ extern StageList b_area_flo2_stageTable;
 
 extern BattleList b_area_tik_formationTable;
 extern StageList b_area_tik_stageTable;
+
+extern BattleList b_area_tik2_formationTable;
+extern StageList b_area_tik2_stageTable;
+
+extern BattleList b_area_tik3_formationTable;
+extern StageList b_area_tik3_stageTable;
 
 extern BattleList b_area_sam_formationTable;
 extern StageList b_area_sam_stageTable;
@@ -96,6 +106,9 @@ extern StageList b_area_pra2_stageTable;
 
 extern BattleList b_area_pra3_formationTable;
 extern StageList b_area_pra3_stageTable;
+
+extern BattleList b_area_kkj_formationTable;
+extern StageList b_area_kkj_stageTable;
 
 extern BattleList b_area_dig_formationTable;
 extern StageList b_area_dig_stageTable;

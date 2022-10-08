@@ -388,7 +388,7 @@ EvtScript N(takeTurn_8021BD5C) = {
             EVT_CALL(SetBattleCamZoom, 300)
             EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
             EVT_CALL(func_8024ECF8, -1, 1, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -407,7 +407,7 @@ EvtScript N(takeTurn_8021BD5C) = {
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
             EVT_THREAD
                 EVT_LOOP(4)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DF)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DF)
                     EVT_WAIT(4)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -438,7 +438,7 @@ EvtScript N(takeTurn_8021BD5C) = {
             EVT_CALL(SetBattleCamZoom, 300)
             EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
             EVT_CALL(func_8024ECF8, -1, 1, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))

@@ -439,7 +439,7 @@ EvtScript N(takeTurn_8021FA24) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim04)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -508,7 +508,7 @@ EvtScript N(takeTurn_8021FA24) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Anim04)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1033,7 +1033,7 @@ EvtScript N(takeTurn_80221DAC) = {
                 EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
                 EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BA)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BA)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -1064,12 +1064,12 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_WAIT(2)
             EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_END_CHILD_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Anim06)
         EVT_WAIT(10)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20D3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

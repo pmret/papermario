@@ -274,7 +274,7 @@ EvtScript N(8021D890) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -1728,7 +1728,7 @@ EvtScript N(electrify) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_Anim02)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2F0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F0)
     EVT_CALL(GetActorFlags, -127, LVar0)
     EVT_IF_NOT_FLAG(LVar0, 0x200)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

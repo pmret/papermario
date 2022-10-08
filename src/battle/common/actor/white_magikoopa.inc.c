@@ -629,7 +629,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2DB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DB)
     EVT_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim02)
         EVT_SET(LVar0, 200)
@@ -660,7 +660,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_White_Anim03)
     EVT_WAIT(11)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2DC)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DC)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)

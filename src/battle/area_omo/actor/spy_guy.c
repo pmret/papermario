@@ -335,7 +335,7 @@ EvtScript N(slingshotAttack) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E7)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpyGuy_Anim15)
     EVT_WAIT(12)
     EVT_WAIT(12)
@@ -349,7 +349,7 @@ EvtScript N(slingshotAttack) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E8)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 2, 2, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -480,7 +480,7 @@ EvtScript N(hammerAttack) = {
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_THREAD
         EVT_WAIT(4)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x327)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_327)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -564,7 +564,7 @@ EvtScript N(hammerAttack) = {
                 EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                 EVT_THREAD
                     EVT_WAIT(5)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DC)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DC)
                     EVT_CALL(N(StartRumbleWithParams), 200, 10)
                 EVT_END_THREAD
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpyGuy_Anim09)

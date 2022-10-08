@@ -296,7 +296,7 @@ EvtScript N(bite) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -410,7 +410,7 @@ EvtScript N(breath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LargePiranha_Putrid_Anim01)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LargePiranha_Putrid_Anim08)
     EVT_WAIT(11)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3AB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3AB)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
