@@ -128,6 +128,7 @@ ApiStatus SetNpcSpeed(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcJumpscale(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcAnimation(Evt* script, s32 isInitialCall);
 ApiStatus GetNpcAnimation(Evt* script, s32 isInitialCall);
+ApiStatus SetNpcAnimationSpeed(Evt* script, s32 isInitialCall);
 ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall);
 ApiStatus NpcJump0(Evt* script, s32 isInitialCall);
 ApiStatus NpcJump1(Evt* script, s32 isInitialCall);

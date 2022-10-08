@@ -2869,7 +2869,37 @@ segments:
     subsegments:
     - [0x337240, c, sparkles]
     - [0x337F10, data]
-  - [0x337FC0, bin] # sparkles, stars_shimmer, shimmer_burst, shimmer_wave, pink_sparkles gfx
+  - name: effect_gfx_sparkles
+    dir: effects/gfx
+    type: code
+    start: 0x337FC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x337FC0, c, sparkles]
+    - start: 0x337FC0
+      type: .data
+      name: sparkles
+      subsegments:
+      - [0x337FC0, ia8, D_09000000_337FC0, 176, 22]
+      - [0x338EE0, gfx, D_09000F20_338EE0]
+      - [0x338F88, vtx, D_09000FC8_338F88]
+      - [0x338FC8, vtx, D_09001008_338FC8]
+      - [0x339008, vtx, D_09001048_339008]
+      - [0x339048, vtx, D_09001088_339048]
+      - [0x339088, vtx, D_090010C8_339088]
+      - [0x3390C8, vtx, D_09001108_3390C8]
+      - [0x339108, vtx, D_09001148_339108]
+      - [0x339148, vtx, D_09001188_339148]
+      - [0x339188, gfx, D_090011C8_339188]
+      - [0x3391A0, gfx, D_090011E0_3391A0]
+      - [0x3391B8, gfx, D_090011F8_3391B8]
+      - [0x3391D0, gfx, D_09001210_3391D0]
+      - [0x3391E8, gfx, D_09001228_3391E8]
+      - [0x339200, gfx, D_09001240_339200]
+      - [0x339218, gfx, D_09001258_339218]
+      - [0x339230, gfx, D_09001270_339230]
+      - [0x339248]
   - name: effect_shape_spell
     dir: effects
     type: code
@@ -2887,7 +2917,28 @@ segments:
     subsegments:
     - [0x33B180, c, gather_energy_pink]
     - [0x33BB70, data]
-  - [0x33BBD0, bin] # gather_energy_pink gfx
+  - name: effect_gfx_gather_energy_pink
+    dir: effects/gfx
+    type: code
+    start: 0x33BBD0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x33BBD0, c, gather_energy_pink]
+    - start: 0x33BBD0
+      type: .data
+      name: gather_energy_pink
+      subsegments:
+      - [0x33BBD0, i4, D_09000000_33BBD0, 64, 16]
+      - [0x33BDD0, i4, D_09000200_33BDD0, 64, 16]
+      - [0x33BFD0, i4, D_09000400_33BFD0, 64, 64]
+      - [0x33C7D0, vtx, D_09000C00_33C7D0]
+      - [0x33C970, gfx, D_09000DA0_33C970]
+      - [0x33C9F8, gfx, D_09000E28_33C9F8]
+      - [0x33CAE0, vtx, D_09000F10_33CAE0]
+      - [0x33CC80, gfx, D_090010B0_33CC80]
+      - [0x33CD08, gfx, D_09001138_33CD08]
+      - [0x33CDE8]
   - name: effect_drop_leaves
     dir: effects
     type: code
@@ -3489,7 +3540,25 @@ segments:
     subsegments:
     - [0x36D020, c, light_rays]
     - [0x36DE10, data]
-  - [0x36DF90, bin] # light_rays gfx
+  - name: effect_gfx_light_rays
+    dir: effects/gfx
+    type: code
+    start: 0x36DF90
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x36DF90, c, light_rays]
+    - start: 0x36DF90
+      type: .data
+      name: light_rays
+      subsegments:
+      - [0x36DF90, i4, D_09000000_36DF90, 16, 16]
+      - [0x36E010, vtx, D_09000080_36E010]
+      - [0x36E040, gfx, D_090000B0_36E040]
+      - [0x36E060, vtx, D_090000D0_36E060]
+      - [0x36E0A0, gfx, D_09000110_36E0A0]
+      - [0x36E0C0, gfx, D_09000130_36E0C0]
+      - [0x36E168, gfx, D_090001D8_36E168]
   - name: effect_lightning
     dir: effects
     type: code
@@ -3498,7 +3567,57 @@ segments:
     subsegments:
     - [0x36E1D0, c, lightning]
     - [0x36ED30, data]
-  - [0x36ED60, bin] # lightning gfx
+  - name: effect_gfx_lightning
+    dir: effects/gfx
+    type: code
+    start: 0x36ED60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x36ED60, c, lightning]
+    - start: 0x36ED60
+      type: .data
+      name: lightning
+      subsegments:
+      - [0x36ED60, i8, D_09000000_36ED60, 128, 32]
+      - [0x36FD60, vtx, D_09001000_36FD60]
+      - [0x36FF40, vtx, D_090011E0_36FF40]
+      - [0x370080, vtx, D_09001320_370080]
+      - [0x370280, vtx, D_09001520_370280]
+      - [0x3703A0, vtx, D_09001640_3703A0]
+      - [0x3705A0, vtx, D_09001840_3705A0]
+      - [0x370620, vtx, D_090018C0_370620]
+      - [0x3706A0, vtx, D_09001940_3706A0]
+      - [0x370720, vtx, D_090019C0_370720]
+      - [0x3707A0, vtx, D_09001A40_3707A0]
+      - [0x370820, vtx, D_09001AC0_370820]
+      - [0x3709A0, vtx, D_09001C40_3709A0]
+      - [0x370B20, vtx, D_09001DC0_370B20]
+      - [0x370CA0, vtx, D_09001F40_370CA0]
+      - [0x370E20, vtx, D_090020C0_370E20]
+      - [0x370FA0, vtx, D_09002240_370FA0]
+      - [0x3711A0, vtx, D_09002440_3711A0]
+      - [0x371220, vtx, D_090024C0_371220]
+      - [0x371250, vtx, D_090024F0_371250]
+      - [0x3713D0, vtx, D_09002670_3713D0]
+      - [0x371460, vtx, D_09002700_371460]
+      - [0x371660, vtx, D_09002900_371660]
+      - [0x3716E0, vtx, D_09002980_3716E0]
+      - [0x371710, vtx, D_090029B0_371710]
+      - [0x371890, vtx, D_09002B30_371890]
+      - [0x371920, vtx, D_09002BC0_371920]
+      - [0x371B20, vtx, D_09002DC0_371B20]
+      - [0x371D20, vtx, D_09002FC0_371D20]
+      - [0x371DA0, vtx, D_09003040_371DA0]
+      - [0x371FA0, vtx, D_09003240_371FA0]
+      - [0x371FE0, gfx, D_09003280_371FE0]
+      - [0x372058, gfx, D_090032F8_372058]
+      - [0x3720D8, gfx, D_09003378_3720D8]
+      - [0x372140, gfx, D_090033E0_372140]
+      - [0x3722E0, gfx, D_09003580_3722E0]
+      - [0x3724D8, gfx, D_09003778_3724D8]
+      - [0x3725E8, gfx, D_09003888_3725E8]
+      - [0x3726A8, gfx, D_09003948_3726A8]
   - name: effect_fire_breath
     dir: effects
     type: code
@@ -3625,7 +3744,27 @@ segments:
     subsegments:
     - [0x37A3F0, c, bulb_glow]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # bulb_glow gfx
+  - name: effect_gfx_bulb_glow
+    dir: effects/gfx
+    type: code
+    start: 0x37ADD0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x37ADD0, c, bulb_glow]
+    - start: 0x37ADD0
+      type: .data
+      name: bulb_glow
+      subsegments:
+      - [0x37ADD0, rgba16, D_09000000_37ADD0, 32, 32]
+      - [0x37B5D0, i8, D_09000800_37B5D0, 32, 32]
+      - [0x37B9D0, i4, D_09000C00_37B9D0, 64, 64]
+      - [0x37C1D0, gfx, D_09001400_37C1D0]
+      - [0x37C288, gfx, D_090014B8_37C288]
+      - [0x37C340, gfx, D_09001570_37C340]
+      - [0x37C3E8, gfx, D_09001618_37C3E8]
+      - [0x37C490, gfx, D_090016C0_37C490]
+      - [0x37C538]
   - name: effect_effect_3D
     dir: effects
     type: code
@@ -3837,7 +3976,30 @@ segments:
     subsegments:
     - [0x389850, c, firework]
     - [0x38A2F0, data]
-  - [0x38A350, bin] # firework gfx
+  - name: effect_gfx_firework
+    dir: effects/gfx
+    type: code
+    start: 0x38A350
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x38A350, c, firework]
+    - start: 0x38A350
+      type: .data
+      name: firework
+      subsegments:
+      - [0x38A350, i4, D_09000000_38A350, 32, 128]
+      - [0x38AB50, vtx, D_09000800_38AB50]
+      - [0x38AB90, vtx, D_09000840_38AB90]
+      - [0x38ABD0, vtx, D_09000880_38ABD0]
+      - [0x38AC10, vtx, D_090008C0_38AC10]
+      - [0x38AC50, vtx, D_09000900_38AC50]
+      - [0x38AC90, gfx, D_09000940_38AC90]
+      - [0x38AD50, gfx, D_09000A00_38AD50]
+      - [0x38AD70, gfx, D_09000A20_38AD70]
+      - [0x38AD90, gfx, D_09000A40_38AD90]
+      - [0x38ADB0, gfx, D_09000A60_38ADB0]
+      - [0x38ADD0, gfx, D_09000A80_38ADD0]
   - name: effect_confetti
     dir: effects
     type: code
@@ -3846,7 +4008,27 @@ segments:
     subsegments:
     - [0x38ADF0, c, confetti]
     - [0x38BAB0, data]
-  - [0x38BBA0, bin] # confetti gfx
+  - name: effect_gfx_confetti
+    dir: effects/gfx
+    type: code
+    start: 0x38BBA0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x38BBA0, c, confetti]
+    - start: 0x38BBA0
+      type: .data
+      name: confetti
+      subsegments:
+      - [0x38BBA0, ia4, D_09000000_38BBA0, 16, 256]
+      - [0x38C3A0, vtx, D_09000800_38C3A0]
+      - [0x38C3E0, vtx, D_09000840_38C3E0]
+      - [0x38C420, vtx, D_09000880_38C420]
+      - [0x38C460, vtx, D_090008C0_38C460]
+      - [0x38C4A0, vtx, D_09000900_38C4A0]
+      - [0x38C4E0, gfx, D_09000940_38C4E0]
+      - [0x38C588, gfx, D_090009E8_38C588]
+      - [0x38C5A0, gfx, D_09000A00_38C5A0]
   - name: effect_snowfall
     dir: effects
     type: code
@@ -4045,7 +4227,24 @@ segments:
     subsegments:
     - [0x3965B0, c, chomp_drop]
     - [0x397010]
-  - [0x397040, bin] # chomp_drop gfx
+  - name: effect_gfx_chomp_drop
+    dir: effects/gfx
+    type: code
+    start: 0x397040
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x397040, c, chomp_drop]
+    - start: 0x397040
+      type: .data
+      name: chomp_drop
+      subsegments:
+      - [0x397040, i4, D_09000000_397040, 64, 64]
+      - [0x397840, ia4, D_09000800_397840, 64, 64]
+      - [0x398040, vtx, D_09001000_398040]
+      - [0x398080, gfx, D_09001040_398080]
+      - [0x398128, gfx, D_090010E8_398128]
+      - [0x3981D0, gfx, D_09001190_3981D0]
   - name: effect_quizmo_stage
     dir: effects
     type: code
@@ -4268,7 +4467,21 @@ segments:
     subsegments:
     - [0x3BA030, c, lightning_bolt]
     - [0x3BAC60]
-  - [0x3BAEA0, bin] # lightning_bolt gfx
+  - name: effect_gfx_lightning_bolt
+    dir: effects/gfx
+    type: code
+    start: 0x3BAEA0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3BAEA0, c, lightning_bolt]
+    - start: 0x3BAEA0
+      type: .data
+      name: lightning_bolt
+      subsegments:
+      - [0x3BAEA0, i8, D_09000000_3BAEA0, 128, 32]
+      - [0x3BBEA0, gfx, D_09001000_3BBEA0]
+      - [0x3BBF58]
   - name: effect_water_splash
     dir: effects
     type: code
@@ -4333,7 +4546,38 @@ segments:
     subsegments:
     - [0x3CC9E0, c, effect_63]
     - [0x3CD670, data]
-  - [0x3CD6E0, bin] # effect_63 gfx
+  - name: effect_gfx_effect_63
+    dir: effects/gfx
+    type: code
+    start: 0x3CD6E0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3CD6E0, c, effect_63]
+    - start: 0x3CD6E0
+      type: .data
+      name: effect_63
+      subsegments:
+      - [0x3CD6E0, i8, D_09000000_3CD6E0, 32, 32]
+      - [0x3CDAE0, i4, D_09000400_3CDAE0, 32, 128]
+      - [0x3CE2E0, i8, D_09000C00_3CE2E0, 32, 32]
+      - [0x3CE6E0, i8, D_09001000_3CE6E0, 32, 64]
+      - [0x3CEEE0, vtx, D_09001800_3CEEE0]
+      - [0x3CEF20, vtx, D_09001840_3CEF20]
+      - [0x3CEF60, vtx, D_09001880_3CEF60]
+      - [0x3CEFA0, vtx, D_090018C0_3CEFA0]
+      - [0x3CEFE0, vtx, D_09001900_3CEFE0]
+      - [0x3CF040, gfx, D_09001960_3CF040]
+      - [0x3CF068, gfx, D_09001988_3CF068]
+      - [0x3CF088, gfx, D_090019A8_3CF088]
+      - [0x3CF0A8, gfx, D_090019C8_3CF0A8]
+      - [0x3CF0C8, gfx, D_090019E8_3CF0C8]
+      - [0x3CF0E8, gfx, D_09001A08_3CF0E8]
+      - [0x3CF1D0, gfx, D_09001AF0_3CF1D0]
+      - [0x3CF250, gfx, D_09001B70_3CF250]
+      - [0x3CF338, vtx, D_09001C58_3CF338]
+      - [0x3CF378, gfx, D_09001C98_3CF378]
+      - [0x3CF398]
   - name: effect_throw_spiny
     dir: effects
     type: code
@@ -4372,7 +4616,21 @@ segments:
     subsegments:
     - [0x3D0500, c, effect_65]
     - [0x3D11B0, data]
-  - [0x3D11E0, bin] # effect_65 gfx
+  - name: effect_gfx_effect_65
+    dir: effects/gfx
+    type: code
+    start: 0x3D11E0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3D11E0, c, effect_65]
+    - start: 0x3D11E0
+      type: .data
+      name: effect_65
+      subsegments:
+      - [0x3D11E0, i4, D_09000000_3D11E0, 64, 32]
+      - [0x3D15E0, gfx, D_09000400_3D15E0]
+      - [0x3D1688]
   - name: effect_tubba_heart_attack
     dir: effects
     type: code
@@ -4514,7 +4772,32 @@ segments:
     subsegments:
     - [0x3D8720, c, cold_breath]
     - [0x3D8F30, data]
-  - [0x3D9100, bin] # ecold_breath gfx
+  - name: effect_gfx_cold_breath
+    dir: effects/gfx
+    type: code
+    start: 0x3D9100
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3D9100, c, cold_breath]
+    - start: 0x3D9100
+      type: .data
+      name: cold_breath
+      subsegments:
+      - [0x3D9100, i8, D_09000000_3D9100, 32, 128]
+      - [0x3DA100, i8, D_09001000_3DA100, 32, 128]
+      - [0x3DB100, gfx, D_09002000_3DB100]
+      - [0x3DB1C0, vtx, D_090020C0_3DB1C0]
+      - [0x3DB200, vtx, D_09002100_3DB200]
+      - [0x3DB240, vtx, D_09002140_3DB240]
+      - [0x3DB280, vtx, D_09002180_3DB280]
+      - [0x3DB2C0, vtx, D_090021C0_3DB2C0]
+      - [0x3DB300, gfx, D_09002200_3DB300]
+      - [0x3DB320, gfx, D_09002220_3DB320]
+      - [0x3DB340, gfx, D_09002240_3DB340]
+      - [0x3DB360, gfx, D_09002260_3DB360]
+      - [0x3DB380, gfx, D_09002280_3DB380]
+      - [0x3DB3A0, gfx, D_090022A0_3DB3A0]
   - name: effect_embers
     dir: effects
     type: code
@@ -4523,7 +4806,23 @@ segments:
     subsegments:
     - [0x3DB460, c, embers]
     - [0x3DBEA0, data]
-  - [0x3DBF40, bin] # embers gfx
+  - name: effect_gfx_embers
+    dir: effects/gfx
+    type: code
+    start: 0x3DBF40
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3DBF40, c, embers]
+    - start: 0x3DBF40
+      type: .data
+      name: embers
+      subsegments:
+      - [0x3DBF40, i4, D_09000000_3DBF40, 16, 64]
+      - [0x3DC140, i4, D_09000200_3DC140, 16, 16]
+      - [0x3DC1C0, gfx, D_09000280_3DC1C0]
+      - [0x3DC2B0, vtx, D_09000370_3DC2B0]
+      - [0x3DC2F0, gfx, D_090003B0_3DC2F0]
   - name: effect_hieroglyphs
     dir: effects
     type: code
@@ -4604,7 +4903,22 @@ segments:
     subsegments:
     - [0x3E43A0, c, firework_rocket]
     - [0x3E5060, data]
-  - [0x3E5350, bin] # firework_rocket gfx
+  - name: effect_gfx_firework_rocket
+    dir: effects/gfx
+    type: code
+    start: 0x3E5350
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3E5350, c, firework_rocket]
+    - start: 0x3E5350
+      type: .data
+      name: firework_rocket
+      subsegments:
+      - [0x3E5350, i4, D_09000000_3E5350, 16, 16]
+      - [0x3E53D0, gfx, D_09000080_3E53D0]
+      - [0x3E5478, vtx, D_09000128_3E5478]
+      - [0x3E54A8, gfx, D_09000158_3E54A8]
   - name: effect_peach_star_beam
     dir: effects
     type: code
@@ -5074,7 +5388,45 @@ segments:
     subsegments:
     - [0x414BA0, c, effect_86]
     - [0x415020]
-  - [0x415060, bin] # effect_86 gfx
+  - name: effect_gfx_effect_86
+    dir: effects/gfx
+    type: code
+    start: 0x415060
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x415060, c, effect_86]
+    - start: 0x415060
+      type: .data
+      name: effect_86
+      subsegments:
+      - [0x415060, i4, D_09000000_415060, 256, 16]
+      - [0x415860, gfx, D_09000800_415860]
+      - [0x415908, vtx, D_090008A8_415908]
+      - [0x415948, vtx, D_090008E8_415948]
+      - [0x415988, vtx, D_09000928_415988]
+      - [0x4159C8, vtx, D_09000968_4159C8]
+      - [0x415A08, vtx, D_090009A8_415A08]
+      - [0x415A48, vtx, D_090009E8_415A48]
+      - [0x415A88, vtx, D_09000A28_415A88]
+      - [0x415AC8, vtx, D_09000A68_415AC8]
+      - [0x415B08, vtx, D_09000AA8_415B08]
+      - [0x415B48, vtx, D_09000AE8_415B48]
+      - [0x415B88, vtx, D_09000B28_415B88]
+      - [0x415BC8, vtx, D_09000B68_415BC8]
+      - [0x415C08, gfx, D_09000BA8_415C08]
+      - [0x415C28, gfx, D_09000BC8_415C28]
+      - [0x415C48, gfx, D_09000BE8_415C48]
+      - [0x415C68, gfx, D_09000C08_415C68]
+      - [0x415C88, gfx, D_09000C28_415C88]
+      - [0x415CA8, gfx, D_09000C48_415CA8]
+      - [0x415CC8, gfx, D_09000C68_415CC8]
+      - [0x415CE8, gfx, D_09000C88_415CE8]
+      - [0x415D08, gfx, D_09000CA8_415D08]
+      - [0x415D28, gfx, D_09000CC8_415D28]
+      - [0x415D48, gfx, D_09000CE8_415D48]
+      - [0x415D68, gfx, D_09000D08_415D68]
+      - [0x415D88]
 
 #######################
 ### Action Commands ###
@@ -5766,11 +6118,77 @@ segments:
     type: code
     start: 0x59E6E0
     vram: 0x80218000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
-    - [0x59E6E0, c]
-    - [0x59F420, c]
-    - [0x59F4D0, c]
-    - [0x59F530, data]
+    - [0x59E6E0, c, anim/unused_gfx]
+    - [0x59E6E0, c, anim/lava_piranha_anim]
+    - [0x59E6E0, c, actor/lava_piranha]
+    - [0x59F420, c, actor/petit_piranha]
+    - [0x59F4D0, c, actor/lava_bud]
+    - [0x59F530, c, actor/petit_piranha_bomb]
+    - [0x59F530, c, stage/kzn_01]
+    - [0x59F530, c, stage/kzn_01b]
+    - [0x59F530, c, stage/kzn_02]
+    - [0x59F530, c, stage/kzn_04]
+    - [0x59F530, c, stage/kzn_04b]
+    - [0x59F530, c, stage/kzn_04c]
+    - [0x59F530, c, stage/kzn_05]
+    - [0x59F530, c, area]
+    - start: 0x59F530
+      type: .data
+      name: anim/unused_gfx
+      subsegments:
+      - [0x59F530, vtx, vtx1]
+      - [0x59F6B0, vtx, vtx2]
+      - [0x59F7D0, vtx, vtx3]
+      - [0x59F930, vtx, vtx4]
+      - [0x59FA30, vtx, vtx5]
+      - [0x59FB90, vtx, vtx6]
+      - [0x59FD30, vtx, vtx7]
+      - [0x59FEB0, vtx, vtx8]
+      - [0x5A0030, vtx, vtx9]
+      - [0x5A0190, vtx, vtx10]
+      - [0x5A02B0, vtx, vtx11]
+      - [0x5A02E0, vtx, vtx12]
+      - [0x5A0310, vtx, vtx13]
+      - [0x5A0340, vtx, vtx14]
+      - [0x5A0370, vtx, vtx15]
+      - [0x5A03A0, vtx, vtx16]
+      - [0x5A03D0, vtx, vtx17]
+      - [0x5A0400, vtx, vtx18]
+      - [0x5A0430, gfx, gfx1]
+      - [0x5A0500, gfx, gfx2]
+      - [0x5A0540, gfx, gfx3]
+      - [0x5A0590, gfx, gfx4]
+      - [0x5A05E0, gfx, gfx5]
+      - [0x5A0630, gfx, gfx6]
+      - [0x5A0690, gfx, gfx7]
+      - [0x5A06E0, gfx, gfx8]
+      - [0x5A0720, gfx, gfx9]
+      - [0x5A0770, gfx, gfx10]
+      - [0x5A07B0, gfx, gfx11]
+    - [0x5A0800, .data, anim/lava_piranha_anim]
+    - start: 0x5A2E80
+      type: .data
+      name: actor/lava_piranha
+      subsegments:
+      - [0x5A2E80]
+      - [0x5A3020, ci4, lava_piranha_vine, 64, 32]
+      - [0x5A3420, palette, lava_piranha_vine]
+      - [0x5A3620, gfx, lava_piranha_vine]
+      - [0x5A36F8]
+    - [0x5AA5B0, .data, actor/petit_piranha]
+    - [0x5AB7A0, .data, actor/lava_bud]
+    - [0x5AEE00, .data, actor/petit_piranha_bomb]
+    - [0x5AF060, .data, stage/kzn_01]
+    - [0x5AF100, .data, stage/kzn_01b]
+    - [0x5AF190, .data, stage/kzn_02]
+    - [0x5AF6C0, .data, stage/kzn_04]
+    - [0x5AFC50, .data, stage/kzn_04b]
+    - [0x5B01E0, .data, stage/kzn_04c]
+    - [0x5B0720, .data, stage/kzn_05]
+    - [0x5B1070, .data, area]
+    - [0x5B1240]
   - dir: battle/area_flo
     type: code
     start: 0x5B14B0
@@ -5845,24 +6263,31 @@ segments:
     start: 0x608AB0
     vram: 0x80218000
     subsegments:
-    - [0x608AB0, c]
-    - [0x608CB0, c]
-    - [0x609B30, c]
-    - [0x609FD0, c]
-    - [0x60A470, c]
-    - [0x60ABD0, data]
+    - [0x608AB0, c, actor/blooper]
+    - [0x608CB0, c, actor/electro_blooper]
+    - [0x609130, c, actor/super_blooper]
+    - [0x6094D0, c, actor/blooper_baby]
+    - [0x609690, c, stage/tik_01]
+    - [0x609B30, c, stage/tik_02]
+    - [0x609FD0, c, stage/tik_03]
+    - [0x60A470, c, stage/tik_04]
+    - [0x60A8C0, c, stage/tik_05]
+    - [0x60ABD0, c, area]
+    - [0x60ABD0]
   - dir: battle/area_tik3
     type: code
     start: 0x6186F0
     vram: 0x80218000
     subsegments:
-    - [0x6186F0, c]
-    - [0x6187C0, c]
-    - [0x618A00, c]
-    - [0x618EA0, c]
-    - [0x619340, c]
-    - [0x6197E0, c]
-    - [0x619F40, data]
+    - [0x6186F0, c, actor/swooper]
+    - [0x6187C0, c, actor/swoopula]
+    - [0x618A00, c, stage/tik_01]
+    - [0x618EA0, c, stage/tik_02]
+    - [0x619340, c, stage/tik_03]
+    - [0x6197E0, c, stage/tik_04]
+    - [0x619C30, c, stage/tik_05]
+    - [0x619F40, c, area]
+    - [0x619F40]
   - dir: battle/area_sam
     type: code
     start: 0x623BA0
@@ -6027,9 +6452,10 @@ segments:
     start: 0x6DBDA0
     vram: 0x80218000
     subsegments:
-    - [0x6DBDA0, c]
-    - [0x6DC2F0, c]
-    - [0x6DC340, data]
+    - [0x6DBDA0, c, area]
+    - [0x6DBDA0, c, actor/kammy_koopa]
+    - [0x6DC2F0, c, stage/kpa_05]
+    - [0x6DC340]
   - dir: battle/area_dig
     type: code
     start: 0x6DDDC0

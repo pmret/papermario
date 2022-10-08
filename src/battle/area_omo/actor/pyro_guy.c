@@ -293,7 +293,7 @@ EvtScript N(takeTurn_8022D344) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2EF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PyroGuy_Anim05)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

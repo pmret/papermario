@@ -150,9 +150,9 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_KZN2] = {
         BTL_AREA(area_kzn2),
         .name = "エリア ＫＺＮ２",
-        .battles = 0x8022AA08,
-        .stages = 0x8022AA44,
-        .dmaTable = 0x8022AA84,
+        .battles = &b_area_kzn2_formationTable,
+        .stages = &b_area_kzn2_stageTable,
+        .dmaTable = b_area_kzn2_dmaTable,
     },
     [BTL_AREA_FLO] = {
         BTL_AREA(area_flo),
@@ -175,14 +175,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_TIK2] = {
         BTL_AREA(area_tik2),
         .name = "エリア ＴＩＫ２",
-        .battles = 0x80227A90,
-        .stages = 0x80227AE0,
+        .battles = &b_area_tik2_formationTable,
+        .stages = &b_area_tik2_stageTable,
     },
     [BTL_AREA_TIK3] = {
         BTL_AREA(area_tik3),
         .name = "エリア ＴＩＫ３",
-        .battles = 0x802232E8,
-        .stages = 0x8022334C,
+        .battles = &b_area_tik3_formationTable,
+        .stages = &b_area_tik3_stageTable,
     },
     [BTL_AREA_SAM] = {
         BTL_AREA(area_sam),
@@ -241,8 +241,8 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_KKJ] = {
         BTL_AREA(area_kkj),
         .name = "エリア ＫＫＪ",
-        .battles = 0x802185BC,
-        .stages = 0x802185E4,
+        .battles = &b_area_kkj_formationTable,
+        .stages = &b_area_kkj_stageTable,
     },
     [BTL_AREA_DIG] = {
         BTL_AREA(area_dig),

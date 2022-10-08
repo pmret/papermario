@@ -295,7 +295,7 @@ EvtScript N(80219BE0) = {
     EVT_ADD(LVar1, 16)
     EVT_ADD(LVar2, 2)
     EVT_CALL(PlayEffect, EFFECT_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(3.0), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2078)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2078)
     EVT_CALL(StartRumble, 11)
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))

@@ -736,11 +736,11 @@ EvtScript N(takeTurn_Chan) = {
         EVT_WAIT(5)
         EVT_CALL(PlayEffect, 0x1D, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Chan_ShellSpin)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, -127, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20D3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)

@@ -299,7 +299,7 @@ EvtScript N(basicAttack) = {
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2EF)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EF)
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
@@ -353,7 +353,7 @@ EvtScript N(sleepySpin) = {
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E2)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_SET(LVar0, 0)
     EVT_LOOP(30)
@@ -399,7 +399,7 @@ EvtScript N(sleepySpin) = {
                     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
                 EVT_END_THREAD
             EVT_END_IF
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E3)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0B)
             EVT_SET(LVar0, 0)
             EVT_LOOP(15)
@@ -411,7 +411,7 @@ EvtScript N(sleepySpin) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E4)
             EVT_THREAD
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(20)
@@ -620,55 +620,55 @@ s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
 EvtScript N(8022671C) = {
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0B)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0D)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0B)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0D)
     EVT_WAIT(4)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E5)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0C)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
@@ -679,7 +679,7 @@ EvtScript N(8022671C) = {
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(func_8021878C_512D5C, LVar0, LVar1, LVar2, LVar3, 48)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E6)
     EVT_SET(LVar0, 0)
     EVT_LOOP(48)
         EVT_ADD(LVar0, 30)
@@ -693,7 +693,7 @@ EvtScript N(8022671C) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GrooveGuy_Anim0A)
     EVT_WAIT(8)
     EVT_RETURN
@@ -760,7 +760,7 @@ EvtScript N(80226DEC) = {
     EVT_END_THREAD
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))
     EVT_CALL(RunToGoal, LVarB, 0, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F3)
     EVT_CALL(SetAnimation, LVarB, 1, ANIM_GrooveGuy_Anim0A)
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)

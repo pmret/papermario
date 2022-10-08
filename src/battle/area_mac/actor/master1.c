@@ -231,9 +231,9 @@ EvtScript N(takeTurn_8022AA54) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_Idle)
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BB)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20BB)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_WindUpLoop)
     EVT_WAIT(10)
@@ -273,7 +273,7 @@ EvtScript N(takeTurn_8022AA54) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3ED)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)

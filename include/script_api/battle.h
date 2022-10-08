@@ -334,6 +334,7 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall);
 ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall);
 ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall);
 ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall);
+ApiStatus DispatchEventPlayer(Evt* script, s32 isInitialCall);
 
 extern EvtScript PlayerScriptDispatcher;
 extern EvtScript PeachScriptDispatcher;

@@ -219,13 +219,13 @@ EvtScript N(80220DB0) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
     EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 15, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
     EVT_RETURN
     EVT_END
 };
@@ -469,7 +469,7 @@ EvtScript N(80221CD4) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaKing_Still)
