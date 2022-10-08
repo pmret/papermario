@@ -40,7 +40,7 @@ void func_80240BB8_A11438(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80241C2C_A124AC);
 }
 
-ApiStatus func_80240C08_A11488(Evt* script) {
+ApiStatus func_80240C08_A11488(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     D_80241C2C_A124AC = evt_get_variable(script, *args++);
@@ -53,7 +53,7 @@ void func_80240C34_A114B4(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80241C30_A124B0);
 }
 
-ApiStatus func_80240C84_A11504(Evt* script) {
+ApiStatus func_80240C84_A11504(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     D_80241C30_A124B0 = evt_get_variable(script, *args++);

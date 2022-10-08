@@ -5,6 +5,7 @@
 #define evt_get_variable dead_evt_get_variable
 #define evt_set_variable dead_evt_set_variable
 #define evt_get_float_variable dead_evt_get_float_variable
+#define sin_rad dead_sin_rad
 #define cos_rad dead_cos_rad
 #define evt_set_float_variable dead_evt_set_float_variable
 #define fx_sparkles dead_fx_sparkles
@@ -112,5 +113,11 @@
 #define osVirtualToPhysical dead_osVirtualToPhysical
 #define nuGfxZBuffer dead_nuGfxZBuffer
 #define nuGfxCfb_ptr dead_nuGfxCfb_ptr
+#define guMtxF2L dead_guMtxF2L
+#define mdl_get_copied_vertices dead_mdl_get_copied_vertices
+#define mdl_get_copied_gfx dead_mdl_get_copied_gfx
+#define gMatrixListPos dead_gMatrixListPos
+#define gDisplayContext dead_gDisplayContext
+#define fx_sun_undeclared fx_sun
 
 #endif

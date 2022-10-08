@@ -607,8 +607,6 @@ ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// graphics macros
-#ifdef NON_EQUIVALENT
 void N(func_80240504_CCB814)(void) {
     Matrix4f matrix;
     Vtx* sp50;
@@ -634,7 +632,7 @@ void N(func_80240504_CCB814)(void) {
     mdl_get_copied_vertices(0, &sp50, &sp54, &sp58);
 
     new_var = 0;
-    do {} while (new_var); // dumb but it gets things so close
+    while (new_var); // TODO required to match
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -642,9 +640,6 @@ void N(func_80240504_CCB814)(void) {
 
     N(D_80243B14_CCEE24) += 1.0f;
 }
-#else
-INCLUDE_ASM(void, "world/area_flo/flo_14/CCB310", flo_14_func_80240504_CCB814, void);
-#endif
 
 void N(func_802407D4_CCBAE4)(void) {
     s32 i;
