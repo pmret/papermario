@@ -1,8 +1,15 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000450[];
-extern Gfx* D_E0098510[];
+extern Gfx D_090003A0_396490[];
+extern Gfx D_090003E0_3964D0[];
+extern Gfx D_09000410_396500[];
+extern Gfx D_09000450_396540[];
+
+Gfx* D_E0098510[] = {
+    D_090003A0_396490, D_090003E0_3964D0, D_09000410_396500, D_090003A0_396490,
+    D_090003E0_3964D0, D_09000410_396500, NULL, NULL
+};
 
 void floating_rock_init(EffectInstance* effect);
 void floating_rock_update(EffectInstance* effect);
@@ -119,7 +126,7 @@ void floating_rock_appendGfx(void* effect) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     }
 
-    gSPDisplayList(gMasterGfxPos++, D_09000450);
+    gSPDisplayList(gMasterGfxPos++, D_09000450_396540);
     gSPDisplayList(gMasterGfxPos++, D_E0098510[data->unk_00]);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);

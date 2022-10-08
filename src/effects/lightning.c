@@ -1,8 +1,24 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx* D_E006CB60[];
-extern Gfx* D_E006CB78[];
+extern Gfx D_09003280_371FE0[];
+extern Gfx D_090032F8_372058[];
+extern Gfx D_09003378_3720D8[];
+extern Gfx D_090033E0_372140[];
+extern Gfx D_09003580_3722E0[];
+extern Gfx D_09003778_3724D8[];
+extern Gfx D_09003888_3725E8[];
+extern Gfx D_09003948_3726A8[];
+
+Gfx* D_E006CB60[] = {
+    D_09003778_3724D8, D_09003580_3722E0, D_090033E0_372140,
+    D_09003378_3720D8, D_090032F8_372058, D_09003280_371FE0
+};
+
+Gfx* D_E006CB78[] = {
+    D_09003888_3725E8, D_09003888_3725E8, D_09003888_3725E8,
+    D_09003948_3726A8, D_09003948_3726A8, D_09003948_3726A8
+};
 
 void lightning_init(EffectInstance* effect);
 void lightning_update(EffectInstance* effect);

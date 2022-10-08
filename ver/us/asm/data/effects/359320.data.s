@@ -1,6 +1,0 @@
-.include "macro.inc"
-
-.section .data
-
-dlabel D_E004AE60
-.word 0x090009A0, 0x090009A0, 0x09000A80, 0x09000A80, 0x09000A80, 0x09000A80, 0x00000000, 0x00000000

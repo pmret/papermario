@@ -2,7 +2,9 @@
 #include "effects_internal.h"
 
 extern Gfx D_09000540_365EF0[];
-extern Gfx* D_E0064A60[];
+extern Gfx D_090005A0_365F50[];
+
+Gfx* D_E0064A60[] = { D_090005A0_365F50, D_090005A0_365F50, NULL, NULL };
 
 void green_impact_init(EffectInstance* effect);
 void green_impact_update(EffectInstance* effect);

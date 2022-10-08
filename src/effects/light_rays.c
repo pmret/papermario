@@ -1,9 +1,26 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx* D_E006ADF0[];
-extern Gfx* D_E006AE00[];
-extern s32 D_E006AE10[];
+extern Gfx D_090000B0_36E040[];
+extern Gfx D_09000110_36E0A0[];
+extern Gfx D_09000130_36E0C0[];
+extern Gfx D_090001D8_36E168[];
+
+Gfx* D_E006ADF0[] = {
+    D_09000110_36E0A0, D_09000110_36E0A0, D_090000B0_36E040, D_090000B0_36E040
+};
+
+Gfx* D_E006AE00[] = {
+    D_09000130_36E0C0, D_09000130_36E0C0, D_090001D8_36E168, D_090001D8_36E168
+};
+
+s32 D_E006AE10[] = {
+    0, -20, 0, 1, 18, -10, -60, 45, -1, 4, -20, -20, 90, 1, 1, -10,
+    -60, 135, 1, -4, 0, -20, 180, -8, 1, -10, -60, 225, -1, -1, -20, -20,
+    270, 1, -9, -10, -60, 315, 4, 4, 0, 10, 22, 4, 1, -10, 20, 67,
+    1, -1, -20, 10, 112, -1, -1, -10, 20, 157, -8, 1, 0, 10, 202, 1,
+    -4, -10, 20, 247, 1, -18, -20, 10, 292, -1, 9, -10, 20, 337, 1, 1
+};
 
 void light_rays_init(EffectInstance* effect);
 void light_rays_update(EffectInstance* effect);
