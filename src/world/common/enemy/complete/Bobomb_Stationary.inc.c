@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Bobomb.h"
 
 #include "world/common/enemy/StationaryAI.inc.c"
 

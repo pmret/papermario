@@ -4,7 +4,7 @@
 
 #include "common/ShrinkActor.inc.c"
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 #include "common/GetSelectedMoveID.inc.c"
 

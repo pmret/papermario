@@ -474,7 +474,7 @@ EvtScript N(80241CC4) = {
     EVT_SET(LVarF, 0)
     EVT_LOOP(344)
         EVT_ADD(LVarF, 1)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, -210, 0, 344, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, -210, 0, 344, 0, 0)
         EVT_SETF(LVar1, LVar0)
         EVT_MULF(LVar1, EVT_FLOAT(-3.0))
         EVT_CALL(TranslateModel, 86, EVT_FLOAT(1.3134765625), LVar0, EVT_FLOAT(-0.56640625))
@@ -574,7 +574,7 @@ EvtScript N(802423F8) = {
             EVT_SET(LVarF, 0)
             EVT_LOOP(344)
                 EVT_ADD(LVarF, 1)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, 0, -210, 344, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, 0, -210, 344, 0, 0)
                 EVT_SETF(LVar1, LVar0)
                 EVT_MULF(LVar1, EVT_FLOAT(-3.0))
                 EVT_CALL(TranslateModel, 86, EVT_FLOAT(1.3134765625), LVar0, EVT_FLOAT(-0.56640625))
@@ -665,7 +665,7 @@ EvtScript N(80242A2C) = {
             EVT_END_IF
         EVT_END_IF
         EVT_ADD(LVarF, 1)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, -350, 0, 400, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, -350, 0, 400, 0, 0)
         EVT_SETF(MapVar(11), LVarF)
         EVT_MULF(MapVar(11), EVT_FLOAT(1.6))
         EVT_SETF(LVar2, LVar0)
@@ -706,7 +706,7 @@ ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Identical to UnkFloatFunc except for the presence of the fabsf
+// Identical to CosInterpMinMax except for the presence of the fabsf
 ApiStatus N(func_80240340_CE3A30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
@@ -774,4 +774,4 @@ ApiStatus N(func_80240784_CE3E74)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"

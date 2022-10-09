@@ -556,7 +556,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             y = itemEntity->position.y + 12.0f;
             z = itemEntity->position.z;
             hitDepth = 1000.0f;
-            npc_raycast_down_sides(0x20000, &x, &y, &z, &hitDepth);
+            npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
             shadow->position.x = x;
             shadow->position.y = y;
             shadow->position.z = z;
@@ -658,7 +658,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     posY = item->position.y + 12.0f;
     posZ = item->position.z;
     depth = 1000.0f;
-    npc_raycast_down_sides(0x20000, &posX, &posY, &posZ, &depth);
+    npc_raycast_down_sides(COLLISION_CHANNEL_20000, &posX, &posY, &posZ, &depth);
     shadow->position.x = posX;
     shadow->position.y = posY;
     shadow->position.z = posZ;
@@ -790,7 +790,7 @@ void update_item_entities(void) {
                                 y = entity->position.y + 12.0f;
                                 z = entity->position.z;
                                 hitDepth = 1000.0f;
-                                npc_raycast_down_sides(0x20000, &x, &y, &z, &hitDepth);
+                                npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
 
                                 shadow->position.x = x;
                                 shadow->position.y = y;
@@ -1558,9 +1558,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outDepth = temp + physData->verticalVelocity;
 
                     if (physData->unk_20 == 0) {
-                        hit = npc_raycast_up(0x20000, &outX, &outY, &outZ, &outDepth);
+                        hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     } else {
-                        hit = npc_raycast_up(0x20000, &outX, &outY, &outZ, &outDepth);
+                        hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     }
 
                     if (hit && outDepth < temp) {
@@ -1579,9 +1579,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outZ = item->position.z;
 
                     if (physData->unk_20 == 0) {
-                        hit = npc_test_move_complex_with_slipping(0x20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
+                        hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
                     } else {
-                        hit = npc_test_move_simple_with_slipping(0x20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
+                        hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
                     }
 
                     if (hit) {
@@ -1608,9 +1608,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                         outZ = item->position.z;
                         outDepth = -physData->verticalVelocity + 12.0f;
                         if (physData->unk_20 == 0) {
-                            hit = npc_raycast_down_sides(0x20000, &outX, &outY, &outZ, &outDepth);
+                            hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                         } else {
-                            hit = npc_raycast_down_around(0x20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
+                            hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
                         }
                     } else {
                         outX = item->position.x;

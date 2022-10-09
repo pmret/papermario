@@ -2,26 +2,19 @@
 /// @brief Gusty Gulch - Windmill Interior
 
 #include "common.h"
-#include "../arn.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../arn.h"
+#include "mapfs/arn_08_shape.h"
+#include "mapfs/arn_08_hit.h"
+
+#include "sprite/npc/TubbasHeart.h"
+#include "sprite/npc/Yakkey.h"
+
+enum {
+	NPC_TubbasHeart             = 0,
+	NPC_Yakkey                  = 1,
+};
+
 #define NAMESPACE arn_08
-
-f32 player_check_collision_below(f32, s32*);
-f32 func_800E34D8(void);
-
-ApiStatus N(func_80240000_BF47A0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024008C_BF482C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802400C0_BF4860)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802400D4_BF4874)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802400F4_BF4894)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024019C_BF493C)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80241828);
-extern EvtScript N(80240B50);
-extern EvtScript N(80240BA0);
-extern EvtScript N(8024118C);
-extern EvtScript N(80240300);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Bobomb.h"
 
 MobileAISettings N(AISettings_Bobomb) = {
     .moveSpeed = 1.5f,

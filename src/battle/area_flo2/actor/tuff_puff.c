@@ -173,7 +173,7 @@ EvtScript N(nextTurn) = {
     EVT_END
 };
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(idle) = {
     EVT_SET(LVarF, 0)
@@ -181,16 +181,16 @@ EvtScript N(idle) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_2), LVarA)
         EVT_SWITCH(LVarA)
             EVT_CASE_EQ(0)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
                 EVT_ADD(LVarF, 1)
             EVT_CASE_EQ(1)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.95), EVT_FLOAT(1.05), 15, 0, 0)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(1.05), EVT_FLOAT(0.95), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.95), EVT_FLOAT(1.05), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.05), EVT_FLOAT(0.95), 15, 0, 0)
                 EVT_ADD(LVarF, 3)
             EVT_CASE_EQ(2)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.9), EVT_FLOAT(1.1), 15, 0, 0)
-                EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(1.1), EVT_FLOAT(0.9), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.9), EVT_FLOAT(1.1), 15, 0, 0)
+                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.1), EVT_FLOAT(0.9), 15, 0, 0)
                 EVT_ADD(LVarF, 5)
         EVT_END_SWITCH
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar2)

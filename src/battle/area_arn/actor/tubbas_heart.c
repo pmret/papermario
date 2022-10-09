@@ -142,7 +142,7 @@ EvtScript N(init_80223DA0) = {
     EVT_END
 };
 
-ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
+ApiStatus N(func_80218680_4FF0D0)(Evt* script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
@@ -174,7 +174,7 @@ EvtScript N(idle_80223E98) = {
                 EVT_ADD(LVar2, 6)
                 EVT_SETF(LVar4, EVT_FLOAT(0.4))
             EVT_END_IF
-            EVT_CALL(func_80218680_4FF0D0, LVar0, LVar1, LVar2, LVar3, LVar4)
+            EVT_CALL(N(func_80218680_4FF0D0), LVar0, LVar1, LVar2, LVar3, LVar4)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT(1)

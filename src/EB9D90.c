@@ -50,7 +50,7 @@ ApiStatus func_802410E4_EB9F34(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 #include "world/common/SyncStatusMenu.inc.c"
 

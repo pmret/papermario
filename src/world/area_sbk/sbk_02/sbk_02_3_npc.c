@@ -336,7 +336,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_WAIT(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-        EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_SET(GF_TradingEvent2_Active, FALSE)
         EVT_RETURN
@@ -365,7 +365,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
             EVT_WAIT(10)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_SET(GF_TradingEvent2_Active, FALSE)
             EVT_ADD(GB_TradingEvent_Count, 1)

@@ -23,7 +23,7 @@ ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
 
 ApiStatus N(func_80240000_BFD880)(void);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
-ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
+ApiStatus N(RemovePadlock)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
