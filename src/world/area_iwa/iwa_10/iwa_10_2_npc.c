@@ -111,12 +111,12 @@ EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
 EvtScript N(EVS_NpcInteract_Dryite) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_IWA_02, FALSE)
+            EVT_IF_EQ(AF_IWA_SpokeWIthDryite, FALSE)
                 EVT_SET(LVar0, MSG_CH2_0005)
-                EVT_SET(AF_IWA_02, TRUE)
+                EVT_SET(AF_IWA_SpokeWIthDryite, TRUE)
             EVT_ELSE
                 EVT_SET(LVar0, MSG_CH2_0006)
-                EVT_SET(AF_IWA_02, TRUE)
+                EVT_SET(AF_IWA_SpokeWIthDryite, TRUE)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
             EVT_SET(LVar0, MSG_CH2_0007)

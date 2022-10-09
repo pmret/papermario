@@ -1,195 +1,7 @@
 #include "iwa_02.h"
 
-EvtScript N(D_802414B0_917220) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar1, 30)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_8024154C_9172BC) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar1, 30)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim12)
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(D_802415CC_91733C) = {
-    .moveSpeed = 1.8f,
-    .moveTime = 30,
-    .waitTime = 30,
-    .alertRadius = 90.0f,
-    .alertOffsetDist = 70.0f,
-    .playerSearchInterval = 2,
-    .chaseSpeed = 3.0f,
-    .chaseTurnRate = 90,
-    .chaseUpdateInterval = 25,
-    .chaseRadius = 120.0f,
-    .chaseOffsetDist = 70.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_802415FC_91736C) = {
-    EVT_CALL(func_800445D4, LVar0)
-    EVT_IF_EQ(LVar0, 100)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
-        EVT_LABEL(10)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
-        EVT_IF_NE(LVar3, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar2, 30)
-        EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, FALSE)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar4, LVar5, LVar6)
-        EVT_ADD(LVar5, 30)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
-        EVT_CALL(NpcJump0, NPC_SELF, LVar4, LVar5, LVar6, 20)
-        EVT_CALL(SetNpcPos, LVar0, 0, -1000, 0)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
-        EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
-        EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802415CC_91733C)))
-        EVT_RETURN
-        EVT_END
-};
-
-NpcSettings N(80241848) = {
-    .height = 24,
-    .radius = 22,
-    .level = 8,
-    .otherAI = &N(D_802414B0_917220),
-    .ai = &N(D_802415FC_91736C),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-    .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
-};
-
-NpcSettings N(80241874) = {
-    .height = 24,
-    .radius = 22,
-    .level = 8,
-    .otherAI = &N(D_8024154C_9172BC),
-    .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
-};
-
-EvtScript N(EVS_NpcAuxAI_MontyMole_01) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 50)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcAuxAI_MontyMole_02) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 50)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim13)
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(D_802419BC_91772C) = {
-    .moveSpeed = 1.8f,
-    .moveTime = 30,
-    .waitTime = 30,
-    .alertRadius = 90.0f,
-    .alertOffsetDist = 70.0f,
-    .playerSearchInterval = 2,
-    .chaseSpeed = 3.0f,
-    .chaseTurnRate = 90,
-    .chaseUpdateInterval = 25,
-    .chaseRadius = 120.0f,
-    .chaseOffsetDist = 70.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_MontyMole_01) = {
-    EVT_CALL(func_800445D4, LVar0)
-    EVT_IF_EQ(LVar0, 100)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
-        EVT_LABEL(10)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar2, 130)
-        EVT_CALL(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
-        EVT_IF_NE(LVar3, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar2, 30)
-        EVT_ADD(LVar3, 50)
-        EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        EVT_SUB(LVar2, 30)
-        EVT_ADD(LVar3, 80)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
-        EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
-        EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
-    EVT_END_IF
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802419BC_91772C)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(missing_80241C84_1C84) = {
-    EVT_RETURN
-    EVT_END
-};
-
-#include "world/common/enemy/complete/MontyMole.inc.c"
-
-NpcSettings N(NpcSettings_MontyMole_01) = {
-    .height = 24,
-    .radius = 22,
-    .level = 8,
-    .otherAI = &N(EVS_NpcAuxAI_MontyMole_01),
-    .ai = &N(EVS_NpcAI_MontyMole_01),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-    .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
-};
-
-NpcSettings N(NpcSettings_MontyMole_02) = {
-    .height = 24,
-    .radius = 22,
-    .level = 8,
-    .otherAI = &N(EVS_NpcAuxAI_MontyMole_02),
-    .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
-};
-
+#include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
+#include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
 #include "world/common/enemy/complete/Cleft.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_Bubulb) = {
@@ -277,8 +89,8 @@ StaticNpc N(NpcData_Cleft_03) = {
 
 StaticNpc N(NpcData_MontyMole_01)[] = {
     {
-        .id = NPC_MontyMole_01,
-        .settings = &N(NpcSettings_MontyMole_01),
+        .id = NPC_MontyMole,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush),
         .pos = { 867.0f, 0.0f, 101.0f },
         .yaw = 0,
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
@@ -295,12 +107,12 @@ StaticNpc N(NpcData_MontyMole_01)[] = {
                 .detectSize = { 150 },
             }
         },
-        .animations = MONTY_MOLE_ANIMS,
+        .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     {
-        .id = NPC_MontyMole_02,
-        .settings = &N(NpcSettings_MontyMole_02),
+        .id = NPC_MontyMole_Hole,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
         .pos = { 867.0f, 0.0f, 101.0f },
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_AI | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
@@ -321,18 +133,18 @@ StaticNpc N(NpcData_MontyMole_01)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = MONTY_MOLE_ANIMS,
+        .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
 };
 
 EvtScript N(EVS_Bulbulb_Conversation) = {
-    EVT_IF_EQ(AF_IWA_01, FALSE)
+    EVT_IF_EQ(AF_IWA_SpokeWithBulbulb, FALSE)
         EVT_SET(LVar2, LVar0)
-        EVT_SET(AF_IWA_01, TRUE)
+        EVT_SET(AF_IWA_SpokeWithBulbulb, TRUE)
     EVT_ELSE
         EVT_SET(LVar2, LVar1)
-        EVT_SET(AF_IWA_01, FALSE)
+        EVT_SET(AF_IWA_SpokeWithBulbulb, FALSE)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, LVar2)
     EVT_RETURN

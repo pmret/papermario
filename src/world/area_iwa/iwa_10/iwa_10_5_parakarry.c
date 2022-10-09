@@ -59,13 +59,13 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
         EVT_CALL(InterpNpcYaw, NPC_Parakarry, 270, 0)
         EVT_CALL(SetNpcRotation, NPC_Parakarry, 0, 0, 0)
     EVT_END_THREAD
-    EVT_SET(MV_Unk_0A, -510)
+    EVT_SET(MV_ParakarryPosZ, -510)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_THREAD
         EVT_CALL(MakeLerp, -510, LVar2, 60, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_SET(MV_Unk_0A, LVar0)
+            EVT_SET(MV_ParakarryPosZ, LVar0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -76,7 +76,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(MakeLerp, -400, LVar0, 55, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcPos, NPC_Parakarry, LVar0, 220, MV_Unk_0A)
+        EVT_CALL(SetNpcPos, NPC_Parakarry, LVar0, 220, MV_ParakarryPosZ)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP

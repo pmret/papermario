@@ -28,22 +28,22 @@ enum {
 };
 
 enum {
-    MF_Unk_00               = MapFlag(0),
-    MF_Unk_01               = MapFlag(1),
-    MF_Unk_02               = MapFlag(2),
-    MF_Unk_03               = MapFlag(3),
-    MF_TrainMoving          = MapFlag(4),
-    MF_TrainReverseDir      = MapFlag(5),
-    MF_DropBush1            = MapFlag(10),
-    MF_DropBush2            = MapFlag(11),
-    MF_DropBush3            = MapFlag(12),
-    MF_DropBush4            = MapFlag(13),
+    MF_TrainArriveDoorOpen          = MapFlag(0),
+    MF_TrainArrivePlayerDisembark   = MapFlag(1),
+    MF_TrainDepartDoorOpen          = MapFlag(2),
+    MF_TrainDepartPlayerBoard       = MapFlag(3),
+    MF_TrainMoving                  = MapFlag(4),
+    MF_TrainReverseDir              = MapFlag(5),
+    MF_DropBush1                    = MapFlag(10),
+    MF_DropBush2                    = MapFlag(11),
+    MF_DropBush3                    = MapFlag(12),
+    MF_DropBush4                    = MapFlag(13),
 };
 
 enum {
     MV_TrainMoveDist        = MapVar(0),
     MV_TrainMoveSpeed       = MapVar(1),
-    MV_Unk_0A               = MapVar(10),
+    MV_ParakarryPosZ        = MapVar(10),
     MV_SuperBlock           = MapVar(11),
 };
 

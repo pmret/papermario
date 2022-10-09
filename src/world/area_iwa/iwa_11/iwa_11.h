@@ -19,12 +19,12 @@ enum {
 };
 
 enum {
-    MF_Unk_00           = MapFlag(0),
-    MF_Unk_01           = MapFlag(1),
-    MF_Unk_02           = MapFlag(2),
-    MF_Unk_03           = MapFlag(3),
-    MF_TrainScrolling   = MapFlag(4),
-    MF_TrainReverseDir  = MapFlag(5),
+    MF_TrainArriveDoorOpen          = MapFlag(0),
+    MF_TrainArrivePlayerDisembark   = MapFlag(1),
+    MF_TrainDepartDoorOpen          = MapFlag(2),
+    MF_TrainDepartPlayerBoard       = MapFlag(3),
+    MF_TrainScrolling               = MapFlag(4),
+    MF_TrainReverseDir              = MapFlag(5),
 };
 
 #define NAMESPACE iwa_11
