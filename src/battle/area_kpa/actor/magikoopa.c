@@ -241,7 +241,7 @@ s32 N(idleAnimtions_broomstick)[] = {
 };
 
 #include "common/ShrinkActor.inc.c"
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(idle) = {
     EVT_SET(LVarF, 0)
@@ -249,7 +249,7 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE_ID), LVar0)
     EVT_CALL(ActorExists, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 1)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(254.0), EVT_FLOAT(100.0), 20, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(254.0), EVT_FLOAT(100.0), 20, 0, 0)
         EVT_ADD(LVarF, 1)
         EVT_CALL(GetActorFlags, ACTOR_SELF, LVar2)
         EVT_IF_FLAG(LVar2, ACTOR_FLAG_FLYING)
