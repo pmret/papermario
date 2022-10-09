@@ -27,9 +27,47 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802419D8_B365A8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A2C_B365FC);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A64_B36634);
+extern s32 D_8024FBA0[];
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
+ApiStatus func_80241A64_B36634(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_8024FBA0[i] = ptr[i];
+        }
+        D_8024FBA0[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_8024FBA0[i] = i + 16;
+            D_8024FBA0[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+extern s32 D_8024FD68[];
+
+ApiStatus func_80241B00_B366D0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_8024FD68[i] = ptr[i];
+        }
+        D_8024FD68[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            D_8024FD68[i] = i + 128;
+            D_8024FD68[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

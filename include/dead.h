@@ -5,6 +5,7 @@
 #define evt_get_variable dead_evt_get_variable
 #define evt_set_variable dead_evt_set_variable
 #define evt_get_float_variable dead_evt_get_float_variable
+#define sin_rad dead_sin_rad
 #define cos_rad dead_cos_rad
 #define evt_set_float_variable dead_evt_set_float_variable
 #define fx_sparkles dead_fx_sparkles
@@ -71,7 +72,7 @@
 #define sfx_play_sound_with_params dead_sfx_play_sound_with_params
 #define sfx_get_spatialized_sound_params dead_sfx_get_spatialized_sound_params
 #define npc_test_move_simple_without_slipping dead_npc_test_move_simple_without_slipping
-#define func_8003D660 func_80041080
+#define func_8003D660 dead_func_8003D660
 #define get_item_entity dead_get_item_entity
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_msg dead_set_message_msg
@@ -112,5 +113,11 @@
 #define osVirtualToPhysical dead_osVirtualToPhysical
 #define nuGfxZBuffer dead_nuGfxZBuffer
 #define nuGfxCfb_ptr dead_nuGfxCfb_ptr
+#define guMtxF2L dead_guMtxF2L
+#define mdl_get_copied_vertices dead_mdl_get_copied_vertices
+#define mdl_get_copied_gfx dead_mdl_get_copied_gfx
+#define gMatrixListPos dead_gMatrixListPos
+#define gDisplayContext dead_gDisplayContext
+#define fx_sun_undeclared fx_sun
 
 #endif

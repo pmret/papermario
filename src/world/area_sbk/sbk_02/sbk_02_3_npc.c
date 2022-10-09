@@ -25,7 +25,7 @@ API_CALLABLE(func_8024091C_92ABCC) {
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_8024091C_92ABCC);
 #endif
 
-static s32 D_80245630[91];
+static s32 sbk_02_D_80245630[91];
 extern s32 D_8024404C_92E2FC;
 extern s32 D_80244050_92E300;
 
@@ -41,16 +41,16 @@ API_CALLABLE(func_802409A8_92AC58) {
     Bytecode* args = script->ptrReadPos;
     s32* buf = (s32*) evt_get_variable(script, *args++);
     s32 i;
-    
+
     if (buf != NULL) {
         for (i = 0; *buf != NULL; i++) {
-            D_80245630[i] = *buf++;
+            sbk_02_D_80245630[i] = *buf++;
         }
-        D_80245630[i] = 0;
+        sbk_02_D_80245630[i] = 0;
     } else {
         for (i = 0; i <= 90; i++) {
-            D_80245630[i] = i + 0x80;
-            D_80245630[91] = 0;
+            sbk_02_D_80245630[i] = i + 0x80;
+            sbk_02_D_80245630[91] = 0;
         }
     }
     return ApiStatus_DONE2;

@@ -1,8 +1,8 @@
 #include "common.h"
 
-void dead_fx_sun(s32, s32, s32, s32, s32, s32);
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(DeadUnkFunc1)(Evt* script, s32 isInitialCall) {
-    dead_fx_sun(1, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
