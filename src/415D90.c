@@ -131,9 +131,9 @@ IconHudScriptPair battle_menu_HammerHudScripts[] = {
     { &HES_MenuHammer3, &HES_MenuHammer3Disabled  },
 };
 
-HudScript* battle_menu_ItemHudScripts[] = { &HES_MenuItem, &HES_MenuItemDisabled };
+IconHudScriptPair battle_menu_ItemHudScripts = { &HES_MenuItem, &HES_MenuItemDisabled };
 
-HudScript* battle_menu_StarPowerHudScripts[] = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
+IconHudScriptPair battle_menu_StarPowerHudScripts = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
 IconHudScriptPair battle_menu_StarPowerMovesHudScripts[] = {
     { &HES_MenuStarPower, &HES_MenuStarPowerDisabled },
@@ -164,11 +164,11 @@ HudScript* battle_menu_DisabledPartnerHudScripts[] = {
     &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled
 };
 
-HudScript* battle_menu_StrategiesHudScript[] = { &HES_MenuStrategies, &HES_MenuStrategiesDisabled };
+IconHudScriptPair battle_menu_StrategiesHudScript = { &HES_MenuStrategies, &HES_MenuStrategiesDisabled };
 
-HudScript* battle_menu_DoNothingHudScripts[] = { &HES_MenuDoNothing, &HES_MenuDoNothingDisabled };
+IconHudScriptPair battle_menu_DoNothingHudScripts = { &HES_MenuDoNothing, &HES_MenuDoNothingDisabled };
 
-HudScript* battle_menu_FleeHudScripts[] = { &HES_MenuFlee, &HES_MenuFleeDisabled };
+IconHudScriptPair battle_menu_FleeHudScripts = { &HES_MenuFlee, &HES_MenuFleeDisabled };
 
 // Jump, Hammer, Items, RunAway, Defense
 s32 battle_menu_leftJustfiedMessagesA[] = { MSG_Menus_0039, MSG_Menus_0038, MSG_Menus_003F, MSG_Menus_003B, MSG_Menus_0044 };
@@ -2277,7 +2277,7 @@ void btl_state_update_player_menu(void) {
             }
             battle_menu_submenuIDs[0] = 7;
             battle_menu_isEnabled[0] = 1;
-            main_battle_menu_JumpHudScripts[0] = battle_menu_StrategiesHudScript[0];
+            main_battle_menu_JumpHudScripts[0] = battle_menu_StrategiesHudScript.enabled;
             battle_menu_messageIDs[0] = battle_menu_centeredMessagesC[0];
             if (battleStatus->unk_83 != 2) {
 
@@ -2289,7 +2289,7 @@ void btl_state_update_player_menu(void) {
             }
             battle_menu_isMessageDisabled[s4] = 0;
             if (!(battleStatus->menuDisableFlags & 0x80)) {
-                HudScript* temp = battle_menu_StrategiesHudScript[1];
+                HudScript* temp = battle_menu_StrategiesHudScript.disabled;
                 battle_menu_isEnabled[s4] = 0;
                 main_battle_menu_JumpHudScripts[s4] = temp;
                 battle_menu_isMessageDisabled[s4] = 0x48;
@@ -2299,25 +2299,25 @@ void btl_state_update_player_menu(void) {
             }
             s4++;
             if (battleStatus->menuStatus[0] >= 0) {
-                main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts[0];
+                main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts.enabled;
                 battle_menu_submenuIDs[s4] = 2;
                 battle_menu_isEnabled[s4] = 1;
                 battle_menu_messageIDs[s4] = battle_menu_centeredMessagesB[0];
 
                 if(battleStatus->menuStatus[0] == 0) {
-                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts[1];
+                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[s4] = 0;
                     battle_menu_isMessageDisabled[s4] = 0x45;
                 }
 
                 if (!(battleStatus->menuDisableFlags & 0x4)) {
-                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts[1];
+                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[s4] = 0;
                     battle_menu_isMessageDisabled[s4] = 0x48;
                 }
 
                 if (battleStatus->itemLossTurns >= 0) {
-                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts[1];
+                    main_battle_menu_JumpHudScripts[s4] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[s4] = 0;
                     battle_menu_isMessageDisabled[s4] = 0x48;
                 }
@@ -2378,13 +2378,13 @@ void btl_state_update_player_menu(void) {
                 s4++;
             }
             if (playerData->maxStarPower != 0) {
-                main_battle_menu_JumpHudScripts[s4] = battle_menu_StarPowerHudScripts[0];
+                main_battle_menu_JumpHudScripts[s4] = battle_menu_StarPowerHudScripts.enabled;
                 battle_menu_submenuIDs[s4] = 8;
                 battle_menu_isEnabled[s4] = 1;
                 battle_menu_messageIDs[s4] = battle_menu_centeredMessagesD[0];
                 battle_menu_isMessageDisabled[s4] = 0;
                 if (!(battleStatus->menuDisableFlags & 0x100)) {
-                    main_battle_menu_JumpHudScripts[s4] = battle_menu_StarPowerHudScripts[1];
+                    main_battle_menu_JumpHudScripts[s4] = battle_menu_StarPowerHudScripts.disabled;
                     battle_menu_isEnabled[s4] = 0;
                     battle_menu_isMessageDisabled[s4] = 0x48;
                 }
@@ -3299,20 +3299,20 @@ void btl_state_update_player_menu(void) {
                 }
                 s4 = 1;
             }
-            D_802AD640[s4] = battle_menu_DoNothingHudScripts[0];
+            D_802AD640[s4] = battle_menu_DoNothingHudScripts.enabled;
             D_802AD678[s4] = 9;
             D_802AD690[s4] = 1;
             D_802AD658[s4] = battle_menu_leftJustfiedMessagesA[9]; // out of bounds TODO
             D_802AD6C0[s4] = 0x1D00A2;
 
             s4++;
-            D_802AD640[s4] = battle_menu_FleeHudScripts[0];
+            D_802AD640[s4] = battle_menu_FleeHudScripts.enabled;
             D_802AD678[s4] = 3;
             D_802AD690[s4] = 1;
             D_802AD658[s4] = battle_menu_leftJustfiedMessagesA[3];
             D_802AD6C0[s4] = 0x1D00A3;
             if (!(gBattleStatus.flags2 & 0x20)) {
-                D_802AD640[s4] = battle_menu_FleeHudScripts[1];
+                D_802AD640[s4] = battle_menu_FleeHudScripts.disabled;
                 D_802AD690[s4] = 0;
                 D_802AD6A8[s4] = 1;
             }

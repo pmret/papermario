@@ -36,7 +36,7 @@ void func_8005DECC(Npc* npc, s32 arg1, s32* animIDs, f32 arg3, f32 arg4, s32 arg
     npc->blur.unk2A4 = blur = heap_malloc(sizeof(*blur));
     ASSERT(blur != NULL);
 
-    for (i = 0; i < 0x28; i++) {
+    for (i = 0; i < ARRAY_COUNT(blur->unk_00); i++) {
         blur->unk_00[i].pos.x = playerStatus->position.x;
         blur->unk_00[i].pos.y = playerStatus->position.y;
         blur->unk_00[i].pos.z = playerStatus->position.z;
@@ -127,7 +127,7 @@ void func_8005E12C(Npc* npc) {
                 npc->moveSpeed = blur->unk_298;
             }
             npc->currentAnim = blur->animIDs[5];
-            if (!(npc->flags & 0x1000)) {
+            if (!(npc->flags & NPC_FLAG_1000)) {
                 npc->currentAnim = blur->animIDs[2];
             }
 
@@ -170,7 +170,7 @@ void func_8005E12C(Npc* npc) {
                         part = &blur->unk_00[blur->unk_284];
                         partX = part->pos.x;
                         partZ = part->pos.z;
-                        if (npc->flags & 0x1000) {
+                        if (npc->flags & NPC_FLAG_1000) {
                             if (part->unk_00 != 0) {
                                 blur->unk_288 = 1;
                                 break;
@@ -182,12 +182,12 @@ void func_8005E12C(Npc* npc) {
                 break;
             }
 
-            if (!(npc->flags & 0x1000)) {
+            if (!(npc->flags & NPC_FLAG_1000)) {
                 npc->moveSpeed *= 0.5f;
             }
             npc->yaw = yaw;
             npc_move_heading(npc, npc->moveSpeed, yaw);
-            if ((npc->flags & 0x5000) == 0x5000) {
+            if ((npc->flags & (NPC_FLAG_4000 | NPC_FLAG_1000)) == (NPC_FLAG_4000 | NPC_FLAG_1000)) {
                 blur->unk_288 = 1;
             }
             break;
@@ -218,7 +218,7 @@ void func_8005E12C(Npc* npc) {
                     npcX = npc->pos.x;
                     npcZ = npc->pos.z;
                     npc->jumpVelocity = 0.0f;
-                    npc->flags |= 0x200;
+                    npc->flags |= NPC_FLAG_GRAVITY;
                     npc->yaw = atan2(npcX, npcZ, x, z);
                     blur->unk_288 = 0;
                     return;
@@ -230,7 +230,7 @@ void func_8005E12C(Npc* npc) {
                 npc->moveSpeed = npc->planarFlyDist / npc->duration;
                 npc->jumpVelocity = (sp2C + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
                 npc->currentAnim = blur->animIDs[1];
-                npc->flags &= ~0x200;
+                npc->flags &= ~NPC_FLAG_GRAVITY;
                 blur->unk_288 = 2;
             }
             break;
@@ -252,7 +252,7 @@ void func_8005E12C(Npc* npc) {
                     npcZ = sp30;
                     npc->jumpVelocity = 0.0f;
                     npc->pos.y = sp2C;
-                    npc->flags |= 0x200;
+                    npc->flags |= NPC_FLAG_GRAVITY;
                     npc->yaw = atan2(npcX, npcZ, x, z);
                     blur->unk_288 = 0;
                 }
