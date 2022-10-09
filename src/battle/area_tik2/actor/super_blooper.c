@@ -391,7 +391,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_STAR_BEAM)
-        EVT_CASE_OR_EQ(EVENT_14)
+        EVT_CASE_OR_EQ(EVENT_PEACH_BEAM)
             EVT_EXEC_WAIT(N(unEnrage))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)

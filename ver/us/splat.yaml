@@ -6425,11 +6425,16 @@ segments:
     start: 0x69F200
     vram: 0x80218000
     subsegments:
-    - [0x69F200, c]
-    - [0x69F320, c]
-    - [0x6A2B50, c]
-    - [0x6A44E0, data]
-    - [0x6BB940]
+    - [0x69F200, c, actor/bowser]
+    - [0x69F320, c, actor/bowser_intro]
+    - [0x6A0100, c, actor/bowser_phase_1]
+    - [0x6A14C0, c, actor/bowser_phase_2]
+    - [0x6A2B50, c, actor/bowser_phase_3]
+    - [0x6A4490, c, stage/kpa_01]
+    - [0x6A4490, c, stage/kpa_02]
+    - [0x6A4490, c, stage/kpa_03]
+    - [0x6A44E0, c, area]
+    - [0x6A44E0]
   - dir: battle/area_kpa3
     type: code
     start: 0x6BBB90

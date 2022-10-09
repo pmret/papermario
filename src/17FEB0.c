@@ -253,11 +253,11 @@ s32 calc_item_damage_enemy(void) {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_PEACH_BEAM) {
             dispatchEvent = EVENT_IMMUNE;
             if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
-                dispatchEvent = EVENT_14;
+                dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
             if (targetPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
-                dispatchEvent = EVENT_14;
+                dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
         }

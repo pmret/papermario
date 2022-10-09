@@ -1772,8 +1772,11 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x66 */ s16 moveArcAmplitude;
     /* 0x68 */ char unk_68[3];
     /* 0x6B */ u8 jumpPartIndex;
-    /* 0x6C */ ChompChainAnimationState* unk_6C;
-    /* 0x70 */ char unk_70[12];
+    /* 0x6C */ union {
+    /*      */     s32 functionTemp[4];
+    /*      */     f32 functionTempF[4];
+    /*      */     void* functionTempPtr[4];
+    /*      */ };
     /* 0x7C */ union {
     /*      */     s32 varTable[16];
     /*      */     f32 varTableF[16];

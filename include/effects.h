@@ -1982,7 +1982,15 @@ typedef struct PinkSparklesFXData {
 } PinkSparklesFXData; // size = unknown
 
 typedef struct StarOutlineFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x14];
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ char unk_28[0xC];
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ Vec3f unk_3C;
 } StarOutlineFXData; // size = unknown
 
 typedef struct Effect86FXData {
