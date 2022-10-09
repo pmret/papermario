@@ -1,5 +1,4 @@
-#include "common.h"
-#include "sprite/npc/LargePiranha.h"
+#include "PutridPiranha.h"
 
 extern EvtScript EVS_NpcHitRecoil;
 

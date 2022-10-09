@@ -330,7 +330,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             y = npc->pos.y + 14.0f;
             z = npc->pos.z;
             hitDepth = 16.0f;
-            if ((npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && ((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2) < 2U)) {
+            if ((npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && ((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2) < 2U)) {
                 if (playerStatus->actionState == 0) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }

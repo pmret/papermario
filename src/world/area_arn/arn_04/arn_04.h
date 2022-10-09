@@ -2,17 +2,22 @@
 /// @brief Gusty Gulch - Wasteland Ascent 2
 
 #include "common.h"
-#include "../arn.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../arn.h"
+#include "mapfs/arn_04_shape.h"
+#include "mapfs/arn_04_hit.h"
+
+#include "sprite/npc/Paragoomba.h"
+#include "sprite/npc/Goomba.h"
+#include "sprite/npc/Cleft.h"
+
+enum {
+	NPC_HyperParagoomba		= 0,
+	NPC_HyperGoomba    		= 1,
+	NPC_HyperCleft_01  		= 2,
+	NPC_HyperCleft_02  		= 3,
+};
+
 #define NAMESPACE arn_04
-
-ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(CleftAI_Main)(Evt* script, s32 isInitialCall);
-
-extern EvtScript N(main);
-extern EvtScript N(802433D0);
-extern NpcGroupList N(npcGroupList_80244000);
-extern EvtScript N(makeEntities);

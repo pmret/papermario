@@ -40,7 +40,26 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024226C_8B22DC);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422C0_8B2330);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422F8_8B2368);
+extern s32 kmr_02_D_80257F58[];
+
+ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            kmr_02_D_80257F58[i] = ptr[i];
+        }
+        kmr_02_D_80257F58[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            kmr_02_D_80257F58[i] = i + 16;
+            kmr_02_D_80257F58[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 
@@ -74,10 +93,10 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BA8_8B2C18);
 #ifdef NON_MATCHING
 s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
     Bytecode* args;
-    
+
     static u8 oldPrimR, oldPrimG, oldPrimB;
     static u8 oldEnvR, oldEnvG, oldEnvB;
-    
+
     s32 newEnvR, newEnvB, newEnvG;
     s32 newPrimR, newPrimG, newPrimB;
     s32 duration;

@@ -9,6 +9,6 @@ static char* N(exit_str_5) = "kmr_22";
 static char* N(exit_str_6) = "hos_20";
 static char* N(exit_str_7) = "";
 
-#include "world/common/SetEntityFlags100000.inc.c"
+#include "world/common/RemovePadlock.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"

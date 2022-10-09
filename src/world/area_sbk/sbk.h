@@ -21,12 +21,12 @@ enum {
 };
 
 enum {
-    AF_SBK_01       = AreaFlag(1),
-    AF_SBK_02       = AreaFlag(2),
-    AF_SBK_03       = AreaFlag(3),
-    AF_SBK_04       = AreaFlag(4),
-    AF_SBK_05       = AreaFlag(5),
-    AF_SBK_06       = AreaFlag(6),
+    AF_BanditHasCoin    = AreaFlag(1),
+    AF_SBK_02           = AreaFlag(2),
+    AF_SBK_03           = AreaFlag(3),
+    AF_SBK_04           = AreaFlag(4),
+    AF_SBK_05           = AreaFlag(5),
+    AF_SBK_06           = AreaFlag(6),
 };
 
 extern MapSettings sbk_00_settings;

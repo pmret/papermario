@@ -20,7 +20,26 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406A8_A39B88);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
+extern s32 hos_06_D_80246260[];
+
+ApiStatus func_802406E0_A39BC0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            hos_06_D_80246260[i] = ptr[i];
+        }
+        hos_06_D_80246260[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            hos_06_D_80246260[i] = i + 16;
+            hos_06_D_80246260[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

@@ -3,7 +3,9 @@
 
 #define NAMESPACE ED8FE0
 
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
+
 ApiStatus func_80240000_EDBFE0(Evt *script, s32 isInitialCall) {
-    dead_fx_sun(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

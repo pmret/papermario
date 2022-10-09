@@ -290,17 +290,7 @@ StaticNpc N(NpcData_SpikeTop_01) = {
     .pos = { 140.0f, 670.0f, -20.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SODA, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(4),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -313,24 +303,7 @@ StaticNpc N(NpcData_SpikeTop_01) = {
             .detectSize = { 240, 115 },
         }
     },
-    .animations = {
-        .idle   = ANIM_SpikeTop_Anim03,
-        .walk   = ANIM_SpikeTop_Anim06,
-        .run    = ANIM_SpikeTop_Anim08,
-        .chase  = ANIM_SpikeTop_Anim08,
-        .anim_4 = ANIM_SpikeTop_Anim03,
-        .anim_5 = ANIM_SpikeTop_Anim03,
-        .death  = ANIM_SpikeTop_Anim13,
-        .hit    = ANIM_SpikeTop_Anim13,
-        .anim_8 = ANIM_SpikeTop_Anim0B,
-        .anim_9 = ANIM_SpikeTop_Anim0A,
-        .anim_A = ANIM_SpikeTop_Anim0C,
-        .anim_B = ANIM_SpikeTop_Anim03,
-        .anim_C = ANIM_SpikeTop_Anim03,
-        .anim_D = ANIM_SpikeTop_Anim03,
-        .anim_E = ANIM_SpikeTop_Anim03,
-        .anim_F = ANIM_SpikeTop_Anim03,
-    },
+    .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -340,17 +313,7 @@ StaticNpc N(NpcData_SpikeTop_02) = {
     .pos = { -200.0f, 670.0f, -35.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SODA, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(4),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -363,24 +326,7 @@ StaticNpc N(NpcData_SpikeTop_02) = {
             .detectSize = { 240, 115 },
         }
     },
-    .animations = {
-        .idle   = ANIM_SpikeTop_Anim03,
-        .walk   = ANIM_SpikeTop_Anim06,
-        .run    = ANIM_SpikeTop_Anim08,
-        .chase  = ANIM_SpikeTop_Anim08,
-        .anim_4 = ANIM_SpikeTop_Anim03,
-        .anim_5 = ANIM_SpikeTop_Anim03,
-        .death  = ANIM_SpikeTop_Anim13,
-        .hit    = ANIM_SpikeTop_Anim13,
-        .anim_8 = ANIM_SpikeTop_Anim0B,
-        .anim_9 = ANIM_SpikeTop_Anim0A,
-        .anim_A = ANIM_SpikeTop_Anim0C,
-        .anim_B = ANIM_SpikeTop_Anim03,
-        .anim_C = ANIM_SpikeTop_Anim03,
-        .anim_D = ANIM_SpikeTop_Anim03,
-        .anim_E = ANIM_SpikeTop_Anim03,
-        .anim_F = ANIM_SpikeTop_Anim03,
-    },
+    .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -390,17 +336,7 @@ StaticNpc N(NpcData_SpikeTop_03) = {
     .pos = { 30.0f, 20.0f, 320.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SODA, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(4),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -413,24 +349,7 @@ StaticNpc N(NpcData_SpikeTop_03) = {
             .detectSize = { 180, 95 },
         }
     },
-    .animations = {
-        .idle   = ANIM_SpikeTop_Anim03,
-        .walk   = ANIM_SpikeTop_Anim06,
-        .run    = ANIM_SpikeTop_Anim08,
-        .chase  = ANIM_SpikeTop_Anim08,
-        .anim_4 = ANIM_SpikeTop_Anim03,
-        .anim_5 = ANIM_SpikeTop_Anim03,
-        .death  = ANIM_SpikeTop_Anim13,
-        .hit    = ANIM_SpikeTop_Anim13,
-        .anim_8 = ANIM_SpikeTop_Anim0B,
-        .anim_9 = ANIM_SpikeTop_Anim0A,
-        .anim_A = ANIM_SpikeTop_Anim0C,
-        .anim_B = ANIM_SpikeTop_Anim03,
-        .anim_C = ANIM_SpikeTop_Anim03,
-        .anim_D = ANIM_SpikeTop_Anim03,
-        .anim_E = ANIM_SpikeTop_Anim03,
-        .anim_F = ANIM_SpikeTop_Anim03,
-    },
+    .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -441,17 +360,7 @@ StaticNpc N(NpcData_PutridPiranha)[] = {
         .pos = { 260.0f, 20.0f, 255.0f },
         .yaw = 270,
         .flags = NPC_FLAG_LOCK_ANIMS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_SUPER_SHROOM, 10, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 0,
-            .maxCoinBonus = 3,
-        },
+        .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -464,56 +373,10 @@ StaticNpc N(NpcData_PutridPiranha)[] = {
                 .detectSize = { 100, 50 },
             }
         },
-        .animations = {
-            .idle   = ANIM_LargePiranha_Putrid_Anim01,
-            .walk   = ANIM_LargePiranha_Putrid_Anim02,
-            .run    = ANIM_LargePiranha_Putrid_Anim03,
-            .chase  = ANIM_LargePiranha_Putrid_Anim03,
-            .anim_4 = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_5 = ANIM_LargePiranha_Putrid_Anim01,
-            .death  = ANIM_LargePiranha_Putrid_Anim0E,
-            .hit    = ANIM_LargePiranha_Putrid_Anim0E,
-            .anim_8 = ANIM_LargePiranha_Putrid_Anim18,
-            .anim_9 = ANIM_LargePiranha_Putrid_Anim17,
-            .anim_A = ANIM_LargePiranha_Putrid_Anim05,
-            .anim_B = ANIM_LargePiranha_Putrid_Anim06,
-            .anim_C = ANIM_LargePiranha_Putrid_Anim07,
-            .anim_D = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_E = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_F = ANIM_LargePiranha_Putrid_Anim01,
-        },
+        .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
-    {
-        .id = NPC_Piranha_Hitbox,
-        .settings = &N(NpcSettings_PutridPiranha_Hitbox),
-        .pos = { NPC_DISPOSE_LOCATION },
-        .yaw = 0,
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_LargePiranha_Putrid_Anim01,
-            .walk   = ANIM_LargePiranha_Putrid_Anim02,
-            .run    = ANIM_LargePiranha_Putrid_Anim03,
-            .chase  = ANIM_LargePiranha_Putrid_Anim03,
-            .anim_4 = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_5 = ANIM_LargePiranha_Putrid_Anim01,
-            .death  = ANIM_LargePiranha_Putrid_Anim0E,
-            .hit    = ANIM_LargePiranha_Putrid_Anim0E,
-            .anim_8 = ANIM_LargePiranha_Putrid_Anim18,
-            .anim_9 = ANIM_LargePiranha_Putrid_Anim17,
-            .anim_A = ANIM_LargePiranha_Putrid_Anim05,
-            .anim_B = ANIM_LargePiranha_Putrid_Anim06,
-            .anim_C = ANIM_LargePiranha_Putrid_Anim07,
-            .anim_D = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_E = ANIM_LargePiranha_Putrid_Anim01,
-            .anim_F = ANIM_LargePiranha_Putrid_Anim01,
-        },
-    },
+    PUTRID_PIRANHA_HITBOX(NPC_Piranha_Hitbox),
 };
 
 NpcGroupList N(DefaultNPCs) = {

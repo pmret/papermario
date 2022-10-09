@@ -835,7 +835,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTattleMsg(Evt* script, s32 isInitialCall) {
+ApiStatus SetTattleMessage(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 enemyId = evt_get_variable(script, *args++);
     u32 tattleMsg = evt_get_variable(script, *args);

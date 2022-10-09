@@ -47,7 +47,26 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242028_9C7408);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024207C_9C745C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802420B4_9C7494);
+extern s32 nok_01_D_80251C70[];
+
+ApiStatus func_802420B4_9C7494(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            nok_01_D_80251C70[i] = ptr[i];
+        }
+        nok_01_D_80251C70[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            nok_01_D_80251C70[i] = i + 16;
+            nok_01_D_80251C70[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
@@ -68,7 +87,7 @@ ApiStatus func_8024243C_9C781C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 ApiStatus func_802426A4_9C7A84(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -127,10 +146,10 @@ ApiStatus func_802428B8_9C7C98(Evt* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 ApiStatus func_802428D8_9C7CB8(Evt* script, s32 isInitialCall) {
     static s16 D_80250810_9D5BF0[] = { 0, 2, 1, 4 };
-    
+
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    
+
     snd_ambient_80055848(D_80250810_9D5BF0[index]);
     return ApiStatus_DONE2;
 }

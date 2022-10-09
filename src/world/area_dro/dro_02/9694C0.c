@@ -36,23 +36,23 @@ enum {
 
 // BSS
 
-typedef struct {
-    s32 unk_00;
-    f32 unk_04;
-    f32 unk_08;
-    f32 unk_0C;
-    f32 unk_10;
-    f32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
+typedef struct D_8024F010_Struct {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
 } D_8024F010_Struct; // size = 0x24
 
-static s8 N(pad_D_8024EF80)[0x4];
+static f32 N(D_8024EF80);
 static f32 N(D_8024EF84);
 static s32 N(D_8024EF88);
 static s8 N(pad_D_8024EF8C)[0x4];
-static EffectInstance* N(D_8024EF90)[4]; // possibly bigger?
+static EffectInstance* N(D_8024EF90)[4];
 static s32 N(Quizmo_Worker);
 static s32 N(pad_D_8024EFA4);
 static s32 N(Quizmo_ScriptArray)[4];
@@ -2614,8 +2614,275 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
     *arg4 = clamp_angle(F010_ptr->unk_10);
 }
 
-INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, Evt* script,
-            s32 isInitialCall);
+void dro_02_func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 sp28;
+    f32 sp2C;
+    f32 sp30;
+    f32 sp34;
+    f32 sp38;
+    f32 sp3C;
+    f32 sp40;
+    f32 sp44;
+    f32 sp48;
+    f32 sp4C;
+    f32 sp50;
+    f32 sp54;
+    f32 sp58;
+    f32 sp5C;
+    f32 sp60;
+    f32 sp64;
+    f32 sp68;
+    f32 sp6C;
+    f32 sp70;
+    f32 sp74;
+    EffectInstance* effect;
+    EnergyInOutFXData* data;
+    s32 i, j;
+
+    switch (evt_get_variable(N(D_8024EFCC), ArrayVar(9))) {
+        case 0:
+            N(D_8024EF88) = 0;
+            evt_set_variable(N(D_8024EFCC), ArrayVar(9), 1);
+            N(D_8024F010)[0].unk_00 = 1;
+            N(D_8024F010)[0].unk_04 = -200.0f;
+            N(D_8024F010)[0].unk_08 = 0.0f;
+            N(D_8024F010)[0].unk_0C = 0.0f;
+            N(D_8024F010)[0].unk_14 = 0.0f;
+            N(D_8024F010)[0].unk_1C = 12;
+            N(D_8024F010)[0].unk_20 = 2;
+
+            N(D_8024F010)[1].unk_1C = 48;
+            N(D_8024F010)[2].unk_18 = 8;
+            N(D_8024F010)[2].unk_1C = 5;
+            N(D_8024F010)[0].unk_10 = 0.0f;
+            N(D_8024F010)[0].unk_18 = 1;
+            N(D_8024F010)[1].unk_00 = 1;
+            N(D_8024F010)[1].unk_08 = 0.0f;
+            N(D_8024F010)[1].unk_14 = 0.0f;
+            N(D_8024F010)[1].unk_10 = 0.0f;
+            N(D_8024F010)[1].unk_18 = 1;
+            N(D_8024F010)[1].unk_20 = 0;
+            N(D_8024F010)[2].unk_00 = 1;
+            N(D_8024F010)[2].unk_04 = 0.0f;
+            N(D_8024F010)[2].unk_14 = 0.0f;
+            N(D_8024F010)[2].unk_10 = 0.0f;
+            N(D_8024F010)[2].unk_20 = 4;
+            N(D_8024F010)[1].unk_04 = 200.0f;
+            N(D_8024F010)[1].unk_0C = 1.0f;
+            N(D_8024F010)[2].unk_08 = 200.0f;
+            N(D_8024F010)[2].unk_0C = 2.0f;
+            break;
+        case 1:
+            N(D_8024EF88)++;
+            N(D_8024F010)[0].unk_04 += 10.0f;
+            N(D_8024F010)[1].unk_04 += -10.0f;
+            N(D_8024F010)[2].unk_08 += -10.0f;
+            if (N(D_8024EF88) == 18) {
+                gPlayerStatus.position.y = -1000.0f;
+            }
+            if (N(D_8024EF88) == 20) {
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 2);
+                N(D_8024EF88) = 0;
+            }
+            break;
+        case 2:
+            N(D_8024F010)[0].unk_00 = 2;
+            N(D_8024F010)[1].unk_00 = 0;
+            N(D_8024F010)[2].unk_00 = 0;
+            N(D_8024F010)[0].unk_04 = 0.0f;
+            N(D_8024F010)[0].unk_08 = 0.0f;
+            N(D_8024F010)[0].unk_0C = 0;
+            break;
+        case 3:
+            N(D_8024F010)[0].unk_00 = 1;
+            N(D_8024F010)[1].unk_00 = 1;
+            N(D_8024F010)[2].unk_00 = 1;
+            N(D_8024EF88)++;
+            N(D_8024F010)[0].unk_04 -= 10.0f;
+            N(D_8024F010)[1].unk_04 += 10.0f;
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 4);
+            }
+            break;
+        case 4:
+            N(D_8024F010)[0].unk_08 = 0.0f;
+            N(D_8024F010)[0].unk_0C = 0;
+            N(D_8024F010)[1].unk_08 = 0.0f;
+            N(D_8024F010)[2].unk_04 = 0;
+            N(D_8024F010)[2].unk_08 = 0.0f;
+            N(D_8024F010)[0].unk_04 = -100.0f;
+            N(D_8024F010)[1].unk_04 = 100.0f;
+            N(D_8024F010)[1].unk_0C = 1.0f;
+            N(D_8024F010)[2].unk_0C = 2.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 20) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 5);
+                sfx_play_sound_with_params(SOUND_203, 0, 0x18, 0);
+            }
+            break;
+        case 5:
+            N(D_8024F010)[1].unk_10 = 0.0f;
+            N(D_8024F010)[2].unk_10 = 0.0f;
+            N(D_8024F010)[0].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(0, &sp18, &sp1C, &sp20, &sp24);
+                fx_sparkles(0, sp18, sp1C + 20.0f, sp20, 30.0f);
+            }
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 6);
+                sfx_play_sound_with_params(SOUND_203, 0, 0x40, 0);
+            }
+            break;
+        case 6:
+            N(D_8024F010)[1].unk_10 = 0.0f;
+            N(D_8024F010)[0].unk_10 += 18.0f;
+            N(D_8024F010)[2].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(2, &sp28, &sp2C, &sp30, &sp34);
+                fx_sparkles(0, sp28, sp2C + 20.0f, sp30, 30.0f);
+            }
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 7);
+                sfx_play_sound_with_params(SOUND_203, 0, 0x68, 0);
+            }
+            break;
+        case 7:
+            N(D_8024F010)[0].unk_10 = 0.0f;
+            N(D_8024EF88)++;
+            N(D_8024F010)[1].unk_10 += 18.0f;
+            N(D_8024F010)[2].unk_10 += 18.0f;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(1, &sp38, &sp3C, &sp40, &sp44);
+                fx_sparkles(0, sp38, sp3C + 20.0f, sp40, 30.0f);
+            }
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 8);
+            }
+            break;
+        case 8:
+            N(D_8024F010)[0].unk_10 = 0.0f;
+            N(D_8024F010)[2].unk_10 = 0.0f;
+            N(D_8024F010)[1].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 9);
+            }
+            break;
+        case 9:
+            N(D_8024F010)[0].unk_08 = 0.0f;
+            N(D_8024F010)[0].unk_10 = 0.0f;
+            N(D_8024F010)[1].unk_08 = 0.0f;
+            N(D_8024F010)[1].unk_10 = 0.0f;
+            N(D_8024F010)[2].unk_04 = 0;
+            N(D_8024F010)[2].unk_08 = 0.0f;
+            N(D_8024F010)[2].unk_10 = 0.0f;
+            N(D_8024EF88)++;
+            N(D_8024F010)[0].unk_04 += 10.0f;
+            N(D_8024F010)[1].unk_04 -= 10.0f;
+            if (N(D_8024EF88) == 10) {
+                N(D_8024EF88) = 0;
+                evt_set_variable(N(D_8024EFCC), ArrayVar(9), 10);
+                return;
+            }
+            break;
+        case 10:
+            N(D_8024F010)[0].unk_00 = 3;
+            N(D_8024F010)[0].unk_18 = 8;
+            N(D_8024F010)[1].unk_00 = 0;
+            N(D_8024F010)[2].unk_00 = 0;
+            N(D_8024F010)[0].unk_1C = 0x11;
+            return;
+        case 11:
+            N(D_8024F010)[0].unk_00 = 4;
+            N(D_8024F010)[1].unk_00 = 5;
+            N(D_8024F010)[1].unk_18 = 8;
+            N(D_8024F010)[0].unk_04 = 0.0f;
+            N(D_8024F010)[0].unk_0C = 0;
+            N(D_8024F010)[1].unk_04 = 0.0f;
+            N(D_8024F010)[1].unk_0C = 0;
+            N(D_8024F010)[1].unk_1C = 10;
+            N(D_8024F010)[1].unk_20 = 0;
+            N(D_8024EF88) = 0;
+            N(D_8024F010)[0].unk_08 = 68.0f;
+            N(D_8024F010)[0].unk_10 = 180.0f;
+            N(D_8024F010)[1].unk_08 = 68.0f;
+            N(D_8024F010)[1].unk_10 = 180.0f;
+            evt_set_variable(N(D_8024EFCC), ArrayVar(9), 12);
+            N(D_8024EF80) = 0.0f;
+            N(D_8024EF84) = 1.0f;
+
+            N(func_80242214_96B3D4)(1, &sp48, &sp4C, &sp50, &sp54);
+
+            for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
+                s32 i;
+
+                N(D_8024EF90)[j] = fx_energy_in_out(2, sp48, sp4C + 20.0f, sp50, 8.0f, -1);
+                N(D_8024EF90)[j]->data.energyInOut->unk_28 = 215;
+                N(D_8024EF90)[j]->data.energyInOut->unk_2C = 55;
+                N(D_8024EF90)[j]->data.energyInOut->unk_30 = 255;
+
+                for (i = 1; i < N(D_8024EF90)[j]->numParts; i++) {
+                    N(D_8024EF90)[j]->data.energyInOut[i].unk_38 *= 0.1;
+                }
+            }
+            break;
+        case 12:
+            N(func_80242214_96B3D4)(1, &sp58, &sp5C, &sp60, &sp64);
+
+            for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
+                s32 i;
+
+                N(D_8024EF90)[j]->data.energyInOut->pos.x = sp58;
+                N(D_8024EF90)[j]->data.energyInOut->pos.y = sp5C + 20.0f;
+                N(D_8024EF90)[j]->data.energyInOut->pos.z = sp60;
+                N(D_8024EF90)[j]->data.energyInOut->scale -= 0.1;
+
+                if (N(D_8024EF90)[j]->data.energyInOut->scale < 0.1) {
+                    N(D_8024EF90)[j]->data.energyInOut->scale = 0.1f;
+                }
+
+                for (i = 1; i < N(D_8024EF90)[j]->numParts; i++, data++) {
+                    N(D_8024EF90)[j]->data.energyInOut[i].unk_38 += 0.01;
+                }
+            }
+
+            N(D_8024F010)[0].unk_08 += N(D_8024EF80);
+            N(D_8024F010)[1].unk_08 += N(D_8024EF84);
+            N(D_8024EF80) += 0.4;
+            N(D_8024EF84) -= 0.05;
+            N(D_8024EF88) += 1;
+
+            if (N(D_8024F010)[1].unk_08 < -5.0f) {
+                N(D_8024F010)[1].unk_08 = -5.0f;
+                N(D_8024EF88) = 0;
+                evt_set_variable(dro_02_D_8024EFCC, ArrayVar(9), 13);
+                N(D_8024F010)[0].unk_00 = 0;
+                N(D_8024F010)[1].unk_00 = 0;
+                N(func_80242214_96B3D4)(1, &sp68, &sp6C, &sp70, &sp74);
+                fx_sparkles(0, sp68, sp6C + 20.0f, sp70, 30.0f);
+                sfx_play_sound(0x206);
+
+                for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
+                    N(D_8024EF90)[j]->flags |= 0x10;
+                }
+            }
+            break;
+        case 13:
+            break;
+    }
+}
 
 void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
     Matrix4f sp20;

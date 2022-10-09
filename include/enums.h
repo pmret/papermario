@@ -784,6 +784,7 @@ enum SoundIDs {
     SOUND_1FF                       = 0x000001FF,
     SOUND_201                       = 0x00000201,
     SOUND_202                       = 0x00000202,
+    SOUND_203                       = 0x00000203,
     SOUND_204                       = 0x00000204,
     SOUND_205                       = 0x00000205,
     SOUND_207                       = 0x00000207,
@@ -1681,7 +1682,7 @@ enum ItemIDs {
     ITEM_DRIED_SHROOM                 = 0x0000008D,
     ITEM_ULTRA_SHROOM                 = 0x0000008E,
     ITEM_SLEEPY_SHEEP                 = 0x0000008F,
-    ITEM_P_O_W_BLOCK                  = 0x00000090,
+    ITEM_POW_BLOCK                    = 0x00000090,
     ITEM_HUSTLE_DRINK                 = 0x00000091,
     ITEM_STOP_WATCH                   = 0x00000092,
     ITEM_WHACKAS_BUMP                 = 0x00000093,
@@ -1932,6 +1933,14 @@ enum GotItemType {
     ITEM_TYPE_CONSUMABLE    = 0,
     ITEM_TYPE_KEY           = 1,
     ITEM_TYPE_BADGE         = 2
+};
+
+enum ItemPickupFlags {
+    ITEM_PICKUP_FLAG_NO_SOUND           = 0x0001,
+    ITEM_PICKUP_FLAG_NO_ANIMS           = 0x0002,
+    ITEM_PICKUP_FLAG_1_COIN             = 0x0010,
+    ITEM_PICKUP_FLAG_3_STAR_PIECES      = 0x0020,
+    ITEM_PICKUP_FLAG_UNIQUE             = 0x0040,
 };
 
 enum ItemTypeFlags {
@@ -3334,7 +3343,7 @@ enum PlayerStatusAnimFlags {
     PA_FLAGS_HOLDING_WATT                     = 0x00000001,
     PA_FLAGS_2                                = 0x00000002,
     PA_FLAGS_INTERRUPT_USE_PARTNER            = 0x00000004, ///< forces actions with bow, parakarry, watt, and lakilester to end (sushie not tested)
-    PA_FLAGS_8                                = 0x00000008, ///< triggers partner use when set
+    PA_FLAGS_FORCE_USE_PARTNER                = 0x00000008, ///< triggers partner use when set
     PA_FLAGS_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
     PA_FLAGS_SPEECH_PROMPT_AVAILABLE          = 0x00000020, ///< (...) prompt
     PA_FLAGS_40                               = 0x00000040,

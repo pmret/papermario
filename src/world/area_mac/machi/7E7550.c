@@ -1,15 +1,15 @@
 #include "machi.h"
 
-extern s32 D_80241180_7E8520;
+extern s32 D_80241180_7E8520[];
 
 ApiStatus func_802401B0_7E7550(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     if (rand_int(1000) < 500) {
-        func_8005DECC(npc, -1, &D_80241180_7E8520,
+        func_8005DECC(npc, -1, D_80241180_7E8520,
                       rand_int(4) + 1, rand_int(3) + 5, rand_int(50) + 50, rand_int(100) + 100);
     } else {
-        func_8005DECC(npc, rand_int(3) + 10, &D_80241180_7E8520,
+        func_8005DECC(npc, rand_int(3) + 10, D_80241180_7E8520,
                       rand_int(4) + 1, rand_int(3) + 5, rand_int(50) + 50, rand_int(100) + 10);
     }
     return ApiStatus_DONE2;

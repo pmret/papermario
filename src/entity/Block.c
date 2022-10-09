@@ -608,7 +608,7 @@ EntityBlueprint Entity_Hammer1Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer1Block_WideHitbox = {
+EntityBlueprint Entity_Hammer1Block_WideX = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
@@ -621,7 +621,7 @@ EntityBlueprint Entity_Hammer1Block_WideHitbox = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer1Block_TallHitbox = {
+EntityBlueprint Entity_Hammer1Block_WideZ = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
@@ -660,7 +660,7 @@ EntityBlueprint Entity_Hammer2Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer2Block_WideHitbox = {
+EntityBlueprint Entity_Hammer2Block_WideX = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
@@ -673,7 +673,7 @@ EntityBlueprint Entity_Hammer2Block_WideHitbox = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer2Block_TallHitbox = {
+EntityBlueprint Entity_Hammer2Block_WideZ = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
@@ -712,7 +712,7 @@ EntityBlueprint Entity_Hammer3Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer3Block_WideHitbox = {
+EntityBlueprint Entity_Hammer3Block_WideX = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
@@ -725,7 +725,7 @@ EntityBlueprint Entity_Hammer3Block_WideHitbox = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer3Block_TallHitbox = {
+EntityBlueprint Entity_Hammer3Block_WideZ = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,

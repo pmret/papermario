@@ -14,7 +14,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 325, 205, -30, 0, ITEM_LIFE_SHROOM, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_KZN06_HiddenItem_LifeShroom)
     EVT_IF_EQ(GF_KZN06_Hammer3Block, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block_TallHitbox), 385, 5, 180, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block_WideZ), 385, 5, 180, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnBreakBlock)))
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)

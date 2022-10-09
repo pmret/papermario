@@ -8,7 +8,7 @@
 
 const char ascii_EA6D70[] = "kzn_11";
 const char ascii_EA6D78[] = "kzn_18";
-extern s32 D_802466D0[];
+extern s32 EA0C10_D_802466D0[];
 
 void func_8004D8E0(DeadEnemy*);
 
@@ -76,13 +76,13 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_802466D0[i] = ptr[i];
+            EA0C10_D_802466D0[i] = ptr[i];
         }
-        D_802466D0[i] = 0;
+        EA0C10_D_802466D0[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            D_802466D0[i] = i + 16;
-            D_802466D0[112] = 0;
+            EA0C10_D_802466D0[i] = i + 16;
+            EA0C10_D_802466D0[112] = 0;
         }
     }
     return ApiStatus_DONE2;

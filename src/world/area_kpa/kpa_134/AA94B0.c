@@ -11,6 +11,6 @@ ApiStatus func_80240510_AA94B0(Evt* script, s32 isInitialCall) {
 
 #include "world/common/SetEntityPosition.inc.c"
 
-#include "world/common/SetEntityFlags100000.inc.c"
+#include "world/common/RemovePadlock.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"

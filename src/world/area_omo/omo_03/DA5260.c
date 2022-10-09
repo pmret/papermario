@@ -14,7 +14,7 @@
 
 #include "common/SetNpcPosYaw.inc.c"
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 #include "common/IsAOrBPressed.inc.c"
 

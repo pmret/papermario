@@ -1,5 +1,4 @@
-#include "common.h"
-#include "sprite/npc/BuzzyBeetle.h"
+#include "SpikeTop.h"
 
 #include "world/common/enemy/TackleAI.inc.c"
 

@@ -3,11 +3,11 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-// Copy of kzn_19 (C8DBB0.c)
+// Copy of kzn_19 (kzn_19_3.npc.c)
 
 #define NAMESPACE EA8AE0
 
-extern s32 D_80248388[];
+extern s32 EA8AE0_D_80248388[];
 extern s32 D_80248380;
 extern s32 D_80243DD8_EAC8B8;
 extern s32 D_80243DDC_EAC8BC;
@@ -116,13 +116,13 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_80248388[i] = ptr[i];
+            EA8AE0_D_80248388[i] = ptr[i];
         }
-        D_80248388[i] = 0;
+        EA8AE0_D_80248388[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            D_80248388[i] = i + 16;
-            D_80248388[112] = 0;
+            EA8AE0_D_80248388[i] = i + 16;
+            EA8AE0_D_80248388[112] = 0;
         }
     }
     return ApiStatus_DONE2;

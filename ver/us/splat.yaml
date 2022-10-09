@@ -8176,90 +8176,93 @@ segments:
     start: 0x90CC40
     vram: 0x80240000
     subsegments:
-    - [0x90CC40, c]
-    - [0x90CEF0, c]
-    - [0x90CF20, data]
-    - [0x90F6A0]
+    - [0x90CC40, c, iwa_00_1_main]
+    - [0x90CC40, c, iwa_00_2_entity]
+    - [0x90CC40, c, iwa_00_3_npc]
+    - [0x90CEF0, c, iwa_00_4_slide]
+    - [0x90CF20]
   - name: iwa_01
     dir: world/area_iwa/iwa_01
     type: code
     start: 0x90F6B0
     vram: 0x80240000
     subsegments:
-    - [0x90F6B0, c]
-    - [0x90FBD0, c]
-    - [0x912960, c]
-    - [0x912990, data]
-    - [0x913070, data]
-    - [0x9135D0, data]
-    - [0x9154B0, data]
-    - [0x915A00]
+    - [0x90F6B0, c, iwa_01_1_main]
+    - [0x90F6B0, c, iwa_01_2_entity]
+    - [0x90F6B0, c, iwa_01_3_splash]
+    - [0x90FBD0, c, iwa_01_4_npc]
+    - [0x912960, c, iwa_01_5_slide]
+    - [0x912990, .data, iwa_01_1_main]
+    - [0x912F60, .data, iwa_01_2_entity]
+    - start: 0x913070
+      type: .data
+      name: iwa_01_3_splash
+      subsegments:
+      - [0x913070, i8, splash, 32, 32]
+      - [0x913470, vtx, splash]
+      - [0x9134B0, gfx, splash]
+      - [0x913578]
+    - [0x9135D0, .data, iwa_01_4_npc]
+    - [0x9154B0, .data, iwa_01_5_slide]
   - name: iwa_02
     dir: world/area_iwa/iwa_02
     type: code
     start: 0x915D70
     vram: 0x80240000
     subsegments:
-    - [0x915D70, c]
-    - [0x916E70, data]
-    - [0x917170, data]
-    - [0x917220, data]
-    - [0x918AA0]
+    - [0x915D70, c, iwa_02_1_main]
+    - [0x915D70, c, iwa_02_2_entity]
+    - [0x915D70, c, iwa_02_3_npc]
+    - [0x916E70]
   - name: iwa_03
     dir: world/area_iwa/iwa_03
     type: code
     start: 0x918BB0
     vram: 0x80240000
     subsegments:
-    - [0x918BB0, c]
-    - [0x918EF0, c]
-    - [0x919F00, data]
-    - [0x91A6B0, data]
-    - [0x91B510, data]
-    - [0x91B7D0]
+    - [0x918BB0, c, iwa_03_1_main]
+    - [0x918BB0, c, iwa_03_2_entity]
+    - [0x918EF0, c, iwa_03_3_npc]
+    - [0x919ED0, c, iwa_03_4_slide]
+    - [0x919F00]
   - name: iwa_04
     dir: world/area_iwa/iwa_04
     type: code
     start: 0x91B8E0
     vram: 0x80240000
     subsegments:
-    - [0x91B8E0, c]
-    - [0x91C9C0, data]
-    - [0x91CA50, data]
-    - [0x91CFA0, data]
-    - [0x91E460]
+    - [0x91B8E0, c, iwa_04_0_header]
+    - [0x91B8E0, c, iwa_04_1_main]
+    - [0x91B8E0, c, iwa_04_2_entity]
+    - [0x91B960, c, iwa_04_3_npc]
+    - [0x91C9C0]
   - name: iwa_10
     dir: world/area_iwa/iwa_10
     type: code
     start: 0x91E570
     vram: 0x80240000
     subsegments:
-    - [0x91E570, c]
-    - [0x91E5B0, c]
-    - [0x91E6D0, c]
-    - [0x91F5A0, c]
-    - [0x91FA80, c]
-    - [0x91FB20, c]
-    - [0x91FD60, data]
-    - [0x91FE80, data]
-    - [0x920280, data]
-    - [0x921830, data]
-    - [0x923FD0, data]
-    - [0x9247B0, data]
-    - [0x9269D0]
+    - [0x91E570, c, iwa_10_0_header]
+    - [0x91E570, c, iwa_10_1_main]
+    - [0x91E5B0, c, iwa_10_2_npc]
+    - [0x91E6D0, c, iwa_10_3_train]
+    - [0x91F5A0, c, iwa_10_4_entity]
+    - [0x91FA80, c, iwa_10_5_parakarry]
+    - [0x91FA80, c, iwa_10_6_new_party]
+    - [0x91FB20, c, iwa_10_7_foliage]
+    - [0x91FD60]
   - name: iwa_11
     dir: world/area_iwa/iwa_11
     type: code
     start: 0x9269F0
     vram: 0x80240000
     subsegments:
-    - [0x9269F0, c]
-    - [0x926A10, c]
-    - [0x926C70, c]
-    - [0x926D00, data]
-    - [0x926D90, data]
-    - [0x927030, data]
-    - [0x929240]
+    - [0x9269F0, c, iwa_11_0_header]
+    - [0x9269F0, c, iwa_11_1_main]
+    - [0x926A10, c, iwa_11_2_train]
+    - [0x926C70, c, iwa_11_3_scenery]
+    - [0x926C70, c, iwa_11_4_npc]
+    - [0x926D00]
   - name: sbk_00
     dir: world/area_sbk/sbk_00
     type: code
@@ -11026,83 +11029,92 @@ segments:
     start: 0xBDD1B0
     vram: 0x80240000
     subsegments:
-    - [0xBDD1B0,       c, events]
-    - [0xBDE190,   .data, header]
-    - [0xBDE2A0,   .data, events]
-    - [0xBDEC80]
+    - [0xBDD1B0, c, arn_02_0_header]
+    - [0xBDD1B0, c, arn_02_1_main]
+    - [0xBDD1B0, c, arn_02_2_entity]
+    - [0xBDD1B0, c, arn_02_3_npc]
+    - [0xBDE190]
   - name: arn_03
     dir: world/area_arn/arn_03
     type: code
     start: 0xBDED90
     vram: 0x80240000
     subsegments:
-    - [0xBDED90,       c, events]
-    - [0xBE04B0,   .data, header]
-    - [0xBE05C0,   .data, events]
-    - [0xBE35E0]
+    - [0xBDED90, c, arn_03_0_header]
+    - [0xBDED90, c, arn_03_1_main]
+    - [0xBDED90, c, arn_03_2_npc]
+    - [0xBDED90, c, arn_03_3_entity]
+    - [0xBE04B0]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
     start: 0xBE37B0
     vram: 0x80240000
     subsegments:
-    - [0xBE37B0,       c, events]
-    - [0xBE6B20,   .data, header]
-    - [0xBE6C30,   .data, events]
-    - [0xBE78D0]
+    - [0xBE37B0, c, arn_04_0_header]
+    - [0xBE37B0, c, arn_04_1_main]
+    - [0xBE37B0, c, arn_04_2_npc]
+    - [0xBE37B0, c, arn_04_3_entity]
+    - [0xBE6B20]
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
     start: 0xBE7BE0
     vram: 0x80240000
     subsegments:
-    - [0xBE7BE0,       c, events]
-    - [0xBE8EE0,   .data, header]
-    - [0xBE9290,   .data, events]
-    - [0xBECC20]
+    - [0xBE7BE0, c, arn_05_0_header]
+    - [0xBE7BE0, c, arn_05_1_main]
+    - [0xBE7BE0, c, arn_05_2_npc]
+    - [0xBE7BE0, c, arn_05_3_entity]
+    - [0xBE8EE0]
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
     start: 0xBECDF0
     vram: 0x80240000
     subsegments:
-    - [0xBECDF0,       c, BECDF0]
-    - [0xBED5F0,       c, BED5F0]
-    - [0xBED660,       c, BED660]
-    - [0xBED740,       c, events]
-    - [0xBEEC80,   .data, header]
-    - [0xBEEE30,   .data, BECDF0]
-    - [0xBF0580,   .data, events]
-    - [0xBF46F0]
+    - [0xBECDF0, c, arn_07_0_header]
+    - [0xBECDF0, c, arn_07_1_main]
+    - [0xBED5F0, c, arn_07_2_windmill]
+    - [0xBED660, c, arn_07_3_entity]
+    - [0xBED740, c, arn_07_4_npc]
+    - [0xBEEC80]
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
     start: 0xBF47A0
     vram: 0x80240000
     subsegments:
-    - [0xBF47A0,       c, BF47A0]
-    - [0xBF4860,       c, events]
-    - [0xBF4A30,   .data, header]
-    - [0xBF4B50,   .data, events]
-    - [0xBF6040]
+    - [0xBF47A0, c, arn_08_0_header]
+    - [0xBF47A0, c, arn_08_1_main]
+    - [0xBF47A0, c, arn_08_2_well]
+    - [0xBF47A0, c, arn_08_3_gears]
+    - [0xBF4860, c, arn_08_4_demo]
+    - [0xBF4860, c, arn_08_5_npc]
+    - [0xBF4860, c, arn_08_6_entity]
+    - [0xBF4A30]
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
     start: 0xBF6060
     vram: 0x80240000
     subsegments:
-    - [0xBF6060,       c, events]
-    - [0xBF60A0,   .data, header]
-    - [0xBF61A0,   .data, events]
-    - [0xBF69F0]
+    - [0xBF6060, c, arn_09_0_header]
+    - [0xBF6060, c, arn_09_1_main]
+    - [0xBF6060, c, arn_09_2_entity]
+    - [0xBF6060, c, arn_09_3_launch]
+    - [0xBF6060, c, arn_09_4_npc]
+    - [0xBF60A0]
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
     start: 0xBF6A00
     vram: 0x80240000
     subsegments:
-    - [0xBF6A00, c, header]
-    - [0xBF6A00, c, events]
+    - [0xBF6A00, c, arn_10_0_header]
+    - [0xBF6A00, c, arn_10_1_main]
+    - [0xBF6A00, c, arn_10_2_npc]
+    - [0xBF6A00, c, arn_10_3_entity]
     - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
@@ -11110,8 +11122,9 @@ segments:
     start: 0xBF7680
     vram: 0x80240000
     subsegments:
-    - [0xBF7680, c, header]
-    - [0xBF7680, c, events]
+    - [0xBF7680, c, arn_11_0_header]
+    - [0xBF7680, c, arn_11_1_main]
+    - [0xBF7680, c, arn_11_2_npc]
     - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
@@ -11119,8 +11132,10 @@ segments:
     start: 0xBF8790
     vram: 0x80240000
     subsegments:
-    - [0xBF8790, c, header]
-    - [0xBF8790, c, events]
+    - [0xBF8790, c, arn_12_0_header]
+    - [0xBF8790, c, arn_12_1_main]
+    - [0xBF8790, c, arn_12_2_npc]
+    - [0xBF8790, c, arn_12_3_entity]
     - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
@@ -11128,8 +11143,10 @@ segments:
     start: 0xBF9410
     vram: 0x80240000
     subsegments:
-    - [0xBF9410, c, header]
-    - [0xBF9410, c, events]
+    - [0xBF9410, c, arn_13_0_header]
+    - [0xBF9410, c, arn_13_1_main]
+    - [0xBF9410, c, arn_13_2_npc]
+    - [0xBF9410, c, arn_13_3_entity]
     - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00

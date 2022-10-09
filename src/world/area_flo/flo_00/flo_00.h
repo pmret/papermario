@@ -10,7 +10,7 @@
 
 ApiStatus N(SyncStatusMenu)(Evt* script, s32 isInitialCall);
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFloatFunc)(Evt* script, s32 isInitialCall);
+ApiStatus N(CosInterpMinMax)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_C9DF20)(Evt* script, s32 isInitialCall);
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240ED0_C9EDF0)(Evt* script, s32 isInitialCall);

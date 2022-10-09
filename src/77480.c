@@ -672,7 +672,7 @@ void update_player(void) {
     playerStatus->pushVelocity.y = 0.0f;
     playerStatus->pushVelocity.z = 0.0f;
     playerStatus->flags &= ~PS_FLAGS_10;
-    playerStatus->animFlags &= ~PA_FLAGS_8;
+    playerStatus->animFlags &= ~PA_FLAGS_FORCE_USE_PARTNER;
 }
 
 void check_input_use_partner(void) {
@@ -681,7 +681,7 @@ void check_input_use_partner(void) {
     u32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-        if (playerStatus->animFlags & PA_FLAGS_8 || playerStatus->inputEnabledCounter == 0) {
+        if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER || playerStatus->inputEnabledCounter == 0) {
             if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_80) &&
                 !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) &&
                 actionState <= ACTION_STATE_RUN) {

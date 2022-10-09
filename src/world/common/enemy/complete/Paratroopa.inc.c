@@ -1,4 +1,4 @@
-#include "common.h"
+#include "Paratroopa.h"
 
 #include "world/common/enemy/ParatroopaAI.inc.c"
 

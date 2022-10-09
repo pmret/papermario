@@ -3,7 +3,7 @@
 
 extern s32 D_80241B10_AF9460;
 extern s32 D_80241B14_AF9464;
-extern s32 D_802461F0[];
+extern s32 kkj_19_D_802461F0[];
 extern s32 D_802463B8_kkj_19[];
 extern s32 D_8024652C;
 extern s32 D_80246530;
@@ -63,13 +63,13 @@ ApiStatus func_80240568_AF7EB8(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_802461F0[i] = ptr[i];
+            kkj_19_D_802461F0[i] = ptr[i];
         }
-        D_802461F0[i] = 0;
+        kkj_19_D_802461F0[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            D_802461F0[i] = i + 16;
-            D_802461F0[112] = 0;
+            kkj_19_D_802461F0[i] = i + 16;
+            kkj_19_D_802461F0[112] = 0;
         }
     }
 

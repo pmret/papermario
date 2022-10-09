@@ -26,8 +26,11 @@ extern EvtScript EnterSavePoint;
 extern EvtScript ExitWalk;
 extern EvtScript ExitSingleDoor;
 extern EvtScript EnterSingleDoor;
+extern EvtScript ExitSplitSingleDoor;
+extern EvtScript EnterSplitSingleDoor;
 extern EvtScript ExitDoubleDoor;
 extern EvtScript EnterDoubleDoor;
-
+extern EvtScript ExitSplitDoubleDoor;
+extern EvtScript EnterSplitDoubleDoor;
 
 #endif

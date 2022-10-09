@@ -37,4 +37,4 @@ ApiStatus func_80240340_EF7DC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"

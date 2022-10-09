@@ -10,18 +10,7 @@ StaticNpc N(NpcData_Bobomb_01) = {
     .pos = { -70.0f, 0.0f, 80.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 5, 0 },
-            { ITEM_FIRE_FLOWER, 5, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = BOBOMB_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -34,24 +23,7 @@ StaticNpc N(NpcData_Bobomb_01) = {
             .detectSize = { 250, 175 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bobomb_Anim02,
-        .walk   = ANIM_Bobomb_Anim04,
-        .run    = ANIM_Bobomb_Anim06,
-        .chase  = ANIM_Bobomb_Anim06,
-        .anim_4 = ANIM_Bobomb_Anim02,
-        .anim_5 = ANIM_Bobomb_Anim02,
-        .death  = ANIM_Bobomb_Anim0E,
-        .hit    = ANIM_Bobomb_Anim0E,
-        .anim_8 = ANIM_Bobomb_Anim06,
-        .anim_9 = ANIM_Bobomb_Anim06,
-        .anim_A = ANIM_Bobomb_Anim06,
-        .anim_B = ANIM_Bobomb_Anim06,
-        .anim_C = ANIM_Bobomb_Anim06,
-        .anim_D = ANIM_Bobomb_Anim06,
-        .anim_E = ANIM_Bobomb_Anim06,
-        .anim_F = ANIM_Bobomb_Anim06,
-    },
+    .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -61,18 +33,7 @@ StaticNpc N(NpcData_Bobomb_02) = {
     .pos = { 140.0f, 0.0f, 80.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 5, 0 },
-            { ITEM_FIRE_FLOWER, 5, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = BOBOMB_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -85,24 +46,7 @@ StaticNpc N(NpcData_Bobomb_02) = {
             .detectSize = { 250, 175 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bobomb_Anim02,
-        .walk   = ANIM_Bobomb_Anim04,
-        .run    = ANIM_Bobomb_Anim06,
-        .chase  = ANIM_Bobomb_Anim06,
-        .anim_4 = ANIM_Bobomb_Anim02,
-        .anim_5 = ANIM_Bobomb_Anim02,
-        .death  = ANIM_Bobomb_Anim0E,
-        .hit    = ANIM_Bobomb_Anim0E,
-        .anim_8 = ANIM_Bobomb_Anim06,
-        .anim_9 = ANIM_Bobomb_Anim06,
-        .anim_A = ANIM_Bobomb_Anim06,
-        .anim_B = ANIM_Bobomb_Anim06,
-        .anim_C = ANIM_Bobomb_Anim06,
-        .anim_D = ANIM_Bobomb_Anim06,
-        .anim_E = ANIM_Bobomb_Anim06,
-        .anim_F = ANIM_Bobomb_Anim06,
-    },
+    .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -112,18 +56,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .pos = { 50.0f, 187.0f, 183.0f },
     .yaw = 0,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 5, 0 },
-            { ITEM_P_O_W_BLOCK, 5, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 1,
-    },
+    .drops = KOOPA_TROOPA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -138,24 +71,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
             .detectSize = { 150, 80 },
         }
     },
-    .animations = {
-        .idle   = ANIM_KoopaTroopa_Anim01,
-        .walk   = ANIM_KoopaTroopa_Anim03,
-        .run    = ANIM_KoopaTroopa_Anim04,
-        .chase  = ANIM_KoopaTroopa_Anim04,
-        .anim_4 = ANIM_KoopaTroopa_Anim01,
-        .anim_5 = ANIM_KoopaTroopa_Anim01,
-        .death  = ANIM_KoopaTroopa_Anim0B,
-        .hit    = ANIM_KoopaTroopa_Anim0B,
-        .anim_8 = ANIM_KoopaTroopa_Anim07,
-        .anim_9 = ANIM_KoopaTroopa_Anim06,
-        .anim_A = ANIM_KoopaTroopa_Anim08,
-        .anim_B = ANIM_KoopaTroopa_Anim04,
-        .anim_C = ANIM_KoopaTroopa_Anim04,
-        .anim_D = ANIM_KoopaTroopa_Anim04,
-        .anim_E = ANIM_KoopaTroopa_Anim04,
-        .anim_F = ANIM_KoopaTroopa_Anim04,
-    },
+    .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
