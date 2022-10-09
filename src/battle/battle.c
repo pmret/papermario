@@ -223,14 +223,14 @@ BattleArea gBattleAreas[] = {
     [BTL_AREA_KPA2] = {
         BTL_AREA(area_kpa2),
         .name = "エリア ＫＰＡ２",
-        .battles = 0x802346A8,
-        .stages = 0x80234720,
+        .battles = &b_area_kpa2_formationTable,
+        .stages = &b_area_kpa2_stageTable,
     },
     [BTL_AREA_KPA3] = {
         BTL_AREA(area_kpa3),
         .name = "エリア ＫＰＡ３",
-        .battles = 0x8022839C,
-        .stages = 0x802283EC,
+        .battles = &b_area_kpa3_formationTable,
+        .stages = &b_area_kpa3_stageTable,
     },
     [BTL_AREA_KPA4] = {
         BTL_AREA(area_kpa4),

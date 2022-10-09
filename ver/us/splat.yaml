@@ -6440,10 +6440,11 @@ segments:
     start: 0x6BBB90
     vram: 0x80218000
     subsegments:
-    - [0x6BBB90, c]
-    - [0x6BBC60, c]
-    - [0x6BD250, data]
-    - [0x6CBF90]
+    - [0x6BBB90, c, actor/anti_guy]
+    - [0x6BBC60, c, actor/duplighost]
+    - [0x6BD250, c, stage/kpa_01]
+    - [0x6BD250, c, area]
+    - [0x6BD250]
   - dir: battle/area_kpa4
     type: code
     start: 0x6CC070
