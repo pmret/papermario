@@ -775,6 +775,9 @@ end_01_CreditsDataPtr = 0x8024A2C4;
 D_80242568_filemenu = 0x80242568;
 D_80243390_omo_12 = 0x80243390;
 D_8024F580_hos_05 = 0x8024F580;
+osr_00_802437C0 = 0x802437C0;
+mim_03_802424E0 = 0x802424E0;
+sam_04_80245210 = 0x80245210;
 
 // incorrectly-identified vtx addresses for tst_13
 D_802423D0 = 0x802423D0;

@@ -4,14 +4,14 @@
 
 #define NAMESPACE b_area_flo_flo_04
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(80233470) = {
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarF, 0)
     EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.96875), EVT_FLOAT(1.03125), 15, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(1.03125), EVT_FLOAT(0.96875), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.96875), EVT_FLOAT(1.03125), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03125), EVT_FLOAT(0.96875), 15, 0, 0)
         EVT_CALL(ScaleModel, LVarA, LVar1, LVar0, 1)
         EVT_ADD(LVarF, 1)
         EVT_IF_GE(LVarF, 30)

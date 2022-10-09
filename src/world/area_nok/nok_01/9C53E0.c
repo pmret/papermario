@@ -87,7 +87,7 @@ ApiStatus func_8024243C_9C781C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 ApiStatus func_802426A4_9C7A84(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

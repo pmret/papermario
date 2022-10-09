@@ -312,7 +312,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         sp2C = parakarry->collisionHeight * 0.5f;
                         halfCollisionHeight = sp2C;
 
-                        if (npc_raycast_up(0x10000, &x, &y, &z, &sp2C)) {
+                        if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C)) {
                             if (sp2C < halfCollisionHeight) {
                                 D_802BEBC4 = 0;
                             }
@@ -332,7 +332,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         x = playerStatus->position.x;
                         y = playerStatus->position.y;
                         z = playerStatus->position.z;
-                        if (npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter) >= 2) {
+                        if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter) >= 2) {
                             playerStatus->position.x += (x - playerStatus->position.x) * 0.125f;
                             playerStatus->position.z += (z - playerStatus->position.z) * 0.125f;
                             parakarry->pos.x += (x - parakarry->pos.x) * 0.125f;
@@ -342,7 +342,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         x = parakarry->pos.x;
                         y = parakarry->pos.y;
                         z = parakarry->pos.z;
-                        testMove = npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+                        testMove = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
                         if (testMove >= 2) {
                             tempX = x;
                             tempZ = z;
@@ -356,7 +356,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             diffXPlayer = (tempX - playerStatus->position.x) * 0.125f;
                             diffZPlayer = (tempZ - playerStatus->position.z) * 0.125f;
                             z = parakarry->pos.z;
-                            testMove = npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+                            testMove = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
                             if (testMove == 0) {
                                 playerStatus->position.x += diffXPlayer;
                                 playerStatus->position.z += diffZPlayer;
@@ -375,7 +375,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         y = playerStatus->position.y + playerStatus->colliderHeight * 0.5f;
                         z = playerStatus->position.z;
                         sp2C = playerStatus->colliderHeight * 0.5f;
-                        if (npc_raycast_down_around(0x10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
+                        if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
                             s32 surfaceType = get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_SPIKES;
@@ -459,14 +459,14 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                     x = playerStatus->position.x;
                                     y = playerStatus->position.y;
                                     z = playerStatus->position.z;
-                                    if (npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter)) {
+                                    if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter)) {
                                         suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                                         D_802BEBC0_31CBE0 = 0x15;
                                     } else {
                                         x = parakarry->pos.x;
                                         y = parakarry->pos.y;
                                         z = parakarry->pos.z;
-                                        if (!npc_test_move_complex_with_slipping(0x10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius)) {
+                                        if (!npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius)) {
                                             tempConditional = FALSE;
                                             x = parakarry->pos.x;
                                             y = parakarry->pos.y + parakarry->collisionHeight * 0.5f;
@@ -474,7 +474,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                             sp2C = parakarry->collisionHeight * 0.5f;
 
                                             halfCollisionHeight = sp2C;
-                                            if (npc_raycast_up(0x10000, &x, &y, &z, &sp2C) && (sp2C < halfCollisionHeight)) {
+                                            if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C) && (sp2C < halfCollisionHeight)) {
                                                 parakarry->pos.y =  y - parakarry->collisionHeight;
                                                 playerStatus->position.y =  parakarry->pos.y - 32.0f;
                                                 tempConditional = TRUE;
@@ -484,7 +484,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                             z = playerStatus->position.z;
                                             sp2C = playerStatus->colliderHeight * 0.5f;
 
-                                            if (!npc_raycast_down_around(0x10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)
+                                            if (!npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)
                                                     || (playerStatus->position.y += (y - playerStatus->position.y) * 0.25f,
                                                         parakarry->pos.y = playerStatus->position.y + 32.0f,
                                                         y = parakarry->pos.y,

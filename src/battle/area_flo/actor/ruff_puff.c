@@ -100,13 +100,13 @@ EvtScript N(init) = {
     EVT_END
 };
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(idle) = {
     EVT_SET(LVarF, 0)
     EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
         EVT_ADD(LVarF, 1)
         EVT_CALL(SetActorScale, ACTOR_SELF, LVar1, LVar0, EVT_FLOAT(1.0))
         EVT_IF_GE(LVarF, 30)

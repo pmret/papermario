@@ -602,7 +602,11 @@ ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
-    return (gCollisionStatus.currentFloor >= 0) * ApiStatus_DONE2;
+    if (gCollisionStatus.currentFloor >= 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
@@ -644,36 +648,36 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
 
     switch (val) {
         case 0:
-            playerStatus->renderMode = 0xD;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             func_802DDFF8(a0, 0, 0, 0, 0, 0, D_802DB5B0);
             break;
         case 2:
         case 3:
-            playerStatus->renderMode = 0xD;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         case 1:
             func_802DDFF8(a0, val, 0, 0, 0, 0, D_802DB5B0);
             break;
         case 4:
-            playerStatus->renderMode = 13;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, 4, a2, a3, a4, 0, D_802DB5B0);
             break;
         case 6:
-            playerStatus->renderMode = 13;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 6, a2, a3, a4, 0xFF, D_802DB5B0);
+            func_802DDFF8(a0, 6, a2, a3, a4, 255, D_802DB5B0);
             break;
         case 7:
-            playerStatus->renderMode = 22;
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a5 = evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 7, 0xFF, 0xFF, 0xFF, a5, D_802DB5B0);
+            func_802DDFF8(a0, 7, 255, 255, 255, a5, D_802DB5B0);
             break;
         case 8:
-            playerStatus->renderMode = 22;
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
@@ -681,14 +685,14 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
             func_802DDFF8(a0, 8, a2, a3, a4, a5, D_802DB5B0);
             break;
         case 5:
-            playerStatus->renderMode = 13;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, 5, a2, a3, a4, 0, D_802DB5B0);
             break;
         case 13:
-            playerStatus->renderMode = 22;
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
@@ -778,10 +782,10 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2B50(void) {
+ApiStatus ForceUsePartner(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PA_FLAGS_8;
+    playerStatus->animFlags |= PA_FLAGS_FORCE_USE_PARTNER;
     return ApiStatus_DONE2;
 }
 

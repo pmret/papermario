@@ -105,7 +105,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_FIRE_SHIELD, 75, 290, 235, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KZN03_Item_FireShield)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 215, 745, -105, 0, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 85, 770, -105, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeItemEntity, ITEM_P_O_W_BLOCK, 85, 795, -105, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KZN03_Item_POWBlock)
+    EVT_CALL(MakeItemEntity, ITEM_POW_BLOCK, 85, 795, -105, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KZN03_Item_POWBlock)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 35, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinA)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -15, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)

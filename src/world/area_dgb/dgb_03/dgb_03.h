@@ -14,7 +14,7 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
+ApiStatus N(RemovePadlock)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244988);

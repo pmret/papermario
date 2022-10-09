@@ -3,7 +3,7 @@
 
 extern EvtScript N(EVS_ExitDoors_trd_01_2);
 
-#include "world/common/SetEntityFlags100000.inc.c"
+#include "world/common/RemovePadlock.inc.c"
 #include "world/common/GetEntityPosition.inc.c"
 
 EvtScript N(D_80242890_9A3870) = {
@@ -27,7 +27,7 @@ EvtScript N(D_80242890_9A3870) = {
     EVT_CALL(N(GetEntityPosition), MV_Padlock_EntityIndex, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
     EVT_RETURN

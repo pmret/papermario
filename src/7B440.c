@@ -30,7 +30,7 @@ void update_player_input(void) {
         playerStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_8) {
+    if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER) {
         playerStatus->animFlags |= PA_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-// Same as UnkFloatFunc with an extra abs on diff
+// Same as CosInterpMinMax with an extra abs on diff
 ApiStatus N(UnkFloatFuncAbs)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;

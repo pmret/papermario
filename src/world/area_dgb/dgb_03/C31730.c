@@ -365,7 +365,7 @@ EvtScript N(80243740) = {
     EVT_CALL(N(GetEntityPosition), MapVar(0), LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, 0x269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MapVar(0))
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
     EVT_RETURN

@@ -41,7 +41,7 @@ EvtScript N(80232A30) = {
 
 #include "common/MakeSun.inc.c"
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(80232C48) = {
     EVT_CALL(EnableModel, LVarF, 1)
@@ -56,10 +56,10 @@ EvtScript N(80232C48) = {
         EVT_MULF(LVar6, EVT_FLOAT(1.01))
         EVT_ADDF(LVar7, EVT_FLOAT(0.01))
         EVT_SETF(LVar8, LVar6)
-        EVT_CALL(N(UnkFloatFunc), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 15, 0, 0)
         EVT_ADDF(LVar8, LVarA)
         EVT_SETF(LVar9, LVar7)
-        EVT_CALL(N(UnkFloatFunc), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 20, 0, 90)
+        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 20, 0, 90)
         EVT_ADDF(LVar9, LVarA)
         EVT_SETF(LVarA, LVar0)
         EVT_MULF(LVarA, EVT_FLOAT(10.0))
