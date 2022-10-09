@@ -6450,9 +6450,26 @@ segments:
     start: 0x6CC070
     vram: 0x80218000
     subsegments:
-    - [0x6CC070, c]
-    - [0x6CC1C0, c]
-    - [0x6CC6C0, data]
+    - [0x6CC070, c, actor/bombshell_bill_blaster]
+    - [0x6CC090, c, actor/bombshell_bill]
+    - [0x6CC090, c, actor/koopatrol]
+    - [0x6CC1C0, c, actor/magikoopa]
+    - [0x6CC6C0, c, stage/kpa_01]
+    - [0x6CC6C0, c, stage/kpa_01b]
+    - [0x6CC6C0, c, stage/kpa_02]
+    - [0x6CC6C0, c, stage/kpa_03]
+    - [0x6CC6C0, c, stage/kpa_04]
+    - [0x6CC6C0, c, stage/kpa_04b]
+    - [0x6CC6C0, c, stage/kpa_04c]
+    - [0x6CC6C0, c, stage/kpa_05]
+    - [0x6CC6C0, c, stage/kpa_07]
+    - [0x6CC6C0, c, stage/kpa_08]
+    - [0x6CC6C0, c, stage/kpa_09]
+    - [0x6CC6C0, c, stage/kpa_11]
+    - [0x6CC6C0, c, stage/kpa_13]
+    - [0x6CC6C0, c, stage/kpa_14]
+    - [0x6CC6C0, c, area]
+    - [0x6CC6C0]
   - dir: battle/area_kkj
     type: code
     start: 0x6DBDA0

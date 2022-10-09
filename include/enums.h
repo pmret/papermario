@@ -2517,7 +2517,7 @@ enum Events {
     EVENT_SPIN_SMASH_LAUNCH_HIT       = 0x00000011,
     EVENT_SHELL_CRACK_HIT             = 0x00000012,
     EVENT_STAR_BEAM                   = 0x00000013,
-    EVENT_PEACH_BEAM                          = 0x00000014,
+    EVENT_PEACH_BEAM                  = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
     EVENT_UNKNOWN_TRIGGER             = 0x00000017,
