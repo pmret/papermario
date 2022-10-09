@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcDefeat_Goomba) = {
+EvtScript N(EVS_NpcDefeat_HyperGoomba) = {
     EVT_SET(GF_ARN12_Defeated_Goomba, TRUE)
     EVT_CALL(DoNpcDefeat)
     EVT_RETURN
@@ -47,15 +47,15 @@ EvtScript N(EVS_NpcInit_TubbasHeart) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Goomba) = {
+EvtScript N(EVS_NpcInit_HyperGoomba) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
         EVT_IF_EQ(GF_ARN12_Defeated_Goomba, TRUE)
             EVT_CALL(RemoveNpc, NPC_SELF)
             EVT_RETURN
         EVT_END_IF
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HyperGoomba)))
     EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HyperGoomba)))
     EVT_RETURN
     EVT_END
 };
@@ -71,13 +71,13 @@ StaticNpc N(NpcData_TubbasHeart) = {
     .animations = TUBBAS_HEART_ANIMS,
 };
 
-StaticNpc N(NpcData_Goomba) = {
-    .id = NPC_Goomba,
-    .settings = &N(NpcSettings_Goomba),
+StaticNpc N(NpcData_HyperGoomba) = {
+    .id = NPC_HyperGoomba,
+    .settings = &N(NpcSettings_HyperGoomba),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = &N(EVS_NpcInit_Goomba),
+    .init = &N(EVS_NpcInit_HyperGoomba),
     .drops = HYPER_GOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -97,6 +97,6 @@ StaticNpc N(NpcData_Goomba) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_TubbasHeart)),
-    NPC_GROUP(N(NpcData_Goomba), BTL_ARN_FORMATION_01, BTL_ARN_STAGE_04),
+    NPC_GROUP(N(NpcData_HyperGoomba), BTL_ARN_FORMATION_01, BTL_ARN_STAGE_04),
     {}
 };

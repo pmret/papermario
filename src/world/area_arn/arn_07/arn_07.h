@@ -28,9 +28,9 @@ enum {
 	NPC_Boo_06              = 7,
 	NPC_Bow                 = 8,
 	NPC_Bootler             = 9,
-	NPC_Paragoomba_01       = 10,
-	NPC_Paragoomba_02       = 11,
-	NPC_Paragoomba_03       = 12,
+	NPC_HyperParagoomba_01  = 10,
+	NPC_HyperParagoomba_02  = 11,
+	NPC_HyperParagoomba_03  = 12,
 	NPC_Skolar              = 13,
 };
 

@@ -1,40 +1,9 @@
 
-#include "common.h"
+#include "Bandit.h"
 
-#define BANDIT_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAGS_80, \
-    .itemDropChance = 5, \
-    .itemDrops = { \
-        { ITEM_HONEY_SYRUP, 10, 0 }, \
-    }, \
-    .heartDrops  = STANDARD_HEART_DROPS(2), \
-    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
-    .minCoinBonus = 1, \
-    .maxCoinBonus = 3, \
-}
+#define HAS_COIN_FLAG    AreaFlag(1)
 
-#define BANDIT_ANIMS \
-{ \
-    .idle   = ANIM_Bandit_Anim01, \
-    .walk   = ANIM_Bandit_Anim05, \
-    .run    = ANIM_Bandit_Anim07, \
-    .chase  = ANIM_Bandit_Anim07, \
-    .anim_4 = ANIM_Bandit_Anim01, \
-    .anim_5 = ANIM_Bandit_Anim01, \
-    .death  = ANIM_Bandit_Anim09, \
-    .hit    = ANIM_Bandit_Anim09, \
-    .anim_8 = ANIM_Bandit_Anim00, \
-    .anim_9 = ANIM_Bandit_Anim00, \
-    .anim_A = ANIM_Bandit_Anim00, \
-    .anim_B = ANIM_Bandit_Anim00, \
-    .anim_C = ANIM_Bandit_Anim00, \
-    .anim_D = ANIM_Bandit_Anim00, \
-    .anim_E = ANIM_Bandit_Anim00, \
-    .anim_F = ANIM_Bandit_Anim00, \
-}
-
-API_CALLABLE(N(Bandit_DropStolenCoin)) {
+API_CALLABLE(N(Bandit_TetherStolenCoin)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID;
     Npc* npc;
@@ -76,7 +45,7 @@ EvtScript N(EVS_Bandit_CreateStolenCoin) = {
     EVT_CALL(GetNpcPos, LVarA, LVar1, LVar2, LVar3)
     EVT_ADD(LVar2, 30)
     EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_CALL(N(Bandit_DropStolenCoin), LVarA, LVar0, AF_SBK_01)
+    EVT_CALL(N(Bandit_TetherStolenCoin), LVarA, LVar0, HAS_COIN_FLAG)
     EVT_CALL(RemoveItemEntity, LVar0)
     EVT_RETURN
     EVT_END
@@ -111,7 +80,7 @@ EvtScript N(EVS_NpcDefeat_Bandit) = {
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_SET(AF_SBK_01, TRUE)
+            EVT_SET(HAS_COIN_FLAG, TRUE)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bandit_Anim02)
             EVT_CALL(GetSelfNpcID, LVar0)
@@ -130,7 +99,7 @@ EvtScript N(EVS_NpcDefeat_Bandit) = {
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(16.0))
             EVT_ADD(LVar7, 200)
             EVT_CALL(NpcMoveTo, NPC_SELF, LVar7, LVar9, 0)
-            EVT_SET(AF_SBK_01, FALSE)
+            EVT_SET(HAS_COIN_FLAG, FALSE)
             EVT_CALL(DisablePlayerInput, FALSE)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)

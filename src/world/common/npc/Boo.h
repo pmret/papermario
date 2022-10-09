@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/npc/Boo.h"
 
 #define BOO_DROPS \
 { \

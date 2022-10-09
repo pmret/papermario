@@ -1,37 +1,18 @@
 #include "common.h"
 
 static s32 N(KeyItemChoiceList)[112];
-static s32** N(varStash) = NULL;
 
-// GiveKeyItem?
-EvtScript N(80241C6C) = {
-    EVT_CALL(ShowGotItem, LVar0, ITEM_TYPE_KEY, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-// GiveCoin?
-EvtScript N(80241C9C) = {
-    EVT_CALL(ShowGotItem, LVar0, ITEM_TYPE_KEY, ITEM_PICKUP_FLAG_1_COIN)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/complete/GiveReward.inc.c"
 
 s32 N(ItemChoice_HasSelectedItem) = 0;
 
 s32 N(ItemChoice_SelectedItemID) = 0;
 
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"
 
-EvtScript N(80241CD4) = {
+EvtScript N(EVS_ItemChoicePopup) = {
     EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_SET(LVarA, LVar0)
@@ -56,9 +37,9 @@ EvtScript N(80241CD4) = {
     EVT_END
 };
 
-EvtScript N(80241E18) = {
+EvtScript N(ChooseKeyItem) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(80241CD4)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END

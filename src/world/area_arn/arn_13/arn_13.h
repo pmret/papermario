@@ -13,8 +13,8 @@
 #include "sprite/npc/Goomba.h"
 
 enum {
-	NPC_TubbasHeart             = 0,
-	NPC_Goomba                  = 1,
+	NPC_TubbasHeart		= 0,
+	NPC_HyperGoomba		= 1,
 };
 
 #define NAMESPACE arn_13

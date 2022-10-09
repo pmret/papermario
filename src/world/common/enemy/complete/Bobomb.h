@@ -1,3 +1,6 @@
+#include "common.h"
+#include "sprite/npc/Bobomb.h"
+
 #define BOBOMB_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

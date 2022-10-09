@@ -3,7 +3,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 23
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

@@ -1,3 +1,6 @@
+#include "common.h"
+#include "sprite/npc/Goomba.h"
+
 #define HYPER_GOOMBA_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

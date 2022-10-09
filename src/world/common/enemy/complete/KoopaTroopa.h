@@ -1,3 +1,6 @@
+#include "common.h"
+#include "sprite/npc/KoopaTroopa.h"
+
 #define KOOPA_TROOPA_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

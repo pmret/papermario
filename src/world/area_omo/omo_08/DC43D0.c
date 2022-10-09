@@ -19,7 +19,7 @@ static char* N(exit_str_5) = "omo_16";
 
 #include "common/SetNpcPosYaw.inc.c"
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 #include "common/IsAOrBPressed.inc.c"
 

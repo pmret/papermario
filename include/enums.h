@@ -1604,7 +1604,7 @@ enum ItemIDs {
     ITEM_DRIED_SHROOM                 = 0x0000008D,
     ITEM_ULTRA_SHROOM                 = 0x0000008E,
     ITEM_SLEEPY_SHEEP                 = 0x0000008F,
-    ITEM_POW_BLOCK                  = 0x00000090,
+    ITEM_POW_BLOCK                    = 0x00000090,
     ITEM_HUSTLE_DRINK                 = 0x00000091,
     ITEM_STOP_WATCH                   = 0x00000092,
     ITEM_WHACKAS_BUMP                 = 0x00000093,

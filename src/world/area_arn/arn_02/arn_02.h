@@ -13,9 +13,9 @@
 #include "sprite/npc/Goomba.h"
 
 enum {
-	NPC_Cleft_01                = 0,
-	NPC_Cleft_02                = 1,
-	NPC_Goomba                  = 2,
+	NPC_HyperCleft_01		= 0,
+	NPC_HyperCleft_02		= 1,
+	NPC_HyperGoomba  		= 2,
 };
 
 #define NAMESPACE arn_02

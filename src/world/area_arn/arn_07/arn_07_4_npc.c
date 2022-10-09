@@ -767,7 +767,7 @@ StaticNpc N(NpcData_Bootler) = {
     .extraAnimations = N(ExtraAnims_Bootler),
 };
 
-EvtScript N(EVS_NpcInit_Paragoomba_01) = {
+EvtScript N(EVS_NpcInit_HyperParagoomba) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
         EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -777,13 +777,13 @@ EvtScript N(EVS_NpcInit_Paragoomba_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Paragoomba_01) = {
-    .id = NPC_Paragoomba_01,
-    .settings = &N(NpcSettings_Paragoomba),
+StaticNpc N(NpcData_HyperParagoomba_01) = {
+    .id = NPC_HyperParagoomba_01,
+    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { -216.0f, 60.0f, -10.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = &N(EVS_NpcInit_Paragoomba_01),
+    .init = &N(EVS_NpcInit_HyperParagoomba),
     .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -801,13 +801,13 @@ StaticNpc N(NpcData_Paragoomba_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Paragoomba_02) = {
-    .id = NPC_Paragoomba_02,
-    .settings = &N(NpcSettings_Paragoomba),
+StaticNpc N(NpcData_HyperParagoomba_02) = {
+    .id = NPC_HyperParagoomba_02,
+    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 0.0f, 60.0f, 150.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = &N(EVS_NpcInit_Paragoomba_01),
+    .init = &N(EVS_NpcInit_HyperParagoomba),
     .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -825,13 +825,13 @@ StaticNpc N(NpcData_Paragoomba_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Paragoomba_03) = {
-    .id = NPC_Paragoomba_03,
-    .settings = &N(NpcSettings_Paragoomba),
+StaticNpc N(NpcData_HyperParagoomba_03) = {
+    .id = NPC_HyperParagoomba_03,
+    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 260.0f, 60.0f, 30.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = &N(EVS_NpcInit_Paragoomba_01),
+    .init = &N(EVS_NpcInit_HyperParagoomba),
     .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -890,9 +890,9 @@ NpcGroupList N(BossNPCs) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Paragoomba_01), BTL_ARN_FORMATION_06, BTL_ARN_STAGE_01),
-    NPC_GROUP(N(NpcData_Paragoomba_02), BTL_ARN_FORMATION_07, BTL_ARN_STAGE_01),
-    NPC_GROUP(N(NpcData_Paragoomba_03), BTL_ARN_FORMATION_08, BTL_ARN_STAGE_01),
+    NPC_GROUP(N(NpcData_HyperParagoomba_01), BTL_ARN_FORMATION_06, BTL_ARN_STAGE_01),
+    NPC_GROUP(N(NpcData_HyperParagoomba_02), BTL_ARN_FORMATION_07, BTL_ARN_STAGE_01),
+    NPC_GROUP(N(NpcData_HyperParagoomba_03), BTL_ARN_FORMATION_08, BTL_ARN_STAGE_01),
     {}
 };
 

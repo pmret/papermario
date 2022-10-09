@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-MobileAISettings N(AISettings_Goomba_Patrol) = {
+MobileAISettings N(AISettings_HyperGoomba_Patrol) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -17,17 +17,17 @@ MobileAISettings N(AISettings_Goomba_Patrol) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(EVS_NpcAI_Goomba_Patrol) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Goomba_Patrol)))
+EvtScript N(EVS_NpcAI_HyperGoomba_Patrol) = {
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_HyperGoomba_Patrol)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_Goomba_Patrol) = {
+NpcSettings N(NpcSettings_HyperGoomba_Patrol) = {
     .height = 20,
     .radius = 23,
     .level = 12,
-    .ai = &N(EVS_NpcAI_Goomba_Patrol),
+    .ai = &N(EVS_NpcAI_HyperGoomba_Patrol),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

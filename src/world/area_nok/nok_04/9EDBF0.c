@@ -61,7 +61,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

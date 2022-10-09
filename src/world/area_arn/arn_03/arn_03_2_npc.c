@@ -126,7 +126,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0081)
             EVT_SET(LVar0, 118)
             EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(80241C6C))
+            EVT_EXEC_WAIT(N(GiveKeyReward))
             EVT_CALL(AddKeyItem, ITEM_KOOT_PACKAGE)
             EVT_SET(MV_Unk_00, 0)
             EVT_SET(GF_ARN03_RecievedPackage, TRUE)
