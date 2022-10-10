@@ -261,7 +261,7 @@ typedef struct Npc {
     /* 0x2C8 */ PAL_PTR* localPalettes[16];
     /* 0x308 */ s16 unk_308;
     /* 0x30A */ s16 unk_30A;
-    /* 0x30C */ s16 unk_30C;
+    /* 0x30C */ u16 unk_30C;
     /* 0x30E */ s16 unk_30E;
     /* 0x310 */ s16 unk_310;
     /* 0x312 */ s16 unk_312;
