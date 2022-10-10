@@ -258,10 +258,10 @@ typedef struct Npc {
     /* 0x0C2 */ char unk_C2[2];
     /* 0x0C4 */ PAL_PTR* spritePaletteList;
     /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
-    /* 0x2C8 */ PAL_PTR* localPalettes[16];
+    /* 0x2C8 */ PAL_PTR localPalettes[16];
     /* 0x308 */ s16 unk_308;
     /* 0x30A */ s16 unk_30A;
-    /* 0x30C */ s16 unk_30C;
+    /* 0x30C */ u16 unk_30C;
     /* 0x30E */ s16 unk_30E;
     /* 0x310 */ s16 unk_310;
     /* 0x312 */ s16 unk_312;

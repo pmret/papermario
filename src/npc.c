@@ -3,11 +3,24 @@
 #include "effects.h"
 #include "sprite.h"
 
-
-s8 D_80077BF0[] = {
-    0x01, 0x02, 0x00, 0x34, 0x01, 0x04, 0x00, 0x36, 0x00, 0x36, 0x01, 0x02, 0x00, 0x1C, 0x01, 0x02, 0x00, 0x06, 0x01, 0x02, 0x00, 0x2C, 0x01, 0x02, 0x00, 0x2C, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00
+u8 D_80077BF0[] = {
+    1, 2,
+    0, 52,
+    1, 4,
+    0, 54,
+    0, 54,
+    1, 2,
+    0, 28,
+    1, 2,
+    0, 6,
+    1, 2,
+    0, 44,
+    1, 2,
+    0, 44,
+    255, 0,
 };
 
+s32 D_80077C0C = 0; //  padding?
 f32 D_80077C10 = 0.0f;
 s16 D_80077C14 = 4;
 s16 D_80077C16 = 0; // padding?
@@ -15,10 +28,10 @@ f32 D_80077C18 = 0;
 s16 D_80077C1C = 4;
 s16 D_80077C1E = 5;
 s32 D_80077C20 = 0;
-s32 D_80077C24 = 0;
+f32 D_80077C24 = 0.0f;
 s16 D_80077C28 = 4;
 s16 D_80077C2A = 0; // padding?
-s32 D_80077C2C = 0;
+f32 D_80077C2C = 0.0f;
 s16 D_80077C30 = 4;
 s16 D_80077C32 = 0; // padding?
 s32 D_80077C34 = 0;
@@ -1144,15 +1157,114 @@ void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        s32 temp_a2 = (npc->alpha * npc->alpha2 / 255);
-        s32 temp = temp_a2 < 255; // TODO: better match?
-        spr_draw_npc_sprite(npc->spriteInstanceID | (temp) << 31, arg1, temp_a2, NULL, mtx);
+        s32 alpha = (npc->alpha * npc->alpha2 / 255);
+        u32 mask;
+        if (alpha < 255) {
+            mask = DRAW_SPRITE_OVERRIDE_ALPHA;
+        } else {
+            mask = 0;
+        }
+        spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, NULL, mtx);
     } else {
         spr_draw_player_sprite(0x40000001, arg1, 0, 0, mtx);
     }
 }
 
-INCLUDE_ASM(s32, "npc", npc_draw_palswap_mode_1);
+s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
+    s32 i, j;
+    s32 temp3;
+    PAL_PTR src;
+    PAL_PTR dst;
+
+    if (npc->dirtyPalettes != 0) {
+        npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+        npc->paletteCount = 0;
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
+            npc->paletteCount++;
+        }
+
+        npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);
+        for (i = 0; i < npc->paletteCount; i++) {
+            dst = npc->localPaletteData[i];
+            src = npc->spritePaletteList[i];
+            if (src != NULL) {
+                for (j = 0; j < 16; j++) {
+                    *dst++ = *src++;
+                }
+            }
+        }
+
+        npc->palSwapState = -2;
+        npc->palSwapLerpAlpha = 0;
+        npc->dirtyPalettes = 0;
+        npc->palSwapTimer = 0;
+    }
+
+    if (npc->palSwapTimer == 0) {
+        npc->palSwapState += 2;
+        temp3 = D_80077BF0[npc->palSwapState];
+        if (temp3 == 255) {
+            npc->palSwapState = 0;
+        }
+        npc->palSwapTimer = D_80077BF0[npc->palSwapState + 1] / 2;
+    }
+
+    temp3 = D_80077BF0[npc->palSwapState];
+    npc->palSwapTimer--;
+
+    switch(temp3) {
+        case 0:
+            for (i = 0; i < npc->unk_C0; i++) {
+                dst = npc->localPaletteData[i];
+                src = npc->spritePaletteList[i];
+                if (src != NULL) {
+                    for (j = 0; j < 16; j++) {
+                        *dst++ = *src++;
+                    }
+                }
+            }
+            break;
+        case 1:
+            for (i = 0; i < npc->unk_C0; i++) {
+                dst = npc->localPaletteData[i];
+                src = npc->spritePaletteList[npc->unk_C0 * 5 + i];
+                if (src != NULL) {
+                    for (j = 0; j < 16; j++) {
+                        *dst++ = *src++;
+                    }
+                }
+            }
+            break;
+        case 2:
+            for (i = 0; i < npc->unk_C0; i++) {
+                dst = npc->localPaletteData[i];
+                src = npc->spritePaletteList[npc->unk_C0 * 6 + i];
+                if (src != NULL) {
+                    for (j = 0; j < 16; j++) {
+                        *dst++ = *src++;
+                    }
+                }
+            }
+            break;
+    }
+
+    for (i = 0; i < npc->paletteCount; i++) {
+        npc->localPalettes[i] = npc->localPaletteData[i];
+    }
+
+    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+        s32 alpha = npc->alpha * npc->alpha2 / 255;
+        u32 mask;
+        if (alpha < 255) {
+            mask = DRAW_SPRITE_OVERRIDE_ALPHA;
+        } else {
+            mask = 0;
+        }
+        mask |= DRAW_SPRITE_OVERRIDE_PALETTES;
+        spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, npc->localPalettes, mtx);
+    }
+    npc->palSwapLerpAlpha--;
+}
 
 u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
     u32 r = ((((colorA >> 11) & 0x1F) * (255 - lerpAlpha)) + (((colorB >> 11) & 0x1F) * lerpAlpha)) / 255;
@@ -1162,9 +1274,275 @@ u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
     return (colorB & 1) | (((r & 0xFF) << 11) | ((g & 0xFF) << 6) | ((b & 0xFF) << 1));
 }
 
-INCLUDE_ASM(s32, "npc", npc_draw_palswap_mode_2);
+s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
+    s32 i, j;
+    PAL_PTR src;
+    PAL_PTR dst;
+    PAL_PTR src2;
+    s32 blendAlpha;
 
-INCLUDE_ASM(s32, "npc", npc_draw_palswap_mode_4);
+    if (npc->dirtyPalettes != 0) {
+        if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+            npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+        }
+
+        npc->paletteCount = 0;
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
+            npc->paletteCount++;
+        }
+
+        if (npc->dirtyPalettes == 1) {
+            npc->palSwapState = 0;
+            npc->palSwapLerpAlpha = 0;
+        } else {
+            npc->palSwapState = 0;
+            npc->palSwapLerpAlpha = 255;
+        }
+
+        for (i = 0; i < npc->paletteCount; i++) {
+            src2 = npc->localPaletteData[i];
+            src = npc->spritePaletteList[i];
+            npc->localPalettes[i] = src2;
+            if (src != NULL) {
+                for (j = 0; j < 16; j++) {
+                    *src2++ = *src++;
+                }
+            }
+        }
+
+        if (arg2 == 0) {
+            s32 temp2 = npc->unk_30C;
+            npc->unk_30C = 0;
+            npc->unk_30E = temp2;
+            npc->unk_310 = temp2;
+            npc->unk_312 = npc->unk_30E;
+        }
+
+        npc->palSwapLerpAlpha = 0;
+        npc->palSwapState = 0;
+        npc->dirtyPalettes = 0;
+        npc->palSwapTimer = npc->unk_30C;
+    }
+
+    switch (npc->palSwapState) {
+        case 0:
+            if (npc->palSwapTimer != 0) {
+                npc->palSwapTimer--;
+                break;
+            } else {
+                npc->palSwapLerpAlpha = 0;
+                npc->palSwapState = 1;
+            }
+            /* fallthrough */
+        case 1:
+            npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
+            if (npc->palSwapLerpAlpha > 25500) {
+                npc->palSwapLerpAlpha = 25500;
+            }
+            blendAlpha = npc->palSwapLerpAlpha / 100;
+            dst = npc->localPaletteData[0];
+            src = npc->spritePaletteList[npc->unk_308];
+            src2 = npc->spritePaletteList[npc->unk_30A];
+            npc->localPalettes[0] = dst;
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            if (blendAlpha == 255) {
+                npc->palSwapState = 2;
+                npc->palSwapTimer = npc->unk_310;
+            }
+            break;
+    }
+    switch (npc->palSwapState) {
+        case 2:
+            if (npc->palSwapTimer != 0) {
+                npc->palSwapTimer--;
+                break;
+            } else {
+                npc->palSwapLerpAlpha = 0;
+                npc->palSwapState = 3;
+            }
+            /* fallthrough */
+        case 3:
+            npc->palSwapLerpAlpha += 25600 / npc->unk_312;
+            if (npc->palSwapLerpAlpha > 25500) {
+                npc->palSwapLerpAlpha = 25500;
+            }
+            blendAlpha = npc->palSwapLerpAlpha / 100;
+            dst = npc->localPaletteData[0];
+            src = npc->spritePaletteList[npc->unk_30A];
+            src2 = npc->spritePaletteList[npc->unk_308];
+            npc->localPalettes[0] = dst;
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            if (blendAlpha == 255) {
+                npc->palSwapState = 0;
+                npc->palSwapTimer = npc->unk_30C;
+            }
+            break;
+    }
+
+    if (npc->palSwapState < 4) {
+        if (npc->palSwapState >= 0) {
+            if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                u32 mask;
+                blendAlpha = npc->alpha * npc->alpha2 / 255;
+                if (blendAlpha < 255) {
+                    mask = DRAW_SPRITE_OVERRIDE_ALPHA;
+                } else {
+                    mask = 0;
+                }
+                mask |= DRAW_SPRITE_OVERRIDE_PALETTES;
+                spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, blendAlpha, npc->localPalettes, mtx);
+            }
+        }
+    }
+}
+
+s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
+    s32 i, j;
+    PAL_PTR src;
+    PAL_PTR src2;
+    PAL_PTR dst;
+    u8 blendAlpha;
+
+    if (npc->dirtyPalettes != 0) {
+        if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+            npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+        }
+
+        npc->paletteCount = 0;
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
+            npc->paletteCount++;
+        }
+
+        if (npc->dirtyPalettes == 1) {
+            npc->palSwapState = 0;
+            npc->palSwapLerpAlpha = 0;
+        } else {
+            npc->palSwapState = 0;
+            npc->palSwapLerpAlpha = 255;
+        }
+
+        for (i = 0; i < npc->paletteCount; i++) {
+            src2 = npc->localPaletteData[i];
+            src = npc->spritePaletteList[i];
+            npc->localPalettes[i] = src2;
+            if (src != NULL) {
+                for (j = 0; j < 16; j++) {
+                    *src2++ = *src++;
+                }
+            }
+        }
+
+        npc->palSwapLerpAlpha = 0;
+        npc->palSwapState = 0;
+        npc->dirtyPalettes = 0;
+        npc->palSwapTimer = npc->unk_30C;
+    }
+
+    switch (npc->palSwapState) {
+        case 0:
+            if (npc->palSwapTimer != 0) {
+                npc->palSwapTimer--;
+                break;
+            } else {
+                npc->palSwapLerpAlpha = 0;
+                npc->palSwapState = 1;
+            }
+            /* fallthrough */
+        case 1:
+            npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
+            if (npc->palSwapLerpAlpha > 25500) {
+                npc->palSwapLerpAlpha = 25500;
+            }
+            blendAlpha = npc->palSwapLerpAlpha / 100;
+
+            dst = npc->localPaletteData[0];
+            src = npc->spritePaletteList[npc->unk_308];
+            src2 = npc->spritePaletteList[npc->unk_30A];
+            npc->localPalettes[0] = dst;
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            dst = npc->localPaletteData[3];
+            src = npc->spritePaletteList[npc->unk_314];
+            src2 = npc->spritePaletteList[npc->unk_316];
+            npc->localPalettes[3] = dst;
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            if (blendAlpha == 255) {
+                npc->palSwapState = 2;
+                npc->palSwapTimer = npc->unk_310;
+            }
+            break;
+    }
+    switch (npc->palSwapState) {
+        case 2:
+            if (npc->palSwapTimer != 0) {
+                npc->palSwapTimer--;
+                break;
+            } else {
+                npc->palSwapLerpAlpha = 0;
+                npc->palSwapState = 3;
+            }
+            /* fallthrough */
+        case 3:
+            npc->palSwapLerpAlpha += 25600 / npc->unk_312;
+            if (npc->palSwapLerpAlpha > 25500) {
+                npc->palSwapLerpAlpha = 25500;
+            }
+            blendAlpha = npc->palSwapLerpAlpha / 100;
+
+            dst = npc->localPaletteData[0];
+            src = npc->spritePaletteList[npc->unk_30A];
+            src2 = npc->spritePaletteList[npc->unk_308];
+            npc->localPalettes[0] = dst;
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            dst = npc->localPaletteData[1];
+            src = npc->spritePaletteList[npc->unk_316];
+            src2 = npc->spritePaletteList[npc->unk_314];
+            npc->localPalettes[3] = npc->localPaletteData[3];
+
+            for (j = 0; j < 16; j++) {
+                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            }
+
+            if (blendAlpha == 255) {
+                npc->palSwapState = 0;
+                npc->palSwapTimer = npc->unk_30C;
+            }
+            break;
+    }
+
+    if (npc->palSwapState < 4) {
+        if (npc->palSwapState >= 0) {
+            if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                s32 temp;
+                u32 spriteInstanceMask;
+
+                blendAlpha = npc->alpha * npc->alpha2 / 255;
+                temp = blendAlpha < 255;
+                spriteInstanceMask = ((temp) << 31) | 0x20000000;
+                spr_draw_npc_sprite(npc->spriteInstanceID | spriteInstanceMask, arg1, blendAlpha, npc->localPalettes, mtx);
+            }
+        }
+    }
+}
 
 void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType) {
     npc__remove_decoration(npc, idx);
@@ -1726,15 +2104,14 @@ INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 // floats suqqz
 #ifdef NON_EQUIVALENT
 void func_8003DC38(Npc* npc, s32 arg1) {
-    f32 temp_f0;
     f32 xTemp;
     f32 zTemp;
     f32 yTemp;
     f32 theta;
     f32 sinTheta;
-    s32 i;
-    s32 var_v0;
     f32 cosTheta;
+    f32 angle;
+    s32 i;
 
     D_80077C2C += 0.1f;
     if (arg1 == 2) {
@@ -1744,10 +2121,13 @@ void func_8003DC38(Npc* npc, s32 arg1) {
 
         for (i = 0; i < 4; i++) {
             xTemp = rand_int(10) - 5;
+            yTemp = -2.0f;
             zTemp = rand_int(10) - 5;
-            yTemp = -2.0f - (SQ(xTemp) + SQ(zTemp) / 5.0f);
+
+            yTemp -= (SQ(xTemp) + SQ(zTemp)) / 5.0f;
             D_80077C28 = 0;
-            theta = DEG_TO_RAD(clamp_angle(-npc->yaw + (i * 90)));
+
+            theta = DEG_TO_RAD(clamp_angle(-npc->yaw + i * 90));
             sinTheta = sin_rad(theta);
             cosTheta = cos_rad(theta);
             fx_cloud_trail(
@@ -1759,9 +2139,12 @@ void func_8003DC38(Npc* npc, s32 arg1) {
         }
     } else {
         xTemp = rand_int(10) - 5;
+        yTemp = -2.0f;
         zTemp = rand_int(10) - 5;
-        yTemp = -2.0f - (SQ(xTemp) + SQ(zTemp) / 5.0f);
+
+        yTemp -= (SQ(xTemp) + SQ(zTemp)) / 5.0f;
         D_80077C28 = 0;
+
         theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
