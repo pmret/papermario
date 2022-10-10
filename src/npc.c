@@ -28,7 +28,7 @@ f32 D_80077C18 = 0;
 s16 D_80077C1C = 4;
 s16 D_80077C1E = 5;
 s32 D_80077C20 = 0;
-f32 D_80077C24 = 0;
+f32 D_80077C24 = 0.0f;
 s16 D_80077C28 = 4;
 s16 D_80077C2A = 0; // padding?
 f32 D_80077C2C = 0.0f;
@@ -1149,10 +1149,10 @@ void npc_draw_with_palswap(Npc* npc, s32 arg1, Matrix4f mtx) {
 }
 
 void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
-    if (npc->dirtyPalettes) {
+    if (npc->dirtyPalettes != 0) {
         npc->screenSpaceOffset2D[0] = 0.0f;
         npc->screenSpaceOffset2D[1] = 0.0f;
-        npc->dirtyPalettes = FALSE;
+        npc->dirtyPalettes = 0;
         npc->verticalStretch = 1.0f;
     }
 
@@ -1176,7 +1176,7 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
     PAL_PTR src;
     PAL_PTR dst;
 
-    if (npc->dirtyPalettes) {
+    if (npc->dirtyPalettes != 0) {
         npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
         npc->paletteCount = 0;
         while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
@@ -1196,7 +1196,7 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
 
         npc->palSwapState = -2;
         npc->palSwapLerpAlpha = 0;
-        npc->dirtyPalettes = FALSE;
+        npc->dirtyPalettes = 0;
         npc->palSwapTimer = 0;
     }
 
@@ -1281,7 +1281,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
     PAL_PTR src2;
     s32 blendAlpha;
 
-    if (npc->dirtyPalettes) {
+    if (npc->dirtyPalettes != 0) {
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
             npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
         }
@@ -1291,7 +1291,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
             npc->paletteCount++;
         }
 
-        if (npc->dirtyPalettes == TRUE) {
+        if (npc->dirtyPalettes == 1) {
             npc->palSwapState = 0;
             npc->palSwapLerpAlpha = 0;
         } else {
@@ -1320,7 +1320,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
 
         npc->palSwapLerpAlpha = 0;
         npc->palSwapState = 0;
-        npc->dirtyPalettes = FALSE;
+        npc->dirtyPalettes = 0;
         npc->palSwapTimer = npc->unk_30C;
     }
 
@@ -1407,11 +1407,11 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
 s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
     s32 i, j;
     PAL_PTR src;
-    PAL_PTR dst;
     PAL_PTR src2;
+    PAL_PTR dst;
     u8 blendAlpha;
 
-    if (npc->dirtyPalettes) {
+    if (npc->dirtyPalettes != 0) {
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
             npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
         }
@@ -1421,7 +1421,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
             npc->paletteCount++;
         }
 
-        if (npc->dirtyPalettes == TRUE) {
+        if (npc->dirtyPalettes == 1) {
             npc->palSwapState = 0;
             npc->palSwapLerpAlpha = 0;
         } else {
@@ -1442,7 +1442,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
 
         npc->palSwapLerpAlpha = 0;
         npc->palSwapState = 0;
-        npc->dirtyPalettes = FALSE;
+        npc->dirtyPalettes = 0;
         npc->palSwapTimer = npc->unk_30C;
     }
 
