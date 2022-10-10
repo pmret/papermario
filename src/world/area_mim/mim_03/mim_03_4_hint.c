@@ -1,8 +1,7 @@
 #include "mim_03.h"
 #include "model.h"
 
-void func_802400A0_B9B520(Gfx*, f32*, f32*, f32*); 
-INCLUDE_ASM(s32, "world/area_mim/mim_03/B9B480", func_802400A0_B9B520);
+#include "world/common/util/GetFirstTriangleNormal.inc.c"
 
 API_CALLABLE(N(CalculateFlowerAngles)) {
     Bytecode* args = script->ptrReadPos;
@@ -11,7 +10,7 @@ API_CALLABLE(N(CalculateFlowerAngles)) {
     Model* mdl = get_model_from_list_index(treeIndex);
     f32 x, y, z;
     
-    func_802400A0_B9B520(mdl->modelNode->displayData->displayList, &x, &y, &z);
+    N(GetFirstTriangleNormal)(mdl->modelNode->displayData->displayList, &x, &y, &z);
     
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(x));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(y));
