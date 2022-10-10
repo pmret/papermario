@@ -750,9 +750,66 @@ EvtScript N(8021F5F8) = {
     EVT_END
 };
 
-ApiStatus func_80218100_464590(Evt*, s32);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218100_464590);
+ApiStatus func_80218100_464590(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    s32 currentPartner = script->varTable[5];
+    s32 partnerId;
+    s32 i;
+    s32 sp10[12];
 
+    if (D_80232C50 < 0) {
+        D_80232C50 = currentPartner;
+        D_80232C20[currentPartner] = TRUE;
+        return ApiStatus_DONE2;
+    }
+
+    if (D_80232C50 != currentPartner && !D_80232C20[currentPartner]) {
+        D_80232C50 = currentPartner;
+        D_80232C20[currentPartner] = TRUE;
+        return ApiStatus_DONE2;
+    }
+
+    for (i = 0; i < 12; i++) {
+        sp10[i] = i;
+    }
+
+    for (i = 0; i < 100; i++) {
+        s32 index1 = rand_int(11);
+        s32 index2 = rand_int(11);
+        s32 tempValue = sp10[index1];
+        sp10[index1] = sp10[index2];
+        sp10[index2] = tempValue;
+    }
+
+    for (i = 0; i < 12; i++) {
+        partnerId = sp10[i];
+
+        if (playerData->partners[partnerId].enabled &&
+            partnerId != PARTNER_GOOMPA &&
+            partnerId != PARTNER_GOOMBARIA &&
+            partnerId != PARTNER_TWINK &&
+            partnerId != currentPartner &&
+            !D_80232C20[partnerId]
+        ) {
+            break;
+        }
+    }
+
+    if (i < 12) {
+        D_80232C20[partnerId] = TRUE;
+        D_80232C50 = partnerId;
+        script->varTable[5] = partnerId;
+        script->varTable[6] = playerData->partners[partnerId].level;
+        return ApiStatus_DONE2;
+    } else {
+        for (i = 0; i < 12; i++) {
+            D_80232C20[i] = FALSE;
+        }
+        D_80232C50 = currentPartner;
+        D_80232C20[currentPartner] = TRUE;
+        return ApiStatus_DONE2;
+    }
+}
 
 #include "world/common/UnkFunc62.inc.c"
 
@@ -2819,20 +2876,102 @@ EvtScript N(init_Watt) = {
     EVT_END
 };
 
-ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219188_465618);
+ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
+    WattEffectData* wattEffectData;
+    f32 x, y, z;
+    Actor* actor = get_actor(script->owner1.enemyID);
+    ActorState* state = &actor->state;
 
-ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
-    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[3];
-
-    unkDuplighost->flags = 0;
-
-    if (unkDuplighost->effect1 != NULL) {
-        unkDuplighost->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+    if (isInitialCall) {
+        wattEffectData = heap_malloc(sizeof(*wattEffectData));
+        actor->state.varTablePtr[3] = wattEffectData;
+        wattEffectData->unk_04 = TRUE;
+        wattEffectData->angle = 0;
+        wattEffectData->unk_0C = TRUE;
+        wattEffectData->unk_10 = 0;
+        wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->flags = TRUE;
+        wattEffectData->debuff = actor->debuff;
     }
 
-    if (unkDuplighost->effect2 != NULL) {
-        unkDuplighost->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+    wattEffectData = state->varTablePtr[3];
+    if (wattEffectData->flags) {
+        if (wattEffectData->unk_04 && actor->debuff != STATUS_STOP) {
+            wattEffectData->angle += 15;
+            wattEffectData->angle = clamp_angle(wattEffectData->angle);
+        }
+        actor->unk_19A = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
+
+        x = actor->currentPos.x + actor->headOffset.x;
+        y = actor->currentPos.y + actor->headOffset.y + actor->unk_19A + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        z = actor->currentPos.z + actor->headOffset.z;
+        if (wattEffectData->unk_0C) {
+            switch (wattEffectData->unk_10) {
+                case 0:
+                    if (wattEffectData->effect1 == NULL) {
+                        wattEffectData->effect1 = fx_static_status(0, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+                    }
+
+                    if (wattEffectData->effect2 != NULL) {
+                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect2 = NULL;
+                    }
+                    wattEffectData->effect1->data.staticStatus->unk_04 = x;
+                    wattEffectData->effect1->data.staticStatus->unk_08 = y;
+                    wattEffectData->effect1->data.staticStatus->unk_0C = z;
+                    break;
+                case 1:
+                    if (wattEffectData->effect1 != NULL) {
+                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect1 = NULL;
+                    }
+                    if (wattEffectData->effect2 == NULL) {
+                        wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+
+                    }
+                    wattEffectData->effect2->data.staticStatus->unk_04 = x;
+                    wattEffectData->effect2->data.staticStatus->unk_08 = y;
+                    wattEffectData->effect2->data.staticStatus->unk_0C = z;
+                    break;
+            }
+        } else {
+            if (wattEffectData->effect1 != NULL) {
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1 = NULL;
+            }
+            if (wattEffectData->effect2 != NULL) {
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2 = NULL;
+            }
+        }
+        if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
+            if (wattEffectData->effect1 != NULL) {
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1 = NULL;
+            }
+            if (wattEffectData->effect2 != NULL) {
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2 = NULL;
+            }
+        }
+        wattEffectData->debuff = actor->debuff;
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
+    WattEffectData* wattEffectData = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[3];
+
+    wattEffectData->flags = 0;
+
+    if (wattEffectData->effect1 != NULL) {
+        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+    }
+
+    if (wattEffectData->effect2 != NULL) {
+        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
 
     return ApiStatus_DONE2;
