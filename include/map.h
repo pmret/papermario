@@ -75,4 +75,7 @@ MapSettings* get_current_map_settings(void);
 /// Zero-terminated.
 extern AreaConfig gAreas[29];
 
+extern EvtScript EVS_NpcHitRecoil;
+extern EvtScript EVS_800936C0;
+
 #endif

@@ -2379,6 +2379,19 @@ enum NpcDecorationIDs {
     NPC_DECORATION_CHARGED                       = 0x00000006,
 };
 
+enum SpeechFlags {
+    SPEECH_FLAG_10              = 0x010,
+    SPEECH_FLAG_HAS_OFFSET      = 0x100,
+    SPEECH_FLAG_200             = 0x200,
+    // different facing orientations for speaker and listener
+    SPEECH_ORIENTATION_MASK     = 0xF,
+    SPEECH_FACE_SPEAKER_ONLY    = 4,
+    SPEECH_FACE_AWAY_FROM       = 3,
+    SPEECH_FACE_LIKE_SPEAKER    = 2,
+    SPEECH_FACE_LIKE_LISTENER   = 1,
+    SPEECH_FACE_EACH_OTHER      = 0,
+};
+
 enum HitResults {
     HIT_RESULT_TRIGGERED_EXPLODE           = -1,
     HIT_RESULT_HIT                         = 0,

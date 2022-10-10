@@ -1,7 +1,5 @@
 #include "PutridPiranha.h"
 
-extern EvtScript EVS_NpcHitRecoil;
-
 #include "world/common/enemy/PiranhaPlantAI.inc.c"
 
 EvtScript N(EVS_NpcDefeat_PutridPiranha_Hitbox) = {

@@ -10762,158 +10762,163 @@ segments:
     start: 0xB93440
     vram: 0x80240000
     subsegments:
-    - [0xB93440, c]
-    - [0xB934B0, c]
-    - [0xB93940, c]
-    - [0xB952F0, data]
-    - [0xB953B0, data]
-    - [0xB957E0, data]
-    - [0xB960E0, data]
-    - [0xB97A10]
+    - [0xB93440, c, mim_01_0_header]
+    - [0xB93440, c, mim_01_1_music]
+    - [0xB93440, c, mim_01_2_main]
+    - [0xB934B0, c, mim_01_3_entity]
+    - [0xB934B0, c, mim_01_4_hint]
+    - [0xB934B0, c, mim_01_5_gate]
+    - [0xB93940, c, mim_01_6_npc]
+    - [0xB952F0]
   - name: mim_02
     dir: world/area_mim/mim_02
     type: code
     start: 0xB97C00
     vram: 0x80240000
     subsegments:
-    - [0xB97C00, c]
-    - [0xB97C70, c]
-    - [0xB98DE0, data]
-    - [0xB98EA0, data]
-    - [0xB9A390, data]
-    - [0xB9B250, data]
-    - [0xB9B420]
+    - [0xB97C00, c, mim_02_0_header]
+    - [0xB97C00, c, mim_02_1_music]
+    - [0xB97C00, c, mim_02_2_main]
+    - [0xB97C70, c, mim_02_3_npc]
+    - [0xB97C70, c, mim_02_4_gate]
+    - [0xB97C70, c, mim_02_5_hint]
+    - [0xB98DE0]
   - name: mim_03
     dir: world/area_mim/mim_03
     type: code
     start: 0xB9B480
     vram: 0x80240000
     subsegments:
-    - [0xB9B480, c]
-    - [0xB9B9B0, data]
-    - [0xB9BA70, data]
-    - [0xB9BE30, data]
-    - [0xB9D500, data]
-    - [0xB9D940]
+    - [0xB9B480, c, mim_03_0_header]
+    - [0xB9B480, c, mim_03_1_music]
+    - [0xB9B480, c, mim_03_2_main]
+    - [0xB9B480, c, mim_03_3_entity]
+    - [0xB9B480, c, mim_03_4_hint]
+    - [0xB9B480, c, mim_03_5_gate]
+    - [0xB9B480, c, mim_03_6_npc]
+    - [0xB9B9B0]
   - name: mim_04
     dir: world/area_mim/mim_04
     type: code
     start: 0xB9D960
     vram: 0x80240000
     subsegments:
-    - [0xB9D960, c]
-    - [0xB9D9D0, c]
-    - [0xB9DB60, c]
-    - [0xB9EA90, data]
-    - [0xB9EB50, data]
-    - [0xB9F020, data]
-    - [0xB9FEA0, data]
-    - [0xBA06C0]
+    - [0xB9D960, c, mim_04_0_header]
+    - [0xB9D960, c, mim_04_1_music]
+    - [0xB9D960, c, mim_04_2_main]
+    - [0xB9D9D0, c, mim_04_3_entity]
+    - [0xB9D9D0, c, mim_04_4_hint]
+    - [0xB9DB60, c, mim_04_5_gate]
+    - [0xB9DB60, c, mim_04_6_npc]
+    - [0xB9EA90]
   - name: mim_05
     dir: world/area_mim/mim_05
     type: code
     start: 0xBA0730
     vram: 0x80240000
     subsegments:
-    - [0xBA0730, c]
-    - [0xBA07A0, c]
-    - [0xBA2150, data]
-    - [0xBA2210, data]
-    - [0xBA3A80, data]
-    - [0xBA4590]
+    - [0xBA0730, c, mim_05_0_header]
+    - [0xBA07A0, c, mim_05_1_music]
+    - [0xBA07A0, c, mim_05_2_main]
+    - [0xBA07A0, c, mim_05_3_entity]
+    - [0xBA07A0, c, mim_05_4_hint]
+    - [0xBA07A0, c, mim_05_5_gate]
+    - [0xBA07A0, c, mim_05_6_npc]
+    - [0xBA2150]
   - name: mim_06
     dir: world/area_mim/mim_06
     type: code
     start: 0xBA4780
     vram: 0x80240000
     subsegments:
-    - [0xBA4780, c]
-    - [0xBA47F0, c]
-    - [0xBA4CF0, c]
-    - [0xBA74B0, data]
-    - [0xBA7570, data]
-    - [0xBA82F0, data]
-    - [0xBA9170, data]
-    - [0xBA9F10]
+    - [0xBA4780, c, mim_06_0_header]
+    - [0xBA4780, c, mim_06_1_music]
+    - [0xBA4780, c, mim_06_2_main]
+    - [0xBA4780, c, mim_06_3_entity]
+    - [0xBA47F0, c, mim_06_4_hint]
+    - [0xBA47F0, c, mim_06_5_gate]
+    - [0xBA4CF0, c, mim_06_6_npc]
+    - [0xBA74B0]
   - name: mim_07
     dir: world/area_mim/mim_07
     type: code
     start: 0xBAA140
     vram: 0x80240000
     subsegments:
-    - [0xBAA140, c]
-    - [0xBAA1B0, c]
-    - [0xBAA3B0, c]
-    - [0xBAB1D0, data]
-    - [0xBAB2C0, data]
-    - [0xBAB6D0, data]
-    - [0xBAB7C0, data]
-    - [0xBABAD0, data]
-    - [0xBAC9C0, data]
-    - [0xBAD8D0]
+    - [0xBAA140, c, mim_07_0_header]
+    - [0xBAA140, c, mim_07_1_music]
+    - [0xBAA140, c, mim_07_2_main]
+    - [0xBAA1B0, c, mim_07_3_entity]
+    - [0xBAA1B0, c, mim_07_4_hint]
+    - [0xBAA3B0, c, mim_07_5_gate]
+    - [0xBAA3B0, c, mim_07_6_npc]
+    - [0xBAB1D0]
   - name: mim_08
     dir: world/area_mim/mim_08
     type: code
     start: 0xBAD940
     vram: 0x80240000
     subsegments:
-    - [0xBAD940, c]
-    - [0xBB0880, data]
-    - [0xBB0940, data]
-    - [0xBB0E30, data]
-    - [0xBB0E80, data]
-    - [0xBB1D00, data]
-    - [0xBB2BD0]
+    - [0xBAD940, c, mim_08_0_header]
+    - [0xBAD940, c, mim_08_1_music]
+    - [0xBAD940, c, mim_08_2_main]
+    - [0xBAD9E0, c, mim_08_3_entity]
+    - [0xBAD9E0, c, mim_08_4_gate]
+    - [0xBAD9E0, c, mim_08_5_npc]
+    - [0xBB0880]
   - name: mim_09
     dir: world/area_mim/mim_09
     type: code
     start: 0xBB2E00
     vram: 0x80240000
     subsegments:
-    - [0xBB2E00, c]
-    - [0xBB3CC0, data]
-    - [0xBB3D80, data]
-    - [0xBB4130, data]
-    - [0xBB4180, data]
-    - [0xBB4830, data]
-    - [0xBB5980]
+    - [0xBB2E00, c, mim_09_0_header]
+    - [0xBB2E00, c, mim_09_1_music]
+    - [0xBB2E00, c, mim_09_2_main]
+    - [0xBB2EA0, c, mim_09_3_entity]
+    - [0xBB2EA0, c, mim_09_4_hint]
+    - [0xBB2EA0, c, mim_09_5_gate]
+    - [0xBB2EA0, c, mim_09_6_npc]
+    - [0xBB3CC0]
   - name: mim_10
     dir: world/area_mim/mim_10
     type: code
     start: 0xBB59E0
     vram: 0x80240000
     subsegments:
-    - [0xBB59E0, c]
-    - [0xBB5B70, data]
-    - [0xBB5EB0, data]
-    - [0xBB5EF0, data]
-    - [0xBB61D0, data]
-    - [0xBB7050]
+    - [0xBB59E0, c, mim_10_0_header]
+    - [0xBB59E0, c, mim_10_1_music]
+    - [0xBB59E0, c, mim_10_2_entity]
+    - [0xBB59E0, c, mim_10_3_main]
+    - [0xBB59E0, c, mim_10_4_npc]
+    - [0xBB5B70]
   - name: mim_11
     dir: world/area_mim/mim_11
     type: code
     start: 0xBB7070
     vram: 0x80240000
     subsegments:
-    - [0xBB7070, c]
-    - [0xBB7940, c]
-    - [0xBB79F0, c]
-    - [0xBB7C30, data]
-    - [0xBBA180, data]
-    - [0xBBA2E0, data]
-    - [0xBBB350]
+    - [0xBB7070, c, mim_11_0_header]
+    - [0xBB7070, c, mim_11_1_music]
+    - [0xBB7070, c, mim_11_2_main]
+    - [0xBB7070, c, mim_11_3_gate]
+    - [0xBB7070, c, mim_11_4_entity]
+    - [0xBB7940, c, mim_11_5_npc]
+    - [0xBB79F0, c, mim_11_6_foliage]
+    - [0xBB7C30]
   - name: mim_12
     dir: world/area_mim/mim_12
     type: code
     start: 0xBBB380
     vram: 0x80240000
     subsegments:
-    - [0xBBB380, c]
-    - [0xBBB960, data]
-    - [0xBBBB90, data]
-    - [0xBBBE60, data]
-    - [0xBBC2B0, data]
-    - [0xBBD190]
+    - [0xBBB380, c, mim_12_0_header]
+    - [0xBBB380, c, mim_12_1_music]
+    - [0xBBB380, c, mim_12_2_entity]
+    - [0xBBB380, c, mim_12_3_main]
+    - [0xBBB380, c, mim_12_4_npc]
+    - [0xBBB380, c, mim_12_5_gate]
+    - [0xBBB960]
   - name: obk_01
     dir: world/area_obk/obk_01
     type: code

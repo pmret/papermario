@@ -54,7 +54,7 @@ void state_step_pause(void) {
                 if (D_800A0920 == 0) {
                     D_800A0920 = -1;
                     nuGfxSetCfb(&D_80077950, 2);
-                    gGameStatusPtr->unk_15E = gGameStatusPtr->unk_15C;
+                    gGameStatusPtr->savedBackgroundDarkness = gGameStatusPtr->backgroundDarkness;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
                     gGameStatusPtr->isBattle = oldIsBattle;
@@ -178,7 +178,7 @@ void state_step_unpause(void) {
                             set_background_size(296, 200, 12, 20);
                         }
 
-                        gGameStatusPtr->unk_15C = gGameStatusPtr->unk_15E;
+                        gGameStatusPtr->backgroundDarkness = gGameStatusPtr->savedBackgroundDarkness;
                         calculate_model_sizes();
                         npc_reload_all();
                         set_windows_visible(WINDOW_GROUP_ALL);

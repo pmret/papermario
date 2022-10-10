@@ -4,7 +4,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall);
 ApiStatus func_8005DD54(Evt* script, s32 isInitialCall);
 ApiStatus func_8005DDF0(Evt* script, s32 isInitialCall);
 
-EvtScript D_800936C0 = {
+EvtScript EVS_800936C0 = {
     EVT_CALL(func_8005DB00)
     EVT_RETURN
     EVT_END
