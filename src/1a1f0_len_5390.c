@@ -21,8 +21,6 @@ void spawn_drops(Enemy* enemy);
 
 s32 D_80077C40 = 0;
 
-extern EvtScript EVS_NpcHitRecoil;
-
 EvtScript D_80077C44 = {
     EVT_WAIT(10)
     EVT_CALL(FadeBackgroundToBlack)

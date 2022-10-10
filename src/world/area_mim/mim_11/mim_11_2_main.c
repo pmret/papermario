@@ -15,9 +15,9 @@ API_CALLABLE(N(func_802405EC_BB765C)) {
     set_entity_fog_dist(990, 1000);
     set_entity_fog_color(0, 0, 0, 255);
 
-    gCameras->bgColor[0] = 24;
-    gCameras->bgColor[1] = 24;
-    gCameras->bgColor[2] = 24;
+    gCameras[CAM_DEFAULT].bgColor[0] = 24;
+    gCameras[CAM_DEFAULT].bgColor[1] = 24;
+    gCameras[CAM_DEFAULT].bgColor[2] = 24;
     return ApiStatus_DONE2;
 }
 
@@ -135,7 +135,7 @@ EvtScript N(EVS_Scene_ReachedMansion) = {
 // interesting broken, unused snippet for starting next peach sequence
 EvtScript N(EVS_ExitWarp_osr_03_4) = {
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_CALL(GotoMapSpecial, "osr_03", osr_03_ENTRY_4, 0xB)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("osr_03"), osr_03_ENTRY_4, 0xB)
     EVT_WAIT(100)
 };
 

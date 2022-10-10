@@ -11,9 +11,9 @@ API_CALLABLE(N(AwaitPlayerApproachForest)) {
 API_CALLABLE(N(InitializeLightingBright)) {
     enable_world_fog();
     set_world_fog_color(16, 16, 16, 255);
-    gCameras->bgColor[0] = 20;
-    gCameras->bgColor[1] = 20;
-    gCameras->bgColor[2] = 28;
+    gCameras[CAM_DEFAULT].bgColor[0] = 20;
+    gCameras[CAM_DEFAULT].bgColor[1] = 20;
+    gCameras[CAM_DEFAULT].bgColor[2] = 28;
     return ApiStatus_DONE2;
 }
 
@@ -21,9 +21,9 @@ API_CALLABLE(N(InitializeLightingGloomy)) {
     enable_world_fog();
     set_world_fog_dist(990, 1000);
     set_world_fog_color(16, 16, 16, 255);
-    gCameras->bgColor[0] = 20;
-    gCameras->bgColor[1] = 20;
-    gCameras->bgColor[2] = 28;
+    gCameras[CAM_DEFAULT].bgColor[0] = 20;
+    gCameras[CAM_DEFAULT].bgColor[1] = 20;
+    gCameras[CAM_DEFAULT].bgColor[2] = 28;
     gGameStatusPtr->backgroundDarkness = 240;
     return ApiStatus_DONE2;
 }

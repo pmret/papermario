@@ -1,5 +1,7 @@
 #include "mim_11.h"
 
+void increment_max_SP(void);
+
 NpcSettings N(NpcSettings_Bootler) = {
     .height = 24,
     .radius = 24,

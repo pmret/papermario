@@ -4,9 +4,9 @@ API_CALLABLE(N(InitializeGustyFogProperties)) {
     enable_world_fog();
     set_world_fog_dist(990, 1000);
     set_world_fog_color(0, 8, 24, 255);
-    gCameras->bgColor[0] = 24;
-    gCameras->bgColor[1] = 24;
-    gCameras->bgColor[2] = 24;
+    gCameras[CAM_DEFAULT].bgColor[0] = 24;
+    gCameras[CAM_DEFAULT].bgColor[1] = 24;
+    gCameras[CAM_DEFAULT].bgColor[2] = 24;
     gGameStatusPtr->backgroundDarkness = 0;
     return ApiStatus_DONE2;
 }
@@ -15,9 +15,9 @@ API_CALLABLE(N(InitializeForestFogProperties)) {
     enable_world_fog();
     set_world_fog_dist(980, 1000);
     set_world_fog_color(0, 8, 24, 255);
-    gCameras->bgColor[0] = 24;
-    gCameras->bgColor[1] = 24;
-    gCameras->bgColor[2] = 24;
+    gCameras[CAM_DEFAULT].bgColor[0] = 24;
+    gCameras[CAM_DEFAULT].bgColor[1] = 24;
+    gCameras[CAM_DEFAULT].bgColor[2] = 24;
     gGameStatusPtr->backgroundDarkness = 232;
     return ApiStatus_DONE2;
 }
