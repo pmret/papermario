@@ -1181,7 +1181,7 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
     if (npc->dirtyPalettes) {
         npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
         npc->paletteCount = 0;
-        while (npc->spritePaletteList[npc->paletteCount] != -1) {
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
             npc->paletteCount++;
         }
 
@@ -1289,7 +1289,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
         }
 
         npc->paletteCount = 0;
-        while (npc->spritePaletteList[npc->paletteCount] != -1) {
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
             npc->paletteCount++;
         }
 
@@ -1419,7 +1419,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
         }
 
         npc->paletteCount = 0;
-        while (npc->spritePaletteList[npc->paletteCount] != -1) {
+        while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
             npc->paletteCount++;
         }
 
