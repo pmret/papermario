@@ -84,9 +84,9 @@ void N(GetFirstTriangleNormal)(Gfx* inGfx, f32* outNx, f32* outNy, f32* outNz) {
     if (readState == READ_STATE_TRIANGLE) {
         // get two vectors from three points
         d12x = v1x - v2x;
-        d32x = v3x - v2x;
         d12y = v1y - v2y;
         d12z = v1z - v2z;
+        d32x = v3x - v2x;
         d32y = v3y - v2y;        
         d32z = v3z - v2z;
         // cross product to get normal vector
