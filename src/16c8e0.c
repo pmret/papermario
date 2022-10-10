@@ -242,7 +242,7 @@ void func_8023E3FC(void) {
 }
 
 void update_actor_shadows(void) {
-    if (gBattleStatus.flags1 & 1) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_1) {
         update_enemy_shadows();
         update_hero_shadows();
     }
@@ -762,7 +762,7 @@ void btl_draw_enemy_health_bars(void) {
                     }
 
                     if (!(enemy->flags & (ACTOR_FLAG_40000 | ACTOR_FLAG_TARGET_ONLY)) &&
-                        ((gBattleStatus.flags1 & 2) || (enemy->flags & ENEMY_FLAGS_80000)) &&
+                        ((gBattleStatus.flags1 & BS_FLAGS1_2) || (enemy->flags & ENEMY_FLAGS_80000)) &&
                         is_actor_hp_bar_visible(enemy))
                     {
                         f32 x = enemy->healthBarPosition.x;

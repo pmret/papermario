@@ -45,7 +45,7 @@ EvtScript N(main) = {
     EVT_END_IF
     EVT_CALL(GetItemPower, ITEM_STOP_WATCH, LVar0, LVar1)
     EVT_CALL(MakeStatusField, LVar0, 2097152, 100, LVar0)
-    EVT_CALL(func_80252B3C, LVar0, 1342177280, LVar0, 0, 32)
+    EVT_CALL(func_80252B3C, LVar0, 1342177280, LVar0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, 0, LVar0)

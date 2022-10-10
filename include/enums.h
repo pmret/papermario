@@ -867,6 +867,10 @@ enum SoundIDs {
     SOUND_SMOKE_BURST               = 0x000002CD,
     SOUND_2CE                       = 0x000002CE,
     SOUND_2CF                       = 0x000002CF,
+    SOUND_2D1                       = 0x000002D1,
+    SOUND_2D2                       = 0x000002D2,
+    SOUND_2D3                       = 0x000002D3,
+    SOUND_2D4                       = 0x000002D4,
     SOUND_2D5                       = 0x000002D5,
     SOUND_2D6                       = 0x000002D6,
     SOUND_DAYZEE_SONG               = 0x000002D7,
@@ -1030,6 +1034,7 @@ enum SoundIDs {
     SOUND_3B9                       = 0x000003B9,
     SOUND_3BB                       = 0x000003BB,
     SOUND_3BC                       = 0x000003BC,
+    SOUND_3BD                       = 0x000003BD,
     SOUND_3BE                       = 0x000003BE,
     SOUND_3C0                       = 0x000003C0,
     SOUND_3C1                       = 0x000003C1,
@@ -1098,6 +1103,7 @@ enum SoundIDs {
     SOUND_76D                       = 0x0000076D,
     SOUND_791                       = 0x00000791,
     SOUND_7BC                       = 0x000007BC,
+    SOUND_7BD                       = 0x000007BD,
     SOUND_B88                       = 0x00000B88,
     SOUND_2003                      = 0x00002003,
     SOUND_2004                      = 0x00002004,
@@ -1248,6 +1254,8 @@ enum SoundIDs {
     SOUND_20CB                      = 0x000020CB,
     SOUND_20CC                      = 0x000020CC,
     SOUND_20CD                      = 0x000020CD,
+    SOUND_20CE                      = 0x000020CE,
+    SOUND_20CF                      = 0x000020CF,
     SOUND_20D0                      = 0x000020D0,
     SOUND_20D1                      = 0x000020D1,
     SOUND_20D2                      = 0x000020D2,
@@ -1306,7 +1314,14 @@ enum SoundIDs {
     SOUND_2119                      = 0x00002119,
     SOUND_211A                      = 0x0000211A,
     SOUND_2121                      = 0x00002121,
+    SOUND_2122                      = 0x00002122,
+    SOUND_2123                      = 0x00002123,
+    SOUND_2124                      = 0x00002124,
+    SOUND_2125                      = 0x00002125,
+    SOUND_2126                      = 0x00002126,
     SOUND_2127                      = 0x00002127,
+    SOUND_2128                      = 0x00002128,
+    SOUND_2129                      = 0x00002129,
     SOUND_212A                      = 0x0000212A,
     SOUND_212B                      = 0x0000212B,
     SOUND_212C                      = 0x0000212C,
@@ -2502,7 +2517,7 @@ enum Events {
     EVENT_SPIN_SMASH_LAUNCH_HIT       = 0x00000011,
     EVENT_SHELL_CRACK_HIT             = 0x00000012,
     EVENT_STAR_BEAM                   = 0x00000013,
-    EVENT_14                          = 0x00000014,
+    EVENT_PEACH_BEAM                  = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
     EVENT_UNKNOWN_TRIGGER             = 0x00000017,
@@ -3913,39 +3928,39 @@ enum IntroStates {
 };
 
 enum BattleStatusFlags1 {
-    BS_FLAGS1_0                = 0x00000000,
-    BS_FLAGS1_1                = 0x00000001, // show actors
-    BS_FLAGS1_2                = 0x00000002, // menu is open
-    BS_FLAGS1_4                = 0x00000004,
-    BS_FLAGS1_8                = 0x00000008,
-    BS_FLAGS1_10               = 0x00000010, // enable attack bonuses (power plus, etc)?
-    BS_FLAGS1_SP_EVT_ACTIVE    = 0x00000020, // enable special events (other than hit/death/immune?)
-    BS_FLAGS1_40               = 0x00000040,
-    BS_FLAGS1_80               = 0x00000080,
-    BS_FLAGS1_100              = 0x00000100,
-    BS_FLAGS1_200              = 0x00000200,
-    BS_FLAGS1_400              = 0x00000400,
-    BS_FLAGS1_800              = 0x00000800,
-    BS_FLAGS1_1000             = 0x00001000,
-    BS_FLAGS1_2000             = 0x00002000,
-    BS_FLAGS1_4000             = 0x00004000,
-    BS_FLAGS1_8000             = 0x00008000,
-    BS_FLAGS1_10000            = 0x00010000,
-    BS_FLAGS1_20000            = 0x00020000,
-    BS_FLAGS1_40000            = 0x00040000,
-    BS_FLAGS1_80000            = 0x00080000, // partner will act (partner turn?)
-    BS_FLAGS1_100000           = 0x00100000, // player in back (after pressing z)
-    BS_FLAGS1_200000           = 0x00200000, // enemy turn pending
-    BS_FLAGS1_PLAYER_DEFENDING = 0x00400000, // player is defending
-    BS_FLAGS1_800000           = 0x00800000, // don’t game over on loss
-    BS_FLAGS1_1000000          = 0x01000000,
-    BS_FLAGS1_2000000          = 0x02000000,
-    BS_FLAGS1_4000000          = 0x04000000,
-    BS_FLAGS1_8000000          = 0x08000000,
-    BS_FLAGS1_10000000         = 0x10000000, // prevent hammer charge
-    BS_FLAGS1_20000000         = 0x20000000, // prevent jump charge
-    BS_FLAGS1_40000000         = 0x40000000,
-    BS_FLAGS1_ATK_BLOCKED      = 0x80000000,
+    BS_FLAGS1_0                     = 0x00000000,
+    BS_FLAGS1_1                     = 0x00000001, // show actors
+    BS_FLAGS1_2                     = 0x00000002, // menu is open
+    BS_FLAGS1_4                     = 0x00000004,
+    BS_FLAGS1_8                     = 0x00000008,
+    BS_FLAGS1_10                    = 0x00000010, // enable attack bonuses (power plus, etc)?
+    BS_FLAGS1_SP_EVT_ACTIVE         = 0x00000020, // enable special events (other than hit/death/immune?)
+    BS_FLAGS1_40                    = 0x00000040,
+    BS_FLAGS1_80                    = 0x00000080,
+    BS_FLAGS1_100                   = 0x00000100,
+    BS_FLAGS1_200                   = 0x00000200,
+    BS_FLAGS1_400                   = 0x00000400,
+    BS_FLAGS1_800                   = 0x00000800,
+    BS_FLAGS1_1000                  = 0x00001000,
+    BS_FLAGS1_2000                  = 0x00002000,
+    BS_FLAGS1_4000                  = 0x00004000,
+    BS_FLAGS1_8000                  = 0x00008000,
+    BS_FLAGS1_10000                 = 0x00010000,
+    BS_FLAGS1_DISABLE_CELEBRATION   = 0x00020000,
+    BS_FLAGS1_ENEMY_FLED            = 0x00040000,
+    BS_FLAGS1_80000                 = 0x00080000, // partner will act (partner turn?)
+    BS_FLAGS1_100000                = 0x00100000, // player in back (after pressing z)
+    BS_FLAGS1_200000                = 0x00200000, // enemy turn pending
+    BS_FLAGS1_PLAYER_DEFENDING      = 0x00400000, // player is defending
+    BS_FLAGS1_800000                = 0x00800000, // don’t game over on loss
+    BS_FLAGS1_STAR_POINTS_DROPPED   = 0x01000000,
+    BS_FLAGS1_2000000               = 0x02000000,
+    BS_FLAGS1_HUSTLE_DRINK_ON       = 0x04000000,
+    BS_FLAGS1_8000000               = 0x08000000,
+    BS_FLAGS1_10000000              = 0x10000000, // prevent hammer charge
+    BS_FLAGS1_20000000              = 0x20000000, // prevent jump charge
+    BS_FLAGS1_40000000              = 0x40000000,
+    BS_FLAGS1_ATK_BLOCKED           = 0x80000000,
 };
 
 enum BattleStatusFlags2 {

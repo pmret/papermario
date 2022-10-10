@@ -55,7 +55,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    battleStatus->flags1 &= ~0x8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_8000;
 
     return ApiStatus_DONE2;
 }
@@ -76,7 +76,7 @@ ApiStatus func_802A916C_425CBC(Evt* script, s32 isInitialCall) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
 
-    battleStatus->flags1 &= ~0x8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_8024FAFC(battleStatus->flags1);
     actionCommandStatus->state = 10;
 

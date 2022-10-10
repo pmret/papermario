@@ -75,7 +75,7 @@ EvtScript N(main) = {
     EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetItemPower, ITEM_THUNDER_RAGE, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, 939524128, 0, LVar0, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 939524128, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, 0, LVar0)

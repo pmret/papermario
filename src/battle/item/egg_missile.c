@@ -178,7 +178,7 @@ EvtScript N(main) = {
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.4501953125))
     EVT_END_THREAD
     EVT_CALL(GetItemPower, 200, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, 402653698, 0, LVar0, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 402653698, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_EXEC_WAIT(battle_item_egg_missile_PlayerGoHome)
     EVT_RETURN
     EVT_END

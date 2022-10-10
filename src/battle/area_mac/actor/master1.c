@@ -104,7 +104,7 @@ EvtScript N(init_8022A3B0) = {
     EVT_CALL(SetActorVar, -127, 2, 0)
     EVT_CALL(SetActorVar, -127, 3, 2)
     EVT_SET(GF_FoughtTheMaster, 1)
-    EVT_CALL(SetBattleFlagBits, 8388608, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -244,7 +244,7 @@ EvtScript N(takeTurn_8022AA54) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(RunToGoal, ACTOR_SELF, 8, TRUE)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -275,7 +275,7 @@ EvtScript N(takeTurn_8022AA54) = {
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, 48)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
@@ -352,7 +352,7 @@ EvtScript N(handleEvent_8022B2CC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, 0x240)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
         EVT_CALL(GetLastDamage, -127, LVar0)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(SetActorVar, -127, 2, 1)

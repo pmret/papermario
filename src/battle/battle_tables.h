@@ -107,6 +107,18 @@ extern StageList b_area_pra2_stageTable;
 extern BattleList b_area_pra3_formationTable;
 extern StageList b_area_pra3_stageTable;
 
+extern BattleList b_area_kpa_formationTable;
+extern StageList b_area_kpa_stageTable;
+
+extern BattleList b_area_kpa2_formationTable;
+extern StageList b_area_kpa2_stageTable;
+
+extern BattleList b_area_kpa3_formationTable;
+extern StageList b_area_kpa3_stageTable;
+
+extern BattleList b_area_kpa4_formationTable;
+extern StageList b_area_kpa4_stageTable;
+
 extern BattleList b_area_kkj_formationTable;
 extern StageList b_area_kkj_stageTable;
 

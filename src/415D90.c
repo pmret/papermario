@@ -838,7 +838,7 @@ void btl_draw_menu_wheel(void) {
                 draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, 0x35, 0);
             }
 
-            if ((gBattleStatus.flags1 & 0x02000000) || (gBattleStatus.flags2 & 0x40)) {
+            if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & 0x40)) {
                 D_802AD104 = 0;
             }
 

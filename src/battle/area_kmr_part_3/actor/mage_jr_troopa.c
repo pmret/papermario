@@ -137,7 +137,7 @@ EvtScript N(8022A750) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
-    EVT_IF_FLAG(LVar2, 0x80000)
+    EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, 183)
             EVT_CALL(SetActorVar, -127, 3, 1)
@@ -393,7 +393,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_SwingStaff)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_NO_CONTACT, 0, 1, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_NO_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -442,7 +442,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ADD(LVar1, LVar7)
     EVT_CALL(PlayEffect, 0x12, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 15, 0, 0, 0, 0, 0)
     EVT_WAIT(15)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 8, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 8, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(GetActorVar, -127, 1, LVar0)

@@ -84,7 +84,7 @@ EvtScript N(main) = {
     EVT_END_IF
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetItemPower, ITEM_FIRE_FLOWER, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, 939524098, 0, LVar0, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 939524098, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, 0, LVar0)

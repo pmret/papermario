@@ -820,7 +820,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     partner->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
 
-    if (battleStatus->flags1 & 0x20) {
+    if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (event == 0x9) {
             event = 0xA;
         }
@@ -830,7 +830,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     }
 
     if (battleStatus->lastAttackDamage > 0) {
-        gBattleStatus.flags1 |= 0x20;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
 
         inflict_status(partner, 0xD, battleStatus->lastAttackDamage);
     }
@@ -850,7 +850,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
 
     partner->flags |= 0x80000;
 
-    flagCheck = (gBattleStatus.flags1 & 0x240) != 0;
+    flagCheck = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40))) != 0;
     dispatch_event_partner(event);
     return flagCheck;
 }
@@ -952,13 +952,13 @@ ApiStatus PartnerDamageEnemy(Evt* script, s32 isInitialCall) {
     gBattleStatus.powerBounceCounter = 0;
     flags = *args++;
 
-    if ((flags & 0x30) == 0x30) {
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x10) {
+    } else if (flags & BS_FLAGS1_10) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x20) {
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
         battleStatus->flags1 &= ~BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
@@ -966,25 +966,25 @@ ApiStatus PartnerDamageEnemy(Evt* script, s32 isInitialCall) {
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (flags & 0x40) {
+    if (flags & BS_FLAGS1_40) {
         gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
-    if (flags & 0x200) {
+    if (flags & BS_FLAGS1_200) {
         gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
-    if (flags & 0x80) {
+    if (flags & BS_FLAGS1_80) {
         gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    if (flags & 0x800) {
+    if (flags & BS_FLAGS1_800) {
         gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_800;
@@ -1032,13 +1032,13 @@ ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->powerBounceCounter = 0;
     flags = *args++;
 
-    if ((flags & 0x30) == 0x30) {
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x10) {
+    } else if (flags & BS_FLAGS1_10) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x20) {
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
         battleStatus->flags1 &= ~BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
@@ -1046,22 +1046,22 @@ ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (flags & 0x40) {
+    if (flags & BS_FLAGS1_40) {
         gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
-    if (flags & 0x200) {
+    if (flags & BS_FLAGS1_200) {
         gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
-    if (flags & 0x80) {
+    if (flags & BS_FLAGS1_80) {
         gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
-    if (flags & 0x800) {
+    if (flags & BS_FLAGS1_800) {
         gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_800;
@@ -1108,13 +1108,13 @@ ApiStatus PartnerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->powerBounceCounter = evt_get_variable(script, *args++);
     flags = *args++;
 
-    if ((flags & 0x30) == 0x30) {
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x10) {
+    } else if (flags & BS_FLAGS1_10) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x20) {
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
         battleStatus->flags1 &= ~BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
@@ -1122,22 +1122,22 @@ ApiStatus PartnerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (flags & 0x40) {
+    if (flags & BS_FLAGS1_40) {
         gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
-    if (flags & 0x200) {
+    if (flags & BS_FLAGS1_200) {
         gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
-    if (flags & 0x80) {
+    if (flags & BS_FLAGS1_80) {
         gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
-    if (flags & 0x800) {
+    if (flags & BS_FLAGS1_800) {
         gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_800;
@@ -1186,13 +1186,13 @@ ApiStatus PartnerTestEnemy(Evt* script, s32 isInitialCall) {
     gBattleStatus.powerBounceCounter = 0;
     flags = *args++;
 
-    if ((flags & 0x30) == 0x30) {
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x10) {
+    } else if (flags & BS_FLAGS1_10) {
         battleStatus->flags1 |= BS_FLAGS1_10;
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
-    } else if (flags & 0x20) {
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
         battleStatus->flags1 &= ~BS_FLAGS1_10;
         battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
@@ -1200,25 +1200,25 @@ ApiStatus PartnerTestEnemy(Evt* script, s32 isInitialCall) {
         battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (flags & 0x40) {
+    if (flags & BS_FLAGS1_40) {
         gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
-    if (flags & 0x200) {
+    if (flags & BS_FLAGS1_200) {
         gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
-    if (flags & 0x80) {
+    if (flags & BS_FLAGS1_80) {
         gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    if (flags & 0x800) {
+    if (flags & BS_FLAGS1_800) {
         gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_800;
@@ -1289,6 +1289,6 @@ ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
 
 /// Seems to be the same functionality as YieldTurn in 1A5830.c
 ApiStatus func_80280818(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= 0x200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_200000;
     return ApiStatus_DONE2;
 }

@@ -116,7 +116,7 @@ EvtScript N(init_8022B7DC) = {
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
     EVT_CALL(SetActorVar, -127, 3, 2)
-    EVT_CALL(SetBattleFlagBits, 8388608, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -250,7 +250,7 @@ EvtScript N(singleStrike2) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedKick)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BC)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -282,7 +282,7 @@ EvtScript N(singleStrike2) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 8, 48)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 8, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
@@ -347,7 +347,7 @@ EvtScript N(doubleStrike2) = {
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B9)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -389,7 +389,7 @@ EvtScript N(doubleStrike2) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, 16)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_10)
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_THREAD
@@ -410,7 +410,7 @@ EvtScript N(doubleStrike2) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(15)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -577,7 +577,7 @@ EvtScript N(handleEvent_8022D634) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, 0x240)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
         EVT_CALL(GetLastDamage, -127, LVar0)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(SetActorVar, -127, 2, 1)

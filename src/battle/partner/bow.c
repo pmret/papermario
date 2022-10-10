@@ -34,7 +34,7 @@ ApiStatus func_8023808C_710F7C(Evt* script, s32 isInitialCall) {
 
     playerActorPartTable->idleAnimations = bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
-    gBattleStatus.flags1 &= ~0x04000000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
 
     return ApiStatus_DONE2;
 }

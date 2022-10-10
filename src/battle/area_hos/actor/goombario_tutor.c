@@ -228,7 +228,7 @@ EvtScript N(takeTurn_80219444) = {
         EVT_CALL(func_80269EAC, 5)
     EVT_END_IF
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(CloseActionCommandInfo)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
@@ -282,7 +282,7 @@ ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(80219C74) = {
-    EVT_CALL(SetBattleFlagBits, 33554432, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, 13)
     EVT_WAIT(15)
@@ -306,7 +306,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(ActorSpeak, 655386, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, 1)
-    EVT_CALL(SetBattleFlagBits, 16384, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(SetMessageBoxDuration, -1)
     EVT_THREAD
         EVT_LOOP(15)

@@ -220,12 +220,12 @@ void func_80268858(void) {
     actionCommandStatus->autoSucceed = FALSE;
     actionCommandStatus->unk_6A = FALSE;
 
-    if (!(gBattleStatus.flags1 & 0x80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
         if (is_ability_active(ABILITY_RIGHT_ON)) {
             actionCommandStatus->autoSucceed = TRUE;
         }
 
-        if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_BERSERKER)) {
+        if (!(gBattleStatus.flags1 & BS_FLAGS1_80000) && is_ability_active(ABILITY_BERSERKER)) {
             actionCommandStatus->unk_61 = FALSE;
             actionCommandStatus->unk_6A = TRUE;
 
@@ -239,7 +239,7 @@ void func_80268858(void) {
         actionCommandStatus->autoSucceed = TRUE;
     }
 
-    if (gBattleStatus.flags1 & 0x1000) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_1000) {
         actionCommandStatus->autoSucceed = TRUE;
         actionCommandStatus->unk_61 = FALSE;
     }

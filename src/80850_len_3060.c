@@ -416,51 +416,43 @@ void initialize_status_menu(void) {
     func_800F0D5C();
 }
 
-// close but maybe just regalloc remaining?
-#ifdef NON_EQUIVALENT
 void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits) {
     s8 digits[4];
     s32 i;
-    s32 y2;
+    s32 x2, y2;
     s32 keepDrawing;
     s32 digit;
-    s32 place;
 
     hud_element_set_script(iconID, TimesHudScript);
-    x += 8;
+    x2 = x + 8;
     y2 = y + 8;
-    hud_element_set_render_pos(iconID, x, y + 7);
+    hud_element_set_render_pos(iconID, x2, y2 - 1);
     hud_element_clear_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_draw_next(iconID);
 
     // Write each digit of the input number into the digits array
     for (i = 0; i < numDigits; i++) {
-        digit = value / 10;
-        place = (digit) * 10;
-        digit = value - place;
+        digit = value % 10;
         digits[(numDigits - i) - 1] = digit;
         value /= 10;
     }
 
-    x += 13;
+    x2 += 13;
     keepDrawing = FALSE;
 
-    for (i = 0; i < numDigits; i++, x += 8) {
+    for (i = 0; i < numDigits; i++, x2 += 8) {
         digit = digits[i];
 
         // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
         if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
             keepDrawing = TRUE;
             hud_element_set_script(iconID, DigitHudScripts[digit]);
-            hud_element_set_render_pos(iconID, x, y2);
+            hud_element_set_render_pos(iconID, x2, y2);
             hud_element_clear_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
             hud_element_draw_next(iconID);
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
-#endif
 
 // close but some ordering / reg issues
 #ifdef NON_MATCHING

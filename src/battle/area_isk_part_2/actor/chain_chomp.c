@@ -276,7 +276,7 @@ ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInit
 
     three = 3;
 
-    animState = actor->state.unk_6C;
+    animState = actor->state.functionTempPtr[0];
     if (actor->debuff == STATUS_SHRINK) {
         ax = actor->currentPos.x + 6.0;
         ay = actor->currentPos.y + 2.5;

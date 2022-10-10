@@ -242,7 +242,7 @@ EvtScript N(parakarry_doTakeTurn) = {
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleParakarry_Still)
     EVT_WAIT(3)
-    EVT_CALL(UseBattleCamPresetImmediately, 1)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_B)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2004)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleParakarry_FlyFast)

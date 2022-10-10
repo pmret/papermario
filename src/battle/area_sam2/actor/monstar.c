@@ -163,7 +163,7 @@ ApiStatus func_80218000_63D1E0(Evt* script, s32 isInitialCall) {
         func_802DE780(part->unk_84, 0, 17, 20, 0, 0, 255, 0);
     }
 
-    func_802DE780(part->unk_84, 1, 15, &D_8021A2B8_63F498, 255, 0, 255, 0);
+    func_802DE780(part->unk_84, 1, 15, (s32)&D_8021A2B8_63F498, 255, 0, 255, 0);
     script->functionTemp[1] += 10;
     if (script->functionTemp[1] >= 360) {
         script->functionTemp[1] %= 360;

@@ -213,7 +213,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
         EVT_KILL_THREAD(LVar0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_20000 | BS_FLAGS1_40000, 1)
+        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
         EVT_CALL(func_8026F60C, 10)
         EVT_RETURN
     EVT_END_IF

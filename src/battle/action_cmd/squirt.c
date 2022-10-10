@@ -71,7 +71,7 @@ ApiStatus func_802A911C_429E3C(Evt* script) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
     actionCommandStatus->state = 10;
-    battleStatus->flags1 &= ~0x8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_80269118();
     return ApiStatus_DONE2;
 }
