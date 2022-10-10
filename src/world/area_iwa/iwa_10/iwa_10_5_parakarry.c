@@ -15,8 +15,7 @@ NpcSettings N(NpcSettings_Parakarry) = {
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#define _COMMON_GIVE_REWARD_H_ // not great!
-#include "world/common/complete/KeyItems.inc.c"
+#include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(4,unk);
 
 EvtScript N(EVS_Scene_MeetParakarry) = {
@@ -205,7 +204,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
     EVT_END_IF
     EVT_SET(LVar0, EVT_PTR(N(LetterList)))
     EVT_SET(LVar1, 4)
-    EVT_EXEC_WAIT(N(ChooseKeyItem))
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SWITCH(GB_IWA10_ReturnedLetterCount)

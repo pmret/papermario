@@ -1,9 +1,6 @@
 #include "trd_09.h"
 #include "effects.h"
 
-extern EvtScript D_800936C0;
-extern EvtScript EVS_NpcHitRecoil;
-
 API_CALLABLE(N(func_80240000_9BD660)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
@@ -39,7 +36,7 @@ EvtScript N(D_80240844_9BDEA4) = {
     EVT_SET(LVar3, 10)
     EVT_SET(LVarA, ANIM_BillBlaster_Anim01)
     EVT_SET(LVarB, ANIM_BillBlaster_Anim01)
-    EVT_EXEC_WAIT(D_800936C0)
+    EVT_EXEC_WAIT(EVS_800936C0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Anim02)
     EVT_WAIT(15)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)

@@ -1,7 +1,7 @@
 #include "iwa_04.h"
 #include "entity.h"
 
-ApiStatus N(MonitorPlayerAltitude)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MonitorPlayerAltitude)) {
     s32 status = -1;
     
     if (gPlayerStatus.lastGoodPosition.y > -100.0) {

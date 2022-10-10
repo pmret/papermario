@@ -4,8 +4,8 @@
 #include "world/common/npc/Boo_Patrol.inc.c"
 #include "world/common/npc/Boo.inc.c"
 
-//TODO understand this key item support
-#include "world/common/complete/KeyItems.inc.c"
+#include "world/common/complete/GiveReward.inc.c"
+#include "world/common/complete/KeyItemChoice.inc.c"
 
 EvtScript N(EVS_PlayerReact) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)

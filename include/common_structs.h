@@ -1431,10 +1431,10 @@ typedef struct GameStatus {
     /* 0x14E */ s16 backgroundMaxX;
     /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
-    /* 0x154 */ UNK_PTR backgroundRaster;
-    /* 0x158 */ u16* backgroundPalette;
-    /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ u16 unk_15E;
+    /* 0x154 */ IMG_PTR backgroundRaster;
+    /* 0x158 */ PAL_PTR backgroundPalette;
+    /* 0x15C */ s16 backgroundDarkness; // 255 = fully black
+    /* 0x15E */ s16 savedBackgroundDarkness; // used during pause/unpause
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
