@@ -3,7 +3,7 @@
 
 #include "world/common/util/GetFirstTriangleNormal.inc.c"
 
-API_CALLABLE(N(CalculateFlowerAngles)) {
+API_CALLABLE(N(GetFlowerNormal)) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
@@ -64,11 +64,11 @@ EvtScript N(EVS_FlowersWither) = {
         EVT_CALL(N(GetWitherTranslation), LVar0, LVar2)
         EVT_SUB(LVar1, 1)
         EVT_CALL(TranslateModel, LVarA, 0, LVar1, LVar2)
-        EVT_CALL(N(CalculateFlowerAngles), LVarA, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetFlowerNormal), LVarA, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVarA, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(ScaleModel, LVarA, LVar3, LVar3, LVar3)
         EVT_CALL(TranslateModel, LVarB, 0, LVar1, LVar2)
-        EVT_CALL(N(CalculateFlowerAngles), LVarA, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetFlowerNormal), LVarA, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVarB, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(ScaleModel, LVarB, LVar3, LVar3, LVar3)
         EVT_MULF(LVar3, EVT_FLOAT(0.9658203))
@@ -91,7 +91,7 @@ EvtScript N(EVS_InspectFlowers_South) = {
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_South)))
     EVT_LOOP(3)
         EVT_BUF_READ2(LVar2, LVar3)
-        EVT_CALL(N(CalculateFlowerAngles), LVar2, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetFlowerNormal), LVar2, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar2, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar3, LVar0, LVar7, LVar8, LVar9)
     EVT_END_LOOP
@@ -106,7 +106,7 @@ EvtScript N(EVS_InspectFlowers_South) = {
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_South)))
     EVT_LOOP(3)
         EVT_BUF_READ2(LVar2, LVar3)
-        EVT_CALL(N(CalculateFlowerAngles), LVar2, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetFlowerNormal), LVar2, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar2, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar3, LVar0, LVar7, LVar8, LVar9)
     EVT_END_LOOP
@@ -121,7 +121,7 @@ EvtScript N(EVS_InspectFlowers_South) = {
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_South)))
     EVT_LOOP(3)
         EVT_BUF_READ2(LVar2, LVar3)
-        EVT_CALL(N(CalculateFlowerAngles), LVar2, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetFlowerNormal), LVar2, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar2, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVar3, LVar0, LVar7, LVar8, LVar9)
     EVT_END_LOOP

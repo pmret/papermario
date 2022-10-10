@@ -3,7 +3,7 @@
 
 #include "world/common/util/GetFirstTriangleNormal.inc.c"
 
-API_CALLABLE(N(func_802403F0_B93830)) {
+API_CALLABLE(N(GetFlowerNormal)) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
@@ -56,13 +56,13 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_CALL(MakeLerp, 0, 30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ea_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ea_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_eb_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_eb_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ec_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ec_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_2, LVar0, LVar7, LVar8, LVar9)
     EVT_WAIT(1)
@@ -73,13 +73,13 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_CALL(MakeLerp, 30, -30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(20)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ea_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ea_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_eb_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_eb_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ec_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ec_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_2, LVar0, LVar7, LVar8, LVar9)
     EVT_WAIT(1)
@@ -90,13 +90,13 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_CALL(MakeLerp, -30, 0, 50, EASING_COS_IN_OUT)
     EVT_LABEL(30)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ea_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ea_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ea_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_eb_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_eb_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_eb_2, LVar0, LVar7, LVar8, LVar9)
-    EVT_CALL(N(func_802403F0_B93830), MODEL_ec_1, LVar7, LVar8, LVar9)
+    EVT_CALL(N(GetFlowerNormal), MODEL_ec_1, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_1, LVar0, LVar7, LVar8, LVar9)
     EVT_CALL(RotateModel, MODEL_ec_2, LVar0, LVar7, LVar8, LVar9)
     EVT_WAIT(1)

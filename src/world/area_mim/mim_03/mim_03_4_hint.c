@@ -3,7 +3,7 @@
 
 #include "world/common/util/GetFirstTriangleNormal.inc.c"
 
-API_CALLABLE(N(CalculateFlowerAngles)) {
+API_CALLABLE(N(GetFlowerNormal)) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
@@ -54,7 +54,7 @@ EvtScript N(EVS_FlowersReact_Wrong) = {
     EVT_USE_BUF(LVar8)
     EVT_LOOP(3)
         EVT_BUF_READ2(LVar6, LVar7)
-        EVT_CALL(N(CalculateFlowerAngles), LVar6, LVar3, LVar4, LVar5)
+        EVT_CALL(N(GetFlowerNormal), LVar6, LVar3, LVar4, LVar5)
         EVT_CALL(RotateModel, LVar6, LVar0, LVar3, LVar4, LVar5)
         EVT_CALL(RotateModel, LVar7, LVar0, LVar3, LVar4, LVar5)
     EVT_END_LOOP
@@ -80,7 +80,7 @@ EvtScript N(EVS_FlowersReact_Correct) = {
         EVT_USE_BUF(LVar8)
         EVT_LOOP(4)
             EVT_BUF_READ2(LVar6, LVar7)
-            EVT_CALL(N(CalculateFlowerAngles), LVar6, LVar3, LVar4, LVar5)
+            EVT_CALL(N(GetFlowerNormal), LVar6, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar6, LVar0, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar7, LVar0, LVar3, LVar4, LVar5)
         EVT_END_LOOP
@@ -94,7 +94,7 @@ EvtScript N(EVS_FlowersReact_Correct) = {
         EVT_USE_BUF(LVar8)
         EVT_LOOP(4)
             EVT_BUF_READ2(LVar6, LVar7)
-            EVT_CALL(N(CalculateFlowerAngles), LVar6, LVar3, LVar4, LVar5)
+            EVT_CALL(N(GetFlowerNormal), LVar6, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar6, LVar0, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar7, LVar0, LVar3, LVar4, LVar5)
         EVT_END_LOOP
@@ -108,7 +108,7 @@ EvtScript N(EVS_FlowersReact_Correct) = {
         EVT_USE_BUF(LVar8)
         EVT_LOOP(4)
             EVT_BUF_READ2(LVar6, LVar7)
-            EVT_CALL(N(CalculateFlowerAngles), LVar6, LVar3, LVar4, LVar5)
+            EVT_CALL(N(GetFlowerNormal), LVar6, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar6, LVar0, LVar3, LVar4, LVar5)
             EVT_CALL(RotateModel, LVar7, LVar0, LVar3, LVar4, LVar5)
         EVT_END_LOOP
