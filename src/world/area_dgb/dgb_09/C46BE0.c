@@ -166,7 +166,7 @@ EvtScript N(80243E60) = {
         EVT_CALL(EnableModel, 25, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 13, 0x7FFFFE00)
     EVT_SET(GF_DGB09_BombedWall, 1)
     EVT_UNBIND
     EVT_RETURN
@@ -179,7 +179,7 @@ EvtScript N(80243F6C) = {
         EVT_CALL(EnableModel, 29, 0)
     EVT_ELSE
         EVT_CALL(EnableModel, 25, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 13, 0x7FFFFE00)
     EVT_END_IF
     EVT_RETURN
     EVT_END

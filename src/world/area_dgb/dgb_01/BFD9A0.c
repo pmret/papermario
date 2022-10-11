@@ -418,17 +418,17 @@ EvtScript N(802449C4) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetGroupEnabled, 210, 0)
-            EVT_CALL(ModifyColliderFlags, 0, 50, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 50, 0x7FFFFE00)
         EVT_CASE_EQ(-29)
             EVT_CALL(SetGroupEnabled, 210, 0)
-            EVT_CALL(ModifyColliderFlags, 0, 50, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 50, 0x7FFFFE00)
             EVT_EXEC(N(80243EF0))
         EVT_CASE_LT(-16)
             EVT_CALL(SetGroupEnabled, 112, 0)
-            EVT_CALL(ModifyColliderFlags, 0, 40, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 40, 0x7FFFFE00)
         EVT_CASE_DEFAULT
             EVT_CALL(SetGroupEnabled, 210, 0)
-            EVT_CALL(ModifyColliderFlags, 0, 50, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 50, 0x7FFFFE00)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

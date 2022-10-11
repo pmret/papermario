@@ -249,7 +249,7 @@ static s32 N(pad_1468)[] = {
 };
 
 EvtScript N(80241470) = {
-    EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 9, 0x7FFFFE00)
     EVT_SET(GB_StoryProgress, -117)
     EVT_RETURN
     EVT_END
@@ -276,7 +276,7 @@ EvtScript N(makeEntities) = {
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer1Block), 45, 0, 70, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80241470)))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 9, 0x7FFFFE00)
     EVT_END_IF
     EVT_IF_EQ(GF_KMR03_Hammer1Block, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)

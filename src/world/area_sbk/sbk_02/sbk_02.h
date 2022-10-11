@@ -24,8 +24,8 @@ enum {
 #define NAMESPACE sbk_02
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80243A00);
-extern EvtScript N(EVS_80243B38);
+extern EvtScript N(EVS_SetupRuins);
+extern EvtScript N(EVS_Ruins_Arise_Continued);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);

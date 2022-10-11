@@ -1,16 +1,18 @@
 #include "sbk_02.h"
 #include "effects.h"
 
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
+
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-API_CALLABLE(N(func_80240338_92A5E8)) {
+API_CALLABLE(N(HideSun)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MapVar(0));
     
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240364_92A614)) {
+API_CALLABLE(N(InterpWorldEnvColor)) {
     static u8 savedPrimR, savedPrimG, savedPrimB;
     static u8 savedEnvR, savedEnvG, savedEnvB;
     static s32 targetPrimR, targetPrimG, targetPrimB;
@@ -54,12 +56,12 @@ API_CALLABLE(N(func_80240364_92A614)) {
     return ApiStatus_BLOCK;
 }
 
-s32 N(D_80241250_92B500)[] = {
+s32 N(PedestalKeyList)[] = {
     ITEM_PULSE_STONE,
     ITEM_NONE
 };
 
-EvtScript N(D_80241258_92B508) = {
+EvtScript N(EVS_Pedestal_Sink) = {
     EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 0, 0, 0, 20, 10, 0, 60)
     EVT_PLAY_EFFECT(EFFECT_DUST, 2, 0, 0, 0, 60)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_iwa, SOUND_5F, 0)
@@ -76,34 +78,34 @@ EvtScript N(D_80241258_92B508) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(EnableModel, MODEL_point_iwa, FALSE)
     EVT_CALL(PlaySound, SOUND_8000005F)
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_80241418_92B6C8)[] = {
+s32 N(ModelList_Solid)[] = {
     MODEL_ruins, MODEL_step, 0x0000FFFF
 };
 
-s32 N(D_80241424_92B6D4)[] = {
+s32 N(ModelList_Translucent)[] = {
     MODEL_upper_light, MODEL_o225, 0x0000FFFF
 };
 
-EvtScript N(D_80241430_92B6E0) = {
+EvtScript N(EVS_DarkenEnvironment) = {
     EVT_CALL(N(UnkFunc27), 2, 0, 3)
     EVT_CALL(N(UnkFunc27), 1, -1, 3)
-    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(D_80241418_92B6C8)), 0)
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_80241424_92B6D4)), 0)
-    EVT_CALL(N(func_80240364_92A614), 255, 255, 255, 0, 0, 0, 0)
+    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(ModelList_Solid)), 0)
+    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ModelList_Translucent)), 0)
+    EVT_CALL(N(InterpWorldEnvColor), 255, 255, 255, 0, 0, 0, 0)
     EVT_WAIT(1)
-    EVT_CALL(N(func_80240364_92A614), 44, 32, 177, 0, 0, 0, 60)
+    EVT_CALL(N(InterpWorldEnvColor), 44, 32, 177, 0, 0, 0, 60)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802414FC_92B7AC) = {
+EvtScript N(EVS_TexPan_SandRing) = {
     EVT_CALL(SetRenderMode, MODEL_o225, RENDER_MODE_SURFACE_XLU_LAYER2)
     EVT_CALL(EnableTexPanning, MODEL_o225, TRUE)
     EVT_CALL(EnableTexPanning, CLONED_MODEL(0), TRUE)
@@ -131,7 +133,7 @@ EvtScript N(D_802414FC_92B7AC) = {
     EVT_END
 };
 
-EvtScript N(D_80241678_92B928) = {
+EvtScript N(EVS_SandRing_Appear) = {
     EVT_CALL(EnableModel, MODEL_o225, TRUE)
     EVT_SET(LVar2, 0)
     EVT_SET(LVar0, -100)
@@ -152,7 +154,7 @@ EvtScript N(D_80241678_92B928) = {
     EVT_END
 };
 
-EvtScript N(D_80241790_92BA40) = {
+EvtScript N(EVS_SandRingClone_Appear) = {
     EVT_WAIT(10)
     EVT_CALL(EnableModel, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar2, 0)
@@ -174,7 +176,7 @@ EvtScript N(D_80241790_92BA40) = {
     EVT_END
 };
 
-EvtScript N(D_802418B4_92BB64) = {
+EvtScript N(EVS_SandRing_Vanish) = {
     EVT_CALL(EnableModel, MODEL_o225, TRUE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar2, 100)
@@ -197,7 +199,7 @@ EvtScript N(D_802418B4_92BB64) = {
     EVT_END
 };
 
-EvtScript N(D_802419F0_92BCA0) = {
+EvtScript N(EVS_SandRingClone_Vanish) = {
     EVT_WAIT(10)
     EVT_CALL(EnableModel, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar0, 0)
@@ -221,7 +223,7 @@ EvtScript N(D_802419F0_92BCA0) = {
     EVT_END
 };
 
-EvtScript N(D_80241B38_92BDE8) = {
+EvtScript N(EVS_LightRays_Appear) = {
     EVT_CHILD_THREAD
         EVT_CALL(EnableTexPanning, MODEL_upper_light, TRUE)
         EVT_SET(LVar0, 0)
@@ -249,7 +251,7 @@ EvtScript N(D_80241B38_92BDE8) = {
     EVT_END
 };
 
-EvtScript N(D_80241C90_92BF40) = {
+EvtScript N(EVS_LightRays_Vanish) = {
     EVT_CHILD_THREAD
         EVT_CALL(EnableTexPanning, MODEL_upper_light, TRUE)
         EVT_SET(LVar0, 0)
@@ -275,7 +277,7 @@ EvtScript N(D_80241C90_92BF40) = {
     EVT_END
 };
 
-EvtScript N(D_80241DE0_92C090) = {
+EvtScript N(EVS_Ruins_Arise) = {
     EVT_CALL(MakeTransformGroup, MODEL_ruins)
     EVT_CALL(EnableGroup, MODEL_ruins, TRUE)
     EVT_THREAD
@@ -286,9 +288,9 @@ EvtScript N(D_80241DE0_92C090) = {
         EVT_LOOP(600)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, LVar0)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX, LVar1, LVar2)
-            EVT_ADD(LVar0, 200)
+            EVT_ADD(LVar0,  200)
             EVT_ADD(LVar1, -200)
-            EVT_ADD(LVar2, 700)
+            EVT_ADD(LVar2,  700)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(EnableModel, MODEL_o232, FALSE)
@@ -343,20 +345,20 @@ EvtScript N(D_80241DE0_92C090) = {
     EVT_END
 };
 
-EvtScript N(D_802422F0_92C5A0) = {
+EvtScript N(EVS_Ruins_FinishRising) = {
     EVT_CALL(MakeTransformGroup, MODEL_ruins)
     EVT_CALL(EnableGroup, MODEL_ruins, TRUE)
     EVT_THREAD
         EVT_CALL(EnableTexPanning, MODEL_o232, TRUE)
-        EVT_SET(LVar0, 0x0000EA60)
-        EVT_SET(LVar1, 0xFFFF15A0)
-        EVT_SET(LVar2, 0x00033450)
+        EVT_SET(LVar0,  60000)
+        EVT_SET(LVar1, -60000)
+        EVT_SET(LVar2, 210000)
         EVT_LOOP(300)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, LVar0)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX, LVar1, LVar2)
-            EVT_ADD(LVar0, 200)
+            EVT_ADD(LVar0,  200)
             EVT_ADD(LVar1, -200)
-            EVT_ADD(LVar2, 700)
+            EVT_ADD(LVar2,  700)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(EnableModel, MODEL_o232, FALSE)
@@ -409,7 +411,7 @@ EvtScript N(D_802422F0_92C5A0) = {
     EVT_END
 };
 
-EvtScript N(D_802427F4_92CAA4) = {
+EvtScript N(EVS_SetChompStatueRotation) = {
     EVT_CALL(RotateGroup, MODEL_c_wang, LVar0, 0, 1, 0)
     EVT_CALL(RotateGroup, MODEL_d_wang, LVar0, 0, 1, 0)
     EVT_SET(LVar2, 0)
@@ -420,11 +422,11 @@ EvtScript N(D_802427F4_92CAA4) = {
     EVT_END
 };
 
-EvtScript N(D_802428A4_92CB54) = {
+EvtScript N(EVS_InterpChompStatueRotation) = {
     EVT_CALL(MakeLerp, 180, 0, 60, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_EXEC_WAIT(N(D_802427F4_92CAA4))
+        EVT_EXEC_WAIT(N(EVS_SetChompStatueRotation))
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -434,94 +436,94 @@ EvtScript N(D_802428A4_92CB54) = {
     EVT_END
 };
 
-EvtScript N(D_80242928_92CBD8) = {
+EvtScript N(EVS_Doors_Open) = {
     EVT_CALL(MakeLerp, 0, 60, 180, EASING_QUADRATIC_IN)
     EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_o168, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o177, LVar0, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o169, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o178, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o169, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o178, LVar0, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o169, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o178, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o130, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o176, LVar0, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o175, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o129, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o175, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o129, LVar0, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o175, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o129, 20, 0, 0)
-    EVT_SET(LVar2, 0)
-    EVT_SUB(LVar2, LVar0)
-    EVT_CALL(RotateModel, MODEL_o141, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o174, LVar2, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o140, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o173, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o140, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o173, LVar2, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o140, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o173, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o157, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o171, LVar2, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o158, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o172, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o158, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o172, LVar2, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o158, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o172, -20, 0, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_o168, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o177, LVar0, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o169, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o178, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o169, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o178, LVar0, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o169, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o178, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o130, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o176, LVar0, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o175, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o129, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o175, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o129, LVar0, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o175, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o129, 20, 0, 0)
+        EVT_SET(LVar2, 0)
+        EVT_SUB(LVar2, LVar0)
+        EVT_CALL(RotateModel, MODEL_o141, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o174, LVar2, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o140, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o173, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o140, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o173, LVar2, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o140, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o173, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o157, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o171, LVar2, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o158, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o172, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o158, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o172, LVar2, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o158, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o172, -20, 0, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(10)
+        EVT_END_IF
     EVT_CALL(MakeLerp, 0, 60, 180, EASING_QUADRATIC_OUT)
     EVT_LABEL(20)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, MODEL_o169, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o178, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o169, 60, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o178, 60, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o169, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o178, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o169, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o178, LVar0, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o175, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o129, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o175, 60, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o129, 60, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o175, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o129, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o175, LVar0, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o129, LVar0, 0, 1, 0)
-    EVT_SET(LVar2, 0)
-    EVT_SUB(LVar2, LVar0)
-    EVT_CALL(TranslateModel, MODEL_o140, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o173, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o140, -60, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o173, -60, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o140, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o173, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o140, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o173, LVar2, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o158, 20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o172, 20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o158, -60, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o172, -60, 0, 1, 0)
-    EVT_CALL(TranslateModel, MODEL_o158, -20, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o172, -20, 0, 0)
-    EVT_CALL(RotateModel, MODEL_o158, LVar2, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o172, LVar2, 0, 1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(20)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, MODEL_o169, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o178, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o169, 60, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o178, 60, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o169, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o178, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o169, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o178, LVar0, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o175, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o129, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o175, 60, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o129, 60, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o175, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o129, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o175, LVar0, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o129, LVar0, 0, 1, 0)
+        EVT_SET(LVar2, 0)
+        EVT_SUB(LVar2, LVar0)
+        EVT_CALL(TranslateModel, MODEL_o140, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o173, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o140, -60, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o173, -60, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o140, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o173, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o140, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o173, LVar2, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o158, 20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o172, 20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o158, -60, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o172, -60, 0, 1, 0)
+        EVT_CALL(TranslateModel, MODEL_o158, -20, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o172, -20, 0, 0)
+        EVT_CALL(RotateModel, MODEL_o158, LVar2, 0, 1, 0)
+        EVT_CALL(RotateModel, MODEL_o172, LVar2, 0, 1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(20)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802431C0_92D470) = {
+EvtScript N(EVS_Steps_Arise) = {
     EVT_CALL(EnableGroup, MODEL_step, TRUE)
     EVT_CALL(MakeLerp, -310, 0, 310, EASING_LINEAR)
     EVT_LOOP(0)
@@ -536,7 +538,7 @@ EvtScript N(D_802431C0_92D470) = {
     EVT_END
 };
 
-EvtScript N(D_80243268_92D518) = {
+EvtScript N(EVS_Steps_FinishRising) = {
     EVT_CALL(EnableGroup, MODEL_step, TRUE)
     EVT_CALL(MakeLerp, -20, 0, 20, EASING_LINEAR)
     EVT_LOOP(0)
@@ -551,7 +553,7 @@ EvtScript N(D_80243268_92D518) = {
     EVT_END
 };
 
-EvtScript N(D_80243310_92D5C0) = {
+EvtScript N(EVS_Steps_Unfold) = {
     EVT_CALL(PlaySoundAt, SOUND_5E, 0, 0, 39, -80)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.2))
@@ -578,7 +580,7 @@ EvtScript N(D_80243310_92D5C0) = {
     EVT_END
 };
 
-EvtScript N(D_8024358C_92D83C) = {
+EvtScript N(EVS_OnInteract_Pedestal) = {
     EVT_CALL(DisablePulseStone, TRUE)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_LE(LVar0, 0)
@@ -591,7 +593,7 @@ EvtScript N(D_8024358C_92D83C) = {
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GB_StoryProgress, STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
-    EVT_CALL(N(func_80240338_92A5E8))
+    EVT_CALL(N(HideSun))
     EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_RUINS_APPEAR, 1, 8)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 210, 0, 137)
@@ -603,13 +605,13 @@ EvtScript N(D_8024358C_92D83C) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(10)
     EVT_SET(LVar0, 180)
-    EVT_EXEC_WAIT(N(D_802427F4_92CAA4))
+    EVT_EXEC_WAIT(N(EVS_SetChompStatueRotation))
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 120, EVT_FLOAT(0.2))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 300, EVT_FLOAT(0.5))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 300, EVT_FLOAT(0.2))
     EVT_END_THREAD
-    EVT_EXEC(N(D_80241258_92B508))
+    EVT_EXEC(N(EVS_Pedestal_Sink))
     EVT_WAIT(30)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_LT(LVar0, 0)
@@ -625,23 +627,23 @@ EvtScript N(D_8024358C_92D83C) = {
         EVT_CALL(PlayerMoveTo, LVar0, 80, 0)
         EVT_CALL(func_802D2884, 0, 0, 0)
     EVT_END_THREAD
-    EVT_EXEC(N(D_80241430_92B6E0))
+    EVT_EXEC(N(EVS_DarkenEnvironment))
     EVT_WAIT(30)
     EVT_CALL(CloneModel, MODEL_o225, CLONED_MODEL(0))
-    EVT_EXEC(N(D_802414FC_92B7AC))
-    EVT_EXEC(N(D_80241678_92B928))
-    EVT_EXEC(N(D_80241790_92BA40))
+    EVT_EXEC(N(EVS_TexPan_SandRing))
+    EVT_EXEC(N(EVS_SandRing_Appear))
+    EVT_EXEC(N(EVS_SandRingClone_Appear))
     EVT_WAIT(100)
-    EVT_EXEC(N(D_80241B38_92BDE8))
+    EVT_EXEC(N(EVS_LightRays_Appear))
     EVT_WAIT(150)
-    EVT_EXEC(N(D_80241DE0_92C090))
-    EVT_EXEC(N(D_802431C0_92D470))
+    EVT_EXEC(N(EVS_Ruins_Arise))
+    EVT_EXEC(N(EVS_Steps_Arise))
     EVT_WAIT(100)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(8.0), EVT_FLOAT(-9.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.2))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(80)
-    EVT_EXEC(N(D_802428A4_92CB54))
+    EVT_EXEC(N(EVS_InterpChompStatueRotation))
     EVT_WAIT(60)
     EVT_WAIT(50)
     EVT_IF_EQ(LocalFlag(0), FALSE)
@@ -654,18 +656,18 @@ EvtScript N(D_8024358C_92D83C) = {
     EVT_END
 };
 
-EvtScript N(EVS_80243A00) = {
+EvtScript N(EVS_SetupRuins) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
             EVT_CALL(EnableGroup, MODEL_day_version, FALSE)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CASE_LT(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
             EVT_CALL(EnableGroup, MODEL_day_version, FALSE)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_BIND_PADLOCK(EVT_PTR(N(D_8024358C_92D83C)), TRIGGER_WALL_PRESS_A, COLLIDER_iwa, EVT_PTR(N(D_80241250_92B500)), 0, 1)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_BIND_PADLOCK(EVT_PTR(N(EVS_OnInteract_Pedestal)), TRIGGER_WALL_PRESS_A, COLLIDER_iwa, EVT_PTR(N(PedestalKeyList)), 0, 1)
         EVT_CASE_DEFAULT
             EVT_CALL(EnableModel, MODEL_point_iwa, FALSE)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_pikapika, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_pikapika, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
     EVT_CALL(EnableGroup, MODEL_ruins, FALSE)
     EVT_CALL(EnableGroup, MODEL_step, FALSE)
@@ -675,12 +677,12 @@ EvtScript N(EVS_80243A00) = {
     EVT_END
 };
 
-EvtScript N(EVS_80243B38) = {
+EvtScript N(EVS_Ruins_Arise_Continued) = {
     EVT_CALL(PlaySound, SOUND_5C)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802CF56C, 1)
     EVT_CALL(func_802D2884, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(EnableModel, MODEL_point_iwa, FALSE)
     EVT_CALL(EnableGroup, MODEL_day_version, FALSE)
     EVT_THREAD
@@ -696,17 +698,17 @@ EvtScript N(EVS_80243B38) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(N(UnkFunc27), 2, 0, 3)
     EVT_CALL(N(UnkFunc27), 1, -1, 3)
-    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(D_80241418_92B6C8)), 0)
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_80241424_92B6D4)), 0)
-    EVT_CALL(N(func_80240364_92A614), 44, 32, 177, 0, 0, 0, 0)
-    EVT_EXEC(N(D_802422F0_92C5A0))
-    EVT_EXEC(N(D_80243268_92D518))
+    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(ModelList_Solid)), 0)
+    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ModelList_Translucent)), 0)
+    EVT_CALL(N(InterpWorldEnvColor), 44, 32, 177, 0, 0, 0, 0)
+    EVT_EXEC(N(EVS_Ruins_FinishRising))
+    EVT_EXEC(N(EVS_Steps_FinishRising))
     EVT_CALL(CloneModel, MODEL_o225, CLONED_MODEL(0))
-    EVT_EXEC(N(D_802414FC_92B7AC))
-    EVT_EXEC(N(D_802418B4_92BB64))
-    EVT_EXEC(N(D_802419F0_92BCA0))
+    EVT_EXEC(N(EVS_TexPan_SandRing))
+    EVT_EXEC(N(EVS_SandRing_Vanish))
+    EVT_EXEC(N(EVS_SandRingClone_Vanish))
     EVT_WAIT(20)
-    EVT_EXEC(N(D_80241C90_92BF40))
+    EVT_EXEC(N(EVS_LightRays_Vanish))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
@@ -715,9 +717,9 @@ EvtScript N(EVS_80243B38) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.2))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(100)
-    EVT_EXEC(N(D_80242928_92CBD8))
+    EVT_EXEC(N(EVS_Doors_Open))
     EVT_WAIT(100)
-    EVT_EXEC_WAIT(N(D_80243310_92D5C0))
+    EVT_EXEC_WAIT(N(EVS_Steps_Unfold))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(60)

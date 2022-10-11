@@ -123,7 +123,7 @@ EvtScript N(EVS_Main) = {
     EVT_ELSE
         EVT_CALL(EnableGroup, MODEL_g23, FALSE)
         EVT_CALL(EnableGroup, MODEL_sakji_tent, FALSE)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_Default, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_Default, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(SetZoneEnabled, ZONE_o25, FALSE)
     EVT_END_IF
     EVT_EXEC(N(D_802418B0_940E60))

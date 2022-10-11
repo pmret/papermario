@@ -210,8 +210,8 @@ EvtScript N(main) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80243654)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80243280))
@@ -242,7 +242,7 @@ EvtScript N(80243FD0) = {
                     EVT_IF_EQ(LVar7, 0)
                         EVT_WAIT(5)
                         EVT_SET(LVar8, 6)
-                        EVT_CALL(ModifyColliderFlags, 0, LVar9, 0x7FFFFE00)
+                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar9, 0x7FFFFE00)
                     EVT_END_IF
                     EVT_ADD(LVar8, 1)
                     EVT_ADD(LVar7, LVar8)

@@ -200,7 +200,7 @@ EvtScript N(main) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC(N(80241C14))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
         EVT_SET(LVar0, EVT_PTR(N(80240C74)))
         EVT_EXEC(EnterWalk)
         EVT_EXEC(N(802424F4))

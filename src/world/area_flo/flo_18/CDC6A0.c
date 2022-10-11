@@ -133,7 +133,7 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
         EVT_SET(LVar0, EVT_PTR(N(802409B8)))
         EVT_EXEC(EnterWalk)
     EVT_ELSE
@@ -412,7 +412,7 @@ EvtScript N(80241ED4) = {
 EVT_END_LOOP
 EVT_LABEL(0)
 EVT_WAIT(30)
-EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
+EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 19, 0x7FFFFE00)
 EVT_RETURN
 EVT_END
 };
@@ -659,7 +659,7 @@ EVT_CMD(EVT_OP_END)
 #endif
 
 EvtScript N(80242B18) = {
-    EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
     EVT_SETF(LVar0, 0)
     EVT_SETF(LVar1, 0)
     EVT_SETF(LVar2, 0)
@@ -839,7 +839,7 @@ Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 EvtScript N(802436BC) = {
     EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(EnableModel, 49, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 19, 0x7FFFFE00)
         EVT_CALL(EnableModel, 31, 0)
         EVT_CALL(EnableModel, 32, 0)
         EVT_CALL(EnableModel, 19, 0)
@@ -853,13 +853,13 @@ EvtScript N(802436BC) = {
         EVT_CALL(EnableModel, 29, 0)
         EVT_CALL(EnableModel, 41, 0)
         EVT_CALL(EnableModel, 33, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC(N(80240E90))
     EVT_CALL(EnableModel, 49, 0)
     EVT_IF_GE(GB_FLO18_MachineDamage_Left, 1)
-        EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 19, 0x7FFFFE00)
         EVT_CALL(EnableModel, 31, 0)
         EVT_CALL(EnableModel, 32, 0)
     EVT_END_IF
@@ -881,7 +881,7 @@ EvtScript N(802436BC) = {
         EVT_CALL(EnableModel, 29, 0)
         EVT_CALL(EnableModel, 41, 0)
         EVT_CALL(EnableModel, 33, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar0, 0)

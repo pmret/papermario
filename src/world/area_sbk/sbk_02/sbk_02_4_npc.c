@@ -88,7 +88,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, 512, MSG_CH2_00EB)
+    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EB)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -9)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
@@ -137,7 +137,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, 512, MSG_CH2_00EC)
+    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EC)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar3, LVar4, LVar5)
@@ -149,7 +149,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, 512, MSG_CH2_00ED)
+    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00ED)
     EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_40000, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
@@ -217,7 +217,8 @@ EvtScript N(EVS_NpcInit_Mamar) = {
 };
 
 API_CALLABLE(N(CheckTradeEventTime)) {
-    script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
+    s32 timeElapsed = (gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600;
+    script->varTable[0] = timeElapsed < script->varTable[0];
     return ApiStatus_DONE2;
 }
 
@@ -226,7 +227,7 @@ API_CALLABLE(N(GetItemCount)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_NpcInteract_Toad) = {
+EvtScript N(EVS_NpcInteract_TradingToad) = {
     EVT_SET(LVar0, 5)
     EVT_CALL(N(CheckTradeEventTime))
     EVT_IF_EQ(LVar0, 0)
@@ -271,7 +272,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 
 EvtScript N(EVS_NpcInit_Toad) = {
     EVT_IF_NE(GF_TradingEvent2_Active, FALSE)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TradingToad)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF

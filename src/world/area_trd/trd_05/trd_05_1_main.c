@@ -70,7 +70,7 @@ EvtScript N(EVS_BombWall) = {
         EVT_CALL(SetGroupEnabled, MODEL_ana3, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(GF_TRD05_BombedWall, TRUE)
     EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
@@ -105,14 +105,14 @@ EvtScript N(EVS_Main) = {
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BombWall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
     EVT_ELSE
         EVT_CALL(SetGroupEnabled, MODEL_ana3, 0)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_TexPan_Water))
     EVT_CALL(EnableModel, MODEL_o95, FALSE)
     EVT_CALL(EnableModel, MODEL_o96, FALSE)
     EVT_CALL(SetGroupEnabled, MODEL_kesu, 0)
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_o103, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o103, COLLIDER_FLAGS_UPPER_MASK)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPA_BROS_SET_TRAP)
         EVT_WAIT(10)
         EVT_CALL(N(SetMapChangeFadeRate))

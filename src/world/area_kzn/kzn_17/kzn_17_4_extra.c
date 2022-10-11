@@ -54,7 +54,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
         EVT_CALL(EnableModel, MODEL_me, FALSE)
         EVT_CALL(EnableModel, MODEL_mae, FALSE)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(EnableModel, MODEL_ato, FALSE)
@@ -116,7 +116,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_IF_EQ(AF_KZN_Tromp2_ShakingDone, FALSE)
             EVT_IF_GT(LVar0, 630)
                 EVT_KILL_THREAD(MV_ScreenShakeTID)
-                EVT_CALL(ModifyColliderFlags, 0, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
+                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
                 EVT_CALL(PlaySoundAtCollider, COLLIDER_gogo, SOUND_1E4, 0)
                 EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 2, 32, 32, 1, 10, 45)
                 EVT_CALL(EnableModel, MODEL_mae, FALSE)

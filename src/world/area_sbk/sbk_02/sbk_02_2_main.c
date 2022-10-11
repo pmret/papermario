@@ -56,7 +56,7 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_OR_EQ(sbk_02_ENTRY_7)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_EXEC_WAIT(N(EVS_80243A00))
+            EVT_EXEC_WAIT(N(EVS_SetupRuins))
     EVT_END_SWITCH
     EVT_EXEC(N(EVS_EnterMap))
     EVT_CALL(GetEntryID, LVar0)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Main) = {
             EVT_WAIT(65)
         EVT_CASE_OR_EQ(sbk_02_ENTRY_6)
         EVT_CASE_OR_EQ(sbk_02_ENTRY_7)
-            EVT_EXEC(N(EVS_80243B38))
+            EVT_EXEC(N(EVS_Ruins_Arise_Continued))
             EVT_WAIT(3)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT

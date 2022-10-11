@@ -62,7 +62,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, LVarB, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(GetEntryID, LVar0)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SET(LVar5, LVar1)

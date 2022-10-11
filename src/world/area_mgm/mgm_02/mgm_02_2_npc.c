@@ -1481,7 +1481,7 @@ EvtScript N(EVS_OnHitBox) = {
             EVT_CALL(TranslateModel, LVarA, 0, -21, 0)
             EVT_WAIT(1)
             EVT_CALL(EnableModel, LVarA, FALSE)
-            EVT_CALL(ModifyColliderFlags, 0, LVarB, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)
             EVT_WAIT(4)
             EVT_SUB(LVar1, 5)
             EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2)
@@ -1492,7 +1492,7 @@ EvtScript N(EVS_OnHitBox) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableModel, LVarA, FALSE)
-    EVT_CALL(ModifyColliderFlags, 0, LVarB, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END
 };
