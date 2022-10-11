@@ -94,7 +94,7 @@ EvtScript N(802405E0) = {
     EVT_LOOP(0)
         EVT_THREAD
             EVT_WAIT(2)
-            EVT_CALL(ModifyColliderFlags, 0, 0, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 0, 0x7FFFFE00)
         EVT_END_THREAD
         EVT_CALL(MakeLerp, 0, -35, 15, 0)
         EVT_LOOP(0)

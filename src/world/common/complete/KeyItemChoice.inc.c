@@ -1,20 +1,48 @@
+#ifndef _COMMON_KEY_CHOICE_
+#define _COMMON_KEY_CHOICE_
+
 #include "common.h"
 
-static s32 N(KeyItemChoiceList)[112];
+static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS];
+
+#ifndef _CHOICE_SUPPORT_
+#define _CHOICE_SUPPORT_
 
 s32 N(ItemChoice_HasSelectedItem) = 0;
-
 s32 N(ItemChoice_SelectedItemID) = 0;
 
-#include "world/common/atomic/ItemChoice_PartA.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
+
+ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        N(ItemChoice_HasSelectedItem) = FALSE;
+    }
+
+    if (N(ItemChoice_HasSelectedItem)) {
+        N(ItemChoice_HasSelectedItem) = FALSE;
+        evt_set_variable(script, *args, N(ItemChoice_SelectedItemID));
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
+
+#endif
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"
 
-// ItemChoice_WaitForSelection
-// ItemChoice_SaveSelected
-// BuildKeyItemChoiceList
-
-EvtScript N(EVS_ItemChoicePopup) = {
+EvtScript N(EVS_KeyItemChoicePopup) = {
     EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_SET(LVarA, LVar0)
@@ -41,8 +69,20 @@ EvtScript N(EVS_ItemChoicePopup) = {
 
 EvtScript N(EVS_ChooseKeyItem) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_KeyItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END
 };
+
+#define EVT_CHOOSE_ANY_KEY_ITEM() \
+    EVT_SET(LVar0, 0) \
+    EVT_SET(LVar1, 0) \
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+
+#define EVT_CHOOSE_KEY_ITEM(itemList) \
+    EVT_SET(LVar0, EVT_PTR(itemList)) \
+    EVT_SET(LVar1, 0) \
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+
+#endif

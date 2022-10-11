@@ -50,7 +50,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(80241F6C))
     EVT_EXEC(N(80241528))
     EVT_CALL(GetEntryID, LVar0)
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(802403AC)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC(N(80240E24))

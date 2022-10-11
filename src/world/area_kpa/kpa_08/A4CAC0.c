@@ -1,3 +1,3 @@
 #include "kpa_08.h"
 
-#include "world/common/enemy/MagikoopaAI.inc.c"
+#include "world/common/enemy/ai/MagikoopaAI.inc.c"

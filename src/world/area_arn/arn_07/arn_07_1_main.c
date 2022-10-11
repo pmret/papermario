@@ -8,7 +8,7 @@ extern NpcGroupList N(DefaultNPCs);
 extern NpcGroupList N(BossNPCs);
 extern NpcGroupList N(SpiritNPCs);
 
-#include "world/common/StarSpiritEffectFunc.inc.c"
+#include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 s32 N(KeyList)[] = {
     ITEM_MYSTICAL_KEY,

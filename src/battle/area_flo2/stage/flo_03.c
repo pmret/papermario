@@ -12,12 +12,12 @@ EvtScript N(80232A30) = {
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(SetTexPanner, LVar0, 14)
+        EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_E)
         EVT_BUF_READ1(LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(SetTexPanner, LVar0, 15)
+        EVT_CALL(SetTexPanner, LVar0, TEX_PANNER_F)
     EVT_END_LOOP
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
@@ -27,12 +27,12 @@ EvtScript N(80232A30) = {
     EVT_IF_LT(LVar0, 0)
         EVT_ADD(LVar0, 65536)
     EVT_END_IF
-    EVT_CALL(SetTexPanOffset, 14, 0, LVar0, 0)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar0, 0)
     EVT_ADD(LVar1, -200)
     EVT_IF_LT(LVar1, 0)
         EVT_ADD(LVar1, 65536)
     EVT_END_IF
-    EVT_CALL(SetTexPanOffset, 15, 0, LVar1, 0)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_F, TEX_PANNER_MAIN, LVar1, 0)
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
@@ -82,13 +82,13 @@ EvtScript N(beforeBattle) = {
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_SET(LVar0, N(modelList))
     EVT_EXEC(N(80232A30))
-    EVT_CALL(SetTexPanner, 36, 1)
-    EVT_CALL(SetTexPanner, 37, 2)
-    EVT_CALL(SetTexPanner, 38, 3)
-    EVT_CALL(SetTexPanner, 39, 4)
-    EVT_CALL(SetTexPanner, 40, 5)
-    EVT_CALL(SetTexPanner, 41, 6)
-    EVT_CALL(SetTexPanner, 42, 7)
+    EVT_CALL(SetTexPanner, 36, TEX_PANNER_1)
+    EVT_CALL(SetTexPanner, 37, TEX_PANNER_2)
+    EVT_CALL(SetTexPanner, 38, TEX_PANNER_3)
+    EVT_CALL(SetTexPanner, 39, TEX_PANNER_4)
+    EVT_CALL(SetTexPanner, 40, TEX_PANNER_5)
+    EVT_CALL(SetTexPanner, 41, TEX_PANNER_6)
+    EVT_CALL(SetTexPanner, 42, TEX_PANNER_7)
     EVT_THREAD
         EVT_SET(LVarE, 1)
         EVT_SET(LVarF, 0)
@@ -125,13 +125,13 @@ EvtScript N(beforeBattle) = {
             EVT_DIV(LVar6, 8)
             EVT_MOD(LVar6, 2)
             EVT_MUL(LVar6, 32768)
-            EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
-            EVT_CALL(SetTexPanOffset, 2, 0, LVar1, 0)
-            EVT_CALL(SetTexPanOffset, 3, 0, LVar2, 0)
-            EVT_CALL(SetTexPanOffset, 4, 0, LVar3, 0)
-            EVT_CALL(SetTexPanOffset, 5, 0, LVar4, 0)
-            EVT_CALL(SetTexPanOffset, 6, 0, LVar5, 0)
-            EVT_CALL(SetTexPanOffset, 7, 0, LVar6, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar1, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, LVar2, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_4, TEX_PANNER_MAIN, LVar3, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_5, TEX_PANNER_MAIN, LVar4, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_6, TEX_PANNER_MAIN, LVar5, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_7, TEX_PANNER_MAIN, LVar6, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD

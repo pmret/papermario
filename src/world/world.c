@@ -362,7 +362,7 @@ MapConfig dro_maps[] = {
 MapConfig sbk_maps[] = {
     { MAP(sbk_00), .bgName = "sbk_bg" },
     { MAP(sbk_01), .bgName = "sbk_bg" },
-    { MAP_UNSPLIT(sbk_02, 0x80240C80), .bgName = "sbk_bg" },
+    { MAP(sbk_02), .bgName = "sbk_bg" },
     { MAP(sbk_03), .bgName = "sbk_bg" },
     { MAP(sbk_04), .bgName = "sbk_bg" },
     { MAP(sbk_05), .bgName = "sbk_bg" },
@@ -381,7 +381,7 @@ MapConfig sbk_maps[] = {
     { MAP(sbk_24), .bgName = "sbk_bg" },
     { MAP(sbk_25), .bgName = "sbk_bg" },
     { MAP(sbk_26), .bgName = "sbk_bg" },
-    { MAP_UNSPLIT(sbk_30, 0x80241870), .bgName = "sbk_bg" },
+    { MAP(sbk_30), .bgName = "sbk_bg" },
     { MAP(sbk_31), .bgName = "sbk_bg" },
     { MAP(sbk_32), .bgName = "sbk_bg" },
     { MAP(sbk_33), .bgName = "sbk_bg" },
@@ -595,19 +595,20 @@ MapConfig jan_maps[] = {
 };
 
 /// Forever Forest
+#include "area_mim/mim.h"
 MapConfig mim_maps[] = {
-    { MAP_UNSPLIT(mim_01, 0x80241EF0), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_02, 0x80241220), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_03, 0x80240570), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_04, 0x80241170), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_05, 0x80241A60), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_06, 0x80242D70), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_07, 0x802410D0), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_08, 0x80242F80), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_09, 0x80240F00), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_10, 0x802401B0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mim_11, 0x80240C20), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(mim_12, 0x80240600), .bgName = "arn_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_01), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_02), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_03), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_04), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_05), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_06), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_07), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_08), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_09), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_10), .bgName = "nok_bg" },
+    { MAP(mim_11), .bgName = "obk_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(mim_12), .bgName = "arn_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
 };
 
 /// Boo's Mansion

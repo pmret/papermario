@@ -1,8 +1,8 @@
 #include "pra_31.h"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7ED80", func_8024024C_D7EFAC);
 

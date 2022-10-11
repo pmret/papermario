@@ -22,7 +22,7 @@ s32 D_802A1140_73D9A0[] = {
     5, 2, 4, 2,
 };
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
 EvtScript N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BeforeJump)

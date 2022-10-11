@@ -156,7 +156,7 @@ EvtScript N(main) = {
     EVT_IF_EQ(LVar0, 2)
         EVT_EXEC(N(80240FFC))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
         EVT_SET(LVar0, EVT_PTR(N(80240BE4)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
@@ -1104,9 +1104,9 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

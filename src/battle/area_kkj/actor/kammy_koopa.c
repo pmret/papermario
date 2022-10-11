@@ -175,9 +175,9 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-#include "world/common/SetEntityPositionF.inc.c"
+#include "world/common/todo/SetEntityPositionF.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 ApiStatus N(BlockAppear)(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[9]);

@@ -81,9 +81,9 @@ EvtScript N(EVS_FlowersWither) = {
 };
 
 EvtScript N(EVS_InspectFlowers_South) = {
-    EVT_CALL(SetTexPanOffset, 0, 0, 0, -0x8000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
-    EVT_CALL(SetTexPanOffset, 0, 0, 0, -0x10000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_CALL(PlaySoundAt, SOUND_205B, 0, -10, 0, -300)
     EVT_CALL(MakeLerp, 0, 30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(0)
@@ -129,17 +129,17 @@ EvtScript N(EVS_InspectFlowers_South) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(20)
     EVT_END_IF
-    EVT_CALL(SetTexPanOffset, 0, 0, 0, -0x8000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
-    EVT_CALL(SetTexPanOffset, 0, 0, 0, 0)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_InspectFlowers_West) = {
-    EVT_CALL(SetTexPanOffset, 1, 0, 0, -0x8000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
-    EVT_CALL(SetTexPanOffset, 1, 0, 0, -0x10000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAt, SOUND_205C, 0, -300, 0, -10)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_West)))
@@ -155,9 +155,9 @@ EvtScript N(EVS_InspectFlowers_West) = {
 };
 
 EvtScript N(EVS_InspectFlowers_North) = {
-    EVT_CALL(SetTexPanOffset, 2, 0, 0, -0x8000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
-    EVT_CALL(SetTexPanOffset, 2, 0, 0, -0x10000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAt, SOUND_205C, 0, 10, 0, 300)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_North)))
@@ -173,9 +173,9 @@ EvtScript N(EVS_InspectFlowers_North) = {
 };
 
 EvtScript N(EVS_InspectFlowers_East) = {
-    EVT_CALL(SetTexPanOffset, 3, 0, 0, -0x8000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
-    EVT_CALL(SetTexPanOffset, 3, 0, 0, -0x10000)
+    EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAt, SOUND_205C, 0, 300, 0, -10)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_East)))
@@ -191,18 +191,18 @@ EvtScript N(EVS_InspectFlowers_East) = {
 };
 
 EvtScript N(D_802439F8_BA8178) = {
-    EVT_CALL(SetTexPanner, MODEL_sa_2, 0)
-    EVT_CALL(SetTexPanner, MODEL_sb_2, 0)
-    EVT_CALL(SetTexPanner, MODEL_sc_2, 0)
-    EVT_CALL(SetTexPanner, MODEL_wa_2, 1)
-    EVT_CALL(SetTexPanner, MODEL_wb_2, 1)
-    EVT_CALL(SetTexPanner, MODEL_wc_2, 1)
-    EVT_CALL(SetTexPanner, MODEL_na_2, 2)
-    EVT_CALL(SetTexPanner, MODEL_nb_2, 2)
-    EVT_CALL(SetTexPanner, MODEL_nc_2, 2)
-    EVT_CALL(SetTexPanner, MODEL_ea_2, 3)
-    EVT_CALL(SetTexPanner, MODEL_eb_2, 3)
-    EVT_CALL(SetTexPanner, MODEL_ec_2, 3)
+    EVT_CALL(SetTexPanner, MODEL_sa_2, TEX_PANNER_0)
+    EVT_CALL(SetTexPanner, MODEL_sb_2, TEX_PANNER_0)
+    EVT_CALL(SetTexPanner, MODEL_sc_2, TEX_PANNER_0)
+    EVT_CALL(SetTexPanner, MODEL_wa_2, TEX_PANNER_1)
+    EVT_CALL(SetTexPanner, MODEL_wb_2, TEX_PANNER_1)
+    EVT_CALL(SetTexPanner, MODEL_wc_2, TEX_PANNER_1)
+    EVT_CALL(SetTexPanner, MODEL_na_2, TEX_PANNER_2)
+    EVT_CALL(SetTexPanner, MODEL_nb_2, TEX_PANNER_2)
+    EVT_CALL(SetTexPanner, MODEL_nc_2, TEX_PANNER_2)
+    EVT_CALL(SetTexPanner, MODEL_ea_2, TEX_PANNER_3)
+    EVT_CALL(SetTexPanner, MODEL_eb_2, TEX_PANNER_3)
+    EVT_CALL(SetTexPanner, MODEL_ec_2, TEX_PANNER_3)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_InspectFlowers_South)), TRIGGER_WALL_PRESS_A, COLLIDER_o416, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_InspectFlowers_West)), TRIGGER_WALL_PRESS_A, COLLIDER_o418, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_InspectFlowers_North)), TRIGGER_WALL_PRESS_A, COLLIDER_o417, 1, 0)

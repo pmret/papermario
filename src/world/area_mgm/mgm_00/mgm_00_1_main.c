@@ -25,8 +25,8 @@ EvtScript N(D_80241850_E0FFF0) = {
     EVT_END
 };
 
-#include "world/common/atomic/Pipe.inc.c"
-#include "world/common/atomic/Pipe.data.inc.c"
+#include "world/common/entity/Pipe.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
 
 EvtScript N(EVS_GotoMap_ToadTown) = {
     EVT_CALL(GotoMap, EVT_PTR("mac_03"), mac_03_ENTRY_2)
@@ -95,13 +95,13 @@ EvtScript N(EVS_BindExitTriggers) = {
 
 EvtScript N(EVS_EnterMap) = {
     EVT_IF_EQ(GF_MGM_Unlocked_JumpAttack, FALSE)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_o5, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_deili2, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o5, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deili2, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableModel, MODEL_o5, FALSE)
     EVT_END_IF
     EVT_IF_EQ(GF_MGM_Unlocked_SmashAttack, FALSE)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_o9, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_deili3, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o9, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deili3, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableModel, MODEL_o9, FALSE)
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)

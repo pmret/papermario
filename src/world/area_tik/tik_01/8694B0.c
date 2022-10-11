@@ -9,4 +9,4 @@ static char* N(exit_str_5) = "";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"

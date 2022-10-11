@@ -13,12 +13,19 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-    NPC_Mamar                   = 1,
-    NPC_Toad                    = 2,
+    NPC_Mamar           = 1,
+    NPC_TradingToad     = 2,
 };
 
 enum {
-    MV_Unk_00                   = MapVar(0),
+    MV_Unk_00           = MapVar(0),
 };
 
 #define NAMESPACE sbk_02
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupRuins);
+extern EvtScript N(EVS_Ruins_Arise_Continued);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

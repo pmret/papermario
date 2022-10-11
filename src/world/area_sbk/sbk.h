@@ -31,7 +31,7 @@ enum {
 
 extern MapSettings sbk_00_settings;
 extern MapSettings sbk_01_settings;
-//extern MapSettings sbk_02_settings;
+extern MapSettings sbk_02_settings;
 extern MapSettings sbk_03_settings;
 extern MapSettings sbk_04_settings;
 extern MapSettings sbk_05_settings;
@@ -50,7 +50,7 @@ extern MapSettings sbk_23_settings;
 extern MapSettings sbk_24_settings;
 extern MapSettings sbk_25_settings;
 extern MapSettings sbk_26_settings;
-//extern MapSettings sbk_30_settings;
+extern MapSettings sbk_30_settings;
 extern MapSettings sbk_31_settings;
 extern MapSettings sbk_32_settings;
 extern MapSettings sbk_33_settings;

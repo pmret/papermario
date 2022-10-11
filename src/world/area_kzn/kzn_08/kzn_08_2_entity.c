@@ -3,13 +3,13 @@
 
 s32** N(varStash) = NULL;
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 EvtScript N(D_80244BB4_C76034) = {
     EVT_SET_GROUP(EVT_GROUP_00)

@@ -197,14 +197,14 @@ EvtScript N(main) = {
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_THREAD
-        EVT_CALL(SetTexPanner, 162, 1)
+        EVT_CALL(SetTexPanner, 162, TEX_PANNER_1)
         EVT_SET(LVar0, 0)
         EVT_LABEL(123)
         EVT_ADD(LVar0, 420)
         EVT_IF_GT(LVar0, 65536)
             EVT_ADD(LVar0, -65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, 0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, LVar0)
         EVT_WAIT(1)
         EVT_GOTO(123)
     EVT_END_THREAD
@@ -363,7 +363,7 @@ EvtScript N(8024486C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, 10, 20)
-    EVT_CALL(ModifyColliderFlags, 0, 8, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 8, 0x7FFFFE00)
     EVT_CALL(PlaySoundAtCollider, 8, 449, 0)
     EVT_CALL(MakeLerp, 18, 80, 10, 0)
     EVT_LOOP(0)
@@ -397,7 +397,7 @@ EvtScript N(80244A68) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, -70, 20)
-    EVT_CALL(ModifyColliderFlags, 0, 10, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 10, 0x7FFFFE00)
     EVT_CALL(PlaySoundAtCollider, 10, 449, 0)
     EVT_CALL(MakeLerp, 18, 80, 10, 0)
     EVT_LOOP(0)
@@ -2921,4 +2921,4 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"

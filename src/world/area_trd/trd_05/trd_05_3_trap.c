@@ -328,7 +328,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(EVS_PartnerFalling))
     EVT_END_THREAD
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
     EVT_SET(LVar5, LVar3)
     EVT_SUB(LVar5, 200)

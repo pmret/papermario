@@ -52,7 +52,7 @@ ApiStatus func_802410E4_EB9F34(Evt* script, s32 isInitialCall) {
 
 #include "common/CosInterpMinMax.inc.c"
 
-#include "world/common/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusMenu.inc.c"
 
 ApiStatus func_802413CC_EBA21C(Evt* script, s32 isInitialCall) {
     increment_status_menu_disabled();

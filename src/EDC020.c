@@ -9,13 +9,13 @@ extern s32 EDC020_D_802429E0[];
 
 #include "common/foliage.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 #ifdef NON_MATCHING // TODO(data)
 ApiStatus func_802405C0_EDC5A0(Evt* script, s32 isInitialCall) {

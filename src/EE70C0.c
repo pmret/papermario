@@ -10,11 +10,11 @@ extern const s32 D_802453E0_EEB990[];
 extern s32 D_8024462C_EEABDC;
 extern s32 D_80244630_EEABE0;
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Needs data migrated
 #ifdef NON_MATCHING

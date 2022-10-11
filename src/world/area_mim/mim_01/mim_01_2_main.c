@@ -1,6 +1,6 @@
 #include "mim_01.h"
 
-#include "world/common/SetForeverForestFog.inc.c"
+#include "world/common/todo/SetForeverForestFog.inc.c"
 
 EvtScript N(EVS_ExitWalk_n) = EVT_EXIT_WALK(60, mim_01_ENTRY_0, "mim_01", mim_01_ENTRY_1);
 EvtScript N(EVS_ExitWalk_w) = EVT_EXIT_WALK(60, mim_01_ENTRY_1, "mim_10", mim_10_ENTRY_1);

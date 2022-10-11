@@ -22,9 +22,9 @@ extern HudScript HES_BlueMeter;
 extern HudScript HES_MashAButton;
 extern s32 dgb_08_npcGroup_80246528;
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Needs data migration, matching otherwise
 #ifdef NON_MATCHING
@@ -246,7 +246,7 @@ ApiStatus func_80240B8C_AF84DC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 ApiStatus func_80240C10_AF8560(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

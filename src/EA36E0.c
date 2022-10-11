@@ -22,14 +22,14 @@ ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc46.inc.c"
+#include "world/common/todo/UnkFunc46.inc.c"
 
-#include "world/common/SpinyTromp_CheckDist.inc.c"
+#include "world/common/todo/SpinyTromp_CheckDist.inc.c"
 
-#include "world/common/UnkFunc48.inc.c"
+#include "world/common/todo/UnkFunc48.inc.c"
 
-#include "world/common/UnkFunc49.inc.c"
+#include "world/common/todo/UnkFunc49.inc.c"
 
-#include "world/common/UnkFunc50.inc.c"
+#include "world/common/todo/UnkFunc50.inc.c"
 
-#include "world/common/UnkFunc51.inc.c"
+#include "world/common/todo/UnkFunc51.inc.c"

@@ -133,8 +133,8 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_EXEC(N(80243E78))
     EVT_EXEC(N(80245224))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(802425B4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802423F0))
@@ -530,7 +530,7 @@ EvtScript N(80243E78) = {
     EVT_SET(LVar6, 93)
     EVT_SET(LVarA, 0)
     EVT_EXEC(N(80242EAC))
-    EVT_CALL(ModifyColliderFlags, 0, 15, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 15, 0x7FFFFE00)
     EVT_CALL(CloneModel, 124, 10001)
     EVT_CALL(CloneModel, 124, 10002)
     EVT_CALL(CloneModel, 124, 10003)
@@ -577,7 +577,7 @@ ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc43.inc.c"
+#include "world/common/todo/UnkFunc43.inc.c"
 
 ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

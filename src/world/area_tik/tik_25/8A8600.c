@@ -6,7 +6,7 @@ ApiStatus func_80240680_8A8600(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetEntityPosition.inc.c"
+#include "world/common/todo/SetEntityPosition.inc.c"
 
 // linker sym needed
 #ifdef NON_MATCHING

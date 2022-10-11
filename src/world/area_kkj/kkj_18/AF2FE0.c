@@ -5,9 +5,9 @@ extern s32 D_80241F10_AF4BB0;
 extern s32 D_80241F14_AF4BB4;
 extern s32 kkj_18_D_80244E78[];
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Needs data migration, matching otherwise
 #ifdef NON_MATCHING

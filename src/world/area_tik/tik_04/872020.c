@@ -1,6 +1,6 @@
 #include "tik_04.h"
 
-#include "world/common/UnkPosFunc2.inc.c"
+#include "world/common/todo/UnkPosFunc2.inc.c"
 
 ApiStatus func_80240960_872390(Evt* script, s32 isInitialCall) {
     Model* model1;
@@ -57,7 +57,7 @@ ApiStatus func_80240A00_872430(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 ApiStatus func_80240C20_872650(Evt* script, s32 isInitialCall) {
     PlayerStatus* player = &gPlayerStatus;

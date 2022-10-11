@@ -3,9 +3,9 @@
 
 #define NAMESPACE battle_move_d_down_pound
 
-#include "world/common/IsBerserkerEquipped.inc.c"
+#include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/IsRightOnEquipped.inc.c"
+#include "world/common/todo/IsRightOnEquipped.inc.c"
 
 ApiStatus func_802A10A4_74AE34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

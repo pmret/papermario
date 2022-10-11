@@ -776,10 +776,10 @@ NpcGroupList N(npcGroupList_80244988) = {
     {},
 };
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/ClubbaPatrolAI.inc.c"
+#include "world/common/enemy/ai/ClubbaPatrolAI.inc.c"
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"

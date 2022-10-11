@@ -363,7 +363,7 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+        EVT_EXEC_WAIT(N(GiveKeyReward))
         EVT_CALL(AddStarPieces, 1)
     EVT_END_IF
     EVT_RETURN

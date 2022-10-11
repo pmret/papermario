@@ -2,9 +2,9 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/MeleeHitbox.inc.c"
+#include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
 // Requires data migration
 #ifdef NON_MATCHING
@@ -108,4 +108,4 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
 #endif
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

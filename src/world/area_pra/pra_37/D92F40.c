@@ -11,6 +11,6 @@ const char* N(exit_str_0) = "pra_22\0\0pra_28";
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/enemy/MeleeHitbox.inc.c"
+#include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

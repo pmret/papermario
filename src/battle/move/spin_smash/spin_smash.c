@@ -33,9 +33,9 @@ ApiStatus func_802A1074_737904(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/IsBerserkerEquipped.inc.c"
+#include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/IsRightOnEquipped.inc.c"
+#include "world/common/todo/IsRightOnEquipped.inc.c"
 
 EvtScript D_802A1190_737A20 = {
     EVT_CALL(InitTargetIterator)

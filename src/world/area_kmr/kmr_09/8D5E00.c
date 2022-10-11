@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kmr_02";
 static char* N(exit_str_1) = "kmr_06";
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 ApiStatus func_802414F8_8D72F8(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(2);

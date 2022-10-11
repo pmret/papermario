@@ -160,7 +160,7 @@ EvtScript N(main) = {
             EVT_EXEC(flo_10_802427EC)
             EVT_EXEC(N(80241988))
         EVT_CASE_DEFAULT
-            EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
             EVT_SET(LVar0, EVT_PTR(N(80241988)))
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
@@ -466,15 +466,15 @@ EvtScript N(80242AE8) = {
     EVT_IF_LT(GB_StoryProgress, 49)
         EVT_CALL(EnableGroup, 52, 0)
         EVT_CALL(EnableGroup, 61, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 21, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 21, 0x7FFFFE00)
     EVT_ELSE
         EVT_CALL(EnableGroup, 19, 0)
         EVT_CALL(EnableGroup, 61, 0)
         EVT_CALL(EnableGroup, 60, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
-        EVT_CALL(ModifyColliderFlags, 0, 15, 0x7FFFFE00)
-        EVT_CALL(ModifyColliderFlags, 0, 16, 0x7FFFFE00)
-        EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 15, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 16, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 17, 0x7FFFFE00)
     EVT_END_IF
     EVT_CALL(EnableTexPanning, 54, 1)
     EVT_CALL(EnableTexPanning, 48, 1)
@@ -848,9 +848,9 @@ static s32 N(pad_4084)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

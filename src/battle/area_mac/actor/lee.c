@@ -811,7 +811,7 @@ ApiStatus func_80218100_464590(Evt* script, s32 isInitialCall) {
     }
 }
 
-#include "world/common/UnkFunc62.inc.c"
+#include "world/common/todo/UnkFunc62.inc.c"
 
 #include "common/ActorJumpToPos.inc.c"
 

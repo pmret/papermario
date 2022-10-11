@@ -234,15 +234,15 @@ EvtScript N(idle) = {
     EVT_END_IF
     EVT_IF_EQ(ArrayVar(1), 0)
         EVT_ADD(LVarF, -277)
-        EVT_CALL(SetTexPanOffset, 11, 0, 0, LVarF)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
     EVT_END_IF
     EVT_IF_EQ(ArrayVar(1), 1)
         EVT_ADD(LVarF, -1110)
-        EVT_CALL(SetTexPanOffset, 11, 0, 0, LVarF)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
     EVT_END_IF
     EVT_IF_EQ(ArrayVar(1), 2)
         EVT_ADD(LVarF, -3330)
-        EVT_CALL(SetTexPanOffset, 11, 0, 0, LVarF)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
     EVT_END_IF
     EVT_IF_EQ(ArrayVar(1), 2)
         EVT_GOTO(1)

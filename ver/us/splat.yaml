@@ -8306,14 +8306,13 @@ segments:
     start: 0x92A2B0
     vram: 0x80240000
     subsegments:
-    - [0x92A2B0, c]
-    - [0x92A9A0, c]
-    - [0x92AEB0, data]
-    - [0x92AFF0, data]
-    - [0x92B500, data]
-    - [0x92E220, data]
-    - [0x92F830, data]
-    - [0x92F880]
+    - [0x92A2B0, c, sbk_02_0_header]
+    - [0x92A2F0, c, sbk_02_1_music]
+    - [0x92A2F0, c, sbk_02_2_main]
+    - [0x92A2F0, c, sbk_02_3_ruins]
+    - [0x92A9A0, c, sbk_02_4_npc]
+    - [0x92A9A0, c, sbk_02_5_entity]
+    - [0x92AEB0]
   - name: sbk_03
     dir: world/area_sbk/sbk_03
     type: code
@@ -8485,19 +8484,18 @@ segments:
     - [0x93DD10, c, sbk_26_2_npc]
     - [0x93DE30, c, sbk_26_3_foliage]
     - [0x93E070]
-  - name: sbk_30 #TODO
+  - name: sbk_30
     dir: world/area_sbk/sbk_30
     type: code
     start: 0x93F5B0
     vram: 0x80240000
     subsegments:
-    - [0x93F5B0, c]
-    - [0x940DC0, data]
-    - [0x943E20]
-#    - [0x93F5B0, c, sbk_30_1_main]
-#    - [0x93F5B0, c, sbk_30_2_npc]
-#    - [0x93F5B0, c, sbk_30_3_foliage]
-#    - [0x940DC0]
+    - [0x93F5B0, c, sbk_30_0_header]
+    - [0x93F5B0, c, sbk_30_1_music]
+    - [0x93F5B0, c, sbk_30_2_main]
+    - [0x93F5B0, c, sbk_30_3_npc]
+    - [0x93F5B0, c, sbk_30_4_foliage]
+    - [0x940DC0]
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code

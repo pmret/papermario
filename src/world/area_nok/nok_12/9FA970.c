@@ -19,4 +19,4 @@ ApiStatus func_80240180_9FA970(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetEntityPosition.inc.c"
+#include "world/common/todo/SetEntityPosition.inc.c"

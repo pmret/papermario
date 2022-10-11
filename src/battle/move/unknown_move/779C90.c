@@ -4,7 +4,7 @@
 
 #define NAMESPACE battle_move_unknown_move
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
 extern s32 D_802A26D0_77B360;
 

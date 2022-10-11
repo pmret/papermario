@@ -48,7 +48,7 @@ EvtScript N(80241F40) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_FLO08_SuperBlock
-#include "world/common/atomic/SuperBlock.data.inc.c"
+#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_MAKE_SUPER_BLOCK(-780, 120, -110, 0)
@@ -148,12 +148,12 @@ EvtScript N(main) = {
         EVT_IF_GT(LVar0, 65536)
             EVT_ADD(LVar0, -65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
         EVT_ADD(LVar1, -200)
         EVT_IF_LT(LVar1, 0)
             EVT_ADD(LVar1, 65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 2, 0, LVar1, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar1, 0)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
@@ -171,8 +171,8 @@ EvtScript N(main) = {
     EVT_SET(LVar4, 0)
     EVT_EXEC(N(80242680))
     EVT_EXEC(N(80245914))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(802429E4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80241F40))
@@ -341,7 +341,7 @@ EvtScript N(interact_80243214) = {
                         EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Yellow_HappyTalk, ANIM_GateFlower_Yellow_HappyIdle, 0)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_OpenGate)
                         EVT_CALL(PlaySoundAtCollider, 17, 457, 0)
-                        EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
+                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 17, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
                         EVT_LOOP(0)
                             EVT_CALL(UpdateLerp)
@@ -442,7 +442,7 @@ EvtScript N(init_80243B20) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243214)))
     EVT_IF_EQ(GF_FLO08_GaveYellowBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_HappyDance)
-        EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 17, 0x7FFFFE00)
         EVT_CALL(RotateModel, 103, 50, 0, 1, 0)
         EVT_CALL(RotateModel, 104, 50, 0, 1, 0)
         EVT_CALL(RotateModel, 105, 50, 0, 1, 0)
@@ -840,7 +840,7 @@ static s32 N(pad_4F3C) = {
     0x00000000,
 };
 
-#include "world/common/enemy/UnkFloAI.inc.c"
+#include "world/common/enemy/ai/UnkFloAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

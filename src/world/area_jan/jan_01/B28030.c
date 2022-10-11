@@ -13,8 +13,8 @@ ApiStatus func_8024030C_B2833C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/HoppingAI.inc.c"
+#include "world/common/enemy/ai/HoppingAI.inc.c"
 
-#include "world/common/SetCamera0Flag1000.inc.c"
+#include "world/common/todo/SetCamera0Flag1000.inc.c"
 
-#include "world/common/UnsetCamera0Flag1000.inc.c"
+#include "world/common/todo/UnsetCamera0Flag1000.inc.c"

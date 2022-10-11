@@ -3,9 +3,9 @@
 
 #define NAMESPACE battle_move_jump_charge_0
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
-#include "world/common/IsJumpMaxCharged.inc.c"
+#include "world/common/todo/IsJumpMaxCharged.inc.c"
 
 ApiStatus func_802A1108_74D678(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

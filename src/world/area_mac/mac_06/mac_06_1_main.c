@@ -45,7 +45,7 @@ ApiStatus N(GetWaveAmplitude)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_AnimateWaves) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -73,7 +73,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetMusicTrack, 0, SONG_RIDING_THE_WHALE, 0, 8)
     EVT_CALL(PlayAmbientSounds, AMBIENT_BEACH)
     EVT_EXEC(N(EVS_AnimateWaves))
-    EVT_CALL(SetTexPanner, MODEL_o214, 1)
+    EVT_CALL(SetTexPanner, MODEL_o214, TEX_PANNER_1)
     EVT_CALL(N(SpawnSunEffect))
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, mac_06_ENTRY_0)

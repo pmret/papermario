@@ -55,8 +55,8 @@ EvtScript N(EVS_BombWall_Cell) = {
         EVT_CALL(SetGroupEnabled, MODEL_ana2, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ttse, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttse, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GF_TRD06_BombedWall, TRUE)
@@ -136,7 +136,7 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_LT(STORY_CH1_DEFEATED_KOOPA_BROS)
             EVT_CALL(EnableModel, MODEL_o97, FALSE)
             EVT_CALL(EnableModel, MODEL_o98, FALSE)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_o109, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o109, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_DEFEATED_DUNGEON_GUARDS)
         EVT_SET(GF_TRD06_BombedWall, TRUE)
@@ -159,8 +159,8 @@ EvtScript N(EVS_Main) = {
             EVT_CALL(SetGroupEnabled, MODEL_ana, 0)
         EVT_ELSE
             EVT_CALL(SetGroupEnabled, MODEL_ana2, 0)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(ModifyColliderFlags, 0, COLLIDER_ttse, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttse, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(SetGroupEnabled, MODEL_ana, 0)

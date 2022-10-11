@@ -5,9 +5,9 @@ extern s32 D_802A2C50;
 
 #define NAMESPACE battle_move_jump_charge_1
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
-#include "world/common/IsJumpMaxCharged.inc.c"
+#include "world/common/todo/IsJumpMaxCharged.inc.c"
 
 ApiStatus func_802A1108_75CA88(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -37,7 +37,7 @@ ApiStatus func_802A1108_75CA88(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkMoveFunc2.inc.c"
+#include "world/common/todo/UnkMoveFunc2.inc.c"
 
 ApiStatus func_802A133C_75CCBC(Evt* script, s32 isInitialCall) {
     if (D_802A2C50 == 0) {

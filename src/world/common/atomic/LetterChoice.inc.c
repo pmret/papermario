@@ -3,99 +3,9 @@
 //TODO remove
 extern s32 N(LetterDelivery_SavedNpcAnim);
 
-s32** N(varStash) = NULL;
+#include "world/common/complete/GiveReward.inc.c"
 
-//TODO temporarily moved from #include "world/common/StashVars.inc.c" to suppresse warnings
-ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
-    //static s32** varTable = NULL;
-    s32 i;
-
-    if (N(varStash) == NULL) {
-        N(varStash) = heap_malloc(sizeof(script->varTable));
-
-        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            N(varStash)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            script->varTable[i] = (s32) N(varStash)[i];
-        }
-
-        heap_free(N(varStash));
-        N(varStash) = NULL;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-EvtScript N(Delivery_ShowGotStarPiece) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_80244A44) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0x10)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
-//static s32 N(LetterDelivery_SavedNpcAnim);
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-s32 N(HasLetterChoiceResult) = FALSE;
-s32 N(LetterChoiceResult) = ITEM_NONE;
-
-ApiStatus N(AwaitLetterChoiceResult)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(HasLetterChoiceResult) = FALSE;
-    }
-
-    if (N(HasLetterChoiceResult)) {
-        N(HasLetterChoiceResult) = FALSE;
-        evt_set_variable(script, *args++, N(LetterChoiceResult));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(SetLetterChoiceResult)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(LetterChoiceResult) = evt_get_variable(script, *args++);
-    N(HasLetterChoiceResult) = TRUE;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* allowedItemList = (s32*)evt_get_variable(script, *args++);
-    s32 i;
-
-    if (allowedItemList != NULL) {
-        for (i = 0; allowedItemList[i] != ITEM_NONE; i++) {
-            N(KeyItemChoiceList)[i] = allowedItemList[i];
-        }
-        N(KeyItemChoiceList)[i] = ITEM_NONE;
-    } else {
-        for (i = 0; i < ITEM_NUM_KEYS; i++) {
-            N(KeyItemChoiceList)[i] = ITEM_FIRST_KEY + i;
-            N(KeyItemChoiceList)[ITEM_NUM_KEYS] = ITEM_NONE; // vanilla oddity -- should be after the loop!
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/complete/KeyItemChoice.inc.c"
 
 ApiStatus N(LetterDelivery_Init)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -148,39 +58,6 @@ ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
     npc->currentAnim = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }
-
-EvtScript N(D_802452BC_C7BF9C) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveKeyItemAt, LVar1)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, 0x00050000)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
-            EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_SWITCH
-    EVT_CALL(N(SetLetterChoiceResult), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_ShowChoiceWindow) = {
-    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(D_802452BC_C7BF9C), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(AwaitLetterChoiceResult), LVar0)
-    EVT_RETURN
-    EVT_END
-};
 
 EvtScript N(D_80245450_C7C130) = {
     EVT_LOOP(0)
@@ -236,7 +113,7 @@ EvtScript N(D_802454D0_C7C1B0) = {
             EVT_CALL(EnablePartnerAI)
             EVT_WAIT(5)
     EVT_END_SWITCH
-    EVT_CALL(N(SetLetterChoiceResult), LVarA)
+    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -248,7 +125,7 @@ EvtScript N(EVS_ShowLetterChoice) = {
     EVT_SET(LVar1, LVar2)
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
     EVT_BIND_PADLOCK(N(D_802454D0_C7C1B0), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(AwaitLetterChoiceResult), LVar0)
+    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -292,7 +169,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
                     EVT_IF_NE(LVar6, 0)
                         EVT_SET(LVar0, LVar6)
                         EVT_SET(LVar1, ITEM_TYPE_KEY)
-                        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+                        EVT_EXEC_WAIT(N(GiveKeyReward))
                         EVT_CALL(AddKeyItem, LVar6)
                     EVT_END_IF
                     EVT_SET(LVarC, 2)

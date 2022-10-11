@@ -16,7 +16,7 @@ void func_8012DFE8(s32, UNK_FUN_ARG);
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/StarSpiritEffectFunc.inc.c"
+#include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 static char* N(exit_str_0) = "kmr_23";
 static char* N(exit_str_1) = "kzn_18";
@@ -78,13 +78,13 @@ ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 #ifdef NON_MATCHING
 ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
@@ -129,6 +129,6 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241BC0_EAA6A0);

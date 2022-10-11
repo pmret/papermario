@@ -1933,7 +1933,8 @@ enum ItemIDs {
 enum GotItemType {
     ITEM_TYPE_CONSUMABLE    = 0,
     ITEM_TYPE_KEY           = 1,
-    ITEM_TYPE_BADGE         = 2
+    ITEM_TYPE_BADGE         = 2,
+    ITEM_TYPE_STAR_PIECE    = 3,
 };
 
 enum ItemPickupFlags {

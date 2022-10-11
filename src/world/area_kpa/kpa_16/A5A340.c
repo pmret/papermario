@@ -13,4 +13,4 @@ ApiStatus func_8024034C_A5A37C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"

@@ -5,7 +5,7 @@
 
 #define NAMESPACE ED8E20
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 ApiStatus func_80240318_ED9138(Evt* script, s32 isInitialCall) {
     fx_sun(0, 0, 0, 0, 0, 0);

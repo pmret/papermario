@@ -11,4 +11,4 @@ static char* N(exit_str_7) = "omo_16";
 static char* N(exit_str_8) = "mac_04\0";
 static char* N(exit_str_9) = "jan_04";
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"

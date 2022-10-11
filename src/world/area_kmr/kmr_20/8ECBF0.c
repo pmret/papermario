@@ -5,4 +5,4 @@ ApiStatus func_80240DD0_8ECBF0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"

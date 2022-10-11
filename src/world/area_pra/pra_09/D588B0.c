@@ -2,9 +2,9 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_8024114C_D599DC);
 

@@ -13,7 +13,7 @@ API_CALLABLE(N(UpgradeStarPower)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusMenu.inc.c"
 
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,

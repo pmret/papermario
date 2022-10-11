@@ -18,6 +18,6 @@ ApiStatus func_80240028_AED438(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 
-#include "world/common/UnkGooberFunc50.inc.c"
+#include "world/common/todo/UnkGooberFunc50.inc.c"
 
 const char* kkj_16_str = "kkj_14";

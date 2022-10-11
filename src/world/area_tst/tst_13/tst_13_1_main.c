@@ -32,7 +32,7 @@ API_CALLABLE(N(func_80240000_B1D760)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkDistFunc2.inc.c"
+#include "world/common/todo/UnkDistFunc2.inc.c"
 
 void N(func_8024013C_B1D89C)(void) {
     Matrix4f sp10;
@@ -102,7 +102,7 @@ EvtScript N(D_80240510_B1DC70) = {
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, ArrayVar(0), COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableModel, ArrayVar(1), TRUE)
         EVT_WAIT(1)
-        EVT_CALL(ModifyColliderFlags, 0, ArrayVar(0), COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, ArrayVar(0), COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableModel, ArrayVar(1), FALSE)
         EVT_WAIT(1)
     EVT_END_LOOP

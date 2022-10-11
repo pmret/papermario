@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_kmr_part_1_kmr_06
 
-#include "world/common/clouds.inc.c"
+#include "world/common/todo/clouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
 EvtScript N(beforeBattle_80220E28) = {

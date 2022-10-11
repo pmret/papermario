@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "isk_08";
 static char* N(exit_str_1) = "isk_04";
 
-#include "world/common/SetNpcB5_3.inc.c"
+#include "world/common/todo/SetNpcB5_3.inc.c"
 
 ApiStatus func_80240014_982454(Evt* script, s32 isInitialCall) {
     EncounterStatus* encounterStatus = &gCurrentEncounter;

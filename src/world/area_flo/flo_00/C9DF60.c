@@ -127,7 +127,7 @@ EvtScript N(802416C0) = {
 
 EvtScript N(8024196C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, 2, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 2, 0x7FFFFE00)
     EVT_CALL(PlayerMoveTo, 30, -170, 10)
     EVT_CALL(InterpPlayerYaw, 0, 0)
     EVT_CALL(PlaySoundAtCollider, 2, 463, 0)
@@ -164,7 +164,7 @@ EvtScript N(8024196C) = {
 
 EvtScript N(80241B90) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, 2, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 2, 0x7FFFFE00)
     EVT_CALL(InterpPlayerYaw, 180, 0)
     EVT_CALL(PlaySoundAtCollider, 2, 463, 0)
     EVT_CALL(MakeLerp, 0, -100, 30, 1)
@@ -273,7 +273,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_SET(GF_MAP_FlowerFields, 1)
     EVT_IF_LT(GB_StoryProgress, 55)
-        EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 48, 0x7FFFFE00)
     EVT_END_IF
     EVT_SET(GF_MAC01_RowfBadgesChosen, 0)
     EVT_CALL(GetEntryID, LVar0)
@@ -312,10 +312,10 @@ EvtScript N(main) = {
     EVT_SET(LVar3, 160)
     EVT_SET(LVar4, 0)
     EVT_EXEC(N(802416C0))
-    EVT_CALL(ModifyColliderFlags, 0, 26, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 6, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 26, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 6, 0x7FFFFE00)
     EVT_EXEC(N(enterWalk_8024205C))
     EVT_CALL(GetLoadType, LVar1)
     EVT_IF_NE(LVar1, 1)
@@ -338,19 +338,19 @@ EvtScript N(main) = {
         EVT_ADD(LVar2, 1)
         EVT_WAIT(LVar1)
         EVT_LOOP(LVar2)
-            EVT_CALL(SetTexPanOffset, 12, 0, -32768, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, -0x8000, 0)
             EVT_WAIT(2)
-            EVT_CALL(SetTexPanOffset, 12, 0, -65536, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, -0x10000, 0)
             EVT_WAIT(2)
-            EVT_CALL(SetTexPanOffset, 12, 0, -98304, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, -0x18000, 0)
             EVT_CALL(RandInt, 5, LVar3)
             EVT_ADD(LVar3, 2)
             EVT_WAIT(LVar3)
-            EVT_CALL(SetTexPanOffset, 12, 0, -65536, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, -0x10000, 0)
             EVT_WAIT(2)
-            EVT_CALL(SetTexPanOffset, 12, 0, -32768, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, -0x8000, 0)
             EVT_WAIT(2)
-            EVT_CALL(SetTexPanOffset, 12, 0, 0, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, 0, 0)
             EVT_CALL(RandInt, 5, LVar3)
             EVT_ADD(LVar3, 2)
             EVT_WAIT(LVar3)
@@ -1667,8 +1667,8 @@ EvtScript N(802477EC) = {
         EVT_WAIT(15)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_SET(AreaFlag(44), 1)
-        EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
-        EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 47, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 48, 0x7FFFFE00)
         EVT_SET(LVar9, EVT_FLOAT(-59.0))
         EVT_SET(LVarA, EVT_FLOAT(22.0))
         EVT_SET(LVarB, EVT_FLOAT(125.0))
@@ -1728,8 +1728,8 @@ EvtScript N(802477EC) = {
 EvtScript N(80247BCC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetPlayerActionState, 10)
-    EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 47, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 48, 0x7FFFFE00)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -1989,7 +1989,7 @@ EvtScript N(802485A8) = {
             EVT_WAIT(30)
             EVT_CALL(RemoveItemEntity, MapVar(11))
             EVT_WAIT(30)
-            EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 47, 0x7FFFFE00)
             EVT_CALL(PlayerMoveTo, -60, 30, 20)
             EVT_CALL(ModifyColliderFlags, 1, 47, 0x7FFFFE00)
             EVT_CALL(ModifyColliderFlags, 1, 48, 0x7FFFFE00)
@@ -2072,8 +2072,8 @@ EvtScript N(80248F48) = {
             EVT_EXEC(N(80247588))
             EVT_SET(LVar0, 0)
             EVT_EXEC(N(802476F4))
-            EVT_CALL(ModifyColliderFlags, 0, 46, 0x7FFFFE00)
-            EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 46, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 47, 0x7FFFFE00)
         EVT_CASE_GE(55)
             EVT_SET(LVar0, 1)
             EVT_EXEC(N(80247588))
@@ -2087,8 +2087,8 @@ EvtScript N(80248F48) = {
             EVT_EXEC(N(80247588))
             EVT_SET(LVar0, 0)
             EVT_EXEC(N(802476F4))
-            EVT_CALL(ModifyColliderFlags, 0, 46, 0x7FFFFE00)
-            EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 46, 0x7FFFFE00)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 47, 0x7FFFFE00)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -2106,7 +2106,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
