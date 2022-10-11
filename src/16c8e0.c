@@ -105,7 +105,7 @@ extern HudScript HES_Item_StarPoint;
 extern HudScript HES_StatusSPShine;
 
 void func_8023ED5C(void);
-void func_8023F088(Camera*);
+void tattle_cam_pre_render(Camera*);
 void func_8023FF84(Camera*);
 void btl_draw_enemy_health_bars(void);
 void btl_update_starpoints_display(void);
@@ -225,7 +225,7 @@ void initialize_battle(void) {
         hud_element_set_render_depth(hudElemID, 20);
     }
 
-    tattleCam->fpDoPreRender = func_8023F088;
+    tattleCam->fpDoPreRender = tattle_cam_pre_render;
     tattleCam->fpDoPostRender = func_8023FF84;
 
     if (playerData->battlesCount < 9999) {
@@ -723,7 +723,130 @@ u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
     return (arg0 + (temp_lo >> 8));
 }
 
-INCLUDE_ASM(s32, "16c8e0", func_8023F088);
+void tattle_cam_pre_render(Camera* camera) {
+    Camera* cam = &gCameras[gCurrentCamID];
+    s32 fogEnabled = FALSE;
+    u8 r1, g1, b1, a1;
+    s32 fogR, fogG, fogB, fogA;
+    s32 i;
+
+    s32 lineHeight;
+    s32 numLines;
+    s32 bgWidth, bgHeight;
+    s32 posX, posY;
+    s32 texOffsetX;
+    s32 extraHeight;
+    s16 texOffsetY;
+
+    hide_foreground_models_unchecked();
+
+    if (is_world_fog_enabled()) {
+        fogEnabled = TRUE;
+        get_world_fog_color(&fogR, &fogG, &fogB, &fogA);
+        fogA = gGameStatusPtr->backgroundDarkness;
+        get_background_color_blend(&r1, &g1, &b1, &a1);
+        if (fogA == 255) {
+            for (i = 0; i < 256; i++) {
+                D_8029F038[i] = 1;
+            }
+        } else {
+            for (i = 0; i < 256; i++) {
+                u16 palColor = ((u16*)gGameStatusPtr->backgroundPalette)[i];
+                u16 blendedB = func_8023F060((palColor >> 1) & 0x1F, fogB >> 3, fogA);
+                u16 blendedG = func_8023F060((palColor >> 6) & 0x1F, fogG >> 3, fogA);
+                u16 blendedR = func_8023F060((palColor >> 11) & 0x1F, fogR >> 3, fogA);
+                D_8029F038[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
+            }
+        }
+    }
+
+    if (gGameStatusPtr->backgroundFlags & 1) {
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+        gDPPipeSync(gMasterGfxPos++);
+        if (!fogEnabled) {
+            gDPLoadTLUT_pal256(gMasterGfxPos++, gGameStatusPtr->backgroundPalette);
+        } else {
+            gDPLoadTLUT_pal256(gMasterGfxPos++, D_8029F038);
+        }
+        bgWidth = gGameStatusPtr->backgroundMaxX;
+        bgHeight = gGameStatusPtr->backgroundMaxY;
+        texOffsetX = 0;
+        lineHeight = 2048 / bgWidth;
+        numLines = gGameStatusPtr->backgroundMaxY / lineHeight;
+        extraHeight = gGameStatusPtr->backgroundMaxY % lineHeight;
+        posX = cam->viewportStartX;
+        posY = cam->viewportStartY;
+        for (i = 0; i < numLines; i++) {
+            texOffsetY = D_802809FA + lineHeight * i;
+            if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
+                texOffsetY -= gGameStatusPtr->backgroundMaxY;
+            }
+            gDPLoadTextureTile(gMasterGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
+                               G_IM_FMT_CI, G_IM_SIZ_8b, bgWidth, 6,
+                               0, 0, 295, 5, 0,
+                               G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (lineHeight * i + posY) * 4, (texOffsetX + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4, G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (lineHeight * i + posY) * 4, (bgWidth + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+        }
+        if (extraHeight != 0) {
+            texOffsetY = D_802809FA + lineHeight * i;
+            if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
+                texOffsetY -= gGameStatusPtr->backgroundMaxY;
+            }
+            gDPLoadTextureTile(gMasterGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
+                               G_IM_FMT_CI, G_IM_SIZ_8b, bgWidth, extraHeight,
+                               0, 0, 295, extraHeight - 1, 0,
+                               G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (i * lineHeight + posY) * 4, (texOffsetX + posX - 1) * 4, (bgHeight + - 1 + posY) * 4, G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (i * lineHeight + posY) * 4, (bgWidth + posX - 1) * 4, (bgHeight - 1 + posY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+        }
+    }
+
+    gSPViewport(gMasterGfxPos++, &cam->vp);
+    gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+    gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
+    gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX * 4.0f, cam->viewportStartY * 4.0f, (cam->viewportStartX + cam->viewportW) * 4.0f, (cam->viewportStartY + cam->viewportH) * 4.0f);
+    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
+    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxZBuffer));
+    gDPSetFillColor(gMasterGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
+    gDPFillRectangle(gMasterGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+
+    if (!(gGameStatusPtr->backgroundFlags & 1)) {
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+        gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(cam->bgColor[0], cam->bgColor[1], cam->bgColor[2], 1));
+        gDPFillRectangle(gMasterGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
+    guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+}
 
 void func_8023FF84(Camera* camera) {
     show_foreground_models_unchecked();
