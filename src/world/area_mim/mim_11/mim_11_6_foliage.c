@@ -1,0 +1,73 @@
+#include "mim_11.h"
+
+#include "common/foliage.inc.c"
+
+FoliageModelList N(Bush1_BushModels) = {
+    .count = 1,
+    .models = {
+        MODEL_o182,
+    }
+};
+
+FoliageDropList N(Bush1_Drops) = {
+    .count = 1, 
+    .drops = {
+        {
+            .itemID = ITEM_STRANGE_LEAF,
+            .pos = { 357, 16, 315 },
+            .spawnMode = ITEM_SPAWN_MODE_TOSS_NEVER_VANISH,
+            .spawnFlag = MF_Unk_0A,
+        },
+    }
+};
+
+SearchBushConfig N(SearchBush_Bush1) = {
+    .bush = &N(Bush1_BushModels),
+    .drops = &N(Bush1_Drops),
+};
+
+FoliageModelList N(Bush2_BushModels) = {
+    .count = 1,
+    .models = {
+        MODEL_o183,
+    }
+};
+
+SearchBushConfig N(SearchBush_Bush2) = {
+    .bush = &N(Bush2_BushModels),
+};
+
+FoliageModelList N(Bush3_BushModels) = {
+    .count = 1,
+    .models = {
+        MODEL_o184,
+    }
+};
+
+SearchBushConfig N(SearchBush_Bush3) = {
+    .bush = &N(Bush3_BushModels),
+};
+
+FoliageModelList N(Bush4_BushModels) = {
+    .count = 1,
+    .models = {
+        MODEL_o185,
+    }
+};
+
+SearchBushConfig N(SearchBush_Bush4) = {
+    .bush = &N(Bush4_BushModels),
+};
+
+EvtScript N(EVS_SetupFoliage) = {
+    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)
+    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o208, 1, 0)
+    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o209, 1, 0)
+    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o210, 1, 0)
+    EVT_RETURN
+    EVT_END
+};

@@ -1902,7 +1902,7 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
         battleStatus->pendingStarPoints += numToDrop;
     }
 
-    gBattleStatus.flags1 |= 0x1000000;
+    gBattleStatus.flags1 |= BS_FLAGS1_STAR_POINTS_DROPPED;
     return ApiStatus_DONE2;
 }
 
@@ -1995,30 +1995,30 @@ ApiStatus EnemyDamageTarget(Evt *script, s32 isInitialCall) {
     battleFlagsModifier = *args++;
 
     if (battleFlagsModifier & 0x10) {
-        gBattleStatus.flags1 |= 0x10;
-        gBattleStatus.flags1 &= ~0x20;
-    } else if (battleFlagsModifier & 0x20) {
-        gBattleStatus.flags1 &= ~0x10;
-        gBattleStatus.flags1 |= 0x20;
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (battleFlagsModifier & BS_FLAGS1_SP_EVT_ACTIVE) {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        gBattleStatus.flags1 &= ~0x10;
-        gBattleStatus.flags1 &= ~0x20;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (battleFlagsModifier & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+    if (battleFlagsModifier & BS_FLAGS1_40) {
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
-    if (battleFlagsModifier & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+    if (battleFlagsModifier & BS_FLAGS1_200) {
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
-    if (battleFlagsModifier & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+    if (battleFlagsModifier & BS_FLAGS1_80) {
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     attackStatus = battleStatus->currentAttackStatus;
@@ -2107,31 +2107,31 @@ ApiStatus EnemyTestTarget(Evt *script, s32 isInitialCall) {
     battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
     battleFlagsModifier = *args++;
 
-    if (battleFlagsModifier & 0x10) {
-        gBattleStatus.flags1 |= 0x10;
-        gBattleStatus.flags1 &= ~0x20;
-    } else if (battleFlagsModifier & 0x20) {
-        gBattleStatus.flags1 &= ~0x10;
-        gBattleStatus.flags1 |= 0x20;
+    if (battleFlagsModifier & BS_FLAGS1_10) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (battleFlagsModifier & BS_FLAGS1_SP_EVT_ACTIVE) {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        gBattleStatus.flags1 &= ~0x10;
-        gBattleStatus.flags1 &= ~0x20;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    if (battleFlagsModifier & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+    if (battleFlagsModifier & BS_FLAGS1_40) {
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
-    if (battleFlagsModifier & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+    if (battleFlagsModifier & BS_FLAGS1_200) {
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
-    if (battleFlagsModifier & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+    if (battleFlagsModifier & BS_FLAGS1_80) {
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     attackStatus = battleStatus->currentAttackStatus;
@@ -2367,7 +2367,7 @@ ApiStatus GetEncounterState(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus YieldTurn(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= 0x200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_200000;
     return ApiStatus_DONE2;
 }
 

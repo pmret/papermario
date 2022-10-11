@@ -365,7 +365,7 @@ EvtScript N(80243740) = {
     EVT_CALL(N(GetEntityPosition), MapVar(0), LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, 0x269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MapVar(0))
-    EVT_CALL(N(SetEntityFlags100000))
+    EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
     EVT_RETURN
@@ -400,7 +400,7 @@ EvtScript N(80243970) = {
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-            EVT_CALL(func_80045900, 1)
+            EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(3)
             EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)

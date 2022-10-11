@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-// Similar to UnkFloatFunc
+// Similar to CosInterpMinMax
 ApiStatus N(UnkFloatFunc001)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;

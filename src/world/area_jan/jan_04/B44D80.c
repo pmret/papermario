@@ -1,3 +1,3 @@
 #include "jan_04.h"
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"

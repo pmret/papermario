@@ -39,13 +39,13 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
 };
 
 EvtScript N(EVS_ParadePhase_Partners) = {
-    EVT_CALL(PlayEffect, EFFECT_CONFETTI, 3, -2545, 200, 0, 1, 800, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_CONFETTI, 3, -2545, 200, 0, 1, 800)
     EVT_CALL(EnableNpcShadow, NPC_Goombario, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Bombette, FALSE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_WAIT(25)
-            EVT_CALL(PlayEffect, EFFECT_CONFETTI, 4, -2530, 95, 5, 1, 20, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, -2530, 95, 5, 1, 20)
             EVT_WAIT(20)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -109,7 +109,7 @@ EvtScript N(EVS_QuizCrew) = {
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_ChuckQuizmo, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 80)
-    EVT_CALL(PlayEffect, EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcAnimation, NPC_VannaT, ANIM_VannaT_Clap)
     EVT_WAIT(60)
     EVT_CALL(SetNpcAnimation, NPC_ChuckQuizmo, ANIM_ChuckQuizmo_CloseHat)

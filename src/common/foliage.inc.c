@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #include "FoliageTransform.inc.c"
 
@@ -165,7 +166,7 @@ EvtScript N(shakeTree) = {
             EVT_BUF_READ1(LVar5)
             EVT_LOOP(LVar5)
                 EVT_BUF_READ3(LVar6, LVar7, LVar8)
-                EVT_CALL(PlayEffect, 0x14, 0, LVar6, LVar7, LVar8, 100, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_DROP_LEAVES, 0, LVar6, LVar7, LVar8, 100)
             EVT_END_LOOP
         EVT_END_IF
     EVT_END_THREAD

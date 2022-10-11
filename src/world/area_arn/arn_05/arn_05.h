@@ -2,21 +2,33 @@
 /// @brief Gusty Gulch - Ghost Town 2
 
 #include "common.h"
-#include "../arn.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../arn.h"
+#include "mapfs/arn_05_shape.h"
+#include "mapfs/arn_05_hit.h"
+
+#include "sprite/npc/Boo.h"
+#include "sprite/npc/WorldBow.h"
+#include "sprite/npc/WorldTubba.h"
+
+enum {
+	NPC_Boo_01          = 0,
+	NPC_Boo_02          = 1,
+	NPC_Boo_03          = 2,
+	NPC_Boo_04          = 3,
+	NPC_Boo_05          = 4,
+	NPC_Tubba           = 5,
+	NPC_Boo_06          = 6,
+	NPC_Boo_07          = 7,
+	NPC_Boo_08          = 8,
+	NPC_Boo_09          = 9,
+};
+
+enum {
+    MV_Unk_00           = MapVar(0),
+    MV_Unk_01           = MapVar(1),
+};
+
 #define NAMESPACE arn_05
-
-ApiStatus func_802D2B50(void);
-
-ApiStatus N(SwitchToPartner)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802412B0_BE8E90)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall);
-
-extern EvtScript N(makeEntities);
-extern EvtScript N(main);
-extern EvtScript N(80241360);
-extern EvtScript N(802441FC);
-extern NpcGroupList N(npcGroupList_80244FC8);
-extern NpcGroupList N(npcGroupList_80244FA4);

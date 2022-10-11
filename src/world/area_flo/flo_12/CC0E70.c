@@ -7,7 +7,7 @@ enum {
     NPC_ROSIE1,
 };
 
-static s32 N(D_802429E0)[112];
+static s32 N(flo_12_D_802429E0)[112];
 
 EntryList N(entryList) = {
     { 280.0f, 0.0f, 0.0f, 270.0f },
@@ -218,7 +218,7 @@ EvtScript N(80241858) = {
 
 EvtScript N(8024199C) = {
     EVT_CALL(N(func_8024064C_CC147C), LVar0)
-    EVT_BIND_PADLOCK(N(80241858), 0x10, 0, EVT_PTR(N(D_802429E0)), 0, 1)
+    EVT_BIND_PADLOCK(N(80241858), 0x10, 0, EVT_PTR(N(flo_12_D_802429E0)), 0, 1)
     EVT_CALL(N(func_802405C0_CC13F0), LVar0)
     EVT_RETURN
     EVT_END
@@ -517,13 +517,13 @@ ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            N(D_802429E0)[i] = ptr[i];
+            N(flo_12_D_802429E0)[i] = ptr[i];
         }
-        N(D_802429E0)[i] = 0;
+        N(flo_12_D_802429E0)[i] = 0;
     } else {
         for (i = 0; i < 0x70; i++) {
-            N(D_802429E0)[i] = i + 16;
-            N(D_802429E0)[112] = 0;
+            N(flo_12_D_802429E0)[i] = i + 16;
+            N(flo_12_D_802429E0)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

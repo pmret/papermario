@@ -14,6 +14,8 @@
 #define EVS_BindExitTriggers    EVS_BindExitTriggers
 #define EVS_EnterMap            EVS_EnterMap
 
+#define CLONED_MODEL(idx)       (10000+(idx))
+
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
@@ -72,5 +74,8 @@ MapSettings* get_current_map_settings(void);
 
 /// Zero-terminated.
 extern AreaConfig gAreas[29];
+
+extern EvtScript EVS_NpcHitRecoil;
+extern EvtScript EVS_800936C0;
 
 #endif

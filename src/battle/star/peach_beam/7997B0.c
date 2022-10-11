@@ -320,7 +320,7 @@ EvtScript N(usePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemDamageEnemy, LVar0, 1082130432, 0, 0, 32)
+    EVT_CALL(ItemDamageEnemy, LVar0, 1082130432, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ChooseNextTarget, 0, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)

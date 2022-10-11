@@ -627,7 +627,7 @@ EvtScript N(80239384) = {
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, LVarA)
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, 0, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, 16)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_THREAD
             EVT_CALL(func_80238000_6F5E80)
@@ -669,9 +669,9 @@ EvtScript N(80239384) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarF, 112)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarE, 48)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_SWITCH(LVar0)
@@ -814,7 +814,7 @@ EvtScript N(80239E7C) = {
     EVT_IF_GT(LVar0, LVar3)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, 16)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(12)
     EVT_END_IF
@@ -831,9 +831,9 @@ EvtScript N(80239E7C) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 536870912, 159, 0, LVarF, 112)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 536870912, 159, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 536870912, 159, 0, LVarE, 48)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 536870912, 159, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_LABEL(12)
@@ -969,7 +969,7 @@ EvtScript N(8023AA38) = {
     EVT_IF_GT(LVar0, LVar3)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, 16)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(12)
     EVT_END_IF
@@ -989,18 +989,18 @@ EvtScript N(8023AA38) = {
         EVT_CASE_GT(0)
             EVT_IF_EQ(LVar9, 1)
                 EVT_IF_EQ(LVarF, 100)
-                    EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 254, 0, 112)
+                    EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 254, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
                 EVT_ELSE
-                    EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, LVarF, 0, 112)
+                    EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
                 EVT_END_IF
             EVT_ELSE
-                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, LVarF, 0, 112)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(LVar9, 1)
-                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 255, 0, 48)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 255, 0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_ELSE
-                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 255, 0, 48)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, 1610612736, 159, -1073478912, 255, 0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
@@ -1214,7 +1214,7 @@ EvtScript N(8023B660) = {
     EVT_IF_GT(LVar0, LVar3)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, 16)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(12)
     EVT_END_IF
@@ -1232,9 +1232,9 @@ EvtScript N(8023B660) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 536870914, 159, 0, LVarF, 112)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 536870914, 159, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 536870914, 159, 0, LVarF, 48)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 536870914, 159, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_LABEL(12)
@@ -1283,7 +1283,7 @@ EvtScript N(8023C754) = {
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(16.0))
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, 0, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, 16)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, 6)
         EVT_THREAD
             EVT_CALL(func_80238000_6F5E80)
@@ -1331,7 +1331,7 @@ EvtScript N(8023C754) = {
         EVT_CASE_EQ(139)
             EVT_SET(LVarF, 3)
     EVT_END_SWITCH
-    EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarF, 48)
+    EVT_CALL(PartnerDamageEnemy, LVar0, 0, 159, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(137)

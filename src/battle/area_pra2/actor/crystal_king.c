@@ -152,7 +152,7 @@ EvtScript N(init) = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"
 
 ApiStatus GetActorPartOpacity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -243,7 +243,7 @@ EvtScript N(idle) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar2)
         EVT_CALL(ActorExists, LVar1, LVar3)
         EVT_IF_EQ(LVar3, TRUE)
-            EVT_CALL(N(UnkFloatFunc), LVarF, LVar4, EVT_FLOAT(128.0), EVT_FLOAT(254.0), 20, 0, 0)
+            EVT_CALL(N(CosInterpMinMax), LVarF, LVar4, EVT_FLOAT(128.0), EVT_FLOAT(254.0), 20, 0, 0)
             EVT_SET(LVar4, LVar4)
             EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar4)
             EVT_CALL(SetPartAlpha, LVar1, 1, LVar4)
@@ -312,7 +312,7 @@ EvtScript N(FlyWithClones) = {
         EVT_SET(LVar4, 41)
         EVT_ADD(LVar4, LVarE)
         EVT_CALL(SetActorPos, LVar2, LVar3, LVar4, LVar5)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVar0, EVT_FLOAT(0.0), EVT_FLOAT(5.0), 30, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.0), EVT_FLOAT(5.0), 30, 0, 0)
         EVT_SET(LVarA, LVarB)
         EVT_SET(LVarB, LVarC)
         EVT_SET(LVarC, LVarD)

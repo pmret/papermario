@@ -5,141 +5,141 @@
 #include "common_structs.h"
 
 enum EffectID {
-    EFFECT_00 = 0x00,
-    EFFECT_BIG_SMOKE_PUFF,
-    EFFECT_02, // unused
-    EFFECT_03, // unused
-    EFFECT_04, // unused
-    EFFECT_05, // unused
-    EFFECT_LANDING_DUST,
-    EFFECT_WALKING_DUST,
-    EFFECT_FLOWER_SPLASH,
-    EFFECT_FLOWER_TRAIL,
-    EFFECT_CLOUD_PUFF,
-    EFFECT_CLOUD_TRAIL,
-    EFFECT_FOOTPRINT,
-    EFFECT_FLOATING_FLOWER,
-    EFFECT_SNOWFLAKE,
-    EFFECT_STAR,
-    EFFECT_EMOTE,
-    EFFECT_SPARKLES,
-    EFFECT_SHAPE_SPELL,
-    EFFECT_GATHER_ENERGY_PINK,
-    EFFECT_DROP_LEAVES,
-    EFFECT_DUST,
-    EFFECT_SHATTERING_STONES,
-    EFFECT_SMOKE_RING,
-    EFFECT_DAMAGE_STARS,
-    EFFECT_EXPLOSION,
-    EFFECT_LENS_FLARE,
-    EFFECT_GOT_ITEM_OUTLINE,
-    EFFECT_SPIKY_WHITE_AURA,
-    EFFECT_SMOKE_IMPACT,
-    EFFECT_DAMAGE_INDICATOR,
-    EFFECT_PURPLE_RING,
-    EFFECT_FLAME,
-    EFFECT_STARS_BURST,
-    EFFECT_STARS_SHIMMER,
-    EFFECT_RISING_BUBBLE,
-    EFFECT_RING_BLAST,
-    EFFECT_SHOCKWAVE,
-    EFFECT_MUSIC_NOTE,
-    EFFECT_SMOKE_BURST,
-    EFFECT_SWEAT,
-    EFFECT_SLEEP_BUBBLE,
-    EFFECT_2A, // unused
-    EFFECT_WINDY_LEAVES,
-    EFFECT_FALLING_LEAVES,
-    EFFECT_STARS_SPREAD,
-    EFFECT_STEAM_BURST,
-    EFFECT_STARS_ORBITING,
-    EFFECT_BIG_SNOWFLAKES,
-    EFFECT_DEBUFF,
-    EFFECT_GREEN_IMPACT,
-    EFFECT_RADIAL_SHIMMER,
-    EFFECT_ENDING_DECALS,
-    EFFECT_LIGHT_RAYS,
-    EFFECT_LIGHTNING,
-    EFFECT_FIRE_BREATH,
-    EFFECT_SHIMMER_BURST,
-    EFFECT_ENERGY_SHOCKWAVE,
-    EFFECT_SHIMMER_WAVE,
-    EFFECT_AURA,
-    EFFECT_BULB_GLOW,
-    EFFECT_3D,
-    EFFECT_BLAST,
-    EFFECT_FIRE_FLOWER,
-    EFFECT_RECOVER,
-    EFFECT_DISABLE_X,
-    EFFECT_BOMBETTE_BREAKING,
-    EFFECT_FIREWORK,
-    EFFECT_CONFETTI,
-    EFFECT_SNOWFALL,
-    EFFECT_46,
-    EFFECT_GATHER_MAGIC,
-    EFFECT_ATTACK_RESULT_TEXT,
-    EFFECT_SMALL_GOLD_SPARKLE,
-    EFFECT_FLASHING_BOX_SHOCKWAVE,
-    EFFECT_BALLOON,
-    EFFECT_FLOATING_ROCK,
-    EFFECT_CHOMP_DROP,
-    EFFECT_QUIZMO_STAGE,
-    EFFECT_RADIATING_ENERGY_ORB,
-    EFFECT_QUIZMO_ANSWER, // unused
-    EFFECT_MOTION_BLUR_FLAME,   // three orbs emanating from super block during upgrading animation
-    EFFECT_ENERGY_ORB_WAVE,
-    EFFECT_MERLIN_HOUSE_STARS,
-    EFFECT_QUIZMO_AUDIENCE, // unused
-    EFFECT_BUTTERFLIES,
-    EFFECT_STAT_CHANGE,
-    EFFECT_SNAKING_STATIC,
-    EFFECT_THUNDERBOLT_RING,
-    EFFECT_SQUIRT,
-    EFFECT_WATER_BLOCK,
-    EFFECT_WATERFALL,
-    EFFECT_WATER_FOUNTAIN,
-    EFFECT_UNDERWATER,
-    EFFECT_LIGHTNING_BOLT,
-    EFFECT_WATER_SPLASH,
-    EFFECT_SNOWMAN_DOLL,
-    EFFECT_FRIGHT_JAR,
-    EFFECT_STOP_WATCH,
-    EFFECT_63,
-    EFFECT_THROW_SPINY,
-    EFFECT_65,
-    EFFECT_TUBBA_HEART_ATTACK,
-    EFFECT_WHIRLWIND,
-    EFFECT_RED_IMPACT,
-    EFFECT_FLOATING_CLOUD_PUFF,
-    EFFECT_6A, // unused
-    EFFECT_ENERGY_IN_OUT,
-    EFFECT_TATTLE_WINDOW,
-    EFFECT_SHINY_FLARE,
-    EFFECT_HUFF_PUFF_BREATH,
-    EFFECT_COLD_BREATH,
-    EFFECT_EMBERS,
-    EFFECT_HIEROGLYPHS,
-    EFFECT_MISC_PARTICLES,
-    EFFECT_STATIC_STATUS,
-    EFFECT_MOVING_CLOUD,
-    EFFECT_75,
-    EFFECT_76, // unused
-    EFFECT_FIREWORK_ROCKET,
-    EFFECT_PEACH_STAR_BEAM,
-    EFFECT_CHAPTER_CHANGE,
-    EFFECT_ICE_SHARD,
-    EFFECT_SPIRIT_CARD,
-    EFFECT_LIL_OINK,
-    EFFECT_SOMETHING_ROTATING,
-    EFFECT_BREAKING_JUNK,
-    EFFECT_PARTNER_BUFF,
-    EFFECT_QUIZMO_ASSISTANT,
-    EFFECT_ICE_PILLAR,
-    EFFECT_SUN,
-    EFFECT_STAR_SPIRITS_ENERGY,
-    EFFECT_PINK_SPARKLES,
-    EFFECT_STAR_OUTLINE,
-    EFFECT_86,
+    EFFECT_00                       = 0x00,
+    EFFECT_BIG_SMOKE_PUFF           = 0x01,
+    EFFECT_02                       = 0x02, // unused
+    EFFECT_03                       = 0x03, // unused
+    EFFECT_04                       = 0x04, // unused
+    EFFECT_05                       = 0x05, // unused
+    EFFECT_LANDING_DUST             = 0x06,
+    EFFECT_WALKING_DUST             = 0x07,
+    EFFECT_FLOWER_SPLASH            = 0x08,
+    EFFECT_FLOWER_TRAIL             = 0x09,
+    EFFECT_CLOUD_PUFF               = 0x0A,
+    EFFECT_CLOUD_TRAIL              = 0x0B,
+    EFFECT_FOOTPRINT                = 0x0C,
+    EFFECT_FLOATING_FLOWER          = 0x0D,
+    EFFECT_SNOWFLAKE                = 0x0E,
+    EFFECT_STAR                     = 0x0F,
+    EFFECT_EMOTE                    = 0x10,
+    EFFECT_SPARKLES                 = 0x11,
+    EFFECT_SHAPE_SPELL              = 0x12,
+    EFFECT_GATHER_ENERGY_PINK       = 0x13,
+    EFFECT_DROP_LEAVES              = 0x14,
+    EFFECT_DUST                     = 0x15,
+    EFFECT_SHATTERING_STONES        = 0x16,
+    EFFECT_SMOKE_RING               = 0x17,
+    EFFECT_DAMAGE_STARS             = 0x18,
+    EFFECT_EXPLOSION                = 0x19,
+    EFFECT_LENS_FLARE               = 0x1A,
+    EFFECT_GOT_ITEM_OUTLINE         = 0x1B,
+    EFFECT_SPIKY_WHITE_AURA         = 0x1C,
+    EFFECT_SMOKE_IMPACT             = 0x1D,
+    EFFECT_DAMAGE_INDICATOR         = 0x1E,
+    EFFECT_PURPLE_RING              = 0x1F,
+    EFFECT_FLAME                    = 0x20,
+    EFFECT_STARS_BURST              = 0x21,
+    EFFECT_STARS_SHIMMER            = 0x22,
+    EFFECT_RISING_BUBBLE            = 0x23,
+    EFFECT_RING_BLAST               = 0x24,
+    EFFECT_SHOCKWAVE                = 0x25,
+    EFFECT_MUSIC_NOTE               = 0x26,
+    EFFECT_SMOKE_BURST              = 0x27,
+    EFFECT_SWEAT                    = 0x28,
+    EFFECT_SLEEP_BUBBLE             = 0x29,
+    EFFECT_2A                       = 0x2A, // unused
+    EFFECT_WINDY_LEAVES             = 0x2B,
+    EFFECT_FALLING_LEAVES           = 0x2C,
+    EFFECT_STARS_SPREAD             = 0x2D,
+    EFFECT_STEAM_BURST              = 0x2E,
+    EFFECT_STARS_ORBITING           = 0x2F,
+    EFFECT_BIG_SNOWFLAKES           = 0x30,
+    EFFECT_DEBUFF                   = 0x31,
+    EFFECT_GREEN_IMPACT             = 0x32,
+    EFFECT_RADIAL_SHIMMER           = 0x33,
+    EFFECT_ENDING_DECALS            = 0x34,
+    EFFECT_LIGHT_RAYS               = 0x35,
+    EFFECT_LIGHTNING                = 0x36,
+    EFFECT_FIRE_BREATH              = 0x37,
+    EFFECT_SHIMMER_BURST            = 0x38,
+    EFFECT_ENERGY_SHOCKWAVE         = 0x39,
+    EFFECT_SHIMMER_WAVE             = 0x3A,
+    EFFECT_AURA                     = 0x3B,
+    EFFECT_BULB_GLOW                = 0x3C,
+    EFFECT_3D                       = 0x3D,
+    EFFECT_BLAST                    = 0x3E,
+    EFFECT_FIRE_FLOWER              = 0x3F,
+    EFFECT_RECOVER                  = 0x40,
+    EFFECT_DISABLE_X                = 0x41,
+    EFFECT_BOMBETTE_BREAKING        = 0x42,
+    EFFECT_FIREWORK                 = 0x43,
+    EFFECT_CONFETTI                 = 0x44,
+    EFFECT_SNOWFALL                 = 0x45,
+    EFFECT_46                       = 0x46,
+    EFFECT_GATHER_MAGIC             = 0x47,
+    EFFECT_ATTACK_RESULT_TEXT       = 0x48,
+    EFFECT_SMALL_GOLD_SPARKLE       = 0x49,
+    EFFECT_FLASHING_BOX_SHOCKWAVE   = 0x4A,
+    EFFECT_BALLOON                  = 0x4B,
+    EFFECT_FLOATING_ROCK            = 0x4C,
+    EFFECT_CHOMP_DROP               = 0x4D,
+    EFFECT_QUIZMO_STAGE             = 0x4E,
+    EFFECT_RADIATING_ENERGY_ORB     = 0x4F,
+    EFFECT_QUIZMO_ANSWER            = 0x50, // unused
+    EFFECT_MOTION_BLUR_FLAME        = 0x51, // three orbs emanating from super block during upgrading animation
+    EFFECT_ENERGY_ORB_WAVE          = 0x52,
+    EFFECT_MERLIN_HOUSE_STARS       = 0x53,
+    EFFECT_QUIZMO_AUDIENCE          = 0x54, // unused
+    EFFECT_BUTTERFLIES              = 0x55,
+    EFFECT_STAT_CHANGE              = 0x56,
+    EFFECT_SNAKING_STATIC           = 0x57,
+    EFFECT_THUNDERBOLT_RING         = 0x58,
+    EFFECT_SQUIRT                   = 0x59,
+    EFFECT_WATER_BLOCK              = 0x5A,
+    EFFECT_WATERFALL                = 0x5B,
+    EFFECT_WATER_FOUNTAIN           = 0x5C,
+    EFFECT_UNDERWATER               = 0x5D,
+    EFFECT_LIGHTNING_BOLT           = 0x5E,
+    EFFECT_WATER_SPLASH             = 0x5F,
+    EFFECT_SNOWMAN_DOLL             = 0x60,
+    EFFECT_FRIGHT_JAR               = 0x61,
+    EFFECT_STOP_WATCH               = 0x62,
+    EFFECT_63                       = 0x63,
+    EFFECT_THROW_SPINY              = 0x64,
+    EFFECT_65                       = 0x65,
+    EFFECT_TUBBA_HEART_ATTACK       = 0x66,
+    EFFECT_WHIRLWIND                = 0x67,
+    EFFECT_RED_IMPACT               = 0x68,
+    EFFECT_FLOATING_CLOUD_PUFF      = 0x69,
+    EFFECT_6A                       = 0x6A, // unused
+    EFFECT_ENERGY_IN_OUT            = 0x6B,
+    EFFECT_TATTLE_WINDOW            = 0x6C,
+    EFFECT_SHINY_FLARE              = 0x6D,
+    EFFECT_HUFF_PUFF_BREATH         = 0x6E,
+    EFFECT_COLD_BREATH              = 0x6F,
+    EFFECT_EMBERS                   = 0x70,
+    EFFECT_HIEROGLYPHS              = 0x71,
+    EFFECT_MISC_PARTICLES           = 0x72,
+    EFFECT_STATIC_STATUS            = 0x73,
+    EFFECT_MOVING_CLOUD             = 0x74,
+    EFFECT_75                       = 0x75,
+    EFFECT_76                       = 0x76, // unused
+    EFFECT_FIREWORK_ROCKET          = 0x77,
+    EFFECT_PEACH_STAR_BEAM          = 0x78,
+    EFFECT_CHAPTER_CHANGE           = 0x79,
+    EFFECT_ICE_SHARD                = 0x7A,
+    EFFECT_SPIRIT_CARD              = 0x7B,
+    EFFECT_LIL_OINK                 = 0x7C,
+    EFFECT_SOMETHING_ROTATING       = 0x7D,
+    EFFECT_BREAKING_JUNK            = 0x7E,
+    EFFECT_PARTNER_BUFF             = 0x7F,
+    EFFECT_QUIZMO_ASSISTANT         = 0x80,
+    EFFECT_ICE_PILLAR               = 0x81,
+    EFFECT_SUN                      = 0x82,
+    EFFECT_STAR_SPIRITS_ENERGY      = 0x83,
+    EFFECT_PINK_SPARKLES            = 0x84,
+    EFFECT_STAR_OUTLINE             = 0x85,
+    EFFECT_86                       = 0x86,
 };
 
 typedef struct Effect00FXData {
@@ -782,19 +782,64 @@ typedef struct EndingDecalsFXData {
 } EndingDecalsFXData; // size = 0x2C
 
 typedef struct LightRaysFXData {
-    /* 0x00 */ char todo[0];
-} LightRaysFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0xC];
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ char unk_30[4];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ char unk_44[4];
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ f32 unk_6C;
+    /* 0x70 */ f32 unk_70;
+    /* 0x74 */ f32 unk_74;
+    /* 0x78 */ f32 unk_78;
+    /* 0x7C */ s32 unk_7C;
+    /* 0x80 */ f32 unk_80;
+    /* 0x84 */ f32 unk_84;
+    /* 0x88 */ f32 unk_88;
+    /* 0x8C */ f32 unk_8C;
+    /* 0x90 */ s32 unk_90;
+} LightRaysFXData; // size = 0x94
 
 typedef struct LightningFXData {
-    /* 0x00 */ char unk_00[0x30];
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ char unk_3C[0x4];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32 unk_48;
-} LightningFXData; // size = ?
+    /* 0x44 */ struct EffectInstance* unk_44;
+    /* 0x48 */ struct EffectInstance* unk_48;
+} LightningFXData; // size = 0x4C
 
 typedef struct FireBreathFXData {
     /* 0x00 */ s32 type;
@@ -1289,7 +1334,15 @@ typedef struct StatChangeFXData {
 typedef struct SnakingStaticFXData {
     /* 0x00 */ char unk_00[4];
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x28];
+    /* 0x10 */ char unk_10[8];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ char unk_34[4];
     /* 0x38 */ f32 unk_38;
 } SnakingStaticFXData; // size = unknown
 
@@ -1339,17 +1392,33 @@ typedef struct UnderwaterFXData {
 } UnderwaterFXData; // size = unknown
 
 typedef struct LightningBoltFXData {
-    /* 0x00 */ char unk_00[0xC];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ char unk_3C[0x4];
-    /* 0x40 */ s32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32 unk_48;
-} LightningBoltFXData; // size = ?
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ f32 unk_04;
+    /* 0x008 */ f32 unk_08;
+    /* 0x00C */ f32 unk_0C;
+    /* 0x010 */ f32 unk_10;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ f32 unk_1C;
+    /* 0x020 */ f32 unk_20;
+    /* 0x024 */ f32 unk_24;
+    /* 0x028 */ s32 unk_28;
+    /* 0x02C */ s32 unk_2C;
+    /* 0x030 */ s32 unk_30;
+    /* 0x034 */ s32 unk_34;
+    /* 0x038 */ s32 unk_38;
+    /* 0x03C */ s32 unk_3C;
+    /* 0x040 */ s32 unk_40;
+    /* 0x044 */ s32 unk_44;
+    /* 0x048 */ s32 unk_48;
+    /* 0x04C */ f32 unk_4C;
+    /* 0x050 */ f32 unk_50[0xC];
+    /* 0x080 */ f32 unk_80[0xC];
+    /* 0x0B0 */ f32 unk_B0[0xC];
+    /* 0x0E0 */ f32 unk_E0[0xC];
+    /* 0x110 */ s32 unk_110;
+    /* 0x114 */ f32 unk_114;
+} LightningBoltFXData; // size = 0x118
 
 typedef struct WaterSplashFXData {
     /* 0x00 */ char todo[0];
@@ -1930,7 +1999,15 @@ typedef struct PinkSparklesFXData {
 } PinkSparklesFXData; // size = unknown
 
 typedef struct StarOutlineFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x14];
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ char unk_28[0xC];
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ Vec3f unk_3C;
 } StarOutlineFXData; // size = unknown
 
 typedef struct Effect86FXData {

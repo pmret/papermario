@@ -5,13 +5,11 @@
 #include "enums.h"
 #include "script_api/map.h"
 
-#define GET_MACRO(_1,_2,_3,NAME,ARGS...) NAME
-#define NPC_GROUP(ARGS...) GET_MACRO(ARGS, NPC_GROUP_3, NPC_GROUP_2, NPC_GROUP_1)(ARGS)
-
 // battle and stage are optional in overloaded NPC_GROUP macros
-#define NPC_GROUP_1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
-#define NPC_GROUP_2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
-#define NPC_GROUP_3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
+#define NPC_GROUP(args...) VFUNC(NPC_GROUP, args)
+#define NPC_GROUP1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
+#define NPC_GROUP2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
+#define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
 
 #define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
@@ -95,7 +93,7 @@ typedef struct MobileAISettings {
 
 typedef struct StationaryAISettings {
     /* 0x00 */ f32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ f32 unk_04;
     /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
     /* 0x0C */ f32 chaseSpeed;
     /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing
@@ -360,7 +358,7 @@ typedef struct EncounterStatus {
     /* 0x010 */ char unk_10;
     /* 0x011 */ s8 allowFleeing;
     /* 0x012 */ s8 unk_12;
-    /* 0x013 */ u8 dropWhackaBump;
+    /* 0x013 */ s8 dropWhackaBump;
     /* 0x014 */ s32 songID;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
@@ -567,7 +565,7 @@ void func_8003D788(Npc* npc, s32);
 
 void func_8003DA38(Npc* npc, s32);
 
-s32 func_8003DC38(Npc*, s32);
+void func_8003DC38(Npc* npc, s32);
 
 void func_8003DFA0(Npc* npc, s32);
 

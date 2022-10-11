@@ -393,7 +393,7 @@ EvtScript D_80296014 = {
     EVT_WAIT(8)
     EVT_LABEL(10)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2)
     EVT_RETURN
     EVT_END
 };
@@ -405,11 +405,11 @@ EvtScript D_8029621C = {
         EVT_ADD(LVar5, -5)
         EVT_ADD(LVar6, 18)
         EVT_ADD(LVar7, 5)
-        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
         EVT_WAIT(2)
         EVT_ADD(LVar5, 10)
         EVT_ADD(LVar6, -14)
-        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
@@ -1121,7 +1121,7 @@ EvtScript ForceNextTarget = {
 };
 
 EvtScript D_80298E20 = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2022)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2022)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
     EVT_DIVF(LVar3, EVT_FLOAT(40.0))
@@ -1150,7 +1150,7 @@ EvtScript D_80298E20 = {
         EVT_CASE_OR_EQ(17)
             EVT_WAIT(40)
             EVT_CALL(func_802D7B10, LVarF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2023)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2023)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

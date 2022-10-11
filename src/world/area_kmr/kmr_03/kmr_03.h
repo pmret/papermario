@@ -10,7 +10,7 @@
 #define NAMESPACE kmr_03
 
 ApiStatus N(UnkPositionFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc41)(Evt* script, s32 isInitialCall);
+ApiStatus N(ChangeNpcToPartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80241450);

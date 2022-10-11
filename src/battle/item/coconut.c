@@ -82,7 +82,7 @@ EvtScript N(main) = {
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 18)
     EVT_CALL(GetItemPower, ITEM_COCONUT, LVar3, LVar4)
     EVT_CALL(ApplyShrinkFromOwner, LVar3)
-    EVT_CALL(ItemDamageEnemy, LVar9, 0x18000000, 0, LVar3, 32)
+    EVT_CALL(ItemDamageEnemy, LVar9, 0x18000000, 0, LVar3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_ADD(LVar0, 60)
     EVT_ADD(LVar1, 0)
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 16)

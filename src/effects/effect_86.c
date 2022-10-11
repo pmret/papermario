@@ -1,26 +1,27 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000800[];
-extern Gfx D_09000BA8[];
-extern Gfx D_09000BC8[];
-extern Gfx D_09000BE8[];
-extern Gfx D_09000C08[];
-extern Gfx D_09000C28[];
-extern Gfx D_09000C48[];
-extern Gfx D_09000C68[];
-extern Gfx D_09000C88[];
-extern Gfx D_09000CA8[];
-extern Gfx D_09000CC8[];
-extern Gfx D_09000CE8[];
-extern Gfx D_09000D08[];
+extern Gfx D_09000800_415860[];
+extern Gfx D_09000BA8_415C08[];
+extern Gfx D_09000BC8_415C28[];
+extern Gfx D_09000BE8_415C48[];
+extern Gfx D_09000C08_415C68[];
+extern Gfx D_09000C28_415C88[];
+extern Gfx D_09000C48_415CA8[];
+extern Gfx D_09000C68_415CC8[];
+extern Gfx D_09000C88_415CE8[];
+extern Gfx D_09000CA8_415D08[];
+extern Gfx D_09000CC8_415D28[];
+extern Gfx D_09000CE8_415D48[];
+extern Gfx D_09000D08_415D68[];
 
 Gfx* D_E0128480[12] = {
-    D_09000BA8, D_09000BC8, D_09000BE8, D_09000C08, D_09000C28, D_09000C48, D_09000C68, D_09000C88, D_09000CA8,
-    D_09000CC8, D_09000CE8, D_09000D08
+    D_09000BA8_415C08, D_09000BC8_415C28, D_09000BE8_415C48, D_09000C08_415C68,
+    D_09000C28_415C88, D_09000C48_415CA8, D_09000C68_415CC8, D_09000C88_415CE8,
+    D_09000CA8_415D08, D_09000CC8_415D28, D_09000CE8_415D48, D_09000D08_415D68
 };
 
-Gfx* D_E01284B0[] = { D_09000800 };
+Gfx* D_E01284B0[] = { D_09000800_415860 };
 
 void fx_86_init(EffectInstance* effect);
 void fx_86_update(EffectInstance* effect);

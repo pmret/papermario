@@ -9,7 +9,7 @@
 #define NAMESPACE flo_13
 
 ApiStatus N(func_80240000_CC3810)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc41)(Evt* script, s32 isInitialCall);
+ApiStatus N(ChangeNpcToPartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(LakituAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc42)(Evt* script, s32 isInitialCall);

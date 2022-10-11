@@ -93,7 +93,7 @@ ApiStatus func_802A91B0_4235A0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_46 = rand_int(actionCommandStatus->unk_5A);
     actionCommandStatus->unk_5C = 0;
     actionCommandStatus->state = 10;
-    battleStatus->flags1 &= ~0x8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_8000;
 
     return ApiStatus_DONE2;
 }

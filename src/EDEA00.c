@@ -5,7 +5,7 @@
 
 #define NAMESPACE EDEA00
 
-#include "world/common/UnkFunc41.inc.c"
+#include "world/common/util/ChangeNpcToPartner.inc.c"
 
 // must include this before LakituAI for the debug string to end up in the right position
 #include "world/common/enemy/FlyingAI.inc.c"

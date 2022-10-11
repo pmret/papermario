@@ -341,7 +341,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(func_8027D32C, ACTOR_SELF)
         EVT_THREAD
             EVT_WAIT(20)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E1)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E1)
         EVT_END_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_SkyGuy_Anim2E)
         EVT_CALL(SetAnimation, ACTOR_SELF, 4, ANIM_SkyGuy_Anim2D)
@@ -354,7 +354,7 @@ EvtScript N(80229F08) = {
         EVT_WAIT(15)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_SkyGuy_Anim00)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x263)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_263)
         EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 24, 0, 25, 0, 0, 0, 0, 0)
         EVT_WAIT(25)
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_SkyGuy_Anim06)
@@ -371,7 +371,7 @@ EvtScript N(80229F08) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
         EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
         EVT_CALL(SetPartFlags, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
         EVT_CALL(SetPartFlags, ACTOR_SELF, 1, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
@@ -514,7 +514,7 @@ EvtScript N(takeTurn_8022A9D0) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E7)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_SkyGuy_Anim08)
     EVT_WAIT(12)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -524,7 +524,7 @@ EvtScript N(takeTurn_8022A9D0) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_SkyGuy_Anim0B)
     EVT_WAIT(12)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 6, ACTOR_PART_FLAG_INVISIBLE, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E8)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 6, 2, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
@@ -801,7 +801,7 @@ EvtScript N(8022B7EC) = {
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2EF)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EF)
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
@@ -844,7 +844,7 @@ EvtScript N(8022BF14) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x234)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_234)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim09)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim03)
@@ -954,8 +954,8 @@ EvtScript N(8022BF14) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x349)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x749)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_349)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_749)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim09)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim07)
@@ -968,10 +968,10 @@ EvtScript N(8022BF14) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim10)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LT(LVar0, 50)

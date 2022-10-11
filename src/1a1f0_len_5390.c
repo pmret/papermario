@@ -21,8 +21,6 @@ void spawn_drops(Enemy* enemy);
 
 s32 D_80077C40 = 0;
 
-extern EvtScript D_800936DC;
-
 EvtScript D_80077C44 = {
     EVT_WAIT(10)
     EVT_CALL(FadeBackgroundToBlack)
@@ -31,7 +29,7 @@ EvtScript D_80077C44 = {
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
     EVT_CALL(GetCamLookAtObjVector)
-    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LVar0, LocalVar(1), LocalVar(2))
     EVT_THREAD
         EVT_CALL(MerleeUpdateFX)
     EVT_END_THREAD
@@ -46,14 +44,14 @@ EvtScript D_80077C44 = {
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_2075)
-    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(PlayMerleeGatherFX, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(PlayMerleeOrbFX, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(GetPlayerPos, LVar0, LocalVar(1), LocalVar(2))
+    EVT_CALL(PlayMerleeGatherFX, LVar0, LocalVar(1), LocalVar(2))
+    EVT_CALL(PlayMerleeOrbFX, LVar0, LocalVar(1), LocalVar(2))
     EVT_WAIT(15)
     EVT_CALL(ShowMerleeCoinMessage)
     EVT_WAIT(15)
     EVT_CALL(HasMerleeCasts)
-    EVT_IF_EQ(LocalVar(0), 1)
+    EVT_IF_EQ(LVar0, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(ShowMerleeRanOutMessage)
@@ -63,8 +61,8 @@ EvtScript D_80077C44 = {
 };
 
 EvtScript SCRIPT_NpcDefeat = {
-    EVT_CALL(GetBattleOutcome, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(OnDefeatEnemy)
         EVT_CASE_EQ(1)
@@ -81,7 +79,7 @@ EvtScript D_80077E9C = {
 };
 
 EnemyDrops D_80077EB8 = {
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 10,
     .itemDrops = {
         {
@@ -129,22 +127,22 @@ EnemyDrops D_80077EB8 = {
 };
 
 EvtScript EnemyNpcHit = {
-    EVT_CALL(GetOwnerEncounterTrigger, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
-        EVT_CASE_EQ(1)
-        EVT_CASE_OR_EQ(2)
-        EVT_CASE_OR_EQ(4)
-        EVT_CASE_OR_EQ(6)
-            EVT_CALL(GetSelfAnimationFromTable, 7, LocalVar(0))
-            EVT_EXEC_WAIT(D_800936DC)
-        EVT_CASE_EQ(3)
+    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
+        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
+        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
+        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
+            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_HIT, LVar0)
+            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
+        EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
             EVT_THREAD
-                EVT_CALL(func_800458CC, LocalVar(0))
-                EVT_IF_EQ(LocalVar(0), 0)
-                    EVT_SET(LocalVar(10), 0)
+                EVT_CALL(func_800458CC, LVar0)
+                EVT_IF_EQ(LVar0, 0)
+                    EVT_SET(LVarA, 0)
                     EVT_LOOP(30)
-                        EVT_ADD(LocalVar(10), 40)
-                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LocalVar(10), 0)
+                        EVT_ADD(LVarA, 40)
+                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
                         EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_IF
@@ -157,14 +155,14 @@ EvtScript EnemyNpcHit = {
 
 EvtScript EnemyNpcDefeat = {
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
-        EVT_CASE_EQ(0)
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(2)
-            EVT_CALL(func_80045900, 0)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
+            EVT_CALL(OnPlayerFled, 0)
+        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_10, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN

@@ -769,6 +769,7 @@ ApiStatus GetItemPower(Evt* script, s32 isInitialCall) {
 
 ApiStatus ShowGotItem(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 itemID, category, pickupMsgFlags;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -776,9 +777,10 @@ ApiStatus ShowGotItem(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++),
-                                                                 evt_get_variable(script, *args++),
-                                                                 *args++);
+            itemID = evt_get_variable(script, *args++);
+            category = evt_get_variable(script, *args++);
+            pickupMsgFlags = *args++;
+            script->functionTemp[1] = make_item_entity_at_player(itemID, category, pickupMsgFlags);
             script->functionTemp[0] = 1;
             break;
         case 1:

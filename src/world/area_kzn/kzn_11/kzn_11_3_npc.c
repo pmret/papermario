@@ -38,7 +38,7 @@ EvtScript N(EVS_FireBar_Defeated) = {
         EVT_CALL(RandInt, 30, LVar5)
         EVT_ADD(LVar1, LVar4)
         EVT_ADD(LVar2, LVar5)
-        EVT_CALL(PlayEffect, EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2)
     EVT_END_LOOP
     EVT_IF_EQ(LVarA, NPC_FireBar_1A)
         EVT_IF_EQ(AF_KZN11_FireBar1_Coins, FALSE)
@@ -277,17 +277,7 @@ StaticNpc N(NpcData_Bubble_01) = {
     .pos = { -150.0f, 50.0f, 10.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 3,
-    },
+    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -300,24 +290,7 @@ StaticNpc N(NpcData_Bubble_01) = {
             .detectSize = { 150 },
         }
     },
-    .animations = {
-        .idle   = ANIM_LavaBubble_Anim01,
-        .walk   = ANIM_LavaBubble_Anim02,
-        .run    = ANIM_LavaBubble_Anim03,
-        .chase  = ANIM_LavaBubble_Anim03,
-        .anim_4 = ANIM_LavaBubble_Anim01,
-        .anim_5 = ANIM_LavaBubble_Anim01,
-        .death  = ANIM_LavaBubble_Anim07,
-        .hit    = ANIM_LavaBubble_Anim07,
-        .anim_8 = ANIM_LavaBubble_Anim04,
-        .anim_9 = ANIM_LavaBubble_Anim01,
-        .anim_A = ANIM_LavaBubble_Anim01,
-        .anim_B = ANIM_LavaBubble_Anim01,
-        .anim_C = ANIM_LavaBubble_Anim01,
-        .anim_D = ANIM_LavaBubble_Anim01,
-        .anim_E = ANIM_LavaBubble_Anim01,
-        .anim_F = ANIM_LavaBubble_Anim01,
-    },
+    .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -327,17 +300,7 @@ StaticNpc N(NpcData_Bubble_02) = {
     .pos = { 150.0f, 50.0f, 10.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 3,
-    },
+    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -350,24 +313,7 @@ StaticNpc N(NpcData_Bubble_02) = {
             .detectSize = { 150 },
         }
     },
-    .animations = {
-        .idle   = ANIM_LavaBubble_Anim01,
-        .walk   = ANIM_LavaBubble_Anim02,
-        .run    = ANIM_LavaBubble_Anim03,
-        .chase  = ANIM_LavaBubble_Anim03,
-        .anim_4 = ANIM_LavaBubble_Anim01,
-        .anim_5 = ANIM_LavaBubble_Anim01,
-        .death  = ANIM_LavaBubble_Anim07,
-        .hit    = ANIM_LavaBubble_Anim07,
-        .anim_8 = ANIM_LavaBubble_Anim04,
-        .anim_9 = ANIM_LavaBubble_Anim01,
-        .anim_A = ANIM_LavaBubble_Anim01,
-        .anim_B = ANIM_LavaBubble_Anim01,
-        .anim_C = ANIM_LavaBubble_Anim01,
-        .anim_D = ANIM_LavaBubble_Anim01,
-        .anim_E = ANIM_LavaBubble_Anim01,
-        .anim_F = ANIM_LavaBubble_Anim01,
-    },
+    .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 

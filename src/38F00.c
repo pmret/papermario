@@ -4,13 +4,13 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall);
 ApiStatus func_8005DD54(Evt* script, s32 isInitialCall);
 ApiStatus func_8005DDF0(Evt* script, s32 isInitialCall);
 
-EvtScript D_800936C0 = {
+EvtScript EVS_800936C0 = {
     EVT_CALL(func_8005DB00)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript D_800936DC = {
+EvtScript EVS_NpcHitRecoil = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar0)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar3, LVar2)
     EVT_SET(LVar1, LVar3)

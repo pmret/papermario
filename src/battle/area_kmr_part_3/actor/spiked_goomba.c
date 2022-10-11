@@ -316,7 +316,7 @@ EvtScript N(takeTurn_8021B19C) = {
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikedGoomba_Midair)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, ((0)), 0, 1, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, ((0)), 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -428,7 +428,7 @@ EvtScript N(takeTurn_8021B19C) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_WAIT(1)
     EVT_END_SWITCH
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, ((0)), 0, 0, 2, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, ((0)), 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)

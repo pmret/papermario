@@ -193,10 +193,10 @@ EvtScript N(80241094) = {
         EVT_MULF(LVar6, EVT_FLOAT(1.01))
         EVT_ADDF(LVar7, EVT_FLOAT(0.01))
         EVT_SETF(LVar8, LVar6)
-        EVT_CALL(N(UnkFloatFunc), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 15, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 15, 0, 0)
         EVT_ADDF(LVar8, LVarA)
         EVT_SETF(LVar9, LVar7)
-        EVT_CALL(N(UnkFloatFunc), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 20, 0, 90)
+        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203125), 20, 0, 90)
         EVT_ADDF(LVar9, LVarA)
         EVT_SETF(LVarA, LVar0)
         EVT_MULF(LVarA, EVT_FLOAT(10.0))
@@ -253,8 +253,8 @@ EvtScript N(802413F0) = {
         EVT_SUB(LVar2, 25)
         EVT_CALL(PlayEffect, 0x0, LVar0, LVar1, LVar2, 5, 10, 1, 1, 0, 0, 0, 0, 0, 0)
         EVT_ADD(LVarF, 1)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVarE, EVT_FLOAT(1.0), EVT_FLOAT(1.09375), 2, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), LVarF, LVarD, EVT_FLOAT(1.09375), EVT_FLOAT(1.0), 2, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVarE, EVT_FLOAT(1.0), EVT_FLOAT(1.09375), 2, 0, 0)
+        EVT_CALL(N(CosInterpMinMax), LVarF, LVarD, EVT_FLOAT(1.09375), EVT_FLOAT(1.0), 2, 0, 0)
         EVT_SETF(LVar0, LVarE)
         EVT_SETF(LVar1, LVarD)
         EVT_SETF(LVar2, LVarE)
@@ -1762,13 +1762,13 @@ ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) script->varTable[15];
 
-    effect->data.lightning->unk_30 = 69;
-    effect->data.lightning->unk_34 = 255;
-    effect->data.lightning->unk_38 = 217;
-    effect->data.lightning->unk_40 = 176;
-    effect->data.lightning->unk_44 = 254;
-    effect->data.lightning->unk_48 = 124;
+    effect->data.any[12] = 69;
+    effect->data.any[13] = 255;
+    effect->data.any[14] = 217;
+    effect->data.any[16] = 176;
+    effect->data.any[17] = 254;
+    effect->data.any[18] = 124;
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkFloatFunc.inc.c"
+#include "common/CosInterpMinMax.inc.c"

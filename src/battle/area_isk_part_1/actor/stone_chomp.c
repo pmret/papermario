@@ -261,7 +261,7 @@ ApiStatus b_area_isk_part_1_ChompChainUpdate(Evt* script, s32 isInitialCall) {
 
     three = 3;
 
-    animState = actor->state.unk_6C;
+    animState = actor->state.functionTempPtr[0];
     if (actor->debuff == STATUS_SHRINK) {
         ax = actor->currentPos.x + 6.0;
         ay = actor->currentPos.y + 2.5;
@@ -374,13 +374,13 @@ EvtScript N(8022181C) = {
         EVT_IF_LT(LVar4, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
         EVT_ELSE
             EVT_SET(LVar4, LVar3)
             EVT_ADD(LVar3, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
         EVT_END_IF
     EVT_ELSE
         EVT_SET(LVar4, LVar3)
@@ -388,12 +388,12 @@ EvtScript N(8022181C) = {
         EVT_IF_LT(LVar4, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
         EVT_ELSE
             EVT_SUB(LVar3, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
         EVT_END_IF
     EVT_END_IF
     EVT_GOTO(0)
@@ -609,21 +609,21 @@ EvtScript N(handleEvent_80222364) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
             EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 15, 0, 0)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 0, 0)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_StoneChomp_Anim05)
             EVT_EXEC_WAIT(N(80221794))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_THREAD
                 EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
             EVT_END_THREAD
@@ -736,10 +736,10 @@ EvtScript N(takeTurn_80222ED0) = {
     EVT_ADD(LVar0, 45)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_StoneChomp_Anim05)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x10F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_10F)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -753,7 +753,7 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -762,11 +762,11 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_SUB(LVar0, 25)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_SUB(LVar0, 15)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_StoneChomp_Anim04)
             EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -815,18 +815,18 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_ADD(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_SUB(LVar0, 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_StoneChomp_Anim01)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)

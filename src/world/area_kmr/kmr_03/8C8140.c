@@ -135,7 +135,7 @@ EvtScript N(npcAI_80240B50) = {
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, 0, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A8)
-            EVT_CALL(N(UnkFunc41), 0, 5)
+            EVT_CALL(N(ChangeNpcToPartner), 0, 5)
             EVT_SET(GB_StoryProgress, -121)
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

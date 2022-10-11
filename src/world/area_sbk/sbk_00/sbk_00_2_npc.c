@@ -8,18 +8,7 @@ StaticNpc N(NpcData_Pokey_01) = {
     .pos = { -40.0f, 0.0f, 160.0f },
     .yaw = 90,
     .flags = NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 15,
-        .itemDrops = {
-            { ITEM_DRIED_FRUIT, 9, 0 },
-            { ITEM_TASTY_TONIC, 1, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -32,24 +21,7 @@ StaticNpc N(NpcData_Pokey_01) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Pokey_Anim04,
-        .walk   = ANIM_Pokey_Anim08,
-        .run    = ANIM_Pokey_Anim08,
-        .chase  = ANIM_Pokey_Anim08,
-        .anim_4 = ANIM_Pokey_Anim04,
-        .anim_5 = ANIM_Pokey_Anim04,
-        .death  = ANIM_Pokey_Anim0C,
-        .hit    = ANIM_Pokey_Anim0C,
-        .anim_8 = ANIM_Pokey_Anim08,
-        .anim_9 = ANIM_Pokey_Anim08,
-        .anim_A = ANIM_Pokey_Anim08,
-        .anim_B = ANIM_Pokey_Anim08,
-        .anim_C = ANIM_Pokey_Anim08,
-        .anim_D = ANIM_Pokey_Anim08,
-        .anim_E = ANIM_Pokey_Anim08,
-        .anim_F = ANIM_Pokey_Anim08,
-    },
+    .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -59,18 +31,7 @@ StaticNpc N(NpcData_Pokey_02) = {
     .pos = { 245.0f, 0.0f, 75.0f },
     .yaw = 270,
     .flags = NPC_FLAG_JUMPING,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 15,
-        .itemDrops = {
-            { ITEM_DRIED_FRUIT, 9, 0 },
-            { ITEM_TASTY_TONIC, 1, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -83,24 +44,7 @@ StaticNpc N(NpcData_Pokey_02) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Pokey_Anim04,
-        .walk   = ANIM_Pokey_Anim08,
-        .run    = ANIM_Pokey_Anim08,
-        .chase  = ANIM_Pokey_Anim08,
-        .anim_4 = ANIM_Pokey_Anim04,
-        .anim_5 = ANIM_Pokey_Anim04,
-        .death  = ANIM_Pokey_Anim0C,
-        .hit    = ANIM_Pokey_Anim0C,
-        .anim_8 = ANIM_Pokey_Anim08,
-        .anim_9 = ANIM_Pokey_Anim08,
-        .anim_A = ANIM_Pokey_Anim08,
-        .anim_B = ANIM_Pokey_Anim08,
-        .anim_C = ANIM_Pokey_Anim08,
-        .anim_D = ANIM_Pokey_Anim08,
-        .anim_E = ANIM_Pokey_Anim08,
-        .anim_F = ANIM_Pokey_Anim08,
-    },
+    .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 

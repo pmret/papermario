@@ -173,6 +173,25 @@ typedef struct NpcQuizmoBlur {
     /* 0x04 */ char unk_04[0x4];
 } NpcQuizmoBlur; // size = 0x8;
 
+typedef struct Unk2A4Part {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ char unk_01[0x3];
+    /* 0x04 */ Vec3f pos;
+} Unk2A4Part; // size = 0x10
+
+typedef struct Unk2A4Blur {
+    /* 0x000 */ Unk2A4Part unk_00[40];
+    /* 0x280 */ s32 partIdx;
+    /* 0x284 */ s32 unk_284;
+    /* 0x288 */ s32 unk_288;
+    /* 0x28C */ s32 npcID;
+    /* 0x290 */ s32* animIDs;
+    /* 0x294 */ f32 unk_294;
+    /* 0x298 */ f32 unk_298;
+    /* 0x29C */ f32 unk_29C;
+    /* 0x2A0 */ f32 unk_2A0;
+} Unk2A4Blur; // size = 0x2A4
+
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -187,6 +206,7 @@ typedef struct Npc {
                 NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
+                Unk2A4Blur*    unk2A4;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
@@ -238,10 +258,10 @@ typedef struct Npc {
     /* 0x0C2 */ char unk_C2[2];
     /* 0x0C4 */ PAL_PTR* spritePaletteList;
     /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
-    /* 0x2C8 */ PAL_PTR* localPalettes[16];
+    /* 0x2C8 */ PAL_PTR localPalettes[16];
     /* 0x308 */ s16 unk_308;
     /* 0x30A */ s16 unk_30A;
-    /* 0x30C */ s16 unk_30C;
+    /* 0x30C */ u16 unk_30C;
     /* 0x30E */ s16 unk_30E;
     /* 0x310 */ s16 unk_310;
     /* 0x312 */ s16 unk_312;
@@ -910,7 +930,9 @@ typedef struct BattleStatus {
     /* 0x1A6 */ s8 currentTargetPart2;
     /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
-    /* 0x1AA */ char unk_1AA[4];
+    /* 0x1AA */ s16 unk_1AA;
+    /* 0x1AC */ s8 unk_1AC;
+    /* 0x1AD */ char unk_1AD;
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
     /* 0x1F6 */ s8 submenuStatus[24]; ///< @see enum BattleSubmenuStatus
@@ -1380,7 +1402,7 @@ typedef struct GameStatus {
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ s8 creditsViewportMode;
-    /* 0x0A9 */ s8 unk_A9;
+    /* 0x0A9 */ s8 unk_A9; // selected language?
     /* 0x0AA */ s8 demoFlags;
     /* 0x0AB */ u8 soundOutputMode;
     /* 0x0AC */ s8 introState;
@@ -1409,10 +1431,10 @@ typedef struct GameStatus {
     /* 0x14E */ s16 backgroundMaxX;
     /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
-    /* 0x154 */ UNK_PTR backgroundRaster;
-    /* 0x158 */ u16* backgroundPalette;
-    /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ u16 unk_15E;
+    /* 0x154 */ IMG_PTR backgroundRaster;
+    /* 0x158 */ PAL_PTR backgroundPalette;
+    /* 0x15C */ s16 backgroundDarkness; // 255 = fully black
+    /* 0x15E */ s16 savedBackgroundDarkness; // used during pause/unpause
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
@@ -1772,8 +1794,11 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x66 */ s16 moveArcAmplitude;
     /* 0x68 */ char unk_68[3];
     /* 0x6B */ u8 jumpPartIndex;
-    /* 0x6C */ ChompChainAnimationState* unk_6C;
-    /* 0x70 */ char unk_70[12];
+    /* 0x6C */ union {
+    /*      */     s32 functionTemp[4];
+    /*      */     f32 functionTempF[4];
+    /*      */     void* functionTempPtr[4];
+    /*      */ };
     /* 0x7C */ union {
     /*      */     s32 varTable[16];
     /*      */     f32 varTableF[16];

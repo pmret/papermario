@@ -1159,9 +1159,9 @@ EvtScript N(attack) = {
     EVT_SET(LVarD, LVarE)
     EVT_LOOP(LVarD)
         EVT_IF_GT(LVarE, 1)
-            EVT_SET(LVar0, 64)
+            EVT_SET(LVar0, BS_FLAGS1_40)
         EVT_ELSE
-            EVT_SET(LVar0, 32)
+            EVT_SET(LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_END_IF
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 1, LVar0)

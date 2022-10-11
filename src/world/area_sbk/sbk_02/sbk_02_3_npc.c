@@ -25,7 +25,7 @@ API_CALLABLE(func_8024091C_92ABCC) {
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_8024091C_92ABCC);
 #endif
 
-static s32 D_80245630[91];
+static s32 sbk_02_D_80245630[91];
 extern s32 D_8024404C_92E2FC;
 extern s32 D_80244050_92E300;
 
@@ -41,16 +41,16 @@ API_CALLABLE(func_802409A8_92AC58) {
     Bytecode* args = script->ptrReadPos;
     s32* buf = (s32*) evt_get_variable(script, *args++);
     s32 i;
-    
+
     if (buf != NULL) {
         for (i = 0; *buf != NULL; i++) {
-            D_80245630[i] = *buf++;
+            sbk_02_D_80245630[i] = *buf++;
         }
-        D_80245630[i] = 0;
+        sbk_02_D_80245630[i] = 0;
     } else {
         for (i = 0; i <= 90; i++) {
-            D_80245630[i] = i + 0x80;
-            D_80245630[91] = 0;
+            sbk_02_D_80245630[i] = i + 0x80;
+            sbk_02_D_80245630[91] = 0;
         }
     }
     return ApiStatus_DONE2;
@@ -226,16 +226,16 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_ADD(LVar2, 10)
     EVT_ADD(LVar3, 30)
     EVT_LOOP(5)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
         EVT_WAIT(6)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
         EVT_WAIT(6)
     EVT_END_LOOP
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtPlayer, SOUND_188, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
@@ -266,7 +266,7 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-            EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -336,7 +336,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_WAIT(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-        EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_SET(GF_TradingEvent2_Active, FALSE)
         EVT_RETURN
@@ -365,7 +365,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
             EVT_WAIT(10)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, 0)
-            EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_SET(GF_TradingEvent2_Active, FALSE)
             EVT_ADD(GB_TradingEvent_Count, 1)

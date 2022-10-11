@@ -374,6 +374,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
+s32 func_80265D44(s32 animID);
 void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
@@ -667,7 +668,7 @@ s32 find_item(s32);
 
 void enable_background_wave(void);
 
-void func_80035DF0(s16);
+void set_map_change_fade_rate(s16);
 
 // State funcs
 void state_init_startup(void);
@@ -989,7 +990,7 @@ void set_max_SP(s8);
 void sync_status_menu(void);
 void create_cameras_a(void);
 void func_80045AC0(void);
-void func_8005DECC(Npc*, s32, void* arg2, f32, f32, s32, s32);
+void func_8005DECC(Npc*, s32, s32*, f32, f32, s32, s32);
 void func_8005DFD4(Npc*);
 void func_8005E12C(Npc*);
 void create_encounters(void);

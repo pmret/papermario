@@ -133,7 +133,7 @@ static s32 N(pad_868)[] = {
 
 #define CHEST_ITEM  19
 #define CHEST_FLAG  1057
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/atomic/Chest.old.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)

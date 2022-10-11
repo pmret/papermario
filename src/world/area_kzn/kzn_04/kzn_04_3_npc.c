@@ -37,7 +37,7 @@ EvtScript N(EVS_FireBar_Defeated) = {
         EVT_CALL(RandInt, 30, LVar5)
         EVT_ADD(LVar1, LVar4)
         EVT_ADD(LVar2, LVar5)
-        EVT_CALL(PlayEffect, EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2)
     EVT_END_LOOP
     EVT_IF_EQ(LVarA, NPC_FireBar_1A)
         EVT_IF_EQ(AF_KZN04_FireBar1_Coins, FALSE)

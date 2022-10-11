@@ -142,7 +142,7 @@ EvtScript N(init_80223DA0) = {
     EVT_END
 };
 
-ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
+ApiStatus N(func_80218680_4FF0D0)(Evt* script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
@@ -174,7 +174,7 @@ EvtScript N(idle_80223E98) = {
                 EVT_ADD(LVar2, 6)
                 EVT_SETF(LVar4, EVT_FLOAT(0.4))
             EVT_END_IF
-            EVT_CALL(func_80218680_4FF0D0, LVar0, LVar1, LVar2, LVar3, LVar4)
+            EVT_CALL(N(func_80218680_4FF0D0), LVar0, LVar1, LVar2, LVar3, LVar4)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT(1)
@@ -279,7 +279,7 @@ EvtScript N(80224414) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 25)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_20000 | BS_FLAGS1_40000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
     EVT_CALL(func_8026F60C, 20)
     EVT_RETURN
     EVT_END
@@ -502,7 +502,7 @@ EvtScript N(80225258) = {
     EVT_END_IF
     EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 1, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F7)
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)

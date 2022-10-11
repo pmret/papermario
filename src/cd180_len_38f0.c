@@ -615,7 +615,7 @@ s32 update_exit_map_screen_overlay(s16* progress) {
     return 0;
 }
 
-u8 update_enter_map_screen_overlay(s16* progress) {
+s16 update_enter_map_screen_overlay(s16* progress) {
     u8 frontType = 0;
     s32 amt = 20;
     u8 ret = FALSE;

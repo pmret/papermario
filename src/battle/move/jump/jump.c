@@ -422,10 +422,10 @@ EvtScript D_802A2720_73EF80 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -454,7 +454,7 @@ EvtScript D_802A2720_73EF80 = {
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -473,10 +473,10 @@ EvtScript D_802A2ABC_73F31C = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -509,7 +509,7 @@ EvtScript D_802A2ABC_73F31C = {
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -528,10 +528,10 @@ EvtScript D_802A2DE8_73F648 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -562,7 +562,7 @@ EvtScript D_802A2DE8_73F648 = {
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -625,7 +625,7 @@ EvtScript D_802A3188_73F9E8 = {
     EVT_CALL(func_80274A18, LVarA, 0)
     EVT_CALL(N(GetJumpDamage))
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, LVarF, 48)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
     EVT_END
@@ -648,7 +648,7 @@ EvtScript D_802A3378_73FBD8 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_34)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 4, 48)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
     EVT_END
@@ -669,7 +669,7 @@ EvtScript D_802A34EC_73FD4C = {
     EVT_SET(LVarA, 4)
     EVT_CALL(func_80275F00, LVarA, 1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 6, 48)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
     EVT_END
@@ -702,10 +702,10 @@ EvtScript D_802A36D8_73FF38 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -734,7 +734,7 @@ EvtScript D_802A36D8_73FF38 = {
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -753,10 +753,10 @@ EvtScript D_802A39C4_740224 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -789,7 +789,7 @@ EvtScript D_802A39C4_740224 = {
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 347, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 2, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -810,10 +810,10 @@ EvtScript D_802A3CF0_740550 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -844,7 +844,7 @@ EvtScript D_802A3CF0_740550 = {
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 348, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 3, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN
@@ -886,10 +886,10 @@ EvtScript D_802A4018_740878 = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -918,7 +918,7 @@ EvtScript D_802A4018_740878 = {
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, 128, 0, 0, 1, BS_FLAGS1_80 | BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
     EVT_RETURN

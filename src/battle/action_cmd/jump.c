@@ -67,8 +67,8 @@ ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall) {
 
         hudElement = actionCommandStatus->hudElements[0];
         actionCommandStatus->hudElementX = 50;
-        battleStatus->flags1 &= ~0x8000;
-        battleStatus->flags1 &= ~0x2000;
+        battleStatus->flags1 &= ~BS_FLAGS1_8000;
+        battleStatus->flags1 &= ~BS_FLAGS1_2000;
         hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
         if (actionCommandStatus->unk_61 != 0) {
             hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
@@ -163,7 +163,7 @@ void N(update)(void) {
                     (actionCommandStatus->autoSucceed != 0)) {
                     battleStatus->actionSuccess = 1;
                     battleStatus->unk_86 = 1;
-                    gBattleStatus.flags1 |= 0x2000;
+                    gBattleStatus.flags1 |= BS_FLAGS1_2000;
                 }
             }
 

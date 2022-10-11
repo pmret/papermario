@@ -57,7 +57,7 @@ ActorPartBlueprint N(partsTable_80219E24)[] = {
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .unk_1C = 1,
-        .unk_1D = 263,
+        .unk_1D = 7,
     },
 };
 
@@ -595,7 +595,7 @@ EvtScript N(takeTurn_8021B81C) = {
         EVT_CALL(MoveBattleCamOver, 10)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_END_IF
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 3, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 3, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -655,7 +655,7 @@ EvtScript N(takeTurn_8021B81C) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
@@ -736,12 +736,12 @@ EvtScript N(takeTurn_Chan) = {
         EVT_WAIT(5)
         EVT_CALL(PlayEffect, 0x1D, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Chan_ShellSpin)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, -127, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20D3)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, 16)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -790,7 +790,7 @@ EvtScript N(takeTurn_Chan) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(14.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 2, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
@@ -833,7 +833,7 @@ EvtScript N(init_8021CCDC) = {
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
-    EVT_CALL(SetBattleFlagBits, 8388608, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -900,7 +900,7 @@ EvtScript N(handleEvent_8021D0CC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(13)
             EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 0x20)
+            EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)

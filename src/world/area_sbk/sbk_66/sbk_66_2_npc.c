@@ -8,17 +8,7 @@ StaticNpc N(NpcData_Bandit_01) = {
     .pos = { -120.0f, 0.0f, 45.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -31,24 +21,7 @@ StaticNpc N(NpcData_Bandit_01) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -58,17 +31,7 @@ StaticNpc N(NpcData_Bandit_02) = {
     .pos = { -76.0f, 0.0f, -20.0f },
     .yaw = 90,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -81,24 +44,7 @@ StaticNpc N(NpcData_Bandit_02) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -108,17 +54,7 @@ StaticNpc N(NpcData_Bandit_03) = {
     .pos = { -78.0f, 0.0f, 80.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -131,24 +67,7 @@ StaticNpc N(NpcData_Bandit_03) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -158,17 +77,7 @@ StaticNpc N(NpcData_Bandit_04) = {
     .pos = { -20.0f, 0.0f, 40.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -181,24 +90,7 @@ StaticNpc N(NpcData_Bandit_04) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -208,17 +100,7 @@ StaticNpc N(NpcData_Bandit_05) = {
     .pos = { 45.0f, 0.0f, -30.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -231,24 +113,7 @@ StaticNpc N(NpcData_Bandit_05) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
@@ -258,17 +123,7 @@ StaticNpc N(NpcData_Bandit_06) = {
     .pos = { 40.0f, 0.0f, 150.0f },
     .yaw = 270,
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_HONEY_SYRUP, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 3,
-    },
+    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -281,24 +136,7 @@ StaticNpc N(NpcData_Bandit_06) = {
             .detectSize = { 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Bandit_Anim01,
-        .walk   = ANIM_Bandit_Anim05,
-        .run    = ANIM_Bandit_Anim07,
-        .chase  = ANIM_Bandit_Anim07,
-        .anim_4 = ANIM_Bandit_Anim01,
-        .anim_5 = ANIM_Bandit_Anim01,
-        .death  = ANIM_Bandit_Anim09,
-        .hit    = ANIM_Bandit_Anim09,
-        .anim_8 = ANIM_Bandit_Anim00,
-        .anim_9 = ANIM_Bandit_Anim00,
-        .anim_A = ANIM_Bandit_Anim00,
-        .anim_B = ANIM_Bandit_Anim00,
-        .anim_C = ANIM_Bandit_Anim00,
-        .anim_D = ANIM_Bandit_Anim00,
-        .anim_E = ANIM_Bandit_Anim00,
-        .anim_F = ANIM_Bandit_Anim00,
-    },
+    .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 

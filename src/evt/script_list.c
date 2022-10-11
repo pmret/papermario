@@ -39,8 +39,8 @@ BSS s32 wExtraPartnerNpcID;
 BSS s32 D_802DAE4C[2]; // unused?
 
 // msg_api
-BSS s32 D_802DAE50;
-BSS s32 D_802DAE54;
+BSS s32 ShowMessageScreenOffsetX;
+BSS s32 ShowMessageScreenOffsetY;
 BSS s32 D_802DAE58[2]; // unused?
 BSS char D_802DAE60[0x400]; // unused?
 BSS MessagePrintState* gCurrentPrintContext;
