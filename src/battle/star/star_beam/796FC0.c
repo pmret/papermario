@@ -1,33 +1,14 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "effects.h"
 
 #define NAMESPACE battle_star_star_beam
 
 #include "common/StarPower.inc.c"
 
 ApiStatus func_802A1518_7974D8(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/star/star_beam/796FC0", func_802A1518_7974D8);
-
-ApiStatus func_802A2468_798428(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = D_802A3838;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A247C_79843C(Evt* script, s32 isInitialCall) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 230;
-    }
-
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
-
-    script->functionTemp[0] -= 5;
-    if (script->functionTemp[0] <= 200) {
-        set_background_color_blend(0, 0, 0, 200);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+ApiStatus func_802A2468_798428(Evt* script, s32 isInitialCall);
+ApiStatus func_802A247C_79843C(Evt* script, s32 isInitialCall);
 
 EvtScript N(802A24F0) = {
     EVT_CALL(GetOwnerID, LVarA)
@@ -283,19 +264,18 @@ EvtScript N(802A33A8) = {
     EVT_END
 };
 
-// TODO: type this data used by func_802A1518_7974D8
-s32 D_802A3514_7994D4[] = {
-    0x00000023, 0x00000000, 0x00000005, 0x0000000A, 0x0000000F, 0x00000014, 0x00000019, 0x0000001E,
-};
+s32 D_802A3514_7994D4[] = { 35, 0, 5, 10, 15, 20, 25, 30 };
+s32 D_802A3534_7994F4[] = { 35, 0, 5, 10, 15, 20, 25, 30 };
 
-s32 D_802A3534_7994F4[] = {
-    0x00000023, 0x00000000, 0x00000005, 0x0000000A, 0x0000000F, 0x00000014, 0x00000019, 0x0000001E,
-};
-
-s32 D_802A3554_799514[] = {
-    0x42B20000, 0x43340000, 0x00000000, 0xC2100000, 0x43340000, 0x00000000, 0x434C0000, 0x43340000,
-    0x00000000, 0x41F00000, 0x42C20000, 0x43EE8000, 0x43660000, 0x42A20000, 0x00000000, 0x43010000,
-    0x43340000, 0x00000000, 0xC2700000, 0x43340000, 0x00000000, 0xC36A0000, 0x421C0000, 0x00000000,
+Vec3f D_802A3554_799514[] = {
+    { 89.0f, 180.0f, 0.0f },
+    { -36.0f, 180.0f, 0.0f },
+    { 204.0f, 180.0f, 0.0f },
+    { 30.0f, 97.0f, 477.0f },
+    { 230.0f, 81.0f, 0.0f },
+    { 129.0f, 180.0f, 0.0f },
+    { -60.0f, 180.0f, 0.0f },
+    { -234.0f, 39.0f, 0.0f },
 };
 
 EvtScript N(usePower) = {
@@ -337,3 +317,492 @@ EvtScript N(usePower) = {
     EVT_RETURN
     EVT_END
 };
+
+BSS EffectInstance* D_802A37F0;
+BSS char D_802A37F4[4];
+BSS s32 D_802A37F8[8];
+BSS s32 D_802A3818[8];
+BSS s32 D_802A3834[8];
+
+// flots
+#ifdef NON_MATCHING
+ApiStatus func_802A1518_7974D8(Evt* script, s32 isInitialCall) {
+    PeachStarBeamFXData* sp28;
+    PeachStarBeamInner* part;
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = gBattleStatus.playerActor;
+    ActorState* playerState = &player->state;
+    s32 i;
+
+    f32 playerX, playerY, playerZ;
+    f32 playerGoalX, playerGoalY, playerGoalZ;
+    f32 goalX, goalY, goalZ;
+    f32 tx, ty, tz;
+    s32 cond;
+    Actor* target;
+    Evt* script;
+    f32 dist;
+    f32 dist2;
+
+    f32 temp_f20;
+    f32 temp_f22;
+    f32 temp_f30;
+    s32 var_a0;
+
+    if (isInitialCall) {
+        D_802A3838 = 0;
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[0] = 0;
+    }
+
+    if (player->targetListLength == 1) {
+        target = get_actor(player->targetActorID);
+        if (target == NULL) {
+            return ApiStatus_DONE2;
+        }
+
+        get_actor_part(target, player->targetPartIndex);
+        goalX = target->currentPos.x + target->headOffset.x;
+        if (target->flags & 0x800) {
+            goalY = (target->currentPos.y + target->headOffset.y) - target->size.y;
+        } else if (!(target->flags & 0x8000)) {
+            goalY = target->size.y + (target->currentPos.y + target->headOffset.y);
+        } else {
+            goalY = target->currentPos.y + target->headOffset.y + (target->size.y * 2);
+        }
+        goalZ = target->currentPos.z + target->headOffset.z;
+    } else {
+        goalX = 64.0f;
+        goalY = 80.0f;
+        goalZ = 0.0f;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            sp28 = D_802A37F0->data.peachStarBeam;
+
+            for (i = 0; i < ARRAY_COUNT(sp28->parts); i++) {
+                if (script->functionTemp[2] != 0 || i != 0) {
+                    part = &sp28->parts[i];
+
+                    if (D_802A37F8[i] != 0) {
+                        D_802A37F8[i]--;
+                    } else {
+                        D_802A37F8[i] = 20;
+
+                        if (D_802A3514_7994D4[i] <= 0) {
+                                fx_misc_particles(4, part->unk_10.x, part->unk_10.y, part->unk_10.z, 20.0f, 20.0f, 1.0f, 10, 20);
+                            } else {
+                                fx_misc_particles(4, part->unk_04.x, part->unk_04.y, part->unk_04.z, 20.0f, 20.0f, 1.0f, 10, 20);
+                        }
+                    }
+                }
+            }
+            break;
+        case 10:
+            sp28 = D_802A37F0->data.peachStarBeam;
+
+            for (i = 0; i < ARRAY_COUNT(sp28->parts); i++) {
+                if (script->functionTemp[2] != 0 || i != 0) {
+                    part = &sp28->parts[i];
+
+                    if (D_802A37F8[i] != 0) {
+                        D_802A37F8[i]--;
+                    } else {
+                        D_802A37F8[i] = 20;
+
+                        if (D_802A3534_7994F4[i] <= 0) {
+                            fx_misc_particles(4, part->unk_10.x, part->unk_10.y, part->unk_10.z, 20.0f, 20.0f, 1.0f, 10, 20);
+                        } else {
+                            fx_misc_particles(4, part->unk_04.x, part->unk_04.y, part->unk_04.z, 20.0f, 20.0f, 1.0f, 10, 20);
+                        }
+
+                    }
+                }
+            }
+            break;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            temp_f20 = player->currentPos.x;
+            temp_f30 = player->currentPos.z;
+            playerState->currentPos.x = temp_f20;
+            temp_f22 = player->currentPos.y + player->size.y + 30.0f;
+            playerState->currentPos.z = temp_f30;
+            playerState->goalPos.x = temp_f20;
+            playerState->goalPos.z = temp_f30;
+            playerState->goalPos.y = temp_f22;
+            playerState->currentPos.y = playerState->goalPos.y + 150.0f;
+
+            if (script->functionTemp[2] == 0) {
+                D_802A37F0 = fx_peach_star_beam(0, temp_f20, temp_f22, temp_f30, 1.0f, 0);
+            } else {
+                D_802A37F0 = fx_peach_star_beam(1, temp_f20, temp_f22, temp_f30, 1.0f, 0);
+            }
+
+            playerState->distance = 48.0f;
+            D_802A37F0->data.peachStarBeam->unk_3C = 0;
+            D_802A37F0->data.peachStarBeam->unk_48 = playerState->distance;
+            D_802A37F0->data.peachStarBeam->alpha = 0;
+            D_802A37F0->data.peachStarBeam->unk_58 = 30.0f;
+            D_802A37F0->data.peachStarBeam->unk_40 = 5.0f;
+
+            for (i = 0; i < ARRAY_COUNT(D_802A37F8); i++) {
+                D_802A37F8[i] = rand_int(20);
+            }
+
+            script->functionTemp[1] = 40;
+            if (script->functionTemp[2] == 0) {
+                sfx_play_sound(0x80000068);
+            } else {
+                sfx_play_sound(0x80000069);
+            }
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            playerState->currentPos.y += (playerState->goalPos.y - playerState->currentPos.y) / 10.0f;
+            D_802A37F0->data.peachStarBeam->unk_4C = playerState->currentPos.x;
+            D_802A37F0->data.peachStarBeam->unk_50 = playerState->currentPos.y;
+            D_802A37F0->data.peachStarBeam->unk_54 = playerState->currentPos.z;
+            D_802A37F0->data.peachStarBeam->unk_3C = 0;
+            D_802A37F0->data.peachStarBeam->unk_48 = playerState->distance;
+            D_802A37F0->data.peachStarBeam->alpha = 0;
+            if (script->functionTemp[1] == 0) {
+                script->functionTemp[1] = 20;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[1] == 0) {
+                btl_cam_use_preset(2);
+                btl_cam_move(10);
+                script->functionTemp[1] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 3:
+            playerState->distance += (24.0f - playerState->distance) * 0.125f;
+            D_802A37F0->data.peachStarBeam->unk_48 = playerState->distance;
+            if (script->functionTemp[1] == 0) {
+                playerState->goalPos.x = goalX;
+                playerState->goalPos.y = goalY;
+                playerState->goalPos.z = goalZ;
+
+                for (i = 0; i < ARRAY_COUNT(D_802A3834); i++) {
+                    D_802A3834[i] = 30;
+                }
+
+                if (script->functionTemp[2] == 0) {
+                    sfx_play_sound(0x648);
+                } else {
+                    sfx_play_sound(0x649);
+                }
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 4:
+            cond = FALSE;
+            playerState->distance += (48.0f - playerState->distance) * 0.25f;
+            D_802A37F0->data.peachStarBeam->unk_48 = playerState->distance;
+
+            for (i = 0; i < 2; i++) {
+                if (i != 0) {
+                    if (D_802A3514_7994D4[i] < 0) {
+                        playerState->currentPos.x += playerState->goalPos.x - playerState->currentPos.x;
+                        playerState->currentPos.y += playerState->goalPos.y - playerState->currentPos.y;
+                        playerState->currentPos.z += playerState->goalPos.z - playerState->currentPos.z;
+                    } else {
+                        cond = TRUE;
+                        if (D_802A3514_7994D4[i] != 0) {
+                            D_802A3514_7994D4[i]--;
+                        } else {
+                            playerX = playerState->currentPos.x;
+                            playerY = playerState->currentPos.y;
+                            playerZ = playerState->currentPos.z;
+                            playerGoalX = playerState->goalPos.x;
+                            playerGoalY = playerState->goalPos.y;
+                            playerGoalZ = playerState->goalPos.z;
+                            dist = dist2D(playerX, playerZ, playerGoalX, playerGoalZ);
+                            playerState->currentPos.x += (playerGoalX - playerX) / D_802A3818[i];
+                            playerState->currentPos.y += (playerGoalY - playerY) / D_802A3818[i];
+                            playerState->currentPos.z += (playerGoalZ - playerZ) / D_802A3818[i];
+                            if (D_802A3818[i] == 1) {
+                                D_802A3514_7994D4[i] = -1;
+                                playerState->currentPos.x = playerGoalX;
+                                playerState->currentPos.y = playerGoalY;
+                                playerState->currentPos.z = playerGoalZ;
+                            } else {
+                                playerState->currentPos.y += dist / 60.0f;
+                            }
+                            D_802A3818[i]--;
+                        }
+                    }
+                }
+            }
+
+            D_802A37F0->data.peachStarBeam->unk_4C = playerState->currentPos.x;
+            D_802A37F0->data.peachStarBeam->unk_50 = playerState->currentPos.y;
+            D_802A37F0->data.peachStarBeam->unk_54 = playerState->currentPos.z;
+            D_802A37F0->data.peachStarBeam->pos.x = playerState->currentPos.x;
+            D_802A37F0->data.peachStarBeam->pos.y = 0.0f;
+            D_802A37F0->data.peachStarBeam->pos.z = playerState->currentPos.z;
+
+            if (!cond) {
+                playerState->currentPos.x = playerState->goalPos.x;
+                playerState->currentPos.y = playerState->goalPos.y;
+                playerState->currentPos.z = playerState->goalPos.z;
+                D_802A37F0->data.peachStarBeam->unk_4C = playerState->currentPos.x;
+                D_802A37F0->data.peachStarBeam->unk_50 = playerState->currentPos.y;
+                D_802A37F0->data.peachStarBeam->unk_54 = playerState->currentPos.z;
+                D_802A37F0->data.peachStarBeam->pos.x = playerState->currentPos.x;
+                D_802A37F0->data.peachStarBeam->pos.y = 0.0f;
+                D_802A37F0->data.peachStarBeam->pos.z = playerState->currentPos.z;
+
+                sp28 = D_802A37F0->data.peachStarBeam;
+                for (i = 0; i < ARRAY_COUNT(sp28->parts); i++) {
+                    if ((script->functionTemp[2] != 0) || (i != 0)) {
+                        part = &sp28->parts[i];
+                        D_802A3514_7994D4[i] = 1;
+                        part->flags &= ~2;
+                    }
+                }
+                btl_cam_use_preset(3);
+                btl_cam_move(30);
+                script->functionTemp[1] = 15;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[1] == 0) {
+                playerState->moveTime = 0;
+                D_802A37F0->data.peachStarBeam->unk_3C = 0;
+                D_802A37F0->data.peachStarBeam->alpha = 0;
+                if (script->functionTemp[2] != 0) {
+                    D_802A37F0->data.peachStarBeam->primR = 240;
+                    D_802A37F0->data.peachStarBeam->primG = 80;
+                    D_802A37F0->data.peachStarBeam->primB = 200;
+                    D_802A37F0->data.peachStarBeam->envR = 240;
+                    D_802A37F0->data.peachStarBeam->envG = 240;
+                    D_802A37F0->data.peachStarBeam->envB = 240;
+                }
+                script = start_script(battle_star_star_beam_802A33A8, 0xA, 0);
+                script->varTable[0] = playerState->currentPos.x;
+                script->varTable[1] = playerState->currentPos.y * 0.5f;
+                script->varTable[2] = playerState->currentPos.z;
+                script->varTable[10] = script->functionTemp[2];
+                sfx_play_sound(0x24A);
+                script->functionTemp[1] = 45;
+                script->functionTemp[0] = 6;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 6:
+            playerState->moveTime += 30;
+            if (playerState->moveTime > 255) {
+                playerState->moveTime = 255;
+            }
+            D_802A37F0->data.peachStarBeam->unk_3C = playerState->moveTime;
+            D_802A37F0->data.peachStarBeam->alpha = playerState->moveTime;
+            if (script->functionTemp[1] == 0) {
+                D_802A3838 = 1;
+                if (script->functionTemp[2] == 0 && player->targetListLength == 1) {
+                    if (get_actor_part(get_actor(player->targetActorID), player->targetPartIndex)->eventFlags & 0x80000) {
+                        script->functionTemp[0] = 20;
+                    } else {
+                        script->functionTemp[1] = 15;
+                        script->functionTemp[0] = 7;
+                    }
+                } else {
+                    script->functionTemp[1] = 15;
+                    script->functionTemp[0] = 7;
+                }
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 7:
+            if (script->functionTemp[1] == 0) {
+                script->functionTemp[1] = 10;
+                script->functionTemp[0] = 8;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 8:
+            playerState->moveTime -= 30;
+            if (playerState->moveTime < 0) {
+                playerState->moveTime = 0;
+            }
+            D_802A37F0->data.peachStarBeam->unk_3C = playerState->moveTime;
+            D_802A37F0->data.peachStarBeam->alpha = playerState->moveTime;
+            if (script->functionTemp[1] == 0) {
+                script->functionTemp[1] = 10;
+                script->functionTemp[0] = 9;
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 9:
+            if (script->functionTemp[1] != 0) {
+                script->functionTemp[1]--;
+                break;
+            }
+            playerState->goalPos.x = goalX;
+            playerState->goalPos.y = goalY + 170.0f;
+            playerState->goalPos.z = goalZ;
+            script->functionTemp[1] = 20;
+            script->functionTemp[0] = 10;
+            break;
+        case 10:
+            if (script->functionTemp[1] != 0) {
+                script->functionTemp[1]--;
+                if (script->functionTemp[1] == 0) {
+                    if (script->functionTemp[2] == 0) {
+                        func_80149A6C(0x248, 1);
+                        sfx_play_sound(0x648);
+                    } else {
+                        func_80149A6C(0x249, 1);
+                        sfx_play_sound(0x649);
+                    }
+                }
+            }
+
+            cond = FALSE;
+            for (i = 0; i < ARRAY_COUNT(sp28->parts); i++) {
+                if (script->functionTemp[2] != 0 || i != 0) {
+                    part = &sp28->parts[i];
+
+                    if (D_802A3534_7994F4[i] >= 0) {
+                        cond = TRUE;
+                        if (D_802A3534_7994F4[i] != 0) {
+                            D_802A3534_7994F4[i]--;
+                        } else {
+                            part->flags |= 2;
+                            part->unk_10.y += (playerState->goalPos.y - part->unk_10.y) / 10.0f;
+                            if (fabsf(part->unk_10.y - playerState->goalPos.y) < 1.0) {
+                                D_802A3534_7994F4[i] = -1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!cond) {
+                D_802A3838 = 2;
+                D_802A37F0->flags |= 0x10;
+                return ApiStatus_DONE2;
+            }
+            break;
+        case 20:
+            D_802A37F0->data.peachStarBeam->unk_3C = 0;
+            D_802A37F0->data.peachStarBeam->alpha = 0;
+
+            for (i = 0; i < ARRAY_COUNT(D_802A3834); i++) {
+                D_802A3834[i] = 15;
+            }
+
+            if (script->functionTemp[2] == 0) {
+                func_80149A6C(0x248, 0);
+            } else {
+                func_80149A6C(0x249, 0);
+            }
+            script->functionTemp[0] = 0x15;
+            break;
+        case 21:
+            cond = FALSE;
+            sp28 = D_802A37F0->data.peachStarBeam;
+
+            for (i = 0; i < ARRAY_COUNT(sp28->parts); i++) {
+                if ((script->functionTemp[2] != 0) || (i != 0)) {
+                    part = &sp28->parts[i];
+
+                    if (D_802A3514_7994D4[i] < 0) {
+                        part->unk_10.x += D_802A3554_799514[i].x - part->unk_10.x;
+                        part->unk_10.y += D_802A3554_799514[i].y - part->unk_10.y;
+                        part->unk_10.z += D_802A3554_799514[i].z - part->unk_10.z;
+                    } else {
+                        cond = TRUE;
+                        if (D_802A3514_7994D4[i] != 0) {
+                            D_802A3514_7994D4[i]--;
+                        } else {
+                            part->flags |= 2;
+                            tx = D_802A3554_799514[i].x;
+                            ty = D_802A3554_799514[i].y;
+                            tz = D_802A3554_799514[i].z;
+                            dist2 = dist2D(part->unk_10.x, part->unk_10.z, tx, tz);
+                            part->unk_10.x += (tx - part->unk_10.x) / D_802A3818[i];
+                            part->unk_10.y += (ty - part->unk_10.y) / D_802A3818[i];
+                            part->unk_10.z += (tz - part->unk_10.z) / D_802A3818[i];
+                            if (D_802A3818[i] == 1) {
+                                D_802A3514_7994D4[i] = -1;
+                                part->unk_10.x = tx;
+                                part->unk_10.y = ty;
+                                part->unk_10.z = tz;
+                            } else {
+                                part->unk_10.y = (part->unk_10.y + (dist2 / 60.0f));
+                            }
+                            D_802A3818[i]--;
+                        }
+                    }
+                }
+            }
+
+            if (!cond) {
+                D_802A3838 = 2;
+                D_802A37F0->flags |= 0x10;
+                return ApiStatus_DONE2;
+            }
+            break;
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
+INCLUDE_ASM(s32, "battle/star/star_beam/796FC0", func_802A1518_7974D8);
+#endif
+
+ApiStatus func_802A2468_798428(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = D_802A3838;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802A247C_79843C(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 230;
+    }
+
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+
+    script->functionTemp[0] -= 5;
+    if (script->functionTemp[0] <= 200) {
+        set_background_color_blend(0, 0, 0, 200);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
