@@ -61,9 +61,11 @@ void thunderbolt_ring_update(EffectInstance *effect) {
     if (data->timeLeft < 1000) {
         data->timeLeft--;
     }
+
     timeLeft = data->timeLeft;
-    lifeTime = data->lifeTime + 1;
-    data->lifeTime = lifeTime;
+    data->lifeTime++;
+    lifeTime = data->lifeTime;
+
     if (timeLeft < 0) {
         shim_remove_effect(effect);
         return;
