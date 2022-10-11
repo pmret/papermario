@@ -1711,8 +1711,7 @@ ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "19FAF0", func_80274A18);
-s32 func_80274A18(Evt* script, s32 isInitialCall) {
+ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
