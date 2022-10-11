@@ -111,10 +111,10 @@ EvtScript N(EVS_BindExitTriggers) = {
 
 EvtScript N(EVS_StartTexPanners_Lava) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, MODEL_yougan1_1, 2)
+    EVT_CALL(SetTexPanner, MODEL_yougan1_1, TEX_PANNER_2)
     EVT_CALL(EnableTexPanning, MODEL_toro, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_poko, TRUE)
-    EVT_CALL(SetTexPanner, MODEL_poko1, 14)
+    EVT_CALL(SetTexPanner, MODEL_poko1, TEX_PANNER_E)
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(  200,    0,  400, -100)

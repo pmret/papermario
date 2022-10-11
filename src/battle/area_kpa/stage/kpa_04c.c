@@ -5,11 +5,11 @@
 
 EvtScript N(8022FC20) = {
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(SetTexPanner, LVarA, 1)
+    EVT_CALL(SetTexPanner, LVarA, TEX_PANNER_1)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, LVar1)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
         EVT_ADD(LVar0, 32768)
         EVT_ADD(LVar1, 0)
         EVT_WAIT(5)

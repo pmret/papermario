@@ -197,14 +197,14 @@ EvtScript N(main) = {
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_THREAD
-        EVT_CALL(SetTexPanner, 162, 1)
+        EVT_CALL(SetTexPanner, 162, TEX_PANNER_1)
         EVT_SET(LVar0, 0)
         EVT_LABEL(123)
         EVT_ADD(LVar0, 420)
         EVT_IF_GT(LVar0, 65536)
             EVT_ADD(LVar0, -65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, 0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, LVar0)
         EVT_WAIT(1)
         EVT_GOTO(123)
     EVT_END_THREAD

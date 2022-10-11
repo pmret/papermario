@@ -69,14 +69,14 @@ EvtScript N(EVS_Main) = {
             EVT_GOTO(10)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_o256, 2)
-        EVT_CALL(SetTexPanner, MODEL_o266, 2)
+        EVT_CALL(SetTexPanner, MODEL_o256, TEX_PANNER_2)
+        EVT_CALL(SetTexPanner, MODEL_o266, TEX_PANNER_2)
         EVT_CALL(EnableTexPanning, MODEL_o256, TRUE)
         EVT_CALL(EnableTexPanning, MODEL_o266, TRUE)
         EVT_SET(LVar0, 0)
         EVT_LABEL(20)
         EVT_SUB(LVar0, 3000)
-        EVT_CALL(SetTexPanOffset, 2, 0, 0, LVar0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, LVar0)
         EVT_WAIT(1)
         EVT_GOTO(20)
     EVT_END_THREAD

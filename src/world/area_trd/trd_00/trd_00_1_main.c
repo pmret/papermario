@@ -104,12 +104,12 @@ EvtScript N(EVS_EnterMap) = {
 
 EvtScript N(EVS_TexPan_WaterEdge) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, MODEL_ue, 1)
+    EVT_CALL(SetTexPanner, MODEL_ue, TEX_PANNER_1)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LABEL(10)
-        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, 1, 1, LVar1, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, 0)
         EVT_ADD(LVar0, 100)
         EVT_SUB(LVar1, 100)
         EVT_WAIT(1)

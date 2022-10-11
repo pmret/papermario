@@ -219,7 +219,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
 
 EvtScript N(EVS_TexPan_Water) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, MODEL_suimen, 1)
+    EVT_CALL(SetTexPanner, MODEL_suimen, TEX_PANNER_1)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LABEL(10)

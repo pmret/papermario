@@ -70,9 +70,9 @@ API_CALLABLE(N(TryEvilRockLaugh)) {
 
 EvtScript N(EVS_ManageEvilRock) = {
     EVT_LABEL(0)
-        EVT_CALL(SetTexPanOffset, 0, 0, 0, -0x8000)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
         EVT_WAIT(3)
-        EVT_CALL(SetTexPanOffset, 0, 0, 0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
         EVT_WAIT(3)
         EVT_GOTO(0)
     EVT_RETURN
@@ -115,7 +115,7 @@ EvtScript N(EVS_SetupExitHint) = {
     EVT_CALL(SetModelCustomGfx, MODEL_o440, 1, -1)
     EVT_CALL(SetModelFlags, MODEL_o440, 16, TRUE)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspectEvilRock)), TRIGGER_WALL_PRESS_A, COLLIDER_o491, 1, 0)
-    EVT_CALL(SetTexPanner, MODEL_o440, 0)
+    EVT_CALL(SetTexPanner, MODEL_o440, TEX_PANNER_0)
     EVT_RETURN
     EVT_END
 };

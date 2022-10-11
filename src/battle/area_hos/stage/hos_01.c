@@ -157,10 +157,10 @@ EvtScript N(beforeBattle_80224BD0) = {
     EVT_CALL(SetModelFlags, MODEL_o347, 128, 1)
 
     EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_o332, 0)
-        EVT_CALL(SetTexPanner, MODEL_o334, 0)
-        EVT_CALL(SetTexPanner, MODEL_o333, 0)
-        EVT_CALL(SetTexPanner, MODEL_o336, 0)
+        EVT_CALL(SetTexPanner, MODEL_o332, TEX_PANNER_0)
+        EVT_CALL(SetTexPanner, MODEL_o334, TEX_PANNER_0)
+        EVT_CALL(SetTexPanner, MODEL_o333, TEX_PANNER_0)
+        EVT_CALL(SetTexPanner, MODEL_o336, TEX_PANNER_0)
         EVT_SET(LVar0, 0)
         EVT_SET(LVar1, 0)
         EVT_SET(LVar2, 0)
@@ -182,8 +182,8 @@ EvtScript N(beforeBattle_80224BD0) = {
             EVT_IF_GT(LVar3, 32768)
                 EVT_ADD(LVar3, -32768)
             EVT_END_IF
-            EVT_CALL(SetTexPanOffset, 0, 0, LVar0, LVar1)
-            EVT_CALL(SetTexPanOffset, 0, 1, LVar2, LVar3)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, LVar0, LVar1)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_AUX, LVar2, LVar3)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
