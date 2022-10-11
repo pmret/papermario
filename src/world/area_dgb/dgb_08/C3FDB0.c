@@ -1010,13 +1010,13 @@ EvtScript N(802469E0) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC 7
 #define AI_SENTINEL_LAST_NPC  9
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
 

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "Bobomb.h"
 
-#include "world/common/enemy/StationaryAI.inc.c"
+#include "world/common/enemy/ai/StationaryAI.inc.c"
 
 StationaryAISettings N(AISettings_Bobomb_Stationary) = {
     .unk_00 = 110.0f,

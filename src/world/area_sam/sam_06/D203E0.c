@@ -1,6 +1,6 @@
 #include "sam_06.h"
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 #include "world/common/todo/StashVars.inc.c"
 

@@ -1,4 +1,4 @@
-#include "world/common/enemy/HoppingAI.inc.c"
+#include "world/common/enemy/ai/HoppingAI.inc.c"
 
 void N(StoneChompAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);

@@ -2026,7 +2026,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 #include "world/common/atomic/Quizmo.inc.c"
 

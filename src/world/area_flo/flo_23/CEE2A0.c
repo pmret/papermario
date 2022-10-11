@@ -475,6 +475,6 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/atomic/MakeConsumableChoice.inc.c"
 
-#include "world/common/enemy/TackleAI.inc.c"
+#include "world/common/enemy/ai/TackleAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"

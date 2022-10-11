@@ -632,12 +632,12 @@ NpcGroupList N(npcGroupList_8024533C) = {
     {},
 };
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC 0
 #define AI_SENTINEL_LAST_NPC  0
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
 const char N(dgb_00_name_hack)[] = "dgb_00";

@@ -24,9 +24,9 @@ ApiStatus func_802402F4_DAD6F4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
-#include "world/common/enemy/ShyGuyWanderAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyWanderAI.inc.c"
 
 const s32 N(pad_8)[] = { 0, 0 };
 static char* N(exit_str_2) = "omo_04";

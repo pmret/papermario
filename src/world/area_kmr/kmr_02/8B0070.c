@@ -22,7 +22,7 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/enemy/StationaryAI.inc.c"
+#include "world/common/enemy/ai/StationaryAI.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";

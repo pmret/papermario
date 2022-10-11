@@ -9,7 +9,7 @@ extern s32 D_80262F68;
 
 #include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";

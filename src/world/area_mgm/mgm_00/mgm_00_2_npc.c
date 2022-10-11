@@ -3,7 +3,7 @@
 extern EvtScript N(EVS_OnEnterPipe_JumpAttack);
 extern EvtScript N(EVS_OnEnterPipe_SmashAttack);
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 MobileAISettings N(AISettings_GreenToad) = {
     .moveSpeed = 1.5f,

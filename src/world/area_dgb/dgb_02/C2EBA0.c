@@ -430,5 +430,5 @@ NpcGroupList N(npcGroupList_802425C8) = {
     {},
 };
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"

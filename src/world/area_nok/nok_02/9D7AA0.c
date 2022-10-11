@@ -2,7 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 19
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";

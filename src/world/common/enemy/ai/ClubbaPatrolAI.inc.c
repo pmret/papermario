@@ -2,8 +2,8 @@
 #include "world/partners.h"
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox.inc.c"
-#include "world/common/enemy/States_PatrolAI.inc.c"
+#include "world/common/enemy/ai/MeleeHitbox.inc.c"
+#include "world/common/enemy/ai/States_PatrolAI.inc.c"
 
 ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

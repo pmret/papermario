@@ -1,5 +1,5 @@
 // hitbox enemy
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
 // visual enemy
 #include "world/common/enemy/wip/PiranhaPlantAI_00.inc.c"

@@ -9,7 +9,7 @@
 #include "effects.h"
 
 // prerequisites
-#include "world/common/enemy/ProjectileHitbox.inc.c"
+#include "world/common/enemy/ai/ProjectileHitbox.inc.c"
 
 ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;

@@ -14,7 +14,7 @@ extern s32 ECAA80_ItemChoice_SelectedItemID;
 
 void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
-#include "world/common/enemy/UnkFloAI.inc.c"
+#include "world/common/enemy/ai/UnkFloAI.inc.c"
 
 // following four functions can be folded into this combined include when the last two are done
 // #include "world/common/atomic/ItemChoice_PartA.inc.c"

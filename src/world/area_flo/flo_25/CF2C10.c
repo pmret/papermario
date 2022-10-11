@@ -520,9 +520,9 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
+#include "world/common/enemy/ai/FlyingNoAttackAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

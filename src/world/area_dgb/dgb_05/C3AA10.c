@@ -365,5 +365,5 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

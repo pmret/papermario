@@ -1,3 +1,3 @@
 #include "jan_10.h"
 
-#include "world/common/enemy/HoppingAI.inc.c"
+#include "world/common/enemy/ai/HoppingAI.inc.c"

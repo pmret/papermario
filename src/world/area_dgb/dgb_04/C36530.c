@@ -284,7 +284,7 @@ EvtScript N(makeEntities) = {
 
 #define AI_SENTINEL_FIRST_NPC 0
 #define AI_SENTINEL_LAST_NPC  0
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
 #include "world/common/atomic/SuperBlock.inc.c"
 

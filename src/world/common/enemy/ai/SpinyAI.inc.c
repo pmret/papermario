@@ -6,7 +6,7 @@
 #include "sprite/npc/Spiny.h"
 
 // prerequisites
-#include "world/common/enemy/TackleAI.inc.c"
+#include "world/common/enemy/ai/TackleAI.inc.c"
 
 ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_

@@ -1246,8 +1246,8 @@ NpcGroupList N(npcGroupList_80247984) = {
 
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     55
-#include "world/common/enemy/LakituAI.inc.c"
-#include "world/common/enemy/SpinyAI.inc.c"
+#include "world/common/enemy/ai/LakituAI.inc.c"
+#include "world/common/enemy/ai/SpinyAI.inc.c"
 
 #include "world/common/todo/UnkFunc42.inc.c"
 

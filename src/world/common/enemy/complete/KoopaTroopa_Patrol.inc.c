@@ -1,7 +1,7 @@
 #include "common.h"
 #include "KoopaTroopa.h"
 
-#include "world/common/enemy/KoopaPatrolAI.inc.c"
+#include "world/common/enemy/ai/KoopaPatrolAI.inc.c"
 
 MobileAISettings N(AISettings_KoopaTroopa_Patrol) = {
     .moveSpeed = 1.5f,

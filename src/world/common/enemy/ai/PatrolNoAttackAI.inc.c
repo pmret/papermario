@@ -6,7 +6,7 @@
 #endif
 
 // prerequisites
-#include "world/common/enemy/States_PatrolAI.inc.c"
+#include "world/common/enemy/ai/States_PatrolAI.inc.c"
 
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_

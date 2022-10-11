@@ -14,7 +14,7 @@
 #endif
 
 // prerequisites
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 enum AiStateSentinel {
     AI_STATE_SENTINEL_WANDER_INIT       = 0,

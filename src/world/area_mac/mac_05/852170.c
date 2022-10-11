@@ -13,7 +13,7 @@ static char* N(exit_str_1) = "kgr_01";
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

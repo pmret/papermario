@@ -3,7 +3,7 @@
 #include "sprite/npc/MontyMole.h"
 
 // prerequisites
-#include "world/common/enemy/ProjectileHitbox.inc.c"
+#include "world/common/enemy/ai/ProjectileHitbox.inc.c"
 
 // ensure state handlers conform to expected signature
 static AIStateHandler N(MontyMoleAI_Init);

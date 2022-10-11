@@ -12,7 +12,7 @@ extern s32 EA0C10_D_802466D0[];
 
 void func_8004D8E0(DeadEnemy*);
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 #include "world/common/enemy/wip/PiranhaPlantAI_00.inc.c"
 #include "world/common/enemy/wip/PiranhaPlantAI_01.inc.c"
 #include "world/common/enemy/wip/PiranhaPlantAI_10.inc.c"
@@ -22,7 +22,7 @@ void func_8004D8E0(DeadEnemy*);
 #include "world/common/enemy/wip/PiranhaPlantAI_14.inc.c"
 #include "world/common/enemy/wip/Dead_PiranhaPlantAI_Main.inc.c"
 
-#include "world/common/enemy/TackleAI.inc.c"
+#include "world/common/enemy/ai/TackleAI.inc.c"
 
 #include "world/common/todo/AwaitPlayerNearNpc.inc.c"
 

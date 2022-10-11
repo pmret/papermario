@@ -2106,7 +2106,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

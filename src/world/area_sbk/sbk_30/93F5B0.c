@@ -21,7 +21,7 @@ s32 N(get_tattle)(void) {
 
 #include "world/common/todo/SpawnSunEffect.inc.c"
 
-#include "world/common/enemy/StationaryAI.inc.c"
+#include "world/common/enemy/ai/StationaryAI.inc.c"
 
 #include "world/common/todo/StashVars.inc.c"
 

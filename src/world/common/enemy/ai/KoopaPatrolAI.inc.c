@@ -2,9 +2,9 @@
 #include "npc.h"
 #include "effects.h"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/States_TackleAI.inc.c"
+#include "world/common/enemy/ai/States_TackleAI.inc.c"
 
 ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

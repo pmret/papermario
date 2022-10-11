@@ -13,7 +13,7 @@
 #endif
 
 // prerequisites
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 s32 N(LakituAI_GetAvailableSpiny)(void) {
     s32 npcID;

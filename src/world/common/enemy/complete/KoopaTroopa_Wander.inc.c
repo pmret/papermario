@@ -1,7 +1,7 @@
 #include "common.h"
 #include "KoopaTroopa.h"
 
-#include "world/common/enemy/TackleAI.inc.c"
+#include "world/common/enemy/ai/TackleAI.inc.c"
 
 MobileAISettings N(AISettings_KoopaTroopa_Wander) = {
     .moveSpeed = 1.5f,

@@ -3,11 +3,11 @@
 static char* N(exit_str_0) = "omo_06";
 static char* N(exit_str_1) = "";
 
-#include "world/common/enemy/ShyGuyWanderAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyWanderAI.inc.c"
 
-#include "world/common/enemy/ShyGuyPatrolAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyPatrolAI.inc.c"
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 

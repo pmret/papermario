@@ -506,7 +506,7 @@ MobileAISettings N(npcAISettings_80244D24) = {
 
 #define AI_SENTINEL_FIRST_NPC 0
 #define AI_SENTINEL_LAST_NPC  4
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
 extern const char N(dgb_00_name_hack)[];
 
@@ -722,7 +722,7 @@ EvtScript N(init_80245784) = {
 
 const char N(dgb_00_name_hack)[] = "dgb_00";
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
 

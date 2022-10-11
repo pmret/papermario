@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-#include "world/common/enemy/MagikoopaSpellAI.inc.c"
+#include "world/common/enemy/ai/MagikoopaSpellAI.inc.c"
 
 void N(FlyingMagikoopaAI_10)(Evt* script, MobileAISettings* arg1, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;

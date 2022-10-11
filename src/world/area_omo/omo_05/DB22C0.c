@@ -3,11 +3,11 @@
 static char* N(exit_str_0) = "omo_17";
 static char* N(exit_str_1) = "";
 
-#include "world/common/enemy/ShyGuyWanderAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyWanderAI.inc.c"
 
-#include "world/common/enemy/GrooveGuyAI.inc.c"
+#include "world/common/enemy/ai/GrooveGuyAI.inc.c"
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 

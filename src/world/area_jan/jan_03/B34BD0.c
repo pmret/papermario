@@ -13,7 +13,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_4) = "tik_08";
 

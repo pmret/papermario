@@ -3,4 +3,4 @@
 static char* N(exit_str_0) = "kpa_134";
 static char* N(exit_str_1) = "kpa_111";
 
-#include "world/common/enemy/BulletBillAI.inc.c"
+#include "world/common/enemy/ai/BulletBillAI.inc.c"

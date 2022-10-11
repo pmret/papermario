@@ -13,7 +13,7 @@ typedef struct MagikoopaTeleportAnim {
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
 
-#include "world/common/enemy/MagikoopaSpellAI.inc.c"
+#include "world/common/enemy/ai/MagikoopaSpellAI.inc.c"
 
 void N(MagikoopaAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;

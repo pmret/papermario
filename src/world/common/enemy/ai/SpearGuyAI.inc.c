@@ -1,21 +1,87 @@
-// Used by:
-// - Clubba + White Clubba
-// - Spear Guy
-// - Piranha Plant
-// - Putrid Piranha + Frost Piranha
-
 #include "common.h"
 #include "npc.h"
+#include "effects.h"
+#include "sprite/npc/JungleGuy.h"
+
+void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration = 0;
+    set_npc_yaw(npc, 270.0f);
+    enemy->varTable[0] = 0;
+    script->AI_TEMP_STATE = AI_STATE_LOITER;
+}
+
+void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 d100;
+
+    if (enemy->varTable[0] == 0) {
+        if (rand_int(100) >= 50) {
+            enemy->varTable[0] = 3;
+        } else {
+            enemy->varTable[0] = 1;
+        }
+        set_npc_yaw(npc, 270.0f);
+    }
+
+    switch (enemy->varTable[0]) {
+        case 1:
+            enemy->varTable[0] = 2;
+            enemy->varTable[1] = 0;
+            npc->currentAnim = ANIM_JungleGuy_Anim0F;
+        case 2:
+            enemy->varTable[1]++;
+            if (enemy->varTable[1] > 50) {
+                enemy->varTable[0] = 5;
+            }
+            break;
+        case 3:
+            enemy->varTable[0] = 4;
+            enemy->varTable[1] = 0;
+            npc->currentAnim = ANIM_JungleGuy_Anim10;
+        case 4:
+            enemy->varTable[1]++;
+            if (enemy->varTable[1] == 25) {
+                npc->yaw = 90.0f;
+            }
+            if (enemy->varTable[1] > 60) {
+                enemy->varTable[0] = 5;
+            }
+            break;
+        case 5:
+            enemy->varTable[0] = 6;
+            enemy->varTable[1] = 0;
+            npc->currentAnim = ANIM_JungleGuy_Anim03;
+            fx_sweat(0, npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionHeight, 0, 10);
+        case 6:
+            enemy->varTable[1]++;
+            if (enemy->varTable[1] > 10) {
+                d100 = rand_int(100);
+
+                if (d100 < 90) {
+                    enemy->varTable[0] = 7;
+                } else if (d100 >= 95) {
+                    enemy->varTable[0] = 3;
+                } else {
+                    enemy->varTable[0] = 1;
+                }
+            }
+            break;
+    }
+
+    if (enemy->varTable[0] == 7) {
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
+    }
+}
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
+ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
@@ -31,14 +97,6 @@ ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    #ifdef _DEAD_H_
-    enemy->unk_108.x = npc->pos.x;
-    enemy->unk_108.y = npc->pos.y;
-    enemy->unk_108.z = npc->pos.z;
-    enemy->unk_114 = 0.0001f;
-    enemy->unk_118 = 0.0001f;
-    #endif
-
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
@@ -52,70 +110,66 @@ ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        
+
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
-            script->functionTemp[1] = AI_STATE_WANDER_INIT;
+            script->AI_TEMP_STATE_AFTER_SUSPEND = AI_STATE_WANDER_INIT;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
-        enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
+        enemy->varTable[0] = 0;
     }
 
-    if (script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT
-            && enemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_NONE
-            && N(MeleeHitbox_CanSeePlayer)(script)) {
+    if ((script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_INIT;
     }
 
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_WANDER_INIT:
             basic_ai_wander_init(script, npcAISettings, territoryPtr);
-            // fallthrough
         case AI_STATE_WANDER:
             basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
+            
         case AI_STATE_LOITER_INIT:
-            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
-            // fallthrough
+            N(SpearGuyAI_LoiterInit)(script, npcAISettings, territoryPtr);
         case AI_STATE_LOITER:
-            basic_ai_loiter(script, npcAISettings, territoryPtr);
+            N(SpearGuyAI_Loiter)(script, npcAISettings, territoryPtr);
             break;
+
         case AI_STATE_ALERT_INIT:
             basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
-            // fallthrough
         case AI_STATE_ALERT:
             basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
+
         case AI_STATE_CHASE_INIT:
             basic_ai_chase_init(script, npcAISettings, territoryPtr);
-            // fallthrough
         case AI_STATE_CHASE:
             basic_ai_chase(script, npcAISettings, territoryPtr);
             break;
+
         case AI_STATE_LOSE_PLAYER:
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
+
         case AI_STATE_MELEE_HITBOX_INIT:
             N(MeleeHitbox_30)(script);
-            // fallthrough
         case AI_STATE_MELEE_HITBOX_PRE:
             N(MeleeHitbox_31)(script);
             if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_ACTIVE) {
                 break;
             }
-            // fallthrough
         case AI_STATE_MELEE_HITBOX_ACTIVE:
             N(MeleeHitbox_32)(script);
             if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_MISS) {
                 break;
             }
-            // fallthrough
         case AI_STATE_MELEE_HITBOX_MISS:
             N(MeleeHitbox_33)(script);
             break;
+
         case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
-            break;
     }
 
     return ApiStatus_BLOCK;

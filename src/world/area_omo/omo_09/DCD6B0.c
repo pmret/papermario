@@ -1,10 +1,10 @@
 #include "omo_09.h"
 
-#include "world/common/enemy/ShyGuyWanderAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyWanderAI.inc.c"
 
-#include "world/common/enemy/ShyGuyPatrolAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyPatrolAI.inc.c"
 
-#include "world/common/enemy/RangedAttackAI.inc.c"
+#include "world/common/enemy/ai/RangedAttackAI.inc.c"
 
 #include "world/common/todo/SetNpcB5_3.inc.c"
 

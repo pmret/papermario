@@ -840,7 +840,7 @@ static s32 N(pad_4F3C) = {
     0x00000000,
 };
 
-#include "world/common/enemy/UnkFloAI.inc.c"
+#include "world/common/enemy/ai/UnkFloAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 
