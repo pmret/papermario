@@ -1623,8 +1623,17 @@ typedef struct TattleWindowFXData {
 } TattleWindowFXData; // size = 0x38
 
 typedef struct ShinyFlareFXData {
-    /* 0x00 */ char todo[0];
-} ShinyFlareFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+} ShinyFlareFXData; // size = 0x30
 
 typedef struct HuffPuffBreathFXData {
     /* 0x00 */ s32 unk_00;

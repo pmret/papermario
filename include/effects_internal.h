@@ -139,7 +139,7 @@ FX_MAIN(red_impact_main);
 EffectInstance* floating_cloud_puff_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(energy_in_out_main);
 EffectInstance* tattle_window_main(s32, f32, f32, f32, f32, s32);
-FX_MAIN(shiny_flare_main);
+EffectInstance* shiny_flare_main(s32, f32, f32, f32, f32);
 EffectInstance* huff_puff_breath_main(s32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* cold_breath_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* embers_main(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
