@@ -4,22 +4,22 @@
 #include "SuperBlock.inc.h"
 #include "hud_element.h"
 
-ApiStatus N(SuperBlock_SetOverride40)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_SetOverride40)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_ClearOverride40)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_ClearOverride40)) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_HideBlockContent)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_HideBlockContent)) {
     entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_GetPartnerRank)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_GetPartnerRank)) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
     s32 partnerIdx = evt_get_variable(script, *args++);
@@ -43,7 +43,7 @@ s32 N(SuperBlock_get_partner_rank)(s32 idx, s16 maxLevel) {
     return -1;
 }
 
-ApiStatus N(SuperBlock_CountEligiblePartners)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_CountEligiblePartners)) {
     PlayerData* playerData = &gPlayerData;
     s16 var = script->varTable[12] >= 0;
     s32 i;
@@ -60,7 +60,7 @@ ApiStatus N(SuperBlock_CountEligiblePartners)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_ShowSelectPartnerMenu)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
     PlayerData* playerData = &gPlayerData;
     PopupMenu* popupMenu;
     s32 partnerID;
@@ -132,17 +132,17 @@ ApiStatus N(SuperBlock_ShowSelectPartnerMenu)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_SwitchToPartner)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_SwitchToPartner)) {
     switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_LoadCurrentPartnerName)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_LoadCurrentPartnerName)) {
     set_message_msg(gPartnerPopupProperties[gPlayerData.currentPartner][0], 0);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_StartGlowEffect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_StartGlowEffect)) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIdx = evt_get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIdx);
@@ -153,21 +153,21 @@ ApiStatus N(SuperBlock_StartGlowEffect)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_EndGlowEffect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_EndGlowEffect)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *script->ptrReadPos);
 
     effect->flags |= EFFECT_INSTANCE_FLAGS_10;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_GatherEnergyFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_GatherEnergyFX)) {
     Entity* entity = get_entity_by_index(evt_get_variable(script, *script->ptrReadPos));
 
     fx_radial_shimmer(4, entity->position.x, entity->position.y + 12.5f, entity->position.z, 1.0f, 75);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_RadiateFaintEnergyFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_RadiateFaintEnergyFX)) {
     Npc* npc = get_npc_safe(NPC_PARTNER);
 
     fx_radial_shimmer(9, npc->pos.x, npc->pos.y + 12.5f, npc->pos.z, 1.0f, 30);
@@ -189,7 +189,7 @@ typedef struct EnergyOrbSet {
     s32 gatherStateTime;
 } EnergyOrbSet;
 
-ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     Bytecode* args = script->ptrReadPos;
     Npc* partner = get_npc_safe(NPC_PARTNER);
     EnergyOrbSet* userData;
@@ -310,7 +310,7 @@ ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 N(SuperBlock_WhiteScreenFlash)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
     Bytecode* args = script->ptrReadPos;
     s32 ret = 0;
 
@@ -357,19 +357,19 @@ s32 N(SuperBlock_WhiteScreenFlash)(Evt* script, s32 isInitialCall) {
     return ret;
 }
 
-ApiStatus N(SuperBlock_PartnerSparkles2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_PartnerSparkles2)) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
     fx_sparkles(FX_SPARKLES_2, partner->pos.x, partner->pos.y + 30.0f, partner->pos.z, 30.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_PartnerSparkles4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_PartnerSparkles4)) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
     fx_sparkles(FX_SPARKLES_4, partner->pos.x, partner->pos.y + 30.0f, partner->pos.z, 30.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SuperBlock_WaitForPlayerToLand)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SuperBlock_WaitForPlayerToLand)) {
     script->varTable[0] = FALSE;
     if ((gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE)) {
         script->varTable[0] = TRUE;

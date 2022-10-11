@@ -48,7 +48,7 @@ EvtScript N(80241F40) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_FLO08_SuperBlock
-#include "world/common/atomic/SuperBlock.data.inc.c"
+#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_MAKE_SUPER_BLOCK(-780, 120, -110, 0)

@@ -8,7 +8,7 @@ static char* N(exit_str_3) = "";
 
 #define CHUCK_QUIZMO_NPC_ID 8
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 

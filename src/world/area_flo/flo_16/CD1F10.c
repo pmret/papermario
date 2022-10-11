@@ -240,7 +240,7 @@ static s32 N(pad_36FC) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_FLO16_SuperBlock
-#include "world/common/atomic/SuperBlock.data.inc.c"
+#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(80243D48) = {
     EVT_LABEL(0)
@@ -295,6 +295,6 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/SuperBlock.inc.c"
+#include "world/common/entity/SuperBlock.inc.c"
 
 #include "world/common/todo/UnkFunc44.inc.c"

@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "nok_03";
 static char* N(exit_str_2) = "tik_01";
 static char* N(exit_str_3) = "";
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/todo/StashVars.inc.c"
 

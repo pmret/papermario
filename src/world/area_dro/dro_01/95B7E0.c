@@ -109,7 +109,7 @@ EvtScript N(80243BB0) = {
     EVT_END
 };
 
-#include "world/common/atomic/PipeData.inc.c"
+#include "world/common/entity/PipeData.inc.c"
 
 EvtScript N(exitWalk_80244960) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

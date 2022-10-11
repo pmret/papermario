@@ -25,8 +25,8 @@ EvtScript N(D_80241850_E0FFF0) = {
     EVT_END
 };
 
-#include "world/common/atomic/Pipe.inc.c"
-#include "world/common/atomic/Pipe.data.inc.c"
+#include "world/common/entity/Pipe.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
 
 EvtScript N(EVS_GotoMap_ToadTown) = {
     EVT_CALL(GotoMap, EVT_PTR("mac_03"), mac_03_ENTRY_2)

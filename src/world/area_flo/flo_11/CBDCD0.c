@@ -79,7 +79,7 @@ EvtScript N(80240450) = {
     EVT_END
 };
 
-#include "world/common/atomic/PipeData.inc.c"
+#include "world/common/entity/PipeData.inc.c"
 
 EvtScript N(exitWalk_8024142C) = EVT_EXIT_WALK(60,  0, "flo_23",  1);
 
@@ -655,7 +655,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 

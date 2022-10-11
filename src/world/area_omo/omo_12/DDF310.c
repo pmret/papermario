@@ -2,7 +2,7 @@
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#include "world/common/atomic/DarkRoom.inc.c"
+#include "world/common/atomic/CreateDarkness.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 

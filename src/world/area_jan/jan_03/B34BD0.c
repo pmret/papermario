@@ -7,7 +7,7 @@ static char* N(exit_str_3) = "";
 
 #define CHUCK_QUIZMO_NPC_ID 17
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

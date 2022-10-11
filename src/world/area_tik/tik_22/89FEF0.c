@@ -2,7 +2,7 @@
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 s32 bgm_clear_track_volumes(s32, s16);
 
