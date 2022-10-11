@@ -8306,14 +8306,13 @@ segments:
     start: 0x92A2B0
     vram: 0x80240000
     subsegments:
-    - [0x92A2B0, c]
-    - [0x92A9A0, c]
-    - [0x92AEB0, data]
-    - [0x92AFF0, data]
-    - [0x92B500, data]
-    - [0x92E220, data]
-    - [0x92F830, data]
-    - [0x92F880]
+    - [0x92A2B0, c, sbk_02_0_header]
+    - [0x92A2F0, c, sbk_02_1_music]
+    - [0x92A2F0, c, sbk_02_2_main]
+    - [0x92A2F0, c, sbk_02_3_ruins]
+    - [0x92A9A0, c, sbk_02_4_npc]
+    - [0x92A9A0, c, sbk_02_5_entity]
+    - [0x92AEB0]
   - name: sbk_03
     dir: world/area_sbk/sbk_03
     type: code

@@ -1,97 +1,22 @@
 #include "sbk_02.h"
 #include "effects.h"
 
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-// needs data
-#ifdef NON_MATCHING
-API_CALLABLE(func_8024091C_92ABCC) {
-    Bytecode* args = script->ptrReadPos;
-    if (isInitialCall) {
-        D_8024404C_92E2FC = FALSE;
-    }
-    if (D_8024404C_92E2FC) {
-        D_8024404C_92E2FC = FALSE;
-        evt_set_variable(script, *args++, D_80244050_92E300);
-        return ApiStatus_DONE2;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-}
-#else
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_8024091C_92ABCC);
-#endif
-
-static s32 sbk_02_D_80245630[91];
-extern s32 D_8024404C_92E2FC;
-extern s32 D_80244050_92E300;
-
-API_CALLABLE(func_80240970_92AC20) {
-    Bytecode* args = script->ptrReadPos;
-
-    D_80244050_92E300 = evt_get_variable(script, *args++);
-    D_8024404C_92E2FC = TRUE;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(func_802409A8_92AC58) {
-    Bytecode* args = script->ptrReadPos;
-    s32* buf = (s32*) evt_get_variable(script, *args++);
-    s32 i;
-
-    if (buf != NULL) {
-        for (i = 0; *buf != NULL; i++) {
-            sbk_02_D_80245630[i] = *buf++;
-        }
-        sbk_02_D_80245630[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            sbk_02_D_80245630[i] = i + 0x80;
-            sbk_02_D_80245630[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
-API_CALLABLE(PostChapter2StatUpdate) {
-    PlayerData* playerData = &gPlayerData;
-
-    set_max_SP(2);
-    playerData->curHP = playerData->curMaxHP;
-    playerData->curFP = playerData->curMaxFP;
-    sync_status_menu();
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(CheckTradeEventTime)) {
-    script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(GetItemCount) {
-    script->varTable[0] = get_item_count();
-    return ApiStatus_DONE2;
-}
-
-
 NpcSettings N(NpcSettings_Mamar) = {
     .height = 26,
     .radius = 24,
     .level = 99,
 };
 
-s32 N(missing_80243F9C_3F9C)[] = {
-    0x00000000, 0x00140014, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000,
-    0x00000000,  0x00160018, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000,
+NpcSettings N(NpcSettings_Unused1) = {
+    .height = 20,
+    .radius = 20,
+    .level = 99,
+};
+
+NpcSettings N(NpcSettings_Unused2) = {
+    .height = 22,
+    .radius = 24,
+    .level = 99,
 };
 
 NpcSettings N(NpcSettings_Toad) = {
@@ -100,62 +25,15 @@ NpcSettings N(NpcSettings_Toad) = {
     .level = 99,
 };
 
-s32 N(missing_80244020_4020)[] = {
-    0x00000000, 0x00170013, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000,
+NpcSettings N(NpcSettings_Unused3) = {
+    .height = 23,
+    .radius = 19,
+    .level = 99,
 };
 
-s32 N(D_8024404C_92E2FC) = 0;
+#include "world/common/complete/NormalItemChoice.inc.c"
 
-s32 N(D_80244050_92E300) = 0;
-
-EvtScript N(D_80244054_92E304) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveItemAt, LVar1)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
-            EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_SWITCH
-    EVT_CALL(N(func_80240970_92AC20), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80244188_92E438) = {
-    EVT_CALL(N(func_802409A8_92AC58), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(D_80244054_92E304)), TRIGGER_FORCE_ACTIVATE, 0, 80245630_BSS[30], 0, 1)
-    EVT_CALL(N(func_8024091C_92ABCC), LVar0)
-    EVT_RETURN
-    EVT_END
-};
-
-s32** N(varStash) = NULL;
-
-EvtScript N(D_802441DC_92E48C) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_8024420C) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 16)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/complete/GiveReward.inc.c"
 
 EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_LOOP(0)
@@ -176,7 +54,17 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_END
 };
 
-EvtScript N(D_80244330_92E5E0) = {
+API_CALLABLE(N(UpgradeStarPower)) {
+    PlayerData* playerData = &gPlayerData;
+
+    set_max_SP(2);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -240,7 +128,7 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Mamar, TRUE)
-    EVT_CALL(N(PostChapter2StatUpdate))
+    EVT_CALL(N(UpgradeStarPower))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0192, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
@@ -272,7 +160,7 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 0x00000708)
+        EVT_SET(LVar3, 1800)
         EVT_CALL(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -309,7 +197,7 @@ EvtScript N(D_80244330_92E5E0) = {
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_SET(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-    EVT_EXEC(N(EVS_80240CC0))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -320,13 +208,23 @@ EvtScript N(EVS_NpcInit_Mamar) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, sbk_02_ENTRY_5)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Mamar)))
-        EVT_EXEC(N(D_80244330_92E5E0))
+        EVT_EXEC(N(EVS_Scene_RescuedMamar))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
+
+API_CALLABLE(N(CheckTradeEventTime)) {
+    script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(GetItemCount)) {
+    script->varTable[0] = get_item_count();
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_SET(LVar0, 5)
@@ -347,19 +245,14 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 2)
-    EVT_EXEC_WAIT(N(D_80244188_92E438))
+    EVT_CHOOSE_CONSUMABLE(NULL)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)
             EVT_RETURN
-        EVT_CASE_EQ(214)
+        EVT_CASE_EQ(ITEM_NUTTY_CAKE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F1)
-            EVT_SET(LVar0, ITEM_MAPLE_SUPER)
-            EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE)
-            EVT_EXEC_WAIT(N(D_802441DC_92E48C))
-            EVT_CALL(AddItem, LVar0, LVar1)
+            EVT_GIVE_CONSUMABLE_REWARD(ITEM_MAPLE_SUPER)
             EVT_WAIT(10)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F2)
             EVT_WAIT(10)
@@ -418,8 +311,8 @@ StaticNpc N(NpcData_Mamar) = {
     },
 };
 
-StaticNpc N(NpcData_Toad) = {
-    .id = NPC_Toad,
+StaticNpc N(NpcData_TradingToad) = {
+    .id = NPC_TradingToad,
     .settings = &N(NpcSettings_Toad),
     .pos = { 0.0f, 2.0f, 150.0f },
     .yaw = 90,
@@ -453,6 +346,6 @@ StaticNpc N(NpcData_Toad) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Mamar)),
-    NPC_GROUP(N(NpcData_Toad)),
+    NPC_GROUP(N(NpcData_TradingToad)),
     {}
 };

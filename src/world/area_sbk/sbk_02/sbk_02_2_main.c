@@ -1,13 +1,5 @@
 #include "sbk_02.h"
 #include "effects.h"
-#include "entity.h"
-
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80243A00);
-extern EvtScript N(EVS_80243B38);
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
 
 EvtScript N(EVS_ExitWalk_sbk_01_1) = EVT_EXIT_WALK(60, sbk_02_ENTRY_0, "sbk_01", sbk_01_ENTRY_1);
 EvtScript N(EVS_ExitWalk_sbk_03_0) = EVT_EXIT_WALK(60, sbk_02_ENTRY_1, "sbk_03", sbk_03_ENTRY_0);
@@ -23,7 +15,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_80240F30_92B1E0) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(sbk_02_ENTRY_5)
@@ -66,7 +58,7 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_DEFAULT
             EVT_EXEC_WAIT(N(EVS_80243A00))
     EVT_END_SWITCH
-    EVT_EXEC(N(D_80240F30_92B1E0))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(sbk_02_ENTRY_5)

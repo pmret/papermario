@@ -106,24 +106,24 @@ EvtScript N(D_80241430_92B6E0) = {
 EvtScript N(D_802414FC_92B7AC) = {
     EVT_CALL(SetRenderMode, MODEL_o225, RENDER_MODE_SURFACE_XLU_LAYER2)
     EVT_CALL(EnableTexPanning, MODEL_o225, TRUE)
-    EVT_CALL(EnableTexPanning, 0x00002710, TRUE)
+    EVT_CALL(EnableTexPanning, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, 0)
     EVT_LOOP(0)
         EVT_CALL(SetTexPanOffset, 3, 0, LVar0, 0)
         EVT_CALL(SetTexPanOffset, 3, 1, LVar1, LVar2)
-        EVT_ADD(LVar0, 0x00001770)
-        EVT_ADD(LVar1, 0x00001388)
-        EVT_ADD(LVar2, 0x00000FA0)
-        EVT_IF_GT(LVar0, 0x00020000)
-            EVT_SUB(LVar0, 0x00020000)
+        EVT_ADD(LVar0, 6000)
+        EVT_ADD(LVar1, 5000)
+        EVT_ADD(LVar2, 4000)
+        EVT_IF_GT(LVar0, 0x20000)
+            EVT_SUB(LVar0, 0x20000)
         EVT_END_IF
-        EVT_IF_GT(LVar1, 0x00020000)
-            EVT_SUB(LVar1, 0x00020000)
+        EVT_IF_GT(LVar1, 0x20000)
+            EVT_SUB(LVar1, 0x20000)
         EVT_END_IF
-        EVT_IF_GT(LVar2, 0x00020000)
-            EVT_SUB(LVar2, 0x00020000)
+        EVT_IF_GT(LVar2, 0x20000)
+            EVT_SUB(LVar2, 0x20000)
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -154,20 +154,20 @@ EvtScript N(D_80241678_92B928) = {
 
 EvtScript N(D_80241790_92BA40) = {
     EVT_WAIT(10)
-    EVT_CALL(EnableModel, 0x00002710, TRUE)
+    EVT_CALL(EnableModel, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar2, 0)
     EVT_SET(LVar0, -100)
     EVT_LOOP(100)
         EVT_SET(LVar3, LVar2)
         EVT_DIVF(LVar3, 110)
-        EVT_CALL(ScaleModel, 0x00002710, LVar3, EVT_FLOAT(1.0), LVar3)
-        EVT_CALL(TranslateModel, 0x00002710, 0, LVar0, 0)
+        EVT_CALL(ScaleModel, CLONED_MODEL(0), LVar3, EVT_FLOAT(1.0), LVar3)
+        EVT_CALL(TranslateModel, CLONED_MODEL(0), 0, LVar0, 0)
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar2, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
-        EVT_CALL(ScaleModel, 0x00002710, LVar3, EVT_FLOAT(1.0), LVar3)
+        EVT_CALL(ScaleModel, CLONED_MODEL(0), LVar3, EVT_FLOAT(1.0), LVar3)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -199,24 +199,24 @@ EvtScript N(D_802418B4_92BB64) = {
 
 EvtScript N(D_802419F0_92BCA0) = {
     EVT_WAIT(10)
-    EVT_CALL(EnableModel, 0x00002710, TRUE)
+    EVT_CALL(EnableModel, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar2, 100)
-    EVT_SETF(LVar3, EVT_FLOAT(0.91))
+    EVT_SETF(LVar3, EVT_FLOAT(0.9091))
     EVT_LOOP(20)
-        EVT_CALL(ScaleModel, 0x00002710, LVar3, EVT_FLOAT(1.0), LVar3)
+        EVT_CALL(ScaleModel, CLONED_MODEL(0), LVar3, EVT_FLOAT(1.0), LVar3)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(70)
         EVT_SET(LVar3, LVar2)
         EVT_DIVF(LVar3, 110)
-        EVT_CALL(ScaleModel, 0x00002710, LVar3, LVar3, LVar3)
-        EVT_CALL(TranslateModel, 0x00002710, 0, LVar0, 0)
+        EVT_CALL(ScaleModel, CLONED_MODEL(0), LVar3, LVar3, LVar3)
+        EVT_CALL(TranslateModel, CLONED_MODEL(0), 0, LVar0, 0)
         EVT_SUB(LVar0, 2)
         EVT_ADD(LVar2, 5)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnableModel, 0x00002710, FALSE)
+    EVT_CALL(EnableModel, CLONED_MODEL(0), FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -227,9 +227,9 @@ EvtScript N(D_80241B38_92BDE8) = {
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
             EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
-            EVT_ADD(LVar0, 0x000009C4)
-            EVT_IF_GT(LVar0, 0x00008000)
-                EVT_SUB(LVar0, 0x00008000)
+            EVT_ADD(LVar0, 2500)
+            EVT_IF_GT(LVar0, 0x8000)
+                EVT_SUB(LVar0, 0x8000)
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -255,9 +255,9 @@ EvtScript N(D_80241C90_92BF40) = {
         EVT_SET(LVar0, 0)
         EVT_LOOP(0)
             EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
-            EVT_ADD(LVar0, 0x000009C4)
-            EVT_IF_GT(LVar0, 0x00008000)
-                EVT_SUB(LVar0, 0x00008000)
+            EVT_ADD(LVar0, 2500)
+            EVT_IF_GT(LVar0, 0x8000)
+                EVT_SUB(LVar0, 0x8000)
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -627,7 +627,7 @@ EvtScript N(D_8024358C_92D83C) = {
     EVT_END_THREAD
     EVT_EXEC(N(D_80241430_92B6E0))
     EVT_WAIT(30)
-    EVT_CALL(CloneModel, MODEL_o225, 0x00002710)
+    EVT_CALL(CloneModel, MODEL_o225, CLONED_MODEL(0))
     EVT_EXEC(N(D_802414FC_92B7AC))
     EVT_EXEC(N(D_80241678_92B928))
     EVT_EXEC(N(D_80241790_92BA40))
@@ -701,7 +701,7 @@ EvtScript N(EVS_80243B38) = {
     EVT_CALL(N(func_80240364_92A614), 44, 32, 177, 0, 0, 0, 0)
     EVT_EXEC(N(D_802422F0_92C5A0))
     EVT_EXEC(N(D_80243268_92D518))
-    EVT_CALL(CloneModel, MODEL_o225, 0x00002710)
+    EVT_CALL(CloneModel, MODEL_o225, CLONED_MODEL(0))
     EVT_EXEC(N(D_802414FC_92B7AC))
     EVT_EXEC(N(D_802418B4_92BB64))
     EVT_EXEC(N(D_802419F0_92BCA0))

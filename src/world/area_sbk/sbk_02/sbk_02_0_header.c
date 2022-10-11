@@ -1,7 +1,5 @@
 #include "sbk_02.h"
 
-extern EvtScript N(EVS_Main);
-
 s32 N(get_tattle)(void) {
     s32 tattle;
     if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_GOT_PULSE_STONE) {
@@ -29,17 +27,4 @@ MapSettings N(settings) = {
     .entryCount = ENTRY_COUNT(N(Entrances)),
     .background = &gBackgroundImage,
     .tattle = { &N(get_tattle) },
-};
-
-EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(sbk_02_ENTRY_6)
-        EVT_CASE_OR_EQ(sbk_02_ENTRY_7)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
 };

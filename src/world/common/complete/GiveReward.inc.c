@@ -28,4 +28,10 @@ EvtScript N(GiveCoinReward) = {
     EVT_EXEC_WAIT(N(GiveKeyReward)) \
     EVT_CALL(AddKeyItem, itemID)
 
+#define EVT_GIVE_CONSUMABLE_REWARD(itemID) \
+    EVT_SET(LVar0, itemID) \
+    EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \
+    EVT_EXEC_WAIT(N(GiveKeyReward)) \
+    EVT_CALL(AddItem, LVar0, LVar1)
+
 #endif

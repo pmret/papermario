@@ -1,6 +1,6 @@
 #include "common.h"
 
-static s32 N(KeyItemChoiceList)[112];
+static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS];
 
 s32 N(ItemChoice_HasSelectedItem) = 0;
 
