@@ -28,11 +28,11 @@ ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)

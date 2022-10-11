@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_trd_part_2_trd_03
 
-#include "world/common/clouds.inc.c"
+#include "world/common/todo/clouds.inc.c"
 
 EvtScript N(beforeBattle_80232888) = {
     EVT_CALL(SetSpriteShading, -1)

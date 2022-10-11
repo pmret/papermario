@@ -1104,9 +1104,9 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

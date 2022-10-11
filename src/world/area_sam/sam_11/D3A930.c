@@ -16,9 +16,9 @@ ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall) {
 }
 #define NAMESPACE sam_11
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/SetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_8024059C_D3AB6C);
 

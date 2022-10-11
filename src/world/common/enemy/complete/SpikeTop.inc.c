@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/AwaitPlayerNearNpc.inc.c"
+#include "world/common/todo/AwaitPlayerNearNpc.inc.c"
 
 MobileAISettings N(D_80243AA0_C647B0) = {
     .moveSpeed = 1.0f,

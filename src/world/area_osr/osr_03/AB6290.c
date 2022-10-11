@@ -9,4 +9,4 @@ static char* N(exit_str_5) = "kkj_15";
 static char* N(exit_str_6) = "hos_10\0";
 static char* N(exit_str_7) = "";
 
-#include "world/common/SetPlayerSpriteSet2.inc.c"
+#include "world/common/todo/SetPlayerSpriteSet2.inc.c"

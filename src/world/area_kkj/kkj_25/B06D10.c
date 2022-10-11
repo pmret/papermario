@@ -1,7 +1,7 @@
 #include "kkj_25.h"
 #include "effects.h"
 
-#include "world/common/UnkFoldFunc.inc.c"
+#include "world/common/todo/UnkFoldFunc.inc.c"
 
 ApiStatus func_802406EC_B070EC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

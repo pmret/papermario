@@ -45,7 +45,7 @@ ApiStatus N(GetWaveAmplitude)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_AnimateWaves) = {
     EVT_SET_GROUP(EVT_GROUP_00)

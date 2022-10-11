@@ -2921,4 +2921,4 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"

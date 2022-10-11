@@ -3,11 +3,11 @@
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_802438D0_9DA8F0);
 
 #define NAMESPACE dup2_nok_02
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 #define NAMESPACE nok_02
 
 #define NAMESPACE dup2_nok_02
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
@@ -57,11 +57,11 @@ ApiStatus func_80243D14_9DAD34(Evt* script, s32 isInitialCall) {
 }
 
 #define NAMESPACE dup2_nok_02
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 #define NAMESPACE nok_02
 
 #define NAMESPACE dup2_nok_02
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243EC8_9DAEE8);

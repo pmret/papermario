@@ -2,13 +2,13 @@
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241D8C_D21C1C);
 
@@ -59,6 +59,6 @@ ApiStatus func_80241EB4_D21D44(Evt* script, s32 isInitialCall) {
 #include "world/common/atomic/ToadHouse.inc.c"
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242538_D223C8);

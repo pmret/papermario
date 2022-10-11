@@ -7,9 +7,9 @@
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/DeadUnkFunc1.inc.c"
+#include "world/common/todo/DeadUnkFunc1.inc.c"
 
-#include "world/common/UnkFloatFuncAbs.inc.c"
+#include "world/common/todo/UnkFloatFuncAbs.inc.c"
 
 ApiStatus func_802404D0_EFEFD0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

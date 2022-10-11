@@ -5,19 +5,19 @@
 static char* N(exit_str_0) = "mac_01";
 
 #define NAMESPACE dup_mac_00
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 #define NAMESPACE mac_00
 
 #define NAMESPACE dup_mac_00
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE mac_00
 
 #define NAMESPACE dup_mac_00
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 #define NAMESPACE mac_00
 
 #define NAMESPACE dup_mac_00
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE mac_00
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243744_7EE454);
@@ -47,5 +47,5 @@ ApiStatus func_802437D0_7EE4E0(Evt* script, s32 isInitialCall) {
 
 #define NAMESPACE dup_mac_00
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 #define NAMESPACE mac_00

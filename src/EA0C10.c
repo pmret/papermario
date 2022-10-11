@@ -24,15 +24,15 @@ void func_8004D8E0(DeadEnemy*);
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/AwaitPlayerNearNpc.inc.c"
+#include "world/common/todo/AwaitPlayerNearNpc.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Requires data migration
 #ifdef NON_MATCHING
@@ -89,4 +89,4 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"

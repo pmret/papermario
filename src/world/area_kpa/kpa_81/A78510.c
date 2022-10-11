@@ -1,8 +1,8 @@
 #include "kpa_81.h"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 extern s32 D_80240D98_A79258;
 extern s32 D_80240D9C_A7925C;

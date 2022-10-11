@@ -514,8 +514,8 @@ NpcGroupList N(npcGroupList_80242B0C) = {
     {},
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 const char N(flo_25_name_hack)[] = "flo_25";

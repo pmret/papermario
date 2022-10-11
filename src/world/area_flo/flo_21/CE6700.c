@@ -46,7 +46,7 @@ EvtScript N(80240D40) = {
     EVT_END
 };
 
-#include "world/common/StarSpiritEffectFunc.inc.c"
+#include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(80240DA0) = {
     EVT_SET_GROUP(EVT_GROUP_00)

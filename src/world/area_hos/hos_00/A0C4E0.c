@@ -3,9 +3,9 @@
 extern f32 D_80242B9C_A0E88C;
 extern f32 D_80242BA0_A0E890;
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 ApiStatus N(EnableActionCommands)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -51,7 +51,7 @@ ApiStatus func_80240A54_A0C744(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetCamera0Flag1000.inc.c"
+#include "world/common/todo/SetCamera0Flag1000.inc.c"
 
 ApiStatus func_80240B3C_A0C82C(Evt* script, s32 isInitialCall) {
     s32 temp_s1 = script->varTable[0];

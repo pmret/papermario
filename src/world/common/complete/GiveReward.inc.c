@@ -5,8 +5,8 @@
 
 static s32** N(varStash) = NULL;
 
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/StashVars.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 EvtScript N(GiveKeyReward) = {
     EVT_CALL(ShowGotItem, LVar0, ITEM_TYPE_KEY, 0)

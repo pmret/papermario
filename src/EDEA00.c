@@ -19,7 +19,7 @@ const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
 const char D_80247BB8_EE6578[] = "TOGEZO TYPE1 : NORMAL MOVE";
 
-#include "world/common/UnkFunc42.inc.c"
+#include "world/common/todo/UnkFunc42.inc.c"
 
 ApiStatus func_80243470_EE1E30(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(1);

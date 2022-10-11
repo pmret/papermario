@@ -724,7 +724,7 @@ const char N(dgb_00_name_hack)[] = "dgb_00";
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/UnkFunc1.inc.c"
+#include "world/common/todo/UnkFunc1.inc.c"
 
 extern const char N(dgb_08_name_hack)[];
 

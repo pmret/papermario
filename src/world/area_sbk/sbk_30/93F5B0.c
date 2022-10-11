@@ -19,17 +19,17 @@ s32 N(get_tattle)(void) {
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 #include "world/common/enemy/StationaryAI.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // AwaitLetterChoiceResult
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
@@ -80,6 +80,6 @@ ApiStatus func_80241248_9407F8(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 #include "common/foliage.inc.c"

@@ -4,9 +4,9 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802414EC_B2D95C);
 
@@ -41,4 +41,4 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/todo/SwitchToPartner.inc.c"

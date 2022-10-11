@@ -5,7 +5,7 @@ extern EvtScript N(goombario_takeTurn);
 extern EvtScript N(goombario_idle);
 extern EvtScript N(goombario_handleEvent);
 
-#include "world/common/UnkFunc62.inc.c"
+#include "world/common/todo/UnkFunc62.inc.c"
 #include "common/ActorJumpToPos.inc.c"
 #include "common/UnkActorSizeFunc.inc.c"
 #include "common/UnkEffect6CFunc.inc.c"

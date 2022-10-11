@@ -848,9 +848,9 @@ static s32 N(pad_4084)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

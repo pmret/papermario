@@ -20,7 +20,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_sbk_56 },
 };
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 ApiStatus N(StartOasisSongVariation)(void) {
     bgm_set_variation(0, 1);

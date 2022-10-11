@@ -478,13 +478,13 @@ NpcGroupList N(npcGroupList_802429B8) = {
     {},
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

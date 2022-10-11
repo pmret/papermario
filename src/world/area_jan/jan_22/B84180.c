@@ -7,13 +7,13 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SetCamera0Flag1000.inc.c"
+#include "world/common/todo/SetCamera0Flag1000.inc.c"
 
-#include "world/common/UnsetCamera0Flag1000.inc.c"
+#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
 
 ApiStatus PostChapter5StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

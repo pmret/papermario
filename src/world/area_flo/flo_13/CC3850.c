@@ -1249,7 +1249,7 @@ NpcGroupList N(npcGroupList_80247984) = {
 #include "world/common/enemy/LakituAI.inc.c"
 #include "world/common/enemy/SpinyAI.inc.c"
 
-#include "world/common/UnkFunc42.inc.c"
+#include "world/common/todo/UnkFunc42.inc.c"
 
 ApiStatus N(func_802433C0_CC6BD0)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(1);

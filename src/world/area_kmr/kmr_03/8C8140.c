@@ -13,7 +13,7 @@ ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkPositionFunc.inc.c"
+#include "world/common/todo/UnkPositionFunc.inc.c"
 
 EvtScript N(exitWalk_802406F0) = EVT_EXIT_WALK(60,  0, "kmr_04",  0);
 

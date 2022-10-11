@@ -2030,9 +2030,9 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2185,7 +2185,7 @@ ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -2194,7 +2194,7 @@ ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;

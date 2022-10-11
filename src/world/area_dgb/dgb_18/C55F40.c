@@ -707,7 +707,7 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/UnkFunc1.inc.c"
+#include "world/common/todo/UnkFunc1.inc.c"
 
 ApiStatus N(func_80240EBC_C56DFC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

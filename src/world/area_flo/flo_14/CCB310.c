@@ -577,7 +577,7 @@ ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc43.inc.c"
+#include "world/common/todo/UnkFunc43.inc.c"
 
 ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

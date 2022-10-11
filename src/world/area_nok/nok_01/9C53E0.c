@@ -21,9 +21,9 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Requires data migration
 #ifdef NON_MATCHING
@@ -69,7 +69,7 @@ ApiStatus func_802420B4_9C7494(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 ApiStatus func_8024243C_9C781C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

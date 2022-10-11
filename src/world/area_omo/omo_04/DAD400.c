@@ -3,17 +3,17 @@
 static char* N(exit_str_0) = "omo_03";
 static char* N(exit_str_1) = "";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/SetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
 ApiStatus func_802402F4_DAD6F4(Evt* script, s32 isInitialCall) {
     f32 playerVx = gPlayerStatus.currentSpeed * 5.0f * sin_deg(gPlayerStatus.targetYaw);
@@ -31,6 +31,6 @@ ApiStatus func_802402F4_DAD6F4(Evt* script, s32 isInitialCall) {
 const s32 N(pad_8)[] = { 0, 0 };
 static char* N(exit_str_2) = "omo_04";
 
-#include "world/common/SetCamera0Flag1000.inc.c"
+#include "world/common/todo/SetCamera0Flag1000.inc.c"
 
-#include "world/common/UnsetCamera0Flag1000.inc.c"
+#include "world/common/todo/UnsetCamera0Flag1000.inc.c"

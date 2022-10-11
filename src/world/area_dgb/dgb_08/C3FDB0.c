@@ -1018,7 +1018,7 @@ EvtScript N(802469E0) = {
 #define AI_SENTINEL_LAST_NPC  9
 #include "world/common/enemy/SentinelAI.inc.c"
 
-#include "world/common/UnkFunc1.inc.c"
+#include "world/common/todo/UnkFunc1.inc.c"
 
 ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(9) != 0) {

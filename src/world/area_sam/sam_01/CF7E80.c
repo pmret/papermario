@@ -3,9 +3,9 @@
 
 #define CHUCK_QUIZMO_NPC_ID 14
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_8024053C_CF80AC);
 
@@ -62,20 +62,20 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 #include "world/common/atomic/Quizmo.inc.c"
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 #include "common/GetItemEntityPosition.inc.c"
 
-#include "world/common/GetLeftRightPoints.inc.c"
+#include "world/common/todo/GetLeftRightPoints.inc.c"
 
 #define NAMESPACE dup_sam_01
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 #define NAMESPACE sam_01
 
 #define NAMESPACE dup_sam_01
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE sam_01
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"

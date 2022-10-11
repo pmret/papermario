@@ -3,6 +3,6 @@
 static char* N(exit_str_0) = "kpa_94";
 static char* N(exit_str_1) = "";
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"

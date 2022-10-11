@@ -3,4 +3,4 @@
 
 #define NAMESPACE ED4260
 
-#include "world/common/DeadUnkFunc1.inc.c"
+#include "world/common/todo/DeadUnkFunc1.inc.c"

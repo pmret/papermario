@@ -1,6 +1,6 @@
 #include "isk_04.h"
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/todo/SwitchToPartner.inc.c"
 
 #include "world/partners.h"
 extern s32 D_80242288_97D8B8;

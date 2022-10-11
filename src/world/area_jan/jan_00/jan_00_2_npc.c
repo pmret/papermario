@@ -5,7 +5,7 @@
 extern EvtScript N(D_80245860_B25DA0);
 extern EvtScript N(EVS_NpcInteract_HeartPlant_01);
 
-#include "world/common/HeartPlant_SpawnHeart.inc.c"
+#include "world/common/todo/HeartPlant_SpawnHeart.inc.c"
 
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,

@@ -32,7 +32,7 @@ API_CALLABLE(N(func_80240000_B1D760)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkDistFunc2.inc.c"
+#include "world/common/todo/UnkDistFunc2.inc.c"
 
 void N(func_8024013C_B1D89C)(void) {
     Matrix4f sp10;

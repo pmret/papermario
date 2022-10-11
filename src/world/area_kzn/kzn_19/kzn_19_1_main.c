@@ -9,7 +9,7 @@ extern NpcGroupList N(EscapeNPCs);
 
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
-#include "world/common/StarSpiritEffectFunc.inc.c"
+#include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(EVS_TryingSpawningStarCard) = {
     // determine if card should be spawned

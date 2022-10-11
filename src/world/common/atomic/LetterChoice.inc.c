@@ -8,9 +8,9 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
 //static s32 N(LetterDelivery_SavedNpcAnim);
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 s32 N(HasLetterChoiceResult) = FALSE;
 s32 N(LetterChoiceResult) = ITEM_NONE;

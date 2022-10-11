@@ -314,7 +314,7 @@ ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkDistFunc2.inc.c"
+#include "world/common/todo/UnkDistFunc2.inc.c"
 
 ApiStatus N(func_8024013C_C4C4CC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

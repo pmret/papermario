@@ -11,9 +11,9 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241720_8442F0);
 
@@ -54,7 +54,7 @@ ApiStatus PostChapter4StatUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 ApiStatus N(IsPartnerBow)(Evt* script, s32 isInitialCall) {
     if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
@@ -65,7 +65,7 @@ ApiStatus N(IsPartnerBow)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetPlayerCoins.inc.c"
+#include "world/common/todo/GetPlayerCoins.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419E4_8445B4);
 

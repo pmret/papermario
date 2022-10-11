@@ -1448,7 +1448,7 @@ EvtScript N(makeCopy) = {
     EVT_END
 };
 
-#include "world/common/UnkFunc52.inc.c"
+#include "world/common/todo/UnkFunc52.inc.c"
 
 EvtScript N(boostAttack) = {
     EVT_SET(LocalFlag(0), 0)

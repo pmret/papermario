@@ -1,6 +1,6 @@
 #include "tik_08.h"
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 extern s16 D_80242C0E_8819FE[0][2];
 

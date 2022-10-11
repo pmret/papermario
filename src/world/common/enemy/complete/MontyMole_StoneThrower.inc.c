@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/RangedAttackAI.inc.c"
 
-#include "world/common/GetEncounterEnemyIsOwner.inc.c"
+#include "world/common/todo/GetEncounterEnemyIsOwner.inc.c"
 
 EvtScript N(EVS_NpcDefeat_MontyMole_Stone) = {
     EVT_CALL(GetBattleOutcome, LVar0)

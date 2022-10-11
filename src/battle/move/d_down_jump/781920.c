@@ -3,7 +3,7 @@
 
 #define NAMESPACE battle_move_d_down_jump
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
 ApiStatus func_802A10E4_781A04(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

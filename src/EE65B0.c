@@ -16,7 +16,7 @@ ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc43.inc.c"
+#include "world/common/todo/UnkFunc43.inc.c"
 
 ApiStatus func_802403D4_EE6984(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

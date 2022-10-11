@@ -12,9 +12,9 @@ extern s32 D_80244630_EEABE0;
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // Needs data migrated
 #ifdef NON_MATCHING

@@ -5,11 +5,11 @@ extern s32 D_802A4350;
 
 #define NAMESPACE battle_move_hammer_charge_2
 
-#include "world/common/IsBerserkerEquipped.inc.c"
+#include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/IsRightOnEquipped.inc.c"
+#include "world/common/todo/IsRightOnEquipped.inc.c"
 
-#include "world/common/IsHammerMaxCharged.inc.c"
+#include "world/common/todo/IsHammerMaxCharged.inc.c"
 
 ApiStatus func_802A10C8_75E698(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -39,7 +39,7 @@ ApiStatus func_802A10C8_75E698(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkMoveFunc3.inc.c"
+#include "world/common/todo/UnkMoveFunc3.inc.c"
 
 ApiStatus func_802A12FC_75E8CC(Evt* script, s32 isInitialCall) {
     if (D_802A4350 == 0) {

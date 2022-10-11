@@ -17,7 +17,7 @@ ApiStatus func_80240384_ADB224(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetPeachDisguise.inc.c"
+#include "world/common/todo/GetPeachDisguise.inc.c"
 
 ApiStatus func_802403CC_ADB26C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

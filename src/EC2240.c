@@ -9,9 +9,9 @@ const char* ascii_EC7170 = "flo_09";
 const char* ascii_EC7178 = "flo_22";
 const char* ascii_EC7180 = "flo_18\0";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 //const char* D_80244F98_EC7198 = "touch_choro\n";
 

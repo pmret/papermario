@@ -16,9 +16,9 @@ extern s32 D_8024EA14;
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // needs data migration, matching otherwise
 #ifdef NON_MATCHING
@@ -123,6 +123,6 @@ ApiStatus func_802430D0_826390(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 #include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"

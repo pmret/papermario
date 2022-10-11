@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/UnkMachiFunc.inc.c"
+#include "world/common/todo/UnkMachiFunc.inc.c"
 
 #define NAMESPACE mac_01
 

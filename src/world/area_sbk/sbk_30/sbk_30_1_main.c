@@ -43,7 +43,7 @@ EvtScript N(D_802418B0_940E60) = {
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_ExitWalk_sbk_99_1) = EVT_EXIT_WALK(60, sbk_30_ENTRY_0, "sbk_99", sbk_99_ENTRY_1);
 EvtScript N(EVS_ExitWalk_sbk_31_0) = EVT_EXIT_WALK(60, sbk_30_ENTRY_1, "sbk_31", sbk_31_ENTRY_0);

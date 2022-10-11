@@ -8,8 +8,8 @@ static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS];
 s32 N(ItemChoice_HasSelectedItem) = 0;
 s32 N(ItemChoice_SelectedItemID) = 0;
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

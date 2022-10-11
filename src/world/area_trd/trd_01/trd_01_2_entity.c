@@ -23,8 +23,8 @@ EvtScript N(EVS_FocusCamOnLock) = {
     EVT_END
 };
 
-#include "world/common/RemovePadlock.inc.c"
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_UnlockDoors) = {
     EVT_SET_GROUP(EVT_GROUP_00)

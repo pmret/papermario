@@ -2,9 +2,9 @@
 
 //static f64 D_802462E0_B4AA50[4] = {990.0, 2.732579860045591e+204, 2.732579860045591e+204, 0.0}; /* const */
 
-#include "world/common/SetEntityPositionF.inc.c"
+#include "world/common/todo/SetEntityPositionF.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 // Can't get this to match because the const array above is in "discarded section .data"
 #ifdef NON_EQUIVALENT

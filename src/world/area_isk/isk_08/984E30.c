@@ -7,4 +7,4 @@ static char* N(exit_str_3) = "isk_11";
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/AwaitPlayerNearNpc.inc.c"
+#include "world/common/todo/AwaitPlayerNearNpc.inc.c"
