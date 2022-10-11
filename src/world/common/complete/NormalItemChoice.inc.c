@@ -1,3 +1,5 @@
+#ifndef _COMMON_CONSUMABLE_CHOICE_
+#define _COMMON_CONSUMABLE_CHOICE_
 
 #include "common.h"
 
@@ -89,7 +91,14 @@ EvtScript N(EVS_ChooseItem) = {
     EVT_END
 };
 
-#define EVT_CHOOSE_CONSUMABLE(itemList) \
-    EVT_SET(LVar0, itemList) \
+#define EVT_CHOOSE_ANY_CONSUMABLE() \
+    EVT_SET(LVar0, 0) \
     EVT_SET(LVar1, 2) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))
+
+#define EVT_CHOOSE_CONSUMABLE(itemList) \
+    EVT_SET(LVar0, EVT_PTR(itemList)) \
+    EVT_SET(LVar1, 2) \
+    EVT_EXEC_WAIT(N(EVS_ChooseItem))
+
+#endif

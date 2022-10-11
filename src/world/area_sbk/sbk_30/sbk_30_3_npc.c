@@ -21,6 +21,11 @@ NpcSettings N(NpcSettings_Archeologist_01) = {
     .level = 99,
 };
 
+#include "world/common/complete/GiveReward.inc.c"
+#include "world/common/complete/KeyItemChoice.inc.c"
+MAP_STATIC_PAD(2,main);
+#include "world/common/complete/NormalItemChoice.inc.c"
+
 #include "world/common/atomic/LetterChoice.inc.c"
 
 s32 N(LetterList)[] = {
@@ -28,10 +33,10 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(D_80242A8C_94203C) = {
+EvtScript N(EVS_DeliveryPrompt) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
+        ITEM_LETTER25, ITEM_NONE,
         MSG_CH2_004A, MSG_CH2_004B, MSG_CH2_004C, MSG_CH2_004D,
         EVT_PTR(N(LetterList)))
         EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -39,12 +44,9 @@ EvtScript N(D_80242A8C_94203C) = {
     EVT_END
 };
 
-EvtScript N(D_80242ADC_94208C) = {
+EvtScript N(EVS_DeliveryReward) = {
     EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, 348)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
+        EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -55,13 +57,10 @@ s32 N(ArtifactList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(D_80242B48_9420F8) = {
+EvtScript N(EVS_ArtifactPrompt) = {
     EVT_SET(GF_SBK_GaveArtifactToKolorado, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0044)
-    EVT_SET(LVar0, 348)
-    EVT_SET(LVar1, 3)
-    EVT_EXEC_WAIT(N(GiveKeyReward))
-    EVT_CALL(AddStarPieces, 1)
+    EVT_GIVE_STAR_PIECE()
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0045)
     EVT_RETURN
     EVT_END
@@ -89,21 +88,17 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
             EVT_SET(GF_SBK_KeptArtifactFromKolorado, TRUE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
         EVT_END_IF
-        EVT_SET(LVar0, EVT_PTR(N(ArtifactList)))
-        EVT_SET(LVar1, 0)
-        EVT_EXEC_WAIT(N(EVS_ShowChoiceWindow))
+        EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
         EVT_SWITCH(LVar0)
             EVT_CASE_GE(1)
-                EVT_EXEC_WAIT(N(D_80242B48_9420F8))
+                EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
                 EVT_GOTO(50)
             EVT_CASE_DEFAULT
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0041)
-                EVT_SET(LVar0, EVT_PTR(N(ArtifactList)))
-                EVT_SET(LVar1, 0)
-                EVT_EXEC_WAIT(N(EVS_ShowChoiceWindow))
+                EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
                 EVT_SWITCH(LVar0)
                     EVT_CASE_GE(1)
-                        EVT_EXEC_WAIT(N(D_80242B48_9420F8))
+                        EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
                     EVT_CASE_DEFAULT
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0042)
                         EVT_GOTO(50)
@@ -162,8 +157,8 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar9)
-    EVT_EXEC_WAIT(N(D_80242A8C_94203C))
-    EVT_EXEC_WAIT(N(D_80242ADC_94208C))
+    EVT_EXEC_WAIT(N(EVS_DeliveryPrompt))
+    EVT_EXEC_WAIT(N(EVS_DeliveryReward))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

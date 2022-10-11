@@ -312,7 +312,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
 
 API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
     Bytecode* args = script->ptrReadPos;
-    s32 ret = 0;
+    s32 ret = ApiStatus_BLOCK;
 
     if (isInitialCall) {
         script->varTable[0] = evt_get_variable(script, *args++);
@@ -343,7 +343,7 @@ API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
 
         case 2:
             if (script->functionTemp[1] == 0) {
-                ret = 1;
+                ret = ApiStatus_DONE1;
             }
             script->functionTemp[1] -= script->varTable[1];
             if (script->functionTemp[1] < 0) {

@@ -1,3 +1,6 @@
+#ifndef _COMMON_KEY_CHOICE_
+#define _COMMON_KEY_CHOICE_
+
 #include "common.h"
 
 static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS];
@@ -39,7 +42,7 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"
 
-EvtScript N(EVS_ItemChoicePopup) = {
+EvtScript N(EVS_KeyItemChoicePopup) = {
     EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_SET(LVarA, LVar0)
@@ -66,8 +69,20 @@ EvtScript N(EVS_ItemChoicePopup) = {
 
 EvtScript N(EVS_ChooseKeyItem) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_KeyItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END
 };
+
+#define EVT_CHOOSE_ANY_KEY_ITEM() \
+    EVT_SET(LVar0, 0) \
+    EVT_SET(LVar1, 0) \
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+
+#define EVT_CHOOSE_KEY_ITEM(itemList) \
+    EVT_SET(LVar0, EVT_PTR(itemList)) \
+    EVT_SET(LVar1, 0) \
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+
+#endif

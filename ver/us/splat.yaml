@@ -8484,19 +8484,18 @@ segments:
     - [0x93DD10, c, sbk_26_2_npc]
     - [0x93DE30, c, sbk_26_3_foliage]
     - [0x93E070]
-  - name: sbk_30 #TODO
+  - name: sbk_30
     dir: world/area_sbk/sbk_30
     type: code
     start: 0x93F5B0
     vram: 0x80240000
     subsegments:
-    - [0x93F5B0, c]
-    - [0x940DC0, data]
-    - [0x943E20]
-#    - [0x93F5B0, c, sbk_30_1_main]
-#    - [0x93F5B0, c, sbk_30_2_npc]
-#    - [0x93F5B0, c, sbk_30_3_foliage]
-#    - [0x940DC0]
+    - [0x93F5B0, c, sbk_30_0_header]
+    - [0x93F5B0, c, sbk_30_1_music]
+    - [0x93F5B0, c, sbk_30_2_main]
+    - [0x93F5B0, c, sbk_30_3_npc]
+    - [0x93F5B0, c, sbk_30_4_foliage]
+    - [0x940DC0]
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code

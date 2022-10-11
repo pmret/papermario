@@ -246,7 +246,7 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
-    EVT_CHOOSE_CONSUMABLE(NULL)
+    EVT_CHOOSE_ANY_CONSUMABLE()
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)

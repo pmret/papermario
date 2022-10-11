@@ -1,17 +1,17 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Pipe_SetAnimFlag)) {
     gPlayerStatusPtr->animFlags |= PA_FLAGS_100000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Pipe_GetCurrentFloor)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Pipe_GetCurrentFloor)) {
     script->varTable[0] = gCollisionStatus.currentFloor;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Pipe_AwaitDownInput)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Pipe_AwaitDownInput)) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 stickX, stickY;
 
@@ -33,7 +33,7 @@ ApiStatus N(Pipe_AwaitDownInput)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(Pipe_GetEntryPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Pipe_GetEntryPos)) {
     MapSettings* mapSettings = get_current_map_settings();
     s32 index = evt_get_variable(script, LVar0);
 
@@ -49,7 +49,7 @@ ApiStatus N(Pipe_GetEntryPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Pipe_GetCameraYaw)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Pipe_GetCameraYaw)) {
     script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
     return ApiStatus_DONE2;
 }

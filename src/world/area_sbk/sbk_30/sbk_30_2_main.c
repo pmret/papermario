@@ -1,46 +1,5 @@
 #include "sbk_30.h"
 
-s32 N(get_tattle)(void) {
-    s32 tattle;
-    if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_STAR_SPRIT_DEPARTED) {
-        tattle = MSG_MapTattle_sbk_30_after;
-    } else {
-        tattle = MSG_MapTattle_sbk_30_before;
-    }
-    return  tattle;
-}
-
-EntryList N(Entrances) = {
-    [sbk_30_ENTRY_0]    { -475.0,    0.0,    0.0,   90.0 },
-    [sbk_30_ENTRY_1]    {  475.0,    0.0,    0.0,  270.0 },
-    [sbk_30_ENTRY_2]    {    0.0,    0.0, -475.0,  180.0 },
-    [sbk_30_ENTRY_3]    {    0.0,    0.0,  475.0,    0.0 },
-    [sbk_30_ENTRY_4]    {    0.0,    0.0,    0.0,    0.0 },
-    [sbk_30_ENTRY_5]    {    0.0,    0.0,    0.0,    0.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .background = &gBackgroundImage,
-    .tattle = { &N(get_tattle) },
-};
-
-EvtScript N(D_802418B0_940E60) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_4)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_5)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
 #include "world/common/atomic/UnkFunc27.inc.c"
 
 #include "world/common/todo/SpawnSunEffect.inc.c"
@@ -59,7 +18,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_80241B20_9410D0) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(sbk_30_ENTRY_0)
@@ -79,7 +38,7 @@ EvtScript N(D_80241B20_9410D0) = {
     EVT_END
 };
 
-EvtScript N(D_80241BEC_94119C) = {
+EvtScript N(EVS_Scene_RuinsRising) = {
     EVT_CALL(PlaySound, SOUND_80000060)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 193, 0, -237)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 193, 0, -237)
@@ -122,14 +81,14 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_Default, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(SetZoneEnabled, ZONE_o25, FALSE)
     EVT_END_IF
-    EVT_EXEC(N(D_802418B0_940E60))
-    EVT_EXEC(N(D_80241B20_9410D0))
+    EVT_EXEC(N(EVS_SetupMusic))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_EXEC(N(EVS_SetupFoliage))
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(sbk_30_ENTRY_4)
         EVT_CASE_OR_EQ(sbk_30_ENTRY_5)
-            EVT_EXEC_WAIT(N(D_80241BEC_94119C))
+            EVT_EXEC_WAIT(N(EVS_Scene_RuinsRising))
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_CALL(N(SpawnSunEffect))
@@ -137,3 +96,5 @@ EvtScript N(EVS_Main) = {
     EVT_RETURN
     EVT_END
 };
+
+MAP_RODATA_PAD(1,main);
