@@ -24,5 +24,5 @@ MapSettings N(settings) = {
     .entryList = &N(Entrances),
     .entryCount = ENTRY_COUNT(N(Entrances)),
     .background = &gBackgroundImage,
-    .tattle = { &N(get_tattle) },
+    .tattle = { .get = &N(get_tattle) },
 };
