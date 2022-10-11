@@ -3,49 +3,10 @@
 //TODO remove
 extern s32 N(LetterDelivery_SavedNpcAnim);
 
-s32** N(varStash) = NULL;
-
-//TODO temporarily moved from #include "world/common/StashVars.inc.c" to suppresse warnings
-ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
-    //static s32** varTable = NULL;
-    s32 i;
-
-    if (N(varStash) == NULL) {
-        N(varStash) = heap_malloc(sizeof(script->varTable));
-
-        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            N(varStash)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            script->varTable[i] = (s32) N(varStash)[i];
-        }
-
-        heap_free(N(varStash));
-        N(varStash) = NULL;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-EvtScript N(Delivery_ShowGotStarPiece) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_80244A44) = {
-    EVT_CALL(ShowGotItem, LVar0, TRUE, 0x10)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/complete/GiveReward.inc.c"
 
 static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
 //static s32 N(LetterDelivery_SavedNpcAnim);
-
-#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -292,7 +253,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
                     EVT_IF_NE(LVar6, 0)
                         EVT_SET(LVar0, LVar6)
                         EVT_SET(LVar1, ITEM_TYPE_KEY)
-                        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+                        EVT_EXEC_WAIT(N(GiveKeyReward))
                         EVT_CALL(AddKeyItem, LVar6)
                     EVT_END_IF
                     EVT_SET(LVarC, 2)

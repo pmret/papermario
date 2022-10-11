@@ -1,9 +1,5 @@
 #include "sbk_30.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_SetupFoliage);
-extern NpcGroupList N(DefaultNPCs);
-
 s32 N(get_tattle)(void) {
     s32 tattle;
     if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_STAR_SPRIT_DEPARTED) {

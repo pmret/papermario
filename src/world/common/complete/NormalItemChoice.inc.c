@@ -3,12 +3,13 @@
 
 static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES];
 
-s32 N(ItemChoice_HasSelectedItem) = 0;
+#ifndef _CHOICE_SUPPORT_
+#define _CHOICE_SUPPORT_
 
+s32 N(ItemChoice_HasSelectedItem) = 0;
 s32 N(ItemChoice_SelectedItemID) = 0;
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
-
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
 API_CALLABLE(N(ItemChoice_WaitForSelection)) {
@@ -34,6 +35,8 @@ API_CALLABLE(N(ItemChoice_SaveSelected)) {
     N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
+
+#endif
 
 API_CALLABLE(N(BuildItemChoiceList)) {
     Bytecode* args = script->ptrReadPos;

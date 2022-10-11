@@ -1,6 +1,8 @@
 
 #include "sbk_30.h"
 
+#include "world/common/enemy/StationaryAI.inc.c"
+
 NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,
     .radius = 24,
@@ -41,7 +43,7 @@ EvtScript N(D_80242ADC_94208C) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, 348)
         EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+        EVT_EXEC_WAIT(N(GiveKeyReward))
         EVT_CALL(AddStarPieces, 1)
     EVT_END_IF
     EVT_RETURN
@@ -58,7 +60,7 @@ EvtScript N(D_80242B48_9420F8) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0044)
     EVT_SET(LVar0, 348)
     EVT_SET(LVar1, 3)
-    EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+    EVT_EXEC_WAIT(N(GiveKeyReward))
     EVT_CALL(AddStarPieces, 1)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0045)
     EVT_RETURN

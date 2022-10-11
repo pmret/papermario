@@ -25,3 +25,7 @@ enum {
 };
 
 #define NAMESPACE sbk_30
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupFoliage);
+extern NpcGroupList N(DefaultNPCs);
