@@ -25,16 +25,16 @@ EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
-    data->unk_14 = 0;
-    data->unk_10 = 0xA;
-    data->unk_24 = 0xFF;
+    data->lifeTime = 0;
+    data->timeLeft = 10;
+    data->unk_24 = 255;
     data->pos.x = arg1;
     data->pos.y = arg2;
     data->pos.z = arg3;
     data->unk_28 = arg4;
-    data->unk_18 = 0x46;
-    data->unk_1C = 0xB4;
-    data->unk_20 = 0x78;
+    data->unk_18 = 70;
+    data->unk_1C = 180;
+    data->unk_20 = 120;
     data->unk_2C = 0;
 
     return effect;
@@ -43,7 +43,29 @@ EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 void shiny_flare_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/shiny_flare", shiny_flare_update);
+void shiny_flare_update(EffectInstance *effect) {
+    ShinyFlareFXData *data = effect->data.shinyFlare;
+
+    if (effect->flags & 16) {
+        effect->flags &= ~16;
+        data->timeLeft = 10;
+    }
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
+    }
+
+    data->lifeTime++;
+    if (data->timeLeft < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    if (data->timeLeft < 4) {
+        data->unk_2C *= 0.5;
+        return;
+    }
+
+    data->unk_2C = data->lifeTime * 0.2f + 0.3;
+}
 
 void shiny_flare_render(EffectInstance* effect) {
     RenderTask renderTask;
