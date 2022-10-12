@@ -8,7 +8,7 @@ extern s32** N(Quizmo_varStash);
 
 void N(Quizmo_NPC_OnRender)(Npc* npc);
 
-ApiStatus N(Quizmo_StashVars)(Evt* script, s32 isInitialCall) {
+ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
     //static s32** varTable = NULL;
     s32 i;
 
