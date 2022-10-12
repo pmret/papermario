@@ -11,7 +11,7 @@ s8 D_802809F4 = 0;
 s8 D_802809F5 = 0;
 s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
-u16 D_802809FA = 0;
+u16 gTattleBgTextureYOffset = 0;
 
 BSS s32 bSavedPartner = 0;
 BSS s32 bSavedOverrideFlags = 0;
@@ -32,7 +32,7 @@ BSS s32 D_8029EFBC;
 BSS s32 D_8029EFC0[10];
 BSS s32 D_8029EFE8[10];
 BSS s32 D_8029F010[10];
-BSS s16 D_8029F038[0x100];
+BSS PAL_BIN gTattleBgPalette[0x100];
 
 extern HudScript HES_HPDigit0;
 extern HudScript HES_HPDigit1;
@@ -713,14 +713,8 @@ void func_8023ED5C(void) {
     }
 }
 
-u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
-    s32 temp_lo;
-
-    temp_lo = (arg1 - arg0) * arg2;
-    if (temp_lo < 0) {
-        temp_lo += 0xFF;
-    }
-    return (arg0 + (temp_lo >> 8));
+u16 blend_background_channel_COPY(u16 arg0, s32 arg1, s32 alpha) {
+    return arg0 + (arg1 - arg0) * alpha / 256;
 }
 
 void tattle_cam_pre_render(Camera* camera) {
@@ -747,20 +741,20 @@ void tattle_cam_pre_render(Camera* camera) {
         get_background_color_blend(&r1, &g1, &b1, &a1);
         if (fogA == 255) {
             for (i = 0; i < 256; i++) {
-                D_8029F038[i] = 1;
+                gTattleBgPalette[i] = 1;
             }
         } else {
             for (i = 0; i < 256; i++) {
                 u16 palColor = ((u16*)gGameStatusPtr->backgroundPalette)[i];
-                u16 blendedB = func_8023F060((palColor >> 1) & 0x1F, fogB >> 3, fogA);
-                u16 blendedG = func_8023F060((palColor >> 6) & 0x1F, fogG >> 3, fogA);
-                u16 blendedR = func_8023F060((palColor >> 11) & 0x1F, fogR >> 3, fogA);
-                D_8029F038[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
+                u16 blendedB = blend_background_channel_COPY((palColor >> 1) & 0x1F, fogB >> 3, fogA);
+                u16 blendedG = blend_background_channel_COPY((palColor >> 6) & 0x1F, fogG >> 3, fogA);
+                u16 blendedR = blend_background_channel_COPY((palColor >> 11) & 0x1F, fogR >> 3, fogA);
+                gTattleBgPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
             }
         }
     }
 
-    if (gGameStatusPtr->backgroundFlags & 1) {
+    if (gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE) {
         gDPPipeSync(gMasterGfxPos++);
         gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
         gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
@@ -773,7 +767,7 @@ void tattle_cam_pre_render(Camera* camera) {
         if (!fogEnabled) {
             gDPLoadTLUT_pal256(gMasterGfxPos++, gGameStatusPtr->backgroundPalette);
         } else {
-            gDPLoadTLUT_pal256(gMasterGfxPos++, D_8029F038);
+            gDPLoadTLUT_pal256(gMasterGfxPos++, gTattleBgPalette);
         }
         bgWidth = gGameStatusPtr->backgroundMaxX;
         bgHeight = gGameStatusPtr->backgroundMaxY;
@@ -784,7 +778,7 @@ void tattle_cam_pre_render(Camera* camera) {
         posX = cam->viewportStartX;
         posY = cam->viewportStartY;
         for (i = 0; i < numLines; i++) {
-            texOffsetY = D_802809FA + lineHeight * i;
+            texOffsetY = gTattleBgTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -793,11 +787,15 @@ void tattle_cam_pre_render(Camera* camera) {
                                0, 0, 295, 5, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (lineHeight * i + posY) * 4, (texOffsetX + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4, G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (lineHeight * i + posY) * 4, (bgWidth + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (lineHeight * i + posY) * 4,
+                                                 (texOffsetX + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4,
+                                                 G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (lineHeight * i + posY) * 4,
+                                                 (bgWidth + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4,
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
         if (extraHeight != 0) {
-            texOffsetY = D_802809FA + lineHeight * i;
+            texOffsetY = gTattleBgTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -805,8 +803,12 @@ void tattle_cam_pre_render(Camera* camera) {
                                G_IM_FMT_CI, G_IM_SIZ_8b, bgWidth, extraHeight,
                                0, 0, 295, extraHeight - 1, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (i * lineHeight + posY) * 4, (texOffsetX + posX - 1) * 4, (bgHeight + - 1 + posY) * 4, G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (i * lineHeight + posY) * 4, (bgWidth + posX - 1) * 4, (bgHeight - 1 + posY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (i * lineHeight + posY) * 4,
+                                                 (texOffsetX + posX - 1) * 4, (bgHeight + - 1 + posY) * 4,
+                                                 G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (i * lineHeight + posY) * 4,
+                                                 (bgWidth + posX - 1) * 4, (bgHeight - 1 + posY) * 4,
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
     }
 
@@ -836,7 +838,7 @@ void tattle_cam_pre_render(Camera* camera) {
     gDPPipeSync(gMasterGfxPos++);
     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
 
-    if (!(gGameStatusPtr->backgroundFlags & 1)) {
+    if (!(gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE)) {
         gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
         gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(cam->bgColor[0], cam->bgColor[1], cam->bgColor[2], 1));
         gDPFillRectangle(gMasterGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);

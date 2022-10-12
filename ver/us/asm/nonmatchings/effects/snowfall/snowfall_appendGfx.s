@@ -21,8 +21,8 @@ glabel snowfall_appendGfx
 /* 38CD58 E008A768 8E690028 */  lw        $t1, 0x28($s3)
 /* 38CD5C E008A76C 8E630004 */  lw        $v1, 4($s3)
 /* 38CD60 E008A770 A3A20059 */  sb        $v0, 0x59($sp)
-/* 38CD64 E008A774 3C028015 */  lui       $v0, %hi(D_801512F0)
-/* 38CD68 E008A778 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
+/* 38CD64 E008A774 3C028015 */  lui       $v0, %hi(gBgRenderTypePtr)
+/* 38CD68 E008A778 8C4212F0 */  lw        $v0, %lo(gBgRenderTypePtr)($v0)
 /* 38CD6C E008A77C 8E7E002C */  lw        $fp, 0x2c($s3)
 /* 38CD70 E008A780 00031880 */  sll       $v1, $v1, 2
 /* 38CD74 E008A784 90420000 */  lbu       $v0, ($v0)

@@ -1425,7 +1425,7 @@ typedef struct GameStatus {
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
     /* 0x144 */ struct Shop* mapShop;
-    /* 0x148 */ s16 backgroundFlags; /* (bit 1 = enable, bit 2 is used for something else) */
+    /* 0x148 */ s16 backgroundFlags;
     /* 0x14A */ s16 backgroundMinX;
     /* 0x14C */ s16 backgroundMinY;
     /* 0x14E */ s16 backgroundMaxX;

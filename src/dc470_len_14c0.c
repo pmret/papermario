@@ -2,13 +2,13 @@
 
 char gCloudyFlowerFieldsBg[] = "fla_bg";
 char gSunnyFlowerFieldsBg[] = "flb_bg";
-s8 D_8014F12F = FALSE;
-s16 D_8014F130 = 0;
-f32 D_8014F134 = 0.0f;
+s8 gBackroundWaveEnabled = FALSE;
+s16 gBackroundTextureYOffset = 0;
+f32 gBackroundWavePhase = 0.0f;
 
 // BSS
-extern PAL_BIN D_801593A0[256];
-extern f32 D_801595A0;
+extern PAL_BIN gBackgroundPalette[256];
+extern f32 gBackroundLastScrollValue;
 
 void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
@@ -32,10 +32,10 @@ void load_map_bg(char* optAssetName) {
 }
 
 void reset_background_settings(void) {
-    D_801595A0 = 0;
-    D_8014F12F = FALSE;
+    gBackroundLastScrollValue = 0;
+    gBackroundWaveEnabled = FALSE;
     gGameStatusPtr->backgroundDarkness = 180;
-    gGameStatusPtr->backgroundFlags &= 0xF0;
+    gGameStatusPtr->backgroundFlags &= BACKGROUND_RENDER_STATE_MASK;
 }
 
 void read_background_size(BackgroundHeader* bg) {
@@ -45,38 +45,31 @@ void read_background_size(BackgroundHeader* bg) {
     gGameStatusPtr->backgroundMinY = bg->startY;
     gGameStatusPtr->backgroundRaster = bg->raster;
     gGameStatusPtr->backgroundPalette = bg->palette;
-    gGameStatusPtr->backgroundFlags |= 1;
+    gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_TEXTURE;
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
-    gGameStatusPtr->backgroundFlags &= ~1;
+    gGameStatusPtr->backgroundFlags &= ~BACKGROUND_FLAG_TEXTURE;
     gGameStatusPtr->backgroundMaxX = startX;
     gGameStatusPtr->backgroundMaxY = startY;
     gGameStatusPtr->backgroundMinX = sizeX;
     gGameStatusPtr->backgroundMinY = sizeY;
 }
 
-u16 blend_background_channel(s32 arg0, s32 arg1, s32 alpha) {
-    s32 temp_lo;
-
-    temp_lo = (arg1 - (u16)arg0) * alpha;
-    if (temp_lo < 0) {
-        temp_lo = temp_lo + 0xFF;
-    }
-    temp_lo = arg0 + (temp_lo >> 8);
-    return temp_lo;
+u16 blend_background_channel(u16 arg0, s32 arg1, s32 alpha) {
+    return arg0 + (arg1 - arg0) * alpha / 256;
 }
 
 void appendGfx_background_texture(void) {
     Camera* cam = &gCameras[gCurrentCameraID];
     u16 flags = 0;
-    s32 fogR, fogG, fogB, fogA; // 18 1c 20 24
-    u8 r1, g1, b1, a1; // 28 29 2a 2b
-    u8 r2, g2, b2; // 2c 2d 2e
+    s32 fogR, fogG, fogB, fogA;
+    u8 r1, g1, b1, a1;
+    u8 r2, g2, b2;
     u16 blendedR, blendedG, blendedB;
     s32 i;
 
-    f32 theta, sinTheta, cosTheta, f4, f5, f6, f7, f8;
+    f32 theta, sinTheta, cosTheta, scrollValue, f5, waveOffset;
 
     s32 bgMinX;
     s32 bgMinY;
@@ -97,16 +90,16 @@ void appendGfx_background_texture(void) {
         fogA = gGameStatusPtr->backgroundDarkness;
     }
 
-    switch (*D_801512F0) {
-        case 0:
-        case 1:
+    switch (*gBgRenderTypePtr) {
+        case BACKGROUND_RENDER_TYPE_0:
+        case BACKGROUND_RENDER_TYPE_1:
             get_background_color_blend(&r1, &g1, &b1, &a1);
             if (a1 != 0) {
                 flags |= 2;
             }
             break;
-        case 2:
-        case 3:
+        case BACKGROUND_RENDER_TYPE_2:
+        case BACKGROUND_RENDER_TYPE_3:
         default:
             get_model_env_color_parameters(&r1, &g1, &b1, &r2, &g2, &b2);
             if (!(r1 == 255 && g1 == 255 && b1 == 255 && r2 == 0 && g2 == 0 && b2 == 0)) {
@@ -115,55 +108,39 @@ void appendGfx_background_texture(void) {
             break;
     }
 
-/*
-    switch (*D_801512F0) {
-        case 0:
-        case 1:
-            get_background_color_blend(&r1, &g1, &b1, &a1);
-            if (a1 != 0) {
-                flags |= 2;
-            }
-            break;
-        default:
-            get_model_env_color_parameters(&r1, &g1, &b1, &r2, &g2, &b2);
-            if (!(r1 == 255 && g1 == 255 && b1 == 255 && r2 == 0 && g2 == 0 && b2 == 0)) {
-                flags |= 4;
-            }
-    }
-*/
     switch (flags) {
         case 0:
-            gGameStatusPtr->backgroundFlags &= ~0x2;
+            gGameStatusPtr->backgroundFlags &= ~BACKGROUND_FLAG_FOG;
             break;
         case 1:
-            gGameStatusPtr->backgroundFlags |= 0x2;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             break;
         case 2:
-            gGameStatusPtr->backgroundFlags |= 0x2;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             fogR = r1;
             fogG = g1;
             fogB = b1;
             fogA = a1;
             break;
         case 3:
-            gGameStatusPtr->backgroundFlags |= 0x2;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             fogR = (fogR * (255 - a1) + r1 * a1) / 255;
             fogG = (fogG * (255 - a1) + g1 * a1) / 255;
             fogB = (fogB * (255 - a1) + b1 * a1) / 255;
             fogA = (fogA * (255 - a1) + a1 * a1) / 255;
             break;
         case 4:
-            gGameStatusPtr->backgroundFlags |= 0x2;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             break;
     }
 
-    if (gGameStatusPtr->backgroundFlags & 2) {
-        switch (*D_801512F0) {
-            case 0:
-            case 1:
+    if (gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_FOG) {
+        switch (*gBgRenderTypePtr) {
+            case BACKGROUND_RENDER_TYPE_0:
+            case BACKGROUND_RENDER_TYPE_1:
                 if (fogA == 255) {
                     for (i = 0; i < 256; i++) {
-                        D_801593A0[i] = 1;
+                        gBackgroundPalette[i] = 1;
                     }
                 } else {
                     for (i = 0; i < 256; i++) {
@@ -171,12 +148,12 @@ void appendGfx_background_texture(void) {
                         blendedB = blend_background_channel((palColor >> 1) & 0x1F, fogB >> 3, fogA);
                         blendedG = blend_background_channel((palColor >> 6) & 0x1F, fogG >> 3, fogA);
                         blendedR = blend_background_channel((palColor >> 11) & 0x1F, fogR >> 3, fogA);
-                        D_801593A0[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
+                        gBackgroundPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
                     }
                 }
                 break;
-            case 2:
-            case 3:
+            case BACKGROUND_RENDER_TYPE_2:
+            case BACKGROUND_RENDER_TYPE_3:
             default:
                 for (i = 0; i < 256; i++) {
                     u16 palColor = gGameStatusPtr->backgroundPalette[i];
@@ -193,7 +170,7 @@ void appendGfx_background_texture(void) {
                     if (blendedR > 0x1F) {
                         blendedR = 0x1F;
                     }
-                    D_801593A0[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
+                    gBackgroundPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
                 }
                 break;
         }
@@ -203,20 +180,20 @@ void appendGfx_background_texture(void) {
     sinTheta = sin_deg(theta);
     cosTheta = cos_deg(theta);
     f5 = cosTheta * cam->lookAt_obj.x - sinTheta * cam->lookAt_obj.z + cam->leadAmount;
-    f4 = -f5 * 0.25f;
-    f4 += gGameStatusPtr->backgroundMaxX * theta * (1 / 90.0f);
+    scrollValue = -f5 * 0.25f;
+    scrollValue += gGameStatusPtr->backgroundMaxX * theta * (1 / 90.0f);
 
-    if (fabsf(f4 - D_801595A0) < 0.3f) {
-        f4 = D_801595A0;
+    if (fabsf(scrollValue - gBackroundLastScrollValue) < 0.3f) {
+        scrollValue = gBackroundLastScrollValue;
     } else {
-        D_801595A0 = f4;
+        gBackroundLastScrollValue = scrollValue;
     }
 
-    while (f4 < 0.0f) {
-        f4 += gGameStatusPtr->backgroundMaxX * 32;
+    while (scrollValue < 0.0f) {
+        scrollValue += gGameStatusPtr->backgroundMaxX * 32;
     }
 
-    bgXOffset =gGameStatusPtr->backgroundXOffset = ((s32)f4) % gGameStatusPtr->backgroundMaxX;
+    bgXOffset =gGameStatusPtr->backgroundXOffset = ((s32)scrollValue) % gGameStatusPtr->backgroundMaxX;
     bgMaxX = gGameStatusPtr->backgroundMaxX;
     bgMaxY = gGameStatusPtr->backgroundMaxY;
     bgMinX = gGameStatusPtr->backgroundMinX;
@@ -231,18 +208,18 @@ void appendGfx_background_texture(void) {
     gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
     gDPPipeSync(gMasterGfxPos++);
 
-    if (!(gGameStatusPtr->backgroundFlags & 2)) {
+    if (!(gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_FOG)) {
         gDPLoadTLUT_pal256(gMasterGfxPos++, gGameStatusPtr->backgroundPalette);
     } else {
-        gDPLoadTLUT_pal256(gMasterGfxPos++, D_801593A0);
+        gDPLoadTLUT_pal256(gMasterGfxPos++, gBackgroundPalette);
     }
 
-    if (!D_8014F12F) {
+    if (!gBackroundWaveEnabled) {
         lineHeight = 2048 / gGameStatusPtr->backgroundMaxX;
         numLines = gGameStatusPtr->backgroundMaxY / lineHeight;
         extraHeight = gGameStatusPtr->backgroundMaxY % lineHeight;
         for (i = 0; i < numLines; i++) {
-            texOffsetY = D_8014F130 + lineHeight * i;
+            texOffsetY = gBackroundTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -251,11 +228,15 @@ void appendGfx_background_texture(void) {
                                0, 0, 295, 5, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4, (bgXOffset + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4, G_TX_RENDERTILE, (bgMaxX - bgXOffset) * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (bgXOffset + bgMinX) * 4, (lineHeight * i + bgMinY) * 4, (bgMaxX + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgXOffset + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, (bgMaxX - bgXOffset) * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (bgXOffset + bgMinX) * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgMaxX + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
         if (extraHeight != 0) {
-            texOffsetY = D_8014F130 + lineHeight * i;
+            texOffsetY = gBackroundTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -263,18 +244,22 @@ void appendGfx_background_texture(void) {
                                G_IM_FMT_CI, G_IM_SIZ_8b, bgMaxX, extraHeight,
                                0, 0, 295, extraHeight - 1, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4, (bgXOffset + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, G_TX_RENDERTILE, (bgMaxX - bgXOffset) * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (bgXOffset + bgMinX) * 4, (lineHeight * i + bgMinY) * 4, (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgXOffset + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, (bgMaxX - bgXOffset) * 32, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, (bgXOffset + bgMinX) * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
     } else {
         lineHeight = 6;
         numLines = gGameStatusPtr->backgroundMaxY / lineHeight;
         extraHeight = gGameStatusPtr->backgroundMaxY % lineHeight;
-        D_8014F134 += 0.10471967f; // 6°
+        gBackroundWavePhase += TAU / 60; // 60 frames period
         for (i = 0; i < numLines; i++) {
-            f8 = sin_rad(D_8014F134 + i * 0.41887867f) * 3.0f;
-            bgXOffset = 2.0f * (gGameStatusPtr->backgroundXOffset + f8);
-            texOffsetY = D_8014F130 + lineHeight * i;
+            waveOffset = sin_rad(gBackroundWavePhase + i * (TAU / 15)) * 3.0f;
+            bgXOffset = 2.0f * (gGameStatusPtr->backgroundXOffset + waveOffset);
+            texOffsetY = gBackroundTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -283,13 +268,17 @@ void appendGfx_background_texture(void) {
                                0, 0, 295, 5, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4, (2 * bgXOffset + (bgMinX - 1)) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4, G_TX_RENDERTILE, bgMaxX * 32 - bgXOffset * 16, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, bgXOffset * 2 + bgMinX * 4, (lineHeight * i + bgMinY) * 4, (bgMaxX + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (2 * bgXOffset + (bgMinX - 1)) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, bgMaxX * 32 - bgXOffset * 16, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgXOffset * 2 + bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgMaxX + bgMinX - 1) * 4, (lineHeight * i + lineHeight - 1 + bgMinY) * 4,
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
         if (extraHeight != 0) {
-            f8 = sin_rad(D_8014F134 + i * 0.41887867f) * 3.0f;
-            bgXOffset = 2.0f * (gGameStatusPtr->backgroundXOffset + f8);
-            texOffsetY = D_8014F130 + lineHeight * i;
+            waveOffset = sin_rad(gBackroundWavePhase + i * (TAU / 15)) * 3.0f;
+            bgXOffset = 2.0f * (gGameStatusPtr->backgroundXOffset + waveOffset);
+            texOffsetY = gBackroundTextureYOffset + lineHeight * i;
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
@@ -297,18 +286,23 @@ void appendGfx_background_texture(void) {
                                G_IM_FMT_CI, G_IM_SIZ_8b, bgMaxX, extraHeight,
                                0, 0, 295, extraHeight - 1, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4, (2 * bgXOffset + (bgMinX - 1)) * 4, (bgMaxY - 1 + bgMinY) * 4, G_TX_RENDERTILE, bgMaxX * 32 - bgXOffset * 16, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, bgXOffset * 2  + bgMinX * 4, (lineHeight * i + bgMinY) * 4, (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, G_TX_RENDERTILE, 0, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (2 * bgXOffset + (bgMinX - 1)) * 4, (bgMaxY - 1 + bgMinY) * 4, // @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
+                                                 G_TX_RENDERTILE, bgMaxX * 32 - bgXOffset * 16, 0, 4096, 1024);
+            gSPTextureRectangle(gMasterGfxPos++, bgXOffset * 2  + bgMinX * 4, (lineHeight * i + bgMinY) * 4,
+                                                 (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, // @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
+                                                 G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
     }
 }
 
+// TODO figure out why it is needed
 static const f32 rodata_padding[] = { 0.0f, 0.0f };
 
 void enable_background_wave(void) {
-    D_8014F12F = TRUE;
+    gBackroundWaveEnabled = TRUE;
 }
 
 void disable_background_wave(void) {
-    D_8014F12F = FALSE;
+    gBackroundWaveEnabled = FALSE;
 }
