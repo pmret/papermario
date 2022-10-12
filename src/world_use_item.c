@@ -2,41 +2,40 @@
 #include "effects.h"
 #include "script_api/battle.h"
 
-ApiStatus func_802C0000(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_ShowUseSparkles(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
 
-    fx_sparkles(FX_SPARKLES_0, a, b, c, 60.0f);
+    fx_sparkles(FX_SPARKLES_0, x, y, z, 60.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C00AC(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_ShowHPGain(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
-    s32 d = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    s32 amt = evt_get_variable(script, *args++);
 
-    fx_recover(0, a, b, c, d);
+    fx_recover(0, x, y, z, amt);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C016C(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_ShowFPGain(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
-    s32 d = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    s32 amt = evt_get_variable(script, *args++);
 
-    fx_recover(1, a, b, c, d);
+    fx_recover(1, x, y, z, amt);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C022C(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_RestoreHP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-
     s32 newHP = playerData->curHP + evt_get_variable(script, *script->ptrReadPos);
 
     if (newHP > playerData->curMaxHP) {
@@ -51,9 +50,8 @@ ApiStatus func_802C022C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C0288(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_RestoreFP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-
     s32 newFP = playerData->curFP + evt_get_variable(script, *script->ptrReadPos);
 
     if (newFP > playerData->curMaxFP) {
@@ -68,28 +66,28 @@ ApiStatus func_802C0288(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C02E4(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_PauseTime(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_FULL);
     gOverrideFlags |= GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C031C(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_UnpauseTime(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
     gOverrideFlags &= ~GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C0358(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_GetItemProperties(Evt* script, s32 isInitialCall) {
     s32 itemIdx = evt_get_variable(script, *script->ptrReadPos);
     s32 var15;
 
     script->varTable[11] = (&gItemTable[itemIdx])->potencyA;
     script->varTable[12] = (&gItemTable[itemIdx])->potencyB;
-    script->varTable[13] = 0;
+    script->varTable[13] = FALSE;
 
-    if ((&gItemTable[itemIdx])->typeFlags & 0x100) {
-        script->varTable[13] = 1;
+    if ((&gItemTable[itemIdx])->typeFlags & ITEM_TYPE_FLAG_USE_DRINK_ANIMATION) {
+        script->varTable[13] = TRUE;
     }
 
     var15 = 0;
@@ -101,12 +99,12 @@ ApiStatus func_802C0358(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C03E8(Evt* script, s32 isInitialCall) {
+ApiStatus WorldItem_ConsumeItem(Evt* script, s32 isInitialCall) {
     remove_consumable();
     return ApiStatus_DONE2;
 }
 
-EvtScript D_802C0410 = {
+EvtScript EVS_WorldItem_ShowUsedItem = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -116,13 +114,13 @@ EvtScript D_802C0410 = {
     EVT_WAIT(15)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(func_802C0000, LVar0, LVar1, LVar2)
+    EVT_CALL(WorldItem_ShowUseSparkles, LVar0, LVar1, LVar2)
     EVT_CALL(RemoveItemEntity, LVarA)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript D_802C04F4 = {
+EvtScript EVS_WorldItem_PlayEatingSounds = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
@@ -135,7 +133,7 @@ EvtScript D_802C04F4 = {
     EVT_END
 };
 
-EvtScript D_802C0560 = {
+EvtScript EVS_WorldItem_PlayDrinkingSounds = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
@@ -148,7 +146,7 @@ EvtScript D_802C0560 = {
     EVT_END
 };
 
-EvtScript D_802C05CC_32579C = {
+EvtScript EVS_World_UseItem = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetCurrentPartner, LVar0)
@@ -156,13 +154,13 @@ EvtScript D_802C05CC_32579C = {
         EVT_CALL(InterruptUsePartner)
         EVT_WAIT(20)
     EVT_END_IF
-    EVT_CALL(func_802C02E4)
-    EVT_CALL(func_802C0358, LVarA)
-    EVT_EXEC_WAIT(D_802C0410)
+    EVT_CALL(WorldItem_PauseTime)
+    EVT_CALL(WorldItem_GetItemProperties, LVarA)
+    EVT_EXEC_WAIT(EVS_WorldItem_ShowUsedItem)
     EVT_IF_EQ(LVarD, 0)
-        EVT_EXEC_WAIT(D_802C04F4)
+        EVT_EXEC_WAIT(EVS_WorldItem_PlayEatingSounds)
     EVT_ELSE
-        EVT_EXEC_WAIT(D_802C0560)
+        EVT_EXEC_WAIT(EVS_WorldItem_PlayDrinkingSounds)
     EVT_END_IF
     EVT_IF_EQ(LVarF, 1)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_StickOutTongue)
@@ -171,22 +169,22 @@ EvtScript D_802C05CC_32579C = {
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(func_802C00AC, LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(WorldItem_ShowHPGain, LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
     EVT_IF_GT(LVarC, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(func_802C016C, LVar0, LVar1, LVar2, LVarC)
+        EVT_CALL(WorldItem_ShowFPGain, LVar0, LVar1, LVar2, LVarC)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
     EVT_IF_NE(LVarB, 0)
-        EVT_CALL(func_802C022C, LVarB)
+        EVT_CALL(WorldItem_RestoreHP, LVarB)
     EVT_END_IF
     EVT_IF_NE(LVarC, 0)
-        EVT_CALL(func_802C0288, LVarC)
+        EVT_CALL(WorldItem_RestoreFP, LVarC)
     EVT_END_IF
     EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
@@ -199,9 +197,9 @@ EvtScript D_802C05CC_32579C = {
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
-    EVT_CALL(func_802C03E8)
+    EVT_CALL(WorldItem_ConsumeItem)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(func_802C031C)
+    EVT_CALL(WorldItem_UnpauseTime)
     EVT_RETURN
     EVT_END
 };

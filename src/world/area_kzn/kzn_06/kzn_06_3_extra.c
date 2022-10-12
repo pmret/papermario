@@ -1,8 +1,6 @@
 #include "kzn_06.h"
 #include "model.h"
 
-MAP_RODATA_PAD(1, C6E318);
-
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
 API_CALLABLE(N(AdjustFog)) {

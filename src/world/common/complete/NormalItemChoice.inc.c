@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES];
+static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES + 1];
 
 #ifndef _CHOICE_SUPPORT_
 #define _CHOICE_SUPPORT_

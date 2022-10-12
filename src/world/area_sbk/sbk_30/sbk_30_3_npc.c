@@ -23,7 +23,6 @@ NpcSettings N(NpcSettings_Archeologist_01) = {
 
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
-MAP_STATIC_PAD(2,main);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/atomic/LetterChoice.inc.c"
