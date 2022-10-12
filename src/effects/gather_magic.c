@@ -5,7 +5,7 @@ extern Gfx D_09000080_38F790[];
 extern Gfx D_090001A8_38F8B8[];
 extern Gfx D_090001C8_38F8D8[];
 
-Gfx* D_E008E890[] = { D_090001A8_38F8B8, D_090001C8_38F8D8, NULL, NULL };
+Gfx* D_E008E890[] = { D_090001A8_38F8B8, D_090001C8_38F8D8 };
 
 void gather_magic_appendGfx(void* effect);
 void gather_magic_init(EffectInstance* effect);
