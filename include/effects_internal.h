@@ -68,7 +68,7 @@ FX_MAIN(flame_main);
 void stars_burst_main(s32, f32, f32, f32, f32, f32, s32);
 FX_MAIN(stars_shimmer_main);
 void rising_bubble_main(s32, f32, f32, f32, f32);
-FX_MAIN(ring_blast_main);
+void ring_blast_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(shockwave_main);
 void music_note_main(s32, f32, f32, f32);
 void smoke_burst_main(s32, f32, f32, f32, f32, s32);
