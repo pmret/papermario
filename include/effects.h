@@ -585,20 +585,27 @@ typedef struct StarsShimmerFXData {
 } StarsShimmerFXData; // size = unknown
 
 typedef struct RisingBubbleFXData {
-    /* 0x00 */ char unk_00[0x08];
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ char unk_0C[0x04];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x18 */ s32 timeLeft;
+    /* 0x1C */ s32 lifeTime;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 unk_24;
-} RisingBubbleFXData; // size = unknown
+} RisingBubbleFXData; // size = 0x28
 
 typedef struct RingBlastFXData {
-    /* 0x00 */ char todo[0];
-} RingBlastFXData; // size = unknown
+    /* 0x00 */ u16 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ s32 lifeTime;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+} RingBlastFXData; // size = 0x2C
 
 // Likely to be the same as GreenImpactFXData and RedImpactFXData
 typedef struct ShockwaveFXData {
@@ -1121,8 +1128,16 @@ typedef struct ConfettiFXData {
 } ConfettiFXData; // size = 0x34
 
 typedef struct SnowfallFXData {
-    /* 0x00 */ char todo[0];
-} SnowfallFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ char unk_0C[0x14];
+    /* 0x20 */ s32 timeLeft;
+    /* 0x24 */ s32 lifeTime;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+} SnowfallFXData; // size = 0x34
 
 typedef struct Effect46FXData {
     /* 0x00 */ s32 unk_00;
@@ -1272,10 +1287,10 @@ typedef struct ChompDropFXData {
 } ChompDropFXData; // size = 0x48
 
 typedef struct QuizmoStageFXData {
-   /* 0x00 */ char unk_00[0x4];
+   /* 0x00 */ s32 unk_00;
    /* 0x04 */ s32 vanishTimer;
    /* 0x08 */ s32 lifetime;
-   /* 0x10 */ Vec3f origin;
+   /* 0x0C */ Vec3f origin;
    /* 0x18 */ s32 microphoneRaiseAmt;
    /* 0x1C */ s32 rearWallRaiseAmt;
    /* 0x20 */ s32 leftWallRaiseAmt;
@@ -1286,8 +1301,8 @@ typedef struct QuizmoStageFXData {
    /* 0x34 */ s32 lightScrollDelay;
    /* 0x38 */ s32 unkEffectMode;
    /* 0x3C */ s32 unk_3C; // stage hidden when == 0xFF
-   /* 0x3C */ char unk_40[0x10];
-} QuizmoStageFXData; // size ~ 0x50 (as allocated on heap)
+   /* 0x40 */ char unk_40[0x04];
+} QuizmoStageFXData; // size 0x44
 
 typedef struct RadiatingEnergyOrbFXData {
     /* 0x00 */ char todo[0];
@@ -1381,9 +1396,18 @@ typedef struct SnakingStaticFXData {
 } SnakingStaticFXData; // size = unknown
 
 typedef struct ThunderboltRingFXData {
-    /* 0x00 */ char unk_00[0x30];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
     /* 0x30 */ s32 unk_30;
-} ThunderboltRingFXData; // size = ?
+} ThunderboltRingFXData; // size = 0x34
 
 typedef struct SquirtFXData {
     /* 0x00 */ char todo[0];
@@ -1672,8 +1696,17 @@ typedef struct TattleWindowFXData {
 } TattleWindowFXData; // size = 0x38
 
 typedef struct ShinyFlareFXData {
-    /* 0x00 */ char todo[0];
-} ShinyFlareFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+} ShinyFlareFXData; // size = 0x30
 
 typedef struct HuffPuffBreathFXData {
     /* 0x00 */ s32 unk_00;
@@ -1764,18 +1797,18 @@ typedef struct HieroglyphsFXData {
 } HieroglyphsFXData; // size = 0x3C
 
 typedef struct MiscParticlesFXData {
-    char unk_00[0x4];
-    Vec3f pos;
-    f32 scaleX;
-    f32 scaleY;
-    char unk_18[0x20];
-    s32 unk_38;
-    s32 unk_3C;
-    s32 unk_40;
-    char unk_44[0x4];
-    s32 unk_48;
-    s32 unk_4C;
-    s32 unk_50;
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 scaleX;
+    /* 0x14 */ f32 scaleY;
+    /* 0x18 */ char unk_18[0x20];
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ char unk_44[0x4];
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 unk_50;
 } MiscParticlesFXData; // size = ?
 
 typedef struct StaticStatusFXData {
