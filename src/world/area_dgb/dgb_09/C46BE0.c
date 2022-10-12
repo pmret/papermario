@@ -166,7 +166,7 @@ EvtScript N(80243E60) = {
         EVT_CALL(EnableModel, 25, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 13, 0x7FFFFE00)
     EVT_SET(GF_DGB09_BombedWall, 1)
     EVT_UNBIND
     EVT_RETURN
@@ -179,7 +179,7 @@ EvtScript N(80243F6C) = {
         EVT_CALL(EnableModel, 29, 0)
     EVT_ELSE
         EVT_CALL(EnableModel, 25, 0)
-        EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 13, 0x7FFFFE00)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -632,12 +632,12 @@ NpcGroupList N(npcGroupList_8024533C) = {
     {},
 };
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC 0
 #define AI_SENTINEL_LAST_NPC  0
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
 const char N(dgb_00_name_hack)[] = "dgb_00";

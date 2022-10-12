@@ -46,7 +46,7 @@ EvtScript N(80240D40) = {
     EVT_END
 };
 
-#include "world/common/StarSpiritEffectFunc.inc.c"
+#include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(80240DA0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -166,7 +166,7 @@ EvtScript N(main) = {
     EVT_CALL(ModifyColliderFlags, 3, 5, 0x00000007)
     EVT_CALL(ModifyColliderFlags, 3, 7, 0x00000007)
     EVT_CALL(GetEntryID, LVar0)
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80241350)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80240D40))

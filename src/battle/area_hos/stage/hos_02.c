@@ -6,8 +6,8 @@
 
 EvtScript N(beforeBattle_802258E0) = {
     EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_o372, 1)
-        EVT_CALL(SetTexPanner, MODEL_o375, 1)
+        EVT_CALL(SetTexPanner, MODEL_o372, TEX_PANNER_1)
+        EVT_CALL(SetTexPanner, MODEL_o375, TEX_PANNER_1)
         EVT_SET(LVar0, 0)
         EVT_SET(LVar1, 0)
         EVT_SET(LVar2, 0)
@@ -17,8 +17,8 @@ EvtScript N(beforeBattle_802258E0) = {
             EVT_ADD(LVar1, 300)
             EVT_ADD(LVar2, 90)
             EVT_ADD(LVar3, -200)
-            EVT_CALL(SetTexPanOffset, 1, 0, LVar0, LVar1)
-            EVT_CALL(SetTexPanOffset, 1, 1, LVar2, LVar3)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar2, LVar3)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD

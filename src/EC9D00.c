@@ -5,4 +5,4 @@
 
 #define NAMESPACE EC9D00
 
-#include "world/common/atomic/SuperBlock.inc.c"
+#include "world/common/entity/SuperBlock.inc.c"

@@ -12,4 +12,4 @@ ApiStatus func_802415C4_8ED3E4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/WaitForPlayerToLand.inc.c"
+#include "world/common/todo/WaitForPlayerToLand.inc.c"

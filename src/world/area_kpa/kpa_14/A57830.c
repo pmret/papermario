@@ -1,16 +1,16 @@
 #include "kpa_14.h"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 ApiStatus N(func_80240710_A57BC0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

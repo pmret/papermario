@@ -5,8 +5,8 @@ extern EvtScript(N(EVS_ExitDoor_arn_08_0));
 
 MAP_RODATA_PAD(1,entity);
 
-#include "world/common/RemovePadlock.inc.c"
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_UnlockDoor) = {
     EVT_SET_GROUP(EVT_GROUP_00)

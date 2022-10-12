@@ -20,9 +20,9 @@ INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240624_BC8484);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240910_BC8770);
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240A58_BC88B8);
 

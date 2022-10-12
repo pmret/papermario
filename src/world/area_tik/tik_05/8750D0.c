@@ -3,15 +3,15 @@
 #include "effects.h"
 #include "functions.h"
 
-#include "world/common/UnkPosFunc2.inc.c"
+#include "world/common/todo/UnkPosFunc2.inc.c"
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 extern s16 Entity_ScriptSpring_AnimLaunch[];
 
@@ -27,4 +27,4 @@ ApiStatus func_8024093C_8756FC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetEntityPosition.inc.c"
+#include "world/common/todo/SetEntityPosition.inc.c"

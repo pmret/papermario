@@ -8,7 +8,7 @@ static char* N(exit_str_3) = "";
 
 #define CHUCK_QUIZMO_NPC_ID 8
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
@@ -22,7 +22,7 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/enemy/StationaryAI.inc.c"
+#include "world/common/enemy/ai/StationaryAI.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";
@@ -32,9 +32,9 @@ static char* N(exit_str_6) = "\0\0\0\0";
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242014_8B2084);
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024226C_8B22DC);
 
@@ -64,7 +64,7 @@ ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242710_8B2780);
 
@@ -81,9 +81,9 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427EC_8B285C);
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024280C_8B287C);
 
 #define UNK_NPC_POS_FUNC_NUM 7
-#include "world/common/UnkNpcPosFunc.inc.c"
+#include "world/common/todo/UnkNpcPosFunc.inc.c"
 
-#include "world/common/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
 

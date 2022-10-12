@@ -9,7 +9,7 @@ extern s32 D_80262F68;
 
 #include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
@@ -22,7 +22,7 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkFoldFunc.inc.c"
+#include "world/common/todo/UnkFoldFunc.inc.c"
 
 ApiStatus func_80243380_803C00(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -61,9 +61,9 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243CD4_804554);
 
@@ -97,9 +97,9 @@ ApiStatus func_80243D60_8045E0(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
-#include "world/common/GetPlayerCoins.inc.c"
+#include "world/common/todo/GetPlayerCoins.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440FC_80497C);
 
@@ -111,7 +111,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802443E0_804C60);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446AC_804F2C);
 
-#include "world/common/UnkPositionFunc.inc.c"
+#include "world/common/todo/UnkPositionFunc.inc.c"
 
 ApiStatus func_802447E0_805060(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -157,7 +157,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_stats_805418);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_badges_805540);
 
-#include "world/common/UnkMachiFunc.inc.c"
+#include "world/common/todo/UnkMachiFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244E10_805690);
 

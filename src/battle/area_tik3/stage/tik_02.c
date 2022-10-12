@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_tik3_tik_02
 
-#include "world/common/UnkFunc56.inc.c"
+#include "world/common/todo/UnkFunc56.inc.c"
 
 EvtScript N(80230DF0) = {
     EVT_SET(LVarA, LVar1)

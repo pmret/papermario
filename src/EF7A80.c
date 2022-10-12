@@ -7,7 +7,7 @@
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/DeadUnkFunc1.inc.c"
+#include "world/common/todo/DeadUnkFunc1.inc.c"
 
 typedef struct unk_effect {
     char unk_00[0x30];

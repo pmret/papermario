@@ -27,4 +27,17 @@ enum {
     AF_MIM12_BackgroundLitUp            = AreaFlag(3),
 };
 
+extern MapSettings mim_01_settings;
+extern MapSettings mim_02_settings;
+extern MapSettings mim_03_settings;
+extern MapSettings mim_04_settings;
+extern MapSettings mim_05_settings;
+extern MapSettings mim_06_settings;
+extern MapSettings mim_07_settings;
+extern MapSettings mim_08_settings;
+extern MapSettings mim_09_settings;
+extern MapSettings mim_10_settings;
+extern MapSettings mim_11_settings;
+extern MapSettings mim_12_settings;
+
 #endif

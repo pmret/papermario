@@ -3,13 +3,13 @@
 static char* N(exit_str_0) = "kmr_11";
 static char* N(exit_str_1) = "mac_00";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 #ifdef NON_EQUIVALENT
 // 0x1E4 is probably a linker constant. We need to learn more about animations,
@@ -29,4 +29,4 @@ ApiStatus func_802402BC_8D878C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_10/8D84D0", func_802402BC_8D878C);
 #endif
 
-#include "world/common/SetEntityPosition.inc.c"
+#include "world/common/todo/SetEntityPosition.inc.c"

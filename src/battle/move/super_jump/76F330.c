@@ -2,4 +2,4 @@
 
 #define NAMESPACE battle_move_super_jump
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"

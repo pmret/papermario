@@ -1,3 +1,3 @@
 #include "kkj_10.h"
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"

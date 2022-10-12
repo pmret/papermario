@@ -79,7 +79,7 @@ EvtScript N(main) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802417F0))
-    EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
     EVT_CALL(EnableModel, 20, 0)
     EVT_BIND_TRIGGER(N(exitSingleDoor_80241580), TRIGGER_WALL_PRESS_A, 16, 1, 0)
     EVT_EXEC(N(802414E0))
@@ -365,5 +365,5 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

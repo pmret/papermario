@@ -26,7 +26,7 @@ EvtScript N(80233540) = {
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetTexPanner, 15, 1)
+    EVT_CALL(SetTexPanner, 15, TEX_PANNER_1)
     EVT_CALL(EnableTexPanning, 15, 1)
     EVT_THREAD
         EVT_SET(LVar0, 1)
@@ -44,7 +44,7 @@ EvtScript N(beforeBattle) = {
         EVT_SET(LVarC, 0)
         EVT_EXEC(N(80233540))
     EVT_END_THREAD
-    EVT_CALL(SetTexPanner, 16, 2)
+    EVT_CALL(SetTexPanner, 16, TEX_PANNER_2)
     EVT_CALL(EnableTexPanning, 16, 1)
     EVT_THREAD
         EVT_SET(LVar0, 2)

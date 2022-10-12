@@ -268,6 +268,6 @@ static const s32 N(pad_1E74)[] = {
     0x00000000, 0x00000000
 };
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

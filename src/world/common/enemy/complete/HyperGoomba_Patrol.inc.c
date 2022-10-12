@@ -2,7 +2,7 @@
 #include "common.h"
 #include "HyperGoomba.h"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 MobileAISettings N(AISettings_HyperGoomba_Patrol) = {
     .moveSpeed = 1.5f,

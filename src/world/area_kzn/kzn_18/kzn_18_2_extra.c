@@ -1,11 +1,11 @@
 #include "kzn_18.h"
 #include "entity.h"
 
-#include "world/common/SetCamera0Flag1000.inc.c"
+#include "world/common/todo/SetCamera0Flag1000.inc.c"
 
-#include "world/common/UnsetCamera0Flag1000.inc.c"
+#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,

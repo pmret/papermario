@@ -644,6 +644,6 @@ NpcGroupList N(npcGroupList_8024318C) = {
     {},
 };
 
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"

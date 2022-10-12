@@ -1,7 +1,7 @@
 #include "omo_03.h"
 
 #define NAMESPACE dup_omo_03
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 #define NAMESPACE omo_03
 
 #include "common/SetAngleClamped.inc.c"

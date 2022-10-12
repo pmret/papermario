@@ -2,9 +2,9 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
 
@@ -33,16 +33,16 @@ ApiStatus func_80241274_D51264(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetEntityPositionF.inc.c"
+#include "world/common/todo/SetEntityPositionF.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
-#include "world/common/UnkFunc44.inc.c"
+#include "world/common/todo/UnkFunc44.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
 
 #define NAMESPACE dup_pra_02
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 #define NAMESPACE pra_02

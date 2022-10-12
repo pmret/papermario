@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kpa_03";
 static char* N(exit_str_1) = "kpa_81";
 
-#include "world/common/UnkFunc11.inc.c"
+#include "world/common/todo/UnkFunc11.inc.c"
 
 ApiStatus func_802400BC_A4C01C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

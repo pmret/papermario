@@ -5,7 +5,7 @@
 extern EvtScript N(D_80245860_B25DA0);
 extern EvtScript N(EVS_NpcInteract_HeartPlant_01);
 
-#include "world/common/HeartPlant_SpawnHeart.inc.c"
+#include "world/common/todo/HeartPlant_SpawnHeart.inc.c"
 
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,
@@ -91,7 +91,7 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_SET(LVar0, ITEM_STAR_PIECE)
         EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(Delivery_ShowGotStarPiece))
+        EVT_EXEC_WAIT(N(GiveKeyReward))
         EVT_CALL(AddStarPieces, 1)
     EVT_END_IF
     EVT_RETURN

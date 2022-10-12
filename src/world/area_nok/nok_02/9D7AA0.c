@@ -2,7 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 19
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";
@@ -15,9 +15,9 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242BD0_9D9BF0);
 
@@ -45,9 +45,9 @@ ApiStatus func_80242C5C_9D9C7C(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/todo/SwitchToPartner.inc.c"
 
 ApiStatus func_80243010_9DA030(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

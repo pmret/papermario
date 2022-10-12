@@ -7,13 +7,13 @@ extern IconHudScriptPair gItemHudScripts[];
 static char* N(exit_str_0) = "kkj_11";
 static char* N(exit_str_1) = "";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
     PopupMenu *menu;
@@ -118,4 +118,4 @@ ApiStatus func_80240500_AF2160(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetItemEmptyCount.inc.c"
+#include "world/common/todo/GetItemEmptyCount.inc.c"

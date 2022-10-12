@@ -1,7 +1,7 @@
 #include "tik_03.h"
 #include "world/partners.h"
 
-#include "world/common/UnkPosFunc2.inc.c"
+#include "world/common/todo/UnkPosFunc2.inc.c"
 
 extern s32 D_80242EBC_8719BC;
 extern s32 D_80242930_871430[4];

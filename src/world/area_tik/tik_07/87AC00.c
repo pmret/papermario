@@ -1,6 +1,6 @@
 #include "tik_07.h"
 
-#include "world/common/UnkPosFunc2.inc.c"
+#include "world/common/todo/UnkPosFunc2.inc.c"
 
 extern s32 D_802449B0_87E590[4];
 
@@ -19,4 +19,4 @@ ApiStatus func_80241390_87AF70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"

@@ -1,12 +1,12 @@
 #include "omo_13.h"
 
-#include "world/common/enemy/ShyGuyWanderAI.inc.c"
+#include "world/common/enemy/ai/ShyGuyWanderAI.inc.c"
 
-#include "world/common/enemy/GrooveGuyAI.inc.c"
+#include "world/common/enemy/ai/GrooveGuyAI.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 // matches, needs data migration
 #ifdef NON_MATCHING

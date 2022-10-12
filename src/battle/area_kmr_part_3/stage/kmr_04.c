@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_kmr_04
 
-#include "world/common/clouds.inc.c"
+#include "world/common/todo/clouds.inc.c"
 
 EvtScript N(beforeBattle_80232B08) = {
     EVT_CALL(SetSpriteShading, -1)

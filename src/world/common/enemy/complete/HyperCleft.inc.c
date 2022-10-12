@@ -1,6 +1,6 @@
 #include "HyperCleft.h"
 
-#include "world/common/enemy/CleftAI.inc.c"
+#include "world/common/enemy/ai/CleftAI.inc.c"
 
 MobileAISettings N(AISettings_HyperCleft) = {
     .moveSpeed = 1.0f,

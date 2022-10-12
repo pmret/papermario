@@ -4,11 +4,11 @@
 extern EvtScript N(EVS_ExitDoors_trd_05_0);
 extern EvtScript N(EVS_ExitDoors_trd_03_3);
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
 
-#include "world/common/SetEntityPosition.inc.c"
+#include "world/common/todo/SetEntityPosition.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 s32 N(missing_80244D70_4D70)[] = {
     0x00000000, 0x00010101, 0x01010101, 0x01010101, 

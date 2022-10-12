@@ -2,7 +2,7 @@
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 s32 bgm_clear_track_volumes(s32, s16);
 
@@ -11,4 +11,4 @@ ApiStatus func_8024061C_8A04DC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkPosFunc2.inc.c"
+#include "world/common/todo/UnkPosFunc2.inc.c"

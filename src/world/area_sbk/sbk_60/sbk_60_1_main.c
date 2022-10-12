@@ -18,7 +18,7 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_sbk_60 },
 };
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_ExitWalk_sbk_61_0) = EVT_EXIT_WALK(60, sbk_60_ENTRY_1, "sbk_61", sbk_61_ENTRY_0);
 EvtScript N(EVS_ExitWalk_sbk_50_3) = EVT_EXIT_WALK(60, sbk_60_ENTRY_2, "sbk_50", sbk_50_ENTRY_3);

@@ -3,12 +3,12 @@
 #include "common/foliage.inc.c"
 
 #define NAMESPACE dup_kmr_04
-#include "world/common/CheckPartnerFlags1000.inc.c"
+#include "world/common/todo/CheckPartnerFlags1000.inc.c"
 #define NAMESPACE kmr_04
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802403E0_8CACE0);
 

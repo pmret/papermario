@@ -34,7 +34,7 @@ NpcSettings N(npcSettings_8024066C) = {
 EvtScript N(80240698) = {
     EVT_SET(LVar3, 0)
     EVT_SUB(LVar3, LVar2)
-    EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 18, 0x7FFFFE00)
     EVT_CALL(PlaySoundAtCollider, 18, 455, 0)
     EVT_CALL(MakeLerp, 0, 80, 30, 0)
     EVT_LABEL(10)
