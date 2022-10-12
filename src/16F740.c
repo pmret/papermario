@@ -8,8 +8,6 @@
 
 extern s32* D_800DC064;
 
-extern BackgroundHeader gBackgroundImage;
-
 extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 D_80280A30;
