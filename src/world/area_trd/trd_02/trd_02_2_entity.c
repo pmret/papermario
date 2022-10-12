@@ -3,8 +3,8 @@
 
 extern EvtScript N(EVS_ExitDoors_trd_01_2);
 
-#include "world/common/RemovePadlock.inc.c"
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(D_80242890_9A3870) = {
     EVT_SET_GROUP(EVT_GROUP_00)

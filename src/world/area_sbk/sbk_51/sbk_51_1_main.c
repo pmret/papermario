@@ -23,7 +23,7 @@ EvtScript N(EVS_ExitWalk_sbk_52_0) = EVT_EXIT_WALK(60, sbk_51_ENTRY_1, "sbk_52",
 EvtScript N(EVS_ExitWalk_sbk_41_3) = EVT_EXIT_WALK(60, sbk_51_ENTRY_2, "sbk_41", sbk_41_ENTRY_3);
 EvtScript N(EVS_ExitWalk_sbk_61_2) = EVT_EXIT_WALK(60, sbk_51_ENTRY_3, "sbk_61", sbk_61_ENTRY_2);
 
-#include "world/common/SpawnSunEffect.inc.c"
+#include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_50_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)

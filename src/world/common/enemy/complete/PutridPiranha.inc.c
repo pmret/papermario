@@ -1,6 +1,6 @@
 #include "PutridPiranha.h"
 
-#include "world/common/enemy/PiranhaPlantAI.inc.c"
+#include "world/common/enemy/ai/PiranhaPlantAI.inc.c"
 
 EvtScript N(EVS_NpcDefeat_PutridPiranha_Hitbox) = {
     EVT_CALL(GetBattleOutcome, LVar0)

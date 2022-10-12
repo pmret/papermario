@@ -79,7 +79,7 @@ EvtScript N(80240450) = {
     EVT_END
 };
 
-#include "world/common/atomic/PipeData.inc.c"
+#include "world/common/entity/PipeData.inc.c"
 
 EvtScript N(exitWalk_8024142C) = EVT_EXIT_WALK(60,  0, "flo_23",  1);
 
@@ -183,8 +183,8 @@ EvtScript N(main) = {
     EVT_CALL(func_80044238, 5)
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802430D4)))
     EVT_EXEC_WAIT(N(makeEntities))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_LE(LVar0, 1)
         EVT_SET(LVar0, EVT_PTR(N(80241698)))
@@ -655,7 +655,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 

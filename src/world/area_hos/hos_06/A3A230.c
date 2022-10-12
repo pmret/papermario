@@ -1,8 +1,8 @@
 #include "hos_06.h"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240F7C_A3A45C);
 
@@ -30,10 +30,10 @@ ApiStatus func_80241008_A3A4E8(Evt* script, s32 isInitialCall) {
 }
 
 #define NAMESPACE dup_hos_06
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 #define NAMESPACE hos_06
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 s32 func_802411BC_A3A69C(s32 badgeID) {
     s32 i;

@@ -467,10 +467,10 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/WanderMeleeAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-#include "world/common/UnkFunc1.inc.c"
+#include "world/common/todo/UnkFunc1.inc.c"
 
 const char N(dgb_14_name_hack)[] = "dgb_14";

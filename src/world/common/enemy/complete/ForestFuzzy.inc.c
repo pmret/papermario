@@ -1,6 +1,6 @@
 #include "ForestFuzzy.h"
 
-#include "world/common/enemy/HoppingAI.inc.c"
+#include "world/common/enemy/ai/HoppingAI.inc.c"
 
 MobileAISettings N(AISettings_ForestFuzzy) = {
     .moveSpeed = 1.0f,

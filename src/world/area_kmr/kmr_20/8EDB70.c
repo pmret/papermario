@@ -1,7 +1,7 @@
 #include "kmr_20.h"
 
 #define NAMESPACE dup2_kmr_20
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 #define NAMESPACE kmr_20
 
 ApiStatus func_80242030_8EDE50(Evt* script, s32 isInitialCall) {

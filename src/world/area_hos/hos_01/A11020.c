@@ -60,7 +60,7 @@ ApiStatus func_80240C84_A11504(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/todo/SwitchToPartner.inc.c"
 
 ApiStatus func_80240CDC_A1155C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -9,9 +9,9 @@ typedef struct LilOinkReward {
 
 extern LilOinkReward D_8024F800_841000[10];
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
-#include "world/common/GetPlayerCoins.inc.c"
+#include "world/common/todo/GetPlayerCoins.inc.c"
 
 ApiStatus func_80241F80_833780(Evt* script, s32 isInitialCall) {
     hide_coin_counter_immediately();

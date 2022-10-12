@@ -3,11 +3,11 @@
 
 #define NAMESPACE battle_move_hammer_charge_0
 
-#include "world/common/IsBerserkerEquipped.inc.c"
+#include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/IsRightOnEquipped.inc.c"
+#include "world/common/todo/IsRightOnEquipped.inc.c"
 
-#include "world/common/IsHammerMaxCharged.inc.c"
+#include "world/common/todo/IsHammerMaxCharged.inc.c"
 
 ApiStatus func_802A10C8_74F1F8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

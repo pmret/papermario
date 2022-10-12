@@ -221,7 +221,7 @@ EvtScript N(idle) = {
 #include "common/GetSelectedMoveID.inc.c"
 #include "common/UnkBattleFunc1.inc.c"
 #include "common/StartRumbleWithParams.inc.c"
-#include "world/common/UnkFunc52.inc.c"
+#include "world/common/todo/UnkFunc52.inc.c"
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

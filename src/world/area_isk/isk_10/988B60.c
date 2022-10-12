@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "isk_14";
 static char* N(exit_str_2) = "isk_18";
 static char* N(exit_str_3) = "";
 
-#include "world/common/atomic/SuperBlock.inc.c"
+#include "world/common/entity/SuperBlock.inc.c"
 
 ApiStatus func_80240D38_989898(Evt* script, s32 isInitialCall) {
     s32 status = -1;

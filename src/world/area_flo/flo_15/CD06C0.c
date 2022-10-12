@@ -62,11 +62,11 @@ EvtScript N(main) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC(N(802404D8))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
         EVT_SET(LVar0, EVT_PTR(N(8024017C)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
-    EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
     EVT_EXEC(N(802413B0))
     EVT_EXEC_WAIT(N(80240060))
     EVT_RETURN
@@ -422,13 +422,13 @@ EvtScript N(802413B0) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(ModifyColliderFlags, 0, 12, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 12, 0x7FFFFE00)
         EVT_CALL(ModifyColliderFlags, 1, 14, 0x7FFFFE00)
         EVT_WAIT(15)
         EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 12, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 12, 0x7FFFFE00)
         EVT_CALL(ModifyColliderFlags, 1, 14, 0x7FFFFE00)
         EVT_CALL(TranslateGroup, 16, 0, -50, 0)
     EVT_END_IF

@@ -2,7 +2,7 @@
 
 #define NAMESPACE battle_move_earthquake_jump
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
 ApiStatus func_802A10E4_785C04(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 3;

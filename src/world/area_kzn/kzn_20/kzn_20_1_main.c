@@ -190,7 +190,7 @@ EvtScript N(EVS_OnBreakWall) = {
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 2, 2, 1, 10, 30)
     EVT_CALL(EnableGroup, MODEL_bom_mae, FALSE)
     EVT_CALL(EnableGroup, MODEL_bom_ato, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
     EVT_UNBIND
     EVT_RETURN
@@ -211,7 +211,7 @@ EvtScript N(EVS_Main) = {
         EVT_BIND_TRIGGER(N(EVS_OnBreakWall), TRIGGER_POINT_BOMB, EVT_PTR(N(WeakWallBombTrigger)), 1, 0)
     EVT_ELSE
         EVT_CALL(EnableGroup, MODEL_bom_mae, FALSE)
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_UpdateLavaWaves))

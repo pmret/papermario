@@ -201,17 +201,17 @@ EvtScript N(main) = {
         EVT_IF_GT(LVar0, 65536)
             EVT_ADD(LVar0, -65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
         EVT_ADD(LVar1, -200)
         EVT_IF_LT(LVar1, 0)
             EVT_ADD(LVar1, 65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 2, 0, LVar1, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar1, 0)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80243654)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80243280))
@@ -242,7 +242,7 @@ EvtScript N(80243FD0) = {
                     EVT_IF_EQ(LVar7, 0)
                         EVT_WAIT(5)
                         EVT_SET(LVar8, 6)
-                        EVT_CALL(ModifyColliderFlags, 0, LVar9, 0x7FFFFE00)
+                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar9, 0x7FFFFE00)
                     EVT_END_IF
                     EVT_ADD(LVar8, 1)
                     EVT_ADD(LVar7, LVar8)
@@ -640,5 +640,5 @@ EvtScript N(makeEntities) = {
 
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     53
-#include "world/common/enemy/LakituAI.inc.c"
-#include "world/common/enemy/SpinyAI.inc.c"
+#include "world/common/enemy/ai/LakituAI.inc.c"
+#include "world/common/enemy/ai/SpinyAI.inc.c"

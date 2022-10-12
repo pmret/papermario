@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
+#include "message_ids.h"
 
 typedef struct {
     /* 0x00 */ Gfx* displayList;
@@ -9,12 +10,79 @@ typedef struct {
     /* 0x0A */ s16 height;
 } UnkStruct; // size: 0xC
 
-extern s32 D_E010E750[];
-extern UnkStruct D_E010E79C[];
-extern UnkStruct D_E010E7D8[];
-extern UnkStruct D_E010E7FC[];
-extern UnkStruct D_E010E838[];
-extern UnkStruct D_E010E868[];
+extern Gfx D_0900BE40_3F7CA0[];
+extern Gfx D_0900BE88_3F7CE8[];
+extern Gfx D_0900BED0_3F7D30[];
+extern Gfx D_0900BF18_3F7D78[];
+extern Gfx D_0900BF60_3F7DC0[];
+extern Gfx D_0900BFA8_3F7E08[];
+extern Gfx D_0900BFF0_3F7E50[];
+extern Gfx D_0900C038_3F7E98[];
+extern Gfx D_0900C080_3F7EE0[];
+extern Gfx D_0900C168_3F7FC8[];
+extern Gfx D_0900C1B0_3F8010[];
+extern Gfx D_0900C1F8_3F8058[];
+extern Gfx D_0900C240_3F80A0[];
+extern Gfx D_0900C328_3F8188[];
+extern Gfx D_0900C370_3F81D0[];
+extern Gfx D_0900C458_3F82B8[];
+extern Gfx D_0900C540_3F83A0[];
+
+s32 D_E010E750[] = {
+    -1,
+    MSG_Menus_019D, MSG_Menus_019E, MSG_Menus_019F,
+    MSG_Menus_01A0, MSG_Menus_01A1, MSG_Menus_01A2,
+    MSG_Menus_01A3, MSG_Menus_01A4, MSG_Menus_019C,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1
+};
+
+UnkStruct D_E010E79C[] = {
+    { D_0900C080_3F7EE0, 104,  0, 128, 10 },
+    { D_0900C168_3F7FC8, 104, 10, 128, 10 },
+    { D_0900C1B0_3F8010, 104, 20, 128, 10 },
+    { D_0900C1F8_3F8058, 104, 30, 128, 10 },
+    {              NULL,   0,  0,   0,  0 }
+};
+
+UnkStruct D_E010E7D8[] = {
+    { D_0900C458_3F82B8, -16, -6, 144, 20 },
+    { D_0900C540_3F83A0, -16, 14, 144, 20 },
+    {              NULL,   0,  0,   0,  0 }
+};
+
+UnkStruct D_E010E7FC[] = {
+    { D_0900C080_3F7EE0, 0, -6, 128, 10 },
+    { D_0900C168_3F7FC8, 0,  4, 128, 10 },
+    { D_0900C1B0_3F8010, 0, 14, 128, 10 },
+    { D_0900C1F8_3F8058, 0, 24, 128, 10 },
+    {              NULL, 0,  0,   0,  0 }
+};
+
+UnkStruct D_E010E838[] = {
+    { D_0900C240_3F80A0,   0,  0, 104, 20 },
+    { D_0900C328_3F8188,   0, 20, 104, 20 },
+    { D_0900C370_3F81D0, 232,  0,  16, 40 },
+    {              NULL,   0,  0,   0,  0 }
+};
+
+UnkStruct D_E010E868[] = {
+    { D_0900BE40_3F7CA0, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BE88_3F7CE8, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BED0_3F7D30, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BF18_3F7D78, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BF60_3F7DC0, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BFA8_3F7E08, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900BFF0_3F7E50, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 },
+    { D_0900C038_3F7E98, 128, -33, 64, 64 },
+    {              NULL,   0,   0,  0,  0 }
+};
 
 void chapter_change_init(EffectInstance* effect);
 void chapter_change_update(EffectInstance* effect);

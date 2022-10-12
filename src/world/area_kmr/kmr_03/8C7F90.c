@@ -4,7 +4,7 @@
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#include "world/common/CheckPartnerFlags1000.inc.c"
+#include "world/common/todo/CheckPartnerFlags1000.inc.c"
 
 EntryList N(entryList) = {
     { -340.0f, 0.0f, 348.0f, 48.0f },

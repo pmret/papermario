@@ -4,9 +4,17 @@
 extern char D_09000000_345B40[][0x1000];
 extern char D_09004000_349B40[][0x1000];
 extern Gfx D_09008100_34DC40[];
-extern Gfx* D_E0036630[];
-extern u8 D_E0036640[];
-extern u8 D_E0036648[];
+extern Gfx D_09008170_34DCB0[];
+extern Gfx D_09008190_34DCD0[];
+extern Gfx D_090081A8_34DCE8[];
+extern Gfx D_090081C0_34DD00[];
+
+Gfx* D_E0036630[] = {
+    D_09008170_34DCB0, D_09008190_34DCD0, D_090081A8_34DCE8, D_090081C0_34DD00
+};
+
+u8 D_E0036640[] = { 0x3C, 0x78, 0x8C, 0x93, 0x95, 0x96, 0x00, 0x00 };
+u8 D_E0036648[] = { 0x96, 0x96, 0x96, 0x96, 0x96, 0x96, 0x00, 0x00 };
 
 void got_item_outline_init(EffectInstance* effect);
 void got_item_outline_update(EffectInstance* effect);

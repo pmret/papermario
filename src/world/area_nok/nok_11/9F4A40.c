@@ -3,9 +3,9 @@
 static char* N(exit_str_0) = "mac_01";
 static char* N(exit_str_1) = "nok_12";
 
-#include "world/common/enemy/TackleAI.inc.c"
+#include "world/common/enemy/ai/TackleAI.inc.c"
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 #include "common/foliage.inc.c"
 

@@ -5,4 +5,4 @@
 
 #define PARTY_IMAGE "party_pokopi"
 
-#include "world/common/LoadPartyImage.inc.c"
+#include "world/common/todo/LoadPartyImage.inc.c"

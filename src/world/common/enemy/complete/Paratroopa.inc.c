@@ -1,6 +1,6 @@
 #include "Paratroopa.h"
 
-#include "world/common/enemy/ParatroopaAI.inc.c"
+#include "world/common/enemy/ai/ParatroopaAI.inc.c"
 
 f32 N(FlyingAI_JumpVels)[] = {
     4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 

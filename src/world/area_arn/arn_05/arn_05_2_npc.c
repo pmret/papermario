@@ -26,7 +26,7 @@ API_CALLABLE(N(AwaitCDownPress)) {
     }
 }
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/todo/SwitchToPartner.inc.c"
 
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     EVT_SWITCH(GB_StoryProgress)

@@ -274,7 +274,7 @@ EvtScript N(80244F70) = {
                     EVT_IF_EQ(LVar7, 0)
                         EVT_WAIT(5)
                         EVT_SET(LVar8, 6)
-                        EVT_CALL(ModifyColliderFlags, 0, LVar9, 0x7FFFFE00)
+                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar9, 0x7FFFFE00)
                     EVT_END_IF
                     EVT_ADD(LVar8, 1)
                     EVT_ADD(LVar7, LVar8)
@@ -327,7 +327,7 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

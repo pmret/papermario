@@ -5,4 +5,4 @@ static char* N(exit_str_1) = "isk_07";
 static char* N(exit_str_2) = "isk_06";
 static char* N(exit_str_3) = "isk_05";
 
-#include "world/common/RemovePadlock.inc.c"
+#include "world/common/todo/RemovePadlock.inc.c"

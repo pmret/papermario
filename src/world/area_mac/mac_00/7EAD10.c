@@ -7,7 +7,7 @@ static char* N(exit_str_3) = "kmr_20";
 static char* N(exit_str_4) = "mac_00";
 static char* N(exit_str_5) = "\0\0\0\0";
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

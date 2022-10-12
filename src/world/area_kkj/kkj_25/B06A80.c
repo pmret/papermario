@@ -1,13 +1,13 @@
 #include "effects.h"
 #include "kkj_25.h"
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 #include "common/UnkLightningFXFunc.inc.c"
 
-#include "world/common/SetEntityPositionF.inc.c"
+#include "world/common/todo/SetEntityPositionF.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 ApiStatus func_80240264_B06C64(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

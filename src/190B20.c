@@ -766,12 +766,10 @@ void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
     vector->z += -speed * cosAngleRad;
 }
 
-// matching after data migration
-#ifdef NON_MATCHING
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg) {
-    f32 temp_f0;
-    f32 temp_f20;
-    f32 temp_f20_2;
+    f32 theta;
+    f32 sinTheta;
+    f32 cosTheta;
 
     if (var0 == 2) {
         fx_landing_dust(0, xPos, yPos + 0.0f, zPos, D_802938A4);
@@ -779,15 +777,19 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
         D_802938A8 = 4;
     } else if (D_802938A8++ >= 4) {
         D_802938A8 = 0;
-        temp_f20 = DEG_TO_RAD(clamp_angle(-angleDeg));
-        temp_f20_2 = sin_rad(temp_f20);
-        temp_f0 = cos_rad(temp_f20);
-        fx_walking_dust(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
+        theta = DEG_TO_RAD(clamp_angle(-angleDeg));
+        sinTheta = sin_rad(theta);
+        cosTheta = cos_rad(theta);
+        fx_walking_dust(
+            0,
+            xPos + (sinTheta * 24.0f * 0.2f),
+            yPos + 1.5f,
+            zPos + (cosTheta * 24.0f * 0.2f),
+            sinTheta,
+            cosTheta
+        );
     }
 }
-#else
-INCLUDE_ASM(void, "190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
-#endif
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     ActorPart* part = &actor->partsTable[0];

@@ -1079,7 +1079,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = FALSE;
     }
 
-    if (!script->functionTemp[0]) {
+    if (script->functionTemp[0] == 0) {
         player->state.moveTime = evt_get_variable(script, *args++);
         player->state.moveArcAmplitude = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -1142,7 +1142,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     playerState->currentPos.y += playerVel;
     playerState->velocity -= playerState->acceleration;
     temp_f20_2 = playerState->speed;
-    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24), playerState->angle);
+    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24)), playerState->angle);
     playerState->unk_24 += playerState->unk_28;
     playerState->unk_24 = clamp_angle(playerState->unk_24);
     player->currentPos.x = playerState->currentPos.x;
@@ -1711,11 +1711,702 @@ ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", func_80274A18);
+ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = battleStatus->playerActor;
+    ActorState* playerState = &player->state;
+    f32 posX, posY, posZ;
+    f32 goalX, goalZ;
+    f32 temp;
+    f64 temp_f20_2;
+    f64 vel1, vel2;
+    f64 vel3, vel4;
+    f64 acc1, acc2;
+    f64 acc3, acc4;
 
-INCLUDE_ASM(s32, "19FAF0", func_802752AC);
+    if (isInitialCall) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        player->state.moveArcAmplitude = evt_get_variable(script, *args++);
+        script->functionTemp[1] = 0;
+        script->functionTemp[0] = 0;
+        if (player->state.moveArcAmplitude == 1) {
+            script->functionTemp[0] = 2;
+        }
+    }
 
-INCLUDE_ASM(s32, "19FAF0", func_80275F00);
+    if (script->functionTemp[0] == 0) {
+        playerState->currentPos.x = player->currentPos.x;
+        playerState->currentPos.y = player->currentPos.y;
+        playerState->currentPos.z = player->currentPos.z;
+        goalX = playerState->goalPos.x;
+        goalZ = playerState->goalPos.z;
+        posX = playerState->currentPos.x;
+        posY = playerState->currentPos.y;
+        posZ = playerState->currentPos.z;
+        playerState->angle = atan2(posX, posZ, goalX, goalZ);
+        playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+        if (playerState->moveTime == 0) {
+            playerState->moveTime = playerState->distance / playerState->speed;
+            temp = playerState->distance - (playerState->moveTime * playerState->speed);
+        } else {
+            playerState->speed = playerState->distance / playerState->moveTime;
+            temp = playerState->distance - (playerState->moveTime * playerState->speed);
+        }
+
+        if (playerState->moveTime == 0) {
+            return ApiStatus_DONE2;
+        }
+
+        playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+        playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+        playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+        playerState->acceleration = PI_S /  playerState->moveTime;
+        playerState->velocity = 0.0f;
+        playerState->speed += temp / playerState->moveTime;
+        if (playerState->moveArcAmplitude < 3) {
+            temp = playerState->distance;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            playerState->bounceDivisor = temp;
+            playerState->unk_24 = 90.0f;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            if (playerState->moveArcAmplitude == 2) {
+                playerState->bounceDivisor = temp * 1.12;
+            }
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            vel1 = playerState->velocity;
+            acc1 = playerState->acceleration;
+            playerState->velocity = vel1 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc1) + acc1);
+        } else {
+            temp = playerState->distance;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            playerState->bounceDivisor = temp;
+            playerState->unk_24 = 90.0f;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            if (playerState->moveArcAmplitude == 4) {
+                playerState->bounceDivisor = temp * 1.25;
+            }
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            vel2 = playerState->velocity;
+            acc2 = playerState->acceleration;
+            playerState->velocity = vel2 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.8 * acc2) + acc2);
+        }
+        set_animation(0, 0, playerState->animJumpRise);
+        sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        script->functionTemp[0] = 1;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (playerState->velocity > PI_S / 2) {
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
+            }
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            if (playerState->goalPos.y > player->currentPos.y && playerState->moveTime < 3) {
+                player->currentPos.y = playerState->goalPos.y;
+            }
+            playerState->unk_18.y = player->currentPos.y;
+            if (playerState->moveArcAmplitude < 3) {
+                vel3 = playerState->velocity;
+                acc3 = playerState->acceleration;
+                playerState->velocity = vel3 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc3) + acc3);
+            } else {
+                vel4 = playerState->velocity;
+                acc4 = playerState->acceleration;
+                playerState->velocity = vel4 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.8 * acc4) + acc4);
+            }
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                player->currentPos.y = playerState->goalPos.y;
+                playerState->acceleration = 1.8f;
+                playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 2:
+            if (battleStatus->unk_83 == 0) {
+                return ApiStatus_DONE2;
+            }
+            playerState->moveTime = 1;
+            playerState->acceleration = 1.8f;
+            playerState->unk_24 = 90.0f;
+            playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+            playerState->bounceDivisor = fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            script->functionTemp[0] = 3;
+            // fallthrough
+        case 3:
+            temp_f20_2 = playerState->currentPos.x;
+            playerState->currentPos.x = temp_f20_2 + ((playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0);
+            playerState->currentPos.y -= (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24)));
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y;
+            player->currentPos.z = playerState->currentPos.z;
+            if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
+                return ApiStatus_DONE2;
+            }
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                return ApiStatus_DONE1;
+            }
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = gBattleStatus.playerActor;
+    ActorState* playerState = &player->state;
+    f32 posX, posY, posZ;
+    f32 goalX, goalZ;
+    f32 temp;
+    f64 temp_f20;
+    f64 vel1, vel2;
+    f64 vel3, vel4;
+    f64 vel5, vel6;
+    f64 vel7, vel8;
+    f64 acc1, acc2;
+    f64 acc3, acc4;
+    f64 acc5, acc6;
+    f64 acc7, acc8;
+
+    if (isInitialCall) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        player->state.moveArcAmplitude = evt_get_variable(script, *args++);
+        script->functionTemp[0] = 0;
+        if (player->state.moveArcAmplitude == 1 ||
+            player->state.moveArcAmplitude == 5 ||
+            player->state.moveArcAmplitude == 6)
+        {
+            script->functionTemp[0] = 10;
+        }
+        if (playerState->moveArcAmplitude == 2) {
+            script->functionTemp[0] = 20;
+        }
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            goalX = playerState->goalPos.x;
+            goalZ = playerState->goalPos.z;
+            posX = playerState->currentPos.x;
+            posY = playerState->currentPos.y;
+            posZ = playerState->currentPos.z;
+            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+
+            if (playerState->moveTime == 0) {
+                playerState->moveTime = playerState->distance / playerState->speed;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            } else {
+                playerState->speed = playerState->distance / playerState->moveTime;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            }
+
+            if (playerState->moveTime == 0) {
+                return ApiStatus_DONE2;
+            }
+
+            playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+            playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+            playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+            playerState->acceleration = (PI_S / 2) / playerState->moveTime;
+            playerState->velocity = 0.0f;
+            playerState->speed += temp / playerState->moveTime;
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpRise);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            playerState->unk_24 = 90.0f;
+            playerState->bounceDivisor = 45.0f;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            if (playerState->moveArcAmplitude == 4) {
+                playerState->bounceDivisor = 56.25f;
+            }
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            if (playerState->moveArcAmplitude == 0) {
+                vel1 = playerState->velocity;
+                acc1 = playerState->acceleration;
+                playerState->velocity = (vel1 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc1) + acc1));
+            } else {
+                vel2 = playerState->velocity;
+                acc2 = playerState->acceleration;
+                playerState->velocity = (vel2 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc2) + acc2));
+            }
+            script->functionTemp[0] = 1;
+            break;
+        case 10:
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            goalX = playerState->goalPos.x;
+            goalZ = playerState->goalPos.z;
+            posX = playerState->currentPos.x;
+            posY = playerState->currentPos.y;
+            posZ = playerState->currentPos.z;
+            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            if (playerState->moveTime == 0) {
+                playerState->moveTime = playerState->distance / playerState->speed;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            } else {
+                playerState->speed = playerState->distance / playerState->moveTime;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            }
+
+            if (playerState->moveTime == 0) {
+                return ApiStatus_DONE2;
+            }
+            playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+            playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+            playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+            playerState->velocity = (PI_S / 2);
+            playerState->acceleration = (PI_S / 4) / (playerState->moveTime + 1);
+            playerState->speed += temp / playerState->moveTime;
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
+            playerState->unk_24 = 90.0f;
+            playerState->bounceDivisor = 45.0f;
+            playerState->unk_28 = (360 / playerState->moveTime);
+            if (playerState->moveArcAmplitude == 5) {
+                playerState->bounceDivisor = 56.25f;
+            }
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            if (playerState->moveArcAmplitude == 1) {
+                vel3 = playerState->velocity;
+                acc3 = playerState->acceleration;
+                playerState->velocity = (vel3 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc3) + acc3));
+            } else {
+                vel4 = playerState->velocity;
+                acc4 = playerState->acceleration;
+                playerState->velocity = (vel4 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc4) + acc4));
+            }
+            playerState->currentPos.y = player->currentPos.y - playerState->bounceDivisor;
+            script->functionTemp[0] = 11;
+            break;
+        case 20:
+            playerState->moveTime = 1;
+            playerState->unk_24 = 90.0f;
+            playerState->bounceDivisor = (fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5);
+            playerState->unk_28 = (360 / playerState->moveTime);
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            script->functionTemp[0] = 21;
+            break;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (playerState->moveArcAmplitude == 0) {
+                vel5 = playerState->velocity;
+                acc5 = playerState->acceleration;
+                playerState->velocity = (vel5 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc5) + acc5));
+            } else {
+                vel6 = playerState->velocity;
+                acc6 = playerState->acceleration;
+                playerState->velocity = (vel6 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc6) + acc6));
+            }
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(sin_rad(sin_rad(playerState->velocity) * (PI_S / 2)) * (PI_S / 2)));
+            player->currentPos.z = playerState->currentPos.z;
+            playerState->unk_18.y = player->currentPos.y;
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
+                player->rotationPivotOffset.y = 14;
+                player->rotation.z -= 66.0f;
+                playerState->moveTime = 7;
+                script->functionTemp[0] = 2;
+            }
+            break;
+        case 2:
+            player->rotationPivotOffset.y = 14;
+            player->rotation.z -= 66.0f;
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                player->rotation.z = 0.0f;
+                player->rotationPivotOffset.y = 0;
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 11:
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            if (playerState->goalPos.y > player->currentPos.y) {
+                player->currentPos.y = playerState->goalPos.y;
+            }
+            playerState->unk_18.y = player->currentPos.y;
+
+            if (playerState->moveArcAmplitude == 1) {
+                vel7 = playerState->velocity;
+                acc7 = playerState->acceleration;
+                playerState->velocity = (vel7 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc7) + acc7));
+            } else {
+                vel8 = playerState->velocity;
+                acc8 = playerState->acceleration;
+                playerState->velocity = (vel8 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc8) + acc8));
+            }
+
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                player->currentPos.y = playerState->goalPos.y;
+                set_animation(ACTOR_PLAYER, 0, 0x1000C);
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 21:
+            temp_f20 = playerState->currentPos.x;
+            temp_f20 += (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0;
+            playerState->currentPos.x = temp_f20;
+            playerState->currentPos.y -= playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24));
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y;
+            player->currentPos.z = playerState->currentPos.z;
+            if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
+                return ApiStatus_DONE2;
+            }
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                return ApiStatus_DONE1;
+            }
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = gBattleStatus.playerActor;
+    ActorState* playerState = &player->state;
+    f32 posX, posY, posZ;
+    f32 goalX, goalZ;
+    f32 speed;
+    f32 temp;
+
+    f64 temp_f20;
+    f64 temp_f20_2;
+    f64 temp_f20_4;
+    f64 temp_f20_5;
+    f64 temp_f20_6;
+    f64 temp_f20_7;
+
+    f64 temp_f22;
+    f64 temp_f22_2;
+    f64 temp_f22_3;
+    f64 temp_f22_4;
+    f64 temp_f22_5;
+    f64 temp_f22_6;
+    f64 temp_f22_7;
+
+    if (isInitialCall) {
+        player->state.moveTime = evt_get_variable(script, *args++);
+        player->state.moveArcAmplitude = evt_get_variable(script, *args++);
+        script->functionTemp[1] = 0;
+        script->functionTemp[0] = 0;
+        if (player->state.moveArcAmplitude == 1) {
+            script->functionTemp[0] = 11;
+        }
+        if (player->state.moveArcAmplitude == 3) {
+            script->functionTemp[0] = 20;
+        }
+        if (player->state.moveArcAmplitude == 2 || player->state.moveArcAmplitude == 4) {
+            script->functionTemp[0] = 30;
+        }
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            goalX = playerState->goalPos.x;
+            goalZ = playerState->goalPos.z;
+            posX = playerState->currentPos.x;
+            posY = playerState->currentPos.y;
+            posZ = playerState->currentPos.z;
+            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            if (playerState->moveTime == 0) {
+                playerState->moveTime = playerState->distance / playerState->speed;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            } else {
+                playerState->speed = playerState->distance / playerState->moveTime;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            }
+            playerState->acceleration = PI_S / playerState->moveTime;
+            playerState->velocity = 0.0f;
+            playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+            playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+            playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+            playerState->speed += temp / playerState->moveTime;
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_TORNADO_JUMP, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            playerState->unk_24 = 90.0f;
+
+            temp = playerState->distance;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            playerState->bounceDivisor = temp;
+
+            temp_f20 = playerState->velocity;
+            temp_f22 = playerState->acceleration;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            playerState->velocity = temp_f20 + (((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53) * temp_f22) + temp_f22);
+            script->functionTemp[0] = 1;
+            break;
+        case 10:
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            goalX = playerState->goalPos.x;
+            goalZ = playerState->goalPos.z;
+            posX = playerState->currentPos.x;
+            posY = playerState->currentPos.y;
+            posZ = playerState->currentPos.z;
+            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            if (playerState->moveTime == 0) {
+                playerState->moveTime = playerState->distance / playerState->speed;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            } else {
+                speed = playerState->distance / playerState->moveTime;
+                playerState->speed = speed;
+                temp = playerState->distance - (playerState->moveTime * speed);
+            }
+            playerState->acceleration = PI_S / playerState->moveTime;
+            playerState->velocity = 0.0f;
+            playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+            playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+            playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+            playerState->speed += temp / playerState->moveTime;
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpRise);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            sfx_play_sound_at_position(SOUND_TORNADO_JUMP, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            playerState->unk_24 = 90.0f;
+            temp_f20_2 = playerState->velocity;
+            temp_f22_2 = playerState->acceleration;
+
+            temp = playerState->distance;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            playerState->bounceDivisor = temp;
+
+            playerState->unk_28 = 360 / playerState->moveTime;
+            playerState->velocity = temp_f20_2 + (((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53) * temp_f22_2) + temp_f22_2);
+            script->functionTemp[0] = 11;
+            break;
+        case 20:
+            playerState->moveTime = 1;
+            set_animation(ACTOR_PLAYER, 1, 0x1000C);
+            player->rotation.y = 0.0f;
+            playerState->unk_24 = 90.0f;
+            playerState->bounceDivisor = fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            script->functionTemp[0] = 21;
+            break;
+        case 30:
+            playerState->currentPos.x = player->currentPos.x;
+            playerState->currentPos.y = player->currentPos.y;
+            playerState->currentPos.z = player->currentPos.z;
+            goalX = playerState->goalPos.x;
+            goalZ = playerState->goalPos.z;
+            posX = playerState->currentPos.x;
+            posY = playerState->currentPos.y;
+            posZ = playerState->currentPos.z;
+            playerState->angle = atan2(posX, posZ, goalX, goalZ);
+            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            if (playerState->moveTime == 0) {
+                playerState->moveTime = playerState->distance / playerState->speed;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            } else {
+                playerState->speed = playerState->distance / playerState->moveTime;
+                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            }
+            playerState->acceleration = PI_S / (playerState->moveTime + 1);
+            playerState->velocity = 0.0f;
+            playerState->unk_30.x = (playerState->goalPos.x - playerState->currentPos.x) / playerState->moveTime;
+            playerState->unk_30.y = (playerState->goalPos.y - playerState->currentPos.y) / playerState->moveTime;
+            playerState->unk_30.z = (playerState->goalPos.z - playerState->currentPos.z) / playerState->moveTime;
+            playerState->speed += temp / playerState->moveTime;
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpRise);
+            sfx_play_sound_at_position(SOUND_160, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+            playerState->unk_24 = 90.0f;
+            playerState->bounceDivisor = 45.0f;
+            playerState->unk_28 = 360 / playerState->moveTime;
+            if (playerState->moveArcAmplitude == 4) {
+                playerState->bounceDivisor = 56.25f;
+            }
+            playerState->unk_18.x = 0.0f;
+            playerState->unk_18.y = 0.0f;
+            temp_f22_3 = playerState->acceleration;
+            temp_f22_7 = playerState->velocity;
+            temp_f22_7 = temp_f22_7 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f22_3) + temp_f22_3);
+            playerState->velocity = temp_f22_7;
+            script->functionTemp[0] = 31;
+            break;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            temp_f22_4 = playerState->velocity;
+            temp_f20_4 = playerState->acceleration;
+            playerState->velocity = temp_f22_4 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_4) + temp_f20_4);
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            playerState->unk_18.y = player->currentPos.y;
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            player->rotation.y += 133.0f;
+            player->rotation.y = clamp_angle(player->rotation.y);
+            if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
+                return ApiStatus_DONE2;
+            }
+            playerState->moveTime--;
+            if (playerState->moveTime == 4) {
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 11:
+            temp_f22_6 = playerState->velocity;
+            temp_f20_7 = playerState->acceleration;
+            playerState->velocity = temp_f22_6 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_7) + temp_f20_7);
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            if (playerState->goalPos.y > player->currentPos.y && playerState->moveTime < 3) {
+                player->currentPos.y = playerState->goalPos.y;
+            }
+            playerState->unk_18.y = player->currentPos.y;
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
+            player->rotation.y += 133.0f;
+            player->rotation.y = clamp_angle(player->rotation.y);
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                playerState->acceleration = 1.8f;
+                playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+                player->currentPos.y = playerState->goalPos.y;
+                player->rotation.y = 0.0f;
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
+                play_movement_dust_effects(2, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 21:
+            temp_f20_5 = playerState->currentPos.x;
+            temp_f20_5 += (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0;
+            playerState->currentPos.x = temp_f20_5;
+            playerState->currentPos.y -= playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24));
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y;
+            player->currentPos.z = playerState->currentPos.z;
+            if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
+               return ApiStatus_DONE2;
+            }
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                return ApiStatus_DONE1;
+            }
+            break;
+        case 31:
+            temp_f22_5 = playerState->velocity;
+            temp_f20_6 = playerState->acceleration;
+            playerState->velocity = temp_f22_5 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_6) + temp_f20_6);
+            playerState->currentPos.x += playerState->unk_30.x;
+            playerState->currentPos.y += playerState->unk_30.y;
+            playerState->currentPos.z += playerState->unk_30.z;
+            playerState->unk_18.x = player->currentPos.y;
+            player->currentPos.x = playerState->currentPos.x;
+            player->currentPos.y = playerState->currentPos.y + (playerState->bounceDivisor * sin_rad(playerState->velocity));
+            player->currentPos.z = playerState->currentPos.z;
+            if (playerState->goalPos.y > player->currentPos.y && playerState->moveTime < 3) {
+                player->currentPos.y = playerState->goalPos.y;
+            }
+            playerState->unk_18.y = player->currentPos.y;
+            playerState->unk_24 += playerState->unk_28;
+            playerState->unk_24 = clamp_angle(playerState->unk_24);
+            set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
+            player->rotation.y += 133.0f;
+            player->rotation.y = clamp_angle(player->rotation.y);
+            playerState->moveTime--;
+            if (playerState->moveTime == 0) {
+                player->currentPos.y = playerState->goalPos.y;
+                player->rotation.y = 0.0f;
+                set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
+                playerState->acceleration = 1.8f;
+                playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
+                return ApiStatus_DONE1;
+            }
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus DidActionSucceed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -137,7 +137,7 @@ EvtScript N(main) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC(N(802419F4))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
         EVT_SET(LVar0, EVT_PTR(N(80240B78)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
@@ -478,13 +478,13 @@ NpcGroupList N(npcGroupList_802429B8) = {
     {},
 };
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

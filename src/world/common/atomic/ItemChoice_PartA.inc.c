@@ -1,8 +1,8 @@
 #include "common.h"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -17,8 +17,8 @@ MapSettings N(settings) = {
     .tattle = { MSG_MapTattle_kgr_02 },
 };
 
-#include "world/common/atomic/DarkRoom.inc.c"
-#include "world/common/atomic/DarkRoom.data.inc.c"
+#include "world/common/atomic/CreateDarkness.inc.c"
+#include "world/common/atomic/CreateDarkness.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_kgr_01_1) = EVT_EXIT_WALK(60, kgr_02_ENTRY_0, "kgr_01", kgr_01_ENTRY_1);
 

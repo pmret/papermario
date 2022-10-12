@@ -96,7 +96,7 @@ static s32 N(pad_3944)[] = {
 };
 
 EvtScript N(80243950) = {
-    EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
     EVT_RETURN
     EVT_END
 };
@@ -108,7 +108,7 @@ EvtScript N(makeEntities) = {
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -160, 160, -90, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80243950)))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -210,8 +210,8 @@ EvtScript N(main) = {
     EVT_SET(LVar3, -50)
     EVT_SET(LVar4, 160)
     EVT_EXEC(N(80243A40))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80243DA4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802438B0))
@@ -1246,10 +1246,10 @@ NpcGroupList N(npcGroupList_80247984) = {
 
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     55
-#include "world/common/enemy/LakituAI.inc.c"
-#include "world/common/enemy/SpinyAI.inc.c"
+#include "world/common/enemy/ai/LakituAI.inc.c"
+#include "world/common/enemy/ai/SpinyAI.inc.c"
 
-#include "world/common/UnkFunc42.inc.c"
+#include "world/common/todo/UnkFunc42.inc.c"
 
 ApiStatus N(func_802433C0_CC6BD0)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(1);

@@ -3,9 +3,9 @@
 static char* N(exit_str_0) = "sam_08";
 static char* N(exit_str_1) = "sam_10";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240118_D36408);
 

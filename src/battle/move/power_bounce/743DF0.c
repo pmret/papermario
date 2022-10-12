@@ -6,7 +6,7 @@
 extern s32 D_802A2730_745520;
 extern s32 D_802A4020;
 
-#include "world/common/UnkMoveFunc1.inc.c"
+#include "world/common/todo/UnkMoveFunc1.inc.c"
 
 ApiStatus func_802A10E4_743ED4(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);

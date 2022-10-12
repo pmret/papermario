@@ -1,7 +1,7 @@
 #include "kmr_20.h"
 
 #define NAMESPACE dup_kmr_20
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 #define NAMESPACE kmr_20
 
 #define NAMESPACE dup3_kmr_20

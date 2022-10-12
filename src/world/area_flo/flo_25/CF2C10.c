@@ -108,8 +108,8 @@ EvtScript N(main) = {
     EVT_SET(LVar3, -60)
     EVT_SET(LVar4, 60)
     EVT_EXEC(N(802423A0))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80242704)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80242330))
@@ -274,7 +274,7 @@ EvtScript N(interact_80242C58) = {
                         EVT_CALL(EndSpeech, -1, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_OpenGate)
                         EVT_CALL(PlaySoundAtCollider, 14, 457, 0)
-                        EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
                         EVT_CALL(MakeLerp, 0, 100, 30, 1)
                         EVT_LOOP(0)
                             EVT_CALL(UpdateLerp)
@@ -375,7 +375,7 @@ EvtScript N(init_80243564) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
     EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_HappyDance)
-        EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
         EVT_CALL(RotateModel, 86, 50, 0, -1, 0)
         EVT_CALL(RotateModel, 87, 50, 0, -1, 0)
         EVT_CALL(RotateModel, 88, 50, 0, -1, 0)
@@ -520,9 +520,9 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/ai/FlyingAI.inc.c"
 
-#include "world/common/enemy/FlyingNoAttackAI.inc.c"
+#include "world/common/enemy/ai/FlyingNoAttackAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

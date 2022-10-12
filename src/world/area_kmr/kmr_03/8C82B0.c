@@ -1,8 +1,8 @@
 #include "kmr_03.h"
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/SetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
 ApiStatus func_80240358_8C82E8(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

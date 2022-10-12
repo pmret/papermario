@@ -6,20 +6,22 @@ void blast_update(EffectInstance* effect);
 void blast_render(EffectInstance* effect);
 void blast_appendGfx(void* effect);
 
-extern Gfx D_09001300[];
-extern Gfx D_09001378[];
-extern Gfx D_090013F0[];
-extern Gfx D_09001468[];
-extern Gfx D_090014E0[];
-extern Gfx D_09001558[];
-extern Gfx D_090015D0[];
-extern Gfx D_09001648[];
-extern Gfx D_090016C0[];
-extern Gfx D_09001738[];
-extern Gfx D_090017B0[];
+extern Gfx D_09001300_37ECD0[];
+extern Gfx D_09001378_37ED48[];
+extern Gfx D_090013F0_37EDC0[];
+extern Gfx D_09001468_37EE38[];
+extern Gfx D_090014E0_37EEB0[];
+extern Gfx D_09001558_37EF28[];
+extern Gfx D_090015D0_37EFA0[];
+extern Gfx D_09001648_37F018[];
+extern Gfx D_090016C0_37F090[];
+extern Gfx D_09001738_37F108[];
+extern Gfx D_090017B0_37F190[];
 
 Gfx* D_E007C510[] = {
-    D_09001378, D_090013F0, D_09001468, D_090014E0, D_09001558, D_090015D0, D_09001648, D_090016C0, D_09001738
+    D_09001378_37ED48, D_090013F0_37EDC0, D_09001468_37EE38,
+    D_090014E0_37EEB0, D_09001558_37EF28, D_090015D0_37EFA0,
+    D_09001648_37F018, D_090016C0_37F090, D_09001738_37F108
 };
 
 void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
@@ -100,8 +102,8 @@ void blast_appendGfx(void* effect) {
     s32 temp_f4;
     s32 alpha;
 
-    dlist = D_090017B0;
-    dlist2 = D_09001300;
+    dlist = D_090017B0_37F190;
+    dlist2 = D_09001300_37ECD0;
 
     temp_f2 = data->unk_20;
     temp_f4 = temp_f2;

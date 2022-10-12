@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "mgm_00";
 static char* N(exit_str_2) = "iwa_11";
 static char* N(exit_str_3) = "mac_03";
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 
 ApiStatus func_802402E0_831AE0(Evt* script, s32 isInitialCall) {
     if (script->varTable[15] > 720) {

@@ -4,7 +4,7 @@
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 #define NAMESPACE kkj_11
 
-#include "world/common/GetPeachDisguise.inc.c"
+#include "world/common/todo/GetPeachDisguise.inc.c"
 
 ApiStatus func_80240F44_ACF084(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
@@ -14,7 +14,7 @@ ApiStatus func_80240F44_ACF084(Evt* script, s32 isInitialCall) {
 }
 
 #define NAMESPACE dup_kkj_11
-#include "world/common/UnkGooberFunc.inc.c"
+#include "world/common/todo/UnkGooberFunc.inc.c"
 #define NAMESPACE kkj_11
 
 const char* kkj_11_str2 = "kkj_14";

@@ -45,7 +45,7 @@ EvtScript N(EVS_RetractPlatform) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(ModifyColliderFlags, 0, LVar7, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar7, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(PlaySound, SOUND_26)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.3))
     EVT_RETURN

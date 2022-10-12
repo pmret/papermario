@@ -45,7 +45,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_EXEC_WAIT(N(80240270))
-    EVT_CALL(ModifyColliderFlags, 0, 6, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 6, 0x7FFFFE00)
     EVT_EXEC_WAIT(N(80240680))
     EVT_EXEC(N(80240050))
     EVT_SET(LVar0, EVT_PTR(N(8024014C)))

@@ -4,16 +4,16 @@
 extern ShopItemData D_802435EC_A3CACC[];
 extern IconHudScriptPair gItemHudScripts[];
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
 #define NAMESPACE dup2_hos_06
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE hos_06
 
 #define NAMESPACE dup_hos_06
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE hos_06
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
@@ -42,7 +42,7 @@ ApiStatus func_802406E0_A39BC0(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
-#include "world/common/LetterDelivery.inc.c"
+#include "world/common/todo/LetterDelivery.inc.c"
 
 ApiStatus Merlow_GetPlayerStarPieces(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

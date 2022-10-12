@@ -2,9 +2,30 @@
 #include "effects_internal.h"
 
 extern Gfx D_09000200_3D6130[];
+extern Gfx D_090003A8_3D62D8[];
+extern Gfx D_090003C8_3D62F8[];
+extern Gfx D_090003E8_3D6318[];
+extern Gfx D_09000528_3D6458[];
+extern Gfx D_09000540_3D6470[];
+extern Gfx D_09000558_3D6488[];
 extern Gfx D_09000688_3D65B8[];
 extern Gfx D_09000808_3D6738[];
-extern Gfx* D_E00D6E40[];
+
+Gfx* D_E00D6E40[] = {
+    D_090003A8_3D62D8, D_090003C8_3D62F8, D_090003E8_3D6318, D_09000528_3D6458,
+    D_09000540_3D6470, D_09000558_3D6488, D_09000688_3D65B8, D_09000688_3D65B8,
+    D_09000688_3D65B8, D_09000558_3D6488, D_09000808_3D6738, D_09000688_3D65B8,
+    D_09000558_3D6488
+};
+
+u8 D_E00D6E74[] = {
+    0x0B, 0x0B, 0x0B, 0x0B, 0x11, 0x0B, 0x0B, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x00, 0x00, 0x00
+};
+
+u8 D_E00D6E84[] = {
+    0x14, 0x05, 0x14, 0x14, 0x0A, 0x14, 0x14, 0x08, 0x08, 0x08, 0x01, 0x01, 0x01, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
 
 void energy_in_out_appendGfx(void* effect);
 

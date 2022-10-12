@@ -1,7 +1,7 @@
 #include "trd_08.h"
 #include "effects.h"
 
-#include "world/common/enemy/FireBarAI.inc.c"
+#include "world/common/enemy/ai/FireBarAI.inc.c"
 
 s32 N(FireBar_Sounds)[] = {
     SOUND_FIRE_BAR_0, SOUND_FIRE_BAR_1, SOUND_FIRE_BAR_2, SOUND_FIRE_BAR_3,

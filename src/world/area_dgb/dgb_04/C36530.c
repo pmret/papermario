@@ -274,7 +274,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_DGB04_SuperBlock
-#include "world/common/atomic/SuperBlock.data.inc.c"
+#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_MAKE_SUPER_BLOCK(500, -360, 110, 0)
@@ -284,8 +284,8 @@ EvtScript N(makeEntities) = {
 
 #define AI_SENTINEL_FIRST_NPC 0
 #define AI_SENTINEL_LAST_NPC  0
-#include "world/common/enemy/SentinelAI.inc.c"
+#include "world/common/enemy/ai/SentinelAI.inc.c"
 
-#include "world/common/atomic/SuperBlock.inc.c"
+#include "world/common/entity/SuperBlock.inc.c"
 
 const char N(dgb_00_name_hack)[] = "dgb_00";

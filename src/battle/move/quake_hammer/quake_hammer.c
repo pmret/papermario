@@ -7,9 +7,9 @@
 
 extern EvtScript D_802A3168_0073D038;
 
-#include "world/common/IsBerserkerEquipped.inc.c"
+#include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/IsRightOnEquipped.inc.c"
+#include "world/common/todo/IsRightOnEquipped.inc.c"
 
 EvtScript D_802A10B0_73AF80 = {
     EVT_CALL(InitTargetIterator)

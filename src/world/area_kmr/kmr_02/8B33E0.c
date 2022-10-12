@@ -2,9 +2,9 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B33E0", func_80243370_8B33E0);
 
-#include "world/common/SetEntityPositionF.inc.c"
+#include "world/common/todo/SetEntityPositionF.inc.c"
 
-#include "world/common/GetEntityPosition.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
 
 static char* N(exit_str_6) = "tik_01";
 

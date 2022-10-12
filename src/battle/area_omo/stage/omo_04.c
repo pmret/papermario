@@ -12,12 +12,12 @@ extern ActorBlueprint N(slot_machine_start);
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetTexPanner, 29, 10)
+    EVT_CALL(SetTexPanner, 29, TEX_PANNER_A)
     EVT_THREAD
         EVT_SET(LVarE, 0)
         EVT_LOOP(0)
             EVT_ADD(LVarE, 32768)
-            EVT_CALL(SetTexPanOffset, 10, 0, LVarE, 0)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVarE, 0)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD

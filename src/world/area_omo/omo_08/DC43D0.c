@@ -7,7 +7,7 @@ static char* N(exit_str_3) = "omo_06";
 static char* N(exit_str_4) = "omo_03";
 static char* N(exit_str_5) = "omo_16";
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
 #include "common/SetAngleClamped.inc.c"
 

@@ -607,9 +607,33 @@ typedef struct RingBlastFXData {
     /* 0x28 */ f32 unk_28;
 } RingBlastFXData; // size = 0x2C
 
+// Likely to be the same as GreenImpactFXData and RedImpactFXData
 typedef struct ShockwaveFXData {
-    /* 0x00 */ char todo[0];
-} ShockwaveFXData; // size = unknown
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[2]; // likely padding
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ Color_RGB8 unk_50;
+    /* 0x53 */ Color_RGB8 unk_53;
+    /* 0x56 */ char unk_56[2]; // likely padding
+} ShockwaveFXData; // size = 0x58
 
 typedef struct MusicNoteFXData {
     /* 0x00 */ s32 unk_00;
@@ -740,6 +764,7 @@ typedef struct DebuffFXData {
     /* 0x3E */ char unk_3E[2];
 } DebuffFXData; // size = 0x40
 
+// Likely to be the same as RedImpactFXData and ShockwaveFXData
 typedef struct GreenImpactFXData {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[2]; // likely padding
@@ -1006,8 +1031,25 @@ typedef struct FireFlowerFXData {
 } FireFlowerFXData; // size = 0x4C
 
 typedef struct RecoverFXData {
-    /* 0x00 */ char todo[0];
-} RecoverFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+} RecoverFXData; // size = 0x48
 
 typedef struct DisableXFXData {
     /* 0x00 */ s32 type;
@@ -1553,9 +1595,33 @@ typedef struct WhirlwindFXData {
     /* 0x10 */ char todo[0];
 } WhirlwindFXData; // size = unknown
 
+// Likely to be the same as GreenImpactFXData and ShockwaveFXData
 typedef struct RedImpactFXData {
-    /* 0x00 */ char todo[0];
-} RedImpactFXData; // size = unknown
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[2]; // likely padding
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ Color_RGB8 unk_50;
+    /* 0x53 */ Color_RGB8 unk_53;
+    /* 0x56 */ char unk_56[2]; // likely padding
+} RedImpactFXData; // size = 0x58
 
 typedef struct FloatingCloudPuffFXData {
     /* 0x00 */ s32 unk_00;

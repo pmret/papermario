@@ -7,9 +7,9 @@ static char* N(exit_str_3) = "obk_07";
 static char* N(exit_str_4) = "obk_08";
 static char* N(exit_str_5) = "obk_09";
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/SetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240038_BBD1D8);
 

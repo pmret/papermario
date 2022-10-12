@@ -73,18 +73,18 @@ EvtScript N(main) = {
         EVT_IF_GT(LVar0, 65536)
             EVT_ADD(LVar0, -65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, LVar0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
         EVT_ADD(LVar1, -200)
         EVT_IF_LT(LVar1, 0)
             EVT_ADD(LVar1, 65536)
         EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 2, 0, LVar1, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar1, 0)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
     EVT_EXEC(N(802451C4))
-    EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 1, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 5, 0x7FFFFE00)
     EVT_SET(LVar0, EVT_PTR(N(80242AF8)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802429D0))
@@ -240,7 +240,7 @@ static s32 N(pad_36FC) = {
 
 #define SUPER_BLOCK_MAPVAR MapVar(0)
 #define SUPER_BLOCK_GAMEFLAG GF_FLO16_SuperBlock
-#include "world/common/atomic/SuperBlock.data.inc.c"
+#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(80243D48) = {
     EVT_LABEL(0)
@@ -295,6 +295,6 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/SuperBlock.inc.c"
+#include "world/common/entity/SuperBlock.inc.c"
 
-#include "world/common/UnkFunc44.inc.c"
+#include "world/common/todo/UnkFunc44.inc.c"

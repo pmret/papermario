@@ -213,7 +213,7 @@ s32 N(idleAnimations_80223E08)[] = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-#include "world/common/UnkFunc52.inc.c"
+#include "world/common/todo/UnkFunc52.inc.c"
 
 #include "common/GetBootsHammerLevel.inc.c"
 

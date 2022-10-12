@@ -5,13 +5,13 @@ static char* N(exit_str_1) = "pra_01";
 static char* N(exit_str_2) = "sam_12";
 static char* N(exit_str_3) = "";
 
-#include "world/common/StashVars.inc.c"
+#include "world/common/todo/StashVars.inc.c"
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/todo/GetItemName.inc.c"
 
-#include "world/common/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
 
-#include "world/common/IsItemBadge.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_802402BC_D37ABC);
 

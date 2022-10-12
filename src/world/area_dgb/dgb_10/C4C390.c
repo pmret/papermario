@@ -77,13 +77,13 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80240E68))
     EVT_EXEC(N(80240250))
-    EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 9, 0x7FFFFE00)
     EVT_CALL(EnableModel, 6, 0)
     EVT_CALL(EnableModel, 12, 0)
     EVT_CALL(EnableModel, 18, 0)
-    EVT_CALL(ModifyColliderFlags, 0, 12, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
-    EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 12, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 13, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, 14, 0x7FFFFE00)
     EVT_EXEC(N(enterWalk_80240378))
     EVT_RETURN
     EVT_END
@@ -124,7 +124,7 @@ EvtScript N(80240770) = {
         EVT_CALL(ModifyColliderFlags, 1, ArrayVar(0), 0x7FFFFE00)
         EVT_CALL(EnableModel, ArrayVar(1), 1)
         EVT_WAIT(1)
-        EVT_CALL(ModifyColliderFlags, 0, ArrayVar(0), 0x7FFFFE00)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, ArrayVar(0), 0x7FFFFE00)
         EVT_CALL(EnableModel, ArrayVar(1), 0)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -314,7 +314,7 @@ ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkDistFunc2.inc.c"
+#include "world/common/todo/UnkDistFunc2.inc.c"
 
 ApiStatus N(func_8024013C_C4C4CC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

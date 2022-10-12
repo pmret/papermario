@@ -2,7 +2,7 @@
 
 #include "common/UnkEffect0FFuncs.inc.c"
 
-#include "world/common/GetFloorCollider.inc.c"
+#include "world/common/todo/GetFloorCollider.inc.c"
 
 static char* N(exit_str_0) = "kmr_24";
 static char* N(exit_str_1) = "hos_00";

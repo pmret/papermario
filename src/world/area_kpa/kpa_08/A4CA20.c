@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kpa_52";
 static char* N(exit_str_1) = "kpa_100";
 
-#include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
 ApiStatus func_8024001C_A4CA3C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -128,7 +128,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     EVT_END_IF
     EVT_WAIT(45)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(ModifyColliderFlags, 0, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, 1, COLLIDER_yougan, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(EnableGroup, MODEL_i_on, FALSE)
     EVT_CALL(EnableGroup, MODEL_i_off, TRUE)
@@ -172,7 +172,7 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
         EVT_EXEC(N(EVS_MonitorPushBlockPuzzle))
         EVT_SETF(MV_GlowIntensity, EVT_FLOAT(1.0))
     EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, 0, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(EnableGroup, MODEL_i_on, FALSE)
         EVT_CALL(TranslateGroup, MODEL_you, 0, -14, -2)
         EVT_CALL(TranslateModel, MODEL_yougan, 0, -25, -50)

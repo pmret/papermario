@@ -73,11 +73,11 @@ EvtScript N(EVS_SetupExitHint) = {
     EVT_WAIT(20)
     EVT_EXEC(N(EVS_ManageEvilTree))
     EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_kao, 0)
+        EVT_CALL(SetTexPanner, MODEL_kao, TEX_PANNER_0)
         EVT_LABEL(0)
-        EVT_CALL(SetTexPanOffset, 0, 0, 0, -0x8000)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
         EVT_WAIT(2)
-        EVT_CALL(SetTexPanOffset, 0, 0, 0, 0)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
         EVT_WAIT(3)
         EVT_GOTO(0)
     EVT_END_THREAD

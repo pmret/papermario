@@ -1,7 +1,7 @@
 #include "dro_01.h"
 
 #define NAMESPACE dro_01_dup
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"
 #define NAMESPACE dro_01
 
 #include "common/foliage.inc.c"

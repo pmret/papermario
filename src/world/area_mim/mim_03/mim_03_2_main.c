@@ -1,6 +1,6 @@
 #include "mim_03.h"
 
-#include "world/common/SetForeverForestFog.inc.c"
+#include "world/common/todo/SetForeverForestFog.inc.c"
 
 API_CALLABLE(N(GetPlayerDistFromMapCenter)) {
     script->varTable[0] = get_xz_dist_to_player(0.0f, 0.0f);

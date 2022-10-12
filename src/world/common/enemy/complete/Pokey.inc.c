@@ -1,6 +1,6 @@
 #include "Pokey.h"
 
-#include "world/common/SetNpcB5_3.inc.c"
+#include "world/common/todo/SetNpcB5_3.inc.c"
 
 MobileAISettings N(AISettings_Pokey) = {
     .moveSpeed = 1.8f,

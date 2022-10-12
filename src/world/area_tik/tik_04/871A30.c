@@ -7,4 +7,4 @@ static char* N(exit_str_3) = "tik_12";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/atomic/Pipe.inc.c"
+#include "world/common/entity/Pipe.inc.c"

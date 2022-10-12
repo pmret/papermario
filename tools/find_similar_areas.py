@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
-from Levenshtein import ratio
 import os
 import sys
 
@@ -121,7 +120,6 @@ def parse_map() -> OrderedDict[str, Symbol]:
     return syms
 
 
-
 @dataclass
 class Match:
     query_offset: int
@@ -130,6 +128,16 @@ class Match:
 
     def __str__(self):
         return f"{self.query_offset} {self.target_offset} {self.length}"
+
+
+@dataclass
+class Result:
+    query: str
+    target: str
+    query_start: int
+    target_start: int
+    length: int
+
 
 def get_pair_matches(query_hashes: list[int], sym_hashes: list[int]) -> list[Match]:
     ret = []
@@ -145,6 +153,30 @@ def get_hashes(bytes: Bytes, window_size: int) -> list[int]:
     for i in range(0, len(bytes.normalized) - window_size):
         ret.append(bytes.normalized[i : i + window_size])
     return ret
+
+
+def group_matches(query: str, target: str, matches: list[Match]) -> list[Result]:
+    ret = []
+
+    matches.sort(key=lambda m: m.query_offset)
+
+    match_groups = []
+    last_start = matches[0].query_offset
+    for match in matches:
+        if match.query_offset == last_start + 1:
+            match_groups[-1].append(match)
+        else:
+            match_groups.append([match])
+        last_start = match.query_offset
+
+    for group in match_groups:
+        query_start = group[0].query_offset
+        target_start = group[0].target_offset
+        length = len(group)
+        ret.append(Result(query, target, query_start, target_start, length))
+
+    return ret
+
 
 def get_matches(query: str, window_size: int):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
@@ -169,40 +201,28 @@ def get_matches(query: str, window_size: int):
         sym_hashes = get_hashes(sym_bytes, window_size)
 
         matches: list[Match] = get_pair_matches(query_hashes, sym_hashes)
-        for match in matches:
-            print(f"{query} {symbol} {match}")
+        if matches:
+            results = group_matches(query, symbol, matches)
+
+            decompiled_str = ""
+            if syms[symbol].is_decompiled:
+                decompiled_str = " (decompiled)"
+            print(symbol + ":" + decompiled_str)
+
+            for result in results:
+                total_len = result.length + window_size
+                query_str = f"{query} [{result.query_start}-{result.query_start + total_len}]"
+                target_str = f"{symbol} [{result.target_start}-{result.target_start + total_len}]"
+                print(f"\t{query_str} matches {target_str} ({total_len})")
 
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
 def do_query(query, window_size):
-    matches = get_matches(query, window_size)
-    num_matches = len(matches)
-
-    if num_matches == 0:
-        print(query + " - found no matches")
-        return
-
-    i = 0
-    more_str = ":"
-    if args.num_out < num_matches:
-        more_str = " (showing only " + str(args.num_out) + "):"
-
-    print(query + " - found " + str(num_matches) + " matches total" + more_str)
-    for match in matches:
-        if i == args.num_out:
-            break
-        match_str = "{:.3f} - {}".format(matches[match], match)
-        if syms[match].is_decompiled:
-           match_str += " (decompiled)"
-        print(match_str)
-        i += 1
-    print()
+    get_matches(query, window_size)
 
 parser = argparse.ArgumentParser(description="Tool to find duplicate portions of code from one function in code across the codebase")
 parser.add_argument("query", help="function")
-parser.add_argument("-t", "--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
-parser.add_argument("-n", "--num-out", help="number of results to display", type=int, default=100, required=False)
 parser.add_argument("-w", "--window-size", help="number of bytes to compare", type=int, default=20, required=False)
 
 args = parser.parse_args()

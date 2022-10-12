@@ -15,8 +15,8 @@ MapSettings N(settings) = {
     .entryCount = ENTRY_COUNT(N(Entrances)),
 };
 
-#include "world/common/atomic/Pipe.inc.c"
-#include "world/common/atomic/Pipe.data.inc.c"
+#include "world/common/entity/Pipe.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"

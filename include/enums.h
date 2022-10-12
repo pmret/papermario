@@ -673,6 +673,7 @@ enum SoundIDs {
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_158                       = 0x00000158,
     SOUND_15E                       = 0x0000015E,
+    SOUND_160                       = 0x00000160,
     SOUND_161                       = 0x00000161,
     SOUND_162                       = 0x00000162,
     SOUND_ENTER_PIPE                = 0x00000163,
@@ -1932,7 +1933,8 @@ enum ItemIDs {
 enum GotItemType {
     ITEM_TYPE_CONSUMABLE    = 0,
     ITEM_TYPE_KEY           = 1,
-    ITEM_TYPE_BADGE         = 2
+    ITEM_TYPE_BADGE         = 2,
+    ITEM_TYPE_STAR_PIECE    = 3,
 };
 
 enum ItemPickupFlags {
