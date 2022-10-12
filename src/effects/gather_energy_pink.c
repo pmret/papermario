@@ -1,9 +1,18 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx* D_E00269F0[];
-extern Gfx* D_E00269F8[];
-extern u8 D_E0026A00[];
+extern Gfx D_09000DA0_33C970[];
+extern Gfx D_09000E28_33C9F8[];
+extern Gfx D_090010B0_33CC80[];
+extern Gfx D_09001138_33CD08[];
+
+Gfx* D_E00269F0[] = { D_090010B0_33CC80, D_09000DA0_33C970 };
+Gfx* D_E00269F8[] = { D_09001138_33CD08, D_09000E28_33C9F8 };
+
+u8 D_E0026A00[] = {
+    0xFF, 0xC5, 0x9C, 0xFF, 0x9C, 0xFF, 0xFF, 0x73, 0xD6, 0xFF, 0x9C, 0xFF, 0xFF, 0xC5, 0x7B, 0xFF,
+    0xB4, 0xFF, 0xDE, 0x73, 0xFF, 0xFF, 0x94, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
 
 void gather_energy_pink_init(EffectInstance* effect);
 void gather_energy_pink_update(EffectInstance* effect);

@@ -1,11 +1,15 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern s32 D_09000000;
-extern s32 D_09002020;
-extern Vtx D_09004040[][22];
-extern Gfx D_09008BE0[];
-extern u8 D_E00C2990[];
+extern s32 D_09000000_3C1BA0;
+extern s32 D_09002020_3C3BC0;
+extern Vtx D_09004040_3C5BE0[][22];
+extern Gfx D_09008BE0_3CA780[];
+
+u8 D_E00C2990[] = {
+    0xFF, 0xFF, 0xDC, 0xBE, 0xA0, 0x78, 0x50, 0x28,
+    0x00, 0x00, 0x28, 0x50, 0x78, 0xA0, 0xBE, 0xDC
+};
 
 void fright_jar_init(EffectInstance* effect);
 void fright_jar_update(EffectInstance* effect);
@@ -129,14 +133,14 @@ void fright_jar_appendGfx(void* effect) {
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09008BE0);
+    gSPDisplayList(gMasterGfxPos++, D_09008BE0_3CA780);
 
     idx = 54 - unk_14;
     if (idx < 0) {
         idx = 0;
     }
 
-    gSPVertex(gMasterGfxPos++, &D_09004040[idx], 22, 0);
+    gSPVertex(gMasterGfxPos++, &D_09004040_3C5BE0[idx], 22, 0);
 
     alpha = D_E00C2990[unk_14 % 16];
     gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
@@ -160,7 +164,7 @@ void fright_jar_appendGfx(void* effect) {
         }
 
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, temp3);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09002020);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09002020_3C3BC0);
         gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
         gDPLoadSync(gMasterGfxPos++);
         gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);
@@ -168,7 +172,7 @@ void fright_jar_appendGfx(void* effect) {
         gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
         gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, temp1 * 4, 508, (temp1 + 15) * 4);
         gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, temp2 * 128.0f * 4.0f, 2000, 2000);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09000000);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09000000_3C1BA0);
         gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x80, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
         gDPLoadSync(gMasterGfxPos++);
         gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);

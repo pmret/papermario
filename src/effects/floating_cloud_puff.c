@@ -3,8 +3,9 @@
 
 extern Gfx D_09000080_3D4F10[];
 extern Gfx D_09000168_3D4FF8[];
-extern u8 D_E00D2500[];
-extern u8 D_E00D2508[];
+
+u8 D_E00D2500[] = { 0x00, 0x1E, 0x50, 0x78, 0x70, 0x68, 0x64, 0x00 };
+u8 D_E00D2508[] = { 0x5E, 0x5C, 0x64, 0x69, 0x6B, 0x69, 0x64, 0x00 };
 
 void floating_cloud_puff_init(EffectInstance* effect);
 void floating_cloud_puff_update(EffectInstance* effect);
@@ -61,8 +62,6 @@ EffectInstance* floating_cloud_puff_main(
 void floating_cloud_puff_init(EffectInstance* effect) {
 }
 
-// Needs data migration, matching otherwise
-#ifdef NON_MATCHING
 void floating_cloud_puff_update(EffectInstance* effect) {
     FloatingCloudPuffFXData* data = effect->data.floatingCloudPuff;
     s32 unk_14;
@@ -97,9 +96,6 @@ void floating_cloud_puff_update(EffectInstance* effect) {
         data->unk_38 = D_E00D2508[(unk_14 - 7) % 7] * 0.01;
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/floating_cloud_puff", floating_cloud_puff_update);
-#endif
 
 void floating_cloud_puff_render(EffectInstance* effect) {
     RenderTask renderTask;
