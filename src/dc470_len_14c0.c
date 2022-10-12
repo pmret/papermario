@@ -139,11 +139,11 @@ void appendGfx_background_texture(void) {
             case BACKGROUND_RENDER_TYPE_0:
             case BACKGROUND_RENDER_TYPE_1:
                 if (fogA == 255) {
-                    for (i = 0; i < 256; i++) {
+                    for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                         gBackgroundPalette[i] = 1;
                     }
                 } else {
-                    for (i = 0; i < 256; i++) {
+                    for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                         u16 palColor = gGameStatusPtr->backgroundPalette[i];
                         blendedB = blend_background_channel((palColor >> 1) & 0x1F, fogB >> 3, fogA);
                         blendedG = blend_background_channel((palColor >> 6) & 0x1F, fogG >> 3, fogA);
@@ -155,7 +155,7 @@ void appendGfx_background_texture(void) {
             case BACKGROUND_RENDER_TYPE_2:
             case BACKGROUND_RENDER_TYPE_3:
             default:
-                for (i = 0; i < 256; i++) {
+                for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                     u16 palColor = gGameStatusPtr->backgroundPalette[i];
                     blendedB = (b2 >> 3) +  ((((palColor >> 1) & 0x1F) * b1) >> 8);
                     blendedG = (g2 >> 3) +  ((((palColor >> 6) & 0x1F) * g1) >> 8);
