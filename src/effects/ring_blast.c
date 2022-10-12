@@ -21,7 +21,7 @@ void ring_blast_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5)
 
     effect = shim_create_effect_instance(&effectBp);
     effect->numParts = numParts;
-    data = effect->data.any = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.ringBlast = shim_general_heap_malloc(numParts * sizeof(*data));
 
     ASSERT(data != NULL);
     shim_mem_clear(data, numParts * sizeof(*data));
