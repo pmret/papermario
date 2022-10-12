@@ -71,13 +71,13 @@ void thunderbolt_ring_update(EffectInstance *effect) {
         return;
     }
     if (timeLeft < 8) {
-        data->unk_2C = data->unk_2C + ((8 - timeLeft) * 0.3);
+        data->unk_2C += (8 - timeLeft) * 0.3;
     }
     if (lifeTime < 16) {
         data->unk_24 = (lifeTime * 16) + 15;
     }
     if (timeLeft < 8) {
-        data->unk_24 = (timeLeft << 5) + 31;
+        data->unk_24 = (timeLeft * 32) + 31;
     }
 }
 

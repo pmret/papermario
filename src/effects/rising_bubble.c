@@ -18,6 +18,7 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     effectBp.renderWorld = rising_bubble_render;
     effectBp.unk_14 = 0;
     effectBp.effectID = EFFECT_RISING_BUBBLE;
+
     effect = shim_create_effect_instance(&effectBp);
     effect->numParts = numParts;
     data = effect->data.risingBubble = shim_general_heap_malloc(numParts * sizeof(*data));
@@ -32,18 +33,19 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     if (arg4 != 0.0f) {
         data->unk_10 = ((shim_rand_int(3) * 0.1) + 0.7) * 0.4;
     } else {
-        data->unk_10 = 1.f;
+        data->unk_10 = 1.0f;
     }
-    data->timeLeft = 0x20;
-    data->unk_20 = shim_rand_int(0x1F);
+    data->timeLeft = 32;
+    data->unk_20 = shim_rand_int(31);
     data->unk_24 = posY + arg4;
 }
+
 void rising_bubble_init(EffectInstance* effect) {
 }
 
 void rising_bubble_update(EffectInstance* effect) {
     RisingBubbleFXData* data = effect->data.risingBubble;
-    s32 temp_a2 = data->timeLeft;
+    s32 timeLeft = data->timeLeft;
 
     if (data->pos.y >= data->unk_24) {
         data->timeLeft--;
@@ -54,10 +56,10 @@ void rising_bubble_update(EffectInstance* effect) {
             return;
         }
 
-        if (temp_a2 >= 6) {
+        if (timeLeft >= 6) {
             data->unk_14 += (120 - data->unk_14) * 0.3;
         } else {
-            data->unk_14 = temp_a2 * 20;
+            data->unk_14 = timeLeft * 20;
         }
 
         data->unk_20++;

@@ -1128,15 +1128,15 @@ typedef struct ConfettiFXData {
 } ConfettiFXData; // size = 0x34
 
 typedef struct SnowfallFXData {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    char unk_0C[0x14];
-    s32 timeLeft;
-    s32 lifeTime;
-    s32 unk_28;
-    s32 unk_2C;
-    s32 unk_30;
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ char unk_0C[0x14];
+    /* 0x20 */ s32 timeLeft;
+    /* 0x24 */ s32 lifeTime;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
 } SnowfallFXData; // size = 0x34
 
 typedef struct Effect46FXData {
@@ -1797,18 +1797,18 @@ typedef struct HieroglyphsFXData {
 } HieroglyphsFXData; // size = 0x3C
 
 typedef struct MiscParticlesFXData {
-    char unk_00[0x4];
-    Vec3f pos;
-    f32 scaleX;
-    f32 scaleY;
-    char unk_18[0x20];
-    s32 unk_38;
-    s32 unk_3C;
-    s32 unk_40;
-    char unk_44[0x4];
-    s32 unk_48;
-    s32 unk_4C;
-    s32 unk_50;
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 scaleX;
+    /* 0x14 */ f32 scaleY;
+    /* 0x18 */ char unk_18[0x20];
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ char unk_44[0x4];
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 unk_50;
 } MiscParticlesFXData; // size = ?
 
 typedef struct StaticStatusFXData {

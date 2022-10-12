@@ -40,7 +40,7 @@ void ring_blast_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5)
         data->unk_28 = 0;
         return;
     }
-    data->unk_28 = 0x28;
+    data->unk_28 = 40;
 }
 
 void ring_blast_init(EffectInstance* effect) {
@@ -58,9 +58,9 @@ void ring_blast_update(EffectInstance* effect) {
         shim_remove_effect(effect);
         return;
     }
-    data->unk_24 = data->unk_24 + data->unk_28;
+    data->unk_24 += data->unk_28;
     if (data->unk_00 == 0) {
-        data->unk_10 = data->unk_10 + 0.1;
+        data->unk_10 += 0.1;
     }
 }
 
