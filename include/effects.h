@@ -1245,10 +1245,10 @@ typedef struct ChompDropFXData {
 } ChompDropFXData; // size = 0x48
 
 typedef struct QuizmoStageFXData {
-   /* 0x00 */ char unk_00[0x4];
+   /* 0x00 */ s32 unk_00;
    /* 0x04 */ s32 vanishTimer;
    /* 0x08 */ s32 lifetime;
-   /* 0x10 */ Vec3f origin;
+   /* 0x0C */ Vec3f origin;
    /* 0x18 */ s32 microphoneRaiseAmt;
    /* 0x1C */ s32 rearWallRaiseAmt;
    /* 0x20 */ s32 leftWallRaiseAmt;
@@ -1259,8 +1259,8 @@ typedef struct QuizmoStageFXData {
    /* 0x34 */ s32 lightScrollDelay;
    /* 0x38 */ s32 unkEffectMode;
    /* 0x3C */ s32 unk_3C; // stage hidden when == 0xFF
-   /* 0x3C */ char unk_40[0x10];
-} QuizmoStageFXData; // size ~ 0x50 (as allocated on heap)
+   /* 0x40 */ char unk_40[0x04];
+} QuizmoStageFXData; // size 0x44
 
 typedef struct RadiatingEnergyOrbFXData {
     /* 0x00 */ char todo[0];

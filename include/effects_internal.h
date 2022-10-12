@@ -109,7 +109,7 @@ EffectInstance* flashing_box_shockwave_main(s32, f32, f32, f32, f32, f32);
 EffectInstance* balloon_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* floating_rock_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* chomp_drop_main(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
-FX_MAIN(quizmo_stage_main);
+EffectInstance* quizmo_stage_main(s32, f32, f32, f32);
 FX_MAIN(radiating_energy_orb_main);
 FX_MAIN(quizmo_answer_main);
 FX_MAIN(motion_blur_flame_main);
