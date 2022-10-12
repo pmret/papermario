@@ -108,7 +108,7 @@ class LinkerEntry:
 class LinkerWriter:
     def __init__(self):
         self.linker_discard_section: bool = options.opts.ld_discard_section
-        self.entries: List[LinkerEntry] = []
+        self.entries: List[LinkerEntry] = [] # Used to store all the linker entries - build tools may want this information
 
         self.buffer: List[str] = []
         self.symbols: List[str] = []
@@ -164,7 +164,7 @@ class LinkerWriter:
         for entry in entries:
             entering_bss = False
             leaving_bss = False
-            cur_section = entry.section
+            cur_section = entry.section_type
 
             if cur_section == "linker":
                 self._end_block()
@@ -231,10 +231,10 @@ class LinkerWriter:
                 section_labels[cur_section].started = True
 
                 # Write THIS linker entry
-                self._writeln(f"{entry.object_path}({cur_section});")
+                self._writeln(f"{entry.object_path}({entry.section});")
             else:
                 # Write THIS linker entry
-                self._writeln(f"{entry.object_path}({cur_section});")
+                self._writeln(f"{entry.object_path}({entry.section});")
 
                 # If this is the last entry of its type, add the END marker for the section we're ending
                 if entry in last_seen_sections:

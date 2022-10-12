@@ -43,6 +43,9 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
                 with open(path, "w", newline="\n") as f:
                     f.write('.include "macro.inc"\n\n')
+                    preamble = options.opts.generated_s_preamble
+                    if preamble:
+                        f.write(preamble + "\n")
                     f.write(f".section {self.get_linker_section()}\n\n")
 
                     f.write(self.spim_section.disassemble())
