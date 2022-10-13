@@ -16,7 +16,77 @@ extern s32 D_8023C1C8;
 extern EffectInstance* D_8023C1CC;
 extern EffectInstance* D_8023C1D0;
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
+ApiStatus func_80238000_703AF0(Evt* script, s32 isInitialCall) {
+    Actor* partner = gBattleStatus.partnerActor;
+    f32 x, y, z;
+
+    if (isInitialCall) {
+        D_8023C1BC = 1;
+        D_8023C1C0 = 0;
+        D_8023C1C4 = 1;
+        D_8023C1C8 = 0;
+        D_8023C1CC = fx_static_status(0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z, 1.0f, 5, 0);
+        D_8023C1D0 = fx_static_status(1, partner->currentPos.x, -1000.0f, partner->currentPos.z, 1.0f, 5, 0);
+        D_8023C1B8 = 1;
+    }
+
+    if (D_8023C1B8 == 0) {
+        return ApiStatus_DONE2;
+    }
+
+    if (D_8023C1BC != 0) {
+        D_8023C1C0 += 15;
+        D_8023C1C0 = clamp_angle(D_8023C1C0);
+    }
+
+    partner->unk_19A = sin_rad(DEG_TO_RAD(D_8023C1C0)) * 3.0f;
+    x = partner->currentPos.x + partner->headOffset.x;
+    y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    z = partner->currentPos.z + partner->headOffset.z;
+    if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
+        y = -1000.0f;
+    }
+
+    if (D_8023C1C4 != 0) {
+        switch (D_8023C1C8) {
+            case 0:
+                if (D_8023C1CC == NULL) {
+                    D_8023C1CC = fx_static_status(0, x, y, z, 1.0f, 5, 0);
+                }
+                if (D_8023C1D0 != NULL) {
+                    D_8023C1D0->flags |= 0x10;
+                    D_8023C1D0 = NULL;
+                }
+                D_8023C1CC->data.staticStatus->unk_04 = x;
+                D_8023C1CC->data.staticStatus->unk_08 = y;
+                D_8023C1CC->data.staticStatus->unk_0C = z;
+                break;
+            case 1:
+                if (D_8023C1CC != NULL) {
+                    D_8023C1CC->flags |= 0x10;
+                    D_8023C1CC = NULL;
+                }
+                if (D_8023C1D0 == NULL) {
+                    D_8023C1D0 = fx_static_status(1, x, y, z, 1.0f, 5, 0);
+                }
+                D_8023C1D0->data.staticStatus->unk_04 = x;
+                D_8023C1D0->data.staticStatus->unk_08 = y;
+                D_8023C1D0->data.staticStatus->unk_0C = z;
+                break;
+        }
+    } else {
+        if (D_8023C1CC != NULL) {
+            D_8023C1CC->flags |= 0x10;
+            D_8023C1CC = NULL;
+        }
+        if (D_8023C1D0 != NULL) {
+            D_8023C1D0->flags |= 0x10;
+            D_8023C1D0 = NULL;
+        }
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80238370_703E60(Evt* script, s32 isInitialCall) {
     D_8023C1B8 = 0;
