@@ -65,7 +65,7 @@ s32 N(statusTable_80224A40)[] = {
     STATUS_END,
 };
 
-BSS EffectWhirlwindUnk D_802310D0;
+BSS PlayerStatus D_802310D0;
 
 ActorPartBlueprint N(partsTable_80224AEC)[] = {
     {
@@ -609,9 +609,9 @@ s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
     temp_f20 = evt_get_float_variable(script, *args++);
     temp_v0 = evt_get_variable(script, *args++);
 
-    D_802310D0.unk_28 = x;
-    D_802310D0.unk_2C = y;
-    D_802310D0.unk_30 = z;
+    D_802310D0.position.x = x;
+    D_802310D0.position.y = y;
+    D_802310D0.position.z = z;
     fx_46(6, &D_802310D0, temp_f20, temp_v0);
 
     return ApiStatus_DONE2;

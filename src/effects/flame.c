@@ -1,20 +1,113 @@
 #include "common.h"
 #include "effects_internal.h"
+#include "nu/nusys.h"
 
+typedef struct UnkStruct {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ s8 unk_02;
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ s8 unk_04;
+    /* 0x05 */ s8 unk_05;
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ s8 unk_07;
+    /* 0x08 */ u8 unk_08;
+    /* 0x09 */ char unk_09[3]; // likely padding
+    /* 0x0C */ Gfx* unk_0C;
+} UnkStruct; // size = 0x10
+
+extern Gfx D_09000800[];
+extern Gfx D_090008F8[];
+extern Gfx D_09000918[];
+extern Gfx D_090009E0[];
+
+UnkStruct D_E0040840[] = {
+    { 255, 109, 255,  92, 102, 191, 255, 75,  50, {}, D_09000800 },
+    { 255, 255, 255,   0, 255,  32,   0, 75, 100, {}, D_09000800 },
+    { 255,   0, 255,  92, 107, 168, 255, 75,  10, {}, D_09000800 },
+    { 255, 255, 255, 244, 247, 175, 175, 22,  30, {}, D_09000800 }
+};
+
+s32 D_E0040880;
+
+void flame_init(EffectInstance* effect);
+void flame_update(EffectInstance* effect);
+void flame_render(EffectInstance* effect);
 void flame_appendGfx(void* effect);
 
-u32 D_E0040840[2] = { 0xFF6DFF5C, 0x66BFFF4B };
+void flame_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    EffectInstance** outEffect
+) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
+    EffectInstance* effect;
+    FlameFXData* data;
+    s32 numParts = 1;
 
-s8 D_E0040848[56] = { 0x32, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0x20, 0x00, 0x4B, 0x64, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0x00, 0xFF, 0x5C, 0x6B, 0xA8, 0xFF, 0x4B, 0x0A, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0xFF, 0xFF, 0xF4, 0xF7, 0xAF, 0xAF, 0x16, 0x1E, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00 };
+    if (arg0 >= 4) {
+        arg0 = 3;
+    }
 
-s32 D_E0040880[4] = { 0, 0, 0, 0 };
+    bpPtr->init = flame_init;
+    bpPtr->update = flame_update;
+    bpPtr->renderWorld = flame_render;
+    bpPtr->unk_00 = 0;
+    bpPtr->unk_14 = NULL;
+    bpPtr->effectID = EFFECT_FLAME;
 
-INCLUDE_ASM(s32, "effects/flame", flame_main);
+    effect = shim_create_effect_instance(bpPtr);
+    effect->numParts = numParts;
+    data = effect->data.flame = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.flame != NULL);
 
-void flame_init(void) {
+    data->unk_00 = arg0;
+    data->unk_18 = 0;
+    data->pos.x = arg1;
+    data->pos.y = arg2;
+    data->pos.z = arg3;
+    data->unk_10 = arg4 * D_E0040840[arg0].unk_08 * 0.01;
+    data->unk_1C = 0;
+    data->unk_24 = 0;
+    data->unk_20 = 0;
+    data->unk_30 = 1.0f;
+    data->unk_2C = 1.0f;
+    data->unk_28 = 1.0f;
+
+    if (outEffect != NULL) {
+        *outEffect = effect;
+    }
 }
 
-INCLUDE_ASM(s32, "effects/flame", flame_update);
+void flame_init(EffectInstance* effect) {
+}
+
+void flame_update(EffectInstance* effect) {
+    FlameFXData* part = effect->data.flame;
+    s32 i;
+
+    for (i = 0; i < effect->numParts; i++, part++) {
+        part->unk_1C += part->unk_20;
+        if (part->unk_1C > 64.0f) {
+            part->unk_1C -= 64.0f;
+        }
+        if (part->unk_1C < 0.0f) {
+            part->unk_1C += 64.0f;
+        }
+
+        part->unk_24 += part->unk_28;
+        if (part->unk_24 > 128.0f) {
+            part->unk_24 -= 128.0f;
+        }
+        if (part->unk_24 < 0.0f) {
+            part->unk_24 += 128.0f;
+        }
+    }
+}
 
 void flame_render(EffectInstance* effect) {
     FlameFXData* data = effect->data.flame;
@@ -48,4 +141,50 @@ void flame_render(EffectInstance* effect) {
     shim_queue_render_task(renderTaskPtr);
 }
 
-INCLUDE_ASM(s32, "effects/flame", flame_appendGfx);
+void flame_appendGfx(void* effect) {
+    FlameFXData* data = ((EffectInstance*)effect)->data.flame;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_00 = data->unk_00;
+    s32 uls = data->unk_1C * 4.0f;
+    s32 ult = data->unk_24 * 4.0f;
+    UnkStruct* unkStruct;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    if (D_E0040880 != gGameStatusPtr->frameCounter) {
+        D_E0040880 = gGameStatusPtr->frameCounter;
+        gSPDisplayList(gMasterGfxPos++, D_09000918);
+        gDPSetTileSize(gMasterGfxPos++, 1, uls, ult, uls + 128, ult + 256);
+        gSPDisplayList(gMasterGfxPos++, D_090009E0);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr));
+        gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE,
+            camera->viewportStartX * 4.0f,
+            camera->viewportStartY * 4.0f,
+            (camera->viewportStartX + camera->viewportW) * 4.0f,
+            (camera->viewportStartY + camera->viewportH) * 4.0f);
+    }
+
+    unkStruct = &D_E0040840[unk_00];
+
+    gSPDisplayList(gMasterGfxPos++, unkStruct->unk_0C);
+    gDPSetKeyR(gMasterGfxPos++, unkStruct->unk_03, unkStruct->unk_00, 0);
+    gDPSetKeyGB(gMasterGfxPos++, unkStruct->unk_03, unkStruct->unk_01, 0, unkStruct->unk_03, unkStruct->unk_02, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, unkStruct->unk_07, unkStruct->unk_07, unkStruct->unk_07, 0);
+    gDPSetEnvColor(gMasterGfxPos++, unkStruct->unk_04, unkStruct->unk_05, unkStruct->unk_06, 0);
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp98);
+    shim_guScaleF(sp58, data->unk_10 * data->unk_30, data->unk_10 * data->unk_2C, data->unk_10);
+    shim_guMtxCatF(sp58, sp98, sp98);
+    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_090008F8);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}

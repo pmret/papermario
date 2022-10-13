@@ -1,13 +1,95 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern f32 D_E00E0A48[];
+extern Gfx D_09000280_3DC1C0[];
+extern Gfx D_090003B0_3DC2F0[];
 
+Gfx* D_E00E0A40[] = { D_090003B0_3DC2F0, D_09000280_3DC1C0 };
+
+f32 D_E00E0A48[] = {
+    0.01f, 0.05f,  0.1f,  0.2f, 0.35f,  0.5f,
+    0.65f,  0.8f, 0.95f,  1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f, 0.95f,  0.8f, 0.65f,
+     0.5f, 0.35f,  0.2f,  0.1f, 0.05f, 0.01f
+};
+
+void embers_init(EffectInstance* effect);
+void embers_update(EffectInstance* effect);
+void embers_render(EffectInstance* effect);
 void embers_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/embers", embers_main);
+EffectInstance* embers_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    f32 arg5,
+    f32 arg6,
+    s32 arg7,
+    s32 arg8,
+    f32 arg9,
+    f32 argA
+) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+    EmbersFXData* part;
+    s32 numParts;
+    f32 temp1;
+    s32 i;
 
-void embers_init(void) {
+    arg7++;
+
+    bp.init = embers_init;
+    bp.update = embers_update;
+    bp.renderWorld = embers_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_EMBERS;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->numParts = arg7;
+    part = effect->data.embers = shim_general_heap_malloc(arg7 * sizeof(*part));
+    ASSERT(effect->data.embers != NULL);
+
+    part->unk_00 = arg0;
+    part->unk_1C = 0;
+    if (arg8 <= 0) {
+        part->unk_18 = 1000;
+    } else {
+        part->unk_18 = arg8;
+    }
+    part->unk_2C = 0;
+    part->unk_04 = arg1;
+    part->unk_08 = arg2;
+    part->unk_0C = arg3;
+    part->unk_40 = arg6;
+    part->unk_10 = arg4;
+    part->unk_14 = arg5;
+    part->unk_68 = arg9;
+    part->unk_6C = argA;
+    part->unk_20 = 127;
+    part->unk_24 = 0;
+    part->unk_28 = 0;
+    part->unk_30 = 127;
+    part->unk_34 = 127;
+    part->unk_38 = 0;
+    part->unk_3C = 255;
+
+    temp1 = 30.0f / (arg7 - 1);
+    temp1 *= 0.5;
+
+    part++;
+    for (i = 1; i < arg7; i++, part++) {
+        s32 temp_f0 = -(f32) i * temp1;
+        part->unk_64 = temp_f0 - 1;
+    }
+
+    return effect;
+}
+
+void embers_init(EffectInstance* effect) {
 }
 
 void embers_update(EffectInstance* effect) {
@@ -103,4 +185,41 @@ void embers_render(EffectInstance* effect) {
 void func_E00E05F8(void) {
 }
 
-INCLUDE_ASM(s32, "effects/embers", embers_appendGfx);
+void embers_appendGfx(void* effect) {
+    EmbersFXData* part = ((EffectInstance*)effect)->data.embers;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_2C = part->unk_2C;
+    Matrix4f sp10;
+    Matrix4f sp50;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
+    shim_guScaleF(sp50, part->unk_40, part->unk_40, part->unk_40);
+    shim_guMtxCatF(sp50, sp10, sp10);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_20, part->unk_24, part->unk_28, unk_2C);
+    gDPSetEnvColor(gMasterGfxPos++, part->unk_30, part->unk_34, part->unk_38, part->unk_3C);
+    gSPDisplayList(gMasterGfxPos++, D_E00E0A40[1]);
+
+    part++;
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
+        if (part->unk_64 >= 0) {
+            shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
+            shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, (i % 4) * 16 * 4, 15 * 4, ((i % 4) * 16 + 15) * 4);
+            gDPSetTileSize(gMasterGfxPos++, 1, (s32) part->unk_5C * 4, (s32) part->unk_60 * 4, ((s32) part->unk_5C + 15) * 4, ((s32) part->unk_60 + 15) * 4);
+            gSPDisplayList(gMasterGfxPos++, D_E00E0A40[0]);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

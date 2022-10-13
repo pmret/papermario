@@ -38,6 +38,12 @@ obfuscated_create_audio_system = create_audio_system - 0x7B;
 D_7599F6D8 = 0x7599F6D8;
 D_F79DDD0F = 0xF79DDD0F;
 
+// effect_flame
+D_09000800 = 0x09000800;
+D_090008F8 = 0x090008F8;
+D_09000918 = 0x09000918;
+D_090009E0 = 0x090009E0;
+
 fx_sun_undeclared = fx_sun;
 
 D_E007EC2F = 0xE007EC2F;

@@ -577,7 +577,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_snowfall(iVar1, iVar2);
             break;
         case EFFECT_46:
-            effectRet = fx_46(iVar1, (EffectWhirlwindUnk*)a2, fVar3, iVar4);
+            effectRet = fx_46(iVar1, (PlayerStatus*)a2, fVar3, iVar4);
             break;
         case EFFECT_GATHER_MAGIC:
             effectRet = fx_gather_magic(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
