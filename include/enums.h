@@ -788,6 +788,7 @@ enum SoundIDs {
     SOUND_203                       = 0x00000203,
     SOUND_204                       = 0x00000204,
     SOUND_205                       = 0x00000205,
+    SOUND_206                       = 0x00000206,
     SOUND_207                       = 0x00000207,
     SOUND_208                       = 0x00000208,
     SOUND_209                       = 0x00000209,
@@ -2369,6 +2370,14 @@ enum EncounterOutcomes {
     OUTCOME_PLAYER_LOST         = 1,
     OUTCOME_PLAYER_FLED         = 2,
     OUTCOME_ENEMY_FLED          = 3,
+};
+
+enum MerleeSpellType {
+    MERLEE_SPELL_0              = 0,
+    MERLEE_SPELL_1              = 1,
+    MERLEE_SPELL_2              = 2,
+    MERLEE_SPELL_3              = 3,
+    MERLEE_SPELL_4              = 4, // extra coins
 };
 
 enum NpcDecorationIDs {

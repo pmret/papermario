@@ -8942,7 +8942,7 @@ segments:
     - [0x9691C0, c, dro_02_2_entity]
     - [0x9691C0, c, dro_02_3_main]
     - [0x9694C0, c, dro_02_4_building]
-    - [0x9694C0, c, 9694C0]
+    - [0x9694C0, c, dro_02_5_npc]
     - [0x96CC30, .data, dro_02_0_header]
     - [0x96CCB0, .data, dro_02_1_music]
     - [0x96CD90, .data, dro_02_2_entity]
@@ -8950,12 +8950,21 @@ segments:
     - [0x96D380, .data, dro_02_4_building]
     - start: 0x96DFA0
       type: .data
-      name: 9694C0
+      name: dro_02_5_npc
       subsegments:
       - [0x96DFA0]
-      - [0x971F98,     vtx, vtx/971F98]
-      - [0x9722B8,     vtx, vtx/9722B8]
-      - [0x973578]
+      - [0x9707A8, ci4, card, 32, 32]
+      - [0x9709A8, palette, card]
+      - [0x9709C8, vtx, card_1]
+      - [0x970A48, vtx, card_2]
+      - [0x970A88, gfx, card_setup]
+      - [0x970B78, gfx, card_1]
+      - [0x970BF8, gfx, card_2]
+      - [0x970C40]
+      - [0x971F98, vtx, toad_house_blanket]
+      - [0x973578, gfx, toad_house_blanket]
+      - [0x9736E0, rgba16, toad_house_blanket, 16, 32]
+      - [0x973AE0]
     - [0x9780D0]
   - name: isk_01
     dir: world/area_isk/isk_01

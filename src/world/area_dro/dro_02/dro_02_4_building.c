@@ -23,7 +23,7 @@ EvtScript N(EVS_SwingToadHouseSign) = {
     EVT_END
 };
 
-EvtScript N(802442F0) = {
+EvtScript N(EVS_UnusedDoorSetup) = {
     EVT_DIV(LVar0, 2)
     EVT_ADD(LVar0, 18)
     EVT_CALL(RotateModel, MODEL_1_doa, LVar0, 0, 1, 0)
@@ -76,7 +76,7 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(8024459C) = {
+EvtScript N(EVS_SetupCamSpeed) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
@@ -128,7 +128,7 @@ EvtScript N(EVS_ToggleVis_Hideout) = {
     EVT_END
 };
 
-EvtScript N(8024486C) = {
+EvtScript N(EVS_OpenSecretDoor_FromOutside) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
@@ -162,7 +162,7 @@ EvtScript N(8024486C) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenSecretDoor) = {
+EvtScript N(EVS_OpenSecretDoor_FromInside) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
@@ -225,8 +225,8 @@ EvtScript N(EVS_SetupBuildings) = {
         MODEL_k_i5,
         EVT_PTR(N(InsideNPCs_Hideout)))
     EVT_IF_GE(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
-        EVT_BIND_TRIGGER(EVT_PTR(N(8024486C)), TRIGGER_WALL_PRESS_A, COLLIDER_o1287, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor)), TRIGGER_WALL_PRESS_A, COLLIDER_o1289, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromOutside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1287, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromInside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1289, 1, 0)
     EVT_END_IF
     EVT_CALL(MakeDoorAdvanced,
         VIS_GROUP_PAIR(1, 5),
@@ -240,7 +240,7 @@ EvtScript N(EVS_SetupBuildings) = {
         EVT_PTR(N(InsideNPCs_ToadHouse)))
     EVT_SET(LVar0, 3)
     EVT_EXEC(N(EVS_ToggleVis_Hideout))
-    EVT_EXEC(N(8024459C))
+    EVT_EXEC(N(EVS_SetupCamSpeed))
     EVT_EXEC(N(EVS_ToggleVis_ToadHouse))
     EVT_RETURN
     EVT_END

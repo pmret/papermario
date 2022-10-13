@@ -87,14 +87,14 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
             EVT_SET(GF_SBK_KeptArtifactFromKolorado, TRUE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
         EVT_END_IF
-        EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
+        EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
         EVT_SWITCH(LVar0)
             EVT_CASE_GE(1)
                 EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
                 EVT_GOTO(50)
             EVT_CASE_DEFAULT
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0041)
-                EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
+                EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
                 EVT_SWITCH(LVar0)
                     EVT_CASE_GE(1)
                         EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))

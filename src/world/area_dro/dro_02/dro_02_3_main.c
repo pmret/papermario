@@ -71,13 +71,13 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(SetTexPanner, MODEL_kemuri, 1)
         EVT_SET(LVar0, 0)
         EVT_LABEL(123)
-        EVT_ADD(LVar0, 420)
-        EVT_IF_GT(LVar0, 0x10000)
-            EVT_ADD(LVar0, -0x10000)
-        EVT_END_IF
-        EVT_CALL(SetTexPanOffset, 1, 0, 0, LVar0)
-        EVT_WAIT(1)
-        EVT_GOTO(123)
+            EVT_ADD(LVar0, 420)
+            EVT_IF_GT(LVar0, 0x10000)
+                EVT_ADD(LVar0, -0x10000)
+            EVT_END_IF
+            EVT_CALL(SetTexPanOffset, 1, 0, 0, LVar0)
+            EVT_WAIT(1)
+            EVT_GOTO(123)
     EVT_END_THREAD
     EVT_SET(MF_Unk_00, FALSE)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnReadPoster)), TRIGGER_WALL_PRESS_A, COLLIDER_poster, 1, 0)

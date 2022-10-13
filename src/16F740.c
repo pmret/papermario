@@ -2081,15 +2081,15 @@ void btl_state_update_end_battle(void) {
 
             btl_delete_player_actor(battleStatus->playerActor);
 
-            if (battleStatus->nextMerleeSpellType == 4) {
-                encounterStatus->merleeCoinBonus = 1;
+            if (battleStatus->nextMerleeSpellType == MERLEE_SPELL_4) {
+                encounterStatus->merleeCoinBonus = TRUE;
                 battleStatus->nextMerleeSpellType = 0;
             }
 
             encounterStatus->damageTaken = battleStatus->damageTaken;
 
             if (gBattleStatus.flags2 & BS_FLAGS2_10000000) {
-                encounterStatus->dropWhackaBump = 1;
+                encounterStatus->dropWhackaBump = TRUE;
             }
 
             remove_all_effects();

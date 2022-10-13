@@ -20,6 +20,10 @@ enum {
     AB_DRO_F       = AreaByte(15),
 };
 
-#define AF_DRO(index) AreaFlag(index)
+enum {
+    AF_DRO_03       = AreaFlag(3),
+    AF_DRO_04       = AreaFlag(4),
+    AF_DRO_05       = AreaFlag(5),
+};
 
 #endif
