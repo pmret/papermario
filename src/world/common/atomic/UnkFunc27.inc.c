@@ -40,7 +40,7 @@ ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
             break;
 
         case 2:
-            *D_801512F0 = testS1;
+            *gBgRenderTypePtr = testS1;
             break;
 
     }

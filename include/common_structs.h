@@ -1425,7 +1425,7 @@ typedef struct GameStatus {
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
     /* 0x144 */ struct Shop* mapShop;
-    /* 0x148 */ s16 backgroundFlags; /* (bit 1 = enable, bit 2 is used for something else) */
+    /* 0x148 */ s16 backgroundFlags;
     /* 0x14A */ s16 backgroundMinX;
     /* 0x14C */ s16 backgroundMinY;
     /* 0x14E */ s16 backgroundMaxX;
@@ -1433,7 +1433,7 @@ typedef struct GameStatus {
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ IMG_PTR backgroundRaster;
     /* 0x158 */ PAL_PTR backgroundPalette;
-    /* 0x15C */ s16 backgroundDarkness; // 255 = fully black
+    /* 0x15C */ u16 backgroundDarkness; // 255 = fully black
     /* 0x15E */ s16 savedBackgroundDarkness; // used during pause/unpause
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;

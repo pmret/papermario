@@ -8,8 +8,6 @@
 
 extern s32* D_800DC064;
 
-extern BackgroundHeader func_80200000;
-
 extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 D_80280A30;
@@ -230,7 +228,7 @@ void btl_state_update_normal_start(void) {
 
             if (stage->bg != NULL) {
                 load_map_bg(stage->bg);
-                read_background_size(&func_80200000);
+                read_background_size(&gBackgroundImage);
             }
 
             if (gGameStatusPtr->demoFlags & 1) {

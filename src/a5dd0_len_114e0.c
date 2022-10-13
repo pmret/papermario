@@ -3092,7 +3092,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        D_801512F0 = &wBgRenderType;
+        gBgRenderTypePtr = &wBgRenderType;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
         mdl_bgMultiplyColorG = 0;
@@ -3106,7 +3106,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        D_801512F0 = &bBgRenderType;
+        gBgRenderTypePtr = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
 
@@ -3131,7 +3131,7 @@ void clear_model_data(void) {
         (*mdl_currentModelTreeNodeInfo)[i].textureID = 0;
     }
 
-    *D_801512F0 = 0;
+    *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
     gCurrentFogSettings->r = 10;
     gCurrentFogSettings->g = 10;
     gCurrentFogSettings->b = 10;
@@ -3157,7 +3157,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        D_801512F0 = &wBgRenderType;
+        gBgRenderTypePtr = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
     } else {
         gCurrentModels = &bModelList;
@@ -3167,7 +3167,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        D_801512F0 = &bBgRenderType;
+        gBgRenderTypePtr = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
 }

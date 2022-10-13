@@ -232,7 +232,7 @@ ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
 ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
-        *D_801512F0 = 1;
+        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 25;
     }
