@@ -146,7 +146,141 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
 
 INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
-INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
+typedef struct Rect {
+    s32 ulx;
+    s32 uly;
+    s32 lrx;
+    s32 lry;
+} Rect;
+
+s32 draw_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
+                     f32 scaleX, f32 scaleY) {
+    Rect texRect;
+    Rect drawRect;
+    s32 dsdx, dtdy;
+    s32 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+    u8 stopDrawingLine;
+
+    if (scaleX < 0.01 || scaleY < 0.01) {
+        return 0;
+    }
+
+    if (posX >= clipX + clipWidth  || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + (f32)(f64)width * scaleX)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + (f32)(f64)height * scaleY)) {
+        return 0;
+    }
+
+    stopDrawing = 0;
+    texRect.uly = 0;
+    drawRect.uly = posY;
+    dsdx = 1.0f / scaleX * 1024.0f;
+    dtdy = 1.0f / scaleY * 1024.0f;
+    while (TRUE) {
+        texRect.lry = texRect.uly + 31;
+        drawRect.lry = drawRect.uly + (scaleY * 32.0 + 0.5);
+        texOffsetY = 0;
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += 32;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += scaleY * 32.0f;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + 31;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            texOffsetY = abs(posY - clipY) / scaleY * 32.0f;
+        }
+
+        if ((u32)(texRect.lry + 1) >= height) {
+            texRect.lry = height - 1;
+            stopDrawing = 1;
+            drawRect.lry = posY + (s16)(texRect.lry * scaleY);
+            drawRect.lry += scaleY;
+        }
+
+        if (drawRect.lry > clipY + clipHeight) {
+            drawRect.lry = clipY + clipHeight;
+            if (!stopDrawing) {
+                drawRect.lry = clipY + clipHeight;
+                stopDrawing = 1;
+            }
+        }
+
+        stopDrawingLine = 0;
+        texRect.ulx = 0;
+        drawRect.ulx = posX;
+        while (TRUE) {
+            texRect.lrx = texRect.ulx + 63;
+            drawRect.lrx = drawRect.ulx + (scaleX * 64.0 + 0.3);
+            texOffsetX = 0;
+
+            if (drawRect.lrx <= clipX) {
+                do {
+                    texRect.ulx += 64;
+                    drawRect.ulx = drawRect.lrx;
+                    drawRect.lrx += scaleX * 64.0f;
+                } while (drawRect.lrx < clipX);
+                texRect.lrx = texRect.ulx + 63;
+            }
+
+            if (drawRect.ulx < clipX) {
+                drawRect.ulx = clipX;
+                texOffsetX = abs(posX - clipX) / scaleX * 32.0f;
+            }
+
+            if ((u32)(texRect.lrx + 1) >= width) {
+                texRect.lrx = width - 1;
+                stopDrawingLine = TRUE;
+                drawRect.lrx = posX + (s16)(texRect.lrx * scaleX);
+                drawRect.lrx = drawRect.lrx + scaleX + 0.3;
+            }
+
+            if (drawRect.lrx > clipX + clipWidth) {
+                drawRect.lrx = clipX + clipWidth;
+                stopDrawingLine = TRUE;
+            }
+
+            if (bitDepth == G_IM_SIZ_16b) {
+                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, 0,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_4b) {
+                gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, 0,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            }
+
+            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, (drawRect.lrx - stopDrawingLine) * 4, drawRect.lry * 4,
+                                0, texOffsetX, texOffsetY, dsdx, dtdy);
+
+            if (stopDrawingLine) {
+                break;
+            }
+            texRect.ulx += 64;
+            drawRect.ulx = drawRect.lrx;
+        };
+
+        if (stopDrawing) {
+            break;
+        }
+        texRect.uly += 32;
+        drawRect.uly = drawRect.lry;
+    };
+
+    return 1;
+}
 
 s32 integer_log(s32 number, u32 base) {
     f32 fNumber = number;
