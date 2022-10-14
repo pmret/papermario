@@ -15,7 +15,6 @@ typedef struct StickerData {
     /* 0x44 */ s32 duration;
 } StickerData;
 
-API_CALLABLE(func_80241A68_8D2F78);
 API_CALLABLE(func_802417E0_8D2CF0);
 
 void N(appendGfx_sticker)(void* renderData) {
@@ -23,9 +22,9 @@ void N(appendGfx_sticker)(void* renderData) {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
     
-    StickerData* sticker = (StickerData*) evt_get_variable(NULL, MapVar(10));
-    IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MapVar(11));
-    PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MapVar(12));
+    StickerData* sticker = (StickerData*) evt_get_variable(NULL, MV_StickerData);
+    IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MV_StickerImage);
+    PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
     u32 foldFlags = FOLD_STATE_FLAG_400;
     
     gDPPipeSync(gMasterGfxPos++);
@@ -75,7 +74,7 @@ API_CALLABLE(N(SetStickerPos)) {
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
-    StickerData* sticker = (StickerData*) evt_get_variable(script, MapVar(10));
+    StickerData* sticker = (StickerData*) evt_get_variable(script, MV_StickerData);
     
     sticker->pos.x = x;
     sticker->pos.y = y;
@@ -87,16 +86,16 @@ API_CALLABLE(N(SetStickerRotation)) {
     Bytecode* args = script->ptrReadPos;
     f32 pitch = evt_get_float_variable(script, *args++);
     f32 yaw = evt_get_float_variable(script, *args++);
-    StickerData* sticker = (StickerData*) evt_get_variable(script, MapVar(10));
+    StickerData* sticker = (StickerData*) evt_get_variable(script, MV_StickerData);
 
     sticker->pitch = pitch;
     sticker->yaw = yaw;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80241A68_8D2F78) {
+API_CALLABLE(N(JumpStickerTo)) {
     Bytecode* args = script->ptrReadPos;
-    StickerData* data = (StickerData*) evt_get_variable(script, MapVar(10));
+    StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
     f32 x, y, z, dist;
     
     if (isInitialCall) {
@@ -116,7 +115,10 @@ API_CALLABLE(func_80241A68_8D2F78) {
 
         y = data->goalPos.y - data->pos.y;
         if (data->duration == 0) {
-            data->duration = dist / data->moveSpeed; //@bug moveSpeed is never assigned!
+            // oversight here:
+            // moveSpeed is initialized to zero and never changed except in prior calls to JumpStickerTo
+            // this will cause a divide by zero if duration = 0 is used for the first call
+            data->duration = dist / data->moveSpeed;
         } else {
             data->moveSpeed = dist / data->duration;
         }
@@ -145,16 +147,16 @@ API_CALLABLE(func_80241A68_8D2F78) {
 API_CALLABLE(N(func_80241C78_8D3188)) {
     Bytecode* args = script->ptrReadPos;
     f32 gravity = evt_get_float_variable(script, *args++);
-    StickerData* data = (StickerData*) evt_get_variable(script, MapVar(10));
+    StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
     
     data->gravity = gravity;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(DeleteSticker)) {
-    StickerData* data = (StickerData*) evt_get_variable(script, MapVar(10));
-    IMG_PTR img = (IMG_PTR) evt_get_variable(script, MapVar(11));
-    PAL_PTR pal = (PAL_PTR) evt_get_variable(script, MapVar(12));
+    StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
+    IMG_PTR img = (IMG_PTR) evt_get_variable(script, MV_StickerImage);
+    PAL_PTR pal = (PAL_PTR) evt_get_variable(script, MV_StickerPalette);
 
     free_generic_entity(data->workerID);
 
@@ -162,9 +164,9 @@ API_CALLABLE(N(DeleteSticker)) {
     heap_free(img);
     heap_free(pal);
 
-    evt_set_variable(script, MapVar(10), NULL);
-    evt_set_variable(script, MapVar(11), NULL);
-    evt_set_variable(script, MapVar(12), NULL);
+    evt_set_variable(script, MV_StickerData, NULL);
+    evt_set_variable(script, MV_StickerImage, NULL);
+    evt_set_variable(script, MV_StickerPalette, NULL);
 
     return ApiStatus_DONE2;
 }
@@ -189,7 +191,7 @@ EvtScript N(EVS_OnInspect_StickerSign) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_CALL(N(func_80241C78_8D3188), EVT_FLOAT(0.6))
-                EVT_CALL(func_80241A68_8D2F78, 362, 0, 40, 23)
+                EVT_CALL(N(JumpStickerTo), 362, 0, 40, 23)
                 EVT_CALL(N(DeleteSticker))
                 EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, 362, 0, 40, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KMR06_Item_Mushroom)
             EVT_END_THREAD

@@ -21,6 +21,12 @@ enum {
     MF_Unk_0A           = MapFlag(10),
 };
 
+enum {
+	MV_StickerData		= MapVar(10),
+	MV_StickerImage		= MapVar(11),
+	MV_StickerPalette	= MapVar(12),
+};
+
 #define NAMESPACE kmr_06
 
 extern EvtScript N(EVS_Main);
