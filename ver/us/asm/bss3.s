@@ -58,7 +58,7 @@ dlabel gCurrentCustomModelGfxPtr
 dlabel gLastCreatedEntityIndex
 .space 4
 
-dlabel D_801512F0
+dlabel gBgRenderTypePtr
 .space 4
 
 dlabel gMsgVarImages
@@ -634,13 +634,13 @@ dlabel gCurrentTriggerListPtr
 dlabel D_80159394
 .space 0x0000000c
 
-dlabel D_801593A0
+dlabel gBackgroundPalette
 .space 0x000001fe
 
 dlabel D_8015959E
 .space 2
 
-dlabel D_801595A0
+dlabel gBackroundLastScrollValue
 .space 0x00000020
 
 dlabel D_801595C0

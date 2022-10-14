@@ -157,7 +157,7 @@ void floating_flower_appendGfx(void* effect) {
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    if (*D_801512F0 == 1) {
+    if (*gBgRenderTypePtr == BACKGROUND_RENDER_TYPE_1) {
         shim_get_background_color_blend(&rgb, &rgb, &rgb, &a);
         alpha -= a;
     }

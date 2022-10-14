@@ -458,10 +458,10 @@ void gfx_draw_background(void) {
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     camera = &gCameras[gCurrentCameraID];
-    bgFlags = gGameStatusPtr->backgroundFlags & 0xF0;
+    bgFlags = gGameStatusPtr->backgroundFlags & BACKGROUND_RENDER_STATE_MASK;
 
     switch (bgFlags) {
-        case 0x10:
+        case BACKGROUND_RENDER_STATE_1:
             // Save coverage to nunGfxCfb[1] using the VISCVG render mode
             gDPPipeSync(gMasterGfxPos++);
             gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
@@ -473,17 +473,17 @@ void gfx_draw_background(void) {
             gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             gDPPipeSync(gMasterGfxPos++);
             gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
-            gGameStatusPtr->backgroundFlags &= ~0xF0;
-            gGameStatusPtr->backgroundFlags |= 0x20;
+            gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_2;
             break;
-        case 0x20:
+        case BACKGROUND_RENDER_STATE_2:
             // Save the framebuffer into the depth buffer and run a filter on it based on the saved coverage values
             gfx_transfer_frame_to_depth(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer); // applies filters to the framebuffer
             gPauseBackgroundFade = 0;
-            gGameStatusPtr->backgroundFlags &= ~0xF0;
-            gGameStatusPtr->backgroundFlags |= 0x30;
+            gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_3;
             // fallthrough
-        case 0x30:
+        case BACKGROUND_RENDER_STATE_3:
             // Draw the saved framebuffer to the background, fading in at a rate of 16 opacity per frame until reaching 128 opacity
             gPauseBackgroundFade += 16;
             if (gPauseBackgroundFade > 128) {
@@ -596,7 +596,7 @@ void gfx_draw_background(void) {
                 backgroundMaxY = SCREEN_HEIGHT;
             }
 
-            if (!(gGameStatusPtr->backgroundFlags & 1)) {
+            if (!(gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE)) {
                 gDPFillRectangle(gMasterGfxPos++, backgroundMinX, backgroundMinY, backgroundMaxX - 1, backgroundMaxY - 1);
             } else {
                 appendGfx_background_texture();
@@ -623,7 +623,7 @@ void gfx_draw_background(void) {
                 gDPNoOp(gMasterGfxPos++);
             }
 
-            if (backgroundMaxY < 0xF0) {
+            if (backgroundMaxY < SCREEN_HEIGHT) {
                 gDPFillRectangle(gMasterGfxPos++, 0, backgroundMaxY, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
                 gDPNoOp(gMasterGfxPos++);
             }
