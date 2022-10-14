@@ -2424,7 +2424,7 @@ ApiStatus N(func_802414C0_96A680)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
-        *D_801512F0 = 1;
+        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
         set_background_color_blend(0, 0, 0, 0);
 
         for (i = 0; i < 64; i++) {
@@ -2463,7 +2463,7 @@ ApiStatus N(func_802415CC_96A78C)(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = 1;
     } else if (script->functionTemp[1] == 1) {
         mdl_set_all_fog_mode(0);
-        *D_801512F0 = 0;
+        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
 

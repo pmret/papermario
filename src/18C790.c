@@ -279,7 +279,7 @@ void btl_state_update_celebration(void) {
             gBattleState2 = BATTLE_STATE2_UNK_6;
             D_8029FB80 = D_8029FB7C->id;
             mdl_set_all_fog_mode(1);
-            *D_801512F0 = 1;
+            *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
             set_background_color_blend(0, 0, 0, 0);
             break;
         case BATTLE_STATE2_UNK_6:

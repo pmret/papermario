@@ -40,8 +40,8 @@ void state_step_pause(void) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
                 gOverrideFlags |= GLOBAL_OVERRIDES_8;
-                gGameStatusPtr->backgroundFlags &= ~0xF0;
-                gGameStatusPtr->backgroundFlags |= 0x10;
+                gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
+                gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_1;
 
             }
             break;
@@ -140,7 +140,7 @@ void state_step_unpause(void) {
                         mapSettings = get_current_map_settings();
                         mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;
-                        gGameStatusPtr->backgroundFlags &= ~0xF0;
+                        gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
                         func_8005AF84();
                         func_8002ACDC();
                         nuContRmbForceStopEnd();

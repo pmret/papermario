@@ -5641,4 +5641,20 @@ enum MsgWindowStates {
     MSG_WINDOW_STATE_E                  = 0xE,
 };
 
+enum BackgroundFlags {
+    BACKGROUND_FLAG_TEXTURE         = 0x01,
+    BACKGROUND_FLAG_FOG             = 0x02,
+    BACKGROUND_RENDER_STATE_1       = 0x10,
+    BACKGROUND_RENDER_STATE_2       = 0x20,
+    BACKGROUND_RENDER_STATE_3       = 0x30,
+    BACKGROUND_RENDER_STATE_MASK    = 0xF0,
+};
+
+enum BackgroundRenderTypes {
+    BACKGROUND_RENDER_TYPE_0 = 0,
+    BACKGROUND_RENDER_TYPE_1 = 1,
+    BACKGROUND_RENDER_TYPE_2 = 2,
+    BACKGROUND_RENDER_TYPE_3 = 3,
+};
+
 #endif
