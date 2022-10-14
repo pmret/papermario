@@ -21,6 +21,8 @@ enum {
 };
 
 enum {
+    AF_DRO_01       = AreaFlag(1),
+    AF_DRO_02       = AreaFlag(2),
     AF_DRO_03       = AreaFlag(3),
     AF_DRO_04       = AreaFlag(4),
     AF_DRO_05       = AreaFlag(5),

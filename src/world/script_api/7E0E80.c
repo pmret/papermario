@@ -66,7 +66,7 @@ EvtScript BadgeShopInteract = {
     EVT_END
 };
 
-EvtScript D_80284054_7E4ED4 = {
+EvtScript ItemShopInteract = {
     EVT_CALL(ShowShopOwnerDialog)
     EVT_RETURN
     EVT_END

@@ -116,7 +116,7 @@ void clear_player_data(void) {
         playerData->partnerUsedTime[i] = 0;
     }
 
-    playerData->droTreeOrbitTime = 0;
+    playerData->droTreeHintTime = 0;
     playerData->starPiecesCollected = 0;
     playerData->jumpGamePlays = 0;
     playerData->jumpGameTotal = 0;

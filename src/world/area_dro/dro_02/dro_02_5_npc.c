@@ -6,9 +6,6 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 
-extern s16 MessagePlural;
-extern s16 MessageSingular;
-
 static f32 N(D_8024EF80);
 static f32 N(D_8024EF84);
 static s32 N(RitualStateTime);
