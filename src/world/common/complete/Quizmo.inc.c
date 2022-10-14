@@ -7,6 +7,9 @@
 #  error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c
 #endif
 
+extern s16 MessagePlural;
+extern s16 MessageSingular;
+
 static s32 N(Quizmo_Worker);
 static s32 N(pad_D_8024EFA4);
 static s32 N(Quizmo_ScriptArray)[4];

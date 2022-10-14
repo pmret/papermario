@@ -10,11 +10,6 @@
 #include "sprite/npc/Toadette.h"
 #include "sprite/npc/WorldParakarry.h"
 
-#define CHUCK_QUIZMO_NPC_ID 10
-
-extern s16 MessagePlural;
-extern s16 MessageSingular;
-
 typedef struct Unk_Struct_1 {
     s32 unk_00;
     s32 unk_04;
@@ -27,8 +22,8 @@ typedef struct Unk_Struct_1 {
     s32 unk_20;
     f32 unk_24;
     f32 unk_28;
-    f32 unk_2C;
-    f32 unk_30;
+    f32 lastPlayerX;
+    f32 lastPlayerZ;
     f32 unk_34;
     s32 unk_38;
 } Unk_Struct_1;
@@ -43,20 +38,6 @@ typedef struct {
 } Unk_Struct_2;
 
 void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
-
-static s32 N(Quizmo_Worker);
-static s8 N(pad_D_8024DFC4)[0x4];
-static s32 N(Quizmo_ScriptArray)[4];
-static s32 N(Quizmo_AnswerResult);
-static s8 N(pad_D_8024DFDC)[0x4];
-static EffectInstance* N(Quizmo_StageEffect);
-static EffectInstance* N(Quizmo_AudienceEffect);
-static EffectInstance* N(Quizmo_VannaTEffect);
-static s8 N(pad_D_8024DFEC)[0x4];
-static s32 N(KeyItemChoiceList)[112];
-static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
-static s32 N(LetterDelivery_SavedNpcAnim);
-
 
 MobileAISettings N(npcAISettings_80245010) = {
     .moveSpeed = 1.5f,
@@ -128,171 +109,134 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
-#include "world/common/atomic/Quizmo.inc.c"
-#include "world/common/atomic/QuizmoData.inc.c"
+#define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
+#include "world/common/complete/Quizmo.inc.c"
 
-s32 N(D_802477E0_9629E0) = {
-    0x00000000,
-};
+MAP_STATIC_PAD(1,pre_key_item); // or post-quizmo?
+#include "world/common/complete/KeyItemChoice.inc.c"
 
-s32 N(D_802477E4_9629E4) = {
-    0x00000000,
-};
+API_CALLABLE(N(func_80242858_95DA58)) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Unk_Struct_2* temp_s1 = (Unk_Struct_2*) evt_get_variable(script, *script->ptrReadPos);
+    Unk_Struct_1* ptr;
+    s32 atan_res1, atan_res2;
+    s32 clamp;
+    s32 dist;
 
-EvtScript N(802477E8) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveKeyItemAt, LVar1)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, 0x50000)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
-            EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-            EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_SWITCH
-    EVT_CALL(N(func_80242784_95D984), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
-};
+    if (isInitialCall) {
+        script->functionTempPtr[1] = heap_malloc(0x3C);
+        ptr = script->functionTempPtr[1];
+        ptr->unk_00 = temp_s1->unk_00;
+        ptr->unk_04 = temp_s1->unk_04;
+        ptr->unk_08 = temp_s1->unk_08;
+        ptr->unk_0C = temp_s1->unk_0C;
+        ptr->unk_10 = temp_s1->unk_10;
+        ptr->unk_14 = temp_s1->unk_14;
+        ptr->unk_18 = 0;
+        ptr->unk_1C = 0;
+        ptr->unk_20 = 0;
+        ptr->unk_24 = 0;
+        ptr->unk_28 = 0;
+        ptr->lastPlayerX = 0;
+        ptr->lastPlayerZ = 0;
+        ptr->unk_34 = 0;
+        ptr->unk_38 = 0;
+    }
 
-EvtScript N(8024792C) = {
-    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(802477E8), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(func_80242730_95D930), LVar0)
-    EVT_RETURN
-    EVT_END
-};
+    ptr = script->functionTempPtr[1];
+    switch (ptr->unk_20) {
+        case 0:
+            dist = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
+            if (dist < ptr->unk_0C) {
+                ptr->unk_24 = playerStatus->position.x;
+                ptr->unk_28 = playerStatus->position.z;
+                ptr->unk_20++;
+            }
+            break;
 
-EvtScript N(8024797C) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-        EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
-        EVT_CALL(SetItemPos, LVar0, LVar3, LVar4, LVar5)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+        case 1:
+            dist = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
+            if (dist < ptr->unk_0C) {
+                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_24, ptr->unk_28);
+                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
+                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
+                ptr->unk_34 = signF(clamp);
+                ptr->unk_20++;
+                break;
+            }
+            ptr->unk_20 = 0;
+            break;
 
-EvtScript N(802479FC) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveKeyItemAt, LVar1)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-            EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, 0x50000)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
-            EVT_EXEC_GET_TID(N(8024797C), LVarA)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Walk)
-            EVT_CALL(GetAngleBetweenNPCs, LVar9, -4, LVarB)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-            EVT_CALL(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), TRUE)
-            EVT_IF_LE(LVarB, 180)
-                EVT_ADD(LVar6, 20)
-            EVT_ELSE
-                EVT_ADD(LVar6, -20)
-            EVT_END_IF
-            EVT_ADD(LVar7, 10)
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVar6, LVar7, LVar8, 20)
-            EVT_KILL_THREAD(LVarA)
-            EVT_CALL(RemoveItemEntity, LVar0)
-            EVT_WAIT(20)
-            EVT_CALL(GetNpcYaw, -4, LVarA)
-            EVT_ADD(LVarA, 180)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
-            EVT_WAIT(5)
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVar3, LVar4, LVar5, 20)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
-            EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
-            EVT_WAIT(5)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), FALSE)
-            EVT_CALL(EnablePartnerAI)
-            EVT_WAIT(5)
-    EVT_END_SWITCH
-    EVT_CALL(N(func_80242784_95D984), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
-};
+        case 2:
+            dist = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
+            if (dist < ptr->unk_0C) {
+                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->lastPlayerX, ptr->lastPlayerZ);
+                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
+                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
+                if (ptr->unk_34 == signF(clamp)) {
+                    atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_24, ptr->unk_28);
+                    atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
+                    clamp = get_clamped_angle_diff(atan_res1, atan_res2);
+                    if (fabsf(clamp) > 90.0f) {
+                        if (ptr->unk_14 != NULL) {
+                            ptr->unk_14(ptr, 0);
+                        }
+                        ptr->unk_18 = ptr->unk_18 + fabsf(clamp);
+                        ptr->unk_20++;
+                    }
+                    break;
+                }
+            }
+            ptr->unk_20 = 0;
+            break;
 
-EvtScript N(80247D20) = {
-    EVT_SET(LVar0, LVarB)
-    EVT_SET(LVar1, LVar2)
-    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(func_80242730_95D930), LVar0)
-    EVT_RETURN
-    EVT_END
-};
+        case 3:
+            dist = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
+            if (dist < ptr->unk_10) {
+                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->lastPlayerX, ptr->lastPlayerZ);
+                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
+                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
+                if (ptr->unk_34 != signF(clamp)) {
+                    if (ptr->unk_14 != NULL) {
+                        ptr->unk_14(ptr, 3);
+                    }
+                    ptr->unk_20++;
+                } else {
+                    ptr->unk_18 = ptr->unk_18 + fabsf(clamp);
+                    ptr->unk_1C = ptr->unk_18 / 360;
+                    if (ptr->unk_1C != ptr->unk_38) {
+                        if (ptr->unk_14 != NULL) {
+                            ptr->unk_14(ptr, 1);
+                        }
+                        ptr->unk_38 = ptr->unk_1C;
+                    }
+                }
+                if (ptr->unk_14 != NULL) {
+                    ptr->unk_14(ptr, 2);
+                }
+            } else {
+                if (ptr->unk_14 != NULL) {
+                    ptr->unk_14(ptr, 4);
+                }
+                ptr->unk_20++;
+            }
+            break;
 
-EvtScript N(80247D90) = {
-    EVT_SET(LVarC, 0)
-    EVT_IF_LT(GB_StoryProgress, -70)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(LetterDelivery_SaveNpcAnim))
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_CALL(FindKeyItem, LVar5, LVar1)
-    EVT_IF_EQ(LVar0, 4)
-        EVT_IF_NE(LVar1, -1)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(PlayerFaceNpc, LVar2, 0)
-            EVT_WAIT(1)
-            EVT_CALL(GetNpcPos, LVar2, LVarD, LVar0, LVarE)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVarD, LVarE, LVarF)
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-            EVT_ADD(LVar0, 10)
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVarD, LVar0, LVarF, 10)
-            EVT_CALL(SpeakToNpc, -4, 262150, 262145, 0, LVar2, LVar7)
-            EVT_CALL(EnablePartnerAI)
-            EVT_EXEC_WAIT(N(80247D20))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(-1)
-                    EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar8)
-                    EVT_CALL(EnablePartnerAI)
-                    EVT_SET(LVarC, 1)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar9)
-                    EVT_IF_NE(LVarA, 0)
-                        EVT_CALL(SpeakToPlayer, LVar2, LVar3, LVar4, 0, LVarA)
-                    EVT_END_IF
-                    EVT_CALL(EnablePartnerAI)
-                    EVT_IF_NE(LVar6, 0)
-                        EVT_SET(LVar0, LVar6)
-                        EVT_SET(LVar1, 1)
-                        EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
-                        EVT_CALL(AddKeyItem, LVar6)
-                    EVT_END_IF
-                    EVT_SET(LVarC, 2)
-            EVT_END_SWITCH
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(LetterDelivery_RestoreNpcAnim))
-    EVT_RETURN
-    EVT_END
-};
+        case 4:
+            ptr->unk_18 = 0.0f;
+            ptr->unk_1C = 0;
+            ptr->unk_38 = 0;
+            ptr->unk_20 = 0;
+            break;
+    }
+
+    ptr->lastPlayerX = playerStatus->position.x;
+    ptr->lastPlayerZ = playerStatus->position.z;
+
+    return ApiStatus_BLOCK;
+}
+
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(D_80248088_963288)[] = {
     ITEM_LETTER19, ITEM_NONE
@@ -301,7 +245,7 @@ s32 N(D_80248088_963288)[] = {
 EvtScript N(80248090) = {
     EVT_CALL(N(LetterDelivery_Init), 6, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 76, 69,
         MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C, EVT_PTR(N(D_80248088_963288)))
-    EVT_EXEC_WAIT(N(80247D90))
+    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
@@ -442,7 +386,8 @@ EvtScript N(80248504) = {
 };
 
 Unk_Struct_2 N(D_8024884C_963A4C) = {
-    0x0000007D, 0x00000000, 0xFFFFFFD6, 0x0000004B, 0x0000004B, N(func_802430C8_95E2C8),
+    0x0000007D,
+    0x00000000, 0xFFFFFFD6, 0x0000004B, 0x0000004B, N(func_802430C8_95E2C8),
 };
 
 EvtScript N(interact_80248864) = {
@@ -587,7 +532,7 @@ EvtScript N(interact_80248D54) = {
     EVT_END_SWITCH
     EVT_SET(LVar0, EVT_PTR(N(D_80248D4C_963F4C)))
     EVT_SET(LVar1, 5)
-    EVT_EXEC_WAIT(N(8024792C))
+    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
@@ -599,7 +544,7 @@ EvtScript N(interact_80248D54) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0083)
             EVT_SET(LVar0, 104)
             EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
+            EVT_EXEC_WAIT(N(GiveKeyReward))
             EVT_CALL(AddKeyItem, ITEM_MELODY)
             EVT_SET(GF_DRO01_Gift_Melody, 1)
             EVT_RETURN
@@ -1215,165 +1160,6 @@ NpcGroupList N(Chapter3NPCs) = {
     {},
 };
 
-
-
-
-#include "world/common/todo/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/todo/AddPlayerHandsOffset.inc.c"
-
-API_CALLABLE(N(func_80242730_95D930)) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr;
-
-    if (isInitialCall) {
-        ptr = &N(D_802477E0_9629E0);
-        *ptr = 0;
-    }
-
-    ptr = &N(D_802477E0_9629E0);
-    if (*ptr != NULL) {
-        ptr = &N(D_802477E0_9629E0);
-        *ptr = 0;
-        evt_set_variable(script, *args++, N(D_802477E4_9629E4));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(N(func_80242784_95D984)) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_802477E4_9629E4) = evt_get_variable(script, *args++);
-    N(D_802477E0_9629E0) = 1;
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/atomic/MakeKeyChoice.inc.c"
-
-API_CALLABLE(N(func_80242858_95DA58)) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    Unk_Struct_2* temp_s1 = (Unk_Struct_2*) evt_get_variable(script, *script->ptrReadPos);
-    Unk_Struct_1* ptr;
-    s32 atan_res1, atan_res2;
-    s32 clamp;
-    s32 res;
-
-    if (isInitialCall) {
-        script->functionTempPtr[1] = heap_malloc(0x3C);
-        ptr = script->functionTempPtr[1];
-        ptr->unk_00 = temp_s1->unk_00;
-        ptr->unk_04 = temp_s1->unk_04;
-        ptr->unk_08 = temp_s1->unk_08;
-        ptr->unk_0C = temp_s1->unk_0C;
-        ptr->unk_10 = temp_s1->unk_10;
-        ptr->unk_14 = temp_s1->unk_14;
-        ptr->unk_18 = 0;
-        ptr->unk_1C = 0;
-        ptr->unk_20 = 0;
-        ptr->unk_24 = 0;
-        ptr->unk_28 = 0;
-        ptr->unk_2C = 0;
-        ptr->unk_30 = 0;
-        ptr->unk_34 = 0;
-        ptr->unk_38 = 0;
-    }
-
-    ptr = script->functionTempPtr[1];
-    switch (ptr->unk_20) {
-        case 0:
-            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
-            if (res < ptr->unk_0C) {
-                ptr->unk_24 = playerStatus->position.x;
-                ptr->unk_28 = playerStatus->position.z;
-                ptr->unk_20++;
-            }
-            break;
-
-        case 1:
-            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
-            if (res < ptr->unk_0C) {
-                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_24, ptr->unk_28);
-                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
-                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
-                ptr->unk_34 = signF(clamp);
-                ptr->unk_20++;
-                break;
-            }
-            ptr->unk_20 = 0;
-            break;
-
-        case 2:
-            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
-            if (res < ptr->unk_0C) {
-                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_2C, ptr->unk_30);
-                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
-                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
-                if (ptr->unk_34 == signF(clamp)) {
-                    atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_24, ptr->unk_28);
-                    atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
-                    clamp = get_clamped_angle_diff(atan_res1, atan_res2);
-                    if (fabsf(clamp) > 90.0f) {
-                        if (ptr->unk_14 != NULL) {
-                            ptr->unk_14(ptr, 0);
-                        }
-                        ptr->unk_18 = ptr->unk_18 + fabsf(clamp);
-                        ptr->unk_20++;
-                    }
-                    break;
-                }
-            }
-            ptr->unk_20 = 0;
-            break;
-
-        case 3:
-            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
-            if (res < ptr->unk_10) {
-                atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_2C, ptr->unk_30);
-                atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
-                clamp = get_clamped_angle_diff(atan_res1, atan_res2);
-                if (ptr->unk_34 != signF(clamp)) {
-                    if (ptr->unk_14 != NULL) {
-                        ptr->unk_14(ptr, 3);
-                    }
-                    ptr->unk_20++;
-                } else {
-                    ptr->unk_18 = ptr->unk_18 + fabsf(clamp);
-                    ptr->unk_1C = ptr->unk_18 / 360;
-                    if (ptr->unk_1C != ptr->unk_38) {
-                        if (ptr->unk_14 != NULL) {
-                            ptr->unk_14(ptr, 1);
-                        }
-                        ptr->unk_38 = ptr->unk_1C;
-                    }
-                }
-                if (ptr->unk_14 != NULL) {
-                    ptr->unk_14(ptr, 2);
-                }
-            } else {
-                if (ptr->unk_14 != NULL) {
-                    ptr->unk_14(ptr, 4);
-                }
-                ptr->unk_20++;
-            }
-            break;
-
-        case 4:
-            ptr->unk_18 = 0.0f;
-            ptr->unk_1C = 0;
-            ptr->unk_38 = 0;
-            ptr->unk_20 = 0;
-            break;
-    }
-
-    ptr->unk_2C = playerStatus->position.x;
-    ptr->unk_30 = playerStatus->position.z;
-
-    return ApiStatus_BLOCK;
-}
-
-#include "world/common/todo/LetterDelivery.inc.c"
 
 API_CALLABLE(N(func_80243084_95E284)) {
     PlayerData* playerData = &gPlayerData;

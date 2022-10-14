@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 2];
+static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 1];
 
 #ifndef _CHOICE_SUPPORT_
 #define _CHOICE_SUPPORT_

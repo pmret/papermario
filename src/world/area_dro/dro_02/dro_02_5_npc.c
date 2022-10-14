@@ -95,6 +95,7 @@ NpcSettings N(npcSettings_802475B0) = {
 #include "dro_02_merlee.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
+MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 extern IMG_BIN N(toad_house_blanket_img)[];
