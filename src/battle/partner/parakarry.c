@@ -564,6 +564,7 @@ ApiStatus func_802390B4_700E34(Evt* script, s32 isInitialCall) {
             state->moveTime = 5;
             script->functionTemp[0] = 3;
             D_8023BD70->flags |= 0x10;
+            // fallthrough
         case 3:
             add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
             if (state->moveTime == 0) {
@@ -571,6 +572,7 @@ ApiStatus func_802390B4_700E34(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
             state->moveTime--;
+            // fallthrough
         default:
             partner->currentPos.x = state->currentPos.x;
             partner->currentPos.y = state->currentPos.y;
