@@ -43,6 +43,8 @@ options:
   # mips_abi_float_regs: o32
   # section_order: [".text", ".data", ".rodata", ".bss"]
   # auto_all_sections: [".data", ".rodata", ".bss"]
+  # libultra_symbols: True
+  # hardware_regs: True
 """
 
     first_section_end = find_code_length.run(rom_bytes, 0x1000, rom.entry_point)

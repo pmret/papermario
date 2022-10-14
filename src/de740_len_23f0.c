@@ -294,6 +294,7 @@ void appendGfx_shading_palette(
     f32 var_f8;
     f32 abc;
     f32 ex, ey, ez;
+    f32 t1;
 
     var_f12 = (shadowX * shadowX) + (shadowY * shadowY) + (shadowZ * shadowZ);
 
@@ -323,8 +324,10 @@ void appendGfx_shading_palette(
         ez = mtx[2][2];
     }
 
+    temp_f6 = ex * shadowX;
     temp_f6_2 = (shadowX * -camera->perspectiveMatrix[2][2]) + (shadowZ * camera->perspectiveMatrix[0][2]);
-    if ((ex * shadowX) + (ey * shadowY) + (ez * shadowZ) > 0.0f) {
+    t1 = temp_f6 + (ey * shadowY) + (ez * shadowZ);
+    if (t1 > 0.0f) {
         var_f26 = ambientPower * temp_f6_2;
     } else {
         var_f26 = ambientPower;
@@ -406,10 +409,16 @@ void appendGfx_shading_palette(
                           COMBINED, 0, 0, 0, COMBINED);
     }
 
-    // abc = var_f30 * var_f26;
     abc = var_f26;
-    abc = var_f30 * abc;
-    gDPSetTileSize(gMasterGfxPos++, 0, ((uls + 0x100) << 2) + (s32)abc, ((ult + 0x100) << 2) + (s32)temp_f28, ((lrs + 0x100 - 1) << 2) + (s32)abc, ((lrt + 0x100 - 1) << 2) + (s32)temp_f28);
+    abc *= var_f30;
+    gDPSetTileSize(
+        gMasterGfxPos++,
+        0,
+        ((uls + 0x100) << 2) + (s32)abc,
+        ((ult + 0x100) << 2) + (s32)temp_f28,
+        ((lrs + 0x100 - 1) << 2) + (s32)abc,
+        ((lrt + 0x100 - 1) << 2) + (s32)temp_f28
+    );
 }
 #else
 INCLUDE_ASM(s32, "de740_len_23f0", appendGfx_shading_palette);

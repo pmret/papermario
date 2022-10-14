@@ -1844,41 +1844,46 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
 // Needs work
 #ifdef NON_EQUIVALENT
 s32 npc_find_standing_on_entity(s32 arg0) {
-    s32 entityIndex = arg0 | 0x4000;
-    Entity* entity = get_entity_by_index(entityIndex);
-    s32 y = entity->position.y - 10.0f;
-    s32 floorID;
+    Npc* npc;
+    s32 y;
     s32 i;
+    s32 var_v1;
+
+    var_v1 = arg0 | 0x4000;
+    y = get_entity_by_index(var_v1)->position.y - 10.0f;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
-        Npc* npc = (*gCurrentNpcListPtr)[i];
+        npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL) {
-            if (npc->flags != 0) {
-                if (!(npc->flags & 0x80000004)) {
-                    if (!(npc->pos.y < y)) {
-                        if (npc->flags & 0x8008) {
-                            floorID = npc_get_collider_below(npc);
-                            if (floorID == 0) {
-                                continue;
-                            }
-                        } else {
-                            floorID = npc->currentFloor;
-
-                            if (!(floorID & COLLISION_WITH_ENTITY_BIT)) {
-                                continue;
-                            }
-                        }
-
-                        if (entityIndex == floorID) {
-                            return i;
-                        }
-                    }
+        if (npc == NULL) {
+            continue;
+        }
+        if (npc->flags == 0) {
+            continue;
+        }
+        if (npc->flags & (0x80000000 | 0x4)) {
+            continue;
+        }
+        if (npc->pos.y < y) {
+            continue;
+        }
+        if (npc->flags & (0x8000 | 0x8)) {
+            var_v1 = npc_get_collider_below(npc);
+            if (var_v1 != 0) {
+                if ((arg0 | 0x4000) == var_v1) {
+                    return i;
                 }
             }
+        } else {
+            var_v1 = npc->currentFloor;
+            if (npc->currentFloor & 0x4000) {
+                if ((arg0 | 0x4000) == var_v1) {
+                    return i;
+                }
+            }
+
         }
     }
-
     return -1;
 }
 #else

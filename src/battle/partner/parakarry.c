@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "effects.h"
 
+extern EffectInstance* D_8023BD70;
 extern s32 D_8023BD78[7];
 extern s32 D_8023BD98[6];
 extern s32 D_8023BDB4;
@@ -433,7 +434,152 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "battle/partner/parakarry", func_802390B4_700E34);
+ApiStatus func_802390B4_700E34(Evt* script, s32 isInitialCall) {
+    Actor* partner = gBattleStatus.partnerActor;
+    ActorState* state = &partner->state;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            state->currentPos.x = partner->currentPos.x;
+            state->currentPos.y = partner->currentPos.y;
+            state->currentPos.z = partner->currentPos.z;
+            state->angle = 60 - rand_int(10);
+            state->bounceDivisor = 0.0f;
+            state->moveTime = 90;
+            state->speed = 48.0f;
+            script->functionTemp[1] = 0;
+            script->functionTemp[2] = 0;
+            script->functionTemp[3] = 0;
+            D_8023BD70 = fx_65(0, state->currentPos.x, state->currentPos.y, state->currentPos.z, 1.0f, 0);
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
+            D_8023BD70->data.unk_65->pos.x = state->currentPos.x;
+            D_8023BD70->data.unk_65->pos.y = state->currentPos.y;
+            D_8023BD70->data.unk_65->pos.z = state->currentPos.z;
+            if (state->currentPos.x < -190.0f) {
+                if (script->functionTemp[1] != 0) {
+                    script->functionTemp[0] = 2;
+                    break;
+                }
+                if (state->angle >= 270.0f && state->angle < 360.0f) {
+                    state->angle = 90.0f + (90.0f - clamp_angle(state->angle + 180.0f));
+                    state->bounceDivisor = rand_int(4) - 2;
+                }
+                if (state->angle >= 180.0f && state->angle < 270.0f) {
+                    state->angle = 90.0f - (clamp_angle(state->angle + 180.0f) - 90.0f);
+                    state->bounceDivisor = rand_int(4) - 2;
+                }
+
+                if (script->functionTemp[3] != 0) {
+                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                } else {
+                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                }
+                script->functionTemp[3] = 1 - script->functionTemp[3];
+            }
+
+            if (state->currentPos.x > 190.0f) {
+                if (script->functionTemp[1] != 0) {
+                    script->functionTemp[0] = 2;
+                    break;
+                }
+
+                do {
+                    if (state->angle >= 0.0f && state->angle < 90.0f) {
+                        state->angle = 270.0f + (270.0f - clamp_angle(state->angle + 180.0f));
+                    } else if (state->angle >= 90.0f && state->angle < 180.0f) {
+                        state->angle = 270.0f - (clamp_angle(state->angle + 180.0f) - 270.0f);
+                    }
+                } while (0);
+
+                if (script->functionTemp[3] != 0) {
+                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                } else {
+                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                }
+                script->functionTemp[3] = 1 - script->functionTemp[3];
+            }
+
+            if (state->currentPos.y < -30.0f) {
+                if (script->functionTemp[1] != 0) {
+                    script->functionTemp[0] = 2;
+                    break;
+                }
+
+                do {
+                    if (state->angle >= 270.0f && state->angle < 360.0f) {
+                        state->angle = 180.0f + (180.0f - clamp_angle(state->angle + 180.0f));
+                    } else if (state->angle >= 0.0f && state->angle < 90.0f) {
+                        state->angle = 180.0f - (clamp_angle(state->angle + 180.0f) - 180.0f);
+                    }
+                } while (0); // TODO macro?
+
+                if (script->functionTemp[3] != 0) {
+                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                } else {
+                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                }
+                script->functionTemp[3] = 1 - script->functionTemp[3];
+            }
+
+            if (state->currentPos.y > 160.0f) {
+                if (script->functionTemp[1] != 0) {
+                    script->functionTemp[0] = 2;
+                    break;
+                }
+
+                do {
+                    if (state->angle >= 90.0f && state->angle < 180.0f) {
+                        state->angle = 360.0f + (360.0f - clamp_angle(state->angle + 180.0f));
+                    } else if (state->angle >= 180.0f && state->angle < 270.0f) {
+                        state->angle = 360.0f - (clamp_angle(state->angle + 180.0f) - 360.0f);
+                    }
+                } while (0); // TODO macro?
+
+                if (script->functionTemp[3] != 0) {
+                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                } else {
+                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                }
+                script->functionTemp[3] = 1 - script->functionTemp[3];
+            }
+
+            state->angle = clamp_angle(state->angle + (state->bounceDivisor * 0.5));
+            if (state->moveTime != 0) {
+                state->moveTime--;
+            } else {
+                script->functionTemp[1] = 1;
+            }
+            break;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 2:
+            state->moveTime = 5;
+            script->functionTemp[0] = 3;
+            D_8023BD70->flags |= 0x10;
+            // fallthrough
+        case 3:
+            add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
+            if (state->moveTime == 0) {
+                partner->rotation.z = 0.0f;
+                return ApiStatus_DONE2;
+            }
+            state->moveTime--;
+            // fallthrough
+        default:
+            partner->currentPos.x = state->currentPos.x;
+            partner->currentPos.y = state->currentPos.y;
+            partner->currentPos.z = state->currentPos.z;
+            return ApiStatus_BLOCK;
+    }
+}
 
 ApiStatus func_802397C8_701548(Evt* script, s32 isInitialCall) {
     script->varTable[15] = ((script->varTable[0] * 100) / 2499) + 2;

@@ -31,8 +31,6 @@ TempE20110* D_802B7CB8_E20DC8 = &D_802B7DA0;
 void func_802B7728_E20838(void);
 void func_802B79C8_E20AD8(void);
 
-// floatz
-#ifdef NON_MATCHING
 void func_802B70B4_E201C4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 new_var;
@@ -40,15 +38,11 @@ void func_802B70B4_E201C4(void) {
     if (playerStatus->animFlags & 0x10) {
         mem_clear(D_802B7CB8_E20DC8, sizeof(*D_802B7CB8_E20DC8));
         D_8010C950 = -1;
-        D_802B7CB8_E20DC8->unk_00.x = playerStatus->position.x;
-        new_var = playerStatus->position.y + playerStatus->colliderHeight;
-        if (!(playerStatus->animFlags & 0x1000)) {
-            D_802B7CB8_E20DC8->unk_00.y = new_var + 8.0f;
-        } else {
-            D_802B7CB8_E20DC8->unk_00.y = new_var + 2.0f;
-        }
-        D_802B7CB8_E20DC8->unk_00.z = playerStatus->position.z;
-        D_802B7CB8_E20DC8->unk_10 = 0.4f;
+        D_802B7CB8_E20DC8->pos.x = playerStatus->position.x;
+        D_802B7CB8_E20DC8->pos.y = playerStatus->position.y + playerStatus->colliderHeight +
+                                   (!(playerStatus->animFlags & 0x1000) ? 8.0f : 2.0f);
+        D_802B7CB8_E20DC8->pos.z = playerStatus->position.z;
+        D_802B7CB8_E20DC8->scale = 0.4f;
         D_802B7CB8_E20DC8->unk_23 = 0;
         D_802B7CB8_E20DC8->unk_0C = -gCameras[gCurrentCameraID].currentYaw;
         D_8010C958 = func_802B7728_E20838;
@@ -56,9 +50,6 @@ void func_802B70B4_E201C4(void) {
         D_802B7CB8_E20DC8->unk_1C = 0xFF;
     }
 }
-#else
-INCLUDE_ASM(s32, "E20110", func_802B70B4_E201C4);
-#endif
 
 void func_802B71E8_E202F8(void) {
     FoldImageRecPart sp20;

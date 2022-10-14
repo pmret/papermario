@@ -2,6 +2,7 @@ from typing import Dict, List, Optional, TYPE_CHECKING, Set
 import spimdisasm
 import tqdm
 from dataclasses import dataclass
+from intervaltree import IntervalTree, Interval
 
 # circular import
 if TYPE_CHECKING:
@@ -11,8 +12,8 @@ from util import options, log
 
 all_symbols: List["Symbol"] = []
 all_symbols_dict: Dict[int, List["Symbol"]] = {}
+all_symbols_ranges = IntervalTree()
 ignored_addresses: Set[int] = set()
-symbol_ranges: List["Symbol"] = []
 to_mark_as_defined: Set[str] = set()
 
 # Initialize a spimdisasm context, used to store symbols and functions
@@ -37,15 +38,19 @@ def add_symbol(sym: "Symbol"):
             all_symbols_dict[sym.vram_start] = []
         all_symbols_dict[sym.vram_start].append(sym)
 
+    # For larger symbols, add their ranges to interval trees for faster lookup
+    if sym.size > 4:
+        all_symbols_ranges.addi(sym.vram_start, sym.vram_end, sym)
+
 
 def initialize(all_segments: "List[Segment]"):
     global all_symbols
     global all_symbols_dict
-    global symbol_ranges
+    global all_symbols_ranges
 
     all_symbols = []
     all_symbols_dict = {}
-    symbol_ranges = []
+    all_symbols_ranges = IntervalTree()
 
     def get_seg_for_name(name: str) -> Optional["Segment"]:
         for segment in all_segments:
@@ -182,10 +187,6 @@ def initialize(all_segments: "List[Segment]"):
 
                         sym.user_declared = True
                         add_symbol(sym)
-
-                        # Symbol ranges
-                        if sym.size > 4:
-                            symbol_ranges.append(sym)
 
 
 def initialize_spim_context(all_segments: "List[Segment]") -> None:
@@ -383,6 +384,9 @@ def create_symbol_from_spim_symbol(
         context_sym.vram, in_segment, type=sym_type, reference=True
     )
 
+    if sym.given_name is None and context_sym.name is not None:
+        sym.given_name = context_sym.name
+
     # To keep the symbol name in sync between splat and spimdisasm
     context_sym.setNameGetCallback(lambda _: sym.name)
 
@@ -396,25 +400,6 @@ def create_symbol_from_spim_symbol(
         sym.referenced = True
 
     return sym
-
-
-def retrieve_from_ranges(vram, rom=None):
-    rom_matches = []
-    ram_matches = []
-
-    for symbol in symbol_ranges:
-        if symbol.contains_vram(vram):
-            if symbol.rom and rom and symbol.contains_rom(rom):
-                rom_matches.append(symbol)
-            else:
-                ram_matches.append(symbol)
-
-    ret = rom_matches + ram_matches
-
-    if len(ret) > 0:
-        return ret[0]
-    else:
-        return None
 
 
 def mark_c_funcs_as_defined():
@@ -448,6 +433,15 @@ class Symbol:
 
     def __str__(self):
         return self.name
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Symbol):
+            return False
+        return self.vram_start == other.vram_start and self.segment == other.segment
+
+    # https://stackoverflow.com/a/56915493/6292472
+    def __hash__(self):
+        return hash((self.vram_start, self.segment))
 
     def format_name(self, format: str) -> str:
         ret = format
