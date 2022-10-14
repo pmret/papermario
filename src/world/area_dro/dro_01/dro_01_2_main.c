@@ -1,7 +1,7 @@
 #include "dro_01.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/PipeData.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
@@ -79,7 +79,7 @@ EvtScript N(EVS_EnterMap) = {
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_IF
             EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC_WAIT(N(Pipe_EnterVertical))
+            EVT_EXEC_WAIT(N(EVS_Pipe_EnterVertical))
         EVT_CASE_OR_EQ(dro_01_ENTRY_3)
         EVT_CASE_OR_EQ(dro_01_ENTRY_4)
             EVT_EXEC_WAIT(N(EVS_Scene_RuinsRising))

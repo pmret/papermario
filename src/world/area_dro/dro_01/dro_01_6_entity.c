@@ -3,7 +3,7 @@
 
 #define NAMESPACE dro_01_Entity
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/PipeData.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
 #define NAMESPACE dro_01
 
 EvtScript N(EVS_WarpPipeExit) = {
