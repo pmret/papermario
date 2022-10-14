@@ -8930,10 +8930,10 @@ segments:
     - [0x95B200, c, dro_01_1_music]
     - [0x95B200, c, dro_01_2_main]
     - [0x95B7E0, c, dro_01_3_npc]
-    - [0x95E660, c, dro_01_w_shop]
-    - [0x95E660, c, dro_01_x_building]
-    - [0x95E7A0, c, dro_01_y_entity]
-    - [0x95EA80, c, dro_01_z_foliage]
+    - [0x95E660, c, dro_01_4_shop]
+    - [0x95E660, c, dro_01_5_building]
+    - [0x95E7A0, c, dro_01_6_entity]
+    - [0x95EA80, c, dro_01_7_foliage]
     - [0x95ECC0]
   - name: dro_02
     dir: world/area_dro/dro_02

@@ -119,7 +119,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
-    EVT_EXEC(N(8024DD78))
+    EVT_EXEC(N(EVS_SetupFoliage))
     EVT_RETURN
     EVT_END
 };

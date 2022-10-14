@@ -27,28 +27,28 @@ EvtScript N(EVS_NpcInteract_Composer) = {
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_02, FALSE)
+            EVT_IF_EQ(AF_DRO_DialogueToggle_Composer, FALSE)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007C)
-                EVT_SET(AF_DRO_02, TRUE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, TRUE)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007D)
-                EVT_SET(AF_DRO_02, FALSE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, FALSE)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_02, FALSE)
+            EVT_IF_EQ(AF_DRO_DialogueToggle_Composer, FALSE)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007E)
-                EVT_SET(AF_DRO_02, TRUE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, TRUE)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_007F)
-                EVT_SET(AF_DRO_02, FALSE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, FALSE)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(AF_DRO_02, FALSE)
+            EVT_IF_EQ(AF_DRO_DialogueToggle_Composer, FALSE)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0080)
-                EVT_SET(AF_DRO_02, TRUE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, TRUE)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0081)
-                EVT_SET(AF_DRO_02, FALSE)
+                EVT_SET(AF_DRO_DialogueToggle_Composer, FALSE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_SET(LVar0, EVT_PTR(N(LyricsList)))

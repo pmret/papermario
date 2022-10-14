@@ -26,7 +26,7 @@ enum {
 	NPC_Dryite_03               = 3,
 	NPC_Dryite_04               = 4,
 	NPC_ArtistToad              = 5,
-	NPC_Mouser_02               = 6,
+	NPC_Mouser_ShopOwner		= 6,
 	NPC_ThreeSisters_01         = 7,
 	NPC_ThreeSisters_02         = 8,
 	NPC_ThreeSisters_03         = 9,
@@ -59,7 +59,7 @@ extern EvtScript ItemShopInteract;
 extern EvtScript N(80244450);
 
 extern EvtScript N(8024CDA0);
-extern EvtScript N(8024DD78);
+extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(main);
 extern EvtScript N(makeEntities);
 extern EvtScript N(unk_80248088);

@@ -91,9 +91,9 @@ EvtScript N(EVS_MoveWalls_RightHouse) = {
 EvtScript N(EVS_ToggleVis_LeftHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, 1)
+            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, TRUE)
         EVT_CASE_EQ(3)
-            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, 0)
+            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -115,13 +115,13 @@ EvtScript N(EVS_ToggleVis_Shop) = {
         EVT_CASE_EQ(2)
             EVT_THREAD
                 EVT_WAIT(45)
-                EVT_CALL(SetNpcPos, NPC_Mouser_02, 33, 0, -375)
-                EVT_CALL(SetNpcYaw, NPC_Mouser_02, 180)
+                EVT_CALL(SetNpcPos, NPC_Mouser_ShopOwner, 33, 0, -375)
+                EVT_CALL(SetNpcYaw, NPC_Mouser_ShopOwner, 180)
             EVT_END_THREAD
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 0)
-            EVT_SET(AB_DRO_4, 0)
-            EVT_SET(AB_DRO_5, 0)
+            EVT_SET(AB_DRO_SHOP_PREV1, 0)
+            EVT_SET(AB_DRO_SHOP_PREV2, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -145,7 +145,7 @@ s32 N(InteriorNPCs_LeftHouse)[] = {
 };
 
 s32 N(InteriorNPCs_Shop)[] = {
-    NPC_Mouser_02,
+    NPC_Mouser_ShopOwner,
     -1
 };
 

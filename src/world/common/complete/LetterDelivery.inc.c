@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/npc/WorldParakarry.h"
 
 static s32 N(LetterDelivery_SavedNpcAnim);
 
