@@ -15,7 +15,7 @@ class CommonSegAsm(CommonSegCodeSubsegment):
             and self.rom_end != "auto"
             and self.rom_start != self.rom_end
         ):
-            self.scan_code(rom_bytes, is_asm=True)
+            self.scan_code(rom_bytes)
 
     def get_file_header(self):
         return []

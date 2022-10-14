@@ -2,6 +2,14 @@ from segtypes.common.asm import CommonSegAsm
 
 
 class CommonSegHasm(CommonSegAsm):
+    def scan(self, rom_bytes: bytes):
+        if (
+            self.rom_start != "auto"
+            and self.rom_end != "auto"
+            and self.rom_start != self.rom_end
+        ):
+            self.scan_code(rom_bytes, is_hasm=True)
+
     def split(self, rom_bytes: bytes):
         if not self.rom_start == self.rom_end and self.spim_section is not None:
             out_path = self.out_path()

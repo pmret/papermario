@@ -4,7 +4,16 @@
 #include "hud_element.h"
 
 extern s32 (*D_8023AB80_70E890)[0];
+
 extern f32 D_8023D1E0;
+extern EffectInstance* D_8023D1E4;
+extern s32 D_8023D26C;
+extern s32 D_8023D270;
+extern s32 D_8023D274;
+extern s32 D_8023D278;
+extern s32 D_8023D27C;
+extern s32 D_8023D280;
+extern s32 D_8023D284;
 extern s32 D_8023D288;
 extern s32 D_8023D28C;
 extern s32 D_8023D290;
@@ -25,6 +34,7 @@ extern s32 D_8023D2C8;
 extern s32 D_8023D2D0[];
 extern s32 D_8023D330;
 extern s32 D_8023D334;
+extern s32 D_8023D338;
 
 extern HudScript HES_AimReticle;
 extern HudScript HES_AimTarget;
@@ -142,7 +152,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
             if (D_8023D298 != 0) {
                 D_8023D298--;
             } else {
-                D_8023D298 = 0x50;
+                D_8023D298 = 80;
                 hud_element_set_script(D_8023D2BC, HES_StickTapRight);
                 sfx_play_sound_at_position(0x312, 0, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
@@ -150,8 +160,8 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             dpadY = battleStatus->dpadY;
-            if (dpadY > 0x50) {
-                dpadY = 0x50;
+            if (dpadY > 80) {
+                dpadY = 80;
             }
             dpadX = battleStatus->dpadX;
             if (dpadY < 35) {
@@ -489,6 +499,23 @@ ApiStatus func_8023906C_70CD7C(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
+
+typedef struct UnkLak {
+    /* 0x00 */ char unk_00[0x44];
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ char unk_48[0xC];
+    /* 0x54 */ s16 unk_54;
+    /* 0x56 */ char unk_56[0x4];
+    /* 0x5A */ s16 unk_5A;
+    /* 0x5C */ s8 unk_5C;
+    /* 0x5D */ s8 unk_5D;
+    /* 0x5E */ char unk_5E[0x12];
+    /* 0x70 */ s16 unk_70;
+    /* 0x72 */ s16 unk_72;
+} UnkLak;
+
+extern UnkLak* D_8023CCC0_7109D0;
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80239140_70CE50);
 

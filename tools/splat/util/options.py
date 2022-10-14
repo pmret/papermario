@@ -155,6 +155,10 @@ class SplatOpts:
     # Determines the type gfx ucode (used by gfx segments)
     # Valid options are ['f3d', 'f3db', 'f3dex', 'f3dexb', 'f3dex2']
     gfx_ucode: str
+    # Use named libultra symbols by default. Those will need to be added to a linker script manually by the user
+    libultra_symbols: bool
+    # Use named hardware register symbols by default. Those will need to be added to a linker script manually by the user
+    hardware_regs: bool
 
     ################################################################################
     # Compiler-specific options
@@ -366,6 +370,8 @@ def parse_yaml(
             ["f3d", "f3db", "f3dex", "f3dexb", "f3dex2"],
             "f3dex2",
         ),
+        libultra_symbols=parse_opt(yaml, "libultra_symbols", bool, False),
+        hardware_regs=parse_opt(yaml, "hardware_regs", bool, False),
         use_legacy_include_asm=parse_opt(yaml, "use_legacy_include_asm", bool, True),
     )
 
