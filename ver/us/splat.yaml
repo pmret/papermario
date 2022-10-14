@@ -8201,13 +8201,13 @@ segments:
     start: 0x8D1510
     vram: 0x80240000
     subsegments:
-    - [0x8D1510, c]
-    - [0x8D2A10, c]
-    - [0x8D32B0, data]
-    - [0x8D3340, data]
-    - [0x8D3AC0, data]
-    - [0x8D3B30, data]
-    - [0x8D3D50]
+    - [0x8D1510, c, kmr_06_0_header]
+    - [0x8D1510, c, kmr_06_1_music]
+    - [0x8D1510, c, kmr_06_2_main]
+    - [0x8D1510, c, kmr_06_3_npc]
+    - [0x8D2A10, c, kmr_06_4_entity]
+    - [0x8D2A10, c, kmr_06_5_sticker_sign]
+    - [0x8D32B0]
   - name: kmr_07
     dir: world/area_kmr/kmr_07
     type: code

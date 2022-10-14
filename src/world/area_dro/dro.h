@@ -28,4 +28,7 @@ enum {
     AF_DRO_05                       = AreaFlag(5),
 };
 
+extern MapSettings dro_01_settings;
+extern MapSettings dro_02_settings;
+
 #endif
