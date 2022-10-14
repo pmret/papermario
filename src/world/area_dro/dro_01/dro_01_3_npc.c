@@ -15,22 +15,6 @@
 extern s16 MessagePlural;
 extern s16 MessageSingular;
 
-enum {
-    NPC_MOUSER0,
-    NPC_DRYITE0,
-    NPC_DRYITE1,
-    NPC_DRYITE2,
-    NPC_DRYITE3,
-    NPC_ARTIST_TOAD,
-    NPC_MOUSER1,
-    NPC_THREE_SISTERS0,
-    NPC_THREE_SISTERS1,
-    NPC_THREE_SISTERS2,
-    NPC_CHUCK_QUIZMO,
-    NPC_DRYITE4,
-    NPC_DRYITE5,
-};
-
 typedef struct Unk_Struct_1 {
     s32 unk_00;
     s32 unk_04;
@@ -73,169 +57,6 @@ static s32 N(KeyItemChoiceList)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
 static s32 N(LetterDelivery_SavedNpcAnim);
 
-EntryList N(entryList) = {
-    { -342.0f, 0.0f, 316.0f, 45.0f },
-    { 488.0f, 1.0f, 4.0f, 270.0f },
-    { 430.0f, 35.0f, -120.0f, 180.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f },
-    { -211.0f, 50.0f, -50.0f, 120.0f },
-};
-
-MapSettings N(settings) = {
-    .main = &N(main),
-    .entryList = &N(entryList),
-    .entryCount = ENTRY_COUNT(N(entryList)),
-    .background = &gBackgroundImage,
-    .tattle = { MSG_MapTattle_dro_01 },
-};
-
-EvtScript N(80243BB0) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(3)
-        EVT_CASE_OR_EQ(4)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_OUTPOST, 0, 8)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-#include "world/common/entity/PipeData.inc.c"
-
-EvtScript N(exitWalk_80244960) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
-    EVT_CALL(UseExitHeading, 60, 0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("sbk_36"), 1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(exitWalk_802449CC) = EVT_EXIT_WALK(60,  1, "dro_02",  0);
-
-EvtScript N(80244A28) = {
-    EVT_BIND_TRIGGER(N(exitWalk_80244960), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
-    EVT_BIND_TRIGGER(N(exitWalk_802449CC), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80244A70) = {
-    EVT_CALL(PlaySound, 0x80000060)
-    EVT_CALL(UseSettingsFrom, 0, 175, 0, -201)
-    EVT_CALL(SetPanTarget, 0, 175, 0, -201)
-    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, 3)
-    EVT_CALL(N(UnkFunc27), 1, -1, 3)
-    EVT_CALL(N(UnkFunc26), 3, 44, 32, 177, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 300, EVT_FLOAT(0.2))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(GetEntryID, LVar0)
-        EVT_IF_EQ(LVar0, 3)
-            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 2)
-        EVT_ELSE
-            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 3)
-        EVT_END_IF
-        EVT_WAIT(100)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(enterWalk_80244C14) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(80244A28))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(2)
-            EVT_IF_EQ(GF_DRO01_WarpPipe, 0)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_CALL(DisablePlayerPhysics, TRUE)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                EVT_CALL(SetPlayerPos, LVar0, -1000, LVar2)
-                EVT_WAIT(30)
-                EVT_CALL(PlaySound, SOUND_208E)
-                EVT_SET(GF_DRO01_WarpPipe, 1)
-                EVT_WAIT(30)
-                EVT_CALL(SetPlayerActionState, 0)
-                EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                EVT_CALL(DisablePlayerPhysics, FALSE)
-                EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_END_IF
-            EVT_SET(LVarA, EVT_PTR(N(80244A28)))
-            EVT_EXEC_WAIT(N(Pipe_EnterVertical))
-        EVT_CASE_OR_EQ(3)
-        EVT_CASE_OR_EQ(4)
-            EVT_EXEC_WAIT(N(80244A70))
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(10)
-            EVT_EXEC(0x80285C50)
-            EVT_EXEC(N(80244A28))
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar0, EVT_PTR(N(80244A28)))
-            EVT_EXEC(EnterWalk)
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(main) = {
-    EVT_SET(GB_WorldLocation, 9)
-    EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_SET(GF_MAP_DryDryOutpost, 1)
-    EVT_IF_LT(GB_StoryProgress, -68)
-        EVT_SET(GB_StoryProgress, -68)
-    EVT_END_IF
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_RANGE(-53, 6)
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024B47C)))
-        EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024B464)))
-    EVT_END_SWITCH
-    EVT_CALL(InitVirtualEntityList)
-    EVT_EXEC_WAIT(N(makeEntities))
-    EVT_CALL(MakeShop, EVT_PTR(N(shopItemPositions_8024BA68)), EVT_PTR(N(shopInventory_8024B4FC)), EVT_PTR(N(shopPriceList_8024B550)), 0)
-    EVT_CALL(MakeShopOwner, EVT_PTR(N(shopOwnerNPC_8024BA80)))
-    EVT_EXEC_WAIT(N(8024C218))
-    EVT_EXEC(N(8024C2EC))
-    EVT_EXEC(N(80243BB0))
-    EVT_EXEC(N(enterWalk_80244C14))
-    EVT_WAIT(1)
-    EVT_EXEC(N(8024DD78))
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(pad_5004)[] = {
-    0x00000000, 0x00000000, 0x00000000,
-};
 
 MobileAISettings N(npcAISettings_80245010) = {
     .moveSpeed = 1.5f,
@@ -259,6 +80,8 @@ NpcSettings N(npcSettings_80245060) = {
     .actionFlags = 16,
 };
 
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
+
 MobileAISettings N(npcAISettings_8024508C) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
@@ -273,7 +96,7 @@ EvtScript N(npcAI_802450BC) = {
     EVT_END
 };
 
-NpcSettings N(npcSettings_802450DC) = {
+NpcSettings N(NpcSettings_Dryite_06) = {
     .height = 26,
     .radius = 23,
     .ai = &N(npcAI_802450BC),
@@ -293,7 +116,7 @@ NpcSettings N(npcSettings_80245134) = {
     .level = 99,
 };
 
-NpcSettings N(npcSettings_80245160) = {
+NpcSettings N(NpcSettings_ThreeSisters) = {
     .height = 30,
     .radius = 24,
     .level = 99,
@@ -305,6 +128,7 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
+#include "world/common/atomic/Quizmo.inc.c"
 #include "world/common/atomic/QuizmoData.inc.c"
 
 s32 N(D_802477E0_9629E0) = {
@@ -342,7 +166,7 @@ EvtScript N(802477E8) = {
 
 EvtScript N(8024792C) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(802477E8), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), LVar0)
     EVT_RETURN
     EVT_END
@@ -797,7 +621,7 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, -180)
-            EVT_EXEC_WAIT(N(8024C41C))
+            EVT_EXEC_WAIT(N(EVS_OpenShopDoor))
             EVT_WAIT(10)
             EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
             EVT_CALL(UseSettingsFrom, 0, LVarA, LVarB, LVarC)
@@ -816,7 +640,7 @@ EvtScript N(idle_8024918C) = {
             EVT_WAIT(10)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 65, 0)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(8024C4C8))
+            EVT_EXEC_WAIT(N(EVS_CloseShopDoor))
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
             EVT_CALL(NpcMoveTo, NPC_SELF, 37, -27, 20)
             EVT_CALL(UseSettingsFrom, 0, LVarA, LVarB, LVarC)
@@ -849,11 +673,11 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(NpcMoveTo, NPC_SELF, 102, -14, 20)
             EVT_CALL(NpcMoveTo, NPC_SELF, -32, -96, 20)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Idle)
-            EVT_EXEC_WAIT(N(8024C41C))
+            EVT_EXEC_WAIT(N(EVS_OpenShopDoor))
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
             EVT_CALL(NpcMoveTo, NPC_SELF, 20, -375, 30)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Idle)
-            EVT_EXEC_WAIT(N(8024C4C8))
+            EVT_EXEC_WAIT(N(EVS_CloseShopDoor))
             EVT_CALL(EnableNpcBlur, -1, 0)
             EVT_SET(GB_StoryProgress, -65)
         EVT_CASE_DEFAULT
@@ -891,16 +715,16 @@ EvtScript N(init_8024981C) = {
     EVT_END
 };
 
-EvtScript N(interact_80249854) = {
-    EVT_CALL(SpeakToPlayer, 7, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
-    EVT_CALL(SpeakToPlayer, 8, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
-    EVT_CALL(SpeakToPlayer, 9, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
+EvtScript N(EVS_NpcInteract_ThreeSisters) = {
+    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
+    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
+    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(init_802498C4) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80249854)))
+EvtScript N(EVS_NpcInit_ThreeSisters) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
     EVT_RETURN
     EVT_END
 };
@@ -936,7 +760,7 @@ EvtScript N(interact_802498E8) = {
     EVT_END
 };
 
-EvtScript N(init_80249ABC) = {
+EvtScript N(EVS_NpcInit_DojoGrad) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802498E8)))
     EVT_RETURN
     EVT_END
@@ -954,9 +778,9 @@ EvtScript N(init_80249B10) = {
     EVT_END
 };
 
-StaticNpc N(npcGroup_80249B34)[] = {
+StaticNpc N(PassiveNPCs)[] = {
     {
-        .id = NPC_MOUSER0,
+        .id = NPC_Mouser_01,
         .settings = &N(npcSettings_80245134),
         .pos = { -332.0f, 0.0f, 188.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -988,7 +812,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_Greeter,
     },
     {
-        .id = NPC_DRYITE0,
+        .id = NPC_Dryite_01,
         .settings = &N(npcSettings_80245060),
         .pos = { -235.0f, 0.0f, 160.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1021,7 +845,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_DryiteA,
     },
     {
-        .id = NPC_DRYITE1,
+        .id = NPC_Dryite_02,
         .settings = &N(npcSettings_80245108),
         .pos = { -380.0f, 0.0f, -15.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1053,7 +877,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_DryiteD,
     },
     {
-        .id = NPC_DRYITE2,
+        .id = NPC_Dryite_03,
         .settings = &N(npcSettings_80245108),
         .pos = { 195.0f, 0.0f, -75.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1085,7 +909,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_DryiteB,
     },
     {
-        .id = NPC_DRYITE3,
+        .id = NPC_Dryite_04,
         .settings = &N(npcSettings_80245108),
         .pos = { 225.0f, 0.0f, -83.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1117,7 +941,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_DryiteC,
     },
     {
-        .id = NPC_ARTIST_TOAD,
+        .id = NPC_ArtistToad,
         .settings = &N(npcSettings_80245108),
         .pos = { 285.0f, 0.0f, -274.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1149,7 +973,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_Composer,
     },
     {
-        .id = NPC_MOUSER1,
+        .id = NPC_Mouser_02,
         .settings = &N(npcSettings_80245134),
         .pos = { 31.0f, 0.0f, -374.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
@@ -1181,7 +1005,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_ShopOwner,
     },
     {
-        .id = NPC_CHUCK_QUIZMO,
+        .id = NPC_ChuckQuizmo,
         .settings = &N(Quizmo_NpcSettings),
         .pos = { -400.0f, 0.0f, 100.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
@@ -1214,11 +1038,11 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },
     {
-        .id = NPC_DRYITE4,
+        .id = NPC_Dryite_05,
         .settings = &N(npcSettings_80245060),
         .pos = { -120.0f, 0.0f, 134.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-        .init = &N(init_80249ABC),
+        .init = &N(EVS_NpcInit_DojoGrad),
         .yaw = 257,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -1247,8 +1071,8 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .tattle = MSG_NpcTattle_DRO_DojoGraduate,
     },
     {
-        .id = NPC_DRYITE5,
-        .settings = &N(npcSettings_802450DC),
+        .id = NPC_Dryite_06,
+        .settings = &N(NpcSettings_Dryite_06),
         .pos = { 40.0f, 0.0f, 105.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80249B10),
@@ -1281,13 +1105,13 @@ StaticNpc N(npcGroup_80249B34)[] = {
     },
 };
 
-StaticNpc N(npcGroup_8024AE94)[] = {
+StaticNpc N(ThreeSisterNPCs)[] = {
     {
-        .id = NPC_THREE_SISTERS0,
-        .settings = &N(npcSettings_80245160),
+        .id = NPC_ThreeSisters_01,
+        .settings = &N(NpcSettings_ThreeSisters),
         .pos = { -141.0f, 0.0f, -18.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-        .init = &N(init_802498C4),
+        .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 62,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -1315,11 +1139,11 @@ StaticNpc N(npcGroup_8024AE94)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
-        .id = NPC_THREE_SISTERS1,
-        .settings = &N(npcSettings_80245160),
+        .id = NPC_ThreeSisters_02,
+        .settings = &N(NpcSettings_ThreeSisters),
         .pos = { -124.0f, 0.0f, -61.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-        .init = &N(init_802498C4),
+        .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 63,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -1347,11 +1171,11 @@ StaticNpc N(npcGroup_8024AE94)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
-        .id = NPC_THREE_SISTERS2,
-        .settings = &N(npcSettings_80245160),
+        .id = NPC_ThreeSisters_03,
+        .settings = &N(NpcSettings_ThreeSisters),
         .pos = { -80.0f, 0.0f, -35.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-        .init = &N(init_802498C4),
+        .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 244,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -1380,661 +1204,25 @@ StaticNpc N(npcGroup_8024AE94)[] = {
     },
 };
 
-NpcGroupList N(npcGroupList_8024B464) = {
-    NPC_GROUP(N(npcGroup_80249B34)),
+NpcGroupList N(DefaultNPCs) = {
+    NPC_GROUP(N(PassiveNPCs)),
     {},
 };
 
-NpcGroupList N(npcGroupList_8024B47C) = {
-    NPC_GROUP(N(npcGroup_80249B34)),
-    NPC_GROUP(N(npcGroup_8024AE94)),
+NpcGroupList N(Chapter3NPCs) = {
+    NPC_GROUP(N(PassiveNPCs)),
+    NPC_GROUP(N(ThreeSisterNPCs)),
     {},
 };
 
-s32 N(intTable_8024B4A0)[] = {
-    MSG_Shop_0049, MSG_Shop_004A, MSG_Shop_004B, MSG_Shop_004C,
-    MSG_Shop_004D, MSG_Shop_004E, MSG_Shop_004F, MSG_Shop_0050,
-    MSG_Shop_0051, MSG_Shop_0052, MSG_Shop_0053, MSG_Shop_0054,
-    MSG_Shop_0055, MSG_Shop_0056, MSG_Shop_0057, MSG_Shop_0058,
-    MSG_Shop_0059, MSG_Shop_005A, MSG_Shop_005B, MSG_Shop_005C,
-    MSG_Shop_005D, MSG_Shop_005E, MSG_Shop_005F,
-};
 
-N(shopInventory) N(shopInventory_8024B4FC)[] = {
-    { ITEM_THUNDER_BOLT,    5, MSG_ItemShopDesc_ThunderBolt },
-    { ITEM_DUSTY_HAMMER,    2, MSG_ItemShopDesc_DustyHammer },
-    { ITEM_HONEY_SYRUP,     5, MSG_ItemShopDesc_HoneySyrup },
-    { ITEM_DRIED_SHROOM,    2, MSG_ItemShopDesc_DriedShroom },
-    { ITEM_DRIED_PASTA,     3, MSG_ItemShopDesc_DriedPasta },
-    { ITEM_MUSHROOM,        3, MSG_ItemShopDesc_Mushroom },
-    {},
-};
 
-N(shopPrice) N(shopPriceList_8024B550)[] = {
-    { ITEM_SNOWMAN_DOLL,    12, 0x00000000 },
-    { ITEM_MELON,           10, 0x00000000 },
-    { ITEM_ICED_POTATO,     10, 0x00000000 },
-    { ITEM_TASTY_TONIC,      5, 0x00000000 },
-    { ITEM_SUPER_SODA,       6, 0x00000000 },
-    { ITEM_SPECIAL_SHAKE,   15, 0x00000000 },
-    { ITEM_DRIED_PASTA,      2, 0x00000000 },
-    {},
-};
-
-#define NAMESPACE dro_01_dup
-s32** N(varStash) = NULL;
-#define NAMESPACE dro_01
-
-EvtScript N(8024B5B4) = {
-    EVT_CALL(ShowGotItem, LVar0, 1, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B5E4) = {
-    EVT_CALL(ShowGotItem, LVar0, 1, 16)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B614) = {
-    EVT_CALL(NpcJump0, 6, -31, 0, -283, 10)
-    EVT_CALL(NpcJump0, 6, -30, 0, -283, 8)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B664) = {
-    EVT_CALL(NpcJump0, 6, 20, 0, -259, 10)
-    EVT_CALL(NpcJump0, 6, 20, 0, -259, 4)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B6B4) = {
-    EVT_CALL(N(func_80243578_95E778))
-    EVT_CALL(func_802D2C14, 1)
-    EVT_EXEC_WAIT(N(8024B614))
-    EVT_IF_LT(GB_StoryProgress, -64)
-        EVT_CALL(SpeakToPlayer, 6, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0087)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-        EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, 6, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0088)
-    EVT_SET(GB_StoryProgress, -64)
-    EVT_CALL(func_802D2C14, 0)
-    EVT_EXEC_WAIT(N(8024B664))
-    EVT_END_IF // @bug
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B7B0) = {
-    EVT_IF_EQ(GF_DRO01_Gift_RedJar, 0)
-        EVT_CALL(N(func_80243578_95E778))
-        EVT_CALL(func_802D2C14, 1)
-        EVT_EXEC_WAIT(N(8024B614))
-        EVT_CALL(SpeakToPlayer, 6, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_008D)
-        EVT_SET(LVar0, 119)
-        EVT_SET(LVar1, 1)
-        EVT_EXEC_WAIT(N(8024B5B4))
-        EVT_CALL(AddKeyItem, ITEM_KOOT_RED_JAR)
-        EVT_SET(GF_DRO01_Gift_RedJar, 1)
-        EVT_WAIT(20)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(8024B664))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024B894) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(3)
-        EVT_CASE_EQ(4)
-        EVT_CASE_EQ(1)
-            EVT_SET(LVar2, AreaByte(4))
-            EVT_SET(LVar3, AreaByte(5))
-            EVT_SET(LVar4, AreaByte(6))
-            EVT_SET(AreaByte(5), LVar2)
-            EVT_SET(AreaByte(6), LVar3)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(141)
-                    EVT_SET(AreaByte(4), 1)
-                    EVT_IF_EQ(LVar2, 2)
-                        EVT_IF_EQ(LVar3, 3)
-                            EVT_IF_EQ(LVar4, 2)
-                                EVT_EXEC_WAIT(N(8024B7B0))
-                                EVT_SET(AreaByte(4), 0)
-                            EVT_END_IF
-                        EVT_END_IF
-                    EVT_END_IF
-                EVT_CASE_EQ(134)
-                    EVT_SET(AreaByte(4), 2)
-                    EVT_IF_EQ(LVar2, 1)
-                        EVT_IF_LT(GB_StoryProgress, -63)
-                            EVT_EXEC_WAIT(N(8024B6B4))
-                            EVT_SET(AreaByte(4), 0)
-                        EVT_END_IF
-                    EVT_END_IF
-                EVT_CASE_EQ(167)
-                    EVT_SET(AreaByte(4), 3)
-                EVT_CASE_DEFAULT
-                    EVT_SET(AreaByte(4), 0)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(shopItemPositions_8024BA68)[] = {
-    0x004C0021, 0x004B0022, 0x00490023, 0x004A0024, 0x00480025, 0x00470026,
-};
-
-ShopOwner N(shopOwnerNPC_8024BA80) = {
-    0x00000006, 0x00940101, 0x00940105, N(8024B894), 0x00000000, 0x00000000, N(intTable_8024B4A0),
-};
-
-s32 N(pad_BA9C) = {
-    0x00000000,
-};
-
-EvtScript N(openDoor_8024BAA0) = {
-    EVT_CALL(RotateModel, 103, LVar0, 0, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(moveWalls_8024BAD0) = {
-    EVT_SET(LVar1, LVar0)
-    EVT_DIVF(LVar1, 50)
-    EVT_CALL(TranslateModel, 98, 0, LVar1, 0)
-    EVT_CALL(TranslateModel, 97, 0, LVar1, 0)
-    EVT_CALL(RotateModel, 98, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 97, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 100, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 101, LVar0, -1, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(dropDoor_8024BBB8) = {
-    EVT_SET(LVar1, LVar0)
-    EVT_DIVF(LVar1, 50)
-    EVT_CALL(TranslateModel, 103, 0, LVar1, 0)
-    EVT_CALL(RotateModel, 103, LVar0, 1, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(openDoor_8024BC24) = {
-    EVT_CALL(RotateModel, 83, LVar0, 0, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(moveWalls_8024BC54) = {
-    EVT_SET(LVar1, LVar0)
-    EVT_DIVF(LVar1, 50)
-    EVT_CALL(TranslateModel, 47, 0, LVar1, 0)
-    EVT_CALL(TranslateModel, 48, 0, LVar1, 0)
-    EVT_CALL(RotateModel, 47, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 48, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 41, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 42, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 43, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 44, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 45, LVar0, -1, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(openDoor_8024BD9C) = {
-    EVT_CALL(RotateModel, 157, LVar0, 0, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(dropDoor_8024BDCC) = {
-    EVT_SET(LVar1, LVar0)
-    EVT_DIV(LVar1, 45)
-    EVT_CALL(TranslateModel, 157, 0, LVar1, 0)
-    EVT_CALL(RotateModel, 157, LVar0, 1, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(moveWalls_8024BE38) = {
-    EVT_IF_EQ(LVar0, 90)
-        EVT_CALL(EnableModel, 142, 0)
-    EVT_ELSE
-        EVT_CALL(EnableModel, 142, 1)
-    EVT_END_IF
-    EVT_SET(LVar1, LVar0)
-    EVT_DIV(LVar1, 45)
-    EVT_SET(LVar2, LVar0)
-    EVT_SUB(LVar2, -90)
-    EVT_DIV(LVar2, -90)
-    EVT_CALL(TranslateModel, 140, 0, LVar1, 0)
-    EVT_CALL(RotateModel, 140, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 138, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 137, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 136, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 135, LVar0, -1, 0, 0)
-    EVT_CALL(RotateModel, 143, LVar0, 1, 0, 0)
-    EVT_CALL(RotateModel, 142, LVar0, 1, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(toggleVis_8024BFDC) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetGroupEnabled, 127, 1)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetGroupEnabled, 127, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(toggleVis_8024C040) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_SWITCH(GB_StoryProgress)
-                EVT_CASE_LT(-66)
-                    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_017B, 160, 40)
-                    EVT_SET(LVar0, -1)
-                    EVT_RETURN
-                EVT_CASE_LT(-65)
-                    EVT_SET(LVar0, -1)
-                    EVT_RETURN
-            EVT_END_SWITCH
-            EVT_CALL(SetGroupEnabled, 82, 1)
-        EVT_CASE_EQ(2)
-            EVT_THREAD
-                EVT_WAIT(45)
-                EVT_CALL(SetNpcPos, 6, 33, 0, -375)
-                EVT_CALL(SetNpcYaw, 6, 180)
-            EVT_END_THREAD
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetGroupEnabled, 82, 0)
-            EVT_SET(AreaByte(4), 0)
-            EVT_SET(AreaByte(5), 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(toggleVis_8024C190) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetGroupEnabled, 156, 1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetGroupEnabled, 156, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(npcList_8024C200)[] = {
-    0x00000002, 0xFFFFFFFF,
-};
-
-s32 N(npcList_8024C208)[] = {
-    0x00000006, 0xFFFFFFFF,
-};
-
-s32 N(npcList_8024C210)[] = {
-    0x00000005, 0xFFFFFFFF,
-};
-
-EvtScript N(8024C218) = {
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BAA0)), EVT_PTR(N(moveWalls_8024BAD0)), EVT_PTR(N(dropDoor_8024BBB8)), EVT_PTR(N(toggleVis_8024BFDC)), 15, 16, 128, EVT_PTR(N(npcList_8024C200)))
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BC24)), EVT_PTR(N(moveWalls_8024BC54)), 0, EVT_PTR(N(toggleVis_8024C040)), 23, 24, 91, EVT_PTR(N(npcList_8024C208)))
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BD9C)), EVT_PTR(N(moveWalls_8024BE38)), EVT_PTR(N(dropDoor_8024BDCC)), EVT_PTR(N(toggleVis_8024C190)), 29, 30, 159, EVT_PTR(N(npcList_8024C210)))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(toggleVis_8024BFDC))
-    EVT_EXEC(N(toggleVis_8024C040))
-    EVT_EXEC(N(toggleVis_8024C190))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024C2EC) = {
-    EVT_LABEL(9)
-    EVT_CALL(MakeLerp, 10, -10, 30, 10)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, 34, LVar0, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(MakeLerp, -10, 10, 30, 10)
-    EVT_LABEL(11)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, 34, LVar0, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(11)
-    EVT_END_IF
-    EVT_GOTO(9)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024C41C) = {
-    EVT_CALL(SetGroupEnabled, 82, 1)
-    EVT_CALL(PlaySoundAtCollider, 23, 449, 0)
-    EVT_CALL(MakeLerp, 0, 100, 15, 4)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_EXEC(N(openDoor_8024BC24))
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024C4C8) = {
-    EVT_CALL(MakeLerp, 100, 0, 15, 4)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_EXEC(N(openDoor_8024BC24))
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, 23, 450, 0)
-    EVT_CALL(SetGroupEnabled, 82, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(pad_C574)[] = {
-    0x00000000, 0x00000000, 0x00000000,
-};
-
-EvtScript N(8024C580) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_CALL(N(dup_Pipe_GetEntryPos))
-    EVT_SUB(LVar2, 40)
-    EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(InterpPlayerYaw, LVar4, 0)
-    EVT_CALL(PlaySound, 355)
-    EVT_CALL(func_802D286C, 256)
-    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 5, 2, 1, 1, 0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_LOOP(40)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(3)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_THREAD
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar2, 3)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_2)), FALSE)
-            EVT_CALL(EnablePartnerAI)
-            EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_WAIT(2)
-    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 0, 0, 0, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_LABEL(0)
-    EVT_CALL(N(dup_Pipe_GetCurrentFloor))
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_EXEC(LVarA)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024C8D4) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, 0x7FFFFE00)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_CALL(N(dup_Pipe_GetEntryPos))
-    EVT_SET(LVar5, LVar1)
-    EVT_SET(LVar6, LVar2)
-    EVT_SET(LVar7, LVar3)
-    EVT_ADD(LVar2, 2)
-    EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(InterpPlayerYaw, LVar4, 0)
-    EVT_IF_EQ(LVar4, 90)
-        EVT_ADD(LVar5, 40)
-    EVT_ELSE
-        EVT_SUB(LVar5, 40)
-    EVT_END_IF
-    EVT_CALL(UseSettingsFrom, 0, LVar5, LVar6, LVar7)
-    EVT_CALL(SetPanTarget, 0, LVar5, LVar6, LVar7)
-    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVar0, 0)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(PlaySound, 355)
-    EVT_THREAD
-        EVT_WAIT(25)
-        EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(func_802D286C, 2304)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 3, 1, 1, 0)
-    EVT_LOOP(40)
-        EVT_CALL(N(dup_Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_THREAD
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar2, 3)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
-            EVT_CALL(EnablePartnerAI)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_WAIT(5)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, 1, LVarB, 0x7FFFFE00)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_EXEC(LVarA)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024CCC4) = {
-    EVT_CALL(N(dup_Pipe_AwaitDownInput))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetCurrentPartnerID, LVar1)
-        EVT_IF_NE(LVar1, 6)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(InterruptUsePartner)
-            EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(8024CDA0))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024CDA0) = {
-    EVT_CALL(N(dup_Pipe_SetAnimFlag))
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_SET(LVar0, LVarA)
-    EVT_CALL(N(dup_Pipe_GetEntryPos))
-    EVT_CALL(PlayerMoveTo, LVar1, LVar3, 3)
-    EVT_SET(LVar0, LVarA)
-    EVT_CALL(N(dup_Pipe_GetEntryPos))
-    EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(SetPlayerFlagBits, 2097152, 1)
-    EVT_CALL(N(dup_Pipe_GetCameraYaw))
-    EVT_CALL(InterpPlayerYaw, LVar0, 0)
-    EVT_WAIT(2)
-    EVT_CALL(SetPlayerFlagBits, 2097152, 0)
-    EVT_CALL(PlaySound, 355)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_WAIT(4)
-        EVT_LOOP(40)
-            EVT_SUB(LVar1, 1)
-            EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(func_802D286C, 2048)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 2, 1, 1, 0)
-    EVT_WAIT(25)
-    EVT_EXEC_WAIT(LVarC)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024CF7C) = {
-    EVT_CALL(IsPlayerOnValidFloor, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_EQ(LVar0, 26)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetCurrentPartner, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetCurrentPartnerID, LVar1)
-        EVT_IF_NE(LVar1, 6)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(InterruptUsePartner)
-            EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_END_IF
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(N(dup_Pipe_SetAnimFlag))
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, 0x7FFFFE00)
-    EVT_SET(LVar0, LVarA)
-    EVT_CALL(N(dup_Pipe_GetEntryPos))
-    EVT_SET(LVar5, LVar1)
-    EVT_SET(LVar6, LVar2)
-    EVT_ADD(LVar6, 2)
-    EVT_SET(LVar7, LVar3)
-    EVT_SET(LVar8, LVar4)
-    EVT_ADD(LVar8, 180)
-    EVT_IF_GE(LVar4, 360)
-        EVT_SUB(LVar4, 360)
-    EVT_END_IF
-    EVT_CALL(InterpPlayerYaw, LVar8, 1)
-    EVT_WAIT(1)
-    EVT_CALL(PlaySound, 355)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerPos, LVar0, LVar6, LVar7)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-    EVT_CALL(func_802D286C, 2048)
-    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 5, 3, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(3)
-        EVT_LOOP(40)
-            EVT_CALL(N(dup_Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
-            EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(25)
-    EVT_EXEC_WAIT(LVarC)
-    EVT_RETURN
-    EVT_END
-};
-
-extern const char N(dro_01_name_hack)[];
-
-EvtScript N(8024D2B0) = {
-    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
-    EVT_CALL(GotoMap, EVT_PTR(N(dro_01_name_hack)), 4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
-    EVT_IF_EQ(GF_DRO01_WarpPipe, 0)
-        EVT_IF_EQ(GF_TIK01_WarpPipes, 1)
-            EVT_CALL(GetEntryID, LVar0)
-            EVT_IF_NE(LVar0, 2)
-                EVT_SET(GF_DRO01_WarpPipe, 1)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(MakeEntity, &Entity_BlueWarpPipe, 430, 0, -120, 0, 2, EVT_PTR(N(8024D2B0)), 1939, MAKE_ENTITY_END)
-    EVT_RETURN
-    EVT_END
-};
-
-#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
-
-#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242730_95D930)) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
@@ -2054,7 +1242,7 @@ ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242784_95D984)) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_802477E4_9629E4) = evt_get_variable(script, *args++);
@@ -2064,7 +1252,7 @@ ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"
 
-ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242858_95DA58)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Unk_Struct_2* temp_s1 = (Unk_Struct_2*) evt_get_variable(script, *script->ptrReadPos);
     Unk_Struct_1* ptr;
@@ -2187,7 +1375,7 @@ ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/LetterDelivery.inc.c"
 
-ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80243084_95E284)) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->droTreeOrbitTime = playerData->frameCounter;
@@ -2218,7 +1406,7 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
     }
 }
 
-ApiStatus N(func_802431B4_95E3B4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802431B4_95E3B4)) {
     PlayerData* playerData = &gPlayerData;
     s32 val = (playerData->frameCounter - playerData->droTreeOrbitTime) / 3600;
 
@@ -2231,7 +1419,7 @@ ApiStatus N(func_802431B4_95E3B4)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802431FC_95E3FC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802431FC_95E3FC)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_safe(script->owner2.npcID);
     s32 rand;
@@ -2254,7 +1442,7 @@ ApiStatus N(func_802431FC_95E3FC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243350_95E550)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80243350_95E550)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     f32 var1 = evt_get_variable(script, *args++);
@@ -2271,7 +1459,3 @@ ApiStatus N(func_80243350_95E550)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 1;
     return ApiStatus_BLOCK;
 }
-
-const s32 N(pad_XXX)[] = { 0 };
-
-const char N(dro_01_name_hack)[] = "tik_01";

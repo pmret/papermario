@@ -4837,7 +4837,7 @@ enum EffectInstanceFlags {
     EFFECT_INSTANCE_FLAGS_2                 = 0x00000002,
     EFFECT_INSTANCE_FLAGS_4                 = 0x00000004,
     EFFECT_INSTANCE_FLAGS_8                 = 0x00000008,
-    EFFECT_INSTANCE_FLAGS_10                = 0x00000010,
+    EFFECT_INSTANCE_FLAGS_10                = 0x00000010, // mark ready for cleanup
     EFFECT_INSTANCE_FLAGS_20                = 0x00000020,
     EFFECT_INSTANCE_FLAGS_40                = 0x00000040,
     EFFECT_INSTANCE_FLAGS_80                = 0x00000080,

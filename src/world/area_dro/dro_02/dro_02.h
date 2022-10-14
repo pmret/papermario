@@ -51,8 +51,6 @@ extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_PlayRestMusic);
 extern EvtScript N(EVS_PlayMoustafaMusic);
 
-API_CALLABLE(InitVirtualEntityList);
-
 extern EvtScript N(EVS_SetupBuildings);
 extern EvtScript N(EVS_SetToadHouseDialogue);
 extern EvtScript N(8024D434);

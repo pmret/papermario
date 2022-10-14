@@ -32,5 +32,6 @@ extern EvtScript ExitDoubleDoor;
 extern EvtScript EnterDoubleDoor;
 extern EvtScript ExitSplitDoubleDoor;
 extern EvtScript EnterSplitDoubleDoor;
+extern EvtScript EnterPostPipe;
 
 #endif

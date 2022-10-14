@@ -194,6 +194,7 @@ ApiStatus EnablePartner(Evt* script, s32 isInitialCall);
 ApiStatus DisablePartner(Evt* script, s32 isInitialCall);
 ApiStatus UseEntryHeading(Evt* script, s32 isInitialCall);
 ApiStatus UseExitHeading(Evt* script, s32 isInitialCall);
+ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall);
 ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall);
 ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall);
 ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall);

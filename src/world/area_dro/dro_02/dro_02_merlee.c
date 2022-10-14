@@ -33,18 +33,18 @@ enum {
 enum {
     RITUAL_STATE_INIT           = 0,
     RITUAL_STATE_APPEAR         = 1,
-    RITUAL_STATE_2          = 2,
-    RITUAL_STATE_3          = 3,
-    RITUAL_STATE_4          = 4,
+    RITUAL_STATE_2              = 2,
+    RITUAL_STATE_3              = 3,
+    RITUAL_STATE_4              = 4,
     RITUAL_STATE_FLIP_LEFT      = 5,
     RITUAL_STATE_FLIP_MIDDLE    = 6,
     RITUAL_STATE_FLIP_RIGHT     = 7,
-    RITUAL_STATE_8          = 8,
-    RITUAL_STATE_9          = 9,
-    RITUAL_STATE_A          = 10,
-    RITUAL_STATE_B          = 11,
-    RITUAL_STATE_C          = 12,
-    RITUAL_STATE_D          = 13,
+    RITUAL_STATE_8              = 8,
+    RITUAL_STATE_9              = 9,
+    RITUAL_STATE_A              = 10,
+    RITUAL_STATE_B              = 11,
+    RITUAL_STATE_C              = 12,
+    RITUAL_STATE_D              = 13,
 };
 
 static RitualCard N(RitualCards)[3];
@@ -550,7 +550,7 @@ void N(card_worker_update)(void) {
                 sfx_play_sound(SOUND_206);
 
                 for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
-                    N(D_8024EF90)[j]->flags |= 0x10;
+                    N(D_8024EF90)[j]->flags |= EFFECT_INSTANCE_FLAGS_10;
                 }
             }
             break;
