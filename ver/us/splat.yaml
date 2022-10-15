@@ -147,7 +147,7 @@ segments:
     - [0x3CCD0, hasm, os/osWritebackDCacheAll]
     - [0x3CD00, c, os/contquery, gcc_272 -O3]
     - [0x3CDA0, c, os/contreaddata, gcc_272 -O3]
-    - [0x3CF80, c, os/controller]
+    - [0x3CF80, c, os/controller, gcc_272 -O3]
     - [0x3D290, c, os/osVirtualToPhysical, gcc_272 -O3]
     - [0x3D2F0, c, os/sqrtf, -ffast-math]
     - [0x3D300, c, os/coss, gcc_272 -O3]

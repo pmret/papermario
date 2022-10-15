@@ -1,10 +1,101 @@
 #include "ultra64.h"
-#include "include_asm.h"
+#include "macros.h"
+#include "PR/siint.h"
+#include "PR/os_internal.h"
+#include "controller.h"
 
-u32 __osContinitialized = 0;
+s32 __osContinitialized = 0;
 
-INCLUDE_ASM(s32, "os/controller", osContInit, OSMesgQueue* arg0, u8* arg1, OSContStatus* arg2);
+OSPifRam __osContPifRam ALIGNED(16);
+u8 __osContLastCmd;
+u8 __osMaxControllers;
 
-INCLUDE_ASM(s32, "os/controller", osContGetInitData);
+OSTimer __osEepromTimer;
+OSMesgQueue __osEepromTimerQ ALIGNED(8);
+OSMesg __osEepromTimerMsg;
 
-INCLUDE_ASM(s32, "os/controller", osPackRequestData);
+s32 osContInit(OSMesgQueue* mq, u8* bitpattern, OSContStatus* data) {
+    OSMesg dummy;
+    s32 ret = 0;
+    OSTime t;
+    OSTimer mytimer;
+    OSMesgQueue timerMesgQueue;
+
+    if (__osContinitialized != 0) {
+        return 0;
+    }
+
+    __osContinitialized = 1;
+
+    t = osGetTime();
+    if (t < OS_USEC_TO_CYCLES(500000)) {
+        osCreateMesgQueue(&timerMesgQueue, &dummy, 1);
+        osSetTimer(&mytimer, OS_USEC_TO_CYCLES(500000) - t, 0, &timerMesgQueue, &dummy);
+        osRecvMesg(&timerMesgQueue, &dummy, OS_MESG_BLOCK);
+    }
+
+    __osMaxControllers = 4;
+
+    __osPackRequestData(CONT_CMD_REQUEST_STATUS);
+
+    ret = __osSiRawStartDma(OS_WRITE, __osContPifRam.ramarray);
+    osRecvMesg(mq, &dummy, OS_MESG_BLOCK);
+
+    ret = __osSiRawStartDma(OS_READ, __osContPifRam.ramarray);
+    osRecvMesg(mq, &dummy, OS_MESG_BLOCK);
+
+    __osContGetInitData(bitpattern, data);
+    __osContLastCmd = CONT_CMD_REQUEST_STATUS;
+    __osSiCreateAccessQueue();
+    osCreateMesgQueue(&__osEepromTimerQ, &__osEepromTimerMsg, 1);
+
+    return ret;
+}
+
+void __osContGetInitData(u8* pattern, OSContStatus* data) {
+    u8* ptr;
+    __OSContRequesFormat requestHeader;
+    s32 i;
+    u8 bits;
+
+    bits = 0;
+    ptr = (u8*) __osContPifRam.ramarray;
+    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(requestHeader), data++) {
+        requestHeader = *(__OSContRequesFormat*)ptr;
+        data->errno = CHNL_ERR(requestHeader);
+        if (data->errno == 0) {
+            data->type = requestHeader.typel << 8 | requestHeader.typeh;
+            data->status = requestHeader.status;
+
+            bits |= 1 << i;
+        }
+    }
+    *pattern = bits;
+}
+
+void __osPackRequestData(u8 cmd) {
+    u8* ptr;
+    __OSContRequesFormat requestHeader;
+    s32 i;
+
+    for (i = 0; i < ARRLEN(__osContPifRam.ramarray); i++) {
+        __osContPifRam.ramarray[i] = 0;
+    }
+
+    __osContPifRam.pifstatus = CONT_CMD_EXE;
+    ptr = (u8*) __osContPifRam.ramarray;
+    requestHeader.dummy = CONT_CMD_NOP;
+    requestHeader.txsize = CONT_CMD_RESET_TX;
+    requestHeader.rxsize = CONT_CMD_RESET_RX;
+    requestHeader.cmd = cmd;
+    requestHeader.typeh = CONT_CMD_NOP;
+    requestHeader.typel = CONT_CMD_NOP;
+    requestHeader.status = CONT_CMD_NOP;
+    requestHeader.dummy1 = CONT_CMD_NOP;
+
+    for (i = 0; i < __osMaxControllers; i++) {
+        *(__OSContRequesFormat*)ptr = requestHeader;
+        ptr += sizeof(requestHeader);
+    }
+    *ptr = CONT_CMD_END;
+}

@@ -94,7 +94,7 @@ dlabel nuGfxTaskSpool
 dlabel __osContLastCmd
 .space 4
 
-dlabel D_8009A620
+dlabel __osEepromTimerMsg
 .space 4
 
 dlabel D_8009A624
@@ -1009,7 +1009,7 @@ dlabel D_800DAABC
 dlabel D_800DAABD
 .space 3
 
-dlabel D_800DAAC0
+dlabel __osEepromTimerQ
 .space 0x00000018
 
 dlabel nuContPfs
