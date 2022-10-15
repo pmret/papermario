@@ -1,5 +1,12 @@
 #include "PR/osint.h"
 
+OSTimer *__osTimerList = &__osBaseTimer;
+OSTimer __osBaseTimer;
+OSTime __osCurrentTime;
+u32 __osBaseCounter;
+u32 __osViIntrCount;
+u32 __osTimerCounter;
+
 void __osTimerServicesInit(void) {
     __osCurrentTime = 0;
     __osBaseCounter = 0;

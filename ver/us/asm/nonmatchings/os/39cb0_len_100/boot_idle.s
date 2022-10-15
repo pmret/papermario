@@ -5,9 +5,9 @@ glabel boot_idle
 /* 39D0C 8005E90C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 39D10 8005E910 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 39D14 8005E914 AFB00018 */  sw        $s0, 0x18($sp)
-/* 39D18 8005E918 3C01800A */  lui       $at, %hi(D_8009A630)
+/* 39D18 8005E918 3C01800A */  lui       $at, %hi(nuIdleFunc)
 /* 39D1C 8005E91C 0C017D14 */  jal       nuPiInit
-/* 39D20 8005E920 AC20A630 */   sw       $zero, %lo(D_8009A630)($at)
+/* 39D20 8005E920 AC20A630 */   sw       $zero, %lo(nuIdleFunc)($at)
 /* 39D24 8005E924 24040002 */  addiu     $a0, $zero, 2
 /* 39D28 8005E928 0C017A6C */  jal       nuScCreateScheduler
 /* 39D2C 8005E92C 24050001 */   addiu    $a1, $zero, 1
@@ -33,8 +33,8 @@ glabel boot_idle
 /* 39D7C 8005E97C 0C0197D4 */  jal       osSetThreadPri
 /* 39D80 8005E980 0000282D */   daddu    $a1, $zero, $zero
 .L8005E984:
-/* 39D84 8005E984 3C02800A */  lui       $v0, %hi(D_8009A630)
-/* 39D88 8005E988 8C42A630 */  lw        $v0, %lo(D_8009A630)($v0)
+/* 39D84 8005E984 3C02800A */  lui       $v0, %hi(nuIdleFunc)
+/* 39D88 8005E988 8C42A630 */  lw        $v0, %lo(nuIdleFunc)($v0)
 .L8005E98C:
 /* 39D8C 8005E98C 1040FFFF */  beqz      $v0, .L8005E98C
 /* 39D90 8005E990 00000000 */   nop

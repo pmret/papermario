@@ -106,7 +106,7 @@ dlabel gAuAmbienceManager
 dlabel __osTimerCounter
 .space 4
 
-dlabel D_8009A630
+dlabel nuIdleFunc
 .space 4
 
 dlabel gCurrentCamID
@@ -694,31 +694,34 @@ dlabel siAccessBuf
 dlabel D_800AF904
 .space 0x0000000c
 
-dlabel D_800AF910
+dlabel retrace
 .space 4
 
 dlabel D_800AF914
 .space 4
 
-dlabel D_800AF918
+dlabel viThread
 .space 4
 
 dlabel D_800AF91C
-.space 0x000011b4
+.space 0x1B4
 
-dlabel D_800B0AD0
+dlabel viThreadStack
+.space 0x1000
+
+dlabel viEventQueue
 .space 4
 
 dlabel D_800B0AD4
 .space 0x00000014
 
-dlabel D_800B0AE8
+dlabel viEventBuf
 .space 4
 
 dlabel D_800B0AEC
 .space 0x00000014
 
-dlabel D_800B0B00
+dlabel viRetraceMsg
 .space 2
 
 dlabel D_800B0B02
@@ -730,7 +733,7 @@ dlabel D_800B0B04
 dlabel D_800B0B08
 .space 0x00000010
 
-dlabel D_800B0B18
+dlabel viCounterMsg
 .space 2
 
 dlabel D_800B0B1A
@@ -944,7 +947,10 @@ dlabel wMapHitName
 .space 0x00000018
 
 dlabel nuSiMgrMesgQ
-.space 0x00000038
+.space 0x00000018
+
+dlabel __osBaseTimer
+.space 0x20
 
 dlabel wMapShapeName
 .space 0x00000018

@@ -196,7 +196,8 @@ segments:
     - [0x41DB0, c, os/vigetcurrframebuf, gcc_272 -O3]
     - [0x41DF0, c, os/vigetnextframebuf, gcc_272 -O3]
     - [0x41E30, c, os/vigetmode, gcc_272 -O3]
-    - [0x41E70, c, os/vimgr]
+    - [0x41E70, c, os/vimgr, gcc_272 -O3]
+    - [0x421B0, c, os/vitbl, gcc_272 -O3]
     - [0x421B0, c, os/visetevent, gcc_272 -O3]
     - [0x42210, c, os/visetmode, gcc_272 -O3]
     - [0x42260, c, os/visetspecial, gcc_272 -O3]
@@ -354,7 +355,10 @@ segments:
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/setthreadpri]
-    - [0x6FA70, data] # libultra data
+    - [0x6FA70, .data, os/timerintr] # libultra data
+    - [auto, .data, os/vimgr]
+    - [auto, .data, os/vitbl]
+    - [0x70C20, data, 70C20]
     - [0x70E30, .data, battle/battle]
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
