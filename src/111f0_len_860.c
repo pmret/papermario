@@ -3,6 +3,7 @@
 
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
+s32 update_exit_map_screen_overlay(s16* progress);
 
 void set_map_change_fade_rate(s16 fadeRate) {
     gMapTransitionFadeRate = fadeRate;

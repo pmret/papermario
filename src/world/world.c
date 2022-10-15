@@ -12,10 +12,10 @@
 s32 D_8008FF60[] = { 0, 1, 2, 3 };
 
 // bss
-extern MapSettings gMapSettings;
-extern MapConfig* gMapConfig;
+MapSettings gMapSettings;
+MapConfig* gMapConfig;
 
-extern s32 D_800D9668;
+extern char wMapBgName[];
 
 typedef struct {
     /* 0x00 */ char name[16];
@@ -23,6 +23,9 @@ typedef struct {
     /* 0x14 */ u32 compressedLength;
     /* 0x18 */ u32 decompressedLength;
 } AssetHeader; // size = 0x1C
+
+void fio_deserialize_state(void);
+void load_map_hit_asset(void);
 
 void load_map_script_lib(void) {
     dma_copy((u8 *) &world_script_api_ROM_START, (u8 *) &world_script_api_ROM_END, &world_script_api_VRAM);
@@ -64,15 +67,15 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     mapConfig = &gAreas[areaID].maps[mapID];
 
-    sprintf(&wMapShapeName, "%s_shape", mapConfig->id);
-    sprintf(&wMapHitName, "%s_hit", mapConfig->id);
+    sprintf(wMapShapeName, "%s_shape", mapConfig->id);
+    sprintf(wMapHitName, "%s_hit", mapConfig->id);
     strcpy(texStr, mapConfig->id);
     texStr[3] = '\0';
-    sprintf(&wMapTexName, "%s_tex", texStr);
+    sprintf(wMapTexName, "%s_tex", texStr);
 
     gMapConfig = mapConfig;
     if (mapConfig->bgName != NULL) {
-        strcpy(&D_800D9668, mapConfig->bgName);
+        strcpy(wMapBgName, mapConfig->bgName);
     }
     load_map_script_lib();
 
@@ -89,7 +92,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
-        s32 yay0Asset = load_asset_by_name(&wMapShapeName, &decompressedSize);
+        void* yay0Asset = load_asset_by_name(wMapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);
@@ -101,7 +104,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     if (mapConfig->bgName != NULL) {
-        load_map_bg(&D_800D9668);
+        load_map_bg(wMapBgName);
     }
 
     func_8002D160();
@@ -145,7 +148,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
-        s32 thing = get_asset_offset(&wMapTexName, &decompressedSize);
+        s32 thing = get_asset_offset(wMapTexName, &decompressedSize);
 
         if (mapSettings->modelTreeRoot != NULL) {
             load_data_for_models(mapSettings->modelTreeRoot, thing, decompressedSize);

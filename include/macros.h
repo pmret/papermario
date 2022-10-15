@@ -12,6 +12,7 @@
 #define TRANSPARENT_UNION
 #endif
 
+#define ALIGNED(x) __attribute__((aligned(x)))
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 

@@ -95,8 +95,8 @@
 
 extern OSDevMgr __osPiDevMgr;
 extern OSPiHandle *__osCurrentHandle[2];
-extern OSPiHandle CartRomHandle;
-extern OSPiHandle LeoDiskHandle;
+extern OSPiHandle __Dom1SpeedParam;
+extern OSPiHandle __Dom2SpeedParam;
 extern OSMesgQueue __osPiAccessQueue;
 extern u32 __osPiAccessQueueEnabled;
 
@@ -105,6 +105,9 @@ void __osDevMgrMain(void *);
 void __osPiCreateAccessQueue(void);
 void __osPiRelAccess(void);
 void __osPiGetAccess(void);
+s32 __osPiRawStartDma(s32, u32 , void *, u32 );
+s32 __osPiRawWriteIo(u32, u32);
+s32 __osPiRawReadIo(u32, u32 *);
 s32 __osEPiRawWriteIo(OSPiHandle *, u32 , u32);
 s32 __osEPiRawReadIo(OSPiHandle *, u32 , u32 *);
 s32 __osEPiRawStartDma(OSPiHandle *, s32 , u32 , void *, u32 );

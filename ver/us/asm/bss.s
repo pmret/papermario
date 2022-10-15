@@ -94,7 +94,7 @@ dlabel nuGfxTaskSpool
 dlabel __osContLastCmd
 .space 4
 
-dlabel D_8009A620
+dlabel __osEepromTimerMsg
 .space 4
 
 dlabel D_8009A624
@@ -106,7 +106,7 @@ dlabel gAuAmbienceManager
 dlabel __osTimerCounter
 .space 4
 
-dlabel D_8009A630
+dlabel nuIdleFunc
 .space 4
 
 dlabel gCurrentCamID
@@ -661,16 +661,19 @@ dlabel nuContDataMutexBuf
 dlabel D_800AC6D8
 .space 8
 
-dlabel piMgrThread
-.space 0x000011b0
+dlabel piThread
+.space 0x1B0
 
-dlabel __osPiMesgQueue
+dlabel piThreadStack
+.space 0x1000
+
+dlabel piEventQueue
 .space 4
 
 dlabel D_800AF890
 .space 0x00000014
 
-dlabel piMgrMesgBuff
+dlabel piEventBuf
 .space 4
 
 dlabel D_800AF8AC
@@ -691,31 +694,34 @@ dlabel siAccessBuf
 dlabel D_800AF904
 .space 0x0000000c
 
-dlabel D_800AF910
+dlabel retrace
 .space 4
 
 dlabel D_800AF914
 .space 4
 
-dlabel D_800AF918
+dlabel viThread
 .space 4
 
 dlabel D_800AF91C
-.space 0x000011b4
+.space 0x1B4
 
-dlabel D_800B0AD0
+dlabel viThreadStack
+.space 0x1000
+
+dlabel viEventQueue
 .space 4
 
 dlabel D_800B0AD4
 .space 0x00000014
 
-dlabel D_800B0AE8
+dlabel viEventBuf
 .space 4
 
 dlabel D_800B0AEC
 .space 0x00000014
 
-dlabel D_800B0B00
+dlabel viRetraceMsg
 .space 2
 
 dlabel D_800B0B02
@@ -727,7 +733,7 @@ dlabel D_800B0B04
 dlabel D_800B0B08
 .space 0x00000010
 
-dlabel D_800B0B18
+dlabel viCounterMsg
 .space 2
 
 dlabel D_800B0B1A
@@ -739,7 +745,7 @@ dlabel D_800B0B1C
 dlabel D_800B0B20
 .space 0x00000010
 
-dlabel D_800B0B30
+dlabel __MotorDataBuf
 .space 4
 
 dlabel D_800B0B34
@@ -817,7 +823,7 @@ dlabel D_800B0F0C
 dlabel gCurrentEncounter
 .space 0x00000bf8
 
-dlabel LeoDiskHandle
+dlabel __Dom2SpeedParam
 .space 4
 
 dlabel D_800B1B0C
@@ -865,7 +871,7 @@ dlabel nuGfxMesgQ
 dlabel D_800B42F4
 .space 0x00000014
 
-dlabel D_800B4308
+dlabel __CartRomHandle
 .space 4
 
 dlabel D_800B430C
@@ -904,7 +910,7 @@ dlabel D_800B4384
 dlabel gEffectInstances
 .space 0x00000180
 
-dlabel CartRomHandle
+dlabel __Dom1SpeedParam
 .space 4
 
 dlabel D_800B451C
@@ -941,7 +947,10 @@ dlabel wMapHitName
 .space 0x00000018
 
 dlabel nuSiMgrMesgQ
-.space 0x00000038
+.space 0x00000018
+
+dlabel __osBaseTimer
+.space 0x20
 
 dlabel wMapShapeName
 .space 0x00000018
@@ -958,7 +967,7 @@ dlabel D_800D95E8
 dlabel D_800D9620
 .space 0x00000048
 
-dlabel D_800D9668
+dlabel wMapBgName
 .space 0x00000018
 
 dlabel __osPfsInodeCache
@@ -1009,7 +1018,7 @@ dlabel D_800DAABC
 dlabel D_800DAABD
 .space 3
 
-dlabel D_800DAAC0
+dlabel __osEepromTimerQ
 .space 0x00000018
 
 dlabel nuContPfs

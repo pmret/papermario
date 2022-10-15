@@ -2,85 +2,6 @@
 #include "partners.h"
 #include "macros.h"
 
-extern s32 D_8010CD20;
-
-// BSS
-BSS s32 D_8010CD34;
-BSS PlayerPathElement gPlayerMoveHistory[40];
-BSS s32 gPlayerMoveHistoryIndex;
-BSS s32 D_8010CFBC;
-BSS f32 wPartnerTetherDistance;
-BSS s32 D_8010CFC4;
-BSS s16 wPartnerFollowState;
-BSS s16 D_8010CFCA;
-BSS s16 D_8010CFCC;
-BSS s16 D_8010CFCE;
-BSS s32 wPartnerNpcIndex;
-BSS Evt* wPartnerCurrentScript;
-BSS s32 wCurrentPartnerId;
-BSS s32 wPartnerCurrentScriptID;
-BSS s32 D_8010CFE0;
-BSS s32 D_8010CFE4;
-BSS s32 D_8010CFE8;
-BSS WorldPartner* wPartner;
-BSS s32 D_8010CFF0;
-BSS s32 D_8010CFF4;
-BSS char D_8010CFF8[0x8];
-BSS s32 D_8010D000;
-BSS char D_8010D004[0x63C];
-BSS s32 D_8010D640;
-BSS s32 D_8010D644;
-BSS s32 D_8010D648;
-BSS s32 D_8010D64C;
-BSS s32 D_8010D650;
-BSS s8 D_8010D654;
-BSS s8 D_8010D655;
-BSS s16 D_8010D656;
-BSS s16 D_8010D658;
-BSS s16 D_8010D65A;
-BSS s32 D_8010D65C;
-BSS s32 D_8010D660;
-BSS s32 D_8010D664;
-BSS s32 D_8010D668;
-BSS s32 D_8010D66C;
-BSS s32 D_8010D670;
-BSS s32 D_8010D674;
-BSS s32 D_8010D678;
-BSS s16 D_8010D67C;
-BSS s16 D_8010D67E;
-BSS s16 D_8010D680;
-BSS s16 D_8010D682;
-BSS s16 D_8010D684;
-BSS s16 D_8010D686;
-BSS s16 D_8010D688;
-BSS s16 D_8010D68A;
-BSS s16 D_8010D68C;
-BSS s8 D_8010D68E;
-BSS s8 D_8010D68F;
-BSS s8 D_8010D690;
-BSS s8 D_8010D691;
-BSS s8 D_8010D692;
-BSS s8 D_8010D693;
-BSS s32 D_8010D694;
-BSS s8 D_8010D698;
-BSS s8 D_8010D699;
-BSS s16 D_8010D69A;
-BSS s32 gPopupMenu;
-BSS s32 D_8010D6A0;
-BSS s32 D_8010D6A4;
-BSS char D_8010D6A8[0x8];
-BSS char D_8010D6B0[0x1500];
-BSS PartnerActionStatus gPartnerActionStatus;
-BSS char gSpinHistoryPosY[0x18];
-BSS char gSpinHistoryPosX[0x18];
-BSS char gSpinHistoryPosZ[0x18];
-BSS UiStatus gUIStatus;
-BSS PlayerStatus gPlayerStatus;
-BSS PlayerSpinState gPlayerSpinState;
-BSS s8 D_8010F284[0xC];
-BSS PlayerData gPlayerData;
-BSS s8 gSpinHistoryPosAngle[0x18];
-
 #include "ld_addrs.h"
 #include "npc.h"
 #include "hud_element.h"
@@ -117,6 +38,28 @@ BSS s8 gSpinHistoryPosAngle[0x18];
 
 #include "partner/twink.h"
 #include "sprite/npc/Twink.h"
+
+extern s32 D_8010CD20;
+
+// BSS
+BSS s32 D_8010CD34;
+BSS PlayerPathElement gPlayerMoveHistory[40];
+BSS s32 gPlayerMoveHistoryIndex;
+BSS s32 D_8010CFBC;
+extern f32 wPartnerTetherDistance;
+extern s32 D_8010CFC4;
+extern s16 wPartnerFollowState;
+extern s16 D_8010CFCA;
+extern s16 D_8010CFCC;
+extern s16 D_8010CFCE;
+extern s32 wPartnerNpcIndex;
+extern Evt* wPartnerCurrentScript;
+extern s32 wCurrentPartnerId;
+extern s32 wPartnerCurrentScriptID;
+extern s32 D_8010CFE0;
+extern s32 D_8010CFE4;
+extern s32 D_8010CFE8;
+extern WorldPartner* wPartner;
 
 extern HudScript HES_Partner0;
 extern HudScript HES_Goombario;
@@ -168,7 +111,6 @@ extern HudScript HES_StatusSPIncrement5;
 extern HudScript HES_StatusSPIncrement6;
 extern HudScript HES_StatusSPIncrement7;
 
-extern s32 D_802C0000;
 extern EvtScript EVS_World_UseItem;
 
 s32 partner_is_idle(Npc* partner);
@@ -196,10 +138,13 @@ HudScript* DigitHudScripts[] = {
 };
 HudScript* TimesHudScript = &HES_StatusTimes;
 HudScript* SlashHudScript = &HES_StatusSlash;
-HudScript* SPIncrementHudScripts[] = { &HES_StatusSPIncrement1, &HES_StatusSPIncrement3, &HES_StatusSPIncrement2,
-    &HES_StatusSPIncrement4, &HES_StatusSPIncrement5, &HES_StatusSPIncrement6, &HES_StatusSPIncrement7 };
+HudScript* SPIncrementHudScripts[] = {
+    &HES_StatusSPIncrement1, &HES_StatusSPIncrement3, &HES_StatusSPIncrement2,
+    &HES_StatusSPIncrement4, &HES_StatusSPIncrement5, &HES_StatusSPIncrement6, &HES_StatusSPIncrement7
+};
 HudScript* SPStarHudScripts[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_StatusStar2, &HES_StatusStar4,
-    &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7 };
+    &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7
+};
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;
@@ -948,8 +893,6 @@ void _use_partner_ability(void) {
             break;
     }
 }
-
-static const f32 rodata_padding = 0.0f;
 
 void switch_to_partner(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;

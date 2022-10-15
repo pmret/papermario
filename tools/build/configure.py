@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
-    cflags = f"-c -G0 -O2 -x c -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -398,6 +398,8 @@ class Configure:
                     )
                 # Not dead cod
                 else:
+                    if seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                        cflags += " -fno-common"
                     build(entry.object_path, entry.src_paths, task, variables={
                         "cflags": cflags,
                         "cppflags": f"-DVERSION_{self.version.upper()}",

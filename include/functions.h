@@ -374,7 +374,6 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
-s32 func_80265D44(s32 animID);
 void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
@@ -494,7 +493,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 create_generic_entity_frontUI(s32 (*updateFunc)(void), void (*drawFunc)(void));
+s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 DynamicEntity* get_generic_entity(s32 idx);
 Trigger* bind_trigger_1(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
@@ -669,6 +668,7 @@ s32 find_item(s32);
 void enable_background_wave(void);
 
 void set_map_change_fade_rate(s16);
+void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType);
 
 // State funcs
 void state_init_startup(void);
@@ -854,6 +854,7 @@ void func_8024E60C(void);
 void dispatch_event_actor(Actor*, s32);
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
 
+void reset_battle_status(void);
 void btl_show_variable_battle_message(s32, s32, s32);
 s32 btl_is_popup_displayed(void);
 void btl_cam_use_preset_immediately(s32);
@@ -889,6 +890,8 @@ void func_800EFD08(void);
 void check_input_open_menus(void);
 void check_input_status_menu(void);
 
+void update_player(void);
+
 void enforce_hpfp_limits(void);
 s32 should_collider_allow_interact(s32);
 void show_coin_counter(void);
@@ -898,6 +901,8 @@ void hide_coin_counter_immediately(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void reset_player_status(void);
+void player_reset_data(void);
+void partner_reset_data(void);
 s32 has_valid_conversation_npc(void);
 s32 func_800E06D8(void);
 void func_800E4F10(void);

@@ -1,10 +1,10 @@
 #include "osr_01.h"
 
-extern s8 D_800D9668;
+extern s8 wMapBgName;
 
 ApiStatus func_80240000_AAFFF0(Evt* script, s32 isInitialCall) {
     if (gGameStatusPtr->entryID == 3) {
-        sprintf(&D_800D9668, "hos_bg");
+        sprintf(&wMapBgName, "hos_bg");
     }
     return ApiStatus_BLOCK;
 }

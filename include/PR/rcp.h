@@ -594,6 +594,13 @@ The Indy development board use cartridge domain 1:
 #define VI_CTRL_DIVOT_ON	 0x00010    /* Bit 4: default = on */
 #define VI_CTRL_SERRATE_ON	 0x00040    /* Bit 6: on if interlaced */
 #define VI_CTRL_ANTIALIAS_MASK	 0x00300    /* Bit [9:8] anti-alias mode */
+#define VI_CTRL_ANTIALIAS_MODE_1    0x00100 /* Bit [9:8] anti-alias mode */
+#define VI_CTRL_ANTIALIAS_MODE_2    0x00200 /* Bit [9:8] anti-alias mode */
+#define VI_CTRL_ANTIALIAS_MODE_3    0x00300 /* Bit [9:8] anti-alias mode */
+#define VI_CTRL_PIXEL_ADV_MASK      0x01000 /* [15:12] pixel advance mode? */
+#define VI_CTRL_PIXEL_ADV_1         0x01000 /* Bit [15:12] pixel advance mode? */
+#define VI_CTRL_PIXEL_ADV_2         0x02000 /* Bit [15:12] pixel advance mode? */
+#define VI_CTRL_PIXEL_ADV_3         0x03000 /* Bit [15:12] pixel advance mode? */
 #define VI_CTRL_DITHER_FILTER_ON 0x10000    /* Bit 16: dither-filter mode */
 
 /*

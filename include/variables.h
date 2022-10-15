@@ -130,7 +130,7 @@ extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
-extern s32 wMapTexName;
+extern char wMapTexName[];
 extern char wMapHitName[];
 extern char wMapShapeName[];
 extern struct ModelNode* D_80210000;
