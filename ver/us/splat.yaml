@@ -8130,13 +8130,13 @@ segments:
     start: 0x8ABF90
     vram: 0x80240000
     subsegments:
-    - [0x8ABF90, c]
-    - [0x8ACD00, data]
-    - [0x8ACDB0, data]
-    - [0x8ACFE0, data]
-    - [0x8AEC40, data]
-    - [0x8B0010, data]
-    - [0x8B0060]
+    - [0x8ABF90, c, kmr_00_0_header]
+    - [0x8ABF90, c, kmr_00_1_music]
+    - [0x8ABF90, c, kmr_00_2_main]
+    - [0x8ABF90, c, kmr_00_3_revival]
+    - [0x8ACC40, c, kmr_00_4_npc]
+    - [0x8ACC40, c, kmr_00_5_entity]
+    - [0x8ACD00]
   - name: kmr_02
     dir: world/area_kmr/kmr_02
     type: code
@@ -8163,38 +8163,51 @@ segments:
     start: 0x8C7F90
     vram: 0x80240000
     subsegments:
-    - [0x8C7F90, c]
-    - [0x8C8140, c]
-    - [0x8C82B0, c]
-    - [0x8C83A0, c]
-    - [0x8C85E0, c]
-    - [0x8C85E0]
+    - [0x8C7F90, c, kmr_03_0_header]
+    - [0x8C7F90, c, kmr_03_1_music]
+    - [0x8C7F90, c, kmr_03_2_main]
+    - [0x8C7F90, c, kmr_03_3_npc]
+    - [0x8C82B0, c, kmr_03_4_entity]
+    - [0x8C83A0, c, kmr_03_5_foliage]
+    - [0x8C85E0, c, kmr_03_6_fall_down]
+    - [0x8C8680]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
     start: 0x8CA900
     vram: 0x80240000
     subsegments:
-    - [0x8CA900, c]
-    - [0x8CA960, c]
-    - [0x8CAD70, data]
-    - [0x8CAF00, data]
-    - [0x8CB160, data]
-    - [0x8CC4F0, data]
-    - [0x8CE060]
+    - [0x8CA900, c, kmr_04_0_header]
+    - [0x8CA900, c, kmr_04_1_music]
+    - [0x8CA900, c, kmr_04_2_main]
+    - [0x8CA900, c, kmr_04_3_npc]
+    - [0x8CA960, c, kmr_04_4_entity]
+    - [0x8CA960, c, kmr_04_5_foliage]
+    - [0x8CAD70, .data, kmr_04_0_header]
+    - [0x8CAE60, .data, kmr_04_1_music]
+    - [0x8CAF00, .data, kmr_04_2_main]
+    - [0x8CB160, .data, kmr_04_3_npc]
+    - [0x8CC380, .data, kmr_04_4_entity]
+    - start: 0x8CC4F0
+      type: .data
+      name: kmr_04_5_foliage
+      subsegments:
+      - [0x8CC4F0, ci4, hammer_block_message, 48, 48]
+      - [0x8CC970, palette, hammer_block_message]
+      - [0x8CC990]
   - name: kmr_05
     dir: world/area_kmr/kmr_05
     type: code
     start: 0x8CE070
     vram: 0x80240000
     subsegments:
-    - [0x8CE070, c]
-    - [0x8CF570, c]
-    - [0x8CF7F0, data]
-    - [0x8CF880, data]
-    - [0x8D0900, data]
-    - [0x8D0940, data]
-    - [0x8D14A0]
+    - [0x8CE070, c, kmr_05_0_header]
+    - [0x8CE070, c, kmr_05_1_music]
+    - [0x8CE070, c, kmr_05_2_main]
+    - [0x8CE070, c, kmr_05_3_npc]
+    - [0x8CF570, c, kmr_05_4_entity]
+    - [0x8CF570, c, kmr_05_5_foliage]
+    - [0x8CF7F0]
   - name: kmr_06
     dir: world/area_kmr/kmr_06
     type: code

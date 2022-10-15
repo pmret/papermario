@@ -2,20 +2,32 @@
 /// @brief Goomba Region - Bottom of the Cliff
 
 #include "common.h"
-#include "../kmr.h"
 #include "message_ids.h"
 #include "map.h"
+
 #include "../kmr.h"
+#include "mapfs/kmr_03_shape.h"
+#include "mapfs/kmr_03_hit.h"
+
+#include "sprite/npc/Goompa.h"
+
+enum {
+	NPC_Goompa                  = 0,
+};
+
+enum {
+    MV_Unk_00               = MapVar(0),
+};
+
+enum {
+    MF_Unk_0A               = MapFlag(10),
+};
 
 #define NAMESPACE kmr_03
 
-ApiStatus N(UnkPositionFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(ChangeNpcToPartner)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80241450);
-extern EvtScript N(802422B8);
-extern EvtScript N(80242340);
-extern EvtScript N(802406C0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_Scene_FallingDown);
+extern NpcGroupList N(DefaultNPCs);

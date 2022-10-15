@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802403E0_8CACE0
+glabel SetMessageImage_HammerBlock
 /* 8CACE0 802403E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8CACE4 802403E4 3C048024 */  lui       $a0, %hi(kmr_04_80243770)
 /* 8CACE8 802403E8 24843770 */  addiu     $a0, $a0, %lo(kmr_04_80243770)
