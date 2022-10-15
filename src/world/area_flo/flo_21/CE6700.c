@@ -1421,9 +1421,9 @@ NpcGroupList N(npcGroupList_80245AEC) = {
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-EffectInstance* fx_sun();
+EffectInstance* fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(func_80240B00_CE7200)(Evt* script, s32 isInitialCall) {
-    fx_sun(1, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

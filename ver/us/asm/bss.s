@@ -967,7 +967,7 @@ dlabel D_800D95E8
 dlabel D_800D9620
 .space 0x00000048
 
-dlabel D_800D9668
+dlabel wMapBgName
 .space 0x00000018
 
 dlabel __osPfsInodeCache

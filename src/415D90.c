@@ -376,6 +376,7 @@ BSS s32 D_802AD6D4;
 
 void func_800F513C(PopupMenu* popup);
 
+s32 func_80265D44(s32 animID);
 void func_802A3C98(s32 x, s32 y);
 void func_802A43DC(s32 arg0, s32 x, s32 y);
 void func_802A4448(s32 arg0, s32 x, s32 y);

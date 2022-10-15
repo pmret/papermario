@@ -1,10 +1,10 @@
 #include "kkj_14.h"
 
-extern char D_800D9668[];
+extern char wMapBgName[];
 
 ApiStatus func_80240000_ADAEA0(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(NULL, GB_StoryProgress) == -128) {
-        sprintf(D_800D9668, "nok_bg");
+        sprintf(wMapBgName, "nok_bg");
     }
     return ApiStatus_BLOCK;
 }
