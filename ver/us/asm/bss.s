@@ -661,16 +661,19 @@ dlabel nuContDataMutexBuf
 dlabel D_800AC6D8
 .space 8
 
-dlabel piMgrThread
-.space 0x000011b0
+dlabel piThread
+.space 0x1B0
 
-dlabel __osPiMesgQueue
+dlabel piThreadStack
+.space 0x1000
+
+dlabel piEventQueue
 .space 4
 
 dlabel D_800AF890
 .space 0x00000014
 
-dlabel piMgrMesgBuff
+dlabel piEventBuf
 .space 4
 
 dlabel D_800AF8AC
@@ -817,7 +820,7 @@ dlabel D_800B0F0C
 dlabel gCurrentEncounter
 .space 0x00000bf8
 
-dlabel LeoDiskHandle
+dlabel __Dom2SpeedParam
 .space 4
 
 dlabel D_800B1B0C
@@ -904,7 +907,7 @@ dlabel D_800B4384
 dlabel gEffectInstances
 .space 0x00000180
 
-dlabel CartRomHandle
+dlabel __Dom1SpeedParam
 .space 4
 
 dlabel D_800B451C
