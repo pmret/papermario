@@ -16,7 +16,6 @@ extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
 extern s32 D_800B91D0;
 extern u8 rspbootUcodeBuffer[];
-extern u32 nuGfxCfbCounter;
 extern OSMesgQueue D_800DA47C;
 
 void nuGfxTaskMgr(void) {

@@ -428,5 +428,3 @@ EntityBlueprint Entity_SpinningFlower = {
     .entityType = ENTITY_TYPE_SPINNING_FLOWER,
     .aabbSize = { 45, 22, 42 }
 };
-
-static const f32 rodata_padding[] = {0.0f, 0.0f};

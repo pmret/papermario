@@ -338,7 +338,7 @@ typedef struct PlayerData {
     /* 0x2C4 */ s32 partnerUnlockedTime[12];
     /* 0x2F4 */ s32 partnerUsedTime[12];
     /* 0x324 */ s32 tradeEventStartTime;
-    /* 0x328 */ s32 droTreeOrbitTime;
+    /* 0x328 */ s32 droTreeHintTime;
     /* 0x32C */ s16 starPiecesCollected;
     /* 0x32E */ u16 jumpGamePlays;
     /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */

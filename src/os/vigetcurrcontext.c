@@ -1,4 +1,6 @@
-#include "ultra64.h"
-#include "include_asm.h"
+#include "PR/os_internal.h"
+#include "PR/viint.h"
 
-INCLUDE_ASM(s32, "os/vigetcurrcontext", osViGetCurrentContext);
+__OSViContext *__osViGetCurrentContext(void) {
+    return __osViCurr;
+}

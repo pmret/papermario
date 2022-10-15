@@ -1,7 +1,7 @@
 import spimdisasm
 
 from segtypes.common.data import CommonSegData
-from util import symbols, options
+from util import symbols, options, compiler
 
 
 class CommonSegRodata(CommonSegData):
@@ -60,6 +60,10 @@ class CommonSegRodata(CommonSegData):
 
                     path = path_folder / f"{rodataSym.getName()}.s"
                     with open(path, "w", newline="\n") as f:
-                        f.write('.include "macro.inc"\n\n')
-                        f.write(".section .rodata\n\n")
+                        if options.opts.compiler.include_macro_inc:
+                            f.write('.include "macro.inc"\n\n')
+                        preamble = options.opts.generated_s_preamble
+                        if preamble:
+                            f.write(preamble + "\n")
+                        f.write(f".section {self.get_linker_section()}\n\n")
                         f.write(rodataSym.disassemble())

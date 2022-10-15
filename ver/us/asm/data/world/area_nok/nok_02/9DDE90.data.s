@@ -38,7 +38,7 @@ dlabel D_80247070_9DE090
 dlabel D_8024709C_9DE0BC
 .word 0x00000000, 0x00170014, 0x00000000, 0x00000000, 0x00000000, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x00060000
 
-dlabel nok_02_Quizmo_varStash
+dlabel nok_02_varStash
 .word 0x00000000
 
 dlabel D_802470CC_9DE0EC

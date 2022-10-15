@@ -7,7 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_fright_jar
 
-ApiStatus func_80269EAC(Evt* script, s32 isInitialCall);
 ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A12D4_72BBE4)(Evt* script, s32 isInitialCall);
 

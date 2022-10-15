@@ -43,7 +43,7 @@ class CommonSegGroup(CommonSegment):
         prev_start: RomAddr = -1
 
         for i, subsection_yaml in enumerate(yaml["subsegments"]):
-            # End of previous segment
+            # endpos marker
             if isinstance(subsection_yaml, list) and len(subsection_yaml) == 1:
                 continue
 

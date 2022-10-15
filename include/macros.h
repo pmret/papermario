@@ -12,6 +12,7 @@
 #define TRANSPARENT_UNION
 #endif
 
+#define ALIGNED(x) __attribute__((aligned(x)))
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
@@ -134,6 +135,7 @@
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
 #define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+#define VIS_GROUP_PAIR(group1, group2) ((group1) << 12 | (group2))
 
 // loads integrator with standard parameter set used for falling
 

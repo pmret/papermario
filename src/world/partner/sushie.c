@@ -6,8 +6,6 @@
 
 extern s16 D_8010C97A;
 
-void partner_kill_ability_script(void);
-
 BSS f32 OriginalPlayerY;
 BSS s32 bss_802BFEE4;
 BSS s32 bss_802BFEE8;

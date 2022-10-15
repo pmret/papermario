@@ -9,6 +9,7 @@ class Compiler:
     asm_end_label: str = ""
     c_newline: str = "\n"
     asm_inc_header: str = ""
+    include_macro_inc: bool = True
 
 
 GCC = Compiler(
@@ -22,6 +23,7 @@ SN64 = Compiler(
     asm_data_macro=".globl",
     asm_end_label=".end",
     c_newline="\r\n",
+    include_macro_inc=False,
 )
 
 IDO = Compiler("IDO")

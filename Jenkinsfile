@@ -13,7 +13,7 @@ pipeline {
                 sh 'curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
                 sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
-                sh 'pip install -r requirements.txt'
+                sh 'pip install -U -r requirements.txt'
                 sh './configure'
             }
         }

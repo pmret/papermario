@@ -385,9 +385,9 @@ static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-void fx_sun();
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
-    fx_sun(1, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

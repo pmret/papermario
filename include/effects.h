@@ -1424,7 +1424,9 @@ typedef struct WaterfallFXData {
 } WaterfallFXData; // size = unknown
 
 typedef struct WaterFountainFXData {
-    /* 0x00 */ char unk_00[0x18];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ char unk_10[0x8];
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -1434,6 +1436,8 @@ typedef struct WaterFountainFXData {
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ char unk_34[0x4];
     /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
 } WaterFountainFXData; // size = ?
 
 typedef struct UnderwaterFXData {

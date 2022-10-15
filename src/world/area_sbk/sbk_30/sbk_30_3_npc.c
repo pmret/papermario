@@ -23,7 +23,7 @@ NpcSettings N(NpcSettings_Archeologist_01) = {
 
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
-MAP_STATIC_PAD(2,main);
+MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/atomic/LetterChoice.inc.c"
@@ -88,14 +88,14 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
             EVT_SET(GF_SBK_KeptArtifactFromKolorado, TRUE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
         EVT_END_IF
-        EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
+        EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
         EVT_SWITCH(LVar0)
             EVT_CASE_GE(1)
                 EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
                 EVT_GOTO(50)
             EVT_CASE_DEFAULT
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0041)
-                EVT_CHOOSE_KEY_ITEM(N(ArtifactList))
+                EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
                 EVT_SWITCH(LVar0)
                     EVT_CASE_GE(1)
                         EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))

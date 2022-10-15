@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
-    cflags = f"-c -G0 -O2 -x c -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -76,17 +76,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
-    objcopy_sections = ""
-    if debug:
-        ninja.rule("genobjcopy",
-            description="generate $out",
-            command=f"$python {BUILD_TOOLS}/genobjcopy.py $in $out",
-        )
-        objcopy_sections = "@ver/$version/build/objcopy_sections.txt "
-
     ninja.rule("z64",
         description="rom $out",
-        command=f"{cross}objcopy {objcopy_sections} $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
+        command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
     ninja.rule("sha1sum",
@@ -262,9 +254,6 @@ class Configure:
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
 
-    def objcopy_sections_path(self) -> Path:
-        return self.build_path() / "objcopy_sections.txt"
-
     def undefined_syms_path(self) -> Path:
         return self.build_path() / "undefined_syms.txt"
 
@@ -409,6 +398,8 @@ class Configure:
                     )
                 # Not dead cod
                 else:
+                    if seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                        cflags += " -fno-common"
                     build(entry.object_path, entry.src_paths, task, variables={
                         "cflags": cflags,
                         "cppflags": f"-DVERSION_{self.version.upper()}",
@@ -657,14 +648,6 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
-        # Create objcopy section list
-        if debug:
-            ninja.build(
-                str(self.objcopy_sections_path()),
-                "genobjcopy",
-                str(self.build_path() / "elf_sections.txt"),
-            )
-
         # Run undefined_syms through cpp
         ninja.build(
             str(self.undefined_syms_path()),
@@ -674,8 +657,6 @@ class Configure:
 
         # Build elf, z64, ok
         additional_objects = [str(self.undefined_syms_path())]
-        if debug:
-            additional_objects += [str(self.objcopy_sections_path())]
 
         ninja.build(
             str(self.elf_path()),

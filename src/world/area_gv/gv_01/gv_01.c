@@ -3,7 +3,6 @@
 #include "hud_element.h"
 
 extern EvtScript N(EVS_Main);
-void reset_battle_status(void);
 
 EntryList N(Entrances) = {
     {    0.0,    0.0,    0.0,   90.0 },  /* gv_01_ENTRY_0 */
@@ -22,16 +21,16 @@ MapSettings N(settings) = {
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 s32 N(DropLetterYCurve)[] = {
-    200, 170, 140, 110, 80, 50, 20, 10, 
-    26, 29, 30, 29, 26, 10, 0, 12, 
-    15, 16, 15, 11, 6, 0, 4, 3, 
-    1, 0, 
+    200, 170, 140, 110, 80, 50, 20, 10,
+    26, 29, 30, 29, 26, 10, 0, 12,
+    15, 16, 15, 11, 6, 0, 4, 3,
+    1, 0,
 };
 
 s32 N(DropLastLetterYCurve)[] = {
-    200, 170, 140, 110, 80, 50, 20, 0, 
-    12, 15, 16, 15, 11, 6, 0, 4, 
-    3, 1, 0, 
+    200, 170, 140, 110, 80, 50, 20, 0,
+    12, 15, 16, 15, 11, 6, 0, 4,
+    3, 1, 0,
 };
 
 API_CALLABLE(N(FadeToTitleScreen));
