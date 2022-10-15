@@ -268,7 +268,7 @@ segments:
     - [0x47FC0, hasm, os/guNormalize]
     - [0x48020, c, os/pfschecker, gcc_272 -O3]
     - [0x48740, c, os/pfsisplug, gcc_272 -O3]
-    - [0x48A20, c, os/ldiv]
+    - [0x48A20, c, os/ldiv, gcc_272 -O3]
     - [0x48BE0, c, os/osSiDeviceBusy]
     - [0x48C00, c, os/divdi3]
     - [0x491C0, c, os/moddi3]
