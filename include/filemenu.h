@@ -5,19 +5,19 @@
 
 extern MenuPanel* filemenu_menus[4];
 
-extern BSS s32 filemenu_iterFileIdx;
-extern BSS s32 filemenu_pressedButtons;
-extern BSS s32 filemenu_cursorHudElem;
-extern BSS s32 filemenu_heldButtons;
-extern BSS s8 filemenu_filename_pos;
-extern BSS s32 filemenu_loadedFileIdx;
-extern BSS s8 filemenu_currentMenu;
-extern BSS s32 filemenu_8024C09C;
-extern BSS s32 filemenu_cursorHudElemID[1];
-extern BSS s32 filemenu_8024C0A4[3];
-extern BSS s32 filemenu_hudElemIDs[20];
-extern BSS s32 filemenu_createfile_hudElems[4];
-extern BSS u8 filemenu_filename[8];
+extern s32 filemenu_iterFileIdx;
+extern s32 filemenu_pressedButtons;
+extern s32 filemenu_cursorHudElem;
+extern s32 filemenu_heldButtons;
+extern s8 filemenu_filename_pos;
+extern s32 filemenu_loadedFileIdx;
+extern s8 filemenu_currentMenu;
+extern s32 filemenu_8024C09C;
+extern s32 filemenu_cursorHudElemID[1];
+extern s32 filemenu_8024C0A4[3];
+extern s32 filemenu_hudElemIDs[20];
+extern s32 filemenu_createfile_hudElems[4];
+extern u8 filemenu_filename[8];
 
 #define WINDOW_UPDATE_FUNC(name) void (name)( \
     s32 windowIdx,\

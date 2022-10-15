@@ -374,6 +374,7 @@ segments:
     - [0x80850, c, 80850_len_3060]
     - [0x838B0, c, world/actions] # DUMMY ROM
     - [0x838B0, c, world/partners]
+    - [0x891B0, hasm, bss2_2]
     - [0x891B0, c, 891b0_len_fb0]
     - [0x8A160, c, 8a160_len_700]
     - [0x8A860, c, 8a860_len_3f30]

@@ -111,3 +111,45 @@ dlabel D_8010C9B0
 
 dlabel D_8010C9B4
 .space 0x0000000c
+
+dlabel D_8010C9C0
+.space 4
+
+dlabel D_8010C9C4
+.space 4
+
+dlabel D_8010C9C8
+.space 0x330
+
+dlabel D_8010CCF8
+.space 2
+
+dlabel D_8010CCFA
+.space 2
+
+dlabel D_8010CCFC
+.space 2
+
+dlabel D_8010CCFE
+.space 2
+
+dlabel D_8010CD00
+.space 4
+
+dlabel D_8010CD04
+.space 0xC
+
+dlabel D_8010CD10
+.space 2
+
+dlabel D_8010CD12
+.space 2
+
+dlabel D_8010CD14
+.space 0xC
+
+dlabel D_8010CD20
+.space 4
+
+dlabel D_8010CD24
+.space 0xC

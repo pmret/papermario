@@ -1002,7 +1002,6 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // BSS
-extern s32 B_801512B0[2];
 extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 extern s32 D_801512BC;
 extern s32 D_80151304;
@@ -1016,7 +1015,6 @@ extern ModelTransformGroupList* gCurrentTransformGroups;
 extern s8 gMsgGlobalWaveCounter[0x4];
 extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
 extern s32 gLastCreatedEntityIndex;
-extern s8 B_801512F0[0x410];
 extern GameMode gMainGameState[2]; // TODO rename
 
 extern s32 gEntityHeapBottom;

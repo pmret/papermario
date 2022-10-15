@@ -25853,7 +25853,6 @@ get_default_variation_for_song = 0x8014A430; //
 D_8014F120 = 0x8014F120; // type:data
 D_8014F128 = 0x8014F128; // type:data
 rodata_padding_2 = 0x80150BBC; // type:data
-B_801512B0 = 0x801512B0; // type:data
 D_801512B0 = 0x801512B0; // type:data
 D_801512E8 = 0x801512E8; // type:data
 B_801512F0 = 0x801512F0; // type:data
