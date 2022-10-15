@@ -765,7 +765,7 @@ if __name__ == "__main__":
         cflags += " -ggdb3"
 
     if not args.no_warn:
-        cflags += " -Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
+        cflags += " -Wno-uninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
     # add splat to python import path
     sys.path.append(str((ROOT / args.splat).resolve()))
