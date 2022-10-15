@@ -296,7 +296,181 @@ s32 integer_log(s32 number, u32 base) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
+s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
+                     f32 scaleX, f32 scaleY) {
+    Rect texRect;
+    Rect drawRect;
+    u16 sp48;
+    s32 dsdx, dtdy;
+    s32 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+
+    u16 masks, maskt;
+
+    u16 v02;
+    u16 s1;
+
+    f32 q;
+
+    if (scaleX < 0.01 || scaleY < 0.01) {
+        return 0;
+    }
+
+    if (posX >= clipX + clipWidth || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + width * scaleX)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + height * scaleY)) {
+        return 0;
+    }
+    if (bitDepth == G_IM_SIZ_4b) {
+        if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
+            v02 = 0x2000;
+        } else if (fmt == G_IM_FMT_CI) {
+            v02 = 0x1000;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_8b) {
+        if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
+            v02 = 0x1000;
+        } else if (fmt == G_IM_FMT_CI) {
+            v02 = 0x800;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_16b) {
+        if (fmt == G_IM_FMT_RGBA) {
+            v02 = 0x800;
+        } else if (fmt == G_IM_FMT_IA) {
+            v02 = 0x800;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_32b) {
+        if (fmt == G_IM_FMT_RGBA) {
+            v02 = 0x400;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+
+    dsdx = 1.0f / scaleX * 1024.0f;
+    dtdy = 1.0f / scaleY * 1024.0f;
+    s1 = v02 / width;
+    if (s1 > height) {
+        s1 = height;
+    } else if (s1 <= 1) {
+        return 0;
+    }
+    if (scaleY <= 1.0) {
+        sp48 = 0;
+    } else {
+        sp48 = scaleY;
+    }
+
+    masks = integer_log(width, 2);
+    maskt = integer_log(height, 2);
+
+    stopDrawing = 0;
+
+    texRect.ulx = 0;
+    texRect.uly = 0;
+    drawRect.ulx = posX;
+    drawRect.uly = posY;
+
+    while (TRUE) {
+        texRect.lrx = width - 1;
+        texRect.lry = texRect.uly + s1 - 1;
+        drawRect.lry = drawRect.uly + s1 * scaleY;
+        drawRect.lrx = (s16)(drawRect.ulx + width * scaleX);
+
+
+        texOffsetX = texOffsetY = 0;
+
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += s1;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += s1 * scaleY;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + s1 - 1;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            q = abs(posY - clipY);
+            q /= scaleY;
+            texOffsetY = q * 32.0f;
+        }
+        if (texRect.lry + 1 == height){
+            stopDrawing = 1;
+        } else if (height < texRect.lry + 1) {
+            s32 temp;
+            texRect.lry = height - 1;
+            temp = height * scaleY;
+            stopDrawing = 1;
+            drawRect.lry = drawRect.uly + temp;
+        }
+
+        if (drawRect.lry >= clipY + clipHeight) {
+            if (!stopDrawing) {
+                drawRect.lry = clipY + clipHeight;
+                stopDrawing = 1;
+            } else if (drawRect.lry > clipY + clipHeight) {
+                drawRect.lry = clipY + clipHeight;
+            }
+        }
+        if (drawRect.ulx < clipX) {
+            drawRect.ulx = clipX;
+            q = abs(posX - clipX);
+            q /= scaleX;
+            texOffsetX = q * 32.0f;
+        }
+        if (drawRect.lrx >= clipX + clipWidth) {
+            drawRect.lrx = clipX + clipWidth;
+        }
+
+        if (bitDepth == G_IM_SIZ_4b) {
+            gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_8b) {
+            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_16b) {
+            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_32b) {
+            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_32b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        }
+        gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+                            0, texOffsetX, texOffsetY, dsdx, dtdy);
+
+        if (stopDrawing) {
+            break;
+        }
+
+        texRect.uly += s1 - sp48;
+        drawRect.uly = drawRect.lry - sp48 * scaleY;
+    };
+
+    return 1;
+}
+
+static const f32 rodata_padding[] = { 0.0f };
 
 void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
     itemEntity->sparkleReadPos = (s32*)script;
@@ -2491,19 +2665,19 @@ void func_801363A0(ItemEntity* itemEntity) {
         case 10:
             if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MSG_Menus_0058;
+                    itemMsg = MESSAGE_ID(0x1D, 0x058);
                 } else {
-                    itemMsg = MSG_Menus_005A;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
                 }
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MSG_Menus_005D;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MSG_Menus_005E;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MSG_Menus_005C;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
@@ -2520,19 +2694,19 @@ void func_801363A0(ItemEntity* itemEntity) {
                 s3 = 0x4C;
             } else {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
-                    itemMsg = MSG_Menus_0059;
+                    itemMsg = MESSAGE_ID(0x1D, 0x059);
                 } else {
-                    itemMsg = MSG_Menus_005B;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
                 }
 
                 if (itemEntity->pickupMsgFlags & 0x10) {
-                    itemMsg = MSG_Menus_005D;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
                 }
                 if (itemEntity->pickupMsgFlags & 0x20) {
-                    itemMsg = MSG_Menus_005E;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
                 }
                 if (itemEntity->pickupMsgFlags & 0x40) {
-                    itemMsg = MSG_Menus_005C;
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
@@ -2546,25 +2720,32 @@ void func_801363A0(ItemEntity* itemEntity) {
             } else {
                 temp = 0;
             }
-            if (gItemTable[itemEntity->itemID].typeFlags) {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+
+            // needed to match
+            if (gItemTable[itemEntity->itemID].typeFlags & 2) {
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             } else {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             }
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
+                set_window_properties(0x13, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
-                offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
-                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+                offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x060), 0) + 0x18;
+                s1 = 160 - offsetY / 2;
+                set_window_properties(0x11, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
-            offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
-            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
+            s1 = 160 - offsetY / 2;
+            set_window_properties(0xC, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
     }
 }
