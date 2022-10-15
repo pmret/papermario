@@ -1,14 +1,8 @@
-#include "dead.h"
-#include "common.h"
-#include "dead_structs.h"
-
-// Copy of kzn_17 (C85DC0.c)
-
-#define NAMESPACE EA0C10
+#include "kzn_17.h"
 
 const char ascii_EA6D70[] = "kzn_11";
 const char ascii_EA6D78[] = "kzn_18";
-extern s32 EA0C10_D_802466D0[];
+extern s32 N(D_802466D0)[];
 
 void func_8004D8E0(DeadEnemy*);
 
@@ -76,13 +70,13 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            EA0C10_D_802466D0[i] = ptr[i];
+            N(D_802466D0)[i] = ptr[i];
         }
-        EA0C10_D_802466D0[i] = 0;
+        N(D_802466D0)[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            EA0C10_D_802466D0[i] = i + 16;
-            EA0C10_D_802466D0[112] = 0;
+            N(D_802466D0)[i] = i + 16;
+            N(D_802466D0)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

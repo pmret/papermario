@@ -1,9 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-#define NAMESPACE EA36E0
-
-// Copy of kzn_17 (C887B0.c)
+#include "kzn_17.h"
 
 #define UNK_FUNC_50_LVar1 -583.0
 #define UNK_FUNC_50_LVar2 165.0

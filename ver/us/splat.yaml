@@ -14440,89 +14440,111 @@ segments:
 #################
 ### Dead maps ###
 #################
-  - type: code
+  - name: dead_kzn_17
+    dir: world/dead/kzn_17
+    type: code
     start: 0xEA0900
     vram: 0x80240000
     subsegments:
     - [0xEA0900, c]
-    - [0xEA0C10, c, EA0C10]
-    - [0xEA36E0, c, EA36E0]
-    - [0xEA3A80, data, dead/EA3A80]
+    - [0xEA0C10, c]
+    - [0xEA36E0, c]
+    - [0xEA3A80, data]
     - [0xEA6D70]
-  - type: code
+  - name: dead_01
+    dir: world/dead/dead_01
+    type: code
     start: 0xEA6FD0
     vram: 0x80240000
     subsegments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
-    - [0xEA7390, data, dead/EA7390]
-  - type: code
+    - [0xEA7390, data]
+  - name: dead_02
+    dir: world/dead/dead_02
+    type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
     - [0xEA8AE0, c]
-    - [0xEAA810, data, dead/EAA810]
+    - [0xEAA810, data]
     - [0xEB0E20]
-  - type: code
+  - name: dead_03
+    dir: world/dead/dead_03
+    type: code
     start: 0xEB0E60
     vram: 0x80240000
     subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
-    - [0xEB1920, data, dead/EB1920]
-  - type: code
+    - [0xEB1920, data]
+  - name: dead_04
+    dir: world/dead/dead_04
+    type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
-    - [0xEB54C0, data, dead/EB54C0]
-  - type: code
+    - [0xEB54C0, data]
+  - name: dead_05
+    dir: world/dead/dead_05
+    type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
     - [0xEB7230, c]
-    - [0xEB7540, c, EB7540]
-    - [0xEB7850, data, dead/EB7850]
+    - [0xEB7540, c]
+    - [0xEB7850, data]
     - [0xEB8E40]
-  - type: code
+  - name: dead_06
+    dir: world/dead/dead_06
+    type: code
     start: 0xEB8E50
     vram: 0x80240000
     subsegments:
-    - [0xEB8E50, c, EB8E50]
-    - [0xEB8E90, c, EB8E90]
+    - [0xEB8E50, c]
+    - [0xEB8E90, c]
     - [0xEB9D90, c]
-    - [0xEBA260, data, dead/EBA260]
+    - [0xEBA260, data]
     - [0xEC2000]
-  - type: code
+  - name: dead_07
+    dir: world/dead/dead_07
+    type: code
     start: 0xEC2200
     vram: 0x80240000
     subsegments:
-    - [0xEC2200, c, EC2200]
-    - [0xEC2240, c, EC2240]
+    - [0xEC2200, c]
+    - [0xEC2240, c]
     - [0xEC2610, c]
-    - [0xEC2850, data, dead/EC2850]
+    - [0xEC2850, data]
     - [0xEC7170]
-  - type: code
+  - name: dead_08
+    dir: world/dead/dead_08
+    type: code
     start: 0xEC71B0
     vram: 0x80240000
     subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
-    - [0xEC78F0, data, dead/EC78F0]
-  - type: code
+    - [0xEC78F0, data]
+  - name: dead_09
+    dir: world/dead/dead_09
+    type: code
     start: 0xEC9D00
     vram: 0x80240000
     subsegments:
     - [0xEC9D00, c]
     - [0xECAA40, c]
-    - [0xECAA80, c, ECAA80]
+    - [0xECAA80, c]
     - [0xECB930, c]
     - [0xECBB70, c]
-    - [0xECBC10, data, dead/ECBC10]
+    - [0xECBC10, data]
     - [0xECFE60]
-  - type: code
+  - name: dead_0A
+    dir: world/dead/dead_0A
+    type: code
     start: 0xECFFF0
     vram: 0x80240000
     subsegments:
@@ -14530,9 +14552,11 @@ segments:
     - [0xED0030, c]
     - [0xED00D0, c]
     - [0xED0310, c]
-    - [0xED1840, data, dead/ED1840]
+    - [0xED1840, data]
     - [0xED41C0]
-  - type: code
+  - name: dead_0B
+    dir: world/dead/dead_0B
+    type: code
     start: 0xED4220
     vram: 0x80240000
     subsegments:
@@ -14541,40 +14565,50 @@ segments:
     - [0xED42A0, c]
     - [0xED46D0, c]
     - [0xED5540, c]
-    - [0xED5780, data, dead/ED5780]
-  - type: code
+    - [0xED5780, data]
+  - name: dead_0C
+    dir: world/dead/dead_0C
+    type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
-    - [0xED8E20, c, ED8E20]
-    - [0xED9170, data, dead/ED9170]
+    - [0xED8E20, c]
+    - [0xED9170, data]
     - [0xEDBF90]
-  - type: code
+  - name: dead_0D
+    dir: world/dead/dead_0D
+    type: code
     start: 0xEDBFE0
     vram: 0x80240000
     subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
-    - [0xEDC6D0, data, dead/EDC6D0]
-  - type: code
+    - [0xEDC6D0, data]
+  - name: dead_0E
+    dir: world/dead/dead_0E
+    type: code
     start: 0xEDE9C0
     vram: 0x80240000
     subsegments:
     - [0xEDE9C0, c]
-    - [0xEDEA00, c, EDEA00]
-    - [0xEE2040, c, EE2040]
-    - [0xEE20E0, data, dead/EE20E0]
+    - [0xEDEA00, c]
+    - [0xEE2040, c]
+    - [0xEE20E0, data]
     - [0xEE64B0]
-  - type: code
+  - name: dead_0F
+    dir: world/dead/dead_0F
+    type: code
     start: 0xEE65B0
     vram: 0x80240000
     subsegments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data, dead/EE8970]
+    - [0xEE8970, data]
     - [0xEEB900]
-  - type: code
+  - name: dead_10
+    dir: world/dead/dead_10
+    type: code
     start: 0xEED100
     vram: 0x80240000
     subsegments:
@@ -14583,25 +14617,29 @@ segments:
     - [0xEED1E0, c]
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
-    - [0xEEFAD0, data, dead/EEFAD0]
+    - [0xEEFAD0, data]
     - [0xEF2550]
-  - type: code
+  - name: dead_11
+    dir: world/dead/dead_11
+    type: code
     start: 0xEF2610
     vram: 0x80240000
     subsegments:
     - [0xEF2610, c]
     - [0xEF2650, c]
-    - [0xEF2680, c, EF2680]
-    - [0xEF58E0, data, dead/EF58E0]
+    - [0xEF2680, c]
+    - [0xEF58E0, data]
     - [0xEF79C0]
-  - type: code
+  - name: dead_12
+    dir: world/dead/dead_12
+    type: code
     start: 0xEF7A80
     vram: 0x80240000
     subsegments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
-    - [0xEF8250, data, dead/EF8250]
+    - [0xEF8250, data]
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
