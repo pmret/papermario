@@ -16,7 +16,6 @@ NpcSettings N(NpcSettings_Parakarry) = {
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
-MAP_STATIC_PAD(4,unk);
 
 EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_LABEL(0)

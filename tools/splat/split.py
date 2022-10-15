@@ -14,10 +14,10 @@ from colorama import Fore, Style
 from intervaltree import Interval, IntervalTree
 
 from segtypes.linker_entry import LinkerWriter, to_cname
-from segtypes.segment import Segment
+from segtypes.segment import RomAddr, Segment
 from util import compiler, log, options, palettes, symbols
 
-VERSION = "0.12.2"
+VERSION = "0.12.4"
 # This value should be keep in sync with the version listed on requirements.txt
 SPIMDISASM_MIN = (1, 5, 6)
 
@@ -67,7 +67,11 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         segment_class = Segment.get_class_for_type(seg_type)
 
         this_start = Segment.parse_segment_start(seg_yaml)
-        next_start = Segment.parse_segment_start(config_segments[i + 1])
+
+        if i == len(config_segments) - 1 and Segment.parse_segment_file_path:
+            next_start: RomAddr = 0
+        else:
+            next_start = Segment.parse_segment_start(config_segments[i + 1])
 
         segment: Segment = Segment.from_yaml(
             segment_class, seg_yaml, this_start, next_start
@@ -393,7 +397,9 @@ def main(config_path, modes, verbose, use_cache=True):
                     segment_bytes = segment_input_file.read()
             segment.split(segment_bytes)
 
-    if options.opts.is_mode_active("ld"):
+    if (
+        options.opts.is_mode_active("ld") and options.opts.platform != "gc"
+    ):  # TODO move this to platform initialization when it gets implemented
         global linker_writer
         linker_writer = LinkerWriter()
         linker_bar = tqdm.tqdm(

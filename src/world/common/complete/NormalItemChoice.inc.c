@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES];
+static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES + 1];
 
 #ifndef _CHOICE_SUPPORT_
 #define _CHOICE_SUPPORT_
@@ -96,7 +96,7 @@ EvtScript N(EVS_ChooseItem) = {
     EVT_SET(LVar1, 2) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))
 
-#define EVT_CHOOSE_CONSUMABLE(itemList) \
+#define EVT_CHOOSE_CONSUMABLE_FROM(itemList) \
     EVT_SET(LVar0, EVT_PTR(itemList)) \
     EVT_SET(LVar1, 2) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))

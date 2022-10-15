@@ -1,5 +1,19 @@
 # splat Release Notes
 
+### 0.12.4
+* Fixed a bug involving the order of attributes in symbol_addrs preventing proper range searching during calls to `get_symbol`
+
+### 0.12.3: Initial Gamecube Support
+Initial support for Gamecube disk images has been set up! Disassembly is not currently supported, and a more comprehensive explanation of Gamecube support will come once that is finished.
+
+* The Symbol class is now hashable
+* Added the ability for segments to specify a file path (`path`) to receive that file's contents as their split input
+* The `generated_s_preamble` option now will be applied to data files created by spimdisasm
+* Rewrote symbol range check code to be more efficient
+* Fixed bug that allowed empty top-level segments of type `code`.
+* Fixed progress bars to properly update their descriptions
+* Fixed bug pertaining to symbols getting assigned to segments they shouldn't if their segment is given in symbol_addrs (`segment:`)
+
 ### 0.12.2
 * Fixed bug where `given_dir` was possibly not a `Path`
 

@@ -134,6 +134,7 @@
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
 #define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+#define VIS_GROUP_PAIR(group1, group2) ((group1) << 12 | (group2))
 
 // loads integrator with standard parameter set used for falling
 

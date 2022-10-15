@@ -1,7 +1,7 @@
 import importlib
 import importlib.util
 
-from typing import Any, Dict, TYPE_CHECKING, Type, Union, Optional, List
+from typing import Any, Dict, TYPE_CHECKING, Set, Type, Union, Optional, List
 from pathlib import Path
 
 from util import log
@@ -504,7 +504,7 @@ class Segment:
             if not ret and search_ranges:
                 # Search ranges first, starting with rom
                 if rom is not None:
-                    cands: set[Interval] = most_parent.symbol_ranges_rom[rom]
+                    cands: Set[Interval] = most_parent.symbol_ranges_rom[rom]
                     if cands:
                         ret = cands.pop().data
                 # and then vram if we can't find a rom match

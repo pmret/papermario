@@ -7,17 +7,10 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/entity/Pipe.inc.c"
 
+#define NAMESPACE dup_nok_02
 #include "world/common/todo/StashVars.inc.c"
-
-#define NAMESPACE dup_nok_02
 #include "world/common/todo/GetItemName.inc.c"
-#define NAMESPACE nok_02
-
-#define NAMESPACE dup_nok_02
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
-#define NAMESPACE nok_02
-
-#define NAMESPACE dup_nok_02
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 

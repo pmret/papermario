@@ -321,12 +321,12 @@ MapConfig kgr_maps[] = {
 /// Goomba Region
 #include "area_kmr/kmr.h"
 MapConfig kmr_maps[] = {
-    { MAP_UNSPLIT(kmr_00, 0x80240D80), .bgName = "kmr_bg", .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kmr_00), .bgName = "kmr_bg", .unk_1C = { .bytes = { .flags = 1 } } },
     { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_03, 0x80240680), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_04, 0x80240520), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_05, 0x802417A0), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_06, 0x80241DC0), .bgName = "kmr_bg" },
+    { MAP(kmr_03), .bgName = "kmr_bg" },
+    { MAP(kmr_04), .bgName = "kmr_bg" },
+    { MAP(kmr_05), .bgName = "kmr_bg" },
+    { MAP(kmr_06), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_07, 0x80240B70), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_09, 0x80241550), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_10, 0x80240640), .bgName = "kmr_bg" },
@@ -341,20 +341,22 @@ MapConfig kmr_maps[] = {
 };
 
 /// Mt. Rugged
+#include "area_iwa/iwa.h"
 MapConfig iwa_maps[] = {
-    { MAP_UNSPLIT(iwa_00, 0x80240310), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_01, 0x80243320), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_02, 0x80241140), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_03, 0x80241360), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_04, 0x80241100), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_10, 0x80241810), .bgName = "iwa_bg" },
-    { MAP_UNSPLIT(iwa_11, 0x80240330), .bgName = "iwa_bg" },
+    { MAP(iwa_00), .bgName = "iwa_bg" },
+    { MAP(iwa_01), .bgName = "iwa_bg" },
+    { MAP(iwa_02), .bgName = "iwa_bg" },
+    { MAP(iwa_03), .bgName = "iwa_bg" },
+    { MAP(iwa_04), .bgName = "iwa_bg" },
+    { MAP(iwa_10), .bgName = "iwa_bg" },
+    { MAP(iwa_11), .bgName = "iwa_bg" },
 };
 
 /// Dry Dry Outpost
+#include "area_dro/dro.h"
 MapConfig dro_maps[] = {
-    { MAP_UNSPLIT(dro_01, 0x80243B70), .bgName = "sbk_bg" },
-    { MAP_UNSPLIT(dro_02, 0x80243AB0), .bgName = "sbk_bg" },
+    { MAP(dro_01), .bgName = "sbk_bg" },
+    { MAP(dro_02), .bgName = "sbk_bg" },
 };
 
 /// Dry Dry Desert

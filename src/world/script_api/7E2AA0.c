@@ -50,6 +50,18 @@ ApiStatus func_80281C84(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+/* ARGS:
+    s16 group1;
+    s16 group2;
+    EvtScript* openDoor;
+    EvtScript* moveWalls;
+    EvtScript* dropDoor;
+    EvtScript* toggleVis;
+    s32 doorInColliderID;
+    s32 doorOutColliderID;
+    s32 interiorModelGroup;
+    s32* interiorNPCs;
+*/
 ApiStatus MakeDoorAdvanced(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     AdvancedDoor* door = heap_malloc(sizeof(*door));
