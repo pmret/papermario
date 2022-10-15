@@ -14451,8 +14451,8 @@ segments:
     - [0xEA36E0, c]
     - [0xEA3A80, data]
     - [0xEA6D70]
-  - name: dead_01
-    dir: world/dead/dead_01
+  - name: dead_kzn_18
+    dir: world/dead/kzn_18
     type: code
     start: 0xEA6FD0
     vram: 0x80240000
@@ -14461,8 +14461,8 @@ segments:
     - [0xEA7010, c]
     - [0xEA7320, c]
     - [0xEA7390, data]
-  - name: dead_02
-    dir: world/dead/dead_02
+  - name: dead_kzn_19
+    dir: world/dead/kzn_19
     type: code
     start: 0xEA8AE0
     vram: 0x80240000
@@ -14542,8 +14542,8 @@ segments:
     - [0xECBB70, c]
     - [0xECBC10, data]
     - [0xECFE60]
-  - name: dead_0A
-    dir: world/dead/dead_0A
+  - name: dead_flo_09
+    dir: world/dead/flo_09
     type: code
     start: 0xECFFF0
     vram: 0x80240000
@@ -14554,8 +14554,8 @@ segments:
     - [0xED0310, c]
     - [0xED1840, data]
     - [0xED41C0]
-  - name: dead_0B
-    dir: world/dead/dead_0B
+  - name: dead_flo_10
+    dir: world/dead/flo_10
     type: code
     start: 0xED4220
     vram: 0x80240000
@@ -14566,8 +14566,8 @@ segments:
     - [0xED46D0, c]
     - [0xED5540, c]
     - [0xED5780, data]
-  - name: dead_0C
-    dir: world/dead/dead_0C
+  - name: dead_flo_11
+    dir: world/dead/flo_11
     type: code
     start: 0xED8E20
     vram: 0x80240000
@@ -14575,8 +14575,8 @@ segments:
     - [0xED8E20, c]
     - [0xED9170, data]
     - [0xEDBF90]
-  - name: dead_0D
-    dir: world/dead/dead_0D
+  - name: dead_flo_12
+    dir: world/dead/flo_12
     type: code
     start: 0xEDBFE0
     vram: 0x80240000
@@ -14584,8 +14584,8 @@ segments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
     - [0xEDC6D0, data]
-  - name: dead_0E
-    dir: world/dead/dead_0E
+  - name: dead_flo_13
+    dir: world/dead/flo_13
     type: code
     start: 0xEDE9C0
     vram: 0x80240000
@@ -14595,8 +14595,8 @@ segments:
     - [0xEE2040, c]
     - [0xEE20E0, data]
     - [0xEE64B0]
-  - name: dead_0F
-    dir: world/dead/dead_0F
+  - name: dead_flo_14
+    dir: world/dead/flo_14
     type: code
     start: 0xEE65B0
     vram: 0x80240000
