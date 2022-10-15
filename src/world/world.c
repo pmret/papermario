@@ -321,12 +321,12 @@ MapConfig kgr_maps[] = {
 /// Goomba Region
 #include "area_kmr/kmr.h"
 MapConfig kmr_maps[] = {
-    { MAP_UNSPLIT(kmr_00, 0x80240D80), .bgName = "kmr_bg", .unk_1C = { .bytes = { .flags = 1 } } },
+    { MAP(kmr_00), .bgName = "kmr_bg", .unk_1C = { .bytes = { .flags = 1 } } },
     { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_03, 0x80240680), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_04, 0x80240520), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_05, 0x802417A0), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_06, 0x80241DC0), .bgName = "kmr_bg" },
+    { MAP(kmr_03), .bgName = "kmr_bg" },
+    { MAP(kmr_04), .bgName = "kmr_bg" },
+    { MAP(kmr_05), .bgName = "kmr_bg" },
+    { MAP(kmr_06), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_07, 0x80240B70), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_09, 0x80241550), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_10, 0x80240640), .bgName = "kmr_bg" },
