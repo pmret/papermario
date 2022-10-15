@@ -1,7 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-#define NAMESPACE EF2650
+#include "dead_11.h"
 
 ApiStatus func_80240040_EF2650(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

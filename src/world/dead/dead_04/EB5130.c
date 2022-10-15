@@ -1,7 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-#define NAMESPACE EB5130
+#include "dead_04.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

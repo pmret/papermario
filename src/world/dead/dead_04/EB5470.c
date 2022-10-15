@@ -1,7 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-#define NAMESPACE EB5470
+#include "dead_04.h"
 
 ApiStatus func_80240340_EB5470(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

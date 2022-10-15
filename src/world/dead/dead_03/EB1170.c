@@ -1,15 +1,10 @@
-#include "dead.h"
-#include "common.h"
-
-// Has some relation to flo_12 (CC0E70.c) but it's rearranged and some stuff is different, so hard to tell
-
-#define NAMESPACE EB1170
+#include "dead_03.h"
 
 extern s32 func_80059AC8(s32, s32);
 extern s32 D_802417E4_EB2644;
 extern s32 D_802417E8_EB2648;
-extern s32 EB1170_D_802442D0[];
-extern s32 EB1170_LetterDelivery_SavedNpcAnim;
+extern s32 dead_03_D_802442D0[];
+extern s32 dead_03_LetterDelivery_SavedNpcAnim;
 extern s32 D_800B8DEC;
 
 #include "world/common/todo/StashVars.inc.c"
@@ -54,13 +49,13 @@ ApiStatus func_802406E0_EB1540(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            EB1170_D_802442D0[i] = ptr[i];
+            dead_03_D_802442D0[i] = ptr[i];
         }
-        EB1170_D_802442D0[i] = 0;
+        dead_03_D_802442D0[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            EB1170_D_802442D0[i] = i + 16;
-            EB1170_D_802442D0[112] = 0;
+            dead_03_D_802442D0[i] = i + 16;
+            dead_03_D_802442D0[112] = 0;
         }
     }
     return ApiStatus_DONE2;

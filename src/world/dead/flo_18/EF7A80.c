@@ -1,9 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-// Copy of flo_18 (CDC6A0.c)
-
-#define NAMESPACE EF7A80
+#include "flo_18.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

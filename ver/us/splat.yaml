@@ -14606,8 +14606,8 @@ segments:
     - [0xEE8940, c]
     - [0xEE8970, data]
     - [0xEEB900]
-  - name: dead_10
-    dir: world/dead/dead_10
+  - name: dead_flo_16
+    dir: world/dead/flo_16
     type: code
     start: 0xEED100
     vram: 0x80240000
@@ -14630,8 +14630,8 @@ segments:
     - [0xEF2680, c]
     - [0xEF58E0, data]
     - [0xEF79C0]
-  - name: dead_12
-    dir: world/dead/dead_12
+  - name: dead_flo_18
+    dir: world/dead/flo_18
     type: code
     start: 0xEF7A80
     vram: 0x80240000

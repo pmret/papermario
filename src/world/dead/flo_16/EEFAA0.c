@@ -1,9 +1,4 @@
-#include "dead.h"
-#include "common.h"
-
-// Copy of flo_16 (CD4770.c)
-
-#define NAMESPACE EEFAA0
+#include "flo_16.h"
 
 // Copy from flo_16/UnkFunc44
 ApiStatus func_802429A0_EEFAA0(Evt* script, s32 isInitialCall) {
