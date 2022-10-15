@@ -5,7 +5,7 @@
 #  error CHUCK_QUIZMO_NPC_ID must be defined for QuizmoData.inc.c
 #endif
 
-s32** N(Quizmo_varStash) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(EVS_Quizmo_GiveItem_0) = {
     EVT_CALL(ShowGotItem, LVar0, 1, 0)

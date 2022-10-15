@@ -2541,7 +2541,7 @@ segments:
     start: 0x3251D0
     vram: 0x802C0000
     subsegments:
-    - [0x3251D0, c, 3251D0]
+    - [0x3251D0, c, world_use_item]
     - [0x3255E0]
 
 ###############
@@ -8138,13 +8138,13 @@ segments:
     start: 0x8ABF90
     vram: 0x80240000
     subsegments:
-    - [0x8ABF90, c]
-    - [0x8ACD00, data]
-    - [0x8ACDB0, data]
-    - [0x8ACFE0, data]
-    - [0x8AEC40, data]
-    - [0x8B0010, data]
-    - [0x8B0060]
+    - [0x8ABF90, c, kmr_00_0_header]
+    - [0x8ABF90, c, kmr_00_1_music]
+    - [0x8ABF90, c, kmr_00_2_main]
+    - [0x8ABF90, c, kmr_00_3_revival]
+    - [0x8ACC40, c, kmr_00_4_npc]
+    - [0x8ACC40, c, kmr_00_5_entity]
+    - [0x8ACD00]
   - name: kmr_02
     dir: world/area_kmr/kmr_02
     type: code
@@ -8171,51 +8171,64 @@ segments:
     start: 0x8C7F90
     vram: 0x80240000
     subsegments:
-    - [0x8C7F90, c]
-    - [0x8C8140, c]
-    - [0x8C82B0, c]
-    - [0x8C83A0, c]
-    - [0x8C85E0, c]
-    - [0x8C85E0]
+    - [0x8C7F90, c, kmr_03_0_header]
+    - [0x8C7F90, c, kmr_03_1_music]
+    - [0x8C7F90, c, kmr_03_2_main]
+    - [0x8C7F90, c, kmr_03_3_npc]
+    - [0x8C82B0, c, kmr_03_4_entity]
+    - [0x8C83A0, c, kmr_03_5_foliage]
+    - [0x8C85E0, c, kmr_03_6_fall_down]
+    - [0x8C8680]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
     start: 0x8CA900
     vram: 0x80240000
     subsegments:
-    - [0x8CA900, c]
-    - [0x8CA960, c]
-    - [0x8CAD70, data]
-    - [0x8CAF00, data]
-    - [0x8CB160, data]
-    - [0x8CC4F0, data]
-    - [0x8CE060]
+    - [0x8CA900, c, kmr_04_0_header]
+    - [0x8CA900, c, kmr_04_1_music]
+    - [0x8CA900, c, kmr_04_2_main]
+    - [0x8CA900, c, kmr_04_3_npc]
+    - [0x8CA960, c, kmr_04_4_entity]
+    - [0x8CA960, c, kmr_04_5_foliage]
+    - [0x8CAD70, .data, kmr_04_0_header]
+    - [0x8CAE60, .data, kmr_04_1_music]
+    - [0x8CAF00, .data, kmr_04_2_main]
+    - [0x8CB160, .data, kmr_04_3_npc]
+    - [0x8CC380, .data, kmr_04_4_entity]
+    - start: 0x8CC4F0
+      type: .data
+      name: kmr_04_5_foliage
+      subsegments:
+      - [0x8CC4F0, ci4, hammer_block_message, 48, 48]
+      - [0x8CC970, palette, hammer_block_message]
+      - [0x8CC990]
   - name: kmr_05
     dir: world/area_kmr/kmr_05
     type: code
     start: 0x8CE070
     vram: 0x80240000
     subsegments:
-    - [0x8CE070, c]
-    - [0x8CF570, c]
-    - [0x8CF7F0, data]
-    - [0x8CF880, data]
-    - [0x8D0900, data]
-    - [0x8D0940, data]
-    - [0x8D14A0]
+    - [0x8CE070, c, kmr_05_0_header]
+    - [0x8CE070, c, kmr_05_1_music]
+    - [0x8CE070, c, kmr_05_2_main]
+    - [0x8CE070, c, kmr_05_3_npc]
+    - [0x8CF570, c, kmr_05_4_entity]
+    - [0x8CF570, c, kmr_05_5_foliage]
+    - [0x8CF7F0]
   - name: kmr_06
     dir: world/area_kmr/kmr_06
     type: code
     start: 0x8D1510
     vram: 0x80240000
     subsegments:
-    - [0x8D1510, c]
-    - [0x8D2A10, c]
-    - [0x8D32B0, data]
-    - [0x8D3340, data]
-    - [0x8D3AC0, data]
-    - [0x8D3B30, data]
-    - [0x8D3D50]
+    - [0x8D1510, c, kmr_06_0_header]
+    - [0x8D1510, c, kmr_06_1_music]
+    - [0x8D1510, c, kmr_06_2_main]
+    - [0x8D1510, c, kmr_06_3_npc]
+    - [0x8D2A10, c, kmr_06_4_entity]
+    - [0x8D2A10, c, kmr_06_5_sticker_sign]
+    - [0x8D32B0]
   - name: kmr_07
     dir: world/area_kmr/kmr_07
     type: code
@@ -8658,6 +8671,7 @@ segments:
     type: code
     start: 0x93F5B0
     vram: 0x80240000
+    subalign: 16
     subsegments:
     - [0x93F5B0, c, sbk_30_0_header]
     - [0x93F5B0, c, sbk_30_1_music]
@@ -8933,10 +8947,14 @@ segments:
     start: 0x95B200
     vram: 0x80240000
     subsegments:
-    - [0x95B200,       c, 95B200]
-    - [0x95B7E0,       c, 95B7E0]
-    - [0x95E660,       c, 95E660]
-    - [0x95E7A0,       c, 95E7A0]
+    - [0x95B200, c, dro_01_0_header]
+    - [0x95B200, c, dro_01_1_music]
+    - [0x95B200, c, dro_01_2_main]
+    - [0x95B7E0, c, dro_01_3_npc]
+    - [0x95E660, c, dro_01_4_shop]
+    - [0x95E660, c, dro_01_5_building]
+    - [0x95E7A0, c, dro_01_6_entity]
+    - [0x95EA80, c, dro_01_7_foliage]
     - [0x95ECC0]
   - name: dro_02
     dir: world/area_dro/dro_02
@@ -8944,16 +8962,34 @@ segments:
     start: 0x9691C0
     vram: 0x80240000
     subsegments:
-    - [0x9691C0,       c, 9691C0]
-    - [0x9694C0,       c, 9694C0]
-    - start: 0x96CC30
+    - [0x9691C0, c, dro_02_0_header]
+    - [0x9691C0, c, dro_02_1_music]
+    - [0x9691C0, c, dro_02_2_entity]
+    - [0x9691C0, c, dro_02_3_main]
+    - [0x9694C0, c, dro_02_4_building]
+    - [0x9694C0, c, dro_02_5_npc]
+    - [0x96CC30, .data, dro_02_0_header]
+    - [0x96CCB0, .data, dro_02_1_music]
+    - [0x96CD90, .data, dro_02_2_entity]
+    - [0x96CE00, .data, dro_02_3_main]
+    - [0x96D380, .data, dro_02_4_building]
+    - start: 0x96DFA0
       type: .data
-      name: 9694C0
+      name: dro_02_5_npc
       subsegments:
-      - [0x96CC30]
-      - [0x971F98,     vtx, vtx/971F98]
-      - [0x9722B8,     vtx, vtx/9722B8]
-      - [0x973578]
+      - [0x96DFA0]
+      - [0x9707A8, ci4, card, 32, 32]
+      - [0x9709A8, palette, card]
+      - [0x9709C8, vtx, card_1]
+      - [0x970A48, vtx, card_2]
+      - [0x970A88, gfx, card_setup]
+      - [0x970B78, gfx, card_1]
+      - [0x970BF8, gfx, card_2]
+      - [0x970C40]
+      - [0x971F98, vtx, toad_house_blanket]
+      - [0x973578, gfx, toad_house_blanket]
+      - [0x9736E0, rgba16, toad_house_blanket, 16, 32]
+      - [0x973AE0]
     - [0x9780D0]
   - name: isk_01
     dir: world/area_isk/isk_01
@@ -9236,6 +9272,7 @@ segments:
     type: code
     start: 0x9B1790
     vram: 0x80240000
+    subalign: 16
     subsegments:
     - [0x9B1790, c, trd_06_0_header]
     - [0x9B1790, c, trd_06_1_main]
@@ -9243,7 +9280,6 @@ segments:
     - [0x9B2280, c, trd_06_3_npc_prisoners]
     - [0x9B2280, c, trd_06_4_npc_koopa_bros]
     - [0x9B2280, c, trd_06_5_entity]
-    - [0x9B2410, c, trd_06_6_party_image]
     - [0x9B24B0]
   - name: trd_07
     dir: world/area_trd/trd_07
@@ -11869,6 +11905,7 @@ segments:
     type: code
     start: 0xC6C920
     vram: 0x80240000
+    subalign: 16
     subsegments:
     - [0xC6C920, c, kzn_06_1_main]
     - [0xC6CC30, c, kzn_06_2_entity]
@@ -14424,89 +14461,111 @@ segments:
 #################
 ### Dead maps ###
 #################
-  - type: code
+  - name: dead_kzn_17
+    dir: world/dead/kzn_17
+    type: code
     start: 0xEA0900
     vram: 0x80240000
     subsegments:
     - [0xEA0900, c]
-    - [0xEA0C10, c, EA0C10]
-    - [0xEA36E0, c, EA36E0]
-    - [0xEA3A80, data, dead/EA3A80]
+    - [0xEA0C10, c]
+    - [0xEA36E0, c]
+    - [0xEA3A80, data]
     - [0xEA6D70]
-  - type: code
+  - name: dead_kzn_18
+    dir: world/dead/kzn_18
+    type: code
     start: 0xEA6FD0
     vram: 0x80240000
     subsegments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
-    - [0xEA7390, data, dead/EA7390]
-  - type: code
+    - [0xEA7390, data]
+  - name: dead_kzn_19
+    dir: world/dead/kzn_19
+    type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
     - [0xEA8AE0, c]
-    - [0xEAA810, data, dead/EAA810]
+    - [0xEAA810, data]
     - [0xEB0E20]
-  - type: code
+  - name: dead_03
+    dir: world/dead/dead_03
+    type: code
     start: 0xEB0E60
     vram: 0x80240000
     subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
-    - [0xEB1920, data, dead/EB1920]
-  - type: code
+    - [0xEB1920, data]
+  - name: dead_04
+    dir: world/dead/dead_04
+    type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
-    - [0xEB54C0, data, dead/EB54C0]
-  - type: code
+    - [0xEB54C0, data]
+  - name: dead_kzn_23
+    dir: world/dead/kzn_23
+    type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
     - [0xEB7230, c]
-    - [0xEB7540, c, EB7540]
-    - [0xEB7850, data, dead/EB7850]
+    - [0xEB7540, c]
+    - [0xEB7850, data]
     - [0xEB8E40]
-  - type: code
+  - name: dead_flo_00
+    dir: world/dead/flo_00
+    type: code
     start: 0xEB8E50
     vram: 0x80240000
     subsegments:
-    - [0xEB8E50, c, EB8E50]
-    - [0xEB8E90, c, EB8E90]
+    - [0xEB8E50, c]
+    - [0xEB8E90, c]
     - [0xEB9D90, c]
-    - [0xEBA260, data, dead/EBA260]
+    - [0xEBA260, data]
     - [0xEC2000]
-  - type: code
+  - name: dead_flo_03
+    dir: world/dead/flo_03
+    type: code
     start: 0xEC2200
     vram: 0x80240000
     subsegments:
-    - [0xEC2200, c, EC2200]
-    - [0xEC2240, c, EC2240]
+    - [0xEC2200, c]
+    - [0xEC2240, c]
     - [0xEC2610, c]
-    - [0xEC2850, data, dead/EC2850]
+    - [0xEC2850, data]
     - [0xEC7170]
-  - type: code
+  - name: dead_flo_07
+    dir: world/dead/flo_07
+    type: code
     start: 0xEC71B0
     vram: 0x80240000
     subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
-    - [0xEC78F0, data, dead/EC78F0]
-  - type: code
+    - [0xEC78F0, data]
+  - name: dead_flo_08
+    dir: world/dead/flo_08
+    type: code
     start: 0xEC9D00
     vram: 0x80240000
     subsegments:
     - [0xEC9D00, c]
     - [0xECAA40, c]
-    - [0xECAA80, c, ECAA80]
+    - [0xECAA80, c]
     - [0xECB930, c]
     - [0xECBB70, c]
-    - [0xECBC10, data, dead/ECBC10]
+    - [0xECBC10, data]
     - [0xECFE60]
-  - type: code
+  - name: dead_flo_09
+    dir: world/dead/flo_09
+    type: code
     start: 0xECFFF0
     vram: 0x80240000
     subsegments:
@@ -14514,9 +14573,11 @@ segments:
     - [0xED0030, c]
     - [0xED00D0, c]
     - [0xED0310, c]
-    - [0xED1840, data, dead/ED1840]
+    - [0xED1840, data]
     - [0xED41C0]
-  - type: code
+  - name: dead_flo_10
+    dir: world/dead/flo_10
+    type: code
     start: 0xED4220
     vram: 0x80240000
     subsegments:
@@ -14525,40 +14586,50 @@ segments:
     - [0xED42A0, c]
     - [0xED46D0, c]
     - [0xED5540, c]
-    - [0xED5780, data, dead/ED5780]
-  - type: code
+    - [0xED5780, data]
+  - name: dead_flo_11
+    dir: world/dead/flo_11
+    type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
-    - [0xED8E20, c, ED8E20]
-    - [0xED9170, data, dead/ED9170]
+    - [0xED8E20, c]
+    - [0xED9170, data]
     - [0xEDBF90]
-  - type: code
+  - name: dead_flo_12
+    dir: world/dead/flo_12
+    type: code
     start: 0xEDBFE0
     vram: 0x80240000
     subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
-    - [0xEDC6D0, data, dead/EDC6D0]
-  - type: code
+    - [0xEDC6D0, data]
+  - name: dead_flo_13
+    dir: world/dead/flo_13
+    type: code
     start: 0xEDE9C0
     vram: 0x80240000
     subsegments:
     - [0xEDE9C0, c]
-    - [0xEDEA00, c, EDEA00]
-    - [0xEE2040, c, EE2040]
-    - [0xEE20E0, data, dead/EE20E0]
+    - [0xEDEA00, c]
+    - [0xEE2040, c]
+    - [0xEE20E0, data]
     - [0xEE64B0]
-  - type: code
+  - name: dead_flo_14
+    dir: world/dead/flo_14
+    type: code
     start: 0xEE65B0
     vram: 0x80240000
     subsegments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data, dead/EE8970]
+    - [0xEE8970, data]
     - [0xEEB900]
-  - type: code
+  - name: dead_flo_16
+    dir: world/dead/flo_16
+    type: code
     start: 0xEED100
     vram: 0x80240000
     subsegments:
@@ -14567,25 +14638,29 @@ segments:
     - [0xEED1E0, c]
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
-    - [0xEEFAD0, data, dead/EEFAD0]
+    - [0xEEFAD0, data]
     - [0xEF2550]
-  - type: code
+  - name: dead_11
+    dir: world/dead/dead_11
+    type: code
     start: 0xEF2610
     vram: 0x80240000
     subsegments:
     - [0xEF2610, c]
     - [0xEF2650, c]
-    - [0xEF2680, c, EF2680]
-    - [0xEF58E0, data, dead/EF58E0]
+    - [0xEF2680, c]
+    - [0xEF58E0, data]
     - [0xEF79C0]
-  - type: code
+  - name: dead_flo_18
+    dir: world/dead/flo_18
+    type: code
     start: 0xEF7A80
     vram: 0x80240000
     subsegments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
-    - [0xEF8250, data, dead/EF8250]
+    - [0xEF8250, data]
   - type: code
     start: 0xEFEB00
     vram: 0x80240000

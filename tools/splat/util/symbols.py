@@ -140,9 +140,8 @@ def initialize(all_segments: "List[Segment]"):
                                                 )
                                                 log.error("")
                                             else:
-                                                # Add segment to symbol, symbol to segment
+                                                # Add segment to symbol
                                                 sym.segment = seg
-                                                seg.add_symbol(sym)
                                             continue
                                     except:
                                         log.parsing_error_preamble(path, line_num, line)
@@ -184,6 +183,9 @@ def initialize(all_segments: "List[Segment]"):
                             ignored_addresses.add(sym.vram_start)
                             ignore_sym = False
                             continue
+
+                        if sym.segment:
+                            sym.segment.add_symbol(sym)
 
                         sym.user_declared = True
                         add_symbol(sym)

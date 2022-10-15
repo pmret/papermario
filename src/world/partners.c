@@ -111,7 +111,7 @@ extern HudScript HES_StatusSPIncrement5;
 extern HudScript HES_StatusSPIncrement6;
 extern HudScript HES_StatusSPIncrement7;
 
-extern EvtScript D_802C05CC_32579C;
+extern EvtScript EVS_World_UseItem;
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
@@ -156,7 +156,7 @@ s32 D_800F8000[] = { 8, 0, 0, 0 };
 UseItemStruct UseItemDmaArgs = {
     _3251D0_ROM_START,
     _3251D0_ROM_END,
-    &D_802C05CC_32579C,
+    &EVS_World_UseItem,
     0
 };
 s32 D_800F8020 = 0;

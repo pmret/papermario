@@ -25,4 +25,12 @@ enum {
     AF_IWA_SpokeWIthDryite      = AreaFlag(2),
 };
 
+extern MapSettings iwa_00_settings;
+extern MapSettings iwa_01_settings;
+extern MapSettings iwa_02_settings;
+extern MapSettings iwa_03_settings;
+extern MapSettings iwa_04_settings;
+extern MapSettings iwa_10_settings;
+extern MapSettings iwa_11_settings;
+
 #endif

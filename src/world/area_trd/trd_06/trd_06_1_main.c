@@ -15,8 +15,6 @@ extern EvtScript N(EVS_Scene_ImprisonedKoopaBros);
 EvtScript N(EVS_ExitDoors_trd_04_5) = EVT_EXIT_DOUBLE_DOOR(trd_06_ENTRY_1, "trd_04", trd_04_ENTRY_5,
     COLLIDER_ttw, MODEL_o93, MODEL_o94);
 
-MAP_RODATA_PAD(1,pad); //TODO remove
-
 EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)

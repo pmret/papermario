@@ -290,7 +290,6 @@ ApiStatus CamPresetUpdate_L(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleCamPos(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleCamParam(Evt* script, s32 isInitialCall);
 ApiStatus func_8026DF88(Evt* script, s32 isInitialCall);
-ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall);
 ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall);
 ApiStatus func_802CABE8(Evt* script, s32 isInitialCall);

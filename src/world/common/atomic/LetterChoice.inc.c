@@ -1,13 +1,13 @@
 #include "common.h"
 
-//TODO remove
+//TODO this should be static, but causes wierd padding issues in sbk_30
 extern s32 N(LetterDelivery_SavedNpcAnim);
 
 #include "world/common/complete/GiveReward.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 
-ApiStatus N(LetterDelivery_Init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LetterDelivery_Init)) {
     Bytecode* args = script->ptrReadPos;
 
     script->varTable[2] = evt_get_variable(script, *args++);
@@ -23,7 +23,7 @@ ApiStatus N(LetterDelivery_Init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(LetterDelivery_CalcLetterPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LetterDelivery_CalcLetterPos)) {
     Bytecode* args = script->ptrReadPos;
     s32 varX = *args++;
     f32 x = evt_get_variable(script, varX);
@@ -44,7 +44,7 @@ ApiStatus N(LetterDelivery_CalcLetterPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LetterDelivery_SaveNpcAnim)) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
     N(LetterDelivery_SavedNpcAnim) = npc->currentAnim;
@@ -52,7 +52,7 @@ ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LetterDelivery_RestoreNpcAnim)) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
     npc->currentAnim = N(LetterDelivery_SavedNpcAnim);

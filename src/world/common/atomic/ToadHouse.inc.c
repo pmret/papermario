@@ -2,18 +2,18 @@
 #include "npc.h"
 #include "../../partners.h"
 
-ApiStatus N(ToadHouse_DisableStatusMenu)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_DisableStatusMenu)) {
     func_800E9894();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_ShowStatusMenu)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_ShowStatusMenu)) {
     func_800E98C4();
     sync_status_menu();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_UpdateScreenOverlay)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_UpdateScreenOverlay)) {
     Bytecode* args = script->ptrReadPos;
     s32 type = evt_get_variable(script, *args++);
     s32 zoom = evt_get_variable(script, *args++);
@@ -23,7 +23,7 @@ ApiStatus N(ToadHouse_UpdateScreenOverlay)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_CamSetFOV)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_CamSetFOV)) {
     Bytecode* args = script->ptrReadPos;
     s32 camIdx = evt_get_variable(script, *args++);
 
@@ -31,7 +31,7 @@ ApiStatus N(ToadHouse_CamSetFOV)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_AwaitScriptComplete)) {
     Bytecode* args = script->ptrReadPos;
     s32 waitingScriptID = evt_get_variable(script, *args++);
     
@@ -42,7 +42,7 @@ ApiStatus N(ToadHouse_AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(ToadHouse_PartnerSuspendAbilityScript)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_PartnerSuspendAbilityScript)) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
@@ -50,12 +50,12 @@ ApiStatus N(ToadHouse_PartnerSuspendAbilityScript)(Evt* script, s32 isInitialCal
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_PartnerResumeAbilityScript)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_PartnerResumeAbilityScript)) {
     partner_resume_ability_script();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_DoesPlayerNeedSleep)) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[1] = FALSE;
@@ -73,7 +73,7 @@ ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_InitScreenOverlay)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_InitScreenOverlay)) {
     Bytecode* args = script->ptrReadPos;
     s32 r = evt_get_variable(script, *args++);
     s32 g = evt_get_variable(script, *args++);
@@ -83,7 +83,7 @@ ApiStatus N(ToadHouse_InitScreenOverlay)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_PutPartnerAway)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_PutPartnerAway)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode saveToVar = *args++;
 
@@ -92,7 +92,7 @@ ApiStatus N(ToadHouse_PutPartnerAway)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ToadHouse_GetPartnerBackOut)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_GetPartnerBackOut)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode readFromVar = *args++;
 
@@ -101,6 +101,6 @@ ApiStatus N(ToadHouse_GetPartnerBackOut)(Evt* script, s32 isInitialCall) {
 }
 
 // do nothing (unused)
-ApiStatus N(ToadHouse_Stub)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ToadHouse_Stub)) {
     return ApiStatus_DONE2;
 }
