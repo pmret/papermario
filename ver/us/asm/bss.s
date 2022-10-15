@@ -739,7 +739,7 @@ dlabel D_800B0B1C
 dlabel D_800B0B20
 .space 0x00000010
 
-dlabel D_800B0B30
+dlabel __MotorDataBuf
 .space 4
 
 dlabel D_800B0B34
