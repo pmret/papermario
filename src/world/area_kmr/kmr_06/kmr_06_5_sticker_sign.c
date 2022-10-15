@@ -1,4 +1,8 @@
 #include "kmr_06.h"
+#include "ld_addrs.h"
+
+extern s32 gItemIconRasterOffsets[];
+extern s32 gItemIconPaletteOffsets[];
 
 typedef struct StickerData {
     /* 0x00 */ s32 folderID;
@@ -14,8 +18,6 @@ typedef struct StickerData {
     /* 0x40 */ f32 gravity;
     /* 0x44 */ s32 duration;
 } StickerData;
-
-API_CALLABLE(func_802417E0_8D2CF0);
 
 void N(appendGfx_sticker)(void* renderData) {
     FoldImageRecPart foldImage;
@@ -67,7 +69,51 @@ void N(worker_render_sticker)(void) {
     queue_render_task(renderTaskPtr);
 }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_06/kmr_06_5_sticker_sign", func_802417E0_8D2CF0);
+API_CALLABLE(N(CreateSticker)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemID = evt_get_variable(script, *args++);
+
+    StickerData* sticker = (StickerData*) heap_malloc(sizeof(*sticker));
+    IMG_PTR iconImg = heap_malloc(0x200);
+    PAL_PTR iconPal = heap_malloc(0x20);
+
+    s32 iconBase = (s32) icon_present_ROM_START;
+    s32 iconImgEnd = iconBase + 0x200;
+    s32 iconPalEnd = iconBase + 0x20;
+
+    sticker->pos.x = 0.0f;
+    sticker->pos.y = 0.0f;
+    sticker->pos.z = 0.0f;
+    sticker->pitch = 0.0f;
+    sticker->yaw = 0.0f;
+    sticker->goalPos.x = 0.0f;
+    sticker->goalPos.y = 0.0f;
+    sticker->goalPos.z = 0.0f;
+    sticker->moveAngle = 0.0f;
+    sticker->moveSpeed = 0.0f;
+    sticker->fallSpeed = 0.0f;
+    sticker->gravity = 0.0f;
+    sticker->scale.x = 1.0f;
+    sticker->scale.y = 1.0f;
+    sticker->scale.z = 1.0f;
+
+    sticker->duration = 0;
+    dma_copy(
+        (u8*) (iconBase + gItemIconRasterOffsets[itemID]),
+        (u8*) (iconImgEnd + gItemIconRasterOffsets[itemID]),
+        iconImg);
+    dma_copy(
+        (u8*) (iconBase + gItemIconPaletteOffsets[itemID]),
+        (u8*) (iconPalEnd + gItemIconPaletteOffsets[itemID]),
+        iconPal);
+    
+    sticker->folderID = func_8013A704(1);
+    sticker->workerID = create_generic_entity_world(NULL, N(worker_render_sticker));
+    evt_set_variable(script, MapVar(10), (s32) sticker);
+    evt_set_variable(script, MapVar(11), (s32) iconImg);
+    evt_set_variable(script, MapVar(12), (s32) iconPal);
+    return ApiStatus_DONE2;
+}
 
 API_CALLABLE(N(SetStickerPos)) {
     Bytecode* args = script->ptrReadPos;
@@ -79,7 +125,7 @@ API_CALLABLE(N(SetStickerPos)) {
     sticker->pos.x = x;
     sticker->pos.y = y;
     sticker->pos.z = z;
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetStickerRotation)) {
@@ -144,7 +190,7 @@ API_CALLABLE(N(JumpStickerTo)) {
     }
 }
 
-API_CALLABLE(N(func_80241C78_8D3188)) {
+API_CALLABLE(N(SetStickerGravity)) {
     Bytecode* args = script->ptrReadPos;
     f32 gravity = evt_get_float_variable(script, *args++);
     StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
@@ -190,7 +236,7 @@ EvtScript N(EVS_OnInspect_StickerSign) = {
                 EVT_CALL(N(SetStickerRotation), 0, 0)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(N(func_80241C78_8D3188), EVT_FLOAT(0.6))
+                EVT_CALL(N(SetStickerGravity), EVT_FLOAT(0.6))
                 EVT_CALL(N(JumpStickerTo), 362, 0, 40, 23)
                 EVT_CALL(N(DeleteSticker))
                 EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, 362, 0, 40, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KMR06_Item_Mushroom)
@@ -206,7 +252,7 @@ EvtScript N(EVS_OnInspect_StickerSign) = {
 
 EvtScript N(EVS_SetupStickerSign) = {
     EVT_IF_EQ(GF_KMR06_Item_Mushroom, FALSE)
-        EVT_CALL(func_802417E0_8D2CF0, ITEM_MUSHROOM)
+        EVT_CALL(N(CreateSticker), ITEM_MUSHROOM)
         EVT_CALL(N(SetStickerPos), 362, 40, -17)
     EVT_END_IF
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspect_StickerSign)), TRIGGER_WALL_PRESS_A, COLLIDER_o852, 1, 0)
