@@ -865,7 +865,7 @@ dlabel nuGfxMesgQ
 dlabel D_800B42F4
 .space 0x00000014
 
-dlabel D_800B4308
+dlabel __CartRomHandle
 .space 4
 
 dlabel D_800B430C
