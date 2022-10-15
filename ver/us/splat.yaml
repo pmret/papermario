@@ -14488,8 +14488,8 @@ segments:
     - [0xEB5130, c]
     - [0xEB5470, c]
     - [0xEB54C0, data]
-  - name: dead_05
-    dir: world/dead/dead_05
+  - name: dead_kzn_23
+    dir: world/dead/kzn_23
     type: code
     start: 0xEB7230
     vram: 0x80240000
@@ -14498,8 +14498,8 @@ segments:
     - [0xEB7540, c]
     - [0xEB7850, data]
     - [0xEB8E40]
-  - name: dead_06
-    dir: world/dead/dead_06
+  - name: dead_flo_00
+    dir: world/dead/flo_00
     type: code
     start: 0xEB8E50
     vram: 0x80240000
@@ -14509,8 +14509,8 @@ segments:
     - [0xEB9D90, c]
     - [0xEBA260, data]
     - [0xEC2000]
-  - name: dead_07
-    dir: world/dead/dead_07
+  - name: dead_flo_03
+    dir: world/dead/flo_03
     type: code
     start: 0xEC2200
     vram: 0x80240000
@@ -14520,8 +14520,8 @@ segments:
     - [0xEC2610, c]
     - [0xEC2850, data]
     - [0xEC7170]
-  - name: dead_08
-    dir: world/dead/dead_08
+  - name: dead_flo_07
+    dir: world/dead/flo_07
     type: code
     start: 0xEC71B0
     vram: 0x80240000
@@ -14529,8 +14529,8 @@ segments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
     - [0xEC78F0, data]
-  - name: dead_09
-    dir: world/dead/dead_09
+  - name: dead_flo_08
+    dir: world/dead/flo_08
     type: code
     start: 0xEC9D00
     vram: 0x80240000
