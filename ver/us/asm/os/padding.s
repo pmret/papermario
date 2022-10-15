@@ -7,4 +7,4 @@
 
 .section .text
 
-.space 10
+.space 0x10
