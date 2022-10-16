@@ -6,7 +6,7 @@
 #include "sprite.h"
 
 extern s32 D_800DC060;
-extern Stage* D_800DC064;
+extern StageListRow* D_800DC064;
 
 BattleArea gBattleAreas[] = {
     [BTL_AREA_KMR_PART_1] = {

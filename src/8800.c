@@ -2,10 +2,13 @@
 #include "camera.h"
 #include "nu/nusys.h"
 #include "hud_element.h"
+#include "camera.h"
 
-// D_8009A5EC bss here
+f32 D_8009A5EC;
 
-Camera* initialize_next_camera(CameraInitData* data);
+void render_models(void);
+void execute_render_tasks(void);
+void render_item_entities(void);
 
 void update_cameras(void) {
     s32 i;

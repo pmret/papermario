@@ -127,9 +127,9 @@ typedef struct CamPosSettings {
 } CamPosSettings; // size = 0x1C
 
 typedef struct DmaTable {
-    /* 0x00 */ s32 start;
-    /* 0x04 */ s32 end;
-    /* 0x08 */ s32 dest;
+    /* 0x00 */ u8* start;
+    /* 0x04 */ u8* end;
+    /* 0x08 */ u8* dest;
 } DmaTable;
 
 typedef struct UseItemStruct {
@@ -776,7 +776,7 @@ typedef struct Camera {
     /* 0x1D4 */ char unk_1D4[0x28];
     /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
     /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
-    /* 0x204 */ Matrix4s* unkMatrix;
+    /* 0x204 */ Mtx* unkMatrix;
     /* 0x208 */ s32 unk_208;
     /* 0x20C */ Matrix4s* unkEffectMatrix;
     /* 0x210 */ char unk_210[0x2];

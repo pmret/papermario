@@ -116,7 +116,7 @@ typedef struct HudCacheEntry {
 typedef struct PopupMenu {
     /* 0x000 */ HudScript* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
-    /* 0x084 */ s32 nameMsg[32];
+    /* 0x084 */ char* nameMsg[32];
     /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[0x4];
@@ -207,7 +207,14 @@ extern HudScript HES_StatusCoin;
 extern HudScript HES_Refund;
 extern HudScript HES_MenuTimes;
 
-extern s32 gPartnerPopupProperties[13][4];
+typedef struct PartnerPopupProperties {
+    /* 0x00 */ s32 nameMsg;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 worldDescMsg;
+    /* 0x0C */ s32 battleDescMsg;
+} PartnerPopupProperties; // size = 0x10
+
+extern PartnerPopupProperties gPartnerPopupProperties[13];
 extern HudScript* wDisabledPartnerHudScripts[];
 extern HudScript* wPartnerHudScripts[];
 

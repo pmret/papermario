@@ -493,7 +493,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
+s32 create_generic_entity_frontUI(s32 (*updateFunc)(void), void (*drawFunc)(void));
 DynamicEntity* get_generic_entity(s32 idx);
 Trigger* bind_trigger_1(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
@@ -518,6 +518,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 //TODO -- remove these and use audio/public.h instead
 
+enum AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
@@ -802,6 +803,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 void* mdl_get_next_texture_address(s32);
+s32 cancel_current_message(void);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
@@ -1059,6 +1061,7 @@ f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 void func_800EF3D4(s32);
 
+void func_80116698(void);
 void func_8011B950(u16, s32, s32, s32);
 
 #endif

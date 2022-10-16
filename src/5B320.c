@@ -159,11 +159,9 @@ s32 D_8008EEC0[] = { 0, 1, 2, 3, 4, 9, 6, 7, 8, 5, 10, 11 };
 
 s32 D_8008EEF0[] = { 0, 1, 2, 3, 4, 0, 6, 7, 8, 5, 0, 0 };
 
-const char D_800989A0[] = "なし";
-
-s32 gPartnerPopupProperties[][4] = {
+PartnerPopupProperties gPartnerPopupProperties[] = {
     [PARTNER_NONE] {
-        &D_800989A0,
+        "なし",
         0x00000000,
         0x00000000,
         0x00000000,

@@ -81,7 +81,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
             partnerID = N(SuperBlock_PartnerIDs)[i];
             if (playerData->partners[partnerID].enabled) {
                 popupMenu->userIndex[entryIndex] = partnerID;
-                popupMenu->nameMsg[entryIndex] = gPartnerPopupProperties[partnerID][0];
+                popupMenu->nameMsg[entryIndex] = (char*) gPartnerPopupProperties[partnerID].nameMsg;
                 canUpgradePartner = N(SuperBlock_get_partner_rank)(partnerID, hasUltraStone);
                 if (canUpgradePartner >= 0) {
                     popupMenu->ptrIcon[entryIndex] = wPartnerHudScripts[partnerID];
@@ -122,7 +122,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
     destroy_popup_menu();
 
     if (script->functionTemp[1] != 255) {
-        script->varTable[0] = gPartnerPopupProperties[popupMenu->userIndex[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[popupMenu->userIndex[script->functionTemp[1] - 1]].nameMsg;
         script->varTable[1] = popupMenu->userIndex[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
@@ -138,7 +138,7 @@ API_CALLABLE(N(SuperBlock_SwitchToPartner)) {
 }
 
 API_CALLABLE(N(SuperBlock_LoadCurrentPartnerName)) {
-    set_message_msg(gPartnerPopupProperties[gPlayerData.currentPartner][0], 0);
+    set_message_msg(gPartnerPopupProperties[gPlayerData.currentPartner].nameMsg, 0);
     return ApiStatus_DONE2;
 }
 

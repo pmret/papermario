@@ -4,7 +4,6 @@
 #include "world/partners.h"
 
 ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
-AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
 
 extern MusicEvent* MusicEventList;
 extern s32 D_802DB7D4; // unused?
