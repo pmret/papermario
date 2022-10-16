@@ -17,8 +17,6 @@ ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall);
 ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall);
 ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall);
 
-void spawn_drops(Enemy* enemy);
-
 s32 D_80077C40 = 0;
 
 EvtScript D_80077C44 = {

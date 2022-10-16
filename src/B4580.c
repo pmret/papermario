@@ -1,5 +1,6 @@
 #include "model.h"
 #include "animation_script.h"
+#include "model.h"
 
 AnimScript gAnimScriptDefault = {
     AS_WAIT, 60,

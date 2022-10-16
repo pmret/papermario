@@ -4,6 +4,7 @@
 #include "nu/nusys.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "model.h"
 
 s32* D_80077950[] = { &D_8038F800, &D_803B5000, &heap_battleHead };
 
