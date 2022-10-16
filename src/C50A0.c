@@ -9,6 +9,13 @@
 
 #define MAX_ITEM_ENTITIES 256
 
+typedef struct Rect {
+    /* 0x00 */ s32 ulx;
+    /* 0x04 */ s32 uly;
+    /* 0x08 */ s32 lrx;
+    /* 0x0C */ s32 lry;
+} Rect; // size = 0x10
+
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
@@ -144,9 +151,269 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
     return ret;
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
+#ifdef NON_EQUIVALENT
+typedef struct Rect2b {
+    /* 0x00 */ s16 ulx;
+    /* 0x02 */ s16 uly;
+    /* 0x04 */ s16 lrx;
+    /* 0x06 */ s16 lry;
+} Rect2b; // size = 0x08
 
-INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
+s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight) {
+    Rect2b texRect;
+    Rect2b drawRect;
+    Rect ry;
+    Rect rx;
+    u16 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+    u8 stopDrawingLine;
+
+    if (posX >= clipX + clipWidth  || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + width)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + height)) {
+        return 0;
+    }
+
+    stopDrawing = 0;
+    texRect.uly = 0;
+    drawRect.uly = posY;
+    while (TRUE) {
+        texRect.lry = texRect.uly + 31;
+        drawRect.lry = drawRect.uly + 32;
+        texOffsetY = 0;
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += 32;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += 32;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + 31;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            texOffsetY = abs(posY - clipY);
+        }
+
+        if (drawRect.lry >= clipY + clipHeight) {
+            stopDrawing = TRUE;
+            drawRect.lry = clipY + clipHeight;
+            texRect.lry = clipY + clipHeight - posY - 1;
+        }
+
+        if ((u32)(texRect.lry + 1) >= height) {
+            stopDrawing = TRUE;
+            texRect.lry = height - 1;
+            drawRect.lry = height + posY;
+        }
+
+        stopDrawingLine = 0;
+        texRect.ulx = 0;
+        drawRect.ulx = posX;
+        while (TRUE) {
+            texRect.lrx = texRect.ulx + 63;
+            drawRect.lrx = drawRect.ulx + 64;
+            texOffsetX = 0;
+
+            if (drawRect.lrx <= clipX) {
+                do {
+                    texRect.ulx += 64;
+                    drawRect.ulx = drawRect.lrx;
+                    drawRect.lrx += 64;
+                } while (drawRect.lrx < clipX);
+                texRect.lrx = texRect.ulx + 63;
+            }
+
+            if (drawRect.ulx < clipX) {
+                drawRect.ulx = clipX;
+                texOffsetX = abs(posX - clipX);
+            }
+
+            if (drawRect.lrx >= clipX + clipWidth) {
+                stopDrawingLine = TRUE;
+                drawRect.lrx = clipX + clipWidth;
+                texRect.lrx = clipX + clipWidth - posX - 1;
+            }
+
+            if ((u32)(texRect.lrx + 1) >= width) {
+                stopDrawingLine = TRUE;
+                texRect.lrx = width - 1;
+                drawRect.lrx = width + posX;
+            }
+
+            if (bitDepth == G_IM_SIZ_4b) {
+                gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_16b) {
+                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_8b) {
+                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            }
+
+            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+                                0, texOffsetX * 32, texOffsetY * 32, 1024, 1024);
+
+            if (stopDrawingLine) {
+                break;
+            }
+            texRect.ulx += 64;
+            drawRect.ulx = drawRect.lrx;
+        }
+
+        if (stopDrawing) {
+            break;
+        }
+        texRect.uly += 32;
+        drawRect.uly = drawRect.lry;
+    }
+
+    return 1;
+}
+#else
+INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
+#endif
+
+s32 draw_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
+                     f32 scaleX, f32 scaleY) {
+    Rect texRect;
+    Rect drawRect;
+    s32 dsdx, dtdy;
+    s32 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+    u8 stopDrawingLine;
+
+    if (scaleX < 0.01 || scaleY < 0.01) {
+        return 0;
+    }
+
+    if (posX >= clipX + clipWidth  || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + width * scaleX)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + height * scaleY)) {
+        return 0;
+    }
+
+    stopDrawing = 0;
+    texRect.uly = 0;
+    drawRect.uly = posY;
+    dsdx = 1.0f / scaleX * 1024.0f;
+    dtdy = 1.0f / scaleY * 1024.0f;
+    while (TRUE) {
+        texRect.lry = texRect.uly + 31;
+        drawRect.lry = drawRect.uly + (scaleY * 32.0 + 0.5);
+        texOffsetY = 0;
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += 32;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += scaleY * 32.0f;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + 31;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            texOffsetY = abs(posY - clipY) / scaleY * 32.0f;
+        }
+
+        if ((u32)(texRect.lry + 1) >= height) {
+            texRect.lry = height - 1;
+            stopDrawing = 1;
+            drawRect.lry = posY + (s16)(texRect.lry * scaleY);
+            drawRect.lry += scaleY;
+        }
+
+        if (drawRect.lry > clipY + clipHeight) {
+            drawRect.lry = clipY + clipHeight;
+            if (!stopDrawing) {
+                drawRect.lry = clipY + clipHeight;
+                stopDrawing = 1;
+            }
+        }
+
+        stopDrawingLine = 0;
+        texRect.ulx = 0;
+        drawRect.ulx = posX;
+        while (TRUE) {
+            texRect.lrx = texRect.ulx + 63;
+            drawRect.lrx = drawRect.ulx + (scaleX * 64.0 + 0.3);
+            texOffsetX = 0;
+
+            if (drawRect.lrx <= clipX) {
+                do {
+                    texRect.ulx += 64;
+                    drawRect.ulx = drawRect.lrx;
+                    drawRect.lrx += scaleX * 64.0f;
+                } while (drawRect.lrx < clipX);
+                texRect.lrx = texRect.ulx + 63;
+            }
+
+            if (drawRect.ulx < clipX) {
+                drawRect.ulx = clipX;
+                texOffsetX = abs(posX - clipX) / scaleX * 32.0f;
+            }
+
+            if ((u32)(texRect.lrx + 1) >= width) {
+                texRect.lrx = width - 1;
+                stopDrawingLine = TRUE;
+                drawRect.lrx = posX + (s16)(texRect.lrx * scaleX);
+                drawRect.lrx = drawRect.lrx + scaleX + 0.3;
+            }
+
+            if (drawRect.lrx > clipX + clipWidth) {
+                drawRect.lrx = clipX + clipWidth;
+                stopDrawingLine = TRUE;
+            }
+
+            if (bitDepth == G_IM_SIZ_16b) {
+                gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_4b) {
+                gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            }
+
+            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, (drawRect.lrx - stopDrawingLine) * 4, drawRect.lry * 4,
+                                0, texOffsetX, texOffsetY, dsdx, dtdy);
+
+            if (stopDrawingLine) {
+                break;
+            }
+            texRect.ulx += 64;
+            drawRect.ulx = drawRect.lrx;
+        };
+
+        if (stopDrawing) {
+            break;
+        }
+        texRect.uly += 32;
+        drawRect.uly = drawRect.lry;
+    };
+
+    return 1;
+}
 
 s32 integer_log(s32 number, u32 base) {
     f32 fNumber = number;
@@ -162,7 +429,181 @@ s32 integer_log(s32 number, u32 base) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
+s32 draw_adjustable_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
+                     f32 scaleX, f32 scaleY) {
+    Rect texRect;
+    Rect drawRect;
+    u16 overlap;
+    s32 dsdx, dtdy;
+    s32 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+
+    u16 masks, maskt;
+
+    u16 texelNum;
+    u16 lineHeight;
+
+    f32 temp;
+
+    if (scaleX < 0.01 || scaleY < 0.01) {
+        return 0;
+    }
+
+    if (posX >= clipX + clipWidth || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + width * scaleX)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + height * scaleY)) {
+        return 0;
+    }
+    if (bitDepth == G_IM_SIZ_4b) {
+        if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
+            texelNum = 0x2000;
+        } else if (fmt == G_IM_FMT_CI) {
+            texelNum = 0x1000;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_8b) {
+        if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
+            texelNum = 0x1000;
+        } else if (fmt == G_IM_FMT_CI) {
+            texelNum = 0x800;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_16b) {
+        if (fmt == G_IM_FMT_RGBA) {
+            texelNum = 0x800;
+        } else if (fmt == G_IM_FMT_IA) {
+            texelNum = 0x800;
+        } else {
+            return 0;
+        }
+    } else if (bitDepth == G_IM_SIZ_32b) {
+        if (fmt == G_IM_FMT_RGBA) {
+            texelNum = 0x400;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+
+    dsdx = 1.0f / scaleX * 1024.0f;
+    dtdy = 1.0f / scaleY * 1024.0f;
+    lineHeight = texelNum / width;
+    if (lineHeight > height) {
+        lineHeight = height;
+    } else if (lineHeight <= 1) {
+        return 0;
+    }
+    if (scaleY <= 1.0) {
+        overlap = 0;
+    } else {
+        overlap = scaleY;
+    }
+
+    masks = integer_log(width, 2);
+    maskt = integer_log(height, 2);
+
+    stopDrawing = 0;
+
+    texRect.ulx = 0;
+    texRect.uly = 0;
+    drawRect.ulx = posX;
+    drawRect.uly = posY;
+
+    while (TRUE) {
+        texRect.lrx = width - 1;
+        texRect.lry = texRect.uly + lineHeight - 1;
+        drawRect.lry = drawRect.uly + lineHeight * scaleY;
+        drawRect.lrx = (s16)(drawRect.ulx + width * scaleX);
+
+
+        texOffsetX = texOffsetY = 0;
+
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += lineHeight;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += lineHeight * scaleY;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + lineHeight - 1;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            temp = abs(posY - clipY);
+            temp /= scaleY;
+            texOffsetY = temp * 32.0f;
+        }
+        if (texRect.lry + 1 == height){
+            stopDrawing = 1;
+        } else if (height < texRect.lry + 1) {
+            s32 temp;
+            texRect.lry = height - 1;
+            temp = height * scaleY;
+            stopDrawing = 1;
+            drawRect.lry = drawRect.uly + temp;
+        }
+
+        if (drawRect.lry >= clipY + clipHeight) {
+            if (!stopDrawing) {
+                drawRect.lry = clipY + clipHeight;
+                stopDrawing = 1;
+            } else if (drawRect.lry > clipY + clipHeight) {
+                drawRect.lry = clipY + clipHeight;
+            }
+        }
+        if (drawRect.ulx < clipX) {
+            drawRect.ulx = clipX;
+            temp = abs(posX - clipX);
+            temp /= scaleX;
+            texOffsetX = temp * 32.0f;
+        }
+        if (drawRect.lrx >= clipX + clipWidth) {
+            drawRect.lrx = clipX + clipWidth;
+        }
+
+        if (bitDepth == G_IM_SIZ_4b) {
+            gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_8b) {
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_8b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_16b) {
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (bitDepth == G_IM_SIZ_32b) {
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_32b, width, height,
+                                  texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                  G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+        }
+        gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+                            0, texOffsetX, texOffsetY, dsdx, dtdy);
+
+        if (stopDrawing) {
+            break;
+        }
+
+        texRect.uly += lineHeight - overlap;
+        drawRect.uly = drawRect.lry - overlap * scaleY;
+    };
+
+    return 1;
+}
+
+static const f32 rodata_padding[] = { 0.0f };
 
 void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
     itemEntity->sparkleReadPos = (s32*)script;
@@ -1022,7 +1463,143 @@ void draw_item_entities_UI(void) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", render_item_entities);
+void render_item_entities(void) {
+    s32 i;
+    s32 offsetY;
+    f32 rotX;
+    Mtx sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    u8 r1, g1, b1, a1;
+    s32 alpha;
+
+    // needed to move 'i++' to the bottom
+    for (i = 0; i < MAX_ITEM_ENTITIES;) {
+        ItemEntity* item = gCurrentItemEntities[i];
+        if (item != NULL) {
+            if ((item->flags != 0)) {
+                if (!(item->flags & ITEM_ENTITY_FLAGS_40)) {
+                    if ((item->flags & ITEM_ENTITY_FLAGS_100000)) {
+                        if (!(item->flags & ITEM_ENTITY_FLAGS_40000)) {
+                            offsetY = -4;
+                        } else {
+                            offsetY = 0;
+                        }
+
+                        if (item->itemID == ITEM_COIN || item->itemID == ITEM_STAR_POINT || item->itemID == ITEM_HEART) {
+                            offsetY = 0;
+                            item->scale = 1.0f;
+                        }
+
+                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+                        guTranslateF(sp58, item->position.x, -item->position.y - offsetY, item->position.z);
+                        guRotateF(sp98, rotX, 0.0f, 1.0f, 0.0f);
+                        if (item->flags & ITEM_ENTITY_FLAGS_TINY) {
+                            guScaleF(spD8, item->scale, item->scale, item->scale);
+                            guMtxCatF(sp98, spD8, sp98);
+                        }
+                        guMtxCatF(sp98, sp58, sp58);
+                        guMtxF2L(sp58, &sp18);
+                        gDisplayContext->matrixStack[gMatrixListPos] = sp18;
+                        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+                        if (D_80151328->flags != 0) {
+                            gSPDisplayList(gMasterGfxPos++, D_8014BBD8);
+                        } else {
+                            gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                        }
+                        gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                        gSPDisplayList(gMasterGfxPos++, D_8014C620);
+
+                        alpha = 255;
+                        if (item->flags & (ITEM_ENTITY_FLAGS_TRANSPARENT | ITEM_ENTITY_FLAGS_8000000)) {
+                            if (item->flags & ITEM_ENTITY_FLAGS_TRANSPARENT) {
+                                alpha = item->alpha * alpha / 255;
+                            }
+                            if (item->flags & ITEM_ENTITY_FLAGS_8000000) {
+                                get_background_color_blend(&r1, &g1, &b1, &a1);
+                                alpha = alpha * (255 - a1) / 255;
+                            }
+                            if (item->flags & (ITEM_ENTITY_FLAGS_TRANSPARENT | ITEM_ENTITY_FLAGS_8000000)) {
+                                if (D_80151328->flags) {
+                                    gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
+                                        AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+                                } else {
+                                    gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
+                                                                    AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+                                    gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
+                                }
+                            }
+                        }
+
+                        if (!(item->flags & ITEM_ENTITY_FLAGS_40000)) {
+                            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
+                            if (D_80151328->flags) {
+                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMasterGfxPos++);
+                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+                                gDPPipeSync(gMasterGfxPos++);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x045C, 0x045C);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+                                if (item->flags & (ITEM_ENTITY_FLAGS_TRANSPARENT | ITEM_ENTITY_FLAGS_8000000)) {
+                                    func_801491E4(sp58, 0, 0, 24, 24, alpha);
+                                } else {
+                                    func_801491E4(sp58, 0, 0, 24, 24, 255);
+                                }
+                            } else {
+                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMasterGfxPos++);
+                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+                                gDPPipeSync(gMasterGfxPos++);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x045C, 0x045C);
+                            }
+                            gSPDisplayList(gMasterGfxPos++, D_8014C678);
+                        } else {
+                            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
+                            if (D_80151328->flags) {
+                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMasterGfxPos++);
+                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+                                gDPPipeSync(gMasterGfxPos++);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x047C, 0x047C);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+                                if (item->flags & (ITEM_ENTITY_FLAGS_TRANSPARENT | ITEM_ENTITY_FLAGS_8000000)) {
+                                    func_801491E4(sp58, 0, 0, 32, 32, alpha);
+                                } else {
+                                    func_801491E4(sp58, 0, 0, 32, 32, 255);
+                                }
+                            } else {
+                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMasterGfxPos++);
+                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+                                gDPPipeSync(gMasterGfxPos++);
+                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
+                            }
+                            gSPDisplayList(gMasterGfxPos++, D_8014C6A0);
+                        }
+                        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                        gDPPipeSync(gMasterGfxPos++);
+                    }
+                }
+            }
+        }
+        i++;
+    }
+}
 
 void remove_item_entity_by_reference(ItemEntity* entity) {
     s32 index;
@@ -2277,7 +2854,12 @@ void func_801363A0(ItemEntity* itemEntity) {
             } else {
                 temp = 0;
             }
-            if (gItemTable[itemEntity->itemID].typeFlags) {
+
+            // needed to match
+            if (gItemTable[itemEntity->itemID].typeFlags & 2) {
+                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
                 set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             } else {
@@ -2289,12 +2871,14 @@ void func_801363A0(ItemEntity* itemEntity) {
             }
             if (itemEntity->state != 2) {
                 offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
+                s1 = 160 - offsetY / 2;
                 set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
             offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
+            s1 = 160 - offsetY / 2;
             set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
     }
