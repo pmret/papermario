@@ -1,24 +1,8 @@
 #include "iwa_11.h"
 
 #include "world/common/npc/TrainConductorToad.inc.c"
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused3) = {
-    .height = 26,
-    .radius = 23,
-    .level = 99,
-};
+#include "world/common/npc/Toad_Stationary.inc.c"
+#include "world/common/npc/Dryite_Stationary.inc.c"
 
 EvtScript N(EVS_NpcInit_TrainConductorToad) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)

@@ -8430,6 +8430,7 @@ segments:
     start: 0x918BB0
     vram: 0x80240000
     subsegments:
+    - [0x918BB0, c, iwa_03_0_header]
     - [0x918BB0, c, iwa_03_1_main]
     - [0x918BB0, c, iwa_03_2_entity]
     - [0x918EF0, c, iwa_03_3_npc]
@@ -8442,9 +8443,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x91B8E0, c, iwa_04_0_header]
-    - [0x91B8E0, c, iwa_04_1_main]
-    - [0x91B8E0, c, iwa_04_2_entity]
-    - [0x91B960, c, iwa_04_3_npc]
+    - [0x91B8E0, c, iwa_04_1_music]
+    - [0x91B8E0, c, iwa_04_2_main]
+    - [0x91B8E0, c, iwa_04_3_entity]
+    - [0x91B960, c, iwa_04_4_npc]
     - [0x91C9C0]
   - name: iwa_10
     dir: world/area_iwa/iwa_10
@@ -8453,13 +8455,14 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x91E570, c, iwa_10_0_header]
-    - [0x91E570, c, iwa_10_1_main]
-    - [0x91E5B0, c, iwa_10_2_npc]
-    - [0x91E6D0, c, iwa_10_3_train]
-    - [0x91F5A0, c, iwa_10_4_entity]
-    - [0x91FA80, c, iwa_10_5_parakarry]
-    - [0x91FA80, c, iwa_10_6_new_party]
-    - [0x91FB20, c, iwa_10_7_foliage]
+    - [0x91E570, c, iwa_10_1_music]
+    - [0x91E570, c, iwa_10_2_main]
+    - [0x91E5B0, c, iwa_10_3_npc]
+    - [0x91E6D0, c, iwa_10_4_train]
+    - [0x91F5A0, c, iwa_10_5_entity]
+    - [0x91FA80, c, iwa_10_6_parakarry]
+    - [0x91FA80, c, iwa_10_7_new_party]
+    - [0x91FB20, c, iwa_10_8_foliage]
     - [0x91FD60]
   - name: iwa_11
     dir: world/area_iwa/iwa_11
@@ -8468,10 +8471,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x9269F0, c, iwa_11_0_header]
-    - [0x9269F0, c, iwa_11_1_main]
-    - [0x926A10, c, iwa_11_2_train]
-    - [0x926C70, c, iwa_11_3_scenery]
-    - [0x926C70, c, iwa_11_4_npc]
+    - [0x9269F0, c, iwa_11_1_music]
+    - [0x9269F0, c, iwa_11_2_main]
+    - [0x926A10, c, iwa_11_3_train]
+    - [0x926C70, c, iwa_11_4_scenery]
+    - [0x926C70, c, iwa_11_5_npc]
     - [0x926D00]
   - name: sbk_00
     dir: world/area_sbk/sbk_00

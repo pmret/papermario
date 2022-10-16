@@ -1,8 +1,7 @@
-#include "iwa_11.h"
+#include "iwa_03.h"
 
 EntryList N(Entrances) = {
-    [iwa_11_ENTRY_0]    {    0.0,    0.0,   15.0,   90.0 },
-    [iwa_11_ENTRY_1]    {    0.0,    0.0,   15.0,  270.0 },
+    [iwa_03_ENTRY_0]    {   14.0,  -18.0,    7.0,  270.0 },
 };
 
 MapSettings N(settings) = {
@@ -10,4 +9,5 @@ MapSettings N(settings) = {
     .entryList = &N(Entrances),
     .entryCount = ENTRY_COUNT(N(Entrances)),
     .background = &gBackgroundImage,
+    .tattle = { MSG_MapTattle_iwa_03 },
 };

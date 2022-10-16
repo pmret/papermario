@@ -1,7 +1,5 @@
 #include "iwa_04.h"
 
-extern EvtScript N(EVS_SetupMusic);
-
 #include "world/common/enemy/complete/Cleft.inc.c"
 
 API_CALLABLE(N(func_80241060_91C940)) {

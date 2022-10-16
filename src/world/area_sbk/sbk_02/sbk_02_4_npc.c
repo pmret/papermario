@@ -1,35 +1,8 @@
 #include "sbk_02.h"
 #include "effects.h"
 
-NpcSettings N(NpcSettings_Mamar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Toad) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused3) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
+#include "world/common/npc/Toad_Stationary.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
@@ -282,39 +255,18 @@ EvtScript N(EVS_NpcInit_Toad) = {
 
 StaticNpc N(NpcData_Mamar) = {
     .id = NPC_Mamar,
-    .settings = &N(NpcSettings_Mamar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Mamar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldMamar_Idle,
-        .walk   = ANIM_WorldMamar_Idle,
-        .run    = ANIM_WorldMamar_Idle,
-        .chase  = ANIM_WorldMamar_Idle,
-        .anim_4 = ANIM_WorldMamar_Idle,
-        .anim_5 = ANIM_WorldMamar_Idle,
-        .death  = ANIM_WorldMamar_Idle,
-        .hit    = ANIM_WorldMamar_Idle,
-        .anim_8 = ANIM_WorldMamar_Still,
-        .anim_9 = ANIM_WorldMamar_Idle,
-        .anim_A = ANIM_WorldMamar_Idle,
-        .anim_B = ANIM_WorldMamar_Idle,
-        .anim_C = ANIM_WorldMamar_Idle,
-        .anim_D = ANIM_WorldMamar_Idle,
-        .anim_E = ANIM_WorldMamar_Idle,
-        .anim_F = ANIM_WorldMamar_Idle,
-    },
+    .drops = MAMAR_DROPS,
+    .animations = MAMAR_ANIMS,
 };
 
 StaticNpc N(NpcData_TradingToad) = {
     .id = NPC_TradingToad,
-    .settings = &N(NpcSettings_Toad),
+    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 2.0f, 150.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,

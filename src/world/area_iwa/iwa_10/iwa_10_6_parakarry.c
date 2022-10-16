@@ -1,11 +1,6 @@
 #include "iwa_10.h"
 #include "effects.h"
 
-extern EvtScript N(EVS_PushSong);
-extern EvtScript N(EVS_PopSong);
-extern EvtScript N(EVS_NpcIdle_Parakarry);
-API_CALLABLE(N(LoadPartyImage));
-
 NpcSettings N(NpcSettings_Parakarry) = {
     .height = 35,
     .radius = 24,

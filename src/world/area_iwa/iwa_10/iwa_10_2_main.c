@@ -1,13 +1,5 @@
 #include "iwa_10.h"
 
-extern EvtScript N(EVS_ArriveFromToadTown);
-extern EvtScript N(EVS_InitializeTrainScene);
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_Scene_MeetParakarry);
-extern EvtScript N(EVS_SetupFoliage);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-
 API_CALLABLE(N(GetClockHandAngles)) {
     if (script->varTable[15] > 720) {
         script->varTable[15] = 0;

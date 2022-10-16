@@ -1,12 +1,5 @@
 #include "iwa_11.h"
 
-extern EvtScript N(EVS_InitializeTrainScene);
-extern EvtScript N(EVS_TravelToMtRugged);
-extern EvtScript N(EVS_TravelToToadTown);
-extern EvtScript N(EVS_UpdateSceneryPos);
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-
 API_CALLABLE(N(CheckForSkipInput)) {
     if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
         return ApiStatus_DONE2;
@@ -35,7 +28,7 @@ EvtScript N(EVS_MonitorSceneSkip) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_RUGGED)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 30, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 30, 16, 4096) // uses fov 25 instead of 30
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)

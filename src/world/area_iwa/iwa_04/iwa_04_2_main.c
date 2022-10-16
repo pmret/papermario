@@ -1,9 +1,5 @@
 #include "iwa_04.h"
 
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-
 EvtScript N(EVS_ExitWalk_iwa_02_2) = EVT_EXIT_WALK(60, iwa_04_ENTRY_0, "iwa_02", iwa_02_ENTRY_2);
 EvtScript N(EVS_ExitWalk_sbk_99_0) = EVT_EXIT_WALK(60, iwa_04_ENTRY_1, "sbk_99", sbk_99_ENTRY_0);
 
