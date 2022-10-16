@@ -222,7 +222,7 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             imageData = entityModel->gfx.imageData;
             entityModel->nextFrameTime = *curPos++;
             imageData->raster = (u8*)*curPos++;
-            imageData->defaultPal = (u16*)*curPos++;
+            imageData->defaultPal = (PAL_PTR) *curPos++;
             imageData->width = *curPos++;
             imageData->height = *curPos++;
             entityModel->cmdListReadPos = curPos;

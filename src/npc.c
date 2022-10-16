@@ -1055,7 +1055,7 @@ void npc_reload_all(void) {
                     if (!(npc->flags & NPC_FLAG_1000000) && (npc->palSwapType != 0)) {
                         npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
                         npc->paletteCount = 0;
-                        while (npc->spritePaletteList[npc->paletteCount] != (u16*) -1) {
+                        while (npc->spritePaletteList[npc->paletteCount] != (PAL_PTR) -1) {
                             npc->paletteCount++;
                         }
                         npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);
