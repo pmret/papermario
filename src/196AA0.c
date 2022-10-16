@@ -491,7 +491,7 @@ void func_80268C9C(void) {
 
 void func_80268E88(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
-    actionCmdStatus->unk_00 = create_generic_entity_frontUI(func_80268938, func_80268AF8);
+    actionCmdStatus->unk_00 = create_generic_entity_frontUI((s32 (*)(void)) func_80268938, func_80268AF8);
     actionCmdStatus->actionCommandID = 0;
 }
 

@@ -1,14 +1,14 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-s32 contRetrace();
-s32 contReadData();
-s32 contReadNW();
-s32 contQuery();
+s32 contRetrace(void);
+s32 contReadData(void);
+s32 contReadNW(void);
+s32 contQuery(void);
 
 u32 D_80093D20 = 0;
 
-UNK_FUN_PTR(D_80093D24[4]) = {
+s32(*D_80093D24[4])(void) = {
     contRetrace,
     contReadData,
     contReadNW,
@@ -19,7 +19,7 @@ s32 D_80093D34 = 0;
 
 NUCallBackList nuContCallBack = {
     NULL,
-    D_80093D24,
+    &D_80093D24,
     0x100,
     0,
 };

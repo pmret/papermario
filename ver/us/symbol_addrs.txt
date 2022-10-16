@@ -2508,7 +2508,6 @@ D_80098930 = 0x80098930; // type:data rom:0x73D30
 D_80098938 = 0x80098938; // type:data rom:0x73D38
 D_80098968 = 0x80098968; // type:data rom:0x73D68
 D_80098990 = 0x80098990; // type:data rom:0x73D90
-D_800989A0 = 0x800989A0; // type:data rom:0x73DA0
 D_80098A10 = 0x80098A10; // type:data rom:0x73E10
 D_80098A1C = 0x80098A1C; // type:data rom:0x73E1C
 D_80098A24 = 0x80098A24; // type:data rom:0x73E24

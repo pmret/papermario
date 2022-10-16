@@ -1,7 +1,7 @@
 #include "dizzy_dial.h"
 #include "camera.h"
 
-static s32* D_802A1CD0;
+static s32 D_802A1CD0;
 
 #include "ItemRefund.inc.c"
 

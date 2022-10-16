@@ -13,7 +13,7 @@ void nuBoot(void) {
 }
 
 #ifdef NON_EQUIVALENT
-void boot_idle(void) {
+void boot_idle(void* data) {
     nuIdleFunc = NULL;
 
     nuPiInit();

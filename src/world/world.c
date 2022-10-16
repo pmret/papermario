@@ -28,7 +28,7 @@ void fio_deserialize_state(void);
 void load_map_hit_asset(void);
 
 void load_map_script_lib(void) {
-    dma_copy((u8 *) &world_script_api_ROM_START, (u8 *) &world_script_api_ROM_END, &world_script_api_VRAM);
+    dma_copy(world_script_api_ROM_START, world_script_api_ROM_END, world_script_api_VRAM);
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {

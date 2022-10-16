@@ -4,6 +4,8 @@
 // TODO
 #define nuSiSendMesg func_800602C8
 
+void func_800602C8(s32, s32);
+
 void nuContRmbForceStop(void) {
     nuSiSendMesg(NU_CONT_RMB_FORCESTOP_MSG, NULL);
 }

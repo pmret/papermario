@@ -323,6 +323,18 @@ typedef struct FormationRow {
 
 typedef FormationRow Formation[];
 
+typedef struct StaticFormationActor {
+    /* 0x00 */ char unk_00[0x4];
+} StaticFormationActor; // size = ??
+
+typedef struct StaticFormationEntry {
+    /* 0x00 */ char* sjisName;
+    /* 0x04 */ s32 numActors;
+    /* 0x08 */ StaticFormationActor* actors;
+    /* 0x0C */ char* stageName;
+    /* 0x10 */ char unk_10[0x4];
+} StaticFormationEntry; // size = 0x20
+
 typedef struct Stage {
     /* 0x00 */ char* texture;
     /* 0x04 */ const char* shape;
@@ -351,7 +363,9 @@ typedef Battle BattleList[];
 typedef struct StageListRow {
     /* 0x00 */ const char* id; ///< Map ID.
     /* 0x04 */ Stage* stage;
-} StageList[]; // size = 0x08 * n
+} StageListRow; // size = 0x08
+
+typedef StageListRow StageList[];
 
 typedef struct BattleArea {
     /* 0x00 */ char* name; ///< JP debug name.

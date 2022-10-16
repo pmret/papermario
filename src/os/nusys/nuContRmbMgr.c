@@ -10,7 +10,10 @@ s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg);
 
 u32 nuContRmbSearchTime = 300;
 
-s32 D_80093CE4[] = { contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, NULL};
+s32 (*D_80093CE4[])(NUSiCommonMesg*) = { 
+    contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, 
+    NULL
+};
 
 NUCallBackList nuContRmbCallBack = {.next = NULL, .func = D_80093CE4, .majorNo = 0x300, .funcNum = 0};
 

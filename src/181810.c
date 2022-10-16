@@ -203,7 +203,7 @@ ApiStatus func_802535B4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
-    gBattleDmaDest = evt_get_variable(script, *script->ptrReadPos);
+    gBattleDmaDest = (u8*) evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -214,7 +214,7 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if (gBattleDmaDest == 0) {
+    if (gBattleDmaDest == NULL) {
             dma_copy(moveScript->start, moveScript->end, moveScript->dest);
         } else {
             dma_copy(moveScript->start, moveScript->end, gBattleDmaDest);

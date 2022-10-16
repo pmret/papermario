@@ -86,11 +86,11 @@ ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
 ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
+    StaticAnimatorNode** tree = (StaticAnimatorNode**) evt_get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
     s32 animModelID = create_model_animator(0);
 
-    load_mesh_animator_tree(animModelID, var1);
+    load_mesh_animator_tree(animModelID, tree);
     animModel->animModelID = animModelID;
     animModel->pos.x = 0;
     animModel->pos.y = 0;

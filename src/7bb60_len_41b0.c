@@ -7,7 +7,6 @@ extern f32 JumpedOnSwitchX;
 extern f32 JumpedOnSwitchZ;
 extern f32 D_8010C984;
 
-void func_800E315C(s32 colliderID);
 s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2);
 s32 phys_check_interactable_collision(void);
 void phys_save_ground_pos(void);

@@ -46,7 +46,7 @@ INCLUDE_ASM(s32, "EDC020", func_80240614_EDC5F4);
 
 ApiStatus func_8024064C_EDC62C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

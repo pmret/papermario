@@ -1,5 +1,7 @@
 #include "dead_04.h"
 
+extern s32 func_80059AC8(s32, s32);
+
 ApiStatus func_80240340_EB5470(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
