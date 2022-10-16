@@ -1,46 +1,22 @@
 #include "kzn_02.h"
-#include "message_ids.h"
-
-extern EvtScript N(EVS_KoloradoSinkingPlatform);
 
 #include "world/common/enemy/complete/LavaBubble.inc.c"
 
-NpcSettings N(NpSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_LetterDelivery) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado,
+    ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+    MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-// END LETTER DELIVERY?
+EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -162,8 +138,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 7)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     EVT_CALL(CloseMessage)
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+    EVT_LETTER_CHECK(Kolorado)
     EVT_RETURN
     EVT_END
 };
@@ -189,34 +164,13 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
 
 StaticNpc N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpSettings_Kolorado),
+    .settings = &N(NpcSettings_Kolorado),
     .pos = { -740.0f, 20.0f, 0.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 

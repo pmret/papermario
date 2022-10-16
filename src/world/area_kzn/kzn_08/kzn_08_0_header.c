@@ -1,12 +1,13 @@
-#include "kzn_07.h"
+#include "kzn_08.h"
+#include "model.h"
 
 EntryList N(Entrances) = {
-    [kzn_07_ENTRY_0]    {  290.0,    0.0,   70.0,  270.0 },
+    [kzn_08_ENTRY_0]    { -315.0,    0.0,   85.0,   90.0 },
 };
 
 MapSettings N(settings) = {
     .main = &N(EVS_Main),
     .entryList = &N(Entrances),
     .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_07 },
+    .tattle = { MSG_MapTattle_kzn_08 },
 };

@@ -74,7 +74,7 @@ EvtScript N(EVS_OnReadBillboard) = {
         EVT_UNBIND
     EVT_END_IF
     EVT_END
-    EVT_RETURN
+    EVT_RETURN //@bug wrong order for END/RETURN
 };
 
 EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {

@@ -2,8 +2,6 @@
 #include "effects.h"
 #include "entity.h"
 
-extern EvtScript N(EVS_PlayUpgradeFanfare);
-
 #include "world/common/atomic/PushBlockGravity.inc.c"
 
 API_CALLABLE(func_802407F4_C6EB24) {

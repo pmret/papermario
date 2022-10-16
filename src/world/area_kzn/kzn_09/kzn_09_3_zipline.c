@@ -1,7 +1,5 @@
 #include "kzn_09.h"
 
-extern EvtScript N(EVS_SyncZiplineDummyNPC);
-
 API_CALLABLE(N(Zipline_AdjustMoveDownSound)) {
     Bytecode* args = script->ptrReadPos;
 

@@ -1,5 +1,6 @@
 #include "kzn_01.h"
-#include "sprite/npc/LargePiranha.h"
+
+#include "world/common/enemy/complete/PutridPiranha.h"
 
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 30,
@@ -74,24 +75,7 @@ StaticNpc N(NpcPutridPiranha) = {
         .minCoinBonus = 0,
         .maxCoinBonus = 2,
     },
-    .animations = {
-        .idle   = ANIM_LargePiranha_Putrid_Anim01,
-        .walk   = ANIM_LargePiranha_Putrid_Anim02,
-        .run    = ANIM_LargePiranha_Putrid_Anim03,
-        .chase  = ANIM_LargePiranha_Putrid_Anim03,
-        .anim_4 = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_5 = ANIM_LargePiranha_Putrid_Anim01,
-        .death  = ANIM_LargePiranha_Putrid_Anim0E,
-        .hit    = ANIM_LargePiranha_Putrid_Anim0E,
-        .anim_8 = ANIM_LargePiranha_Putrid_Anim18,
-        .anim_9 = ANIM_LargePiranha_Putrid_Anim17,
-        .anim_A = ANIM_LargePiranha_Putrid_Anim05,
-        .anim_B = ANIM_LargePiranha_Putrid_Anim06,
-        .anim_C = ANIM_LargePiranha_Putrid_Anim07,
-        .anim_D = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_E = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_F = ANIM_LargePiranha_Putrid_Anim01,
-    },
+    .animations = PUTRID_PIRANHA_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {

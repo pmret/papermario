@@ -16,7 +16,7 @@ enum {
 };
 
 enum {
-    MV_SpringEntityIndex        = MapVar(0),
+    MV_SpringEntityIndex    = MapVar(0),
 };
 
 #define NAMESPACE kmr_10

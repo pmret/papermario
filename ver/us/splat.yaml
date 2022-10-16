@@ -8289,8 +8289,11 @@ segments:
     start: 0x8EB360
     vram: 0x80240000
     subsegments:
-    - [0x8EB360, c, header]
-    - [0x8EB390, c, events]
+    - [0x8EB360, c, kmr_12_0_header]
+    - [0x8EB360, c, kmr_12_1_music]
+    - [0x8EB360, c, kmr_12_2_main]
+    - [0x8EB360, c, kmr_12_3_npc]
+    - [0x8EB390, c, kmr_12_4_entity]
     - [0x8EB390]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
@@ -11860,8 +11863,9 @@ segments:
     start: 0xC599D0
     vram: 0x80240000
     subsegments:
+    - [0xC599D0, c, kzn_01_0_header]
     - [0xC599D0, c, kzn_01_1_main]
-    - [0xC59CE0, c, kzn_01_2_enemy]
+    - [0xC59CE0, c, kzn_01_2_npc]
     - [0xC59CE0]
   - name: kzn_02
     dir: world/area_kzn/kzn_02
@@ -11869,6 +11873,7 @@ segments:
     start: 0xC5A740
     vram: 0x80240000
     subsegments:
+    - [0xC5A740, c, kzn_02_0_header]
     - [0xC5A740, c, kzn_02_1_main]
     - [0xC5AA50, c, kzn_02_2_platforms]
     - [0xC5AC20, c, kzn_02_3_npc]
@@ -11880,6 +11885,7 @@ segments:
     start: 0xC60D10
     vram: 0x80240000
     subsegments:
+    - [0xC60D10, c, kzn_03_0_header]
     - [0xC60D10, c, kzn_03_1_main]
     - [0xC61020, c, kzn_03_2_npc]
     - [0xC63A10, c, kzn_03_3_entity]
@@ -11891,6 +11897,7 @@ segments:
     start: 0xC68130
     vram: 0x80240000
     subsegments:
+    - [0xC68130, c, kzn_04_0_header]
     - [0xC68130, c, kzn_04_1_main]
     - [0xC68440, c, kzn_04_2_entity]
     - [0xC69180, c, kzn_04_3_npc]
@@ -11901,6 +11908,7 @@ segments:
     start: 0xC6C0D0
     vram: 0x80240000
     subsegments:
+    - [0xC6C0D0, c, kzn_05_0_header]
     - [0xC6C0D0, c, kzn_05_1_main]
     - [0xC6C3E0]
   - name: kzn_06
@@ -11910,6 +11918,7 @@ segments:
     vram: 0x80240000
     subalign: 16
     subsegments:
+    - [0xC6C920, c, kzn_06_0_header]
     - [0xC6C920, c, kzn_06_1_main]
     - [0xC6CC30, c, kzn_06_2_entity]
     - [0xC6CD10, c, kzn_06_3_extra]
@@ -11921,9 +11930,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC6E330, c, kzn_07_0_header]
-    - [0xC6E330, c, kzn_07_1_main]
-    - [0xC6EA50, c, kzn_07_2_entity]
-    - [0xC6EB50, c, kzn_07_3_enemy]
+    - [0xC6E330, c, kzn_07_1_music]
+    - [0xC6E330, c, kzn_07_2_main]
+    - [0xC6EA50, c, kzn_07_3_entity]
+    - [0xC6EB50, c, kzn_07_4_npc]
     - [0xC70640]
   - name: kzn_08
     dir: world/area_kzn/kzn_08
@@ -11931,9 +11941,10 @@ segments:
     start: 0xC71480
     vram: 0x80240000
     subsegments:
+    - [0xC71480, c, kzn_08_0_header]
     - [0xC71480, c, kzn_08_1_main]
     - [0xC71C10, c, kzn_08_2_entity]
-    - [0xC71ED0, c, kzn_08_3_enemy]
+    - [0xC71ED0, c, kzn_08_3_npc]
     - [0xC75360, c, kzn_08_4_extra]
     - [0xC755A0]
   - name: kzn_09
@@ -11942,6 +11953,7 @@ segments:
     start: 0xC76CE0
     vram: 0x80240000
     subsegments:
+    - [0xC76CE0, c, kzn_09_0_header]
     - [0xC76CE0, c, kzn_09_1_main]
     - [0xC76CE0, c, kzn_09_2_entity]
     - [0xC77A20, c, kzn_09_3_zipline]

@@ -1,10 +1,6 @@
 #include "kzn_07.h"
 #include "model.h"
 
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-extern EvtScript N(EVS_SetupMusic);
-
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
