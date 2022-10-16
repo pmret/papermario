@@ -1,8 +1,5 @@
 #include "kzn_23.h"
 
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 // should add to zero over a full cycle
@@ -66,9 +63,7 @@ EvtScript N(EVS_RaiseLava) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     EVT_CALL(SetSpriteShading, SHADING_KZN_23)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
+    EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_RaiseLava))

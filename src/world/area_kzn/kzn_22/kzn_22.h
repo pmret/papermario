@@ -9,12 +9,14 @@
 #include "mapfs/kzn_22_shape.h"
 #include "mapfs/kzn_22_hit.h"
 
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/WorldMisstar.h"
-
 enum {
-    NPC_Kolorado                = 0,
-    NPC_Misstar                 = 1,
+    NPC_Kolorado    = 0,
+    NPC_Misstar     = 1,
 };
 
 #define NAMESPACE kzn_22
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

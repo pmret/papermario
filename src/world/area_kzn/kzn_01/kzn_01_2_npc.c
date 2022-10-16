@@ -1,18 +1,6 @@
 #include "kzn_01.h"
 
-#include "world/common/enemy/complete/PutridPiranha.h"
-
-NpcSettings N(NpcSettings_PutridPiranha) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
+#include "world/common/enemy/complete/PutridPiranhaSentinel.inc.c"
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     EVT_LABEL(0)
@@ -59,23 +47,13 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
 
 StaticNpc N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(NpcSettings_PutridPiranha),
+    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_200000,
     .init = &N(EVS_NpcInit_PutridPiranha),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_FIRE_FLOWER, 10, 0 }
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 2,
-    },
-    .animations = PUTRID_PIRANHA_ANIMS,
+    .drops = PIRANHA_SENTINEL_DROPS,
+    .animations = PIRANHA_SENTINEL_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {

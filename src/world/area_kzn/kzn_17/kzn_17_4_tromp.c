@@ -1,9 +1,6 @@
 #include "kzn_17.h"
 #include "effects.h"
 
-extern API_CALLABLE(N(EVS_Kolorado_TrompPanic));
-extern API_CALLABLE(N(EVS_Kolorado_TrompImpact));
-
 #define UNK_FUNC_50_LVar1 -583.0
 #define UNK_FUNC_50_LVar2 165.0
 

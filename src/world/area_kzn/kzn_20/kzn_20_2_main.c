@@ -1,39 +1,6 @@
 #include "kzn_20.h"
 #include "effects.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_ShakingWorld);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [kzn_20_ENTRY_0]    { -182.0,    0.0,   36.0,   90.0 },
-    [kzn_20_ENTRY_1]    {  164.0,  150.0,   20.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_20 },
-};
-
-EvtScript N(EVS_SetupMusic) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_MT_LAVA_LAVA_ERUPTING)
-        EVT_CALL(PlaySound, SOUND_8000006B)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
-        EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
-        EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA3)
-    EVT_ELSE
-        EVT_CALL(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
-        EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-//SPLIT? header//main
-
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 

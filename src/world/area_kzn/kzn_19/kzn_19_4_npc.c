@@ -1,6 +1,10 @@
 #include "kzn_19.h"
 #include "ld_addrs.h"
 
+#include "world/common/npc/Kolorado.h"
+#include "world/common/npc/StarSpirit.h"
+#include "world/common/enemy/complete/LavaPiranha.h"
+
 enum {
     VINE_0      = 0,
     VINE_1      = 1,
@@ -14,7 +18,7 @@ enum {
     VINE_1_BASE  = 0x80204000,
     VINE_2_BASE  = 0x80207000,
     VINE_3_BASE  = 0x8020A000,
-};
+}; //TODO shiftaility -- hard-coded addresses in gBackgroundImage
 
 typedef struct LavaPiranhaVine {
     /* 0x000 */ Vec3f bonePos[9];
@@ -24,19 +28,6 @@ typedef struct LavaPiranhaVine {
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
-
-extern API_CALLABLE(SetAnimatorFlags);
-extern API_CALLABLE(GetAnimatedPositionByTreeIndex);
-extern API_CALLABLE(GetAnimatedRotationByTreeIndex);
-
-extern EvtScript N(EVS_TryingSpawningStarCard);
-extern StaticAnimatorNode* N(AnimModel_MainHeadVine)[];
-extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
-extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];
-
-extern NpcSettings N(NpcSettings_Kolorado);
-extern NpcSettings N(NpcSettings_Misstar);
-extern NpcSettings N(NpcSettings_LavaPiranhaHead);
 
 #include "./kzn_19_anim1.c"
 #include "./kzn_19_anim2.c"
@@ -341,34 +332,18 @@ API_CALLABLE(N(CreateVineRenderer)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_LetterDelivery) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+    MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_IF_EQ(GF_KZN19_KoloradoDeadEnd, FALSE)
@@ -436,8 +411,7 @@ EvtScript N(EVS_Kolorado_Escape) = {
 EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_TalkSad, ANIM_Kolorado_IdleSad, 0, MSG_CH5_0101)
     EVT_CALL(SetSelfVar, 0, 1)
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+    EVT_LETTER_CHECK(Kolorado)
     EVT_RETURN
     EVT_END
 };
@@ -997,61 +971,19 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR | NPC_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
 StaticNpc N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_Misstar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldMisstar_Idle,
-        .walk   = ANIM_WorldMisstar_Idle,
-        .run    = ANIM_WorldMisstar_Idle,
-        .chase  = ANIM_WorldMisstar_Idle,
-        .anim_4 = ANIM_WorldMisstar_Idle,
-        .anim_5 = ANIM_WorldMisstar_Idle,
-        .death  = ANIM_WorldMisstar_Idle,
-        .hit    = ANIM_WorldMisstar_Idle,
-        .anim_8 = ANIM_WorldMisstar_Still,
-        .anim_9 = ANIM_WorldMisstar_Idle,
-        .anim_A = ANIM_WorldMisstar_Idle,
-        .anim_B = ANIM_WorldMisstar_Idle,
-        .anim_C = ANIM_WorldMisstar_Idle,
-        .anim_D = ANIM_WorldMisstar_Idle,
-        .anim_E = ANIM_WorldMisstar_Idle,
-        .anim_F = ANIM_WorldMisstar_Idle,
-    },
+    .drops = MISSTAR_DROPS,
+    .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
 };
 
@@ -1074,35 +1006,8 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .yaw = 270,
         .flags = NPC_FLAG_4 | NPC_FLAG_JUMPING | NPC_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaPiranha),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_SUPER_SHROOM, 10, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 0,
-            .maxCoinBonus = 3,
-        },
-        .animations = {
-            .idle   = ANIM_LavaPiranha_Anim03,
-            .walk   = ANIM_LavaPiranha_Anim03,
-            .run    = ANIM_LavaPiranha_Anim03,
-            .chase  = ANIM_LavaPiranha_Anim03,
-            .anim_4 = ANIM_LavaPiranha_Anim03,
-            .anim_5 = ANIM_LavaPiranha_Anim03,
-            .death  = ANIM_LavaPiranha_Anim03,
-            .hit    = ANIM_LavaPiranha_Anim03,
-            .anim_8 = ANIM_LavaPiranha_Anim03,
-            .anim_9 = ANIM_LavaPiranha_Anim03,
-            .anim_A = ANIM_LavaPiranha_Anim03,
-            .anim_B = ANIM_LavaPiranha_Anim03,
-            .anim_C = ANIM_LavaPiranha_Anim03,
-            .anim_D = ANIM_LavaPiranha_Anim03,
-            .anim_E = ANIM_LavaPiranha_Anim03,
-            .anim_F = ANIM_LavaPiranha_Anim03,
-        },
+        .drops = LAVA_PIRANHA_DROPS,
+        .animations = LAVA_PIRANHA_HEAD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaPiranha),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
@@ -1113,35 +1018,8 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .yaw = 270,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_SUPER_SHROOM, 10, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 0,
-            .maxCoinBonus = 3,
-        },
-        .animations = {
-            .idle   = ANIM_LavaBud_Anim03,
-            .walk   = ANIM_LavaBud_Anim03,
-            .run    = ANIM_LavaBud_Anim03,
-            .chase  = ANIM_LavaBud_Anim03,
-            .anim_4 = ANIM_LavaBud_Anim03,
-            .anim_5 = ANIM_LavaBud_Anim03,
-            .death  = ANIM_LavaBud_Anim03,
-            .hit    = ANIM_LavaBud_Anim03,
-            .anim_8 = ANIM_LavaBud_Anim03,
-            .anim_9 = ANIM_LavaBud_Anim03,
-            .anim_A = ANIM_LavaBud_Anim03,
-            .anim_B = ANIM_LavaBud_Anim03,
-            .anim_C = ANIM_LavaBud_Anim03,
-            .anim_D = ANIM_LavaBud_Anim03,
-            .anim_E = ANIM_LavaBud_Anim03,
-            .anim_F = ANIM_LavaBud_Anim03,
-        },
+        .drops = LAVA_PIRANHA_DROPS,
+        .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaBud),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
@@ -1152,35 +1030,8 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .yaw = 270,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_SUPER_SHROOM, 10, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 0,
-            .maxCoinBonus = 3,
-        },
-        .animations = {
-            .idle   = ANIM_LavaBud_Anim03,
-            .walk   = ANIM_LavaBud_Anim03,
-            .run    = ANIM_LavaBud_Anim03,
-            .chase  = ANIM_LavaBud_Anim03,
-            .anim_4 = ANIM_LavaBud_Anim03,
-            .anim_5 = ANIM_LavaBud_Anim03,
-            .death  = ANIM_LavaBud_Anim03,
-            .hit    = ANIM_LavaBud_Anim03,
-            .anim_8 = ANIM_LavaBud_Anim03,
-            .anim_9 = ANIM_LavaBud_Anim03,
-            .anim_A = ANIM_LavaBud_Anim03,
-            .anim_B = ANIM_LavaBud_Anim03,
-            .anim_C = ANIM_LavaBud_Anim03,
-            .anim_D = ANIM_LavaBud_Anim03,
-            .anim_E = ANIM_LavaBud_Anim03,
-            .anim_F = ANIM_LavaBud_Anim03,
-        },
+        .drops = LAVA_PIRANHA_DROPS,
+        .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaBud),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },

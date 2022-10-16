@@ -2,8 +2,7 @@
 #include "effects.h"
 
 enum {
-
-    SCENE_STATE_BEGIN    = 15,
+    SCENE_STATE_BEGIN                   = 15,
     SCENE_STATE_STARFISH_REMARK         = 20,
     SCENE_STATE_KOLORADO_LOOKS_AROUND   = 25,
     SCENE_STATE_KOLORADO_WENT_BACK      = 30,
@@ -16,58 +15,21 @@ enum {
     SCENE_STATE_DONE                    = -1,
 };
 
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
+#include "world/common/npc/StarSpirit.inc.c"
 
-NpcSettings N(NpcSettings_Misstar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
-
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_LetterDelivery) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+    MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_SpawnFallingDust) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
@@ -357,13 +319,11 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_IF_LT(LVar1, 100)
         EVT_CALL(EnableNpcAI, NPC_SELF, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0108)
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+        EVT_LETTER_CHECK(Kolorado)
         EVT_CALL(EnableNpcAI, NPC_SELF, TRUE)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_0113)
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+        EVT_LETTER_CHECK(Kolorado)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -572,62 +532,20 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR | NPC_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
 StaticNpc N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_Misstar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { 100.0f, 160.0f, 0.0f },
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_400000,
     .init = &N(EVS_NpcInit_Misstar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldMisstar_Idle,
-        .walk   = ANIM_WorldMisstar_Idle,
-        .run    = ANIM_WorldMisstar_Idle,
-        .chase  = ANIM_WorldMisstar_Idle,
-        .anim_4 = ANIM_WorldMisstar_Idle,
-        .anim_5 = ANIM_WorldMisstar_Idle,
-        .death  = ANIM_WorldMisstar_Idle,
-        .hit    = ANIM_WorldMisstar_Idle,
-        .anim_8 = ANIM_WorldMisstar_Still,
-        .anim_9 = ANIM_WorldMisstar_Idle,
-        .anim_A = ANIM_WorldMisstar_Idle,
-        .anim_B = ANIM_WorldMisstar_Idle,
-        .anim_C = ANIM_WorldMisstar_Idle,
-        .anim_D = ANIM_WorldMisstar_Idle,
-        .anim_E = ANIM_WorldMisstar_Idle,
-        .anim_F = ANIM_WorldMisstar_Idle,
-    },
+    .drops = MISSTAR_DROPS,
+    .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
 };
 

@@ -11965,8 +11965,9 @@ segments:
     start: 0xC7E180
     vram: 0x80240000
     subsegments:
+    - [0xC7E180, c, kzn_10_0_header]
     - [0xC7E180, c, kzn_10_1_main]
-    - [0xC7E4B0, c, kzn_10_2_extra]
+    - [0xC7E4B0, c, kzn_10_2_tromp]
     - [0xC7E850]
   - name: kzn_11
     dir: world/area_kzn/kzn_11
@@ -11974,6 +11975,7 @@ segments:
     start: 0xC801A0
     vram: 0x80240000
     subsegments:
+    - [0xC801A0, c, kzn_11_0_header]
     - [0xC801A0, c, kzn_11_1_main]
     - [0xC804B0, c, kzn_11_2_platforms]
     - [0xC80600, c, kzn_11_3_npc]
@@ -11984,10 +11986,11 @@ segments:
     start: 0xC85AB0
     vram: 0x80240000
     subsegments:
+    - [0xC85AB0, c, kzn_17_0_header]
     - [0xC85AB0, c, kzn_17_1_main]
     - [0xC85AB0, c, kzn_17_2_entity]
     - [0xC85DC0, c, kzn_17_3_npc]
-    - [0xC887B0, c, kzn_17_4_extra]
+    - [0xC887B0, c, kzn_17_4_tromp]
     - [0xC88B50]
   - name: kzn_18
     dir: world/area_kzn/kzn_18
@@ -11997,7 +12000,8 @@ segments:
     subsegments:
     - [0xC8C0A0, c, kzn_18_0_header]
     - [0xC8C0E0, c, kzn_18_1_main]
-    - [0xC8C3F0, c, kzn_18_2_extra]
+    - [0xC8C3F0, c, kzn_18_2_npc]
+    - [0xC8C460, c, kzn_18_3_entity]
     - [0xC8C460]
   - name: kzn_19
     dir: world/area_kzn/kzn_19
@@ -12006,33 +12010,37 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC8DBB0, c, kzn_19_0_header]
-    - [0xC8DBB0, c, kzn_19_1_main]
-    - [0xC8E6B0, c, kzn_19_2_npc_settings]
-    - [0xC8E6B0, c, kzn_19_3_npc]
-    - [0xC8E6B0, c, kzn_19_4_eruption]
-    - [0xC8E6B0, c, kzn_19_5_entity]
+    - [0xC8DBB0, c, kzn_19_1_music]
+    - [0xC8DBB0, c, kzn_19_2_main]
+    - [0xC8E6B0, c, kzn_19_3_npc_settings]
+    - [0xC8E6B0, c, kzn_19_4_npc]
+    - [0xC8E6B0, c, kzn_19_5_eruption]
+    - [0xC8E6B0, c, kzn_19_6_entity]
     - [0xC8F8E0, .data, kzn_19_0_header]
-    - [0xC8FA40, .data, kzn_19_1_main]
-    - [0xC90B10, .data, kzn_19_2_npc_settings]
+    - [0xC8F960, .data, kzn_19_1_music]
+    - [0xC8FA40, .data, kzn_19_2_main]
+    - [0xC90B10, .data, kzn_19_3_npc_settings]
     - start: 0xC90BF0
       type: .data
-      name: kzn_19_3_npc
+      name: kzn_19_4_npc
       subsegments:
       - [0xC90BF0]
       - [0xC91088, ci4, lava_piranha_vine, 64, 32]
       - [0xC91488, palette, lava_piranha_vine]
       - [0xC91688, gfx, lava_piranha_vine]
       - [0xC91768]
-    - [0xC959B0, .data, kzn_19_4_eruption]
-    - [0xC95E70, .data, kzn_19_5_entity]
+    - [0xC959B0, .data, kzn_19_5_eruption]
+    - [0xC95E70, .data, kzn_19_6_entity]
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code
     start: 0xC95F30
     vram: 0x80240000
     subsegments:
-    - [0xC95F30, c, kzn_20_1_main]
-    - [0xC96240, c, kzn_20_2_npc]
+    - [0xC95F30, c, kzn_20_0_header]
+    - [0xC95F30, c, kzn_20_1_music]
+    - [0xC95F30, c, kzn_20_2_main]
+    - [0xC96240, c, kzn_20_3_npc]
     - [0xC969F0]
   - name: kzn_22
     dir: world/area_kzn/kzn_22
@@ -12041,9 +12049,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC9A200, c, kzn_22_0_header]
-    - [0xC9A200, c, kzn_22_1_main]
-    - [0xC9A540, c, kzn_22_2_entity]
-    - [0xC9A540, c, kzn_22_3_npc]
+    - [0xC9A200, c, kzn_22_1_music]
+    - [0xC9A200, c, kzn_22_2_main]
+    - [0xC9A540, c, kzn_22_3_entity]
+    - [0xC9A540, c, kzn_22_4_npc]
     - [0xC9A590]
   - name: kzn_23
     dir: world/area_kzn/kzn_23
@@ -12052,8 +12061,9 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC9C300, c, kzn_23_0_header]
-    - [0xC9C300, c, kzn_23_1_main]
-    - [0xC9C610, c, kzn_23_2_extra]
+    - [0xC9C300, c, kzn_23_1_music]
+    - [0xC9C300, c, kzn_23_2_main]
+    - [0xC9C610, c, kzn_23_3_npc]
     - [0xC9C920]
   - name: flo_00
     dir: world/area_flo/flo_00

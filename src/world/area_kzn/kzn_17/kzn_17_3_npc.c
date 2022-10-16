@@ -1,53 +1,28 @@
 #include "kzn_17.h"
 
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
 
 #include "world/common/enemy/complete/PutridPiranha.inc.c"
 #include "world/common/enemy/complete/SpikeTop.inc.c"
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_LetterDelivery1) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado1, NPC_Kolorado,
+    ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+    MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(EVS_Kolorado_LetterDelivery2) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado2, NPC_Kolorado,
+    ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+    MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_REWARD(Kolorado);
 
 Vec3f N(KoloradoThrownPath)[] = {
     {  447.0,     0.0,   39.0 },
@@ -126,11 +101,11 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
 EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FC)
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery1))
+        EVT_EXEC_WAIT(N(EVS_Kolorado1_LetterPrompt))
         EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00FA)
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery2))
+        EVT_EXEC_WAIT(N(EVS_Kolorado2_LetterPrompt))
         EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
     EVT_END_IF
     EVT_RETURN
@@ -165,29 +140,8 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR | NPC_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 

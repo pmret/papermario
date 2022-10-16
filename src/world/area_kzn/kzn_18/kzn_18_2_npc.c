@@ -1,29 +1,11 @@
 #include "kzn_18.h"
-#include "entity.h"
+
+#include "world/common/npc/Kolorado.inc.c"
+#include "world/common/enemy/complete/PutridPiranhaSentinel.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
-
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
-
 #include "world/common/todo/GetFloorCollider.inc.c"
-
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Piranha) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
@@ -168,81 +150,24 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
 StaticNpc N(NpcData_Piranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(NpcSettings_Piranha),
+    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = NPC_FLAG_4 | NPC_FLAG_200000,
     .init = &N(EVS_NpcInit_Piranha),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_FIRE_FLOWER, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 2,
-    },
-    .animations = {
-        .idle   = ANIM_LargePiranha_Putrid_Anim01,
-        .walk   = ANIM_LargePiranha_Putrid_Anim02,
-        .run    = ANIM_LargePiranha_Putrid_Anim03,
-        .chase  = ANIM_LargePiranha_Putrid_Anim03,
-        .anim_4 = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_5 = ANIM_LargePiranha_Putrid_Anim01,
-        .death  = ANIM_LargePiranha_Putrid_Anim0E,
-        .hit    = ANIM_LargePiranha_Putrid_Anim0E,
-        .anim_8 = ANIM_LargePiranha_Putrid_Anim18,
-        .anim_9 = ANIM_LargePiranha_Putrid_Anim17,
-        .anim_A = ANIM_LargePiranha_Putrid_Anim05,
-        .anim_B = ANIM_LargePiranha_Putrid_Anim06,
-        .anim_C = ANIM_LargePiranha_Putrid_Anim07,
-        .anim_D = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_E = ANIM_LargePiranha_Putrid_Anim01,
-        .anim_F = ANIM_LargePiranha_Putrid_Anim01,
-    },
+    .drops = PIRANHA_SENTINEL_DROPS,
+    .animations = PIRANHA_SENTINEL_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Kolorado)),
     NPC_GROUP(N(NpcData_Piranha)),
     {}
-};
-
-EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenPanel), 250, 250, -225, 0, MODEL_o380, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, GF_KZN18_HiddenPanel)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -420, 85, -80, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), 350, 310, -250, 0, MAKE_ENTITY_END)
-    EVT_RETURN
-    EVT_END
 };

@@ -13,29 +13,8 @@ API_CALLABLE(N(func_8024036C_C9A56C)) {
     return ApiStatus_DONE2;
 }
 
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Misstar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
+#include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_ShakeScreen) = {
     EVT_LOOP(0)
@@ -290,62 +269,20 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
 StaticNpc N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_Misstar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { 285.0f, 160.0f, 80.0f },
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR,
     .init = &N(EVS_NpcInit_Misstar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldMisstar_Idle,
-        .walk   = ANIM_WorldMisstar_Idle,
-        .run    = ANIM_WorldMisstar_Idle,
-        .chase  = ANIM_WorldMisstar_Idle,
-        .anim_4 = ANIM_WorldMisstar_Idle,
-        .anim_5 = ANIM_WorldMisstar_Idle,
-        .death  = ANIM_WorldMisstar_Idle,
-        .hit    = ANIM_WorldMisstar_Idle,
-        .anim_8 = ANIM_WorldMisstar_Still,
-        .anim_9 = ANIM_WorldMisstar_Idle,
-        .anim_A = ANIM_WorldMisstar_Idle,
-        .anim_B = ANIM_WorldMisstar_Idle,
-        .anim_C = ANIM_WorldMisstar_Idle,
-        .anim_D = ANIM_WorldMisstar_Idle,
-        .anim_E = ANIM_WorldMisstar_Idle,
-        .anim_F = ANIM_WorldMisstar_Idle,
-    },
+    .drops = MISSTAR_DROPS,
+    .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
 };
 

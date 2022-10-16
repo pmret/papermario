@@ -1,9 +1,5 @@
 #include "kzn_22.h"
 
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 EvtScript N(EVS_ExitWalk_kzn_20_1) = EVT_EXIT_WALK_FIXED(60, kzn_22_ENTRY_0, "kzn_20", kzn_20_ENTRY_1);

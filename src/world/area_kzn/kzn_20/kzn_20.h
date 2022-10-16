@@ -9,10 +9,6 @@
 #include "mapfs/kzn_20_shape.h"
 #include "mapfs/kzn_20_hit.h"
 
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/WorldMisstar.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_Misstar                 = 1,
@@ -26,3 +22,8 @@ enum {
 };
 
 #define NAMESPACE kzn_20
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_ShakingWorld);
+extern NpcGroupList N(DefaultNPCs);

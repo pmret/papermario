@@ -1,12 +1,5 @@
 #include "kzn_19.h"
 
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_UpdateEruption);
-extern EvtScript N(EVS_Misstar_Escape);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(BossNPCs);
-extern NpcGroupList N(EscapeNPCs);
-
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"

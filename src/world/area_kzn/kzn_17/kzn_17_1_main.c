@@ -1,22 +1,4 @@
 #include "kzn_17.h"
-#include "entity.h"
-
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_SetupSpinyTromp);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [kzn_17_ENTRY_0]    { -670.0,    0.0,  160.0,   90.0 },
-    [kzn_17_ENTRY_1]    {  620.0,    0.0,   30.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_17 },
-};
 
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 

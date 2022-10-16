@@ -182,7 +182,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
 };
 
 #define EVT_LETTER_PROMPT(npcName, npcID, animTalk, animIdle, msg1, msg2, ms3, msg4, itemID, itemList) \
-    EvtScript N(EVS_##npcName##_LetterDelivery) = { \
+    EvtScript N(EVS_##npcName##_LetterPrompt) = { \
         EVT_CALL(N(LetterDelivery_Init), \
             npcID, animTalk, animIdle, \
             itemID, ITEM_NONE, \
@@ -206,5 +206,5 @@ EvtScript N(EVS_DoLetterDelivery) = {
     }
 
 #define EVT_LETTER_CHECK(npcName) \
-    EVT_EXEC_WAIT(N(EVS_##npcName##_LetterDelivery)) \
+    EVT_EXEC_WAIT(N(EVS_##npcName##_LetterPrompt)) \
     EVT_EXEC_WAIT(N(EVS_##npcName##_LetterReward))
