@@ -81,7 +81,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
             partnerID = N(SuperBlock_PartnerIDs)[i];
             if (playerData->partners[partnerID].enabled) {
                 popupMenu->userIndex[entryIndex] = partnerID;
-                popupMenu->nameMsg[entryIndex] = (char*) gPartnerPopupProperties[partnerID].nameMsg;
+                popupMenu->nameMsg[entryIndex] = gPartnerPopupProperties[partnerID].nameMsg;
                 canUpgradePartner = N(SuperBlock_get_partner_rank)(partnerID, hasUltraStone);
                 if (canUpgradePartner >= 0) {
                     popupMenu->ptrIcon[entryIndex] = wPartnerHudScripts[partnerID];

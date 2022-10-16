@@ -47,7 +47,7 @@ ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            make_npcs(evt_get_variable(script, *args++), gGameStatusPtr->mapID, evt_get_variable(script, *args++));
+            make_npcs(evt_get_variable(script, *args++), gGameStatusPtr->mapID, (s32*) evt_get_variable(script, *args++));
             script->functionTemp[0] = 1;
             break;
         case 1:

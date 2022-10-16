@@ -659,12 +659,16 @@ ApiStatus evt_handle_divideF(Evt* script) {
 }
 
 ApiStatus evt_handle_set_int_buffer_ptr(Evt* script) {
-    script->buffer = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->buffer = (s32*) evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus evt_handle_set_float_buffer_ptr(Evt* script) {
-    script->buffer = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->buffer = (s32*) evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -956,13 +960,17 @@ ApiStatus evt_handle_exec1_get_id(Evt* script) {
 }
 
 ApiStatus evt_handle_exec_wait(Evt* script) {
-    start_child_script(script, evt_get_variable(script, *script->ptrReadPos), 0);
+    Bytecode* args = script->ptrReadPos;
+
+    start_child_script(script, (EvtScript*) evt_get_variable(script, *args++), 0);
     script->currentOpcode = 0;
     return ApiStatus_FINISH;
 }
 
 ApiStatus evt_handle_jump(Evt* script) {
-    script->ptrFirstLine = (Bytecode*)evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->ptrFirstLine = (Bytecode*) evt_get_variable(script, *args++);
     restart_script(script);
     return ApiStatus_DONE2;
 }
@@ -2016,7 +2024,7 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
     s32 i;
 
     if (arg1 < EVT_LIMIT) {
-        return arg1;
+        return (Bytecode*) arg1;
     }
 
     for (i = 0; i < 0x10; i++) {

@@ -222,7 +222,7 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             imageData = entityModel->gfx.imageData;
             entityModel->nextFrameTime = *curPos++;
             imageData->raster = (u8*)*curPos++;
-            imageData->defaultPal = (u8*)*curPos++;
+            imageData->defaultPal = (u16*)*curPos++;
             imageData->width = *curPos++;
             imageData->height = *curPos++;
             entityModel->cmdListReadPos = curPos;
@@ -880,11 +880,11 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
-        newDynEntity->update = &stub_generic_entity_delegate;
+        newDynEntity->update = stub_generic_entity_delegate;
     }
     newDynEntity->draw = drawFunc;
     if (drawFunc == NULL) {
-        newDynEntity->draw = &stub_generic_entity_delegate;
+        newDynEntity->draw = stub_generic_entity_delegate;
     }
 
     if (gGameStatusPtr->isBattle) {
@@ -893,7 +893,7 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     return i;
 }
 
-s32 create_generic_entity_frontUI(s32 (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -911,11 +911,11 @@ s32 create_generic_entity_frontUI(s32 (*updateFunc)(void), void (*drawFunc)(void
     newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
-        newDynEntity->update = &stub_generic_entity_delegate;
+        newDynEntity->update = stub_generic_entity_delegate;
     }
     newDynEntity->draw = drawFunc;
     if (drawFunc == NULL) {
-        newDynEntity->draw = &stub_generic_entity_delegate;
+        newDynEntity->draw = stub_generic_entity_delegate;
     }
 
     if (gGameStatusPtr->isBattle) {

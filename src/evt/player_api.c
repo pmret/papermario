@@ -527,7 +527,6 @@ ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     f32 cosTheta;
     f32 sinTheta;
     f32 exitTangentFrac;
-    f32* blah;
 
     sin_cos_deg(clamp_angle((*mapSettings->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
 
@@ -535,8 +534,7 @@ ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     gPlayerStatus.position.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
     gPlayerStatus.position.z = (entryZ - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
 
-    blah = &script->varTable[5];
-    *blah = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
+    script->varTableF[5] = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
     gPlayerStatus.flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
 
     return ApiStatus_DONE2;
@@ -551,7 +549,7 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     MapSettings* mapSettings = get_current_map_settings();
-    f32* varTableVar5 = &script->varTable[5];
+    f32* varTableVar5 = &script->varTableF[5];
 
     if (can_trigger_loading_zone()) {
         s32 var1 = evt_get_variable(script, *args++);
