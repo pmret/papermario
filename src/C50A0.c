@@ -10,18 +10,11 @@
 #define MAX_ITEM_ENTITIES 256
 
 typedef struct Rect {
-    s32 ulx;
-    s32 uly;
-    s32 lrx;
-    s32 lry;
-} Rect;
-
-typedef struct Rect2b {
-    s16 ulx;
-    s16 uly;
-    s16 lrx;
-    s16 lry;
-} Rect2b;
+    /* 0x00 */ s32 ulx;
+    /* 0x04 */ s32 uly;
+    /* 0x08 */ s32 lrx;
+    /* 0x0C */ s32 lry;
+} Rect; // size = 0x10
 
 extern SparkleScript SparkleScript_Coin;
 
@@ -68,9 +61,8 @@ void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
 void func_801363A0(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
-s32 draw_image_with_clipping(IMG_PTR img, u32 width, u32 height, s32 fmt, s32 bitDepth,
-                     s16 posX, s16 posY,
-                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight);
+s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
+                             u16 clipULy, u16 clipLRx, u16 clipRLy);
 void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
@@ -160,6 +152,13 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
 }
 
 #ifdef NON_EQUIVALENT
+typedef struct Rect2b {
+    /* 0x00 */ s16 ulx;
+    /* 0x02 */ s16 uly;
+    /* 0x04 */ s16 lrx;
+    /* 0x06 */ s16 lry;
+} Rect2b; // size = 0x08
+
 s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDepth,
                      s16 posX, s16 posY,
                      u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight) {
@@ -287,7 +286,7 @@ s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDep
 INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 #endif
 
-s32 draw_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
+s32 draw_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
                      s16 posX, s16 posY,
                      u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
                      f32 scaleX, f32 scaleY) {
@@ -306,11 +305,11 @@ s32 draw_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
         return 0;
     }
 
-    if (clipX >= (s16)(posX + (f32)(f64)width * scaleX)) {
+    if (clipX >= (s16)(posX + width * scaleX)) {
         return 0;
     }
 
-    if (clipY >= (s16)(posY + (f32)(f64)height * scaleY)) {
+    if (clipY >= (s16)(posY + height * scaleY)) {
         return 0;
     }
 
@@ -387,11 +386,11 @@ s32 draw_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
             }
 
             if (bitDepth == G_IM_SIZ_16b) {
-                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_4b) {
-                gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+                gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             }
@@ -430,23 +429,23 @@ s32 integer_log(s32 number, u32 base) {
     }
 }
 
-s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
+s32 draw_adjustable_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
                      s16 posX, s16 posY,
                      u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight,
                      f32 scaleX, f32 scaleY) {
     Rect texRect;
     Rect drawRect;
-    u16 sp48;
+    u16 overlap;
     s32 dsdx, dtdy;
     s32 texOffsetX, texOffsetY;
     u8 stopDrawing;
 
     u16 masks, maskt;
 
-    u16 v02;
-    u16 s1;
+    u16 texelNum;
+    u16 lineHeight;
 
-    f32 q;
+    f32 temp;
 
     if (scaleX < 0.01 || scaleY < 0.01) {
         return 0;
@@ -465,31 +464,31 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
     }
     if (bitDepth == G_IM_SIZ_4b) {
         if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
-            v02 = 0x2000;
+            texelNum = 0x2000;
         } else if (fmt == G_IM_FMT_CI) {
-            v02 = 0x1000;
+            texelNum = 0x1000;
         } else {
             return 0;
         }
     } else if (bitDepth == G_IM_SIZ_8b) {
         if (fmt == G_IM_FMT_IA || fmt == G_IM_FMT_I) {
-            v02 = 0x1000;
+            texelNum = 0x1000;
         } else if (fmt == G_IM_FMT_CI) {
-            v02 = 0x800;
+            texelNum = 0x800;
         } else {
             return 0;
         }
     } else if (bitDepth == G_IM_SIZ_16b) {
         if (fmt == G_IM_FMT_RGBA) {
-            v02 = 0x800;
+            texelNum = 0x800;
         } else if (fmt == G_IM_FMT_IA) {
-            v02 = 0x800;
+            texelNum = 0x800;
         } else {
             return 0;
         }
     } else if (bitDepth == G_IM_SIZ_32b) {
         if (fmt == G_IM_FMT_RGBA) {
-            v02 = 0x400;
+            texelNum = 0x400;
         } else {
             return 0;
         }
@@ -499,16 +498,16 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
 
     dsdx = 1.0f / scaleX * 1024.0f;
     dtdy = 1.0f / scaleY * 1024.0f;
-    s1 = v02 / width;
-    if (s1 > height) {
-        s1 = height;
-    } else if (s1 <= 1) {
+    lineHeight = texelNum / width;
+    if (lineHeight > height) {
+        lineHeight = height;
+    } else if (lineHeight <= 1) {
         return 0;
     }
     if (scaleY <= 1.0) {
-        sp48 = 0;
+        overlap = 0;
     } else {
-        sp48 = scaleY;
+        overlap = scaleY;
     }
 
     masks = integer_log(width, 2);
@@ -523,8 +522,8 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
 
     while (TRUE) {
         texRect.lrx = width - 1;
-        texRect.lry = texRect.uly + s1 - 1;
-        drawRect.lry = drawRect.uly + s1 * scaleY;
+        texRect.lry = texRect.uly + lineHeight - 1;
+        drawRect.lry = drawRect.uly + lineHeight * scaleY;
         drawRect.lrx = (s16)(drawRect.ulx + width * scaleX);
 
 
@@ -532,18 +531,18 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
 
         if (drawRect.lry <= clipY) {
             do {
-                texRect.uly += s1;
+                texRect.uly += lineHeight;
                 drawRect.uly = drawRect.lry;
-                drawRect.lry += s1 * scaleY;
+                drawRect.lry += lineHeight * scaleY;
             } while (drawRect.lry < clipY);
-            texRect.lry = texRect.uly + s1 - 1;
+            texRect.lry = texRect.uly + lineHeight - 1;
         }
 
         if (drawRect.uly < clipY) {
             drawRect.uly = clipY;
-            q = abs(posY - clipY);
-            q /= scaleY;
-            texOffsetY = q * 32.0f;
+            temp = abs(posY - clipY);
+            temp /= scaleY;
+            texOffsetY = temp * 32.0f;
         }
         if (texRect.lry + 1 == height){
             stopDrawing = 1;
@@ -565,28 +564,28 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
         }
         if (drawRect.ulx < clipX) {
             drawRect.ulx = clipX;
-            q = abs(posX - clipX);
-            q /= scaleX;
-            texOffsetX = q * 32.0f;
+            temp = abs(posX - clipX);
+            temp /= scaleX;
+            texOffsetX = temp * 32.0f;
         }
         if (drawRect.lrx >= clipX + clipWidth) {
             drawRect.lrx = clipX + clipWidth;
         }
 
         if (bitDepth == G_IM_SIZ_4b) {
-            gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+            gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_8b) {
-            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_8b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_16b) {
-            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_32b) {
-            gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_32b, width, height,
+            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_32b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         }
@@ -597,8 +596,8 @@ s32 draw_adjustable_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 b
             break;
         }
 
-        texRect.uly += s1 - sp48;
-        drawRect.uly = drawRect.lry - sp48 * scaleY;
+        texRect.uly += lineHeight - overlap;
+        drawRect.uly = drawRect.lry - overlap * scaleY;
     };
 
     return 1;
@@ -1467,7 +1466,7 @@ void draw_item_entities_UI(void) {
 void render_item_entities(void) {
     s32 i;
     s32 offsetY;
-    f32 f20;
+    f32 rotX;
     Mtx sp18;
     Matrix4f sp58;
     Matrix4f sp98;
@@ -1475,6 +1474,7 @@ void render_item_entities(void) {
     u8 r1, g1, b1, a1;
     s32 alpha;
 
+    // needed to move 'i++' to the bottom
     for (i = 0; i < MAX_ITEM_ENTITIES;) {
         ItemEntity* item = gCurrentItemEntities[i];
         if (item != NULL) {
@@ -1492,9 +1492,9 @@ void render_item_entities(void) {
                             item->scale = 1.0f;
                         }
 
-                        f20 = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
                         guTranslateF(sp58, item->position.x, -item->position.y - offsetY, item->position.z);
-                        guRotateF(sp98, f20, 0.0f, 1.0f, 0.0f);
+                        guRotateF(sp98, rotX, 0.0f, 1.0f, 0.0f);
                         if (item->flags & ITEM_ENTITY_FLAGS_TINY) {
                             guScaleF(spD8, item->scale, item->scale, item->scale);
                             guMtxCatF(sp98, spD8, sp98);
