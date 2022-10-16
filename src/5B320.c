@@ -161,7 +161,7 @@ s32 D_8008EEF0[] = { 0, 1, 2, 3, 4, 0, 6, 7, 8, 5, 0, 0 };
 
 PartnerPopupProperties gPartnerPopupProperties[] = {
     [PARTNER_NONE] {
-        "なし",
+        (s32) "なし",
         0x00000000,
         0x00000000,
         0x00000000,

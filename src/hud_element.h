@@ -116,7 +116,7 @@ typedef struct HudCacheEntry {
 typedef struct PopupMenu {
     /* 0x000 */ HudScript* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
-    /* 0x084 */ char* nameMsg[32];
+    /* 0x084 */ s32 nameMsg[32];
     /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[0x4];
