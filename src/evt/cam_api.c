@@ -410,7 +410,7 @@ ApiStatus LoadSettings(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
-    CameraControlSettings* settings = evt_get_variable(script, *args++);
+    CameraControlSettings* settings = (CameraControlSettings*) evt_get_variable(script, *args++);
 
     camera->controlSettings = *settings;
     return ApiStatus_DONE2;

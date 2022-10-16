@@ -11,4 +11,7 @@ void update_camera_mode_5(Camera*);
 void update_camera_mode_6(Camera*);
 void create_camera_leadplayer_matrix(Camera*);
 
+void update_camera_zone_interp(Camera* camera);
+Camera* initialize_next_camera(CameraInitData* data);
+
 #endif

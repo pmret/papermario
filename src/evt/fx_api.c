@@ -441,7 +441,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_lens_flare(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_GOT_ITEM_OUTLINE:
-            fx_got_item_outline(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            fx_got_item_outline(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**) &sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_SPIKY_WHITE_AURA:
@@ -451,7 +451,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_smoke_impact(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, fVar7, iVar8);
             break;
         case EFFECT_DAMAGE_INDICATOR:
-            fx_damage_indicator(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, (EffectInstance**)&sp30);
+            fx_damage_indicator(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, (EffectInstance**) &sp30);
             evt_set_variable(script, a8, sp30);
             break;
         case EFFECT_PURPLE_RING:

@@ -4,7 +4,6 @@
 
 extern s32 D_8014B7F0;
 
-void spawn_drops(Enemy* enemy);
 INCLUDE_ASM(s32, "23680", spawn_drops);
 
 s32 get_coin_drop_amount(Enemy* enemy) {

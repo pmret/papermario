@@ -4,9 +4,10 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 #include "battle/battle.h"
+#include "model.h"
 
-s32 D_800778A0[] = {
-    &D_8038F800, &D_803B5000, &heap_battleHead,
+u16* D_800778A0[] = {
+    D_8038F800, D_803B5000, &heap_battleHead,
 };
 
 s32 D_800778AC[] = {
@@ -40,7 +41,7 @@ void state_step_battle(void) {
             return;
         } else {
             D_800A0900 = -1;
-            nuGfxSetCfb(&D_800778A0, 2);
+            nuGfxSetCfb(D_800778A0, 2);
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
             func_8003B1A8();
@@ -74,7 +75,7 @@ void state_step_battle(void) {
             clear_npcs();
             clear_entity_data(1);
             clear_trigger_data();
-            dma_copy(&_16C8E0_ROM_START, &_16C8E0_ROM_END, &_16C8E0_VRAM);
+            dma_copy(_16C8E0_ROM_START, _16C8E0_ROM_END, _16C8E0_VRAM);
             initialize_battle();
             btl_save_world_cameras();
             load_battle_section();
@@ -129,7 +130,7 @@ void state_step_end_battle(void) {
             sfx_stop_env_sounds();
             mapSettings = get_current_map_settings();
             mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
-            btl_restore_world_cameras(gGameStatusPtr);
+            btl_restore_world_cameras();
             gGameStatusPtr->isBattle = FALSE;
             func_8005AF84();
             func_8002ACDC();
@@ -160,7 +161,7 @@ void state_step_end_battle(void) {
 
                 partner_init_after_battle(playerData->currentPartner);
                 load_map_script_lib();
-                mapShape = load_asset_by_name(&wMapShapeName, &sizeTemp);
+                mapShape = load_asset_by_name(wMapShapeName, &sizeTemp);
                 decode_yay0(mapShape, &D_80210000);
                 general_heap_free(mapShape);
                 initialize_collision();
@@ -177,7 +178,7 @@ void state_step_end_battle(void) {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
+                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 

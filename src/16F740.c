@@ -6,7 +6,7 @@
 #include "battle/battle.h"
 #include "model.h"
 
-extern s32* D_800DC064;
+extern StageListRow* D_800DC064;
 
 extern s16 D_802809F6;
 extern s16 D_802809F8;
@@ -205,7 +205,7 @@ void btl_state_update_normal_start(void) {
     if (D_800DC064 == NULL) {
         stage = battle->stage;
     } else {
-        stage = D_800DC064[1];
+        stage = D_800DC064->stage;
     }
 
     battleStatus->currentStage = stage;
@@ -2048,7 +2048,7 @@ void btl_state_update_end_battle(void) {
             if (D_800DC064 == NULL) {
                 stage = blah->stage;
             } else {
-                stage = D_800DC064[1];
+                stage = D_800DC064->stage;;
             }
             if (stage->postBattle == NULL) {
                 gBattleState2 = BATTLE_STATE2_UNK_4;
@@ -4284,7 +4284,7 @@ void btl_state_update_end_demo_battle(void) {
             if (D_800DC064 == NULL) {
                 stage = blah->stage;
             } else {
-                stage = D_800DC064[1]; // TODO cleanup
+                stage = D_800DC064->stage;
             }
 
             if (stage->postBattle == NULL) {

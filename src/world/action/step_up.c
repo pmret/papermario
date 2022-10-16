@@ -24,6 +24,8 @@ AnimID StepUpPeachAnims[] = {
     0x00000000
 };
 
+void func_802B6198_E24768(void);
+
 void action_update_step_up(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 cosTheta;

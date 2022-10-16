@@ -3,12 +3,12 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s32 obfuscated_general_heap_create[];
+extern u8 obfuscated_general_heap_create[];
 
 void func_802AE000_316C00(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x3C016C07 + 0xFEFEFEF;
-    HeapNode*(*generalHeapCreate)(void) = obfuscated_general_heap_create; // general_heap_create - 0xFEFEFEF
+    HeapNode*(*generalHeapCreate)(void) = (HeapNode* (*)(void)) obfuscated_general_heap_create; // general_heap_create - 0xFEFEFEF
     u32 hash = 0;
     u32 thisInsn;
     u32* it;
@@ -19,8 +19,8 @@ void func_802AE000_316C00(void) {
 
     prevInsn = 0;
 
-    for (it = _316A70_ROM_START; it < _316A70_ROM_END; it++) {
-        readFunc(nuPiCartHandle, it, &thisInsn);
+    for (it = (u32*) _316A70_ROM_START; it < (u32*) _316A70_ROM_END; it++) {
+        readFunc(nuPiCartHandle, (u32) it, &thisInsn);
         hash += LOWER(thisInsn) + UPPER(thisInsn);
 
         if (OPCODE(prevInsn) == LUI && (OPCODE(thisInsn) == ADDIU || OPCODE(thisInsn) == LW)) {

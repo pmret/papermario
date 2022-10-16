@@ -550,7 +550,7 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 37: Unused_37
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = 0,
@@ -570,7 +570,7 @@ MoveData gMoveTable[] = {
     .costBP = 4
 },
 {   // move 39: Unused_39
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
@@ -580,7 +580,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 3A: Unused_3A
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = 0,
@@ -630,7 +630,7 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 3F: Unused_3F
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
@@ -750,7 +750,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 4B: Unused_4B
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = 0,
@@ -810,7 +810,7 @@ MoveData gMoveTable[] = {
     .costBP = 5
 },
 {   // move 51: Unused_51
-    .nameMsg = "つうじょう",
+    .nameMsg = (s32) "つうじょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
@@ -1110,7 +1110,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 6F: Unused_FinalGoompa
-    .nameMsg = "ファイナルクリジイ",
+    .nameMsg = (s32) "ファイナルクリジイ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_2,
@@ -1120,7 +1120,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 70: Unused_FinalBobomb
-    .nameMsg = "ファイナルボムヘイ",
+    .nameMsg = (s32) "ファイナルボムヘイ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_2,
@@ -1550,7 +1550,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9B: Unused_LoneFool1
-    .nameMsg = "ひとりぼけ",
+    .nameMsg = (s32) "ひとりぼけ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1560,7 +1560,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9C: Unused_LoneFool2
-    .nameMsg = "ひとりぼけ",
+    .nameMsg = (s32) "ひとりぼけ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1570,7 +1570,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9D: Unused_LoneFool3
-    .nameMsg = "ひとりぼけ",
+    .nameMsg = (s32) "ひとりぼけ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1580,7 +1580,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9E: Unused_Mumble
-    .nameMsg = "むにゃむにゃ",
+    .nameMsg = (s32) "むにゃむにゃ",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_4,
@@ -1590,7 +1590,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 9F: Unused_Preach
-    .nameMsg = "せっきょう",
+    .nameMsg = (s32) "せっきょう",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1600,7 +1600,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A0: Unused_Awakening
-    .nameMsg = "かくせい",
+    .nameMsg = (s32) "かくせい",
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,

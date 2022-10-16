@@ -434,7 +434,7 @@ void update_npcs(void);
 
 f32 npc_get_render_yaw(Npc* npc);
 
-void appendGfx_npc(Npc* npc);
+void appendGfx_npc(void* data);
 
 /// Renders all NPCs.
 void render_npcs(void);
@@ -452,7 +452,7 @@ void disable_npc_shadow(Npc* npc);
 
 void update_npc_blur(Npc* npc);
 
-void appendGfx_npc_blur(Npc* npc);
+void appendGfx_npc_blur(void* data);
 
 void npc_enable_collisions(void);
 
@@ -648,5 +648,7 @@ Enemy* get_enemy(s32 npcID);
 ///
 /// @returns pointer to Enemy struct, if one is found. Otherwise, NULL.
 Enemy* get_enemy_safe(s32 npcID);
+
+void set_npc_sprite(Npc* npc, s32 anim, AnimID* extraAnimList);
 
 #endif

@@ -8,7 +8,7 @@ extern s32 obfuscated_battle_heap_create[];
 void func_802AE000(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x33F50000;
-    UNK_FUN_PTR(battle_heap_create) = obfuscated_battle_heap_create;
+    s32 (*battle_heap_create)(void) = (s32 (*) (void)) obfuscated_battle_heap_create;
     u32 hash = 0;
     u32 thisInsn;
     u32* it;
@@ -19,8 +19,8 @@ void func_802AE000(void) {
 
     prevInsn = 0;
 
-    for (it = _316C00_ROM_START; it < _316C00_ROM_END; it++) {
-        readFunc(nuPiCartHandle, it, &thisInsn);
+    for (it = (u32*) _316C00_ROM_START; it < (u32*) _316C00_ROM_END; it++) {
+        readFunc(nuPiCartHandle, (u32) it, &thisInsn);
         hash += LOWER(thisInsn) + UPPER(thisInsn);
 
         if (OPCODE(prevInsn) == LUI && (OPCODE(thisInsn) == ADDIU || OPCODE(thisInsn) == LW)) {

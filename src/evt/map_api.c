@@ -244,11 +244,11 @@ ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    ModelCustomGfxBuilderFunc pre = (ModelCustomGfxBuilderFunc) evt_get_variable(script, *args++);
+    ModelCustomGfxBuilderFunc post = (ModelCustomGfxBuilderFunc) evt_get_variable(script, *args++);
 
-    set_custom_gfx_builders(var1, var2, var3);
+    set_custom_gfx_builders(index, pre, post);
     return ApiStatus_DONE2;
 }
 

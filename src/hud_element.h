@@ -207,7 +207,14 @@ extern HudScript HES_StatusCoin;
 extern HudScript HES_Refund;
 extern HudScript HES_MenuTimes;
 
-extern s32 gPartnerPopupProperties[13][4];
+typedef struct PartnerPopupProperties {
+    /* 0x00 */ s32 nameMsg;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 worldDescMsg;
+    /* 0x0C */ s32 battleDescMsg;
+} PartnerPopupProperties; // size = 0x10
+
+extern PartnerPopupProperties gPartnerPopupProperties[13];
 extern HudScript* wDisabledPartnerHudScripts[];
 extern HudScript* wPartnerHudScripts[];
 
