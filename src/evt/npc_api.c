@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "world/partners.h"
 
 extern s32 wExtraPartnerID;
 extern s32 wExtraPartnerNpcID;

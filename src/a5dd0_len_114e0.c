@@ -6,15 +6,6 @@
 #include "hud_element.h"
 #include "effects.h"
 
-typedef struct GameMode {
-    /* 0x00 */ u16 flags;
-    /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(void);
-    /* 0x0C */ UNK_FUN_PTR(unk_0C);
-    /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
-} GameMode; // size = 0x18
-
 typedef struct Fog {
     /* 0x00 */ s32 enabled;
     /* 0x04 */ s32 r;
@@ -2840,15 +2831,15 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     return gameMode;
 }
 
-GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
+GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
     GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->flags = 1 | 2;
-    gameMode->init = arg0->init;
-    gameMode->step = arg0->step;
-    gameMode->render = arg0->render;
+    gameMode->init = mode->init;
+    gameMode->step = mode->step;
+    gameMode->render = mode->render;
     gameMode->unk_0C = NULL;
     if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
     if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
@@ -4311,7 +4302,7 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
     }
 }
 
-// void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
+void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
 
 void mdl_local_gfx_copy_vertices(Vtx* from, s32 num, Vtx* to) {
@@ -4321,6 +4312,7 @@ void mdl_local_gfx_copy_vertices(Vtx* from, s32 num, Vtx* to) {
         ((u8*)to)[i] = ((u8*)from)[i];
     }
 }
+
 
 void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32 arg2) {
     s32 numVertices;

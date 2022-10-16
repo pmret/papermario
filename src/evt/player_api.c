@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "sprite.h"
+#include "world/partners.h"
 
 extern Npc playerNpcData;
 extern u16 D_802DB5B0;
@@ -13,6 +14,8 @@ Npc* playerNpc = &playerNpcData;
 
 void virtual_entity_list_render_world(void);
 void virtual_entity_list_render_UI(void);
+s32 ALT_load_entity_model(s32* cmdList);
+s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void));
 
 ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

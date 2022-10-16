@@ -649,4 +649,6 @@ Enemy* get_enemy(s32 npcID);
 /// @returns pointer to Enemy struct, if one is found. Otherwise, NULL.
 Enemy* get_enemy_safe(s32 npcID);
 
+void set_npc_sprite(Npc* npc, s32 anim, u32** extraAnimList);
+
 #endif

@@ -1344,7 +1344,7 @@ s32 func_802C73B8(Evt* script) {
     return 1;
 }
 
-s32 evt_execute_next_command(Evt *script) {
+s32 evt_execute_next_command(Evt* script) {
     while (TRUE) {
         s32 status = ApiStatus_DONE2;
         s32* lines;

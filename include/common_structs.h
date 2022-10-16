@@ -2511,4 +2511,13 @@ typedef struct CreditsUnkBeta {
     /* 0x02 */ s16 size;
 } CreditsUnkBeta; // size = 0x4
 
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(void);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+} GameMode; // size = 0x18
+
 #endif

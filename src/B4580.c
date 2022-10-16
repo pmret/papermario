@@ -1014,8 +1014,8 @@ void play_model_animation(s32 index, s16* animPos) {
     if (animator->animationBuffer != NULL) {
         animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
-    animator->animReadPos = (s16*)animPos;
-    animator->savedReadPos = (s16*)animPos;
+    animator->animReadPos = animPos;
+    animator->savedReadPos = animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 }
@@ -1026,11 +1026,11 @@ void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip
     s32 i;
 
     if (animator->animationBuffer != NULL) {
-        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
+        animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
 
-    animator->animReadPos = (s16*)animPos;
-    animator->savedReadPos = (s16*)animPos;
+    animator->animReadPos = (s16*) animPos;
+    animator->savedReadPos =(s16*) animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 

@@ -76,6 +76,8 @@ StateFunc* gameModeMap[] = {
 // BSS
 extern s16 gameMode;
 
+GameMode* set_game_mode_slot(s32 i, GameMode* mode);
+
 void set_game_mode(s16 mode) {
     gameMode = mode;
     set_game_mode_slot(0, gameModeMap[mode]);
