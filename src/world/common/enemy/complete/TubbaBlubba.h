@@ -1,0 +1,29 @@
+#include "common.h"
+#include "sprite/npc/WorldTubba.h"
+
+#define TUBBA_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
+#define TUBBA_ANIMS \
+{ \
+    .idle   = ANIM_WorldTubba_Anim06, \
+    .walk   = ANIM_WorldTubba_Anim09, \
+    .run    = ANIM_WorldTubba_Anim0C, \
+    .chase  = ANIM_WorldTubba_Anim0C, \
+    .anim_4 = ANIM_WorldTubba_Anim00, \
+    .anim_5 = ANIM_WorldTubba_Anim00, \
+    .death  = ANIM_WorldTubba_Anim00, \
+    .hit    = ANIM_WorldTubba_Anim00, \
+    .anim_8 = ANIM_WorldTubba_Anim00, \
+    .anim_9 = ANIM_WorldTubba_Anim00, \
+    .anim_A = ANIM_WorldTubba_Anim00, \
+    .anim_B = ANIM_WorldTubba_Anim00, \
+    .anim_C = ANIM_WorldTubba_Anim00, \
+    .anim_D = ANIM_WorldTubba_Anim00, \
+    .anim_E = ANIM_WorldTubba_Anim00, \
+    .anim_F = ANIM_WorldTubba_Anim00, \
+}

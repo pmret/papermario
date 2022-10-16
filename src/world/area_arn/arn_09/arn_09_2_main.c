@@ -1,11 +1,5 @@
 #include "arn_09.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_LaunchPlayer);
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-
 EvtScript N(EVS_ExitDoor_arn_10_0) = EVT_EXIT_SPLIT_SINGLE_DOOR(arn_09_ENTRY_0, "arn_10", arn_10_ENTRY_0,
     COLLIDER_tte, MODEL_doa, MODEL_o37, DOOR_SWING_OUT);
 

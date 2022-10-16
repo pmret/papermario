@@ -1,13 +1,5 @@
 #include "arn_07.h"
 
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_UnlockDoor);
-extern EvtScript N(EVS_SetupWindmill);
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(BossNPCs);
-extern NpcGroupList N(SpiritNPCs);
-
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 s32 N(KeyList)[] = {

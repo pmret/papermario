@@ -1,10 +1,6 @@
 #include "end_00.h"
 #include "effects.h"
 
-extern EvtScript N(EVS_OffsetNpcScroll);
-
-API_CALLABLE(N(AddScrollToNpcPos));
-
 s32 N(UnusedAlpha) = 255;
 
 API_CALLABLE(N(SetUnusedAlpha)) {

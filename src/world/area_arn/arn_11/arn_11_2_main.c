@@ -1,8 +1,5 @@
 #include "arn_11.h"
 
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-
 EvtScript N(EVS_SetupCamera) = {
     EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))

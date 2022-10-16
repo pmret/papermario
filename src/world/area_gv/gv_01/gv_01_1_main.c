@@ -2,18 +2,6 @@
 #include "sprite.h"
 #include "hud_element.h"
 
-extern EvtScript N(EVS_Main);
-
-EntryList N(Entrances) = {
-    {    0.0,    0.0,    0.0,   90.0 },  /* gv_01_ENTRY_0 */
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-};
-
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"
 

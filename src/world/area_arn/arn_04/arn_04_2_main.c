@@ -1,9 +1,4 @@
 #include "arn_04.h"
-#include "entity.h"
-
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
 
 EvtScript N(EVS_ExitWalk_arn_02_1) = EVT_EXIT_WALK(60, arn_04_ENTRY_0, "arn_02", arn_02_ENTRY_1);
 EvtScript N(EVS_ExitWalk_dgb_00_0) = EVT_EXIT_WALK(60, arn_04_ENTRY_1, "dgb_00", dgb_00_ENTRY_0);

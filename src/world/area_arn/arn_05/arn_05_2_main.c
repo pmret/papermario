@@ -1,11 +1,5 @@
 #include "arn_05.h"
 
-extern EvtScript N(EVS_SetupTubbaRaid);
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
-
 EvtScript N(EVS_ExitWalk_arn_03_1) = EVT_EXIT_WALK(60, arn_05_ENTRY_0, "arn_03", arn_03_ENTRY_1);
 EvtScript N(EVS_ExitWalk_arn_02_0) = EVT_EXIT_WALK(60, arn_05_ENTRY_1, "arn_02", arn_02_ENTRY_0);
 
@@ -35,9 +29,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_IF_LT(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(BeforeNPCs)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(AfterNPCs)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupTubbaRaid))

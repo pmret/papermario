@@ -11262,9 +11262,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBDD1B0, c, arn_02_0_header]
-    - [0xBDD1B0, c, arn_02_1_main]
-    - [0xBDD1B0, c, arn_02_2_entity]
-    - [0xBDD1B0, c, arn_02_3_npc]
+    - [0xBDD1B0, c, arn_02_1_music]
+    - [0xBDD1B0, c, arn_02_2_main]
+    - [0xBDD1B0, c, arn_02_3_entity]
+    - [0xBDD1B0, c, arn_02_4_npc]
     - [0xBDE190]
   - name: arn_03
     dir: world/area_arn/arn_03
@@ -11273,9 +11274,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBDED90, c, arn_03_0_header]
-    - [0xBDED90, c, arn_03_1_main]
-    - [0xBDED90, c, arn_03_2_npc]
-    - [0xBDED90, c, arn_03_3_entity]
+    - [0xBDED90, c, arn_03_1_music]
+    - [0xBDED90, c, arn_03_2_main]
+    - [0xBDED90, c, arn_03_3_npc]
+    - [0xBDED90, c, arn_03_4_entity]
     - [0xBE04B0]
   - name: arn_04
     dir: world/area_arn/arn_04
@@ -11284,9 +11286,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBE37B0, c, arn_04_0_header]
-    - [0xBE37B0, c, arn_04_1_main]
-    - [0xBE37B0, c, arn_04_2_npc]
-    - [0xBE37B0, c, arn_04_3_entity]
+    - [0xBE37B0, c, arn_04_1_music]
+    - [0xBE37B0, c, arn_04_2_main]
+    - [0xBE37B0, c, arn_04_3_npc]
+    - [0xBE37B0, c, arn_04_4_entity]
     - [0xBE6B20]
   - name: arn_05
     dir: world/area_arn/arn_05
@@ -11295,9 +11298,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBE7BE0, c, arn_05_0_header]
-    - [0xBE7BE0, c, arn_05_1_main]
-    - [0xBE7BE0, c, arn_05_2_npc]
-    - [0xBE7BE0, c, arn_05_3_entity]
+    - [0xBE7BE0, c, arn_05_1_music]
+    - [0xBE7BE0, c, arn_05_2_main]
+    - [0xBE7BE0, c, arn_05_3_npc]
+    - [0xBE7BE0, c, arn_05_4_entity]
     - [0xBE8EE0]
   - name: arn_07
     dir: world/area_arn/arn_07
@@ -11306,10 +11310,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBECDF0, c, arn_07_0_header]
-    - [0xBECDF0, c, arn_07_1_main]
-    - [0xBED5F0, c, arn_07_2_windmill]
-    - [0xBED660, c, arn_07_3_entity]
-    - [0xBED740, c, arn_07_4_npc]
+    - [0xBECDF0, c, arn_07_1_music]
+    - [0xBECDF0, c, arn_07_2_main]
+    - [0xBED5F0, c, arn_07_3_windmill]
+    - [0xBED660, c, arn_07_4_entity]
+    - [0xBED740, c, arn_07_5_npc]
     - [0xBEEC80]
   - name: arn_08
     dir: world/area_arn/arn_08
@@ -11318,12 +11323,13 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF47A0, c, arn_08_0_header]
-    - [0xBF47A0, c, arn_08_1_main]
-    - [0xBF47A0, c, arn_08_2_well]
-    - [0xBF47A0, c, arn_08_3_gears]
-    - [0xBF4860, c, arn_08_4_demo]
-    - [0xBF4860, c, arn_08_5_npc]
-    - [0xBF4860, c, arn_08_6_entity]
+    - [0xBF47A0, c, arn_08_1_music]
+    - [0xBF47A0, c, arn_08_2_main]
+    - [0xBF47A0, c, arn_08_3_well]
+    - [0xBF47A0, c, arn_08_4_gears]
+    - [0xBF4860, c, arn_08_5_demo]
+    - [0xBF4860, c, arn_08_6_npc]
+    - [0xBF4860, c, arn_08_7_entity]
     - [0xBF4A30]
   - name: arn_09
     dir: world/area_arn/arn_09
@@ -11332,10 +11338,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF6060, c, arn_09_0_header]
-    - [0xBF6060, c, arn_09_1_main]
-    - [0xBF6060, c, arn_09_2_entity]
-    - [0xBF6060, c, arn_09_3_launch]
-    - [0xBF6060, c, arn_09_4_npc]
+    - [0xBF6060, c, arn_09_1_music]
+    - [0xBF6060, c, arn_09_2_main]
+    - [0xBF6060, c, arn_09_3_entity]
+    - [0xBF6060, c, arn_09_4_launch]
+    - [0xBF6060, c, arn_09_5_npc]
     - [0xBF60A0]
   - name: arn_10
     dir: world/area_arn/arn_10
@@ -11344,9 +11351,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF6A00, c, arn_10_0_header]
-    - [0xBF6A00, c, arn_10_1_main]
-    - [0xBF6A00, c, arn_10_2_npc]
-    - [0xBF6A00, c, arn_10_3_entity]
+    - [0xBF6A00, c, arn_10_1_music]
+    - [0xBF6A00, c, arn_10_2_main]
+    - [0xBF6A00, c, arn_10_3_npc]
+    - [0xBF6A00, c, arn_10_4_entity]
     - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
@@ -11355,8 +11363,9 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF7680, c, arn_11_0_header]
-    - [0xBF7680, c, arn_11_1_main]
-    - [0xBF7680, c, arn_11_2_npc]
+    - [0xBF7680, c, arn_11_1_music]
+    - [0xBF7680, c, arn_11_2_main]
+    - [0xBF7680, c, arn_11_3_npc]
     - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
@@ -11365,9 +11374,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF8790, c, arn_12_0_header]
-    - [0xBF8790, c, arn_12_1_main]
-    - [0xBF8790, c, arn_12_2_npc]
-    - [0xBF8790, c, arn_12_3_entity]
+    - [0xBF8790, c, arn_12_1_music]
+    - [0xBF8790, c, arn_12_2_main]
+    - [0xBF8790, c, arn_12_3_npc]
+    - [0xBF8790, c, arn_12_4_entity]
     - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
@@ -11376,9 +11386,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF9410, c, arn_13_0_header]
-    - [0xBF9410, c, arn_13_1_main]
-    - [0xBF9410, c, arn_13_2_npc]
-    - [0xBF9410, c, arn_13_3_entity]
+    - [0xBF9410, c, arn_13_1_music]
+    - [0xBF9410, c, arn_13_2_main]
+    - [0xBF9410, c, arn_13_3_npc]
+    - [0xBF9410, c, arn_13_4_entity]
     - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
@@ -13021,7 +13032,7 @@ segments:
     start: 0xDF6A00
     vram: 0x80240000
     subsegments:
-    - [0xDF6A00, c, end_00_0_init]
+    - [0xDF6A00, c, end_00_0_header]
     - [0xDF6A20, c, end_00_1_main]
     - [0xDF6A20, c, end_00_2_credits]
     - [0xDF9080, c, end_00_3_parade_setup]
@@ -13040,7 +13051,7 @@ segments:
     start: 0xE05360
     vram: 0x80240000
     subsegments:
-    - [0xE05360, c, end_01_0_init]
+    - [0xE05360, c, end_01_0_header]
     - [0xE05370, c, end_01_1_main]
     - [0xE05390, c, end_01_2_credits]
     - [0xE079F0, c, end_01_3_parade_setup]
@@ -13055,6 +13066,7 @@ segments:
     start: 0xE0E7A0
     vram: 0x80240000
     subsegments:
+    - [0xE0E7A0, c, mgm_00_0_header]
     - [0xE0E7A0, c, mgm_00_1_main]
     - [0xE0EA80, c, mgm_00_2_npc]
     - [0xE0F980, c, mgm_00_3_scoreboard]
@@ -13065,11 +13077,13 @@ segments:
     start: 0xE12760
     vram: 0x80240000
     subsegments:
+    - [0xE12760, c, mgm_01_0_header]
     - [0xE12760, c, mgm_01_1_main]
     - [0xE12930, c, mgm_01_2_npc]
     - [0xE12930, c, mgm_01_3_entity]
     - [0xE12930, c, mgm_01_4_images]
-    - [0xE13F10, .data, mgm_01_1_main]
+    - [0xE13F10, .data, mgm_01_0_header]
+    - [0xE13F60, .data, mgm_01_1_main]
     - [0xE141D0, .data, mgm_01_2_npc]
     - [0xE153A0, .data, mgm_01_3_entity]
     - start: 0xE15440
@@ -13091,10 +13105,12 @@ segments:
     start: 0xE15D80
     vram: 0x80240000
     subsegments:
+      - [0xE15D80, c, mgm_02_0_header]
       - [0xE15D80, c, mgm_02_1_main]
       - [0xE15D80, c, mgm_02_2_npc]
       - [0xE15D80, c, mgm_02_3_images]
-      - [0xE18180, .data, mgm_02_1_main]
+      - [0xE18180, .data, mgm_02_0_header]
+      - [0xE181D0, .data, mgm_02_1_main]
       - [0xE183D0, .data, mgm_02_2_npc]
       - start: 0xE1E020
         type: .data
@@ -13109,6 +13125,7 @@ segments:
     start: 0xE1E380
     vram: 0x80240000
     subsegments:
+    - [0xE1E380, c, mgm_03_0_header]
     - [0xE1E380, c, mgm_03_1_main]
   - name: gv_01
     dir: world/area_gv/gv_01
@@ -13116,7 +13133,8 @@ segments:
     start: 0xE1E460
     vram: 0x80240000
     subsegments:
-    - [0xE1E460, c, gv_01]
+    - [0xE1E460, c, gv_01_0_header]
+    - [0xE1E460, c, gv_01_1_main]
     - [0xE1EC20]
   - type: code
     start: 0xE20110

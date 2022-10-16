@@ -1,7 +1,5 @@
 #include "arn_07.h"
 
-extern EvtScript(N(EVS_UpdateWindmill));
-
 MAP_RODATA_PAD(1,windmill);
 
 API_CALLABLE(N(WrapWindmillAngle)) {
@@ -13,6 +11,8 @@ API_CALLABLE(N(WrapWindmillAngle)) {
     evt_set_float_variable(script, LVar0, angle);
     return ApiStatus_DONE2;
 }
+
+extern EvtScript(N(EVS_UpdateWindmill));
 
 EvtScript N(EVS_SetupWindmill) = {
     EVT_EXEC(N(EVS_UpdateWindmill))

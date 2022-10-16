@@ -1,39 +1,11 @@
 #include "arn_07.h"
 #include "effects.h"
 
-extern EvtScript(N(EVS_SetupMusic));
-extern EvtScript(N(EVS_SpawnStarCard));
-
 #include "world/common/enemy/complete/HyperParagoomba.inc.c"
 #include "world/common/npc/TubbasHeart.inc.c"
-
-NpcSettings N(NpcSettings_Tubba) = {
-    .height = 90,
-    .radius = 65,
-    .level = 13,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
+#include "world/common/enemy/complete/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo.inc.c"
-
-NpcSettings N(NpcSettings_Skolar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
 
 API_CALLABLE(N(UpgradeStarPower)) {
     PlayerData* playerData = &gPlayerData;
@@ -591,34 +563,13 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 StaticNpc N(NpcData_Tubba)[] = {
     {
         .id = NPC_Tubba,
-        .settings = &N(NpcSettings_Tubba),
+        .settings = &N(NpcSettings_TubbaBlubba),
         .pos = { 309.0f, 0.0f, 11.0f },
         .yaw = 270,
         .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(EVS_NpcInit_Tubba),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldTubba_Anim06,
-            .walk   = ANIM_WorldTubba_Anim09,
-            .run    = ANIM_WorldTubba_Anim0C,
-            .chase  = ANIM_WorldTubba_Anim0C,
-            .anim_4 = ANIM_WorldTubba_Anim00,
-            .anim_5 = ANIM_WorldTubba_Anim00,
-            .death  = ANIM_WorldTubba_Anim00,
-            .hit    = ANIM_WorldTubba_Anim00,
-            .anim_8 = ANIM_WorldTubba_Anim00,
-            .anim_9 = ANIM_WorldTubba_Anim00,
-            .anim_A = ANIM_WorldTubba_Anim00,
-            .anim_B = ANIM_WorldTubba_Anim00,
-            .anim_C = ANIM_WorldTubba_Anim00,
-            .anim_D = ANIM_WorldTubba_Anim00,
-            .anim_E = ANIM_WorldTubba_Anim00,
-            .anim_F = ANIM_WorldTubba_Anim00,
-        },
+        .drops = TUBBA_DROPS,
+        .animations = TUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Tubba),
     },
     {
@@ -851,34 +802,13 @@ StaticNpc N(NpcData_HyperParagoomba_03) = {
 
 StaticNpc N(NpcData_Skolar) = {
     .id = NPC_Skolar,
-    .settings = &N(NpcSettings_Skolar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Skolar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldSkolar_Idle,
-        .walk   = ANIM_WorldSkolar_Idle,
-        .run    = ANIM_WorldSkolar_Idle,
-        .chase  = ANIM_WorldSkolar_Idle,
-        .anim_4 = ANIM_WorldSkolar_Idle,
-        .anim_5 = ANIM_WorldSkolar_Idle,
-        .death  = ANIM_WorldSkolar_Idle,
-        .hit    = ANIM_WorldSkolar_Idle,
-        .anim_8 = ANIM_WorldSkolar_Still,
-        .anim_9 = ANIM_WorldSkolar_Idle,
-        .anim_A = ANIM_WorldSkolar_Idle,
-        .anim_B = ANIM_WorldSkolar_Idle,
-        .anim_C = ANIM_WorldSkolar_Idle,
-        .anim_D = ANIM_WorldSkolar_Idle,
-        .anim_E = ANIM_WorldSkolar_Idle,
-        .anim_F = ANIM_WorldSkolar_Idle,
-    },
+    .drops = SKOLAR_DROPS,
+    .animations = SKOLAR_ANIMS,
 };
 
 NpcGroupList N(BossNPCs) = {

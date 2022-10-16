@@ -1,8 +1,6 @@
 #include "arn_07.h"
 #include "entity.h"
 
-extern EvtScript(N(EVS_ExitDoor_arn_08_0));
-
 MAP_RODATA_PAD(1,entity);
 
 #include "world/common/todo/RemovePadlock.inc.c"

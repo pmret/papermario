@@ -1,9 +1,5 @@
 #include "mgm_00.h"
 
-void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
-
-extern Gfx N(Gfx_RecordDisplay_Init)[];
-
 #define MINIGAME_TYPE_JUMP      1
 #define MINIGAME_TYPE_SMASH     2
 
@@ -27,6 +23,28 @@ typedef struct RecordDisplayData {
     /* 0x10 */ s32 curAlpha;
     /* 0x14 */ s32 workerID;
 } RecordDisplayData; /* size = 0x18 */
+
+EvtScript N(D_80243C40_E123E0) = {
+    EVT_RETURN
+    EVT_END
+};
+
+Gfx N(Gfx_RecordDisplay_Init)[] = {
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPNoOp(),
+    gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
+    gsDPFillRectangle(44, 49, 276, 51),
+    gsDPFillRectangle(44, 49, 46, 133),
+    gsDPFillRectangle(275, 49, 276, 133),
+    gsDPFillRectangle(44, 132, 276, 133),
+    gsSPEndDisplayList(),
+};
 
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
@@ -135,28 +153,6 @@ API_CALLABLE(N(UpdateRecordDisplay)) {
     }
     return ApiStatus_BLOCK;
 }
-
-EvtScript N(D_80243C40_E123E0) = {
-    EVT_RETURN
-    EVT_END
-};
-
-Gfx N(Gfx_RecordDisplay_Init)[] = {
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
-    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
-    gsDPSetColorDither(G_CD_DISABLE),
-    gsDPSetAlphaDither(G_AD_DISABLE),
-    gsDPSetCombineKey(G_CK_NONE),
-    gsDPSetAlphaCompare(G_AC_NONE),
-    gsDPNoOp(),
-    gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
-    gsDPFillRectangle(44, 49, 276, 51),
-    gsDPFillRectangle(44, 49, 46, 133),
-    gsDPFillRectangle(275, 49, 276, 133),
-    gsDPFillRectangle(44, 132, 276, 133),
-    gsSPEndDisplayList(),
-};
 
 EvtScript N(EVS_OnInteract_JumpRecords) = {
     EVT_CALL(DisablePlayerInput, TRUE)

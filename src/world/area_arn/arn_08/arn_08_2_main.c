@@ -1,12 +1,5 @@
 #include "arn_08.h"
 
-extern EvtScript N(EVS_AnimateGears);
-extern EvtScript N(EVS_SetupHole);
-extern EvtScript N(EVS_PlayDemoScene);
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_SetupMusic);
-extern NpcGroupList N(DefaultNPCs);
-
 EvtScript N(EVS_ExitDoor_arn_07_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
