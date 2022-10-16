@@ -9,6 +9,20 @@
 
 #define MAX_ITEM_ENTITIES 256
 
+typedef struct Rect {
+    s32 ulx;
+    s32 uly;
+    s32 lrx;
+    s32 lry;
+} Rect;
+
+typedef struct Rect2b {
+    s16 ulx;
+    s16 uly;
+    s16 lrx;
+    s16 lry;
+} Rect2b;
+
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
@@ -54,8 +68,9 @@ void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
 void func_801363A0(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
-s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
-                             u16 clipULy, u16 clipLRx, u16 clipRLy);
+s32 draw_image_with_clipping(IMG_PTR img, u32 width, u32 height, s32 fmt, s32 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight);
 void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
@@ -144,14 +159,133 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
     return ret;
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
+#ifdef NON_EQUIVALENT
+s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDepth,
+                     s16 posX, s16 posY,
+                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight) {
+    Rect2b texRect;
+    Rect2b drawRect;
+    Rect ry;
+    Rect rx;
+    u16 texOffsetX, texOffsetY;
+    u8 stopDrawing;
+    u8 stopDrawingLine;
 
-typedef struct Rect {
-    s32 ulx;
-    s32 uly;
-    s32 lrx;
-    s32 lry;
-} Rect;
+    if (posX >= clipX + clipWidth  || posY >= clipY + clipHeight) {
+        return 0;
+    }
+
+    if (clipX >= (s16)(posX + width)) {
+        return 0;
+    }
+
+    if (clipY >= (s16)(posY + height)) {
+        return 0;
+    }
+
+    stopDrawing = 0;
+    texRect.uly = 0;
+    drawRect.uly = posY;
+    while (TRUE) {
+        texRect.lry = texRect.uly + 31;
+        drawRect.lry = drawRect.uly + 32;
+        texOffsetY = 0;
+        if (drawRect.lry <= clipY) {
+            do {
+                texRect.uly += 32;
+                drawRect.uly = drawRect.lry;
+                drawRect.lry += 32;
+            } while (drawRect.lry < clipY);
+            texRect.lry = texRect.uly + 31;
+        }
+
+        if (drawRect.uly < clipY) {
+            drawRect.uly = clipY;
+            texOffsetY = abs(posY - clipY);
+        }
+
+        if (drawRect.lry >= clipY + clipHeight) {
+            stopDrawing = TRUE;
+            drawRect.lry = clipY + clipHeight;
+            texRect.lry = clipY + clipHeight - posY - 1;
+        }
+
+        if ((u32)(texRect.lry + 1) >= height) {
+            stopDrawing = TRUE;
+            texRect.lry = height - 1;
+            drawRect.lry = height + posY;
+        }
+
+        stopDrawingLine = 0;
+        texRect.ulx = 0;
+        drawRect.ulx = posX;
+        while (TRUE) {
+            texRect.lrx = texRect.ulx + 63;
+            drawRect.lrx = drawRect.ulx + 64;
+            texOffsetX = 0;
+
+            if (drawRect.lrx <= clipX) {
+                do {
+                    texRect.ulx += 64;
+                    drawRect.ulx = drawRect.lrx;
+                    drawRect.lrx += 64;
+                } while (drawRect.lrx < clipX);
+                texRect.lrx = texRect.ulx + 63;
+            }
+
+            if (drawRect.ulx < clipX) {
+                drawRect.ulx = clipX;
+                texOffsetX = abs(posX - clipX);
+            }
+
+            if (drawRect.lrx >= clipX + clipWidth) {
+                stopDrawingLine = TRUE;
+                drawRect.lrx = clipX + clipWidth;
+                texRect.lrx = clipX + clipWidth - posX - 1;
+            }
+
+            if ((u32)(texRect.lrx + 1) >= width) {
+                stopDrawingLine = TRUE;
+                texRect.lrx = width - 1;
+                drawRect.lrx = width + posX;
+            }
+
+            if (bitDepth == G_IM_SIZ_4b) {
+                gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_16b) {
+                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            } else if (bitDepth == G_IM_SIZ_8b) {
+                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+                                texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
+                                G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+            }
+
+            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+                                0, texOffsetX * 32, texOffsetY * 32, 1024, 1024);
+
+            if (stopDrawingLine) {
+                break;
+            }
+            texRect.ulx += 64;
+            drawRect.ulx = drawRect.lrx;
+        }
+
+        if (stopDrawing) {
+            break;
+        }
+        texRect.uly += 32;
+        drawRect.uly = drawRect.lry;
+    }
+
+    return 1;
+}
+#else
+INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
+#endif
 
 s32 draw_tiled_image(IMG_PTR img, u32 width, u32 height, u8 fmt, u8 bitDepth,
                      s16 posX, s16 posY,
