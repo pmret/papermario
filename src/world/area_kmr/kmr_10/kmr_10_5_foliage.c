@@ -1,18 +1,18 @@
-#include "kmr_03.h"
+#include "kmr_10.h"
 
 #include "common/foliage.inc.c"
 
 FoliageModelList N(Bush1_BushModels) = {
     .count = 1,
     .models = {
-        MODEL_km,
+        MODEL_o1056,
     }
 };
 
 FoliageVectorList N(Bush1_Effects) = {
     .count = 1,
     .vectors = {
-        { 143.0f, 16.0f, 462.0f },
+        { -305.0f, 163.0f, 3.0f },
     }
 };
 
@@ -22,44 +22,29 @@ SearchBushConfig N(SearchBush_Bush1) = {
 };
 
 FoliageModelList N(Tree1_LeafModels) = {
-    .count = 1,
+    .count = 3,
     .models = {
-        MODEL_ue,
+        MODEL_ha1_1,
+        MODEL_ha1_2,
+        MODEL_ha1_3,
     }
 };
 
 FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 1,
+    .count = 3,
     .models = {
-        MODEL_sita,
+        MODEL_o1066,
+        MODEL_miki1_1,
+        MODEL_miki1_2,
     }
 };
 
 FoliageVectorList N(Tree1_Effects) = {
     .count = 2,
     .vectors = {
-        { -80.0f, 130.0f, 18.0f },
-        { 28.0f, 130.0f, 39.0f },
+        { 291.0f, 103.0f, -27.0f },
+        { 368.0f, 96.0f, -18.0f },
     }
-};
-
-EvtScript N(EVS_Tree1_CallbackScript) = {
-    EVT_IF_EQ(GF_KMR03_Tree1_Mushroom, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(MF_Unk_0A, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, -30)
-        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -23, 100, 35, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR03_Tree1_Mushroom)
-    EVT_ELSE
-        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -85, 100, 16, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR03_Tree1_Mushroom)
-    EVT_END_IF
-    EVT_SET(MF_Unk_0A, TRUE)
-    EVT_RETURN
-    EVT_END
 };
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -70,15 +55,15 @@ ShakeTreeConfig N(ShakeTree_Tree1) = {
 };
 
 BombTrigger N(BombPos_Tree1) = {
-    .pos = { -42.0f, 0.0f, -13.0f },
+    .pos = { 328.0f, 10.0f, -36.0f },
     .radius = 0.0f
 };
 
 EvtScript N(EVS_SetupFoliage) = {
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_km, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_k1, 1, 0)
     EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_ki, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_ki_a, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
     EVT_RETURN
     EVT_END

@@ -2,24 +2,18 @@
 
 #include "world/common/enemy/complete/GoombaBros_Stationary.inc.c"
 
-API_CALLABLE(func_80240A6C_8D482C);
+extern Addr EntityModel_Spring_ReboundAnim;
 
-// name: kmr_07_MakeSpringBounce, see func_802402BC_8D878C
-#ifdef NON_MATCHING
-ApiStatus func_80240A6C_8D482C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlaySpringReboundAnimation)) {
     Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityIndex));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->unk_14, 0x1E4);
+    play_model_animation(entity->virtualModelIndex, (s16*) EntityModel_Spring_ReboundAnim);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240A6C_8D482C);
-#endif
-MAP_DATA_SECTION_START
 
 EvtScript N(EVS_PlayWalkingSounds) = {
     EVT_LOOP(0)
@@ -32,11 +26,11 @@ EvtScript N(EVS_PlayWalkingSounds) = {
 
 EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_IF_LT(LVar0, 210)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_WAIT(1)
+        EVT_IF_LT(LVar0, 210)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
     EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_THREAD
@@ -129,7 +123,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
                 EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_CryWalk)
                 EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_10F, 0)
                 EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 307, 25, 49, 20)
-                EVT_CALL(func_80240A6C_8D482C)
+                EVT_CALL(N(PlaySpringReboundAnimation))
                 EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_2086, 0)
                 EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 401, 80, 25, 30)
                 EVT_WAIT(5)
@@ -147,7 +141,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_CryWalk)
             EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_10F, 0)
             EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 307, 25, 49, 20)
-            EVT_CALL(func_80240A6C_8D482C)
+            EVT_CALL(N(PlaySpringReboundAnimation))
             EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_2086, 0)
             EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 401, 80, 25, 30)
             EVT_WAIT(5)

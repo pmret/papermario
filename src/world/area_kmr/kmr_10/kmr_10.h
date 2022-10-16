@@ -2,9 +2,28 @@
 /// @brief Goomba Region - Toad Town Entrance
 
 #include "common.h"
-#include "../kmr.h"
 #include "message_ids.h"
 #include "map.h"
+
 #include "../kmr.h"
+#include "mapfs/kmr_10_shape.h"
+#include "mapfs/kmr_10_hit.h"
+
+#include "sprite/npc/Toad.h"
+
+enum {
+	NPC_Dummy   = 0, // for controlling the spring as it falls from the tree
+};
+
+enum {
+    MV_SpringEntityIndex        = MapVar(0),
+};
 
 #define NAMESPACE kmr_10
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_Tree1_CallbackScript);
+extern NpcGroupList N(DefaultNPCs);

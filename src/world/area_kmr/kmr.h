@@ -25,6 +25,7 @@ enum {
     AF_KMR_07       = AreaFlag(7),
     AF_KMR_08       = AreaFlag(8),
     AF_KMR_09       = AreaFlag(9),
+    AF_KMR_0D       = AreaFlag(13),
 };
 
 extern MapSettings kmr_00_settings;
