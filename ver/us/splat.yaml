@@ -8235,10 +8235,12 @@ segments:
     start: 0x8D3DC0
     vram: 0x80240000
     subsegments:
-    - [0x8D3DC0, c]
-    - [0x8D4880, data]
-    - [0x8D49A0, data]
-    - [0x8D5C40]
+    - [0x8D3DC0, c, kmr_07_0_header]
+    - [0x8D3DC0, c, kmr_07_1_music]
+    - [0x8D3DC0, c, kmr_07_2_main]
+    - [0x8D3DC0, c, kmr_07_3_npc]
+    - [0x8D4880, c, kmr_07_4_entity]
+    - [0x8D4880]
   - name: kmr_09
     dir: world/area_kmr/kmr_09
     type: code
