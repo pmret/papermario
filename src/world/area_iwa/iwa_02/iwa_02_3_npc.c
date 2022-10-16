@@ -3,7 +3,7 @@
 #include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
 #include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
 #include "world/common/enemy/complete/Cleft.inc.c"
-#include "world/common/npc/Bulbulb.inc.c"
+#include "world/common/npc/Bubulb.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -127,13 +127,13 @@ StaticNpc N(NpcData_MontyMole_01)[] = {
     },
 };
 
-EvtScript N(EVS_Bulbulb_Conversation) = {
-    EVT_IF_EQ(AF_IWA_SpokeWithBulbulb, FALSE)
+EvtScript N(EVS_Bubulb_Conversation) = {
+    EVT_IF_EQ(AF_IWA_SpokeWithBubulb, FALSE)
         EVT_SET(LVar2, LVar0)
-        EVT_SET(AF_IWA_SpokeWithBulbulb, TRUE)
+        EVT_SET(AF_IWA_SpokeWithBubulb, TRUE)
     EVT_ELSE
         EVT_SET(LVar2, LVar1)
-        EVT_SET(AF_IWA_SpokeWithBulbulb, FALSE)
+        EVT_SET(AF_IWA_SpokeWithBubulb, FALSE)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, LVar2)
     EVT_RETURN
@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
                 EVT_SET(LVar0, MSG_CH2_0025)
                 EVT_SET(LVar1, MSG_CH2_0026)
         EVT_END_SWITCH
-        EVT_EXEC_WAIT(N(EVS_Bulbulb_Conversation))
+        EVT_EXEC_WAIT(N(EVS_Bubulb_Conversation))
     EVT_END_IF
     EVT_RETURN
     EVT_END

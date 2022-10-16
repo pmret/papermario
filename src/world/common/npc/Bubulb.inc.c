@@ -1,5 +1,5 @@
 #include "common.h"
-#include "Bulbulb.h"
+#include "Bubulb.h"
 
 EvtScript N(EVS_NpcAuxAI_Bubulb) = {
     EVT_RETURN
