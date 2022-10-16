@@ -121,7 +121,6 @@ extern s32 b_area_kzn2_lava_bud_idleAnimations_fiery[];
 extern s32 N(defenseTable_fiery)[];
 extern s32 b_area_kzn2_lava_bud_defenseTable_fiery[];
 
-s32 bgm_init_music_players(void);
 API_CALLABLE(SetAnimatorFlags);
 API_CALLABLE(GetAnimatedPositionByTreeIndex);
 API_CALLABLE(GetAnimatedRotationByTreeIndex);

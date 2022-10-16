@@ -3,6 +3,7 @@
 #include "ld_addrs.h"
 #include "animation_script.h"
 #include "entity.h"
+#include "model.h"
 
 extern Gfx Entity_YellowBlock_Render[];
 extern Gfx Entity_RedBlock_Render[];

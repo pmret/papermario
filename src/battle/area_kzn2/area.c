@@ -48,9 +48,9 @@ StageList N(stageTable) = {
 };
 
 #define PIRANHA_DMA_ENTRY(name) \
-    { (s32) world_model_anim_kzn_##name##_ROM_START,\
-      (s32) world_model_anim_kzn_##name##_ROM_END,\
-      (s32) world_model_anim_kzn_##name##_VRAM }
+    { world_model_anim_kzn_##name##_ROM_START,\
+      world_model_anim_kzn_##name##_ROM_END,\
+      world_model_anim_kzn_##name##_VRAM }
 
 DmaTable N(dmaTable)[] = {
     PIRANHA_DMA_ENTRY(00),

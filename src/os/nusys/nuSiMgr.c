@@ -14,7 +14,7 @@ u8 nuSiMgrInit(void) {
     OSContStatus status[NU_CONT_MAXCONTROLLERS];
     u32 i;
 
-    osCreateMesgQueue(&nuSiMesgQ, &nuSiMesgBuf, ARRAY_COUNT(nuSiMesgBuf));
+    osCreateMesgQueue(&nuSiMesgQ, nuSiMesgBuf, ARRAY_COUNT(nuSiMesgBuf));
     osSetEventMesg(OS_EVENT_SI, &nuSiMesgQ, NULL);
     osContInit(&nuSiMesgQ, &pattern, &status[0]);
 
@@ -63,11 +63,11 @@ void nuSiMgrThread(void* arg) {
     u16 majorNo;
     u16 minorNo;
 
-    osCreateMesgQueue(&nuSiMgrMesgQ, &siMgrMesgBuf, NU_SI_MESG_MAX);
+    osCreateMesgQueue(&nuSiMgrMesgQ, siMgrMesgBuf, NU_SI_MESG_MAX);
     nuScAddClient(&siClient, &nuSiMgrMesgQ, NU_SC_RETRACE_MSG);
 
     while (TRUE) {
-        osRecvMesg(&nuSiMgrMesgQ, &siMesg, OS_MESG_BLOCK);
+        osRecvMesg(&nuSiMgrMesgQ, (OSMesg*) &siMesg, OS_MESG_BLOCK);
 
         siCallBackListPtr = &nuSiCallBackList;
 

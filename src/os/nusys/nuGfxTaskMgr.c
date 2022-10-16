@@ -18,7 +18,7 @@ extern s32 D_800B91D0;
 extern u8 rspbootUcodeBuffer[];
 extern OSMesgQueue D_800DA47C;
 
-void nuGfxTaskMgr(void) {
+void nuGfxTaskMgr(void* data) {
     NUScTask* task;
     s16* msg;
     OSIntMask mask;
@@ -70,15 +70,15 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].list.t.type = M_GFXTASK;
         nuGfxTask[i].list.t.flags = 0;
         dma_copy((u8* )0xB0000B70, (u8* )0xB0000C70, rspbootUcodeBuffer);
-        nuGfxTask[i].list.t.ucode_boot = rspbootUcodeBuffer;
+        nuGfxTask[i].list.t.ucode_boot = (u64*) rspbootUcodeBuffer;
         nuGfxTask[i].list.t.ucode_boot_size = 0x100;
         nuGfxTask[i].list.t.ucode_size = SP_UCODE_SIZE;
         nuGfxTask[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
-        nuGfxTask[i].list.t.dram_stack = &D_800DA040;
+        nuGfxTask[i].list.t.dram_stack = (u64*) &D_800DA040;
         nuGfxTask[i].list.t.dram_stack_size = SP_DRAM_STACK_SIZE8;
-        nuGfxTask[i].list.t.output_buff = &D_800B91D0;
-        nuGfxTask[i].list.t.output_buff_size = &gZoneCollisionData;
-        nuGfxTask[i].list.t.yield_data_ptr = &nuYieldBuf;
+        nuGfxTask[i].list.t.output_buff = (u64*) &D_800B91D0;
+        nuGfxTask[i].list.t.output_buff_size = (u64*) &gZoneCollisionData;
+        nuGfxTask[i].list.t.yield_data_ptr = (u64*) &nuYieldBuf;
         nuGfxTask[i].list.t.yield_data_size = NU_GFX_YIELD_BUF_SIZE;
     }
 

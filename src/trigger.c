@@ -74,7 +74,7 @@ Trigger* create_trigger(TriggerBlueprint* bp) {
 
     trigger->onActivateFunc = bp->onActivateFunc;
     if (trigger->onActivateFunc == NULL) {
-        trigger->onActivateFunc = default_trigger_on_activate;
+        trigger->onActivateFunc = (s32 (*) (Trigger*)) default_trigger_on_activate;
     }
 
     return trigger;

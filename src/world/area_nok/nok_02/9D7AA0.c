@@ -129,8 +129,8 @@ ApiStatus func_80243294_9DA2B4(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 randRange = 10000;
-    Npc* npc1 = evt_get_variable(script, *args++);
-    Npc* npc2 = evt_get_variable(script, *args++);
+    Npc* npc1 = (Npc*) evt_get_variable(script, *args++);
+    Npc* npc2 = (Npc*) evt_get_variable(script, *args++);
     f32 xDiff, zDiff;
     f32 x, z;
     f32 dist;
@@ -177,7 +177,7 @@ ApiStatus func_8024351C_9DA53C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 randRange = 10000;
-    Npc* npc = evt_get_variable(script, *args++);
+    Npc* npc = (Npc*) evt_get_variable(script, *args++);
     f32 xDiff, zDiff;
     f32 x, z;
     f32 dist;
@@ -222,7 +222,7 @@ ApiStatus func_80243754_9DA774(Evt* script, s32 isInitialCall) {
     f32 yaw;
 
     if (isInitialCall) {
-        script->functionTempPtr[1] = npc = evt_get_variable(script, *args++);
+        script->functionTempPtr[1] = npc = (Npc*) evt_get_variable(script, *args++);
         npc->moveToPos.x = (evt_get_variable(script, *args++) + npc->pos.x) * 0.5f;
         npc->moveToPos.z = (evt_get_variable(script, *args++) + npc->pos.z) * 0.5f;
         npc->moveToPos.y = dist2D(npc->moveToPos.x, npc->moveToPos.z, npc->pos.x, npc->pos.z);

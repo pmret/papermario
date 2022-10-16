@@ -130,12 +130,12 @@ Gfx N(frame4_displayList)[] = {
 
 s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, &N(frame1_displayList),
-    0x00000001, 0x00000002, &N(frame2_displayList),
-    0x00000001, 0x00000002, &N(frame3_displayList),
+    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
+    0x00000001, 0x00000002, (s32) &N(frame2_displayList),
+    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
     0x00000002, 0x00000000,
     0x00000004, 0x0000000D,
-    0x00000001, sizeof(N(frame4_displayList)) / sizeof(s32), &N(frame4_displayList),
+    0x00000001, sizeof(N(frame4_displayList)) / sizeof(s32), (s32) &N(frame4_displayList),
     0x00000002, 0x00000000,
 };
 
@@ -147,7 +147,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, 0, 0, 65558)
     EVT_CALL(PlaySound, 1018)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LVarA, battle_item_egg_missile_modelCommandList)
+    EVT_CALL(CreateVirtualEntity, LVarA, (s32) battle_item_egg_missile_modelCommandList)
     EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_ADD(LVar1, 42)

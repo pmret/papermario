@@ -8,7 +8,7 @@ void* general_heap_malloc(s32 size) {
     return _heap_malloc(&heap_generalHead, size);
 }
 
-s32 general_heap_malloc_tail(s32 size) {
+void* general_heap_malloc_tail(s32 size) {
     return _heap_malloc_tail(&heap_generalHead, size);
 }
 

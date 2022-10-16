@@ -132,14 +132,15 @@ s32 setup_partner_popup(PopupMenu* menu) {
 
     for (i = 1; i < ARRAY_COUNT(D_8008EEC0); i++) {
         s32 partnerID = D_8008EEC0[i];
+        
         if (playerData->partners[partnerID].enabled && partnerID != PARTNER_GOOMPA) {
-            s32* properties = gPartnerPopupProperties[partnerID];
+            PartnerPopupProperties* properties = &gPartnerPopupProperties[partnerID];
 
             menu->ptrIcon[optionCount] = wPartnerHudScripts[partnerID];
             menu->userIndex[optionCount] = partnerID;
             menu->enabled[optionCount] = TRUE;
-            menu->nameMsg[optionCount] = properties[0];
-            menu->descMsg[optionCount] = properties[2];
+            menu->nameMsg[optionCount] = properties->nameMsg;
+            menu->descMsg[optionCount] = properties->worldDescMsg;
             menu->value[optionCount] = playerData->partners[partnerID].level;
             if (playerData->currentPartner == partnerID) {
                 menu->enabled[optionCount] = FALSE;

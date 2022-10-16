@@ -716,7 +716,8 @@ f32 npc_get_render_yaw(Npc* npc) {
 INCLUDE_ASM(f32, "npc", npc_get_render_yaw);
 #endif
 
-void appendGfx_npc(Npc* npc) {
+void appendGfx_npc(void* data) {
+    Npc* npc = data;
     Matrix4f mtx1, mtx2;
     f32 renderYaw = npc_get_render_yaw(npc);
 
@@ -957,7 +958,7 @@ void disable_npc_shadow(Npc* npc) {
     }
 }
 
-void set_npc_sprite(Npc* npc, s32 anim, u32** extraAnimList) {
+void set_npc_sprite(Npc* npc, s32 anim, AnimID* extraAnimList) {
     ASSERT((npc->flags & NPC_FLAG_1000000) || spr_free_sprite(npc->spriteInstanceID) == 0);
 
     npc->extraAnimList = extraAnimList;
@@ -1054,7 +1055,7 @@ void npc_reload_all(void) {
                     if (!(npc->flags & NPC_FLAG_1000000) && (npc->palSwapType != 0)) {
                         npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
                         npc->paletteCount = 0;
-                        while (npc->spritePaletteList[npc->paletteCount] != -1) {
+                        while (npc->spritePaletteList[npc->paletteCount] != (PAL_PTR) -1) {
                             npc->paletteCount++;
                         }
                         npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);

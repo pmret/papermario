@@ -4,8 +4,9 @@
 #include "camera.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "model.h"
 
-s32 D_80077980[] = { &D_8038F800, &D_803B5000, &heap_battleHead, };
+u16* D_80077980[] = { D_8038F800, D_803B5000, &heap_battleHead };
 
 NUPiOverlaySegment D_8007798C = {
     .romStart = filemenu_ROM_START,
@@ -286,7 +287,7 @@ void state_step_exit_language_select(void) {
                     init_npc_list();
                     init_entity_data();
                     init_trigger_list();
-                    mapShape = load_asset_by_name(&wMapShapeName, &mapShapeSize);
+                    mapShape = load_asset_by_name(wMapShapeName, &mapShapeSize);
                     decode_yay0(mapShape, &D_80210000);
                     general_heap_free(mapShape);
                     initialize_collision();

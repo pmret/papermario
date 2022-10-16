@@ -146,6 +146,7 @@ typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;
 
+void init_model_data(void);
 void update_model_animator(s32);
 void update_model_animator_with_transform(s32 animatorID, Mtx* mtx);
 void set_mdl_custom_gfx_set(Model*, s32, u32);
@@ -156,6 +157,9 @@ void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransfor
 void render_animated_model(s32 animatorID, Mtx* rootTransform);
 void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
                                           Mtx* rootTransform);
+void init_generic_entity_list(void);
+ModelAnimator* get_animator_by_index(s32 animModelID);
+void reset_animator_list(void);
 void delete_model_animator_node(AnimatorNode* node);
 void delete_model_animator_nodes(ModelAnimator* animator);
 void delete_model_animator(ModelAnimator* animator);
@@ -164,4 +168,9 @@ void appendGfx_animator(ModelAnimator* animator);
 ModelAnimator* set_animator_render_callback(s32 animModelID, s32 callbackArg, void (*callbackFunc)(void*));
 void reload_mesh_animator_tree(ModelAnimator* animator);
 s32 step_mesh_animator(ModelAnimator* animator);
+
+void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, ModelCustomGfxBuilderFunc post);
+void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32);
+void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip);
+
 #endif

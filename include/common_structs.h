@@ -127,9 +127,9 @@ typedef struct CamPosSettings {
 } CamPosSettings; // size = 0x1C
 
 typedef struct DmaTable {
-    /* 0x00 */ s32 start;
-    /* 0x04 */ s32 end;
-    /* 0x08 */ s32 dest;
+    /* 0x00 */ u8* start;
+    /* 0x04 */ u8* end;
+    /* 0x08 */ u8* dest;
 } DmaTable;
 
 typedef struct UseItemStruct {
@@ -245,7 +245,7 @@ typedef struct Npc {
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
-    /* 0x0B0 */ AnimID** extraAnimList;
+    /* 0x0B0 */ AnimID* extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
@@ -394,7 +394,7 @@ typedef struct TriggerBlueprint {
     /* 0x10 */ char unk_10[4];
     /* 0x14 */ s32 unk_tr_2C;
     /* 0x18 */ s32 hasPlayerInteractPrompt;
-    /* 0x1C */ s32 itemList;
+    /* 0x1C */ s32* itemList;
 } TriggerBlueprint; // size = 0x20
 
 typedef union X32 {
@@ -776,7 +776,7 @@ typedef struct Camera {
     /* 0x1D4 */ char unk_1D4[0x28];
     /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
     /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
-    /* 0x204 */ Matrix4s* unkMatrix;
+    /* 0x204 */ Mtx* unkMatrix;
     /* 0x208 */ s32 unk_208;
     /* 0x20C */ Matrix4s* unkEffectMatrix;
     /* 0x210 */ char unk_210[0x2];
@@ -2510,5 +2510,14 @@ typedef struct CreditsUnkBeta {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s16 size;
 } CreditsUnkBeta; // size = 0x4
+
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(void);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+} GameMode; // size = 0x18
 
 #endif

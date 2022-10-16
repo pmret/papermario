@@ -1,5 +1,6 @@
 #include "common.h"
 #include "stdlib/stdarg.h"
+#include "PR/os_internal_thread.h"
 
 typedef struct {
     /* 0x000 */ OSThread thread;
