@@ -8361,21 +8361,20 @@ segments:
     start: 0x90B240
     vram: 0x80240000
     subsegments:
-    - [0x90B240, c]
-    - [0x90B250, c]
-    - [0x90B350, data]
-    - [0x90B6C0]
+    - [0x90B240, c, kmr_24_0_header]
+    - [0x90B250, c, kmr_24_1_main]
+    - [0x90B350]
   - name: kmr_30
     dir: world/area_kmr/kmr_30
     type: code
     start: 0x90B6D0
     vram: 0x80240000
     subsegments:
-    - [0x90B6D0, c]
-    - [0x90B9E0, c]
-    - [0x90BBB0, data]
-    - [0x90BDB0, data]
-    - [0x90BFF0, data]
+    - [0x90B6D0, c, kmr_30_0_header]
+    - [0x90B6D0, c, kmr_30_1_main]
+    - [0x90B9E0, c, kmr_30_2_npc]
+    - [0x90B9E0, c, kmr_30_3_the_end]
+    - [0x90BBB0]
   - name: iwa_00
     dir: world/area_iwa/iwa_00
     type: code

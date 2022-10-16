@@ -44,6 +44,7 @@ extern MapSettings kmr_21_settings;
 extern MapSettings kmr_22_settings;
 extern MapSettings kmr_23_settings;
 extern MapSettings kmr_24_settings;
+s32 kmr_24_map_init(void);
 extern MapSettings kmr_30_settings;
 
 #endif
