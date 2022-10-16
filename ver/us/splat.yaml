@@ -8382,6 +8382,7 @@ segments:
     start: 0x90CC40
     vram: 0x80240000
     subsegments:
+    - [0x90CC40, c, iwa_00_0_header]
     - [0x90CC40, c, iwa_00_1_main]
     - [0x90CC40, c, iwa_00_2_entity]
     - [0x90CC40, c, iwa_00_3_npc]
@@ -8393,12 +8394,14 @@ segments:
     start: 0x90F6B0
     vram: 0x80240000
     subsegments:
+    - [0x90F6B0, c, iwa_01_0_header]
     - [0x90F6B0, c, iwa_01_1_main]
     - [0x90F6B0, c, iwa_01_2_entity]
     - [0x90F6B0, c, iwa_01_3_splash]
     - [0x90FBD0, c, iwa_01_4_npc]
     - [0x912960, c, iwa_01_5_slide]
-    - [0x912990, .data, iwa_01_1_main]
+    - [0x912990, .data, iwa_01_0_header]
+    - [0x912A10, .data, iwa_01_1_main]
     - [0x912F60, .data, iwa_01_2_entity]
     - start: 0x913070
       type: .data
@@ -8416,6 +8419,7 @@ segments:
     start: 0x915D70
     vram: 0x80240000
     subsegments:
+    - [0x915D70, c, iwa_02_0_header]
     - [0x915D70, c, iwa_02_1_main]
     - [0x915D70, c, iwa_02_2_entity]
     - [0x915D70, c, iwa_02_3_npc]

@@ -1,24 +1,5 @@
 #include "iwa_00.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_BindSlideTriggers);
-extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [iwa_00_ENTRY_0]    {   55.0,   -5.0,  -25.0,   90.0 },
-    [iwa_00_ENTRY_1]    { 1313.0,   90.0,  -40.0,  270.0 },
-    [iwa_00_ENTRY_2]    {  625.0,  -30.0,  259.0,   45.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .background = &gBackgroundImage,
-    .tattle = { MSG_MapTattle_iwa_00 },
-};
-
 EvtScript N(EVS_ExitWalk_iwa_10_1) = EVT_EXIT_WALK(60, iwa_00_ENTRY_0, "iwa_10", iwa_10_ENTRY_1);
 EvtScript N(EVS_ExitWalk_iwa_01_0) = EVT_EXIT_WALK(60, iwa_00_ENTRY_1, "iwa_01", iwa_01_ENTRY_0);
 

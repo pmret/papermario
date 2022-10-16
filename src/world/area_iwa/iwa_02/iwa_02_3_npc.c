@@ -3,18 +3,7 @@
 #include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
 #include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
 #include "world/common/enemy/complete/Cleft.inc.c"
-
-EvtScript N(EVS_NpcAuxAI_Bubulb) = {
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Bubulb) = {
-    .height = 42,
-    .radius = 26,
-    .level = 99,
-    .otherAI = &N(EVS_NpcAuxAI_Bubulb),
-};
+#include "world/common/npc/Bulbulb.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -202,29 +191,8 @@ StaticNpc N(NpcData_Bubulb) = {
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Bubulb),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Bubulb_Purple_Idle,
-        .walk   = ANIM_Bubulb_Purple_Walk,
-        .run    = ANIM_Bubulb_Purple_Walk,
-        .chase  = ANIM_Bubulb_Purple_Idle,
-        .anim_4 = ANIM_Bubulb_Purple_Idle,
-        .anim_5 = ANIM_Bubulb_Purple_Idle,
-        .death  = ANIM_Bubulb_Purple_Idle,
-        .hit    = ANIM_Bubulb_Purple_Idle,
-        .anim_8 = ANIM_Bubulb_Purple_Idle,
-        .anim_9 = ANIM_Bubulb_Purple_Idle,
-        .anim_A = ANIM_Bubulb_Purple_Idle,
-        .anim_B = ANIM_Bubulb_Purple_Idle,
-        .anim_C = ANIM_Bubulb_Purple_Idle,
-        .anim_D = ANIM_Bubulb_Purple_Idle,
-        .anim_E = ANIM_Bubulb_Purple_Idle,
-        .anim_F = ANIM_Bubulb_Purple_Idle,
-    },
+    .drops = BULBULB_DROPS,
+    .animations = BULBULB_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_IWA_Bubulb_Revealed,
 };
 
