@@ -219,7 +219,7 @@ void spr_appendGfx_component_flat(
                 gSPViewport(gMasterGfxPos++, &camera->vpAlt);
             }
 
-            if (alpha == 0xFF) {
+            if (alpha == 255) {
                 gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  G_RM_PASS, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
@@ -245,7 +245,7 @@ void spr_appendGfx_component_flat(
             } else {
                 gSPViewport(gMasterGfxPos++, &camera->vpAlt);
             }
-            if (alpha == 0xFF) {
+            if (alpha == 255) {
                 gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
             } else {
                 gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
@@ -258,7 +258,7 @@ void spr_appendGfx_component_flat(
             gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMasterGfxPos++);
 
-            if (alpha == 0xFF) {
+            if (alpha == 255) {
                 gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
                                  AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
