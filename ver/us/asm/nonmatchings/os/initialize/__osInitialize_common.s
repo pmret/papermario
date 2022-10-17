@@ -126,10 +126,10 @@ glabel __osInitialize_common
 /* 45CE4 8006A8E4 A02A1B0F */   sb       $t2, %lo(D_800B1B0F)($at)
 /* 45CE8 8006A8E8 0C01B28C */  jal       osMapTLBRdb
 /* 45CEC 8006A8EC 00000000 */   nop
-/* 45CF0 8006A8F0 3C028009 */  lui       $v0, %hi(D_800958F0)
-/* 45CF4 8006A8F4 8C4258F0 */  lw        $v0, %lo(D_800958F0)($v0)
-/* 45CF8 8006A8F8 3C038009 */  lui       $v1, %hi(D_800958F4)
-/* 45CFC 8006A8FC 8C6358F4 */  lw        $v1, %lo(D_800958F4)($v1)
+/* 45CF0 8006A8F0 3C028009 */  lui       $v0, %hi(osClockRate)
+/* 45CF4 8006A8F4 8C4258F0 */  lw        $v0, %lo(osClockRate)($v0)
+/* 45CF8 8006A8F8 3C038009 */  lui       $v1, %hi(osClockRate + 4)
+/* 45CFC 8006A8FC 8C6358F4 */  lw        $v1, %lo(osClockRate + 4)($v1)
 /* 45D00 8006A900 00022040 */  sll       $a0, $v0, 1
 /* 45D04 8006A904 000337C2 */  srl       $a2, $v1, 0x1f
 /* 45D08 8006A908 00862025 */  or        $a0, $a0, $a2
@@ -143,11 +143,11 @@ glabel __osInitialize_common
 /* 45D28 8006A928 24070004 */   addiu    $a3, $zero, 4
 /* 45D2C 8006A92C 3C048000 */  lui       $a0, %hi(D_8000030C)
 /* 45D30 8006A930 8C84030C */  lw        $a0, %lo(D_8000030C)($a0)
-/* 45D34 8006A934 3C018009 */  lui       $at, %hi(D_800958F0)
-/* 45D38 8006A938 AC2258F0 */  sw        $v0, %lo(D_800958F0)($at)
-/* 45D3C 8006A93C 3C018009 */  lui       $at, %hi(D_800958F4)
+/* 45D34 8006A934 3C018009 */  lui       $at, %hi(osClockRate)
+/* 45D38 8006A938 AC2258F0 */  sw        $v0, %lo(osClockRate)($at)
+/* 45D3C 8006A93C 3C018009 */  lui       $at, %hi(osClockRate + 4)
 /* 45D40 8006A940 14800005 */  bnez      $a0, .L8006A958
-/* 45D44 8006A944 AC2358F4 */   sw       $v1, %lo(D_800958F4)($at)
+/* 45D44 8006A944 AC2358F4 */   sw       $v1, %lo(osClockRate + 4)($at)
 /* 45D48 8006A948 3C048000 */  lui       $a0, %hi(D_8000031C)
 /* 45D4C 8006A94C 2484031C */  addiu     $a0, $a0, %lo(D_8000031C)
 /* 45D50 8006A950 0C01925C */  jal       bzero

@@ -1,7 +1,8 @@
 #ifndef _XSTDIO_H
 #define _XSTDIO_H
 #include "PR/ultratypes.h"
-#include "stdlib/stdarg.h"
+#include "gcc/stdlib.h"
+#include "gcc/stdarg.h"
 
 typedef struct {
     /* 0x0 */ union {

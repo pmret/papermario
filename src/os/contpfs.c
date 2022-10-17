@@ -1,9 +1,9 @@
 #include "PR/controller.h"
 #include "macros.h"
 
-extern u8 __osPfsInodeCacheBank;
-extern int __osPfsInodeCacheChannel;
 extern __OSInode __osPfsInodeCache;
+s32 __osPfsInodeCacheChannel = -1;
+u8 __osPfsInodeCacheBank = 250;
 
 u16 __osSumcalc(u8 *ptr, int length) {
     int i;

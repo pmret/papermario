@@ -6,7 +6,7 @@
 #include "map.h"
 #include "enums.h"
 #include "stdlib/stdarg.h"
-#include "xstdio.h"
+#include "libc/xstdio.h"
 
 f32 fabsf(f32 f);
 f64 fabs(f64 f);
