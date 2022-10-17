@@ -91,6 +91,7 @@ segments:
     - [0x30450, c, audio/30450]
     - [0x31650, c, audio/31650]
     - [0x33450, c, audio/33450]
+    - [0x341D0, c, audio/tables]
     - [0x341D0, c, audio/reverb]
     - [0x341D0, c, 5B320]
     - [0x35080, c, effects]
@@ -331,7 +332,7 @@ segments:
     - [0x541B0, .data, audio/30450]
     - [0x54250, .data, audio/31650]
     - [0x54260, .data, audio/33450]
-    - [0x54360, data] # some audio table
+    - [0x54360, .data, audio/tables]
     - [0x5A3E0, .data, audio/reverb]
     - [0x5A610, .data, effects]
     - [0x5B320, .data, 5B320]
