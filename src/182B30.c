@@ -13,6 +13,22 @@ extern s16 D_80284134[];
 void update_player_actor_shadow(void);
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
 
+void create_status_chill_out(s32 iconID);
+void enable_status_2(s32 iconID);
+void enable_status_chill_out(s32 iconID);
+void enable_status_debuff(s16);
+void enable_status_transparent(s16);
+void enable_status_icon_boost_jump(s32 iconID);
+void enable_status_icon_boost_hammer(s32 iconID);
+s32 func_80265CE8(u32*, s32);
+void func_80266DAC(Actor* actor, s32 arg1);
+void create_status_icon_boost_hammer(s32 iconID);
+void create_status_icon_boost_jump(s32 iconID);
+void create_status_icon_peril(s32 iconID);
+void create_status_icon_danger(s32 iconID);
+void set_status_icons_offset(s32 iconID, s32 offsetY, s32 arg2);
+void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY);
+
 void func_802571F0(s32, Actor*);
 void func_80259494(ActorPart*);
 void func_8025950C(ActorPart*, s32, Matrix4f);
@@ -707,16 +723,6 @@ void update_hero_shadows(void) {
 void func_80255FD8(void) {
 }
 
-void create_status_chill_out(s32 iconID);
-void enable_status_2(s32 iconID);
-void enable_status_chill_out(s32 iconID);
-void enable_status_debuff(s16);
-void enable_status_transparent(s16);
-s32 func_80265CE8(u32*, s32);
-void func_80266DAC(Actor* actor, s32 arg1);
-void set_status_icons_offset(s32 iconID, s32 offsetY, s32 arg2);
-void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY);
-
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     BattleStatus* battleStatus = &gBattleStatus;
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation;
@@ -900,15 +906,15 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                     }
                 } while (0); // required to match
                 func_80266DAC(actor, 0xC);
-                cond2 = 1;
+                cond2 = TRUE;
                 func_80266EE8(actor, 0);
                 decorChanged = TRUE;
             }
             if (isPartner && (gPlayerData.currentPartner == PARTNER_WATT)) {
-                if (cond2 == 0) {
+                if (!cond2) {
                     func_80266DAC(actor, 9);
                 }
-                cond2 = 1;
+                cond2 = TRUE;
             }
         }
         if (actor->isGlowing) {
@@ -918,30 +924,30 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             decorChanged = TRUE;
         }
         if (actor->debuff == STATUS_POISON) {
-            if (cond2 == 0) {
+            if (!cond2) {
                 func_80266DAC(actor, 6);
             }
-            cond2 = 1;
+            cond2 = TRUE;
         }
         if (actor->debuff == STATUS_PARALYZE) {
-            if (cond2 == 0) {
+            if (!cond2) {
                 func_80266DAC(actor, 7);
             }
-            cond2 = 1;
+            cond2 = TRUE;
         }
         if (actor->debuff == STATUS_FEAR) {
-            if (cond2 == 0) {
+            if (!cond2) {
                 func_80266DAC(actor, 5);
             }
-            cond2 = 1;
+            cond2 = TRUE;
         }
         if (actor->staticStatus == STATUS_STATIC) {
-            if (cond2 == 0) {
+            if (!cond2) {
                 func_80266DAC(actor, 4);
             }
-            cond2 = 1;
+            cond2 = TRUE;
         }
-        if ((cond2 == 0) && !(part->flags & ACTOR_PART_FLAG_1000000)) {
+        if ((!cond2) && !(part->flags & ACTOR_PART_FLAG_1000000)) {
             func_80266DAC(actor, 0);
         }
         if ((!decorChanged) && !(part->flags & ACTOR_PART_FLAG_1000000)) {
@@ -1331,7 +1337,6 @@ void update_player_actor_shadow(void) {
     }
 }
 
-#ifdef NON_EQUIVALENT
 void appendGfx_player_actor(void* arg0) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -1345,26 +1350,26 @@ void appendGfx_player_actor(void* arg0) {
     ActorPart* playerParts;
     EffectInstance* effect;
     f32 playerPosX, playerPosY, playerPosZ, playerYaw;
-    f32 dx, dy, dz;
     s32 cond1, cond2, cond3, cond4;
     u32 lastAnim;
 
-    player = gBattleStatus.playerActor;
-    partner = gBattleStatus.partnerActor;
+    player = battleStatus->playerActor;
+    partner = battleStatus->partnerActor;
     playerParts = player->partsTable;
 
     playerPosX = player->currentPos.x + player->headOffset.x;
     playerPosY = player->currentPos.y + player->headOffset.y + player->unk_19A;
     playerPosZ = player->currentPos.z + player->headOffset.z;
 
-    playerYaw = player->yaw;
-    playerParts->yaw = playerYaw;
+    playerYaw = playerParts->yaw = player->yaw;
 
-    player->disableEffect->data.disableX->pos.x = playerPosX + ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
-    player->disableEffect->data.disableX->pos.y = playerPosY + ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
+    player->disableEffect->data.disableX->pos.x = playerPosX + 
+        ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
+    player->disableEffect->data.disableX->pos.y = playerPosY + 
+        ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
     player->disableEffect->data.disableX->pos.z = playerPosZ;
 
-    if (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
         if (player->disableDismissTimer != 0) {
             player->disableDismissTimer--;
             player->disableEffect->data.disableX->pos.y = -1000.0f;
@@ -1375,8 +1380,11 @@ void appendGfx_player_actor(void* arg0) {
         player->disableEffect->data.disableX->pos.y = -1000.0f;
         player->disableDismissTimer = 10;
     }
+
     if (battleStatus->waterBlockTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
+        if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
+            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+        {
             effect = battleStatus->waterBlockEffect;
             effect->data.waterBlock->pos.x = playerPosX;
             effect->data.waterBlock->pos.y = playerPosY;
@@ -1389,7 +1397,9 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
     if (battleStatus->cloudNineTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
+        if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
+            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+        {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;
             effect->data.endingDecals->pos.y = playerPosY;
@@ -1402,11 +1412,13 @@ void appendGfx_player_actor(void* arg0) {
             effect->data.endingDecals->pos.z = playerPosZ;
         }
     }
-    if (player->debuff == 7) {
+    if (player->debuff == STATUS_FROZEN) {
         effect = player->icePillarEffect;
         if (player->icePillarEffect != NULL) {
-            if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
-                effect->data.icePillar->pos.x = (f32) (playerPosX - 8.0f);
+            if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
+                (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+            {
+                effect->data.icePillar->pos.x = playerPosX - 8.0f;
                 effect->data.icePillar->pos.y = playerPosY;
                 effect->data.icePillar->pos.z = playerPosZ;
                 effect->data.icePillar->unk_20 = player->size.y / 24.0;
@@ -1415,6 +1427,10 @@ void appendGfx_player_actor(void* arg0) {
                 effect->data.icePillar->pos.y = -1000.0f;
                 effect->data.icePillar->pos.z = 0.0f;
             }
+        } else {
+            effect->data.icePillar->pos.x = 0.0f;
+            effect->data.icePillar->pos.y = -1000.0f;
+            effect->data.icePillar->pos.z = 0.0f;
         }
     } else {
         effect = player->icePillarEffect;
@@ -1423,20 +1439,22 @@ void appendGfx_player_actor(void* arg0) {
             player->icePillarEffect = NULL;
         }
     }
-    if (!(gBattleStatus.flags2 & 0x10000) && !(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
+    
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
     } else {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 0;
     }
+
     do {
-        if (player->debuff == 0xA) {
-            player->scalingFactor += ((0.4 - player->scalingFactor) / 6.0);
+        if (player->debuff == STATUS_SHRINK) {
+            player->scalingFactor += (0.4 - player->scalingFactor) / 6.0;
         } else {
-            player->scalingFactor += ((1.0 - player->scalingFactor) / 6.0);
+            player->scalingFactor += (1.0 - player->scalingFactor) / 6.0;
         }
     } while (0); // required to match
 
-    if (player->flags & 0x08000000) {
+    if (player->flags & ACTOR_FLAG_8000000) {
         if (battleStatus->hammerCharge > 0) {
             create_status_icon_boost_hammer(player->hudElementDataIndex);
             remove_status_icon_boost_jump(player->hudElementDataIndex);
@@ -1454,15 +1472,17 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_icon_boost_hammer(player->hudElementDataIndex);
     }
 
-    if ((player->flags & 0x08000000) && !(gBattleStatus.flags2 & 0x40)) {
+    if ((player->flags & ACTOR_FLAG_8000000) && !(gBattleStatus.flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP > 1) {
             remove_status_icon_peril(player->hudElementDataIndex);
-            if (playerData->curHP > 5) {
-                remove_status_icon_danger(player->hudElementDataIndex);
-            } else {
-                create_status_icon_danger(player->hudElementDataIndex);
-                remove_status_icon_peril(player->hudElementDataIndex);
-            }
+            do {
+                if (playerData->curHP <= 5) {
+                    create_status_icon_danger(player->hudElementDataIndex);
+                    remove_status_icon_peril(player->hudElementDataIndex);
+                } else {
+                    remove_status_icon_danger(player->hudElementDataIndex);
+                }
+            } while (0); // required to match
         } else {
             create_status_icon_peril(player->hudElementDataIndex);
             remove_status_icon_danger(player->hudElementDataIndex);
@@ -1473,9 +1493,16 @@ void appendGfx_player_actor(void* arg0) {
     }
 
     if (player->transparentStatus == 0xE) {
-        playerParts->flags |= 0x100;
+        playerParts->flags |= ACTOR_PART_FLAG_100;
+        
+        if (FALSE) { // TODO required to match - also whyyyyyy compiler, whyyyyy
+    back:
+            playerParts->currentAnimation = func_80265D44(8);
+            create_status_debuff(player->hudElementDataIndex, 8);
+            goto end;
+        }
     } else {
-        playerParts->flags &= ~0x100;
+        playerParts->flags &= ~ACTOR_PART_FLAG_100;
     }
 
     do {
@@ -1486,10 +1513,20 @@ void appendGfx_player_actor(void* arg0) {
         lastAnim = playerParts->currentAnimation;
     } while (0); // required to match
 
-    if (((((gBattleStatus.flags2 & 0xA) == 2) && (partner != NULL)) || (gBattleStatus.outtaSightActive > 0)) && !(player->flags & 0x20000000) && ((partner == NULL) || !(partner->flags & 0x200000))) {
-        if (!(gBattleStatus.flags2 & 0x100000)) {
-            if ((player->debuff != 3) && (player->debuff != 5) && (player->debuff != 7) && (player->debuff != 8)) {
-                if ((player->transparentStatus != 0xE) && (player->stoneStatus != 0xC) && ((gBattleStatus.outtaSightActive > 0) || (gBattleStatus.flags2 & 2))) {
+    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0)) && 
+        !(player->flags & ACTOR_FLAG_20000000) && 
+        ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK))) 
+    {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
+            if ((player->debuff != STATUS_FEAR) && 
+                (player->debuff != STATUS_PARALYZE) && 
+                (player->debuff != STATUS_FROZEN) && 
+                (player->debuff != STATUS_STOP)) 
+            {
+                if ((player->transparentStatus != STATUS_TRANSPARENT) && 
+                    (player->stoneStatus != STATUS_STONE) && 
+                    ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2))) 
+                {
                     if (is_ability_active(0x15)) {
                         playerParts->currentAnimation = func_80265D44(0x13);
                     } else  if (player->debuff == 6) {
@@ -1499,12 +1536,12 @@ void appendGfx_player_actor(void* arg0) {
                     } else {
                         playerParts->currentAnimation = func_80265D44(0x12);
                     }
-                    spr_update_player_sprite(0, (s32) playerParts->currentAnimation, playerParts->animationRate);
+                    spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
                     cond1 = TRUE;
                 }
             }
 
-            if (player->debuff != 9) {
+            if (player->debuff != STATUS_POISON) {
                 func_80266DAC(player, 0xC);
             } else {
                 func_80266DAC(player, 0xD);
@@ -1515,79 +1552,80 @@ void appendGfx_player_actor(void* arg0) {
             cond3 = TRUE;
         }
     }
-    if (player->stoneStatus == 0xC) {
+
+    if (player->stoneStatus == STATUS_STONE) {
         playerParts->currentAnimation = func_80265D44(0xC);
         spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
         cond1 = TRUE;
 
-        if (cond2 == 0) {
+        if (!cond2) {
             func_80266DAC(player, 0);
         }
         func_80266EE8(player, 0);
-        cond2 = 1;
+        cond2 = TRUE;
         enable_status_debuff(player->hudElementDataIndex);
-        cond3 = 1;
+        cond3 = TRUE;
         enable_status_2(player->hudElementDataIndex);
-        cond4 = 1;
+        cond4 = TRUE;
 
         enable_status_transparent(player->hudElementDataIndex);
         enable_status_chill_out(player->hudElementDataIndex);
     }
 
-    if ((player->flags & 0x04000000) && (cond1 == 0)) {
+    if ((player->flags & ACTOR_FLAG_4000000) && !cond1) {
         s32 temp = playerParts->currentAnimation;
         if (temp == func_80265D44(0xC)) {
             playerParts->currentAnimation = func_80265D44(1);
         }
     }
 
-    if (is_ability_active(0x15) != 0) {
-        if (cond2 == 0) {
+    if (is_ability_active(ABILITY_BERSERKER)) {
+        if (!cond2) {
             func_80266DAC(player, 8);
         }
-        cond2 = 1;
+        cond2 = TRUE;
     }
-    if (player->debuff == 9) {
-        if (cond2 == 0) {
+    if (player->debuff == STATUS_POISON) {
+        if (!cond2) {
             func_80266DAC(player, 6);
         }
-        cond2 = 1;
+        cond2 = TRUE;
     }
-    if (player->debuff == 5) {
-        if (cond2 == 0) {
+    if (player->debuff == STATUS_PARALYZE) {
+        if (!cond2) {
             func_80266DAC(player, 7);
         }
-        cond2 = 1;
+        cond2 = TRUE;
     }
-    if (player->staticStatus == 0xB) {
-        if (cond2 == 0) {
+    if (player->staticStatus == STATUS_STATIC) {
+        if (!cond2) {
             func_80266DAC(player, 4);
         }
-        cond2 = 1;
+        cond2 = TRUE;
     }
     if (battleStatus->turboChargeTurnsLeft != 0) {
-        if (cond3 == 0) {
+        if (!cond3) {
             func_80266EE8(player, 0xB);
         }
-        cond3 = 1;
+        cond3 = TRUE;
     }
-    if (is_ability_active(0x13) != 0) {
-        if (cond2 == 0) {
+    if (is_ability_active(ABILITY_ZAP_TAP)) {
+        if (!cond2) {
             func_80266DAC(player, 4);
         }
-        cond2 = 1;
+        cond2 = TRUE;
     }
-    if (cond2 == 0) {
+    if (!cond2) {
         func_80266DAC(player, 0);
     }
-    if (cond3 == 0) {
+    if (!cond3) {
         func_80266EE8(player, 0);
     }
-    if (player->flags & 0x04000000) {
+    if (player->flags & ACTOR_FLAG_4000000) {
         if (battleStatus->hustleTurns != 0) {
             playerParts->currentAnimation = func_80265D44(0x19);
-            cond1 = 1;
-        } else if (cond1 == 0) {
+            cond1 = TRUE;
+        } else if (!cond1) {
             s32 temp = func_80265D44(1);
             do {
                 if (temp == func_80265D44(0x19)) {
@@ -1597,87 +1635,88 @@ void appendGfx_player_actor(void* arg0) {
         }
 
         do {
-            if (player->debuff == 7) {
+            if (player->debuff == STATUS_FROZEN) {
                 if (!cond1) {
                     playerParts->currentAnimation = func_80265D44(7);
-                    cond1 = 1;
+                    cond1 = TRUE;
                 }
             } else if (player->debuff != STATUS_SHRINK) {
-                if (player->debuff == 9) {
+                if (player->debuff == STATUS_POISON) {
                     if (!cond1) {
                         playerParts->currentAnimation = func_80265D44(9);
-                        cond1 = 1;
+                        cond1 = TRUE;
                     }
-                } else if (player->debuff == 4) {
+                } else if (player->debuff == STATUS_DIZZY) {
                     if (!cond1) {
                         playerParts->currentAnimation = func_80265D44(4);
-                        cond1 = 1;
+                        cond1 = TRUE;
                     }
-                } else if (player->debuff == 6) {
+                } else if (player->debuff == STATUS_SLEEP) {
                     if (!cond1) {
                         playerParts->currentAnimation = func_80265D44(6);
-                        cond1 = 1;
+                        cond1 = TRUE;
                     }
-                } else if (player->debuff == 5) {
+                } else if (player->debuff == STATUS_PARALYZE) {
                     if (!cond1) {
                         playerParts->currentAnimation = func_80265D44(5);
-                        cond1 = 1;
+                        cond1 = TRUE;
                     }
                  } else {
-                    if (player_team_is_ability_active(player, 0x15) != 0) {
-                        if (cond1 == 0) {
+                    if (player_team_is_ability_active(player, ABILITY_BERSERKER)) {
+                        if (!cond1) {
                             playerParts->currentAnimation = func_80265D44(0x10);
-                            cond1 = 1;
+                            cond1 = TRUE;
                         }
                     }
                 }
             }
-            if (is_ability_active(0x13) != 0) {
-                if (cond1 == 0) {
+            if (is_ability_active(ABILITY_ZAP_TAP)) {
+                if (!cond1) {
                     playerParts->currentAnimation = func_80265D44(0xB);
-                    cond1 = 1;
+                    cond1 = TRUE;
                 }
-                player->staticStatus = 0xB;
-                player->staticDuration = 0x7F;
-            } else if ((player->staticStatus == (s8) 0xB) && (cond1 == 0)) {
+                player->staticStatus = STATUS_STATIC;
+                player->staticDuration = 127;
+            } else if ((player->staticStatus == STATUS_STATIC) && !cond1) {
                 playerParts->currentAnimation = func_80265D44(0xB);
-                cond1 = 1;
+                cond1 = TRUE;
             }
-            if ((player->transparentStatus == 0xE) || (playerParts->flags & 0x100)) {
-                if (cond1 == 0) {
+            if ((player->transparentStatus == STATUS_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+                if (!cond1) {
                     playerParts->currentAnimation = func_80265D44(0xE);
-                    cond1 = 1;
+                    cond1 = TRUE;
                 }
-                create_status_transparent((s32) player->hudElementDataIndex, 0xE);
+                create_status_transparent(player->hudElementDataIndex, 0xE);
             }
-            if (cond1 == 0) {
+            if (!cond1) {
                 playerParts->currentAnimation = func_80265D44(1);
             }
         } while(0); // needed to match
     }
-    if (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
-        if (cond4 == 0) {
+
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
+        if (!cond4) {
             do {
-                if (player->debuff == 0x9) {
+                if (player->debuff == STATUS_POISON) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
-                } else if (player->debuff == 6) {
+                } else if (player->debuff == STATUS_SLEEP) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
-                } else if (player->debuff == 5) {
+                } else if (player->debuff == STATUS_PARALYZE) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
-                } else if (player->debuff == 4) {
+                } else if (player->debuff == STATUS_DIZZY) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
-                } else if (player->debuff == 10) {
+                } else if (player->debuff == STATUS_SHRINK) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
-                } else if (player->debuff == 7) {
+                } else if (player->debuff == STATUS_FROZEN) {
                     create_status_debuff(player->hudElementDataIndex, player->debuff);
                 }
             } while (0); // required to match
-            if ((cond4 == 0) && ((is_ability_active(0x13) != 0) || (player->staticStatus == 0xB))) {
-                create_status_static((s32) player->hudElementDataIndex, 0xB);
+            if (!cond4 && (is_ability_active(ABILITY_ZAP_TAP) || (player->staticStatus == STATUS_STATIC))) {
+                create_status_static(player->hudElementDataIndex, 0xB);
             }
         }
-        if ((player->transparentStatus == 0xE) || (playerParts->flags & 0x100)) {
-            create_status_transparent((s32) player->hudElementDataIndex, 0xE);
+        if ((player->transparentStatus == STATUS_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+            create_status_transparent(player->hudElementDataIndex, 0xE);
         }
     } else {
         enable_status_debuff(player->hudElementDataIndex);
@@ -1686,18 +1725,18 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_chill_out(player->hudElementDataIndex);
     }
 
-    if (player->debuff != 8) {
-        if (cond1 == 0) {
+    if (player->debuff != STATUS_STOP) {
+        if (!cond1) {
             s32 temp = playerParts->currentAnimation;
             if (temp == func_80265D44(8)) {
                 playerParts->currentAnimation = func_80265D44(1);
             }
         }
     } else {
-        playerParts->currentAnimation = func_80265D44(8);
-        create_status_debuff(player->hudElementDataIndex, 8);
+        goto back;
     }
-
+    
+end:
     set_status_icons_properties(player->hudElementDataIndex,
         playerPosX, playerPosY, playerPosZ,
         player->actorBlueprint->statusIconOffset.x * player->scalingFactor,
@@ -1708,13 +1747,13 @@ void appendGfx_player_actor(void* arg0) {
         player->size.y * player->scalingFactor,
         player->size.x * player->scalingFactor);
 
-    dx = playerPosX + playerParts->unkOffset[0];
-    dy = playerPosY + playerParts->unkOffset[1];
-    dz = playerPosZ;
-    playerParts->currentPos.x = dx;
-    playerParts->currentPos.y = dy;
-    playerParts->currentPos.z = dz;
-    guTranslateF(mtxTranslate, dx, dy, dz);
+    playerPosX += playerParts->unkOffset[0];
+    playerPosY += playerParts->unkOffset[1];
+
+    playerParts->currentPos.x = playerPosX;
+    playerParts->currentPos.y = playerPosY;
+    playerParts->currentPos.z = playerPosZ;
+    guTranslateF(mtxTranslate, playerPosX, playerPosY, playerPosZ);
 
     guTranslateF(mtxPivotOn,
         -player->rotationPivotOffset.x * player->scalingFactor,
@@ -1749,9 +1788,6 @@ void appendGfx_player_actor(void* arg0) {
     func_802591EC(0, playerParts, clamp_angle(playerYaw + 180.0f), mtxTransform, 0);
     _add_part_decoration(playerParts);
 }
-#else
-INCLUDE_ASM(void, "182B30", appendGfx_player_actor);
-#endif
 
 void func_80258E14(void* arg0) {
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation, mtxScale;
@@ -1924,7 +1960,7 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     if (decor->unk_768 != 0) {
         decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 0x10);
         decor->numSpritePalettes = 0;
-        while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+        while (decor->spritePalettes[decor->numSpritePalettes] != (PAL_PTR) -1) {
             decor->numSpritePalettes++;
         }
 
@@ -1994,7 +2030,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
         decor->numSpritePalettes = 0;
 
-        while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+        while (decor->spritePalettes[decor->numSpritePalettes] != (PAL_PTR) -1) {
             decor->numSpritePalettes++;
         }
 
@@ -3002,7 +3038,6 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
 }
 
 void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
-
     DecorationTable* decor = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
@@ -3016,13 +3051,13 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decor->numSpritePalettes = 0;
-            while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+            while (decor->spritePalettes[decor->numSpritePalettes] != (PAL_PTR) -1) {
                 decor->numSpritePalettes++;
             }
         } else {
             decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decor->numSpritePalettes = 0;
-            while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+            while (decor->spritePalettes[decor->numSpritePalettes] != (PAL_PTR) -1) {
                 decor->numSpritePalettes++;
             }
             decor->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
