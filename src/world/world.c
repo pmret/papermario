@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "model.h"
 
 #define ASSET_TABLE_ROM_START 0x1E40000
 #define ASSET_TABLE_HEADER_SIZE 0x20
@@ -32,7 +33,7 @@ void load_map_script_lib(void) {
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
-    s32 initStatus = 0;
+    s32 skipLoadingAssets = 0;
     MapConfig* mapConfig;
     MapSettings* mapSettings;
     char texStr[17];
@@ -86,21 +87,21 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gMapSettings = *mapConfig->settings;
 
     mapSettings = &gMapSettings;
-    if (mapConfig->init != 0) {
-        initStatus = mapConfig->init();
+    if (mapConfig->init != NULL) {
+        skipLoadingAssets = mapConfig->init();
     }
 
-    if (initStatus == 0) {
-        s32* place = &D_80210000;
+    if (!skipLoadingAssets) {
+        ShapeFile* shapeFile = &D_80210000;
         void* yay0Asset = load_asset_by_name(wMapShapeName, &decompressedSize);
 
-        decode_yay0(yay0Asset, place);
+        decode_yay0(yay0Asset, shapeFile);
         general_heap_free(yay0Asset);
 
-        mapSettings->modelTreeRoot = place[0];
-        mapSettings->modelNameList = place[2];
-        mapSettings->colliderNameList = place[3];
-        mapSettings->zoneNameList = place[4];
+        mapSettings->modelTreeRoot = shapeFile->root;
+        mapSettings->modelNameList = shapeFile->modelNames;
+        mapSettings->colliderNameList = shapeFile->colliderNames;
+        mapSettings->zoneNameList = shapeFile->zoneNames;
     }
 
     if (mapConfig->bgName != NULL) {
@@ -127,7 +128,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         func_80138188();
     }
 
-    if (initStatus == 0) {
+    if (!skipLoadingAssets) {
         initialize_collision();
         load_map_hit_asset();
     }
@@ -147,7 +148,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     func_801497FC(D_8008FF60[mapConfig->unk_1C.word & 0x3]);
     sfx_reset_door_sounds();
 
-    if (initStatus == 0) {
+    if (!skipLoadingAssets) {
         s32 thing = get_asset_offset(wMapTexName, &decompressedSize);
 
         if (mapSettings->modelTreeRoot != NULL) {
@@ -330,17 +331,17 @@ MapConfig kmr_maps[] = {
     { MAP(kmr_04), .bgName = "kmr_bg" },
     { MAP(kmr_05), .bgName = "kmr_bg" },
     { MAP(kmr_06), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_07, 0x80240B70), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_09, 0x80241550), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_10, 0x80240640), .bgName = "kmr_bg" },
+    { MAP(kmr_07), .bgName = "kmr_bg" },
+    { MAP(kmr_09), .bgName = "kmr_bg" },
+    { MAP(kmr_10), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_11, 0x80241180), .bgName = "kmr_bg" },
     { MAP(kmr_12), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_20, 0x80242C00), .bgName = "kmr_bg" }, // Mario's House
-    { MAP_UNSPLIT(kmr_21, 0x802402F0), .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(kmr_21) },
     { MAP_UNSPLIT(kmr_22, 0x80240DA0), .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kmr_23, 0x80241150), .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kmr_24, 0x80240120), .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kmr_30, 0x802404F0) },
+    { MAP_WITH_INIT(kmr_23) },
+    { MAP_WITH_INIT(kmr_24) },
+    { MAP(kmr_30) },
 };
 
 /// Mt. Rugged

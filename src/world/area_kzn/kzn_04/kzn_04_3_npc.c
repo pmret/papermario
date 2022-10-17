@@ -1,6 +1,7 @@
 #include "kzn_04.h"
 #include "effects.h"
 
+#include "sprite/npc/Fire.h"
 #include "world/common/enemy/ai/FireBarAI.inc.c"
 
 s32 N(FireBar_Sounds)[] = {

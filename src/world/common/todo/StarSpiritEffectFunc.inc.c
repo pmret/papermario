@@ -74,7 +74,7 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
                 ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
-                ptr->unk_54->data.spiritCard->unk_34 = ptr->unk_38;
+                ptr->unk_54->data.spiritCard->chapter = ptr->unk_38;
                 ptr->unk_54->data.spiritCard->unk_20 = 0;
                 ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
                 ptr->unk_44 = 3;
@@ -126,10 +126,10 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
         case 1:
             ptr->unk_2C = clamp_angle(ptr->unk_2C + ptr->unk_30);
         case 2:
-            ptr->unk_54->data.spiritCard->unk_24 = ptr->unk_2C;
-            ptr->unk_54->data.spiritCard->unk_04 = ptr->unk_18;
-            ptr->unk_54->data.spiritCard->unk_08 = ptr->unk_04;
-            ptr->unk_54->data.spiritCard->unk_0C = ptr->unk_20;
+            ptr->unk_54->data.spiritCard->yaw = ptr->unk_2C;
+            ptr->unk_54->data.spiritCard->pos.x = ptr->unk_18;
+            ptr->unk_54->data.spiritCard->pos.y = ptr->unk_04;
+            ptr->unk_54->data.spiritCard->pos.z = ptr->unk_20;
             break;
     }
 
@@ -155,7 +155,7 @@ ApiStatus N(StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall) {
         ptr->unk_20 = evt_get_float_variable(script, *args++);
         ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
-        ptr->unk_54->data.spiritCard->unk_34 = ptr->unk_38;
+        ptr->unk_54->data.spiritCard->chapter = ptr->unk_38;
         ptr->unk_54->data.spiritCard->unk_20 = 0;
         ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
         ptr->unk_4C = 270;
@@ -174,9 +174,9 @@ ApiStatus N(StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall) {
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }
-    ptr->unk_54->data.spiritCard->unk_04 = ptr->unk_18;
-    ptr->unk_54->data.spiritCard->unk_08 = ptr->unk_04;
-    ptr->unk_54->data.spiritCard->unk_0C = ptr->unk_20;
+    ptr->unk_54->data.spiritCard->pos.x = ptr->unk_18;
+    ptr->unk_54->data.spiritCard->pos.y = ptr->unk_04;
+    ptr->unk_54->data.spiritCard->pos.z = ptr->unk_20;
 
     return ApiStatus_BLOCK;
 }

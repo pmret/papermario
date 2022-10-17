@@ -131,7 +131,7 @@ EvtScript EnemyNpcHit = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_HIT, LVar0)
+            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
             EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
             EVT_THREAD

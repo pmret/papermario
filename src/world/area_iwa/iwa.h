@@ -21,7 +21,7 @@ enum {
 };
 
 enum {
-    AF_IWA_SpokeWithBulbulb     = AreaFlag(1),
+    AF_IWA_SpokeWithBubulb     = AreaFlag(1),
     AF_IWA_SpokeWIthDryite      = AreaFlag(2),
 };
 

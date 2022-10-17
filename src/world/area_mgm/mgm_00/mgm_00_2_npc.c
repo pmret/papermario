@@ -1,51 +1,7 @@
 #include "mgm_00.h"
 
-extern EvtScript N(EVS_OnEnterPipe_JumpAttack);
-extern EvtScript N(EVS_OnEnterPipe_SmashAttack);
-
-#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
-
-MobileAISettings N(AISettings_GreenToad) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 30,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_GreenToad) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_GreenToad)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_GreenToad) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_GreenToad),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-NpcSettings N(missing_80242A7C_2A7C) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_GreenToad),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-NpcSettings N(NpcSettings_RedToad) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(missing_80242AD4_2AD4) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
+#include "world/common/npc/Toad_Patrol.inc.c"
+#include "world/common/npc/Toad_Stationary.inc.c"
 
 API_CALLABLE(N(GetAvailableGamesCount)) {
     s32 numGames = 0;
@@ -211,34 +167,13 @@ EvtScript N(EVS_NpcInit_RedToad) = {
 
 StaticNpc N(NpcData_RedToad) = {
     .id = NPC_RedToad,
-    .settings = &N(NpcSettings_RedToad),
+    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -213.0f, 12.0f, -180.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(EVS_NpcInit_RedToad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Toad_Red_Idle,
-        .walk   = ANIM_Toad_Red_Walk,
-        .run    = ANIM_Toad_Red_Run,
-        .chase  = ANIM_Toad_Red_Run,
-        .anim_4 = ANIM_Toad_Red_Idle,
-        .anim_5 = ANIM_Toad_Red_Idle,
-        .death  = ANIM_Toad_Red_Disappointed,
-        .hit    = ANIM_Toad_Red_Disappointed,
-        .anim_8 = ANIM_Toad_Red_Run,
-        .anim_9 = ANIM_Toad_Red_Run,
-        .anim_A = ANIM_Toad_Red_Run,
-        .anim_B = ANIM_Toad_Red_Run,
-        .anim_C = ANIM_Toad_Red_Run,
-        .anim_D = ANIM_Toad_Red_Run,
-        .anim_E = ANIM_Toad_Red_Run,
-        .anim_F = ANIM_Toad_Red_Run,
-    },
+    .drops = TOAD_DROPS,
+    .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_MGM_PlayroomReceptionist,
 };
 
@@ -272,16 +207,12 @@ EvtScript N(EVS_NpcInit_GreenToad) = {
 
 StaticNpc N(NpcData_GreenToad) = {
     .id = NPC_GreenToad,
-    .settings = &N(NpcSettings_GreenToad),
+    .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { -88.0f, 0.0f, -95.0f },
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(EVS_NpcInit_GreenToad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = TOAD_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -296,24 +227,7 @@ StaticNpc N(NpcData_GreenToad) = {
             .detectSize = { 0 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Toad_Green_Idle,
-        .walk   = ANIM_Toad_Green_Walk,
-        .run    = ANIM_Toad_Green_Run,
-        .chase  = ANIM_Toad_Green_Run,
-        .anim_4 = ANIM_Toad_Green_Idle,
-        .anim_5 = ANIM_Toad_Green_Idle,
-        .death  = ANIM_Toad_Green_Disappointed,
-        .hit    = ANIM_Toad_Green_Disappointed,
-        .anim_8 = ANIM_Toad_Green_Run,
-        .anim_9 = ANIM_Toad_Green_Run,
-        .anim_A = ANIM_Toad_Green_Run,
-        .anim_B = ANIM_Toad_Green_Run,
-        .anim_C = ANIM_Toad_Green_Run,
-        .anim_D = ANIM_Toad_Green_Run,
-        .anim_E = ANIM_Toad_Green_Run,
-        .anim_F = ANIM_Toad_Green_Run,
-    },
+    .animations = TOAD_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MGM_PlayroomCustomer,
 };
 
@@ -343,16 +257,12 @@ EvtScript N(EVS_NpcInit_BlueToad) = {
 
 StaticNpc N(NpcData_BlueToad) = {
     .id = NPC_BlueToad,
-    .settings = &N(NpcSettings_GreenToad),
+    .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { 46.0f, 0.0f, -205.0f },
     .yaw = 90,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(EVS_NpcInit_BlueToad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = TOAD_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -367,24 +277,7 @@ StaticNpc N(NpcData_BlueToad) = {
             .detectSize = { 0 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Toad_Blue_Idle,
-        .walk   = ANIM_Toad_Blue_Walk,
-        .run    = ANIM_Toad_Blue_Run,
-        .chase  = ANIM_Toad_Blue_Run,
-        .anim_4 = ANIM_Toad_Blue_Idle,
-        .anim_5 = ANIM_Toad_Blue_Idle,
-        .death  = ANIM_Toad_Blue_Disappointed,
-        .hit    = ANIM_Toad_Blue_Disappointed,
-        .anim_8 = ANIM_Toad_Blue_Run,
-        .anim_9 = ANIM_Toad_Blue_Run,
-        .anim_A = ANIM_Toad_Blue_Run,
-        .anim_B = ANIM_Toad_Blue_Run,
-        .anim_C = ANIM_Toad_Blue_Run,
-        .anim_D = ANIM_Toad_Blue_Run,
-        .anim_E = ANIM_Toad_Blue_Run,
-        .anim_F = ANIM_Toad_Blue_Run,
-    },
+    .animations = TOAD_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_MGM_BestPlayroomCustomer,
 };
 

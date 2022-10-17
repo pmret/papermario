@@ -9,8 +9,6 @@
 #include "mapfs/kzn_07_shape.h"
 #include "mapfs/kzn_07_hit.h"
 
-#include "sprite/npc/LavaBubble.h"
-
 enum {
     NPC_Bubble_01               = 0,
     NPC_Bubble_02               = 1,
@@ -22,3 +20,9 @@ enum {
 };
 
 #define NAMESPACE kzn_07
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_PlayUpgradeFanfare);

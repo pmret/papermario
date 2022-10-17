@@ -1,22 +1,5 @@
 #include "kzn_06.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_SetupLavaPuzzle);
-
-EntryList N(Entrances) = {
-    [kzn_06_ENTRY_0]    {  385.0,  115.0,   55.0,  270.0 },
-    [kzn_06_ENTRY_1]    { -385.0,   75.0,   68.0,   90.0 },
-    [kzn_06_ENTRY_2]    {  400.0,    5.0,  175.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_06 },
-};
-
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 

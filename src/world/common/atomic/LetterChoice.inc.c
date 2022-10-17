@@ -180,3 +180,27 @@ EvtScript N(EVS_DoLetterDelivery) = {
     EVT_RETURN
     EVT_END
 };
+
+#define EVT_LETTER_PROMPT(npcName, npcID, animTalk, animIdle, msg1, msg2, ms3, msg4, itemID, itemList) \
+    EvtScript N(EVS_##npcName##_LetterDelivery) = { \
+        EVT_CALL(N(LetterDelivery_Init), \
+            npcID, animTalk, animIdle, \
+            itemID, ITEM_NONE, \
+            msg1, msg2, ms3, msg4, \
+            EVT_PTR(itemList)) \
+        EVT_EXEC_WAIT(N(EVS_DoLetterDelivery)) \
+        EVT_RETURN \
+        EVT_END \
+    }
+
+#define EVT_LETTER_REWARD(npcName) \
+    EvtScript N(EVS_##npcName##_LetterReward) = { \
+        EVT_IF_EQ(LVarC, 2) \
+            EVT_SET(LVar0, ITEM_STAR_PIECE) \
+            EVT_SET(LVar1, 3) \
+            EVT_EXEC_WAIT(N(GiveKeyReward)) \
+            EVT_CALL(AddStarPieces, 1) \
+        EVT_END_IF \
+        EVT_RETURN \
+        EVT_END \
+    }

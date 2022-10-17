@@ -14,8 +14,6 @@
 #include "sprite/npc/WorldBow.h"
 #include "sprite/npc/Boo.h"
 #include "sprite/npc/Bootler.h"
-#include "sprite/npc/WorldSkolar.h"
-#include "sprite/npc/Paragoomba.h"
 
 enum {
 	NPC_TubbasHeart         = 0,
@@ -39,3 +37,15 @@ enum {
 };
 
 #define NAMESPACE arn_07
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_UnlockDoor);
+extern EvtScript N(EVS_SetupWindmill);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript(N(EVS_SpawnStarCard));
+extern EvtScript(N(EVS_ExitDoor_arn_08_0));
+
+extern NpcGroupList N(DefaultNPCs);
+extern NpcGroupList N(BossNPCs);
+extern NpcGroupList N(SpiritNPCs);

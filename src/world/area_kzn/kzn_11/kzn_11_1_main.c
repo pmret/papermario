@@ -1,22 +1,5 @@
 #include "kzn_11.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_UpdateLeftPlatform);
-extern EvtScript N(EVS_UpdateRightPlatform);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [kzn_11_ENTRY_0]    { -810.0,   20.0,    0.0,   90.0 },
-    [kzn_11_ENTRY_1]    {  810.0,   20.0,    0.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_11 },
-};
-
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 EvtScript N(EVS_ExitWalk_kzn_10_1) = EVT_EXIT_WALK(60, kzn_11_ENTRY_0, "kzn_10", kzn_10_ENTRY_1);

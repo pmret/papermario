@@ -1,10 +1,6 @@
 #include "kzn_09.h"
 
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
 
 #include "world/common/enemy/complete/PutridPiranha.inc.c"
 #include "world/common/enemy/complete/SpikeTop.inc.c"
@@ -15,36 +11,18 @@ NpcSettings N(NpcSettings_Zipline) = {
     .level = 99,
 };
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,
     ITEM_NONE
 };
 
-EvtScript N(D_80245B64_C7C844) = {
-    EVT_CALL(N(LetterDelivery_Init),
-        NPC_Kolorado, ANIM_Kolorado_Fallen, ANIM_Kolorado_Fallen,
-        ITEM_LETTER25, 0,
-        MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
-};
+EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Fallen, ANIM_Kolorado_Fallen,
+    MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
+    ITEM_LETTER25, N(LetterList));
 
-EvtScript N(D_80245BB4_C7C894) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-// END LETTER DELIVERY?
+EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_LABEL(0)
@@ -208,8 +186,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
 
 EvtScript N(EVS_Kolorado_Interact) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Fallen, ANIM_Kolorado_Fallen, 0, MSG_CH5_00F6)
-    EVT_EXEC_WAIT(N(D_80245B64_C7C844))
-    EVT_EXEC_WAIT(N(D_80245BB4_C7C894))
+    EVT_LETTER_CHECK(Kolorado)
     EVT_RETURN
     EVT_END
 };
@@ -256,29 +233,8 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_MOTION_BLUR | NPC_FLAG_400000,
         .init = &N(EVS_Kolorado_Init),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = KOLORADO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
@@ -288,29 +244,8 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(EVS_Dummy_Init),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = KOLORADO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
 };

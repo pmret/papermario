@@ -1,11 +1,6 @@
 #include "mim_09.h"
 
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 32,
-    .radius = 24,
-    .level = 99,
-};
-
+#include "world/common/npc/Oaklie.inc.c"
 #include "world/common/enemy/complete/ForestFuzzy.inc.c"
 
 StaticNpc N(NpcData_Fuzzy) = {

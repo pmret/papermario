@@ -9,12 +9,6 @@
 #include "mapfs/kzn_03_shape.h"
 #include "mapfs/kzn_03_hit.h"
 
-#include "sprite/npc/BuzzyBeetle.h"
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/SpikeTop.h"
-#include "sprite/npc/LargePiranha.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_ZiplineDummy1           = 1,
@@ -36,3 +30,10 @@ enum {
 };
 
 #define NAMESPACE kzn_03
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupZiplines);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SyncZiplineDummyNPC1);
+extern EvtScript N(EVS_SyncZiplineDummyNPC2);
+extern NpcGroupList N(DefaultNPCs);

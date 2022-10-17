@@ -3,8 +3,6 @@
 f32 sin_rad(f32 x);
 f32 cos_rad(f32 x);
 
-extern float D_800958C0;
-
 void guRotateF(float mf[4][4], float a, float x, float y, float z) {
 	static float dtor = 3.1415926 / 180.0;
 	float sine;
@@ -13,7 +11,7 @@ void guRotateF(float mf[4][4], float a, float x, float y, float z) {
     float xs, ys, zs;
 
 	guNormalize(&x, &y, &z);
-	a *= D_800958C0; // change to dtor later?
+	a *= dtor;
 	sine = sin_rad(a);
 	cosine = cos_rad(a);
 	t = 1.0f - cosine;

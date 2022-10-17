@@ -9,12 +9,6 @@
 #include "mapfs/kzn_09_shape.h"
 #include "mapfs/kzn_09_hit.h"
 
-#include "sprite/npc/BuzzyBeetle.h"
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/SpikeTop.h"
-#include "sprite/npc/LargePiranha.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_ZiplineDummy            = 1,    // used to give the zipline a shadow
@@ -33,3 +27,9 @@ enum {
 };
 
 #define NAMESPACE kzn_09
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupZipline);
+extern EvtScript N(EVS_SyncZiplineDummyNPC);
+extern NpcGroupList N(DefaultNPCs);

@@ -1,21 +1,5 @@
 #include "mgm_02.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_Dummy);
-extern EvtScript N(EVS_InitializeMinigame);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [mgm_02_ENTRY_0]    { -300.0,  200.0,  200.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_mgm_02 },
-};
-
 EvtScript N(EVS_SetupCamera) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -300, -20, 200)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 250, -20, 220)

@@ -1,8 +1,6 @@
 #include "mgm_01.h"
 #include "entity.h"
 
-extern API_CALLABLE(N(SetMsgImgs_Panels));
-
 EvtScript N(EVS_ReadSign_HowToPlay) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(SetMsgImgs_Panels))
