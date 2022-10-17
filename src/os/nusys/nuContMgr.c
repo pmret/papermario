@@ -24,10 +24,9 @@ NUCallBackList nuContCallBack = {
     0,
 };
 
-// BSS
-extern OSMesg nuContWaitMesgBuf;
-extern OSMesg nuContDataMutexBuf;
-extern OSMesgQueue nuContDataMutexQ;
+OSMesg nuContWaitMesgBuf;
+OSMesg nuContDataMutexBuf;
+OSMesgQueue nuContDataMutexQ;
 
 u8 nuContMgrInit(void) {
     s32 i;

@@ -2,7 +2,7 @@
 #include "PR/osint.h"
 #include "PR/siint.h"
 
-extern int __osPfsLastChannel;
+s32 __osPfsLastChannel = -1;
 
 s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer) {
     s32 ret;

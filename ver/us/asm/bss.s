@@ -139,7 +139,7 @@ dlabel nuGfxCfb
 dlabel D_8009A65C
 .space 4
 
-dlabel D_8009A660
+dlabel __osFinalrom
 .space 4
 
 dlabel gBGMPlayerA
