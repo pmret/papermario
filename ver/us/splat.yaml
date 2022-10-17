@@ -265,7 +265,7 @@ segments:
     - [0x47C60, c, os/crc, gcc_272 -O3]
     - [0x47D50, c, os/destroythread, gcc_272 -O3]
     - [0x47E30, hasm, os/osMapTLBRdb]
-    - [0x47E90, c, os/vi]
+    - [0x47E90, c, os/vi, gcc_272 -O3]
     - [0x47FA0, c, os/vigetcurrcontext, gcc_272 -O3]
     - [0x47FB0, hasm, os/padding]
     - [0x47FC0, hasm, os/guNormalize]
