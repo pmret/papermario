@@ -16,7 +16,7 @@ typedef struct SplashState {
 void N(gfx_build_splashes)(s32 index) {
     s32 i;
     s32 alpha;
-    SplashState* splash = (SplashState*)evt_get_variable(NULL, MapVar(15));
+    SplashState* splash = (SplashState*)evt_get_variable(NULL, MV_SplashState);
 
     for (i = 0; i < NUM_SPLASHES; i++, splash++) {
         if (splash->pos.y < -30.0f) {
@@ -68,11 +68,11 @@ void N(gfx_build_splashes)(s32 index) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-API_CALLABLE(N(init_splashes)) {
+API_CALLABLE(N(InitSplashes)) {
     SplashState* splash = heap_malloc(NUM_SPLASHES * sizeof(*splash));
     s32 i;
 
-    evt_set_variable(NULL, MapVar(15), (s32)splash);
+    evt_set_variable(NULL, MV_SplashState, (s32)splash);
 
     for (i = 0; i < NUM_SPLASHES; i++, splash++) {
         splash->pos.x = 0.0f;
@@ -94,7 +94,7 @@ API_CALLABLE(N(init_splashes)) {
 }
 
 EvtScript N(EVS_MakeSplashes) = {
-    EVT_CALL(N(init_splashes))
+    EVT_CALL(N(InitSplashes))
     EVT_CALL(SetCustomGfxBuilders, 0, 0, EVT_PTR(N(gfx_build_splashes)))
     EVT_CALL(SetModelCustomGfx, MODEL_dummy_sprash2, 0, -1)
     EVT_RETURN

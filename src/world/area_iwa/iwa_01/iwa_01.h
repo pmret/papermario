@@ -21,6 +21,10 @@ enum {
 	NPC_Cleft                   = 8,
 };
 
+enum {
+	MV_SplashState  	        = MapVar(15),
+};
+
 #define NAMESPACE iwa_01
 
 extern EvtScript N(EVS_Main);
