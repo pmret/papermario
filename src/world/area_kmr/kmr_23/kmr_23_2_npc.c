@@ -432,7 +432,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     EVT_WAIT(60)
     EVT_SET(MF_Unk_0B, TRUE)
     EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_StarSpirit, NPC_ANIM_8)
+    EVT_CALL(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
     EVT_CALL(N(ShowMessagesInFrontOfCurtains))
     EVT_WAIT(16)
     EVT_CALL(GetEntryID, LVar0)
@@ -472,7 +472,7 @@ EvtScript N(EVS_NpcInit_Eldstar_01) = {
 };
 
 EvtScript N(EVS_NpcInit_Eldstar_02) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_8)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
     EVT_CALL(func_802CFD30, NPC_SELF, 8, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 94, 0)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)

@@ -3608,24 +3608,36 @@ enum AnyPartnerAnims {
     PARTNER_ANIM_9          = 0x109,
 };
 
-// very similar to EnemyAIAnims
+enum EnemyAnimIndices {
+    ENEMY_ANIM_INDEX_IDLE         = 0,
+    ENEMY_ANIM_INDEX_WALK         = 1,
+    ENEMY_ANIM_INDEX_RUN          = 2,
+    ENEMY_ANIM_INDEX_CHASE        = 3,
+    ENEMY_ANIM_INDEX_JUMP         = 4,
+    ENEMY_ANIM_INDEX_05           = 5,
+    ENEMY_ANIM_INDEX_DEATH        = 6,
+    ENEMY_ANIM_INDEX_HIT          = 7,
+    ENEMY_ANIM_INDEX_MELEE_PRE    = 8,
+    ENEMY_ANIM_INDEX_MELEE_HIT    = 9,
+};
+
 enum AnyEnemyAnims {
-    NPC_ANIM_IDLE         = 0x201,
-    NPC_ANIM_WALK         = 0x202,
-    NPC_ANIM_RUN          = 0x203,
-    NPC_ANIM_CHASE        = 0x204,
-    NPC_ANIM_JUMP         = 0x205,
-    NPC_ANIM_5            = 0x206,
-    NPC_ANIM_DEATH        = 0x207,
-    NPC_ANIM_HIT          = 0x208,
-    NPC_ANIM_8            = 0x209,
-    NPC_ANIM_9            = 0x20A,
-    NPC_ANIM_A            = 0x20B,
-    NPC_ANIM_B            = 0x20C,
-    NPC_ANIM_C            = 0x20D,
-    NPC_ANIM_D            = 0x20E,
-    NPC_ANIM_E            = 0x20F,
-    NPC_ANIM_F            = 0x210,
+    ENEMY_ANIM_IDLE         = 0x201,
+    ENEMY_ANIM_WALK         = 0x202,
+    ENEMY_ANIM_RUN          = 0x203,
+    ENEMY_ANIM_CHASE        = 0x204,
+    ENEMY_ANIM_JUMP         = 0x205,
+    ENEMY_ANIM_5            = 0x206,
+    ENEMY_ANIM_DEATH        = 0x207,
+    ENEMY_ANIM_HIT          = 0x208,
+    ENEMY_ANIM_8            = 0x209,
+    ENEMY_ANIM_9            = 0x20A,
+    ENEMY_ANIM_A            = 0x20B,
+    ENEMY_ANIM_B            = 0x20C,
+    ENEMY_ANIM_C            = 0x20D,
+    ENEMY_ANIM_D            = 0x20E,
+    ENEMY_ANIM_E            = 0x20F,
+    ENEMY_ANIM_F            = 0x210,
 };
 
 enum FirstStrikes {
@@ -4286,19 +4298,6 @@ enum EnemyAIStates {
     AI_STATE_PROJECTILE_HITBOX_33   = 33,
 };
 
-enum EnemyAIAnims {
-    ENEMY_ANIM_IDLE         = 0,
-    ENEMY_ANIM_WALK         = 1,
-    ENEMY_ANIM_RUN          = 2,
-    ENEMY_ANIM_CHASE        = 3,
-    ENEMY_ANIM_JUMP         = 4,
-    ENEMY_ANIM_05           = 5,
-    ENEMY_ANIM_DEATH        = 6,
-    ENEMY_ANIM_HIT          = 7,
-    ENEMY_ANIM_MELEE_PRE    = 8,
-    ENEMY_ANIM_MELEE_HIT    = 9,
-};
-
 enum EnemyActionFlags {
     AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
     AI_ACTION_02                            = 0x02,
@@ -4781,25 +4780,6 @@ enum WindowImageFormat {
     WINDOW_IMG_I_4          = 0x40,
     WINDOW_IMG_I_8          = 0x41,
 };
-
-/*
- * G_SETIMG fmt: set image formats
- */
-#define G_IM_FMT_RGBA	0
-#define G_IM_FMT_YUV	1
-#define G_IM_FMT_CI	2
-#define G_IM_FMT_IA	3
-#define G_IM_FMT_I	4
-
-/*
- * G_SETIMG siz: set image pixel size
- */
-#define G_IM_SIZ_4b	0
-#define G_IM_SIZ_8b	1
-#define G_IM_SIZ_16b	2
-#define G_IM_SIZ_32b	3
-#define G_IM_SIZ_DD	5
-
 
 enum WindowFlags {
     WINDOW_FLAGS_INITIALIZED       = 0x00000001,
