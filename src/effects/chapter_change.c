@@ -92,18 +92,18 @@ void shim_draw_msg(s32, s32, s32, s32, s32, s32);
 s32 shim_get_msg_width(s32, u16);
 
 void func_E010E000(ChapterChangeFXData* data, s32 arg1, UnkStruct* arg2) {
-    s32 unk_1C = data->unk_1C;
+    s32 unk_1C = data->lifetime;
     UnkStruct* it;
-    f32 var0;
-    f32 var1;
+    f32 posX;
+    f32 posY;
     s32 temp;
 
     if (arg1 == 0) {
-        var0 = data->unk_04;
-        var1 = data->unk_08;
+        posX = data->chapterPos.x;
+        posY = data->chapterPos.y;
     } else {
-        var0 = data->unk_10;
-        var1 = data->unk_14;
+        posX = data->endOfPos.x;
+        posY = data->endOfPos.y;
     }
 
     if (arg2 != NULL) {
@@ -113,10 +113,10 @@ void func_E010E000(ChapterChangeFXData* data, s32 arg1, UnkStruct* arg2) {
             temp = it->x - 384;
             gDPSetTileSize(gMasterGfxPos++, 1, (unk_1C * 4 - temp) * 4, 0, (unk_1C * 4 - it->x + 511) * 4, 0);
             gSPScisTextureRectangle(gMasterGfxPos++,
-                (var0 + it->x) * 4,
-                (var1 + it->y) * 4,
-                (var0 + it->x + it->width) * 4,
-                (var1 + it->y + it->height) * 4,
+                (posX + it->x) * 4,
+                (posY + it->y) * 4,
+                (posX + it->x + it->width) * 4,
+                (posY + it->y + it->height) * 4,
                 G_TX_RENDERTILE, 0, 0, 1024, 1024);
         }
 
@@ -124,7 +124,7 @@ void func_E010E000(ChapterChangeFXData* data, s32 arg1, UnkStruct* arg2) {
     }
 }
 
-EffectInstance* chapter_change_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* chapter_change_main(s32 arg0, f32 posX, f32 posY, f32 arg3, f32 arg4, s32 duration) {
     EffectBlueprint bp;
     ChapterChangeFXData* data;
     EffectInstance* effect;
@@ -143,14 +143,14 @@ EffectInstance* chapter_change_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     ASSERT(effect->data.chapterChange != NULL);
 
     data->unk_00 = arg0;
-    data->unk_1C = 0;
-    if (arg5 <= 0) {
-        data->unk_18 = 1000;
+    data->lifetime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_18 = arg5;
+        data->timeLeft = duration;
     }
-    data->unk_04 = data->unk_10 = arg1;
-    data->unk_08 = data->unk_14 = arg2;
+    data->chapterPos.x = data->endOfPos.x = posX;
+    data->chapterPos.y = data->endOfPos.y = posY;
     data->unk_0C = arg3;
     data->unk_50 = arg4;
     data->unk_20 = 255;
@@ -182,18 +182,18 @@ void chapter_change_init(EffectInstance* effect) {
 void chapter_change_update(EffectInstance* effect) {
     ChapterChangeFXData* data = effect->data.chapterChange;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        data->unk_18 = 0x10;
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_18 < 1000) {
-        data->unk_18--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_1C++;
+    data->lifetime++;
 
-    if (data->unk_18 < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
     }
 }

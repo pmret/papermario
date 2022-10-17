@@ -3608,6 +3608,26 @@ enum AnyPartnerAnims {
     PARTNER_ANIM_9          = 0x109,
 };
 
+// very similar to EnemyAIAnims
+enum AnyEnemyAnims {
+    NPC_ANIM_IDLE         = 0x201,
+    NPC_ANIM_WALK         = 0x202,
+    NPC_ANIM_RUN          = 0x203,
+    NPC_ANIM_CHASE        = 0x204,
+    NPC_ANIM_JUMP         = 0x205,
+    NPC_ANIM_5            = 0x206,
+    NPC_ANIM_DEATH        = 0x207,
+    NPC_ANIM_HIT          = 0x208,
+    NPC_ANIM_8            = 0x209,
+    NPC_ANIM_9            = 0x20A,
+    NPC_ANIM_A            = 0x20B,
+    NPC_ANIM_B            = 0x20C,
+    NPC_ANIM_C            = 0x20D,
+    NPC_ANIM_D            = 0x20E,
+    NPC_ANIM_E            = 0x20F,
+    NPC_ANIM_F            = 0x210,
+};
+
 enum FirstStrikes {
     FIRST_STRIKE_NONE     = 0x00000000,
     FIRST_STRIKE_PLAYER   = 0x00000001,
@@ -4748,6 +4768,38 @@ enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAGS_40000000          = 0x40000000,
     ENCOUNTER_STATUS_FLAGS_80000000          = 0x80000000,
 };
+
+enum WindowImageFormat {
+    WINDOW_IMG_RGBA_16      = 0x02,
+    WINDOW_IMG_RGBA_32      = 0x03,
+    WINDOW_IMG_YUV_16       = 0x12,
+    WINDOW_IMG_CI_4         = 0x20,
+    WINDOW_IMG_CI_8         = 0x21,
+    WINDOW_IMG_IA_4         = 0x30,
+    WINDOW_IMG_IA_8         = 0x31,
+    WINDOW_IMG_IA_16        = 0x32,
+    WINDOW_IMG_I_4          = 0x40,
+    WINDOW_IMG_I_8          = 0x41,
+};
+
+/*
+ * G_SETIMG fmt: set image formats
+ */
+#define G_IM_FMT_RGBA	0
+#define G_IM_FMT_YUV	1
+#define G_IM_FMT_CI	2
+#define G_IM_FMT_IA	3
+#define G_IM_FMT_I	4
+
+/*
+ * G_SETIMG siz: set image pixel size
+ */
+#define G_IM_SIZ_4b	0
+#define G_IM_SIZ_8b	1
+#define G_IM_SIZ_16b	2
+#define G_IM_SIZ_32b	3
+#define G_IM_SIZ_DD	5
+
 
 enum WindowFlags {
     WINDOW_FLAGS_INITIALIZED       = 0x00000001,

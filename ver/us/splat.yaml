@@ -8329,10 +8329,9 @@ segments:
     start: 0x8FEE80
     vram: 0x80240000
     subsegments:
-    - [0x8FEE80, c]
-    - [0x8FEE90, c]
-    - [0x8FF160, data]
-    - [0x8FF650]
+    - [0x8FEE80, c, kmr_21_0_header]
+    - [0x8FEE90, c, kmr_21_1_main]
+    - [0x8FF160]
   - name: kmr_22
     dir: world/area_kmr/kmr_22
     type: code
@@ -8351,10 +8350,21 @@ segments:
     start: 0x907A30
     vram: 0x80240000
     subsegments:
-    - [0x907A30, c]
-    - [0x907A40, c]
-    - [0x908B00, data]
-    - [0x90B210]
+    - [0x907A30, c, kmr_23_0_header]
+    - [0x907A40, c, kmr_23_1_main]
+    - [0x907A70, c, kmr_23_2_npc]
+    - [0x908B00, .data, kmr_23_0_header]
+    - [0x908BC0, .data, kmr_23_1_main]
+    - start: 0x909090
+      type: .data
+      name: kmr_23_2_npc
+      subsegments:
+      - [0x909090]
+      - [0x9090F8, ia8, window_ul, 8, 8]
+      - [0x909138, ia8, window_ur, 8, 8]
+      - [0x909178, ia8, window_ll, 8, 8]
+      - [0x9091B8, ia8, window_lr, 8, 8]
+      - [0x9091F8]
   - name: kmr_24
     dir: world/area_kmr/kmr_24
     type: code
