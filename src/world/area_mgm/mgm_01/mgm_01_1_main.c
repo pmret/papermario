@@ -1,21 +1,5 @@
 #include "mgm_01.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_802424A4);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [mgm_01_ENTRY_0]    {    0.0,  200.0,    0.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_mgm_01 },
-};
-
 API_CALLABLE(N(GetSpotlightPos)) {
     SpriteShadingProfile* shading;
     f32 spotLightPosX, spotLightPosZ;

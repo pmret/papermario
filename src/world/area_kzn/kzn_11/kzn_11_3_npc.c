@@ -2,6 +2,7 @@
 
 #include "world/common/enemy/complete/LavaBubble.inc.c"
 
+#include "sprite/npc/Fire.h"
 #include "world/common/enemy/ai/FireBarAI.inc.c"
 
 s32 N(FireBar_Sounds)[] = {

@@ -346,12 +346,12 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
-    [NPC_Bulbulb1] {
+    [NPC_Bubulb1] {
         .initialAnim = ANIM_Bubulb_Pink_DarkWalk,
         .pos = { -1850.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
-    [NPC_Bulbulb2] {
+    [NPC_Bubulb2] {
         .initialAnim = ANIM_Bubulb_Pink_DarkWalk,
         .pos = { -1850.0f, 0.0f, 20.0f },
         .yaw = 270.0f
@@ -614,8 +614,8 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(N(CreateParadeNPC), NPC_Merlar)
     EVT_CALL(N(CreateParadeNPC), NPC_SunSad)
     EVT_CALL(N(CreateParadeNPC), NPC_SunHappy)
-    EVT_CALL(N(CreateParadeNPC), NPC_Bulbulb1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Bulbulb2)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bubulb1)
+    EVT_CALL(N(CreateParadeNPC), NPC_Bubulb2)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -666,8 +666,8 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_Merlar)
     EVT_CALL(DeleteNpc, NPC_SunSad)
     EVT_CALL(DeleteNpc, NPC_SunHappy)
-    EVT_CALL(DeleteNpc, NPC_Bulbulb1)
-    EVT_CALL(DeleteNpc, NPC_Bulbulb2)
+    EVT_CALL(DeleteNpc, NPC_Bubulb1)
+    EVT_CALL(DeleteNpc, NPC_Bubulb2)
     EVT_WAIT(1)
     EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer1)
     EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer2)

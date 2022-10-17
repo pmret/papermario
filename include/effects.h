@@ -1932,13 +1932,11 @@ typedef struct PeachStarBeamFXData {
 
 typedef struct ChapterChangeFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
+    /* 0x04 */ Vec2f chapterPos;
     /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x10 */ Vec2f endOfPos;
+    /* 0x18 */ s32 timeLeft;
+    /* 0x1C */ s32 lifetime;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
@@ -1965,14 +1963,12 @@ typedef struct IceShardFXData {
 
 typedef struct SpiritCardFXData {
     /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[0x10];
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 unk_24;
+    /* 0x24 */ f32 yaw;
     /* 0x28 */ char unk_28[0xC];
-    /* 0x34 */ s8 unk_34;
+    /* 0x34 */ s8 chapter;
 } SpiritCardFXData; // ?
 
 #define MAX_LIL_OINKS 11

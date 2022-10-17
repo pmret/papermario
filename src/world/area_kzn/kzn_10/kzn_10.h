@@ -15,3 +15,6 @@ enum {
 };
 
 #define NAMESPACE kzn_10
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupSpinyTromp);

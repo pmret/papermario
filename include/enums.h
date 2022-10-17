@@ -3608,6 +3608,38 @@ enum AnyPartnerAnims {
     PARTNER_ANIM_9          = 0x109,
 };
 
+enum EnemyAnimIndices {
+    ENEMY_ANIM_INDEX_IDLE         = 0,
+    ENEMY_ANIM_INDEX_WALK         = 1,
+    ENEMY_ANIM_INDEX_RUN          = 2,
+    ENEMY_ANIM_INDEX_CHASE        = 3,
+    ENEMY_ANIM_INDEX_JUMP         = 4,
+    ENEMY_ANIM_INDEX_05           = 5,
+    ENEMY_ANIM_INDEX_DEATH        = 6,
+    ENEMY_ANIM_INDEX_HIT          = 7,
+    ENEMY_ANIM_INDEX_MELEE_PRE    = 8,
+    ENEMY_ANIM_INDEX_MELEE_HIT    = 9,
+};
+
+enum AnyEnemyAnims {
+    ENEMY_ANIM_IDLE         = 0x201,
+    ENEMY_ANIM_WALK         = 0x202,
+    ENEMY_ANIM_RUN          = 0x203,
+    ENEMY_ANIM_CHASE        = 0x204,
+    ENEMY_ANIM_JUMP         = 0x205,
+    ENEMY_ANIM_5            = 0x206,
+    ENEMY_ANIM_DEATH        = 0x207,
+    ENEMY_ANIM_HIT          = 0x208,
+    ENEMY_ANIM_8            = 0x209,
+    ENEMY_ANIM_9            = 0x20A,
+    ENEMY_ANIM_A            = 0x20B,
+    ENEMY_ANIM_B            = 0x20C,
+    ENEMY_ANIM_C            = 0x20D,
+    ENEMY_ANIM_D            = 0x20E,
+    ENEMY_ANIM_E            = 0x20F,
+    ENEMY_ANIM_F            = 0x210,
+};
+
 enum FirstStrikes {
     FIRST_STRIKE_NONE     = 0x00000000,
     FIRST_STRIKE_PLAYER   = 0x00000001,
@@ -4266,19 +4298,6 @@ enum EnemyAIStates {
     AI_STATE_PROJECTILE_HITBOX_33   = 33,
 };
 
-enum EnemyAIAnims {
-    ENEMY_ANIM_IDLE         = 0,
-    ENEMY_ANIM_WALK         = 1,
-    ENEMY_ANIM_RUN          = 2,
-    ENEMY_ANIM_CHASE        = 3,
-    ENEMY_ANIM_JUMP         = 4,
-    ENEMY_ANIM_05           = 5,
-    ENEMY_ANIM_DEATH        = 6,
-    ENEMY_ANIM_HIT          = 7,
-    ENEMY_ANIM_MELEE_PRE    = 8,
-    ENEMY_ANIM_MELEE_HIT    = 9,
-};
-
 enum EnemyActionFlags {
     AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
     AI_ACTION_02                            = 0x02,
@@ -4747,6 +4766,19 @@ enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAGS_20000000          = 0x20000000,
     ENCOUNTER_STATUS_FLAGS_40000000          = 0x40000000,
     ENCOUNTER_STATUS_FLAGS_80000000          = 0x80000000,
+};
+
+enum WindowImageFormat {
+    WINDOW_IMG_RGBA_16      = 0x02,
+    WINDOW_IMG_RGBA_32      = 0x03,
+    WINDOW_IMG_YUV_16       = 0x12,
+    WINDOW_IMG_CI_4         = 0x20,
+    WINDOW_IMG_CI_8         = 0x21,
+    WINDOW_IMG_IA_4         = 0x30,
+    WINDOW_IMG_IA_8         = 0x31,
+    WINDOW_IMG_IA_16        = 0x32,
+    WINDOW_IMG_I_4          = 0x40,
+    WINDOW_IMG_I_8          = 0x41,
 };
 
 enum WindowFlags {

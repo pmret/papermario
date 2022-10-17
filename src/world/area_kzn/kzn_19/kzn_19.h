@@ -9,12 +9,6 @@
 #include "mapfs/kzn_19_shape.h"
 #include "mapfs/kzn_19_hit.h"
 
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/WorldMisstar.h"
-#include "sprite/npc/LavaPiranha.h"
-#include "sprite/npc/LavaBud.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_Misstar                 = 1,
@@ -30,3 +24,23 @@ enum {
 };
 
 #define NAMESPACE kzn_19
+
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_UpdateEruption);
+extern EvtScript N(EVS_Misstar_Escape);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(BossNPCs);
+extern NpcGroupList N(EscapeNPCs);
+
+extern EvtScript N(EVS_TryingSpawningStarCard);
+extern StaticAnimatorNode* N(AnimModel_MainHeadVine)[];
+extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
+extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];
+
+extern NpcSettings N(NpcSettings_Kolorado);
+extern NpcSettings N(NpcSettings_StarSpirit);
+extern NpcSettings N(NpcSettings_LavaPiranhaHead);
+
+extern API_CALLABLE(SetAnimatorFlags);
+extern API_CALLABLE(GetAnimatedPositionByTreeIndex);
+extern API_CALLABLE(GetAnimatedRotationByTreeIndex);

@@ -1,0 +1,70 @@
+#include "kmr_10.h"
+
+#include "common/foliage.inc.c"
+
+FoliageModelList N(Bush1_BushModels) = {
+    .count = 1,
+    .models = {
+        MODEL_o1056,
+    }
+};
+
+FoliageVectorList N(Bush1_Effects) = {
+    .count = 1,
+    .vectors = {
+        { -305.0f, 163.0f, 3.0f },
+    }
+};
+
+SearchBushConfig N(SearchBush_Bush1) = {
+    .bush = &N(Bush1_BushModels),
+    .vectors = &N(Bush1_Effects),
+};
+
+FoliageModelList N(Tree1_LeafModels) = {
+    .count = 3,
+    .models = {
+        MODEL_ha1_1,
+        MODEL_ha1_2,
+        MODEL_ha1_3,
+    }
+};
+
+FoliageModelList N(Tree1_TrunkModels) = {
+    .count = 3,
+    .models = {
+        MODEL_o1066,
+        MODEL_miki1_1,
+        MODEL_miki1_2,
+    }
+};
+
+FoliageVectorList N(Tree1_Effects) = {
+    .count = 2,
+    .vectors = {
+        { 291.0f, 103.0f, -27.0f },
+        { 368.0f, 96.0f, -18.0f },
+    }
+};
+
+ShakeTreeConfig N(ShakeTree_Tree1) = {
+    .leaves = &N(Tree1_LeafModels),
+    .trunk = &N(Tree1_TrunkModels),
+    .vectors = &N(Tree1_Effects),
+    .callback = &N(EVS_Tree1_CallbackScript),
+};
+
+BombTrigger N(BombPos_Tree1) = {
+    .pos = { 328.0f, 10.0f, -36.0f },
+    .radius = 0.0f
+};
+
+EvtScript N(EVS_SetupFoliage) = {
+    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_k1, 1, 0)
+    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
+    EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_ki_a, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
+    EVT_RETURN
+    EVT_END
+};

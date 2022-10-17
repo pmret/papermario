@@ -3,14 +3,7 @@
 
 #include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
 #include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
-
-NpcSettings N(NpcSettings_Whacka_01) = {
-    .height = 30,
-    .radius = 26,
-    .level = 99,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Whacka.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -50,7 +43,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
     }
 }
 
-StaticNpc N(NpcData_MontyMole_01)[] = {
+StaticNpc N(NpcData_MontyMole_GroundAmbush)[] = {
     {
         .id = NPC_MontyMole_01,
         .settings = &N(NpcSettings_MontyMole_GroundAmbush),
@@ -100,7 +93,7 @@ StaticNpc N(NpcData_MontyMole_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_03)[] = {
+StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
     {
         .id = NPC_MontyMole_02,
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
@@ -349,76 +342,34 @@ EvtScript N(EVS_NpcInit_Whacka_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Whacka_01)[] = {
+StaticNpc N(NpcData_Whacka)[] = {
     {
         .id = NPC_Whacka_01,
-        .settings = &N(NpcSettings_Whacka_01),
+        .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
         .init = &N(EVS_NpcInit_Whacka_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Whacka_Idle,
-            .walk   = ANIM_Whacka_Idle,
-            .run    = ANIM_Whacka_Idle,
-            .chase  = ANIM_Whacka_Idle,
-            .anim_4 = ANIM_Whacka_Idle,
-            .anim_5 = ANIM_Whacka_Idle,
-            .death  = ANIM_Whacka_Idle,
-            .hit    = ANIM_Whacka_Idle,
-            .anim_8 = ANIM_Whacka_Idle,
-            .anim_9 = ANIM_Whacka_Idle,
-            .anim_A = ANIM_Whacka_Idle,
-            .anim_B = ANIM_Whacka_Idle,
-            .anim_C = ANIM_Whacka_Idle,
-            .anim_D = ANIM_Whacka_Idle,
-            .anim_E = ANIM_Whacka_Idle,
-            .anim_F = ANIM_Whacka_Idle,
-        },
+        .drops = WHACKA_DROPS,
+        .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,
     },
     {
         .id = NPC_Whacka_02,
-        .settings = &N(NpcSettings_Whacka_01),
+        .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
         .flags = NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_4000 | NPC_FLAG_MOTION_BLUR | NPC_FLAG_200000 | NPC_FLAG_400000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS,
         .init = &N(EVS_NpcInit_Whacka_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Whacka_Idle,
-            .walk   = ANIM_Whacka_Idle,
-            .run    = ANIM_Whacka_Idle,
-            .chase  = ANIM_Whacka_Idle,
-            .anim_4 = ANIM_Whacka_Idle,
-            .anim_5 = ANIM_Whacka_Idle,
-            .death  = ANIM_Whacka_Idle,
-            .hit    = ANIM_Whacka_Idle,
-            .anim_8 = ANIM_Whacka_Idle,
-            .anim_9 = ANIM_Whacka_Idle,
-            .anim_A = ANIM_Whacka_Idle,
-            .anim_B = ANIM_Whacka_Idle,
-            .anim_C = ANIM_Whacka_Idle,
-            .anim_D = ANIM_Whacka_Idle,
-            .anim_E = ANIM_Whacka_Idle,
-            .anim_F = ANIM_Whacka_Idle,
-        },
+        .drops = WHACKA_DROPS,
+        .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,
     },
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_MontyMole_01), BTL_IWA_FORMATION_06, BTL_IWA_STAGE_01),
-    NPC_GROUP(N(NpcData_MontyMole_03), BTL_IWA_FORMATION_07, BTL_IWA_STAGE_01),
-    NPC_GROUP(N(NpcData_Whacka_01)),
+    NPC_GROUP(N(NpcData_MontyMole_GroundAmbush), BTL_IWA_FORMATION_06, BTL_IWA_STAGE_01),
+    NPC_GROUP(N(NpcData_MontyMole_WallAmbush), BTL_IWA_FORMATION_07, BTL_IWA_STAGE_01),
+    NPC_GROUP(N(NpcData_Whacka)),
     {}
 };

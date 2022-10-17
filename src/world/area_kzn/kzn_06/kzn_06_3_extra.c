@@ -74,11 +74,11 @@ ModelIDList N(InvalidLavaModels) = {
 
 EvtScript N(EVS_8024137C) = {
     EVT_LABEL(0)
-    EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 1)
-    EVT_WAIT(30)
-    EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 0)
-    EVT_WAIT(30)
-    EVT_GOTO(0)
+        EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 1)
+        EVT_WAIT(30)
+        EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 0)
+        EVT_WAIT(30)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
