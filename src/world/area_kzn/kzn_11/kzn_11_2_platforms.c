@@ -62,7 +62,7 @@ EvtScript N(EVS_UpdateLeftPlatform) = {
                 EVT_CALL(N(IsPartnerLakilester))
                 EVT_IF_EQ(LVar9, 1)
                     EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, 62)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF
@@ -88,7 +88,7 @@ EvtScript N(EVS_UpdateLeftPlatform) = {
                 EVT_CALL(N(IsPartnerLakilester))
                 EVT_IF_EQ(LVar9, 1)
                     EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, 63)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp2)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF
@@ -127,7 +127,7 @@ EvtScript N(EVS_UpdateRightPlatform) = {
                 EVT_CALL(N(IsPartnerLakilester))
                 EVT_IF_EQ(LVar9, 1)
                     EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, 62)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF
@@ -153,7 +153,7 @@ EvtScript N(EVS_UpdateRightPlatform) = {
                 EVT_CALL(N(IsPartnerLakilester))
                 EVT_IF_EQ(LVar9, 1)
                     EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, 63)
+                    EVT_IF_EQ(LVar2, COLLIDER_pp2)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_IF

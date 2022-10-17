@@ -1,23 +1,5 @@
 #include "kzn_02.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_InitializePlatforms);
-extern EvtScript N(EVS_PlayDemoScene);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [kzn_02_ENTRY_0]    { -810.0,   20.0,  -10.0,   90.0 },
-    [kzn_02_ENTRY_1]    {  810.0,   20.0,  -10.0,  270.0 },
-    [kzn_02_ENTRY_2]    { -810.0,   20.0,  -10.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_02 },
-};
-
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 

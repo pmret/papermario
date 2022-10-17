@@ -1,23 +1,5 @@
 #include "kzn_09.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_SetupZipline);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [kzn_09_ENTRY_0]    { -445.0,  870.0,  -40.0,   90.0 },
-    [kzn_09_ENTRY_1]    {  435.0,  719.0,   10.0,  270.0 },
-    [kzn_09_ENTRY_2]    { -445.0,  400.0,   95.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_09 },
-};
-
 EvtScript N(EVS_ExitWalk_kzn_03_2) = EVT_EXIT_WALK(60, kzn_09_ENTRY_0, "kzn_03", kzn_03_ENTRY_2);
 EvtScript N(EVS_ExitWalk_kzn_10_0) = EVT_EXIT_WALK(60, kzn_09_ENTRY_1, "kzn_10", kzn_10_ENTRY_0);
 EvtScript N(EVS_ExitWalk_kzn_03_4) = EVT_EXIT_WALK(60, kzn_09_ENTRY_2, "kzn_03", kzn_03_ENTRY_4);

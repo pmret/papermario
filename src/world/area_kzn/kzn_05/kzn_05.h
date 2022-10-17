@@ -10,3 +10,5 @@
 #include "mapfs/kzn_05_hit.h"
 
 #define NAMESPACE kzn_05
+
+extern EvtScript N(EVS_Main);

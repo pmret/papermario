@@ -18,3 +18,11 @@ enum {
 };
 
 #define NAMESPACE arn_08
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_AnimateGears);
+extern EvtScript N(EVS_SetupHole);
+extern EvtScript N(EVS_PlayDemoScene);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupMusic);
+extern NpcGroupList N(DefaultNPCs);

@@ -14,3 +14,6 @@ enum {
 };
 
 #define NAMESPACE kzn_01
+
+extern EvtScript N(EVS_Main);
+extern NpcGroupList N(DefaultNPCs);

@@ -162,3 +162,10 @@ enum {
 };
 
 #define NAMESPACE end_00
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_ManageParade);
+extern EvtScript N(EVS_OffsetNpcScroll);
+
+API_CALLABLE(N(AddScrollToNpcPos));
+

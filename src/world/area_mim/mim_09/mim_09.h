@@ -9,8 +9,6 @@
 #include "mapfs/mim_09_shape.h"
 #include "mapfs/mim_09_hit.h"
 
-#include "sprite/npc/Fuzzy.h"
-
 enum {
 	NPC_Fuzzy           = 0,
 };

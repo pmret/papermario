@@ -2,10 +2,6 @@
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
-API_CALLABLE(N(AddScrollToNpcPos));
-
-extern EvtScript N(EVS_OffsetNpcScroll);
-
 EvtScript N(EVS_TexPan_ShyGuyFloat_Sides) = {
     EVT_CALL(EnableTexPanning, MODEL_omo1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_omo4, TRUE)

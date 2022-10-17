@@ -28,3 +28,11 @@ enum {
 };
 
 #define NAMESPACE iwa_11
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_InitializeTrainScene);
+extern EvtScript N(EVS_TravelToMtRugged);
+extern EvtScript N(EVS_TravelToToadTown);
+extern EvtScript N(EVS_UpdateSceneryPos);
+extern EvtScript N(EVS_SetupMusic);
+extern NpcGroupList N(DefaultNPCs);

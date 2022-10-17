@@ -1,0 +1,677 @@
+#include "kmr_23.h"
+#include "effects.h"
+
+void func_80240DA4_9087D4(void);
+
+typedef struct EndChapter {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ f32 unk0C;
+    /* 0x10 */ f32 yaw;
+    /* 0x14 */ f32 angularVelocity;
+    /* 0x18 */ f32 startYaw;
+    /* 0x1C */ s16 unk1C;
+    /* 0x1E */ s16 unk1E;
+    /* 0x20 */ s16 stopAccelerating;
+    /* 0x22 */ s16 chapter;
+    /* 0x24 */ s16 screenWhiteness;
+    /* 0x26 */ s16 unk26;
+    /* 0x28 */ EffectInstance* spiritCardEffect;
+    /* 0x2C */ EffectInstance* chapterChangeEffect;
+} EndChapter;
+
+#include "world/common/npc/StarSpirit.h"
+
+NpcSettings N(NpcSettings_StarSpirit) = {
+    .height = 24,
+    .radius = 24,
+    .level = 99,
+};
+
+AnimID N(StarSpiritAnimations)[][2] = {
+    { ANIM_WorldEldstar_Idle,   ANIM_WorldEldstar_Back },
+    { ANIM_WorldMamar_Idle,     ANIM_WorldMamar_Back },
+    { ANIM_WorldSkolar_Idle,    ANIM_WorldSkolar_Back },
+    { ANIM_WorldMuskular_Idle,  ANIM_WorldMuskular_Back }, 
+    { ANIM_WorldMisstar_Idle,   ANIM_WorldMisstar_Back },
+    { ANIM_WorldKlevar_Idle,    ANIM_WorldKlevar_Back },
+    { ANIM_WorldKalmar_Idle,    ANIM_WorldKalmar_Back },
+};
+
+s32 imgPadding = 0;
+
+#include "world/area_kmr/kmr_23/window_ul.png.inc.c"
+#include "world/area_kmr/kmr_23/window_ur.png.inc.c"
+#include "world/area_kmr/kmr_23/window_ll.png.inc.c"
+#include "world/area_kmr/kmr_23/window_lr.png.inc.c"
+
+s32 D_802417C8_9091F8 = 0;
+
+s32 D_802417CC_9091FC = 0;
+
+s32 D_802417D0_909200 = 0;
+
+s32 D_802417D0_909204 = 0;
+
+WindowStyleCustom D_802417D8_909208 = {
+    .background = {
+        .imgData = NULL,
+    },
+    .corners = {
+        .imgData = N(window_ul_img),
+        .packedTileFormat = WINDOW_IMG_IA_8,
+        .size1 = { 8, 8 },
+        .size2 = { 8, 8 },
+        .size3 = { 8, 8 },
+        .size4 = { 8, 8 },
+    },
+    // gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .opaqueCombineMode = { .words = { 0xFC317FFF, 0xFFFFF438 }},
+    // gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED)
+    .transparentCombineMode = { .words = { 0xFC3127FF, 0xFFFFFE38 }},
+    .color1 = { 224, 224, 224, 255 },
+    .color2 = { 0, 0, 0, 255},
+};
+
+API_CALLABLE(N(CreateEndChapterData)) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_safe(NPC_StarSpirit);
+    EndChapter* data;
+    s32 backFacing;
+    
+    if (isInitialCall) {
+        data = heap_malloc(sizeof(*data));
+        script->userData = data;
+        evt_set_variable(script, MV_EndChapterDataPtr, (s32) data);
+        data->chapter = evt_get_variable(script, *args++);
+        data->pos.x = evt_get_float_variable(script, *args++);
+        data->pos.y = evt_get_float_variable(script, *args++);
+        data->pos.z = evt_get_float_variable(script, *args++);
+        data->yaw = 0.0f;
+        data->unk1C = 0;
+        data->screenWhiteness = 0;
+        data->unk1E = FALSE;
+        npc->alpha = 0;
+        npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+        data->spiritCardEffect = fx_spirit_card(1, data->pos.x, data->pos.y, data->pos.z, 1.0f, 0);
+        data->spiritCardEffect->data.spiritCard->chapter = data->chapter;
+        data->spiritCardEffect->data.spiritCard->unk_20 = 0;
+        set_curtain_draw_callback(func_80240DA4_9087D4);
+    }
+    data = script->userData;
+    npc->pos.x = data->pos.x;
+    npc->pos.y = data->pos.y;
+    npc->pos.z = data->pos.z + 10.0f;
+    npc->rotation.y = data->yaw;
+    backFacing = FALSE;
+    if (!evt_get_variable(script, MF_Unk_0B)) {
+        if ((data->yaw > 90.0f) && (data->yaw < 270.0f)) {
+            backFacing = TRUE;
+        }
+        npc->currentAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
+    }
+    
+    if (data->spiritCardEffect != NULL) {
+        data->spiritCardEffect->data.spiritCard->yaw = data->yaw;
+        data->spiritCardEffect->data.spiritCard->pos.x = data->pos.x - 2.0f;
+        data->spiritCardEffect->data.spiritCard->pos.y = data->pos.y + 15.0f;
+        data->spiritCardEffect->data.spiritCard->pos.z = data->pos.z;
+    }
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(AddCardAngularVelocity)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+
+    if (isInitialCall) {
+        data->stopAccelerating = FALSE;
+        data->angularVelocity = evt_get_float_variable(script, *args++);
+    }
+
+    if (!data->stopAccelerating) {
+        data->yaw = clamp_angle(data->yaw + data->angularVelocity);
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(AccelerateCardSpin)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data;
+    s32 duration;
+    
+    if (isInitialCall) {
+        script->functionTempF[1] = evt_get_float_variable(script, *args++);
+        duration = script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[0] = 0;
+        script->functionTempF[1] = script->functionTempF[1] / duration;
+    }
+
+    data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    data->angularVelocity += script->functionTempF[1];
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[2]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(MakeCardFloatUpward)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->varTable[0] = evt_get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+    }
+
+    data->pos.y = update_lerp(script->varTable[0],
+        script->functionTemp[1], script->functionTemp[2],
+        script->functionTemp[0], script->functionTemp[3]);
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[3]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(ShowRadialShimmer)) {
+    Bytecode* args = script->ptrReadPos;
+    f32 scale = evt_get_float_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+
+    fx_radial_shimmer(0xE, data->pos.x, data->pos.y + 16.0f, data->pos.z, scale, duration);
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(FadeInSpiritNpc)) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_safe(NPC_StarSpirit);
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+    }
+
+    npc->alpha = update_lerp(EASING_LINEAR, 0.0f, 255.0f, script->functionTemp[0], script->functionTemp[1]);
+
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[1]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(FlashScreenWhite)) {
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    EffectInstance* effect;
+
+    enum FunctionState {
+        FADE_TO_WHITE   = 0,
+        HOLD_WHITE      = 1,
+        BACK_TO_NORMAL  = 2,
+    };
+    
+    if (isInitialCall) {
+        script->functionTemp[0] = FADE_TO_WHITE;
+    }
+    
+    switch(script->functionTemp[0]) {
+        case FADE_TO_WHITE:
+            set_screen_overlay_color(0, 208, 208, 208);
+            set_screen_overlay_params_front(1, data->screenWhiteness);
+            if (data->screenWhiteness == 255) {
+                data->spiritCardEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+                data->spiritCardEffect = NULL;
+                gCameras->bgColor[0] = 208;
+                gCameras->bgColor[1] = 208;
+                gCameras->bgColor[2] = 208;
+                script->functionTemp[0] = HOLD_WHITE;
+                script->functionTemp[1] = 15;
+            } else {
+                data->screenWhiteness += 50;;
+                if (data->screenWhiteness > 255) {
+                    data->screenWhiteness = 255;
+                }
+            }
+            break;
+        case HOLD_WHITE:
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] == -1) {
+                script->functionTemp[0] = BACK_TO_NORMAL;
+            }
+            break;
+        case BACK_TO_NORMAL:
+            set_screen_overlay_params_front(1, data->screenWhiteness);
+            if (data->screenWhiteness == 0) {
+                set_curtain_scale_goal(1.0f);
+                return ApiStatus_DONE1;
+            }
+            data->screenWhiteness -= 20;;
+            if (data->screenWhiteness < 0) {
+                data->screenWhiteness = 0;
+            }
+            break;
+        }
+
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(SpinDownStarSpirit)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        data->stopAccelerating = TRUE;
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        data->startYaw = data->yaw;
+    }
+
+    data->yaw = clamp_angle(update_lerp(EASING_QUADRATIC_OUT,
+        data->startYaw, script->functionTemp[1],
+        script->functionTemp[0], script->functionTemp[2]));
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[2]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(EndOfChapterBounceIn)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* endChatper = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    s32 posY;
+    
+    if (isInitialCall) {
+        endChatper->chapterChangeEffect = fx_chapter_change(gGameStatusPtr->entryID + 10, 40, 0, 0, 1.0f, 0);
+        script->functionTemp[0] = 0;
+        script->varTable[0] = evt_get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+    }
+
+    posY = update_lerp(EASING_COS_BOUNCE,
+        script->functionTemp[1], script->functionTemp[2],
+        script->functionTemp[0], script->functionTemp[3]);
+    endChatper->chapterChangeEffect->data.chapterChange->chapterPos.x = script->varTable[0];
+    endChatper->chapterChangeEffect->data.chapterChange->chapterPos.y = posY;
+    endChatper->chapterChangeEffect->data.chapterChange->endOfPos.x = script->varTable[0];
+    endChatper->chapterChangeEffect->data.chapterChange->endOfPos.y = posY;
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[3]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(EndOfChapterSplitApart)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    s32 leftDx, rightDx;
+    
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->varTable[0] = evt_get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+    }
+
+    leftDx = update_lerp(EASING_LINEAR, 0.0f, (script->functionTemp[2] / 2) + 8, script->functionTemp[0], script->functionTemp[3]);
+    rightDx = update_lerp(EASING_LINEAR, 0.0f, (script->functionTemp[2] / 2), script->functionTemp[0], script->functionTemp[3]);
+    data->chapterChangeEffect->data.chapterChange->chapterPos.x = script->varTable[0] - leftDx;
+    data->chapterChangeEffect->data.chapterChange->chapterPos.y = script->functionTemp[1];
+    data->chapterChangeEffect->data.chapterChange->endOfPos.x = script->varTable[0] + rightDx;
+    data->chapterChangeEffect->data.chapterChange->endOfPos.y = script->functionTemp[1];
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[3]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(func_80240BB4_9085E4)) {
+    Bytecode* args = script->ptrReadPos;
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+        data->unk1E = TRUE;
+    }
+
+    data->unk0C = update_lerp(EASING_LINEAR,
+        script->functionTemp[1], script->functionTemp[2],
+        script->functionTemp[0], script->functionTemp[3]);
+    
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < script->functionTemp[3]) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE1;
+    }
+}
+
+API_CALLABLE(N(AwaitConfirmInput)) {
+    if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+API_CALLABLE(N(func_80240CA8_9086D8)) {
+    EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
+    fx_misc_particles(2, data->pos.x, data->pos.y, data->pos.z, 70.0f, 20.0f, 1.5f, 20, 15);
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(ShowMessagesInFrontOfCurtains)) {
+    EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
+    data->unk1E = TRUE;
+    gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(ShowMessagesBehindCurtains)) {
+    EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
+    data->unk1E = FALSE;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS;
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_ASM(s32, "world/area_kmr/kmr_23/907A40", func_80240DA4_9087D4);
+MAP_DATA_SECTION_START
+
+EvtScript N(EVS_Scene_EndOfChapter) = {
+    EVT_THREAD
+        EVT_SET(MF_Unk_0B, FALSE)
+        EVT_CALL(GetEntryID, LVar0)
+        EVT_CALL(GetNpcPos, NPC_StarSpirit, LVar1, LVar2, LVar3)
+        EVT_CALL(N(CreateEndChapterData), LVar0, LVar1, LVar2, LVar3)
+    EVT_END_THREAD
+    EVT_WAIT(1)
+    EVT_THREAD
+        EVT_CALL(N(AddCardAngularVelocity), 10)
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_CALL(N(AccelerateCardSpin), 20, 150)
+    EVT_END_THREAD
+    EVT_CALL(N(MakeCardFloatUpward), 5, 0, 60, 150)
+    EVT_WAIT(30)
+    EVT_CALL(N(ShowRadialShimmer), 1, 120)
+    EVT_CALL(N(FadeInSpiritNpc), 60)
+    EVT_WAIT(30)
+    EVT_CALL(N(FlashScreenWhite))
+    EVT_CALL(N(SpinDownStarSpirit), 1800, 100)
+    EVT_CALL(N(EndOfChapterBounceIn), 36, 0, 55, 60)
+    EVT_THREAD
+        EVT_CALL(N(AddCardAngularVelocity), 0)
+    EVT_END_THREAD
+    EVT_WAIT(60)
+    EVT_SET(MF_Unk_0B, TRUE)
+    EVT_WAIT(1)
+    EVT_CALL(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
+    EVT_CALL(N(ShowMessagesInFrontOfCurtains))
+    EVT_WAIT(16)
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SET(LVar1, MSG_Menus_01A5)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(kmr_23_ENTRY_0)
+            EVT_SET(LVar1, MSG_Menus_01A5)
+        EVT_CASE_EQ(kmr_23_ENTRY_1)
+            EVT_SET(LVar1, MSG_Menus_01A6)
+        EVT_CASE_EQ(kmr_23_ENTRY_2)
+            EVT_SET(LVar1, MSG_Menus_01A7)
+        EVT_CASE_EQ(kmr_23_ENTRY_3)
+            EVT_SET(LVar1, MSG_Menus_01A8)
+        EVT_CASE_EQ(kmr_23_ENTRY_4)
+            EVT_SET(LVar1, MSG_Menus_01A9)
+        EVT_CASE_EQ(kmr_23_ENTRY_5)
+            EVT_SET(LVar1, MSG_Menus_01AA)
+        EVT_CASE_EQ(kmr_23_ENTRY_6)
+            EVT_SET(LVar1, MSG_Menus_01AB)
+    EVT_END_SWITCH
+    EVT_CALL(ShowMessageAtScreenPos, LVar1, 160, 40)
+    EVT_CALL(N(ShowMessagesBehindCurtains))
+    EVT_WAIT(15)
+    EVT_SET(MF_Unk_0A, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_Eldstar_01) = {
+    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.85), EVT_FLOAT(0.85), EVT_FLOAT(0.85))
+    EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 20)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, TRUE)
+    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
+    EVT_EXEC(N(EVS_Scene_EndOfChapter))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_Eldstar_02) = {
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
+    EVT_CALL(func_802CFD30, NPC_SELF, 8, 0, 0, 0, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, 0, 94, 0)
+    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+
+StaticNpc N(NpcData_Eldstar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = ELDSTAR_DROPS,
+        .animations = ELDSTAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = ELDSTAR_DROPS,
+        .animations = ELDSTAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Mamar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = MAMAR_DROPS,
+        .animations = MAMAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = MAMAR_DROPS,
+        .animations = MAMAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Skolar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = SKOLAR_DROPS,
+        .animations = SKOLAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = SKOLAR_DROPS,
+        .animations = SKOLAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Muskular)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = MUSKULAR_DROPS,
+        .animations = MUSKULAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = MUSKULAR_DROPS,
+        .animations = MUSKULAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Misstar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = MISSTAR_DROPS,
+        .animations = MISSTAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = MISSTAR_DROPS,
+        .animations = MISSTAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Klevar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = KLEVAR_DROPS,
+        .animations = KLEVAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = KLEVAR_DROPS,
+        .animations = KLEVAR_ANIMS,
+    },
+};
+
+StaticNpc N(NpcData_Kalmar)[] = {
+    {
+        .id = NPC_StarSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_01),
+        .drops = KALMAR_DROPS,
+        .animations = KALMAR_ANIMS,
+    },
+    {
+        .id = NPC_AuxSpirit,
+        .settings = &N(NpcSettings_StarSpirit),
+        .pos = { -40.0f, 96.0f, 0.0f },
+        .yaw = 270,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(EVS_NpcInit_Eldstar_02),
+        .drops = KALMAR_DROPS,
+        .animations = KALMAR_ANIMS,
+    },
+};
+
+NpcGroupList N(NpcGroup_Eldstar) = {
+    NPC_GROUP(N(NpcData_Eldstar)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Mamar) = {
+    NPC_GROUP(N(NpcData_Mamar)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Skolar) = {
+    NPC_GROUP(N(NpcData_Skolar)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Muskular) = {
+    NPC_GROUP(N(NpcData_Muskular)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Misstar) = {
+    NPC_GROUP(N(NpcData_Misstar)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Klevar) = {
+    NPC_GROUP(N(NpcData_Klevar)),
+    {}
+};
+
+NpcGroupList N(NpcGroup_Kalmar) = {
+    NPC_GROUP(N(NpcData_Kalmar)),
+    {}
+};

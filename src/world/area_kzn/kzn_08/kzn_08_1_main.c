@@ -1,29 +1,6 @@
 #include "kzn_08.h"
 #include "model.h"
 
-// header and utility includes
-
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_MakeEntities);
-
-extern NpcGroupList N(DefaultNPCs);
-extern EvtScript N(EVS_802455A0);
-extern API_CALLABLE(N(ApplyLavaGlowLighting));
-extern API_CALLABLE(N(ClearLavaGlowLighting));
-
-void disable_world_fog(void);
-
-EntryList N(Entrances) = {
-    [kzn_08_ENTRY_0]    { -315.0,    0.0,   85.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_08 },
-};
-
 #include "world/common/atomic/LavaGlowLighting.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"

@@ -1,25 +1,6 @@
 #include "mgm_00.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(D_80243C40_E123E0);
-extern EvtScript N(EVS_BindInteractTriggers);
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [mgm_00_ENTRY_0]    { -152.0,    0.0, -218.0,   90.0 },
-    [mgm_00_ENTRY_1]    {  -25.0,   30.0, -168.0,   90.0 },
-    [mgm_00_ENTRY_2]    {   95.0,   30.0, -168.0,   90.0 },
-    [mgm_00_ENTRY_3]    {  237.0,    0.0,  -53.0,  270.0 },
-    [mgm_00_ENTRY_4]    {   20.0,    0.0,  -80.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_mgm_00 },
-};
-
+// probably a blank EVS_SetupMusic
 EvtScript N(D_80241850_E0FFF0) = {
     EVT_RETURN
     EVT_END

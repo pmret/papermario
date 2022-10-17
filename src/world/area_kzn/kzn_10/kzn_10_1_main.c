@@ -1,20 +1,5 @@
 #include "kzn_10.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_SetupSpinyTromp);
-
-EntryList N(Entrances) = {
-    [kzn_10_ENTRY_0]    { -445.0,    0.0,    0.0,   90.0 },
-    [kzn_10_ENTRY_1]    {  425.0, -259.0,    0.0,  270.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { MSG_MapTattle_kzn_10 },
-};
-
 #include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
 
 EvtScript N(EVS_ExitWalk_kzn_09_1) = EVT_EXIT_WALK(60, kzn_10_ENTRY_0, "kzn_09", kzn_09_ENTRY_1);

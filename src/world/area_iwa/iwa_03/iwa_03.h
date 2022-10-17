@@ -9,9 +9,6 @@
 #include "mapfs/iwa_03_shape.h"
 #include "mapfs/iwa_03_hit.h"
 
-#include "sprite/npc/MontyMole.h"
-#include "sprite/npc/Cleft.h"
-
 enum {
 	NPC_Cleft_01                = 0,
 	NPC_Cleft_02                = 1,
@@ -25,3 +22,8 @@ enum {
 };
 
 #define NAMESPACE iwa_03
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_BindSlideTriggers);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

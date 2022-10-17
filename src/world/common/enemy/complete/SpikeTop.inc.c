@@ -89,7 +89,7 @@ EvtScript N(D_80243C80_C64990) = {
     EVT_END
 };
 
-// different spike top prefabs
+// different spike top varieties
 
 NpcSettings N(NpcSettings_Unused1) = {
     .height = 20,

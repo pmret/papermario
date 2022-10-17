@@ -21,7 +21,7 @@ void N(MagikoopaAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_2;
         npc->duration = 0;
         script->AI_TEMP_STATE = 1;

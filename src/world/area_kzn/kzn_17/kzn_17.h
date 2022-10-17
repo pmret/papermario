@@ -9,12 +9,6 @@
 #include "mapfs/kzn_17_shape.h"
 #include "mapfs/kzn_17_hit.h"
 
-#include "sprite/npc/BuzzyBeetle.h"
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/LargePiranha.h"
-#include "sprite/npc/SpikeTop.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_Piranha                 = 1,
@@ -28,3 +22,10 @@ enum {
 };
 
 #define NAMESPACE kzn_17
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupSpinyTromp);
+extern EvtScript N(EVS_Kolorado_TrompPanic);
+extern EvtScript N(EVS_Kolorado_TrompImpact);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

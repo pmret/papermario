@@ -16,3 +16,12 @@ enum {
 };
 
 #define NAMESPACE mgm_01
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_802424A4);
+extern NpcGroupList N(DefaultNPCs);
+
+API_CALLABLE(N(SetMsgImgs_Panels));
+
+void delete_entity(s32 entityIndex);

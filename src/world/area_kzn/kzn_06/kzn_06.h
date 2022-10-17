@@ -9,9 +9,12 @@
 #include "mapfs/kzn_06_shape.h"
 #include "mapfs/kzn_06_hit.h"
 
-// map variables
 enum {
     MV_GlowIntensity        = MapVar(0),
 };
 
 #define NAMESPACE kzn_06
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupLavaPuzzle);

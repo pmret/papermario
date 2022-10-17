@@ -268,7 +268,7 @@ void basic_ai_wander_init(Evt* script, MobileAISettings* npcAISettings, EnemyDet
     // chose a random direction and move time
     npc->duration = (npcAISettings->moveTime / 2) + rand_int((npcAISettings->moveTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(60) - 30.0f);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_WALK];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
     script->functionTemp[1] = 0;
 
     if (enemy->territory->wander.moveSpeedOverride < 0) {
@@ -378,7 +378,7 @@ void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
@@ -429,7 +429,7 @@ void basic_ai_found_player_jump_init(Evt* script, MobileAISettings* npcAISetting
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     ai_enemy_play_sound(npc, SOUND_3E1, 0);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_JUMP];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_JUMP];
     npc->jumpVelocity = 10.0f;
     npc->jumpScale = 2.5f;
     npc->moveToPos.y = npc->pos.y;
@@ -488,7 +488,7 @@ void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDete
         npc->duration = 0;
     }
 
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_CHASE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
@@ -501,7 +501,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
 
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 20;
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
         return;
@@ -514,7 +514,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
             z = npc->pos.z;
             if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
                 fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
-                npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+                npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
                 npc->duration = 15;
                 script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
                 return;
@@ -569,7 +569,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
 
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

@@ -142,6 +142,17 @@ typedef enum ShapeTypes {
     SHAPE_TYPE_SPECIAL_GROUP = 10,
 } ShapeTypes;
 
+typedef struct ShapeFile {
+    /* 0x00 */ ModelNode* root;
+    /* 0x04 */ Vtx_t* vertexTable;
+    /* 0x08 */ char** modelNames;
+    /* 0x0C */ char** colliderNames;
+    /* 0x10 */ char** zoneNames;
+    /* 0x14 */ unsigned char pad_14[0xC];
+    // end header
+    /* 0x20 */ u8 data[0];
+} ShapeFile; // size = variable
+
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;

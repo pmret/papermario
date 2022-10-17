@@ -32,3 +32,9 @@ enum {
 };
 
 #define NAMESPACE arn_03
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(BeforeNPCs);
+extern NpcGroupList N(AfterNPCs);

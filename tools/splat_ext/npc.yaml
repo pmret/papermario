@@ -10831,7 +10831,7 @@ Coin:
     - Rotate
 ParadePeach:
   frames:
-    - ShadeNeutral
+    - Neutral
     - RaiseArms1
     - RaiseArms2
     - Talk1

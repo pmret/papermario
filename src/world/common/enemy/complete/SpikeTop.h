@@ -1,5 +1,6 @@
 #include "common.h"
 #include "sprite/npc/BuzzyBeetle.h"
+#include "sprite/npc/SpikeTop.h"
 
 #define SPIKE_TOP_DROPS \
 { \

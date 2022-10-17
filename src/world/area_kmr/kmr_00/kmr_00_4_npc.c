@@ -1,28 +1,7 @@
 #include "kmr_00.h"
 
-NpcSettings N(NpcSettings_StarSpirit) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Goombaria) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
+#include "world/common/npc/Goombaria_Stationary.inc.c"
 
 // initial delay to start bobbing, ensuring star spirits motions are desync'd from one another
 s16 N(StarSpiritBobDelays)[] = {
@@ -129,37 +108,16 @@ EvtScript N(EVS_NpcInit_Goombaria) = {
 
 StaticNpc N(NpcData_Goombaria) = {
     .id = NPC_Goombaria,
-    .settings = &N(NpcSettings_Goombaria),
+    .settings = &N(NpcSettings_Goombaria_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Goombaria),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Goombaria_Idle,
-        .walk   = ANIM_Goombaria_Walk,
-        .run    = ANIM_Goombaria_Run,
-        .chase  = ANIM_Goombaria_Run,
-        .anim_4 = ANIM_Goombaria_Idle,
-        .anim_5 = ANIM_Goombaria_Idle,
-        .death  = ANIM_Goombaria_Still,
-        .hit    = ANIM_Goombaria_Still,
-        .anim_8 = ANIM_Goombaria_Run,
-        .anim_9 = ANIM_Goombaria_Run,
-        .anim_A = ANIM_Goombaria_Run,
-        .anim_B = ANIM_Goombaria_Run,
-        .anim_C = ANIM_Goombaria_Run,
-        .anim_D = ANIM_Goombaria_Run,
-        .anim_E = ANIM_Goombaria_Run,
-        .anim_F = ANIM_Goombaria_Run,
-    },
+    .drops = GOOMBARIA_DROPS,
+    .animations = GOOMBARIA_ANIMS,
 };
 
-StaticNpc N(NpcData_Eldstar)[] = {
+StaticNpc N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Eldstar,
         .settings = &N(NpcSettings_StarSpirit),
@@ -167,29 +125,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldEldstar_Idle,
-            .walk   = ANIM_WorldEldstar_Idle,
-            .run    = ANIM_WorldEldstar_Idle,
-            .chase  = ANIM_WorldEldstar_Idle,
-            .anim_4 = ANIM_WorldEldstar_Idle,
-            .anim_5 = ANIM_WorldEldstar_Idle,
-            .death  = ANIM_WorldEldstar_Idle,
-            .hit    = ANIM_WorldEldstar_Idle,
-            .anim_8 = ANIM_WorldEldstar_Still,
-            .anim_9 = ANIM_WorldEldstar_Idle,
-            .anim_A = ANIM_WorldEldstar_Idle,
-            .anim_B = ANIM_WorldEldstar_Idle,
-            .anim_C = ANIM_WorldEldstar_Idle,
-            .anim_D = ANIM_WorldEldstar_Idle,
-            .anim_E = ANIM_WorldEldstar_Idle,
-            .anim_F = ANIM_WorldEldstar_Idle,
-        },
+        .drops = ELDSTAR_DROPS,
+        .animations = ELDSTAR_ANIMS,
     },
     {
         .id = NPC_Mamar,
@@ -198,29 +135,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMamar_Idle,
-            .walk   = ANIM_WorldMamar_Idle,
-            .run    = ANIM_WorldMamar_Idle,
-            .chase  = ANIM_WorldMamar_Idle,
-            .anim_4 = ANIM_WorldMamar_Idle,
-            .anim_5 = ANIM_WorldMamar_Idle,
-            .death  = ANIM_WorldMamar_Idle,
-            .hit    = ANIM_WorldMamar_Idle,
-            .anim_8 = ANIM_WorldMamar_Still,
-            .anim_9 = ANIM_WorldMamar_Idle,
-            .anim_A = ANIM_WorldMamar_Idle,
-            .anim_B = ANIM_WorldMamar_Idle,
-            .anim_C = ANIM_WorldMamar_Idle,
-            .anim_D = ANIM_WorldMamar_Idle,
-            .anim_E = ANIM_WorldMamar_Idle,
-            .anim_F = ANIM_WorldMamar_Idle,
-        },
+        .drops = MAMAR_DROPS,
+        .animations = MAMAR_ANIMS,
     },
     {
         .id = NPC_Skolar,
@@ -229,29 +145,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldSkolar_Idle,
-            .walk   = ANIM_WorldSkolar_Idle,
-            .run    = ANIM_WorldSkolar_Idle,
-            .chase  = ANIM_WorldSkolar_Idle,
-            .anim_4 = ANIM_WorldSkolar_Idle,
-            .anim_5 = ANIM_WorldSkolar_Idle,
-            .death  = ANIM_WorldSkolar_Idle,
-            .hit    = ANIM_WorldSkolar_Idle,
-            .anim_8 = ANIM_WorldSkolar_Still,
-            .anim_9 = ANIM_WorldSkolar_Idle,
-            .anim_A = ANIM_WorldSkolar_Idle,
-            .anim_B = ANIM_WorldSkolar_Idle,
-            .anim_C = ANIM_WorldSkolar_Idle,
-            .anim_D = ANIM_WorldSkolar_Idle,
-            .anim_E = ANIM_WorldSkolar_Idle,
-            .anim_F = ANIM_WorldSkolar_Idle,
-        },
+        .drops = SKOLAR_DROPS,
+        .animations = SKOLAR_ANIMS,
     },
     {
         .id = NPC_Muskular,
@@ -260,29 +155,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMuskular_Idle,
-            .walk   = ANIM_WorldMuskular_Idle,
-            .run    = ANIM_WorldMuskular_Idle,
-            .chase  = ANIM_WorldMuskular_Idle,
-            .anim_4 = ANIM_WorldMuskular_Idle,
-            .anim_5 = ANIM_WorldMuskular_Idle,
-            .death  = ANIM_WorldMuskular_Idle,
-            .hit    = ANIM_WorldMuskular_Idle,
-            .anim_8 = ANIM_WorldMuskular_Still,
-            .anim_9 = ANIM_WorldMuskular_Idle,
-            .anim_A = ANIM_WorldMuskular_Idle,
-            .anim_B = ANIM_WorldMuskular_Idle,
-            .anim_C = ANIM_WorldMuskular_Idle,
-            .anim_D = ANIM_WorldMuskular_Idle,
-            .anim_E = ANIM_WorldMuskular_Idle,
-            .anim_F = ANIM_WorldMuskular_Idle,
-        },
+        .drops = MUSKULAR_DROPS,
+        .animations = MUSKULAR_ANIMS,
     },
     {
         .id = NPC_Misstar,
@@ -291,29 +165,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMisstar_Idle,
-            .walk   = ANIM_WorldMisstar_Idle,
-            .run    = ANIM_WorldMisstar_Idle,
-            .chase  = ANIM_WorldMisstar_Idle,
-            .anim_4 = ANIM_WorldMisstar_Idle,
-            .anim_5 = ANIM_WorldMisstar_Idle,
-            .death  = ANIM_WorldMisstar_Idle,
-            .hit    = ANIM_WorldMisstar_Idle,
-            .anim_8 = ANIM_WorldMisstar_Still,
-            .anim_9 = ANIM_WorldMisstar_Idle,
-            .anim_A = ANIM_WorldMisstar_Idle,
-            .anim_B = ANIM_WorldMisstar_Idle,
-            .anim_C = ANIM_WorldMisstar_Idle,
-            .anim_D = ANIM_WorldMisstar_Idle,
-            .anim_E = ANIM_WorldMisstar_Idle,
-            .anim_F = ANIM_WorldMisstar_Idle,
-        },
+        .drops = MISSTAR_DROPS,
+        .animations = MISSTAR_ANIMS,
     },
     {
         .id = NPC_Klevar,
@@ -322,29 +175,8 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKlevar_Idle,
-            .walk   = ANIM_WorldKlevar_Idle,
-            .run    = ANIM_WorldKlevar_Idle,
-            .chase  = ANIM_WorldKlevar_Idle,
-            .anim_4 = ANIM_WorldKlevar_Idle,
-            .anim_5 = ANIM_WorldKlevar_Idle,
-            .death  = ANIM_WorldKlevar_Idle,
-            .hit    = ANIM_WorldKlevar_Idle,
-            .anim_8 = ANIM_WorldKlevar_Still,
-            .anim_9 = ANIM_WorldKlevar_Idle,
-            .anim_A = ANIM_WorldKlevar_Idle,
-            .anim_B = ANIM_WorldKlevar_Idle,
-            .anim_C = ANIM_WorldKlevar_Idle,
-            .anim_D = ANIM_WorldKlevar_Idle,
-            .anim_E = ANIM_WorldKlevar_Idle,
-            .anim_F = ANIM_WorldKlevar_Idle,
-        },
+        .drops = KLEVAR_DROPS,
+        .animations = KLEVAR_ANIMS,
     },
     {
         .id = NPC_Kalmar,
@@ -353,34 +185,13 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 0,
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKalmar_Idle,
-            .walk   = ANIM_WorldKalmar_Idle,
-            .run    = ANIM_WorldKalmar_Idle,
-            .chase  = ANIM_WorldKalmar_Idle,
-            .anim_4 = ANIM_WorldKalmar_Idle,
-            .anim_5 = ANIM_WorldKalmar_Idle,
-            .death  = ANIM_WorldKalmar_Idle,
-            .hit    = ANIM_WorldKalmar_Idle,
-            .anim_8 = ANIM_WorldKalmar_Still,
-            .anim_9 = ANIM_WorldKalmar_Idle,
-            .anim_A = ANIM_WorldKalmar_Idle,
-            .anim_B = ANIM_WorldKalmar_Idle,
-            .anim_C = ANIM_WorldKalmar_Idle,
-            .anim_D = ANIM_WorldKalmar_Idle,
-            .anim_E = ANIM_WorldKalmar_Idle,
-            .anim_F = ANIM_WorldKalmar_Idle,
-        },
+        .drops = KALMAR_DROPS,
+        .animations = KALMAR_ANIMS,
     },
 };
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Goombaria)),
-    NPC_GROUP(N(NpcData_Eldstar)),
+    NPC_GROUP(N(NpcData_StarSpirits)),
     {}
 };

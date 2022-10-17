@@ -16,3 +16,7 @@ enum {
 };
 
 #define NAMESPACE arn_11
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern NpcGroupList N(DefaultNPCs);

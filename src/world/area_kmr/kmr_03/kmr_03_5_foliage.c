@@ -43,7 +43,7 @@ FoliageVectorList N(Tree1_Effects) = {
     }
 };
 
-EvtScript N(Tree1_CallbackScript) = {
+EvtScript N(EVS_Tree1_CallbackScript) = {
     EVT_IF_EQ(GF_KMR03_Tree1_Mushroom, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -66,7 +66,7 @@ ShakeTreeConfig N(ShakeTree_Tree1) = {
     .leaves = &N(Tree1_LeafModels),
     .trunk = &N(Tree1_TrunkModels),
     .vectors = &N(Tree1_Effects),
-    .callback = &N(Tree1_CallbackScript),
+    .callback = &N(EVS_Tree1_CallbackScript),
 };
 
 BombTrigger N(BombPos_Tree1) = {

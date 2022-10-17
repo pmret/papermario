@@ -1078,7 +1078,7 @@ StaticNpc N(npcGroup_80245054)[] = {
             ANIM_Bubulb_Pink_Idle,
             ANIM_Bubulb_Pink_Idle,
         },
-        .tattle = MSG_NpcTattle_FLO_BulbulbA,
+        .tattle = MSG_NpcTattle_FLO_BubulbA,
     },
     {
         .id = NPC_BUBULB2,
@@ -1111,7 +1111,7 @@ StaticNpc N(npcGroup_80245054)[] = {
             ANIM_Bubulb_Purple_Idle,
             ANIM_Bubulb_Purple_Idle,
         },
-        .tattle = MSG_NpcTattle_FLO_BulbulbB,
+        .tattle = MSG_NpcTattle_FLO_BubulbB,
     },
     {
         .id = NPC_BUBULB3,
@@ -1144,7 +1144,7 @@ StaticNpc N(npcGroup_80245054)[] = {
             ANIM_Bubulb_Green_Idle,
             ANIM_Bubulb_Green_Idle,
         },
-        .tattle = MSG_NpcTattle_FLO_BulbulbC,
+        .tattle = MSG_NpcTattle_FLO_BubulbC,
     },
     {
         .id = NPC_BUBULB4,
@@ -1177,7 +1177,7 @@ StaticNpc N(npcGroup_80245054)[] = {
             ANIM_Bubulb_Yellow_Idle,
             ANIM_Bubulb_Yellow_Idle,
         },
-        .tattle = MSG_NpcTattle_FLO_BulbulbD,
+        .tattle = MSG_NpcTattle_FLO_BubulbD,
     },
 };
 
