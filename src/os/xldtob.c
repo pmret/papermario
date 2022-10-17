@@ -153,7 +153,7 @@ void _Ldtob(_Pft* px, char code) {
 }
 
 s16 _Ldunscale(s16* pex, _Pft* px) {
-    u16* ps = px;
+    u16* ps = (u16*) px;
     s16 xchar = (ps[_D0] & _DMASK) >> _DOFF;
 
 

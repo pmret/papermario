@@ -26,6 +26,9 @@ D_F0000008 = 0xF0000008;
 D_F5000007 = 0xF5000007;
 D_FA000028 = 0xFA000028;
 D_FD100008 = 0xFD100008;
+__osExceptionPreamble = 0x8006A9F0;
+D_80095910 = 0x80095910;
+D_80095938 = 0x80095938;
 
 // Obfuscation symbols
 obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
@@ -189,8 +192,8 @@ osRomBase = 0x80000308;
 osMemSize = 0x80000318;
 gBackgroundImage = 0x80200000;
 D_80200000 = 0x80200000;
-D_8000030C = 0x8000030C;
-D_8000031C = 0x8000031C;
+osResetType = 0x8000030C;
+osAppNMIBuffer = 0x8000031C;
 D_800A08C0 = 0x800A08C0;
 
 // effect tlb stuff
