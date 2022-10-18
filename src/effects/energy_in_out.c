@@ -27,11 +27,143 @@ u8 D_E00D6E84[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+void energy_in_out_init(EffectInstance* effect);
+void energy_in_out_update(EffectInstance* effect);
+void energy_in_out_render(EffectInstance* effect);
 void energy_in_out_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/energy_in_out", energy_in_out_main);
+EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+    EnergyInOutFXData* part;
+    EnergyInOutFXData* firstPart;
+    s32 numParts = D_E00D6E74[arg0];
+    f32 randAngle;
+    s32 i;
 
-void energy_in_out_init(void) {
+    bp.init = energy_in_out_init;
+    bp.update = energy_in_out_update;
+    bp.renderWorld = energy_in_out_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_ENERGY_IN_OUT;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->numParts = numParts;
+    firstPart = part = effect->data.energyInOut = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.energyInOut != NULL);
+
+    part->unk_00 = arg0;
+    part->unk_14 = 0;
+    if (arg5 <= 0) {
+        part->unk_10 = 1000;
+    } else {
+        part->unk_10 = arg5;
+    }
+    part->unk_24 = 0;
+    part->pos.x = arg1;
+    part->pos.y = arg2;
+    part->pos.z = arg3;
+    part->scale = arg4;
+    part->unk_18 = 255;
+    part->unk_1C = 255;
+    part->unk_20 = 255;
+    part->unk_28 = 255;
+    part->unk_2C = 245;
+    part->unk_30 = 0;
+    part->unk_44 = 1.0f;
+    part->unk_38 = D_E00D6E84[arg0];
+
+    randAngle = shim_rand_int(360);
+
+    part++;
+    for (i = 1; i < effect->numParts; i++, part++) {
+        part->unk_00 = arg0 % 3;
+
+        switch (arg0) {
+            case 0:
+            case 1:
+            case 2:
+                part->unk_38 = -(shim_rand_int(10) * 0.2 + 0.2);
+                part->unk_10 = 20;
+                part->unk_40 = 0;
+                part->scale = 1.0 - (i % 3) * 0.1;
+                break;
+            case 3:
+            case 5:
+                part->unk_38 = shim_rand_int(10) * 0.2 + 0.2;
+                part->unk_10 = 20;
+                part->unk_40 = 0;
+                part->scale = 1.0 - (i % 3) * 0.1;
+                break;
+            case 6:
+                part->unk_38 = -(shim_rand_int(10) + 4);
+                part->unk_10 = 10;
+                part->unk_40 = 0;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                break;
+            case 7:
+                part->unk_38 = -(shim_rand_int(10) + 4);
+                part->unk_10 = 10;
+                part->unk_40 = 0;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                break;
+            case 8:
+                part->unk_38 = shim_rand_int(10) * 0.2 + 0.6;
+                part->unk_10 = 20;
+                part->unk_40 = -1.0f;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                break;
+            case 9:
+                part->unk_38 = -(shim_rand_int(10) * 0.2 + 0.6);
+                part->unk_10 = 20;
+                part->unk_40 = -2.0f;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                firstPart->unk_18 = 255;
+                firstPart->unk_1C = 245;
+                firstPart->unk_20 = 215;
+                firstPart->unk_28 = 220;
+                firstPart->unk_2C = 60;
+                firstPart->unk_30 = 10;
+                break;
+            case 10:
+                part->unk_38 = shim_rand_int(10) * 0.1 + 2.0;
+                part->unk_10 = 10;
+                part->unk_40 = 0;
+                part->scale = (1.0 - (i % 3) * 0.3) * 0.5;
+                break;
+            case 11:
+                part->unk_38 = shim_rand_int(10) * 0.05 + 0.2;
+                part->unk_40 = -1.0f;
+                part->unk_10 = 30;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                break;
+            case 4:
+            case 12:
+                part->unk_38 = shim_rand_int(10) * 0.2 + 0.6;
+                part->unk_10 = 20;
+                part->unk_40 = -2.0f;
+                part->scale = 1.0 - (i % 3) * 0.3;
+                break;
+        }
+
+        part->unk_14 = -shim_rand_int(part->unk_10);
+
+        if (part->unk_38 < 0.0f) {
+            part->pos.x = (part->unk_10 - part->unk_14) * (-part->unk_38);
+        } else {
+            part->pos.x = (-part->unk_14) * part->unk_38;
+        }
+        part->pos.y = 0;
+        part->pos.z = 0;
+
+        part->unk_3C = (i - 1) * 360 / (numParts - 1) + randAngle;
+    }
+
+    return effect;
+}
+
+void energy_in_out_init(EffectInstance* effect) {
 }
 
 void energy_in_out_update(EffectInstance* effect) {

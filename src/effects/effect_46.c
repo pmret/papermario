@@ -4,11 +4,126 @@
 extern Gfx D_090003A0_38ED30[];
 extern Gfx D_09000420_38EDB0[];
 
+s32 D_E008CAF0[] = {
+    0xFEACACFE, 0xACD5FEB4, 0x9AD5B4FE, 0xB4B4FEB4, 0xDDFEB4FE,
+    0xFEB4FED5, 0xB4FEB4D5, 0xFEB4FEFE, 0xB4FED5AC
+};
+
+u8 D_E008CB14[] = { 255, 255,  64 };
+u8 D_E008CB18[] = { 255,  64,  64 };
+u8 D_E008CB1C[] = { 255,  64, 255 };
+
+void fx_46_init(EffectInstance* effect);
+void fx_46_update(EffectInstance* effect);
+void fx_46_render(EffectInstance* effect);
 void fx_46_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/effect_46", fx_46_main);
+EffectInstance* fx_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+    Effect46FXData* part;
+    s32 numParts = 5;
+    s32 index;
+    s32 i;
 
-void fx_46_init(void) {
+    bp.init = fx_46_init;
+    bp.update = fx_46_update;
+    bp.renderWorld = fx_46_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_46;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->numParts = numParts;
+    part = effect->data.unk_46 = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.unk_46 != NULL);
+
+    part->unk_00 = arg0;
+    part->unk_04 = arg1;
+    part->unk_14 = arg2 * 1.2;
+    part->unk_18 = arg2 * 1.2;
+    part->unk_20 = arg3;
+    part->unk_24 = arg3;
+    part->unk_1C = 0;
+    part->unk_28 = 0;
+
+    part++;
+    for (i = 1; i < numParts; i++, part++) {
+        switch (arg0) {
+            case 0:
+            case 2:
+            case 4:
+            case 6:
+                part->unk_08 = 0.0f;
+                part->unk_0C = i * 7 + 4;
+                part->unk_10 = 0.0f;
+                part->unk_38 = 0.0f;
+                part->unk_3C = 60.0f;
+                part->unk_40 = 0.0f;
+                part->unk_2C = 0.0f;
+                part->unk_30 = i * 120;
+                part->unk_34 = 0.0f;
+                part->unk_14 = 1.0f;
+                break;
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+                part->unk_08 = 0.0f;
+                part->unk_0C = i * 7 + 4;
+                part->unk_10 = 0.0f;
+                part->unk_38 = 0.0f;
+                part->unk_3C = -60.0f;
+                part->unk_40 = 0.0f;
+                part->unk_2C = 0.0f;
+                part->unk_30 = i * 120;
+                part->unk_34 = 0.0f;
+                part->unk_14 = 1.0f;
+                part->unk_46 = 255;
+                part->unk_45 = 255;
+                part->unk_44 = 255;
+                break;
+            default:
+                part->unk_08 = 0;
+                part->unk_0C = arg1->colliderHeight * 0.5;
+                part->unk_10 = 0;
+                part->unk_38 = func_E0200000(1) * 8 - 4;
+                part->unk_3C = 0;
+                part->unk_40 = func_E0200000(1) * 8 - 4;
+                part->unk_2C = i * 25;
+                part->unk_30 = (i - 1) * 360 / (numParts - 1);
+                part->unk_34 = 360 - i * 38;
+                part->unk_14 = (f32) (i - 1) / (numParts - 1) * 0.5 + 0.5;
+                break;
+        }
+
+        switch (arg0) {
+            case 2:
+            case 3:
+                index = 1;
+                break;
+            case 4:
+            case 5:
+                index = 2;
+                break;
+            case 6:
+            case 7:
+                index = (i & 1) + 1;
+                break;
+            default:
+                index = 0;
+                break;
+        }
+
+        part->unk_44 = D_E008CB14[index];
+        part->unk_45 = D_E008CB18[index];
+        part->unk_46 = D_E008CB1C[index];
+    }
+
+    return effect;
+}
+
+void fx_46_init(EffectInstance* effect) {
 }
 
 void fx_46_update(EffectInstance* effect) {
@@ -34,7 +149,7 @@ void fx_46_update(EffectInstance* effect) {
         }
         part->unk_14 = (part->unk_18 * unk_24) / part->unk_20;
         if (unk_24 < 10) {
-            part->unk_1C = unk_24 * 0x19;
+            part->unk_1C = unk_24 * 25;
         }
     } else {
         if (unk_24 >= 6) {
@@ -46,9 +161,9 @@ void fx_46_update(EffectInstance* effect) {
         }
     }
 
-    part->unk_08 = part->unk_04[10];
-    part->unk_0C = part->unk_04[11];
-    part->unk_10 = part->unk_04[12];
+    part->unk_08 = part->unk_04->position.x;
+    part->unk_0C = part->unk_04->position.y;
+    part->unk_10 = part->unk_04->position.z;
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
@@ -107,17 +222,17 @@ void fx_46_appendGfx(void* effect) {
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        f32 (*matrix)[4] = sp60; // required to match
-
         shim_guPositionF(sp20, part->unk_2C, 0.0f, part->unk_34, unk_14 * part->unk_14, part->unk_08, part->unk_0C, part->unk_10);
-        shim_guRotateF(matrix, part->unk_30, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(matrix, sp20, sp20);
+        shim_guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+
         if (unk_00 < 8) {
-            shim_guTranslateF(matrix, 3.0f - (unk_14 - unk_18) * 3.0f / unk_18, 0.0f, 0.0f);
+            shim_guTranslateF(sp60, 3.0f - (unk_14 - unk_18) * 3.0f / unk_18, 0.0f, 0.0f);
+            shim_guMtxCatF(sp60, sp20, sp20);
         } else {
-            shim_guTranslateF(matrix, 2.0f, 0.0f, 0.0f);
+            shim_guTranslateF(sp60, 2.0f, 0.0f, 0.0f);
+            shim_guMtxCatF(sp60, sp20, sp20);
         }
-        shim_guMtxCatF(matrix, sp20, sp20);
 
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_44, part->unk_45, part->unk_46, unk_1C);
 

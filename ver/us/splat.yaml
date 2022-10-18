@@ -2881,7 +2881,7 @@ segments:
     vram: 0xE0022000
     subsegments:
     - [0x337240, c, sparkles]
-    - [0x337F10, data]
+    - [0x337F10]
   - name: effect_gfx_sparkles
     dir: effects/gfx
     type: code
@@ -4050,7 +4050,7 @@ segments:
     vram: 0xE0086000
     subsegments:
     - [0x389850, c, firework]
-    - [0x38A2F0, data]
+    - [0x38A2F0]
   - name: effect_gfx_firework
     dir: effects/gfx
     type: code
@@ -4082,7 +4082,7 @@ segments:
     vram: 0xE0088000
     subsegments:
     - [0x38ADF0, c, confetti]
-    - [0x38BAB0, data]
+    - [0x38BAB0]
   - name: effect_gfx_confetti
     dir: effects/gfx
     type: code
@@ -4120,7 +4120,7 @@ segments:
     vram: 0xE008C000
     subsegments:
     - [0x38DE00, c, effect_46]
-    - [0x38E8F0, data]
+    - [0x38E8F0]
   - name: effect_gfx_effect_46
     dir: effects/gfx
     type: code
@@ -4436,7 +4436,29 @@ segments:
     vram: 0xE00A6000
     subsegments:
     - [0x3A5550, c, merlin_house_stars]
-  - [0x3A5BE0, bin] # merlin_house_stars gfx
+  - name: effect_gfx_merlin_house_stars
+    dir: effects/gfx
+    type: code
+    start: 0x3A5BE0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A5BE0, c, merlin_house_stars]
+    - start: 0x3A5BE0
+      type: .data
+      name: merlin_house_stars
+      subsegments:
+      - [0x3A5BE0, i4, D_09000000_3A5BE0, 64, 64]
+      - [0x3A63E0, i4, D_09000800_3A63E0, 64, 64]
+      - [0x3A6BE0, gfx, D_09001000_3A6BE0]
+      - [0x3A6CD8, vtx, D_090010F8_3A6CD8]
+      - [0x3A6E68, vtx, D_09001288_3A6E68]
+      - [0x3A6E88, vtx, D_090012A8_3A6E88]
+      - [0x3A6E98, vtx, D_090012B8_3A6E98]
+      - [0x3A6EB8, vtx, D_090012D8_3A6EB8]
+      - [0x3A6EC8, vtx, D_090012E8_3A6EC8]
+      - [0x3A6FF8, gfx, D_09001418_3A6FF8]
+      - [0x3A70E8]
   - name: effect_quizmo_audience
     dir: effects
     type: code
@@ -4948,7 +4970,7 @@ segments:
     vram: 0xE00E0000
     subsegments:
     - [0x3DB460, c, embers]
-    - [0x3DBEA0, data]
+    - [0x3DBEA0]
   - name: effect_gfx_embers
     dir: effects/gfx
     type: code
@@ -5544,7 +5566,7 @@ segments:
     vram: 0xE0124000
     subsegments:
     - [0x412730, c, pink_sparkles]
-    - [0x412FD0, data]
+    - [0x412FD0]
   - name: effect_star_outline
     dir: effects
     type: code
