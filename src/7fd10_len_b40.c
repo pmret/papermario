@@ -2,30 +2,28 @@
 #include "hud_element.h"
 #include "world/partners.h"
 #include "macros.h"
-
-s16 D_8010C9C0;
-char D_8010C9C4[0x4];
-PopupMenu D_8010C9C8;
-s16 D_8010CCF8;
-s16 D_8010CCFA;
-s16 D_8010CCFC;
-s16 D_8010CCFE;
-s16 D_8010CD00;
-char D_8010CD04[0xC];
-s16 D_8010CD10;
-s16 D_8010CD12;
-char D_8010CD14[0xA];
-s32 D_8010CD20;
-char D_8010CD24[0xC];
-
 #include "common.h"
 #include "sprite.h"
 #include "pause/pause_common.h"
 #include "world/partners.h"
 
+BSS s16 D_8010C9C0;
+BSS char D_8010C9C4[0x4];
+BSS PopupMenu D_8010C9C8;
+BSS s16 D_8010CCF8;
+BSS s16 D_8010CCFA;
+BSS s16 D_8010CCFC;
+BSS s16 D_8010CCFE;
+BSS s16 D_8010CD00;
+BSS char D_8010CD04[0xC];
+BSS s16 D_8010CD10;
+BSS s16 D_8010CD12;
+BSS char D_8010CD14[0xA];
+BSS s32 D_8010CD20;
+BSS char D_8010CD24[0xC];
+
 extern s32 D_8008EEC0[12];
 extern s32 D_8008EEF0[];
-
 
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -132,7 +130,7 @@ s32 setup_partner_popup(PopupMenu* menu) {
 
     for (i = 1; i < ARRAY_COUNT(D_8008EEC0); i++) {
         s32 partnerID = D_8008EEC0[i];
-        
+
         if (playerData->partners[partnerID].enabled && partnerID != PARTNER_GOOMPA) {
             PartnerPopupProperties* properties = &gPartnerPopupProperties[partnerID];
 
@@ -181,19 +179,23 @@ s32 setup_item_popup(PopupMenu* menu) {
     return optionCount;
 }
 
-// stack issues, yucky goto
-#ifdef NON_MATCHING
 void check_input_open_menus(void) {
     static s16 D_8010C9C0;
 
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerData* playerData = &gPlayerData;
-    PopupMenu* popup = &D_8010C9C8;
+    PartnerActionStatus* partnerActionStatus;
+    PlayerStatus* playerStatus;
+    PlayerData* playerData;
+    PopupMenu* popup;
     s32 flags;
     s32 numEntries;
     s32 pressedButtons;
     s32 currentButtons;
+    s8* partnerActionState;
+
+    partnerActionStatus = &gPartnerActionStatus;
+    playerStatus = &gPlayerStatus;
+    playerData = &gPlayerData;
+    popup = &D_8010C9C8;
 
     if (gGameStatusPtr->disableScripts ||
         (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) ||
@@ -213,6 +215,7 @@ void check_input_open_menus(void) {
         currentButtons = playerStatus->currentButtons;
         pressedButtons = playerStatus->pressedButtons;
     }
+    partnerActionState = &partnerActionStatus->partnerActionState;
 
     if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE) {
         currentButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
@@ -301,7 +304,7 @@ block_17:
             }
             create_popup_menu(popup);
             set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
-            if (partnerActionStatus->partnerActionState == 0) {
+            if (*partnerActionState == 0) {
                 set_action_state(ACTION_STATE_IDLE);
             }
             D_8010CD00++;
@@ -336,7 +339,7 @@ block_17:
                                 break;
                         }
                         D_8010C9C0 = TRUE;
-                        goto block_17;
+                        goto block_17; // TODO required to match
                     }
                 }
 
@@ -346,7 +349,9 @@ block_17:
                             switch_to_partner(popup->userIndex[D_8010CCFC - 1]);
                             break;
                         case 1:
-                            use_consumable(popup->userIndex[D_8010CCFC - 1]);
+                            do {
+                                use_consumable(popup->userIndex[D_8010CCFC - 1]);
+                            } while (0); // todo required to match
                             gOverrideFlags |= GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
                             break;
                     }
@@ -370,9 +375,6 @@ block_17:
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "7fd10_len_b40", check_input_open_menus);
-#endif
 
 void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

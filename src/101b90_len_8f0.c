@@ -1,9 +1,13 @@
 #include "common.h"
 #include "sprite.h"
 #include "nu/nusys.h"
+#include "ld_addrs.h"
 
-// TODO generate this somehow, or prevent it from shifting. must be resolved at compile time
+#ifdef SHIFT
+#define SPRITE_ROM_START _1943000_ROM_START + 0x10
+#else
 #define SPRITE_ROM_START 0x1943000 + 0x10
+#endif
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 

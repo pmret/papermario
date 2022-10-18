@@ -4,6 +4,7 @@ import argparse
 from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
+import re
 from typing import Optional
 
 import os
@@ -74,8 +75,16 @@ def parse_map() -> OrderedDict[str, Symbol]:
     syms: OrderedDict[str, Symbol] = OrderedDict()
     prev_sym = ""
     prev_line = ""
+    cur_sect = ""
+    sect_re = re.compile(r"\(\..*\)")
     with open(map_file_path) as f:
         for line in f:
+            sect = sect_re.search(line)
+            if sect:
+                sect_str = sect.group(0)
+                if sect_str in ["(.text)", "(.data)", "(.rodata)", "(.bss)"]:
+                    cur_sect = sect_str
+
             if "load address" in line:
                 if "noload" in line or "noload" in prev_line:
                     ram_offset = None
@@ -101,6 +110,8 @@ def parse_map() -> OrderedDict[str, Symbol]:
             elif "/" in fn:
                 cur_file = fn
             else:
+                if cur_sect != "(.text)":
+                    continue
                 syms[fn] = Symbol(
                     name=fn,
                     rom_start=rom,
