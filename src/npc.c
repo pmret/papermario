@@ -2,6 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 #include "sprite.h"
+#include "world/partners.h"
 
 u8 D_80077BF0[] = {
     1, 2,
@@ -2069,8 +2070,6 @@ void func_8003D788(Npc* npc, s32 arg1) {
     }
 }
 
-// floats suck
-#ifdef NON_MATCHING
 void func_8003DA38(Npc* npc, s32 arg1) {
     f32 theta;
     f32 sinTheta;
@@ -2078,7 +2077,11 @@ void func_8003DA38(Npc* npc, s32 arg1) {
     f32 x, y, z;
 
     if (arg1 == 2 && D_80077C1E == 5) {
-        fx_flower_splash(npc->pos.x, npc->pos.y + 14.0f, npc->pos.z, D_80077C18);
+        x = npc->pos.x;
+        y = npc->pos.y + + 14.0f;
+        z = npc->pos.z;
+
+        fx_flower_splash(x, y, z, D_80077C18);
         D_80077C18 = clamp_angle(D_80077C18 + 35.0f);
         D_80077C1E = 0;
         return;
@@ -2103,9 +2106,6 @@ void func_8003DA38(Npc* npc, s32 arg1) {
         D_80077C20 = D_80077C20 == 0;
     }
 }
-#else
-INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
-#endif
 
 // floats suqqz
 #ifdef NON_EQUIVALENT
