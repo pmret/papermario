@@ -1772,8 +1772,8 @@ void entity_reset_collision(Entity* entity) {
     entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
 }
 
-#ifdef NON_MATCHING
-#define AREA_SPECIFIC_ENTITY_VRAM &entity_default_VRAM
+#ifdef SHIFT
+#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
 #endif

@@ -14,10 +14,6 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     Effect3DFXData* part;
-    f32 temp_f22 = arg4;
-    f32 temp_f24 = arg5;
-    f32 temp_f26 = arg6;
-    s32 numParts = arg7;
     f32 temp_f12;
     f32 temp_f28;
     f32 temp_f30;
@@ -25,29 +21,29 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     Matrix4f sp30;
     s32 i;
 
-    if (numParts != 0) {
-        numParts++;
+    if (arg7 != 0) {
+        arg7++;
 
-        temp_f12 = SQ(temp_f22) + SQ(temp_f24) + SQ(temp_f26);
+        temp_f12 = SQ(arg4) + SQ(arg5) + SQ(arg6);
         if (temp_f12 != 0.0f) {
             temp_f12 = -1.0f / shim_sqrtf(temp_f12);
 
-            temp_f22 *= temp_f12;
-            temp_f24 *= temp_f12;
-            temp_f26 *= temp_f12;
+            arg4 *= temp_f12;
+            arg5 *= temp_f12;
+            arg6 *= temp_f12;
 
-            if (temp_f22 != 0.0f) {
+            if (arg4 != 0.0f) {
                 sp70 = 1.0f;
-                temp_f30 = -temp_f24 / temp_f22;
+                temp_f30 = -arg5 / arg4;
                 temp_f28 = 0.0f;
-            } else if (temp_f24 != 0.0f) {
-                sp70 = -temp_f22 / temp_f24;
+            } else if (arg5 != 0.0f) {
+                sp70 = -arg4 / arg5;
                 temp_f30 = 1.0f;
                 temp_f28 = 0.0f;
             } else {
                 sp70 = 0.0f;
                 temp_f30 = 1.0f;
-                temp_f28 = -temp_f22 / temp_f26;
+                temp_f28 = -arg4 / arg6;
             }
 
             temp_f12 = SQ(temp_f30) + SQ(sp70) + SQ(temp_f28);
@@ -61,9 +57,9 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                 temp_f30 *=  8.0f;
                 sp70 *= 8.0f;
                 temp_f28 *= 8.0f;
-                temp_f22 *= 8.0f;
-                temp_f24 *= 8.0f;
-                temp_f26 *= 8.0f;
+                arg4 *= 8.0f;
+                arg5 *= 8.0f;
+                arg6 *= 8.0f;
 
                 bpPtr->unk_00 = 0;
                 bpPtr->init = fx_3D_init;
@@ -73,8 +69,8 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                 bpPtr->effectID = EFFECT_3D;
 
                 effect = shim_create_effect_instance(bpPtr);
-                effect->numParts = numParts;
-                part = effect->data.unk_3D = shim_general_heap_malloc(numParts * sizeof(*part));
+                effect->numParts = arg7;
+                part = effect->data.unk_3D = shim_general_heap_malloc(arg7 * sizeof(*part));
                 ASSERT(effect->data.unk_3D != NULL);
 
                 part->unk_04 = 0;
@@ -86,17 +82,17 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                 part->unk_60 = 0;
 
                 part++;
-                for (i = 1; i < numParts; i++, part++) {
+                for (i = 1; i < arg7; i++, part++) {
                     part->pos.x = 0;
                     part->pos.y = 0;
                     part->pos.z = 0;
-                    shim_guRotateF(sp30, i * 72, temp_f22, temp_f24, temp_f26);
-                    part->unk_14 = part->unk_20 = 2.0f * temp_f22;
-                    part->unk_18 = part->unk_24 = 2.0f * temp_f24;
-                    part->unk_1C = part->unk_28 = 2.0f * temp_f26;
-                    part->unk_38 = -temp_f22 * 0.05 * 4.0;
-                    part->unk_3C = -temp_f24 * 0.05 * 4.0;
-                    part->unk_40 = -temp_f26 * 0.05 * 4.0;
+                    shim_guRotateF(sp30, i * 72, arg4, arg5, arg6);
+                    part->unk_14 = part->unk_20 = 2.0f * arg4;
+                    part->unk_18 = part->unk_24 = 2.0f * arg5;
+                    part->unk_1C = part->unk_28 = 2.0f * arg6;
+                    part->unk_38 = -arg4 * 0.05 * 4.0;
+                    part->unk_3C = -arg5 * 0.05 * 4.0;
+                    part->unk_40 = -arg6 * 0.05 * 4.0;
                     part->unk_2C = (sp30[0][0] * temp_f30 + sp30[1][0] * sp70 + sp30[2][0] * temp_f28) * 0.1 * 4.0;
                     part->unk_30 = (sp30[0][1] * temp_f30 + sp30[1][1] * sp70 + sp30[2][1] * temp_f28) * 0.1 * 4.0;
                     part->unk_34 = (sp30[0][2] * temp_f30 + sp30[1][2] * sp70 + sp30[2][2] * temp_f28) * 0.1 * 4.0;

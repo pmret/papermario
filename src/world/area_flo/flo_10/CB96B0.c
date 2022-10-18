@@ -2,9 +2,88 @@
 #include "nu/nusys.h"
 #include "model.h"
 
-void N(UnkModelFunc000)(s32, s32, s32, s32);
+void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
+    s32 i;
+    f32 f0;
+    s32 n, m;
+    u16* img;
+    s32 alpha;
 
-INCLUDE_ASM(void, "world/area_flo/flo_10/CB96B0", flo_10_UnkModelFunc000);
+    N(D_80244070_CBD270) += 5;
+
+    if (x1 >= x2 || y1 >= y2) {
+        return;
+    }
+
+    if (x1 < 0) {
+        x1 = 0;
+    }
+    if (y1 < 0) {
+        y1 = 0;
+    }
+    if (x2 < 0) {
+        x2 = 0;
+    }
+    if (y2 < 0) {
+        y2 = 0;
+    }
+
+    if (x1 >= SCREEN_WIDTH) {
+        x1 = SCREEN_WIDTH - 1;
+    }
+    if (y1 >= SCREEN_HEIGHT) {
+        y1 = SCREEN_HEIGHT - 1;
+    }
+    if (x2 >= SCREEN_WIDTH) {
+        x2 = SCREEN_WIDTH - 1;
+    }
+    if (y2 >= SCREEN_HEIGHT) {
+        y2 = SCREEN_HEIGHT - 1;
+    }
+
+    if (x1 == x2 || y1 == y2) {
+        return;
+    }
+
+    x1 = x1 / 4 * 4;
+    x2 = x2 / 4 * 4 + 4;
+
+    n = (y2 - y1) / 6;
+    m = (y2 - y1) % 6;
+    img = nuGfxCfb_ptr;
+
+    for (i = 0; i < n; i++) {
+        alpha = (y1 - 6 * i - 6) * 2;
+        if (y1 - 6 * i - 6 >= 0) {
+            if (alpha > 255) {
+                alpha = 255;
+            }
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            SCREEN_WIDTH, 6,
+                            x1, y1 - 6 * i - 6, x2 - 1, y1 - 6 * i - 1, 0,
+                            G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + 6) * 4,
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(D_80244070_CBD270) + i * 30) * 500.0f) - 500);
+        }
+    }
+
+    if (m != 0) {
+        alpha = (y1 - 6 * i - 6) * 2;
+        if (y1 - 6 * i - 6 >= 0) {
+            if (alpha > 255) {
+                alpha = 255;
+            }
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            SCREEN_WIDTH, 6,
+                            x1, y1 - 6 * i - m, x2 - 1, y1 - 6 * i - 1, 0,
+                            G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + m) * 4,
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, -1024);
+        }
+    }
+}
 
 void N(UnkModelFunc001)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];

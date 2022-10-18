@@ -40,8 +40,14 @@ s8 D_E0020D30[80] = {
 
 s8* D_E0020D80[5] = { D_E0020CB8, D_E0020CE0, D_E0020CFC, D_E0020D24, D_E0020D30 };
 
-s8 D_E0020D94[] = {
-    64, 0, 0, 32, 0, 32, 0, 0, 64, 0, 32, 32, 0, 64, 0, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+u8 D_E0020D94[] = {
+    64,  0,  0,
+    32,  0, 32,
+     0,  0, 64,
+     0, 32, 32,
+     0, 64,  0,
+    32, 32,  0,
+     0,  0,  0
 };
 
 void emote_init(EffectInstance* effect);
@@ -195,50 +201,44 @@ void emote_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-// lots of issues
-#ifdef NON_EQUIVALENT
 void emote_appendGfx(void* effect) {
+    EmoteFXData* part = ((EffectInstance*)effect)->data.emote;
+    s32 type = part->unk_00;
+    s32 unk_38;
+    Gfx* dlist;
+    Gfx* dlist2;
+    Mtx* matrix;
+    s32 w;
+    s32 h;
+    s32 uls;
+    s32 ult;
+    s32 idx;
     Matrix4f sp18;
     Matrix4f sp58;
-    EffectInstance* effectTemp = effect;
-    EmoteFXData* part = effectTemp->data;
-    s32 idx;
-    s32 type;
-    Gfx* temp_a3;
-    Gfx* temp_t0;
-    Mtx* blah;
+    s32 i;
 
-    s32 sp9C;
-    s32 spA0;
-    s32 temp_a0_3;
-    s32 phi_t1;
-    s32 phi_s7;
-    s32 phi_fp;
-
-    type = part->unk_00;
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    //phi_s7 = saved_reg_s7;
-    //phi_fp = saved_reg_fp;
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (type != 1) {
         shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
         shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         shim_guMtxCatF(sp58, sp18, sp18);
+
+        matrix = &gDisplayContext->matrixStack[gMatrixListPos];
+
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos++]);
         shim_guScaleF(sp58, 1.0f, 0.8f, 1.0f);
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09002170_336DE0)
+        gSPDisplayList(gMasterGfxPos++, D_09002170_336DE0);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     } else {
         if (part->unk_38 == 0) {
-            s32 i;
-
             for (i = 0; i < 3; i++, part++) {
                 shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
                 shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -248,65 +248,63 @@ void emote_appendGfx(void* effect) {
                 shim_guScaleF(sp58, part->unk_28, part->unk_28, 1.0f);
                 shim_guMtxCatF(sp58, sp18, sp18);
                 shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, 235, 28, 0, 255);
                 gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(gMasterGfxPos++, D_09002578_3371E8);
                 gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
             }
         }
+
+        return;
     }
 
-    temp_a0_3 = part->unk_38;
-    temp_a3 = D_E0020CA4[type];
-    temp_t0 = D_E0020C90[type];
+    gSPMatrix(gMasterGfxPos++, matrix, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    unk_38 = part->unk_38;
+    dlist = D_E0020CA4[type];
+    dlist2 = D_E0020C90[type];
 
     switch (type) {
-        case 2:
-            sp9C = 0x20;
-            phi_t1 = 0x30;
-            phi_s7 = 0x80 - (temp_a0_3 << 5);
-            spA0 = phi_t1;
+        case 0:
+            w = 16;
+            h = 16;
+            uls = 128 - unk_38 * 16;
+            ult = 0;
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 0, 0, 255);
-            phi_fp = 0;
+            break;
+        case 2:
+            w = 32;
+            h = 48;
+            uls = 128 - unk_38 * 32;
+            ult = 0;
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 0, 0, 255);
             break;
         case 3:
-            sp9C = 0x20;
-            spA0 = 0x20;
-            idx = (part->unk_2C * 3) % 7;
+            w = 32;
+            h = 32;
+            uls = 128 - unk_38 * 32;
+            ult = 0;
+            idx = (part->unk_2C * 3) % (ARRAY_COUNT(D_E0020D94) / 3);
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0020D94[idx], D_E0020D94[idx + 1], D_E0020D94[idx + 2], 255);
-            phi_s7 = 0x80 - (temp_a0_3 << 5);
-            phi_fp = 0;
             break;
         case 4:
-            sp9C = 0x20;
-            spA0 = 8;
-            phi_s7 = 0x80 - (temp_a0_3 << 5);
-            phi_fp = 0;
-            break;
-        default:
-            phi_t1 = 0x10;
-            if (type == 0) {
-                sp9C = 0x10;
-                phi_s7 = 0x80 - (temp_a0_3 * 0x10);
-                spA0 = phi_t1;
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 0, 0, 255);
-                phi_fp = 0;
-            }
+            w = 32;
+            h = 8;
+            uls = 128 - unk_38 * 32;
+            ult = 0;
             break;
     }
 
-    if (temp_a3 != NULL) {
-        gSPDisplayList(gMasterGfxPos++, temp_a3);
+    if (dlist != NULL) {
+        gSPDisplayList(gMasterGfxPos++, dlist);
     }
 
-    gDPSetTileSize(gMasterGfxPos++, 2, phi_s7, 0, phi_s7 + sp9C, spA0);
+    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls * 4, ult * 4, (uls + w) * 4, (ult + h) * 4);
 
-    if (temp_t0 != NULL) {
-        gSPDisplayList(gMasterGfxPos++, temp_t0);
+    if (dlist2 != NULL) {
+        gSPDisplayList(gMasterGfxPos++, dlist2);
     }
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
-#else
-INCLUDE_ASM(s32, "effects/emote", emote_appendGfx);
-#endif

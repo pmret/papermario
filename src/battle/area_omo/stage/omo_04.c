@@ -58,6 +58,4 @@ Formation N(fromation_slot_machine) = {
     { .actor = &N(slot_machine_stop), .home = { .vec = &N(slot_machine_pos4) }, .var0 = 3 },
 };
 
-BSS char N(unused)[0x250];
-
 #include "battle/common/actor/slot_machine.inc.c"

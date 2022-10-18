@@ -63,4 +63,26 @@
 			(lrs + scrolls)<<G_TEXTURE_IMAGE_FRAC,			\
 			(lrt + scrollt)<<G_TEXTURE_IMAGE_FRAC)			\
 
+
+#define	gDPScrollTextureBlock_4b(pkt, timg, fmt, width, height,		\
+		pal, cms, cmt, masks, maskt, shifts, shiftt, scrolls, scrollt)		\
+{									\
+	gDPSetTextureImage(pkt, fmt, G_IM_SIZ_16b, 1, timg);		\
+	gDPSetTile(pkt, fmt, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0,	\
+		cmt, maskt, shiftt, cms, masks, shifts);		\
+	gDPLoadSync(pkt);						\
+	gDPLoadBlock(pkt, G_TX_LOADTILE, 0, 0,				\
+		(((width)*(height)+3)>>2)-1,				\
+		CALC_DXT_4b(width)); 					\
+	gDPPipeSync(pkt);						\
+	gDPSetTile(pkt, fmt, G_IM_SIZ_4b, ((((width)>>1)+7)>>3), 0,	\
+		G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,	\
+		shifts);						\
+	gDPSetTileSize(pkt, G_TX_RENDERTILE,\
+        (scrolls) << G_TEXTURE_IMAGE_FRAC,\
+        (scrollt) << G_TEXTURE_IMAGE_FRAC,			\
+		((width)-1 + scrolls) << G_TEXTURE_IMAGE_FRAC,			\
+		((height)-1 + scrollt) << G_TEXTURE_IMAGE_FRAC)			\
+}
+
 #endif
