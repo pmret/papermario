@@ -1140,3 +1140,124 @@ void func_80260948(s32 arg0, s32 posX, s32 posY) {
 void func_80260A20(s64 posX, s32 posY) {
     draw_msg(0x1D00AB, posX + 11, posY + 6, 255, 0xF, 0);
 }
+
+EvtScript D_802842B0 = {
+    EVT_SET(LocalVar(15), 0)
+    EVT_CALL(func_8025DEB0)
+    EVT_IF_EQ(LocalVar(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_LT(LocalVar(0), 2)
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE40)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_ELSE
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE5C)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+        EVT_SET(LocalFlag(0), 1)
+    EVT_END_IF
+    EVT_SWITCH(LocalVar(0))
+        EVT_CASE_GT(99)
+            EVT_SET(LocalVar(15), 3)
+        EVT_CASE_GT(9)
+            EVT_SET(LocalVar(15), 2)
+        EVT_CASE_DEFAULT
+            EVT_SET(LocalVar(15), 1)
+    EVT_END_SWITCH
+    EVT_CALL(func_8025DEC4)
+    EVT_CALL(CreateVirtualEntity, LocalVar(7), LocalVar(10))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(7), -353, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(7), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LocalVar(8), LocalVar(11))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(8), -338, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(8), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LocalVar(9), LocalVar(12))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), -323, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(9), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(func_8025E044)
+    EVT_SWITCH(LocalVar(15))
+        EVT_CASE_EQ(3)
+            EVT_SET(LocalVar(0), -197)
+        EVT_CASE_EQ(2)
+            EVT_SET(LocalVar(0), -204)
+        EVT_CASE_EQ(1)
+            EVT_SET(LocalVar(0), -211)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LocalVar(0), 20)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -78)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -146)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -131)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -116)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_8025E030)
+    EVT_SWITCH(LocalVar(15))
+        EVT_CASE_EQ(3)
+            EVT_SET(LocalVar(0), 3)
+        EVT_CASE_EQ(2)
+            EVT_SET(LocalVar(0), -4)
+        EVT_CASE_EQ(1)
+            EVT_SET(LocalVar(0), -11)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LocalVar(0), 20)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -78)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -154)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -139)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -124)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(DeleteVirtualEntity, LocalVar(6))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(7))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(8))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(9))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80284880 = {
+    EVT_CALL(CreateVirtualEntity, LocalVar(9), 0x802A9EF0)
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, 210, 70)
+    EVT_CALL(func_8025E108)
+    EVT_CHILD_THREAD
+        EVT_WAIT(4)
+        EVT_CALL(func_8025E14C)
+    EVT_END_CHILD_THREAD
+    EVT_THREAD
+        EVT_WAIT(8)
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(2.25))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
+        EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.45))
+        EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_SET(LocalVar(0), 210)
+        EVT_LOOP(10)
+            EVT_SUB(LocalVar(0), 10)
+            EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, LocalVar(0), 70)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_WAIT(8)
+    EVT_RETURN
+    EVT_END
+};

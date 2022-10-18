@@ -1235,6 +1235,8 @@ segments:
     - [0x1AF5C0, .data, battle_cam]
     - [0x1B2050, .data, 17D6A0]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - [0x1B2B90, .data, 18C790]
+    - [0x1B3300, .data, 18F340]
     - start: 0x1B7CE0
       type: .data
       name: battle_ui_gfx

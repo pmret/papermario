@@ -304,6 +304,7 @@ ApiStatus func_8026919C(Evt* script, s32 isInitialCall);
 ApiStatus func_80280818(Evt* script, s32 isInitialCall); ///< YieldTurn copy
 ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPresetImmediately(Evt* script, s32 isInitialCall);
+ApiStatus UseBattleCamPresetWait(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D32C(Evt* script, s32 isInitialCall);
 ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall);
 ApiStatus CreateNpc(Evt* script, s32 isInitialCall);
