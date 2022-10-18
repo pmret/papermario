@@ -375,9 +375,6 @@ block_17:
             break;
     }
 }
-// #else
-// INCLUDE_ASM(s32, "7fd10_len_b40", check_input_open_menus);
-// #endif
 
 void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
