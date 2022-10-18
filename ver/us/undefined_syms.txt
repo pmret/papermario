@@ -44,6 +44,9 @@ D_090008F8 = 0x090008F8;
 D_09000918 = 0x09000918;
 D_090009E0 = 0x090009E0;
 
+// effect_spirit_card
+D_090042E0 = 0x090042E0;
+
 fx_sun_undeclared = fx_sun;
 
 D_E007EC2F = 0xE007EC2F;
