@@ -139,7 +139,7 @@ EffectInstance* pink_sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
                 part->unk_0C = temp_f20 * shim_sin_deg(angle);
                 part->unk_10 = part->unk_04 * 0.04;
                 part->unk_14 = part->unk_08 * 0.04;
-                part->unk_18 = shim_rand_int(0xA) * 0.001;
+                part->unk_18 = shim_rand_int(10) * 0.001;
                 part->unk_1C = shim_rand_int(7) + 30;
                 part->unk_20 = 0;
 
