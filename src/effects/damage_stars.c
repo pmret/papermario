@@ -5,27 +5,173 @@ extern Gfx D_090004C0_343500[];
 extern Gfx D_090005E0_343620[];
 
 u8 D_E0030E90[] = {
-    0xFE, 0xAC, 0xAC,
-    0xFE, 0xAC, 0xD5,
-    0xFE, 0xB4, 0x9A,
-    0xD5, 0xB4, 0xFE,
-    0xB4, 0xB4, 0xFE,
-    0xB4, 0xDD, 0xFE,
-    0xB4, 0xFE, 0xFE,
-    0xB4, 0xFE, 0xD5,
-    0xB4, 0xFE, 0xB4,
-    0xD5, 0xFE, 0xB4,
-    0xFE, 0xFE, 0xB4,
-    0xFE, 0xD5, 0xAC
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172
 };
 
-u8 D_E0030EB4[] = { 0, 0, 0 };
+f32 D_E0030EB4;
 
+void damage_stars_init(EffectInstance* effect);
+void damage_stars_update(EffectInstance* effect);
+void damage_stars_render(EffectInstance* effect);
 void damage_stars_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/damage_stars", damage_stars_main);
+void damage_stars_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    f32 arg5,
+    f32 arg6,
+    s32 arg7
+) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
+    EffectInstance* effect;
+    DamageStarsFXData* part;
+    f32 temp_f12;
+    f32 var_f28;
+    f32 var_f30;
+    f32 rotateX;
+    f32 rotateZ;
+    f32 sp70;
+    Matrix4f sp30;
+    s32 i;
 
-void damage_stars_init(void) {
+    if (arg7 != 0) {
+        temp_f12 = SQ(arg4) + SQ(arg5) + SQ(arg6);
+        if (temp_f12 != 0.0f) {
+            temp_f12 = -1.0f / shim_sqrtf(temp_f12);
+
+            arg4 *= temp_f12;
+            arg5 *= temp_f12;
+            arg6 *= temp_f12;
+
+            if (arg4 != 0.0f) {
+                sp70 = 1.0f;
+                var_f30 = -arg5 / arg4;
+                var_f28 = 0.0f;
+            } else if (arg5 != 0.0f) {
+                sp70 = -arg4 / arg5;
+                var_f30 = 1.0f;
+                var_f28 = 0.0f;
+            } else {
+                sp70 = 0.0f;
+                var_f30 = 1.0f;
+                var_f28 = -arg4 / arg6;
+            }
+
+            temp_f12 = SQ(var_f30) + SQ(sp70) + SQ(var_f28);
+            if (temp_f12 != 0) {
+                temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+
+                var_f30 *= temp_f12;
+                sp70 *= temp_f12;
+                var_f28 *= temp_f12;
+
+                var_f30 *= 8.0f;
+                sp70 *= 8.0f;
+                var_f28 *= 8.0f;
+                arg4 *= 8.0f;
+                arg5 *= 8.0f;
+                arg6 *= 8.0f;
+
+                bpPtr->unk_00 = 0;
+                bpPtr->init = damage_stars_init;
+                bpPtr->update = damage_stars_update;
+                bpPtr->renderWorld = damage_stars_render;
+                bpPtr->unk_14 = NULL;
+                bpPtr->effectID = EFFECT_DAMAGE_STARS;
+
+                effect = shim_create_effect_instance(bpPtr);
+                effect->numParts = arg7;
+                part = effect->data.damageStars = shim_general_heap_malloc(arg7 * sizeof(*part));
+                ASSERT(effect->data.damageStars != NULL);
+
+                for (i = 0; i < arg7; i++, part++) {
+                    part->unk_00 = arg0;
+                    part->unk_04 = arg1;
+                    part->unk_08 = arg2;
+                    part->unk_0C = arg3;
+
+                    switch (arg0) {
+                        case 0:
+                        case 1:
+                        case 2:
+                            shim_guRotateF(sp30, (i * 360) / (arg7 - 1), arg4, arg5, arg6);
+                            part->unk_10 = arg4 + sp30[0][0] * var_f30 + sp30[1][0] * sp70 + sp30[2][0] * var_f28;
+                            part->unk_14 = arg5 + sp30[0][1] * var_f30 + sp30[1][1] * sp70 + sp30[2][1] * var_f28;
+                            part->unk_18 = arg6 + sp30[0][2] * var_f30 + sp30[1][2] * sp70 + sp30[2][2] * var_f28;
+                            break;
+                        case 3:
+                            rotateX = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateZ = -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            shim_guRotateF(sp30,
+                                (arg7 != 1) ? (i * 100) / (arg7 - 1) - 50 : 0.0f,
+                                rotateX, 0.0f, rotateZ);
+                            part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
+                            part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
+                            part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
+                            break;
+                        case 4:
+                            rotateX = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateZ = -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            shim_guRotateF(sp30, (i * 360.0f) / (arg7 - 1), rotateX, 0.0f, rotateZ);
+                            part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
+                            part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
+                            part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
+                            break;
+                    }
+
+                    switch (arg0) {
+                        case 0:
+                            part->unk_20 = 0;
+                            part->unk_28 = 24;
+                            break;
+                        case 1:
+                            part->unk_20 = 20.0f;
+                            part->unk_28 = 24;
+                            break;
+                        case 2:
+                            part->unk_20 = 20.0f;
+                            part->unk_28 = 40;
+                            part->unk_10 *= 0.5;
+                            part->unk_14 *= 0.5;
+                            part->unk_18 *= 0.5;
+                            break;
+                        case 3:
+                        case 4:
+                            part->unk_20 = 20.0f;
+                            part->unk_28 = 24;
+                            break;
+                    }
+
+                    part->unk_1C = 0;
+                    part->unk_2C = 0;
+                    part->unk_24 = 255;
+                }
+
+                D_E0030EB4 += 15.0f;
+                if (D_E0030EB4 > 360.0f) {
+                    D_E0030EB4 = 0.0f;
+                }
+            }
+        }
+    }
+}
+
+void damage_stars_init(EffectInstance* effect) {
 }
 
 void damage_stars_update(EffectInstance* effect) {
@@ -60,7 +206,7 @@ void damage_stars_update(EffectInstance* effect) {
                 part->unk_14 *= 0.8;
                 part->unk_18 *= 0.8;
             }
-            if (unk_28 - 6 < 0xEU) {
+            if (unk_28 >= 6 && unk_28 <= 19) {
                 if (part->unk_00 == 0) {
                     part->unk_20 += 1.0f;
                 }
