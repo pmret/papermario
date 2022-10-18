@@ -6680,7 +6680,7 @@ segments:
     start: 0x6DDDC0
     vram: 0x80218000
     subsegments:
-    - [0x669D80, c, actor/koopa_troopa]
+    - [0x6DDDC0, c, actor/koopa_troopa]
     - [0x6DDE90, c, actor/fuzzy]
     - [0x6DE000, c, actor/pokey]
     - [0x6DE0D0, c, actor/bandit]
@@ -8917,7 +8917,7 @@ segments:
     - [0x953FC0, c, sbk_56_1_main]
     - [0x954D80, c, sbk_56_2_entity]
     - [0x954D80, c, sbk_56_3_foliage]
-    - [0x954FC00]
+    - [0x954FC0]
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
