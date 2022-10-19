@@ -1057,23 +1057,16 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// float regz
-#ifdef NON_MATCHING
 ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
     ActorState* playerState = &player->state;
     f32 playerVel;
-    f32 currentX;
-    f32 currentY;
-    f32 currentZ;
-    f32 goalX;
-    f32 goalY;
-    f32 goalZ;
+    f32 x, y, z;
+    f32 goalX, goalY, goalZ;
     f32 var_f8;
-    f64 temp_f20_2;
-    f32 sub;
+    f64 playerSpeed;
 
     if (isInitialCall) {
         script->functionTemp[0] = FALSE;
@@ -1084,20 +1077,21 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         player->state.moveArcAmplitude = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
 
-        goalX = player->state.goalPos.x;
-        goalY = player->state.goalPos.y;
-        goalZ = player->state.goalPos.z;
         player->state.currentPos.x = player->currentPos.x;
         player->state.currentPos.y = player->currentPos.y;
         player->state.currentPos.z = player->currentPos.z;
-        currentX = player->currentPos.x;
-        currentY = player->currentPos.y;
-        currentZ = player->currentPos.z;
 
-        player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
-        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+        x = player->state.currentPos.x;
+        y = player->state.currentPos.y;
+        z = player->state.currentPos.z;
+        goalX = player->state.goalPos.x;
+        goalY = player->state.goalPos.y;
+        goalZ = player->state.goalPos.z;
 
-        sub = goalY - currentY;
+        player->state.angle = atan2(x, z, goalX, goalZ);
+        player->state.distance = dist2D(x, z, goalX, goalZ);
+
+        y = goalY - y;
 
         if (player->state.moveTime == 0) {
             player->state.moveTime = player->state.distance / player->state.speed;
@@ -1108,7 +1102,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         }
 
         playerState->speed += var_f8 / playerState->moveTime;
-        playerState->velocity = (playerState->acceleration * playerState->moveTime * 0.5f) + (sub / playerState->moveTime);
+        playerState->velocity = (playerState->acceleration * playerState->moveTime * 0.5f) + (y / playerState->moveTime);
         set_animation(0, 0, playerState->animJumpRise);
         playerState->unk_24 = 90.0f;
         playerState->unk_28 = 180 / playerState->moveTime;
@@ -1141,8 +1135,8 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
 
     playerState->currentPos.y += playerVel;
     playerState->velocity -= playerState->acceleration;
-    temp_f20_2 = playerState->speed;
-    add_xz_vec3f(&playerState->currentPos, temp_f20_2 + sin_rad(DEG_TO_RAD(playerState->unk_24)), playerState->angle);
+    playerSpeed = playerState->speed;
+    add_xz_vec3f(&playerState->currentPos, playerSpeed + sin_rad(DEG_TO_RAD(playerState->unk_24)), playerState->angle);
     playerState->unk_24 += playerState->unk_28;
     playerState->unk_24 = clamp_angle(playerState->unk_24);
     player->currentPos.x = playerState->currentPos.x;
@@ -1164,26 +1158,13 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE1;
 }
-#else
-INCLUDE_ASM(s32, "19FAF0", func_80273444);
-#endif
 
-//float bs
-#ifdef NON_MATCHING
-s32 PlayerFallToGoal(Evt* script, s32 isInitialCall) {
+ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* state = &player->state;
-    f32 temp_f0_2;
-    f32 temp_f20;
-    f32 goalX;
-    f32 goalY;
-    f32 goalZ;
-    f32 currentX, currentY, currentZ;
-    f32 new_var2;
-    f32 temp;
-    f32 xTemp, yTemp, zTemp;
-    f32 goalPosX, goalPosZ;
+    f32 x, y, z;
+    f32 goalX, goalY, goalZ;
 
     if (isInitialCall) {
         script->functionTemp[0] = FALSE;
@@ -1192,23 +1173,23 @@ s32 PlayerFallToGoal(Evt* script, s32 isInitialCall) {
     if (!script->functionTemp[0]) {
         s32 moveTime = evt_get_variable(script, *args++);
 
-        state->currentPos.x = player->currentPos.x;
-        state->currentPos.z = player->currentPos.z;
-        currentX = state->currentPos.x;
-        state->currentPos.y = player->currentPos.y;
-        currentY = state->currentPos.y;
-        temp = state->currentPos.z;
+        player->state.currentPos.x = player->currentPos.x;
+        player->state.currentPos.y = player->currentPos.y;
+        player->state.currentPos.z = player->currentPos.z;
 
-        goalX = state->goalPos.x;
-        goalY = state->goalPos.y;
-        goalZ = state->goalPos.z;
+        x = player->state.currentPos.x;
+        y = player->state.currentPos.y;
+        z = player->state.currentPos.z;
+        goalX = player->state.goalPos.x;
+        goalY = player->state.goalPos.y;
+        goalZ = player->state.goalPos.z;
 
         state->moveTime = moveTime;
 
-        state->angle = atan2(currentX, temp, goalX, goalZ);
-        state->distance = dist2D(currentX, temp, goalX, goalZ);
+        player->state.angle = atan2(x, z, goalX, goalZ);
+        player->state.distance = dist2D(x, z, goalX, goalZ);
 
-        temp = goalY - currentY;
+        y = goalY - y;
 
         if (state->moveTime == 0) {
             state->moveTime = state->distance / state->speed;
@@ -1217,13 +1198,13 @@ s32 PlayerFallToGoal(Evt* script, s32 isInitialCall) {
         }
 
         state->velocity = 0.0f;
-        state->acceleration = (((temp / state->moveTime) - state->velocity) / (-state->moveTime * 0.5));
+        state->acceleration = ((y / state->moveTime) - state->velocity) / (-state->moveTime * 0.5);
         set_animation(ACTOR_PLAYER, 0, state->animJumpRise);
         script->functionTemp[0] = TRUE;
     }
 
     if (state->velocity < 0.0f) {
-        set_animation(0, 0, state->animJumpFall);
+        set_animation(ACTOR_PLAYER, 0, state->animJumpFall);
     }
 
     state->currentPos.y += state->velocity;
@@ -1245,9 +1226,6 @@ s32 PlayerFallToGoal(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;

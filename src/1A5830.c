@@ -1003,9 +1003,171 @@ ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "1A5830", JumpToGoal);
 
-INCLUDE_ASM(s32, "1A5830", IdleJumpToGoal);
+ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorMovement* fly;
+    f32 x, y, z;
+    f32 goalX, goalY, goalZ;
+    f32 var_f8;
+    Actor* actor;
 
-INCLUDE_ASM(s32, "1A5830", JumpToGoalSimple2);
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        s32 actorID = evt_get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        script->functionTempPtr[1] = actor = get_actor(actorID);
+        fly = &actor->fly;
+
+        actor->fly.flyTime = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        script->functionTemp[3] = evt_get_variable(script, *args++);
+
+        fly->currentPos.x = actor->currentPos.x;
+        fly->currentPos.y = actor->currentPos.y;
+        fly->currentPos.z = actor->currentPos.z;
+
+        x = fly->currentPos.x;
+        y = fly->currentPos.y;
+        z = fly->currentPos.z;
+        goalX = fly->goalPos.x;
+        goalY = fly->goalPos.y;
+        goalZ = fly->goalPos.z;
+        fly->angle = atan2(x, z, goalX, goalZ);
+        fly->distance = dist2D(x, z, goalX, goalZ);
+        y = goalY - y;
+
+        if (fly->flyTime == 0) {
+            fly->flyTime = fly->distance / fly->speed;
+            var_f8 = fly->distance - (fly->flyTime * fly->speed);
+        } else {
+            fly->speed = fly->distance / fly->flyTime;
+            var_f8 = fly->distance - (fly->flyTime * fly->speed);
+        }
+
+        if (fly->flyTime == 0) {
+            return ApiStatus_DONE2;
+        }
+
+        fly->velocity = ((fly->acceleration * fly->flyTime) * 0.5f) + (y / fly->flyTime);
+        fly->speed += var_f8 / fly->flyTime;
+        script->functionTemp[0] = TRUE;
+    }
+
+    actor = script->functionTempPtr[1];
+    fly = &actor->fly;
+
+    fly->currentPos.y += fly->velocity;
+    fly->velocity -= fly->acceleration;
+    if (fly->velocity < 0.0f && fly->goalPos.y > fly->currentPos.y) {
+        fly->currentPos.y = fly->goalPos.y;
+    }
+    add_xz_vec3f_copy2(&fly->currentPos, fly->speed, fly->angle);
+    actor->currentPos.x = fly->currentPos.x;
+    actor->currentPos.y = fly->currentPos.y;
+    actor->currentPos.z = fly->currentPos.z;
+
+    fly->flyTime--;
+    if (fly->flyTime <= 0) {
+        if (script->functionTemp[3] != 0) {
+            play_movement_dust_effects(2, fly->goalPos.x, fly->goalPos.y, fly->goalPos.z, fly->angle);
+        }
+        actor->currentPos.x = fly->goalPos.x;
+        actor->currentPos.y = fly->goalPos.y;
+        actor->currentPos.z = fly->goalPos.z;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorState* state;
+    f32 x, y, z;
+    f32 goalX, goalY, goalZ;
+    f32 var_f8;
+    Actor* actor;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        s32 actorID = evt_get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        script->functionTempPtr[1] = actor = get_actor(actorID);
+        state = &actor->state;
+
+        state->moveTime = evt_get_variable(script, *args++);
+        state->currentPos.x = actor->currentPos.x;
+        state->currentPos.y = actor->currentPos.y;
+        state->currentPos.z = actor->currentPos.z;
+
+        x = state->currentPos.x;
+        y = state->currentPos.y;
+        z = state->currentPos.z;
+        goalX = state->goalPos.x;
+        goalY = state->goalPos.y;
+        goalZ = state->goalPos.z;
+        state->angle = atan2(x, z, goalX, goalZ);
+        state->distance = dist2D(x, z, goalX, goalZ);
+        y -= goalY;
+
+        if (state->moveTime == 0) {
+            state->moveTime = state->distance / state->speed;
+            var_f8 = state->distance - (state->moveTime * state->speed);
+        } else {
+            state->speed = state->distance / state->moveTime;
+            var_f8 = state->distance - (state->moveTime * state->speed);
+        }
+
+        if (state->moveTime == 0) {
+            return ApiStatus_DONE2;
+        }
+
+        state->velocity = ((state->acceleration * state->moveTime) * 0.5f) + (y / state->moveTime);
+        state->speed += var_f8 / state->moveTime;
+        if (actor->actorTypeData1[4] != 0) {
+            sfx_play_sound_at_position(actor->actorTypeData1[4], 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+        }
+        script->functionTemp[0] = TRUE;
+    }
+
+    actor = script->functionTempPtr[1];
+    state = &actor->state;
+
+    state->currentPos.y -= state->velocity;
+    state->velocity -= state->acceleration;
+    if (state->velocity > 0.0f && state->goalPos.y < state->currentPos.y) {
+        state->currentPos.y = state->goalPos.y;
+    }
+    add_xz_vec3f(&state->currentPos, state->speed, state->angle);
+    actor->currentPos.x = state->currentPos.x;
+    actor->currentPos.y = state->currentPos.y;
+    actor->currentPos.z = state->currentPos.z;
+
+    state->moveTime--;
+    if (state->moveTime <= 0) {
+        play_movement_dust_effects(2, state->goalPos.x, state->goalPos.y, state->goalPos.z, state->angle);
+        actor->currentPos.x = state->goalPos.x;
+        actor->currentPos.y = state->goalPos.y;
+        actor->currentPos.z = state->goalPos.z;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "1A5830", JumpWithBounce);
 
@@ -1572,10 +1734,17 @@ s32 FlyPartTo(Evt* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     ActorPartMovement* partMovement;
-    s32 actorID, partIndex;
+    s32 actorID;
+    s32 partIndex;
     f32 f2, f4;
-    f32 d1, d2, d3, delta;
-    f32 d1_, d2_, d3_, delta_;
+
+    f32 temp_f0;
+    f32 xComp;
+    f32 temp_f0_2;
+    f32 temp_f0_3;
+    f32 yComp;
+    f32 zComp;
+    f32 temp_f2_4;
 
     if (isInitialCall) {
         actorID = evt_get_variable(script, *args++);
@@ -1597,14 +1766,21 @@ s32 FlyPartTo(Evt* script, s32 isInitialCall) {
         partMovement->unk_3A = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
 
-        partMovement->unk_18.x = partMovement->unk_00.x = part->absolutePosition.x;
-        d1_ = SQ((partMovement->unk_00.x - partMovement->goalPos.x));
-        partMovement->unk_18.y = partMovement->unk_00.y = part->absolutePosition.y;
-        d2_ = SQ((partMovement->unk_00.y - partMovement->goalPos.z));
-        partMovement->unk_18.z = partMovement->unk_00.z = part->absolutePosition.z;
-        d3_ = SQ((partMovement->unk_00.z - partMovement->goalPos.z));
-
-        partMovement->distance = sqrtf(d1_ + d2_ + d3_);
+        temp_f0 = part->absolutePosition.x;
+        partMovement->unk_00.x = temp_f0;
+        partMovement->unk_18.x = temp_f0;
+        temp_f0_2 = part->absolutePosition.y;
+        partMovement->unk_00.y = temp_f0_2;
+        partMovement->unk_18.y = temp_f0_2;
+        temp_f0_3 = part->absolutePosition.z;
+        partMovement->unk_00.z = temp_f0_3;
+        partMovement->unk_18.z = temp_f0_3;
+        //xComp = temp_f0 - partMovement->goalPos.x;
+        f2 = partMovement->goalPos.x;
+        xComp = temp_f0 - f2;
+        yComp = temp_f0_2 - partMovement->goalPos.y;
+        zComp = temp_f0_3 - partMovement->goalPos.z;
+        partMovement->distance = sqrtf(SQ(xComp) + SQ(yComp) + SQ(zComp));
 
         if (partMovement->moveTime == 0) {
             partMovement->moveTime = partMovement->distance / partMovement->moveSpeed;
@@ -1630,8 +1806,8 @@ s32 FlyPartTo(Evt* script, s32 isInitialCall) {
     }
 
     part = script->functionTempPtr[2];
-    partMovement = part->movement;
     actor = script->functionTempPtr[1];
+    partMovement = part->movement;
     partMovement->unk_00.x = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.x, partMovement->goalPos.x, partMovement->unk_3C, partMovement->moveTime);
     partMovement->unk_00.y = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.y, partMovement->goalPos.y, partMovement->unk_3C, partMovement->moveTime);
     partMovement->unk_00.z = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.z, partMovement->goalPos.z, partMovement->unk_3C, partMovement->moveTime);
@@ -1681,16 +1857,12 @@ s32 FlyPartTo(Evt* script, s32 isInitialCall) {
         }
     }
 
-    delta = partMovement->goalPos.x;
-    delta -= partMovement->unk_00.x;
-    d1 = SQ(delta);
-    delta = partMovement->goalPos.y - partMovement->unk_00.y;
-    d2 = SQ(delta);
-    delta = partMovement->goalPos.z - partMovement->unk_00.z;
-    d3 = SQ(delta);
-    f2 = sqrtf(d1 + d2 + d3);
+    f2 = sqrtf(
+        SQ(partMovement->goalPos.x - partMovement->unk_00.x) +
+        SQ(partMovement->goalPos.y - partMovement->unk_00.y) +
+        SQ(partMovement->goalPos.z - partMovement->unk_00.z)
+    );
 
-    //f2 = sqrtf(SQ((partMovement->unk_00.x - partMovement->goalPos.x)) + SQ((partMovement->unk_00.y - partMovement->goalPos.y)) + SQ((partMovement->unk_00.z - partMovement->goalPos.z)));
     if (f2 == 0.0f) {
         f2 = 1.0f;
     }
