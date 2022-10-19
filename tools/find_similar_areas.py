@@ -16,6 +16,7 @@ script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 root_dir = script_dir / ".."
 asm_dir = root_dir / "ver/current/asm/nonmatchings/"
 build_dir = root_dir / "ver/current/build/"
+elf_path = build_dir / "papermario.elf"
 map_file_path = build_dir / "papermario.map"
 rom_path = root_dir / "ver/current/baserom.z64"
 
@@ -56,6 +57,25 @@ def get_all_unmatched_functions():
                 ret.add(f[:-2])
     return ret
 
+
+def get_func_sizes() -> Dict[str, int]:
+    try:
+        result = subprocess.run(['mips-linux-gnu-objdump', '-x', elf_path], stdout=subprocess.PIPE)
+        nm_lines = result.stdout.decode().split("\n")
+    except:
+        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
+        sys.exit(1)
+
+    sizes: Dict[str, int] = {}
+
+    for line in nm_lines:
+        if " F " in line:
+            components = line.split()
+            size = int(components[4], 16)
+            name = components[5]
+            sizes[name] = size
+
+    return sizes
 
 def get_symbol_bytes(func: str) -> Optional[Bytes]:
     if func not in syms or syms[func].rom_end is None:
@@ -118,7 +138,7 @@ def parse_map() -> OrderedDict[str, Symbol]:
             else:
                 if cur_sect != "(.text)":
                     continue
-                syms[fn] = Symbol(
+                new_sym = Symbol(
                     name=fn,
                     rom_start=rom,
                     ram=ram,
@@ -126,12 +146,15 @@ def parse_map() -> OrderedDict[str, Symbol]:
                     prev_sym=prev_sym,
                     is_decompiled=not fn in unmatched_functions,
                 )
+                if fn in func_sizes:
+                    new_sym.rom_end = rom + func_sizes[fn]
+                syms[fn] = new_sym
                 prev_sym = fn
 
     # Calc end offsets
     for sym in syms:
         prev_sym = syms[sym].prev_sym
-        if prev_sym:
+        if prev_sym and not syms[prev_sym].rom_end:
             syms[prev_sym].rom_end = syms[sym].rom_start
 
     return syms
@@ -396,6 +419,7 @@ args = parser.parse_args()
 if __name__ == "__main__":
     rom_bytes = read_rom()
     unmatched_functions = get_all_unmatched_functions()
+    func_sizes = get_func_sizes()
     syms = parse_map()
 
     do_query(args.query, args.window_size)
