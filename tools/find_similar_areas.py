@@ -254,13 +254,59 @@ def get_tu_offset(obj_file: Path, symbol: str) -> Optional[int]:
             return int(pieces[0], 16)
     return None
 
+@dataclass
+class CRange():
+    start: Optional[int] = None
+    end: Optional[int] = None
+    start_exact = False
+    end_exact = False
 
-def get_c_range(
-    insn_start: int, insn_end: int, line_numbers: Dict[int, int]
-) -> Tuple[Optional[int], Optional[int]]:
-    start = line_numbers.get(insn_start)
-    end = line_numbers.get(insn_end)
-    return start, end
+    def has_info(self):
+        return self.start is not None or self.end is not None
+
+    def __str__(self):
+        start_str = "?"
+        end_str = "?"
+
+        if self.start is not None:
+            if self.start_exact:
+                start_str = f"{self.start}"
+            else:
+                start_str = f"~{self.start}"
+
+        if self.end is not None:
+            if self.end_exact:
+                end_str = f"{self.end}"
+            else:
+                end_str = f"~{self.end}"
+
+        return f"{start_str} - {end_str}"
+
+
+def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) -> CRange:
+    range = CRange()
+
+    if insn_start in line_numbers:
+        range.start = line_numbers[insn_start]
+        range.start_exact = True
+    else:
+        keys = list(line_numbers.keys())
+        for i, key in enumerate(keys[:-1]):
+            if keys[i + 1] > insn_start:
+                range.start = line_numbers[keys[i]]
+                break
+
+    if insn_end in line_numbers:
+        range.end = line_numbers[insn_end]
+        range.end_exact = True
+    else:
+        keys = list(line_numbers.keys())
+        for i, key in enumerate(keys):
+            if key > insn_end:
+                range.end = line_numbers[key]
+                break
+
+    return range
 
 
 def get_matches(query: str, window_size: int):
@@ -305,29 +351,25 @@ def get_matches(query: str, window_size: int):
                 query_end = result.query_start + total_len
                 target_end = result.target_start + total_len
 
-                c_start: Optional[int] = None
-                c_end: Optional[int] = None
+                c_range = None
                 if tu_offset is not None and len(line_numbers) > 0:
-                    c_start, c_end = get_c_range(
+                    c_range = get_c_range(
                         tu_offset + (result.target_start * 4),
                         tu_offset + (target_end * 4),
                         line_numbers,
                     )
 
                 target_range_str = ""
-                if c_start is not None or c_end is not None:
-                    start_str = c_start if c_start is not None else "?"
-                    end_str = c_end if c_end is not None else "?"
-
+                if c_range:
                     target_range_str = (
-                        fg.li_cyan + f" (line {start_str}-{end_str} in {obj_file.stem})" + fg.rs
+                        fg.li_cyan + f" (line {c_range} in {obj_file.stem})" + fg.rs
                     )
 
-                query_str = f"{query} [{result.query_start}-{query_end}]"
+                query_str = f"query [{result.query_start}-{query_end}]"
                 target_str = (
-                    f"{symbol} [{result.target_start}-{target_end}]{target_range_str}"
+                    f"{symbol} [insn {result.target_start}-{target_end}] ({total_len} total){target_range_str}"
                 )
-                print(f"\t{query_str} matches {target_str} ({total_len} total insns)")
+                print(f"\t{query_str} matches {target_str}")
 
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
