@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 #include "pause/pause_common.h"
+#include "entity.h"
 
 extern s32 D_80284150;
 extern s32 D_80284154[];
@@ -11,10 +12,7 @@ extern s32 D_802841B0;
 extern HudScript* D_802841B4;
 extern HudScript* D_802841B8;
 extern HudScript* D_802841BC;
-extern HudScript* D_802841C0[3][10];
-extern HudScript* D_80284238[3][10];
 extern EvtScript D_802842B0;
-extern EvtScript D_80284880;
 extern EvtScript PlayerScriptDispatcher;
 extern HudScript HES_ProjectorBeam;
 
@@ -41,14 +39,157 @@ BSS s32 D_8029FB88;
 BSS s32 D_8029FB8C;
 
 extern HudScript D_802A9F34;
-extern HudScript D_802A9F5C;
-extern HudScript D_802A9F84;
-extern HudScript D_802A9F0C;
-extern HudScript D_802A9FAC;
 extern HudScript D_802AA320;
 extern HudScript D_802AA694;
 extern HudScript D_802AAA08;
 extern HudScript D_802AAA30;
+
+extern EntityModelScript level_up_model_script;
+
+extern HudScript HES_level_up_flower;
+extern HudScript HES_level_up_leaves;
+extern HudScript HES_level_up_heart;
+extern HudScript HES_level_up_badge;
+
+extern HudScript HES_level_up_green_digit_0;
+extern HudScript HES_level_up_green_digit_1;
+extern HudScript HES_level_up_green_digit_2;
+extern HudScript HES_level_up_green_digit_3;
+extern HudScript HES_level_up_green_digit_4;
+extern HudScript HES_level_up_green_digit_5;
+extern HudScript HES_level_up_green_digit_6;
+extern HudScript HES_level_up_green_digit_7;
+extern HudScript HES_level_up_green_digit_8;
+extern HudScript HES_level_up_green_digit_9;
+extern HudScript HES_level_up_red_digit_0;
+extern HudScript HES_level_up_red_digit_1;
+extern HudScript HES_level_up_red_digit_2;
+extern HudScript HES_level_up_red_digit_3;
+extern HudScript HES_level_up_red_digit_4;
+extern HudScript HES_level_up_red_digit_5;
+extern HudScript HES_level_up_red_digit_6;
+extern HudScript HES_level_up_red_digit_7;
+extern HudScript HES_level_up_red_digit_8;
+extern HudScript HES_level_up_red_digit_9;
+extern HudScript HES_level_up_blue_digit_0;
+extern HudScript HES_level_up_blue_digit_1;
+extern HudScript HES_level_up_blue_digit_2;
+extern HudScript HES_level_up_blue_digit_3;
+extern HudScript HES_level_up_blue_digit_4;
+extern HudScript HES_level_up_blue_digit_5;
+extern HudScript HES_level_up_blue_digit_6;
+extern HudScript HES_level_up_blue_digit_7;
+extern HudScript HES_level_up_blue_digit_8;
+extern HudScript HES_level_up_blue_digit_9;
+
+extern HudScript HES_level_up_small_green_digit_0;
+extern HudScript HES_level_up_small_green_digit_1;
+extern HudScript HES_level_up_small_green_digit_2;
+extern HudScript HES_level_up_small_green_digit_3;
+extern HudScript HES_level_up_small_green_digit_4;
+extern HudScript HES_level_up_small_green_digit_5;
+extern HudScript HES_level_up_small_green_digit_6;
+extern HudScript HES_level_up_small_green_digit_7;
+extern HudScript HES_level_up_small_green_digit_8;
+extern HudScript HES_level_up_small_green_digit_9;
+extern HudScript HES_level_up_small_red_digit_0;
+extern HudScript HES_level_up_small_red_digit_1;
+extern HudScript HES_level_up_small_red_digit_2;
+extern HudScript HES_level_up_small_red_digit_3;
+extern HudScript HES_level_up_small_red_digit_4;
+extern HudScript HES_level_up_small_red_digit_5;
+extern HudScript HES_level_up_small_red_digit_6;
+extern HudScript HES_level_up_small_red_digit_7;
+extern HudScript HES_level_up_small_red_digit_8;
+extern HudScript HES_level_up_small_red_digit_9;
+extern HudScript HES_level_up_small_blue_digit_0;
+extern HudScript HES_level_up_small_blue_digit_1;
+extern HudScript HES_level_up_small_blue_digit_2;
+extern HudScript HES_level_up_small_blue_digit_3;
+extern HudScript HES_level_up_small_blue_digit_4;
+extern HudScript HES_level_up_small_blue_digit_5;
+extern HudScript HES_level_up_small_blue_digit_6;
+extern HudScript HES_level_up_small_blue_digit_7;
+extern HudScript HES_level_up_small_blue_digit_8;
+extern HudScript HES_level_up_small_blue_digit_9;
+
+HudScript* level_up_digit_scripts[3][10] = {
+    {
+        &HES_level_up_green_digit_0,
+        &HES_level_up_green_digit_1,
+        &HES_level_up_green_digit_2,
+        &HES_level_up_green_digit_3,
+        &HES_level_up_green_digit_4,
+        &HES_level_up_green_digit_5,
+        &HES_level_up_green_digit_6,
+        &HES_level_up_green_digit_7,
+        &HES_level_up_green_digit_8,
+        &HES_level_up_green_digit_9,
+    },
+    {
+        &HES_level_up_red_digit_0,
+        &HES_level_up_red_digit_1,
+        &HES_level_up_red_digit_2,
+        &HES_level_up_red_digit_3,
+        &HES_level_up_red_digit_4,
+        &HES_level_up_red_digit_5,
+        &HES_level_up_red_digit_6,
+        &HES_level_up_red_digit_7,
+        &HES_level_up_red_digit_8,
+        &HES_level_up_red_digit_9,
+    },
+    {
+        &HES_level_up_blue_digit_0,
+        &HES_level_up_blue_digit_1,
+        &HES_level_up_blue_digit_2,
+        &HES_level_up_blue_digit_3,
+        &HES_level_up_blue_digit_4,
+        &HES_level_up_blue_digit_5,
+        &HES_level_up_blue_digit_6,
+        &HES_level_up_blue_digit_7,
+        &HES_level_up_blue_digit_8,
+        &HES_level_up_blue_digit_9,
+    },
+};
+
+HudScript* level_up_small_digit_scripts[3][10] = {
+    {
+        &HES_level_up_small_green_digit_0,
+        &HES_level_up_small_green_digit_1,
+        &HES_level_up_small_green_digit_2,
+        &HES_level_up_small_green_digit_3,
+        &HES_level_up_small_green_digit_4,
+        &HES_level_up_small_green_digit_5,
+        &HES_level_up_small_green_digit_6,
+        &HES_level_up_small_green_digit_7,
+        &HES_level_up_small_green_digit_8,
+        &HES_level_up_small_green_digit_9,
+    },
+    {
+        &HES_level_up_small_red_digit_0,
+        &HES_level_up_small_red_digit_1,
+        &HES_level_up_small_red_digit_2,
+        &HES_level_up_small_red_digit_3,
+        &HES_level_up_small_red_digit_4,
+        &HES_level_up_small_red_digit_5,
+        &HES_level_up_small_red_digit_6,
+        &HES_level_up_small_red_digit_7,
+        &HES_level_up_small_red_digit_8,
+        &HES_level_up_small_red_digit_9,
+    },
+    {
+        &HES_level_up_small_blue_digit_0,
+        &HES_level_up_small_blue_digit_1,
+        &HES_level_up_small_blue_digit_2,
+        &HES_level_up_small_blue_digit_3,
+        &HES_level_up_small_blue_digit_4,
+        &HES_level_up_small_blue_digit_5,
+        &HES_level_up_small_blue_digit_6,
+        &HES_level_up_small_blue_digit_7,
+        &HES_level_up_small_blue_digit_8,
+        &HES_level_up_small_blue_digit_9,
+    },
+};
 
 s32* virtual_entity_get_by_index(s32);
 
@@ -122,6 +263,127 @@ ApiStatus func_8025E14C(Evt* script, s32 isInitialCall) {
     fx_confetti(3, 0.0f, 100.0f, 0.0f, 1.0f, 120);
     return ApiStatus_DONE2;
 }
+
+EvtScript D_802842B0 = {
+    EVT_SET(LocalVar(15), 0)
+    EVT_CALL(func_8025DEB0)
+    EVT_IF_EQ(LocalVar(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_LT(LocalVar(0), 2)
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE40)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_ELSE
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE5C)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+        EVT_SET(LocalFlag(0), 1)
+    EVT_END_IF
+    EVT_SWITCH(LocalVar(0))
+        EVT_CASE_GT(99)
+            EVT_SET(LocalVar(15), 3)
+        EVT_CASE_GT(9)
+            EVT_SET(LocalVar(15), 2)
+        EVT_CASE_DEFAULT
+            EVT_SET(LocalVar(15), 1)
+    EVT_END_SWITCH
+    EVT_CALL(func_8025DEC4)
+    EVT_CALL(CreateVirtualEntity, LocalVar(7), LocalVar(10))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(7), -353, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(7), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LocalVar(8), LocalVar(11))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(8), -338, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(8), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LocalVar(9), LocalVar(12))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), -323, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LocalVar(9), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(func_8025E044)
+    EVT_SWITCH(LocalVar(15))
+        EVT_CASE_EQ(3)
+            EVT_SET(LocalVar(0), -197)
+        EVT_CASE_EQ(2)
+            EVT_SET(LocalVar(0), -204)
+        EVT_CASE_EQ(1)
+            EVT_SET(LocalVar(0), -211)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LocalVar(0), 20)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -78)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -146)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -131)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -116)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_8025E030)
+    EVT_SWITCH(LocalVar(15))
+        EVT_CASE_EQ(3)
+            EVT_SET(LocalVar(0), 3)
+        EVT_CASE_EQ(2)
+            EVT_SET(LocalVar(0), -4)
+        EVT_CASE_EQ(1)
+            EVT_SET(LocalVar(0), -11)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LocalVar(0), 20)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -78)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -154)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -139)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), -124)
+        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(DeleteVirtualEntity, LocalVar(6))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(7))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(8))
+    EVT_CALL(DeleteVirtualEntity, LocalVar(9))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript EVS_ShowLevelUp = {
+    EVT_CALL(CreateVirtualEntity, LocalVar(9), EVT_PTR(level_up_model_script))
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, 210, 70)
+    EVT_CALL(func_8025E108)
+    EVT_CHILD_THREAD
+        EVT_WAIT(4)
+        EVT_CALL(func_8025E14C)
+    EVT_END_CHILD_THREAD
+    EVT_THREAD
+        EVT_WAIT(8)
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(2.25))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
+        EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.45))
+        EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_SET(LocalVar(0), 210)
+        EVT_LOOP(10)
+            EVT_SUB(LocalVar(0), 10)
+            EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, LocalVar(0), 70)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_WAIT(8)
+    EVT_RETURN
+    EVT_END
+};
 
 void btl_state_update_celebration(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -267,14 +529,14 @@ void btl_state_update_celebration(void) {
                 playerData->level++;
                 btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
-                dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
+                dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
                 sfx_play_sound(SOUND_80000008);
                 D_8029FB84 = 0;
                 gBattleState2 = BATTLE_STATE2_UNK_5;
             }
             break;
         case BATTLE_STATE2_UNK_5:
-            D_8029FB7C = start_script(&D_80284880, EVT_PRIORITY_A, 0);
+            D_8029FB7C = start_script(&EVS_ShowLevelUp, EVT_PRIORITY_A, 0);
             D_8029FB4C = 25;
             gBattleState2 = BATTLE_STATE2_UNK_6;
             D_8029FB80 = D_8029FB7C->id;
@@ -303,22 +565,22 @@ void btl_state_update_celebration(void) {
                     set_background_color_blend(0, 0, 0, ((10 - D_8029FB4C) * 0x10) & 0xF0);
                 }
             } else {
-                id = hud_element_create(&D_802A9F0C);
+                id = hud_element_create(&HES_level_up_heart);
                 D_8029FA80[0] = id;
                 hud_element_set_render_pos(id, 310, 140);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9F5C);
+                id = hud_element_create(&HES_level_up_flower);
                 D_8029FA80[1] = id;
                 hud_element_set_render_pos(id, 158, 340);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9F84);
+                id = hud_element_create(&HES_level_up_leaves);
                 D_8029FA80[3] = id;
                 hud_element_set_render_pos(id, 158, 340);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9FAC);
+                id = hud_element_create(&HES_level_up_badge);
                 D_8029FA80[2] = id;
                 hud_element_set_render_pos(id, 6, 140);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
@@ -329,7 +591,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = hud_element_create(D_802841C0[0][0]);
+                    id = hud_element_create(level_up_digit_scripts[0][0]);
                     D_8029FA90[0][i] = id;
                     hud_element_set_render_pos(id, 160, 317);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
@@ -341,7 +603,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = hud_element_create(D_802841C0[1][0]);
+                    id = hud_element_create(level_up_digit_scripts[1][0]);
                     D_8029FA90[1][i] = id;
                     hud_element_set_render_pos(id, 312, 117);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
@@ -353,7 +615,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[20]); i++) {
-                    id = hud_element_create(D_802841C0[2][0]);
+                    id = hud_element_create(level_up_digit_scripts[2][0]);
                     D_8029FA90[2][i] = id;
                     hud_element_set_render_pos(id, 8, 117);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
@@ -367,7 +629,7 @@ void btl_state_update_celebration(void) {
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
                     id = D_8029FA90[0][1];
-                    hud_element_set_script(id, D_80284238[0][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -375,7 +637,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[0][2];
-                    hud_element_set_script(id, D_80284238[0][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
@@ -390,7 +652,7 @@ void btl_state_update_celebration(void) {
                     fpTens = (playerData->curMaxFP + 5) / 10;
                     fpOnes = (playerData->curMaxFP + 5) % 10;
                     id = D_8029FA90[0][4];
-                    hud_element_set_script(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -398,7 +660,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[0][5];
-                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
@@ -406,7 +668,7 @@ void btl_state_update_celebration(void) {
                     id = D_8029FA90[0][4];
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
-                    hud_element_set_script(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -414,7 +676,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[0][5];
-                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, 2);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -435,7 +697,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][1];
-                    hud_element_set_script(id, D_80284238[1][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -443,7 +705,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[1][2];
-                    hud_element_set_script(id, D_80284238[1][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
@@ -458,7 +720,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = (playerData->curMaxHP + 5) % 10;
 
                     id = D_8029FA90[1][4];
-                    hud_element_set_script(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -466,7 +728,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[1][5];
-                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
@@ -475,7 +737,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][4];
-                    hud_element_set_script(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -483,7 +745,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[1][5];
-                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -504,7 +766,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->maxBP % 10;
 
                     id = D_8029FA90[2][1];
-                    hud_element_set_script(id, D_80284238[2][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[2][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -512,7 +774,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[2][2];
-                    hud_element_set_script(id, D_80284238[2][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[2][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
@@ -527,7 +789,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = (playerData->maxBP + 3) % 10;
 
                     id = D_8029FA90[2][4];
-                    hud_element_set_script(id, D_802841C0[2][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -535,19 +797,19 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[2][5];
-                    hud_element_set_script(id, D_802841C0[2][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
                 } else {
                     id = D_8029FA90[2][4];
-                    hud_element_set_script(id, D_802841C0[2][3]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][3]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[2][5];
-                    hud_element_set_script(id, D_802841C0[2][0]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][0]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -961,16 +1223,16 @@ void btl_state_draw_celebration(void) {
                         hud_element_set_script(id, &D_802A9F34);
                     }
                     id = D_8029FA80[3];
-                    if (hud_element_get_script(id) != &D_802A9F84) {
-                        hud_element_set_script(id, &D_802A9F84);
+                    if (hud_element_get_script(id) != &HES_level_up_leaves) {
+                        hud_element_set_script(id, &HES_level_up_leaves);
                     }
                     id = D_8029FA80[1];
-                    if (hud_element_get_script(id) != &D_802A9F5C) {
-                        hud_element_set_script(id, &D_802A9F5C);
+                    if (hud_element_get_script(id) != &HES_level_up_flower) {
+                        hud_element_set_script(id, &HES_level_up_flower);
                     }
                     id = D_8029FA80[2];
-                    if (hud_element_get_script(id) != &D_802A9FAC) {
-                        hud_element_set_script(id, &D_802A9FAC);
+                    if (hud_element_get_script(id) != &HES_level_up_badge) {
+                        hud_element_set_script(id, &HES_level_up_badge);
                     }
                     break;
                 case 1:
@@ -1140,124 +1402,3 @@ void func_80260948(s32 arg0, s32 posX, s32 posY) {
 void func_80260A20(s64 posX, s32 posY) {
     draw_msg(0x1D00AB, posX + 11, posY + 6, 255, 0xF, 0);
 }
-
-EvtScript D_802842B0 = {
-    EVT_SET(LocalVar(15), 0)
-    EVT_CALL(func_8025DEB0)
-    EVT_IF_EQ(LocalVar(0), 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LT(LocalVar(0), 2)
-        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE40)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
-        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_ELSE
-        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE5C)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
-        EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-        EVT_SET(LocalFlag(0), 1)
-    EVT_END_IF
-    EVT_SWITCH(LocalVar(0))
-        EVT_CASE_GT(99)
-            EVT_SET(LocalVar(15), 3)
-        EVT_CASE_GT(9)
-            EVT_SET(LocalVar(15), 2)
-        EVT_CASE_DEFAULT
-            EVT_SET(LocalVar(15), 1)
-    EVT_END_SWITCH
-    EVT_CALL(func_8025DEC4)
-    EVT_CALL(CreateVirtualEntity, LocalVar(7), LocalVar(10))
-    EVT_CALL(SetVirtualEntityPosition, LocalVar(7), -353, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LocalVar(7), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(CreateVirtualEntity, LocalVar(8), LocalVar(11))
-    EVT_CALL(SetVirtualEntityPosition, LocalVar(8), -338, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LocalVar(8), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(CreateVirtualEntity, LocalVar(9), LocalVar(12))
-    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), -323, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LocalVar(9), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(func_8025E044)
-    EVT_SWITCH(LocalVar(15))
-        EVT_CASE_EQ(3)
-            EVT_SET(LocalVar(0), -197)
-        EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(0), -204)
-        EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(0), -211)
-    EVT_END_SWITCH
-    EVT_LOOP(10)
-        EVT_ADD(LocalVar(0), 20)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -78)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -146)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -131)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -116)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(func_8025E030)
-    EVT_SWITCH(LocalVar(15))
-        EVT_CASE_EQ(3)
-            EVT_SET(LocalVar(0), 3)
-        EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(0), -4)
-        EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(0), -11)
-    EVT_END_SWITCH
-    EVT_LOOP(10)
-        EVT_ADD(LocalVar(0), 20)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -78)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(6), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -154)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(7), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -139)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(8), LocalVar(1), 68, 70)
-        EVT_SET(LocalVar(1), LocalVar(0))
-        EVT_ADD(LocalVar(1), -124)
-        EVT_CALL(SetVirtualEntityPosition, LocalVar(9), LocalVar(1), 68, 70)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DeleteVirtualEntity, LocalVar(6))
-    EVT_CALL(DeleteVirtualEntity, LocalVar(7))
-    EVT_CALL(DeleteVirtualEntity, LocalVar(8))
-    EVT_CALL(DeleteVirtualEntity, LocalVar(9))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript D_80284880 = {
-    EVT_CALL(CreateVirtualEntity, LocalVar(9), 0x802A9EF0)
-    EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, 210, 70)
-    EVT_CALL(func_8025E108)
-    EVT_CHILD_THREAD
-        EVT_WAIT(4)
-        EVT_CALL(func_8025E14C)
-    EVT_END_CHILD_THREAD
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(2.25))
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
-        EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.45))
-        EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LocalVar(0), 210)
-        EVT_LOOP(10)
-            EVT_SUB(LocalVar(0), 10)
-            EVT_CALL(SetVirtualEntityPosition, LocalVar(9), 0, LocalVar(0), 70)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(8)
-    EVT_RETURN
-    EVT_END
-};
