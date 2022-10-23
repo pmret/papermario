@@ -1,18 +1,30 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E0116C60[] = { 0x09004458 };
+extern Gfx D_09003F98[];
+extern Gfx D_09004010[];
+extern Gfx D_09004088[];
+extern Gfx D_09004100[];
+extern Gfx D_09004178[];
+extern Gfx D_090041F0[];
+extern Gfx D_09004268[];
+extern Gfx D_09004360[];
+extern Gfx D_09004458[];
+extern Gfx D_09004508[];
+extern Gfx D_09004600[];
 
-s32 D_E0116C64[] = { 0x09004600 };
+Gfx* D_E0116C60[] = { D_09004458 };
 
-s32 D_E0116C68[] = { 0x09004360 };
+Gfx* D_E0116C64[] = { D_09004600 };
 
-s32 D_E0116C6C[] = { 0x09004508 };
+Gfx* D_E0116C68[] = { D_09004360 };
 
-s32 D_E0116C70[] = {
-    0x09003F98, 0x09004010, 0x09004088,
-    0x09004100, 0x09004178, 0x090041F0,
-    0x09004268
+Gfx* D_E0116C6C[] = { D_09004508 };
+
+Gfx* D_E0116C70[] = {
+    D_09003F98, D_09004010, D_09004088,
+    D_09004100, D_09004178, D_090041F0,
+    D_09004268
 };
 
 Color_RGB8 D_E0116C8C[] = {

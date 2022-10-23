@@ -150,20 +150,12 @@ void star_spirits_energy_appendGfx(void* effect) {
     if (unk_04 == 2 || unk_04 == 3) {
         alpha = 0;
 
-        if (data->unk_70 == 1 || data->unk_70 == 100) {
-            if (data->unk_74 > 2) {
-                if (data->unk_74 < 11) {
-                    alpha = 255 - (data->unk_74 - 2) * 30;
-                }
-            }
+        if ((data->unk_70 == 1 || data->unk_70 == 100) && data->unk_74 > 2 && data->unk_74 < 11) {
+            alpha = 255 - (data->unk_74 - 2) * 30;
         }
 
-        if (data->unk_70 == 5) {
-            if (data->unk_74 > 0) {
-                if (data->unk_74 < 9) {
-                    alpha = 255 - data->unk_74 * 30;
-                }
-            }
+        if (data->unk_70 == 5 && data->unk_74 > 0 && data->unk_74 < 9) {
+            alpha = 255 - data->unk_74 * 30;
         }
 
         if (alpha > 0) {
