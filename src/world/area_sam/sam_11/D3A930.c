@@ -1,6 +1,59 @@
 #include "sam_11.h"
 
+extern s32 D_80243CC0_D3E290;
+extern s32 D_80243CC4_D3E294;
+extern s32 D_80243CC8_D3E298;
+
+// needs data migration + some issues with the return values
+#ifdef NON_EQUIVALENT
+ApiStatus func_80240360_D3A930(Evt* script, s32 isInitialCall) {
+    u8 r, g, b, a;
+    u8 alpha;
+    s32 temp_a2;
+
+    if (isInitialCall) {
+        func_8011B950(script->varTable[1], -1, 1, 1);
+        script->functionTemp[0] = 0;
+        get_background_color_blend(&r, &g, &b, &a);
+        if ((script->varTable[0] != 0) || (a != 255)) {
+            if (script->varTable[0] == 1 && a == 0) {
+                return ApiStatus_DONE2;
+            }
+        } else {
+            return ApiStatus_DONE2;
+        }
+    }
+
+    script->functionTemp[0] += script->varTable[2];
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
+    }
+    if (script->varTable[0] == 0) {
+        alpha = script->functionTemp[0];
+    } else {
+        alpha = ~script->functionTemp[0];
+    }
+    a = alpha;
+    set_background_color_blend(0, 0, 0, a);
+    temp_a2 = 255 - a;
+    r = (D_80243CC0_D3E290 * temp_a2) / 255;
+    g = (D_80243CC4_D3E294 * temp_a2) / 255;
+    b = (D_80243CC8_D3E298 * temp_a2) / 255;
+    gCameras[CAM_DEFAULT].bgColor[0] = r;
+    gCameras[CAM_DEFAULT].bgColor[1] = g;
+    gCameras[CAM_DEFAULT].bgColor[2] = b;
+    if (script->functionTemp[0] >= 255) {
+        if (script->varTable[0] == 1) {
+            func_8011B950(script->varTable[1], -1, 0, 1);
+        }
+
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_80240360_D3A930);
+#endif
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_8024052C_D3AAFC);
 

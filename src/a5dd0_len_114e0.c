@@ -3308,270 +3308,306 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
 // this function has weird control flow and suqqz
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 void render_models(void) {
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+    f32 outX, outY, outZ, outS;
+    f32 m00, m01, m02, m03;
+    f32 m10, m11, m12, m13;
+    f32 m20, m21, m22, m23;
+    f32 m30, m31, m32, m33;
+    f32 x, y, z;
+    f32 tgX, tgY, tgZ;
+    f32 bbx, bby, bbz;
+
     Camera* camera = &gCameras[gCurrentCameraID];
+    Model* model;
+    ModelBoundingBox* boundingBox;
+    ModelTransformGroup* transformGroup;
+    f32 xComp, yComp, zComp;
+    f32 v0, v1, v2, v3;
+    f32 d0, d1, d2, d3;
+
     s32 distance;
     s32 cond;
     s32 i;
 
-    RenderTask rt;
-    RenderTask* rtPtr = &rt;
-    f32 sp38;
-    f32 sp3C;
-    f32 sp40;
-    f32 sp44;
-    f32 sp48;
-    f32 sp4C;
-    f32 sp50;
-    f32 sp54;
-    f32 sp58;
-    f32 sp5C;
-    f32 sp60;
-    f32 sp64;
-    f32 sp68;
-    f32 sp6C;
-    f32 sp70;
-    f32 sp74;
-    f32 sp78;
-    f32 sp7C;
-    f32 sp80;
-    f32 sp84;
-    f32 centerX, centerY, centerZ;
-    f32 sp98;
-    f32 spA0;
-
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f0_3;
-    f32 temp_f0_4;
-    f32 temp_f0_5;
-    f32 temp_f0_6;
-    f32 temp_f0_7;
-    f32 temp_f0_8;
-    f32 temp_f12;
-    f32 temp_f12_10;
-    f32 temp_f12_11;
-    f32 temp_f12_12;
-    f32 temp_f12_13;
-    f32 temp_f12_14;
-    f32 temp_f12_15;
-    f32 temp_f12_16;
-    f32 temp_f12_2;
-    f32 temp_f12_3;
-    f32 temp_f12_4;
-    f32 temp_f12_5;
-    f32 temp_f12_6;
-    f32 temp_f12_7;
-    f32 temp_f12_8;
-    f32 temp_f12_9;
-    f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f20_3;
-    f32 temp_f20_4;
-    f32 temp_f20_5;
-    f32 temp_f20_6;
-    f32 temp_f20_7;
-    f32 temp_f20_8;
-    f32 temp_f26;
-    f32 temp_f28;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f2_3;
-    f32 temp_f2_4;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
-    f32 temp_f2_7;
-    f32 temp_f2_8;
-    f32 temp_f4;
-    f32 temp_f4_10;
-    f32 temp_f4_11;
-    f32 temp_f4_12;
-    f32 temp_f4_13;
-    f32 temp_f4_14;
-    f32 temp_f4_15;
-    f32 temp_f4_16;
-    f32 temp_f4_17;
-    f32 temp_f4_18;
-    f32 temp_f4_19;
-    f32 temp_f4_20;
-    f32 temp_f4_21;
-    f32 temp_f4_22;
-    f32 temp_f4_23;
-    f32 temp_f4_24;
-    f32 temp_f4_2;
-    f32 temp_f4_3;
-    f32 temp_f4_4;
-    f32 temp_f4_5;
-    f32 temp_f4_6;
-    f32 temp_f4_7;
-    f32 temp_f4_8;
-    f32 temp_f4_9;
-    f32 temp_f6;
-    f32 temp_f6_2;
-    f32 temp_f6_3;
-    f32 temp_f6_4;
-    f32 temp_f6_5;
-    f32 temp_f6_6;
-    f32 temp_f6_7;
-    f32 temp_f6_8;
-    f32 temp_f8;
-    f32 temp_f8_2;
-    f32 temp_f8_3;
-    f32 temp_f8_4;
-    f32 temp_f8_5;
-    f32 temp_f8_6;
-    f32 temp_f8_7;
-    f32 temp_f8_8;
-
-    sp48 = camera->perspectiveMatrix[0][0];
-    sp4C = camera->perspectiveMatrix[0][1];
-    sp50 = camera->perspectiveMatrix[0][2];
-    sp54 = camera->perspectiveMatrix[0][3];
-    sp58 = camera->perspectiveMatrix[1][0];
-    sp5C = camera->perspectiveMatrix[1][1];
-    sp60 = camera->perspectiveMatrix[1][2];
-    sp64 = camera->perspectiveMatrix[1][3];
-    sp68 = camera->perspectiveMatrix[2][0];
-    sp6C = camera->perspectiveMatrix[2][1];
-    sp70 = camera->perspectiveMatrix[2][2];
-    sp74 = camera->perspectiveMatrix[2][3];
-    sp78 = camera->perspectiveMatrix[3][0];
-    sp7C = camera->perspectiveMatrix[3][1];
-    sp80 = camera->perspectiveMatrix[3][2];
-    sp84 = camera->perspectiveMatrix[3][3];
+    m00 = camera->perspectiveMatrix[0][0];
+    m01 = camera->perspectiveMatrix[0][1];
+    m02 = camera->perspectiveMatrix[0][2];
+    m03 = camera->perspectiveMatrix[0][3];
+    m10 = camera->perspectiveMatrix[1][0];
+    m11 = camera->perspectiveMatrix[1][1];
+    m12 = camera->perspectiveMatrix[1][2];
+    m13 = camera->perspectiveMatrix[1][3];
+    m20 = camera->perspectiveMatrix[2][0];
+    m21 = camera->perspectiveMatrix[2][1];
+    m22 = camera->perspectiveMatrix[2][2];
+    m23 = camera->perspectiveMatrix[2][3];
+    m30 = camera->perspectiveMatrix[3][0];
+    m31 = camera->perspectiveMatrix[3][1];
+    m32 = camera->perspectiveMatrix[3][2];
+    m33 = camera->perspectiveMatrix[3][3];
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        Model* model = (*gCurrentModels)[i];
+        model = (*gCurrentModels)[i];
+        if (model == NULL) {
+            continue;
+        }
+        if (model->flags == 0) {
+            continue;
+        }
+        if (model->flags & 4) {
+            continue;
+        }
+        if (model->flags & 2) {
+            continue;
+        }
+        if (model->flags & 0x20) {
+            continue;
+        }
+        if (model->flags & 8) {
+            continue;
+        }
 
-        if (model != NULL) {
-            if (model->flags == 0) {
-                continue;
-            }
+        x = model->center.x;
+        y = model->center.y;
+        z = model->center.z;
 
-            if (model->flags & 4) {
-                continue;
-            }
+        if (model->flags & 0x200) {
+            cond = FALSE;
+            boundingBox = model->modelNode->propertyList;
+            bbx = boundingBox->halfSizeX;
+            bby = boundingBox->halfSizeY;
+            bbz = boundingBox->halfSizeZ;
 
-            if (model->flags & 2) {
-                continue;
-            }
+            xComp = x - bbx;
+            yComp = y - bby;
+            zComp = z - bbz;
+            v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30;
+            v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31;
+            v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32;
+            v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33;
+            outX = v0;
+            outY = v1;
+            outZ = v2;
+            outS = v3;
+            if ((v3 != 0.0f) &&
+                ((
+                d3 = 1.0f / v3,
+                d0 = v0 * d3,
+                d1 = v1 * d3,
+                d2 = v2 * d3,
+                outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)) &&
+                ((bbx == 0.0f) ||
 
-            if (model->flags & 0x20) {
-                continue;
-            }
+            ((
+                xComp = x + bbx,
+                yComp = y - bby,
+                zComp = z - bbz,
+                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                outX = v0,
+                outY = v1,
+                outZ = v2,
+                outS = v3,
+                (v3 != 0.0f)) && ((
+                    d3 = 1.0f / v3,
+                    d0 = v0 * d3,
+                    d1 = v1 * d3,
+                    d2 = v2 * d3,
+                    outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))
 
-            if (model->flags & 0x8) {
-                continue;
-            }
-
-            centerX = model->center.x;
-            centerY = model->center.y;
-            centerZ = model->center.z;
-
-            if (model->flags & 0x200) {
-                ModelNodeProperty* propertyList = model->modelNode->propertyList;
-
-                temp_f26 = (f32) propertyList->dataType;
-                sp98 = temp_f26;
-                spA0 = (f32) propertyList[1].dataType;
-                temp_f28 = (f32) propertyList[1].key;
-                temp_f4 = centerX - temp_f26;
-                temp_f12 = centerY - spA0;
-                temp_f20 = centerZ - temp_f28;
-                temp_f6 = (sp48 * temp_f4) + (sp58 * temp_f12) + (sp68 * temp_f20) + sp78;
-                temp_f8 = (sp4C * temp_f4) + (sp5C * temp_f12) + (sp6C * temp_f20) + sp7C;
-                temp_f2 = (sp50 * temp_f4) + (sp60 * temp_f12) + (sp70 * temp_f20) + sp80;
-                temp_f4_2 = (sp54 * temp_f4) + (sp64 * temp_f12) + (sp74 * temp_f20) + sp84;
-                cond = FALSE;
-
-                if ((temp_f4_2 != 0.0f) &&
-                ((temp_f0 = 1.0f / temp_f4_2, temp_f4_3 = temp_f6 * temp_f0, temp_f12_2 = temp_f8 * temp_f0, !((temp_f2 * temp_f0) > -1.0f)) || !(temp_f4_3 >= -1.0f) || !(temp_f4_3 <= 1.0f) || !(temp_f12_2 >= -1.0f) || !(temp_f12_2 <= 1.0f)) && ((sp98 == 0.0f) || ((temp_f4_4 = centerX + sp98, temp_f12_3 = centerY - spA0, temp_f20_2 = centerZ - temp_f28, temp_f6_2 = (sp48 * temp_f4_4) + (sp58 * temp_f12_3) + (sp68 * temp_f20_2) + sp78, temp_f8_2 = (sp4C * temp_f4_4) + (sp5C * temp_f12_3) + (sp6C * temp_f20_2) + sp7C, temp_f2_2 = (sp50 * temp_f4_4) + (sp60 * temp_f12_3) + (sp70 * temp_f20_2) + sp80, temp_f4_5 = (sp54 * temp_f4_4) + (sp64 * temp_f12_3) + (sp74 * temp_f20_2) + sp84, (temp_f4_5 != 0.0f)) && ((temp_f0_2 = 1.0f / temp_f4_5, temp_f4_6 = temp_f6_2 * temp_f0_2, temp_f12_4 = temp_f8_2 * temp_f0_2, !((temp_f2_2 * temp_f0_2) > -1.0f)) || !(temp_f4_6 >= -1.0f) || !(temp_f4_6 <= 1.0f) || !(temp_f12_4 >= -1.0f) || !(temp_f12_4 <= 1.0f)))) && ((spA0 == 0.0f) || ((temp_f4_7 = centerX - sp98, temp_f12_5 = centerY + spA0, temp_f20_3 = centerZ - temp_f28, temp_f6_3 = (sp48 * temp_f4_7) + (sp58 * temp_f12_5) + (sp68 * temp_f20_3) + sp78, temp_f8_3 = (sp4C * temp_f4_7) + (sp5C * temp_f12_5) + (sp6C * temp_f20_3) + sp7C, temp_f2_3 = (sp50 * temp_f4_7) + (sp60 * temp_f12_5) + (sp70 * temp_f20_3) + sp80, temp_f4_8 = (sp54 * temp_f4_7) + (sp64 * temp_f12_5) + (sp74 * temp_f20_3) + sp84, (temp_f4_8 != 0.0f)) && ((temp_f0_3 = 1.0f / temp_f4_8, temp_f4_9 = temp_f6_3 * temp_f0_3, temp_f12_6 = temp_f8_3 * temp_f0_3, !((temp_f2_3 * temp_f0_3) > -1.0f)) || !(temp_f4_9 >= -1.0f) || !(temp_f4_9 <= 1.0f) || !(temp_f12_6 >= -1.0f) || !(temp_f12_6 <= 1.0f))))) {
-                    if ((sp98 != 0.0f) && (spA0 != 0.0f)) {
-                        temp_f4_10 = centerX + sp98;
-                        temp_f12_7 = centerY + spA0;
-                        temp_f20_4 = centerZ - temp_f28;
-                        temp_f6_4 = (sp48 * temp_f4_10) + (sp58 * temp_f12_7) + (sp68 * temp_f20_4) + sp78;
-                        temp_f8_4 = (sp4C * temp_f4_10) + (sp5C * temp_f12_7) + (sp6C * temp_f20_4) + sp7C;
-                        temp_f2_4 = (sp50 * temp_f4_10) + (sp60 * temp_f12_7) + (sp70 * temp_f20_4) + sp80;
-                        temp_f4_11 = (sp54 * temp_f4_10) + (sp64 * temp_f12_7) + (sp74 * temp_f20_4) + sp84;
-
-                        if (temp_f4_11 != 0.0f) {
-                            temp_f0_4 = 1.0f / temp_f4_11;
-                            temp_f4_12 = temp_f6_4 * temp_f0_4;
-                            temp_f12_8 = temp_f8_4 * temp_f0_4;
-                            if (((temp_f2_4 * temp_f0_4) > -1.0f) && (temp_f4_12 >= -1.0f) && (temp_f4_12 <= 1.0f) && (temp_f12_8 >= -1.0f)) {
-                                if (!(temp_f12_8 <= 1.0f)) {
-                                    goto block_36;
-                                }
-                            } else {
-                                goto block_37;
+            ) && ((bby == 0.0f) || ((
+                xComp = x - bbx,
+                yComp = y + bby,
+                zComp = z - bbz,
+                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                outX = v0,
+                outY = v1,
+                outZ = v2,
+                outS = v3,
+                (v3 != 0.0f)) && ((
+                    d3 = 1.0f / v3,
+                    d0 = v0 * d3,
+                    d1 = v1 * d3,
+                    d2 = v2 * d3,
+                    outS = d3,
+                    !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f))))) {
+                if ((bbx != 0.0f) && (bby != 0.0f)) {
+                    xComp = x + bbx;
+                    yComp = y + bby;
+                    zComp = z - bbz;
+                    v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30;
+                    v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31;
+                    v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32;
+                    v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33;
+                    outX = v0;
+                    outY = v1;
+                    outZ = v2;
+                    outS = v3;
+                    if (v3 != 0.0f) {
+                        d3 = 1.0f / v3;
+                        d0 = v0 * d3;
+                        d1 = v1 * d3;
+                        d2 = v2 * d3,
+                        outS = d3;
+                        if ((d2 > -1.0f) && (d0 >= -1.0f) && (d0 <= 1.0f) && (d1 >= -1.0f)) {
+                            if (!(d1 <= 1.0f)) {
+                                goto block_36;
                             }
-                        }
-                    } else {
-block_36:
-block_37:
-                        if (((temp_f28 == 0.0f) || ((temp_f4_13 = centerX - sp98, temp_f12_9 = centerY - spA0, temp_f20_5 = centerZ + temp_f28, temp_f6_5 = (sp48 * temp_f4_13) + (sp58 * temp_f12_9) + (sp68 * temp_f20_5) + sp78, temp_f8_5 = (sp4C * temp_f4_13) + (sp5C * temp_f12_9) + (sp6C * temp_f20_5) + sp7C, temp_f2_5 = (sp50 * temp_f4_13) + (sp60 * temp_f12_9) + (sp70 * temp_f20_5) + sp80, temp_f4_14 = (sp54 * temp_f4_13) + (sp64 * temp_f12_9) + (sp74 * temp_f20_5) + sp84, (temp_f4_14 != 0.0f)) && ((temp_f0_5 = 1.0f / temp_f4_14, temp_f4_15 = temp_f6_5 * temp_f0_5, temp_f12_10 = temp_f8_5 * temp_f0_5, !((temp_f2_5 * temp_f0_5) > -1.0f)) || !(temp_f4_15 >= -1.0f) || !(temp_f4_15 <= 1.0f) || !(temp_f12_10 >= -1.0f) || !(temp_f12_10 <= 1.0f)))) && ((sp98 == 0.0f) || (temp_f28 == 0.0f) || ((temp_f4_16 = centerX + sp98, temp_f12_11 = centerY - spA0, temp_f20_6 = centerZ + temp_f28, temp_f6_6 = (sp48 * temp_f4_16) + (sp58 * temp_f12_11) + (sp68 * temp_f20_6) + sp78, temp_f8_6 = (sp4C * temp_f4_16) + (sp5C * temp_f12_11) + (sp6C * temp_f20_6) + sp7C, temp_f2_6 = (sp50 * temp_f4_16) + (sp60 * temp_f12_11) + (sp70 * temp_f20_6) + sp80, temp_f4_17 = (sp54 * temp_f4_16) + (sp64 * temp_f12_11) + (sp74 * temp_f20_6) + sp84, (temp_f4_17 != 0.0f)) && ((temp_f0_6 = 1.0f / temp_f4_17, temp_f4_18 = temp_f6_6 * temp_f0_6, temp_f12_12 = temp_f8_6 * temp_f0_6, !((temp_f2_6 * temp_f0_6) > -1.0f)) || !(temp_f4_18 >= -1.0f) || !(temp_f4_18 <= 1.0f) || !(temp_f12_12 >= -1.0f) || !(temp_f12_12 <= 1.0f)))) && ((spA0 == 0.0f) || (temp_f28 == 0.0f) || ((temp_f4_19 = centerX - sp98, temp_f12_13 = centerY + spA0, temp_f20_7 = centerZ + temp_f28, temp_f6_7 = (sp48 * temp_f4_19) + (sp58 * temp_f12_13) + (sp68 * temp_f20_7) + sp78, temp_f8_7 = (sp4C * temp_f4_19) + (sp5C * temp_f12_13) + (sp6C * temp_f20_7) + sp7C, temp_f2_7 = (sp50 * temp_f4_19) + (sp60 * temp_f12_13) + (sp70 * temp_f20_7) + sp80, temp_f4_20 = (sp54 * temp_f4_19) + (sp64 * temp_f12_13) + (sp74 * temp_f20_7) + sp84, (temp_f4_20 != 0.0f)) && ((temp_f0_7 = 1.0f / temp_f4_20, temp_f4_21 = temp_f6_7 * temp_f0_7, temp_f12_14 = temp_f8_7 * temp_f0_7, !((temp_f2_7 * temp_f0_7) > -1.0f)) || !(temp_f4_21 >= -1.0f) || !(temp_f4_21 <= 1.0f) || !(temp_f12_14 >= -1.0f) || !(temp_f12_14 <= 1.0f)))) && ((sp98 == 0.0f) || (spA0 == 0.0f) || (temp_f28 == 0.0f) || ((temp_f4_22 = centerX + sp98, temp_f12_15 = centerY + spA0, temp_f20_8 = centerZ + temp_f28, temp_f6_8 = (sp48 * temp_f4_22) + (sp58 * temp_f12_15) + (sp68 * temp_f20_8) + sp78, temp_f8_8 = (sp4C * temp_f4_22) + (sp5C * temp_f12_15) + (sp6C * temp_f20_8) + sp7C, temp_f2_8 = (sp50 * temp_f4_22) + (sp60 * temp_f12_15) + (sp70 * temp_f20_8) + sp80, temp_f4_23 = (sp54 * temp_f4_22) + (sp64 * temp_f12_15) + (sp74 * temp_f20_8) + sp84, (temp_f4_23 != 0.0f)) && ((temp_f0_8 = 1.0f / temp_f4_23, temp_f4_24 = temp_f6_8 * temp_f0_8, temp_f12_16 = temp_f8_8 * temp_f0_8, !((temp_f2_8 * temp_f0_8) > -1.0f)) || !(temp_f4_24 >= -1.0f) || !(temp_f4_24 <= 1.0f) || !(temp_f12_16 >= -1.0f) || !(temp_f12_16 <= 1.0f))))) {
-                            cond = TRUE;
+                        } else {
+                            goto block_36;
                         }
                     }
-                }
+                } else {
+block_36:
+                    if (((bbz == 0.0f) || ((
+                        xComp = x - bbx,
+                        yComp = y - bby,
+                        zComp = z + bbz,
+                        v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                        v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                        v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                        v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                        outX = v0,
+                        outY = v1,
+                        outZ = v2,
+                        outS = v3,
+                        (v3 != 0.0f)) && ((
+                            d3 = 1.0f / v3,
+                            d0 = v0 * d3,
+                            d1 = v1 * d3,
+                            d2 = v2 * d3,
+                            outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bbx == 0.0f) || (bbz == 0.0f) || ((
+                                xComp = x + bbx,
+                                yComp = y - bby,
+                                zComp = z + bbz,
+                                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                                outX = v0,
+                                outY = v1,
+                                outZ = v2,
+                                outS = v3, (v3 != 0.0f)) &&
 
-                if (cond) {
-                    continue;
+                                ((
+                                    d3 = 1.0f / v3,
+                                    d0 = v0 * d3,
+                                    d1 = v1 * d3,
+                                    d2 = v2 * d3,
+                                    outS = d3,
+
+                                    !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bby == 0.0f) || (bbz == 0.0f) || ((
+
+                                        xComp = x - bbx,
+                                        yComp = y + bby,
+                                        zComp = z + bbz,
+                                        v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                                        v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                                        v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                                        v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                                        outX = v0,
+                                        outY = v1,
+                                        outZ = v2,
+                                        outS = v3,
+
+                                        (v3 != 0.0f)) && ((
+                                            d3 = 1.0f / v3,
+                                            d0 = v0 * d3,
+                                            d1 = v1 * d3,
+                                            d2 = v2 * d3,
+                                            outS = d3,
+
+                                            !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bbx == 0.0f) || (bby == 0.0f) || (bbz == 0.0f) || ((
+                                                xComp = x + bbx,
+                                                yComp = y + bby,
+                                                zComp = z + bbz,
+                                                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
+                                                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
+                                                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
+                                                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
+                                                outX = v0,
+                                                outY = v1,
+                                                outZ = v2,
+                                                outS = v3,
+
+                                                (v3 != 0.0f)) && ((
+                                                    d3 = 1.0f / v3,
+                                                    d0 = v0 * d3,
+                                                    d1 = v1 * d3,
+                                                    d2 = v2 * d3,
+                                                    outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f))
+                                            )))
+                    {
+                        cond = TRUE;
+                    }
                 }
             }
-
-            transform_point(camera->perspectiveMatrix[0], centerX, centerY, centerZ, 1.0f, &sp38, &sp3C, &sp40, &sp44);
-            distance = sp40 + 5000.0f;
-            if (distance < 0) {
-                distance = 0;
-            } else if (distance > 10000) {
-                distance = 10000;
+            if (cond) {
+                continue;
             }
-            rtPtr->appendGfxArg = model;
-            if (model->modelNode->type == SHAPE_TYPE_GROUP) {
-                rtPtr->appendGfx = appendGfx_model_group;
-            } else {
-                rtPtr->appendGfx = appendGfx_model;
-            }
-            rtPtr->distance = -distance;
-            rtPtr->renderMode = model->renderMode;
-            queue_render_task(rtPtr);
         }
+
+        transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outS);
+        distance = outZ + 5000.0f;
+        if (distance < 0) {
+            distance = 0;
+        } else if (distance > 10000) {
+            distance = 10000;
+        }
+        rtPtr->appendGfxArg = model;
+        if (model->modelNode->type == SHAPE_TYPE_GROUP) {
+            rtPtr->appendGfx = appendGfx_model_group;
+        } else {
+            rtPtr->appendGfx = appendGfx_model;
+        }
+        rtPtr->distance = -distance;
+        rtPtr->renderMode = model->renderMode;
+        queue_render_task(rtPtr);
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
-        ModelTransformGroup* group = (*gCurrentTransformGroups)[i];
-        f32 centerX, centerY, centerZ;
-        s32 distance;
-
-        if (group == NULL) {
-            continue;
-        }
-        if (group->flags == 0) {
-            continue;
-        }
-        if (group->flags & MODEL_TRANSFORM_GROUP_FLAGS_4) {
+        transformGroup = (*gCurrentTransformGroups)[i];
+        if (transformGroup == NULL) {
             continue;
         }
 
-        centerX = group->center.x;
-        centerY = group->center.y;
-        centerZ = group->center.z;
-
-        transform_point(camera->perspectiveMatrix, centerX, centerY, centerZ, 1.0f, &sp38, &sp3C, &sp40, &sp44);
-        if (sp44 == 0.0f) {
-            sp44 = 1.0f;
+        if (transformGroup->flags == 0) {
+            continue;
         }
 
-        distance = (sp40 / sp44) * 10000.0f;
+        if (transformGroup->flags & 4) {
+            continue;
+        }
 
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2)) {
+        tgX = transformGroup->center.x;
+        tgY = transformGroup->center.y;
+        tgZ = transformGroup->center.z;
+
+        transform_point(
+            camera->perspectiveMatrix,
+            tgX, tgY, tgZ, 1.0f,
+            &outX, &outY, &outZ, &outS
+        );
+        if (outS == 0.0f) {
+            outS = 1.0f;
+        }
+
+        distance = ((outZ / outS) * 10000.0f);
+
+        if (!(transformGroup->flags & 2)) {
             rtPtr->appendGfx = render_transform_group;
-            rtPtr->appendGfxArg = group;
+            rtPtr->appendGfxArg = transformGroup;
             rtPtr->distance = -distance;
-            rtPtr->renderMode = group->renderMode;
+            rtPtr->renderMode = transformGroup->renderMode;
             queue_render_task(rtPtr);
         }
     }
