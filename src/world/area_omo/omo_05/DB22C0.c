@@ -38,8 +38,35 @@ ApiStatus func_80242204_DB44C4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802422A0_DB4560);
+ApiStatus func_802422A0_DB4560(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemID = evt_get_variable(script, *args++);
+    ItemData* item = &gItemTable[itemID];
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242328_DB45E8);
+    if (itemID == ITEM_CAKE || itemID == ITEM_STRANGE_CAKE || itemID == ITEM_SHROOM_CAKE) {
+        script->varTable[9] = 2;
+    } else if (item->typeFlags & ITEM_TYPE_FLAG_FOOD_OR_DRINK) {
+        script->varTable[9] = 1;
+    } else {
+        script->varTable[9] = 0;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80242328_DB45E8(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[CAM_DEFAULT];
+
+    if (isInitialCall) {
+        camera->flags |= CAMERA_FLAGS_SHAKING;
+        script->functionTempF[0] = 0.0f;
+    }
+    script->functionTempF[0] += 10.0f;
+    guRotateF(camera->viewMtxShaking[0], script->functionTempF[0], 0.0f, 0.0f, -1.0f);
+
+    if (script->functionTempF[0] >= 360.0) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
