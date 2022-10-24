@@ -2530,4 +2530,6 @@ EffectInstance* fx_pink_sparkles(s32, f32, f32, f32, f32, f32);
 EffectInstance* fx_star_outline(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_86(s32, f32, f32, f32, f32, s32);
 
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
+
 #endif

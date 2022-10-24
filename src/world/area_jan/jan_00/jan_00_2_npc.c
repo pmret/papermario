@@ -107,8 +107,17 @@ INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240CF8_B21238);
 API_CALLABLE(func_80240F14_B21454);
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240F14_B21454);
 
-API_CALLABLE(func_80241134_B21674);
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80241134_B21674);
+API_CALLABLE(func_80241134_B21674) {
+    Npc* npc = get_npc_safe(2);
+    f32 x = npc->pos.x;
+    f32 y = npc->pos.y;
+    f32 z = npc->pos.z - 20.0f;
+
+    if (y < 0.0f) {
+        fx_rising_bubble(0, x, y, z, 0.0f);
+    }
+    return ApiStatus_BLOCK;
+}
 
 MAP_DATA_SECTION_START
 
