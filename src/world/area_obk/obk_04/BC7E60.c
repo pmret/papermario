@@ -1,3 +1,9 @@
 #include "obk_04.h"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7E60", func_80240000_BC7E60);
+ApiStatus func_80240000_BC7E60(Evt* script, s32 isInitialCall) {
+    ItemEntity* item = get_item_entity(script->varTable[0]);
+
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TRANSPARENT);
+    item->alpha = 255;
+    return ApiStatus_DONE2;
+}
