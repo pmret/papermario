@@ -22,15 +22,7 @@ ApiStatus func_802400C0_D4BAE0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240194_D4BBB4(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 temp_s2 = evt_get_variable(script, *args++);
-    s32 temp_s0_3 = evt_get_variable(script, *args++);
-    s32 t3 = evt_get_variable(script, *args++);
-
-    fx_rising_bubble(0, temp_s2, temp_s0_3, t3, 0);
-    return ApiStatus_DONE2;
-}
+#include "world/common/todo/PlayRisingBubble.inc.c"
 
 ApiStatus func_80240238_D4BC58(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

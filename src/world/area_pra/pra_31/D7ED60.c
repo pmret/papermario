@@ -3,4 +3,7 @@
 static char* N(exit_str_0) = "pra_34";
 static char* N(exit_str_1) = "pra_40";
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7ED60", func_80240000_D7ED60);
+ApiStatus func_80240000_D7ED60(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->playerSpriteSet = 1;
+    return ApiStatus_BLOCK;
+}

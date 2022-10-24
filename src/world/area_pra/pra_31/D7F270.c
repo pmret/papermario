@@ -18,6 +18,11 @@ INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240E70_D7FBD0);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240F2C_D7FC8C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240FD0_D7FD30);
+ApiStatus func_80240FD0_D7FD30(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240FF0_D7FD50);
+    playerStatus->animFlags |= PA_FLAGS_800000;
+    return ApiStatus_DONE2;
+}
+
+#include "world/common/todo/UnkFunc11.inc.c"
