@@ -98,8 +98,53 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_END
 };
 
+// float regalloc
 API_CALLABLE(func_80240B4C_B2108C);
+#ifdef NON_EQUIVALENT
+API_CALLABLE(func_80240B4C_B2108C) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc;
+    f32 temp_f20;
+    f32 var_f22;
+    f32 x, y, z;
+    s32 temp_s1;
+    s32 outX, outY, outZ;
+
+
+    temp_s1 = evt_get_variable(script, *args++);
+    x = y = z = 0.0f;
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+    npc = get_npc_safe(0);
+    switch (temp_s1) {
+        case 0:
+            var_f22 = 130.0f;
+            break;
+        case 1:
+            var_f22 = 160.0f;
+            break;
+        case 2:
+            var_f22 = 100.0f;
+            break;
+        default:
+            var_f22 = 80.0f;
+            break;
+    }
+    if (temp_s1 < 4) {
+        temp_f20 = -npc->yaw;
+        x = npc->pos.x + 30.0f + sin_deg(temp_f20) * var_f22;
+        z = npc->pos.z + cos_deg(temp_f20) * var_f22;
+        y = npc->pos.y + 50.0f;
+    }
+    evt_set_float_variable(script, outX, x);
+    evt_set_float_variable(script, outY, y);
+    evt_set_float_variable(script, outZ, z);
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B4C_B2108C);
+#endif
 
 API_CALLABLE(func_80240CF8_B21238);
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240CF8_B21238);
