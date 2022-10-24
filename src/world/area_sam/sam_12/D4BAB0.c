@@ -43,6 +43,6 @@ ApiStatus func_80240238_D4BC58(Evt* script, s32 isInitialCall) {
         temp_f26,
         &effect
     );
-    evt_set_variable(script, outVar, effect);
+    evt_set_variable(script, outVar, (s32) effect);
     return ApiStatus_DONE2;
 }

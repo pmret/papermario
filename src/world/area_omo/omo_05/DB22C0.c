@@ -61,7 +61,7 @@ ApiStatus func_80242328_DB45E8(Evt* script, s32 isInitialCall) {
         script->functionTempF[0] = 0.0f;
     }
     script->functionTempF[0] += 10.0f;
-    guRotateF(camera->viewMtxShaking[0], script->functionTempF[0], 0.0f, 0.0f, -1.0f);
+    guRotateF(camera->viewMtxShaking, script->functionTempF[0], 0.0f, 0.0f, -1.0f);
 
     if (script->functionTempF[0] >= 360.0) {
         return ApiStatus_DONE2;
