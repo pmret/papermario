@@ -6,6 +6,15 @@
 #include "hud_element.h"
 #include "effects.h"
 
+#ifdef SHIFT
+#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
+#else
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shift
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shift
+#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shift
+#endif
+
 typedef struct Fog {
     /* 0x00 */ s32 enabled;
     /* 0x04 */ s32 r;
@@ -385,7 +394,7 @@ Gfx D_8014B400[21][5] = {
     },
 };
 
-void* mdl_textureBaseAddress = 0x8028E000;
+void* mdl_textureBaseAddress = (void*) MODEL_TEXTURE_BASE_ADDRESS;
 
 u8 mdl_bgMultiplyColorA = 0;
 u8 mdl_bgMultiplyColorR = 0;
@@ -1085,9 +1094,9 @@ void entity_free_static_data(EntityBlueprint* data);
 s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z);
 void update_entity_shadow_position(Entity* entity);
 void func_80117D00(Model* model);
-void appendGfx_model_group(Model* model);
+void appendGfx_model_group(void* model);
 void render_transform_group_node(ModelNode* node);
-void render_transform_group(ModelTransformGroup* group);
+void render_transform_group(void* group);
 void func_801180E8(TextureHeader*, void**, u8* raster, u16* palette, u8* auxRaster, u16* auxPalette, s32, s32, s32, s32);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 s32 is_identity_fixed_mtx(Mtx* mtx);
@@ -1772,12 +1781,6 @@ void entity_reset_collision(Entity* entity) {
     entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
 }
 
-#ifdef SHIFT
-#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
-#else
-#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#endif
-
 void load_area_specific_entity_data(void) {
     if (!entity_area_specific_data_is_loaded) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
@@ -1826,8 +1829,8 @@ void clear_entity_data(s32 arg0) {
     }
 
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = 0x80250000;
-        gEntityHeapBase = 0x80267FF0;
+        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
     } else {
         gEntityHeapBottom = (s32)&D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
@@ -1847,8 +1850,8 @@ void clear_entity_data(s32 arg0) {
 
 void init_entity_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = 0x80250000;
-        gEntityHeapBase = 0x80267FF0;
+        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
         reload_world_entity_data();
     } else {
         s32 i;
@@ -2955,7 +2958,7 @@ void state_render_frontUI(void) {
     }
 }
 
-void appendGfx_model(Model* model);
+void appendGfx_model(void* data);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
@@ -3385,7 +3388,7 @@ void render_models(void) {
 
         if (model->flags & 0x200) {
             cond = FALSE;
-            boundingBox = model->modelNode->propertyList;
+            boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
             bby = boundingBox->halfSizeY;
             bbz = boundingBox->halfSizeZ;
@@ -3511,7 +3514,8 @@ void render_models(void) {
     }
 }
 
-void appendGfx_model_group(Model* model) {
+void appendGfx_model_group(void* data) {
+    Model* model = data;
     s32 modelTreeDepth = (*mdl_currentModelTreeNodeInfo)[model->modelID].treeDepth;
     s32 i;
 
@@ -3620,19 +3624,19 @@ void render_transform_group_node(ModelNode* node) {
 }
 
 
-// arg0 and gfx temps needed
-void render_transform_group(ModelTransformGroup* group) {
-    ModelTransformGroup* mtg = group;
+// gfx temps needed
+void render_transform_group(void* data) {
+    ModelTransformGroup* group = data;
     Gfx** gfx = &gMasterGfxPos;
 
-    if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
-        mdl_currentTransformGroupChildIndex = mtg->minChildModelIndex;
-        if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
-            gSPMatrix((*gfx)++, mtg->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
+    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
+        mdl_currentTransformGroupChildIndex = group->minChildModelIndex;
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+            gSPMatrix((*gfx)++, group->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
         }
 
-        render_transform_group_node(mtg->modelNode);
-        if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+        render_transform_group_node(group->modelNode);
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
             gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
         }
         gDPPipeSync((*gfx)++);
