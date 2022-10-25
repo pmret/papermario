@@ -1,4 +1,5 @@
 #include "jan_03.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "jan_02";
 static char* N(exit_str_1) = "jan_05";
@@ -11,7 +12,10 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
+ApiStatus func_802405EC_B351BC(Evt* script, s32 isInitialCall) {
+    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 

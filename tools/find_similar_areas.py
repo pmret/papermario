@@ -16,6 +16,7 @@ script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 root_dir = script_dir / ".."
 asm_dir = root_dir / "ver/current/asm/nonmatchings/"
 build_dir = root_dir / "ver/current/build/"
+elf_path = build_dir / "papermario.elf"
 map_file_path = build_dir / "papermario.map"
 rom_path = root_dir / "ver/current/baserom.z64"
 
@@ -56,6 +57,25 @@ def get_all_unmatched_functions():
                 ret.add(f[:-2])
     return ret
 
+
+def get_func_sizes() -> Dict[str, int]:
+    try:
+        result = subprocess.run(['mips-linux-gnu-objdump', '-x', elf_path], stdout=subprocess.PIPE)
+        nm_lines = result.stdout.decode().split("\n")
+    except:
+        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
+        sys.exit(1)
+
+    sizes: Dict[str, int] = {}
+
+    for line in nm_lines:
+        if " F " in line:
+            components = line.split()
+            size = int(components[4], 16)
+            name = components[5]
+            sizes[name] = size
+
+    return sizes
 
 def get_symbol_bytes(func: str) -> Optional[Bytes]:
     if func not in syms or syms[func].rom_end is None:
@@ -118,7 +138,7 @@ def parse_map() -> OrderedDict[str, Symbol]:
             else:
                 if cur_sect != "(.text)":
                     continue
-                syms[fn] = Symbol(
+                new_sym = Symbol(
                     name=fn,
                     rom_start=rom,
                     ram=ram,
@@ -126,12 +146,15 @@ def parse_map() -> OrderedDict[str, Symbol]:
                     prev_sym=prev_sym,
                     is_decompiled=not fn in unmatched_functions,
                 )
+                if fn in func_sizes:
+                    new_sym.rom_end = rom + func_sizes[fn]
+                syms[fn] = new_sym
                 prev_sym = fn
 
     # Calc end offsets
     for sym in syms:
         prev_sym = syms[sym].prev_sym
-        if prev_sym:
+        if prev_sym and not syms[prev_sym].rom_end:
             syms[prev_sym].rom_end = syms[sym].rom_start
 
     return syms
@@ -254,13 +277,59 @@ def get_tu_offset(obj_file: Path, symbol: str) -> Optional[int]:
             return int(pieces[0], 16)
     return None
 
+@dataclass
+class CRange():
+    start: Optional[int] = None
+    end: Optional[int] = None
+    start_exact = False
+    end_exact = False
 
-def get_c_range(
-    insn_start: int, insn_end: int, line_numbers: Dict[int, int]
-) -> Tuple[Optional[int], Optional[int]]:
-    start = line_numbers.get(insn_start)
-    end = line_numbers.get(insn_end)
-    return start, end
+    def has_info(self):
+        return self.start is not None or self.end is not None
+
+    def __str__(self):
+        start_str = "?"
+        end_str = "?"
+
+        if self.start is not None:
+            if self.start_exact:
+                start_str = f"{self.start}"
+            else:
+                start_str = f"~{self.start}"
+
+        if self.end is not None:
+            if self.end_exact:
+                end_str = f"{self.end}"
+            else:
+                end_str = f"~{self.end}"
+
+        return f"{start_str} - {end_str}"
+
+
+def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) -> CRange:
+    range = CRange()
+
+    if insn_start in line_numbers:
+        range.start = line_numbers[insn_start]
+        range.start_exact = True
+    else:
+        keys = list(line_numbers.keys())
+        for i, key in enumerate(keys[:-1]):
+            if keys[i + 1] > insn_start:
+                range.start = line_numbers[keys[i]]
+                break
+
+    if insn_end in line_numbers:
+        range.end = line_numbers[insn_end]
+        range.end_exact = True
+    else:
+        keys = list(line_numbers.keys())
+        for i, key in enumerate(keys):
+            if key > insn_end:
+                range.end = line_numbers[key]
+                break
+
+    return range
 
 
 def get_matches(query: str, window_size: int):
@@ -305,29 +374,25 @@ def get_matches(query: str, window_size: int):
                 query_end = result.query_start + total_len
                 target_end = result.target_start + total_len
 
-                c_start: Optional[int] = None
-                c_end: Optional[int] = None
+                c_range = None
                 if tu_offset is not None and len(line_numbers) > 0:
-                    c_start, c_end = get_c_range(
+                    c_range = get_c_range(
                         tu_offset + (result.target_start * 4),
                         tu_offset + (target_end * 4),
                         line_numbers,
                     )
 
                 target_range_str = ""
-                if c_start is not None or c_end is not None:
-                    start_str = c_start if c_start is not None else "?"
-                    end_str = c_end if c_end is not None else "?"
-
+                if c_range:
                     target_range_str = (
-                        fg.li_cyan + f" (line {start_str}-{end_str} in {obj_file.stem})" + fg.rs
+                        fg.li_cyan + f" (line {c_range} in {obj_file.stem})" + fg.rs
                     )
 
-                query_str = f"{query} [{result.query_start}-{query_end}]"
+                query_str = f"query [{result.query_start}-{query_end}]"
                 target_str = (
-                    f"{symbol} [{result.target_start}-{target_end}]{target_range_str}"
+                    f"{symbol} [insn {result.target_start}-{target_end}] ({total_len} total){target_range_str}"
                 )
-                print(f"\t{query_str} matches {target_str} ({total_len} total insns)")
+                print(f"\t{query_str} matches {target_str}")
 
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
@@ -354,6 +419,7 @@ args = parser.parse_args()
 if __name__ == "__main__":
     rom_bytes = read_rom()
     unmatched_functions = get_all_unmatched_functions()
+    func_sizes = get_func_sizes()
     syms = parse_map()
 
     do_query(args.query, args.window_size)

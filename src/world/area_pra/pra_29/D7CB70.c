@@ -29,4 +29,4 @@ void func_802410B0_D7DC00(s32 index) {
 
 }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_29/D7CB70", func_802411D4_D7DD24);
+#include "world/common/todo/PlayRisingBubble.inc.c"

@@ -118,6 +118,6 @@
 #define mdl_get_copied_gfx dead_mdl_get_copied_gfx
 #define gMatrixListPos dead_gMatrixListPos
 #define gDisplayContext dead_gDisplayContext
-#define fx_sun_undeclared fx_sun
+#define fx_sun_undeclared dead_fx_sun_undeclared
 
 #endif

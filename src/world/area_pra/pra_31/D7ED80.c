@@ -50,6 +50,26 @@ ApiStatus func_80240374_D7F0D4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7ED80", func_80240410_D7F170);
+ApiStatus func_80240410_D7F170(Evt* script, s32 isInitialCall) {
+    Npc* npc = get_npc_safe(script->owner2.npcID);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7ED80", func_80240468_D7F1C8);
+    script->varTable[0] = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatus.position.x, gPlayerStatus.position.z));
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240468_D7F1C8(Evt* script, s32 isInitialCall) {
+    script->varTable[6] = script->varTable[0] + 90;
+    script->varTable[7] = script->varTable[5] + 90;
+    script->varTable[8] = abs(script->varTable[6] - script->varTable[7]);
+
+    if (script->varTable[8] == 270) {
+        script->varTable[8] = 90;
+        if (script->varTable[6] > script->varTable[7]) {
+            script->varTable[6] -= 360;
+        } else {
+            script->varTable[7] -= 360;
+        }
+    }
+    script->varTable[8] = (script->varTable[8] / 90) * 20;
+    return ApiStatus_DONE2;
+}

@@ -1119,7 +1119,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
 
     i = state->firstVtxIdx;
 
-    while (1) {
+    while (TRUE) {
         Camera* cam;
         s32 uls = (fold_vtxBuf[i + 0].v.tc[0] >> 0x5) - 0x100;
         s32 ult = (fold_vtxBuf[i + 0].v.tc[1] >> 0x5) - 0x100;

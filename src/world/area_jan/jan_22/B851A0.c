@@ -32,11 +32,11 @@ ApiStatus func_80241168_B852E8(Evt* script, s32 isInitialCall) {
     f32 dx = array[3] - array[0];
     f32 dy = array[4] - array[1];
     f32 dz = array[5] - array[2];
-    
+
     script->varTable[5] = (dx / 1000.0f) * script->varTable[0];
     script->varTable[6] = (dy / 1000.0f) * script->varTable[0];
     script->varTable[7] = (dz / 1000.0f) * script->varTable[0];
-    
+
     if (mode == 0) {
         Npc* partner = get_npc_safe(-4);
         gPlayerStatus.position.x = (script->varTable[2] + script->varTable[5]);
@@ -69,32 +69,4 @@ ApiStatus func_802412E0_B85460(Evt* script, s32 isInitialCall) {
 
 #include "common/foliage.inc.c"
 
-void func_8024160C_B8578C(Matrix4f mtx, f32 shearAmt) {
-    guMtxIdentF(mtx);
-    mtx[1][2] = 0;
-    mtx[1][1] = 1.0f;
-    mtx[1][0] = shearAmt * 0.2;
-}
-
-ApiStatus func_80241668_B857E8(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    Matrix4f mtx;
-    s32 treeIndex;
-    s32 listIndex;
-    Model* model;
-    f32 shearAmt;
-
-    treeIndex = evt_get_variable(script, *args++);
-    listIndex = get_model_list_index_from_tree_index(treeIndex);
-    shearAmt = evt_get_float_variable(script, *args++);
-    model = get_model_from_list_index(listIndex);
-    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
-        func_8024160C_B8578C(model->transformMatrix, shearAmt);
-        model->flags |= (MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_USES_TRANSFORM_MATRIX);
-    } else {
-        func_8024160C_B8578C(mtx, shearAmt);
-        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
-    }
-    
-    return ApiStatus_DONE2;
-}
+#include "world/common/todo/PullVineSub.inc.c"

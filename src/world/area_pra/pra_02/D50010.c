@@ -39,7 +39,25 @@ ApiStatus func_80241274_D51264(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/UnkFunc44.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
+ApiStatus func_802414A8_D51498(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 entityIdx = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
+    f32 temp = evt_get_float_variable(script, MapVar(0));
+    Entity* entity;
+
+    if (entityIdx == -1) {
+        return ApiStatus_DONE2;
+    }
+
+    entity = get_entity_by_index(entityIdx);
+    entity->position.x = x;
+    entity->position.y = y + temp;
+    entity->position.z = z;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/todo/RemovePadlock.inc.c"
 

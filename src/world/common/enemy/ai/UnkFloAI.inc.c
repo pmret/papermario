@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "effects.h"
 #ifdef _DEAD_H_
 #include "dead_structs.h"
 #endif
@@ -25,7 +26,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDe
     f32 posXCCW;
     f32 posYCCW;
     f32 posZCCW;
-    
+
     npc->duration = npcAISettings->chaseUpdateInterval / 2 + rand_int(npcAISettings->chaseUpdateInterval / 2 + 1);
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;

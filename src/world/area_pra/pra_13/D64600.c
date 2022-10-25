@@ -52,12 +52,50 @@ ApiStatus func_80241274_D65854(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241310_D658F0);
+#include "world/common/todo/PlayBigSmokePuff.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
+ApiStatus func_802413A4_D65984(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413D0_D659B0);
+    get_npc_safe(evt_get_variable(script, *args++));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_8024140C_D659EC);
+void func_8024140C_D659EC(void);
+void func_802414BC_D65A9C(void* npc);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802414BC_D65A9C);
+ApiStatus func_802413D0_D659B0(Evt* script, s32 isInitialCall) {
+    script->array[0] = create_generic_entity_world(0, func_8024140C_D659EC);
+    return ApiStatus_DONE2;
+}
+
+void func_8024140C_D659EC(void) {
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+    Npc* npc = get_npc_safe(0);
+
+    if (gPlayerStatusPtr->flags & PS_FLAGS_HAS_REFLECTION) {
+        s32 x, y, z;
+
+        get_screen_coords(gCurrentCamID, npc->pos.x, npc->pos.y, -npc->pos.z, &x, &y, &z);
+        rtPtr->renderMode = npc->renderMode;
+        rtPtr->distance = -z;
+        rtPtr->appendGfxArg = npc;
+        rtPtr->appendGfx = func_802414BC_D65A9C;
+        queue_render_task(rtPtr);
+    }
+}
+
+void func_802414BC_D65A9C(void* data) {
+    Npc* npc = data;
+    Matrix4f sp18, sp58, sp98, spD8;
+
+    npc_get_render_yaw(npc);
+    guRotateF(sp18, npc->renderYaw + gCameras[gCurrentCamID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guScaleF(spD8, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
+    guMtxCatF(sp18, spD8, sp18);
+    guTranslateF(sp58, npc->pos.x, npc->pos.y, npc->pos.z);
+    guMtxCatF(sp18, sp58, sp18);
+    spr_update_player_sprite(2, npc->currentAnim, 1.0f);
+    spr_draw_player_sprite(2, 0, 0, 0, sp18);
+}

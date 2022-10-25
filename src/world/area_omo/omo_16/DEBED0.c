@@ -21,4 +21,16 @@ static char* N(exit_str_3) = "omo_03";
 
 #include "common/IsAOrBPressed.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_8024055C_DEC42C);
+ApiStatus func_8024055C_DEC42C(Evt* script, s32 isInitialCall) {
+    f32 temp_f0 = evt_get_float_variable(script, MapVar(11));
+
+    script->varTable[0] = 0;
+    if (fabsf(temp_f0) < 2000.0f && (gGameStatusPtr->pressedButtons[0] & BUTTON_A)) {
+        script->varTable[0] = 1;
+    }
+
+    if (fabsf(temp_f0) < 2000.0f && (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
+        script->varTable[0] = 1;
+    }
+    return ApiStatus_DONE2;
+}

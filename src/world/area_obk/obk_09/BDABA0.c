@@ -1,3 +1,6 @@
 #include "obk_09.h"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_09/BDABA0", func_802403F0_BDABA0);
+ApiStatus func_802403F0_BDABA0(Evt* script) {
+    get_item_entity(script->varTable[0])->scale = 0.6f;
+    return ApiStatus_DONE2;
+}

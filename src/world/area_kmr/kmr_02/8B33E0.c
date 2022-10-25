@@ -1,6 +1,20 @@
 #include "kmr_02.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B33E0", func_80243370_8B33E0);
+ApiStatus func_80243370_8B33E0(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    s32 cond = FALSE;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+        if (playerData->equippedBadges[i] != 0) {
+            cond = TRUE;
+            break;
+        }
+    }
+
+    script->varTable[0] = cond;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/todo/SetEntityPositionF.inc.c"
 
