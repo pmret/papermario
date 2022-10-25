@@ -2053,19 +2053,15 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* bp, s32 listIndex)
 
 void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
     s32 swizzlePointers = FALSE;
-    s32 s2;
     s32 loadedStart, loadedEnd;
     void* animBaseAddr;
-    s32 v0, v00;
     s16* animationScript;
     StaticAnimatorNode** animationNodes;
-    s32 s00;
     s32 specialSize;
     s32 dma1size;
     s32 dma2size_1;
     s32 dma2size_2;
     s32 totalLoaded;
-    s32 totalLoadedBytes;
 
     if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
         DmaEntry* dmaList = entityData->dmaList;
@@ -3307,8 +3303,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
-// this function has weird control flow and suqqz
-#ifdef NON_MATCHING
+
 void render_models(void) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
@@ -3318,7 +3313,6 @@ void render_models(void) {
     f32 m20, m21, m22, m23;
     f32 m30, m31, m32, m33;
     f32 x, y, z;
-    f32 tgX, tgY, tgZ;
     f32 bbx, bby, bbz;
 
     Camera* camera = &gCameras[gCurrentCameraID];
@@ -3326,12 +3320,26 @@ void render_models(void) {
     ModelBoundingBox* boundingBox;
     ModelTransformGroup* transformGroup;
     f32 xComp, yComp, zComp;
-    f32 v0, v1, v2, v3;
-    f32 d0, d1, d2, d3;
 
     s32 distance;
     s32 cond;
     s32 i;
+
+#define COMMON_RENDER_MODELS \
+    outX = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30; \
+    outY = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31; \
+    outZ = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32; \
+    outS = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33; \
+    if (outS == 0.0f) { \
+        break; \
+    } \
+    outS = 1.0f / outS; \
+    xComp = outX * outS; \
+    yComp = outY * outS; \
+    zComp = outZ * outS; \
+    if (zComp > -1.0f && xComp >= -1.0f && xComp <= 1.0f && yComp >= -1.0f && yComp <= 1.0f) { \
+        break; \
+    }
 
     m00 = camera->perspectiveMatrix[0][0];
     m01 = camera->perspectiveMatrix[0][1];
@@ -3382,174 +3390,64 @@ void render_models(void) {
             bby = boundingBox->halfSizeY;
             bbz = boundingBox->halfSizeZ;
 
-            xComp = x - bbx;
-            yComp = y - bby;
-            zComp = z - bbz;
-            v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30;
-            v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31;
-            v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32;
-            v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33;
-            outX = v0;
-            outY = v1;
-            outZ = v2;
-            outS = v3;
-            if ((v3 != 0.0f) &&
-                ((
-                d3 = 1.0f / v3,
-                d0 = v0 * d3,
-                d1 = v1 * d3,
-                d2 = v2 * d3,
-                outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)) &&
-                ((bbx == 0.0f) ||
+            while (TRUE) {
+                if (TRUE) {
+                    xComp = x - bbx;
+                    yComp = y - bby;
+                    zComp = z - bbz;
+                    COMMON_RENDER_MODELS;
+                }
 
-            ((
-                xComp = x + bbx,
-                yComp = y - bby,
-                zComp = z - bbz,
-                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                outX = v0,
-                outY = v1,
-                outZ = v2,
-                outS = v3,
-                (v3 != 0.0f)) && ((
-                    d3 = 1.0f / v3,
-                    d0 = v0 * d3,
-                    d1 = v1 * d3,
-                    d2 = v2 * d3,
-                    outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))
+                if (bbx != 0.0f) {
+                    xComp = x + bbx;
+                    yComp = y - bby;
+                    zComp = z - bbz;
+                    COMMON_RENDER_MODELS;
+                }
 
-            ) && ((bby == 0.0f) || ((
-                xComp = x - bbx,
-                yComp = y + bby,
-                zComp = z - bbz,
-                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                outX = v0,
-                outY = v1,
-                outZ = v2,
-                outS = v3,
-                (v3 != 0.0f)) && ((
-                    d3 = 1.0f / v3,
-                    d0 = v0 * d3,
-                    d1 = v1 * d3,
-                    d2 = v2 * d3,
-                    outS = d3,
-                    !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f))))) {
-                if ((bbx != 0.0f) && (bby != 0.0f)) {
+                if (bby != 0.0f) {
+                    xComp = x - bbx;
+                    yComp = y + bby;
+                    zComp = z - bbz;
+                    COMMON_RENDER_MODELS;
+                }
+
+                if (bbx != 0.0f && bby != 0.0f) {
                     xComp = x + bbx;
                     yComp = y + bby;
                     zComp = z - bbz;
-                    v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30;
-                    v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31;
-                    v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32;
-                    v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33;
-                    outX = v0;
-                    outY = v1;
-                    outZ = v2;
-                    outS = v3;
-                    if (v3 != 0.0f) {
-                        d3 = 1.0f / v3;
-                        d0 = v0 * d3;
-                        d1 = v1 * d3;
-                        d2 = v2 * d3,
-                        outS = d3;
-                        if ((d2 > -1.0f) && (d0 >= -1.0f) && (d0 <= 1.0f) && (d1 >= -1.0f)) {
-                            if (!(d1 <= 1.0f)) {
-                                goto block_36;
-                            }
-                        } else {
-                            goto block_36;
-                        }
-                    }
-                } else {
-block_36:
-                    if (((bbz == 0.0f) || ((
-                        xComp = x - bbx,
-                        yComp = y - bby,
-                        zComp = z + bbz,
-                        v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                        v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                        v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                        v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                        outX = v0,
-                        outY = v1,
-                        outZ = v2,
-                        outS = v3,
-                        (v3 != 0.0f)) && ((
-                            d3 = 1.0f / v3,
-                            d0 = v0 * d3,
-                            d1 = v1 * d3,
-                            d2 = v2 * d3,
-                            outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bbx == 0.0f) || (bbz == 0.0f) || ((
-                                xComp = x + bbx,
-                                yComp = y - bby,
-                                zComp = z + bbz,
-                                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                                outX = v0,
-                                outY = v1,
-                                outZ = v2,
-                                outS = v3, (v3 != 0.0f)) &&
-
-                                ((
-                                    d3 = 1.0f / v3,
-                                    d0 = v0 * d3,
-                                    d1 = v1 * d3,
-                                    d2 = v2 * d3,
-                                    outS = d3,
-
-                                    !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bby == 0.0f) || (bbz == 0.0f) || ((
-
-                                        xComp = x - bbx,
-                                        yComp = y + bby,
-                                        zComp = z + bbz,
-                                        v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                                        v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                                        v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                                        v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                                        outX = v0,
-                                        outY = v1,
-                                        outZ = v2,
-                                        outS = v3,
-
-                                        (v3 != 0.0f)) && ((
-                                            d3 = 1.0f / v3,
-                                            d0 = v0 * d3,
-                                            d1 = v1 * d3,
-                                            d2 = v2 * d3,
-                                            outS = d3,
-
-                                            !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f)))) && ((bbx == 0.0f) || (bby == 0.0f) || (bbz == 0.0f) || ((
-                                                xComp = x + bbx,
-                                                yComp = y + bby,
-                                                zComp = z + bbz,
-                                                v0 = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30,
-                                                v1 = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31,
-                                                v2 = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32,
-                                                v3 = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33,
-                                                outX = v0,
-                                                outY = v1,
-                                                outZ = v2,
-                                                outS = v3,
-
-                                                (v3 != 0.0f)) && ((
-                                                    d3 = 1.0f / v3,
-                                                    d0 = v0 * d3,
-                                                    d1 = v1 * d3,
-                                                    d2 = v2 * d3,
-                                                    outS = d3, !(d2 > -1.0f)) || !(d0 >= -1.0f) || !(d0 <= 1.0f) || !(d1 >= -1.0f) || !(d1 <= 1.0f))
-                                            )))
-                    {
-                        cond = TRUE;
-                    }
+                    COMMON_RENDER_MODELS;
                 }
+
+                if (bbz != 0.0f) {
+                    xComp = x - bbx;
+                    yComp = y - bby;
+                    zComp = z + bbz;
+                    COMMON_RENDER_MODELS;
+                }
+
+                if (bbx != 0.0f && bbz != 0.0f) {
+                    xComp = x + bbx;
+                    yComp = y - bby;
+                    zComp = z + bbz;
+                    COMMON_RENDER_MODELS;
+                }
+
+                if (bby != 0.0f && bbz != 0.0f) {
+                    xComp = x - bbx;
+                    yComp = y + bby;
+                    zComp = z + bbz;
+                    COMMON_RENDER_MODELS;
+                }
+
+                if (bbx != 0.0f && bby != 0.0f && bbz != 0.0f) {
+                    xComp = x + bbx;
+                    yComp = y + bby;
+                    zComp = z + bbz;
+                    COMMON_RENDER_MODELS;
+                }
+                cond = TRUE;
+                break;
             }
             if (cond) {
                 continue;
@@ -3588,13 +3486,13 @@ block_36:
             continue;
         }
 
-        tgX = transformGroup->center.x;
-        tgY = transformGroup->center.y;
-        tgZ = transformGroup->center.z;
+        xComp = transformGroup->center.x;
+        yComp = transformGroup->center.y;
+        zComp = transformGroup->center.z;
 
         transform_point(
             camera->perspectiveMatrix,
-            tgX, tgY, tgZ, 1.0f,
+            xComp, yComp, zComp, 1.0f,
             &outX, &outY, &outZ, &outS
         );
         if (outS == 0.0f) {
@@ -3612,9 +3510,6 @@ block_36:
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
-#endif
 
 void appendGfx_model_group(Model* model) {
     s32 modelTreeDepth = (*mdl_currentModelTreeNodeInfo)[model->modelID].treeDepth;
