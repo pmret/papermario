@@ -1,6 +1,9 @@
 #include "obk_07.h"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_07/BCEEB0", func_802402C0_BCEEB0);
+ApiStatus func_802402C0_BCEEB0(Evt* script, s32 isInitialCall) {
+    script->functionTemp[1] = 0;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/todo/UnkAngleFunc004.inc.c"
 

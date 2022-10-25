@@ -150,7 +150,44 @@ ApiStatus func_80240CE8_B076E8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06D10", func_80240D30_B07730);
+ApiStatus func_80240D30_B07730(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 0;
+        script->functionTemp[2] = 0;
+    }
+
+    switch (script->functionTemp[2]) {
+        case 0:
+            set_screen_overlay_color(0, 208, 0, 0);
+            set_screen_overlay_params_front(1, script->functionTemp[1]);
+            if (script->functionTemp[1] == 255) {
+                script->functionTemp[1] = 0;
+                script->functionTemp[2] = 1;
+            } else {
+                script->functionTemp[1] += 7;
+                if (script->functionTemp[1] > 255) {
+                    script->functionTemp[1] = 255;
+                }
+            }
+            break;
+        case 1:
+            set_screen_overlay_color(
+                0,
+                208,
+                (script->functionTemp[1] * 208) / 255,
+                (script->functionTemp[1] * 208) / 255
+            );
+            set_screen_overlay_params_front(1, 255.0f);
+            if (script->functionTemp[1] == 255) {
+                script->functionTemp[2] = 2;
+            }
+            script->functionTemp[1] += 14;
+            if (script->functionTemp[1] > 255) {
+                script->functionTemp[1] = 255;
+            }
+    }
+    return (script->functionTemp[2] == 2) * 2;
+}
 
 ApiStatus func_80240E54_B07854(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {

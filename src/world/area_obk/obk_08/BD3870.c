@@ -14,4 +14,10 @@ INCLUDE_ASM(s32, "world/area_obk/obk_08/BD3870", func_802406DC_BD3F4C);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_08/BD3870", func_8024079C_BD400C);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_08/BD3870", func_80240808_BD4078);
+ApiStatus func_80240808_BD4078(Evt* script, s32 isInitialCall) {
+    if (gPlayerData.curHP < 2) {
+        return ApiStatus_DONE2;
+    }
+    gPlayerData.curHP--;
+    return ApiStatus_DONE2;
+}

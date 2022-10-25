@@ -23,7 +23,10 @@ ApiStatus func_80240358_8EC178(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_802405BC_8EC3DC);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_802406BC_8EC4DC);
+ApiStatus func_802406BC_8EC4DC(Evt* script, s32 isInitialCall) {
+    script->functionTemp[3] = 0;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_802406C8_8EC4E8);
 
@@ -32,7 +35,10 @@ ApiStatus func_80240B20_8EC940(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240B48_8EC968);
+ApiStatus func_80240B48_8EC968(Evt* script, s32 isInitialCall) {
+    script->functionTemp[3] = 0;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240B54_8EC974);
 

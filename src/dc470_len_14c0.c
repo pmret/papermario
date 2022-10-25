@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 char gCloudyFlowerFieldsBg[] = "fla_bg";
 char gSunnyFlowerFieldsBg[] = "flb_bg";
@@ -9,8 +10,6 @@ f32 gBackroundWavePhase = 0.0f;
 // BSS
 extern PAL_BIN gBackgroundPalette[256];
 extern f32 gBackroundLastScrollValue;
-
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 void load_map_bg(char* optAssetName) {
     if (optAssetName != NULL) {

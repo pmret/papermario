@@ -1,4 +1,5 @@
 #include "hos_05.h"
+#include "model.h"
 
 extern u8 D_8024DCCF_A37F0F;
 extern u8 D_8024DCD3_A37F13;
@@ -13,9 +14,6 @@ extern u8 D_802D9D73;
 
 // should match when preceding bss is worked out
 #ifdef NON_MATCHING
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
-
 ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
     Bytecode* args;
     static u8 oldPrimR, oldPrimG, oldPrimB;
@@ -36,7 +34,7 @@ ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
         duration = evt_get_variable(script, *args++);
         time = 0;
     }
-    
+
     if (duration > 0) {
         time++;
         set_model_env_color_parameters(

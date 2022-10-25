@@ -1,8 +1,6 @@
 #include "kmr_00.h"
 #include "effects.h"
-
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
+#include "model.h"
 
 API_CALLABLE(N(func_80240000_8ABF90)) {
     Bytecode* args;
