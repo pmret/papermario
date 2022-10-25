@@ -81,4 +81,25 @@ void func_80245744_A2F984(void) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245794_A2F9D4);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802457C0_A2FA00);
+ApiStatus func_802457C0_A2FA00(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[CAM_DEFAULT];
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 40;
+    }
+    script->functionTemp[0]--;
+    if (camera->currentController != NULL) {
+        camera->currentController->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
+    } else if (camera->prevController != NULL) {
+        camera->prevController->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
+    }
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+const char* N(exit_str_0) = "hos_20";
+const char* N(exit_str_1) = "hos_04";
