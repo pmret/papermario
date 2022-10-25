@@ -1,4 +1,5 @@
 #include "tik_04.h"
+#include "mapfs/tik_04_hit.h"
 
 #include "world/common/todo/UnkPosFunc2.inc.c"
 
@@ -62,8 +63,8 @@ ApiStatus func_80240A00_872430(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240C20_872650(Evt* script, s32 isInitialCall) {
     PlayerStatus* player = &gPlayerStatus;
 
-    if ((gCollisionStatus.currentFloor == 9) || (gCollisionStatus.currentFloor == 0xB)) {
-        if ((player->actionState == ACTION_STATE_SPIN_POUND) || (player->actionState == ACTION_STATE_TORNADO_POUND)) {
+    if (gCollisionStatus.currentFloor == COLLIDER_erb1 || gCollisionStatus.currentFloor == COLLIDER_erb2) {
+        if (player->actionState == ACTION_STATE_SPIN_POUND || player->actionState == ACTION_STATE_TORNADO_POUND) {
             return ApiStatus_BLOCK;
         }
     }

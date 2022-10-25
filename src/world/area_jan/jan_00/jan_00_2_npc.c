@@ -110,7 +110,6 @@ API_CALLABLE(func_80240B4C_B2108C) {
     s32 temp_s1;
     s32 outX, outY, outZ;
 
-
     temp_s1 = evt_get_variable(script, *args++);
     x = y = z = 0.0f;
     outX = *args++;

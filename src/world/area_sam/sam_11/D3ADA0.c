@@ -1,5 +1,6 @@
 #include "sam_11.h"
 #include "effects.h"
+#include "mapfs/sam_11_hit.h"
 
 #define CHUCK_QUIZMO_NPC_ID 17
 
@@ -78,10 +79,10 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241DAC_D3C37C);
 
 ApiStatus func_80241FB0_D3C580(Evt* script, s32 isInitialCall) {
     script->varTable[10] = 0;
-    if (gCollisionStatus.currentFloor == 0x40) {
+    if (gCollisionStatus.currentFloor == COLLIDER_suimen) {
         script->varTable[10] = 1;
     }
-    if (gCollisionStatus.lastTouchedFloor == 0x40) {
+    if (gCollisionStatus.lastTouchedFloor == COLLIDER_suimen) {
         script->varTable[10] = 1;
     }
     return ApiStatus_DONE2;

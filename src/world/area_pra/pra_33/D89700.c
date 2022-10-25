@@ -1,13 +1,14 @@
 #include "pra_33.h"
+#include "mapfs/pra_33_hit.h"
 
 #include "world/common/atomic/Reflection.inc.c"
 
 ApiStatus func_80240F20_D8A600(Evt* script, s32 isInitialCall) {
     script->varTable[10] = 0;
-    if (gCollisionStatus.currentFloor == 0x1C) {
+    if (gCollisionStatus.currentFloor == COLLIDER_o1045) {
         script->varTable[10] = 1;
     }
-    if (gCollisionStatus.lastTouchedFloor == 0x1C) {
+    if (gCollisionStatus.lastTouchedFloor == COLLIDER_o1045) {
         script->varTable[10] = 1;
     }
     return ApiStatus_DONE2;
