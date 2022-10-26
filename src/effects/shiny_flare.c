@@ -1,10 +1,24 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void shiny_flare_appendGfx(void* effect);
+extern Gfx D_09000240_3D79B0[];
+extern Gfx D_090002E0_3D7A50[];
+
+u8 D_E00DA500[] = {
+    255, 255,  82,
+    255, 255,  82,
+    181, 148,   0,
+    181, 148,   0,
+    255, 255, 214,
+    255, 255, 214,
+    181, 148,   0,
+    181, 148,   0
+};
+
 void shiny_flare_init(EffectInstance* effect);
 void shiny_flare_update(EffectInstance* effect);
 void shiny_flare_render(EffectInstance* effect);
+void shiny_flare_appendGfx(void* effect);
 
 EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     EffectBlueprint effectBp;
@@ -83,4 +97,35 @@ void shiny_flare_render(EffectInstance* effect) {
 void func_E00DA228(void) {
 }
 
-INCLUDE_ASM(s32, "effects/shiny_flare", shiny_flare_appendGfx);
+void shiny_flare_appendGfx(void* effect) {
+    ShinyFlareFXData* data = ((EffectInstance*)effect)->data.shinyFlare;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_24 = data->unk_24;
+    f32 scale = data->unk_28 * data->unk_2C;
+    s32 idx;
+    Matrix4f sp10;
+    Matrix4f sp50;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp10, data->pos.x, data->pos.y, data->pos.z);
+    shim_guScaleF(sp50, scale, scale, scale);
+    shim_guMtxCatF(sp50, sp10, sp10);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_09000240_3D79B0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+
+    idx = data->lifeTime * 3;
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+        D_E00DA500[idx % ARRAY_COUNT(D_E00DA500)    ],
+        D_E00DA500[idx % ARRAY_COUNT(D_E00DA500) + 1],
+        D_E00DA500[idx % ARRAY_COUNT(D_E00DA500) + 2],
+        unk_24);
+    gSPDisplayList(gMasterGfxPos++, D_090002E0_3D7A50);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
