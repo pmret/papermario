@@ -115,7 +115,7 @@ FX_MAIN(quizmo_answer_main);
 EffectInstance* motion_blur_flame_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* energy_orb_wave_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* merlin_house_stars_main(s32, f32, f32, f32);
-FX_MAIN(quizmo_audience_main);
+EffectInstance* quizmo_audience_main(s32, f32, f32, f32);
 EffectInstance* butterflies_main(s32, f32, f32, f32);
 EffectInstance* stat_change_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* snaking_static_main(s32, f32, f32, f32, f32, s32);
