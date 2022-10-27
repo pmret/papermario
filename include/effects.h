@@ -2302,8 +2302,8 @@ typedef struct StarOutlineFXData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -2314,7 +2314,10 @@ typedef struct StarOutlineFXData {
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ Vec3f unk_3C;
-    /* 0x48 */ char unk_48[0x10];
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
 } StarOutlineFXData; // size = 0x58
 
 typedef struct Effect86FXData {

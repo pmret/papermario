@@ -62,9 +62,8 @@ void water_fountain_init(EffectInstance* effect) {
 }
 
 void water_fountain_update(EffectInstance* effect) {
-    WaterFountainFXData* data;
+    WaterFountainFXData* data = effect->data.waterFountain;
 
-    data = effect->data.waterFountain;
     if (effect->flags & 16) {
         effect->flags &= ~16;
         data->timeLeft = 16;
