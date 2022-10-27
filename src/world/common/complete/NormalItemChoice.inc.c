@@ -98,7 +98,7 @@ EvtScript N(EVS_ChooseItem) = {
 
 #define EVT_CHOOSE_CONSUMABLE_FROM(itemList) \
     EVT_SET(LVar0, EVT_PTR(itemList)) \
-    EVT_SET(LVar1, 2) \
+    EVT_SET(LVar1, 0) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))
 
 #endif

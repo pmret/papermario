@@ -21,15 +21,18 @@ enum {
 };
 
 enum {
-    AF_FLO_05                   = AreaFlag(5),
-    AF_FLO_MadeCrystalBerry     = AreaFlag(6),
+    AF_FLO_05                       = AreaFlag(5),
+    AF_FLO_MadeCrystalBerry         = AreaFlag(6),
     // flo_03
-    AF_FLO_17                   = AreaFlag(23),
-    AF_FLO_18                   = AreaFlag(24),
-    AF_FLO_19                   = AreaFlag(25),
-    AF_FLO_1A                   = AreaFlag(26),
-    AF_FLO_TreeDrop_RedBerry1   = AreaFlag(27),
-    AF_FLO_TreeDrop_RedBerry2   = AreaFlag(28),
+    AF_FLO_IsUnderground_Mole_01    = AreaFlag(23),
+    AF_FLO_IsUnderground_Mole_02    = AreaFlag(24),
+    AF_FLO_IsUnderground_Mole_03    = AreaFlag(25),
+    AF_FLO_IsUnderground_Mole_04    = AreaFlag(26),
+    AF_FLO_TreeDrop_RedBerry1       = AreaFlag(27),
+    AF_FLO_TreeDrop_RedBerry2       = AreaFlag(28),
+    // flo_08
+    AF_FLO_TreeDrop_BlueBerry1      = AreaFlag(29),
+    AF_FLO_TreeDrop_BlueBerry2      = AreaFlag(30),
 };
 
 #endif

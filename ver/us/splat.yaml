@@ -12386,10 +12386,13 @@ segments:
     start: 0xCAED40
     vram: 0x80240000
     subsegments:
-    - [0xCAED40,       c, CAED40]
-    - [0xCAFA80,       c, CAFA80]
-    - [0xCAFAC0,       c, CAFAC0]
-    - [0xCB0B80,       c, CB0B80]
+    - [0xCAED40, c, flo_08_0_header]
+    - [0xCAED40, c, flo_08_1_music]
+    - [0xCAED40, c, flo_08_2_entity]
+    - [0xCAFA80, c, flo_08_3_main]
+    - [0xCAFAC0, c, flo_08_4_npc]
+    - [0xCB0940, c, flo_08_5_foliage]
+    - [0xCB0B80, c, flo_08_6_vines]
     - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09

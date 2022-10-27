@@ -23,11 +23,11 @@ enum {
 };
 
 enum {
-    MV_NextBurrowTime_MoleA     = MapVar(10),
-    MV_NextBurrowTime_MoleB     = MapVar(11),
-    MV_NextBurrowTime_MoleC     = MapVar(12),
-    MV_NextBurrowTime_MoleD     = MapVar(13),
-    MV_IsHuntingMoles           = MapVar(14),
+    MV_NextBurrowTime_Mole_01   = MapVar(10),
+    MV_NextBurrowTime_Mole_02   = MapVar(11),
+    MV_NextBurrowTime_Mole_03   = MapVar(12),
+    MV_NextBurrowTime_Mole_04   = MapVar(13),
+    MV_PauseBurrowing           = MapVar(14),
     MV_NextBurrowTriggerRadius  = MapVar(15),
 };
 

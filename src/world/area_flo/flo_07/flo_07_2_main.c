@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-#include "world/common/atomic/FlowerSpawnRegion.inc.c"
+#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
 
 #include "world/common/todo/SpawnSunEffect.inc.c"
 

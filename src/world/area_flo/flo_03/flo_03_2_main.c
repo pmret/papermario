@@ -1,6 +1,6 @@
 #include "flo_03.h"
 
-#include "world/common/atomic/FlowerSpawnRegion.inc.c"
+#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
 
 ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall) {
     fx_sun_undeclared(1, 0, 0, 0, 0, 0);
@@ -8,7 +8,6 @@ ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(EVS_ExitWalk_flo_09_1) = EVT_EXIT_WALK(60, flo_03_ENTRY_0, "flo_09", flo_09_ENTRY_1);
-
 EvtScript N(EVS_ExitWalk_flo_22_0) = EVT_EXIT_WALK(60, flo_03_ENTRY_1, "flo_22", flo_22_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {

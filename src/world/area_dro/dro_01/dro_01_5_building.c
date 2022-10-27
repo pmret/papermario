@@ -156,7 +156,7 @@ s32 N(InteriorNPCs_RightHouse)[] = {
 
 EvtScript N(EVS_SetupBuildings) = {
     EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(0, 5),
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
         EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
         EVT_PTR(N(EVS_MoveWalls_LeftHouse)),
         EVT_PTR(N(EVS_DropDoor_LeftHouse)),
@@ -166,7 +166,7 @@ EvtScript N(EVS_SetupBuildings) = {
         MODEL_k_i1,
         EVT_PTR(N(InteriorNPCs_LeftHouse)))
     EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(0, 5),
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_MoveWalls_Shop)),
         NULL,
@@ -176,7 +176,7 @@ EvtScript N(EVS_SetupBuildings) = {
         MODEL_k_m1,
         EVT_PTR(N(InteriorNPCs_Shop)))
     EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(0, 5),
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
         EVT_PTR(N(EVS_SetDoorRot_RightHouse)),
         EVT_PTR(N(EVS_MoveWalls_RightHouse)),
         EVT_PTR(N(EVS_DropDoor_RightHouse)),

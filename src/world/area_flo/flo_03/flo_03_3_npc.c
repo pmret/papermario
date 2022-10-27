@@ -77,9 +77,9 @@ API_CALLABLE(N(HideBehindTree)) {
     // run or walk to target position, based on the distance from current position
     dist = dist2D(npc->pos.x, npc->pos.z, posX, posZ);
     if (dist > 2.0) {
-        f32 angle1 = clamp_angle(atan2(-210.0f, -183.0f, npc->pos.x, npc->pos.z));
-        f32 angle2 = clamp_angle(atan2(-210.0f, -183.0f, posX, posZ));
-        f32 deltaAngle = angle1 - angle2;
+        f32 curAngle = clamp_angle(atan2(-210.0f, -183.0f, npc->pos.x, npc->pos.z));
+        f32 targetAngle = clamp_angle(atan2(-210.0f, -183.0f, posX, posZ));
+        f32 deltaAngle = curAngle - targetAngle;
         if (abs(deltaAngle) > 20) {
             angle = deltaAngle;
             if (angle >= 180.0f) {
@@ -92,9 +92,9 @@ API_CALLABLE(N(HideBehindTree)) {
                 posX = -210.0f;
                 posZ = -183.0f;
                 if (deltaAngle >= 0.0f) {
-                    yaw = clamp_angle(angle1 - 20.0f);
+                    yaw = clamp_angle(curAngle - 20.0f);
                 } else {
-                    yaw = clamp_angle(angle1 + 20.0f);
+                    yaw = clamp_angle(curAngle + 20.0f);
                 }
                 add_vec2D_polar(&posX, &posZ, 46.0f, yaw);
             }
@@ -148,7 +148,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
     EVT_EXEC_WAIT(N(EVS_PushFlowerSong))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            EVT_SET(MV_IsHuntingMoles, TRUE)
+            EVT_SET(MV_PauseBurrowing, TRUE)
             EVT_SET(LVar4, EVT_FLOAT(3.5))
             EVT_EXEC_WAIT(N(EVS_FocusCamBetween))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0050)
@@ -238,7 +238,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAGS_1, 0)
             EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAGS_1, 0)
             EVT_CALL(BindNpcAI, NPC_Dayzee, EVT_PTR(N(EVS_NpcAI_Dayzee)))
-            EVT_SET(MV_IsHuntingMoles, FALSE)
+            EVT_SET(MV_PauseBurrowing, FALSE)
             EVT_SET(MV_NextBurrowTriggerRadius, 60)
             EVT_SET(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
         EVT_CASE_EQ(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
@@ -307,11 +307,11 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
 };
 
 EvtScript N(EVS_SetupMoles) = {
-    EVT_SET(MV_IsHuntingMoles, FALSE)
-    EVT_SET(MV_NextBurrowTime_MoleA, 0)
-    EVT_SET(MV_NextBurrowTime_MoleB, 0)
-    EVT_SET(MV_NextBurrowTime_MoleC, 0)
-    EVT_SET(MV_NextBurrowTime_MoleD, 0)
+    EVT_SET(MV_PauseBurrowing, FALSE)
+    EVT_SET(MV_NextBurrowTime_Mole_01, 0)
+    EVT_SET(MV_NextBurrowTime_Mole_02, 0)
+    EVT_SET(MV_NextBurrowTime_Mole_03, 0)
+    EVT_SET(MV_NextBurrowTime_Mole_04, 0)
     EVT_SET(MV_NextBurrowTriggerRadius, 100)
     EVT_RETURN
     EVT_END
@@ -321,22 +321,25 @@ EvtScript N(EVS_NpcDefeat_MontyMole) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
+            // record defeat
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(2)
+                EVT_CASE_EQ(NPC_MontyMole_01)
                     EVT_SET(GF_FLO03_Defeated_MontyMoleA, TRUE)
-                EVT_CASE_EQ(3)
+                EVT_CASE_EQ(NPC_MontyMole_02)
                     EVT_SET(GF_FLO03_Defeated_MontyMoleB, TRUE)
-                EVT_CASE_EQ(4)
+                EVT_CASE_EQ(NPC_MontyMole_03)
                     EVT_SET(GF_FLO03_Defeated_MontyMoleC, TRUE)
-                EVT_CASE_EQ(5)
+                EVT_CASE_EQ(NPC_MontyMole_04)
                     EVT_SET(GF_FLO03_Defeated_MontyMoleD, TRUE)
             EVT_END_SWITCH
+            // count number of defeated moles
             EVT_SET(LVar0, 0)
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleA)
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleB)
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleC)
             EVT_ADD(LVar0, GF_FLO03_Defeated_MontyMoleD)
+            // end the mole-hunting minigame if all 4 are defeated
             EVT_IF_NE(LVar0, 4)
                 EVT_CALL(SetNpcAnimation, NPC_Petunia, ANIM_Petunia_Angry)
             EVT_ELSE
@@ -366,31 +369,32 @@ EvtScript N(EVS_NpcHit_MontyMole) = {
 };
 
 EvtScript N(EVS_NpcIdle_MontyMole_01) = {
+    #define LV_ShouldBurrow LVar3
     EVT_LOOP(0)
-        EVT_IF_EQ(MV_NextBurrowTime_MoleA, 0)
-            EVT_IF_EQ(AF_FLO_17, TRUE)
+        EVT_IF_EQ(MV_NextBurrowTime_Mole_01, 0)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_01, TRUE)
                 EVT_GOTO(0)
             EVT_END_IF
-            EVT_SET(LVar3, 1)
+            EVT_SET(LV_ShouldBurrow, TRUE)
         EVT_ELSE
             EVT_LABEL(0)
             EVT_CALL(GetNpcPos, NPC_MontyMole_01, LVar0, LVar1, LVar2)
-            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LVar3)
+            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
         EVT_CALL(GetCurrentPartner, LVar9)
-        EVT_IF_EQ(LVar9, 9)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(LVar9, PARTNER_BOW)
+            EVT_SET(LVar3, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(MV_IsHuntingMoles, TRUE)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(MV_PauseBurrowing, TRUE)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LVar3, 1)
-            EVT_IF_EQ(AF_FLO_17, FALSE)
+        EVT_IF_EQ(LV_ShouldBurrow, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_01, FALSE)
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
-                EVT_SET(AF_FLO_17, TRUE)
-                EVT_IF_NE(MV_NextBurrowTime_MoleA, 0)
+                EVT_SET(AF_FLO_IsUnderground_Mole_01, TRUE)
+                EVT_IF_NE(MV_NextBurrowTime_Mole_01, 0)
                     EVT_IF_LT(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         EVT_SET(LVar1, 4)
                     EVT_ELSE
@@ -410,9 +414,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                 EVT_WAIT(45)
             EVT_END_IF
         EVT_ELSE
-            EVT_IF_EQ(AF_FLO_17, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_01, TRUE)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, FALSE)
-                    EVT_CALL(RandInt, 2, LVar0)
+                    EVT_CALL(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_01)) - 1, LVar0)
                     EVT_ADD(LVar0, 1)
                     EVT_USE_BUF(EVT_PTR(N(BurrowLocations_Mole_01)))
                     EVT_LOOP(LVar0)
@@ -421,7 +425,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     EVT_CALL(SetNpcPos, NPC_MontyMole_01, LVar1, LVar2, LVar3)
                 EVT_END_IF
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
-                EVT_SET(AF_FLO_17, FALSE)
+                EVT_SET(AF_FLO_IsUnderground_Mole_01, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
                 EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, 0)
@@ -430,10 +434,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
                 EVT_CALL(RandInt, 30, LVar0)
                 EVT_ADD(LVar0, 60)
-                EVT_SET(MV_NextBurrowTime_MoleA, LVar0)
+                EVT_SET(MV_NextBurrowTime_Mole_01, LVar0)
             EVT_ELSE
-                EVT_IF_GT(MV_NextBurrowTime_MoleA, 0)
-                    EVT_SUB(MV_NextBurrowTime_MoleA, 1)
+                EVT_IF_GT(MV_NextBurrowTime_Mole_01, 0)
+                    EVT_SUB(MV_NextBurrowTime_Mole_01, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
@@ -444,31 +448,32 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
 };
 
 EvtScript N(EVS_NpcIdle_MontyMole_02) = {
+     #define LV_ShouldBurrow LVar3
     EVT_LOOP(0)
-        EVT_IF_EQ(MV_NextBurrowTime_MoleB, 0)
-            EVT_IF_EQ(AF_FLO_18, TRUE)
+        EVT_IF_EQ(MV_NextBurrowTime_Mole_02, 0)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_02, TRUE)
                 EVT_GOTO(0)
             EVT_END_IF
-            EVT_SET(LVar3, 1)
+            EVT_SET(LV_ShouldBurrow, TRUE)
         EVT_ELSE
             EVT_LABEL(0)
             EVT_CALL(GetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
-            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LVar3)
+            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
         EVT_CALL(GetCurrentPartner, LVar9)
-        EVT_IF_EQ(LVar9, 9)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(LVar9, PARTNER_BOW)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(MV_IsHuntingMoles, TRUE)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(MV_PauseBurrowing, TRUE)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LVar3, 1)
-            EVT_IF_EQ(AF_FLO_18, FALSE)
+        EVT_IF_EQ(LV_ShouldBurrow, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_02, FALSE)
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
-                EVT_SET(AF_FLO_18, TRUE)
-                EVT_IF_NE(MV_NextBurrowTime_MoleB, 0)
+                EVT_SET(AF_FLO_IsUnderground_Mole_02, TRUE)
+                EVT_IF_NE(MV_NextBurrowTime_Mole_02, 0)
                     EVT_IF_LT(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         EVT_SET(LVar1, 4)
                     EVT_ELSE
@@ -488,9 +493,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                 EVT_WAIT(45)
             EVT_END_IF
         EVT_ELSE
-            EVT_IF_EQ(AF_FLO_18, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_02, TRUE)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, FALSE)
-                    EVT_CALL(RandInt, 2, LVar0)
+                    EVT_CALL(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_02)) - 1, LVar0)
                     EVT_ADD(LVar0, 1)
                     EVT_USE_BUF(EVT_PTR(N(BurrowLocations_Mole_02)))
                     EVT_LOOP(LVar0)
@@ -499,7 +504,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     EVT_CALL(SetNpcPos, NPC_MontyMole_02, LVar1, LVar2, LVar3)
                 EVT_END_IF
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
-                EVT_SET(AF_FLO_18, FALSE)
+                EVT_SET(AF_FLO_IsUnderground_Mole_02, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
                 EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_SURFACE, 0)
@@ -508,10 +513,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
                 EVT_CALL(RandInt, 35, LVar0)
                 EVT_ADD(LVar0, 55)
-                EVT_SET(MV_NextBurrowTime_MoleB, LVar0)
+                EVT_SET(MV_NextBurrowTime_Mole_02, LVar0)
             EVT_ELSE
-                EVT_IF_GT(MV_NextBurrowTime_MoleB, 0)
-                    EVT_SUB(MV_NextBurrowTime_MoleB, 1)
+                EVT_IF_GT(MV_NextBurrowTime_Mole_02, 0)
+                    EVT_SUB(MV_NextBurrowTime_Mole_02, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
@@ -522,31 +527,32 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
 };
 
 EvtScript N(EVS_NpcIdle_MontyMole_03) = {
+    #define LV_ShouldBurrow LVar3
     EVT_LOOP(0)
-        EVT_IF_EQ(MV_NextBurrowTime_MoleC, 0)
-            EVT_IF_EQ(AF_FLO_19, TRUE)
+        EVT_IF_EQ(MV_NextBurrowTime_Mole_03, 0)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_03, TRUE)
                 EVT_GOTO(0)
             EVT_END_IF
-            EVT_SET(LVar3, 1)
+            EVT_SET(LV_ShouldBurrow, TRUE)
         EVT_ELSE
             EVT_LABEL(0)
             EVT_CALL(GetNpcPos, NPC_MontyMole_03, LVar0, LVar1, LVar2)
-            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LVar3)
+            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
         EVT_CALL(GetCurrentPartner, LVar9)
-        EVT_IF_EQ(LVar9, 9)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(LVar9, PARTNER_BOW)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(MV_IsHuntingMoles, TRUE)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(MV_PauseBurrowing, TRUE)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LVar3, 1)
-            EVT_IF_EQ(AF_FLO_19, FALSE)
+        EVT_IF_EQ(LV_ShouldBurrow, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_03, FALSE)
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
-                EVT_SET(AF_FLO_19, TRUE)
-                EVT_IF_NE(MV_NextBurrowTime_MoleC, 0)
+                EVT_SET(AF_FLO_IsUnderground_Mole_03, TRUE)
+                EVT_IF_NE(MV_NextBurrowTime_Mole_03, 0)
                     EVT_IF_LT(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         EVT_SET(LVar1, 4)
                     EVT_ELSE
@@ -566,9 +572,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                 EVT_WAIT(45)
             EVT_END_IF
         EVT_ELSE
-            EVT_IF_EQ(AF_FLO_19, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_03, TRUE)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, FALSE)
-                    EVT_CALL(RandInt, 2, LVar0)
+                    EVT_CALL(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_03)) - 1, LVar0)
                     EVT_ADD(LVar0, 1)
                     EVT_USE_BUF(EVT_PTR(N(BurrowLocations_Mole_03)))
                     EVT_LOOP(LVar0)
@@ -577,7 +583,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     EVT_CALL(SetNpcPos, NPC_MontyMole_03, LVar1, LVar2, LVar3)
                 EVT_END_IF
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
-                EVT_SET(AF_FLO_19, FALSE)
+                EVT_SET(AF_FLO_IsUnderground_Mole_03, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
                 EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_SURFACE, 0)
@@ -586,10 +592,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
                 EVT_CALL(RandInt, 40, LVar0)
                 EVT_ADD(LVar0, 50)
-                EVT_SET(MV_NextBurrowTime_MoleC, LVar0)
+                EVT_SET(MV_NextBurrowTime_Mole_03, LVar0)
             EVT_ELSE
-                EVT_IF_GT(MV_NextBurrowTime_MoleC, 0)
-                    EVT_SUB(MV_NextBurrowTime_MoleC, 1)
+                EVT_IF_GT(MV_NextBurrowTime_Mole_03, 0)
+                    EVT_SUB(MV_NextBurrowTime_Mole_03, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
@@ -600,31 +606,32 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
 };
 
 EvtScript N(EVS_NpcIdle_MontyMole_04) = {
+    #define LV_ShouldBurrow LVar3
     EVT_LOOP(0)
-        EVT_IF_EQ(MV_NextBurrowTime_MoleD, 0)
-            EVT_IF_EQ(AF_FLO_1A, TRUE)
+        EVT_IF_EQ(MV_NextBurrowTime_Mole_04, 0)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_04, TRUE)
                 EVT_GOTO(0)
             EVT_END_IF
-            EVT_SET(LVar3, 1)
+            EVT_SET(LV_ShouldBurrow, TRUE)
         EVT_ELSE
             EVT_LABEL(0)
             EVT_CALL(GetNpcPos, NPC_MontyMole_04, LVar0, LVar1, LVar2)
-            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LVar3)
+            EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
         EVT_CALL(GetCurrentPartner, LVar9)
-        EVT_IF_EQ(LVar9, 9)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(LVar9, PARTNER_BOW)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(MV_IsHuntingMoles, TRUE)
-            EVT_SET(LVar3, 0)
+        EVT_IF_EQ(MV_PauseBurrowing, TRUE)
+            EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LVar3, 1)
-            EVT_IF_EQ(AF_FLO_1A, FALSE)
+        EVT_IF_EQ(LV_ShouldBurrow, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_04, FALSE)
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)
-                EVT_SET(AF_FLO_1A, TRUE)
-                EVT_IF_NE(MV_NextBurrowTime_MoleD, 0)
+                EVT_SET(AF_FLO_IsUnderground_Mole_04, TRUE)
+                EVT_IF_NE(MV_NextBurrowTime_Mole_04, 0)
                     EVT_IF_LT(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         EVT_SET(LVar1, 4)
                     EVT_ELSE
@@ -644,9 +651,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                 EVT_WAIT(45)
             EVT_END_IF
         EVT_ELSE
-            EVT_IF_EQ(AF_FLO_1A, TRUE)
+            EVT_IF_EQ(AF_FLO_IsUnderground_Mole_04, TRUE)
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, FALSE)
-                    EVT_CALL(RandInt, 2, LVar0)
+                    EVT_CALL(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_04)) - 1, LVar0)
                     EVT_ADD(LVar0, 1)
                     EVT_USE_BUF(EVT_PTR(N(BurrowLocations_Mole_04)))
                     EVT_LOOP(LVar0)
@@ -655,7 +662,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     EVT_CALL(SetNpcPos, NPC_MontyMole_04, LVar1, LVar2, LVar3)
                 EVT_END_IF
                 EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
-                EVT_SET(AF_FLO_1A, FALSE)
+                EVT_SET(AF_FLO_IsUnderground_Mole_04, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)
                 EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_SURFACE, 0)
@@ -664,10 +671,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
                 EVT_CALL(RandInt, 45, LVar0)
                 EVT_ADD(LVar0, 45)
-                EVT_SET(MV_NextBurrowTime_MoleD, LVar0)
+                EVT_SET(MV_NextBurrowTime_Mole_04, LVar0)
             EVT_ELSE
-                EVT_IF_GT(MV_NextBurrowTime_MoleD, 0)
-                    EVT_SUB(MV_NextBurrowTime_MoleD, 1)
+                EVT_IF_GT(MV_NextBurrowTime_Mole_04, 0)
+                    EVT_SUB(MV_NextBurrowTime_Mole_04, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
