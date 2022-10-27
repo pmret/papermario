@@ -123,7 +123,7 @@ EffectInstance* thunderbolt_ring_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* squirt_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 FX_MAIN(water_block_main);
 FX_MAIN(waterfall_main);
-FX_MAIN(water_fountain_main);
+EffectInstance* water_fountain_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(underwater_main);
 EffectInstance* lightning_bolt_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 FX_MAIN(water_splash_main);
