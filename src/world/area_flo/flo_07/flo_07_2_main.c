@@ -5,6 +5,8 @@
 
 #include "world/common/atomic/FlowerSpawnRegion.inc.c"
 
+#include "world/common/todo/SpawnSunEffect.inc.c"
+
 EvtScript N(EVS_ExitWalk_flo_25_1) = EVT_EXIT_WALK(60, flo_07_ENTRY_0, "flo_25", flo_25_ENTRY_1);
 
 EvtScript N(EVS_BindExitTriggers) = {
@@ -12,8 +14,6 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_RETURN
     EVT_END
 };
-
-#include "world/common/todo/SpawnSunEffect.inc.c"
 
 API_CALLABLE(N(CreateCrystalTreeSparkles)) {
     EffectInstance* effect = fx_misc_particles(3, -272.0f, 80.0f, 20.0f, 200.0f, 120.0f, 4.0f, 8, 0);

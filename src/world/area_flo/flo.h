@@ -23,6 +23,13 @@ enum {
 enum {
     AF_FLO_05                   = AreaFlag(5),
     AF_FLO_MadeCrystalBerry     = AreaFlag(6),
+    // flo_03
+    AF_FLO_17                   = AreaFlag(23),
+    AF_FLO_18                   = AreaFlag(24),
+    AF_FLO_19                   = AreaFlag(25),
+    AF_FLO_1A                   = AreaFlag(26),
+    AF_FLO_TreeDrop_RedBerry1   = AreaFlag(27),
+    AF_FLO_TreeDrop_RedBerry2   = AreaFlag(28),
 };
 
 #endif

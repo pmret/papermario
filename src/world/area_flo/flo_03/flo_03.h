@@ -2,21 +2,45 @@
 /// @brief Flower Fields - (East) Petunia's Field
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_03_shape.h"
+#include "mapfs/flo_03_hit.h"
+
+#include "sprite/npc/Petunia.h"
+#include "sprite/npc/MontyMole.h"
+#include "sprite/npc/Dayzee.h"
+
+enum {
+	NPC_Petunia                 = 0,
+	NPC_Dayzee                  = 1,
+	NPC_MontyMole_01            = 2,
+	NPC_MontyMole_02            = 3,
+	NPC_MontyMole_03            = 4,
+	NPC_MontyMole_04            = 5,
+};
+
+enum {
+    MV_NextBurrowTime_MoleA     = MapVar(10),
+    MV_NextBurrowTime_MoleB     = MapVar(11),
+    MV_NextBurrowTime_MoleC     = MapVar(12),
+    MV_NextBurrowTime_MoleD     = MapVar(13),
+    MV_IsHuntingMoles           = MapVar(14),
+    MV_NextBurrowTriggerRadius  = MapVar(15),
+};
+
 #define NAMESPACE flo_03
 
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CA72A0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240460_CA7700)(Evt* script, s32 isInitialCall);
+extern EvtScript N(EVS_Main);
+extern NpcGroupList N(DefaultNPCs);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_PushFlowerSong);
+extern EvtScript N(EVS_PopSong);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_MakeEntities);
 
-extern NpcGroupList N(npcGroupList_8024442C);
-extern EvtScript N(80240FFC);
-extern EvtScript N(80241EF4);
-extern EvtScript N(80244E54);
-extern EvtScript N(80244ED0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Scene_SunReturns);
+extern EvtScript N(EVS_SetupMoles);
+extern EvtScript N(EVS_EmptyEntityHandler);
