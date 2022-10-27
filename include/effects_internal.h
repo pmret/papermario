@@ -115,7 +115,7 @@ FX_MAIN(quizmo_answer_main);
 EffectInstance* motion_blur_flame_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* energy_orb_wave_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* merlin_house_stars_main(s32, f32, f32, f32);
-FX_MAIN(quizmo_audience_main);
+EffectInstance* quizmo_audience_main(s32, f32, f32, f32);
 EffectInstance* butterflies_main(s32, f32, f32, f32);
 EffectInstance* stat_change_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* snaking_static_main(s32, f32, f32, f32, f32, s32);
@@ -123,7 +123,7 @@ EffectInstance* thunderbolt_ring_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* squirt_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 FX_MAIN(water_block_main);
 FX_MAIN(waterfall_main);
-FX_MAIN(water_fountain_main);
+EffectInstance* water_fountain_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(underwater_main);
 EffectInstance* lightning_bolt_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 FX_MAIN(water_splash_main);
@@ -162,7 +162,7 @@ FX_MAIN(ice_pillar_main);
 EffectInstance* sun_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* star_spirits_energy_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* pink_sparkles_main(s32, f32, f32, f32, f32, f32);
-FX_MAIN(star_outline_main);
+EffectInstance* star_outline_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_86_main(s32, f32, f32, f32, f32, s32);
 
 #endif
