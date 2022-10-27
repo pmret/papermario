@@ -9,9 +9,6 @@
 #include "mapfs/flo_08_shape.h"
 #include "mapfs/flo_08_hit.h"
 
-#include "sprite/npc/GateFlower.h"
-#include "sprite/npc/Dayzee.h"
-
 enum {
 	NPC_GateFlower              = 0,
 	NPC_Dayzee_01               = 1,
