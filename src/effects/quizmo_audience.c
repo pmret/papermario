@@ -54,12 +54,6 @@ EffectInstance* quizmo_audience_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
 void quizmo_audience_init(EffectInstance* effect) {
 }
 
-typedef struct UnkQuizAudienceUpdate {
-    char unk_00[0x01];
-    f32 unk_01;
-    char unk_05[0x03];
-} UnkQuizAudienceUpdate; // size = 0x08
-
 INCLUDE_ASM(s32, "effects/quizmo_audience", quizmo_audience_update);
 
 void quizmo_audience_render(EffectInstance* effect) {
