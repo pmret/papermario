@@ -1806,13 +1806,9 @@ typedef struct MiscParticlesFXData {
     /* 0x10 */ f32 scaleX;
     /* 0x14 */ f32 scaleY;
     /* 0x18 */ char unk_18[0x20];
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ s32 unk_40;
+    /* 0x38 */ Vec3i innerColor;
     /* 0x44 */ char unk_44[0x4];
-    /* 0x48 */ s32 unk_48;
-    /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ s32 unk_50;
+    /* 0x48 */ Vec3i glowColor;
 } MiscParticlesFXData; // size = ?
 
 typedef struct StaticStatusFXData {

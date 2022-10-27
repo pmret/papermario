@@ -401,8 +401,81 @@ API_CALLABLE(N(ShowMessagesBehindCurtains)) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_23/907A40", func_80240DA4_9087D4);
+#ifdef NON_MATCHING
+void func_80240DA4_9087D4(void) {
+    s32 fullWidth = 226;
+    s32 fullHeight = 70;
+    s32 baseX = 47;
+    s32 baseY = 100;
+    EndChapter* data = evt_get_variable(NULL, MapVar(0));
+    
+    switch (D_802417C8_9091F8) {
+        case 0:
+            if (data->unk1E != 0) {
+                D_802417C8_9091F8 = 1;
+            }
+            break;
+        case 1:
+            D_802417CC_9091FC += 20;
+            D_802417D0_909200 += 5;
+            if (D_802417CC_9091FC >= fullWidth) {
+                D_802417CC_9091FC = fullWidth;
+            }
+            if (D_802417D0_909200 >= fullHeight) {
+                D_802417D0_909200 = fullHeight;
+            }
+            if (D_802417CC_9091FC == fullWidth) {
+                if (D_802417D0_909200 == fullHeight) {
+                    D_802417C8_9091F8 = 2;
+                }
+            }
+            break;
+        case 2:
+            if (data->unk1E == 0) {
+               D_802417C8_9091F8 = 3;
+            }
+            break;
+        case 3:
+            D_802417CC_9091FC -= 20;
+            D_802417D0_909200 -= 5;
+            if (D_802417CC_9091FC < 0) {
+                D_802417CC_9091FC = 0;
+            }
+            if (D_802417D0_909200 < 0) {
+                D_802417D0_909200 = 0;
+            }
+            if (D_802417CC_9091FC == 0) {
+                if (D_802417D0_909200 == 0) {
+                    D_802417C8_9091F8 = 4;
+                }
+                break;
+            }
+            break;
+        case 4:
+            break;
+    }
+
+    if (D_802417CC_9091FC != 0 && D_802417D0_909200 != 0) {
+        f32 ulx = baseX + (fullWidth * 0.5) - (D_802417CC_9091FC * 0.5);
+        f32 uly = baseY + (fullHeight * 0.5) - (D_802417D0_909200 * 0.5);
+        f32 lrx = baseX + (fullWidth * 0.5) + (D_802417CC_9091FC * 0.5);
+        f32 lry = baseY + (fullHeight * 0.5) + (D_802417D0_909200 * 0.5);
+        gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE,
+            ulx * 4.0f,
+            uly * 4.0f, // casting this to s8 is wrong, but fixes v0/v1 regalloc
+            lrx * 4.0f,
+            lry * 4.0f);
+        draw_box(4, &D_802417D8_909208,
+            baseX + (fullWidth * 0.5) - (D_802417CC_9091FC * 0.5),
+            baseY + (fullHeight * 0.5) - (D_802417D0_909200 * 0.5),
+            0, D_802417CC_9091FC, D_802417D0_909200,
+            180, 0, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    }
+}
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_23/kmr_23_2_npc", func_80240DA4_9087D4);
 MAP_DATA_SECTION_START
+#endif
 
 EvtScript N(EVS_Scene_EndOfChapter) = {
     EVT_THREAD
