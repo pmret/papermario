@@ -1,13 +1,12 @@
 #include "sbk_02.h"
 #include "effects.h"
-
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
+#include "model.h"
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 
 API_CALLABLE(N(HideSun)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MapVar(0));
-    
+
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;
 }

@@ -202,10 +202,95 @@ void spr_appendGfx_component_flat(
     f32 arg5,
     Matrix4f mtx,
     s32 alpha
-);
+) {
+    gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
+    if (D_80151328->flags & 1) {
+        gDPScrollMultiTile2_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height,
+                              0, 0, width - 1, height - 1, 0,
+                              G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
+                              256, 256);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 63 << 2, 0);
+        if (D_80151328->flags & 2) {
+            Camera* camera = &gCameras[gCurrentCamID];
+            if (gGameStatusPtr->isBattle == 2) {
+                gSPViewport(gMasterGfxPos++, &D_802DF3E0);
+            } else {
+                gSPViewport(gMasterGfxPos++, &camera->vpAlt);
+            }
 
+            if (alpha == 255) {
+                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                                 G_RM_PASS, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                                 GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+            } else {
+                gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
+            }
 
-INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
+            gSPVertex(gMasterGfxPos++, vertices, 4, 0);
+            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+            gDPPipeSync(gMasterGfxPos++);
+        }
+        create_shading_palette(mtx, 0, 0, width, height, alpha, alpha == 255 ? 0x111238 : 0x104B50); // TODO make macro for render mode
+    } else {
+        gDPScrollTextureBlock_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height, 0,
+                                 G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
+                                 256, 256);
+        if (D_80151328->flags & 2) {
+            Camera* camera =  &gCameras[gCurrentCamID];
+            if (gGameStatusPtr->isBattle == 2) {
+                gSPViewport(gMasterGfxPos++, &D_802DF3E0);
+            } else {
+                gSPViewport(gMasterGfxPos++, &camera->vpAlt);
+            }
+            if (alpha == 255) {
+                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+            } else {
+                gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+            }
+
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0,
+                              TEXEL0, 0);
+            gSPVertex(gMasterGfxPos++, vertices, 4, 0);
+            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+            gDPPipeSync(gMasterGfxPos++);
+
+            if (alpha == 255) {
+                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                                 GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
+                                 AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                                 GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+            } else {
+                gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+            }
+
+            gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE,
+                              ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+        }
+    }
+
+    if (D_80151328->flags & 2) {
+        Camera* camera =  &gCameras[gCurrentCamID];
+
+        if (gGameStatusPtr->isBattle == 2) {
+            gSPViewport(gMasterGfxPos++, &D_802DF3D0);
+            D_802DF3E0.vp.vtrans[0] = D_802DF3D0.vp.vtrans[0] + gGameStatusPtr->unk_82;
+            D_802DF3E0.vp.vtrans[1] = D_802DF3D0.vp.vtrans[1] + gGameStatusPtr->unk_83;
+        } else {
+            gSPViewport(gMasterGfxPos++, &camera->vp);
+        }
+    }
+
+    gSPVertex(gMasterGfxPos++, vertices, 4, 0);
+    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 void spr_appendGfx_component(
     SpriteRasterCacheEntry* cache,
@@ -732,7 +817,9 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
     s32 camRelativeYaw;
     s32 alpha;
     f32 zscale;
+    u32 animIdx;
     PAL_PTR* drawPalettes;
+    SpriteAnimData* animData;
 
     camRelativeYaw = yaw;
     spriteAnimIndex = spriteInstanceID & 0xFF;
@@ -745,12 +832,17 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
 
     spriteIndex = ((animID >> 0x10) & 0xFF) - 1;
     D_802DF57C = spriteIndex;
-    if (spr_playerSprites[spriteIndex] == NULL) {
+    animData = spr_playerSprites[spriteIndex];
+    if (animData == NULL) {
         return 0;
     }
-    rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
-    animList = &spr_playerSprites[spriteIndex]->animListStart[animID & 0xFF];
-    drawPalettes = spr_playerSprites[spriteIndex]->palettesOffset;
+
+    animIdx = animID & 0xFF;
+    animIdx++;
+
+    rasterList = animData->rastersOffset;
+    animList = animData->animListStart[animIdx];
+    drawPalettes = animData->palettesOffset;
     if (animID & SPRITE_ID_BACK_FACING) {
         switch (spriteIndex) {
             case 0:
@@ -758,7 +850,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
             case 9:
                 spriteIndex++;
                 D_802DF57C = spriteIndex;
-                rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
+                rasterList = spr_playerSprites[D_802DF57C]->rastersOffset;
                 break;
         }
     }

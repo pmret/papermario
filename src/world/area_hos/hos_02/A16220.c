@@ -4,6 +4,7 @@ static char* N(exit_str_0) = "hos_01";
 static char* N(exit_str_1) = "hos_03";
 
 extern u16 D_802433AC_A195CC;
+extern u16 D_802433AE_A195CE;
 extern u16 D_802433B0_A195D0;
 extern u16 D_802433B2_A195D2;
 extern u16 D_802433B4_A195D4;
@@ -20,7 +21,28 @@ void func_8024030C_A1652C(void) {
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_02/A16220", func_80240434_A16654);
+void func_80240434_A16654(void) {
+    Vtx* firstVertex;
+    Vtx* copiedVertices;
+    s32 numVertices;
+    s32 i;
+    s32 temp3;
+
+    mdl_get_copied_vertices(0, &firstVertex, &copiedVertices, &numVertices);
+
+    for (i = 0; i < numVertices; i++) {
+        u8* colors = copiedVertices[i].v.cn;
+        s16 temp1 = (sins(D_802433AE_A195CE * (i % 3 + 1) + i) + 0x8000) / 2;
+        colors[0] = temp1 * 155 / 0x8000 + 100;
+        colors[1] = temp1 * 155 / 0x8000 + 100;
+
+        temp3 = sins(D_802433AE_A195CE / 0x8000 * (((i / 2) % 3 + 1) << 15)  + D_802433AE_A195CE / 0x4000 * 0x8000 + i) + 0x8000;
+        colors[2] = colors[0] * temp3 / 0x10000;
+    }
+
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
+    D_802433AE_A195CE += 0x253;
+}
 
 void func_80240610_A16830(void) {
     Vtx* firstVertex;

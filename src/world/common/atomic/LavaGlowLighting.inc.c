@@ -11,8 +11,6 @@ enum {
     LAVA_GLOW_MODE_END   = 10
 };
 
-void set_model_fog_color_parameters(u8, u8, u8, u8, u8, u8, u8, s32, s32);
-
 f32 N(LavaGlowLightTime) = 0.0f;
 
 ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
@@ -23,11 +21,11 @@ ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
     f32 deltaX;
     f32 scale;
     s32 fogStart;
-    f32 baseAlpha; 
+    f32 baseAlpha;
     f32 slowOsc, fastOsc;
     f64 primA;
     s32 i;
-    
+
     if (isInitialCall) {
         if (modelIDs != NULL) {
             // apply effect to models in the list
@@ -47,7 +45,7 @@ ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
             }
         }
     }
-    
+
     N(LavaGlowLightTime) += 1.0f;
     if (N(LavaGlowLightTime) > 360.0f) {
         N(LavaGlowLightTime) -= 360.0f;
@@ -72,7 +70,7 @@ ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
         case LAVA_GLOW_MODE_2:
             baseAlpha = 100.0f;
             fogStart = 995 - evt_get_variable(NULL, MV_GlowIntensity);
-            break;   
+            break;
         case LAVA_GLOW_MODE_END:
             return 0;
         default:
@@ -93,7 +91,7 @@ ApiStatus N(ClearLavaGlowLighting)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     s32 i;
-        
+
     if (modelIDs != NULL) {
         // clear effect from models in the list
         u16* idList = modelIDs->list;

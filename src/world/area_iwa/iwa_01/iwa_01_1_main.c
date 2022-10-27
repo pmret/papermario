@@ -73,3 +73,5 @@ EvtScript N(EVS_Main) = {
     EVT_RETURN
     EVT_END
 };
+
+MAP_RODATA_PAD(1, pad)

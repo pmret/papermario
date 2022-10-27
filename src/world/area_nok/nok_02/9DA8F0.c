@@ -1,6 +1,33 @@
 #include "nok_02.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_802438D0_9DA8F0);
+extern s32 D_802523B4_9E93D4;
+extern Npc* wPartnerNpc;
+
+// SetupDemoScene
+ApiStatus func_802438D0_9DA8F0(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    switch (D_802523B4_9E93D4) {
+        case 0:
+            D_802523B4_9E93D4 = 1;
+            break;
+        case 1:
+        case 2:
+            D_802523B4_9E93D4++;
+            break;
+        case 3:
+            partner_clear_player_tracking(wPartnerNpc);
+            partner_set_goal_pos(playerStatus->position.x, playerStatus->position.z);
+            func_800EF3D4(0);
+            set_npc_yaw(wPartnerNpc, 90.0f);
+            playerStatus->targetYaw = 90.0f;
+            playerStatus->currentYaw = 90.0f;
+            playerStatus->spriteFacingAngle = 0.0f;
+            return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 #define NAMESPACE dup2_nok_02
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
@@ -64,7 +91,16 @@ ApiStatus func_80243D14_9DAD34(Evt* script, s32 isInitialCall) {
 #include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE nok_02
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243EC8_9DAEE8);
+ApiStatus func_80243EC8_9DAEE8(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+
+    if ((evt_get_variable(script, *args++) % 4) != 0) {
+        script->varTable[0] = 0;
+    } else {
+        script->varTable[0] = 1;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243F10_9DAF30);
 

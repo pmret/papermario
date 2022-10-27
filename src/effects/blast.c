@@ -95,23 +95,18 @@ void blast_render(EffectInstance* effect) {
 #ifdef NON_MATCHING
 void blast_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98;
-    Gfx* dlist;
-    Gfx* dlist2;
-    BlastFXData* data = ((EffectInstance*)effect)->data;
-    f32 temp_f2;
+    Gfx* dlist = D_090017B0_37F190;
+    BlastFXData* data = ((EffectInstance*)effect)->data.blast;
     s32 temp_f4;
     s32 alpha;
+    f32 new_var;
 
-    dlist = D_090017B0_37F190;
-    dlist2 = D_09001300_37ECD0;
-
-    temp_f2 = data->unk_20;
-    temp_f4 = temp_f2;
-    alpha = (temp_f2 - temp_f4) * 256.0f;
+    new_var = (temp_f4 = data->unk_20);
+    alpha = (new_var - ((s32) data->unk_20)) * 256.0f;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gSPDisplayList(gMasterGfxPos++, D_09001300_37ECD0);
     gSPDisplayList(gMasterGfxPos++, D_E007C510[temp_f4]);
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);

@@ -1,5 +1,12 @@
 #include "pra_06.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_06/D57430", func_80240000_D57430);
+ApiStatus func_80240000_D57430(void) {
+    gGameStatusPtr->playerSpriteSet = 1;
+    sprintf(wMapShapeName, "pra_05_shape");
+    sprintf(wMapHitName, "pra_05_hit");
+    return ApiStatus_BLOCK;
+}
+
+const char N(exit_str_0)[] = "pra_39";
 
 #include "world/common/atomic/Reflection.inc.c"

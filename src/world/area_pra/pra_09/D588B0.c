@@ -1,4 +1,5 @@
 #include "pra_09.h"
+#include "effects.h"
 
 #include "world/common/atomic/Reflection.inc.c"
 
@@ -52,10 +53,78 @@ ApiStatus func_80241274_D59B04(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_80241310_D59BA0);
+#include "world/common/todo/PlayBigSmokePuff.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_802413A4_D59C34);
+ApiStatus func_802413A4_D59C34(Evt* script, s32 isInitialCall) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->owner1.enemy;
+    s32 var_s1 = evt_get_variable(script, *args++) == 0;
+    Encounter* encounter;
 
-INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_802414F4_D59D84);
+    if (evt_get_variable(script, *args++) == 0) {
+        var_s1 += 1;
+    }
+    if (evt_get_variable(script, *args++) == 0) {
+        var_s1 += 1;
+    }
+    if (evt_get_variable(script, *args++) == 0) {
+        var_s1 += 1;
+    }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_802415F8_D59E88);
+    switch (var_s1) {
+        case 1:
+            encounter = currentEncounter->encounterList[enemy->encounterIndex];
+            encounter->battle = 0x2101;
+            break;
+        case 2:
+            encounter = currentEncounter->encounterList[enemy->encounterIndex];
+            encounter->battle = 0x2102;
+            break;
+        case 3:
+            encounter = currentEncounter->encounterList[enemy->encounterIndex];
+            encounter->battle = 0x2103;
+            break;
+        case 4:
+            encounter = currentEncounter->encounterList[enemy->encounterIndex];
+            encounter->battle = 0x2104;
+            break;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802414F4_D59D84(Evt* script, s32 isInitialCall) {
+    Npc* npc = resolve_npc(script, script->varTable[0]);
+
+    if (isInitialCall) {
+        npc->pos.x = script->varTable[1];
+        npc->pos.y = script->varTable[2];
+        npc->pos.z = script->varTable[3];
+        npc->jumpVelocity = 0.0f;
+        npc->currentAnim = 0x30011;
+        npc->jumpScale = 0.8f;
+    }
+    npc->rotation.z -= 39.0f;
+    npc->rotation.x -= 33.0f;
+    npc->pos.y -= npc->jumpVelocity;
+    npc->jumpVelocity += npc->jumpScale;
+    if (npc->pos.y <= 0.0f) {
+        npc->pos.y = 0.0f;
+        npc->rotation.z = 0.0f;
+        npc->rotation.x = 0.0f;
+        npc->jumpVelocity = 0.0f;
+        npc->jumpScale = 0.0f;
+        npc->currentAnim = 0x30003;
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_802415F8_D59E88(Evt* script, s32 isInitialCall) {
+    Npc* npc1 = resolve_npc(script, script->varTable[3]);
+    Npc* npc2 = resolve_npc(script, script->varTable[4]);
+
+    npc1->collisionRadius = npc2->collisionRadius;
+    npc1->collisionHeight = npc2->collisionHeight;
+    return ApiStatus_DONE2;
+}

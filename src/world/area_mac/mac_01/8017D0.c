@@ -147,7 +147,40 @@ ApiStatus func_80244848_8050C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802448A0_805120);
+ApiStatus func_802448A0_805120(Evt* script, s32 isInitialCall) {
+    s32 alpha;
+
+    if (isInitialCall) {
+        if (script->varTable[0] == 0) {
+            func_8011B950(script->varTable[15], -1, 1, 1);
+        }
+        script->functionTemp[0] = 0;
+    }
+
+    script->functionTemp[0] += 32;
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
+    }
+
+    if (script->varTable[0] == 0) {
+        alpha = script->functionTemp[0];
+    } else {
+        alpha = 255 - script->functionTemp[0];
+    }
+
+    set_background_color_blend(0, 0, 0, alpha);
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+
+    if (script->functionTemp[0] >= 255) {
+        if (script->varTable[0] == 3) {
+            func_8011B950(script->varTable[15], -1, 0, 1);
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244984_805204);
 

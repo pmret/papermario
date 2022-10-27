@@ -4,13 +4,159 @@
 #include "model.h"
 
 // rodata
-extern char D_80244BB8_ED8DD8[];
-extern char D_80244BEC_ED8E0C[];
+extern char D_80244BB8_ED8DD8[]; // 'GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n'
+extern char D_80244BEC_ED8E0C[]; // evt_underwater.c
 
-void N(UnkModelFunc000)(s32, s32, s32, s32);
-INCLUDE_ASM(s32, "ED46D0", ED46D0_UnkModelFunc000);
+void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
+    s32 i;
+    f32 f0;
+    s32 n, m;
+    u16* img;
+    s32 alpha;
 
-s32 func_80066FE0(u16*);
+    N(D_80244160_ED8380) += 5;
+
+    if (x1 >= x2 || y1 >= y2) {
+        return;
+    }
+
+    if (x1 < 0) {
+        x1 = 0;
+    }
+    if (y1 < 0) {
+        y1 = 0;
+    }
+    if (x2 < 0) {
+        x2 = 0;
+    }
+    if (y2 < 0) {
+        y2 = 0;
+    }
+
+    if (x1 >= SCREEN_WIDTH) {
+        x1 = SCREEN_WIDTH - 1;
+    }
+    if (y1 >= SCREEN_HEIGHT) {
+        y1 = SCREEN_HEIGHT - 1;
+    }
+    if (x2 >= SCREEN_WIDTH) {
+        x2 = SCREEN_WIDTH - 1;
+    }
+    if (y2 >= SCREEN_HEIGHT) {
+        y2 = SCREEN_HEIGHT - 1;
+    }
+
+    if (x1 == x2 || y1 == y2) {
+        return;
+    }
+
+    x1 = x1 / 4 * 4;
+    x2 = x2 / 4 * 4 + 4;
+
+    n = (y2 - y1) / 6;
+    m = (y2 - y1) % 6;
+    img = nuGfxCfb_ptr;
+
+    for (i = 0; i < n; i++) {
+        alpha = (y1 - 6 * i - 6) * 2;
+        if (y1 - 6 * i - 6 >= 0) {
+            if (alpha > 255) {
+                alpha = 255;
+            }
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+
+            //gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            //SCREEN_WIDTH, 6,
+                            //x1, y1 - 6 * i - 6, x2 - 1, y1 - 6 * i - 1, 0,
+                            //G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+
+            //gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(img));
+            {
+                Gfx *_g = (Gfx *)(gMasterGfxPos++);
+
+                if ((osVirtualToPhysical(img) % 8) != 0) {
+                    osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 83, osVirtualToPhysical(img));
+                }
+                _g->words.w0 = _SHIFTL(G_SETTIMG, 24, 8) | _SHIFTL(G_IM_FMT_RGBA, 21, 3) |
+                        _SHIFTL(G_IM_SIZ_16b, 19, 2) | _SHIFTL((SCREEN_WIDTH)-1, 0, 12);
+
+                _g->words.w1 = (unsigned int)(osVirtualToPhysical(img));
+            }
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x2 - 1)-(x1)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0,
+                G_TX_LOADTILE, 0 , G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
+                G_TX_NOLOD);
+            gDPLoadSync(gMasterGfxPos++);
+            gDPLoadTile(	gMasterGfxPos++, G_TX_LOADTILE,
+                    (x1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 6)<<G_TEXTURE_IMAGE_FRAC,
+                    (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 1)<<G_TEXTURE_IMAGE_FRAC);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x2 - 1)-(x1)+1) * G_IM_SIZ_16b_LINE_BYTES)+7)>>3), 0,
+                G_TX_RENDERTILE, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
+                G_TX_NOLOD);
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                    (x1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 6)<<G_TEXTURE_IMAGE_FRAC,
+                    (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 1)<<G_TEXTURE_IMAGE_FRAC)
+            gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + 6) * 4,
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(D_80244160_ED8380) + i * 30) * 500.0f) - 500);
+        }
+    }
+
+    if (m != 0) {
+        alpha = (y1 - 6 * i - 6) * 2;
+        if (y1 - 6 * i - 6 >= 0) {
+            if (alpha > 255) {
+                alpha = 255;
+            }
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            //gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+            //                SCREEN_WIDTH, 6,
+            //                x1, y1 - 6 * i - m, x2 - 1, y1 - 6 * i - 1, 0,
+            //                G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+            //gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(img));
+            {
+                Gfx *_g = (Gfx *)(gMasterGfxPos++);
+
+                if ((osVirtualToPhysical(img) % 8) != 0) {
+                    osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 107, osVirtualToPhysical(img));
+                }
+                _g->words.w0 = _SHIFTL(G_SETTIMG, 24, 8) | _SHIFTL(G_IM_FMT_RGBA, 21, 3) |
+                        _SHIFTL(G_IM_SIZ_16b, 19, 2) | _SHIFTL((SCREEN_WIDTH)-1, 0, 12);
+
+                _g->words.w1 = (unsigned int)(osVirtualToPhysical(img));
+            }
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x2 - 1)-(x1)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0,
+                G_TX_LOADTILE, 0 , G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
+                G_TX_NOLOD);
+            gDPLoadSync(gMasterGfxPos++);
+            gDPLoadTile(	gMasterGfxPos++, G_TX_LOADTILE,
+                    (x1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - m)<<G_TEXTURE_IMAGE_FRAC,
+                    (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 1)<<G_TEXTURE_IMAGE_FRAC);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x2 - 1)-(x1)+1) * G_IM_SIZ_16b_LINE_BYTES)+7)>>3), 0,
+                G_TX_RENDERTILE, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
+                G_TX_NOLOD);
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                    (x1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - m)<<G_TEXTURE_IMAGE_FRAC,
+                    (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
+                    (y1 - 6 * i - 1)<<G_TEXTURE_IMAGE_FRAC)
+            gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + m) * 4,
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, -1024);
+        }
+    }
+}
 
 // Similar to the flo_10 counterpart but contains debug code
 void N(UnkModelFunc001)(void) {
@@ -150,8 +296,8 @@ void N(UnkModelFunc001)(void) {
                          Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
 
         new_var = gMasterGfxPos++;
-        if ((func_80066FE0(nuGfxZBuffer) % 8) != 0) {
-            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 175, func_80066FE0(nuGfxZBuffer));
+        if ((osVirtualToPhysical(nuGfxZBuffer) % 8) != 0) {
+            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 175, osVirtualToPhysical(nuGfxZBuffer));
         }
         gDPSetColorImage(new_var, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
 
@@ -163,8 +309,8 @@ void N(UnkModelFunc001)(void) {
         gDPPipeSync(gMasterGfxPos++);
 
         new_var = gMasterGfxPos++;
-        if ((func_80066FE0(nuGfxCfb_ptr) % 8) != 0) {
-            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 186, func_80066FE0(nuGfxCfb_ptr));
+        if ((osVirtualToPhysical(nuGfxCfb_ptr) % 8) != 0) {
+            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 186, osVirtualToPhysical(nuGfxCfb_ptr));
         }
         gDPSetColorImage(new_var, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
 
