@@ -162,7 +162,7 @@ FX_MAIN(ice_pillar_main);
 EffectInstance* sun_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* star_spirits_energy_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* pink_sparkles_main(s32, f32, f32, f32, f32, f32);
-FX_MAIN(star_outline_main);
+EffectInstance* star_outline_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_86_main(s32, f32, f32, f32, f32, s32);
 
 #endif
