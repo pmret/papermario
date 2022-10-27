@@ -1434,8 +1434,18 @@ typedef struct MerlinHouseStarsFXData {
 } MerlinHouseStarsFXData; // size = 0x3C
 
 typedef struct QuizmoAudienceFXData {
-    /* 0x00 */ char todo[0];
-} QuizmoAudienceFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 timeLeft;
+    /* 0x08 */ s32 lifeTime;
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C[10];
+    /* 0x44 */ s32 unk_44[10];
+    /* 0x6C */ s32 unk_6C[10];
+    /* 0x94 */ f32 unk_94[10];
+    /* 0xBC */ f32 unk_BC[10];
+    /* 0xE4 */ f32 unk_E4[10];
+} QuizmoAudienceFXData; // size = 0x10C
 
 typedef struct ButterfliesFXData {
     /* 0x00 */ s32 unk_00;
@@ -1550,21 +1560,22 @@ typedef struct WaterfallFXData {
 } WaterfallFXData; // size = unknown
 
 typedef struct WaterFountainFXData {
-    /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ Vec3f unk_04;
-    /* 0x10 */ char unk_10[0x8];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk_24[0x4];
+    /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
-    /* 0x34 */ char unk_34[0x4];
+    /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
-} WaterFountainFXData; // size = ?
+} WaterFountainFXData; // size = 0x44
 
 typedef struct UnderwaterFXData {
     /* 0x00 */ char todo[0];
@@ -2289,15 +2300,25 @@ typedef struct PinkSparklesFXData {
 
 typedef struct StarOutlineFXData {
     /* 0x00 */ s16 unk_00;
-    /* 0x02 */ char unk_02[0x2];
+    /* 0x02 */ s16 unk_02;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x14];
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ char unk_28[0xC];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ Vec3f unk_3C;
-} StarOutlineFXData; // size = unknown
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+} StarOutlineFXData; // size = 0x58
 
 typedef struct Effect86FXData {
     /* 0x00 */ s32 unk_00;

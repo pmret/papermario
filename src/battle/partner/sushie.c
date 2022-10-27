@@ -302,9 +302,9 @@ ApiStatus func_80238540_7081E0(Evt* script, s32 isInitialCall) {
             x = 0.0f;
             y = 0.0f;
             add_vec2D_polar(&x, &y, partner->scale.x * -15.0f, state->angle);
-            D_8023C070->data.waterFountain->unk_04.x = state->currentPos.x + x;
-            D_8023C070->data.waterFountain->unk_04.y = state->currentPos.y + y;
-            D_8023C070->data.waterFountain->unk_04.z = state->currentPos.z + 5.0f;
+            D_8023C070->data.waterFountain->pos.x = state->currentPos.x + x;
+            D_8023C070->data.waterFountain->pos.y = state->currentPos.y + y;
+            D_8023C070->data.waterFountain->pos.z = state->currentPos.z + 5.0f;
             D_8023C070->data.waterFountain->unk_38 = state->angle;
             D_8023C070->data.waterFountain->unk_3C = partner->scale.x;
             D_8023C070->data.waterFountain->unk_40 = partner->scale.x;
@@ -327,9 +327,9 @@ ApiStatus func_80238540_7081E0(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 3;
         case 3:
             add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
-            D_8023C070->data.waterFountain->unk_04.x = state->currentPos.x;
-            D_8023C070->data.waterFountain->unk_04.y = state->currentPos.y;
-            D_8023C070->data.waterFountain->unk_04.z = state->currentPos.z;
+            D_8023C070->data.waterFountain->pos.x = state->currentPos.x;
+            D_8023C070->data.waterFountain->pos.y = state->currentPos.y;
+            D_8023C070->data.waterFountain->pos.z = state->currentPos.z;
             D_8023C070->data.waterFountain->unk_38 = state->angle;
             D_8023C070->data.waterFountain->unk_3C = partner->scale.x;
             D_8023C070->data.waterFountain->unk_40 = partner->scale.x;
