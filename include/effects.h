@@ -1552,8 +1552,8 @@ typedef struct WaterfallFXData {
 typedef struct WaterFountainFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;

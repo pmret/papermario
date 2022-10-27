@@ -34,11 +34,11 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
-    data->unk_14 = 0;
+    data->lifeTime = 0;
     if (arg5 <= 0) {
-        data->unk_10 = 1000;
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = arg5;
     }
     data->unk_24 = 255;
     data->pos.x = posX;
@@ -61,7 +61,27 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
 void water_fountain_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/water_fountain", water_fountain_update);
+void water_fountain_update(EffectInstance* effect) {
+    WaterFountainFXData* data;
+
+    data = effect->data.waterFountain;
+    if (effect->flags & 16) {
+        effect->flags &= ~16;
+        data->timeLeft = 16;
+    }
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
+    }
+    data->lifeTime++;
+    if (data->timeLeft < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    if (data->lifeTime < 8) {
+        data->unk_24 = (data->lifeTime * 32) + 31;
+    }
+}
+
 
 void water_fountain_render(EffectInstance* effect) {
     RenderTask renderTask;
