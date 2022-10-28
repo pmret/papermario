@@ -7,14 +7,7 @@
 #include "world/common/npc/Dryite_Stationary.inc.c"
 
 #include "world/common/npc/Mouser.inc.c"
-#include "world/common/npc/ThreeSisters.inc.c"
-
-// toad kid?
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
+#include "world/common/npc/Toad_Stationary.inc.c"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
@@ -393,35 +386,35 @@ StaticNpc N(PassiveNPCs)[] = {
 StaticNpc N(ThreeSisterNPCs)[] = {
     {
         .id = NPC_ThreeSisters_01,
-        .settings = &N(NpcSettings_ThreeSisters),
+        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -141.0f, 0.0f, -18.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 62,
-        .drops = THREE_SISTER_DROPS,
-	    .animations = THREE_SISTER_ANIMS,
+        .drops = TOADETTE_DROPS,
+	    .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
         .id = NPC_ThreeSisters_02,
-        .settings = &N(NpcSettings_ThreeSisters),
+        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -124.0f, 0.0f, -61.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 63,
-        .drops = THREE_SISTER_DROPS,
-	    .animations = THREE_SISTER_ANIMS,
+        .drops = TOADETTE_DROPS,
+	    .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
         .id = NPC_ThreeSisters_03,
-        .settings = &N(NpcSettings_ThreeSisters),
+        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -80.0f, 0.0f, -35.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 244,
-        .drops = THREE_SISTER_DROPS,
-	    .animations = THREE_SISTER_ANIMS,
+        .drops = TOADETTE_DROPS,
+	    .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
     },
 };

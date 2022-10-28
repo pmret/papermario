@@ -47,18 +47,7 @@ NpcSettings N(NpcSettings_Archeologist) = {
 #include "world/common/npc/Dryite_Stationary.inc.c"
 #include "world/common/npc/Mouser.inc.c"
 
-NpcSettings N(NpcSettings_ToadHouseKeeper) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-// toad kid?
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
+#include "world/common/npc/Toad_Stationary.inc.c"
 
 #include "npc_merlee.c"
 
@@ -451,34 +440,13 @@ StaticNpc N(PassiveNPCs)[] = {
     },
     {
         .id = NPC_Toad,
-        .settings = &N(NpcSettings_ToadHouseKeeper),
+        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -143.0f, 0.0f, -170.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(EVS_NpcInit_ToadHouseKeeper),
         .yaw = 180,
-        .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-	    .animations = {
-            ANIM_Toad_Red_Idle,
-            ANIM_Toad_Red_Walk,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Idle,
-            ANIM_Toad_Red_Idle,
-            ANIM_Toad_Red_Disappointed,
-            ANIM_Toad_Red_Disappointed,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-            ANIM_Toad_Red_Run,
-        },
+        .drops = TOAD_DROPS,
+	    .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_DRO_ToadHouseToad,
     },
     {

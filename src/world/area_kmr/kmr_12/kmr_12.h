@@ -2,20 +2,23 @@
 /// @brief Goomba Region - Goomba Road 4
 
 #include "common.h"
-#include "../kmr.h"
 #include "message_ids.h"
 #include "map.h"
+
 #include "../kmr.h"
+#include "mapfs/kmr_12_shape.h"
+#include "mapfs/kmr_12_hit.h"
+
+#include "sprite/npc/Goomba.h"
+
+enum {
+	NPC_Goomba_Ambush   = 0,
+};
 
 #define NAMESPACE kmr_12
 
-#define NPC_GOOMBA 0
-
-#define GetGoomba N(GetGoomba)
-ApiStatus GetGoomba(Evt* script, s32 isInitialCall);
-
-extern EvtScript N(main);
-extern EvtScript N(PlayMusic);
-extern EvtScript N(MakeEntities);
-extern EvtScript N(ReadWestSign);
-extern NpcGroupList N(npcGroupList);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_OnReadBillboard);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

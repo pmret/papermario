@@ -65,8 +65,8 @@ enum {
     NPC_Merlar                  = 23,
     NPC_SunSad                  = 24,
     NPC_SunHappy                = 25,
-    NPC_Bulbulb1                = 26,
-    NPC_Bulbulb2                = 27,
+    NPC_Bubulb1                = 26,
+    NPC_Bubulb2                = 27,
     NPC_ShyGuyMarshall          = 28,
     NPC_GeneralGuy              = 29,
     NPC_BackupDancer1           = 30,
@@ -125,3 +125,9 @@ enum {
 };
 
 #define NAMESPACE end_01
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_ManageParade);
+extern EvtScript N(EVS_OffsetNpcScroll);
+
+API_CALLABLE(N(AddScrollToNpcPos));

@@ -89,7 +89,7 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

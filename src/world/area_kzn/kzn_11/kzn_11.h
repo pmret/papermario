@@ -9,9 +9,6 @@
 #include "mapfs/kzn_11_shape.h"
 #include "mapfs/kzn_11_hit.h"
 
-#include "sprite/npc/Fire.h"
-#include "sprite/npc/LavaBubble.h"
-
 enum {
     NPC_FireBar_1A              = 0,
     NPC_FireBar_1B              = 1,
@@ -30,3 +27,8 @@ enum {
 };
 
 #define NAMESPACE kzn_11
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_UpdateLeftPlatform);
+extern EvtScript N(EVS_UpdateRightPlatform);
+extern NpcGroupList N(DefaultNPCs);

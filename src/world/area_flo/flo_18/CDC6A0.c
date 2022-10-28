@@ -1745,15 +1745,6 @@ static s32 N(pad_66B4)[] = {
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-// It seems like fx_sun was not properly defined for this file. Having a proper
-// declaration makes it not match.
-
-#ifdef AVOID_UB
-void fx_sun_undeclared(s32, f32, f32, f32, f32, s32);
-#else
-void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
-#endif
-
 ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
     fx_sun_undeclared(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;

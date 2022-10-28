@@ -81,7 +81,14 @@ ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802421D0_7ECEE0);
+ApiStatus func_802421D0_7ECEE0(Evt* script, s32 isInitialCall) {
+    func_8011B950(0x8A, -1, 1, 1);
+    set_background_color_blend(0, 0, 0, 255);
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80242224_7ECF34(Evt* script, s32 isInitialCall) {
     gPlayerData.curHP = 1;
@@ -89,7 +96,10 @@ ApiStatus func_80242224_7ECF34(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242250_7ECF60);
+ApiStatus func_80242250_7ECF60(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = (s32) ((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8024228C_7ECF9C(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_item_count();

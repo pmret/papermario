@@ -10,7 +10,6 @@
 #include "mapfs/iwa_04_hit.h"
 
 #include "sprite/npc/Buzzar.h"
-#include "sprite/npc/Cleft.h"
 
 enum {
 	NPC_Cleft       = 0,
@@ -22,3 +21,8 @@ enum {
 };
 
 #define NAMESPACE iwa_04
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupMusic);
+extern NpcGroupList N(DefaultNPCs);

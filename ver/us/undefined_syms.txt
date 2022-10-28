@@ -26,6 +26,9 @@ D_F0000008 = 0xF0000008;
 D_F5000007 = 0xF5000007;
 D_FA000028 = 0xFA000028;
 D_FD100008 = 0xFD100008;
+__osExceptionPreamble = 0x8006A9F0;
+D_80095910 = 0x80095910;
+D_80095938 = 0x80095938;
 
 // Obfuscation symbols
 obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
@@ -34,6 +37,28 @@ obfuscated_load_engine_data = load_engine_data - 0x315;
 obfuscated_create_audio_system = create_audio_system - 0x7B;
 D_7599F6D8 = 0x7599F6D8;
 D_F79DDD0F = 0xF79DDD0F;
+
+// effect_flame
+D_09000800 = 0x09000800;
+D_090008F8 = 0x090008F8;
+D_09000918 = 0x09000918;
+D_090009E0 = 0x090009E0;
+
+// effect_something_rotating
+D_09003F98 = 0x09003F98;
+D_09004010 = 0x09004010;
+D_09004088 = 0x09004088;
+D_09004100 = 0x09004100;
+D_09004178 = 0x09004178;
+D_090041F0 = 0x090041F0;
+D_09004268 = 0x09004268;
+D_09004360 = 0x09004360;
+D_09004458 = 0x09004458;
+D_09004508 = 0x09004508;
+D_09004600 = 0x09004600;
+
+// effect_spirit_card
+D_090042E0 = 0x090042E0;
 
 fx_sun_undeclared = fx_sun;
 
@@ -106,6 +131,7 @@ func_8002AA2C = 0x8002AA2C;
 func_80059AC8 = 0x80059AC8;
 dead_get_entity_by_index = 0x80118BB0;
 dead_fx_sun = 0x80077BD0;
+dead_fx_sun_undeclared = dead_fx_sun;
 dead_func_8003D660 = 0x80041080;
 dead_set_max_SP = 0x800F1D9C;
 dead_sync_status_menu = 0x800F1730;
@@ -189,8 +215,8 @@ osRomBase = 0x80000308;
 osMemSize = 0x80000318;
 gBackgroundImage = 0x80200000;
 D_80200000 = 0x80200000;
-D_8000030C = 0x8000030C;
-D_8000031C = 0x8000031C;
+osResetType = 0x8000030C;
+osAppNMIBuffer = 0x8000031C;
 D_800A08C0 = 0x800A08C0;
 
 // effect tlb stuff
@@ -320,7 +346,6 @@ D_802440FF = 0x802440FF;
 D_80244100 = 0x80244100;
 D_80244104 = 0x80244104;
 dead_03_D_802442D0 = 0x802442D0;
-kzn_20_LetterDelivery_SavedNpcAnim = 0x80244494;
 D_802447C0 = 0x802447C0;
 D_80244A20 = 0x80244A20;
 sbk_30_D_80244C18 = 0x80244C18;
@@ -378,10 +403,6 @@ nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;
 nok_02_LetterDelivery_SavedNpcAnim = 0x80254B94;
 jan_00_LetterDelivery_SavedNpcAnim = 0x80247CB4;
 jan_03_LetterDelivery_SavedNpcAnim = 0x8024FF04;
-kzn_02_LetterDelivery_SavedNpcAnim = 0x80246794;
-kzn_03_LetterDelivery_SavedNpcAnim = 0x802475E4;
-kzn_09_LetterDelivery_SavedNpcAnim = 0x80247664;
-kzn_17_LetterDelivery_SavedNpcAnim = 0x802467B4;
 sam_01_LetterDelivery_SavedNpcAnim = 0x8024DF24;
 sam_06_LetterDelivery_SavedNpcAnim = 0x8024C1D8;
 sbk_30_LetterDelivery_SavedNpcAnim = 0x80244D88;
@@ -712,10 +733,6 @@ D_802EE8D0 = 0x802EE8D0;
 D_802F39D0 = 0x802F39D0;
 D_802F4560 = 0x802F4560;
 
-kzn_02_KeyItemChoiceList = 0x802465D0;
-D_80247420_kzn_03 = 0x80247420;
-kzn_19_VineRenderState = 0x80248380;
-kzn_19_LetterDelivery_SavedNpcAnim = 0x8024854C;
 D_80247BB8_pra_19 = 0x80247BB8;
 pra_01_80243178 = 0x80243178;
 D_802312E0_battle_area_omo2 = 0x802312E0;
@@ -740,3 +757,5 @@ D_802423D0 = 0x802423D0;
 D_80242310 = 0x80242310;
 flo_23_ConsumableChoiceList = 0x802426E0;
 kmr_04_80243770 = 0x80243770;
+
+EntityModel_Spring_ReboundAnim = 0x1E4;

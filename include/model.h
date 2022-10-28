@@ -142,9 +142,24 @@ typedef enum ShapeTypes {
     SHAPE_TYPE_SPECIAL_GROUP = 10,
 } ShapeTypes;
 
+typedef struct ShapeFile {
+    /* 0x00 */ ModelNode* root;
+    /* 0x04 */ Vtx_t* vertexTable;
+    /* 0x08 */ char** modelNames;
+    /* 0x0C */ char** colliderNames;
+    /* 0x10 */ char** zoneNames;
+    /* 0x14 */ unsigned char pad_14[0xC];
+    // end header
+    /* 0x20 */ u8 data[0];
+} ShapeFile; // size = variable
+
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;
+
+void set_model_fog_color_parameters(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
+void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 void init_model_data(void);
 void update_model_animator(s32);

@@ -49,7 +49,7 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->varTable[9] = 0;

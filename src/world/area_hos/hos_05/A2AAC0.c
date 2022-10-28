@@ -1,10 +1,7 @@
 #include "hos_05.h"
+#include "model.h"
 
 extern Gfx D_8024AA28_A34C68[];
-
-void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

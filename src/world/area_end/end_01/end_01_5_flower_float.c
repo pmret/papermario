@@ -87,8 +87,8 @@ EvtScript N(EVS_Sun) = {
     EVT_END
 };
 
-EvtScript N(EVS_Bulbulbs) = {
-    EVT_CALL(GetNpcPos, NPC_Bulbulb1, LVar0, LVar1, LVar2)
+EvtScript N(EVS_Bubulbs) = {
+    EVT_CALL(GetNpcPos, NPC_Bubulb1, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar0)
     EVT_ADD(LVar3, -120)
     EVT_LOOP(0)
@@ -101,14 +101,14 @@ EvtScript N(EVS_Bulbulbs) = {
     EVT_CALL(MakeLerp, 0, 360, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Bulbulb1, 0, LVar0, 0)
-        EVT_CALL(SetNpcRotation, NPC_Bulbulb2, 0, LVar0, 0)
+        EVT_CALL(SetNpcRotation, NPC_Bubulb1, 0, LVar0, 0)
+        EVT_CALL(SetNpcRotation, NPC_Bubulb2, 0, LVar0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(GetNpcPos, NPC_Bulbulb1, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Bubulb1, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar0)
     EVT_ADD(LVar3, 100)
     EVT_LOOP(0)
@@ -121,8 +121,8 @@ EvtScript N(EVS_Bulbulbs) = {
     EVT_CALL(MakeLerp, 0, 360, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Bulbulb1, 0, LVar0, 0)
-        EVT_CALL(SetNpcRotation, NPC_Bulbulb2, 0, LVar0, 0)
+        EVT_CALL(SetNpcRotation, NPC_Bubulb1, 0, LVar0, 0)
+        EVT_CALL(SetNpcRotation, NPC_Bubulb2, 0, LVar0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -143,7 +143,7 @@ EvtScript N(EVS_ParadePhase_Wizards) = {
     EVT_END_LOOP
     EVT_WAIT(1)
     EVT_EXEC_GET_TID(N(EVS_TexPan_FlowerFloat_Base), LVarA)
-    EVT_EXEC(N(EVS_Bulbulbs))
+    EVT_EXEC(N(EVS_Bubulbs))
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)

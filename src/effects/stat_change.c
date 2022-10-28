@@ -17,11 +17,35 @@ typedef struct ArrowDataTableEntry {
     s32 value;
 } ArrowDataTableEntry;
 
-s32 D_E00AC7B0[] = { 0x09002700, 0x09002700, 0x09002798 };
+extern Gfx D_09002700_3B1E00[];
+extern Gfx D_09002798_3B1E98[];
+extern Gfx D_09002860_3B1F60[];
+extern Gfx D_09002880_3B1F80[];
+extern Gfx D_090028A0_3B1FA0[];
+extern Gfx D_090028C0_3B1FC0[];
+extern Gfx D_090028E0_3B1FE0[];
+extern Gfx D_09002950_3B2050[];
+extern Gfx D_09002990_3B2090[];
+extern Gfx D_090029D0_3B20D0[];
+extern Gfx D_09002A10_3B2110[];
+extern Gfx D_09002A50_3B2150[];
+extern Gfx D_09002A90_3B2190[];
+extern Gfx D_09002AD0_3B21D0[];
+extern Gfx D_09002B10_3B2210[];
+extern Gfx D_09002B50_3B2250[];
+extern Gfx D_09002B90_3B2290[];
+extern Gfx D_09002BD0_3B22D0[];
+extern Gfx D_09002C10_3B2310[];
 
-s32 D_E00AC7BC[] = { 0x09002860, 0x09002880, 0x09002860 };
+Gfx* D_E00AC7B0[] = { D_09002700_3B1E00, D_09002700_3B1E00, D_09002798_3B1E98 };
 
-s32 D_E00AC7C8[] = { 0x09002950, 0x09002990, 0x090029D0, 0x09002A10, 0x09002A50, 0x09002A90, 0x09002AD0, 0x09002B10, 0x09002B50, 0x09002B90, 0x09002BD0, 0x09002C10 };
+Gfx* D_E00AC7BC[] = { D_09002860_3B1F60, D_09002880_3B1F80, D_09002860_3B1F60 };
+
+Gfx* D_E00AC7C8[] = {
+    D_09002950_3B2050, D_09002990_3B2090, D_090029D0_3B20D0, D_09002A10_3B2110,
+    D_09002A50_3B2150, D_09002A90_3B2190, D_09002AD0_3B21D0, D_09002B10_3B2210,
+    D_09002B50_3B2250, D_09002B90_3B2290, D_09002BD0_3B22D0, D_09002C10_3B2310
+};
 
 ExtraArrowDataEntry D_E00AC7F8[] = {
     { .unk_00 = 0xFF, .unk_01 = 0x96 },
@@ -209,4 +233,66 @@ void func_E00AC288(EffectInstance* effect) {
     func_E00AC2A4(effect);
 }
 
-INCLUDE_ASM(s32, "effects/stat_change", func_E00AC2A4);
+void func_E00AC2A4(EffectInstance* effect) {
+    StatChangeFXData* data = effect->data.statChange;
+    s32 arrowType = data->arrowType;
+    s32 arrowValue = data->arrowValue;
+    s32 idx;
+    Matrix4f sp20;
+    Matrix4f sp60;
+
+    if (data->scaleX != 0.0f && data->scaleY != 0.0f) {
+        gDPPipeSync(gMasterGfxPos++);
+        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale, data->pos.x, data->pos.y, data->pos.z);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+        if (data->unk_24 == 255) {
+            gDPSetRenderMode(gMasterGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+        } else {
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0);
+        }
+
+        shim_guTranslateF(sp20, 0.0f, data->unk_40, 0.0f);
+        shim_guScaleF(sp60, data->scaleX, data->scaleY, 1.0f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, D_E00AC7B0[arrowType]);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, data->unk_24);
+        gSPDisplayList(gMasterGfxPos++, D_E00AC7BC[arrowType]);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, D_090028E0_3B1FE0);
+
+        shim_guTranslateF(sp20, 0.0f, data->unk_3C, 0.0f);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+        if (arrowValue < 0) {
+            idx = -arrowValue;
+        } else {
+            idx = arrowValue;
+        }
+
+        gSPDisplayList(gMasterGfxPos++, D_E00AC7C8[idx % 10]);
+        gSPDisplayList(gMasterGfxPos++, D_090028C0_3B1FC0);
+
+        if (arrowValue >= 0) {
+            gSPDisplayList(gMasterGfxPos++, D_E00AC7C8[11]);
+        } else {
+            gSPDisplayList(gMasterGfxPos++, D_E00AC7C8[10]);
+        }
+
+        gSPDisplayList(gMasterGfxPos++, D_090028A0_3B1FA0);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMasterGfxPos++);
+    }
+}

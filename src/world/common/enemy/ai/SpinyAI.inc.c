@@ -48,7 +48,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->AI_TEMP_STATE = 100;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
@@ -73,7 +73,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         } else {
             s32 emoteTemp;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             script->functionTemp[1] = 0;
             script->AI_TEMP_STATE = 200;
         }

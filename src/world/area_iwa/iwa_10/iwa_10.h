@@ -10,9 +10,6 @@
 #include "mapfs/iwa_10_hit.h"
 
 #include "sprite/npc/TrainStationToad.h"
-#include "sprite/npc/Toad.h"
-#include "sprite/npc/Toadette.h"
-#include "sprite/npc/Dryite.h"
 #include "sprite/npc/WorldParakarry.h"
 
 enum {
@@ -48,3 +45,19 @@ enum {
 };
 
 #define NAMESPACE iwa_10
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_InitializeTrainScene);
+extern EvtScript N(EVS_ArriveFromToadTown);
+extern EvtScript N(EVS_DepartForToadTown);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_PushSong);
+extern EvtScript N(EVS_PopSong);
+extern EvtScript N(EVS_Scene_MeetParakarry);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);
+
+extern EvtScript N(EVS_NpcIdle_Parakarry);
+extern StaticNpc N(NpcData_Parakarry);
+API_CALLABLE(N(LoadPartyImage));

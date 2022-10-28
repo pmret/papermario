@@ -10,3 +10,5 @@
 #include "mapfs/mgm_03_hit.h"
 
 #define NAMESPACE mgm_03
+
+extern EvtScript N(EVS_Main);

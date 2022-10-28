@@ -23,23 +23,7 @@ NpcSettings N(NpcSettings_KoopaBros) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Eldstar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
@@ -356,16 +340,12 @@ StaticNpc N(NpcData_KoopaBros) = {
 
 StaticNpc N(NpcData_Eldstar) = {
     .id = NPC_Eldstar,
-    .settings = &N(NpcSettings_Eldstar),
+    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Eldstar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = ELDSTAR_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -378,24 +358,7 @@ StaticNpc N(NpcData_Eldstar) = {
             .detectSize = { 500 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldEldstar_Idle,
-        .walk   = ANIM_WorldEldstar_Idle,
-        .run    = ANIM_WorldEldstar_Idle,
-        .chase  = ANIM_WorldEldstar_Idle,
-        .anim_4 = ANIM_WorldEldstar_Idle,
-        .anim_5 = ANIM_WorldEldstar_Idle,
-        .death  = ANIM_WorldEldstar_Idle,
-        .hit    = ANIM_WorldEldstar_Idle,
-        .anim_8 = ANIM_WorldEldstar_Still,
-        .anim_9 = ANIM_WorldEldstar_Idle,
-        .anim_A = ANIM_WorldEldstar_Idle,
-        .anim_B = ANIM_WorldEldstar_Idle,
-        .anim_C = ANIM_WorldEldstar_Idle,
-        .anim_D = ANIM_WorldEldstar_Idle,
-        .anim_E = ANIM_WorldEldstar_Idle,
-        .anim_F = ANIM_WorldEldstar_Idle,
-    },
+    .animations = ELDSTAR_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {

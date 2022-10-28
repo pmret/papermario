@@ -1,4 +1,5 @@
 #include "osr_00.h"
+#include "ld_addrs.h"
 
 #include "world/common/atomic/UnkFunc27.inc.c"
 

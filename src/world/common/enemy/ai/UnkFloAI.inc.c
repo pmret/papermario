@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "effects.h"
 #ifdef _DEAD_H_
 #include "dead_structs.h"
 #endif
@@ -25,9 +26,9 @@ void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDe
     f32 posXCCW;
     f32 posYCCW;
     f32 posZCCW;
-    
+
     npc->duration = npcAISettings->chaseUpdateInterval / 2 + rand_int(npcAISettings->chaseUpdateInterval / 2 + 1);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_CHASE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     detectedPlayer = FALSE;
 
@@ -116,7 +117,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDe
     }
     if (detectedPlayer) {
         npc->duration = 10;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     }
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
@@ -128,11 +129,11 @@ void N(UnkFloAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetect
 
     if (!basic_ai_check_player_dist(territory, enemy, npcAISettings->chaseRadius, npcAISettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 25;
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
-        if (npc->currentAnim != enemy->animList[ENEMY_ANIM_MELEE_PRE]) {
+        if (npc->currentAnim != enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE]) {
             if (npc->moveSpeed < 4.0) {
                 func_8003D660(npc, 0);
             } else {
@@ -190,7 +191,7 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;

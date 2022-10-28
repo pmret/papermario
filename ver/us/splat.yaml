@@ -235,7 +235,7 @@ segments:
     - [0x457C0, c, os/contramwrite, gcc_272 -O3]
     - [0x459D0, hasm, os/parameters] # Needs actual symbols added
     - [0x45A30, c, os/afterprenmi, gcc_272 -O3]
-    - [0x45A50, c, os/initialize]
+    - [0x45A50, c, os/initialize, gcc_272 -O3]
     - [0x45DF0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
@@ -247,8 +247,8 @@ segments:
     - [0x46AE0, c, os/epirawwrite, gcc_272 -O3]
     - [0x46C50, c, os/ai, gcc_272 -O3]
     - [0x46C70, hasm, os/bcmp]
-    - [0x46D80, c, os/xlitob]
-    - [0x46FD0, c, os/xldtob]
+    - [0x46D80, c, os/xlitob, gcc_272 -O3]
+    - [0x46FD0, c, os/xldtob, gcc_272 -O3]
     - [0x47A60, hasm, os/__osGetCause]
     - [0x47A70, hasm, os/__osGetSR]
     - [0x47A80, hasm, os/__osSetCompare]
@@ -265,7 +265,7 @@ segments:
     - [0x47C60, c, os/crc, gcc_272 -O3]
     - [0x47D50, c, os/destroythread, gcc_272 -O3]
     - [0x47E30, hasm, os/osMapTLBRdb]
-    - [0x47E90, c, os/vi]
+    - [0x47E90, c, os/vi, gcc_272 -O3]
     - [0x47FA0, c, os/vigetcurrcontext, gcc_272 -O3]
     - [0x47FB0, hasm, os/padding]
     - [0x47FC0, hasm, os/guNormalize]
@@ -359,7 +359,12 @@ segments:
     - [0x6FA70, .data, os/timerintr] # libultra data
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
-    - [0x70C20, data, 70C20]
+    - [auto, .data, os/guRotate]
+    - [auto, .data, os/contpfs]
+    - [auto, .data, os/contramread]
+    - [auto, .data, os/initialize]
+    - [auto, .data, os/xlitob]
+    - [auto, .data, os/vi]
     - [0x70E30, .data, battle/battle]
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
@@ -2827,7 +2832,28 @@ segments:
     subsegments:
     - [0x331940, c, star]
     - [0x332690]
-  - [0x3326A0, bin] # star gfx
+  - name: effect_gfx_star
+    dir: effects/gfx
+    type: code
+    start: 0x3326A0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3326A0, c, star]
+    - start: 0x3326A0
+      type: .data
+      name: star
+      subsegments:
+      - [0x3326A0, ia8, D_09000000_3326A0, 64, 64]
+      - [0x3336A0, i4, D_09001000_3336A0, 32, 32]
+      - [0x3338A0, i4, D_09001200_3338A0, 32, 32]
+      - [0x333AA0, vtx, D_09001400_333AA0]
+      - [0x333B40, vtx, D_090014A0_333B40]
+      - [0x333B80, vtx, D_090014E0_333B80]
+      - [0x333BD0, gfx, D_09001530_333BD0]
+      - [0x333CF0, gfx, D_09001650_333CF0]
+      - [0x333E20, gfx, D_09001780_333E20]
+      - [0x333E70, gfx, D_090017D0_333E70]
   - name: effect_emote
     dir: effects
     type: code
@@ -2876,7 +2902,7 @@ segments:
     vram: 0xE0022000
     subsegments:
     - [0x337240, c, sparkles]
-    - [0x337F10, data]
+    - [0x337F10]
   - name: effect_gfx_sparkles
     dir: effects/gfx
     type: code
@@ -3137,7 +3163,23 @@ segments:
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
     - [0x34E710, data]
-  - [0x34E770, bin] # spiky_white_aura gfx
+  - name: effect_gfx_spiky_white_aura
+    dir: effects/gfx
+    type: code
+    start: 0x34E770
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x34E770, c, spiky_white_aura]
+    - start: 0x34E770
+      type: .data
+      name: spiky_white_aura
+      subsegments:
+      - [0x34E770, i4, D_09000000_34E770, 64, 32]
+      - [0x34EB70, vtx, D_09000400_34EB70]
+      - [0x34EBB0, gfx, D_09000440_34EBB0]
+      - [0x34EC58, gfx, D_090004E8_34EC58]
+      - [0x34EC78]
   - name: effect_smoke_impact
     dir: effects
     type: code
@@ -3435,8 +3477,23 @@ segments:
     vram: 0xE005E000
     subsegments:
     - [0x3625C0, c, stars_orbiting]
-    - [0x362C30, data]
-  - [0x362C50, bin] # stars_orbiting gfx
+    - [0x362C30]
+  - name: effect_gfx_stars_orbiting
+    dir: effects/gfx
+    type: code
+    start: 0x362C50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x362C50, c, stars_orbiting]
+    - start: 0x362C50
+      type: .data
+      name: stars_orbiting
+      subsegments:
+      - [0x362C50, i4, D_09000000_362C50, 32, 64]
+      - [0x363050, vtx, D_09000400_363050]
+      - [0x363090, gfx, D_09000440_363090]
+      - [0x363140, gfx, D_090004F0_363140]
   - name: effect_big_snowflakes
     dir: effects
     type: code
@@ -4045,7 +4102,7 @@ segments:
     vram: 0xE0086000
     subsegments:
     - [0x389850, c, firework]
-    - [0x38A2F0, data]
+    - [0x38A2F0]
   - name: effect_gfx_firework
     dir: effects/gfx
     type: code
@@ -4077,7 +4134,7 @@ segments:
     vram: 0xE0088000
     subsegments:
     - [0x38ADF0, c, confetti]
-    - [0x38BAB0, data]
+    - [0x38BAB0]
   - name: effect_gfx_confetti
     dir: effects/gfx
     type: code
@@ -4115,7 +4172,7 @@ segments:
     vram: 0xE008C000
     subsegments:
     - [0x38DE00, c, effect_46]
-    - [0x38E8F0, data]
+    - [0x38E8F0]
   - name: effect_gfx_effect_46
     dir: effects/gfx
     type: code
@@ -4377,7 +4434,32 @@ segments:
     subsegments:
     - [0x39FF20, c, radiating_energy_orb]
     - [0x3A0D10]
-  - [0x3A0D60, bin] # radiating_energy_orb gfx
+  - name: effect_gfx_radiating_energy_orb
+    dir: effects/gfx
+    type: code
+    start: 0x3A0D60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A0D60, c, radiating_energy_orb]
+    - start: 0x3A0D60
+      type: .data
+      name: radiating_energy_orb
+      subsegments:
+      - [0x3A0D60, i4, D_09000000_3A0D60, 16, 64]
+      - [0x3A0F60, i8, D_09000200_3A0F60, 64, 64]
+      - [0x3A1F60, gfx, D_09001200_3A1F60]
+      - [0x3A2008, gfx, D_090012A8_3A2008]
+      - [0x3A20B0, vtx, D_09001350_3A20B0]
+      - [0x3A20F0, vtx, D_09001390_3A20F0]
+      - [0x3A2130, vtx, D_090013D0_3A2130]
+      - [0x3A2170, vtx, D_09001410_3A2170]
+      - [0x3A21B0, vtx, D_09001450_3A21B0]
+      - [0x3A21F0, gfx, D_09001490_3A21F0]
+      - [0x3A2210, gfx, D_090014B0_3A2210]
+      - [0x3A2230, gfx, D_090014D0_3A2230]
+      - [0x3A2250, gfx, D_090014F0_3A2250]
+      - [0x3A2270, gfx, D_09001510_3A2270]
   - name: effect_quizmo_answer
     dir: effects
     type: code
@@ -4431,7 +4513,29 @@ segments:
     vram: 0xE00A6000
     subsegments:
     - [0x3A5550, c, merlin_house_stars]
-  - [0x3A5BE0, bin] # merlin_house_stars gfx
+  - name: effect_gfx_merlin_house_stars
+    dir: effects/gfx
+    type: code
+    start: 0x3A5BE0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A5BE0, c, merlin_house_stars]
+    - start: 0x3A5BE0
+      type: .data
+      name: merlin_house_stars
+      subsegments:
+      - [0x3A5BE0, i4, D_09000000_3A5BE0, 64, 64]
+      - [0x3A63E0, i4, D_09000800_3A63E0, 64, 64]
+      - [0x3A6BE0, gfx, D_09001000_3A6BE0]
+      - [0x3A6CD8, vtx, D_090010F8_3A6CD8]
+      - [0x3A6E68, vtx, D_09001288_3A6E68]
+      - [0x3A6E88, vtx, D_090012A8_3A6E88]
+      - [0x3A6E98, vtx, D_090012B8_3A6E98]
+      - [0x3A6EB8, vtx, D_090012D8_3A6EB8]
+      - [0x3A6EC8, vtx, D_090012E8_3A6EC8]
+      - [0x3A6FF8, gfx, D_09001418_3A6FF8]
+      - [0x3A70E8]
   - name: effect_quizmo_audience
     dir: effects
     type: code
@@ -4508,7 +4612,56 @@ segments:
     subsegments:
     - [0x3AEE20, c, stat_change]
     - [0x3AF5D0]
-  - [0x3AF700, bin] # stat_change gfx
+  - name: effect_gfx_stat_change
+    dir: effects/gfx
+    type: code
+    start: 0x3AF700
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3AF700, c, stat_change]
+    - start: 0x3AF700
+      type: .data
+      name: stat_change
+      subsegments:
+      - [0x3AF700, i4, D_09000000_3AF700, 32, 32]
+      - [0x3AF900, i4, D_09000200_3AF900, 32, 32]
+      - [0x3AFB00, i4, D_09000400_3AFB00, 32, 32]
+      - [0x3AFD00, i4, D_09000600_3AFD00, 32, 32]
+      - [0x3AFF00, i4, D_09000800_3AFF00, 32, 32]
+      - [0x3B0100, i4, D_09000A00_3B0100, 32, 32]
+      - [0x3B0300, i4, D_09000C00_3B0300, 32, 32]
+      - [0x3B0500, i4, D_09000E00_3B0500, 32, 32]
+      - [0x3B0700, i4, D_09001000_3B0700, 32, 32]
+      - [0x3B0900, i4, D_09001200_3B0900, 32, 32]
+      - [0x3B0B00, i4, D_09001400_3B0B00, 32, 32]
+      - [0x3B0D00, i4, D_09001600_3B0D00, 32, 32]
+      - [0x3B0F00, rgba16, D_09001800_3B0F00, 32, 32]
+      - [0x3B1700, ci8, D_09002000_3B1700, 32, 32]
+      - [0x3B1B00, palette, D_09002000_3B1700]
+      - [0x3B1D00, vtx, D_09002600_3B1D00]
+      - [0x3B1D40, vtx, D_09002640_3B1D40]
+      - [0x3B1D80, vtx, D_09002680_3B1D80]
+      - [0x3B1DC0, vtx, D_090026C0_3B1DC0]
+      - [0x3B1E00, gfx, D_09002700_3B1E00]
+      - [0x3B1E98, gfx, D_09002798_3B1E98]
+      - [0x3B1F60, gfx, D_09002860_3B1F60]
+      - [0x3B1F80, gfx, D_09002880_3B1F80]
+      - [0x3B1FA0, gfx, D_090028A0_3B1FA0]
+      - [0x3B1FC0, gfx, D_090028C0_3B1FC0]
+      - [0x3B1FE0, gfx, D_090028E0_3B1FE0]
+      - [0x3B2050, gfx, D_09002950_3B2050]
+      - [0x3B2090, gfx, D_09002990_3B2090]
+      - [0x3B20D0, gfx, D_090029D0_3B20D0]
+      - [0x3B2110, gfx, D_09002A10_3B2110]
+      - [0x3B2150, gfx, D_09002A50_3B2150]
+      - [0x3B2190, gfx, D_09002A90_3B2190]
+      - [0x3B21D0, gfx, D_09002AD0_3B21D0]
+      - [0x3B2210, gfx, D_09002B10_3B2210]
+      - [0x3B2250, gfx, D_09002B50_3B2250]
+      - [0x3B2290, gfx, D_09002B90_3B2290]
+      - [0x3B22D0, gfx, D_09002BD0_3B22D0]
+      - [0x3B2310, gfx, D_09002C10_3B2310]
   - name: effect_snaking_static
     dir: effects
     type: code
@@ -4674,8 +4827,25 @@ segments:
     vram: 0xE00C4000
     subsegments:
     - [0x3CADF0, c, stop_watch]
-    - [0x3CB7C0, data]
-  - [0x3CB890, bin] # stop_watch gfx
+    - [0x3CB7C0]
+  - name: effect_gfx_stop_watch
+    dir: effects/gfx
+    type: code
+    start: 0x3CB890
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3CB890, c, stop_watch]
+    - start: 0x3CB890
+      type: .data
+      name: stop_watch
+      subsegments:
+      - [0x3CB890, i4, D_09000000_3CB890, 64, 64]
+      - [0x3CC090, i4, D_09000800_3CC090, 64, 64]
+      - [0x3CC890, gfx, D_09001000_3CC890]
+      - [0x3CC978, vtx, D_090010E8_3CC978]
+      - [0x3CC9B8, gfx, D_09001128_3CC9B8]
+      - [0x3CC9D8]
   - name: effect_effect_63
     dir: effects
     type: code
@@ -4943,7 +5113,7 @@ segments:
     vram: 0xE00E0000
     subsegments:
     - [0x3DB460, c, embers]
-    - [0x3DBEA0, data]
+    - [0x3DBEA0]
   - name: effect_gfx_embers
     dir: effects/gfx
     type: code
@@ -4977,8 +5147,37 @@ segments:
     vram: 0xE00E4000
     subsegments:
     - [0x3DE000, c, misc_particles]
-    - [0x3DED90, data]
-  - [0x3DEE60, bin] # misc_particles gfx
+    - [0x3DED90]
+  - name: effect_gfx_misc_particles
+    dir: effects/gfx
+    type: code
+    start: 0x3DEE60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3DEE60, c, misc_particles]
+    - start: 0x3DEE60
+      type: .data
+      name: misc_particles
+      subsegments:
+      - [0x3DEE60, i8, D_09000000_3DEE60, 128, 32]
+      - [0x3DFE60, i4, D_09001000_3DFE60, 16, 16]
+      - [0x3DFEE0, i4, D_09001080_3DFEE0, 16, 16]
+      - [0x3DFF60, i4, D_09001100_3DFF60, 16, 16]
+      - [0x3DFFE0, ia8, D_09001180_3DFFE0, 32, 32]
+      - [0x3E03E0, gfx, D_09001580_3E03E0]
+      - [0x3E04D0, gfx, D_09001670_3E04D0]
+      - [0x3E05C8, gfx, D_09001768_3E05C8]
+      - [0x3E0678, gfx, D_09001818_3E0678]
+      - [0x3E0730, vtx, D_090018D0_3E0730]
+      - [0x3E0770, vtx, D_09001910_3E0770]
+      - [0x3E07B0, vtx, D_09001950_3E07B0]
+      - [0x3E07F0, vtx, D_09001990_3E07F0]
+      - [0x3E0830, vtx, D_090019D0_3E0830]
+      - [0x3E0880, gfx, D_09001A20_3E0880]
+      - [0x3E08A0, gfx, D_09001A40_3E08A0]
+      - [0x3E08C0, gfx, D_09001A60_3E08C0]
+      - [0x3E08E0, gfx, D_09001A80_3E08E0]
   - name: effect_static_status
     dir: effects
     type: code
@@ -4986,8 +5185,25 @@ segments:
     vram: 0xE00E6000
     subsegments:
     - [0x3E0930, c, static_status]
-    - [0x3E11B0, data]
-  - [0x3E12D0, bin] # static_status gfx
+    - [0x3E11B0]
+  - name: effect_gfx_static_status
+    dir: effects/gfx
+    type: code
+    start: 0x3E12D0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3E12D0, c, static_status]
+    - start: 0x3E12D0
+      type: .data
+      name: static_status
+      subsegments:
+      - [0x3E12D0, ci4, D_09000000_3E12D0, 16, 16]
+      - [0x3E1350, palette, D_09000000_3E12D0]
+      - [0x3E1370] # padding
+      - [0x3E1550, gfx, D_09000280_3E1550]
+      - [0x3E1630, vtx, D_09000360_3E1630]
+      - [0x3E1670, gfx, D_090003A0_3E1670]
   - name: effect_moving_cloud
     dir: effects
     type: code
@@ -5420,7 +5636,7 @@ segments:
     vram: 0xE0116000
     subsegments:
     - [0x402640, c, something_rotating]
-    - [0x4032A0, data]
+    - [0x4032A0]
   - name: effect_breaking_junk
     dir: effects
     type: code
@@ -5530,8 +5746,45 @@ segments:
     vram: 0xE0122000
     subsegments:
     - [0x40C5A0, c, star_spirits_energy]
-    - [0x40D130, data]
-  - [0x40D290, bin] # star_spirits_energy gfx
+    - [0x40D130]
+  - name: effect_gfx_star_spirits_energy
+    dir: effects/gfx
+    type: code
+    start: 0x40D290
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40D290, c, star_spirits_energy]
+    - start: 0x40D290
+      type: .data
+      name: star_spirits_energy
+      subsegments:
+      - [0x40D290, i4, D_09000000_40D290, 32, 32]
+      - [0x40D490, i4, D_09000200_40D490, 256, 32]
+      - [0x40E490, i4, D_09001200_40E490, 256, 32]
+      - [0x40F490, i4, D_09002200_40F490, 256, 32]
+      - [0x410490, i4, D_09003200_410490, 256, 32]
+      - [0x411490, i4, D_09004200_411490, 64, 64]
+      - [0x411C90, i4, D_09004A00_411C90, 64, 32]
+      - [0x412090, gfx, D_09004E00_412090]
+      - [0x4120F8, vtx, D_09004E68_4120F8]
+      - [0x412138, vtx, D_09004EA8_412138]
+      - [0x412178, vtx, D_09004EE8_412178]
+      - [0x4121B8, vtx, D_09004F28_4121B8]
+      - [0x4121F8, vtx, D_09004F68_4121F8]
+      - [0x412238, vtx, D_09004FA8_412238]
+      - [0x412278, vtx, D_09004FE8_412278]
+      - [0x4122B8, vtx, D_09005028_4122B8]
+      - [0x4122F8, vtx, D_09005068_4122F8]
+      - [0x412338, vtx, D_090050A8_412338]
+      - [0x412378, vtx, D_090050E8_412378]
+      - [0x4123B8, vtx, D_09005128_4123B8]
+      - [0x4123F8, gfx, D_09005168_4123F8]
+      - [0x412458, gfx, D_090051C8_412458]
+      - [0x412600, gfx, D_09005370_412600]
+      - [0x412660, gfx, D_090053D0_412660]
+      - [0x4126D0, gfx, D_09005440_4126D0]
+      - [0x412728]
   - name: effect_pink_sparkles
     dir: effects
     type: code
@@ -5539,7 +5792,7 @@ segments:
     vram: 0xE0124000
     subsegments:
     - [0x412730, c, pink_sparkles]
-    - [0x412FD0, data]
+    - [0x412FD0]
   - name: effect_star_outline
     dir: effects
     type: code
@@ -6653,7 +6906,7 @@ segments:
     start: 0x6DDDC0
     vram: 0x80218000
     subsegments:
-    - [0x669D80, c, actor/koopa_troopa]
+    - [0x6DDDC0, c, actor/koopa_troopa]
     - [0x6DDE90, c, actor/fuzzy]
     - [0x6DE000, c, actor/pokey]
     - [0x6DE0D0, c, actor/bandit]
@@ -8235,34 +8488,37 @@ segments:
     start: 0x8D3DC0
     vram: 0x80240000
     subsegments:
-    - [0x8D3DC0, c]
-    - [0x8D4880, data]
-    - [0x8D49A0, data]
-    - [0x8D5C40]
+    - [0x8D3DC0, c, kmr_07_0_header]
+    - [0x8D3DC0, c, kmr_07_1_music]
+    - [0x8D3DC0, c, kmr_07_2_main]
+    - [0x8D3DC0, c, kmr_07_3_npc]
+    - [0x8D4880, c, kmr_07_4_entity]
+    - [0x8D4880]
   - name: kmr_09
     dir: world/area_kmr/kmr_09
     type: code
     start: 0x8D5E00
     vram: 0x80240000
     subsegments:
-    - [0x8D5E00, c]
-    - [0x8D7330, data]
-    - [0x8D73C0, data]
-    - [0x8D83B0, data]
-    - [0x8D8460]
+    - [0x8D5E00, c, kmr_09_0_header]
+    - [0x8D5E00, c, kmr_09_1_music]
+    - [0x8D5E00, c, kmr_09_2_main]
+    - [0x8D5E00, c, kmr_09_3_npc]
+    - [0x8D7330, c, kmr_09_4_entity]
+    - [0x8D7330]
   - name: kmr_10
     dir: world/area_kmr/kmr_10
     type: code
     start: 0x8D84D0
     vram: 0x80240000
     subsegments:
-    - [0x8D84D0, c]
-    - [0x8D88A0, c]
-    - [0x8D8AE0, data]
-    - [0x8D8B80, data]
-    - [0x8D8E60, data]
-    - [0x8D90F0, data]
-    - [0x8DA0F0]
+    - [0x8D84D0, c, kmr_10_0_header]
+    - [0x8D84D0, c, kmr_10_1_music]
+    - [0x8D84D0, c, kmr_10_2_main]
+    - [0x8D84D0, c, kmr_10_3_npc]
+    - [0x8D84D0, c, kmr_10_4_entity]
+    - [0x8D88A0, c, kmr_10_5_foliage]
+    - [0x8D8AE0]
   - name: kmr_11
     dir: world/area_kmr/kmr_11
     type: code
@@ -8286,8 +8542,11 @@ segments:
     start: 0x8EB360
     vram: 0x80240000
     subsegments:
-    - [0x8EB360, c, header]
-    - [0x8EB390, c, events]
+    - [0x8EB360, c, kmr_12_0_header]
+    - [0x8EB360, c, kmr_12_1_music]
+    - [0x8EB360, c, kmr_12_2_main]
+    - [0x8EB360, c, kmr_12_3_npc]
+    - [0x8EB390, c, kmr_12_4_entity]
     - [0x8EB390]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
@@ -8323,10 +8582,9 @@ segments:
     start: 0x8FEE80
     vram: 0x80240000
     subsegments:
-    - [0x8FEE80, c]
-    - [0x8FEE90, c]
-    - [0x8FF160, data]
-    - [0x8FF650]
+    - [0x8FEE80, c, kmr_21_0_header]
+    - [0x8FEE90, c, kmr_21_1_main]
+    - [0x8FF160]
   - name: kmr_22
     dir: world/area_kmr/kmr_22
     type: code
@@ -8345,37 +8603,48 @@ segments:
     start: 0x907A30
     vram: 0x80240000
     subsegments:
-    - [0x907A30, c]
-    - [0x907A40, c]
-    - [0x908B00, data]
-    - [0x90B210]
+    - [0x907A30, c, kmr_23_0_header]
+    - [0x907A40, c, kmr_23_1_main]
+    - [0x907A70, c, kmr_23_2_npc]
+    - [0x908B00, .data, kmr_23_0_header]
+    - [0x908BC0, .data, kmr_23_1_main]
+    - start: 0x909090
+      type: .data
+      name: kmr_23_2_npc
+      subsegments:
+      - [0x909090]
+      - [0x9090F8, ia8, window_ul, 8, 8]
+      - [0x909138, ia8, window_ur, 8, 8]
+      - [0x909178, ia8, window_ll, 8, 8]
+      - [0x9091B8, ia8, window_lr, 8, 8]
+      - [0x9091F8]
   - name: kmr_24
     dir: world/area_kmr/kmr_24
     type: code
     start: 0x90B240
     vram: 0x80240000
     subsegments:
-    - [0x90B240, c]
-    - [0x90B250, c]
-    - [0x90B350, data]
-    - [0x90B6C0]
+    - [0x90B240, c, kmr_24_0_header]
+    - [0x90B250, c, kmr_24_1_main]
+    - [0x90B350]
   - name: kmr_30
     dir: world/area_kmr/kmr_30
     type: code
     start: 0x90B6D0
     vram: 0x80240000
     subsegments:
-    - [0x90B6D0, c]
-    - [0x90B9E0, c]
-    - [0x90BBB0, data]
-    - [0x90BDB0, data]
-    - [0x90BFF0, data]
+    - [0x90B6D0, c, kmr_30_0_header]
+    - [0x90B6D0, c, kmr_30_1_main]
+    - [0x90B9E0, c, kmr_30_2_npc]
+    - [0x90B9E0, c, kmr_30_3_the_end]
+    - [0x90BBB0]
   - name: iwa_00
     dir: world/area_iwa/iwa_00
     type: code
     start: 0x90CC40
     vram: 0x80240000
     subsegments:
+    - [0x90CC40, c, iwa_00_0_header]
     - [0x90CC40, c, iwa_00_1_main]
     - [0x90CC40, c, iwa_00_2_entity]
     - [0x90CC40, c, iwa_00_3_npc]
@@ -8387,12 +8656,14 @@ segments:
     start: 0x90F6B0
     vram: 0x80240000
     subsegments:
+    - [0x90F6B0, c, iwa_01_0_header]
     - [0x90F6B0, c, iwa_01_1_main]
     - [0x90F6B0, c, iwa_01_2_entity]
     - [0x90F6B0, c, iwa_01_3_splash]
     - [0x90FBD0, c, iwa_01_4_npc]
     - [0x912960, c, iwa_01_5_slide]
-    - [0x912990, .data, iwa_01_1_main]
+    - [0x912990, .data, iwa_01_0_header]
+    - [0x912A10, .data, iwa_01_1_main]
     - [0x912F60, .data, iwa_01_2_entity]
     - start: 0x913070
       type: .data
@@ -8410,6 +8681,7 @@ segments:
     start: 0x915D70
     vram: 0x80240000
     subsegments:
+    - [0x915D70, c, iwa_02_0_header]
     - [0x915D70, c, iwa_02_1_main]
     - [0x915D70, c, iwa_02_2_entity]
     - [0x915D70, c, iwa_02_3_npc]
@@ -8420,6 +8692,7 @@ segments:
     start: 0x918BB0
     vram: 0x80240000
     subsegments:
+    - [0x918BB0, c, iwa_03_0_header]
     - [0x918BB0, c, iwa_03_1_main]
     - [0x918BB0, c, iwa_03_2_entity]
     - [0x918EF0, c, iwa_03_3_npc]
@@ -8432,9 +8705,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x91B8E0, c, iwa_04_0_header]
-    - [0x91B8E0, c, iwa_04_1_main]
-    - [0x91B8E0, c, iwa_04_2_entity]
-    - [0x91B960, c, iwa_04_3_npc]
+    - [0x91B8E0, c, iwa_04_1_music]
+    - [0x91B8E0, c, iwa_04_2_main]
+    - [0x91B8E0, c, iwa_04_3_entity]
+    - [0x91B960, c, iwa_04_4_npc]
     - [0x91C9C0]
   - name: iwa_10
     dir: world/area_iwa/iwa_10
@@ -8443,13 +8717,14 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x91E570, c, iwa_10_0_header]
-    - [0x91E570, c, iwa_10_1_main]
-    - [0x91E5B0, c, iwa_10_2_npc]
-    - [0x91E6D0, c, iwa_10_3_train]
-    - [0x91F5A0, c, iwa_10_4_entity]
-    - [0x91FA80, c, iwa_10_5_parakarry]
-    - [0x91FA80, c, iwa_10_6_new_party]
-    - [0x91FB20, c, iwa_10_7_foliage]
+    - [0x91E570, c, iwa_10_1_music]
+    - [0x91E570, c, iwa_10_2_main]
+    - [0x91E5B0, c, iwa_10_3_npc]
+    - [0x91E6D0, c, iwa_10_4_train]
+    - [0x91F5A0, c, iwa_10_5_entity]
+    - [0x91FA80, c, iwa_10_6_parakarry]
+    - [0x91FA80, c, iwa_10_7_new_party]
+    - [0x91FB20, c, iwa_10_8_foliage]
     - [0x91FD60]
   - name: iwa_11
     dir: world/area_iwa/iwa_11
@@ -8458,10 +8733,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x9269F0, c, iwa_11_0_header]
-    - [0x9269F0, c, iwa_11_1_main]
-    - [0x926A10, c, iwa_11_2_train]
-    - [0x926C70, c, iwa_11_3_scenery]
-    - [0x926C70, c, iwa_11_4_npc]
+    - [0x9269F0, c, iwa_11_1_music]
+    - [0x9269F0, c, iwa_11_2_main]
+    - [0x926A10, c, iwa_11_3_train]
+    - [0x926C70, c, iwa_11_4_scenery]
+    - [0x926C70, c, iwa_11_5_npc]
     - [0x926D00]
   - name: sbk_00
     dir: world/area_sbk/sbk_00
@@ -8867,7 +9143,7 @@ segments:
     - [0x953FC0, c, sbk_56_1_main]
     - [0x954D80, c, sbk_56_2_entity]
     - [0x954D80, c, sbk_56_3_foliage]
-    - [0x954FC00]
+    - [0x954FC0]
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
@@ -11256,9 +11532,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBDD1B0, c, arn_02_0_header]
-    - [0xBDD1B0, c, arn_02_1_main]
-    - [0xBDD1B0, c, arn_02_2_entity]
-    - [0xBDD1B0, c, arn_02_3_npc]
+    - [0xBDD1B0, c, arn_02_1_music]
+    - [0xBDD1B0, c, arn_02_2_main]
+    - [0xBDD1B0, c, arn_02_3_entity]
+    - [0xBDD1B0, c, arn_02_4_npc]
     - [0xBDE190]
   - name: arn_03
     dir: world/area_arn/arn_03
@@ -11267,9 +11544,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBDED90, c, arn_03_0_header]
-    - [0xBDED90, c, arn_03_1_main]
-    - [0xBDED90, c, arn_03_2_npc]
-    - [0xBDED90, c, arn_03_3_entity]
+    - [0xBDED90, c, arn_03_1_music]
+    - [0xBDED90, c, arn_03_2_main]
+    - [0xBDED90, c, arn_03_3_npc]
+    - [0xBDED90, c, arn_03_4_entity]
     - [0xBE04B0]
   - name: arn_04
     dir: world/area_arn/arn_04
@@ -11278,9 +11556,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBE37B0, c, arn_04_0_header]
-    - [0xBE37B0, c, arn_04_1_main]
-    - [0xBE37B0, c, arn_04_2_npc]
-    - [0xBE37B0, c, arn_04_3_entity]
+    - [0xBE37B0, c, arn_04_1_music]
+    - [0xBE37B0, c, arn_04_2_main]
+    - [0xBE37B0, c, arn_04_3_npc]
+    - [0xBE37B0, c, arn_04_4_entity]
     - [0xBE6B20]
   - name: arn_05
     dir: world/area_arn/arn_05
@@ -11289,9 +11568,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBE7BE0, c, arn_05_0_header]
-    - [0xBE7BE0, c, arn_05_1_main]
-    - [0xBE7BE0, c, arn_05_2_npc]
-    - [0xBE7BE0, c, arn_05_3_entity]
+    - [0xBE7BE0, c, arn_05_1_music]
+    - [0xBE7BE0, c, arn_05_2_main]
+    - [0xBE7BE0, c, arn_05_3_npc]
+    - [0xBE7BE0, c, arn_05_4_entity]
     - [0xBE8EE0]
   - name: arn_07
     dir: world/area_arn/arn_07
@@ -11300,10 +11580,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBECDF0, c, arn_07_0_header]
-    - [0xBECDF0, c, arn_07_1_main]
-    - [0xBED5F0, c, arn_07_2_windmill]
-    - [0xBED660, c, arn_07_3_entity]
-    - [0xBED740, c, arn_07_4_npc]
+    - [0xBECDF0, c, arn_07_1_music]
+    - [0xBECDF0, c, arn_07_2_main]
+    - [0xBED5F0, c, arn_07_3_windmill]
+    - [0xBED660, c, arn_07_4_entity]
+    - [0xBED740, c, arn_07_5_npc]
     - [0xBEEC80]
   - name: arn_08
     dir: world/area_arn/arn_08
@@ -11312,12 +11593,13 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF47A0, c, arn_08_0_header]
-    - [0xBF47A0, c, arn_08_1_main]
-    - [0xBF47A0, c, arn_08_2_well]
-    - [0xBF47A0, c, arn_08_3_gears]
-    - [0xBF4860, c, arn_08_4_demo]
-    - [0xBF4860, c, arn_08_5_npc]
-    - [0xBF4860, c, arn_08_6_entity]
+    - [0xBF47A0, c, arn_08_1_music]
+    - [0xBF47A0, c, arn_08_2_main]
+    - [0xBF47A0, c, arn_08_3_well]
+    - [0xBF47A0, c, arn_08_4_gears]
+    - [0xBF4860, c, arn_08_5_demo]
+    - [0xBF4860, c, arn_08_6_npc]
+    - [0xBF4860, c, arn_08_7_entity]
     - [0xBF4A30]
   - name: arn_09
     dir: world/area_arn/arn_09
@@ -11326,10 +11608,11 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF6060, c, arn_09_0_header]
-    - [0xBF6060, c, arn_09_1_main]
-    - [0xBF6060, c, arn_09_2_entity]
-    - [0xBF6060, c, arn_09_3_launch]
-    - [0xBF6060, c, arn_09_4_npc]
+    - [0xBF6060, c, arn_09_1_music]
+    - [0xBF6060, c, arn_09_2_main]
+    - [0xBF6060, c, arn_09_3_entity]
+    - [0xBF6060, c, arn_09_4_launch]
+    - [0xBF6060, c, arn_09_5_npc]
     - [0xBF60A0]
   - name: arn_10
     dir: world/area_arn/arn_10
@@ -11338,9 +11621,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF6A00, c, arn_10_0_header]
-    - [0xBF6A00, c, arn_10_1_main]
-    - [0xBF6A00, c, arn_10_2_npc]
-    - [0xBF6A00, c, arn_10_3_entity]
+    - [0xBF6A00, c, arn_10_1_music]
+    - [0xBF6A00, c, arn_10_2_main]
+    - [0xBF6A00, c, arn_10_3_npc]
+    - [0xBF6A00, c, arn_10_4_entity]
     - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
@@ -11349,8 +11633,9 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF7680, c, arn_11_0_header]
-    - [0xBF7680, c, arn_11_1_main]
-    - [0xBF7680, c, arn_11_2_npc]
+    - [0xBF7680, c, arn_11_1_music]
+    - [0xBF7680, c, arn_11_2_main]
+    - [0xBF7680, c, arn_11_3_npc]
     - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
@@ -11359,9 +11644,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF8790, c, arn_12_0_header]
-    - [0xBF8790, c, arn_12_1_main]
-    - [0xBF8790, c, arn_12_2_npc]
-    - [0xBF8790, c, arn_12_3_entity]
+    - [0xBF8790, c, arn_12_1_music]
+    - [0xBF8790, c, arn_12_2_main]
+    - [0xBF8790, c, arn_12_3_npc]
+    - [0xBF8790, c, arn_12_4_entity]
     - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
@@ -11370,9 +11656,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xBF9410, c, arn_13_0_header]
-    - [0xBF9410, c, arn_13_1_main]
-    - [0xBF9410, c, arn_13_2_npc]
-    - [0xBF9410, c, arn_13_3_entity]
+    - [0xBF9410, c, arn_13_1_music]
+    - [0xBF9410, c, arn_13_2_main]
+    - [0xBF9410, c, arn_13_3_npc]
+    - [0xBF9410, c, arn_13_4_entity]
     - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
@@ -11857,8 +12144,9 @@ segments:
     start: 0xC599D0
     vram: 0x80240000
     subsegments:
+    - [0xC599D0, c, kzn_01_0_header]
     - [0xC599D0, c, kzn_01_1_main]
-    - [0xC59CE0, c, kzn_01_2_enemy]
+    - [0xC59CE0, c, kzn_01_2_npc]
     - [0xC59CE0]
   - name: kzn_02
     dir: world/area_kzn/kzn_02
@@ -11866,6 +12154,7 @@ segments:
     start: 0xC5A740
     vram: 0x80240000
     subsegments:
+    - [0xC5A740, c, kzn_02_0_header]
     - [0xC5A740, c, kzn_02_1_main]
     - [0xC5AA50, c, kzn_02_2_platforms]
     - [0xC5AC20, c, kzn_02_3_npc]
@@ -11877,6 +12166,7 @@ segments:
     start: 0xC60D10
     vram: 0x80240000
     subsegments:
+    - [0xC60D10, c, kzn_03_0_header]
     - [0xC60D10, c, kzn_03_1_main]
     - [0xC61020, c, kzn_03_2_npc]
     - [0xC63A10, c, kzn_03_3_entity]
@@ -11888,6 +12178,7 @@ segments:
     start: 0xC68130
     vram: 0x80240000
     subsegments:
+    - [0xC68130, c, kzn_04_0_header]
     - [0xC68130, c, kzn_04_1_main]
     - [0xC68440, c, kzn_04_2_entity]
     - [0xC69180, c, kzn_04_3_npc]
@@ -11898,6 +12189,7 @@ segments:
     start: 0xC6C0D0
     vram: 0x80240000
     subsegments:
+    - [0xC6C0D0, c, kzn_05_0_header]
     - [0xC6C0D0, c, kzn_05_1_main]
     - [0xC6C3E0]
   - name: kzn_06
@@ -11907,6 +12199,7 @@ segments:
     vram: 0x80240000
     subalign: 16
     subsegments:
+    - [0xC6C920, c, kzn_06_0_header]
     - [0xC6C920, c, kzn_06_1_main]
     - [0xC6CC30, c, kzn_06_2_entity]
     - [0xC6CD10, c, kzn_06_3_extra]
@@ -11918,9 +12211,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC6E330, c, kzn_07_0_header]
-    - [0xC6E330, c, kzn_07_1_main]
-    - [0xC6EA50, c, kzn_07_2_entity]
-    - [0xC6EB50, c, kzn_07_3_enemy]
+    - [0xC6E330, c, kzn_07_1_music]
+    - [0xC6E330, c, kzn_07_2_main]
+    - [0xC6EA50, c, kzn_07_3_entity]
+    - [0xC6EB50, c, kzn_07_4_npc]
     - [0xC70640]
   - name: kzn_08
     dir: world/area_kzn/kzn_08
@@ -11928,9 +12222,10 @@ segments:
     start: 0xC71480
     vram: 0x80240000
     subsegments:
+    - [0xC71480, c, kzn_08_0_header]
     - [0xC71480, c, kzn_08_1_main]
     - [0xC71C10, c, kzn_08_2_entity]
-    - [0xC71ED0, c, kzn_08_3_enemy]
+    - [0xC71ED0, c, kzn_08_3_npc]
     - [0xC75360, c, kzn_08_4_extra]
     - [0xC755A0]
   - name: kzn_09
@@ -11939,6 +12234,7 @@ segments:
     start: 0xC76CE0
     vram: 0x80240000
     subsegments:
+    - [0xC76CE0, c, kzn_09_0_header]
     - [0xC76CE0, c, kzn_09_1_main]
     - [0xC76CE0, c, kzn_09_2_entity]
     - [0xC77A20, c, kzn_09_3_zipline]
@@ -11950,8 +12246,9 @@ segments:
     start: 0xC7E180
     vram: 0x80240000
     subsegments:
+    - [0xC7E180, c, kzn_10_0_header]
     - [0xC7E180, c, kzn_10_1_main]
-    - [0xC7E4B0, c, kzn_10_2_extra]
+    - [0xC7E4B0, c, kzn_10_2_tromp]
     - [0xC7E850]
   - name: kzn_11
     dir: world/area_kzn/kzn_11
@@ -11959,6 +12256,7 @@ segments:
     start: 0xC801A0
     vram: 0x80240000
     subsegments:
+    - [0xC801A0, c, kzn_11_0_header]
     - [0xC801A0, c, kzn_11_1_main]
     - [0xC804B0, c, kzn_11_2_platforms]
     - [0xC80600, c, kzn_11_3_npc]
@@ -11969,10 +12267,11 @@ segments:
     start: 0xC85AB0
     vram: 0x80240000
     subsegments:
+    - [0xC85AB0, c, kzn_17_0_header]
     - [0xC85AB0, c, kzn_17_1_main]
     - [0xC85AB0, c, kzn_17_2_entity]
     - [0xC85DC0, c, kzn_17_3_npc]
-    - [0xC887B0, c, kzn_17_4_extra]
+    - [0xC887B0, c, kzn_17_4_tromp]
     - [0xC88B50]
   - name: kzn_18
     dir: world/area_kzn/kzn_18
@@ -11982,7 +12281,8 @@ segments:
     subsegments:
     - [0xC8C0A0, c, kzn_18_0_header]
     - [0xC8C0E0, c, kzn_18_1_main]
-    - [0xC8C3F0, c, kzn_18_2_extra]
+    - [0xC8C3F0, c, kzn_18_2_npc]
+    - [0xC8C460, c, kzn_18_3_entity]
     - [0xC8C460]
   - name: kzn_19
     dir: world/area_kzn/kzn_19
@@ -11991,33 +12291,37 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC8DBB0, c, kzn_19_0_header]
-    - [0xC8DBB0, c, kzn_19_1_main]
-    - [0xC8E6B0, c, kzn_19_2_npc_settings]
-    - [0xC8E6B0, c, kzn_19_3_npc]
-    - [0xC8E6B0, c, kzn_19_4_eruption]
-    - [0xC8E6B0, c, kzn_19_5_entity]
+    - [0xC8DBB0, c, kzn_19_1_music]
+    - [0xC8DBB0, c, kzn_19_2_main]
+    - [0xC8E6B0, c, kzn_19_3_npc_settings]
+    - [0xC8E6B0, c, kzn_19_4_npc]
+    - [0xC8E6B0, c, kzn_19_5_eruption]
+    - [0xC8E6B0, c, kzn_19_6_entity]
     - [0xC8F8E0, .data, kzn_19_0_header]
-    - [0xC8FA40, .data, kzn_19_1_main]
-    - [0xC90B10, .data, kzn_19_2_npc_settings]
+    - [0xC8F960, .data, kzn_19_1_music]
+    - [0xC8FA40, .data, kzn_19_2_main]
+    - [0xC90B10, .data, kzn_19_3_npc_settings]
     - start: 0xC90BF0
       type: .data
-      name: kzn_19_3_npc
+      name: kzn_19_4_npc
       subsegments:
       - [0xC90BF0]
       - [0xC91088, ci4, lava_piranha_vine, 64, 32]
       - [0xC91488, palette, lava_piranha_vine]
       - [0xC91688, gfx, lava_piranha_vine]
       - [0xC91768]
-    - [0xC959B0, .data, kzn_19_4_eruption]
-    - [0xC95E70, .data, kzn_19_5_entity]
+    - [0xC959B0, .data, kzn_19_5_eruption]
+    - [0xC95E70, .data, kzn_19_6_entity]
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code
     start: 0xC95F30
     vram: 0x80240000
     subsegments:
-    - [0xC95F30, c, kzn_20_1_main]
-    - [0xC96240, c, kzn_20_2_npc]
+    - [0xC95F30, c, kzn_20_0_header]
+    - [0xC95F30, c, kzn_20_1_music]
+    - [0xC95F30, c, kzn_20_2_main]
+    - [0xC96240, c, kzn_20_3_npc]
     - [0xC969F0]
   - name: kzn_22
     dir: world/area_kzn/kzn_22
@@ -12026,9 +12330,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC9A200, c, kzn_22_0_header]
-    - [0xC9A200, c, kzn_22_1_main]
-    - [0xC9A540, c, kzn_22_2_entity]
-    - [0xC9A540, c, kzn_22_3_npc]
+    - [0xC9A200, c, kzn_22_1_music]
+    - [0xC9A200, c, kzn_22_2_main]
+    - [0xC9A540, c, kzn_22_3_entity]
+    - [0xC9A540, c, kzn_22_4_npc]
     - [0xC9A590]
   - name: kzn_23
     dir: world/area_kzn/kzn_23
@@ -12037,8 +12342,9 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC9C300, c, kzn_23_0_header]
-    - [0xC9C300, c, kzn_23_1_main]
-    - [0xC9C610, c, kzn_23_2_extra]
+    - [0xC9C300, c, kzn_23_1_music]
+    - [0xC9C300, c, kzn_23_2_main]
+    - [0xC9C610, c, kzn_23_3_npc]
     - [0xC9C920]
   - name: flo_00
     dir: world/area_flo/flo_00
@@ -12996,7 +13302,7 @@ segments:
     start: 0xDF6A00
     vram: 0x80240000
     subsegments:
-    - [0xDF6A00, c, end_00_0_init]
+    - [0xDF6A00, c, end_00_0_header]
     - [0xDF6A20, c, end_00_1_main]
     - [0xDF6A20, c, end_00_2_credits]
     - [0xDF9080, c, end_00_3_parade_setup]
@@ -13015,7 +13321,7 @@ segments:
     start: 0xE05360
     vram: 0x80240000
     subsegments:
-    - [0xE05360, c, end_01_0_init]
+    - [0xE05360, c, end_01_0_header]
     - [0xE05370, c, end_01_1_main]
     - [0xE05390, c, end_01_2_credits]
     - [0xE079F0, c, end_01_3_parade_setup]
@@ -13030,6 +13336,7 @@ segments:
     start: 0xE0E7A0
     vram: 0x80240000
     subsegments:
+    - [0xE0E7A0, c, mgm_00_0_header]
     - [0xE0E7A0, c, mgm_00_1_main]
     - [0xE0EA80, c, mgm_00_2_npc]
     - [0xE0F980, c, mgm_00_3_scoreboard]
@@ -13040,11 +13347,13 @@ segments:
     start: 0xE12760
     vram: 0x80240000
     subsegments:
+    - [0xE12760, c, mgm_01_0_header]
     - [0xE12760, c, mgm_01_1_main]
     - [0xE12930, c, mgm_01_2_npc]
     - [0xE12930, c, mgm_01_3_entity]
     - [0xE12930, c, mgm_01_4_images]
-    - [0xE13F10, .data, mgm_01_1_main]
+    - [0xE13F10, .data, mgm_01_0_header]
+    - [0xE13F60, .data, mgm_01_1_main]
     - [0xE141D0, .data, mgm_01_2_npc]
     - [0xE153A0, .data, mgm_01_3_entity]
     - start: 0xE15440
@@ -13066,10 +13375,12 @@ segments:
     start: 0xE15D80
     vram: 0x80240000
     subsegments:
+      - [0xE15D80, c, mgm_02_0_header]
       - [0xE15D80, c, mgm_02_1_main]
       - [0xE15D80, c, mgm_02_2_npc]
       - [0xE15D80, c, mgm_02_3_images]
-      - [0xE18180, .data, mgm_02_1_main]
+      - [0xE18180, .data, mgm_02_0_header]
+      - [0xE181D0, .data, mgm_02_1_main]
       - [0xE183D0, .data, mgm_02_2_npc]
       - start: 0xE1E020
         type: .data
@@ -13084,6 +13395,7 @@ segments:
     start: 0xE1E380
     vram: 0x80240000
     subsegments:
+    - [0xE1E380, c, mgm_03_0_header]
     - [0xE1E380, c, mgm_03_1_main]
   - name: gv_01
     dir: world/area_gv/gv_01
@@ -13091,7 +13403,8 @@ segments:
     start: 0xE1E460
     vram: 0x80240000
     subsegments:
-    - [0xE1E460, c, gv_01]
+    - [0xE1E460, c, gv_01_0_header]
+    - [0xE1E460, c, gv_01_1_main]
     - [0xE1EC20]
   - type: code
     start: 0xE20110

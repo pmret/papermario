@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/complete/ForestFuzzy.inc.c"
 
-#include "world/common/npc/Bulbulb.inc.c"
+#include "world/common/npc/Bubulb.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -31,12 +31,12 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
                 EVT_SET(LVar0, MSG_CH3_0015)
                 EVT_SET(LVar1, MSG_CH3_0016)
         EVT_END_SWITCH
-        EVT_IF_EQ(AF_MIM04_Bulbulb_DialogueToggle, FALSE)
+        EVT_IF_EQ(AF_MIM04_Bubulb_DialogueToggle, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, LVar0)
-            EVT_SET(AF_MIM04_Bulbulb_DialogueToggle, TRUE)
+            EVT_SET(AF_MIM04_Bubulb_DialogueToggle, TRUE)
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, LVar1)
-            EVT_SET(AF_MIM04_Bulbulb_DialogueToggle, FALSE)
+            EVT_SET(AF_MIM04_Bubulb_DialogueToggle, FALSE)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN

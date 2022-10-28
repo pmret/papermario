@@ -21,11 +21,11 @@ enum {
 	NPC_Fuzzy_03                = 12,
 	NPC_Fuzzy_04                = 13,
 	NPC_Fuzzy_05                = 14,
-	NPC_Bobomb_01              = 30,
-	NPC_Bobomb_02              = 31,
-	NPC_Bobomb_03              = 32,
-	NPC_Bobomb_04              = 33,
-	NPC_Bobomb_05              = 34,
+	NPC_Bobomb_01       		= 30,
+	NPC_Bobomb_02              	= 31,
+	NPC_Bobomb_03              	= 32,
+	NPC_Bobomb_04              	= 33,
+	NPC_Bobomb_05              	= 34,
 	NPC_Luigi_01                = 100,
 	NPC_Luigi_02                = 101,
 	NPC_Luigi_03                = 102,
@@ -39,3 +39,8 @@ enum {
 };
 
 #define NAMESPACE mgm_02
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_Dummy);
+extern EvtScript N(EVS_InitializeMinigame);
+extern NpcGroupList N(DefaultNPCs);

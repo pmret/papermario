@@ -9,4 +9,7 @@ static char* N(exit_str_3) = "";
 
 #include "common/UnkFogFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA100", func_8024027C_8DA37C);
+ApiStatus func_8024027C_8DA37C(Evt* script, s32 isInitialCall) {
+    set_map_change_fade_rate(10);
+    return ApiStatus_DONE2;
+}

@@ -11,7 +11,12 @@ static char* N(exit_str_5) = "obk_09";
 
 #include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240038_BBD1D8);
+ApiStatus func_80240038_BBD1D8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    gCameras[CAM_DEFAULT].vfov = (s32) evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_8024007C_BBD21C);
 

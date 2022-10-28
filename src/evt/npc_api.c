@@ -20,8 +20,8 @@ void set_npc_animation(Npc* npc, u32 animID) {
 
     if (animID - PARTNER_ANIM_WALK < 9) {
         npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[animID - PARTNER_ANIM_WALK];
-    } else if ((animID - 0x201) < 0x10) {
-        npc->currentAnim = get_enemy(npc->npcID)->animList[animID - 0x201];
+    } else if ((animID - ENEMY_ANIM_IDLE) < 0x10) {
+        npc->currentAnim = get_enemy(npc->npcID)->animList[animID - ENEMY_ANIM_IDLE];
     } else {
         npc->currentAnim = animID;
     }

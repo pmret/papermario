@@ -116,7 +116,7 @@ void N(CleftAI_FindPlayerInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_IDLE];
+    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->functionTemp[1] = rand_int(1000) % 2 + 2;
     script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER;
 }
@@ -220,7 +220,7 @@ void N(CleftAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_WALK];
+        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
         if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {

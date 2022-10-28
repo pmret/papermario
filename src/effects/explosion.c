@@ -14,10 +14,62 @@ void explosion_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/explosion", explosion_main);
 
-void explosion_init(void) {
+void explosion_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/explosion", explosion_update);
+void explosion_update(EffectInstance* effect) {
+    ExplosionFXData* part = effect->data.explosion;
+    s32 unk_00;
+    s32 unk_34;
+
+    part->unk_30--;
+    if (part->unk_30 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    part->unk_34++;
+
+    unk_00 = part->unk_00;
+    unk_34 = part->unk_34;
+
+    if (unk_34 == 7) {
+        shim_load_effect(EFFECT_SMOKE_RING);
+        smoke_ring_main(unk_00, part->unk_04, part->unk_08, part->unk_0C);
+    } else if (unk_34 == 1) {
+        shim_load_effect(EFFECT_CONFETTI);
+        confetti_main(unk_00 + 4, part->unk_04, part->unk_08, part->unk_0C, 1.0f, 50);
+    }
+
+    part++;
+
+    part->unk_20 += part->unk_24;
+
+    if (unk_34 < 8) {
+        part->unk_24 += (unk_00 == 2) ? 1.0f : 0.4;
+        part->unk_38 = (255 - part->unk_38) * 0.6;
+    } else {
+        part->unk_24 *= 0.6;
+        part->unk_38 *= 0.9;
+    }
+
+    part++;
+
+    if (unk_34 >= 3) {
+        if (unk_34 == 3) {
+            part->unk_20 = 1.0f;
+        }
+        part->unk_20 += part->unk_24;
+        if (unk_34 < 6) {
+            part->unk_24 += 0.1;
+        } else {
+            part->unk_24 *= 0.5;
+            part->unk_38 *= 0.9;
+        }
+    }
+
+    part->unk_28 += part->unk_2C;
+}
 
 void explosion_render(EffectInstance* effect) {
     RenderTask renderTask;

@@ -1,10 +1,11 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001530[];
-extern Gfx D_09001650[];
-extern Gfx D_09001780[];
-extern Gfx D_090017D0[];
+extern Vtx_t D_09001400_333AA0[];
+extern Gfx D_09001530_333BD0[];
+extern Gfx D_09001650_333CF0[];
+extern Gfx D_09001780_333E20[];
+extern Gfx D_090017D0_333E70[];
 
 void star_init(EffectInstance* effect);
 void star_update(EffectInstance* effect);
@@ -198,4 +199,69 @@ void star_render(EffectInstance* effect) {
     retTask = shim_queue_render_task(&renderTask);
 }
 
-INCLUDE_ASM(s32, "effects/star", star_appendGfx);
+void star_appendGfx(void* effect) {
+    StarFXData* data = ((EffectInstance*)effect)->data.star;
+    f32 unk_240 = data->unk_240;
+    s32 unk_38 = data->unk_38;
+    s32 unk_244 = data->unk_244;
+    s32 unk_248 = data->unk_248;
+    s32 unk_24C = data->unk_24C;
+    s32 idx;
+    Matrix4f sp20;
+    Matrix4f sp60;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
+    shim_guRotateF(sp60, data->unk_24, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 80, unk_244, unk_248, unk_24C, 255);
+    gDPSetEnvColor(gMasterGfxPos++, 127, 127, 127, 127);
+
+    gSPDisplayList(gMasterGfxPos++, (data->unk_38 >= 2) ? D_09001650_333CF0 : D_09001530_333BD0);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+
+    if (unk_38 == 3) {
+        gSPDisplayList(gMasterGfxPos++, D_090017D0_333E70);
+    } else {
+        gSPDisplayList(gMasterGfxPos++, D_09001780_333E20);
+    }
+
+    data->unk_3C++;
+    if (data->unk_3C >= 8) {
+        data->unk_3C = 0;
+    }
+
+    if (data->unk_1C <= 1.0f) {
+        s32 baseIdx = (data->unk_3C + 5) % 8;
+
+        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
+        shim_guRotateF(sp60, data->unk_20, 0.0f, 0.0f, 1.0f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guMtxF2L(sp20, &data->unk_40[data->unk_3C]);
+
+        for (i = 0; i < 5; i++) {
+            idx = (baseIdx - i + 8) % 8;
+            gDisplayContext->matrixStack[gMatrixListPos] = data->unk_40[idx];
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPVertex(gMasterGfxPos++, &D_09001400_333AA0[i * 2], 2, i * 2);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+
+        for (i = 0; i < 4; i++) {
+            s32 i2 = i * 2;
+            gSP2Triangles(gMasterGfxPos++,
+                i2    , i2 + 1, i2 + 2, i2,
+                i2 + 1, i2 + 3, i2 + 2, i2 + 1);
+        }
+
+        gDPPipeSync(gMasterGfxPos++);
+    }
+}

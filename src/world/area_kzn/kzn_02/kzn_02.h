@@ -9,13 +9,15 @@
 #include "mapfs/kzn_02_shape.h"
 #include "mapfs/kzn_02_hit.h"
 
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/LavaBubble.h"
-
 enum {
     NPC_Kolorado                = 0,
     NPC_LavaBubble              = 1,
 };
 
 #define NAMESPACE kzn_02
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_InitializePlatforms);
+extern EvtScript N(EVS_PlayDemoScene);
+extern EvtScript N(EVS_KoloradoSinkingPlatform);
+extern NpcGroupList N(DefaultNPCs);
