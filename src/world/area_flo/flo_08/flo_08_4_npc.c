@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Talk, ANIM_GateFlower_Yellow_Idle, 0, MSG_CH6_0042)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
         EVT_CALL(N(FlowerGuard_MakeItemList))
-        EVT_CHOOSE_CONSUMABLE_FROM(N(FlowerGuard_ItemChoiceList))
+        EVT_CHOOSE_CONSUMABLE_FROM(N(FlowerGuard_ItemChoiceList), 0)
         EVT_SWITCH(LVar0)
             EVT_CASE_LE(0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)

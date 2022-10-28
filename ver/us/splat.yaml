@@ -12532,9 +12532,12 @@ segments:
     start: 0xCEC240
     vram: 0x80240000
     subsegments:
-    - [0xCEC240,       c, CEC240]
-    - [0xCEC280,       c, CEC280]
-    - [0xCEC290,       c, CEC290]
+    - [0xCEC240, c, flo_22_0_header]
+    - [0xCEC240, c, flo_22_1_music]
+    - [0xCEC240, c, flo_22_2_main]
+    - [0xCEC280, c, flo_22_3_npc]
+    - [0xCEC280, c, flo_22_4_well]
+    - [0xCEC290, c, flo_22_5_foliage]
     - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
@@ -12542,8 +12545,11 @@ segments:
     start: 0xCEE260
     vram: 0x80240000
     subsegments:
-    - [0xCEE260,       c, CEE260]
-    - [0xCEE2A0,       c, CEE2A0]
+    - [0xCEE260, c, flo_23_0_header]
+    - [0xCEE260, c, flo_23_1_music]
+    - [0xCEE260, c, flo_23_2_main]
+    - [0xCEE2A0, c, flo_23_3_npc]
+    - [0xCEEF30, c, flo_23_4_entity]
     - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24

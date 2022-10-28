@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "effects.h"
 
 #include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
 

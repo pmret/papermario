@@ -2,22 +2,22 @@
 /// @brief Flower Fields - (West) Path to Maze
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_23_shape.h"
+#include "mapfs/flo_23_hit.h"
+
+enum {
+	NPC_Spiny_01                = 0,
+	NPC_Spiny_02                = 1,
+	NPC_GateFlower              = 2,
+};
+
 #define NAMESPACE flo_23
 
-ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CEE260)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
-ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
-ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_SetItemEntityPosition)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_MakeItemList)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80242568);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

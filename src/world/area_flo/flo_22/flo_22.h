@@ -2,17 +2,32 @@
 /// @brief Flower Fields - (East) Old Well
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_22_shape.h"
+#include "mapfs/flo_22_hit.h"
+
+#include "sprite/npc/Bzzap.h"
+#include "sprite/npc/Dayzee.h"
+
+enum {
+	NPC_Dummy   = 0, // reused as a dummy for tossing badge out of the well
+	NPC_Bzzap   = 0,
+	NPC_Dayzee  = 1,
+};
+
+enum {
+    MV_Bzzap_State      = MapVar(10),
+    MV_Dayzee_State     = MapVar(11),
+};
+
 #define NAMESPACE flo_22
 
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80240DE4);
-extern EvtScript N(80240E24);
-extern EvtScript N(80241528);
-extern EvtScript N(80241F6C);
-extern EvtScript N(main);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupWell);
+extern EvtScript N(EVS_SniffleHint);
+extern EvtScript N(EVS_SetupMusic);
+extern NpcGroupList N(DefaultNPCs);

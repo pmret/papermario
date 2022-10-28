@@ -9,10 +9,6 @@
 #include "mapfs/flo_25_shape.h"
 #include "mapfs/flo_25_hit.h"
 
-#include "sprite/npc/GateFlower.h"
-#include "sprite/npc/TuffPuff.h"
-#include "sprite/npc/Bzzap.h"
-
 enum {
 	NPC_GateFlower              = 0,
 	NPC_TuffPuff                = 1,
