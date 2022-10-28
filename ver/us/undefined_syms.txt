@@ -752,6 +752,7 @@ osr_00_802437C0 = 0x802437C0;
 mim_03_802424E0 = 0x802424E0;
 sam_04_80245210 = 0x80245210;
 obk_01_802458F0 = 0x802458F0;
+omo_13_80243220 = 0x80243220;
 
 // incorrectly-identified vtx addresses for tst_13
 D_802423D0 = 0x802423D0;

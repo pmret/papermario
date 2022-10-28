@@ -9,8 +9,6 @@
 #include "mapfs/flo_07_shape.h"
 #include "mapfs/flo_07_hit.h"
 
-#include "sprite/npc/Posie.h"
-
 enum {
 	NPC_Posie	= 0,
 };

@@ -12417,11 +12417,14 @@ segments:
     start: 0xCB9200
     vram: 0x80240000
     subsegments:
-    - [0xCB9200,       c, CB9200]
-    - [0xCB9240,       c, CB9240]
-    - [0xCB9280,       c, CB9280]
-    - [0xCB96B0,       c, CB96B0]
-    - [0xCBA430,       c, CBA430]
+    - [0xCB9200, c, flo_10_0_header]
+    - [0xCB9240, c, flo_10_1_music]
+    - [0xCB9240, c, flo_10_2_entity]
+    - [0xCB9240, c, flo_10_3_main]
+    - [0xCB9280, c, flo_10_4_fountain]
+    - [0xCB96B0, c, flo_10_5_npc]
+    - [0xCB96B0, c, flo_10_6_waterfx]
+    - [0xCBA430, c, flo_10_7_foliage]
     - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11

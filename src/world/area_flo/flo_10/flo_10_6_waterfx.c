@@ -2,6 +2,16 @@
 #include "nu/nusys.h"
 #include "model.h"
 
+s32 N(WavePhase) = {
+    0 
+};
+
+// unused wavy distortion effect for edge water -- unclear how it would have been used
+EvtScript N(EVS_SetupWaterEffect) = {
+    EVT_RETURN
+    EVT_END
+};
+
 void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
     s32 i;
     f32 f0;
@@ -9,7 +19,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
     u16* img;
     s32 alpha;
 
-    N(D_80244070_CBD270) += 5;
+    N(WavePhase) += 5;
 
     if (x1 >= x2 || y1 >= y2) {
         return;
@@ -58,13 +68,13 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
             if (alpha > 255) {
                 alpha = 255;
             }
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
             gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
                             SCREEN_WIDTH, 6,
                             x1, y1 - 6 * i - 6, x2 - 1, y1 - 6 * i - 1, 0,
                             G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + 6) * 4,
-                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(D_80244070_CBD270) + i * 30) * 500.0f) - 500);
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(WavePhase) + i * 30) * 500.0f) - 500);
         }
     }
 
@@ -74,7 +84,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
             if (alpha > 255) {
                 alpha = 255;
             }
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
             gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
                             SCREEN_WIDTH, 6,
                             x1, y1 - 6 * i - m, x2 - 1, y1 - 6 * i - 1, 0,
@@ -87,7 +97,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
 
 void N(UnkModelFunc001)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(0x30));
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o40));
     ModelBoundingBox* bb = (ModelBoundingBox*) model->modelNode->propertyList;
     f32 bbHalfX = bb->halfSizeX;
     f32 bbHalfZ = bb->halfSizeZ;
@@ -247,3 +257,4 @@ void N(UnkModelFunc001)(void) {
         gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
     }
 }
+
