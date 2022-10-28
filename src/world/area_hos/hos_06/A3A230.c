@@ -1,5 +1,6 @@
 #include "hos_06.h"
 #include "effects.h"
+#include "model.h"
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
@@ -96,11 +97,91 @@ ApiStatus func_802418A4_A3AD84(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802418E8_A3ADC8);
+ApiStatus func_802418E8_A3ADC8(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x79)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7A)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7B)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7C)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7D)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7F)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0xD0)), -1, 3);
+        set_model_env_color_parameters(255, 255, 255, 0, 0, 0);
+        script->functionTemp[0] = 255;
+    }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241A58_A3AF38);
+    script->functionTemp[0] -= 4;
+    if (script->functionTemp[0] < 64) {
+        script->functionTemp[0] = 64;
+    }
+    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
+    if (script->functionTemp[0] == 64) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241B74_A3B054);
+ApiStatus func_80241A58_A3AF38(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 64;
+        script->functionTemp[2] = 64;
+        script->functionTemp[1] = 0;
+    }
+    if (script->functionTemp[1] == 0) {
+        script->functionTemp[0] += 4;
+        script->functionTemp[2] += 4;
+        if (script->functionTemp[0] > 127) {
+            script->functionTemp[0] = 127;
+        }
+        if (script->functionTemp[2] > 127) {
+            script->functionTemp[2] = 127;
+        }
+        if (script->functionTemp[0] == 127 && (script->functionTemp[2] == script->functionTemp[0])) {
+            script->functionTemp[1] = 1;
+        }
+    } else {
+        script->functionTemp[0] -= 4;
+        script->functionTemp[2] -= 4;
+        if (script->functionTemp[0] < 64) {
+            script->functionTemp[0] = 64;
+        }
+        if (script->functionTemp[2] < 0) {
+            script->functionTemp[2] = 0;
+        }
+    }
+    set_model_env_color_parameters(
+        script->functionTemp[0], script->functionTemp[0], script->functionTemp[0],
+        script->functionTemp[2], script->functionTemp[2], script->functionTemp[2]
+    );
+    if (script->functionTemp[0] == 64 && script->functionTemp[2] == 0) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_80241B74_A3B054(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 64;
+    }
+
+    script->functionTemp[0] += 4;
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
+    }
+    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
+
+    if (script->functionTemp[0] == 255) {
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x79)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7A)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7B)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7C)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7D)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x7F)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0xD0)), -1, 0);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 // TODO may not be motionBlurFlame
 ApiStatus func_80241CCC_A3B1AC(Evt* script, s32 isInitialCall) {
