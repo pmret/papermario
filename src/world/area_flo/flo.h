@@ -31,6 +31,9 @@ enum {
     AF_FLO_13                       = AreaFlag(19),
     AF_FLO_14                       = AreaFlag(20),
     AF_FLO_15                       = AreaFlag(21),
+    // flo_12
+    AF_FLO_16                       = AreaFlag(22),
+    
     AF_FLO_RidingBeanstalk          = AreaFlag(44),
 };
 

@@ -12429,7 +12429,11 @@ segments:
     start: 0xCBDCD0
     vram: 0x80240000
     subsegments:
-    - [0xCBDCD0,       c, CBDCD0]
+    - [0xCBDCD0, c, flo_11_0_header]
+    - [0xCBDCD0, c, flo_11_1_music]
+    - [0xCBDCD0, c, flo_11_2_main]
+    - [0xCBDFF0, c, flo_11_3_npc]
+    - [0xCBDFF0, c, flo_11_4_entity]
     - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
@@ -12437,8 +12441,10 @@ segments:
     start: 0xCC0E30
     vram: 0x80240000
     subsegments:
-    - [0xCC0E30,       c, CC0E30]
-    - [0xCC0E70,       c, CC0E70]
+    - [0xCC0E30, c, flo_12_0_header]
+    - [0xCC0E30, c, flo_12_1_music]
+    - [0xCC0E30, c, flo_12_2_main]
+    - [0xCC0E70, c, flo_12_3_npc]
     - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
