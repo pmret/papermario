@@ -264,9 +264,9 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
         EVT_CASE_LT(STORY_CH6_RETURNED_TO_TOAD_TOWN)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005C)
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(AB_FLO_1, 0)
+            EVT_IF_EQ(AB_FLO_PetuniaDialogue, 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005D)
-                EVT_SET(AB_FLO_1, 1)
+                EVT_SET(AB_FLO_PetuniaDialogue, 1)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_005E)
             EVT_END_IF

@@ -15,14 +15,14 @@ EvtScript N(EVS_SpawnBzzap) = {
 
 EvtScript N(Tree1_CallbackScript) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_IF_EQ(AB_FLO_5, 1)
+        EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 1)
             EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO09_Item_HappyFlowerB)
         EVT_ELSE
             EVT_SET(LVar9, MODEL_o10)
             EVT_EXEC(N(EVS_SpawnBzzap))
         EVT_END_IF
-        EVT_SET(AB_FLO_4, 0)
-        EVT_SET(AB_FLO_5, 0)
+        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
+        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -30,8 +30,8 @@ EvtScript N(Tree1_CallbackScript) = {
 
 EvtScript N(Tree2_CallbackScript) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_SET(AB_FLO_4, 1)
-        EVT_SET(AB_FLO_5, 0)
+        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 1)
+        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -39,16 +39,16 @@ EvtScript N(Tree2_CallbackScript) = {
 
 EvtScript N(Tree3_CallbackScript) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_IF_EQ(AB_FLO_4, 1)
-            EVT_IF_EQ(AB_FLO_5, 0)
-                EVT_SET(AB_FLO_5, 1)
+        EVT_IF_EQ(AB_FLO_TreePuzzle_FirstCorrect, 1)
+            EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 0)
+                EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 1)
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
         EVT_SET(LVar9, MODEL_o13)
         EVT_EXEC(N(EVS_SpawnBzzap))
-        EVT_SET(AB_FLO_4, 0)
-        EVT_SET(AB_FLO_5, 0)
+        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
+        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -133,8 +133,8 @@ BombTrigger N(BombPos_Tree3) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(AB_FLO_4, 0)
-    EVT_SET(AB_FLO_5, 0)
+    EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
+    EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
     EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
     EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o10, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(shakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)

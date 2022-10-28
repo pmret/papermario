@@ -84,9 +84,9 @@ EvtScript N(EVS_NpcInteract_Posie) = {
     EVT_CALL(NpcFacePlayer, NPC_SELF, 1)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_IF_EQ(AF_FLO_05, FALSE)
+            EVT_IF_EQ(AF_FLO_PoiseHintDialogue, FALSE)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0070)
-                EVT_SET(AF_FLO_05, TRUE)
+                EVT_SET(AF_FLO_PoiseHintDialogue, TRUE)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0071)
             EVT_END_IF
@@ -146,7 +146,7 @@ EvtScript N(EVS_NpcInit_Posie) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_SET(AF_FLO_05, FALSE)
+    EVT_SET(AF_FLO_PoiseHintDialogue, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Posie)))
     EVT_RETURN
     EVT_END
