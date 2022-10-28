@@ -12551,9 +12551,12 @@ segments:
     start: 0xCF0940
     vram: 0x80240000
     subsegments:
-    - [0xCF0940,       c, CF0940]
-    - [0xCF0980,       c, CF0980]
-    - [0xCF0BC0,       c, CF0BC0]
+    - [0xCF0940, c, flo_24_0_header]
+    - [0xCF0940, c, flo_24_1_music]
+    - [0xCF0940, c, flo_24_2_main]
+    - [0xCF0980, c, flo_24_3_foliage]
+    - [0xCF0BC0, c, flo_24_4_water]
+    - [0xCF0ED0, c, flo_24_5_entity]
     - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
@@ -12561,10 +12564,13 @@ segments:
     start: 0xCF2BD0
     vram: 0x80240000
     subsegments:
-    - [0xCF2BD0,       c, CF2BD0]
-    - [0xCF2C10,       c, CF2C10]
-    - [0xCF4BC0,       c, CF4BC0]
-    - [0xCF4E00,       c, CF4E00]
+    - [0xCF2BD0, c, flo_25_0_header]
+    - [0xCF2BD0, c, flo_25_1_music]
+    - [0xCF2BD0, c, flo_25_2_main]
+    - [0xCF2C10, c, flo_25_3_npc]
+    - [0xCF4BC0, c, flo_25_4_entity]
+    - [0xCF4BC0, c, flo_25_5_foliage]
+    - [0xCF4E00, c, flo_25_6_vine]
     - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01

@@ -14,9 +14,9 @@
 #include "sprite/npc/WorldParakarry.h"
 
 enum {
-    NPC_Dummy_Wisterwood        = 0,
-    NPC_Bubulb_01               = 1,
-    NPC_Bubulb_02               = 2,
+	NPC_Dummy_Wisterwood        = 0,
+	NPC_Bubulb_01               = 1,
+	NPC_Bubulb_02               = 2,
 	NPC_Bubulb_03               = 3,
 	NPC_Bubulb_04               = 4,
 	NPC_Tolielup                = 5,

@@ -24,6 +24,12 @@ enum {
     // flo_08
     AF_FLO_TreeDrop_BlueBerry1      = AreaFlag(29),
     AF_FLO_TreeDrop_BlueBerry2      = AreaFlag(30),
+    // flo_24
+    AF_FLO_TreeDrop_BubbleBerry1    = AreaFlag(31),
+    AF_FLO_TreeDrop_BubbleBerry2    = AreaFlag(32),
+    // flo_25
+    AF_FLO_TreeDrop_YellowBerry1    = AreaFlag(33),
+    AF_FLO_TreeDrop_YellowBerry2    = AreaFlag(34),
     // flo_00
     AF_FLO_10                       = AreaFlag(16),
     AF_FLO_11                       = AreaFlag(17),
