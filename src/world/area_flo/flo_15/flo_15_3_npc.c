@@ -119,7 +119,7 @@ EvtScript N(EVS_Sun_DescendFromSky) = {
     EVT_EXEC_GET_TID(N(EVS_Sun_AnimateBobbing), LVar9)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(AF_FLO_26, TRUE)
+        EVT_IF_EQ(AF_FLO_MetTheSun, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -158,7 +158,7 @@ EvtScript N(EVS_NpcInteract_Sun_01) = {
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_Sun_01, ANIM_Sun_TalkSad, ANIM_Sun_Idle, 517, MSG_CH6_009F)
     EVT_END_SWITCH
-    EVT_SET(AF_FLO_26, TRUE)
+    EVT_SET(AF_FLO_MetTheSun, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -173,7 +173,7 @@ EvtScript N(EVS_NpcInit_Sun_01) = {
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_Sun_01, 0, 450, 0)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Sun_01)))
-        EVT_SET(AF_FLO_26, FALSE)
+        EVT_SET(AF_FLO_MetTheSun, FALSE)
         EVT_EXEC(N(EVS_Sun_DescendFromSky))
     EVT_END_IF
     EVT_RETURN

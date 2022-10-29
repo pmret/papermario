@@ -1571,25 +1571,14 @@ typedef struct UnderwaterFXData {
 } UnderwaterFXData; // size = unknown
 
 typedef struct LightningBoltFXData {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ f32 unk_04;
-    /* 0x008 */ f32 unk_08;
-    /* 0x00C */ f32 unk_0C;
-    /* 0x010 */ f32 unk_10;
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
-    /* 0x01C */ f32 unk_1C;
-    /* 0x020 */ f32 unk_20;
-    /* 0x024 */ f32 unk_24;
-    /* 0x028 */ s32 unk_28;
-    /* 0x02C */ s32 unk_2C;
-    /* 0x030 */ s32 unk_30;
-    /* 0x034 */ s32 unk_34;
-    /* 0x038 */ s32 unk_38;
-    /* 0x03C */ s32 unk_3C;
-    /* 0x040 */ s32 unk_40;
-    /* 0x044 */ s32 unk_44;
-    /* 0x048 */ s32 unk_48;
+    /* 0x000 */ s32 type;
+    /* 0x004 */ Vec3f tipPos;
+    /* 0x010 */ Vec3f startPos;
+    /* 0x01C */ Vec3f endPos;
+    /* 0x028 */ s32 timeLeft;
+    /* 0x02C */ s32 lifetime;
+    /* 0x030 */ Color4i outerColor;
+    /* 0x040 */ Color3i innerColor;
     /* 0x04C */ f32 unk_4C;
     /* 0x050 */ f32 unk_50[12];
     /* 0x080 */ f32 unk_80[12];

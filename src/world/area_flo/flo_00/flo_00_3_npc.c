@@ -219,13 +219,13 @@ EvtScript N(EVS_NpcInteract_Bubulb1) = {
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0019)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_12)
+            EVT_SWITCH(AF_FLO_PinkBubulbDialogueToggle)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001A)
-                    EVT_SET(AF_FLO_12, TRUE)
+                    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, TRUE)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001B)
-                    EVT_SET(AF_FLO_12, FALSE)
+                    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, FALSE)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001C)
@@ -245,13 +245,13 @@ EvtScript N(EVS_NpcInteract_Bubulb2) = {
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0020)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_13)
+            EVT_SWITCH(AF_FLO_PurpleBubulbDialogueToggle)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0021)
-                    EVT_SET(AF_FLO_13, TRUE)
+                    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, TRUE)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0022)
-                    EVT_SET(AF_FLO_13, FALSE)
+                    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0023)
@@ -271,13 +271,13 @@ EvtScript N(EVS_NpcInteract_Bubulb_03) = {
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0027)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_14)
+            EVT_SWITCH(AF_FLO_GreenBubulbDialogueToggle)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0028)
-                    EVT_SET(AF_FLO_14, TRUE)
+                    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, TRUE)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0029)
-                    EVT_SET(AF_FLO_14, FALSE)
+                    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, FALSE)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_002A)
@@ -297,13 +297,13 @@ EvtScript N(EVS_NpcInteract_Bubulb_04) = {
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002E)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_15)
+            EVT_SWITCH(AF_FLO_YellowBubulbDialogueToggle)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_002F)
-                    EVT_SET(AF_FLO_15, TRUE)
+                    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, TRUE)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0030)
-                    EVT_SET(AF_FLO_15, FALSE)
+                    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, FALSE)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0031)
@@ -313,28 +313,28 @@ EvtScript N(EVS_NpcInteract_Bubulb_04) = {
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_01) = {
-    EVT_SET(AF_FLO_12, FALSE)
+    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb1)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_02) = {
-    EVT_SET(AF_FLO_13, FALSE)
+    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb2)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_03) = {
-    EVT_SET(AF_FLO_14, FALSE)
+    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb_03)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_04) = {
-    EVT_SET(AF_FLO_15, FALSE)
+    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb_04)))
     EVT_RETURN
     EVT_END

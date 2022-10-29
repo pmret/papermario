@@ -137,11 +137,11 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                     EVT_GIVE_KEY_REWARD(ITEM_WATER_STONE)
                     EVT_WAIT(10)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
-                    EVT_SET(AF_FLO_16, TRUE)
+                    EVT_SET(AF_FLO_GivenCrystalBerry, TRUE)
                     EVT_SET(GB_StoryProgress, STORY_CH6_GOT_WATER_STONE)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_SWITCH(AF_FLO_16)
+            EVT_SWITCH(AF_FLO_GivenCrystalBerry)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0097)
                 EVT_CASE_EQ(1)

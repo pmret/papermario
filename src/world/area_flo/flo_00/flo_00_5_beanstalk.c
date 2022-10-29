@@ -258,11 +258,11 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(N(GetPlayerAngles), LVar3, LVar4)
         EVT_SWITCH(LVar4)
             EVT_CASE_LT(90)
-                EVT_SET(AF_FLO_10, FALSE)
+                EVT_SET(AF_FLO_BeanstalkFacingRight, FALSE)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
             EVT_CASE_GE(270)
-                EVT_SET(AF_FLO_10, TRUE)
+                EVT_SET(AF_FLO_BeanstalkFacingRight, TRUE)
                 EVT_CALL(InterpPlayerYaw, 270, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_END_SWITCH
@@ -318,7 +318,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
-        EVT_SWITCH(AF_FLO_10)
+        EVT_SWITCH(AF_FLO_BeanstalkFacingRight)
             EVT_CASE_EQ(0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
@@ -485,10 +485,10 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
                     EVT_WAIT(20)
                 EVT_CASE_DEFAULT
-                    EVT_SWITCH(AF_FLO_11)
+                    EVT_SWITCH(AF_FLO_PlatingInstructionsToggle)
                         EVT_CASE_EQ(0)
                             EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0008, 0, 10, -200)
-                            EVT_SET(AF_FLO_11, TRUE)
+                            EVT_SET(AF_FLO_PlatingInstructionsToggle, TRUE)
                         EVT_CASE_DEFAULT
                             EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0009, 0, 10, -200)
                     EVT_END_SWITCH
@@ -523,10 +523,10 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
                     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
                     EVT_WAIT(20)
                 EVT_CASE_DEFAULT
-                    EVT_SWITCH(AF_FLO_11)
+                    EVT_SWITCH(AF_FLO_PlatingInstructionsToggle)
                         EVT_CASE_EQ(0)
                             EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0008, 0, 10, -200)
-                            EVT_SET(AF_FLO_11, TRUE)
+                            EVT_SET(AF_FLO_PlatingInstructionsToggle, TRUE)
                         EVT_CASE_DEFAULT
                             EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0009, 0, 10, -200)
                     EVT_END_SWITCH

@@ -2,7 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-EvtScript N(80247024) = {
+EvtScript N(EVS_SetupFoliage) = {
     EVT_RETURN
     EVT_END
 };

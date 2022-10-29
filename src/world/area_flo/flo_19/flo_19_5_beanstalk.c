@@ -135,7 +135,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
-        EVT_SWITCH(AF_FLO_10)
+        EVT_SWITCH(AF_FLO_BeanstalkFacingRight)
             EVT_CASE_EQ(0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
@@ -147,11 +147,11 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.3134766), EVT_FLOAT(3.0), EVT_FLOAT(-0.56640625))
     EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
     EVT_THREAD
-        EVT_SET(AF_FLO_2D, FALSE)
+        EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_WAIT(200)
         EVT_EXEC_WAIT(N(EVS_FadeOutToBlack))
-        EVT_SET(AF_FLO_2D, TRUE)
+        EVT_SET(AF_FLO_BeanstalkFadedOut, TRUE)
         EVT_WAIT(10)
         EVT_CALL(EnableGroup, MODEL_g16, TRUE)
         EVT_CALL(EnableGroup, MODEL_g2, TRUE)
@@ -169,7 +169,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_EXEC_WAIT(N(EVS_FadeInFromBlack))
         EVT_WAIT(20)
-        EVT_SET(AF_FLO_2D, FALSE)
+        EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
     EVT_END_THREAD
     EVT_SET(LVarF, 0)
     EVT_LOOP(344)
@@ -187,7 +187,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
         EVT_CALL(N(PartnerRideBeanstalk))
         EVT_LABEL(11)
             EVT_WAIT(1)
-            EVT_IF_EQ(AF_FLO_2D, TRUE)
+            EVT_IF_EQ(AF_FLO_BeanstalkFadedOut, TRUE)
                 EVT_GOTO(11)
             EVT_END_IF
     EVT_END_LOOP
@@ -234,11 +234,11 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(N(GetPlayerAngles), LVar3, LVar4)
         EVT_SWITCH(LVar4)
             EVT_CASE_LT(90)
-                EVT_SET(AF_FLO_10, FALSE)
+                EVT_SET(AF_FLO_BeanstalkFacingRight, FALSE)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
             EVT_CASE_GE(270)
-                EVT_SET(AF_FLO_10, TRUE)
+                EVT_SET(AF_FLO_BeanstalkFacingRight, TRUE)
                 EVT_CALL(InterpPlayerYaw, 270, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_END_SWITCH
@@ -246,9 +246,9 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
         EVT_SET(MV_BeanstalkSceneSync, FALSE)
         EVT_THREAD
-            EVT_SET(AF_FLO_2D, FALSE)
+            EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
             EVT_WAIT(120)
-            EVT_SET(AF_FLO_2D, TRUE)
+            EVT_SET(AF_FLO_BeanstalkFadedOut, TRUE)
             EVT_WAIT(20)
             EVT_EXEC_WAIT(N(EVS_FadeOutToBlack))
             EVT_WAIT(10)
@@ -267,7 +267,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
             EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_SET(AF_FLO_2D, FALSE)
+            EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
             EVT_EXEC_WAIT(N(EVS_FadeInFromBlack))
         EVT_END_THREAD
         EVT_THREAD
@@ -290,7 +290,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
                 EVT_END_IF
                 EVT_LABEL(11)
                     EVT_WAIT(1)
-                    EVT_IF_EQ(AF_FLO_2D, TRUE)
+                    EVT_IF_EQ(AF_FLO_BeanstalkFadedOut, TRUE)
                         EVT_GOTO(11)
                     EVT_END_IF
             EVT_END_LOOP
@@ -331,9 +331,9 @@ EvtScript N(EVS_Scene_BeanstalkGrowing) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_SET(LVarF, 100)
     EVT_SET(MV_BeanstalkGrowthProgress, LVarF)
-    EVT_SET(AF_FLO_28, FALSE)
+    EVT_SET(AF_FLO_BeanstalkGrowing, FALSE)
     EVT_LOOP(400)
-        EVT_IF_EQ(AF_FLO_28, FALSE)
+        EVT_IF_EQ(AF_FLO_BeanstalkGrowing, FALSE)
             EVT_IF_GT(MV_BeanstalkGrowthProgress, 400)
                 EVT_CALL(EnableGroup, MODEL_tuta, FALSE)
                 EVT_CALL(EnableGroup, MODEL_ha, FALSE)
@@ -361,7 +361,7 @@ EvtScript N(EVS_Scene_BeanstalkGrowing) = {
                     EVT_WAIT(10)
                     EVT_PLAY_EFFECT(EFFECT_CLOUD_PUFF, 0, 22, 15, 0)
                 EVT_END_THREAD
-                EVT_SET(AF_FLO_28, TRUE)
+                EVT_SET(AF_FLO_BeanstalkGrowing, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_ADD(LVarF, 1)
