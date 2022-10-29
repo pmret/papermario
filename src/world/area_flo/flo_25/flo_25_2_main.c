@@ -4,7 +4,7 @@
 #include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
 
 ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

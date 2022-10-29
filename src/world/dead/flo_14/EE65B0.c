@@ -6,7 +6,7 @@ extern f32 D_80243B44_EEA0F4;
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

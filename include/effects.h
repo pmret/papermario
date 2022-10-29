@@ -2226,6 +2226,12 @@ typedef struct IcePillarFXData {
     /* 0x24 */ char todo[0];
 } IcePillarFXData; // size = unknown
 
+// sun shine directions
+enum {
+    FX_SUN_FROM_LEFT    = 0,
+    FX_SUN_FROM_RIGHT   = 1,
+};
+
 typedef struct SunFXData {
     /* 0x00 */ s32 shineFromRight;
     /* 0x04 */ Vec3f pos; // does nothing

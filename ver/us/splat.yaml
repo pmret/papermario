@@ -12495,9 +12495,12 @@ segments:
     start: 0xCD72E0
     vram: 0x80240000
     subsegments:
-    - [0xCD72E0,       c, CD72E0]
-    - [0xCD7320,       c, CD7320]
-    - [0xCD7350,       c, CD7350]
+    - [0xCD72E0, c, flo_17_0_header]
+    - [0xCD72E0, c, flo_17_1_music]
+    - [0xCD72E0, c, flo_17_2_main]
+    - [0xCD7320, c, flo_17_3_logs]
+    - [0xCD7350, c, flo_17_4_npc]
+    - [0xCDA500, c, flo_17_5_entity]
     - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18

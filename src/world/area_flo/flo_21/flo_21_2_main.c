@@ -6,7 +6,7 @@
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 API_CALLABLE(N(SpawnSunEffect)) {
-    fx_sun_undeclared(1, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_RIGHT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

@@ -572,7 +572,7 @@ EvtScript N(80243E78) = {
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

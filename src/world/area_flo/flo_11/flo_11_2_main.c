@@ -6,8 +6,8 @@
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"
 
-ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+API_CALLABLE(N(SpawnSunEffect)) {
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
