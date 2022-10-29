@@ -12455,9 +12455,12 @@ segments:
     start: 0xCC3810
     vram: 0x80240000
     subsegments:
-    - [0xCC3810,       c, CC3810]
-    - [0xCC3850,       c, CC3850]
-    - [0xCC6DE0,       c, CC6DE0]
+    - [0xCC3810, c, flo_13_0_header]
+    - [0xCC3810, c, flo_13_1_music]
+    - [0xCC3810, c, flo_13_2_entity]
+    - [0xCC3810, c, flo_13_3_main]
+    - [0xCC3850, c, flo_13_4_npc]
+    - [0xCC6DE0, c, flo_13_5_new_party]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14

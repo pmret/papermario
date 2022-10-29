@@ -92,6 +92,6 @@ void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 
 void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
 void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
-void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
+void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
 
 #endif

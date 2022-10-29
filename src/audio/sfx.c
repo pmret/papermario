@@ -210,10 +210,10 @@ extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
 extern SoundInstance* D_80159AD0;
 extern s32 D_80159AD4;
 
-void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
+void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
     s32 screenX, screenY, screenZ;
-    f32 f1, f2, f3;
-    f32 lerp1, lerp2, lerp3;
+    f32 volAmtOffsetX, volAmtDeltaY, volAmtDepth;
+    f32 offsetX, offsetY, depth;
     f32 volTemp, panTemp;
     s32 phi_v0;
 
@@ -225,63 +225,57 @@ void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s1
         return;
     }
 
-    if (flags & 0x20000) {
-        if (screenX < -30 || screenX > 350 || screenY < -30) {
+    if (flags & SOUND_PARAM_CLIP_OFFSCREEN_ANY) {
+        if (screenX < -30 || screenX > SCREEN_WIDTH + 30 || screenY < -30 || screenY > SCREEN_HEIGHT + 30) {
             *volume = -1;
             *pan = 0;
             return;
         }
-
-        if (screenY > 270) {
+    } else if (flags & SOUND_PARAM_CLIP_OFFSCREEN_X) {
+        if (screenX < -30 || screenX > SCREEN_WIDTH + 30) {
             *volume = -1;
             *pan = 0;
             return;
         }
-    } else if (flags & 0x40000) {
-        if (screenX < -30 || screenX > 350) {
-            *volume = -1;
-            *pan = 0;
-            return;
-        }
-    } else if (flags & 0x80000) {
-        if (screenY < -30 || screenY > 270) {
+    } else if (flags & SOUND_PARAM_CLIP_OFFSCREEN_Y) {
+        if (screenY < -30 || screenY > SCREEN_HEIGHT + 30) {
             *volume = -1;
             *pan = 0;
             return;
         }
     }
 
-    lerp1 = abs(160 - screenX) - 145;
-    if (lerp1 < 0.0) {
-        lerp1 = 0.0f;
+    offsetX = abs((SCREEN_WIDTH / 2) - screenX) - 145;
+    if (offsetX < 0.0) {
+        offsetX = 0.0f;
     }
 
-    f1 = update_lerp(0, 1.0f, 0.0f, lerp1, 200);
-    if (f1 < 0.0) {
-        f1 = 0.0f;
+    volAmtOffsetX = update_lerp(0, 1.0f, 0.0f, offsetX, 200);
+    if (volAmtOffsetX < 0.0) {
+        volAmtOffsetX = 0.0f;
     }
 
-    lerp2 = abs(120 - screenY) - 105;
-    if (lerp2 < 0.0) {
-        lerp2 = 0.0f;
+    offsetY = abs((SCREEN_HEIGHT / 2) - screenY) - 105;
+    if (offsetY < 0.0) {
+        offsetY = 0.0f;
     }
 
-    f2 = update_lerp(0, 1.0f, 0.0f, lerp2, 130);
-    if (f2 < 0.0) {
-        f2 = 0.0f;
+    volAmtDeltaY = update_lerp(0, 1.0f, 0.0f, offsetY, 130);
+    if (volAmtDeltaY < 0.0) {
+        volAmtDeltaY = 0.0f;
     }
 
-    lerp3 = screenZ - 5550.0;
-    if (lerp3 < 0.0) {
-        lerp3 = 0.0f;
+    depth = screenZ - 5550.0;
+    if (depth < 0.0) {
+        depth = 0.0f;
     }
 
-    f3 = update_lerp(0, 1.0f, 0.0f, lerp3, 250);
-    if (f3 < 0.0) {
-        f3 = 0.0f;
+    volAmtDepth = update_lerp(0, 1.0f, 0.0f, depth, 250);
+    if (volAmtDepth < 0.0) {
+        volAmtDepth = 0.0f;
     }
 
-    volTemp = (f1 * f2 * f3) * 127.0;
+    volTemp = (volAmtOffsetX * volAmtDeltaY * volAmtDepth) * 127.0;
     if (volTemp < 15.0) {
         volTemp = 15.0f;
     } else if (volTemp > 127.0) {
@@ -549,38 +543,38 @@ void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 
 }
 
 void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
-    u32 upperFlags;
-    u32 lowerFlags;
+    u32 paramFlags;
+    u32 spaceMode;
 
-    upperFlags = flags & 0xFFFF0000;
+    paramFlags = flags & SOUND_SPACE_PARAMS_MASK;
 
     do {
-        lowerFlags = flags & 0xFFFF;
+        spaceMode = flags & SOUND_SPACE_MODE_MASK;
     } while (0); // required to match
 
-    switch (lowerFlags) {
-        case 0:
+    switch (spaceMode) {
+        case SOUND_SPACE_MODE_0:
             sfx_compute_spatialized_sound_params_0(x, y, z, volume, pan);
             break;
-        case 1:
+        case SOUND_SPACE_MODE_1:
             sfx_compute_spatialized_sound_params_1(x, y, z, volume, pan);
             break;
-        case 2:
-            sfx_compute_spatialized_sound_params_2(x, y, z, volume, pan, upperFlags);
+        case SOUND_SPACE_FULL:
+            sfx_compute_spatialized_sound_params_full(x, y, z, volume, pan, paramFlags);
             break;
     }
 
-    if (upperFlags & 0x10000) {
+    if (paramFlags & SOUND_PARAM_MUTE) {
         *volume = 0;
-    } else if (upperFlags & 0x400000) {
+    } else if (paramFlags & SOUND_PARAM_QUIET) {
         if (*volume < 80) {
             *volume = 80;
         }
-    } else if (upperFlags & 0x200000) {
+    } else if (paramFlags & SOUND_PARAM_MORE_QUIET) {
         if (*volume < 60) {
             *volume = 60;
         }
-    } else if (upperFlags & 0x100000) {
+    } else if (paramFlags & SOUND_PARAM_MOST_QUIET) {
         if (*volume < 40) {
             *volume = 40;
         }
@@ -622,7 +616,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
     if (!gGameStatusPtr->isBattle) {
         *pan = (screenX * 0.2f) + 32.0f;
     } else {
-        f32 temp_f20 = ((screenX * 127.0) / 320.0) - 64.0;
+        f32 temp_f20 = ((screenX * 127.0) / SCREEN_WIDTH) - 64.0;
         *pan = (s32) (temp_f20 * sin_rad(DEG_TO_RAD(fabs(temp_f20) * 90.0 / 64.0))) + 64;
     }
 }
@@ -630,7 +624,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
 void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 screenX, screenY, screenZ;
-    f32 temp_f0;
+    f32 depth;
 
     get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
 
@@ -651,12 +645,12 @@ void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s1
         screenX = camera->viewportW;
     }
 
-    temp_f0 = fabsf(5000 - screenZ);
-    if (temp_f0 > 1000.0f) {
-        temp_f0 = 1000.0f;
+    depth = fabsf(5000 - screenZ);
+    if (depth > 1000.0f) {
+        depth = 1000.0f;
     }
 
-    *volume = *volume * (1500.0f - temp_f0) * 0.001f;
+    *volume = *volume * (1500.0f - depth) * 0.001f;
     if (*volume > 127) {
         *volume = 127;
     }
