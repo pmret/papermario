@@ -12475,7 +12475,12 @@ segments:
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
-    - [0xCD06C0,       c, CD06C0]
+    - [0xCD06C0, c, flo_15_0_header]
+    - [0xCD06C0, c, flo_15_1_music]
+    - [0xCD06C0, c, flo_15_2_main]
+    - [0xCD06C0, c, flo_15_3_npc]
+    - [0xCD06C0, c, flo_15_4_entity]
+    - [0xCD06C0, c, flo_15_5_stairs]
     - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16

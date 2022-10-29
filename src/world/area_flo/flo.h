@@ -41,6 +41,9 @@ enum {
     AF_FLO_TreeDrop_YellowBerry1    = AreaFlag(33),
     AF_FLO_TreeDrop_YellowBerry2    = AreaFlag(34),
 
+    // flo_15
+    AF_FLO_26                       = AreaFlag(38),
+
     AF_FLO16_FoundHiddenStarPiece   = AreaFlag(39),
 
     AF_FLO_28                       = AreaFlag(40),
