@@ -12523,8 +12523,11 @@ segments:
     start: 0xCE6700
     vram: 0x80240000
     subsegments:
-    - [0xCE6700,       c, CE6700]
-    - [0xCE7240,       c, CE7240]
+    - [0xCE6700, c, flo_21_0_header]
+    - [0xCE6700, c, flo_21_1_music]
+    - [0xCE6700, c, flo_21_2_main]
+    - [0xCE7240, c, flo_21_3_clouds]
+    - [0xCE73D0, c, flo_21_4_npc]
     - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22

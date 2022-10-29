@@ -33,13 +33,7 @@ EvtScript N(EVS_BossDefeated) = {
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -135, 85, 0)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.6))
         EVT_CALL(SetPanTarget, CAM_DEFAULT, -135, 30, 0)
-        EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_SUB(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_IF_NE(10000, 10000)
-            EVT_CALL(GetCamPitch, CAM_DEFAULT, LVar2, LVar3)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar2, 10000)
-        EVT_END_IF
+        EVT_SPIRIT_ADJUST_CAM(10000)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(N(StarSpiritEffectFunc2), 0, 180, -135, 10, 0, -135, 85, 0, 30, 0)
         EVT_THREAD
