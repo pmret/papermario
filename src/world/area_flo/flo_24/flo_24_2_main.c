@@ -3,7 +3,7 @@
 
 #include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
 
-ApiStatus N(SpawnSunEffect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpawnSunEffect)) {
     fx_sun_undeclared(FX_SUN_FROM_RIGHT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

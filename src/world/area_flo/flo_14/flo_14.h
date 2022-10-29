@@ -2,33 +2,39 @@
 /// @brief Flower Fields - (NW) Bubble Flower
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_14_shape.h"
+#include "mapfs/flo_14_hit.h"
+
+#include "sprite/npc/Bubulb.h"
+#include "sprite/npc/Bzzap.h"
+
+enum {
+	NPC_BubbleFlower    = 0,
+	NPC_Bzzap           = 1,
+};
+
+enum {
+    MV_SavedPartnerFlags    = MapVar(0),
+    MV_BubbleCamScript      = MapVar(9),
+    MV_RotAngle_Log_01      = MapVar(10),
+    MV_RotVelocity_Log_01   = MapVar(11),
+    MV_RotAngle_Log_02      = MapVar(12),
+    MV_RotVelocity_Log_02   = MapVar(13),
+};
+
 #define NAMESPACE flo_14
 
-ApiStatus N(func_80242360_CCD670)(Evt *script, s32 isInitialCall);
-ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall);
-ApiStatus N(CheckVineTriggerDist)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall);
-void N(func_80240504_CCB814)(void);
-void N(func_802407D4_CCBAE4)(void);
-ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
-ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_SetupBubbles);
+extern EvtScript N(EVS_SetupLogBridges);
+extern EvtScript N(EVS_MakeEntities);
 
-extern NpcGroupList N(npcGroupList_80244F00);
-extern EvtScript N(80243E78);
-extern EvtScript N(8024352C);
-extern EvtScript N(80243870);
-extern EvtScript N(80244F30);
-extern EvtScript N(80245224);
-extern EvtScript N(d_80242360);
-extern EvtScript N(main);
+extern EvtScript N(EVS_BlowBigBubble);
+extern EvtScript N(EVS_RideBigBubble);
+
+extern NpcGroupList N(DefaultNPCs);

@@ -12465,9 +12465,13 @@ segments:
     start: 0xCCB310
     vram: 0x80240000
     subsegments:
-    - [0xCCB310,       c, CCB310]
-    - [0xCCBE20,       c, CCBE20]
-    - [0xCCD670,       c, CCD670]
+    - [0xCCB310, c, flo_14_0_header]
+    - [0xCCB310, c, flo_14_1_music]
+    - [0xCCB310, c, flo_14_2_main]
+    - [0xCCB650, c, flo_14_3_bubbles]
+    - [0xCCBE20, c, flo_14_4_npc]
+    - [0xCCD670, c, flo_14_5_entity]
+    - [0xCCD670, c, flo_14_6_logs]
     - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15

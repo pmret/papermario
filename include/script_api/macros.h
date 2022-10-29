@@ -571,6 +571,9 @@
 
 /****** COMMON SCRIPTS ************************************************************************************************/
 
+#define EVT_IF_TRUE(b)  EVT_IF_NE(b, 0)
+#define EVT_IF_FALSE(b) EVT_IF_EQ(b, 0)
+
 #define EVT_SET_VEC2(baseVar, x, y, z) \
     EVT_SET(baseVar + 0, x) \
     EVT_SET(baseVar + 1, y)
