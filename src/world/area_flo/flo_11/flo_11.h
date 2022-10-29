@@ -10,14 +10,14 @@
 #include "mapfs/flo_11_hit.h"
 
 enum {
-	NPC_Lakitu_01               = 0,
-	NPC_Lakitu_02               = 1,
+	NPC_Lakitu_01       = 0,
+	NPC_Lakitu_02       = 1,
 };
 
 enum {
-    MV_Unk_00           = MapVar(0),
-    MV_Unk_0A           = MapVar(10),
-    MV_Unk_0B           = MapVar(11),
+    MV_LakituAmbushState    = MapVar(0),
+    MV_LakituSearchSync     = MapVar(10),
+    MV_FlyingSoundsScript   = MapVar(11),
 };
 
 #define NAMESPACE flo_11

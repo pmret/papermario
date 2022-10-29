@@ -75,7 +75,7 @@ EvtScript N(EVS_PlayFlightSounds) = {
 
 EvtScript N(EVS_LakitusFlying_Search) = {
     EVT_SET(LVar0, 5)
-    EVT_EXEC_GET_TID(N(EVS_PlayFlightSounds), MV_Unk_0B)
+    EVT_EXEC_GET_TID(N(EVS_PlayFlightSounds), MV_FlyingSoundsScript)
     EVT_THREAD
         EVT_CALL(LoadPath, 160, EVT_PTR(N(FlightPath_Lakitu_01_Search)),
             ARRAY_COUNT(N(FlightPath_Lakitu_01_Search)), EASING_LINEAR)
@@ -98,7 +98,7 @@ EvtScript N(EVS_LakitusFlying_Search) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(MV_Unk_0A, 1)
+    EVT_SET(MV_LakituSearchSync, 1)
     EVT_RETURN
     EVT_END
 };
@@ -126,14 +126,14 @@ EvtScript N(EVS_LakitusFlying_Gather) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_KILL_THREAD(MV_Unk_0B)
+    EVT_KILL_THREAD(MV_FlyingSoundsScript)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_LakitusFlying_Attack) = {
     EVT_SET(LVar0, 4)
-    EVT_EXEC_GET_TID(N(EVS_PlayFlightSounds), MV_Unk_0B)
+    EVT_EXEC_GET_TID(N(EVS_PlayFlightSounds), MV_FlyingSoundsScript)
     EVT_THREAD
         EVT_CALL(LoadPath, 35, EVT_PTR(N(FlightPath_Lakitu_01_Attack)),
             ARRAY_COUNT(N(FlightPath_Lakitu_01_Attack)), EASING_LINEAR)
@@ -186,7 +186,7 @@ EvtScript N(EVS_LakitusFlying_Flee) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_Lakitu_02, NPC_DISPOSE_LOCATION)
     EVT_WAIT(40)
-    EVT_KILL_THREAD(MV_Unk_0B)
+    EVT_KILL_THREAD(MV_FlyingSoundsScript)
     EVT_RETURN
     EVT_END
 };
@@ -211,7 +211,7 @@ EvtScript N(EVS_Scene_LakituAmbush) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(MV_Unk_0A, 0)
+    EVT_SET(MV_LakituSearchSync, 0)
     EVT_EXEC(N(EVS_LakitusFlying_Search))
     EVT_CALL(SetCamType, CAM_DEFAULT, 1, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -241,7 +241,7 @@ EvtScript N(EVS_Scene_LakituAmbush) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(MV_Unk_0A, 1)
+        EVT_IF_EQ(MV_LakituSearchSync, 1)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -311,7 +311,7 @@ EvtScript N(EVS_NpcDefeat_Lakitu_01) = {
             EVT_EXEC_WAIT(N(EVS_LakitusFlying_Flee))
             EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
             EVT_SET(GF_FLO11_Defeated_Lakitus, TRUE)
-            EVT_SET(MV_Unk_00, 1)
+            EVT_SET(MV_LakituAmbushState, 1)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
@@ -325,7 +325,7 @@ EvtScript N(EVS_NpcDefeat_Lakitu_02) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_LABEL(0)
-            EVT_IF_EQ(MV_Unk_00, 0)
+            EVT_IF_EQ(MV_LakituAmbushState, 0)
                 EVT_WAIT(1)
                 EVT_GOTO(0)
             EVT_END_IF
@@ -341,7 +341,7 @@ EvtScript N(EVS_NpcInit_Lakitu_01) = {
     EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, FALSE)
         EVT_IF_GE(GB_StoryProgress, STORY_CH6_GOT_MAGICAL_BEAN)
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, TRUE)
-                EVT_SET(MV_Unk_00, 0)
+                EVT_SET(MV_LakituAmbushState, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Lakitu_01)))
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Lakitu_01)))
                 EVT_CALL(SetNpcPos, NPC_Lakitu_01, 350, 120, -220)

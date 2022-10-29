@@ -39,8 +39,11 @@ enum {
     AF_FLO_15                       = AreaFlag(21),
     // flo_12
     AF_FLO_16                       = AreaFlag(22),
-    
+
+    AF_FLO_28                       = AreaFlag(40),
+
     AF_FLO_RidingBeanstalk          = AreaFlag(44),
+    AF_FLO_2D                       = AreaFlag(45),
 };
 
 #endif

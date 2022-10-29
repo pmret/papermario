@@ -12515,7 +12515,12 @@ segments:
     start: 0xCE36F0
     vram: 0x80240000
     subsegments:
-    - [0xCE36F0,       c, CE36F0]
+    - [0xCE36F0, c, flo_19_0_header]
+    - [0xCE36F0, c, flo_19_1_music]
+    - [0xCE36F0, c, flo_19_2_entity]
+    - [0xCE36F0, c, flo_19_3_main]
+    - [0xCE3A30, c, flo_19_4_clouds]
+    - [0xCE3BC0, c, flo_19_5_beanstalk]
     - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
