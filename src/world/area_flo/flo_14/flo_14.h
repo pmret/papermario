@@ -13,7 +13,7 @@ ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
 ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
+ApiStatus N(CheckVineTriggerDist)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall);

@@ -14,6 +14,16 @@ enum {
     // flo_07
     AF_FLO_PoiseHintDialogue        = AreaFlag(5),
     AF_FLO_MadeCrystalBerry         = AreaFlag(6),
+ 
+    // flo_00
+    AF_FLO_10                       = AreaFlag(16),
+    AF_FLO_11                       = AreaFlag(17),
+    AF_FLO_12                       = AreaFlag(18),
+    AF_FLO_13                       = AreaFlag(19),
+    AF_FLO_14                       = AreaFlag(20),
+    AF_FLO_15                       = AreaFlag(21),
+    // flo_12
+    AF_FLO_16                       = AreaFlag(22),
     // flo_03
     AF_FLO_IsUnderground_Mole_01    = AreaFlag(23),
     AF_FLO_IsUnderground_Mole_02    = AreaFlag(24),
@@ -30,17 +40,14 @@ enum {
     // flo_25
     AF_FLO_TreeDrop_YellowBerry1    = AreaFlag(33),
     AF_FLO_TreeDrop_YellowBerry2    = AreaFlag(34),
-    // flo_00
-    AF_FLO_10                       = AreaFlag(16),
-    AF_FLO_11                       = AreaFlag(17),
-    AF_FLO_12                       = AreaFlag(18),
-    AF_FLO_13                       = AreaFlag(19),
-    AF_FLO_14                       = AreaFlag(20),
-    AF_FLO_15                       = AreaFlag(21),
-    // flo_12
-    AF_FLO_16                       = AreaFlag(22),
+
+    AF_FLO16_FoundHiddenStarPiece   = AreaFlag(39),
 
     AF_FLO_28                       = AreaFlag(40),
+    // flo_16
+    AF_FLO_RaisedRedPillar          = AreaFlag(41),
+    AF_FLO_RaisedGreenPillar        = AreaFlag(42),
+    AF_FLO_LoweredPurplePillar      = AreaFlag(43),
 
     AF_FLO_RidingBeanstalk          = AreaFlag(44),
     AF_FLO_2D                       = AreaFlag(45),

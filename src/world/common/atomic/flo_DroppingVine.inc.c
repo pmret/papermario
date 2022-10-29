@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-API_CALLABLE(N(UnkFunc43)) {
+API_CALLABLE(N(CheckVineTriggerDist)) {
     f32 var1 = script->varTable[0] - script->varTable[3];
     f32 var2 = script->varTable[1] - script->varTable[4];
     f32 var3 = script->varTable[2] - script->varTable[5];
@@ -22,7 +22,7 @@ EvtScript N(EVS_DroppingVine) = {
     EVT_CALL(EnableModel, LVar6, FALSE)
     EVT_LABEL(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkFunc43))
+        EVT_CALL(N(CheckVineTriggerDist))
         EVT_IF_EQ(LVar0, 0)
             EVT_WAIT(1)
             EVT_GOTO(0)

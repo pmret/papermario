@@ -202,7 +202,7 @@ EvtScript N(80242EAC) = {
     EVT_CALL(EnableModel, LVar6, 0)
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(N(UnkFunc43))
+    EVT_CALL(N(CheckVineTriggerDist))
     EVT_IF_EQ(LVar0, 0)
         EVT_WAIT(1)
         EVT_GOTO(0)
@@ -576,7 +576,7 @@ ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnkFunc43.inc.c"
+#include "world/common/todo/CheckVineTriggerDist.inc.c"
 
 ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

@@ -9,9 +9,6 @@
 #include "mapfs/flo_17_shape.h"
 #include "mapfs/flo_17_hit.h"
 
-#include "sprite/npc/Lakitu.h"
-#include "sprite/npc/Spiny.h"
-
 enum {
 	NPC_Lakitu_01               = 0,
 	NPC_Lakitu_02               = 1,

@@ -12483,11 +12483,13 @@ segments:
     start: 0xCD1E30
     vram: 0x80240000
     subsegments:
-    - [0xCD1E30,       c, CD1E30]
-    - [0xCD1E70,       c, CD1E70]
-    - [0xCD1F10,       c, CD1F10]
-    - [0xCD2C80,       c, CD2C80]
-    - [0xCD4770,       c, CD4770]
+    - [0xCD1E30, c, flo_16_0_header]
+    - [0xCD1E30, c, flo_16_1_music]
+    - [0xCD1E30, c, flo_16_2_main]
+    - [0xCD1E70, c, flo_16_3_vines]
+    - [0xCD1F10, c, flo_16_4_entity]
+    - [0xCD2C80, c, flo_16_5_npc]
+    - [0xCD4770, c, flo_16_6_puzzle]
     - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
