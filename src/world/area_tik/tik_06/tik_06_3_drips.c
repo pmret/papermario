@@ -8,18 +8,18 @@ DripVolumeList N(DripVolumes) = {
         {
             .minPos = { -512,  -14 },
             .maxPos = {  173,   84 },
-            .unk_10 = 200,
-            .unk_14 = -10,
-            .unk_18 = 60,
-            .density = 2,
+            .startY = 200,
+            .endY   = -10,
+            .duration = 60,
+            .density  = 2,
         },
         {
             .minPos = {   63, -105 },
             .maxPos = {  103,  182 },
-            .unk_10 = 200,
-            .unk_14 = -10,
-            .unk_18 = 60,
-            .density = 1,
+            .startY = 200,
+            .endY   = -10,
+            .duration = 60,
+            .density  = 1,
         },
     }
 };

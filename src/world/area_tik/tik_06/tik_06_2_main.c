@@ -38,9 +38,9 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_80241A24_878904) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, 1)
+    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
         EVT_EXEC(EnterSavePoint)
         EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_RETURN
@@ -109,7 +109,7 @@ EvtScript N(EVS_Main) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_SET(GF_MAC01_RowfBadgesChosen, FALSE)
-    EVT_EXEC(N(D_80241A24_878904))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END

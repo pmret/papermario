@@ -188,9 +188,9 @@ EvtScript N(EVS_CreateDripVolumes) = {
 typedef struct DripVolume {
     /* 0x00 */ Vec2i minPos;
     /* 0x08 */ Vec2i maxPos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x10 */ s32 startY;
+    /* 0x14 */ s32 endY;
+    /* 0x18 */ s32 duration;
     /* 0x1C */ s32 density;
 } DripVolume;
 
