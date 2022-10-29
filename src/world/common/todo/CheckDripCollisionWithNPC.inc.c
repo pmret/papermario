@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "model.h"
 
-ApiStatus N(UnkPosFunc2)(Evt* script, s32 isInitialCall) {
+ApiStatus N(CheckDripCollisionWithNPC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -31,7 +31,7 @@ ApiStatus N(UnkPosFunc2)(Evt* script, s32 isInitialCall) {
         script->varTable[2] = 1;
     }
 
-    for (i = 0; i < 0x40; i++) {
+    for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_safe(i);
 
         if (npc != NULL) {

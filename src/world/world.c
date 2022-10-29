@@ -295,13 +295,14 @@ MapConfig mac_maps[] = {
 };
 
 /// Toad Town Tunnels
+#include "area_tik/tik.h"
 MapConfig tik_maps[] = {
     { MAP_UNSPLIT(tik_01, 0x80240AE0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_02, 0x802409B0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_03, 0x80240B00), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_04, 0x80240CB0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_05, 0x80240A90), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(tik_06, 0x802409A0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(tik_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_07, 0x80242920), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_08, 0x80240B10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_09, 0x802412D0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },

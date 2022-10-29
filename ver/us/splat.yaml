@@ -8152,13 +8152,12 @@ segments:
     start: 0x876EE0
     vram: 0x80240000
     subsegments:
-    - [0x876EE0, c]
-    - [0x8774D0, c]
-    - [0x877840, data]
-    - [0x8778F0, data]
-    - [0x878F90, data]
-    - [0x879860, data]
-    - [0x879BB0]
+    - [0x876EE0, c, tik_06_0_header]
+    - [0x876EE0, c, tik_06_1_music]
+    - [0x876EE0, c, tik_06_2_main]
+    - [0x8774D0, c, tik_06_3_drips]
+    - [0x877840, c, tik_06_4_entity]
+    - [0x877840]
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code

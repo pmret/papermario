@@ -1,7 +1,7 @@
 #include "tik_04.h"
 #include "mapfs/tik_04_hit.h"
 
-#include "world/common/todo/UnkPosFunc2.inc.c"
+#include "world/common/todo/CheckDripCollisionWithNPC.inc.c"
 
 ApiStatus func_80240960_872390(Evt* script, s32 isInitialCall) {
     Model* model1;

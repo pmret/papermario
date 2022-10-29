@@ -22,4 +22,27 @@ enum {
 
 #define AF_TIK(index) AreaFlag(index)
 
+extern MapSettings tik_01_settings;
+extern MapSettings tik_02_settings;
+extern MapSettings tik_03_settings;
+extern MapSettings tik_04_settings;
+extern MapSettings tik_05_settings;
+extern MapSettings tik_06_settings;
+extern MapSettings tik_07_settings;
+extern MapSettings tik_08_settings;
+extern MapSettings tik_09_settings;
+extern MapSettings tik_10_settings;
+extern MapSettings tik_12_settings;
+extern MapSettings tik_14_settings;
+extern MapSettings tik_15_settings;
+extern MapSettings tik_17_settings;
+extern MapSettings tik_18_settings;
+extern MapSettings tik_19_settings;
+extern MapSettings tik_20_settings;
+extern MapSettings tik_21_settings;
+extern MapSettings tik_22_settings;
+extern MapSettings tik_23_settings;
+extern MapSettings tik_24_settings;
+extern MapSettings tik_25_settings;
+
 #endif
