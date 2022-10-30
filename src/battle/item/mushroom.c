@@ -171,7 +171,7 @@ EvtScript N(main) = {
     EVT_CALL(N(func_802A15A0_715DF0), LVarA)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_IF_EQ(LVar0, 256)
+    EVT_IF_EQ(LVar0, ACTOR_PARTNER)
         EVT_EXEC_WAIT(N(script6))
         EVT_RETURN
     EVT_END_IF

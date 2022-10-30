@@ -208,7 +208,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
 EvtScript UseMystery = {
     EVT_WAIT(2)
     EVT_CALL(LoadFreeItemScript)
-    EVT_EXEC_WAIT(LocalVar(0))
+    EVT_EXEC_WAIT(LVar0)
     EVT_RETURN
     EVT_END
 };

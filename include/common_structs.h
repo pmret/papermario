@@ -2520,4 +2520,12 @@ typedef struct GameMode {
     /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
 } GameMode; // size = 0x18
 
+typedef struct PartnerDMAData {
+    /* 0x00 */ u32 dmaStart;
+    /* 0x04 */ u32 dmaEnd;
+    /* 0x08 */ void* dmaDest;
+    /* 0x0C */ struct ActorBlueprint* ActorBlueprint;
+    /* 0x10 */ s32 y;
+} PartnerDMAData; // size = 0x14
+
 #endif

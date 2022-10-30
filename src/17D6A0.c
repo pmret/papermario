@@ -4,6 +4,23 @@
 #include "battle/battle.h"
 #include "hud_element.h"
 #include "entity.h"
+#include "ld_addrs.h"
+
+extern IMG_BIN ui_battle_menu_spirits_png[];
+extern PAL_BIN ui_battle_menu_spirits_pal[];
+extern IMG_BIN ui_battle_unk_star_png[];
+extern PAL_BIN ui_battle_unk_star_pal[];
+
+extern ActorBlueprint battle_partner_goombario;
+extern ActorBlueprint battle_partner_kooper;
+extern ActorBlueprint battle_partner_bombette;
+extern ActorBlueprint battle_partner_parakarry;
+extern ActorBlueprint battle_partner_goompa;
+extern ActorBlueprint battle_partner_watt;
+extern ActorBlueprint battle_partner_sushie;
+extern ActorBlueprint battle_partner_lakilester;
+extern ActorBlueprint battle_partner_bow;
+extern ActorBlueprint battle_partner_twink;
 
 s16 D_80280FC0[] = {
     10, 90, 0, 50,
@@ -2388,80 +2405,12 @@ s32 bActorMessages[] = {
 };
 PopupMessage* D_802838F8 = NULL;
 
-
-//TODO split files
-/*dlabel D_80283900
-.word
-
-
-*/
-
-typedef struct PartnerDMAData {
-    /* 0x00 */ u32 dmaStart;
-    /* 0x04 */ u32 dmaEnd;
-    /* 0x08 */ void* dmaDest;
-    /* 0x0C */ ActorBlueprint* ActorBlueprint;
-    /* 0x10 */ s32 y;
-} PartnerDMAData; // size = 0x14
-#include "ld_addrs.h"
-#include "entity.h"
-
-extern IMG_BIN ui_battle_menu_spirits_png[];
-extern PAL_BIN ui_battle_menu_spirits_pal[];
-extern IMG_BIN ui_battle_unk_star_png[];
-extern PAL_BIN ui_battle_unk_star_pal[];
-
-extern ActorBlueprint battle_partner_goombario;
-extern ActorBlueprint battle_partner_kooper;
-extern ActorBlueprint battle_partner_bombette;
-extern ActorBlueprint battle_partner_parakarry;
-extern ActorBlueprint battle_partner_goompa;
-extern ActorBlueprint battle_partner_watt;
-extern ActorBlueprint battle_partner_sushie;
-extern ActorBlueprint battle_partner_lakilester;
-extern ActorBlueprint battle_partner_bow;
-extern ActorBlueprint battle_partner_twink;
-
 s32 D_802838FC_padding = 0;
 
-u32 D_80283900[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x0000000D, 0xDDDD0000, 0x00000000,
-    0x00000000, 0x000000D5, 0x2224DD00, 0x00000000,
-    0x00000000, 0x000000D2, 0x222235D0, 0x00000000,
-    0x00000000, 0x000000D2, 0x2222345E, 0x00000000,
-    0x00000000, 0x00000DD6, 0x5564345E, 0x00000000,
-    0x00000000, 0x00000D22, 0x2245646E, 0x00000000,
-    0x00000000, 0x0000D522, 0x222556D0, 0x00000000,
-    0x00000000, 0x0000D222, 0x222544D0, 0x00000000,
-    0x00000000, 0x000D5222, 0x2225445E, 0x00000000,
-    0x00000000, 0x000D2222, 0x2226445E, 0x00000000,
-    0x00000000, 0x000D2222, 0x2237456E, 0x00000000,
-    0x00000000, 0x00D42522, 0x226776E0, 0x00000000,
-    0x00000000, 0x00D32522, 0x26655EE0, 0x00000000,
-    0x00000000, 0x00D22622, 0x465555E0, 0x00000000,
-    0x00000000, 0x0D422622, 0xD55555E0, 0x00000000,
-    0x00000000, 0x0D222742, 0xD7555E00, 0x00000000,
-    0x00000000, 0xD3224EEE, 0xEEEEE000, 0x00000000,
-    0x00000000, 0xD2227E00, 0x00000000, 0x00000000,
-    0x00000000, 0xD425E000, 0x00000000, 0x00000000,
-    0x00000000, 0x0EEE0000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000
-};
+//TODO split files
 
-u32 D_80283B00[] = {
-    0x294AFFFF, 0xD6B5A63B, 0x7D7B442F, 0x3B25325B, 0x7BFF7BFF, 0x7BFF7BFF, 0x7BFF2151, 0x19090001
-};
+#include "ui/battle/cursor_hand.png.inc.c"
+#include "ui/battle/cursor_hand.pal.inc.c"
 
 Vtx D_80283B20[4] = {
     {{{ -22, -6, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
@@ -2559,19 +2508,16 @@ s32 D_80283F04_padding = 0;
 s32 D_80283F08_padding = 0;
 s32 D_80283F0C_padding = 0;
 
-// TODO shiftability
-#define BATTLE_PARTNER_VRAM 0x80238000
-
 #define BATTLE_PARTNER_ENTRY(name, Y) \
     { \
         (u32)battle_partner_##name##_ROM_START, \
         (u32)battle_partner_##name##_ROM_END, \
-        (void*)BATTLE_PARTNER_VRAM, \
+        battle_partner_##name##_VRAM, \
         &battle_partner_##name, \
         Y \
     }
 
-PartnerDMAData D_80283F10[] = {
+PartnerDMAData bPartnerDmaTable[] = {
     { },
     BATTLE_PARTNER_ENTRY(goombario, 0),
     BATTLE_PARTNER_ENTRY(kooper, 0),

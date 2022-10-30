@@ -27,7 +27,7 @@ EvtScript D_80077C44 = {
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
     EVT_CALL(GetCamLookAtObjVector)
-    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LVar0, LocalVar(1), LocalVar(2))
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LVar0, LVar1, LVar2)
     EVT_THREAD
         EVT_CALL(MerleeUpdateFX)
     EVT_END_THREAD
@@ -42,9 +42,9 @@ EvtScript D_80077C44 = {
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_2075)
-    EVT_CALL(GetPlayerPos, LVar0, LocalVar(1), LocalVar(2))
-    EVT_CALL(PlayMerleeGatherFX, LVar0, LocalVar(1), LocalVar(2))
-    EVT_CALL(PlayMerleeOrbFX, LVar0, LocalVar(1), LocalVar(2))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayMerleeGatherFX, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayMerleeOrbFX, LVar0, LVar1, LVar2)
     EVT_WAIT(15)
     EVT_CALL(ShowMerleeCoinMessage)
     EVT_WAIT(15)

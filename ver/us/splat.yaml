@@ -1234,6 +1234,14 @@ segments:
     - [0x1AF2D0, .data, 16c8e0]
     - [0x1AF5C0, .data, battle_cam]
     - [0x1B2050, .data, 17D6A0]
+    - start: 0x1B2050
+      type: .data
+      name: 17D6A0
+      subsegments:
+      - [0x1B2050]
+      - [0x1B21E0, ci4, ui/battle/cursor_hand, 32, 32]
+      - [0x1B23E0, palette, ui/battle/cursor_hand]
+      - [0x1B2400]
     - [0x1B28E0, .data, 181810]
     - [0x1B2960, .data, 182B30]
     - [0x1B2A30, .data, 18C790]

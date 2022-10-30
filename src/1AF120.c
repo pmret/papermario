@@ -1019,7 +1019,7 @@ EvtScript D_80298724 = {
         EVT_CASE_DEFAULT
             EVT_EXEC_WAIT(D_80297A38)
     EVT_END_SWITCH
-    EVT_IF_NE(LVar2, 000000)
+    EVT_IF_NE(LVar2, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar2)
         EVT_WAIT(8)
     EVT_END_IF
@@ -1029,7 +1029,7 @@ EvtScript D_80298724 = {
 
 EvtScript D_802988F0 = {
     EVT_EXEC_WAIT(D_80297A38)
-    EVT_IF_NE(LVar2, 000000)
+    EVT_IF_NE(LVar2, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar2)
         EVT_WAIT(8)
     EVT_END_IF

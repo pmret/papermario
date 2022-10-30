@@ -6,16 +6,8 @@
 #include "model.h"
 #include "sprite.h"
 
-typedef struct PartnerDMAData {
-    /* 0x00 */ u32 dmaStart;
-    /* 0x04 */ u32 dmaEnd;
-    /* 0x08 */ void* dmaDest;
-    /* 0x0C */ ActorBlueprint* ActorBlueprint;
-    /* 0x10 */ s32 y;
-} PartnerDMAData; // size = 0x14
-
 EvtScript D_80293820 = {
-    EVT_WAIT(LocalVar(0))
+    EVT_WAIT(LVar0)
     EVT_LOOP(4)
         EVT_CALL(SetBattleCamParam, 4, 11)
         EVT_WAIT(1)
@@ -61,7 +53,7 @@ extern s32 bPlayerStatusTable[];
 extern ActorBlueprint bPlayerActorBlueprint;
 extern ActorPartBlueprint bMarioParts[];
 
-extern PartnerDMAData D_80283F10[];
+extern PartnerDMAData bPartnerDmaTable[];
 
 s32 func_80265CE8(AnimID*, s32);
 
@@ -1042,7 +1034,7 @@ void load_partner_actor(void) {
     battleStatus->partnerActor = NULL;
 
     if (currentPartner != PARTNER_NONE) {
-        partnerData = &D_80283F10[currentPartner];
+        partnerData = &bPartnerDmaTable[currentPartner];
         ActorBlueprint = partnerData->ActorBlueprint;
 
         ASSERT(ActorBlueprint != NULL);
