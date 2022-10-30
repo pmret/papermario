@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-BSS char D_8029FA660[0x400]; // unused?
+BSS char D_8029F660[0x400]; // unused?
 
 BSS MessagePrintState* gSpeakingActorPrintCtx;
 BSS MessagePrintState* D_8029FA64;
@@ -10,6 +10,25 @@ BSS s32 gSpeakingActorTalkAnim;
 BSS s32 gSpeakingActorIdleAnim;
 BSS Actor* gSpeakingActor;
 BSS ActorPart* gSpeakingActorPart;
+
+u8* gBattleDmaDest = NULL;
+
+u8 D_80284004[] = { 59, 60, 61, 62, 63, 64, 65, 66, 67, 255 };
+u8 D_80284010[] = { 126, 127, 128, 129, 130, 131, 132, 133, 134, 255 };
+u8 D_8028401C[] = { 189, 190, 255 };
+u8 D_80284020[] = { 170, 171, 255 };
+u8 D_80284024[] = { 195, 197, 255 };
+u8 D_80284028[] = { 77, 79, 78, 80, 255 };
+u8 D_80284030[] = { 81, 82, 255};
+u8 D_80284034[] = { 83, 84, 255 };
+u8 D_80284038[] = { 87, 88, 255 };
+u8 D_8028403C[] = { 85, 86, 255 };
+u8 D_80284040[] = { 89, 90, 255 };
+
+u8* D_80284044[] = {
+    D_80284004, D_80284010, D_8028401C, D_80284020, D_80284024, D_80284028, D_80284030, D_80284034, D_80284038,
+    D_8028403C, D_80284040, NULL,
+};
 
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

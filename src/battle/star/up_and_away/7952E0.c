@@ -2,6 +2,9 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKalmar.h"
+#include "entity.h"
+
+extern EntityModelScript D_80283EE8;
 
 #define NAMESPACE battle_star_up_and_away
 
@@ -337,7 +340,7 @@ EvtScript N(usePower) = {
             EVT_THREAD
                 EVT_CALL(GetOwnerTarget, LVarB, LVar1)
                 EVT_WAIT(10)
-                EVT_CALL(CreateVirtualEntity, LVarA, 0x80283EE8)
+                EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(D_80283EE8))
                 EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
                 EVT_SET(LVarD, LVar0)
                 EVT_SET(LVarE, LVar1)

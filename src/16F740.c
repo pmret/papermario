@@ -1710,7 +1710,7 @@ void btl_state_update_victory(void) {
 
             battleStatus->unk_8C = 0;
             if (battleStatus->outtaSightActive == 0) {
-                gBattleState2 = BATTLE_STATE2_UNK_5;
+                gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             } else {
                 if (battleStatus->outtaSightActive > 0) {
                     D_8029F254 = 1;
@@ -1727,13 +1727,13 @@ void btl_state_update_victory(void) {
         case BATTLE_STATE2_UNK_1:
             if (!does_script_exist(partner->onTurnChangeID)) {
                 battleStatus->outtaSightActive = 0;
-                gBattleState2 = BATTLE_STATE2_UNK_5;
+                gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             }
             break;
     }
 
     switch (gBattleState2) {
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             player->flags &= ~(ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000);
             if (partner != NULL) {
                 partner->flags &= ~(ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000);
@@ -2485,9 +2485,9 @@ void btl_state_update_change_partner(void) {
             battleStatus->controlScript = script;
             battleStatus->controlScriptID = script->id;
             script->owner1.actorID = ACTOR_PARTNER;
-            gBattleState2 = BATTLE_STATE2_UNK_5;
+            gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             break;
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             if (!does_script_exist(battleStatus->controlScriptID)) {
                 partner = battleStatus->partnerActor;
                 if (partner != NULL) {
@@ -2499,10 +2499,10 @@ void btl_state_update_change_partner(void) {
                         script->owner1.actorID = ACTOR_PARTNER;
                     }
                 }
-                gBattleState2 = BATTLE_STATE2_UNK_6;
+                gBattleState2 = BATTLE_STATE2_LEVEL_UP_SHOW_HUD;
             }
             break;
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
             partner = battleStatus->partnerActor;
             if (partner == NULL || partner->onTurnChanceScriptSource == NULL
                                 || !does_script_exist(partner->onTurnChangeID)) {

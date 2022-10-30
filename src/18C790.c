@@ -3,19 +3,18 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 #include "pause/pause_common.h"
+#include "script_api/battle.h"
+#include "entity.h"
+#include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/BattleKooper.h"
+#include "sprite/npc/BattleBombette.h"
+#include "sprite/npc/BattleParakarry.h"
+#include "sprite/npc/Goompa.h"
+#include "sprite/npc/BattleWatt.h"
+#include "sprite/npc/BattleSushie.h"
+#include "sprite/npc/BattleLakilester.h"
+#include "sprite/npc/BattleBow.h"
 
-extern s32 D_80284150;
-extern s32 D_80284154[];
-extern s32* D_80284188[];
-extern s32 D_802841B0;
-extern HudScript* D_802841B4;
-extern HudScript* D_802841B8;
-extern HudScript* D_802841BC;
-extern HudScript* D_802841C0[3][10];
-extern HudScript* D_80284238[3][10];
-extern EvtScript D_802842B0;
-extern EvtScript D_80284880;
-extern EvtScript PlayerScriptDispatcher;
 extern HudScript HES_ProjectorBeam;
 
 BSS s32 D_8029FA80[4];
@@ -40,15 +39,215 @@ BSS s32 D_8029FB84;
 BSS s32 D_8029FB88;
 BSS s32 D_8029FB8C;
 
-extern HudScript D_802A9F34;
-extern HudScript D_802A9F5C;
-extern HudScript D_802A9F84;
-extern HudScript D_802A9F0C;
-extern HudScript D_802A9FAC;
-extern HudScript D_802AA320;
-extern HudScript D_802AA694;
-extern HudScript D_802AAA08;
-extern HudScript D_802AAA30;
+extern EntityModelScript starpoint_model_script_starpoint;
+extern EntityModelScript starpoint_model_script_starpoints;
+extern EntityModelScript starpoint_model_script_digit_0;
+extern EntityModelScript starpoint_model_script_digit_1;
+extern EntityModelScript starpoint_model_script_digit_2;
+extern EntityModelScript starpoint_model_script_digit_3;
+extern EntityModelScript starpoint_model_script_digit_4;
+extern EntityModelScript starpoint_model_script_digit_5;
+extern EntityModelScript starpoint_model_script_digit_6;
+extern EntityModelScript starpoint_model_script_digit_7;
+extern EntityModelScript starpoint_model_script_digit_8;
+extern EntityModelScript starpoint_model_script_digit_9;
+extern EntityModelScript starpoint_model_script_dummy;
+
+extern EntityModelScript level_up_model_script;
+
+extern HudScript HES_level_up_flower;
+extern HudScript HES_level_up_leaves;
+extern HudScript HES_level_up_heart;
+extern HudScript HES_level_up_heart_copy;
+extern HudScript HES_level_up_badge;
+
+extern HudScript HES_level_up_FP;
+extern HudScript HES_level_up_HP;
+extern HudScript HES_level_up_BP;
+
+extern HudScript HES_level_up_green_digit_0;
+extern HudScript HES_level_up_green_digit_1;
+extern HudScript HES_level_up_green_digit_2;
+extern HudScript HES_level_up_green_digit_3;
+extern HudScript HES_level_up_green_digit_4;
+extern HudScript HES_level_up_green_digit_5;
+extern HudScript HES_level_up_green_digit_6;
+extern HudScript HES_level_up_green_digit_7;
+extern HudScript HES_level_up_green_digit_8;
+extern HudScript HES_level_up_green_digit_9;
+extern HudScript HES_level_up_red_digit_0;
+extern HudScript HES_level_up_red_digit_1;
+extern HudScript HES_level_up_red_digit_2;
+extern HudScript HES_level_up_red_digit_3;
+extern HudScript HES_level_up_red_digit_4;
+extern HudScript HES_level_up_red_digit_5;
+extern HudScript HES_level_up_red_digit_6;
+extern HudScript HES_level_up_red_digit_7;
+extern HudScript HES_level_up_red_digit_8;
+extern HudScript HES_level_up_red_digit_9;
+extern HudScript HES_level_up_blue_digit_0;
+extern HudScript HES_level_up_blue_digit_1;
+extern HudScript HES_level_up_blue_digit_2;
+extern HudScript HES_level_up_blue_digit_3;
+extern HudScript HES_level_up_blue_digit_4;
+extern HudScript HES_level_up_blue_digit_5;
+extern HudScript HES_level_up_blue_digit_6;
+extern HudScript HES_level_up_blue_digit_7;
+extern HudScript HES_level_up_blue_digit_8;
+extern HudScript HES_level_up_blue_digit_9;
+
+extern HudScript HES_level_up_small_green_digit_0;
+extern HudScript HES_level_up_small_green_digit_1;
+extern HudScript HES_level_up_small_green_digit_2;
+extern HudScript HES_level_up_small_green_digit_3;
+extern HudScript HES_level_up_small_green_digit_4;
+extern HudScript HES_level_up_small_green_digit_5;
+extern HudScript HES_level_up_small_green_digit_6;
+extern HudScript HES_level_up_small_green_digit_7;
+extern HudScript HES_level_up_small_green_digit_8;
+extern HudScript HES_level_up_small_green_digit_9;
+extern HudScript HES_level_up_small_green_arrow;
+extern HudScript HES_level_up_small_red_digit_0;
+extern HudScript HES_level_up_small_red_digit_1;
+extern HudScript HES_level_up_small_red_digit_2;
+extern HudScript HES_level_up_small_red_digit_3;
+extern HudScript HES_level_up_small_red_digit_4;
+extern HudScript HES_level_up_small_red_digit_5;
+extern HudScript HES_level_up_small_red_digit_6;
+extern HudScript HES_level_up_small_red_digit_7;
+extern HudScript HES_level_up_small_red_digit_8;
+extern HudScript HES_level_up_small_red_digit_9;
+extern HudScript HES_level_up_small_red_arrow;
+extern HudScript HES_level_up_small_blue_digit_0;
+extern HudScript HES_level_up_small_blue_digit_1;
+extern HudScript HES_level_up_small_blue_digit_2;
+extern HudScript HES_level_up_small_blue_digit_3;
+extern HudScript HES_level_up_small_blue_digit_4;
+extern HudScript HES_level_up_small_blue_digit_5;
+extern HudScript HES_level_up_small_blue_digit_6;
+extern HudScript HES_level_up_small_blue_digit_7;
+extern HudScript HES_level_up_small_blue_digit_8;
+extern HudScript HES_level_up_small_blue_digit_9;
+extern HudScript HES_level_up_small_blue_arrow;
+
+extern HudScript HES_level_up_select_one_to_upgrade;
+
+s32 D_80284150 = 255;
+
+s32 D_80284154[] = {
+    0,
+    ANIM_BattleGoombario_Walk,
+    ANIM_BattleKooper_Walk,
+    ANIM_BattleBombette_Walk,
+    ANIM_BattleParakarry_Walk,
+    ANIM_Goompa_Walk,
+    ANIM_BattleWatt_Walk,
+    ANIM_BattleSushie_Walk,
+    ANIM_BattleLakilester_Walk,
+    ANIM_BattleBow_Walk,
+    0,
+    0,
+    0
+};
+
+EntityModelScript* starpoint_digit_scripts[] = {
+    &starpoint_model_script_digit_0,
+    &starpoint_model_script_digit_1,
+    &starpoint_model_script_digit_2,
+    &starpoint_model_script_digit_3,
+    &starpoint_model_script_digit_4,
+    &starpoint_model_script_digit_5,
+    &starpoint_model_script_digit_6,
+    &starpoint_model_script_digit_7,
+    &starpoint_model_script_digit_8,
+    &starpoint_model_script_digit_9,
+};
+
+EntityModelScript* starpoint_space_script = &starpoint_model_script_dummy;
+
+HudScript* levelup_stat_scripts[3] = {
+    &HES_level_up_FP,
+    &HES_level_up_HP,
+    &HES_level_up_BP,
+};
+
+HudScript* level_up_digit_scripts[3][10] = {
+    {
+        &HES_level_up_green_digit_0,
+        &HES_level_up_green_digit_1,
+        &HES_level_up_green_digit_2,
+        &HES_level_up_green_digit_3,
+        &HES_level_up_green_digit_4,
+        &HES_level_up_green_digit_5,
+        &HES_level_up_green_digit_6,
+        &HES_level_up_green_digit_7,
+        &HES_level_up_green_digit_8,
+        &HES_level_up_green_digit_9,
+    },
+    {
+        &HES_level_up_red_digit_0,
+        &HES_level_up_red_digit_1,
+        &HES_level_up_red_digit_2,
+        &HES_level_up_red_digit_3,
+        &HES_level_up_red_digit_4,
+        &HES_level_up_red_digit_5,
+        &HES_level_up_red_digit_6,
+        &HES_level_up_red_digit_7,
+        &HES_level_up_red_digit_8,
+        &HES_level_up_red_digit_9,
+    },
+    {
+        &HES_level_up_blue_digit_0,
+        &HES_level_up_blue_digit_1,
+        &HES_level_up_blue_digit_2,
+        &HES_level_up_blue_digit_3,
+        &HES_level_up_blue_digit_4,
+        &HES_level_up_blue_digit_5,
+        &HES_level_up_blue_digit_6,
+        &HES_level_up_blue_digit_7,
+        &HES_level_up_blue_digit_8,
+        &HES_level_up_blue_digit_9,
+    },
+};
+
+HudScript* level_up_small_digit_scripts[3][10] = {
+    {
+        &HES_level_up_small_green_digit_0,
+        &HES_level_up_small_green_digit_1,
+        &HES_level_up_small_green_digit_2,
+        &HES_level_up_small_green_digit_3,
+        &HES_level_up_small_green_digit_4,
+        &HES_level_up_small_green_digit_5,
+        &HES_level_up_small_green_digit_6,
+        &HES_level_up_small_green_digit_7,
+        &HES_level_up_small_green_digit_8,
+        &HES_level_up_small_green_digit_9,
+    },
+    {
+        &HES_level_up_small_red_digit_0,
+        &HES_level_up_small_red_digit_1,
+        &HES_level_up_small_red_digit_2,
+        &HES_level_up_small_red_digit_3,
+        &HES_level_up_small_red_digit_4,
+        &HES_level_up_small_red_digit_5,
+        &HES_level_up_small_red_digit_6,
+        &HES_level_up_small_red_digit_7,
+        &HES_level_up_small_red_digit_8,
+        &HES_level_up_small_red_digit_9,
+    },
+    {
+        &HES_level_up_small_blue_digit_0,
+        &HES_level_up_small_blue_digit_1,
+        &HES_level_up_small_blue_digit_2,
+        &HES_level_up_small_blue_digit_3,
+        &HES_level_up_small_blue_digit_4,
+        &HES_level_up_small_blue_digit_5,
+        &HES_level_up_small_blue_digit_6,
+        &HES_level_up_small_blue_digit_7,
+        &HES_level_up_small_blue_digit_8,
+        &HES_level_up_small_blue_digit_9,
+    },
+};
 
 s32* virtual_entity_get_by_index(s32);
 
@@ -68,19 +267,19 @@ s32 func_8025DEC4(Evt* script, s32 isInitialCall) {
     script->varTable[12] = gBattleStatus.totalStarPoints % 10; // star points in ones
 
     if (script->varTable[10] > 0) {
-        script->varTable[10] = (s32) D_80284188[script->varTable[10]];
+        script->varTablePtr[10] = starpoint_digit_scripts[script->varTable[10]];
         levelUp = TRUE;
     } else {
-        script->varTable[10] = D_802841B0;
+        script->varTablePtr[10] = starpoint_space_script;
     }
 
     if ((script->varTable[11] > 0) || levelUp) {
-        script->varTable[11] = (s32) D_80284188[script->varTable[11]];
+        script->varTablePtr[11] = starpoint_digit_scripts[script->varTable[11]];
     } else {
-        script->varTable[11] = D_802841B0;
+        script->varTablePtr[11] = starpoint_space_script;
     }
 
-    script->varTable[12] = (s32) D_80284188[script->varTable[12]];
+    script->varTablePtr[12] = starpoint_digit_scripts[script->varTable[12]];
     return ApiStatus_DONE2;
 }
 
@@ -122,6 +321,127 @@ ApiStatus func_8025E14C(Evt* script, s32 isInitialCall) {
     fx_confetti(3, 0.0f, 100.0f, 0.0f, 1.0f, 120);
     return ApiStatus_DONE2;
 }
+
+EvtScript EVS_ShowStarpoints = {
+    EVT_SET(LVarF, 0)
+    EVT_CALL(func_8025DEB0)
+    EVT_IF_EQ(LVar0, 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_LT(LVar0, 2)
+        EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(starpoint_model_script_starpoint))
+        EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_ELSE
+        EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(starpoint_model_script_starpoints))
+        EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
+        EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+        EVT_SET(LocalFlag(0), 1)
+    EVT_END_IF
+    EVT_SWITCH(LVar0)
+        EVT_CASE_GT(99)
+            EVT_SET(LVarF, 3)
+        EVT_CASE_GT(9)
+            EVT_SET(LVarF, 2)
+        EVT_CASE_DEFAULT
+            EVT_SET(LVarF, 1)
+    EVT_END_SWITCH
+    EVT_CALL(func_8025DEC4)
+    EVT_CALL(CreateVirtualEntity, LVar7, LVarA)
+    EVT_CALL(SetVirtualEntityPosition, LVar7, -353, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LVar7, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LVar8, LVarB)
+    EVT_CALL(SetVirtualEntityPosition, LVar8, -338, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LVar8, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(CreateVirtualEntity, LVar9, LVarC)
+    EVT_CALL(SetVirtualEntityPosition, LVar9, -323, 68, 70)
+    EVT_CALL(SetVirtualEntityScale, LVar9, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
+    EVT_CALL(func_8025E044)
+    EVT_SWITCH(LVarF)
+        EVT_CASE_EQ(3)
+            EVT_SET(LVar0, -197)
+        EVT_CASE_EQ(2)
+            EVT_SET(LVar0, -204)
+        EVT_CASE_EQ(1)
+            EVT_SET(LVar0, -211)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LVar0, 20)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -78)
+        EVT_CALL(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -146)
+        EVT_CALL(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -131)
+        EVT_CALL(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -116)
+        EVT_CALL(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_8025E030)
+    EVT_SWITCH(LVarF)
+        EVT_CASE_EQ(3)
+            EVT_SET(LVar0, 3)
+        EVT_CASE_EQ(2)
+            EVT_SET(LVar0, -4)
+        EVT_CASE_EQ(1)
+            EVT_SET(LVar0, -11)
+    EVT_END_SWITCH
+    EVT_LOOP(10)
+        EVT_ADD(LVar0, 20)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -78)
+        EVT_CALL(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -154)
+        EVT_CALL(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -139)
+        EVT_CALL(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
+        EVT_SET(LVar1, LVar0)
+        EVT_ADD(LVar1, -124)
+        EVT_CALL(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(DeleteVirtualEntity, LVar6)
+    EVT_CALL(DeleteVirtualEntity, LVar7)
+    EVT_CALL(DeleteVirtualEntity, LVar8)
+    EVT_CALL(DeleteVirtualEntity, LVar9)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript EVS_ShowLevelUp = {
+    EVT_CALL(CreateVirtualEntity, LVar9, EVT_PTR(level_up_model_script))
+    EVT_CALL(SetVirtualEntityPosition, LVar9, 0, 210, 70)
+    EVT_CALL(func_8025E108)
+    EVT_CHILD_THREAD
+        EVT_WAIT(4)
+        EVT_CALL(func_8025E14C)
+    EVT_END_CHILD_THREAD
+    EVT_THREAD
+        EVT_WAIT(8)
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(2.25))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
+        EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.45))
+        EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_SET(LVar0, 210)
+        EVT_LOOP(10)
+            EVT_SUB(LVar0, 10)
+            EVT_CALL(SetVirtualEntityPosition, LVar9, 0, LVar0, 70)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_WAIT(8)
+    EVT_RETURN
+    EVT_END
+};
 
 void btl_state_update_celebration(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -184,8 +504,8 @@ void btl_state_update_celebration(void) {
             if (D_8029FB4C != 0) {
                 D_8029FB4C--;
             } else if (btl_cam_is_moving_done()) {
-                dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
-                script = start_script(&D_802842B0, EVT_PRIORITY_A, 0);
+                dma_copy(starpoint_ROM_START, starpoint_ROM_END, starpoint_VRAM);
+                script = start_script(&EVS_ShowStarpoints, EVT_PRIORITY_A, 0);
                 D_8029FB78 = 0;
                 D_8029FB54 = 20;
                 D_8029FB70 = D_8029FB6C / D_8029FB54;
@@ -267,22 +587,22 @@ void btl_state_update_celebration(void) {
                 playerData->level++;
                 btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
-                dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
+                dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
                 sfx_play_sound(SOUND_80000008);
                 D_8029FB84 = 0;
-                gBattleState2 = BATTLE_STATE2_UNK_5;
+                gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             }
             break;
-        case BATTLE_STATE2_UNK_5:
-            D_8029FB7C = start_script(&D_80284880, EVT_PRIORITY_A, 0);
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+            D_8029FB7C = start_script(&EVS_ShowLevelUp, EVT_PRIORITY_A, 0);
             D_8029FB4C = 25;
-            gBattleState2 = BATTLE_STATE2_UNK_6;
+            gBattleState2 = BATTLE_STATE2_LEVEL_UP_SHOW_HUD;
             D_8029FB80 = D_8029FB7C->id;
             mdl_set_all_fog_mode(1);
             *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
             set_background_color_blend(0, 0, 0, 0);
             break;
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
             if (D_8029FB4C == 18) {
                 playerData->curHP = playerData->curMaxHP;
                 playerData->curFP = playerData->curMaxFP;
@@ -303,57 +623,57 @@ void btl_state_update_celebration(void) {
                     set_background_color_blend(0, 0, 0, ((10 - D_8029FB4C) * 0x10) & 0xF0);
                 }
             } else {
-                id = hud_element_create(&D_802A9F0C);
+                id = hud_element_create(&HES_level_up_heart);
                 D_8029FA80[0] = id;
                 hud_element_set_render_pos(id, 310, 140);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9F5C);
+                id = hud_element_create(&HES_level_up_flower);
                 D_8029FA80[1] = id;
                 hud_element_set_render_pos(id, 158, 340);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9F84);
+                id = hud_element_create(&HES_level_up_leaves);
                 D_8029FA80[3] = id;
                 hud_element_set_render_pos(id, 158, 340);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(&D_802A9FAC);
+                id = hud_element_create(&HES_level_up_badge);
                 D_8029FA80[2] = id;
                 hud_element_set_render_pos(id, 6, 140);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(D_802841B4);
+                id = hud_element_create(levelup_stat_scripts[0]);
                 D_8029FA90[0][0] = id;
                 hud_element_set_render_pos(id, 160, 317);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = hud_element_create(D_802841C0[0][0]);
+                    id = hud_element_create(level_up_digit_scripts[0][0]);
                     D_8029FA90[0][i] = id;
                     hud_element_set_render_pos(id, 160, 317);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = hud_element_create(D_802841B8);
+                id = hud_element_create(levelup_stat_scripts[1]);
                 D_8029FA90[0][7] = id;
                 hud_element_set_render_pos(id, 312, 117);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = hud_element_create(D_802841C0[1][0]);
+                    id = hud_element_create(level_up_digit_scripts[1][0]);
                     D_8029FA90[1][i] = id;
                     hud_element_set_render_pos(id, 312, 117);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = hud_element_create(D_802841BC);
+                id = hud_element_create(levelup_stat_scripts[2]);
                 D_8029FA90[2][0] = id;
                 hud_element_set_render_pos(id, 8, 117);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[20]); i++) {
-                    id = hud_element_create(D_802841C0[2][0]);
+                    id = hud_element_create(level_up_digit_scripts[2][0]);
                     D_8029FA90[2][i] = id;
                     hud_element_set_render_pos(id, 8, 117);
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
@@ -367,7 +687,7 @@ void btl_state_update_celebration(void) {
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
                     id = D_8029FA90[0][1];
-                    hud_element_set_script(id, D_80284238[0][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -375,13 +695,13 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[0][2];
-                    hud_element_set_script(id, D_80284238[0][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[0][3];
-                    hud_element_set_script(id, &D_802AA320);
+                    hud_element_set_script(id, &HES_level_up_small_green_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -390,7 +710,7 @@ void btl_state_update_celebration(void) {
                     fpTens = (playerData->curMaxFP + 5) / 10;
                     fpOnes = (playerData->curMaxFP + 5) % 10;
                     id = D_8029FA90[0][4];
-                    hud_element_set_script(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -398,7 +718,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[0][5];
-                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
@@ -406,7 +726,7 @@ void btl_state_update_celebration(void) {
                     id = D_8029FA90[0][4];
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
-                    hud_element_set_script(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -414,7 +734,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[0][5];
-                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[0][fpOnes]);
                     hud_element_clear_flags(id, 2);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -435,7 +755,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][1];
-                    hud_element_set_script(id, D_80284238[1][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -443,13 +763,13 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[1][2];
-                    hud_element_set_script(id, D_80284238[1][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[1][3];
-                    hud_element_set_script(id, &D_802AA694);
+                    hud_element_set_script(id, &HES_level_up_small_red_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -458,7 +778,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = (playerData->curMaxHP + 5) % 10;
 
                     id = D_8029FA90[1][4];
-                    hud_element_set_script(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -466,7 +786,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[1][5];
-                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
@@ -475,7 +795,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][4];
-                    hud_element_set_script(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -483,7 +803,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[1][5];
-                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[1][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -504,7 +824,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->maxBP % 10;
 
                     id = D_8029FA90[2][1];
-                    hud_element_set_script(id, D_80284238[2][fpTens]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[2][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -512,13 +832,13 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[2][2];
-                    hud_element_set_script(id, D_80284238[2][fpOnes]);
+                    hud_element_set_script(id, level_up_small_digit_scripts[2][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[2][3];
-                    hud_element_set_script(id, &D_802AAA08);
+                    hud_element_set_script(id, &HES_level_up_small_blue_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -527,7 +847,7 @@ void btl_state_update_celebration(void) {
                     fpOnes = (playerData->maxBP + 3) % 10;
 
                     id = D_8029FA90[2][4];
-                    hud_element_set_script(id, D_802841C0[2][fpTens]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][fpTens]);
                     if (fpTens != 0) {
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
@@ -535,19 +855,19 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[2][5];
-                    hud_element_set_script(id, D_802841C0[2][fpOnes]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][fpOnes]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 10, y + 46);
                 } else {
                     id = D_8029FA90[2][4];
-                    hud_element_set_script(id, D_802841C0[2][3]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][3]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[2][5];
-                    hud_element_set_script(id, D_802841C0[2][0]);
+                    hud_element_set_script(id, level_up_digit_scripts[2][0]);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
@@ -564,7 +884,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_alpha(id, 200);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
 
-                D_8029FB48 = id = hud_element_create(&D_802AAA30);
+                D_8029FB48 = id = hud_element_create(&HES_level_up_select_one_to_upgrade);
                 hud_element_set_render_pos(id, 0, 0);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
                 battleStatus->currentSubmenu = 1;
@@ -740,7 +1060,7 @@ void btl_state_update_celebration(void) {
                         break;
                 }
             }
-            if (D_80284150 == 0xFF) {
+            if (D_80284150 == 255) {
                 gBattleState2 = BATTLE_STATE2_UNK_B;
                 break;
             }
@@ -822,7 +1142,7 @@ void btl_state_update_celebration(void) {
                     partner->currentPos.x += 4.0f;
                 }
             }
-            if (D_80284150 == 0xFF) {
+            if (D_80284150 == 255) {
                 gBattleState2 = BATTLE_STATE2_UNK_16;
                 break;
             }
@@ -957,20 +1277,20 @@ void btl_state_draw_celebration(void) {
                     }
 
                     id = D_8029FA80[0];
-                    if (hud_element_get_script(id) != &D_802A9F34) {
-                        hud_element_set_script(id, &D_802A9F34);
+                    if (hud_element_get_script(id) != &HES_level_up_heart_copy) {
+                        hud_element_set_script(id, &HES_level_up_heart_copy);
                     }
                     id = D_8029FA80[3];
-                    if (hud_element_get_script(id) != &D_802A9F84) {
-                        hud_element_set_script(id, &D_802A9F84);
+                    if (hud_element_get_script(id) != &HES_level_up_leaves) {
+                        hud_element_set_script(id, &HES_level_up_leaves);
                     }
                     id = D_8029FA80[1];
-                    if (hud_element_get_script(id) != &D_802A9F5C) {
-                        hud_element_set_script(id, &D_802A9F5C);
+                    if (hud_element_get_script(id) != &HES_level_up_flower) {
+                        hud_element_set_script(id, &HES_level_up_flower);
                     }
                     id = D_8029FA80[2];
-                    if (hud_element_get_script(id) != &D_802A9FAC) {
-                        hud_element_set_script(id, &D_802A9FAC);
+                    if (hud_element_get_script(id) != &HES_level_up_badge) {
+                        hud_element_set_script(id, &HES_level_up_badge);
                     }
                     break;
                 case 1:

@@ -3,6 +3,24 @@
 #include "message_ids.h"
 #include "battle/battle.h"
 #include "hud_element.h"
+#include "entity.h"
+#include "ld_addrs.h"
+
+extern IMG_BIN ui_battle_menu_spirits_png[];
+extern PAL_BIN ui_battle_menu_spirits_pal[];
+extern IMG_BIN ui_battle_unk_star_png[];
+extern PAL_BIN ui_battle_unk_star_pal[];
+
+extern ActorBlueprint battle_partner_goombario;
+extern ActorBlueprint battle_partner_kooper;
+extern ActorBlueprint battle_partner_bombette;
+extern ActorBlueprint battle_partner_parakarry;
+extern ActorBlueprint battle_partner_goompa;
+extern ActorBlueprint battle_partner_watt;
+extern ActorBlueprint battle_partner_sushie;
+extern ActorBlueprint battle_partner_lakilester;
+extern ActorBlueprint battle_partner_bow;
+extern ActorBlueprint battle_partner_twink;
 
 s16 D_80280FC0[] = {
     10, 90, 0, 50,
@@ -2361,8 +2379,8 @@ f32 D_80283690[] = {
     1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
-extern void D_80283D98;
-UNK_PTR D_80283744[] = {
+extern EntityModelScript D_80283D98;
+EntityModelScript* D_80283744[] = {
     NULL, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98,
 };
 
@@ -2386,6 +2404,133 @@ s32 bActorMessages[] = {
     MSG_Menus_Party_Mario, MSG_Menus_Party_Goombario, MSG_Menus_Party_Kooper, MSG_Menus_Party_Bombette, MSG_Menus_Party_Parakarry, MSG_Menus_Party_Goompa, MSG_Menus_Party_Watt, MSG_Menus_Party_Sushie, MSG_Menus_Party_Lakilester, MSG_Menus_Party_Bow, MSG_Menus_Party_Goombaria, MSG_Menus_Party_Twink, MSG_Menus_Party_Peach
 };
 PopupMessage* D_802838F8 = NULL;
+
+s32 D_802838FC_padding = 0;
+
+//TODO split files
+
+#include "ui/battle/cursor_hand.png.inc.c"
+#include "ui/battle/cursor_hand.pal.inc.c"
+
+Vtx D_80283B20[4] = {
+    {{{ -22, -6, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    {{{   9, -6, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
+    {{{   9, 25, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
+    {{{ -22, 25, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx D_80283B60[] = {
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsDPLoadTLUT_pal16(0, D_80283B00),
+    gsDPLoadTextureTile_4b(D_80283900, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsSPVertex(D_80283B20, 4, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSP1Triangle(0, 2, 3, 0),
+    gsSPEndDisplayList(),
+};
+
+EntityModelScript D_80283C48 = STANDARD_ENTITY_MODEL_SCRIPT(D_80283B60, RENDER_MODE_ALPHATEST);
+
+Vtx D_80283C68[4] = {
+    {{{ -16, -16, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
+    {{{  15, -16, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
+    {{{  15,  15, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    {{{ -16,  15, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx D_80283CA8[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCombineLERP(0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsDPLoadTLUT_pal16(0, ui_battle_menu_spirits_pal),
+    gsDPLoadTextureTile_4b(ui_battle_menu_spirits_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsSPVertex(D_80283C68, 4, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSP1Triangle(0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+EntityModelScript D_80283D98 = STANDARD_ENTITY_MODEL_SCRIPT(D_80283CA8, RENDER_MODE_2D);
+
+Vtx D_80283DB8[4] = {
+    {{{ -16, -16, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
+    {{{  15, -16, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    {{{  15,  15, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
+    {{{ -16,  15, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx D_80283DF8[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsDPLoadTLUT_pal16(0, ui_battle_unk_star_pal),
+    gsDPLoadTextureTile_4b(ui_battle_unk_star_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsSPVertex(D_80283DB8, 4, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSP1Triangle(0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+
+};
+EntityModelScript D_80283EE8 = STANDARD_ENTITY_MODEL_SCRIPT(D_80283DF8, RENDER_MODE_ALPHATEST);
+
+s32 D_80283F04_padding = 0;
+s32 D_80283F08_padding = 0;
+s32 D_80283F0C_padding = 0;
+
+#define BATTLE_PARTNER_ENTRY(name, Y) \
+    { \
+        (u32)battle_partner_##name##_ROM_START, \
+        (u32)battle_partner_##name##_ROM_END, \
+        battle_partner_##name##_VRAM, \
+        &battle_partner_##name, \
+        Y \
+    }
+
+PartnerDMAData bPartnerDmaTable[] = {
+    {},
+    BATTLE_PARTNER_ENTRY(goombario, 0),
+    BATTLE_PARTNER_ENTRY(kooper, 0),
+    BATTLE_PARTNER_ENTRY(bombette, 0),
+    BATTLE_PARTNER_ENTRY(parakarry, 30),
+    BATTLE_PARTNER_ENTRY(goompa, 0),
+    BATTLE_PARTNER_ENTRY(watt, 20),
+    BATTLE_PARTNER_ENTRY(sushie, 0),
+    BATTLE_PARTNER_ENTRY(lakilester, 10),
+    BATTLE_PARTNER_ENTRY(bow, 20),
+    {},
+    BATTLE_PARTNER_ENTRY(twink, 30),
+};
 
 // BSS
 BSS PopupMessage popupMessages[32];
@@ -2522,7 +2667,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
     BattleStatus* battleStatus = &gBattleStatus;
     PopupMessage* popup;
     Message* message;
-    void** sp10;
+    EntityModelScript** sp10;
     f32 var_f20;
     f32 var_f22;
     f32* f1;
@@ -2579,7 +2724,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
         for (i = 0; i < numMessages; i++, message++) {
             sp10 = &D_80283744[numMessages];
             message->unk_00 = 1;
-            message->unk_04 = load_entity_model(*sp10);
+            message->unk_04 = load_entity_model(**sp10);
             set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAGS_HIDDEN);
             bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
             message->pos.x = x;

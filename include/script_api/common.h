@@ -154,6 +154,7 @@ ApiStatus GetCurrentPartnerID(Evt* script, s32 isInitialCall);
 ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcDecoration(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall);
+ApiStatus SetNpcRenderMode(Evt* script, s32 isInitialCall);
 ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall);
 ApiStatus EndSpeech(Evt* script, s32 isInitialCall);
 ApiStatus ContinueSpeech(Evt* script, s32 isInitialCall);
