@@ -1,4 +1,39 @@
 #include "common.h"
 #include "effects_internal.h"
 
-INCLUDE_ASM(s32, "effects/quizmo_answer", quizmo_answer_main);
+extern Gfx D_09000400_3A2840[];
+extern Gfx D_090004A8_3A28E8[];
+
+EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+
+    bp.unk_00 = 0;
+    bp.init = NULL;
+    bp.update = NULL;
+    bp.renderWorld = NULL;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_QUIZMO_ANSWER;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->data.quizmoAnswer = NULL;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+
+    if (arg0 == 0) {
+        gSPDisplayList(gMasterGfxPos++, D_09000400_3A2840);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 64, 64, 230);
+    } else {
+        gSPDisplayList(gMasterGfxPos++, D_090004A8_3A28E8);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 80, 80, 255, 230);
+    }
+
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+    gSPTextureRectangle(gMasterGfxPos++, 512, 304, 768, 560, G_TX_RENDERTILE, 0, 1024, 1024, 1024);
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x00, NULL);
+
+    shim_remove_effect(effect);
+    return NULL;
+}
