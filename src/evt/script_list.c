@@ -581,7 +581,7 @@ void update_scripts(void) {
         for (i = 0; i < gScriptListCount; i++) {
             Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
-            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & 0x92)) {
+            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & (EVT_FLAG_80 | EVT_FLAG_10 | EVT_FLAG_02))) {
                 s32 stop = FALSE;
                 s32 status;
 
@@ -646,7 +646,7 @@ void kill_script(Evt* instanceToKill) {
     blockingParent = instanceToKill->blockingParent;
     if (blockingParent != NULL) {
         blockingParent->childScript = NULL;
-        blockingParent->state &= ~0x10;
+        blockingParent->state &= ~EVT_FLAG_10;
 
         for (j = 0; j < ARRAY_COUNT(blockingParent->varTable); j++) {
             blockingParent->varTable[j] = instanceToKill->varTable[j];
@@ -777,7 +777,7 @@ void suspend_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state |= 0x2;
+        script->state |= EVT_FLAG_02;
     }
 }
 
@@ -798,7 +798,7 @@ void resume_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state &= ~0x2;
+        script->state &= ~EVT_FLAG_02;
     }
 }
 

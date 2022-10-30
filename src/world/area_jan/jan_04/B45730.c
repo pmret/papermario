@@ -15,7 +15,7 @@ ApiStatus func_80240FC0_B45730(Evt* script, s32 isInitialCall) {
                 Evt* newScript;
 
                 D_8024625C_B4A9CC++;
-                newScript = start_script(rideScript, 0, 0x20);
+                newScript = start_script(rideScript, 0, EVT_FLAG_20);
                 newScript->varTable[1] = playerStatus->position.x - 10.0f;
                 newScript->varTable[2] = playerStatus->position.y;
                 newScript->varTable[3] = playerStatus->position.z;

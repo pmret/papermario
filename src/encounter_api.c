@@ -193,7 +193,7 @@ void start_battle(Evt* script, s32 songID) {
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
-    currentEncounter->allowFleeing = 0;
+    currentEncounter->allowFleeing = FALSE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
@@ -309,7 +309,7 @@ ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
     Bytecode songID = evt_get_variable(script, *script->ptrReadPos);
     EncounterStatus* currentEncounter = &gCurrentEncounter;
 
-    currentEncounter->allowFleeing = 1;
+    currentEncounter->allowFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
     return ApiStatus_DONE2;

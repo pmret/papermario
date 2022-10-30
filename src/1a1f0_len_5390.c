@@ -455,7 +455,782 @@ ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
 }
 
 /// Default/neutral state during world gameplay; checks for player-enemy collisions and initiates battles when they occur.
-INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_neutral);
+void update_encounters_neutral(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 screenX, screenY, screenZ;
+    f32 npcX, npcY, npcZ;
+    f32 npcYaw;
+    f32 testX, testY, testZ;
+    f32 x, y, z;
+    s32 e;
+    f32 playerX, playerY, playerZ;
+    f32 playerYaw;
+    Encounter* encounter;
+    Evt* script;
+    Npc* npc;
+    f32 distance;
+    f32 colHeight;
+    f32 colRadius;
+    f32 hammerDir;
+
+    s32 cond;
+    s32 cond2;
+    s32 firstStrikeType;
+    s32 aiPaused;
+
+    Enemy* enemy;
+    Enemy* currentEnemy;
+    s32 i;
+
+    f32 playerJumpColHeight = 37.0f;
+    f32 playerColRadius = 14.0f;
+    f32 playerColHeight = 18.0f;
+
+    f32 dx, dz;
+    f32 angle1, angle2;
+
+    do {
+        if (currentEncounter->hitType == ENCOUNTER_TRIGGER_CONVERSATION) {
+            goto START_BATTLE;
+        }
+    } while (0);
+
+    currentEncounter->songID = -1;
+    currentEncounter->unk_18 = -1;
+    currentEncounter->hitType = 0;
+    currentEncounter->allowFleeing = FALSE;
+    currentEncounter->dropWhackaBump = 0;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_1;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_2;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_4;
+
+    playerX = playerStatus->position.x;
+    playerY = playerStatus->position.y;
+    playerZ = playerStatus->position.z;
+    playerYaw = playerStatus->spriteFacingAngle;
+
+    if (playerYaw < 180.0f) {
+        playerYaw = clamp_angle(camera->currentYaw - 90.0f);
+    } else {
+        playerYaw = clamp_angle(camera->currentYaw + 90.0f);
+    }
+
+    if (currentEncounter->battleTriggerCooldown != 0) {
+        if (!(gOverrideFlags & GLOBAL_OVERRIDES_40)) {
+            currentEncounter->battleTriggerCooldown--;
+        }
+        if (playerStatus->blinkTimer != 0) {
+            if (!(playerStatus->flags & PS_FLAGS_INPUT_DISABLED)) {
+                playerStatus->blinkTimer = currentEncounter->battleTriggerCooldown;
+            } else {
+                playerStatus->blinkTimer = 1;
+            }
+        }
+    }
+
+    for (e = 0; e < currentEncounter->numEncounters; e++) {
+        encounter = currentEncounter->encounterList[e];
+        if (encounter == NULL) {
+            continue;
+        }
+        for (i = 0; i < encounter->count; i++) {
+            enemy = encounter->enemy[i];
+            if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                continue;
+            }
+            npc = get_npc_unsafe(enemy->npcID);
+            if (enemy->aiPaused != 0) {
+                if (!(gOverrideFlags & GLOBAL_OVERRIDES_40)) {
+                    enemy->aiPaused--;
+                    aiPaused = enemy->aiPaused;
+                } else {
+                    aiPaused = 0;
+                }
+
+                if (aiPaused & 1) {
+                    npc->flags |= NPC_FLAG_80000000;
+                    enemy->flags |= ENEMY_FLAGS_80000000;
+                } else {
+                    npc->flags &= ~NPC_FLAG_80000000;
+                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                }
+                script = get_script_by_id(enemy->auxScriptID);
+                if (script != NULL) {
+                    set_script_flags(script, EVT_FLAG_80);
+                }
+                script = get_script_by_id(enemy->aiScriptID);
+                if (script != NULL) {
+                    set_script_flags(script, EVT_FLAG_80);
+                }
+                if (enemy->flags & 0x80000) {
+                    script = get_script_by_id(enemy->auxScriptID);
+                    if (script != NULL) {
+                        clear_script_flags(script, EVT_FLAG_80);
+                    }
+                    script = get_script_by_id(enemy->aiScriptID);
+                    if (script != NULL) {
+                        clear_script_flags(script, EVT_FLAG_80);
+                    }
+                }
+            } else if (!(enemy->flags & ENEMY_FLAGS_200000)) {
+                get_screen_coords(gCurrentCameraID, npc->pos.x, npc->pos.y, npc->pos.z, &screenX, &screenY, &screenZ);
+                if ((screenX < -160 || screenX > 480 || screenY < -120 || screenY > 360 || screenZ < 0) && !(enemy->flags & ENEMY_FLAGS_1)) {
+                    npc->flags |= NPC_FLAG_80000000;
+                    enemy->flags |= ENEMY_FLAGS_80000000;
+                    script = get_script_by_id(enemy->auxScriptID);
+                    if (script != NULL) {
+                        set_script_flags(script, EVT_FLAG_80);
+                    }
+                    script = get_script_by_id(enemy->aiScriptID);
+                    if (script != NULL) {
+                        set_script_flags(script, EVT_FLAG_80);
+                    }
+                } else {
+                    npc->flags &= ~NPC_FLAG_80000000;
+                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                    script = get_script_by_id(enemy->auxScriptID);
+                    if (script != NULL) {
+                        clear_script_flags(script, EVT_FLAG_80);
+                    }
+                    script = get_script_by_id(enemy->aiScriptID);
+                    if (script != NULL) {
+                        clear_script_flags(script, EVT_FLAG_80);
+                    }
+                }
+            } else {
+                npc->flags &= ~NPC_FLAG_80000000;
+                enemy->flags &= ~ENEMY_FLAGS_80000000;
+                script = get_script_by_id(enemy->auxScriptID);
+                if (script != NULL) {
+                    clear_script_flags(script, EVT_FLAG_80);
+                }
+                script = get_script_by_id(enemy->aiScriptID);
+                if (script != NULL) {
+                    clear_script_flags(script, EVT_FLAG_80);
+                }
+            }
+
+            if (enemy->flags & ENEMY_FLAGS_80000000) {
+                continue;
+            }
+            if (enemy->flags & ENEMY_FLAGS_1) {
+                if (!(enemy->flags & ENEMY_FLAGS_400000)) {
+                    if (npc == playerStatus->encounteredNPC) {
+                        enemy->unk_E0 = npc->yaw;
+                        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                        script = get_script_by_id(enemy->aiScriptID);
+                        if (script != NULL) {
+                            set_script_flags(script, EVT_FLAG_80);
+                        }
+                    } else {
+                        if (enemy->unk_E0 != 12345) {
+                            npc->yaw = enemy->unk_E0;
+                            enemy->unk_E0 = 12345;
+                        }
+                        script = get_script_by_id(enemy->aiScriptID);
+                        if (script != NULL) {
+                            clear_script_flags(script, EVT_FLAG_80);
+                        }
+                    }
+                } else {
+                    script = get_script_by_id(enemy->aiScriptID);
+                    if (script != NULL) {
+                        clear_script_flags(script, EVT_FLAG_80);
+                    }
+                }
+            }
+
+            if (currentEncounter->battleTriggerCooldown != 0 ||
+                gGameStatusPtr->debugEnemyContact == 1 ||
+                (playerStatus->flags & PS_FLAGS_80000) ||
+                (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
+                gPartnerActionStatus.actingPartner == PARTNER_BOW ||
+                (enemy->flags & ENEMY_FLAGS_1) ||
+                (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800)) ||
+                is_picking_up_item()) {
+                continue;
+            }
+            do {
+                if (!(enemy->flags & ENEMY_FLAGS_10000000) && partner_test_enemy_collision(npc) != 0) {
+                    currentEncounter->hitType = ENCOUNTER_TRIGGER_PARTNER;
+                    enemy->encountered = ENCOUNTER_TRIGGER_PARTNER;
+                    currentEncounter->currentEncounter = encounter;
+                    currentEncounter->currentEnemy = enemy;
+                    currentEncounter->firstStrikeType = FIRST_STRIKE_PLAYER;
+                    goto START_BATTLE;
+                }
+            } while (0);
+
+            npcX = npc->pos.x;
+            npcY = npc->pos.y;
+            npcZ = npc->pos.z;
+            npcYaw = npc->yaw;
+            colHeight = npc->collisionHeight;
+            colRadius = npc->collisionRadius / 2;
+
+            if (enemy->unk_DC != 0) {
+                npcYaw = npc->yawCamOffset;
+                if (npcYaw < 180.0f) {
+                    npcYaw = clamp_angle(camera->currentYaw - 90.0f);
+                } else {
+                    npcYaw = clamp_angle(camera->currentYaw + 90.0f);
+                }
+
+                add_vec2D_polar(&npcX, &npcZ, enemy->unk_DC, npcYaw);
+            }
+
+            dx = npcX - playerX;
+            dz = npcZ - playerZ;
+            distance = sqrtf(SQ(dx) + SQ(dz));
+
+            switch (playerStatus->actionState) {
+                case ACTION_STATE_HAMMER:
+                    x = playerX;
+                    y = playerY;
+                    z = playerZ;
+                    if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
+                        hammerDir = clamp_angle(camera->currentYaw - 90.0f);
+                        if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
+                            hammerDir = clamp_angle(hammerDir + 30.0f);
+                        }
+                    } else {
+                        hammerDir = clamp_angle(camera->currentYaw + 90.0f);
+                        if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
+                            hammerDir = clamp_angle(hammerDir - 30.0f);
+                        }
+                    }
+                    add_vec2D_polar(&x, &z, 24.0f, hammerDir);
+                    dx = npcX - x;
+                    dz = npcZ - z;
+                    distance = sqrtf(SQ(dx) + SQ(dz));
+                    if (enemy->flags & ENEMY_FLAGS_IGNORE_HAMMER) {
+                        break;
+                    }
+                    if (!(playerStatus->flags & PS_FLAGS_1000000)) {
+                        break;
+                    }
+                    if (distance >= playerColRadius + colRadius || y > npcY + colHeight || npcY > y + playerColHeight) {
+                        break;
+                    }
+
+                    testX = npcX;
+                    testY = npcY;
+                    testZ = npcZ;
+
+                    if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f) != 0) {
+                        testX = playerX;
+                        testY = playerY;
+                        testZ = playerZ;
+                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f) != 0) {
+                            break;
+                        }
+                    }
+                    if (enemy->unk_07 != 0) {
+                        npcX = enemy->unk_10.x;
+                        npcY = enemy->unk_10.y;
+                        npcZ = enemy->unk_10.z;
+                    }
+
+                    angle1 = fabsf(get_clamped_angle_diff(atan2(playerX, playerZ, npcX, npcZ), playerYaw));
+                    angle2 = fabsf(get_clamped_angle_diff(atan2(npcX, npcZ, playerX, playerZ), npcYaw));
+                    cond = FALSE;
+                    if (angle1 >= 90.0f && angle2 >= 90.0f) {
+                        cond = FALSE;
+                    }
+                    if (angle1 < 90.0f && angle2 >= 90.0f) {
+                        cond = TRUE;
+                    }
+                    if (angle1 >= 90.0f && angle2 < 90.0f) {
+                        cond = FALSE;
+                    }
+                    if (angle1 < 90.0f && angle2 < 90.0f) {
+                        cond = TRUE;
+                    }
+                    if (cond) {
+                        sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                        currentEncounter->hitType = ENCOUNTER_TRIGGER_HAMMER;
+                        currentEncounter->hitTier = gPlayerData.hammerLevel;
+                        enemy->encountered = ENCOUNTER_TRIGGER_HAMMER;
+                        currentEncounter->currentEncounter = encounter;
+                        currentEncounter->currentEnemy = enemy;
+                        currentEncounter->firstStrikeType = FIRST_STRIKE_PLAYER;
+                        goto START_BATTLE;
+                    }
+                    break;
+                case ACTION_STATE_JUMP:
+                case ACTION_STATE_BOUNCE:
+                case ACTION_STATE_FALLING:
+                case ACTION_STATE_STEP_DOWN:
+                case ACTION_STATE_LAND:
+                case ACTION_STATE_STEP_DOWN_LAND:
+                case ACTION_STATE_SPIN_JUMP:
+                case ACTION_STATE_SPIN_POUND:
+                case ACTION_STATE_TORNADO_JUMP:
+                case ACTION_STATE_TORNADO_POUND:
+                    x = playerX;
+                    z = playerZ;
+                    if (!(enemy->flags & ENEMY_FLAGS_IGNORE_JUMP)) {
+                        if (distance >= playerColRadius + colRadius) {
+                            continue;
+                        }
+                        if (playerY > npcY + colHeight || npcY > playerY + playerJumpColHeight) {
+                            continue;
+                        }
+
+                        testX = npcX;
+                        testY = npcY;
+                        testZ = npcZ;
+                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f) != 0) {
+                            testX = playerX;
+                            testY = playerY;
+                            testZ = playerZ;
+                            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f) != 0) {
+                                break;
+                            }
+                        }
+                        cond = FALSE;
+                        if (npcY + colHeight < playerY + playerJumpColHeight * 0.5f) {
+                            if (playerStatus->actionState == ACTION_STATE_FALLING ||
+                                playerStatus->actionState == ACTION_STATE_STEP_DOWN ||
+                                playerStatus->actionState == ACTION_STATE_LAND ||
+                                playerStatus->actionState == ACTION_STATE_STEP_DOWN_LAND ||
+                                playerStatus->actionState == ACTION_STATE_SPIN_JUMP ||
+                                playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
+                                playerStatus->actionState == ACTION_STATE_TORNADO_JUMP ||
+                                playerStatus->actionState == ACTION_STATE_TORNADO_POUND) {
+                                cond = TRUE;
+                            }
+                        }
+                        if (playerY + playerJumpColHeight < npcY + colHeight * 0.5f) {
+                            cond = FALSE;
+                        }
+                        if (cond) {
+                            if (gPlayerData.bootsLevel < 0) {
+                                currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
+                                enemy->encountered = ENCOUNTER_TRIGGER_NONE;
+                                currentEncounter->currentEncounter = encounter;
+                                currentEncounter->currentEnemy = enemy;
+                                currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
+                                currentEncounter->hitTier = 0;
+                                goto START_BATTLE;
+                            }
+                            currentEncounter->hitType = ENCOUNTER_TRIGGER_JUMP;
+                            switch (playerStatus->actionState) {
+                                case ACTION_STATE_JUMP:
+                                case ACTION_STATE_BOUNCE:
+                                case ACTION_STATE_FALLING:
+                                case ACTION_STATE_STEP_DOWN:
+                                case ACTION_STATE_LAND:
+                                case ACTION_STATE_STEP_DOWN_LAND:
+                                    currentEncounter->hitTier = 0;
+                                    break;
+                                case ACTION_STATE_SPIN_JUMP:
+                                case ACTION_STATE_SPIN_POUND:
+                                    currentEncounter->hitTier = 1;
+                                    break;
+                                case ACTION_STATE_TORNADO_JUMP:
+                                case ACTION_STATE_TORNADO_POUND:
+                                    currentEncounter->hitTier = 2;
+                                    break;
+                            }
+                            sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                            enemy->encountered = 2;
+                            currentEncounter->currentEncounter = encounter;
+                            currentEncounter->currentEnemy = enemy;
+                            currentEncounter->firstStrikeType = FIRST_STRIKE_PLAYER;
+                            goto START_BATTLE;
+                        }
+                    }
+                    break;
+            }
+
+            if (enemy->flags & ENEMY_FLAGS_IGNORE_TOUCH) {
+                continue;
+            }
+
+            dx = npcX - playerX;
+            dz = npcZ - playerZ;
+            distance = sqrtf(SQ(dx) + SQ(dz));
+
+            if (distance >= (playerColRadius + colRadius) * 0.8) {
+                continue;
+            }
+            if (npcY + colHeight < playerY) {
+                continue;
+            }
+            if (playerY + playerJumpColHeight < npcY) {
+                continue;
+            }
+
+            testX = npcX;
+            testY = npcY;
+            testZ = npcZ;
+            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f) != 0) {
+                testX = playerX;
+                testY = playerY;
+                testZ = playerZ;
+                if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f) != 0) {
+                    continue;
+                }
+            }
+            cond = FALSE;
+            if (is_ability_active(ABILITY_SPIN_ATTACK) && gPlayerData.level >= enemy->npcSettings->level) {
+                cond = currentEncounter->unk_12 == 0;
+            }
+            if (is_ability_active(ABILITY_DIZZY_ATTACK)) {
+                cond = TRUE;
+            }
+            if ((playerStatus->animFlags & PA_FLAGS_SPINNING) && !(enemy->flags & ENEMY_FLAGS_20000000) && cond) {
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                testX = playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                currentEncounter->hitType = ENCOUNTER_TRIGGER_SPIN;
+                playerStatus->animFlags |= PA_FLAGS_20000;
+                enemy->encountered = ENCOUNTER_TRIGGER_SPIN;
+                currentEncounter->currentEncounter = encounter;
+                currentEncounter->currentEnemy = enemy;
+                currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
+            } else {
+                currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
+                playerStatus->animFlags &= ~PA_FLAGS_20000;
+                enemy->encountered = ENCOUNTER_TRIGGER_NONE;
+                currentEncounter->currentEncounter = encounter;
+                currentEncounter->currentEnemy = enemy;
+                testX = playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                firstStrikeType = FIRST_STRIKE_NONE;
+                if (enemy->unk_07 != 0) {
+                    if (is_ability_active(ABILITY_CHILL_OUT)) {
+                        firstStrikeType = FIRST_STRIKE_NONE;
+                    } else {
+                        firstStrikeType = FIRST_STRIKE_ENEMY;
+                    }
+                }
+                if (!is_ability_active(ABILITY_BUMP_ATTACK) || gPlayerData.level < enemy->npcSettings->level || (enemy->flags & ENEMY_FLAGS_40)) {
+                    currentEncounter->firstStrikeType = firstStrikeType;
+                } else {
+                    if (currentEncounter->unk_12 == 0) {
+                        firstStrikeType = FIRST_STRIKE_NONE;
+                    }
+                    currentEncounter->firstStrikeType = firstStrikeType;
+                }
+            }
+            goto START_BATTLE;
+        }
+    }
+
+START_BATTLE:
+    switch (currentEncounter->hitType) {
+        case 0:
+            break;
+        case ENCOUNTER_TRIGGER_NONE:
+            currentEnemy = enemy = currentEncounter->currentEnemy;
+            if (enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            if (enemy->auxScript != NULL) {
+                suspend_all_script(enemy->auxScriptID);
+            }
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+
+                if (enemy->hitBytecode != NULL) {
+                    enemy->encountered = ENCOUNTER_TRIGGER_NONE;
+                    script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                    enemy->hitScript = script;
+                    enemy->hitScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+            }
+            disable_player_input();
+            partner_disable_input();
+            if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
+                playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
+                playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
+                playerStatus->actionState != ACTION_STATE_SPIN_POUND) {
+                playerStatus->flags |= PS_FLAGS_40000;
+            }
+            if (!is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
+                set_action_state(ACTION_STATE_ENEMY_FIRST_STRIKE);
+                npc = get_npc_unsafe(enemy->npcID);
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+            }
+            currentEncounter->unk_12 = 0;
+            gGameState = 3;
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+        case ENCOUNTER_TRIGGER_SPIN:
+            currentEnemy = enemy = currentEncounter->currentEnemy;
+            if (enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            if (enemy->auxScript != NULL) {
+                suspend_all_script(enemy->auxScriptID);
+            }
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+
+                if (enemy->hitBytecode != NULL) {
+                    enemy->encountered = ENCOUNTER_TRIGGER_SPIN;
+                    script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                    enemy->hitScript = script;
+                    enemy->hitScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+            }
+            disable_player_input();
+            partner_disable_input();
+            currentEncounter->unk_12 = 0;
+            gGameState = 3;
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            playerStatus->flags |= PS_FLAGS_40000;
+            break;
+        case ENCOUNTER_TRIGGER_JUMP:
+            currentEnemy = enemy = currentEncounter->currentEnemy;
+            if (enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            if (enemy->auxScript != NULL) {
+                suspend_all_script(enemy->auxScriptID);
+            }
+            encounter = currentEncounter->currentEncounter;
+
+            cond2 = FALSE;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->hitBytecode != NULL) {
+                    enemy->encountered = ENCOUNTER_TRIGGER_JUMP;
+                    script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                    enemy->hitScript = script;
+                    enemy->hitScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                    npc = get_npc_unsafe(enemy->npcID);
+                    cond2 = TRUE;
+                    testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                    testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                    testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                    npc = get_npc_unsafe(enemy->npcID);
+                    cond2 = TRUE;
+                    testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                    testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                    testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                }
+            }
+            disable_player_input();
+            partner_disable_input();
+            playerStatus->flags |= PS_FLAGS_40000;
+            if (cond2) {
+                start_bounce_a();
+            }
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            currentEncounter->unk_12 = 0;
+            sfx_play_sound(0);
+            gGameState = 3;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+        case ENCOUNTER_TRIGGER_HAMMER:
+            currentEnemy = enemy = currentEncounter->currentEnemy;
+            if (enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            if (enemy->auxScript != NULL) {
+                suspend_all_script(enemy->auxScriptID);
+            }
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->hitBytecode != NULL) {
+                    enemy->encountered = ENCOUNTER_TRIGGER_HAMMER;
+                    script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                    enemy->hitScript = script;
+                    enemy->hitScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                    npc = get_npc_unsafe(enemy->npcID);
+                    testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                    testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                    testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                    npc = get_npc_unsafe(enemy->npcID);
+                    testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
+                    testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
+                    testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
+                    fx_damage_stars(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 0.0f, -1.0f, 0.0f, 3);
+                }
+            }
+            disable_player_input();
+            partner_disable_input();
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            currentEncounter->unk_12 = 0;
+            playerStatus->flags |= PS_FLAGS_40000;
+            sfx_play_sound(0);
+            gGameState = 3;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+        case ENCOUNTER_TRIGGER_CONVERSATION:
+            suspend_all_group(1);
+            enemy = currentEncounter->currentEnemy;
+            if (enemy != NULL && enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            enemy = currentEncounter->currentEnemy;
+            if (enemy->interactBytecode != NULL) {
+                enemy->encountered = 5;
+                script = start_script(enemy->interactBytecode, EVT_PRIORITY_A, 0);
+                enemy->interactScript = script;
+                enemy->interactScriptID = script->id;
+                script->owner1.enemy = enemy;
+                script->owner2.npcID = enemy->npcID;
+                script->groupFlags = enemy->scriptGroup;
+            }
+            disable_player_input();
+            partner_disable_input();
+            set_action_state(ACTION_STATE_TALK);
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            func_800EF3D4(1);
+            gGameState = 4;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+        case ENCOUNTER_TRIGGER_PARTNER:
+            currentEnemy = enemy = currentEncounter->currentEnemy;
+            if (enemy->aiScript != NULL) {
+                suspend_all_script(enemy->aiScriptID);
+            }
+            if (enemy->auxScript != NULL) {
+                suspend_all_script(enemy->auxScriptID);
+            }
+            encounter = currentEncounter->currentEncounter;
+
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->hitBytecode != NULL) {
+                    enemy->encountered = ENCOUNTER_TRIGGER_PARTNER;
+                    script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                    enemy->hitScript = script;
+                    enemy->hitScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                    npc = get_npc_unsafe(enemy->npcID);
+                    testX = npc->pos.x;
+                    testY = npc->pos.y + npc->collisionHeight;
+                    testZ = npc->pos.z;
+                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                    npc = get_npc_unsafe(enemy->npcID);
+                    testX = npc->pos.x;
+                    testY = npc->pos.y + npc->collisionHeight;
+                    testZ = npc->pos.z;
+                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                }
+            }
+            disable_player_input();
+            partner_disable_input();
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 0;
+            currentEncounter->unk_12 = 0;
+            playerStatus->flags |= PS_FLAGS_40000;
+            sfx_play_sound(0);
+            gGameState = 3;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+    }
+}
+
+static const f32 padding = 0;
 
 void draw_encounters_neutral(void) {
 }

@@ -3744,7 +3744,7 @@ void btl_state_update_first_strike(void) {
             enemy = get_actor(ACTOR_ENEMY0);
             if (enemy->onHitScriptSource != NULL) {
                 enemy->lastEventType = EVENT_BEGIN_FIRST_STRIKE;
-                script = start_script(enemy->onHitScriptSource, 0xA, 0x20);
+                script = start_script(enemy->onHitScriptSource, 0xA, EVT_FLAG_20);
                 enemy->onHitScript = script;
                 enemy->onHitID = script->id;
                 script->owner1.actorID = enemy->actorID;
@@ -3847,7 +3847,7 @@ void btl_state_update_first_strike(void) {
                                     if (target != NULL) {
                                         if (target->onHitScriptSource != NULL) {
                                             target->lastEventType = EVENT_END_FIRST_STRIKE;
-                                            script = start_script(target->onHitScriptSource, 0xA, 0x20);
+                                            script = start_script(target->onHitScriptSource, 0xA, EVT_FLAG_20);
                                             target->onHitScript = script;
                                             target->onHitID = script->id;
                                             script->owner1.actorID = target->actorID;

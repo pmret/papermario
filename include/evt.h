@@ -141,9 +141,11 @@ enum EventPriority {
 
 enum EventStateFlags {
     EVT_FLAG_01     = 0x01,
+    EVT_FLAG_02     = 0x02,
     EVT_FLAG_10     = 0x10, // has child?
     EVT_FLAG_20     = 0x20, // add to global script list
     EVT_FLAG_40     = 0x40, // thread?
+    EVT_FLAG_80     = 0x80,
 };
 
 #endif
