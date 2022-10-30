@@ -539,7 +539,7 @@ ActorPartBlueprint N(partsTable_802392A4)[] = {
 
 extern EvtScript N(init_802392F0);
 
-ActorBlueprint N(goombario) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBARIO,
     .level = 0,

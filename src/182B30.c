@@ -3,12 +3,14 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-extern u8 D_80284080[];
-extern u16 D_802840B4[];
-extern u16 D_802840DC[];
-extern u8 D_80284104[];
-extern u8 D_80284120[];
-extern s16 D_80284134[];
+u8 D_80284080[] = { 0, 32, 1, 4, 2, 2, 0, 16, 1, 2, 0, 64, 1, 2, 2, 2, 0, 28, 1, 2, 0, 18, 1, 4, 0, 16, 1, 2, 0, 80,
+                    1, 2, 0, 16, 2, 2, 1, 2, 0, 32, 1, 2, 0, 14, 1, 2, 2, 2, 255, 0, 0, 0 };
+s16 D_802840B4[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, 255, 0 };
+s16 D_802840DC[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, 255, 0 };
+u8 D_80284104[] = { 1, 2, 0, 52, 1, 4, 0, 54, 0, 54, 1, 2, 0, 28, 1, 2, 0, 6, 1, 2, 0, 44, 1, 2, 0, 44, 255, 0 };
+u8 D_80284120[] = { 1, 2, 0, 10, 2, 4, 0, 14, 1, 2, 0, 10, 2, 4, 0, 4, 255, 0, 0, 0 };
+s16 D_80284134[] = { -1, 15, 10, 7, 5, 3, 2, 1, 0, 0, 0, 0, 0, 0 };
+
 
 void update_player_actor_shadow(void);
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
@@ -1363,9 +1365,9 @@ void appendGfx_player_actor(void* arg0) {
 
     playerYaw = playerParts->yaw = player->yaw;
 
-    player->disableEffect->data.disableX->pos.x = playerPosX + 
+    player->disableEffect->data.disableX->pos.x = playerPosX +
         ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
-    player->disableEffect->data.disableX->pos.y = playerPosY + 
+    player->disableEffect->data.disableX->pos.y = playerPosY +
         ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
     player->disableEffect->data.disableX->pos.z = playerPosZ;
 
@@ -1382,8 +1384,8 @@ void appendGfx_player_actor(void* arg0) {
     }
 
     if (battleStatus->waterBlockTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
-            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+        if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
+            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
         {
             effect = battleStatus->waterBlockEffect;
             effect->data.waterBlock->pos.x = playerPosX;
@@ -1397,8 +1399,8 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
     if (battleStatus->cloudNineTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
-            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+        if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
+            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
         {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;
@@ -1415,8 +1417,8 @@ void appendGfx_player_actor(void* arg0) {
     if (player->debuff == STATUS_FROZEN) {
         effect = player->icePillarEffect;
         if (player->icePillarEffect != NULL) {
-            if ((gBattleStatus.flags1 & BS_FLAGS1_8) || 
-                (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000))) 
+            if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
+                (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
             {
                 effect->data.icePillar->pos.x = playerPosX - 8.0f;
                 effect->data.icePillar->pos.y = playerPosY;
@@ -1439,7 +1441,7 @@ void appendGfx_player_actor(void* arg0) {
             player->icePillarEffect = NULL;
         }
     }
-    
+
     if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
     } else {
@@ -1494,7 +1496,7 @@ void appendGfx_player_actor(void* arg0) {
 
     if (player->transparentStatus == 0xE) {
         playerParts->flags |= ACTOR_PART_FLAG_100;
-        
+
         if (FALSE) { // TODO required to match - also whyyyyyy compiler, whyyyyy
     back:
             playerParts->currentAnimation = func_80265D44(8);
@@ -1513,19 +1515,19 @@ void appendGfx_player_actor(void* arg0) {
         lastAnim = playerParts->currentAnimation;
     } while (0); // required to match
 
-    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0)) && 
-        !(player->flags & ACTOR_FLAG_20000000) && 
-        ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK))) 
+    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0)) &&
+        !(player->flags & ACTOR_FLAG_20000000) &&
+        ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
     {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
-            if ((player->debuff != STATUS_FEAR) && 
-                (player->debuff != STATUS_PARALYZE) && 
-                (player->debuff != STATUS_FROZEN) && 
-                (player->debuff != STATUS_STOP)) 
+            if ((player->debuff != STATUS_FEAR) &&
+                (player->debuff != STATUS_PARALYZE) &&
+                (player->debuff != STATUS_FROZEN) &&
+                (player->debuff != STATUS_STOP))
             {
-                if ((player->transparentStatus != STATUS_TRANSPARENT) && 
-                    (player->stoneStatus != STATUS_STONE) && 
-                    ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2))) 
+                if ((player->transparentStatus != STATUS_TRANSPARENT) &&
+                    (player->stoneStatus != STATUS_STONE) &&
+                    ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
                 {
                     if (is_ability_active(0x15)) {
                         playerParts->currentAnimation = func_80265D44(0x13);
@@ -1735,7 +1737,7 @@ void appendGfx_player_actor(void* arg0) {
     } else {
         goto back;
     }
-    
+
 end:
     set_status_icons_properties(player->hudElementDataIndex,
         playerPosX, playerPosY, playerPosZ,

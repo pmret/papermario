@@ -31,7 +31,6 @@ extern s32 D_800DC4EC;
 extern s32 D_800DC4F0;
 extern struct Battle* D_800DC4F4;
 extern s32 D_800DC4F8;
-extern u8* gBattleDmaDest;
 
 extern ActionCommandStatus gActionCommandStatus;
 

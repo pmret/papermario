@@ -3,17 +3,18 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 #include "pause/pause_common.h"
+#include "script_api/battle.h"
 #include "entity.h"
+#include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/BattleKooper.h"
+#include "sprite/npc/BattleBombette.h"
+#include "sprite/npc/BattleParakarry.h"
+#include "sprite/npc/Goompa.h"
+#include "sprite/npc/BattleWatt.h"
+#include "sprite/npc/BattleSushie.h"
+#include "sprite/npc/BattleLakilester.h"
+#include "sprite/npc/BattleBow.h"
 
-extern s32 D_80284150;
-extern s32 D_80284154[];
-extern s32* D_80284188[];
-extern s32 D_802841B0;
-extern HudScript* D_802841B4;
-extern HudScript* D_802841B8;
-extern HudScript* D_802841BC;
-extern EvtScript D_802842B0;
-extern EvtScript PlayerScriptDispatcher;
 extern HudScript HES_ProjectorBeam;
 
 BSS s32 D_8029FA80[4];
@@ -38,18 +39,31 @@ BSS s32 D_8029FB84;
 BSS s32 D_8029FB88;
 BSS s32 D_8029FB8C;
 
-extern HudScript D_802A9F34;
-extern HudScript D_802AA320;
-extern HudScript D_802AA694;
-extern HudScript D_802AAA08;
-extern HudScript D_802AAA30;
+extern EntityModelScript starpoint_model_script_starpoint;
+extern EntityModelScript starpoint_model_script_starpoints;
+extern EntityModelScript starpoint_model_script_digit_0;
+extern EntityModelScript starpoint_model_script_digit_1;
+extern EntityModelScript starpoint_model_script_digit_2;
+extern EntityModelScript starpoint_model_script_digit_3;
+extern EntityModelScript starpoint_model_script_digit_4;
+extern EntityModelScript starpoint_model_script_digit_5;
+extern EntityModelScript starpoint_model_script_digit_6;
+extern EntityModelScript starpoint_model_script_digit_7;
+extern EntityModelScript starpoint_model_script_digit_8;
+extern EntityModelScript starpoint_model_script_digit_9;
+extern EntityModelScript starpoint_model_script_dummy;
 
 extern EntityModelScript level_up_model_script;
 
 extern HudScript HES_level_up_flower;
 extern HudScript HES_level_up_leaves;
 extern HudScript HES_level_up_heart;
+extern HudScript HES_level_up_heart_copy;
 extern HudScript HES_level_up_badge;
+
+extern HudScript HES_level_up_FP;
+extern HudScript HES_level_up_HP;
+extern HudScript HES_level_up_BP;
 
 extern HudScript HES_level_up_green_digit_0;
 extern HudScript HES_level_up_green_digit_1;
@@ -92,6 +106,7 @@ extern HudScript HES_level_up_small_green_digit_6;
 extern HudScript HES_level_up_small_green_digit_7;
 extern HudScript HES_level_up_small_green_digit_8;
 extern HudScript HES_level_up_small_green_digit_9;
+extern HudScript HES_level_up_small_green_arrow;
 extern HudScript HES_level_up_small_red_digit_0;
 extern HudScript HES_level_up_small_red_digit_1;
 extern HudScript HES_level_up_small_red_digit_2;
@@ -102,6 +117,7 @@ extern HudScript HES_level_up_small_red_digit_6;
 extern HudScript HES_level_up_small_red_digit_7;
 extern HudScript HES_level_up_small_red_digit_8;
 extern HudScript HES_level_up_small_red_digit_9;
+extern HudScript HES_level_up_small_red_arrow;
 extern HudScript HES_level_up_small_blue_digit_0;
 extern HudScript HES_level_up_small_blue_digit_1;
 extern HudScript HES_level_up_small_blue_digit_2;
@@ -112,6 +128,48 @@ extern HudScript HES_level_up_small_blue_digit_6;
 extern HudScript HES_level_up_small_blue_digit_7;
 extern HudScript HES_level_up_small_blue_digit_8;
 extern HudScript HES_level_up_small_blue_digit_9;
+extern HudScript HES_level_up_small_blue_arrow;
+
+extern HudScript HES_level_up_select_one_to_upgrade;
+
+s32 D_80284150 = 255;
+
+s32 D_80284154[] = {
+    0,
+    ANIM_BattleGoombario_Walk,
+    ANIM_BattleKooper_Walk,
+    ANIM_BattleBombette_Walk,
+    ANIM_BattleParakarry_Walk,
+    ANIM_Goompa_Walk,
+    ANIM_BattleWatt_Walk,
+    ANIM_BattleSushie_Walk,
+    ANIM_BattleLakilester_Walk,
+    ANIM_BattleBow_Walk,
+    0,
+    0,
+    0
+};
+
+EntityModelScript* starpoint_digit_scripts[] = {
+    &starpoint_model_script_digit_0,
+    &starpoint_model_script_digit_1,
+    &starpoint_model_script_digit_2,
+    &starpoint_model_script_digit_3,
+    &starpoint_model_script_digit_4,
+    &starpoint_model_script_digit_5,
+    &starpoint_model_script_digit_6,
+    &starpoint_model_script_digit_7,
+    &starpoint_model_script_digit_8,
+    &starpoint_model_script_digit_9,
+};
+
+EntityModelScript* starpoint_space_script = &starpoint_model_script_dummy;
+
+HudScript* levelup_stat_scripts[3] = {
+    &HES_level_up_FP,
+    &HES_level_up_HP,
+    &HES_level_up_BP,
+};
 
 HudScript* level_up_digit_scripts[3][10] = {
     {
@@ -209,19 +267,19 @@ s32 func_8025DEC4(Evt* script, s32 isInitialCall) {
     script->varTable[12] = gBattleStatus.totalStarPoints % 10; // star points in ones
 
     if (script->varTable[10] > 0) {
-        script->varTable[10] = (s32) D_80284188[script->varTable[10]];
+        script->varTablePtr[10] = starpoint_digit_scripts[script->varTable[10]];
         levelUp = TRUE;
     } else {
-        script->varTable[10] = D_802841B0;
+        script->varTablePtr[10] = starpoint_space_script;
     }
 
     if ((script->varTable[11] > 0) || levelUp) {
-        script->varTable[11] = (s32) D_80284188[script->varTable[11]];
+        script->varTablePtr[11] = starpoint_digit_scripts[script->varTable[11]];
     } else {
-        script->varTable[11] = D_802841B0;
+        script->varTablePtr[11] = starpoint_space_script;
     }
 
-    script->varTable[12] = (s32) D_80284188[script->varTable[12]];
+    script->varTablePtr[12] = starpoint_digit_scripts[script->varTable[12]];
     return ApiStatus_DONE2;
 }
 
@@ -264,18 +322,18 @@ ApiStatus func_8025E14C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript D_802842B0 = {
+EvtScript EVS_ShowStarpoints = {
     EVT_SET(LocalVar(15), 0)
     EVT_CALL(func_8025DEB0)
     EVT_IF_EQ(LocalVar(0), 0)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_LT(LocalVar(0), 2)
-        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE40)
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), EVT_PTR(starpoint_model_script_starpoint))
         EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
         EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
     EVT_ELSE
-        EVT_CALL(CreateVirtualEntity, LocalVar(6), 0x802ADE5C)
+        EVT_CALL(CreateVirtualEntity, LocalVar(6), EVT_PTR(starpoint_model_script_starpoints))
         EVT_CALL(SetVirtualEntityPosition, LocalVar(6), -278, 68, 70)
         EVT_CALL(SetVirtualEntityScale, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
         EVT_SET(LocalFlag(0), 1)
@@ -446,8 +504,8 @@ void btl_state_update_celebration(void) {
             if (D_8029FB4C != 0) {
                 D_8029FB4C--;
             } else if (btl_cam_is_moving_done()) {
-                dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
-                script = start_script(&D_802842B0, EVT_PRIORITY_A, 0);
+                dma_copy(starpoint_ROM_START, starpoint_ROM_END, starpoint_VRAM);
+                script = start_script(&EVS_ShowStarpoints, EVT_PRIORITY_A, 0);
                 D_8029FB78 = 0;
                 D_8029FB54 = 20;
                 D_8029FB70 = D_8029FB6C / D_8029FB54;
@@ -532,19 +590,19 @@ void btl_state_update_celebration(void) {
                 dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
                 sfx_play_sound(SOUND_80000008);
                 D_8029FB84 = 0;
-                gBattleState2 = BATTLE_STATE2_UNK_5;
+                gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             }
             break;
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             D_8029FB7C = start_script(&EVS_ShowLevelUp, EVT_PRIORITY_A, 0);
             D_8029FB4C = 25;
-            gBattleState2 = BATTLE_STATE2_UNK_6;
+            gBattleState2 = BATTLE_STATE2_LEVEL_UP_SHOW_HUD;
             D_8029FB80 = D_8029FB7C->id;
             mdl_set_all_fog_mode(1);
             *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
             set_background_color_blend(0, 0, 0, 0);
             break;
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
             if (D_8029FB4C == 18) {
                 playerData->curHP = playerData->curMaxHP;
                 playerData->curFP = playerData->curMaxFP;
@@ -585,7 +643,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_render_pos(id, 6, 140);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = hud_element_create(D_802841B4);
+                id = hud_element_create(levelup_stat_scripts[0]);
                 D_8029FA90[0][0] = id;
                 hud_element_set_render_pos(id, 160, 317);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
@@ -597,7 +655,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = hud_element_create(D_802841B8);
+                id = hud_element_create(levelup_stat_scripts[1]);
                 D_8029FA90[0][7] = id;
                 hud_element_set_render_pos(id, 312, 117);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
@@ -609,7 +667,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = hud_element_create(D_802841BC);
+                id = hud_element_create(levelup_stat_scripts[2]);
                 D_8029FA90[2][0] = id;
                 hud_element_set_render_pos(id, 8, 117);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
@@ -643,7 +701,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[0][3];
-                    hud_element_set_script(id, &D_802AA320);
+                    hud_element_set_script(id, &HES_level_up_small_green_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -711,7 +769,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[1][3];
-                    hud_element_set_script(id, &D_802AA694);
+                    hud_element_set_script(id, &HES_level_up_small_red_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -780,7 +838,7 @@ void btl_state_update_celebration(void) {
                     hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[2][3];
-                    hud_element_set_script(id, &D_802AAA08);
+                    hud_element_set_script(id, &HES_level_up_small_blue_arrow);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x - 3, y + 46);
@@ -826,7 +884,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_alpha(id, 200);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
 
-                D_8029FB48 = id = hud_element_create(&D_802AAA30);
+                D_8029FB48 = id = hud_element_create(&HES_level_up_select_one_to_upgrade);
                 hud_element_set_render_pos(id, 0, 0);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
                 battleStatus->currentSubmenu = 1;
@@ -1002,7 +1060,7 @@ void btl_state_update_celebration(void) {
                         break;
                 }
             }
-            if (D_80284150 == 0xFF) {
+            if (D_80284150 == 255) {
                 gBattleState2 = BATTLE_STATE2_UNK_B;
                 break;
             }
@@ -1084,7 +1142,7 @@ void btl_state_update_celebration(void) {
                     partner->currentPos.x += 4.0f;
                 }
             }
-            if (D_80284150 == 0xFF) {
+            if (D_80284150 == 255) {
                 gBattleState2 = BATTLE_STATE2_UNK_16;
                 break;
             }
@@ -1219,8 +1277,8 @@ void btl_state_draw_celebration(void) {
                     }
 
                     id = D_8029FA80[0];
-                    if (hud_element_get_script(id) != &D_802A9F34) {
-                        hud_element_set_script(id, &D_802A9F34);
+                    if (hud_element_get_script(id) != &HES_level_up_heart_copy) {
+                        hud_element_set_script(id, &HES_level_up_heart_copy);
                     }
                     id = D_8029FA80[3];
                     if (hud_element_get_script(id) != &HES_level_up_leaves) {

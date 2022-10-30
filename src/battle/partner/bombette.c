@@ -6,6 +6,8 @@
 #include "battle/action_cmd/bomb.h"
 #include "battle/action_cmd/body_slam.h"
 
+#define NAMESPACE battle_partner_bombette
+
 extern EvtScript N(init_80238780);
 extern EvtScript N(takeTurn_80239AB8);
 extern EvtScript N(idle_802387E0);
