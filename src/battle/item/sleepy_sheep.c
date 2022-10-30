@@ -6,6 +6,10 @@
 
 #include "ItemRefund.inc.c"
 
+void virtual_entity_set_pos(s32, s32, s32, s32);
+void virtual_entity_set_scale(s32, f32, f32, f32);
+void virtual_entity_delete_by_index(s32);
+
 #ifdef NON_EQUIVALENT
 
 extern Vec3f D_802A3F88;
@@ -39,10 +43,6 @@ s32 N(D_802A3F28_721578)[] = {
     0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0,
     0x802A32E0, 0x802A3260
 };
-
-void virtual_entity_set_pos(s32, s32, s32, s32);
-void virtual_entity_set_scale(s32, f32, f32, f32);
-void virtual_entity_delete_by_index(s32);
 
 ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
     s32 i;

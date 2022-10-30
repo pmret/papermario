@@ -802,32 +802,28 @@ s32 calc_partner_damage_enemy(void) {
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    ActorMovement* state = &partner->state;
+    ActorState* state;
+    s32 hpChange;
     s32 flagCheck;
-    s32 temp_a1;
-    s16 temp_v1;
 
     battleStatus->currentAttackDamage = damageAmount;
     partner->currentHP = 127;
-    temp_v1 = partner->hpChangeCounter + damageAmount;
-    temp_a1 = temp_v1;
     partner->hpChangeCounter += damageAmount;
-    partner->hpChangeCounter -= temp_a1;
-    partner->damageCounter += temp_a1;
+    hpChange = partner->hpChangeCounter;
+    partner->hpChangeCounter -= hpChange;
+    partner->damageCounter += hpChange;
     battleStatus->lastAttackDamage = 0;
-    partner->currentHP -= temp_a1;
-
+    partner->currentHP -= hpChange;
+    state = &partner->state;
     if (partner->currentHP <= 0) {
+        event = EVENT_DEATH;
         battleStatus->lastAttackDamage += partner->currentHP;
         partner->currentHP = 0;
-        event = 0x20;
     }
-
-    battleStatus->lastAttackDamage += temp_a1;
+    battleStatus->lastAttackDamage += hpChange;
     partner->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
-
-    if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (event == 0x9) {
             event = 0xA;
         }
@@ -857,7 +853,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
 
     partner->flags |= 0x80000;
 
-    flagCheck = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40))) != 0;
+    flagCheck = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;
     dispatch_event_partner(event);
     return flagCheck;
 }

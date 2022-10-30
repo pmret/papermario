@@ -6,6 +6,7 @@
 #include "sparkle_script.h"
 #include "item_entity.h"
 #include "message_ids.h"
+#include "nu/nusys.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -16,6 +17,8 @@ typedef struct Rect {
     /* 0x0C */ s32 lry;
 } Rect; // size = 0x10
 
+s32* gItemEntityScripts[];
+
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
@@ -24,6 +27,9 @@ extern Lights1 D_8014C6C8;
 
 extern HudCacheEntry* gHudElementCacheTableRaster;
 extern HudCacheEntry* gHudElementCacheTablePalette;
+
+extern u8* gHudElementCacheBuffer;
+extern s32* gHudElementCacheSize;
 
 extern s32 ItemEntitiesCreated;
 extern s32 D_80155D80;
@@ -766,6 +772,7 @@ void init_item_entity_list(void) {
     ItemEntityAlternatingSpawn = 0;
 }
 
+void item_entity_load(ItemEntity* item);
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
