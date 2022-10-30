@@ -2667,7 +2667,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
     BattleStatus* battleStatus = &gBattleStatus;
     PopupMessage* popup;
     Message* message;
-    void** sp10;
+    EntityModelScript** sp10;
     f32 var_f20;
     f32 var_f22;
     f32* f1;
@@ -2724,7 +2724,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
         for (i = 0; i < numMessages; i++, message++) {
             sp10 = &D_80283744[numMessages];
             message->unk_00 = 1;
-            message->unk_04 = load_entity_model(*sp10);
+            message->unk_04 = load_entity_model(**sp10);
             set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAGS_HIDDEN);
             bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
             message->pos.x = x;
