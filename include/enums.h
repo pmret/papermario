@@ -1465,6 +1465,21 @@ enum SoundInstanceFlags {
     SOUND_INSTANCE_FLAG_4           = 0x00000004,
 };
 
+enum SoundSpatializationFlags {
+    SOUND_SPACE_MODE_MASK           = 0x0000FFFF,
+    SOUND_SPACE_MODE_0              = 0x00000000,
+    SOUND_SPACE_MODE_1              = 0x00000001,
+    SOUND_SPACE_FULL                = 0x00000002,
+    SOUND_SPACE_PARAMS_MASK         = 0xFFFF0000,
+    SOUND_PARAM_MUTE                = 0x00010000,
+    SOUND_PARAM_CLIP_OFFSCREEN_ANY  = 0x00020000,
+    SOUND_PARAM_CLIP_OFFSCREEN_X    = 0x00040000,
+    SOUND_PARAM_CLIP_OFFSCREEN_Y    = 0x00080000,
+    SOUND_PARAM_MOST_QUIET          = 0x00100000,
+    SOUND_PARAM_MORE_QUIET          = 0x00200000,
+    SOUND_PARAM_QUIET               = 0x00400000,
+};
+
 enum SoundType {
     SOUND_TYPE_SPECIAL              = 0x80000000,
     SOUND_TYPE_LOOPING              = 0,
@@ -2658,6 +2673,8 @@ enum VisibilityGroup {
     VIS_GROUP_1             = 1,
     VIS_GROUP_2             = 2,
     VIS_GROUP_3             = 3,
+    VIS_GROUP_4             = 4,
+    VIS_GROUP_5             = 5,
 };
 
 enum ItemSpawnModes {

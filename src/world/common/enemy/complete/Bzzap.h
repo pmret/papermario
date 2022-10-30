@@ -8,6 +8,20 @@
     .flowerDrops = NO_DROPS, \
 }
 
+#define BZZAP_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .itemDropChance = 15, \
+    .itemDrops = { \
+        { ITEM_MAPLE_SYRUP, 6, 0 }, \
+        { ITEM_HONEY_SYRUP, 4, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(3), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 1, \
+    .maxCoinBonus = 4, \
+}
+
 #define BZZAP_ANIMS \
 { \
     .idle   = ANIM_Bzzap_Anim02, \

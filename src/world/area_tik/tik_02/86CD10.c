@@ -1,6 +1,6 @@
 #include "tik_02.h"
 
-#include "world/common/todo/UnkPosFunc2.inc.c"
+#include "world/common/todo/CheckDripCollisionWithNPC.inc.c"
 
 extern s16 D_80241BAE_86E2EE[0][2]; // length unk
 

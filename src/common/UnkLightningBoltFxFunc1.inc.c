@@ -54,13 +54,13 @@ ApiStatus N(UnkLightningBoltFxFunc1)(Evt* script, s32 isInitialCall) {
         f32 x = effectState->pos.x + cos_deg(effectState->yaw) * effectState->radius;
         f32 z = effectState->pos.z + sin_deg(effectState->yaw) * effectState->radius;
 
-        effectState->effect->data.lightningBolt->unk_04 = x;
-        effectState->effect->data.lightningBolt->unk_10 = x;
-        effectState->effect->data.lightningBolt->unk_1C = x;
+        effectState->effect->data.lightningBolt->tipPos.x = x;
+        effectState->effect->data.lightningBolt->startPos.x = x;
+        effectState->effect->data.lightningBolt->endPos.x = x;
 
-        effectState->effect->data.lightningBolt->unk_0C = z;
-        effectState->effect->data.lightningBolt->unk_18 = z;
-        effectState->effect->data.lightningBolt->unk_24 = z;
+        effectState->effect->data.lightningBolt->tipPos.z = z;
+        effectState->effect->data.lightningBolt->startPos.z = z;
+        effectState->effect->data.lightningBolt->endPos.z = z;
 
         if (effectState->duration > 10) {
             effectState->radius += 1.5;

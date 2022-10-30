@@ -31,7 +31,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F54_DE33E4);
 
-extern s32 flo_10_npcSettings_80243220[];
+extern s32 omo_13_80243220[];
 
 ApiStatus func_80240F8C_DE341C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -40,13 +40,13 @@ ApiStatus func_80240F8C_DE341C(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            flo_10_npcSettings_80243220[i] = ptr[i];
+            omo_13_80243220[i] = ptr[i];
         }
-        flo_10_npcSettings_80243220[i] = 0;
+        omo_13_80243220[i] = 0;
     } else {
         for (i = 0; i < 91; i++) {
-            flo_10_npcSettings_80243220[i] = i + 128;
-            flo_10_npcSettings_80243220[91] = 0;
+            omo_13_80243220[i] = i + 128;
+            omo_13_80243220[91] = 0;
         }
     }
     return ApiStatus_DONE2;

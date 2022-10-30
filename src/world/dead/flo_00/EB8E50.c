@@ -11,6 +11,6 @@ const char ascii_EC2030[] = "flo_08";
 static const f64 rodata_alignment = 0.0;
 
 ApiStatus func_80240000_EB8E50(void) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

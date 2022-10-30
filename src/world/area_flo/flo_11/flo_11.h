@@ -2,16 +2,28 @@
 /// @brief Flower Fields - (West) Maze
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_11_shape.h"
+#include "mapfs/flo_11_hit.h"
+
+enum {
+	NPC_Lakitu_01       = 0,
+	NPC_Lakitu_02       = 1,
+};
+
+enum {
+    MV_LakituAmbushState    = MapVar(0),
+    MV_LakituSearchSync     = MapVar(10),
+    MV_FlyingSoundsScript   = MapVar(11),
+};
+
 #define NAMESPACE flo_11
 
-ApiStatus N(func_802402E0_CBDFB0)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_802430D4);
-extern EvtScript N(80240F1C);
-extern EvtScript N(80242240);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_Scene_LakituAmbush);
+extern NpcGroupList N(DefaultNPCs);

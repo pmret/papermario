@@ -29,7 +29,7 @@ EvtScript N(EVS_SetupMusic) = {
 };
 
 EvtScript N(EVS_PushSong) = {
-    EVT_CALL(PushSong, 130, 0)
+    EVT_CALL(PushSong, SONG_NEW_PARTNER, 0)
     EVT_RETURN
     EVT_END
 };

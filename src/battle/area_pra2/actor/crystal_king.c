@@ -184,12 +184,12 @@ ApiStatus func_802182E4_660A34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    effect->data.lightningBolt->unk_30 = 0xFF;
-    effect->data.lightningBolt->unk_34 = 0xFF;
-    effect->data.lightningBolt->unk_38 = 0xFF;
-    effect->data.lightningBolt->unk_40 = 0xC8;
-    effect->data.lightningBolt->unk_44 = 0xF0;
-    effect->data.lightningBolt->unk_48 = 0xFF;
+    effect->data.lightningBolt->outerColor.r = 255;
+    effect->data.lightningBolt->outerColor.g = 255;
+    effect->data.lightningBolt->outerColor.b = 255;
+    effect->data.lightningBolt->innerColor.r = 200;
+    effect->data.lightningBolt->innerColor.g = 240;
+    effect->data.lightningBolt->innerColor.b = 255;
     return ApiStatus_DONE2;
 }
 

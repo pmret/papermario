@@ -2,27 +2,25 @@
 /// @brief Flower Fields - (SW) Path to Crystal Tree
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_25_shape.h"
+#include "mapfs/flo_25_hit.h"
+
+enum {
+	NPC_GateFlower              = 0,
+	NPC_TuffPuff                = 1,
+	NPC_Bzzap                   = 2,
+};
+
 #define NAMESPACE flo_25
 
-ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CF2BD0)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
-ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
-ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_SetItemEntityPosition)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlowerGuard_MakeItemList)(Evt* script, s32 isInitialCall);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupVines);
 
-extern NpcGroupList N(npcGroupList_80243C5C);
-extern EvtScript N(802446BC);
-extern EvtScript N(80244D0C);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern NpcGroupList N(DefaultNPCs);

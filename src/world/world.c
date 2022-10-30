@@ -295,13 +295,14 @@ MapConfig mac_maps[] = {
 };
 
 /// Toad Town Tunnels
+#include "area_tik/tik.h"
 MapConfig tik_maps[] = {
     { MAP_UNSPLIT(tik_01, 0x80240AE0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_02, 0x802409B0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_03, 0x80240B00), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_04, 0x80240CB0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_05, 0x80240A90), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(tik_06, 0x802409A0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(tik_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_07, 0x80242920), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_08, 0x80240B10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(tik_09, 0x802412D0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
@@ -697,27 +698,28 @@ MapConfig kzn_maps[] = {
 };
 
 /// Flower Fields
+#include "area_flo/flo.h"
 MapConfig flo_maps[] = {
-    { MAP_UNSPLIT(flo_00, 0x80241490), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_03, 0x80240660), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_07, 0x80240760), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_08, 0x80241F00), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_09, 0x80241840), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_10, 0x802414A0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_11, 0x802403A0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_12, 0x80240710), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_13, 0x80243690), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_14, 0x802423B0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_15, 0x80240020), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_16, 0x80242990), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_17, 0x80243240), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_18, 0x802407F0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_19, 0x80240980), .bgName = "sra_bg" },
-    { MAP_UNSPLIT(flo_21, 0x80240D00), .bgName = "sra_bg" },
-    { MAP_UNSPLIT(flo_22, 0x802402A0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_23, 0x80240CF0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_24, 0x802405C0), .bgName = "fla_bg" },
-    { MAP_UNSPLIT(flo_25, 0x802422F0), .bgName = "fla_bg" },
+    { MAP(flo_00), .bgName = "fla_bg" },
+    { MAP(flo_03), .bgName = "fla_bg" },
+    { MAP(flo_07), .bgName = "fla_bg" },
+    { MAP(flo_08), .bgName = "fla_bg" },
+    { MAP(flo_09), .bgName = "fla_bg" },
+    { MAP(flo_10), .bgName = "fla_bg" },
+    { MAP(flo_11), .bgName = "fla_bg" },
+    { MAP(flo_12), .bgName = "fla_bg" },
+    { MAP(flo_13), .bgName = "fla_bg" },
+    { MAP(flo_14), .bgName = "fla_bg" },
+    { MAP(flo_15), .bgName = "fla_bg" },
+    { MAP(flo_16), .bgName = "fla_bg" },
+    { MAP(flo_17), .bgName = "fla_bg" },
+    { MAP(flo_18), .bgName = "fla_bg" },
+    { MAP(flo_19), .bgName = "sra_bg" },
+    { MAP(flo_21), .bgName = "sra_bg" },
+    { MAP(flo_22), .bgName = "fla_bg" },
+    { MAP(flo_23), .bgName = "fla_bg" },
+    { MAP(flo_24), .bgName = "fla_bg" },
+    { MAP(flo_25), .bgName = "fla_bg" },
 };
 
 /// Shiver Region

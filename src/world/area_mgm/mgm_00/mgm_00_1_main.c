@@ -33,15 +33,8 @@ EvtScript N(EVS_GotoMap_JumpAttack) = {
     EVT_END
 };
 
-EvtScript N(EVS_OnEnterPipe_JumpAttack) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_SET(LVarA, mgm_00_ENTRY_1)
-    EVT_SET(LVarB, COLLIDER_deili2)
-    EVT_SET(LVarC, EVT_PTR(N(EVS_GotoMap_JumpAttack)))
-    EVT_EXEC_WAIT(N(EVS_Pipe_ExitVertical))
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_OnEnterPipe_JumpAttack) = EVT_EXIT_PIPE_VERTICAL(
+    mgm_00_ENTRY_1, COLLIDER_deili2, N(EVS_GotoMap_JumpAttack));
 
 EvtScript N(EVS_GotoMap_SmashAttack) = {
     EVT_CALL(GotoMap, EVT_PTR("mgm_02"), mgm_02_ENTRY_0)

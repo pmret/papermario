@@ -111,6 +111,19 @@ typedef struct Color4f {
     /* 0x0C */ f32 a;
 } Color4f; // size = 0x10
 
+typedef struct Color3i {
+    /* 0x00 */ s32 r;
+    /* 0x04 */ s32 g;
+    /* 0x08 */ s32 b;
+} Color3i; // size = 0xC
+
+typedef struct Color4i {
+    /* 0x00 */ s32 r;
+    /* 0x04 */ s32 g;
+    /* 0x08 */ s32 b;
+    /* 0x0C */ s32 a;
+} Color4i; // size = 0x10
+
 typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {

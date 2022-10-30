@@ -8559,13 +8559,12 @@ segments:
     start: 0x876EE0
     vram: 0x80240000
     subsegments:
-    - [0x876EE0, c]
-    - [0x8774D0, c]
-    - [0x877840, data]
-    - [0x8778F0, data]
-    - [0x878F90, data]
-    - [0x879860, data]
-    - [0x879BB0]
+    - [0x876EE0, c, tik_06_0_header]
+    - [0x876EE0, c, tik_06_1_music]
+    - [0x876EE0, c, tik_06_2_main]
+    - [0x8774D0, c, tik_06_3_drips]
+    - [0x877840, c, tik_06_4_entity]
+    - [0x877840]
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code
@@ -12759,9 +12758,13 @@ segments:
     start: 0xC9DF20
     vram: 0x80240000
     subsegments:
-    - [0xC9DF20,       c, C9DF20]
-    - [0xC9DF60,       c, C9DF60]
-    - [0xC9EE30,       c, C9EE30]
+    - [0xC9DF20, c, flo_00_0_header]
+    - [0xC9DF20, c, flo_00_1_music]
+    - [0xC9DF20, c, flo_00_2_main]
+    - [0xC9DF60, c, flo_00_3_npc]
+    - [0xC9EE30, c, flo_00_4_epilogue]
+    - [0xC9EE30, c, flo_00_5_beanstalk]
+    - [0xC9F300, c, flo_00_6_entity]
     - [0xC9F300]
   - name: flo_03
     dir: world/area_flo/flo_03
@@ -12769,8 +12772,12 @@ segments:
     start: 0xCA72A0
     vram: 0x80240000
     subsegments:
-    - [0xCA72A0,       c, CA72A0]
-    - [0xCA72E0,       c, CA72E0]
+    - [0xCA72A0, c, flo_03_0_header]
+    - [0xCA72A0, c, flo_03_1_music]
+    - [0xCA72A0, c, flo_03_2_main]
+    - [0xCA72E0, c, flo_03_3_npc]
+    - [0xCA7690, c, flo_03_4_foliage]
+    - [0xCA78D0, c, flo_03_5_entity]
     - [0xCA78D0]
   - name: flo_07
     dir: world/area_flo/flo_07
@@ -12778,19 +12785,24 @@ segments:
     start: 0xCAC1F0
     vram: 0x80240000
     subsegments:
-    - [0xCAC1F0,       c, CAC1F0]
-    - [0xCAC5D0,       c, CAC5D0]
-    - [0xCAC930]
+    - [0xCAC1F0, c, flo_07_0_header]
+    - [0xCAC1F0, c, flo_07_1_music]
+    - [0xCAC1F0, c, flo_07_2_main]
+    - [0xCAC5D0, c, flo_07_3_npc]
+    - [0xCAC5D0]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
     start: 0xCAED40
     vram: 0x80240000
     subsegments:
-    - [0xCAED40,       c, CAED40]
-    - [0xCAFA80,       c, CAFA80]
-    - [0xCAFAC0,       c, CAFAC0]
-    - [0xCB0B80,       c, CB0B80]
+    - [0xCAED40, c, flo_08_0_header]
+    - [0xCAED40, c, flo_08_1_music]
+    - [0xCAED40, c, flo_08_2_entity]
+    - [0xCAFA80, c, flo_08_3_main]
+    - [0xCAFAC0, c, flo_08_4_npc]
+    - [0xCB0940, c, flo_08_5_foliage]
+    - [0xCB0B80, c, flo_08_6_vines]
     - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09
@@ -12798,10 +12810,12 @@ segments:
     start: 0xCB5000
     vram: 0x80240000
     subsegments:
-    - [0xCB5000,       c, CB5000]
-    - [0xCB5040,       c, CB5040]
-    - [0xCB50E0,       c, CB50E0]
-    - [0xCB5320,       c, CB5320]
+    - [0xCB5000, c, flo_09_0_header]
+    - [0xCB5000, c, flo_09_1_music]
+    - [0xCB5000, c, flo_09_2_main]
+    - [0xCB5040, c, flo_09_3_vines]
+    - [0xCB50E0, c, flo_09_4_foliage]
+    - [0xCB5320, c, flo_09_5_npc]
     - [0xCB6820]
   - name: flo_10
     dir: world/area_flo/flo_10
@@ -12809,11 +12823,14 @@ segments:
     start: 0xCB9200
     vram: 0x80240000
     subsegments:
-    - [0xCB9200,       c, CB9200]
-    - [0xCB9240,       c, CB9240]
-    - [0xCB9280,       c, CB9280]
-    - [0xCB96B0,       c, CB96B0]
-    - [0xCBA430,       c, CBA430]
+    - [0xCB9200, c, flo_10_0_header]
+    - [0xCB9240, c, flo_10_1_music]
+    - [0xCB9240, c, flo_10_2_entity]
+    - [0xCB9240, c, flo_10_3_main]
+    - [0xCB9280, c, flo_10_4_fountain]
+    - [0xCB96B0, c, flo_10_5_npc]
+    - [0xCB96B0, c, flo_10_6_waterfx]
+    - [0xCBA430, c, flo_10_7_foliage]
     - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11
@@ -12821,7 +12838,11 @@ segments:
     start: 0xCBDCD0
     vram: 0x80240000
     subsegments:
-    - [0xCBDCD0,       c, CBDCD0]
+    - [0xCBDCD0, c, flo_11_0_header]
+    - [0xCBDCD0, c, flo_11_1_music]
+    - [0xCBDCD0, c, flo_11_2_main]
+    - [0xCBDFF0, c, flo_11_3_npc]
+    - [0xCBDFF0, c, flo_11_4_entity]
     - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
@@ -12829,8 +12850,10 @@ segments:
     start: 0xCC0E30
     vram: 0x80240000
     subsegments:
-    - [0xCC0E30,       c, CC0E30]
-    - [0xCC0E70,       c, CC0E70]
+    - [0xCC0E30, c, flo_12_0_header]
+    - [0xCC0E30, c, flo_12_1_music]
+    - [0xCC0E30, c, flo_12_2_main]
+    - [0xCC0E70, c, flo_12_3_npc]
     - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
@@ -12838,9 +12861,12 @@ segments:
     start: 0xCC3810
     vram: 0x80240000
     subsegments:
-    - [0xCC3810,       c, CC3810]
-    - [0xCC3850,       c, CC3850]
-    - [0xCC6DE0,       c, CC6DE0]
+    - [0xCC3810, c, flo_13_0_header]
+    - [0xCC3810, c, flo_13_1_music]
+    - [0xCC3810, c, flo_13_2_entity]
+    - [0xCC3810, c, flo_13_3_main]
+    - [0xCC3850, c, flo_13_4_npc]
+    - [0xCC6DE0, c, flo_13_5_new_party]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
@@ -12848,9 +12874,13 @@ segments:
     start: 0xCCB310
     vram: 0x80240000
     subsegments:
-    - [0xCCB310,       c, CCB310]
-    - [0xCCBE20,       c, CCBE20]
-    - [0xCCD670,       c, CCD670]
+    - [0xCCB310, c, flo_14_0_header]
+    - [0xCCB310, c, flo_14_1_music]
+    - [0xCCB310, c, flo_14_2_main]
+    - [0xCCB650, c, flo_14_3_bubbles]
+    - [0xCCBE20, c, flo_14_4_npc]
+    - [0xCCD670, c, flo_14_5_entity]
+    - [0xCCD670, c, flo_14_6_logs]
     - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15
@@ -12858,7 +12888,12 @@ segments:
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
-    - [0xCD06C0,       c, CD06C0]
+    - [0xCD06C0, c, flo_15_0_header]
+    - [0xCD06C0, c, flo_15_1_music]
+    - [0xCD06C0, c, flo_15_2_main]
+    - [0xCD06C0, c, flo_15_3_npc]
+    - [0xCD06C0, c, flo_15_4_entity]
+    - [0xCD06C0, c, flo_15_5_stairs]
     - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
@@ -12866,11 +12901,13 @@ segments:
     start: 0xCD1E30
     vram: 0x80240000
     subsegments:
-    - [0xCD1E30,       c, CD1E30]
-    - [0xCD1E70,       c, CD1E70]
-    - [0xCD1F10,       c, CD1F10]
-    - [0xCD2C80,       c, CD2C80]
-    - [0xCD4770,       c, CD4770]
+    - [0xCD1E30, c, flo_16_0_header]
+    - [0xCD1E30, c, flo_16_1_music]
+    - [0xCD1E30, c, flo_16_2_main]
+    - [0xCD1E70, c, flo_16_3_vines]
+    - [0xCD1F10, c, flo_16_4_entity]
+    - [0xCD2C80, c, flo_16_5_npc]
+    - [0xCD4770, c, flo_16_6_puzzle]
     - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
@@ -12878,9 +12915,12 @@ segments:
     start: 0xCD72E0
     vram: 0x80240000
     subsegments:
-    - [0xCD72E0,       c, CD72E0]
-    - [0xCD7320,       c, CD7320]
-    - [0xCD7350,       c, CD7350]
+    - [0xCD72E0, c, flo_17_0_header]
+    - [0xCD72E0, c, flo_17_1_music]
+    - [0xCD72E0, c, flo_17_2_main]
+    - [0xCD7320, c, flo_17_3_logs]
+    - [0xCD7350, c, flo_17_4_npc]
+    - [0xCDA500, c, flo_17_5_entity]
     - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18
@@ -12888,9 +12928,12 @@ segments:
     start: 0xCDC6A0
     vram: 0x80240000
     subsegments:
-    - [0xCDC6A0,       c, CDC6A0]
-    - [0xCDCBD0,       c, CDCBD0]
-    - [0xCDCC30,       c, CDCC30]
+    - [0xCDC6A0, c, flo_18_0_header]
+    - [0xCDC6A0, c, flo_18_1_music]
+    - [0xCDC6A0, c, flo_18_2_main]
+    - [0xCDC9E0, c, flo_18_3_machine]
+    - [0xCDCBD0, c, flo_18_4_npc]
+    - [0xCDCC30, c, flo_18_5_foliage]
     - [0xCDCE70]
   - name: flo_19
     dir: world/area_flo/flo_19
@@ -12898,7 +12941,12 @@ segments:
     start: 0xCE36F0
     vram: 0x80240000
     subsegments:
-    - [0xCE36F0,       c, CE36F0]
+    - [0xCE36F0, c, flo_19_0_header]
+    - [0xCE36F0, c, flo_19_1_music]
+    - [0xCE36F0, c, flo_19_2_entity]
+    - [0xCE36F0, c, flo_19_3_main]
+    - [0xCE3A30, c, flo_19_4_clouds]
+    - [0xCE3BC0, c, flo_19_5_beanstalk]
     - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
@@ -12906,8 +12954,11 @@ segments:
     start: 0xCE6700
     vram: 0x80240000
     subsegments:
-    - [0xCE6700,       c, CE6700]
-    - [0xCE7240,       c, CE7240]
+    - [0xCE6700, c, flo_21_0_header]
+    - [0xCE6700, c, flo_21_1_music]
+    - [0xCE6700, c, flo_21_2_main]
+    - [0xCE7240, c, flo_21_3_clouds]
+    - [0xCE73D0, c, flo_21_4_npc]
     - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22
@@ -12915,9 +12966,12 @@ segments:
     start: 0xCEC240
     vram: 0x80240000
     subsegments:
-    - [0xCEC240,       c, CEC240]
-    - [0xCEC280,       c, CEC280]
-    - [0xCEC290,       c, CEC290]
+    - [0xCEC240, c, flo_22_0_header]
+    - [0xCEC240, c, flo_22_1_music]
+    - [0xCEC240, c, flo_22_2_main]
+    - [0xCEC280, c, flo_22_3_npc]
+    - [0xCEC280, c, flo_22_4_well]
+    - [0xCEC290, c, flo_22_5_foliage]
     - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
@@ -12925,8 +12979,11 @@ segments:
     start: 0xCEE260
     vram: 0x80240000
     subsegments:
-    - [0xCEE260,       c, CEE260]
-    - [0xCEE2A0,       c, CEE2A0]
+    - [0xCEE260, c, flo_23_0_header]
+    - [0xCEE260, c, flo_23_1_music]
+    - [0xCEE260, c, flo_23_2_main]
+    - [0xCEE2A0, c, flo_23_3_npc]
+    - [0xCEEF30, c, flo_23_4_entity]
     - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24
@@ -12934,9 +12991,12 @@ segments:
     start: 0xCF0940
     vram: 0x80240000
     subsegments:
-    - [0xCF0940,       c, CF0940]
-    - [0xCF0980,       c, CF0980]
-    - [0xCF0BC0,       c, CF0BC0]
+    - [0xCF0940, c, flo_24_0_header]
+    - [0xCF0940, c, flo_24_1_music]
+    - [0xCF0940, c, flo_24_2_main]
+    - [0xCF0980, c, flo_24_3_foliage]
+    - [0xCF0BC0, c, flo_24_4_water]
+    - [0xCF0ED0, c, flo_24_5_entity]
     - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
@@ -12944,10 +13004,13 @@ segments:
     start: 0xCF2BD0
     vram: 0x80240000
     subsegments:
-    - [0xCF2BD0,       c, CF2BD0]
-    - [0xCF2C10,       c, CF2C10]
-    - [0xCF4BC0,       c, CF4BC0]
-    - [0xCF4E00,       c, CF4E00]
+    - [0xCF2BD0, c, flo_25_0_header]
+    - [0xCF2BD0, c, flo_25_1_music]
+    - [0xCF2BD0, c, flo_25_2_main]
+    - [0xCF2C10, c, flo_25_3_npc]
+    - [0xCF4BC0, c, flo_25_4_entity]
+    - [0xCF4BC0, c, flo_25_5_foliage]
+    - [0xCF4E00, c, flo_25_6_vine]
     - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01

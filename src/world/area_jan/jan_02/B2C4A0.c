@@ -29,6 +29,6 @@ ApiStatus func_80240360_B2C7D0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802403F8_B2C868(Evt* script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

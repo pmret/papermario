@@ -2,6 +2,16 @@
 #include "npc.h"
 #include "effects.h"
 
+// seems to be a macro in the original based on usage
+#define EVT_SPIRIT_ADJUST_CAM(pitch) \
+    EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1) \
+    EVT_SUB(LVar1, 100) \
+    EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1) \
+    EVT_IF_NE(pitch, 10000) \
+        EVT_CALL(GetCamPitch, CAM_DEFAULT, LVar2, LVar3) \
+        EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar2, pitch) \
+    EVT_END_IF
+
 ApiStatus N(StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall) {
     StarSpiritData* ptr = script->varTablePtr[0];
 
