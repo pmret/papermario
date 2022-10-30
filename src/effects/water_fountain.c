@@ -10,13 +10,77 @@ s32 D_E00B8B58[] = { 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000F000,
 s32 D_E00B8CA4[] = { 0x00000000, 0x00000028, 0x00000037, 0x000000BE, 0x00000014, 0x00000082, 0x0000010E, 0x0000012C, 0x00000000, 0x00000000, 0x00000000 };
 
 void water_fountain_appendGfx(void* effect);
+void water_fountain_init(EffectInstance* effect);
+void water_fountain_update(EffectInstance* effect);
+void water_fountain_render(EffectInstance* effect);
 
-INCLUDE_ASM(s32, "effects/water_fountain", water_fountain_main);
+EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5) {
+    EffectBlueprint effectBp;
+    EffectInstance* effect;
+    WaterFountainFXData* data;
+    s32 numParts = 1;
 
-void water_fountain_init(void) {
+    effectBp.init = water_fountain_init;
+    effectBp.update = water_fountain_update;
+    effectBp.renderWorld = water_fountain_render;
+    effectBp.unk_00 = 0;
+    effectBp.unk_14 = 0;
+    effectBp.effectID = EFFECT_WATER_FOUNTAIN;
+
+    effect = shim_create_effect_instance(&effectBp);
+    effect->numParts = numParts;
+
+    data = effect->data.waterFountain = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(data != NULL);
+
+    data->unk_00 = arg0;
+    data->lifeTime = 0;
+    if (arg5 <= 0) {
+        data->timeLeft = 1000;
+    } else {
+        data->timeLeft = arg5;
+    }
+    data->unk_24 = 255;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->unk_34 = arg4;
+    data->unk_18 = 70;
+    data->unk_1C = 180;
+    data->unk_20 = 255;
+    data->unk_28 = 255;
+    data->unk_2C = 255;
+    data->unk_30 = 255;
+    data->unk_38 = 0;
+    data->unk_3C = 1.0f;
+    data->unk_40 = 1.0f;
+
+    return effect;
 }
 
-INCLUDE_ASM(s32, "effects/water_fountain", water_fountain_update);
+void water_fountain_init(EffectInstance* effect) {
+}
+
+void water_fountain_update(EffectInstance* effect) {
+    WaterFountainFXData* data = effect->data.waterFountain;
+
+    if (effect->flags & 16) {
+        effect->flags &= ~16;
+        data->timeLeft = 16;
+    }
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
+    }
+    data->lifeTime++;
+    if (data->timeLeft < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    if (data->lifeTime < 8) {
+        data->unk_24 = (data->lifeTime * 32) + 31;
+    }
+}
+
 
 void water_fountain_render(EffectInstance* effect) {
     RenderTask renderTask;

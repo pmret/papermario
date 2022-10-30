@@ -2,6 +2,7 @@
 #include "message_ids.h"
 #include "sprite/npc/Bzzap.h"
 #include "sprite/npc/Dayzee.h"
+#include "effects.h"
 
 enum {
     NPC_BZZAP,
@@ -384,8 +385,6 @@ EvtScript N(80241528) = {
 static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
-
-void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
     fx_sun_undeclared(1, 0, 0, 0, 0, 0);

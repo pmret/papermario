@@ -1,5 +1,6 @@
 #include "flo_14.h"
 #include "message_ids.h"
+#include "effects.h"
 
 EntryList N(entryList) = {
     {  720.0f, 0.0f, 0.0f, 270.0f },
@@ -569,8 +570,6 @@ EvtScript N(80243E78) = {
 };
 
 #include "world/common/atomic/TexturePan.inc.c"
-
-void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
     fx_sun_undeclared(0, 0, 0, 0, 0, 0);

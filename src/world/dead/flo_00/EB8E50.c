@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "effects.h"
 
 const char ascii_EC2000[] = "mac_01";
 const char ascii_EC2008[] = "flo_14";
@@ -8,8 +9,6 @@ const char ascii_EC2020[] = "flo_16";
 const char ascii_EC2028[] = "flo_09";
 const char ascii_EC2030[] = "flo_08";
 static const f64 rodata_alignment = 0.0;
-
-void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus func_80240000_EB8E50(void) {
     fx_sun_undeclared(0, 0, 0, 0, 0, 0);

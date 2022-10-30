@@ -12,7 +12,10 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
+ApiStatus func_80240370_8B03E0(Evt* script, s32 isInitialCall) {
+    set_map_change_fade_rate(1);
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);
@@ -30,7 +33,13 @@ static char* N(exit_str_6) = "\0\0\0\0";
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242014_8B2084);
+ApiStatus func_80242014_8B2084(Evt* script, s32 isInitialCall) {
+    if (get_npc_unsafe(NPC_PARTNER)->flags & NPC_FLAG_1000) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
@@ -66,28 +75,108 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242710_8B2780);
+ApiStatus func_80242710_8B2780(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = gPlayerData.curHP == gPlayerData.curMaxHP;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242734_8B27A4);
+extern u8 D_80257B00_8C7B70;
+extern u16 D_80257D00_8C7D70;
+extern MessageImageData D_80258120;
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242788_8B27F8);
+ApiStatus func_80242734_8B27A4(void) {
+    D_80258120.raster = &D_80257B00_8C7B70; // TODO extract image
+    D_80258120.palette = &D_80257D00_8C7D70; // TODO extract pal
+    D_80258120.width = 32; // TOOD image header define
+    D_80258120.height = 32; // TOOD image header define
+    D_80258120.format = G_IM_FMT_CI;
+    D_80258120.bitDepth = 0;
+    set_message_images(&D_80258120);
+    return ApiStatus_DONE1;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427B0_8B2820);
+ApiStatus func_80242788_8B27F8(Evt* script, s32 isInitialCall) {
+    gPlayerData.partners[PARTNER_GOOMPA].enabled = FALSE;
+    func_800EB2A4(0);
+    return ApiStatus_DONE1;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427CC_8B283C);
+ApiStatus func_802427B0_8B2820(Evt* script, s32 isInitialCall) {
+    if (gGameStatusPtr->pressedButtons[0] & BUTTON_START) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427EC_8B285C);
+ApiStatus func_802427CC_8B283C(Evt* script, s32 isInitialCall) {
+    set_game_mode(GAME_MODE_PAUSE);
+    return ApiStatus_DONE1;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024280C_8B287C);
+ApiStatus func_802427EC_8B285C(Evt* script, s32 isInitialCall) {
+    close_status_menu();
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_8024280C_8B287C(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = resolve_npc(script, 0);
+
+    npc->renderYaw += evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 #define UNK_NPC_POS_FUNC_NUM 7
 #include "world/common/todo/UnkNpcPosFunc.inc.c"
 
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
+#ifdef NON_EQUIVALENT
+extern u8 D_80257F20;
+extern u8 D_80257F21;
+extern u8 D_80257F22;
+extern u8 D_80257F23;
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BA8_8B2C18);
+// control flow + data migration
+ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 r = evt_get_variable(script, *args++);
+    s32 g = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 temp_s0_5 = evt_get_variable(script, *args++);
+
+    if (isInitialCall) {
+        get_background_color_blend(&D_80257F20, &D_80257F21, &D_80257F22, &D_80257F23);
+        script->functionTemp[0] = 0;
+    }
+
+    if (temp_s0_5 > 0) {
+        set_background_color_blend(
+            D_80257F20 + (((r - D_80257F20) * script->functionTemp[0]) / temp_s0_5),
+            D_80257F21 + (((g - D_80257F21) * script->functionTemp[0]) / temp_s0_5),
+            D_80257F22 + (((b - D_80257F22) * script->functionTemp[0]) / temp_s0_5),
+            D_80257F23 + (((a - D_80257F23) * script->functionTemp[0]) / temp_s0_5)
+        );
+
+        script->functionTemp[0]++;
+        if (temp_s0_5 < script->functionTemp[0]) {
+            return ApiStatus_BLOCK;
+        }
+    } else {
+        set_background_color_blend(r, g, b, a);
+    }
+    return ApiStatus_DONE2;
+}
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
+#endif
+
+ApiStatus func_80242BA8_8B2C18(Evt* script, s32 isInitialCall) {
+    *gBgRenderTypePtr = 1;
+    return ApiStatus_DONE2;
+}
 
 // will match when preceding bss is worked out
 #ifdef NON_MATCHING
@@ -135,10 +224,23 @@ s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BC0_8B2C30);
 #endif
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F08_8B2F78);
+ApiStatus func_80242F08_8B2F78(Evt* script, s32 isInitialCall) {
+    mdl_set_all_fog_mode(3);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F28_8B2F98);
+ApiStatus func_80242F28_8B2F98(Evt* script, s32 isInitialCall) {
+    func_8011B950(0x9C, -1, 1, 1);
+    set_background_color_blend(0, 0, 0, 255);
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F7C_8B2FEC);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80243034_8B30A4);
+ApiStatus func_80243034_8B30A4(Evt* script, s32 isInitialCall) {
+    get_item_entity(script->varTable[0])->scale = 0.6f;
+    return ApiStatus_DONE2;
+}

@@ -2107,12 +2107,10 @@ void func_8003DA38(Npc* npc, s32 arg1) {
     }
 }
 
-// floats suqqz
-#ifdef NON_EQUIVALENT
 void func_8003DC38(Npc* npc, s32 arg1) {
-    f32 xTemp;
-    f32 zTemp;
-    f32 yTemp;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 xTemp, yTemp, zTemp;
+    f32 xTemp2, yTemp2, zTemp2;
     f32 theta;
     f32 sinTheta;
     f32 cosTheta;
@@ -2127,15 +2125,14 @@ void func_8003DC38(Npc* npc, s32 arg1) {
 
         for (i = 0; i < 4; i++) {
             xTemp = rand_int(10) - 5;
-            yTemp = -2.0f;
             zTemp = rand_int(10) - 5;
-
-            yTemp -= (SQ(xTemp) + SQ(zTemp)) / 5.0f;
+            yTemp = -2.0f - ((SQ(xTemp) + SQ(zTemp)) / 5.0f);
             D_80077C28 = 0;
 
-            theta = DEG_TO_RAD(clamp_angle(-npc->yaw + i * 90));
+            theta = DEG_TO_RAD(clamp_angle(-npc->yaw + (i * 90)));
             sinTheta = sin_rad(theta);
             cosTheta = cos_rad(theta);
+
             fx_cloud_trail(
                 1,
                 npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp,
@@ -2144,11 +2141,10 @@ void func_8003DC38(Npc* npc, s32 arg1) {
             );
         }
     } else {
-        xTemp = rand_int(10) - 5;
-        yTemp = -2.0f;
-        zTemp = rand_int(10) - 5;
+        xTemp2 = rand_int(10) - 5;
+        zTemp2 = rand_int(10) - 5;
+        yTemp2 = -2.0f - ((SQ(xTemp2) + SQ(zTemp2)) / 5.0f);
 
-        yTemp -= (SQ(xTemp) + SQ(zTemp)) / 5.0f;
         D_80077C28 = 0;
 
         theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
@@ -2156,15 +2152,12 @@ void func_8003DC38(Npc* npc, s32 arg1) {
         cosTheta = cos_rad(theta);
         fx_cloud_trail(
             1,
-            npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp,
-            npc->pos.y + 15.5f + yTemp,
-            npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp
+            npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp2,
+            npc->pos.y + 15.5f + yTemp2,
+            npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp2
         );
     }
 }
-#else
-INCLUDE_ASM(s32, "npc", func_8003DC38);
-#endif
 
 void func_8003DFA0(Npc* npc, s32 arg1) {
     if (D_80077C30++ >= 4) {

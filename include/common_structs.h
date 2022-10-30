@@ -1753,13 +1753,17 @@ typedef struct ActorMovement {
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ char unk_24[24];
+    /* 0x24 */ char unk_24[0x18];
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 velocity;
     /* 0x48 */ f32 angle;
     /* 0x4C */ f32 distance;
-} ActorMovement; // size = 0x50;
+    /* 0x50 */ f32 flyElapsed;
+    /* 0x54 */ char unk_11C[4];
+    /* 0x58 */ s16 flyTime;
+    /* 0x5A */ s16 flyArcAmplitude;
+} ActorMovement; // size = 0x5C;
 
 typedef struct ChompChainAnimationState {
     /* 0x00 */ Vec3f currentPos;
@@ -1812,10 +1816,6 @@ typedef struct Actor {
     /* 0x008 */ struct ActorBlueprint* actorBlueprint;
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
-    /* 0x118 */ f32 flyElapsed;
-    /* 0x11C */ char unk_11C[4];
-    /* 0x120 */ s16 flyTime;
-    /* 0x122 */ s16 flyArcAmplitude;
     /* 0x124 */ char unk_124[16];
     /* 0x134 */ u8 unk_134;
     /* 0x135 */ u8 footStepCounter;

@@ -1,3 +1,6 @@
 #include "pra_15.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_15/D69830", func_80240020_D69830);
+ApiStatus func_80240020_D69830(Evt* script, s32 isInitialCall) {
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    return ApiStatus_DONE2;
+}

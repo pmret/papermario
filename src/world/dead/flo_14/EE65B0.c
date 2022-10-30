@@ -1,10 +1,9 @@
 #include "flo_14.h"
+#include "effects.h"
 
 extern f32 D_80243B44_EEA0F4;
 
 #include "world/common/atomic/TexturePan.inc.c"
-
-void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 
 ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
     fx_sun_undeclared(0, 0, 0, 0, 0, 0);

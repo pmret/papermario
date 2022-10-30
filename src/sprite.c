@@ -817,7 +817,9 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
     s32 camRelativeYaw;
     s32 alpha;
     f32 zscale;
+    u32 animIdx;
     PAL_PTR* drawPalettes;
+    SpriteAnimData* animData;
 
     camRelativeYaw = yaw;
     spriteAnimIndex = spriteInstanceID & 0xFF;
@@ -830,12 +832,17 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
 
     spriteIndex = ((animID >> 0x10) & 0xFF) - 1;
     D_802DF57C = spriteIndex;
-    if (spr_playerSprites[spriteIndex] == NULL) {
+    animData = spr_playerSprites[spriteIndex];
+    if (animData == NULL) {
         return 0;
     }
-    rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
-    animList = &spr_playerSprites[spriteIndex]->animListStart[animID & 0xFF];
-    drawPalettes = spr_playerSprites[spriteIndex]->palettesOffset;
+
+    animIdx = animID & 0xFF;
+    animIdx++;
+
+    rasterList = animData->rastersOffset;
+    animList = animData->animListStart[animIdx];
+    drawPalettes = animData->palettesOffset;
     if (animID & SPRITE_ID_BACK_FACING) {
         switch (spriteIndex) {
             case 0:
@@ -843,7 +850,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
             case 9:
                 spriteIndex++;
                 D_802DF57C = spriteIndex;
-                rasterList = spr_playerSprites[spriteIndex]->rastersOffset;
+                rasterList = spr_playerSprites[D_802DF57C]->rastersOffset;
                 break;
         }
     }

@@ -11,9 +11,47 @@ s32 D_E00A8690[] = { D_E00A8648, 0x18000000, D_E00A8678, 0x0C000000 };
 
 void quizmo_audience_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/quizmo_audience", quizmo_audience_main);
+void quizmo_audience_init(EffectInstance* effect);
+void quizmo_audience_update(EffectInstance* effect);
+void quizmo_audience_render(EffectInstance* effect);
 
-void quizmo_audience_init(void) {
+EffectInstance* quizmo_audience_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
+    EffectBlueprint effectBp;
+    EffectInstance* effect;
+    QuizmoAudienceFXData* data;
+    s32 numParts = 1;
+    s32 i;
+
+    effectBp.init = quizmo_audience_init;
+    effectBp.update = quizmo_audience_update;
+    effectBp.renderWorld = quizmo_audience_render;
+    effectBp.unk_00 = 0;
+    effectBp.unk_14 = 0;
+    effectBp.effectID = EFFECT_QUIZMO_AUDIENCE;
+
+    effect = shim_create_effect_instance(&effectBp);
+    effect->numParts = numParts;
+
+    data = effect->data.quizmoAudience = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(data != NULL);
+
+    data->timeLeft = 100;
+    data->unk_00 = arg0;
+    data->unk_18 = 255;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->lifeTime = 0;
+
+    for(i = 0; i < 10; i++) {
+        data->unk_1C[i] = 0;
+        data->unk_BC[i] = data->unk_E4[i] = 0.0f;
+    }
+
+    return effect;
+}
+
+void quizmo_audience_init(EffectInstance* effect) {
 }
 
 INCLUDE_ASM(s32, "effects/quizmo_audience", quizmo_audience_update);
