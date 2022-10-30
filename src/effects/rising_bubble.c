@@ -1,6 +1,22 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000200_356730[];
+extern Gfx D_090002E8_356818[];
+extern Gfx D_09000308_356838[];
+extern Gfx D_090003F0_356920[];
+extern Gfx D_09000410_356940[];
+extern Gfx D_09000430_356960[];
+
+Gfx* D_E0046600[] = { D_090002E8_356818 };
+
+Gfx* D_E0046604[] = {
+    D_090003F0_356920, D_09000410_356940, D_090003F0_356920, D_09000430_356960
+};
+
+Gfx* D_E0046614[] = { D_09000200_356730 };
+Gfx* D_E0046618[] = { D_09000308_356838 };
+
 void rising_bubble_init(EffectInstance* effect);
 void rising_bubble_update(EffectInstance* effect);
 void rising_bubble_render(EffectInstance* effect);
@@ -89,4 +105,49 @@ void rising_bubble_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/rising_bubble", rising_bubble_appendGfx);
+void rising_bubble_appendGfx(void* effect) {
+    RisingBubbleFXData* data = ((EffectInstance*)effect)->data.risingBubble;
+    s32 lifeTime = data->lifeTime;
+    Matrix4f sp20;
+    Matrix4f sp60;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    if (data->pos.y >= data->unk_24) {
+        s32 uls;
+        s32 ult;
+
+        gSPDisplayList(gMasterGfxPos++, D_E0046614[0]);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 127, 127, 127, data->unk_14);
+
+        uls = 0;
+        ult = data->unk_20;
+
+        gDPSetTileSize(gMasterGfxPos++, 1,
+            (uls     ) * 4, (ult     ) * 4,
+            (uls + 32) * 4, (ult + 32) * 4);
+
+        shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+        shim_guScaleF(sp60, data->unk_10, 1.0f, data->unk_10);
+        shim_guMtxCatF(sp60, sp20, sp20);
+    } else {
+        gSPDisplayList(gMasterGfxPos++, D_E0046618[0]);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
+        gDPSetEnvColor(gMasterGfxPos++, 128, 128, 255, data->unk_14);
+
+        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+    }
+
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    if (data->pos.y >= data->unk_24) {
+        gSPDisplayList(gMasterGfxPos++, D_E0046600[0]);
+    } else {
+        gSPDisplayList(gMasterGfxPos++, D_E0046604[(lifeTime >> 1) & 3]);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}

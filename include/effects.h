@@ -484,12 +484,44 @@ typedef struct DustFXData {
 } DustFXData; // size = 0x48
 
 typedef struct ShatteringStonesFXData {
-    /* 0x00 */ char todo[0];
-} ShatteringStonesFXData; // size = unknown
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+} ShatteringStonesFXData; // size = 0x40
 
 typedef struct SmokeRingFXData {
-    /* 0x00 */ char todo[0];
-} SmokeRingFXData; // size = unknown
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[2];
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+} SmokeRingFXData; // size = 0x44
 
 typedef struct DamageStarsFXData {
     /* 0x00 */ s32 unk_00;
@@ -552,8 +584,21 @@ typedef struct SpikyWhiteAuraFXData {
 } SpikyWhiteAuraFXData; // size = 0x30
 
 typedef struct SmokeImpactFXData {
-    /* 0x00 */ char todo[0];
-} SmokeImpactFXData; // size = unknown
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[2];
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+} SmokeImpactFXData; // size = 0x34
 
 typedef struct DamageIndicatorFXData {
     /* 0x00 */ s32 unk_00;
@@ -569,8 +614,28 @@ typedef struct DamageIndicatorFXData {
 } DamageIndicatorFXData; // size = 0x40
 
 typedef struct PurpleRingFXData {
-    /* 0x00 */ char todo[0];
-} PurpleRingFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ Matrix4f unk_1C;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ s32 unk_68;
+    /* 0x6C */ s32 unk_6C;
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ u8 unk_74;
+    /* 0x75 */ u8 unk_75;
+    /* 0x76 */ u8 unk_76;
+    /* 0x77 */ u8 unk_77;
+    /* 0x78 */ u8 unk_78;
+    /* 0x79 */ u8 unk_79;
+    /* 0x7A */ char unk_7A[2];
+} PurpleRingFXData; // size = 0x7C
 
 typedef struct FlameFXData {
     /* 0x00 */ s32 unk_00;
@@ -672,7 +737,7 @@ typedef struct MusicNoteFXData {
 } MusicNoteFXData; // size = 0x34
 
 typedef struct SmokeBurstFXData {
-    /* 0x00 */ s16 unk_00;
+    /* 0x00 */ u16 unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ s32 timeLeft;
@@ -1747,8 +1812,37 @@ typedef struct Effect65FXData {
 } Effect65FXData; // size = 0x324
 
 typedef struct TubbaHeartAttackFXData {
-    /* 0x00 */ char todo[0];
-} TubbaHeartAttackFXData; // size = unknown
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ f32 unk_04;
+    /* 0x008 */ f32 unk_08;
+    /* 0x00C */ f32 unk_0C;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ s32 unk_14;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s32 unk_1C;
+    /* 0x020 */ s32 unk_20;
+    /* 0x024 */ s32 unk_24;
+    /* 0x028 */ f32 unk_28;
+    /* 0x02C */ f32 unk_2C[25];
+    /* 0x090 */ f32 unk_90[25];
+    /* 0x0F4 */ f32 unk_F4[25];
+    /* 0x158 */ f32 unk_158[25];
+    /* 0x1BC */ f32 unk_1BC[25];
+    /* 0x220 */ f32 unk_220[25];
+    /* 0x284 */ f32 unk_284[25];
+    /* 0x2E8 */ f32 unk_2E8[25];
+    /* 0x34C */ f32 unk_34C[25];
+    /* 0x3B0 */ f32 unk_3B0[25];
+    /* 0x414 */ f32 unk_414[25];
+    /* 0x478 */ f32 unk_478[25];
+    /* 0x4DC */ f32 unk_4DC[25];
+    /* 0x540 */ f32 unk_540[25];
+    /* 0x5A4 */ f32 unk_5A4[25];
+    /* 0x608 */ f32 unk_608[25];
+    /* 0x66C */ s32 unk_66C[25];
+    /* 0x6D0 */ s32 unk_6D0[25];
+    /* 0x734 */ s32 unk_734[25];
+} TubbaHeartAttackFXData; // size = 0x798
 
 typedef struct WhirlwindFXData {
     /* 0x00 */ char unk_00[0x4];
@@ -2001,8 +2095,25 @@ typedef struct StaticStatusFXData {
 } StaticStatusFXData; // size = 0x38
 
 typedef struct MovingCloudFXData {
-    /* 0x00 */ char todo[0];
-} MovingCloudFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ f32 unk_44;
+} MovingCloudFXData; // size = 0x48
 
 typedef struct Effect75FXData {
     /* 0x00 */ s32 unk_00;
@@ -2581,7 +2692,7 @@ EffectInstance* fx_shape_spell(s32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* fx_gather_energy_pink(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_drop_leaves(s32, f32, f32, f32, s32);
 EffectInstance* fx_dust(s32, f32, f32, f32, s32);
-EffectInstance* fx_shattering_stones(s32, f32, f32, f32, f32);
+void fx_shattering_stones(s32, f32, f32, f32, f32);
 void fx_smoke_ring(s32, f32, f32, f32);
 void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
 void fx_explosion(s32, f32, f32, f32);
@@ -2639,7 +2750,7 @@ EffectInstance* fx_floating_rock(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* fx_chomp_drop(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
 EffectInstance* fx_quizmo_stage(s32, f32, f32, f32);
 EffectInstance* fx_radiating_energy_orb(s32, f32, f32, f32, f32, s32);
-void fx_quizmo_answer(s32, f32, f32, f32);
+EffectInstance* fx_quizmo_answer(s32, f32, f32, f32);
 EffectInstance* fx_motion_blur_flame(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_energy_orb_wave(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_merlin_house_stars(s32, f32, f32, f32);

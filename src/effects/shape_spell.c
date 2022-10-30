@@ -1,7 +1,28 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E0024CC0[] = { 0x00FFD01A, 0x09001128, 0x090011A0, 0x784DD0FE, 0x09001150, 0x090011C8, 0xF0FE4C6E, 0x09001178, 0x090011F0, 0x00000000, 0x00000000, 0x00000000 };
+typedef struct UnkStruct {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03;
+    /* 0x04 */ Gfx* unk_04;
+    /* 0x08 */ Gfx* unk_08;
+} UnkStruct; // size = 0xC
+
+extern Gfx D_09001080_33AFE0[];
+extern Gfx D_09001128_33B088[];
+extern Gfx D_09001150_33B0B0[];
+extern Gfx D_09001178_33B0D8[];
+extern Gfx D_090011A0_33B100[];
+extern Gfx D_090011C8_33B128[];
+extern Gfx D_090011F0_33B150[];
+
+UnkStruct D_E0024CC0[] = {
+    {   0, 255, 208,  26, D_09001128_33B088, D_090011A0_33B100 },
+    { 120,  77, 208, 254, D_09001150_33B0B0, D_090011C8_33B128 },
+    { 240, 254,  76, 110, D_09001178_33B0D8, D_090011F0_33B150 }
+};
 
 void shape_spell_appendGfx(void* effect);
 void shape_spell_init(EffectInstance* effect);
@@ -126,4 +147,141 @@ s32 func_E00243BC(s32 arg0, s32 arg1) {
     return (f32)((shim_sin_deg(frameCounter + arg1) * -arg0 + -arg0) * 0.5 + arg0);
 }
 
-INCLUDE_ASM(s32, "effects/shape_spell", shape_spell_appendGfx);
+void shape_spell_appendGfx(void* effect) {
+    ShapeSpellFXData* data = ((EffectInstance*)effect)->data.shapeSpell;
+    s32 isChild;
+    Gfx* savedGfxPos2;
+    Gfx* savedGfxPos;
+    f32 unk_28 = data->unk_28;
+    s32 primA;
+    f32 unk_10;
+    f32 unk_14;
+    f32 unk_18;
+    f32 angle;
+    f32 factor;
+    f32 var_f30;
+    s32 timeLeft;
+    Matrix4f sp20;
+    Mtx* sp60[3];
+    Mtx* mtx;
+    s32 i;
+    s32 j;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_09001080_33AFE0);
+
+    savedGfxPos = gMasterGfxPos++;
+    savedGfxPos2 = gMasterGfxPos;
+    isChild = data->isChild;
+    primA = data->unk_34;
+    unk_10 = data->unk_10;
+    unk_14 = data->unk_14;
+    unk_18 = data->unk_18;
+    timeLeft = data->timeLeft;
+
+    if (isChild == 0) {
+        angle = timeLeft * 35;
+        factor = 9.0f;
+        var_f30 = -gCameras[gCurrentCameraID].currentYaw;
+    } else {
+        angle = timeLeft * 25;
+        factor = 6.0f;
+        var_f30 = 0.0f;
+        unk_10 *= unk_28;
+    }
+
+    for (i = 0; i < 3; i++) {
+        if (i > 0) {
+            if (!isChild) {
+                angle -= 70.0f;
+                unk_10 -= 2.0f * data->unk_1C;
+                unk_14 -= 2.0f * data->unk_20;
+                unk_18 -= 2.0f * data->unk_24;
+            } else {
+                angle -= 50.0f;
+                unk_10 -= data->unk_1C * (100.0 / 83) * 2.0;
+            }
+            primA = data->unk_34 * 100 / 255;
+        }
+
+        shim_guPositionF(sp20, 0.0f, var_f30, 0.0f, unk_28, unk_10, unk_14, unk_18);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+        shim_guTranslateF(sp20,
+            shim_sin_deg(angle) * factor,
+            shim_cos_deg(angle) * factor, 0.0f);
+
+        angle += 120.0f;
+        sp60[0] = &gDisplayContext->matrixStack[gMatrixListPos++];
+
+        shim_guMtxF2L(sp20, sp60[0]);
+        shim_guTranslateF(sp20,
+            shim_sin_deg(angle) * factor,
+            shim_cos_deg(angle) * factor, 0.0f);
+
+        angle += 120.0f;
+        sp60[1] = &gDisplayContext->matrixStack[gMatrixListPos++];
+
+        shim_guMtxF2L(sp20, sp60[1]);
+        shim_guTranslateF(sp20,
+            shim_sin_deg(angle) * factor,
+            shim_cos_deg(angle) * factor, 0.0f);
+
+        sp60[2] = &gDisplayContext->matrixStack[gMatrixListPos++];
+
+        shim_guMtxF2L(sp20, sp60[2]);
+
+        for (j = 0; j < 3; j++) {
+            gSPMatrix(gMasterGfxPos++, sp60[j], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+                func_E00243BC(D_E0024CC0[j].unk_01, D_E0024CC0[j].unk_00),
+                func_E00243BC(D_E0024CC0[j].unk_02, D_E0024CC0[j].unk_00),
+                func_E00243BC(D_E0024CC0[j].unk_03, D_E0024CC0[j].unk_00),
+                primA);
+            gDPSetEnvColor(gMasterGfxPos++,
+                func_E0024324(D_E0024CC0[j].unk_01, D_E0024CC0[j].unk_00),
+                func_E0024324(D_E0024CC0[j].unk_02, D_E0024CC0[j].unk_00),
+                func_E0024324(D_E0024CC0[j].unk_03, D_E0024CC0[j].unk_00),
+                255);
+            gSPDisplayList(gMasterGfxPos++, !isChild ?
+                D_E0024CC0[j].unk_04 : D_E0024CC0[j].unk_08);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+
+    gSPEndDisplayList(gMasterGfxPos++);
+    gSPBranchList(savedGfxPos, gMasterGfxPos);
+
+    if (!isChild) {
+        var_f30 = 0.0f;
+    } else {
+        var_f30 = -gCameras[gCurrentCameraID].currentYaw;
+    }
+
+    shim_guPositionF(sp20, 0.0f, var_f30, 0.0f, 1.0f, data->pos.x, data->pos.y, data->pos.z);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    if (!isChild) {
+        gSPDisplayList(gMasterGfxPos++, savedGfxPos2);
+    } else {
+        shim_guRotateF(sp20, 30.0f, 0.0f, 0.0f, 1.0f);
+
+        mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+        shim_guMtxF2L(sp20, mtx);
+
+        for (i = 0; i < 12; i++) {
+            gSPMatrix(gMasterGfxPos++, mtx, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, savedGfxPos2);
+        }
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
