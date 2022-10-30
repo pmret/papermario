@@ -2,19 +2,19 @@
 /// @brief Flower Fields - (SE) Water Level Room
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_24_shape.h"
+#include "mapfs/flo_24_hit.h"
+
 #define NAMESPACE flo_24
 
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CF0940)(Evt* script, s32 isInitialCall);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
 
-extern EvtScript N(80241728);
-extern EvtScript N(8024183C);
-extern EvtScript N(80241ABC);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupWater);
+extern EvtScript N(EVS_Scene_FillWithWater);

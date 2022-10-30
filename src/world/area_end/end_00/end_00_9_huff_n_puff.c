@@ -3,8 +3,6 @@
 
 extern EvtScript N(EVS_SetNpcShadowScale);
 
-API_CALLABLE(N(AddScrollToNpcPos));
-
 EvtScript N(EVS_HoldPosition_Yoshis) = {
     EVT_CALL(GetNpcPos, NPC_YoshiKidGreen, LVar0, LVar1, LVar2)
     EVT_SETF(LVar0, LVar0)

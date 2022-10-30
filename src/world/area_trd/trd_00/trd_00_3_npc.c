@@ -4,11 +4,9 @@
 extern EvtScript N(EVS_SetupMusic);
 
 API_CALLABLE(N(UpgradeStarPower)) {
-    PlayerData* playerData = &gPlayerData;
-
     set_max_SP(1);
-    playerData->curHP = playerData->curMaxHP;
-    playerData->curFP = playerData->curMaxFP;
+    gPlayerData.curHP = gPlayerData.curMaxHP;
+    gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_menu();
     return ApiStatus_DONE2;
 }

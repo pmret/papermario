@@ -1378,7 +1378,7 @@ GameFlag(1376) GF_FLO10_ShowedLilyTheWaterStone
 GameFlag(1377) GF_FLO11_Defeated_Lakitus
 GameFlag(1378) GF_FLO12_Met_Rosie
 GameFlag(1379) GF_FLO12_RosieRequestedSomethingBeautiful
-GameFlag(1380) GF_Unused_FLO_12
+GameFlag(1380) GF_FLO12_HeldItemPickup
 GameFlag(1381) GF_FLO08_Item_StarPiece
 GameFlag(1382) GF_FLO09_Item_HappyFlowerB
 GameFlag(1383) GF_FLO10_Tree1_JamminJelly

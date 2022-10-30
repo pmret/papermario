@@ -966,6 +966,7 @@ enum {
     flo_00_ENTRY_8   = 8,
     flo_00_ENTRY_9   = 9,
     flo_00_ENTRY_A   = 10,
+    flo_00_ENTRY_B   = 11,
     flo_03_ENTRY_0   = 0,
     flo_03_ENTRY_1   = 1,
     flo_03_ENTRY_2   = 2,

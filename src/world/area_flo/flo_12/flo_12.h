@@ -2,19 +2,23 @@
 /// @brief Flower Fields - (West) Rosie's Trellis
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_12_shape.h"
+#include "mapfs/flo_12_hit.h"
+
+enum {
+	NPC_Rosie		= 0,
+	NPC_Dummy		= 1,
+};
+
 #define NAMESPACE flo_12
 
-ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240000_CC0E30)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_802429B8);
-extern EvtScript N(802419F4);
-extern EvtScript N(main);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_PushFlowerSong);
+extern EvtScript N(EVS_PopMusic);
+extern EvtScript N(EVS_Scene_SunReturns);
+extern NpcGroupList N(DefaultNPCs);

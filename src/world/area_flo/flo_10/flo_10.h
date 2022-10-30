@@ -2,25 +2,31 @@
 /// @brief Flower Fields - (SE) Lily's Fountain
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_10_shape.h"
+#include "mapfs/flo_10_hit.h"
+
+enum {
+	NPC_Lily                    = 0,
+};
+
 #define NAMESPACE flo_10
 
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
-s32 N(get_tattle)(void);
-ApiStatus N(func_80240040_CB9240)(Evt* script, s32 isInitialCall);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_PushFlowerSong);
+extern EvtScript N(EVS_PopSong);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_SetupFountain);
+extern EvtScript N(EVS_SetupWaterStoneSocket);
+extern EvtScript N(EVS_SetupWaterEffect);
 
-extern s32 N(D_80244070_CBD270);
-extern s32** N(varStash);
-extern NpcGroupList N(npcGroupList_80244054);
-extern EvtScript N(802427EC);
-extern EvtScript N(80242AE8);
-extern EvtScript N(8024324C);
-extern EvtScript N(802435F8);
-extern EvtScript N(80244074);
-extern EvtScript N(80244A50);
-extern EvtScript N(main);
+extern EvtScript N(EVS_Scene_ReleaseFountain);
+extern EvtScript N(EVS_Scene_PostReleaseFountain);
+extern EvtScript N(EVS_Scene_SunReturns);
+
+extern NpcGroupList N(DefaultNPCs);

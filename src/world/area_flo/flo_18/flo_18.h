@@ -2,23 +2,39 @@
 /// @brief Flower Fields - (NE) Puff Puff Machine
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_18_shape.h"
+#include "mapfs/flo_18_hit.h"
+
+#include "sprite/npc/WorldLakilester.h"
+
+enum {
+	NPC_Lakitu_01         	= 0,
+	NPC_Lakitu_02         	= 1,
+	NPC_Lakitu_03         	= 2,
+	NPC_Magikoopa         	= 3,
+	NPC_FlyingMagikoopa   	= 4,
+};
+
+enum {
+	MF_HitGuardedMachine	= MapFlag(1),
+	MF_MachineShaking		= MapFlag(2),
+	MF_MachineBeingDamaged	= MapFlag(3),
+};
+
+enum {
+	MV_ReactingNpc			= MapVar(10),
+};
+
 #define NAMESPACE flo_18
 
-ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
-ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
-ApiStatus N(CosInterpMinMax)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_8024669C);
-extern EvtScript N(802436BC);
-extern EvtScript N(80244058);
-extern EvtScript N(802456D4);
-extern EvtScript N(80247024);
-extern EvtScript N(main);
-extern EvtScript N(unkFloatFunc);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupMachine);
+extern EvtScript N(EVS_SetupMachineDamageReactions);
+extern EvtScript N(EVS_Scene_LakilesterLikesBeingGood);
+extern NpcGroupList N(DefaultNPCs);

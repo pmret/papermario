@@ -188,13 +188,13 @@ ApiStatus N(MakeLightnings)(Evt* script, s32 isInitialCall) {
         s32 y1 = cos_deg(angle) * 200.0f + y;
         s32 z1 = z + 20;
         EffectInstance* effect = fx_lightning_bolt(1, x, y, z, x1, y1, z1, scale, 11);
-        s32 temp1 = rand_int(256);
-        s32 temp2 = rand_int(256);
-        s32 temp3 = rand_int(256);
+        s32 r = rand_int(256);
+        s32 g = rand_int(256);
+        s32 b = rand_int(256);
 
-        effect->data.lightningBolt->unk_30 = temp1;
-        effect->data.lightningBolt->unk_34 = temp2;
-        effect->data.lightningBolt->unk_38 = temp3;
+        effect->data.lightningBolt->outerColor.r = r;
+        effect->data.lightningBolt->outerColor.g = g;
+        effect->data.lightningBolt->outerColor.b = b;
     }
     return ApiStatus_DONE2;
 }

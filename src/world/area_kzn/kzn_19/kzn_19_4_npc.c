@@ -401,7 +401,7 @@ EvtScript N(EVS_Kolorado_Escape) = {
     EVT_CALL(SetNpcAux, NPC_LavaPiranhaHead, 0)
     EVT_WAIT(10)
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_EXEC(N(EVS_TryingSpawningStarCard))
+    EVT_EXEC(N(EVS_TrySpawningStarCard))
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

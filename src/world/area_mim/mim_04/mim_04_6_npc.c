@@ -84,8 +84,8 @@ StaticNpc N(NpcData_Bubulb) = {
     .yaw = 270,
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
     .init = &N(EVS_NpcInit_Bubulb),
-    .drops = BULBULB_DROPS,
-    .animations = BULBULB_GREEN_ANIMS,
+    .drops = BUBULB_DROPS,
+    .animations = BUBULB_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MIM_Bubulb_Revealed,
 };
 

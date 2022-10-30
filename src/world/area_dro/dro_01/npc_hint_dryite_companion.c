@@ -4,21 +4,21 @@ API_CALLABLE(N(GetRunToPos)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_safe(script->owner2.npcID);
     s32 rand;
-    f32 temp_f22;
-    f32 temp_f24;
+    f32 npcAngle;
+    f32 angle;
 
-    temp_f24 = atan2(183.0f, -75.0f, playerStatus->position.x, playerStatus->position.z);
-    temp_f22 = atan2(183.0f, -75.0f, npc->pos.x, npc->pos.z);
-    temp_f24 = get_clamped_angle_diff(temp_f22, temp_f24);
+    angle = atan2(183.0f, -75.0f, playerStatus->position.x, playerStatus->position.z);
+    npcAngle = atan2(183.0f, -75.0f, npc->pos.x, npc->pos.z);
+    angle = get_clamped_angle_diff(npcAngle, angle);
     rand = rand_int(10) + 30;
-    if (temp_f24 < 0.0f) {
-        temp_f22 += rand;
+    if (angle < 0.0f) {
+        npcAngle += rand;
     } else {
-        temp_f22 -= rand;
+        npcAngle -= rand;
     }
     rand = rand_int(20) + 30;
-    script->varTable[0] = 183.0f + (sin_deg(temp_f22) * rand);
-    script->varTable[1] = -75.0f - (cos_deg(temp_f22) * rand);
+    script->varTable[0] = 183.0f + (sin_deg(npcAngle) * rand);
+    script->varTable[1] = -75.0f - (cos_deg(npcAngle) * rand);
 
     return ApiStatus_DONE2;
 }

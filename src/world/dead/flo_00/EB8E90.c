@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 
-ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
+ApiStatus N(UpgradeStarPower)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(6);

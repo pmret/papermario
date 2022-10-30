@@ -1,11 +1,10 @@
 #include "flo_11.h"
+#include "effects.h"
 
 #include "world/common/entity/Pipe.inc.c"
 
-void fx_sun(s32, s32, s32, s32, s32, s32);
-
 ApiStatus func_80240318_ED9138(Evt* script, s32 isInitialCall) {
-    fx_sun(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

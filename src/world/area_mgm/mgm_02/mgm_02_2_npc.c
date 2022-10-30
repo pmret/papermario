@@ -1764,7 +1764,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, 355, 30, -180)
     EVT_END_THREAD
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-    EVT_CALL(PushSong, 133, 0)
+    EVT_CALL(PushSong, SONG_PLAYROOM, 0)
     EVT_WAIT(8)
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(EnablePartnerAI)

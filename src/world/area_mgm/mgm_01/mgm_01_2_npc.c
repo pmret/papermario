@@ -987,7 +987,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_CALL(N(CreateBlockEntities))
         EVT_WAIT(10)
         EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-        EVT_CALL(PushSong, 133, 0)
+        EVT_CALL(PushSong, SONG_PLAYROOM, 0)
         EVT_WAIT(10)
         EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
         EVT_CALL(N(DisableMenus))

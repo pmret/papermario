@@ -216,12 +216,12 @@ ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall) {
 ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
-    s32 value2 = evt_get_variable(script, *args++);
+    s32 flags = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
 
-    sfx_play_sound_at_position(soundID, value2, x, y, z);
+    sfx_play_sound_at_position(soundID, flags, x, y, z);
     return ApiStatus_DONE2;
 }
 
