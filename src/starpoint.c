@@ -5,8 +5,7 @@ Lights1 starpoint_lights1 = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 #include "starpoint/starpoint.png.inc.c"
 #include "starpoint/load_starpoint.gfx.inc.c"
 #include "starpoint/starpoint.vtx.inc.c"
-Gfx D_802A20D0_7A9A70[] =
-{
+Gfx D_802A20D0_7A9A70[] = {
     gsSPSetLights1(starpoint_lights1),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -18,14 +17,12 @@ Gfx D_802A20D0_7A9A70[] =
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
-Gfx D_802A2130_7A9AD0[] =
-{
+Gfx D_802A2130_7A9AD0[] = {
     gsSPSetLights1(starpoint_lights1),
     gsSPDisplayList(D_802A20D0_7A9A70),
     gsSPEndDisplayList(),
 };
-Gfx D_802A2158_7A9AF8[] =
-{
+Gfx D_802A2158_7A9AF8[] = {
     gsSPSetLights1(starpoint_lights1),
     gsSPDisplayList(D_802A2130_7A9AD0),
     gsSPEndDisplayList(),
@@ -36,8 +33,7 @@ Lights1 starpoint_lights2 = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 #include "starpoint/starpoints.png.inc.c"
 #include "starpoint/load_starpoints.gfx.inc.c"
 
-Gfx D_802A3250_7AABF0[] =
-{
+Gfx D_802A3250_7AABF0[] = {
     gsSPSetLights1(starpoint_lights2),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -49,14 +45,12 @@ Gfx D_802A3250_7AABF0[] =
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
-Gfx D_802A32B0_7AAC50[] =
-{
+Gfx D_802A32B0_7AAC50[] = {
     gsSPSetLights1(starpoint_lights2),
     gsSPDisplayList(D_802A3250_7AABF0),
     gsSPEndDisplayList(),
 };
-Gfx D_802A32D8_7AAC78[] =
-{
+Gfx D_802A32D8_7AAC78[] = {
     gsSPSetLights1(starpoint_lights2),
     gsSPDisplayList(D_802A32B0_7AAC50),
     gsSPEndDisplayList(),

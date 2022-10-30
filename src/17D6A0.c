@@ -2518,7 +2518,7 @@ s32 D_80283F0C_padding = 0;
     }
 
 PartnerDMAData bPartnerDmaTable[] = {
-    { },
+    {},
     BATTLE_PARTNER_ENTRY(goombario, 0),
     BATTLE_PARTNER_ENTRY(kooper, 0),
     BATTLE_PARTNER_ENTRY(bombette, 0),
@@ -2528,7 +2528,7 @@ PartnerDMAData bPartnerDmaTable[] = {
     BATTLE_PARTNER_ENTRY(sushie, 0),
     BATTLE_PARTNER_ENTRY(lakilester, 10),
     BATTLE_PARTNER_ENTRY(bow, 20),
-    { },
+    {},
     BATTLE_PARTNER_ENTRY(twink, 30),
 };
 
