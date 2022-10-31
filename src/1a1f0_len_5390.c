@@ -562,20 +562,20 @@ void update_encounters_neutral(void) {
                 }
                 script = get_script_by_id(enemy->auxScriptID);
                 if (script != NULL) {
-                    set_script_flags(script, EVT_FLAG_80);
+                    set_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
                 script = get_script_by_id(enemy->aiScriptID);
                 if (script != NULL) {
-                    set_script_flags(script, EVT_FLAG_80);
+                    set_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
                 if (enemy->flags & ENEMY_FLAGS_80000) {
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
-                        clear_script_flags(script, EVT_FLAG_80);
+                        clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                     script = get_script_by_id(enemy->aiScriptID);
                     if (script != NULL) {
-                        clear_script_flags(script, EVT_FLAG_80);
+                        clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                 }
             } else if (!(enemy->flags & ENEMY_FLAGS_200000)) {
@@ -585,22 +585,22 @@ void update_encounters_neutral(void) {
                     enemy->flags |= ENEMY_FLAGS_80000000;
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
-                        set_script_flags(script, EVT_FLAG_80);
+                        set_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                     script = get_script_by_id(enemy->aiScriptID);
                     if (script != NULL) {
-                        set_script_flags(script, EVT_FLAG_80);
+                        set_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                 } else {
                     npc->flags &= ~NPC_FLAG_80000000;
                     enemy->flags &= ~ENEMY_FLAGS_80000000;
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
-                        clear_script_flags(script, EVT_FLAG_80);
+                        clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                     script = get_script_by_id(enemy->aiScriptID);
                     if (script != NULL) {
-                        clear_script_flags(script, EVT_FLAG_80);
+                        clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                 }
             } else {
@@ -608,11 +608,11 @@ void update_encounters_neutral(void) {
                 enemy->flags &= ~ENEMY_FLAGS_80000000;
                 script = get_script_by_id(enemy->auxScriptID);
                 if (script != NULL) {
-                    clear_script_flags(script, EVT_FLAG_80);
+                    clear_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
                 script = get_script_by_id(enemy->aiScriptID);
                 if (script != NULL) {
-                    clear_script_flags(script, EVT_FLAG_80);
+                    clear_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
             }
 
@@ -626,7 +626,7 @@ void update_encounters_neutral(void) {
                         npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
                         script = get_script_by_id(enemy->aiScriptID);
                         if (script != NULL) {
-                            set_script_flags(script, EVT_FLAG_80);
+                            set_script_flags(script, EVT_FLAG_SUSPENDED);
                         }
                     } else {
                         if (enemy->unk_E0 != 12345) {
@@ -635,13 +635,13 @@ void update_encounters_neutral(void) {
                         }
                         script = get_script_by_id(enemy->aiScriptID);
                         if (script != NULL) {
-                            clear_script_flags(script, EVT_FLAG_80);
+                            clear_script_flags(script, EVT_FLAG_SUSPENDED);
                         }
                     }
                 } else {
                     script = get_script_by_id(enemy->aiScriptID);
                     if (script != NULL) {
-                        clear_script_flags(script, EVT_FLAG_80);
+                        clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                 }
             }
@@ -2429,11 +2429,6 @@ void create_encounters(void) {
 
                 npcData = groupList->npcs;
                 groupNpcCount = groupList->npcCount;
-                /*
-                if (groupNpcCount == 0) {
-                    break;
-                }
-                */
 
                 encounter = heap_malloc(sizeof(*encounter));
 

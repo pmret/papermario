@@ -28,17 +28,17 @@ EvtScript N(EVS_FocusCamOnLock) = {
 
 EvtScript N(EVS_UnlockDoors) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar0, -1)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(FindKeyItem, ITEM_KOOPA_FORTRESS_KEY, LVar0)
@@ -50,7 +50,7 @@ EvtScript N(EVS_UnlockDoors) = {
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
     EVT_CALL(N(RemovePadlock))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END

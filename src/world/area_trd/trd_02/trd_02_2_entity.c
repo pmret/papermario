@@ -8,17 +8,17 @@ extern EvtScript N(EVS_ExitDoors_trd_01_2);
 
 EvtScript N(D_80242890_9A3870) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar0, -1)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(RemoveKeyItemAt, LVar1)
@@ -28,7 +28,7 @@ EvtScript N(D_80242890_9A3870) = {
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
     EVT_CALL(N(RemovePadlock))
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END

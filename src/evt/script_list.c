@@ -250,7 +250,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     gNumScripts++;
     ASSERT(newScript != NULL);
 
-    newScript->state = initialState | EVT_FLAG_01;
+    newScript->state = initialState | EVT_FLAG_ACTIVE;
     newScript->currentOpcode = 0;
     newScript->priority = priority;
     newScript->ptrNextLine = (Bytecode*)source;
@@ -283,7 +283,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
 
     find_script_labels(newScript);
 
-    if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_20)) {
+    if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_RUN_IMMEDIATELY)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
@@ -322,7 +322,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
     // Some of this function is surely macros. I think we'll learn more as we do others in this file. -Ethan
     do {
-        newScript->state = initialState | EVT_FLAG_01;
+        newScript->state = initialState | EVT_FLAG_ACTIVE;
         newScript->currentOpcode = 0;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
@@ -353,7 +353,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
         find_script_labels(newScript);
 
-        if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_20)) {
+        if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_RUN_IMMEDIATELY)) {
             scriptListCount = gScriptListCount++;
             gScriptIndexList[scriptListCount] = curScriptIndex;
             gScriptIdList[scriptListCount] = newScript->id;
@@ -390,8 +390,8 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) 
     ASSERT(child != NULL);
 
     parentScript->childScript = child;
-    parentScript->state |= EVT_FLAG_10;
-    child->state = initialState | EVT_FLAG_01;
+    parentScript->state |= EVT_FLAG_BLOCKED_BY_CHILD;
+    child->state = initialState | EVT_FLAG_ACTIVE;
     child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
 
@@ -459,7 +459,7 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
     gNumScripts++;
     ASSERT(child != NULL);
 
-    child->state = newState | EVT_FLAG_01;
+    child->state = newState | EVT_FLAG_ACTIVE;
     child->ptrNextLine = nextLine;
     child->ptrFirstLine = nextLine;
     child->ptrCurrentLine = nextLine;
@@ -581,7 +581,7 @@ void update_scripts(void) {
         for (i = 0; i < gScriptListCount; i++) {
             Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
-            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & (EVT_FLAG_80 | EVT_FLAG_10 | EVT_FLAG_02))) {
+            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP))) {
                 s32 stop = FALSE;
                 s32 status;
 
@@ -646,7 +646,7 @@ void kill_script(Evt* instanceToKill) {
     blockingParent = instanceToKill->blockingParent;
     if (blockingParent != NULL) {
         blockingParent->childScript = NULL;
-        blockingParent->state &= ~EVT_FLAG_10;
+        blockingParent->state &= ~EVT_FLAG_BLOCKED_BY_CHILD;
 
         for (j = 0; j < ARRAY_COUNT(blockingParent->varTable); j++) {
             blockingParent->varTable[j] = instanceToKill->varTable[j];
@@ -777,7 +777,7 @@ void suspend_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state |= EVT_FLAG_02;
+        script->state |= EVT_FLAG_SUSPENDED_IN_GROUP;
     }
 }
 
@@ -798,7 +798,7 @@ void resume_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state &= ~EVT_FLAG_02;
+        script->state &= ~EVT_FLAG_SUSPENDED_IN_GROUP;
     }
 }
 

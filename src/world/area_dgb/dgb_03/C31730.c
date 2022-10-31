@@ -345,17 +345,17 @@ static s32 N(pad_3738)[] = {
 
 EvtScript N(80243740) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar0, -1)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, LVar0)
@@ -366,7 +366,7 @@ EvtScript N(80243740) = {
     EVT_CALL(PlaySoundAt, 0x269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MapVar(0))
     EVT_CALL(N(RemovePadlock))
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
@@ -557,7 +557,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
         .id = NPC_WORLD_CLUBBA0,
         .settings = &N(npcSettings_80243AFC),
         .pos = { 180.0f, 0.0f, -122.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -595,7 +595,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80243D68),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -629,7 +629,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
         .id = NPC_WORLD_CLUBBA2,
         .settings = &N(npcSettings_80243BC8),
         .pos = { -272.0f, 0.0f, -135.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -667,7 +667,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80243D68),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -701,7 +701,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
         .id = NPC_WORLD_CLUBBA4,
         .settings = &N(npcSettings_80243C94),
         .pos = { -326.0f, 210.0f, 80.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(init_80243D94),
         .yaw = 90,
         .drops = {
@@ -740,7 +740,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
         .id = NPC_WORLD_CLUBBA5,
         .settings = &N(npcSettings_80243D68),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,

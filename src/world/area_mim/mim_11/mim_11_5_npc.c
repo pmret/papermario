@@ -38,7 +38,7 @@ API_CALLABLE(N(AnimateStarSpiritBobbing)) {
         script->functionTemp[1] = 0;
         script->functionTempPtr[2] = get_npc_safe(script->owner2.npcID);
     }
-    
+
     npc = script->functionTempPtr[2];
     npc->verticalRenderOffset = sin_deg(script->functionTempF[1]) * 6.0f;
     script->functionTempF[1] = clamp_angle(script->functionTempF[1] + 18.0f);
@@ -80,7 +80,7 @@ StaticNpc N(NpcData_Bootler)[] = {
         .settings = &N(NpcSettings_Bootler),
         .pos = { 68.0f, 60.0f, -145.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Bootler),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
@@ -111,7 +111,7 @@ StaticNpc N(NpcData_Bootler)[] = {
         .settings = &N(NpcSettings_Skolar),
         .pos = { 68.0f, 60.0f, -145.0f },
         .yaw = 135,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Skolar),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,

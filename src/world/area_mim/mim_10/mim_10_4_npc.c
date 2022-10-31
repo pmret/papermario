@@ -30,17 +30,17 @@ API_CALLABLE(N(InitializeLightingGloomy)) {
 
 API_CALLABLE(N(ReduceFogEndDist)) {
     s32 retVal = ApiStatus_BLOCK;
-    
+
     if (isInitialCall) {
         script->functionTemp[1] = 1060;
     }
-        
+
     script->functionTemp[1]--;
     if (script->functionTemp[1] <= 1000) {
         script->functionTemp[1] = 1000;
         retVal = ApiStatus_DONE2;
     }
-    
+
     set_world_fog_dist(990, script->functionTemp[1]);
     return retVal;
 }
@@ -51,7 +51,7 @@ API_CALLABLE(N(DarkenBackground)) {
     if (isInitialCall) {
         script->functionTemp[1] = 0;
     }
-    
+
     script->functionTemp[1] += 4;
     if (script->functionTemp[1] >= 240) {
         script->functionTemp[1] = 240;
@@ -251,7 +251,7 @@ StaticNpc N(NpcData_Bootler) = {
     .settings = &N(NpcSettings_Bootler),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Bootler),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -283,7 +283,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_200000,
     .init = &N(EVS_NpcInit_JrTroopa),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,

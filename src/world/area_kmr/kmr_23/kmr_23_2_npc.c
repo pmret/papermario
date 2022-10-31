@@ -31,7 +31,7 @@ AnimID N(StarSpiritAnimations)[][2] = {
     { ANIM_WorldEldstar_Idle,   ANIM_WorldEldstar_Back },
     { ANIM_WorldMamar_Idle,     ANIM_WorldMamar_Back },
     { ANIM_WorldSkolar_Idle,    ANIM_WorldSkolar_Back },
-    { ANIM_WorldMuskular_Idle,  ANIM_WorldMuskular_Back }, 
+    { ANIM_WorldMuskular_Idle,  ANIM_WorldMuskular_Back },
     { ANIM_WorldMisstar_Idle,   ANIM_WorldMisstar_Back },
     { ANIM_WorldKlevar_Idle,    ANIM_WorldKlevar_Back },
     { ANIM_WorldKalmar_Idle,    ANIM_WorldKalmar_Back },
@@ -77,7 +77,7 @@ API_CALLABLE(N(CreateEndChapterData)) {
     Npc* npc = get_npc_safe(NPC_StarSpirit);
     EndChapter* data;
     s32 backFacing;
-    
+
     if (isInitialCall) {
         data = heap_malloc(sizeof(*data));
         script->userData = data;
@@ -109,7 +109,7 @@ API_CALLABLE(N(CreateEndChapterData)) {
         }
         npc->currentAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
     }
-    
+
     if (data->spiritCardEffect != NULL) {
         data->spiritCardEffect->data.spiritCard->yaw = data->yaw;
         data->spiritCardEffect->data.spiritCard->pos.x = data->pos.x - 2.0f;
@@ -139,7 +139,7 @@ API_CALLABLE(N(AccelerateCardSpin)) {
     Bytecode* args = script->ptrReadPos;
     EndChapter* data;
     s32 duration;
-    
+
     if (isInitialCall) {
         script->functionTempF[1] = evt_get_float_variable(script, *args++);
         duration = script->functionTemp[2] = evt_get_variable(script, *args++);
@@ -149,7 +149,7 @@ API_CALLABLE(N(AccelerateCardSpin)) {
 
     data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
     data->angularVelocity += script->functionTempF[1];
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[2]) {
         return ApiStatus_BLOCK;
@@ -173,7 +173,7 @@ API_CALLABLE(N(MakeCardFloatUpward)) {
     data->pos.y = update_lerp(script->varTable[0],
         script->functionTemp[1], script->functionTemp[2],
         script->functionTemp[0], script->functionTemp[3]);
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[3]) {
         return ApiStatus_BLOCK;
@@ -221,11 +221,11 @@ API_CALLABLE(N(FlashScreenWhite)) {
         HOLD_WHITE      = 1,
         BACK_TO_NORMAL  = 2,
     };
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = FADE_TO_WHITE;
     }
-    
+
     switch(script->functionTemp[0]) {
         case FADE_TO_WHITE:
             set_screen_overlay_color(0, 208, 208, 208);
@@ -270,7 +270,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
 API_CALLABLE(N(SpinDownStarSpirit)) {
     Bytecode* args = script->ptrReadPos;
     EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         data->stopAccelerating = TRUE;
@@ -282,7 +282,7 @@ API_CALLABLE(N(SpinDownStarSpirit)) {
     data->yaw = clamp_angle(update_lerp(EASING_QUADRATIC_OUT,
         data->startYaw, script->functionTemp[1],
         script->functionTemp[0], script->functionTemp[2]));
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[2]) {
         return ApiStatus_BLOCK;
@@ -295,7 +295,7 @@ API_CALLABLE(N(EndOfChapterBounceIn)) {
     Bytecode* args = script->ptrReadPos;
     EndChapter* endChatper = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
     s32 posY;
-    
+
     if (isInitialCall) {
         endChatper->chapterChangeEffect = fx_chapter_change(gGameStatusPtr->entryID + 10, 40, 0, 0, 1.0f, 0);
         script->functionTemp[0] = 0;
@@ -312,7 +312,7 @@ API_CALLABLE(N(EndOfChapterBounceIn)) {
     endChatper->chapterChangeEffect->data.chapterChange->chapterPos.y = posY;
     endChatper->chapterChangeEffect->data.chapterChange->endOfPos.x = script->varTable[0];
     endChatper->chapterChangeEffect->data.chapterChange->endOfPos.y = posY;
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[3]) {
         return ApiStatus_BLOCK;
@@ -325,7 +325,7 @@ API_CALLABLE(N(EndOfChapterSplitApart)) {
     Bytecode* args = script->ptrReadPos;
     EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
     s32 leftDx, rightDx;
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         script->varTable[0] = evt_get_variable(script, *args++);
@@ -340,7 +340,7 @@ API_CALLABLE(N(EndOfChapterSplitApart)) {
     data->chapterChangeEffect->data.chapterChange->chapterPos.y = script->functionTemp[1];
     data->chapterChangeEffect->data.chapterChange->endOfPos.x = script->varTable[0] + rightDx;
     data->chapterChangeEffect->data.chapterChange->endOfPos.y = script->functionTemp[1];
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[3]) {
         return ApiStatus_BLOCK;
@@ -352,7 +352,7 @@ API_CALLABLE(N(EndOfChapterSplitApart)) {
 API_CALLABLE(N(func_80240BB4_9085E4)) {
     Bytecode* args = script->ptrReadPos;
     EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -364,7 +364,7 @@ API_CALLABLE(N(func_80240BB4_9085E4)) {
     data->unk0C = update_lerp(EASING_LINEAR,
         script->functionTemp[1], script->functionTemp[2],
         script->functionTemp[0], script->functionTemp[3]);
-    
+
     script->functionTemp[0]++;
     if (script->functionTemp[0] < script->functionTemp[3]) {
         return ApiStatus_BLOCK;
@@ -408,7 +408,7 @@ void func_80240DA4_9087D4(void) {
     s32 baseX = 47;
     s32 baseY = 100;
     EndChapter* data = evt_get_variable(NULL, MapVar(0));
-    
+
     switch (D_802417C8_9091F8) {
         case 0:
             if (data->unk1E != 0) {
@@ -559,7 +559,7 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = ELDSTAR_DROPS,
         .animations = ELDSTAR_ANIMS,
@@ -569,7 +569,7 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = ELDSTAR_DROPS,
         .animations = ELDSTAR_ANIMS,
@@ -582,7 +582,7 @@ StaticNpc N(NpcData_Mamar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = MAMAR_DROPS,
         .animations = MAMAR_ANIMS,
@@ -592,7 +592,7 @@ StaticNpc N(NpcData_Mamar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = MAMAR_DROPS,
         .animations = MAMAR_ANIMS,
@@ -605,7 +605,7 @@ StaticNpc N(NpcData_Skolar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = SKOLAR_DROPS,
         .animations = SKOLAR_ANIMS,
@@ -615,7 +615,7 @@ StaticNpc N(NpcData_Skolar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = SKOLAR_DROPS,
         .animations = SKOLAR_ANIMS,
@@ -628,7 +628,7 @@ StaticNpc N(NpcData_Muskular)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = MUSKULAR_DROPS,
         .animations = MUSKULAR_ANIMS,
@@ -638,7 +638,7 @@ StaticNpc N(NpcData_Muskular)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = MUSKULAR_DROPS,
         .animations = MUSKULAR_ANIMS,
@@ -651,7 +651,7 @@ StaticNpc N(NpcData_Misstar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = MISSTAR_DROPS,
         .animations = MISSTAR_ANIMS,
@@ -661,7 +661,7 @@ StaticNpc N(NpcData_Misstar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = MISSTAR_DROPS,
         .animations = MISSTAR_ANIMS,
@@ -674,7 +674,7 @@ StaticNpc N(NpcData_Klevar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = KLEVAR_DROPS,
         .animations = KLEVAR_ANIMS,
@@ -684,7 +684,7 @@ StaticNpc N(NpcData_Klevar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = KLEVAR_DROPS,
         .animations = KLEVAR_ANIMS,
@@ -697,7 +697,7 @@ StaticNpc N(NpcData_Kalmar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .drops = KALMAR_DROPS,
         .animations = KALMAR_ANIMS,
@@ -707,7 +707,7 @@ StaticNpc N(NpcData_Kalmar)[] = {
         .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .drops = KALMAR_DROPS,
         .animations = KALMAR_ANIMS,

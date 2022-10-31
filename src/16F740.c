@@ -3734,7 +3734,7 @@ void btl_state_update_first_strike(void) {
             enemy = get_actor(ACTOR_ENEMY0);
             if (enemy->onHitScriptSource != NULL) {
                 enemy->lastEventType = EVENT_BEGIN_FIRST_STRIKE;
-                script = start_script(enemy->onHitScriptSource, 0xA, EVT_FLAG_20);
+                script = start_script(enemy->onHitScriptSource, 0xA, EVT_FLAG_RUN_IMMEDIATELY);
                 enemy->onHitScript = script;
                 enemy->onHitID = script->id;
                 script->owner1.actorID = enemy->actorID;
@@ -3837,7 +3837,7 @@ void btl_state_update_first_strike(void) {
                                     if (target != NULL) {
                                         if (target->onHitScriptSource != NULL) {
                                             target->lastEventType = EVENT_END_FIRST_STRIKE;
-                                            script = start_script(target->onHitScriptSource, 0xA, EVT_FLAG_20);
+                                            script = start_script(target->onHitScriptSource, 0xA, EVT_FLAG_RUN_IMMEDIATELY);
                                             target->onHitScript = script;
                                             target->onHitID = script->id;
                                             script->owner1.actorID = target->actorID;
@@ -3925,7 +3925,7 @@ void btl_state_update_partner_striking_first(void) {
             actor = get_actor(ACTOR_ENEMY0);
             if (actor->onHitScriptSource != NULL) {
                 actor->lastEventType = EVENT_BEGIN_FIRST_STRIKE;
-                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
+                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
                 actor->onHitScript = script;
                 actor->onHitID = script->id;
                 script->owner1.actorID = actor->actorID;
@@ -4008,7 +4008,7 @@ void btl_state_update_partner_striking_first(void) {
                                         if (actor != NULL) {
                                             if (actor->onHitScriptSource != NULL) {
                                                 actor->lastEventType = EVENT_END_FIRST_STRIKE;
-                                                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
+                                                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
                                                 actor->onHitScript = script;
                                                 actor->onHitID = script->id;
                                                 script->owner1.actorID = actor->actorID;

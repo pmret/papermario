@@ -131,9 +131,9 @@ EvtScript N(D_80240C2C_9BE28C) = {
 };
 
 s32 N(missing_80240CE4_CE4)[] = {
-    0x002E0001, 0x001A0020, 0x80240820, 0x00000000, 0x80240844, 0x80240A48, 0x00000000, 0x80240B80, 
-    0x00000000, 0x00000000, 0x000A0000, 0x002D0001, 0x000E001F, 0x80240C0C, 0x00000000, 0x80240C1C, 
-    0x80077F70, 0x00000000, 0x80240C2C, 0x00000000, 0x00000000, 0x00050000, 
+    0x002E0001, 0x001A0020, 0x80240820, 0x00000000, 0x80240844, 0x80240A48, 0x00000000, 0x80240B80,
+    0x00000000, 0x00000000, 0x000A0000, 0x002D0001, 0x000E001F, 0x80240C0C, 0x00000000, 0x80240C1C,
+    0x80077F70, 0x00000000, 0x80240C2C, 0x00000000, 0x00000000, 0x00050000,
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Red) = {
@@ -530,7 +530,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1260.0f, 0.0f, -40.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
@@ -573,7 +573,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1275.0f, 0.0f, 5.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = STANDARD_HEART_DROPS(2),
@@ -617,7 +617,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1290.0f, 0.0f, 50.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -661,7 +661,7 @@ StaticNpc N(NpcData_BulletBill_01) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -710,7 +710,7 @@ StaticNpc N(NpcData_BulletBill_02) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -759,7 +759,7 @@ StaticNpc N(NpcData_BulletBill_03) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -808,7 +808,7 @@ StaticNpc N(NpcData_BulletBill_04) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -857,7 +857,7 @@ StaticNpc N(NpcData_BulletBill_05) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -906,7 +906,7 @@ StaticNpc N(NpcData_BulletBill_06) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -955,7 +955,7 @@ StaticNpc N(NpcData_BulletBill_07) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -1004,7 +1004,7 @@ StaticNpc N(NpcData_BulletBill_08) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -1053,7 +1053,7 @@ StaticNpc N(NpcData_BulletBill_09) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -1102,7 +1102,7 @@ StaticNpc N(NpcData_BulletBill_10) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
@@ -1152,7 +1152,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Red),
         .pos = { 1590.0f, 60.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -1161,7 +1161,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Green),
         .pos = { 1590.0f, 60.0f, -10.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -1170,7 +1170,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Yellow),
         .pos = { 1605.0f, 60.0f, 5.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -1179,7 +1179,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Black),
         .pos = { 1620.0f, 60.0f, 20.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -1221,7 +1221,7 @@ StaticNpc N(NpcData_BulletBill_Demo1) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -100.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
@@ -1271,7 +1271,7 @@ StaticNpc N(NpcData_BulletBill_Demo2) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -150.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
@@ -1321,7 +1321,7 @@ StaticNpc N(NpcData_BulletBill_Demo3) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 120.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
@@ -1371,7 +1371,7 @@ StaticNpc N(NpcData_BulletBill_Demo4) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 330.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
@@ -1421,7 +1421,7 @@ StaticNpc N(NpcData_BulletBill_Demo5) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 380.0f, 11.0f, -40.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_REFLECT_FLOOR,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
