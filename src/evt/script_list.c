@@ -213,7 +213,7 @@ void init_script_list(void) {
 }
 
 void suspend_frozen_scripts(Evt* script) {
-    s32 arg;
+    s32 groupFlags;
 
     switch (timeFreezeMode) {
         default:
@@ -221,14 +221,14 @@ void suspend_frozen_scripts(Evt* script) {
         case 4:
             return;
         case 1:
-            arg = 1;
+            groupFlags = EVT_GROUP_01;
             break;
         case 2:
         case 3:
-            arg = 2;
+            groupFlags = EVT_GROUP_02;
             break;
     }
-    suspend_all_group(arg);
+    suspend_all_group(groupFlags);
 }
 
 Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {

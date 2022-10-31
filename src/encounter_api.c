@@ -51,7 +51,7 @@ ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            if (gGameState != script->functionTemp[0]) {
+            if (gEncounterState != ENCOUNTER_STATE_CREATE) {
                 return ApiStatus_DONE2;
             }
     }
@@ -186,9 +186,9 @@ void start_battle(Evt* script, s32 songID) {
     Encounter* encounter;
     s32 i;
 
-    resume_all_group(1);
+    resume_all_group(EVT_GROUP_01);
 
-    currentEncounter->hitType = 1;
+    currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
@@ -231,10 +231,10 @@ void start_battle(Evt* script, s32 songID) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->unk_94 = 0;
-    currentEncounter->unk_12 = 1;
-    gGameState = 3;
+    currentEncounter->unk_12 = TRUE;
+    gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
     D_8009A678 = 1;
-    D_8009A5D0 = 0;
+    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
 }
 
 ApiStatus StartBattle(Evt* script, s32 isInitialCall) {
@@ -254,9 +254,9 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     Encounter* encounter;
     s32 i;
 
-    resume_all_group(1);
+    resume_all_group(EVT_GROUP_01);
 
-    currentEncounter->hitType = 1;
+    currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
@@ -297,10 +297,10 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->unk_94 = 0;
-    currentEncounter->unk_12 = 1;
-    gGameState = 3;
+    currentEncounter->unk_12 = TRUE;
+    gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
     D_8009A678 = 1;
-    D_8009A5D0 = 0;
+    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
 
     return ApiStatus_DONE1;
 }
@@ -772,7 +772,7 @@ ApiStatus func_800457C4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800457F8(Evt* script, s32 isInitialCall) {
-    gCurrentEncounter.unk_12 = 1;
+    gCurrentEncounter.unk_12 = TRUE;
     return ApiStatus_DONE2;
 }
 

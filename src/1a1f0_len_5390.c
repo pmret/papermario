@@ -167,14 +167,19 @@ EvtScript EnemyNpcDefeat = {
     EVT_END
 };
 
+extern s8 D_8009A63C;
 extern s8 D_8009A654;
-extern s16 D_8009A668;
+extern s16 gFirstStrikeMessagePos;
+extern s8 D_8009A670;
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;
+extern Evt* D_800A0BB0;
+extern s32 D_800A0BB4;
 extern EffectInstance* WorldMerleeOrbEffect;
 extern EffectInstance* WorldMerleeWaveEffect;
 
 void set_battle_formation(Battle*);
+void func_800E97E4(void);
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -454,7 +459,6 @@ ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
     return --script->functionTemp[1] == 0;
 }
 
-/// Default/neutral state during world gameplay; checks for player-enemy collisions and initiates battles when they occur.
 void update_encounters_neutral(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -501,7 +505,7 @@ void update_encounters_neutral(void) {
     currentEncounter->unk_18 = -1;
     currentEncounter->hitType = 0;
     currentEncounter->allowFleeing = FALSE;
-    currentEncounter->dropWhackaBump = 0;
+    currentEncounter->dropWhackaBump = FALSE;
     currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_1;
     currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_2;
     currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_4;
@@ -564,7 +568,7 @@ void update_encounters_neutral(void) {
                 if (script != NULL) {
                     set_script_flags(script, EVT_FLAG_80);
                 }
-                if (enemy->flags & 0x80000) {
+                if (enemy->flags & ENEMY_FLAGS_80000) {
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
                         clear_script_flags(script, EVT_FLAG_80);
@@ -877,7 +881,7 @@ void update_encounters_neutral(void) {
             }
             cond = FALSE;
             if (is_ability_active(ABILITY_SPIN_ATTACK) && gPlayerData.level >= enemy->npcSettings->level) {
-                cond = currentEncounter->unk_12 == 0;
+                cond = !currentEncounter->unk_12;
             }
             if (is_ability_active(ABILITY_DIZZY_ATTACK)) {
                 cond = TRUE;
@@ -915,7 +919,7 @@ void update_encounters_neutral(void) {
                 if (!is_ability_active(ABILITY_BUMP_ATTACK) || gPlayerData.level < enemy->npcSettings->level || (enemy->flags & ENEMY_FLAGS_40)) {
                     currentEncounter->firstStrikeType = firstStrikeType;
                 } else {
-                    if (currentEncounter->unk_12 == 0) {
+                    if (!currentEncounter->unk_12) {
                         firstStrikeType = FIRST_STRIKE_NONE;
                     }
                     currentEncounter->firstStrikeType = firstStrikeType;
@@ -976,12 +980,12 @@ START_BATTLE:
                 npc = get_npc_unsafe(enemy->npcID);
                 sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, npc->pos.x, npc->pos.y, npc->pos.z);
             }
-            currentEncounter->unk_12 = 0;
-            gGameState = 3;
+            currentEncounter->unk_12 = FALSE;
+            gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
             break;
         case ENCOUNTER_TRIGGER_SPIN:
             currentEnemy = enemy = currentEncounter->currentEnemy;
@@ -1019,12 +1023,12 @@ START_BATTLE:
             }
             disable_player_input();
             partner_disable_input();
-            currentEncounter->unk_12 = 0;
-            gGameState = 3;
+            currentEncounter->unk_12 = FALSE;
+            gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
             playerStatus->flags |= PS_FLAGS_40000;
             break;
         case ENCOUNTER_TRIGGER_JUMP:
@@ -1084,11 +1088,11 @@ START_BATTLE:
             }
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
-            currentEncounter->unk_12 = 0;
+            currentEncounter->unk_12 = FALSE;
             sfx_play_sound(0);
-            gGameState = 3;
+            gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
             break;
         case ENCOUNTER_TRIGGER_HAMMER:
             currentEnemy = enemy = currentEncounter->currentEnemy;
@@ -1138,15 +1142,15 @@ START_BATTLE:
             partner_disable_input();
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
-            currentEncounter->unk_12 = 0;
+            currentEncounter->unk_12 = FALSE;
             playerStatus->flags |= PS_FLAGS_40000;
             sfx_play_sound(0);
-            gGameState = 3;
+            gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
             break;
         case ENCOUNTER_TRIGGER_CONVERSATION:
-            suspend_all_group(1);
+            suspend_all_group(EVT_GROUP_01);
             enemy = currentEncounter->currentEnemy;
             if (enemy != NULL && enemy->aiScript != NULL) {
                 suspend_all_script(enemy->aiScriptID);
@@ -1167,9 +1171,9 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             func_800EF3D4(1);
-            gGameState = 4;
+            gEncounterState = ENCOUNTER_STATE_CONVERSATION;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_CONVERSATION_0;
             break;
         case ENCOUNTER_TRIGGER_PARTNER:
             currentEnemy = enemy = currentEncounter->currentEnemy;
@@ -1220,17 +1224,15 @@ START_BATTLE:
             partner_disable_input();
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
-            currentEncounter->unk_12 = 0;
+            currentEncounter->unk_12 = FALSE;
             playerStatus->flags |= PS_FLAGS_40000;
             sfx_play_sound(0);
-            gGameState = 3;
+            gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
             break;
     }
 }
-
-static const f32 padding = 0;
 
 void draw_encounters_neutral(void) {
 }
@@ -1243,15 +1245,15 @@ void update_encounters_pre_battle(void) {
     s32 i;
     s32 j;
 
-    switch (D_8009A5D0) {
-        case 0:
+    switch (gEncounterSubState) {
+        case ENCOUNTER_SUBSTATE_PRE_BATTLE_0:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 1;
             currentEncounter->fadeOutAccel = 1;
             currentEncounter->unk_08 = -1;
-            D_8009A654 = 0;
+            D_8009A654 = FALSE;
             D_80077C40 = 0;
-            suspend_all_group(0x10);
+            suspend_all_group(EVT_GROUP_10);
 
             for (i = 0; i < currentEncounter->numEncounters; i++) {
                 encounter = currentEncounter->encounterList[i];
@@ -1259,7 +1261,7 @@ void update_encounters_pre_battle(void) {
                 if (encounter != NULL) {
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
-                        if (enemy != NULL && !(enemy->flags & NPC_FLAG_NO_AI)) {
+                        if (enemy != NULL && !(enemy->flags & ENEMY_FLAGS_20)) {
                             if (enemy->aiScript != NULL) {
                                 suspend_all_script(enemy->aiScriptID);
                             }
@@ -1272,11 +1274,11 @@ void update_encounters_pre_battle(void) {
             }
 
             enemy = currentEncounter->currentEnemy;
-            if ((enemy->flags & NPC_FLAG_MOTION_BLUR) && currentEncounter->unk_12 == 0) {
+            if ((enemy->flags & ENEMY_FLAGS_100000) && !currentEncounter->unk_12) {
                 currentEncounter->unk_94 = 0;
                 currentEncounter->battleStartCountdown = 0;
                 partner_handle_before_battle();
-                D_8009A5D0 = 3;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_3;
                 return;
             }
 
@@ -1284,22 +1286,22 @@ void update_encounters_pre_battle(void) {
                 currentEncounter->unk_94 = 0;
                 currentEncounter->battleStartCountdown = 10;
                 partner_handle_before_battle();
-                D_8009A5D0 = 2;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_2;
                 return;
             }
 
             enemy = currentEncounter->currentEnemy;
-            if (currentEncounter->hitType != 1 &&
-                currentEncounter->hitType != 3 &&
+            if (currentEncounter->hitType != ENCOUNTER_TRIGGER_NONE &&
+                currentEncounter->hitType != ENCOUNTER_TRIGGER_SPIN &&
                 is_ability_active(ABILITY_FIRST_ATTACK) &&
                 (playerData->level >= enemy->npcSettings->level) &&
                 !(enemy->flags & ENEMY_FLAGS_40) &&
-                currentEncounter->unk_12 == 0)
+                !currentEncounter->unk_12)
             {
                 currentEncounter->unk_94 = 0;
                 currentEncounter->battleStartCountdown = 0xA;
                 D_80077C40 = 1;
-                D_8009A5D0 = 2;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_2;
                 return;
             }
 
@@ -1308,20 +1310,20 @@ void update_encounters_pre_battle(void) {
                     (is_ability_active(ABILITY_BUMP_ATTACK)) &&
                     (playerData->level >= enemy->npcSettings->level) &&
                     (!(enemy->flags & ENEMY_FLAGS_40) &&
-                    (currentEncounter->unk_12 == 0))
+                    !(currentEncounter->unk_12))
                 ) || (
                     (enemy = currentEncounter->currentEnemy,
-                    (currentEncounter->hitType == 3)) &&
+                    (currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN)) &&
                     (is_ability_active(ABILITY_SPIN_ATTACK)) &&
                     playerData->level >= enemy->npcSettings->level &&
                     !(enemy->flags & ENEMY_FLAGS_40) &&
-                    currentEncounter->unk_12 == 0
+                    !currentEncounter->unk_12
                 ))
             {
                 currentEncounter->battleStartCountdown = 10;
                 D_80077C40 = 1;
                 currentEncounter->unk_94 = 0;
-                D_8009A5D0 = 2;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_2;
                 return;
             }
 
@@ -1341,10 +1343,10 @@ void update_encounters_pre_battle(void) {
                 bgm_set_battle_song(currentEncounter->songID, FIRST_STRIKE_NONE);
             }
             bgm_push_battle_song();
-            D_8009A654 = 1;
+            D_8009A654 = TRUE;
             currentEncounter->battleStartCountdown = 10;
-            D_8009A5D0 = 1;
-        case 1:
+            gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_1;
+        case ENCOUNTER_SUBSTATE_PRE_BATTLE_1:
             if (currentEncounter->fadeOutAmount == 255) {
                 if (currentEncounter->battleStartCountdown != 0) {
                     currentEncounter->battleStartCountdown--;
@@ -1355,8 +1357,8 @@ void update_encounters_pre_battle(void) {
                 for (i = 0; i < encounter->count; i++) {
                     enemy = encounter->enemy[i];
                     if (enemy != NULL &&
-                        ((!(enemy->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)) &&
-                        !(enemy->flags & NPC_FLAG_NO_AI) &&
+                        ((!(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)) &&
+                        !(enemy->flags & ENEMY_FLAGS_20) &&
                         enemy->hitScript != NULL)
                     {
                         kill_script_by_ID(enemy->hitScriptID);
@@ -1371,7 +1373,7 @@ void update_encounters_pre_battle(void) {
                 enemy = currentEncounter->currentEnemy;
                 currentEncounter->unk_10 = enemy->unk_B5;
 
-                if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == 3) {
+                if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
                     currentEncounter->dizzyAttackStatus = 4;
                     currentEncounter->dizzyAttackDuration = 3;
                 }
@@ -1391,12 +1393,12 @@ void update_encounters_pre_battle(void) {
                 currentEncounter->fadeOutAccel = 0;
                 currentEncounter->fadeOutAmount = 255;
                 set_screen_overlay_params_front(0, 255.0f);
-                gGameState = 5;
+                gEncounterState = ENCOUNTER_STATE_POST_BATTLE;
                 D_8009A678 = 1;
-                D_8009A5D0 = 0;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_0;
             }
             break;
-        case 2:
+        case ENCOUNTER_SUBSTATE_PRE_BATTLE_2:
             if (currentEncounter->battleStartCountdown != 0) {
                 currentEncounter->battleStartCountdown--;
                 break;
@@ -1406,8 +1408,8 @@ void update_encounters_pre_battle(void) {
             for (i = 0; i < encounter->count; i++) {
                 enemy = encounter->enemy[i];
                 if (enemy != NULL &&
-                    (!(enemy->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy) &&
-                    !(enemy->flags & NPC_FLAG_NO_AI) &&
+                    (!(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy) &&
+                    !(enemy->flags & ENEMY_FLAGS_20) &&
                     (enemy->hitScript != 0))
                 {
                     kill_script_by_ID(enemy->hitScriptID);
@@ -1417,24 +1419,24 @@ void update_encounters_pre_battle(void) {
 
             currentEncounter->unk_08 = 1;
             currentEncounter->unk_07 = 1;
-            currentEncounter->battleOutcome = 0;
+            currentEncounter->battleOutcome = OUTCOME_PLAYER_WON;
             currentEncounter->merleeCoinBonus = 0;
             currentEncounter->damageTaken = 0;
-            gGameState = 5;
+            gEncounterState = ENCOUNTER_STATE_POST_BATTLE;
             currentEncounter->coinsEarned = 0;
             currentEncounter->fadeOutAccel = 0;
             currentEncounter->fadeOutAmount = 0;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_0;
             break;
-        case 3:
-            currentEncounter->battleOutcome = 4;
+        case ENCOUNTER_SUBSTATE_PRE_BATTLE_3:
+            currentEncounter->battleOutcome = OUTCOME_4;
             currentEncounter->unk_08 = 1;
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->fadeOutAccel = 0;
-            gGameState = 5;
+            gEncounterState = ENCOUNTER_STATE_POST_BATTLE;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_0;
             break;
     }
 }
@@ -1503,12 +1505,12 @@ void show_first_strike_message(void) {
     s32 screenWidthHalf;
 
     if (currentEncounter->unk_94 == 0) {
-        D_8009A668 = -200;
+        gFirstStrikeMessagePos = -200;
         return;
     }
 
-    D_8009A668 += 40;
-    xOffset = D_8009A668;
+    gFirstStrikeMessagePos += 40;
+    xOffset = gFirstStrikeMessagePos;
     if (xOffset > 0) {
         if (xOffset < 1600) {
             xOffset = 0;
@@ -1551,7 +1553,617 @@ void show_first_strike_message(void) {
     }
 }
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_post_battle);
+void update_encounters_post_battle(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    Encounter* encounter;
+    Evt* script;
+    Enemy* enemy;
+    s32 i, j;
+    s32 cond;
+    Npc* npc;
+
+    switch (gEncounterSubState) {
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_0:
+            if (currentEncounter->unk_08 == 0) {
+                return;
+            }
+
+            currentEncounter->unk_08 = 0;
+            gPlayerStatus.blinkTimer = 0;
+            currentEncounter->unk_12 = FALSE;
+            func_800E97E4();
+            currentEncounter->dizzyAttackStatus = 0;
+            currentEncounter->unk_A4 = 0;
+            currentEncounter->unk_A8 = 0;
+            currentEncounter->unk_AC = 0;
+            currentEncounter->dizzyAttackDuration = 0;
+            currentEncounter->unk_A6 = 0;
+            currentEncounter->unk_AA = 0;
+            currentEncounter->unk_AE = 0;
+            if (D_8009A654 == TRUE) {
+                bgm_pop_battle_song();
+            }
+            currentEncounter->fadeOutAccel = 1;
+            currentEncounter->battleStartCountdown = 0;
+            D_8009A670 = FALSE;
+            gPlayerStatus.flags &= 0xFFFBFFFF;
+            if (currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
+                D_8009A670 = TRUE;
+            }
+            currentEncounter->hitType = 0;
+            if (D_80077C40 == 0) {
+                partner_handle_after_battle();
+            }
+            D_8009A63C = FALSE;
+            if (partnerActionStatus->partnerAction_unk_1) {
+                D_8009A63C = TRUE;
+            } else if ((D_8009A670 == 0) && !(gPlayerStatus.flags & 6) && (gPlayerStatus.actionState != 0x21) && (gPlayerStatus.actionState != 0x1D)) {
+                set_action_state(0);
+            }
+            switch (currentEncounter->battleOutcome) {
+                case OUTCOME_PLAYER_WON:
+                    gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_10;
+                    break;
+                case OUTCOME_PLAYER_LOST:
+                    gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_200;
+                    break;
+                case OUTCOME_PLAYER_FLED:
+                    gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_100;
+                    break;
+                case OUTCOME_4:
+                    gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_300;
+                    break;
+                case OUTCOME_ENEMY_FLED:
+                    gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_400;
+                    break;
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_10:
+            if (currentEncounter->merleeCoinBonus != 0) {
+                if (get_coin_drop_amount(currentEncounter->currentEnemy) != 0) {
+                    D_800A0BB0 = start_script(D_80077C44, 0xA, 0);
+                    D_800A0BB0->groupFlags = 0;
+                    D_800A0BB4 = D_800A0BB0->id;
+                } else {
+                    playerData->merleeTurnCount = 0;
+                    playerData->merleeCastsLeft++;
+                }
+            }
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_11;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_11:
+            if ((currentEncounter->merleeCoinBonus != 0) && (get_coin_drop_amount(currentEncounter->currentEnemy) != 0)) {
+                currentEncounter->fadeOutAccel += 4;
+                currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
+                if (currentEncounter->fadeOutAmount < 0) {
+                    currentEncounter->fadeOutAmount = 0;
+                }
+                if (does_script_exist(D_800A0BB4)) {
+                    break;
+                }
+            }
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if (enemy->defeatBytecode != NULL) {
+                    script = start_script_in_group(enemy->defeatBytecode, 0xAU, 0, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = 0;
+                    currentEncounter->battleStartCountdown = 1;
+                } else {
+                    script = start_script_in_group(SCRIPT_NpcDefeat, 0xAU, 0, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = 0;
+                }
+            }
+            if (!(currentEncounter->flags & 1) && !D_8009A63C && currentEncounter->battleStartCountdown == 0 && D_8009A670 == 0) {
+                suggest_player_anim_clearUnkFlag(0x10032);
+            }
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_2;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_2:
+            if (currentEncounter->fadeOutAmount == 0) {
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_3;
+            } else {
+                currentEncounter->fadeOutAccel += 4;
+                currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
+                if (currentEncounter->fadeOutAmount < 0) {
+                    currentEncounter->fadeOutAmount = 0;
+                }
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_3:
+            cond = FALSE;
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+                if (does_script_exist(enemy->defeatScriptID)) {
+                    cond = TRUE;
+                } else {
+                    enemy->defeatScript = NULL;
+                }
+            }
+            if (!cond) {
+                if (!(currentEncounter->flags & 1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
+                    suggest_player_anim_clearUnkFlag(0x10032);
+                }
+                encounter = currentEncounter->currentEncounter;
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    enemy = encounter->enemy[i];
+                    if (enemy == NULL) {
+                        continue;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_4) {
+                        continue;
+                    }
+                    if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                        continue;
+                    }
+                    if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                        if (!(enemy->flags & ENEMY_FLAGS_10)) {
+                            set_defeated(currentEncounter->mapID, encounter->encounterID + i);
+                        }
+                    }
+                    kill_enemy(enemy);
+                }
+
+                currentEncounter->unk_94 = 0;
+                if (!(currentEncounter->flags & 1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
+                    currentEncounter->unk_94 = 30;
+                }
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_4;
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_4:
+            if (!(currentEncounter->flags & 2) && (gGameStatusPtr->stickX[0] != 0 || gGameStatusPtr->stickY[0] != 0)) {
+                currentEncounter->unk_94 = 0;
+            }
+            if (currentEncounter->unk_94 != 0) {
+                currentEncounter->unk_94--;
+                break;
+            }
+
+            for (i = 0; i < currentEncounter->numEncounters; i++) {
+                encounter = currentEncounter->encounterList[i];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (j = 0; j < encounter->count; j++) {
+                    enemy = encounter->enemy[j];
+                    if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                        continue;
+                    }
+                    if (enemy->aiScript != NULL) {
+                        resume_all_script(enemy->aiScriptID);
+                    }
+                    if (enemy->auxScript != NULL) {
+                        resume_all_script(enemy->auxScriptID);
+                    }
+                }
+            }
+
+            currentEncounter->battleTriggerCooldown = 15;
+            enable_player_input();
+            partner_enable_input();
+            if (!D_8009A63C) {
+                suggest_player_anim_clearUnkFlag(0x10002U);
+            }
+            set_screen_overlay_params_front(255, -1.0f);
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+            D_8009A678 = 1;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_100:
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+
+                if (enemy->defeatBytecode != NULL) {
+                    script = start_script(enemy->defeatBytecode, 0xAU, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    enemy->aiFlags |= 1;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+            }
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_101;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_101:
+            if (currentEncounter->fadeOutAmount == 0) {
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_102;
+            } else {
+                currentEncounter->fadeOutAccel += 4;
+                currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
+                if (currentEncounter->fadeOutAmount < 0) {
+                    currentEncounter->fadeOutAmount = 0;
+                }
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_102:
+            encounter = currentEncounter->currentEncounter;
+            cond = FALSE;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                    if (does_script_exist(enemy->defeatScriptID)) {
+                        cond = TRUE;
+                    } else {
+                        enemy->defeatScript = NULL;
+                    }
+                }
+            }
+            if (!cond) {
+                for (i = 0; i < currentEncounter->numEncounters; i++) {
+                    encounter = currentEncounter->encounterList[i];
+                    if (encounter == NULL) {
+                        continue;
+                    }
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                            continue;
+                        }
+                        if (enemy->aiScript != NULL) {
+                            resume_all_script(enemy->aiScriptID);
+                        }
+                        if (enemy->auxScript != NULL) {
+                            resume_all_script(enemy->auxScriptID);
+                        }
+                    }
+                }
+
+                enemy = currentEncounter->currentEnemy;
+                encounter = currentEncounter->currentEncounter;;
+                if (!(enemy->flags & ENEMY_FLAGS_40000)) {
+                    enemy->aiPaused = 45;
+                    playerStatus->blinkTimer = 45;
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy == NULL) {
+                            continue;
+                        }
+                        if (enemy->flags & ENEMY_FLAGS_20) {
+                            continue;
+                        }
+                        if (enemy->flags & ENEMY_FLAGS_8) {
+                            continue;
+                        }
+                        enemy->aiPaused = 45;
+                        playerStatus->blinkTimer = 45;
+                    }
+                }
+
+                enemy = currentEncounter->currentEnemy;
+                if (!(currentEncounter->flags & 4)) {
+                    script = start_script(D_80077E9C, 0xA, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+
+                currentEncounter->battleTriggerCooldown = 45;
+                playerStatus->blinkTimer = 45;
+                enable_player_input();
+                partner_enable_input();
+                set_screen_overlay_params_front(255, -1.0f);
+                if (!D_8009A63C) {
+                    currentEncounter->unk_94 = 15;
+                } else {
+                    currentEncounter->unk_94 = 0;
+                }
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_103;
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_103:
+            if (currentEncounter->unk_94 != 0) {
+                currentEncounter->unk_94--;
+                if (gGameStatusPtr->currentButtons[0] == 0 && gGameStatusPtr->stickX[0] == 0 && gGameStatusPtr->stickY[0] == 0) {
+                    break;
+                }
+            }
+            if (!D_8009A63C && playerStatus->anim == 0x50000) {
+                suggest_player_anim_clearUnkFlag(0x10002);
+            }
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+            D_8009A678 = 1;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_200:
+            suggest_player_anim_clearUnkFlag(0x80009);
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+
+                if (enemy->defeatBytecode != NULL) {
+                    script = start_script(enemy->defeatBytecode, 0xA, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+            }
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_201;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_201:
+            if (currentEncounter->fadeOutAmount == 0) {
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_202;
+            } else {
+                currentEncounter->fadeOutAccel += 4;
+                currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
+                if (currentEncounter->fadeOutAmount < 0) {
+                    currentEncounter->fadeOutAmount = 0;
+                }
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_202:
+            cond = FALSE;
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                    if (does_script_exist(enemy->defeatScriptID)) {
+                        cond = TRUE;
+                    } else {
+                        enemy->defeatScript = NULL;
+                    }
+                }
+            }
+            if (!cond) {
+                for (i = 0; i < currentEncounter->numEncounters; i++) {
+                    encounter = currentEncounter->encounterList[i];
+                    if (encounter == NULL) {
+                        continue;
+                    }
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                            continue;
+                        }
+                        if (enemy->aiScript != NULL) {
+                            resume_all_script(enemy->aiScriptID);
+                        }
+                        if (enemy->auxScript != NULL) {
+                            resume_all_script(enemy->auxScriptID);
+                        }
+                    }
+                }
+                enable_player_input();
+                partner_enable_input();
+                set_screen_overlay_params_front(255, -1.0f);
+                currentEncounter->unk_94 = 15;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_203;
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_203:
+            if (currentEncounter->unk_94 != 0) {
+                currentEncounter->unk_94--;
+                if (gGameStatusPtr->currentButtons[0] == 0 && gGameStatusPtr->stickX[0] == 0 && gGameStatusPtr->stickY[0] == 0) {
+                    break;
+                }
+            }
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+            D_8009A678 = 1;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_300:
+            for (i = 0; i < currentEncounter->numEncounters; i++) {
+                encounter = currentEncounter->encounterList[i];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (j = 0; j < encounter->count; j++) {
+                    enemy = encounter->enemy[j];
+                    if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                        continue;
+                    }
+                    if (enemy->aiScript != NULL) {
+                        resume_all_script(enemy->aiScriptID);
+                    }
+                    if (enemy->auxScript != NULL) {
+                        resume_all_script(enemy->auxScriptID);
+                    }
+                }
+            }
+            enable_player_input();
+            partner_enable_input();
+            set_screen_overlay_params_front(255, -1.0f);
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+            D_8009A678 = 1;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_400:
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    continue;
+                }
+
+                if (enemy->flags & ENEMY_FLAGS_20) {
+                    continue;
+                }
+
+                if (enemy->defeatBytecode != NULL) {
+                    script = start_script(enemy->defeatBytecode, 0xA, 0);
+                    enemy->defeatScript = script;
+                    enemy->defeatScriptID = script->id;
+                    script->owner1.enemy = enemy;
+                    script->owner2.npcID = enemy->npcID;
+                    script->groupFlags = enemy->scriptGroup;
+                }
+            }
+            gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_401;
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_401:
+            if (currentEncounter->fadeOutAmount == 0) {
+                gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_402;
+            } else {
+                currentEncounter->fadeOutAccel += 4;
+                currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
+                if (currentEncounter->fadeOutAmount < 0) {
+                    currentEncounter->fadeOutAmount = 0;
+                }
+            }
+            break;
+        case ENCOUNTER_SUBSTATE_POST_BATTLE_402:
+            cond = FALSE;
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy == NULL) {
+                    continue;
+                }
+                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                    if (does_script_exist(enemy->defeatScriptID)) {
+                        cond = TRUE;
+                    } else {
+                        enemy->defeatScript = NULL;
+                    }
+                }
+            }
+            if (!cond) {
+                for (i = 0; i < currentEncounter->numEncounters; i++) {
+                    encounter = currentEncounter->encounterList[i];
+                    if (encounter == NULL) {
+                        continue;
+                    }
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                            continue;
+                        }
+                        if (enemy->aiScript != NULL) {
+                            resume_all_script(enemy->aiScriptID);
+                        }
+                        if (enemy->auxScript != NULL) {
+                            resume_all_script(enemy->auxScriptID);
+                        }
+                    }
+                }
+
+                enemy = currentEncounter->currentEnemy;
+                if (!(enemy->flags & ENEMY_FLAGS_4)) {
+                    encounter = currentEncounter->currentEncounter;
+                    enemy->aiPaused = 45;
+                    playerStatus->blinkTimer = 45;
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy == NULL) {
+                            continue;
+                        }
+                        if (enemy->flags & ENEMY_FLAGS_20) {
+                            continue;
+                        }
+                        if (enemy->flags & ENEMY_FLAGS_8) {
+                            continue;
+                        }
+                        enemy->aiPaused = 45;
+                        playerStatus->blinkTimer = 45;
+                    }
+                }
+
+                currentEncounter->battleTriggerCooldown = 45;
+                enable_player_input();
+                partner_enable_input();
+                set_screen_overlay_params_front(255, -1.0f);
+                resume_all_group(EVT_GROUP_10);
+                gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+                D_8009A678 = 1;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            }
+            break;
+    }
+
+    for (i = 0; i < currentEncounter->numEncounters; i++) {
+        encounter = currentEncounter->encounterList[i];
+        if (encounter == NULL) {
+            continue;
+        }
+        for (j = 0; j < encounter->count; j++) {
+            enemy = encounter->enemy[j];
+            if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                continue;
+            }
+
+            npc = get_npc_unsafe(enemy->npcID);
+            if (enemy->aiPaused != 0) {
+                if (enemy->aiPaused & 1) {
+                    npc->flags |= 0x80000000;
+                    enemy->flags |= ENEMY_FLAGS_80000000;
+                } else {
+                    npc->flags &= ~0x80000000;
+                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                }
+            }
+        }
+    }
+}
 
 void draw_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -1569,8 +2181,8 @@ void update_encounters_conversation(void) {
     Enemy* currentEnemy;
     s32 flag;
 
-    switch (D_8009A5D0) {
-        case 0:
+    switch (gEncounterSubState) {
+        case ENCOUNTER_SUBSTATE_CONVERSATION_0:
             currentEnemy = encounter->currentEnemy;
             flag = FALSE;
 
@@ -1591,11 +2203,11 @@ void update_encounters_conversation(void) {
             }
 
             if (!flag) {
-                D_8009A5D0 = 1;
+                gEncounterSubState = ENCOUNTER_SUBSTATE_CONVERSATION_1;
             }
             break;
-        case 1:
-            resume_all_group(1);
+        case ENCOUNTER_SUBSTATE_CONVERSATION_1:
+            resume_all_group(EVT_GROUP_01);
 
             currentEnemy = encounter->currentEnemy;
             if (currentEnemy != NULL && currentEnemy->aiScript != NULL) {
@@ -1611,10 +2223,10 @@ void update_encounters_conversation(void) {
 
             func_800EF3D4(0);
             encounter->hitType = 0;
-            resume_all_group(16);
-            gGameState = 2;
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             D_8009A678 = 1;
-            D_8009A5D0 = 0;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
             break;
     }
 }
@@ -1759,16 +2371,374 @@ s32 check_conversation_trigger(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", create_encounters);
+void create_encounters(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    NpcBlueprint sp10;
+    NpcBlueprint* bp = &sp10;
+    NpcGroup* groupList = (NpcGroup*)(currentEncounter->npcGroupList);
+    s32 groupNpcCount;
+    s32 mapID = currentEncounter->mapID;
+
+    Npc* newNpc;
+    s32 newNpcIndex;
+    s32 npcCount;
+
+    NpcSettings* npcSettings;
+    StaticNpc* npcData;
+    Enemy* enemy;
+    Encounter* encounter;
+    Encounter** encounterList;
+    Evt* script;
+
+    s32 totalNpcCount;
+
+    s32 cond1;
+    s32 cond2;
+    s32 i;
+    s32 k;
+    s32 e;
+
+    switch (gEncounterSubState) {
+        case ENCOUNTER_SUBSTATE_CREATE_0:
+            if (currentEncounter->resetMapEncounterFlags != 1) {
+                // check for current map among most recently visited
+                for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
+                    if (currentEncounter->recentMaps[i] == mapID) {
+                        break;
+                    }
+                }
+                // current map not found in recent: reset all defeat flags
+                if (i >= ARRAY_COUNT(currentEncounter->recentMaps)) {
+                    for (k = 0; k < ARRAY_COUNT(currentEncounter->defeatFlags[mapID]); k++) {
+                        currentEncounter->defeatFlags[mapID][k] = FALSE;
+                    }
+                }
+                // add current map to recent maps, pushing out the least recent
+                for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps) - 1; i++) {
+                    currentEncounter->recentMaps[i] = currentEncounter->recentMaps[i + 1];
+                }
+                currentEncounter->recentMaps[i] = mapID;
+            }
+
+            e = 0;
+            totalNpcCount = 0;
+            while(TRUE) {
+                if (groupList->npcCount == 0) {
+                    break;
+                }
+
+                npcData = groupList->npcs;
+                groupNpcCount = groupList->npcCount;
+                /*
+                if (groupNpcCount == 0) {
+                    break;
+                }
+                */
+
+                encounter = heap_malloc(sizeof(*encounter));
+
+                currentEncounter->encounterList[e] = encounter;
+                ASSERT(encounter != NULL);
+                encounter->count = groupNpcCount;
+                encounter->battle = groupList->battle;
+                encounter->stage = groupList->stage - 1;
+                encounter->encounterID = totalNpcCount;
+                for (i = 0; i < groupNpcCount; i++) {
+                    if (get_defeated(mapID, encounter->encounterID + i)) {
+                        npcData++;
+                        encounter->enemy[i] = NULL;
+                        continue;
+                    }
+
+                    enemy = encounter->enemy[i] = heap_malloc(sizeof(*enemy));
+                    ASSERT (enemy != NULL);
+
+                    for (k = 0; k < ARRAY_COUNT(enemy->varTable); k++) {
+                        enemy->varTable[k] = 0;
+                    }
+                    enemy->encounterIndex = e;
+                    enemy->npcID = npcData->id;
+                    npcSettings = enemy->npcSettings = npcData->settings;
+                    enemy->drops = &npcData->drops;
+                    if ((*(s16*)(&npcData->drops) & 0xFF00) != 0x8000) { //TODO s16?
+                        enemy->drops = &D_80077EB8;
+                    }
+                    enemy->encountered = 0;
+                    if ((s32) npcData->init < -270000000) {
+                        enemy->initBytecode = npcData->init;
+                    } else {
+                        enemy->initBytecode = NULL;
+                    }
+                    enemy->interactBytecode = npcSettings->onInteract;
+                    enemy->aiBytecode = npcSettings->ai;
+                    enemy->hitBytecode = npcSettings->onHit;
+                    enemy->auxBytecode = npcSettings->aux;
+                    enemy->defeatBytecode = npcSettings->onDefeat;
+                    enemy->initScript = NULL;
+                    enemy->interactScript = NULL;
+                    enemy->aiScript = NULL;
+                    enemy->hitScript = NULL;
+                    enemy->auxScript = NULL;
+                    enemy->defeatScript = NULL;
+                    enemy->interactScriptID = 0;
+                    enemy->aiScriptID = 0;
+                    enemy->hitScriptID = 0;
+                    enemy->auxScriptID = 0;
+                    enemy->defeatScriptID = 0;
+                    enemy->unk_07 = 0;
+                    enemy->unk_B5 = 0;
+                    enemy->aiDetectFlags = npcData->aiDetectFlags;
+
+
+                    enemy->aiFlags = npcData->aiFlags;
+                    enemy->unk_DC = 0;
+                    enemy->aiPaused = 0;
+                    enemy->unk_B8 = npcSettings->unk_24;
+                    enemy->unk_BC = NULL;
+                    enemy->unk_C0 = 0;
+                    enemy->unk_C4 = 0;
+
+                    enemy->animList = (AnimID*) &npcData->animations;
+                    enemy->territory = &npcData->territory;
+
+                    enemy->flags = npcSettings->flags;
+                    enemy->flags |= npcData->flags;
+                    enemy->unk_64 = NULL;
+                    enemy->tattleMsg = npcData->tattle;
+                    if (npcData->initVarCount != 0) {
+                        if (npcData->initVarCount == 1) {
+                            enemy->varTable[0] = npcData->initVar.value;
+                        } else {
+                            s32* initialVars = npcData->initVar.array;
+                            for (k = 0; k < npcData->initVarCount; k++) {
+                                enemy->varTable[k] = *initialVars++;
+                            }
+                        }
+                    }
+
+                    // create the new NPC
+                    bp->flags = 0;
+                    if (npcSettings->defaultAnim == 0) {
+                        bp->initialAnim = enemy->animList[0];
+                    } else {
+                        bp->initialAnim = npcSettings->defaultAnim;
+                    }
+                    bp->onUpdate = NULL;
+                    bp->onRender = NULL;
+                    if (!(enemy->flags & ENEMY_FLAGS_20000)) {
+                        newNpcIndex = _create_npc_standard(bp, (AnimID**) npcData->extraAnimations);
+                    } else {
+                        newNpcIndex = _create_npc_partner(bp);
+                    }
+
+                    newNpc = get_npc_by_index(newNpcIndex);
+                    newNpc->npcID = npcData->id;
+                    newNpc->collisionRadius = npcSettings->radius;
+                    newNpc->collisionHeight = npcSettings->height;
+                    enemy->spawnPos[0] = newNpc->pos.x = npcData->pos.x;
+                    enemy->spawnPos[1] = newNpc->pos.y = npcData->pos.y;
+                    enemy->spawnPos[2] = newNpc->pos.z = npcData->pos.z;
+                    newNpc->unk_96 = 0;
+                    newNpc->planarFlyDist = 0.0f;
+                    newNpc->homePos.x = newNpc->pos.x;
+                    newNpc->homePos.y = newNpc->pos.y;
+                    newNpc->homePos.z = newNpc->pos.z;
+                    set_npc_yaw(newNpc, npcData->yaw);
+                    enemy->unk_E0 = 12345;
+                    if (newNpc->collisionRadius >= 24.0) {
+                        newNpc->shadowScale = newNpc->collisionRadius / 24.0;
+                    } else {
+                        newNpc->shadowScale = 1.0f;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_100) {
+                        newNpc->flags |= NPC_FLAG_40;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_200) {
+                        newNpc->flags |= NPC_FLAG_100;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_400) {
+                        newNpc->flags |= NPC_FLAG_8000;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_800) {
+                        newNpc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_1000) {
+                        newNpc->flags |= NPC_FLAG_GRAVITY;
+                    }
+                    if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                        newNpc->flags |= NPC_FLAG_100;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_4000) {
+                        newNpc->flags |= NPC_FLAG_1000000;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_2000) {
+                        newNpc->flags |= NPC_FLAG_NO_AI;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_8000) {
+                        newNpc->flags |= NPC_FLAG_10000000;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_10000) {
+                        newNpc->flags |= NPC_FLAG_20000000;
+                    }
+                    if (enemy->flags & ENEMY_FLAGS_80) {
+                        newNpc->flags |= NPC_FLAG_LOCK_ANIMS;
+                    }
+                    enemy->scriptGroup = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
+                    if (enemy->flags & ENEMY_FLAGS_1) {
+                        enemy->scriptGroup = EVT_GROUP_08 | EVT_GROUP_02;
+                    }
+                    if (npcSettings->otherAI != NULL) {
+                        script = start_script(npcSettings->otherAI, EVT_PRIORITY_A, 0);
+                        enemy->aiScript = script;
+                        enemy->aiScriptID = script->id;
+                        script->owner1.enemy = enemy;
+                        script->owner2.npcID = enemy->npcID;
+                        script->groupFlags = enemy->scriptGroup;
+                    }
+
+                    npcData++;
+                }
+                groupList++;
+                e++;
+                totalNpcCount += groupNpcCount;
+            }
+            currentEncounter->numEncounters = e;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_1;
+            break;
+
+        case ENCOUNTER_SUBSTATE_CREATE_1:
+            cond2 = FALSE;
+            for (e = 0; e < currentEncounter->numEncounters; e++) {
+                encounter = currentEncounter->encounterList[e];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    if (enemy == NULL) {
+                        continue;
+                    }
+                    if (enemy->aiScript != NULL) {
+                        if (does_script_exist(enemy->aiScriptID)) {
+                            cond2 = TRUE;
+                        }
+                    }
+                }
+            }
+            if (!cond2) {
+                for (e = 0; e < currentEncounter->numEncounters; e++) {
+                    encounter = currentEncounter->encounterList[e];
+                    if (encounter == NULL) {
+                        continue;
+                    }
+                    for (i = 0; i < encounter->count; i++) {
+                        enemy = encounter->enemy[i];
+                        if (enemy == NULL) {
+                            continue;
+                        }
+                        if (enemy->initBytecode != NULL) {
+                            script = start_script(enemy->initBytecode, EVT_PRIORITY_A, 0);
+                            enemy->initScript = script;
+                            enemy->initScriptID = script->id;
+                            script->owner1.enemy = enemy;
+                            script->owner2.npcID = enemy->npcID;
+                            script->groupFlags = enemy->scriptGroup;
+                        }
+                    }
+                }
+                gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_2;
+            }
+            break;
+
+        case ENCOUNTER_SUBSTATE_CREATE_2:
+            cond1 = FALSE;
+
+            for (e = 0; e < currentEncounter->numEncounters; e++) {
+                encounter = currentEncounter->encounterList[e];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    if (enemy == NULL) {
+                        continue;
+                    }
+                    if (enemy->initScript != NULL) {
+                        if (does_script_exist(enemy->initScriptID)) {
+                            cond1 = TRUE;
+                        } else {
+                            enemy->initScript = NULL;
+                        }
+                    }
+                }
+            }
+
+            if (cond1) {
+                break;
+            }
+
+            for (e = 0; e < currentEncounter->numEncounters; e++) {
+                encounter = currentEncounter->encounterList[e];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    if (enemy == NULL) {
+                        continue;
+                    }
+                    if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy->aiBytecode != NULL) {
+                            script = start_script(enemy->aiBytecode, EVT_PRIORITY_A, 0);
+                            enemy->aiScript = script;
+                            enemy->aiScriptID = script->id;
+                            enemy->unk_C8 = 100;
+                            script->owner1.enemy = enemy;
+                            script->owner2.npcID = enemy->npcID;
+                            script->groupFlags = enemy->scriptGroup;
+                        }
+                    }
+                }
+            }
+
+            for (e = 0; e < currentEncounter->numEncounters; e++) {
+                encounter = currentEncounter->encounterList[e];
+                if (encounter == NULL) {
+                    continue;
+                }
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    if (enemy == NULL) {
+                        continue;
+                    }
+                    if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy->auxBytecode != NULL) {
+                            script = start_script(enemy->auxBytecode, EVT_PRIORITY_A, 0);
+                            enemy->auxScript = script;
+                            enemy->auxScriptID = script->id;
+                            script->owner1.enemy = enemy;
+                            script->owner2.npcID = enemy->npcID;
+                            script->groupFlags = enemy->scriptGroup;
+                        }
+                    }
+                }
+            }
+            resume_all_group(EVT_GROUP_10);
+            gEncounterState = ENCOUNTER_STATE_NEUTRAL;
+            D_8009A678 = 1;
+            gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL_0;
+            break;
+    }
+}
 
 void init_encounters_ui(void) {
 }
 
 s32 is_starting_conversation(void) {
-    s32 ret = gGameState == 3;
+    s32 ret = gEncounterState == ENCOUNTER_STATE_PRE_BATTLE;
 
-    if (gCurrentEncounter.hitType == 5) {
-        ret = 1;
+    if (gCurrentEncounter.hitType == ENCOUNTER_TRIGGER_CONVERSATION) {
+        ret = TRUE;
     }
     return ret;
 }

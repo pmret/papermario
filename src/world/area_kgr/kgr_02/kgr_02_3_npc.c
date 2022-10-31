@@ -283,7 +283,7 @@ NpcSettings N(NpcSettings_Fuzzipede) = {
     .ai = &N(EVS_NpcAI_Fuzzipede),
     .onHit = &N(EVS_NpcHit_Fuzzipede),
     .onDefeat = &N(EVS_NpcDefeat_Fuzzipede),
-    .unk_27 = 100,
+    .unk_24 = 100,
 };
 
 StaticNpc N(NpcData_Fuzzipede) = {

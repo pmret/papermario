@@ -325,25 +325,25 @@ void set_time_freeze_mode(s32 mode) {
         case 0:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES);
-            resume_all_group(3);
+            resume_all_group(EVT_GROUP_01 | EVT_GROUP_02);
             break;
         case 1:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200);
             gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_BATTLES;
-            suspend_all_group(1);
+            suspend_all_group(EVT_GROUP_01);
             break;
         case 2:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800);
             gOverrideFlags |= GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
-            suspend_all_group(2);
+            suspend_all_group(EVT_GROUP_02);
             break;
         case 3:
             timeFreezeMode = mode;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_800;
             gOverrideFlags |= GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
-            suspend_all_group(2);
+            suspend_all_group(EVT_GROUP_02);
             break;
         case 4:
             timeFreezeMode = mode;

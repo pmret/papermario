@@ -1998,7 +1998,7 @@ void btl_state_update_end_training_battle(void) {
             if (playerData->trainingsDone < 9999) {
                 playerData->trainingsDone++;
             }
-            encounterStatus->battleOutcome = 3;
+            encounterStatus->battleOutcome = OUTCOME_ENEMY_FLED;
             if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
                 bgm_set_song(0, -1, 0, 1500, 8);
             }
@@ -2024,7 +2024,7 @@ void btl_state_update_end_battle(void) {
             if (gGameStatusPtr->debugEnemyContact == 2) {
                 D_80280A30 = 255;
             }
-            if (encounterStatus->battleOutcome == 1 && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
+            if (encounterStatus->battleOutcome == OUTCOME_PLAYER_LOST && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
                 btl_cam_unfreeze();
                 btl_cam_use_preset(BTL_CAM_PRESET_B);
                 set_screen_overlay_color(0, 0, 0, 0);
@@ -2123,7 +2123,7 @@ void btl_state_update_end_battle(void) {
 void btl_state_draw_end_battle(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    if (gCurrentEncounter.battleOutcome == 1 && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
+    if (gCurrentEncounter.battleOutcome == OUTCOME_PLAYER_LOST && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
         camera->auxBoomZOffset += 0x100;
         set_screen_overlay_params_front(7, D_80280A30);
     } else {
@@ -2223,7 +2223,7 @@ void btl_state_update_run_away(void) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_ENEMY_FLED)) {
                     gBattleState2 = BATTLE_STATE2_UNK_3;
                 } else {
-                    currentEncounter->battleOutcome = 2;
+                    currentEncounter->battleOutcome = OUTCOME_PLAYER_FLED;
                     if (is_ability_active(ABILITY_RUNAWAY_PAY) == 0) {
                         gBattleState2 = BATTLE_STATE2_UNK_B;
                     } else {
@@ -2884,26 +2884,28 @@ void btl_state_update_player_move(void) {
 void btl_state_draw_player_move(void) {
 }
 
-// control flow
-#ifdef NON_MATCHING
 void btl_state_update_end_player_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
+    s32 prevHPDrainCount;
     Evt* script;
+    s32 var_a0;
+    s32 var_s2;
+    s32 var_s4;
 
     if (gBattleState2 == 0) {
         if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
             gBattleState2 = 5;
-        } else if (
-            ((gBattleStatus.flags2 & 0x04000000) ||
-             is_ability_active(0x12) ||
-             is_ability_active(0x1F) ||
-             is_ability_active(0x34)
-            ) &&
-            player->stoneStatus != 0xC &&
-            !battleStatus->outtaSightActive)
-        {
+        } else if (!(gBattleStatus.flags2 & 0x04000000) &&
+             !is_ability_active(0x12) &&
+             !is_ability_active(0x1F) &&
+             !is_ability_active(0x34)
+            ) {
+            gBattleState2 = 5;
+        } else if (player->stoneStatus == 0xC || battleStatus->outtaSightActive) {
+            gBattleState2 = 5;
+        } else {
             s32 prevHPDrainCount = 0;
             s32 var_s2 = 0;
             s32 var_s4 = 0;
@@ -2926,7 +2928,7 @@ void btl_state_update_end_player_turn(void) {
             if (prevHPDrainCount + var_s2 + var_s4 == 0) {
                 gBattleState2 = 5;
             } else {
-                battleStatus->battlePhase = PHASE_PLAYER_HAPPY;
+                battleStatus->battlePhase = 0x1E;
                 script = start_script(&PlayerScriptDispatcher, 0xA, 0);
                 player->takeTurnScript = script;
                 player->takeTurnID = script->id;
@@ -2949,11 +2951,9 @@ void btl_state_update_end_player_turn(void) {
                     script->varTable[12] = 99;
                 }
 
-                gBattleStatus.flags2 &= 0xFBFFFFFF;
+                gBattleStatus.flags2 &= ~0x04000000;
                 gBattleState2 = 5;
             }
-        } else {
-            gBattleState2 = 5;
         }
     }
 
@@ -2981,9 +2981,9 @@ void btl_state_update_end_player_turn(void) {
             partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
             partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
         }
-        player->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+        player->currentPos.z += sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
         player->yaw = clamp_angle(-player->state.angle);
-        partner->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+        partner->currentPos.z -= sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
         partner->yaw = clamp_angle(-player->state.angle);
         player->state.angle += 90.0f;
 
@@ -3004,7 +3004,7 @@ void btl_state_update_end_player_turn(void) {
     }
 
     if (gBattleState2 == 0xA && !btl_check_enemies_defeated()) {
-        if (battleStatus->moveCategory == 2 && battleStatus->itemUsesLeft >= 2) {
+        if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
             btl_cam_use_preset(2);
             btl_cam_move(0xA);
             gBattleStatus.flags2 &= ~2;
@@ -3027,44 +3027,34 @@ void btl_state_update_end_player_turn(void) {
                 return;
             }
 
-            if (gBattleStatus.flags1 & 0x04000000) {
-                if (battleStatus->hustleTurns != 0) {
-                    battleStatus->hustleTurns--;
-                }
+            if (gBattleStatus.flags1 & 0x04000000 && battleStatus->hustleTurns != 0) {
+                battleStatus->hustleTurns--;
             }
-
-            if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & 0x04000000)) {
+            if (battleStatus->hustleTurns != 0 && gBattleStatus.flags1 & 0x04000000) {
                 gBattleStatus.flags2 &= ~2;
                 btl_set_state(0xC);
             } else {
-                gBattleStatus.flags1 &= 0xFBFFFFFF;
+                gBattleStatus.flags1 &= ~0x04000000;
                 btl_set_state(8);
             }
-            return;
-        }
-
-        if (gBattleStatus.flags1 & 0x04000000) {
-            if (battleStatus->hustleTurns != 0) {
+        } else {
+           if (gBattleStatus.flags1 & 0x04000000 && battleStatus->hustleTurns != 0) {
                 battleStatus->hustleTurns--;
             }
-        }
-
-        if ((battleStatus->hustleTurns != 0) && (gBattleStatus.flags1 & 0x04000000)) {
-            gBattleStatus.flags2 &= ~2;
-            btl_set_state(0xC);
-        } else {
-            gBattleStatus.flags1 &= 0xFBFFFFFF;
-            if (!(gBattleStatus.flags2 & 0x40)) {
-                btl_set_state(8);
+            if ((battleStatus->hustleTurns != 0) && gBattleStatus.flags1 & 0x04000000) {
+                gBattleStatus.flags2 &= ~2;
+                btl_set_state(0xC);
             } else {
-                btl_set_state(9);
+                gBattleStatus.flags1 &= ~0x04000000;
+                if (!(gBattleStatus.flags2 & 0x40)) {
+                    btl_set_state(8);
+                } else {
+                    btl_set_state(9);
+                }
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "16F740", btl_state_update_end_player_turn);
-#endif
 
 void btl_state_draw_end_player_turn(void) {
 }
@@ -3724,19 +3714,19 @@ void btl_state_update_first_strike(void) {
             }
 
             switch (encounterStatus->hitType) {
-                case 2:
+                case ENCOUNTER_TRIGGER_JUMP:
                     battleStatus->moveCategory = 0;
                     battleStatus->selectedMoveID = MOVE_UNUSED_JUMP4;
                     battleStatus->selectedItemID = encounterStatus->hitTier;
                     battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP4].flags;
                     break;
-                case 4:
+                case ENCOUNTER_TRIGGER_HAMMER:
                     battleStatus->moveCategory = 1;
                     battleStatus->selectedMoveID = MOVE_UNUSED_HAMMER4;
                     battleStatus->selectedItemID = encounterStatus->hitTier;
                     battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER4].flags;
                     break;
-                case 6:
+                case ENCOUNTER_TRIGGER_PARTNER:
                     btl_set_state(BATTLE_STATE_PARTNER_FIRST_STRIKE);
                     return;
             }

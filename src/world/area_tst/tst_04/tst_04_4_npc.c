@@ -47,7 +47,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .onHit = &N(EVS_NpcHit_Goompa),
     .aux = &N(EVS_NpcAux_Goompa),
     .onDefeat = &N(EVS_NpcDefeat_Goompa),
-    .unk_27 = 200,
+    .unk_24 = 200,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4,
 };
 

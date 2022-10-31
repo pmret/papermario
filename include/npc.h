@@ -138,8 +138,7 @@ typedef struct NpcSettings {
     /* 0x18 */ EvtScript* aux;
     /* 0x1C */ EvtScript* onDefeat;
     /* 0x20 */ s32 flags;
-    /* 0x24 */ char unk_24[3];
-    /* 0x24 */ s8 unk_27;
+    /* 0x24 */ s32 unk_24;
     /* 0x28 */ s16 level;
     /* 0x2A */ s16 actionFlags;  // action flags: 1 = jump on seeing player
 } NpcSettings; // size = 0x2C
@@ -268,12 +267,14 @@ typedef struct StaticNpc {
 } StaticNpc; // size = 0x1F0
 
 /// Zero-terminated.
-typedef struct {
+typedef struct NpcGroup {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
     /* 0x08 */ s16 battle;
     /* 0x0A */ s16 stage;
-} NpcGroupList[]; // size = 0x0C
+} NpcGroup; // size = 0x0C
+
+typedef NpcGroup NpcGroupList[];
 
 // function signature used for state handlers in AI main functions
 typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);
@@ -380,7 +381,15 @@ typedef struct EncounterStatus {
     /* 0x0A0 */ s8 dizzyAttackStatus;
     /* 0x0A1 */ char unk_A1[0x1];
     /* 0x0A2 */ s16 dizzyAttackDuration;
-    /* 0x0A4 */ char unk_A4[0xC];
+    /* 0x0A4 */ s8 unk_A4;
+    /* 0x0A5 */ char unk_A5[0x1];
+    /* 0x0A6 */ s16 unk_A6;
+    /* 0x0A8 */ s8 unk_A8;
+    /* 0x0A9 */ char unk_A9[0x1];
+    /* 0x0AA */ s16 unk_AA;
+    /* 0x0AC */ s8 unk_AC;
+    /* 0x0AD */ char unk_AD[0x1];
+    /* 0x0AE */ s16 unk_AE;
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xFB0 */ s16 recentMaps[2];
     /* 0xFB4 */ char unk_FB4[4];
