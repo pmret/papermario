@@ -714,7 +714,7 @@ void au_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap) {
     s32 tblOffset, shortsOffset;
     s32* romPtr = &arg0->baseRomOffset;
 
-    au_read_rom(romAddr, &sbnHeader, sizeof(SBNHeader));
+    au_read_rom(romAddr, &sbnHeader, sizeof(sbnHeader));
     numEntries = sbnHeader.numEntries;
     arg0->baseRomOffset = romAddr;
     tableSize = numEntries * sizeof(SBNFileEntry);
@@ -735,7 +735,7 @@ void au_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap) {
 
     if (sbnHeader.INIToffset != 0) {
         initBase = *romPtr + sbnHeader.INIToffset;
-        au_read_rom(initBase, &initHeader, sizeof(INITHeader));
+        au_read_rom(initBase, &initHeader, sizeof(initHeader));
 
         tblOffset = initHeader.tblOffset;
         size = (initHeader.tblSize + 0xF) & 0xFFF0;
@@ -784,9 +784,9 @@ void au_load_PER(AuGlobals* globals, s32 romAddr) {
     s32 numItems;
     void* end;
 
-    au_read_rom(romAddr, &header, sizeof(PERHeader));
-    size = header.size - sizeof(PERHeader);
-    au_read_rom(romAddr + sizeof(PERHeader), globals->dataPER, size);
+    au_read_rom(romAddr, &header, sizeof(header));
+    size = header.size - sizeof(header);
+    au_read_rom(romAddr + sizeof(header), globals->dataPER, size);
     numItems = size / sizeof(PEREntry);
     numItemsLeft = 6 - numItems;
     if (numItemsLeft > 0) {
@@ -804,9 +804,9 @@ void au_load_PRG(AuGlobals* arg0, s32 romAddr) {
     s32 dataRomAddr;
     void* end;
 
-    au_read_rom(romAddr, &header, sizeof(PERHeader));
-    dataRomAddr = romAddr + sizeof(PERHeader);
-    size = header.size - sizeof(PERHeader);
+    au_read_rom(romAddr, &header, sizeof(header));
+    dataRomAddr = romAddr + sizeof(header);
+    size = header.size - sizeof(header);
     if (size > 0x200) {
         size = 0x200;
     }
@@ -853,89 +853,115 @@ InstrumentGroup* au_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     return ret;
 }
 
-#ifdef NON_EQUIVALENT
 enum BKParseState {
-    EN_0 = 0,
-    EN_11 = 11,
-    EN_21 = 21,
-    EN_101 = 101,
-    EN_111 = 111,
-    EN_201 = 201,
-    EN_301 = 301,
+    BK_READ_DONE          = 0,
+    BK_READ_FETCH_HEADER  = 11,
+    BK_READ_FETCH_DATA    = 21,
+    BK_READ_SWIZZLE       = 31,
+    BK_READ_PROCESS_CR    = 101,
+    BK_READ_SWIZZLE_CR    = 111,
+    BK_READ_PROCESS_DR    = 201,
+    BK_READ_UNK_DR        = 211,
+    BK_READ_PROCESS_SR    = 301,
+    BK_READ_UNK_SR        = 311,
 };
-s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup) {
+
+#define AL_HEADER_SIG_BK 0x424B
+#define AL_HEADER_SIG_CR 0x4352
+#define AL_HEADER_SIG_DR 0x4452
+#define AL_HEADER_SIG_SR 0x5352
+
+SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup) {
     ALHeap* heap = gSynDriverPtr->heap;
     BKHeader bkHeader;
     BKHeader* header = &bkHeader;
-    u16 s3;
-    u16 s2;
-    s32 size;
-    u8* s4;
+    u16 keepReading;
+    u16 readState;
     InstrumentGroup* group;
+    Instrument** inst;
+    s32 instrumentCount;
+    s32 size;
     u32 i;
-    s32 a2;
 
-    au_read_rom(bkFileOffset, header, sizeof(BKHeader));
-    s3 = EN_11;
-    s2 = TRUE;
-    do {
-        switch (s3) {
-            case EN_11:
-                if (header->signature == 0x424B /* BK */ && header->size != 0) {
-                    s3 = EN_21;
+    au_read_rom(bkFileOffset, header, sizeof(*header));
+    readState = BK_READ_FETCH_HEADER;
+    keepReading = TRUE;
+
+    while (keepReading) {
+        switch (readState) {
+            case BK_READ_DONE:
+                keepReading = FALSE;
+                break;
+            case BK_READ_FETCH_HEADER:
+                if (header->signature != AL_HEADER_SIG_BK) {
+                    keepReading = FALSE;
+                } else if (header->size == 0) {
+                    keepReading = FALSE;
                 } else {
-                    s2 = FALSE;
+                    readState = BK_READ_FETCH_DATA;
                 }
                 break;
-            case EN_21:
-                if (header->format == 0x4352) { // CR
-                    s3 = EN_101;
-                } else if (header->format == 0x4452) { // DR
-                    s3 = EN_201;
-                } else if (header->format == 0x5352) { // SR
-                    s3 = EN_301;
+            case BK_READ_FETCH_DATA:
+                if (header->format == AL_HEADER_SIG_CR) {
+                    readState = BK_READ_PROCESS_CR;
+                } else if (header->format == AL_HEADER_SIG_DR) {
+                    readState = BK_READ_PROCESS_DR;
+                } else if (header->format == AL_HEADER_SIG_SR) {
+                    readState = BK_READ_PROCESS_SR;
                 } else {
-                    s2 = FALSE;
+                    keepReading = FALSE;
                 }
                 break;
-            case EN_101:
-                size = ALIGN16_(header->instrumetsSize) + ALIGN16_(header->unkSizeA) + ALIGN16_(header->predictorsSize) + ALIGN16_(header->unkSizeB) + sizeof(BKHeader);
+                      
+            case BK_READ_PROCESS_CR:
+                size = ALIGN16_(header->instrumetsSize)
+                    + ALIGN16_(header->unkSizeA)
+                    + ALIGN16_(header->predictorsSize)
+                    + ALIGN16_(header->unkSizeB)
+                    + sizeof(*header);
                 if (bank == NULL) {
                     bank = alHeapAlloc(heap, 1, size);
                 }
                 au_read_rom(bkFileOffset, bank, size);
+                
                 group = au_get_BK_instruments(bankGroup, bankIndex);
-                a2 = 0;
-                for (i = 0; i < ARRAY_COUNT(*group); i++) {
-                    if (header->instruments[i] != 0) {
-                        (*group)[i] = (s32)bank + header->instruments[i];
-                        a2++;
+                inst = (*group);
+                instrumentCount = 0;
+                
+                for (i = 0; i < ARRAY_COUNT(header->instruments); inst++, i++) {
+                    u16 instOffset = header->instruments[i];
+                    if (instOffset != 0) {
+                        instrumentCount++;
+                        *inst = AU_FILE_RELATIVE(bank, instOffset);
                     } else {
-                        (*group)[i] = NULL;
+                        *inst = NULL;
                     }
                 }
-
-                if (a2 != 0) {
-                    s3 = EN_111;
+                
+                if (instrumentCount != 0) {
+                    readState = BK_READ_SWIZZLE_CR;
                 } else {
-                    s2 = FALSE;
+                    keepReading = FALSE;
                 }
                 break;
-            case EN_111:
+            case BK_READ_SWIZZLE_CR:
                 au_swizzle_BK_instruments(bkFileOffset, bank, *group, 16, 1);
-                s3 = 0;
+                readState = BK_READ_DONE;
                 break;
+
+            // inferred states
+            case BK_READ_PROCESS_DR:
+            case BK_READ_UNK_DR:
+            case BK_READ_PROCESS_SR:
+            case BK_READ_UNK_SR:
             default:
-                s2 = FALSE;
+                keepReading = FALSE;
                 break;
         }
-    } while (s2);
+    }
 
     return bank;
 }
-#else
-INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
-#endif
 
 void au_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
     Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
@@ -970,32 +996,24 @@ void au_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGrou
     }
 }
 
-#ifdef NON_MATCHING
-enum ReadState {
-    BK_READ_DONE            = 0,
-    BK_READ_FETCH_HEADER    = 11,
-    BK_READ_FETCH_DATA      = 21,
-    BK_READ_SWIZZLE         = 31,
-};
-
-#define AL_HEADER_SIG_BK 0x424B
-#define AL_HEADER_SIG_CR 0x4352
-
 s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup) {
     ALHeap* heap = gSynDriverPtr->heap;
     BKHeader localHeader;
+    void* fileData = vaddr;
     BKHeader* header = &localHeader;
-    Instrument** instrumentGroup;
+    InstrumentGroup* group;
     Instrument* instruments;
+    Instrument** inst;
     u32 instrCount;
     u32 readState;
     s32 keepReading;
-    void* fileData = vaddr;
-    u32 i;
 
-    fileData = vaddr;
+    u32 i;
+    s32 swizzleArg;
+    swizzleArg = 0;
     readState = BK_READ_FETCH_HEADER;
     keepReading = TRUE;
+
 
     while (keepReading) {
         switch (readState) {
@@ -1003,28 +1021,33 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
                 keepReading = FALSE;
                 break;
             case BK_READ_FETCH_HEADER:
-                au_read_rom(*bkFileOffset, &localHeader, 0x40U);
-                if ((header->signature == AL_HEADER_SIG_BK) && (header->size != 0) && (header->format == AL_HEADER_SIG_CR)) {
-                    readState = BK_READ_FETCH_DATA;
-                } else {
+                au_read_rom(*bkFileOffset, &localHeader, sizeof(localHeader));
+                if (header->signature != AL_HEADER_SIG_BK) {
                     keepReading = FALSE;
+                } else if (header->size == 0) {
+                    keepReading = FALSE;
+                } else if (header->format != AL_HEADER_SIG_CR) {
+                    keepReading = FALSE;
+                } else {
+                    readState = BK_READ_FETCH_DATA;
                 }
                 break;
             case BK_READ_FETCH_DATA:
-                if (vaddr == NULL) {
+                if (fileData == NULL) {
                     fileData = alHeapAlloc(heap, 1, header->size);
                 }
                 au_read_rom(*bkFileOffset, fileData, header->size);
 
                 instrCount = 0;
-                instrumentGroup = (Instrument**)au_get_BK_instruments(bankGroup, bankIndex);
-
-                for (i = 0; i < 16; i++) {
-                    if (header->instruments[i] != 0) {
-                        instrumentGroup[i] = header->instruments[i] + fileData;
+                group = au_get_BK_instruments(bankGroup, bankIndex);
+                inst = (*group);
+                for(i = 0; i < ARRAY_COUNT(header->instruments); inst++, i++) {
+                    u16 instOffset = header->instruments[i];
+                    if(instOffset != 0) {
                         instrCount++;
+                        *inst = AU_FILE_RELATIVE(fileData, instOffset);
                     } else {
-                        instrumentGroup[i] = NULL;
+                        *inst =  NULL;
                     }
                 }
 
@@ -1035,7 +1058,7 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
                 }
                 break;
             case BK_READ_SWIZZLE:
-                au_swizzle_BK_instruments(fileData, fileData, instrumentGroup, 0x10U, 0);
+                au_swizzle_BK_instruments((s32)fileData, fileData, *group, 0x10U, swizzleArg);
                 readState = BK_READ_DONE;
                 break;
             default:
@@ -1045,12 +1068,9 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
     }
     return fileData;
 }
-#else
-INCLUDE_ASM(s32, "audio/2e230_len_2190", func_80054AA0);
-#endif
 
 s32 snd_load_BK(s32 bkFileOffset, s32 bankIndex) {
-    snd_load_BK_to_bank(bkFileOffset, gSoundGlobals->banks[bankIndex], bankIndex, 1);
+    au_load_BK_to_bank(bkFileOffset, gSoundGlobals->banks[bankIndex], bankIndex, 1);
     return 0;
 }
 
@@ -1103,6 +1123,8 @@ void func_80054DA8(u32 bMonoSound) {
         }
     }
 }
+
+// probable split
 
 void au_read_rom(s32 romAddr, void* buffer, u32 size) {
     s32 nchunks = size / 0x2000;

@@ -673,6 +673,7 @@ enum SoundIDs {
     SOUND_152                       = 0x00000152,
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_158                       = 0x00000158,
+    SOUND_15D                       = 0x0000015D,
     SOUND_15E                       = 0x0000015E,
     SOUND_160                       = 0x00000160,
     SOUND_161                       = 0x00000161,
@@ -977,7 +978,10 @@ enum SoundIDs {
     SOUND_36E                       = 0x0000036E,
     SOUND_36F                       = 0x0000036F,
     SOUND_370                       = 0x00000370,
+    SOUND_371                       = 0x00000371,
     SOUND_372                       = 0x00000372,
+    SOUND_373                       = 0x00000373,
+    SOUND_374                       = 0x00000374,
     SOUND_375                       = 0x00000375,
     SOUND_376                       = 0x00000376,
     SOUND_377                       = 0x00000377,
@@ -1459,6 +1463,21 @@ enum SoundIDs {
 
 enum SoundInstanceFlags {
     SOUND_INSTANCE_FLAG_4           = 0x00000004,
+};
+
+enum SoundSpatializationFlags {
+    SOUND_SPACE_MODE_MASK           = 0x0000FFFF,
+    SOUND_SPACE_MODE_0              = 0x00000000,
+    SOUND_SPACE_MODE_1              = 0x00000001,
+    SOUND_SPACE_FULL                = 0x00000002,
+    SOUND_SPACE_PARAMS_MASK         = 0xFFFF0000,
+    SOUND_PARAM_MUTE                = 0x00010000,
+    SOUND_PARAM_CLIP_OFFSCREEN_ANY  = 0x00020000,
+    SOUND_PARAM_CLIP_OFFSCREEN_X    = 0x00040000,
+    SOUND_PARAM_CLIP_OFFSCREEN_Y    = 0x00080000,
+    SOUND_PARAM_MOST_QUIET          = 0x00100000,
+    SOUND_PARAM_MORE_QUIET          = 0x00200000,
+    SOUND_PARAM_QUIET               = 0x00400000,
 };
 
 enum SoundType {
@@ -2654,6 +2673,8 @@ enum VisibilityGroup {
     VIS_GROUP_1             = 1,
     VIS_GROUP_2             = 2,
     VIS_GROUP_3             = 3,
+    VIS_GROUP_4             = 4,
+    VIS_GROUP_5             = 5,
 };
 
 enum ItemSpawnModes {
@@ -4094,8 +4115,8 @@ enum BattleStates2 {
     BATTLE_STATE2_UNK_2                 = 0x00000002,
     BATTLE_STATE2_UNK_3                 = 0x00000003,
     BATTLE_STATE2_UNK_4                 = 0x00000004,
-    BATTLE_STATE2_UNK_5                 = 0x00000005,
-    BATTLE_STATE2_UNK_6                 = 0x00000006,
+    BATTLE_STATE2_BEGIN_LEVEL_UP        = 0x00000005,
+    BATTLE_STATE2_LEVEL_UP_SHOW_HUD     = 0x00000006,
     BATTLE_STATE2_UNK_7                 = 0x00000007,
     BATTLE_STATE2_UNK_8                 = 0x00000008,
     BATTLE_STATE2_UNK_9                 = 0x00000009,

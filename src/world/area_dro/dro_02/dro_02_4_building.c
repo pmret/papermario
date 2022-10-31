@@ -215,7 +215,7 @@ EvtScript N(EVS_SetupBuildings) = {
         EVT_CALL(UpdateColliderTransform, COLLIDER_o1287)
     EVT_END_IF
     EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(0, 4),
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_4),
         EVT_PTR(N(EVS_OpenDoor_Hideout)),
         EVT_PTR(N(EVS_MoveWalls_Hideout)),
         EVT_PTR(N(EVS_DropDoor_Hideout)),
@@ -229,7 +229,7 @@ EvtScript N(EVS_SetupBuildings) = {
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromInside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1289, 1, 0)
     EVT_END_IF
     EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(1, 5),
+        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_5),
         EVT_PTR(N(EVS_OpenDoor_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,

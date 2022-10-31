@@ -111,6 +111,19 @@ typedef struct Color4f {
     /* 0x0C */ f32 a;
 } Color4f; // size = 0x10
 
+typedef struct Color3i {
+    /* 0x00 */ s32 r;
+    /* 0x04 */ s32 g;
+    /* 0x08 */ s32 b;
+} Color3i; // size = 0xC
+
+typedef struct Color4i {
+    /* 0x00 */ s32 r;
+    /* 0x04 */ s32 g;
+    /* 0x08 */ s32 b;
+    /* 0x0C */ s32 a;
+} Color4i; // size = 0x10
+
 typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {
@@ -2519,5 +2532,13 @@ typedef struct GameMode {
     /* 0x10 */ void (*render)(void);
     /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
 } GameMode; // size = 0x18
+
+typedef struct PartnerDMAData {
+    /* 0x00 */ u32 dmaStart;
+    /* 0x04 */ u32 dmaEnd;
+    /* 0x08 */ void* dmaDest;
+    /* 0x0C */ struct ActorBlueprint* ActorBlueprint;
+    /* 0x10 */ s32 y;
+} PartnerDMAData; // size = 0x14
 
 #endif

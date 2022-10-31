@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Goompa.h"
 
-#define NAMESPACE battle_partner_goombario
+#define NAMESPACE battle_partner_goompa
 
 extern EvtScript N(init_80238110);
 extern EvtScript N(takeTurn_802383F4);

@@ -64,7 +64,7 @@ void au_load_PER(AuGlobals* globals, s32 romAddr);
 void au_load_PRG(AuGlobals* arg0, s32 romAddr);
 // INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
 InstrumentGroup* au_get_BK_instruments(s32 bankGroup, u32 bankIndex);
-SoundBank* snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup);
+SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup);
 void au_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4);
 s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup);
 s32 snd_load_BK(s32 bkFileOffset, s32 bankIndex);
@@ -322,5 +322,5 @@ void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 
 void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
 void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
-void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
+void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
 */

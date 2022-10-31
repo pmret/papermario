@@ -5,7 +5,7 @@
 #error "Define PARTY_IMAGE to the asset name to use LoadPartyImage."
 #endif
 
-ApiStatus N(LoadPartyImage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LoadPartyImage)) {
     static PAL_BIN palette[256];
     static IMG_BIN raster[0x3D90]; // 10 bytes added for padding: 150 * 105 = 3D86
     static MessageImageData image;

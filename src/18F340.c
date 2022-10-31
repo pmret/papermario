@@ -1,9 +1,20 @@
 #include "common.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "script_api/battle.h"
+#include "sprite/npc/Twink.h"
+#include "sprite/npc/BattleMerlee.h"
 
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
+
+extern EvtScript D_80286194;
+extern EvtScript D_802988F0;
+extern EvtScript D_80298724;
+extern EvtScript D_80298948;
+ApiStatus func_802749F8(Evt* script, s32 isInitialCall);
+ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall);
+ApiStatus func_802A92A0_422D70(Evt* script, s32 isInitialCall);
 
 BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
@@ -585,3 +596,1200 @@ ApiStatus func_802620F8(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+EvtScript D_80284A20 = {
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80284A30 = {
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript MarioEnterStage = {
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(SetBattleCamTarget, -80, 35, 8)
+    EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
+    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_SUB(LVar0, 100)
+    EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(RandInt, 100, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_GT(50)
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_Running)
+            EVT_CALL(PlayerRunToGoal, 25)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
+        EVT_CASE_GT(20)
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_BeforeJump)
+            EVT_CALL(func_80273444, 18, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BeforeJump)
+            EVT_WAIT(7)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+            EVT_CALL(PlayerRunToGoal, 20)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CHILD_THREAD
+                EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
+            EVT_END_CHILD_THREAD
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_162)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GetUp)
+            EVT_WAIT(10)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_DustOff)
+            EVT_WAIT(10)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PeachEnterStage = {
+    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(SetBattleCamTarget, -80, 35, 8)
+    EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
+    EVT_CHILD_THREAD
+        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        EVT_SUB(LVar0, 100)
+        EVT_ADD(LVar1, 50)
+        EVT_CALL(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, 0, ANIM_Twink_Angry)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 45, -10, 10)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_SUB(LVar0, 100)
+    EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(SetGoalToHome, ACTOR_SELF)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach_A0003)
+    EVT_CALL(PlayerRunToGoal, 40)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach_A0002)
+    EVT_WAIT(15)
+    EVT_CALL(func_8026BF48, 0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PlayerScriptDispatcher = {
+    EVT_CALL(GetBattlePhase, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
+            EVT_EXEC_WAIT(ExecutePlayerAction)
+        EVT_CASE_EQ(PHASE_FIRST_STRIKE)
+            EVT_EXEC_WAIT(PlayerFirstStrike)
+        EVT_CASE_EQ(PHASE_5)
+            EVT_EXEC_WAIT(D_80286194)
+        EVT_CASE_EQ(PHASE_RUN_AWAY_START)
+            EVT_EXEC_WAIT(RunAwayStart)
+        EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
+            EVT_EXEC_WAIT(RunAwayFail)
+        EVT_CASE_EQ(PHASE_RUN_AWAY_RESET)
+            EVT_EXEC_WAIT(RunAwayReset)
+        EVT_CASE_EQ(PHASE_USE_LIFE_SHROOM)
+            EVT_EXEC_WAIT(UseLifeShroom)
+        EVT_CASE_EQ(PHASE_USE_DEFEND)
+            EVT_EXEC_WAIT(StartDefend)
+        EVT_CASE_EQ(PHASE_MERLEE_ATTACK_BONUS)
+            EVT_EXEC_WAIT(MerleeAttackBonus)
+        EVT_CASE_EQ(PHASE_MERLEE_DEFENSE_BONUS)
+            EVT_EXEC_WAIT(MerleeDefenseBonus)
+        EVT_CASE_EQ(PHASE_MERLEE_EXP_BONUS)
+            EVT_EXEC_WAIT(MerleeExpBonus)
+        EVT_CASE_EQ(PHASE_PLAYER_HAPPY)
+            EVT_EXEC_WAIT(PlayerHappy)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PeachScriptDispatcher = {
+    EVT_CALL(GetBattlePhase, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
+            EVT_EXEC_WAIT(ExecutePeachAction)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript ExecutePlayerAction = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(0)
+            EVT_CALL(LoadMoveScript)
+            EVT_EXEC_WAIT(LVar0)
+        EVT_CASE_EQ(1)
+            EVT_CALL(LoadMoveScript)
+            EVT_EXEC_WAIT(LVar0)
+        EVT_CASE_EQ(2)
+            EVT_CALL(LoadItemScript)
+            EVT_EXEC_WAIT(LVar0)
+        EVT_CASE_EQ(8)
+            EVT_CALL(LoadStarPowerScript)
+            EVT_EXEC_WAIT(LVar0)
+    EVT_END_SWITCH
+    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript ExecutePeachAction = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(8)
+            EVT_CALL(LoadStarPowerScript)
+            EVT_EXEC_WAIT(LVar0)
+    EVT_END_SWITCH
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PlayerFirstStrike = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(0)
+            EVT_CALL(LoadMoveScript)
+            EVT_EXEC_WAIT(LVar0)
+        EVT_CASE_EQ(1)
+            EVT_CALL(LoadMoveScript)
+            EVT_EXEC_WAIT(LVar0)
+    EVT_END_SWITCH
+    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript StartDefend = {
+    EVT_CALL(activate_defend_command)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript HandleEvent_Player = {
+    EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
+    EVT_SWITCH(LVarF)
+        EVT_CASE_NE(EVENT_32)
+            EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_END_SWITCH
+    EVT_CALL(CloseActionCommandInfo)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
+    EVT_CALL(func_802693F0)
+    EVT_CALL(func_802749F8)
+    EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
+    EVT_SWITCH(LVarF)
+        EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
+        EVT_CASE_OR_EQ(EVENT_SPIKE_DEATH)
+            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_30)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_SUB(LVar0, 60)
+            EVT_ADD(LVar1, 40)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.1))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_HurtFoot, ANIM_Mario_HurtFoot, ANIM_Mario_HurtFoot)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 5, 0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Mario_HurtFoot)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_ADD(LVar0, 30)
+            EVT_SET(LVar1, 0)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.4))
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 10, 0, 2)
+            EVT_SUB(LVar0, 20)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 7, 0, 2)
+            EVT_SUB(LVar0, 10)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 4, 0, 2)
+            EVT_IF_EQ(LVarF, 39)
+                EVT_RETURN
+            EVT_END_IF
+        EVT_END_CASE_GROUP
+        EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
+        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
+            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_SUB(LVar0, 60)
+            EVT_ADD(LVar1, 40)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.1))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_50003, ANIM_Mario_50003, ANIM_Mario_50003)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 5, 0, 1)
+            EVT_CHILD_THREAD
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar5, LVar6, LVar7)
+                EVT_ADD(LVar5, 5)
+                EVT_ADD(LVar6, 4)
+                EVT_ADD(LVar7, 5)
+                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+                EVT_WAIT(2)
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar5, LVar6, LVar7)
+                EVT_ADD(LVar5, -5)
+                EVT_ADD(LVar6, 18)
+                EVT_ADD(LVar7, 5)
+                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+            EVT_END_CHILD_THREAD
+            EVT_SET_CONST(LVar1, ANIM_Mario_50003)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_ADD(LVar0, 30)
+            EVT_SET(LVar1, 0)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.4))
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 10, 0, 2)
+            EVT_SUB(LVar0, 20)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 7, 0, 2)
+            EVT_SUB(LVar0, 10)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 4, 0, 2)
+            EVT_IF_EQ(LVarF, 36)
+                EVT_RETURN
+            EVT_END_IF
+        EVT_END_CASE_GROUP
+        EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
+        EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
+            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_SUB(LVar0, 60)
+            EVT_ADD(LVar1, 40)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.1))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_HurtFoot, ANIM_Mario_HurtFoot, ANIM_Mario_HurtFoot)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 5, 0, 1)
+            EVT_CALL(ShowShockEffect, -127)
+            EVT_SET_CONST(LVar1, ANIM_Mario_HurtFoot)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+            EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_ADD(LVar0, 30)
+            EVT_SET(LVar1, 0)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.4))
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 10, 0, 2)
+            EVT_SUB(LVar0, 20)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 7, 0, 2)
+            EVT_SUB(LVar0, 10)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 4, 0, 2)
+            EVT_IF_EQ(LVarF, 38)
+                EVT_RETURN
+            EVT_END_IF
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(EVENT_LUCKY)
+            EVT_CALL(func_80260B70)
+            EVT_IF_EQ(LVar0, 0)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30009)
+                EVT_WAIT(30)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_ELSE
+                EVT_WAIT(30)
+            EVT_END_IF
+        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 15, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+            EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+            EVT_CALL(PlayerRunToGoal, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CASE_EQ(EVENT_32)
+            EVT_WAIT(10)
+            EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(func_80273444, 15, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+            EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+            EVT_CALL(PlayerRunToGoal, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
+        EVT_CASE_OR_EQ(EVENT_HIT)
+            EVT_SET_CONST(LVar1, ANIM_Mario_FallBack)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_80298724)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_END_CASE_GROUP
+        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_IMMUNE)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
+            EVT_SET_CONST(LVar1, ANIM_Mario_10002)
+            EVT_EXEC_WAIT(D_80298948)
+        EVT_END_CASE_GROUP
+        EVT_CASE_OR_EQ(EVENT_18)
+        EVT_CASE_OR_EQ(EVENT_BLOCK)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Mario_Crouch)
+            EVT_EXEC_WAIT(D_80298948)
+            EVT_WAIT(10)
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(EVENT_BURN_HIT)
+            EVT_SET_CONST(LVar1, ANIM_Mario_50003)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CASE_EQ(EVENT_FIRE_DEATH)
+            EVT_SET_CONST(LVar1, ANIM_Mario_50003)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_RETURN
+        EVT_CASE_EQ(EVENT_DEATH)
+            EVT_SET_CONST(LVar1, ANIM_Mario_FallBack)
+            EVT_SET(LVar2, 0)
+            EVT_EXEC_WAIT(D_802988F0)
+            EVT_RETURN
+        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
+            EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
+            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar7, LVar8, LVar9)
+            EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_BeforeJump)
+            EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar7, LVar8, LVar9)
+            EVT_CALL(func_80273444, 15, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BeforeJump)
+        EVT_CASE_DEFAULT
+    EVT_END_SWITCH
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80286194 = {
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(5)
+        EVT_ADD(LVar0, 72)
+        EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_80260BF4)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar0)
+    EVT_WAIT(31)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80286228 = {
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_50000)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15D)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(15)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 8, 0, 0)
+    EVT_CALL(func_80260DD8)
+    EVT_IF_EQ(LVar0, 1)
+        EVT_CALL(func_80260DB8)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_WAIT(5)
+    EVT_ELSE
+        EVT_CHILD_THREAD
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
+        EVT_END_CHILD_THREAD
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30001)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_162)
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_SET(LVar3, 6)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CHILD_THREAD
+            EVT_LOOP(2)
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_WAIT(5)
+            EVT_END_LOOP
+        EVT_END_CHILD_THREAD
+        EVT_LOOP(10)
+            EVT_SUB(LVar0, LVar3)
+            EVT_SUB(LVar3, 1)
+            EVT_IF_LT(LVar3, 1)
+                EVT_SET(LVar3, 1)
+            EVT_END_IF
+            EVT_CALL(SetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+        EVT_WAIT(15)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DUST_OFF)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GetUp)
+        EVT_WAIT(20)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_DustOff)
+        EVT_CHILD_THREAD
+            EVT_WAIT(7)
+            EVT_LOOP(2)
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                EVT_SUB(LVar0, 8)
+                EVT_ADD(LVar1, 14)
+                EVT_ADD(LVar2, 5)
+                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_WAIT(5)
+            EVT_END_LOOP
+        EVT_END_CHILD_THREAD
+        EVT_WAIT(5)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_WAIT(10)
+    EVT_END_IF
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript RunAwayStart = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(GetActionCommandMode, LVar2)
+    EVT_IF_EQ(LVar2, 0)
+        EVT_EXEC_WAIT(D_80286228)
+        EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_FLEE)
+    EVT_CALL(func_802A9000_422AD0, LVar0)
+    EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
+    EVT_CALL(func_80260E38)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_50000)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15D)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
+    EVT_WAIT(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
+    EVT_WAIT(5)
+    EVT_CALL(func_802A92A0_422D70, 0, 60, 3)
+    EVT_CALL(func_80260E5C)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(5)
+    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_WAIT(15)
+    EVT_WAIT(30)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 8, 0, 0)
+    EVT_CALL(GetActionSuccess, LVar0)
+    EVT_CALL(func_80260DD8)
+    EVT_IF_EQ(LVar0, 1)
+        EVT_CALL(func_80260DB8)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_WAIT(5)
+    EVT_ELSE
+        EVT_CHILD_THREAD
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
+        EVT_END_CHILD_THREAD
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30001)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_162)
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_SET(LVar3, 6)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CHILD_THREAD
+            EVT_LOOP(2)
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_WAIT(5)
+            EVT_END_LOOP
+        EVT_END_CHILD_THREAD
+        EVT_LOOP(10)
+            EVT_SUB(LVar0, LVar3)
+            EVT_SUB(LVar3, 1)
+            EVT_IF_LT(LVar3, 1)
+                EVT_SET(LVar3, 1)
+            EVT_END_IF
+            EVT_CALL(SetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+        EVT_WAIT(15)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DUST_OFF)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GetUp)
+        EVT_WAIT(20)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_DustOff)
+        EVT_CHILD_THREAD
+            EVT_WAIT(7)
+            EVT_LOOP(2)
+                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                EVT_SUB(LVar0, 8)
+                EVT_ADD(LVar1, 14)
+                EVT_ADD(LVar2, 5)
+                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_WAIT(5)
+            EVT_END_LOOP
+        EVT_END_CHILD_THREAD
+        EVT_WAIT(5)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_WAIT(10)
+    EVT_END_IF
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript RunAwayFail = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
+    EVT_CALL(PlayerRunToGoal, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript RunAwayReset = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30002)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
+    EVT_WAIT(15)
+    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_371)
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(30)
+        EVT_ADD(LVar0, 60)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(10)
+        EVT_ADD(LVar0, 36)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_WAIT(30)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3FB)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 1)
+    EVT_LOOP(0)
+        EVT_IF_EQ(LVar0, 90)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+        EVT_ADD(LVar0, LVar1)
+        EVT_ADD(LVar1, 2)
+        EVT_IF_GT(LVar0, 90)
+            EVT_SET(LVar0, 90)
+        EVT_END_IF
+        EVT_CALL(SetActorRotation, ACTOR_PLAYER, LVar0, 0, 0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 2)
+    EVT_CALL(SetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar2, 20)
+    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT(15)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80287404 = {
+    EVT_IF_EQ(LVar1, 0)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        EVT_WAIT(10)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 18)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_ADD(LVar1, 45)
+        EVT_SET(LVar3, LVar1)
+        EVT_ADD(LVar3, 10)
+        EVT_ADD(LVar3, 2)
+        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
+        EVT_SET(LVarA, LVar0)
+        EVT_CALL(base_GiveRefund)
+        EVT_WAIT(LVar0)
+        EVT_WAIT(15)
+        EVT_CALL(base_GiveRefundCleanup)
+        EVT_CALL(RemoveItemEntity, LVarA)
+    EVT_ELSE
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_WAIT(4)
+        EVT_ADD(LVar1, 45)
+        EVT_SET(LVar3, LVar1)
+        EVT_ADD(LVar3, 10)
+        EVT_ADD(LVar3, 2)
+        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
+        EVT_SET(LVarA, LVar0)
+        EVT_WAIT(15)
+        EVT_CALL(RemoveItemEntity, LVarA)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80287708 = {
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(SetBattleCamTarget, -85, 1, 0)
+    EVT_CALL(SetBattleCamOffsetZ, 41)
+    EVT_CALL(SetBattleCamZoom, 248)
+    EVT_CALL(MoveBattleCamOver, 30)
+    EVT_WAIT(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 45)
+    EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
+    EVT_SET(LVarE, LVar0)
+    EVT_CALL(base_GiveRefund)
+    EVT_WAIT(LVar0)
+    EVT_WAIT(15)
+    EVT_CALL(base_GiveRefundCleanup)
+    EVT_CALL(RemoveItemEntity, LVarE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80287834 = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(PlayerRunToGoal, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PlayEatFX = {
+    EVT_THREAD
+        EVT_LOOP(4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_WAIT(10)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Eat)
+    EVT_WAIT(45)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PlayDrinkFX = {
+    EVT_THREAD
+        EVT_LOOP(4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_WAIT(10)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Drink)
+    EVT_WAIT(45)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript UseLifeShroom = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CHILD_THREAD
+        EVT_CALL(func_80261388)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_CALL(DispatchEvent, ACTOR_PARTNER, EVENT_LIFE_SHROOM_PROC)
+            EVT_CALL(SetActorFlagBits, ACTOR_PARTNER, ACTOR_FLAG_NO_SHADOW, 1)
+            EVT_SET(LVar0, 255)
+            EVT_LOOP(10)
+                EVT_SUB(LVar0, 25)
+                EVT_IF_LT(LVar0, 0)
+                    EVT_SET(LVar0, 0)
+                EVT_END_IF
+                EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, LVar0)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 0)
+        EVT_END_IF
+    EVT_END_CHILD_THREAD
+    EVT_CALL(func_802610CC)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(MakeItemEntity, ITEM_LIFE_SHROOM, LVar0, LVar1, LVar2, 1, 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_SET(LVar3, 30)
+    EVT_SET(LVar4, 16)
+    EVT_LOOP(LVar3)
+        EVT_ADD(LVar4, 8)
+        EVT_IF_GT(LVar4, 255)
+            EVT_SET(LVar4, 255)
+        EVT_END_IF
+        EVT_ADDF(LVar1, EVT_FLOAT(1.0))
+        EVT_CALL(SetItemPos, LVarA, LVar0, LVar1, LVar2)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_SET(LVar3, LVar0)
+    EVT_SET(LVar4, LVar1)
+    EVT_SET(LVar5, LVar2)
+    EVT_CALL(func_802613A8)
+    EVT_CALL(base_GiveRefund)
+    EVT_IF_GT(LVar0, 0)
+        EVT_WAIT(LVar0)
+        EVT_WAIT(15)
+        EVT_CALL(base_GiveRefundCleanup)
+    EVT_END_IF
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_372)
+    EVT_ADD(LVar4, 15)
+    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_SET(LVar0, LVarF)
+    EVT_LOOP(4)
+        EVT_CALL(SetItemFlags, LVarA, 64, 1)
+        EVT_WAIT(2)
+        EVT_CALL(SetItemFlags, LVarA, 64, 0)
+        EVT_WAIT(8)
+    EVT_END_LOOP
+    EVT_CALL(RemoveEffect, LVar0)
+    EVT_CALL(RemoveItemEntity, LVarA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2055)
+    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20, 0, 0, 0, 0, 0)
+    EVT_WAIT(20)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_373)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30, 0, 0, 0, 0, 0)
+    EVT_WAIT(40)
+    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 30, 50, 32, 30, 0, 0, 0, 0, 0)
+    EVT_CHILD_THREAD
+        EVT_LOOP(3)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, 1, 0, 0)
+            EVT_WAIT(4)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, -1, 0, 0)
+            EVT_WAIT(4)
+        EVT_END_LOOP
+        EVT_LOOP(3)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, 1, 0, 0)
+            EVT_WAIT(2)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, -1, 0, 0)
+            EVT_WAIT(2)
+        EVT_END_LOOP
+        EVT_LOOP(7)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, 1, 0, 0)
+            EVT_WAIT(1)
+            EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, -1, 0, 0)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_CHILD_THREAD
+    EVT_WAIT(50)
+    EVT_CHILD_THREAD
+        EVT_CALL(func_80261164)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_374)
+    EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
+    EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
+    EVT_CALL(ConsumeLifeShroom)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(FreezeBattleCam, 0)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(MoveBattleCamOver, 15)
+    EVT_CHILD_THREAD
+        EVT_CALL(func_80261388)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_CALL(SetActorFlagBits, ACTOR_PARTNER, ACTOR_FLAG_NO_SHADOW, 0)
+            EVT_SET(LVar0, 0)
+            EVT_LOOP(10)
+                EVT_ADD(LVar0, 25)
+                EVT_IF_GT(LVar0, 255)
+                    EVT_SET(LVar0, 255)
+                EVT_END_IF
+                EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, LVar0)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_CALL(DispatchEvent, ACTOR_PARTNER, EVENT_REVIVE)
+            EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 255)
+        EVT_END_IF
+    EVT_END_CHILD_THREAD
+    EVT_CHILD_THREAD
+        EVT_LOOP(5)
+            EVT_WAIT(2)
+            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+            EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50, 0, 0, 0, 0)
+        EVT_END_LOOP
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_SET(LVar1, 0)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 20, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+    EVT_WAIT(4)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_WAIT(10)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_CALL(RestorePreDefeatState)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript MerleeRunOut = {
+    EVT_CALL(HasMerleeCastsLeft)
+    EVT_IF_EQ(LVar0, 1)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_WAIT(15)
+    EVT_CALL(ShowMessageBox, 3, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript MerleeAttackBonus = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(BattleMerleeFadeStageToBlack)
+    EVT_WAIT(10)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(SetBattleCamTarget, 0, 80, 0)
+    EVT_CALL(SetBattleCamOffsetZ, 0)
+    EVT_CALL(SetBattleCamZoom, 246)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT(10)
+    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleMerleeUpdateFX)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(BattleFadeInMerlee)
+    EVT_WAIT(30)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
+    EVT_CALL(func_802619B4)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(MoveBattleCamOver, 4)
+    EVT_CALL(BattleMerleeFadeStageFromBlack)
+    EVT_WAIT(20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleFadeOutMerlee)
+        EVT_CALL(DeleteNpc, -10)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
+    EVT_WAIT(15)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 18, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+    EVT_WAIT(4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
+    EVT_CALL(ShowMessageBox, 0, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript MerleeDefenseBonus = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(BattleMerleeFadeStageToBlack)
+    EVT_WAIT(10)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(SetBattleCamTarget, 0, 80, 0)
+    EVT_CALL(SetBattleCamOffsetZ, 0)
+    EVT_CALL(SetBattleCamZoom, 246)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT(10)
+    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleMerleeUpdateFX)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(BattleFadeInMerlee)
+    EVT_WAIT(30)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
+    EVT_CALL(func_802619B4)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(MoveBattleCamOver, 4)
+    EVT_CALL(BattleMerleeFadeStageFromBlack)
+    EVT_WAIT(20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleFadeOutMerlee)
+        EVT_CALL(DeleteNpc, -10)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
+    EVT_WAIT(15)
+    EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
+    EVT_IF_FLAG(LVar0, 0x0035D000)
+        EVT_WAIT(22)
+    EVT_ELSE
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
+        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_CALL(func_80273444, 18, 0, 0)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+        EVT_WAIT(4)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
+    EVT_END_IF
+    EVT_CALL(ShowMessageBox, 1, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript MerleeExpBonus = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(BattleMerleeFadeStageToBlack)
+    EVT_WAIT(10)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(SetBattleCamTarget, 0, 80, 0)
+    EVT_CALL(SetBattleCamOffsetZ, 0)
+    EVT_CALL(SetBattleCamZoom, 246)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT(10)
+    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleMerleeUpdateFX)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(BattleFadeInMerlee)
+    EVT_WAIT(30)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
+    EVT_CALL(func_802619B4)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(MoveBattleCamOver, 4)
+    EVT_CALL(BattleMerleeFadeStageFromBlack)
+    EVT_WAIT(20)
+    EVT_CHILD_THREAD
+        EVT_CALL(BattleFadeOutMerlee)
+        EVT_CALL(DeleteNpc, -10)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
+    EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
+    EVT_WAIT(15)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 18, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+    EVT_WAIT(4)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
+    EVT_CALL(ShowMessageBox, 2, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript PlayerHappy = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(UseBattleCamPresetWait, BTL_CAM_PRESET_C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_802619E8, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, 0)
+    EVT_ADD(LVar1, 35)
+    EVT_SET(LVar3, LVarA)
+    EVT_ADD(LVar3, LVarB)
+    EVT_IF_GT(LVar3, 0)
+        EVT_CALL(FXRecoverHP, LVar0, LVar1, LVar2, LVar3)
+    EVT_END_IF
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, 20)
+    EVT_ADD(LVar1, 25)
+    EVT_IF_GT(LVarC, 0)
+        EVT_CALL(FXRecoverFP, LVar0, LVar1, LVar2, LVarC)
+    EVT_END_IF
+    EVT_SET(LVar3, LVarA)
+    EVT_ADD(LVar3, LVarB)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
+    EVT_WAIT(10)
+    EVT_SET(LVar0, LVarA)
+    EVT_IF_GT(LVar0, 0)
+        EVT_LOOP(LVar0)
+            EVT_CALL(IncrementPlayerHP)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_IF
+    EVT_SET(LVar0, LVarB)
+    EVT_IF_GT(LVar0, 0)
+        EVT_LOOP(LVar0)
+            EVT_CALL(IncrementPlayerHP)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_IF
+    EVT_SET(LVar0, LVarC)
+    EVT_IF_GT(LVar0, 0)
+        EVT_LOOP(LVar0)
+            EVT_CALL(IncrementPlayerFP)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+    EVT_END_IF
+    EVT_WAIT(30)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
+    EVT_CALL(func_80261B40)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoDizzyAttack = {
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(40)
+        EVT_ADD(LVar0, 72)
+        EVT_CALL(SetActorRotation, ACTOR_ENEMY0, 0, LVar0, 0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_80261D98)
+    EVT_CALL(SetActorRotation, ACTOR_ENEMY0, 0, 0, 0)
+    EVT_RETURN
+    EVT_END
+};
+
+
+EvtScript RegainAbility = {
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVarF, LVar1, LVar2)
+    EVT_LOOP(LVar0)
+        EVT_ADD(LVarF, 3)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_CALL(func_80261DD4)
+    EVT_SWITCH(LVarA)
+        EVT_CASE_EQ(2)
+            EVT_SET(LVarE, 0)
+            EVT_SET(LVarA, ITEM_ITEMS_ICON)
+        EVT_CASE_EQ(1)
+            EVT_SET(LVarE, 1)
+            EVT_SWITCH(LVarC)
+                EVT_CASE_EQ(0)
+                    EVT_SET(LVarA, ITEM_HAMMER1_ICON)
+                EVT_CASE_EQ(1)
+                    EVT_SET(LVarA, ITEM_HAMMER2_ICON)
+                EVT_CASE_EQ(2)
+                    EVT_SET(LVarA, ITEM_HAMMER3_ICON)
+            EVT_END_SWITCH
+        EVT_CASE_EQ(0)
+            EVT_SET(LVarE, 2)
+            EVT_SWITCH(LVarB)
+                EVT_CASE_EQ(0)
+                    EVT_SET(LVarA, ITEM_BOOTS1_ICON)
+                EVT_CASE_EQ(1)
+                    EVT_SET(LVarA, ITEM_BOOTS2_ICON)
+                EVT_CASE_EQ(2)
+                    EVT_SET(LVarA, ITEM_BOOTS3_ICON)
+            EVT_END_SWITCH
+    EVT_END_SWITCH
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVarF, 24)
+    EVT_ADD(LVar1, 150)
+    EVT_CALL(MakeItemEntity, LVarA, LVarF, LVar1, LVar2, 1, 0)
+    EVT_SET(LVarA, LVar0)
+    EVT_CALL(func_80261DF4)
+    EVT_CALL(func_802620F8)
+    EVT_CALL(func_80261FB4)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 20)
+    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30, 0, 0, 0, 0, 0)
+    EVT_CALL(RemoveItemEntity, LVarA)
+    EVT_CALL(func_8026BF48, 0)
+    EVT_RETURN
+    EVT_END
+};

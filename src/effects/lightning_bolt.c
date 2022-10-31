@@ -13,15 +13,15 @@ void lightning_bolt_render(EffectInstance* effect);
 void lightning_bolt_appendGfx(void* effect);
 
 EffectInstance* lightning_bolt_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
-    f32 arg5,
-    f32 arg6,
-    f32 arg7,
-    s32 arg8)
+    s32 type,
+    f32 startX,
+    f32 startY,
+    f32 startZ,
+    f32 endX,
+    f32 endY,
+    f32 endZ,
+    f32 scale,
+    s32 duration)
 {
     EffectBlueprint bp;
     EffectInstance* effect;
@@ -41,35 +41,35 @@ EffectInstance* lightning_bolt_main(
     data = effect->data.lightningBolt = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.lightningBolt != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_2C = 0;
-    if (arg8 <= 0) {
-        data->unk_28 = 1000;
+    data->type = type;
+    data->lifetime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_28 = arg8;
+        data->timeLeft = duration;
     }
-    data->unk_3C = 255;
-    data->unk_10 = arg1;
-    data->unk_14 = arg2;
-    data->unk_18 = arg3;
-    data->unk_1C = arg4;
-    data->unk_20 = arg5;
-    data->unk_24 = arg6;
-    data->unk_04 = arg1;
-    data->unk_08 = arg2;
-    data->unk_0C = arg3;
-    data->unk_4C = arg7;
+    data->outerColor.a = 255;
+    data->startPos.x = startX;
+    data->startPos.y = startY;
+    data->startPos.z = startZ;
+    data->endPos.x = endX;
+    data->endPos.y = endY;
+    data->endPos.z = endZ;
+    data->tipPos.x = startX;
+    data->tipPos.y = startY;
+    data->tipPos.z = startZ;
+    data->unk_4C = scale;
 
-    temp = SQ(arg1 - arg4) + SQ(arg2 - arg5) + SQ(arg3 - arg6);
+    temp = SQ(startX - endX) + SQ(startY - endY) + SQ(startZ - endZ);
 
     if (temp != 0.0f) {
         data->unk_114 = shim_sqrtf(temp) * 0.005;
-        data->unk_30 = 255;
-        data->unk_34 = 220;
-        data->unk_38 = 20;
-        data->unk_40 = 255;
-        data->unk_44 = 255;
-        data->unk_48 = 255;
+        data->outerColor.r = 255;
+        data->outerColor.g = 220;
+        data->outerColor.b = 20;
+        data->innerColor.r = 255;
+        data->innerColor.g = 255;
+        data->innerColor.b = 255;
         data->unk_110 = shim_rand_int(359);
 
         return effect;
@@ -81,43 +81,43 @@ EffectInstance* lightning_bolt_main(
 void lightning_bolt_init(EffectInstance* effect) {
 }
 
-f32 func_E00BC1D8(f32 arg0) {
-    return (f32)shim_rand_int(arg0) - arg0 * 0.5;
+f32 lightning_bolt_get_rand_symmetric(f32 interval) {
+    return (f32)shim_rand_int(interval) - interval * 0.5;
 }
 
 void lightning_bolt_update(EffectInstance* effect) {
     LightningBoltFXData* data = effect->data.lightningBolt;
-    s32 unk_00 = data->unk_00;
+    s32 type = data->type;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        data->unk_28 = 16;
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_28 < 1000) {
-        data->unk_28--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_2C++;
+    data->lifetime++;
 
-    if (data->unk_28 < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    if (unk_00 == 2) {
-        if (data->unk_2C >= 40) {
-            data->unk_3C *= 0.5;
+    if (type == 2) {
+        if (data->lifetime >= 40) {
+            data->outerColor.a *= 0.5;
         }
     } else {
-        if (data->unk_2C >= 11) {
-            data->unk_3C *= 0.5;
+        if (data->lifetime >= 11) {
+            data->outerColor.a *= 0.5;
         }
     }
 }
 
 void lightning_bolt_render(EffectInstance *effect) {
-    LightningBoltFXData* effect94 = effect->data.lightningBolt;
+    LightningBoltFXData* data = effect->data.lightningBolt;
     RenderTask renderTask;
     RenderTask* retTask;
     RenderTask* renderTaskPointer = &renderTask;
@@ -125,7 +125,7 @@ void lightning_bolt_render(EffectInstance *effect) {
     renderTask.appendGfx = lightning_bolt_appendGfx;
     renderTask.appendGfxArg = effect;
     if (gGameStatusPtr->isBattle == TRUE) {
-        renderTask.distance = effect94->unk_0C + 1000.0f;
+        renderTask.distance = data->tipPos.z + 1000.0f;
     } else {
         renderTask.distance = 10;
     }

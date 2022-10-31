@@ -3530,7 +3530,7 @@ void btl_state_draw_player_menu(void) {
         case BATTLE_STATE2_UNK_2:
         case BATTLE_STATE2_UNK_3:
         case BATTLE_STATE2_UNK_4:
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
         case BATTLE_STATE2_PLAYER_DEFEATED:
         case BATTLE_STATE2_UNK_B:
         case BATTLE_STATE2_UNK_C:
@@ -3587,8 +3587,8 @@ void btl_state_draw_partner_menu(void) {
             break;
         case BATTLE_STATE2_UNK_3:
         case BATTLE_STATE2_UNK_4:
-        case BATTLE_STATE2_UNK_5:
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
         case BATTLE_STATE2_PLAYER_DEFEATED:
         case BATTLE_STATE2_UNK_B:
         case BATTLE_STATE2_UNK_C:
@@ -3808,10 +3808,10 @@ void btl_state_draw_peach_menu(void) {
         case BATTLE_STATE2_UNK_4:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
         case BATTLE_STATE2_UNK_7:
         case BATTLE_STATE2_UNK_8:
         case BATTLE_STATE2_UNK_9:
@@ -3979,7 +3979,7 @@ void btl_state_update_twink_menu(void) {
             btl_state_update_twink_menu();
             btl_state_update_twink_menu();
             break;
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             func_802A10B8();
             break;
         case BATTLE_STATE2_UNK_8:
@@ -4014,10 +4014,10 @@ void btl_state_draw_twink_menu(void) {
         case BATTLE_STATE2_UNK_4:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
         case BATTLE_STATE2_UNK_7:
         case BATTLE_STATE2_UNK_8:
         case BATTLE_STATE2_UNK_9:

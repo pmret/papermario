@@ -9,7 +9,7 @@ static char* N(exit_str_3) = "kkj_00\0";
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_8024030C_AACB3C(Evt* script, s32 isInitialCall) {
-    fx_sun(1, 0.0f, 0.0f, 0.0f, 0.0f, 0);
+    fx_sun(FX_SUN_FROM_RIGHT, 0.0f, 0.0f, 0.0f, 0.0f, 0);
     return ApiStatus_DONE2;
 }
 

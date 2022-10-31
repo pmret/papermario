@@ -238,3 +238,26 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_RETURN
     EVT_END
 };
+
+#define EVT_EXIT_PIPE_HORIZONTAL(entry, collider, script) \
+{ \
+    EVT_SET_GROUP(EVT_GROUP_1B) \
+    EVT_SET(LVarA, entry) \
+    EVT_SET(LVarB, collider) \
+    EVT_SET(LVarC, EVT_PTR(script)) \
+    EVT_EXEC_WAIT(N(EVS_Pipe_ExitHorizontal)) \
+    EVT_RETURN \
+    EVT_END \
+}
+
+
+#define EVT_EXIT_PIPE_VERTICAL(entry, collider, script) \
+{ \
+    EVT_SET_GROUP(EVT_GROUP_1B) \
+    EVT_SET(LVarA, entry) \
+    EVT_SET(LVarB, collider) \
+    EVT_SET(LVarC, EVT_PTR(script)) \
+    EVT_EXEC_WAIT(N(EVS_Pipe_ExitVertical)) \
+    EVT_RETURN \
+    EVT_END \
+}

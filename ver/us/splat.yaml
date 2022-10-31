@@ -91,6 +91,7 @@ segments:
     - [0x30450, c, audio/30450]
     - [0x31650, c, audio/31650]
     - [0x33450, c, audio/33450]
+    - [0x341D0, c, audio/tables]
     - [0x341D0, c, audio/reverb]
     - [0x341D0, c, 5B320]
     - [0x35080, c, effects]
@@ -331,7 +332,7 @@ segments:
     - [0x541B0, .data, audio/30450]
     - [0x54250, .data, audio/31650]
     - [0x54260, .data, audio/33450]
-    - [0x54360, data] # some audio table
+    - [0x54360, .data, audio/tables]
     - [0x5A3E0, .data, audio/reverb]
     - [0x5A610, .data, effects]
     - [0x5B320, .data, 5B320]
@@ -1233,7 +1234,18 @@ segments:
     - [0x1AF2D0, .data, 16c8e0]
     - [0x1AF5C0, .data, battle_cam]
     - [0x1B2050, .data, 17D6A0]
-    - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - start: 0x1B2050
+      type: .data
+      name: 17D6A0
+      subsegments:
+      - [0x1B2050]
+      - [0x1B21E0, ci4, ui/battle/cursor_hand, 32, 32]
+      - [0x1B23E0, palette, ui/battle/cursor_hand]
+      - [0x1B2400]
+    - [0x1B28E0, .data, 181810]
+    - [0x1B2960, .data, 182B30]
+    - [0x1B2A30, .data, 18C790]
+    - [0x1B3300, .data, 18F340]
     - start: 0x1B7CE0
       type: .data
       name: battle_ui_gfx
@@ -7839,16 +7851,221 @@ segments:
     subsegments:
     - [0x79D8A0, c]
     - [0x79DE50]
-  - type: code # todo identify
+  - type: code
+    name: level_up
     start: 0x79EF40
     vram: 0x802A1000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
-    - [0x79EF40, bin]
-  - type: code # todo identify
+    - [0x79EF40, c, level_up]
+    - start: 0x79EF40
+      type: .data
+      name: level_up
+      subsegments:
+      - [0x79EF40]
+      - [0x79EF58, vtx, level_up/draw_second_E]
+      - [0x79EFD8, vtx, level_up/draw_V]
+      - [0x79F058, vtx, level_up/draw_E]
+      - [0x79F0D8, vtx, level_up/draw_second_L]
+      - [0x79F158, vtx, level_up/draw_L]
+      - [0x79F1D8, vtx, level_up/draw_P]
+      - [0x79F258, vtx, level_up/draw_U]
+      - [0x79F2D8, vtx, level_up/draw_exclamation_mark]
+      - [0x79F358, ia8, level_up/big_V, 64, 64]
+      - [0x7A0358, gfx, level_up/big_V]
+      - [0x7A03D0, ia8, level_up/big_P, 64, 64]
+      - [0x7A13D0, gfx, level_up/big_P]
+      - [0x7A1448, ia8, level_up/big_exclamation_mark, 64, 64]
+      - [0x7A2448, gfx, level_up/big_exclamation_mark]
+      - [0x7A24C0, ia8, level_up/big_U, 64, 64]
+      - [0x7A34C0, gfx, level_up/big_U]
+      - [0x7A3538, ia8, level_up/big_L, 64, 64]
+      - [0x7A4538, gfx, level_up/big_L]
+      - [0x7A45B0, ia8, level_up/big_E, 64, 64]
+      - [0x7A55B0, gfx, level_up/big_E]
+      - [0x7A5628]
+      - [0x7A59F0, ci4, level_up/heart, 40, 40]
+      - [0x7A5D10, palette, level_up/heart]
+      - [0x7A5D30, ci4, level_up/flower, 40, 40]
+      - [0x7A6050, palette, level_up/flower]
+      - [0x7A6070, ci4, level_up/leaves, 40, 40]
+      - [0x7A6390, palette, level_up/leaves]
+      - [0x7A63B0, ci4, level_up/badge, 40, 40]
+      - [0x7A66D0, palette, level_up/badge]
+      - [0x7A66F0, ci4, level_up/FP, 32, 24]
+      - [0x7A6870, palette, level_up/FP]
+      - [0x7A6890, ci4, level_up/BP, 32, 24]
+      - [0x7A6A10, palette, level_up/BP]
+      - [0x7A6A30, ci4, level_up/HP, 32, 24]
+      - [0x7A6BB0, palette, level_up/HP]
+      - [0x7A6BD0, ci4, level_up/digit_0, 8, 16]
+      - [0x7A6C10, palette, level_up/digit_0]
+      - [0x7A6C30, ci4, level_up/digit_1, 8, 16]
+      - [0x7A6C70, palette, level_up/digit_1]
+      - [0x7A6C90, ci4, level_up/digit_2, 8, 16]
+      - [0x7A6CD0, palette, level_up/digit_2]
+      - [0x7A6CF0, ci4, level_up/digit_3, 8, 16]
+      - [0x7A6D30, palette, level_up/digit_3]
+      - [0x7A6D50, ci4, level_up/digit_4, 8, 16]
+      - [0x7A6D90, palette, level_up/digit_4]
+      - [0x7A6DB0, ci4, level_up/digit_5, 8, 16]
+      - [0x7A6DF0, palette, level_up/digit_5]
+      - [0x7A6E10, ci4, level_up/digit_6, 8, 16]
+      - [0x7A6E50, palette, level_up/digit_6]
+      - [0x7A6E70, ci4, level_up/digit_7, 8, 16]
+      - [0x7A6EB0, palette, level_up/digit_7]
+      - [0x7A6ED0, ci4, level_up/digit_8, 8, 16]
+      - [0x7A6F10, palette, level_up/digit_8]
+      - [0x7A6F30, ci4, level_up/digit_9, 8, 16]
+      - [0x7A6F70, palette, level_up/digit_9]
+      - [0x7A6F90, ci4, level_up/small_digit_0, 8, 8]
+      - [0x7A6FB0, palette, level_up/small_digit_0]
+      - [0x7A6FD0, ci4, level_up/small_digit_1, 8, 8]
+      - [0x7A6FF0, palette, level_up/small_digit_1]
+      - [0x7A7010, ci4, level_up/small_digit_2, 8, 8]
+      - [0x7A7030, palette, level_up/small_digit_2]
+      - [0x7A7050, ci4, level_up/small_digit_3, 8, 8]
+      - [0x7A7070, palette, level_up/small_digit_3]
+      - [0x7A7090, ci4, level_up/small_digit_4, 8, 8]
+      - [0x7A70B0, palette, level_up/small_digit_4]
+      - [0x7A70D0, ci4, level_up/small_digit_5, 8, 8]
+      - [0x7A70F0, palette, level_up/small_digit_5]
+      - [0x7A7110, ci4, level_up/small_digit_6, 8, 8]
+      - [0x7A7130, palette, level_up/small_digit_6]
+      - [0x7A7150, ci4, level_up/small_digit_7, 8, 8]
+      - [0x7A7170, palette, level_up/small_digit_7]
+      - [0x7A7190, ci4, level_up/small_digit_8, 8, 8]
+      - [0x7A71B0, palette, level_up/small_digit_8]
+      - [0x7A71D0, ci4, level_up/small_digit_9, 8, 8]
+      - [0x7A71F0, palette, level_up/small_digit_9]
+      - [0x7A7210, ci4, level_up/small_arrow, 8, 8]
+      - [0x7A7230, palette, level_up/small_arrow]
+      - [0x7A7250, palette, level_up/digit_0.red]
+      - [0x7A7270, palette, level_up/digit_1.red]
+      - [0x7A7290, palette, level_up/digit_2.red]
+      - [0x7A72B0, palette, level_up/digit_3.red]
+      - [0x7A72D0, palette, level_up/digit_4.red]
+      - [0x7A72F0, palette, level_up/digit_5.red]
+      - [0x7A7310, palette, level_up/digit_6.red]
+      - [0x7A7330, palette, level_up/digit_7.red]
+      - [0x7A7350, palette, level_up/digit_8.red]
+      - [0x7A7370, palette, level_up/digit_9.red]
+      - [0x7A7390, palette, level_up/small_digit_0.red]
+      - [0x7A73B0, palette, level_up/small_digit_1.red]
+      - [0x7A73D0, palette, level_up/small_digit_2.red]
+      - [0x7A73F0, palette, level_up/small_digit_3.red]
+      - [0x7A7410, palette, level_up/small_digit_4.red]
+      - [0x7A7430, palette, level_up/small_digit_5.red]
+      - [0x7A7450, palette, level_up/small_digit_6.red]
+      - [0x7A7470, palette, level_up/small_digit_7.red]
+      - [0x7A7490, palette, level_up/small_digit_8.red]
+      - [0x7A74B0, palette, level_up/small_digit_9.red]
+      - [0x7A74D0, palette, level_up/small_arrow.red]
+      - [0x7A74F0, palette, level_up/digit_0.blue]
+      - [0x7A7510, palette, level_up/digit_1.blue]
+      - [0x7A7530, palette, level_up/digit_2.blue]
+      - [0x7A7550, palette, level_up/digit_3.blue]
+      - [0x7A7570, palette, level_up/digit_4.blue]
+      - [0x7A7590, palette, level_up/digit_5.blue]
+      - [0x7A75B0, palette, level_up/digit_6.blue]
+      - [0x7A75D0, palette, level_up/digit_7.blue]
+      - [0x7A75F0, palette, level_up/digit_8.blue]
+      - [0x7A7610, palette, level_up/digit_9.blue]
+      - [0x7A7630, palette, level_up/small_digit_0.blue]
+      - [0x7A7650, palette, level_up/small_digit_1.blue]
+      - [0x7A7670, palette, level_up/small_digit_2.blue]
+      - [0x7A7690, palette, level_up/small_digit_3.blue]
+      - [0x7A76B0, palette, level_up/small_digit_4.blue]
+      - [0x7A76D0, palette, level_up/small_digit_5.blue]
+      - [0x7A76F0, palette, level_up/small_digit_6.blue]
+      - [0x7A7710, palette, level_up/small_digit_7.blue]
+      - [0x7A7730, palette, level_up/small_digit_8.blue]
+      - [0x7A7750, palette, level_up/small_digit_9.blue]
+      - [0x7A7770, palette, level_up/small_arrow.blue]
+      - [0x7A7790, ci4, level_up/select_one_to_upgrade, 208, 16]
+      - [0x7A7E10, palette, level_up/select_one_to_upgrade]
+      - [0x7A7E30]
+  - type: code
+    name: starpoint
     start: 0x7A89A0
     vram: 0x802A1000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
-    - [0x7A89A0, bin]
+    - [0x7A89A0, c, starpoint]
+    - start: 0x7A89A0
+      type: .data
+      name: starpoint
+      subsegments:
+      - [0x7A89A0]
+      - [0x7A89B8, ia8, starpoint/starpoint, 128, 32]
+      - [0x7A99B8, gfx, starpoint/load_starpoint]
+      - [0x7A9A30, vtx, starpoint/starpoint]
+      - [0x7A9A70]
+      - [0x7A9B38, vtx, starpoint/starpoints]
+      - [0x7A9B78, ia8, starpoint/starpoints, 128, 32]
+      - [0x7AAB78, gfx, starpoint/load_starpoints]
+      - [0x7AABF0]
+      - [0x7AACA0, vtx, starpoint/digit_0]
+      - [0x7AACE0, ia8, starpoint/digit_0, 64, 64]
+      - [0x7ABCE0, gfx, starpoint/load_digit_0]
+      - [0x7ABD58, gfx, starpoint/__render_digit_0]
+      - [0x7ABDA0, gfx, starpoint/_render_digit_0]
+      - [0x7ABDB0, gfx, starpoint/render_digit_0]
+      - [0x7ABDC0, vtx, starpoint/digit_1]
+      - [0x7ABE00, ia8, starpoint/digit_1, 64, 64]
+      - [0x7ACE00, gfx, starpoint/load_digit_1]
+      - [0x7ACE78, gfx, starpoint/__render_digit_1]
+      - [0x7ACEC0, gfx, starpoint/_render_digit_1]
+      - [0x7ACED0, gfx, starpoint/render_digit_1]
+      - [0x7ACEE0, vtx, starpoint/digit_2]
+      - [0x7ACF20, ia8, starpoint/digit_2, 64, 64]
+      - [0x7ADF20, gfx, starpoint/load_digit_2]
+      - [0x7ADF98, gfx, starpoint/__render_digit_2]
+      - [0x7ADFE0, gfx, starpoint/_render_digit_2]
+      - [0x7ADFF0, gfx, starpoint/render_digit_2]
+      - [0x7AE000, vtx, starpoint/digit_3]
+      - [0x7AE040, ia8, starpoint/digit_3, 64, 64]
+      - [0x7AF040, gfx, starpoint/load_digit_3]
+      - [0x7AF0B8, gfx, starpoint/__render_digit_3]
+      - [0x7AF100, gfx, starpoint/_render_digit_3]
+      - [0x7AF110, gfx, starpoint/render_digit_3]
+      - [0x7AF120, vtx, starpoint/digit_4]
+      - [0x7AF160, ia8, starpoint/digit_4, 64, 64]
+      - [0x7B0160, gfx, starpoint/load_digit_4]
+      - [0x7B01D8, gfx, starpoint/__render_digit_4]
+      - [0x7B0220, gfx, starpoint/_render_digit_4]
+      - [0x7B0230, gfx, starpoint/render_digit_4]
+      - [0x7B0240, vtx, starpoint/digit_5]
+      - [0x7B0280, ia8, starpoint/digit_5, 64, 64]
+      - [0x7B1280, gfx, starpoint/load_digit_5]
+      - [0x7B12F8, gfx, starpoint/__render_digit_5]
+      - [0x7B1340, gfx, starpoint/_render_digit_5]
+      - [0x7B1350, gfx, starpoint/render_digit_5]
+      - [0x7B1360, vtx, starpoint/digit_6]
+      - [0x7B13A0, ia8, starpoint/digit_6, 64, 64]
+      - [0x7B23A0, gfx, starpoint/load_digit_6]
+      - [0x7B2418, gfx, starpoint/__render_digit_6]
+      - [0x7B2460, gfx, starpoint/_render_digit_6]
+      - [0x7B2470, gfx, starpoint/render_digit_6]
+      - [0x7B2480, vtx, starpoint/digit_7]
+      - [0x7B24C0, ia8, starpoint/digit_7, 64, 64]
+      - [0x7B34C0, gfx, starpoint/load_digit_7]
+      - [0x7B3538, gfx, starpoint/__render_digit_7]
+      - [0x7B3580, gfx, starpoint/_render_digit_7]
+      - [0x7B3590, gfx, starpoint/render_digit_7]
+      - [0x7B35A0, vtx, starpoint/digit_8]
+      - [0x7B35E0, ia8, starpoint/digit_8, 64, 64]
+      - [0x7B45E0, gfx, starpoint/load_digit_8]
+      - [0x7B4658, gfx, starpoint/__render_digit_8]
+      - [0x7B46A0, gfx, starpoint/_render_digit_8]
+      - [0x7B46B0, gfx, starpoint/render_digit_8]
+      - [0x7B46C0, vtx, starpoint/digit_9]
+      - [0x7B4700, ia8, starpoint/digit_9, 64, 64]
+      - [0x7B5700, gfx, starpoint/load_digit_9]
+      - [0x7B5778, gfx, starpoint/__render_digit_9]
+      - [0x7B57C0, gfx, starpoint/_render_digit_9]
+      - [0x7B57D0, gfx, starpoint/render_digit_9]
+      - [0x7B57E0]
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
     type: code
@@ -8342,13 +8559,12 @@ segments:
     start: 0x876EE0
     vram: 0x80240000
     subsegments:
-    - [0x876EE0, c]
-    - [0x8774D0, c]
-    - [0x877840, data]
-    - [0x8778F0, data]
-    - [0x878F90, data]
-    - [0x879860, data]
-    - [0x879BB0]
+    - [0x876EE0, c, tik_06_0_header]
+    - [0x876EE0, c, tik_06_1_music]
+    - [0x876EE0, c, tik_06_2_main]
+    - [0x8774D0, c, tik_06_3_drips]
+    - [0x877840, c, tik_06_4_entity]
+    - [0x877840]
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code
@@ -12542,9 +12758,13 @@ segments:
     start: 0xC9DF20
     vram: 0x80240000
     subsegments:
-    - [0xC9DF20,       c, C9DF20]
-    - [0xC9DF60,       c, C9DF60]
-    - [0xC9EE30,       c, C9EE30]
+    - [0xC9DF20, c, flo_00_0_header]
+    - [0xC9DF20, c, flo_00_1_music]
+    - [0xC9DF20, c, flo_00_2_main]
+    - [0xC9DF60, c, flo_00_3_npc]
+    - [0xC9EE30, c, flo_00_4_epilogue]
+    - [0xC9EE30, c, flo_00_5_beanstalk]
+    - [0xC9F300, c, flo_00_6_entity]
     - [0xC9F300]
   - name: flo_03
     dir: world/area_flo/flo_03
@@ -12552,8 +12772,12 @@ segments:
     start: 0xCA72A0
     vram: 0x80240000
     subsegments:
-    - [0xCA72A0,       c, CA72A0]
-    - [0xCA72E0,       c, CA72E0]
+    - [0xCA72A0, c, flo_03_0_header]
+    - [0xCA72A0, c, flo_03_1_music]
+    - [0xCA72A0, c, flo_03_2_main]
+    - [0xCA72E0, c, flo_03_3_npc]
+    - [0xCA7690, c, flo_03_4_foliage]
+    - [0xCA78D0, c, flo_03_5_entity]
     - [0xCA78D0]
   - name: flo_07
     dir: world/area_flo/flo_07
@@ -12561,19 +12785,24 @@ segments:
     start: 0xCAC1F0
     vram: 0x80240000
     subsegments:
-    - [0xCAC1F0,       c, CAC1F0]
-    - [0xCAC5D0,       c, CAC5D0]
-    - [0xCAC930]
+    - [0xCAC1F0, c, flo_07_0_header]
+    - [0xCAC1F0, c, flo_07_1_music]
+    - [0xCAC1F0, c, flo_07_2_main]
+    - [0xCAC5D0, c, flo_07_3_npc]
+    - [0xCAC5D0]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
     start: 0xCAED40
     vram: 0x80240000
     subsegments:
-    - [0xCAED40,       c, CAED40]
-    - [0xCAFA80,       c, CAFA80]
-    - [0xCAFAC0,       c, CAFAC0]
-    - [0xCB0B80,       c, CB0B80]
+    - [0xCAED40, c, flo_08_0_header]
+    - [0xCAED40, c, flo_08_1_music]
+    - [0xCAED40, c, flo_08_2_entity]
+    - [0xCAFA80, c, flo_08_3_main]
+    - [0xCAFAC0, c, flo_08_4_npc]
+    - [0xCB0940, c, flo_08_5_foliage]
+    - [0xCB0B80, c, flo_08_6_vines]
     - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09
@@ -12581,10 +12810,12 @@ segments:
     start: 0xCB5000
     vram: 0x80240000
     subsegments:
-    - [0xCB5000,       c, CB5000]
-    - [0xCB5040,       c, CB5040]
-    - [0xCB50E0,       c, CB50E0]
-    - [0xCB5320,       c, CB5320]
+    - [0xCB5000, c, flo_09_0_header]
+    - [0xCB5000, c, flo_09_1_music]
+    - [0xCB5000, c, flo_09_2_main]
+    - [0xCB5040, c, flo_09_3_vines]
+    - [0xCB50E0, c, flo_09_4_foliage]
+    - [0xCB5320, c, flo_09_5_npc]
     - [0xCB6820]
   - name: flo_10
     dir: world/area_flo/flo_10
@@ -12592,11 +12823,14 @@ segments:
     start: 0xCB9200
     vram: 0x80240000
     subsegments:
-    - [0xCB9200,       c, CB9200]
-    - [0xCB9240,       c, CB9240]
-    - [0xCB9280,       c, CB9280]
-    - [0xCB96B0,       c, CB96B0]
-    - [0xCBA430,       c, CBA430]
+    - [0xCB9200, c, flo_10_0_header]
+    - [0xCB9240, c, flo_10_1_music]
+    - [0xCB9240, c, flo_10_2_entity]
+    - [0xCB9240, c, flo_10_3_main]
+    - [0xCB9280, c, flo_10_4_fountain]
+    - [0xCB96B0, c, flo_10_5_npc]
+    - [0xCB96B0, c, flo_10_6_waterfx]
+    - [0xCBA430, c, flo_10_7_foliage]
     - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11
@@ -12604,7 +12838,11 @@ segments:
     start: 0xCBDCD0
     vram: 0x80240000
     subsegments:
-    - [0xCBDCD0,       c, CBDCD0]
+    - [0xCBDCD0, c, flo_11_0_header]
+    - [0xCBDCD0, c, flo_11_1_music]
+    - [0xCBDCD0, c, flo_11_2_main]
+    - [0xCBDFF0, c, flo_11_3_npc]
+    - [0xCBDFF0, c, flo_11_4_entity]
     - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
@@ -12612,8 +12850,10 @@ segments:
     start: 0xCC0E30
     vram: 0x80240000
     subsegments:
-    - [0xCC0E30,       c, CC0E30]
-    - [0xCC0E70,       c, CC0E70]
+    - [0xCC0E30, c, flo_12_0_header]
+    - [0xCC0E30, c, flo_12_1_music]
+    - [0xCC0E30, c, flo_12_2_main]
+    - [0xCC0E70, c, flo_12_3_npc]
     - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
@@ -12621,9 +12861,12 @@ segments:
     start: 0xCC3810
     vram: 0x80240000
     subsegments:
-    - [0xCC3810,       c, CC3810]
-    - [0xCC3850,       c, CC3850]
-    - [0xCC6DE0,       c, CC6DE0]
+    - [0xCC3810, c, flo_13_0_header]
+    - [0xCC3810, c, flo_13_1_music]
+    - [0xCC3810, c, flo_13_2_entity]
+    - [0xCC3810, c, flo_13_3_main]
+    - [0xCC3850, c, flo_13_4_npc]
+    - [0xCC6DE0, c, flo_13_5_new_party]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
@@ -12631,9 +12874,13 @@ segments:
     start: 0xCCB310
     vram: 0x80240000
     subsegments:
-    - [0xCCB310,       c, CCB310]
-    - [0xCCBE20,       c, CCBE20]
-    - [0xCCD670,       c, CCD670]
+    - [0xCCB310, c, flo_14_0_header]
+    - [0xCCB310, c, flo_14_1_music]
+    - [0xCCB310, c, flo_14_2_main]
+    - [0xCCB650, c, flo_14_3_bubbles]
+    - [0xCCBE20, c, flo_14_4_npc]
+    - [0xCCD670, c, flo_14_5_entity]
+    - [0xCCD670, c, flo_14_6_logs]
     - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15
@@ -12641,7 +12888,12 @@ segments:
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
-    - [0xCD06C0,       c, CD06C0]
+    - [0xCD06C0, c, flo_15_0_header]
+    - [0xCD06C0, c, flo_15_1_music]
+    - [0xCD06C0, c, flo_15_2_main]
+    - [0xCD06C0, c, flo_15_3_npc]
+    - [0xCD06C0, c, flo_15_4_entity]
+    - [0xCD06C0, c, flo_15_5_stairs]
     - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
@@ -12649,11 +12901,13 @@ segments:
     start: 0xCD1E30
     vram: 0x80240000
     subsegments:
-    - [0xCD1E30,       c, CD1E30]
-    - [0xCD1E70,       c, CD1E70]
-    - [0xCD1F10,       c, CD1F10]
-    - [0xCD2C80,       c, CD2C80]
-    - [0xCD4770,       c, CD4770]
+    - [0xCD1E30, c, flo_16_0_header]
+    - [0xCD1E30, c, flo_16_1_music]
+    - [0xCD1E30, c, flo_16_2_main]
+    - [0xCD1E70, c, flo_16_3_vines]
+    - [0xCD1F10, c, flo_16_4_entity]
+    - [0xCD2C80, c, flo_16_5_npc]
+    - [0xCD4770, c, flo_16_6_puzzle]
     - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
@@ -12661,9 +12915,12 @@ segments:
     start: 0xCD72E0
     vram: 0x80240000
     subsegments:
-    - [0xCD72E0,       c, CD72E0]
-    - [0xCD7320,       c, CD7320]
-    - [0xCD7350,       c, CD7350]
+    - [0xCD72E0, c, flo_17_0_header]
+    - [0xCD72E0, c, flo_17_1_music]
+    - [0xCD72E0, c, flo_17_2_main]
+    - [0xCD7320, c, flo_17_3_logs]
+    - [0xCD7350, c, flo_17_4_npc]
+    - [0xCDA500, c, flo_17_5_entity]
     - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18
@@ -12671,9 +12928,12 @@ segments:
     start: 0xCDC6A0
     vram: 0x80240000
     subsegments:
-    - [0xCDC6A0,       c, CDC6A0]
-    - [0xCDCBD0,       c, CDCBD0]
-    - [0xCDCC30,       c, CDCC30]
+    - [0xCDC6A0, c, flo_18_0_header]
+    - [0xCDC6A0, c, flo_18_1_music]
+    - [0xCDC6A0, c, flo_18_2_main]
+    - [0xCDC9E0, c, flo_18_3_machine]
+    - [0xCDCBD0, c, flo_18_4_npc]
+    - [0xCDCC30, c, flo_18_5_foliage]
     - [0xCDCE70]
   - name: flo_19
     dir: world/area_flo/flo_19
@@ -12681,7 +12941,12 @@ segments:
     start: 0xCE36F0
     vram: 0x80240000
     subsegments:
-    - [0xCE36F0,       c, CE36F0]
+    - [0xCE36F0, c, flo_19_0_header]
+    - [0xCE36F0, c, flo_19_1_music]
+    - [0xCE36F0, c, flo_19_2_entity]
+    - [0xCE36F0, c, flo_19_3_main]
+    - [0xCE3A30, c, flo_19_4_clouds]
+    - [0xCE3BC0, c, flo_19_5_beanstalk]
     - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
@@ -12689,8 +12954,11 @@ segments:
     start: 0xCE6700
     vram: 0x80240000
     subsegments:
-    - [0xCE6700,       c, CE6700]
-    - [0xCE7240,       c, CE7240]
+    - [0xCE6700, c, flo_21_0_header]
+    - [0xCE6700, c, flo_21_1_music]
+    - [0xCE6700, c, flo_21_2_main]
+    - [0xCE7240, c, flo_21_3_clouds]
+    - [0xCE73D0, c, flo_21_4_npc]
     - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22
@@ -12698,9 +12966,12 @@ segments:
     start: 0xCEC240
     vram: 0x80240000
     subsegments:
-    - [0xCEC240,       c, CEC240]
-    - [0xCEC280,       c, CEC280]
-    - [0xCEC290,       c, CEC290]
+    - [0xCEC240, c, flo_22_0_header]
+    - [0xCEC240, c, flo_22_1_music]
+    - [0xCEC240, c, flo_22_2_main]
+    - [0xCEC280, c, flo_22_3_npc]
+    - [0xCEC280, c, flo_22_4_well]
+    - [0xCEC290, c, flo_22_5_foliage]
     - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
@@ -12708,8 +12979,11 @@ segments:
     start: 0xCEE260
     vram: 0x80240000
     subsegments:
-    - [0xCEE260,       c, CEE260]
-    - [0xCEE2A0,       c, CEE2A0]
+    - [0xCEE260, c, flo_23_0_header]
+    - [0xCEE260, c, flo_23_1_music]
+    - [0xCEE260, c, flo_23_2_main]
+    - [0xCEE2A0, c, flo_23_3_npc]
+    - [0xCEEF30, c, flo_23_4_entity]
     - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24
@@ -12717,9 +12991,12 @@ segments:
     start: 0xCF0940
     vram: 0x80240000
     subsegments:
-    - [0xCF0940,       c, CF0940]
-    - [0xCF0980,       c, CF0980]
-    - [0xCF0BC0,       c, CF0BC0]
+    - [0xCF0940, c, flo_24_0_header]
+    - [0xCF0940, c, flo_24_1_music]
+    - [0xCF0940, c, flo_24_2_main]
+    - [0xCF0980, c, flo_24_3_foliage]
+    - [0xCF0BC0, c, flo_24_4_water]
+    - [0xCF0ED0, c, flo_24_5_entity]
     - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
@@ -12727,10 +13004,13 @@ segments:
     start: 0xCF2BD0
     vram: 0x80240000
     subsegments:
-    - [0xCF2BD0,       c, CF2BD0]
-    - [0xCF2C10,       c, CF2C10]
-    - [0xCF4BC0,       c, CF4BC0]
-    - [0xCF4E00,       c, CF4E00]
+    - [0xCF2BD0, c, flo_25_0_header]
+    - [0xCF2BD0, c, flo_25_1_music]
+    - [0xCF2BD0, c, flo_25_2_main]
+    - [0xCF2C10, c, flo_25_3_npc]
+    - [0xCF4BC0, c, flo_25_4_entity]
+    - [0xCF4BC0, c, flo_25_5_foliage]
+    - [0xCF4E00, c, flo_25_6_vine]
     - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01

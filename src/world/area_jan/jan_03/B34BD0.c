@@ -13,7 +13,7 @@ static char* N(exit_str_3) = "";
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_802405EC_B351BC(Evt* script, s32 isInitialCall) {
-    fx_sun_undeclared(0, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

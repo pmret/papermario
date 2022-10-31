@@ -1,5 +1,8 @@
 #include "food.h"
 #include "effects.h"
+#include "entity.h"
+
+extern EntityModelScript D_80283EE8;
 
 #include "ItemRefund.inc.c"
 
@@ -116,7 +119,7 @@ EvtScript N(script6) = {
         EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_END_THREAD
-    EVT_CALL(CreateVirtualEntity, LVarA, 0x80283EE8)
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(D_80283EE8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 30)

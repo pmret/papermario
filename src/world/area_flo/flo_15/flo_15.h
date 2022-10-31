@@ -2,14 +2,25 @@
 /// @brief Flower Fields - (NW) Sun Tower
 
 #include "common.h"
-#include "../flo.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../flo.h"
+#include "mapfs/flo_15_shape.h"
+#include "mapfs/flo_15_hit.h"
+
+#include "sprite/npc/Sun.h"
+
+enum {
+	NPC_Sun_01                  = 10,
+	NPC_Sun_02                  = 11,
+};
+
 #define NAMESPACE flo_15
 
-extern NpcGroupList N(npcGroupList_802412C0);
-extern EvtScript N(802404D8);
-extern EvtScript N(802413B0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_MonitorFallingStairs);
+extern EvtScript N(EVS_Scene_SunReturns);
+extern NpcGroupList N(DefaultNPCs);

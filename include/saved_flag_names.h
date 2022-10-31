@@ -1381,7 +1381,7 @@ enum GameFlags {
     GF_FLO11_Defeated_Lakitus                   = GameFlag(0x561),
     GF_FLO12_Met_Rosie                          = GameFlag(0x562),
     GF_FLO12_RosieRequestedSomethingBeautiful   = GameFlag(0x563),
-    GF_Unused_FLO_12                            = GameFlag(0x564),
+    GF_FLO12_HeldItemPickup                     = GameFlag(0x564),
     GF_FLO08_Item_StarPiece                     = GameFlag(0x565),
     GF_FLO09_Item_HappyFlowerB                  = GameFlag(0x566),
     GF_FLO10_Tree1_JamminJelly                  = GameFlag(0x567),

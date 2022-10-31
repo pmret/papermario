@@ -32,7 +32,7 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(BossNPCs);
 extern NpcGroupList N(EscapeNPCs);
 
-extern EvtScript N(EVS_TryingSpawningStarCard);
+extern EvtScript N(EVS_TrySpawningStarCard);
 extern StaticAnimatorNode* N(AnimModel_MainHeadVine)[];
 extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
 extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];

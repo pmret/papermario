@@ -4,7 +4,7 @@
 
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
-EvtScript N(EVS_TryingSpawningStarCard) = {
+EvtScript N(EVS_TrySpawningStarCard) = {
     // determine if card should be spawned
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
@@ -28,13 +28,7 @@ EvtScript N(EVS_TryingSpawningStarCard) = {
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 185, 110, -30)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.44))
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 185, 55, -30)
-        EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_SUB(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_IF_NE(10000, 10000)
-            EVT_CALL(GetCamPitch, CAM_DEFAULT, LVar2, LVar3)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar2, 10000)
-        EVT_END_IF
+        EVT_SPIRIT_ADJUST_CAM(10000)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(N(StarSpiritEffectFunc2), 4, 180, 304, 15, -54, 185, 110, -30, 55, 25)
         EVT_THREAD
@@ -219,7 +213,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_UpdateLavaWaves))
     EVT_EXEC(N(EVS_UpdateEruption))
-    EVT_EXEC(N(EVS_TryingSpawningStarCard))
+    EVT_EXEC(N(EVS_TrySpawningStarCard))
     EVT_RETURN
     EVT_END
 };
