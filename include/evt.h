@@ -140,10 +140,12 @@ enum EventPriority {
 };
 
 enum EventStateFlags {
-    EVT_FLAG_01     = 0x01,
-    EVT_FLAG_10     = 0x10, // has child?
-    EVT_FLAG_20     = 0x20, // add to global script list
-    EVT_FLAG_40     = 0x40, // thread?
+    EVT_FLAG_ACTIVE             = 0x01,
+    EVT_FLAG_SUSPENDED_IN_GROUP = 0x02,
+    EVT_FLAG_BLOCKED_BY_CHILD   = 0x10,
+    EVT_FLAG_RUN_IMMEDIATELY    = 0x20, ///< don't wait for next `update_scripts` call
+    EVT_FLAG_THREAD             = 0x40,
+    EVT_FLAG_SUSPENDED          = 0x80, ///< doesn't affect child
 };
 
 #endif

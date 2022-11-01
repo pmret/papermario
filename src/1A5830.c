@@ -110,7 +110,7 @@ void dispatch_event_actor(Actor* actor, s32 event) {
         Evt* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
+        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
         actor->onHitScript = newScript;
         actor->onHitID = newScript->id;
         newScript->owner1.actorID = actor->actorID;

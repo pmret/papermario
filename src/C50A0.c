@@ -1707,11 +1707,11 @@ s32 test_item_player_collision(ItemEntity* item) {
         return TRUE;
     }
 
-    if (gGameState != 2 && gGameState != 0) {
+    if (gEncounterState != ENCOUNTER_STATE_NEUTRAL && gEncounterState != ENCOUNTER_STATE_NONE) {
         return FALSE;
     }
 
-    if (encounterStatus->hitType == 5) {
+    if (encounterStatus->hitType == ENCOUNTER_TRIGGER_CONVERSATION) {
         return FALSE;
     }
 
@@ -2343,7 +2343,7 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (!does_script_exist(D_80155D80)) {
                 D_801565A8 = 0;
                 remove_item_entity_by_reference(item);
-                resume_all_group(2);
+                resume_all_group(EVT_GROUP_02);
             }
         }
 

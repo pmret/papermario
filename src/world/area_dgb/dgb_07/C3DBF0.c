@@ -105,7 +105,7 @@ EvtScript N(802417F0) = {
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
             EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(3)
-            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -191,7 +191,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .id = NPC_WORLD_CLUBBA0,
         .settings = &N(npcSettings_8024197C),
         .pos = { -500.0f, 0.0f, -240.0f },
-        .flags = NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -230,7 +230,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80241A50),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,

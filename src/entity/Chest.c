@@ -70,7 +70,7 @@ void entity_Chest_adjust_camera(Entity* entity) {
         script = &Entity_Chest_AdjustCam_KZN;
     }
     if (script != NULL) {
-        start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
+        start_script(script, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     }
 }
 
@@ -85,7 +85,7 @@ void entity_Chest_reset_camera(Entity* entity) {
     } else {
         script = &Entity_Chest_ResetCam_Default;
     }
-    start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
+    start_script(script, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
 }
 
 void entity_Chest_setupGfx(s32 entityIndex) {

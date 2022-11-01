@@ -11,7 +11,7 @@ EvtScript N(EVS_Unused_DoNothing) = {
 
 s32 N(KeyList)[] = {
     ITEM_FOREST_PASS,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 #include "world/common/complete/KeyItemChoice.inc.c"
@@ -161,7 +161,7 @@ StaticNpc N(NpcData_Oaklie) = {
     .settings = &N(NpcSettings_Oaklie),
     .pos = { -426.0f, 58.0f, -70.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_JUMPING | NPC_FLAG_400000,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_400000,
     .init = &N(EVS_NpcInit_Oaklie),
     .drops = OAKLIE_DROPS,
     .animations = OAKLIE_ANIMS,

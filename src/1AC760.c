@@ -14,7 +14,7 @@ void dispatch_event_partner(s32 lastEventType) {
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
+    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
@@ -37,7 +37,7 @@ void dispatch_event_partner_continue_turn(s8 lastEventType) {
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
+    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;

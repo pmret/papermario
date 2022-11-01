@@ -158,13 +158,13 @@ static s32 N(pad_1AA8)[] = {
 EvtScript N(80241AB0) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
             EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -284,7 +284,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
         .id = NPC_WORLD_CLUBBA0,
         .settings = &N(npcSettings_80241C3C),
         .pos = { -200.0f, 0.0f, 180.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -323,7 +323,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80241DDC),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -357,7 +357,7 @@ StaticNpc N(npcGroup_802421E8)[] = {
         .id = NPC_WORLD_CLUBBA2,
         .settings = &N(npcSettings_80241D08),
         .pos = { 375.0f, 0.0f, 100.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,
@@ -395,7 +395,7 @@ StaticNpc N(npcGroup_802421E8)[] = {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80241DDC),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
 		.dropFlags = NPC_DROP_FLAGS_80,

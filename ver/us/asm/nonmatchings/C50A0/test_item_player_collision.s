@@ -40,8 +40,8 @@ glabel test_item_player_collision
 /* CA298 80133B98 0804CFDA */  j         .L80133F68
 /* CA29C 80133B9C 00621024 */   and      $v0, $v1, $v0
 .L80133BA0:
-/* CA2A0 80133BA0 3C03800A */  lui       $v1, %hi(gGameState)
-/* CA2A4 80133BA4 8C63A600 */  lw        $v1, %lo(gGameState)($v1)
+/* CA2A0 80133BA0 3C03800A */  lui       $v1, %hi(gEncounterState)
+/* CA2A4 80133BA4 8C63A600 */  lw        $v1, %lo(gEncounterState)($v1)
 /* CA2A8 80133BA8 24020002 */  addiu     $v0, $zero, 2
 /* CA2AC 80133BAC 10620003 */  beq       $v1, $v0, .L80133BBC
 /* CA2B0 80133BB0 00000000 */   nop

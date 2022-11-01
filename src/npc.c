@@ -2240,7 +2240,7 @@ void init_encounter_status(void) {
     currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
-    currentEncounter->dropWhackaBump = 0;
+    currentEncounter->dropWhackaBump = FALSE;
 
     for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
         for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
@@ -2253,7 +2253,7 @@ void init_encounter_status(void) {
     }
 
     func_80045AC0();
-    gGameState = 0;
+    gEncounterState = ENCOUNTER_STATE_NONE;
     create_generic_entity_world(0, npc_dyn_entity_draw_no_op);
 }
 
@@ -2289,10 +2289,10 @@ void clear_encounter_status(void) {
     currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
-    currentEncounter->unk_12 = 0;
+    currentEncounter->scriptedBattle = FALSE;
 
     func_80045AC0();
-    gGameState = 0;
+    gEncounterState = ENCOUNTER_STATE_NONE;
     create_generic_entity_world(NULL, npc_dyn_entity_draw_no_op);
 }
 
@@ -2304,22 +2304,22 @@ void func_8003E514(s8 arg0) {
 }
 
 void update_encounters(void) {
-    switch (gGameState) {
-        case 0:
+    switch (gEncounterState) {
+        case ENCOUNTER_STATE_NONE:
             break;
-        case 1:
+        case ENCOUNTER_STATE_CREATE:
             create_encounters();
             break;
-        case 2:
+        case ENCOUNTER_STATE_NEUTRAL:
             update_encounters_neutral();
             break;
-        case 3:
+        case ENCOUNTER_STATE_PRE_BATTLE:
             update_encounters_pre_battle();
             break;
-        case 4:
+        case ENCOUNTER_STATE_CONVERSATION:
             update_encounters_conversation();
             break;
-        case 5:
+        case ENCOUNTER_STATE_POST_BATTLE:
             update_encounters_post_battle();
             break;
     }
@@ -2328,22 +2328,22 @@ void update_encounters(void) {
 }
 
 void draw_encounter_ui(void) {
-    switch (gGameState) {
-        case 0:
+    switch (gEncounterState) {
+        case ENCOUNTER_STATE_NONE:
             break;
-        case 1:
+        case ENCOUNTER_STATE_CREATE:
             init_encounters_ui();
             break;
-        case 2:
+        case ENCOUNTER_STATE_NEUTRAL:
             draw_encounters_neutral();
             break;
-        case 3:
+        case ENCOUNTER_STATE_PRE_BATTLE:
             draw_encounters_pre_battle();
             break;
-        case 4:
+        case ENCOUNTER_STATE_CONVERSATION:
             draw_encounters_conversation();
             break;
-        case 5:
+        case ENCOUNTER_STATE_POST_BATTLE:
             draw_encounters_post_battle();
             break;
     }
@@ -2352,12 +2352,12 @@ void draw_encounter_ui(void) {
 }
 
 void draw_first_strike_ui(void) {
-    switch (gGameState) {
-        case 0:
-        default:
+    switch (gEncounterState) {
+        case ENCOUNTER_STATE_NONE:
             break;
-        case 3:
+        case ENCOUNTER_STATE_PRE_BATTLE:
             show_first_strike_message();
+            break;
     }
 }
 
@@ -2388,9 +2388,9 @@ void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
     }
 
     if (npcGroupList != NULL) {
-        gGameState = 1;
+        gEncounterState = ENCOUNTER_STATE_CREATE;
         D_8009A678 = 1;
-        D_8009A5D0 = 0;
+        gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_INIT;
     }
 }
 
@@ -2461,7 +2461,7 @@ void kill_enemy(Enemy* enemy) {
         if (!(enemy->flags & ENEMY_FLAGS_4)) {
             if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
                 if (!(enemy->flags & ENEMY_FLAGS_1)) {
-                    if (!(enemy->flags & ENEMY_FLAGS_10)) {
+                    if (!(enemy->flags & ENEMY_FLAGS_FLED)) {
                         COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
                     }
                 }

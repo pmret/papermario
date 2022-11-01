@@ -256,12 +256,12 @@ Vec3i N(BeginAnimScaleX)[] = {
     {  5, 12, 6 },
     { 12,  5, 5 },
     {  5, 10, 5 },
-    { 10,  5, 4 }, 
+    { 10,  5, 4 },
 };
 
 Vec2i N(LoopAnimScaleX)[] = {
     {  8, 10 },
-    { 10,  8 }, 
+    { 10,  8 },
 };
 
 Vec3i N(BeginAnimScaleY)[] = {
@@ -270,12 +270,12 @@ Vec3i N(BeginAnimScaleY)[] = {
     { 14,  5, 6 },
     {  5, 12, 5 },
     { 12,  5, 5 },
-    {  5, 10, 4 }, 
+    {  5, 10, 4 },
 };
 
 Vec2i N(LoopAnimScaleY)[] = {
     { 10,  6 },
-    {  6, 10 }, 
+    {  6, 10 },
 };
 
 EvtScript N(EVS_HuffNPuff_Defeat_Flashing) = {
@@ -525,7 +525,7 @@ EvtScript N(EVS_NpcDefeat_HuffNPuff_Main) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_1, TRUE)
             EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar3)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
@@ -608,7 +608,7 @@ StaticNpc N(NpcData_HuffNPuff)[] = {
         .settings = &N(NpcSettings_HuffNPuff),
         .pos = { 650.0f, NPC_DISPOSE_POS_Y, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
         .init = &N(EVS_NpcInit_HuffNPuff_Face),
         .drops = HUFF_N_PUFF_NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
@@ -619,7 +619,7 @@ StaticNpc N(NpcData_HuffNPuff)[] = {
         .settings = &N(NpcSettings_HuffNPuff),
         .pos = { 650.0f, 100.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
         .init = &N(EVS_NpcInit_HuffNPuff_Body),
         .drops = HUFF_N_PUFF_NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
@@ -630,7 +630,7 @@ StaticNpc N(NpcData_HuffNPuff)[] = {
         .settings = &N(NpcSettings_HuffNPuff),
         .pos = { 650.0f, NPC_DISPOSE_POS_Y, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
         .init = &N(EVS_NpcInit_HuffNPuff_Arms),
         .drops = HUFF_N_PUFF_NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
@@ -649,7 +649,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -660,7 +660,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -671,7 +671,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -682,7 +682,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -693,7 +693,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -704,7 +704,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -715,7 +715,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -726,7 +726,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -737,7 +737,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -748,7 +748,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -759,7 +759,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -770,7 +770,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -781,7 +781,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -792,7 +792,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
@@ -803,7 +803,7 @@ StaticNpc N(NpcData_TuffPuffs)[] = {
         .settings = &N(NpcSettings_TuffPuff),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_TuffPuff),
         .drops = TUFF_PUFF_NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,

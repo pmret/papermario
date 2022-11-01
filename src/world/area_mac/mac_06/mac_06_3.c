@@ -35,7 +35,7 @@ API_CALLABLE(N(func_80240E80_8659C0)) {
     Npc* partner;
     f32 forward, radius;
     f32 x, y, z;
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         switch (script->functionTemp[0]) {
@@ -50,7 +50,7 @@ API_CALLABLE(N(func_80240E80_8659C0)) {
                break;
         }
     }
-    
+
     radius = script->functionTemp[1];
     forward = -whale->yaw;
     x = whale->pos.x + 30.0f + sin_deg(forward) * radius;
@@ -88,17 +88,17 @@ API_CALLABLE(N(func_80240E80_8659C0)) {
             kolorado->colliderPos.x = kolorado->pos.x;
             kolorado->colliderPos.y = kolorado->pos.y;
             kolorado->colliderPos.z = kolorado->pos.z;
-            kolorado->flags |= NPC_FLAG_DIRTY_SHADOW;  
+            kolorado->flags |= NPC_FLAG_DIRTY_SHADOW;
             break;
     }
-   
+
     return ApiStatus_BLOCK;
 }
 
 API_CALLABLE(N(func_80241098_865BD8)) {
     u32 buttons = gGameStatusPtr->pressedButtons[0];
     Npc* npc = get_npc_safe(NPC_Whale);
-    
+
     switch (D_8024343C_867F7C) {
         case 0:
             if (buttons & BUTTON_A) {
@@ -133,7 +133,7 @@ API_CALLABLE(N(func_80241098_865BD8)) {
                 D_8024343C_867F7C++;
             }
             break;
-        
+
         case 12:
             D_80243434_867F74 -= D_80243438_867F78;
             if (D_80243434_867F74 < 0.0f) {
@@ -163,7 +163,7 @@ API_CALLABLE(N(func_802412AC_865DEC)) {
     s32 modelIndex = get_model_list_index_from_tree_index(modelID);
     Model* model = get_model_from_list_index(modelIndex);
     f32 x, y, z;
-    
+
     if (model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED) {
         // get model translation from transform matrix
         x = model->transformMatrix[3][0];
@@ -174,7 +174,7 @@ API_CALLABLE(N(func_802412AC_865DEC)) {
         y = 0.0f;
         x = 0.0f;
     }
-    
+
     evt_set_float_variable(script, outVarX, x);
     evt_set_float_variable(script, outVarY, y);
     evt_set_float_variable(script, outVarZ, z);
@@ -228,7 +228,7 @@ API_CALLABLE(N(SeagullYawInterp)) {
     f32 y2 = evt_get_float_variable(script, LVar5);
     f32 lastYaw = evt_get_float_variable(script, LVar7);
     f32 newYaw, deltaYaw;
-    
+
     if (evt_get_variable(script, LocalFlag(0))) {
         evt_set_float_variable(script, LVar6, 0.0f);
         evt_set_float_variable(script, LVar7, 0.0f);
@@ -236,11 +236,11 @@ API_CALLABLE(N(SeagullYawInterp)) {
         evt_set_variable(script, LocalFlag(1), 1);
         return ApiStatus_DONE2;
     }
-    
+
     if (x1 == x2 && y1 == y2) {
         return ApiStatus_DONE2;
     }
-    
+
     if (evt_get_variable(script, LocalFlag(1))) {
         newYaw = atan2(-x1, y1, -x2, y2);
         evt_set_float_variable(script, LVar6, newYaw);
@@ -252,14 +252,14 @@ API_CALLABLE(N(SeagullYawInterp)) {
     newYaw = atan2(-x1, y1, -x2, y2);
     newYaw = clamp_angle(newYaw);
     evt_set_float_variable(script, LVar6, newYaw);
-    
+
     deltaYaw = lastYaw - newYaw;
     if (deltaYaw >= 180.0f) {
         lastYaw -= 360.0f;
     } else if (deltaYaw <= -180.0f) {
         lastYaw += 360.0f;
     }
-    
+
     evt_set_float_variable(script, LVar7, lastYaw + (f32)((newYaw - lastYaw) * 0.1));
     return ApiStatus_DONE2;
 }
@@ -269,7 +269,7 @@ API_CALLABLE(N(MakeJrTroopaBubbles)) {
     f32 x = jrTroopa->pos.x + 10.0f;
     f32 y = jrTroopa->pos.y;
     f32 z = jrTroopa->pos.z;
-    
+
     if (y < 0.0f) {
         fx_rising_bubble(0, x, y, z, 0.0f);
         sfx_adjust_env_sound_pos(0x46, 0, x, y, z);
@@ -514,7 +514,7 @@ StaticNpc N(NpcData_Whale) = {
     .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Whale),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -546,7 +546,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Kolorado),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -585,7 +585,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_400000,
     .init = &N(EVS_NpcInit_JrTroopa),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,

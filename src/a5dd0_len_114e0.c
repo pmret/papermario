@@ -1120,7 +1120,7 @@ void update_entities(void) {
                     if (!(entity->flags & ENTITY_FLAGS_8000)) {
                         entity->flags |= ENTITY_FLAGS_2000000;
                     }
-                    entity->boundScript = start_script(entity->boundScriptBytecode, EVT_PRIORITY_A, EVT_FLAG_20);
+                    entity->boundScript = start_script(entity->boundScriptBytecode, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
                 }
 
                 if (entity->flags & ENTITY_FLAGS_2000000) {
