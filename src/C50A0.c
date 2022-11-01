@@ -10,13 +10,6 @@
 
 #define MAX_ITEM_ENTITIES 256
 
-typedef struct Rect {
-    /* 0x00 */ s32 ulx;
-    /* 0x04 */ s32 uly;
-    /* 0x08 */ s32 lrx;
-    /* 0x0C */ s32 lry;
-} Rect; // size = 0x10
-
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];

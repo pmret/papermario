@@ -287,13 +287,50 @@ s32 pad_after_move_table[] = {
     0x00000000, 0x00000000, 0x00000000
 };
 
-s32* gMessageBoxFrameParts[] = {
-    D_802EBFF0, D_802EC010, D_802EC030, D_802EC050,
-    D_802EC070, D_802EC090, D_802EC0B0, D_802EC0D0,
-    D_802EC0F0, D_802EC110, D_802EC130, D_802EC150,
-    D_802EC170, D_802EC190, D_802EC1B0, D_802EC1D0,
-    D_802EC1F0, D_802EC210, D_802EC230, D_802EC250,
-    D_802EC270, D_802EC290, D_802EC2B0, D_802EC2D0,
-    D_802EC2F0, D_802EC310, D_802EC330, D_802EC350,
-    D_802EC370, D_802EC390, D_802EC3B0, D_802EC3D0
+extern IMG_BIN ui_msg_frame_part_0[];
+extern IMG_BIN ui_msg_frame_part_1[];
+extern IMG_BIN ui_msg_frame_part_2[];
+extern IMG_BIN ui_msg_frame_part_3[];
+extern IMG_BIN ui_msg_frame_part_4[];
+extern IMG_BIN ui_msg_frame_part_5[];
+extern IMG_BIN ui_msg_frame_part_6[];
+extern IMG_BIN ui_msg_frame_part_7[];
+extern IMG_BIN ui_msg_frame_part_8[];
+extern IMG_BIN ui_msg_frame_part_9[];
+extern IMG_BIN ui_msg_frame_part_A[];
+extern IMG_BIN ui_msg_frame_part_B[];
+extern IMG_BIN ui_msg_frame_part_C[];
+extern IMG_BIN ui_msg_frame_part_D[];
+extern IMG_BIN ui_msg_frame_part_E[];
+extern IMG_BIN ui_msg_frame_part_F[];
+extern IMG_BIN ui_msg_frame_part_10[];
+extern IMG_BIN ui_msg_frame_part_11[];
+extern IMG_BIN ui_msg_frame_part_12[];
+extern IMG_BIN ui_msg_frame_part_13[];
+extern IMG_BIN ui_msg_frame_part_14[];
+extern IMG_BIN ui_msg_frame_part_15[];
+extern IMG_BIN ui_msg_frame_part_16[];
+extern IMG_BIN ui_msg_frame_part_17[];
+extern IMG_BIN ui_msg_frame_part_18[];
+extern IMG_BIN ui_msg_frame_part_19[];
+extern IMG_BIN ui_msg_frame_part_1A[];
+extern IMG_BIN ui_msg_frame_part_1B[];
+extern IMG_BIN ui_msg_frame_part_1C[];
+extern IMG_BIN ui_msg_frame_part_1D[];
+extern IMG_BIN ui_msg_frame_part_1E[];
+extern IMG_BIN ui_msg_frame_part_1F[];
+
+IMG_BIN* gMessageBoxFrameParts[2][16] = {
+    {
+        ui_msg_frame_part_0, ui_msg_frame_part_1, ui_msg_frame_part_2, ui_msg_frame_part_3,
+        ui_msg_frame_part_4, ui_msg_frame_part_5, ui_msg_frame_part_6, ui_msg_frame_part_7,
+        ui_msg_frame_part_8, ui_msg_frame_part_9, ui_msg_frame_part_A, ui_msg_frame_part_B,
+        ui_msg_frame_part_C, ui_msg_frame_part_D, ui_msg_frame_part_E, ui_msg_frame_part_F,
+    },
+    {
+        ui_msg_frame_part_10, ui_msg_frame_part_11, ui_msg_frame_part_12, ui_msg_frame_part_13,
+        ui_msg_frame_part_14, ui_msg_frame_part_15, ui_msg_frame_part_16, ui_msg_frame_part_17,
+        ui_msg_frame_part_18, ui_msg_frame_part_19, ui_msg_frame_part_1A, ui_msg_frame_part_1B,
+        ui_msg_frame_part_1C, ui_msg_frame_part_1D, ui_msg_frame_part_1E, ui_msg_frame_part_1F
+    }
 };
