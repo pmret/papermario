@@ -10240,7 +10240,7 @@ segments:
     - [0xA2FAA0, data]
     - [0xA2FCD0, data]
     - [0xA30810, data]
-    - [0xA37CD0, data]
+    - [0xA37CD0, .data, A2EC30]
     - [0xA37E70, data]
     - [0xA39400]
   - name: hos_06

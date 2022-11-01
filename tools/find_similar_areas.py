@@ -178,6 +178,14 @@ class Result:
     target_start: int
     length: int
 
+    @property
+    def query_end(self):
+        return self.query_start + self.length
+
+    @property
+    def target_end(self):
+        return self.target_start + self.length
+
 
 def get_pair_matches(query_hashes: list[str], sym_hashes: list[str]) -> list[Match]:
     ret = []
@@ -195,7 +203,8 @@ def get_hashes(bytes: Bytes, window_size: int) -> list[str]:
     return ret
 
 
-def group_matches(query: str, target: str, matches: list[Match]) -> list[Result]:
+def group_matches(query: str, target: str, matches: list[Match], window_size: int,
+                  min: Optional[int], max: Optional[int]) -> list[Result]:
     ret = []
 
     matches.sort(key=lambda m: m.query_offset)
@@ -212,7 +221,13 @@ def group_matches(query: str, target: str, matches: list[Match]) -> list[Result]
     for group in match_groups:
         query_start = group[0].query_offset
         target_start = group[0].target_offset
-        length = len(group)
+        length = len(group) + window_size
+
+        if min is not None and query_start + length < min:
+            continue
+        if max is not None and query_start > max:
+            continue
+
         ret.append(Result(query, target, query_start, target_start, length))
 
     return ret
@@ -332,7 +347,7 @@ def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) ->
     return range
 
 
-def get_matches(query: str, window_size: int):
+def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int]):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
 
     if query_bytes is None:
@@ -355,50 +370,51 @@ def get_matches(query: str, window_size: int):
         sym_hashes = get_hashes(sym_bytes, window_size)
 
         matches: list[Match] = get_pair_matches(query_hashes, sym_hashes)
-        if matches:
-            results = group_matches(query, symbol, matches)
-            obj_file = syms[symbol].current_file
+        if not matches:
+            continue
 
-            line_numbers = {}
-            tu_offset = None
-            decompiled_str = ":"
-            if syms[symbol].is_decompiled:
-                line_numbers = get_line_numbers(obj_file)
-                tu_offset = get_tu_offset(obj_file, symbol)
-                decompiled_str = fg.green + " (decompiled)" + fg.rs + ":"
+        results = group_matches(query, symbol, matches, window_size, min, max)
+        if not results:
+            continue
 
-            print(symbol + decompiled_str)
+        obj_file = syms[symbol].current_file
 
-            for result in results:
-                total_len = result.length + window_size
-                query_end = result.query_start + total_len
-                target_end = result.target_start + total_len
+        line_numbers = {}
+        tu_offset = None
+        decompiled_str = ":"
+        if syms[symbol].is_decompiled:
+            line_numbers = get_line_numbers(obj_file)
+            tu_offset = get_tu_offset(obj_file, symbol)
+            decompiled_str = fg.green + " (decompiled)" + fg.rs + ":"
 
-                c_range = None
-                if tu_offset is not None and len(line_numbers) > 0:
-                    c_range = get_c_range(
-                        tu_offset + (result.target_start * 4),
-                        tu_offset + (target_end * 4),
-                        line_numbers,
-                    )
+        print(symbol + decompiled_str)
 
-                target_range_str = ""
-                if c_range:
-                    target_range_str = (
-                        fg.li_cyan + f" (line {c_range} in {obj_file.stem})" + fg.rs
-                    )
-
-                query_str = f"query [{result.query_start}-{query_end}]"
-                target_str = (
-                    f"{symbol} [insn {result.target_start}-{target_end}] ({total_len} total){target_range_str}"
+        for result in results:
+            c_range = None
+            if tu_offset is not None and len(line_numbers) > 0:
+                c_range = get_c_range(
+                    tu_offset + (result.target_start * 4),
+                    tu_offset + (result.target_end * 4),
+                    line_numbers,
                 )
-                print(f"\t{query_str} matches {target_str}")
+
+            target_range_str = ""
+            if c_range:
+                target_range_str = (
+                    fg.li_cyan + f" (line {c_range} in {obj_file.stem})" + fg.rs
+                )
+
+            query_str = f"query [{result.query_start}-{result.query_end}]"
+            target_str = (
+                f"{symbol} [insn {result.target_start}-{result.target_end}] ({result.length} total){target_range_str}"
+            )
+            print(f"\t{query_str} matches {target_str}")
 
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
-def do_query(query, window_size):
-    get_matches(query, window_size)
+def do_query(query, window_size, min, max):
+    get_matches(query, window_size, min, max)
 
 
 parser = argparse.ArgumentParser(
@@ -413,6 +429,8 @@ parser.add_argument(
     default=20,
     required=False,
 )
+parser.add_argument("--min", help="lower bound of instruction for matches against query", type=int, required=False)
+parser.add_argument("--max", help="upper bound of instruction for matches against query", type=int, required=False)
 
 args = parser.parse_args()
 
@@ -422,4 +440,4 @@ if __name__ == "__main__":
     func_sizes = get_func_sizes()
     syms = parse_map()
 
-    do_query(args.query, args.window_size)
+    do_query(args.query, args.window_size, args.min, args.max)

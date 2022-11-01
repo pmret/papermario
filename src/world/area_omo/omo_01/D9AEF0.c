@@ -1,15 +1,6 @@
 #include "omo_01.h"
 #include "model.h"
 
-typedef struct UnkOmo {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 treeIndex;
-} UnkOmo; // size = 0x18
-
 extern s32 D_802412A0_D9C190[];
 
 ApiStatus func_80240000_D9AEF0(Evt* script, s32 isInitialCall) {
@@ -45,7 +36,7 @@ ApiStatus func_80240000_D9AEF0(Evt* script, s32 isInitialCall) {
         temp_f24 = SQ(temp_f20) / 90.0f;
         if (i == 0) {
             if ((it->unk_08 >= 0.0f && temp_f20 < 0.0f) || (it->unk_08 < 0.0f && temp_f20 >= 0.0f)) {
-                sfx_play_sound_at_position(0x1D6, 0, -185.0f, 0.0f, 160.0f);
+                sfx_play_sound_at_position(SOUND_CREAKY_ROCKING_CHAIR, 0, -185.0f, 0.0f, 160.0f);
             }
             it->unk_08 = temp_f20;
         }

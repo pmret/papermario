@@ -1452,7 +1452,7 @@ typedef struct MotionBlurFlameFXData {
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
     /* 0x1C */ f32 unk_1C[4];
     /* 0x2C */ f32 unk_2C[4];
     /* 0x3C */ f32 unk_3C[4];

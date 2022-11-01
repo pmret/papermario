@@ -65,6 +65,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
     ActorPart* part;
     ActorState* playerState;
     ActorState* partnerState;
+    f32 speed;
     f32 dpadX;
     s32 dpadY;
     s32 id;
@@ -199,8 +200,9 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
                 theta = DEG_TO_RAD(D_8023D2B4);
                 sinTheta = sin_rad(theta);
                 cosTheta = cos_rad(theta);
-                partnerState->currentPos.x += partnerState->speed * sinTheta;
-                partnerState->currentPos.y += partnerState->speed * cosTheta;
+                speed = partnerState->speed;
+                partnerState->currentPos.x += speed * sinTheta;
+                partnerState->currentPos.y += speed * cosTheta;
             }
             if (partnerState->currentPos.x < -30.0f) {
                 partnerState->currentPos.x = -30.0f;
@@ -261,18 +263,20 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
                       &screenX, &screenY, &screenZ);
     hud_element_set_render_pos(D_8023D288, screenX, screenY);
 
-    temp_v1_2 = script->functionTemp[0];
-    if (temp_v1_2 < 3 && temp_v1_2 > 0) {
-        D_8023D2C0 += 20;
-        if (D_8023D2C0 > 50) {
-            D_8023D2C0 = 50;
-        }
-        hud_element_set_render_pos(D_8023D2BC, D_8023D2C0, D_8023D2C4);
+    switch (script->functionTemp[0]) {
+        case 1:
+        case 2:
+            D_8023D2C0 += 20;
+            if (D_8023D2C0 > 50) {
+                D_8023D2C0 = 50;
+            }
+            hud_element_set_render_pos(D_8023D2BC, D_8023D2C0, D_8023D2C4);
+            break;
     }
 
-    temp_a0_2 = script->functionTemp[0];
-    if (temp_a0_2 < 3) {
-        if (temp_a0_2 > 0) {
+    switch (script->functionTemp[0]) {
+        case 1:
+        case 2:
             playerState->currentPos.x = partnerState->currentPos.x;
             playerState->currentPos.y = partnerState->currentPos.y;
             playerState->currentPos.z = partnerState->currentPos.z;
@@ -281,7 +285,7 @@ ApiStatus func_8023803C_70BD4C(Evt* script, s32 isInitialCall) {
                 id = D_8023D2B8[i];
                 hud_element_set_render_pos(id, screenX, screenY);
             }
-        }
+            break;
     }
 
     btl_set_popup_duration(99);
