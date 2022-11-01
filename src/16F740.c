@@ -27,6 +27,8 @@ BSS s32 D_8029F25C;
 BSS s32 D_8029F260;
 BSS s32 D_8029F264;
 
+s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event);
+
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -956,7 +958,7 @@ later:
             if (battleStatus->hammerLossTurns >= 0) {
                 battleStatus->hammerLossTurns--;
                 if (battleStatus->hammerLossTurns == -1) {
-                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
+                    script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[0] = 1;
@@ -970,7 +972,7 @@ later:
             if (battleStatus->jumpLossTurns >= 0) {
                 battleStatus->jumpLossTurns--;
                 if (battleStatus->jumpLossTurns == -1) {
-                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
+                    script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[0] = temp;
@@ -984,7 +986,7 @@ later:
             if (battleStatus->itemLossTurns >= 0) {
                 battleStatus->itemLossTurns--;
                 if (battleStatus->itemLossTurns == -1) {
-                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
+                    script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[10] = 2;

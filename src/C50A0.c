@@ -17,8 +17,6 @@ typedef struct Rect {
     /* 0x0C */ s32 lry;
 } Rect; // size = 0x10
 
-s32* gItemEntityScripts[];
-
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
@@ -53,7 +51,6 @@ extern EffectInstance* D_801568F0;
 extern MessagePrintState* D_801568F4;
 extern s32 D_801568F8;
 
-void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
