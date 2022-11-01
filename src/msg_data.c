@@ -143,7 +143,7 @@ MessageCharset D_802EB590 = {
     .unk_02 = 14,
     .newLineY = 16,
     .charRasterSize = 96,
-    .rasters = &D_802EB560
+    .rasters = D_802EB560
 };
 
 MessageCharset D_802EB59C = {
