@@ -163,7 +163,7 @@ void N(appendGfx_score_display)(void* renderData) {
 
     draw_box(0, 9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     draw_msg(MSG_MGM_0047, data->windowA_posX + 42, 28, 255, MSG_PAL_WHITE, 0);
-    draw_number(NUM_PANELS - data->found, data->windowA_posX + 65, 43, TRUE, MSG_PAL_WHITE, 255, 3);
+    draw_number(NUM_PANELS - data->found, data->windowA_posX + 65, 43, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     draw_ci_image_with_clipping(&N(panel_peach_img), 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &N(panel_peach_pal),
         data->windowA_posX + 5, 26, 10, 20, 300, 200, 255);
 
@@ -173,9 +173,9 @@ void N(appendGfx_score_display)(void* renderData) {
 
     draw_box(0, 0xB, data->windowB_posX, 27, 0, 60, 20, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     // draw whole seconds
-    draw_number(seconds, data->windowB_posX + 29, 31, TRUE, MSG_PAL_WHITE, 255, 3);
+    draw_number(seconds, data->windowB_posX + 29, 31, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     // draw tenths of seconds
-    draw_number(deciseconds, data->windowB_posX + 40, 31, TRUE, MSG_PAL_WHITE, 255, 0);
+    draw_number(deciseconds, data->windowB_posX + 40, 31, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, 0);
     // draw dot
     draw_msg(MSG_MGM_0024, data->windowB_posX + 30, 29, 255, MSG_PAL_WHITE, 0);
 }

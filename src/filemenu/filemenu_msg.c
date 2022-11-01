@@ -2,7 +2,7 @@
 #include "filemenu.h"
 
 extern MessageCharset* gMsgCharsets[5];
-extern unsigned char D_802F4560[80][16];
+extern PAL_BIN D_802F4560[80][8];
 
 u8 filemenu_msg_C6[] = { 0x33, 0x30, 0x21, 0x23, 0x25, 0xFD };   // SPACE[End]
 u8 filemenu_msg_C7[] = { 0xFD };                                 // [End]

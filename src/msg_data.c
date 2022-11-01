@@ -1,8 +1,8 @@
 #include "common.h"
 
-extern unsigned char D_802ED970[];
-extern unsigned char D_802F39D0[];
-extern unsigned char D_802EE8D0[];
+extern IMG_BIN D_802ED970[];
+extern IMG_BIN D_802F39D0[];
+extern IMG_BIN D_802EE8D0[];
 
 u8 D_802EB3D0[] = {
     11,  8,  8, 10,  9,  9,  9,  4,

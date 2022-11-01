@@ -1187,8 +1187,8 @@ typedef struct MessagePrintState {
     /* 0x474 */ s16 animTimers[4];
     /* 0x47C */ u8 rewindArrowAnimState;
     /* 0x47D */ char unk_47D[0x1];
-    /* 0x47E */ s16 rewindArrowBlinkCounter;
-    /* 0x480 */ s16 unk_480;
+    /* 0x47E */ s16 rewindArrowCounter;
+    /* 0x480 */ s16 rewindArrowSwingPhase;
     /* 0x482 */ Vec2su rewindArrowPos;
     /* 0x486 */ u8 currentLine;
     /* 0x487 */ u8 unkArraySize;
@@ -1206,7 +1206,7 @@ typedef struct MessagePrintState {
     /* 0x4EA */ u8 cancelOption;
     /* 0x4EB */ char unk_4EB[0x1];
     /* 0x4EC */ u8 targetOption;
-    /* 0x4ED */ u8 unkCounter;
+    /* 0x4ED */ u8 scrollingTime;
     /* 0x4EE */ u8 selectedOption;
     /* 0x4EF */ char unk_4EF[0x9];
     /* 0x4F8 */ u8 windowState;

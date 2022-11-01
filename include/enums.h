@@ -5216,7 +5216,19 @@ enum DrawMsgStyleFlags {
     DRAW_MSG_STYLE_MENU             = 1, // slightly higher baseline with smaller fullspace widths
     DRAW_MSG_STYLE_WAVY             = 2,
     DRAW_MSG_STYLE_RAINBOW          = 4,
-    DRAW_MSG_STYLE_DROP_SHADOW      = 8
+    DRAW_MSG_STYLE_DROP_SHADOW      = 8,
+};
+
+// used with draw_number
+enum DrawNumberStyleFlags {
+    DRAW_NUMBER_STYLE_ALIGN_RIGHT   = 1, ///< drawn to the left of posX
+    DRAW_NUMBER_STYLE_MONOSPACE     = 2,
+    DRAW_NUMBER_STYLE_DROP_SHADOW   = 4,
+};
+
+enum DrawNumberCharsets {
+    DRAW_NUMBER_CHARSET_NORMAL = 0,
+    DRAW_NUMBER_CHARSET_THIN   = 1,
 };
 
 enum MsgPalettes {
@@ -5675,6 +5687,7 @@ enum MsgStateFlags {
     MSG_STATE_FLAG_40               = 0x000040,
     MSG_STATE_FLAG_80               = 0x000080,
     MSG_STATE_FLAG_100              = 0x000100,
+    MSG_STATE_FLAG_400              = 0x000400,
     MSG_STATE_FLAG_4000             = 0x004000,
     MSG_STATE_FLAG_8000             = 0x008000,
     MSG_STATE_FLAG_10000            = 0x010000,

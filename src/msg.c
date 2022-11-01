@@ -2,6 +2,14 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 
+enum RewindArrowStates {
+    REWIND_ARROW_STATE_INIT = 0,
+    REWIND_ARROW_STATE_GROW = 1,
+    REWIND_ARROW_STATE_NEUTRAL = 2,
+    REWIND_ARROW_STATE_CHANGE_COLOR = 3,
+    REWIND_ARROW_STATE_CHANGE_COLOR_BACK = 4,
+};
+
 // todo consider symbol
 #define MSG_ROM_START 0x1B83000
 
@@ -17,7 +25,7 @@ u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
 s16 gNextMessageBuffer = 0;
 
-s32 D_8014C298[] = { 0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF, 0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF, 0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF, };
+s32 gRewindArrowQuad[] = { 0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF, 0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF, 0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF, };
 
 Gfx D_8014C2D8[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
@@ -54,7 +62,7 @@ MessageNumber gMsgNumbers[] = {
     }
 };
 
-Gfx D_8014C368[] = {
+Gfx gMsgDlistInitDrawNumber[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetTextureFilter(G_TF_POINT),
@@ -89,14 +97,14 @@ Vtx gMsgSpeechBoxRQuad[] = {
     { .v = { .ob = {0x100, 0xFFC0, 0},  .tc = {0x400, 0x800},     .cn = {191, 184, 176, 255} } },
 };
 
-Vtx gMsgUnkArrowQuad[] = {
+Vtx gMsgArrowQuad1[] = {
     { .v = { .ob = {0xFFF1, 0x001E, 0}, .tc = {0, 0},             .cn = {191, 184, 176, 255} } },
     { .v = { .ob = {0xF, 0x001E, 0},    .tc = {0x1E0, 0},         .cn = {191, 184, 176, 255} } },
     { .v = { .ob = {0xFFFF, 0, 0},      .tc = {0, 0x1E0},         .cn = {191, 184, 176, 255} } },
     { .v = { .ob = {1, 0, 0},           .tc = {0x1E0, 0x1E0},     .cn = {191, 184, 176, 255} } },
 };
 
-Vtx gMsgUnkQuad[] = {
+Vtx gMsgArrowQuad2[] = {
     { .v = { .ob = {0xFFF1, 0x001E, 0}, .tc = {0, 0},             .cn = {191, 184, 176, 255} } },
     { .v = { .ob = {0xF, 0x001E, 0},    .tc = {0x1E0, 0},         .cn = {191, 184, 176, 255} } },
     { .v = { .ob = {0xFFFF, 0, 0},      .tc = {0, 0x1E0},         .cn = {191, 184, 176, 255} } },
@@ -143,38 +151,38 @@ extern s16 D_80155C98;
 extern Mtx gMessageWindowProjMatrix[2];
 extern MessageDrawState* msg_drawState;
 
-// another file?
 extern s16 D_802EB644[22];
-extern unsigned char ui_msg_bubble_left[];
-extern unsigned char ui_msg_bubble_mid[];
-extern unsigned char ui_msg_bubble_right[];
-extern unsigned char ui_msg_arrow[];
+
+extern IMG_BIN ui_msg_bubble_left_png[];
+extern IMG_BIN ui_msg_bubble_mid_png[];
+extern IMG_BIN ui_msg_bubble_right_png[];
+extern IMG_BIN ui_msg_arrow_png[];
 extern unsigned char ui_msg_palettes[16][32];
-extern unsigned char ui_msg_sign_corner_topleft[];
-extern unsigned char ui_msg_sign_corner_topright[];
-extern unsigned char ui_msg_sign_corner_bottomleft[];
-extern unsigned char ui_msg_sign_corner_bottomright[];
-extern unsigned char ui_msg_lamppost_corner_bottomright[];
-extern unsigned char ui_msg_sign_side_top[];
-extern unsigned char ui_msg_sign_side_left[];
-extern unsigned char ui_msg_sign_side_right[];
-extern unsigned char ui_msg_sign_side_bottom[];
-extern unsigned char ui_msg_sign_fill[];
-extern unsigned char ui_msg_palette_sign[];
-extern unsigned char ui_msg_palette_lamppost[];
-extern unsigned char ui_msg_background[];
-extern unsigned char ui_msg_rewind_arrow_png[];
-extern unsigned char ui_msg_rewind_arrow_pal[];
-extern unsigned char ui_msg_star[];
-extern unsigned char ui_msg_star_silhouette[];
+extern IMG_BIN ui_msg_sign_corner_topleft_png[];
+extern IMG_BIN ui_msg_sign_corner_topright_png[];
+extern IMG_BIN ui_msg_sign_corner_bottomleft_png[];
+extern IMG_BIN ui_msg_sign_corner_bottomright_png[];
+extern IMG_BIN ui_msg_lamppost_corner_bottomright_png[];
+extern IMG_BIN ui_msg_sign_side_top_png[];
+extern IMG_BIN ui_msg_sign_side_left_png[];
+extern IMG_BIN ui_msg_sign_side_right_png[];
+extern IMG_BIN ui_msg_sign_side_bottom_png[];
+extern IMG_BIN ui_msg_sign_fill_png[];
+extern PAL_BIN ui_msg_sign_pal[];
+extern PAL_BIN ui_msg_lamppost_pal[];
+extern IMG_BIN ui_msg_background_png[];
+extern IMG_BIN ui_msg_rewind_arrow_png[];
+extern PAL_BIN ui_msg_rewind_arrow_pal[];
+extern IMG_BIN ui_msg_star_png[];
+extern IMG_BIN ui_msg_star_silhouette_png[];
 
 extern IMG_BIN D_802ED550[];
 extern PAL_BIN D_802ED670[];
-extern s32 D_802ED970;
-extern s32 D_802EE8D0;
+extern IMG_BIN D_802ED970[];
+extern IMG_BIN D_802EE8D0[];
 extern MessageCharset* gMsgCharsets[5];
-extern s32 D_802F39D0;
-extern unsigned char D_802F4560[80][16];
+extern IMG_BIN D_802F39D0[];
+extern PAL_BIN D_802F4560[80][8];
 
 extern s32 gMessageBoxFrameParts[2][16];
 
@@ -235,11 +243,11 @@ void load_font_data(Addr offset, u16 size, void* dest) {
 void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
-            load_font_data(charset_standard_OFFSET, 0x5100, &D_802EE8D0);
+            load_font_data(charset_standard_OFFSET, 0x5100, D_802EE8D0);
             load_font_data(charset_standard_pal_OFFSET, 0x500, D_802F4560);
         } else if (font == 1) {
-            load_font_data(charset_title_OFFSET, 0xF60, &D_802ED970);
-            load_font_data(charset_subtitle_OFFSET, 0xB88, &D_802F39D0);
+            load_font_data(charset_title_OFFSET, 0xF60, D_802ED970);
+            load_font_data(charset_subtitle_OFFSET, 0xB88, D_802F39D0);
             load_font_data(charset_credits_pal_OFFSET, 0x80, D_802F4560);
         }
     }
@@ -361,7 +369,7 @@ s32 _update_message(MessagePrintState* printer) {
                     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         printer->madeChoice = 1;
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
-                        printer->unkCounter = 0;
+                        printer->scrollingTime = 0;
                         printer->stateFlags |= MSG_STATE_FLAG_20000;
                         sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                     } else if (printer->cancelOption != 0xFF && (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
@@ -372,7 +380,7 @@ s32 _update_message(MessagePrintState* printer) {
                         }
                         printer->madeChoice = 1;
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
-                        printer->unkCounter = 0;
+                        printer->scrollingTime = 0;
                         printer->currentOption = printer->cancelOption;
                         printer->stateFlags |= MSG_STATE_FLAG_20000;
                         sfx_play_sound_with_params(SOUND_MENU_BACK, 0, 0, 0);
@@ -380,14 +388,14 @@ s32 _update_message(MessagePrintState* printer) {
                         if (printer->currentOption != printer->maxOption - 1) {
                             printer->targetOption = printer->currentOption + 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
-                            printer->unkCounter = 1;
+                            printer->scrollingTime = 1;
                             sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
                         }
                     } else if (gGameStatusPtr->heldButtons[0] & BUTTON_STICK_UP) {
                         if (printer->currentOption != 0) {
                             printer->targetOption = printer->currentOption - 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
-                            printer->unkCounter = 1;
+                            printer->scrollingTime = 1;
                             sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
                         }
                     }
@@ -396,8 +404,8 @@ s32 _update_message(MessagePrintState* printer) {
                         break;
                     }
                 case MSG_WINDOW_STATE_SCROLLING_BACK:
-                    printer->unkCounter++;
-                    if (printer->unkCounter >= 5) {
+                    printer->scrollingTime++;
+                    if (printer->scrollingTime >= 5) {
                         printer->windowState = 7;
                         printer->currentOption = printer->targetOption;
                         printer->selectedOption = printer->currentOption;
@@ -522,8 +530,8 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->windowState = MSG_WINDOW_STATE_C;
                         if (printer->unkArraySize == printer->currentLine) {
                             printer->windowState = MSG_WINDOW_STATE_WAITING;
-                            printer->rewindArrowAnimState = 0;
-                            printer->rewindArrowBlinkCounter = 0;
+                            printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
+                            printer->rewindArrowCounter = 0;
                         }
                     }
                 }
@@ -664,7 +672,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 printer->windowState = 5;
                 printer->delayFlags |= 1;
                 printer->delayFlags &= ~2;
-                printer->rewindArrowAnimState = 0;
+                printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
                 printer->rewindArrowBlinkCounter = 0;
                 printer->stateFlags &= ~0x80;
                 printer->stateFlags &= ~0x100;
@@ -1274,8 +1282,8 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->windowOffsetPos.y = 0;
     printer->windowBasePos.x = 0;
     printer->windowBasePos.y = 0;
-    printer->rewindArrowAnimState = 0;
-    printer->rewindArrowBlinkCounter = 0;
+    printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
+    printer->rewindArrowCounter = 0;
     printer->rewindArrowPos.x = 0;
     printer->rewindArrowPos.y = 0;
     printer->currentLine = 0;
@@ -1308,7 +1316,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->speechSoundType = -1;
     printer->speechPan = 64;
     printer->volume = 75;
-    printer->rewindArrowBlinkCounter = 0;
+    printer->rewindArrowCounter = 0;
     printer->style = 0;
     printer->fadeInCounter = 0;
     printer->openStartPos.x = 0;
@@ -1458,14 +1466,14 @@ void set_message_images(MessageImageData* images) {
 }
 
 void set_message_msg(s32 msgID, s32 index) {
-    s32 mallocSpace = 0;
+    u8* mallocSpace = NULL;
     s32 i;
     u8* msgVars;
 
     if (msgID >= 0) {
         mallocSpace = general_heap_malloc(0x400);
         dma_load_msg(msgID, mallocSpace);
-        msgID = mallocSpace;
+        msgID = (s32)mallocSpace;
     }
 
     i = 0;
@@ -1595,111 +1603,111 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     return baseWidth * msgScale;
 }
 
-void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines, s32* maxLinesPerPage, s32* arg6, u16 charset) {
-    u8* s1;
-    s32 s0;
-    u16 s7;
-    s32 s6;
-    u8 s4;
-    s32 s3;
-    s32 s5;
-    u16 s2;
-    u16 fp;
+void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines, s32* maxLinesPerPage, s32* numSpaces, u16 charset) {
+    u8* message;
+    s32 i;
+    u16 pageCount;
+    s32 linesOnPage;
+    u8 stop;
+    s32 lineWidth;
+    s32 charCount;
+    u16 lineIndex;
+    u16 endl;
     s32 msgStyle;
     s32 functionCode;
     u8 packedScaleY;
-    f32 f20;
+    f32 scale;
     s32 temp;
 
-    u16 sp18[32];
-    u16 sp58[32];
-    u16 sp98[32];
-    s32 spD8;
-    u16 spE6;
-    u16 spEE;
-    u8* spF0;
-    u16 spFE;
-    u16 sp106;
-    u16 sp108;
-    u16 sp116;
+    u16 lineWidths[32];
+    u16 lineCharNumbers[32];
+    u16 linesPerPage[32];
+    s32 lineCount;
+    u16 varIndex;
+    u16 font;
+    u8* buffer;
+    u16 maxLineWidth;
+    u16 maxCharsPerLine;
+    u16 maxLinesOnPage;
+    u16 spaceCount;
 
-    f20 = 1.0f;
-    s2 = 0;
-    s7 = 0;
-    spE6 = 0;
-    spEE = 0;
-    spF0 = NULL;
-    spFE = 0;
-    sp106 = 0;
-    sp108 = 0;
-    sp116 = 0;
+    scale = 1.0f;
+    lineIndex = 0;
+    pageCount = 0;
+    varIndex = 0;
+    font = 0;
+    buffer = NULL;
+    maxLineWidth = 0;
+    maxCharsPerLine = 0;
+    maxLinesOnPage = 0;
+    spaceCount = 0;
 
     if (msgID == 0) {
         return;
     }
 
     if (msgID >= 0) {
-        spF0 = general_heap_malloc(0x400);
-        dma_load_msg(msgID, spF0);
-        s1 = spF0;
+        buffer = general_heap_malloc(0x400);
+        dma_load_msg(msgID, buffer);
+        message = buffer;
     } else {
-        s1 = (u8*)msgID;
+        message = (u8*)msgID;
     }
 
     if (charset & 1) {
-        spEE = 1;
+        font = 1;
     }
 
-    s0 = 0;
-    s4 = 0;
-    s3 = 0;
-    s6 = 0;
-    s5 = 0;
-    fp = 1;
-    spD8 = 0;
+    i = 0;
+    stop = FALSE;
+    lineWidth = 0;
+    linesOnPage = 0;
+    charCount = 0;
+    endl = TRUE;
+    lineCount = 0;
 
     do {
-        u8 c = s1[s0++];
+        u8 c = message[i++];
         switch (c) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
             case MSG_CHAR_READ_VARIANT2:
             case MSG_CHAR_READ_VARIANT3:
-                spE6 = c - MSG_CHAR_READ_VARIANT0;
+                varIndex = c - MSG_CHAR_READ_VARIANT0;
                 break;
             case MSG_CHAR_READ_PAUSE:
-                s0++;
+                i++;
                 break;
             case MSG_CHAR_READ_WAIT:
             case MSG_CHAR_READ_NEXT:
-                if (s6 != 0) {
-                    sp98[s7] = s6;
-                    s7++;
-                    if (s7 >= 32) {
-                        s4 = 1;
+                if (linesOnPage != 0) {
+                    linesPerPage[pageCount] = linesOnPage;
+                    pageCount++;
+                    if (pageCount >= 32) {
+                        stop = 1;
                     }
-                    s6 = 0;
+                    linesOnPage = 0;
                 }
                 break;
             case MSG_CHAR_READ_ENDL:
-                sp18[s2] = s3;
-                sp58[s2] = s5;
-                s2++;
-                if (s2 >= 32) {
-                    s4 = 1;
+                lineWidths[lineIndex] = lineWidth;
+                lineCharNumbers[lineIndex] = charCount;
+                lineIndex++;
+                if (lineIndex >= 32) {
+                    stop = 1;
                 }
-                s3 = 0;
-                s5 = 0;
-                fp = 1;
+                lineWidth = 0;
+                charCount = 0;
+                endl = TRUE;
                 break;
             case MSG_CHAR_READ_STYLE:
-                msgStyle = s1[s0++];
+                msgStyle = message[i++];
                 switch (msgStyle) {
                     case MSG_STYLE_CHOICE:
-                        s0 += 4;
+                        i += 4;
                         break;
                     case MSG_STYLE_POSTCARD:
-                        s0++;
+                        i++;
                         break;
                     case MSG_STYLE_RIGHT:
                     case MSG_STYLE_LEFT:
@@ -1714,16 +1722,16 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                 }
                 break;
             case MSG_CHAR_READ_END:
-                sp18[s2] = s3;
-                sp58[s2] = s5;
-                s2++;
-                s4 = 1;
+                lineWidths[lineIndex] = lineWidth;
+                lineCharNumbers[lineIndex] = charCount;
+                lineIndex++;
+                stop = TRUE;
                 break;
             case MSG_CHAR_READ_FUNCTION:
-                functionCode = s1[s0++];
+                functionCode = message[i++];
                 switch (functionCode) {
                     case MSG_READ_FUNC_FONT:
-                        spEE = s1[s0++];
+                        font = message[i++];
                         break;
                     case MSG_READ_FUNC_RESET_GFX:
                     case MSG_READ_FUNC_NO_SKIP:
@@ -1738,23 +1746,23 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     case MSG_READ_FUNC_ENABLE_CDOWN_NEXT:
                         break;
                     default:
-                        s4 = 1;
+                        stop = TRUE;
                         break;
                     case MSG_READ_FUNC_CUSTOM_VOICE:
-                        s0++;
+                        i++;
                         /* fallthrough */
                     temp = 4;
                     case MSG_READ_FUNC_IMAGE:
-                        s0 += temp;
+                        i += temp;
                         /* fallthrough */
                     case MSG_READ_FUNC_ANIM_SPRITE:
                     case MSG_READ_FUNC_ANIM_DELAY:
-                        s0++;
+                        i++;
                         /* fallthrough */
                     case MSG_READ_FUNC_SPEED:
                     case MSG_READ_FUNC_SET_X:
                     case MSG_READ_FUNC_ANIM_LOOP:
-                        s0++;
+                        i++;
                         /* fallthrough */
                     case MSG_READ_FUNC_COLOR:
                     case MSG_READ_FUNC_SPACING:
@@ -1774,33 +1782,33 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     case MSG_READ_FUNC_END_FX:
                     case MSG_READ_FUNC_SET_REWIND:
                     case MSG_READ_FUNC_VOICE:
-                        s0++;
+                        i++;
                         break;
                     case MSG_READ_FUNC_CENTER_X:
-                        if (s1[s0] == 0) {
-                            s4 = 1;
+                        if (message[i] == 0) {
+                            stop = TRUE;
                         }
-                        s0++;
+                        i++;
                         break;
                     case MSG_READ_FUNC_YIELD:
-                        if (s1[s0] == MSG_CHAR_READ_END) {
-                            s4 = 1;
+                        if (message[i] == MSG_CHAR_READ_END) {
+                            stop = TRUE;
                         }
                         break;
                     case MSG_READ_FUNC_SIZE:
-                        packedScaleY = s1[s0 + 1];
-                        s0 += 2;
-                        f20 = (f32)(packedScaleY >> 4) + ((packedScaleY & 0xF) * 0.0625f);
+                        packedScaleY = message[i + 1];
+                        i += 2;
+                        scale = (f32)(packedScaleY >> 4) + ((packedScaleY & 0xF) * 0.0625f);
                         break;
                     case MSG_READ_FUNC_SIZE_RESET:
-                        f20 = 1.0f;
+                        scale = 1.0f;
                         break;
                     case MSG_READ_FUNC_START_FX:
-                        switch (s1[s0++]) {
+                        switch (message[i++]) {
                             case MSG_FX_STATIC:
                             case MSG_FX_BLUR:
                             case MSG_FX_DITHER_FADE:
-                                s0++;
+                                i++;
                                 break;
                             case MSG_FX_SHAKE:
                             case MSG_FX_WAVE:
@@ -1817,7 +1825,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                         }
                         break;
                     case MSG_READ_FUNC_VAR:
-                        s3 += get_msg_width((s32)gMessageMsgVars[s1[s0++]], 0);
+                        lineWidth += get_msg_width((s32)gMessageMsgVars[message[i++]], 0);
                         break;
                 }
                 break;
@@ -1826,60 +1834,60 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
             case MSG_CHAR_READ_SPACE:
             case MSG_CHAR_READ_FULL_SPACE:
             case MSG_CHAR_READ_HALF_SPACE:
-                sp116++;
+                spaceCount++;
                 /* fallthrough */
             default:
-                if (fp) {
-                    spD8++;
-                    s6++;
-                    fp = 0;
+                if (endl) {
+                    lineCount++;
+                    linesOnPage++;
+                    endl = FALSE;
                 }
-                s3 += msg_get_print_char_width(c, spEE, spE6, f20, 0, 1);
-                s5++;
+                lineWidth += msg_get_print_char_width(c, font, varIndex, scale, 0, 1);
+                charCount++;
                 break;
         }
-    } while (!s4);
+    } while (!stop);
 
-    if (spF0 != NULL) {
-        general_heap_free(spF0);
+    if (buffer != NULL) {
+        general_heap_free(buffer);
     }
 
-    for (s0 = 0; s0 < s2; s0++) {
-        if (spFE < sp18[s0]) {
-            spFE = sp18[s0];
+    for (i = 0; i < lineIndex; i++) {
+        if (maxLineWidth < lineWidths[i]) {
+            maxLineWidth = lineWidths[i];
         }
-        if (sp106 < sp58[s0]) {
-            sp106 = sp58[s0];
+        if (maxCharsPerLine < lineCharNumbers[i]) {
+            maxCharsPerLine = lineCharNumbers[i];
         }
     }
 
-    if (s7 == 0) {
-        sp108 = s6;
+    if (pageCount == 0) {
+        maxLinesOnPage = linesOnPage;
     } else {
-        for (s0 = 0; s0 < s7; s0++) {
-            if (sp108 < sp98[s0]) {
-                sp108 = sp98[s0];
+        for (i = 0; i < pageCount; i++) {
+            if (maxLinesOnPage < linesPerPage[i]) {
+                maxLinesOnPage = linesPerPage[i];
             }
         }
     }
 
     if (width != NULL) {
-        *width = spFE;
+        *width = maxLineWidth;
     }
     if (height != NULL) {
-        *height = spD8 * gMsgCharsets[spEE]->newLineY;
+        *height = lineCount * gMsgCharsets[font]->newLineY;
     }
     if (maxLineChars != NULL) {
-        *maxLineChars = sp106;
+        *maxLineChars = maxCharsPerLine;
     }
     if (numLines != NULL) {
-        *numLines = spD8;
+        *numLines = lineCount;
     }
     if (maxLinesPerPage != NULL) {
-        *maxLinesPerPage = sp108;
+        *maxLinesPerPage = maxLinesOnPage;
     }
-    if (arg6 != NULL) {
-        *arg6 = sp116;
+    if (numSpaces != NULL) {
+        *numSpaces = spaceCount;
     }
 }
 
@@ -1988,52 +1996,54 @@ void msg_update_rewind_arrow(s32 printerIndex) {
     gSPDisplayList(gMasterGfxPos++, D_8014C2D8);
 
     switch (printer->rewindArrowAnimState) {
-        case 0:
-            printer->rewindArrowBlinkCounter = 0;
-            printer->unk_480 = 0;
-            printer->rewindArrowAnimState = 1;
+        case REWIND_ARROW_STATE_INIT:
+            printer->rewindArrowCounter = 0;
+            printer->rewindArrowSwingPhase = 0;
+            printer->rewindArrowAnimState = REWIND_ARROW_STATE_GROW;
             /* fallthrough */
-        case 1:
-            temp = printer->rewindArrowBlinkCounter;
+        case REWIND_ARROW_STATE_GROW:
+            temp = printer->rewindArrowCounter;
             scale = temp * 0.2 + 0.5;
-            if (++printer->rewindArrowBlinkCounter >= 4) {
-                printer->rewindArrowBlinkCounter = 0;
-                printer->rewindArrowAnimState = 2;
+            if (++printer->rewindArrowCounter >= 4) {
+                printer->rewindArrowCounter = 0;
+                printer->rewindArrowAnimState = REWIND_ARROW_STATE_NEUTRAL;
             }
             break;
-        case 2:
-            if (++printer->rewindArrowBlinkCounter >= 25) {
-                printer->rewindArrowBlinkCounter = 0;
-                printer->rewindArrowAnimState = 3;
+        case REWIND_ARROW_STATE_NEUTRAL:
+            if (++printer->rewindArrowCounter >= 25) {
+                printer->rewindArrowCounter = 0;
+                printer->rewindArrowAnimState = REWIND_ARROW_STATE_CHANGE_COLOR;
             }
             break;
-        case 3:
-            colorR = update_lerp(EASING_LINEAR, 255.0f, 224.0f, printer->rewindArrowBlinkCounter, 15);
-            colorG = update_lerp(EASING_LINEAR, 255.0f, 224.0f, printer->rewindArrowBlinkCounter, 15);
-            colorB = update_lerp(EASING_LINEAR, 255.0f, 208.0f, printer->rewindArrowBlinkCounter, 15);
-            if (++printer->rewindArrowBlinkCounter >= 15) {
-                printer->rewindArrowBlinkCounter = 0;
-                printer->rewindArrowAnimState = 4;
+        case REWIND_ARROW_STATE_CHANGE_COLOR:
+            colorR = update_lerp(EASING_LINEAR, 255.0f, 224.0f, printer->rewindArrowCounter, 15);
+            colorG = update_lerp(EASING_LINEAR, 255.0f, 224.0f, printer->rewindArrowCounter, 15);
+            colorB = update_lerp(EASING_LINEAR, 255.0f, 208.0f, printer->rewindArrowCounter, 15);
+            if (++printer->rewindArrowCounter >= 15) {
+                printer->rewindArrowCounter = 0;
+                printer->rewindArrowAnimState = REWIND_ARROW_STATE_CHANGE_COLOR_BACK;
             }
             break;
-        case 4:
-            colorR = update_lerp(EASING_LINEAR, 224.0f, 255.0f, printer->rewindArrowBlinkCounter, 15);
-            colorG = update_lerp(EASING_LINEAR, 224.0f, 255.0f, printer->rewindArrowBlinkCounter, 15);
-            colorB = update_lerp(EASING_LINEAR, 208.0f, 255.0f, printer->rewindArrowBlinkCounter, 15);
-            if (++printer->rewindArrowBlinkCounter >= 15) {
-                printer->rewindArrowBlinkCounter = 0;
-                printer->rewindArrowAnimState = 2;
+        case REWIND_ARROW_STATE_CHANGE_COLOR_BACK:
+            colorR = update_lerp(EASING_LINEAR, 224.0f, 255.0f, printer->rewindArrowCounter, 15);
+            colorG = update_lerp(EASING_LINEAR, 224.0f, 255.0f, printer->rewindArrowCounter, 15);
+            colorB = update_lerp(EASING_LINEAR, 208.0f, 255.0f, printer->rewindArrowCounter, 15);
+            if (++printer->rewindArrowCounter >= 15) {
+                printer->rewindArrowCounter = 0;
+                printer->rewindArrowAnimState = REWIND_ARROW_STATE_NEUTRAL;
             }
             break;
     }
 
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, colorR, colorG, colorB, 255);
 
-    if (printer->rewindArrowAnimState == 2 || printer->rewindArrowAnimState == 3 || printer->rewindArrowAnimState == 4) {
-        angle = cosine(printer->unk_480) * 30.0f;
-        printer->unk_480 += 15;
-        if (printer->unk_480 >= 360) {
-            printer->unk_480 -= 360;
+    if (printer->rewindArrowAnimState == REWIND_ARROW_STATE_NEUTRAL ||
+        printer->rewindArrowAnimState == REWIND_ARROW_STATE_CHANGE_COLOR ||
+        printer->rewindArrowAnimState == REWIND_ARROW_STATE_CHANGE_COLOR_BACK) {
+        angle = cosine(printer->rewindArrowSwingPhase) * 30.0f;
+        printer->rewindArrowSwingPhase += 15;
+        if (printer->rewindArrowSwingPhase >= 360) {
+            printer->rewindArrowSwingPhase -= 360;
         }
     }
 
@@ -2049,58 +2059,58 @@ void msg_update_rewind_arrow(s32 printerIndex) {
 
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPLoadTextureTile(gMasterGfxPos++, ui_msg_star, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, 0, 0, 15, 17, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiTile_4b(gMasterGfxPos++, ui_msg_star_silhouette, 0x0100, 1, G_IM_FMT_I, 16, 0, 0, 0, 15, 18, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gSPVertex(gMasterGfxPos++, D_8014C298, 4, 0);
+    gDPLoadTextureTile(gMasterGfxPos++, ui_msg_star_png, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, 0, 0, 15, 17, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiTile_4b(gMasterGfxPos++, ui_msg_star_silhouette_png, 0x0100, 1, G_IM_FMT_I, 16, 0, 0, 0, 15, 18, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPVertex(gMasterGfxPos++, gRewindArrowQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
 }
 
 void msg_draw_rewind_arrow(s32 printerIndex) {
     MessagePrintState* printer = &gMessagePrinters[printerIndex];
 
-    if (printer->rewindArrowBlinkCounter < 6) {
+    if (printer->rewindArrowCounter < 6) {
         draw_ci_image_with_clipping(ui_msg_rewind_arrow_png, 24, 24, G_IM_FMT_CI, G_IM_SIZ_4b, ui_msg_rewind_arrow_pal, printer->rewindArrowPos.x,
                                     printer->rewindArrowPos.y, 10, 10, SCREEN_WIDTH - 20, SCREEN_HEIGHT - 20, 255);
     }
 
-    printer->rewindArrowBlinkCounter++;
-    if (printer->rewindArrowBlinkCounter >= 12) {
-        printer->rewindArrowBlinkCounter = 0;
+    printer->rewindArrowCounter++;
+    if (printer->rewindArrowCounter >= 12) {
+        printer->rewindArrowCounter = 0;
     }
 }
 
 void msg_draw_choice_pointer(MessagePrintState* printer) {
-    s32 s7 = 255;
-    s32 s6 = 72;
-    s32 t0 = gGameStatusPtr->frameCounter % 360;
-    s32 s4, s5;
+    s32 pointerAlpha = 255;
+    s32 shadowAlpha = 72;
+    s32 posInterpPhase = gGameStatusPtr->frameCounter % 360;
+    s32 posX, posY;
 
     if (printer->windowState == MSG_WINDOW_STATE_WAITING_FOR_CHOICE || (printer->stateFlags & MSG_STATE_FLAG_20000)) {
-        s4 = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
-        s5 = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
+        posX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
+        posY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
     } else {
-        s32 a3, v1, temp1, temp2;
-        f32 f0 = (f32)(printer->unkCounter + 1.0) / 6.0;
+        s32 baseX, baseY, targetX, targetY;
+        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / 6.0;
 
-        a3 = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
-        temp1 = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->targetOption];
-        s4 = a3 + (temp1 - a3) * f0;
+        baseX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
+        targetX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->targetOption];
+        posX = baseX + (targetX - baseX) * moveToTargetAlpha;
 
-        v1 = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
-        temp2 = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->targetOption];
-        s5 = v1 + (temp2 - v1) * f0;
+        baseY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
+        targetY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->targetOption];
+        posY = baseY + (targetY - baseY) * moveToTargetAlpha;
     }
 
-    s5 += 1;
-    s4 += (cosine(t0 * 38 + 270) + 1.0) * 0.5 * 3.2;
-    s4 -= 2;
+    posY += 1;
+    posX += (cosine(posInterpPhase * 38 + 270) + 1.0) * 0.5 * 3.2;
+    posX -= 2;
 
     if (printer->stateFlags & MSG_STATE_FLAG_20000) {
         u32 opacity;
         opacity = 255.0 - printer->fadeOutCounter * 46.0;
-        s7 = opacity;
+        pointerAlpha = opacity;
         opacity = 72.0 - printer->fadeOutCounter * 14.4;
-        s6 = opacity;
+        shadowAlpha = opacity;
     }
 
     gDPPipeSync(gMasterGfxPos++);
@@ -2108,12 +2118,12 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
     gDPLoadTLUT_pal16(gMasterGfxPos++, 0, ui_point_right_pal);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, s6);
-    draw_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, s4 + 2, s5 + 2, 10, 10, 300, 220);
-    draw_ci_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, ui_point_right_pal, s4, s5, 20, 20, 300, 200, s7);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, shadowAlpha);
+    draw_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, posX + 2, posY + 2, 10, 10, 300, 220);
+    draw_ci_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, ui_point_right_pal, posX, posY, 20, 20, 300, 200, pointerAlpha);
 }
 
-void draw_digit(u32 img, s32 charset, s32 posX, s32 posY) {
+void draw_digit(IMG_PTR img, s32 charset, s32 posX, s32 posY) {
     MessageNumber* num = &gMsgNumbers[charset];
 
     gDPLoadTextureTile_4b(gMasterGfxPos++,
@@ -2136,12 +2146,12 @@ void draw_digit(u32 img, s32 charset, s32 posX, s32 posY) {
 void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity, u16 style) {
     u8 valueStr[24];
     u8 digits[24];
-    s32 sp40[24];
+    s32 digitPosX[24];
     s32 i;
     s32 count;
     s32 posX;
-    s32 fp = gMsgNumbers[charset].rasters;
-    s32 s7 = gMsgNumbers[charset].texSize;
+    IMG_PTR raster = gMsgNumbers[charset].rasters;
+    s32 texSize = gMsgNumbers[charset].texSize;
 
     y -= 2;
     if (y > 240U) {
@@ -2164,21 +2174,21 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
     posX = x;
     count = i;
 
-    gSPDisplayList(gMasterGfxPos++, D_8014C368);
+    gSPDisplayList(gMasterGfxPos++, gMsgDlistInitDrawNumber);
 
-    if (style & 1) {
+    if (style & DRAW_NUMBER_STYLE_ALIGN_RIGHT) {
         for (i = count - 1; i >= 0; i--) {
-            if (style & 2) {
+            if (style & DRAW_NUMBER_STYLE_MONOSPACE) {
                 posX -= gMsgNumbers[charset].fixedWidth;
             } else {
                 posX -= gMsgNumbers[charset].digitWidth[digits[i]];
             }
-            sp40[i] = posX;
+            digitPosX[i] = posX;
         }
     } else {
         for (i = 0; i < count; i++) {
-            sp40[i] = posX;
-            if (style & 2) {
+            digitPosX[i] = posX;
+            if (style & DRAW_NUMBER_STYLE_MONOSPACE) {
                 posX += gMsgNumbers[charset].fixedWidth;
             } else {
                 posX += gMsgNumbers[charset].digitWidth[digits[i]];
@@ -2186,13 +2196,13 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
         }
     }
 
-    if (style & 4) {
+    if (style & DRAW_NUMBER_STYLE_DROP_SHADOW) {
         for (i = 0; i < count; i++) {
             gDPPipeSync(gMasterGfxPos++);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
             gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, 72);
-            draw_digit(fp + digits[i] * s7, charset, sp40[i] + 2, y + 2);
+            draw_digit(raster + digits[i] * texSize, charset, digitPosX[i] + 2, y + 2);
             gDPPipeSync(gMasterGfxPos++);
         }
     }
@@ -2208,9 +2218,9 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
 
     gDPLoadTLUT_pal16(gMasterGfxPos++, 0, D_802F4560[palette]);
     for (i = 0; i < count; i++) {
-        posX = sp40[i];
+        posX = digitPosX[i];
         if (posX > 0 && posX < 320) {
-            draw_digit(fp + digits[i] * s7, charset, posX, y);
+            draw_digit(raster + digits[i] * texSize, charset, posX, y);
         }
     }
     gDPPipeSync(gMasterGfxPos++);
@@ -2637,7 +2647,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         msg_drawState->clipY[0] = frameY + 2;
                         msg_drawState->clipX[1] = frameX + frameSizeX - 2;
                         msg_drawState->clipY[1] = frameY + frameSizeY - 2;
-                        msg_draw_frame(frameX, frameY, frameSizeX, frameSizeY, 5, msg_drawState->framePalette, frameFading, frameAlpha,
+                        msg_draw_frame(frameX, frameY, frameSizeX, frameSizeY, MSG_STYLE_CHOICE, msg_drawState->framePalette, frameFading, frameAlpha,
                                        frameAlpha);
                         msg_reset_gfx_state();
                         spAE = frameAlpha & 0xFF;
@@ -2684,7 +2694,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             }
                         }
 
-                        msg_draw_frame(printer->windowBasePos.x, printer->windowBasePos.y, printer->windowSize.x, printer->windowSize.y, 6,
+                        msg_draw_frame(printer->windowBasePos.x, printer->windowBasePos.y, printer->windowSize.x, printer->windowSize.y, MSG_STYLE_INSPECT,
                                        msg_drawState->framePalette, fading, phi_s0_5, phi_s0_5);
                         msg_reset_gfx_state();
                         spAE = phi_s0_5 & 0xFF;
@@ -2700,14 +2710,14 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         msg_drawState->framePalette = 15;
                         temp_s1_5 = 0xFF;
                         if (printer->style == MSG_STYLE_SIGN) {
-                            signRaster = ui_msg_sign_corner_bottomright;
+                            signRaster = ui_msg_sign_corner_bottomright_png;
                             printer->windowSize.y = 72;
                             msg_drawState->textColor = MSG_PAL_18;
-                            signPalette = ui_msg_palette_sign;
+                            signPalette = ui_msg_sign_pal;
                         } else {
-                            signRaster = ui_msg_lamppost_corner_bottomright;
+                            signRaster = ui_msg_lamppost_corner_bottomright_png;
                             msg_drawState->textColor = MSG_PAL_1C;
-                            signPalette = ui_msg_palette_lamppost;
+                            signPalette = ui_msg_lamppost_pal;
                         }
                         msg_drawState->clipX[0] = 34;
                         msg_drawState->clipY[0] = 40;
@@ -2734,27 +2744,27 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             }
                         }
                         spAE = (u8)temp_s1_5;
-                        draw_ci_image_with_clipping(ui_msg_sign_corner_topleft, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, 28, 10, 10, 310, 230, temp_s1_5);
-                        draw_ci_image_with_clipping(ui_msg_sign_corner_topright, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 284, 28, 10, 10, 310, 230, temp_s1_5);
-                        draw_ci_image_with_clipping(ui_msg_sign_corner_bottomleft, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, printer->windowSize.y + 12, 10, 10, 310, 230,
+                        draw_ci_image_with_clipping(ui_msg_sign_corner_topleft_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(ui_msg_sign_corner_topright_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 284, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(ui_msg_sign_corner_bottomleft_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 20, printer->windowSize.y + 12, 10, 10, 310, 230,
                                                     temp_s1_5);
                         draw_ci_image_with_clipping(signRaster, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, signPalette, 284, printer->windowSize.y + 12, 10, 10, 310, 230, temp_s1_5);
-                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_top, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_top_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0090, 0x0070, 0x0470, 0x00B0, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_left, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_left_png, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0050, 0x00B0, 0x0090, (printer->windowSize.y + 12) * 4, G_TX_RENDERTILE, 0, 0,
                                             0x0400, 0x0400);
-                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_right, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_right_png, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0470, 0x00B0, 0x04B0, (printer->windowSize.y + 12) * 4, G_TX_RENDERTILE, 0, 0,
                                             0x0400, 0x0400);
-                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_bottom, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_side_bottom_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0090, (printer->windowSize.y + 12) * 4, 0x0470, (printer->windowSize.y + 28) * 4,
                                             G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_fill, G_IM_FMT_CI, 8, 0, 0, 0, 7, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_sign_fill_png, G_IM_FMT_CI, 8, 0, 0, 0, 7, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                               G_TX_NOMIRROR | G_TX_WRAP, 3, 3, G_TX_NOLOD, G_TX_NOLOD);
                         gSPTextureRectangle(gMasterGfxPos++, 0x0090, 0x00B0, 0x0470, (printer->windowSize.y + 12) * 4, G_TX_RENDERTILE, 0, 0,
                                             0x0400, 0x0400);
@@ -2795,7 +2805,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             }
                             phi_s2_4 = 1;
                         }
-                        msg_draw_frame(40, 28, 240, 58, 6, msg_drawState->framePalette, phi_s2_4, phi_s3_2, phi_s3_2);
+                        msg_draw_frame(40, 28, 240, 58, MSG_STYLE_INSPECT, msg_drawState->framePalette, phi_s2_4, phi_s3_2, phi_s3_2);
                         draw_ci_image_with_clipping(printer->letterBackgroundImg, 150, 105, G_IM_FMT_CI, G_IM_SIZ_4b,
                                                     printer->letterBackgroundPal, 85, 97, 10, 10, 300, 220, phi_s3_2);
                         draw_ci_image_with_clipping(printer->letterContentImg, 70, 95, G_IM_FMT_CI, G_IM_SIZ_8b,
@@ -3588,82 +3598,79 @@ void msg_reset_gfx_state(void) {
 }
 
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
-    MessageCharset* t1 = gMsgCharsets[drawState->font];
-    s32 t4 = drawState->fontVariant;
+    MessageCharset* messageCharset = gMsgCharsets[drawState->font];
+    s32 fontVariant = drawState->fontVariant;
 
-    s32 a3 = drawState->clipY[0];
-    s32 t0 = drawState->clipY[1];
-    s32 a1 = drawState->clipX[0];
-    s32 t3 = drawState->clipX[1];
+    s32 clipUly = drawState->clipY[0];
+    s32 clipLry = drawState->clipY[1];
+    s32 clipUlx = drawState->clipX[0];
+    s32 clipLrx = drawState->clipX[1];
 
-    s32 t5 = posX + (s32)(drawState->charScale.x * t1->texSize.x);
-    s32 t6 = posY + (s32)(drawState->charScale.y * t1->texSize.y);
+    s32 rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
+    s32 rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
 
-    f32 d;
-    s32 s0;
-    s32 t9;
-    s32 t8;
-    s32 t7;
-    s32 t33;
-    s32 t55;
+    f32 clipOffset;
+    s32 texOffsetX;
+    s32 texOffsetY;
+    s32 ulx, uly, lrx, lry;
     s32 dsdx, dtdy;
 
-    if (posX >= t3 || posY >= t0 || t5 <= a1 || t6 <= a3) {
+    if (posX >= clipLrx || posY >= clipLry || rightPosX <= clipUlx || rightPosY <= clipUly) {
         return;
     }
 
-    if (posX < a1) {
-        d = abs(posX - a1) / drawState->charScale.x;
-        s0 = (f32)((d + 0.5) * 32.0);
-        t9 = a1;
+    if (posX < clipUlx) {
+        clipOffset = abs(posX - clipUlx) / drawState->charScale.x;
+        texOffsetX = (f32)((clipOffset + 0.5) * 32.0);
+        ulx = clipUlx;
     } else {
-        s0 = 0;
-        t9 = posX;
+        texOffsetX = 0;
+        ulx = posX;
     }
 
-    if (posY < a3) {
-        if (!(printer->stateFlags & 0x400) || posY < 0) {
-            d = abs(posY - a3) / drawState->charScale.y;
-            t8 = d * 32.0f;
-            t7 = a3;
+    if (posY < clipUly) {
+        if (!(printer->stateFlags & MSG_STATE_FLAG_400) || posY < 0) {
+            clipOffset = abs(posY - clipUly) / drawState->charScale.y;
+            texOffsetY = clipOffset * 32.0f;
+            uly = clipUly;
         } else {
-            t8 = 0;
-            t7 = posY;
+            texOffsetY = 0;
+            uly = posY;
         }
     } else {
-        t8 = 0;
-        t7 = posY;
+        texOffsetY = 0;
+        uly = posY;
     }
 
-    t55 = t5;
-    if (t55 >= t3) {
-        t55 = t3;
+    lrx = rightPosX;
+    if (lrx >= clipLrx) {
+        lrx = clipLrx;
     }
 
-    t33 = t6;
-    if (t33 >= t0) {
-        t33 = t0;
+    lry = rightPosY;
+    if (lry >= clipLry) {
+        lry = clipLry;
     }
 
     dsdx = 1.0f / drawState->charScale.x * 1024.0f;
     dtdy = 1.0f / drawState->charScale.y * 1024.0f;
 
-    if (drawState->printModeFlags & 0x11) {
-        drawState->printModeFlags &= ~0x11;
+    if (drawState->printModeFlags & (MSG_PRINT_FLAG_10 | MSG_PRINT_FLAG_1)) {
+        drawState->printModeFlags &= ~(MSG_PRINT_FLAG_10 | MSG_PRINT_FLAG_1);
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, D_802F4560[palette]);
     }
 
-    if (t1->texSize.x >= 16 && t1->texSize.x % 16 == 0) {
-        gDPLoadTextureBlock_4b(gMasterGfxPos++, t1->rasters[t4].raster + t1->charRasterSize * charIndex, G_IM_FMT_CI,
-                               t1->texSize.x, t1->texSize.y, 0,
+    if (messageCharset->texSize.x >= 16 && messageCharset->texSize.x % 16 == 0) {
+        gDPLoadTextureBlock_4b(gMasterGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                               messageCharset->texSize.x, messageCharset->texSize.y, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     } else {
-        gDPLoadTextureTile_4b(gMasterGfxPos++, t1->rasters[t4].raster + t1->charRasterSize * charIndex, G_IM_FMT_CI,
-                              t1->texSize.x, t1->texSize.y,
-                              0, 0, t1->texSize.x - 1, t1->texSize.y - 1, 0,
+        gDPLoadTextureTile_4b(gMasterGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                              messageCharset->texSize.x, messageCharset->texSize.y,
+                              0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
                               G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     }
-    gSPTextureRectangle(gMasterGfxPos++, t9 * 4, t7 * 4, t55 * 4, t33 * 4, G_TX_RENDERTILE, s0, t8,
+    gSPTextureRectangle(gMasterGfxPos++, ulx * 4, uly * 4, lrx * 4, lry * 4, G_TX_RENDERTILE, texOffsetX, texOffsetY,
                         dsdx, dtdy);
 }
 
@@ -3793,15 +3800,15 @@ void msg_draw_speech_bubble(
     gDPLoadSync(gMasterGfxPos++);
     gDPLoadTLUTCmd(gMasterGfxPos++, G_TX_LOADTILE, 15);
     gDPPipeSync(gMasterGfxPos++);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_left, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_left_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxLQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_mid, G_IM_FMT_CI, 8, 0, 0, 0, 7, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_mid_png, G_IM_FMT_CI, 8, 0, 0, 0, 7, 63, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 3, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxMQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_right, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_bubble_right_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPVertex(gMasterGfxPos++, gMsgSpeechBoxRQuad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
@@ -3809,125 +3816,123 @@ void msg_draw_speech_bubble(
 }
 
 void msg_draw_speech_arrow(MessagePrintState* printer) {
-    s16 s4;
-    s16 s2;
-    f32 f20;
-    s32 v0;
-    f32 f24;
-    f32 f22;
-    s32 s7;
-    Vtx* fp;
-    s32 s0;
-    f32 cos1, cos2;
+    s16 targetX, targetY;
+    f32 windowXpart;
+    s32 arrowLength;
+    Vtx* quad;
+    s32 angle;
+    f32 cosAngle, sinAngle;
     Matrix4f sp10;
-    s16 x1, x2;
-    s16 x3, x4;
-    s32 y1;
-    s32 y2;
-    u8 a1 = 0;
-    s16 a2 = printer->windowOffsetPos.x + printer->windowBasePos.x;
-    s16 a0 = printer->windowOffsetPos.y + printer->windowBasePos.y;
+    s16 x1, x2, x3, x4;
+    s32 y1, y2;
+    u8 pointRightSide = FALSE;
+    s16 windowX = printer->windowOffsetPos.x + printer->windowBasePos.x;
+    s16 windowY = printer->windowOffsetPos.y + printer->windowBasePos.y;
 
     if (printer->openStartPos.x == 0) {
         return;
     }
 
-    if (printer->style == 1 || printer->style == 2 || printer->style == 3 || printer->maxLinesPerPage == 3) {
-        s4 = a0 + printer->windowSize.y - 4;
+    if (printer->style == MSG_STYLE_RIGHT ||
+        printer->style == MSG_STYLE_LEFT ||
+        printer->style == MSG_STYLE_CENTER ||
+        printer->maxLinesPerPage == 3) {
+        targetY = windowY + printer->windowSize.y - 4;
     } else {
-        s4 = a0 + printer->windowSize.y - 3;
+        targetY = windowY + printer->windowSize.y - 3;
     }
 
-    if (printer->style == 2) {
-        a1 = 0;
-    } else if (printer->style == 3 || printer->openStartPos.x >= 160) {
-        a1 = 1;
+    if (printer->style == MSG_STYLE_LEFT) {
+        pointRightSide = FALSE;
+    } else if (printer->style == MSG_STYLE_CENTER || printer->openStartPos.x >= 160) {
+        pointRightSide = TRUE;
     }
 
-    if (a1) {
-        s2 = a2 + (f32)printer->windowSize.x * 0.7;
-        if (printer->openStartPos.x < s2) {
-            for (f20 = 0.7f; f20 >= 0.67; f20 -= 0.005) {
-                s2 = a2 + printer->windowSize.x * f20;
-                s0 = atan2(printer->openStartPos.x, printer->openStartPos.y, s2, s4);
-                if (abs(s0) < 45) {
+    if (pointRightSide) {
+        targetX = windowX + (f32)printer->windowSize.x * 0.7;
+        if (printer->openStartPos.x < targetX) {
+            for (windowXpart = 0.7f; windowXpart >= 0.67; windowXpart -= 0.005) {
+                targetX = windowX + printer->windowSize.x * windowXpart;
+                angle = atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
+                if (abs(angle) < 45) {
                     break;
                 }
             }
         }
     } else {
-        s2 = a2 + (f32)printer->windowSize.x * 0.3;
-        if (printer->openStartPos.x > s2) {
-            for (f20 = 0.3f; f20 <= 0.38; f20 += 0.005) {
-                s2 = a2 + printer->windowSize.x * f20;
-                s0 = atan2(printer->openStartPos.x, printer->openStartPos.y, s2, s4);
-                if (abs(s0) < 45) {
+        targetX = windowX + (f32)printer->windowSize.x * 0.3;
+        if (printer->openStartPos.x > targetX) {
+            for (windowXpart = 0.3f; windowXpart <= 0.38; windowXpart += 0.005) {
+                targetX = windowX + printer->windowSize.x * windowXpart;
+                angle = atan2(printer->openStartPos.x, printer->openStartPos.y, targetX, targetY);
+                if (abs(angle) < 45) {
                     break;
                 }
             }
         }
     }
 
-    x1 = s2 - 9;
-    x2 = s2 + 9;
-    x3 = s2;
+    x1 = targetX - 9;
+    x2 = targetX + 9;
+    x3 = targetX;
 
-    s7 = dist2D(printer->initOpenPos.x, printer->initOpenPos.y, s2, s4);
-    if (s7 < 10) {
+    arrowLength = dist2D(printer->initOpenPos.x, printer->initOpenPos.y, targetX, targetY);
+    if (arrowLength < 10) {
         return;
     }
 
-    if (s7 > 25) {
-        s7 = 25;
+    if (arrowLength > 25) {
+        arrowLength = 25;
     }
 
+    // alternate quads between frames
     if (gCurrentDisplayContextIndex != 0) {
-        fp = gMsgUnkArrowQuad;
+        quad = gMsgArrowQuad1;
     } else {
-        fp = gMsgUnkQuad;
+        quad = gMsgArrowQuad2;
     }
 
-    s0 = atan2(s2, s4, printer->initOpenPos.x, printer->initOpenPos.y);
-    s0 -= 180;
-    if (abs(s0) >= 75) {
+    angle = atan2(targetX, targetY, printer->initOpenPos.x, printer->initOpenPos.y);
+    angle -= 180;
+    if (abs(angle) >= 75) {
         return;
     }
 
-    cos1 = cosine(s0);
-    cos2 = cosine(s0 + 90);
+    cosAngle = cosine(angle);
+    sinAngle = cosine(angle + 90);
 
-    x3 = x3 - s7 * cos1;
+    x3 = x3 - arrowLength * cosAngle;
     x4 = x3 + 1;
 
-    y1 = -s4;
-    y2 = -(s16)(s4 + s7 * cos2);
+    y1 = -targetY;
+    y2 = -(s16)(targetY + arrowLength * sinAngle);
 
-    fp[0].v.ob[0] = x1;
-    fp[0].v.ob[1] = y1;
-    fp[1].v.ob[0] = x2;
-    fp[1].v.ob[1] = y1;
+    quad[0].v.ob[0] = x1;
+    quad[0].v.ob[1] = y1;
+    quad[1].v.ob[0] = x2;
+    quad[1].v.ob[1] = y1;
 
-    fp[2].v.ob[0] = x3;
-    fp[2].v.ob[1] = y2;
-    fp[3].v.ob[0] = x4;
-    fp[3].v.ob[1] = y2;
+    quad[2].v.ob[0] = x3;
+    quad[2].v.ob[1] = y2;
+    quad[3].v.ob[0] = x4;
+    quad[3].v.ob[1] = y2;
 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, 1, 0, 0, 0, TEXEL0, 0, 0, 0, 1);
     gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 32, 32, 32, 255);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_arrow, G_IM_FMT_CI, 16, 0, 0, 0, 15, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, ui_msg_arrow_png, G_IM_FMT_CI, 16, 0, 0, 0, 15, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPVertex(gMasterGfxPos++, fp, 4, 0);
+    gSPVertex(gMasterGfxPos++, quad, 4, 0);
     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
 }
 
 void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha) {
     s32 i;
-    s32 v0;
+    s32 frameType;
     s32 textures[16];
     s32 r, g, b;
     Rect quads[16];
@@ -3952,7 +3957,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
     if (fading == 0 || bgAlpha != 0) {
         do {} while (0);
         switch (style) {
-            case 5:
+            case MSG_STYLE_CHOICE:
                 r = ((((u16*)(ui_msg_palettes[0]))[4] >> 11) & 0x1F) * 8;
                 g = ((((u16*)(ui_msg_palettes[0]))[4] >> 6) & 0x1F) * 8;
                 b = ((((u16*)(ui_msg_palettes[0]))[4] >> 1) & 0x1F) * 8;
@@ -3968,7 +3973,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
                     gDPScisFillRectangle(gMasterGfxPos++, posX + 8, posY + 8, posX + sizeX - 8, posY + sizeY - 8);
                 }
                 break;
-            case 6:
+            case MSG_STYLE_INSPECT:
                 gDPPipeSync(gMasterGfxPos++);
                 gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
                 gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
@@ -3982,8 +3987,8 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
                     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, bgAlpha);
                 }
 
-                gDPLoadTextureBlock_4b(gMasterGfxPos++, ui_msg_background, G_IM_FMT_I, 64, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
-                if (style == 6) {
+                gDPLoadTextureBlock_4b(gMasterGfxPos++, ui_msg_background_png, G_IM_FMT_I, 64, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
+                if (style == MSG_STYLE_INSPECT) {
                     gSPScisTextureRectangle(gMasterGfxPos++, (posX + 3) * 4, (posY + 3) * 4, (posX + sizeX - 3) * 4, (posY + sizeY - 3) * 4,
                                             G_TX_RENDERTILE, gMsgBGScrollAmtX, gMsgBGScrollAmtY, 0x400, 0x400);
                 } else {
@@ -4119,19 +4124,19 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
     quads[15].lry = (posY + sizeY) * 4;
 
     switch (style) {
-        case 5:
-            v0 = 0;
+        case MSG_STYLE_CHOICE:
+            frameType = 0;
             break;
-        case 6:
-            v0 = 1;
+        case MSG_STYLE_INSPECT:
+            frameType = 1;
             break;
         default:
-            v0 = 0;
+            frameType = 0;
             break;
     }
 
-    for (i = 0; i < 16; i++) {
-        textures[i] = gMessageBoxFrameParts[v0][i];
+    for (i = 0; i < ARRAY_COUNT(textures); i++) {
+        textures[i] = gMessageBoxFrameParts[frameType][i];
     }
 
     if (fading == 0) {
@@ -4145,7 +4150,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
     gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
     gDPLoadTLUT_pal16(gMasterGfxPos++, 0, ui_msg_palettes[palette]);
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(textures); i++) {
         if (textures[i] != NULL && quads[i].ulx < 10000) {
             gDPLoadTextureTile_4b(gMasterGfxPos++, textures[i], G_IM_FMT_CI, 8, 8, 0, 0, 7, 7, 0, G_TX_WRAP, G_TX_WRAP, 3, 3, G_TX_NOLOD, G_TX_NOLOD);
             gSPScisTextureRectangle(gMasterGfxPos++, quads[i].ulx, quads[i].uly, quads[i].lrx, quads[i].lry,

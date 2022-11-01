@@ -287,50 +287,50 @@ s32 pad_after_move_table[] = {
     0x00000000, 0x00000000, 0x00000000
 };
 
-extern IMG_BIN ui_msg_frame_part_0[];
-extern IMG_BIN ui_msg_frame_part_1[];
-extern IMG_BIN ui_msg_frame_part_2[];
-extern IMG_BIN ui_msg_frame_part_3[];
-extern IMG_BIN ui_msg_frame_part_4[];
-extern IMG_BIN ui_msg_frame_part_5[];
-extern IMG_BIN ui_msg_frame_part_6[];
-extern IMG_BIN ui_msg_frame_part_7[];
-extern IMG_BIN ui_msg_frame_part_8[];
-extern IMG_BIN ui_msg_frame_part_9[];
-extern IMG_BIN ui_msg_frame_part_A[];
-extern IMG_BIN ui_msg_frame_part_B[];
-extern IMG_BIN ui_msg_frame_part_C[];
-extern IMG_BIN ui_msg_frame_part_D[];
-extern IMG_BIN ui_msg_frame_part_E[];
-extern IMG_BIN ui_msg_frame_part_F[];
-extern IMG_BIN ui_msg_frame_part_10[];
-extern IMG_BIN ui_msg_frame_part_11[];
-extern IMG_BIN ui_msg_frame_part_12[];
-extern IMG_BIN ui_msg_frame_part_13[];
-extern IMG_BIN ui_msg_frame_part_14[];
-extern IMG_BIN ui_msg_frame_part_15[];
-extern IMG_BIN ui_msg_frame_part_16[];
-extern IMG_BIN ui_msg_frame_part_17[];
-extern IMG_BIN ui_msg_frame_part_18[];
-extern IMG_BIN ui_msg_frame_part_19[];
-extern IMG_BIN ui_msg_frame_part_1A[];
-extern IMG_BIN ui_msg_frame_part_1B[];
-extern IMG_BIN ui_msg_frame_part_1C[];
-extern IMG_BIN ui_msg_frame_part_1D[];
-extern IMG_BIN ui_msg_frame_part_1E[];
-extern IMG_BIN ui_msg_frame_part_1F[];
+extern IMG_BIN ui_msg_frame_part_0_png[];
+extern IMG_BIN ui_msg_frame_part_1_png[];
+extern IMG_BIN ui_msg_frame_part_2_png[];
+extern IMG_BIN ui_msg_frame_part_3_png[];
+extern IMG_BIN ui_msg_frame_part_4_png[];
+extern IMG_BIN ui_msg_frame_part_5_png[];
+extern IMG_BIN ui_msg_frame_part_6_png[];
+extern IMG_BIN ui_msg_frame_part_7_png[];
+extern IMG_BIN ui_msg_frame_part_8_png[];
+extern IMG_BIN ui_msg_frame_part_9_png[];
+extern IMG_BIN ui_msg_frame_part_A_png[];
+extern IMG_BIN ui_msg_frame_part_B_png[];
+extern IMG_BIN ui_msg_frame_part_C_png[];
+extern IMG_BIN ui_msg_frame_part_D_png[];
+extern IMG_BIN ui_msg_frame_part_E_png[];
+extern IMG_BIN ui_msg_frame_part_F_png[];
+extern IMG_BIN ui_msg_frame_part_10_png[];
+extern IMG_BIN ui_msg_frame_part_11_png[];
+extern IMG_BIN ui_msg_frame_part_12_png[];
+extern IMG_BIN ui_msg_frame_part_13_png[];
+extern IMG_BIN ui_msg_frame_part_14_png[];
+extern IMG_BIN ui_msg_frame_part_15_png[];
+extern IMG_BIN ui_msg_frame_part_16_png[];
+extern IMG_BIN ui_msg_frame_part_17_png[];
+extern IMG_BIN ui_msg_frame_part_18_png[];
+extern IMG_BIN ui_msg_frame_part_19_png[];
+extern IMG_BIN ui_msg_frame_part_1A_png[];
+extern IMG_BIN ui_msg_frame_part_1B_png[];
+extern IMG_BIN ui_msg_frame_part_1C_png[];
+extern IMG_BIN ui_msg_frame_part_1D_png[];
+extern IMG_BIN ui_msg_frame_part_1E_png[];
+extern IMG_BIN ui_msg_frame_part_1F_png[];
 
 IMG_BIN* gMessageBoxFrameParts[2][16] = {
     {
-        ui_msg_frame_part_0, ui_msg_frame_part_1, ui_msg_frame_part_2, ui_msg_frame_part_3,
-        ui_msg_frame_part_4, ui_msg_frame_part_5, ui_msg_frame_part_6, ui_msg_frame_part_7,
-        ui_msg_frame_part_8, ui_msg_frame_part_9, ui_msg_frame_part_A, ui_msg_frame_part_B,
-        ui_msg_frame_part_C, ui_msg_frame_part_D, ui_msg_frame_part_E, ui_msg_frame_part_F,
+        ui_msg_frame_part_0_png, ui_msg_frame_part_1_png, ui_msg_frame_part_2_png, ui_msg_frame_part_3_png,
+        ui_msg_frame_part_4_png, ui_msg_frame_part_5_png, ui_msg_frame_part_6_png, ui_msg_frame_part_7_png,
+        ui_msg_frame_part_8_png, ui_msg_frame_part_9_png, ui_msg_frame_part_A_png, ui_msg_frame_part_B_png,
+        ui_msg_frame_part_C_png, ui_msg_frame_part_D_png, ui_msg_frame_part_E_png, ui_msg_frame_part_F_png,
     },
     {
-        ui_msg_frame_part_10, ui_msg_frame_part_11, ui_msg_frame_part_12, ui_msg_frame_part_13,
-        ui_msg_frame_part_14, ui_msg_frame_part_15, ui_msg_frame_part_16, ui_msg_frame_part_17,
-        ui_msg_frame_part_18, ui_msg_frame_part_19, ui_msg_frame_part_1A, ui_msg_frame_part_1B,
-        ui_msg_frame_part_1C, ui_msg_frame_part_1D, ui_msg_frame_part_1E, ui_msg_frame_part_1F
+        ui_msg_frame_part_10_png, ui_msg_frame_part_11_png, ui_msg_frame_part_12_png, ui_msg_frame_part_13_png,
+        ui_msg_frame_part_14_png, ui_msg_frame_part_15_png, ui_msg_frame_part_16_png, ui_msg_frame_part_17_png,
+        ui_msg_frame_part_18_png, ui_msg_frame_part_19_png, ui_msg_frame_part_1A_png, ui_msg_frame_part_1B_png,
+        ui_msg_frame_part_1C_png, ui_msg_frame_part_1D_png, ui_msg_frame_part_1E_png, ui_msg_frame_part_1F_png,
     }
 };

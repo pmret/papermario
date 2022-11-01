@@ -147,7 +147,7 @@ void N(appendGfx_score_display) (void* renderData) {
             sfx_play_sound_with_params(SOUND_211, 0, 0x40, 0x32);
 
         }
-        draw_number(data->currentScore, data->scoreWindowPosX + 63, 32, 1, 0, 255, 3);
+        draw_number(data->currentScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     }
 }
 
@@ -684,7 +684,7 @@ s8 N(BlockPosX)[NUM_BLOCKS] = {
 };
 
 s8 N(BlockPosY)[NUM_BLOCKS] = {
-    56, 60, 56, 60, 56, 60, 56, 60, 56, 60, 56 
+    56, 60, 56, 60, 56, 60, 56, 60, 56, 60, 56
 };
 
 s8 N(BlockPosZ)[NUM_BLOCKS] = {
@@ -692,18 +692,18 @@ s8 N(BlockPosZ)[NUM_BLOCKS] = {
 };
 
 f32 N(TallyPosX)[NUM_BLOCKS] = {
-    -105.0, -80.0, -55.0, -30.0, -5.0, -105.0, -80.0, -55.0, 
+    -105.0, -80.0, -55.0, -30.0, -5.0, -105.0, -80.0, -55.0,
     -30.0, -5.0, 20.0
 };
 
 f32 N(TallyPosY)[NUM_BLOCKS] = {
-    157.0, 157.0, 157.0, 157.0, 157.0, 133.0, 133.0, 133.0, 
+    157.0, 157.0, 157.0, 157.0, 157.0, 133.0, 133.0, 133.0,
     133.0, 133.0, 133.0,
 };
 
 s32 N(PanelModelIDs)[NUM_BLOCKS] = {
-    19, 17, 15, 13, 22, 24, 26, 29, 
-    31, 34, 36 
+    19, 17, 15, 13, 22, 24, 26, 29,
+    31, 34, 36
 };
 
 JumpGamePanelType N(PanelTypes)[NUM_BLOCKS] = {
