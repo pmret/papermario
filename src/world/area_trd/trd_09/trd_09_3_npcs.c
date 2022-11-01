@@ -98,7 +98,7 @@ EvtScript N(D_80240B80_9BE1E0) = {
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN

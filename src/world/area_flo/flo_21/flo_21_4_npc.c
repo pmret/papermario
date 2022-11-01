@@ -525,7 +525,7 @@ EvtScript N(EVS_NpcDefeat_HuffNPuff_Main) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_1, TRUE)
             EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar3)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)

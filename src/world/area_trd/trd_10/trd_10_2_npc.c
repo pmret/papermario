@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcInteract_KoopaBros_01) = {
 };
 
 EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
-    EVT_CALL(SetEncounterStatusFlags, 2, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_KoopaBros_01, 0, -1000, 0)
     EVT_CALL(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_2, FALSE)

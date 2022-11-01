@@ -56,7 +56,7 @@ StaticNpc N(NpcData_Goompa) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { 80.0f, 40.0f, -84.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_1000,
+    .flags = ENEMY_FLAGS_GRAVITY,
 };
 
 NpcGroupList N(DefaultNPCs) = {

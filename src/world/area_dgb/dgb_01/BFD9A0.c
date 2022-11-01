@@ -589,10 +589,10 @@ EvtScript N(8024517C) = {
 EvtScript N(80245208) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
+        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

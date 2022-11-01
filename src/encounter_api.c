@@ -231,10 +231,10 @@ void start_battle(Evt* script, s32 songID) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->unk_94 = 0;
-    currentEncounter->unk_12 = TRUE;
+    currentEncounter->scriptedBattle = TRUE;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
     D_8009A678 = 1;
-    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
+    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 }
 
 ApiStatus StartBattle(Evt* script, s32 isInitialCall) {
@@ -297,10 +297,10 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->unk_94 = 0;
-    currentEncounter->unk_12 = TRUE;
+    currentEncounter->scriptedBattle = TRUE;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
     D_8009A678 = 1;
-    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_0;
+    gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 
     return ApiStatus_DONE1;
 }
@@ -772,7 +772,7 @@ ApiStatus func_800457C4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800457F8(Evt* script, s32 isInitialCall) {
-    gCurrentEncounter.unk_12 = TRUE;
+    gCurrentEncounter.scriptedBattle = TRUE;
     return ApiStatus_DONE2;
 }
 

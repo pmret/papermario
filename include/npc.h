@@ -138,7 +138,7 @@ typedef struct NpcSettings {
     /* 0x18 */ EvtScript* aux;
     /* 0x1C */ EvtScript* onDefeat;
     /* 0x20 */ s32 flags;
-    /* 0x24 */ s32 unk_24;
+    /* 0x24 */ EvtScript* unk_24;
     /* 0x28 */ s16 level;
     /* 0x2A */ s16 actionFlags;  // action flags: 1 = jump on seeing player
 } NpcSettings; // size = 0x2C
@@ -359,7 +359,7 @@ typedef struct EncounterStatus {
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
     /* 0x010 */ char unk_10;
     /* 0x011 */ s8 allowFleeing;
-    /* 0x012 */ s8 unk_12;
+    /* 0x012 */ s8 scriptedBattle; ///< battle started by StartBattle but not by encounter
     /* 0x013 */ s8 dropWhackaBump;
     /* 0x014 */ s32 songID;
     /* 0x018 */ s32 unk_18;

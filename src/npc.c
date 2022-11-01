@@ -2289,7 +2289,7 @@ void clear_encounter_status(void) {
     currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
-    currentEncounter->unk_12 = FALSE;
+    currentEncounter->scriptedBattle = FALSE;
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
@@ -2390,7 +2390,7 @@ void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
     if (npcGroupList != NULL) {
         gEncounterState = ENCOUNTER_STATE_CREATE;
         D_8009A678 = 1;
-        gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_0;
+        gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_INIT;
     }
 }
 
@@ -2461,7 +2461,7 @@ void kill_enemy(Enemy* enemy) {
         if (!(enemy->flags & ENEMY_FLAGS_4)) {
             if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
                 if (!(enemy->flags & ENEMY_FLAGS_1)) {
-                    if (!(enemy->flags & ENEMY_FLAGS_10)) {
+                    if (!(enemy->flags & ENEMY_FLAGS_FLED)) {
                         COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
                     }
                 }

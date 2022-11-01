@@ -305,7 +305,7 @@ EvtScript N(EVS_NpcIdle_Boo) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Tubba) = {
-    EVT_CALL(SetEncounterStatusFlags, 2, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)

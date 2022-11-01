@@ -158,13 +158,13 @@ static s32 N(pad_1AA8)[] = {
 EvtScript N(80241AB0) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
             EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN

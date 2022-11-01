@@ -1356,7 +1356,7 @@ block_52:
                     return;
                 }
 
-                btl_cam_use_preset(2);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
                 if (partner == NULL || !(gBattleStatus.flags1 & BS_FLAGS1_100000)) {
                     gBattleState2 = 4;
                 } else if (gBattleStatus.flags2 & 0x40) {
@@ -2894,52 +2894,52 @@ void btl_state_update_end_player_turn(void) {
     s32 var_s2;
     s32 var_s4;
 
-    if (gBattleState2 == 0) {
-        if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
-            gBattleState2 = 5;
-        } else if (!(gBattleStatus.flags2 & 0x04000000) &&
-             !is_ability_active(0x12) &&
-             !is_ability_active(0x1F) &&
-             !is_ability_active(0x34)
+    if (gBattleState2 == BATTLE_STATE2_UNK_0) {
+        if (battleStatus->moveCategory == 2 && battleStatus->itemUsesLeft >= 2) {
+            gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
+        } else if (!(gBattleStatus.flags2 & BS_FLAGS2_4000000) &&
+             !is_ability_active(ABILITY_HAPPY_HEART) &&
+             !is_ability_active(ABILITY_CRAZY_HEART) &&
+             !is_ability_active(ABILITY_HAPPY_FLOWER)
             ) {
-            gBattleState2 = 5;
+            gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
         } else if (player->stoneStatus == 0xC || battleStatus->outtaSightActive) {
-            gBattleState2 = 5;
+            gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
         } else {
             s32 prevHPDrainCount = 0;
-            s32 var_s2 = 0;
-            s32 var_s4 = 0;
+            s32 extraHP = 0;
+            s32 extraFP = 0;
 
-            if (gBattleStatus.flags2 & 0x04000000) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_4000000) {
                 prevHPDrainCount = battleStatus->hpDrainCount;
                 battleStatus->hpDrainCount = 0;
             }
 
             if (rand_int(100) < 50) {
-                var_s2 = is_ability_active(0x1F) * 3;
+                extraHP = is_ability_active(ABILITY_CRAZY_HEART) * 3;
             }
             if (rand_int(100) < 50) {
-                var_s2 += is_ability_active(0x12);
+                extraHP += is_ability_active(ABILITY_HAPPY_HEART);
             }
             if (rand_int(100) < 50) {
-                var_s4 = is_ability_active(0x34);
+                extraFP = is_ability_active(ABILITY_HAPPY_FLOWER);
             }
 
-            if (prevHPDrainCount + var_s2 + var_s4 == 0) {
-                gBattleState2 = 5;
+            if (prevHPDrainCount + extraHP + extraFP == 0) {
+                gBattleState2 = BATTLE_STATE2_BEGIN_LEVEL_UP;
             } else {
-                battleStatus->battlePhase = 0x1E;
-                script = start_script(&PlayerScriptDispatcher, 0xA, 0);
+                battleStatus->battlePhase = PHASE_PLAYER_HAPPY;
+                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
-                if (gBattleStatus.flags2 & 0x04000000) {
+                if (gBattleStatus.flags2 & BS_FLAGS2_4000000) {
                     script->varTable[10] += battleStatus->hpDrainCount;
                     battleStatus->hpDrainCount = 0;
                 }
                 script->varTable[10] = prevHPDrainCount;
-                script->varTable[11] = var_s2;
-                script->varTable[12] = var_s4;
+                script->varTable[11] = extraHP;
+                script->varTable[12] = extraFP;
 
                 if (script->varTable[10] > 99) {
                     script->varTable[10] = 99;
@@ -2951,17 +2951,17 @@ void btl_state_update_end_player_turn(void) {
                     script->varTable[12] = 99;
                 }
 
-                gBattleStatus.flags2 &= ~0x04000000;
+                gBattleStatus.flags2 &= ~BS_FLAGS2_4000000;
                 gBattleState2 = 5;
             }
         }
     }
 
-    if (gBattleState2 == 5) {
+    if (gBattleState2 == BATTLE_STATE2_BEGIN_LEVEL_UP) {
         if ((player->takeTurnScript == NULL) || (does_script_exist(player->takeTurnID) == 0)) {
             player->takeTurnScript = NULL;
-            if (!(gBattleStatus.flags2 & 0x40) || (gBattleStatus.flags1 & 0x100000)) {
-                gBattleState2 = 0xA;
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_40) || (gBattleStatus.flags1 & BS_FLAGS1_100000)) {
+                gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
             } else {
                 player->state.currentPos.x = player->homePos.x;
                 player->state.currentPos.z = player->homePos.z;
@@ -2974,7 +2974,7 @@ void btl_state_update_end_player_turn(void) {
         }
     }
 
-    if (gBattleState2 == 6) {
+    if (gBattleState2 == BATTLE_STATE2_LEVEL_UP_SHOW_HUD) {
         if (player->state.moveTime != 0) {
             player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
             player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
@@ -2998,58 +2998,58 @@ void btl_state_update_end_player_turn(void) {
             player->homePos.z = player->currentPos.z;
             partner->homePos.x = partner->currentPos.x;
             partner->homePos.z = partner->currentPos.z;
-            gBattleStatus.flags1 |= 0x100000;
-            gBattleState2 = 0xA;
+            gBattleStatus.flags1 |= BS_FLAGS1_100000;
+            gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
         }
     }
 
-    if (gBattleState2 == 0xA && !btl_check_enemies_defeated()) {
-        if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
-            btl_cam_use_preset(2);
-            btl_cam_move(0xA);
-            gBattleStatus.flags2 &= ~2;
+    if (gBattleState2 == BATTLE_STATE2_PLAYER_DEFEATED && !btl_check_enemies_defeated()) {
+        if (battleStatus->moveCategory == 2 && battleStatus->itemUsesLeft >= 2) {
+            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_move(10);
+            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
         } else {
-            gBattleStatus.flags2 |= 2;
+            gBattleStatus.flags2 |= BS_FLAGS2_2;
         }
 
         if (battleStatus->unk_94 < 0) {
             battleStatus->unk_94 = 0;
             battleStatus->itemUsesLeft = 0;
-            btl_set_state(6);
+            btl_set_state(BATTLE_STATE_END_TURN);
             return;
         }
 
         if (battleStatus->itemUsesLeft != 0) {
             battleStatus->itemUsesLeft--;
             if (battleStatus->itemUsesLeft != 0) {
-                btl_set_state(0xC);
-                gBattleState2 = 0x46;
+                btl_set_state(BATTLE_STATE_PREPARE_MENU);
+                gBattleState2 = BATTLE_STATE2_UNK_46;
                 return;
             }
 
-            if (gBattleStatus.flags1 & 0x04000000 && battleStatus->hustleTurns != 0) {
+            if (gBattleStatus.flags1 & BS_FLAGS1_HUSTLE_DRINK_ON && battleStatus->hustleTurns != 0) {
                 battleStatus->hustleTurns--;
             }
-            if (battleStatus->hustleTurns != 0 && gBattleStatus.flags1 & 0x04000000) {
-                gBattleStatus.flags2 &= ~2;
-                btl_set_state(0xC);
+            if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & BS_FLAGS1_HUSTLE_DRINK_ON)) {
+                gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+                btl_set_state(BATTLE_STATE_PREPARE_MENU);
             } else {
-                gBattleStatus.flags1 &= ~0x04000000;
-                btl_set_state(8);
+                gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+                btl_set_state(BATTLE_STATE_BEGIN_PARTNER_TURN);
             }
         } else {
-           if (gBattleStatus.flags1 & 0x04000000 && battleStatus->hustleTurns != 0) {
+           if (gBattleStatus.flags1 & BS_FLAGS1_HUSTLE_DRINK_ON && battleStatus->hustleTurns != 0) {
                 battleStatus->hustleTurns--;
             }
-            if ((battleStatus->hustleTurns != 0) && gBattleStatus.flags1 & 0x04000000) {
-                gBattleStatus.flags2 &= ~2;
-                btl_set_state(0xC);
+            if (battleStatus->hustleTurns != 0 && gBattleStatus.flags1 & BS_FLAGS1_HUSTLE_DRINK_ON) {
+                gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+                btl_set_state(BATTLE_STATE_PREPARE_MENU);
             } else {
-                gBattleStatus.flags1 &= ~0x04000000;
-                if (!(gBattleStatus.flags2 & 0x40)) {
-                    btl_set_state(8);
+                gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+                if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
+                    btl_set_state(BATTLE_STATE_BEGIN_PARTNER_TURN);
                 } else {
-                    btl_set_state(9);
+                    btl_set_state(BATTLE_STATE_9);
                 }
             }
         }

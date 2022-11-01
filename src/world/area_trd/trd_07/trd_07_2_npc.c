@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
