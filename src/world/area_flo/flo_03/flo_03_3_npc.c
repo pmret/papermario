@@ -15,27 +15,27 @@ NpcSettings N(NpcSettings_Petunia) = {
 #include "world/common/complete/GiveReward.inc.c"
 
 Vec3i N(BurrowLocations_Mole_01)[] = {
-    { -100, 0, 210 }, 
-    { -160, 0, 285 }, 
-    {  -35, 0, 305 }, 
+    { -100, 0, 210 },
+    { -160, 0, 285 },
+    {  -35, 0, 305 },
 };
 
 Vec3i N(BurrowLocations_Mole_02)[] = {
     { -190, 0,  80 },
     { -130, 0,   0 },
-    {  -70, 0, -60 }, 
+    {  -70, 0, -60 },
 };
 
 Vec3i N(BurrowLocations_Mole_03)[] = {
     {  75, 0,  -15 },
     {  35, 0, -100 },
-    { 130, 0,    0 }, 
+    { 130, 0,    0 },
 };
 
 Vec3i N(BurrowLocations_Mole_04)[] = {
     { 115, 0,  180 },
     {  85, 0,  290 },
-    { 145, 0,  140 }, 
+    { 145, 0,  140 },
 };
 
 EvtScript N(EVS_Scene_SunReturns) = {
@@ -781,7 +781,7 @@ StaticNpc N(NpcData_Petunia) = {
     .settings = &N(NpcSettings_Petunia),
     .pos = { -30.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Petunia),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -814,7 +814,7 @@ StaticNpc N(NpcData_Dayzee) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -233.0f, 0.0f, -217.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Dayzee),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -846,7 +846,7 @@ StaticNpc N(NpcData_MontyMole_01) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -100.0f, 0.0f, 210.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_MontyMole_01),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -878,7 +878,7 @@ StaticNpc N(NpcData_MontyMole_02) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -130.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_MontyMole_02),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -910,7 +910,7 @@ StaticNpc N(NpcData_MontyMole_03) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { 75.0f, 0.0f, 20.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_MontyMole_03),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -942,7 +942,7 @@ StaticNpc N(NpcData_MontyMole_04) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { 71.0f, 0.0f, 200.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_MontyMole_04),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,

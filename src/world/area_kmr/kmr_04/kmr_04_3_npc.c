@@ -263,7 +263,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
     .init = &N(EVS_NpcInit_JrTroopa),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -295,7 +295,7 @@ StaticNpc N(NpcData_Goompa) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { -58.0f, 0.0f, 130.0f },
     .yaw = 0,
-    .flags = NPC_FLAG_100 | NPC_FLAG_200000,
+    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200000,
     .animations = {
     },
 };

@@ -1169,11 +1169,11 @@ NpcSettings N(Quizmo_NpcSettings) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .level = 99,
 };
 
-// alternate (unused?) variant of quizmo with AI and NPC_FLAG_100 unset
+// alternate (unused?) variant of quizmo with AI and ENEMY_FLAGS_100 unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
@@ -1182,7 +1182,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .level = 99,
     .actionFlags = 16,
 };

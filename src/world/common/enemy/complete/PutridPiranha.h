@@ -41,7 +41,7 @@
     .settings = &N(NpcSettings_PutridPiranha_Hitbox), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 0, \
-    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS, \
+    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000, \
     .drops = { \
         .dropFlags = NPC_DROP_FLAGS_80, \
         .heartDrops  = NO_DROPS, \

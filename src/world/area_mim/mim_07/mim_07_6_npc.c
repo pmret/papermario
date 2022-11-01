@@ -9,39 +9,39 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 };
 
 s32 N(D_80242944_BACA84)[] = {
-    0, -350, 
+    0, -350,
 };
 
 s32 N(D_8024294C_BACA8C)[] = {
-    0, 350, 
+    0, 350,
 };
 
 s32 N(D_80242954_BACA94)[] = {
-    350, 0, 
+    350, 0,
 };
 
 s32 N(D_8024295C_BACA9C)[] = {
-    -270, -245, -150, -310, 
+    -270, -245, -150, -310,
 };
 
 s32 N(D_8024296C_BACAAC)[] = {
-    270, -245, 150, -310, 
+    270, -245, 150, -310,
 };
 
 s32 N(D_8024297C_BACABC)[] = {
-    -270, 245, -150, 310, 
+    -270, 245, -150, 310,
 };
 
 s32 N(D_8024298C_BACACC)[] = {
-    270, 245, 150, 310, 
+    270, 245, 150, 310,
 };
 
 s32 N(D_8024299C_BACADC)[] = {
-    245, -270, 310, -150, 
+    245, -270, 310, -150,
 };
 
 s32 N(D_802429AC_BACAEC)[] = {
-    245, 270, 310, 150, 
+    245, 270, 310, 150,
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
@@ -235,7 +235,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { -338.0f, 0.0f, 0.0f },
     .yaw = 0,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
     .init = &N(EVS_NpcInit_JrTroopa),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,

@@ -66,7 +66,7 @@ Vec3i N(HeartJumpPath)[] = {
     {    -70,    10,    20 },
     {   -180,     0,     0 },
     {   -300,     0,     0 },
-    { SUBLIST_DONE, 0, 0 }, 
+    { SUBLIST_DONE, 0, 0 },
 };
 
 EvtScript N(EVS_Scene_HeartEscape) = {
@@ -154,7 +154,7 @@ StaticNpc N(NpcData_TubbasHeart) = {
     .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 119.0f, 60.0f, 0.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
     .init = &N(EVS_NpcInit_TubbasHeart),
     .drops = TUBBAS_HEART_DROPS,
     .animations = TUBBAS_HEART_ANIMS,

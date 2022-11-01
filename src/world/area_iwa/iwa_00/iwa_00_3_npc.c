@@ -25,7 +25,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
         sfx_play_sound_at_position(SOUND_DEATH, 0, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
         fx_damage_stars(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0.0f, -1.0f, 0.0f, 10);
     }
-    
+
     temp = script->functionTemp[1];
     if (script->functionTemp[1] == 10) {
         fx_big_smoke_puff(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
@@ -34,7 +34,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
             spawn_drops(enemy);
         }
     }
-    
+
     script->functionTemp[1]--;
     if (script->functionTemp[1] == 0) {
         return ApiStatus_DONE1;
@@ -49,7 +49,7 @@ StaticNpc N(NpcData_MontyMole_GroundAmbush)[] = {
         .settings = &N(NpcSettings_MontyMole_GroundAmbush),
         .pos = { 880.0f, 70.0f, 67.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_LOCK_ANIMS,
+        .flags = ENEMY_FLAGS_400,
         .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
@@ -71,7 +71,7 @@ StaticNpc N(NpcData_MontyMole_GroundAmbush)[] = {
         .settings = &N(NpcSettings_MontyMole_GroundAmbush_Hole),
         .pos = { 880.0f, 70.0f, 67.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_AI | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_20 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -99,7 +99,7 @@ StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
         .pos = { 1220.0f, -30.0f, 70.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_LOCK_ANIMS,
+        .flags = ENEMY_FLAGS_400,
         .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
@@ -121,7 +121,7 @@ StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
         .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
         .pos = { 1220.0f, -30.0f, 70.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_AI | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_20 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -348,7 +348,7 @@ StaticNpc N(NpcData_Whacka)[] = {
         .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_400000,
         .init = &N(EVS_NpcInit_Whacka_01),
         .drops = WHACKA_DROPS,
         .animations = WHACKA_ANIMS,
@@ -359,7 +359,7 @@ StaticNpc N(NpcData_Whacka)[] = {
         .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
-        .flags = NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_4000 | NPC_FLAG_MOTION_BLUR | NPC_FLAG_200000 | NPC_FLAG_400000 | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS,
+        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_4000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Whacka_02),
         .drops = WHACKA_DROPS,
         .animations = WHACKA_ANIMS,

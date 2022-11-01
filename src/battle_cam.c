@@ -2174,7 +2174,7 @@ void btl_cam_use_preset_intl(s32 id) {
         }
 
         BattleCam_ControlScript = preset;
-        newScript = start_script(preset, EVT_PRIORITY_A, EVT_FLAG_20);
+        newScript = start_script(preset, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
         BattleCam_DoneMoving = FALSE;
         battleStatus->camMovementScript = newScript;
         battleStatus->camMovementScriptID = newScript->id;

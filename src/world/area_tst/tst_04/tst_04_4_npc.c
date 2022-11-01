@@ -47,7 +47,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .onHit = &N(EVS_NpcHit_Goompa),
     .aux = &N(EVS_NpcAux_Goompa),
     .onDefeat = &N(EVS_NpcDefeat_Goompa),
-    .unk_27 = 200,
+    .unk_24 = 200,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4,
 };
 
@@ -56,7 +56,7 @@ StaticNpc N(NpcData_Goompa) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { 80.0f, 40.0f, -84.0f },
     .yaw = 0,
-    .flags = NPC_FLAG_1000,
+    .flags = ENEMY_FLAGS_GRAVITY,
 };
 
 NpcGroupList N(DefaultNPCs) = {

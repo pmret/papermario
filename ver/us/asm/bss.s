@@ -31,7 +31,7 @@ dlabel __osBaseCounter
 dlabel gBGMPlayerC
 .space 4
 
-dlabel D_8009A5D0
+dlabel gEncounterSubState
 .space 4
 
 dlabel CurrentSefCmdHandler
@@ -67,7 +67,7 @@ dlabel nuGfxDisplay
 dlabel gBGMPlayerB
 .space 4
 
-dlabel gGameState
+dlabel gEncounterState
 .space 4
 
 dlabel gNpcCount
@@ -145,7 +145,7 @@ dlabel __osFinalrom
 dlabel gBGMPlayerA
 .space 4
 
-dlabel D_8009A668
+dlabel gFirstStrikeMessagePos
 .space 4
 
 dlabel gMasterGfxPos

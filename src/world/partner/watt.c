@@ -3,6 +3,7 @@
 #include "../src/world/partners.h"
 #include "npc.h"
 #include "sprite/npc/WorldWatt.h"
+#include "sprite.h"
 
 void force_player_anim(AnimID);
 void func_802BE014_31DB84(void);
@@ -509,7 +510,7 @@ void world_watt_sync_held_position(void) {
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
-            if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
+            if (!(gPlayerStatusPtr->trueAnimation & SPRITE_ID_BACK_FACING)) {
                 angleOffset = -5;
                 offsetScale = 0.6f;
             } else {
@@ -517,7 +518,7 @@ void world_watt_sync_held_position(void) {
                 offsetScale = 0.6f;
             }
         } else {
-            if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
+            if (!(gPlayerStatusPtr->trueAnimation & SPRITE_ID_BACK_FACING)) {
                 angleOffset = 5;
                 offsetScale = 0.6f;
             } else {

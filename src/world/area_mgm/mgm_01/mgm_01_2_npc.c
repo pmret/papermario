@@ -684,7 +684,7 @@ s8 N(BlockPosX)[NUM_BLOCKS] = {
 };
 
 s8 N(BlockPosY)[NUM_BLOCKS] = {
-    56, 60, 56, 60, 56, 60, 56, 60, 56, 60, 56 
+    56, 60, 56, 60, 56, 60, 56, 60, 56, 60, 56
 };
 
 s8 N(BlockPosZ)[NUM_BLOCKS] = {
@@ -692,18 +692,18 @@ s8 N(BlockPosZ)[NUM_BLOCKS] = {
 };
 
 f32 N(TallyPosX)[NUM_BLOCKS] = {
-    -105.0, -80.0, -55.0, -30.0, -5.0, -105.0, -80.0, -55.0, 
+    -105.0, -80.0, -55.0, -30.0, -5.0, -105.0, -80.0, -55.0,
     -30.0, -5.0, 20.0
 };
 
 f32 N(TallyPosY)[NUM_BLOCKS] = {
-    157.0, 157.0, 157.0, 157.0, 157.0, 133.0, 133.0, 133.0, 
+    157.0, 157.0, 157.0, 157.0, 157.0, 133.0, 133.0, 133.0,
     133.0, 133.0, 133.0,
 };
 
 s32 N(PanelModelIDs)[NUM_BLOCKS] = {
-    19, 17, 15, 13, 22, 24, 26, 29, 
-    31, 34, 36 
+    19, 17, 15, 13, 22, 24, 26, 29,
+    31, 34, 36
 };
 
 JumpGamePanelType N(PanelTypes)[NUM_BLOCKS] = {
@@ -1018,7 +1018,7 @@ StaticNpc N(NpcData_Toad) = {
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 0.0f, -20.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
     .init = &N(EVS_NpcInit_Toad),
     .drops = TOAD_DROPS,
     .animations = TOAD_RED_ANIMS,

@@ -436,17 +436,17 @@ EvtScript N(802449C4) = {
 
 EvtScript N(80244AD0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar0, -1)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, LVar0)
@@ -457,7 +457,7 @@ EvtScript N(80244AD0) = {
     EVT_CALL(PlaySoundAt, 0x269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MapVar(0))
     EVT_CALL(N(RemovePadlock))
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
@@ -485,8 +485,8 @@ f32 N(FlyingAI_JumpVels)[] = {
 };
 
 EvtScript N(80244CE8) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000)), TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING)), TRUE)
+    EVT_CALL(SetSelfEnemyFlagBits, ((ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000 | ENEMY_FLAGS_20000000)), TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | ENEMY_FLAGS_800)), TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -589,10 +589,10 @@ EvtScript N(8024517C) = {
 EvtScript N(80245208) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
+        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -892,7 +892,7 @@ StaticNpc N(npcGroup_80246090) = {
     .id = NPC_SENTINEL0,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(init_80245D80),
     .yaw = 90,
     .drops = {
@@ -925,7 +925,7 @@ StaticNpc N(npcGroup_80246280) = {
     .id = NPC_SENTINEL1,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(init_80245E44),
     .yaw = 270,
     .drops = {
@@ -958,7 +958,7 @@ StaticNpc N(npcGroup_80246470) = {
     .id = NPC_SENTINEL2,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(init_80245F08),
     .yaw = 90,
     .drops = {
@@ -991,7 +991,7 @@ StaticNpc N(npcGroup_80246660) = {
     .id = NPC_SENTINEL3,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(init_80245FCC),
     .yaw = 270,
     .drops = {

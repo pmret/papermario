@@ -93,7 +93,7 @@ void func_802B742C(void) {
 
     if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_40000 | PS_FLAGS_20))
             != PS_FLAGS_HAS_CONVERSATION_NPC) ||
-        (gGameState == GAME_MODE_CHANGE_MAP) ||
+        (gEncounterState == ENCOUNTER_STATE_CONVERSATION) ||
         (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) ||
         (playerStatus->inputEnabledCounter != 0) ||
         (playerStatus->animFlags & PA_FLAGS_SPINNING))

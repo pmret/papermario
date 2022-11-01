@@ -381,7 +381,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_00),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -390,7 +390,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_01),
         .pos = { 20.0f, 0.0f, 20.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -399,7 +399,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_02),
         .pos = { 40.0f, 0.0f, 40.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -408,7 +408,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_03),
         .pos = { 60.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -417,7 +417,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_04),
         .pos = { 80.0f, 0.0f, 80.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -426,7 +426,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_05),
         .pos = { 100.0f, 0.0f, 100.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -435,7 +435,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_06),
         .pos = { 120.0f, 0.0f, 120.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -444,7 +444,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_07),
         .pos = { 140.0f, 0.0f, 140.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -453,7 +453,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_08),
         .pos = { 160.0f, 0.0f, 160.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },
@@ -462,7 +462,7 @@ StaticNpc N(D_80240F38_B1E698)[] = {
         .settings = &N(NpcSettings_09),
         .pos = { 180.0f, 0.0f, 180.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .animations = {
         },
     },

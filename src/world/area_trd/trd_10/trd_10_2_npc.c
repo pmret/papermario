@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcInteract_KoopaBros_01) = {
 };
 
 EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
-    EVT_CALL(SetEncounterStatusFlags, 2, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_KoopaBros_01, 0, -1000, 0)
     EVT_CALL(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_2, FALSE)
@@ -341,7 +341,7 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -371,7 +371,7 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -401,7 +401,7 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_03),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -431,7 +431,7 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_04),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
