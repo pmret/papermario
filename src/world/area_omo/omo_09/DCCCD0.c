@@ -76,10 +76,13 @@ ApiStatus func_80240078_DCCD48(Evt* script, s32 isInitialCall) {
         partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)
     {
         for (i = 0; i < ARRAY_COUNT(D_80243A80_DD0750); i++) {
-            if (gCollisionStatus.currentFloor == D_80243A80_DD0750[i] || gCollisionStatus.lastTouchedFloor == D_80243A80_DD0750[i]) {
+            if (gCollisionStatus.currentFloor == D_80243A80_DD0750[i] ||
+                gCollisionStatus.lastTouchedFloor == D_80243A80_DD0750[i])
+            {
                 playerStatus->pushVelocity.x = D_80243A90_DD0760[i][0];
                 playerStatus->pushVelocity.z = D_80243A90_DD0760[i][one]; // TODO needed to match
             }
+
             if (partner->currentFloor == D_80243A80_DD0750[i] &&
                 ((partnerActionStatus->actingPartner != PARTNER_KOOPER) ||
                  (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)))
