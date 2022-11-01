@@ -20,7 +20,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 
 EvtScript N(EVS_EnterMap) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(trd_02_ENTRY_0)
@@ -47,7 +47,7 @@ EvtScript N(EVS_EnterMap) = {
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_RETURN
     EVT_END
 };
@@ -55,7 +55,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 0)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
     EVT_CALL(SetGroupEnabled, MODEL_move_saku, 0)
@@ -112,7 +112,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_SET(GB_StoryProgress, STORY_CH1_LOWERED_SECOND_STAIRS)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, 0)
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
@@ -125,7 +125,7 @@ BombTrigger N(D_8024240C_9A33EC) = {
 
 EvtScript N(D_8024241C_9A33FC) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 17, 11, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_anaaki, TRUE)
     EVT_LOOP(10)
@@ -136,7 +136,7 @@ EvtScript N(D_8024241C_9A33FC) = {
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(GF_TRD02_BombedWall, TRUE)
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END

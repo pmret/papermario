@@ -4,7 +4,7 @@
 #include "world/common/enemy/ai/LakituAI.inc.c"
 
 f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
 };
 
 MobileAISettings N(AISettings_Lakitu_SpinySpawner) = {
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcDefeat_SpawnedSpiny) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_10, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN

@@ -117,7 +117,7 @@ extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
-extern s32 gGameState;
+extern s32 gEncounterState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;
 extern s16 D_8009A6A0;
@@ -173,7 +173,7 @@ extern Vec3s btl_actorHomePositions[];
 
 extern SaveData gCurrentSaveFile;
 
-extern s32 D_8009A5D0;
+extern s32 gEncounterSubState;
 extern s32 timeFreezeMode;
 extern s32 D_8009A678;
 

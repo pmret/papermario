@@ -63,7 +63,7 @@ EvtScript N(EVS_EnterMap) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(trd_04_ENTRY_0)
@@ -95,14 +95,14 @@ EvtScript N(EVS_EnterMap) = {
             EVT_EXEC_WAIT(EnterDoubleDoor)
             EVT_EXEC(N(EVS_BindExitTriggers))
     EVT_END_SWITCH
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_SET(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
@@ -211,7 +211,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(EnableModel, MODEL_o7, TRUE)
     EVT_CALL(EnableModel, MODEL_bero2, TRUE)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END

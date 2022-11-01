@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_BubbleFlower) = {
 
 s32 N(KeyList)[] = {
     ITEM_BUBBLE_BERRY,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_NpcInteract_BubbleFlower) = {
@@ -83,7 +83,7 @@ StaticNpc N(NpcData_BubbleFlower) = {
     .settings = &N(NpcSettings_BubbleFlower),
     .pos = { 617.0f, 0.0f, 108.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_4000,
+    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_4000,
     .init = &N(EVS_NpcInit_BubbleFlower),
     .drops = BUBULB_DROPS,
     .animations = BUBULB_PINK_ANIMS,
@@ -95,7 +95,7 @@ StaticNpc N(NpcData_Bzzap) = {
     .settings = &N(NpcSettings_Bzzap),
     .pos = { -175.0f, 55.0f, 15.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .drops = BZZAP_DROPS,
     .territory = {
         .wander = {

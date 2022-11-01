@@ -60,7 +60,7 @@ EvtScript N(D_80240B34_99A7A4) = {
 
 EvtScript N(EVS_EnterMap) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(GetLoadType, LVar1)
     EVT_IF_EQ(LVar1, 1)
         EVT_EXEC(EnterSavePoint)
@@ -97,7 +97,7 @@ EvtScript N(EVS_EnterMap) = {
         EVT_CASE_EQ(trd_00_ENTRY_5)
             EVT_EXEC(N(EVS_BindExitTriggers))
     EVT_END_SWITCH
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_RETURN
     EVT_END
 };

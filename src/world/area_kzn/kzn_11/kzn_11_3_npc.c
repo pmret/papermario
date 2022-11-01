@@ -149,7 +149,7 @@ StaticNpc N(NpcData_FireBar_01)[] = {
         .settings = &N(NpcSettings_FireBar_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -159,7 +159,7 @@ StaticNpc N(NpcData_FireBar_01)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -169,7 +169,7 @@ StaticNpc N(NpcData_FireBar_01)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -179,7 +179,7 @@ StaticNpc N(NpcData_FireBar_01)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -192,7 +192,7 @@ StaticNpc N(NpcData_FireBar_02)[] = {
         .settings = &N(NpcSettings_FireBar_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -202,7 +202,7 @@ StaticNpc N(NpcData_FireBar_02)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -212,7 +212,7 @@ StaticNpc N(NpcData_FireBar_02)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -222,7 +222,7 @@ StaticNpc N(NpcData_FireBar_02)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -235,7 +235,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
         .settings = &N(NpcSettings_FireBar_03),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -245,7 +245,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -255,7 +255,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -265,7 +265,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
         .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = NPC_FLAG_PASSIVE,
+        .flags = ENEMY_FLAGS_1,
         .init = (void*) 0x00004003,
         .animations = {
         },
@@ -277,7 +277,7 @@ StaticNpc N(NpcData_Bubble_01) = {
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { -150.0f, 50.0f, 10.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
@@ -300,7 +300,7 @@ StaticNpc N(NpcData_Bubble_02) = {
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { 150.0f, 50.0f, 10.0f },
     .yaw = 270,
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {

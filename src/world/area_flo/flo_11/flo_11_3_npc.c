@@ -116,7 +116,7 @@ EvtScript N(EVS_LakitusFlying_Gather) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(FlightPath_Lakitu_02_Gather)), 
+    EVT_CALL(LoadPath, 45, EVT_PTR(N(FlightPath_Lakitu_02_Gather)),
         ARRAY_COUNT(N(FlightPath_Lakitu_02_Gather)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
@@ -374,7 +374,7 @@ StaticNpc N(NpcData_Lakitus)[] = {
         .settings = &N(NpcSettings_Lakitu),
         .pos = { 553.0f, 60.0f, 52.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
         .init = &N(EVS_NpcInit_Lakitu_01),
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
@@ -384,7 +384,7 @@ StaticNpc N(NpcData_Lakitus)[] = {
         .settings = &N(NpcSettings_Lakitu),
         .pos = { 553.0f, 60.0f, 52.0f },
         .yaw = 270,
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
         .init = &N(EVS_NpcInit_Lakitu_02),
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,

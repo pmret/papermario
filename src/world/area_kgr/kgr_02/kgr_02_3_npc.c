@@ -283,7 +283,7 @@ NpcSettings N(NpcSettings_Fuzzipede) = {
     .ai = &N(EVS_NpcAI_Fuzzipede),
     .onHit = &N(EVS_NpcHit_Fuzzipede),
     .onDefeat = &N(EVS_NpcDefeat_Fuzzipede),
-    .unk_27 = 100,
+    .unk_24 = 100,
 };
 
 StaticNpc N(NpcData_Fuzzipede) = {
@@ -291,7 +291,7 @@ StaticNpc N(NpcData_Fuzzipede) = {
     .settings = &N(NpcSettings_Fuzzipede),
     .pos = { 333.0f, -10.0f, -130.0f },
     .yaw = 90,
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_JUMPING | NPC_FLAG_8000 | NPC_FLAG_40000 | NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000,
+    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_8000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000,
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,

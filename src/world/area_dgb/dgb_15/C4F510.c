@@ -163,7 +163,7 @@ EvtScript N(80241EA0) = {
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
             EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(3)
-            EVT_CALL(SetEnemyFlagBits, -1, 16, 1)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -377,7 +377,7 @@ StaticNpc N(npcGroup_802428C0) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_8024212C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
     .init = &N(init_802427EC),
     .yaw = 270,
     .drops = {
@@ -424,17 +424,17 @@ static s32 N(pad_2AC8)[] = {
 
 EvtScript N(80242AD0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(1)
+    EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar0, -1)
         EVT_CALL(CloseChoicePopup)
-        EVT_RESUME_GROUP(1)
+        EVT_RESUME_GROUP(EVT_GROUP_01)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, LVar0)
@@ -445,7 +445,7 @@ EvtScript N(80242AD0) = {
     EVT_CALL(PlaySoundAt, 0x269, 0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MapVar(0))
     EVT_CALL(N(RemovePadlock))
-    EVT_RESUME_GROUP(1)
+    EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
