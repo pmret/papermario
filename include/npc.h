@@ -138,7 +138,7 @@ typedef struct NpcSettings {
     /* 0x18 */ EvtScript* aux;
     /* 0x1C */ EvtScript* onDefeat;
     /* 0x20 */ s32 flags;
-    /* 0x24 */ EvtScript* unk_24;
+    /* 0x24 */ s32 unk_24;
     /* 0x28 */ s16 level;
     /* 0x2A */ s16 actionFlags;  // action flags: 1 = jump on seeing player
 } NpcSettings; // size = 0x2C

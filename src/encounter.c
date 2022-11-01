@@ -2492,7 +2492,7 @@ void create_encounters(void) {
                     enemy->aiFlags = npcData->aiFlags;
                     enemy->unk_DC = 0;
                     enemy->aiPaused = 0;
-                    enemy->unk_B8 = npcSettings->unk_24;
+                    enemy->unk_B8 = (EvtScript*)npcSettings->unk_24; // ??
                     enemy->unk_BC = NULL;
                     enemy->unk_C0 = 0;
                     enemy->unk_C4 = 0;
