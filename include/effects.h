@@ -2221,7 +2221,11 @@ typedef struct ChapterChangeFXData {
 } ChapterChangeFXData; // size = 0x58
 
 typedef struct IceShardFXData {
-    /* 0x00 */ char unk_00[0x4C];
+    /* 0x00 */ char unk_00[0x3C];
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
     /* 0x4C */ f32 unk_4C;
     /* 0x50 */ f32 unk_50;
     /* 0x54 */ f32 unk_54;
