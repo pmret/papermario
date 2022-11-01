@@ -113,16 +113,16 @@ void func_8005E12C(Npc* npc) {
 
     switch (blur->unk_288) {
         case 0:
-            npcX = npc->pos.x;
-            npcZ = npc->pos.z;
             part = &blur->unk_00[blur->unk_284];
             partX = part->pos.x;
             partZ = part->pos.z;
+            npcX = npc->pos.x;
+            npcZ = npc->pos.z;
             sp28 = npcX;
             sp2C = npc->pos.y;
             sp30 = npcZ;
             npc->moveSpeed = blur->unk_294;
-            dist = dist2D(npcX, npcZ, x, z);
+            dist = dist2D(npc->pos.x, npc->pos.z, x, z);
             if (blur->unk_2A0 <= dist) {
                 npc->moveSpeed = blur->unk_298;
             }
@@ -207,19 +207,17 @@ void func_8005E12C(Npc* npc) {
                 npc->duration = 0;
                 npc->jumpScale = 2.0f;
                 npc->moveSpeed = blur->unk_298;
-                npc->planarFlyDist = dist2D(npc->pos.x, npc->pos.z, partX, partZ);
+                npc->planarFlyDist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
                 dist = npc->planarFlyDist;
-                sp2C = npc->moveToPos.y - npc->pos.y;
+                sp2C = partY - npc->pos.y;
                 if (dist < sp2C) {
                     dist = sp2C;
                 }
                 if (dist < blur->unk_29C) {
-                    npcX = npc->pos.x;
-                    npcZ = npc->pos.z;
                     npc->jumpVelocity = 0.0f;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->yaw = atan2(npcX, npcZ, x, z);
+                    npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
                     blur->unk_288 = 0;
                     return;
                 }
@@ -246,14 +244,14 @@ void func_8005E12C(Npc* npc) {
                 sp30 = npc->pos.z;
                 dist = fabsf(npc->jumpVelocity) + 8.0;
                 sp2C = npc->pos.y + dist;
-                if ((npc_raycast_down_sides(npc->collisionChannel, &sp28, &sp2C, &sp30, &dist) != 0) && ((f64) dist <= ((f64) fabsf(npc->jumpVelocity) + 8.0))) {
+                if ((npc_raycast_down_sides(npc->collisionChannel, &sp28, &sp2C, &sp30, &dist) != 0) &&
+                    (dist <= (fabsf(npc->jumpVelocity) + 8.0)))
+                {
                     npc->currentAnim = blur->animIDs[3];
-                    npcX = sp28;
-                    npcZ = sp30;
                     npc->jumpVelocity = 0.0f;
                     npc->pos.y = sp2C;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->yaw = atan2(npcX, npcZ, x, z);
+                    npc->yaw = atan2(sp28, sp30, x, z);
                     blur->unk_288 = 0;
                 }
             }

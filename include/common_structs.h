@@ -1880,7 +1880,7 @@ typedef struct Actor {
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
     /* 0x1FA */ s16 hpChangeCounter;
-    /* 0x1FC */ u16 damageCounter;
+    /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ struct EffectInstance* attackResultEffect;
     /* 0x204 */ s8 unk_204;
@@ -2540,5 +2540,14 @@ typedef struct PartnerDMAData {
     /* 0x0C */ struct ActorBlueprint* ActorBlueprint;
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
+
+typedef struct UnkOmo {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ s32 treeIndex;
+} UnkOmo; // size = 0x18
 
 #endif

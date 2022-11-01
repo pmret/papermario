@@ -58,11 +58,10 @@ void star_outline_init(EffectInstance* effect) {
 
 void star_outline_update(EffectInstance* effect) {
     StarOutlineFXData* data = effect->data.starOutline;
-    f32 temp_f20;
-    s32 lifeTime;
-    s32 temp_v1_3;
-    s32 temp_v1_4;
     s32 temp_a2 = data->unk_02;
+    s32 lifeTime;
+    s32 temp;
+    s32 temp2;
 
     if (effect->flags & 16) {
         effect->flags &= ~16;
@@ -80,21 +79,21 @@ void star_outline_update(EffectInstance* effect) {
     }
     lifeTime = data->lifeTime;
     if (data->timeLeft < 16) {
-        temp_v1_3 = data->timeLeft * 16;
-        if (temp_v1_3 < data->unk_24) {
-            data->unk_24 = temp_v1_3;
+        temp = data->timeLeft * 16;
+        if (data->unk_24 > temp) {
+            data->unk_24 = temp;
         }
-        if (temp_v1_3 < data->unk_34) {
-            data->unk_34 = temp_v1_3;
+        if (data->unk_34 > temp) {
+            data->unk_34 = temp;
         }
     }
     if (lifeTime < 16) {
-        temp_v1_4 = (lifeTime * 16) + 15;
-        if (data->unk_24 < temp_v1_4) {
-            data->unk_24 = temp_v1_4;
+        temp2 = (lifeTime * 16) + 15;
+        if (data->unk_24 < temp2) {
+            data->unk_24 = temp2;
         }
-        if (data->unk_34 < temp_v1_4) {
-            data->unk_34 = temp_v1_4;
+        if (data->unk_34 < temp2) {
+            data->unk_34 = temp2;
         }
     }
     data->unk_48 = data->unk_3C.x;
@@ -102,19 +101,20 @@ void star_outline_update(EffectInstance* effect) {
     data->unk_50 = data->unk_3C.z;
     data->unk_54 = data->unk_38;
     if (temp_a2 == 1) {
-        temp_f20 = lifeTime;
+        f32 lifetimeF = lifeTime;
+
         data->unk_3C.x = lifeTime * 4;
         data->unk_24 = 255;
         data->unk_3C.y = (lifeTime * 4.0f * 0.4953);
         data->unk_3C.z = (lifeTime * 4.0f * 0.2234);
-        data->unk_34 = ((shim_sin_deg (temp_f20 * 7.12343)) * 127.0f) + 128.0f;
-        data->unk_18 = ((shim_sin_deg (temp_f20 * 1.231)) * 127.0f) + 215.0f;
-        data->unk_1C = ((shim_sin_deg (temp_f20 * 0.531)) * 127.0f) + 215.0f;
-        data->unk_20 = ((shim_sin_deg (temp_f20 * 3.231)) * 127.0f) + 215.0f;
-        data->unk_28 = ((shim_sin_deg (temp_f20 * 0.298)) * 127.0f) + 188.0f;
-        data->unk_2C = ((shim_sin_deg (temp_f20 * 0.831)) * 127.0f) + 188.0f;
-        data->unk_30 = ((shim_sin_deg (temp_f20 * 2.231)) * 127.0f) + 188.0f;
-        data->unk_38 = ((shim_sin_deg (temp_f20 * 2.044)) * 0.3) + 0.7;
+        data->unk_34 = ((shim_sin_deg (lifetimeF * 7.12343)) * 127.0f) + 128.0f;
+        data->unk_18 = ((shim_sin_deg (lifetimeF * 1.231)) * 127.0f) + 215.0f;
+        data->unk_1C = ((shim_sin_deg (lifetimeF * 0.531)) * 127.0f) + 215.0f;
+        data->unk_20 = ((shim_sin_deg (lifetimeF * 3.231)) * 127.0f) + 215.0f;
+        data->unk_28 = ((shim_sin_deg (lifetimeF * 0.298)) * 127.0f) + 188.0f;
+        data->unk_2C = ((shim_sin_deg (lifetimeF * 0.831)) * 127.0f) + 188.0f;
+        data->unk_30 = ((shim_sin_deg (lifetimeF * 2.231)) * 127.0f) + 188.0f;
+        data->unk_38 = ((shim_sin_deg (lifetimeF * 2.044)) * 0.3) + 0.7;
     }
     if (lifeTime == 1) {
         data->unk_48 = data->unk_3C.x;

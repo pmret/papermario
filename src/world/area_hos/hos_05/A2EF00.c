@@ -1,8 +1,9 @@
 #include "hos_05.h"
 #include "model.h"
 
-extern u8 D_8024DCCF_A37F0F;
-extern u8 D_8024DCD3_A37F13;
+extern s32 D_8024DCCC_A37F0C;
+extern s32 D_8024DCD0_A37F10;
+extern s16 D_802D9D72; // something wrong with this / the next
 extern u8 D_802D9D73;
 
 #define NAMESPACE dup_hos_05
@@ -12,10 +13,9 @@ extern u8 D_802D9D73;
 
 #define NAMESPACE hos_05
 
-// should match when preceding bss is worked out
-#ifdef NON_MATCHING
 ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
     Bytecode* args;
+    static char N(bss_padding)[0x2B0]; // TODO remove / relocate this
     static u8 oldPrimR, oldPrimG, oldPrimB;
     static u8 oldEnvR, oldEnvG, oldEnvB;
     static s32 newPrimR, newPrimG, newPrimB;
@@ -53,9 +53,6 @@ ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);
-#endif
 
 void func_8024564C_A2F88C(void) {
     gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0,
@@ -63,23 +60,38 @@ void func_8024564C_A2F88C(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_802D9D73);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_8024569C_A2F8DC);
+ApiStatus func_8024569C_A2F8DC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    D_802D9D72 = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 void func_802456C8_A2F908(void) {
     gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0,
                       PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCCF_A37F0F);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCCC_A37F0C);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245718_A2F958);
+ApiStatus func_80245718_A2F958(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    D_8024DCCC_A37F0C = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 void func_80245744_A2F984(void) {
     gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0,
                       PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCD3_A37F13);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCD0_A37F10);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245794_A2F9D4);
+ApiStatus func_80245794_A2F9D4(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    D_8024DCD0_A37F10 = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802457C0_A2FA00(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[CAM_DEFAULT];

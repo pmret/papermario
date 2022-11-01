@@ -42,9 +42,9 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
     data->unk_04 = arg1;
     data->unk_08 = arg2;
     data->unk_0C = arg3;
-    data->position.x = 0;
-    data->position.y = 0;
-    data->position.z = 0;
+    data->pos.x = 0;
+    data->pos.y = 0;
+    data->pos.z = 0;
     data->unk_5C = 255;
     data->unk_60 = 255;
     data->unk_64 = 255;

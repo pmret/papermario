@@ -794,7 +794,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     return hitResult;
 }
 
-// missing one move
+// missing one move, not equivalent
 #ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;

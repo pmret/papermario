@@ -666,6 +666,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration);
 void btl_update_ko_status(void);
 void reset_actor_turn_info(void);
 void startup_draw_prim_rect(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
+void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);
 void reset_all_actor_sounds(Actor*);
 void decrement_status_menu_disabled(void);

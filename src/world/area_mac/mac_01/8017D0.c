@@ -1,4 +1,5 @@
 #include "mac_01.h"
+#include "model.h"
 
 #define CHUCK_QUIZMO_NPC_ID 5
 
@@ -103,7 +104,43 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440FC_80497C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802441EC_804A6C);
+ApiStatus func_802441EC_804A6C(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 64;
+        script->functionTemp[2] = 64;
+        script->functionTemp[1] = 0;
+    }
+    if (script->functionTemp[1] == 0) {
+        script->functionTemp[0] += 4;
+        script->functionTemp[2] += 4;
+        if (script->functionTemp[0] > 127) {
+            script->functionTemp[0] = 127;
+        }
+        if (script->functionTemp[2] > 127) {
+            script->functionTemp[2] = 127;
+        }
+        if (script->functionTemp[0] == 127 && (script->functionTemp[2] == script->functionTemp[0])) {
+            script->functionTemp[1] = 1;
+        }
+    } else {
+        script->functionTemp[0] -= 4;
+        script->functionTemp[2] -= 4;
+        if (script->functionTemp[0] < 64) {
+            script->functionTemp[0] = 64;
+        }
+        if (script->functionTemp[2] < 0) {
+            script->functionTemp[2] = 0;
+        }
+    }
+    set_model_env_color_parameters(
+        script->functionTemp[0], script->functionTemp[0], script->functionTemp[0],
+        script->functionTemp[2], script->functionTemp[2], script->functionTemp[2]
+    );
+    if (script->functionTemp[0] == 64 && script->functionTemp[2] == 0) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244308_804B88);
 

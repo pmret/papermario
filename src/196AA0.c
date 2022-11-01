@@ -24,11 +24,29 @@
 #include "battle/action_cmd/tidal_wave.h"
 #include "ld_addrs.h"
 
-s32 D_80294190[] = { 0x2121751D, 0x23A3460C, 0xB46B0078, 0x730D1300, };
+s8 D_80294190[5][3] = {
+    { 0x21, 0x21, 0x75 },
+    { 0x1D, 0x23, 0xA3 },
+    { 0x46, 0x0C, 0xB4 },
+    { 0x6B, 0x00, 0x78 },
+    { 0x73, 0x0D, 0x13 }
+};
 
-s32 D_802941A0[] = { 0x00E4862E, 0xB4F27570, 0xFFF304BC, 0xF70D0500, };
+s8 D_802941A0[5][3] = {
+    { 0x00, 0xE4, 0x86 },
+    { 0x2E, 0xB4, 0xF2 },
+    { 0x75, 0x70, 0xFF },
+    { 0xF3, 0x04, 0xBC },
+    { 0xF7, 0x0D, 0x05 }
+};
 
-s32 D_802941B0[] = { 0x2D38D254, 0x28D17D2C, 0xB5A11B55, 0xFFFFFF00, };
+s8 D_802941B0[5][3] = {
+    { 0x2D, 0x38, 0xD2 },
+    { 0x54, 0x28, 0xD1 },
+    { 0x7D, 0x2C, 0xB5 },
+    { 0xA1, 0x1B, 0x55 },
+    { 0xFF, 0xFF, 0xFF }
+};
 
 s32 D_802941C0[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
@@ -491,7 +509,7 @@ void func_80268C9C(void) {
 
 void func_80268E88(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
-    actionCmdStatus->unk_00 = create_generic_entity_frontUI((s32 (*)(void)) func_80268938, func_80268AF8);
+    actionCmdStatus->unk_00 = create_generic_entity_frontUI(func_80268938, func_80268AF8);
     actionCmdStatus->actionCommandID = 0;
 }
 
@@ -519,7 +537,7 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     if (playerData->hitsTaken < 9999) {
-        playerData->hitsTaken += 1;
+        playerData->hitsTaken++;
         actionCommandStatus->hitsTakenIsMax = FALSE;
     } else {
         actionCommandStatus->hitsTakenIsMax = TRUE;
@@ -593,7 +611,7 @@ s32 check_block_input(s32 buttonMask) {
         }
     }
     if (block && !actionCommandStatus->hitsTakenIsMax) {
-        playerData->hitsBlocked += 1;
+        playerData->hitsBlocked++;
     }
 
     return block;

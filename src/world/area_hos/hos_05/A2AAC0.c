@@ -99,7 +99,25 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240F88_A2B1C8);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240FE0_A2B220);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241044_A2B284);
+void func_80241044_A2B284(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4) {
+    f32 temp_f2 = arg1 - arg2;
+
+    if (arg1 - arg0 > 0.0f) {
+        if (temp_f2 < 0.0f) {
+            *arg4 = arg1;
+        } else if (arg3 < temp_f2) {
+            *arg4 += arg3;
+        } else {
+            *arg4 += temp_f2;
+        }
+    } else if (temp_f2 > 0.0f) {
+        *arg4 = arg1;
+    } else if (temp_f2 < -arg3) {
+        *arg4 -= arg3;
+    } else {
+        *arg4 += temp_f2;
+    }
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802410E4_A2B324);
 

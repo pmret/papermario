@@ -1,4 +1,5 @@
 #include "hos_02.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "hos_01";
 static char* N(exit_str_1) = "hos_03";
@@ -113,6 +114,24 @@ void func_80240BFC_A16E1C(void) {
     D_802433B4_A195D4 += 0x253;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_02/A16220", func_80240EF4_A17114);
+ApiStatus func_80240EF4_A17114(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_02/A16220", func_80240F68_A17188);
+    effect->data.unk_75->unk_78 = 190.0f;
+    effect->data.unk_75->unk_7C = 220.0f;
+    effect->data.unk_75->unk_68 = 0.7f;
+    effect->data.unk_75->unk_38 = 255;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240F68_A17188(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+
+    effect->data.unk_75->unk_78 = 170.0f;
+    effect->data.unk_75->unk_7C = 170.0f;
+    effect->data.unk_75->unk_68 = 2.0f;
+    effect->data.unk_75->unk_38 = 255;
+    return ApiStatus_DONE2;
+}
