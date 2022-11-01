@@ -1,14 +1,105 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000200_3B7AD0[];
+
+void waterfall_init(EffectInstance* effect);
+void waterfall_update(EffectInstance* effect);
+void waterfall_render(EffectInstance* effect);
 void waterfall_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/waterfall", waterfall_main);
+EffectInstance* waterfall_main(
+    s32 arg0,
+    f32 arg1,
+    f32 arg2,
+    f32 arg3,
+    f32 arg4,
+    s32 arg5
+) {
+    EffectBlueprint bp;
+    EffectInstance* effect;
+    WaterfallFXData* data;
+    s32 numParts = 1;
+    s32 i;
 
-void waterfall_init(void) {
+    bp.init = waterfall_init;
+    bp.update = waterfall_update;
+    bp.renderWorld = waterfall_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_WATERFALL;
+
+    effect = shim_create_effect_instance(&bp);
+    effect->numParts = numParts;
+    data = effect->data.waterfall = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.waterfall != NULL);
+
+    data->unk_00 = arg0;
+    data->unk_14 = 0;
+    if (arg5 <= 0) {
+        data->unk_10 = 1000;
+    } else {
+        data->unk_10 = arg5;
+    }
+    data->unk_24 = 0;
+    data->unk_04 = arg1;
+    data->unk_08 = arg2;
+    data->unk_0C = arg3;
+    data->unk_28 = arg4;
+    data->unk_18 = 20;
+    data->unk_1C = 120;
+    data->unk_20 = 255;
+
+    for (i = 0; i < 12; i++) {
+        data->unk_2C[i] = 0;
+        data->unk_5C[i] = (f32) shim_rand_int(10) * 0.01 + -1.0;
+    }
+
+    return effect;
 }
 
-INCLUDE_ASM(s32, "effects/waterfall", waterfall_update);
+void waterfall_init(EffectInstance* effect) {
+}
+
+void waterfall_update(EffectInstance* effect) {
+    WaterfallFXData* data = effect->data.waterfall;
+    s32 unk_14;
+    s32 i;
+
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->unk_10 = 16;
+    }
+
+    if (data->unk_10 < 1000) {
+        data->unk_10--;
+    }
+
+    data->unk_14++;
+
+    if (data->unk_10 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    unk_14 = data->unk_14;
+
+    if (data->unk_10 < 16) {
+        data->unk_24 = data->unk_10 * 16;
+    }
+
+    if (unk_14 < 16) {
+        data->unk_24 = unk_14 * 16 + 15;
+    }
+
+    for (i = 0; i < 12; i++) {
+        data->unk_2C[i] += data->unk_5C[i];
+        data->unk_5C[i] += -0.1;
+        if (data->unk_5C[i] > 5.0f) {
+            data->unk_5C[i] += (5.0 - data->unk_5C[i]) * 0.1;
+        }
+    }
+}
 
 void waterfall_render(EffectInstance* effect) {
     RenderTask renderTask;
@@ -25,4 +116,72 @@ void waterfall_render(EffectInstance* effect) {
 void func_E00B62D8(void) {
 }
 
-INCLUDE_ASM(s32, "effects/waterfall", waterfall_appendGfx);
+void waterfall_appendGfx(void* effect) {
+    WaterfallFXData* data = ((EffectInstance*)effect)->data.waterfall;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_14 = data->unk_14;
+    s32 unk_24 = data->unk_24;
+    f32 scale = data->unk_28 * 0.1;
+    s32 savedIdx;
+    Vtx_t* vtx;
+    Gfx* savedGfxPos;
+    Matrix4f sp10;
+    Matrix4f sp50;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
+    shim_guScaleF(sp50, scale, scale, scale);
+    shim_guMtxCatF(sp50, sp10, sp10);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gSPDisplayList(gMasterGfxPos++, D_09000200_3B7AD0);
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[49]);
+
+    savedGfxPos = gMasterGfxPos + 1;
+    gMasterGfxPos = &gMasterGfxPos[49];
+
+    vtx = (Vtx_t*) savedGfxPos;
+
+    for (i = 0; i < 12; i++) {
+        vtx->ob[0] = i * 50 - 300;
+        vtx->ob[1] = 600;
+        vtx->ob[2] = 0;
+        vtx->tc[0] = (unk_14 + i * 4) * 32;
+        vtx->tc[1] = (s32) data->unk_2C[i] * 32;
+        vtx->cn[0] = 255;
+        vtx->cn[1] = 255;
+        vtx->cn[2] = 255;
+        vtx->cn[3] = -i * 20 - 1;
+        vtx++;
+
+        vtx->ob[0] = i * 50 - 300;
+        vtx->ob[1] = (data->unk_2C[i] + 60.0f) * 10.0f;
+        vtx->ob[2] = 0;
+        vtx->tc[0] = (unk_14 + i * 4) * 32;
+        vtx->tc[1] = 1024;
+        vtx->cn[0] = 255;
+        vtx->cn[1] = 255;
+        vtx->cn[2] = 255;
+        vtx->cn[3] = -i * 20 - 1;
+        vtx++;
+    }
+
+    savedIdx = i;
+
+    gSPVertex(gMasterGfxPos++, savedGfxPos, i * 2, 0);
+
+    for (i = 0; i < savedIdx - 1; i++) {
+        s32 i2 = i * 2;
+        gSP2Triangles(gMasterGfxPos++,
+            i2    , i2 + 2, i2 + 1, i2,
+            i2 + 1, i2 + 2, i2 + 3, i2);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

@@ -1,18 +1,125 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E00B88F0[] = { 0x27BD0108, 0x00000000, 0x00000000, 0x00000000 };
+typedef struct UnkStruct {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u8 unk_08;
+    /* 0x09 */ char unk_09[1];
+} UnkStruct; // size = 0xA
 
-s32 D_E00B8900[] = { 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000FA00, 0x010C001E, 0x006EFFFB, 0xF0000111, 0x00320064, 0xFFECF000, 0x0216003C, 0x005AFFE2, 0xF000021A, 0x0046005A, 0xFFD8F000, 0x031C0050, 0x0055FFCE, 0xF0000420, 0x005A005A, 0xFFC4F000, 0x05230064, 0x0064FFBA, 0xF0000726, 0x006E006E, 0xFFB0F000, 0x08280078, 0x0078FFA6, 0xF0000B2A, 0x00820082, 0xFF9CF000, 0x0E2B0096, 0x0096FF92, 0xF000122C, 0x00BE00BE, 0xFF88F000, 0x152D00E6, 0x00E6FF7E, 0xF000182E, 0x010E010E, 0xFF74F000, 0x1B2F0136, 0x0136FF6A, 0xF0001E30, 0x015E015E, 0xFF60C800, 0x2131017C, 0x017CFF56, 0x8C002432, 0x01900190, 0xFF4C2800, 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000F000, 0xFF0C001E, 0x006E0005, 0xE600FF11, 0x00320064, 0x0014DC00, 0xFE16003C, 0x005A001E, 0xD200FE1A, 0x0046005A, 0x0028C800, 0xFD1C0050, 0x00550032, 0xBE00FC20, 0x005A0050, 0x003CB400, 0xFB230064, 0x004D0046, 0xAA00F926, 0x006E0041, 0x0050A000, 0xF8280078, 0x0036005A, 0x9600F52A, 0x0082003C, 0x00648C00, 0xF22B008C, 0x0046006E, 0x8200EE2C, 0x00960050, 0x00787800, 0xEB2D00A0, 0x005A0082, 0x6E00E82E, 0x00AA0064, 0x008C5A00, 0xE52F00B4, 0x006E0096, 0x5000E230, 0x00BE0078, 0x00A04600, 0xDF3100C8, 0x008200AA, 0x1E00DC32, 0x00D2008C, 0x00B40A00, 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000F000, 0x000C001E, 0x006E0005, 0xE6000011, 0x00320064, 0x0014DC00, 0x0016003C, 0x005A001E, 0xD200001A, 0x0046005A, 0x0028C800, 0x001C0050, 0x00550032, 0xBE000020, 0x005A0050, 0x003CB400, 0x00230064, 0x004D0046, 0xAA000026, 0x006E0041, 0x0050A000, 0x00280078, 0x0036005A, 0x9600002A, 0x0082003C, 0x00648C00, 0x002B008C, 0x0046006E, 0x8200002C, 0x00960050, 0x00787800, 0x002D00A0, 0x005A0082, 0x6E00002E, 0x00AA0064, 0x008C5A00, 0x002F00B4, 0x006E0096, 0x50000030, 0x00BE0078, 0x00A04600, 0x003100C8, 0x008200AA, 0x1E000032, 0x00D2008C, 0x00B40A00 };
+extern Gfx D_09000280_3B8AE0[];
+extern Gfx D_09000328_3B8B88[];
+extern Gfx D_09000348_3B8BA8[];
 
-s32 D_E00B8B58[] = { 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000F000, 0x010C001E, 0x006EFFFB, 0xE6000111, 0x00320064, 0xFFECDC00, 0x0216003C, 0x005AFFE2, 0xD200021A, 0x0046005A, 0xFFD8C800, 0x031C0050, 0x0055FFCE, 0xBE000420, 0x005A0050, 0xFFC4B400, 0x05230064, 0x004DFFBA, 0x78000726, 0x006E0041, 0xFFB05000, 0x08280078, 0x0036FFA6, 0x28000000, 0x001E008C, 0x0000FF00, 0x0006001E, 0x00780000, 0xF000FF0C, 0x001E006E, 0x0005E600, 0xFF110032, 0x00640014, 0xDC00FE16, 0x003C005A, 0x001ED200, 0xFE1A0046, 0x005A0028, 0xC800FD1C, 0x00500055, 0x0032BE00, 0xFC20005A, 0x0050003C, 0xB400FB23, 0x0064004D, 0x00467800, 0xF926006E, 0x00410050, 0x5000F828, 0x00780036, 0x005A2800, 0x0000001E, 0x008C0000, 0xFF000006, 0x001E0078, 0x0000F000, 0x000C001E, 0x006E0005, 0xE6000011, 0x00320064, 0x0014DC00, 0x0016003C, 0x005A001E, 0xD200001A, 0x0046005A, 0x0028C800, 0x001C0050, 0x00550032, 0xBE000020, 0x005A0050, 0x003CB400, 0x00240064, 0x004D0046, 0x78000027, 0x006E0041, 0x00505000, 0x002A0078, 0x0036005A, 0x28000000 };
+UnkStruct D_E00B8900[] = {
+    {   0,  0,  30, 140,    0, 255, { 0 } },
+    {   0,  6,  30, 120,    0, 250, { 0 } },
+    {   1, 12,  30, 110,   -5, 240, { 0 } },
+    {   1, 17,  50, 100,  -20, 240, { 0 } },
+    {   2, 22,  60,  90,  -30, 240, { 0 } },
+    {   2, 26,  70,  90,  -40, 240, { 0 } },
+    {   3, 28,  80,  85,  -50, 240, { 0 } },
+    {   4, 32,  90,  90,  -60, 240, { 0 } },
+    {   5, 35, 100, 100,  -70, 240, { 0 } },
+    {   7, 38, 110, 110,  -80, 240, { 0 } },
+    {   8, 40, 120, 120,  -90, 240, { 0 } },
+    {  11, 42, 130, 130, -100, 240, { 0 } },
+    {  14, 43, 150, 150, -110, 240, { 0 } },
+    {  18, 44, 190, 190, -120, 240, { 0 } },
+    {  21, 45, 230, 230, -130, 240, { 0 } },
+    {  24, 46, 270, 270, -140, 240, { 0 } },
+    {  27, 47, 310, 310, -150, 240, { 0 } },
+    {  30, 48, 350, 350, -160, 200, { 0 } },
+    {  33, 49, 380, 380, -170, 140, { 0 } },
+    {  36, 50, 400, 400, -180,  40, { 0 } },
+    {   0,  0,  30, 140,    0, 255, { 0 } },
+    {   0,  6,  30, 120,    0, 240, { 0 } },
+    {  -1, 12,  30, 110,    5, 230, { 0 } },
+    {  -1, 17,  50, 100,   20, 220, { 0 } },
+    {  -2, 22,  60,  90,   30, 210, { 0 } },
+    {  -2, 26,  70,  90,   40, 200, { 0 } },
+    {  -3, 28,  80,  85,   50, 190, { 0 } },
+    {  -4, 32,  90,  80,   60, 180, { 0 } },
+    {  -5, 35, 100,  77,   70, 170, { 0 } },
+    {  -7, 38, 110,  65,   80, 160, { 0 } },
+    {  -8, 40, 120,  54,   90, 150, { 0 } },
+    { -11, 42, 130,  60,  100, 140, { 0 } },
+    { -14, 43, 140,  70,  110, 130, { 0 } },
+    { -18, 44, 150,  80,  120, 120, { 0 } },
+    { -21, 45, 160,  90,  130, 110, { 0 } },
+    { -24, 46, 170, 100,  140,  90, { 0 } },
+    { -27, 47, 180, 110,  150,  80, { 0 } },
+    { -30, 48, 190, 120,  160,  70, { 0 } },
+    { -33, 49, 200, 130,  170,  30, { 0 } },
+    { -36, 50, 210, 140,  180,  10, { 0 } },
+    {   0,  0,  30, 140,    0, 255, { 0 } },
+    {   0,  6,  30, 120,    0, 240, { 0 } },
+    {   0, 12,  30, 110,    5, 230, { 0 } },
+    {   0, 17,  50, 100,   20, 220, { 0 } },
+    {   0, 22,  60,  90,   30, 210, { 0 } },
+    {   0, 26,  70,  90,   40, 200, { 0 } },
+    {   0, 28,  80,  85,   50, 190, { 0 } },
+    {   0, 32,  90,  80,   60, 180, { 0 } },
+    {   0, 35, 100,  77,   70, 170, { 0 } },
+    {   0, 38, 110,  65,   80, 160, { 0 } },
+    {   0, 40, 120,  54,   90, 150, { 0 } },
+    {   0, 42, 130,  60,  100, 140, { 0 } },
+    {   0, 43, 140,  70,  110, 130, { 0 } },
+    {   0, 44, 150,  80,  120, 120, { 0 } },
+    {   0, 45, 160,  90,  130, 110, { 0 } },
+    {   0, 46, 170, 100,  140,  90, { 0 } },
+    {   0, 47, 180, 110,  150,  80, { 0 } },
+    {   0, 48, 190, 120,  160,  70, { 0 } },
+    {   0, 49, 200, 130,  170,  30, { 0 } },
+    {   0, 50, 210, 140,  180,  10, { 0 } }
+};
 
-s32 D_E00B8CA4[] = { 0x00000000, 0x00000028, 0x00000037, 0x000000BE, 0x00000014, 0x00000082, 0x0000010E, 0x0000012C, 0x00000000, 0x00000000, 0x00000000 };
+UnkStruct D_E00B8B58[] = {
+    {  0,  0,  30, 140,   0, 255, { 0 } },
+    {  0,  6,  30, 120,   0, 240, { 0 } },
+    {  1, 12,  30, 110,  -5, 230, { 0 } },
+    {  1, 17,  50, 100, -20, 220, { 0 } },
+    {  2, 22,  60,  90, -30, 210, { 0 } },
+    {  2, 26,  70,  90, -40, 200, { 0 } },
+    {  3, 28,  80,  85, -50, 190, { 0 } },
+    {  4, 32,  90,  80, -60, 180, { 0 } },
+    {  5, 35, 100,  77, -70, 120, { 0 } },
+    {  7, 38, 110,  65, -80,  80, { 0 } },
+    {  8, 40, 120,  54, -90,  40, { 0 } },
+    {  0,  0,  30, 140,   0, 255, { 0 } },
+    {  0,  6,  30, 120,   0, 240, { 0 } },
+    { -1, 12,  30, 110,   5, 230, { 0 } },
+    { -1, 17,  50, 100,  20, 220, { 0 } },
+    { -2, 22,  60,  90,  30, 210, { 0 } },
+    { -2, 26,  70,  90,  40, 200, { 0 } },
+    { -3, 28,  80,  85,  50, 190, { 0 } },
+    { -4, 32,  90,  80,  60, 180, { 0 } },
+    { -5, 35, 100,  77,  70, 120, { 0 } },
+    { -7, 38, 110,  65,  80,  80, { 0 } },
+    { -8, 40, 120,  54,  90,  40, { 0 } },
+    {  0,  0,  30, 140,   0, 255, { 0 } },
+    {  0,  6,  30, 120,   0, 240, { 0 } },
+    {  0, 12,  30, 110,   5, 230, { 0 } },
+    {  0, 17,  50, 100,  20, 220, { 0 } },
+    {  0, 22,  60,  90,  30, 210, { 0 } },
+    {  0, 26,  70,  90,  40, 200, { 0 } },
+    {  0, 28,  80,  85,  50, 190, { 0 } },
+    {  0, 32,  90,  80,  60, 180, { 0 } },
+    {  0, 36, 100,  77,  70, 120, { 0 } },
+    {  0, 39, 110,  65,  80,  80, { 0 } },
+    {  0, 42, 120,  54,  90,  40, { 0 } }
+};
 
-void water_fountain_appendGfx(void* effect);
+s32 D_E00B8CA4[] = { 0, 40, 55, 190, 20, 130, 270, 300 };
+
 void water_fountain_init(EffectInstance* effect);
 void water_fountain_update(EffectInstance* effect);
 void water_fountain_render(EffectInstance* effect);
+void water_fountain_appendGfx(void* effect);
 
 EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5) {
     EffectBlueprint effectBp;
@@ -98,4 +205,87 @@ void water_fountain_render(EffectInstance* effect) {
 void func_E00B8200(void) {
 }
 
-INCLUDE_ASM(s32, "effects/water_fountain", water_fountain_appendGfx);
+void water_fountain_appendGfx(void *effect) {
+    WaterFountainFXData* data = ((EffectInstance*)effect)->data.waterFountain;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 lifeTime = data->lifeTime;
+    s32 timeLeft = data->timeLeft;
+    s32 sp9C;
+    s32 unk_24 = data->unk_24;
+    s32 unk_00 = data->unk_00;
+    s32 unk_18 = data->unk_18;
+    s32 unk_1C = data->unk_1C;
+    s32 unk_20 = data->unk_20;
+    s32 spB0;
+    s32 var_s6;
+    s32 temp;
+    UnkStruct* basePtr;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    s32 i;
+    s32 j;
+
+    if (unk_00 == 0) {
+        spB0 = 3;
+        basePtr = D_E00B8900;
+        var_s6 = 20;
+    } else {
+        var_s6 = 11;
+        spB0 = 3;
+        basePtr = D_E00B8B58;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guScaleF(sp58, data->unk_34, data->unk_34, data->unk_34);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_09000280_3B8AE0);
+
+    shim_guRotateF(sp18, data->unk_38, 0.0f, 0.0f, 1.0f);
+    shim_guScaleF(sp58, data->unk_3C, data->unk_40, 1.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, unk_24);
+
+    temp = sp9C + 1;
+    if (timeLeft >= var_s6 - temp) {
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
+        gSPDisplayList(gMasterGfxPos++, D_09000348_3B8BA8);
+    }
+
+    for (i = 0; i < var_s6 / 2; i++) {
+        for (j = 0; j < spB0; j++) {
+            s32 idx = (lifeTime + i * 2) % var_s6;
+            UnkStruct* ptr = &basePtr[j * var_s6];
+
+            if (lifeTime * 5 >= idx) {
+                s32 temp2 = idx + 1;
+                if (timeLeft >= var_s6 - temp2) {
+                    shim_guTranslateF(sp18, (f32) ptr[idx].unk_00, (f32) ptr[idx].unk_01 + 10.0f, 0.0f);
+                    shim_guScaleF(sp58, (f32) basePtr[idx].unk_02 * 0.01, (f32) basePtr[idx].unk_04 * 0.01, 1.0f);
+                    shim_guMtxCatF(sp58, sp18, sp18);
+                    shim_guRotateF(sp58, (f32) ptr[idx].unk_06 + D_E00B8CA4[(j + i) & 7], 0.0f, 0.0f, 1.0f);
+                    shim_guMtxCatF(sp58, sp18, sp18);
+                    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, (unk_24 * basePtr[idx].unk_08) >> 8);
+                    gSPDisplayList(gMasterGfxPos++, D_09000328_3B8B88);
+                    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                }
+            }
+        }
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
