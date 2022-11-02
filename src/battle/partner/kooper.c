@@ -458,7 +458,7 @@ EvtScript N(returnHomeOnMiss) = {
         EVT_WAIT(30)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_END_THREAD
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 60)
     EVT_SET(LVar1, 0)
@@ -487,7 +487,7 @@ EvtScript N(returnHomeOnMiss) = {
 EvtScript N(returnHome) = {
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 30)
     EVT_SET(LVar1, 0)
@@ -1025,7 +1025,7 @@ EvtScript N(dizzyShell) = {
         EVT_GOTO(11)
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
@@ -1258,7 +1258,7 @@ EvtScript N(fireShell) = {
         EVT_GOTO(11)
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)

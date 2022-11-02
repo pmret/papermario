@@ -686,7 +686,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(returnHome2) = {
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
@@ -728,7 +728,7 @@ EvtScript N(returnHome2) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1317,7 +1317,7 @@ EvtScript N(bomb) = {
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
             EVT_WAIT(50)
-            EVT_CALL(func_80280818)
+            EVT_CALL(PartnerYieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 25)

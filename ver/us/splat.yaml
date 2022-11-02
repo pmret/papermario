@@ -7589,7 +7589,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x6FFD80, c, parakarry]
-    - [0x701590, data]
+    - [0x703AE0]
   - name: battle_partner_watt
     dir: battle/partner
     type: code

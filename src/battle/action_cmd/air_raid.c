@@ -16,7 +16,7 @@ s32 D_802A9984_429CA4[] = { 40, 70, 99, 200, };
 s32 D_802A9994_429CB4[] = { 35, 60, 80, 99, 200, };
 s32 D_802A99A8_429CC8[] = { 35, 35, 60, 80, 99, 200, };
 
-ApiStatus func_802A9000_429320(void) {
+ApiStatus func_802A9000_429320(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;
@@ -67,7 +67,7 @@ ApiStatus func_802A9000_429320(void) {
 
 #include "common/MashActionCommandInit.inc.c"
 
-void func_802A9294_4295B4(void) {
+void func_802A9294_4295B4(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;

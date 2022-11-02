@@ -1291,7 +1291,7 @@ ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
 }
 
 /// Seems to be the same functionality as YieldTurn in 1A5830.c
-ApiStatus func_80280818(Evt* script, s32 isInitialCall) {
+ApiStatus PartnerYieldTurn(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= BS_FLAGS1_200000;
     return ApiStatus_DONE2;
 }

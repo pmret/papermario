@@ -768,7 +768,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_THREAD
@@ -819,7 +819,7 @@ EvtScript N(returnHome) = {
 };
 
 EvtScript N(returnHome2) = {
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
@@ -1463,7 +1463,7 @@ EvtScript N(tattle) = {
     EVT_WAIT(32)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, 0)
-    EVT_CALL(func_80280818)
+    EVT_CALL(PartnerYieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.8))

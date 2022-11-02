@@ -301,7 +301,7 @@ ApiStatus func_802694A4(Evt* script, s32 isInitialCall);
 ApiStatus func_80269524(Evt* script, s32 isInitialCall);
 ApiStatus func_80269550(Evt* script, s32 isInitialCall);
 ApiStatus func_8026919C(Evt* script, s32 isInitialCall);
-ApiStatus func_80280818(Evt* script, s32 isInitialCall); ///< YieldTurn copy
+ApiStatus PartnerYieldTurn(Evt* script, s32 isInitialCall); ///< YieldTurn copy
 ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPresetImmediately(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPresetWait(Evt* script, s32 isInitialCall);
@@ -314,6 +314,7 @@ ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall);
+ApiStatus func_80269344(Evt* script, s32 isInitialCall);
 ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall);
 ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall);
 ApiStatus func_802693F0(Evt* script, s32 isInitialCall);
