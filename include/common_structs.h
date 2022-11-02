@@ -1185,11 +1185,11 @@ typedef struct MessagePrintState {
     /* 0x46C */ s32 unk_46C;
     /* 0x470 */ u8 currentAnimFrame[4];
     /* 0x474 */ s16 animTimers[4];
-    /* 0x47C */ s8 rewindArrowAnimState;
+    /* 0x47C */ u8 rewindArrowAnimState;
     /* 0x47D */ char unk_47D[0x1];
-    /* 0x47E */ s16 rewindArrowBlinkCounter;
-    /* 0x480 */ s16 unk_480;
-    /* 0x482 */ Vec2s rewindArrowPos;
+    /* 0x47E */ s16 rewindArrowCounter;
+    /* 0x480 */ s16 rewindArrowSwingPhase;
+    /* 0x482 */ Vec2su rewindArrowPos;
     /* 0x486 */ u8 currentLine;
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ u16 lineEndPos[4];
@@ -1199,15 +1199,15 @@ typedef struct MessagePrintState {
     /* 0x4CC */ u16 unk_4CC;
     /* 0x4CE */ u8 maxOption;
     /* 0x4CF */ char unk_4CF[0x1];
-    /* 0x4D0 */ s16 cursorPosX[6];
-    /* 0x4DC */ s16 cursorPosY[6];
+    /* 0x4D0 */ u16 cursorPosX[6];
+    /* 0x4DC */ u16 cursorPosY[6];
     /* 0x4E8 */ u8 currentOption;
     /* 0x4E9 */ s8 madeChoice;
     /* 0x4EA */ u8 cancelOption;
     /* 0x4EB */ char unk_4EB[0x1];
-    /* 0x4EC */ s8 targetOption;
-    /* 0x4ED */ u8 unkCounter;
-    /* 0x4EE */ s8 selectedOption;
+    /* 0x4EC */ u8 targetOption;
+    /* 0x4ED */ u8 scrollingTime;
+    /* 0x4EE */ u8 selectedOption;
     /* 0x4EF */ char unk_4EF[0x9];
     /* 0x4F8 */ u8 windowState;
     /* 0x4F9 */ char unk_4F9[0x3];
@@ -1320,18 +1320,13 @@ typedef struct MessageImageData {
 
 typedef struct MessageNumber {
     /* 0x00 */ IMG_PTR rasters;
-    /* 0x04 */ s8 texSize;
+    /* 0x04 */ u8 texSize;
     /* 0x05 */ u8 texWidth;
     /* 0x06 */ u8 texHeight;
-    /* 0x07 */ s8 digitWidth[10];
-    /* 0x11 */ s8 fixedWidth;
+    /* 0x07 */ u8 digitWidth[10];
+    /* 0x11 */ u8 fixedWidth;
     /* 0x12 */ char unk_12[0x2];
 } MessageNumber; // size = 0x14
-
-typedef struct UnkMsgStruct8 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ char unk_02[0xE];
-} UnkMsgStruct8; // size = 0x16
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;
@@ -2549,5 +2544,18 @@ typedef struct UnkOmo {
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ s32 treeIndex;
 } UnkOmo; // size = 0x18
+
+typedef struct struct_D_802EB620 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+} struct_D_802EB620; // size = 0x0C
+
+typedef struct Rect {
+    /* 0x00 */ s32 ulx;
+    /* 0x04 */ s32 uly;
+    /* 0x08 */ s32 lrx;
+    /* 0x0C */ s32 lry;
+} Rect; // size = 0x10
 
 #endif

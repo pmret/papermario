@@ -1,6 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000400_3D84C0[];
+extern Gfx D_090005E8_3D86A8[];
+extern Gfx D_09000628_3D86E8[];
+
+Gfx* D_E00DC640[] = { D_09000628_3D86E8, D_090005E8_3D86A8 };
+Gfx* D_E00DC648[] = { D_09000400_3D84C0, D_09000400_3D84C0 };
+
 void huff_puff_breath_init(EffectInstance* effect);
 void huff_puff_breath_update(EffectInstance* effect);
 void huff_puff_breath_render(EffectInstance* effect);
@@ -117,4 +124,32 @@ void huff_puff_breath_render(EffectInstance* effect) {
 void func_E00DC2FC(void) {
 }
 
-INCLUDE_ASM(s32, "effects/huff_puff_breath", huff_puff_breath_appendGfx);
+void huff_puff_breath_appendGfx(void* effect) {
+    HuffPuffBreathFXData* data = ((EffectInstance*)effect)->data.huffPuffBreath;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 unk_24 = data->unk_24;
+    s32 unk_00 = data->unk_00;
+    s32 uls = data->unk_38 * 4.0f;
+    s32 ult = data->unk_40 * 4.0f;
+    Matrix4f sp18;
+    Matrix4f sp58;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guRotateF(sp58, data->unk_48, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guScaleF(sp58, data->unk_4C, data->unk_4C, data->unk_4C);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, data->unk_34);
+    gSPDisplayList(gMasterGfxPos++, D_E00DC648[unk_00]);
+    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 31 * 4, ult + 15 * 4);
+    gSPDisplayList(gMasterGfxPos++, D_E00DC640[unk_00]);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

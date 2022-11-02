@@ -1451,12 +1451,12 @@ void func_80260948(s32 arg0, s32 posX, s32 posY) {
                     xOffset = 9;
                     break;
             }
-            draw_msg(msgID, posX + xOffset + 0x11, posY, 255, 0xA, 0);
+            draw_msg(msgID, posX + xOffset + 0x11, posY, 255, MSG_PAL_STANDARD, 0);
             break;
     }
 }
 
 // TODO type is almost definitely incorrect
 void func_80260A20(s64 posX, s32 posY) {
-    draw_msg(0x1D00AB, posX + 11, posY + 6, 255, 0xF, 0);
+    draw_msg(0x1D00AB, posX + 11, posY + 6, 255, MSG_PAL_0F, 0);
 }

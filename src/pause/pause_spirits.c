@@ -254,7 +254,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
-        draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 255, 0, 0);
+        draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
     }
 }
 

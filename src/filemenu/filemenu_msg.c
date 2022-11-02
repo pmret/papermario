@@ -2,7 +2,7 @@
 #include "filemenu.h"
 
 extern MessageCharset* gMsgCharsets[5];
-extern UnkMsgStruct8 D_802F4560[];
+extern PAL_BIN D_802F4560[80][8];
 
 u8 filemenu_msg_C6[] = { 0x33, 0x30, 0x21, 0x23, 0x25, 0xFD };   // SPACE[End]
 u8 filemenu_msg_C7[] = { 0xFD };                                 // [End]
@@ -126,7 +126,7 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
 
         if (filemenu_char_color != color) {
             filemenu_char_color = color;
-            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, &D_802F4560[color]);
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, D_802F4560[color]);
         }
 
         if (texSizeX >= 16 && texSizeX % 16 == 0) {

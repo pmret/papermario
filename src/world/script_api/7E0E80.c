@@ -769,14 +769,14 @@ void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     ShopItemData* siItem = &shop->staticInventory[shop->currentItemSlot];
     ItemData* shopItem = &gItemTable[siItem->itemID];
 
-    draw_msg(shopItem->nameMsg, posX + 60 - (get_msg_width(shopItem->nameMsg, 0) >> 1), posY + 6, 255, 0, 0);
+    draw_msg(shopItem->nameMsg, posX + 60 - (get_msg_width(shopItem->nameMsg, 0) >> 1), posY + 6, 255, MSG_PAL_WHITE, 0);
 }
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
     ShopItemData* shopItem = &shop->staticInventory[shop->currentItemSlot];
 
-    draw_msg(shopItem->descMsg, posX + 8, posY, 255, 0xA, 0);
+    draw_msg(shopItem->descMsg, posX + 8, posY, 255, MSG_PAL_STANDARD, 0);
 }
 
 void draw_shop_items(void) {
@@ -828,7 +828,7 @@ void draw_shop_items(void) {
                 }
 
                 if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_40)) {
-                    draw_number(itemData->price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
+                    draw_number(itemData->price, xTemp + xOffset, yTemp, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, 0);
                 }
 
                 if (i == shop->currentItemSlot) {

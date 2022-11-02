@@ -541,7 +541,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     hud_element_set_render_pos(iconIndex, posX + 15, posY + 11);
     hud_element_draw_clipped(iconIndex);
 
-    draw_number(uiStatus->displayCoins, posX + 58, posY + 4, 1, 10, 255, 3);
+    draw_number(uiStatus->displayCoins, posX + 58, posY + 4, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
 }
 
 void update_coin_counter(void) {

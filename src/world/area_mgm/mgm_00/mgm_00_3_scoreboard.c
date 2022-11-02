@@ -53,17 +53,17 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
         gDPFillRectangle(gMasterGfxPos++, 48, 53, 272, 129);
         gDPPipeSync(gMasterGfxPos++);
-        msg_draw_frame(45, 50, 230, 82, 6, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
+        msg_draw_frame(45, 50, 230, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
         if (data->gameType == MINIGAME_TYPE_JUMP) {
             draw_msg(MSG_MGM_001C, 66, 57, alpha, MSG_PAL_TEAL, 0);
-            draw_number(gPlayerData.jumpGamePlays,   219, 78,  TRUE, MSG_PAL_WHITE, alpha, 3);
-            draw_number(gPlayerData.jumpGameTotal,   219, 93,  TRUE, MSG_PAL_WHITE, alpha, 3);
-            draw_number(gPlayerData.jumpGameRecord,  219, 108, TRUE, MSG_PAL_WHITE, alpha, 3);
+            draw_number(gPlayerData.jumpGamePlays,   219, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameTotal,   219, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameRecord,  219, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
         } else {
             draw_msg(MSG_MGM_001D, 64, 57, alpha, MSG_PAL_TEAL, 0);
-            draw_number(gPlayerData.smashGamePlays,  219, 78,  TRUE, MSG_PAL_WHITE, alpha, 3);
-            draw_number(gPlayerData.smashGameTotal,  219, 93,  TRUE, MSG_PAL_WHITE, alpha, 3);
-            draw_number(gPlayerData.smashGameRecord, 219, 108, TRUE, MSG_PAL_WHITE, alpha, 3);
+            draw_number(gPlayerData.smashGamePlays,  219, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameTotal,  219, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameRecord, 219, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
         }
 
         draw_msg(MSG_MGM_001E, 58,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
