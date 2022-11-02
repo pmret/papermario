@@ -85,7 +85,7 @@ EvtScript D_80294720 = {
     EVT_END
 };
 
-EvtScript D_80294AFC = {
+EvtScript DoRunAway = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -105,7 +105,7 @@ EvtScript D_80294AFC = {
     EVT_END
 };
 
-EvtScript D_80294C68 = {
+EvtScript DoPartnerBurnContact = {
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)
     EVT_SET(LVarC, LVar3)
@@ -152,7 +152,7 @@ EvtScript D_80294C68 = {
     EVT_END
 };
 
-EvtScript D_80294FE4 = {
+EvtScript DoPartnerSpikeContact = {
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)

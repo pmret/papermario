@@ -657,7 +657,7 @@ EvtScript N(80239D08) = {
 EvtScript N(80239D8C) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_Run)
-    EVT_EXEC_WAIT(D_80294AFC)
+    EVT_EXEC_WAIT(DoRunAway)
     EVT_RETURN
     EVT_END
 };

@@ -293,14 +293,14 @@ EvtScript N(handleEvent_802385E0) = {
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_SET(LVar2, 16)
-            EVT_EXEC_WAIT(D_80294FE4)
+            EVT_EXEC_WAIT(DoPartnerSpikeContact)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_EXEC_WAIT(D_80296014)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_BurnHurt)
             EVT_SET(LVar2, 16)
             EVT_SET_CONST(LVar3, ANIM_BattleKooper_BurnStill)
-            EVT_EXEC_WAIT(D_80294C68)
+            EVT_EXEC_WAIT(DoPartnerBurnContact)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_EXEC_WAIT(D_80296014)
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -370,7 +370,7 @@ EvtScript N(80238A20) = {
 EvtScript N(runAway) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BattleKooper_Run)
-    EVT_EXEC_WAIT(D_80294AFC)
+    EVT_EXEC_WAIT(DoRunAway)
     EVT_RETURN
     EVT_END
 };
