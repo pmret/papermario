@@ -85,7 +85,7 @@ EvtScript D_80294720 = {
     EVT_END
 };
 
-EvtScript DoRunAway = {
+EvtScript DoPartnerRunAway = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)

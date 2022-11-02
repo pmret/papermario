@@ -12,7 +12,7 @@ extern s32 D_80294380;
 s32 D_802A9760_42A480[] = { 300, 300, 265, 220, 175, 175, };
 s32 D_802A9778_42A498[] = { 300, 300, 265, 220, 175, 175, };
 
-ApiStatus func_802A9000_429D20(void) {
+ApiStatus func_802A9000_429D20(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
@@ -50,7 +50,7 @@ ApiStatus func_802A9000_429D20(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A911C_429E3C(Evt* script) {
+ApiStatus func_802A911C_429E3C(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

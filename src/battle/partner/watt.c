@@ -44,7 +44,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
     f32 x, y, z;
 
     if (isInitialCall) {
-        sWattEffectData_isBouncing = 1;
+        sWattEffectData_isBouncing = TRUE;
         sWattEffectData_bouncePhase = 0;
         sWattEffectData_isActive = TRUE;
         sWattEffectData_currentEffectIndex = 0;
@@ -57,7 +57,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if (sWattEffectData_isBouncing != 0) {
+    if (sWattEffectData_isBouncing) {
         sWattEffectData_bouncePhase += 15;
         sWattEffectData_bouncePhase = clamp_angle(sWattEffectData_bouncePhase);
     }
@@ -650,7 +650,7 @@ EvtScript N(runAway) = {
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1,  ANIM_BattleWatt_Run)
-    EVT_EXEC_WAIT(DoRunAway)
+    EVT_EXEC_WAIT(DoPartnerRunAway)
     EVT_RETURN
     EVT_END
 };
@@ -727,14 +727,14 @@ EvtScript N(returnHome) = {
 
 EffectInstance* N(radialShimmer) = NULL;
 
-EvtScript N(80239A10) = {
+EvtScript N(dashToTarget) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80239A54) = {
+EvtScript N(charge) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_289)
@@ -757,7 +757,7 @@ EvtScript N(80239A54) = {
     EVT_END
 };
 
-EvtScript N(80239B98) = {
+EvtScript N(electroDash_wait) = {
     EVT_LOOP(30)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -787,7 +787,7 @@ EvtScript N(electroDash) = {
     EVT_IF_EQ(LocalFlag(2), 1)
         EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 102, 3, 1)
         EVT_SET(LocalFlag(0), 0)
-        EVT_EXEC_GET_TID(N(80239A10), LVarA)
+        EVT_EXEC_GET_TID(N(dashToTarget), LVarA)
         EVT_LOOP(20)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_EQ(LVar0, 0)
@@ -802,7 +802,7 @@ EvtScript N(electroDash) = {
         EVT_END_IF
         EVT_CALL(PartnerTestEnemy, LVar0, 0, 4, 0, 1, BS_FLAGS1_10)
         EVT_SET(LocalFlag(0), 0)
-        EVT_EXEC_GET_TID(N(80239A54), LVarA)
+        EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_EQ(LVar0, 0)
@@ -816,7 +816,7 @@ EvtScript N(electroDash) = {
             EVT_GOTO(10)
         EVT_END_IF
         EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_EXEC_GET_TID(N(80239B98), LVarA)
+            EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)
@@ -832,7 +832,7 @@ EvtScript N(electroDash) = {
         EVT_END_IF
     EVT_ELSE
         EVT_SET(LocalFlag(0), 0)
-        EVT_EXEC_GET_TID(N(80239A10), LVarA)
+        EVT_EXEC_GET_TID(N(dashToTarget), LVarA)
         EVT_LOOP(20)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
@@ -855,7 +855,7 @@ EvtScript N(electroDash) = {
         EVT_END_IF
         EVT_CALL(PartnerTestEnemy, LVar0, 0, 4, 0, 1, BS_FLAGS1_10)
         EVT_SET(LocalFlag(0), 0)
-        EVT_EXEC_GET_TID(N(80239A54), LVarA)
+        EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
@@ -877,7 +877,7 @@ EvtScript N(electroDash) = {
             EVT_GOTO(10)
         EVT_END_IF
         EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_EXEC_GET_TID(N(80239B98), LVarA)
+            EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)

@@ -371,7 +371,7 @@ extern EvtScript DoFreezeHit;
 extern EvtScript DoShrinkHit;
 extern EvtScript ForceNextTarget;
 extern EvtScript DoNormalHit;
-extern EvtScript DoRunAway;
+extern EvtScript DoPartnerRunAway;
 extern EvtScript DoPartnerSpikeContact;
 extern EvtScript D_80295350;
 extern EvtScript DoPartnerBurnContact;

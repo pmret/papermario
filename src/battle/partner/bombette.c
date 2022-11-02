@@ -662,7 +662,7 @@ EvtScript N(firstStrike) = {
 EvtScript N(runAway) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_Run)
-    EVT_EXEC_WAIT(DoRunAway)
+    EVT_EXEC_WAIT(DoPartnerRunAway)
     EVT_RETURN
     EVT_END
 };
