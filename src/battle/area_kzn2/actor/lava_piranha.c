@@ -285,15 +285,6 @@ enum {
     VINE_3_BASE = 0x8022C000,
 };
 
-typedef struct LavaPiranhaVine {
-    /* 0x000 */ Vec3f bonePos[9];
-    /* 0x06C */ f32 boneRot[9];
-    /* 0x090 */ s32 boneCount;
-    /* 0x094 */ f32 boneLength;
-    /* 0x098 */ Vec3f points[27];
-    /* 0x1DC */ s32 numPoints;
-} LavaPiranhaVine;
-
 static LavaPiranhaVine N(VineData)[NUM_VINES];
 static s32 N(VineRenderState);
 

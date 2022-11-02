@@ -75,5 +75,61 @@ void func_80240504_EE6AB4(void) {
     D_80243B44_EEA0F4 += 1.0f;
 }
 
+#ifdef NON_MATCHING // data migration
+extern s32 D_802431FC_EE97AC;
+extern s32 D_80243B48_EEA0F8;
 
+// gfx_build_bubble_flower
+void func_802407D4_EE6D84(void) {
+    s32 i;
+    Vtx* verts;
+    Vtx* copied;
+    s32 numCopied;
+    f32 openedScale; // controls how open the flower is
+    f32 lengthScale; // controls longitudinal pulsing
+
+    mdl_get_copied_vertices(1, &verts, &copied, &numCopied);
+
+    for (i = 0; i < numCopied; i++) {
+        Vtx* src = &verts[i];
+        Vtx* copy = &copied[i];
+
+        if (src->v.ob[0] <= 600) {
+            openedScale = 0.7 + (sin_rad((D_80243B48_EEA0F8 / 180.0f) * PI_D) * 0.3);
+            lengthScale = 0.2 - (sin_rad((D_80243B48_EEA0F8 / 180.0f) * PI_D) * 0.2);
+            copy->v.ob[0] = ((src->v.ob[0] - 616) * openedScale) + 616.0f + (lengthScale * -48.0f);
+            copy->v.ob[1] = ((src->v.ob[1] -  44) * openedScale) +  44.0f + (lengthScale *  25.0f);
+            copy->v.ob[2] = ((src->v.ob[2] - 113) * openedScale) + 113.0f + (lengthScale * -87.0f);
+        }
+    }
+
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
+
+    if (evt_get_variable(NULL, AreaFlag(36))) { // AF_FLO_BlowingBigBubble
+        if (D_80243B48_EEA0F8 > 90) {
+            D_80243B48_EEA0F8 -= 360;
+        }
+        if (D_80243B48_EEA0F8 >= -90) {
+            D_80243B48_EEA0F8 += 5;
+        } else {
+            D_80243B48_EEA0F8 += 20;
+        }
+        if (D_80243B48_EEA0F8 >= 90) {
+            D_80243B48_EEA0F8 = 90;
+        }
+    } else {
+        if (D_80243B48_EEA0F8 > 140 && D_80243B48_EEA0F8 < 260) {
+            D_802431FC_EE97AC = TRUE;
+        } else {
+            D_802431FC_EE97AC = FALSE;
+        }
+        D_80243B48_EEA0F8 += 5;
+    }
+
+    if (D_80243B48_EEA0F8 >= 360) {
+        D_80243B48_EEA0F8 -= 360;
+    }
+}
+#else
 INCLUDE_ASM(s32, "EE65B0", func_802407D4_EE6D84);
+#endif
