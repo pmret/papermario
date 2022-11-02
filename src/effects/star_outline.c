@@ -1,11 +1,18 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void star_outline_appendGfx(void* effect);
+extern Gfx D_09000800_4147A0[];
+extern Gfx D_09000B20_414AC0[];
+extern Gfx D_09000B90_414B30[];
+
+Gfx* D_E0126BC0[] = { D_09000B90_414B30 };
+Gfx* D_E0126BC4[] = { D_09000B20_414AC0 };
+Gfx* D_E0126BC8[] = { D_09000800_4147A0 };
 
 void star_outline_init(EffectInstance* effect);
 void star_outline_update(EffectInstance* effect);
 void star_outline_render(EffectInstance* effect);
+void star_outline_appendGfx(void* effect);
 
 EffectInstance* star_outline_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5) {
     EffectBlueprint effectBp;
@@ -137,4 +144,116 @@ void star_outline_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/star_outline", star_outline_appendGfx);
+void star_outline_appendGfx(void* effect) {
+    StarOutlineFXData* data = ((EffectInstance*)effect)->data.starOutline;
+    s32 unk_18 = data->unk_18;
+    s32 unk_1C = data->unk_1C;
+    s32 unk_20 = data->unk_20;
+    s32 unk_24 = data->unk_24;
+    s32 unk_28 = data->unk_28;
+    s32 unk_2C = data->unk_2C;
+    s32 unk_30 = data->unk_30;
+    s32 unk_34 = data->unk_34;
+    Matrix4f sp20;
+    Matrix4f sp60;
+
+    if (unk_18 > 255) {
+        unk_18 = 255;
+    }
+    if (unk_1C > 255) {
+        unk_1C = 255;
+    }
+    if (unk_20 > 255) {
+        unk_20 = 255;
+    }
+    if (unk_24 > 255) {
+        unk_24 = 255;
+    }
+    if (unk_28 > 255) {
+        unk_28 = 255;
+    }
+    if (unk_2C > 255) {
+        unk_2C = 255;
+    }
+    if (unk_30 > 255) {
+        unk_30 = 255;
+    }
+    if (unk_34 > 255) {
+        unk_34 = 255;
+    }
+    if (unk_18 < 0) {
+        unk_18 = 0;
+    }
+    if (unk_1C < 0) {
+        unk_1C = 0;
+    }
+    if (unk_20 < 0) {
+        unk_20 = 0;
+    }
+    if (unk_24 < 0) {
+        unk_24 = 0;
+    }
+    if (unk_28 < 0) {
+        unk_28 = 0;
+    }
+    if (unk_2C < 0) {
+        unk_2C = 0;
+    }
+    if (unk_30 < 0) {
+        unk_30 = 0;
+    }
+    if (unk_34 < 0) {
+        unk_34 = 0;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_E0126BC8[0]);
+
+    if (unk_34 != 0) {
+        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
+        shim_guPositionF(sp60, data->unk_48, data->unk_4C, data->unk_50, 1.0f, 0.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+        if (data->unk_00 == 0) {
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        } else {
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+        }
+
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_34 >> 1);
+        gDPSetEnvColor(gMasterGfxPos++, unk_28, unk_2C, unk_30, unk_34 >> 1);
+        gSPDisplayList(gMasterGfxPos++, D_E0126BC4[0]);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
+    shim_guPositionF(sp60, data->unk_3C.x, data->unk_3C.y, data->unk_3C.z, 1.0f, 0.0f, 0.0f, 0.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    if (unk_34 != 0) {
+        if (data->unk_00 == 0) {
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        } else {
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+        }
+        gSPDisplayList(gMasterGfxPos++, D_E0126BC4[0]);
+    }
+
+    if (data->unk_00 == 0) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
+    }
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
+    gDPSetEnvColor(gMasterGfxPos++, unk_28, unk_2C, unk_30, unk_24);
+    gSPDisplayList(gMasterGfxPos++, D_E0126BC0[0]);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
