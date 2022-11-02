@@ -18,7 +18,7 @@ enum {
     VINE_1_BASE  = 0x80204000,
     VINE_2_BASE  = 0x80207000,
     VINE_3_BASE  = 0x8020A000,
-}; //TODO shiftaility -- hard-coded addresses in gBackgroundImage
+}; // TODO shiftability -- hard-coded addresses in gBackgroundImage
 
 #include "./kzn_19_anim1.c"
 #include "./kzn_19_anim2.c"
