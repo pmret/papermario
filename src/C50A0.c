@@ -10,13 +10,6 @@
 
 #define MAX_ITEM_ENTITIES 256
 
-typedef struct Rect {
-    /* 0x00 */ s32 ulx;
-    /* 0x04 */ s32 uly;
-    /* 0x08 */ s32 lrx;
-    /* 0x0C */ s32 lry;
-} Rect; // size = 0x10
-
 extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
@@ -2946,9 +2939,9 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
                 (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
                 (itemEntity->pickupMsgFlags & 0x30)) {
 
-                draw_msg(itemMsg, posX + 15, posY + offsetY, 255, 47, 0);
+                draw_msg(itemMsg, posX + 15, posY + offsetY, 255, MSG_PAL_2F, 0);
             } else {
-                draw_msg(itemMsg, posX + 40, posY + offsetY, 255, 47, 0);
+                draw_msg(itemMsg, posX + 40, posY + offsetY, 255, MSG_PAL_2F, 0);
                 if (!(itemEntity->pickupMsgFlags & 0x30)) {
                     hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
                     hud_element_draw_next(D_801568E0);
@@ -2958,7 +2951,7 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 13:
         case 14:
             set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
-            draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, 47, 0);
+            draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, MSG_PAL_2F, 0);
             hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
             hud_element_draw_next(D_801568E0);
             break;
@@ -2966,7 +2959,7 @@ void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
 }
 
 void func_801369D0(ItemEntity* itemEntity, s32 x, s32 y) {
-    draw_msg(MSG_Menus_0060, x + 12, y + 4, 255, 52, 0);
+    draw_msg(MSG_Menus_0060, x + 12, y + 4, 255, MSG_PAL_34, 0);
 }
 
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
@@ -2979,7 +2972,7 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 10:
         case 11:
             itemMsg = itemData->shortDescMsg;
-            draw_msg(itemMsg, posX + 8, posY, 255, 10, 0);
+            draw_msg(itemMsg, posX + 8, posY, 255, MSG_PAL_STANDARD, 0);
             break;
     }
 }

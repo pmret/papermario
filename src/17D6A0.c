@@ -3540,7 +3540,7 @@ void func_80250818(void* data, s32 x, s32 y) {
         case 0x54:
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
-            draw_msg(messageID, x, y + D_802835D4[msgLinesIdx], 255, 0xF, 0);
+            draw_msg(messageID, x, y + D_802835D4[msgLinesIdx], 255, MSG_PAL_0F, 0);
             break;
         case 0x4:
         case 0x5:
@@ -3556,14 +3556,14 @@ void func_80250818(void* data, s32 x, s32 y) {
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += D_802835D4[msgLinesIdx];
             set_message_value(D_8029F640, 0);
-            draw_msg(messageID, x, y, 255, 0xF, 0);
+            draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case 0x51:
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += D_802835D4[msgLinesIdx];
             set_message_msg(bActorMessages[D_8029F640], 0);
-            draw_msg(messageID, x, y, 255, 0xF, 0);
+            draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case 0x49:
         case 0x4A:
@@ -3573,7 +3573,7 @@ void func_80250818(void* data, s32 x, s32 y) {
         case 0x4E:
         case 0x4F:
             messageID = bMessages[popup->messageIndex];
-            draw_msg(messageID, x + 0x1D, y + 6, 255, 0xF, 0);
+            draw_msg(messageID, x + 0x1D, y + 6, 255, MSG_PAL_0F, 0);
             hud_element_set_render_pos(D_8029F642, x + 13, y + 14);
             hud_element_draw_clipped(D_8029F642);
             break;
@@ -3611,7 +3611,7 @@ void func_80250818(void* data, s32 x, s32 y) {
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += D_802835D4[msgLinesIdx];
-            draw_msg(messageID, x + 11, y + 6, opacity, 0xF, 0);
+            draw_msg(messageID, x + 11, y + 6, opacity, MSG_PAL_0F, 0);
 
             switch (popup->messageIndex) {
                 case 46:

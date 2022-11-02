@@ -260,7 +260,7 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
 
     posY += D_80078164[get_msg_lines(messageID) - 1];
 
-    draw_msg(messageID, posX, posY, 255, 15, 0);
+    draw_msg(messageID, posX, posY, 255, MSG_PAL_0F, 0);
 }
 
 void draw_merlee_message(void* data) {

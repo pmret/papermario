@@ -106,7 +106,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     f32 posX = chr->posX;
     f32 posY = chr->posY;
     f32 alpha;
-    
+
     alpha = update_lerp(EASING_LINEAR, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
     if (alpha > 255.0f) {
         alpha = 255.0;
@@ -119,7 +119,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -128,7 +128,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -141,7 +141,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     f32 posX = chr->posX;
     f32 posY = chr->posY;
     f32 alpha;
-    
+
     alpha = update_lerp(0, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
     if (alpha > 255.0f) {
         alpha = 255.0;
@@ -164,7 +164,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -185,13 +185,13 @@ void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
     f32 posY = chr->posY;
     f32 scaleAmt;
     f32 alpha;
-    
+
     alpha = update_lerp(EASING_COS_IN, 16.0f, 300.0f, chr->fadeInTime, line->appearTime);
     if (alpha > 255.0f) {
         alpha = 255.0f;
     }
     fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
-    
+
     scaleAmt = update_lerp(EASING_LINEAR, 0.2f, 2.0f, chr->fadeInTime, line->appearTime);
     if (scaleAmt > 1.0) {
         scaleAmt = 1.0;
@@ -207,7 +207,7 @@ void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-   
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -234,12 +234,12 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
         alpha = 255.0f;
     }
     fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
-    
+
     rotAngle = update_lerp(EASING_LINEAR, -75.0f, 30.0f, chr->fadeInTime, line->appearTime);
     if (rotAngle >= 0.0f) {
         rotAngle = 0.0f;
     }
-    
+
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
     posX += (glyphPtr->charWidth * 0.5);
@@ -251,7 +251,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -260,7 +260,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -294,7 +294,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
         fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
     }
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
-    
+
     posX += (glyphPtr->charWidth * 0.5);
     guTranslateF(transformMtx, posX, -posY, 0.0f);
     guRotateF(tempMtx, rotAngle, 0.0f, 1.0f, 0.2f);
@@ -304,7 +304,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -323,7 +323,7 @@ void N(CharAnim_FadeIn_5)(CreditsLine* line, CreditsChar* chr) {
     f32 posX = chr->posX;
     f32 posY = chr->posY;
     f32 alpha;
-    
+
     alpha = update_lerp(EASING_LINEAR, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
@@ -347,7 +347,7 @@ void N(CharAnim_HoldClearFold)(CreditsLine* line, CreditsChar* chr) {
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -356,7 +356,7 @@ void N(CharAnim_HoldClearFold)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -381,7 +381,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     f32 posX = chr->posX;
     f32 posY = chr->posY;
     f32 alpha;
-    
+
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
     fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
 
@@ -392,7 +392,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -401,7 +401,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -413,13 +413,13 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
     f32 scaleAmt, alpha;
     f32 posX = chr->posX;
     f32 posY = chr->posY;
-    
+
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
     fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
-    
+
     scaleAmt = update_lerp(EASING_LINEAR, 1.0f, 0.2f, chr->fadeInTime, line->vanishTime);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
-    
+
     posX += (glyphPtr->charWidth * 0.5);
     guTranslateF(transformMtx, posX, -posY, 0.0f);
     guScaleF(tempMtx, scaleAmt, scaleAmt, 1.0f);
@@ -427,7 +427,7 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -436,7 +436,7 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -448,10 +448,10 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     f32 rotAngle, alpha;
     f32 posX = chr->posX;
     f32 posY = chr->posY;
-    
+
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
     fold_update(0, FOLD_TYPE_7, 255, 255, 255, alpha, 0);
-    
+
     rotAngle = update_lerp(EASING_LINEAR, 0.0f, 60.0f, chr->fadeInTime, line->vanishTime);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
@@ -462,7 +462,7 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     foldImg.raster  = glyphPtr->raster;
     foldImg.palette = glyphPtr->palette;
     foldImg.width   = glyphPtr->texSize.x;
@@ -471,7 +471,7 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
     fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
-    
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -479,9 +479,9 @@ void N(CharAnim_FadeOut_3)(CreditsLine* line, CreditsChar* chr) {
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     f32 posX = chr->posX;
-    f32 posY = chr->posY; 
+    f32 posY = chr->posY;
     f32 alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
-    
+
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
     draw_ci_image_with_clipping(glyphPtr->raster, glyphPtr->texSize.x, glyphPtr->texSize.y,
         G_IM_FMT_CI, G_IM_SIZ_4b, glyphPtr->palette, posX, posY,
@@ -508,9 +508,9 @@ void N(credits_update_line)(CreditsLine* line) {
         line->time = 0;
         line->state = 0;
     }
-    
+
     get_msg_properties((s32) line->message, &msgHeight, &msgWidth, &msgMaxLineChars, NULL, NULL, NULL, 0);
-    
+
     curChar->font = 0;
     curChar->variation = 0;
 
@@ -521,7 +521,7 @@ void N(credits_update_line)(CreditsLine* line) {
         curMsgChar = line->message[readPos++];
         nextMsgChar1 = line->message[readPos];
         doneCalcLoop = FALSE;
-        
+
         switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
@@ -545,15 +545,15 @@ void N(credits_update_line)(CreditsLine* line) {
                     if (curChar->font == MSG_FONT_SUBTITLE) {
                         curPattern = N(Font4Patterns);
                     }
-    
+
                     i = 0;
-    
+
                     if (curChar->font == MSG_FONT_SUBTITLE) {
                         if (curMsgChar == MSG_CHAR_LPAREN || nextMsgChar1 == MSG_CHAR_LPAREN) {
                             msgWidth++;
                         }
                     }
-                    
+
                     do {
                         if (curMsgChar == curPattern[i].unk_00 && nextMsgChar1 == curPattern[i].unk_01) {
                             msgWidth += curPattern[i].size;
@@ -575,14 +575,14 @@ void N(credits_update_line)(CreditsLine* line) {
     curChar->font = 0;
     curChar->variation = 0;
     curChar->palette = line->palette;
-    
+
     drawCount = 0;
     readPos = 0;
     do {
         curMsgChar = line->message[readPos++];
         nextMsgChar2 = line->message[readPos];
         doneDrawLoop = FALSE;
-        
+
         switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
@@ -603,7 +603,7 @@ void N(credits_update_line)(CreditsLine* line) {
                     curChar->charIndex = curMsgChar;
                     curChar->posX = posX;
                     curChar->posY = line->posY;
-                    
+
                     switch (line->state) {
                         case CREDITS_LINE_APPEARING:
                             curChar->fadeInTime = line->time - (line->perCharDelayIn * drawCount);
@@ -636,7 +636,7 @@ void N(credits_update_line)(CreditsLine* line) {
                                 }
                             }
                             break;
-                        
+
                         case CREDITS_LINE_HOLDING:
                             if (nextMsgChar2 == MSG_CHAR_READ_END) {
                                 if (line->time == line->holdTime) {
@@ -701,7 +701,7 @@ void N(credits_update_line)(CreditsLine* line) {
                 break;
         }
     } while (!doneDrawLoop);
-    
+
     if ((line->state == CREDITS_LINE_APPEARING) && doneCurrentState) {
         s32 temp = 0;
         get_msg_properties((s32) line->message, NULL, NULL, &temp, NULL, NULL, NULL, 0);
@@ -741,9 +741,9 @@ void N(credits_worker_render)(void) {
 void N(credits_load_message)(CreditsEntry* entry) {
     CreditsLine* line;
     s32 maxLineChars;
-    s32 unkMsgProperty;
+    s32 numSpaces;
     s32 i = 0;
-    
+
     while (TRUE) {
         if (!(N(CreditsDataPtr)->lines[i].flags & CREDITS_LINE_FLAG_1)) {
             break;
@@ -752,7 +752,7 @@ void N(credits_load_message)(CreditsEntry* entry) {
             return;
         }
     }
-    
+
     line = &N(CreditsDataPtr)->lines[i];
     if (entry->msgID != NULL) {
         if (entry->msgID >= 0) {
@@ -765,7 +765,7 @@ void N(credits_load_message)(CreditsEntry* entry) {
         } else {
             line->message = (u8*) entry->msgID;
         }
-        get_msg_properties((s32) line->message, NULL, NULL, &maxLineChars, NULL, NULL, &unkMsgProperty, 0);
+        get_msg_properties((s32) line->message, NULL, NULL, &maxLineChars, NULL, NULL, &numSpaces, 0);
         line->posX            = entry->posX;
         line->posY            = entry->posY;
         line->palette         = entry->palette;
@@ -774,7 +774,7 @@ void N(credits_load_message)(CreditsEntry* entry) {
         line->holdMode        = entry->holdMode;
         line->holdTime        = entry->holdTime;
         if (entry->perCharDelayIn != 0) {
-            line->holdTime = entry->holdTime - ((maxLineChars - 1) - unkMsgProperty) * entry->perCharDelayIn;
+            line->holdTime = entry->holdTime - ((maxLineChars - 1) - numSpaces) * entry->perCharDelayIn;
             if (line->holdTime < 0) {
                 line->holdTime = 0;
             }
@@ -806,13 +806,13 @@ ApiStatus N(InitCredits)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(ShowCreditList)(Evt* script, s32 isInitialCall) {
     CreditsEntry* creditList = (CreditsEntry*) evt_get_variable(script, *script->ptrReadPos);
-    
+
     if (isInitialCall) {
         script->varTable[0] = 0;
         script->varTable[1] = -1;
         script->varTable[2] = 0;
     }
-    
+
     switch (script->varTable[0]) {
         case 0:
             while (TRUE) {

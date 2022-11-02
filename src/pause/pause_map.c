@@ -375,7 +375,7 @@ void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (gPauseMapCursorCurrentOption != -1) {
             msgWidth = get_msg_width(MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3), 0);
             msgID = MSG_Menus_00F2 + (gPauseMapCursorCurrentOption * 3);
-            draw_msg(msgID, baseX + ((width - msgWidth) >> 1), baseY + 1, 255, 0, 0);
+            draw_msg(msgID, baseX + ((width - msgWidth) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
         }
     }
 }
