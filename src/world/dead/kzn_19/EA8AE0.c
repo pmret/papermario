@@ -1,11 +1,11 @@
 #include "kzn_19.h"
 
 extern Gfx D_80243AD8_EAC5B8[];
-extern s32 D_80248380;
-extern s32 N(D_80248388)[];
+extern s32 D_80243BB8_EAC698[];
 extern s32 D_80243DD8_EAC8B8;
 extern s32 D_80243DDC_EAC8BC;
-void func_8012DFE8(s32, UNK_FUN_ARG);
+extern s32 D_80248380;
+extern s32 N(D_80248388)[];
 
 #include "world/common/atomic/TexturePan.inc.c"
 
@@ -14,6 +14,21 @@ void func_8012DFE8(s32, UNK_FUN_ARG);
 static char* N(exit_str_0) = "kmr_23";
 static char* N(exit_str_1) = "kzn_18";
 static char* N(exit_str_2) = "kzn_20";
+
+enum {
+    VINE_0      = 0,
+    VINE_1      = 1,
+    VINE_2      = 2,
+    VINE_3      = 3,
+    NUM_VINES   = 4
+};
+
+enum {
+    VINE_0_BASE  = 0x80200000,
+    VINE_1_BASE  = 0x80204000,
+    VINE_2_BASE  = 0x80207000,
+    VINE_3_BASE  = 0x8020A000,
+}; //TODO shiftaility -- hard-coded addresses in gBackgroundImage
 
 // make_vine_interpolation
 void func_80240B00_EA95E0(LavaPiranhaVine* vine) {
@@ -89,7 +104,6 @@ ApiStatus func_80240DA4_EA9884(Evt* script, s32 isInitialCall) {
 }
 
 // appendGfx_piranha_vines
-# define NUM_VINES 4
 void func_80240E2C_EA990C(void* data) {
     Vtx_t* vtxBuffer;
     Vtx_t* vtx;
@@ -266,7 +280,7 @@ ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
     LavaPiranhaVine* data = heap_malloc(NUM_VINES * sizeof(*data));
     evt_set_variable(script, MV_VinesData, (s32) data);
     D_80248380 = -1;
-    func_8012DFE8(0, &func_802413C0_EA9EA0);
+    create_generic_entity_world(0, &func_802413C0_EA9EA0);
     return ApiStatus_DONE2;
 }
 
@@ -323,4 +337,37 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241BC0_EAA6A0);
+// LoadAnimationFromTable
+API_CALLABLE(func_80241BC0_EAA6A0) {
+    Bytecode* args = script->ptrReadPos;
+    s32 type = evt_get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+
+    switch (type) {
+        case VINE_0:
+            dma_copy(
+                (u8*) D_80243BB8_EAC698[3 * index + 0],
+                (u8*) D_80243BB8_EAC698[3 * index + 1],
+                (void*) VINE_0_BASE);
+            break;
+        case VINE_1:
+            dma_copy(
+                (u8*) D_80243BB8_EAC698[3 * index + 0],
+                (u8*) D_80243BB8_EAC698[3 * index + 1],
+                (void*) VINE_1_BASE);
+            break;
+        case VINE_2:
+            dma_copy(
+                (u8*) D_80243BB8_EAC698[3 * index + 0],
+                (u8*) D_80243BB8_EAC698[3 * index + 1],
+                (void*) VINE_2_BASE);
+            break;
+        case VINE_3:
+            dma_copy(
+                (u8*) D_80243BB8_EAC698[3 * index + 0],
+                (u8*) D_80243BB8_EAC698[3 * index + 1],
+                (void*) VINE_3_BASE);
+            break;
+    }
+    return ApiStatus_DONE2;
+}

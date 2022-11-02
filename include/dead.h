@@ -122,5 +122,7 @@
 #define LoadPath dead_LoadPath
 #define GetNextPathPos dead_GetNextPathPos
 #define queue_render_task dead_queue_render_task
+#define dma_copy dead_dma_copy
+#define create_generic_entity_world dead_create_generic_entity_world
 
 #endif
