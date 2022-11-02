@@ -18,7 +18,7 @@ extern EvtScript N(celebrate);
 extern EvtScript N(executeAction);
 extern EvtScript N(firstStrike);
 extern EvtScript N(runAway);
-extern EvtScript N(failRunAway);
+extern EvtScript N(runAwayFail);
 extern EvtScript N(headbonk1);
 extern EvtScript N(headbonk2);
 extern EvtScript N(headbonk3);
@@ -650,7 +650,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(failRunAway))
+            EVT_EXEC_WAIT(N(runAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -711,7 +711,7 @@ EvtScript N(runAway) = {
     EVT_END
 };
 
-EvtScript N(failRunAway) = {
+EvtScript N(runAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, 0)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
