@@ -366,7 +366,7 @@ ApiStatus N(GetShellShotDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetAirLiftChance)(Evt* script, s32 isInitialCall) {
+ApiStatus N(AirLiftChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -1091,7 +1091,7 @@ EvtScript N(shellShot) = {
 
 EvtScript N(airLift) = {
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(N(GetAirLiftChance))
+    EVT_CALL(N(AirLiftChance))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_AIR_LIFT)
     EVT_CALL(func_802A9000_428A70, LVar0)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -1141,7 +1141,7 @@ EvtScript N(airLift) = {
     EVT_END_IF
     EVT_WAIT(3)
     EVT_CALL(PartnerTestEnemy, LVar0, 32768, 4, 0, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(N(GetAirLiftChance))
+    EVT_CALL(N(AirLiftChance))
     EVT_IF_NE(LVar0, -1)
         EVT_CALL(func_802A9184_428BF4, 0, 87, 3, 0)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
