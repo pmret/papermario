@@ -119,5 +119,8 @@
 #define gMatrixListPos dead_gMatrixListPos
 #define gDisplayContext dead_gDisplayContext
 #define fx_sun_undeclared dead_fx_sun_undeclared
+#define LoadPath dead_LoadPath
+#define GetNextPathPos dead_GetNextPathPos
+#define queue_render_task dead_queue_render_task
 
 #endif
