@@ -147,7 +147,7 @@ void N(appendGfx_score_display) (void* renderData) {
             sfx_play_sound_with_params(SOUND_211, 0, 0x40, 0x32);
 
         }
-        draw_number(data->currentScore, data->scoreWindowPosX + 63, 32, 1, 0, 255, 3);
+        draw_number(data->currentScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     }
 }
 

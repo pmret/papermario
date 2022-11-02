@@ -836,7 +836,7 @@ void btl_draw_menu_wheel(void) {
                 msgY -= 34;
 
                 btl_draw_prim_quad(0, 0, 0, 0, D_802AD060 + 46, msgY, 48, 16);
-                draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, 0x35, 0);
+                draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, MSG_PAL_35, 0);
             }
 
             if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & 0x40)) {
@@ -972,7 +972,7 @@ void func_802A2910(void) {
     }
 
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
-    battle_menu_moveTextColor = 10;
+    battle_menu_moveTextColor = MSG_PAL_STANDARD;
     D_802AD10F = 1;
     battle_menu_moveTextOpacity = 255;
     battle_menu_moveState = 1;
@@ -1012,7 +1012,7 @@ void func_802A2AB8(void) {
     }
 
     hud_element_set_script(battle_menu_moveCursorIcon, &HES_AnimatedHandPointer);
-    battle_menu_moveTextColor = 10;
+    battle_menu_moveTextColor = MSG_PAL_STANDARD;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
 }
@@ -1143,7 +1143,7 @@ s32 func_802A2C84(void) {
                 hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
             }
 
-            battle_menu_moveTextColor = 0xA;
+            battle_menu_moveTextColor = MSG_PAL_STANDARD;
 
             moveX = battle_menu_moveX;
             moveY = battle_menu_moveY;
@@ -1280,7 +1280,7 @@ s32 func_802A2C84(void) {
             }
 
             hud_element_set_script(battle_menu_moveCursorIcon, &HES_HandPointer);
-            battle_menu_moveTextColor = 0xD;
+            battle_menu_moveTextColor = MSG_PAL_0D;
             set_window_update(1, 4);
             if (!battle_menu_hasSpiritsMenu) {
                 set_window_update(2, 4);
@@ -1456,11 +1456,11 @@ void func_802A3C98(s32 x, s32 y) {
                 if ((i >= battle_menu_moveScrollLine - 1) && (i <= battle_menu_moveScrollLine + D_802AD10E)) {
                     palette = battle_menu_moveTextColor;
                     if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
-                        palette = 0xB;
+                        palette = MSG_PAL_0B;
                     }
 
                     if (battle_menu_moveOptionNames[battle_menu_moveOptionIndexMap[i]] >= 0) {
-                        draw_msg(battle_menu_moveOptionNames[battle_menu_moveOptionIndexMap[i]], moveOptX, moveOptY, battle_menu_moveTextOpacity, palette, 1);
+                        draw_msg(battle_menu_moveOptionNames[battle_menu_moveOptionIndexMap[i]], moveOptX, moveOptY, battle_menu_moveTextOpacity, palette, DRAW_MSG_STYLE_MENU);
                     }
 
                     num = battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] - battle_menu_moveOptionDisplayCostReductions[battle_menu_moveOptionIndexMap[i]];
@@ -1488,30 +1488,30 @@ void func_802A3C98(s32 x, s32 y) {
 
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
-                            palette = 0xA;
+                            palette = MSG_PAL_STANDARD;
                             break;
                         case 1:
-                            palette = 0x37;
+                            palette = MSG_PAL_37;
                             break;
                         default:
-                            palette = 0x38;
+                            palette = MSG_PAL_38;
                             break;
                     }
 
                     if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
-                        palette = 0xB;
+                        palette = MSG_PAL_0B;
                     }
 
                     if (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] != 0) {
                         id = battle_menu_moveOptionCostUnitIconIDs[i];
                         if (!battle_menu_hasSpiritsMenu) {
-                            draw_number(num, moveOptX + 108, moveOptY, 1, palette, battle_menu_moveTextOpacity, 3);
+                            draw_number(num, moveOptX + 108, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, battle_menu_moveTextOpacity, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                             if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughFP);
                             }
                             moveOptX += 116;
                         } else {
-                            draw_number(num, moveOptX + 93, moveOptY, 1, palette, battle_menu_moveTextOpacity, 3);
+                            draw_number(num, moveOptX + 93, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, battle_menu_moveTextOpacity, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                             if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughPOW);
                             }
@@ -1597,7 +1597,7 @@ void func_802A43DC(s32 arg0, s32 x, s32 y) {
         opacity = battle_menu_moveTextOpacity;
         palette = 0x31;
     }
-    draw_msg(msgID, posX, posY, opacity, palette, 1);
+    draw_msg(msgID, posX, posY, opacity, palette, DRAW_MSG_STYLE_MENU);
 }
 
 void func_802A4448(s32 arg0, s32 x, s32 y) {
@@ -1638,7 +1638,7 @@ void func_802A4534(s32 arg0, s32 x, s32 y) {
     } else {
         msgID = 0x1D00A0;
     }
-    draw_msg(msgID, posX, posY + D_802AB344[get_msg_lines(msgID) - 1], 255, 0xF, 0);
+    draw_msg(msgID, posX, posY + D_802AB344[get_msg_lines(msgID) - 1], 255, MSG_PAL_0F, 0);
 }
 
 void func_802A45D8(void) {
@@ -1717,7 +1717,7 @@ void func_802A47E0(void) {
     set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
-    D_802AD614 = 10;
+    D_802AD614 = MSG_PAL_STANDARD;
     D_802AD60B = 1;
     D_802AD624 = 255;
     D_802AD604 = 1;
@@ -1738,7 +1738,7 @@ void func_802A48FC(void) {
     hud_element_set_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     hud_element_set_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
     hud_element_set_script(D_802AD618, &HES_AnimatedHandPointer);
-    D_802AD614 = 10;
+    D_802AD614 = MSG_PAL_STANDARD;
     D_802AD60B = 1;
     D_802AD604 = 20;
 }
@@ -1786,7 +1786,7 @@ s32 func_802A4A54(void) {
             hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E + 78);
 
-            D_802AD614 = 10;
+            D_802AD614 = MSG_PAL_STANDARD;
             x = D_802AD63C;
             y = D_802AD63E;
             set_window_properties(6, x, y, 144, (D_802AD60A * 13) + 26, 0, func_802A5290, NULL, -1);
@@ -1868,7 +1868,7 @@ s32 func_802A4A54(void) {
             hud_element_set_tint(D_802AD61C, 160, 160, 160);
             hud_element_set_tint(D_802AD620, 160, 160, 160);
             hud_element_set_script(D_802AD618, HES_HandPointer);
-            D_802AD614 = 13;
+            D_802AD614 = MSG_PAL_0D;
             set_window_update(6, 4);
             set_window_update(7, 4);
             set_window_update(8, 2);
@@ -1984,12 +1984,12 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
                 s32 palette = D_802AD614;
 
                 if (D_802AD678[i] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
-                    palette = 0x37;
+                    palette = MSG_PAL_37;
                 }
                 if (D_802AD690[i] == 0) {
-                    palette = 0xB;
+                    palette = MSG_PAL_0B;
                 }
-                draw_msg(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, 1);
+                draw_msg(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
             }
 
             xTemp = x + 24;
@@ -2037,7 +2037,7 @@ INCLUDE_ASM(s32, "415D90", func_802A5290);
 #endif
 
 void func_802A56F8(s32 arg0, s32 x, s32 y) {
-    draw_msg(0x1D0043, x + 15, y + 2, D_802AD624, 0x33, 1);
+    draw_msg(0x1D0043, x + 15, y + 2, D_802AD624, MSG_PAL_33, DRAW_MSG_STYLE_MENU);
 }
 
 void func_802A5738(s32 arg0, s32 x, s32 y) {
@@ -2072,7 +2072,7 @@ void func_802A57C8(s32 arg0, s32 x, s32 y) {
         a0 = 0x1D0000;
         a0 |= 0xCC;
     }
-    draw_msg(a0, x2, y2, 255, 15, 0);
+    draw_msg(a0, x2, y2, 255, MSG_PAL_0F, 0);
 }
 #else
 INCLUDE_ASM(s32, "415D90", func_802A57C8);
@@ -4376,9 +4376,9 @@ void btl_state_draw_select_target(void) {
         if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, 0x36, 0);
+                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else if (actorID == ACTOR_PARTNER) {
-                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, 0x36, 0);
+                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                 anotherActor = get_actor(target->actorID);
@@ -4386,17 +4386,17 @@ void btl_state_draw_select_target(void) {
                 if (msgID == 0) {
                     msgID = bActorNames[anotherActor->actorType];
                 }
-                draw_msg(msgID, screenX + *tmpPtr, screenY, 255, 0x36, 0); // TODO required to match
+                draw_msg(msgID, screenX + *tmpPtr, screenY, 255, MSG_PAL_36, 0); // TODO required to match
             }
         } else {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, 0x36, 0);
+                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else if (actorID == ACTOR_PARTNER) {
-                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, 0x36, 0);
+                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else {
-                draw_msg(0x1D00C5, screenX + D_802ACC68, screenY, 255, 0x36, 0);
+                draw_msg(0x1D00C5, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             }
         }
     }

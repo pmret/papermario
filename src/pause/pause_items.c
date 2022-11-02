@@ -125,8 +125,8 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     s32 selectedPosX, selectedPosY;
     s32 cursorOffsetX, cursorOffsetY;
 
-    style = 1;
-    palette = 10;
+    style = DRAW_MSG_STYLE_MENU;
+    palette = MSG_PAL_STANDARD;
     currentItemColumn = gPauseItemsSelectedIndex / gPauseItemsPages[gPauseItemsCurrentPage].numCols;
     currentItemRow = gPauseItemsSelectedIndex % gPauseItemsPages[gPauseItemsCurrentPage].numCols;
     draw_box(DRAW_FLAGS_CLIP, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
@@ -198,11 +198,11 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                 }
 
                 if (i == 0) {
-                    style = 1;
-                    palette = 10;
+                    style = DRAW_MSG_STYLE_MENU;
+                    palette = MSG_PAL_STANDARD;
 
                     if (isSelected) {
-                        style = 9;
+                        style = DRAW_MSG_STYLE_MENU | DRAW_MSG_STYLE_DROP_SHADOW;
                     }
                 }
 
@@ -306,7 +306,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseItemsCurrentTab == 1) {
         opacity1 = 191;
     }
-    draw_msg(msg, msgX, msgY, opacity1, 0, 1);
+    draw_msg(msg, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 
     draw_box(DRAW_FLAGS_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
          91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
@@ -322,7 +322,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseItemsCurrentTab == 0) {
         opacity1 = 191;
     }
-    draw_msg(msg, msgX, msgY, opacity1, 0, 1);
+    draw_msg(msg, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 
     if (gPauseMenuCurrentTab == 3) {
          if (gPauseItemsLevel == 0) {

@@ -416,7 +416,7 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         msgWidth += 4;
     }
 
-    draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, 0, 0);
+    draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
 
     if (level == 1) {
         hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
@@ -453,7 +453,7 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             continue;
         }
 
-        style = 1;
+        style = DRAW_NUMBER_CHARSET_THIN;
 
         if (i == 0) {
             moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].nameMsg;
@@ -467,14 +467,14 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             costFP = 0;
         }
 
-        draw_msg(moveNameID, msgX, msgY, 255, 10, style);
+        draw_msg(moveNameID, msgX, msgY, 255, MSG_PAL_STANDARD, style);
         hud_element_set_scale(gPausePartnersIconIDs[i + 4], 0.5f);
         //TODO find better match
         hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
-            draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, 10, 255, 3);
+            draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             if (costFP > 0) {
                 hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
                 hud_element_draw_without_clipping(gPausePartnersIconIDs[0]);
@@ -488,7 +488,7 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 }
 
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 255, -1, 1);
+    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
 }
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {

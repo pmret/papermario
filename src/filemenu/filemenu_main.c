@@ -419,8 +419,8 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + 0x22, baseY + 10, 0xFF, 0xA, 1);
     temp_s3_2 = save->level;
     temp_s3 = temp_s3_2;
-    draw_number(temp_s3 / 10, baseX + 79, baseY + 10, 1, 0xA, 0xFF, 2);
-    draw_number(temp_s3 % 10, baseX + 88, baseY + 10, 1, 0xA, 0xFF, 2);
+    draw_number(temp_s3 / 10, baseX + 79, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 % 10, baseX + 88, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + 11, baseY + 24, 0xFF, 0xA, 1);
 
     temp_s3_2 = save->timePlayed;
@@ -428,14 +428,14 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         temp_s3_2 = MAX_DISPLAYED_TIME;
     }
 
-    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24, 1, 0xA, 0xFF, 2);
+    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     temp_s1_2 = temp_s3_2 / 216000;
-    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24, 1, 0xA, 0xFF, 2);
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 0xFF, 0xA, 1);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 0xFF, 0xA, 1);
     temp_s0_3 = temp_s3_2 / 36000;
-    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24, 1, 0xA, 0xFF, 2);
-    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24, 1, 0xA, 0xFF, 2);
+    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
 
     for (i = 0; i < 7; i++) {
         if (i < gSaveSlotMetadata[fileIdx].spiritsRescued) {
@@ -466,9 +466,9 @@ void filemenu_draw_contents_file_title(
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 5, baseY + 1, 255, 0, 1);
 
     if (!gSaveSlotHasData[fileIdx]) {
-        draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
+        draw_number(fileIdx + 1, baseX + 33, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     } else {
-        draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
+        draw_number(fileIdx + 1, baseX + 33, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
         filemenu_draw_file_name(
             gSaveSlotMetadata[fileIdx].filename,
             ARRAY_COUNT(gSaveSlotMetadata[fileIdx].filename),

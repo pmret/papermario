@@ -76,7 +76,7 @@ void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
 f32 func_800E5348(void);
 
-void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, s32 style);
+void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, u16 style);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
@@ -96,8 +96,7 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
 void render_frame(s32 flag);
 void clear_windows(void);
 void update_window_hierarchy(s32 windowIndex, u8 arg1);
-void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
-                        s32* maxLinesPerPage, s32* arg6, s32 charset);
+void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines, s32* maxLinesPerPage, s32* arg6, u16 charset);
 void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
 void decode_yay0(void* src, void* dst);
 

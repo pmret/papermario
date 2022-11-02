@@ -471,7 +471,7 @@ void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
-    draw_msg(msgID, baseX + 10, baseY - gPauseDescTextOffset, 255, 10, 0);
+    draw_msg(msgID, baseX + 10, baseY - gPauseDescTextOffset, 255, MSG_PAL_STANDARD, 0);
     if (gPauseShownDescIconScript != 0) {
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         hud_element_set_render_pos(gPauseCommonIconIDs[3], baseX - 4, baseY + 16);
@@ -551,13 +551,13 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 
     get_msg_properties(pause_get_menu_msg(1), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
     margin = (s32)(width - msgWidth) >> 1;
-    draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 255, 0, 1);
+    draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 255, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
     gPauseTutorialScrollPos += pause_interp_text_scroll(gPauseTutorialState * 140 - gPauseTutorialScrollPos);
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
     state = gPauseTutorialState;
     get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[state]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, NULL, 1);
     margin2 = (s32)(width - msgWidth2) >> 1;
-    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, 10, 1);
+    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, MSG_PAL_STANDARD, DRAW_MSG_STYLE_MENU);
     hud_element_set_render_pos(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
     hud_element_set_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], HUD_ELEMENT_FLAGS_FILTER_TEX);
     hud_element_set_scale(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0.5f);
@@ -568,7 +568,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         hud_element_draw_without_clipping(gPauseCommonIconIDs[7]);
     }
 
-    draw_msg(pause_get_menu_msg(gPauseTutorialCmdMessages[gPauseTutorialState]), baseX + width / 2 + 10, baseY + 44, 255, 10, 0);
+    draw_msg(pause_get_menu_msg(gPauseTutorialCmdMessages[gPauseTutorialState]), baseX + width / 2 + 10, baseY + 44, 255, MSG_PAL_STANDARD, 0);
 }
 
 void pause_init(void) {
