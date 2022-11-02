@@ -1,13 +1,24 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000898_40C438[];
+extern Gfx D_09000980_40C520[];
+extern Gfx D_09000998_40C538[];
+extern Gfx D_090009B0_40C550[];
+extern Gfx D_090009C8_40C568[];
+extern Gfx D_090009E0_40C580[];
+
+Gfx* D_E0120780[] = {
+    D_09000980_40C520, D_09000998_40C538, D_090009B0_40C550,
+    D_090009C8_40C568, D_090009E0_40C580
+};
+
+Gfx* D_E0120794[] = { D_09000898_40C438 };
+
 void sun_init(EffectInstance* effect);
 void sun_update(EffectInstance* effect);
 void sun_render(EffectInstance* effect);
 void sun_appendGfx(void* effect);
-
-Gfx* D_E0120780[] = { (Gfx*) 0x09000980, (Gfx*) 0x09000998, (Gfx*) 0x090009B0, (Gfx*) 0x090009C8, (Gfx*) 0x090009E0 };
-Gfx* D_E0120794[] = { (Gfx*) 0x09000898 };
 
 EffectInstance* sun_main(s32 shineFromRight, f32 offsetX, f32 offsetY, f32 offsetZ, f32 arg4, s32 duration) {
     EffectBlueprint bp;

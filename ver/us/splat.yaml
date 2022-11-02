@@ -3287,8 +3287,23 @@ segments:
     vram: 0xE0034000
     subsegments:
     - [0x344A10, c, lens_flare]
-    - [0x345190, data]
-  - [0x3451E0, bin] # lens_flare gfx
+    - [0x345190]
+  - name: effect_gfx_lens_flare
+    dir: effects/gfx
+    type: code
+    start: 0x3451E0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3451E0, c, lens_flare]
+    - start: 0x3451E0
+      type: .data
+      name: lens_flare
+      subsegments:
+      - [0x3451E0, i4, D_09000000_3451E0, 32, 32]
+      - [0x3453E0, vtx, D_09000200_3453E0]
+      - [0x345420, gfx, D_09000240_345420]
+      - [0x3454C0, gfx, D_090002E0_3454C0]
   - name: effect_got_item_outline
     dir: effects
     type: code
@@ -3618,7 +3633,26 @@ segments:
     subsegments:
     - [0x35BFD0, c, sweat]
     - [0x35C530]
-  - [0x35C550, bin] # sweat gfx
+  - name: effect_gfx_sweat
+    dir: effects/gfx
+    type: code
+    start: 0x35C550
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x35C550, c, sweat]
+    - start: 0x35C550
+      type: .data
+      name: sweat
+      subsegments:
+      - [0x35C550, i4, D_09000000_35C550, 16, 16]
+      - [0x35C5D0, i4, D_09000080_35C5D0, 32, 16]
+      - [0x35C6D0, vtx, D_09000180_35C6D0]
+      - [0x35C710, vtx, D_090001C0_35C710]
+      - [0x35C750, gfx, D_09000200_35C750]
+      - [0x35C818, gfx, D_090002C8_35C818]
+      - [0x35C8E0, gfx, D_09000390_35C8E0]
+      - [0x35C9B0, gfx, D_09000460_35C9B0]
   - name: effect_sleep_bubble
     dir: effects
     type: code
@@ -3687,7 +3721,22 @@ segments:
     subsegments:
     - [0x3602C0, c, stars_spread]
     - [0x360A10]
-  - [0x360A30, bin] # stars_spread gfx
+  - name: effect_gfx_stars_spread
+    dir: effects/gfx
+    type: code
+    start: 0x360A30
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x360A30, c, stars_spread]
+    - start: 0x360A30
+      type: .data
+      name: stars_spread
+      subsegments:
+      - [0x360A30, i4, D_09000000_360A30, 32, 64]
+      - [0x360E30, vtx, D_09000400_360E30]
+      - [0x360E70, gfx, D_09000440_360E70]
+      - [0x360F20, gfx, D_090004F0_360F20]
   - name: effect_steam_burst
     dir: effects
     type: code
@@ -3695,8 +3744,23 @@ segments:
     vram: 0xE005C000
     subsegments:
     - [0x360F40, c, steam_burst]
-    - [0x361640, data]
-  - [0x361670, bin] # steam_burst gfx
+    - [0x361640]
+  - name: effect_gfx_steam_burst
+    dir: effects/gfx
+    type: code
+    start: 0x361670
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x361670, c, steam_burst]
+    - start: 0x361670
+      type: .data
+      name: steam_burst
+      subsegments:
+      - [0x361670, i4, D_09000000_361670, 224, 32]
+      - [0x362470, gfx, D_09000E00_362470]
+      - [0x362560, vtx, D_09000EF0_362560]
+      - [0x3625A0, gfx, D_09000F30_3625A0]
   - name: effect_stars_orbiting
     dir: effects
     type: code
@@ -4002,7 +4066,7 @@ segments:
     vram: 0xE0074000
     subsegments:
     - [0x376460, c, shimmer_wave]
-    - [0x376FC0, data]
+    - [0x376FC0]
   - name: effect_aura
     dir: effects
     type: code
@@ -5043,8 +5107,126 @@ segments:
     vram: 0xE00C0000
     subsegments:
     - [0x3BCD60, c, snowman_doll]
-    - [0x3BD770, data]
-  - [0x3BD9A0, bin] # snowman_doll gfx
+    - [0x3BD770]
+  - name: effect_gfx_snowman_doll
+    dir: effects/gfx
+    type: code
+    start: 0x3BD9A0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3BD9A0, c, snowman_doll]
+    - start: 0x3BD9A0
+      type: .data
+      name: snowman_doll
+      subsegments:
+      - [0x3BD9A0, ia8, D_09000000_3BD9A0, 32, 64]
+      - [0x3BE1A0, gfx, D_09000800_3BE1A0]
+      - [0x3BE218, ci4, D_09000878_3BE218, 32, 32]
+      - [0x3BE418, palette, D_09000878_3BE218]
+      - [0x3BE438, gfx, D_09000A98_3BE438]
+      - [0x3BE4E0, vtx, D_09000B40_3BE4E0]
+      - [0x3BE560, vtx, D_09000BC0_3BE560]
+      - [0x3BE590, vtx, D_09000BF0_3BE590]
+      - [0x3BE600, vtx, D_09000C60_3BE600]
+      - [0x3BE630, vtx, D_09000C90_3BE630]
+      - [0x3BE650, vtx, D_09000CB0_3BE650]
+      - [0x3BE660, vtx, D_09000CC0_3BE660]
+      - [0x3BE680, vtx, D_09000CE0_3BE680]
+      - [0x3BE6A0, vtx, D_09000D00_3BE6A0]
+      - [0x3BE6B0, vtx, D_09000D10_3BE6B0]
+      - [0x3BE6C0, vtx, D_09000D20_3BE6C0]
+      - [0x3BE700, vtx, D_09000D60_3BE700]
+      - [0x3BE740, vtx, D_09000DA0_3BE740]
+      - [0x3BE780, vtx, D_09000DE0_3BE780]
+      - [0x3BE7C0, vtx, D_09000E20_3BE7C0]
+      - [0x3BE810, vtx, D_09000E70_3BE810]
+      - [0x3BE8F0, vtx, D_09000F50_3BE8F0]
+      - [0x3BE960, vtx, D_09000FC0_3BE960]
+      - [0x3BE9B0, vtx, D_09001010_3BE9B0]
+      - [0x3BEAA0, vtx, D_09001100_3BEAA0]
+      - [0x3BEAE0, vtx, D_09001140_3BEAE0]
+      - [0x3BEC10, vtx, D_09001270_3BEC10]
+      - [0x3BED30, vtx, D_09001390_3BED30]
+      - [0x3BED60, vtx, D_090013C0_3BED60]
+      - [0x3BED80, vtx, D_090013E0_3BED80]
+      - [0x3BEDB0, vtx, D_09001410_3BEDB0]
+      - [0x3BEDD0, vtx, D_09001430_3BEDD0]
+      - [0x3BEE10, vtx, D_09001470_3BEE10]
+      - [0x3BEE30, vtx, D_09001490_3BEE30]
+      - [0x3BEE60, vtx, D_090014C0_3BEE60]
+      - [0x3BEE90, vtx, D_090014F0_3BEE90]
+      - [0x3BEED0, vtx, D_09001530_3BEED0]
+      - [0x3BEEE0, vtx, D_09001540_3BEEE0]
+      - [0x3BEEF0, vtx, D_09001550_3BEEF0]
+      - [0x3BEF00, vtx, D_09001560_3BEF00]
+      - [0x3BEF70, vtx, D_090015D0_3BEF70]
+      - [0x3BEF80, vtx, D_090015E0_3BEF80]
+      - [0x3BF010, vtx, D_09001670_3BF010]
+      - [0x3BF0C0, vtx, D_09001720_3BF0C0]
+      - [0x3BF0D0, vtx, D_09001730_3BF0D0]
+      - [0x3BF110, vtx, D_09001770_3BF110]
+      - [0x3BF140, vtx, D_090017A0_3BF140]
+      - [0x3BF150, vtx, D_090017B0_3BF150]
+      - [0x3BF170, vtx, D_090017D0_3BF170]
+      - [0x3BF1B0, vtx, D_09001810_3BF1B0]
+      - [0x3BF260, vtx, D_090018C0_3BF260]
+      - [0x3BF2B0, vtx, D_09001910_3BF2B0]
+      - [0x3BF370, vtx, D_090019D0_3BF370]
+      - [0x3BF470, vtx, D_09001AD0_3BF470]
+      - [0x3BF4C0, vtx, D_09001B20_3BF4C0]
+      - [0x3BF4E0, vtx, D_09001B40_3BF4E0]
+      - [0x3BF4F0, vtx, D_09001B50_3BF4F0]
+      - [0x3BF510, vtx, D_09001B70_3BF510]
+      - [0x3BF520, vtx, D_09001B80_3BF520]
+      - [0x3BF530, vtx, D_09001B90_3BF530]
+      - [0x3BF540, vtx, D_09001BA0_3BF540]
+      - [0x3BF550, vtx, D_09001BB0_3BF550]
+      - [0x3BF570, vtx, D_09001BD0_3BF570]
+      - [0x3BF590, vtx, D_09001BF0_3BF590]
+      - [0x3BF5D0, vtx, D_09001C30_3BF5D0]
+      - [0x3BF5F0, vtx, D_09001C50_3BF5F0]
+      - [0x3BF690, vtx, D_09001CF0_3BF690]
+      - [0x3BF6F0, vtx, D_09001D50_3BF6F0]
+      - [0x3BF760, vtx, D_09001DC0_3BF760]
+      - [0x3BF7A0, vtx, D_09001E00_3BF7A0]
+      - [0x3BF7D0, vtx, D_09001E30_3BF7D0]
+      - [0x3BF830, vtx, D_09001E90_3BF830]
+      - [0x3BF870, vtx, D_09001ED0_3BF870]
+      - [0x3BF8D0, vtx, D_09001F30_3BF8D0]
+      - [0x3BF900, vtx, D_09001F60_3BF900]
+      - [0x3BF940, vtx, D_09001FA0_3BF940]
+      - [0x3BF980, vtx, D_09001FE0_3BF980]
+      - [0x3BFAB0, vtx, D_09002110_3BFAB0]
+      - [0x3BFAD0, vtx, D_09002130_3BFAD0]
+      - [0x3BFB00, vtx, D_09002160_3BFB00]
+      - [0x3BFB30, vtx, D_09002190_3BFB30]
+      - [0x3BFB50, vtx, D_090021B0_3BFB50]
+      - [0x3BFCE0, vtx, D_09002340_3BFCE0]
+      - [0x3BFDE0, vtx, D_09002440_3BFDE0]
+      - [0x3BFDF0, vtx, D_09002450_3BFDF0]
+      - [0x3BFE20, vtx, D_09002480_3BFE20]
+      - [0x3BFF30, vtx, D_09002590_3BFF30]
+      - [0x3BFF90, vtx, D_090025F0_3BFF90]
+      - [0x3BFFF0, vtx, D_09002650_3BFFF0]
+      - [0x3C0000, vtx, D_09002660_3C0000]
+      - [0x3C0030, vtx, D_09002690_3C0030]
+      - [0x3C0140, vtx, D_090027A0_3C0140]
+      - [0x3C01A0, vtx, D_09002800_3C01A0]
+      - [0x3C0200, gfx, D_09002860_3C0200]
+      - [0x3C0340, gfx, D_090029A0_3C0340]
+      - [0x3C0480, gfx, D_09002AE0_3C0480]
+      - [0x3C0508, gfx, D_09002B68_3C0508]
+      - [0x3C0688, gfx, D_09002CE8_3C0688]
+      - [0x3C0AE8, gfx, D_09003148_3C0AE8]
+      - [0x3C0D38, gfx, D_09003398_3C0D38]
+      - [0x3C0EB0, gfx, D_09003510_3C0EB0]
+      - [0x3C10D0, gfx, D_09003730_3C10D0]
+      - [0x3C1118, gfx, D_09003778_3C1118]
+      - [0x3C1130, gfx, D_09003790_3C1130]
+      - [0x3C1140] # padding
+      - [0x3C1148, gfx, D_090037A8_3C1148]
+      - [0x3C11B8, gfx, D_09003818_3C11B8]
   - name: effect_fright_jar
     dir: effects
     type: code
@@ -5359,8 +5541,28 @@ segments:
     vram: 0xE00DC000
     subsegments:
     - [0x3D7A70, c, huff_puff_breath]
-    - [0x3D80B0, data]
-  - [0x3D80C0, bin] # huff_puff_breath gfx
+    - [0x3D80B0]
+  - name: effect_gfx_huff_puff_breath
+    dir: effects/gfx
+    type: code
+    start: 0x3D80C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3D80C0, c, huff_puff_breath]
+    - start: 0x3D80C0
+      type: .data
+      name: huff_puff_breath
+      subsegments:
+      - [0x3D80C0, i8, D_09000000_3D80C0, 32, 16]
+      - [0x3D82C0, i8, D_09000200_3D82C0, 32, 16]
+      - [0x3D84C0, gfx, D_09000400_3D84C0]
+      - [0x3D85A8, vtx, D_090004E8_3D85A8]
+      - [0x3D85E8, vtx, D_09000528_3D85E8]
+      - [0x3D8608, vtx, D_09000548_3D8608]
+      - [0x3D8628, vtx, D_09000568_3D8628]
+      - [0x3D86A8, gfx, D_090005E8_3D86A8]
+      - [0x3D86E8, gfx, D_09000628_3D86E8]
   - name: effect_cold_breath
     dir: effects
     type: code
@@ -5427,8 +5629,23 @@ segments:
     vram: 0xE00E2000
     subsegments:
     - [0x3DC310, c, hieroglyphs]
-    - [0x3DCD00, data]
-  - [0x3DCD50, bin] # hieroglyphs gfx
+    - [0x3DCD00]
+  - name: effect_gfx_hieroglyphs
+    dir: effects/gfx
+    type: code
+    start: 0x3DCD50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3DCD50, c, hieroglyphs]
+    - start: 0x3DCD50
+      type: .data
+      name: hieroglyphs
+      subsegments:
+      - [0x3DCD50, i8, D_09000000_3DCD50, 128, 32]
+      - [0x3DDD50, gfx, D_09001000_3DDD50]
+      - [0x3DDDF8, vtx, D_090010A8_3DDDF8]
+      - [0x3DDFF8]
   - name: effect_misc_particles
     dir: effects
     type: code
@@ -5716,8 +5933,25 @@ segments:
     vram: 0xE0110000
     subsegments:
     - [0x3F83F0, c, ice_shard]
-    - [0x3F8CA0, data]
-  - [0x3F8CC0, bin] # ice_shard gfx
+    - [0x3F8CA0]
+  - name: effect_gfx_ice_shard
+    dir: effects/gfx
+    type: code
+    start: 0x3F8CC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3F8CC0, c, ice_shard]
+    - start: 0x3F8CC0
+      type: .data
+      name: ice_shard
+      subsegments:
+      - [0x3F8CC0, i4, D_09000000_3F8CC0, 64, 128]
+      - [0x3F9CC0, gfx, D_09001000_3F9CC0]
+      - [0x3F9D78, vtx, D_090010B8_3F9D78]
+      - [0x3F9DB8, vtx, D_090010F8_3F9DB8]
+      - [0x3F9E08, gfx, D_09001148_3F9E08]
+      - [0x3F9E28, gfx, D_09001168_3F9E28]
   - name: effect_spirit_card
     dir: effects
     type: code
@@ -6024,8 +6258,41 @@ segments:
     vram: 0xE011C000
     subsegments:
     - [0x406B40, c, quizmo_assistant]
-    - [0x407040, data]
-  - [0x407080, bin] # quizmo_assistant gfx
+    - [0x407040]
+  - name: effect_gfx_quizmo_assistant
+    dir: effects/gfx
+    type: code
+    start: 0x407080
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x407080, c, quizmo_assistant]
+    - start: 0x407080
+      type: .data
+      name: quizmo_assistant
+      subsegments:
+      - [0x407080, ci4, D_09000000_407080, 64, 64]
+      - [0x407880, palette, D_09000000_407080]
+      - [0x4078A0] # padding
+      - [0x407A80, ci4, D_09000A00_407A80, 64, 32]
+      - [0x407E80, palette, D_09000A00_407A80]
+      - [0x407EA0] # padding
+      - [0x408080, ci4, D_09001000_408080, 64, 64]
+      - [0x408880, palette, D_09001000_408080]
+      - [0x4088A0] # padding
+      - [0x408A80, ci4, D_09001A00_408A80, 64, 64]
+      - [0x409280, palette, D_09001A00_408A80]
+      - [0x4092A0] # padding
+      - [0x409480, gfx, D_09002400_409480]
+      - [0x4094E8, vtx, D_09002468_4094E8]
+      - [0x409528, vtx, D_090024A8_409528]
+      - [0x409568, vtx, D_090024E8_409568]
+      - [0x4095A8, gfx, D_09002528_4095A8]
+      - [0x409638, gfx, D_090025B8_409638]
+      - [0x4096C8, gfx, D_09002648_4096C8]
+      - [0x409758, gfx, D_090026D8_409758]
+      - [0x409870, gfx, D_090027F0_409870]
+      - [0x409988]
   - name: effect_ice_pillar
     dir: effects
     type: code
@@ -6043,7 +6310,40 @@ segments:
     subsegments:
     - [0x40B3F0, c, sun]
     - [0x40BB70]
-  - [0x40BBA0, bin] # sun gfx
+  - name: effect_gfx_sun
+    dir: effects/gfx
+    type: code
+    start: 0x40BBA0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40BBA0, c, sun]
+    - start: 0x40BBA0
+      type: .data
+      name: sun
+      subsegments:
+      - [0x40BBA0, i4, D_09000000_40BBA0, 16, 64]
+      - [0x40BDA0, i4, D_09000200_40BDA0, 256, 8]
+      - [0x40C1A0, vtx, D_09000600_40C1A0]
+      - [0x40C220, vtx, D_09000680_40C220]
+      - [0x40C260, vtx, D_090006C0_40C260]
+      - [0x40C2A0, vtx, D_09000700_40C2A0]
+      - [0x40C320, vtx, D_09000780_40C320]
+      - [0x40C360, gfx, D_090007C0_40C360]
+      - [0x40C388, gfx, D_090007E8_40C388]
+      - [0x40C3A8, gfx, D_09000808_40C3A8]
+      - [0x40C3C8, gfx, D_09000828_40C3C8]
+      - [0x40C3F0, gfx, D_09000850_40C3F0]
+      - [0x40C410, gfx, D_09000870_40C410]
+      - [0x40C420, gfx, D_09000880_40C420]
+      - [0x40C430] # padding
+      - [0x40C438, gfx, D_09000898_40C438]
+      - [0x40C520, gfx, D_09000980_40C520]
+      - [0x40C538, gfx, D_09000998_40C538]
+      - [0x40C550, gfx, D_090009B0_40C550]
+      - [0x40C568, gfx, D_090009C8_40C568]
+      - [0x40C580, gfx, D_090009E0_40C580]
+      - [0x40C598]
   - name: effect_star_spirits_energy
     dir: effects
     type: code
@@ -6105,8 +6405,25 @@ segments:
     vram: 0xE0126000
     subsegments:
     - [0x413360, c, star_outline]
-    - [0x413F20, data]
-  - [0x413FA0, bin] # star_outline gfx
+    - [0x413F20]
+  - name: effect_gfx_star_outline
+    dir: effects/gfx
+    type: code
+    start: 0x413FA0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x413FA0, c, star_outline]
+    - start: 0x413FA0
+      type: .data
+      name: star_outline
+      subsegments:
+      - [0x413FA0, i4, D_09000000_413FA0, 64, 64]
+      - [0x4147A0, gfx, D_09000800_4147A0]
+      - [0x414840, vtx, D_090008A0_414840]
+      - [0x414980, vtx, D_090009E0_414980]
+      - [0x414AC0, gfx, D_09000B20_414AC0]
+      - [0x414B30, gfx, D_09000B90_414B30]
   - name: effect_effect_86
     dir: effects
     type: code
