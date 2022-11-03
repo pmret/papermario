@@ -13,7 +13,21 @@ typedef struct D_E00D8818_Entry {
     u8 unk_03;
 } D_E00D8818_Entry; // size = 0x4
 
-s32 D_E00D87E0[] = { 0x00000000, 0x00000000, 0x00000000, 0x09000000, 0x31100810, 0x08100810, 0x08000000, 0x00000000, 0xFC317FFF, 0x5FFEF438, 0xFC3135FF, 0x5FFEFE38, 0x3D4ABCFF, 0x00191CFF };
+WindowStyleCustom D_E00D87E0 = {
+    .background = {0},
+    .corners = {
+        .imgData = 0x09000000, // TODO change to sym when the graphics for this is done
+        .packedTileFormat = 0x31,
+        .size1 = {0x10, 0x08},
+        .size2 = {0x10, 0x08},
+        .size3 = {0x10, 0x08},
+        .size4 = {0x10, 0x08},
+    },
+    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .color1 = { 0x3D, 0x4A, 0xBC, 0xFF },
+    .color2 = { 0x00, 0x19, 0x1C, 0xFF},
+};
 
 D_E00D8818_Entry D_E00D8818[] = {
     { .unk_00 = 0xFF38, .unk_02 = 0xFF, .unk_03 = 0xFF },
@@ -71,12 +85,12 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
     part->pos.x = x;
     part->pos.y = y;
     part->pos.z = z;
-    part->unk_1C = 0;
+    part->scale = 0.0f;
     part->unk_18 = arg4;
-    part->unk_28 = 0.0f;
-    part->unk_2C = part->unk_30 = part->unk_28;
-    part->unk_20 = 0;
-    part->unk_24 = 0;
+    part->rot.x = 0.0f;
+    part->rot.y = 0.0f;
+    part->rot.z = 0.0f;
+    part->unk_2C = part->unk_30 = part->rot.z;
     part->unk_34 = 0xFF;
     part->unk_35 = 0xFF;
 
@@ -108,18 +122,18 @@ void tattle_window_update(EffectInstance* effect) {
         return;
     }
     unk_10_2 = unk_10;
-    part->unk_28 = 0;
+    part->rot.z = 0;
     part->unk_2C = 0;
-    part->unk_1C = part->unk_18;
+    part->scale = part->unk_18;
     if (old_unk_14 < 23) {
         part->unk_30 = D_E00D8818[old_unk_14].unk_00;
         part->unk_34 = D_E00D8818[old_unk_14].unk_02;
         part->unk_35 = D_E00D8818[old_unk_14].unk_03;
     } else {
-        part->unk_30 = D_E00D8818[0x16].unk_00;
-        part->unk_34 = D_E00D8818[0x16].unk_02;
-        part->unk_35 = D_E00D8818[0x16].unk_03;
-        part->unk_14 = 0x18;
+        part->unk_30 = D_E00D8818[22].unk_00;
+        part->unk_34 = D_E00D8818[22].unk_02;
+        part->unk_35 = D_E00D8818[22].unk_03;
+        part->unk_14 = 24;
     }
     if (unk_10_2 < 23) {
         part->unk_30 = D_E00D8818[unk_10_2].unk_00;
@@ -168,6 +182,60 @@ void func_E00D8288(s32 l, s32 r, s32 t, s32 b) {
     gDPFillRectangle(gMasterGfxPos++, l, r, t, b);
 }
 
-INCLUDE_ASM(s32, "effects/tattle_window", func_E00D8334);
+void func_E00D8334(TattleWindowFXData* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    f32 t1 = data->unk_34 / 255.0f;
+    f32 t2 = data->unk_35 / 255.0f;
+    s32 d1, d2;
+    s32 l, r, t, b;
 
-INCLUDE_ASM(s32, "effects/tattle_window", func_E00D8630);
+    if (data->unk_34 > 0 || data->unk_35 > 0) {
+        gDPPipeSync(gMasterGfxPos++);
+        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
+        gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 24, 48, 96, 255);
+        t = (arg1 + arg3) - 4;
+        b = (arg2 + arg4) - 4;
+        r = arg2 + 4;
+        l = arg1 + 4;
+        d1 = (t - l) / 2;
+        d2 = (b - r) / 2;
+        func_E00D8288(l, r, l + (d1 * t1), b);
+        func_E00D8288(t - (d1 * t1), r, t, b);
+        func_E00D8288(l, r, t, r + (d2 * t2));
+        func_E00D8288(l, b - (d2 * t2), t, b);
+    }
+}
+
+void func_E00D8630(EffectInstance* effect) {
+    TattleWindowFXData* data = effect->data.tattleWindow;
+    s32 flags;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    if (data->scale == 1.0f && data->rot.x == 0.0f && data->rot.y == 0.0f && data->rot.z == 0.0f) {
+        flags = 0;
+    } else {
+        flags = 1;
+    }
+
+    shim_draw_box(
+        flags, &D_E00D87E0,
+        (data->pos.x + data->unk_2C) - 75.0f,
+        (data->pos.y + data->unk_30) - 53.0f,
+        data->pos.z,
+        150, 107,
+        255, 0,
+        data->scale, data->scale,
+        data->rot.x, data->rot.y, data->rot.z,
+        (void (*)(void*)) func_E00D8334, data, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    gDPPipeSync(gMasterGfxPos++);
+}
