@@ -148,7 +148,7 @@ void waterfall_appendGfx(void* effect) {
 
     vtx = (Vtx_t*) savedGfxPos;
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < ARRAY_COUNT(data->unk_2C); i++) {
         vtx->ob[0] = i * 50 - 300;
         vtx->ob[1] = 600;
         vtx->ob[2] = 0;

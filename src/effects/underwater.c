@@ -45,8 +45,8 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     data->unk_21 = 220;
     data->unk_22 = 255;
 
-    for (i = 0; i < 19; i++) {
-        for (j = 0; j < 13; j++) {
+    for (i = 0; i < ARRAY_COUNT(data->unk_23); i++) {
+        for (j = 0; j < ARRAY_COUNT(data->unk_23[0]); j++) {
             data->unk_23[i][j] = 0;
             data->unk_11A[i][j] = 0;
         }
@@ -97,12 +97,12 @@ void underwater_update(EffectInstance* effect) {
     data->unk_1F = (f32) var_a0;
     factor = (f32) var_a0 / 255.0f;
 
-    for (i = 1; i < 18; i++) {
+    for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
         data->unk_23[i][6] = shim_sin_deg(-((unk_14 - i) * 20)) * -64.0f * factor;
     }
 
-    for (i = 1; i < 18; i++) {
-        for (j = 1; j < 12; j++) {
+    for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
+        for (j = 1; j < ARRAY_COUNT(data->unk_23[0]) - 1; j++) {
             f32 m11 = data->unk_23[i][j] * 4.0f;
             f32 m21 = data->unk_23[i + 1][j];
             f32 m01 = data->unk_23[i - 1][j];
@@ -124,8 +124,8 @@ void underwater_update(EffectInstance* effect) {
         }
     }
 
-    for (i = 1; i < 18; i++) {
-        for (j = 1; j < 12; j++) {
+    for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
+        for (j = 1; j < ARRAY_COUNT(data->unk_23[0]) - 1; j++) {
             data->unk_23[i][j] += data->unk_11A[i][j] * 0.02;
         }
     }
