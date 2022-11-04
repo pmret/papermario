@@ -7607,7 +7607,6 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x70BD10, c, lakilester]
-    - [0x710EC0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -7615,7 +7614,6 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x710EF0, c, bow]
-    - [0x7111F0, data]
   - name: battle_partner_twink
     dir: battle/partner
     type: code
