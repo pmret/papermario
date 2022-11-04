@@ -9,7 +9,7 @@ extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
-extern EvtScript N(80238488);
+extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
@@ -141,7 +141,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
             EVT_EXEC_WAIT(N(executeAction))
         EVT_CASE_EQ(PHASE_5)
-            EVT_EXEC_WAIT(N(80238488))
+            EVT_EXEC_WAIT(N(celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -151,7 +151,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-EvtScript N(80238488) = {
+EvtScript N(celebrate) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)

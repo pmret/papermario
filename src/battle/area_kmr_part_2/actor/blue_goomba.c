@@ -282,7 +282,7 @@ EvtScript N(handleEvent_80219D74) = {
     EVT_END
 };
 
-#include "common/anglestuff.inc.c"
+#include "common/CalculateRotationZ.inc.c"
 
 EvtScript N(takeTurn_8021A5A0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

@@ -756,7 +756,7 @@ EvtScript N(handleEvent_gloomba) = {
     EVT_END
 };
 
-#include "common/anglestuff.inc.c"
+#include "common/CalculateRotationZ.inc.c"
 
 EvtScript N(takeTurn_gloomba) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

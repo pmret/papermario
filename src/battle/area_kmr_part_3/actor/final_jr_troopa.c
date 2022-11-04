@@ -1047,7 +1047,7 @@ EvtScript N(8022F468) = {
     EVT_END
 };
 
-#include "common/anglestuff.inc.c"
+#include "common/CalculateRotationZ.inc.c"
 
 EvtScript N(80230034) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
