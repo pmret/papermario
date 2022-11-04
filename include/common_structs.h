@@ -2558,4 +2558,13 @@ typedef struct Rect {
     /* 0x0C */ s32 lry;
 } Rect; // size = 0x10
 
+typedef struct LavaPiranhaVine {
+    /* 0x000 */ Vec3f bonePos[9];
+    /* 0x06C */ f32 boneRot[9];
+    /* 0x090 */ s32 boneCount;
+    /* 0x094 */ f32 boneLength;
+    /* 0x098 */ Vec3f points[27];
+    /* 0x1DC */ s32 numPoints;
+} LavaPiranhaVine;
+
 #endif

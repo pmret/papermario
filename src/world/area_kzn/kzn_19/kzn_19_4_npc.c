@@ -18,16 +18,7 @@ enum {
     VINE_1_BASE  = 0x80204000,
     VINE_2_BASE  = 0x80207000,
     VINE_3_BASE  = 0x8020A000,
-}; //TODO shiftaility -- hard-coded addresses in gBackgroundImage
-
-typedef struct LavaPiranhaVine {
-    /* 0x000 */ Vec3f bonePos[9];
-    /* 0x06C */ f32 boneRot[9];
-    /* 0x090 */ s32 boneCount;
-    /* 0x094 */ f32 boneLength;
-    /* 0x098 */ Vec3f points[27];
-    /* 0x1DC */ s32 numPoints;
-} LavaPiranhaVine;
+}; // TODO shiftability -- hard-coded addresses in gBackgroundImage
 
 #include "./kzn_19_anim1.c"
 #include "./kzn_19_anim2.c"
