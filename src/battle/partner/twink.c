@@ -112,7 +112,7 @@ EvtScript N(init) = {
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, 1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, N(defenseTable))
+    EVT_CALL(SetActorVar, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 9)
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 0, 0, 0, 0, 0)
     EVT_RETURN
