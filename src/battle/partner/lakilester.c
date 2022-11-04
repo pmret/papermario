@@ -207,7 +207,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_Hurt)
             EVT_EXEC_WAIT(D_802976E8)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -221,27 +221,27 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar2, 20)
             EVT_EXEC_WAIT(DoPartnerSpikeContact)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_BurnHurt)
             EVT_SET(LVar2, 20)
             EVT_SET_CONST(LVar3,  ANIM_BattleLakilester_BurnStill)
             EVT_EXEC_WAIT(DoPartnerBurnContact)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_BurnHurt)
             EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_BurnStill)
-            EVT_EXEC_WAIT(D_8029621C)
+            EVT_EXEC_WAIT(DoPartnerBurn)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
             EVT_SET(LVar2, 20)
             EVT_EXEC_WAIT(D_80295744)
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Walk)
@@ -874,7 +874,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_SET(LVarF, -1)
     EVT_END_IF
@@ -920,7 +920,7 @@ EvtScript N(spinyFlip) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268500992, 0, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, HIT_RESULT_QUAKE_IMMUNE)
     EVT_END_SWITCH
@@ -1057,7 +1057,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(12)
     EVT_END_IF
@@ -1065,9 +1065,9 @@ EvtScript N(spinySurge) = {
     EVT_CALL(N(GetSpinySurgeDamage))
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 805371904, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 805371904, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -1752,7 +1752,7 @@ EvtScript N(hurricane) = {
         EVT_END_THREAD
     EVT_ELSE
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PartnerDamageEnemy, LVar2, 268435456, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_800)
+            EVT_CALL(PartnerDamageEnemy, LVar2, DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_800)
         EVT_END_IF
     EVT_END_IF
     EVT_LABEL(11)

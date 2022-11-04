@@ -250,7 +250,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar2, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(D_802977BC)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -264,27 +264,27 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar2, 14)
             EVT_EXEC_WAIT(DoPartnerSpikeContact)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurt)
             EVT_SET(LVar2, 14)
             EVT_SET_CONST(LVar3, ANIM_BattleBow_BurnStill)
             EVT_EXEC_WAIT(DoPartnerBurnContact)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleBow_BurnStill)
-            EVT_EXEC_WAIT(D_8029621C)
+            EVT_EXEC_WAIT(DoPartnerBurn)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
             EVT_EXEC_WAIT(D_80295744)
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(D_80296014)
+            EVT_EXEC_WAIT(DoPartnerHit)
         EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Idle)
@@ -532,7 +532,7 @@ EvtScript N(smack) = {
     EVT_CALL(GetActionCommandResult, LVarB)
     EVT_CALL(func_80269600, LVarD)
     EVT_LABEL(0)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
         EVT_CALL(CloseActionCommandInfo)
@@ -585,16 +585,16 @@ EvtScript N(smack) = {
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, 3, SOUND_2019, 0)
     EVT_IF_EQ(LVarE, 1)
         EVT_IF_GT(LVarB, 99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_ELSE
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, BS_FLAGS1_10)
         EVT_END_IF
         EVT_GOTO(1)
     EVT_ELSE
         EVT_IF_GT(LVarB, 99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, BS_FLAGS1_40)
         EVT_ELSE
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, 0)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, 0)
         EVT_END_IF
         EVT_GOTO(1)
     EVT_END_IF
@@ -628,9 +628,9 @@ EvtScript N(smack) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, 5, 0, LVarC, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4, 0, LVarC, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_WAIT(8)
     EVT_SWITCH(LVar0)
@@ -926,16 +926,16 @@ EvtScript N(spook) = {
     EVT_CALL(GetActionResult, LVarF)
     EVT_LOOP(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, 20, 0, 2, BS_FLAGS1_10)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
         EVT_IF_EQ(LVar0, 6)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(func_80269EAC, 18)
         EVT_SWITCH(LVarF)
             EVT_CASE_GT(99)
-                EVT_CALL(PartnerAfflictEnemy, LVar0, 1879048192, 0, 4194304, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_CASE_DEFAULT
-                EVT_CALL(PartnerAfflictEnemy, LVar0, 1879048192, 0, 4194304, LVarF, 0, BS_FLAGS1_80 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_80 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_END_SWITCH
         EVT_LABEL(10)
         EVT_WAIT(5)
@@ -1044,7 +1044,7 @@ EvtScript N(fanSmack) = {
     EVT_CALL(GetActionCommandResult, LVarB)
     EVT_CALL(func_80269600, LVarD)
     EVT_LABEL(0)
-    EVT_CALL(PartnerTestEnemy, LVar0, 268435456, 149, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
         EVT_CALL(CloseActionCommandInfo)
@@ -1104,16 +1104,16 @@ EvtScript N(fanSmack) = {
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, 3, 8218, 0)
     EVT_IF_EQ(LVarE, 1)
         EVT_IF_GT(LVarB, 99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_10)
         EVT_ELSE
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, BS_FLAGS1_10)
         EVT_END_IF
         EVT_GOTO(1)
     EVT_ELSE
         EVT_IF_GT(LVarB, 99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, BS_FLAGS1_40)
         EVT_ELSE
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, 0)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, 0)
         EVT_END_IF
         EVT_GOTO(1)
     EVT_END_IF
@@ -1168,9 +1168,9 @@ EvtScript N(fanSmack) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 268435456, 149, 0, LVarC, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10 | ATTACK_EVENT_FLAG_80, 0, LVarC, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_THREAD
         EVT_IF_EQ(LVarE, 1)

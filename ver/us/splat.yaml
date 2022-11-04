@@ -7621,7 +7621,6 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x714CF0, c, twink]
-    - [0x714DC0, data]
 
 ####################
 ### Battle Items ###

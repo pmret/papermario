@@ -873,6 +873,7 @@ enum SoundIDs {
     SOUND_2A4                       = 0x000002A4,
     SOUND_2A6                       = 0x000002A6,
     SOUND_2A7                       = 0x000002A7,
+    SOUND_2AA                       = 0x000002AA,
     SOUND_UNUSED_2C1                = 0x000002C1,
     SOUND_2C4                       = 0x000002C4,
     SOUND_2C5                       = 0x000002C5,
@@ -1220,6 +1221,8 @@ enum SoundIDs {
     SOUND_207B                      = 0x0000207B,
     SOUND_207C                      = 0x0000207C,
     SOUND_207D                      = 0x0000207D,
+    SOUND_207E                      = 0x0000207E,
+    SOUND_207F                      = 0x0000207F,
     SOUND_JUMP_2081                 = 0x00002081,
     SOUND_JUMP_8BIT_MARIO           = 0x00002082,
     SOUND_2085                      = 0x00002085,
@@ -3283,6 +3286,7 @@ enum AttackEventFlags {
     ATTACK_EVENT_FLAG_8       = 0x8,
     ATTACK_EVENT_FLAG_10      = 0x10,
     ATTACK_EVENT_FLAG_80      = 0x80,
+    ATTACK_EVENT_FLAG_200     = 0x200,
 };
 
 enum PartnerActions {

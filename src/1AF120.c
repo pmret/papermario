@@ -123,7 +123,7 @@ EvtScript DoPartnerBurnContact = {
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
     EVT_SET(LVar1, LVarA)
     EVT_SET(LVar2, LVarC)
-    EVT_EXEC_WAIT(D_8029621C)
+    EVT_EXEC_WAIT(DoPartnerBurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CHILD_THREAD
         EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, LVarB, 0)
@@ -372,14 +372,14 @@ EvtScript DoPartnerRecover = {
     EVT_END
 };
 
-EvtScript D_80296014 = {
+EvtScript DoPartnerHit = {
     EVT_SET(LVarA, LVar1)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_IF_EQ(LVar1, 0)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(func_8026F1A0, 256, 1)
+    EVT_CALL(func_8026F1A0, ACTOR_PARTNER, 1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
@@ -398,7 +398,7 @@ EvtScript D_80296014 = {
     EVT_END
 };
 
-EvtScript D_8029621C = {
+EvtScript DoPartnerBurn = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LVar1)
     EVT_CHILD_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar5, LVar6, LVar7)
