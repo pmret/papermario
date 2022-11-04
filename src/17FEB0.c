@@ -364,7 +364,7 @@ s32 calc_item_damage_enemy(void) {
 
     }
 
-    temp = target->actorBlueprint->baseStatusChance;
+    temp = target->actorBlueprint->spookChance;
     temp = (battleStatus->statusChance * temp) / 100;
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) && (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR)) {

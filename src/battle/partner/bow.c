@@ -104,14 +104,13 @@ ApiStatus N(RestorePlayerIdleAnimations)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/// Averages the baseStatusChance of the hittable actors this partner is targeting.
-ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
+ApiStatus N(AverageSpookChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
     ActorBlueprint* targetActorBlueprint;
     ActorPart* targetActorPart;
-    s32 targetActorBlueprintBaseStatusChance;
+    s32 spookChance;
     s32 chanceTotal = 0;
     s32 nTargets = 0;
     s32 i;
@@ -120,18 +119,18 @@ ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprint = targetActor->actorBlueprint;
-        targetActorBlueprintBaseStatusChance = targetActorBlueprint->baseStatusChance;
+        spookChance = targetActorBlueprint->spookChance;
 
         if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
-            targetActorBlueprintBaseStatusChance = 0;
+            spookChance = 0;
         }
 
         if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-            targetActorBlueprintBaseStatusChance = 0;
+            spookChance = 0;
         }
 
-        if (targetActorBlueprintBaseStatusChance > 0) {
-            chanceTotal += targetActorBlueprintBaseStatusChance;
+        if (spookChance > 0) {
+            chanceTotal += spookChance;
             nTargets++;
         }
     }
@@ -213,8 +212,8 @@ ActorBlueprint NAMESPACE = {
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 4,
     .powerBounceChance = 80,
@@ -791,7 +790,7 @@ EvtScript N(spook) = {
         EVT_END_LOOP
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(N(AverageTargetStatusChance))
+    EVT_CALL(N(AverageSpookChance))
     EVT_CALL(action_command_spook_MashActionCommandInit, 0, 87, 3, LVar0)
     EVT_CALL(GetActionResult, LVar1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Conceal)

@@ -2311,8 +2311,8 @@ ActorBlueprint bPlayerActorBlueprint = {
 
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 4,
     .powerBounceChance = 80,

@@ -63,7 +63,7 @@ static s32 hudStickPosX;
 static s32 hudStickPosY;
 static s32 sSpinyFlipStarted;
 static s32 D_8023D2CC;
-static s32 sSpookStates[24];
+static s32 sTargetStates[24];
 static s32 sNumEnemiesBeingBlown;
 static s32 sIsHurricaneActive;
 static s32 D_8023D338;
@@ -170,8 +170,8 @@ ActorBlueprint NAMESPACE = {
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 4,
     .powerBounceChance = 80,
@@ -715,26 +715,26 @@ ApiStatus N(ApplyCloudNine)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(InitHurricane)(Evt* script, s32 isInitialCall) {
     Actor* partner = gBattleStatus.partnerActor;
-    s32 totalSpookChance;
-    s32 spookableTargets;
+    s32 totalChance;
+    s32 affectedTargets;
     s32 targetIdx;
     SelectableTarget* target;
     Actor* actor;
     ActorPart* part;
     s32 hpMissingPercent;
-    s32 spookChance;
-    s32 avgSpookChance;
+    s32 hurricaneChance;
+    s32 avgHurricaneChance;
     s32 i;
 
     sNumEnemiesBeingBlown = 0;
     sIsHurricaneActive = FALSE;
 
     for (i = 0; i < partner->targetListLength; i++) {
-        sSpookStates[i] = 0;
+        sTargetStates[i] = 0;
     }
 
-    totalSpookChance = 0;
-    spookableTargets = 0;
+    totalChance = 0;
+    affectedTargets = 0;
 
     for (i = 0; i < partner->targetListLength; i++) {
         targetIdx = partner->targetIndexList[i];
@@ -742,36 +742,36 @@ ApiStatus N(InitHurricane)(Evt* script, s32 isInitialCall) {
         actor = get_actor(target->actorID);
         part = get_actor_part(actor, target->partID);
         hpMissingPercent = 100 - ((actor->currentHP * 100) / actor->maxHP);
-        spookChance = actor->actorBlueprint->spookChance;
-        if (spookChance > 0) {
-            spookChance += spookChance * hpMissingPercent / 100;
-            if (spookChance > 100) {
-                spookChance = 100;
+        hurricaneChance = actor->actorBlueprint->hurricaneChance;
+        if (hurricaneChance > 0) {
+            hurricaneChance += hurricaneChance * hpMissingPercent / 100;
+            if (hurricaneChance > 100) {
+                hurricaneChance = 100;
             }
             if (actor->debuff != 0) {
-                spookChance = spookChance * 150 / 100;
-                if (spookChance > 150) {
-                    spookChance = 150;
+                hurricaneChance = hurricaneChance * 150 / 100;
+                if (hurricaneChance > 150) {
+                    hurricaneChance = 150;
                 }
             }
             if (actor->transparentStatus == STATUS_TRANSPARENT) {
-                spookChance = 0;
+                hurricaneChance = 0;
             }
             if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-                spookChance = 0;
+                hurricaneChance = 0;
             }
-            spookableTargets++;
+            affectedTargets++;
         }
-        sSpookStates[targetIdx] = spookChance;
-        totalSpookChance += spookChance;
+        sTargetStates[targetIdx] = hurricaneChance;
+        totalChance += hurricaneChance;
     }
 
-    if (spookableTargets != 0) {
-        avgSpookChance = totalSpookChance / spookableTargets;
+    if (affectedTargets != 0) {
+        avgHurricaneChance = totalChance / affectedTargets;
     } else {
-        avgSpookChance = 0;
+        avgHurricaneChance = 0;
     }
-    script->varTable[0] = avgSpookChance;
+    script->varTable[0] = avgHurricaneChance;
 
     for (i = 0; i < partner->targetListLength; i++) {
         targetIdx = partner->targetIndexList[i];
@@ -779,9 +779,9 @@ ApiStatus N(InitHurricane)(Evt* script, s32 isInitialCall) {
         actor = get_actor(target->actorID);
         part = get_actor_part(actor, target->partID);
         if (actor->transparentStatus == STATUS_TRANSPARENT || (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            sSpookStates[targetIdx] = -1;
-        } else if (sSpookStates[targetIdx] != 0) {
-            sSpookStates[targetIdx] = avgSpookChance;
+            sTargetStates[targetIdx] = -1;
+        } else if (sTargetStates[targetIdx] != 0) {
+            sTargetStates[targetIdx] = avgHurricaneChance;
         }
     }
     return ApiStatus_DONE2;
@@ -791,25 +791,25 @@ ApiStatus N(CanTargetBeBlown)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s32 targetIdx = partner->targetIndexList[partner->selectedTargetIndex];
-    s32* spookChance = &sSpookStates[targetIdx];
+    s32* hurricaneChance = &sTargetStates[targetIdx];
     SelectableTarget* target = &partner->targetData[targetIdx];
 
-    script->varTable[0] = *spookChance;
+    script->varTable[0] = *hurricaneChance;
 
-    if (*spookChance == -1) {
+    if (*hurricaneChance == -1) {
         return ApiStatus_DONE2;
     }
 
-    if (*spookChance == 0) {
+    if (*hurricaneChance == 0) {
         return ApiStatus_DONE2;
     }
 
     get_actor(target->actorID);
     if (rand_int(99) < battleStatus->actionSuccess) {
-        *spookChance = -1;
+        *hurricaneChance = -1;
         script->varTable[0] = target->actorID;
     } else {
-        *spookChance = 0;
+        *hurricaneChance = 0;
         script->varTable[0] = ACTOR_PLAYER;
     }
     return ApiStatus_DONE2;
@@ -1414,7 +1414,7 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sSpookStates[targetIndex];
+                temp = sTargetStates[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];
@@ -1431,7 +1431,7 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sSpookStates[targetIndex];
+                temp = sTargetStates[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];

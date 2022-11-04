@@ -571,7 +571,7 @@ s32 calc_partner_damage_enemy(void) {
 
                     #undef INFLICT_STATUS
 
-                    statusChanceOrDefense = target->actorBlueprint->baseStatusChance;
+                    statusChanceOrDefense = target->actorBlueprint->spookChance;
 
                     if (statusChanceOrDefense > 0) {
                         statusChanceOrDefense = 100;
@@ -617,7 +617,7 @@ s32 calc_partner_damage_enemy(void) {
         }
     }
 
-    statusChanceOrDefense = target->actorBlueprint->baseStatusChance;
+    statusChanceOrDefense = target->actorBlueprint->spookChance;
     statusChanceOrDefense = (battleStatus->statusChance * statusChanceOrDefense) / 100;
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
