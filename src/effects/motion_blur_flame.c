@@ -58,7 +58,36 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
 void motion_blur_flame_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/motion_blur_flame", motion_blur_flame_update);
+void motion_blur_flame_update(EffectInstance* effect) {
+    MotionBlurFlameFXData* data = effect->data.motionBlurFlame;
+    s32 temp;
+
+    if (effect->flags & 0x10) {
+        effect->flags &= ~0x10;
+        data->unk_50 = 30;
+    }
+    data->unk_54++;
+    if (data->unk_50 < 1000) {
+        data->unk_50--;
+    }
+
+    if (data->unk_50 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    temp = data->unk_50;
+    if (data->unk_54 <= 16) {
+        data->unk_4C = (data->unk_54 * 8) - 1;
+    }
+    if (temp < 16) {
+        data->unk_4C = temp * 8;
+    }
+
+    temp = 0;
+    data->unk_1C[temp] = data->unk_04 + data->pos.x;
+    data->unk_2C[temp] = data->unk_08 + data->pos.y;
+    data->unk_3C[temp] = data->unk_0C + data->pos.z;
+}
 
 void motion_blur_flame_render(EffectInstance* effect) {
     RenderTask renderTask;
