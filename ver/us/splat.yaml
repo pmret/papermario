@@ -4031,7 +4031,7 @@ segments:
     vram: 0xE0070000
     subsegments:
     - [0x3740B0, c, shimmer_burst]
-    - [0x374D80, data]
+    - [0x374D80]
   - name: effect_energy_shockwave
     dir: effects
     type: code
@@ -5025,7 +5025,21 @@ segments:
     subsegments:
     - [0x3B7160, c, waterfall]
     - [0x3B78B0]
-  - [0x3B78D0, bin] # waterfall gfx
+  - name: effect_gfx_waterfall
+    dir: effects/gfx
+    type: code
+    start: 0x3B78D0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B78D0, c, waterfall]
+    - start: 0x3B78D0
+      type: .data
+      name: waterfall
+      subsegments:
+      - [0x3B78D0, i4, D_09000000_3B78D0, 32, 32]
+      - [0x3B7AD0, gfx, D_09000200_3B7AD0]
+      - [0x3B7B78]
   - name: effect_water_fountain
     dir: effects
     type: code
@@ -5034,9 +5048,25 @@ segments:
     subsegments:
     - [0x3B7B80, c, water_fountain]
     - [0x3B8470]
-  - start: 0x3B8860 # water_fountain gfx
-    type: bin
-    align: 16
+  - name: effect_gfx_water_fountain
+    dir: effects/gfx
+    type: code
+    start: 0x3B8860
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B8860, c, water_fountain]
+    - start: 0x3B8860
+      type: .data
+      name: water_fountain
+      subsegments:
+      - [0x3B8860, i4, D_09000000_3B8860, 32, 32]
+      - [0x3B8A60, vtx, D_09000200_3B8A60]
+      - [0x3B8AA0, vtx, D_09000240_3B8AA0]
+      - [0x3B8AE0, gfx, D_09000280_3B8AE0]
+      - [0x3B8B88, gfx, D_09000328_3B8B88]
+      - [0x3B8BA8, gfx, D_09000348_3B8BA8]
+      - [0x3B8BC8]
   - name: effect_underwater
     dir: effects
     type: code
