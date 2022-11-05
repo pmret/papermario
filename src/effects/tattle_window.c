@@ -13,19 +13,21 @@ typedef struct D_E00D8818_Entry {
     u8 unk_03;
 } D_E00D8818_Entry; // size = 0x4
 
+extern u8 D_09000000_3D7040[];
+
 WindowStyleCustom D_E00D87E0 = {
     .background = {0},
     .corners = {
-        .imgData = 0x09000000, // TODO change to sym when the graphics for this is done
+        .imgData = D_09000000_3D7040,
         .packedTileFormat = 0x31,
         .size1 = {16, 8},
         .size2 = {16, 8},
         .size3 = {16, 8},
         .size4 = {16, 8},
     },
-    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1, 0, 0, 0, 
+    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1, 0, 0, 0,
                                             COMBINED, 0, 0, 0, COMBINED),
-    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0, 
+    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0,
                                                  0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
     .color1 = { 61, 74, 188, 255 },
     .color2 = { 0, 25, 28, 255},
@@ -92,7 +94,7 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
     part->rot.x = 0.0f;
     part->rot.y = 0.0f;
     part->rot.z = 0.0f;
-    part->xOffset = part->yOffset = part->rot.z;
+    part->offset.x = part->offset.y = 0.0f;
     part->unk_34 = 255;
     part->unk_35 = 255;
 
@@ -125,20 +127,20 @@ void tattle_window_update(EffectInstance* effect) {
     }
     unk_10_2 = unk_10;
     part->rot.z = 0;
-    part->xOffset = 0;
+    part->offset.x = 0;
     part->scale = part->unk_18;
     if (old_unk_14 < 23) {
-        part->yOffset = D_E00D8818[old_unk_14].yOffset;
+        part->offset.y = D_E00D8818[old_unk_14].yOffset;
         part->unk_34 = D_E00D8818[old_unk_14].unk_02;
         part->unk_35 = D_E00D8818[old_unk_14].unk_03;
     } else {
-        part->yOffset = D_E00D8818[22].yOffset;
+        part->offset.y = D_E00D8818[22].yOffset;
         part->unk_34 = D_E00D8818[22].unk_02;
         part->unk_35 = D_E00D8818[22].unk_03;
         part->unk_14 = 24;
     }
     if (unk_10_2 < 23) {
-        part->yOffset = D_E00D8818[unk_10_2].yOffset;
+        part->offset.y = D_E00D8818[unk_10_2].yOffset;
         part->unk_34 = D_E00D8818[unk_10_2].unk_02;
         part->unk_35 = D_E00D8818[unk_10_2].unk_03;
     }
@@ -231,8 +233,8 @@ void func_E00D8630(EffectInstance* effect) {
 
     shim_draw_box(
         flags, &D_E00D87E0,
-        (data->pos.x + data->xOffset) - 75.0f,
-        (data->pos.y + data->yOffset) - 53.0f,
+        (data->pos.x + data->offset.x) - 75.0f,
+        (data->pos.y + data->offset.y) - 53.0f,
         data->pos.z,
         150, 107,
         255, 0,

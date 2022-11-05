@@ -5539,7 +5539,19 @@ segments:
     subsegments:
     - [0x3D67C0, c, tattle_window]
     - [0x3D6FA0]
-  - [0x3D7040, bin] # tattle_window gfx
+  - name: effect_gfx_tattle_window
+    dir: effects/gfx
+    type: code
+    start: 0x3D7040
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3D7040, c, tattle_window]
+    - start: 0x3D7040
+      type: .data
+      name: tattle_window
+      subsegments:
+      - [0x3D7040, ia8, D_09000000_3D7040, 16, 32]
   - name: effect_shiny_flare
     dir: effects
     type: code

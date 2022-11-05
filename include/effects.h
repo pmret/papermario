@@ -2071,8 +2071,7 @@ typedef struct TattleWindowFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 scale;
     /* 0x20 */ Vec3f rot;
-    /* 0x2C */ f32 xOffset;
-    /* 0x30 */ f32 yOffset;
+    /* 0x2C */ Vec2f offset;
     /* 0x34 */ u8 unk_34;
     /* 0x35 */ u8 unk_35;
 } TattleWindowFXData; // size = 0x38

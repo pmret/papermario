@@ -135,7 +135,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x69 */ FX_ENTRY(floating_cloud_puff, effect_gfx_floating_cloud_puff),
     /* 0x6A */ {},
     /* 0x6B */ FX_ENTRY(energy_in_out, effect_gfx_energy_in_out),
-    /* 0x6C */ FX_ENTRY(tattle_window, _3D7040),
+    /* 0x6C */ FX_ENTRY(tattle_window, effect_gfx_tattle_window),
     /* 0x6D */ FX_ENTRY(shiny_flare, effect_gfx_shiny_flare),
     /* 0x6E */ FX_ENTRY(huff_puff_breath, effect_gfx_huff_puff_breath),
     /* 0x6F */ FX_ENTRY(cold_breath, effect_gfx_cold_breath),
