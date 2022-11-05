@@ -36,7 +36,7 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
     effect->numParts = numParts;
     part = effect->data.partnerBuff = shim_general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.partnerBuff != NULL);
-    
+
     part->useRandomValues = useRandomValues;
     part->lifeTime = 0;
     if (duration <= 0) {
@@ -44,7 +44,7 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
     } else {
         part->timeLeft = duration;
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(part->unk_0C); i++) {
         part->unk_0C[i].alpha = 0;
         part->unk_0C[i].turnsDisplay = 0;
@@ -52,12 +52,12 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
         part->unk_0C[i].state = BUFF_STATE_IDLE;
         part->unk_0C[i].stateTimer = 0;
     }
-    
+
     part->unk_02 = 0;
     if (useRandomValues == 1) {
         part->unk_02 = 1;
     }
-    
+
     return effect;
 }
 
@@ -69,7 +69,7 @@ void partner_buff_update(EffectInstance* effect) {
     s32 useRandomValues = data->useRandomValues;
     s32 time;
     s32 i;
-    
+
     if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
         effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
         data->timeLeft = 16;
@@ -77,7 +77,7 @@ void partner_buff_update(EffectInstance* effect) {
     if (data->timeLeft < 1000) {
         data->timeLeft--;
     }
-    
+
     data->lifeTime++;
     if (data->timeLeft < 0) {
         shim_remove_effect(effect);
@@ -85,7 +85,7 @@ void partner_buff_update(EffectInstance* effect) {
     }
 
     time = data->lifeTime;
-    
+
     for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
         BuffData* buff = &data->unk_0C[i];
         if (buff->turnsLeft < 0) {
@@ -95,7 +95,7 @@ void partner_buff_update(EffectInstance* effect) {
         if ((useRandomValues == 1) && (time % 30 == 0)) {
             buff->turnsLeft = shim_rand_int(4);
         }
-        
+
         switch (buff->state) {
             case BUFF_STATE_IDLE:
                 if (buff->alpha == 255) {

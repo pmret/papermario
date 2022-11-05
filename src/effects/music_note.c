@@ -6,6 +6,7 @@ void music_note_init(EffectInstance* effect);
 void music_note_update(EffectInstance* effect);
 void music_note_render(EffectInstance* effect);
 
+extern Gfx D_09000FC0_35B5A0[];
 extern Gfx D_09001038_35B618[];
 extern Gfx D_090010C0_35B6A0[];
 extern Gfx D_09001148_35B728[];
@@ -17,7 +18,20 @@ extern Gfx D_09001368_35B948[];
 Gfx* D_E004C660[] = { D_09001038_35B618, D_090010C0_35B6A0, D_09001148_35B728, D_090011D0_35B7B0,
                       D_09001258_35B838, D_090012E0_35B8C0, D_09001368_35B948 };
 
-s8 D_E004C67C[] = { 0xFE, 0xAC, 0xAC, 0xFE, 0xAC, 0xD5, 0xFE, 0xB4, 0x9A, 0xD5, 0xB4, 0xFE, 0xB4, 0xB4, 0xFE, 0xB4, 0xDD, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xB4, 0xFE, 0xB4, 0xD5, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xAC, };
+s8 D_E004C67C[] = {
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172,
+};
 
 void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
@@ -114,4 +128,32 @@ void music_note_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/music_note", music_note_appendGfx);
+void music_note_appendGfx(void* data) {
+    EffectInstance* effect = data;
+    MusicNoteFXData* fxData = effect->data.musicNote;
+    Matrix4f sp18, sp58;
+    s32 colorIdx = fxData->unk_1C;
+    s32 dlistIdx = fxData->unk_20;
+    s32 rgbOffset;
+
+    // TODO required to match - need to initialize define twice for some reason
+    rgbOffset = (colorIdx * 3) % ARRAY_COUNT(D_E004C67C);
+    rgbOffset = (colorIdx * 3) % ARRAY_COUNT(D_E004C67C);
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_09000FC0_35B5A0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+        D_E004C67C[rgbOffset], D_E004C67C[rgbOffset + 1], D_E004C67C[rgbOffset + 2], fxData->unk_14
+    );
+    shim_guTranslateF(sp18, fxData->pos.x, fxData->pos.y, fxData->pos.z);
+    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guScaleF(sp58, fxData->unk_10, fxData->unk_10, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_E004C660[dlistIdx]);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
