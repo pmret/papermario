@@ -295,7 +295,7 @@ EvtScript N(handleEvent_8021E874) = {
     EVT_END
 };
 
-#include "common/CalculateRotationZ.inc.c"
+#include "common/CalculateArcsinDeg.inc.c"
 
 EvtScript N(takeTurn_8021F1BC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -333,7 +333,7 @@ EvtScript N(takeTurn_8021F1BC) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(16)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                    EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_SET(LVar1, LVar4)
                     EVT_SET(LVar2, LVar5)
@@ -409,7 +409,7 @@ EvtScript N(takeTurn_8021F1BC) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(16)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                    EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_SET(LVar1, LVar4)
                     EVT_SET(LVar2, LVar5)

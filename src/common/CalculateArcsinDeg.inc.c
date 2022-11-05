@@ -53,7 +53,7 @@ u32 N(ArcsinDeg)(f32 x, f32 y) {
     return ret;
 }
 
-ApiStatus N(CalculateRotationZ)(Evt* script, s32 isInitialCall) {
+ApiStatus N(CalculateArcsinDeg)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 x1 = evt_get_variable(script, *args++);
     s32 y1 = evt_get_variable(script, *args++);
