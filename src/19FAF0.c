@@ -211,7 +211,7 @@ s32 calc_player_test_enemy(void) {
         return HIT_RESULT_LANDED_ON_SPIKE;
     } else if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP)) &&
                (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT) &&
-               (!(battleStatus->currentAttackEventSuppression & 4) &&
+               (!(battleStatus->currentAttackEventSuppression & ATTACK_EVENT_FLAG_4) &&
                !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD)))
     {
         sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);

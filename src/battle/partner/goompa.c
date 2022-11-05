@@ -5,26 +5,26 @@
 
 #define NAMESPACE battle_partner_goompa
 
-extern EvtScript N(init_80238110);
-extern EvtScript N(takeTurn_802383F4);
-extern EvtScript N(idle_8023818C);
-extern EvtScript N(handleEvent_8023819C);
-extern EvtScript N(80238488);
-extern EvtScript N(802384D4);
-extern EvtScript N(80238510);
-extern EvtScript N(8023859C);
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(celebrate);
+extern EvtScript N(runAway);
+extern EvtScript N(runAwayFail);
+extern EvtScript N(executeAction);
 
-s32 N(idleAnimations_80238000)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL, ANIM_Goompa_Walk,
     STATUS_END,
 };
 
-s32 N(defenseTable_8023800C)[] = {
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80238018)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL,            100,
     STATUS_DEFAULT,           100,
     STATUS_SLEEP,             100,
@@ -49,12 +49,12 @@ s32 N(statusTable_80238018)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_802380C4)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .index = 1,
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80238000),
-        .defenseTable = N(defenseTable_8023800C),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
     },
 };
 
@@ -62,10 +62,10 @@ ActorBlueprint NAMESPACE = {
     .flags = ACTOR_PART_FLAG_200000,
     .type = ACTOR_TYPE_GOOMBARIO,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(partsTable_802380C4)),
-    .partsData = N(partsTable_802380C4),
-    .script = &N(init_80238110),
-    .statusTable = N(statusTable_80238018),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .spinSmashReq = 4,
     .powerBounceChance = 80,
     .size = { 29, 26 },
@@ -73,22 +73,22 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtScript N(init_80238110) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802383F4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8023818C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8023819C)))
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8023818C) = {
+EvtScript N(idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8023819C) = {
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
@@ -110,14 +110,14 @@ EvtScript N(handleEvent_8023819C) = {
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
             EVT_SET_CONST(LVar3, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(D_80294FE4)
+            EVT_EXEC_WAIT(DoPartnerSpikeContact)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar0, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar3, ANIM_Goompa_Run)
             EVT_SET_CONST(LVar4, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(D_80294C68)
+            EVT_EXEC_WAIT(DoPartnerBurnContact)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 0)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
@@ -135,23 +135,23 @@ EvtScript N(handleEvent_8023819C) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_802383F4) = {
+EvtScript N(takeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(8023859C))
+            EVT_EXEC_WAIT(N(executeAction))
         EVT_CASE_EQ(PHASE_5)
-            EVT_EXEC_WAIT(N(80238488))
+            EVT_EXEC_WAIT(N(celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(802384D4))
+            EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(80238510))
+            EVT_EXEC_WAIT(N(runAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80238488) = {
+EvtScript N(celebrate) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)
@@ -160,15 +160,15 @@ EvtScript N(80238488) = {
     EVT_END
 };
 
-EvtScript N(802384D4) = {
+EvtScript N(runAway) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Run)
-    EVT_EXEC_WAIT(D_80294AFC)
+    EVT_EXEC_WAIT(DoPartnerRunAway)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80238510) = {
+EvtScript N(runAwayFail) = {
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Run)
@@ -179,7 +179,7 @@ EvtScript N(80238510) = {
     EVT_END
 };
 
-EvtScript N(8023859C) = {
+EvtScript N(executeAction) = {
     EVT_RETURN
     EVT_END
 };

@@ -12,7 +12,7 @@ extern HudScript HES_100pct;
 s32 D_802A9860_42F680[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 extern s32 D_802A98C0; // bss?
 
-ApiStatus func_802A9000_42EE20(void) {
+ApiStatus func_802A9000_42EE20(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;

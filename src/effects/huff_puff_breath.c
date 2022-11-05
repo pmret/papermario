@@ -13,7 +13,7 @@ void huff_puff_breath_update(EffectInstance* effect);
 void huff_puff_breath_render(EffectInstance* effect);
 void huff_puff_breath_appendGfx(void* effect);
 
-EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, f32 arg5, f32 arg6, s32 timeLeft) {
+EffectInstance* huff_puff_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 angle, f32 speed, f32 scale, s32 timeLeft) {
     EffectBlueprint effectBp;
     EffectInstance* effect;
     HuffPuffBreathFXData* data;
@@ -32,7 +32,7 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     data = effect->data.huffPuffBreath = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
-    data->unk_00 = arg0;
+    data->type = type;
     data->lifeTime = 0;
     if (timeLeft <= 0) {
         data->timeLeft = 1000;
@@ -40,29 +40,29 @@ EffectInstance* huff_puff_breath_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
         data->timeLeft = timeLeft;
     }
 
-    data->unk_24 = 0;
+    data->primA = 0;
     data->pos.x = posX;
     data->pos.y = posY;
     data->pos.z = posZ;
-    data->unk_4C = arg6;
-    data->unk_18 = 255;
-    data->unk_2C = 230;
-    data->unk_1C = 255;
-    data->unk_20 = 255;
-    data->unk_28 = 255;
-    data->unk_30 = 50;
-    data->unk_34 = 255;
-    data->unk_48 = arg4;
-    data->unk_44 = 0;
-    data->unk_3C = arg5;
-    data->unk_38 = shim_rand_int(32);
-    data->unk_40 = shim_rand_int(16);
-    data->unk_20 = 150;
-    data->unk_28 = 215;
-    data->unk_2C = 210;
-    data->unk_18 = 255;
-    data->unk_1C = 255;
-    data->unk_30 = 10;
+    data->scale = scale;
+    data->primR = 255;
+    data->envG = 230;
+    data->primG = 255;
+    data->primB = 255;
+    data->envR = 255;
+    data->envB = 50;
+    data->envA = 255;
+    data->angle = angle;
+    data->speedY = 0;
+    data->speedX = speed;
+    data->texOffsetX = shim_rand_int(32);
+    data->texOffsetY = shim_rand_int(16);
+    data->primB = 150;
+    data->envR = 215;
+    data->envG = 210;
+    data->primR = 255;
+    data->primG = 255;
+    data->envB = 10;
 
     return effect;
 }
@@ -88,24 +88,24 @@ void huff_puff_breath_update(EffectInstance* effect) {
         return;
     }
     if (data->timeLeft < 16) {
-        data->unk_24 = data->timeLeft * 16;
+        data->primA = data->timeLeft * 16;
     }
     if (temp_a2 < 16) {
-        data->unk_24 = (temp_a2 * 16) + 15;
+        data->primA = (temp_a2 * 16) + 15;
     }
-    data->unk_38 += data->unk_3C;
-    if (data->unk_38 >= 256.0f) {
-        data->unk_38 -= 256.0f;
+    data->texOffsetX += data->speedX;
+    if (data->texOffsetX >= 256.0f) {
+        data->texOffsetX -= 256.0f;
     }
-    if (data->unk_38 < 0.0f) {
-        data->unk_38 += 256.0f;
+    if (data->texOffsetX < 0.0f) {
+        data->texOffsetX += 256.0f;
     }
-    data->unk_40 += data->unk_44;
-    if (data->unk_40 >= 256.0f) {
-        data->unk_40 -= 256.0f;
+    data->texOffsetY += data->speedY;
+    if (data->texOffsetY >= 256.0f) {
+        data->texOffsetY -= 256.0f;
     }
-    if (data->unk_40 < 0.0f) {
-        data->unk_40 += 256.0f;
+    if (data->texOffsetY < 0.0f) {
+        data->texOffsetY += 256.0f;
     }
 }
 
@@ -127,10 +127,10 @@ void func_E00DC2FC(void) {
 void huff_puff_breath_appendGfx(void* effect) {
     HuffPuffBreathFXData* data = ((EffectInstance*)effect)->data.huffPuffBreath;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 unk_24 = data->unk_24;
-    s32 unk_00 = data->unk_00;
-    s32 uls = data->unk_38 * 4.0f;
-    s32 ult = data->unk_40 * 4.0f;
+    s32 primA = data->primA;
+    s32 unk_00 = data->type;
+    s32 uls = data->texOffsetX * 4.0f;
+    s32 ult = data->texOffsetY * 4.0f;
     Matrix4f sp18;
     Matrix4f sp58;
 
@@ -138,16 +138,16 @@ void huff_puff_breath_appendGfx(void* effect) {
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, data->unk_48, 0.0f, 0.0f, 1.0f);
+    shim_guRotateF(sp58, data->angle, 0.0f, 0.0f, 1.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, data->unk_4C, data->unk_4C, data->unk_4C);
+    shim_guScaleF(sp58, data->scale, data->scale, data->scale);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, data->unk_34);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primR, data->primG, data->primB, primA);
+    gDPSetEnvColor(gMasterGfxPos++, data->envR, data->envG, data->envB, data->envA);
     gSPDisplayList(gMasterGfxPos++, D_E00DC648[unk_00]);
     gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 31 * 4, ult + 15 * 4);
     gSPDisplayList(gMasterGfxPos++, D_E00DC640[unk_00]);

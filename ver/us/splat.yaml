@@ -7588,6 +7588,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x6F0B30, c, goompa]
+    - [0x6F0B30]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
@@ -7619,7 +7620,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x6FFD80, c, parakarry]
-    - [0x701590, data]
+    - [0x701590]
   - name: battle_partner_watt
     dir: battle/partner
     type: code
@@ -7627,7 +7628,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x703AF0, c, watt]
-    - [0x704A80, data]
+    - [0x704A80]
   - name: battle_partner_sushie
     dir: battle/partner
     type: code
@@ -7635,8 +7636,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x707CA0, c, sushie]
-    - [0x708B70, data]
-    - [0x70BD00]
+    - [0x708B70]
   - name: battle_partner_lakilester
     dir: battle/partner
     type: code
@@ -7644,8 +7644,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x70BD10, c, lakilester]
-    - [0x70DEE0, data, 70DED0]
-    - [0x710EC0]
+    - [0x70DEE0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -7653,7 +7652,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x710EF0, c, bow]
-    - [0x7111F0, data]
+    - [0x7111F0]
   - name: battle_partner_twink
     dir: battle/partner
     type: code
@@ -7661,7 +7660,7 @@ segments:
     vram: 0x80238000
     subsegments:
     - [0x714CF0, c, twink]
-    - [0x714DC0, data]
+    - [0x714DC0]
 
 ####################
 ### Battle Items ###

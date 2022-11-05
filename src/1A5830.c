@@ -327,7 +327,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     if (!(attacker->staticStatus == STATUS_STATIC)) {
         if ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)) {
             if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT))) {
-                if (!(battleStatus->currentAttackEventSuppression & 8)) {
+                if (!(battleStatus->currentAttackEventSuppression & ATTACK_EVENT_FLAG_8)) {
                     if (!has_enchanted_part(attacker)) {
                         isEnchanted = TRUE;
                         gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
@@ -780,7 +780,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
-        && !(battleStatus->currentAttackEventSuppression & 8)
+        && !(battleStatus->currentAttackEventSuppression & ATTACK_EVENT_FLAG_8)
         && (attacker->transparentStatus != STATUS_TRANSPARENT)
         && !has_enchanted_part(attacker)
     ) {
