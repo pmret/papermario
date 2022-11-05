@@ -296,8 +296,8 @@ typedef struct ActorBlueprint {
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
     /* 0x19 */ u8 airLiftChance;
-    /* 0x1A */ u8 spookChance;
-    /* 0x1B */ u8 baseStatusChance;
+    /* 0x1A */ u8 hurricaneChance;
+    /* 0x1B */ u8 spookChance;
     /* 0x1C */ u8 upAndAwayChance;
     /* 0x1D */ u8 spinSmashReq;
     /* 0x1E */ u8 powerBounceChance;

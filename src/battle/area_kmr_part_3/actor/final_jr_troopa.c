@@ -188,8 +188,8 @@ ActorBlueprint NAMESPACE = {
     .statusTable = N(statusTable_8022C43C),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 0,
     .powerBounceChance = 70,
@@ -905,7 +905,7 @@ EvtScript N(8022ED10) = {
     EVT_END
 };
 
-ApiStatus N(CalculateRotationZ)(Evt* script, s32 isInitialCall);
+ApiStatus N(CalculateArcsinDeg)(Evt* script, s32 isInitialCall);
 
 EvtScript N(8022F468) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -942,7 +942,7 @@ EvtScript N(8022F468) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             EVT_LOOP(20)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                 EVT_CALL(SetPartRotation, -127, 2, 0, 0, LVar0)
                 EVT_SET(LVar1, LVar4)
                 EVT_SET(LVar2, LVar5)
@@ -963,7 +963,7 @@ EvtScript N(8022F468) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             EVT_LOOP(14)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                 EVT_SET(LVar7, LVar0)
                 EVT_ADD(LVar7, 180)
                 EVT_CALL(SetPartRotation, -127, 2, 0, 0, LVar7)
@@ -1002,7 +1002,7 @@ EvtScript N(8022F468) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_LOOP(20)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-        EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+        EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
         EVT_CALL(SetPartRotation, -127, 2, 0, 0, LVar0)
         EVT_SET(LVar1, LVar4)
         EVT_SET(LVar2, LVar5)
@@ -1023,7 +1023,7 @@ EvtScript N(8022F468) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_LOOP(14)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-        EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+        EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
         EVT_SET(LVar7, LVar0)
         EVT_ADD(LVar7, 180)
         EVT_CALL(SetPartRotation, -127, 2, 0, 0, LVar7)
@@ -1047,7 +1047,7 @@ EvtScript N(8022F468) = {
     EVT_END
 };
 
-#include "common/anglestuff.inc.c"
+#include "common/CalculateArcsinDeg.inc.c"
 
 EvtScript N(80230034) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

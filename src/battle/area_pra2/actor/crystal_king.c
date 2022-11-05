@@ -123,8 +123,8 @@ ActorBlueprint NAMESPACE = {
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 4,
     .powerBounceChance = 70,
@@ -171,12 +171,12 @@ ApiStatus func_80218280_6609D0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    effect->data.huffPuffBreath->unk_18 = 0xF8;
-    effect->data.huffPuffBreath->unk_1C = 0xF8;
-    effect->data.huffPuffBreath->unk_20 = 0xFF;
-    effect->data.huffPuffBreath->unk_28 = 0x80;
-    effect->data.huffPuffBreath->unk_2C = 0xE0;
-    ((HuffPuffBreathFXData*)effect->data.huffPuffBreath)->unk_30 = 0xFF;
+    effect->data.huffPuffBreath->primR = 0xF8;
+    effect->data.huffPuffBreath->primG = 0xF8;
+    effect->data.huffPuffBreath->primB = 0xFF;
+    effect->data.huffPuffBreath->envR = 0x80;
+    effect->data.huffPuffBreath->envG = 0xE0;
+    ((HuffPuffBreathFXData*)effect->data.huffPuffBreath)->envB = 0xFF;
     return ApiStatus_DONE2;
 }
 
@@ -1202,8 +1202,8 @@ ActorBlueprint N(clone) = {
     .statusTable = N(clone_statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 4,
     .powerBounceChance = 0,

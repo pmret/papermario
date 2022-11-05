@@ -326,7 +326,7 @@ EvtScript N(usePower) = {
                 EVT_CALL(ShowMessageBox, 28, 60)
         EVT_END_SWITCH
         EVT_CALL(WaitForMessageBoxDone)
-        EVT_CALL(func_80280818)
+        EVT_CALL(PartnerYieldTurn)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
         EVT_CALL(N(UnkStarFunc), 3)

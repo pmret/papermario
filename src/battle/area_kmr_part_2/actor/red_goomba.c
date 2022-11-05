@@ -69,8 +69,8 @@ ActorBlueprint NAMESPACE = {
     .statusTable = N(statusTable_8021B6CC),
     .escapeChance = 0,
     .airLiftChance = 0,
+    .hurricaneChance = 0,
     .spookChance = 0,
-    .baseStatusChance = 0,
     .upAndAwayChance = 0,
     .spinSmashReq = 0,
     .powerBounceChance = 80,
@@ -282,7 +282,7 @@ EvtScript N(handleEvent_8021BB84) = {
     EVT_END
 };
 
-#include "common/anglestuff.inc.c"
+#include "common/CalculateArcsinDeg.inc.c"
 
 EvtScript N(takeTurn_8021C3B0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -320,7 +320,7 @@ EvtScript N(takeTurn_8021C3B0) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(16)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                    EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_SET(LVar1, LVar4)
                     EVT_SET(LVar2, LVar5)
@@ -396,7 +396,7 @@ EvtScript N(takeTurn_8021C3B0) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(16)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(N(CalculateRotationZ), LVar1, LVar2, LVar4, LVar5, LVar0)
+                    EVT_CALL(N(CalculateArcsinDeg), LVar1, LVar2, LVar4, LVar5, LVar0)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_SET(LVar1, LVar4)
                     EVT_SET(LVar2, LVar5)

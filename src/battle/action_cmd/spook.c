@@ -12,7 +12,7 @@ extern s32 D_80294440;
 
 s32 D_802A9920_430940[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
-ApiStatus func_802A9000_430020(void) {
+ApiStatus func_802A9000_430020(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;

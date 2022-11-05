@@ -39,7 +39,7 @@ s32 D_802A9A20_42EDC0[] = {
     0x23, 0x3C, 0x50, 0x63, 0xC8, 0x00,
 };
 
-ApiStatus func_802A9000_42E3A0(void) {
+ApiStatus func_802A9000_42E3A0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;

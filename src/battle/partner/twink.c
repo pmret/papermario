@@ -1,11 +1,24 @@
 #include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
+#include "sprite/npc/Twink.h"
 
-extern s32 D_802382F8_714FE8;
+#define NAMESPACE battle_partner_twink
+
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(nextTurn);
+extern EvtScript N(executeAction);
+extern EvtScript N(celebrate);
+extern EvtScript N(runAway);
+extern EvtScript N(runAwayFail);
 
 ApiStatus func_80238000_714CF0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    if (battleStatus->flags2 & 0x40) {
+    if (battleStatus->flags2 & BS_FLAGS2_40) {
         script->varTable[0] = 1;
     } else {
         script->varTable[0] = 0;
@@ -13,6 +26,100 @@ ApiStatus func_80238000_714CF0(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+s32 N(idleAnimations)[] = {
+    STATUS_NORMAL, ANIM_Twink_Angry,
+    STATUS_TURN_DONE, ANIM_Twink_Still,
+    STATUS_END,
+};
+
+s32 N(defenseTable)[] = {
+    ELEMENT_NORMAL, 0,
+    ELEMENT_END,
+};
+
+s32 N(statusTable)[] = {
+    STATUS_NORMAL, 100,
+    STATUS_DEFAULT, 100,
+    STATUS_SLEEP, 100,
+    STATUS_POISON, 100,
+    STATUS_FROZEN, 100,
+    STATUS_DIZZY, 100,
+    STATUS_FEAR, 100,
+    STATUS_STATIC, 100,
+    STATUS_PARALYZE, 100,
+    STATUS_SHRINK, 100,
+    STATUS_STOP, 100,
+    STATUS_DEFAULT_TURN_MOD, 0,
+    STATUS_SLEEP_TURN_MOD, 0,
+    STATUS_POISON_TURN_MOD, 0,
+    STATUS_FROZEN_TURN_MOD, 0,
+    STATUS_DIZZY_TURN_MOD, 0,
+    STATUS_FEAR_TURN_MOD, 0,
+    STATUS_STATIC_TURN_MOD, 0,
+    STATUS_PARALYZE_TURN_MOD, 0,
+    STATUS_SHRINK_TURN_MOD, 0,
+    STATUS_STOP_TURN_MOD, 0,
+    STATUS_END,
+};
+
+ActorPartBlueprint N(parts)[] = {
+    {
+        .flags = 0,
+        .index = 1,
+        .posOffset = { 0, 0, 0 },
+        .targetOffset = { 0, 0 },
+        .opacity = 255,
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
+        .eventFlags = 0,
+        .elementImmunityFlags = 0,
+        .unk_1C = 0,
+        .unk_1D = 0,
+    },
+};
+
+ActorBlueprint NAMESPACE = {
+    .flags = ACTOR_FLAG_NO_DMG_APPLY,
+    .type = ACTOR_TYPE_TWINK,
+    .level = 0,
+    .maxHP = 99,
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
+    .escapeChance = 0,
+    .airLiftChance = 0,
+    .hurricaneChance = 0,
+    .spookChance = 0,
+    .upAndAwayChance = 0,
+    .spinSmashReq = 4,
+    .powerBounceChance = 80,
+    .coinReward = 0,
+    .size = { 20, 20 },
+    .hpBarOffset = { 0, 0 },
+    .statusIconOffset = { -10, 30 },
+    .statusMessageOffset = { 13, 31 },
+};
+
+EvtScript N(init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+    EVT_CALL(func_80238000_714CF0)
+    EVT_IF_NE(LVar0, 1)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, 1)
+    EVT_END_IF
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 9)
+    EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 0, 0, 0, 0, 0)
+    EVT_RETURN
+    EVT_END
+};
+
+s32 D_802382F8_714FE8 = 0;
 
 ApiStatus func_80238028_714D18(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
@@ -22,3 +129,156 @@ ApiStatus func_80238028_714D18(Evt* script, s32 isInitialCall) {
     actor->unk_19A = 2.0f * sin_rad(DEG_TO_RAD(D_802382F8_714FE8));
     return ApiStatus_DONE2;
 }
+
+EvtScript N(idle) = {
+    EVT_LOOP(0)
+        EVT_CALL(func_80238028_714D18)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(handleEvent) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    EVT_CALL(CloseActionCommandInfo)
+    EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
+        EVT_CASE_OR_EQ(EVENT_HIT)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Twink_Hurt)
+            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
+        EVT_END_CASE_GROUP
+        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_IMMUNE)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
+            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar1, ANIM_Twink_Angry)
+            EVT_EXEC_WAIT(DoImmune)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
+        EVT_END_CASE_GROUP
+    EVT_END_SWITCH
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(takeTurn) = {
+    EVT_CALL(GetBattlePhase, LVar0)
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
+            EVT_EXEC_WAIT(N(executeAction))
+        EVT_CASE_EQ(PHASE_5)
+            EVT_EXEC_WAIT(N(celebrate))
+        EVT_CASE_EQ(PHASE_RUN_AWAY_START)
+            EVT_EXEC_WAIT(N(runAway))
+        EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
+            EVT_EXEC_WAIT(N(runAwayFail))
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(celebrate) = {
+    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar1, ANIM_Twink_Fly)
+    EVT_SET_CONST(LVar2, ANIM_Twink_Fly)
+    EVT_EXEC_WAIT(D_80294720)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(runAway) = {
+    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar1, ANIM_Twink_Angry)
+    EVT_EXEC_WAIT(DoPartnerRunAway)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(runAwayFail) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
+    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
+    EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
+    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Idle)
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(nextTurn) = {
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(executeAction) = {
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, 1, SOUND_207F, SOUND_2AA)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+    EVT_CALL(InitTargetIterator)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
+    EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
+    EVT_CALL(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)
+    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -10, 10)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Idle)
+    EVT_WAIT(3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Cringe)
+    EVT_CALL(AddGoalPos, ACTOR_PARTNER, 0, 10, 0)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, 0)
+    EVT_WAIT(2)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, 1, 0, 0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_JUMP_3E2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 15, 0)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -20, 6)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_IF_GT(LVarF, 1)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
+    EVT_END_IF
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_207E)
+    EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
+    EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, 0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_IF_GT(LVarF, 0)
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+    EVT_ELSE
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+    EVT_END_IF
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(MoveBattleCamOver, 10)
+    EVT_CALL(AddGoalPos, ACTOR_PARTNER, 150, 100, 0)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 20, 0)
+    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
+    EVT_WAIT(20)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_LOOP(0)
+        EVT_WAIT(1)
+        EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, 1, SOUND_207F, SOUND_2AA)
+    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
+    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -20, 10)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 1)
+    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    EVT_RETURN
+    EVT_END
+};

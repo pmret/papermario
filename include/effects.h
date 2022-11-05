@@ -1061,8 +1061,34 @@ typedef struct FireBreathFXData {
 } FireBreathFXData; // size = 0x7C
 
 typedef struct ShimmerBurstFXData {
-    /* 0x00 */ char todo[0];
-} ShimmerBurstFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 unk_50;
+    /* 0x54 */ s32 unk_54;
+    /* 0x58 */ s32 unk_58;
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ f32 unk_68;
+} ShimmerBurstFXData; // size = 0x6C
 
 typedef struct EnergyShockwaveFXData {
     /* 0x00 */ s32 unk_00;
@@ -1685,8 +1711,20 @@ typedef struct WaterBlockFXData {
 } WaterBlockFXData; // size = unknown
 
 typedef struct WaterfallFXData {
-    /* 0x00 */ char todo[0];
-} WaterfallFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C[12];
+    /* 0x5C */ f32 unk_5C[12];
+} WaterfallFXData; // size = 0x8C
 
 typedef struct WaterFountainFXData {
     /* 0x00 */ s32 unk_00;
@@ -1707,8 +1745,23 @@ typedef struct WaterFountainFXData {
 } WaterFountainFXData; // size = 0x44
 
 typedef struct UnderwaterFXData {
-    /* 0x00 */ char todo[0];
-} UnderwaterFXData; // size = unknown
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ f32 unk_04;
+    /* 0x008 */ f32 unk_08;
+    /* 0x00C */ f32 unk_0C;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ s32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ u8 unk_1C;
+    /* 0x01D */ u8 unk_1D;
+    /* 0x01E */ u8 unk_1E;
+    /* 0x01F */ u8 unk_1F;
+    /* 0x020 */ u8 unk_20;
+    /* 0x021 */ u8 unk_21;
+    /* 0x022 */ u8 unk_22;
+    /* 0x023 */ s8 unk_23[19][13];
+    /* 0x11A */ s16 unk_11A[19][13];
+} UnderwaterFXData; // size = 0x308
 
 typedef struct LightningBoltFXData {
     /* 0x000 */ s32 type;
@@ -2038,24 +2091,24 @@ typedef struct ShinyFlareFXData {
 } ShinyFlareFXData; // size = 0x30
 
 typedef struct HuffPuffBreathFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 timeLeft;
     /* 0x14 */ s32 lifeTime;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-    /* 0x44 */ f32 unk_44;
-    /* 0x48 */ f32 unk_48;
-    /* 0x4C */ f32 unk_4C;
+    /* 0x18 */ s32 primR;
+    /* 0x1C */ s32 primG;
+    /* 0x20 */ s32 primB;
+    /* 0x24 */ s32 primA;
+    /* 0x28 */ s32 envR;
+    /* 0x2C */ s32 envG;
+    /* 0x30 */ s32 envB;
+    /* 0x34 */ s32 envA;
+    /* 0x38 */ f32 texOffsetX;
+    /* 0x3C */ f32 speedX;
+    /* 0x40 */ f32 texOffsetY;
+    /* 0x44 */ f32 speedY;
+    /* 0x48 */ f32 angle;
+    /* 0x4C */ f32 scale;
 } HuffPuffBreathFXData; // size = 0x50
 
 typedef struct ColdBreathFXData {

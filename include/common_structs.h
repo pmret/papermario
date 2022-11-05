@@ -1899,7 +1899,7 @@ typedef struct Actor {
     /* 0x21C */ s8 status;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s8 isGlowing; // not the case for goombario
+    /* 0x220 */ s8 isGlowing; // charge amount for goombario
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */
