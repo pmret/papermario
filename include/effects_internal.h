@@ -32,6 +32,9 @@ void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32*
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 void shim_mdl_draw_hidden_panel_surface(Gfx**, u16 treeIndex);
+void shim_draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
+                   u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(void*),
+                   void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, f32 (*outMtx)[4]);
 
 // the actual signature is going to be wrong, but it doesn't matter
 // TODO remove when every effect's main is sorted out
