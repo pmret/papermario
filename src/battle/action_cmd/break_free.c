@@ -12,7 +12,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     battleStatus->actionCmdDifficultyTable = actionCmdTableBreakFree;
     battleStatus->unk_86 = 127;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -26,30 +26,30 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->thresholdLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudX = -48;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosX = -48;
+    actionCommandStatus->hudPosY = 80;
 
     id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_RunningAway);
     actionCommandStatus->hudElements[2] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[3] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
@@ -61,7 +61,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -128,14 +128,14 @@ void N(update)(void) {
             break;
         case 1:
             btl_set_popup_duration(99);
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX + 31, actionCommandStatus->hudY - 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudX + 31, actionCommandStatus->hudY + 17);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31, actionCommandStatus->hudPosY - 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX + 31, actionCommandStatus->hudPosY + 17);
             break;
         case 10:
             btl_set_popup_duration(99);
@@ -229,10 +229,10 @@ void N(draw)(void) {
 
     // Putting 31 into a variable manually fixes regalloc, so perhaps this was a constant defined somewhere?
     thirtyOne = 31;
-    hud_element_set_render_pos(hudElements[3], actionCommandStatus->hudX - (hudX - thirtyOne),
-        actionCommandStatus->hudY + 17);
-    hud_element_set_render_pos(hudElements[2], actionCommandStatus->hudX - (hudX - thirtyOne),
-        actionCommandStatus->hudY - 1);
+    hud_element_set_render_pos(hudElements[3], actionCommandStatus->hudPosX - (hudX - thirtyOne),
+        actionCommandStatus->hudPosY + 17);
+    hud_element_set_render_pos(hudElements[2], actionCommandStatus->hudPosX - (hudX - thirtyOne),
+        actionCommandStatus->hudPosY - 1);
 
     if (!actionCommandStatus->berserkerEnabled) {
         hud_element_draw_clipped(hudElements[0]);

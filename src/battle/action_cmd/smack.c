@@ -41,7 +41,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSmack;
     battleStatus->unk_86 = 127;
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -56,24 +56,24 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = 0;
-    actionCommandStatus->hudX = -48;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosX = -48;
+    actionCommandStatus->hudPosY = 80;
 
     hudElement = hud_element_create(&HES_StickNeutral);
     actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
@@ -112,15 +112,15 @@ void N(update)(void) {
                 break;
             }
 
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX,
-                actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX,
-                actionCommandStatus->hudY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX,
+                actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX,
+                actionCommandStatus->hudPosY + 28);
             break;
         case 10:
             btl_set_popup_duration(99);
@@ -178,8 +178,8 @@ void N(update)(void) {
                 hudElement = actionCommandStatus->hudElements[2];
                 actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->isBarFilled = TRUE;
-                hud_element_set_render_pos(hudElement, actionCommandStatus->hudX + 50,
-                    actionCommandStatus->hudY + 28);
+                hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50,
+                    actionCommandStatus->hudPosY + 28);
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 

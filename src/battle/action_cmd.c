@@ -526,7 +526,7 @@ void action_command_free(void) {
 
 void func_80268E88(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
-    actionCmdStatus->dynEntityId = create_generic_entity_frontUI(action_command_update, action_command_draw);
+    actionCmdStatus->workerID = create_generic_entity_frontUI(action_command_update, action_command_draw);
     actionCmdStatus->actionCommandID = 0;
 }
 
@@ -544,12 +544,12 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = 0; // Fail
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_LEARN_BLOCK && (battleStatus->flags1 & BS_FLAGS1_2000000)) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_2000000)) {
         battleStatus->blockResult = 1;
         return TRUE;
     }
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED || (gGameStatusPtr->demoFlags & 1)) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED || (gGameStatusPtr->demoFlags & 1)) {
         return FALSE;
     }
 
@@ -683,12 +683,12 @@ ApiStatus SetActionSuccess(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionTutorialState(Evt* script, s32 isInitialCall) {
+ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall) {
     gBattleStatus.actionCommandMode = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionTutorialState(Evt* script, s32 isInitialCall) {
+ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionCommandMode);
     return ApiStatus_DONE2;
 }

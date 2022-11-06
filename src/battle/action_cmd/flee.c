@@ -27,41 +27,41 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_5A = rand_int(1);
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudX = -48;
+    actionCommandStatus->hudPosX = -48;
     D_802A9920 = 0;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosY = 80;
 
     hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_RunningAway);
     actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[3] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     xOffset = 29 - ((100 - actionCommandStatus->thresholdLevel) * 60) / 100;
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudX - xOffset, actionCommandStatus->hudY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX - xOffset, actionCommandStatus->hudY - 1);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY + 17);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY - 1);
 
     hudElement = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[4] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
@@ -122,12 +122,12 @@ void N(update)(void) {
             actionCommandStatus->state = 1;
             break;
         case 1:
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
             break;
         case 10:
             if (actionCommandStatus->prepareTime != 0) {
@@ -140,14 +140,14 @@ void N(update)(void) {
             actionCommandStatus->state = 11;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
         case 11:
-            if (battleStatus->actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED && (battleStatus->currentButtonsPressed & BUTTON_A)) {
+            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->currentButtonsPressed & BUTTON_A)) {
                 actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 180 / 100);
             }
             if (actionCommandStatus->barFillLevel >= 10000) {
                 hudElement = actionCommandStatus->hudElements[4];
                 actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->isBarFilled = TRUE;
-                hud_element_set_render_pos(hudElement, actionCommandStatus->hudX + 50, actionCommandStatus->hudY + 28);
+                hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY + 28);
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
@@ -210,10 +210,10 @@ void N(draw)(void) {
     x = 60 - temp_v1 / 100;
     temp_a1 = x - 31;
 
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudX - temp_a1, actionCommandStatus->hudY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX + 31 - x, actionCommandStatus->hudY - 1);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - temp_a1, actionCommandStatus->hudPosY + 17);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31 - x, actionCommandStatus->hudPosY - 1);
 
-    if (battleStatus->actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
         hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     }
 

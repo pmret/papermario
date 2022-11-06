@@ -398,12 +398,12 @@ EvtScript N(802A2650) = {
 
 EvtScript D_802A2720_73EF80 = {
     EVT_EXEC_WAIT(D_802A21D4_73EA34)
-    EVT_CALL(GetActionTutorialState, LVar0)
-    EVT_IF_EQ(LVar0, ACTION_TUTORIAL_GUIDED)
-        EVT_CALL(SetActionTutorialState, ACTION_TUTORIAL_WAIT_FOR_INPUT)
+    EVT_CALL(GetActionCommandMode, LVar0)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+        EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
         EVT_LOOP(0)
-            EVT_CALL(GetActionTutorialState, LVar0)
-            EVT_IF_LT(LVar0, ACTION_TUTORIAL_GUIDED)
+            EVT_CALL(GetActionCommandMode, LVar0)
+            EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -414,8 +414,8 @@ EvtScript D_802A2720_73EF80 = {
         EVT_EXEC_WAIT(D_802A203C_73E89C)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionTutorialState, LVar0)
-    EVT_IF_GT(LVar0, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
+    EVT_CALL(GetActionCommandMode, LVar0)
+    EVT_IF_GT(LVar0, ACTION_COMMAND_MODE_NOT_LEARNED)
         EVT_WAIT(1)
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVar0)
@@ -862,12 +862,12 @@ EvtScript D_802A4018_740878 = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -5, 10, 0)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_30000)
     EVT_CALL(func_80274A18, LVarA, 0)
-    EVT_CALL(GetActionTutorialState, LVar0)
-    EVT_IF_EQ(LVar0, ACTION_TUTORIAL_GUIDED)
-        EVT_CALL(SetActionTutorialState, ACTION_TUTORIAL_WAIT_FOR_INPUT)
+    EVT_CALL(GetActionCommandMode, LVar0)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+        EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
         EVT_LOOP(0)
-            EVT_CALL(GetActionTutorialState, LVar0)
-            EVT_IF_LT(LVar0, ACTION_TUTORIAL_GUIDED)
+            EVT_CALL(GetActionCommandMode, LVar0)
+            EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -878,8 +878,8 @@ EvtScript D_802A4018_740878 = {
         EVT_EXEC_WAIT(D_802A203C_73E89C)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionTutorialState, LVar0)
-    EVT_IF_GT(LVar0, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
+    EVT_CALL(GetActionCommandMode, LVar0)
+    EVT_IF_GT(LVar0, ACTION_COMMAND_MODE_NOT_LEARNED)
         EVT_WAIT(1)
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVar0)

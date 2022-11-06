@@ -13,7 +13,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
 
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSquirt;
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -25,19 +25,19 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionResult = 0;
-    actionCommandStatus->hudX = -48;
+    actionCommandStatus->hudPosX = -48;
     actionCommandStatus->unk_5C = 0;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosY = 80;
 
     id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
@@ -49,7 +49,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -99,15 +99,15 @@ void N(update)(void) {
         case 1:
             btl_set_popup_duration(99);
 
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX,
-                actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX,
-                actionCommandStatus->hudY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX,
+                actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX,
+                actionCommandStatus->hudPosY + 28);
             break;
         case 10:
             btl_set_popup_duration(99);

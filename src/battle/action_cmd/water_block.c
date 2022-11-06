@@ -116,7 +116,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableWaterBlock;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -130,68 +130,68 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->targetWeakness = evt_get_variable(script, *args++);
     battleStatus->actionResult = 1;
     actionCommandStatus->hudPrepareTime = 30;
-    actionCommandStatus->hudX = -48;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosX = -48;
+    actionCommandStatus->hudPosY = 80;
 
     id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingBar3Chances);
     actionCommandStatus->hudElements[1] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[2] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[3] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[4] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[6] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[7] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[8] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     actionCommandStatus->hudElements[10] = hud_element_create(D_802AB184_42C674[0]);
     hud_element_set_render_pos(actionCommandStatus->hudElements[10],
-                               actionCommandStatus->hudX, actionCommandStatus->hudY);
+                               actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
 
     actionCommandStatus->hudElements[11] = hud_element_create(&HES_TimingCharge4c);
     hud_element_set_render_pos(actionCommandStatus->hudElements[11],
-                               actionCommandStatus->hudX, actionCommandStatus->hudY);
+                               actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
 
     id = hud_element_create(&HES_TimingCharge4b);
     actionCommandStatus->hudElements[12] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
 
     switch (actionCommandStatus->targetWeakness) {
         case 0:
@@ -208,7 +208,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     return ApiStatus_DONE2;
 }
 
@@ -217,7 +217,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -303,32 +303,32 @@ void N(update)(void) {
                 actionCommandStatus->hudPrepareTime--;
                 return;
             }
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX + 28, actionCommandStatus->hudY + 28);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX + 21, actionCommandStatus->hudY + 24);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudX + 41, actionCommandStatus->hudY + 24);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudX + 61, actionCommandStatus->hudY + 24);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX + 28, actionCommandStatus->hudPosY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 21, actionCommandStatus->hudPosY + 24);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX + 41, actionCommandStatus->hudPosY + 24);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudPosX + 61, actionCommandStatus->hudPosY + 24);
 
             id = actionCommandStatus->hudElements[10];
             switch (actionCommandStatus->targetWeakness) {
                 case 0:
-                    hud_element_set_render_pos(id, actionCommandStatus->hudX + 91, actionCommandStatus->hudY + 7);
+                    hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 91, actionCommandStatus->hudPosY + 7);
                     break;
                 case 1:
-                    hud_element_set_render_pos(id, actionCommandStatus->hudX + 91, actionCommandStatus->hudY + 13);
+                    hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 91, actionCommandStatus->hudPosY + 13);
                     break;
                 case 2:
-                    hud_element_set_render_pos(id, actionCommandStatus->hudX + 91, actionCommandStatus->hudY + 13);
+                    hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 91, actionCommandStatus->hudPosY + 13);
                     break;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[11], actionCommandStatus->hudX - 5, actionCommandStatus->hudY + 29);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[12], actionCommandStatus->hudX + 7, actionCommandStatus->hudY + 29);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[13], actionCommandStatus->hudX + 92, actionCommandStatus->hudY + 23);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[11], actionCommandStatus->hudPosX - 5, actionCommandStatus->hudPosY + 29);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[12], actionCommandStatus->hudPosX + 7, actionCommandStatus->hudPosY + 29);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[13], actionCommandStatus->hudPosX + 92, actionCommandStatus->hudPosY + 23);
             break;
         case 10:
             btl_set_popup_duration(99);
@@ -407,7 +407,7 @@ void N(update)(void) {
                 } else {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 28, actionCommandStatus->hudY + 38);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 28, actionCommandStatus->hudPosY + 38);
                 hud_element_clear_flags(id, 2);
             }
 
@@ -418,7 +418,7 @@ void N(update)(void) {
                 } else {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 28, actionCommandStatus->hudY + 38);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 28, actionCommandStatus->hudPosY + 38);
                 hud_element_clear_flags(id, 2);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
@@ -482,7 +482,7 @@ void N(update)(void) {
                 } else {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 48, actionCommandStatus->hudY + 38);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 48, actionCommandStatus->hudPosY + 38);
                 hud_element_clear_flags(id, 2);
             }
             if (actionCommandStatus->unk_5D == -5) {
@@ -492,7 +492,7 @@ void N(update)(void) {
                 } else {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 48, actionCommandStatus->hudY + 38);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 48, actionCommandStatus->hudPosY + 38);
                 hud_element_clear_flags(id, 2);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
@@ -556,7 +556,7 @@ void N(update)(void) {
                     } else {
                         hud_element_set_script(id, &HES_TimingMiss);
                     }
-                    hud_element_set_render_pos(id, actionCommandStatus->hudX + 68, actionCommandStatus->hudY + 38);
+                    hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 68, actionCommandStatus->hudPosY + 38);
                     hud_element_clear_flags(id, 2);
                 }
             }
@@ -567,7 +567,7 @@ void N(update)(void) {
                 } else {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 68, actionCommandStatus->hudY + 38);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 68, actionCommandStatus->hudPosY + 38);
                 hud_element_clear_flags(id, 2);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
                 actionCommandStatus->state = 16;

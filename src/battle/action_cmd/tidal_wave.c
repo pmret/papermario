@@ -15,7 +15,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableTidalWave;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     } else {
@@ -26,19 +26,19 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->barFillLevel = 0;
         actionCommandStatus->barFillWidth = 0;
         battleStatus->actionResult = 0;
-        actionCommandStatus->hudX = -48;
-        actionCommandStatus->hudY = 80;
+        actionCommandStatus->hudPosX = -48;
+        actionCommandStatus->hudPosY = 80;
 
         id = hud_element_create(&HES_BlueMeter);
         actionCommandStatus->hudElements[0] = id;
-        hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
+        hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
         hud_element_set_render_depth(id, 0);
         hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
         for (i = 1; i < 15; i++) {
             id = hud_element_create(&HES_AButton);
             actionCommandStatus->hudElements[i] = id;
-            hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+            hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
             hud_element_set_render_depth(id, 0);
             hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         }
@@ -52,7 +52,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -98,14 +98,14 @@ void N(update)(void) {
             break;
         case 1:
             btl_set_popup_duration(99);
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
             hud_element_set_render_pos(
                 actionCommandStatus->hudElements[0],
-                actionCommandStatus->hudX + 21,
-                actionCommandStatus->hudY + 28);
+                actionCommandStatus->hudPosX + 21,
+                actionCommandStatus->hudPosY + 28);
             break;
         case 10:
             btl_set_popup_duration(99);
@@ -134,8 +134,8 @@ void N(update)(void) {
                 id, D_802A97C0_42CEB0[newButton]);
             hud_element_set_render_pos(
                 id,
-                actionCommandStatus->hudX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
-                actionCommandStatus->hudY);
+                actionCommandStatus->hudPosX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
+                actionCommandStatus->hudPosY);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
             sfx_play_sound(SOUND_233);
             actionCommandStatus->lookBackCounter = 1;
@@ -251,8 +251,8 @@ void N(update)(void) {
                         hud_element_set_scale(id, 0.5f);
                         hud_element_set_render_pos(
                             id,
-                            actionCommandStatus->hudX + ((actionCommandStatus->unk_5D - 1) * 20),
-                            actionCommandStatus->hudY + 7);
+                            actionCommandStatus->hudPosX + ((actionCommandStatus->unk_5D - 1) * 20),
+                            actionCommandStatus->hudPosY + 7);
                         actionCommandStatus->unk_5D++;
                         actionCommandStatus->barFillLevel +=
                             battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 0x12;

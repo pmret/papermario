@@ -1097,8 +1097,8 @@ EvtScript D_80286228 = {
 
 EvtScript RunAwayStart = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(GetActionTutorialState, LVar2)
-    EVT_IF_EQ(LVar2, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
+    EVT_CALL(GetActionCommandMode, LVar2)
+    EVT_IF_EQ(LVar2, ACTION_COMMAND_MODE_NOT_LEARNED)
         EVT_EXEC_WAIT(D_80286228)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_RETURN

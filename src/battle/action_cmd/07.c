@@ -22,31 +22,31 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->state = 0;
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = evt_get_variable(script, *args);
-    actionCommandStatus->hudX = -48;
+    actionCommandStatus->hudPosX = -48;
     actionCommandStatus->barFillWidth = 0;
     D_802A9620 = 0;
-    actionCommandStatus->hudY = 80;
+    actionCommandStatus->hudPosY = 80;
 
     hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX,
-        actionCommandStatus->hudY);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
+        actionCommandStatus->hudPosY);
     hud_element_set_render_depth(hudElement, 0);
 
     // Weird use of an extra temp settles regalloc here.
     hudElementTemp = hud_element_create(&HES_BlueMeter);
     hudElement = hudElementTemp;
     actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX,
-        actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
+        actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX,
-        actionCommandStatus->hudY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
+        actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
@@ -110,14 +110,14 @@ void N(update)(void) {
         case 1:
             btl_set_popup_duration(99);
 
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX + 31, actionCommandStatus->hudY + 14);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31, actionCommandStatus->hudPosY + 14);
             break;
         case 10:
             btl_set_popup_duration(99);

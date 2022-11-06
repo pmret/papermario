@@ -33,16 +33,16 @@ enum MashMeterColorModes {
     MASH_METER_MODE_ONE_COLOR   = 1,
 };
 
-enum ActionTutorialModes {
-    ACTION_TUTORIAL_LEARN_BLOCK         = -1,
-    ACTION_TUTORIAL_MOVES_NOT_LEARNED   = 0,
-    ACTION_TUTORIAL_MOVES_LEARNED       = 1,
-    ACTION_TUTORIAL_GUIDED              = 2,
-    ACTION_TUTORIAL_WAIT_FOR_INPUT      = 3,
+enum ActionCommandModes {
+    ACTION_COMMAND_MODE_TUTORIAL_BLOCK      = -1,
+    ACTION_COMMAND_MODE_NOT_LEARNED         = 0,
+    ACTION_COMMAND_MODE_LEARNED             = 1,
+    ACTION_COMMAND_MODE_TUTORIAL            = 2,
+    ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT = 3,
 };
 
 typedef struct ActionCommandStatus {
-    /* 0x00 */ s32 dynEntityId;
+    /* 0x00 */ s32 workerID;
     /* 0x04 */ s32 hudElements[16];
     /* 0x44 */ s16 barFillLevel; // full = 10000
     /* 0x46 */ s16 thresholdLevel;
@@ -53,8 +53,8 @@ typedef struct ActionCommandStatus {
     /* 0x50 */ s16 difficulty; // values from 0 to 7
     /* 0x52 */ s16 duration;
     /* 0x54 */ s16 frameCounter;
-    /* 0x56 */ s16 hudX;
-    /* 0x58 */ s16 hudY;
+    /* 0x56 */ s16 hudPosX;
+    /* 0x58 */ s16 hudPosY;
     /* 0x5A */ s16 unk_5A;
     /* 0x5C */ s8 unk_5C;
     /* 0x5D */ s8 unk_5D;
@@ -154,8 +154,8 @@ API_CALLABLE(SetActionDifficultyTable);
 API_CALLABLE(SetupMashMeter);
 API_CALLABLE(GetActionSuccess);
 API_CALLABLE(SetActionSuccess);
-API_CALLABLE(SetActionTutorialState);
-API_CALLABLE(GetActionTutorialState);
+API_CALLABLE(SetActionCommandMode);
+API_CALLABLE(GetActionCommandMode);
 API_CALLABLE(SetActionHudPrepareTime);
 API_CALLABLE(GetCommandAutoSuccess);
 API_CALLABLE(SetCommandAutoSuccess);

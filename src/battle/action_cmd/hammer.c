@@ -12,7 +12,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
     battleStatus->unk_86 = 0;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         battleStatus->actionResult = 0;
         return ApiStatus_DONE2;
@@ -20,51 +20,51 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
 
     action_command_init_status();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_SMASH;
-    actionCommandStatus->hudX = -48;
+    actionCommandStatus->hudPosX = -48;
     actionCommandStatus->state = 0;
     actionCommandStatus->wrongButtonPressed = FALSE;
-    actionCommandStatus->hudY = 96;
+    actionCommandStatus->hudPosY = 96;
 
     id = hud_element_create(&HES_TimingBar1Chance);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 10);
 
     id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4a);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4b);
     actionCommandStatus->hudElements[3] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4c);
     actionCommandStatus->hudElements[4] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_StickHoldLeft);
     actionCommandStatus->hudElements[5] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_RightOn);
     actionCommandStatus->hudElements[6] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudX, actionCommandStatus->hudY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_alpha(id, 0xFF);
 
@@ -76,7 +76,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         battleStatus->actionResult = 0;
         return ApiStatus_DONE2;
@@ -158,19 +158,19 @@ void N(update)(void) {
             break;
         case 1:
             btl_set_popup_duration(99);
-            actionCommandStatus->hudX += 20;
-            if (actionCommandStatus->hudX > 50) {
-                actionCommandStatus->hudX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX + 21, actionCommandStatus->hudY - 3);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudX + 5, actionCommandStatus->hudY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudX - 7, actionCommandStatus->hudY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudX - 19, actionCommandStatus->hudY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[5], actionCommandStatus->hudX, actionCommandStatus->hudY - 23);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX + 21, actionCommandStatus->hudPosY - 3);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 5, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - 7, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudPosX - 19, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[5], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY - 23);
             if (actionCommandStatus->autoSucceed != 0) {
                 id = actionCommandStatus->hudElements[6];
-                hud_element_set_render_pos(id, actionCommandStatus->hudX + 50, actionCommandStatus->hudY);
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY);
                 if (actionCommandStatus->showHud) {
                     hud_element_clear_flags(id, 2);
                     break;
@@ -194,14 +194,14 @@ void N(update)(void) {
             }
 
             actionCommandStatus->frameCounter = 0;
-            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_TUTORIAL_GUIDED) {
+            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL) {
                 actionCommandStatus->hammerMissedStart = TRUE;
             }
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
 
-            if (battleStatus->actionCommandMode <= ACTION_TUTORIAL_LEARN_BLOCK) {
+            if (battleStatus->actionCommandMode <= ACTION_COMMAND_MODE_TUTORIAL_BLOCK) {
                 return;
             }
 
@@ -255,7 +255,7 @@ void N(update)(void) {
             if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) &&
                 phi_s0 == 0 &&
                 actionCommandStatus->autoSucceed == 0 &&
-                battleStatus->actionCommandMode < ACTION_TUTORIAL_GUIDED)
+                battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL)
             {
                 battleStatus->actionSuccess = -1;
                 battleStatus->unk_86 = -1;
@@ -286,7 +286,7 @@ void N(update)(void) {
                     }
                 }
 
-                if (battleStatus->actionCommandMode < ACTION_TUTORIAL_GUIDED || actionCommandStatus->frameCounter != actionCommandStatus->duration) {
+                if (battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL || actionCommandStatus->frameCounter != actionCommandStatus->duration) {
                     actionCommandStatus->frameCounter++;
                     if (actionCommandStatus->duration < actionCommandStatus->frameCounter) {
                         if (battleStatus->actionSuccess == 0) {

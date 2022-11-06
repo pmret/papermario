@@ -386,12 +386,12 @@ EvtScript N(main) = {
 
 EvtScript D_802A26BC_7672DC = {
     EVT_EXEC_WAIT(D_802A2184_766DA4)
-    EVT_CALL(GetActionTutorialState, LVar0)
-    EVT_IF_EQ(LVar0, ACTION_TUTORIAL_GUIDED)
-        EVT_CALL(SetActionTutorialState, ACTION_TUTORIAL_WAIT_FOR_INPUT)
+    EVT_CALL(GetActionCommandMode, LVar0)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+        EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
         EVT_LOOP(0)
-            EVT_CALL(GetActionTutorialState, LVar0)
-            EVT_IF_LT(LVar0, ACTION_TUTORIAL_GUIDED)
+            EVT_CALL(GetActionCommandMode, LVar0)
+            EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)

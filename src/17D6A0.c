@@ -3077,7 +3077,7 @@ void func_8024FB3C(void* data) {
         case 0x42:
             temp_a0 = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
-            if (temp_a0 == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+            if (temp_a0 == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 D_8029F64A = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;

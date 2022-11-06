@@ -46,7 +46,7 @@ ApiStatus N(GetReturnMoveTime)(Evt* script, s32 isInitialCall) {
         script->varTable[0] = 20;
     }
 
-    if (battleStatus->actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
         if (script->varTable[0] < 10) {
             script->varTable[0] = 10;
         }
@@ -206,7 +206,7 @@ ApiStatus N(JumpOnTarget)(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
+            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             state->moveTime = 1;
