@@ -4,6 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Twink.h"
 #include "sprite/npc/BattleMerlee.h"
+#include "battle/action_cmd/flee.h"
 
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
@@ -13,8 +14,6 @@ extern EvtScript D_802988F0;
 extern EvtScript D_80298724;
 extern EvtScript D_80298948;
 ApiStatus func_802749F8(Evt* script, s32 isInitialCall);
-ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall);
-ApiStatus func_802A92A0_422D70(Evt* script, s32 isInitialCall);
 
 BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
@@ -1098,16 +1097,16 @@ EvtScript D_80286228 = {
 
 EvtScript RunAwayStart = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(GetActionCommandMode, LVar2)
-    EVT_IF_EQ(LVar2, 0)
+    EVT_CALL(GetActionTutorialState, LVar2)
+    EVT_IF_EQ(LVar2, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
         EVT_EXEC_WAIT(D_80286228)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_FLEE)
-    EVT_CALL(func_802A9000_422AD0, LVar0)
+    EVT_CALL(action_command_flee_init, LVar0)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(func_80260E38)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_50000)
@@ -1124,7 +1123,7 @@ EvtScript RunAwayStart = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
     EVT_WAIT(5)
-    EVT_CALL(func_802A92A0_422D70, 0, 60, 3)
+    EVT_CALL(action_command_flee_start, 0, 60, 3)
     EVT_CALL(func_80260E5C)
     EVT_WAIT(5)
     EVT_CALL(AddActorPos, 0, 2, 0, 0)

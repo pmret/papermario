@@ -3,9 +3,10 @@
 
 #include "common_structs.h"
 
-ApiStatus func_802A9000_42E3A0(Evt* script, s32 isInitialCall);
-ApiStatus action_command_smack_MashActionCommandInit(Evt* script, s32 isInitialCall);
-
-void func_802A9298_42E638(void);
+ApiStatus action_command_smack_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_smack_start(Evt* script, s32 isInitialCall);
+void action_command_smack_update(void);
+void action_command_smack_draw(void);
+void action_command_smack_free(void);
 
 #endif

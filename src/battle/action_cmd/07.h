@@ -3,6 +3,10 @@
 
 #include "common_structs.h"
 
-void func_802A9228_425D78(void);
+ApiStatus action_command_07_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_07_start(Evt* script, s32 isInitialCall);
+void action_command_07_update(void);
+void action_command_07_draw(void);
+void action_command_07_free(void);
 
 #endif

@@ -1817,7 +1817,7 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            if (battleStatus->unk_83 == 0) {
+            if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             playerState->moveTime = 1;

@@ -37,8 +37,6 @@ extern HudScript HES_AimShimmerD;
 extern HudScript HES_AimShimmerE;
 extern HudScript HES_AimShimmerF;
 extern HudScript HES_AimTarget;
-extern HudScript HES_StickHoldLeft;
-extern HudScript HES_StickNeutral;
 
 extern EvtScript N(handleEvent);
 extern EvtScript N(idle);
@@ -191,7 +189,7 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             shellShotTimer = 90;
             state->velocity = 3.0f;
             battleStatus->unk_86 = 0;
-            func_80268858();
+            action_command_init_status();
             func_80269118();
             evt->functionTemp[0] = 1;
             break;
@@ -265,14 +263,14 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             } else {
                 battleStatus->unk_86 = 0;
             }
-            battleStatus->unk_84 = 0;
+            battleStatus->actionResult = 0;
 
             if (aimAngle < 7.0f) {
-                battleStatus->unk_84 = 1;
+                battleStatus->actionResult = 1;
                 battleStatus->unk_86 = 1;
                 func_80269160();
             } else if (state->angle < state->bounceDivisor) {
-                battleStatus->unk_84 = -1;
+                battleStatus->actionResult = -1;
             }
 
             for (i = 0; i < ARRAY_COUNT(hudMarkers); i++) {
@@ -442,7 +440,7 @@ ApiStatus N(CarryAway)(Evt* evt, s32 isInitialCall) {
             }
 
             if (parakarry->state.currentPos.x > 240.0f) {
-                battleStatus->unk_84 = temp_s4;
+                battleStatus->actionResult = temp_s4;
                 return ApiStatus_DONE2;
             }
             break;
@@ -805,7 +803,7 @@ EvtScript N(celebrate) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
@@ -929,8 +927,8 @@ EvtScript N(skyDive) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_8026919C, EVT_PTR(N(actionCommandTable)))
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(actionCommandTable)))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(InitTargetIterator)
@@ -941,7 +939,7 @@ EvtScript N(skyDive) = {
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -10, 10)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Still)
     EVT_WAIT(3)
-    EVT_CALL(func_802A9120_421B10, 32, 3)
+    EVT_CALL(action_command_jump_start, 32, 3)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2004)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_FlyFast)
@@ -1093,9 +1091,9 @@ EvtScript N(airLift) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(N(AirLiftChance))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_AIR_LIFT)
-    EVT_CALL(func_802A9000_428A70, LVar0)
+    EVT_CALL(action_command_air_lift_init, LVar0)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(GetDistanceToGoal, ACTOR_PARTNER, LVar0)
@@ -1107,7 +1105,7 @@ EvtScript N(airLift) = {
     EVT_IF_LT(LVar0, 0)
         EVT_SET(LVar0, 0)
     EVT_END_IF
-    EVT_CALL(func_80269344, LVar0)
+    EVT_CALL(SetActionHudPrepareTime, LVar0)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -4, 10)
@@ -1143,7 +1141,7 @@ EvtScript N(airLift) = {
     EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_AIR_LIFT, ATTACK_EVENT_FLAG_4, 0, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(N(AirLiftChance))
     EVT_IF_NE(LVar0, -1)
-        EVT_CALL(func_802A9184_428BF4, 0, 87, 3, 0)
+        EVT_CALL(action_command_air_lift_start, 0, 87, 3, 0)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
         EVT_CHILD_THREAD
             EVT_WAIT(1)
@@ -1204,9 +1202,9 @@ EvtScript N(airLift) = {
 
 EvtScript N(airRaid) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_AIR_RAID)
-    EVT_CALL(func_802A9000_429320)
+    EVT_CALL(action_command_air_raid_init)
     EVT_CALL(SetupMashMeter, 4, 25, 50, 75, 100, 0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
@@ -1216,7 +1214,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -2, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
-    EVT_CALL(action_command_air_raid_MashActionCommandInit, 0, 90, 3)
+    EVT_CALL(action_command_air_raid_start, 0, 90, 3)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_WAIT(2)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)

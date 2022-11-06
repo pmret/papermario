@@ -1,24 +1,24 @@
-ApiStatus N(MashActionCommandInit)(Evt* script, s32 isInitialCall) {
+ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     u8 mashMeterCutoff;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (!battleStatus->unk_83) {
+    if (battleStatus->actionCommandMode == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
 
-    func_80268858();
-    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_60 = 0;
+    action_command_init_status();
+    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
+    actionCommandStatus->duration = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
+    actionCommandStatus->targetWeakness = evt_get_variable(script, *args++);
+    actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
-    actionCommandStatus->unk_48 = 0;
+    actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 127;
     mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[(actionCommandStatus->mashMeterIntervals - 1)];

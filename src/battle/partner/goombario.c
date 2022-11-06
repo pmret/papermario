@@ -46,7 +46,7 @@ ApiStatus N(GetReturnMoveTime)(Evt* script, s32 isInitialCall) {
         script->varTable[0] = 20;
     }
 
-    if (battleStatus->unk_83 != 0) {
+    if (battleStatus->actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
         if (script->varTable[0] < 10) {
             script->varTable[0] = 10;
         }
@@ -206,7 +206,7 @@ ApiStatus N(JumpOnTarget)(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            if (battleStatus->unk_83 == 0) {
+            if (battleStatus->actionCommandMode == ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             state->moveTime = 1;
@@ -668,7 +668,7 @@ EvtScript N(celebrate) = {
 
 EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
@@ -925,7 +925,7 @@ EvtScript N(calcJumpTime) = {
 
 EvtScript N(headbonk1) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
@@ -934,7 +934,7 @@ EvtScript N(headbonk1) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_WAIT(1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(func_802A9120_421B10, LVarA, 3)
+    EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
@@ -993,9 +993,9 @@ EvtScript N(headbonk1) = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_SET(LVarA, 24)
     EVT_THREAD
         EVT_WAIT(4)
@@ -1030,7 +1030,7 @@ EvtScript N(headbonk1) = {
 
 EvtScript N(headbonk2) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
@@ -1039,7 +1039,7 @@ EvtScript N(headbonk2) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_WAIT(1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(func_802A9120_421B10, LVarA, 3)
+    EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
@@ -1098,9 +1098,9 @@ EvtScript N(headbonk2) = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_SET(LVarA, 24)
     EVT_THREAD
         EVT_WAIT(4)
@@ -1137,7 +1137,7 @@ EvtScript N(headbonk2) = {
 
 EvtScript N(headbonk3) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
@@ -1146,7 +1146,7 @@ EvtScript N(headbonk3) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_WAIT(1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(func_802A9120_421B10, LVarA, 3)
+    EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
@@ -1205,9 +1205,9 @@ EvtScript N(headbonk3) = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_SET(LVarA, 24)
     EVT_THREAD
         EVT_WAIT(4)
@@ -1257,7 +1257,7 @@ s32 N(powerBounceChance) = 200;
 
 EvtScript N(multibonk) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
@@ -1266,7 +1266,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_WAIT(1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(func_802A9120_421B10, LVarA, 1)
+    EVT_CALL(action_command_jump_start, LVarA, 1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
@@ -1334,21 +1334,21 @@ EvtScript N(multibonk) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(func_8026919C, EVT_PTR(N(actionCommandTable)))
+    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(actionCommandTable)))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_SET(LVarA, 24)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(func_802A9120_421B10, LVarA, 1)
+            EVT_CALL(action_command_jump_start, LVarA, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(func_802A9120_421B10, LVarA, 2)
+            EVT_CALL(action_command_jump_start, LVarA, 2)
         EVT_CASE_EQ(2)
-            EVT_CALL(func_802A9120_421B10, LVarA, 3)
+            EVT_CALL(action_command_jump_start, LVarA, 3)
         EVT_CASE_EQ(3)
-            EVT_CALL(func_802A9120_421B10, LVarA, 4)
+            EVT_CALL(action_command_jump_start, LVarA, 4)
         EVT_CASE_DEFAULT
-            EVT_CALL(func_802A9120_421B10, LVarA, 5)
+            EVT_CALL(action_command_jump_start, LVarA, 5)
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(4)

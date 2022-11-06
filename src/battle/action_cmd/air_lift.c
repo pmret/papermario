@@ -1,83 +1,74 @@
 #include "common.h"
 #include "effects.h"
-#include "battle/battle.h"
-#include "hud_element.h"
+#include "battle/action_cmd.h"
 
 #define NAMESPACE action_command_air_lift
-
-void func_80268834(s32, s32, s16, s32);
-
-extern HudScript HES_BlueMeter;
-extern HudScript HES_AButton;
-extern HudScript HES_MashAButton;
-extern HudScript HES_100pct;
-extern s32 D_80294340;
 
 s32 D_802A9852_4292C0[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 BSS s32 air_lift_bss_0;
 
-ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
+ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     s32 *args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 hudElement;
 
-    battleStatus->unk_434 = &D_80294340;
+    battleStatus->actionCmdDifficultyTable = actionCmdTableAirLift;
     battleStatus->unk_82 = 0;
     battleStatus->unk_86 = 127;
-    func_80268858();
+    action_command_init_status();
     actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_AIR_LIFT;
-    actionCommandStatus->unk_61 = 1;
+    actionCommandStatus->showHud = TRUE;
     actionCommandStatus->state = 0;
-    actionCommandStatus->unk_60 = 0;
+    actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
-    actionCommandStatus->unk_48 = 0;
-    actionCommandStatus->unk_68 = 0;
+    actionCommandStatus->barFillWidth = 0;
+    actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_84 = 0;
-    actionCommandStatus->unk_6C = 30;
-    actionCommandStatus->hudElementX = -48;
+    battleStatus->actionResult = 0;
+    actionCommandStatus->hudPrepareTime = 30;
+    actionCommandStatus->hudX = -48;
     air_lift_bss_0 = 0;
-    actionCommandStatus->hudElementY = 80;
+    actionCommandStatus->hudY = 80;
 
     hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9184_428BF4(Evt* script, s32 isInitialCall) {
+ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     u8 mashMeterCutoff;
 
-    func_80268858();
+    action_command_init_status();
 
-    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
+    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
+    actionCommandStatus->duration = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
+    actionCommandStatus->targetWeakness = evt_get_variable(script, *args++);
 
-    actionCommandStatus->unk_60 = 0;
+    actionCommandStatus->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 127;
 
@@ -93,7 +84,7 @@ ApiStatus func_802A9184_428BF4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void func_802A9278_428CE8(void) {
+void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
@@ -104,13 +95,13 @@ void func_802A9278_428CE8(void) {
 
             id = actionCommandStatus->hudElements[0];
             hud_element_set_alpha(id, 255);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
 
             id = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(id, 255);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
 
@@ -119,36 +110,36 @@ void func_802A9278_428CE8(void) {
         case 1:
             btl_set_popup_duration(99);
 
-            if (actionCommandStatus->unk_6C != 0) {
-                actionCommandStatus->unk_6C--;
+            if (actionCommandStatus->hudPrepareTime != 0) {
+                actionCommandStatus->hudPrepareTime--;
                 return;
             }
 
-            actionCommandStatus->hudElementX += 20;
-            if (actionCommandStatus->hudElementX > 50) {
-                actionCommandStatus->hudElementX = 50;
+            actionCommandStatus->hudX += 20;
+            if (actionCommandStatus->hudX > 50) {
+                actionCommandStatus->hudX = 50;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudX, actionCommandStatus->hudY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudX, actionCommandStatus->hudY + 28);
             break;
         case 10:
             btl_set_popup_duration(99);
 
-            if (actionCommandStatus->unk_4E != 0) {
-                actionCommandStatus->unk_4E--;
+            if (actionCommandStatus->prepareTime != 0) {
+                actionCommandStatus->prepareTime--;
                 return;
             }
 
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             air_lift_bss_0 = 1;
-            actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
+            actionCommandStatus->frameCounter = actionCommandStatus->duration;
             sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
-            actionCommandStatus->state = 0xB;
+            actionCommandStatus->state = 11;
             // fallthrough
         case 11:
             btl_set_popup_duration(99);
-            if (actionCommandStatus->unk_68 == 0) {
+            if (!actionCommandStatus->isBarFilled) {
                 if (actionCommandStatus->unk_5A != 0) {
                     s32 a = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
 
@@ -164,9 +155,9 @@ void func_802A9278_428CE8(void) {
                 }
             }
 
-            if (battleStatus->unk_83 != 0 && (battleStatus->currentButtonsPressed & BUTTON_A)) {
+            if (battleStatus->actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED && (battleStatus->currentButtonsPressed & BUTTON_A)) {
                 if (actionCommandStatus->unk_5A != 0) {
-                    s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
+                    s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                     s32 b = actionCommandStatus->unk_5A * 820;
 
                     actionCommandStatus->barFillLevel += (a * b) / 10000;
@@ -181,28 +172,28 @@ void func_802A9278_428CE8(void) {
 
             if (actionCommandStatus->barFillLevel > 10000) {
                 actionCommandStatus->barFillLevel = 10000;
-                actionCommandStatus->unk_68 = 1;
+                actionCommandStatus->isBarFilled = TRUE;
                 id = actionCommandStatus->hudElements[2];
-                hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
+                hud_element_set_render_pos(id, actionCommandStatus->hudX + 50, actionCommandStatus->hudY + 28);
                 hud_element_clear_flags(id, 2);
             }
 
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
-            if (battleStatus->unk_84 < battleStatus->actionSuccess) {
-                battleStatus->unk_84 = battleStatus->actionSuccess;
+            if (battleStatus->actionResult < battleStatus->actionSuccess) {
+                battleStatus->actionResult = battleStatus->actionSuccess;
             }
-            sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->actionSuccess * 12);
+            sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, battleStatus->actionSuccess * 12);
 
-            if (actionCommandStatus->unk_54 != 0) {
-                actionCommandStatus->unk_54--;
+            if (actionCommandStatus->frameCounter != 0) {
+                actionCommandStatus->frameCounter--;
                 return;
             }
 
             if (actionCommandStatus->unk_5A == 0) {
-                battleStatus->unk_84 = 0;
+                battleStatus->actionResult = 0;
             }
 
-            battleStatus->actionSuccess = battleStatus->unk_84;
+            battleStatus->actionSuccess = battleStatus->actionResult;
             if (rand_int(99) < battleStatus->actionSuccess) {
                 battleStatus->unk_86 = 1;
                 battleStatus->actionSuccess = 1;
@@ -216,8 +207,8 @@ void func_802A9278_428CE8(void) {
             }
             btl_set_popup_duration(0);
             sfx_stop_sound(SOUND_80000041);
-            actionCommandStatus->unk_54 = 20;
-            actionCommandStatus->state = 0xC;
+            actionCommandStatus->frameCounter = 20;
+            actionCommandStatus->state = 12;
             break;
         case 12:
             if (actionCommandStatus->unk_5A == 0) {
@@ -226,22 +217,22 @@ void func_802A9278_428CE8(void) {
                     actionCommandStatus->barFillLevel = 0;
                 }
             }
-            if (actionCommandStatus->unk_54 != 0) {
-                actionCommandStatus->unk_54--;
+            if (actionCommandStatus->frameCounter != 0) {
+                actionCommandStatus->frameCounter--;
                 return;
             }
-            func_80268C9C();
+            action_command_free();
             break;
     }
 }
 
-void N(draw_hud_elements)(void) {
+void N(draw)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 hudX;
     s32 hudY;
     s32 hudElement1;
 
-    if (gBattleStatus.unk_83 != 0) {
+    if (gBattleStatus.actionCommandMode != ACTION_TUTORIAL_MOVES_NOT_LEARNED) {
         hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     }
 
@@ -250,11 +241,11 @@ void N(draw_hud_elements)(void) {
     hud_element_get_render_pos(hudElement1, &hudX, &hudY);
 
     if (air_lift_bss_0 == 0) {
-        func_80268798(hudX, hudY, actionCommandStatus->barFillLevel / 100, 1);
-    } else if (actionCommandStatus->unk_68 == 0) {
-        func_80268798(hudX, hudY, actionCommandStatus->barFillLevel / 100, 4);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, actionCommandStatus->barFillLevel / 100, 1);
+    } else if (!actionCommandStatus->isBarFilled) {
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, actionCommandStatus->barFillLevel / 100, 4);
     } else {
-        func_80268834(hudX, hudY, actionCommandStatus->barFillLevel / 100, 4);
+        draw_mash_meter_blink_with_divisor(hudX, hudY, actionCommandStatus->barFillLevel / 100, 4);
     }
 
     hud_element_draw_clipped(actionCommandStatus->hudElements[2]);

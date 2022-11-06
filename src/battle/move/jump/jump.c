@@ -296,10 +296,10 @@ EvtScript D_802A203C_73E89C = {
 
 EvtScript D_802A21D4_73EA34 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1370_73DBD0)
-    EVT_CALL(func_802A9120_421B10, LVarA, 3)
+    EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_30000)
@@ -310,14 +310,14 @@ EvtScript D_802A21D4_73EA34 = {
 
 EvtScript D_802A2280 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(MoveToJump))
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(D_802A1458_73DCB8)
     EVT_SET(LVarB, LVarA)
     EVT_ADD(LVarB, 14)
     EVT_ADD(LVarB, -3)
-    EVT_CALL(func_802A9120_421B10, LVarB, 3)
+    EVT_CALL(action_command_jump_start, LVarB, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_37)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_1000A, ANIM_Mario_1000B)
@@ -336,14 +336,14 @@ EvtScript D_802A2280 = {
 
 EvtScript D_802A23D4_73EC34 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1540_73DDA0)
-    EVT_CALL(func_8026919C, EVT_PTR(D_802A1140_73D9A0))
+    EVT_CALL(SetActionDifficultyTable, EVT_PTR(D_802A1140_73D9A0))
     EVT_SET(LVarB, LVarA)
     EVT_SUB(LVarB, 4)
     EVT_ADD(LVarB, -3)
-    EVT_CALL(func_802A9120_421B10, LVarB, 3)
+    EVT_CALL(action_command_jump_start, LVarB, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_38)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, 524288, ANIM_Mario_30000)
@@ -359,15 +359,15 @@ EvtScript D_802A23D4_73EC34 = {
         EVT_WAIT(2)
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-        EVT_CALL(action_command_jump_CreateHudElements)
-        EVT_CALL(func_802A9120_421B10, 13, 3)
+        EVT_CALL(action_command_jump_init)
+        EVT_CALL(action_command_jump_start, 13, 3)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_39)
         EVT_CALL(func_80275F00, 15, 2)
         EVT_GOTO(10)
     EVT_ELSE
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-        EVT_CALL(action_command_jump_CreateHudElements)
-        EVT_CALL(func_802A9120_421B10, 2, 3)
+        EVT_CALL(action_command_jump_init)
+        EVT_CALL(action_command_jump_start, 2, 3)
         EVT_CALL(func_80275F00, 4, 1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -377,7 +377,7 @@ EvtScript D_802A23D4_73EC34 = {
 };
 
 EvtScript N(802A2650) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetBattleFlags2, LVar0)
     EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
         EVT_EXEC_WAIT(D_802A4018_740878)
@@ -398,12 +398,12 @@ EvtScript N(802A2650) = {
 
 EvtScript D_802A2720_73EF80 = {
     EVT_EXEC_WAIT(D_802A21D4_73EA34)
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_EQ(LVar0, 2)
-        EVT_CALL(SetActionCommandMode, 3)
+    EVT_CALL(GetActionTutorialState, LVar0)
+    EVT_IF_EQ(LVar0, ACTION_TUTORIAL_GUIDED)
+        EVT_CALL(SetActionTutorialState, ACTION_TUTORIAL_WAIT_FOR_INPUT)
         EVT_LOOP(0)
-            EVT_CALL(GetActionCommandMode, LVar0)
-            EVT_IF_LT(LVar0, 2)
+            EVT_CALL(GetActionTutorialState, LVar0)
+            EVT_IF_LT(LVar0, ACTION_TUTORIAL_GUIDED)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -414,8 +414,8 @@ EvtScript D_802A2720_73EF80 = {
         EVT_EXEC_WAIT(D_802A203C_73E89C)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_GT(LVar0, 0)
+    EVT_CALL(GetActionTutorialState, LVar0)
+    EVT_IF_GT(LVar0, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
         EVT_WAIT(1)
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVar0)
@@ -446,9 +446,9 @@ EvtScript D_802A2720_73EF80 = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_1000C)
     EVT_CALL(func_80274A18, 24, 3)
@@ -497,9 +497,9 @@ EvtScript D_802A2ABC_73F31C = {
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 37, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 37, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(EnablePlayerBlur, 1)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_1000A, ANIM_Mario_1000B)
@@ -552,9 +552,9 @@ EvtScript D_802A2DE8_73F648 = {
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 25, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 25, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(EnablePlayerBlur, 1)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidairStill, ANIM_Mario_1000C)
@@ -570,7 +570,7 @@ EvtScript D_802A2DE8_73F648 = {
 };
 
 EvtScript N(802A30F4) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -676,7 +676,7 @@ EvtScript D_802A34EC_73FD4C = {
 };
 
 EvtScript N(802A3644) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -726,9 +726,9 @@ EvtScript D_802A36D8_73FF38 = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_1000C)
     EVT_CALL(func_80274A18, 24, 3)
@@ -777,9 +777,9 @@ EvtScript D_802A39C4_740224 = {
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 37, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 37, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(EnablePlayerBlur, 1)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_1000A, ANIM_Mario_1000B)
@@ -834,9 +834,9 @@ EvtScript D_802A3CF0_740550 = {
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 25, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 25, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(EnablePlayerBlur, 1)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidairStill, ANIM_Mario_1000C)
@@ -853,21 +853,21 @@ EvtScript D_802A3CF0_740550 = {
 
 EvtScript D_802A4018_740878 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
+    EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1370_73DBD0)
-    EVT_CALL(func_802A9120_421B10, LVarA, 3)
+    EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -5, 10, 0)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_30000)
     EVT_CALL(func_80274A18, LVarA, 0)
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_EQ(LVar0, 2)
-        EVT_CALL(SetActionCommandMode, 3)
+    EVT_CALL(GetActionTutorialState, LVar0)
+    EVT_IF_EQ(LVar0, ACTION_TUTORIAL_GUIDED)
+        EVT_CALL(SetActionTutorialState, ACTION_TUTORIAL_WAIT_FOR_INPUT)
         EVT_LOOP(0)
-            EVT_CALL(GetActionCommandMode, LVar0)
-            EVT_IF_LT(LVar0, 2)
+            EVT_CALL(GetActionTutorialState, LVar0)
+            EVT_IF_LT(LVar0, ACTION_TUTORIAL_GUIDED)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -878,8 +878,8 @@ EvtScript D_802A4018_740878 = {
         EVT_EXEC_WAIT(D_802A203C_73E89C)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_GT(LVar0, 0)
+    EVT_CALL(GetActionTutorialState, LVar0)
+    EVT_IF_GT(LVar0, ACTION_TUTORIAL_MOVES_NOT_LEARNED)
         EVT_WAIT(1)
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVar0)
@@ -910,9 +910,9 @@ EvtScript D_802A4018_740878 = {
     EVT_CALL(func_80269524, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_CALL(func_802694A4, 0)
-    EVT_CALL(func_802A9120_421B10, 24, 3)
+    EVT_CALL(action_command_jump_init)
+    EVT_CALL(ShowActionHud, 0)
+    EVT_CALL(action_command_jump_start, 24, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_1000C)
     EVT_CALL(func_80274A18, 24, 3)

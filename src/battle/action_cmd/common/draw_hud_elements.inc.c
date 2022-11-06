@@ -1,6 +1,6 @@
 #include "common.h"
 
-void N(draw_hud_elements)(void) {
+void N(draw)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     s32 hudX;
@@ -14,10 +14,10 @@ void N(draw_hud_elements)(void) {
     hud_element_draw_clipped(hudElement);
     hud_element_get_render_pos(hudElement, &hudX, &hudY);
 
-    if (actionCommandStatus->unk_68 == 0) {
-        func_80268770(hudX, hudY, actionCommandStatus->barFillLevel / 100);
+    if (!actionCommandStatus->isBarFilled) {
+        draw_mash_meter_multicolor(hudX, hudY, actionCommandStatus->barFillLevel / 100);
     } else {
-        func_8026880C(hudX, hudY, actionCommandStatus->barFillLevel / 100);
+        draw_mash_meter_blink(hudX, hudY, actionCommandStatus->barFillLevel / 100);
     }
 
     hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
