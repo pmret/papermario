@@ -72,9 +72,11 @@ for root, dirs, files in os.walk(asm_dir):
             non_matching = "nonmatchings" in str(Path(f_path))
 
             if non_matching:
-                namespace = Path(f_path).parent.parent.name
+                namespace = Path(f_path).parent.name
                 if "world" not in str(Path(f_path)):
                     namespace = Path(f_path).parent.name
+
+            namespace = "dead_" + namespace
 
             for func in from_funcs:
                 f_text = f_text.replace(func, namespace + "_" + func_name)

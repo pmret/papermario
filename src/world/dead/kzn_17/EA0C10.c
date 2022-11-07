@@ -34,12 +34,12 @@ ApiStatus func_802429C0_EA32C0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_802441B8_EA4AB8 = FALSE;
+        dead_kzn_17_ItemChoice_HasSelectedItem = FALSE;
     }
 
-    if (D_802441B8_EA4AB8) {
-        D_802441B8_EA4AB8 = FALSE;
-        evt_set_variable(script, *args++, D_802441BC_EA4ABC);
+    if (dead_kzn_17_ItemChoice_HasSelectedItem) {
+        dead_kzn_17_ItemChoice_HasSelectedItem = FALSE;
+        evt_set_variable(script, *args++, dead_kzn_17_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
 
@@ -49,19 +49,16 @@ ApiStatus func_802429C0_EA32C0(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "EA0C10", func_802429C0_EA32C0);
 #endif
 
-// Requires data migration
-#ifdef NON_MATCHING
-ApiStatus func_80242A14_EA3314(Evt* script, s32 isInitialCall) {
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_802441BC_EA4ABC = dead_evt_get_variable(script, *args++);
-    D_802441B8_EA4AB8 = TRUE;
-
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "EA0C10", func_80242A14_EA3314);
-#endif
 
 ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

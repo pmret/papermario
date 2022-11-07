@@ -31,15 +31,22 @@ ApiStatus func_802438D0_9DA8F0(Evt* script, s32 isInitialCall) {
 
 #define NAMESPACE dup2_nok_02
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
-#define NAMESPACE nok_02
 
-#define NAMESPACE dup2_nok_02
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
-#define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C40_9DAC60);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
+#define NAMESPACE nok_02
 
 extern s32 nok_02_D_80254BA0[];
 
