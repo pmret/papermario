@@ -16,7 +16,16 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 nok_02_D_802547D0[];
 

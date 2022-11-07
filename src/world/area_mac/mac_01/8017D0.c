@@ -3,8 +3,8 @@
 
 #define CHUCK_QUIZMO_NPC_ID 5
 
-extern s32 D_8024D944_80E1C4;
-extern s32 D_8024D948_80E1C8;
+extern s32 mac_01_ItemChoice_HasSelectedItem;
+extern s32 mac_01_ItemChoice_SelectedItemID;
 extern s32 D_80258404_818C84;
 extern s32 D_80262F68;
 
@@ -68,11 +68,11 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243CD4_804554);
 
-ApiStatus func_80243D28_8045A8(Evt* script, s32 isInitialCall) {
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_8024D948_80E1C8 = evt_get_variable(script, *args++);
-    D_8024D944_80E1C4 = 1;
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
 

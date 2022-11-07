@@ -17,7 +17,7 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802418F0_7EC600);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241944_7EC654);
+ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241944_7EC654);
 
 extern s32 mac_00_D_80255BA0[];
 

@@ -4,8 +4,8 @@
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-extern s32 D_80240D98_A79258;
-extern s32 D_80240D9C_A7925C;
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
 
 // Needs data migrated
 #ifdef NON_MATCHING
@@ -13,11 +13,11 @@ ApiStatus func_8024027C_A7873C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     if (isInitialCall) {
-        D_80240D98_A79258 = 0;
+        kpa_81_ItemChoice_HasSelectedItem = 0;
     }
-    if (D_80240D98_A79258 != 0) {
-        D_80240D98_A79258 = 0;
-        evt_set_variable(script, *args++, D_80240D9C_A7925C);
+    if (kpa_81_ItemChoice_HasSelectedItem != 0) {
+        kpa_81_ItemChoice_HasSelectedItem = 0;
+        evt_set_variable(script, *args++, kpa_81_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
     
@@ -32,12 +32,19 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_81/A78510", func_8024027C_A7873C);
 ApiStatus func_802402D0_A78790(Evt* script, s32 isInitialCall) { 
     Bytecode* args = script->ptrReadPos;
     
-    D_80240D9C_A7925C = evt_get_variable(script, *args++);
-    D_80240D98_A79258 = 1;
+    kpa_81_ItemChoice_SelectedItemID = evt_get_variable(script, *args++);
+    kpa_81_ItemChoice_HasSelectedItem = 1;
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "world/area_kpa/kpa_81/A78510", func_802402D0_A78790);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 #endif
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_81/A78510", func_80240308_A787C8);

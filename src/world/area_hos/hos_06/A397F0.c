@@ -18,7 +18,16 @@ extern IconHudScriptPair gItemHudScripts[];
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406A8_A39B88);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 hos_06_D_80246260[];
 

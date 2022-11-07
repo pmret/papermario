@@ -15,7 +15,16 @@ ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241200_D4E240);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 D_80242FB0[];
 

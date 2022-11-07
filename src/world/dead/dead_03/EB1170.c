@@ -1,8 +1,8 @@
 #include "dead_03.h"
 
 extern s32 func_80059AC8(s32, s32);
-extern s32 D_802417E4_EB2644;
-extern s32 D_802417E8_EB2648;
+extern s32 dead_03_ItemChoice_HasSelectedItem;
+extern s32 dead_03_ItemChoice_SelectedItemID;
 extern s32 dead_03_D_802442D0[];
 extern s32 dead_03_LetterDelivery_SavedNpcAnim;
 extern s32 D_800B8DEC;
@@ -21,11 +21,11 @@ ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_802417E4_EB2644 = 0;
+        dead_03_ItemChoice_HasSelectedItem = 0;
     }
-    if (D_802417E4_EB2644 != 0) {
-        D_802417E4_EB2644 = 0;
-        dead_evt_set_variable(script, *args++, D_802417E8_EB2648);
+    if (dead_03_ItemChoice_HasSelectedItem != 0) {
+        dead_03_ItemChoice_HasSelectedItem = 0;
+        dead_evt_set_variable(script, *args++, dead_03_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -34,11 +34,11 @@ ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "EB1170", func_80240654_EB14B4);
 #endif
 
-ApiStatus func_802406A8_EB1508(Evt* script, s32 isInitialCall) {
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_802417E8_EB2648 = evt_get_variable(script, *args++);
-    D_802417E4_EB2644 = 1;
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
 

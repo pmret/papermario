@@ -6,14 +6,14 @@
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_8024027C_A7A77C);
 
-extern s32 D_80240C20_A7B120;
-extern s32 D_80240C24_A7B124;
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
 
-ApiStatus func_802402D0_A7A7D0(Evt* script, s32 isInitialCall) {
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80240C24_A7B124 = evt_get_variable(script, *args++);
-    D_80240C20_A7B120 = 1;
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
 
