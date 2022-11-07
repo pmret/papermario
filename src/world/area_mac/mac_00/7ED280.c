@@ -22,6 +22,7 @@ static char* N(exit_str_0) = "mac_01";
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243744_7EE454);
 
+#define NAMESPACE dup_mac_00
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
 
@@ -32,6 +33,7 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
+#define NAMESPACE mac_00
 
 extern s32 D_80255EE0[];
 
