@@ -22,7 +22,7 @@ ApiStatus func_802405C0_EDC5A0(Evt* script, s32 isInitialCall) {
 
     if (D_80241850_EDD830) {
         D_80241850_EDD830 = FALSE;
-        evt_set_variable(script, *args, D_80241850_EDD834);
+        evt_set_variable(script, *args++, D_80241850_EDD834);
         return ApiStatus_DONE2;
     }
 

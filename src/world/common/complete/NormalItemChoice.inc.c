@@ -23,7 +23,7 @@ API_CALLABLE(N(ItemChoice_WaitForSelection)) {
 
     if (N(ItemChoice_HasSelectedItem)) {
         N(ItemChoice_HasSelectedItem) = FALSE;
-        evt_set_variable(script, *args, N(ItemChoice_SelectedItemID));
+        evt_set_variable(script, *args++, N(ItemChoice_SelectedItemID));
         return ApiStatus_DONE2;
     }
 

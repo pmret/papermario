@@ -18,7 +18,7 @@ API_CALLABLE(N(GetHiddenDoorPushDirection)) {
         pushDir = 2;
     }
 
-    evt_set_variable(script, *args, pushDir);
+    evt_set_variable(script, *args++, pushDir);
     return ApiStatus_DONE2;
 }
 

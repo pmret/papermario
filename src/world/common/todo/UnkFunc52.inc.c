@@ -38,16 +38,16 @@ ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
         case ACTOR_TYPE_UNUSED_62:
         case ACTOR_TYPE_UNUSED_63:
         case ACTOR_TYPE_UNUSED_64:
-            evt_set_variable(script, *args, -1);
+            evt_set_variable(script, *args++, -1);
             break;
 
         case ACTOR_TYPE_DRY_BONES:
             if (actor->state.varTable[8] == 1) {
-                evt_set_variable(script, *args, -1);
+                evt_set_variable(script, *args++, -1);
                 break;
             }
         default:
-            evt_set_variable(script, *args, 0);
+            evt_set_variable(script, *args++, 0);
     }
 
     return ApiStatus_DONE2;

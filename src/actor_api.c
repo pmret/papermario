@@ -2480,7 +2480,7 @@ INCLUDE_ASM(s32, "actor_api", func_8026E558);
 ApiStatus GetTargetListLength(Evt* script) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args, get_actor(script->owner1.actorID)->targetListLength);
+    evt_set_variable(script, *args++, get_actor(script->owner1.actorID)->targetListLength);
     return ApiStatus_DONE2;
 }
 

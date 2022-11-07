@@ -489,7 +489,7 @@ ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
         amt /= 2;
     }
 
-    evt_set_variable(script, *args, amt);
+    evt_set_variable(script, *args++, amt);
     return ApiStatus_DONE2;
 }
 
