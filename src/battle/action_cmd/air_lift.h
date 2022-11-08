@@ -3,8 +3,10 @@
 
 #include "common_structs.h"
 
-ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall);
-ApiStatus func_802A9184_428BF4(Evt* script, s32 isInitialCall);
-void func_802A9278_428CE8(void);
+ApiStatus action_command_air_lift_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_air_lift_start(Evt* script, s32 isInitialCall);
+void action_command_air_lift_update(void);
+void action_command_air_lift_draw(void);
+void action_command_air_lift_free(void);
 
 #endif

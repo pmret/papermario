@@ -1,6 +1,5 @@
 #include "strange_cake.h"
 #include "effects.h"
-#include "pause/pause_common.h"
 #include "hud_element.h"
 #include "battle/item/strange_cake1.png.h"
 #include "battle/item/strange_cake2.png.h"

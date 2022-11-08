@@ -595,7 +595,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -731,7 +731,7 @@ EvtScript N(getJumpTime) = {
 
 EvtScript N(bellyFlop) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(getJumpTime))
     EVT_LOOP(30)
@@ -741,7 +741,7 @@ EvtScript N(bellyFlop) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(func_802A9258_422258, 0, 57, 3)
+    EVT_CALL(action_command_hammer_start, 0, 57, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_59)
@@ -933,7 +933,7 @@ EvtScript N(bellyFlop) = {
 
 EvtScript N(squirt) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SQUIRT)
-    EVT_CALL(func_802A9000_429D20)
+    EVT_CALL(action_command_squirt_init)
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -960,7 +960,7 @@ EvtScript N(squirt) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
     EVT_CALL(AddBattleCamZoom, -80)
     EVT_CALL(MoveBattleCamOver, 90)
-    EVT_CALL(func_802A911C_429E3C, 0, 87, 3)
+    EVT_CALL(action_command_squirt_start, 0, 87, 3)
     EVT_LOOP(90)
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_EQ(LVar0, 0)
@@ -1046,8 +1046,8 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(func_802A9000_42A4F0, 0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(action_command_water_block_init, 0)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_SET(LVar0, 0)
     EVT_LOOP(4)
         EVT_ADD(LVar0, 45)
@@ -1055,7 +1055,7 @@ EvtScript N(waterBlock) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(4)
-    EVT_CALL(func_802A9398_42A888, 0, 100, 3)
+    EVT_CALL(action_command_water_block_start, 0, 100, 3)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     EVT_WAIT(110)
     EVT_CALL(GetActionCommandResult, LVar0)
@@ -1137,7 +1137,7 @@ EvtScript N(waterBlock) = {
 EvtScript N(tidalWave) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_TIDAL_WAVE)
-    EVT_CALL(action_command_tidal_wave_CreateHudElements)
+    EVT_CALL(action_command_tidal_wave_init)
     EVT_CALL(SetupMashMeter, 5, 20, 30, 60, 80, 100)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -1155,7 +1155,7 @@ EvtScript N(tidalWave) = {
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
-    EVT_CALL(func_802A9138_42C828, 0, 100, 3)
+    EVT_CALL(action_command_tidal_wave_start, 0, 100, 3)
     EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
     EVT_THREAD
         EVT_WAIT(54)

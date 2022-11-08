@@ -3,9 +3,10 @@
 
 #include "common_structs.h"
 
-void func_802A91F8_425788(void);
-
-ApiStatus func_802A9000_425590(Evt* script, s32 isInitialCall);
-ApiStatus func_802A9110_4256A0(Evt* script, s32 isInitialCall);
+ApiStatus action_command_stop_leech_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_stop_leech_start(Evt* script, s32 isInitialCall);
+void action_command_stop_leech_update(void);
+void action_command_stop_leech_draw(void);
+void action_command_stop_leech_free(void);
 
 #endif

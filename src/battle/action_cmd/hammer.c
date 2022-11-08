@@ -1,118 +1,102 @@
 #include "common.h"
-#include "hud_element.h"
+#include "battle/action_cmd.h"
 
 #define NAMESPACE action_command_hammer
 
-// icon indexes for hud elements
-extern HudScript HES_TimingBar1Chance;
-extern HudScript HES_TimingWait;
-extern HudScript HES_TimingCharge1;
-extern HudScript HES_TimingCharge2;
-extern HudScript HES_TimingCharge3;
-extern HudScript HES_TimingCharge4a;
-extern HudScript HES_TimingCharge4b;
-extern HudScript HES_TimingCharge4c;
-extern HudScript HES_StickHoldLeft;
-extern HudScript HES_StickTapNeutral;
-extern HudScript HES_RightOn;
-extern HudScript HES_TimingReady;
-
-extern s32 D_802941E0[];
-
-ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
+ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
 
     battleStatus->unk_82 = 1;
-    battleStatus->unk_434 = D_802941E0;
+    battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
     battleStatus->unk_86 = 0;
 
-    if (battleStatus->unk_83 == 0) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->unk_84 = 0;
+        battleStatus->actionResult = 0;
         return ApiStatus_DONE2;
     }
 
-    func_80268858();
+    action_command_init_status();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_SMASH;
-    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->hudPosX = -48;
     actionCommandStatus->state = 0;
-    actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->hudElementY = 96;
+    actionCommandStatus->wrongButtonPressed = FALSE;
+    actionCommandStatus->hudPosY = 96;
 
     id = hud_element_create(&HES_TimingBar1Chance);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 10);
 
     id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4a);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4b);
     actionCommandStatus->hudElements[3] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_TimingCharge4c);
     actionCommandStatus->hudElements[4] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_StickHoldLeft);
     actionCommandStatus->hudElements[5] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
     id = hud_element_create(&HES_RightOn);
     actionCommandStatus->hudElements[6] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_alpha(id, 0xFF);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9258_422258(Evt* script, s32 isInitialCall) {
+ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->unk_83 == 0) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->unk_84 = 0;
+        battleStatus->actionResult = 0;
         return ApiStatus_DONE2;
     }
 
-    func_80268858();
-    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = evt_get_variable(script, *args);
-    actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_62 = 1;
-    if (actionCommandStatus->unk_4E < 0) {
-        actionCommandStatus->unk_4E = 0;
-        actionCommandStatus->unk_62 = 0;
+    action_command_init_status();
+    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
+    actionCommandStatus->duration = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = evt_get_variable(script, *args);
+    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
+    actionCommandStatus->wrongButtonPressed = FALSE;
+    actionCommandStatus->playHammerSounds = TRUE;
+    if (actionCommandStatus->prepareTime < 0) {
+        actionCommandStatus->prepareTime = 0;
+        actionCommandStatus->playHammerSounds = FALSE;
     }
 
-    actionCommandStatus->unk_5F = 0;
+    actionCommandStatus->hammerMissedStart = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_84 = 0;
+    battleStatus->actionResult = 0;
     battleStatus->unk_86 = 0;
     actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
@@ -120,7 +104,7 @@ ApiStatus func_802A9258_422258(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void func_802A936C_42236C(void) {
+void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
@@ -135,37 +119,37 @@ void func_802A936C_42236C(void) {
             btl_set_popup_duration(99);
 
             id = actionCommandStatus->hudElements[0];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[1];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[2];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[3];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[4];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[5];
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(id, 2);
             }
             hud_element_set_alpha(id, 255);
@@ -174,20 +158,20 @@ void func_802A936C_42236C(void) {
             break;
         case 1:
             btl_set_popup_duration(99);
-            actionCommandStatus->hudElementX += 20;
-            if (actionCommandStatus->hudElementX > 50) {
-                actionCommandStatus->hudElementX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX + 21, actionCommandStatus->hudElementY - 3);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 5, actionCommandStatus->hudElementY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - 7, actionCommandStatus->hudElementY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudElementX - 19, actionCommandStatus->hudElementY + 1);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[5], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY - 23);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX + 21, actionCommandStatus->hudPosY - 3);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 5, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - 7, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudPosX - 19, actionCommandStatus->hudPosY + 1);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[5], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY - 23);
             if (actionCommandStatus->autoSucceed != 0) {
                 id = actionCommandStatus->hudElements[6];
-                hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY);
-                if (actionCommandStatus->unk_61 != 0) {
+                hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY);
+                if (actionCommandStatus->showHud) {
                     hud_element_clear_flags(id, 2);
                     break;
                 }
@@ -195,7 +179,7 @@ void func_802A936C_42236C(void) {
             break;
         case 10:
             btl_set_popup_duration(99);
-            if (actionCommandStatus->unk_4E < 15) {
+            if (actionCommandStatus->prepareTime < 15) {
                 hud_element_set_alpha(actionCommandStatus->hudElements[0], 255);
                 hud_element_set_alpha(actionCommandStatus->hudElements[1], 255);
                 hud_element_set_alpha(actionCommandStatus->hudElements[2], 255);
@@ -204,66 +188,66 @@ void func_802A936C_42236C(void) {
                 hud_element_set_alpha(actionCommandStatus->hudElements[5], 255);
             }
 
-            if (actionCommandStatus->unk_4E != 0) {
-                actionCommandStatus->unk_4E--;
+            if (actionCommandStatus->prepareTime != 0) {
+                actionCommandStatus->prepareTime--;
                 return;
             }
 
-            actionCommandStatus->unk_54 = 0;
-            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && battleStatus->unk_83 < 2) {
-                actionCommandStatus->unk_5F = 1;
+            actionCommandStatus->frameCounter = 0;
+            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL) {
+                actionCommandStatus->hammerMissedStart = TRUE;
             }
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
 
-            if (battleStatus->unk_83 < 0) {
+            if (battleStatus->actionCommandMode <= ACTION_COMMAND_MODE_TUTORIAL_BLOCK) {
                 return;
             }
 
-            phi_s0 = battleStatus->unk_434[actionCommandStatus->unk_50];
+            phi_s0 = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
             new_var = phi_s0 + 2;
-            temp_f20 = (actionCommandStatus->unk_52 - new_var) / 3;
+            temp_f20 = (actionCommandStatus->duration - new_var) / 3;
 
-            if (actionCommandStatus->unk_54 < temp_f20) {
+            if (actionCommandStatus->frameCounter < temp_f20) {
                 hud_element_set_script(actionCommandStatus->hudElements[4], &HES_TimingCharge3);
-                battleStatus->unk_84 = 0;
-                if (actionCommandStatus->unk_54 == 0 && actionCommandStatus->unk_62 != 0) {
+                battleStatus->actionResult = 0;
+                if (actionCommandStatus->frameCounter == 0 && actionCommandStatus->playHammerSounds) {
                     sfx_play_sound(SOUND_233);
                 }
-            } else if (actionCommandStatus->unk_54 < temp_f20 * 2) {
+            } else if (actionCommandStatus->frameCounter < temp_f20 * 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[3], &HES_TimingCharge2);
-                battleStatus->unk_84 = 1;
-                if (actionCommandStatus->unk_54 == temp_f20) {
-                    if (actionCommandStatus->unk_62 != 0) {
+                battleStatus->actionResult = 1;
+                if (actionCommandStatus->frameCounter == temp_f20) {
+                    if (actionCommandStatus->playHammerSounds) {
                         sfx_play_sound(SOUND_233);
                     }
                 }
-            } else if (actionCommandStatus->unk_54 < temp_f20 * 3.0f) {
+            } else if (actionCommandStatus->frameCounter < temp_f20 * 3.0f) {
                 hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingCharge1);
-                battleStatus->unk_84 = 2;
-                if (actionCommandStatus->unk_54 == temp_f20 * 2) {
-                    if (actionCommandStatus->unk_62 != 0) {
+                battleStatus->actionResult = 2;
+                if (actionCommandStatus->frameCounter == temp_f20 * 2) {
+                    if (actionCommandStatus->playHammerSounds) {
                         sfx_play_sound(SOUND_233);
                     }
                 }
             }
 
-            if (actionCommandStatus->unk_54 == (~phi_s0 + actionCommandStatus->unk_52)) {
-                battleStatus->unk_84 = 3;
+            if (actionCommandStatus->frameCounter == (~phi_s0 + actionCommandStatus->duration)) {
+                battleStatus->actionResult = 3;
                 hud_element_set_script(actionCommandStatus->hudElements[1], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[5], &HES_StickTapNeutral);
-                if (actionCommandStatus->unk_62 != 0) {
+                if (actionCommandStatus->playHammerSounds) {
                     sfx_play_sound(SOUND_234);
                 }
                 if (actionCommandStatus->autoSucceed != 0 && actionCommandStatus->autoSucceed != 2) {
                     actionCommandStatus->autoSucceed = 2;
-                    actionCommandStatus->unk_54 = actionCommandStatus->unk_52 - 4;
+                    actionCommandStatus->frameCounter = actionCommandStatus->duration - 4;
                 }
             }
 
-            a = actionCommandStatus->unk_52 - actionCommandStatus->unk_54;
-            phi_s0 = battleStatus->unk_434[actionCommandStatus->unk_50] - a + 3;
+            a = actionCommandStatus->duration - actionCommandStatus->frameCounter;
+            phi_s0 = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] - a + 3;
             if (phi_s0 < 0) {
                 phi_s0 = 0;
             }
@@ -271,11 +255,11 @@ void func_802A936C_42236C(void) {
             if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) &&
                 phi_s0 == 0 &&
                 actionCommandStatus->autoSucceed == 0 &&
-                battleStatus->unk_83 < 2)
+                battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL)
             {
                 battleStatus->actionSuccess = -1;
                 battleStatus->unk_86 = -1;
-                func_80268C9C();
+                action_command_free();
             } else {
                 s32 i;
                 s32 bufferPos;
@@ -302,9 +286,9 @@ void func_802A936C_42236C(void) {
                     }
                 }
 
-                if (battleStatus->unk_83 < 2 || actionCommandStatus->unk_54 != actionCommandStatus->unk_52) {
-                    actionCommandStatus->unk_54++;
-                    if (actionCommandStatus->unk_52 < actionCommandStatus->unk_54) {
+                if (battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL || actionCommandStatus->frameCounter != actionCommandStatus->duration) {
+                    actionCommandStatus->frameCounter++;
+                    if (actionCommandStatus->duration < actionCommandStatus->frameCounter) {
                         if (battleStatus->actionSuccess == 0) {
                             battleStatus->actionSuccess = -1;
                         }
@@ -314,23 +298,23 @@ void func_802A936C_42236C(void) {
                         }
 
                         btl_set_popup_duration(0);
-                        actionCommandStatus->unk_54 = 5;
+                        actionCommandStatus->frameCounter = 5;
                         actionCommandStatus->state = 12;
                     }
                 }
             }
             break;
         case 12:
-            if (actionCommandStatus->unk_54 != 0) {
-                actionCommandStatus->unk_54--;
+            if (actionCommandStatus->frameCounter != 0) {
+                actionCommandStatus->frameCounter--;
                 return;
             }
-            func_80268C9C();
+            action_command_free();
             break;
     }
 }
 
-void N(draw_hud_elements)(void) {
+void N(draw)(void) {
     hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
     hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
     hud_element_draw_clipped(gActionCommandStatus.hudElements[2]);
@@ -340,7 +324,7 @@ void N(draw_hud_elements)(void) {
     hud_element_draw_clipped(gActionCommandStatus.hudElements[6]);
 }
 
-void N(free_hud_elements)(void) {
+void N(free)(void) {
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
     hud_element_free(gActionCommandStatus.hudElements[2]);

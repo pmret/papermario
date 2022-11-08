@@ -3,8 +3,10 @@
 
 #include "common_structs.h"
 
-void func_802A92DC_4236CC(void);
-
-ApiStatus func_802A91B0_4235A0(Evt* script, s32 isInitialCall);
+ApiStatus action_command_break_free_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_break_free_start(Evt* script, s32 isInitialCall);
+void action_command_break_free_update(void);
+void action_command_break_free_draw(void);
+void action_command_break_free_free(void);
 
 #endif

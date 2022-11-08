@@ -5,6 +5,7 @@
 #include "hud_element.h"
 #include "entity.h"
 #include "ld_addrs.h"
+#include "battle/action_cmd.h"
 
 extern IMG_BIN ui_battle_menu_spirits_png[];
 extern PAL_BIN ui_battle_menu_spirits_pal[];
@@ -2544,11 +2545,8 @@ BSS s16 D_8029F64C;
 BSS s16 D_8029F64E;
 BSS s16 D_8029F650;
 
-extern HudScript HES_AButton;
-extern HudScript HES_AButtonDown;
 extern HudScript HES_AimReticle;
 extern HudScript HES_AimTarget;
-extern HudScript HES_BButton;
 extern HudScript HES_CDownButton;
 extern HudScript HES_CLeftButton;
 extern HudScript HES_CRightButton;
@@ -2560,24 +2558,16 @@ extern HudScript HES_Item_Hammer1;
 extern HudScript HES_Item_Hammer2;
 extern HudScript HES_Item_Hammer3;
 extern HudScript HES_Item_Items;
-extern HudScript HES_MashAButton;
-extern HudScript HES_MashBButton1;
 extern HudScript HES_MashBButton2;
 extern HudScript HES_MashCDownButton1;
 extern HudScript HES_MashCLeftButton;
 extern HudScript HES_MashCRightButton1;
 extern HudScript HES_MashCUpButton;
-extern HudScript HES_PressAButton;
-extern HudScript HES_PressBButton;
-extern HudScript HES_PressCDownButton;
 extern HudScript HES_RotateStickCW;
 extern HudScript HES_StickBackAndForth;
-extern HudScript HES_StickMashLeft;
-extern HudScript HES_StickNeutral;
 extern HudScript HES_StickTapLeft;
 extern HudScript HES_StickTapRight;
 extern HudScript HES_TimingBlink;
-extern HudScript HES_TimingReady;
 
 void func_8024F394(void* data);
 void func_8024F5AC(void* data);
@@ -3085,9 +3075,9 @@ void func_8024FB3C(void* data) {
         case 0x40:
         case 0x41:
         case 0x42:
-            temp_a0 = battleStatus->unk_83;
+            temp_a0 = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
-            if (temp_a0 == 0) {
+            if (temp_a0 == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 D_8029F64A = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;

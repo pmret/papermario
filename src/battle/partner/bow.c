@@ -364,7 +364,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
@@ -463,8 +463,8 @@ EvtScript N(80238EE0) = {
 
 EvtScript N(smack) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMACK)
-    EVT_CALL(func_802A9000_42E3A0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(action_command_smack_init)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_SMACK1)
@@ -485,7 +485,7 @@ EvtScript N(smack) = {
         EVT_WAIT(10)
         EVT_SET(LVar0, LVarB)
         EVT_ADD(LVar0, -3)
-        EVT_CALL(action_command_smack_MashActionCommandInit, 0, LVar0, 3, 0)
+        EVT_CALL(action_command_smack_start, 0, LVar0, 3, 0)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
@@ -749,9 +749,9 @@ EvtScript N(hidePlayer) = {
 
 EvtScript N(spook) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SPOOK)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_spook_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_CALL(func_80269344, 20)
+    EVT_CALL(SetActionHudPrepareTime, 20)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
@@ -791,7 +791,7 @@ EvtScript N(spook) = {
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(N(AverageSpookChance))
-    EVT_CALL(action_command_spook_MashActionCommandInit, 0, 87, 3, LVar0)
+    EVT_CALL(action_command_spook_start, 0, 87, 3, LVar0)
     EVT_CALL(GetActionResult, LVar1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Conceal)
     EVT_SET(LVar1, 0)
@@ -987,8 +987,8 @@ EvtScript N(spook) = {
 
 EvtScript N(fanSmack) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMACK)
-    EVT_CALL(func_802A9000_42E3A0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(action_command_smack_init)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(SetupMashMeter, 5, 35, 60, 80, 99, 100)
     EVT_SET(LVarB, 90)
     EVT_SET(LVarC, 2)
@@ -997,7 +997,7 @@ EvtScript N(fanSmack) = {
         EVT_WAIT(10)
         EVT_SET(LVar0, LVarB)
         EVT_ADD(LVar0, -3)
-        EVT_CALL(action_command_smack_MashActionCommandInit, 0, LVar0, 3, 1)
+        EVT_CALL(action_command_smack_start, 0, LVar0, 3, 1)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)

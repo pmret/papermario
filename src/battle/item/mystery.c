@@ -2,9 +2,10 @@
 #include "effects.h"
 #include "ld_addrs.h"
 #include "battle/item/mystery.png.h"
-#include "pause/pause_common.h"
 
 #include "ItemRefund.inc.c"
+
+extern IconHudScriptPair gItemHudScripts[];
 
 extern s32 D_802A25C8[7];
 extern s32 D_802A25E4;

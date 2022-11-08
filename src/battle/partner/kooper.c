@@ -394,7 +394,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -533,7 +533,7 @@ EvtScript N(getShellTossMoveTime) = {
 
 EvtScript N(shellToss) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 30)
@@ -553,7 +553,7 @@ EvtScript N(shellToss) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(func_802A9258_422258, 0, 47, 3)
+    EVT_CALL(action_command_hammer_start, 0, 47, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
@@ -690,7 +690,7 @@ EvtScript N(shellToss) = {
 
 EvtScript N(powerShell) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -723,7 +723,7 @@ EvtScript N(powerShell) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_59)
-    EVT_CALL(func_802A9258_422258, 0, 47, 3)
+    EVT_CALL(action_command_hammer_start, 0, 47, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
@@ -869,7 +869,7 @@ EvtScript N(powerShell) = {
 
 EvtScript N(dizzyShell) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_DIZZY_SHELL)
-    EVT_CALL(func_802A9000_426170)
+    EVT_CALL(action_command_dizzy_shell_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -889,7 +889,7 @@ EvtScript N(dizzyShell) = {
     EVT_SET(LVarA, LVarD)
     EVT_ADD(LVarA, -3)
     EVT_CALL(battle_partner_kooper_AverageTargetDizzyChance)
-    EVT_CALL(action_command_dizzy_shell_MashActionCommandInit, 0, LVarA, 3, LVar0)
+    EVT_CALL(action_command_dizzy_shell_start, 0, LVarA, 3, LVar0)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
@@ -1040,7 +1040,7 @@ EvtScript N(dizzyShell) = {
 
 EvtScript N(fireShell) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_FIRE_SHELL)
-    EVT_CALL(func_802A9000_4269D0)
+    EVT_CALL(action_command_fire_shell_init)
     EVT_CALL(SetupMashMeter, 5, 35, 60, 80, 99, 100)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1059,7 +1059,7 @@ EvtScript N(fireShell) = {
     EVT_SET(LVarD, 75)
     EVT_SET(LVarC, LVarD)
     EVT_ADD(LVarC, -3)
-    EVT_CALL(action_command_fire_shell_MashActionCommandInit, 0, LVarC, 3)
+    EVT_CALL(action_command_fire_shell_start, 0, LVarC, 3)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_SET(LVarA, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)

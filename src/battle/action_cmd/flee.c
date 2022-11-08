@@ -1,18 +1,11 @@
 #include "common.h"
-#include "hud_element.h"
+#include "battle/action_cmd.h"
 
 #define NAMESPACE action_command_flee
 
-extern HudScript HES_BlueMeter;
-extern HudScript HES_AButton;
-extern HudScript HES_RunAwayOK;
-extern HudScript HES_RunningAway;
-extern HudScript HES_100pct;
-extern s32 D_80294200;
-extern s32 D_802A9920;
-extern HudScript HES_MashAButton;
+BSS s32 D_802A9920;
 
-ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
+ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -20,72 +13,72 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     s32 hudElement;
 
     battleStatus->unk_82 = 0;
-    battleStatus->unk_434 = &D_80294200;
+    battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
     battleStatus->unk_86 = 127;
-    func_80268858();
+    action_command_init_status();
     actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
     actionCommandStatus->state = 0;
-    actionCommandStatus->unk_60 = 0;
+    actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = actionCommandStatus->unk_5A * 100;
-    actionCommandStatus->unk_46 = rand_int(50);
-    actionCommandStatus->unk_48 = 0;
+    actionCommandStatus->thresholdLevel = rand_int(50);
+    actionCommandStatus->barFillWidth = 0;
     actionCommandStatus->unk_5C = 1;
     actionCommandStatus->unk_5A = rand_int(1);
-    actionCommandStatus->unk_68 = 0;
+    actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->hudPosX = -48;
     D_802A9920 = 0;
-    actionCommandStatus->hudElementY = 80;
+    actionCommandStatus->hudPosY = 80;
 
     hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_RunningAway);
     actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[3] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    xOffset = 29 - ((100 - actionCommandStatus->unk_46) * 60) / 100;
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY - 1);
+    xOffset = 29 - ((100 - actionCommandStatus->thresholdLevel) * 60) / 100;
+    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY + 17);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY - 1);
 
     hudElement = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[4] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A92A0_422D70(Evt* script) {
+ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    func_80268858();
-    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->unk_60 = 0;
+    action_command_init_status();
+    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
+    actionCommandStatus->duration = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = evt_get_variable(script, *args++);
+    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
+    actionCommandStatus->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 127;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
@@ -94,7 +87,7 @@ ApiStatus func_802A92A0_422D70(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-void func_802A9378_422E48(void) {
+void N(update)(void) {
     s32 temp;
     s32 hudElement;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -104,81 +97,81 @@ void func_802A9378_422E48(void) {
         case 0:
             hudElement = actionCommandStatus->hudElements[0];
             hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             hudElement = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             hudElement = actionCommandStatus->hudElements[2];
             hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             hudElement = actionCommandStatus->hudElements[3];
             hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->unk_61 != 0) {
+            if (actionCommandStatus->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             actionCommandStatus->state = 1;
             break;
         case 1:
-            actionCommandStatus->hudElementX += 20;
-            if (actionCommandStatus->hudElementX > 50) {
-                actionCommandStatus->hudElementX = 50;
+            actionCommandStatus->hudPosX += 20;
+            if (actionCommandStatus->hudPosX > 50) {
+                actionCommandStatus->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
             break;
         case 10:
-            if (actionCommandStatus->unk_4E != 0) {
-                actionCommandStatus->unk_4E--;
+            if (actionCommandStatus->prepareTime != 0) {
+                actionCommandStatus->prepareTime--;
                 break;
             }
 
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
-            actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
+            actionCommandStatus->frameCounter = actionCommandStatus->duration;
         case 11:
-            if ((battleStatus->unk_83 != 0) && (battleStatus->currentButtonsPressed & BUTTON_A)) {
-                actionCommandStatus->barFillLevel += (battleStatus->unk_434[actionCommandStatus->unk_50] * 180 / 100);
+            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->currentButtonsPressed & BUTTON_A)) {
+                actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 180 / 100);
             }
             if (actionCommandStatus->barFillLevel >= 10000) {
                 hudElement = actionCommandStatus->hudElements[4];
                 actionCommandStatus->barFillLevel = 10000;
-                actionCommandStatus->unk_68 = 1;
-                hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
+                actionCommandStatus->isBarFilled = TRUE;
+                hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY + 28);
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
-            if (actionCommandStatus->unk_54 == 0) {
-                if (battleStatus->actionSuccess >= (100 - actionCommandStatus->unk_46)) {
+            if (actionCommandStatus->frameCounter == 0) {
+                if (battleStatus->actionSuccess >= (100 - actionCommandStatus->thresholdLevel)) {
                     battleStatus->unk_86 = 1;
                     battleStatus->actionSuccess = 1;
                 } else {
                     battleStatus->unk_86 = -2;
                     battleStatus->actionSuccess = -1;
                 }
-                actionCommandStatus->unk_54 = 20;
+                actionCommandStatus->frameCounter = 20;
                 actionCommandStatus->state = 12;
             } else {
-                actionCommandStatus->unk_54--;
+                actionCommandStatus->frameCounter--;
             }
             break;
         case 12:
-            if (actionCommandStatus->unk_54 != 0) {
-                actionCommandStatus->unk_54--;
+            if (actionCommandStatus->frameCounter != 0) {
+                actionCommandStatus->frameCounter--;
                 break;
             }
-            func_80268C9C();
+            action_command_free();
             break;
     }
 
@@ -188,22 +181,22 @@ void func_802A9378_422E48(void) {
         case 11:
             temp = actionCommandStatus->unk_5A == 0 ? 7 : 8;
             if (actionCommandStatus->unk_5C == 0) {
-                actionCommandStatus->unk_46 += temp;
-                if (actionCommandStatus->unk_46 >= 100) {
-                    actionCommandStatus->unk_46 = 100;
+                actionCommandStatus->thresholdLevel += temp;
+                if (actionCommandStatus->thresholdLevel >= 100) {
+                    actionCommandStatus->thresholdLevel = 100;
                     actionCommandStatus->unk_5C = 1;
                 }
                 break;
             }
-            actionCommandStatus->unk_46 -= temp;
-            if (actionCommandStatus->unk_46 <= 0) {
-                actionCommandStatus->unk_46 = 0;
+            actionCommandStatus->thresholdLevel -= temp;
+            if (actionCommandStatus->thresholdLevel <= 0) {
+                actionCommandStatus->thresholdLevel = 0;
                 actionCommandStatus->unk_5C = 0;
             }
     }
 }
 
-void N(draw_hud_elements)(void) {
+void N(draw)(void) {
     s32 y;
     s32 x;
     s32 temp_a1;
@@ -213,14 +206,14 @@ void N(draw_hud_elements)(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-    temp_v1 = (100 - actionCommandStatus->unk_46) * 60;
+    temp_v1 = (100 - actionCommandStatus->thresholdLevel) * 60;
     x = 60 - temp_v1 / 100;
     temp_a1 = x - 31;
 
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - temp_a1, actionCommandStatus->hudElementY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 31 - x, actionCommandStatus->hudElementY - 1);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - temp_a1, actionCommandStatus->hudPosY + 17);
+    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31 - x, actionCommandStatus->hudPosY - 1);
 
-    if (battleStatus->unk_83 != 0) {
+    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
         hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     }
 
@@ -229,12 +222,12 @@ void N(draw_hud_elements)(void) {
     hud_element_get_render_pos(hudElement, &x, &y);
 
     if (D_802A9920 == 0) {
-        func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
+        draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else {
-        if (actionCommandStatus->unk_68 == 0) {
-            func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 4);
+        if (!actionCommandStatus->isBarFilled) {
+            draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 4);
         } else {
-            func_8026880C(x, y, actionCommandStatus->barFillLevel / 100);
+            draw_mash_meter_blink(x, y, actionCommandStatus->barFillLevel / 100);
         }
     }
 
@@ -243,7 +236,7 @@ void N(draw_hud_elements)(void) {
     hud_element_draw_clipped(actionCommandStatus->hudElements[4]);
 }
 
-void N(free_hud_elements)(void) {
+void N(free)(void) {
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
     hud_element_free(gActionCommandStatus.hudElements[2]);
