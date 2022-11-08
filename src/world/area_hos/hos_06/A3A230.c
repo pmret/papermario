@@ -77,9 +77,98 @@ ApiStatus func_802411F0_A3A6D0(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_8024126C_A3A74C);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802414E4_A3A9C4);
+typedef struct UnkThing {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+} UnkThing; // size = 0xC
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241668_A3AB48);
+extern UnkThing D_80244B88_A3E068[16];
+extern UnkThing D_80244C48_A3E128[63];
+
+ApiStatus func_802414E4_A3A9C4(Evt* script, s32 isInitialCall) {
+    s32 temp_s5 = evt_get_variable(NULL, GameByte(0));
+    u32 count = 0;
+    s32 temp_s7;
+    UnkThing* it;
+    u32 i;
+    
+    script->varTable[1] = 0;
+
+    it = D_80244B88_A3E068;
+    for (i = 0; i < ARRAY_COUNT(D_80244B88_A3E068); i++, it++) {
+        if (temp_s5 >= it->unk_08 && 
+            evt_get_variable(NULL, it->unk_04) == 0 && 
+            evt_get_variable(NULL, i + AreaFlag(100)) == 0)
+        {
+            count++;
+        }
+    }
+
+    if (count > 0) {
+        temp_s7 = rand_int(count - 1);
+        it = D_80244B88_A3E068;
+        count = 0;
+
+        for (i = 0; i < ARRAY_COUNT(D_80244B88_A3E068); i++, it++) {
+            if (temp_s5 >= it->unk_08 && 
+                evt_get_variable(NULL, it->unk_04) == 0 && 
+                evt_get_variable(NULL, i + AreaFlag(100)) == 0)
+            {   
+                if (count == temp_s7) {
+                    script->varTable[1] = it->unk_00;
+                    evt_set_variable(NULL, i + AreaFlag(100), 1);
+                    break;
+                } else {
+                    count++;
+                }
+            }
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80241668_A3AB48(Evt* script, s32 isInitialCall) {
+    s32 temp_s5 = evt_get_variable(NULL, GameByte(0));
+    u32 count = 0;
+    s32 temp_s7;
+    UnkThing* it;
+    u32 i;
+    
+    script->varTable[1] = 0;
+
+    it = D_80244C48_A3E128;
+    for (i = 0; i < ARRAY_COUNT(D_80244C48_A3E128); i++, it++) {
+        if (temp_s5 >= it->unk_08 && 
+            evt_get_variable(NULL, it->unk_04) == 0 && 
+            evt_get_variable(NULL, i + AreaFlag(116)) == 0)
+        {
+            count++;
+        }
+    }
+
+    if (count > 0) {
+        temp_s7 = rand_int(count - 1);
+        it = D_80244C48_A3E128;
+        count = 0;
+
+        for (i = 0; i < ARRAY_COUNT(D_80244C48_A3E128); i++, it++) {
+            if (temp_s5 >= it->unk_08 && 
+                evt_get_variable(NULL, it->unk_04) == 0 && 
+                evt_get_variable(NULL, i + AreaFlag(116)) == 0)
+            {   
+                if (count == temp_s7) {
+                    script->varTable[1] = it->unk_00;
+                    evt_set_variable(NULL, i + AreaFlag(116), 1);
+                    break;
+                } else {
+                    count++;
+                }
+            }
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802417EC_A3ACCC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
