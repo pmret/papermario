@@ -677,7 +677,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -767,7 +767,7 @@ EvtScript N(electroDash_wait) = {
 
 EvtScript N(electroDash) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BODY_SLAM)
-    EVT_CALL(action_command_body_slam_CreateHudElements)
+    EVT_CALL(action_command_body_slam_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_48)
@@ -785,7 +785,7 @@ EvtScript N(electroDash) = {
     EVT_END_LOOP
     EVT_CALL(MoveBattleCamOver, 75)
     EVT_IF_EQ(LocalFlag(2), 1)
-        EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 102, 3, 1)
+        EVT_CALL(action_command_body_slam_start, 0, 102, 3, 1)
         EVT_SET(LocalFlag(0), 0)
         EVT_EXEC_GET_TID(N(dashToTarget), LVarA)
         EVT_LOOP(20)
@@ -837,7 +837,7 @@ EvtScript N(electroDash) = {
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_EQ(LocalFlag(2), 0)
-                    EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 1)
+                    EVT_CALL(action_command_body_slam_start, 0, 92, 3, 1)
                     EVT_SET(LocalFlag(2), 1)
                 EVT_END_IF
             EVT_END_IF
@@ -860,7 +860,7 @@ EvtScript N(electroDash) = {
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_EQ(LocalFlag(2), 0)
-                    EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 1)
+                    EVT_CALL(action_command_body_slam_start, 0, 92, 3, 1)
                     EVT_SET(LocalFlag(2), 1)
                 EVT_END_IF
             EVT_END_IF
@@ -961,9 +961,9 @@ EvtScript N(electroDash) = {
 
 EvtScript N(powerShock) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_POWER_SHOCK)
-    EVT_CALL(action_command_power_shock_CreateHudElements)
+    EVT_CALL(action_command_power_shock_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_SET(LocalFlag(15), 0)
     EVT_CALL(GetOwnerTarget, LVarA, LVarB)
     EVT_CALL(GetActorFlags, LVarA, LVar0)
@@ -984,7 +984,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(MoveBattleCamOver, 80)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(N(TargetParalyzeChance))
-    EVT_CALL(func_802A9210_42D120, 0, 72, 3, LVar0)
+    EVT_CALL(action_command_power_shock_start, 0, 72, 3, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, 5)
@@ -1084,8 +1084,8 @@ EvtScript N(powerShock) = {
 
 EvtScript N(8023AE8C) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(func_802A9000_42A4F0, 1)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(action_command_water_block_init, 1)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
@@ -1107,7 +1107,7 @@ EvtScript N(8023AE8C) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 180)
     EVT_WAIT(10)
-    EVT_CALL(func_802A9398_42A888, 0, 100, 3)
+    EVT_CALL(action_command_water_block_start, 0, 100, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
@@ -1169,8 +1169,8 @@ EvtScript N(8023AE8C) = {
 
 EvtScript N(8023B450) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(func_802A9000_42A4F0, 1)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(action_command_water_block_init, 1)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_WAIT(5)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -1190,7 +1190,7 @@ EvtScript N(8023B450) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 180)
     EVT_WAIT(10)
-    EVT_CALL(func_802A9398_42A888, 0, 100, 3)
+    EVT_CALL(action_command_water_block_start, 0, 100, 3)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
@@ -1253,9 +1253,9 @@ s32 D_8023B948_707438[] = { 3, 3, 4, 7, 10, 13, 16, 16, 16, 16, };
 
 EvtScript N(megaShock) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_MEGA_SHOCK)
-    EVT_CALL(func_802A9000_42DA10)
+    EVT_CALL(action_command_mega_shock_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_CALL(func_80269344, 0)
+    EVT_CALL(SetActionHudPrepareTime, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -54, 63, 10)
     EVT_CALL(SetBattleCamOffsetZ, 15)
@@ -1278,7 +1278,7 @@ EvtScript N(megaShock) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(N(AverageTargetParalyzeChance))
-    EVT_CALL(func_802A91A0_42DBB0, 0, 87, 3, LVar0)
+    EVT_CALL(action_command_mega_shock_start, 0, 87, 3, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, 5)

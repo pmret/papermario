@@ -3,8 +3,10 @@
 
 #include "common_structs.h"
 
-ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall);
-ApiStatus func_802A91A0_42DBB0(Evt* script, s32 isInitialCall);
-void func_802A92A0_42DCB0(void);
+ApiStatus action_command_mega_shock_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_mega_shock_start(Evt* script, s32 isInitialCall);
+void action_command_mega_shock_update(void);
+void action_command_mega_shock_draw(void);
+void action_command_mega_shock_free(void);
 
 #endif

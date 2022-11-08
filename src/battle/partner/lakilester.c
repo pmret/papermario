@@ -71,7 +71,6 @@ static s32 D_8023D338;
 extern HudScript HES_AimBlinkA;
 extern HudScript HES_AimReticle;
 extern HudScript HES_AimTarget;
-extern HudScript HES_StickNeutral;
 extern HudScript HES_StickTapRight;
 
 ApiStatus N(SpinyFlipUpdatePopup)(Evt* script, s32 isInitialCall) {
@@ -317,7 +316,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
             EVT_CALL(LoadStarPowerScript)
@@ -947,7 +946,7 @@ EvtScript N(spinyFlip) = {
 
 EvtScript N(spinySurge) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SPINY_SURGE)
-    EVT_CALL(func_802A9000_42EE20)
+    EVT_CALL(action_command_spiny_surge_init)
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -957,7 +956,7 @@ EvtScript N(spinySurge) = {
         EVT_CASE_EQ(2)
             EVT_CALL(SetupMashMeter, 4, 40, 70, 99, 100, 0)
     EVT_END_SWITCH
-    EVT_CALL(func_80269344, 10)
+    EVT_CALL(SetActionHudPrepareTime, 10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 45, 60, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -981,7 +980,7 @@ EvtScript N(spinySurge) = {
     EVT_END_SWITCH
     EVT_SET(LVarB, LVarA)
     EVT_ADD(LVarB, -3)
-    EVT_CALL(func_802A916C_42EF8C, 0, LVarB, 3)
+    EVT_CALL(action_command_spiny_surge_start, 0, LVarB, 3)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
@@ -1102,8 +1101,8 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 1)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(func_802A9000_42A4F0, 2)
-    EVT_CALL(func_80269344, 50)
+    EVT_CALL(action_command_water_block_init, 2)
+    EVT_CALL(SetActionHudPrepareTime, 50)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_10)
@@ -1143,7 +1142,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ReadyJump)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
-    EVT_CALL(func_802A9398_42A888, 0, 97, 3)
+    EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
@@ -1221,8 +1220,8 @@ EvtScript N(cloudNine_normal) = {
 EvtScript N(cloudNine_immobile) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(func_802A9000_42A4F0, 2)
-    EVT_CALL(func_80269344, 50)
+    EVT_CALL(action_command_water_block_init, 2)
+    EVT_CALL(SetActionHudPrepareTime, 50)
     EVT_CALL(N(RemoveCloudNineFX))
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
@@ -1258,7 +1257,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_ADD(LVar1, 40)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 10)
-    EVT_CALL(func_802A9398_42A888, 0, 97, 3)
+    EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
@@ -1689,9 +1688,9 @@ ApiStatus N(IsHurricaneActive)(Evt* script, s32 isInitialCall) {
 
 EvtScript N(hurricane) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_HURRICANE)
-    EVT_CALL(func_802A9000_42F6E0)
+    EVT_CALL(action_command_hurricane_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_CALL(func_80269344, 15)
+    EVT_CALL(SetActionHudPrepareTime, 15)
     EVT_CALL(func_80269EAC, 20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -45, 54, 0)
@@ -1706,7 +1705,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
     EVT_WAIT(15)
     EVT_CALL(N(InitHurricane))
-    EVT_CALL(func_802A91A0_42F880, 0, 147, 3, LVar0)
+    EVT_CALL(action_command_hurricane_start, 0, 147, 3, LVar0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)

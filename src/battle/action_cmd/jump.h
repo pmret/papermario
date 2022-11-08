@@ -3,8 +3,10 @@
 
 #include "common_structs.h"
 
+ApiStatus action_command_jump_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_jump_start(Evt* script, s32 isInitialCall);
 void action_command_jump_update(void);
-
-ApiStatus action_command_jump_CreateHudElements(Evt* script, s32 isInitialCall);
+void action_command_jump_draw(void);
+void action_command_jump_free(void);
 
 #endif

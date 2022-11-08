@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "battle/action_cmd.h"
 
 #define NAMESPACE battle_move_jump_charge_0
 

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "script_api/battle.h"
+#include "battle/action_cmd.h"
 #include "battle/action_cmd/hammer.h"
 
 #define NAMESPACE battle_move_spin_smash
@@ -162,7 +163,7 @@ EvtScript D_802A1770_738000 = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
     EVT_WAIT(4)
-    EVT_CALL(func_802A9258_422258, 0, 36, 3)
+    EVT_CALL(action_command_hammer_start, 0, 36, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
     EVT_SET(LVar1, 0)
@@ -247,7 +248,7 @@ EvtScript D_802A1B44_7383D4 = {
 
 EvtScript D_802A1C20_7384B0 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -260,10 +261,10 @@ EvtScript D_802A1C20_7384B0 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
     EVT_WAIT(4)
     EVT_CALL(battle_move_spin_smash_IsBerserkerEquipped)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_NOT_LEARNED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
         EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_LT(LVar0, 2)
+        EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
             EVT_CALL(battle_move_spin_smash_IsRightOnEquipped)
             EVT_IF_EQ(LVar0, 0)
                 EVT_LOOP(45)
@@ -276,7 +277,7 @@ EvtScript D_802A1C20_7384B0 = {
             EVT_END_IF
         EVT_END_IF
         EVT_ADD(LVarD, 6)
-        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LVar1, 0)
         EVT_LOOP(30)
@@ -295,7 +296,7 @@ EvtScript D_802A1C20_7384B0 = {
         EVT_END_LOOP
         EVT_LABEL(0)
         EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_LT(LVar0, 2)
+        EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
             EVT_WAIT(1)
             EVT_CALL(GetActionSuccess, LVar0)
             EVT_IF_EQ(LVar0, 0)
@@ -303,7 +304,7 @@ EvtScript D_802A1C20_7384B0 = {
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
         EVT_SUB(LVar1, 10)
@@ -312,11 +313,11 @@ EvtScript D_802A1C20_7384B0 = {
         EVT_WAIT(5)
     EVT_END_IF
     EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_EQ(LVar0, 2)
-        EVT_CALL(SetActionCommandMode, 3)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+        EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
         EVT_LOOP(0)
             EVT_CALL(GetActionCommandMode, LVar0)
-            EVT_IF_LT(LVar0, 2)
+            EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
@@ -333,7 +334,7 @@ EvtScript D_802A1C20_7384B0 = {
 
 EvtScript D_802A20E0_738970 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -346,7 +347,7 @@ EvtScript D_802A20E0_738970 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30015)
     EVT_WAIT(4)
     EVT_CALL(battle_move_spin_smash_IsBerserkerEquipped)
-    EVT_IF_EQ(LVar0, 1)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_LEARNED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
         EVT_CALL(battle_move_spin_smash_IsRightOnEquipped)
         EVT_IF_EQ(LVar0, 0)
@@ -359,7 +360,7 @@ EvtScript D_802A20E0_738970 = {
             EVT_END_LOOP
         EVT_END_IF
         EVT_ADD(LVarD, 6)
-        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LVar1, 0)
         EVT_LOOP(30)
@@ -383,7 +384,7 @@ EvtScript D_802A20E0_738970 = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
         EVT_SUB(LVar1, 10)
@@ -402,7 +403,7 @@ EvtScript D_802A20E0_738970 = {
 
 EvtScript D_802A24C8_738D58 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -415,7 +416,7 @@ EvtScript D_802A24C8_738D58 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001C)
     EVT_WAIT(4)
     EVT_CALL(battle_move_spin_smash_IsBerserkerEquipped)
-    EVT_IF_EQ(LVar0, 1)
+    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_LEARNED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
         EVT_CALL(battle_move_spin_smash_IsRightOnEquipped)
         EVT_IF_EQ(LVar0, 0)
@@ -428,7 +429,7 @@ EvtScript D_802A24C8_738D58 = {
             EVT_END_LOOP
         EVT_END_IF
         EVT_ADD(LVarD, 6)
-        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LVar1, 0)
         EVT_LOOP(30)
@@ -452,7 +453,7 @@ EvtScript D_802A24C8_738D58 = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
+        EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
         EVT_SUB(LVar1, 10)
@@ -472,7 +473,7 @@ EvtScript D_802A24C8_738D58 = {
 EvtScript D_802A28B0_739140 = {
     EVT_CALL(ChooseNextTarget, 10, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -495,7 +496,7 @@ EvtScript D_802A28B0_739140 = {
         EVT_END_LOOP
     EVT_END_IF
     EVT_ADD(LVarD, 6)
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)
@@ -530,7 +531,7 @@ EvtScript D_802A28B0_739140 = {
 EvtScript D_802A2BDC_73946C = {
     EVT_CALL(ChooseNextTarget, 10, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -553,7 +554,7 @@ EvtScript D_802A2BDC_73946C = {
         EVT_END_LOOP
     EVT_END_IF
     EVT_ADD(LVarD, 6)
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 0x00040000, LVar0)
@@ -579,7 +580,7 @@ EvtScript D_802A2BDC_73946C = {
 EvtScript D_802A2E80_739710 = {
     EVT_CALL(ChooseNextTarget, 10, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -602,7 +603,7 @@ EvtScript D_802A2E80_739710 = {
         EVT_END_LOOP
     EVT_END_IF
     EVT_ADD(LVarD, 6)
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 0x00040000, LVar0)
@@ -626,7 +627,7 @@ EvtScript D_802A2E80_739710 = {
 };
 
 EvtScript battle_move_spin_smash_main = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(func_80269EAC, 2)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -652,7 +653,7 @@ EvtScript battle_move_spin_smash_main = {
 
 EvtScript D_802A3258_739AE8 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LVar1, 0)
@@ -698,7 +699,7 @@ EvtScript D_802A3258_739AE8 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)
@@ -775,7 +776,7 @@ EvtScript D_802A3258_739AE8 = {
 
 EvtScript D_802A3920_73A1B0 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LVar1, 0)
@@ -820,7 +821,7 @@ EvtScript D_802A3920_73A1B0 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)
@@ -897,7 +898,7 @@ EvtScript D_802A3920_73A1B0 = {
 
 EvtScript D_802A3FC4_73A854 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_CreateHudElements)
+    EVT_CALL(action_command_hammer_init)
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LVar1, 0)
@@ -940,7 +941,7 @@ EvtScript D_802A3FC4_73A854 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
+    EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)

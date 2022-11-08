@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "battle/action_cmd.h"
 
 ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -17,7 +18,7 @@ ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
         script->varTable[0] = 20;
     }
 
-    if (battleStatus->unk_83 != 0) {
+    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
         if (script->varTable[0] < 6) {
             script->varTable[0] = 6;
         }

@@ -863,8 +863,8 @@ typedef struct BattleStatus {
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
-    /* 0x083 */ s8 unk_83;
-    /* 0x084 */ s8 unk_84;
+    /* 0x083 */ s8 actionCommandMode;
+    /* 0x084 */ s8 actionResult;
     /* 0x085 */ s8 unk_85;
     /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
@@ -965,7 +965,7 @@ typedef struct BattleStatus {
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ u8 unk_433;
-    /* 0x434 */ s32* unk_434;
+    /* 0x434 */ s32* actionCmdDifficultyTable;
     /* 0x438 */ struct Stage* currentStage;
     /* 0x43C */ struct EffectInstance* buffEffect;
     /* 0x440 */ u8 tattleFlags[28];
@@ -2293,42 +2293,6 @@ typedef struct VirtualEntity {
 } VirtualEntity; // size = 0x4C
 
 typedef VirtualEntity* VirtualEntityList[0x40];
-
-typedef struct ActionCommandStatus {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 hudElements[15];
-    /* 0x40 */ char unk_40[0x4];
-    /* 0x44 */ s16 barFillLevel;
-    /* 0x46 */ s16 unk_46;
-    /* 0x48 */ s16 unk_48;
-    /* 0x4A */ s16 actionCommandID; // current action command id?
-    /* 0x4C */ s16 state;
-    /* 0x4E */ s16 unk_4E;
-    /* 0x50 */ s16 unk_50;
-    /* 0x52 */ s16 unk_52;
-    /* 0x54 */ s16 unk_54;
-    /* 0x56 */ s16 hudElementX;
-    /* 0x58 */ s16 hudElementY;
-    /* 0x5A */ s16 unk_5A;
-    /* 0x5C */ s8 unk_5C;
-    /* 0x5D */ s8 unk_5D;
-    /* 0x5E */ s8 autoSucceed;
-    /* 0x5F */ s8 unk_5F;
-    /* 0x60 */ s8 unk_60;
-    /* 0x61 */ s8 unk_61;
-    /* 0x62 */ s8 unk_62;
-    /* 0x63 */ s8 unk_63;
-    /* 0x64 */ s16 easyVersion;
-    /* 0x66 */ s16 unk_66;
-    /* 0x68 */ s16 unk_68;
-    /* 0x6A */ s16 unk_6A;
-    /* 0x6C */ s16 unk_6C;
-    /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ s16 unk_70;
-    /* 0x72 */ s16 unk_72;
-    /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
-    /* 0x80 */ s8 mashMeterIntervals;
-} ActionCommandStatus;
 
 typedef struct Message {
     /* 0x00 */ s32 unk_00;

@@ -617,7 +617,7 @@ EvtScript N(celebrate) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(func_802694A4, 1)
+    EVT_CALL(ShowActionHud, 1)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -800,7 +800,7 @@ EvtScript N(animHold) = {
 
 EvtScript N(bodySlam) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BODY_SLAM)
-    EVT_CALL(action_command_body_slam_CreateHudElements)
+    EVT_CALL(action_command_body_slam_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_48)
@@ -818,7 +818,7 @@ EvtScript N(bodySlam) = {
     EVT_END_LOOP
     EVT_CALL(MoveBattleCamOver, 65)
     EVT_IF_EQ(LF_MashStarted, 1)
-        EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
+        EVT_CALL(action_command_body_slam_start, 0, 92, 3, 0)
         EVT_SET(LF_MashEnded, 0)
         EVT_EXEC_GET_TID(N(runToTarget), LVarA)
         EVT_LOOP(35)
@@ -869,7 +869,7 @@ EvtScript N(bodySlam) = {
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, FALSE)
                 EVT_IF_EQ(LF_MashStarted, 0)
-                    EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
+                    EVT_CALL(action_command_body_slam_start, 0, 92, 3, 0)
                     EVT_SET(LF_MashStarted, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -891,7 +891,7 @@ EvtScript N(bodySlam) = {
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, FALSE)
                 EVT_IF_EQ(LF_MashStarted, 0)
-                    EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
+                    EVT_CALL(action_command_body_slam_start, 0, 92, 3, 0)
                     EVT_SET(LF_MashStarted, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -1013,7 +1013,7 @@ EvtScript N(bodySlam) = {
 
 EvtScript N(bomb) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BOMB)
-    EVT_CALL(func_802A9000_427A70)
+    EVT_CALL(action_command_bomb_init)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
@@ -1058,11 +1058,11 @@ EvtScript N(bomb) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_CALL(action_command_bomb_MashActionCommandInit, 0, 57, 3, 0)
+            EVT_CALL(action_command_bomb_start, 0, 57, 3, 0)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_CALL(action_command_bomb_MashActionCommandInit, 0, 72, 3, 1)
+            EVT_CALL(action_command_bomb_start, 0, 72, 3, 1)
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_CALL(action_command_bomb_MashActionCommandInit, 0, 87, 3, 2)
+            EVT_CALL(action_command_bomb_start, 0, 87, 3, 2)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
     EVT_CHILD_THREAD

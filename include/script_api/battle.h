@@ -5,6 +5,7 @@
 #include "evt.h"
 
 #include "script_api/common.h"
+#include "battle/action_cmd.h"
 
 ApiStatus EnablePartnerBlur(Evt* script, s32 isInitialCall);
 ApiStatus DisablePartnerBlur(Evt* script, s32 isInitialCall);
@@ -54,13 +55,6 @@ ApiStatus StartRumbleWithParams(Evt* script, s32 isInitialCall);
 ApiStatus LoadItemScript(Evt* script, s32 isInitialCall);
 ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall);
 ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall);
-ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall);
-ApiStatus GetActionSuccess(Evt* script, s32 isInitialCall);
-ApiStatus SetActionSuccess(Evt* script, s32 isInitialCall);
-ApiStatus GetActionSuccessCopy(Evt* script, s32 isInitialCall);
-ApiStatus GetBlockResult(Evt* script, s32 isInitialCall);
-ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall);
-ApiStatus func_80269470(Evt* script, s32 isInitialCall);
 ApiStatus LoadBattleSection(Evt* script, s32 isInitialCall);
 ApiStatus GetBattlePhase(Evt* script, s32 isInitialCall);
 ApiStatus GetLastElement(Evt* script, s32 isInitialCall);
@@ -295,12 +289,7 @@ ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall);
 ApiStatus func_802CABE8(Evt* script, s32 isInitialCall);
 ApiStatus func_802CAE50(Evt* script, s32 isInitialCall);
-ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall);
 ApiStatus func_802807D0(Evt* script, s32 isInitialCall);
-ApiStatus func_802694A4(Evt* script, s32 isInitialCall);
-ApiStatus func_80269524(Evt* script, s32 isInitialCall);
-ApiStatus func_80269550(Evt* script, s32 isInitialCall);
-ApiStatus func_8026919C(Evt* script, s32 isInitialCall);
 ApiStatus PartnerYieldTurn(Evt* script, s32 isInitialCall); ///< YieldTurn copy
 ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPresetImmediately(Evt* script, s32 isInitialCall);
@@ -313,14 +302,8 @@ ApiStatus func_80276EFC(Evt* script, s32 isInitialCall);
 ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus func_80273444(Evt* script, s32 isInitialCall);
-ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall);
-ApiStatus func_80269344(Evt* script, s32 isInitialCall);
-ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall);
-ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall);
-ApiStatus func_802693F0(Evt* script, s32 isInitialCall);
 ApiStatus WaitForState(Evt* script, s32 isInitialCall);
 ApiStatus func_8026E020(Evt* script, s32 isInitialCall);
-ApiStatus GetActionResult(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleState(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D434(Evt* script, s32 isInitialCall);
 ApiStatus func_8026F1A0(Evt* script, s32 isInitialCall);
@@ -328,9 +311,6 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall);
 ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall);
 ApiStatus func_8026ED20(Evt* script, s32 isInitialCall);
 ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall);
-ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall);
-ApiStatus SetActionResult(Evt* script, s32 isInitialCall);
-ApiStatus func_80269600(Evt* script, s32 isInitialCall);
 ApiStatus BattleCamTargetActorPart(Evt* script, s32 isInitialCall);
 ApiStatus func_802537C0(Evt* script, s32 isInitialCall);
 ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall);

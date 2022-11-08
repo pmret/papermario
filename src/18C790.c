@@ -2,7 +2,6 @@
 #include "effects.h"
 #include "hud_element.h"
 #include "ld_addrs.h"
-#include "pause/pause_common.h"
 #include "script_api/battle.h"
 #include "entity.h"
 #include "sprite/npc/BattleGoombario.h"
@@ -16,6 +15,7 @@
 #include "sprite/npc/BattleBow.h"
 
 extern HudScript HES_ProjectorBeam;
+extern IconHudScriptPair gItemHudScripts[];
 
 BSS s32 D_8029FA80[4];
 BSS s32 D_8029FA90[3][7];

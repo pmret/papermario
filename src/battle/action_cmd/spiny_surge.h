@@ -3,9 +3,10 @@
 
 #include "common_structs.h"
 
-ApiStatus func_802A9000_42EE20(Evt* script, s32 isInitialCall);
-ApiStatus func_802A916C_42EF8C(Evt* script, s32 isInitialCall);
-
-void func_802A9254_42F074(void);
+ApiStatus action_command_spiny_surge_init(Evt* script, s32 isInitialCall);
+ApiStatus action_command_spiny_surge_start(Evt* script, s32 isInitialCall);
+void action_command_spiny_surge_update(void);
+void action_command_spiny_surge_draw(void);
+void action_command_spiny_surge_free(void);
 
 #endif

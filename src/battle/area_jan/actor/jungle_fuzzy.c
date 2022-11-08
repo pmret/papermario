@@ -427,13 +427,13 @@ EvtScript N(leechAttack) = {
         EVT_END_LOOP
     EVT_ELSE
         EVT_CALL(ShowMessageBox, 49, 32767)
-        EVT_CALL(func_802694A4, 1)
+        EVT_CALL(ShowActionHud, 1)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
-        EVT_CALL(func_802A9000_425590)
+        EVT_CALL(action_command_stop_leech_init)
         EVT_CALL(SetupMashMeter, 1, 23, 0, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
-        EVT_CALL(func_802A9110_4256A0, 0, 32767, 3)
+        EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(5)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)

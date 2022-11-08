@@ -32,8 +32,6 @@ extern s32 D_800DC4F0;
 extern struct Battle* D_800DC4F4;
 extern s32 D_800DC4F8;
 
-extern ActionCommandStatus gActionCommandStatus;
-
 extern s32 D_802DAC98;
 
 extern EntityList gWorldEntityList;

@@ -204,7 +204,7 @@ EvtScript N(takeTurn_80218414) = {
 EvtScript N(80218424) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
     EVT_CALL(func_80218158_4CF308)
-    EVT_CALL(WaitForState, 13)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -236,7 +236,7 @@ EvtScript N(80218424) = {
     EVT_WAIT(10)
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 2)
-    EVT_CALL(WaitForState, 18)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_SET(LVar0, 255)
     EVT_LOOP(10)
         EVT_SUB(LVar0, 25)
@@ -251,7 +251,7 @@ EvtScript N(80218424) = {
     EVT_THREAD
         EVT_CALL(func_80218170_4CF320)
     EVT_END_THREAD
-    EVT_CALL(WaitForState, 22)
+    EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
     EVT_SET(LVar0, 0)
     EVT_LOOP(10)
         EVT_ADD(LVar0, 25)
@@ -274,7 +274,7 @@ EvtScript N(80218424) = {
     EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
     EVT_CALL(SetBattleState, 6)
-    EVT_CALL(WaitForState, 5)
+    EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_TURN)
     EVT_WAIT(20)
     EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
@@ -304,7 +304,7 @@ EvtScript N(80218424) = {
     EVT_CALL(func_8026E020, 256)
     EVT_CALL(func_8026E038, 1)
     EVT_CALL(func_80218158_4CF308)
-    EVT_CALL(WaitForState, 18)
+    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_SET(LVar0, 255)
     EVT_LOOP(10)
         EVT_SUB(LVar0, 25)
@@ -319,7 +319,7 @@ EvtScript N(80218424) = {
     EVT_THREAD
         EVT_CALL(func_80218170_4CF320)
     EVT_END_THREAD
-    EVT_CALL(WaitForState, 22)
+    EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
     EVT_SET(LVar0, 0)
     EVT_LOOP(10)
         EVT_ADD(LVar0, 25)
@@ -340,7 +340,7 @@ EvtScript N(80218424) = {
     EVT_CALL(func_802180E8_4CF298)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_CALL(WaitForState, 0)
+    EVT_CALL(WaitForState, BATTLE_STATE_0)
     EVT_CALL(SetBattleState, 30)
     EVT_WAIT(10000)
     EVT_RETURN
