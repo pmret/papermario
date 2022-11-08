@@ -1,7 +1,11 @@
 #include "hos_05.h"
 #include "model.h"
+#include "effects.h"
 
+extern s32 D_8024995C_A33B9C;
+extern s16 D_80249960_A33BA0[];
 extern Gfx D_8024AA28_A34C68[];
+extern f32 D_8024F2CC;
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -131,7 +135,33 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241850_A2BA90);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802419F4_A2BC34);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241B40_A2BD80);
+ApiStatus func_80241B40_A2BD80(Evt* script, s32 isInitialCall) {
+    Npc* npc7 = resolve_npc(script, 7);
+    Npc* npc8 = resolve_npc(script, 8);
+
+    if (isInitialCall) {
+        npc7->pos.x = -64.0f;
+        npc7->pos.y = 135.0f;
+        npc7->pos.z = 85.0f;
+        npc8->pos.x = -64.0f;
+        npc8->pos.y = 135.0f;
+        npc8->pos.z = 85.0f;
+        npc7->colliderPos.x = npc7->pos.x;
+        npc8->colliderPos.x = npc8->pos.x;
+        npc7->colliderPos.z = npc7->pos.z;
+        npc8->colliderPos.z = npc8->pos.z;
+        D_8024F2CC = 135.0f;
+    }
+    npc7->pos.y += D_80249960_A33BA0[((u32) (D_8024995C_A33B9C - 20) & 30) / 2] * 0.1f;
+    npc8->pos.y = npc7->pos.y;
+    npc7->colliderPos.y = npc7->pos.y;
+    npc8->colliderPos.y = npc8->pos.y;
+    D_8024995C_A33B9C++;
+    if (D_8024995C_A33B9C < 2000) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241C54_A2BE94);
 
@@ -141,7 +171,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241D7C_A2BFBC);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241F54_A2C194);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", update_heroes_start_turn_A2C264);
+INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80242024_A2C264);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802421E0_A2C420);
 
@@ -159,7 +189,41 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80242F74_A2D1B4);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024301C_A2D25C);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243100_A2D340);
+typedef struct UnkHosStruct {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0x14];
+    /* 0x18 */ IMG_PTR unk_18; // img
+    /* 0x1C */ IMG_PTR unk_1C; // img
+    /* 0x20 */ PAL_PTR unk_20; // pal
+    /* 0x24 */ char unk_24[0x20];
+    /* 0x44 */ u16 unk_44; // x
+    /* 0x46 */ u16 unk_46; // y
+    /* 0x48 */ s16 unk_48; // x
+    /* 0x4A */ s16 unk_4A; // y
+    /* 0x4C */ char unk_4C[0x10];
+    /* 0x5C */ s16 unk_5C; // alpha
+} UnkHosStruct; // size = ??
+
+extern UnkHosStruct* D_8024AA20_A34C60;
+
+void func_80243164_A2D3A4(
+    s32 baseX, s32 baseY, 
+    IMG_PTR img, PAL_PTR pal, 
+    s32 alpha, s32 width, s32 height, s32 lineHeight
+);
+
+void func_80243100_A2D340(void) {
+    s32 x = D_8024AA20_A34C60->unk_44 << 0x10;
+    s32 y = D_8024AA20_A34C60->unk_46 << 0x10;
+    
+    if (D_8024AA20_A34C60->unk_00 != 0) {
+        func_80243164_A2D3A4(
+            x >> 0x10, y >> 0x10, 
+            D_8024AA20_A34C60->unk_1C, D_8024AA20_A34C60->unk_20, 
+            255, 128, 128, 16
+        );
+    }
+}
 
 void func_80243164_A2D3A4(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s32 alpha, s32 width, s32 height, s32 lineHeight) {
     u8 overlayType;
@@ -205,7 +269,13 @@ void func_80243164_A2D3A4(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s32 al
     gDPPipeSync(gMasterGfxPos++);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024370C_A2D94C);
+void func_8024370C_A2D94C(void) {
+    func_80243164_A2D3A4(
+        D_8024AA20_A34C60->unk_48, D_8024AA20_A34C60->unk_4A, 
+        D_8024AA20_A34C60->unk_18, NULL,
+        D_8024AA20_A34C60->unk_5C, 128, 128, 32
+    );
+}
 
 void func_80243758_A2D998(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal) {
     s32 i;
