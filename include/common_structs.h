@@ -136,7 +136,7 @@ typedef struct CamPosSettings {
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     /* 0x0C */ f32 viewPitch;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
 } CamPosSettings; // size = 0x1C
 
 typedef struct DmaTable {
@@ -378,7 +378,7 @@ typedef struct Trigger {
     /* 0x04 */ s32 varIndex;
     /* 0x08 */ union {
         s32 colliderID;
-        Vec4f* position;
+        Vec4f* pos;
     } location;
     /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
     /* 0x10 */ EvtScript* onTriggerEvt;
@@ -468,7 +468,7 @@ typedef struct Evt {
     /* 0x154 */ f32 frameCounter;
     /* 0x158 */ s32 unk_158;
     /* 0x15C */ Bytecode* ptrFirstLine;
-    /* 0x160 */ Bytecode* ptrSavedPosition;
+    /* 0x160 */ Bytecode* ptrSavedPos;
     /* 0x164 */ Bytecode* ptrCurrentLine;
 } Evt; // size = 0x168
 

@@ -266,7 +266,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     newScript->loopDepth = -1;
     newScript->switchDepth = -1;
     newScript->groupFlags = ~EVT_GROUP_10;
-    newScript->ptrSavedPosition = NULL;
+    newScript->ptrSavedPos = NULL;
     newScript->frameCounter = 0.0f;
     newScript->unk_158 = 0;
     newScript->timeScale = gGlobalTimeSpace;
@@ -338,7 +338,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
         newScript->loopDepth = -1;
         newScript->switchDepth = -1;
         newScript->groupFlags = groupFlags;
-        newScript->ptrSavedPosition = 0;
+        newScript->ptrSavedPos = 0;
         newScript->frameCounter = 0.0f;
         newScript->unk_158 = 0;
         newScript->timeScale = gGlobalTimeSpace;
@@ -407,7 +407,7 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) 
     child->loopDepth = -1;
     child->switchDepth = -1;
     child->groupFlags = parentScript->groupFlags;
-    child->ptrSavedPosition = NULL;
+    child->ptrSavedPos = NULL;
     child->array = parentScript->array;
     child->flagArray = parentScript->flagArray;
     child->timeScale = gGlobalTimeSpace;
@@ -475,7 +475,7 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
     child->loopDepth = -1;
     child->switchDepth = -1;
     child->groupFlags = parentScript->groupFlags;
-    child->ptrSavedPosition = NULL;
+    child->ptrSavedPos = NULL;
     child->array = parentScript->array;
     child->flagArray = parentScript->flagArray;
     child->timeScale = gGlobalTimeSpace;

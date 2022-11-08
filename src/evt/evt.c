@@ -1333,7 +1333,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
 }
 
 ApiStatus func_802C739C(Evt* script) {
-    script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
+    script->ptrSavedPos = (Bytecode*)*script->ptrReadPos;
     return ApiStatus_DONE2;
 }
 

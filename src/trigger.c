@@ -192,7 +192,7 @@ void update_triggers(void) {
                 continue;
             }
 
-            triggerPos = listTrigger->location.position;
+            triggerPos = listTrigger->location.pos;
             dist = dist3D(triggerPos->x, triggerPos->y, triggerPos->z,
                                 collisionStatus->bombetteExplosionPos.x, collisionStatus->bombetteExplosionPos.y,
                                 collisionStatus->bombetteExplosionPos.z);
