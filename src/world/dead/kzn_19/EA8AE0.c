@@ -313,9 +313,6 @@ ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
 #endif
 
-extern s32 N(ItemChoice_HasSelectedItem);
-extern s32 N(ItemChoice_SelectedItemID);
-
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
