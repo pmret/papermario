@@ -75,16 +75,85 @@ ApiStatus func_802411F0_A3A6D0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_8024126C_A3A74C);
-
 typedef struct UnkThing {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
 } UnkThing; // size = 0xC
 
+extern UnkThing D_802447D4_A3DCB4[79];
 extern UnkThing D_80244B88_A3E068[16];
 extern UnkThing D_80244C48_A3E128[63];
+
+ApiStatus func_8024126C_A3A74C(Evt* script, s32 isInitialCall) {
+    s32 temp_s6 = evt_get_variable(NULL, GameByte(0));
+    u32 count = 0;
+    UnkThing* it;
+    s32 temp_s5;
+    u32 i;
+    
+    script->varTable[1] = 0;
+    for (i = 0, it = D_802447D4_A3DCB4; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
+        if (temp_s6 >= it->unk_08 && 
+            func_802411BC_A3A69C(it->unk_04) == 0 && 
+            evt_get_variable(NULL, i + AreaFlag(3)) == 0) {
+            count++;
+        }
+    }
+
+    if (count > 0) {
+        temp_s5 = rand_int(count - 1);
+        it = D_802447D4_A3DCB4;
+        count = 0;
+        i = 0;
+
+        for (; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
+            if (temp_s6 >= it->unk_08 && 
+                func_802411BC_A3A69C(it->unk_04) == 0 && 
+                evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+            {
+                if (count == temp_s5) {
+                    script->varTable[1] = it->unk_00;
+                    evt_set_variable(NULL, i + AreaFlag(3), 1);
+                    break;
+                }
+                count++;
+            }
+        }
+        return ApiStatus_DONE2;
+    }
+
+    for (i = 0, it = D_802447D4_A3DCB4; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
+        if (it->unk_08 == 0x2712 && 
+            func_802411BC_A3A69C(it->unk_04) == 0 && 
+            evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+        {
+            count++;
+        }
+    }
+
+    if (count > 0) {
+        temp_s5 = rand_int(count - 1);
+        it = D_802447D4_A3DCB4;
+        count = 0;
+        i = 0;
+
+        for (; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
+            if (it->unk_08 == 0x2712 && 
+                func_802411BC_A3A69C(it->unk_04) == 0 && 
+                evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+            {
+                if (count == temp_s5) {
+                    script->varTable[1] = it->unk_00;
+                    evt_set_variable(NULL, i + AreaFlag(3), 1);
+                    break;
+                }
+                count++;
+            }
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802414E4_A3A9C4(Evt* script, s32 isInitialCall) {
     s32 temp_s5 = evt_get_variable(NULL, GameByte(0));
@@ -119,9 +188,8 @@ ApiStatus func_802414E4_A3A9C4(Evt* script, s32 isInitialCall) {
                     script->varTable[1] = it->unk_00;
                     evt_set_variable(NULL, i + AreaFlag(100), 1);
                     break;
-                } else {
-                    count++;
                 }
+                count++;
             }
         }
     }
@@ -161,9 +229,8 @@ ApiStatus func_80241668_A3AB48(Evt* script, s32 isInitialCall) {
                     script->varTable[1] = it->unk_00;
                     evt_set_variable(NULL, i + AreaFlag(116), 1);
                     break;
-                } else {
-                    count++;
                 }
+                count++;
             }
         }
     }
