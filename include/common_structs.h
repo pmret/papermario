@@ -2431,7 +2431,7 @@ typedef struct CreditsEntry {
 
 typedef struct CreditsLine {
     /* 0x00 */ u8* message;
-    /* 0x04 */ s32 unk__04;
+    /* 0x04 */ char unk_04[0x4];
     /* 0x08 */ s32 time;
     /* 0x0C */ s32 state;
     /* 0x10 */ s32 palette;
@@ -2439,23 +2439,14 @@ typedef struct CreditsLine {
     /* 0x18 */ s32 appearMode;
     /* 0x1C */ s32 appearTime;
     /* 0x20 */ s32 perCharDelayIn;
-    /* 0x24 */ s32 unk__24;
-    /* 0x28 */ s32 unk__28;
-    /* 0x2C */ s32 unk__2C;
-    /* 0x30 */ s32 unk__30;
+    /* 0x24 */ char unk_24[0x10];
     /* 0x34 */ s32 holdMode;
     /* 0x38 */ s32 holdTime;
-    /* 0x3C */ s32 unk__3C;
-    /* 0x40 */ s32 unk__40;
-    /* 0x44 */ s32 unk__44;
-    /* 0x48 */ s32 unk__48;
+    /* 0x3C */ char unk_3C[0x10];
     /* 0x4C */ s32 vanishMode;
     /* 0x50 */ s32 vanishTime;
     /* 0x54 */ s32 perCharDelayOut;
-    /* 0x58 */ s32 unk__58;
-    /* 0x5C */ s32 unk__5C;
-    /* 0x60 */ s32 unk__60;
-    /* 0x64 */ s32 unk__64;
+    /* 0x58 */ char unk_58[0x10];
     /* 0x68 */ s32 posX;
     /* 0x6C */ s32 posY;
     /* 0x70 */ s16 flags;
