@@ -67,7 +67,7 @@ extern s32 D_8024A9CC_A34C0C;
 extern UnkHosStruct* D_8024AA20_A34C60;
 extern Gfx D_8024AA28_A34C68[];
 extern u32 D_8024AAB0_A34CF0;
-extern s32 D_8024AAB4_A34CF4;
+extern s32 D_8024AAB4_A34CF4; // func_802440D0_A2E310 can be matched once this is migrated
 extern s32 D_8024AAB8_A34CF8;
 extern u32 D_8024AABC_A34CFC;
 extern s32 D_8024AAC0_A34D00[];
