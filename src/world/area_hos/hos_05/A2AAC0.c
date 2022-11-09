@@ -42,6 +42,9 @@ extern s16 D_80249934_A33B74[];
 extern s32 D_8024995C_A33B9C;
 extern s16 D_80249960_A33BA0[];
 extern f32 D_80249980_A33BC0;
+extern s32 D_80249984_A33BC4;
+extern s16 D_80249988_A33BC8[];
+extern s16 D_802499A8_A33BE8[][2];
 extern s32 D_80249A48_A33C88;
 extern s16 D_80249A4C_A33C8C[];
 extern f32 D_80249A6C_A33CAC;
@@ -49,10 +52,16 @@ extern s32 D_80249A70_A33CB0;
 extern f32 D_80249A74_A33CB4;
 extern s32 D_80249A78_A33CB8;
 extern s32 D_80249A7C_A33CBC;
+extern s32 D_80249A80_A33CC0;
 extern f32 D_80249A84_A33CC4;
 extern f32 D_80249A88_A33CC8;
 extern f32 D_80249A8C_A33CCC;
 extern s32 D_80249A90_A33CD0;
+extern f32 D_80249A94_A33CD4;
+extern f32 D_80249A98_A33CD8;
+extern f32 D_80249A9C_A33CDC;
+extern f32 D_80249AA0_A33CE0;
+extern s32 D_80249AA4_A33CE4;
 extern f32 D_8024A9C8_A34C08;
 extern s32 D_8024A9CC_A34C0C;
 extern UnkHosStruct* D_8024AA20_A34C60;
@@ -70,10 +79,17 @@ extern u16 D_8024AC9C_A34EDC[];
 extern s32 D_8024ACB8_A34EF8;
 extern f32 D_8024AEC4_A35104;
 extern f32 D_8024AEC8_A35108;
+
+// BSS?
 extern f32 D_8024F2C8;
 extern f32 D_8024F2CC;
 extern f32 D_8024F2D8;
 extern f32 D_8024F2DC;
+extern f32 D_8024F2E0;
+extern f32 D_8024F2E4;
+extern f32 D_8024F2E8;
+extern f32 D_8024F2EC;
+extern f32 D_8024F2F0_C0CB70;
 extern f32 D_8024F2F4;
 extern f32 D_8024F2F8;
 extern f32 D_8024F374;
@@ -357,7 +373,39 @@ ApiStatus func_80241D08_A2BF48(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241D7C_A2BFBC);
+ApiStatus func_80241D7C_A2BFBC(Evt* script, s32 isInitialCall) {
+    Npc* npc = resolve_npc(script, 9);
+
+    if (isInitialCall) {
+        npc->pos.x = -145.0f;
+        npc->pos.z = 114.0f;
+        npc->yaw = 270.0f;
+        npc->colliderPos.x = npc->pos.x;
+        npc->colliderPos.z = npc->pos.z;
+    }
+    if (D_80249984_A33BC4 == 30) {
+        npc->yaw = 90.0f;
+    }
+    if (D_80249984_A33BC4 < 40) {
+        npc->pos.x = D_802499A8_A33BE8[D_80249984_A33BC4][0] - 145;
+        npc->pos.y = (((D_802499A8_A33BE8[D_80249984_A33BC4][1] - 135) * 200) / 225) + 147;
+        if (D_80249984_A33BC4 < 20) {
+            npc->pos.z = 114.0f - (D_80249984_A33BC4 * 30.0f) / 20.0f;
+        } else {
+            npc->pos.z = 84.0f;
+        }
+        npc->colliderPos.x = npc->pos.x;
+        npc->colliderPos.z = npc->pos.z;
+    } else {
+        npc->pos.y += D_80249988_A33BC8[((D_80249984_A33BC4 - 40) & 30) / 2] * 0.1f;
+    }
+    npc->colliderPos.y = npc->pos.y;
+    D_80249984_A33BC4++;
+    if (D_80249984_A33BC4 < 2000) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 ApiStatus func_80241F54_A2C194(Evt* script, s32 isInitialCall) {
     Npc* npc = resolve_npc(script, 9);
@@ -443,7 +491,27 @@ ApiStatus func_802422A0_A2C4E0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802423D4_A2C614);;
+ApiStatus func_802423D4_A2C614(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    func_802410E4_A2B324(4, 35.0f, 35.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E0);
+    func_802410E4_A2B324(4, 130.0f, 270.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E4);
+    func_802410E4_A2B324(4, 30.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E8);
+    func_802410E4_A2B324(4, 232.0f, 177.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2EC);
+    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0_C0CB70);
+    func_80240D54_A2AF94(0, D_8024F2E0);
+    camera->panActive = TRUE;
+    camera->controlSettings.boomLength = D_8024F2E4;
+    camera->movePos.x = D_8024F2E8;
+    camera->movePos.y = D_8024F2EC;
+    camera->movePos.z = D_8024F2F0_C0CB70;
+
+    D_80249A80_A33CC0++;
+    if (D_80249A80_A33CC0 <= 90) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 ApiStatus func_802425A0_A2C7E0(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];
@@ -464,7 +532,25 @@ ApiStatus func_802425A0_A2C7E0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80242704_A2C944);
+ApiStatus func_80242704_A2C944(void) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    func_802410E4_A2B324(3, 25.0f, 200.0f, D_80249AA4_A33CE4, 120.0f, &D_80249AA0_A33CE0);
+    func_802410E4_A2B324(3, 50.0f, 35.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A94_A33CD4);
+    func_802410E4_A2B324(3, 246.1f, 180.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A98_A33CD8);
+    func_802410E4_A2B324(3, 200.0f, 220.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A9C_A33CDC);
+    camera->controlSettings.posB.x = sin_deg(D_80249AA0_A33CE0) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(D_80249AA0_A33CE0) * 500.0f;
+    func_80240D54_A2AF94(0, D_80249A94_A33CD4);
+    camera->panActive = TRUE;
+    camera->controlSettings.boomLength = D_80249A98_A33CD8;
+    camera->movePos.y = D_80249A9C_A33CDC;
+    D_80249AA4_A33CE4++;
+    if (D_80249AA4_A33CE4 <= 120) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802428C8_A2CB08);
 
