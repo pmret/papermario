@@ -32,6 +32,10 @@ typedef struct UnkHosStruct {
 
 extern f32 D_8024987C_A33ABC;
 extern f32 D_802498A8_A33AE8;
+extern s32 D_80249900_A33B40;
+extern f32 D_80249904_A33B44;
+extern s32 D_80249908_A33B48;
+extern f32 D_8024990C_A33B4C;
 extern s32 D_80249910_A33B50;
 extern s16 D_80249914_A33B54[];
 extern s16 D_80249934_A33B74[];
@@ -40,6 +44,8 @@ extern s16 D_80249960_A33BA0[];
 extern f32 D_80249980_A33BC0;
 extern s32 D_80249A48_A33C88;
 extern s16 D_80249A4C_A33C8C[];
+extern f32 D_80249A6C_A33CAC;
+extern s32 D_80249A70_A33CB0;
 extern f32 D_80249A74_A33CB4;
 extern s32 D_80249A78_A33CB8;
 extern s32 D_80249A7C_A33CBC;
@@ -189,16 +195,84 @@ void func_80241044_A2B284(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4) {
     }
 }
 
-void func_802410E4_A2B324(s32, f32, f32, f32, f32, f32*);
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802410E4_A2B324);
+void func_802410E4_A2B324(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5) {
+    f32 var_f12_2;
+
+    if (arg3 > arg4) {
+        arg3 = arg4;
+    }
+
+    switch (arg0) {
+        case 1:
+            var_f12_2 = sin_deg((arg3 / arg4) * 90.0f);
+            break;
+        case 2:
+            if (arg3 < 30.0f) {
+                var_f12_2 = 0.0f;
+            } else {
+                var_f12_2 = sin_deg((((arg3 - 30.0f) / (arg4 - 30.0f)) * 90.0f) + -90.0f) + 1.0f;
+            }
+            break;
+        case 3:
+            var_f12_2 = (sin_deg(((arg3 / arg4) * 180.0f) - 90.0f) + 1.0f) * 0.5;
+            break;
+        case 4:
+            var_f12_2 = sin_deg(((arg3 / arg4) * 90.0f) - 90.0f) + 1.0f;
+            break;
+        default:
+            var_f12_2 = arg3 / arg4;
+            break;
+    }
+    *arg5 = arg1 + ((arg2 - arg1) * var_f12_2);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241274_A2B4B4);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024146C_A2B6AC);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802416BC_A2B8FC);
+ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241850_A2BA90);
+    if (isInitialCall) {
+        camera->flags |= CAMERA_FLAGS_SHAKING;
+    }
+    guTranslateF(camera->viewMtxShaking,
+        D_80249904_A33B44 * sin_deg(D_80249900_A33B40 * 486),
+        D_80249904_A33B44 * cos_deg(D_80249900_A33B40 * 254),
+        0.0f
+    );
+    D_80249900_A33B40++;
+    D_80249904_A33B44 += (12.0f - D_80249904_A33B44) * 0.2;
+    if (D_80249900_A33B40 > 20) {
+        guTranslateF(camera->viewMtxShaking, 0.0f, 0.0f, 0.0f);
+        camera->flags &= ~CAMERA_FLAGS_SHAKING;
+        return ApiStatus_DONE1;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_80241850_A2BA90(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    Matrix4f sp18;
+    f32 x, y;
+
+    if (isInitialCall) {
+        camera->flags |= CAMERA_FLAGS_SHAKING;
+    }
+    x = D_8024990C_A33B4C * sin_deg(D_80249908_A33B48 * 486);
+    y = D_8024990C_A33B4C * cos_deg(D_80249908_A33B48 * 254);
+    guTranslateF(camera->viewMtxShaking, x, y, 0.0f);
+    guTranslateF(camera->viewMtxShaking, x, y, 0.0f);
+    guRotateF(sp18, 20.0f, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp18, camera->viewMtxShaking, camera->viewMtxShaking);
+    camera->panActive = TRUE;
+    if (D_80249908_A33B48 >= 10) {
+        guRotateF(camera->viewMtxShaking, 20.0f, 0.0f, 0.0f, 1.0f);
+        return ApiStatus_DONE1;
+    }
+    D_80249908_A33B48++;
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_802419F4_A2BC34(Evt* script, s32 isInitialCall) {
     Npc* npc7 = resolve_npc(script, 7);
@@ -306,7 +380,31 @@ ApiStatus func_80241F54_A2C194(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80242024_A2C264);
+ApiStatus func_80242024_A2C264(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    func_802410E4_A2B324(0, 121.6f, 90.0f, D_80249A70_A33CB0, 40.0f, &D_80249A6C_A33CAC);
+    camera->panActive = TRUE;
+    camera->controlSettings.boomLength = D_80249A6C_A33CAC;
+    if ((D_80249A70_A33CB0 == ((D_80249A70_A33CB0 / 5) * 5)) && (D_80249A6C_A33CAC != 90.0f)) {
+        f32 temp_f4 = resolve_npc(script, 7)->pos.y - 150.0f;
+
+        fx_fire_breath(
+            1, script->varTable[0],
+            script->varTable[1] + temp_f4,
+            script->varTable[2],
+            script->varTable[3] - 5,
+            script->varTable[4] + temp_f4,
+            script->varTable[5] - 30, 0, 5, 20
+        );
+    }
+
+    D_80249A70_A33CB0++;
+    if (D_80249A70_A33CB0 <= 40) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 ApiStatus func_802421E0_A2C420(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];
