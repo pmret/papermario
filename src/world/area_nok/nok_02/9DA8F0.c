@@ -98,7 +98,7 @@ ApiStatus func_80243D14_9DAD34(Evt* script, s32 isInitialCall) {
 #include "world/common/todo/GetItemName.inc.c"
 #define NAMESPACE nok_02
 
-ApiStatus func_80243EC8_9DAEE8(Evt* script) {
+ApiStatus func_80243EC8_9DAEE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if ((evt_get_variable(script, *args++) % 4) != 0) {

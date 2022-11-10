@@ -2,7 +2,7 @@
 
 #include "world/common/util/MonitorPlayerOrbiting.inc.c"
 
-ApiStatus func_80241360_A01960(Evt* script) {
+ApiStatus func_80241360_A01960(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
 

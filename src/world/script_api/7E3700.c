@@ -251,7 +251,7 @@ ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283240(Evt* script) {
+ApiStatus func_80283240(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode* sourceToFind = (Bytecode*)evt_get_variable(script, *args++);

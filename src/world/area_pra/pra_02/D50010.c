@@ -67,7 +67,7 @@ ApiStatus func_80241274_D51264(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/UnkFunc44.inc.c"
 
-ApiStatus func_802414A8_D51498(Evt* script) {
+ApiStatus func_802414A8_D51498(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIdx = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);

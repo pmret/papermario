@@ -93,7 +93,7 @@ void func_80240BD0_A27AA0(s32** arg0) {
     }
 }
 
-ApiStatus func_80240E40_A27D10(Evt* script) {
+ApiStatus func_80240E40_A27D10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     set_curtain_draw_callback((void (*)) evt_get_variable(script, *args++));

@@ -10,7 +10,7 @@
 #include "common/foliage.inc.c"
 #define NAMESPACE jan_05
 
-ApiStatus func_8024268C_B4D0FC(Evt* script) {
+ApiStatus func_8024268C_B4D0FC(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(0) == NULL) {
         script->varTable[0] = FALSE;
     } else {

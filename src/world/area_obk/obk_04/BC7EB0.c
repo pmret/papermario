@@ -193,7 +193,7 @@ ApiStatus func_80240A58_BC88B8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240C10_BC8A70(Evt* script) {
+ApiStatus func_80240C10_BC8A70(Evt* script, s32 isInitialCall) {
     Npc npc;
 
     npc.pos.x = 0;

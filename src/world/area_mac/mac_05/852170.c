@@ -91,7 +91,7 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 // float stuff
 #ifdef NON_MATCHING
-ApiStatus func_80242A90_854C00(Evt* script) {
+ApiStatus func_80242A90_854C00(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s1 = evt_get_variable(script, *args++);
     s32 temp_s3 = *args++;

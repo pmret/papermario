@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240314_8FF984);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240418_8FFA88);
 
-ApiStatus func_802404E4_8FFB54(Evt* script) {
+ApiStatus func_802404E4_8FFB54(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     evt_get_variable(script, *args++);

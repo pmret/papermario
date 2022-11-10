@@ -14,7 +14,7 @@ extern s32 D_80244B2C_8B4B9C[];
 
 // reg swap & data migration
 #ifdef NON_MATCHING
-ApiStatus func_802402E0_8B0350(Evt* script) {
+ApiStatus func_802402E0_8B0350(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     s32* var_s0 = D_80244B2C_8B4B9C[evt_get_variable(script, *args++)];
@@ -147,7 +147,7 @@ ApiStatus func_802427EC_8B285C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024280C_8B287C(Evt* script) {
+ApiStatus func_8024280C_8B287C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = resolve_npc(script, 0);
 
