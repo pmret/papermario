@@ -1,8 +1,8 @@
 #include "nok_01.h"
 #include "effects.h"
 
-extern s32 D_8024856C_9CD94C;
-extern s32 D_80248570_9CD950;
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
 
 static char* N(exit_str_0) = "nok_13";
 static char* N(exit_str_1) = "nok_02";
@@ -31,12 +31,12 @@ ApiStatus func_80242028_9C7408(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_8024856C_9CD94C = FALSE;
+        nok_01_ItemChoice_HasSelectedItem = FALSE;
     }
 
-    if (D_8024856C_9CD94C) {
-        D_8024856C_9CD94C = FALSE;
-        evt_set_variable(script, *args++, D_80248570_9CD950);
+    if (nok_01_ItemChoice_HasSelectedItem) {
+        nok_01_ItemChoice_HasSelectedItem = FALSE;
+        evt_set_variable(script, *args++, nok_01_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -45,7 +45,13 @@ ApiStatus func_80242028_9C7408(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242028_9C7408);
 #endif
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024207C_9C745C);
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 nok_01_D_80251C70[];
 

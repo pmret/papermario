@@ -537,7 +537,7 @@ ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
 ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args, clamp_angle(evt_get_variable(script, *args)));
+    evt_set_variable(script, *args++, clamp_angle(evt_get_variable(script, *args)));
 
     return ApiStatus_DONE2;
 }
@@ -545,7 +545,7 @@ ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
 ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_float_variable(script, *args, clamp_angle(evt_get_float_variable(script, *args)));
+    evt_set_float_variable(script, *args++, clamp_angle(evt_get_float_variable(script, *args)));
 
     return ApiStatus_DONE2;
 }

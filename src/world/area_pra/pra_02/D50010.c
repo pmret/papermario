@@ -8,7 +8,16 @@
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411A0_D51190);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
 

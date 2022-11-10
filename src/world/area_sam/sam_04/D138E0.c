@@ -6,7 +6,16 @@
 
 INCLUDE_ASM(s32, "world/area_sam/sam_04/D138E0", func_8024053C_D13B0C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_04/D138E0", func_80240590_D13B60);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 sam_04_80245210[];
 

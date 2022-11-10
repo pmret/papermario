@@ -10,7 +10,16 @@
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_802404B4_BC4734);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240508_BC4788);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 D_80243BE0[];
 

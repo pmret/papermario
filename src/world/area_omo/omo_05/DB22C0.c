@@ -15,7 +15,16 @@ static char* N(exit_str_1) = "";
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 D_80245650[];
 

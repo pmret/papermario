@@ -14,12 +14,12 @@ ApiStatus func_80240F00_DE3390(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80241C04_DE4094 = FALSE;
+        omo_13_ItemChoice_HasSelectedItem = FALSE;
     }
 
-    if (D_80241C04_DE4094) {
-        D_80241C04_DE4094 = FALSE;
-        evt_set_variable(script, *args++, D_80241C08_DE4098);
+    if (omo_13_ItemChoice_HasSelectedItem) {
+        omo_13_ItemChoice_HasSelectedItem = FALSE;
+        evt_set_variable(script, *args++, omo_13_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
 
@@ -29,7 +29,16 @@ ApiStatus func_80240F00_DE3390(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
 #endif
 
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F54_DE33E4);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 omo_13_80243220[];
 

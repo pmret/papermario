@@ -65,10 +65,10 @@ ApiStatus N(CalculateArcsinDeg)(Evt* script, s32 isInitialCall) {
     y2 -= y1;
 
     if (x2 == 0 && y2 == 0) {
-        evt_set_variable(script, *args, outVar);
+        evt_set_variable(script, *args++, outVar);
         return ApiStatus_DONE2;
     } else {
-        evt_set_variable(script, *args, N(ArcsinDeg)(x2, y2) - 90);
+        evt_set_variable(script, *args++, N(ArcsinDeg)(x2, y2) - 90);
         return ApiStatus_DONE2;
     }
 }

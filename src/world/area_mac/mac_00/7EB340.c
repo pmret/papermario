@@ -17,7 +17,16 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802418F0_7EC600);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241944_7EC654);
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 extern s32 mac_00_D_80255BA0[];
 

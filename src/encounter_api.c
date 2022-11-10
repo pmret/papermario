@@ -624,7 +624,7 @@ ApiStatus SetSelfVar(Evt* script, s32 isInitialCall) {
 ApiStatus GetSelfVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args, script->owner1.enemy->varTable[evt_get_variable(script, *args++)]);
+    evt_set_variable(script, *args++, script->owner1.enemy->varTable[evt_get_variable(script, *args++)]);
     return ApiStatus_DONE2;
 }
 
@@ -755,7 +755,7 @@ ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
 
-    evt_set_variable(script, *args, owner->animList[evt_get_variable(script, *args++)]);
+    evt_set_variable(script, *args++, owner->animList[evt_get_variable(script, *args++)]);
     return ApiStatus_DONE2;
 }
 

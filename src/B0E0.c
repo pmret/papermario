@@ -957,9 +957,9 @@ void update_camera_zone_interp(Camera* camera) {
         boomYawDiff = settingDiff;
     }
 
-    deltaX = camera->oldCameraSettings.position.x - camera->newCameraSettings.position.x;
-    deltaY = camera->oldCameraSettings.position.y - camera->newCameraSettings.position.y;
-    deltaZ = camera->oldCameraSettings.position.z - camera->newCameraSettings.position.z;
+    deltaX = camera->oldCameraSettings.pos.x - camera->newCameraSettings.pos.x;
+    deltaY = camera->oldCameraSettings.pos.y - camera->newCameraSettings.pos.y;
+    deltaZ = camera->oldCameraSettings.pos.z - camera->newCameraSettings.pos.z;
     settingDiff = SQ(deltaX);
     settingDiff += SQ(deltaY);
     settingDiff += SQ(deltaZ);
@@ -1011,9 +1011,9 @@ void update_camera_zone_interp(Camera* camera) {
     blendedCamSettings.boomLength = (camera->oldCameraSettings.boomLength * interpAlphaInv) + (camera->newCameraSettings.boomLength * interpAlpha);
     blendedCamSettings.boomPitch = (camera->oldCameraSettings.boomPitch * interpAlphaInv) + (camera->newCameraSettings.boomPitch * interpAlpha);
     blendedCamSettings.viewPitch = (camera->oldCameraSettings.viewPitch * interpAlphaInv) + (camera->newCameraSettings.viewPitch * interpAlpha);
-    blendedCamSettings.position.x = (camera->oldCameraSettings.position.x * interpAlphaInv) + (camera->newCameraSettings.position.x * interpAlpha);
-    blendedCamSettings.position.y = (camera->oldCameraSettings.position.y * interpAlphaInv) + (camera->newCameraSettings.position.y * interpAlpha);
-    blendedCamSettings.position.z = (camera->oldCameraSettings.position.z * interpAlphaInv) + (camera->newCameraSettings.position.z * interpAlpha);
+    blendedCamSettings.pos.x = (camera->oldCameraSettings.pos.x * interpAlphaInv) + (camera->newCameraSettings.pos.x * interpAlpha);
+    blendedCamSettings.pos.y = (camera->oldCameraSettings.pos.y * interpAlphaInv) + (camera->newCameraSettings.pos.y * interpAlpha);
+    blendedCamSettings.pos.z = (camera->oldCameraSettings.pos.z * interpAlphaInv) + (camera->newCameraSettings.pos.z * interpAlpha);
     blendedCamSettings.boomLength *= camera->zoomPercent;
     blendedCamSettings.boomLength *= 0.01;
 
@@ -1025,21 +1025,21 @@ void update_camera_zone_interp(Camera* camera) {
     sinViewPitch = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
 
     if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
-        camera->lookAt_eye.y = blendedCamSettings.position.y + (blendedCamSettings.boomLength * sinViewPitch);
+        camera->lookAt_eye.y = blendedCamSettings.pos.y + (blendedCamSettings.boomLength * sinViewPitch);
     }
 
-    camera->lookAt_eye.x = blendedCamSettings.position.x - (temp_f26 * blendedCamSettings.boomLength * cosViewPitch);
-    camera->lookAt_eye.z = blendedCamSettings.position.z - (temp_f24_2 * blendedCamSettings.boomLength * cosViewPitch);
+    camera->lookAt_eye.x = blendedCamSettings.pos.x - (temp_f26 * blendedCamSettings.boomLength * cosViewPitch);
+    camera->lookAt_eye.z = blendedCamSettings.pos.z - (temp_f24_2 * blendedCamSettings.boomLength * cosViewPitch);
     cosViewPitch = cos_deg(-blendedCamSettings.viewPitch);
     sinViewPitch = sin_deg(-blendedCamSettings.viewPitch);
 
-    if (camera->lookAt_eye.x == blendedCamSettings.position.x && camera->lookAt_eye.z == blendedCamSettings.position.z) {
+    if (camera->lookAt_eye.x == blendedCamSettings.pos.x && camera->lookAt_eye.z == blendedCamSettings.pos.z) {
         dist = 0.0f;
     } else {
-        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, blendedCamSettings.position.x, blendedCamSettings.position.z);
+        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, blendedCamSettings.pos.x, blendedCamSettings.pos.z);
     }
 
-    temp_f8_2 = blendedCamSettings.position.y - camera->lookAt_eye.y;
+    temp_f8_2 = blendedCamSettings.pos.y - camera->lookAt_eye.y;
     if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
         camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinViewPitch) + (temp_f8_2 * cosViewPitch));
     }

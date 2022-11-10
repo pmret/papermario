@@ -1,8 +1,8 @@
 #include "kkj_18.h"
 #include "camera.h"
 
-extern s32 D_80241F10_AF4BB0;
-extern s32 D_80241F14_AF4BB4;
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
 extern s32 kkj_18_D_80244E78[];
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
@@ -15,12 +15,12 @@ ApiStatus func_8024056C_AF320C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80241F10_AF4BB0 = 0;
+        kkj_18_ItemChoice_HasSelectedItem = 0;
     }
 
-    if (D_80241F10_AF4BB0 != 0) {
-        D_80241F10_AF4BB0 = 0;
-        evt_set_variable(script, *args++, D_80241F14_AF4BB4);
+    if (kkj_18_ItemChoice_HasSelectedItem != 0) {
+        kkj_18_ItemChoice_HasSelectedItem = 0;
+        evt_set_variable(script, *args++, kkj_18_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
 
@@ -30,12 +30,11 @@ ApiStatus func_8024056C_AF320C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_8024056C_AF320C);
 #endif
 
-ApiStatus func_802405C0_AF3260(Evt* script, s32 isInitialCall) {
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241F14_AF4BB4 = evt_get_variable(script, *args++);
-    D_80241F10_AF4BB0 = 1;
-
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
 

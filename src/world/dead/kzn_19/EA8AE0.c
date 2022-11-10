@@ -2,8 +2,8 @@
 
 extern Gfx D_80243AD8_EAC5B8[];
 extern s32 D_80243BB8_EAC698[];
-extern s32 D_80243DD8_EAC8B8;
-extern s32 D_80243DDC_EAC8BC;
+extern s32 dead_kzn_19_ItemChoice_HasSelectedItem;
+extern s32 dead_kzn_19_ItemChoice_SelectedItemID;
 extern s32 D_80248380;
 extern s32 N(D_80248388)[];
 
@@ -297,12 +297,12 @@ ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80243DD8_EAC8B8 = FALSE;
+        dead_kzn_19_ItemChoice_HasSelectedItem = FALSE;
     }
-    if (D_80243DD8_EAC8B8) {
-        D_80243DD8_EAC8B8 = FALSE;
+    if (dead_kzn_19_ItemChoice_HasSelectedItem) {
+        dead_kzn_19_ItemChoice_HasSelectedItem = FALSE;
 
-        evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
+        evt_set_variable(script, *args++, dead_kzn_19_ItemChoice_SelectedItemID);
 
         return ApiStatus_DONE2;
     }
@@ -313,7 +313,13 @@ ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
 #endif
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

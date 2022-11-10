@@ -617,7 +617,7 @@ ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     if (gCollisionStatus.currentFloor >= 0) {
         result = (func_802D23F8() != 0);
     }
-    evt_set_variable(script, *args, result);
+    evt_set_variable(script, *args++, result);
 
     return ApiStatus_DONE2;
 }

@@ -21,10 +21,21 @@ from_funcs = []
 with open(args.from_list) as f:
     from_text = f.readlines()
 
-to_line = from_text[0].strip()
-func_name = to_line[to_line.rfind("/") + 1:to_line.find(".")]
+to_line = """
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
 
-for from_line in from_text[1:]:
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
+    return ApiStatus_DONE2;
+}
+"""
+func_name = "ItemChoice_SaveSelected"
+
+for from_line in from_text:
     if len(from_line.strip()) > 0:
         from_funcs.append(from_line.rstrip().split(" ")[-1])
 
@@ -38,13 +49,15 @@ for root, dirs, files in os.walk(src_dir):
             f_text = f_text_orig
             for func in from_funcs:
                 search_pattern = re.compile("\n.*" + func + "\).*\n")
-                f_text = re.sub(search_pattern, "\n" + to_line + "\n", f_text)
+                f_text = re.sub(search_pattern, to_line, f_text)
             if f_text != f_text_orig:
                 with open(f_path, "w", newline="\n") as f:
                     f.write(f_text)
 
 # # Rename symbols in from_funcs to namespace equivalents
 # for root, dirs, files in os.walk
+
+to_replace = []                    
 
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
@@ -55,18 +68,26 @@ for root, dirs, files in os.walk(asm_dir):
 
             f_text = f_text_orig
 
-            if Path(f_path).parent.parent.name == "nonmatchings":
-                namespace = Path(f_path).parent.name
-            else:
-                namespace = Path(f_path).parent.parent.name
+            namespace = Path(f_path).parent.name
+            non_matching = "nonmatchings" in str(Path(f_path))
 
-            # TODO refactor into new func
-            # if f_name[:-2] in from_funcs:
-            #     syms = list(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
-            #     print(f"{syms[0]} {namespace}_varTable")
+            if non_matching:
+                namespace = Path(f_path).parent.name
+                if "world" not in str(Path(f_path)):
+                    namespace = Path(f_path).parent.name
+
+            namespace = "dead_" + namespace
 
             for func in from_funcs:
                 f_text = f_text.replace(func, namespace + "_" + func_name)
             if f_text != f_text_orig:
+                if non_matching:
+                    syms = sorted(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
+                    to_replace.append(syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n")
+                    to_replace.append(syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n")
+
                 with open(f_path, "w", newline="\n") as f:
                     f.write(f_text)
+
+with open("to_rename.txt", "w") as f:
+    f.writelines(to_replace)

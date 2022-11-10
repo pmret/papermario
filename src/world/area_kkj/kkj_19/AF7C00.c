@@ -1,8 +1,8 @@
 #include "kkj_19.h"
 #include "hud_element.h"
 
-extern s32 D_80241B10_AF9460;
-extern s32 D_80241B14_AF9464;
+extern s32 kkj_19_ItemChoice_HasSelectedItem;
+extern s32 kkj_19_ItemChoice_SelectedItemID;
 extern s32 kkj_19_D_802461F0[];
 extern s32 D_802463B8_kkj_19[];
 extern s32 D_8024652C;
@@ -32,12 +32,12 @@ ApiStatus func_802404DC_AF7E2C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80241B10_AF9460 = 0;
+        kkj_19_ItemChoice_HasSelectedItem = 0;
     }
 
-    if (D_80241B10_AF9460 != 0) {
-        D_80241B10_AF9460 = 0;
-        evt_set_variable(script, *args++, D_80241B14_AF9464);
+    if (kkj_19_ItemChoice_HasSelectedItem != 0) {
+        kkj_19_ItemChoice_HasSelectedItem = 0;
+        evt_set_variable(script, *args++, kkj_19_ItemChoice_SelectedItemID);
         return ApiStatus_DONE2;
     }
 
@@ -47,12 +47,11 @@ ApiStatus func_802404DC_AF7E2C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_802404DC_AF7E2C);
 #endif
 
-ApiStatus func_80240530_AF7E80(Evt* script, s32 isInitialCall) {
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241B14_AF9464 = evt_get_variable(script, *args++);
-    D_80241B10_AF9460 = 1;
-
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
 

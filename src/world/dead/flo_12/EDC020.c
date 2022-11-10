@@ -17,12 +17,12 @@ ApiStatus func_802405C0_EDC5A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        D_80241850_EDD830 = FALSE;
+        dead_flo_12_ItemChoice_HasSelectedItem = FALSE;
     }
 
-    if (D_80241850_EDD830) {
-        D_80241850_EDD830 = FALSE;
-        evt_set_variable(script, *args, D_80241850_EDD834);
+    if (dead_flo_12_ItemChoice_HasSelectedItem) {
+        dead_flo_12_ItemChoice_HasSelectedItem = FALSE;
+        evt_set_variable(script, *args++, D_80241850_EDD834);
         return ApiStatus_DONE2;
     }
 
@@ -32,17 +32,16 @@ ApiStatus func_802405C0_EDC5A0(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "EDC020", func_802405C0_EDC5A0);
 #endif
 
-#ifdef NON_MATCHING // TODO(data)
-ApiStatus func_80240614_EDC5F4(Evt* script, s32 isInitialCall) {
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241850_EDD834 = evt_get_variable(script, *args);
-    D_80241850_EDD830 = TRUE;
+    N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
+    N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "EDC020", func_80240614_EDC5F4);
-#endif
 
 ApiStatus func_8024064C_EDC62C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
