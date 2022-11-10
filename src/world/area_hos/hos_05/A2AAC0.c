@@ -30,8 +30,21 @@ typedef struct UnkHosStruct {
     /* 0x60 */ char unk_6E[0x2];
 } UnkHosStruct; // size = 0x60
 
+extern f32 D_8024963C_A3387C[];
 extern f32 D_8024987C_A33ABC;
 extern f32 D_802498A8_A33AE8;
+extern f32 D_802498D0_A33B10;
+extern u16* D_802498D4_A33B14;
+extern f32 D_802498D8_A33B18;
+extern f32 D_802498DC_A33B1C;
+extern f32 D_802498E0_A33B20;
+extern f32 D_802498E4_A33B24;
+extern f32 D_802498E8_A33B28;
+extern f32 D_802498EC_A33B2C;
+extern f32 D_802498F0_A33B30;
+extern f32 D_802498F4_A33B34;
+extern s32 D_802498F8_A33B38;
+extern s32 D_802498FC_A33B3C;
 extern s32 D_80249900_A33B40;
 extern f32 D_80249904_A33B44;
 extern s32 D_80249908_A33B48;
@@ -242,9 +255,57 @@ void func_802410E4_A2B324(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32*
     *arg5 = arg1 + ((arg2 - arg1) * var_f12_2);
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80241274_A2B4B4);
+ApiStatus func_80241274_A2B4B4(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_8024146C_A2B6AC);
+    if (nuGfxCfb_ptr == D_802498D4_A33B14) {
+        return ApiStatus_BLOCK;
+    }
+    D_802498D4_A33B14 = nuGfxCfb_ptr;
+    func_80241044_A2B284(250.0f, 0.0f, D_802498D0_A33B10, 0.5f, &D_802498D0_A33B10);
+    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], 0.0f, 470.0f, &D_802498D8_A33B18);
+    func_80241044_A2B284(12.4f, D_8024963C_A3387C[2], D_802498DC_A33B1C, 0.05f, &D_802498DC_A33B1C);
+    func_80241044_A2B284(-16.8f, D_8024963C_A3387C[9], D_802498E0_A33B20, 0.05f, &D_802498E0_A33B20);
+    func_80241044_A2B284(62.0f, 49.0f, D_802498E4_A33B24, 0.1f, &D_802498E4_A33B24);
+    func_80240D54_A2AF94(0, D_802498E4_A33B24);
+    camera->controlSettings.boomLength = D_802498D8_A33B18;
+    camera->controlSettings.boomPitch = D_802498DC_A33B1C;
+    camera->controlSettings.viewPitch = D_802498E0_A33B20;
+    camera->controlSettings.posB.x = sin_deg(D_802498D0_A33B10) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(D_802498D0_A33B10) * -500.0f;
+    camera->panActive = TRUE;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_8024146C_A2B6AC(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    if (nuGfxCfb_ptr == D_802498D4_A33B14) {
+        return ApiStatus_BLOCK;
+    }
+    D_802498D4_A33B14 = nuGfxCfb_ptr;
+    func_80241044_A2B284(250.0f, 0.0f, D_802498D0_A33B10, 0.5f, &D_802498D0_A33B10);
+    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], (f32) D_802498FC_A33B3C, 470.0f, &D_802498E8_A33B28);
+    func_80241044_A2B284(12.4f, D_8024963C_A3387C[2], D_802498EC_A33B2C, 0.05f, &D_802498EC_A33B2C);
+    func_80241044_A2B284(-16.8f, D_8024963C_A3387C[9], D_802498F0_A33B30, 0.05f, &D_802498F0_A33B30);
+    func_80241044_A2B284(62.0f, 49.0f, D_802498F4_A33B34, 0.1f, &D_802498F4_A33B34);
+    func_80240D54_A2AF94(0, D_802498F4_A33B34);
+    camera->controlSettings.boomLength = D_802498E8_A33B28;
+    camera->controlSettings.boomPitch = D_802498EC_A33B2C;
+    camera->controlSettings.viewPitch = D_802498F0_A33B30;
+    camera->controlSettings.posB.x = sin_deg(D_802498D0_A33B10) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(D_802498D0_A33B10) * -500.0f;
+    camera->panActive = TRUE;
+    D_802498FC_A33B3C++;
+    if (D_802498D0_A33B10 == 0.0f) {
+        D_802498F8_A33B38++;
+    }
+
+    if (D_802498F8_A33B38 <= 30) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE1;
+}
 
 ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];
