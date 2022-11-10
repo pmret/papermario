@@ -480,6 +480,9 @@ mac_01_D_80262A70 = 0x80262A70;
 mac_01_LetterDelivery_SavedNpcAnim = 0x80262C34;
 D_80262C38 = 0x80262C38;
 D_80262F68 = 0x80262F68;
+kpa_81_D_80242040 = 0x80242040;
+osr_01_D_80242180 = 0x80242180;
+pra_02_D_80243CC0 = 0x80243CC0;
 
 // Unsolved BSS Mysteries
 gActionCommandStatus = 0x8029FBE0; // more bss for 16c8e0's segment

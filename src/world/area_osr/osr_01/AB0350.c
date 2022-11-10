@@ -52,7 +52,26 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 }
 #endif
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240730_AB0720);
+extern s32 osr_01_D_80242180[];
+
+ApiStatus func_80240730_AB0720(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            osr_01_D_80242180[i] = ptr[i];
+        }
+        osr_01_D_80242180[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            osr_01_D_80242180[i] = i + 16;
+            osr_01_D_80242180[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"

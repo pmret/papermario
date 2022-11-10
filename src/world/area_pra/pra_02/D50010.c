@@ -19,7 +19,26 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
+extern s32 pra_02_D_80243CC0[];
+
+ApiStatus func_802411D8_D511C8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            pra_02_D_80243CC0[i] = ptr[i];
+        }
+        pra_02_D_80243CC0[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            pra_02_D_80243CC0[i] = i + 16;
+            pra_02_D_80243CC0[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 D_80243E88_846A58[];
 
