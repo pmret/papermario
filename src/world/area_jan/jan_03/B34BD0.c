@@ -93,4 +93,24 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242F1C_B37AEC);
+extern s32 D_8024A5AC_B3F17C[];
+
+ApiStatus func_80242F1C_B37AEC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerData* playerData = &gPlayerData;
+    s32 outVar = *args++;
+    s32 outVal = 0;
+    s32* it;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        it = D_8024A5AC_B3F17C;
+        while (*it != 0) {
+            if (playerData->invItems[i] == *it++) {
+                outVal++;
+            }
+        }
+    }
+    evt_set_variable(script, outVar, outVal);
+    return ApiStatus_DONE2;
+}
