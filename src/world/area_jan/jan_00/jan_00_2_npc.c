@@ -145,11 +145,135 @@ API_CALLABLE(func_80240B4C_B2108C) {
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B4C_B2108C);
 #endif
 
-API_CALLABLE(func_80240CF8_B21238);
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240CF8_B21238);
+ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc0 = get_npc_safe(0);
+    Npc* npc1;
+    Npc* partner;
+    f32 theta;
+    f32 x, y, z;
+    f32 temp_f22;
 
-API_CALLABLE(func_80240F14_B21454);
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240F14_B21454);
+    if (isInitialCall) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+
+        switch (script->functionTemp[0]) {
+            case 0:
+                script->functionTemp[1] = 55;
+                break;
+            case 1:
+                script->functionTemp[1] = 85;
+                break;
+            default:
+                script->functionTemp[1] = 25;
+                break;
+        }
+    }
+    temp_f22 = script->functionTemp[1];
+    theta = -npc0->yaw;
+    x = ((npc0->pos.x + 30.0f) - 75.0f) + (sin_deg(theta) * temp_f22);
+    z = npc0->pos.z + (cos_deg(theta) * temp_f22);
+    y = npc0->pos.y + 50.0f;
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            gPlayerStatus.position.x = x;
+            gPlayerStatus.position.y = y;
+            gPlayerStatus.position.z = z;
+            npc0->colliderPos.x = npc0->pos.x;
+            npc0->colliderPos.y = npc0->pos.y;
+            npc0->colliderPos.z = npc0->pos.z;
+            npc0->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+        case 1:
+            partner = get_npc_safe(NPC_PARTNER);
+            if (partner == NULL) {
+                return ApiStatus_DONE2;
+            }
+            partner->pos.x = x;
+            partner->pos.y = y;
+            partner->pos.z = z;
+            partner->colliderPos.x = partner->pos.x;
+            partner->colliderPos.y = partner->pos.y;
+            partner->colliderPos.z = partner->pos.z;
+            partner->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+        case 2:
+            npc1 = get_npc_safe(1);
+            npc1->pos.x = x;
+            npc1->pos.y = y;
+            npc1->pos.z = z;
+            npc1->colliderPos.x = npc1->pos.x;
+            npc1->colliderPos.y = npc1->pos.y;
+            npc1->colliderPos.z = npc1->pos.z;
+            npc1->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_80240F14_B21454(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_safe(0);
+
+    if (isInitialCall) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+        switch (script->functionTemp[0]) {
+            case 0:
+                script->functionTemp[2] = 0;
+                script->functionTemp[1] = 90;
+                npc->pos.x = 158.0f;
+                npc->pos.y = -50.0f;
+                npc->pos.z = -38.0f;
+                break;
+            case 1:
+                script->functionTemp[2] = 10;
+                script->functionTemp[1] = 200;
+                npc->pos.x = -442.0f;
+                npc->pos.y = -50.0f;
+                npc->pos.z = -38.0f;
+                break;
+        }
+    }
+
+    switch (script->functionTemp[2]) {
+        case 0:
+            npc->currentAnim = 0xB60001;
+            npc->yaw -= 1.0f;
+            npc->pos.x -= 3.0f;
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] <= 0) {
+                script->functionTemp[2] = 1;
+                script->functionTemp[1] = 90;
+            }
+            break;
+        case 1:
+            npc->yaw -= 1.0f;
+            npc->pos.x -= 3.0f;
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] <= 0) {
+                script->functionTemp[2] = 2;
+                script->functionTemp[1] = 120;
+            }
+            break;
+        case 2:
+            npc->pos.x -= 3.0f;
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] <= 0) {
+                return ApiStatus_DONE2;
+            }
+            break;
+        case 10:
+            npc->yaw = 90.0f;
+            npc->pos.x += 3.0f;
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] <= 0) {
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 API_CALLABLE(func_80241134_B21674) {
     Npc* npc = get_npc_safe(2);
@@ -162,8 +286,6 @@ API_CALLABLE(func_80241134_B21674) {
     }
     return ApiStatus_BLOCK;
 }
-
-MAP_DATA_SECTION_START
 
 EvtScript N(D_80242D90_B232D0) = {
     EVT_CALL(func_80240CF8_B21238, LVar0)
