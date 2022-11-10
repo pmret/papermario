@@ -91,12 +91,12 @@ ApiStatus func_8024126C_A3A74C(Evt* script, s32 isInitialCall) {
     UnkThing* it;
     s32 temp_s5;
     u32 i;
-    
+
     script->varTable[1] = 0;
     for (i = 0, it = D_802447D4_A3DCB4; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
-        if (temp_s6 >= it->unk_08 && 
-            func_802411BC_A3A69C(it->unk_04) == 0 && 
-            evt_get_variable(NULL, i + AreaFlag(3)) == 0) {
+        if (temp_s6 >= it->unk_08 &&
+            func_802411BC_A3A69C(it->unk_04) == 0 &&
+            evt_get_variable(NULL, AreaFlag(3 + i)) == 0) {
             count++;
         }
     }
@@ -108,13 +108,13 @@ ApiStatus func_8024126C_A3A74C(Evt* script, s32 isInitialCall) {
         i = 0;
 
         for (; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
-            if (temp_s6 >= it->unk_08 && 
-                func_802411BC_A3A69C(it->unk_04) == 0 && 
-                evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+            if (temp_s6 >= it->unk_08 &&
+                func_802411BC_A3A69C(it->unk_04) == 0 &&
+                evt_get_variable(NULL, AreaFlag(3 + i)) == 0)
             {
                 if (count == temp_s5) {
                     script->varTable[1] = it->unk_00;
-                    evt_set_variable(NULL, i + AreaFlag(3), 1);
+                    evt_set_variable(NULL, AreaFlag(3 + i), 1);
                     break;
                 }
                 count++;
@@ -124,9 +124,9 @@ ApiStatus func_8024126C_A3A74C(Evt* script, s32 isInitialCall) {
     }
 
     for (i = 0, it = D_802447D4_A3DCB4; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
-        if (it->unk_08 == 0x2712 && 
-            func_802411BC_A3A69C(it->unk_04) == 0 && 
-            evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+        if (it->unk_08 == 0x2712 &&
+            func_802411BC_A3A69C(it->unk_04) == 0 &&
+            evt_get_variable(NULL, AreaFlag(3 + i)) == 0)
         {
             count++;
         }
@@ -139,13 +139,13 @@ ApiStatus func_8024126C_A3A74C(Evt* script, s32 isInitialCall) {
         i = 0;
 
         for (; i < ARRAY_COUNT(D_802447D4_A3DCB4); i++, it++) {
-            if (it->unk_08 == 0x2712 && 
-                func_802411BC_A3A69C(it->unk_04) == 0 && 
-                evt_get_variable(NULL, i + AreaFlag(3)) == 0) 
+            if (it->unk_08 == 0x2712 &&
+                func_802411BC_A3A69C(it->unk_04) == 0 &&
+                evt_get_variable(NULL, AreaFlag(3 + i)) == 0)
             {
                 if (count == temp_s5) {
                     script->varTable[1] = it->unk_00;
-                    evt_set_variable(NULL, i + AreaFlag(3), 1);
+                    evt_set_variable(NULL, AreaFlag(3 + i), 1);
                     break;
                 }
                 count++;
@@ -161,14 +161,14 @@ ApiStatus func_802414E4_A3A9C4(Evt* script, s32 isInitialCall) {
     s32 temp_s7;
     UnkThing* it;
     u32 i;
-    
+
     script->varTable[1] = 0;
 
     it = D_80244B88_A3E068;
     for (i = 0; i < ARRAY_COUNT(D_80244B88_A3E068); i++, it++) {
-        if (temp_s5 >= it->unk_08 && 
-            evt_get_variable(NULL, it->unk_04) == 0 && 
-            evt_get_variable(NULL, i + AreaFlag(100)) == 0)
+        if (temp_s5 >= it->unk_08 &&
+            evt_get_variable(NULL, it->unk_04) == 0 &&
+            evt_get_variable(NULL, AreaFlag(100 + i)) == 0)
         {
             count++;
         }
@@ -180,13 +180,13 @@ ApiStatus func_802414E4_A3A9C4(Evt* script, s32 isInitialCall) {
         count = 0;
 
         for (i = 0; i < ARRAY_COUNT(D_80244B88_A3E068); i++, it++) {
-            if (temp_s5 >= it->unk_08 && 
-                evt_get_variable(NULL, it->unk_04) == 0 && 
-                evt_get_variable(NULL, i + AreaFlag(100)) == 0)
-            {   
+            if (temp_s5 >= it->unk_08 &&
+                evt_get_variable(NULL, it->unk_04) == 0 &&
+                evt_get_variable(NULL, AreaFlag(100 + i)) == 0)
+            {
                 if (count == temp_s7) {
                     script->varTable[1] = it->unk_00;
-                    evt_set_variable(NULL, i + AreaFlag(100), 1);
+                    evt_set_variable(NULL, AreaFlag(100 + i), 1);
                     break;
                 }
                 count++;
@@ -202,14 +202,14 @@ ApiStatus func_80241668_A3AB48(Evt* script, s32 isInitialCall) {
     s32 temp_s7;
     UnkThing* it;
     u32 i;
-    
+
     script->varTable[1] = 0;
 
     it = D_80244C48_A3E128;
     for (i = 0; i < ARRAY_COUNT(D_80244C48_A3E128); i++, it++) {
-        if (temp_s5 >= it->unk_08 && 
-            evt_get_variable(NULL, it->unk_04) == 0 && 
-            evt_get_variable(NULL, i + AreaFlag(116)) == 0)
+        if (temp_s5 >= it->unk_08 &&
+            evt_get_variable(NULL, it->unk_04) == 0 &&
+            evt_get_variable(NULL, AreaFlag(116 + i)) == 0)
         {
             count++;
         }
@@ -221,13 +221,13 @@ ApiStatus func_80241668_A3AB48(Evt* script, s32 isInitialCall) {
         count = 0;
 
         for (i = 0; i < ARRAY_COUNT(D_80244C48_A3E128); i++, it++) {
-            if (temp_s5 >= it->unk_08 && 
-                evt_get_variable(NULL, it->unk_04) == 0 && 
-                evt_get_variable(NULL, i + AreaFlag(116)) == 0)
-            {   
+            if (temp_s5 >= it->unk_08 &&
+                evt_get_variable(NULL, it->unk_04) == 0 &&
+                evt_get_variable(NULL, AreaFlag(116 + i)) == 0)
+            {
                 if (count == temp_s7) {
                     script->varTable[1] = it->unk_00;
-                    evt_set_variable(NULL, i + AreaFlag(116), 1);
+                    evt_set_variable(NULL, AreaFlag(116 + i), 1);
                     break;
                 }
                 count++;
