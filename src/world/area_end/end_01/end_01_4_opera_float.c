@@ -1,5 +1,6 @@
 #include "end_01.h"
 #include "effects.h"
+#include "model.h"
 
 extern s32 N(SpotlightsAlpha);
 
@@ -13,14 +14,14 @@ API_CALLABLE(N(FadeInWorld)) {
     if (isInitialCall) {
         script->functionTemp[1] = 255;
     }
-    
+
     script->functionTemp[1] -= 10;
     if (script->functionTemp[1] < 0) {
         script->functionTemp[1] = 0;
     }
-    
+
     set_background_color_blend(0, 0, 0, script->functionTemp[1]);
-    
+
     if (script->functionTemp[1] == 0) {
         func_8011B950(MODEL_Root, -1, 0, 0);
         return ApiStatus_DONE2;
@@ -60,13 +61,13 @@ API_CALLABLE(N(SkateInCirclePenguin1)) {
         script->functionTempF[3] = 180.0f;
         script->functionTemp[0] = 72;
     }
-    
+
     npc = script->functionTempPtr[1];
     script->functionTempF[3] = clamp_angle(script->functionTempF[3] - 5.0f);
     npc->pos.x = npc->pos.x + (cos_deg(script->functionTempF[3]) * 6.0f);
     npc->pos.z = npc->pos.z + (sin_deg(script->functionTempF[3]) * 2.5f);
     npc->renderYaw = clamp_angle(180.0f - script->functionTempF[3]);
-    
+
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE1;
@@ -87,13 +88,13 @@ API_CALLABLE(N(SkateInCirclePenguin2)) {
         script->functionTempF[3] = 180.0f;
         script->functionTemp[0] = 72;
     }
-    
+
     npc = script->functionTempPtr[1];
     script->functionTempF[3] = clamp_angle(script->functionTempF[3] + 5.0f);
     npc->pos.x = npc->pos.x + (cos_deg(script->functionTempF[3]) * 6.0f);
     npc->pos.z = npc->pos.z + (sin_deg(script->functionTempF[3]) * 2.5f);
     npc->renderYaw = clamp_angle(180.0f - script->functionTempF[3]);
-    
+
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE1;
@@ -105,7 +106,7 @@ API_CALLABLE(N(SkateInCirclePenguin2)) {
 API_CALLABLE(N(SetSpotlightsAlpha)) {
     Bytecode* args = script->ptrReadPos;
     N(SpotlightsAlpha) = evt_get_variable(script, *args++);
-    
+
     return ApiStatus_DONE2;
 }
 

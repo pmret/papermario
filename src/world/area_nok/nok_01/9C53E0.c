@@ -134,9 +134,24 @@ ApiStatus func_802427C0_9C7BA0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242804_9C7BE4);
+extern s16 D_80250810_9D5BF0[];
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242858_9C7C38);
+ApiStatus func_80242804_9C7BE4(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *args++);
+
+    snd_ambient_80055848(D_80250810_9D5BF0[idx]);
+    au_ambience_set_volume(D_80250810_9D5BF0[idx], 1500, 127);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80242858_9C7C38(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *args++);
+
+    au_ambience_set_volume(D_80250810_9D5BF0[idx], 1500, 1);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80242898_9C7C78(Evt* script, s32 isInitialCall) {
     snd_ambient_80055848(4);

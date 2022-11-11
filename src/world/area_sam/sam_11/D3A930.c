@@ -1,4 +1,5 @@
 #include "sam_11.h"
+#include "model.h"
 
 extern s32 D_80243CC0_D3E290;
 extern s32 D_80243CC4_D3E294;

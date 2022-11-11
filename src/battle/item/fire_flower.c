@@ -1,5 +1,6 @@
 #include "fire_flower.h"
 #include "effects.h"
+#include "model.h"
 
 #include "ItemRefund.inc.c"
 

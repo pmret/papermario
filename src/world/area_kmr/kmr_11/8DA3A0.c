@@ -1,7 +1,7 @@
 #include "kmr_11.h"
 #include "effects.h"
 
-ApiStatus func_802402A0_8DA3A0(Evt* script) {
+ApiStatus func_802402A0_8DA3A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 temp_f24 = evt_get_float_variable(script, *args++);
     f32 temp_f22 = evt_get_float_variable(script, *args++);
@@ -11,7 +11,7 @@ ApiStatus func_802402A0_8DA3A0(Evt* script) {
     fx_lens_flare(0, temp_f24, temp_f22, temp_f20, t4);
     return ApiStatus_DONE2;
 }
-ApiStatus func_80240344_8DA444(Evt* script) {
+ApiStatus func_80240344_8DA444(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     gCameras[CAM_DEFAULT].vfov = evt_get_float_variable(script, *args++);

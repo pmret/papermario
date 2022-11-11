@@ -1,4 +1,5 @@
 #include "kkj_13.h"
+#include "effects.h"
 
 ApiStatus func_80240330_AD6200(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(1);

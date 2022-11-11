@@ -1,5 +1,6 @@
 #include "shooting_star.h"
 #include "effects.h"
+#include "model.h"
 
 #include "ItemRefund.inc.c"
 

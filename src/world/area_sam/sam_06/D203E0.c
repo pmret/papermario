@@ -1,4 +1,5 @@
 #include "sam_06.h"
+#include "model.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
 

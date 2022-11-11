@@ -1,4 +1,5 @@
 #include "dro_02.h"
+#include "model.h"
 
 // cards used during Merlee's ritual
 typedef struct RitualCard {
@@ -329,7 +330,7 @@ void N(card_worker_update)(void) {
             N(RitualCards)[0].spriteID = 1;
             N(RitualCards)[0].rasterIndex = 12;
             N(RitualCards)[0].xoffset = 2;
-            
+
             N(RitualCards)[1].unk_00 = 1;
             N(RitualCards)[1].pos.x = 200.0f;
             N(RitualCards)[1].pos.y = 0.0f;
@@ -339,7 +340,7 @@ void N(card_worker_update)(void) {
             N(RitualCards)[1].spriteID = 1;
             N(RitualCards)[1].rasterIndex = 48;
             N(RitualCards)[1].xoffset = 0;
-       
+
 
             N(RitualCards)[2].spriteID = 8;
             N(RitualCards)[2].rasterIndex = 5;

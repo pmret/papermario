@@ -368,15 +368,15 @@ void shop_open_item_select_popup(s32 mode) {
 
     switch (mode) {
         case 0:
-            popupType = 5;
+            popupType = POPUP_MENU_SELL_ITEM;
             numItemSlots = 10;
             break;
         case 1:
-            popupType = 6;
+            popupType = POPUP_MENU_CHECK_ITEM;
             numItemSlots = 10;
             break;
         default:
-            popupType = 7;
+            popupType = POPUP_MENU_CLAIM_ITEM;
             numItemSlots = 32;
             break;
     }

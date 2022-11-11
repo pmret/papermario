@@ -91,7 +91,7 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 // float stuff
 #ifdef NON_MATCHING
-ApiStatus func_80242A90_854C00(Evt* script) {
+ApiStatus func_80242A90_854C00(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s1 = evt_get_variable(script, *args++);
     s32 temp_s3 = *args++;
@@ -147,7 +147,73 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A90_854C00);
 
 static char* N(exit_str_2) = "mac_06";
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242C78_854DE8);
+// maybe a duplicate, not sure if the NPCs are the same
+API_CALLABLE(func_80242C78_854DE8) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc0 = get_npc_safe(0);
+    Npc* npc1;
+    Npc* partner;
+    f32 forward, radius;
+    f32 x, y, z;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+        switch (script->functionTemp[0]) {
+            case 0:
+                script->functionTemp[1] = 55;
+                break;
+            case 1:
+                script->functionTemp[1] = 85;
+                break;
+            default:
+                script->functionTemp[1] = 25;
+               break;
+        }
+    }
+
+    radius = script->functionTemp[1];
+    forward = -npc0->yaw;
+    x = npc0->pos.x + 30.0f + sin_deg(forward) * radius;
+    z = npc0->pos.z + cos_deg(forward) * radius;
+    y = npc0->pos.y + 50.0f;
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            gPlayerStatus.position.x = x;
+            gPlayerStatus.position.y = y;
+            gPlayerStatus.position.z = z;
+            npc0->colliderPos.x = npc0->pos.x;
+            npc0->colliderPos.y = npc0->pos.y;
+            npc0->colliderPos.z = npc0->pos.z;
+            npc0->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+        case 1:
+            partner = get_npc_safe(NPC_PARTNER);
+            if (partner == NULL) {
+                return ApiStatus_DONE2;
+            }
+            partner->pos.x = x;
+            partner->pos.y = y;
+            partner->pos.z = z;
+            partner->colliderPos.x = partner->pos.x;
+            partner->colliderPos.y = partner->pos.y;
+            partner->colliderPos.z = partner->pos.z;
+            partner->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+        case 2:
+            npc1 = get_npc_safe(1);
+            npc1->pos.x = x;
+            npc1->pos.y = y;
+            npc1->pos.z = z;
+            npc1->colliderPos.x = npc1->pos.x;
+            npc1->colliderPos.y = npc1->pos.y;
+            npc1->colliderPos.z = npc1->pos.z;
+            npc1->flags |= NPC_FLAG_DIRTY_SHADOW;
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80242E84_854FF4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

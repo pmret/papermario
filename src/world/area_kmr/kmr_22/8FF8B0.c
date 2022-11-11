@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240314_8FF984);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240418_8FFA88);
 
-ApiStatus func_802404E4_8FFB54(Evt* script) {
+ApiStatus func_802404E4_8FFB54(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     evt_get_variable(script, *args++);
@@ -38,6 +38,11 @@ ApiStatus func_80240B3C_9001AC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240B4C_9001BC);
+ApiStatus func_80240B4C_9001BC(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, MapVar(0), (s32) heap_malloc(0x780)); // TODO what is this
+    D_802483D0 = -1;
+    create_generic_entity_world(NULL, func_80240B00_900170);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF8B0", func_80240BA8_900218);

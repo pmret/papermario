@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 void set_current_item_entity_render_group(s32);
 s32 get_current_item_entity_render_group(void);
@@ -158,7 +159,7 @@ ApiStatus MakeDoorAdvanced(Evt* script, s32 isInitialCall) {
     door->unk_1C.z = door->unk_14.z;
     door->unk_24.x = door->unk_0C.x;
     door->unk_24.z = door->unk_0C.z;
-    
+
     door->bgColor[0] = gCameras[CAM_DEFAULT].bgColor[0];
     door->bgColor[1] = gCameras[CAM_DEFAULT].bgColor[1];
     door->bgColor[2] = gCameras[CAM_DEFAULT].bgColor[2];
@@ -190,7 +191,7 @@ ApiStatus func_80282314(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetDoorState(Evt* script, s32 isInitialCall) {
     AdvancedDoor* door = script->functionTempPtr[1];
-    
+
     script->varTable[0] = door->state;
     return ApiStatus_DONE2;
 }
@@ -218,7 +219,7 @@ ApiStatus func_802823B0(Evt* script, s32 isInitialCall) {
     AdvancedDoor* door = script->functionTempPtr[1];
     s32 index = evt_get_variable(script, *args++);
     s32 scriptID = evt_get_variable(script, *args++);
-    
+
     door->scriptIDs[index] = scriptID;
     return ApiStatus_DONE2;
 }
@@ -226,7 +227,7 @@ ApiStatus func_802823B0(Evt* script, s32 isInitialCall) {
 ApiStatus func_80282414(Evt* script, s32 isInitialCall) {
     AdvancedDoor* door = script->varTablePtr[1];
     s32 alpha, r, g, b;
-    
+
     if (isInitialCall) {
         if (script->varTable[0] == 0) {
             func_8011B950(script->varTable[15], -1, 1, 1);
@@ -249,7 +250,7 @@ ApiStatus func_80282414(Evt* script, s32 isInitialCall) {
     gCameras[CAM_DEFAULT].bgColor[0] = r;
     gCameras[CAM_DEFAULT].bgColor[1] = g;
     gCameras[CAM_DEFAULT].bgColor[2] = b;
-    
+
     if (script->functionTemp[1] >= 255) {
         if (script->varTable[0] == 3) {
             func_8011B950(script->varTable[15], -1, 0, 1);
@@ -297,11 +298,11 @@ ApiStatus func_80282634(Evt* script, s32 isInitialCall) {
     s32 endOfList;
     s32 mask;
     s32 i;
-    
+
     if (npcList == NULL) {
         return ApiStatus_DONE2;
     }
-    
+
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_by_index(i);
         if (npc != NULL) {
@@ -321,10 +322,10 @@ ApiStatus func_80282634(Evt* script, s32 isInitialCall) {
         }
         npc = get_npc_safe(*npcList++);
         if (npc != NULL) {
-            npc->flags &= mask; 
+            npc->flags &= mask;
         }
     } while (TRUE);
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -335,7 +336,7 @@ ApiStatus func_80282700(Evt* script, s32 isInitialCall) {
     if (door->npcList == NULL) {
         return ApiStatus_DONE2;
     }
-    
+
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_by_index(i);
         if (npc != NULL) {
@@ -344,7 +345,7 @@ ApiStatus func_80282700(Evt* script, s32 isInitialCall) {
             }
         }
     }
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -358,7 +359,7 @@ ApiStatus SetNewItemVisGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus RestorePrevItemVisGroup(Evt* script, s32 isInitialCall) {
     AdvancedDoor* door = script->functionTempPtr[1];
-    
+
     set_current_item_entity_render_group(door->prevItemVisGroup);
     return ApiStatus_DONE2;
 }

@@ -140,7 +140,7 @@ void func_802415E0_D6FF90(void* data) {
     spr_draw_player_sprite(2, 0, 0, 0, sp18);
 }
 
-ApiStatus func_802416F8_D700A8(Evt* script) {
+ApiStatus func_802416F8_D700A8(Evt* script, s32 isInitialCall) {
     gPlayerStatus.spriteFacingAngle = script->varTable[0];
     return ApiStatus_DONE2;
 }

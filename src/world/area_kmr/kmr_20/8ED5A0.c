@@ -1,4 +1,5 @@
 #include "kmr_20.h"
+#include "model.h"
 
 #define NAMESPACE dup_kmr_20
 #include "world/common/entity/Pipe.inc.c"

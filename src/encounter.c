@@ -6,6 +6,7 @@
 #include "hud_element.h"
 #include "world/partners.h"
 #include "sprite.h"
+#include "model.h"
 #include "sprite/npc/BattleMerlee.h"
 
 ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);

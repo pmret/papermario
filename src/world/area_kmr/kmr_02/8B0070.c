@@ -1,5 +1,6 @@
 #include "kmr_02.h"
 #include "effects.h"
+#include "model.h"
 
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
@@ -10,7 +11,25 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/entity/Pipe.inc.c"
 
+extern s32 D_80244B2C_8B4B9C[];
+
+// reg swap & data migration
+#ifdef NON_MATCHING
+ApiStatus func_802402E0_8B0350(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 npcID = evt_get_variable(script, *args++);
+    s32* var_s0 = D_80244B2C_8B4B9C[evt_get_variable(script, *args++)];
+    Enemy* enemy = get_enemy(npcID);
+    s32 i;
+
+    for (i = 0; i < 14; i++) {
+        enemy->territory->temp[i] = *var_s0++;
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
+#endif
 
 ApiStatus func_80240370_8B03E0(Evt* script, s32 isInitialCall) {
     set_map_change_fade_rate(1);
@@ -79,6 +98,7 @@ ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// duplicate of func_802402E0_8B0350
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
@@ -128,7 +148,7 @@ ApiStatus func_802427EC_8B285C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024280C_8B287C(Evt* script) {
+ApiStatus func_8024280C_8B287C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = resolve_npc(script, 0);
 
@@ -247,7 +267,26 @@ ApiStatus func_80242F28_8B2F98(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F7C_8B2FEC);
+extern s16 D_8024E538_8BE5A8[];
+
+ApiStatus func_80242F7C_8B2FEC(Evt* script, s32 isInitialCall) {
+    Npc* npc;
+
+    if (isInitialCall) {
+        script->functionTemp[1] = 0.0f;
+        script->functionTempPtr[2] = get_npc_safe(script->owner2.npcID);
+        script->functionTemp[3] = D_8024E538_8BE5A8[script->owner2.npcID];
+    }
+
+    if (script->functionTemp[3] != 0) {
+        script->functionTemp[3]--;
+        return ApiStatus_BLOCK;
+    }
+    npc = script->functionTempPtr[2];
+    npc->verticalRenderOffset = sin_deg(script->functionTempF[1]) * 1.5f;
+    script->functionTempF[1] = clamp_angle(script->functionTempF[1] + 18.0f);
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80243034_8B30A4(Evt* script, s32 isInitialCall) {
     get_item_entity(script->varTable[0])->scale = 0.6f;

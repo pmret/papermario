@@ -16,7 +16,7 @@ ApiStatus func_80240A78_890618(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240AA4_890644(Evt* script) {
+ApiStatus func_80240AA4_890644(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_item_empty_count();
     return ApiStatus_DONE2;
 }

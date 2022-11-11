@@ -823,7 +823,7 @@ ApiStatus func_802D2C14(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerPushVelocity(Evt* script) {
+ApiStatus SetPlayerPushVelocity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_variable(script, *args++);
     f32 y;

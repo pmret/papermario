@@ -1,5 +1,6 @@
 #include "mac_00.h"
 #include "effects.h"
+#include "model.h"
 
 #define CHUCK_QUIZMO_NPC_ID 6
 
@@ -73,13 +74,96 @@ ApiStatus func_80241A18_7EC728(Evt* script, s32 isInitialCall) {
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241DA0_7ECAB0);
+typedef struct UnkMac00 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+} UnkMac00; // size = 0x14
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241E04_7ECB14);
+extern UnkMac00 D_80248F18_7F3C28[36];
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241E80_7ECB90);
+ApiStatus func_80241DA0_7ECAB0(Evt* script, s32 isInitialCall) {
+    UnkMac00* it = D_80248F18_7F3C28;
+    u32 i;
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
+    for (i = 0; i < ARRAY_COUNT(D_80248F18_7F3C28); i++, it++) {
+        evt_set_variable(script, it->unk_10, 0);
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80241E04_7ECB14(Evt* script, s32 isInitialCall) {
+    UnkMac00* it = D_80248F18_7F3C28;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80248F18_7F3C28); i++, it++) {
+        s32 t1 = evt_get_variable(script, GameByte(0));
+
+        evt_set_variable(script, it->unk_08, t1 >= it->unk_04);
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80241E80_7ECB90(Evt* script, s32 isInitialCall) {
+    UnkMac00* it = D_80248F18_7F3C28;
+    s32 cond = FALSE;
+    s32 count = 0;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80248F18_7F3C28); i++, it++) {
+        if (evt_get_variable(script, it->unk_08) != 0) {
+            if (evt_get_variable(script, it->unk_0C) == 0) {
+                cond = TRUE;
+                break;
+            } else {
+                if (evt_get_variable(script, it->unk_10) == 0) {
+                    count++;
+                }
+            }
+        }
+    }
+
+    if (!cond) {
+        it = D_80248F18_7F3C28;
+        i = 0;
+        if (count != 0) {
+            s32 temp_s6 = rand_int(count - 1);
+
+            count = 0;
+
+            for (i = cond; i < ARRAY_COUNT(D_80248F18_7F3C28); i++, it++) {
+                if (evt_get_variable(script, it->unk_08) != 0 &&
+                    evt_get_variable(script, it->unk_10) == 0 &&
+                    count++ >= temp_s6)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    script->varTable[0] = i;
+    script->varTable[1] = it->unk_00;
+    script->varTable[2] = cond;
+    evt_set_variable(script, it->unk_0C, 1);
+    evt_set_variable(script, it->unk_10, 1);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80241FF0_7ECD00(Evt* script, s32 isInitialCall) {
+    UnkMac00* it = D_80248F18_7F3C28;
+    s32 count = 0;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80248F18_7F3C28); i++, it++) {
+        if (evt_get_variable(script, it->unk_08) != 0 && evt_get_variable(script, it->unk_10) == 0) {
+            count++;
+        }
+    }
+    script->varTable[0] = count;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/todo/UnkPositionFunc.inc.c"
 

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "model.h"
 
 #define NAMESPACE battle_star_peach_beam
 
