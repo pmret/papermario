@@ -149,7 +149,84 @@ ApiStatus func_802405B4_BC8414(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// float regalloc
+#ifdef NON_MATCHING
+ApiStatus func_80240624_BC8484(Evt* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(script->owner2.npcID);
+    Npc* npc2 = npc->blur.any;
+    f32 temp_f10;
+    f32 temp_f12;
+    f32 temp_f14;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 temp_f6;
+    s32* temp_s2;
+    f32 yaw;
+    f32 new_var;
+    f32 f1;
+
+
+    temp_s2 = npc2->blur.any;
+    switch (script->functionTemp[1]) {
+        case 0:
+            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+            if (*temp_s2 == 1) {
+                script->functionTemp[1] = 1;
+                npc->duration = rand_int(20) + 10;
+            }
+            break;
+        case 1:
+            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+            npc->duration--;
+            if (npc->duration == 0) {
+                sfx_play_sound_at_position(0xB000000F, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+                script->functionTemp[1] = 2;
+                npc->duration = 0;
+                npc->moveToPos.x = npc->pos.x;
+                npc->moveToPos.y = npc->pos.y;
+                npc->moveToPos.z = npc->pos.z;
+            }
+            break;
+        case 2:
+            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+            new_var = npc->yaw;
+            npc->pos.x = npc2->pos.x;
+            npc->pos.z = npc2->pos.z;
+            npc_move_heading(npc, npc2->planarFlyDist, new_var);
+            temp_f4 = (40.0f - npc->duration) / 40.0f;
+            temp_f12 = npc->pos.z;
+            f1 = (npc->pos.x - npc->moveToPos.x) * (temp_f4 * temp_f4);
+            temp_f6 = (npc->pos.z - npc->moveToPos.z) * (temp_f4 * temp_f4);
+            temp_f2 = npc2->pos.y + 1000.0f;
+            npc->pos.x -= f1;
+            npc->pos.y = temp_f2;
+            npc->pos.y -= (npc->pos.y - npc->moveToPos.y) * ((temp_f4 * temp_f4) * temp_f4);
+            npc->pos.z = temp_f12 - temp_f6;
+            npc->duration++;
+            if (npc->duration == 40) {
+                script->functionTemp[1] = 12;
+            }
+            break;
+        case 12:
+        case 13:
+        case 14:
+            yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+            npc->yaw = yaw;
+            script->functionTemp[1] = func_802402A0_BC8100(evt_get_variable(script, MapVar(3)));
+            npc->pos.x = npc2->pos.x;
+            npc->pos.z = npc2->pos.z;
+            npc_move_heading(npc, npc2->planarFlyDist, yaw);
+            npc->pos.y = npc2->pos.y + 1000.0f;
+            break;
+        case 100:
+            script->functionTemp[1] = func_802402A0_BC8100(evt_get_variable(script, MapVar(3)));
+            break;
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240624_BC8484);
+#endif
 
 ApiStatus func_80240910_BC8770(Evt* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y < -50.0f) {
