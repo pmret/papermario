@@ -2125,7 +2125,6 @@ s32 can_btl_state_update_switch_to_player(void) {
     }
 }
 
-extern s32 D_8008EEC0[];
 extern s32 D_8008EEF0[];
 
 s32 func_802A58D0(void) {
@@ -2881,7 +2880,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->unk_4C[4] < 0) {
                 battleStatus->unk_4C[4] = 0;
             }
-            D_802ACCD0.popupType = 0;
+            D_802ACCD0.popupType = POPUP_TYPE_USE_ITEM;
             D_802ACCD0.numEntries = p;
             D_802ACCD0.initialPos = battleStatus->unk_4C[4];
             func_800F513C(&D_802ACCD0);
@@ -2974,7 +2973,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->unk_4C[4] < 0) {
                 battleStatus->unk_4C[4] = 0;
             }
-            D_802ACCD0.popupType = 0;
+            D_802ACCD0.popupType = POPUP_TYPE_USE_ITEM;
             D_802ACCD0.numEntries = p;
             D_802ACCD0.unk_31C = 0;
             D_802ACCD0.unk_320 = 0;
@@ -3178,7 +3177,7 @@ void btl_state_update_player_menu(void) {
                 btl_set_state(0x16);
                 break;
             }
-            D_802ACCD0.popupType = 0;
+            D_802ACCD0.popupType = POPUP_TYPE_USE_ITEM;
             if (battleStatus->selectedMoveID == 0x35) {
                 D_802ACCD0.popupType = 100;
                 D_802ACCD0.unk_31C = 1;
@@ -3440,7 +3439,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->unk_4C[5] < 0) {
                 battleStatus->unk_4C[5] = 0;
             }
-            D_802ACCD0.popupType = 1;
+            D_802ACCD0.popupType = POPUP_MENU_SWITCH_PARTNER;
             D_802ACCD0.numEntries = p;
             D_802ACCD0.initialPos = D_8008EEF0[playerData->currentPartner] - 1;
             D_802ACCD0.unk_31C = 0;

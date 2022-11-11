@@ -22,7 +22,6 @@ BSS char D_8010CD14[0xA];
 BSS s32 D_8010CD20;
 BSS char D_8010CD24[0xC];
 
-extern s32 D_8008EEC0[12];
 extern s32 D_8008EEF0[];
 
 void func_800E6860(void) {

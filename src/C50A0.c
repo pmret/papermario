@@ -2695,7 +2695,7 @@ block_47: // TODO required to match
                         numEntries++;
                     }
                 }
-                menu->popupType = 2;
+                menu->popupType = POPUP_MENU_THROW_AWAY_ITEM;
                 menu->numEntries = numEntries;
                 menu->initialPos = 0;
                 create_popup_menu(menu);
