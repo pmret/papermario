@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "model.h"
 #include "hud_element.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Twink.h"

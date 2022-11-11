@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 ApiStatus N(UnkBackgroundFunc3)(Evt* script, s32 isInitialCall) {
     mdl_set_all_fog_mode(1);

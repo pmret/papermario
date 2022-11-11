@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "model.h"
 
 // TODO, can we remove this once all data disasm'ed?
 extern QuizRequirement N(Quizmo_Requirements)[];

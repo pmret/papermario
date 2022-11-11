@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 #include "npc.h"
 
 ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall) {

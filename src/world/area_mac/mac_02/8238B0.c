@@ -1,4 +1,5 @@
 #include "mac_02.h"
+#include "model.h"
 
 ApiStatus func_802405F0_8238B0(Evt* script, s32 isInitialCall) {
     Npc* npc;

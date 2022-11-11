@@ -1,5 +1,6 @@
 #include "mac_00.h"
 #include "effects.h"
+#include "model.h"
 
 #define CHUCK_QUIZMO_NPC_ID 6
 

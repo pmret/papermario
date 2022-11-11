@@ -428,8 +428,6 @@ s32 partner_is_flying(void);
 void partner_flying_update_motion(Npc* partner);
 void partner_clear_player_tracking(Npc* partner);
 
-void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
-
 void partner_set_tether_distance(f32);
 
 void btl_delete_player_actor(Actor* player);

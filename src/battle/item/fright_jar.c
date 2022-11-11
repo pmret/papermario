@@ -1,4 +1,5 @@
 #include "fright_jar.h"
+#include "model.h"
 
 #include "ItemRefund.inc.c"
 

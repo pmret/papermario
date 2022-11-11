@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 ApiStatus N(UnkBackgroundFunc)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {

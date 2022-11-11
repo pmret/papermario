@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 #include "map.h"
 
 ApiStatus N(UnfadeBackgroundToBlack)(Evt* script, s32 isInitialCall) {

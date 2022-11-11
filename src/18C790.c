@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "hud_element.h"
 #include "ld_addrs.h"
+#include "model.h"
 #include "script_api/battle.h"
 #include "entity.h"
 #include "sprite/npc/BattleGoombario.h"

@@ -1,5 +1,6 @@
 #include "thunder_bolt.h"
 #include "effects.h"
+#include "model.h"
 
 #include "ItemRefund.inc.c"
 

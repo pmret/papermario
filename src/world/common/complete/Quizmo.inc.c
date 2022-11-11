@@ -1,6 +1,7 @@
 #include "common.h"
 #include "message_ids.h"
 #include "effects.h"
+#include "model.h"
 #include "sprite/npc/ChuckQuizmo.h"
 
 #ifndef CHUCK_QUIZMO_NPC_ID

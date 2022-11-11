@@ -1,5 +1,6 @@
 #include "kmr_02.h"
 #include "effects.h"
+#include "model.h"
 
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";

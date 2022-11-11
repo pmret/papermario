@@ -1,5 +1,6 @@
 #include "snowman_doll.h"
 #include "effects.h"
+#include "model.h"
 
 #include "ItemRefund.inc.c"
 

@@ -3,6 +3,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKalmar.h"
 #include "entity.h"
+#include "model.h"
 
 extern EntityModelScript D_80283EE8;
 

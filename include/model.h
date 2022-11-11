@@ -188,4 +188,6 @@ void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, 
 void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32);
 void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip);
 
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+
 #endif

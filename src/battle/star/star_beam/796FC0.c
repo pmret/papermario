@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "model.h"
 
 #define NAMESPACE battle_star_star_beam
 
