@@ -52,8 +52,25 @@ void func_8024022C_BC808C(void) {
     get_npc_unsafe(8)->unk_A2 = 0;
 }
 
-s32 func_802402A0_BC8100(s32);
-INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_802402A0_BC8100);
+s32 func_802402A0_BC8100(s32 arg0) {
+    s32 ret = 12;
+
+    switch (arg0) {
+        case 0:
+            ret = 12;
+            break;
+        case 1:
+            ret = 100;
+            break;
+        case 2:
+            ret = 13;
+            break;
+        case 3:
+            ret = 14;
+            break;
+    }
+    return ret;
+}
 
 ApiStatus func_802402F4_BC8154(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
