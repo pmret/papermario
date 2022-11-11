@@ -1,7 +1,6 @@
 #include "kmr_22.h"
 #include "effects.h"
 
-//INCLUDE_ASM(s32, "world/area_kmr/kmr_22/8FF680", func_80240010_8FF680);
 extern s16 D_80240DE0_900450[];
 extern EffectInstance* D_802483C0;
 extern s32 D_802483C4;
