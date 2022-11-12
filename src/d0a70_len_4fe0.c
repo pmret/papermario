@@ -52,14 +52,14 @@ typedef struct FoldRenderMode {
 } FoldRenderMode; // size = 0xC
 
 typedef struct UnkFoldStruct {
-    s32 raster;
-    s32 palette;
-    u16 width;
-    u16 height;
-    s32 unk_0C;
-    s32 unk_10;
-    Gfx* unk_14;
-} UnkFoldStruct;
+    /* 0x00 */ s32 raster;
+    /* 0x04 */ s32 palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ Gfx* unk_14;
+} UnkFoldStruct; // size = 0x18
 
 typedef struct PackedVtx {
     /* 0x00 */ s16 ob[3];
