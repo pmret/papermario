@@ -70,6 +70,7 @@ ApiStatus func_80242B0C_825DCC(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 mac_02_D_8024E738[];
+extern s32 mac_02_D_8024E8A8[];
 
 ApiStatus func_80242BA8_825E68(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -113,17 +114,12 @@ ApiStatus func_80243088_826348(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802430D0_826390(Evt* script, s32 isInitialCall) {
-    s32 i = 90;
-    s32* ptr = &D_8024EA10;
-    s32 val = 218;
+    s32 i;
 
-    while (i >= 0) {
-        *ptr-- = val;
-        val--;
-        i--;
+    for (i = 0; i < 91; i++) {
+        mac_02_D_8024E8A8[i] = i + 128;
     }
-
-    D_8024EA14 = 0;
+    mac_02_D_8024E8A8[i] = 0;
 
     return ApiStatus_DONE2;
 }
