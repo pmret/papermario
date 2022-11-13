@@ -1953,8 +1953,9 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
     s32 yOffset;
     s32 uly;
     s32 xTemp;
-    s32 iconIndex;
+    s32 id;
     s32 i;
+    s32 j;
 
     switch (D_802AD604) {
         case -1:
@@ -1980,26 +1981,25 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
 
             xTemp = x + 33;
             phi_s1 = y + (D_802AD60C + 19);
-            for (i = 0; i < D_802AD66C; i++, phi_s1 += 13) {
+            for (j = 0; j < D_802AD66C; phi_s1 += 13, j++) {
                 s32 palette = D_802AD614;
 
-                if (D_802AD678[i] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
+                if (D_802AD678[j] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
                     palette = MSG_PAL_37;
                 }
-                if (D_802AD690[i] == 0) {
+                if (D_802AD690[j] == 0) {
                     palette = MSG_PAL_0B;
                 }
-                draw_msg(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
+                draw_msg(D_802AD658[j], xTemp, phi_s1, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
             }
 
             xTemp = x + 24;
-            phi_s1_2 = D_802AD60C + y + 24;
-            for (i = 0; i < D_802AD66C; i++, phi_s1_2 += 13) {
-                iconIndex = D_802AD628[i];
-
-                hud_element_set_render_pos(iconIndex, xTemp, phi_s1_2);
-                hud_element_set_alpha(iconIndex, D_802AD624);
-                hud_element_draw_without_clipping(iconIndex);
+            phi_s1 = D_802AD60C + y + 24;
+            for (i = 0; i < D_802AD66C; phi_s1 += 13, i++) {
+                id = D_802AD628[i];
+                hud_element_set_render_pos(id, xTemp, phi_s1);
+                hud_element_set_alpha(id, D_802AD624);
+                hud_element_draw_without_clipping(id);
             }
 
             temp_s1_3 = (D_802AD605 - D_802AD608) * 13;
@@ -2010,23 +2010,23 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
                 D_802AD60E = temp_s1_3;
             }
 
-            iconIndex = D_802AD618;
-            hud_element_set_render_pos(iconIndex, x + 10, y + (D_802AD60E + 26));
-            hud_element_set_alpha(iconIndex, D_802AD624);
-            hud_element_draw_clipped(iconIndex);
+            id = D_802AD618;
+            hud_element_set_render_pos(id, x + 10, y + (D_802AD60E + 26));
+            hud_element_set_alpha(id, D_802AD624);
+            hud_element_draw_clipped(id);
 
             if (D_802AD608 > 0) {
-                iconIndex = D_802AD61C;
-                hud_element_set_render_pos(iconIndex, x + 67, y + 16);
-                hud_element_set_alpha(iconIndex, D_802AD624);
-                hud_element_draw_clipped(iconIndex);
+                id = D_802AD61C;
+                hud_element_set_render_pos(id, x + 67, y + 16);
+                hud_element_set_alpha(id, D_802AD624);
+                hud_element_draw_clipped(id);
             }
 
             if (D_802AD609 < D_802AD66C) {
-                iconIndex = D_802AD620;
-                hud_element_set_render_pos(iconIndex, x + 67, y + 100);
-                hud_element_set_alpha(iconIndex, D_802AD624);
-                hud_element_draw_clipped(iconIndex);
+                id = D_802AD620;
+                hud_element_set_render_pos(id, x + 67, y + 100);
+                hud_element_set_alpha(id, D_802AD624);
+                hud_element_draw_clipped(id);
             }
 
             break;
@@ -2069,7 +2069,7 @@ void func_802A57C8(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
             msgID = MSG_Menus_00CC;
             break;
     }
-    draw_msg(msgID, x, y, 255, 15, 0);
+    draw_msg(msgID, x, y, 255, MSG_PAL_0F, 0);
 }
 
 s32 can_btl_state_update_switch_to_player(void) {
