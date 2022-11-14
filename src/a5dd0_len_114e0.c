@@ -3666,14 +3666,13 @@ void load_data_for_models(ModelNode* model, s32 romOffset, s32 size) {
     }
 }
 
-// tiny reg swap in the first loop
-#ifdef NON_EQUIVALENT
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth) {
     Matrix4f sp10;
     Matrix4f sp50;
     ModelBlueprint modelBP;
     ModelBlueprint* modelBPptr = &modelBP;
     ModelNodeProperty* groupTypeProperty;
+    ModelNode* modelTemp;
     s32 i;
 
     if (model->groupData != NULL && model->groupData->numChildren != 0) {
@@ -3695,18 +3694,8 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
 
         if (model->type != 5 || groupType == 0) {
             for (i = 0; i < model->groupData->numChildren; i++) {
-                ModelNode** modelTemp;
-                Matrix4f* txMtx;
-
-                modelTemp = &model->groupData->childList[i];
-
-                if (model->groupData->transformMatrix != NULL) {
-                    txMtx = sp10;
-                } else {
-                    txMtx = mdlTxMtx;
-                }
-
-                load_model_transforms(*modelTemp, model, txMtx, treeDepth + 1);
+                load_model_transforms(model->groupData->childList[i], model,
+                                      model->groupData->transformMatrix != NULL ? sp10 : mdlTxMtx, treeDepth + 1);
             }
 
             (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = -1;
@@ -3736,9 +3725,6 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
     mdl_treeIterPos += 1;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_transforms);
-#endif
 
 s32 get_model_list_index_from_tree_index(s32 treeIndex) {
     s32 i;
