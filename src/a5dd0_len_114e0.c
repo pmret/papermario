@@ -3668,7 +3668,7 @@ void load_data_for_models(ModelNode* model, s32 romOffset, s32 size) {
 
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth) {
     Matrix4f sp10;
-    Matrix4f sp50;
+    Mtx sp50;
     ModelBlueprint modelBP;
     ModelBlueprint* modelBPptr = &modelBP;
     ModelNodeProperty* groupTypeProperty;
@@ -3705,11 +3705,11 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
         }
     }
 
-    guMtxF2L(mdlTxMtx, sp50);
+    guMtxF2L(mdlTxMtx, &sp50);
     modelBPptr->flags = 0;
     modelBPptr->mdlNode = model;
     modelBPptr->groupData = parent->groupData;
-    modelBPptr->mtx = sp50;
+    modelBPptr->mtx = &sp50;
 
     if (model->type == 5) {
         s32 childCount = mdl_get_child_count(model);
