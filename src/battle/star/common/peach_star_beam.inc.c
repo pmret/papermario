@@ -296,7 +296,7 @@ static s32 N(miscParticlesTimeLeft)[8];
 static s32 N(spiritsMoveTime)[8];
 static s32 N(starBeamStage);
 
-ApiStatus N(ProcessPeachStarBeam)(Evt *script, s32 isInitialCall) {
+ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
     PeachStarBeamFXData* effectData;
     PeachStarBeamSpirit* spirit;
     Bytecode* args = script->ptrReadPos;

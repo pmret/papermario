@@ -2058,6 +2058,7 @@ void func_802A57C8(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
     s32 x = baseX + 11;
     s32 y = baseY + 6;
     s32 msgID;
+
     switch (D_802AD610) {
         case 0:
             msgID = MSG_Menus_00CB;
