@@ -3,8 +3,22 @@
 #include "goombario.h"
 #include "../src/world/partners.h"
 #include "message_ids.h"
+#include "entity.h"
 
-extern s32* D_802B79A8_E21858;
+typedef struct UnkE20EB0 {
+    /* 0x00 */ Npc* unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 scale;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[6];
+    /* 0x2A */ u8 unk_2A;
+    /* 0x2B */ u8 unk_2B;
+} UnkE20EB0; /* size = 0x2C */
+
+extern UnkE20EB0* D_802B79A8_E21858;
 
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
@@ -208,8 +222,210 @@ s32 world_goombario_can_pause(Npc* goombario) {
 }
 
 // get message for tattle routine
+#ifdef NON_MATCHING
+ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* goombario = script->owner2.npc;
+    s32 msgID;
+    s32 entityType;
+    s32 triggerSomething;
+    s32 v1;
+    s32 i;
+    s32 v0;
+
+    if (isInitialCall) {
+        func_802BD564_317484(goombario);
+        D_802BDF64 = 0;
+        D_802BDF30 = 0;
+        D_802BDF34 = 0;
+        if (playerStatus->animFlags & 0x20) {
+            D_802BDF30 = 1;
+            D_802BDF38 = D_802B79A8_E21858->unk_00;
+        }
+        if (playerStatus->animFlags & 0x10) {
+            D_802BDF34 = 1;
+        }
+        script->functionTemp[0] = 40;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 40:
+            if (!(goombario->flags & 0x1000) || playerStatus->inputEnabledCounter != 0) {
+                script->varTable[0] = -1;
+                return ApiStatus_DONE2;
+            }
+            script->functionTemp[1] = 3;
+            disable_player_input();
+            D_802BDF64 = 1;
+            script->functionTemp[2] = playerStatus->inputEnabledCounter;
+            script->functionTemp[0]++;
+            break;
+        case 41:
+            if (script->functionTemp[1] != 0) {
+                script->functionTemp[1]--;
+            } else {
+                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                    script->varTable[0] = -1;
+                    enable_player_input();
+                    D_802BDF64 = 0;
+                    return ApiStatus_DONE2;
+                }
+                script->functionTemp[0] = 0;
+            }
+            break;
+        case 0:
+            set_time_freeze_mode(1);
+            playerStatus->flags &= ~0x2000000;
+            goombario->currentAnim = 0x010001;
+            goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
+            gPartnerActionStatus.partnerActionState = 1;
+            close_status_menu();
+            if (D_802BDF30 != 0) {
+                script->varTable[0] = 0;
+                script->functionTemp[0] = 20;
+                break;
+            }
+            script->functionTemp[0] = 1;
+            /* fallthrough */
+        case 1:
+            if (GoombarioGetTattleID >= 0 && (GoombarioGetTattleID & 0x4000)) {
+                entityType = get_entity_type(GoombarioGetTattleID);
+                msgID = -1;
+                do {} while (0);
+                for (i = 0; EntityTattles[2 * i] != -1; i++) {
+                    if (EntityTattles[2 * i] != entityType) {
+                        continue;
+                    }
+                    switch (entityType) {
+                        case 22:
+                        case 25:
+                            if (gPlayerData.hammerLevel >= 1) {
+                                msgID = 0x1B0002;
+                            }
+                            break;
+                        case 23:
+                        case 26:
+                            if (gPlayerData.hammerLevel >= 2) {
+                                msgID = 0x1B0004;
+                            }
+                            break;
+                        case 36:
+                            if (gPlayerData.bootsLevel == 1) {
+                                msgID = 0x1B0018;
+                            } else if (gPlayerData.bootsLevel == 2) {
+                                msgID = 0x1B0019;
+                            }
+                            break;
+                        case 37:
+                            if (gPlayerData.bootsLevel == 1) {
+                                msgID = 0x1B001B;
+                            } else if (gPlayerData.bootsLevel == 2) {
+                                msgID = 0x1B001C;
+                            }
+                            break;
+                        case 9:
+                            if (gPlayerData.bootsLevel >= 2) {
+                                msgID = 0x1B000D;
+                            }
+                            break;
+                        case 10:
+                            if (gPlayerData.bootsLevel >= 2) {
+                                msgID = 0x1B000F;
+                            }
+                            break;
+                        case 49:
+                            if (gPlayerData.bootsLevel >= 2) {
+                                msgID = 0x1B001E;
+                            }
+                            break;
+                        case 50:
+                            if (get_entity_by_index(GoombarioGetTattleID & 0x3FFF)->dataBuf.chest->itemID == -1) {
+                                msgID = 0x1B0016;
+                            }
+                            break;
+                    }
+                    if (msgID != -1) {
+                        script->varTable[0] = msgID;
+                    } else {
+                        script->varTable[0] = EntityTattles[2 * i + 1];
+                    }
+                    script->varTable[1] = 0;
+                    return ApiStatus_DONE2;
+                }
+            }
+
+            if (GoombarioGetTattleID >= 0 && (GoombarioGetTattleID & 0x2000)) {
+                D_802BDF38 = get_npc_unsafe(GoombarioGetTattleID & 0x1FFF);
+                v0 = get_enemy(D_802BDF38->npcID)->tattleMsg;
+                if (v0 != 0) {
+                    msgID = v0;
+                    if (msgID < -270000000) {
+                        script->varTable[0] = ((s32(*)(void))msgID)();
+                    } else {
+                        script->varTable[0] = msgID;
+                        script->varTable[1] = 0;
+                    }
+                }
+                return ApiStatus_DONE2;
+            }
+
+            if (D_802BDF34 != 0) {
+                script->varTable[0] = 0x1B0025;
+                script->varTable[1] = 0;
+                return ApiStatus_DONE2;
+            }
+
+            if (GoombarioGetTattleID >= 0) {
+                v1 = func_802BD100_317020(GoombarioGetTattleID);
+            } else {
+                v1 = 0;
+            }
+
+            if (v1 == 0) {
+                msgID = get_current_map_settings()->tattle.msgID;
+                if (msgID != 0) {
+                    if (msgID < -270000000) {
+                        script->varTable[0] = ((s32(*)(void))msgID)();
+                    } else {
+                        script->varTable[0] = msgID;
+                        script->varTable[1] = 0;
+                    }
+                }
+            } else {
+                script->varTable[0] = v1;
+                script->varTable[1] = 1;
+            }
+            return ApiStatus_DONE2;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 10:
+            msgID = get_current_map_settings()->tattle.msgID;
+            if (msgID != 0) {
+                if (msgID < -270000000) {
+                    script->varTable[0] = ((s32(*)(void))msgID)();
+                } else {
+                    script->varTable[0] = msgID;
+                    script->varTable[1] = 0;
+                }
+                return ApiStatus_DONE2;
+            }
+            break;
+        case 20:
+            v1 = get_enemy(D_802BDF38->npcID)->tattleMsg;
+            if (v1 != 0) {
+                script->varTable[0] = v1;
+                script->varTable[1] = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
+#endif
 
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;

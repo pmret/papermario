@@ -133,33 +133,27 @@ void func_802BD4FC_323E4C(Npc* bow) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 func_802BD540_323E90(void) {
-    f32 sp20, sp24, sp28;
-    f32 temp_f12, temp_f22;
+    f32 x, y, z;
+    f32 yaw;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 tempX, tempZ;
 
     if (gGameStatusPtr->areaID != AREA_OMO) {
         return -1;
-    } else {
-        if (gPlayerStatus.pushVelocity.x != 0.0f || gPlayerStatus.pushVelocity.z != 0.0f) {
-            temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.pushVelocity.x, gPlayerStatus.pushVelocity.z);
-            temp_f12 = temp_f22 + 180.0f;
-            sp20 = gPlayerStatus.position.x;
-            sp24 = gPlayerStatus.position.z;
-            sp28 = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 0.5f);
-            add_vec2D_polar(&sp20, &sp24, gPlayerStatus.colliderDiameter * 0.5f, clamp_angle(temp_f12));
-            return player_test_lateral_overlap(0, &gPlayerStatus, &sp20, &sp28, &sp24,
-                                               gPlayerStatus.colliderDiameter, temp_f22);
-        }
+    }
 
+    if (playerStatus->pushVelocity.x == 0.0f && playerStatus->pushVelocity.z == 0.0f) {
         return -1;
     }
+
+    yaw = atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z);
+    x = playerStatus->position.x;
+    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+    z = playerStatus->position.z;
+
+    add_vec2D_polar(&x, &z, playerStatus->colliderDiameter * 0.5f, clamp_angle(yaw + 180.0f));
+    return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
 }
-#else
-INCLUDE_ASM(s32, "world/partner/bow", func_802BD540_323E90);
-#endif
 
 ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
