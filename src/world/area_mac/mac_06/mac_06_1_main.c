@@ -40,7 +40,7 @@ ApiStatus N(GetWaveAmplitude)(Evt* script, s32 isInitialCall) {
     evt_set_float_variable(script, outVar,
         // average value
         (min + diff)
-        // modify 
+        // modify
         - diff * cos_deg(((time * 180.0f) / duration) + phaseOffset));
     return ApiStatus_DONE2;
 }
