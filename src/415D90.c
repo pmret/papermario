@@ -12,6 +12,7 @@
 #include "sprite/npc/BattleWatt.h"
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleLakilester.h"
+#include "sprite/npc/Twink.h"
 
 extern HudScript HES_YellowArrow;
 
@@ -481,16 +482,13 @@ void func_802A10B8(void) {
     hud_element_free(D_802AD058);
 }
 
-s32 func_802A11B0(void);
-// so close
-#ifdef NON_MATCHING
 s32 func_802A11B0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    f32 var_f20;
+    f32 theta;
     s32 id;
     s32 i;
     f32 x, y;
-    f32 x2, y2;
+    s32 l, t;
 
     switch (D_802AD000) {
         case 0:
@@ -541,7 +539,7 @@ s32 func_802A11B0(void) {
             hud_element_set_render_depth(id, 2);
             hud_element_set_render_pos(id, 39, 212);
             hud_element_set_tint(id, 0, 91, 127);
-            hud_element_set_transform_rotation_pivot(id, 0x10, -0x10);
+            hud_element_set_transform_rotation_pivot(id, 16, -16);
             hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
             hud_element_set_alpha(id, 240);
@@ -586,7 +584,7 @@ s32 func_802A11B0(void) {
             D_802AD00A = 100;
             D_802AD001 = 3;
             D_802AD000 = 1;
-            D_802AD06C = var_f20 = D_802AD100 * 28;
+            D_802AD06C = theta = D_802AD100 * 28;
             break;
         case 1:
             D_802AD00A = (D_802AD001 * 100) / 3;
@@ -595,7 +593,7 @@ s32 func_802A11B0(void) {
                 case 1:
                     if (D_802AD001 == 1) {
                         id = D_802AD04C;
-                        hud_element_clear_flags(id, 2);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                 default:
                     D_802AD001--;
@@ -603,36 +601,36 @@ s32 func_802A11B0(void) {
                 case 0:
                     D_802AD002 = 0;
                     D_802AD003 = 0;
-
-                    D_802AD06C = var_f20 = D_802AD100 * 28;
-                    for (i = 0; i < main_menu_numOptions; i++, var_f20 += 28.0f) {
-                        s32 id;
-
+                    D_802AD06C = theta = D_802AD100 * 28;
+                    for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
                         x = 0.0f;
                         y = 0.0f;
-                        add_vec2D_polar(&x, &y, 87.0f, var_f20);
+                        add_vec2D_polar(&x, &y, 87.0f, theta);
 
-                        x2 = D_802AD060 + x;
-                        y2 = D_802AD064 + y;
+                        l = D_802AD060 + x;
+                        t = D_802AD064 + y;
                         id = D_802AD010[i];
-                        hud_element_set_render_pos(id, x2, y2);
-                        hud_element_clear_flags(id, 2);
+                        hud_element_set_render_pos(id, l, t);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
 
                         id = D_802AD028[i];
-                        hud_element_set_render_pos(id, x2, y2);
+                        hud_element_set_render_pos(id, l, t);
                         hud_element_set_alpha(id, 100);
-                        hud_element_clear_flags(id, 2);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
 
                     x = 0.0f;
                     y = 0.0f;
-                    add_vec2D_polar(&x, &y, 87.0f, D_802AD100 * 28);
+                    theta = D_802AD100 * 28;
+                    add_vec2D_polar(&x, &y, 87.0f, theta);
 
+                    l = D_802AD060 + x;
+                    t = D_802AD064 + y;
                     id = D_802AD040;
-                    hud_element_set_render_pos(id, D_802AD060 + x, D_802AD064 + y);
+                    hud_element_set_render_pos(id, l, t);
                     hud_element_set_alpha(id, 180);
                     hud_element_set_scale(id, 0.85f);
-                    hud_element_clear_flags(id, 2);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     D_802AD000 = 2;
                     break;
             }
@@ -651,12 +649,12 @@ s32 func_802A11B0(void) {
                 D_802AD003 = D_802AD002;
                 if (D_802AD004 == 0) {
                     if ((battleStatus->currentButtonsHeld & (BUTTON_STICK_LEFT | BUTTON_STICK_UP)) &&
-                        (D_802AD069 < D_802AD002))
+                        D_802AD069 < D_802AD002)
                     {
                         D_802AD002--;
                     }
                     if ((battleStatus->currentButtonsHeld & (BUTTON_STICK_RIGHT | BUTTON_STICK_DOWN)) &&
-                        (D_802AD002 < D_802AD06A))
+                        D_802AD002 < D_802AD06A)
                     {
                         D_802AD002++;
                     }
@@ -701,37 +699,16 @@ s32 func_802A11B0(void) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(s32, "415D90", func_802A11B0);
-#endif
-
-void btl_draw_menu_wheel(void);
-
-// various issues
-#ifdef NON_MATCHING
-extern s8 D_802AD002;
-extern s8 D_802AD004;
-extern s16 D_802AD00A;
-extern s32 D_802AD060;
-extern s32 D_802AD064;
-extern s8 D_802AD06B;
-extern f32 D_802AD06C;
-extern f32 D_802AD070;
 
 void btl_draw_menu_wheel(void) {
     s32 id;
     s32 opacity;
-
-    f32 temp_f24;
     f32 theta;
-
     s32 cond;
-    f32 x;
-    f32 y;
+    f32 x, y;
     f32 scale;
     s32 i;
-
-    s32 new_var;
+    s32 l, t;
 
     switch (D_802AD000) {
         case 1:
@@ -753,19 +730,19 @@ void btl_draw_menu_wheel(void) {
         case 30:
             opacity = (D_802AD006 * D_802AD008) / 255;
             func_80144218(-1);
-            temp_f24 = (D_802AD100 - D_802AD002) * 28;
+            theta = (D_802AD100 - D_802AD002) * 28;
 
             cond = FALSE;
-            if (D_802AD06C > temp_f24) {
+            if (D_802AD06C > theta) {
                 D_802AD06C -= D_802AD070;
-                if (D_802AD06C < temp_f24) {
-                    D_802AD06C = temp_f24;
+                if (D_802AD06C < theta) {
+                    D_802AD06C = theta;
                     cond = TRUE;
                 }
-            } else if (D_802AD06C < temp_f24) {
+            } else if (D_802AD06C < theta) {
                 D_802AD06C += D_802AD070;
-                if (D_802AD06C > temp_f24) {
-                    D_802AD06C = temp_f24;
+                if (D_802AD06C > theta) {
+                    D_802AD06C = theta;
                     cond = TRUE;
                 }
             } else {
@@ -817,8 +794,8 @@ void btl_draw_menu_wheel(void) {
                     func_80144238(id);
                 }
             }
-
-            scale = (fabsf(fabsf((D_802AD06C - ((D_802AD100 - D_802AD002) * 28)) * (45.0 / 28.0)) - 22.5) / 22.5) + 0.01;
+            theta = (D_802AD100 - D_802AD002) * 28;
+            scale = (fabsf(fabsf((D_802AD06C - theta) * (45.0 / 28.0)) - 22.5) / 22.5) + 0.01;
             if (cond) {
                 scale = 1.0f;
             }
@@ -833,7 +810,8 @@ void btl_draw_menu_wheel(void) {
             func_80144238(id);
 
             id = D_802AD048;
-            scale = (D_802AD06C - ((D_802AD100 - D_802AD002) * 28)) * (45.0 / 28.0);
+            theta = (D_802AD100 - D_802AD002) * 28;
+            scale = (D_802AD06C - theta) * (45.0 / 28.0);
             hud_element_set_transform_rotation(id, 0.0f, 0.0f, -scale);
             hud_element_set_transform_rotation_pivot(id, 18, -20);
             hud_element_set_scale(id, 0.95f);
@@ -849,18 +827,11 @@ void btl_draw_menu_wheel(void) {
 
             theta = D_802AD06C;
             for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
-                s32 l;
-                s32 t;
-                s32 new_var;
-
                 x = 0.0f;
                 y = 0.0f;
                 add_vec2D_polar(&x, &y, 87.0f, theta);
-
-                x = D_802AD060 + x;
-                l = x;
-                y = D_802AD064 + y;
-                t = y;
+                l = x = D_802AD060 + x;
+                t = y = D_802AD064 + y;
                 btl_draw_prim_quad(0, 0, 0, 0, l - 12, t - 12, 24, 24);
                 id = D_802AD010[i];
                 hud_element_set_render_pos(id, l, t);
@@ -872,19 +843,13 @@ void btl_draw_menu_wheel(void) {
             }
 
             if (cond) {
-                s32 msgX;
-                s32 msgY;
-
-                msgX = D_802AD060 + 20;
-                msgY = D_802AD064;
-
-                msgY -= 34;
-
-                btl_draw_prim_quad(0, 0, 0, 0, D_802AD060 + 46, msgY, 48, 16);
-                draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, MSG_PAL_35, 0);
+                l = D_802AD060 + 20;
+                t = D_802AD064 - 34;
+                btl_draw_prim_quad(0, 0, 0, 0, l + 26, t, 48, 16);
+                draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], l, t, opacity, MSG_PAL_35, 0);
             }
 
-            if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & 0x40)) {
+            if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & BS_FLAGS2_40)) {
                 D_802AD104 = 0;
             }
 
@@ -905,9 +870,6 @@ void btl_draw_menu_wheel(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", btl_draw_menu_wheel);
-#endif
 
 // Very similar to func_802A45D8 - maybe can be used to reduce fake matches there
 void func_802A2684(void) {
@@ -4473,33 +4435,31 @@ s32 func_802A9B30(void) {
     return (gBattleStatus.flags2 & BS_FLAGS2_4) <= 0;
 }
 
-// Ordering shenanigans
-#ifdef NON_MATCHING
 void btl_state_update_peach_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
     s32 temp_s0_2;
-    s32 phi_v0;
     s32 s1;
+    s32 s0;
 
     switch (gBattleState2) {
-        case 0:
+        case BATTLE_STATE2_UNK_0:
             btl_cam_use_preset(BTL_CAM_PRESET_C);
-            btl_cam_move(0xA);
-            if (!(gBattleStatus.flags1 & 0x100000)) {
-                gBattleState2 = 0xB;
+            btl_cam_move(10);
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_100000)) {
+                gBattleState2 = BATTLE_STATE2_UNK_B;
                 break;
             }
             player->state.currentPos.x = player->homePos.x;
             player->state.currentPos.z = player->homePos.z;
-            gBattleState2 = 0xA;
+            gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
             player->state.goalPos.x = partner->homePos.x;
             player->state.goalPos.z = partner->homePos.z;
             player->state.moveTime = 4;
             player->state.angle = 0.0f;
             break;
-        case 10:
+        case BATTLE_STATE2_PLAYER_DEFEATED:
             if (player->state.moveTime != 0) {
                 player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
                 player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
@@ -4526,105 +4486,94 @@ void btl_state_update_peach_menu(void) {
             player->homePos.z = player->currentPos.z;
             partner->homePos.x = partner->currentPos.x;
             partner->homePos.z = partner->currentPos.z;
-            gBattleStatus.flags1 &= ~0x100000;
-        case 11:
-            gBattleStatus.flags1 |= 2;
-            player->flags &= ~0x4000000;
-            player->flags |= 0x08000000;
-
+            gBattleStatus.flags1 &= ~BS_FLAGS1_100000;
+        case BATTLE_STATE2_UNK_B:
+            gBattleStatus.flags1 |= BS_FLAGS1_2;
+            player->flags &= ~ACTOR_FLAG_4000000;
+            player->flags |= ACTOR_FLAG_8000000;
             if (partner != NULL) {
-                partner->flags |= 0x4000000;
-                partner->flags |= 0x08000000;
+                partner->flags |= ACTOR_FLAG_4000000;
+                partner->flags |= ACTOR_FLAG_8000000;
             }
-
-            temp_s0_2 = 8;
             battleStatus->selectedMoveID = 0;
-            battle_menu_submenuIDs[0] = temp_s0_2;
+            battle_menu_submenuIDs[0] = 8;
             battle_menu_isEnabled[0] = TRUE;
             battle_menu_isMessageDisabled[0] = 0;
             main_battle_menu_JumpHudScripts[0] = battle_menu_PeachStarPowerHudScripts.enabled;
             battle_menu_messageIDs[0] = D_802AB728[0];
-            s1 = 0;
             if (!(battleStatus->menuDisableFlags & 0x100)) {
                 battle_menu_isEnabled[0] = FALSE;
                 battle_menu_isMessageDisabled[0] = 0x48;
                 main_battle_menu_JumpHudScripts[0] = battle_menu_PeachStarPowerHudScripts.disabled;
             }
 
-            phi_v0 = 2;
-            if (func_802A9B30()) {
+            s1 = 0;
+            s0 = 1;
+
+            if (func_802A9B30() != 0) {
                 D_802AD104 = 1;
-                phi_v0 = 2 - s1;
-                main_menu_numOptions = 1;
-                D_802AD0A8 = 0;
-                D_802AD0B0 = 0;
-                D_802AD100 = phi_v0;
             } else {
                 D_802AD104 = 0;
-                phi_v0 = 2 - s1;
-                main_menu_numOptions = 1;
-                D_802AD0A8 = 0;
-                D_802AD0B0 = 0;
-                D_802AD100 = phi_v0;
             }
+            main_menu_numOptions = s0;
+            D_802AD0A8 = 0;
+            D_802AD0B0 = s1;
+            D_802AD100 = 2 - s1;
 
             func_802A1000();
             D_802ACC60 = 8;
-            gBattleState2 = 1;
+            gBattleState2 = BATTLE_STATE2_UNK_1;
             break;
-        case 1:
-            set_animation(0, 0, 0xC0009);
+        case BATTLE_STATE2_UNK_1:
+            set_animation(ACTOR_PLAYER, 0, ANIM_Peach_C0009);
             temp_s0_2 = func_802A11B0();
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
                 break;
             }
             if (temp_s0_2 != 0) {
-                set_animation(0, 0, 0xA0002);
+                set_animation(ACTOR_PLAYER, 0, ANIM_Peach_A0002);
                 battleStatus->currentSubmenu = battle_menu_submenuIDs[temp_s0_2 - 1];
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
-                gBattleState2 = 2;
+                gBattleState2 = BATTLE_STATE2_UNK_2;
             }
             break;
-        case 2:
+        case BATTLE_STATE2_UNK_2:
             if (func_802A11B0() != 0) {
                 battleStatus->unk_6C = 4;
                 battleStatus->unk_6E = 5;
                 battleStatus->moveCategory = 8;
                 battleStatus->selectedMoveID = MOVE_PEACH_FOCUS;
-                battleStatus->selectedItemID = 0xA;
+                battleStatus->selectedItemID = ITEM_FIRST_DEGREE_CARD;
                 battleStatus->currentTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
                 btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
-        case 4:
+        case BATTLE_STATE2_UNK_4:
             func_802A1050();
-            gBattleState2 = 1;
+            gBattleState2 = BATTLE_STATE2_UNK_1;
             btl_state_update_peach_menu();
             btl_state_update_peach_menu();
             break;
-        case 5:
+        case BATTLE_STATE2_BEGIN_LEVEL_UP:
             func_802A10B8();
             break;
-        case 8:
+        case BATTLE_STATE2_UNK_8:
             btl_show_variable_battle_message(0x50, 60, 0);
             D_802AD607 = 1;
-            gBattleState2 = 9;
+            gBattleState2 = BATTLE_STATE2_UNK_9;
             break;
-        case 9:
+        case BATTLE_STATE2_UNK_9:
             if (!btl_is_popup_displayed()) {
                 D_802AD607 = 0;
                 D_802ACC60 = 0;
-                gBattleState2 = 1;
+                gBattleState2 = BATTLE_STATE2_UNK_1;
             }
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);
-#endif
 
 void btl_state_draw_peach_menu(void) {
     switch (gBattleState2) {
@@ -4657,16 +4606,16 @@ s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
 }
 
-// weird sub stuff
-#ifdef NON_MATCHING
 void btl_state_update_twink_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
+    s32 s1;
     s32 temp_s0_2;
     s32 var_v0_2;
     s32 cond;
     s32 z;
+    s32 s0;
 
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_0:
@@ -4722,9 +4671,9 @@ void btl_state_update_twink_menu(void) {
                 partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
                 partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
             }
-            player->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            player->currentPos.z += sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
             player->yaw = clamp_angle(-player->state.angle);
-            partner->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            partner->currentPos.z -= sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
             partner->yaw = clamp_angle(-player->state.angle);
             player->state.angle += 90.0f;
             if (player->state.moveTime != 0) {
@@ -4749,44 +4698,44 @@ void btl_state_update_twink_menu(void) {
                 partner->flags |= ACTOR_FLAG_8000000;
             }
             battleStatus->selectedMoveID = MOVE_NONE;
-            battle_menu_submenuIDs = 8;
+            battle_menu_submenuIDs[0] = 8;
+            battle_menu_isEnabled[0] = TRUE;
+            battle_menu_isMessageDisabled[0] = 0;
+            main_battle_menu_JumpHudScripts[0] = battle_menu_TwinkStarPowerHudScripts[0];
 
-            battle_menu_isEnabled = TRUE;
-            battle_menu_isMessageDisabled = 0;
-            main_battle_menu_JumpHudScripts = battle_menu_TwinkStarPowerHudScripts[0];
-            battle_menu_messageIDs[0] = *D_802AB734;
+            battle_menu_messageIDs[0] = D_802AB734[0];
+
             if (!(battleStatus->menuDisableFlags & 0x100)) {
-                battle_menu_isEnabled = FALSE;
-                battle_menu_isMessageDisabled = 0x48;
-                main_battle_menu_JumpHudScripts = battle_menu_TwinkStarPowerHudScripts[1];
+                battle_menu_isEnabled[0] = FALSE;
+                battle_menu_isMessageDisabled[0] = 0x48;
+                main_battle_menu_JumpHudScripts[0] = battle_menu_TwinkStarPowerHudScripts[1];
             }
-
             z = 0;
+            s0 = 1;
+
             if (func_802AA0A4() != 0) {
                 D_802AD104 = 1;
-                var_v0_2 = 2 - z;
             } else {
                 D_802AD104 = 0;
-                var_v0_2 = 2 - z;
             }
-            main_menu_numOptions = 1;
+            main_menu_numOptions = s0;
             D_802AD0A8 = 0;
-            D_802AD0B0 = 0;
-            D_802AD100 = var_v0_2;
+            D_802AD0B0 = z;
+            D_802AD100 = 2 - z;
 
             func_802A1000();
             D_802ACC60 = 8;
             gBattleState2 = BATTLE_STATE2_UNK_1;
             break;
         case BATTLE_STATE2_UNK_1:
-            set_animation(ACTOR_PARTNER, 0, 0x200001);
+            set_animation(ACTOR_PARTNER, 0, ANIM_Twink_Idle);
             temp_s0_2 = func_802A11B0();
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
                 break;
             }
             if (temp_s0_2 != 0) {
-                set_animation(ACTOR_PARTNER, 0, 0x200008);
+                set_animation(ACTOR_PARTNER, 0, ANIM_Twink_Angry);
                 battleStatus->currentSubmenu = battle_menu_submenuIDs[temp_s0_2 - 1];
                 func_802A1030();
                 D_802ACC60 = 8;
@@ -4828,9 +4777,6 @@ void btl_state_update_twink_menu(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", btl_state_update_twink_menu); // look into m2c bug
-#endif
 
 void btl_state_draw_twink_menu(void) {
     switch (gBattleState2) {
