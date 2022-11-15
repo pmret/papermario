@@ -135,19 +135,19 @@ IconHudScriptPair battle_menu_ItemHudScripts = { &HES_MenuItem, &HES_MenuItemDis
 
 IconHudScriptPair battle_menu_StarPowerHudScripts = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
-IconHudScriptPair battle_menu_StarPowerMovesHudScripts[] = {
-    { &HES_MenuStarPower, &HES_MenuStarPowerDisabled },
-    { &HES_Eldstar, &HES_EldstarDisabled },
-    { &HES_Mamar, &HES_MamarDisabled },
-    { &HES_Skolar, &HES_SkolarDisabled },
-    { &HES_Muskular, &HES_MuskularDisabled },
-    { &HES_Misstar, &HES_MisstarDisabled },
-    { &HES_Klevar, &HES_KlevarDisabled },
-    { &HES_Kalmar, &HES_KalmarDisabled },
-    { &HES_StarBeam, &HES_StarBeamDisabled },
-    { &HES_PeachBeam, &HES_PeachBeamDisabled },
-    { &HES_MenuStarPower, &HES_MenuStarPowerDisabled },
-    { &HES_MenuStarPower, &HES_MenuStarPowerDisabled },
+HudScript* battle_menu_StarPowerMovesHudScripts[] = {
+    &HES_MenuStarPower, &HES_MenuStarPowerDisabled,
+    &HES_Eldstar, &HES_EldstarDisabled,
+    &HES_Mamar, &HES_MamarDisabled,
+    &HES_Skolar, &HES_SkolarDisabled,
+    &HES_Muskular, &HES_MuskularDisabled,
+    &HES_Misstar, &HES_MisstarDisabled,
+    &HES_Klevar, &HES_KlevarDisabled,
+    &HES_Kalmar, &HES_KalmarDisabled,
+    &HES_StarBeam, &HES_StarBeamDisabled,
+    &HES_PeachBeam, &HES_PeachBeamDisabled,
+    &HES_MenuStarPower, &HES_MenuStarPowerDisabled,
+    &HES_MenuStarPower, &HES_MenuStarPowerDisabled,
 };
 
 HudScript* battle_menu_PartnerHudScripts[] = {
@@ -193,6 +193,7 @@ s32 battle_menu_centeredMessagesD[] = { MSG_Menus_004C, MSG_Menus_004E, MSG_Menu
 
 s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 0x37 };
 
+/*
 AnimID battle_menu_partnerChooseMoveAnimations[] = {
     [PARTNER_NONE]       0,
     [PARTNER_GOOMBARIO]  ANIM_BattleGoombario_Think,
@@ -226,18 +227,54 @@ AnimID D_802AB558[] = {
     0x00000000,
     0x00000000
 };
+*/
 
-HudScript* battle_menu_PartnerMoveHudScripts[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    &HES_Goombario, &HES_GoombarioDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Kooper, &HES_KooperDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Bombette, &HES_BombetteDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Parakarry, &HES_ParakarryDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Partner0, &HES_Partner0Disabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Watt, &HES_WattDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Sushie, &HES_SushieDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Lakilester, &HES_LakilesterDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled,
-    &HES_Bow, &HES_BowDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled };
+AnimID battle_menu_partnerChooseMoveAnimations[] = {
+    0,
+    ANIM_BattleGoombario_Think,
+    ANIM_BattleKooper_Think,
+    ANIM_BattleBombette_Think,
+    ANIM_BattleParakarry_Think,
+    ANIM_Goompa_Idle,
+    ANIM_BattleWatt_Think,
+    ANIM_BattleSushie_Think,
+    ANIM_BattleLakilester_Run,
+    ANIM_BattleBow_Still,
+    0,
+    0,
+    0,
+    0
+};
+
+AnimID D_802AB558[] = {
+    0,
+    ANIM_BattleGoombario_Walk,
+    ANIM_BattleKooper_Walk,
+    ANIM_BattleBombette_Walk,
+    ANIM_BattleParakarry_Walk,
+    ANIM_Goompa_Walk,
+    ANIM_BattleWatt_Walk,
+    ANIM_BattleSushie_Walk,
+    ANIM_BattleLakilester_Walk,
+    ANIM_BattleBow_Walk,
+    0,
+    0,
+    0x00000000,
+    0x00000000
+};
+
+HudScript* battle_menu_PartnerMoveHudScripts[10][10] = {
+    { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, },
+    { &HES_Goombario, &HES_GoombarioDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Kooper, &HES_KooperDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Bombette, &HES_BombetteDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Parakarry, &HES_ParakarryDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Partner0, &HES_Partner0Disabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Watt, &HES_WattDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Sushie, &HES_SushieDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Lakilester, &HES_LakilesterDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    { &HES_Bow, &HES_BowDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled },
+};
 
 IconHudScriptPair battle_menu_PeachStarPowerHudScripts = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
@@ -364,9 +401,11 @@ BSS s16 D_802AD63E;
 BSS HudScript* D_802AD640[6];
 BSS s32 D_802AD658[5]; // msg IDs
 BSS s32 D_802AD66C;
-BSS s8 D_802AD670[3]; // actually an s32 but sometimes the last byte is accessed?
-//BSS char D_802AD671[0x2];
-BSS s8 D_802AD673; // TODO fix
+BSS s32 D_802AD670;
+
+//TODO remove it in func_802A45D8 and use D_802AD670 instead
+extern s8 D_802AD673;
+
 BSS s32 D_802AD674; // unused?
 BSS s32 D_802AD678[6];
 BSS s32 D_802AD690[6];
@@ -386,6 +425,12 @@ void func_802A5290(s32 arg0, s32 x, s32 y);
 void func_802A56F8(s32 arg0, s32 x, s32 y);
 void func_802A5738(s32 arg0, s32 x, s32 y);
 void func_802A57C8(s32* userData, s32 x, s32 y, s32 width, s32 height, s32 opacity, s32 darkening);
+
+void func_80263300(void);
+void func_80263268(void);
+void btl_init_menu_partner(void);
+void func_800F52BC(void);
+void func_800F16CC(void);
 
 void func_802A1000(void) {
     D_802AD006 = 255;
@@ -3572,7 +3617,800 @@ void btl_state_draw_player_menu(void) {
 
 static const f32 padding = 0.0f;
 
-INCLUDE_ASM(s32, "415D90", btl_state_update_partner_menu);
+void btl_state_update_partner_menu(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* playerActor = battleStatus->playerActor;
+    Actor* partnerActor = battleStatus->partnerActor;
+    PopupMenu* popup = &D_802ACCD0;
+    s32 s00;
+    s32 i;
+    s32 s4;
+    s32 s1;
+    MoveData* moveData;
+    PartnerPopupProperties* prop;
+
+    if (gBattleState2 == 0) {
+        battleStatus->moveCategory = -1;
+        battleStatus->selectedMoveID = 0;
+        battleStatus->currentAttackElement = 0;
+        if (func_802A58D0() == 0) {
+            btl_set_state(9);
+        } else {
+            btl_cam_use_preset(2);
+            battleStatus->flags1 |= 2;
+            playerActor->flags &= 0xF3FFFFFF;
+            partnerActor->flags &= 0xF3FFFFFF;
+            if (battleStatus->flags1 & 0x100000) {
+                gBattleState2 = 0x12E;
+            } else {
+                gBattleState2 = 0x12D;
+                partnerActor->state.currentPos.x = partnerActor->homePos.x;
+                partnerActor->state.currentPos.z = partnerActor->homePos.z;
+                partnerActor->state.goalPos.x = playerActor->homePos.x;
+                partnerActor->state.goalPos.z = playerActor->homePos.z;
+                partnerActor->state.moveTime = 4;
+                partnerActor->state.angle = 0.0f;
+            }
+        }
+    }
+    if (gBattleState2 == 0x12D) {
+        if (partnerActor->state.moveTime != 0) {
+            partnerActor->currentPos.x += (partnerActor->state.goalPos.x - partnerActor->currentPos.x) / partnerActor->state.moveTime;
+            partnerActor->currentPos.z += (partnerActor->state.goalPos.z - partnerActor->currentPos.z) / partnerActor->state.moveTime;
+            playerActor->currentPos.x += (partnerActor->state.currentPos.x - playerActor->currentPos.x) / partnerActor->state.moveTime;
+            playerActor->currentPos.z += (partnerActor->state.currentPos.z - playerActor->currentPos.z) / partnerActor->state.moveTime;
+        }
+        partnerActor->currentPos.z += sin_rad(partnerActor->state.angle * 6.28318f / 360.0f) * 16.0f;
+        partnerActor->yaw = clamp_angle(-partnerActor->state.angle);
+        playerActor->currentPos.z -= sin_rad(partnerActor->state.angle * 6.28318f / 360.0f) * 16.0f;
+        playerActor->yaw = clamp_angle(-partnerActor->state.angle);
+        partnerActor->state.angle += 90.0f;
+        if (partnerActor->state.moveTime != 0) {
+            partnerActor->state.moveTime--;
+        } else {
+            gBattleState2 = 0x12E;
+            partnerActor->currentPos.x = partnerActor->state.goalPos.x;
+            partnerActor->currentPos.z = partnerActor->state.goalPos.z;
+            playerActor->currentPos.x = partnerActor->state.currentPos.x;
+            playerActor->currentPos.z = partnerActor->state.currentPos.z;
+            partnerActor->homePos.x = partnerActor->currentPos.x;
+            partnerActor->homePos.z = partnerActor->currentPos.z;
+            playerActor->homePos.x = playerActor->currentPos.x;
+            playerActor->homePos.z = playerActor->currentPos.z;
+            gBattleStatus.flags1 |= 0x100000;
+        }
+    }
+    switch (gBattleState2) {
+        case 0x12E:
+            partnerActor->flags |= 0x08000000;
+            partnerActor->flags &= 0xFBFFFFFF;
+            playerActor->flags |= 0x04000000;
+            playerActor->flags |= 0x08000000;
+            func_80263300();
+            s1 = 1;
+            func_80263268();
+            if (battleStatus->unk_5C[0] < 0) {
+                battleStatus->unk_5C[0] = 6;
+            }
+            btl_init_menu_partner();
+            func_80263268();
+            battle_menu_submenuIDs[0] = 7;
+            battle_menu_isEnabled[0] = 1;
+            battle_menu_isMessageDisabled[0] = 0;
+            main_battle_menu_JumpHudScripts[0] = battle_menu_StrategiesHudScript.enabled;
+            battle_menu_messageIDs[0] = battle_menu_centeredMessagesA[7];
+            if (!(battleStatus->menuDisableFlags & 0x80)) {
+                battle_menu_isEnabled[0] = 0;
+                battle_menu_isMessageDisabled[0] = 0x48;
+                main_battle_menu_JumpHudScripts[0] = battle_menu_StrategiesHudScript.disabled;
+            }
+            if (battleStatus->unk_5C[0] == 7) {
+                s1 = 0;
+            }
+            s00 = 1;
+            main_battle_menu_JumpHudScripts[1] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][0];
+            battle_menu_submenuIDs[1] = 6;
+            battle_menu_isEnabled[1] = s00;
+            battle_menu_messageIDs[1] = battle_menu_centeredMessagesA[6];
+
+            if (battleStatus->menuStatus[3] <= 0) {
+                main_battle_menu_JumpHudScripts[1] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][1];
+                battle_menu_isEnabled[1] = 0;
+                battle_menu_isMessageDisabled[1] = 0x48;
+
+            }
+            if (!(battleStatus->menuDisableFlags & 0x40)) {
+                main_battle_menu_JumpHudScripts[1] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][1];
+                battle_menu_isEnabled[1] = 0;
+                battle_menu_isMessageDisabled[1] = 0x48;
+            }
+            if (battleStatus->unk_5C[0] == (s8) 6) {
+                s1 = 1;
+            }
+            s00 = 2;
+            if ((playerData->maxStarPower != 0) && (is_ability_active(0x35) != 0)) {
+                battle_menu_submenuIDs[2] = 0xB;
+                battle_menu_isEnabled[2] = 1;
+                battle_menu_isMessageDisabled[2] = 0;
+                main_battle_menu_JumpHudScripts[2] = battle_menu_StarPowerHudScripts.enabled;
+                battle_menu_messageIDs[2] = (s32) battle_menu_centeredMessagesA[11];
+                if (!(battleStatus->menuDisableFlags & 0x800)) {
+                    battle_menu_isEnabled[2] = 0;
+                    battle_menu_isMessageDisabled[2] = 0x48;
+                    main_battle_menu_JumpHudScripts[2] = battle_menu_StarPowerHudScripts.disabled;
+                }
+                if (battleStatus->unk_5C[0] == (s8) 0xB) {
+                    s1 = 2;
+                }
+                s00 = 3;
+            }
+            main_menu_numOptions = s00;
+            D_802AD0A8 = 1;
+            D_802AD0B0 = s1;
+            D_802AD100 = 2 - s1;
+            if (can_btl_state_update_switch_to_player() != 0) {
+                D_802AD104 = 1;
+            } else {
+                D_802AD104 = 0;
+            }
+            func_802A1000();
+            D_802ACC60 = 8;
+            D_802ACC6C = 0;
+            gBattleState2 = 2;
+            return;
+        case 0x2:
+            set_animation(0x100, 0, battle_menu_partnerChooseMoveAnimations[playerData->currentPartner]);
+            gBattleState2 = 3;
+        case 0x3:
+            s00 = func_802A11B0();
+            if (D_802ACC6C != 0) {
+                D_802ACC6C -= 1;
+            } else if (!(gBattleStatus.flags1 & 0x02000000) && (gGameStatusPtr->pressedButtons[0] & 0x2000)) {
+                if (can_btl_state_update_switch_to_player() != 0) {
+                    sfx_play_sound(0xF);
+                    battleStatus->unk_5C[0] = battle_menu_submenuIDs[D_802AD002 + D_802AD06B];
+                    func_802A10B8();
+                    btl_set_state(0xA);
+                } else {
+                    sfx_play_sound(0x21D);
+                    gBattleState2 = 8;
+                }
+                break;
+            }
+            if (D_802ACC60 != 0) {
+                D_802ACC60 -= 1;
+            } else if (s00 != 0) {
+                set_animation(0x100, 0, D_802AB558[playerData->currentPartner]);
+                battleStatus->unk_5C[0] = battleStatus->unk_4A = battle_menu_submenuIDs[s00 - 1];
+                if (battleStatus->unk_4A == 7) {
+                    gBattleState2 = 0xC8;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else if (battleStatus->unk_4A == 6) {
+                    gBattleState2 = 0xA;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else if (battleStatus->unk_4A == 8) {
+                    gBattleState2 = 0x3C;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else if (battleStatus->unk_4A == 2) {
+                    gBattleState2 = 0x28;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else if (battleStatus->unk_4A == 5) {
+                    gBattleState2 = 0x32;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else {
+                    battleStatus->unk_6C = 6;
+                    battleStatus->unk_6E = 7;
+                    func_802A1030();
+                    gBattleState2 = 4;
+                }
+            }
+            break;
+    case 0x4:
+        s00 = func_802A11B0();
+        if ((battleStatus->currentButtonsPressed & 0x4000) && s00 == 0) {
+            func_802A1078();
+            gBattleState2 = 5;
+            return;
+        }
+        if (s00 != 0) {
+            battleStatus->moveCategory = 8;
+            battleStatus->selectedMoveID = 0x77;
+            battleStatus->selectedItemID = 0;
+            battleStatus->currentTargetListFlags = gMoveTable[0x77].flags;
+            btl_set_state(0x11);
+            return;
+        }
+        break;
+    case 0x5:
+        if (func_802A11B0() != 0) {
+            D_802ACC60 = 8;
+            D_802ACC6C = 4;
+            gBattleState2 = 2;
+        }
+        break;
+    case 0x6:
+        func_802A1078();
+        gBattleState2 = 5;
+        break;
+    case 0x8:
+        if (can_btl_state_update_switch_to_player() == 0) {
+            btl_show_variable_battle_message(0x51, 0x3C, 0);
+        } else {
+            btl_show_variable_battle_message(0x50, 0x3C, 0);
+        }
+        D_802AD607 = 1;
+        gBattleState2 = 9;
+        break;
+    case 0x9:
+        if (btl_is_popup_displayed() == 0) {
+            D_802ACC6C = 4;
+            D_802ACC60 = 0;
+            D_802AD607 = 0;
+            gBattleState2 = 2;
+        }
+        break;
+    case 0xA:
+        for (i = 0; i < battleStatus->submenuMoveCount; i++) {
+            moveData = &gMoveTable[battleStatus->submenuMoves[i]];
+
+            battle_menu_moveOptionCantUseTypes[i] = 0;
+            if (battleStatus->submenuStatus[i] == 0) {
+                battle_menu_moveOptionCantUseTypes[i] = 0;
+            }
+            if (battleStatus->submenuStatus[i] == -1) {
+                battleStatus->submenuStatus[i] = 0;
+                battle_menu_moveOptionCantUseTypes[i] = 0x48;
+            }
+            if (battleStatus->submenuStatus[i] == -2) {
+                battleStatus->submenuStatus[i] = 0;
+                battle_menu_moveOptionCantUseTypes[i] = 0x48;
+            }
+            battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 2];
+            if (battleStatus->submenuStatus[i] == 0) {
+                battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 3];
+            }
+            battle_menu_moveIndices[i] = battleStatus->submenuMoves[i];
+            battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+            battle_menu_moveOptionNames[i] = moveData->nameMsg;
+            battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+            battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
+            battle_menu_moveOptionBPCosts[i] = moveData->costBP;
+            battle_menu_moveOptionSortPriorities[i] = i;
+
+            battle_menu_moveOptionDisplayCostReductions[i] = 0;
+            battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
+            if (player_team_is_ability_active(playerActor, 0x18) != 0) {
+                battle_menu_moveOptionDisplayCostReductions[i] += player_team_is_ability_active(playerActor, 0x18);
+                battle_menu_moveOptionDisplayCostReductionColors[i] = 1;
+            }
+            if (player_team_is_ability_active(playerActor, 0x26) != 0) {
+                battle_menu_moveOptionDisplayCostReductions[i] += player_team_is_ability_active(playerActor, 0x26) * 2;
+                battle_menu_moveOptionDisplayCostReductionColors[i] = 2;
+            }
+        }
+        if (battleStatus->unk_5C[1] < 0) {
+            battleStatus->unk_5C[1] = 0;
+        }
+        battle_menu_hasSpiritsMenu = 0;
+        battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+        s1 = battleStatus->unk_5C[1];
+        D_802AD4A8 = s1;
+        func_802A2684();
+        gBattleState2 = 0xB;
+        break;
+    case 0xB:
+        s00 = func_802A2C84();
+        if (s00 == -1) {
+            gBattleState2 = 0x10;
+        } else if (s00  != 0) {
+            if (s00 == 255) {
+                func_802A1050();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_4B = s00 - 1;
+                func_802A27D0();
+                func_802A1030();
+                gBattleState2 = 0xC;
+            }
+        }
+        break;
+    case 0xC:
+        s00 = func_802A2C84();
+        if ((battleStatus->currentButtonsPressed & 0x4000) && s00 == 0) {
+            func_802A2AB8();
+            func_802A1098();
+            gBattleState2 = 0xD;
+        } else if (func_802A11B0() != 0) {
+            battleStatus->moveCategory = 6;
+            battleStatus->selectedMoveID = battle_menu_moveIndices[battleStatus->unk_4B];
+            battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
+            battleStatus->unk_5C[1] = battle_menu_moveOptionActive;
+            battleStatus->unk_6C = 0xE;
+            battleStatus->unk_6E = 0xF;
+            btl_set_state(0x11);
+        }
+        break;
+    case 0xD:
+        func_802A2C84();
+        if (func_802A11B0() != 0) {
+            gBattleState2 = 0xB;
+        }
+        break;
+    case 0xE:
+        func_802A2AB8();
+        func_802A1098();
+        gBattleState2 = 0xD;
+        break;
+    case 0x10:
+        if (func_802A2C84() != -1) {
+            gBattleState2 = 0xB;
+        }
+        break;
+    case 0x28:
+        s4 = 0;
+        for (i = 0; i < 10; i++) {
+            ItemData* item;
+            HudScript** hudScript;
+            if (playerData->invItems[i] == 0) {
+                continue;
+            }
+            item = &gItemTable[playerData->invItems[i]];
+            hudScript = &gItemHudScripts[item->hudElemID].enabled;
+
+            if (!(item->typeFlags & 2)) {
+                continue;
+            }
+            popup->ptrIcon[s4] = hudScript[0];
+            popup->userIndex[s4] = playerData->invItems[i];
+            popup->enabled[s4] = 1;
+            popup->nameMsg[s4] = item->nameMsg;
+            popup->descMsg[s4] = item->shortDescMsg;
+            s4++;
+        }
+        if (battleStatus->unk_5C[4] < 0) {
+            battleStatus->unk_5C[4] = 0;
+        }
+        popup->popupType = 0;
+        popup->numEntries = s4;
+        popup->unk_31C = 0;
+        popup->unk_320 = 0;
+        s1 = battleStatus->unk_5C[4];
+        popup->initialPos = s1;
+        func_800F513C(popup);
+        func_800F52BC();
+        gBattleState2 = 0x29;
+        break;
+    case 0x29:
+        if (popup->result != 0) {
+            if (popup->result == 255) {
+                func_802A1050();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_6C = 0x2C;
+                battleStatus->unk_6E = 0x2D;
+                battleStatus->unk_1AA = popup->userIndex[popup->result - 1];
+                battleStatus->moveCategory = 2;
+                battleStatus->selectedItemID = battleStatus->unk_1AA;
+                battleStatus->currentTargetListFlags = gItemTable[battleStatus->selectedItemID].targetFlags | 0x8000;
+                battleStatus->currentAttackElement = 0;
+                battleStatus->unk_5C[4] = popup->result - 1;
+                hide_popup_menu();
+                func_802A1030();
+                gBattleState2 = 0x2A;
+            }
+        }
+        break;
+    case 0x2A:
+        if ((battleStatus->currentButtonsPressed & 0x4000) && popup->result == 0) {
+            func_800F16CC();
+            func_802A1098();
+            gBattleState2 = 0x2B;
+        } else if (func_802A11B0() != 0) {
+            btl_set_state(0x11);
+        }
+        break;
+    case 0x2B:
+        if (func_802A11B0() != 0) {
+            gBattleState2 = 0x29;
+        }
+        break;
+    case 0x2C:
+        func_800F16CC();
+        func_802A1098();
+        gBattleState2 = 0x2B;
+        break;
+    case 0x2D:
+        destroy_popup_menu();
+        func_802A10B8();
+        break;
+    case 0x32:
+        s4 = 0;
+        for (i = 1; i < 12; i++) {
+            s32 partnerId = D_8008EEC0[i];
+            if (playerData->partners[partnerId].enabled) {
+                prop = &gPartnerPopupProperties[partnerId];
+                popup->ptrIcon[s4] = battle_menu_PartnerHudScripts[partnerId];
+                popup->userIndex[s4] = partnerId;
+                popup->enabled[s4] = 1;
+                popup->nameMsg[s4] = prop->nameMsg;
+                popup->descMsg[s4] = prop->battleDescMsg;
+                popup->value[s4] = playerData->partners[partnerId].level;
+                if (playerData->currentPartner == partnerId) {
+                    popup->enabled[s4] = 0;
+                    popup->ptrIcon[s4] = battle_menu_DisabledPartnerHudScripts[partnerId];
+                }
+                s4++;
+            }
+        }
+        if (battleStatus->unk_5C[5] < 0) {
+            battleStatus->unk_5C[5] = 0;
+        }
+        popup->popupType = 1;
+        popup->numEntries = s4;
+        popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
+        popup->unk_31C = 0;
+        popup->unk_320 = 0;
+        func_800F513C(popup);
+        func_800F52BC();
+        gBattleState2 = 0x33;
+        break;
+    case 0x33:
+        if (popup->result == -1) {
+            gBattleState2 = 0x38;
+        } else if (popup->result != 0) {
+            if (popup->result == 255) {
+                func_802A1050();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_6C = 0x36;
+                battleStatus->unk_6E = 0x37;
+                battleStatus->unk_1AC = popup->userIndex[popup->result - 1];
+                battleStatus->moveCategory = 5;
+                battleStatus->selectedMoveID = 0x37;
+                battleStatus->currentTargetListFlags = 2;
+                battleStatus->selectedItemID = battleStatus->unk_1AC;
+                battleStatus->unk_5C[5] = popup->result - 1;
+                hide_popup_menu();
+                func_802A1030();
+                gBattleState2 = 0x34;
+            }
+        }
+        break;
+    case 0x34:
+        if ((battleStatus->currentButtonsPressed & 0x4000) && (popup->result == 0)) {
+            func_800F16CC();
+            func_802A1098();
+            gBattleState2 = 0x35;
+        } else if (func_802A11B0() != 0) {
+            gBattleState2 = battleStatus->unk_6E;
+            btl_state_update_partner_menu();
+            btl_set_state(0x1D);
+        }
+        break;
+    case 0x35:
+        if (func_802A11B0() != 0) {
+            gBattleState2 = 0x33;
+        }
+        break;
+    case 0x36:
+        func_800F16CC();
+        func_802A1098();
+        gBattleState2 = 0x35;
+        break;
+    case 0x37:
+        destroy_popup_menu();
+        func_802A10B8();
+        break;
+    case 0x7:
+        func_802A10B8();
+        break;
+    case 0x38:
+        if (popup->result != -1) {
+            gBattleState2 = 0x33;
+        }
+        break;
+    case 0x3C:
+        s00 = 1;
+        battleStatus->submenuMoves[0] = 0x77;
+        battleStatus->submenuMoveCount = s00;
+        battleStatus->submenuIcons[0] = 0x155;
+        battleStatus->submenuStatus[0] = 1U;
+        for (i = 0; i < battleStatus->submenuMoveCount; i++) {
+            moveData = &gMoveTable[battleStatus->submenuMoves[i]];
+            battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[(battleStatus->submenuMoves[i] - 0x77) * 2 + 0];
+            if (battleStatus->submenuStatus[i] == 0) {
+                battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[(battleStatus->submenuMoves[i] - 0x77) * 2 + 1];
+            }
+            battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
+            battle_menu_moveOptionBPCosts[i] = moveData->costBP;
+            battle_menu_moveIndices[i] = i;
+            battle_menu_moveOptionSortPriorities[i] = i;
+            battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+            battle_menu_moveOptionNames[i] = moveData->nameMsg;
+            battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+            battle_menu_moveOptionDisplayCostReductions[i] = 0;
+            battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
+        }
+        if (battleStatus->unk_5C[6] < 0) {
+            battleStatus->unk_5C[6] = 0;
+        }
+        battle_menu_hasSpiritsMenu = 1;
+        battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+        s1 = battleStatus->unk_5C[6];
+        D_802AD4A8 = s1;
+        func_802A2684();
+        gBattleState2 = 0x3D;
+        break;
+    case 0x3D:
+        s00 = func_802A2C84();
+        if (s00 != 0) {
+            if (s00 == 255) {
+                func_802A1050();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_4B = battle_menu_moveIndices[s00 - 1];
+                func_802A27D0();
+                func_802A1030();
+                gBattleState2 = 0x3E;
+            }
+        }
+        break;
+    case 0x3E:
+        s00 = func_802A2C84();
+        if ((battleStatus->currentButtonsPressed & 0x4000) && (s00 == 0)) {
+            func_802A2AB8();
+            func_802A1098();
+            gBattleState2 = 0x3F;
+        } else if (func_802A11B0() != 0) {
+            battleStatus->unk_6C = 0x40;
+            battleStatus->unk_6E = 0x41;
+            battleStatus->moveCategory = 8;
+            battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_4B];
+            battleStatus->currentTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_4B]].flags;
+            battleStatus->selectedItemID = battleStatus->unk_4B;
+            battleStatus->unk_5C[6] = battle_menu_moveOptionActive;
+            btl_set_state(0x11);
+        }
+        break;
+    case 0x3F:
+        func_802A2C84();
+        if (func_802A11B0() != 0) {
+            gBattleState2 = 0x3D;
+        }
+        break;
+    case 0x40:
+        func_802A2AB8();
+        func_802A1098();
+        gBattleState2 = 0x3F;
+        break;
+    case 0xF:
+    case 0x41:
+        func_802A27E4();
+        func_802A10B8();
+        break;
+    case 0xC8:
+        s4 = 0;
+        func_80263268();
+        if (battleStatus->changePartnerAllowed >= 0) {
+            D_802AD678[s4] = 5;
+            D_802AD658[s4] = battle_menu_leftJustfiedMessagesB[0];
+            D_802AD640[s4] = battle_menu_PartnerHudScripts[playerData->currentPartner];
+            D_802AD690[s4] = 1;
+            D_802AD6C0[s4] = 0x1D00A1;
+            if (battleStatus->changePartnerAllowed <= 0) {
+                D_802AD640[s4] = battle_menu_DisabledPartnerHudScripts[playerData->currentPartner];
+                D_802AD690[s4] = 0;
+                D_802AD6A8[s4] = 0;
+            }
+            s4++;
+        }
+        D_802AD640[s4] = battle_menu_DoNothingHudScripts.enabled;
+        D_802AD678[s4] = 9;
+        D_802AD690[s4] = 1;
+        D_802AD658[s4] = battle_menu_leftJustfiedMessagesC[0];
+        D_802AD6C0[s4] = 0x1D00A2;
+        s4++;
+
+        if (battleStatus->unk_5C[7] < 0) {
+            battleStatus->unk_5C[7] = 0;
+        }
+        D_802AD66C = s4;
+        s1 = battleStatus->unk_5C[7];
+        D_802AD670 = s1;
+        func_802A45D8();
+        gBattleState2 = 0xC9;
+        break;
+    case 0xC9:
+        s00 = func_802A4A54();
+        if (s00 != 0) {
+            if (s00 == 0xFF) {
+                func_802A1050();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_4A = D_802AD678[s00 - 1];
+                battleStatus->unk_5C[7] = s00 - 1;
+                if (battleStatus->unk_4A == 5) {
+                    gBattleState2 = 0x1E;
+                    btl_state_update_partner_menu();
+                    btl_state_update_partner_menu();
+                } else {
+                    func_802A4718();
+                    func_802A1030();
+                    gBattleState2 = 0xCA;
+                }
+            }
+        }
+        break;
+    case 0xCA:
+        s00 = func_802A4A54();
+        if ((battleStatus->currentButtonsPressed & 0x4000) && (s00 == 0)) {
+            func_802A48FC();
+            func_802A1098();
+            gBattleState2 = 0xCB;
+        } else if (func_802A11B0() != 0) {
+            battleStatus->unk_6C = 0xCC;
+            battleStatus->unk_6E = 0xCD;
+            s00 = battleStatus->unk_4A;
+            switch (s00) {
+                case 9:
+                    gBattleState2 = 0xCD;
+                    btl_state_update_partner_menu();
+                    btl_set_state(0x17);
+                    break;
+                case 3:
+                    gBattleState2 = 0xCD;
+                    btl_state_update_partner_menu();
+                    battleStatus->moveCategory = s00;
+                    battleStatus->selectedMoveID = 0x39;
+                    btl_set_state(0x18);
+                    break;
+                case 10:
+                    gBattleState2 = 0xCD;
+                    btl_state_update_partner_menu();
+                    btl_set_state(0xA);
+                    break;
+            }
+        }
+        break;
+    case 0xCB:
+        func_802A4A54();
+        if (func_802A11B0() != 0) {
+            D_802ACC60 = 8;
+            D_802ACC6C = 4;
+            gBattleState2 = 2;
+        }
+        break;
+    case 0xCC:
+        func_802A48FC();
+        func_802A1098();
+        gBattleState2 = 0xCB;
+        break;
+    case 0x1E:
+        s4 = 0;
+        for (i = 1; i < 12; i++) {
+            s32 partnerId = D_8008EEC0[i];
+            if (playerData->partners[partnerId].enabled) {
+                prop = &gPartnerPopupProperties[partnerId];
+                popup->ptrIcon[s4] = battle_menu_PartnerHudScripts[partnerId];
+                popup->userIndex[s4] = partnerId;
+                popup->enabled[s4] = 1;
+                popup->nameMsg[s4] = prop->nameMsg;
+                popup->descMsg[s4] = prop->battleDescMsg;
+                popup->value[s4] = playerData->partners[partnerId].level;
+                if (playerData->currentPartner == partnerId) {
+                    popup->enabled[s4] = 0;
+                    popup->ptrIcon[s4] = battle_menu_DisabledPartnerHudScripts[partnerId];
+                }
+                s4++;
+            }
+        }
+        if (battleStatus->unk_5C[5] < 0) {
+            battleStatus->unk_5C[5] = 0;
+        }
+        popup->popupType = 1;
+        popup->numEntries = s4;
+        popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
+        popup->unk_31C = 0;
+        popup->unk_320 = 0;
+        func_800F513C(popup);
+        func_800F52BC();
+        gBattleState2 = 0x1f;
+        break;
+    case 0x1F:
+        if (popup->result == -1) {
+            gBattleState2 = 0x24;
+        } else if (popup->result != 0) {
+            if (popup->result == 255) {
+                func_802A47E0();
+                gBattleState2 = 0xC9;
+                btl_state_update_partner_menu();
+                btl_state_update_partner_menu();
+            } else {
+                battleStatus->unk_6C = 0x22;
+                battleStatus->unk_6E = 0x23;
+                battleStatus->unk_1AC = popup->userIndex[popup->result - 1];
+                battleStatus->moveCategory = 5;
+                battleStatus->selectedMoveID = 0x37;
+                battleStatus->currentTargetListFlags = 2;
+                battleStatus->selectedItemID = battleStatus->unk_1AC;
+                battleStatus->unk_5C[5] = popup->result - 1;
+                hide_popup_menu();
+                func_802A4718();
+                func_802A1030();
+                gBattleState2 = 0x20;
+            }
+        }
+        break;
+    case 0x20:
+        if ((battleStatus->currentButtonsPressed & 0x4000) && (popup->result == 0)) {
+            func_800F16CC();
+            func_802A4A10();
+            func_802A1098();
+            gBattleState2 = 0x21;
+        } else {
+            func_802A4A54();
+            if (func_802A11B0() != 0) {
+                gBattleState2 = battleStatus->unk_6E;
+                btl_state_update_partner_menu();
+                btl_set_state(0x1D);
+            }
+        }
+        break;
+    case 0x21:
+        func_802A4A54();
+        if (func_802A11B0() != 0) {
+            gBattleState2 = 0x1F;
+        }
+        break;
+    case 0x22:
+        func_800F16CC();
+        func_802A4A10();
+        func_802A1098();
+        gBattleState2 = 0x21;
+        break;
+    case 0x23:
+        destroy_popup_menu();
+    case 0xCD:
+        func_802A472C();
+        func_802A10B8();
+        break;
+    case 0x24:
+        set_window_update(6, 2);
+        set_window_update(7, 2);
+        if (popup->result != -1) {
+            set_window_update(6, 9);
+            set_window_update(7, 9);
+            gBattleState2 = 0x1F;
+        }
+        break;
+    }
+}
 
 void btl_state_draw_partner_menu(void) {
     switch (gBattleState2) {
