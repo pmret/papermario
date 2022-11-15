@@ -27,6 +27,7 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 }
 
 extern s32 D_80245650[];
+extern s32 D_802457C0[];
 
 ApiStatus func_80242204_DB44C4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -78,4 +79,13 @@ ApiStatus func_80242328_DB45E8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
+ApiStatus func_802423C8_DB4688(Evt* script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i < 91; i++) {
+        D_802457C0[i] = i + 128;
+    }
+    D_802457C0[i] = 0;
+
+    return ApiStatus_DONE2;
+}
