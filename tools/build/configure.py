@@ -13,7 +13,8 @@ DO_SHA1_CHECK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-BUILD_TOOLS = (ROOT / "tools" / "build").relative_to(ROOT)
+TOOLS = (ROOT / "tools").relative_to(ROOT)
+BUILD_TOOLS = TOOLS / "build"
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
@@ -160,17 +161,17 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("sprite",
         description="sprite $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprites/sprite.py $out $sprite_dir",
+        command=f"$python {BUILD_TOOLS}/sprite/sprite.py $out $sprite_dir",
     )
 
     ninja.rule("sprite_combine",
         description="sprite_combine $in",
-        command=f"$python {BUILD_TOOLS}/sprites/combine.py $out $in",
+        command=f"$python {BUILD_TOOLS}/sprite/combine.py $out $in",
     )
 
     ninja.rule("sprite_header",
         description="sprite_header $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprites/header.py $out $sprite_dir $sprite_id",
+        command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_dir $sprite_id",
     )
 
     ninja.rule("msg",
@@ -198,6 +199,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
+
+    ninja.rule("pm_sprite_shading_profiles", command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
@@ -238,7 +241,7 @@ class Configure:
         modes = ["ld"]
         if assets:
             modes.extend(["bin", "Yay0", "img", "vtx", "gfx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
-                          "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims"])
+                          "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims", "pm_sprite_shading_profiles"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -313,7 +316,7 @@ class Configure:
         built_objects = set()
         generated_headers = []
 
-        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str, variables: Dict[str, str] = {}):
+        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str, variables: Dict[str, str] = {}, implicit_outputs: List[str] = []):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
 
@@ -348,6 +351,7 @@ class Configure:
                     variables={ "version": self.version, **variables },
                     implicit=implicit,
                     order_only=order_only,
+                    implicit_outputs=implicit_outputs
                 )
 
         # Build objects
@@ -646,6 +650,12 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
+            elif seg.type == "pm_sprite_shading_profiles":
+                header_path = str(self.build_path() / "include/sprite/sprite_shading_profiles.h")
+                build(entry.object_path.with_suffix(""), entry.src_paths, "pm_sprite_shading_profiles", implicit_outputs=[header_path], variables={
+                    "header_path": header_path,
+                })
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             else:

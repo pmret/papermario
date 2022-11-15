@@ -30,7 +30,9 @@
         "./tools"
     ],
     "python.analysis.extraPaths": [
-        "./tools"
+        "./tools",
+        "./tools/build/sprite",
+        "./tools/splat"
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
