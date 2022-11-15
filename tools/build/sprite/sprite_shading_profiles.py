@@ -97,7 +97,7 @@ def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "
     with open(header_out, "w") as f:
         f.write("#ifndef SHADING_PROFILES_H\n")
         f.write("#define SHADING_PROFILES_H\n")
-        f.write("/* This file is auto-generated from sprite_shading_profiles.json. Do not edit. */\n\n")
+        f.write(f"/* This file is auto-generated from {input.name}. Do not edit. */\n\n")
         f.write("enum ShadingProfile {\n")
         f.write("    SHADING_NONE = 0xFFFFFFFF,\n")
 
@@ -105,7 +105,7 @@ def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "
             for i, profile in enumerate(group.profiles):
                 f.write(f"    SHADING_{profile.name.upper()} = 0x{(g << 16) | i:08X},\n")
         f.write("};\n")
-        f.write("#endif // SHADING_PROFILES_H")
+        f.write("#endif // SHADING_PROFILES_H\n")
 
     data_offset = 0
     profile_list_offset = len(groups) * 8
