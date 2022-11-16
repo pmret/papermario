@@ -15,9 +15,63 @@ ApiStatus func_80240118_D36408(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240158_D36448);
+ApiStatus func_80240158_D36448(Evt* script, s32 isInitialCall) {
+    s32 mapVar0;
+    s32 mapVar2;
+    s32 mapVar3;
 
-INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240264_D36554);
+    mapVar0 = evt_get_variable(script, MapVar(0));
+    if (mapVar0 == -1) {
+        mapVar0 = 0xFF;
+    }
+    evt_set_variable(script, GameByte(264), mapVar0 & 0xFF);
+    evt_set_variable(script, GameByte(265), (mapVar0 >> 8) & 0xFF);
+
+    mapVar2 = evt_get_variable(script, MapVar(1));
+    if (mapVar2 == -1) {
+        mapVar2 = 0xFF;
+    }
+    evt_set_variable(script, GameByte(266), mapVar2 & 0xFF);
+    evt_set_variable(script, GameByte(267), (mapVar2 >> 8) & 0xFF);
+
+    mapVar3 = evt_get_variable(script, MapVar(2));
+    if (mapVar3 == -1) {
+        mapVar3 = 0xFF;
+    }
+    evt_set_variable(script, GameByte(268), mapVar3 & 0xFF);
+    evt_set_variable(script, GameByte(269), (mapVar3 >> 8) & 0xFF);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240264_D36554(Evt* script, s32 isInitialCall) {
+    s32 temp_a2;
+    s32 temp_s0;
+
+    temp_s0 = evt_get_variable(script, GameByte(264)) & 0xFF;
+    temp_a2 = evt_get_variable(script, GameByte(265)) & 0xFF;
+    if (temp_s0 != 0xFF) {
+        evt_set_variable(script, MapVar(0), (temp_a2 << 8) | temp_s0);
+    } else {
+        evt_set_variable(script, MapVar(0), -1);
+    }
+
+    temp_s0 = evt_get_variable(script, GameByte(266)) & 0xFF;
+    temp_a2 = evt_get_variable(script, GameByte(267)) & 0xFF;
+    if (temp_s0 != 0xFF) {
+        evt_set_variable(script, MapVar(1), (temp_a2 << 8) | temp_s0);
+    } else {
+        evt_set_variable(script, MapVar(1), -1);
+    }
+
+    temp_s0 = evt_get_variable(script, GameByte(268)) & 0xFF;
+    temp_a2 = evt_get_variable(script, GameByte(269)) & 0xFF;
+    if (temp_s0 != 0xFF) {
+        evt_set_variable(script, MapVar(2), (temp_a2 << 8) | temp_s0);
+    } else {
+        evt_set_variable(script, MapVar(2), -1);
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802403A0_D36690(Evt* script, s32 isInitialCall) {
     s32* array;
