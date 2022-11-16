@@ -45,10 +45,10 @@ ApiStatus func_802419A4_D1A184(Evt* script, s32 isInitialCall) {
     if (enemy->varTable[3] == 255) {
         s32 vt3 = enemy->varTable[3]; // todo required to match
 
-        npc->renderMode = 0xD;
+        npc->renderMode = RENDER_MODE_ALPHATEST;
         func_802DE780(npc->spriteInstanceID, 1, 0xF, (s32) &D_80242F90_D1B770, vt3, 0, vt3, 0);
     } else {
-        npc->renderMode = 0x16;
+        npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
         func_802DE780(npc->spriteInstanceID, 1, 0xF, (s32) &D_80242F90_D1B770, enemy->varTable[3], 0, enemy->varTable[3], 0);
     }
     return ApiStatus_BLOCK;
