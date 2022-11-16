@@ -698,7 +698,7 @@ EvtScript N(8024382C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, &Entity_Chest, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), 845, 0, 145, -35, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_DGB18_Chest_MysticalKey)
     EVT_CALL(AssignScript, EVT_PTR(N(8024382C)))
     EVT_RETURN

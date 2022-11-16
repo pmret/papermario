@@ -23,7 +23,7 @@ typedef struct {
     /* 0x5C */ u8* buf;
     /* 0x60 */ u16 bufSize;
     /* 0x62 */ char unk_62[0x2];
-    /* 0x64 */ s32* unk_64;
+    /* 0x64 */ u8* unk_64;
     /* 0x68 */ Vtx* vtxBufs[2];
     /* 0x70 */ Gfx* gfxBufs[2];
     /* 0x78 */ s32 unk_78;
@@ -1059,16 +1059,16 @@ void func_8013C048(FoldState* state) {
 }
 
 FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
-    Gfx* romStart = fold_groupOffsets[state->unk_1C[0][0]] + _24B7F0_ROM_START;
+    u8* romStart = fold_groupOffsets[state->unk_1C[0][0]] + _24B7F0_ROM_START;
     FoldGfxDescriptor* descriptor = &fold_groupDescriptors[state->arrayIdx];
 
     if (state->unk_64 != romStart) {
-        Gfx* romEnd;
+        u8* romEnd;
         s32 i;
 
         state->unk_64 = romStart;
 
-        dma_copy(state->unk_64, (s32)state->unk_64 + 0x10, descriptor);
+        dma_copy(state->unk_64, state->unk_64 + 0x10, descriptor);
 
         if (state->vtxBufs[0] != NULL) {
             fold_add_to_gfx_cache(state->vtxBufs[0], 1);
@@ -1085,7 +1085,7 @@ FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
         if (state->gfxBufs[1] != NULL) {
             // fold_add_to_gfx_cache(state->gfxBufs[1], 1);
             romEnd = state->gfxBufs[1]; // required to match
-            fold_add_to_gfx_cache(romEnd, 1);
+            fold_add_to_gfx_cache(state->gfxBufs[1], 1);
             state->gfxBufs[1] = NULL;
         }
         state->vtxBufs[0] = heap_malloc(descriptor->vtxCount * 0x10);
@@ -1094,7 +1094,7 @@ FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
         state->gfxBufs[1] = heap_malloc(descriptor->gfxCount * 8);
 
         romStart = (s32)descriptor->gfx + _24B7F0_ROM_START;
-        romEnd = &romStart[descriptor->gfxCount];
+        romEnd = &romStart[descriptor->gfxCount * sizeof(*descriptor->gfx)];
         dma_copy(romStart, romEnd, state->gfxBufs[0]);
         dma_copy(romStart, romEnd, state->gfxBufs[1]);
 

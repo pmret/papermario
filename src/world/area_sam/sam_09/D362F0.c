@@ -78,7 +78,7 @@ ApiStatus func_802403A0_D36690(Evt* script, s32 isInitialCall) {
     s32 len = 92;
     s32 i;
 
-    script->varTable[0] = array = heap_malloc(92 * sizeof(*array));
+    script->varTable[0] = (s32) array = heap_malloc(92 * sizeof(*array));
     for (i = 0; i < 91; i++) {
         array[i] = 128 + i;
     }
