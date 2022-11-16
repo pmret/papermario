@@ -1,8 +1,6 @@
 #include "end_00.h"
 #include "effects.h"
 
-extern EvtScript N(EVS_OffsetNpcScroll);
-
 Vec3f N(CrystalsFlyInPath)[] = {
     { 2050.0,   100.0,    0.0 },
     { 1900.0,    80.0,    0.0 },

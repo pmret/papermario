@@ -2,8 +2,27 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-void func_80240F20_D7DA70(Vtx* arg0, Vtx* arg1, Vtx* arg2, s32 arg3, s32 arg4);
-INCLUDE_ASM(s32, "world/area_pra/pra_29/D7CB70", func_80240F20_D7DA70);
+void func_80240F20_D7DA70(Vtx* arg0, Vtx* arg1, Vtx* arg2, s32 numVerticies, s32 arg4) {
+    s32 temp_t3;
+    s32 var_t2;
+    s32 temp_t5;
+    s32 i;
+
+    temp_t3 = 255 - arg4;
+    var_t2 = arg4;
+    if (var_t2 > 255) {
+        var_t2 = 255;
+    }
+    temp_t5 = 255 - var_t2;
+
+    for (i = 0; i < numVerticies; i++) {
+        arg2[i].v.ob[0] = ((arg0[i].v.ob[0] * temp_t3) + (arg1[i].v.ob[0] * arg4)) / 255;
+        arg2[i].v.ob[1] = ((arg0[i].v.ob[1] * temp_t3) + (arg1[i].v.ob[1] * arg4)) / 255;
+        arg2[i].v.ob[2] = ((arg0[i].v.ob[2] * temp_t3) + (arg1[i].v.ob[2] * arg4)) / 255;
+        arg2[i].v.tc[0] = ((arg0[i].v.tc[0] * temp_t5) + (arg1[i].v.tc[0] * var_t2)) / 255;
+        arg2[i].v.tc[1] = ((arg0[i].v.tc[1] * temp_t5) + (arg1[i].v.tc[1] * var_t2)) / 255;
+    }
+}
 
 void func_802410B0_D7DC00(s32 index) {
     Vtx* first1;

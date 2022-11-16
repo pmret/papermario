@@ -136,7 +136,7 @@ static s32 N(pad_868)[] = {
 #include "world/common/atomic/Chest.old.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), -225, 0, -245, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_DGB12_Chest_CastleKey1)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_RETURN
