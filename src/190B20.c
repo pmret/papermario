@@ -250,7 +250,7 @@ s32 btl_check_player_defeated(void) {
         return FALSE;
     }
     D_800DC4E4 = gBattleState;
-    D_800DC4D8 = gBattleState2;
+    D_800DC4D8 = gBattleSubState;
     btl_set_state(BATTLE_STATE_DEFEAT);
     return TRUE;
 }

@@ -1063,7 +1063,7 @@ dlabel D_800DC4D4
 dlabel D_800DC4D8
 .space 4
 
-dlabel gBattleState2
+dlabel gBattleSubState
 .space 4
 
 dlabel D_800DC4E0

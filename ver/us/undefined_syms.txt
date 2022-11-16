@@ -490,6 +490,8 @@ pra_02_D_80243CC0 = 0x80243CC0;
 gActionCommandStatus = 0x8029FBE0; // more bss for 16c8e0's segment
 D_80164000 = 0x80164000; // display contexts, part of bss3
 
+D_802AD673 = 0x802AD673; // remove when func_802A45D8 is decompiled with D_802AD670 instead of D_802AD673
+
 // battle/item BSS
 D_802A25C8 = 0x802A25C8;
 D_802A25E4 = 0x802A25E4;

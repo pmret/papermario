@@ -219,7 +219,7 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
 
     battleStatus->rushFlags = RUSH_FLAG_NONE;
     gBattleState = D_800DC4E4;
-    gBattleState2 = D_800DC4D8;
+    gBattleSubState = D_800DC4D8;
     battleStatus->flags1 |= BS_FLAGS1_8;
     battleStatus->flags2 &= ~BS_FLAGS2_8000000;
 
