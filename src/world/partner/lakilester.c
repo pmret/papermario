@@ -463,7 +463,7 @@ void func_802BDDD8_321928(Npc* npc) {
             npc->collisionRadius) != 0) {
 
             npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z +=(z - npc->pos.z) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
         }
     }
 

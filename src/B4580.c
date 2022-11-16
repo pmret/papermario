@@ -1031,7 +1031,7 @@ void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip
     }
 
     animator->animReadPos = (s16*) animPos;
-    animator->savedReadPos =(s16*) animPos;
+    animator->savedReadPos = (s16*) animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 

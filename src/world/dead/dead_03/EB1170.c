@@ -4,7 +4,6 @@ extern s32 func_80059AC8(s32, s32);
 extern s32 dead_03_ItemChoice_HasSelectedItem;
 extern s32 dead_03_ItemChoice_SelectedItemID;
 extern s32 dead_03_D_802442D0[];
-extern s32 dead_03_LetterDelivery_SavedNpcAnim;
 extern s32 D_800B8DEC;
 
 #include "world/common/todo/StashVars.inc.c"
