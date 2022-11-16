@@ -505,6 +505,7 @@ enum SoundIDs {
     SOUND_B                         = 0x0000000B,
     SOUND_D                         = 0x0000000D,
     SOUND_E                         = 0x0000000E,
+    SOUND_F                         = 0x0000000F,
     SOUND_10                        = 0x00000010,
     SOUND_11                        = 0x00000011,
     SOUND_14                        = 0x00000014,
@@ -4106,6 +4107,9 @@ enum BattleStates2 {
     BATTLE_STATE2_UNK_CB                = 0x000000CB,
     BATTLE_STATE2_UNK_CC                = 0x000000CC,
     BATTLE_STATE2_UNK_CD                = 0x000000CD,
+    BATTLE_STATE2_UNK_12C               = 0x0000012C,
+    BATTLE_STATE2_UNK_12D               = 0x0000012D,
+    BATTLE_STATE2_UNK_12E               = 0x0000012E,
 };
 
 enum DebuffTypes {
@@ -5105,6 +5109,7 @@ enum SimpleWindowUpdateId {
     WINDOW_UPDATE_OPAQUE            = 6,
     WINDOW_UPDATE_SHOW_TRANSPARENT  = 7,
     WINDOW_UPDATE_SHOW_DARKENED     = 8,
+    WINDOW_UPDATE_9                 = 9,
 };
 
 enum WindowGroupId {

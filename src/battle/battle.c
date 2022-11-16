@@ -280,7 +280,7 @@ void reset_battle_status(void) {
     gGameStatusPtr->demoFlags = 0;
     gBattleState = BATTLE_STATE_0;
     D_800DC4E0 = 1;
-    gBattleState2 = BATTLE_STATE2_UNK_0;
+    gBattleSubState = BATTLE_STATE2_UNK_0;
     D_800DC4D0 = 0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
@@ -324,7 +324,7 @@ void load_battle(s32 arg0) {
     set_game_mode(GAME_MODE_BATTLE);
     gBattleState = 0;
     D_800DC4D0 = 0;
-    gBattleState2 = 0;
+    gBattleSubState = 0;
 }
 
 void set_battle_stage(s32 arg0) {
