@@ -280,7 +280,7 @@ void reset_battle_status(void) {
     gGameStatusPtr->demoFlags = 0;
     gBattleState = BATTLE_STATE_0;
     D_800DC4E0 = 1;
-    gBattleSubState = BATTLE_STATE2_UNK_0;
+    gBattleSubState = BATTLE_SUB_STATE_UNK_0;
     D_800DC4D0 = 0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;

@@ -14,73 +14,6 @@
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/Twink.h"
 
-enum BattleSubStatesPartner {
-    BATTLE_SUB_STATE_PARTNER_NONE = 0,
-    // Main menu
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_1 = 2,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_2 = 3,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_3 = 4,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_4 = 5,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_5 = 6,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_6 = 7,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_7 = 8,
-    BATTLE_SUB_STATE_PARTNER_MAIN_MENU_8 = 9,
-    // Abilities
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_1 = 10,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_2 = 11,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_3 = 12,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_4 = 13,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_5 = 14,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_6 = 15,
-    BATTLE_SUB_STATE_PARTNER_ABILITIES_7 = 16,
-    // Unknown, referenced only in btl_state_draw_partner_menu
-    BATTLE_SUB_STATE_PARTNER_UNKNOWN_1 = 20,
-    BATTLE_SUB_STATE_PARTNER_UNKNOWN_2 = 21,
-    BATTLE_SUB_STATE_PARTNER_UNKNOWN_3 = 22,
-    BATTLE_SUB_STATE_PARTNER_UNKNOWN_4 = 23,
-    BATTLE_SUB_STATE_PARTNER_UNKNOWN_5 = 24,
-    // Change Partner
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_1 = 30,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_2 = 31,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_3 = 32,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_4 = 33,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_5 = 34,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_6 = 35,
-    BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_7 = 36,
-    // Items
-    BATTLE_SUB_STATE_PARTNER_ITEMS_1 = 40,
-    BATTLE_SUB_STATE_PARTNER_ITEMS_2 = 41,
-    BATTLE_SUB_STATE_PARTNER_ITEMS_3 = 42,
-    BATTLE_SUB_STATE_PARTNER_ITEMS_4 = 43,
-    BATTLE_SUB_STATE_PARTNER_ITEMS_5 = 44,
-    BATTLE_SUB_STATE_PARTNER_ITEMS_6 = 45,
-    // Switch partner (unused)
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_1 = 50,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_2 = 51,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_3 = 52,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_4 = 53,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_5 = 54,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_6 = 55,
-    BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_7 = 56,
-    // Focus
-    BATTLE_SUB_STATE_PARTNER_FOCUS_1 = 60,
-    BATTLE_SUB_STATE_PARTNER_FOCUS_2 = 61,
-    BATTLE_SUB_STATE_PARTNER_FOCUS_3 = 62,
-    BATTLE_SUB_STATE_PARTNER_FOCUS_4 = 63,
-    BATTLE_SUB_STATE_PARTNER_FOCUS_5 = 64,
-    BATTLE_SUB_STATE_PARTNER_FOCUS_6 = 65,
-    // Strategies
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_1 = 200,
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_2 = 201,
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_3 = 202,
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_4 = 203,
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_5 = 204,
-    BATTLE_SUB_STATE_PARTNER_STRATEGIES_6 = 205,
-    // initialize
-    BATTLE_SUB_STATE_PARTNER_12D = 301,
-    BATTLE_SUB_STATE_PARTNER_INIT_MENU = 302,
-};
-
 extern HudScript HES_YellowArrow;
 
 extern HudScript HES_MenuFlee;
@@ -3556,53 +3489,53 @@ INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 
 void btl_state_draw_player_menu(void) {
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_2:
-        case BATTLE_STATE2_UNK_3:
-        case BATTLE_STATE2_UNK_4:
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
-        case BATTLE_STATE2_PLAYER_DEFEATED:
-        case BATTLE_STATE2_UNK_B:
-        case BATTLE_STATE2_UNK_C:
-        case BATTLE_STATE2_UNK_D:
-        case BATTLE_STATE2_UNK_14:
-        case BATTLE_STATE2_UNK_15:
-        case BATTLE_STATE2_UNK_16:
-        case BATTLE_STATE2_UNK_17:
-        case BATTLE_STATE2_UNK_18:
-        case BATTLE_STATE2_UNK_1E:
-        case BATTLE_STATE2_UNK_1F:
-        case BATTLE_STATE2_UNK_20:
-        case BATTLE_STATE2_UNK_21:
-        case BATTLE_STATE2_UNK_22:
-        case BATTLE_STATE2_UNK_28:
-        case BATTLE_STATE2_UNK_29:
-        case BATTLE_STATE2_UNK_2A:
-        case BATTLE_STATE2_UNK_2B:
-        case BATTLE_STATE2_UNK_2C:
-        case BATTLE_STATE2_UNK_3D:
-        case BATTLE_STATE2_UNK_3E:
-        case BATTLE_STATE2_UNK_3F:
+        case BATTLE_SUB_STATE_UNK_2:
+        case BATTLE_SUB_STATE_UNK_3:
+        case BATTLE_SUB_STATE_UNK_4:
+        case BATTLE_SUB_STATE_BEGIN_LEVEL_UP:
+        case BATTLE_SUB_STATE_PLAYER_DEFEATED:
+        case BATTLE_SUB_STATE_UNK_B:
+        case BATTLE_SUB_STATE_UNK_C:
+        case BATTLE_SUB_STATE_UNK_D:
+        case BATTLE_SUB_STATE_UNK_14:
+        case BATTLE_SUB_STATE_UNK_15:
+        case BATTLE_SUB_STATE_UNK_16:
+        case BATTLE_SUB_STATE_UNK_17:
+        case BATTLE_SUB_STATE_UNK_18:
+        case BATTLE_SUB_STATE_UNK_1E:
+        case BATTLE_SUB_STATE_UNK_1F:
+        case BATTLE_SUB_STATE_UNK_20:
+        case BATTLE_SUB_STATE_UNK_21:
+        case BATTLE_SUB_STATE_UNK_22:
+        case BATTLE_SUB_STATE_UNK_28:
+        case BATTLE_SUB_STATE_UNK_29:
+        case BATTLE_SUB_STATE_UNK_2A:
+        case BATTLE_SUB_STATE_UNK_2B:
+        case BATTLE_SUB_STATE_UNK_2C:
+        case BATTLE_SUB_STATE_UNK_3D:
+        case BATTLE_SUB_STATE_UNK_3E:
+        case BATTLE_SUB_STATE_UNK_3F:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_40:
-        case BATTLE_STATE2_UNK_41:
-        case BATTLE_STATE2_UNK_C8:
-        case BATTLE_STATE2_UNK_C9:
+        case BATTLE_SUB_STATE_UNK_40:
+        case BATTLE_SUB_STATE_UNK_41:
+        case BATTLE_SUB_STATE_UNK_C8:
+        case BATTLE_SUB_STATE_UNK_C9:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CA:
+        case BATTLE_SUB_STATE_UNK_CA:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CB:
+        case BATTLE_SUB_STATE_UNK_CB:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CC:
+        case BATTLE_SUB_STATE_UNK_CC:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CD:
+        case BATTLE_SUB_STATE_UNK_CD:
             btl_draw_menu_wheel();
             break;
     }
@@ -3662,7 +3595,7 @@ void btl_state_update_partner_menu(void) {
         if (partnerActor->state.moveTime != 0) {
             partnerActor->state.moveTime--;
         } else {
-            gBattleSubState = BATTLE_STATE2_UNK_12E;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_12E;
             partnerActor->currentPos.x = partnerActor->state.goalPos.x;
             partnerActor->currentPos.z = partnerActor->state.goalPos.z;
             playerActor->currentPos.x = partnerActor->state.currentPos.x;
@@ -4486,22 +4419,22 @@ void btl_state_update_peach_menu(void) {
     s32 s0;
 
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_0:
+        case BATTLE_SUB_STATE_UNK_0:
             btl_cam_use_preset(BTL_CAM_PRESET_C);
             btl_cam_move(10);
             if (!(gBattleStatus.flags1 & BS_FLAGS1_100000)) {
-                gBattleSubState = BATTLE_STATE2_UNK_B;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_B;
                 break;
             }
             player->state.currentPos.x = player->homePos.x;
             player->state.currentPos.z = player->homePos.z;
-            gBattleSubState = BATTLE_STATE2_PLAYER_DEFEATED;
+            gBattleSubState = BATTLE_SUB_STATE_PLAYER_DEFEATED;
             player->state.goalPos.x = partner->homePos.x;
             player->state.goalPos.z = partner->homePos.z;
             player->state.moveTime = 4;
             player->state.angle = 0.0f;
             break;
-        case BATTLE_STATE2_PLAYER_DEFEATED:
+        case BATTLE_SUB_STATE_PLAYER_DEFEATED:
             if (player->state.moveTime != 0) {
                 player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
                 player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
@@ -4529,7 +4462,7 @@ void btl_state_update_peach_menu(void) {
             partner->homePos.x = partner->currentPos.x;
             partner->homePos.z = partner->currentPos.z;
             gBattleStatus.flags1 &= ~BS_FLAGS1_100000;
-        case BATTLE_STATE2_UNK_B:
+        case BATTLE_SUB_STATE_UNK_B:
             gBattleStatus.flags1 |= BS_FLAGS1_2;
             player->flags &= ~ACTOR_FLAG_4000000;
             player->flags |= ACTOR_FLAG_8000000;
@@ -4564,9 +4497,9 @@ void btl_state_update_peach_menu(void) {
 
             func_802A1000();
             D_802ACC60 = 8;
-            gBattleSubState = BATTLE_STATE2_UNK_1;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             break;
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             set_animation(ACTOR_PLAYER, 0, ANIM_Peach_C0009);
             temp_s0_2 = func_802A11B0();
             if (D_802ACC60 != 0) {
@@ -4579,10 +4512,10 @@ void btl_state_update_peach_menu(void) {
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
-                gBattleSubState = BATTLE_STATE2_UNK_2;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_2;
             }
             break;
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_UNK_2:
             if (func_802A11B0() != 0) {
                 battleStatus->unk_6C = 4;
                 battleStatus->unk_6E = 5;
@@ -4593,25 +4526,25 @@ void btl_state_update_peach_menu(void) {
                 btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
-        case BATTLE_STATE2_UNK_4:
+        case BATTLE_SUB_STATE_UNK_4:
             func_802A1050();
-            gBattleSubState = BATTLE_STATE2_UNK_1;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             btl_state_update_peach_menu();
             btl_state_update_peach_menu();
             break;
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+        case BATTLE_SUB_STATE_BEGIN_LEVEL_UP:
             func_802A10B8();
             break;
-        case BATTLE_STATE2_UNK_8:
+        case BATTLE_SUB_STATE_UNK_8:
             btl_show_variable_battle_message(0x50, 60, 0);
             D_802AD607 = 1;
-            gBattleSubState = BATTLE_STATE2_UNK_9;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_9;
             break;
-        case BATTLE_STATE2_UNK_9:
+        case BATTLE_SUB_STATE_UNK_9:
             if (!btl_is_popup_displayed()) {
                 D_802AD607 = 0;
                 D_802ACC60 = 0;
-                gBattleSubState = BATTLE_STATE2_UNK_1;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             }
             break;
     }
@@ -4619,25 +4552,25 @@ void btl_state_update_peach_menu(void) {
 
 void btl_state_draw_peach_menu(void) {
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_UNK_2:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_3:
+        case BATTLE_SUB_STATE_UNK_3:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_4:
+        case BATTLE_SUB_STATE_UNK_4:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+        case BATTLE_SUB_STATE_BEGIN_LEVEL_UP:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
-        case BATTLE_STATE2_UNK_7:
-        case BATTLE_STATE2_UNK_8:
-        case BATTLE_STATE2_UNK_9:
+        case BATTLE_SUB_STATE_LEVEL_UP_SHOW_HUD:
+        case BATTLE_SUB_STATE_UNK_7:
+        case BATTLE_SUB_STATE_UNK_8:
+        case BATTLE_SUB_STATE_UNK_9:
             break;
     }
 }
@@ -4660,7 +4593,7 @@ void btl_state_update_twink_menu(void) {
     s32 s0;
 
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_0:
+        case BATTLE_SUB_STATE_UNK_0:
             cond = FALSE;
             if (player->debuff == STATUS_SLEEP) {
                 cond = TRUE;
@@ -4699,14 +4632,14 @@ void btl_state_update_twink_menu(void) {
                 player->state.currentPos.z = player->homePos.z;
                 player->state.goalPos.x = partner->homePos.x;
                 player->state.goalPos.z = partner->homePos.z;
-                gBattleSubState = BATTLE_STATE2_PLAYER_DEFEATED;
+                gBattleSubState = BATTLE_SUB_STATE_PLAYER_DEFEATED;
                 player->state.moveTime = 4;
                 player->state.angle = 0.0f;
                 break;
             }
-            gBattleSubState = BATTLE_STATE2_UNK_B;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_B;
             break;
-        case BATTLE_STATE2_PLAYER_DEFEATED:
+        case BATTLE_SUB_STATE_PLAYER_DEFEATED:
             if (player->state.moveTime != 0) {
                 player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
                 player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
@@ -4731,7 +4664,7 @@ void btl_state_update_twink_menu(void) {
             partner->homePos.x = partner->currentPos.x;
             partner->homePos.z = partner->currentPos.z;
             gBattleStatus.flags1 |= BS_FLAGS1_100000;
-        case BATTLE_STATE2_UNK_B:
+        case BATTLE_SUB_STATE_UNK_B:
             gBattleStatus.flags1 |= BS_FLAGS1_2;
             player->flags &= ~ACTOR_FLAG_4000000;
             player->flags |= ACTOR_FLAG_8000000;
@@ -4767,9 +4700,9 @@ void btl_state_update_twink_menu(void) {
 
             func_802A1000();
             D_802ACC60 = 8;
-            gBattleSubState = BATTLE_STATE2_UNK_1;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             break;
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             set_animation(ACTOR_PARTNER, 0, ANIM_Twink_Idle);
             temp_s0_2 = func_802A11B0();
             if (D_802ACC60 != 0) {
@@ -4782,10 +4715,10 @@ void btl_state_update_twink_menu(void) {
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
-                gBattleSubState = BATTLE_STATE2_UNK_2;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_2;
             }
             break;
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_UNK_2:
             if (func_802A11B0() != 0) {
                 battleStatus->unk_6C = 4;
                 battleStatus->unk_6E = 5;
@@ -4796,25 +4729,25 @@ void btl_state_update_twink_menu(void) {
                 btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
-        case BATTLE_STATE2_UNK_4:
+        case BATTLE_SUB_STATE_UNK_4:
             func_802A1050();
-            gBattleSubState = BATTLE_STATE2_UNK_1;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             btl_state_update_twink_menu();
             btl_state_update_twink_menu();
             break;
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+        case BATTLE_SUB_STATE_BEGIN_LEVEL_UP:
             func_802A10B8();
             break;
-        case BATTLE_STATE2_UNK_8:
+        case BATTLE_SUB_STATE_UNK_8:
             btl_show_variable_battle_message(0x50, 60, 0);
             D_802AD607 = 1;
-            gBattleSubState = BATTLE_STATE2_UNK_9;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_9;
             break;
-        case BATTLE_STATE2_UNK_9:
+        case BATTLE_SUB_STATE_UNK_9:
             if (!btl_is_popup_displayed()) {
                 D_802AD607 = 0;
                 D_802ACC60 = 0;
-                gBattleSubState = BATTLE_STATE2_UNK_1;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             }
             break;
     }
@@ -4822,25 +4755,25 @@ void btl_state_update_twink_menu(void) {
 
 void btl_state_draw_twink_menu(void) {
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_UNK_2:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_3:
+        case BATTLE_SUB_STATE_UNK_3:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_4:
+        case BATTLE_SUB_STATE_UNK_4:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
+        case BATTLE_SUB_STATE_BEGIN_LEVEL_UP:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
-        case BATTLE_STATE2_UNK_7:
-        case BATTLE_STATE2_UNK_8:
-        case BATTLE_STATE2_UNK_9:
+        case BATTLE_SUB_STATE_LEVEL_UP_SHOW_HUD:
+        case BATTLE_SUB_STATE_UNK_7:
+        case BATTLE_SUB_STATE_UNK_8:
+        case BATTLE_SUB_STATE_UNK_9:
             break;
     }
 }
@@ -4866,7 +4799,7 @@ void btl_state_update_select_target(void) {
     actor->flags &= ~ACTOR_FLAG_8000000;
     targetIndexList = actor->targetIndexList;
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_0:
+        case BATTLE_SUB_STATE_UNK_0:
             D_802ACC64 = 0xFF;
             D_802ACC68 = -100;
             gBattleStatus.flags1 &= ~BS_FLAGS1_2;
@@ -4940,9 +4873,9 @@ void btl_state_update_select_target(void) {
                 hud_element_set_render_depth(id, 0);
                 hud_element_set_render_pos(id, 0, -100);
             }
-            gBattleSubState = BATTLE_STATE2_UNK_1;
+            gBattleSubState = BATTLE_SUB_STATE_UNK_1;
             break;
-        case BATTLE_STATE2_UNK_1:
+        case BATTLE_SUB_STATE_UNK_1:
             if (D_802ACC68 < 0) {
                 D_802ACC68 += 20;
                 if (D_802ACC68 > 0) {
@@ -4952,7 +4885,7 @@ void btl_state_update_select_target(void) {
 
             if (battleStatus->currentButtonsPressed & BUTTON_B) {
                 sfx_play_sound(SOUND_MENU_BACK);
-                gBattleSubState = BATTLE_STATE2_PLAYER_DEFEATED;
+                gBattleSubState = BATTLE_SUB_STATE_PLAYER_DEFEATED;
                 break;
             }
 
@@ -4960,7 +4893,7 @@ void btl_state_update_select_target(void) {
                 sfx_play_sound(SOUND_MENU_NEXT);
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
-                gBattleSubState = BATTLE_STATE2_UNK_2;
+                gBattleSubState = BATTLE_SUB_STATE_UNK_2;
                 break;
             }
 
@@ -5002,7 +4935,7 @@ void btl_state_update_select_target(void) {
                 actor->selectedTargetIndex = selectedTargetIndex;
             }
             break;
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_UNK_2:
             gBattleStatus.flags1 &= ~BS_FLAGS1_2;
             target = &actor->targetData[targetIndexList[actor->selectedTargetIndex]];
             actor->targetActorID = target->actorID;
@@ -5029,7 +4962,7 @@ void btl_state_update_select_target(void) {
                 btl_set_state(BATTLE_STATE_PARTNER_MOVE);
             }
             break;
-        case BATTLE_STATE2_PLAYER_DEFEATED:
+        case BATTLE_SUB_STATE_PLAYER_DEFEATED:
             for (i = 0; i < targetListLength; i++) {
                 hud_element_free(D_802ACC70[i]);
             }
