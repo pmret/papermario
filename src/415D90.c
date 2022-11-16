@@ -33,6 +33,12 @@ enum BattleSubStatesPartner {
     BATTLE_SUB_STATE_PARTNER_ABILITIES_5 = 14,
     BATTLE_SUB_STATE_PARTNER_ABILITIES_6 = 15,
     BATTLE_SUB_STATE_PARTNER_ABILITIES_7 = 16,
+    // Unknown, referenced only in btl_state_draw_partner_menu
+    BATTLE_SUB_STATE_PARTNER_UNKNOWN_1 = 20,
+    BATTLE_SUB_STATE_PARTNER_UNKNOWN_2 = 21,
+    BATTLE_SUB_STATE_PARTNER_UNKNOWN_3 = 22,
+    BATTLE_SUB_STATE_PARTNER_UNKNOWN_4 = 23,
+    BATTLE_SUB_STATE_PARTNER_UNKNOWN_5 = 24,
     // Change Partner
     BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_1 = 30,
     BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_2 = 31,
@@ -4412,56 +4418,56 @@ void btl_state_update_partner_menu(void) {
 
 void btl_state_draw_partner_menu(void) {
     switch (gBattleSubState) {
-        case BATTLE_STATE2_UNK_2:
+        case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_1:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_3:
-        case BATTLE_STATE2_UNK_4:
-        case BATTLE_STATE2_BEGIN_LEVEL_UP:
-        case BATTLE_STATE2_LEVEL_UP_SHOW_HUD:
-        case BATTLE_STATE2_PLAYER_DEFEATED:
-        case BATTLE_STATE2_UNK_B:
-        case BATTLE_STATE2_UNK_C:
-        case BATTLE_STATE2_UNK_D:
-        case BATTLE_STATE2_UNK_E:
-        case BATTLE_STATE2_UNK_14:
-        case BATTLE_STATE2_UNK_15:
-        case BATTLE_STATE2_UNK_16:
-        case BATTLE_STATE2_UNK_17:
-        case BATTLE_STATE2_UNK_18:
-        case BATTLE_STATE2_UNK_1E:
-        case BATTLE_STATE2_UNK_1F:
-        case BATTLE_STATE2_UNK_20:
-        case BATTLE_STATE2_UNK_21:
-        case BATTLE_STATE2_UNK_22:
-        case BATTLE_STATE2_UNK_28:
-        case BATTLE_STATE2_UNK_29:
-        case BATTLE_STATE2_UNK_2A:
-        case BATTLE_STATE2_UNK_2B:
-        case BATTLE_STATE2_UNK_2C:
-        case BATTLE_STATE2_UNK_33:
-        case BATTLE_STATE2_UNK_34:
-        case BATTLE_STATE2_UNK_35:
-        case BATTLE_STATE2_UNK_36:
-        case BATTLE_STATE2_UNK_3D:
-        case BATTLE_STATE2_UNK_3E:
-        case BATTLE_STATE2_UNK_3F:
-        case BATTLE_STATE2_UNK_40:
-        case BATTLE_STATE2_UNK_41:
-        case BATTLE_STATE2_UNK_C8:
-        case BATTLE_STATE2_UNK_C9:
+        case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_2:
+        case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_3:
+        case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_4:
+        case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_5:
+        case BATTLE_SUB_STATE_PARTNER_ABILITIES_1:
+        case BATTLE_SUB_STATE_PARTNER_ABILITIES_2:
+        case BATTLE_SUB_STATE_PARTNER_ABILITIES_3:
+        case BATTLE_SUB_STATE_PARTNER_ABILITIES_4:
+        case BATTLE_SUB_STATE_PARTNER_ABILITIES_5:
+        case BATTLE_SUB_STATE_PARTNER_UNKNOWN_1:
+        case BATTLE_SUB_STATE_PARTNER_UNKNOWN_2:
+        case BATTLE_SUB_STATE_PARTNER_UNKNOWN_3:
+        case BATTLE_SUB_STATE_PARTNER_UNKNOWN_4:
+        case BATTLE_SUB_STATE_PARTNER_UNKNOWN_5:
+        case BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_1:
+        case BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_2:
+        case BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_3:
+        case BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_4:
+        case BATTLE_SUB_STATE_PARTNER_CHANGE_PARTNER_5:
+        case BATTLE_SUB_STATE_PARTNER_ITEMS_1:
+        case BATTLE_SUB_STATE_PARTNER_ITEMS_2:
+        case BATTLE_SUB_STATE_PARTNER_ITEMS_3:
+        case BATTLE_SUB_STATE_PARTNER_ITEMS_4:
+        case BATTLE_SUB_STATE_PARTNER_ITEMS_5:
+        case BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_2:
+        case BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_3:
+        case BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_4:
+        case BATTLE_SUB_STATE_PARTNER_UNUSED_CHANGE_PARTNER_5:
+        case BATTLE_SUB_STATE_PARTNER_FOCUS_2:
+        case BATTLE_SUB_STATE_PARTNER_FOCUS_3:
+        case BATTLE_SUB_STATE_PARTNER_FOCUS_4:
+        case BATTLE_SUB_STATE_PARTNER_FOCUS_5:
+        case BATTLE_SUB_STATE_PARTNER_FOCUS_6:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_1:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_2:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CA:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_3:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CB:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_4:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CC:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_5:
             btl_draw_menu_wheel();
             break;
-        case BATTLE_STATE2_UNK_CD:
+        case BATTLE_SUB_STATE_PARTNER_STRATEGIES_6:
             btl_draw_menu_wheel();
             break;
     }
