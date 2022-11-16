@@ -21,7 +21,7 @@ extern BattleStatus gBattleStatus;
 extern s32 D_800DC4D0;
 extern s32 D_800DC4D4;
 extern s32 D_800DC4D8;
-extern s32 gBattleState2;
+extern s32 gBattleSubState;
 extern s32 D_800DC4E4;
 extern s32 D_800DC4E8;
 extern u8 gCurrentBattleSection; // in the middle of the previous var
