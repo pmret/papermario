@@ -804,67 +804,61 @@ s32 func_802DDA84(void) {
 
 INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 arg2);
 
-#ifdef NON_EQUIVALENT
 s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** paletteList, Matrix4f mtx) {
-    PlayerCurrentAnimInfo* animInfo;
-    SpriteComponent** compList;
-    SpriteAnimComponent** animList;
-    SpriteRasterCacheEntry** rasterList;
-    s32 spriteIndex;
-    s32 animIndex;
-    s32 spriteAnimIndex;
-    s32 animID;
-    s32 camRelativeYaw;
-    s32 alpha;
+    s32 i = spriteInstanceID & 0xFF;
+    s32 animID = spr_playerCurrentAnimInfo[i].animID;
+    SpriteRasterCacheEntry** rasters;
+    PAL_PTR* palettes;
+    SpriteAnimComponent** animComponents;
+    SpriteComponent** components;
     f32 zscale;
-    u32 animIdx;
-    PAL_PTR* drawPalettes;
-    SpriteAnimData* animData;
+    u32 alpha;
+    u32* spriteData;
+    s32 playerId;
+    s32 playerIdBackFacing;
 
-    camRelativeYaw = yaw;
-    spriteAnimIndex = spriteInstanceID & 0xFF;
-
-    animID = spr_playerCurrentAnimInfo[spriteAnimIndex].animID;
-
-    if (animID == -1) {
-        return 0;
+    if (animID == ANIM_LIST_END) {
+        return FALSE;
     }
 
-    spriteIndex = ((animID >> 0x10) & 0xFF) - 1;
-    D_802DF57C = spriteIndex;
-    animData = spr_playerSprites[spriteIndex];
-    if (animData == NULL) {
-        return 0;
+    D_802DF57C = playerId = ((animID >> 0x10) & 0xFF) - 1;
+    spriteData = (u32*)spr_playerSprites[playerId];
+    if (spriteData == NULL) {
+        return FALSE;
     }
 
-    animIdx = animID & 0xFF;
-    animIdx++;
+    // TODO: fake match or not?
+    rasters = (SpriteRasterCacheEntry**)*spriteData++;
+    palettes = (PAL_PTR*)*spriteData++;
+    spriteData++;
+    spriteData++;
+    animComponents = (SpriteAnimComponent**)spriteData[animID & 0xFF];
 
-    rasterList = animData->rastersOffset;
-    animList = animData->animListStart[animIdx];
-    drawPalettes = animData->palettesOffset;
     if (animID & SPRITE_ID_BACK_FACING) {
-        switch (spriteIndex) {
+        switch (playerId) {
             case 0:
             case 5:
             case 9:
-                spriteIndex++;
-                D_802DF57C = spriteIndex;
-                rasterList = spr_playerSprites[D_802DF57C]->rastersOffset;
+                playerIdBackFacing = playerId + 1;
+                // TODO find better match
+                rasters = (SpriteRasterCacheEntry**)spr_playerSprites[playerIdBackFacing];
+                D_802DF57C = playerIdBackFacing;
+                rasters = (SpriteRasterCacheEntry**)*rasters;
                 break;
         }
     }
 
     if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
-        camRelativeYaw += (s32) -gCameras[gCurrentCamID].currentYaw;
-        if (camRelativeYaw > 360) {
-            camRelativeYaw -= 360;
+        yaw += (s32)-gCameras[gCurrentCamID].currentYaw;
+        if (yaw > 360) {
+            yaw -= 360;
         }
-        if (camRelativeYaw < -360) {
-            camRelativeYaw += 360;
+        if (yaw < -360) {
+            yaw += 360;
         }
     }
-    if ((camRelativeYaw - 91) < 180U || (camRelativeYaw + 270) < 180U) {
+
+    if (yaw > 90 && yaw <= 270 || yaw >= -270 && yaw < -90) {
         zscale = -1.5f;
     } else {
         zscale = 1.5f;
@@ -875,35 +869,33 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
     }
 
     D_802DFEA0[0] = 0;
-    D_802DFEA0[1] = camRelativeYaw;
+    D_802DFEA0[1] = yaw;
     D_802DFEA0[2] = 0;
 
+
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
-        if (alphaIn == 0) {
-            return 0;
-        }
         alpha = alphaIn & 0xFF;
+        if (alphaIn == 0) {
+            return FALSE;
+        }
     } else {
         alpha = 255;
     }
 
-    compList = spr_playerCurrentAnimInfo[spriteAnimIndex].componentList;
+    components = spr_playerCurrentAnimInfo[i].componentList;
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_PALETTES) {
-        drawPalettes = paletteList;
+        palettes = paletteList;
     }
-    while (*compList != PTR_LIST_END) {
-        SpriteComponent* comp = *compList;
-        spr_draw_component(alpha | 0x08000000, comp, *animList, rasterList, drawPalettes, zscale, mtx);
-        compList++;
-        if (*animList != PTR_LIST_END) {
-            animList++;
+
+    while (*components != PTR_LIST_END) {
+        spr_draw_component(alpha | 0x08000000, *components++, *animComponents, rasters, palettes, zscale, mtx);
+        if (*animComponents != PTR_LIST_END) {
+            animComponents++;
         }
     }
-    return 1;
+
+    return TRUE;
 }
-#else
-INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-#endif
 
 s32 func_802DDEC4(s32 arg0) {
     return spr_playerCurrentAnimInfo[arg0].notifyValue;
@@ -1014,7 +1006,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
 // animList being odd
 #ifdef NON_MATCHING
 s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
-    SpriteAnimData* animData;
+    u32* spriteData;
     SpriteComponent** compList;
     SpriteAnimComponent** animList;
     SpriteRasterCacheEntry** rasterList;
@@ -1023,19 +1015,23 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 i = spriteInstanceID & 0xFF;
     s32 animIndex = animID & 0xFF;
 
-    animData = SpriteInstances[i].spriteData;
     compList = SpriteInstances[i].componentList;
-    animList = &animData->animListStart[animIndex];
-    rasterList = animData->rastersOffset;
+    spriteData = SpriteInstances[i].spriteData;
+
+    rasterList = *spriteData++;
+    spriteData++;
+    spriteData++;
+    spriteData++;
+    animList = spriteData[animIndex];
 
     palID = (animID >> 8) & 0xFF;
     spr_set_anim_timescale(timeScale);
-    if ((spriteInstanceID < 0) || ((SpriteInstances[i].currentAnimID & 0xFF) != animIndex)) {
+    if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) || ((SpriteInstances[i].currentAnimID & 0xFF) != animIndex)) {
         spr_init_anim_state(compList, animList);
         SpriteInstances[i].currentAnimID = (palID << 8) | animIndex;
         SpriteInstances[i].notifyValue = 0;
     }
-    if (!(spriteInstanceID & 0x40000000)) {
+    if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
         SpriteInstances[i].notifyValue = spr_component_update(SpriteInstances[i].notifyValue,
             compList, animList, rasterList, palID);
     }
@@ -1045,7 +1041,73 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
 INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 #endif
 
-INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
+s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx) {
+    s32 i = spriteInstanceID & 0xFF;
+    s32 animID = SpriteInstances[i].currentAnimID;
+    SpriteRasterCacheEntry** rasters;
+    PAL_PTR* palettes;
+    SpriteAnimComponent** animComponents;
+    SpriteComponent** components;
+    f32 zscale;
+    u32 alpha;
+    u32* spriteData;
+
+    if (animID == ANIM_LIST_END) {
+        return FALSE;
+    }
+
+    spriteData = (u32*)SpriteInstances[i].spriteData;
+
+    // TODO: fake match or not?
+    rasters = (SpriteRasterCacheEntry**)*spriteData++;
+    palettes = (PAL_PTR*)*spriteData++;
+    spriteData++;
+    spriteData++;
+    animComponents = (SpriteAnimComponent**)spriteData[animID & 0xFF];
+
+    D_802DFEA0[0] = 0;
+    D_802DFEA0[1] = yaw;
+    D_802DFEA0[2] = 0;
+
+    if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
+        yaw += gCameras[gCurrentCamID].currentYaw;
+        if (yaw > 360) {
+            yaw -= 360;
+        }
+        if (yaw < -360) {
+            yaw += 360;
+        }
+    }
+
+    if (yaw > 90 && yaw <= 270 || yaw >= -270 && yaw < -90) {
+        zscale = -1.5f;
+    } else {
+        zscale = 1.5f;
+    }
+
+    if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
+        alpha = arg2 & 0xFF;
+        if (arg2 == 0) {
+            return FALSE;
+        }
+    } else {
+        alpha = 255;
+    }
+
+    components = SpriteInstances[i].componentList;
+    if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_PALETTES) {
+        palettes = paletteList;
+    }
+
+    while (*components != PTR_LIST_END) {
+        spr_draw_component(alpha, *components++, *animComponents, rasters, palettes, zscale, mtx);
+        if (*animComponents != PTR_LIST_END) {
+            animComponents++;
+        }
+    }
+
+    return TRUE;
+}
 
 s32 spr_get_notify_value(s32 spriteIndex) {
     return SpriteInstances[spriteIndex].notifyValue;
@@ -1151,7 +1213,7 @@ s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* out
         return 0xFF;
     }
 
-    animList = sprite->spriteData[animID].animListStart;
+    animList = sprite->spriteData->animListStart[animID];
     compList = sprite->componentList;
     i = 0;
     while (*compList != PTR_LIST_END) {
