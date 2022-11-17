@@ -814,15 +814,15 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
     f32 zscale;
     u32 alpha;
     u32* spriteData;
-    s32 playerId;
-    s32 playerIdBackFacing;
+    s32 spriteId;
+    s32 spriteIdBackFacing;
 
     if (animID == ANIM_LIST_END) {
         return FALSE;
     }
 
-    D_802DF57C = playerId = ((animID >> 0x10) & 0xFF) - 1;
-    spriteData = (u32*)spr_playerSprites[playerId];
+    D_802DF57C = spriteId = ((animID >> 0x10) & 0xFF) - 1;
+    spriteData = (u32*)spr_playerSprites[spriteId];
     if (spriteData == NULL) {
         return FALSE;
     }
@@ -835,14 +835,14 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** pal
     animComponents = (SpriteAnimComponent**)spriteData[animID & 0xFF];
 
     if (animID & SPRITE_ID_BACK_FACING) {
-        switch (playerId) {
+        switch (spriteId) {
             case 0:
             case 5:
             case 9:
-                playerIdBackFacing = playerId + 1;
+                spriteIdBackFacing = spriteId + 1;
                 // TODO find better match
-                rasters = (SpriteRasterCacheEntry**)spr_playerSprites[playerIdBackFacing];
-                D_802DF57C = playerIdBackFacing;
+                rasters = (SpriteRasterCacheEntry**)spr_playerSprites[spriteIdBackFacing];
+                D_802DF57C = spriteIdBackFacing;
                 rasters = (SpriteRasterCacheEntry**)*rasters;
                 break;
         }
