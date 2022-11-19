@@ -4179,6 +4179,17 @@ enum BattleSubStatesPartner {
     BATTLE_SUB_STATE_PARTNER_INIT_MENU = 302,
 };
 
+enum BattleSubStatesState5 {
+    BATTLE_SUB_STATE_5_0 = 0,
+    BATTLE_SUB_STATE_5_1 = 1,
+    BATTLE_SUB_STATE_5_2 = 2,
+    BATTLE_SUB_STATE_5_3 = 3,
+    BATTLE_SUB_STATE_5_4 = 4,
+    BATTLE_SUB_STATE_5_5 = 5,
+    BATTLE_SUB_STATE_5_6 = 6,
+    BATTLE_SUB_STATE_5_7 = 7,
+};
+
 enum DebuffTypes {
     DEBUFF_TYPE_SLEEP                 = 0x00001000,
     DEBUFF_TYPE_STATIC                = 0x00002000,

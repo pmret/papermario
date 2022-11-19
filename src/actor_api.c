@@ -2380,11 +2380,10 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 s32 func_8026E558(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 actorID;
-    s32 temp_s2;
+    SelectableTarget* target;
+    s32 mode;
     s32 outVar;
     Actor* actor;
     f32 x, y, z;
@@ -2394,15 +2393,15 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
     s32 layer;
     s32 i;
 
-    actorID = evt_get_variable(script, *args++);
-    temp_s2 = evt_get_variable(script, *args++);
+    i = evt_get_variable(script, *args++);
+    mode = evt_get_variable(script, *args++);
     outVar = *args++;
 
-    if (actorID == ACTOR_SELF) {
-        actorID = script->owner1.actorID;
+    if (i == ACTOR_SELF) {
+        i = script->owner1.actorID;
     }
 
-    actor = get_actor(actorID);
+    actor = get_actor(i);
     x = actor->currentPos.x;
     y = actor->currentPos.y;
     z = actor->currentPos.z;
@@ -2435,10 +2434,10 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
         layer = 1;
     }
 
-    switch (temp_s2) {
+    switch (mode) {
         case 0:
             for (i = 0; i < actor->targetListLength; i++) {
-                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+                target = &actor->targetData[actor->targetIndexList[i]];
 
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
@@ -2449,7 +2448,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             for (i = 0; i < actor->targetListLength; i++) {
-                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+                target = &actor->targetData[actor->targetIndexList[i]];
 
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
@@ -2460,7 +2459,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
             break;
         case -1:
             for (i = 0; i < actor->targetListLength; i++) {
-                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+                target = &actor->targetData[actor->targetIndexList[i]];
 
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
@@ -2473,9 +2472,6 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "actor_api", func_8026E558);
-#endif
 
 ApiStatus GetTargetListLength(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -1166,8 +1166,6 @@ void btl_state_update_celebration(void) {
     D_8029FB84 += 1;
 }
 
-// d1, d2, d3 hell
-#ifdef NON_MATCHING
 void btl_draw_upgrade_windows(s32 arg0) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 x;
@@ -1177,25 +1175,31 @@ void btl_draw_upgrade_windows(s32 arg0) {
     s32 d3;
 
     switch (arg0) {
+        case 0:
+            d1 = 100;
+            d2 = 100;
+            d3 = 100;
+            break;
         case 1:
-            if (battleStatus->currentSubmenu != 0) {
-                if (battleStatus->currentSubmenu == arg0) {
-                    d1 = 0;
-                    d2 = 0;
-                    d3 = 100;
-                } else {
+            switch (battleStatus->currentSubmenu) {
+                case 0:
                     d1 = 0;
                     d2 = 100;
+                    d3 = 100;
+                    break;
+                case 1:
+                    d1 = 100;
+                    d2 = 0;
+                    d3 = 100;
+                    break;
+                default:
+                    d1 = 100;
+                    d2 = 100;
                     d3 = 0;
-                }
-            } else {
-                d1 = 0;
-                d2 = 100;
-                d3 = 100;
+                    break;
             }
             break;
         default:
-        case 0:
             d1 = 100;
             d2 = 100;
             d3 = 100;
@@ -1212,9 +1216,6 @@ void btl_draw_upgrade_windows(s32 arg0) {
     draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 }
-#else
-INCLUDE_ASM(s32, "18C790", btl_draw_upgrade_windows);
-#endif
 
 void btl_state_draw_celebration(void) {
     BattleStatus* battleStatus = &gBattleStatus;
