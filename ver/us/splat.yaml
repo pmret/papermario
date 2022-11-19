@@ -15912,6 +15912,11 @@ segments:
     subsegments:
     - [0xEFEB00, c]
     - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
+
+#############
+### Audio ###
+#############
+  - [0xF00000, bin, SBN]
   - [0xF007C0, bin, bgm/Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, bgm/Hey_You_03]
   - [0xF03740, bin, bgm/The_Goomba_King_s_Decree_07]
@@ -16056,52 +16061,31 @@ segments:
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # more audio stuff
+  - [0x19425C0, bin] # INIT file
+  - [0x1942C40, bin] # SBN end position
 
+###############
+### Sprites ###
+###############
   - [0x1943000, bin] # sprite data build metadata
   - [0x1943020, bin] # Player sprite table
   - [0x1943BA0, bin] # Mario world sprites
   - [0x199A8C0, bin] # Retro sprites
   - [0x199BB00, bin] # Princess Peach sprites
   - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
-  - start: 0x19E09A8
-    type: Yay0
-    align: 8
-  - start: 0x19E1390
-    type: Yay0
-    align: 8
-  - start: 0x19E1888
-    type: Yay0
-    align: 8
-  - start: 0x19E2330
-    type: Yay0
-    align: 8
-  - start: 0x19E2DE0
-    type: Yay0
-    align: 8
-  - start: 0x19E3208
-    type: Yay0
-    align: 8
-  - start: 0x19E3BA8
-    type: Yay0
-    align: 8
-  - start: 0x19E3FD8
-    type: Yay0
-    align: 8
-  - start: 0x19E4828
-    type: Yay0
-    align: 8
-  - start: 0x19E4BE0
-    type: Yay0
-    align: 8
-  - start: 0x19E5758
-    type: Yay0
-    align: 8
-  - start: 0x19E5950
-    type: Yay0
-    align: 8
-  - start: 0x19E62A0
-    type: Yay0
-    align: 8
+  - { start: 0x19E09A8, type: Yay0, align: 8 }
+  - { start: 0x19E1390, type: Yay0, align: 8 }
+  - { start: 0x19E1888, type: Yay0, align: 8 }
+  - { start: 0x19E2330, type: Yay0, align: 8 }
+  - { start: 0x19E2DE0, type: Yay0, align: 8 }
+  - { start: 0x19E3208, type: Yay0, align: 8 }
+  - { start: 0x19E3BA8, type: Yay0, align: 8 }
+  - { start: 0x19E3FD8, type: Yay0, align: 8 }
+  - { start: 0x19E4828, type: Yay0, align: 8 }
+  - { start: 0x19E4BE0, type: Yay0, align: 8 }
+  - { start: 0x19E5758, type: Yay0, align: 8 }
+  - { start: 0x19E5950, type: Yay0, align: 8 }
+  - { start: 0x19E62A0, type: Yay0, align: 8 }
   - start: 0x19E67B8
     align: 8
     type: pm_npc_sprites
