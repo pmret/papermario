@@ -3310,10 +3310,10 @@ enum PlayerStatusFlags {
     PS_FLAGS_SLIDING                          = 0x00000010,
     /* Paused either via the start menu, or through another menu that causes a pause (like the item menu) */
     PS_FLAGS_PAUSED                           = 0x00000020,
-    PS_FLAGS_CANT_CHANGE_PARTNER              = 0x00000040,
-    PS_FLAGS_CANT_USE_PARTNER                 = 0x00000080,
+    PS_FLAGS_PARTNER_CHANGE_DISABLED          = 0x00000040,
+    PS_FLAGS_PARTNER_USAGE_DISABLED           = 0x00000080,
     /* Prevents opening menus that would require a pause (start menu, item menu, etc) */
-    PS_FLAGS_CANT_PAUSE                       = 0x00000100,
+    PS_FLAGS_PAUSING_DISABLED                 = 0x00000100,
     /* Doing either a spin jump or a tornado jump */
     PS_FLAGS_SPECIAL_JUMP                     = 0x00000200,
     /* Landing from either a spin jump or a tornado jump */

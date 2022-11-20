@@ -188,7 +188,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            playerStatus->flags |= PS_FLAGS_CANT_PAUSE;
+            playerStatus->flags |= PS_FLAGS_PAUSING_DISABLED;
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             D_802BE0C4 = TRUE;
@@ -201,7 +201,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
                 enable_player_input();
                 D_802BE0C4 = FALSE;
-                playerStatus->flags &= ~PS_FLAGS_CANT_PAUSE;
+                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1]--;
@@ -211,7 +211,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
                     }
-                    playerStatus->flags &= ~PS_FLAGS_CANT_PAUSE;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
                     return ApiStatus_DONE2;
                 }
                 script->functionTemp[0] = 20;
@@ -222,7 +222,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 20:
             if (playerStatus->flags & PS_FLAGS_BURNING) {
-                playerStatus->flags &= ~PS_FLAGS_CANT_PAUSE;
+                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
                 if (D_802BE0C4) {
                     enable_player_input();
                     D_802BE0C4 = FALSE;
@@ -284,7 +284,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     playerStatus->alpha1 = 128;
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->functionTemp[0]++;
-                    playerStatus->flags &= ~PS_FLAGS_CANT_PAUSE;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
                     bow->flags |= NPC_FLAG_40;
                 }
 
@@ -369,7 +369,7 @@ void func_802BDDF0_324740(Npc* bow) {
     set_action_state(actionState);
     partnerActionStatus->partnerActionState = 0;
     partnerActionStatus->actingPartner = 0;
-    playerStatus->flags &= ~PS_FLAGS_CANT_PAUSE;
+    playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
     partner_clear_player_tracking(bow);
     D_802BE0C0 = FALSE;
 }
