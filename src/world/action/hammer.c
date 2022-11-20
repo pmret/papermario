@@ -232,7 +232,7 @@ void action_update_hammer(void) {
         s32 soundID;
 
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= PS_FLAGS_200000;
+        playerStatus->flags |= PS_FLAGS_NO_FLIPPING;
         HammerHit->timer = 0;
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->currentSpeed = 0.0f;
@@ -268,9 +268,10 @@ void action_update_hammer(void) {
         HammerHit->unk_14 = 0;
     }
 
-    playerStatus->flags &= ~PS_FLAGS_1000000;
-    if (HammerHit->timer < 3 && (playerStatus->flags & PS_FLAGS_40000)) {
-        playerStatus->flags |= PS_FLAGS_20000000;
+    playerStatus->flags &= ~PS_FLAGS_HAMMER_CHECK;
+    if (HammerHit->timer < 3 && (playerStatus->flags & PS_FLAGS_ENTERING_BATTLE)) {
+        // This is probably to stop Mario from triggering multiple battles at once by hammering while one is starting.
+        playerStatus->flags |= PS_FLAGS_TIME_STOPPED;
     } else if (HammerHit->timer < 2) {
         HammerHit->timer++;
     } else {
@@ -381,9 +382,9 @@ void func_802B6820_E256F0(void) {
 
         if (collisionStatus->lastWallHammered >= 0 && (collisionStatus->lastWallHammered & COLLISION_WITH_ENTITY_BIT)) {
             get_entity_by_index(collisionStatus->lastWallHammered)->collisionTimer = 0;
-            playerStatus->flags |= PS_FLAGS_1000000;
+            playerStatus->flags |= PS_FLAGS_HAMMER_CHECK;
         } else if (HammerHit->hitID < 0) {
-            playerStatus->flags |= PS_FLAGS_1000000;
+            playerStatus->flags |= PS_FLAGS_HAMMER_CHECK;
         }
 
         if (HammerHit->hitID < 0 && gPlayerData.hammerLevel >= 2) {
@@ -403,7 +404,7 @@ void func_802B6820_E256F0(void) {
         HammerHit->unk_14 = 1;
     }
     if (HammerHit->timer == 6) {
-        playerStatus->flags &= ~PS_FLAGS_200000;
+        playerStatus->flags &= ~PS_FLAGS_NO_FLIPPING;
     }
 
     if (playerStatus->animNotifyValue == 1) {
@@ -414,9 +415,9 @@ void func_802B6820_E256F0(void) {
         HammerHit->unk_14 = 0;
         ten = 10; // required to match
         if (HammerHit->unk_1C != 0 || HammerHit->timer > ten) {
-            playerStatus->flags &= ~PS_FLAGS_1000000;
+            playerStatus->flags &= ~PS_FLAGS_HAMMER_CHECK;
             set_action_state(ACTION_STATE_IDLE);
         }
-        playerStatus->flags &= ~PS_FLAGS_200000;
+        playerStatus->flags &= ~PS_FLAGS_NO_FLIPPING;
     }
 }

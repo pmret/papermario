@@ -28,12 +28,12 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
     f32 tempPlayerDist;
     s32 hitDetected;
     s32 i;
-    
+
     settings = (FireBarAISettings*) evt_get_variable(script, *args++);
     npc = get_npc_unsafe(script->owner1.enemy->npcID);
     partnerNpc = get_npc_unsafe(NPC_PARTNER);
     hitDetected = 0;
-    
+
     if (isInitialCall) {
         data = heap_malloc(sizeof(*data));
         script->functionTempPtr[1] = data;
@@ -50,11 +50,11 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
         data->yaw = 0;
         data->settings = settings;
     }
-    
+
     if (get_time_freeze_mode() != 0) {
         return 0;
     }
-    
+
     data = script->functionTempPtr[1];
     for (i = 0; i < data->npcCount; i++) {
         npc = get_npc_unsafe(data->firstNpc + i);
@@ -67,7 +67,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.z = data->centerPos.z + dZ;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
         }
-        if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAGS_8000)) {
+        if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAGS_HAZARD_INVINCIBILITY)) {
             dY = playerStatus->position.y - npc->pos.y;
             if (partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
                 if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
@@ -78,13 +78,13 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
             }
             dX = playerStatus->position.x - npc->pos.x;
             dZ = playerStatus->position.z - npc->pos.z;
-            if ((fabsf(dY) < (npc->collisionHeight * 0.8f)) 
+            if ((fabsf(dY) < (npc->collisionHeight * 0.8f))
                 && (sqrtf(SQ(dX) + SQ(dZ)) <= ((npc->collisionRadius * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f)))) {
                 hitDetected = 1;
             }
         }
     }
-    if (playerStatus->flags & PS_FLAGS_8000) {
+    if (playerStatus->flags & PS_FLAGS_HAZARD_INVINCIBILITY) {
         hitDetected = -1;
     }
     data->yaw += data->rotationRate;

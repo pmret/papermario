@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects.h"
 
-void func_800EFE2C(void);
-void func_800F0248(void);
-void func_800F0490(void);
-void func_800F0864(void);
-void func_800F09EC(void);
-void func_800F0B3C(void);
+void surface_standard_behaviour(void);
+void surface_flowers_behaviour(void);
+void surface_cloud_behaviour(void);
+void surface_snow_behaviour(void);
+void surface_hedges_behaviour(void);
+void surface_water_behaviour(void);
 
 s32 D_80109480 = 0;
 f32 D_80109484 = 0.0f;
@@ -32,7 +32,8 @@ extern s32 D_8010CFF4;
 void func_800EFD00(void) {
 }
 
-void func_800EFD08(void) {
+// Particles (dust, flowers, snow) and etc
+void handle_floor_behaviour(void) {
     s32 colliderType = 0;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -54,27 +55,27 @@ void func_800EFD08(void) {
 
     switch (colliderType) {
         case SURFACE_TYPE_FLOWERS:
-            func_800F0248();
+            surface_flowers_behaviour();
             break;
         case SURFACE_TYPE_CLOUD:
-            func_800F0490();
+            surface_cloud_behaviour();
             break;
         case SURFACE_TYPE_SNOW:
-            func_800F0864();
+            surface_snow_behaviour();
             break;
         case SURFACE_TYPE_HEDGES:
-            func_800F09EC();
+            surface_hedges_behaviour();
             break;
         case SURFACE_TYPE_WATER:
-            func_800F0B3C();
+            surface_water_behaviour();
             break;
         default:
-            func_800EFE2C();
+            surface_standard_behaviour();
             break;
     }
 }
 
-void func_800EFE2C(void) {
+void surface_standard_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta, cosTheta;
     f32 x, y, z;
@@ -99,7 +100,7 @@ void func_800EFE2C(void) {
 
         }
     } else if (
-        (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_400))
+        (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_SPECIAL_LAND))
     {
         x = playerStatus->position.x;
         y = playerStatus->position.y + 0.0f;
@@ -165,7 +166,7 @@ void func_800EFE2C(void) {
     }
 }
 
-void func_800F0248(void) {
+void surface_flowers_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos, x, y, z;
     f32 t1;
@@ -209,7 +210,7 @@ void func_800F0248(void) {
     }
 }
 
-void func_800F0490(void) {
+void surface_cloud_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta, cosTheta;
     f32 xTemp, xTemp2;
@@ -220,7 +221,7 @@ void func_800F0490(void) {
     D_801094A0 += 0.1f;
 
     if (((playerStatus->actionState == ACTION_STATE_LAND && (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED)) ||
-        ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_400))) &&
+        ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_SPECIAL_LAND))) &&
         D_8010CFF4 >= 10)
     {
         fx_cloud_puff(
@@ -264,7 +265,7 @@ void func_800F0490(void) {
     }
 }
 
-void func_800F0864(void) {
+void surface_snow_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
@@ -292,7 +293,7 @@ void func_800F0864(void) {
     }
 }
 
-void func_800F09EC(void) {
+void surface_hedges_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
@@ -318,7 +319,7 @@ void func_800F09EC(void) {
     }
 }
 
-void func_800F0B3C(void) {
+void surface_water_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 

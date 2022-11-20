@@ -155,7 +155,7 @@ s32 func_802BD558_319AC8(void) {
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         D_802BEBC0_31CBE0 = 0x15;
-        gPlayerStatus.flags |= PS_FLAGS_800;
+        gPlayerStatus.flags |= PS_FLAGS_BURNING;
     }
 
     return raycastResult;
@@ -180,7 +180,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
     if (gCurrentEncounter.unk_08 == 0) {
         if (isInitialCall) {
             func_802BD514_319A84(parakarry);
-            if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
                 if (partnerActionStatus->partnerAction_unk_1 == 0) {
                     if (!func_800EA52C(PARTNER_PARAKARRY)) {
                         return ApiStatus_DONE2;
@@ -365,7 +365,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             }
                         }
 
-                        if (testMove == 0 && !(playerStatus->animFlags & PA_FLAGS_8000)) {
+                        if (testMove == 0 && !(playerStatus->animFlags & PA_FLAGS_NPC_COLLIDED)) {
                             add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
                             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
                             parakarry->planarFlyDist += parakarry->moveSpeed;
@@ -380,7 +380,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 D_802BEBC0_31CBE0 = 0x15;
-                                playerStatus->flags |= PS_FLAGS_800;
+                                playerStatus->flags |= PS_FLAGS_BURNING;
                             }
 
                             playerStatus->position.y += (y - playerStatus->position.y) * 0.25f;
@@ -415,7 +415,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 gCollisionStatus.currentFloor = func_802BD558_319AC8();
                 if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
                     suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
-                    if (!(playerStatus->flags & PS_FLAGS_800)) {
+                    if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
                         if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
                             if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
                                 if (!parakarry->pos.x) {
@@ -439,7 +439,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
 
                             parakarry->pos.y += parakarry->jumpVelocity;
                             playerStatus->position.y += parakarry->jumpVelocity;
-                            if (!(playerStatus->animFlags & PA_FLAGS_8000)) {
+                            if (!(playerStatus->animFlags & PA_FLAGS_NPC_COLLIDED)) {
                                 parakarry->moveSpeed += 0.1;
                                 if (parakarry->moveSpeed > 2.0) {
                                     parakarry->moveSpeed = 2.0f;
@@ -455,7 +455,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                 if (parakarry->planarFlyDist > 80.0f) {
                                     parakarry->animationSpeed += 0.5;
                                 }
-                                if (!(playerStatus->animFlags & PA_FLAGS_8000)) {
+                                if (!(playerStatus->animFlags & PA_FLAGS_NPC_COLLIDED)) {
                                     x = playerStatus->position.x;
                                     y = playerStatus->position.y;
                                     z = playerStatus->position.z;
@@ -552,13 +552,13 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             if (D_802BEBB8 != 0) {
                 enable_player_static_collisions();
             }
-            if (!(playerStatus->flags & PS_FLAGS_800)) {
+            if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
                 if (D_802BEBC0_31CBE0 == 0x14) {
                     start_bounce_b();
                 } else if (D_802BEBC0_31CBE0 == 0x15) {
                     start_falling();
                     gravity_use_fall_parms();
-                    playerStatus->flags |= PS_FLAGS_800000;
+                    playerStatus->flags |= PS_FLAGS_SCRIPTED_FALL;
                 } else {
                     set_action_state(ACTION_STATE_IDLE);
                 }

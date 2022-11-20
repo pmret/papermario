@@ -37,7 +37,7 @@ void action_update_spin_jump(void) {
         playerStatus->gravityIntegrator[0] = 5.2f;
         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
         disable_player_input();
-        playerStatus->flags |= PS_FLAGS_200;
+        playerStatus->flags |= PS_FLAGS_SPECIAL_JUMP;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         sfx_play_sound_at_player(SOUND_SPIN_JUMP, 0);
     }
@@ -96,7 +96,7 @@ void action_update_spin_jump(void) {
             }
             break;
         case SUBSTATE_DESCEND:
-            velocity = func_800E34D8();
+            velocity = player_fall_distance();
             playerStatus->position.y = player_check_collision_below(velocity, &belowColliderID);
             if (velocity < -100.0f) {
                 playerStatus->gravityIntegrator[3] = 0.0f;
@@ -116,7 +116,7 @@ void action_update_spin_jump(void) {
                     if (surfaceType == SURFACE_TYPE_LAVA) {
                         playerStatus->hazardType = HAZARD_TYPE_LAVA;
                         set_action_state(ACTION_STATE_HIT_LAVA);
-                        playerStatus->flags |= PS_FLAGS_800;
+                        playerStatus->flags |= PS_FLAGS_BURNING;
                         playerStatus->flags &= ~PS_FLAGS_FLYING;
                         return;
                     } else if (surfaceType == SURFACE_TYPE_SPIKES) {
@@ -140,7 +140,7 @@ void action_update_spin_jump(void) {
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;
                         panels->flipTriggerPosY = playerStatus->position.y;
-                        playerStatus->flags |= PS_FLAGS_400;
+                        playerStatus->flags |= PS_FLAGS_SPECIAL_LAND;
                     }
                 }
             }

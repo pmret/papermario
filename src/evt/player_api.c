@@ -52,7 +52,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
-            playerStatus->animFlags |= PA_FLAGS_40000;
+            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
         }
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     } else {
@@ -261,11 +261,11 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
         playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
         playerStatus->flags |= PS_FLAGS_FLYING;
-        playerStatus->animFlags |= PA_FLAGS_10000000;
+        playerStatus->animFlags |= PA_FLAGS_NO_OOB_RESPAWN;
 
         if (mode == 0) {
             if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
                     anim = ANIM_Mario_AnimMidairStill;
                 } else {
                     anim = ANIM_Mario_60009;
@@ -286,7 +286,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
         if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
                 anim = ANIM_Mario_AnimMidair;
             } else {
                 anim = ANIM_Mario_6000A;
@@ -308,11 +308,11 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     playerNpc->duration--;
     if (playerNpc->duration == 0) {
         playerStatus->flags &= ~PS_FLAGS_FLYING;
-        playerStatus->animFlags &= ~PA_FLAGS_10000000;
+        playerStatus->animFlags &= ~PA_FLAGS_NO_OOB_RESPAWN;
 
         if (mode == 0) {
             if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+                if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
                     anim = ANIM_Mario_10009;
                 } else {
                     anim = ANIM_Mario_6000B;
@@ -331,8 +331,8 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
             if (colliderID >= 0) {
                 playerStatus->position.y = yTemp;
-                func_800E315C(colliderID);
-                func_800EFD08();
+                player_handle_floor_collider_type(colliderID);
+                handle_floor_behaviour();
             }
         }
         return TRUE;
@@ -576,7 +576,7 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
         script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
         script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
-        playerStatus->animFlags |= PA_FLAGS_100000;
+        playerStatus->animFlags |= PA_FLAGS_CHANGING_MAP;
         playerStatus->flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
         return ApiStatus_DONE2;
     }
@@ -809,7 +809,7 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
         playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
-            | PA_FLAGS_40000
+            | PA_FLAGS_INTERRUPT_SPIN
             | PA_FLAGS_INTERRUPT_USE_PARTNER;
     }
 

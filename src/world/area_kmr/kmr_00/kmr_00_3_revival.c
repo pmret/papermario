@@ -224,7 +224,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_CALL(N(func_80240388_8AC318))
     EVT_CALL(N(func_80240000_8ABF90), 255, 255, 255, 60, 60, 60, 0)
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)

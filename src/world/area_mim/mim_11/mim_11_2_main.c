@@ -24,13 +24,13 @@ API_CALLABLE(N(func_802405EC_BB765C)) {
 API_CALLABLE(N(func_8024066C_BB76DC)) {
     Camera* cam = &gCameras[gCurrentCameraID];
     s32 retVal = ApiStatus_BLOCK;
-    
+
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         script->functionTemp[2] = 0;
         script->functionTemp[3] = 100;
     }
-    
+
     switch (script->functionTemp[1]) {
         case 0:
             script->functionTemp[2] = script->functionTemp[2] + script->functionTemp[3];
@@ -54,18 +54,18 @@ API_CALLABLE(N(func_8024066C_BB76DC)) {
 API_CALLABLE(N(func_80240790_BB7800)) {
     Camera* cam = &gCameras[CAM_DEFAULT];
     f32 angle1, angle2, moveAngle;
-    
+
     if (isInitialCall) {
         script->functionTemp[1] = 0;
     }
-    
+
     angle1 = atan2(89.0f, 84.0f, 75.0f, 309.0f);
     angle2 = atan2(89.0f, 84.0f, 245.0f, 85.0f);
     moveAngle = (((angle2 - angle1) / 40.0f) * script->functionTemp[1]) + angle1;
     cam->movePos.x = (s32) (sin_deg(moveAngle) * 100.0f) + 89;
     cam->movePos.z = (s32)(-cos_deg(moveAngle) * 100.0f) + 84;
     cam->panActive = TRUE;
-    
+
     script->functionTemp[1]++;
     if (script->functionTemp[1] < 41) {
         return ApiStatus_BLOCK;
@@ -106,9 +106,9 @@ EvtScript N(EVS_Scene_ReachedMansion) = {
     EVT_CALL(SetPlayerPos, -701, 0, -34)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -701, 0, -34)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
     EVT_CALL(PlayerMoveTo, -407, 103, 120)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(15)

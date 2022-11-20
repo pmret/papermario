@@ -31,7 +31,7 @@ API_CALLABLE(N(Zipline_UpdatePlayerPos)) {
     f32 dx = array[3] - array[0];
     f32 dy = array[4] - array[1];
     f32 dz = array[5] - array[2];
-    
+
     script->varTable[5] = (dx / 1000.0f) * script->varTable[0];
     script->varTable[6] = (dy / 1000.0f) * script->varTable[0];
     script->varTable[7] = (dz / 1000.0f) * script->varTable[0];
@@ -132,7 +132,7 @@ EvtScript N(EVS_RideZipline) = {
         EVT_END_IF
     EVT_CALL(PlaySound, SOUND_2087)
     EVT_LABEL(10)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_800000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_SCRIPTED_FALL, TRUE)
     EVT_SET(MF_Zipline_GoingDown, FALSE)
     EVT_CALL(StopSound, SOUND_80000019)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)

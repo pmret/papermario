@@ -438,7 +438,7 @@ void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;
 
-    playerStatus->animFlags |= PA_FLAGS_1000000;
+    playerStatus->animFlags |= PA_FLAGS_MAP_HAS_SWITCH;
     data->baseScale.x = 1.0f;
     data->baseScale.y = 1.0f;
     data->baseScale.z = 1.0f;

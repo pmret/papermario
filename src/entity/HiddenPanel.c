@@ -125,7 +125,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             data->rotationSpeed = 65.0f;
             set_time_freeze_mode(TIME_FREEZE_PARTIAL);
             disable_player_static_collisions();
-            gPlayerStatusPtr->animFlags |= PA_FLAGS_800;
+            gPlayerStatusPtr->animFlags |= PA_FLAGS_OPENED_HIDDEN_PANEL;
             if (data->needSpawnItem) {
                 data->needSpawnItem = FALSE;
                 data->spawnedItemIndex = make_item_entity_nodelay(data->itemID, entity->position.x, entity->position.y + 2.0, entity->position.z, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, data->pickupVar);
@@ -232,7 +232,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 exec_entity_commandlist(entity);
                 if (data->unk_02) {
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
-                    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_800;
+                    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_OPENED_HIDDEN_PANEL;
                 }
                 entity->flags &= ~ENTITY_FLAGS_DISABLE_COLLISION;
                 if (data->standingNpcIndex >= 0) {

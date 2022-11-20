@@ -115,7 +115,7 @@ void func_802B735C_E2290C(void) {
             {
                 cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
-                cond = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000);
+                cond = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION);
             }
 
             if (!cond) {
@@ -123,7 +123,7 @@ void func_802B735C_E2290C(void) {
             }
             break;
         case 1:
-            if (playerStatus->flags & PS_FLAGS_20) {
+            if (playerStatus->flags & PS_FLAGS_PAUSED) {
                 D_802B7C78_E23228->unk_24 = 3;
                 return;
             }
@@ -140,7 +140,7 @@ void func_802B735C_E2290C(void) {
             break;
         case 3:
             D_802B7C78_E23228->scale = 0.53f;
-            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAGS_20) {
+            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAGS_PAUSED) {
                 D_802B7C78_E23228->unk_28 -= 64;
                 if (D_802B7C78_E23228->unk_28 < 0) {
                     D_802B7C78_E23228->unk_28 = 0;
