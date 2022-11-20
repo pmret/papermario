@@ -1069,7 +1069,7 @@ void collision_lateral_peach(void) {
     playerStatus->position.z = z;
 
     // If there was a climbable step in this direction, but no wall, we can climb up it
-    if (climbableStep != FALSE &&
+    if (climbableStep &&
         wall < 0 &&
         playerStatus->actionState != ACTION_STATE_STEP_UP_PEACH &&
         playerStatus->currentSpeed != 0.0f)
