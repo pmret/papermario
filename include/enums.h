@@ -3090,6 +3090,14 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAGS_80000000      = 0x80000000,
 };
 
+// Worker
+enum WorkerFlags {
+    WORKER_FLAG_1                       = 0x00000001,
+    WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE  = 0x00000002,
+    WORKER_FLAGS_FRONT_UI               = 0x00000004,
+    WORKER_FLAGS_BACK_UI                = 0x00000008,
+};
+
 enum Buttons {
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,

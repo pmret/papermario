@@ -40,7 +40,7 @@ s32 create_worker_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     (*gCurrentWorkerListPtr)[i] = worker = heap_malloc(sizeof(*worker));
     ASSERT(worker != NULL);
 
-    worker->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE;
     worker->update = updateFunc;
     if (updateFunc == NULL) {
         worker->update = worker_delegate_do_nothing;
@@ -71,7 +71,7 @@ s32 create_worker_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     (*gCurrentWorkerListPtr)[i] = worker = heap_malloc(sizeof(*worker));
     ASSERT(worker != NULL);
 
-    worker->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAGS_FRONT_UI;
     worker->update = updateFunc;
     if (updateFunc == NULL) {
         worker->update = worker_delegate_do_nothing;
@@ -102,7 +102,7 @@ s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     (*gCurrentWorkerListPtr)[i] = worker = heap_malloc(sizeof(*worker));
     ASSERT(worker != NULL);
 
-    worker->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAGS_BACK_UI;
     worker->update = updateFunc;
     if (updateFunc == NULL) {
         worker->update = &worker_delegate_do_nothing;
@@ -124,7 +124,7 @@ void update_workers(void) {
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
         if (worker != NULL) {
-            worker->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+            worker->flags &= ~WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE;
             worker->update();
         }
     }
@@ -135,8 +135,8 @@ void render_workers_world(void) {
 
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
-        if (worker != NULL && !(worker->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
-            if (!(worker->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
+        if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
+            if (!(worker->flags & WORKER_FLAGS_FRONT_UI)) {
                 worker->draw();
             }
         }
@@ -148,8 +148,8 @@ void render_workers_frontUI(void) {
 
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
-        if (worker != NULL && !(worker->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
-            if (worker->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
+        if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
+            if (worker->flags & WORKER_FLAGS_FRONT_UI) {
                 worker->draw();
             }
         }
@@ -161,8 +161,8 @@ void render_workers_backUI(void) {
 
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
-        if (worker != NULL && !(worker->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
-            if (worker->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+        if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
+            if (worker->flags & WORKER_FLAGS_BACK_UI) {
                 worker->draw();
             }
         }
