@@ -398,7 +398,7 @@ void load_demo_battle(u32 index) {
     gGameStatusPtr->isBattle = FALSE;
 
     general_heap_create();
-    clear_generic_entity_list();
+    clear_worker_list();
     clear_script_list();
     create_cameras_a();
     spr_init_sprites(0);

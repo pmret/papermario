@@ -791,7 +791,7 @@ void N(init_credits)(void) {
     s32 i;
 
     N(CreditsDataPtr) = &N(CreditsData);
-    N(CreditsData).workerID = create_generic_entity_frontUI(NULL, N(credits_worker_render));
+    N(CreditsData).workerID = create_worker_frontUI(NULL, N(credits_worker_render));
 
     for (i = 0; i < ARRAY_COUNT(N(CreditsData).lines); i++) {
         N(CreditsData).lines[i].flags = 0;

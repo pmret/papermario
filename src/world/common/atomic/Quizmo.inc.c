@@ -292,7 +292,7 @@ ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
     if (stageData->microphoneRaiseAmt <= 0) {
         stageData->microphoneRaiseAmt = 0;
         remove_effect(N(Quizmo_StageEffect));
-        free_generic_entity(N(Quizmo_Worker));
+        free_worker(N(Quizmo_Worker));
         return ApiStatus_DONE2;
     }
 
@@ -461,6 +461,6 @@ void N(Quizmo_CreateReactionEffect)(void) {
 }
 
 ApiStatus N(Quizmo_CreateWorker)(Evt* script, s32 isInitialCall) {
-    N(Quizmo_Worker) = create_generic_entity_frontUI(NULL, N(Quizmo_CreateReactionEffect));
+    N(Quizmo_Worker) = create_worker_frontUI(NULL, N(Quizmo_CreateReactionEffect));
     return ApiStatus_DONE2;
 }

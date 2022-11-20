@@ -65,7 +65,7 @@ ApiStatus func_802401FC_AF7B4C(Evt* script, s32 isInitialCall) {
     D_80240E8C_AF87DC = 0;
     D_80240E90_AF87E0 = 0;
 
-    get_generic_entity(create_generic_entity_frontUI(func_80240068_AF79B8, NULL));
+    get_worker(create_worker_frontUI(func_80240068_AF79B8, NULL));
     setup_pause_menu_tab(D_80240EF0_AF8840, ARRAY_COUNT(D_80240EF0_AF8840));
 
     for (i = 0; i < 10; i++) {

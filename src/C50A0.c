@@ -743,8 +743,8 @@ void clear_item_entity_data(void) {
         ItemEntityRenderGroup = 0;
     }
 
-    create_generic_entity_world(NULL, draw_item_entities);
-    create_generic_entity_frontUI(NULL, draw_item_entities_UI);
+    create_worker_world(NULL, draw_item_entities);
+    create_worker_frontUI(NULL, draw_item_entities_UI);
     isPickingUpItem = FALSE;
     D_801565A8 = 0;
 }

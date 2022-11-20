@@ -600,7 +600,7 @@ void draw_encounter_ui(void);
 
 void draw_first_strike_ui(void);
 
-void npc_dyn_entity_draw_no_op(void);
+void npc_render_worker_do_nothing(void);
 
 void make_npcs(s32 flags, s32 mapID, s32* npcGroupList);
 

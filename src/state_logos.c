@@ -84,7 +84,7 @@ void state_init_logos(void) {
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
     clear_script_list();
-    clear_generic_entity_list();
+    clear_worker_list();
     clear_render_tasks();
     spr_init_sprites(0);
     clear_animator_list();

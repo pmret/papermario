@@ -619,13 +619,13 @@ typedef struct Shadow {
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
 
-typedef struct DynamicEntity {
+typedef struct Worker {
     /* 0x00 */ s32 flags;
     /* 0x04 */ void (*update)(void);
     /* 0x08 */ void (*draw)(void);
-} DynamicEntity;
+} Worker;
 
-typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
+typedef Worker* WorkerList[MAX_WORKERS];
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;

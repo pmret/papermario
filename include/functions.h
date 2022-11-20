@@ -498,8 +498,8 @@ s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 void clear_item_entity_flags(s32 index, s32 flags);
 
-s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
-DynamicEntity* get_generic_entity(s32 idx);
+s32 create_worker_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
+Worker* get_worker(s32 idx);
 Trigger* bind_trigger_1(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
@@ -583,7 +583,7 @@ void start_bounce_b(void);
 void update_input(void);
 void update_max_rumble_duration(void);
 void func_8011BAE8(void);
-void update_generic_entities(void);
+void update_workers(void);
 void update_triggers(void);
 void update_scripts(void);
 void update_messages(void);
@@ -597,12 +597,12 @@ void update_windows(void);
 void player_render_interact_prompts(void);
 void func_802C3EE4(void);
 void render_screen_overlay_backUI(void);
-void render_generic_entities_backUI(void);
+void render_workers_backUI(void);
 void render_effects_UI(void);
 void state_render_backUI(void);
 void render_window_root(void);
 void render_messages(void);
-void render_generic_entities_frontUI(void);
+void render_workers_frontUI(void);
 void render_screen_overlay_frontUI(void);
 void render_curtains(void);
 void state_render_frontUI(void);
@@ -792,7 +792,7 @@ typedef union {
   void (*func2)(void);
 } WorldArgs TRANSPARENT_UNION;
 
-s32 create_generic_entity_world(WorldArgs, WorldArgs);
+s32 create_worker_world(WorldArgs, WorldArgs);
 
 void init_entity_models(void);
 EntityModel* get_entity_model(s32 idx);
@@ -801,7 +801,7 @@ void fold_update(u32, FoldType, s32, s32, s32, s32, s32);
 s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
 void func_8013A6E8(void);
 s32 func_8013A704(s32);
-void free_generic_entity(s32);
+void free_worker(s32);
 
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
@@ -903,7 +903,7 @@ void remove_all_effects(void);
 void update_effects(void);
 void update_cameras(void);
 void clear_render_tasks(void);
-void clear_generic_entity_list(void);
+void clear_worker_list(void);
 void clear_printers(void);
 void clear_item_entity_data(void);
 void clear_player_data(void);
@@ -1006,7 +1006,7 @@ void init_encounters_ui(void);
 void initialize_collision(void);
 void render_entities(void);
 void render_player(void);
-void render_generic_entities_world(void);
+void render_workers_world(void);
 void render_effects_world(void);
 s32 get_asset_offset(char*, s32*);
 void initialize_status_menu(void);

@@ -200,7 +200,7 @@ void initialize_battle(void) {
         gBattleStatus.flags2 &= ~BS_FLAGS2_40;
     }
 
-    create_generic_entity_world(NULL, func_8023ED5C);
+    create_worker_world(NULL, func_8023ED5C);
     btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);

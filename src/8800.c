@@ -195,7 +195,7 @@ void render_frame(s32 flag) {
                     }
                     render_player();
                     render_npcs();
-                    render_generic_entities_world();
+                    render_workers_world();
                     render_effects_world();
                     execute_render_tasks();
                     render_hud_elements_world();
@@ -209,7 +209,7 @@ void render_frame(s32 flag) {
                     render_item_entities();
                 }
             } else {
-                render_generic_entities_world();
+                render_workers_world();
                 execute_render_tasks();
             }
 

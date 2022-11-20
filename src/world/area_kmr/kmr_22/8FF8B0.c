@@ -41,7 +41,7 @@ ApiStatus func_80240B3C_9001AC(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240B4C_9001BC(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, MapVar(0), (s32) heap_malloc(0x780)); // TODO what is this
     D_802483D0 = -1;
-    create_generic_entity_world(NULL, func_80240B00_900170);
+    create_worker_world(NULL, func_80240B00_900170);
     return ApiStatus_DONE2;
 }
 

@@ -81,7 +81,7 @@ void step_game_loop(void) {
 
     func_8011BAE8();
     npc_iter_no_op();
-    update_generic_entities();
+    update_workers();
     update_triggers();
     update_scripts();
     update_messages();
@@ -191,7 +191,7 @@ void gfx_draw_frame(void) {
     player_render_interact_prompts();
     func_802C3EE4();
     render_screen_overlay_backUI();
-    render_generic_entities_backUI();
+    render_workers_backUI();
     render_hud_elements_backUI();
     render_effects_UI();
     state_render_backUI();
@@ -208,7 +208,7 @@ void gfx_draw_frame(void) {
         render_messages();
     }
 
-    render_generic_entities_frontUI();
+    render_workers_frontUI();
     render_hud_elements_frontUI();
     render_screen_overlay_frontUI();
 
@@ -275,7 +275,7 @@ void load_engine_data(void) {
     func_80028838();
     general_heap_create();
     clear_render_tasks();
-    clear_generic_entity_list();
+    clear_worker_list();
     clear_script_list();
     create_cameras_a();
     clear_player_status();

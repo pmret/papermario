@@ -64,7 +64,7 @@ API_CALLABLE(N(LoadTitleImage)) {
     decode_yay0(compressed, TitleData);
     general_heap_free(compressed);
     TitleImage = (IMG_PTR)(TitleData->img_offset_title + (s32)TitleData);
-    create_generic_entity_frontUI(NULL, worker_render_title_image);
+    create_worker_frontUI(NULL, worker_render_title_image);
     return ApiStatus_DONE2;
 }
 

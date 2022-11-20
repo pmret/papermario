@@ -108,7 +108,7 @@ API_CALLABLE(N(CreateSticker)) {
         iconPal);
     
     sticker->folderID = func_8013A704(1);
-    sticker->workerID = create_generic_entity_world(NULL, N(worker_render_sticker));
+    sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
     evt_set_variable(script, MapVar(10), (s32) sticker);
     evt_set_variable(script, MapVar(11), (s32) iconImg);
     evt_set_variable(script, MapVar(12), (s32) iconPal);
@@ -204,7 +204,7 @@ API_CALLABLE(N(DeleteSticker)) {
     IMG_PTR img = (IMG_PTR) evt_get_variable(script, MV_StickerImage);
     PAL_PTR pal = (PAL_PTR) evt_get_variable(script, MV_StickerPalette);
 
-    free_generic_entity(data->workerID);
+    free_worker(data->workerID);
 
     heap_free(data);
     heap_free(img);

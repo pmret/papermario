@@ -15,7 +15,7 @@ Npc* playerNpc = &playerNpcData;
 void virtual_entity_list_render_world(void);
 void virtual_entity_list_render_UI(void);
 s32 ALT_load_entity_model(s32* cmdList);
-s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void));
+s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void));
 
 ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -1502,8 +1502,8 @@ void clear_virtual_entity_list(void) {
         (*D_802DB7C0)[i]->entityModelIndex = -1;
     }
 
-    create_generic_entity_world(virtual_entity_list_update, virtual_entity_list_render_world);
-    create_generic_entity_backUI(NULL, virtual_entity_list_render_UI);
+    create_worker_world(virtual_entity_list_update, virtual_entity_list_render_world);
+    create_worker_backUI(NULL, virtual_entity_list_render_UI);
 }
 
 void init_virtual_entity_list(void) {

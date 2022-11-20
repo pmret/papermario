@@ -38,9 +38,9 @@ extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
 extern EntityList* gCurrentEntityListPtr;
 
-extern DynamicEntityList gWorldDynamicEntityList;
-extern DynamicEntityList gBattleDynamicEntityList;
-extern DynamicEntityList* gCurrentDynamicEntityListPtr;
+extern WorkerList gWorldWorkerList;
+extern WorkerList gBattleWorkerList;
+extern WorkerList* gCurrentWorkerListPtr;
 
 extern NpcList gWorldNpcList;
 extern NpcList gBattleNpcList;
