@@ -494,7 +494,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
 
     raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (raycastID >= 0 && hitDepth <= depth) {
-        *hasClimbableStep = 1;
+        *hasClimbableStep = TRUE;
     }
 
     depth = length + radius;
@@ -646,7 +646,7 @@ void update_player(void) {
     }
 
     if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
-        handle_floor_behaviour();
+        handle_floor_behavior();
     }
 
     player_sprite_behaviour();

@@ -332,7 +332,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
             if (colliderID >= 0) {
                 playerStatus->position.y = yTemp;
                 player_handle_floor_collider_type(colliderID);
-                handle_floor_behaviour();
+                handle_floor_behavior();
             }
         }
         return TRUE;

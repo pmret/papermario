@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects.h"
 
-void surface_standard_behaviour(void);
-void surface_flowers_behaviour(void);
-void surface_cloud_behaviour(void);
-void surface_snow_behaviour(void);
-void surface_hedges_behaviour(void);
-void surface_water_behaviour(void);
+void surface_standard_behavior(void);
+void surface_flowers_behavior(void);
+void surface_cloud_behavior(void);
+void surface_snow_behavior(void);
+void surface_hedges_behavior(void);
+void surface_water_behavior(void);
 
 s32 D_80109480 = 0;
 f32 D_80109484 = 0.0f;
@@ -33,7 +33,7 @@ void func_800EFD00(void) {
 }
 
 // Particles (dust, flowers, snow) and etc
-void handle_floor_behaviour(void) {
+void handle_floor_behavior(void) {
     s32 colliderType = 0;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -55,27 +55,27 @@ void handle_floor_behaviour(void) {
 
     switch (colliderType) {
         case SURFACE_TYPE_FLOWERS:
-            surface_flowers_behaviour();
+            surface_flowers_behavior();
             break;
         case SURFACE_TYPE_CLOUD:
-            surface_cloud_behaviour();
+            surface_cloud_behavior();
             break;
         case SURFACE_TYPE_SNOW:
-            surface_snow_behaviour();
+            surface_snow_behavior();
             break;
         case SURFACE_TYPE_HEDGES:
-            surface_hedges_behaviour();
+            surface_hedges_behavior();
             break;
         case SURFACE_TYPE_WATER:
-            surface_water_behaviour();
+            surface_water_behavior();
             break;
         default:
-            surface_standard_behaviour();
+            surface_standard_behavior();
             break;
     }
 }
 
-void surface_standard_behaviour(void) {
+void surface_standard_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta, cosTheta;
     f32 x, y, z;
@@ -166,7 +166,7 @@ void surface_standard_behaviour(void) {
     }
 }
 
-void surface_flowers_behaviour(void) {
+void surface_flowers_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos, x, y, z;
     f32 t1;
@@ -210,7 +210,7 @@ void surface_flowers_behaviour(void) {
     }
 }
 
-void surface_cloud_behaviour(void) {
+void surface_cloud_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta, cosTheta;
     f32 xTemp, xTemp2;
@@ -265,7 +265,7 @@ void surface_cloud_behaviour(void) {
     }
 }
 
-void surface_snow_behaviour(void) {
+void surface_snow_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
@@ -293,7 +293,7 @@ void surface_snow_behaviour(void) {
     }
 }
 
-void surface_hedges_behaviour(void) {
+void surface_hedges_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 
@@ -319,7 +319,7 @@ void surface_hedges_behaviour(void) {
     }
 }
 
-void surface_water_behaviour(void) {
+void surface_water_behavior(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos;
 

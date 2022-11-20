@@ -916,7 +916,7 @@ void collision_check_player_overlaps(void);
 void update_player_input(void);
 void phys_update_action_state(void);
 void collision_main_lateral(void);
-void handle_floor_behaviour(void);
+void handle_floor_behavior(void);
 void check_input_open_menus(void);
 void check_input_status_menu(void);
 

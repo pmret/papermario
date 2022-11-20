@@ -1058,7 +1058,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
 
 void collision_lateral_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 climbableStep = 0;
+    s32 climbableStep = FALSE;
     f32 yaw = playerStatus->targetYaw;
     f32 x = playerStatus->position.x;
     f32 y = playerStatus->position.y;
@@ -1069,7 +1069,7 @@ void collision_lateral_peach(void) {
     playerStatus->position.z = z;
 
     // If there was a climbable step in this direction, but no wall, we can climb up it
-    if (climbableStep != 0 &&
+    if (climbableStep != FALSE &&
         wall < 0 &&
         playerStatus->actionState != ACTION_STATE_STEP_UP_PEACH &&
         playerStatus->currentSpeed != 0.0f)
