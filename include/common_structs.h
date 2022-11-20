@@ -2522,4 +2522,10 @@ typedef struct LavaPiranhaVine {
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
 
+typedef struct UnkPartnerThing {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s32 options[0];
+} UnkPartnerThing; // size = 0x8
+
 #endif

@@ -79,8 +79,57 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260BF4(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "18F340", func_80260BF4);
+extern UnkPartnerThing D_80280FC0;
+
+ApiStatus func_80260BF4(Evt* script, s32 isInitialCall) {
+    UnkPartnerThing* var_s0 = &D_80280FC0;
+    PlayerData* playerData = &gPlayerData;
+    s32 temp;
+    s32 i;
+
+    if (rand_int(var_s0->unk_00 + var_s0->unk_02) < var_s0->unk_00) {
+        temp = 0;
+        for (i = 0; i < 8; i++) {
+            temp += var_s0->options[i * 2];
+        }
+        temp = rand_int(temp);
+        for (i = 0; i < 8; i++) {
+            temp -= var_s0->options[i * 2];
+            if (temp <= 0) {
+                break;
+            }
+        }
+
+        script->varTable[0] = var_s0->options[i * 2 + 1];
+    } else {
+        s32* opts;
+        f32 healthRatio = playerData->curHP / (f32) playerData->curMaxHP;
+
+        if (healthRatio <= 0.25) {
+            opts = &var_s0->options[16];
+        } else if (healthRatio <= 0.5) {
+            opts = &var_s0->options[32];
+        } else if (healthRatio <= 0.75) {
+            opts = &var_s0->options[48];
+        } else {
+            opts = &var_s0->options[64];
+        }
+
+        temp = 0;
+        for (i = 0; i < 8; i++) {
+            temp += opts[i * 2];
+        }
+        temp = rand_int(temp);
+        for (i = 0; i < 8; i++) {
+            temp -= opts[i * 2];
+            if (temp <= 0) {
+                break;
+            }
+        }
+        script->varTable[0] = opts[i * 2 + 1];
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80260DB8(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= BS_FLAGS1_ENEMY_FLED;
