@@ -1,168 +1,99 @@
 #include "sleepy_sheep.h"
 #include "ld_addrs.h"
+#include "effects.h"
 #include "battle/item/sleepy_sheep1.png.h"
 #include "battle/item/sleepy_sheep2.png.h"
 #include "battle/item/sleepy_sheep3.png.h"
 
 #include "ItemRefund.inc.c"
 
+s32 virtual_entity_create(s32);
 void virtual_entity_set_pos(s32, s32, s32, s32);
 void virtual_entity_set_scale(s32, f32, f32, f32);
 void virtual_entity_delete_by_index(s32);
 
-#ifdef NON_EQUIVALENT
-
+extern s32 D_802A3E88_7214D8[];
+extern s32* D_802A3F28_721578[10];
+extern f32 D_802A3F00_721550[];
 extern Vec3f D_802A3F88;
-extern s32* D_802A3F58;
+extern s32 D_802A3F58[10];
 
-s32 N(D_802A3E88_7214D8)[] = {
-    0, 0
-};
-
-s32 N(D_802A3E88_7214E0)[] = {
-    0x00000000,
-    0xFFFFFFE2, 0x00000000, 0xFFFFFFCE,
-    0xFFFFFFE5, 0x00000000, 0x0000001E,
-    0xFFFFFFBA, 0x00000000, 0xFFFFFFFB,
-    0xFFFFFF97, 0x00000000, 0x0000001E,
-    0xFFFFFF92, 0x00000000, 0xFFFFFFCE,
-    0xFFFFFF6F, 0x00000000, 0xFFFFFFFB,
-    0xFFFFFF56, 0x00000000, 0xFFFFFFCE,
-    0xFFFFFF42, 0x00000000, 0xFFFFFFE2,
-    0xFFFFFF2E, 0x00000000, 0xFFFFFFF6
-};
-
-f32 N(D_802A3F00_721550)[] = {
-    0x3F800000, 0x3F800000, 0x3F400000, 0x3F800000,
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
-    0x3F400000, 0x3F400000
-};
-
-s32 N(D_802A3F28_721578)[] = {
-    0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260,
-    0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0,
-    0x802A32E0, 0x802A3260
-};
-
-ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall) {
+    Vec3f* posPtr = &D_802A3F88;
+    s32 entityID;
+    f32 x, y, z;
+    s32 cond;
     s32 i;
-    Vec3f vecf;
-    s32 flag;
-    Vec3f* D_802A3F88_ptr = &D_802A3F88;
-    s32* D_802A3E88_7214D8_ptr1; // = &N(D_802A3E88_7214D8);
-    s32* D_802A3E88_7214D8_ptr2; // = &N(D_802A3E88_7214D8);
-    s32* D_802A3E88_7214D8_ptr3; // = &N(D_802A3E88_7214D8);
-    s32* D_802A3F58_ptr;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
     switch (script->functionTemp[0]) {
-        case 0: {
-            s32* D_802A3F28_721578_ptr = &N(D_802A3F28_721578);
-            s32 loop1, loop2, loop3;
-            D_802A3F58_ptr = &D_802A3F58;
-
-            D_802A3F88_ptr->x = -200.0f;
-            D_802A3F88_ptr->z = 10.0f;
-
-            D_802A3E88_7214D8_ptr1 = N(D_802A3E88_7214D8) + 0;
-            D_802A3E88_7214D8_ptr2 = N(D_802A3E88_7214D8) + 1;
-            D_802A3E88_7214D8_ptr3 = N(D_802A3E88_7214D8) + 2;
-
-            for (i = 0; i < 10; i++) {
-                D_802A3F58_ptr[i] = virtual_entity_create(D_802A3F28_721578_ptr[i]);
-
-                virtual_entity_set_pos(D_802A3F58_ptr[i],
-                              *D_802A3E88_7214D8_ptr1 + D_802A3F88_ptr->x,
-                              *D_802A3E88_7214D8_ptr2,
-                              *D_802A3E88_7214D8_ptr3 + D_802A3F88_ptr->z);
-                virtual_entity_set_scale(D_802A3F58_ptr[i], N(D_802A3F00_721550)[i], N(D_802A3F00_721550)[i], 1.0f);
-                D_802A3E88_7214D8_ptr1 += i * 3 + 0;
-                D_802A3E88_7214D8_ptr2 += i * 3 + 1;
-                D_802A3E88_7214D8_ptr3 += i * 3 + 2;
+        case 0:
+            posPtr->x = -200.0f;
+            posPtr->z = 10.0f;
+            for (i = 0; i < ARRAY_COUNT(D_802A3F58); i++) {
+                entityID = D_802A3F58[i] = virtual_entity_create((s32) D_802A3F28_721578[i]);
+                x = D_802A3E88_7214D8[i * 3] + posPtr->x;
+                y = D_802A3E88_7214D8[i * 3 + 1];
+                z = D_802A3E88_7214D8[i * 3 + 2] + posPtr->z;
+                virtual_entity_set_pos(entityID, x, y, z);
+                virtual_entity_set_scale(entityID, D_802A3F00_721550[i], D_802A3F00_721550[i], 1.0f);
             }
+            script->functionTemp[1] = (gGameStatusPtr->frameCounter % 10) & 0xFFFF;
             script->functionTemp[0] = 1;
-            script->functionTemp[1] = gGameStatusPtr->frameCounter % 10;
-        }
-        break;
-
+            break;
         case 1:
-            D_802A3F88.x += 6.0f;
-            if (gGameStatusPtr->frameCounter % 3 == 0) {
-                script->functionTemp[1]++;
-                script->functionTemp[1] %= 10;
+            posPtr->x += 6.0f;
+            cond = FALSE;
+            if (!((gGameStatusPtr->frameCounter % 3) & 0xFFFF)) {
+                script->functionTemp[1] = (script->functionTemp[1] + 1) % 10;
             }
 
-            flag = 0;
-            D_802A3F58_ptr = &D_802A3F58;
-            D_802A3E88_7214D8_ptr1 = N(D_802A3E88_7214D8);
-            D_802A3E88_7214D8_ptr2 = N(D_802A3E88_7214D8);
-            D_802A3E88_7214D8_ptr3 = N(D_802A3E88_7214D8);
-            for (i = 0; i < 10; i++) {
-                f32 x, y, z;
-
-                D_802A3E88_7214D8_ptr1 += i * 3 + 0;
-                D_802A3E88_7214D8_ptr2 += i * 3 + 1;
-                D_802A3E88_7214D8_ptr3 += i * 3 + 2;
-
-                x = *D_802A3E88_7214D8_ptr1 + D_802A3F88.x;
-                y = *D_802A3E88_7214D8_ptr2;
-                z = *D_802A3E88_7214D8_ptr3 + D_802A3F88.z;
-
-                virtual_entity_set_pos(D_802A3F58_ptr[i], x, y, z);
-
-                if (flag == 0 && script->functionTemp[1] == i) {
-                    f32 x2, y2;
-                    if (gGameStatusPtr->frameCounter % 5 == 0) {
-
-                        y2 = y;
-                        if (x > 0.0f) {
-                            x2 = x;
-                            if (x > 100.0f) {
-                                x2 = x - 50.0f;
-                            }
-                            y2 = rand_int(x2);
+            for (i = 0; i < ARRAY_COUNT(D_802A3F58); i++) {
+                entityID = D_802A3F58[i];
+                x = D_802A3E88_7214D8[i * 3] + posPtr->x;
+                y = D_802A3E88_7214D8[i * 3 + 1];
+                z = D_802A3E88_7214D8[i * 3 + 2] + posPtr->z;
+                virtual_entity_set_pos(entityID, x, y, z);
+                if (!cond && script->functionTemp[1] == i && !((gGameStatusPtr->frameCounter % 5) & 0xFFFF)) {
+                    if (x > 0.0f) {
+                        y = x;
+                        if (x > 100.0f) {
+                            y = x - 50.0f;
                         }
-                        x2 = x;
-                        if (x > 40.0f) {
-                            x2 = -(x - 40.0f);
-                        }
-                        fx_landing_dust(3, x2, y2, z, 0);
-                        flag = 1;
+                        y = rand_int(y);
                     }
+
+                    if (x > 40.0f) {
+                        x = -(x - 40.0f);
+                    }
+                    fx_landing_dust(3, x, y, z, 0.0f);
+                    cond = TRUE;
                 }
-                D_802A3E88_7214D8_ptr1 += 0xC;
-                D_802A3E88_7214D8_ptr2 += 0xC;
-                D_802A3E88_7214D8_ptr3 += 0xC;
             }
             if (gGameStatusPtr->frameCounter & 1) {
                 s32 randIdx = rand_int(9);
-                fx_landing_dust(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
-                              N(D_802A3E88_7214D8)[randIdx * 3 + 1],
-                              N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
+
+                x = D_802A3E88_7214D8[randIdx * 3] + posPtr->x;
+                y = D_802A3E88_7214D8[randIdx * 3 + 1];
+                z = D_802A3E88_7214D8[randIdx * 3 + 2] + posPtr->z;
+
+                fx_landing_dust(2, x, y, z, 0.0f);
             }
-            if (D_802A3F88_ptr->x >= 320.0f) {
+            if (posPtr->x >= 320.0f) {
                 script->functionTemp[0] = 2;
-                break;
             }
-            return ApiStatus_DONE2;
-
+            break;
         case 2:
-            for (i = 0; i < 10; i++) {
-                virtual_entity_delete_by_index(*(&D_802A3F58 + i));
+            for (i = 0; i < ARRAY_COUNT(D_802A3F58); i++) {
+                virtual_entity_delete_by_index(D_802A3F58[i]);
             }
-
             return ApiStatus_DONE2;
     }
-
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep", battle_item_sleepy_sheep_func_802A123C_71E88C,
-            Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -180,7 +111,7 @@ ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
         Actor* targetActor = get_actor(target->actorID);
         ActorPart* targetPart = get_actor_part(targetActor, target->partID);
 
-        if ((targetActor->transparentStatus == 0) && !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
+        if (targetActor->transparentStatus == 0 && !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
             targetActor->yaw += 33.0f;
             targetActor->yaw = clamp_angle(targetActor->yaw);
         }
@@ -198,13 +129,13 @@ ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
-    s32 ret;
+    s32 cond;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
-    ret = 0;
+    cond = FALSE;
 
     for (i = 0; i < player->targetListLength; i++) {
         s8 targetIdx = player->targetIndexList[i];
@@ -219,13 +150,16 @@ ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall) {
                     if (targetActor->yaw >= 360.0f) {
                         targetActor->yaw = 360.0f;
                     }
-                    ret = 1;
+                    cond = TRUE;
                 }
             }
         }
     }
 
-    return (ret == 0) * ApiStatus_DONE2;
+    if (!cond) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
 }
 
 #include "UseItem.inc.c"
@@ -318,21 +252,21 @@ s32 N(modelCommandList)[] = {
     0x00000001, 0x00000003, (s32) &N(frame2_displayList),
     0x00000001, 0x00000002, (s32) &N(frame1_displayList),
     0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000002, 0x00000000,
+    0x00000002, 0,
 
     0x00000004, 0x0000000D,
     0x00000001, 0x00000003, (s32) &N(frame2_displayList),
     0x00000001, 0x00000002, (s32) &N(frame1_displayList),
     0x00000001, 0x00000002, (s32) &N(frame3_displayList),
     0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000002, 0x00000000,
+    0x00000002, 0,
 
     0x00000004, 0x0000000D,
     0x00000001, 0x00000002, (s32) &N(frame1_displayList),
     0x00000001, 0x00000002, (s32) &N(frame3_displayList),
     0x00000001, 0x00000002, (s32) &N(frame1_displayList),
     0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000002, 0x00000000,
+    0x00000002, 0,
 };
 
 EvtScript N(main) = {
@@ -486,5 +420,29 @@ EvtScript N(main) = {
 };
 
 s32 D_802A3E88_7214D8[] = {
-    0, 0
+    0, 0, 0,
+    -30, 0, -50,
+    -27, 0, 30,
+    -70, 0, -5,
+    -105, 0, 30,
+    -110, 0, -50,
+    -145, 0, -5,
+    -170, 0, -50,
+    -190, 0, -30,
+    -210, 0, -10,
+};
+
+f32 D_802A3F00_721550[] = { 1.0f, 1.0f, 0.75f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.75f, 0.75f };
+
+s32* D_802A3F28_721578[] = {
+    &N(modelCommandList)[0],
+    &N(modelCommandList)[16],
+    &N(modelCommandList)[32],
+    &N(modelCommandList)[0],
+    &N(modelCommandList)[16],
+    &N(modelCommandList)[32],
+    &N(modelCommandList)[0],
+    &N(modelCommandList)[16],
+    &N(modelCommandList)[32],
+    &N(modelCommandList)[0]
 };

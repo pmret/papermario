@@ -16062,11 +16062,10 @@ segments:
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # more audio stuff
   - [0x19425C0, bin] # INIT file
-  - [0x1942C40, bin] # SBN end position
-
 ###############
 ### Sprites ###
 ###############
+  - [0x1942C40, bin]
   - [0x1943000, bin] # sprite data build metadata
   - [0x1943020, bin] # Player sprite table
   - [0x1943BA0, bin] # Mario world sprites
