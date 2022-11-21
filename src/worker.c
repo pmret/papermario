@@ -71,7 +71,7 @@ s32 create_worker_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     (*gCurrentWorkerListPtr)[i] = worker = heap_malloc(sizeof(*worker));
     ASSERT(worker != NULL);
 
-    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAGS_FRONT_UI;
+    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAG_FRONT_UI;
     worker->update = updateFunc;
     if (updateFunc == NULL) {
         worker->update = worker_delegate_do_nothing;
@@ -102,7 +102,7 @@ s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     (*gCurrentWorkerListPtr)[i] = worker = heap_malloc(sizeof(*worker));
     ASSERT(worker != NULL);
 
-    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAGS_BACK_UI;
+    worker->flags = WORKER_FLAG_1 | WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE | WORKER_FLAG_BACK_UI;
     worker->update = updateFunc;
     if (updateFunc == NULL) {
         worker->update = &worker_delegate_do_nothing;
@@ -136,7 +136,7 @@ void render_workers_world(void) {
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
         if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
-            if (!(worker->flags & WORKER_FLAGS_FRONT_UI)) {
+            if (!(worker->flags & WORKER_FLAG_FRONT_UI)) {
                 worker->draw();
             }
         }
@@ -149,7 +149,7 @@ void render_workers_frontUI(void) {
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
         if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
-            if (worker->flags & WORKER_FLAGS_FRONT_UI) {
+            if (worker->flags & WORKER_FLAG_FRONT_UI) {
                 worker->draw();
             }
         }
@@ -162,7 +162,7 @@ void render_workers_backUI(void) {
     for (i = 0; i < MAX_WORKERS; i++) {
         Worker* worker = (*gCurrentWorkerListPtr)[i];
         if (worker != NULL && !(worker->flags & WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE)) {
-            if (worker->flags & WORKER_FLAGS_BACK_UI) {
+            if (worker->flags & WORKER_FLAG_BACK_UI) {
                 worker->draw();
             }
         }
