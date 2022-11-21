@@ -401,7 +401,7 @@ void load_demo_battle(u32 index) {
     clear_worker_list();
     clear_script_list();
     create_cameras_a();
-    spr_init_sprites(PLAYER_SPRITES_MARIO_DEFAULT);
+    spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
     clear_animator_list();
     clear_entity_models();
     clear_npcs();

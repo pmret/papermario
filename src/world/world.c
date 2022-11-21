@@ -48,7 +48,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
 
-    gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_DEFAULT;
+    gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
     func_8002D160();
     func_802B2078();
     clear_render_tasks();

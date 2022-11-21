@@ -121,7 +121,7 @@ void state_step_language_select(void) {
                     backup_map_collision_data();
                     battle_heap_create();
                     sfx_clear_env_sounds(0);
-                    spr_init_sprites(PLAYER_SPRITES_MARIO_DEFAULT);
+                    spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
                     clear_model_data();
                     clear_sprite_shading_data();
                     reset_background_settings();

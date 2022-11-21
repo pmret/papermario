@@ -114,11 +114,11 @@ f32 spr_animUpdateTimeScale = 1.0f;
 // - macroify rasterSize based on the biggest raster
 // - OR values of a generated player raster name enum together for initiallyLoaded bits
 PlayerSpriteSet spr_playerSpriteSets[] = {
-    [PLAYER_SPRITES_MARIO_DEFAULT]          {  6, 0x700, MARIO_SPRITE_WORLD_BITS },
+    [PLAYER_SPRITES_MARIO_WORLD]            {  6, 0x700, MARIO_SPRITE_WORLD_BITS },
     [PLAYER_SPRITES_MARIO_REFLECT_FLOOR]    { 18, 0x700, MARIO_SPRITE_WORLD_BITS },
     [PLAYER_SPRITES_COMBINED_EPILOGUE]      { 10, 0x900, MARIO_SPRITE_WORLD_BITS | PEACH_SPRITE_BITS },
     [PLAYER_SPRITES_MARIO_PARADE]           {  3, 0x700, MARIO_SPRITE_COMMON_BITS },
-    [PLAYER_SPRITES_PEACH_DEFAULT]          {  6, 0x900, PEACH_SPRITE_BITS },
+    [PLAYER_SPRITES_PEACH_WORLD]            {  6, 0x900, PEACH_SPRITE_BITS },
     [PLAYER_SPRITES_MARIO_BATTLE]           {  6, 0x700, MARIO_SPRITE_BATTLE_BITS },
     [PLAYER_SPRITES_PEACH_BATTLE]           {  6, 0x900, PEACH_SPRITE_BITS},
 };
@@ -782,7 +782,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     spr_playerMaxComponents = 0;
 
     if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
-        playerSpriteSet = PLAYER_SPRITES_PEACH_DEFAULT;
+        playerSpriteSet = PLAYER_SPRITES_PEACH_WORLD;
     }
 
     loadedFlags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;
