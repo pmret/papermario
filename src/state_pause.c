@@ -63,7 +63,7 @@ void state_step_pause(void) {
                     battle_heap_create();
                     nuContRmbForceStop();
                     sfx_clear_env_sounds(0);
-                    spr_init_sprites(0);
+                    spr_init_sprites(PLAYER_SPRITES_MARIO_DEFAULT);
                     clear_model_data();
                     clear_sprite_shading_data();
                     reset_background_settings();

@@ -87,17 +87,40 @@ Gfx D_802DF490[] = {
 
 f32 spr_animUpdateTimeScale = 1.0f;
 
+#define MARIO_SPRITE_COMMON_BITS \
+      1 << SPR_Mario_1 \
+    | 1 << SPR_Mario_2 \
+
+#define MARIO_SPRITE_WORLD_BITS \
+    MARIO_SPRITE_COMMON_BITS \
+    | 1 << SPR_Mario_6 \
+    | 1 << SPR_Mario_7 \
+    | 1 << SPR_Mario_8 \
+    | 1 << SPR_Mario_9
+
+#define MARIO_SPRITE_BATTLE_BITS \
+    MARIO_SPRITE_COMMON_BITS \
+    | 1 << SPR_Mario_3 \
+    | 1 << SPR_Mario_4 \
+    | 1 << SPR_Mario_5
+
+#define PEACH_SPRITE_BITS \
+      1 << SPR_Peach_A \
+    | 1 << SPR_Peach_B \
+    | 1 << SPR_Peach_C \
+    | 1 << SPR_Peach_D \
+
 // TODO(player raster splat header generation):
 // - macroify rasterSize based on the biggest raster
 // - OR values of a generated player raster name enum together for initiallyLoaded bits
 PlayerSpriteSet spr_playerSpriteSets[] = {
-    /* Mario */ {  6, 0x700, 0x000003C6 },
-    /* Mario */ { 18, 0x700, 0x000003C6 },
-    /* Mario */ { 10, 0x900, 0x00003FC6 },
-    /* Mario */ {  3, 0x700, 0x00000006 },
-    /* Peach */ {  6, 0x900, 0x00003C00 },
-    /* Peach */ {  6, 0x700, 0x0000003E },
-    /* Peach */ {  6, 0x900, 0x00003C00 },
+    [PLAYER_SPRITES_MARIO_DEFAULT]          {  6, 0x700, MARIO_SPRITE_WORLD_BITS },
+    [PLAYER_SPRITES_MARIO_REFLECT_FLOOR]    { 18, 0x700, MARIO_SPRITE_WORLD_BITS },
+    [PLAYER_SPRITES_COMBINED_EPILOGUE]      { 10, 0x900, MARIO_SPRITE_WORLD_BITS | PEACH_SPRITE_BITS },
+    [PLAYER_SPRITES_MARIO_PARADE]           {  3, 0x700, MARIO_SPRITE_COMMON_BITS },
+    [PLAYER_SPRITES_PEACH_DEFAULT]          {  6, 0x900, PEACH_SPRITE_BITS },
+    [PLAYER_SPRITES_MARIO_BATTLE]           {  6, 0x700, MARIO_SPRITE_BATTLE_BITS },
+    [PLAYER_SPRITES_PEACH_BATTLE]           {  6, 0x900, PEACH_SPRITE_BITS},
 };
 
 void spr_init_quad_cache(void) {
@@ -759,7 +782,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     spr_playerMaxComponents = 0;
 
     if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
-        playerSpriteSet = 4;
+        playerSpriteSet = PLAYER_SPRITES_PEACH_DEFAULT;
     }
 
     loadedFlags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;

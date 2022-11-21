@@ -108,6 +108,9 @@
 
 #define BATTLE_ENTITY_ID_MASK 0x800
 
+#define UNPACK_BTL_AREA(battleID) (((battleID) >> 8) & 0xFF)
+#define UNPACK_BTL_INDEX(battleID) ((battleID) & 0xFF)
+
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000
 

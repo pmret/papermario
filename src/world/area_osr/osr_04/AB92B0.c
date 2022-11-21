@@ -1,7 +1,7 @@
 #include "osr_04.h"
 
 ApiStatus func_80240000_AB92B0(Evt *script, s32 isInitialCall) {
-    gGameStatusPtr->playerSpriteSet = 2;
+    gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_COMBINED_EPILOGUE;
     sprintf(wMapShapeName, "osr_03_shape");
     sprintf(wMapHitName, "osr_03_hit");
     return ApiStatus_BLOCK;

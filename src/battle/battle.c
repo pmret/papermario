@@ -286,7 +286,7 @@ void reset_battle_status(void) {
     D_800DC4D4 = 0;
     D_800DC4FC = NULL;
     D_800DC4F8 = 0;
-    D_800DC4E8 = 0;
+    gCurrentBattleID = 0;
     D_800DC064 = NULL;
     D_800DC060 = 0;
     D_800DC4EC = 0;
@@ -302,8 +302,8 @@ void func_80072BCC(s32 arg0) {
 }
 
 void load_battle_section(void) {
-    BattleArea* battleArea = &gBattleAreas[gCurrentBattleSection];
-    s32 battleIdx = D_800DC4EB;
+    BattleArea* battleArea = &gBattleAreas[UNPACK_BTL_AREA(gCurrentBattleID)];
+    s32 battleIdx = UNPACK_BTL_INDEX(gCurrentBattleID);
 
     dma_copy(battleArea->dmaStart, battleArea->dmaEnd, battleArea->dmaDest);
 
@@ -319,8 +319,8 @@ void load_battle_section(void) {
     D_800DC4D0 = 0;
 }
 
-void load_battle(s32 arg0) {
-    D_800DC4E8 = arg0;
+void load_battle(s32 battleID) {
+    gCurrentBattleID = battleID;
     set_game_mode(GAME_MODE_BATTLE);
     gBattleState = 0;
     D_800DC4D0 = 0;
@@ -401,7 +401,7 @@ void load_demo_battle(u32 index) {
     clear_worker_list();
     clear_script_list();
     create_cameras_a();
-    spr_init_sprites(0);
+    spr_init_sprites(PLAYER_SPRITES_MARIO_DEFAULT);
     clear_animator_list();
     clear_entity_models();
     clear_npcs();

@@ -227,7 +227,7 @@ ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
-    DmaTable* moveScript = &gBattleAreas[gCurrentBattleSection].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
+    DmaTable* moveScript = &gBattleAreas[UNPACK_BTL_AREA(gCurrentBattleID)].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
 
     if (moveScript == NULL) {
         return ApiStatus_DONE2;
