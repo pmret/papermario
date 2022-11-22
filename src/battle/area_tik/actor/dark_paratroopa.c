@@ -578,7 +578,7 @@ EvtScript N(fall) = {
     EVT_ADD(LVar1, 8)
     EVT_SUB(LVar2, 2)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim0B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Hurt)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 2, SOUND_301, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
     EVT_IF_EQ(LVarA, 0)
@@ -629,7 +629,7 @@ EvtScript N(fall) = {
     EVT_CALL(SetGoalToIndex, ACTOR_SELF, LVar0)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Idle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_koopa)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
@@ -646,67 +646,67 @@ EvtScript N(fall) = {
 };
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Anim01,
-    STATUS_STONE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Anim11,
-    STATUS_POISON, ANIM_KoopaTroopa_Dark_Anim01,
-    STATUS_STOP, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Anim01,
-    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Idle,
+    STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_KoopaTroopa_Dark_Idle,
+    STATUS_STOP, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Idle,
+    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations_koopa_step)[] = {
-    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_STONE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Anim11,
-    STATUS_POISON, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_STOP, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_STOP, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations_koopa_active)[] = {
-    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Anim02,
-    STATUS_STONE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Anim11,
-    STATUS_POISON, ANIM_KoopaTroopa_Dark_Anim02,
-    STATUS_STOP, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Anim02,
-    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Scramble,
+    STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_KoopaTroopa_Dark_Scramble,
+    STATUS_STOP, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Scramble,
+    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations_koopa_step_active)[] = {
-    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_STONE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Anim11,
-    STATUS_POISON, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_STOP, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Anim03,
-    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_STOP, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Walk,
+    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations_koopa_flipped)[] = {
-    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Anim0F,
-    STATUS_STONE, ANIM_KoopaTroopa_Dark_Anim10,
-    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Anim12,
-    STATUS_POISON, ANIM_KoopaTroopa_Dark_Anim0F,
-    STATUS_STOP, ANIM_KoopaTroopa_Dark_Anim10,
-    STATUS_STATIC, ANIM_KoopaTroopa_Dark_Anim0F,
-    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_Anim10,
-    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_Anim14,
-    STATUS_FEAR, ANIM_KoopaTroopa_Dark_Anim14,
+    STATUS_NORMAL, ANIM_KoopaTroopa_Dark_ToppleStruggle,
+    STATUS_STONE, ANIM_KoopaTroopa_Dark_ToppleStill,
+    STATUS_SLEEP, ANIM_KoopaTroopa_Dark_ToppleSleep,
+    STATUS_POISON, ANIM_KoopaTroopa_Dark_ToppleStruggle,
+    STATUS_STOP, ANIM_KoopaTroopa_Dark_ToppleStill,
+    STATUS_STATIC, ANIM_KoopaTroopa_Dark_ToppleStruggle,
+    STATUS_PARALYZE, ANIM_KoopaTroopa_Dark_ToppleStill,
+    STATUS_DIZZY, ANIM_KoopaTroopa_Dark_ToppleStunned,
+    STATUS_FEAR, ANIM_KoopaTroopa_Dark_ToppleStunned,
     STATUS_END,
 };
 
@@ -720,7 +720,7 @@ EvtScript N(init_koopa) = {
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -910,33 +910,33 @@ EvtScript N(handleEvent_koopa) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0C)
-            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0C)
-            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0D)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
@@ -953,7 +953,7 @@ EvtScript N(handleEvent_koopa) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
                 EVT_WAIT(4)
@@ -977,27 +977,27 @@ EvtScript N(handleEvent_koopa) = {
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim0F)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(0.5))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim04)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -1007,36 +1007,36 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_CASE_OR_EQ(0)
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim07)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ShellEnter)
                     EVT_EXEC_WAIT(DoImmune)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-                        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim08)
+                        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
                         EVT_WAIT(10)
                     EVT_END_IF
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                     EVT_EXEC_WAIT(DoImmune)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim04)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
                 EVT_EXEC_WAIT(DoReturnHome)
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1046,7 +1046,7 @@ EvtScript N(handleEvent_koopa) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
-                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim02)
+                EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Scramble)
                 EVT_EXEC_WAIT(DoRecover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
@@ -1055,15 +1055,15 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_CASE_OR_EQ(0)
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim04)
-                    EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_Anim0B)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
+                    EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_Hurt)
                     EVT_EXEC_WAIT(DoScareAway)
                     EVT_RETURN
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                     EVT_EXEC_WAIT(DoImmune)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -1073,12 +1073,12 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_CASE_OR_EQ(0)
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim17)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Panic)
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoAirLift)
@@ -1088,12 +1088,12 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_CASE_OR_EQ(0)
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim17)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Panic)
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
             EVT_EXEC_WAIT(DoBlowAway)
@@ -1104,13 +1104,13 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_CASE_OR_EQ(0)
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim01)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Idle)
                     EVT_EXEC_WAIT(DoImmune)
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
-                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                     EVT_EXEC_WAIT(DoImmune)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -1127,12 +1127,12 @@ EvtScript N(koopa_attackShellToss) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellSpin)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellEnter)
         EVT_WAIT(10)
         EVT_THREAD
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1144,7 +1144,7 @@ EvtScript N(koopa_attackShellToss) = {
             EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellSpin)
         EVT_WAIT(10)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_END_IF
@@ -1160,7 +1160,7 @@ EvtScript N(koopa_attackShellToss) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, -40, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
             EVT_WAIT(8)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -1168,15 +1168,15 @@ EvtScript N(koopa_attackShellToss) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim15)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_BeginPanic1)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim16)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_BeginPanic2)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim17)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Panic)
             EVT_WAIT(6)
             EVT_SUB(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1185,11 +1185,11 @@ EvtScript N(koopa_attackShellToss) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim17)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Panic)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1219,13 +1219,13 @@ EvtScript N(koopa_attackShellToss) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim04)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1254,12 +1254,12 @@ EvtScript N(koopa_attackDizzyTornado) = {
     EVT_ELSE
         EVT_CALL(AddGoalPos, ACTOR_SELF, 20, 0, 0)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellEnter)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1271,7 +1271,7 @@ EvtScript N(koopa_attackDizzyTornado) = {
         EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellSpin)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2026)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, 7)
@@ -1281,7 +1281,7 @@ EvtScript N(koopa_attackDizzyTornado) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 1)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
@@ -1292,11 +1292,11 @@ EvtScript N(koopa_attackDizzyTornado) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim17)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Panic)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_RETURN
@@ -1322,16 +1322,16 @@ EvtScript N(koopa_attackDizzyTornado) = {
                 EVT_END_IF
             EVT_END_THREAD
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 1)
             EVT_WAIT(10)
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Anim04)
+            EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1363,7 +1363,7 @@ EvtScript N(koopa_standUp) = {
         EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Anim0F)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
         EVT_SET(LVar0, 0)
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
         EVT_THREAD

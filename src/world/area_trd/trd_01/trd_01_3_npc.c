@@ -103,7 +103,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
 EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_02)))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Anim0E)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Floating)
     EVT_ELSE
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
         EVT_CALL(GetSelfNpcID, LVar0)
