@@ -121,13 +121,13 @@ void state_step_language_select(void) {
                     backup_map_collision_data();
                     battle_heap_create();
                     sfx_clear_env_sounds(0);
-                    spr_init_sprites(0);
+                    spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
                     clear_model_data();
                     clear_sprite_shading_data();
                     reset_background_settings();
                     clear_entity_models();
                     clear_animator_list();
-                    clear_generic_entity_list();
+                    clear_worker_list();
                     hud_element_set_aux_cache(&D_80200000, 0x20000);
                     hud_element_clear_cache();
                     reset_status_menu();
@@ -279,7 +279,7 @@ void state_step_exit_language_select(void) {
                     init_sprite_shading_data();
                     init_entity_models();
                     reset_animator_list();
-                    init_generic_entity_list();
+                    init_worker_list();
                     hud_element_set_aux_cache(0, 0);
                     init_hud_element_list();
                     init_item_entity_list();

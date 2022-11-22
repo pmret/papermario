@@ -134,7 +134,7 @@ EvtScript N(init_80218B70) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, 125, 33, -15)
     EVT_CALL(SetHomePos, ACTOR_SELF, 125, 33, -15)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(func_80253734, 1)
+    EVT_CALL(func_80253734, BTL_DARKNESS_MODE_1)
     EVT_RETURN
     EVT_END
 };

@@ -619,13 +619,13 @@ typedef struct Shadow {
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
 
-typedef struct DynamicEntity {
+typedef struct Worker {
     /* 0x00 */ s32 flags;
     /* 0x04 */ void (*update)(void);
     /* 0x08 */ void (*draw)(void);
-} DynamicEntity;
+} Worker;
 
-typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
+typedef Worker* WorkerList[MAX_WORKERS];
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
@@ -963,7 +963,7 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ s8 holdInputBufferPos;
     /* 0x431 */ s8 inputBufferPos;
-    /* 0x432 */ s8 unk_432;
+    /* 0x432 */ s8 darknessMode;
     /* 0x433 */ u8 unk_433;
     /* 0x434 */ s32* actionCmdDifficultyTable;
     /* 0x438 */ struct Stage* currentStage;

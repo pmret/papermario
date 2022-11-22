@@ -9,7 +9,7 @@ void N(test_reflection_worker_partner)(void);
 
 // identical to final version
 API_CALLABLE(N(EnableWallReflectionTest)) {
-    script->array[0] = (s32) create_generic_entity_frontUI(NULL, N(test_reflection_worker_render_wall));
+    script->array[0] = (s32) create_worker_frontUI(NULL, N(test_reflection_worker_render_wall));
     return ApiStatus_DONE2;
 }
 
@@ -60,7 +60,7 @@ void N(appendGfx_test_reflection_wall)(void* data) {
 }
 
 API_CALLABLE(N(EnableFloorReflectionTest)) {
-    script->array[0] = (s32) create_generic_entity_frontUI(NULL, &N(test_reflection_worker_render_floor));
+    script->array[0] = (s32) create_worker_frontUI(NULL, &N(test_reflection_worker_render_floor));
     return ApiStatus_DONE2;
 }
 
@@ -127,7 +127,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
 API_CALLABLE(N(PartnerReflectTest)) {
     Npc* partner;
 
-    script->array[1] = create_generic_entity_world(N(test_reflection_worker_partner), NULL);
+    script->array[1] = create_worker_world(N(test_reflection_worker_partner), NULL);
     partner = get_npc_safe(NPC_PARTNER);
 
     if (partner == NULL) {

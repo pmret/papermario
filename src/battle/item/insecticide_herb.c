@@ -1,5 +1,6 @@
 #include "insecticide_herb.h"
 #include "effects.h"
+#include "entity.h"
 #include "ld_addrs.h"
 #include "battle/item/insecticide_herb.png.h"
 
@@ -84,12 +85,11 @@ Gfx N(displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
-};
+EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);;
+
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000087)
+    EVT_SET_CONST(LVarA, ITEM_INSECTICIDE_HERB)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)

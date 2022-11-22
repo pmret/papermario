@@ -72,7 +72,7 @@
 #define MAX_TRIGGERS 64
 #define MAX_SHADOWS 60
 #define MAX_ENTITIES 30
-#define MAX_DYNAMIC_ENTITIES 16
+#define MAX_WORKERS 16
 #define MAX_TEX_PANNERS 16
 #define MAX_ITEM_ENTITIES 256
 
@@ -107,6 +107,9 @@
 #define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
 
 #define BATTLE_ENTITY_ID_MASK 0x800
+
+#define UNPACK_BTL_AREA(battleID) (((battleID) >> 8) & 0xFF)
+#define UNPACK_BTL_INDEX(battleID) ((battleID) & 0xFF)
 
 #define COLLISION_WITH_NPC_BIT 0x2000
 #define COLLISION_WITH_ENTITY_BIT 0x4000

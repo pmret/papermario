@@ -31,7 +31,7 @@ ApiStatus func_802406BC_8EC4DC(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_802406C8_8EC4E8);
 
 ApiStatus func_80240B20_8EC940(Evt* script, s32 isInitialCall) {
-    free_generic_entity(D_8025B2A8);
+    free_worker(D_8025B2A8);
     return ApiStatus_DONE2;
 }
 

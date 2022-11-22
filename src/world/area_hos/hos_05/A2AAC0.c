@@ -933,7 +933,7 @@ ApiStatus func_80244454_A2E694(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     } else {
         D_8024AA20_A34C60->unk_5C = 0;
-        free_generic_entity(D_8024AA20_A34C60->unk_00);
+        free_worker(D_8024AA20_A34C60->unk_00);
         D_8024AA20_A34C60->unk_00 = 0;
         return ApiStatus_DONE1;
     }

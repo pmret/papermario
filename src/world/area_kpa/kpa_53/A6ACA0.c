@@ -1,7 +1,7 @@
 #include "kpa_53.h"
 
 ApiStatus func_80240000_A6ACA0(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->playerSpriteSet = 2;
+    gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_COMBINED_EPILOGUE;
     sprintf(wMapShapeName, "kpa_50_shape");
     sprintf(wMapHitName, "kpa_50_hit");
     return ApiStatus_BLOCK;

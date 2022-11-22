@@ -112,7 +112,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
     switch (D_80246558_kkj_19) {
         case 0:
             D_80246534 = evt_get_variable(script, *args++);
-            D_80246554 = create_generic_entity_frontUI(NULL, func_802406A0_AF7FF0);
+            D_80246554 = create_worker_frontUI(NULL, func_802406A0_AF7FF0);
             dgb_08_npcGroup_80246528 = 0;
             D_80246530 = 0;
             for (i = 0; i < 10; i++) {
@@ -206,7 +206,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             script->varTable[0] = dgb_08_npcGroup_80246528;
             hud_element_free(D_80246568_C8C018[0]);
             hud_element_free(D_80246568_C8C018[1]);
-            free_generic_entity(D_80246554);
+            free_worker(D_80246554);
             return ApiStatus_DONE2;
     }
 

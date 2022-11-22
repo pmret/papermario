@@ -8,7 +8,7 @@ ApiStatus func_802404F0_BD3D60(Evt* script, s32 isInitialCall) {
     UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     func_8013A854(temp_v0->foldID);
-    free_generic_entity(temp_v0->entityID);
+    free_worker(temp_v0->entityID);
     heap_free(temp_v0);
     evt_set_variable(script, MapVar(10), NULL);
     return ApiStatus_DONE2;

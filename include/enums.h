@@ -3090,6 +3090,14 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAGS_80000000      = 0x80000000,
 };
 
+// Worker
+enum WorkerFlags {
+    WORKER_FLAG_1                       = 0x00000001,
+    WORKER_FLAG_SKIP_DRAW_UNTIL_UPDATE  = 0x00000002,
+    WORKER_FLAG_FRONT_UI                = 0x00000004,
+    WORKER_FLAG_BACK_UI                 = 0x00000008,
+};
+
 enum Buttons {
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,
@@ -5817,6 +5825,30 @@ enum EncounterPostBattleSubStates {
     ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_INIT = 400,
     ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_WAIT = 401,
     ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_TO_NEUTRAL = 402,
+};
+
+enum PlayerSpriteSets {
+    PLAYER_SPRITES_MARIO_WORLD          = 0,
+    PLAYER_SPRITES_MARIO_REFLECT_FLOOR  = 1,
+    PLAYER_SPRITES_COMBINED_EPILOGUE    = 2,
+    PLAYER_SPRITES_MARIO_PARADE         = 3,
+    PLAYER_SPRITES_PEACH_WORLD          = 4,
+    PLAYER_SPRITES_MARIO_BATTLE         = 5,
+    PLAYER_SPRITES_PEACH_BATTLE         = 6,
+};
+
+enum BattleDarknessMode {
+    BTL_DARKNESS_MODE_0     = 0,
+    BTL_DARKNESS_MODE_1     = 1,
+    BTL_DARKNESS_MODE_2     = 2,
+    BTL_DARKNESS_MODE_3     = 3,
+};
+
+enum BattleDarknessState {
+    BTL_DARKNESS_STATE_LOCKED       = -2,
+    BTL_DARKNESS_STATE_DARK         = -1,
+    BTL_DARKNESS_STATE_NONE         = 0,
+    BTL_DARKNESS_STATE_WATT_BASED   = 1,
 };
 
 #endif
