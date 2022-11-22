@@ -975,17 +975,22 @@ typedef struct BattleStatus {
 // alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
-    /* 0x20 */ s16 auxW;
-    /* 0x22 */ s16 mainW;
-    /* 0x24 */ s16 auxH;
-    /* 0x26 */ s16 mainH;
+    /* 0x20 */ u16 auxW;
+    /* 0x22 */ u16 mainW;
+    /* 0x24 */ u16 auxH;
+    /* 0x26 */ u16 mainH;
     /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u8 colorCombine;
-    /* 0x2B */ u8 fmt;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
+    /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
+    /* 0x2A */ u8 colorCombineType : 6;
+    /* 0x2A */ u8 colorCombineSubType : 2;
+    /* 0x2B */ u8 auxFmt : 4;
+    /* 0x2B */ u8 mainFmt : 4;
+    /* 0x2C */ u8 bitDepthHigh : 4;
+    /* 0x2C */ u8 mainBitDepth : 4;
+    /* 0x2D */ u8 auxWrapW : 4;
+    /* 0x2D */ u8 mainWrapW : 4;
+    /* 0x2E */ u8 auxWrapH : 4;
+    /* 0x2E */ u8 mainWrapH : 4;
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
 
