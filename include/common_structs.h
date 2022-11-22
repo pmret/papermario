@@ -963,7 +963,7 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ s8 holdInputBufferPos;
     /* 0x431 */ s8 inputBufferPos;
-    /* 0x432 */ s8 unk_432;
+    /* 0x432 */ s8 darknessMode;
     /* 0x433 */ u8 unk_433;
     /* 0x434 */ s32* actionCmdDifficultyTable;
     /* 0x438 */ struct Stage* currentStage;

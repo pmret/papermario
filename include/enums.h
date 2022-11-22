@@ -5837,4 +5837,18 @@ enum PlayerSpriteSets {
     PLAYER_SPRITES_PEACH_BATTLE         = 6,
 };
 
+enum BattleDarknessMode {
+    BTL_DARKNESS_MODE_0     = 0,
+    BTL_DARKNESS_MODE_1     = 1,
+    BTL_DARKNESS_MODE_2     = 2,
+    BTL_DARKNESS_MODE_3     = 3,
+};
+
+enum BattleDarknessState {
+    BTL_DARKNESS_STATE_LOCKED       = -2,
+    BTL_DARKNESS_STATE_DARK         = -1,
+    BTL_DARKNESS_STATE_NONE         = 0,
+    BTL_DARKNESS_STATE_WATT_BASED   = 1,
+};
+
 #endif

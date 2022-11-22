@@ -877,6 +877,7 @@ segments:
     - [0xF2470, c, npc_api]
     - [0xF4C60, c, msg_api]
     - [0xF5750, c, player_api]
+    - [0xF76E0, c, virtual_entity]
     - [0xF8F60, c, f8f60_len_1560]
     - [0xFA4C0, c, fa4c0_len_3bf0]
     - [0xFBE10, c, fx_api]

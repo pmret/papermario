@@ -264,17 +264,17 @@ ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
     s32 val = evt_get_variable(script, *script->ptrReadPos);
 
     switch (val) {
-        case 0:
-            battleStatus->unk_432 = -1;
+        case BTL_DARKNESS_MODE_0:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_DARK;
             break;
-        case 1:
-            battleStatus->unk_432 = 1;
+        case BTL_DARKNESS_MODE_1:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_WATT_BASED;
             break;
-        case 2:
-            battleStatus->unk_432 = -2;
+        case BTL_DARKNESS_MODE_2:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_LOCKED;
             break;
-        case 3:
-            battleStatus->unk_432 = 1;
+        case BTL_DARKNESS_MODE_3:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_WATT_BASED;
             break;
     }
 

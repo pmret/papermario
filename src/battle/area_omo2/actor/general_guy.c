@@ -430,7 +430,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_WAIT(10)
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(func_80253734, 2)
+        EVT_CALL(func_80253734, BTL_DARKNESS_MODE_2)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GeneralGuy_Anim03)
     EVT_WAIT(20)
@@ -479,7 +479,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
             EVT_IF_NE(LVar0, 0)
-                EVT_CALL(func_80253734, 3)
+                EVT_CALL(func_80253734, BTL_DARKNESS_MODE_3)
             EVT_END_IF
             EVT_CALL(N(UnfadeBackgroundToBlack))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
@@ -508,7 +508,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_WAIT(12)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
             EVT_IF_NE(LVar0, 0)
-                EVT_CALL(func_80253734, 3)
+                EVT_CALL(func_80253734, BTL_DARKNESS_MODE_3)
             EVT_END_IF
             EVT_CALL(N(UnfadeBackgroundToBlack))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
@@ -556,7 +556,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(func_80253734, 3)
+        EVT_CALL(func_80253734, BTL_DARKNESS_MODE_3)
     EVT_END_IF
     EVT_CALL(N(UnfadeBackgroundToBlack))
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)

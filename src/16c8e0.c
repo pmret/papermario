@@ -415,13 +415,13 @@ void btl_update(void) {
     btl_popup_messages_update();
     update_actor_shadows();
 
-    if (battleStatus->unk_432 != -2) {
+    if (battleStatus->darknessMode != BTL_DARKNESS_STATE_LOCKED) {
         u8 paramType;
         f32 paramAmount;
 
         get_screen_overlay_params(1, &paramType, &paramAmount);
 
-        if (battleStatus->unk_432 > 0) {
+        if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
             set_screen_overlay_color(1, 0, 0, 0);
             if (partner == NULL) {
                 set_screen_overlay_params_back(0, 215.0f);
@@ -438,12 +438,12 @@ void btl_update(void) {
                 }
                 set_screen_overlay_params_back(0, paramAmount);
             }
-        } else if (battleStatus->unk_432 < 0) {
+        } else if (battleStatus->darknessMode < BTL_DARKNESS_STATE_NONE) {
             paramAmount -= 10.0f;
             if (paramAmount < 0.0f) {
                 paramAmount = 0.0f;
-                set_screen_overlay_params_back(0xFF, -1.0f);
-                battleStatus->unk_432 = 0;
+                set_screen_overlay_params_back(255, -1.0f);
+                battleStatus->darknessMode = BTL_DARKNESS_STATE_NONE;
             } else {
                 set_screen_overlay_params_back(0, paramAmount);
             }
@@ -456,19 +456,19 @@ void btl_update(void) {
                     f32 paramAmount;
 
                     get_screen_overlay_params(0, &paramType, &paramAmount);
-                    if (paramType == 0xFF) {
+                    if (paramType == 255) {
                         D_802809F6 = 0;
                         set_screen_overlay_params_front(0, 0.0f);
                     }
                 }
-            } else if (D_802809F6 == 0xFF) {
+            } else if (D_802809F6 == 255) {
                 if (gBattleState != BATTLE_STATE_END_DEMO_BATTLE) {
                     btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                 }
             } else {
                 D_802809F6 += 10;
-                if (D_802809F6 > 0xFF) {
-                    D_802809F6 = 0xFF;
+                if (D_802809F6 > 255) {
+                    D_802809F6 = 255;
                 }
 
                 set_screen_overlay_params_front(0, D_802809F6);

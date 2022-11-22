@@ -1,5 +1,6 @@
 #include "egg_missile.h"
 #include "effects.h"
+#include "entity.h"
 #include "ld_addrs.h"
 #include "battle/item/egg_missile1.png.h"
 #include "battle/item/egg_missile2.png.h"
@@ -128,26 +129,27 @@ Gfx N(frame4_displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame2_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000002, 0x00000000,
-    0x00000004, 0x0000000D,
-    0x00000001, sizeof(N(frame4_displayList)) / sizeof(s32), (s32) &N(frame4_displayList),
-    0x00000002, 0x00000000,
+EntityModelScript N(modelCommandList) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame2_displayList), 2)
+    ems_Draw(N(frame3_displayList), 2)
+    ems_Restart
+    ems_End
 };
 
+EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(
+    N(frame4_displayList), RENDER_MODE_ALPHATEST);
+
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0xC8)
+    EVT_SET_CONST(LVarA, ITEM_EGG_MISSILE)
     EVT_EXEC_WAIT(battle_item_egg_missile_UseItemWithEffect)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, 0, 0, 65558)
     EVT_CALL(PlaySound, 1018)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LVarA, (s32) battle_item_egg_missile_modelCommandList)
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(battle_item_egg_missile_modelCommandList))
     EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_ADD(LVar1, 42)
