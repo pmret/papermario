@@ -280,7 +280,7 @@ ApiStatus func_8024140C_EA9EEC(Evt* script, s32 isInitialCall) {
     LavaPiranhaVine* data = heap_malloc(NUM_VINES * sizeof(*data));
     evt_set_variable(script, MV_VinesData, (s32) data);
     D_80248380 = -1;
-    create_generic_entity_world(0, &func_802413C0_EA9EA0);
+    create_worker_world(0, &func_802413C0_EA9EA0);
     return ApiStatus_DONE2;
 }
 

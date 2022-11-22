@@ -643,7 +643,7 @@ EvtScript N(summon_tank_squad) = {
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim03)
     EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
     EVT_WAIT(10)
-    EVT_CALL(func_80253734, 1)
+    EVT_CALL(func_80253734, BTL_DARKNESS_MODE_1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 7, 1)
     EVT_EXEC(N(8022F2BC))
     EVT_WAIT(30)

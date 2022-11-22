@@ -7,8 +7,8 @@ extern SlideParams D_8024160C_ABC89C;
 extern SlideParams D_8024162C_ABC8BC;
 
 ApiStatus func_80240000_ABB290(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(NULL, GB_StoryProgress) >= 96) {
-        gGameStatusPtr->playerSpriteSet = 2;
+    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE) {
+        gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_COMBINED_EPILOGUE;
     }
 
     return ApiStatus_BLOCK;

@@ -24,7 +24,7 @@ void state_init_battle(void) {
 
 void state_step_battle(void) {
     u32 currentBattleSelection;
-    u32 temp;
+    u32 currentBattleIndex;
 
     if (D_800A0900 == 5) {
         if (nuGfxCfb[1] != nuGfxCfb_ptr) {
@@ -51,14 +51,15 @@ void state_step_battle(void) {
             func_802B20B4();
             sfx_clear_env_sounds(0);
 
-            currentBattleSelection = gCurrentBattleSection;
-            temp = D_800DC4EB;
+            currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
+            currentBattleIndex = UNPACK_BTL_INDEX(gCurrentBattleID);
 
-            if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH || (currentBattleSelection == BTL_AREA_KKJ && temp == 0)) {
+            if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH ||
+                (currentBattleSelection == BTL_AREA_KKJ && currentBattleIndex == 0)) {
                 gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
-                spr_init_sprites(6);
+                spr_init_sprites(PLAYER_SPRITES_PEACH_BATTLE);
             } else {
-                spr_init_sprites(5);
+                spr_init_sprites(PLAYER_SPRITES_MARIO_BATTLE);
             }
 
             clear_model_data();
@@ -66,7 +67,7 @@ void state_step_battle(void) {
             reset_background_settings();
             clear_entity_models();
             clear_animator_list();
-            clear_generic_entity_list();
+            clear_worker_list();
             hud_element_set_aux_cache(NULL, 0);
             hud_element_clear_cache();
             reset_status_menu();
@@ -142,7 +143,7 @@ void state_step_end_battle(void) {
             init_sprite_shading_data();
             init_entity_models();
             reset_animator_list();
-            init_generic_entity_list();
+            init_worker_list();
             hud_element_set_aux_cache(0, 0);
             init_hud_element_list();
             init_item_entity_list();

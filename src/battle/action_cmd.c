@@ -526,7 +526,7 @@ void action_command_free(void) {
 
 void func_80268E88(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
-    actionCmdStatus->workerID = create_generic_entity_frontUI(action_command_update, action_command_draw);
+    actionCmdStatus->workerID = create_worker_frontUI(action_command_update, action_command_draw);
     actionCmdStatus->actionCommandID = 0;
 }
 

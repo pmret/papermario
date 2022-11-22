@@ -183,7 +183,7 @@ API_CALLABLE(N(CreateRitualCards)) {
     fold_update(ret, FOLD_TYPE_5, 0x12, 1, 1, 0, 0x800);
     evt_set_variable(script, RITUAL_VAR_FOLDER_4, ret);
 
-    evt_set_variable(script, RITUAL_VAR_WORKER, create_generic_entity_world(
+    evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_world(
         N(card_worker_update),
         N(card_worker_render)));
     return ApiStatus_DONE2;
@@ -194,7 +194,7 @@ API_CALLABLE(N(DestroyRitualCards)) {
     func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_2));
     func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_3));
     func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_4));
-    free_generic_entity(evt_get_variable(script, RITUAL_VAR_WORKER));
+    free_worker(evt_get_variable(script, RITUAL_VAR_WORKER));
     return ApiStatus_DONE2;
 }
 

@@ -1,7 +1,7 @@
 #include "pra_39.h"
 
 ApiStatus func_80240000_D97890(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->playerSpriteSet = 1;
+    gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_REFLECT_FLOOR;
     sprintf(wMapShapeName, "pra_10_shape");
     sprintf(wMapHitName, "pra_10_hit");
     return ApiStatus_BLOCK;

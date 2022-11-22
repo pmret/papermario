@@ -196,7 +196,7 @@ API_CALLABLE(N(CreateScoreDisplay)) {
     s32 hudElemA, hudElemMeter;
 
     if (isInitialCall) {
-        data->workerID = create_generic_entity_world(NULL, &N(worker_draw_score));
+        data->workerID = create_worker_world(NULL, &N(worker_draw_score));
 
         hudElemA = hud_element_create(&HES_AButton);
         data->hudElemID_AButton = hudElemA;
@@ -967,7 +967,7 @@ API_CALLABLE(N(CreateMinigame)) {
 API_CALLABLE(N(DestroyMinigame)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
 
-    free_generic_entity(data->workerID);
+    free_worker(data->workerID);
     hud_element_free(data->hudElemID_AButton);
     hud_element_free(data->hudElemID_Meter);
 

@@ -289,7 +289,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->unk_8C = 0;
             battleStatus->merleeAttackBoost = 0;
             battleStatus->merleeDefenseBoost = 0;
-            battleStatus->unk_432 = 0;
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_NONE;
             battleStatus->unk_433 = -1;
             battleStatus->hustleTurns = 0;
             battleStatus->unk_93 = 0;
@@ -420,7 +420,7 @@ void btl_state_update_normal_start(void) {
                         battleStatus->controlScript = script;
                         battleStatus->controlScriptID = script->id;
                     }
-                    if (battleStatus->unk_432 > 0) {
+                    if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
                         set_screen_overlay_color(1, 0, 0, 0);
                         set_screen_overlay_params_back(0, 215.0f);
                     }

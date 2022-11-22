@@ -52,9 +52,9 @@ BSS s32 D_802DB26C; // unused?
 BSS Npc playerNpcData;
 BSS u16 D_802DB5B0;
 BSS s32 D_802DB5B4[3]; // unused
-BSS VirtualEntityList D_802DB5C0;
-BSS VirtualEntityList D_802DB6C0;
-BSS VirtualEntityList* D_802DB7C0;
+BSS VirtualEntityList bBattleVirtualEntityList;
+BSS VirtualEntityList wWorldVirtualEntityList;
+BSS VirtualEntityList* gCurrentVirtualEntityListPtr;
 BSS s32 D_802DB7C4[3]; // unused
 
 // fa4c0_len_3bf0

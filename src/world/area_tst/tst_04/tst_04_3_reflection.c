@@ -9,7 +9,7 @@ void N(worker_update_partner_reflection)(void);
 static s32 N(Animator);
 
 API_CALLABLE(N(EnablePlayerReflection)) {
-    script->array[0] = (s32) create_generic_entity_frontUI(NULL, &N(worker_render_player_reflection));
+    script->array[0] = (s32) create_worker_frontUI(NULL, &N(worker_render_player_reflection));
     return ApiStatus_DONE2;
 }
 
@@ -63,7 +63,7 @@ void N(appendGfx_test_player_reflection)(void* data) {
 API_CALLABLE(N(EnablePartnerReflection)) {
     Npc* partner;
 
-    script->array[1] = create_generic_entity_world(&N(worker_update_partner_reflection), NULL);
+    script->array[1] = create_worker_world(&N(worker_update_partner_reflection), NULL);
     partner = get_npc_safe(NPC_PARTNER);
 
     if (partner == NULL) {
@@ -101,7 +101,7 @@ void N(worker_render_animator)(void) {
 }
 
 API_CALLABLE(N(SetupAnimatedModel)) {
-    create_generic_entity_world(N(worker_update_animator), N(worker_render_animator));
+    create_worker_world(N(worker_update_animator), N(worker_render_animator));
     return ApiStatus_DONE2;
 }
 

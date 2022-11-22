@@ -121,9 +121,9 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
     clear_script_list();
-    clear_generic_entity_list();
+    clear_worker_list();
     clear_render_tasks();
-    spr_init_sprites(0);
+    spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
@@ -247,7 +247,7 @@ void state_step_title_screen(void) {
             clear_animator_list();
             clear_npcs();
             hud_element_clear_cache();
-            spr_init_sprites(0);
+            spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
             clear_entity_data(1);
             clear_windows();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_8;

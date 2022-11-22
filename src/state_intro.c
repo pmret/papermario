@@ -144,10 +144,10 @@ void state_step_intro(void) {
             if (gGameStatusPtr->creditsViewportMode == -1) {
                 general_heap_create();
                 clear_render_tasks();
-                clear_generic_entity_list();
+                clear_worker_list();
                 clear_script_list();
                 create_cameras_a();
-                spr_init_sprites(0);
+                spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
                 clear_entity_models();
                 clear_animator_list();
                 clear_model_data();

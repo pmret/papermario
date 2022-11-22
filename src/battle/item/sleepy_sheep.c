@@ -1,4 +1,5 @@
 #include "sleepy_sheep.h"
+#include "entity.h"
 #include "ld_addrs.h"
 #include "battle/item/sleepy_sheep1.png.h"
 #include "battle/item/sleepy_sheep2.png.h"
@@ -312,31 +313,38 @@ Gfx N(frame3_displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000002, 0x00000000,
+EntityModelScript N(modelCommandList) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame2_displayList), 3)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame3_displayList), 2)
+    ems_Restart
+    ems_End
+};
 
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000002, 0x00000000,
+EntityModelScript N(modelCommandList_unused1) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame2_displayList),3)
+    ems_Draw(N(frame1_displayList),2)
+    ems_Draw(N(frame3_displayList),2)
+    ems_Draw(N(frame1_displayList),2)
+    ems_Restart
+    ems_End
+};
 
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000002, 0x00000000,
+EntityModelScript N(modelCommandList_unused2) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame3_displayList), 2)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame2_displayList), 3)
+    ems_Restart
+    ems_End
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000008F)
+    EVT_SET_CONST(LVarA, ITEM_SLEEPY_SHEEP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -67, -15, -5)

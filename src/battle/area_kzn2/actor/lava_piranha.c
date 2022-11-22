@@ -523,7 +523,7 @@ API_CALLABLE(N(MarkVineInterpolationDirty)) {
 
 API_CALLABLE(N(CreateVineRenderer)) {
     N(VineRenderState) = -1;
-    create_generic_entity_world(NULL, &N(worker_render_piranha_vines));
+    create_worker_world(NULL, &N(worker_render_piranha_vines));
     return ApiStatus_DONE2;
 }
 

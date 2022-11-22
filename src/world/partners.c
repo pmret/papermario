@@ -990,7 +990,7 @@ void partner_reset_data(void) {
     s32 currentPartner = gPlayerData.currentPartner;
 
     mem_clear(&gPartnerActionStatus, sizeof(gPartnerActionStatus));
-    get_generic_entity(create_generic_entity_frontUI(_use_partner_ability, NULL));
+    get_worker(create_worker_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
     D_8010CFE8 = 9;

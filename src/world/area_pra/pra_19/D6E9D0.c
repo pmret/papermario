@@ -105,7 +105,7 @@ void func_802415E0_D6FF90(void* data);
 void func_80241530_D6FEE0(void);
 
 ApiStatus func_802414F4_D6FEA4(Evt* script, s32 isInitialCall) {
-    script->array[0] = create_generic_entity_world(0, func_80241530_D6FEE0);
+    script->array[0] = create_worker_world(0, func_80241530_D6FEE0);
     return ApiStatus_DONE2;
 }
 

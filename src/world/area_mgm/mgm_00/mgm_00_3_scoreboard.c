@@ -141,13 +141,13 @@ API_CALLABLE(N(UpdateRecordDisplay)) {
         script->functionTempPtr[0] = data;
         data->state = RECORD_START_SHOW;
         data->alpha = 255;
-        data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
+        data->workerID = create_worker_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
         evt_set_variable(script, MV_RecordDisplayData, (s32)data);
     }
     data = script->functionTempPtr[0];
     if (data->state == RECORD_STATE_DONE) {
-        free_generic_entity(data->workerID);
+        free_worker(data->workerID);
         heap_free(data);
         return ApiStatus_DONE1;
     }

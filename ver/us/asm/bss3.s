@@ -430,13 +430,13 @@ dlabel entity_fog_dist_max
 dlabel D_80154394
 .space 0x0000000c
 
-dlabel gWorldDynamicEntityList
+dlabel gWorldWorkerList
 .space 0x00000040
 
-dlabel gBattleDynamicEntityList
+dlabel gBattleWorkerList
 .space 0x00000040
 
-dlabel gCurrentDynamicEntityListPtr
+dlabel gCurrentWorkerListPtr
 .space 4
 
 dlabel D_80154424

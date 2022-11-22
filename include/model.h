@@ -172,7 +172,7 @@ void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransfor
 void render_animated_model(s32 animatorID, Mtx* rootTransform);
 void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
                                           Mtx* rootTransform);
-void init_generic_entity_list(void);
+void init_worker_list(void);
 ModelAnimator* get_animator_by_index(s32 animModelID);
 void reset_animator_list(void);
 void delete_model_animator_node(AnimatorNode* node);

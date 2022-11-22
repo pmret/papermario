@@ -1072,14 +1072,8 @@ dlabel D_800DC4E0
 dlabel D_800DC4E4
 .space 4
 
-dlabel D_800DC4E8
-.space 2
-
-dlabel gCurrentBattleSection
-.space 1
-
-dlabel D_800DC4EB
-.space 1
+dlabel gCurrentBattleID
+.space 4
 
 dlabel D_800DC4EC
 .space 4
