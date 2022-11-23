@@ -129,7 +129,7 @@ void func_80045AC0(void) {
         popup->message = NULL;
     }
 
-    create_generic_entity_world(NULL, func_80045BC8);
+    create_worker_world(NULL, func_80045BC8);
     init_all_status_icons();
 }
 

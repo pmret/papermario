@@ -87,13 +87,13 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->scale.y = SPRITE_WORLD_SCALE_F;
     falling->scale.z = SPRITE_WORLD_SCALE_F;
     falling->foldStateID = func_8013A704(1);
-    falling->workerID = create_generic_entity_world(0, &N(appendGfx_FallingSprite));
+    falling->workerID = create_worker_world(0, &N(appendGfx_FallingSprite));
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(DeleteFallingSprite)) {
     func_8013A854(N(Falling).foldStateID);
-    free_generic_entity(N(Falling).workerID);
+    free_worker(N(Falling).workerID);
     return ApiStatus_DONE2;
 }
 

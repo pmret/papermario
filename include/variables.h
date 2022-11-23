@@ -23,9 +23,7 @@ extern s32 D_800DC4D4;
 extern s32 D_800DC4D8;
 extern s32 gBattleSubState;
 extern s32 D_800DC4E4;
-extern s32 D_800DC4E8;
-extern u8 gCurrentBattleSection; // in the middle of the previous var
-extern u8 D_800DC4EB; // in the middle of the previous var
+extern s32 gCurrentBattleID;
 extern s32 D_800DC4E0;
 extern s32 D_800DC4EC;
 extern s32 D_800DC4F0;
@@ -38,9 +36,9 @@ extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
 extern EntityList* gCurrentEntityListPtr;
 
-extern DynamicEntityList gWorldDynamicEntityList;
-extern DynamicEntityList gBattleDynamicEntityList;
-extern DynamicEntityList* gCurrentDynamicEntityListPtr;
+extern WorkerList gWorldWorkerList;
+extern WorkerList gBattleWorkerList;
+extern WorkerList* gCurrentWorkerListPtr;
 
 extern NpcList gWorldNpcList;
 extern NpcList gBattleNpcList;

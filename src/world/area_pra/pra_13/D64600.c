@@ -74,7 +74,7 @@ void func_8024140C_D659EC(void);
 void func_802414BC_D65A9C(void* npc);
 
 ApiStatus func_802413D0_D659B0(Evt* script, s32 isInitialCall) {
-    script->array[0] = create_generic_entity_world(0, func_8024140C_D659EC);
+    script->array[0] = create_worker_world(0, func_8024140C_D659EC);
     return ApiStatus_DONE2;
 }
 

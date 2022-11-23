@@ -45,7 +45,7 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000085)
+    EVT_SET_CONST(LVarA, ITEM_PEBBLE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)

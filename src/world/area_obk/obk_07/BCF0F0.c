@@ -114,7 +114,7 @@ ApiStatus func_80241168_BCFD58(Evt* script, s32 isInitialCall) {
     s32 i;
 
     gOverrideFlags |= GLOBAL_OVERRIDES_10;
-    temp_s1->unk_2C = create_generic_entity_frontUI(func_80240A6C_BCF65C, func_802410C0_BCFCB0);
+    temp_s1->unk_2C = create_worker_frontUI(func_80240A6C_BCF65C, func_802410C0_BCFCB0);
     temp_s1->unk_30 = 0;
     temp_s1->unk_04 = 0;
     temp_s1->unk_08 = 0;
@@ -179,7 +179,7 @@ ApiStatus func_802413D0_BCFFC0(Evt* script, s32 isInitialCall) {
     hud_element_free(temp_v0->unk_3C);
     hud_element_free(temp_v0->unk_40);
     hud_element_free(temp_v0->unk_44);
-    free_generic_entity(temp_v0->unk_2C);
+    free_worker(temp_v0->unk_2C);
     return ApiStatus_DONE2;
 }
 

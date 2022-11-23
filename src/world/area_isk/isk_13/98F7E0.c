@@ -117,14 +117,14 @@ ApiStatus func_80241BA8_991388(Evt* script, s32 isInitialCall) {
     ambush->color.a = 0.0f;
     ambush->foldID = 0;
     
-    ambush->workerID = create_generic_entity_frontUI(NULL, func_80241610_990DF0);
+    ambush->workerID = create_worker_frontUI(NULL, func_80241610_990DF0);
     evt_set_variable(script, MapVar(10), (s32) ambush);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80241D08_9914E8(Evt* script, s32 isInitialCall) {
     StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
-    free_generic_entity(ambush->workerID);
+    free_worker(ambush->workerID);
     return ApiStatus_DONE2;
 }
 

@@ -23,7 +23,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
             script->functionTemp[2] = 0;
             sfx_play_sound(SOUND_2033);
             camera->auxPitch = 0;
-            D_802A1CD0 = create_generic_entity_frontUI(NULL, func_802A123C_727B4C);
+            D_802A1CD0 = create_worker_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0] = 1;
         case 1:
             camera->flags |= CAMERA_FLAGS_SHAKING;
@@ -36,7 +36,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
             }
             camera->auxPitch = 0;
             camera->flags &= ~CAMERA_FLAGS_SHAKING;
-            free_generic_entity(D_802A1CD0);
+            free_worker(D_802A1CD0);
             return ApiStatus_DONE2;
     }
 

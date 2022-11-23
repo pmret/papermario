@@ -1,5 +1,6 @@
 #include "mystery.h"
 #include "effects.h"
+#include "entity.h"
 #include "ld_addrs.h"
 #include "battle/item/mystery.png.h"
 
@@ -53,12 +54,12 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
 
     switch (D_802A25E4) {
         case 0:
-            D_802A25F8 = create_generic_entity_frontUI(NULL, N(func_802A123C_72C7EC));
+            D_802A25F8 = create_worker_frontUI(NULL, N(func_802A123C_72C7EC));
             D_802A25EC = rand_int(18200);
             D_802A25F0 = 1000;
             D_802A25FC = N(D_802A227C_72D82C);
 
-            if (battleStatus->unk_432 > 0) {
+            if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
                 u8 type;
                 f32 zoom;
 
@@ -149,7 +150,7 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             var_v0_3 = i = D_802A25E8 / 26; // use of i required to match
             battleStatus->selectedItemID = D_802A25FC[D_802A25E8 / 26];
             script->varTable[0] = battleStatus->selectedItemID;
-            free_generic_entity(D_802A25F8);
+            free_worker(D_802A25F8);
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
                 hud_element_free(D_802A25C8[i]);
             }
@@ -205,22 +206,32 @@ Gfx N(displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), (s32) &N(displayList), 0x00000002, 0x00000000,
-};
+EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);;
 
 s32 N(D_802A227C_72D82C)[8] = {
-    0x0000008A, 0x0000008C, 0x00000080, 0x00000088,
-    0x0000009A, 0x00000082, 0x00000085, 0x0000008A
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_FIRE_FLOWER,
+    ITEM_STONE_CAP,
+    ITEM_DIZZY_DIAL,
+    ITEM_THUNDER_RAGE,
+    ITEM_PEBBLE,
+    ITEM_MUSHROOM
 };
 
 s32 N(D_802A229C_72D84C)[8] = {
-    0x0000008A, 0x0000008C, 0x00000085, 0x00000088,
-    0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_PEBBLE,
+    ITEM_STONE_CAP,
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_PEBBLE,
+    ITEM_MUSHROOM
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000096)
+    EVT_SET_CONST(LVarA, ITEM_MYSTERY)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(220)

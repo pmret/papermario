@@ -227,16 +227,18 @@ ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
-    DmaTable* moveScript = &gBattleAreas[gCurrentBattleSection].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
+    s32 dmaIndex = evt_get_variable(script, *script->ptrReadPos);
+    BattleArea* battleArea = &gBattleAreas[UNPACK_BTL_AREA(gCurrentBattleID)];
+    DmaTable* dmaEntry = &battleArea->dmaTable[dmaIndex];
 
-    if (moveScript == NULL) {
+    if (dmaEntry == NULL) {
         return ApiStatus_DONE2;
     }
 
     if (gBattleDmaDest == NULL) {
-            dma_copy(moveScript->start, moveScript->end, moveScript->dest);
+            dma_copy(dmaEntry->start, dmaEntry->end, dmaEntry->dest);
         } else {
-            dma_copy(moveScript->start, moveScript->end, gBattleDmaDest);
+            dma_copy(dmaEntry->start, dmaEntry->end, gBattleDmaDest);
     }
 
     return ApiStatus_DONE2;
@@ -262,17 +264,17 @@ ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
     s32 val = evt_get_variable(script, *script->ptrReadPos);
 
     switch (val) {
-        case 0:
-            battleStatus->unk_432 = -1;
+        case BTL_DARKNESS_MODE_0:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_DARK;
             break;
-        case 1:
-            battleStatus->unk_432 = 1;
+        case BTL_DARKNESS_MODE_1:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_WATT_BASED;
             break;
-        case 2:
-            battleStatus->unk_432 = -2;
+        case BTL_DARKNESS_MODE_2:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_LOCKED;
             break;
-        case 3:
-            battleStatus->unk_432 = 1;
+        case BTL_DARKNESS_MODE_3:
+            battleStatus->darknessMode = BTL_DARKNESS_STATE_WATT_BASED;
             break;
     }
 

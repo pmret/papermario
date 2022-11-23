@@ -1,4 +1,5 @@
 #include "sleepy_sheep.h"
+#include "entity.h"
 #include "ld_addrs.h"
 #include "effects.h"
 #include "battle/item/sleepy_sheep1.png.h"
@@ -7,13 +8,13 @@
 
 #include "ItemRefund.inc.c"
 
-s32 virtual_entity_create(s32);
+s32 virtual_entity_create(EntityModelScript*);
 void virtual_entity_set_pos(s32, s32, s32, s32);
 void virtual_entity_set_scale(s32, f32, f32, f32);
 void virtual_entity_delete_by_index(s32);
 
 extern s32 D_802A3E88_7214D8[];
-extern s32* D_802A3F28_721578[10];
+extern EntityModelScript* D_802A3F28_721578[10];
 extern f32 D_802A3F00_721550[];
 extern Vec3f D_802A3F88;
 extern s32 D_802A3F58[10];
@@ -34,7 +35,7 @@ ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall) {
             posPtr->x = -200.0f;
             posPtr->z = 10.0f;
             for (i = 0; i < ARRAY_COUNT(D_802A3F58); i++) {
-                entityID = D_802A3F58[i] = virtual_entity_create((s32) D_802A3F28_721578[i]);
+                entityID = D_802A3F58[i] = virtual_entity_create(D_802A3F28_721578[i]);
                 x = D_802A3E88_7214D8[i * 3] + posPtr->x;
                 y = D_802A3E88_7214D8[i * 3 + 1];
                 z = D_802A3E88_7214D8[i * 3 + 2] + posPtr->z;
@@ -246,31 +247,38 @@ Gfx N(frame3_displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000002, 0,
+EntityModelScript N(modelCommandList) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame2_displayList), 3)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame3_displayList), 2)
+    ems_Restart
+    ems_End
+};
 
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000002, 0,
+EntityModelScript N(modelCommandList2) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame2_displayList),3)
+    ems_Draw(N(frame1_displayList),2)
+    ems_Draw(N(frame3_displayList),2)
+    ems_Draw(N(frame1_displayList),2)
+    ems_Restart
+    ems_End
+};
 
-    0x00000004, 0x0000000D,
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame3_displayList),
-    0x00000001, 0x00000002, (s32) &N(frame1_displayList),
-    0x00000001, 0x00000003, (s32) &N(frame2_displayList),
-    0x00000002, 0,
+EntityModelScript N(modelCommandList3) = {
+    ems_SetRenderMode(RENDER_MODE_ALPHATEST)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame3_displayList), 2)
+    ems_Draw(N(frame1_displayList), 2)
+    ems_Draw(N(frame2_displayList), 3)
+    ems_Restart
+    ems_End
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000008F)
+    EVT_SET_CONST(LVarA, ITEM_SLEEPY_SHEEP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -67, -15, -5)
@@ -434,15 +442,15 @@ s32 D_802A3E88_7214D8[] = {
 
 f32 D_802A3F00_721550[] = { 1.0f, 1.0f, 0.75f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.75f, 0.75f };
 
-s32* D_802A3F28_721578[] = {
-    &N(modelCommandList)[0],
-    &N(modelCommandList)[16],
-    &N(modelCommandList)[32],
-    &N(modelCommandList)[0],
-    &N(modelCommandList)[16],
-    &N(modelCommandList)[32],
-    &N(modelCommandList)[0],
-    &N(modelCommandList)[16],
-    &N(modelCommandList)[32],
-    &N(modelCommandList)[0]
+EntityModelScript* D_802A3F28_721578[] = {
+    &N(modelCommandList),
+    &N(modelCommandList2),
+    &N(modelCommandList3),
+    &N(modelCommandList),
+    &N(modelCommandList2),
+    &N(modelCommandList3),
+    &N(modelCommandList),
+    &N(modelCommandList2),
+    &N(modelCommandList3),
+    &N(modelCommandList)
 };

@@ -628,7 +628,7 @@ API_CALLABLE(N(CreateMinigame)) {
     s32 hudElemID;
 
     scorekeeper->varTablePtr[JUMP_DATA_VAR_IDX] = data;
-    data->workerID = create_generic_entity_world(NULL, &mgm_01_worker_draw_score);
+    data->workerID = create_worker_world(NULL, &mgm_01_worker_draw_score);
 
     hudElemID = hud_element_create(&HES_StatusCoin);
     data->hudElemID = hudElemID;
@@ -646,7 +646,7 @@ API_CALLABLE(N(CreateMinigame)) {
 API_CALLABLE(N(DestroyMinigame)) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
 
-    free_generic_entity(data->workerID);
+    free_worker(data->workerID);
     hud_element_free(data->hudElemID);
 
     return ApiStatus_DONE2;

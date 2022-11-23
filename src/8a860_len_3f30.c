@@ -805,12 +805,12 @@ s32 popup_menu_update(void) {
                     break;
             }
             destroy_popup_menu();
-            free_generic_entity(D_8010D694);
+            free_worker(D_8010D694);
             D_8010D640 = -5;
             gPopupMenu->result = 255;
             return 255;
         case -4:
-            free_generic_entity(D_8010D694);
+            free_worker(D_8010D694);
             D_8010D640 = -5;
             gPopupMenu->result = 255;
             return 255;
@@ -1258,7 +1258,7 @@ void create_popup_menu(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_generic_entity_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
 }
 
 void func_800F4FC4(PopupMenu* popup) {
@@ -1303,7 +1303,7 @@ void func_800F4FC4(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_generic_entity_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
 }
 
 void func_800F513C(PopupMenu* popup) {
@@ -1347,7 +1347,7 @@ void func_800F513C(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 9;
     D_8010D692 = 2;
-    D_8010D694 = create_generic_entity_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
 }
 
 void func_800F52BC(void) {

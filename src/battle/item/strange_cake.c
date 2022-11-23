@@ -56,7 +56,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
 
     switch (D_802A2DEC) {
         case 0:
-            D_802A2E00 = create_generic_entity_frontUI(NULL, N(func_802A123C_73153C));
+            D_802A2E00 = create_worker_frontUI(NULL, N(func_802A123C_73153C));
             D_802A2DF4 = rand_int(13000);
             D_802A2DF8 = 1000;
 
@@ -142,7 +142,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
             var_v0_3 = i = D_802A2DF0 / 26; // use of i required to match
             battleStatus->selectedItemID = N(D_802A2858_732B58)[var_v0_3];
             script->varTable[0] = battleStatus->selectedItemID;
-            free_generic_entity(D_802A2E00);
+            free_worker(D_802A2E00);
             for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
                 hud_element_free(D_802A2DD8[i]);
             }

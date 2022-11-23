@@ -48,7 +48,7 @@ ApiStatus func_80243380_803C00(Evt* script, s32 isInitialCall) {
     temp_v0->scale.y = SPRITE_WORLD_SCALE_F;
     temp_v0->scale.z = SPRITE_WORLD_SCALE_F;
     temp_v0->foldID = func_8013A704(1);
-    temp_v0->entityID = create_generic_entity_world(NULL, mac_01_UnkFoldFunc);
+    temp_v0->entityID = create_worker_world(NULL, mac_01_UnkFoldFunc);
     evt_set_variable(script, MapVar(10), (s32) temp_v0);
     return ApiStatus_DONE2;
 }
@@ -57,7 +57,7 @@ ApiStatus func_80243494_803D14(Evt* script, s32 isInitialCall) {
     UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     func_8013A854(temp_v0->foldID);
-    free_generic_entity(temp_v0->entityID);
+    free_worker(temp_v0->entityID);
     heap_free(temp_v0);
     evt_set_variable(script, MapVar(10), NULL);
     return ApiStatus_DONE2;

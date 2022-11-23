@@ -6,7 +6,7 @@ void func_80241DAC_84497C(void*);
 
 ApiStatus func_80241C90_844860(Evt* script, s32 isInitialCall) {
     gPlayerStatus.animFlags |= PA_FLAGS_IN_DISGUISE;
-    evt_set_variable(script, MapVar(11), create_generic_entity_world(NULL, func_80241D30_844900));
+    evt_set_variable(script, MapVar(11), create_worker_world(NULL, func_80241D30_844900));
 
     return ApiStatus_DONE2;
 }
@@ -14,7 +14,7 @@ ApiStatus func_80241C90_844860(Evt* script, s32 isInitialCall) {
 ApiStatus func_80241CEC_8448BC(Evt* script, s32 isInitialCall) {
     s32 index = evt_get_variable(script, MapVar(11));
     gPlayerStatus.animFlags &= ~PA_FLAGS_IN_DISGUISE;
-    free_generic_entity(index);
+    free_worker(index);
 
     return ApiStatus_DONE2;
 }

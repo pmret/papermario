@@ -924,7 +924,7 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     shop->costIconID = hud_element_create(&HES_Item_Coin);
     hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAGS_FILTER_TEX);
-    get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
+    get_worker(create_worker_frontUI(NULL, draw_shop_items));
     set_window_properties(WINDOW_ID_10, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(WINDOW_ID_11, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
     gWindowStyles[10].defaultStyleID = 9;
