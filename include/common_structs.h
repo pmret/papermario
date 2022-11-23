@@ -985,7 +985,7 @@ typedef struct TextureHeader {
     /* 0x2A */ u8 colorCombineSubType : 2;
     /* 0x2B */ u8 auxFmt : 4;
     /* 0x2B */ u8 mainFmt : 4;
-    /* 0x2C */ u8 bitDepthHigh : 4;
+    /* 0x2C */ u8 auxBitDepth : 4;
     /* 0x2C */ u8 mainBitDepth : 4;
     /* 0x2D */ u8 auxWrapW : 4;
     /* 0x2D */ u8 mainWrapW : 4;

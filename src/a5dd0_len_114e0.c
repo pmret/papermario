@@ -3692,7 +3692,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     auxWrapW = header->auxWrapW;
     auxWrapH = header->auxWrapH;
     auxFmt = header->auxFmt;
-    auxBitDepth = header->bitDepthHigh;
+    auxBitDepth = header->auxBitDepth;
 
 
     if (extraTileType == 3) {
@@ -3766,7 +3766,8 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                 case G_IM_SIZ_4b:
                     for (rasterPtr = raster, lod = 0, lodDivisor = 1;
                          mainWidth / lodDivisor * 4 >= 64 && mainHeight / lodDivisor != 0;
-                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor / 2, lodDivisor *= 2, lod++) {
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor / 2, lodDivisor *= 2, lod++)
+                    {
                         gDPLoadMultiTile_4b((*gfxPos)++, rasterPtr, (u32)(rasterPtr - raster) >> 3, lod, mainFmt,
                                             mainWidth / lodDivisor, mainHeight / lodDivisor,
                                             0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
@@ -3776,7 +3777,8 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                 case G_IM_SIZ_8b:
                     for (rasterPtr = raster, lod = 0, lodDivisor = 1;
                          mainWidth / lodDivisor * 8 >= 64 && mainHeight / lodDivisor != 0;
-                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor, lodDivisor *= 2, lod++) {
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor, lodDivisor *= 2, lod++)
+                    {
                         gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 3, lod, mainFmt, G_IM_SIZ_8b,
                                          mainWidth / lodDivisor, mainHeight / lodDivisor,
                                          0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
@@ -3786,7 +3788,8 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                 case G_IM_SIZ_16b:
                     for (rasterPtr = raster, lod = 0, lodDivisor = 1;
                          mainWidth / lodDivisor * 16 >= 64 && mainHeight / lodDivisor != 0;
-                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 2, lodDivisor *= 2, lod++) {
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 2, lodDivisor *= 2, lod++)
+                    {
                         gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 3, lod, mainFmt, G_IM_SIZ_16b,
                                          mainWidth / lodDivisor, mainHeight / lodDivisor,
                                          0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
@@ -3796,7 +3799,8 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                 case G_IM_SIZ_32b:
                     for (rasterPtr = raster, lod = 0, lodDivisor = 1;
                          mainWidth / lodDivisor * 32 >= 64 && mainHeight / lodDivisor != 0;
-                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 4, lodDivisor *= 2, lod++) {
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 4, lodDivisor *= 2, lod++)
+                    {
                         gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 4, lod, mainFmt, G_IM_SIZ_32b,
                                          mainWidth / lodDivisor, mainHeight / lodDivisor,
                                          0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
