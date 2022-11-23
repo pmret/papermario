@@ -137,7 +137,7 @@ EffectInstance* fx_63_main(s32, f32, f32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* throw_spiny_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* fx_65_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* tubba_heart_attack_main(s32, f32, f32, f32, f32, s32);
-FX_MAIN(whirlwind_main);
+EffectInstance* whirlwind_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* red_impact_main(s32, f32, f32, f32, f32);
 EffectInstance* floating_cloud_puff_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* energy_in_out_main(s32, f32, f32, f32, f32, s32);

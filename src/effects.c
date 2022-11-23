@@ -130,7 +130,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x64 */ FX_ENTRY(throw_spiny, effect_gfx_throw_spiny),
     /* 0x65 */ FX_ENTRY_NUMBERED(65, effect_gfx_effect_65),
     /* 0x66 */ FX_ENTRY(tubba_heart_attack, effect_gfx_tubba_heart_attack),
-    /* 0x67 */ FX_ENTRY(whirlwind, _3D3930),
+    /* 0x67 */ FX_ENTRY(whirlwind, effect_gfx_whirlwind),
     /* 0x68 */ FX_ENTRY(red_impact, effect_gfx_shockwave),
     /* 0x69 */ FX_ENTRY(floating_cloud_puff, effect_gfx_floating_cloud_puff),
     /* 0x6A */ {},

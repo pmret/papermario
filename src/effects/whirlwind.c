@@ -1,29 +1,283 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void whirlwind_init(EffectInstance* effect);
+void whirlwind_update(EffectInstance* effect);
+void whirlwind_render(EffectInstance* effect);
 void whirlwind_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/whirlwind", whirlwind_main);
+extern Gfx D_09000400_3D3D30[];
 
-void whirlwind_init(void) {
+EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
+    EffectInstance *effect;
+    WhirlwindFXData* part;
+    s32 numParts;
+    s32 i;
+
+    bp.init = whirlwind_init;
+    bp.update = whirlwind_update;
+    bp.renderWorld = whirlwind_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_WHIRLWIND;
+
+    numParts = 1;
+    effect = shim_create_effect_instance(bpPtr);
+    effect->numParts = numParts;
+    part = effect->data.whirlwind = shim_general_heap_malloc(effect->numParts * sizeof(*part));
+    ASSERT(part != NULL);
+
+    part->unk_00 = arg0;
+    part->unk_14 = 0;
+    if (arg5 <= 0) {
+        part->unk_10 = 1000;
+    } else {
+        part->unk_10 = arg5;
+    }
+    part->primAlpha = 0;
+    part->pos.x = arg1;
+    part->pos.y = arg2;
+    part->pos.z = arg3;
+    part->unk_34 = arg4;
+
+    part->primR = 0xFF;
+    part->primG = 0xFF;
+    part->primB = 0xFF;
+
+    part->envR = 0xFF;
+    part->envG = 0xFF;
+    part->envB = 0xEB;
+
+    for(i = 0; i < 8; i++) {
+        part->unk_38[i] = arg1;
+        part->unk_58[i] = arg2;
+        part->unk_78[i] = arg3;
+        part->unk_98[i] = i * 0.2 + 1.0;
+        part->unk_B8[i] = shim_rand_int(360);
+        part->unk_D8[i] = shim_rand_int(100) * 0.1 + 2.0;
+        part->unk_F8[i] = shim_rand_int(30) * 0.1;
+        part->unk_118[i] = 0;
+    }
+    part->unk_138 = 0;
+    part->unk_13C = 0;
+    part->unk_140 = 0;
+
+    return effect;
 }
 
-INCLUDE_ASM(s32, "effects/whirlwind", whirlwind_update);
+void whirlwind_init(EffectInstance* effect) {
+}
+
+void whirlwind_update(EffectInstance *effect) {
+    s32 temp_a2;
+    s32 temp_v1_3;
+    WhirlwindFXData* part;
+    s32 i;
+    f32 temp;
+
+    part = effect->data.whirlwind;
+    if ((effect->flags & 0x10)) {
+        effect->flags &= ~0x10;
+        part->unk_10 = 16;
+    }
+    if (part->unk_10 < 1000) {
+        part->unk_10--;
+    }
+    part->unk_14++;
+    if (part->unk_10 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    temp = part->unk_34;
+    temp_v1_3 = part->unk_10;
+    temp_a2 = part->unk_14;
+    if (temp_v1_3 < 0x10) {
+        part->primAlpha = temp_v1_3 * 16;
+    }
+
+    if (temp_a2 < 0x10) {
+        part->primAlpha = temp_a2 * 16 + 0xF;
+    }
+    part->unk_38[0] = part->pos.x;
+    part->unk_58[0] = part->pos.y;
+    part->unk_78[0] = part->pos.z;
+
+    for (i = 7; i > 0; i--) {
+        part->unk_118[i] = (part->unk_38[i - 1] - part->unk_38[i]) * 4.0f;
+        part->unk_38[i] = part->unk_38[i - 1];
+        part->unk_58[i] = part->unk_58[i - 1] + temp * 5.0f;
+        part->unk_78[i] = part->unk_78[i - 1];
+        if (part->unk_118[i] > 90.0f) {
+            part->unk_118[i] = 90.0f;
+        } else if (part->unk_118[i] < -90.0f) {
+            part->unk_118[i] = -90.0f;
+        }
+    }
+
+    part->unk_138 += 10.0f;
+    part->unk_13C += 12.96;
+    part->unk_140 += 17.28;
+    if (part->unk_13C > 64.0f) {
+        part->unk_13C -= 64.0f;
+    }
+    if (part->unk_140 > 64.0f) {
+        part->unk_140 -= 64.0f;
+    }
+    for(i = 0; i < 8; i++) {
+        part->unk_B8[i] += part->unk_D8[i];
+    }
+}
 
 void whirlwind_render(EffectInstance* effect) {
     RenderTask renderTask;
-    RenderTask* retTask;
+    RenderTask* queuedTask;
 
     renderTask.appendGfx = whirlwind_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    queuedTask = shim_queue_render_task(&renderTask);
+    queuedTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00CE470(void) {
 }
 
-INCLUDE_ASM(s32, "effects/whirlwind", whirlwind_appendGfx);
+void whirlwind_appendGfx(void *effect) {
+    Matrix4f sp20;
+    Matrix4f sp60;
+    s32 spA0;
+    s32 primAlpha;
+    Gfx* triangleDisplayList;
+    Vtx* vertexBuffer;
+    s32 spB0;
+    s32 spB4;
+    f32 spB8;
+    Gfx* whirlwindMainDisplayList;
+    Gfx* savedPos;
+    f32 temp_f20_2;
+    f32 temp_f20_3;
+    f32 var_f4;
+    f32 f22;
+    s32 i;
+    EffectInstance *eff = (EffectInstance *)effect;
+    WhirlwindFXData* data = eff->data.whirlwind;
+    
+    spA0 = data->unk_10;
+    primAlpha = data->primAlpha >> 1;
+    spB8 = data->unk_34;
+    spB0 = data->unk_13C * 4.0f;
+    spB4 = data->unk_140 * 4.0f;
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, OS_K0_TO_PHYSICAL(eff->graphics->data));
+
+    shim_guTranslateF(sp20, 0.0f, 0.0f, 0.0f);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_09000400_3D3D30);
+
+    // Reserve 0x208 bytes (65 commands) for a vertex buffer (2x16 Vtx + space for the current command)
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[65]);
+    vertexBuffer = (Vtx*)(gMasterGfxPos + 1);
+
+    // set the current position we're writing gfx commands to past the vertex buffer
+    gMasterGfxPos = &gMasterGfxPos[65];
+
+    // fill the vertex buffer; 2 sets of 16 verticies
+    for (i = 0; i <= (360 / 24); i++) {
+        Vtx* vtx = &vertexBuffer[i];
+        vtx->v.ob[0] = shim_cos_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[1] = 0;
+        vtx->v.ob[2] = shim_sin_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.tc[0] = i * 128;
+        vtx->v.tc[1] = 0;
+
+        vtx = &vertexBuffer[i + (360 / 24 + 1)];
+        vtx->v.ob[0] = shim_cos_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[1] = 0;
+        vtx->v.ob[2] = shim_sin_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.tc[0] = i * 512;
+        vtx->v.tc[1] = 1024;
+    }
+
+    // Reserve 0x88 bytes (17 commands, including this one) for a separate dynamically generated display list
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[17]);
+    
+    // Get a reference to the dynamically generated display list
+    triangleDisplayList = ++gMasterGfxPos;
+
+    // Generate display list
+    for (i = 0; i < 15; i++) {
+        gSP2Triangles(gMasterGfxPos++, i + 0x10, i + 1, i, 0, i + 0x10, i + 0x11, i + 1, 0);
+    }
+
+    // This marks the end of our dynamically generated display list, return control back to the main display list
+    gSPEndDisplayList(gMasterGfxPos++);
+
+    shim_guScaleF(sp20, 0.1f, 0.1f, 0.1f);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    // Save position to later insert a branch around the commands that follow this
+    savedPos = gMasterGfxPos++;
+
+    // Save position of main display list
+    whirlwindMainDisplayList = gMasterGfxPos;
+
+    // Generate main display list
+    for(i = 0; i < 7; i++) {
+        shim_guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i], 1.0f, data->unk_38[i] * 10.0f, data->unk_58[i] * 10.0f, data->unk_78[i] * 10.0f);
+        shim_guRotateF(sp60, data->unk_138 + i * i, -0.03f, 1.0f, 0.1f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        var_f4 = data->unk_98[i] * spB8;
+        if (spA0 < 0x10) {
+            var_f4 += (0x7F - primAlpha) * 0.02f;
+        }
+        shim_guScaleF(sp60, var_f4, spB8, var_f4);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        temp_f20_2 = data->unk_F8[i] * 10.0f;
+        f22 = data->unk_B8[i];
+        shim_guTranslateF(sp60, temp_f20_2 * shim_sin_deg(f22), 0.0f, temp_f20_2 * shim_cos_deg(f22));
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPVertex(gMasterGfxPos++, vertexBuffer, 16, 0);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+        shim_guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i + 1], 1.0f, data->unk_38[i + 1] * 10.0f, data->unk_58[i + 1] * 10.0f, data->unk_78[i + 1] * 10.0f);
+        shim_guRotateF(sp60, data->unk_138 + i * i, 0.03f, 1.0f, 0.0f);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guScaleF(sp60, data->unk_98[i + 1] * spB8, spB8, data->unk_98[i + 1] * spB8);
+        shim_guMtxCatF(sp60, sp20, sp20);
+        temp_f20_3 = data->unk_F8[i] * 10.0f;
+        shim_guTranslateF(sp60, temp_f20_3 * shim_sin_deg(data->unk_B8[i]), 0.0f, temp_f20_3 * shim_cos_deg(data->unk_B8[i]));
+        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPVertex(gMasterGfxPos++, &vertexBuffer[16], 16, 16);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, spB0 + i * 16, 0, (spB0 + i * 16 + 63) << 2, 31 << 2);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE + 1, spB4 + i * 8, 0, (spB4 + i * 8 + 63) << 2, 31 << 2);
+
+        // Call the display list to create triangles from the verticies
+        gSPDisplayList(gMasterGfxPos++, triangleDisplayList);
+    }
+
+    gSPEndDisplayList(gMasterGfxPos++);
+
+    // Now that the length of our display list is known, insert a branch at the previously saved location
+    gSPBranchList(savedPos, gMasterGfxPos);
+    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primR, data->primG, data->primB, primAlpha);
+    gDPSetEnvColor(gMasterGfxPos++, data->envR, data->envG, data->envB, 32);
+
+    // Call the main display list
+    gSPDisplayList(gMasterGfxPos++, whirlwindMainDisplayList);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
