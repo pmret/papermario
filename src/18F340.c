@@ -10,7 +10,7 @@
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
-extern EvtScript D_80286194;
+extern EvtScript PlayerCelebrate;
 extern EvtScript D_802988F0;
 extern EvtScript D_80298724;
 extern EvtScript D_80298948;
@@ -79,40 +79,40 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern UnkPartnerThing D_80280FC0;
+extern PlayerCelebrationAnimOptions D_80280FC0;
 
-ApiStatus func_80260BF4(Evt* script, s32 isInitialCall) {
-    UnkPartnerThing* var_s0 = &D_80280FC0;
+ApiStatus ChoosePlayerCelebrationAnim(Evt* script, s32 isInitialCall) {
+    PlayerCelebrationAnimOptions* pcao = &D_80280FC0;
     PlayerData* playerData = &gPlayerData;
     s32 temp;
     s32 i;
 
-    if (rand_int(var_s0->unk_00 + var_s0->unk_02) < var_s0->unk_00) {
+    if (rand_int(pcao->randomChance + pcao->hpBasedChance) < pcao->randomChance) {
         temp = 0;
         for (i = 0; i < 8; i++) {
-            temp += var_s0->options[i * 2];
+            temp += pcao->options[i * 2];
         }
         temp = rand_int(temp);
         for (i = 0; i < 8; i++) {
-            temp -= var_s0->options[i * 2];
+            temp -= pcao->options[i * 2];
             if (temp <= 0) {
                 break;
             }
         }
 
-        script->varTable[0] = var_s0->options[i * 2 + 1];
+        script->varTable[0] = pcao->options[i * 2 + 1];
     } else {
         s32* opts;
         f32 healthRatio = playerData->curHP / (f32) playerData->curMaxHP;
 
         if (healthRatio <= 0.25) {
-            opts = &var_s0->options[16];
+            opts = &pcao->options[16];
         } else if (healthRatio <= 0.5) {
-            opts = &var_s0->options[32];
+            opts = &pcao->options[32];
         } else if (healthRatio <= 0.75) {
-            opts = &var_s0->options[48];
+            opts = &pcao->options[48];
         } else {
-            opts = &var_s0->options[64];
+            opts = &pcao->options[64];
         }
 
         temp = 0;
@@ -732,8 +732,8 @@ EvtScript PlayerScriptDispatcher = {
             EVT_EXEC_WAIT(ExecutePlayerAction)
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
             EVT_EXEC_WAIT(PlayerFirstStrike)
-        EVT_CASE_EQ(PHASE_5)
-            EVT_EXEC_WAIT(D_80286194)
+        EVT_CASE_EQ(PHASE_CELEBRATE)
+            EVT_EXEC_WAIT(PlayerCelebrate)
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(RunAwayStart)
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -1035,14 +1035,14 @@ EvtScript HandleEvent_Player = {
     EVT_END
 };
 
-EvtScript D_80286194 = {
+EvtScript PlayerCelebrate = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 72)
         EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_80260BF4)
+    EVT_CALL(ChoosePlayerCelebrationAnim)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar0)
     EVT_WAIT(31)
     EVT_RETURN

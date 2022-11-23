@@ -2520,7 +2520,7 @@ enum Phases {
     PHASE_FIRST_STRIKE              = 1,
     PHASE_RUN_AWAY_START            = 3,
     PHASE_RUN_AWAY_RESET            = 4,
-    PHASE_5                         = 5,
+    PHASE_CELEBRATE                         = 5,
     PHASE_USE_DEFEND                = 6,
     PHASE_RUN_AWAY_FAIL             = 7,
     PHASE_USE_LIFE_SHROOM           = 8,

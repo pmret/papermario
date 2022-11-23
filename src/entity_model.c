@@ -1,7 +1,7 @@
 #include "common.h"
 #include "entity.h"
 
-EntityModelScript D_8014C260[] = { {0x00000000}, {0x00000000 }};
+EntityModelScript D_8014C260[] = { {ems_End}, {ems_End }};
 Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 extern EntityModelList gWorldEntityModelList;
