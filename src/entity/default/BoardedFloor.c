@@ -226,7 +226,7 @@ void Entity_BoardedFloor_shatter(Entity* entity) {
         data->fragmentPosY[i] += 1.0f;
     }
 
-    entity_set_render_script(entity, Entity_BoardedFloor_RenderScriptShattered);
+    entity_set_render_script(entity, &Entity_BoardedFloor_RenderScriptShattered);
 }
 
 EntityScript Entity_BoardedFloor_Script = {

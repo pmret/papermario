@@ -1,5 +1,6 @@
 #include "tst_04.h"
 #include "sprite.h"
+#include "entity.h"
 #include "model.h"
 
 void N(worker_render_player_reflection)(void);

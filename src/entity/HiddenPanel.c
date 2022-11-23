@@ -319,7 +319,7 @@ void entity_HiddenPanel_init(Entity* entity) {
 
     if (gCurrentHiddenPanels.panelsCount & 1) {
         dlist = Gfx_AltHiddenPanel_RenderTop;
-        entity_set_render_script(entity, ERS_AltHiddenPanel);
+        entity_set_render_script(entity, &ERS_AltHiddenPanel);
     } else {
         dlist = Gfx_HiddenPanel_RenderTop;
     }

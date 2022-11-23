@@ -1,4 +1,5 @@
 #include "tst_11.h"
+#include "entity.h"
 #include "sprite.h"
 
 void N(test_reflection_worker_render_wall)(void);

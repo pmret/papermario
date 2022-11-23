@@ -267,7 +267,7 @@ EvtScript N(takeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
             EVT_EXEC_WAIT(N(executeAction))
-        EVT_CASE_EQ(PHASE_5)
+        EVT_CASE_EQ(PHASE_CELEBRATE)
             EVT_EXEC_WAIT(N(celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))

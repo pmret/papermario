@@ -78,11 +78,9 @@ f32 func_800E5348(void);
 
 void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, u16 style);
 
-void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
 void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
-s32 load_entity_model(s32* cmdList);
 RenderTask* queue_render_task(RenderTask* task);
 
 s32 create_mesh_animator(s16* animPos, s16* animBuffer);
@@ -795,7 +793,6 @@ typedef union {
 s32 create_worker_world(WorldArgs, WorldArgs);
 
 void init_entity_models(void);
-EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void fold_update(u32, FoldType, s32, s32, s32, s32, s32);
 s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
@@ -834,7 +831,6 @@ s32 entity_base_block_idle(Entity* entity);
 void add_SP(s32 amt);
 s32 recover_hp(s32 amt);
 s32 recover_fp(s32 amt);
-void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);

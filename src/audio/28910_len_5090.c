@@ -118,23 +118,16 @@ void au_bgm_update_main(BGMPlayer* player) {
     }
 }
 
-// Return values are being pushed into v0 in the wrong place
-// May depend on data decomp
-#ifdef NON_EQUIVALENT
 BGMPlayer* au_bgm_get_player_with_song_name(s32 songString) {
-    SndGlobals* globals = gBGMPlayerA->data;
-
-    if (songString == globals->dataBGM[0]->name) {
+    if (songString != gBGMPlayerA->globals->dataBGM[0]->name) {
+        if (songString == gBGMPlayerA->globals->dataBGM[1]->name) {
+            return gBGMPlayerB;
+        }
+    } else {
         return gBGMPlayerA;
-    }
-    if (songString == globals->dataBGM[1]->name) {
-        return gBGMPlayerB;
     }
     return NULL;
 }
-#else
-INCLUDE_ASM(BGMPlayer*, "audio/28910_len_5090", au_bgm_get_player_with_song_name, s32 songString);
-#endif
 
 AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event) {
     BGMPlayer* player;
@@ -929,7 +922,7 @@ void au_bgm_load_subsegment(BGMPlayer* player, u32 cmd) {
     s32 nextRelativePos;
     s32 bUsesPolyphony;
     s32 i;
-    
+
     nextRelativePos = 0;
     bUsesPolyphony = FALSE;
     player->subSegmentStartPos = AU_FILE_RELATIVE(player->segmentStartPos, (cmd & 0xFFFF) << 2);
@@ -950,10 +943,10 @@ void au_bgm_load_subsegment(BGMPlayer* player, u32 cmd) {
                         track->unk_51 = parentTrack->unk_51;
                         track->unk_52 = parentTrack->unk_52;
                         track->unk_53 = parentTrack->unk_53;
-                        
+
                         track->bgmReadPos = (track->bgmReadPos + (s32)player->subSegmentStartPos);
                         track->delayTime = 1;
-                        
+
                         track->parentTrackIdx = parentIdx;
                         if (player->unk_233 != 0) {
                             track->unk_5A = 1;
@@ -968,7 +961,7 @@ void au_bgm_load_subsegment(BGMPlayer* player, u32 cmd) {
                     track->unk_52 = nextRelativePos;
                     nextRelativePos += count;
                     track->unk_53 = nextRelativePos;
-                    
+
                     track->bgmReadPos = (track->bgmReadPos + (s32)player->subSegmentStartPos);
                     track->delayTime = 1;
                 }
@@ -1375,9 +1368,9 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                 }
                                 if (track->changed.volume) {
                                     voice->adjustedVolume = (
-                                        ((((player->masterVolume >> 0x15) 
-                                        * (track->subTrackVolume >> 0x15)) 
-                                        * (track->unkVolume >> 0x15)) >> 0x14) 
+                                        ((((player->masterVolume >> 0x15)
+                                        * (track->subTrackVolume >> 0x15))
+                                        * (track->unkVolume >> 0x15)) >> 0x14)
                                         * (track->segTrackVolume * note->volume)) >> 0x10;
                                     voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_VOL_CHANGED;
                                 }

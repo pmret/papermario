@@ -1770,9 +1770,9 @@ s32 is_player_action_state(s8 actionState) {
     return actionState == gPlayerStatus.actionState;
 }
 
-void entity_set_render_script(Entity* entity, u32* commandList) {
+void entity_set_render_script(Entity* entity, EntityModelScript* cmdList) {
     if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
-        set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
+        set_entity_model_render_command_list(entity->virtualModelIndex, cmdList);
     }
 }
 

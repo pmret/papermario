@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "entity.h"
 #include "effects.h"
 #include "sprite.h"
 #include "world/partners.h"
