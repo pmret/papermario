@@ -2256,28 +2256,6 @@ typedef struct UnkEntityStruct {
     /* 0x38 */ f32 unk_38;
 } UnkEntityStruct; // size = 0x3C
 
-typedef struct EntityModel {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 renderMode;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
-    /* 0x0C */ f32 timeScale; ///< Default is 1.0
-    /* 0x10 */ s32* cmdListReadPos;
-    /* 0x14 */ union {
-                    Gfx* displayList;
-                    SpriteRasterInfo* imageData;
-               } gfx;
-    /* 0x18 */ Mtx transform;
-    /* 0x58 */ s32* cmdListSavedPos;
-    /* 0x5C */ Vec3s* vertexArray;
-    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
-    /* 0x64 */ void* setupGfxCallbackArg0;
-} EntityModel; // size = 0x68
-
-typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
-
 typedef struct VirtualEntity {
     /* 0x00 */ s32 entityModelIndex;
     /* 0x04 */ Vec3f pos;

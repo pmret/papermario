@@ -4,6 +4,7 @@
 /// See also tst_11, which has a more primitive reflection implementation.
 
 #include "common.h"
+#include "entity.h"
 #include "npc.h"
 #include "sprite.h"
 
