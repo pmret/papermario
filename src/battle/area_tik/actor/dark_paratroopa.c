@@ -157,41 +157,41 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(idleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_ParaTroopa_Dark_Anim01,
-    STATUS_STONE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Anim12,
-    STATUS_POISON, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STOP, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_ParaTroopa_Dark_Anim01,
-    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_ParaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_ParaTroopa_Dark_Idle,
+    STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STOP, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_ParaTroopa_Dark_Idle,
+    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_ParaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations_step)[] = {
-    STATUS_NORMAL, ANIM_ParaTroopa_Dark_Anim01,
-    STATUS_STONE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Anim12,
-    STATUS_POISON, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STOP, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_ParaTroopa_Dark_Anim01,
-    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_ParaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_ParaTroopa_Dark_Idle,
+    STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STOP, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_ParaTroopa_Dark_Idle,
+    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_ParaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
 s32 N(idleAnimations3)[] = {
-    STATUS_NORMAL, ANIM_ParaTroopa_Dark_Anim0F,
-    STATUS_STONE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Anim12,
-    STATUS_POISON, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STOP, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_STATIC, ANIM_ParaTroopa_Dark_Anim0F,
-    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Anim00,
-    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Anim13,
-    STATUS_FEAR, ANIM_ParaTroopa_Dark_Anim13,
+    STATUS_NORMAL, ANIM_ParaTroopa_Dark_WingsStill,
+    STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
+    STATUS_POISON, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STOP, ANIM_ParaTroopa_Dark_Still,
+    STATUS_STATIC, ANIM_ParaTroopa_Dark_WingsStill,
+    STATUS_PARALYZE, ANIM_ParaTroopa_Dark_Still,
+    STATUS_DIZZY, ANIM_ParaTroopa_Dark_Stunned,
+    STATUS_FEAR, ANIM_ParaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
@@ -282,11 +282,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -299,11 +299,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -314,66 +314,66 @@ EvtScript N(handleEvent) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim08)
-            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim08)
-            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FALL_TRIGGER)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(fall))
         EVT_CASE_EQ(EVENT_15)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim08)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_BurnHurt)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_BurnStill)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_EXEC_WAIT(N(fall))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_ShellEnter)
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_ShellEnter)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -385,11 +385,11 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim06)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
@@ -400,22 +400,22 @@ EvtScript N(handleEvent) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Idle)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim03)
-            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Run)
+            EVT_SET_CONST(LVar2, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Run)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 2)
-            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -434,7 +434,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_F)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
@@ -448,7 +448,7 @@ EvtScript N(takeTurn) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Windup)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 6, 6, 0)
@@ -462,7 +462,7 @@ EvtScript N(takeTurn) = {
             EVT_SET(LVar1, 0)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim0C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_ShellDive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
@@ -487,13 +487,13 @@ EvtScript N(takeTurn) = {
             EVT_SUB(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Hurt)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Hurt)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -517,7 +517,7 @@ EvtScript N(takeTurn) = {
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Windup)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 6, 6, 0)
@@ -528,7 +528,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, 1, 0, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_ShellDive)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -539,7 +539,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_ShellHit)
             EVT_THREAD
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 10, 0)
                 EVT_SET(LVar0, 0)
@@ -553,7 +553,7 @@ EvtScript N(takeTurn) = {
                 EVT_END_LOOP
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, -10, 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Anim01)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_Idle)
             EVT_END_THREAD
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 30, 0)
             EVT_WAIT(10)

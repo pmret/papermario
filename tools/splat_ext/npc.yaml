@@ -2260,43 +2260,43 @@ ParaTroopa:
     - DarkTroopa
     - Default
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - LWingFlap1
+    - RWingFlap1
+    - LWingFlap2
+    - RWingFlap2
+    - LWingFlap3
+    - RWingFlap3
+    - LWingFlap4
+    - RWingFlap4
+    - WingsRecoil1
+    - WingsRecoil2
+    - WingsWindup1
+    - WingsWindup2
+    - WingStill
+    - Shell
+    - IdleLegsDown
+    - IdleLegsUp
+    - Recoil
+    - Windup
+    - BurnStill
+    - HurtStill
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - Sleep
+    - Stun1
+    - Stun2
+    - Stun3
+    - Stun4
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - LWingDive1
+    - RWingDive2
+    - LWingDive2
+    - WingsBurn1
+    - WingsBurn2
   palettes:
     - Dark
     - Default
@@ -2308,26 +2308,26 @@ ParaTroopa:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Windup
+    - Recoil
+    - HurtStill
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - ShellIdle
+    - ShellEnter
+    - ShellDive
+    - ShellHit
+    - ShellExit
+    - WingsStill
+    - WingsBurn
+    - UnusedIdle
+    - Sleep
+    - Stunned
 Fuzzy:
   variations:
     - Default
@@ -9222,8 +9222,8 @@ TheMaster:
     - AscendedCrouch
     - AscendedMidair
     - AscendedDive
-    - WindUp1
-    - WindUp2
+    - Windup1
+    - Windup2
     - DownwardStrike1
     - DownwardStrike2
   palettes:
@@ -9252,8 +9252,8 @@ TheMaster:
     - Cough
     - AscendedPunch
     - AscendedKick
-    - WindUpLoop
-    - WindUpStill
+    - WindupLoop
+    - WindupStill
     - DownwardStrike
     - AscendedPalmStance
     - AscendedUppercut
