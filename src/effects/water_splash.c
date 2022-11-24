@@ -55,14 +55,14 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     } else {
         part->unk_1C = arg5;
     }
-    part->unk_30 = 0xFF;
+    part->unk_30 = 255;
     part->unk_04.x = arg1;
     part->unk_04.y = arg2;
     part->unk_04.z = arg3;
     part->unk_34 = arg4;
-    part->unk_24 = 0x46;
-    part->unk_28 = 0xB4;
-    part->unk_2C = 0xFF;
+    part->unk_24 = 70;
+    part->unk_28 = 180;
+    part->unk_2C = 255;
     part++;
 
     for(i = 1; i < effect->numParts; i++, part++) {
@@ -72,24 +72,24 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
         part->unk_34 = 2.0f;
         switch (arg0) {
             case 0:
-                part->unk_10.x = shim_rand_int(0xA) - 2;
-                part->unk_10.y = shim_rand_int(0xA) - 5;
-                part->unk_10.z = shim_rand_int(0xA) - 5;
+                part->unk_10.x = shim_rand_int(10) - 2;
+                part->unk_10.y = shim_rand_int(10) - 5;
+                part->unk_10.z = shim_rand_int(10) - 5;
                 break;
             case 1:
-                part->unk_10.x = 2 - shim_rand_int(0xA);
-                part->unk_10.y = shim_rand_int(0xA) - 5;
-                part->unk_10.z = shim_rand_int(0xA) - 5;
+                part->unk_10.x = 2 - shim_rand_int(10);
+                part->unk_10.y = shim_rand_int(10) - 5;
+                part->unk_10.z = shim_rand_int(10) - 5;
                 break;
             case 2:
-                part->unk_10.x = (shim_rand_int(0x64) - 0x32) * 0.07f;
-                part->unk_10.y = (shim_rand_int(0x64) + 0xA) * 0.2f;
-                part->unk_10.z = (shim_rand_int(0x64) - 0x32) * 0.07f;
+                part->unk_10.x = (shim_rand_int(100) - 50) * 0.07f;
+                part->unk_10.y = (shim_rand_int(100) + 10) * 0.2f;
+                part->unk_10.z = (shim_rand_int(100) - 50) * 0.07f;
                 break;
             default:
-                part->unk_10.x = (shim_rand_int(0xA) - 5) * 0.5;
-                part->unk_10.y = (shim_rand_int(0xA) - 5) * 0.5;
-                part->unk_10.z = (shim_rand_int(0xA) - 5) * 0.5;
+                part->unk_10.x = (shim_rand_int(10) - 5) * 0.5;
+                part->unk_10.y = (shim_rand_int(10) - 5) * 0.5;
+                part->unk_10.z = (shim_rand_int(10) - 5) * 0.5;
                 part->unk_1C = i;
                 part->unk_34 = 0.4f;
                 break;

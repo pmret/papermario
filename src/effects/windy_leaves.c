@@ -78,14 +78,14 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
 void windy_leaves_init(EffectInstance* effect) {
 }
 
-void windy_leaves_update(EffectInstance *effect) {
+void windy_leaves_update(EffectInstance* effect) {
+    WindyLeavesFXData* part = effect->data.windyLeaves;
     f32 temp_f0_2;
     f32 temp_f4;
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_a1;
     s32 i;
-    WindyLeavesFXData *part = effect->data.windyLeaves;
     s32 temp;
     s32 temp2;
 
@@ -99,16 +99,16 @@ void windy_leaves_update(EffectInstance *effect) {
     temp_v0 = part->unk_28;
     temp = part->type;
     if (temp_a1 < 10) {
-        part->alpha += (0xFF - part->alpha) * 0.3;
+        part->alpha += (255 - part->alpha) * 0.3;
     }
     if (temp_v0 < 10) {
         part->alpha *= 0.8;
     }
 
     part++;
-    switch(temp) {
+    switch (temp) {
         case 0:
-            for(i = 1; i < effect->numParts; i++, part++) {
+            for (i = 1; i < effect->numParts; i++, part++) {
                 f32 temp3 = (shim_sin_deg(2.0f * part->unk_18) * 0.2);
                 part->unk_14 += -0.05f;
                 part->unk_10 += temp3;
@@ -119,7 +119,7 @@ void windy_leaves_update(EffectInstance *effect) {
                     part->unk_14 += -0.05f;
                     part->unk_10 *= 0.92;
                 }
-                part->unk_1C += func_E0200044(0x32, temp_a1 + i * 20) - 0x19;
+                part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
                 part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
@@ -158,12 +158,12 @@ void windy_leaves_update(EffectInstance *effect) {
             }
             break;
         case 1:
-            for(i = 1; i < effect->numParts; i++, part++) {
+            for (i = 1; i < effect->numParts; i++, part++) {
                 part->unk_10 += (f32)(shim_sin_deg(2.0f * part->unk_18) * 0.2 * 2.0);
                 part->unk_14 += -0.05f;
                 part->unk_10 *= 0.8464;
                 part->unk_14 += -0.05f;
-                part->unk_1C += func_E0200044(0x32, temp_a1 + i * 20) - 0x19;
+                part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
                 part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
@@ -202,15 +202,13 @@ void windy_leaves_update(EffectInstance *effect) {
             }
             break;
         case 2:
-            for(i = 1; i < effect->numParts; i++, part++) {
-                part->unk_1C += func_E0200044(0x32,  temp_a1 + i * 20) - 0x19;
+            for (i = 1; i < effect->numParts; i++, part++) {
+                part->unk_1C += func_E0200044(50,  temp_a1 + i * 20) - 25;
                 part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
                 part->unk_04.y += part->unk_14;
             }
-            break;
-        default:
             break;
     }
 }
@@ -232,7 +230,7 @@ extern Gfx D_09001180_33E790[];
 extern Gfx D_09001258_33E868[];
 extern Gfx D_09001280_33E890[];
 
-void windy_leaves_appendGfx(void *effect) {
+void windy_leaves_appendGfx(void* effect) {
     WindyLeavesFXData* part;
     Gfx* phi_s7;
     s32 i;
