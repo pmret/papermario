@@ -58,7 +58,8 @@ WindowStyleCustom D_802417D8_909208 = {
     },
     .corners = {
         .imgData = N(window_ul_img),
-        .packedTileFormat = WINDOW_IMG_IA_8,
+        .packedTileFormatHigh = 0x3,
+        .packedTileFormatLow = 0x1,
         .size1 = { 8, 8 },
         .size2 = { 8, 8 },
         .size3 = { 8, 8 },
