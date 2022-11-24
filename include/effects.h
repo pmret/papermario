@@ -1973,11 +1973,33 @@ typedef struct TubbaHeartAttackFXData {
     /* 0x734 */ s32 unk_734[25];
 } TubbaHeartAttackFXData; // size = 0x798
 
+#define MAX_WHIRLWIND_SEGMENTS 8
+
 typedef struct WhirlwindFXData {
-    /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char todo[0];
-} WhirlwindFXData; // size = unknown
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ Vec3f pos;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ s32 unk_14;
+    /* 0x018 */ s32 primR;
+    /* 0x01C */ s32 primG;
+    /* 0x020 */ s32 primB;
+    /* 0x024 */ s32 primAlpha;
+    /* 0x028 */ s32 envR;
+    /* 0x02C */ s32 envG;
+    /* 0x030 */ s32 envB;
+    /* 0x034 */ f32 unk_34;
+    /* 0x038 */ f32 unk_38[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x058 */ f32 unk_58[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x078 */ f32 unk_78[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x098 */ f32 unk_98[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0B8 */ f32 unk_B8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0D8 */ f32 unk_D8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0F8 */ f32 unk_F8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x118 */ f32 unk_118[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x138 */ f32 unk_138;
+    /* 0x13C */ f32 unk_13C;
+    /* 0x140 */ f32 unk_140;
+} WhirlwindFXData; // size = 0x144
 
 // Likely to be the same as GreenImpactFXData and ShockwaveFXData
 typedef struct RedImpactFXData {

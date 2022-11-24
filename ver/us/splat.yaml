@@ -5444,8 +5444,23 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c, whirlwind]
-    - [0x3D3910]
-  - [0x3D3930, bin] # whirlwind gfx
+    - [0x3D3910, .rodata, whirlwind]
+    - [0x3D3930]
+  - name: effect_gfx_whirlwind
+    dir: effects/gfx
+    type: code
+    start: 0x3D3930
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x3D3930, c, whirlwind]
+      - start: 0x3D3930
+        type: .data
+        name: whirlwind
+        subsegments:
+          - [0x3D3930, i4, D_09000000_3D3930, 64, 32]
+          - [0x3D3D30, gfx, D_09000400_3D3D30]
+          - [0x3D3E20]
   - name: effect_red_impact
     dir: effects
     type: code
