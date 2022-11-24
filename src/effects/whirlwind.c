@@ -42,15 +42,15 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     part->pos.z = arg3;
     part->unk_34 = arg4;
 
-    part->primR = 0xFF;
-    part->primG = 0xFF;
-    part->primB = 0xFF;
+    part->primR = 255;
+    part->primG = 255;
+    part->primB = 255;
 
-    part->envR = 0xFF;
-    part->envG = 0xFF;
-    part->envB = 0xEB;
+    part->envR = 255;
+    part->envG = 255;
+    part->envB = 235;
 
-    for(i = 0; i < 8; i++) {
+    for(i = 0; i < MAX_WHIRLWIND_SEGMENTS; i++) {
         part->unk_38[i] = arg1;
         part->unk_58[i] = arg2;
         part->unk_78[i] = arg3;
@@ -70,7 +70,7 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 void whirlwind_init(EffectInstance* effect) {
 }
 
-void whirlwind_update(EffectInstance *effect) {
+void whirlwind_update(EffectInstance* effect) {
     s32 temp_a2;
     s32 temp_v1_3;
     WhirlwindFXData* part;
@@ -98,13 +98,13 @@ void whirlwind_update(EffectInstance *effect) {
     }
 
     if (temp_a2 < 0x10) {
-        part->primAlpha = temp_a2 * 16 + 0xF;
+        part->primAlpha = temp_a2 * 16 + 15;
     }
     part->unk_38[0] = part->pos.x;
     part->unk_58[0] = part->pos.y;
     part->unk_78[0] = part->pos.z;
 
-    for (i = 7; i > 0; i--) {
+    for (i = MAX_WHIRLWIND_SEGMENTS - 1; i > 0; i--) {
         part->unk_118[i] = (part->unk_38[i - 1] - part->unk_38[i]) * 4.0f;
         part->unk_38[i] = part->unk_38[i - 1];
         part->unk_58[i] = part->unk_58[i - 1] + temp * 5.0f;
@@ -125,7 +125,7 @@ void whirlwind_update(EffectInstance *effect) {
     if (part->unk_140 > 64.0f) {
         part->unk_140 -= 64.0f;
     }
-    for(i = 0; i < 8; i++) {
+    for(i = 0; i < MAX_WHIRLWIND_SEGMENTS; i++) {
         part->unk_B8[i] += part->unk_D8[i];
     }
 }
@@ -146,7 +146,7 @@ void whirlwind_render(EffectInstance* effect) {
 void func_E00CE470(void) {
 }
 
-void whirlwind_appendGfx(void *effect) {
+void whirlwind_appendGfx(void* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
     s32 spA0;
@@ -163,7 +163,7 @@ void whirlwind_appendGfx(void *effect) {
     f32 var_f4;
     f32 f22;
     s32 i;
-    EffectInstance *eff = (EffectInstance *)effect;
+    EffectInstance* eff = (EffectInstance*)effect;
     WhirlwindFXData* data = eff->data.whirlwind;
     
     spA0 = data->unk_10;
@@ -229,13 +229,13 @@ void whirlwind_appendGfx(void *effect) {
     whirlwindMainDisplayList = gMasterGfxPos;
 
     // Generate main display list
-    for(i = 0; i < 7; i++) {
+    for(i = 0; i < (MAX_WHIRLWIND_SEGMENTS - 1); i++) {
         shim_guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i], 1.0f, data->unk_38[i] * 10.0f, data->unk_58[i] * 10.0f, data->unk_78[i] * 10.0f);
         shim_guRotateF(sp60, data->unk_138 + i * i, -0.03f, 1.0f, 0.1f);
         shim_guMtxCatF(sp60, sp20, sp20);
         var_f4 = data->unk_98[i] * spB8;
         if (spA0 < 0x10) {
-            var_f4 += (0x7F - primAlpha) * 0.02f;
+            var_f4 += (127 - primAlpha) * 0.02f;
         }
         shim_guScaleF(sp60, var_f4, spB8, var_f4);
         shim_guMtxCatF(sp60, sp20, sp20);
