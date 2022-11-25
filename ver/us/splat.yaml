@@ -15782,16 +15782,19 @@ segments:
     - [0xEB7850, data]
     - [0xEB8E40]
   - name: dead_flo_00
-    dir: world/dead/flo_00
+    dir: world/dead/area_flo/flo_00
     type: code
     start: 0xEB8E50
     vram: 0x80240000
     subsegments:
-    - [0xEB8E50, c]
-    - [0xEB8E90, c]
-    - [0xEB9D90, c]
-    - [0xEBA260, data]
-    - [0xEC2000]
+    - [0xEB8E50, c, flo_00_0_header]
+    - [0xEB8E50, c, flo_00_1_music]
+    - [0xEB8E50, c, flo_00_2_main]
+    - [0xEB8E90, c, flo_00_3_npc]
+    - [0xEB9D90, c, flo_00_4_epilogue]
+    - [0xEB9D90, c, flo_00_5_beanstalk]
+    - [0xEBA260, c, flo_00_6_entity]
+    - [0xEBA260]
   - name: dead_flo_03
     dir: world/dead/flo_03
     type: code
