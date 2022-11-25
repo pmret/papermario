@@ -231,5 +231,26 @@
 #define GetCurrentPartner dead_GetCurrentPartner
 #define MakeEntity dead_MakeEntity
 #define Entity_SavePoint dead_Entity_SavePoint
+#define PopSong dead_PopSong
+#define PushSong dead_PushSong
+#define ShowGotItem dead_ShowGotItem
+#define GetBattleOutcome dead_GetBattleOutcome
+#define DoNpcDefeat dead_DoNpcDefeat
+#define SetCamProperties dead_SetCamProperties
+#define ShowEmote dead_ShowEmote
+#define SetEnemyFlagBits dead_SetEnemyFlagBits
+#define AddKeyItem dead_AddKeyItem
+#define BindNpcDefeat dead_BindNpcDefeat
+#define BindNpcAI dead_BindNpcAI
+#define GetSelfNpcID dead_GetSelfNpcID
+#define GetOwnerEncounterTrigger dead_GetOwnerEncounterTrigger
+#define SetSelfEnemyFlagBits dead_SetSelfEnemyFlagBits
+#define BindNpcHit dead_BindNpcHit
+#define PlaySoundAtModel dead_PlaySoundAtModel
+#define DropItemEntity dead_DropItemEntity
+#define GetValueByRef dead_GetValueByRef
+#define SetValueByRef dead_SetValueByRef
+#define AssignPanelFlag dead_AssignPanelFlag
+#define Entity_HiddenPanel dead_Entity_HiddenPanel
 
 #endif
