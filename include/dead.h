@@ -285,5 +285,13 @@
 #define SetNpcVar dead_SetNpcVar
 #define StartBossBattle dead_StartBossBattle
 #define Entity_MulticoinBlock dead_Entity_MulticoinBlock
+#define Entity_BombableRock dead_Entity_BombableRock
+#define OnPlayerFled dead_OnPlayerFled
+#define GetAngleBetweenNPCs dead_GetAngleBetweenNPCs
+#define AwaitPlayerApproach dead_AwaitPlayerApproach
+#define BringPartnerOut dead_BringPartnerOut
+#define PutPartnerAway dead_PutPartnerAway
+#define SetNpcSpeed dead_SetNpcSpeed
+#define NpcMoveTo dead_NpcMoveTo
 
 #endif

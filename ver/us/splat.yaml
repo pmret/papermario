@@ -15885,16 +15885,18 @@ segments:
     - [0xEDC020, c, flo_12_3_npc]
     - [0xEDC6D0]
   - name: dead_flo_13
-    dir: world/dead/flo_13
+    dir: world/dead/area_flo/flo_13
     type: code
     start: 0xEDE9C0
     vram: 0x80240000
     subsegments:
-    - [0xEDE9C0, c]
-    - [0xEDEA00, c]
-    - [0xEE2040, c]
-    - [0xEE20E0, data]
-    - [0xEE64B0]
+    - [0xEDE9C0, c, flo_13_0_header]
+    - [0xEDE9C0, c, flo_13_1_music]
+    - [0xEDE9C0, c, flo_13_2_entity]
+    - [0xEDE9C0, c, flo_13_3_main]
+    - [0xEDEA00, c, flo_13_4_npc]
+    - [0xEE2040, c, flo_13_5_new_party]
+    - [0xEE20E0]
   - name: dead_flo_14
     dir: world/dead/flo_14
     type: code

@@ -1,4 +1,4 @@
-// Older version of flo_11
+// Older version of flo_12
 
 #include "dead.h"
 #include "common.h"
