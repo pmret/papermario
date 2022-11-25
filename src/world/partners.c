@@ -543,7 +543,7 @@ s32 func_800EA52C(s32 partnerID) {
     u32 playerActionState = playerStatus->actionState;
     s32 ret = FALSE;
 
-    if (playerStatus->flags & PS_FLAGS_BURNING) {
+    if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
         return FALSE;
     }
 

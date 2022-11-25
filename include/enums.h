@@ -3289,10 +3289,10 @@ enum NpcFlags {
     NPC_FLAG_400000                  = 0x00400000,
     NPC_FLAG_NO_DROPS                = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
     NPC_FLAG_1000000                 = 0x01000000, // TODO. fails assert in set_npc_sprite
+    NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
-    NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     NPC_FLAG_PARTICLE                = 0x04000000,
     NPC_FLAG_8000000                 = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
@@ -3310,16 +3310,16 @@ enum PlayerStatusFlags {
     PS_FLAGS_SLIDING                          = 0x00000010,
     /* Paused either via the start menu, or through another menu that causes a pause (like the item menu) */
     PS_FLAGS_PAUSED                           = 0x00000020,
-    PS_FLAGS_PARTNER_CHANGE_DISABLED          = 0x00000040,
-    PS_FLAGS_PARTNER_USAGE_DISABLED           = 0x00000080,
-    /* Prevents opening menus that would require a pause (start menu, item menu, etc) */
-    PS_FLAGS_PAUSING_DISABLED                 = 0x00000100,
+    PS_FLAGS_NO_CHANGE_PARTNER                = 0x00000040,
+    PS_FLAGS_NO_PARTNER_USAGE                 = 0x00000080,
+    /* Prevents opening menus that would require a game-time pause (start menu, item menu, etc) */
+    PS_FLAGS_PAUSE_DISABLED                   = 0x00000100,
     /* Doing either a spin jump or a tornado jump */
     PS_FLAGS_SPECIAL_JUMP                     = 0x00000200,
     /* Landing from either a spin jump or a tornado jump */
     PS_FLAGS_SPECIAL_LAND                     = 0x00000400,
     /* Burning from touching a fire hazard of some kind */
-    PS_FLAGS_BURNING                          = 0x00000800,
+    PS_FLAGS_HIT_FIRE                         = 0x00000800,
     PS_FLAGS_NO_STATIC_COLLISION              = 0x00001000,
     PS_FLAGS_INPUT_DISABLED                   = 0x00002000,
     /* Indicates that Mario's lateral movement is currently commandeered by a cutscene or script */

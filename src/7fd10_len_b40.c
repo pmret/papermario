@@ -73,7 +73,7 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
     s32 actionState = gPlayerStatus.actionState;
 
     if (!(gPlayerStatus.animFlags & PA_FLAGS_CHANGING_MAP) &&
-        !(gPlayerStatus.flags & PS_FLAGS_PAUSING_DISABLED) &&
+        !(gPlayerStatus.flags & PS_FLAGS_PAUSE_DISABLED) &&
         !(currentButtons & (BUTTON_Z | BUTTON_R)) &&
         (pressedButtons & (BUTTON_START | BUTTON_C_LEFT | BUTTON_C_RIGHT)) &&
         ((gGameStatusPtr->mapShop == NULL) || !(gGameStatusPtr->mapShop->flags & 1)) &&
@@ -235,7 +235,7 @@ void check_input_open_menus(void) {
 block_17:
                 switch (D_8010CCF8) {
                     case 0:
-                        if (playerStatus->flags & PS_FLAGS_PARTNER_CHANGE_DISABLED) {
+                        if (playerStatus->flags & PS_FLAGS_NO_CHANGE_PARTNER) {
                             sfx_play_sound(SOUND_MENU_ERROR);
                             if (D_8010C9C0) {
                                 func_800E6860();

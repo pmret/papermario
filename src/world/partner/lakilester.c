@@ -575,14 +575,14 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                         playerStatus->actionState == ACTION_STATE_RUN ||
                         playerStatus->actionState == ACTION_STATE_FALLING) {
 
-                        playerStatus->flags |= PS_FLAGS_PAUSING_DISABLED;
+                        playerStatus->flags |= PS_FLAGS_PAUSE_DISABLED;
                     } else {
                         return ApiStatus_DONE2;
                     }
                 }
             } else {
                 partnerActionStatus->partnerAction_unk_1 = 0;
-                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= NPC_FLAG_100;
                 set_action_state(ACTION_STATE_RIDE);
@@ -623,10 +623,10 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
     switch (D_802BFF14) {
         case 40:
-            if (playerStatus->flags & PS_FLAGS_BURNING ||
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE ||
                 playerStatus->inputEnabledCounter) {
 
-                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
@@ -635,8 +635,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14 += 1;
             break;
         case 41:
-            if (playerStatus->flags & PS_FLAGS_BURNING) {
-                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 if (D_802BFF04 != 0) {
                     enable_player_input();
                     D_802BFF04 = 0;
@@ -649,7 +649,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     enable_player_input();
                     D_802BFF04 = 0;
                 }
-                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
             }
 
@@ -657,7 +657,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     enable_player_input();
                     D_802BFF04 = 0;
-                    playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                     return ApiStatus_DONE2;
                 }
                 D_802BFF14 = 100;
@@ -715,7 +715,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14++;
             /* fallthrough */
         case 103:
-            if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
+            if (!(playerStatus->flags & PS_FLAGS_HIT_FIRE)) {
                 npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
                 npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
                 npc->pos.y += (npc->moveToPos.y - npc->pos.y) / npc->duration;
@@ -748,7 +748,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     disable_player_shadow();
                     partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
-                    playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                     gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                     D_802BFF18 = 0;
                     D_802BFF0C = 2;
@@ -761,7 +761,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
             break;
         case 104:
-            if (playerStatus->flags & PS_FLAGS_BURNING) {
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
                 D_802BFF14 = 10;
                 break;
             } else {
@@ -790,7 +790,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 playerStatus->targetYaw = npc->yaw;
             }
 
-            if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
+            if (!(playerStatus->flags & PS_FLAGS_HIT_FIRE)) {
                 if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
                     if (lakilester_raycast_below()) {
                         D_802BFF14 = 3;
@@ -808,7 +808,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             npc->flags &= ~NPC_FLAG_40;
-            playerStatus->flags |= PS_FLAGS_PAUSING_DISABLED;
+            playerStatus->flags |= PS_FLAGS_PAUSE_DISABLED;
             lakilester_raycast_below();
             camYaw = camera->currentYaw;
             if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
@@ -881,7 +881,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             enable_player_shadow();
             gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
 
-            if (playerStatus->flags & PS_FLAGS_BURNING) {
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
                 partnerActionStatus->actingPartner = PARTNER_NONE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
 
@@ -892,7 +892,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
                 partner_clear_player_tracking(npc);
                 set_action_state(ACTION_STATE_HIT_FIRE);
-                playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 return ApiStatus_DONE1;
             }
 
@@ -906,7 +906,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_400000 | NPC_FLAG_ENABLE_HIT_SCRIPT);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-            playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+            playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
             if (D_802BFF04 != 0) {
                 D_802BFF04 = 0;
                 enable_player_input();
@@ -940,7 +940,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
         partner_init_put_away(lakilester);
         lakilester_raycast_below();
         playerStatus->animFlags &= ~PA_FLAGS_RIDING_PARTNER;
-        playerStatus->flags |= PS_FLAGS_PAUSING_DISABLED;
+        playerStatus->flags |= PS_FLAGS_PAUSE_DISABLED;
     }
 
     switch (D_802BFF00) {
@@ -1012,7 +1012,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
 
             enable_player_shadow();
 
-            if (playerStatus->flags & PS_FLAGS_BURNING) {
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
                 partnerActionStatus->actingPartner = PARTNER_NONE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 if (D_802BFF04) {
@@ -1039,7 +1039,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
         case 4:
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-            playerStatus->flags &= ~PS_FLAGS_PAUSING_DISABLED;
+            playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
 
             if (D_802BFF04) {
                 D_802BFF04 = FALSE;

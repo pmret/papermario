@@ -360,7 +360,7 @@ void set_action_state(s32 actionState) {
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
                 playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
-                playerStatus->flags |= PS_FLAGS_BURNING;
+                playerStatus->flags |= PS_FLAGS_HIT_FIRE;
                 return;
             }
         }

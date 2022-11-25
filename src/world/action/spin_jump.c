@@ -116,7 +116,7 @@ void action_update_spin_jump(void) {
                     if (surfaceType == SURFACE_TYPE_LAVA) {
                         playerStatus->hazardType = HAZARD_TYPE_LAVA;
                         set_action_state(ACTION_STATE_HIT_LAVA);
-                        playerStatus->flags |= PS_FLAGS_BURNING;
+                        playerStatus->flags |= PS_FLAGS_HIT_FIRE;
                         playerStatus->flags &= ~PS_FLAGS_FLYING;
                         return;
                     } else if (surfaceType == SURFACE_TYPE_SPIKES) {

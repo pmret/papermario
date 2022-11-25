@@ -682,7 +682,7 @@ void check_input_use_partner(void) {
 
     if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
         if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER || playerStatus->inputEnabledCounter == 0) {
-            if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_PARTNER_USAGE_DISABLED) &&
+            if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_NO_PARTNER_USAGE) &&
                 !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) &&
                 actionState <= ACTION_STATE_RUN) {
 

@@ -16,7 +16,7 @@ void action_update_hit_fire(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
 
         playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
-        playerStatus->flags |= (PS_FLAGS_BURNING | PS_FLAGS_FLYING);
+        playerStatus->flags |= (PS_FLAGS_HIT_FIRE | PS_FLAGS_FLYING);
 
         suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
 
@@ -59,7 +59,7 @@ void action_update_hit_fire(void) {
             set_action_state(ACTION_STATE_LAND);
             playerStatus->blinkTimer = 60;
             playerStatus->hazardType = HAZARD_TYPE_NONE;
-            playerStatus->flags &= ~PS_FLAGS_BURNING;
+            playerStatus->flags &= ~PS_FLAGS_HIT_FIRE;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
         }
     }

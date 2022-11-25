@@ -155,7 +155,7 @@ s32 func_802BD558_319AC8(void) {
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         D_802BEBC0_31CBE0 = 0x15;
-        gPlayerStatus.flags |= PS_FLAGS_BURNING;
+        gPlayerStatus.flags |= PS_FLAGS_HIT_FIRE;
     }
 
     return raycastResult;
@@ -380,7 +380,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 D_802BEBC0_31CBE0 = 0x15;
-                                playerStatus->flags |= PS_FLAGS_BURNING;
+                                playerStatus->flags |= PS_FLAGS_HIT_FIRE;
                             }
 
                             playerStatus->position.y += (y - playerStatus->position.y) * 0.25f;
@@ -415,7 +415,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 gCollisionStatus.currentFloor = func_802BD558_319AC8();
                 if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
                     suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
-                    if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
+                    if (!(playerStatus->flags & PS_FLAGS_HIT_FIRE)) {
                         if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
                             if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
                                 if (!parakarry->pos.x) {
@@ -552,7 +552,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             if (D_802BEBB8 != 0) {
                 enable_player_static_collisions();
             }
-            if (!(playerStatus->flags & PS_FLAGS_BURNING)) {
+            if (!(playerStatus->flags & PS_FLAGS_HIT_FIRE)) {
                 if (D_802BEBC0_31CBE0 == 0x14) {
                     start_bounce_b();
                 } else if (D_802BEBC0_31CBE0 == 0x15) {

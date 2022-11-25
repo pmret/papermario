@@ -138,7 +138,7 @@ void action_update_tornado_jump(void) {
                     playerStatus->hazardType = HAZARD_TYPE_LAVA;
                     playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags |= PS_FLAGS_BURNING;
+                    playerStatus->flags |= PS_FLAGS_HIT_FIRE;
                     return;
                 } else if (surfaceType == SURFACE_TYPE_SPIKES) {
                     set_action_state(ACTION_STATE_HIT_LAVA);

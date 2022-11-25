@@ -32,7 +32,7 @@ void action_update_hit_lava(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= (PS_FLAGS_SCRIPTED_FALL | PS_FLAGS_FLYING);
         playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
-        playerStatus->flags |= PS_FLAGS_BURNING;
+        playerStatus->flags |= PS_FLAGS_HIT_FIRE;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;
             playerStatus->currentStateTime = 2;
@@ -175,7 +175,7 @@ void action_update_hit_lava(void) {
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                 sfx_play_sound_at_player(SOUND_3FB, 0);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
-                playerStatus->flags &= ~PS_FLAGS_BURNING;
+                playerStatus->flags &= ~PS_FLAGS_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAGS_FLYING;
                 playerStatus->hazardType = HAZARD_TYPE_NONE;
                 playerStatus->gravityIntegrator[0] = 6.0f;
