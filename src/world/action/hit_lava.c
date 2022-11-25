@@ -30,9 +30,9 @@ void action_update_hit_lava(void) {
 
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= (PS_FLAGS_800000 | PS_FLAGS_FLYING);
+        playerStatus->flags |= (PS_FLAGS_SCRIPTED_FALL | PS_FLAGS_FLYING);
         playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
-        playerStatus->flags |= PS_FLAGS_800;
+        playerStatus->flags |= PS_FLAGS_HIT_FIRE;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;
             playerStatus->currentStateTime = 2;
@@ -167,7 +167,7 @@ void action_update_hit_lava(void) {
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA && (playerStatus->timeInAir % 2) == 0) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }
-            playerStatus->position.y = player_check_collision_below(func_800E34D8(), &completeAxes);
+            playerStatus->position.y = player_check_collision_below(player_fall_distance(), &completeAxes);
             if (completeAxes >= 0) {
                 exec_ShakeCamX(0, 2, 1, 0.8f);
                 start_rumble(256, 50);
@@ -175,7 +175,7 @@ void action_update_hit_lava(void) {
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                 sfx_play_sound_at_player(SOUND_3FB, 0);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
-                playerStatus->flags &= ~PS_FLAGS_800;
+                playerStatus->flags &= ~PS_FLAGS_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAGS_FLYING;
                 playerStatus->hazardType = HAZARD_TYPE_NONE;
                 playerStatus->gravityIntegrator[0] = 6.0f;
@@ -194,7 +194,7 @@ void action_update_hit_lava(void) {
         case SUBSTATE_DELAY_DONE:
             if (--playerStatus->currentStateTime <= 0) {
                 set_action_state(ACTION_STATE_LAND);
-                playerStatus->flags &= ~PS_FLAGS_800000;
+                playerStatus->flags &= ~PS_FLAGS_SCRIPTED_FALL;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             }
             break;

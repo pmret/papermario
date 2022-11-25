@@ -91,10 +91,10 @@ void func_802B742C(void) {
     f32 unk10;
     Npc* npc;
 
-    if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_40000 | PS_FLAGS_20))
+    if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_ENTERING_BATTLE | PS_FLAGS_PAUSED))
             != PS_FLAGS_HAS_CONVERSATION_NPC) ||
         (gEncounterState == ENCOUNTER_STATE_CONVERSATION) ||
-        (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) ||
+        (playerStatus->animFlags & PA_FLAGS_USING_WATT) ||
         (playerStatus->inputEnabledCounter != 0) ||
         (playerStatus->animFlags & PA_FLAGS_SPINNING))
     {

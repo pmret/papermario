@@ -3690,7 +3690,7 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c, windy_leaves]
-    - [0x35E8A0]
+    - [0x35E8A0, .rodata, windy_leaves]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -5111,7 +5111,8 @@ segments:
     vram: 0xE00BE000
     subsegments:
     - [0x3BBF60, c, water_splash]
-    - [0x3BCA50]
+    - [0x3BCA50, .data, water_splash]
+    - [0x3BCA60, .rodata, water_splash]
   - name: effect_gfx_water_splash
     dir: effects/gfx
     type: code

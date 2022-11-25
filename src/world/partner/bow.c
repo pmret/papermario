@@ -4,7 +4,7 @@
 #include "sprite/npc/WorldBow.h"
 
 BSS s32 D_802BE0C0;
-BSS s32 D_802BE0C4;
+BSS s32 D_802BE0C4; // This seems to have something to do with input being disabled
 BSS TweesterPhysics BowTweesterPhysics;
 BSS s32 D_802BE0E4;
 BSS s32 D_802BE0E8;
@@ -164,10 +164,10 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         func_802BD4FC_323E4C(bow);
-        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
             if (func_800EA52C(PARTNER_BOW)) {
-                if (playerStatus->animFlags & PA_FLAGS_200000) {
-                    playerStatus->animFlags &= ~PA_FLAGS_200000;
+                if (playerStatus->animFlags & PA_FLAGS_PARTNER_USAGE_FORCED) {
+                    playerStatus->animFlags &= ~PA_FLAGS_PARTNER_USAGE_FORCED;
                     script->functionTemp[2] = disable_player_input();
                     D_802BE0C4 = TRUE;
                     script->functionTemp[0] = 20;
@@ -188,7 +188,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            playerStatus->flags |= PS_FLAGS_100;
+            playerStatus->flags |= PS_FLAGS_PAUSE_DISABLED;
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             D_802BE0C4 = TRUE;
@@ -201,7 +201,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
                 enable_player_input();
                 D_802BE0C4 = FALSE;
-                playerStatus->flags &= ~PS_FLAGS_100;
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1]--;
@@ -211,7 +211,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
                     }
-                    playerStatus->flags &= ~PS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                     return ApiStatus_DONE2;
                 }
                 script->functionTemp[0] = 20;
@@ -221,8 +221,8 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 20:
-            if (playerStatus->flags & PS_FLAGS_800) {
-                playerStatus->flags &= ~PS_FLAGS_100;
+            if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
+                playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                 if (D_802BE0C4) {
                     enable_player_input();
                     D_802BE0C4 = FALSE;
@@ -237,7 +237,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             partnerActionStatus->partnerActionState = 1;
             partnerActionStatus->actingPartner = 9;
-            playerStatus->flags |= PS_FLAGS_8000;
+            playerStatus->flags |= PS_FLAGS_HAZARD_INVINCIBILITY;
             func_800EF4E0();
             bow->moveToPos.x = playerStatus->position.x;
             bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
@@ -254,7 +254,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             script->functionTemp[0]++;
             break;
         case 21:
-            if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAGS_100000)) {
+            if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
                 bow->moveToPos.x = playerStatus->position.x;
                 bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
                 bow->moveToPos.z = playerStatus->position.z;
@@ -284,7 +284,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     playerStatus->alpha1 = 128;
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->functionTemp[0]++;
-                    playerStatus->flags &= ~PS_FLAGS_100;
+                    playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
                     bow->flags |= NPC_FLAG_40;
                 }
 
@@ -311,7 +311,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             distance = dist2D(0.0f, 0.0f, partnerActionStatus->stickX, partnerActionStatus->stickY);
             if ((collisionStatus->currentFloor < 0) || distance > 10.0f ||
                  partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN) ||
-                 playerStatus->flags & PS_FLAGS_800) {
+                 playerStatus->flags & PS_FLAGS_HIT_FIRE) {
                 if (func_802BD540_323E90() < 0) {
                     script->functionTemp[0]++;
                     script->functionTemp[1] = 3;
@@ -357,19 +357,19 @@ void func_802BDDF0_324740(Npc* bow) {
         enable_player_input();
     }
 
-    playerStatus->flags &= ~(PS_FLAGS_8000 | PS_FLAGS_JUMPING);
+    playerStatus->flags &= ~(PS_FLAGS_HAZARD_INVINCIBILITY | PS_FLAGS_JUMPING);
     bow->flags &= ~(NPC_FLAG_40 | NPC_FLAG_2);
     D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
 
-    if (playerStatus->flags & PS_FLAGS_800) {
+    if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
         actionState = ACTION_STATE_HIT_LAVA;
     }
 
     set_action_state(actionState);
     partnerActionStatus->partnerActionState = 0;
     partnerActionStatus->actingPartner = 0;
-    playerStatus->flags &= ~PS_FLAGS_100;
+    playerStatus->flags &= ~PS_FLAGS_PAUSE_DISABLED;
     partner_clear_player_tracking(bow);
     D_802BE0C0 = FALSE;
 }

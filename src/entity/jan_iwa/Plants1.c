@@ -279,7 +279,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                     playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
                 }
                 func_800EF300();
-                playerStatus->animFlags |= PA_FLAGS_40000;
+                playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
                 data->timer = 4;
                 data->unk_01++;
                 data->state++;
@@ -293,14 +293,14 @@ void entity_CymbalPlant_idle(Entity* entity) {
             }
             break;
         case 1:
-            playerStatus->animFlags |= PA_FLAGS_40000;
+            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
             if (--data->timer == 0) {
                 start_rumble(128, 10);
                 data->timer = 30;
                 data->state++;
                 yaw = playerStatus->spriteFacingAngle;
                 playerStatus->spriteFacingAngle = 80.0f;
-                playerStatus->flags |= PS_FLAGS_100000;
+                playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
                 D_802BCE20 = yaw;
             }
             func_802BB98C_E2E2BC(entity);
@@ -330,7 +330,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                 data->state++;
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
                 enable_player_input();
-                playerStatus->flags &= ~PS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
             }
             break;
         case 6:
