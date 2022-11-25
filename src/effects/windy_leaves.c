@@ -36,7 +36,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
     part->alpha = 0;
 
     part++;
-    for(i = 1; i < numParts; i++, part++) {
+    for (i = 1; i < numParts; i++, part++) {
         s32 temp_s0_2 = func_E0200000(50);
         s32 temp_s1 = func_E0200000(20);
         s32 temp_s2 = func_E0200000(360);
@@ -47,7 +47,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_18 = temp_s2;
         part->unk_20 = 360 - temp_s2;
 
-        switch(type) {
+        switch (type) {
             case 0:
                 part->unk_10 = 0.0f;
                 part->unk_14 = 0.0f;
@@ -252,7 +252,7 @@ void windy_leaves_appendGfx(void* effect) {
     shim_guMtxCatF(sp58, sp18, sp98);
 
     part++;
-    for(i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         shim_guTranslateF(sp58, part->unk_04.x, part->unk_04.y, part->unk_04.z);
         shim_guMtxCatF(sp58, sp98, sp18);
         shim_guRotateF(sp58, part->unk_18, 0.0f, 0.0f, 1.0f);

@@ -65,7 +65,7 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     part->unk_2C = 255;
     part++;
 
-    for(i = 1; i < effect->numParts; i++, part++) {
+    for (i = 1; i < effect->numParts; i++, part++) {
         part->unk_04.x = 0.0f;
         part->unk_04.y = 0.0f;
         part->unk_04.z = 0.0f;
@@ -131,7 +131,7 @@ void water_splash_update(EffectInstance *effect) {
     }
 
     part++;
-    for(i = 1; i < effect->numParts; i++, part++) {
+    for (i = 1; i < effect->numParts; i++, part++) {
         part->unk_04.x += part->unk_10.x;
         part->unk_04.y += part->unk_10.y;
         part->unk_04.z += part->unk_10.z;
@@ -187,7 +187,7 @@ void water_splash_appendGfx(void* effect) {
     gSPDisplayList(gMasterGfxPos++, D_09000100_3BCB90);
     
     data++;
-    for(i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         s32 temp_t2 = (s32)data->unk_04.x + sp94;
         s32 temp_t3 = (s32)data->unk_04.y + temp_fp;
 
