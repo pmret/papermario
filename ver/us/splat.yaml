@@ -15925,18 +15925,19 @@ segments:
     - [0xEEB990, c, flo_15_5_stairs]
     - [0xEEB990]
   - name: dead_flo_16
-    dir: world/dead/flo_16
+    dir: world/dead/area_flo/flo_16
     type: code
     start: 0xEED100
     vram: 0x80240000
     subsegments:
-    - [0xEED100, c]
-    - [0xEED140, c]
-    - [0xEED1E0, c]
-    - [0xEEDF50, c]
-    - [0xEEFAA0, c]
-    - [0xEEFAD0, data]
-    - [0xEF2550]
+    - [0xEED100, c, flo_16_0_header]
+    - [0xEED100, c, flo_16_1_music]
+    - [0xEED100, c, flo_16_2_main]
+    - [0xEED140, c, flo_16_3_vines]
+    - [0xEED1E0, c, flo_16_4_entity]
+    - [0xEEDF50, c, flo_16_5_npc]
+    - [0xEEFAA0, c, flo_16_6_puzzle]
+    - [0xEEFAD0]
   - name: dead_11
     dir: world/dead/dead_11
     type: code

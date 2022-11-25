@@ -303,5 +303,6 @@
 #define SetNpcPaletteSwapMode dead_SetNpcPaletteSwapMode
 #define SetNpcPaletteSwapping dead_SetNpcPaletteSwapping
 #define BindNpcAux dead_BindNpcAux
+#define Entity_ScriptSpring dead_Entity_ScriptSpring
 
 #endif
