@@ -15834,17 +15834,18 @@ segments:
     - [0xECBB70, c, flo_08_6_vines]
     - [0xECBC10]
   - name: dead_flo_09
-    dir: world/dead/flo_09
+    dir: world/dead/area_flo/flo_09
     type: code
     start: 0xECFFF0
     vram: 0x80240000
     subsegments:
-    - [0xECFFF0, c]
-    - [0xED0030, c]
-    - [0xED00D0, c]
-    - [0xED0310, c]
-    - [0xED1840, data]
-    - [0xED41C0]
+    - [0xECFFF0, c, flo_09_0_header]
+    - [0xECFFF0, c, flo_09_1_music]
+    - [0xECFFF0, c, flo_09_2_main]
+    - [0xED0030, c, flo_09_3_vines]
+    - [0xED00D0, c, flo_09_4_foliage]
+    - [0xED0310, c, flo_09_5_npc]
+    - [0xED1840]
   - name: dead_flo_10
     dir: world/dead/flo_10
     type: code

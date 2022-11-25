@@ -272,5 +272,7 @@
 #define EnableModel dead_EnableModel
 #define PlaySoundAt dead_PlaySoundAt
 #define GetModelCenter dead_GetModelCenter
+#define SetSelfVar dead_SetSelfVar
+#define GetSelfVar dead_GetSelfVar
 
 #endif
