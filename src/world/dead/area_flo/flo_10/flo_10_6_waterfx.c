@@ -1,11 +1,16 @@
 #include "flo_10.h"
-
 #include "nu/nusys.h"
 #include "model.h"
 
-// rodata
-extern char D_80244BB8_ED8DD8[]; // 'GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n'
-extern char D_80244BEC_ED8E0C[]; // evt_underwater.c
+s32 N(WavePhase) = {
+    0
+};
+
+// unused wavy distortion effect for edge water -- unclear how it would have been used
+EvtScript N(EVS_SetupWaterEffect) = {
+    EVT_RETURN
+    EVT_END
+};
 
 void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
     s32 i;
@@ -14,7 +19,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
     u16* img;
     s32 alpha;
 
-    N(D_80244160_ED8380) += 5;
+    N(WavePhase) += 5;
 
     if (x1 >= x2 || y1 >= y2) {
         return;
@@ -63,7 +68,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
             if (alpha > 255) {
                 alpha = 255;
             }
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
 
             //gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
                             //SCREEN_WIDTH, 6,
@@ -76,7 +81,8 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                 Gfx *_g = (Gfx *)(gMasterGfxPos++);
 
                 if ((osVirtualToPhysical(img) % 8) != 0) {
-                    osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 83, osVirtualToPhysical(img));
+                    osSyncPrintf("GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n",
+                                 "evt_underwater.c", 83, osVirtualToPhysical(img));
                 }
                 _g->words.w0 = _SHIFTL(G_SETTIMG, 24, 8) | _SHIFTL(G_IM_FMT_RGBA, 21, 3) |
                         _SHIFTL(G_IM_SIZ_16b, 19, 2) | _SHIFTL((SCREEN_WIDTH)-1, 0, 12);
@@ -104,7 +110,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                     (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
                     (y1 - 6 * i - 1)<<G_TEXTURE_IMAGE_FRAC)
             gSPTextureRectangle(gMasterGfxPos++, x1 * 4, (y1 + i * 6) * 4, x2 * 4, (y1 + i * 6 + 6) * 4,
-                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(D_80244160_ED8380) + i * 30) * 500.0f) - 500);
+                                G_TX_RENDERTILE, x1 * 32, (y1 - i * 6) * 32, 1024, (s32)(sin_deg(N(WavePhase) + i * 30) * 500.0f) - 500);
         }
     }
 
@@ -114,7 +120,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
             if (alpha > 255) {
                 alpha = 255;
             }
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
             //gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(img), G_IM_FMT_RGBA, G_IM_SIZ_16b,
             //                SCREEN_WIDTH, 6,
             //                x1, y1 - 6 * i - m, x2 - 1, y1 - 6 * i - 1, 0,
@@ -125,7 +131,8 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                 Gfx *_g = (Gfx *)(gMasterGfxPos++);
 
                 if ((osVirtualToPhysical(img) % 8) != 0) {
-                    osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 107, osVirtualToPhysical(img));
+                    osSyncPrintf("GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n",
+                                 "evt_underwater.c", 107, osVirtualToPhysical(img));
                 }
                 _g->words.w0 = _SHIFTL(G_SETTIMG, 24, 8) | _SHIFTL(G_IM_FMT_RGBA, 21, 3) |
                         _SHIFTL(G_IM_SIZ_16b, 19, 2) | _SHIFTL((SCREEN_WIDTH)-1, 0, 12);
@@ -158,10 +165,9 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
     }
 }
 
-// Similar to the flo_10 counterpart but contains debug code
 void N(UnkModelFunc001)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(0x30));
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o40));
     ModelBoundingBox* bb = (ModelBoundingBox*) model->modelNode->propertyList;
     f32 bbHalfX = bb->halfSizeX;
     f32 bbHalfZ = bb->halfSizeZ;
@@ -297,7 +303,8 @@ void N(UnkModelFunc001)(void) {
 
         new_var = gMasterGfxPos++;
         if ((osVirtualToPhysical(nuGfxZBuffer) % 8) != 0) {
-            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 175, osVirtualToPhysical(nuGfxZBuffer));
+            osSyncPrintf("GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n",
+                         "evt_underwater.c", 175, osVirtualToPhysical(nuGfxZBuffer));
         }
         gDPSetColorImage(new_var, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
 
@@ -310,7 +317,8 @@ void N(UnkModelFunc001)(void) {
 
         new_var = gMasterGfxPos++;
         if ((osVirtualToPhysical(nuGfxCfb_ptr) % 8) != 0) {
-            osSyncPrintf(D_80244BB8_ED8DD8, D_80244BEC_ED8E0C, 186, osVirtualToPhysical(nuGfxCfb_ptr));
+            osSyncPrintf("GBI Error (aligned 8)  File:%s Line:%d Adrs:%08x \n",
+                         "evt_underwater.c", 186, osVirtualToPhysical(nuGfxCfb_ptr));
         }
         gDPSetColorImage(new_var, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
 
@@ -333,3 +341,4 @@ void N(UnkModelFunc001)(void) {
         gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
     }
 }
+

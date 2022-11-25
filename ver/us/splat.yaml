@@ -15847,17 +15847,20 @@ segments:
     - [0xED0310, c, flo_09_5_npc]
     - [0xED1840]
   - name: dead_flo_10
-    dir: world/dead/flo_10
+    dir: world/dead/area_flo/flo_10
     type: code
     start: 0xED4220
     vram: 0x80240000
     subsegments:
-    - [0xED4220, c]
-    - [0xED4260, c]
-    - [0xED42A0, c]
-    - [0xED46D0, c]
-    - [0xED5540, c]
-    - [0xED5780, data]
+    - [0xED4220, c, flo_10_0_header]
+    - [0xED4260, c, flo_10_1_music]
+    - [0xED4260, c, flo_10_2_entity]
+    - [0xED4260, c, flo_10_3_main]
+    - [0xED42A0, c, flo_10_4_fountain]
+    - [0xED46D0, c, flo_10_5_npc]
+    - [0xED46D0, c, flo_10_6_waterfx]
+    - [0xED5540, c, flo_10_7_foliage]
+    - [0xED5780]
   - name: dead_flo_11
     dir: world/dead/flo_11
     type: code

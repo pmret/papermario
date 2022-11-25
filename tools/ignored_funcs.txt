@@ -190,6 +190,7 @@ dead_PlaySoundAt = 0x802E382C;
 dead_GetModelCenter = 0x802D6400;
 dead_SetSelfVar = 0x8004930C;
 dead_GetSelfVar = 0x80049370;
+dead_GetPlayerTargetYaw = 0x802DF348;
 dead_GetNpcPos = 0x802DC654;
 dead_func_802CF56C = 0x802DCACC;
 dead_dma_copy = 0x8002AA2C;

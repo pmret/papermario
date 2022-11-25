@@ -732,6 +732,7 @@ dead_PlaySoundAt = 0x802E382C;
 dead_GetModelCenter = 0x802D6400;
 dead_SetSelfVar = 0x8004930C;
 dead_GetSelfVar = 0x80049370;
+dead_GetPlayerTargetYaw = 0x802DF348;
 dead_SetNpcYaw = 0x802DBFE4;
 dead_ScaleGroup = 0x802D6EC8;
 dead_ScaleModel = 0x802D6208;

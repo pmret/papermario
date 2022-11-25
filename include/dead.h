@@ -274,5 +274,6 @@
 #define GetModelCenter dead_GetModelCenter
 #define SetSelfVar dead_SetSelfVar
 #define GetSelfVar dead_GetSelfVar
+#define GetPlayerTargetYaw dead_GetPlayerTargetYaw
 
 #endif
