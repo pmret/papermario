@@ -252,5 +252,7 @@
 #define SetValueByRef dead_SetValueByRef
 #define AssignPanelFlag dead_AssignPanelFlag
 #define Entity_HiddenPanel dead_Entity_HiddenPanel
+#define ShakeCam dead_ShakeCam
+#define func_802D62E4 dead_func_802D62E4
 
 #endif
