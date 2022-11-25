@@ -44,7 +44,7 @@ BombTrigger N(BombPos_CellWall) = {
 };
 
 EvtScript N(EVS_BombWall_Cell) = {
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_40 | PS_FLAGS_80, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_CHANGE_PARTNER | PS_FLAGS_NO_PARTNER_USAGE, TRUE)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 19, 19, 1, 10, 30)
     EVT_CALL(SetGroupEnabled, MODEL_ana, 1)
     EVT_LOOP(10)
@@ -90,7 +90,7 @@ EvtScript N(EVS_BombWall_Cell) = {
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00E3)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_40 | PS_FLAGS_80, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_CHANGE_PARTNER | PS_FLAGS_NO_PARTNER_USAGE, FALSE)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_THREAD

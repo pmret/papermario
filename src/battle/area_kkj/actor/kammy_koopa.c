@@ -243,7 +243,7 @@ ApiStatus N(DropBlock)(Evt* script, s32 isInitialCall) {
 
     entity->collisionTimer = 0;
     collisionStatus->lastWallHammered = entityIndex | COLLISION_WITH_ENTITY_BIT;
-    playerStatus->flags |= PS_FLAGS_1000000;
+    playerStatus->flags |= PS_FLAGS_HAMMER_CHECK;
     entity->collisionFlags = ENTITY_COLLISION_PLAYER_HAMMER;
     playerStatus->actionState = ACTION_STATE_HAMMER;
     entity->blueprint->fpHandleCollision(entity);

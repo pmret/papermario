@@ -26,7 +26,7 @@ void initialize_jump(void) {
 
     if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
         anim = ANIM_Mario_90005;
-    } else if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+    } else if (!(playerStatus->animFlags & (PA_FLAGS_USING_WATT | PA_FLAGS_WATT_IN_HANDS))) {
         anim = ANIM_Mario_AnimMidairStill;
     } else {
         anim = ANIM_Mario_60009;
@@ -63,7 +63,7 @@ void action_update_jump(void) {
 
     if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
         anim = ANIM_Mario_90005;
-    } else if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+    } else if (!(playerStatus->animFlags & (PA_FLAGS_USING_WATT | PA_FLAGS_WATT_IN_HANDS))) {
         anim = ANIM_Mario_AnimMidairStill;
     } else {
         anim = ANIM_Mario_60009;
@@ -84,7 +84,7 @@ void action_update_landing_on_switch(void) {
         JumpedOnSwitchX = entity->position.x;
         JumpedOnSwitchZ = entity->position.z;
         initialize_jump();
-        playerStatus->flags |= (PS_FLAGS_800000 | PS_FLAGS_80000);
+        playerStatus->flags |= (PS_FLAGS_SCRIPTED_FALL | PS_FLAGS_ARMS_RAISED);
         disable_player_input();
     }
 
@@ -98,7 +98,7 @@ void action_update_landing_on_switch(void) {
         playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_JUMPING | PS_FLAGS_FLYING);
         playerStatus->flags |= PS_FLAGS_FALLING;
 
-        if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+        if (!(playerStatus->animFlags & (PA_FLAGS_USING_WATT | PA_FLAGS_WATT_IN_HANDS))) {
             anim = ANIM_Mario_AnimMidair;
         } else {
             anim = ANIM_Mario_6000A;
@@ -127,7 +127,7 @@ void action_update_falling(void) {
 
         if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
             anim = ANIM_Mario_90005;
-        } else  if (!(playerStatus->animFlags & (PA_FLAGS_HOLDING_WATT | PA_FLAGS_2))) {
+        } else  if (!(playerStatus->animFlags & (PA_FLAGS_USING_WATT | PA_FLAGS_WATT_IN_HANDS))) {
             anim = ANIM_Mario_AnimMidair;
         } else {
             anim = ANIM_Mario_6000A;

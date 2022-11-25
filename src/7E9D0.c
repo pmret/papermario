@@ -212,8 +212,8 @@ void phys_update_action_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
 
-    if (!(playerStatus->flags & PS_FLAGS_40000)) {
-        playerStatus->flags &= ~PS_FLAGS_20000000;
+    if (!(playerStatus->flags & PS_FLAGS_ENTERING_BATTLE)) {
+        playerStatus->flags &= ~PS_FLAGS_TIME_STOPPED;
     }
 
     if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
@@ -259,7 +259,7 @@ void phys_update_action_state(void) {
                 cond = FALSE;
             }
 
-            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAGS_20) && cond) {
+            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAGS_PAUSED) && cond) {
                 set_action_state(ACTION_STATE_TALK);
             }
             check_input_spin();
@@ -283,7 +283,7 @@ void phys_peach_update(void) {
     func_800E24F8();
 
     do {
-        if (!(playerStatus->flags & PS_FLAGS_20) && check_conversation_trigger()) {
+        if (!(playerStatus->flags & PS_FLAGS_PAUSED) && check_conversation_trigger()) {
             set_action_state(ACTION_STATE_TALK);
         }
 
@@ -320,8 +320,8 @@ void set_action_state(s32 actionState) {
     PlayerData* playerData = &gPlayerData;
     PlayerSpinState* spinState = &gPlayerSpinState;
 
-    if (playerStatus->flags & PS_FLAGS_200) {
-        playerStatus->flags &= ~PS_FLAGS_200;
+    if (playerStatus->flags & PS_FLAGS_SPECIAL_JUMP) {
+        playerStatus->flags &= ~PS_FLAGS_SPECIAL_JUMP;
         enable_player_input();
     }
 
@@ -360,16 +360,16 @@ void set_action_state(s32 actionState) {
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
                 playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
-                playerStatus->flags |= PS_FLAGS_800;
+                playerStatus->flags |= PS_FLAGS_HIT_FIRE;
                 return;
             }
         }
     }
 
     if (actionState == ACTION_STATE_SLIDING) {
-        playerStatus->flags |= PS_FLAGS_10;
+        playerStatus->flags |= PS_FLAGS_SLIDING;
         playerStatus->moveFrames = 0;
-        playerStatus->flags &= ~PS_FLAGS_4000;
+        playerStatus->flags &= ~PS_FLAGS_CUTSCENE_MOVEMENT;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
@@ -387,7 +387,7 @@ void set_action_state(s32 actionState) {
         return;
     }
 
-    playerStatus->flags &= ~PS_FLAGS_20000;
+    playerStatus->flags &= ~PS_FLAGS_SPINNING;
     playerStatus->animFlags &= ~PA_FLAGS_SPINNING;
 
     if (spinState->spinSoundID != 0) {
@@ -437,7 +437,7 @@ void start_bounce_b(void) {
     playerStatus->gravityIntegrator[1] = -1.0f;
     playerStatus->gravityIntegrator[2] = 0;
     playerStatus->gravityIntegrator[3] = 0;
-    playerStatus->flags |= PS_FLAGS_800000;
+    playerStatus->flags |= PS_FLAGS_SCRIPTED_FALL;
 }
 
 s32 check_input_hammer(void) {
@@ -511,8 +511,8 @@ void check_input_spin(void) {
     PlayerSpinState* spinState = &gPlayerSpinState;
     PlayerSpinState* temp2 = spinState;
 
-    if (!((playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_4000)) ||
-          (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) ||
+    if (!((playerStatus->flags & (PS_FLAGS_NO_STATIC_COLLISION | PS_FLAGS_CUTSCENE_MOVEMENT)) ||
+          (playerStatus->animFlags & PA_FLAGS_USING_WATT) ||
           (playerStatus->currentButtons & BUTTON_C_DOWN) ||
           is_ability_active(ABILITY_SLOW_GO))) {
 
