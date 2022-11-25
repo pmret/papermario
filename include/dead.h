@@ -275,5 +275,15 @@
 #define SetSelfVar dead_SetSelfVar
 #define GetSelfVar dead_GetSelfVar
 #define GetPlayerTargetYaw dead_GetPlayerTargetYaw
+#define HidePlayerShadow dead_HidePlayerShadow
+#define func_802D286C dead_func_802D286C
+#define func_802D2520 dead_func_802D2520
+#define SetPlayerFlagBits dead_SetPlayerFlagBits
+#define func_80044238 dead_func_80044238
+#define SetCamType dead_SetCamType
+#define SetCamPosC dead_SetCamPosC
+#define SetNpcVar dead_SetNpcVar
+#define StartBossBattle dead_StartBossBattle
+#define Entity_MulticoinBlock dead_Entity_MulticoinBlock
 
 #endif
