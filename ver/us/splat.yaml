@@ -15898,16 +15898,32 @@ segments:
     - [0xEE2040, c, flo_13_5_new_party]
     - [0xEE20E0]
   - name: dead_flo_14
-    dir: world/dead/flo_14
+    dir: world/dead/area_flo/flo_14
     type: code
     start: 0xEE65B0
     vram: 0x80240000
     subsegments:
-    - [0xEE65B0, c]
-    - [0xEE70C0, c]
-    - [0xEE8940, c]
-    - [0xEE8970, data]
-    - [0xEEB900]
+    - [0xEE65B0, c, flo_14_0_header]
+    - [0xEE65B0, c, flo_14_1_music]
+    - [0xEE65B0, c, flo_14_2_main]
+    - [0xEE68F0, c, flo_14_3_bubbles]
+    - [0xEE70C0, c, flo_14_4_npc]
+    - [0xEE8940, c, flo_14_5_entity]
+    - [0xEE8940, c, flo_14_6_logs]
+    - [0xEE8970]
+  - name: dead_flo_15
+    dir: world/dead/area_flo/flo_15
+    type: code
+    start: 0xEEB990
+    vram: 0x80240000
+    subsegments:
+    - [0xEEB990, c, flo_15_0_header]
+    - [0xEEB990, c, flo_15_1_music]
+    - [0xEEB990, c, flo_15_2_main]
+    - [0xEEB990, c, flo_15_3_npc]
+    - [0xEEB990, c, flo_15_4_entity]
+    - [0xEEB990, c, flo_15_5_stairs]
+    - [0xEEB990]
   - name: dead_flo_16
     dir: world/dead/flo_16
     type: code

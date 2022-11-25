@@ -293,5 +293,15 @@
 #define PutPartnerAway dead_PutPartnerAway
 #define SetNpcSpeed dead_SetNpcSpeed
 #define NpcMoveTo dead_NpcMoveTo
+#define SetCamTarget dead_SetCamTarget
+#define CloneModel dead_CloneModel
+#define MakeLocalVertexCopy dead_MakeLocalVertexCopy
+#define SetModelCustomGfx dead_SetModelCustomGfx
+#define SetCustomGfxBuilders dead_SetCustomGfxBuilders
+#define FindItem dead_FindItem
+#define func_802CDE68 dead_func_802CDE68
+#define SetNpcPaletteSwapMode dead_SetNpcPaletteSwapMode
+#define SetNpcPaletteSwapping dead_SetNpcPaletteSwapping
+#define BindNpcAux dead_BindNpcAux
 
 #endif
