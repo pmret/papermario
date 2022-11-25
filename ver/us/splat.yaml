@@ -6360,8 +6360,34 @@ segments:
     vram: 0xE011E000
     subsegments:
     - [0x409990, c, ice_pillar]
-    - [0x40A180, data]
-  - [0x40A1C0, bin] # ice_pillar gfx
+    - [0x40A180]
+  - name: effect_gfx_ice_pillar
+    dir: effects/gfx
+    type: code
+    start: 0x40A1C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40A1C0, c, ice_pillar]
+    - start: 0x40A1C0
+      type: .data
+      name: ice_pillar
+      subsegments:
+      - [0x40A1C0, i4, D_09000000_40A1C0, 32, 64]
+      - [0x40A5C0, i4, D_09000400_40A5C0, 32, 64]
+      - [0x40A9C0, i4, D_09000800_40A9C0, 32, 64]
+      - [0x40ADC0, i4, D_09000C00_40ADC0, 32, 64]
+      - [0x40B1C0, gfx, D_09001000_40B1C0]
+      - [0x40B268, vtx, D_090010A8_40B268]
+      - [0x40B2A8, vtx, D_090010E8_40B2A8]
+      - [0x40B2E8, vtx, D_09001128_40B2E8]
+      - [0x40B328, vtx, D_09001168_40B328]
+      - [0x40B358]
+      - [0x40B368, gfx, D_090011A8_40B368]
+      - [0x40B388, gfx, D_090011C8_40B388]
+      - [0x40B3A8, gfx, D_090011E8_40B3A8]
+      - [0x40B3C8, gfx, D_09001208_40B3C8]
+      - [0x40B3E8]
   - name: effect_sun
     dir: effects
     type: code

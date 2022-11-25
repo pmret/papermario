@@ -778,7 +778,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 effect->data.icePillar->pos.x = actorPosX;
                 effect->data.icePillar->pos.y = actorPosY;
                 effect->data.icePillar->pos.z = actorPosZ;
-                effect->data.icePillar->unk_20 = actor->size.y / 24.0;
+                effect->data.icePillar->scale = actor->size.y / 24.0;
             } else {
                 effect->data.icePillar->pos.x = 0.0f;
                 effect->data.icePillar->pos.y = -1000.0f;
@@ -1423,7 +1423,7 @@ void appendGfx_player_actor(void* arg0) {
                 effect->data.icePillar->pos.x = playerPosX - 8.0f;
                 effect->data.icePillar->pos.y = playerPosY;
                 effect->data.icePillar->pos.z = playerPosZ;
-                effect->data.icePillar->unk_20 = player->size.y / 24.0;
+                effect->data.icePillar->scale = player->size.y / 24.0;
             } else {
                 effect->data.icePillar->pos.x = 0.0f;
                 effect->data.icePillar->pos.y = -1000.0f;

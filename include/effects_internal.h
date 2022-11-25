@@ -162,7 +162,7 @@ EffectInstance* something_rotating_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* breaking_junk_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* partner_buff_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* quizmo_assistant_main(s32, f32, f32, f32, f32, s32);
-FX_MAIN(ice_pillar_main);
+EffectInstance* ice_pillar_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 arg5);
 EffectInstance* sun_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* star_spirits_energy_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* pink_sparkles_main(s32, f32, f32, f32, f32, f32);

@@ -2514,12 +2514,18 @@ typedef struct QuizmoAssistantFXData {
 } QuizmoAssistantFXData; // size = 0x20
 
 typedef struct IcePillarFXData {
-    /* 0x00 */ char unk_00[0x4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ char todo[0];
-} IcePillarFXData; // size = unknown
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ Color_RGBA8 prim;
+    /* 0x1C */ Color_RGBA8 env;
+    /* 0x20 */ f32 scale;
+    /* 0x24 */ s8 unk_24;
+    /* 0x25 */ s8 unk_25;
+    /* 0x26 */ char unk_26[0x2];
+    /* 0x28 */ struct EffectInstance* miscParticles;
+} IcePillarFXData; // size = 0x2C
 
 // sun shine directions
 enum {

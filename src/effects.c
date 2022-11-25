@@ -156,7 +156,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x7E */ FX_ENTRY(breaking_junk, effect_gfx_breaking_junk),
     /* 0x7F */ FX_ENTRY(partner_buff, _404F40),
     /* 0x80 */ FX_ENTRY(quizmo_assistant, effect_gfx_quizmo_assistant),
-    /* 0x81 */ FX_ENTRY(ice_pillar, _40A1C0),
+    /* 0x81 */ FX_ENTRY(ice_pillar, effect_gfx_ice_pillar),
     /* 0x82 */ FX_ENTRY(sun, effect_gfx_sun),
     /* 0x83 */ FX_ENTRY(star_spirits_energy, effect_gfx_star_spirits_energy),
     /* 0x84 */ FX_ENTRY(pink_sparkles, effect_gfx_sparkles),
