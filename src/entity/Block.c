@@ -356,7 +356,7 @@ s32 entity_block_handle_collision(Entity* entity) {
         if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_HAMMER)) {
             return TRUE;
         }
-        if (!(playerStatus->flags & PS_FLAGS_1000000)) {
+        if (!(playerStatus->flags & PS_FLAGS_HAMMER_CHECK)) {
             return TRUE;
         }
     }

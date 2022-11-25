@@ -35,7 +35,7 @@ void check_for_interactables(void);
 void func_800E0AD0(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
-void func_800E0B90(void);
+void player_sprite_behaviour(void);
 s32 get_player_back_anim(s32 arg0);
 void appendGfx_player(void* data);
 void appendGfx_player_spin(void* data);
@@ -460,7 +460,7 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
     return ret;
 }
 
-s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* arg6) {
+s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* hasClimbableStep) {
     f32 sinTheta;
     f32 cosTheta;
     f32 hitX;
@@ -494,7 +494,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
 
     raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (raycastID >= 0 && hitDepth <= depth) {
-        *arg6 = 1;
+        *hasClimbableStep = TRUE;
     }
 
     depth = length + radius;
@@ -596,16 +596,16 @@ void update_player(void) {
     update_partner_timers();
 
     if ((playerStatus->timeInAir > 100) || (playerStatus->position.y < -2000.0f)) {
-        if (!(playerStatus->animFlags & PA_FLAGS_10000000)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_NO_OOB_RESPAWN)) {
             playerStatus->timeInAir = 0;
             playerStatus->position.x = playerStatus->lastGoodPosition.x;
             playerStatus->position.y = playerStatus->lastGoodPosition.y;
             playerStatus->position.z = playerStatus->lastGoodPosition.z;
 
-            if (playerStatus->animFlags & PA_FLAGS_400000) {
+            if (playerStatus->animFlags & PA_FLAGS_RIDING_PARTNER) {
                 Npc* partner;
 
-                playerStatus->animFlags |= PA_FLAGS_20000000 | PA_FLAGS_INTERRUPT_USE_PARTNER;
+                playerStatus->animFlags |= PA_FLAGS_DISMOUNTING_ALLOWED | PA_FLAGS_INTERRUPT_USE_PARTNER;
                 partner = get_npc_unsafe(NPC_PARTNER);
                 partner->pos.x = playerStatus->lastGoodPosition.x;
                 partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;
@@ -623,12 +623,12 @@ void update_player(void) {
     collisionStatus->floorBelow = 1;
 
     update_player_input();
-    playerStatus->flags &= ~PS_FLAGS_400;
+    playerStatus->flags &= ~PS_FLAGS_SPECIAL_LAND;
     update_player_blink();
 
-    if (playerStatus->flags & PS_FLAGS_1000) {
+    if (playerStatus->flags & PS_FLAGS_NO_STATIC_COLLISION) {
         phys_update_action_state();
-        if (!func_800E0208()) {
+        if (!game_scripts_disabled()) {
             collision_main_lateral();
         }
     } else if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -637,19 +637,19 @@ void update_player(void) {
         phys_update_lava_reset();
     }
 
-    if (playerStatus->flags & PS_FLAGS_4000) {
+    if (playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT) {
         playerStatus->moveFrames--;
         if (playerStatus->moveFrames <= 0) {
             playerStatus->moveFrames = 0;
-            playerStatus->flags &= ~PS_FLAGS_4000;
+            playerStatus->flags &= ~PS_FLAGS_CUTSCENE_MOVEMENT;
         }
     }
 
     if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
-        func_800EFD08();
+        handle_floor_behavior();
     }
 
-    func_800E0B90();
+    player_sprite_behaviour();
 
     gameStatus = gGameStatusPtr;
     gameStatus->playerPos.x = playerStatus->position.x;
@@ -671,7 +671,7 @@ void update_player(void) {
     playerStatus->pushVelocity.x = 0.0f;
     playerStatus->pushVelocity.y = 0.0f;
     playerStatus->pushVelocity.z = 0.0f;
-    playerStatus->flags &= ~PS_FLAGS_10;
+    playerStatus->flags &= ~PS_FLAGS_SLIDING;
     playerStatus->animFlags &= ~PA_FLAGS_FORCE_USE_PARTNER;
 }
 
@@ -682,7 +682,7 @@ void check_input_use_partner(void) {
 
     if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
         if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER || playerStatus->inputEnabledCounter == 0) {
-            if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_80) &&
+            if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAGS_NO_PARTNER_USAGE) &&
                 !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) &&
                 actionState <= ACTION_STATE_RUN) {
 
@@ -722,7 +722,7 @@ void phys_update_standard(void) {
 
         if (collision_main_above() < 0 && playerStatus->timeInAir == 0 &&
             playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
-            func_800E4F10();
+            collision_lateral_peach();
         }
 
         if ((playerStatus->actionState != ACTION_STATE_ENEMY_FIRST_STRIKE)
@@ -731,7 +731,7 @@ void phys_update_standard(void) {
         }
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_2) {
+    if (playerStatus->animFlags & PA_FLAGS_WATT_IN_HANDS) {
         world_watt_sync_held_position();
     }
 
@@ -844,7 +844,7 @@ void suggest_player_anim_clearUnkFlag(AnimID anim) {
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
         playerStatus->animNotifyValue = 0;
-        playerStatus->flags &= ~PS_FLAGS_10000000;
+        playerStatus->flags &= ~PS_FLAGS_FACE_FORWARDS;
     }
 }
 
@@ -853,7 +853,7 @@ void force_player_anim(AnimID anim) {
 
     playerStatus->anim = anim;
     playerStatus->animNotifyValue = 0;
-    playerStatus->flags &= ~PS_FLAGS_10000000;
+    playerStatus->flags &= ~PS_FLAGS_FACE_FORWARDS;
 }
 
 void suggest_player_anim_setUnkFlag(AnimID anim) {
@@ -863,7 +863,7 @@ void suggest_player_anim_setUnkFlag(AnimID anim) {
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
         playerStatus->animNotifyValue = 0;
-        playerStatus->flags |= PS_FLAGS_10000000;
+        playerStatus->flags |= PS_FLAGS_FACE_FORWARDS;
     }
 }
 
@@ -894,13 +894,13 @@ void update_player_blink(void) {
         if (!playerStatus->blinkTimer) {
             if (outtaSight) {
                 playerStatus->alpha1 = 128;
-                playerStatus->flags |= PS_FLAGS_8000;
+                playerStatus->flags |= PS_FLAGS_HAZARD_INVINCIBILITY;
             } else {
                 playerStatus->alpha1 = 255;
-                playerStatus->flags &= ~PS_FLAGS_8000;
+                playerStatus->flags &= ~PS_FLAGS_HAZARD_INVINCIBILITY;
             }
         } else {
-            playerStatus->flags |= PS_FLAGS_8000;
+            playerStatus->flags |= PS_FLAGS_HAZARD_INVINCIBILITY;
         }
     }
 }
@@ -923,7 +923,7 @@ void disable_player_shadow(void) {
 s32 disable_player_static_collisions(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->flags |= PS_FLAGS_1000;
+    playerStatus->flags |= PS_FLAGS_NO_STATIC_COLLISION;
     playerStatus->enableCollisionOverlapsCheck++;
     return playerStatus->enableCollisionOverlapsCheck;
 }
@@ -933,7 +933,7 @@ s32 enable_player_static_collisions(void) {
 
     playerStatus->enableCollisionOverlapsCheck--;
     if (playerStatus->enableCollisionOverlapsCheck == 0) {
-        playerStatus->flags &= ~PS_FLAGS_1000;
+        playerStatus->flags &= ~PS_FLAGS_NO_STATIC_COLLISION;
     }
     return playerStatus->enableCollisionOverlapsCheck;
 }
@@ -960,11 +960,11 @@ void func_800E01DC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) {
-        playerStatus->flags |= PS_FLAGS_8000000;
+        playerStatus->flags |= PS_FLAGS_INTERACTED;
     }
 }
 
-s32 func_800E0208(void) {
+s32 game_scripts_disabled(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons[0] & BUTTON_R)) {
@@ -1033,7 +1033,7 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (gPlayerStatus.flags & PS_FLAGS_20 || gPlayerStatus.inputEnabledCounter) {
+        if (gPlayerStatus.flags & PS_FLAGS_PAUSED || gPlayerStatus.inputEnabledCounter) {
             return;
         }
 
@@ -1079,7 +1079,7 @@ void check_for_conversation_prompt(void) {
     }
 
     if (D_8010C940 == NULL) {
-        if (gPlayerStatus.inputEnabledCounter || gPlayerStatus.flags & PS_FLAGS_20) {
+        if (gPlayerStatus.inputEnabledCounter || gPlayerStatus.flags & PS_FLAGS_PAUSED) {
             return;
         }
 
@@ -1144,11 +1144,11 @@ s32 func_800E06D8(void) {
     }
 
     if (temp == wall) {
-        if (playerStatus->flags & PS_FLAGS_8000000) {
+        if (playerStatus->flags & PS_FLAGS_INTERACTED) {
             return FALSE;
         }
     } else {
-        playerStatus->flags &= ~PS_FLAGS_8000000;
+        playerStatus->flags &= ~PS_FLAGS_INTERACTED;
     }
     playerStatus->interactingWithID = -1;
 
@@ -1206,7 +1206,7 @@ void check_for_interactables(void) {
                 phi_s2 = 0;
             } else {
                 playerStatus->interactingWithID = -1;
-                playerStatus->flags &= ~PS_FLAGS_8000000;
+                playerStatus->flags &= ~PS_FLAGS_INTERACTED;
                 return;
             }
         } else {
@@ -1215,7 +1215,7 @@ void check_for_interactables(void) {
                 if (!(curInteraction & COLLISION_WITH_NPC_BIT)) {
                     if (!should_collider_allow_interact(curInteraction)) {
                         playerStatus->interactingWithID = -1;
-                        playerStatus->flags &= ~PS_FLAGS_8000000;
+                        playerStatus->flags &= ~PS_FLAGS_INTERACTED;
                         return;
                     }
                 }
@@ -1223,18 +1223,18 @@ void check_for_interactables(void) {
                 if (!phys_can_player_interact()) {
                     phi_s2 = 1;
                     playerStatus->interactingWithID = -1;
-                    playerStatus->flags &= ~PS_FLAGS_8000000;
+                    playerStatus->flags &= ~PS_FLAGS_INTERACTED;
                     return;
                 }
                 phi_s2 = 1;
             }
         }
         if (playerStatus->interactingWithID == curInteraction) {
-            if ((playerStatus->flags & PS_FLAGS_8000000)) {
+            if ((playerStatus->flags & PS_FLAGS_INTERACTED)) {
                 return;
             }
         } else {
-            playerStatus->flags &= ~PS_FLAGS_8000000;
+            playerStatus->flags &= ~PS_FLAGS_INTERACTED;
         }
 
         playerStatus->interactingWithID = curInteraction;
@@ -1290,7 +1290,7 @@ void update_partner_timers(void) {
     }
 }
 
-void func_800E0B90(void) {
+void player_sprite_behaviour(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
     f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
@@ -1338,7 +1338,7 @@ void func_800E0B90(void) {
         }
     }
 
-    if (playerStatus->flags & PS_FLAGS_200000) {
+    if (playerStatus->flags & PS_FLAGS_NO_FLIPPING) {
         angle = 0.0f;
     }
 
@@ -1351,15 +1351,15 @@ void func_800E0B90(void) {
     }
 
     trueAnim = playerStatus->anim;
-    if (playerStatus->flags & PS_FLAGS_20000) {
+    if (playerStatus->flags & PS_FLAGS_SPINNING) {
         playerStatus->trueAnimation = trueAnim;
     } else {
         sprIndex = (trueAnim >> 0x10) & 0xFF;
 
-        if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PS_FLAGS_100000)) {
+        if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PS_FLAGS_ROTATION_LOCKED)) {
             playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAGS_10000000) &&
+            if (!(playerStatus->flags & PS_FLAGS_FACE_FORWARDS) &&
                 (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
                 fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
             {
@@ -1369,7 +1369,7 @@ void func_800E0B90(void) {
             playerStatus->currentYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAGS_10000000) &&
+            if (!(playerStatus->flags & PS_FLAGS_FACE_FORWARDS) &&
                 (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
                 playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
             {
@@ -1380,14 +1380,14 @@ void func_800E0B90(void) {
     }
 
     timescale = 1.0f;
-    if (playerStatus->flags & PS_FLAGS_40000) {
+    if (playerStatus->flags & PS_FLAGS_ENTERING_BATTLE) {
         timescale = 0.5f;
     }
-    if (playerStatus->flags & PS_FLAGS_20000000) {
+    if (playerStatus->flags & PS_FLAGS_TIME_STOPPED) {
         timescale = 0.0f;
     }
     playerStatus->animNotifyValue = spr_update_player_sprite(0, playerStatus->trueAnimation, timescale);
-    playerStatus->flags |= PS_FLAGS_40000000;
+    playerStatus->flags |= PS_FLAGS_SPRITE_REDRAW;
 }
 
 s32 get_player_back_anim(s32 anim) {
@@ -1451,14 +1451,14 @@ void render_player_model(void) {
     s8 renderModeTemp;
     void (*appendGfx)(void*);
 
-    if (playerStatus->flags & PS_FLAGS_40000000) {
-        playerStatus->flags &= ~PS_FLAGS_40000000;
+    if (playerStatus->flags & PS_FLAGS_SPRITE_REDRAW) {
+        playerStatus->flags &= ~PS_FLAGS_SPRITE_REDRAW;
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y,
                           playerStatus->position.z, &x, &y, &z);
-        if (!(playerStatus->flags & PS_FLAGS_20000)) {
+        if (!(playerStatus->flags & PS_FLAGS_SPINNING)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
                 if (playerStatus->alpha1 < 254) {
-                    if (!(playerStatus->animFlags & PA_FLAGS_1000000)) {
+                    if (!(playerStatus->animFlags & PA_FLAGS_MAP_HAS_SWITCH)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
                     } else {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER2;
@@ -1486,7 +1486,7 @@ void render_player_model(void) {
             rtPtr->renderMode = playerStatus->renderMode;
 
 
-            if (!(playerStatus->flags & PS_FLAGS_20000)) {
+            if (!(playerStatus->flags & PS_FLAGS_SPINNING)) {
                 appendGfx = appendGfx_player;
             } else {
                 appendGfx = appendGfx_player_spin;
@@ -1545,7 +1545,7 @@ void appendGfx_player(void* data) {
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
             }
         }
-      
+
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
             flags = 0x10000000;
         } else {

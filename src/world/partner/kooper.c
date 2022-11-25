@@ -200,7 +200,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     if (currentEncounter->unk_08 == 0) {
         if (isInitialCall) {
             func_802BD5F4_31B614(kooper);
-            if (playerStatus->animFlags & PA_FLAGS_100000) {
+            if (playerStatus->animFlags & PA_FLAGS_CHANGING_MAP) {
                 return ApiStatus_DONE2;
             }
 
@@ -278,7 +278,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     }
                     disable_npc_blur(kooper);
                     if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
-                        if (!(playerStatus->animFlags & PA_FLAGS_100000)) {
+                        if (!(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                         } else {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);

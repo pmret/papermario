@@ -109,7 +109,7 @@ ApiStatus func_8024059C_D3AB6C(Evt* script, s32 isInitialCall) {
 ApiStatus func_8024072C_D3ACFC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) {
+    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)) {
         script->varTable[0] = 1;
     } else {
         script->varTable[0] = 0;

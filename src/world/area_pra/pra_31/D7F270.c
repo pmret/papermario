@@ -164,7 +164,7 @@ ApiStatus func_80240F2C_D7FC8C(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240FD0_D7FD30(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PA_FLAGS_800000;
+    playerStatus->animFlags |= PA_FLAGS_PUSHED_ALBINO_DINO;
     return ApiStatus_DONE2;
 }
 
