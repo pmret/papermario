@@ -15964,12 +15964,28 @@ segments:
     - [0xEF7FB0, c, flo_18_4_npc]
     - [0xEF8010, c, flo_18_5_foliage]
     - [0xEF8250]
+  #- name: dead_flo_19
+  #  dir: world/dead/area_flo/flo_19
+  #  type: code
+  #  start: 0xEFEB00
+  #  vram: 0x80240000
+  #  subsegments:
+  #  - [0xEFEB00, c, flo_19_0_header]
+  #  - [0xEFEB00, c, flo_19_1_music]
+  #  - [0xEFEB00, c, flo_19_2_entity]
+  #  - [0xEFEB00, c, flo_19_3_main]
+  #  - [0xEFEE40, c, flo_19_4_clouds]
+  #  - [0xEFEFD0, c, flo_19_5_beanstalk]
+  #  - [0xEFF440]
+
+  # should end at 0xF01B10
+
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
     subsegments:
     - [0xEFEB00, c]
-    - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
+    - [0xEFF440, bin] # part of overlay
 
 #############
 ### Audio ###
