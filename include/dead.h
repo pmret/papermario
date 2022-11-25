@@ -254,5 +254,23 @@
 #define Entity_HiddenPanel dead_Entity_HiddenPanel
 #define ShakeCam dead_ShakeCam
 #define func_802D62E4 dead_func_802D62E4
+#define IsStartingConversation dead_IsStartingConversation
+#define ModifyGlobalOverrideFlags dead_ModifyGlobalOverrideFlags
+#define FindKeyItem dead_FindKeyItem
+#define Entity_SuperBlock dead_Entity_SuperBlock
+#define AssignBlockFlag dead_AssignBlockFlag
+#define AssignScript dead_AssignScript
+#define ResetFromLava dead_ResetFromLava
+#define EnemyNpcHit dead_EnemyNpcHit
+#define EnemyNpcDefeat dead_EnemyNpcDefeat
+#define BasicAI_Main dead_BasicAI_Main
+#define ShowConsumableChoicePopup dead_ShowConsumableChoicePopup
+#define RemoveItemAt dead_RemoveItemAt
+#define GetAngleToPlayer dead_GetAngleToPlayer
+#define GetNpcPointer dead_GetNpcPointer
+#define RemoveNpc dead_RemoveNpc
+#define EnableModel dead_EnableModel
+#define PlaySoundAt dead_PlaySoundAt
+#define GetModelCenter dead_GetModelCenter
 
 #endif

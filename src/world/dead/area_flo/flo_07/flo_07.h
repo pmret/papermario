@@ -1,5 +1,4 @@
-/// @file flo_07.h
-/// @brief Flower Fields - (SW) Posie and Crystal Tree
+// Older version of flo_07
 
 #include "dead.h"
 #include "common.h"
