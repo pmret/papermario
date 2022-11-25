@@ -680,8 +680,17 @@ typedef struct StarsBurstFXData {
 } StarsBurstFXData; // size = 0x38
 
 typedef struct StarsShimmerFXData {
-    /* 0x00 */ char todo[0];
-} StarsShimmerFXData; // size = unknown
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 lifeTime;
+    /* 0x24 */ s32 timeLeft;
+    /* 0x28 */ s32 unk_28;
+} StarsShimmerFXData; // size = 0x2C
 
 typedef struct RisingBubbleFXData {
     /* 0x00 */ s32 unk_00;

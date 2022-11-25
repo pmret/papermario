@@ -3491,7 +3491,7 @@ segments:
     vram: 0xE0044000
     subsegments:
     - [0x354F60, c, stars_shimmer]
-    - [0x355D10, data]
+    - [0x355D10]
   - name: effect_rising_bubble
     dir: effects
     type: code
