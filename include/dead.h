@@ -304,5 +304,7 @@
 #define SetNpcPaletteSwapping dead_SetNpcPaletteSwapping
 #define BindNpcAux dead_BindNpcAux
 #define Entity_ScriptSpring dead_Entity_ScriptSpring
+#define Entity_HiddenYellowBlock dead_Entity_HiddenYellowBlock
+#define GetNpcYaw dead_GetNpcYaw
 
 #endif

@@ -15938,27 +15938,32 @@ segments:
     - [0xEEDF50, c, flo_16_5_npc]
     - [0xEEFAA0, c, flo_16_6_puzzle]
     - [0xEEFAD0]
-  - name: dead_11
-    dir: world/dead/dead_11
+  - name: dead_flo_17
+    dir: world/dead/area_flo/flo_17
     type: code
     start: 0xEF2610
     vram: 0x80240000
     subsegments:
-    - [0xEF2610, c]
-    - [0xEF2650, c]
-    - [0xEF2680, c]
-    - [0xEF58E0, data]
-    - [0xEF79C0]
+    - [0xEF2610, c, flo_17_0_header]
+    - [0xEF2610, c, flo_17_1_music]
+    - [0xEF2610, c, flo_17_2_main]
+    - [0xEF2650, c, flo_17_3_logs]
+    - [0xEF2680, c, flo_17_4_npc]
+    - [0xEF58E0, c, flo_17_5_entity]
+    - [0xEF58E0]
   - name: dead_flo_18
-    dir: world/dead/flo_18
+    dir: world/dead/area_flo/flo_18
     type: code
     start: 0xEF7A80
     vram: 0x80240000
     subsegments:
-    - [0xEF7A80, c]
-    - [0xEF7FB0, c]
-    - [0xEF8010, c]
-    - [0xEF8250, data]
+    - [0xEF7A80, c, flo_18_0_header]
+    - [0xEF7A80, c, flo_18_1_music]
+    - [0xEF7A80, c, flo_18_2_main]
+    - [0xEF7DC0, c, flo_18_3_machine]
+    - [0xEF7FB0, c, flo_18_4_npc]
+    - [0xEF8010, c, flo_18_5_foliage]
+    - [0xEF8250]
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
