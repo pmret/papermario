@@ -361,9 +361,9 @@ EvtScript N(EVS_NpcDefeat_MontyMole) = {
 
 EvtScript N(EVS_NpcHit_MontyMole) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-        EVT_90(EVT_PTR("touch_choro\n"))
+        EVT_DEBUG_LOG(EVT_PTR("touch_choro\n"))
         EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-        EVT_DEBUG_PRINT(LVar0)
+        EVT_DEBUG_PRINT_VAR(LVar0)
         EVT_IF_NE(LVar0, ENCOUNTER_TRIGGER_NONE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Anim05)
         EVT_END_IF

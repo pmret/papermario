@@ -502,7 +502,7 @@ Vec3i N(SmokeBurstPositions)[] = {
 
 EvtScript N(EVS_DamageMachine) = {
     #define LABEL_DONE 0
-    EVT_DEBUG_PRINT(LVar0)
+    EVT_DEBUG_PRINT_VAR(LVar0)
     EVT_SET(LVarA, LVar0) // in: damage part
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_LT(LVar0, -210)
@@ -510,13 +510,13 @@ EvtScript N(EVS_DamageMachine) = {
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_1E5)
     EVT_EXEC_WAIT(N(EVS_ShakeMachine))
-    EVT_DEBUG_PRINT(LVarA)
+    EVT_DEBUG_PRINT_VAR(LVarA)
     EVT_SET(LVar0, LVarA)
     EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
         EVT_SET(MF_HitGuardedMachine, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_DEBUG_PRINT(MF_MachineBeingDamaged)
+    EVT_DEBUG_PRINT_VAR(MF_MachineBeingDamaged)
     EVT_IF_EQ(MF_MachineBeingDamaged, TRUE)
         EVT_RETURN
     EVT_END_IF

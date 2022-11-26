@@ -306,5 +306,37 @@
 #define Entity_ScriptSpring dead_Entity_ScriptSpring
 #define Entity_HiddenYellowBlock dead_Entity_HiddenYellowBlock
 #define GetNpcYaw dead_GetNpcYaw
+#define PlayAmbientSounds dead_PlayAmbientSounds
+#define SetTexPanner dead_SetTexPanner
+#define func_802D7B10 dead_func_802D7B10
+#define Entity_Chest dead_Entity_Chest
+#define snd_ambient_80055618 dead_snd_ambient_80055618
+#define GetPlayerAnimation dead_GetPlayerAnimation
+#define SetPlayerSpeed dead_SetPlayerSpeed
+#define SetItemPos dead_SetItemPos
+#define NpcJump1 dead_NpcJump1
+#define SpeakToNpc dead_SpeakToNpc
+#define AddStarPieces dead_AddStarPieces
+#define Entity_Hammer3Block dead_Entity_Hammer3Block
+#define CreatePushBlockGrid dead_CreatePushBlockGrid
+#define SetPushBlock dead_SetPushBlock
+#define GetSelfAnimationFromTable dead_GetSelfAnimationFromTable
+#define EVS_NpcHitRecoil dead_EVS_NpcHitRecoil
+#define SelfEnemyOverrideSyncPos dead_SelfEnemyOverrideSyncPos
+#define func_802CFD30 dead_func_802CFD30
+#define SetGroupEnabled dead_SetGroupEnabled
+#define Entity_HeartBlock dead_Entity_HeartBlock
+#define GetCamDistance dead_GetCamDistance
+#define GetCamPitch dead_GetCamPitch
+#define GotoMapSpecial dead_GotoMapSpecial
+#define SetNpcAux dead_SetNpcAux
+#define PlayModelAnimation dead_PlayModelAnimation
+#define SetAnimatedModelRootPosition dead_SetAnimatedModelRootPosition
+#define LoadAnimatedModel dead_LoadAnimatedModel
+#define SetAnimatorFlags dead_SetAnimatorFlags
+#define GetAnimatedPositionByTreeIndex dead_GetAnimatedPositionByTreeIndex
+#define GetAnimatedRotationByTreeIndex dead_GetAnimatedRotationByTreeIndex
+#define SetEncounterStatusFlags dead_SetEncounterStatusFlags
+#define Entity_YellowBlock dead_Entity_YellowBlock
 
 #endif

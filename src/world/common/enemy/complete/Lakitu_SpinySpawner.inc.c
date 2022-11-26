@@ -24,7 +24,7 @@ MobileAISettings N(AISettings_Lakitu_SpinySpawner) = {
 
 EvtScript N(EVS_NpcAI_Lakitu_SpinySpawner) = {
     #ifdef DEBUG_LAKITU
-    EVT_90(EVT_PTR("JUGEMU MOVE"))
+    EVT_DEBUG_LOG(EVT_PTR("JUGEMU MOVE"))
     #endif
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -650)
@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcAI_SpawnedSpiny) = {
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
     #ifdef DEBUG_LAKITU
-    EVT_90(EVT_PTR("TOGEZO TYPE1 : NORMAL MOVE"))
+    EVT_DEBUG_LOG(EVT_PTR("TOGEZO TYPE1 : NORMAL MOVE"))
     #endif
     EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(AISettings_SpawnedSpiny)))
     EVT_RETURN

@@ -97,8 +97,8 @@ enum {
     EVT_OP_END_THREAD,
     EVT_OP_CHILD_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
     EVT_OP_END_CHILD_THREAD,
-    EVT_OP_90,
-    EVT_OP_DEBUG_PRINT, ///< Args: expression
+    EVT_OP_DEBUG_LOG,
+    EVT_OP_DEBUG_PRINT_VAR, ///< Args: expression
     EVT_OP_92,
     EVT_OP_93,
     EVT_OP_94,

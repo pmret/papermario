@@ -60,26 +60,3 @@ enum {
 };
 
 #endif
-
-/*
-extern MapSettings flo_00_settings;
-extern MapSettings flo_03_settings;
-extern MapSettings flo_07_settings;
-extern MapSettings flo_08_settings;
-extern MapSettings flo_09_settings;
-extern MapSettings flo_10_settings;
-extern MapSettings flo_11_settings;
-extern MapSettings flo_12_settings;
-extern MapSettings flo_13_settings;
-extern MapSettings flo_14_settings;
-extern MapSettings flo_15_settings;
-extern MapSettings flo_16_settings;
-extern MapSettings flo_17_settings;
-extern MapSettings flo_18_settings;
-extern MapSettings flo_19_settings;
-extern MapSettings flo_21_settings;
-extern MapSettings flo_22_settings;
-extern MapSettings flo_23_settings;
-extern MapSettings flo_24_settings;
-extern MapSettings flo_25_settings;
-*/
