@@ -1635,10 +1635,10 @@ s32 evt_execute_next_command(Evt* script) {
             case EVT_OP_END_CHILD_THREAD:
                 status = evt_handle_end_child_thread(script);
                 break;
-            case EVT_OP_90:
+            case EVT_OP_DEBUG_LOG:
                 status = func_802C6E14(script);
                 break;
-            case EVT_OP_DEBUG_PRINT:
+            case EVT_OP_DEBUG_PRINT_VAR:
                 status = evt_handle_print_debug_var(script);
                 break;
             case EVT_OP_92:

@@ -409,7 +409,7 @@ EvtScript N(80244804) = {
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(0x800936DC)
+            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
