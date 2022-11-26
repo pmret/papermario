@@ -568,6 +568,11 @@
 /// The given arguments can be accessed from the API function using `thread->ptrReadPos`.
 #define EVT_CALL(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##ARGS),
 
+/// Does nothing in release version
+#define EVT_DEBUG_LOG(STRING)                   EVT_CMD(EVT_OP_DEBUG_LOG, STRING),
+
+/// Prints variable name and value
+#define EVT_DEBUG_PRINT_VAR(VAR)                EVT_CMD(EVT_OP_DEBUG_PRINT_VAR, VAR),
 
 /****** COMMON SCRIPTS ************************************************************************************************/
 
