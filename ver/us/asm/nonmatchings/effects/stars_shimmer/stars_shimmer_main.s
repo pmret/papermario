@@ -15,8 +15,8 @@ dlabel D_E0044E30
 dlabel D_E0044E38
 .double 0.4
 
-dlabel D_E0044E40
-.word 0xE0044284, 0xE0044284, 0xE0044344, 0xE00442A8, 0xE0044344, 0xE0044344
+dlabel jtbl_E0044E40
+.word .LE0044284, .LE0044284, .LE0044344, .LE00442A8, .LE0044344, .LE0044344
 
 dlabel D_E0044E58
 .double 0.01
@@ -92,8 +92,8 @@ glabel stars_shimmer_main
 /* 355058 E00440F8 0232102A */  slt       $v0, $s1, $s2
 /* 35505C E00440FC 104000B8 */  beqz      $v0, .LE00443E0
 /* 355060 E0044100 2463002C */   addiu    $v1, $v1, 0x2c
-/* 355064 E0044104 3C15E004 */  lui       $s5, %hi(D_E0044E40)
-/* 355068 E0044108 26B54E40 */  addiu     $s5, $s5, %lo(D_E0044E40)
+/* 355064 E0044104 3C15E004 */  lui       $s5, %hi(jtbl_E0044E40)
+/* 355068 E0044108 26B54E40 */  addiu     $s5, $s5, %lo(jtbl_E0044E40)
 /* 35506C E004410C 24700018 */  addiu     $s0, $v1, 0x18
 /* 355070 E0044110 2654FFFF */  addiu     $s4, $s2, -1
 /* 355074 E0044114 44940000 */  mtc1      $s4, $f0
@@ -190,6 +190,7 @@ glabel stars_shimmer_main
 /* 3551D8 E0044278 8C420000 */  lw        $v0, ($v0)
 /* 3551DC E004427C 00400008 */  jr        $v0
 /* 3551E0 E0044280 00000000 */   nop
+.LE0044284:
 /* 3551E4 E0044284 4608B002 */  mul.s     $f0, $f22, $f8
 /* 3551E8 E0044288 00000000 */  nop
 /* 3551EC E004428C 4604A082 */  mul.s     $f2, $f20, $f4
@@ -199,6 +200,7 @@ glabel stars_shimmer_main
 /* 3551FC E004429C E600FFF8 */  swc1      $f0, -8($s0)
 /* 355200 E00442A0 080110F4 */  j         .LE00443D0
 /* 355204 E00442A4 E602FFFC */   swc1     $f2, -4($s0)
+.LE00442A8:
 /* 355208 E00442A8 0C080138 */  jal       shim_rand_int
 /* 35520C E00442AC 24040064 */   addiu    $a0, $zero, 0x64
 /* 355210 E00442B0 C7AA0090 */  lwc1      $f10, 0x90($sp)

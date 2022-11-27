@@ -6,6 +6,32 @@ void radial_shimmer_update(EffectInstance* effect);
 void radial_shimmer_render(EffectInstance* effect);
 void radial_shimmer_appendGfx(void* effect);
 
+extern Gfx D_09003428_36A188[];
+extern Gfx D_09003508_36A268[];
+extern Gfx D_090035E8_36A348[];
+extern Gfx D_090036C8_36A428[];
+extern Gfx D_09003830_36A590[];
+extern Gfx D_090038B8_36A618[];
+extern Gfx D_090039A8_36A708[];
+extern Gfx D_09003A88_36A7E8[];
+
+Gfx* D_E0066C50[] = {
+    D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590,
+    D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590,
+    D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590, D_09003830_36A590
+};
+
+Gfx* D_E0066C8C[] = {
+    D_09003508_36A268, D_090035E8_36A348, D_09003428_36A188, D_090039A8_36A708, D_09003A88_36A7E8,
+    D_09003428_36A188, D_090039A8_36A708, D_09003A88_36A7E8, D_090038B8_36A618, D_09003508_36A268,
+    D_090038B8_36A618, D_090038B8_36A618, D_09003428_36A188, D_09003A88_36A7E8, D_090036C8_36A428,
+};
+
+// todo ??? unused
+s32 D_E0066CC8[] = {
+    0xFFC59CFF, 0x9CFFFF73, 0xD6FF9CFF, 0xFFC57BFF, 0xB4FFDE73, 0xFFFF949C
+};
+
 EffectInstance* radial_shimmer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
@@ -26,8 +52,8 @@ EffectInstance* radial_shimmer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     ASSERT(effect->data.radialShimmer != NULL);
 
     data->unk_00 = arg0;
-    data->unk_28 = arg5_2;
-    data->unk_24 = data->unk_2C = 0;
+    data->timeLeft = arg5_2;
+    data->unk_24 = data->lifeTime = 0;
     data->unk_10 = arg1;
     data->unk_14 = arg2;
     data->unk_18 = arg3;
@@ -186,23 +212,23 @@ void radial_shimmer_update(EffectInstance* effect) {
     f32 outS;
     s32 i;
 
-    part->unk_28--;
-    part->unk_2C++;
+    part->timeLeft--;
+    part->lifeTime++;
 
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
-        part->unk_28 = 16;
+        part->timeLeft = 16;
     }
 
-    if (part->unk_28 < 0) {
+    if (part->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_28 = part->unk_28;
+    unk_28 = part->timeLeft;
 
-    if (part->unk_2C < 11) {
-        part->unk_24 = (part->unk_2C * 255) / 10;
+    if (part->lifeTime <= 10) {
+        part->unk_24 = (part->lifeTime * 255) / 10;
     }
 
     if (unk_28 < 6) {
@@ -215,7 +241,8 @@ void radial_shimmer_update(EffectInstance* effect) {
 
     part->unk_1C = part->unk_20;
 
-    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->unk_04, part->unk_08, part->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
+    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->unk_04, part->unk_08, part->unk_0C,
+                         1.0f, &outX, &outY, &outZ, &outS);
 
     outS = 1.0f / outS;
     outX *= outS;
@@ -257,4 +284,89 @@ void radial_shimmer_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/radial_shimmer", radial_shimmer_appendGfx);
+void radial_shimmer_appendGfx(void* effect) {
+    Matrix4f sp20, sp60;
+    u16 spA0;
+    EffectInstance* effectTemp = effect;
+    RadialShimmerFXData* dataOrig = effectTemp->data.radialShimmer;
+    RadialShimmerFXData* data = effectTemp->data.radialShimmer;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 temp_f0;
+    s32 temp_f2;
+    s32 temp_f4;
+    s32 temp_f6;
+    Gfx* dlist2;
+    Gfx* dlist1;
+    s32 temp_s5;
+    s32 temp_t1;
+    s32 var_a3;
+    s32 alpha;
+    s32 other;
+    s32 t1;
+    s32 t2;
+    s32 i;
+
+    temp_s5 = data->unk_00;
+    dlist1 = D_E0066C8C[temp_s5];
+    dlist2 = D_E0066C50[temp_s5];
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp20, data->unk_10, data->unk_14, data->unk_18);
+    shim_guScaleF(sp60, data->unk_1C, data->unk_1C, 1.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guPerspectiveF(sp60, &spA0, data->unk_60, (f32) camera->viewportW / camera->viewportH, 4.0f, 16384.0f, 1.0f);
+    shim_guMtxCatF(sp60, sp20, sp20);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+
+    shim_guTranslateF(sp20, 0.0f, 0.0f, data->unk_64);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    alpha = data->unk_24;
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_6B, data->unk_6C, data->unk_6D, 127);
+    gSPDisplayList(gMasterGfxPos++, dlist1);
+
+    for (i = 0; i < effectTemp->numParts; i++, data++) {
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_68, data->unk_69, data->unk_6A, alpha);
+
+        switch (temp_s5) {
+            case 0:
+            case 1:
+                other = 0x3F;
+                var_a3 = 0x1FF;
+                break;
+            case 8:
+                other = 0x3F;
+                var_a3 = 0x7F;
+                break;
+            case 11:
+                other = 0x3F;
+                var_a3 = 0xFF;
+                break;
+            default:
+                other = 0x3F;
+                var_a3 = 0x1FF;
+                break;
+        }
+
+        temp_f0 = data->unk_30;
+        temp_f2 = data->unk_40;
+        temp_f4 = data->unk_38;
+        temp_f6 = data->unk_48;
+
+        gDPSetTileSize(gMasterGfxPos++, 0, temp_f0, temp_f2, temp_f0 + other * 4, temp_f2 + var_a3 * 4);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_MIRROR, temp_f4, temp_f6, temp_f4 + other * 4, temp_f6 + var_a3 * 4);
+        gSPDisplayList(gMasterGfxPos++, dlist2);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gDPPipeSync(gMasterGfxPos++);
+}
