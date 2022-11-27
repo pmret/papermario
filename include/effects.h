@@ -1364,8 +1364,12 @@ typedef struct ConfettiFXData {
 typedef struct SnowfallFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ char unk_0C[0x14];
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 timeLeft;
     /* 0x24 */ s32 lifeTime;
     /* 0x28 */ s32 unk_28;

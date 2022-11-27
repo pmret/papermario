@@ -96,7 +96,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x42 */ FX_ENTRY(bombette_breaking, effect_gfx_blast),
     /* 0x43 */ FX_ENTRY(firework, effect_gfx_firework),
     /* 0x44 */ FX_ENTRY(confetti, effect_gfx_confetti),
-    /* 0x45 */ FX_ENTRY(snowfall, _38D070),
+    /* 0x45 */ FX_ENTRY(snowfall, effect_gfx_snowfall),
     /* 0x46 */ FX_ENTRY_NUMBERED(46, effect_gfx_effect_46),
     /* 0x47 */ FX_ENTRY(gather_magic, effect_gfx_gather_magic),
     /* 0x48 */ FX_ENTRY(attack_result_text, effect_gfx_attack_result_text),
