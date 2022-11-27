@@ -212,7 +212,6 @@ ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
@@ -221,7 +220,6 @@ ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
     D_802495DC_A3381C++;
     return ApiStatus_DONE2;
 }
-
 
 ApiStatus func_80240F88_A2B1C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -241,7 +239,6 @@ ApiStatus func_80240FE0_A2B220(Evt* script, s32 isInitialCall) {
     effect->data.lightRays->unk_18 = script->varTable[2];
     return ApiStatus_DONE2;
 }
-
 
 void func_80241044_A2B284(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 temp_f2 = arg1 - arg2;
