@@ -78,7 +78,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x30 */ FX_ENTRY(big_snowflakes, effect_gfx_big_snowflakes),
     /* 0x31 */ FX_ENTRY(debuff, effect_gfx_debuff),
     /* 0x32 */ FX_ENTRY(green_impact, effect_gfx_green_impact),
-    /* 0x33 */ FX_ENTRY(radial_shimmer, _366D60),
+    /* 0x33 */ FX_ENTRY(radial_shimmer, effect_gfx_radial_shimmer),
     /* 0x34 */ FX_ENTRY(ending_decals, effect_gfx_ending_decals),
     /* 0x35 */ FX_ENTRY(light_rays, effect_gfx_light_rays),
     /* 0x36 */ FX_ENTRY(lightning, effect_gfx_lightning),

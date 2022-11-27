@@ -3349,7 +3349,7 @@ segments:
     vram: 0xE0038000
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
-    - [0x34E710, data]
+    - [0x34E710]
   - name: effect_gfx_spiky_white_aura
     dir: effects/gfx
     type: code
@@ -3483,7 +3483,7 @@ segments:
     vram: 0xE0042000
     subsegments:
     - [0x3547A0, c, stars_burst]
-    - [0x354F20, data]
+    - [0x354F20]
   - name: effect_stars_shimmer
     dir: effects
     type: code
@@ -3873,8 +3873,41 @@ segments:
     vram: 0xE0066000
     subsegments:
     - [0x366030, c, radial_shimmer]
-    - [0x366C80, data]
-  - [0x366D60, bin] # radial_shimmer gfx
+    - [0x366C80]
+  - name: effect_gfx_radial_shimmer
+    dir: effects/gfx
+    type: code
+    start: 0x366D60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x366D60, c, radial_shimmer]
+    - start: 0x366D60
+      type: .data
+      name: radial_shimmer
+      subsegments:
+      - [0x366D60, i4, D_09000000_366D60, 64, 16]
+      - [0x366F60, i4, D_09000200_366F60, 64, 16]
+      - [0x367160, i4, D_09000400_367160, 64, 64]
+      - [0x367960, i4, D_09000C00_367960, 32, 32]
+      - [0x367B60, i4, D_09000E00_367B60, 64, 64]
+      - [0x368360, i4, D_09001600_368360, 64, 64]
+      - [0x368B60, i4, D_09001E00_368B60, 64, 64]
+      - [0x369360, i4, D_09002600_369360, 64, 64]
+      - [0x369B60, i4, D_09002E00_369B60, 32, 32]
+      - [0x369D60, vtx, D_09003000_369D60]
+      - [0x369F00, vtx, D_090031A0_369F00]
+      - [0x36A0A0, gfx, D_09003340_36A0A0]
+      - [0x36A188, gfx, D_09003428_36A188]
+      - [0x36A268, gfx, D_09003508_36A268]
+      - [0x36A348, gfx, D_090035E8_36A348]
+      - [0x36A428, gfx, D_090036C8_36A428]
+      - [0x36A508, gfx, D_090037A8_36A508]
+      - [0x36A590, gfx, D_09003830_36A590]
+      - [0x36A618, gfx, D_090038B8_36A618]
+      - [0x36A708, gfx, D_090039A8_36A708]
+      - [0x36A7E8, gfx, D_09003A88_36A7E8]
+      - [0x36A8C8] # padding
   - name: effect_ending_decals
     dir: effects
     type: code

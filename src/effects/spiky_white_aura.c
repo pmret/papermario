@@ -4,6 +4,22 @@
 extern Gfx* D_09000440_34EBB0[];
 extern Gfx* D_090004E8_34EC58[];
 
+// RGB values? unused
+u8 D_E00389F0[] = {
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172,
+};
+
 void spiky_white_aura_init(EffectInstance* effect);
 void spiky_white_aura_update(EffectInstance* effect);
 void spiky_white_aura_render(EffectInstance* effect);
