@@ -203,16 +203,15 @@ ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
     s32 posX;
     s32 posY;
     f32 posZ;
-    EffectInstance* effect;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    s32 subtype = evt_get_variable(script, *args++);
 
-    effect = (EffectInstance*) evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
     posX = evt_get_float_variable(script, *args++);
     posY = evt_get_float_variable(script, *args++);
     posZ = evt_get_float_variable(script, *args++);
-    effect->data.miscParticles->pos.x = (f32) posX;
-    effect->data.miscParticles->pos.y = (f32) posY;
-    effect->data.miscParticles->pos.z = (f32) (s32) posZ;
+    effect->data.miscParticles->pos.x = posX;
+    effect->data.miscParticles->pos.y = posY;
+    effect->data.miscParticles->pos.z = posZ;
     return ApiStatus_DONE2;
 }
 
@@ -220,8 +219,9 @@ ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
+
     effect->data.somethingRotating[D_802495DC_A3381C + 1].unk_29 = 1;
-    D_802495DC_A3381C += 1;
+    D_802495DC_A3381C++;
     return ApiStatus_DONE2;
 }
 
@@ -229,15 +229,16 @@ ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240F88_A2B1C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
+
     effect->data.somethingRotating[D_802495E0_A33820 + 1].unk_29 = 3;
-    D_802495E0_A33820 += 1;
+    D_802495E0_A33820++;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240FE0_A2B220(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    EffectInstance* effect;
-    effect = (EffectInstance*) evt_get_variable(script, ArrayVar(16));
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(16));
+
     effect->data.lightRays->unk_10 = script->varTable[0];
     effect->data.lightRays->unk_14 = script->varTable[1];
     effect->data.lightRays->unk_18 = script->varTable[2];
