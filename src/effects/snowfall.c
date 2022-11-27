@@ -62,9 +62,6 @@ EffectInstance* snowfall_main(s32 arg0, s32 arg1) {
 void snowfall_init(EffectInstance* effect) {
 }
 
-void func_E008A290(SnowfallFXData* data, s32, s32, s32);
-// reg alloque
-#ifdef NON_MATCHING
 void func_E008A290(SnowfallFXData* data, s32 arg1, s32 arg2, s32 arg3) {
     Camera* camera = &gCameras[gCurrentCameraID];
     f32 unk_08 = data->unk_08;
@@ -79,33 +76,39 @@ void func_E008A290(SnowfallFXData* data, s32 arg1, s32 arg2, s32 arg3) {
 
     temp_f12 = unk_08 - lookX;
     if (arg1 < temp_f12) {
-        data->unk_08 = (lookX - arg1) + (temp_f12 % arg1);
+        temp_f12 = temp_f12 % arg1;
+        data->unk_08 = (lookX - arg1) + temp_f12;
     } else if (-arg1 > temp_f12) {
-        data->unk_08 = (lookX + arg1) - (-temp_f12 % arg1);
+        temp_f12 = -temp_f12;
+        temp_f12 = temp_f12 % arg1;
+        data->unk_08 = (lookX + arg1) - temp_f12;
     }
 
     temp_f12_2 = unk_0C - lookY;
     if (arg2 < temp_f12_2) {
-        data->unk_0C = (lookY - arg2) + (temp_f12_2 % arg2);
+        temp_f12_2 = temp_f12_2 % arg2;
+        data->unk_0C = (lookY - arg2) + temp_f12_2;
     } else if (temp_f12_2 < -arg2) {
         if (arg3 < 100) {
             data->unk_18 = 0;
             data->unk_28 = 0;
         } else {
-            data->unk_0C = (lookY + arg2) - (-temp_f12_2 % arg2);
+            temp_f12_2 = -temp_f12_2;
+            temp_f12_2 = temp_f12_2 % arg2;
+            data->unk_0C = (lookY + arg2) - temp_f12_2;
         }
     }
 
     temp_f12_3 = unk_10 - lookZ;
     if (arg1 < temp_f12_3) {
-        data->unk_10 = (lookZ - arg1) + (temp_f12_3 % arg1);
+        temp_f12_3 = temp_f12_3 % arg1;
+        data->unk_10 = (lookZ - arg1) + temp_f12_3;
     } else if (temp_f12_3 < -arg1) {
-        data->unk_10 = (lookZ + arg1) - (-temp_f12_3 % arg1);
+        temp_f12_3 = -temp_f12_3;
+        temp_f12_3 = temp_f12_3 % arg1;
+        data->unk_10 = (lookZ + arg1) - temp_f12_3;
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/snowfall", func_E008A290);
-#endif
 
 void snowfall_update(EffectInstance* effect) {
     Camera* camera = &gCameras[gCurrentCameraID];

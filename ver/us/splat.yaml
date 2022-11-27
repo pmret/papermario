@@ -5449,7 +5449,7 @@ segments:
     vram: 0xE00CA000
     subsegments:
     - [0x3D0500, c, effect_65]
-    - [0x3D11B0, data]
+    - [0x3D11B0]
   - name: effect_gfx_effect_65
     dir: effects/gfx
     type: code
@@ -5893,7 +5893,7 @@ segments:
     vram: 0xE010A000
     subsegments:
     - [0x3E43A0, c, firework_rocket]
-    - [0x3E5060, data]
+    - [0x3E5060]
   - name: effect_gfx_firework_rocket
     dir: effects/gfx
     type: code
