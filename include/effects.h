@@ -680,8 +680,17 @@ typedef struct StarsBurstFXData {
 } StarsBurstFXData; // size = 0x38
 
 typedef struct StarsShimmerFXData {
-    /* 0x00 */ char todo[0];
-} StarsShimmerFXData; // size = unknown
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 lifeTime;
+    /* 0x24 */ s32 timeLeft;
+    /* 0x28 */ s32 unk_28;
+} StarsShimmerFXData; // size = 0x2C
 
 typedef struct RisingBubbleFXData {
     /* 0x00 */ s32 unk_00;
@@ -944,8 +953,8 @@ typedef struct RadialShimmerFXData {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x28 */ s32 timeLeft;
+    /* 0x2C */ s32 lifeTime;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
@@ -1355,8 +1364,12 @@ typedef struct ConfettiFXData {
 typedef struct SnowfallFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ char unk_0C[0x14];
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 timeLeft;
     /* 0x24 */ s32 lifeTime;
     /* 0x28 */ s32 unk_28;
@@ -2526,12 +2539,18 @@ typedef struct QuizmoAssistantFXData {
 } QuizmoAssistantFXData; // size = 0x20
 
 typedef struct IcePillarFXData {
-    /* 0x00 */ char unk_00[0x4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ char todo[0];
-} IcePillarFXData; // size = unknown
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ Color_RGBA8 prim;
+    /* 0x1C */ Color_RGBA8 env;
+    /* 0x20 */ f32 scale;
+    /* 0x24 */ s8 unk_24;
+    /* 0x25 */ s8 unk_25;
+    /* 0x26 */ char unk_26[0x2];
+    /* 0x28 */ struct EffectInstance* miscParticles;
+} IcePillarFXData; // size = 0x2C
 
 // sun shine directions
 enum {

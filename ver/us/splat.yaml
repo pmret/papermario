@@ -3349,7 +3349,7 @@ segments:
     vram: 0xE0038000
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
-    - [0x34E710, data]
+    - [0x34E710]
   - name: effect_gfx_spiky_white_aura
     dir: effects/gfx
     type: code
@@ -3483,7 +3483,7 @@ segments:
     vram: 0xE0042000
     subsegments:
     - [0x3547A0, c, stars_burst]
-    - [0x354F20, data]
+    - [0x354F20]
   - name: effect_stars_shimmer
     dir: effects
     type: code
@@ -3491,7 +3491,7 @@ segments:
     vram: 0xE0044000
     subsegments:
     - [0x354F60, c, stars_shimmer]
-    - [0x355D10, data]
+    - [0x355D10]
   - name: effect_rising_bubble
     dir: effects
     type: code
@@ -3873,8 +3873,41 @@ segments:
     vram: 0xE0066000
     subsegments:
     - [0x366030, c, radial_shimmer]
-    - [0x366C80, data]
-  - [0x366D60, bin] # radial_shimmer gfx
+    - [0x366C80]
+  - name: effect_gfx_radial_shimmer
+    dir: effects/gfx
+    type: code
+    start: 0x366D60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x366D60, c, radial_shimmer]
+    - start: 0x366D60
+      type: .data
+      name: radial_shimmer
+      subsegments:
+      - [0x366D60, i4, D_09000000_366D60, 64, 16]
+      - [0x366F60, i4, D_09000200_366F60, 64, 16]
+      - [0x367160, i4, D_09000400_367160, 64, 64]
+      - [0x367960, i4, D_09000C00_367960, 32, 32]
+      - [0x367B60, i4, D_09000E00_367B60, 64, 64]
+      - [0x368360, i4, D_09001600_368360, 64, 64]
+      - [0x368B60, i4, D_09001E00_368B60, 64, 64]
+      - [0x369360, i4, D_09002600_369360, 64, 64]
+      - [0x369B60, i4, D_09002E00_369B60, 32, 32]
+      - [0x369D60, vtx, D_09003000_369D60]
+      - [0x369F00, vtx, D_090031A0_369F00]
+      - [0x36A0A0, gfx, D_09003340_36A0A0]
+      - [0x36A188, gfx, D_09003428_36A188]
+      - [0x36A268, gfx, D_09003508_36A268]
+      - [0x36A348, gfx, D_090035E8_36A348]
+      - [0x36A428, gfx, D_090036C8_36A428]
+      - [0x36A508, gfx, D_090037A8_36A508]
+      - [0x36A590, gfx, D_09003830_36A590]
+      - [0x36A618, gfx, D_090038B8_36A618]
+      - [0x36A708, gfx, D_090039A8_36A708]
+      - [0x36A7E8, gfx, D_09003A88_36A7E8]
+      - [0x36A8C8] # padding
   - name: effect_ending_decals
     dir: effects
     type: code
@@ -4121,7 +4154,7 @@ segments:
     vram: 0xE0078000
     subsegments:
     - [0x37A3F0, c, bulb_glow]
-    - [0x37ACF0, data]
+    - [0x37ACF0]
   - name: effect_gfx_bulb_glow
     dir: effects/gfx
     type: code
@@ -4457,8 +4490,29 @@ segments:
     vram: 0xE008A000
     subsegments:
     - [0x38C5F0, c, snowfall]
-    - [0x38D040, data]
-  - [0x38D070, bin] # snowfall gfx
+    - [0x38D040]
+  - name: effect_gfx_snowfall
+    dir: effects/gfx
+    type: code
+    start: 0x38D070
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x38D070, c, snowfall]
+    - start: 0x38D070
+      type: .data
+      name: snowfall
+      subsegments:
+      - [0x38D070, i4, D_09000000_38D070, 16, 16]
+      - [0x38D0F0, i4, D_09000080_38D0F0, 64, 64]
+      - [0x38D8F0, vtx, D_09000880_38D8F0]
+      - [0x38DA70, vtx, D_09000A00_38DA70]
+      - [0x38DAF0, vtx, D_09000A80_38DAF0]
+      - [0x38DC70]
+      - [0x38DC80, gfx, D_09000C10_38DC80]
+      - [0x38DDA0, gfx, D_09000D30_38DDA0]
+      - [0x38DDC0, gfx, D_09000D50_38DDC0]
+      - [0x38DDF8] # padding
   - name: effect_effect_46
     dir: effects
     type: code
@@ -5395,7 +5449,7 @@ segments:
     vram: 0xE00CA000
     subsegments:
     - [0x3D0500, c, effect_65]
-    - [0x3D11B0, data]
+    - [0x3D11B0]
   - name: effect_gfx_effect_65
     dir: effects/gfx
     type: code
@@ -5839,7 +5893,7 @@ segments:
     vram: 0xE010A000
     subsegments:
     - [0x3E43A0, c, firework_rocket]
-    - [0x3E5060, data]
+    - [0x3E5060]
   - name: effect_gfx_firework_rocket
     dir: effects/gfx
     type: code
@@ -6361,8 +6415,34 @@ segments:
     vram: 0xE011E000
     subsegments:
     - [0x409990, c, ice_pillar]
-    - [0x40A180, data]
-  - [0x40A1C0, bin] # ice_pillar gfx
+    - [0x40A180]
+  - name: effect_gfx_ice_pillar
+    dir: effects/gfx
+    type: code
+    start: 0x40A1C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40A1C0, c, ice_pillar]
+    - start: 0x40A1C0
+      type: .data
+      name: ice_pillar
+      subsegments:
+      - [0x40A1C0, i4, D_09000000_40A1C0, 32, 64]
+      - [0x40A5C0, i4, D_09000400_40A5C0, 32, 64]
+      - [0x40A9C0, i4, D_09000800_40A9C0, 32, 64]
+      - [0x40ADC0, i4, D_09000C00_40ADC0, 32, 64]
+      - [0x40B1C0, gfx, D_09001000_40B1C0]
+      - [0x40B268, vtx, D_090010A8_40B268]
+      - [0x40B2A8, vtx, D_090010E8_40B2A8]
+      - [0x40B2E8, vtx, D_09001128_40B2E8]
+      - [0x40B328, vtx, D_09001168_40B328]
+      - [0x40B358]
+      - [0x40B368, gfx, D_090011A8_40B368]
+      - [0x40B388, gfx, D_090011C8_40B388]
+      - [0x40B3A8, gfx, D_090011E8_40B3A8]
+      - [0x40B3C8, gfx, D_09001208_40B3C8]
+      - [0x40B3E8]
   - name: effect_sun
     dir: effects
     type: code
