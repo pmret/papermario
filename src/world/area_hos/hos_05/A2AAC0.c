@@ -200,15 +200,12 @@ ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
 // adjusts properties of EmitterVolume:GoldShimmer2 effect
 ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 posX;
-    s32 posY;
-    f32 posZ;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     s32 subtype = evt_get_variable(script, *args++);
+    s32 posX = evt_get_float_variable(script, *args++);
+    s32 posY = evt_get_float_variable(script, *args++);
+    s32 posZ = evt_get_float_variable(script, *args++);
 
-    posX = evt_get_float_variable(script, *args++);
-    posY = evt_get_float_variable(script, *args++);
-    posZ = evt_get_float_variable(script, *args++);
     effect->data.miscParticles->pos.x = posX;
     effect->data.miscParticles->pos.y = posY;
     effect->data.miscParticles->pos.z = posZ;
