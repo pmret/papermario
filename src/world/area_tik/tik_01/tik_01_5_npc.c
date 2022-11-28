@@ -1,11 +1,11 @@
-#include "tik_02.h"
+#include "tik_01.h"
 
 #include "world/common/enemy/complete/Blooper.inc.c"
 
 EvtScript N(EVS_NpcIdle_Blooper) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, 65)
+        EVT_IF_LT(LVar0, 200)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
@@ -13,28 +13,14 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_EXEC(N(EVS_PlayBlooperSong))
     EVT_CALL(ShowMessageAtScreenPos, MSG_MGM_0000, 160, 40)
-    EVT_THREAD
-        EVT_CALL(InterpPlayerYaw, 315, 0)
-        EVT_WAIT(50)
-        EVT_CALL(InterpPlayerYaw, 45, 0)
-    EVT_END_THREAD
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -25, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -25, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 140, LVar1, LVar2)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim01)
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, -75)
+    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, 150, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_3DC, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_3E7, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, -100, -300, -120)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim01)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_SELF, 175, 0, 0, 40)
+    EVT_CALL(NpcFlyTo, NPC_SELF, LVar0, 0, 0, 10, 0, EASING_QUADRATIC_IN)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim0C)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(15)
@@ -46,17 +32,11 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
 EvtScript N(EVS_NpcDefeat_Blooper) = {
     EVT_WAIT(5)
     EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim04)
         EVT_CALL(MakeLerp, 0, 6 * 360, 40, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -65,16 +45,18 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_3DD, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_3E7, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_SELF, -100, -300, -120, 40)
-    EVT_WAIT(1)
+    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(NpcFlyTo, NPC_SELF, LVar0, 150, 0, 15, 0, EASING_QUADRATIC_IN)
+    EVT_WAIT(5)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EVT_WAIT(15)
+    EVT_EXEC_WAIT(N(EVS_SpawnSwitch))
     EVT_IF_EQ(GF_TIK_DefeatedOneBlooper, FALSE)
         EVT_SET(GF_TIK_DefeatedOneBlooper, TRUE)
     EVT_ELSE
         EVT_SET(GF_TIK_DefeatedTwoBloopers, TRUE)
     EVT_END_IF
-    EVT_SET(GF_TIK02_Defeated_Blooper, TRUE)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
+    EVT_SET(GF_TIK01_Defeated_Blooper, TRUE)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(RemoveNpc, NPC_SELF)
@@ -83,7 +65,7 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
 };
 
 EvtScript N(EVS_NpcInit_Blooper) = {
-    EVT_IF_EQ(GF_TIK02_Defeated_Blooper, FALSE)
+    EVT_IF_EQ(GF_TIK01_Defeated_Blooper, FALSE)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Blooper)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Blooper)))
         EVT_IF_EQ(GF_TIK_DefeatedOneBlooper, FALSE)
