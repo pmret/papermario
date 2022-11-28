@@ -975,17 +975,22 @@ typedef struct BattleStatus {
 // alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
-    /* 0x20 */ s16 auxW;
-    /* 0x22 */ s16 mainW;
-    /* 0x24 */ s16 auxH;
-    /* 0x26 */ s16 mainH;
+    /* 0x20 */ u16 auxW;
+    /* 0x22 */ u16 mainW;
+    /* 0x24 */ u16 auxH;
+    /* 0x26 */ u16 mainH;
     /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u8 colorCombine;
-    /* 0x2B */ u8 fmt;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
+    /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
+    /* 0x2A */ u8 colorCombineType : 6;
+    /* 0x2A */ u8 colorCombineSubType : 2;
+    /* 0x2B */ u8 auxFmt : 4;
+    /* 0x2B */ u8 mainFmt : 4;
+    /* 0x2C */ u8 auxBitDepth : 4;
+    /* 0x2C */ u8 mainBitDepth : 4;
+    /* 0x2D */ u8 auxWrapW : 4;
+    /* 0x2D */ u8 mainWrapW : 4;
+    /* 0x2E */ u8 auxWrapH : 4;
+    /* 0x2E */ u8 mainWrapH : 4;
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
 
@@ -2256,28 +2261,6 @@ typedef struct UnkEntityStruct {
     /* 0x38 */ f32 unk_38;
 } UnkEntityStruct; // size = 0x3C
 
-typedef struct EntityModel {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 renderMode;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
-    /* 0x0C */ f32 timeScale; ///< Default is 1.0
-    /* 0x10 */ s32* cmdListReadPos;
-    /* 0x14 */ union {
-                    Gfx* displayList;
-                    SpriteRasterInfo* imageData;
-               } gfx;
-    /* 0x18 */ Mtx transform;
-    /* 0x58 */ s32* cmdListSavedPos;
-    /* 0x5C */ Vec3s* vertexArray;
-    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
-    /* 0x64 */ void* setupGfxCallbackArg0;
-} EntityModel; // size = 0x68
-
-typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
-
 typedef struct VirtualEntity {
     /* 0x00 */ s32 entityModelIndex;
     /* 0x04 */ Vec3f pos;
@@ -2521,5 +2504,12 @@ typedef struct LavaPiranhaVine {
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
+
+// TODO look into making options here better. it's really an array of 5 substructs, each having and [8][2] array
+typedef struct PlayerCelebrationAnimOptions {
+    /* 0x00 */ s16 randomChance;
+    /* 0x02 */ s16 hpBasedChance;
+    /* 0x04 */ s32 options[0];
+} PlayerCelebrationAnimOptions; // size = 0x8
 
 #endif

@@ -124,10 +124,12 @@ void star_spirits_energy_appendGfx(void* effect) {
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 
+                     data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, D_E0122BA4[0]);
     gDPSetEnvColor(gMasterGfxPos++, data->unk_2C, data->unk_30, data->unk_34, data->unk_38);
 
@@ -137,7 +139,8 @@ void star_spirits_energy_appendGfx(void* effect) {
                 shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_40[i], 0.0f, 0.0f, 0.0f);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+                          G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_1C, data->unk_20, data->unk_24, data->unk_50[i]);
                 gSPDisplayList(gMasterGfxPos++, D_E0122B90[i]);
                 gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

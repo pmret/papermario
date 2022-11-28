@@ -442,4 +442,35 @@ extern EntityBlueprint Entity_TrumpetPlant;
 extern EntityBlueprint Entity_Munchlesia;
 extern EntityBlueprint Entity_ArrowSign;
 
+typedef struct EntityModel {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s8 renderMode;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
+    /* 0x0C */ f32 timeScale; ///< Default is 1.0
+    /* 0x10 */ EntityModelScript* cmdListReadPos;
+    /* 0x14 */ union {
+                    Gfx* displayList;
+                    SpriteRasterInfo* imageData;
+               } gfx;
+    /* 0x18 */ Mtx transform;
+    /* 0x58 */ EntityModelScript* cmdListSavedPos;
+    /* 0x5C */ Vec3s* vertexArray;
+    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
+    /* 0x64 */ void* setupGfxCallbackArg0;
+} EntityModel; // size = 0x68
+
+typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
+
+EntityModel* get_entity_model(s32 idx);
+s32 load_entity_model(EntityModelScript* cmdList);
+s32 ALT_load_entity_model(EntityModelScript* cmdList);
+void entity_set_render_script(Entity* entity, EntityModelScript* cmdList);
+void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList);
+
+void virtual_entity_list_render_world(void);
+void virtual_entity_list_render_UI(void);
+
 #endif

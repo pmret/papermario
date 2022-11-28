@@ -209,7 +209,7 @@ void entity_Tweester_idle(Entity* entity) {
 
     if (get_time_freeze_mode() == TIME_FREEZE_NORMAL &&
         !is_picking_up_item() &&
-        !(playerStatus->flags & PS_FLAGS_20) &&
+        !(playerStatus->flags & PS_FLAGS_PAUSED) &&
         (playerData->currentPartner != PARTNER_GOOMBARIO ||
          playerStatus->inputEnabledCounter == 0 ||
          playerStatus->actionState == ACTION_STATE_USE_TWEESTER
@@ -274,7 +274,7 @@ void entity_Tweester_idle(Entity* entity) {
         }
 
         if (!is_picking_up_item() &&
-            !(playerStatus->flags & PS_FLAGS_20) &&
+            !(playerStatus->flags & PS_FLAGS_PAUSED) &&
             playerStatus->actionState != ACTION_STATE_USE_TWEESTER &&
             playerStatus->blinkTimer == 0 &&
             fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) <= 50.0

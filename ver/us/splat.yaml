@@ -3349,7 +3349,7 @@ segments:
     vram: 0xE0038000
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
-    - [0x34E710, data]
+    - [0x34E710]
   - name: effect_gfx_spiky_white_aura
     dir: effects/gfx
     type: code
@@ -3483,7 +3483,7 @@ segments:
     vram: 0xE0042000
     subsegments:
     - [0x3547A0, c, stars_burst]
-    - [0x354F20, data]
+    - [0x354F20]
   - name: effect_stars_shimmer
     dir: effects
     type: code
@@ -3491,7 +3491,7 @@ segments:
     vram: 0xE0044000
     subsegments:
     - [0x354F60, c, stars_shimmer]
-    - [0x355D10, data]
+    - [0x355D10]
   - name: effect_rising_bubble
     dir: effects
     type: code
@@ -3690,7 +3690,7 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c, windy_leaves]
-    - [0x35E8A0]
+    - [0x35E8A0, .rodata, windy_leaves]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -3873,8 +3873,41 @@ segments:
     vram: 0xE0066000
     subsegments:
     - [0x366030, c, radial_shimmer]
-    - [0x366C80, data]
-  - [0x366D60, bin] # radial_shimmer gfx
+    - [0x366C80]
+  - name: effect_gfx_radial_shimmer
+    dir: effects/gfx
+    type: code
+    start: 0x366D60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x366D60, c, radial_shimmer]
+    - start: 0x366D60
+      type: .data
+      name: radial_shimmer
+      subsegments:
+      - [0x366D60, i4, D_09000000_366D60, 64, 16]
+      - [0x366F60, i4, D_09000200_366F60, 64, 16]
+      - [0x367160, i4, D_09000400_367160, 64, 64]
+      - [0x367960, i4, D_09000C00_367960, 32, 32]
+      - [0x367B60, i4, D_09000E00_367B60, 64, 64]
+      - [0x368360, i4, D_09001600_368360, 64, 64]
+      - [0x368B60, i4, D_09001E00_368B60, 64, 64]
+      - [0x369360, i4, D_09002600_369360, 64, 64]
+      - [0x369B60, i4, D_09002E00_369B60, 32, 32]
+      - [0x369D60, vtx, D_09003000_369D60]
+      - [0x369F00, vtx, D_090031A0_369F00]
+      - [0x36A0A0, gfx, D_09003340_36A0A0]
+      - [0x36A188, gfx, D_09003428_36A188]
+      - [0x36A268, gfx, D_09003508_36A268]
+      - [0x36A348, gfx, D_090035E8_36A348]
+      - [0x36A428, gfx, D_090036C8_36A428]
+      - [0x36A508, gfx, D_090037A8_36A508]
+      - [0x36A590, gfx, D_09003830_36A590]
+      - [0x36A618, gfx, D_090038B8_36A618]
+      - [0x36A708, gfx, D_090039A8_36A708]
+      - [0x36A7E8, gfx, D_09003A88_36A7E8]
+      - [0x36A8C8] # padding
   - name: effect_ending_decals
     dir: effects
     type: code
@@ -4121,7 +4154,7 @@ segments:
     vram: 0xE0078000
     subsegments:
     - [0x37A3F0, c, bulb_glow]
-    - [0x37ACF0, data]
+    - [0x37ACF0]
   - name: effect_gfx_bulb_glow
     dir: effects/gfx
     type: code
@@ -4457,8 +4490,29 @@ segments:
     vram: 0xE008A000
     subsegments:
     - [0x38C5F0, c, snowfall]
-    - [0x38D040, data]
-  - [0x38D070, bin] # snowfall gfx
+    - [0x38D040]
+  - name: effect_gfx_snowfall
+    dir: effects/gfx
+    type: code
+    start: 0x38D070
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x38D070, c, snowfall]
+    - start: 0x38D070
+      type: .data
+      name: snowfall
+      subsegments:
+      - [0x38D070, i4, D_09000000_38D070, 16, 16]
+      - [0x38D0F0, i4, D_09000080_38D0F0, 64, 64]
+      - [0x38D8F0, vtx, D_09000880_38D8F0]
+      - [0x38DA70, vtx, D_09000A00_38DA70]
+      - [0x38DAF0, vtx, D_09000A80_38DAF0]
+      - [0x38DC70]
+      - [0x38DC80, gfx, D_09000C10_38DC80]
+      - [0x38DDA0, gfx, D_09000D30_38DDA0]
+      - [0x38DDC0, gfx, D_09000D50_38DDC0]
+      - [0x38DDF8] # padding
   - name: effect_effect_46
     dir: effects
     type: code
@@ -5111,7 +5165,8 @@ segments:
     vram: 0xE00BE000
     subsegments:
     - [0x3BBF60, c, water_splash]
-    - [0x3BCA50]
+    - [0x3BCA50, .data, water_splash]
+    - [0x3BCA60, .rodata, water_splash]
   - name: effect_gfx_water_splash
     dir: effects/gfx
     type: code
@@ -5394,7 +5449,7 @@ segments:
     vram: 0xE00CA000
     subsegments:
     - [0x3D0500, c, effect_65]
-    - [0x3D11B0, data]
+    - [0x3D11B0]
   - name: effect_gfx_effect_65
     dir: effects/gfx
     type: code
@@ -5444,8 +5499,23 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c, whirlwind]
-    - [0x3D3910]
-  - [0x3D3930, bin] # whirlwind gfx
+    - [0x3D3910, .rodata, whirlwind]
+    - [0x3D3930]
+  - name: effect_gfx_whirlwind
+    dir: effects/gfx
+    type: code
+    start: 0x3D3930
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x3D3930, c, whirlwind]
+      - start: 0x3D3930
+        type: .data
+        name: whirlwind
+        subsegments:
+          - [0x3D3930, i4, D_09000000_3D3930, 64, 32]
+          - [0x3D3D30, gfx, D_09000400_3D3D30]
+          - [0x3D3E20]
   - name: effect_red_impact
     dir: effects
     type: code
@@ -5823,7 +5893,7 @@ segments:
     vram: 0xE010A000
     subsegments:
     - [0x3E43A0, c, firework_rocket]
-    - [0x3E5060, data]
+    - [0x3E5060]
   - name: effect_gfx_firework_rocket
     dir: effects/gfx
     type: code
@@ -6345,8 +6415,34 @@ segments:
     vram: 0xE011E000
     subsegments:
     - [0x409990, c, ice_pillar]
-    - [0x40A180, data]
-  - [0x40A1C0, bin] # ice_pillar gfx
+    - [0x40A180]
+  - name: effect_gfx_ice_pillar
+    dir: effects/gfx
+    type: code
+    start: 0x40A1C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40A1C0, c, ice_pillar]
+    - start: 0x40A1C0
+      type: .data
+      name: ice_pillar
+      subsegments:
+      - [0x40A1C0, i4, D_09000000_40A1C0, 32, 64]
+      - [0x40A5C0, i4, D_09000400_40A5C0, 32, 64]
+      - [0x40A9C0, i4, D_09000800_40A9C0, 32, 64]
+      - [0x40ADC0, i4, D_09000C00_40ADC0, 32, 64]
+      - [0x40B1C0, gfx, D_09001000_40B1C0]
+      - [0x40B268, vtx, D_090010A8_40B268]
+      - [0x40B2A8, vtx, D_090010E8_40B2A8]
+      - [0x40B2E8, vtx, D_09001128_40B2E8]
+      - [0x40B328, vtx, D_09001168_40B328]
+      - [0x40B358]
+      - [0x40B368, gfx, D_090011A8_40B368]
+      - [0x40B388, gfx, D_090011C8_40B388]
+      - [0x40B3A8, gfx, D_090011E8_40B3A8]
+      - [0x40B3C8, gfx, D_09001208_40B3C8]
+      - [0x40B3E8]
   - name: effect_sun
     dir: effects
     type: code
@@ -15703,217 +15799,303 @@ segments:
       - [0xE9DE90, ci4, BombableRock, 64, 64]
       - [0xE9E690, palette, BombableRock]
       - [0xE9E6B0]
-  - [0xE9ECD0, bin] # unk data
 
 #################
 ### Dead maps ###
 #################
+  - [0xE9ECD0, bin] # tail of dead kzn_11
+  #- name: dead_kzn_11
+  #  dir: world/dead/area_kzn/kzn_11
+  #  type: code
+  #  start: 0xE9AFF0
+  #  vram: 0x80240000
+  #  subsegments:
+  #  - [0xE9AFF0, c, kzn_11_0_header]
+  #  - [0xE9AFF0, c, kzn_11_1_main]
+  #  - [0xE9B300, c, kzn_11_2_platforms]
+  #  - [0xE9B450, c, kzn_11_3_npc]
+  #  - [0xE9D650]
   - name: dead_kzn_17
-    dir: world/dead/kzn_17
+    dir: world/dead/area_kzn/kzn_17
     type: code
     start: 0xEA0900
     vram: 0x80240000
     subsegments:
-    - [0xEA0900, c]
-    - [0xEA0C10, c]
-    - [0xEA36E0, c]
-    - [0xEA3A80, data]
-    - [0xEA6D70]
+    - [0xEA0900, c, kzn_17_0_header]
+    - [0xEA0900, c, kzn_17_1_main]
+    - [0xEA0900, c, kzn_17_2_entity]
+    - [0xEA0C10, c, kzn_17_3_npc]
+    - [0xEA36E0, c, kzn_17_4_tromp]
+    - [0xEA3A80]
   - name: dead_kzn_18
-    dir: world/dead/kzn_18
+    dir: world/dead/area_kzn/kzn_18
     type: code
     start: 0xEA6FD0
     vram: 0x80240000
     subsegments:
-    - [0xEA6FD0, c]
-    - [0xEA7010, c]
-    - [0xEA7320, c]
-    - [0xEA7390, data]
+    - [0xEA6FD0, c, kzn_18_0_header]
+    - [0xEA7010, c, kzn_18_1_main]
+    - [0xEA7320, c, kzn_18_2_npc]
+    - [0xEA7390, c, kzn_18_3_entity]
+    - [0xEA7390]
   - name: dead_kzn_19
-    dir: world/dead/kzn_19
+    dir: world/dead/area_kzn/kzn_19
     type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
-    - [0xEA8AE0, c]
-    - [0xEAA810, data]
-    - [0xEB0E20]
-  - name: dead_03
-    dir: world/dead/dead_03
+    - [0xEA8AE0, c, kzn_19_0_header]
+    - [0xEA8AE0, c, kzn_19_1_music]
+    - [0xEA8AE0, c, kzn_19_2_main]
+    - [0xEA95E0, c, kzn_19_3_npc_settings]
+    - [0xEA95E0, c, kzn_19_4_npc]
+    - [0xEA95E0, c, kzn_19_5_eruption]
+    - [0xEA95E0, c, kzn_19_6_entity]
+    - [0xEAA810]
+  - name: dead_kzn_20
+    dir: world/dead/area_kzn/kzn_20
     type: code
     start: 0xEB0E60
     vram: 0x80240000
     subsegments:
-    - [0xEB0E60, c]
-    - [0xEB1170, c]
-    - [0xEB1920, data]
-  - name: dead_04
-    dir: world/dead/dead_04
+    - [0xEB0E60, c, kzn_20_0_header]
+    - [0xEB0E60, c, kzn_20_1_music]
+    - [0xEB0E60, c, kzn_20_2_main]
+    - [0xEB1170, c, kzn_20_3_npc]
+    - [0xEB1920]
+  - name: dead_kzn_22
+    dir: world/dead/area_kzn/kzn_22
     type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
-    - [0xEB5130, c]
-    - [0xEB5470, c]
-    - [0xEB54C0, data]
+    - [0xEB5130, c, kzn_22_0_header]
+    - [0xEB5130, c, kzn_22_1_music]
+    - [0xEB5130, c, kzn_22_2_main]
+    - [0xEB5470, c, kzn_22_3_entity]
+    - [0xEB5470, c, kzn_22_4_npc]
+    - [0xEB54C0]
   - name: dead_kzn_23
-    dir: world/dead/kzn_23
+    dir: world/dead/area_kzn/kzn_23
     type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
-    - [0xEB7230, c]
-    - [0xEB7540, c]
-    - [0xEB7850, data]
-    - [0xEB8E40]
+    - [0xEB7230, c, kzn_23_0_header]
+    - [0xEB7230, c, kzn_23_1_music]
+    - [0xEB7230, c, kzn_23_2_main]
+    - [0xEB7540, c, kzn_23_3_npc]
+    - [0xEB7850]
   - name: dead_flo_00
-    dir: world/dead/flo_00
+    dir: world/dead/area_flo/flo_00
     type: code
     start: 0xEB8E50
     vram: 0x80240000
     subsegments:
-    - [0xEB8E50, c]
-    - [0xEB8E90, c]
-    - [0xEB9D90, c]
-    - [0xEBA260, data]
-    - [0xEC2000]
+    - [0xEB8E50, c, flo_00_0_header]
+    - [0xEB8E50, c, flo_00_1_music]
+    - [0xEB8E50, c, flo_00_2_main]
+    - [0xEB8E90, c, flo_00_3_npc]
+    - [0xEB9D90, c, flo_00_4_epilogue]
+    - [0xEB9D90, c, flo_00_5_beanstalk]
+    - [0xEBA260, c, flo_00_6_entity]
+    - [0xEBA260]
   - name: dead_flo_03
-    dir: world/dead/flo_03
+    dir: world/dead/area_flo/flo_03
     type: code
     start: 0xEC2200
     vram: 0x80240000
     subsegments:
-    - [0xEC2200, c]
-    - [0xEC2240, c]
-    - [0xEC2610, c]
-    - [0xEC2850, data]
-    - [0xEC7170]
+    - [0xEC2200, c, flo_03_0_header]
+    - [0xEC2200, c, flo_03_1_music]
+    - [0xEC2200, c, flo_03_2_main]
+    - [0xEC2240, c, flo_03_3_npc]
+    - [0xEC2610, c, flo_03_4_foliage]
+    - [0xEC2850, c, flo_03_5_entity]
+    - [0xEC2850]
   - name: dead_flo_07
-    dir: world/dead/flo_07
+    dir: world/dead/area_flo/flo_07
     type: code
     start: 0xEC71B0
     vram: 0x80240000
     subsegments:
-    - [0xEC71B0, c]
-    - [0xEC7590, c]
-    - [0xEC78F0, data]
+    - [0xEC71B0, c, flo_07_0_header]
+    - [0xEC71B0, c, flo_07_1_music]
+    - [0xEC71B0, c, flo_07_2_main]
+    - [0xEC7590, c, flo_07_3_npc]
+    - [0xEC7590]
   - name: dead_flo_08
-    dir: world/dead/flo_08
+    dir: world/dead/area_flo/flo_08
     type: code
     start: 0xEC9D00
     vram: 0x80240000
     subsegments:
-    - [0xEC9D00, c]
-    - [0xECAA40, c]
-    - [0xECAA80, c]
-    - [0xECB930, c]
-    - [0xECBB70, c]
-    - [0xECBC10, data]
-    - [0xECFE60]
+    - [0xEC9D00, c, flo_08_0_header]
+    - [0xEC9D00, c, flo_08_1_music]
+    - [0xEC9D00, c, flo_08_2_entity]
+    - [0xECAA40, c, flo_08_3_main]
+    - [0xECAA80, c, flo_08_4_npc]
+    - [0xECB930, c, flo_08_5_foliage]
+    - [0xECBB70, c, flo_08_6_vines]
+    - [0xECBC10]
   - name: dead_flo_09
-    dir: world/dead/flo_09
+    dir: world/dead/area_flo/flo_09
     type: code
     start: 0xECFFF0
     vram: 0x80240000
     subsegments:
-    - [0xECFFF0, c]
-    - [0xED0030, c]
-    - [0xED00D0, c]
-    - [0xED0310, c]
-    - [0xED1840, data]
-    - [0xED41C0]
+    - [0xECFFF0, c, flo_09_0_header]
+    - [0xECFFF0, c, flo_09_1_music]
+    - [0xECFFF0, c, flo_09_2_main]
+    - [0xED0030, c, flo_09_3_vines]
+    - [0xED00D0, c, flo_09_4_foliage]
+    - [0xED0310, c, flo_09_5_npc]
+    - [0xED1840]
   - name: dead_flo_10
-    dir: world/dead/flo_10
+    dir: world/dead/area_flo/flo_10
     type: code
     start: 0xED4220
     vram: 0x80240000
     subsegments:
-    - [0xED4220, c]
-    - [0xED4260, c]
-    - [0xED42A0, c]
-    - [0xED46D0, c]
-    - [0xED5540, c]
-    - [0xED5780, data]
+    - [0xED4220, c, flo_10_0_header]
+    - [0xED4260, c, flo_10_1_music]
+    - [0xED4260, c, flo_10_2_entity]
+    - [0xED4260, c, flo_10_3_main]
+    - [0xED42A0, c, flo_10_4_fountain]
+    - [0xED46D0, c, flo_10_5_npc]
+    - [0xED46D0, c, flo_10_6_waterfx]
+    - [0xED5540, c, flo_10_7_foliage]
+    - [0xED5780]
   - name: dead_flo_11
-    dir: world/dead/flo_11
+    dir: world/dead/area_flo/flo_11
     type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
-    - [0xED8E20, c]
-    - [0xED9170, data]
-    - [0xEDBF90]
+    - [0xED8E20, c, flo_11_0_header]
+    - [0xED8E20, c, flo_11_1_music]
+    - [0xED8E20, c, flo_11_2_main]
+    - [0xED9170, c, flo_11_3_npc]
+    - [0xED9170, c, flo_11_4_entity]
+    - [0xED9170]
   - name: dead_flo_12
-    dir: world/dead/flo_12
+    dir: world/dead/area_flo/flo_12
     type: code
     start: 0xEDBFE0
     vram: 0x80240000
     subsegments:
-    - [0xEDBFE0, c]
-    - [0xEDC020, c]
-    - [0xEDC6D0, data]
+    - [0xEDBFE0, c, flo_12_0_header]
+    - [0xEDBFE0, c, flo_12_1_music]
+    - [0xEDBFE0, c, flo_12_2_main]
+    - [0xEDC020, c, flo_12_3_npc]
+    - [0xEDC6D0]
   - name: dead_flo_13
-    dir: world/dead/flo_13
+    dir: world/dead/area_flo/flo_13
     type: code
     start: 0xEDE9C0
     vram: 0x80240000
     subsegments:
-    - [0xEDE9C0, c]
-    - [0xEDEA00, c]
-    - [0xEE2040, c]
-    - [0xEE20E0, data]
-    - [0xEE64B0]
+    - [0xEDE9C0, c, flo_13_0_header]
+    - [0xEDE9C0, c, flo_13_1_music]
+    - [0xEDE9C0, c, flo_13_2_entity]
+    - [0xEDE9C0, c, flo_13_3_main]
+    - [0xEDEA00, c, flo_13_4_npc]
+    - [0xEE2040, c, flo_13_5_new_party]
+    - [0xEE20E0]
   - name: dead_flo_14
-    dir: world/dead/flo_14
+    dir: world/dead/area_flo/flo_14
     type: code
     start: 0xEE65B0
     vram: 0x80240000
     subsegments:
-    - [0xEE65B0, c]
-    - [0xEE70C0, c]
-    - [0xEE8940, c]
-    - [0xEE8970, data]
-    - [0xEEB900]
+    - [0xEE65B0, c, flo_14_0_header]
+    - [0xEE65B0, c, flo_14_1_music]
+    - [0xEE65B0, c, flo_14_2_main]
+    - [0xEE68F0, c, flo_14_3_bubbles]
+    - [0xEE70C0, c, flo_14_4_npc]
+    - [0xEE8940, c, flo_14_5_entity]
+    - [0xEE8940, c, flo_14_6_logs]
+    - [0xEE8970]
+  - name: dead_flo_15
+    dir: world/dead/area_flo/flo_15
+    type: code
+    start: 0xEEB990
+    vram: 0x80240000
+    subsegments:
+    - [0xEEB990, c, flo_15_0_header]
+    - [0xEEB990, c, flo_15_1_music]
+    - [0xEEB990, c, flo_15_2_main]
+    - [0xEEB990, c, flo_15_3_npc]
+    - [0xEEB990, c, flo_15_4_entity]
+    - [0xEEB990, c, flo_15_5_stairs]
+    - [0xEEB990]
   - name: dead_flo_16
-    dir: world/dead/flo_16
+    dir: world/dead/area_flo/flo_16
     type: code
     start: 0xEED100
     vram: 0x80240000
     subsegments:
-    - [0xEED100, c]
-    - [0xEED140, c]
-    - [0xEED1E0, c]
-    - [0xEEDF50, c]
-    - [0xEEFAA0, c]
-    - [0xEEFAD0, data]
-    - [0xEF2550]
-  - name: dead_11
-    dir: world/dead/dead_11
+    - [0xEED100, c, flo_16_0_header]
+    - [0xEED100, c, flo_16_1_music]
+    - [0xEED100, c, flo_16_2_main]
+    - [0xEED140, c, flo_16_3_vines]
+    - [0xEED1E0, c, flo_16_4_entity]
+    - [0xEEDF50, c, flo_16_5_npc]
+    - [0xEEFAA0, c, flo_16_6_puzzle]
+    - [0xEEFAD0]
+  - name: dead_flo_17
+    dir: world/dead/area_flo/flo_17
     type: code
     start: 0xEF2610
     vram: 0x80240000
     subsegments:
-    - [0xEF2610, c]
-    - [0xEF2650, c]
-    - [0xEF2680, c]
-    - [0xEF58E0, data]
-    - [0xEF79C0]
+    - [0xEF2610, c, flo_17_0_header]
+    - [0xEF2610, c, flo_17_1_music]
+    - [0xEF2610, c, flo_17_2_main]
+    - [0xEF2650, c, flo_17_3_logs]
+    - [0xEF2680, c, flo_17_4_npc]
+    - [0xEF58E0, c, flo_17_5_entity]
+    - [0xEF58E0]
   - name: dead_flo_18
-    dir: world/dead/flo_18
+    dir: world/dead/area_flo/flo_18
     type: code
     start: 0xEF7A80
     vram: 0x80240000
     subsegments:
-    - [0xEF7A80, c]
-    - [0xEF7FB0, c]
-    - [0xEF8010, c]
-    - [0xEF8250, data]
+    - [0xEF7A80, c, flo_18_0_header]
+    - [0xEF7A80, c, flo_18_1_music]
+    - [0xEF7A80, c, flo_18_2_main]
+    - [0xEF7DC0, c, flo_18_3_machine]
+    - [0xEF7FB0, c, flo_18_4_npc]
+    - [0xEF8010, c, flo_18_5_foliage]
+    - [0xEF8250]
+  #- name: dead_flo_19
+  #  dir: world/dead/area_flo/flo_19
+  #  type: code
+  #  start: 0xEFEB00
+  #  vram: 0x80240000
+  #  subsegments:
+  #  - [0xEFEB00, c, flo_19_0_header]
+  #  - [0xEFEB00, c, flo_19_1_music]
+  #  - [0xEFEB00, c, flo_19_2_entity]
+  #  - [0xEFEB00, c, flo_19_3_main]
+  #  - [0xEFEE40, c, flo_19_4_clouds]
+  #  - [0xEFEFD0, c, flo_19_5_beanstalk]
+  #  - [0xEFF440]
+
+  # should end at 0xF01B10
+
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
     subsegments:
     - [0xEFEB00, c]
-    - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
+    - [0xEFF440, bin] # part of overlay
+
+#############
+### Audio ###
+#############
+  - [0xF00000, bin, SBN]
   - [0xF007C0, bin, bgm/Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, bgm/Hey_You_03]
   - [0xF03740, bin, bgm/The_Goomba_King_s_Decree_07]
@@ -16058,52 +16240,34 @@ segments:
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # more audio stuff
+  - [0x19425C0, bin] # INIT file
+###############
+### Sprites ###
+###############
+  - [0x1942C40, bin]
+  - [0x1943000, bin] # sprite data build metadata (build date, major file divisions)
 
-  - [0x1943000, bin] # sprite data build metadata
+  # player sprite raster table:
   - [0x1943020, bin] # Player sprite table
-  - [0x1943BA0, bin] # Mario world sprites
-  - [0x199A8C0, bin] # Retro sprites
-  - [0x199BB00, bin] # Princess Peach sprites
-  - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
-  - start: 0x19E09A8
-    type: Yay0
-    align: 8
-  - start: 0x19E1390
-    type: Yay0
-    align: 8
-  - start: 0x19E1888
-    type: Yay0
-    align: 8
-  - start: 0x19E2330
-    type: Yay0
-    align: 8
-  - start: 0x19E2DE0
-    type: Yay0
-    align: 8
-  - start: 0x19E3208
-    type: Yay0
-    align: 8
-  - start: 0x19E3BA8
-    type: Yay0
-    align: 8
-  - start: 0x19E3FD8
-    type: Yay0
-    align: 8
-  - start: 0x19E4828
-    type: Yay0
-    align: 8
-  - start: 0x19E4BE0
-    type: Yay0
-    align: 8
-  - start: 0x19E5758
-    type: Yay0
-    align: 8
-  - start: 0x19E5950
-    type: Yay0
-    align: 8
-  - start: 0x19E62A0
-    type: Yay0
-    align: 8
+  # - [0x1943BA0, bin] # Mario world sprites
+  # - [0x199A8C0, bin] # Retro sprites
+  # - [0x199BB00, bin] # Princess Peach sprites
+
+  - [0x19E0970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
+  - { start: 0x19E09A8, type: Yay0, align: 8 }
+  - { start: 0x19E1390, type: Yay0, align: 8 }
+  - { start: 0x19E1888, type: Yay0, align: 8 }
+  - { start: 0x19E2330, type: Yay0, align: 8 }
+  - { start: 0x19E2DE0, type: Yay0, align: 8 }
+  - { start: 0x19E3208, type: Yay0, align: 8 }
+  - { start: 0x19E3BA8, type: Yay0, align: 8 }
+  - { start: 0x19E3FD8, type: Yay0, align: 8 }
+  - { start: 0x19E4828, type: Yay0, align: 8 }
+  - { start: 0x19E4BE0, type: Yay0, align: 8 }
+  - { start: 0x19E5758, type: Yay0, align: 8 }
+  - { start: 0x19E5950, type: Yay0, align: 8 }
+  - { start: 0x19E62A0, type: Yay0, align: 8 }
+
   - start: 0x19E67B8
     align: 8
     type: pm_npc_sprites
@@ -16343,7 +16507,7 @@ segments:
       - ParadeShyGuy
       - ParadeTwink
       - Leaf
-  - [0x1B82208, bin] # todo: figure out what this is
+  - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
   - start: 0x1B83000
     type: pm_msg
     files:

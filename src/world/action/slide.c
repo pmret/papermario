@@ -145,7 +145,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            playerStatus->position.y = player_check_collision_below(func_800E34D8(), &hitID);
+            playerStatus->position.y = player_check_collision_below(player_fall_distance(), &hitID);
             if (hitID >= 0) {
                 SlideLaunchSpeed = -1;
                 suggest_player_anim_setUnkFlag(ANIM_Mario_80003);

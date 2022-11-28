@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "entity.h"
 #include "effects.h"
 #include "sprite.h"
 #include "world/partners.h"
@@ -530,7 +531,7 @@ void update_npcs(void) {
     f32 x, y, z;
     f32 hitYaw, hitPitch, hitLength;
 
-    playerStatus->animFlags &= ~PA_FLAGS_8000;
+    playerStatus->animFlags &= ~PA_FLAGS_NPC_COLLIDED;
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400))) {
         s32 i;
 

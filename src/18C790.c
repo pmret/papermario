@@ -551,7 +551,7 @@ void btl_state_update_celebration(void) {
                         if (partner != NULL) {
                             partner->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
                         }
-                        battleStatus->battlePhase = PHASE_5;
+                        battleStatus->battlePhase = PHASE_CELEBRATE;
                         script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                         player->takeTurnScript = script;
                         player->takeTurnID = script->id;

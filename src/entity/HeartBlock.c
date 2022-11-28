@@ -192,8 +192,8 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 data->state++;
                 entity->flags &= ~ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
                 data->rotationRate = -10.0f;
-                entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptHit);
-                entity->renderSetupFunc = &entity_HeartBlockContent_setupGfx;
+                entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptHit);
+                entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
             }
             break;
         case 2:
@@ -340,7 +340,7 @@ void entity_HeartBlockContent_init(Entity* entity) {
 
 void entity_HeartBlockContent_reset(Entity* entity) {
     entity_HeartBlockContent__reset(entity);
-    entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptIdle);
+    entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptIdle);
 }
 
 void entity_HeartBlockContent_idle(Entity* entity) {
@@ -353,7 +353,7 @@ void entity_HeartBlockContent_anim_heal(Entity* entity) {
 }
 
 void entity_HeartBlock_change_render_script(Entity* entity) {
-    entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptAfterHit);
+    entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptAfterHit);
 }
 
 void entity_HeartBlock_show_tutorial_message(Entity* entity) {

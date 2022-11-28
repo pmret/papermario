@@ -25,8 +25,8 @@ void action_update_land(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
             PS_FLAGS_ACTION_STATE_CHANGED |
-            PS_FLAGS_800000 |
-            PS_FLAGS_80000 |
+            PS_FLAGS_SCRIPTED_FALL |
+            PS_FLAGS_ARMS_RAISED |
             PS_FLAGS_AIRBORNE
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;
@@ -37,7 +37,7 @@ void action_update_land(void) {
 
         if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
             anim = ANIM_Mario_90002;
-        } else if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+        } else if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
             anim = ANIM_Mario_10009;
         } else {
             anim = ANIM_Mario_6000B;
@@ -52,7 +52,7 @@ void action_update_land(void) {
         }
 
         collisionStatus->lastTouchedFloor = -1;
-        playerStatus->animFlags &= ~PA_FLAGS_40000;
+        playerStatus->animFlags &= ~PA_FLAGS_INTERRUPT_SPIN;
         camera->moveFlags &= ~CAMERA_MOVE_FLAGS_4;
     }
     playerStatus->actionSubstate++; // SUBSTATE_DONE
@@ -87,8 +87,8 @@ void action_update_step_down_land(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
          playerStatus->flags &= ~(
             PS_FLAGS_ACTION_STATE_CHANGED |
-            PS_FLAGS_800000 |
-            PS_FLAGS_80000 |
+            PS_FLAGS_SCRIPTED_FALL |
+            PS_FLAGS_ARMS_RAISED |
             PS_FLAGS_AIRBORNE
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;

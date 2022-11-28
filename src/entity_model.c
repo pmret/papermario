@@ -1,6 +1,7 @@
 #include "common.h"
+#include "entity.h"
 
-s32 D_8014C260[] = { 0x00000000, 0x00000000 };
+EntityModelScript D_8014C260[] = { {ems_End}, {ems_End }};
 Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 extern EntityModelList gWorldEntityModelList;
@@ -85,7 +86,7 @@ void init_entity_models(void) {
     entity_fog_dist_max = 1000;
 }
 
-s32 load_entity_model(s32* cmdList) {
+s32 load_entity_model(EntityModelScript* cmdList) {
     EntityModel* newEntityModel;
     s32 i;
 
@@ -123,7 +124,7 @@ s32 load_entity_model(s32* cmdList) {
     return i;
 }
 
-s32 ALT_load_entity_model(s32* cmdList) {
+s32 ALT_load_entity_model(EntityModelScript* cmdList) {
     EntityModel* newEntityModel;
     SpriteRasterInfo* imageData;
     s32 i;
@@ -189,7 +190,7 @@ void exec_entity_model_commandlist(s32 idx) {
 s32 step_entity_model_commandlist(EntityModel* entityModel) {
     SpriteRasterInfo* imageData;
 
-    u32* curPos = entityModel->cmdListReadPos;
+    u32* curPos = entityModel->cmdListReadPos[0];
     switch (*curPos++) {
         case 0: // kill model
             free_entity_model_by_ref(entityModel);
@@ -197,25 +198,25 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
         case 1: // set display list ptr
             entityModel->nextFrameTime = (f32) *curPos++;
             entityModel->gfx.displayList = (Gfx*) *curPos++;
-            entityModel->cmdListReadPos = curPos;
+            entityModel->cmdListReadPos = (EntityModelScript*) curPos;
             break;
         case 2: // restore saved position
             entityModel->cmdListReadPos = entityModel->cmdListSavedPos;
             return 1;
         case 3: // set saved position
-            entityModel->cmdListReadPos = entityModel->cmdListSavedPos = curPos;
+            entityModel->cmdListReadPos = entityModel->cmdListSavedPos = (EntityModelScript*) curPos;
             return 1;
         case 4: // set render mode
             entityModel->renderMode = *curPos++;
-            entityModel->cmdListReadPos = curPos;
+            entityModel->cmdListReadPos = (EntityModelScript*) curPos;
             return 1;
         case 5: // set flags
             entityModel->flags |= *curPos++;
-            entityModel->cmdListReadPos = curPos;
+            entityModel->cmdListReadPos = (EntityModelScript*) curPos;
             return 1;
         case 6: // clear flags
             entityModel->flags &= ~*curPos++;
-            entityModel->cmdListReadPos = curPos;
+            entityModel->cmdListReadPos = (EntityModelScript*) curPos;
             return 1;
         case 7: // set image data
             imageData = entityModel->gfx.imageData;
@@ -224,7 +225,7 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             imageData->defaultPal = (PAL_PTR) *curPos++;
             imageData->width = *curPos++;
             imageData->height = *curPos++;
-            entityModel->cmdListReadPos = curPos;
+            entityModel->cmdListReadPos = (EntityModelScript*) curPos;
             break;
     }
     return 0;
@@ -714,17 +715,15 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-void set_entity_model_render_command_list(s32 idx, u32* commandList) {
-    u32* phi_a1;
+void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     if (entityModel != NULL && entityModel->flags) {
-        phi_a1 = commandList;
-        if (commandList == NULL) {
-            phi_a1 = D_8014C260;
+        if (cmdList == NULL) {
+            cmdList = D_8014C260;
         }
-        entityModel->cmdListReadPos = phi_a1;
-        entityModel->cmdListSavedPos = phi_a1;
+        entityModel->cmdListReadPos = cmdList;
+        entityModel->cmdListSavedPos = cmdList;
         entityModel->nextFrameTime = 1.0f;
         entityModel->timeScale = 1.0f;
     }

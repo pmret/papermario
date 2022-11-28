@@ -10,7 +10,7 @@ ApiStatus func_80240000_DCCCD0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (playerStatus->flags & PS_FLAGS_20) {
+    if (playerStatus->flags & PS_FLAGS_PAUSED) {
         return TRUE;
     }
 

@@ -108,7 +108,7 @@ void action_update_parasol(void) {
             transformation->revertTime = 12;
             disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
             disguiseNpc->flags |= NPC_FLAG_40000;
-            playerStatus->flags |= PS_FLAGS_100000;
+            playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
             sfx_play_sound_at_player(SOUND_FD, 0);
         }
     }
@@ -141,7 +141,7 @@ void action_update_parasol(void) {
         case SUBSTATE_PUT_AWAY:
             if (playerStatus->animNotifyValue != 0) {
                 playerStatus->currentStateTime = 12;
-                playerStatus->flags |= PS_FLAGS_100000;
+                playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
                 playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_BEGIN
                 sfx_play_sound_at_player(SOUND_FD, 0);
             }
@@ -228,7 +228,7 @@ void action_update_parasol(void) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
                 disguiseNpc->flags &= ~NPC_FLAG_40000;
-                playerStatus->flags &= ~PS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }
@@ -308,7 +308,7 @@ void action_update_parasol(void) {
         case SUBSTATE_REVERT_DONE:
             if (--playerStatus->currentStateTime == 0) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
-                playerStatus->flags &= ~PS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }

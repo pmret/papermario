@@ -114,7 +114,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_SUB(LVar0, 15)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_CALL(NpcJump1, NPC_Parakarry, LVar0, LVar1, LVar2, 8)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(30)
