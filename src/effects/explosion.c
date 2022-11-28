@@ -1,6 +1,11 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void explosion_init(EffectInstance* effect);
+void explosion_update(EffectInstance* effect);
+void explosion_render(EffectInstance* effect);
+void explosion_appendGfx(void* effect);
+
 extern Gfx D_09000840_3447B0[];
 extern Gfx D_090008F0_344860[];
 extern Gfx D_09000910_344880[];
@@ -10,9 +15,80 @@ extern Gfx D_09000A38_3449A8[];
 
 Gfx* D_E00328B0[] = { D_09000978_3448E8, D_090009D8_344948, D_09000A38_3449A8 };
 
-void explosion_appendGfx(void* effect);
+void explosion_main(s32 type, f32 x, f32 y, f32 z) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
+    EffectInstance* effect;
+    ExplosionFXData* data;
+    s32 numParts = 3;
 
-INCLUDE_ASM(s32, "effects/explosion", explosion_main);
+    // TODO this terrible if-else required to match
+    s32 dumb;
+    s32 temp;
+    if (type != 0) {
+        dumb = 0;
+    } else {
+        temp = 0;
+        dumb = temp;
+    }
+
+    bpPtr->unk_00 = 0;
+    bpPtr->init = explosion_init;
+    bpPtr->update = explosion_update;
+    bpPtr->renderWorld = explosion_render;
+    bpPtr->unk_14 = NULL;
+    bpPtr->effectID = EFFECT_EXPLOSION;
+    
+
+    effect = shim_create_effect_instance(bpPtr);
+    effect->numParts = numParts;
+    effect->data.explosion = data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    ASSERT(effect->data.explosion != NULL);
+
+    data->pos.x = x;
+    data->pos.y = y;
+    data->pos.z = z;
+    data->unk_34 = 0;
+    data->unk_30 = 60;
+    data->unk_00 = type;
+
+    data++;
+    data->unk_00 = type;
+    if (type == 0) {
+        data->unk_00 = -1;
+    }
+    data->unk_38 = 0;
+    if (type == 1) {
+        data->unk_20 = 1.0f;
+    } else {
+        data->unk_20 = 3.0f;
+    }
+    if (type == 1) {
+        data->unk_24 = 1.0f;
+    } else {
+        data->unk_24 = 3.0f;
+    }
+
+    data++;
+    data->unk_00 = type;
+    data->unk_38 = 255;
+    switch (type) {
+        case 0:
+            data->unk_20 = 9.9f;
+            data->unk_24 = 1.6f;
+            break;
+        case 1:
+            data->unk_20 = 13.9f;
+            data->unk_24 = 2.4f;
+            break;
+        default:
+            data->unk_20 = 17.8f;
+            data->unk_24 = 3.2f;
+            break;
+    }
+    data->unk_28 = 0.0f;
+    data->unk_2C = 30.0f;
+}
 
 void explosion_init(EffectInstance* effect) {
 }
@@ -35,10 +111,10 @@ void explosion_update(EffectInstance* effect) {
 
     if (unk_34 == 7) {
         shim_load_effect(EFFECT_SMOKE_RING);
-        smoke_ring_main(unk_00, part->unk_04, part->unk_08, part->unk_0C);
+        smoke_ring_main(unk_00, part->pos.x, part->pos.y, part->pos.z);
     } else if (unk_34 == 1) {
         shim_load_effect(EFFECT_CONFETTI);
-        confetti_main(unk_00 + 4, part->unk_04, part->unk_08, part->unk_0C, 1.0f, 50);
+        confetti_main(unk_00 + 4, part->pos.x, part->pos.y, part->pos.z, 1.0f, 50);
     }
 
     part++;
@@ -95,7 +171,7 @@ void explosion_appendGfx(void* effect) {
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
