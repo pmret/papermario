@@ -9062,14 +9062,13 @@ segments:
     start: 0x86C740
     vram: 0x80240000
     subsegments:
-    - [0x86C740, c]
-    - [0x86CA50, c]
-    - [0x86CD10, c]
-    - [0x86D0E0, data]
-    - [0x86D190, data]
-    - [0x86D800, data]
-    - [0x86E2C0, data]
-    - [0x86EAF0]
+    - [0x86C740, c, tik_02_0_header]
+    - [0x86C740, c, tik_02_1_music]
+    - [0x86C740, c, tik_02_2_main]
+    - [0x86CA50, c, tik_02_3_entity]
+    - [0x86CD10, c, tik_02_4_drips]
+    - [0x86D0E0, c, tik_02_5_npc]
+    - [0x86D0E0]
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
@@ -9110,7 +9109,7 @@ segments:
     - [0x874DC0, c, tik_05_2_main]
     - [0x8750D0, c, tik_05_3_drips]
     - [0x875440, c, tik_05_4_entity]
-    - [0x875440, c, tik_05_5_npc]
+    - [0x875810, c, tik_05_5_npc]
     - [0x875810]
   - name: tik_06
     dir: world/area_tik/tik_06

@@ -19,7 +19,7 @@ API_CALLABLE(N(PlaySpringAnimation)) {
 
 #include "world/common/todo/SetEntityPosition.inc.c"
 
-EvtScript N(D_8024194C_87670C) = {
+EvtScript N(EVS_BreakBlock_DropSpring) = {
     EVT_IF_EQ(GF_TIK05_SpringBrick, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -61,7 +61,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(AssignChestFlag, GF_TIK05_Chest_PowerSmash1)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_OpenChest)))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 25, 50, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_8024194C_87670C)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_BreakBlock_DropSpring)))
     EVT_IF_EQ(GF_TIK05_SpringBrick, FALSE)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 25, 75, 0, 0, 100, MAKE_ENTITY_END)
         EVT_SET(MV_Unk_00, LVar0)
