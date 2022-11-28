@@ -9074,15 +9074,14 @@ segments:
     start: 0x86EB00
     vram: 0x80240000
     subsegments:
-    - [0x86EB00, c]
-    - [0x86F0F0, c]
-    - [0x86F5D0, data]
-    - [0x86F670, data]
-    - [0x870B60, data]
-    - [0x871430, data]
-    - [0x871730, data]
-    - [0x8717F0, data]
-    - [0x871A10]
+    - [0x86EB00, c, tik_03_0_header]
+    - [0x86EB00, c, tik_03_1_music]
+    - [0x86EB00, c, tik_03_2_main]
+    - [0x86F0F0, c, tik_03_3_drips]
+    - [0x86F460, c, tik_03_4_platforms]
+    - [0x86F4C0, c, tik_03_5_entity]
+    - [0x86F4C0, c, tik_03_6_demo]
+    - [0x86F5D0]
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code

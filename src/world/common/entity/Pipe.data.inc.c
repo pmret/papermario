@@ -250,6 +250,10 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_END \
 }
 
+#define EVT_ENTER_PIPE_HORIZONTAL(collider, bindExitsScript) \
+    EVT_SET(LVarA, EVT_PTR(bindExitsScript)) \
+    EVT_SET(LVarB, collider) \
+    EVT_EXEC(N(EVS_Pipe_EnterHorizontal))
 
 #define EVT_EXIT_PIPE_VERTICAL(entry, collider, script) \
 { \
