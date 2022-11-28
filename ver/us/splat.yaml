@@ -9105,14 +9105,13 @@ segments:
     start: 0x874DC0
     vram: 0x80240000
     subsegments:
-    - [0x874DC0, c]
-    - [0x8750D0, c]
-    - [0x875810, data]
-    - [0x8758C0, data]
-    - [0x875D10, data]
-    - [0x8765C0, data]
-    - [0x876A50, data]
-    - [0x876ED0]
+    - [0x874DC0, c, tik_05_0_header]
+    - [0x874DC0, c, tik_05_1_music]
+    - [0x874DC0, c, tik_05_2_main]
+    - [0x8750D0, c, tik_05_3_drips]
+    - [0x875440, c, tik_05_4_entity]
+    - [0x875440, c, tik_05_5_npc]
+    - [0x875810]
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
