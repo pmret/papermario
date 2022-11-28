@@ -9126,14 +9126,14 @@ segments:
     start: 0x879BE0
     vram: 0x80240000
     subsegments:
-    - [0x879BE0, c]
-    - [0x87AC00, c]
-    - [0x87C4D0, data]
-    - [0x87C570, data]
-    - [0x87D5D0, data]
-    - [0x87E590, data]
-    - [0x87E890, data]
-    - [0x87ED80]
+    - [0x879BE0, c, tik_07_0_header]
+    - [0x879BE0, c, tik_07_1_music]
+    - [0x879BE0, c, tik_07_2_main]
+    - [0x879EC0, c, tik_07_3_entity]
+    - [0x87AC00, c, tik_07_4_drips]
+    - [0x87AF70, c, tik_07_5_platforms]
+    - [0x87AFD0, c, tik_07_6_npc]
+    - [0x87C4D0]
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code

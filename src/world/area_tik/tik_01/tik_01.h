@@ -9,8 +9,6 @@
 #include "mapfs/tik_01_shape.h"
 #include "mapfs/tik_01_hit.h"
 
-#include "sprite/npc/Blooper.h"
-
 enum {
 	NPC_Blooper                 = 0,
 };

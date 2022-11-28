@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/complete/SpikedGloomba_Wander.inc.c"
 
-StaticNpc N(NpcData_SpikedGoomba_01) = {
+StaticNpc N(NpcData_SpikedGloomba_01) = {
     .id = NPC_SpikedGoomba_01,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 220.0f, -10.0f, -80.0f },
@@ -24,7 +24,7 @@ StaticNpc N(NpcData_SpikedGoomba_01) = {
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGoomba_02) = {
+StaticNpc N(NpcData_SpikedGloomba_02) = {
     .id = NPC_SpikedGoomba_02,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 130.0f, -10.0f, 45.0f },
@@ -47,7 +47,7 @@ StaticNpc N(NpcData_SpikedGoomba_02) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_SpikedGoomba_01), BTL_TIK_FORMATION_10, BTL_TIK_STAGE_00),
-    NPC_GROUP(N(NpcData_SpikedGoomba_02), BTL_TIK_FORMATION_12, BTL_TIK_STAGE_00),
+    NPC_GROUP(N(NpcData_SpikedGloomba_01), BTL_TIK_FORMATION_10, BTL_TIK_STAGE_00),
+    NPC_GROUP(N(NpcData_SpikedGloomba_02), BTL_TIK_FORMATION_12, BTL_TIK_STAGE_00),
     {}
 };
