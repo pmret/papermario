@@ -88,11 +88,12 @@ void partner_buff_update(EffectInstance* effect) {
 
     for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
         BuffData* buff = &data->unk_0C[i];
+
         if (buff->turnsLeft < 0) {
             buff->turnsLeft = 0;
         }
         // possibly a leftover debug option
-        if ((useRandomValues == 1) && (time % 30 == 0)) {
+        if (useRandomValues == 1 && time % 30 == 0) {
             buff->turnsLeft = shim_rand_int(4);
         }
 
@@ -171,7 +172,8 @@ void func_E011A3BC(s16 alpha) {
         gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, 
+                          TEXEL0, 0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
     }
 }
