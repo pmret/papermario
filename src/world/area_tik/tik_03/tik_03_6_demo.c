@@ -85,15 +85,3 @@ EvtScript N(EVS_PlayDemoScene) = {
     EVT_RETURN
     EVT_END
 };
-
-/*
-EvtScript N(EVS_PlayDemoScene) = {
-    EVT_CALL(N(SetupDemoScene))
-    EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(EVS_MonitorDemoState))
-    EVT_EXEC(N(EVS_ProvideDemoInputs))
-    EVT_RETURN
-    EVT_END
-};
-*/
-
