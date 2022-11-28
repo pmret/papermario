@@ -4907,9 +4907,59 @@ segments:
     subsegments:
     - [0x3A70F0, c, quizmo_audience]
     - [0x3A7710]
-  - start: 0x3A77A0 # quizmo_audience gfx
-    type: bin
-    align: 16
+  - name: effect_gfx_quizmo_audience
+    dir: effects/gfx
+    type: code
+    start: 0x3A77A0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A77A0, c, quizmo_audience]
+    - start: 0x3A77A0
+      type: .data
+      name: quizmo_audience
+      subsegments:
+      - [0x3A77A0, ia4, D_09000000_3A77A0, 32, 64]
+      - [0x3A7BA0, gfx, D_09000400_3A7BA0]
+      - [0x3A7C10, ia4, D_09000470_3A7C10, 32, 64]
+      - [0x3A8010, gfx, D_09000870_3A8010]
+      - [0x3A8080, ia4, D_090008E0_3A8080, 32, 64]
+      - [0x3A8480, gfx, D_09000CE0_3A8480]
+      - [0x3A84F0, ia4, D_09000D50_3A84F0, 32, 64]
+      - [0x3A88F0, gfx, D_09001150_3A88F0]
+      - [0x3A8960, ia4, D_090011C0_3A8960, 32, 64]
+      - [0x3A8D60, gfx, D_090015C0_3A8D60]
+      - [0x3A8DD0, ia4, D_09001630_3A8DD0, 32, 64]
+      - [0x3A91D0, gfx, D_09001A30_3A91D0]
+      - [0x3A9240, ia4, D_09001AA0_3A9240, 32, 64]
+      - [0x3A9640, gfx, D_09001EA0_3A9640]
+      - [0x3A96B0, ia4, D_09001F10_3A96B0, 32, 64]
+      - [0x3A9AB0, gfx, D_09002310_3A9AB0]
+      - [0x3A9B20, ia4, D_09002380_3A9B20, 32, 64]
+      - [0x3A9F20, gfx, D_09002780_3A9F20]
+      - [0x3A9F90, ia4, D_090027F0_3A9F90, 32, 64]
+      - [0x3AA390, gfx, D_09002BF0_3AA390]
+      - [0x3AA400, vtx, D_09002C60_3AA400]
+      - [0x3AA440, vtx, D_09002CA0_3AA440]
+      - [0x3AA480, vtx, D_09002CE0_3AA480]
+      - [0x3AA4C0, vtx, D_09002D20_3AA4C0]
+      - [0x3AA500, vtx, D_09002D60_3AA500]
+      - [0x3AA540, vtx, D_09002DA0_3AA540]
+      - [0x3AA580, vtx, D_09002DE0_3AA580]
+      - [0x3AA5C0, vtx, D_09002E20_3AA5C0]
+      - [0x3AA600, vtx, D_09002E60_3AA600]
+      - [0x3AA640, vtx, D_09002EA0_3AA640]
+      - [0x3AA680, gfx, D_09002EE0_3AA680]
+      - [0x3AA6B8, gfx, D_09002F18_3AA6B8]
+      - [0x3AA6F0, gfx, D_09002F50_3AA6F0]
+      - [0x3AA728, gfx, D_09002F88_3AA728]
+      - [0x3AA760, gfx, D_09002FC0_3AA760]
+      - [0x3AA798, gfx, D_09002FF8_3AA798]
+      - [0x3AA7D0, gfx, D_09003030_3AA7D0]
+      - [0x3AA808, gfx, D_09003068_3AA808]
+      - [0x3AA840, gfx, D_090030A0_3AA840]
+      - [0x3AA878, gfx, D_090030D8_3AA878]
+      - [0x3AA8B0, gfx, D_09003110_3AA8B0]
   - name: effect_butterflies
     dir: effects
     type: code

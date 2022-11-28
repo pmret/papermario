@@ -111,7 +111,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x51 */ FX_ENTRY(motion_blur_flame, _3A33D0),
     /* 0x52 */ FX_ENTRY(energy_orb_wave, effect_gfx_energy_orb_wave),
     /* 0x53 */ FX_ENTRY(merlin_house_stars, effect_gfx_merlin_house_stars),
-    /* 0x54 */ FX_ENTRY(quizmo_audience, _3A77A0),
+    /* 0x54 */ FX_ENTRY(quizmo_audience, effect_gfx_quizmo_audience),
     /* 0x55 */ FX_ENTRY(butterflies, effect_gfx_butterflies),
     /* 0x56 */ FX_ENTRY(stat_change, effect_gfx_stat_change),
     /* 0x57 */ FX_ENTRY(snaking_static, _3B2D90),
