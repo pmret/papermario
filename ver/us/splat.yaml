@@ -9140,14 +9140,13 @@ segments:
     start: 0x87EDF0
     vram: 0x80240000
     subsegments:
-    - [0x87EDF0, c]
-    - [0x87F3E0, c]
-    - [0x87F820, c]
-    - [0x87F8B0, data]
-    - [0x87F9A0, data]
-    - [0x881770, data]
-    - [0x8819D0, data]
-    - [0x8821A0]
+    - [0x87EDF0, c, tik_08_0_header]
+    - [0x87EDF0, c, tik_08_1_music]
+    - [0x87EDF0, c, tik_08_2_main]
+    - [0x87F3E0, c, tik_08_3_drips]
+    - [0x87F750, c, tik_08_4_entity]
+    - [0x87F820, c, tik_08_5_npc]
+    - [0x87F8B0]
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code

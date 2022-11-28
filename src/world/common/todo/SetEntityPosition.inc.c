@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SetEntityPosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetEntityPosition)) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIndex = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
