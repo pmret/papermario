@@ -7,7 +7,7 @@ s32 N(PlatformColliders)[] = {
     COLLIDER_4, 
 };
 
-API_CALLABLE(N(PausePlatformDuringPound)) {
+API_CALLABLE(N(PausePlatformsDuringPound)) {
     PlayerStatus* player = &gPlayerStatus;
     u32 i;
 
@@ -33,7 +33,7 @@ EvtScript N(EVS_UpdatePlatform) = {
         EVT_SETF(LVar1, LVarC)
         EVT_SUBF(LVar0, EVT_FLOAT(80.0))
         EVT_LABEL(1)
-            EVT_CALL(N(PausePlatformDuringPound))
+            EVT_CALL(N(PausePlatformsDuringPound))
             EVT_ADDF(LVar0, EVT_FLOAT(1.5))
             EVT_ADDF(LVar1, EVT_FLOAT(1.5))
             EVT_CALL(TranslateModel, LVarA, 0, LVar0, 0)

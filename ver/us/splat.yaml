@@ -9088,14 +9088,13 @@ segments:
     start: 0x871A30
     vram: 0x80240000
     subsegments:
-    - [0x871A30, c]
-    - [0x872020, c]
-    - [0x8726A0, data]
-    - [0x872750, data]
-    - [0x8739F0, data]
-    - [0x8742C0, data]
-    - [0x8746E0, data]
-    - [0x874DA0]
+    - [0x871A30, c, tik_04_0_header]
+    - [0x871A30, c, tik_04_1_music]
+    - [0x871A30, c, tik_04_2_main]
+    - [0x872020, c, tik_04_3_drips]
+    - [0x872390, c, tik_04_4_platforms]
+    - [0x8726A0, c, tik_04_5_npc]
+    - [0x8726A0]
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
