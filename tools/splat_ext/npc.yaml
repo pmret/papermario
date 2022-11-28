@@ -2335,21 +2335,21 @@ Fuzzy:
     - BlueFuzzy
     - JungleFuzzy
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Neutral
+    - Step1
+    - Step2
     - Raster03
     - Raster04
     - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Hurt1
+    - Hurt2
+    - Stunned1
+    - Stunned2
+    - Stunned3
+    - Stunned4
     - Raster0C
-    - Raster0D
-    - Raster0E
+    - Bite1
+    - Bite2
     - Raster0F
     - Raster10
     - Raster11
@@ -2357,8 +2357,8 @@ Fuzzy:
     - Raster13
     - Raster14
     - Raster15
-    - Raster16
-    - Raster17
+    - Cry1
+    - Cry2
   palettes:
     - Default
     - Forest
@@ -2378,27 +2378,27 @@ Fuzzy:
     - Jungle_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
+    - Still
+    - Idle
+    - Walk
+    - Run
     - Anim04
-    - Anim05
+    - Jump
     - Anim06
-    - Anim07
-    - Anim08
+    - Bite
+    - Hurt
     - Anim09
     - Anim0A
     - Anim0B
     - Anim0C
     - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
+    - Sleep
+    - Stunned
+    - Burn
+    - HurtStill
+    - BurnStill
+    - HurtShock
+    - HurtShockLoop
 Bobomb:
   variations:
     - Variant00
