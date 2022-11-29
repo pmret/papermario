@@ -9203,13 +9203,13 @@ segments:
     start: 0x88FBA0
     vram: 0x80240000
     subsegments:
-    - [0x88FBA0, c]
-    - [0x890190, c]
-    - [0x8906B0, data]
-    - [0x890740, data]
-    - [0x891890, data]
-    - [0x8922A0, data]
-    - [0x892A10]
+    - [0x88FBA0, c, tik_15_0_header]
+    - [0x88FBA0, c, tik_15_1_music]
+    - [0x88FBA0, c, tik_15_2_main]
+    - [0x890190, c, tik_15_3_entity]
+    - [0x890190, c, tik_15_4_drips]
+    - [0x890500, c, tik_15_5_npc]
+    - [0x8906B0]
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
