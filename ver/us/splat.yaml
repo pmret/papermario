@@ -9216,26 +9216,24 @@ segments:
     start: 0x892A20
     vram: 0x80240000
     subsegments:
-    - [0x892A20, c]
-    - [0x892A50, c]
-    - [0x893790, c]
-    - [0x893D80, data]
-    - [0x893E40, data]
-    - [0x8944F0, data]
-    - [0x8956C0]
+    - [0x892A20, c, tik_17_0_header]
+    - [0x892A20, c, tik_17_1_music]
+    - [0x892A50, c, tik_17_2_entity]
+    - [0x893790, c, tik_17_3_main]
+    - [0x893D80]
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
     start: 0x8956E0
     vram: 0x80240000
     subsegments:
-    - [0x8956E0, c]
-    - [0x8959F0, c]
-    - [0x895D90, data]
-    - [0x895E20, data]
-    - [0x896CA0, data]
-    - [0x897450, data]
-    - [0x8975D0]
+    - [0x8956E0, c, tik_18_0_header]
+    - [0x8956E0, c, tik_18_1_music]
+    - [0x8956E0, c, tik_18_2_main]
+    - [0x8959F0, c, tik_18_3_drips]
+    - [0x895D60, c, tik_18_4_npc]
+    - [0x895D60, c, tik_18_5_entity]
+    - [0x895D90]
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
