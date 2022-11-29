@@ -52,4 +52,6 @@ extern MapSettings tik_23_settings;
 extern MapSettings tik_24_settings;
 extern MapSettings tik_25_settings;
 
+s32 tik_24_map_init(void);
+
 #endif

@@ -9284,38 +9284,36 @@ segments:
     start: 0x8A23D0
     vram: 0x80240000
     subsegments:
-    - [0x8A23D0, c]
-    - [0x8A2D30, c]
-    - [0x8A3510, data]
-    - [0x8A35A0, data]
-    - [0x8A5340, data]
-    - [0x8A5A10]
+    - [0x8A23D0, c, tik_23_0_header]
+    - [0x8A23D0, c, tik_23_1_music]
+    - [0x8A23D0, c, tik_23_2_main]
+    - [0x8A2D30, c, tik_23_3_entity]
+    - [0x8A2D30, c, tik_23_4_npc]
+    - [0x8A3510]
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
     start: 0x8A5A80
     vram: 0x80240000
     subsegments:
-    - [0x8A5A80, c]
-    - [0x8A5AD0, c]
-    - [0x8A5DE0, c]
-    - [0x8A6930, data]
-    - [0x8A69C0, data]
-    - [0x8A7810, data]
-    - [0x8A7A20, data]
-    - [0x8A7EF0]
+    - [0x8A5A80, c, tik_24_0_header]
+    - [0x8A5AD0, c, tik_24_1_music]
+    - [0x8A5AD0, c, tik_24_2_main]
+    - [0x8A5DE0, c, tik_24_3_drips]
+    - [0x8A6150, c, tik_24_4_entity]
+    - [0x8A6150, c, tik_24_5_npc]
+    - [0x8A6930]
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
     start: 0x8A7F80
     vram: 0x80240000
     subsegments:
-    - [0x8A7F80, c]
-    - [0x8A8600, c]
-    - [0x8A8740, data]
-    - [0x8A8800, data]
-    - [0x8A93D0, data]
-    - [0x8A9A00]
+    - [0x8A7F80, c, tik_25_0_header]
+    - [0x8A7F80, c, tik_25_1_music]
+    - [0x8A7F80, c, tik_25_2_main]
+    - [0x8A8600, c, tik_25_3_entity]
+    - [0x8A8740]
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code
