@@ -23,6 +23,7 @@ enum {
 enum {
     AF_TIK_03       = AreaFlag(3),
     AF_TIK_04       = AreaFlag(4),
+    AF_TIK_05       = AreaFlag(5),
 };
 
 #define AF_TIK(index) AreaFlag(index)

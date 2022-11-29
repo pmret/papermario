@@ -92,6 +92,7 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall);
 ApiStatus SetCamViewport(Evt* script, s32 isInitialCall);
 ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall);
 ApiStatus SetCamTarget(Evt* script, s32 isInitialCall);
+ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall);
 ApiStatus ShakeCam(Evt* script, s32 isInitialCall);
 ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall);
 ApiStatus PanToTarget(Evt* script, s32 isInitialCall);

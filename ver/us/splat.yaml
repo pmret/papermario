@@ -9153,14 +9153,13 @@ segments:
     start: 0x8821C0
     vram: 0x80240000
     subsegments:
-    - [0x8821C0, c]
-    - [0x8827B0, c]
-    - [0x882BF0, c]
-    - [0x883460, data]
-    - [0x883500, data]
-    - [0x8856E0, data]
-    - [0x885A80, data]
-    - [0x886340]
+    - [0x8821C0, c, tik_09_0_header]
+    - [0x8821C0, c, tik_09_1_music]
+    - [0x8821C0, c, tik_09_2_main]
+    - [0x8827B0, c, tik_09_3_drips]
+    - [0x882B20, c, tik_09_4_entity]
+    - [0x882BF0, c, tik_09_5_npc]
+    - [0x883460]
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
