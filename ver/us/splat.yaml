@@ -9191,13 +9191,12 @@ segments:
     start: 0x88D600
     vram: 0x80240000
     subsegments:
-    - [0x88D600, c]
-    - [0x88DBF0, c]
-    - [0x88DF60, data]
-    - [0x88DFF0, data]
-    - [0x88F180, data]
-    - [0x88FA30, data]
-    - [0x88FB90]
+    - [0x88D600, c, tik_14_0_header]
+    - [0x88D600, c, tik_14_1_music]
+    - [0x88D600, c, tik_14_2_main]
+    - [0x88DBF0, c, tik_14_3_drips]
+    - [0x88DF60, c, tik_14_4_entity]
+    - [0x88DF60]
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
