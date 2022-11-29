@@ -48,6 +48,8 @@ ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall);
 ApiStatus func_800457F8(Evt* script, s32 isInitialCall);
 ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall);
 ApiStatus MakeEntity(Evt* script, s32 isInitialCall);
+ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall);
+ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall);
 ApiStatus AssignScript(Evt* script, s32 isInitialCall);
 ApiStatus AssignSwitchFlag(Evt* script, s32 isInitialCall);
 ApiStatus AssignChestFlag(Evt* script, s32 isInitialCall);
