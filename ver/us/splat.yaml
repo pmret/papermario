@@ -10221,37 +10221,37 @@ segments:
     start: 0x978140
     vram: 0x80240000
     subsegments:
-    - [0x978140, c]
-    - [0x978140, data]
-    - [0x978360, data]
-    - [0x9785C0, data]
-    - [0x978700]
+    - [0x978140, c, isk_01_0_header]
+    - [0x978140, c, isk_01_1_music]
+    - [0x978140, c, isk_01_2_main]
+    - [0x978140, c, isk_01_3_haze]
+    - [0x978140, c, isk_01_4_entity]
+    - [0x978140]
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
     start: 0x978710
     vram: 0x80240000
     subsegments:
-    - [0x978710, c]
-    - [0x978750, c]
-    - [0x978800, c]
-    - [0x978820, data]
-    - [0x978B80, data]
-    - [0x978DE0, data]
-    - [0x979390, data]
-    - [0x9793F0, data]
-    - [0x979E40]
+    - [0x978710, c, isk_02_0_header]
+    - [0x978710, c, isk_02_1_main]
+    - [0x978710, c, isk_02_2_lock]
+    - [0x978750, c, isk_02_3_ambush]
+    - [0x978800, c, isk_02_4_entity]
+    - [0x978800, c, isk_02_5_npc]
+    - [0x978820]
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
     start: 0x979E50
     vram: 0x80240000
     subsegments:
-    - [0x979E50, c]
-    - [0x979E50, data]
-    - [0x97A210, data]
-    - [0x97B340, data]
-    - [0x97B620]
+    - [0x979E50, c, isk_03_0_header]
+    - [0x979E50, c, isk_03_1_main]
+    - [0x979E50, c, isk_03_2_sand]
+    - [0x979E50, c, isk_03_3_entity]
+    - [0x979E50, c, isk_03_4_switch]
+    - [0x979E50]
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code

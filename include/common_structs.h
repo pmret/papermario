@@ -416,7 +416,7 @@ typedef union X32 {
 } X32;
 
 typedef struct Evt {
-    /* 0x000 */ u8 state;
+    /* 0x000 */ u8 stateFlags;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
     /* 0x003 */ u8 priority;
