@@ -8907,13 +8907,15 @@ segments:
     start: 0x7E73A0
     vram: 0x80240000
     subsegments:
-    - [0x7E73A0, c]
-    - [0x7E7550, c]
-    - [0x7E7850, c]
-    - [0x7E7A30, data]
-    - [0x7E8470, data]
-    - [0x7EA340, data]
-    - [0x7EAA50]
+    - [0x7E73A0, c, machi_0_header]
+    - [0x7E73A0, c, machi_1_tables]
+    - [0x7E73A0, c, machi_2_main]
+    - [0x7E73D0, c, machi_3_entity]
+    - [0x7E7550, c, machi_4_goomba_king]
+    - [0x7E7550, c, machi_5_npc]
+    - [0x7E7850, c, machi_6_misstar]
+    - [0x7E7A30, c, machi_7_partner]
+    - [0x7E7A30]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
