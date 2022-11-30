@@ -6382,7 +6382,7 @@ segments:
     vram: 0xE011A000
     subsegments:
     - [0x404220, c, partner_buff]
-    - [0x404E40, data]
+    - [0x404E40]
   - type: group # partner_buff gfx
     start: 0x404F40
     align: 16
