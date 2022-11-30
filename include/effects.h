@@ -717,9 +717,7 @@ typedef struct RingBlastFXData {
 typedef struct ShockwaveFXData {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[2]; // likely padding
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
@@ -730,14 +728,14 @@ typedef struct ShockwaveFXData {
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
+    /* 0x38 */ s32 alpha;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
     /* 0x48 */ f32 unk_48;
     /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ Color_RGB8 unk_50;
-    /* 0x53 */ Color_RGB8 unk_53;
+    /* 0x50 */ Color_RGB8 prim;
+    /* 0x53 */ Color_RGB8 env;
     /* 0x56 */ char unk_56[2]; // likely padding
 } ShockwaveFXData; // size = 0x58
 
