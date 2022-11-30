@@ -21,25 +21,33 @@ extern Gfx D_09003358_4025A8[];
 extern Gfx D_09003370_4025C0[];
 extern Gfx D_09003388_4025D8[];
 
-Gfx* D_E01146A0[] = {
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8,
-    D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8
+Gfx* lil_oink_FramesGfx[][3] = {
+    [LIL_OINK_TYPE_0]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_1]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_2]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_3]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_4]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_5]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_6]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_7]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_8]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
+    [LIL_OINK_TYPE_9]   { D_09003358_4025A8, D_09003370_4025C0, D_09003388_4025D8 },
 };
 
 Gfx* D_E0114718[] = {
-     D_09002DD8_402028, D_09002E70_4020C0, D_09002E98_4020E8, D_09002F30_402180, D_09002FC8_402218,
-     D_09003060_4022B0, D_090030F8_402348, D_09003190_4023E0, D_09003228_402478, D_090032C0_402510
+    [LIL_OINK_TYPE_0]   D_09002DD8_402028,
+    [LIL_OINK_TYPE_1]   D_09002E70_4020C0,
+    [LIL_OINK_TYPE_2]   D_09002E98_4020E8,
+    [LIL_OINK_TYPE_3]   D_09002F30_402180,
+    [LIL_OINK_TYPE_4]   D_09002FC8_402218,
+    [LIL_OINK_TYPE_5]   D_09003060_4022B0,
+    [LIL_OINK_TYPE_6]   D_090030F8_402348,
+    [LIL_OINK_TYPE_7]   D_09003190_4023E0,
+    [LIL_OINK_TYPE_8]   D_09003228_402478,
+    [LIL_OINK_TYPE_9]   D_090032C0_402510
 };
 
-s8 D_E0114740[] = { 1, 2, 1, 0 };
+s8 lil_oink_AnimateGfxSelect[] = { 1, 2, 1, 0 };
 
 EffectInstance* lil_oink_main(void) {
     EffectBlueprint bp;
@@ -60,8 +68,8 @@ EffectInstance* lil_oink_main(void) {
     data = effect->data.lilOink = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
-    data->unk_04 = 0;
-    data->unk_00 = 1000;
+    data->lifetime = 0;
+    data->timeLeft = 1000;
 
     for (i = 0; i < MAX_LIL_OINKS; i++) {
         data->x[i] = 0.0f;
@@ -69,10 +77,10 @@ EffectInstance* lil_oink_main(void) {
         data->z[i] = 0.0f;
         data->rot[i] = 0.0f;
         data->flags[i] = 0;
-        data->unk_FA[i] = 1;
-        data->unk_105[i] = 1;
+        data->anim[i] = LIL_OINK_ANIM_1;
+        data->gfxFrame[i] = 1;
         data->jumpOffset[i] = 0.0f;
-        data->unk_13C[i] = 0;
+        data->animTime[i] = 0;
     }
 
     return effect;
@@ -85,63 +93,63 @@ void lil_oink_update(EffectInstance* effect) {
     LilOinkFXData* data = effect->data.lilOink;
     s32 i;
 
-    data->unk_04++;
+    data->lifetime++;
 
     for (i = 0; i < MAX_LIL_OINKS; i++) {
-        s32 tmp13C = data->unk_13C[i];
-        s32 cond = FALSE;
+        s32 time = data->animTime[i];
+        s32 animDone = FALSE;
 
-        switch (data->unk_FA[i]) {
-            case 0:
-                cond = TRUE;
+        switch (data->anim[i]) {
+            case LIL_OINK_ANIM_0:
+                animDone = TRUE;
                 break;
-            case 1:
-                data->unk_105[i] = 1;
-                cond = TRUE;
+            case LIL_OINK_ANIM_1:
+                data->gfxFrame[i] = 1;
+                animDone = TRUE;
                 break;
-            case 3:
-                data->unk_105[i] = D_E0114740[tmp13C % ARRAY_COUNT(D_E0114740)];
-                data->rot[i] = data->rot[i] + shim_sin_deg(tmp13C * 10);
-                if (tmp13C >= 36) {
-                    cond = TRUE;
-                    data->unk_13C[i] = 0;
+            case LIL_OINK_ANIM_3:
+                data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
+                data->rot[i] = data->rot[i] + shim_sin_deg(time * 10);
+                if (time >= 36) {
+                    animDone = TRUE;
+                    data->animTime[i] = 0;
                 }
                 break;
-            case 2:
-                data->unk_105[i] = D_E0114740[tmp13C % ARRAY_COUNT(D_E0114740)];
-                data->jumpOffset[i] = shim_sin_deg(tmp13C * 20) * 2.0f;
-                cond = TRUE;
-                if (tmp13C >= 9) {
+            case LIL_OINK_ANIM_2:
+                data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
+                data->jumpOffset[i] = shim_sin_deg(time * 20) * 2.0f;
+                animDone = TRUE;
+                if (time >= 9) {
                     data->jumpOffset[i] = 0.0f;
-                    data->unk_13C[i] = 0;
+                    data->animTime[i] = 0;
                 }
                 break;
-            case 4:
-                data->unk_105[i] = D_E0114740[tmp13C % ARRAY_COUNT(D_E0114740)];
-                data->jumpOffset[i] = shim_sin_deg(tmp13C * 20) * 4.0f;
-                if (!(tmp13C < 9)) {
-                    cond = TRUE;
+            case LIL_OINK_ANIM_4:
+                data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
+                data->jumpOffset[i] = shim_sin_deg(time * 20) * 4.0f;
+                if (!(time < 9)) {
+                    animDone = TRUE;
                     data->jumpOffset[i] = 0.0f;
-                    data->unk_13C[i] = 0;
+                    data->animTime[i] = 0;
                 }
                 break;
-            case 5:
+            case LIL_OINK_ANIM_5:
             default:
-                data->unk_105[i] = D_E0114740[tmp13C % ARRAY_COUNT(D_E0114740)];
-                data->jumpOffset[i] = shim_sin_deg(tmp13C * 5) * 12.0f;
-                if (!(tmp13C < 36)) {
-                    cond = TRUE;
+                data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
+                data->jumpOffset[i] = shim_sin_deg(time * 5) * 12.0f;
+                if (!(time < 36)) {
+                    animDone = TRUE;
                     data->jumpOffset[i] = 0.0f;
-                    data->unk_13C[i] = 0;
+                    data->animTime[i] = 0;
                 }
                 break;
         }
-        data->unk_13C[i]++;
-        if (cond) {
-            if (data->flags[i] & 2) {
-                data->flags[i] &= ~2;
-                data->unk_13C[i] = 0;
-                data->unk_FA[i] = data->unk_EF[i];
+        data->animTime[i]++;
+        if (animDone) {
+            if (data->flags[i] & LIL_OINK_FLAG_ANIM_CHANGED) {
+                data->flags[i] &= ~LIL_OINK_FLAG_ANIM_CHANGED;
+                data->animTime[i] = 0;
+                data->anim[i] = data->nextAnim[i];
             }
         }
     }
@@ -161,10 +169,10 @@ void lil_oink_render(EffectInstance* effect) {
 }
 
 void lil_oink_appendGfx(void* effect) {
-    Matrix4f sp20;
+    Matrix4f mtxTransform;
     EffectInstance* eff = effect;
     LilOinkFXData* data = eff->data.lilOink;
-    s32 var_s4 = data->unk_04 * 30;
+    s32 angle = data->lifetime * 30;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
@@ -174,23 +182,23 @@ void lil_oink_appendGfx(void* effect) {
     gSPLookAt(gMasterGfxPos++, &gDisplayContext->lookAt);
 
     for (i = 0; i < MAX_LIL_OINKS; i++) {
-        if (data->flags[i] & 1) {
-            shim_guPositionF(sp20, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
+        if (data->flags[i] & LIL_OINK_FLAG_VISIBLE) {
+            shim_guPositionF(mtxTransform, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
                              data->x[i], data->y[i] + data->jumpOffset[i], data->z[i]);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, D_E0114718[data->type[i]]);
-            if (data->type[i] == 8 || data->type[i] == 9) {
-                f32 temp_f0 = shim_sin_deg(var_s4) * 63.0f;
-                s32 primColor = (s32)(temp_f0 + 63.0f) & 0xFF;
+            if (data->type[i] == LIL_OINK_TYPE_8 || data->type[i] == LIL_OINK_TYPE_9) {
+                f32 colorVariation = shim_sin_deg(angle) * 63.0f;
+                s8 primColor = colorVariation + 63.0f;
 
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, primColor, primColor, primColor, 0);
             }
-            gSPDisplayList(gMasterGfxPos++, D_E01146A0[(data->type[i] * 3) + data->unk_105[i]]);
+            gSPDisplayList(gMasterGfxPos++, lil_oink_FramesGfx[data->type[i]][data->gfxFrame[i]]);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
-        var_s4 += 20;
+        angle += 20;
     }
 }

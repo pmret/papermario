@@ -11,8 +11,8 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
+MAP_STATIC_PAD(1,post_quizmo); // or pre_key_item?
 
-MAP_STATIC_PAD(1,pre_key_item); // or post-quizmo?
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 #include "world/common/util/MonitorPlayerOrbiting.inc.c"

@@ -8981,18 +8981,16 @@ segments:
     start: 0x831800
     vram: 0x80240000
     subsegments:
-    - [0x831800, c]
-    - [0x831B20, c]
-    - [0x833500, c]
-    - [0x833740, c]
-    - [0x834070, data]
-    - [0x834170, data]
-    - [0x835370, data]
-    - [0x837CB0, data]
-    - [0x83F500, data]
-    - [0x83F6C0, data]
-    - [0x8404A0, data]
-    - [0x842BB0]
+    - [0x831800, c, mac_03_0_header]
+    - [0x831800, c, mac_03_1_music]
+    - [0x831800, c, mac_03_2_main]
+    - [0x831B20, c, mac_03_3_train]
+    - [0x831CB0, c, mac_03_4_npc]
+    - [0x833500, c, mac_03_5_entity]
+    - [0x833500, c, mac_03_6_foliage]
+    - [0x833740, c, mac_03_7_oinks]
+    - [0x834070, c, mac_03_8_demo]
+    - [0x834070]
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code

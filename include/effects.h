@@ -2453,20 +2453,47 @@ typedef struct SpiritCardFXData {
 
 #define MAX_LIL_OINKS 11
 
+enum LilOinkFlags {
+    LIL_OINK_FLAG_VISIBLE = 1,
+    LIL_OINK_FLAG_ANIM_CHANGED = 2,
+};
+
+enum LilOinkTypes {
+    LIL_OINK_TYPE_0 = 0,
+    LIL_OINK_TYPE_1 = 1,
+    LIL_OINK_TYPE_2 = 2,
+    LIL_OINK_TYPE_3 = 3,
+    LIL_OINK_TYPE_4 = 4,
+    LIL_OINK_TYPE_5 = 5,
+    LIL_OINK_TYPE_6 = 6,
+    LIL_OINK_TYPE_7 = 7,
+    LIL_OINK_TYPE_8 = 8,
+    LIL_OINK_TYPE_9 = 9,
+};
+
+enum LilOinkAnims {
+    LIL_OINK_ANIM_0 = 0,
+    LIL_OINK_ANIM_1 = 1,
+    LIL_OINK_ANIM_2 = 2,
+    LIL_OINK_ANIM_3 = 3,
+    LIL_OINK_ANIM_4 = 4,
+    LIL_OINK_ANIM_5 = 5,
+};
+
 typedef struct LilOinkFXData {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ s32 unk_04;
+    /* 0x000 */ s32 timeLeft;
+    /* 0x004 */ s32 lifetime;
     /* 0x008 */ s32 flags[MAX_LIL_OINKS];
     /* 0x034 */ f32 x[MAX_LIL_OINKS];
     /* 0x060 */ f32 y[MAX_LIL_OINKS];
     /* 0x08C */ f32 z[MAX_LIL_OINKS];
     /* 0x0B8 */ f32 rot[MAX_LIL_OINKS];
     /* 0x0E4 */ u8 type[MAX_LIL_OINKS];
-    /* 0x0EF */ s8 unk_EF[MAX_LIL_OINKS];
-    /* 0x0FA */ u8 unk_FA[MAX_LIL_OINKS];
-    /* 0x105 */ u8 unk_105[MAX_LIL_OINKS];
+    /* 0x0EF */ s8 nextAnim[MAX_LIL_OINKS];
+    /* 0x0FA */ u8 anim[MAX_LIL_OINKS];
+    /* 0x105 */ u8 gfxFrame[MAX_LIL_OINKS];
     /* 0x110 */ f32 jumpOffset[MAX_LIL_OINKS];
-    /* 0x13C */ s8 unk_13C[MAX_LIL_OINKS];
+    /* 0x13C */ s8 animTime[MAX_LIL_OINKS];
 } LilOinkFXData; // size = 0x148
 
 typedef struct SomethingRotatingFXData {
