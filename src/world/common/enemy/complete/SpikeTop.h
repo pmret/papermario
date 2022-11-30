@@ -2,6 +2,40 @@
 #include "sprite/npc/BuzzyBeetle.h"
 #include "sprite/npc/SpikeTop.h"
 
+#define BUZZY_BEETLE_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .itemDropChance = 5, \
+    .itemDrops = { \
+        { ITEM_SUPER_SODA, 10, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(4), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 2, \
+    .maxCoinBonus = 3, \
+}
+
+#define BUZZY_BEETLE_ANIMS \
+{ \
+    .idle   = ANIM_BuzzyBeetle_Anim01, \
+    .walk   = ANIM_BuzzyBeetle_Anim03, \
+    .run    = ANIM_BuzzyBeetle_Anim04, \
+    .chase  = ANIM_BuzzyBeetle_Anim04, \
+    .anim_4 = ANIM_BuzzyBeetle_Anim00, \
+    .anim_5 = ANIM_BuzzyBeetle_Anim00, \
+    .death  = ANIM_BuzzyBeetle_Anim07, \
+    .hit    = ANIM_BuzzyBeetle_Anim07, \
+    .anim_8 = ANIM_BuzzyBeetle_Anim0C, \
+    .anim_9 = ANIM_BuzzyBeetle_Anim05, \
+    .anim_A = ANIM_BuzzyBeetle_Anim0D, \
+    .anim_B = ANIM_BuzzyBeetle_Anim00, \
+    .anim_C = ANIM_BuzzyBeetle_Anim00, \
+    .anim_D = ANIM_BuzzyBeetle_Anim00, \
+    .anim_E = ANIM_BuzzyBeetle_Anim00, \
+    .anim_F = ANIM_BuzzyBeetle_Anim00, \
+}
+
+
 #define SPIKE_TOP_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

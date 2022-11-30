@@ -16,20 +16,20 @@
 
 #define PARATROOPA_ANIMS \
 { \
-    .idle   = ANIM_ParaTroopa_Anim01, \
-    .walk   = ANIM_ParaTroopa_Anim02, \
-    .run    = ANIM_ParaTroopa_Anim03, \
-    .chase  = ANIM_ParaTroopa_Anim03, \
-    .anim_4 = ANIM_ParaTroopa_Anim01, \
-    .anim_5 = ANIM_ParaTroopa_Anim01, \
-    .death  = ANIM_ParaTroopa_Anim06, \
-    .hit    = ANIM_ParaTroopa_Anim06, \
-    .anim_8 = ANIM_ParaTroopa_Anim04, \
-    .anim_9 = ANIM_ParaTroopa_Anim0C, \
-    .anim_A = ANIM_ParaTroopa_Anim0A, \
-    .anim_B = ANIM_ParaTroopa_Anim0E, \
-    .anim_C = ANIM_ParaTroopa_Anim03, \
-    .anim_D = ANIM_ParaTroopa_Anim03, \
-    .anim_E = ANIM_ParaTroopa_Anim03, \
-    .anim_F = ANIM_ParaTroopa_Anim03, \
+    .idle   = ANIM_ParaTroopa_Idle, \
+    .walk   = ANIM_ParaTroopa_Walk, \
+    .run    = ANIM_ParaTroopa_Run, \
+    .chase  = ANIM_ParaTroopa_Run, \
+    .anim_4 = ANIM_ParaTroopa_Idle, \
+    .anim_5 = ANIM_ParaTroopa_Idle, \
+    .death  = ANIM_ParaTroopa_HurtStill, \
+    .hit    = ANIM_ParaTroopa_HurtStill, \
+    .anim_8 = ANIM_ParaTroopa_Windup, \
+    .anim_9 = ANIM_ParaTroopa_ShellDive, \
+    .anim_A = ANIM_ParaTroopa_ShellIdle, \
+    .anim_B = ANIM_ParaTroopa_ShellExit, \
+    .anim_C = ANIM_ParaTroopa_Run, \
+    .anim_D = ANIM_ParaTroopa_Run, \
+    .anim_E = ANIM_ParaTroopa_Run, \
+    .anim_F = ANIM_ParaTroopa_Run, \
 }

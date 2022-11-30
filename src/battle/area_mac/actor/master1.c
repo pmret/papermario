@@ -235,10 +235,10 @@ EvtScript N(takeTurn_8022AA54) = {
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_WindUpLoop)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_WindupLoop)
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_WindUpStill)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_WindupStill)
         EVT_WAIT(7)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_DownwardStrike)
     EVT_END_THREAD
