@@ -2542,10 +2542,10 @@ enum {
 
 typedef struct BuffData {
     /* 0x00 */ s16 alpha;
-    /* 0x02 */ u16 turnsDisplay;
+    /* 0x02 */ s16 turnsDisplay;
     /* 0x04 */ s16 turnsLeft;
     /* 0x06 */ s16 state;
-    /* 0x08 */ u16 stateTimer;
+    /* 0x08 */ s16 stateTimer;
 } BuffData; // size = 0xA
 
 typedef struct PartnerBuffFXData {

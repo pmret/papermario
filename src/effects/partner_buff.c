@@ -215,7 +215,7 @@ void func_E011A700(EffectInstance* effect) {
     f32 temp_f4;
     s32 alpha;
     s32 temp_v0_2;
-    s32 stateTimer;
+    s16 stateTimer;
     s16 turnsDisplay;
     s32 idx;
     Gfx* dlist;
