@@ -206,23 +206,17 @@ void func_E011A48C(s32 posX, s32 posY, s32 tile, f32 scale) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-// almost - some ordering
-#ifdef NON_MATCHING
 void func_E011A700(EffectInstance* effect) {
     PartnerBuffFXData* data = effect->data.partnerBuff;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 i;
-    f32 temp_f4;
-    s32 alpha;
-    s32 temp_v0_2;
-    s16 stateTimer;
-    s16 turnsDisplay;
-    s32 idx;
-    Gfx* dlist;
-    s32 xOffset;
     s32 numShown;
+    s32 alpha;
+    s32 temp1;
+    s32 temp2;
+    f32 scale;
+    Gfx* dlist;
     f32 x, y;
-    f32 new_var;
+    s32 i;
     
     if (data->unk_02 != 0) {
         gDPPipeSync(gMasterGfxPos++);
@@ -246,12 +240,12 @@ void func_E011A700(EffectInstance* effect) {
         gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
         
-        xOffset = 20;
+        numShown = 0;
         for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
             BuffData* buffData = &data->unk_0C[i];
+            s16 turnsDisplay = buffData->turnsDisplay;
+            s16 stateTimer = buffData->stateTimer;
 
-            turnsDisplay = buffData->turnsDisplay;
-            stateTimer = buffData->stateTimer;
             alpha = buffData->alpha;
 
             if (alpha != 0) {
@@ -264,6 +258,8 @@ void func_E011A700(EffectInstance* effect) {
                 func_E011A3BC(alpha);
 
                 if (buffData->state == BUFF_STATE_DECREMENT_TURNS || buffData->state == BUFF_STATE_SET_TURNS) {
+                    s32 idx;
+
                     if (buffData->state == BUFF_STATE_DECREMENT_TURNS) {
                         idx = turnsDisplay - 1;
                     } else if (buffData->state == BUFF_STATE_SET_TURNS) {
@@ -272,27 +268,25 @@ void func_E011A700(EffectInstance* effect) {
                     dlist = D_E011AC24[idx];
                     if (dlist != NULL) {
                         gSPDisplayList(gMasterGfxPos++, dlist);
-                        temp_f4 = D_E011AC4C[(s16)stateTimer] * 0.01f;
-                        idx = (-(temp_f4 - 1.0f) * 16.0f) + 0.5;
-                        x = idx + xOffset;
-                        y = idx + 50;
-                        func_E011A48C(x, y, 0, 1024.0f / temp_f4);
+                        scale = D_E011AC4C[(s16)stateTimer] * 0.01f;
+                        temp2 = (-(scale - 1.0f) * 16.0f) + 0.5;
+                        x = temp2 + 20 + numShown * 32;
+                        y = temp2 + 50;
+                        func_E011A48C(x, y, 0, 1024.0f / scale);
                     }
                 }
         
                 dlist = D_E011AC24[turnsDisplay];
                 if (dlist != NULL) {
                     gSPDisplayList(gMasterGfxPos++, dlist);
-                    
-                    temp_v0_2 = D_E011AC64[(s16)stateTimer];
-                    idx = -temp_v0_2; // TODO required to match (re-use of idx2)
-                    temp_f4 = D_E011AC58[(s16)stateTimer] * 0.01f;
-                    x = temp_v0_2 + xOffset;
-                    y = idx + 50;
-                    func_E011A48C(x, y, 0, 1024.0f / temp_f4);
+                    temp1 = D_E011AC64[(s16)stateTimer];
+                    temp2 = -temp1;
+                    scale = D_E011AC58[(s16)stateTimer] * 0.01f;
+                    x = temp1 + 20 + numShown * 32;
+                    y = temp2 + 50;
+                    func_E011A48C(x, y, 0, 1024.0f / scale);
                 }
-                
-                xOffset += 32;
+                numShown++;
             }
         }
 
@@ -305,6 +299,3 @@ void func_E011A700(EffectInstance* effect) {
         gDPPipeSync(gMasterGfxPos++);
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/partner_buff", func_E011A700);
-#endif
