@@ -8981,18 +8981,16 @@ segments:
     start: 0x831800
     vram: 0x80240000
     subsegments:
-    - [0x831800, c]
-    - [0x831B20, c]
-    - [0x833500, c]
-    - [0x833740, c]
-    - [0x834070, data]
-    - [0x834170, data]
-    - [0x835370, data]
-    - [0x837CB0, data]
-    - [0x83F500, data]
-    - [0x83F6C0, data]
-    - [0x8404A0, data]
-    - [0x842BB0]
+    - [0x831800, c, mac_03_0_header]
+    - [0x831800, c, mac_03_1_music]
+    - [0x831800, c, mac_03_2_main]
+    - [0x831B20, c, mac_03_3_train]
+    - [0x831CB0, c, mac_03_4_npc]
+    - [0x833500, c, mac_03_5_entity]
+    - [0x833500, c, mac_03_6_foliage]
+    - [0x833740, c, mac_03_7_oinks]
+    - [0x834070, c, mac_03_8_demo]
+    - [0x834070]
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code
@@ -9048,71 +9046,66 @@ segments:
     start: 0x8694B0
     vram: 0x80240000
     subsegments:
-    - [0x8694B0, c]
-    - [0x869AA0, c]
-    - [0x869EE0, c]
-    - [0x869F40, data]
-    - [0x86A030, data]
-    - [0x86B350, data]
-    - [0x86BC00, data]
-    - [0x86C710]
+    - [0x8694B0, c, tik_01_0_header]
+    - [0x8694B0, c, tik_01_1_music]
+    - [0x8694B0, c, tik_01_2_main]
+    - [0x869AA0, c, tik_01_3_drips]
+    - [0x869EE0, c, tik_01_4_entity]
+    - [0x869EE0, c, tik_01_5_npc]
+    - [0x869F40]
   - name: tik_02
     dir: world/area_tik/tik_02
     type: code
     start: 0x86C740
     vram: 0x80240000
     subsegments:
-    - [0x86C740, c]
-    - [0x86CA50, c]
-    - [0x86CD10, c]
-    - [0x86D0E0, data]
-    - [0x86D190, data]
-    - [0x86D800, data]
-    - [0x86E2C0, data]
-    - [0x86EAF0]
+    - [0x86C740, c, tik_02_0_header]
+    - [0x86C740, c, tik_02_1_music]
+    - [0x86C740, c, tik_02_2_main]
+    - [0x86CA50, c, tik_02_3_entity]
+    - [0x86CD10, c, tik_02_4_drips]
+    - [0x86D0E0, c, tik_02_5_npc]
+    - [0x86D0E0]
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
     start: 0x86EB00
     vram: 0x80240000
     subsegments:
-    - [0x86EB00, c]
-    - [0x86F0F0, c]
-    - [0x86F5D0, data]
-    - [0x86F670, data]
-    - [0x870B60, data]
-    - [0x871430, data]
-    - [0x871730, data]
-    - [0x8717F0, data]
-    - [0x871A10]
+    - [0x86EB00, c, tik_03_0_header]
+    - [0x86EB00, c, tik_03_1_music]
+    - [0x86EB00, c, tik_03_2_main]
+    - [0x86F0F0, c, tik_03_3_drips]
+    - [0x86F460, c, tik_03_4_platforms]
+    - [0x86F4C0, c, tik_03_5_entity]
+    - [0x86F4C0, c, tik_03_6_demo]
+    - [0x86F5D0]
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code
     start: 0x871A30
     vram: 0x80240000
     subsegments:
-    - [0x871A30, c]
-    - [0x872020, c]
-    - [0x8726A0, data]
-    - [0x872750, data]
-    - [0x8739F0, data]
-    - [0x8742C0, data]
-    - [0x8746E0, data]
-    - [0x874DA0]
+    - [0x871A30, c, tik_04_0_header]
+    - [0x871A30, c, tik_04_1_music]
+    - [0x871A30, c, tik_04_2_main]
+    - [0x872020, c, tik_04_3_drips]
+    - [0x872390, c, tik_04_4_platforms]
+    - [0x8726A0, c, tik_04_5_npc]
+    - [0x8726A0]
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
     start: 0x874DC0
     vram: 0x80240000
     subsegments:
-    - [0x874DC0, c]
-    - [0x8750D0, c]
-    - [0x875810, data]
-    - [0x8758C0, data]
-    - [0x875D10, data]
-    - [0x8765C0, data]
-    - [0x876A50, data]
-    - [0x876ED0]
+    - [0x874DC0, c, tik_05_0_header]
+    - [0x874DC0, c, tik_05_1_music]
+    - [0x874DC0, c, tik_05_2_main]
+    - [0x8750D0, c, tik_05_3_drips]
+    - [0x875440, c, tik_05_4_entity]
+    - [0x875810, c, tik_05_5_npc]
+    - [0x875810]
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
@@ -9131,205 +9124,194 @@ segments:
     start: 0x879BE0
     vram: 0x80240000
     subsegments:
-    - [0x879BE0, c]
-    - [0x87AC00, c]
-    - [0x87C4D0, data]
-    - [0x87C570, data]
-    - [0x87D5D0, data]
-    - [0x87E590, data]
-    - [0x87E890, data]
-    - [0x87ED80]
+    - [0x879BE0, c, tik_07_0_header]
+    - [0x879BE0, c, tik_07_1_music]
+    - [0x879BE0, c, tik_07_2_main]
+    - [0x879EC0, c, tik_07_3_entity]
+    - [0x87AC00, c, tik_07_4_drips]
+    - [0x87AF70, c, tik_07_5_platforms]
+    - [0x87AFD0, c, tik_07_6_npc]
+    - [0x87C4D0]
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code
     start: 0x87EDF0
     vram: 0x80240000
     subsegments:
-    - [0x87EDF0, c]
-    - [0x87F3E0, c]
-    - [0x87F820, c]
-    - [0x87F8B0, data]
-    - [0x87F9A0, data]
-    - [0x881770, data]
-    - [0x8819D0, data]
-    - [0x8821A0]
+    - [0x87EDF0, c, tik_08_0_header]
+    - [0x87EDF0, c, tik_08_1_music]
+    - [0x87EDF0, c, tik_08_2_main]
+    - [0x87F3E0, c, tik_08_3_drips]
+    - [0x87F750, c, tik_08_4_entity]
+    - [0x87F820, c, tik_08_5_npc]
+    - [0x87F8B0]
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code
     start: 0x8821C0
     vram: 0x80240000
     subsegments:
-    - [0x8821C0, c]
-    - [0x8827B0, c]
-    - [0x882BF0, c]
-    - [0x883460, data]
-    - [0x883500, data]
-    - [0x8856E0, data]
-    - [0x885A80, data]
-    - [0x886340]
+    - [0x8821C0, c, tik_09_0_header]
+    - [0x8821C0, c, tik_09_1_music]
+    - [0x8821C0, c, tik_09_2_main]
+    - [0x8827B0, c, tik_09_3_drips]
+    - [0x882B20, c, tik_09_4_entity]
+    - [0x882BF0, c, tik_09_5_npc]
+    - [0x883460]
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
     start: 0x8863C0
     vram: 0x80240000
     subsegments:
-    - [0x8863C0, c]
-    - [0x8866D0, c]
-    - [0x887780, data]
-    - [0x887800, data]
-    - [0x887B20, data]
-    - [0x8883F0, data]
-    - [0x888BC0]
+    - [0x8863C0, c, tik_10_0_header]
+    - [0x8863C0, c, tik_10_1_music]
+    - [0x8863C0, c, tik_10_2_main]
+    - [0x8866D0, c, tik_10_3_drips]
+    - [0x886A40, c, tik_10_4_entity]
+    - [0x887780]
   - name: tik_12
     dir: world/area_tik/tik_12
     type: code
     start: 0x888BD0
     vram: 0x80240000
     subsegments:
-    - [0x888BD0, c]
-    - [0x8891C0, c]
-    - [0x88A530, c]
-    - [0x88AE20, data]
-    - [0x88AEA0, data]
-    - [0x88BF60, data]
-    - [0x88C810, data]
-    - [0x88D590]
+    - [0x888BD0, c, tik_12_0_header]
+    - [0x888BD0, c, tik_12_1_music]
+    - [0x888BD0, c, tik_12_2_main]
+    - [0x8891C0, c, tik_12_3_drips]
+    - [0x889530, c, tik_12_4_entity]
+    - [0x88A530, c, tik_12_5_npc]
+    - [0x88AE20]
   - name: tik_14
     dir: world/area_tik/tik_14
     type: code
     start: 0x88D600
     vram: 0x80240000
     subsegments:
-    - [0x88D600, c]
-    - [0x88DBF0, c]
-    - [0x88DF60, data]
-    - [0x88DFF0, data]
-    - [0x88F180, data]
-    - [0x88FA30, data]
-    - [0x88FB90]
+    - [0x88D600, c, tik_14_0_header]
+    - [0x88D600, c, tik_14_1_music]
+    - [0x88D600, c, tik_14_2_main]
+    - [0x88DBF0, c, tik_14_3_drips]
+    - [0x88DF60, c, tik_14_4_entity]
+    - [0x88DF60]
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
     start: 0x88FBA0
     vram: 0x80240000
     subsegments:
-    - [0x88FBA0, c]
-    - [0x890190, c]
-    - [0x8906B0, data]
-    - [0x890740, data]
-    - [0x891890, data]
-    - [0x8922A0, data]
-    - [0x892A10]
+    - [0x88FBA0, c, tik_15_0_header]
+    - [0x88FBA0, c, tik_15_1_music]
+    - [0x88FBA0, c, tik_15_2_main]
+    - [0x890190, c, tik_15_3_entity]
+    - [0x890190, c, tik_15_4_drips]
+    - [0x890500, c, tik_15_5_npc]
+    - [0x8906B0]
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
     start: 0x892A20
     vram: 0x80240000
     subsegments:
-    - [0x892A20, c]
-    - [0x892A50, c]
-    - [0x893790, c]
-    - [0x893D80, data]
-    - [0x893E40, data]
-    - [0x8944F0, data]
-    - [0x8956C0]
+    - [0x892A20, c, tik_17_0_header]
+    - [0x892A20, c, tik_17_1_music]
+    - [0x892A50, c, tik_17_2_entity]
+    - [0x893790, c, tik_17_3_main]
+    - [0x893D80]
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
     start: 0x8956E0
     vram: 0x80240000
     subsegments:
-    - [0x8956E0, c]
-    - [0x8959F0, c]
-    - [0x895D90, data]
-    - [0x895E20, data]
-    - [0x896CA0, data]
-    - [0x897450, data]
-    - [0x8975D0]
+    - [0x8956E0, c, tik_18_0_header]
+    - [0x8956E0, c, tik_18_1_music]
+    - [0x8956E0, c, tik_18_2_main]
+    - [0x8959F0, c, tik_18_3_drips]
+    - [0x895D60, c, tik_18_4_npc]
+    - [0x895D60, c, tik_18_5_entity]
+    - [0x895D90]
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
     start: 0x8975E0
     vram: 0x80240000
     subsegments:
-    - [0x8975E0, c]
-    - [0x897BD0, c]
-    - [0x898910, data]
-    - [0x898990, data]
-    - [0x899C90, data]
-    - [0x89A340]
+    - [0x8975E0, c, tik_19_0_header]
+    - [0x8975E0, c, tik_19_1_music]
+    - [0x8975E0, c, tik_19_2_main]
+    - [0x897BD0, c, tik_19_3_entity]
+    - [0x898910]
   - name: tik_20
     dir: world/area_tik/tik_20
     type: code
     start: 0x89A350
     vram: 0x80240000
     subsegments:
-    - [0x89A350, c]
-    - [0x89ACB0, c]
-    - [0x89B490, data]
-    - [0x89B530, data]
-    - [0x89D200, data]
-    - [0x89D720]
+    - [0x89A350, c, tik_20_0_header]
+    - [0x89A350, c, tik_20_1_music]
+    - [0x89A350, c, tik_20_2_main]
+    - [0x89ACB0, c, tik_20_3_npc]
+    - [0x89B490, c, tik_20_4_entity]
+    - [0x89B490]
   - name: tik_21
     dir: world/area_tik/tik_21
     type: code
     start: 0x89D7A0
     vram: 0x80240000
     subsegments:
-    - [0x89D7A0, c]
-    - [0x89E100, data]
-    - [0x89E1A0, data]
-    - [0x89FD70, data]
-    - [0x89FEA0]
+    - [0x89D7A0, c, tik_21_0_header]
+    - [0x89D7A0, c, tik_21_1_music]
+    - [0x89D7A0, c, tik_21_2_main]
+    - [0x89E100, c, tik_21_3_entity]
+    - [0x89E100]
   - name: tik_22
     dir: world/area_tik/tik_22
     type: code
     start: 0x89FEC0
     vram: 0x80240000
     subsegments:
-    - [0x89FEC0, c]
-    - [0x89FEF0, c]
-    - [0x8A0870, data]
-    - [0x8A0930, data]
-    - [0x8A23C0]
+    - [0x89FEC0, c, tik_22_0_header]
+    - [0x89FEC0, c, tik_22_1_music]
+    - [0x89FEF0, c, tik_22_2_main]
+    - [0x8A0870]
   - name: tik_23
     dir: world/area_tik/tik_23
     type: code
     start: 0x8A23D0
     vram: 0x80240000
     subsegments:
-    - [0x8A23D0, c]
-    - [0x8A2D30, c]
-    - [0x8A3510, data]
-    - [0x8A35A0, data]
-    - [0x8A5340, data]
-    - [0x8A5A10]
+    - [0x8A23D0, c, tik_23_0_header]
+    - [0x8A23D0, c, tik_23_1_music]
+    - [0x8A23D0, c, tik_23_2_main]
+    - [0x8A2D30, c, tik_23_3_entity]
+    - [0x8A2D30, c, tik_23_4_npc]
+    - [0x8A3510]
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
     start: 0x8A5A80
     vram: 0x80240000
     subsegments:
-    - [0x8A5A80, c]
-    - [0x8A5AD0, c]
-    - [0x8A5DE0, c]
-    - [0x8A6930, data]
-    - [0x8A69C0, data]
-    - [0x8A7810, data]
-    - [0x8A7A20, data]
-    - [0x8A7EF0]
+    - [0x8A5A80, c, tik_24_0_header]
+    - [0x8A5AD0, c, tik_24_1_music]
+    - [0x8A5AD0, c, tik_24_2_main]
+    - [0x8A5DE0, c, tik_24_3_drips]
+    - [0x8A6150, c, tik_24_4_entity]
+    - [0x8A6150, c, tik_24_5_npc]
+    - [0x8A6930]
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
     start: 0x8A7F80
     vram: 0x80240000
     subsegments:
-    - [0x8A7F80, c]
-    - [0x8A8600, c]
-    - [0x8A8740, data]
-    - [0x8A8800, data]
-    - [0x8A93D0, data]
-    - [0x8A9A00]
+    - [0x8A7F80, c, tik_25_0_header]
+    - [0x8A7F80, c, tik_25_1_music]
+    - [0x8A7F80, c, tik_25_2_main]
+    - [0x8A8600, c, tik_25_3_entity]
+    - [0x8A8740]
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code

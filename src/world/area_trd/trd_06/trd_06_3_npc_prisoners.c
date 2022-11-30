@@ -155,7 +155,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     EVT_CALL(SetNpcSpeed, NPC_Jailer_KoopaTroopa, EVT_FLOAT(4.0))
     EVT_CALL(SetNpcSpeed, NPC_Jailer_Bobomb_01, EVT_FLOAT(4.0))
     EVT_CALL(SetNpcSpeed, NPC_Jailer_Bobomb_02, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcAnimation, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04)
+    EVT_CALL(SetNpcAnimation, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_100, TRUE)
@@ -177,7 +177,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim02)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim02)
-    EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04, ANIM_KoopaTroopa_Anim01, 0, MSG_CH1_00F0)
+    EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_00F0)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -211,7 +211,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     EVT_CALL(NpcJump0, NPC_Jailer_KoopaTroopa, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim02)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim02)
-    EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Anim04, ANIM_KoopaTroopa_Anim01, 0, MSG_CH1_00F1)
+    EVT_CALL(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_00F1)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -390,22 +390,22 @@ StaticNpc N(NpcData_Jailers)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
         },
         .animations = {
-            .idle   = ANIM_KoopaTroopa_Anim01,
-            .walk   = ANIM_KoopaTroopa_Anim03,
-            .run    = ANIM_KoopaTroopa_Anim04,
-            .chase  = ANIM_KoopaTroopa_Anim04,
-            .anim_4 = ANIM_KoopaTroopa_Anim01,
-            .anim_5 = ANIM_KoopaTroopa_Anim01,
-            .death  = ANIM_KoopaTroopa_Anim0B,
-            .hit    = ANIM_KoopaTroopa_Anim0B,
-            .anim_8 = ANIM_KoopaTroopa_Anim07,
-            .anim_9 = ANIM_KoopaTroopa_Anim06,
-            .anim_A = ANIM_KoopaTroopa_Anim08,
-            .anim_B = ANIM_KoopaTroopa_Anim04,
-            .anim_C = ANIM_KoopaTroopa_Anim04,
-            .anim_D = ANIM_KoopaTroopa_Anim04,
-            .anim_E = ANIM_KoopaTroopa_Anim04,
-            .anim_F = ANIM_KoopaTroopa_Anim04,
+            .idle   = ANIM_KoopaTroopa_Idle,
+            .walk   = ANIM_KoopaTroopa_Walk,
+            .run    = ANIM_KoopaTroopa_Run,
+            .chase  = ANIM_KoopaTroopa_Run,
+            .anim_4 = ANIM_KoopaTroopa_Idle,
+            .anim_5 = ANIM_KoopaTroopa_Idle,
+            .death  = ANIM_KoopaTroopa_Hurt,
+            .hit    = ANIM_KoopaTroopa_Hurt,
+            .anim_8 = ANIM_KoopaTroopa_ShellEnter,
+            .anim_9 = ANIM_KoopaTroopa_ShellSpin,
+            .anim_A = ANIM_KoopaTroopa_ShellExit,
+            .anim_B = ANIM_KoopaTroopa_Run,
+            .anim_C = ANIM_KoopaTroopa_Run,
+            .anim_D = ANIM_KoopaTroopa_Run,
+            .anim_E = ANIM_KoopaTroopa_Run,
+            .anim_F = ANIM_KoopaTroopa_Run,
         },
     },
     {

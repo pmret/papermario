@@ -6,7 +6,7 @@
 static s32** N(varStash) = NULL;
 
 // TODO extracted from world/common/todo/StashVars to reduce warnings (for now)
-ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StashVars)) {
     //static s32** varTable = NULL;
     s32 i;
 
@@ -50,11 +50,23 @@ EvtScript N(GiveCoinReward) = {
     EVT_EXEC_WAIT(N(GiveKeyReward)) \
     EVT_CALL(AddKeyItem, itemID)
 
+#define EVT_GIVE_BADGE_REWARD(itemID) \
+    EVT_SET(LVar0, itemID) \
+    EVT_SET(LVar1, ITEM_TYPE_BADGE) \
+    EVT_EXEC_WAIT(N(GiveKeyReward)) \
+    EVT_CALL(AddBadge, itemID, LVar0)
+
 #define EVT_GIVE_CONSUMABLE_REWARD(itemID) \
     EVT_SET(LVar0, itemID) \
     EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \
     EVT_EXEC_WAIT(N(GiveKeyReward)) \
     EVT_CALL(AddItem, LVar0, LVar1)
+
+#define EVT_GIVE_CONSUMABLE_REWARD_ALT(itemID) \
+    EVT_SET(LVar0, itemID) \
+    EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \
+    EVT_EXEC_WAIT(N(GiveKeyReward)) \
+    EVT_CALL(AddItem, itemID, LVar0)
 
 #define EVT_GIVE_STAR_PIECE() \
     EVT_SET(LVar0, ITEM_STAR_PIECE) \
