@@ -2459,16 +2459,16 @@ enum LilOinkFlags {
 };
 
 enum LilOinkTypes {
-    LIL_OINK_TYPE_0 = 0,
-    LIL_OINK_TYPE_1 = 1,
-    LIL_OINK_TYPE_2 = 2,
-    LIL_OINK_TYPE_3 = 3,
-    LIL_OINK_TYPE_4 = 4,
-    LIL_OINK_TYPE_5 = 5,
-    LIL_OINK_TYPE_6 = 6,
-    LIL_OINK_TYPE_7 = 7,
-    LIL_OINK_TYPE_8 = 8,
-    LIL_OINK_TYPE_9 = 9,
+    LIL_OINK_TYPE_BLACK     = 0,
+    LIL_OINK_TYPE_WHITE     = 1,
+    LIL_OINK_TYPE_PINK      = 2,
+    LIL_OINK_TYPE_PIKACHU   = 3,
+    LIL_OINK_TYPE_SHROOM    = 4,
+    LIL_OINK_TYPE_FLOWER    = 5,
+    LIL_OINK_TYPE_STAR      = 6,
+    LIL_OINK_TYPE_QUESTION  = 7,
+    LIL_OINK_TYPE_SILVER    = 8,
+    LIL_OINK_TYPE_GOLD      = 9,
 };
 
 enum LilOinkAnims {

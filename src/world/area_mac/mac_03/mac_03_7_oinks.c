@@ -342,16 +342,16 @@ EvtScript N(EVS_UseMachinePrompt) = {
 };
 
 LilOinkReward N(LilOinkPrizes)[] = {
-    [LIL_OINK_TYPE_0]   { .itemID = ITEM_DRIED_SHROOM,  .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_1]   { .itemID = ITEM_SUPER_SHROOM,  .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_2]   { .itemID = ITEM_FIRE_FLOWER,   .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_3]   { .itemID = ITEM_THUNDER_RAGE,  .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_4]   { .itemID = ITEM_LIFE_SHROOM,   .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_5]   { .itemID = ITEM_MAPLE_SYRUP,   .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_6]   { .itemID = ITEM_SHOOTING_STAR, .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_7]   { .itemID = ITEM_REPEL_GEL,     .quantity = 1, .chance = 100 }, 
-    [LIL_OINK_TYPE_8]   { .itemID = ITEM_JAMMIN_JELLY,  .quantity = 1, .chance = 100 },
-    [LIL_OINK_TYPE_9]   { .itemID = ITEM_ULTRA_SHROOM,  .quantity = 1, .chance = 100 }, 
+    [LIL_OINK_TYPE_BLACK]       { .itemID = ITEM_DRIED_SHROOM,  .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_WHITE]       { .itemID = ITEM_SUPER_SHROOM,  .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_PINK]        { .itemID = ITEM_FIRE_FLOWER,   .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_PIKACHU]     { .itemID = ITEM_THUNDER_RAGE,  .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_SHROOM]      { .itemID = ITEM_LIFE_SHROOM,   .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_FLOWER]      { .itemID = ITEM_MAPLE_SYRUP,   .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_STAR]        { .itemID = ITEM_SHOOTING_STAR, .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_QUESTION]    { .itemID = ITEM_REPEL_GEL,     .quantity = 1, .chance = 100 }, 
+    [LIL_OINK_TYPE_SILVER]      { .itemID = ITEM_JAMMIN_JELLY,  .quantity = 1, .chance = 100 },
+    [LIL_OINK_TYPE_GOLD]        { .itemID = ITEM_ULTRA_SHROOM,  .quantity = 1, .chance = 100 }, 
 };
 
 API_CALLABLE(N(GetLilOinkPrize)) {
@@ -415,25 +415,25 @@ EvtScript N(EVS_OpenCapsule) = {
     EVT_CALL(RandInt, 100, LVar3)
     EVT_SWITCH(LVar3)
         EVT_CASE_LT(3)
-            EVT_SET(LVar3, LIL_OINK_TYPE_9)
+            EVT_SET(LVar3, LIL_OINK_TYPE_GOLD)
         EVT_CASE_LT(12)
-            EVT_SET(LVar3, LIL_OINK_TYPE_8)
+            EVT_SET(LVar3, LIL_OINK_TYPE_SILVER)
         EVT_CASE_LT(19)
-            EVT_SET(LVar3, LIL_OINK_TYPE_4)
+            EVT_SET(LVar3, LIL_OINK_TYPE_SHROOM)
         EVT_CASE_LT(26)
-            EVT_SET(LVar3, LIL_OINK_TYPE_5)
+            EVT_SET(LVar3, LIL_OINK_TYPE_FLOWER)
         EVT_CASE_LT(33)
-            EVT_SET(LVar3, LIL_OINK_TYPE_6)
+            EVT_SET(LVar3, LIL_OINK_TYPE_STAR)
         EVT_CASE_LT(40)
-            EVT_SET(LVar3, LIL_OINK_TYPE_7)
+            EVT_SET(LVar3, LIL_OINK_TYPE_QUESTION)
         EVT_CASE_LT(55)
-            EVT_SET(LVar3, LIL_OINK_TYPE_0)
+            EVT_SET(LVar3, LIL_OINK_TYPE_BLACK)
         EVT_CASE_LT(70)
-            EVT_SET(LVar3, LIL_OINK_TYPE_1)
+            EVT_SET(LVar3, LIL_OINK_TYPE_WHITE)
         EVT_CASE_LT(85)
-            EVT_SET(LVar3, LIL_OINK_TYPE_2)
+            EVT_SET(LVar3, LIL_OINK_TYPE_PINK)
         EVT_CASE_DEFAULT
-            EVT_SET(LVar3, LIL_OINK_TYPE_3)
+            EVT_SET(LVar3, LIL_OINK_TYPE_PIKACHU)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_TORNADO_JUMP, 0)
     EVT_CALL(N(CreateLilOink), 10, LVar3, LVar0, LVar1, LVar2, 90)
