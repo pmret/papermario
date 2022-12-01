@@ -9022,25 +9022,25 @@ segments:
     start: 0x852170
     vram: 0x80240000
     subsegments:
-    - [0x852170, c]
-    - [0x855560, c]
-    - [0x855F20, c]
-    - [0x8562D0, data]
-    - [0x8564E0, data]
-    - [0x856650, data]
-    - [0x857070, data]
-    - [0x862BC0, data]
-    - [0x864450, data]
-    - [0x864910]
+    - [0x852170, c, mac_05_0_header]
+    - [0x852170, c, mac_05_1_music]
+    - [0x852170, c, mac_05_2_entity]
+    - [0x852170, c, mac_05_3_main]
+    - [0x852600, c, mac_05_4_npc]
+    - [0x855560, c, mac_05_5_whale]
+    - [0x855F20, c, mac_05_6_rooms]
+    - [0x855F20, c, mac_05_7_club64_sign]
+    - [0x8562D0]
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
     start: 0x864B40
     vram: 0x80240000
     subsegments:
+    - [0x864B40, c, mac_06_0_header]
     - [0x864B40, c, mac_06_1_main]
-    - [0x865000, c, mac_06_2]
-    - [0x8659C0, c, mac_06_3]
+    - [0x865000, c, mac_06_2_whale]
+    - [0x8659C0, c, mac_06_3_npc]
     - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01

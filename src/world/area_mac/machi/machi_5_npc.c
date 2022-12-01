@@ -380,8 +380,7 @@ StaticNpc N(NpcData_GoombaKing) = {
     .yaw = 0,
     .flags = 0,
     .init = (void*) 0x4003,
-    .animations = {
-    }
+    .animations = {}
 };
 
 NpcGroupList N(DefaultNPCs) = {

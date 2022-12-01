@@ -27,6 +27,11 @@ enum {
     AF_MAC_23       = AreaFlag(35),
     AF_MAC_24       = AreaFlag(36),
     AF_MAC_25       = AreaFlag(37),
+    AF_MAC_38       = AreaFlag(56),
+    AF_MAC_3D       = AreaFlag(61),
+    AF_MAC_3E       = AreaFlag(62),
+    AF_MAC_3F       = AreaFlag(63),
+    AF_MAC_44       = AreaFlag(68),
 };
 
 extern MapSettings machi_settings;

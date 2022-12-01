@@ -26,3 +26,9 @@ enum {
 };
 
 #define NAMESPACE mac_06
+
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_FlyingGull);
+extern EvtScript N(EVS_WhaleMain);
+
+extern NpcGroupList N(DefaultNPCs);

@@ -1,5 +1,4 @@
-#include "jan_00.h"
-#include "effects.h"
+#include "mac_05.h"
 
 u32 N(unkAngle1) = 0;
 s32 N(unkAngle2) = -1;
@@ -7,11 +6,11 @@ s32 N(unkAngle3) = -1;
 
 #include "world/common/atomic/WhaleAnim.inc.c"
 
-ApiStatus jan_00_UnkPlayerPosFunc(Evt* script, s32 isInitialCall) {
+ApiStatus N(UnkPlayerPosFunc)(Evt* script, s32 isInitialCall) {
     Npc* player = get_npc_safe(ACTOR_PLAYER);
     f32 yaw = -player->yaw;
-    f32 x = player->pos.x + 30.0f + (sin_deg(yaw) * 170.0f);
-    f32 z = player->pos.z + (cos_deg(yaw) * 170.0f);
+    f32 x = player->pos.x + 30.0f + (sin_deg(yaw) * 70.0f);
+    f32 z = player->pos.z + (cos_deg(yaw) * 70.0f);
     f32 y = player->pos.y + 50.0f;
 
     evt_set_float_variable(script, LVar0, x);
@@ -20,7 +19,11 @@ ApiStatus jan_00_UnkPlayerPosFunc(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_8024595C_B25E9C) = {
+#include "world/common/atomic/WhaleGeyser.inc.c"
+
+MAP_RODATA_PAD(2, unk);
+
+EvtScript N(D_80250A5C_862BCC) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 30, 60, 30, 0, 0)
     EVT_CALL(RotateModel, MODEL_o167, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o168, LVar0, -1, 0, 0)
@@ -28,7 +31,7 @@ EvtScript N(D_8024595C_B25E9C) = {
     EVT_END
 };
 
-EvtScript N(D_802459D4_B25F14) = {
+EvtScript N(D_80250AD4_862C44) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 0, 30, 30, 1, 0)
     EVT_SETF(LVar1, LVar0)
     EVT_DIVF(LVar1, EVT_FLOAT(3.0))
@@ -48,11 +51,15 @@ EvtScript N(D_802459D4_B25F14) = {
     EVT_CALL(TranslateModel, MODEL_o168, -60, -29, -51)
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 0, -40, 30, 1, 0)
     EVT_CALL(TranslateModel, MODEL_bero, LVar0, 0, 0)
+    EVT_IF_GE(LVarC, 30)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt9, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_kujira_atari, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245C10_B26150) = {
+EvtScript N(D_80250D58_862EC8) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 0, -30, 8, 1, 0)
     EVT_ADDF(LVar0, EVT_FLOAT(30.0))
     EVT_SETF(LVar1, LVar0)
@@ -77,18 +84,22 @@ EvtScript N(D_80245C10_B26150) = {
     EVT_END
 };
 
-EvtScript N(D_80245E5C_B2639C) = {
+EvtScript N(D_80250FA4_863114) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245E6C_B263AC) = {
-    EVT_SET(LVar1, LVarC)
-    EVT_MOD(LVar1, 4)
-    EVT_IF_EQ(LVar1, 0)
+EvtScript N(D_80250FB4_863124) = {
+    EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar3)
+    EVT_IF_EQ(LVar3, 0)
         EVT_CALL(N(UnkPlayerPosFunc))
-        EVT_CALL(PlayEffect, EFFECT_DAMAGE_STARS, 2, LVar0, LVar1, LVar2, 0, -1, 0, 5, 0, 0, 0, 0, 0)
+        EVT_CALL(PlaySoundAt, SOUND_8000004F, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(N(CreateWhaleGeyser), 0, LVar0, LVar1, LVar2, 0, -1, 0, 30)
+        EVT_CALL(SetNpcVar, NPC_Whale, 0, LVar0)
     EVT_END_IF
+    EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar3)
+    EVT_CALL(N(UnkPlayerPosFunc))
+    EVT_CALL(N(SetWhaleGeyserPos), LVar3, LVar0, LVar1, LVar2)
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 30, 60, 30, 0, 0)
     EVT_CALL(RotateModel, MODEL_o167, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o168, LVar0, -1, 0, 0)
@@ -96,12 +107,12 @@ EvtScript N(D_80245E6C_B263AC) = {
     EVT_END
 };
 
-EvtScript N(D_80245F6C_B264AC) = {
+EvtScript N(D_8025110C_86327C) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245F7C_B264BC) = {
+EvtScript N(D_8025111C_86328C) = {
     EVT_IF_GE(LVarC, 0)
         EVT_IF_LE(LVarC, 2)
             EVT_CALL(EnableModel, MODEL_o170, FALSE)
@@ -125,7 +136,7 @@ EvtScript N(D_80245F7C_B264BC) = {
     EVT_END
 };
 
-EvtScript N(D_802460A4_B265E4) = {
+EvtScript N(D_80251244_8633B4) = {
     EVT_SET(LVar0, LVarC)
     EVT_DIV(LVar0, 20)
     EVT_MOD(LVar0, 2)
@@ -145,7 +156,7 @@ EvtScript N(D_802460A4_B265E4) = {
     EVT_END
 };
 
-EvtScript N(D_8024620C_B2674C) = {
+EvtScript N(D_802513AC_86351C) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, EVT_FLOAT(-6.0), EVT_FLOAT(6.0), 3, 0, 0)
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar1, EVT_FLOAT(6.0), EVT_FLOAT(-6.0), 2, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o173, LVar0, LVar1, 0)
@@ -160,7 +171,7 @@ EvtScript N(D_8024620C_B2674C) = {
     EVT_END
 };
 
-EvtScript N(D_8024634C_B2688C) = {
+EvtScript N(D_802514EC_86365C) = {
     EVT_SET(LVar0, LVarC)
     EVT_DIV(LVar0, 20)
     EVT_MOD(LVar0, 2)
@@ -180,7 +191,7 @@ EvtScript N(D_8024634C_B2688C) = {
     EVT_END
 };
 
-EvtScript N(D_802464B4_B269F4) = {
+EvtScript N(D_80251654_8637C4) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 30, 60, 30, 0, 0)
     EVT_CALL(RotateModel, MODEL_o167, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o168, LVar0, -1, 0, 0)
@@ -188,7 +199,7 @@ EvtScript N(D_802464B4_B269F4) = {
     EVT_END
 };
 
-EvtScript N(D_8024652C_B26A6C) = {
+EvtScript N(D_802516CC_86383C) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 0, 8, 3, 0, 0)
     EVT_SET(LVar1, LVar0)
     EVT_DIV(LVar1, 3)
@@ -215,7 +226,7 @@ EvtScript N(D_8024652C_B26A6C) = {
     EVT_END
 };
 
-EvtScript N(EVS_802467AC) = {
+EvtScript N(EVS_8025194C) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(MakeLocalVertexCopy, 1, MODEL_karada, TRUE)
     EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(unkAngleFunc002)), 0)
@@ -229,7 +240,7 @@ EvtScript N(EVS_802467AC) = {
         EVT_SUBF(LVar0, -80)
         EVT_SUBF(LVar1, -18)
         EVT_SUBF(LVar2, 420)
-        EVT_ADDF(LVar0, 55)
+        EVT_ADDF(LVar0, 130)
         EVT_ADDF(LVar1, -20)
         EVT_ADDF(LVar2, 0)
         EVT_CALL(TranslateModel, MODEL_bero, LVar0, LVar1, LVar2)
@@ -239,7 +250,7 @@ EvtScript N(EVS_802467AC) = {
         EVT_CALL(TranslateModel, MODEL_o167, LVar0, LVar1, LVar2)
         EVT_CALL(TranslateModel, MODEL_o168, LVar0, LVar1, LVar2)
         EVT_CALL(TranslateGroup, MODEL_dou, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcYaw, NPC_Kolorado_01, LVar0)
+        EVT_CALL(GetNpcYaw, NPC_Whale, LVar0)
         EVT_MULF(LVar0, -1)
         EVT_ADDF(LVar0, -90)
         EVT_CALL(TranslateModel, MODEL_bero, -100, 0, 0)
@@ -275,43 +286,55 @@ EvtScript N(EVS_802467AC) = {
         EVT_CALL(TranslateModel, MODEL_o167, 100, 0, 0)
         EVT_CALL(TranslateModel, MODEL_o168, 100, 0, 0)
         EVT_CALL(TranslateGroup, MODEL_dou, 100, 0, 0)
-        EVT_CALL(GetNpcAnimation, NPC_Kolorado_01, LVar0)
+        EVT_CALL(GetNpcAnimation, NPC_Whale, LVar0)
         EVT_IF_NE(LVar0, LVarB)
             EVT_SET(LVarB, LVar0)
             EVT_SET(LVarC, 0)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt9, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(EnableModel, MODEL_o170, TRUE)
             EVT_CALL(EnableModel, MODEL_o183, FALSE)
+            EVT_IF_NE(LVarB, ANIM_Kolorado_Shout)
+                EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar0)
+                EVT_IF_NE(LVar0, 0)
+                    EVT_CALL(PlaySound, SOUND_443)
+                    EVT_CALL(func_802D62E4, SOUND_43)
+                    EVT_CALL(N(DisposeWhaleGeyser), LVar0)
+                    EVT_CALL(SetNpcVar, NPC_Whale, 0, 0)
+                EVT_END_IF
+            EVT_END_IF
             EVT_SWITCH(LVarB)
-                EVT_CASE_EQ(0x00B60003)
-                    EVT_SET(LVarD, EVT_PTR(N(D_80245C10_B26150)))
-                EVT_CASE_EQ(0x00B60000)
-                    EVT_SET(LVarD, EVT_PTR(N(D_8024595C_B25E9C)))
-                EVT_CASE_EQ(0x00B60002)
-                    EVT_SET(LVarD, EVT_PTR(N(D_802459D4_B25F14)))
-                EVT_CASE_EQ(0x00B60001)
-                    EVT_SET(LVarD, EVT_PTR(N(D_802464B4_B269F4)))
-                EVT_CASE_EQ(0x00B60004)
-                    EVT_SET(LVarD, EVT_PTR(N(D_8024652C_B26A6C)))
-                EVT_CASE_EQ(0x00B60005)
-                    EVT_SET(LVarD, EVT_PTR(N(D_80245E5C_B2639C)))
+                EVT_CASE_EQ(ANIM_Kolorado_IdleSad)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2037, 0)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80250D58_862EC8)))
+                EVT_CASE_EQ(ANIM_Kolorado_Still)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80250A5C_862BCC)))
+                EVT_CASE_EQ(ANIM_Kolorado_Yell)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2036, 0)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80250AD4_862C44)))
+                EVT_CASE_EQ(ANIM_Kolorado_Idle)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80251654_8637C4)))
+                EVT_CASE_EQ(ANIM_Kolorado_Walk)
+                    EVT_SET(LVarD, EVT_PTR(N(D_802516CC_86383C)))
+                EVT_CASE_EQ(ANIM_Kolorado_WalkSad)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80250FA4_863114)))
                     EVT_CALL(EnableModel, MODEL_o170, FALSE)
                     EVT_CALL(EnableModel, MODEL_o183, FALSE)
-                EVT_CASE_EQ(0x00B60006)
-                    EVT_SET(LVarD, EVT_PTR(N(D_802460A4_B265E4)))
+                EVT_CASE_EQ(ANIM_Kolorado_Run)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80251244_8633B4)))
                     EVT_CALL(EnableModel, MODEL_o170, FALSE)
                     EVT_CALL(EnableModel, MODEL_o183, FALSE)
-                EVT_CASE_EQ(0x00B60007)
-                    EVT_SET(LVarD, EVT_PTR(N(D_8024620C_B2674C)))
+                EVT_CASE_EQ(ANIM_Kolorado_Panic)
+                    EVT_SET(LVarD, EVT_PTR(N(D_802513AC_86351C)))
                     EVT_CALL(EnableModel, MODEL_o170, FALSE)
                     EVT_CALL(EnableModel, MODEL_o183, FALSE)
-                EVT_CASE_EQ(0x00B60008)
-                    EVT_SET(LVarD, EVT_PTR(N(D_8024634C_B2688C)))
-                EVT_CASE_EQ(0x00B60009)
-                    EVT_SET(LVarD, EVT_PTR(N(D_80245E6C_B263AC)))
-                EVT_CASE_EQ(0x00B6000A)
-                    EVT_SET(LVarD, EVT_PTR(N(D_80245F6C_B264AC)))
-                EVT_CASE_EQ(0x00B6000C)
-                    EVT_SET(LVarD, EVT_PTR(N(D_80245F7C_B264BC)))
+                EVT_CASE_EQ(ANIM_Kolorado_Talk)
+                    EVT_SET(LVarD, EVT_PTR(N(D_802514EC_86365C)))
+                EVT_CASE_EQ(ANIM_Kolorado_Shout)
+                    EVT_SET(LVarD, EVT_PTR(N(D_80250FB4_863124)))
+                EVT_CASE_EQ(ANIM_Kolorado_TalkSad)
+                    EVT_SET(LVarD, EVT_PTR(N(D_8025110C_86327C)))
+                EVT_CASE_EQ(ANIM_Kolorado_HurtStill)
+                    EVT_SET(LVarD, EVT_PTR(N(D_8025111C_86328C)))
             EVT_END_SWITCH
         EVT_END_IF
         EVT_EXEC_WAIT(LVarD)
@@ -325,8 +348,8 @@ EvtScript N(EVS_802467AC) = {
     EVT_END
 };
 
-EvtScript N(EVS_80247040) = {
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_IdleSad)
+EvtScript N(EVS_802522B8) = {
+    EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_IdleSad)
     EVT_RETURN
     EVT_END
 };

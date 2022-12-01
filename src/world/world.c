@@ -285,14 +285,14 @@ f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
 /// Toad Town
 #include "area_mac/mac.h"
 MapConfig mac_maps[] = {
-    { MAP_UNSPLIT(machi,  0x802407A0), .bgName = "nok_bg" },
+    { MAP(machi), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_00, 0x80243BE0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_02, 0x80243580), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_04, 0x80242080), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(mac_05, 0x802441A0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_06, 0x802416A0), .bgName = "nok_bg" },
+    { MAP(mac_06), .bgName = "nok_bg" },
 };
 
 /// Toad Town Tunnels

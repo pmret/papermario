@@ -193,7 +193,7 @@ API_CALLABLE(N(CheckTradeEventTime)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(GetItemCount)) {
+API_CALLABLE(N(GetTradeEventItemCount)) {
     script->varTable[0] = get_item_count();
     return ApiStatus_DONE2;
 }
@@ -211,7 +211,7 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
         EVT_SET(GF_TradingEvent2_Active, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(GetItemCount))
+    EVT_CALL(N(GetTradeEventItemCount))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EF)
         EVT_RETURN
