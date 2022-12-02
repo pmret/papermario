@@ -175,8 +175,6 @@ void bgm_update_music_settings(void) {
     bgm_update_volume();
 }
 
-static const f32 padding = 0.0f;
-
 s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicSettings* musicSetting;
     s32 mapSongVariation;
@@ -215,7 +213,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
     musicSetting->variation = variation;
     musicSetting->fadeOutTime = fadeOutTime;
     musicSetting->state = 1;
-    musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
+    musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX;
 
     return 1;
 }
@@ -254,7 +252,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     musicSetting->variation = variation;
     musicSetting->flags |= MUSIC_SETTINGS_FLAGS_20;
     musicSetting->state = 1;
-    musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
+    musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX;
 
     return 1;
 }
@@ -266,7 +264,7 @@ s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
         return FALSE;
     }
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_2)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX)) {
         return FALSE;
     }
 

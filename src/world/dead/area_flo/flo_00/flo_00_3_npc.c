@@ -10,7 +10,7 @@ NpcSettings N(NpcSettings_Dummy) = {
 #include "world/common/npc/Tolielup.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
-API_CALLABLE(N(UpgradeStarPower)) {
+API_CALLABLE(N(UpgradeStarPowerCh6)) {
     set_max_SP(6);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -498,7 +498,7 @@ EvtScript N(EVS_Scene_RescuedKlevar) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Klevar, TRUE)
-    EVT_CALL(N(UpgradeStarPower))
+    EVT_CALL(N(UpgradeStarPowerCh6))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0196, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)

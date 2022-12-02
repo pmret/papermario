@@ -1,4 +1,3 @@
-#include "common.h"
 #include "TubbasHeart.h"
 
 EvtScript N(EVS_NpcAuxAI_TubbasHeart) = {

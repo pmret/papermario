@@ -1,14 +1,5 @@
 #include "mac_04.h"
 
-extern char wMapBgName[];
-
-API_CALLABLE(N(map_init)) {
-    if (gGameStatusPtr->entryID == mac_04_ENTRY_4) {
-        sprintf(wMapBgName, "hos_bg");
-    }
-    return ApiStatus_BLOCK;
-}
-
 EntryList N(Entrances) = {
     [mac_04_ENTRY_0]    {  610.0,    0.0,    0.0,  280.0 },
     [mac_04_ENTRY_1]    { -420.0,    0.0,  430.0,   35.0 },
@@ -25,3 +16,10 @@ MapSettings N(settings) = {
     .background = &gBackgroundImage,
     .tattle = { MSG_MapTattle_mac_04 },
 };
+
+s32 N(map_init)(void) {
+    if (gGameStatusPtr->entryID == mac_04_ENTRY_4) {
+        sprintf(wMapBgName, "hos_bg");
+    }
+    return FALSE;
+}

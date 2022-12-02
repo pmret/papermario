@@ -1,7 +1,7 @@
 #include "mac_04.h"
 #include "model.h"
 
-API_CALLABLE(N(func_80240050_842C20)) {
+API_CALLABLE(N(SetNightFogParams)) {
     Bytecode* args = script->ptrReadPos;
     s32 primR = evt_get_variable(script, *args++);
     s32 primG = evt_get_variable(script, *args++);
@@ -17,7 +17,7 @@ API_CALLABLE(N(func_80240050_842C20)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240194_842D64)) {
+API_CALLABLE(N(SetNightFogMode)) {
     mdl_set_all_fog_mode(3);
     return ApiStatus_DONE2;
 }
@@ -37,10 +37,10 @@ EvtScript N(EVS_EnterMap) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(mac_04_ENTRY_2)
             EVT_EXEC(N(EVS_BindExitTriggers))
-            EVT_EXEC(N(EVS_8024ECDC))
+            EVT_EXEC(N(EVS_ExitToybox))
             EVT_THREAD
                 EVT_WAIT(20)
-                EVT_SET(MF_Unk_0A, TRUE)
+                EVT_SET(MF_MusicMixTrigger, TRUE)
             EVT_END_THREAD
         EVT_CASE_EQ(mac_04_ENTRY_3)
             EVT_EXEC(N(EVS_BindExitTriggers))
@@ -48,11 +48,11 @@ EvtScript N(EVS_EnterMap) = {
             EVT_CALL(SetNpcPos, NPC_PARTNER, -420, 20, -65)
             EVT_THREAD
                 EVT_WAIT(20)
-                EVT_SET(MF_Unk_0A, TRUE)
+                EVT_SET(MF_MusicMixTrigger, TRUE)
             EVT_END_THREAD
         EVT_CASE_EQ(mac_04_ENTRY_4)
-            EVT_CALL(N(func_80240194_842D64))
-            EVT_CALL(N(func_80240050_842C20), 0, 0, 0, 0, 0, 0, 0, 950, 1000)
+            EVT_CALL(N(SetNightFogMode))
+            EVT_CALL(N(SetNightFogParams), 0, 0, 0, 0, 0, 0, 0, 950, 1000)
             EVT_EXEC(N(EVS_Scene_WishingToadKid))
         EVT_CASE_EQ(mac_04_ENTRY_5)
             EVT_EXEC(N(EVS_BindExitTriggers))
@@ -78,7 +78,7 @@ EvtScript N(EVS_Main) = {
             EVT_CASE_LT(STORY_CH4_BEGAN_PEACH_MISSION)
                 EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter4NPCs)))
             EVT_CASE_EQ(STORY_CH4_BEGAN_PEACH_MISSION)
-                EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter5NPCs)))
+                EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(PostChapter4NPCs)))
             EVT_CASE_LT(STORY_CH5_RETURNED_TO_TOAD_TOWN)
                 EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
             EVT_CASE_LT(STORY_CH7_BEGAN_PEACH_MISSION)
@@ -89,10 +89,10 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_SET(AF_MAC_31, FALSE)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_80242E88))
+    EVT_EXEC(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupFoliage))
     EVT_EXEC(N(EVS_SetupShop))
-    EVT_EXEC_WAIT(N(EVS_80246C58))
+    EVT_EXEC_WAIT(N(EVS_Toybox_SetupTrainPrompt))
     EVT_IF_EQ(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
         EVT_CALL(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
     EVT_ELSE

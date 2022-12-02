@@ -183,7 +183,7 @@ void state_step_unpause(void) {
                         calculate_model_sizes();
                         npc_reload_all();
                         set_windows_visible(WINDOW_GROUP_ALL);
-                        func_800E98C4();
+                        status_menu_respond_to_changes();
                         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                         D_800A0921 = 3;
                         gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;

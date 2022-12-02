@@ -112,14 +112,14 @@ ApiStatus func_802426A4_9C7A84(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80242760_9C7B40(Evt* script, s32 isInitialCall) {
     func_800E98EC();
-    func_800E9894();
+    status_menu_ignore_changes();
     open_status_menu_long();
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80242790_9C7B70(Evt* script, s32 isInitialCall) {
     func_800E9900();
-    func_800E98C4();
+    status_menu_respond_to_changes();
     close_status_menu();
     return ApiStatus_DONE2;
 }

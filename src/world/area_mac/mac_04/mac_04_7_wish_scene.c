@@ -47,7 +47,7 @@ StaticNpc N(NpcData_WishSceneToads)[] = {
         .animations = TOAD_KID_RED_ANIMS,
     },
     {
-        .id = NPC_Toad_04,
+        .id = NPC_GossipTrio1,
         .settings = &N(NpcSettings_Toad_Stationary_Wish),
         .pos = { -245.0f, 20.0f, 100.0f },
         .yaw = 270,
@@ -57,7 +57,7 @@ StaticNpc N(NpcData_WishSceneToads)[] = {
         .tattle = MSG_NpcTattle_GreatGossipTrioA,
     },
     {
-        .id = NPC_Toad_05,
+        .id = NPC_GossipTrio2,
         .settings = &N(NpcSettings_Toad_Stationary_Wish),
         .pos = { -25.0f, 0.0f, 170.0f },
         .yaw = 270,
@@ -67,7 +67,7 @@ StaticNpc N(NpcData_WishSceneToads)[] = {
         .tattle = MSG_NpcTattle_GreatGossipTrioB,
     },
     {
-        .id = NPC_Toad_06,
+        .id = NPC_GossipTrio3,
         .settings = &N(NpcSettings_Toad_Stationary_Wish),
         .pos = { -100.0f, 0.0f, 305.0f },
         .yaw = 90,

@@ -128,6 +128,7 @@ extern s16 D_800A0922;
 extern char wMapTexName[];
 extern char wMapHitName[];
 extern char wMapShapeName[];
+extern char wMapBgName[];
 extern struct ShapeFile* D_80210000; // shouldnt be a pointer
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?

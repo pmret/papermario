@@ -2,8 +2,8 @@
 
 s32 set_background_color_blend(s32, s32, s32, s32);
 
-API_CALLABLE(N(func_802401C0_842D90)) {
-    func_8011B950(0x9E, -1, 1, 1);
+API_CALLABLE(N(InitEntryFromToybox)) {
+    func_8011B950(MODEL_heiho_house, -1, 1, 1);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -11,13 +11,13 @@ API_CALLABLE(N(func_802401C0_842D90)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_802426B0_845280) = {
+EvtScript N(EVS_SetDoorRot_Shop) = {
     EVT_CALL(RotateModel, MODEL_msdoor, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802426E0_8452B0) = {
+EvtScript N(EVS_MoveWalls_Shop) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_my1, LVar1, -1, 0, 0)
     EVT_CALL(RotateModel, MODEL_my2, LVar1, -1, 0, 0)
@@ -31,7 +31,7 @@ EvtScript N(D_802426E0_8452B0) = {
     EVT_END
 };
 
-EvtScript N(D_80242800_8453D0) = {
+EvtScript N(EVS_ToggleVis_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(EnableGroup, MODEL_mise_in, TRUE)
@@ -43,13 +43,13 @@ EvtScript N(D_80242800_8453D0) = {
     EVT_END
 };
 
-EvtScript N(D_80242870_845440) = {
+EvtScript N(EVS_SetDoorRot_NiceHouse) = {
     EVT_CALL(RotateModel, MODEL_rndoor, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802428A0_845470) = {
+EvtScript N(EVS_MoveWalls_NiceHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_rnk1, LVar1, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_rnk2, LVar1, 1, 0, 0)
@@ -62,13 +62,13 @@ EvtScript N(D_802428A0_845470) = {
     EVT_END
 };
 
-EvtScript N(D_80242990_845560) = {
+EvtScript N(EVS_DropDoor_NiceHouse) = {
     EVT_CALL(RotateModel, MODEL_rndoor, LVar0, 1, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802429C0_845590) = {
+EvtScript N(EVS_ToggleVis_NiceHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(EnableGroup, MODEL_rin_in, TRUE)
@@ -79,13 +79,13 @@ EvtScript N(D_802429C0_845590) = {
     EVT_END
 };
 
-EvtScript N(D_80242A24_8455F4) = {
+EvtScript N(EVS_SetDoorRot_Storeroom) = {
     EVT_CALL(RotateModel, MODEL_skd, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242A54_845624) = {
+EvtScript N(EVS_MoveWalls_Storeroom) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(2.78125))
     EVT_CALL(TranslateModel, MODEL_skk1, 0, 0, LVar1)
@@ -99,13 +99,13 @@ EvtScript N(D_80242A54_845624) = {
     EVT_END
 };
 
-EvtScript N(D_80242B48_845718) = {
+EvtScript N(EVS_DropDoor_Storeroom) = {
     EVT_CALL(RotateModel, MODEL_skd, LVar0, 0, 0, -1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242B78_845748) = {
+EvtScript N(EVS_ToggleVis_Storeroom) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
     EVT_END_SWITCH
@@ -113,13 +113,13 @@ EvtScript N(D_80242B78_845748) = {
     EVT_END
 };
 
-EvtScript N(D_80242BA8_845778) = {
+EvtScript N(EVS_SetDoorRot_Warehouse) = {
     EVT_CALL(RotateModel, MODEL_hh_door, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242BD8_8457A8) = {
+EvtScript N(EVS_MoveWalls_Warehouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_hk1, LVar1, 0, 0, -1)
     EVT_CALL(RotateModel, MODEL_hk2, LVar1, 0, 0, -1)
@@ -128,30 +128,30 @@ EvtScript N(D_80242BD8_8457A8) = {
     EVT_END
 };
 
-EvtScript N(D_80242C58_845828) = {
+EvtScript N(EVS_ToggleVis_Warehouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(EnableGroup, MODEL_heiho_in, TRUE)
-            EVT_SET(MF_Unk_0A, TRUE)
+            EVT_SET(MF_MusicMixTrigger, TRUE)
         EVT_CASE_EQ(1)
             EVT_EXEC(N(D_80248798_84B368))
         EVT_CASE_EQ(3)
             EVT_CALL(EnableGroup, MODEL_heiho_in, FALSE)
             EVT_CALL(EnableGroup, MODEL_hi_soto, TRUE)
-            EVT_SET(MF_Unk_0A, FALSE)
+            EVT_SET(MF_MusicMixTrigger, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242D08_8458D8) = {
+EvtScript N(EVS_SetDoorRot_HiddenRoom) = {
     EVT_CALL(RotateModel, MODEL_hkai1, LVar0, 0, -1, 0)
     EVT_CALL(RotateModel, MODEL_hkai2, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242D58_845928) = {
+EvtScript N(EVS_MoveWalls_HiddenRoom) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_hk4, LVar1, 0, 0, -1)
     EVT_CALL(RotateModel, MODEL_hk5, LVar1, 0, 0, -1)
@@ -160,55 +160,103 @@ EvtScript N(D_80242D58_845928) = {
     EVT_END
 };
 
-EvtScript N(D_80242DD8_8459A8) = {
+EvtScript N(EVS_ToggleVis_HiddenRoom) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_80242DE8_8459B8)[] = {
+s32 N(InsideNPCs_Shop)[] = {
     NPC_HarryT,
     NPC_ShyGuy_02,
     -1
 };
 
-s32 N(D_80242DF4_8459C4)[] = {
-    NPC_ThreeSisters_01,
-    NPC_ThreeSisters_02,
+s32 N(InsideNPCs_NiceHouse)[] = {
+    NPC_NewResident1,
+    NPC_NewResident2,
     -1
 };
 
-s32 N(D_80242E00_8459D0)[] = {
+s32 N(InsideNPCs_Warehouse)[] = {
     NPC_ShyGuy_01,
     -1
 };
 
-EvtScript N(D_80242E08_8459D8) = {
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80242D08_8458D8)), EVT_PTR(N(D_80242D58_845928)), 0, EVT_PTR(N(D_80242DD8_8459A8)), COLLIDER_deilit_hk, COLLIDER_deilit_hku, MODEL_o13, 0)
+EvtScript N(EVS_MakeHiddenRoom) = {
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_HiddenRoom)),
+        EVT_PTR(N(EVS_MoveWalls_HiddenRoom)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_HiddenRoom)),
+        COLLIDER_deilit_hk,
+        COLLIDER_deilit_hku,
+        MODEL_o13,
+        NULL)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242E48_845A18) = {
-    EVT_CALL(MakeDoorAdvanced, 0x00002002, EVT_PTR(N(D_80242A24_8455F4)), EVT_PTR(N(D_80242A54_845624)), EVT_PTR(N(D_80242B48_845718)), EVT_PTR(N(D_80242B78_845748)), COLLIDER_deilit_sku, COLLIDER_deilit_sk, MODEL_o13, 0)
+EvtScript N(EVS_MakeStoreroom) = {
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_2, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_Storeroom)),
+        EVT_PTR(N(EVS_MoveWalls_Storeroom)),
+        EVT_PTR(N(EVS_DropDoor_Storeroom)),
+        EVT_PTR(N(EVS_ToggleVis_Storeroom)),
+        COLLIDER_deilit_sku,
+        COLLIDER_deilit_sk,
+        MODEL_o13,
+        NULL)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80242E88) = {
-    EVT_CALL(MakeDoorAdvanced, 0x00001002, EVT_PTR(N(D_802426B0_845280)), EVT_PTR(N(D_802426E0_8452B0)), 0, EVT_PTR(N(D_80242800_8453D0)), COLLIDER_deilit_m, COLLIDER_deilit_mu, MODEL_mise, EVT_PTR(N(D_80242DE8_8459B8)))
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80242870_845440)), EVT_PTR(N(D_802428A0_845470)), EVT_PTR(N(D_80242990_845560)), EVT_PTR(N(D_802429C0_845590)), COLLIDER_deilit_r, COLLIDER_deilit_ru, MODEL_rinjin, EVT_PTR(N(D_80242DF4_8459C4)))
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80242BA8_845778)), EVT_PTR(N(D_80242BD8_8457A8)), 0, EVT_PTR(N(D_80242C58_845828)), COLLIDER_deilit_h, COLLIDER_deilit_hu, MODEL_heiho_house, EVT_PTR(N(D_80242E00_8459D0)))
+EvtScript N(EVS_SetupRooms) = {
+    // harry's shop on the right
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_Shop)),
+        EVT_PTR(N(EVS_MoveWalls_Shop)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_Shop)),
+        COLLIDER_deilit_m,
+        COLLIDER_deilit_mu,
+        MODEL_mise,
+        EVT_PTR(N(InsideNPCs_Shop)))
+    // nice house in the middle
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_NiceHouse)),
+        EVT_PTR(N(EVS_MoveWalls_NiceHouse)),
+        EVT_PTR(N(EVS_DropDoor_NiceHouse)),
+        EVT_PTR(N(EVS_ToggleVis_NiceHouse)),
+        COLLIDER_deilit_r,
+        COLLIDER_deilit_ru,
+        MODEL_rinjin,
+        EVT_PTR(N(InsideNPCs_NiceHouse)))
+    // warehouse on the left
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_Warehouse)),
+        EVT_PTR(N(EVS_MoveWalls_Warehouse)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_Warehouse)),
+        COLLIDER_deilit_h,
+        COLLIDER_deilit_hu,
+        MODEL_heiho_house,
+        EVT_PTR(N(InsideNPCs_Warehouse)))
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
-        EVT_EXEC_WAIT(N(D_80242E48_845A18))
+        EVT_EXEC_WAIT(N(EVS_MakeStoreroom))
     EVT_END_IF
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_FOUND_HIDDEN_DOOR)
-        EVT_EXEC_WAIT(N(D_80242E08_8459D8))
+        EVT_EXEC_WAIT(N(EVS_MakeHiddenRoom))
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_RANGE(mac_04_ENTRY_2, mac_04_ENTRY_3)
             EVT_CALL(SetGroupEnabled, MODEL_heiho_in, 1)
-            EVT_CALL(N(func_802401C0_842D90))
+            EVT_CALL(N(InitEntryFromToybox))
             EVT_SET(LVar0, 90)
             EVT_CALL(RotateModel, MODEL_hk1, LVar0, 0, 0, -1)
             EVT_CALL(RotateModel, MODEL_hk2, LVar0, 0, 0, -1)
@@ -218,8 +266,8 @@ EvtScript N(EVS_80242E88) = {
             EVT_CALL(RotateModel, MODEL_hk6, LVar0, 0, 0, -1)
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, 3)
-            EVT_EXEC(N(D_80242800_8453D0))
-            EVT_EXEC(N(D_802429C0_845590))
+            EVT_EXEC(N(EVS_ToggleVis_Shop))
+            EVT_EXEC(N(EVS_ToggleVis_NiceHouse))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

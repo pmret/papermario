@@ -2,19 +2,8 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o287,
-    }
-};
-
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o286,
-    }
-};
+FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o287);
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o286);
 
 FoliageVectorList N(Tree1_Effects) = {
     .count = 2,
@@ -35,19 +24,8 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o290,
-    }
-};
-
-FoliageModelList N(Tree2_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o291,
-    }
-};
+FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o290);
+FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o291);
 
 FoliageVectorList N(Tree2_Effects) = {
     .count = 2,
@@ -68,19 +46,8 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o288,
-    }
-};
-
-FoliageModelList N(Tree3_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o289,
-    }
-};
+FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o288);
+FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o289);
 
 FoliageVectorList N(Tree3_Effects) = {
     .count = 2,

@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_END
 };
 
-API_CALLABLE(N(UpgradeStarPower)) {
+API_CALLABLE(N(UpgradeStarPowerCh2)) {
     set_max_SP(2);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -99,7 +99,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Mamar, TRUE)
-    EVT_CALL(N(UpgradeStarPower))
+    EVT_CALL(N(UpgradeStarPowerCh2))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0192, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)

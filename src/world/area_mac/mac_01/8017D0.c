@@ -566,7 +566,7 @@ ApiStatus func_80245028_8058A8(Evt* script, s32 isInitialCall) {
         menu->numEntries = numEntries;
         menu->initialPos = D_80262F68;
         create_popup_menu(menu);
-        func_800E98C4();
+        status_menu_respond_to_changes();
         close_status_menu();
         script->functionTemp[0] = 0;
     }
@@ -632,7 +632,7 @@ ApiStatus func_8024522C_805AAC(Evt* script, s32 isInitialCall) {
         menu->numEntries = numEntries;
         menu->initialPos = 0;
         create_popup_menu(menu);
-        func_800E98C4();
+        status_menu_respond_to_changes();
         close_status_menu();
         script->functionTemp[0] = 0;
     }

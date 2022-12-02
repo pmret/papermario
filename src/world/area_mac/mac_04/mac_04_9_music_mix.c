@@ -7,12 +7,12 @@ MusicProximityTrigger N(MusicMixTrigger) = {
     .innerDist = 100.0f,
     .outerDist = 120.0f,
     .unk = 9,
-    .manualActivationFlag = MF_Unk_0A,
+    .manualActivationFlag = MF_MusicMixTrigger,
 };
 
-EvtScript N(EVS_8024F4E8) = {
+EvtScript N(EVS_SetupMusicTriggers) = {
     EVT_CALL(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
-    EVT_CALL(func_802D5EE0, 0)
+    EVT_CALL(EnableMusicProximityMix, 0)
     EVT_THREAD
         EVT_CALL(N(MonitorMusicProximityTrigger), EVT_PTR(N(MusicMixTrigger)))
     EVT_END_THREAD

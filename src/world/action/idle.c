@@ -110,7 +110,7 @@ void action_update_idle_peach(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
             } else {
@@ -121,7 +121,7 @@ void action_update_idle_peach(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
         switch (playerStatus->actionSubstate) {
             case SUBSTATE_IDLE_DEFAULT:
                 if (!(playerStatus->flags & (PS_FLAGS_NO_STATIC_COLLISION | PS_FLAGS_INPUT_DISABLED))

@@ -21,8 +21,6 @@ s32 D_8008FF60[] = { 0, 1, 2, 3 };
 MapSettings gMapSettings;
 MapConfig* gMapConfig;
 
-extern char wMapBgName[];
-
 typedef struct {
     /* 0x00 */ char name[16];
     /* 0x10 */ u32 offset;
@@ -290,7 +288,7 @@ MapConfig mac_maps[] = {
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_02, 0x80243580), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_04, 0x80242080), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(mac_04), .bgName = "nok_bg" },
     { MAP(mac_05), .bgName = "nok_bg" },
     { MAP(mac_06), .bgName = "nok_bg" },
 };

@@ -7,7 +7,7 @@ EvtScript N(EVS_SetupMusic) = {
             EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
                 EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_INVASION, 0, 8)
             EVT_CASE_DEFAULT
-                EVT_EXEC(N(EVS_8024F4E8))
+                EVT_EXEC(N(EVS_SetupMusicTriggers))
         EVT_END_SWITCH
         EVT_THREAD
             EVT_WAIT(60)
