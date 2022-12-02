@@ -40,7 +40,7 @@ ApiStatus func_802411D8_D511C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_80243E88_846A58[];
+extern s32 pra_02_80243E88[];
 
 ApiStatus func_80241274_D51264(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -49,13 +49,13 @@ ApiStatus func_80241274_D51264(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            D_80243E88_846A58[i] = ptr[i];
+            pra_02_80243E88[i] = ptr[i];
         }
-        D_80243E88_846A58[i] = 0;
+        pra_02_80243E88[i] = 0;
     } else {
         for (i = 0; i < 91; i++) {
-            D_80243E88_846A58[i] = i + 128;
-            D_80243E88_846A58[91] = 0;
+            pra_02_80243E88[i] = i + 128;
+            pra_02_80243E88[91] = 0;
         }
     }
     return ApiStatus_DONE2;

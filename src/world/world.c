@@ -291,7 +291,7 @@ MapConfig mac_maps[] = {
     { MAP_UNSPLIT(mac_02, 0x80243580), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_04, 0x80242080), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(mac_05, 0x802441A0), .bgName = "nok_bg" },
+    { MAP(mac_05), .bgName = "nok_bg" },
     { MAP(mac_06), .bgName = "nok_bg" },
 };
 

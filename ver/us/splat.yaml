@@ -8999,23 +8999,17 @@ segments:
     start: 0x842BD0
     vram: 0x80240000
     subsegments:
-    - [0x842BD0, c]
-    - [0x842C20, c]
-    - [0x842D90, c]
-    - [0x842DF0, c]
-    - [0x843030, c]
-    - [0x844860, c]
-    - [0x844AC0, c]
-    - [0x844BF0, data]
-    - [0x844D50, data]
-    - [0x845280, data]
-    - [0x845CA0, data]
-    - [0x8467E0, data]
-    - [0x8469B0, data]
-    - [0x8508F0, data]
-    - [0x851410, data]
-    - [0x8520A0, data]
-    - [0x852120]
+    - [0x842BD0, c, mac_04_0_header]
+    - [0x842C20, c, mac_04_1_music]
+    - [0x842C20, c, mac_04_2_main]
+    - [0x842D90, c, mac_04_3_rooms]
+    - [0x842DF0, c, mac_04_4_foliage]
+    - [0x843030, c, mac_04_5_shop]
+    - [0x843030, c, mac_04_6_npc]
+    - [0x844860, c, mac_04_7_wish_scene]
+    - [0x844860, c, mac_04_8_entity]
+    - [0x844AC0, c, mac_04_9_music_mix]
+    - [0x844BF0]
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code

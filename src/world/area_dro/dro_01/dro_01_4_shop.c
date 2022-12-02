@@ -2,12 +2,29 @@
 #define NAMESPACE dro_01_Shop
 
 s32 N(ShopMessages)[] = {
-    MSG_Shop_0049, MSG_Shop_004A, MSG_Shop_004B, MSG_Shop_004C,
-    MSG_Shop_004D, MSG_Shop_004E, MSG_Shop_004F, MSG_Shop_0050,
-    MSG_Shop_0051, MSG_Shop_0052, MSG_Shop_0053, MSG_Shop_0054,
-    MSG_Shop_0055, MSG_Shop_0056, MSG_Shop_0057, MSG_Shop_0058,
-    MSG_Shop_0059, MSG_Shop_005A, MSG_Shop_005B, MSG_Shop_005C,
-    MSG_Shop_005D, MSG_Shop_005E, MSG_Shop_005F,
+    MSG_Shop_0049,
+    MSG_Shop_004A,
+    MSG_Shop_004B,
+    MSG_Shop_004C,
+    MSG_Shop_004D,
+    MSG_Shop_004E,
+    MSG_Shop_004F,
+    MSG_Shop_0050,
+    MSG_Shop_0051,
+    MSG_Shop_0052,
+    MSG_Shop_0053,
+    MSG_Shop_0054,
+    MSG_Shop_0055,
+    MSG_Shop_0056,
+    MSG_Shop_0057,
+    MSG_Shop_0058,
+    MSG_Shop_0059,
+    MSG_Shop_005A,
+    MSG_Shop_005B,
+    MSG_Shop_005C,
+    MSG_Shop_005D,
+    MSG_Shop_005E,
+    MSG_Shop_005F,
 };
 
 ShopItemData N(Inventory)[] = {

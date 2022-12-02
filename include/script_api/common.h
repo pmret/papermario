@@ -233,6 +233,7 @@ ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall);
 ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall);
 ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall);
 ApiStatus FadeInMusic(Evt* script, s32 isInitialCall);
+ApiStatus func_802D5EE0(Evt* script, s32 isInitialCall);
 ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall);
 ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall);
 ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall);

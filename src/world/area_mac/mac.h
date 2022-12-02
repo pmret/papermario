@@ -21,12 +21,18 @@ enum {
 };
 
 enum {
+    AF_MAC_02       = AreaFlag(2),
     AF_MAC_20       = AreaFlag(32),
     AF_MAC_21       = AreaFlag(33),
     AF_MAC_22       = AreaFlag(34),
     AF_MAC_23       = AreaFlag(35),
     AF_MAC_24       = AreaFlag(36),
     AF_MAC_25       = AreaFlag(37),
+    AF_MAC_2D       = AreaFlag(45),
+    AF_MAC_2E       = AreaFlag(46),
+    AF_MAC_30       = AreaFlag(48),
+    AF_MAC_31       = AreaFlag(49),
+    AF_MAC_32       = AreaFlag(50),
     AF_MAC_38       = AreaFlag(56),
     AF_MAC_3D       = AreaFlag(61),
     AF_MAC_3E       = AreaFlag(62),

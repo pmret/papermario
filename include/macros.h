@@ -16,9 +16,10 @@
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
-#define NAMESUFFIX
-#define A(sym) NS(AREA, sym, NAMESUFFIX)
-#define N(sym) NS(NAMESPACE, sym, NAMESUFFIX)
+#define NAME_SUFFIX
+#define NAME_PREFIX
+#define A(sym) NS(AREA, NAME_PREFIX, sym, NAME_SUFFIX)
+#define N(sym) NS(NAMESPACE, NAME_PREFIX, sym, NAME_SUFFIX)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -132,8 +133,8 @@
 /// X.10 fixed-point literal
 #define X10(f) (s32)(f * 1024.0f)
 
-#define _NS(x, y, z) x ## _ ## y ## z
-#define NS(x, y, z) _NS(x, y, z)
+#define _NS(w, x, y, z) w ## _ ## x ## y ## z
+#define NS(w, x, y, z) _NS(w, x, y, z)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
