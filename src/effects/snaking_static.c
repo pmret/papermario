@@ -51,7 +51,7 @@ EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     data->unk_30 = 255;
 
     data++;
-    for(i = 1; i<numParts; i++, data++) {
+    for(i = 1; i < numParts; i++, data++) {
         data->timeLeft = 20;
         data->unk_3C = (i - 1) * 360 / (numParts - 1);
         data->lifeTime = 0;
@@ -99,7 +99,7 @@ void snaking_static_update(EffectInstance* effect) {
         data->unk_24 = timeLeft * 16;
     }
     if (lifeTime < 16) {
-        data->unk_24 = (lifeTime * 16) + 0xF;
+        data->unk_24 = (lifeTime * 16) + 15;
     }
 
     data++;
