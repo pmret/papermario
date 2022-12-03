@@ -100,121 +100,402 @@ MAP_STATIC_PAD(1,key_choice);
 MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-s32 D_80248A98_82BD58[] = {
-    138, 140, 142, 149, 139, 128, 172, 157, 
-    156, 164, 163, 162, 148, 159, 158, 160, 
-    165, 166, 167, 168, 169, 170, 171, 173, 
-    174, 175, 141, 161, 147, -1 
+#ifdef NOPE
+enum {
+    I_00 = 0,
+    I_01 = 1,
+    I_02 = 2,
+    I_03 = 3,
+    I_04 = 4,
+    I_05 = 5,
+    I_06 = 6,
+    I_07 = 7,
+    I_08 = 8,
+    I_09 = 9,
+    I_0A = 10,
+    I_0B = 11,
+    I_0C = 12,
+    I_0D = 13,
+    I_0E = 14,
+    I_0F = 15,
+    I_10 = 16,
+    I_11 = 17,
+    I_12 = 18,
+    I_13 = 19,
+    I_14 = 20,
+    I_15 = 21,
+    I_16 = 22,
+    I_17 = 23,
+    I_18 = 24,
+    I_19 = 25,
+    I_1A = 26,
+    I_1B = 27,
+    I_1C = 28,
+    I_END = 29,
 };
 
-s32 D_80248B10_82BDD0[] = {
-    0, 194, 1, 182, 1, 176,  1, 137, 
-    1, 214, 1, 195, 1, 199,  4, 154, 
-    2, 192, 1, 193, 1, 201,  1, 216, 
-    1, 155, 1, 217, 3, 190,  1, 212, 
-    1, 213, 1, 185, 2, 189,  1, 202, 
-    1, 215, 1, 218, 1, 149,  1, 139, 
-    4, 143, 1, 183, 1, 184,  1, 196, 
-    1, 197, 1, 198, 2, 187,  1, 178, 
-    1, 179, 1, 180, 1, 186,  1, 204, 
-    4, 130, 1, 205, 1, 200,  2, 191, 
-    1, 207, 3, 188, 1, 206,  1, 208, 
-    1, 203, 1, 209, 1, 177,  1, 181, 
-    1, 211, 4, 128, 2, 210, -1,  -1
+enum {
+    R_00 = 0,
+    R_01 = 1,
+    R_02 = 2,
+    R_03 = 3,
+    R_04 = 4,
+    R_05 = 5,
+    R_06 = 6,
+    R_07 = 7,
+    R_08 = 8,
+    R_09 = 9,
+    R_0A = 10,
+    R_0B = 11,
+    R_0C = 12,
+    R_0D = 13,
+    R_0E = 14,
+    R_0F = 15,
+    R_10 = 16,
+    R_11 = 17,
+    R_12 = 18,
+    R_13 = 19,
+    R_14 = 20,
+    R_15 = 21,
+    R_16 = 22,
+    R_17 = 23,
+    R_18 = 24,
+    R_19 = 25,
+    R_1A = 26,
+    R_1B = 27,
+    R_1C = 28,
+    R_1D = 29,
+    R_1E = 30,
+    R_1F = 31,
+    R_20 = 32,
+    R_21 = 33,
+    R_22 = 34,
+    R_23 = 35,
+    R_24 = 36,
+    R_25 = 37,
+    R_26 = 38,
+    R_27 = 39,
+    R_28 = 40,
+    R_29 = 41,
+    R_2A = 42,
+    R_2B = 43,
+    R_2C = 44,
+    R_2D = 45,
+    R_2E = 46,
+    R_2F = 47,
+    R_30 = 48,
+    R_31 = 49,
+    R_32 = 50,
+    R_END = 51,
 };
 
-s8 D_80248CB0_82BF70[] = {
-    0x01, 0x01, 0x1A, 0x11, 0x11, 0x02, 0x03, 0x03, 0x03, 0x0C, 0x0C, 0x0C, 0x0C, 0x00, 0x00, 0x00, 0x04, 0x05, 0x06, 0x00, 0x00, 0x09, 0x0A, 0x27, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+enum {
+    QUALITY_BAD     = 0,
+    QUALITY_OK      = 1,
+    QUALITY_GOOD    = 2,
+    QUALITY_GREAT   = 3,
+    QUALITY_ODD     = 4,
 };
 
-s8 D_80248CD0_82BF90[] = {
-    0x01, 0x01, 0x1A, 0x11, 0x11, 0x02, 0x03, 0x03, 0x03, 0x0C, 0x0C, 0x0C, 0x0C, 0x0C, 0x0C, 0x0C, 0x04, 0x05, 0x06, 0x00, 0x07, 0x09, 0x0A, 0x27, 0x00, 0x10, 0x01, 0x03, 0x1E, 0x00, 0x00, 0x00
+// IngredientType
+s32 CookingIngredients[] = {
+    138,
+    ITEM_SUPER_SHROOM,
+    ITEM_ULTRA_SHROOM,
+    ITEM_LIFE_SHROOM,
+    ITEM_VOLT_SHROOM,
+    ITEM_FIRE_FLOWER,
+    ITEM_COCONUT,
+    ITEM_LIME,
+    ITEM_LEMON,
+    ITEM_HONEY_SYRUP,
+    ITEM_MAPLE_SYRUP,
+    ITEM_JAMMIN_JELLY,
+    ITEM_APPLE,
+    ITEM_RED_BERRY,
+    ITEM_BLUE_BERRY,
+    ITEM_YELLOW_BERRY,
+    ITEM_GOOMNUT,
+    ITEM_KOOPA_LEAF,
+    ITEM_DRIED_PASTA,
+    ITEM_DRIED_FRUIT,
+    ITEM_STRANGE_LEAF,
+    ITEM_CAKE_MIX,
+    ITEM_EGG,
+    ITEM_MELON,
+    ITEM_STINKY_HERB,
+    ITEM_ICED_POTATO,
+    ITEM_DRIED_SHROOM,
+    ITEM_BUBBLE_BERRY,
+    ITEM_WHACKAS_BUMP,
+    -1
 };
 
-s8 D_80248CF0_82BFB0[] = {
-    0x00, 0x11, 0x1A, 0x1A, 0x11, 0x11, 0x00, 0x00, 0x00, 0x13, 0x14, 0x15, 0x00, 0x00, 0x00, 0x00,
-    0x17, 0x17, 0x12, 0x17, 0x17, 0x19, 0x12, 0x00, 0x00, 0x12, 0x01, 0x00, 0x00, 0xFF, 0x00, 0x1A,
-    0x1A, 0x11, 0x12, 0x00, 0x00, 0x00, 0x1B, 0x1C, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x16, 0x16, 0x12,
-    0x17, 0x16, 0x19, 0x12, 0x00, 0x00, 0x12, 0x11, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x1A, 0x1A, 0x1E,
-    0x00, 0x00, 0x00, 0x1F, 0x20, 0x21, 0x00, 0x00, 0x00, 0x00, 0x16, 0x16, 0x1E, 0x17, 0x16, 0x22,
-    0x1E, 0x00, 0x00, 0x1E, 0x1A, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00,
-    0x1B, 0x1C, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x16, 0x16, 0x12, 0x17, 0x16, 0x22, 0x12, 0x00, 0x00,
-    0x12, 0x1A, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x12, 0x00, 0x00, 0x00, 0x1B, 0x1C, 0x1D,
-    0x00, 0x00, 0x00, 0x00, 0x16, 0x16, 0x12, 0x24, 0x07, 0x23, 0x12, 0x00, 0x00, 0x12, 0x11, 0x00,
-    0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x12, 0x00, 0x00, 0x00, 0x00, 0x25, 0x26, 0x00, 0x00, 0x0F, 0x01, 0x00, 0x00, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x03, 0x0C, 0x27, 0x0C, 0x0C, 0x0C, 0x0C, 0x00, 0x0C,
-    0x12, 0x00, 0x00, 0x28, 0x00, 0x0C, 0x00, 0x12, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0x00, 0x0C, 0x03, 0x0C, 0x27, 0x0C, 0x0C, 0x0C, 0x0C, 0x00, 0x0C, 0x00, 0x00, 0x00,
-    0x2A, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0x00, 0x03, 0x0C, 0x27, 0x0C, 0x0C, 0x0C, 0x0C, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x2B, 0x00, 0x27,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x0C,
-    0x27, 0x03, 0x03, 0x03, 0x03, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x2C, 0x00, 0x27, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x27, 0x0C, 0x0C,
-    0x0C, 0x0C, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x30, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x27, 0x27, 0x27, 0x27, 0x00,
-    0x0C, 0x00, 0x00, 0x00, 0x2D, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x0C, 0x0C, 0x0C, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x2E, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x0C, 0x0C, 0x00, 0x12, 0x12, 0x00, 0x18, 0x08, 0x00,
-    0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x0C, 0x00, 0x12, 0x12, 0x00, 0x18, 0x08, 0x00, 0x27, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0x00, 0x00, 0x12, 0x12, 0x00, 0x18, 0x08, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0x00, 0x12, 0x12, 0x00, 0x12, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x2F,
-    0x00, 0x00, 0x30, 0x00, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x1E, 0x12, 0x00,
-    0x12, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x31, 0x00, 0x00, 0x00, 0x00,
-    0x1E, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x32, 0x0B, 0x27, 0x07, 0x1E, 0x00, 0x00,
-    0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x08, 0x0D, 0x30, 0x12, 0x00, 0x00, 0x00, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x0B, 0x12, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00,
-    0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00
+typedef struct CookingResult {
+    /* 00 */ s32 quality;
+    /* 04 */ s32 itemID;
+} CookingResult; // size = 0x8
+
+CookingResult CookingResults[] = {
+    { QUALITY_BAD,   ITEM_MISTAKE },
+    { QUALITY_OK,    ITEM_FRIED_SHROOM },
+    { QUALITY_OK,    ITEM_SPICY_SOUP },
+    { QUALITY_OK,    ITEM_TASTY_TONIC },
+    { QUALITY_OK,    ITEM_NUTTY_CAKE },
+    { QUALITY_OK,    ITEM_KOOPA_TEA },
+    { QUALITY_OK,    ITEM_SPAGHETTI },
+    { QUALITY_ODD,   ITEM_DIZZY_DIAL },
+    { QUALITY_GOOD,  ITEM_BIG_COOKIE },
+    { QUALITY_OK,    ITEM_CAKE },
+    { QUALITY_OK,    ITEM_FRIED_EGG },
+    { QUALITY_OK,    ITEM_BOILED_EGG },
+    { QUALITY_OK,    ITEM_SUPER_SODA },
+    { QUALITY_OK,    ITEM_YOSHI_COOKIE },
+    { QUALITY_GREAT, ITEM_DELUXE_FEAST },
+    { QUALITY_OK,    ITEM_FROZEN_FRIES },
+    { QUALITY_OK,    ITEM_POTATO_SALAD },
+    { QUALITY_OK,    ITEM_HOT_SHROOM },
+    { QUALITY_GOOD,  ITEM_BLAND_MEAL },
+    { QUALITY_OK,    ITEM_HONEY_SHROOM },
+    { QUALITY_OK,    ITEM_MAPLE_SHROOM },
+    { QUALITY_OK,    ITEM_JELLY_SHROOM1 },
+    { QUALITY_OK,    ITEM_LIFE_SHROOM },
+    { QUALITY_OK,    ITEM_VOLT_SHROOM },
+    { QUALITY_ODD,   ITEM_SLEEPY_SHEEP },
+    { QUALITY_OK,    ITEM_SHROOM_CAKE },
+    { QUALITY_OK,    ITEM_SHROOM_STEAK },
+    { QUALITY_OK,    ITEM_HONEY_SUPER },
+    { QUALITY_OK,    ITEM_MAPLE_SUPER },
+    { QUALITY_OK,    ITEM_JELLY_SUPER },
+    { QUALITY_GOOD,  ITEM_YUMMY_MEAL },
+    { QUALITY_OK,    ITEM_HONEY_ULTRA },
+    { QUALITY_OK,    ITEM_MAPLE_ULTRA },
+    { QUALITY_OK,    ITEM_JELLY_ULTRA },
+    { QUALITY_OK,    ITEM_SWEET_SHROOM },
+    { QUALITY_OK,    ITEM_ELECTRO_POP },
+    { QUALITY_ODD,   ITEM_THUNDER_RAGE },
+    { QUALITY_OK,    ITEM_FIRE_POP },
+    { QUALITY_OK,    ITEM_EGG_MISSILE },
+    { QUALITY_GOOD,  ITEM_SPECIAL_SHAKE },
+    { QUALITY_OK,    ITEM_COCO_POP },
+    { QUALITY_GREAT, ITEM_HEALTHY_JUICE },
+    { QUALITY_OK,    ITEM_LIME_CANDY },
+    { QUALITY_OK,    ITEM_LEMON_CANDY },
+    { QUALITY_OK,    ITEM_HONEY_CANDY },
+    { QUALITY_OK,    ITEM_JELLY_POP },
+    { QUALITY_OK,    ITEM_APPLE_PIE },
+    { QUALITY_OK,    ITEM_KOOPASTA },
+    { QUALITY_OK,    ITEM_KOOKY_COOKIE },
+    { QUALITY_ODD,   ITEM_FIRE_FLOWER },
+    { QUALITY_GOOD,  ITEM_STRANGE_CAKE },
+    { -1, -1 },
 };
 
-s32 D_8024903C_82C2FC[] = {
-    191, 141,  41, 191, 169,  41, 191, 174, 
-     41, 213, 199,  30, 213, 182,  18, 213, 
-    185,  30, 213, 184,  14, 169, 147,  14, 
+s8 SingleRecipesWithoutCookbook[] = {
+    R_01,
+    R_01,
+    R_1A,
+    R_11,
+    R_11,
+    R_02,
+    R_03,
+    R_03,
+    R_03,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_00,
+    R_00,
+    R_00,
+    R_04,
+    R_05,
+    R_06,
+    R_00,
+    R_00,
+    R_09,
+    R_0A,
+    R_27,
+    R_00,
+    R_10,
+    R_00,
+    R_00,
+    R_00,
 };
 
-s32 D_8024909C_82C35C[] = {
-    128, 137, 155, 143, 149, 154, 139, 182, 
-    181, 176, 195, 199, 201, 216, 213, 202, 
-    189, 130, 200, 177, 211, 192, 191, 
+s8 SingleRecipesWithCookbook[] = {
+    R_01,
+    R_01,
+    R_1A,
+    R_11,
+    R_11,
+    R_02,
+    R_03,
+    R_03,
+    R_03,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_0C,
+    R_04,
+    R_05,
+    R_06,
+    R_00,
+    R_07,
+    R_09,
+    R_0A,
+    R_27,
+    R_00,
+    R_10,
+    R_01,
+    R_03,
+    R_1E,
 };
 
-API_CALLABLE(func_80242C44_825F04);
-API_CALLABLE(func_80242DBC_82607C);
-API_CALLABLE(func_80242F60_826220);
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242C44_825F04);
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242DBC_82607C);
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242F60_826220);
+s8 DoubleRecipesMatrix[] = {
+/*          I_00  I_01  I_02  I_03  I_04  I_05  I_06  I_07  I_08  I_09  I_0A  I_0B  I_0C  I_0D  I_0E  I_0F  I_10  I_11  I_12  I_13  I_14  I_15  I_16  I_17  I_18  I_19  I_1A  I_1B  I_1C */
+/* I_00 */  R_00, R_11, R_1A, R_1A, R_11, R_11, R_00, R_00, R_00, R_13, R_14, R_15, R_00, R_00, R_00, R_00, R_17, R_17, R_12, R_17, R_17, R_19, R_12, R_00, R_00, R_12, R_01, R_00, R_00, 
+/* I_01 */    -1, R_00, R_1A, R_1A, R_11, R_12, R_00, R_00, R_00, R_1B, R_1C, R_1D, R_00, R_00, R_00, R_00, R_16, R_16, R_12, R_17, R_16, R_19, R_12, R_00, R_00, R_12, R_11, R_00, R_00, 
+/* I_02 */    -1,   -1, R_00, R_1A, R_1A, R_1E, R_00, R_00, R_00, R_1F, R_20, R_21, R_00, R_00, R_00, R_00, R_16, R_16, R_1E, R_17, R_16, R_22, R_1E, R_00, R_00, R_1E, R_1A, R_00, R_00, 
+/* I_03 */    -1,   -1,   -1, R_00, R_00, R_12, R_00, R_00, R_00, R_1B, R_1C, R_1D, R_00, R_00, R_00, R_00, R_16, R_16, R_12, R_17, R_16, R_22, R_12, R_00, R_00, R_12, R_1A, R_00, R_00, 
+/* I_04 */    -1,   -1,   -1,   -1, R_00, R_12, R_00, R_00, R_00, R_1B, R_1C, R_1D, R_00, R_00, R_00, R_00, R_16, R_16, R_12, R_24, R_07, R_23, R_12, R_00, R_00, R_12, R_11, R_00, R_00, 
+/* I_05 */    -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, R_00, R_00, R_00, R_00, R_00, R_00, R_00, R_00, R_12, R_00, R_00, R_00, R_00, R_25, R_26, R_00, R_00, R_0F, R_01, R_00, R_00, 
+/* I_06 */    -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, R_03, R_0C, R_27, R_0C, R_0C, R_0C, R_0C, R_00, R_0C, R_12, R_00, R_00, R_28, R_00, R_0C, R_00, R_12, R_00, R_00, R_00, 
+/* I_07 */    -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_0C, R_03, R_0C, R_27, R_0C, R_0C, R_0C, R_0C, R_00, R_0C, R_00, R_00, R_00, R_2A, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_08 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_03, R_0C, R_27, R_0C, R_0C, R_0C, R_0C, R_00, R_0C, R_00, R_00, R_00, R_2B, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_09 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_0C, R_27, R_03, R_03, R_03, R_03, R_00, R_0C, R_00, R_00, R_00, R_2C, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0A */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_27, R_0C, R_0C, R_0C, R_0C, R_00, R_0C, R_00, R_00, R_00, R_30, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0B */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_27, R_27, R_27, R_27, R_00, R_0C, R_00, R_00, R_00, R_2D, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0C */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_0C, R_0C, R_0C, R_00, R_00, R_00, R_00, R_00, R_2E, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0D */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_0C, R_0C, R_00, R_12, R_12, R_00, R_18, R_08, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0E */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_0C, R_00, R_12, R_12, R_00, R_18, R_08, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_0F */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_12, R_12, R_00, R_18, R_08, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_10 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_12, R_12, R_00, R_12, R_08, R_00, R_00, R_00, R_00, R_00, R_00, R_00, 
+/* I_11 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_2F, R_00, R_00, R_30, R_00, R_27, R_00, R_00, R_00, R_00, R_00, 
+/* I_12 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_1E, R_12, R_00, R_12, R_00, R_00, R_12, R_00, R_00, R_00, 
+/* I_13 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_31, R_00, R_00, R_00, R_00, R_1E, R_00, R_00, R_00, 
+/* I_14 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_32, R_0B, R_27, R_07, R_1E, R_00, R_00, R_00, 
+/* I_15 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_08, R_0D, R_30, R_12, R_00, R_00, R_00, 
+/* I_16 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_0B, R_12, R_00, R_00, R_00, 
+/* I_17 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, R_00, R_00, R_00, 
+/* I_18 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, R_00, R_00, 
+/* I_19 */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, R_00, 
+/* I_1A */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, R_00, 
+/* I_1B */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, R_00, 
+/* I_1C */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, R_00, 
+};
+
+s32 ExtraDoubleRecipes[] = {
+    ITEM_SPECIAL_SHAKE, ITEM_DRIED_SHROOM,  ITEM_COOKBOOK,
+    ITEM_SPECIAL_SHAKE, ITEM_STRANGE_LEAF,  ITEM_COOKBOOK,
+    ITEM_SPECIAL_SHAKE, ITEM_STINKY_HERB,   ITEM_COOKBOOK,
+    ITEM_POTATO_SALAD,  ITEM_SPAGHETTI,     ITEM_CRYSTAL_BERRY,
+    ITEM_POTATO_SALAD,  ITEM_FRIED_SHROOM,  ITEM_PULSE_STONE,
+    ITEM_POTATO_SALAD,  ITEM_HOT_SHROOM,    ITEM_CRYSTAL_BERRY,
+    ITEM_POTATO_SALAD,  ITEM_SHROOM_STEAK,  ITEM_DIPLOMA,
+    ITEM_STRANGE_LEAF,  ITEM_WHACKAS_BUMP,  ITEM_DIPLOMA,
+};
+
+s32 MysteryResultOptions[] = {
+    ITEM_FIRE_FLOWER,
+    ITEM_TASTY_TONIC,
+    ITEM_SUPER_SODA,
+    ITEM_SLEEPY_SHEEP,
+    ITEM_LIFE_SHROOM,
+    ITEM_DIZZY_DIAL,
+    ITEM_VOLT_SHROOM,
+    ITEM_FRIED_SHROOM,
+    ITEM_KOOPASTA,
+    ITEM_SPICY_SOUP,
+    ITEM_KOOPA_TEA,
+    ITEM_SPAGHETTI,
+    ITEM_FRIED_EGG,
+    ITEM_BOILED_EGG,
+    ITEM_POTATO_SALAD,
+    ITEM_HONEY_SHROOM,
+    ITEM_BLAND_MEAL,
+    ITEM_THUNDER_RAGE,
+    ITEM_EGG_MISSILE,
+    ITEM_APPLE_PIE,
+    ITEM_KOOKY_COOKIE,
+    ITEM_BIG_COOKIE,
+    ITEM_SPECIAL_SHAKE,
+};
+
+API_CALLABLE(GetCookResultForDoubleRecipe);
+API_CALLABLE(SetRecipeDiscovered);
+
+// result in LVar6, quality in LVar7, item to remove in LVar8?
+
+s32 func_80242C44_825F04(Evt* script) {
+    CookingResult* result;
+    s32 hasCookbook;
+    s32 inputItem;
+    s32 outVarItemID;
+    s32 outVarQuality;
+    s32 inputIdx;
+    s32 resultItemID;
+    s32 resultQuality;
+    s32 var_v0;
+    s32* args;
+    s32* var_v1;
+    s32 resultIdx;
+    s32 i;
+
+    args = script->ptrReadPos;
+    outVarItemID = *args++;
+    outVarQuality = *args++;
+    inputItem = evt_get_variable(script, *args++);
+    hasCookbook = evt_get_variable(script, *args++);
+    
+    if (inputItem == ITEM_MYSTERY) {
+        if (rand_int(1000) < 500) {
+            resultItemID = ITEM_MISTAKE;
+            resultQuality = 0;
+        } else {
+            resultItemID = MysteryResultOptions[rand_int(10000) % 23];
+            resultQuality = 4;
+        }
+    } else {
+        for (inputIdx = 0; inputIdx < 0x1D; inputIdx++) {
+            if (CookingIngredients[inputIdx] == inputItem) {
+                break;
+            }
+        }
+        if (inputIdx < 0x1D) {
+            if (hasCookbook) {
+                resultIdx = SingleRecipesWithCookbook[inputIdx];
+            } else {
+                resultIdx = SingleRecipesWithoutCookbook[inputIdx];
+            }
+        } else {
+            resultIdx = 0;
+        }
+        result = &CookingResults[resultIdx];
+        resultQuality = result->quality;
+        resultItemID = result->itemID;
+    }
+    evt_set_variable(script, outVarItemID, resultItemID);
+    evt_set_variable(script, outVarQuality, resultQuality);
+    return 2;
+}
+
+INCLUDE_ASM(s32, "world/area_mac/mac_02/mac_02_6_npc", GetCookResultForDoubleRecipe);
+// actual result in LVar6
+INCLUDE_ASM(s32, "world/area_mac/mac_02/mac_02_6_npc", SetRecipeDiscovered);
 //MAP_DATA_SECTION_START
 
-API_CALLABLE(N(func_80243040_826300)) {
+API_CALLABLE(N(GetItemCount)) {
     Bytecode args = *script->ptrReadPos;
 
     evt_set_variable(script, args++, get_item_count());
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80243088_826348)) {
+API_CALLABLE(N(CheckItemsHasRoom)) {
     Bytecode args = *script->ptrReadPos;
 
     evt_set_variable(script, args++, get_item_empty_count());
@@ -223,18 +504,18 @@ API_CALLABLE(N(func_80243088_826348)) {
 
 static s32 N(TayceT_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 
-API_CALLABLE(N(func_802430D0_826390)) {
+API_CALLABLE(N(TayceT_MakeItemList)) {
     s32 i;
 
-    for (i = 0; i < 91; i++) {
-        N(TayceT_ItemChoiceList)[i] = i + 128;
+    for (i = 0; i < ITEM_NUM_CONSUMABLES; i++) {
+        N(TayceT_ItemChoiceList)[i] = i + ITEM_FIRST_CONSUMABLE;
     }
-    N(TayceT_ItemChoiceList)[i] = 0;
+    N(TayceT_ItemChoiceList)[i] = ITEM_NONE;
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_802490F8_82C3B8) = {
+EvtScript N(EVS_Scene_TayceTCooking) = {
     EVT_CALL(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_TayceT, ANIM_TayceT_Walk)
     EVT_CALL(NpcMoveTo, NPC_TayceT, -186, -381, 20)
@@ -260,9 +541,9 @@ s32 N(ItemList_FryingPan)[] = {
     ITEM_NONE
 };
 
-EvtScript N(D_8024926C_82C52C) = {
+EvtScript N(EVS_TayceT_FryingPanAndCake) = {
     EVT_IF_EQ(GF_MAC02_TayceT_HoldingCake, TRUE)
-        EVT_CALL(N(func_80243088_826348), LVar0)
+        EVT_CALL(N(CheckItemsHasRoom), LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001A)
             EVT_GIVE_CONSUMABLE_REWARD_ALT(ITEM_CAKE)
@@ -275,17 +556,15 @@ EvtScript N(D_8024926C_82C52C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_IdleSad, 0, MSG_MAC_Bridge_0017)
-    EVT_SET(LVar0, EVT_PTR(N(ItemList_FryingPan)))
-    EVT_SET(LVar1, 0)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+    EVT_CHOOSE_KEY_ITEM_FROM(N(ItemList_FryingPan))
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_IdleSad, 0, MSG_MAC_Bridge_0018)
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_TalkHappy, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0019)
-            EVT_EXEC_WAIT(N(D_802490F8_82C3B8))
-            EVT_CALL(N(func_80243088_826348), LVar0)
+            EVT_EXEC_WAIT(N(EVS_Scene_TayceTCooking))
+            EVT_CALL(N(CheckItemsHasRoom), LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001A)
                 EVT_GIVE_CONSUMABLE_REWARD_ALT(ITEM_CAKE)
@@ -305,7 +584,7 @@ s32 N(ItemList_Cookbook)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(D_80249550_82C810) = {
+EvtScript N(EVS_TayceT_RequestCookbook) = {
     EVT_IF_EQ(AF_MAC_01, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001D)
         EVT_SET(AF_MAC_01, TRUE)
@@ -327,7 +606,14 @@ EvtScript N(D_80249550_82C810) = {
     EVT_END
 };
 
-EvtScript N(D_80249684_82C944) = {
+EvtScript N(EVS_TayceT_Cook) = {
+    #define LABEL_CHOOSE_FIRST 1
+    #define LABEL_CHOOSE_SECOND 2
+    #define LABEL_CONFIRM_ONE 5
+    #define LABEL_COOK 6
+    #define LABEL_DONE 9
+
+   // greeting and opening choice
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_EQ(GF_MAC02_Met_TayceT, FALSE)
         EVT_SET(GF_MAC02_Met_TayceT, TRUE)
@@ -341,23 +627,23 @@ EvtScript N(D_80249684_82C944) = {
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0002)
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(func_80243040_826300), LVar0)
+    EVT_CALL(N(GetItemCount), LVar0)
     EVT_IF_LE(LVar0, 0)
         EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0003)
-        EVT_GOTO(9)
+        EVT_GOTO(LABEL_DONE)
     EVT_END_IF
     EVT_CALL(ShowChoice, MSG_Choice_0010)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0004)
-        EVT_GOTO(9)
+        EVT_GOTO(LABEL_DONE)
     EVT_END_IF
     EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0005)
-    EVT_LABEL(1)
+
+   // choose the first ingredient
+    EVT_LABEL(LABEL_CHOOSE_FIRST)
     EVT_SET(LVar3, 0)
-    EVT_CALL(N(func_802430D0_826390))
-    EVT_SET(LVar0, N(TayceT_ItemChoiceList))
-    EVT_SET(LVar1, 0)
-    EVT_EXEC_WAIT(N(EVS_ChooseItem))
+    EVT_CALL(N(TayceT_MakeItemList))
+    EVT_CHOOSE_CONSUMABLE_FROM(N(TayceT_ItemChoiceList), 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
@@ -365,7 +651,7 @@ EvtScript N(D_80249684_82C944) = {
             EVT_CALL(ShowChoice, MSG_Choice_0009)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0004)
-                EVT_GOTO(9)
+                EVT_GOTO(LABEL_DONE)
             EVT_END_IF
             EVT_CALL(CloseMessage)
             EVT_SET(LVar3, 1)
@@ -374,28 +660,28 @@ EvtScript N(D_80249684_82C944) = {
             EVT_CALL(AddItem, LVar0, LVar1)
     EVT_END_SWITCH
     EVT_IF_EQ(LVar3, 1)
-        EVT_GOTO(1)
+        EVT_GOTO(LABEL_CHOOSE_FIRST)
     EVT_END_IF
     EVT_IF_EQ(GF_MAC02_TayceT_HasCookbook, FALSE)
-        EVT_GOTO(5)
+        EVT_GOTO(LABEL_CONFIRM_ONE)
     EVT_END_IF
-    EVT_CALL(N(func_80243040_826300), LVar0)
+    EVT_CALL(N(GetItemCount), LVar0)
     EVT_IF_LT(LVar0, 2)
-        EVT_GOTO(5)
+        EVT_GOTO(LABEL_CONFIRM_ONE)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0007)
     EVT_CALL(ShowChoice, MSG_Choice_0010)
     EVT_CALL(CloseMessage)
     EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(5)
+        EVT_GOTO(LABEL_CONFIRM_ONE)
     EVT_END_IF
-    EVT_LABEL(2)
+
+    // choose the second ingredient
+    EVT_LABEL(LABEL_CHOOSE_SECOND)
     EVT_CALL(RemoveItem, LVar8, LVar0)
     EVT_SET(LVar3, 0)
-    EVT_CALL(N(func_802430D0_826390))
-    EVT_SET(LVar0, N(TayceT_ItemChoiceList))
-    EVT_SET(LVar1, 0)
-    EVT_EXEC_WAIT(N(EVS_ChooseItem))
+    EVT_CALL(N(TayceT_MakeItemList))
+    EVT_CHOOSE_CONSUMABLE_FROM(N(TayceT_ItemChoiceList), 0)
     EVT_CALL(AddItem, LVar8, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -404,11 +690,11 @@ EvtScript N(D_80249684_82C944) = {
             EVT_CALL(ShowChoice, MSG_Choice_0008)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(CloseMessage)
-                EVT_GOTO(5)
+                EVT_GOTO(LABEL_CONFIRM_ONE)
             EVT_END_IF
             EVT_IF_EQ(LVar0, 2)
                 EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0004)
-                EVT_GOTO(9)
+                EVT_GOTO(LABEL_DONE)
             EVT_END_IF
             EVT_CALL(CloseMessage)
             EVT_SET(LVar3, 1)
@@ -421,8 +707,11 @@ EvtScript N(D_80249684_82C944) = {
             EVT_END_IF
     EVT_END_SWITCH
     EVT_IF_EQ(LVar3, 1)
-        EVT_GOTO(2)
+        EVT_GOTO(LABEL_CHOOSE_SECOND)
     EVT_END_IF
+
+    // confirm cooking with two ingredients
+    // no label here, but this position would be LABEL_CONFIRM_TWO
     EVT_SET(LVar0, LVar8)
     EVT_CALL(N(GetItemName), LVar0)
     EVT_CALL(SetMessageMsg, LVar0, 0)
@@ -433,13 +722,15 @@ EvtScript N(D_80249684_82C944) = {
     EVT_CALL(ShowChoice, MSG_Choice_0010)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_000C)
-        EVT_GOTO(9)
+        EVT_GOTO(LABEL_DONE)
     EVT_END_IF
-    EVT_CALL(func_80242DBC_82607C, LVar6, LVar7, LVar8, LVar9)
+    EVT_CALL(GetCookResultForDoubleRecipe, LVar6, LVar7, LVar8, LVar9)
     EVT_CALL(RemoveItem, LVar8, LVar0)
     EVT_CALL(RemoveItem, LVar9, LVar0)
-    EVT_GOTO(6)
-    EVT_LABEL(5)
+    EVT_GOTO(LABEL_COOK)
+
+    // confirm cooking with one ingredient
+    EVT_LABEL(LABEL_CONFIRM_ONE)
     EVT_SET(LVar0, LVar8)
     EVT_CALL(N(GetItemName), LVar0)
     EVT_CALL(SetMessageMsg, LVar0, 0)
@@ -447,13 +738,15 @@ EvtScript N(D_80249684_82C944) = {
     EVT_CALL(ShowChoice, MSG_Choice_0010)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_000C)
-        EVT_GOTO(9)
+        EVT_GOTO(LABEL_DONE)
     EVT_END_IF
     EVT_CALL(func_80242C44_825F04, LVar6, LVar7, LVar8, GF_MAC02_TayceT_HasCookbook)
     EVT_CALL(RemoveItem, LVar8, LVar0)
-    EVT_LABEL(6)
+
+    // the actual cooking animation and reaction message
+    EVT_LABEL(LABEL_COOK)
     EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_000D)
-    EVT_EXEC_WAIT(N(D_802490F8_82C3B8))
+    EVT_EXEC_WAIT(N(EVS_Scene_TayceTCooking))
     EVT_SWITCH(LVar7)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0012)
@@ -467,10 +760,12 @@ EvtScript N(D_80249684_82C944) = {
             EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0011)
     EVT_END_SWITCH
     EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0014)
-    EVT_CALL(func_80242F60_826220, LVar6)
+    EVT_CALL(SetRecipeDiscovered, LVar6)
     EVT_GIVE_CONSUMABLE_REWARD_ALT(LVar6)
     EVT_CALL(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0015)
-    EVT_LABEL(9)
+
+    // end the script
+    EVT_LABEL(LABEL_DONE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -479,15 +774,15 @@ EvtScript N(D_80249684_82C944) = {
 EvtScript N(EVS_NpcInteract_TayceT) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
         EVT_IF_LT(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
-            EVT_EXEC_WAIT(N(D_8024926C_82C52C))
+            EVT_EXEC_WAIT(N(EVS_TayceT_FryingPanAndCake))
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(FindKeyItem, ITEM_COOKBOOK, LVar0)
     EVT_IF_EQ(LVar0, -1)
-        EVT_EXEC_WAIT(N(D_80249684_82C944))
+        EVT_EXEC_WAIT(N(EVS_TayceT_Cook))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(D_80249550_82C810))
+        EVT_EXEC_WAIT(N(EVS_TayceT_RequestCookbook))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -510,6 +805,9 @@ EvtScript N(EVS_NpcInit_TayceT) = {
     EVT_RETURN
     EVT_END
 };
+#endif
+
+#include "npc_tayce_t.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
