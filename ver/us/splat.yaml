@@ -8965,18 +8965,15 @@ segments:
     start: 0x8232C0
     vram: 0x80240000
     subsegments:
-    - [0x8232C0, c]
-    - [0x8238B0, c]
-    - [0x823970, c]
-    - [0x823BB0, c]
-    - [0x823BF0, c]
-    - [0x8267E0, data]
-    - [0x8268F0, data]
-    - [0x827E70, data]
-    - [0x8282E0, data]
-    - [0x828F10, data]
-    - [0x8313E0, data]
-    - [0x831490]
+    - [0x8232C0, c, mac_02_0_header]
+    - [0x8232C0, c, mac_02_1_music]
+    - [0x8232C0, c, mac_02_2_main]
+    - [0x8238B0, c, mac_02_3_rooms]
+    - [0x823970, c, mac_02_4_foliage]
+    - [0x823BB0, c, mac_02_5_entity]
+    - [0x823BF0, c, mac_02_6_npc]
+    - [0x8266B0, c, mac_02_7_music_mix]
+    - [0x8267E0]
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
