@@ -14,20 +14,20 @@ MAP_STATIC_PAD(1,key_choice);
 MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-#include "npc_tayce_t.inc.c"
+#include "npc/tayce_t.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
-#include "npc_fice_t.inc.c"
-#include "npc_bootler.inc.c"
-#include "npc_shyguy_thief.inc.c"
-#include "npc_toad_1.inc.c"
-#include "npc_cooking_apprentice.inc.c"
-#include "npc_toad_2.inc.c"
-#include "npc_toad_kid.inc.c"
-#include "npc_toad_3.inc.c"
-#include "npc_toad_4.inc.c"
-#include "npc_bubulb.inc.c"
+#include "npc/fice_t.inc.c"
+#include "npc/bootler.inc.c"
+#include "npc/shyguy_thief.inc.c"
+#include "npc/toad_1.inc.c"
+#include "npc/cooking_apprentice.inc.c"
+#include "npc/toad_2.inc.c"
+#include "npc/toad_kid.inc.c"
+#include "npc/toad_3.inc.c"
+#include "npc/toad_4.inc.c"
+#include "npc/bubulb.inc.c"
 
 s32 N(D_8024CB04_82FDC4)[] = {
     ANIM_TayceT_Still,

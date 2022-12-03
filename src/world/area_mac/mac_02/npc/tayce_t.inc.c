@@ -1,92 +1,94 @@
-enum {
-    iRSH = 0,
-    iSSH = 1,
-    iUSH = 2,
-    iLSH = 3,
-    iVSH = 4,
-    iFFL = 5,
-    iCOC = 6,
-    iLIM = 7,
-    iLEM = 8,
-    iHSY = 9,
-    iMSY = 10,
-    iJAM = 11,
-    iAPP = 12,
-    iRBY = 13,
-    iBBY = 14,
-    iYBY = 15,
-    iGMN = 16,
-    iKLF = 17,
-    iDRP = 18,
-    iDRF = 19,
-    iSLF = 20,
-    iMIX = 21,
-    iEGG = 22,
-    iMEL = 23,
-    iSTK = 24,
-    iPOT = 25,
-    iDSH = 26,
-    iBUB = 27,
-    iBMP = 28,
+// enum mapping itemIDs -> index in single recipe arrays and column/rows in double recipe matrix
+enum CookingIngredientID {
+    iRSH = 0,   // ITEM_MUSHROOM
+    iSSH = 1,   // ITEM_SUPER_SHROOM
+    iUSH = 2,   // ITEM_ULTRA_SHROOM
+    iLSH = 3,   // ITEM_LIFE_SHROOM
+    iVSH = 4,   // ITEM_VOLT_SHROOM
+    iFFL = 5,   // ITEM_FIRE_FLOWER
+    iCOC = 6,   // ITEM_COCONUT
+    iLIM = 7,   // ITEM_LIME
+    iLEM = 8,   // ITEM_LEMON
+    iHSY = 9,   // ITEM_HONEY_SYRUP
+    iMSY = 10,  // ITEM_MAPLE_SYRUP
+    iJAM = 11,  // ITEM_JAMMIN_JELLY
+    iAPP = 12,  // ITEM_APPLE
+    iRBY = 13,  // ITEM_RED_BERRY
+    iBBY = 14,  // ITEM_BLUE_BERRY
+    iYBY = 15,  // ITEM_YELLOW_BERRY
+    iGMN = 16,  // ITEM_GOOMNUT
+    iKLF = 17,  // ITEM_KOOPA_LEAF
+    iDRP = 18,  // ITEM_DRIED_PASTA
+    iDRF = 19,  // ITEM_DRIED_FRUIT
+    iSLF = 20,  // ITEM_STRANGE_LEAF
+    iMIX = 21,  // ITEM_CAKE_MIX
+    iEGG = 22,  // ITEM_EGG
+    iMEL = 23,  // ITEM_MELON
+    iSTK = 24,  // ITEM_STINKY_HERB
+    iPOT = 25,  // ITEM_ICED_POTATO
+    iDSH = 26,  // ITEM_DRIED_SHROOM
+    iBUB = 27,  // ITEM_BUBBLE_BERRY
+    iBMP = 28,  // ITEM_WHACKAS_BUMP
     INPUT_END = 29,
 };
 
-enum {
-    rXXX = 0,
-    rFRS = 1,
-    rSPS = 2,
-    rTTN = 3,
-    rNUT = 4,
-    rTEA = 5,
-    rSPG = 6,
-    rDZD = 7,
-    rBCK = 8,
-    rCAK = 9,
-    rFEG = 10,
-    rBEG = 11,
-    rSOD = 12,
-    rYCK = 13,
-    rDLX = 14,
-    rFZF = 15,
-    rPOT = 16,
-    rHOT = 17,
-    rBLN = 18,
-    rHSH = 19,
-    rMSH = 20,
-    rJSH = 21,
-    rLSH = 22,
-    rVSH = 23,
-    rSLS = 24,
-    rSHC = 25,
-    rSHS = 26,
-    rHSU = 27,
-    rMSU = 28,
-    rJSU = 29,
-    rYUM = 30,
-    rHUL = 31,
-    rMUL = 32,
-    rJUL = 33,
-    rSWS = 34,
-    rELP = 35,
-    rTHR = 36,
-    rFIP = 37,
-    rEGM = 38,
-    rSSH = 39,
-    rCOP = 40,
-    rJUI = 41,
-    rLIC = 42,
-    rLEC = 43,
-    rHNC = 44,
-    rJLP = 45,
-    rPIE = 46,
-    rKOO = 47,
-    rKCK = 48,
-    rFFL = 49,
-    rSTR = 50,
+// enum mapping cooking result to itemID/quality rating
+enum CookingResultID {
+    rXXX = 0,   // ITEM_MISTAKE
+    rFRS = 1,   // ITEM_FRIED_SHROOM
+    rSPS = 2,   // ITEM_SPICY_SOUP
+    rTTN = 3,   // ITEM_TASTY_TONIC
+    rNUT = 4,   // ITEM_NUTTY_CAKE
+    rTEA = 5,   // ITEM_KOOPA_TEA
+    rSPG = 6,   // ITEM_SPAGHETTI
+    rDZD = 7,   // ITEM_DIZZY_DIAL
+    rBCK = 8,   // ITEM_BIG_COOKIE
+    rCAK = 9,   // ITEM_CAKE
+    rFEG = 10,  // ITEM_FRIED_EGG
+    rBEG = 11,  // ITEM_BOILED_EGG
+    rSOD = 12,  // ITEM_SUPER_SODA
+    rYCK = 13,  // ITEM_YOSHI_COOKIE
+    rDLX = 14,  // ITEM_DELUXE_FEAST
+    rFZF = 15,  // ITEM_FROZEN_FRIES
+    rPOT = 16,  // ITEM_POTATO_SALAD
+    rHOT = 17,  // ITEM_HOT_SHROOM
+    rBLN = 18,  // ITEM_BLAND_MEAL
+    rHSH = 19,  // ITEM_HONEY_SHROOM
+    rMSH = 20,  // ITEM_MAPLE_SHROOM
+    rJSH = 21,  // ITEM_JELLY_SHROOM1
+    rLSH = 22,  // ITEM_LIFE_SHROOM
+    rVSH = 23,  // ITEM_VOLT_SHROOM
+    rSLS = 24,  // ITEM_SLEEPY_SHEEP
+    rSHC = 25,  // ITEM_SHROOM_CAKE
+    rSHS = 26,  // ITEM_SHROOM_STEAK
+    rHSU = 27,  // ITEM_HONEY_SUPER
+    rMSU = 28,  // ITEM_MAPLE_SUPER
+    rJSU = 29,  // ITEM_JELLY_SUPER
+    rYUM = 30,  // ITEM_YUMMY_MEAL
+    rHUL = 31,  // ITEM_HONEY_ULTRA
+    rMUL = 32,  // ITEM_MAPLE_ULTRA
+    rJUL = 33,  // ITEM_JELLY_ULTRA
+    rSWS = 34,  // ITEM_SWEET_SHROOM
+    rELP = 35,  // ITEM_ELECTRO_POP
+    rTHR = 36,  // ITEM_THUNDER_RAGE
+    rFIP = 37,  // ITEM_FIRE_POP
+    rEGM = 38,  // ITEM_EGG_MISSILE
+    rSSH = 39,  // ITEM_SPECIAL_SHAKE
+    rCOP = 40,  // ITEM_COCO_POP
+    rJUI = 41,  // ITEM_HEALTHY_JUICE
+    rLIC = 42,  // ITEM_LIME_CANDY
+    rLEC = 43,  // ITEM_LEMON_CANDY
+    rHNC = 44,  // ITEM_HONEY_CANDY
+    rJLP = 45,  // ITEM_JELLY_POP
+    rPIE = 46,  // ITEM_APPLE_PIE
+    rKOO = 47,  // ITEM_KOOPASTA
+    rKCK = 48,  // ITEM_KOOKY_COOKIE
+    rFFL = 49,  // ITEM_FIRE_FLOWER
+    rSTR = 50,  // ITEM_STRANGE_CAKE
     RESULT_END = 51,
 };
 
-enum {
+enum CookingResultQuality {
     QUALITY_BAD     = 0,
     QUALITY_OK      = 1,
     QUALITY_GOOD    = 2,
@@ -94,7 +96,6 @@ enum {
     QUALITY_ODD     = 4,
 };
 
-// IngredientType
 s32 CookingIngredients[] = {
     [iRSH] ITEM_MUSHROOM,
     [iSSH] ITEM_SUPER_SHROOM,
@@ -189,67 +190,68 @@ CookingResult CookingResults[] = {
 };
 
 s8 SingleRecipesWithoutCookbook[] = {
-    [iRSH] rFRS,
-    [iSSH] rFRS,
-    [iUSH] rSHS,
-    [iLSH] rHOT,
-    [iVSH] rHOT,
-    [iFFL] rSPS,
-    [iCOC] rTTN,
-    [iLIM] rTTN,
-    [iLEM] rTTN,
-    [iHSY] rSOD,
-    [iMSY] rSOD,
-    [iJAM] rSOD,
-    [iAPP] rSOD,
-    [iRBY] rXXX,
-    [iBBY] rXXX,
-    [iYBY] rXXX,
-    [iGMN] rNUT,
-    [iKLF] rTEA,
-    [iDRP] rSPG,
-    [iDRF] rXXX,
-    [iSLF] rXXX,
-    [iMIX] rCAK,
-    [iEGG] rFEG,
-    [iMEL] rSSH,
-    [iSTK] rXXX,
-    [iPOT] rPOT,
-    [iDSH] rXXX,
-    [iBUB] rXXX,
-    [iBMP] rXXX,
+    [iRSH] rFRS,    // ITEM_MUSHROOM      -->  ITEM_FRIED_SHROOM
+    [iSSH] rFRS,    // ITEM_SUPER_SHROOM  -->  ITEM_FRIED_SHROOM
+    [iUSH] rSHS,    // ITEM_ULTRA_SHROOM  -->  ITEM_SHROOM_STEAK
+    [iLSH] rHOT,    // ITEM_LIFE_SHROOM   -->  ITEM_HOT_SHROOM
+    [iVSH] rHOT,    // ITEM_VOLT_SHROOM   -->  ITEM_HOT_SHROOM
+    [iFFL] rSPS,    // ITEM_FIRE_FLOWER   -->  ITEM_SPICY_SOUP
+    [iCOC] rTTN,    // ITEM_COCONUT       -->  ITEM_TASTY_TONIC
+    [iLIM] rTTN,    // ITEM_LIME          -->  ITEM_TASTY_TONIC
+    [iLEM] rTTN,    // ITEM_LEMON         -->  ITEM_TASTY_TONIC
+    [iHSY] rSOD,    // ITEM_HONEY_SYRUP   -->  ITEM_SUPER_SODA
+    [iMSY] rSOD,    // ITEM_MAPLE_SYRUP   -->  ITEM_SUPER_SODA
+    [iJAM] rSOD,    // ITEM_JAMMIN_JELLY  -->  ITEM_SUPER_SODA
+    [iAPP] rSOD,    // ITEM_APPLE         -->  ITEM_SUPER_SODA
+    [iRBY] rXXX,    // ITEM_RED_BERRY     -->  ITEM_MISTAKE
+    [iBBY] rXXX,    // ITEM_BLUE_BERRY    -->  ITEM_MISTAKE
+    [iYBY] rXXX,    // ITEM_YELLOW_BERRY  -->  ITEM_MISTAKE
+    [iGMN] rNUT,    // ITEM_GOOMNUT       -->  ITEM_NUTTY_CAKE
+    [iKLF] rTEA,    // ITEM_KOOPA_LEAF    -->  ITEM_KOOPA_TEA
+    [iDRP] rSPG,    // ITEM_DRIED_PASTA   -->  ITEM_SPAGHETTI
+    [iDRF] rXXX,    // ITEM_DRIED_FRUIT   -->  ITEM_MISTAKE
+    [iSLF] rXXX,    // ITEM_STRANGE_LEAF  -->  ITEM_MISTAKE
+    [iMIX] rCAK,    // ITEM_CAKE_MIX      -->  ITEM_CAKE
+    [iEGG] rFEG,    // ITEM_EGG           -->  ITEM_FRIED_EGG
+    [iMEL] rSSH,    // ITEM_MELON         -->  ITEM_SPECIAL_SHAKE
+    [iSTK] rXXX,    // ITEM_STINKY_HERB   -->  ITEM_MISTAKE
+    [iPOT] rPOT,    // ITEM_ICED_POTATO   -->  ITEM_POTATO_SALAD
+    [iDSH] rXXX,    // ITEM_DRIED_SHROOM  -->  ITEM_MISTAKE
+    [iBUB] rXXX,    // ITEM_BUBBLE_BERRY  -->  ITEM_MISTAKE
+    [iBMP] rXXX,    // ITEM_WHACKAS_BUMP  -->  ITEM_MISTAKE
 };
 
+// items with (*) are upgraded from ITEM_MISTAKE when using the cookbook
 s8 SingleRecipesWithCookbook[] = {
-    [iRSH] rFRS,
-    [iSSH] rFRS,
-    [iUSH] rSHS,
-    [iLSH] rHOT,
-    [iVSH] rHOT,
-    [iFFL] rSPS,
-    [iCOC] rTTN,
-    [iLIM] rTTN,
-    [iLEM] rTTN,
-    [iHSY] rSOD,
-    [iMSY] rSOD,
-    [iJAM] rSOD,
-    [iAPP] rSOD,
-    [iRBY] rSOD,
-    [iBBY] rSOD,
-    [iYBY] rSOD,
-    [iGMN] rNUT,
-    [iKLF] rTEA,
-    [iDRP] rSPG,
-    [iDRF] rXXX,
-    [iSLF] rDZD,
-    [iMIX] rCAK,
-    [iEGG] rFEG,
-    [iMEL] rSSH,
-    [iSTK] rXXX,
-    [iPOT] rPOT,
-    [iDSH] rFRS,
-    [iBUB] rTTN,
-    [iBMP] rYUM,
+    [iRSH] rFRS,    // ITEM_MUSHROOM      -->  ITEM_FRIED_SHROOM
+    [iSSH] rFRS,    // ITEM_SUPER_SHROOM  -->  ITEM_FRIED_SHROOM
+    [iUSH] rSHS,    // ITEM_ULTRA_SHROOM  -->  ITEM_SHROOM_STEAK
+    [iLSH] rHOT,    // ITEM_LIFE_SHROOM   -->  ITEM_HOT_SHROOM
+    [iVSH] rHOT,    // ITEM_VOLT_SHROOM   -->  ITEM_HOT_SHROOM
+    [iFFL] rSPS,    // ITEM_FIRE_FLOWER   -->  ITEM_SPICY_SOUP
+    [iCOC] rTTN,    // ITEM_COCONUT       -->  ITEM_TASTY_TONIC
+    [iLIM] rTTN,    // ITEM_LIME          -->  ITEM_TASTY_TONIC
+    [iLEM] rTTN,    // ITEM_LEMON         -->  ITEM_TASTY_TONIC
+    [iHSY] rSOD,    // ITEM_HONEY_SYRUP   -->  ITEM_SUPER_SODA
+    [iMSY] rSOD,    // ITEM_MAPLE_SYRUP   -->  ITEM_SUPER_SODA
+    [iJAM] rSOD,    // ITEM_JAMMIN_JELLY  -->  ITEM_SUPER_SODA
+    [iAPP] rSOD,    // ITEM_APPLE         -->  ITEM_SUPER_SODA
+    [iRBY] rSOD,    // ITEM_RED_BERRY     -->  ITEM_SUPER_SODA      (*)
+    [iBBY] rSOD,    // ITEM_BLUE_BERRY    -->  ITEM_SUPER_SODA      (*)
+    [iYBY] rSOD,    // ITEM_YELLOW_BERRY  -->  ITEM_SUPER_SODA      (*)
+    [iGMN] rNUT,    // ITEM_GOOMNUT       -->  ITEM_NUTTY_CAKE
+    [iKLF] rTEA,    // ITEM_KOOPA_LEAF    -->  ITEM_KOOPA_TEA
+    [iDRP] rSPG,    // ITEM_DRIED_PASTA   -->  ITEM_SPAGHETTI
+    [iDRF] rXXX,    // ITEM_DRIED_FRUIT   -->  ITEM_MISTAKE
+    [iSLF] rDZD,    // ITEM_STRANGE_LEAF  -->  ITEM_DIZZY_DIAL      (*)
+    [iMIX] rCAK,    // ITEM_CAKE_MIX      -->  ITEM_CAKE
+    [iEGG] rFEG,    // ITEM_EGG           -->  ITEM_FRIED_EGG
+    [iMEL] rSSH,    // ITEM_MELON         -->  ITEM_SPECIAL_SHAKE
+    [iSTK] rXXX,    // ITEM_STINKY_HERB   -->  ITEM_MISTAKE
+    [iPOT] rPOT,    // ITEM_ICED_POTATO   -->  ITEM_POTATO_SALAD
+    [iDSH] rFRS,    // ITEM_DRIED_SHROOM  -->  ITEM_FRIED_SHROOM    (*)
+    [iBUB] rTTN,    // ITEM_BUBBLE_BERRY  -->  ITEM_TASTY_TONIC     (*)
+    [iBMP] rYUM,    // ITEM_WHACKAS_BUMP  -->  ITEM_YUMMY_MEAL      (*)
 };
 
 s8 DoubleRecipesMatrix[] = {
@@ -291,17 +293,20 @@ typedef struct ExtraCookingPair {
     /* 04 */ s32 output;
 } ExtraCookingPair; // size = 0x8
 
+// additional recipes checked for inputs not included in the matrix
 ExtraCookingPair ExtraDoubleRecipes[] = {
-    { ITEM_SPECIAL_SHAKE, ITEM_DRIED_SHROOM,  rJUI },
-    { ITEM_SPECIAL_SHAKE, ITEM_STRANGE_LEAF,  rJUI },
-    { ITEM_SPECIAL_SHAKE, ITEM_STINKY_HERB,   rJUI },
-    { ITEM_POTATO_SALAD,  ITEM_SPAGHETTI,     rYUM },
-    { ITEM_POTATO_SALAD,  ITEM_FRIED_SHROOM,  rBLN },
-    { ITEM_POTATO_SALAD,  ITEM_HOT_SHROOM,    rYUM },
-    { ITEM_POTATO_SALAD,  ITEM_SHROOM_STEAK,  rDLX },
-    { ITEM_STRANGE_LEAF,  ITEM_WHACKAS_BUMP,  rDLX },
+    { ITEM_SPECIAL_SHAKE, ITEM_DRIED_SHROOM,  rJUI }, // --> ITEM_HEALTHY_JUICE
+    { ITEM_SPECIAL_SHAKE, ITEM_STRANGE_LEAF,  rJUI }, // --> ITEM_HEALTHY_JUICE
+    { ITEM_SPECIAL_SHAKE, ITEM_STINKY_HERB,   rJUI }, // --> ITEM_HEALTHY_JUICE
+    { ITEM_POTATO_SALAD,  ITEM_SPAGHETTI,     rYUM }, // --> ITEM_YUMMY_MEAL
+    { ITEM_POTATO_SALAD,  ITEM_FRIED_SHROOM,  rBLN }, // --> ITEM_BLAND_MEAL
+    { ITEM_POTATO_SALAD,  ITEM_HOT_SHROOM,    rYUM }, // --> ITEM_YUMMY_MEAL
+    { ITEM_POTATO_SALAD,  ITEM_SHROOM_STEAK,  rDLX }, // --> ITEM_DELUXE_FEAST
+    { ITEM_STRANGE_LEAF,  ITEM_WHACKAS_BUMP,  rDLX }, // --> ITEM_DELUXE_FEAST
 };
 
+// when cooking a mystery, theres is a 50% chance to create ITEM_MISTAKE, and a 50% chance to select
+// any one of these outcomes with equal probability
 s32 MysteryResultOptions[] = {
     ITEM_FIRE_FLOWER,
     ITEM_TASTY_TONIC,
@@ -328,27 +333,67 @@ s32 MysteryResultOptions[] = {
     ITEM_SPECIAL_SHAKE,
 };
 
-API_CALLABLE(func_80242C44_825F04);
-
-// result in LVar6, quality in LVar7, item to remove in LVar8?
-INCLUDE_ASM(s32, "world/area_mac/mac_02/mac_02_6_npc", func_80242C44_825F04);
+API_CALLABLE(N(GetCookResultForSingleRecipe)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 hasCookbook;
+    s32 inputItem;
+    s32 outVarItemID;
+    s32 outVarQuality;
+    s32 resultItemID;
+    s32 resultQuality;
+    s32 i;
+    
+    outVarItemID = *args++;
+    outVarQuality = *args++;
+    inputItem = evt_get_variable(script, *args++);
+    hasCookbook = evt_get_variable(script, *args++);
+    
+    if (inputItem == ITEM_MYSTERY) {
+        if (rand_int(1000) < 500) {
+            resultItemID = ITEM_MISTAKE;
+            resultQuality = 0;
+        } else {
+            i = rand_int(10000) % ARRAY_COUNT(MysteryResultOptions);
+            resultItemID = MysteryResultOptions[i];
+            resultQuality = 4;
+        }
+    } else {
+        for (i = 0; i < INPUT_END; i++) {
+            if (CookingIngredients[i] == inputItem) {
+                break;
+            }
+        }
+        if (i < INPUT_END) {
+            if (hasCookbook) {
+                i = SingleRecipesWithCookbook[i];
+            } else {
+                i = SingleRecipesWithoutCookbook[i];
+            }
+        } else {
+            i = 0;
+        }
+        resultQuality = CookingResults[i].quality;
+        resultItemID = CookingResults[i].itemID;
+    }
+    evt_set_variable(script, outVarItemID, resultItemID);
+    evt_set_variable(script, outVarQuality, resultQuality);
+    return ApiStatus_DONE2;
+}
 
 API_CALLABLE(N(GetCookResultForDoubleRecipe)) {
     Bytecode* args = script->ptrReadPos;
+    s32 outVarItemID = *args++;
+    s32 outVarQuality = *args++;
+    s32 inputItemA = evt_get_variable(script, *args++);
+    s32 inputItemB = evt_get_variable(script, *args++);
     ExtraCookingPair* extraList;
-    s32 inputItemA, inputItemB;
-    s32 outVarItemID, outVarQuality;
     s32 resultItemID, resultQuality;
     s32 inputIdxA, inputIdxB;
     s32 recipeIdx;
     s32 resultIdx;
     s32 i;
 
-    outVarItemID = *args++;
-    outVarQuality = *args++;
-    inputItemA = evt_get_variable(script, *args++);
-    inputItemB = evt_get_variable(script, *args++);
-    inputIdxA = 0;
+    // get ingredient enum values
     for (inputIdxA = 0; inputIdxA < INPUT_END; inputIdxA++) {
         if (CookingIngredients[inputIdxA] == inputItemA) {
             break;
@@ -465,7 +510,7 @@ API_CALLABLE(N(SetRecipeDiscovered)) {
 
     for (i = 0; i < ARRAY_COUNT(CookableItemIDs); i++) {
         if (cookedItemID == cookedItems[i]) {
-            evt_set_variable(NULL, cookedFlags[i], 1);
+            evt_set_variable(NULL, cookedFlags[i], TRUE);
             break;
         }
     }
@@ -724,7 +769,7 @@ EvtScript N(EVS_TayceT_Cook) = {
         EVT_CALL(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_000C)
         EVT_GOTO(LABEL_DONE)
     EVT_END_IF
-    EVT_CALL(func_80242C44_825F04, LVar6, LVar7, LVar8, GF_MAC02_TayceT_HasCookbook)
+    EVT_CALL(N(GetCookResultForSingleRecipe), LVar6, LVar7, LVar8, GF_MAC02_TayceT_HasCookbook)
     EVT_CALL(RemoveItem, LVar8, LVar0)
 
     // the actual cooking animation and reaction message
