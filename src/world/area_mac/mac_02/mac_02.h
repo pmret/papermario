@@ -9,23 +9,17 @@
 #include "mapfs/mac_02_shape.h"
 #include "mapfs/mac_02_hit.h"
 
-#include "sprite/npc/ChuckQuizmo.h"
 #include "sprite/npc/TayceT.h"
 #include "sprite/npc/WorldParakarry.h"
 #include "sprite/npc/FiceT.h"
-#include "sprite/npc/Bootler.h"
 #include "sprite/npc/ShyGuy.h"
-#include "sprite/npc/Toad.h"
-#include "sprite/npc/Toadette.h"
-#include "sprite/npc/ToadKid.h"
-#include "sprite/npc/Bubulb.h"
 
 enum {
 	NPC_TayceT                  = 0,
 	NPC_FiceT                   = 1,
 	NPC_Bubulb                  = 2,
 	NPC_Toad_01                 = 3,
-	NPC_ThreeSisters            = 4,
+	NPC_CookingApprentice		= 4,
 	NPC_Toad_02                 = 5,
 	NPC_ToadKid                 = 6,
 	NPC_Toad_03                 = 7,
