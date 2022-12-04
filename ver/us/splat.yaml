@@ -6180,13 +6180,13 @@ segments:
       - { start: 0x3FCF30, type: ci4, name: star_cards/misstar, flip_y: true, width: 48, height: 48 }
       - [0x3FD3B0, palette, star_cards/misstar]
       - [0x3FD3D0] # padding
-      - { start: 0x3FD5B0, type: ci4, name: D_09003100_3FD5B0, flip_y: true, width: 48, height: 48 }
-      - [0x3FDA30, palette, D_09003100_3FD5B0]
+      - { start: 0x3FD5B0, type: ci4, name: star_cards/klevar, flip_y: true, width: 48, height: 48 }
+      - [0x3FDA30, palette, star_cards/klevar]
       - [0x3FDA50] # padding
-      - { start: 0x3FDC30, type: ci4, name: star_cards/klevar, flip_y: true, width: 48, height: 48 }
-      - [0x3FE0B0, palette, star_cards/klevar]
+      - { start: 0x3FDC30, type: ci4, name: star_cards/kalmar, flip_y: true, width: 48, height: 48 }
+      - [0x3FE0B0, palette, star_cards/kalmar]
       - [0x3FE0D0] # padding
-      #- [0x3FE2B0, bin, D_09003E00_3FE2B0]
+      - [0x3FE2B0, vtx, D_09003E00_3FE2B0]
       - [0x3FE430] # light
       - [0x3FE448, gfx, D_09003F98_3FE448]
       - [0x3FE4C0, gfx, D_09004010_3FE4C0]
@@ -6195,7 +6195,7 @@ segments:
       - [0x3FE628, gfx, D_09004178_3FE628]
       - [0x3FE6A0, gfx, D_090041F0_3FE6A0]
       - [0x3FE718, gfx, D_09004268_3FE718]
-      - [0x3FE790, gfx, D_090042E0_3FE790]
+      - [0x3FE790, gfx, D_090042E0_3FE790] # has bug (see gfx/spirit_card.c)
       - [0x3FE810, gfx, D_09004360_3FE810]
       - [0x3FE888, vtx, D_090043D8_3FE888]
       - [0x3FE8C8, gfx, D_09004418_3FE8C8]

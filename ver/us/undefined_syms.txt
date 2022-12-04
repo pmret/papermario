@@ -54,9 +54,6 @@ D_09001A90 = 0x09001A90;
 D_09001B08 = 0x09001B08;
 D_09001B80 = 0x09001B80;
 
-// effect_spirit_card
-D_09003F80_3FE430 = 0x09003F80;
-
 // hacks for various things
 fx_sun_undeclared = fx_sun;
 EntityModel_Spring_ReboundAnim = 0x1E4;
