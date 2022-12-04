@@ -175,7 +175,7 @@ EvtScript N(EVS_DrainUpperSand) = {
     EVT_END
 };
 
-EvtScript N(EVS_RaiseLowerSand) = {
+EvtScript N(EVS_FillLowerSand) = {
     EVT_CALL(MakeTransformGroup, MODEL_g210)
     EVT_CALL(MakeLerp, -200, 0, 120, EASING_LINEAR)
     EVT_LABEL(10)
@@ -225,7 +225,7 @@ EvtScript N(EVS_Scene_DrainSand) = {
     EVT_EXEC(N(EVS_Camera_LookBelow))
     EVT_WAIT(30)
     EVT_EXEC(N(EVS_TexPan_LowerSand))
-    EVT_EXEC(N(EVS_RaiseLowerSand))
+    EVT_EXEC(N(EVS_FillLowerSand))
     EVT_CALL(PlaySound, SOUND_453)
     EVT_WAIT(120)
     EVT_EXEC(N(EVS_LowerSandColumn))
@@ -255,10 +255,10 @@ EvtScript N(EVS_Scene_DrainSand) = {
 };
 
 EvtScript N(EVS_SetupSand) = {
-    EVT_SET(AF_ISK_03_SandSwitchActivated, FALSE)
+    EVT_SET(AF_ISK03_SandSwitchActivated, FALSE)
     EVT_CALL(MakeTransformGroup, MODEL_g206)
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_DRAINED_FIRST_SAND_ROOM)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_DrainSand)), TRIGGER_AREA_FLAG_SET, AF_ISK_03_SandSwitchActivated, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_DrainSand)), TRIGGER_AREA_FLAG_SET, AF_ISK03_SandSwitchActivated, 1, 0)
         EVT_CALL(EnableModel, MODEL_o1343, FALSE)
         EVT_CALL(EnableModel, MODEL_o1344, FALSE)
         EVT_CALL(EnableModel, MODEL_o1345, FALSE)

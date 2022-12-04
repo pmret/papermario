@@ -1,5 +1,3 @@
-#ifndef _MAC_02_h_
-#define _MAC_02_h_
 /// @file mac_02.h
 /// @brief Toad Town - Southern District
 
@@ -52,5 +50,3 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(NpcGroup1);
 extern NpcGroupList N(NpcGroup3);
 extern NpcGroupList N(NpcGroup4);
-
-#endif

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(func_80240814_97BE44)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240814_97BE44)) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
     npc->verticalRenderOffset = npc->collisionHeight;
@@ -10,7 +10,7 @@ ApiStatus N(func_80240814_97BE44)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AwaitPlayerNearNpc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AwaitPlayerNearNpc)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
@@ -21,7 +21,7 @@ ApiStatus N(AwaitPlayerNearNpc)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802408B4_97BEE4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802408B4_97BEE4)) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_safe(script->owner2.npcID);

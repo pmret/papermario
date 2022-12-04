@@ -286,7 +286,7 @@ MapConfig mac_maps[] = {
     { MAP(machi), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_00, 0x80243BE0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_02, 0x80243580), .bgName = "nok_bg" },
+    { MAP(mac_02), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },
     { MAP_WITH_INIT(mac_04), .bgName = "nok_bg" },
     { MAP(mac_05), .bgName = "nok_bg" },
@@ -424,24 +424,25 @@ MapConfig sbk_maps[] = {
 };
 
 /// Dry Dry Ruins
+#include "area_isk/isk.h"
 MapConfig isk_maps[] = {
-    { MAP_UNSPLIT(isk_01, 0x80240020), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_02, 0x80240140), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_03, 0x80240030), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_04, 0x80240AD0), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_05, 0x80241ED0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_06, 0x80240020), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_01), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_02), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_03), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_04), .bgName = "sbk3_bg", .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_05), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_06), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(isk_07, 0x80240130), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_08, 0x80240930), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(isk_09, 0x80240340), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_10, 0x80240DE0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(isk_11, 0x802401A0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
     { MAP_UNSPLIT(isk_12, 0x80240040), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_13, 0x80242080), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_14, 0x80241D70), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_16, 0x80240B20), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_18, 0x80240910), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
-    { MAP_UNSPLIT(isk_19, 0x80240020), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_13), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_14), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_16), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_18), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
+    { MAP(isk_19), .unk_1C = { .bytes = { .songVariation = 1, .flags = 2 } } },
 };
 
 /// Koopa Bros. Fortress

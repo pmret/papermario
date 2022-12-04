@@ -2,7 +2,7 @@
 #include "sprite/npc/BuzzyBeetle.h"
 #include "sprite/npc/SpikeTop.h"
 
-#define BUZZY_BEETLE_DROPS \
+#define TIK_BUZZY_BEETLE_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \
     .itemDropChance = 5, \
@@ -13,6 +13,15 @@
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
     .minCoinBonus = 2, \
     .maxCoinBonus = 3, \
+}
+
+#define ISK_BUZZY_BEETLE_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = GENEROUS_HEART_DROPS(2), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 1, \
+    .maxCoinBonus = 2, \
 }
 
 #define BUZZY_BEETLE_ANIMS \

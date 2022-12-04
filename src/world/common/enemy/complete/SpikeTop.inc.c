@@ -71,7 +71,7 @@ EvtScript N(D_80243C10_C64920) = {
 
 #include "world/common/todo/AwaitPlayerNearNpc.inc.c"
 
-EvtScript N(D_80243C80_C64990) = {
+EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
     EVT_CALL(N(func_80240814_97BE44))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
     EVT_CALL(N(AwaitPlayerNearNpc))
@@ -100,11 +100,11 @@ NpcSettings N(NpcSettings_BuzzyBeetle) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Unused2) = {
+NpcSettings N(NpcSettings_BuzzyBeetle_Ceiling) = {
     .height = 20,
     .radius = 22,
     .level = 10,
-    .ai = &N(D_80243C80_C64990),
+    .ai = &N(EVS_NpcAI_BuzzyBeetle_Ceiling),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

@@ -5,7 +5,7 @@ extern EvtScript N(EVS_OnTouch_DrainSwitch);
 EvtScript N(EVS_SetupSwitch) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_o1989, MODEL_o1992)
     EVT_CALL(ParentColliderToModel, COLLIDER_o1990, MODEL_o1992)
-    EVT_IF_EQ(AF_ISK_03_SandSwitchActivated, FALSE)
+    EVT_IF_EQ(AF_ISK03_SandSwitchActivated, FALSE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnTouch_DrainSwitch)), TRIGGER_FLOOR_TOUCH, COLLIDER_o1990, 1, 0)
     EVT_ELSE
         EVT_CALL(TranslateGroup, MODEL_g319, 0, -14, 0)
@@ -50,7 +50,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
             EVT_GOTO(10)
         EVT_END_IF
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o1990, SOUND_208B, 0)
-    EVT_SET(AF_ISK_03_SandSwitchActivated, TRUE)
+    EVT_SET(AF_ISK03_SandSwitchActivated, TRUE)
     EVT_UNBIND
     EVT_RETURN
     EVT_END

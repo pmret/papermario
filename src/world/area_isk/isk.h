@@ -21,13 +21,34 @@ enum {
 };
 
 enum {
-    AF_ISK_03_SandSwitchActivated   = AreaFlag(1),
+    AF_ISK03_SandSwitchActivated    = AreaFlag(1),
+    AF_ISK06_SandSwitchActivated    = AreaFlag(2),
     AF_ISK_04                       = AreaFlag(4),
     AF_ISK_05                       = AreaFlag(5),
     AF_ISK_06                       = AreaFlag(6),
     AF_ISK_07                       = AreaFlag(7),
     AF_ISK_08                       = AreaFlag(8),
     AF_ISK_09                       = AreaFlag(9),
+    AF_ISK_11                       = AreaFlag(17),
+    AF_ISK_13                       = AreaFlag(19),
 };
+
+extern MapSettings isk_01_settings;
+extern MapSettings isk_02_settings;
+extern MapSettings isk_03_settings;
+extern MapSettings isk_04_settings;
+extern MapSettings isk_05_settings;
+extern MapSettings isk_06_settings;
+extern MapSettings isk_07_settings;
+extern MapSettings isk_08_settings;
+extern MapSettings isk_09_settings;
+extern MapSettings isk_10_settings;
+extern MapSettings isk_11_settings;
+extern MapSettings isk_12_settings;
+extern MapSettings isk_13_settings;
+extern MapSettings isk_14_settings;
+extern MapSettings isk_16_settings;
+extern MapSettings isk_18_settings;
+extern MapSettings isk_19_settings;
 
 #endif
