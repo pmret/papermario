@@ -114,7 +114,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x54 */ FX_ENTRY(quizmo_audience, effect_gfx_quizmo_audience),
     /* 0x55 */ FX_ENTRY(butterflies, effect_gfx_butterflies),
     /* 0x56 */ FX_ENTRY(stat_change, effect_gfx_stat_change),
-    /* 0x57 */ FX_ENTRY(snaking_static, _3B2D90),
+    /* 0x57 */ FX_ENTRY(snaking_static, effect_gfx_snaking_static),
     /* 0x58 */ FX_ENTRY(thunderbolt_ring, effect_gfx_thunderbolt_ring),
     /* 0x59 */ FX_ENTRY(squirt, _3B5340),
     /* 0x5A */ FX_ENTRY(water_block, _3B6BF0),

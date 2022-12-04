@@ -5082,7 +5082,23 @@ segments:
     vram: 0xE00AE000
     subsegments:
     - [0x3B2350, c, snaking_static]
-  - [0x3B2D90, bin] # snaking_static gfx
+  - name: effect_gfx_snaking_static
+    dir: effects/gfx
+    type: code
+    start: 0x3B2D90
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B2D90, c, snaking_static]
+    - start: 0x3B2D90
+      type: .data
+      name: snaking_static
+      subsegments:
+      - [0x3B2D90, i4, D_09000000_3B2D90, 256, 32]
+      - [0x3B3D90, gfx, D_09001000_3B3D90]
+      - [0x3B3E48, vtx, D_090010B8_3B3E48]
+      - [0x3B3E88, gfx, D_090010F8_3B3E88]
+      - [0x3B3EA8]
   - name: effect_thunderbolt_ring
     dir: effects
     type: code
