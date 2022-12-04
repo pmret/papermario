@@ -212,8 +212,6 @@ void lightning_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-// There's a single instruction out of order
-#if NON_MATCHING
 void lightning_appendGfx(void* effect) {
     LightningFXData* data = ((EffectInstance*)effect)->data.lightning;
     s32 unk_00 = data->unk_00;
@@ -233,13 +231,15 @@ void lightning_appendGfx(void* effect) {
         s32 uls2;
         s32 uls;
         s32 ult;
+        f32* unk_28; // TODO required to match
 
         gSPDisplayList(gMasterGfxPos++, dlist2);
 
         uls = data->unk_1C * 4.0f;
         ult = data->unk_20 * 4.0f;
         uls2 = data->unk_24 * 4.0f;
-        ult2 = data->unk_28 * 4.0f;
+        unk_28 = &data->unk_28; // TODO dumb pointer temp required to match
+        ult2 = *(unk_28) * 4.0f;
 
         switch (unk_00) {
             case 0:
@@ -282,6 +282,3 @@ void lightning_appendGfx(void* effect) {
         gDPPipeSync(gMasterGfxPos++);
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/lightning", lightning_appendGfx);
-#endif

@@ -540,9 +540,7 @@ typedef struct DamageStarsFXData {
 
 typedef struct ExplosionFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[0x10];
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
@@ -719,9 +717,7 @@ typedef struct RingBlastFXData {
 typedef struct ShockwaveFXData {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[2]; // likely padding
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
@@ -732,14 +728,14 @@ typedef struct ShockwaveFXData {
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
+    /* 0x38 */ s32 alpha;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
     /* 0x48 */ f32 unk_48;
     /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ Color_RGB8 unk_50;
-    /* 0x53 */ Color_RGB8 unk_53;
+    /* 0x50 */ Color_RGB8 prim;
+    /* 0x53 */ Color_RGB8 env;
     /* 0x56 */ char unk_56[2]; // likely padding
 } ShockwaveFXData; // size = 0x58
 
@@ -1613,18 +1609,20 @@ typedef struct MerlinHouseStarsFXData {
     /* 0x38 */ f32 unk_38;
 } MerlinHouseStarsFXData; // size = 0x3C
 
+#define MAX_QUIZMO_AUDIENCE 10
+
 typedef struct QuizmoAudienceFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 timeLeft;
     /* 0x08 */ s32 lifeTime;
     /* 0x0C */ Vec3f pos;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C[10];
-    /* 0x44 */ s32 unk_44[10];
-    /* 0x6C */ s32 unk_6C[10];
-    /* 0x94 */ f32 unk_94[10];
-    /* 0xBC */ f32 unk_BC[10];
-    /* 0xE4 */ f32 unk_E4[10];
+    /* 0x18 */ s32 primColor;
+    /* 0x1C */ s32 compState[MAX_QUIZMO_AUDIENCE];
+    /* 0x44 */ s32 compType[MAX_QUIZMO_AUDIENCE];
+    /* 0x6C */ s32 compPosIdx[MAX_QUIZMO_AUDIENCE];
+    /* 0x94 */ f32 compMoveMagnitude[MAX_QUIZMO_AUDIENCE];
+    /* 0xBC */ f32 compX[MAX_QUIZMO_AUDIENCE];
+    /* 0xE4 */ f32 compY[MAX_QUIZMO_AUDIENCE];
 } QuizmoAudienceFXData; // size = 0x10C
 
 typedef struct ButterfliesFXData {
