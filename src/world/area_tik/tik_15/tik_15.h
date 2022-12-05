@@ -12,7 +12,7 @@
 #include "sprite/npc/RipCheato.h"
 
 enum {
-	NPC_RipCheato               = 1,
+    NPC_RipCheato               = 1,
 };
 
 #define NAMESPACE tik_15

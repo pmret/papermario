@@ -33,13 +33,13 @@ enum {
     AF_ISK07_OpeningSarcophagus1    = AreaFlag(10),
     AF_ISK07_OpeningSarcophagus2    = AreaFlag(11),
     AF_ISK07_OpeningSarcophagus3    = AreaFlag(12),
-    AF_ISK_0D                       = AreaFlag(13),
+    AF_ISK07_MummiesReleased        = AreaFlag(13),
     AF_ISK07_FlippingRedStairs      = AreaFlag(14),
     AF_ISK09_FlippingBlueStairs     = AreaFlag(15),
     AF_ISK09_FlippingRedStairs      = AreaFlag(16),
-    AF_ISK_11                       = AreaFlag(17),
+    AF_ISK05_StoneChompDefeated     = AreaFlag(17),
     AF_ISK12_StairSwitchActivated   = AreaFlag(18),
-    AF_ISK_13                       = AreaFlag(19),
+    AF_ISK14_StoneChompDefeated     = AreaFlag(19),
 };
 
 extern MapSettings isk_01_settings;

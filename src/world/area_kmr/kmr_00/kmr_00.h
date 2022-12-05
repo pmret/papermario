@@ -19,14 +19,14 @@
 #include "sprite/npc/Goombaria.h"
 
 enum {
-	NPC_Goombaria               = 0,
-	NPC_Eldstar                 = 1,
-	NPC_Mamar                   = 2,
-	NPC_Skolar                  = 3,
-	NPC_Muskular                = 4,
-	NPC_Misstar                 = 5,
-	NPC_Klevar                  = 6,
-	NPC_Kalmar                  = 7,
+    NPC_Goombaria               = 0,
+    NPC_Eldstar                 = 1,
+    NPC_Mamar                   = 2,
+    NPC_Skolar                  = 3,
+    NPC_Muskular                = 4,
+    NPC_Misstar                 = 5,
+    NPC_Klevar                  = 6,
+    NPC_Kalmar                  = 7,
 };
 
 enum {

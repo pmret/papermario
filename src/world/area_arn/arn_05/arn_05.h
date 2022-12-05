@@ -10,16 +10,16 @@
 #include "mapfs/arn_05_hit.h"
 
 enum {
-	NPC_Boo_01          = 0,
-	NPC_Boo_02          = 1,
-	NPC_Boo_03          = 2,
-	NPC_Boo_04          = 3,
-	NPC_Boo_05          = 4,
-	NPC_Tubba           = 5,
-	NPC_Boo_06          = 6,
-	NPC_Boo_07          = 7,
-	NPC_Boo_08          = 8,
-	NPC_Boo_09          = 9,
+    NPC_Boo_01          = 0,
+    NPC_Boo_02          = 1,
+    NPC_Boo_03          = 2,
+    NPC_Boo_04          = 3,
+    NPC_Boo_05          = 4,
+    NPC_Tubba           = 5,
+    NPC_Boo_06          = 6,
+    NPC_Boo_07          = 7,
+    NPC_Boo_08          = 8,
+    NPC_Boo_09          = 9,
 };
 
 enum {

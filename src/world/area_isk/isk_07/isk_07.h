@@ -12,17 +12,17 @@
 #include "sprite/npc/Pokey.h"
 
 enum {
-	NPC_Pokey_01                = 0,
-	NPC_Pokey_02                = 1,
-	NPC_Pokey_03                = 2,
+    NPC_Pokey_01                = 0,
+    NPC_Pokey_02                = 1,
+    NPC_Pokey_03                = 2,
 };
 
 enum {
-	MV_LockEntityID			= MapVar(0),
+    MV_LockEntityID         = MapVar(0),
 };
 
 enum {
-	MF_Unk_00				= MapFlag(0),
+    MF_StairsFlipped        = MapFlag(0),
 };
 
 #define NAMESPACE isk_07

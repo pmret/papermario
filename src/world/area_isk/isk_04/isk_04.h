@@ -12,12 +12,12 @@
 #include "sprite/npc/BuzzyBeetle.h"
 
 enum {
-	NPC_BuzzyBeetle_01          = 0,
-	NPC_BuzzyBeetle_02          = 1,
+    NPC_BuzzyBeetle_01          = 0,
+    NPC_BuzzyBeetle_02          = 1,
 };
 
 enum {
-	MV_RuinsLockEntityID		= MapVar(0),
+    MV_RuinsLockEntityID        = MapVar(0),
 };
 
 #define NAMESPACE isk_04

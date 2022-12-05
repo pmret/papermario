@@ -231,7 +231,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_SET(GF_ISK05_Defeated_StoneChomp, TRUE)
-            EVT_SET(AF_ISK_11, TRUE)
+            EVT_SET(AF_ISK05_StoneChompDefeated, TRUE)
             EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_265, 0)
             EVT_THREAD
                 EVT_WAIT(5)

@@ -10,9 +10,9 @@
 #include "mapfs/tik_23_hit.h"
 
 enum {
-	NPC_Spiny_01                = 0,
-	NPC_Spiny_02                = 1,
-	NPC_Spiny_03                = 2,
+    NPC_Spiny_01                = 0,
+    NPC_Spiny_02                = 1,
+    NPC_Spiny_03                = 2,
 };
 
 #define NAMESPACE tik_23

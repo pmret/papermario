@@ -94,7 +94,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                 G_TX_LOADTILE, 0 , G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
                 G_TX_NOLOD);
             gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(	gMasterGfxPos++, G_TX_LOADTILE,
+            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE,
                     (x1)<<G_TEXTURE_IMAGE_FRAC,
                     (y1 - 6 * i - 6)<<G_TEXTURE_IMAGE_FRAC,
                     (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,
@@ -144,7 +144,7 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                 G_TX_LOADTILE, 0 , G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, 9,
                 G_TX_NOLOD);
             gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(	gMasterGfxPos++, G_TX_LOADTILE,
+            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE,
                     (x1)<<G_TEXTURE_IMAGE_FRAC,
                     (y1 - 6 * i - m)<<G_TEXTURE_IMAGE_FRAC,
                     (x2 - 1)<<G_TEXTURE_IMAGE_FRAC,

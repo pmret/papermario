@@ -10,8 +10,8 @@
 #include "mapfs/isk_09_hit.h"
 
 enum {
-    MF_Unk_00   = MapFlag(0),
-    MF_Unk_01   = MapFlag(1),
+    MF_BlueStairsFlipped    = MapFlag(0),
+    MF_RedStairsFlipped     = MapFlag(1),
 };
 
 #define NAMESPACE isk_09

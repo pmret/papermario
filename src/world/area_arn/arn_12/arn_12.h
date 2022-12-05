@@ -10,8 +10,8 @@
 #include "mapfs/arn_12_hit.h"
 
 enum {
-	NPC_TubbasHeart		= 0,
-	NPC_HyperGoomba		= 1,
+    NPC_TubbasHeart     = 0,
+    NPC_HyperGoomba     = 1,
 };
 
 #define NAMESPACE arn_12

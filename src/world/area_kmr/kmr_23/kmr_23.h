@@ -18,8 +18,8 @@
 #include "sprite/npc/WorldKalmar.h"
 
 enum {
-	NPC_StarSpirit          = 0,
-	NPC_AuxSpirit           = 1,
+    NPC_StarSpirit          = 0,
+    NPC_AuxSpirit           = 1,
 };
 
 enum {

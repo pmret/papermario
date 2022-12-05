@@ -60,7 +60,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_SET(AF_ISK_0D, TRUE)
+        EVT_SET(AF_ISK07_MummiesReleased, TRUE)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_ELSE
         EVT_SET(AF_ISK07_OpeningSarcophagus1, TRUE)
@@ -79,7 +79,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2036, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2037, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2038, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_SET(AF_ISK_0D, TRUE)
+        EVT_SET(AF_ISK07_MummiesReleased, TRUE)
     EVT_END_IF
     EVT_RETURN
     EVT_END

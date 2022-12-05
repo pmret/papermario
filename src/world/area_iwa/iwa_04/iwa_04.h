@@ -12,12 +12,12 @@
 #include "sprite/npc/Buzzar.h"
 
 enum {
-	NPC_Cleft       = 0,
-	NPC_Buzzar      = 1,
+    NPC_Cleft       = 0,
+    NPC_Buzzar      = 1,
 };
 
 enum {
-    MV_PlayerCliffLevel		= MapVar(9),
+    MV_PlayerCliffLevel     = MapVar(9),
 };
 
 #define NAMESPACE iwa_04

@@ -11,8 +11,8 @@
 #include "mapfs/flo_12_hit.h"
 
 enum {
-	NPC_Rosie		= 0,
-	NPC_Dummy		= 1,
+    NPC_Rosie       = 0,
+    NPC_Dummy       = 1,
 };
 
 #define NAMESPACE dead_flo_12

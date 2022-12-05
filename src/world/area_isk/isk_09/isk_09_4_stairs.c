@@ -208,12 +208,12 @@ EvtScript N(EVS_RedStairs_FlipCW) = {
 };
 
 EvtScript N(EVS_FlipBlueStairs) = {
-    EVT_IF_EQ(MF_Unk_00, FALSE)
+    EVT_IF_EQ(MF_BlueStairsFlipped, FALSE)
         EVT_EXEC_WAIT(N(EVS_BlueStairs_FlipCCW))
-        EVT_SET(MF_Unk_00, TRUE)
+        EVT_SET(MF_BlueStairsFlipped, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(EVS_BlueStairs_FlipCW))
-        EVT_SET(MF_Unk_00, FALSE)
+        EVT_SET(MF_BlueStairsFlipped, FALSE)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_SET(AF_ISK09_FlippingBlueStairs, FALSE)
@@ -222,12 +222,12 @@ EvtScript N(EVS_FlipBlueStairs) = {
 };
 
 EvtScript N(EVS_FlipRedStairs) = {
-    EVT_IF_EQ(MF_Unk_01, FALSE)
+    EVT_IF_EQ(MF_RedStairsFlipped, FALSE)
         EVT_EXEC_WAIT(N(EVS_RedStairs_FlipCW))
-        EVT_SET(MF_Unk_01, TRUE)
+        EVT_SET(MF_RedStairsFlipped, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(EVS_RedStairs_FlipCCW))
-        EVT_SET(MF_Unk_01, FALSE)
+        EVT_SET(MF_RedStairsFlipped, FALSE)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_SET(AF_ISK09_FlippingRedStairs, FALSE)
@@ -242,8 +242,8 @@ EvtScript N(EVS_SetupStairs) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2036, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(RotateModel, MODEL_g329, 90, 0, 0, 1)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2037, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(MF_Unk_00, FALSE)
-    EVT_SET(MF_Unk_01, FALSE)
+    EVT_SET(MF_BlueStairsFlipped, FALSE)
+    EVT_SET(MF_RedStairsFlipped, FALSE)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_FlipBlueStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK09_FlippingBlueStairs, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_FlipRedStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK09_FlippingRedStairs, 1, 0)
     EVT_RETURN

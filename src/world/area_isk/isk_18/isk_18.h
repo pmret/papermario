@@ -12,9 +12,9 @@
 #include "sprite/npc/BuzzyBeetle.h"
 
 enum {
-	NPC_BuzzyBeetle_01          = 0,
-	NPC_BuzzyBeetle_02          = 1,
-	NPC_BuzzyBeetle_03          = 2,
+    NPC_BuzzyBeetle_01          = 0,
+    NPC_BuzzyBeetle_02          = 1,
+    NPC_BuzzyBeetle_03          = 2,
 };
 
 #define NAMESPACE isk_18

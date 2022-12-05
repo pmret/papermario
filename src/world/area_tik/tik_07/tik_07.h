@@ -10,8 +10,8 @@
 #include "mapfs/tik_07_hit.h"
 
 enum {
-	NPC_Paragoomba_01           = 0,
-	NPC_Paragoomba_02           = 1,
+    NPC_Paragoomba_01           = 0,
+    NPC_Paragoomba_02           = 1,
 };
 
 enum {

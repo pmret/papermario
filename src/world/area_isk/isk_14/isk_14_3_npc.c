@@ -191,7 +191,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(AF_ISK_13, TRUE)
+            EVT_SET(AF_ISK14_StoneChompDefeated, TRUE)
             EVT_CALL(N(StoneChompFXC))
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)

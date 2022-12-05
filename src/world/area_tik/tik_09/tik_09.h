@@ -10,9 +10,9 @@
 #include "mapfs/tik_09_hit.h"
 
 enum {
-	NPC_KoopaTroopa_01          = 0,
-	NPC_KoopaTroopa_02          = 1,
-	NPC_KoopaTroopa_03          = 2,
+    NPC_KoopaTroopa_01          = 0,
+    NPC_KoopaTroopa_02          = 1,
+    NPC_KoopaTroopa_03          = 2,
 };
 
 enum {

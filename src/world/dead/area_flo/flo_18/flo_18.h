@@ -13,21 +13,21 @@
 #include "sprite/npc/WorldLakilester.h"
 
 enum {
-	NPC_Lakitu_01         	= 0,
-	NPC_Lakitu_02         	= 1,
-	NPC_Lakitu_03         	= 2,
-	NPC_Magikoopa         	= 3,
-	NPC_FlyingMagikoopa   	= 4,
+    NPC_Lakitu_01           = 0,
+    NPC_Lakitu_02           = 1,
+    NPC_Lakitu_03           = 2,
+    NPC_Magikoopa           = 3,
+    NPC_FlyingMagikoopa     = 4,
 };
 
 enum {
-	MF_HitGuardedMachine	= MapFlag(1),
-	MF_MachineShaking		= MapFlag(2),
-	MF_MachineBeingDamaged	= MapFlag(3),
+    MF_HitGuardedMachine    = MapFlag(1),
+    MF_MachineShaking       = MapFlag(2),
+    MF_MachineBeingDamaged  = MapFlag(3),
 };
 
 enum {
-	MV_ReactingNpc			= MapVar(10),
+    MV_ReactingNpc          = MapVar(10),
 };
 
 #define NAMESPACE dead_flo_18

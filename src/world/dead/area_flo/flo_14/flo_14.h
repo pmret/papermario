@@ -14,8 +14,8 @@
 #include "sprite/npc/Bzzap.h"
 
 enum {
-	NPC_BubbleFlower    = 0,
-	NPC_Bzzap           = 1,
+    NPC_BubbleFlower    = 0,
+    NPC_Bzzap           = 1,
 };
 
 enum {

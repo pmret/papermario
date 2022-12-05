@@ -42,12 +42,12 @@ EvtScript N(EVS_FlipRedStairs) = {
     EVT_WAIT(1)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_IF_EQ(MF_Unk_00, FALSE)
+    EVT_IF_EQ(MF_StairsFlipped, FALSE)
         EVT_EXEC_WAIT(N(EVS_RedStairs_FlipCCW))
-        EVT_SET(MF_Unk_00, TRUE)
+        EVT_SET(MF_StairsFlipped, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(EVS_RedStairs_FlipCW))
-        EVT_SET(MF_Unk_00, FALSE)
+        EVT_SET(MF_StairsFlipped, FALSE)
     EVT_END_IF
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.1))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -63,7 +63,7 @@ EvtScript N(EVS_FlipRedStairs) = {
 EvtScript N(EVS_SetupStairs) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1994, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2000, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(MF_Unk_00, FALSE)
+    EVT_SET(MF_StairsFlipped, FALSE)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_FlipRedStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK07_FlippingRedStairs, 1, 0)
     EVT_RETURN
     EVT_END

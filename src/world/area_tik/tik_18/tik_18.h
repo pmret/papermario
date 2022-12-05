@@ -10,8 +10,8 @@
 #include "mapfs/tik_18_hit.h"
 
 enum {
-	NPC_Gloomba				= 0,
-	NPC_SpikedGloomba		= 1,
+    NPC_Gloomba             = 0,
+    NPC_SpikedGloomba       = 1,
 };
 
 #define NAMESPACE tik_18

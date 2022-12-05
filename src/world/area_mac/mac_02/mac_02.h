@@ -15,27 +15,27 @@
 #include "sprite/npc/ShyGuy.h"
 
 enum {
-	NPC_TayceT                  = 0,
-	NPC_FiceT                   = 1,
-	NPC_Bubulb                  = 2,
-	NPC_Toad_01                 = 3,
-	NPC_CookingApprentice		= 4,
-	NPC_Toad_02                 = 5,
-	NPC_ToadKid                 = 6,
-	NPC_Toad_03                 = 7,
-	NPC_Toad_04                 = 8,
-	NPC_Bootler                 = 9,
-	NPC_ShyGuy                  = 11,
-	NPC_ChuckQuizmo				= 12,
+    NPC_TayceT                  = 0,
+    NPC_FiceT                   = 1,
+    NPC_Bubulb                  = 2,
+    NPC_Toad_01                 = 3,
+    NPC_CookingApprentice       = 4,
+    NPC_Toad_02                 = 5,
+    NPC_ToadKid                 = 6,
+    NPC_Toad_03                 = 7,
+    NPC_Toad_04                 = 8,
+    NPC_Bootler                 = 9,
+    NPC_ShyGuy                  = 11,
+    NPC_ChuckQuizmo             = 12,
 };
 
 enum {
-	MV_BlueHouseLockEntityID	= MapVar(0),
+    MV_BlueHouseLockEntityID    = MapVar(0),
 };
 
 enum {
-	MF_MusicMixTrigger1			= MapFlag(10),
-	MF_MusicMixTrigger2			= MapFlag(11),
+    MF_MusicMixTrigger1         = MapFlag(10),
+    MF_MusicMixTrigger2         = MapFlag(11),
 };
 
 #define NAMESPACE mac_02

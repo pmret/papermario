@@ -11,15 +11,15 @@
 #include "mapfs/flo_08_hit.h"
 
 enum {
-	NPC_GateFlower              = 0,
-	NPC_Dayzee_01               = 1,
-	NPC_Dayzee_02               = 2,
-	NPC_Dayzee_03               = 3,
-	NPC_Dayzee_04               = 4,
-	NPC_Dayzee_05               = 5,
-	NPC_Dayzee_06               = 6,
-	NPC_Dayzee_07               = 7,
-	NPC_AmazyDayzee             = 8,
+    NPC_GateFlower              = 0,
+    NPC_Dayzee_01               = 1,
+    NPC_Dayzee_02               = 2,
+    NPC_Dayzee_03               = 3,
+    NPC_Dayzee_04               = 4,
+    NPC_Dayzee_05               = 5,
+    NPC_Dayzee_06               = 6,
+    NPC_Dayzee_07               = 7,
+    NPC_AmazyDayzee             = 8,
 };
 
 enum {

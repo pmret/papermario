@@ -12,8 +12,8 @@
 #include "sprite/npc/KoopaBros.h"
 
 enum {
-	NPC_KoopaBros_01            = 0,
-	NPC_KoopaBros_02            = 1,
+    NPC_KoopaBros_01            = 0,
+    NPC_KoopaBros_02            = 1,
 };
 
 #define NAMESPACE trd_05

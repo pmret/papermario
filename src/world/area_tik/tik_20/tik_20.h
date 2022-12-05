@@ -10,8 +10,8 @@
 #include "mapfs/tik_20_hit.h"
 
 enum {
-	NPC_DarkTroopa_01          = 0,
-	NPC_DarkTroopa_02          = 1,
+    NPC_DarkTroopa_01          = 0,
+    NPC_DarkTroopa_02          = 1,
 };
 
 #define NAMESPACE tik_20

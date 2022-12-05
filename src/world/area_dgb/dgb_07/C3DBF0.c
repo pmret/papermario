@@ -194,7 +194,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .flags = ENEMY_FLAGS_800,
         .yaw = 270,
         .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
             .itemDropChance = 5,
             .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
@@ -204,7 +204,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
             .minCoinBonus = 2,
             .maxCoinBonus = 3,
         },
-	.territory = { .temp = { -500, 0, -240, 40, 0, -32767, 0, -500, 0, -240, 200, 0, 0, 1 }},
+    .territory = { .temp = { -500, 0, -240, 40, 0, -32767, 0, -500, 0, -240, 200, 0, 0, 1 }},
         .animations = {
             ANIM_WorldClubba_Anim02,
             ANIM_WorldClubba_Anim03,
@@ -233,11 +233,11 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000,
         .yaw = 0,
         .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	.animations = {
+    .animations = {
             ANIM_WorldClubba_Anim02,
             ANIM_WorldClubba_Anim03,
             ANIM_WorldClubba_Anim04,

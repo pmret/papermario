@@ -12,7 +12,7 @@
 #include "sprite/npc/ParadePeach.h"
 
 enum {
-	NPC_ParadePeach             = 0,
+    NPC_ParadePeach             = 0,
 };
 
 #define NAMESPACE kmr_30

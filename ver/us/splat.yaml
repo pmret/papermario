@@ -10338,15 +10338,14 @@ segments:
     start: 0x98AA10
     vram: 0x80240000
     subsegments:
-    - [0x98AA10, c]
-    - [0x98AAC0, c]
-    - [0x98AB30, c]
-    - [0x98AB70, data]
-    - [0x98ADB0, data]
-    - [0x98B330, data]
-    - [0x98B620, data]
-    - [0x98D3C0, data]
-    - [0x98D620]
+    - [0x98AA10, c, isk_11_0_header]
+    - [0x98AA10, c, isk_11_1_music]
+    - [0x98AA10, c, isk_11_2_main]
+    - [0x98AA10, c, isk_11_3_entity]
+    - [0x98AA10, c, isk_11_4_scene]
+    - [0x98AAC0, c, isk_11_5_puzzle]
+    - [0x98AB30, c, isk_11_6_lock]
+    - [0x98AB70]
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code

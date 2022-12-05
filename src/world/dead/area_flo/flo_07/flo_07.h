@@ -11,11 +11,11 @@
 #include "mapfs/flo_07_hit.h"
 
 enum {
-	NPC_Posie	= 0,
+    NPC_Posie   = 0,
 };
 
 enum {
-	MV_GroundShakingScript	= MapVar(0),
+    MV_GroundShakingScript  = MapVar(0),
 };
 
 #define NAMESPACE dead_flo_07

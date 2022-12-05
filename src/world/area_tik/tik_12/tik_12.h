@@ -12,7 +12,7 @@
 #include "sprite/npc/BuzzyBeetle.h"
 
 enum {
-	NPC_BuzzyBeetle             = 0,
+    NPC_BuzzyBeetle             = 0,
 };
 
 enum {

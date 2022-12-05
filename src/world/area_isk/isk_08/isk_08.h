@@ -12,7 +12,7 @@
 #include "sprite/npc/BuzzyBeetle.h"
 
 enum {
-	NPC_BuzzyBeetle     = 1,
+    NPC_BuzzyBeetle     = 1,
 };
 
 #define NAMESPACE isk_08

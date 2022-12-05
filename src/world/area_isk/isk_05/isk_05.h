@@ -12,7 +12,7 @@
 #include "sprite/npc/StoneChomp.h"
 
 enum {
-	NPC_StoneChomp              = 1,
+    NPC_StoneChomp              = 1,
 };
 
 #define NAMESPACE isk_05
