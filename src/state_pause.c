@@ -78,8 +78,8 @@ void state_step_pause(void) {
                     clear_npcs();
                     clear_entity_data(0);
                     clear_trigger_data();
-                    D_800A0924 = func_80149828();
-                    func_801497FC(0);
+                    SavedReverbMode = sfx_get_reverb_mode();
+                    sfx_set_reverb_mode(0);
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
@@ -159,7 +159,7 @@ void state_step_unpause(void) {
                         init_npc_list();
                         init_entity_data();
                         init_trigger_list();
-                        func_801497FC(D_800A0924);
+                        sfx_set_reverb_mode(SavedReverbMode);
                         bgm_reset_max_volume();
                         load_map_script_lib();
                         assetData = load_asset_by_name(wMapShapeName, &assetSize);

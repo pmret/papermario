@@ -58,9 +58,9 @@ typedef struct MapConfig {
         struct {
             char unk_1C[0x2];
             s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-            s8 flags;
+            s8 sfxReverb;
         } bytes;
-    } unk_1C;
+    } audio;
 } MapConfig; // size = 0x20
 
 typedef struct AreaConfig {
