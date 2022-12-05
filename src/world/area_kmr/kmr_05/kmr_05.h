@@ -15,11 +15,11 @@
 #include "sprite/npc/Paragoomba.h"
 
 enum {
-	NPC_Goomba_01               = 0,
-	NPC_Goomba_02               = 2,
-	NPC_SpikedGoomba            = 3,
-	NPC_Paragoomba              = 4,
-	NPC_06                      = 6,
+    NPC_Goomba_01               = 0,
+    NPC_Goomba_02               = 2,
+    NPC_SpikedGoomba            = 3,
+    NPC_Paragoomba              = 4,
+    NPC_06                      = 6,
 };
 
 enum {

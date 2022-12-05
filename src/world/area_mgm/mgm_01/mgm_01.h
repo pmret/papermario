@@ -12,7 +12,7 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Toad                    = 0,
+    NPC_Toad                    = 0,
 };
 
 #define NAMESPACE mgm_01

@@ -1,4 +1,3 @@
-#include "common.h"
 #include "Oaklie.h"
 
 NpcSettings N(NpcSettings_Oaklie) = {

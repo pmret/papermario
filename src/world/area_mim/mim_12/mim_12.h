@@ -13,8 +13,8 @@
 #include "sprite/npc/WorldBow.h"
 
 enum {
-	NPC_GateBoo_01      = 0,
-	NPC_GateBoo_02      = 1,
+    NPC_GateBoo_01      = 0,
+    NPC_GateBoo_02      = 1,
 };
 
 #define NAMESPACE mim_12

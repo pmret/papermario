@@ -10,15 +10,15 @@
 #include "mapfs/iwa_03_hit.h"
 
 enum {
-	NPC_Cleft_01                = 0,
-	NPC_Cleft_02                = 1,
-	NPC_Cleft_03                = 2,
-	NPC_MontyMole	            = 3,
-	NPC_MontyMole_Hole          = 4,
+    NPC_Cleft_01                = 0,
+    NPC_Cleft_02                = 1,
+    NPC_Cleft_03                = 2,
+    NPC_MontyMole               = 3,
+    NPC_MontyMole_Hole          = 4,
 };
 
 enum {
-    MV_PlayerCliffLevel		= MapVar(9),
+    MV_PlayerCliffLevel     = MapVar(9),
 };
 
 #define NAMESPACE iwa_03

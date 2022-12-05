@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite/npc/StoneChomp.h"
 
-ApiStatus N(StoneChompFXA)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StoneChompFXA)) {
     NpcBlueprint bp;
     NpcBlueprint* bpPtr = &bp;
     NpcChompBlur* blurData;
@@ -34,7 +34,7 @@ ApiStatus N(StoneChompFXA)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StoneChompFXB)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StoneChompFXB)) {
     NpcChompBlur* blurData;
     Npc* ownerNpc;
     Npc* childNpc;
@@ -110,7 +110,7 @@ ApiStatus N(StoneChompFXB)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(StoneChompFXC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StoneChompFXC)) {
     NpcChompBlur* blurData = get_npc_safe(script->owner2.npcID)->blur.chomp;
     s32 i;
     

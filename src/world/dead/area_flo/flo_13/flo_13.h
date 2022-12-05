@@ -16,21 +16,21 @@
 #include "sprite/npc/Spiny.h"
 
 enum {
-	NPC_Lakilester              = 0,
-	NPC_Lakilulu             	= 1,
-	NPC_Lakilulu_Spiny			= 2,
-	NPC_Lakitu_01               = 3,
-	NPC_Lakitu_02               = 4,
-	NPC_Spiny_01                = 50,
-	NPC_Spiny_02                = 51,
-	NPC_Spiny_03                = 52,
-	NPC_Spiny_04                = 53,
-	NPC_Spiny_05                = 54,
-	NPC_Spiny_06                = 55,
+    NPC_Lakilester              = 0,
+    NPC_Lakilulu                = 1,
+    NPC_Lakilulu_Spiny          = 2,
+    NPC_Lakitu_01               = 3,
+    NPC_Lakitu_02               = 4,
+    NPC_Spiny_01                = 50,
+    NPC_Spiny_02                = 51,
+    NPC_Spiny_03                = 52,
+    NPC_Spiny_04                = 53,
+    NPC_Spiny_05                = 54,
+    NPC_Spiny_06                = 55,
 };
 
 enum {
-    MV_LakiluluSpinySceneState	= MapVar(10),
+    MV_LakiluluSpinySceneState  = MapVar(10),
 };
 
 #define NAMESPACE dead_flo_13

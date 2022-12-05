@@ -5,13 +5,13 @@
 
 // initial delay to start bobbing, ensuring star spirits motions are desync'd from one another
 s16 N(StarSpiritBobDelays)[] = {
-	[NPC_Eldstar  - 1]   1,
-	[NPC_Mamar    - 1]   3,
-	[NPC_Skolar   - 1]   5,
-	[NPC_Muskular - 1]   7,
-	[NPC_Misstar  - 1]   7,
-	[NPC_Klevar   - 1]   5,
-	[NPC_Kalmar   - 1]   3,
+    [NPC_Eldstar  - 1]   1,
+    [NPC_Mamar    - 1]   3,
+    [NPC_Skolar   - 1]   5,
+    [NPC_Muskular - 1]   7,
+    [NPC_Misstar  - 1]   7,
+    [NPC_Klevar   - 1]   5,
+    [NPC_Kalmar   - 1]   3,
 };
 
 API_CALLABLE(N(UpdateStarSpiritBobbing)) {

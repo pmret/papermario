@@ -17,8 +17,8 @@
 #include "sprite/npc/WorldSkolar.h"
 
 enum {
-	NPC_Bootler         = 0,
-	NPC_Skolar          = 2,
+    NPC_Bootler         = 0,
+    NPC_Skolar          = 2,
 };
 
 enum {

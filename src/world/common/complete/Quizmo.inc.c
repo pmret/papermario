@@ -51,8 +51,8 @@ static EffectInstance* N(Quizmo_VannaTEffect);
 
 // values for Quizmo npc init vars
 enum {
-    QUIZ_AREA_MAC       = 0,
-    QUIZ_AREA_KMR       = 1,
+    QUIZ_AREA_KMR       = 0,
+    QUIZ_AREA_MAC       = 1,
     QUIZ_AREA_NOK       = 2,
     QUIZ_AREA_DRO       = 3,
     QUIZ_AREA_JAN       = 4,
@@ -61,6 +61,11 @@ enum {
 };
 
 enum {
+    // area_mac
+    QUIZ_MAP_MAC_04     = 4,
+    QUIZ_MAP_MAC_05     = 5,
+    QUIZ_COUNT_MAC      = 6,
+    // area_dro
     QUIZ_MAP_DRO_01     = 0,
     QUIZ_MAP_DRO_02     = 1,
     QUIZ_COUNT_DRO      = 2,

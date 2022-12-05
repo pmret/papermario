@@ -11,12 +11,12 @@
 #include "mapfs/flo_17_hit.h"
 
 enum {
-	NPC_Lakitu_01               = 0,
-	NPC_Lakitu_02               = 1,
-	NPC_Spiny_01                = 50,
-	NPC_Spiny_02                = 51,
-	NPC_Spiny_03                = 52,
-	NPC_Spiny_04                = 53,
+    NPC_Lakitu_01               = 0,
+    NPC_Lakitu_02               = 1,
+    NPC_Spiny_01                = 50,
+    NPC_Spiny_02                = 51,
+    NPC_Spiny_03                = 52,
+    NPC_Spiny_04                = 53,
 };
 
 enum {

@@ -8957,13 +8957,15 @@ segments:
     start: 0x7E73A0
     vram: 0x80240000
     subsegments:
-    - [0x7E73A0, c]
-    - [0x7E7550, c]
-    - [0x7E7850, c]
-    - [0x7E7A30, data]
-    - [0x7E8470, data]
-    - [0x7EA340, data]
-    - [0x7EAA50]
+    - [0x7E73A0, c, machi_0_header]
+    - [0x7E73A0, c, machi_1_tables]
+    - [0x7E73A0, c, machi_2_main]
+    - [0x7E73D0, c, machi_3_entity]
+    - [0x7E7550, c, machi_4_goomba_king]
+    - [0x7E7550, c, machi_5_npc]
+    - [0x7E7850, c, machi_6_misstar]
+    - [0x7E7A30, c, machi_7_partner]
+    - [0x7E7A30]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -9013,18 +9015,15 @@ segments:
     start: 0x8232C0
     vram: 0x80240000
     subsegments:
-    - [0x8232C0, c]
-    - [0x8238B0, c]
-    - [0x823970, c]
-    - [0x823BB0, c]
-    - [0x823BF0, c]
-    - [0x8267E0, data]
-    - [0x8268F0, data]
-    - [0x827E70, data]
-    - [0x8282E0, data]
-    - [0x828F10, data]
-    - [0x8313E0, data]
-    - [0x831490]
+    - [0x8232C0, c, mac_02_0_header]
+    - [0x8232C0, c, mac_02_1_music]
+    - [0x8232C0, c, mac_02_2_main]
+    - [0x8238B0, c, mac_02_3_rooms]
+    - [0x823970, c, mac_02_4_foliage]
+    - [0x823BB0, c, mac_02_5_entity]
+    - [0x823BF0, c, mac_02_6_npc]
+    - [0x8266B0, c, mac_02_7_music_mix]
+    - [0x8267E0]
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
@@ -9047,48 +9046,42 @@ segments:
     start: 0x842BD0
     vram: 0x80240000
     subsegments:
-    - [0x842BD0, c]
-    - [0x842C20, c]
-    - [0x842D90, c]
-    - [0x842DF0, c]
-    - [0x843030, c]
-    - [0x844860, c]
-    - [0x844AC0, c]
-    - [0x844BF0, data]
-    - [0x844D50, data]
-    - [0x845280, data]
-    - [0x845CA0, data]
-    - [0x8467E0, data]
-    - [0x8469B0, data]
-    - [0x8508F0, data]
-    - [0x851410, data]
-    - [0x8520A0, data]
-    - [0x852120]
+    - [0x842BD0, c, mac_04_0_header]
+    - [0x842C20, c, mac_04_1_music]
+    - [0x842C20, c, mac_04_2_main]
+    - [0x842D90, c, mac_04_3_rooms]
+    - [0x842DF0, c, mac_04_4_foliage]
+    - [0x843030, c, mac_04_5_shop]
+    - [0x843030, c, mac_04_6_npc]
+    - [0x844860, c, mac_04_7_wish_scene]
+    - [0x844860, c, mac_04_8_entity]
+    - [0x844AC0, c, mac_04_9_music_mix]
+    - [0x844BF0]
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code
     start: 0x852170
     vram: 0x80240000
     subsegments:
-    - [0x852170, c]
-    - [0x855560, c]
-    - [0x855F20, c]
-    - [0x8562D0, data]
-    - [0x8564E0, data]
-    - [0x856650, data]
-    - [0x857070, data]
-    - [0x862BC0, data]
-    - [0x864450, data]
-    - [0x864910]
+    - [0x852170, c, mac_05_0_header]
+    - [0x852170, c, mac_05_1_music]
+    - [0x852170, c, mac_05_2_entity]
+    - [0x852170, c, mac_05_3_main]
+    - [0x852600, c, mac_05_4_npc]
+    - [0x855560, c, mac_05_5_whale]
+    - [0x855F20, c, mac_05_6_rooms]
+    - [0x855F20, c, mac_05_7_club64_sign]
+    - [0x8562D0]
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
     start: 0x864B40
     vram: 0x80240000
     subsegments:
+    - [0x864B40, c, mac_06_0_header]
     - [0x864B40, c, mac_06_1_main]
-    - [0x865000, c, mac_06_2]
-    - [0x8659C0, c, mac_06_3]
+    - [0x865000, c, mac_06_2_whale]
+    - [0x8659C0, c, mac_06_3_npc]
     - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01
@@ -10271,51 +10264,50 @@ segments:
     start: 0x978140
     vram: 0x80240000
     subsegments:
-    - [0x978140, c]
-    - [0x978140, data]
-    - [0x978360, data]
-    - [0x9785C0, data]
-    - [0x978700]
+    - [0x978140, c, isk_01_0_header]
+    - [0x978140, c, isk_01_1_music]
+    - [0x978140, c, isk_01_2_main]
+    - [0x978140, c, isk_01_3_haze]
+    - [0x978140, c, isk_01_4_entity]
+    - [0x978140]
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
     start: 0x978710
     vram: 0x80240000
     subsegments:
-    - [0x978710, c]
-    - [0x978750, c]
-    - [0x978800, c]
-    - [0x978820, data]
-    - [0x978B80, data]
-    - [0x978DE0, data]
-    - [0x979390, data]
-    - [0x9793F0, data]
-    - [0x979E40]
+    - [0x978710, c, isk_02_0_header]
+    - [0x978710, c, isk_02_1_main]
+    - [0x978710, c, isk_02_2_lock]
+    - [0x978750, c, isk_02_3_ambush]
+    - [0x978800, c, isk_02_4_entity]
+    - [0x978800, c, isk_02_5_npc]
+    - [0x978820]
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
     start: 0x979E50
     vram: 0x80240000
     subsegments:
-    - [0x979E50, c]
-    - [0x979E50, data]
-    - [0x97A210, data]
-    - [0x97B340, data]
-    - [0x97B620]
+    - [0x979E50, c, isk_03_0_header]
+    - [0x979E50, c, isk_03_1_main]
+    - [0x979E50, c, isk_03_2_sand]
+    - [0x979E50, c, isk_03_3_entity]
+    - [0x979E50, c, isk_03_4_switch]
+    - [0x979E50]
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code
     start: 0x97B630
     vram: 0x80240000
     subsegments:
-    - [0x97B630, c]
-    - [0x97B670, c]
-    - [0x97BF60, c]
-    - [0x97C0A0, data]
-    - [0x97C300, data]
-    - [0x97CA70, data]
-    - [0x97CB60, data]
-    - [0x97D2F0, data]
+    - [0x97B630, c, isk_04_0_header]
+    - [0x97B630, c, isk_04_1_music]
+    - [0x97B630, c, isk_04_2_main]
+    - [0x97B630, c, isk_04_3_obstructions]
+    - [0x97B670, c, isk_04_4_entity]
+    - [0x97B670, c, isk_04_5_npc]
+    - [0x97BF60, c, isk_04_6_demo]
     - [0x97DA40]
   - name: isk_05
     dir: world/area_isk/isk_05
@@ -10323,37 +10315,37 @@ segments:
     start: 0x97DAD0
     vram: 0x80240000
     subsegments:
-    - [0x97DAD0, c]
-    - [0x97F990, data]
-    - [0x97FCE0, data]
-    - [0x97FE50, data]
-    - [0x980970]
+    - [0x97DAD0, c, isk_05_0_header]
+    - [0x97DAD0, c, isk_05_1_main]
+    - [0x97DAD0, c, isk_05_2_entity]
+    - [0x97DAD0, c, isk_05_3_npc]
+    - [0x97F990]
   - name: isk_06
     dir: world/area_isk/isk_06
     type: code
     start: 0x980A20
     vram: 0x80240000
     subsegments:
-    - [0x980A20, c]
-    - [0x980A20, data]
-    - [0x980D40, data]
-    - [0x982150, data]
-    - [0x982430]
+    - [0x980A20, c, isk_06_0_header]
+    - [0x980A20, c, isk_06_1_main]
+    - [0x980A20, c, isk_06_2_entity]
+    - [0x980A20, c, isk_06_3_sand]
+    - [0x980A20, c, isk_06_4_switch]
+    - [0x980A20]
   - name: isk_07
     dir: world/area_isk/isk_07
     type: code
     start: 0x982440
     vram: 0x80240000
     subsegments:
-    - [0x982440, c]
-    - [0x9824F0, c]
-    - [0x982530, c]
-    - [0x982550, data]
-    - [0x982860, data]
-    - [0x982CA0, data]
-    - [0x983AD0, data]
-    - [0x984390, data]
-    - [0x9845D0, data]
+    - [0x982440, c, isk_07_0_header]
+    - [0x982440, c, isk_07_1_main]
+    - [0x982440, c, isk_07_2_entity]
+    - [0x982440, c, isk_07_3_npc]
+    - [0x9824F0, c, isk_07_4_stairs]
+    - [0x9824F0, c, isk_07_5_lock]
+    - [0x982530, c, isk_07_6_switch]
+    - [0x984E20, c, isk_07_7_ambush]
     - [0x984E20]
   - name: isk_08
     dir: world/area_isk/isk_08
@@ -10361,24 +10353,23 @@ segments:
     start: 0x984E30
     vram: 0x80240000
     subsegments:
-    - [0x984E30, c]
-    - [0x985720, data]
-    - [0x985B00, data]
-    - [0x986090, data]
-    - [0x986460]
+    - [0x984E30, c, isk_08_0_header]
+    - [0x984E30, c, isk_08_1_main]
+    - [0x984E30, c, isk_08_2_npc]
+    - [0x986090, c, isk_08_3_entity]
+    - [0x986090]
   - name: isk_09
     dir: world/area_isk/isk_09
     type: code
     start: 0x9864E0
     vram: 0x80240000
     subsegments:
-    - [0x9864E0, c]
-    - [0x9867D0, c]
-    - [0x986810, data]
-    - [0x986A60, data]
-    - [0x986BD0, data]
-    - [0x987560, data]
-    - [0x988290, data]
+    - [0x9864E0, c, isk_09_0_header]
+    - [0x9864E0, c, isk_09_1_music]
+    - [0x9864E0, c, isk_09_2_main]
+    - [0x9864E0, c, isk_09_3_entity]
+    - [0x9867D0, c, isk_09_4_stairs]
+    - [0x9867D0, c, isk_09_5_switch]
     - [0x988B50]
   - name: isk_10
     dir: world/area_isk/isk_10
@@ -10386,9 +10377,10 @@ segments:
     start: 0x988B60
     vram: 0x80240000
     subsegments:
-    - [0x988B60, c]
-    - [0x989910, data]
-    - [0x98A580, data]
+    - [0x988B60, c, isk_10_0_header]
+    - [0x988B60, c, isk_10_1_main]
+    - [0x988B60, c, isk_10_2_entity]
+    - [0x98A9E0, c, isk_10_3_bombable]
     - [0x98A9E0]
   - name: isk_11
     dir: world/area_isk/isk_11
@@ -10396,26 +10388,25 @@ segments:
     start: 0x98AA10
     vram: 0x80240000
     subsegments:
-    - [0x98AA10, c]
-    - [0x98AAC0, c]
-    - [0x98AB30, c]
-    - [0x98AB70, data]
-    - [0x98ADB0, data]
-    - [0x98B330, data]
-    - [0x98B620, data]
-    - [0x98D3C0, data]
-    - [0x98D620]
+    - [0x98AA10, c, isk_11_0_header]
+    - [0x98AA10, c, isk_11_1_music]
+    - [0x98AA10, c, isk_11_2_main]
+    - [0x98AA10, c, isk_11_3_entity]
+    - [0x98AA10, c, isk_11_4_scene]
+    - [0x98AAC0, c, isk_11_5_puzzle]
+    - [0x98AB30, c, isk_11_6_lock]
+    - [0x98AB70]
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code
     start: 0x98D640
     vram: 0x80240000
     subsegments:
-    - [0x98D640, c]
-    - [0x98D640, data]
-    - [0x98DA70, data]
-    - [0x98DCB0, data]
-    - [0x98ED40, data]
+    - [0x98D640, c, isk_12_0_header]
+    - [0x98D640, c, isk_12_1_main]
+    - [0x98D640, c, isk_12_2_entity]
+    - [0x98D640, c, isk_12_3_sand]
+    - [0x98D640, c, isk_12_4_switch]
     - [0x98F7C0]
   - name: isk_13
     dir: world/area_isk/isk_13
@@ -10423,9 +10414,10 @@ segments:
     start: 0x98F7E0
     vram: 0x80240000
     subsegments:
-    - [0x98F7E0, c]
-    - [0x991850, data]
-    - [0x991A90, data]
+    - [0x98F7E0, c, isk_13_0_header]
+    - [0x98F7E0, c, isk_13_1_main]
+    - [0x98F7E0, c, isk_13_2_entity]
+    - [0x98F7E0, c, isk_13_3_npc]
     - [0x992680]
   - name: isk_14
     dir: world/area_isk/isk_14
@@ -10433,23 +10425,22 @@ segments:
     start: 0x992730
     vram: 0x80240000
     subsegments:
-    - [0x992730, c]
-    - [0x994490, data]
-    - [0x9946D0, data]
-    - [0x994860, data]
-    - [0x995150]
+    - [0x992730, c, isk_14_0_header]
+    - [0x992730, c, isk_14_1_main]
+    - [0x992730, c, isk_14_2_entity]
+    - [0x992730, c, isk_14_3_npc]
+    - [0x994490]
   - name: isk_16
     dir: world/area_isk/isk_16
     type: code
     start: 0x9951F0
     vram: 0x80240000
     subsegments:
-    - [0x9951F0, c]
-    - [0x9959F0, c]
-    - [0x995CF0, data]
-    - [0x996410, data]
-    - [0x996C40, data]
-    - [0x997E20, data]
+    - [0x9951F0, c, isk_16_0_header]
+    - [0x9951F0, c, isk_16_1_main]
+    - [0x9959F0, c, isk_16_2_npc]
+    - [0x9959F0, c, isk_16_3_boss]
+    - [0x997F40, c, isk_16_4_entity]
     - [0x997F40]
   - name: isk_18
     dir: world/area_isk/isk_18
@@ -10457,10 +10448,10 @@ segments:
     start: 0x997F70
     vram: 0x80240000
     subsegments:
-    - [0x997F70, c]
-    - [0x998860, data]
-    - [0x998B90, data]
-    - [0x999520, data]
+    - [0x997F70, c, isk_18_0_header]
+    - [0x997F70, c, isk_18_1_main]
+    - [0x997F70, c, isk_18_2_npc]
+    - [0x9996D0, c, isk_18_3_entity]
     - [0x9996D0]
   - name: isk_19
     dir: world/area_isk/isk_19
@@ -10468,11 +10459,11 @@ segments:
     start: 0x999740
     vram: 0x80240000
     subsegments:
-    - [0x999740, c]
-    - [0x999740, data]
-    - [0x999960, data]
-    - [0x999BA0, data]
-    - [0x999C60]
+    - [0x999740, c, isk_19_0_header]
+    - [0x999740, c, isk_19_1_music]
+    - [0x999740, c, isk_19_2_main]
+    - [0x999740, c, isk_19_3_entity]
+    - [0x999740]
   - name: trd_00
     dir: world/area_trd/trd_00
     type: code

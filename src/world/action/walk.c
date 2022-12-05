@@ -205,7 +205,7 @@ void action_update_run(void) {
 }
 
 void func_802B6550_E23C30(void) {
-    if (!(gPlayerStatus.animFlags & PA_FLAGS_IN_DISGUISE)) {
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
             return;
@@ -265,7 +265,7 @@ static void action_update_run_peach(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 if (!gameStatus->peachCookingIngredient) {

@@ -12,7 +12,7 @@
 #include "sprite/npc/Fuzzipede.h"
 
 enum {
-	NPC_Fuzzipede               = 0,
+    NPC_Fuzzipede               = 0,
 };
 
 #define NAMESPACE kgr_02

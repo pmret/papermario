@@ -1,4 +1,3 @@
-#include "common.h"
 #include "StarSpirit.h"
 
 NpcSettings N(NpcSettings_StarSpirit) = {

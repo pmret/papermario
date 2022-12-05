@@ -14,10 +14,10 @@
 #include "sprite/npc/Cleft.h"
 
 enum {
-	NPC_HyperParagoomba		= 0,
-	NPC_HyperGoomba    		= 1,
-	NPC_HyperCleft_01  		= 2,
-	NPC_HyperCleft_02  		= 3,
+    NPC_HyperParagoomba     = 0,
+    NPC_HyperGoomba         = 1,
+    NPC_HyperCleft_01       = 2,
+    NPC_HyperCleft_02       = 3,
 };
 
 #define NAMESPACE arn_04

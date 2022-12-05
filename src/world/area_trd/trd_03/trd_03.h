@@ -13,14 +13,14 @@
 #include "sprite/npc/KoopaTroopa.h"
 
 enum {
-	NPC_KoopaBros               = 0,
-	NPC_KoopaTroopa_01          = 10,
-	NPC_KoopaTroopa_02          = 11,
-	NPC_KoopaTroopa_03          = 12,
+    NPC_KoopaBros               = 0,
+    NPC_KoopaTroopa_01          = 10,
+    NPC_KoopaTroopa_02          = 11,
+    NPC_KoopaTroopa_03          = 12,
 };
 
 enum {
-	MV_PlatformsExtended		= MapVar(0),
+    MV_PlatformsExtended        = MapVar(0),
 };
 
 #define NAMESPACE trd_03

@@ -13,8 +13,8 @@
 #include "sprite/npc/JrTroopa.h"
 
 enum {
-	NPC_JrTroopa        = 0,
-	NPC_Goompa          = 1,
+    NPC_JrTroopa        = 0,
+    NPC_Goompa          = 1,
 };
 
 enum {

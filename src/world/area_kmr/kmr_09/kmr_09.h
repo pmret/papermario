@@ -10,10 +10,10 @@
 #include "mapfs/kmr_09_hit.h"
 
 enum {
-	NPC_Goomba_01               = 0,
-	NPC_Goomba_02               = 1,
-	NPC_Goomba_Ambush           = 2,
-	NPC_Paragoomba              = 3,
+    NPC_Goomba_01               = 0,
+    NPC_Goomba_02               = 1,
+    NPC_Goomba_Ambush           = 2,
+    NPC_Paragoomba              = 3,
 };
 
 #define NAMESPACE kmr_09

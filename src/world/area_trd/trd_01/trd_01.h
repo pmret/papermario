@@ -13,14 +13,14 @@
 #include "sprite/npc/Bobomb.h"
 
 enum {
-	NPC_KoopaTroopa_01 				= 0,
-	NPC_KoopaTroopa_02 				= 1,
-	NPC_KoopaTroopa_03 				= 2,
-	NPC_Bobomb         				= 3,
+    NPC_KoopaTroopa_01              = 0,
+    NPC_KoopaTroopa_02              = 1,
+    NPC_KoopaTroopa_03              = 2,
+    NPC_Bobomb                      = 3,
 };
 
 enum {
-    MV_Padlock_EntityIndex			= MapVar(0),
+    MV_Padlock_EntityIndex          = MapVar(0),
 };
 
 enum {

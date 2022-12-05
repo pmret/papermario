@@ -817,7 +817,7 @@ s32 get_overriding_player_anim(s32 anim) {
             if (!func_800DFCF4()) {
                 return -1;
             }
-        } else if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        } else if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             anim = ANIM_Peach_C0010;
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].hold);
@@ -1480,7 +1480,7 @@ void render_player_model(void) {
             playerStatus->alpha2 = 0;
         }
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;

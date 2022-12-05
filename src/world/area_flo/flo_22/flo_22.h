@@ -13,9 +13,9 @@
 #include "sprite/npc/Dayzee.h"
 
 enum {
-	NPC_Dummy   = 0, // reused as a dummy for tossing badge out of the well
-	NPC_Bzzap   = 0,
-	NPC_Dayzee  = 1,
+    NPC_Dummy   = 0, // reused as a dummy for tossing badge out of the well
+    NPC_Bzzap   = 0,
+    NPC_Dayzee  = 1,
 };
 
 enum {

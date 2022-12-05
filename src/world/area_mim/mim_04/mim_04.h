@@ -13,8 +13,8 @@
 #include "sprite/npc/Fuzzy.h"
 
 enum {
-	NPC_Bubulb                  = 0,
-	NPC_Fuzzy                   = 1,
+    NPC_Bubulb                  = 0,
+    NPC_Fuzzy                   = 1,
 };
 
 #define NAMESPACE mim_04

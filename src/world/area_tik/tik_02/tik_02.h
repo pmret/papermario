@@ -10,7 +10,7 @@
 #include "mapfs/tik_02_hit.h"
 
 enum {
-	NPC_Blooper                 = 0,
+    NPC_Blooper                 = 0,
 };
 
 #define NAMESPACE tik_02

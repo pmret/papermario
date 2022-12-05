@@ -77,7 +77,7 @@ void action_update_step_up(void) {
 }
 
 void func_802B6198_E24768(void) {
-    if (!(gPlayerStatus.animFlags & PA_FLAGS_IN_DISGUISE)) {
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag((StepUpPeachAnims)[gGameStatusPtr->peachCookingIngredient]);
         } else {

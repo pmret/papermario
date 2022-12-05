@@ -1,4 +1,3 @@
-#include "common.h"
 #include "Yakkey.h"
 
 NpcSettings N(NpcSettings_Yakkey) = {

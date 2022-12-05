@@ -13,11 +13,11 @@
 #include "sprite/npc/SmallPiranha.h"
 
 enum {
-	NPC_Bzzap                   = 0,
-	NPC_PiranhaPlant_01         = 1,
-	NPC_PiranhaPlant_01_Hitbox	= 2,
-	NPC_PiranhaPlant_02         = 3,
-	NPC_PiranhaPlant_02_Hitbox	= 4,
+    NPC_Bzzap                   = 0,
+    NPC_PiranhaPlant_01         = 1,
+    NPC_PiranhaPlant_01_Hitbox  = 2,
+    NPC_PiranhaPlant_02         = 3,
+    NPC_PiranhaPlant_02_Hitbox  = 4,
 };
 
 enum {

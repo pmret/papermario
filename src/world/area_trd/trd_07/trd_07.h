@@ -13,14 +13,14 @@
 #include "sprite/npc/ParaTroopa.h"
 
 enum {
-	NPC_KoopaTroopa             = 0,
-	NPC_ParaTroopa_01           = 1,
-	NPC_ParaTroopa_02           = 2,
+    NPC_KoopaTroopa             = 0,
+    NPC_ParaTroopa_01           = 1,
+    NPC_ParaTroopa_02           = 2,
 };
 
 enum {
     MV_EnterWalkScriptID        = MapVar(0),
-    MV_DoorScaleZ		        = MapVar(0), // reusing
+    MV_DoorScaleZ               = MapVar(0), // reusing
     MV_DoorScaleY               = MapVar(1),
 };
 

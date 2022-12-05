@@ -14,10 +14,10 @@
 #include "sprite/npc/Bzzap.h"
 
 enum {
-	NPC_Dayzee_01               = 0,
-	NPC_Dayzee_02               = 1,
-	NPC_Bzzap_01                = 2,
-	NPC_Bzzap_02                = 3,
+    NPC_Dayzee_01               = 0,
+    NPC_Dayzee_02               = 1,
+    NPC_Bzzap_01                = 2,
+    NPC_Bzzap_02                = 3,
 };
 
 #define NAMESPACE dead_flo_09

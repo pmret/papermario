@@ -12,7 +12,7 @@
 #include "sprite/npc/Goomba.h"
 
 enum {
-	NPC_Goomba_Ambush   = 0,
+    NPC_Goomba_Ambush   = 0,
 };
 
 #define NAMESPACE kmr_12

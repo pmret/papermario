@@ -23,22 +23,22 @@
 #include "sprite/npc/Moustafa.h"
 
 enum {
-	NPC_Archeologist            = 0,
-	NPC_Dryite_01               = 1,
-	NPC_DisguisedMoustafa       = 2,
-	NPC_Toad                    = 3,
-	NPC_Merlee                  = 4,
-	NPC_Moustafa                = 5,
-	NPC_Dryite_02               = 6,
-	NPC_Mouser_01               = 7,
-	NPC_Mouser_02               = 8,
-	NPC_Mouser_03               = 9,
-	NPC_ChuckQuizmo             = 10,
-	NPC_Dryite_03               = 11,
+    NPC_Archeologist            = 0,
+    NPC_Dryite_01               = 1,
+    NPC_DisguisedMoustafa       = 2,
+    NPC_Toad                    = 3,
+    NPC_Merlee                  = 4,
+    NPC_Moustafa                = 5,
+    NPC_Dryite_02               = 6,
+    NPC_Mouser_01               = 7,
+    NPC_Mouser_02               = 8,
+    NPC_Mouser_03               = 9,
+    NPC_ChuckQuizmo             = 10,
+    NPC_Dryite_03               = 11,
 };
 
 enum {
-	MF_Unk_00			= MapFlag(0),
+    MF_Unk_00           = MapFlag(0),
 };
 
 #define NAMESPACE dro_02

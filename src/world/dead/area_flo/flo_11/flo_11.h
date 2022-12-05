@@ -11,8 +11,8 @@
 #include "mapfs/flo_11_hit.h"
 
 enum {
-	NPC_Lakitu_01       = 0,
-	NPC_Lakitu_02       = 1,
+    NPC_Lakitu_01       = 0,
+    NPC_Lakitu_02       = 1,
 };
 
 enum {

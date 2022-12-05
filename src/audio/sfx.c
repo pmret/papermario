@@ -301,7 +301,7 @@ void sfx_clear_sounds(void) {
     bzero(&D_801598A0, sizeof(D_801598A0));
     bzero(&D_801599B8, sizeof(D_801599B8));
     D_80159AD0 = D_801598A0;
-    func_801497FC(0);
+    sfx_set_reverb_mode(0);
     sfx_reset_door_sounds();
 }
 
@@ -345,12 +345,12 @@ void sfx_update_looping_sound_params(void) {
     }
 }
 
-void func_801497FC(s32 arg0) {
-    func_800561E4(arg0);
-    D_80159AD4 = arg0;
+void sfx_set_reverb_mode(s32 mode) {
+    func_800561E4(mode);
+    D_80159AD4 = mode;
 }
 
-s32 func_80149828(void) {
+s32 sfx_get_reverb_mode(void) {
     return D_80159AD4;
 }
 

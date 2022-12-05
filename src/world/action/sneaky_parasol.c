@@ -96,7 +96,7 @@ void action_update_parasol(void) {
         }
         *tempUnk_1C = phi_f4;
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             playerStatus->currentStateTime = 20;
             playerStatus->actionSubstate = SUBSTATE_DISGUISE_INIT;
             transformation->disguiseTime = 15;
@@ -185,7 +185,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_DISGUISE_MAKE_NPC:
             gameStatus = gGameStatusPtr;
-            playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
+            playerStatus->animFlags |= PA_FLAGS_INVISIBLE;
             gameStatus->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
             playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_SPIN_DOWN
         case SUBSTATE_DISGUISE_SPIN_DOWN:
@@ -261,7 +261,7 @@ void action_update_parasol(void) {
                     playerStatus->currentStateTime = 2;
                     playerStatus->actionSubstate++; // SUBSTATE_SPIN_DOWN
                     gameStatus2 = gGameStatusPtr;
-                    playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
+                    playerStatus->animFlags &= ~PA_FLAGS_INVISIBLE;
                     gameStatus2->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
                     playerStatus->peachDisguise = 0;
                     free_npc_by_index(PeachDisguiseNpcIndex);

@@ -939,7 +939,7 @@ void func_800E9810(void);
 void func_800E983C(void);
 void func_800E984C(void);
 s32 func_800E9860(void);
-void func_800E98C4(void);
+void status_menu_respond_to_changes(void);
 void func_800E98EC(void);
 void func_800E9900(void);
 void func_800F0C9C(void);
@@ -981,7 +981,7 @@ void func_8025DA60(ActorPart*, s32);
 void func_8025DBC8(ActorPart*, s32);
 void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
-void func_800E9894(void);
+void status_menu_ignore_changes(void);
 void func_8013A854(u32);
 
 void set_script_flags(Evt* script, s32 flags);

@@ -13,14 +13,14 @@
 #include "sprite/npc/ParaTroopa.h"
 
 enum {
-	NPC_KoopaTroopa             = 0,
-	NPC_ParaTroopa              = 1,
+    NPC_KoopaTroopa             = 0,
+    NPC_ParaTroopa              = 1,
 };
 
 enum {
-	MV_Unk_00			= MapVar(0),
-	MV_Unk_01			= MapVar(1),
-	MV_Unk_02			= MapVar(2),
+    MV_Unk_00           = MapVar(0),
+    MV_Unk_01           = MapVar(1),
+    MV_Unk_02           = MapVar(2),
 };
 
 #define NAMESPACE trd_04

@@ -310,7 +310,7 @@ void phys_peach_update(void) {
     } while (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED);
 
     peach_check_for_parasol_input();
-    if (playerStatus->animFlags & PA_FLAGS_IN_DISGUISE) {
+    if (playerStatus->animFlags & PA_FLAGS_INVISIBLE) {
         peach_sync_disguise_npc();
     }
 }
@@ -555,7 +555,7 @@ void peach_force_disguise_action(s32 useParasol) {
     if (useParasol) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
+        playerStatus->animFlags &= ~PA_FLAGS_INVISIBLE;
         gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(PeachDisguiseNpcIndex);
@@ -575,7 +575,7 @@ void peach_check_for_parasol_input(void) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
                 if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
-                    playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
+                    playerStatus->animFlags |= PA_FLAGS_INVISIBLE;
                     gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
