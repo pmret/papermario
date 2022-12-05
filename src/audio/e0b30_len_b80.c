@@ -52,7 +52,7 @@ s32 bgm_get_map_default_variation(s32 songID) {
         if (SongsUsingVariationFlag[i] == songID) {
             MapConfig* map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
 
-            return map->audio.bytes.songVariation & 1;
+            return map->songVariation & 1;
         }
     }
 

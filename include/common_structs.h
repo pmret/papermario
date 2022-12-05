@@ -1514,7 +1514,7 @@ typedef struct SelectableTarget {
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
-    /* 0x00 */ Vec3f unk_00;
+    /* 0x00 */ Vec3f absolutePosition;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
     /* 0x24 */ f32 jumpScale;

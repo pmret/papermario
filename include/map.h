@@ -53,14 +53,9 @@ typedef struct MapConfig {
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
     /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
-    /* 0x1C */ union {
-        u32 word;
-        struct {
-            char unk_1C[0x2];
-            s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-            s8 sfxReverb;
-        } bytes;
-    } audio;
+    /* 0x1C */ char unk_1C[0x2];
+    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
+    /* 0x1F */ s8 sfxReverb;
 } MapConfig; // size = 0x20
 
 typedef struct AreaConfig {
