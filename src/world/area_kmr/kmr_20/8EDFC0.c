@@ -31,57 +31,57 @@ void func_802421A0_8EDFC0(UnkKmr20* arg0, s32 opacity) {
         gDPPipeSync(gMasterGfxPos++);
 
         msg_draw_frame(30, 40, 260, 155, 6, 0, 1, opacity * 0.55, opacity);
-        draw_msg(0xB00FC, 206 - get_msg_width(0xB00FC, 0), 50, opacity, 0, 1);
-        draw_number(gPlayerData.totalCoinsEarned, 216, 0x33, 1, 0, opacity, 2);
-        draw_msg(0xB00FD, 206 - get_msg_width(0xB00FD, 0), 65, opacity, 0, 1);
+        draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, 0), 50, opacity, 0, 1);
+        draw_number(gPlayerData.totalCoinsEarned, 216, 51, 1, 0, opacity, 2);
+        draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, 0), 65, opacity, 0, 1);
         draw_number(arg0->equippedBadges, 231, 66, 1, 0, opacity, 3);
-        draw_msg(0x1F0034, 232, 63, opacity, 0, 0);
+        draw_msg(MSG_MenuTip_0034, 232, 63, opacity, 0, 0);
         draw_number(80, 244, 66, 1, 0, opacity, 2);
         if (gPlayerData.starPiecesCollected == 0) {
-            draw_msg(0xB00FA, 109, 80, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 80, opacity, 0, 1);
         } else {
-            draw_msg(0xB00FB, 206 - get_msg_width(0xB00FB, 0), 80, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FB, 206 - get_msg_width(MSG_CH0_00FB, 0), 80, opacity, 0, 1);
             draw_number(gPlayerData.starPiecesCollected, 231, 81, 1, 0, opacity, 3);
-            draw_msg(0x1F0034, 232, 78, opacity, 0, 0);
-            draw_number(0xA0, 244, 80, 1, 0, opacity, 2);
+            draw_msg(MSG_MenuTip_0034, 232, 78, opacity, 0, 0);
+            draw_number(160, 244, 80, 1, 0, opacity, 2);
         }
 
-        width = get_msg_width(0xB00FE, 0);
+        width = get_msg_width(MSG_CH0_00FE, 0);
         if (arg0->unk_26 == 0) {
-            draw_msg(0xB00FA, 110, 95, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 110, 95, opacity, 0, 1);
         } else {
             if (arg0->unk_26 == -1) {
-                draw_msg(0xB00FE, 206 - width, 95, opacity, 0, 1);
+                draw_msg(MSG_CH0_00FE, 206 - width, 95, opacity, 0, 1);
                 draw_number(0, 231, 96, 1, 0, opacity, 3);
             } else {
-                draw_msg(0xB00FE, 206 - width, 95, opacity, 0, 1);
+                draw_msg(MSG_CH0_00FE, 206 - width, 95, opacity, 0, 1);
                 draw_number(arg0->unk_26, 231, 96, 1, 0, opacity, 3);
             }
-            draw_msg(0x1F0034, 232, 93, opacity, 0, 0);
+            draw_msg(MSG_MenuTip_0034, 232, 93, opacity, 0, 0);
             draw_number(arg0->unk_28, 244, 95, 1, 0, opacity, 2);
         }
 
         if (gPlayerData.quizzesAnswered == 0) {
-            draw_msg(0xB00FA, 109, 110, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 110, opacity, 0, 1);
         } else {
-            draw_msg(0xB00FF, 206 - get_msg_width(0xB00FF, 0), 110, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FF, 206 - get_msg_width(MSG_CH0_00FF, 0), 110, opacity, 0, 1);
             draw_number(gPlayerData.quizzesCorrect, 231, 111, 1, 0, opacity, 3);
-            draw_msg(0x1F0034, 232, 108, opacity, 0, 0);
+            draw_msg(MSG_MenuTip_0034, 232, 108, opacity, 0, 0);
             draw_number(gPlayerData.quizzesAnswered, 244, 111, 1, 0, opacity, 2);
         }
 
-        draw_msg(0xB00F4, 206 - get_msg_width(0xB00F4, 0), 125, opacity, 0, 1);
+        draw_msg(MSG_CH0_00F4, 206 - get_msg_width(MSG_CH0_00F4, 0), 125, opacity, 0, 1);
         draw_number(gPlayerData.battlesCount, 216, 126, 1, 0, opacity, 2);
-        width = get_msg_width(0xB00F7, 0);
-        draw_msg(0xB00F7, 206 - width, 140, opacity, 0, 1);
+        width = get_msg_width(MSG_CH0_00F7, 0);
+        draw_msg(MSG_CH0_00F7, 206 - width, 140, opacity, 0, 1);
         draw_number(gPlayerData.playerFirstStrikes, 216, 141, 1, 0, opacity, 2);
-        draw_msg(0xB00F8, 206 - get_msg_width(0xB00F8, 0), 155, opacity, 0, 1);
+        draw_msg(MSG_CH0_00F8, 206 - get_msg_width(MSG_CH0_00F8, 0), 155, opacity, 0, 1);
         draw_number(gPlayerData.enemyFirstStrikes, 216, 156, 1, 0, opacity, 2);
 
         if (gPlayerData.powerBounces == 0) {
-            draw_msg(0xB00FA, 109, 170, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 170, opacity, 0, 1);
         } else {
-            draw_msg(0xB00F9, 206 - get_msg_width(0xB00F9, 0), 170, opacity, 0, 1);
+            draw_msg(MSG_CH0_00F9, 206 - get_msg_width(MSG_CH0_00F9, 0), 170, opacity, 0, 1);
             draw_number(gPlayerData.powerBounces, 216, 171, 1, 0, opacity, 2);
         }
     }
