@@ -41,7 +41,7 @@ extern u8 D_802430B0_BD1CA0[];
 extern u8 D_802430C0_BD1CB0[];
 
 ApiStatus func_80240500_BCF0F0(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, MapVar(6), heap_malloc(sizeof(UnkObk07)));
+    evt_set_variable(script, MapVar(6), (s32) heap_malloc(sizeof(UnkObk07)));
     return ApiStatus_DONE2;
 }
 

@@ -23,7 +23,7 @@ ApiStatus func_802403DC_BD3C4C(Evt* script) {
     temp_v0->scale.z = SPRITE_WORLD_SCALE_F;
     temp_v0->foldID = func_8013A704(1);
     temp_v0->entityID = create_worker_world(0, obk_08_UnkFoldFunc);
-    evt_set_variable(script, MapVar(10), temp_v0);
+    evt_set_variable(script, MapVar(10), (s32) temp_v0);
     return ApiStatus_DONE2;
 }
 
