@@ -2,14 +2,15 @@
 #include "entity.h"
 
 API_CALLABLE(N(DismissGotItem)) {
-    get_entity_by_index(script->varTable[0])->dataBuf.chest->gotItemDone = TRUE;
+    Entity* bigChest = get_entity_by_index(script->varTable[0]);
+    bigChest->dataBuf.chest->gotItemDone = TRUE;
     return ApiStatus_DONE2;
 }
 
 #include "world/common/todo/SetEntityPosition.inc.c"
 #include "world/common/util/PlaySpringReboundAnimation.inc.c"
 
-EvtScript N(EVS_OpenGiantChest) = {
+EvtScript N(EVS_SetupGiantChest_UltraBoots) = {
     EVT_IF_EQ(GF_TIK25_GiantChest, FALSE)
         EVT_LABEL(10)
         EVT_IF_EQ(GF_TIK25_GiantChest, FALSE)
@@ -98,7 +99,7 @@ EvtScript N(EVS_OnBreakBlock_SpringL) = {
 EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_GiantChest), -270, -90, 0, 90, ITEM_ULTRA_BOOTS, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_TIK25_GiantChest)
-    EVT_EXEC(N(EVS_OpenGiantChest))
+    EVT_EXEC(N(EVS_SetupGiantChest_UltraBoots))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 210, -75, -20, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnBreakBlock_SpringR)))
     EVT_IF_EQ(GF_TIK25_SpringBrickA, FALSE)

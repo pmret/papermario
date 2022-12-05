@@ -10288,15 +10288,14 @@ segments:
     start: 0x982440
     vram: 0x80240000
     subsegments:
-    - [0x982440, c]
-    - [0x9824F0, c]
-    - [0x982530, c]
-    - [0x982550, data]
-    - [0x982860, data]
-    - [0x982CA0, data]
-    - [0x983AD0, data]
-    - [0x984390, data]
-    - [0x9845D0, data]
+    - [0x982440, c, isk_07_0_header]
+    - [0x982440, c, isk_07_1_main]
+    - [0x982440, c, isk_07_2_entity]
+    - [0x982440, c, isk_07_3_npc]
+    - [0x9824F0, c, isk_07_4_stairs]
+    - [0x9824F0, c, isk_07_5_lock]
+    - [0x982530, c, isk_07_6_switch]
+    - [0x984E20, c, isk_07_7_ambush]
     - [0x984E20]
   - name: isk_08
     dir: world/area_isk/isk_08
@@ -10315,13 +10314,12 @@ segments:
     start: 0x9864E0
     vram: 0x80240000
     subsegments:
-    - [0x9864E0, c]
-    - [0x9867D0, c]
-    - [0x986810, data]
-    - [0x986A60, data]
-    - [0x986BD0, data]
-    - [0x987560, data]
-    - [0x988290, data]
+    - [0x9864E0, c, isk_09_0_header]
+    - [0x9864E0, c, isk_09_1_music]
+    - [0x9864E0, c, isk_09_2_main]
+    - [0x9864E0, c, isk_09_3_entity]
+    - [0x9867D0, c, isk_09_4_stairs]
+    - [0x9867D0, c, isk_09_5_switch]
     - [0x988B50]
   - name: isk_10
     dir: world/area_isk/isk_10
@@ -10355,11 +10353,11 @@ segments:
     start: 0x98D640
     vram: 0x80240000
     subsegments:
-    - [0x98D640, c]
-    - [0x98D640, data]
-    - [0x98DA70, data]
-    - [0x98DCB0, data]
-    - [0x98ED40, data]
+    - [0x98D640, c, isk_12_0_header]
+    - [0x98D640, c, isk_12_1_main]
+    - [0x98D640, c, isk_12_2_entity]
+    - [0x98D640, c, isk_12_3_sand]
+    - [0x98D640, c, isk_12_4_switch]
     - [0x98F7C0]
   - name: isk_13
     dir: world/area_isk/isk_13
