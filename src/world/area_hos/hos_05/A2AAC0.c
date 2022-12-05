@@ -216,7 +216,7 @@ ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
 
-    effect->data.somethingRotating[D_802495DC_A3381C + 1].unk_29 = 1;
+    effect->data.somethingRotating[D_802495DC_A3381C + 1].state = 1;
     D_802495DC_A3381C++;
     return ApiStatus_DONE2;
 }
@@ -225,7 +225,7 @@ ApiStatus func_80240F88_A2B1C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
 
-    effect->data.somethingRotating[D_802495E0_A33820 + 1].unk_29 = 3;
+    effect->data.somethingRotating[D_802495E0_A33820 + 1].state = 3;
     D_802495E0_A33820++;
     return ApiStatus_DONE2;
 }

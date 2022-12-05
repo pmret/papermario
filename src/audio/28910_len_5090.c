@@ -156,14 +156,14 @@ AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event) {
                 }
             }
             volume0 = event->startVolume;
-            if (volume0 >= 0x80) {
+            if (volume0 > 0x7F) {
                 volume0 = 0x7F;
             }
             if (volume0 != 0) {
                 volume0 = (volume0 << 8) | 0xFF;
             }
             volume1 = event->finalVolume;
-            if (volume1 >= 0x80) {
+            if (volume1 > 0x7F) {
                 volume1 = 0x7F;
             }
             if (volume1 != 0) {
@@ -1001,10 +1001,10 @@ if (track->detourLength != 0) {\
 }
 
 void au_bgm_player_update_playing(BGMPlayer *player) {
-    s32 bVolumeFading;    // SP + 10
-    u8 sp1F;              // SP + 1F
-    s16 notePitch;        // SP + 26
-    u8 bFinished;         // SP + 28
+    s32 bVolumeFading;
+    u8 sp1F;
+    s16 notePitch;
+    u8 bFinished;
 
     AlUnkVoice* voice;
     BGMDrumInfo* drumInfo;

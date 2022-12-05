@@ -2507,12 +2507,10 @@ typedef struct SomethingRotatingFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ u8 unk_24;
+    /* 0x24 */ u8 primAlpha;
     /* 0x25 */ s8 unk_25;
-    /* 0x26 */ u8 unk_26;
-    /* 0x27 */ u8 unk_27;
-    /* 0x28 */ u8 unk_28;
-    /* 0x29 */ u8 unk_29;
+    /* 0x26 */ Color_RGB8 env;
+    /* 0x29 */ u8 state;
     /* 0x2A */ char unk_2A[2];
     /* 0x2C */ f32 unk_2C;
 } SomethingRotatingFXData; // size = 0x30

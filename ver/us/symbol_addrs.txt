@@ -9019,6 +9019,7 @@ spirit_card_update = 0xE01121C0; // type:func rom:0x3FA010
 spirit_card_render = 0xE01122E8; // type:func rom:0x3FA138
 func_E0112330 = 0xE0112330; // type:func rom:0x3FA180
 spirit_card_appendGfx = 0xE01124CC; // type:func rom:0x3FA31C
+D_09003F80_3FE430 = 0x09003F80; // type:data rom:0x3FE430 segment:effect_gfx_spirit_card
 lil_oink_main = 0xE0114000; // type:func rom:0x3FEAE0
 lil_oink_init = 0xE01140D4; // type:func rom:0x3FEBB4
 lil_oink_update = 0xE01140DC; // type:func rom:0x3FEBBC

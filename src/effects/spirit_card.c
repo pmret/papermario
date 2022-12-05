@@ -1,10 +1,25 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090042E0[];
-extern Gfx* D_E0112630[];
-extern Gfx* D_E0112638[];
-extern Gfx* D_E0112640[];
+extern Gfx D_09003F98_3FE448[];
+extern Gfx D_09004010_3FE4C0[];
+extern Gfx D_09004088_3FE538[];
+extern Gfx D_09004100_3FE5B0[];
+extern Gfx D_09004178_3FE628[];
+extern Gfx D_090041F0_3FE6A0[];
+extern Gfx D_09004268_3FE718[];
+extern Gfx D_090042E0_3FE790[];
+extern Gfx D_09004360_3FE810[];
+extern Gfx D_09004458_3FE908[];
+extern Gfx D_09004508_3FE9B8[];
+extern Gfx D_09004600_3FEAB0[];
+
+Gfx* D_E0112630[] = { D_09004458_3FE908, D_09004600_3FEAB0 };
+Gfx* D_E0112638[] = { D_09004360_3FE810, D_09004508_3FE9B8 };
+Gfx* D_E0112640[] = {
+    D_09003F98_3FE448, D_09004010_3FE4C0, D_09004088_3FE538, D_09004100_3FE5B0,
+    D_09004178_3FE628, D_090041F0_3FE6A0, D_09004268_3FE718
+};
 
 void spirit_card_init(EffectInstance* effect);
 void spirit_card_update(EffectInstance* effect);
@@ -137,7 +152,7 @@ void spirit_card_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090042E0);
+    gSPDisplayList(gMasterGfxPos++, D_090042E0_3FE790);
     gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 255);
 
     if (unk_00 < 2) {

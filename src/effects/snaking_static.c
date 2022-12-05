@@ -1,11 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void snaking_static_appendGfx(void* effect);
-
 void snaking_static_update(EffectInstance*);
 void snaking_static_init(EffectInstance* effect);
 void snaking_static_render(EffectInstance* effect);
+void snaking_static_appendGfx(void* effect);
+
+extern Gfx D_09001000_3B3D90[];
+extern Gfx D_090010F8_3B3E88[];
 
 EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 timeLeft) {
     EffectBlueprint effectBp;
@@ -156,4 +158,50 @@ void snaking_static_render(EffectInstance* effect) {
 void func_E00AE544(void) {
 }
 
-INCLUDE_ASM(s32, "effects/snaking_static", snaking_static_appendGfx);
+void snaking_static_appendGfx(void* effect) {
+    EffectInstance* effectTemp = effect;
+    SnakingStaticFXData* data = effectTemp->data.snakingStatic;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    Matrix4f sp18, sp58;
+    s32 lifeTime = data->lifeTime;
+    s32 unk_24 = data->unk_24;
+    s32 primR = data->unk_18;
+    s32 primG = data->unk_1C;
+    s32 primB = data->unk_20;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guScaleF(sp58, data->unk_38, data->unk_38, data->unk_38);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gSPDisplayList(gMasterGfxPos++, D_09001000_3B3D90);
+
+    data++;
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR, primG, primB, (data->unk_24 * unk_24) / 255);
+        shim_guTranslateF(sp18, data->pos.x, data->pos.y, 0.0f);
+        shim_guRotateF(sp58, data->unk_3C, 0.0f, 0.0f, 1.0f);
+        shim_guMtxCatF(sp58, sp18, sp18);
+        shim_guScaleF(sp58, data->unk_34 * 0.0625f, data->unk_34 * 0.0625f, 1.0f);
+        shim_guMtxCatF(sp58, sp18, sp18);
+        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                  G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, data->unk_40 * 64, 0, (data->unk_40 * 64) | 0x3C, 0x007C);
+        gDPSetTileSize(gMasterGfxPos++, 1, (lifeTime * 12), 0, ((lifeTime * 3) + 0x1F) * 4, 0x007C);
+
+        gSPDisplayList(gMasterGfxPos++, D_090010F8_3B3E88);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
