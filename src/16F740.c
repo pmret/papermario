@@ -325,7 +325,7 @@ void btl_state_update_normal_start(void) {
                     battleStatus->controlScriptID = script->id;
                 }
 
-                uiStatus->hidden = 0;
+                uiStatus->hidden = FALSE;
                 gBattleStatus.flags1 |= BS_FLAGS1_1;
 
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
