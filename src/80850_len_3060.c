@@ -1053,6 +1053,7 @@ void update_status_menu(void) {
     func_800F102C();
 }
 #else
+void update_status_menu(void);
 INCLUDE_ASM(s32, "80850_len_3060", update_status_menu);
 #endif
 
