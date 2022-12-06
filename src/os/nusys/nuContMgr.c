@@ -2,7 +2,7 @@
 #include "nu/nusys.h"
 
 s32 contRetrace(void);
-s32 contReadData(void);
+s32 contReadData(s32* arg0);
 s32 contReadNW(void);
 s32 contQuery(void);
 
