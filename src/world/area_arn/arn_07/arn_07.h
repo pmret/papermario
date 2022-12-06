@@ -16,20 +16,20 @@
 #include "sprite/npc/Bootler.h"
 
 enum {
-	NPC_TubbasHeart         = 0,
-	NPC_Tubba               = 1,
-	NPC_Boo_01              = 2,
-	NPC_Boo_02              = 3,
-	NPC_Boo_03              = 4,
-	NPC_Boo_04              = 5,
-	NPC_Boo_05              = 6,
-	NPC_Boo_06              = 7,
-	NPC_Bow                 = 8,
-	NPC_Bootler             = 9,
-	NPC_HyperParagoomba_01  = 10,
-	NPC_HyperParagoomba_02  = 11,
-	NPC_HyperParagoomba_03  = 12,
-	NPC_Skolar              = 13,
+    NPC_TubbasHeart         = 0,
+    NPC_Tubba               = 1,
+    NPC_Boo_01              = 2,
+    NPC_Boo_02              = 3,
+    NPC_Boo_03              = 4,
+    NPC_Boo_04              = 5,
+    NPC_Boo_05              = 6,
+    NPC_Boo_06              = 7,
+    NPC_Bow                 = 8,
+    NPC_Bootler             = 9,
+    NPC_HyperParagoomba_01  = 10,
+    NPC_HyperParagoomba_02  = 11,
+    NPC_HyperParagoomba_03  = 12,
+    NPC_Skolar              = 13,
 };
 
 enum {

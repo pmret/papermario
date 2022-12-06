@@ -58,7 +58,7 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = 0;
         script->functionTemp[3] = 0;
     }
-    
+
     physics = script->functionTempPtr[1];
     switch (script->functionTemp[0]) {
         case CHAIR_STATE_INITIAL:
@@ -134,7 +134,7 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
             physics->angularAccel = 0.1f;
             physics->equilibriumAngle = 0;
             physics->angleB += physics->angularAccel;
-                        
+
             if (physics->rotationAngle > physics->equilibriumAngle) {
                 physics->angleA += physics->angularAccel * physics->mass;
             }
@@ -142,7 +142,7 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
                 physics->angleB -= 100.0;
                 physics->angleA -= 100.0;
             }
-            
+
             if (fabsf(physics->angleB - physics->angleA) > 0.5) {
                 if (physics->angleA > physics->angleB) {
                     physics->angleA = physics->angleB + 0.5;
@@ -174,7 +174,7 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
     } else {
         script->functionTemp[2] = 0;
     }
-    
+
     physics->verticalOffset = SQ(physics->rotationAngle) / 90.0f;
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i3));
@@ -184,19 +184,19 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
     guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
     update_collider_transform(COLLIDER_i3);
     update_collider_transform(COLLIDER_i2);
-    
+
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i2));
     model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
     guTranslateF(model->transformMatrix, 0.0f, physics->verticalOffset, 0.0f);
     guRotateF(tempMtx, physics->rotationAngle, 0.0f, 0.0f, 1.0f);
     guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
-    
+
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i1));
     model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
     guTranslateF(model->transformMatrix, 0.0f, physics->verticalOffset, 0.0f);
     guRotateF(tempMtx, physics->rotationAngle, 0.0f, 0.0f, 1.0f);
     guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
     update_collider_transform(COLLIDER_i1);
-    
+
     return ApiStatus_BLOCK;
 }

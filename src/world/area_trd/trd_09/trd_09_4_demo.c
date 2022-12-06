@@ -77,7 +77,7 @@ EvtScript N(EVS_MonitorDemoState) = {
 
 s32 N(DemoSceneState) = 0;
 
-// duplicate of func_8024095C_97BF8C
+// duplicate of SetupDemoScene from isk_04
 API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 

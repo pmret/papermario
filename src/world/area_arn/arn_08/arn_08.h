@@ -13,8 +13,8 @@
 #include "sprite/npc/Yakkey.h"
 
 enum {
-	NPC_TubbasHeart             = 0,
-	NPC_Yakkey                  = 1,
+    NPC_TubbasHeart             = 0,
+    NPC_Yakkey                  = 1,
 };
 
 #define NAMESPACE arn_08

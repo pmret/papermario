@@ -896,11 +896,11 @@ StaticNpc N(npcGroup_80246090) = {
     .init = &N(init_80245D80),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.territory = { .temp = { -180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
+    .territory = { .temp = { -180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
     .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,
@@ -929,11 +929,11 @@ StaticNpc N(npcGroup_80246280) = {
     .init = &N(init_80245E44),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.territory = { .temp = { 180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
+    .territory = { .temp = { 180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
     .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,
@@ -962,11 +962,11 @@ StaticNpc N(npcGroup_80246470) = {
     .init = &N(init_80245F08),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.territory = { .temp = { -180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
+    .territory = { .temp = { -180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
     .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,
@@ -995,11 +995,11 @@ StaticNpc N(npcGroup_80246660) = {
     .init = &N(init_80245FCC),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.territory = { .temp = { 180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
+    .territory = { .temp = { 180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 }},
     .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,
@@ -1043,11 +1043,11 @@ StaticNpc N(npcGroup_80246880) = {
     .init = &N(init_80245784),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_WorldTubba_Anim06,
         ANIM_WorldTubba_Anim09,
         ANIM_WorldTubba_Anim0C,
@@ -1076,7 +1076,7 @@ StaticNpc N(npcGroup_80246A70) = {
     .init = &N(init_80245814),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
@@ -1086,7 +1086,7 @@ StaticNpc N(npcGroup_80246A70) = {
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
     },
-	.territory = { .temp = { 2, 320, 210, 0, 370, 210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 350, 210, 0, 1000, 250, 1 }},
+    .territory = { .temp = { 2, 320, 210, 0, 370, 210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 350, 210, 0, 1000, 250, 1 }},
     .animations = {
         ANIM_WorldTubba_Anim07,
         ANIM_WorldTubba_Anim0A,
@@ -1117,7 +1117,7 @@ StaticNpc N(npcGroup_80246C60) = {
     .init = &N(init_80245CF0),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
@@ -1127,7 +1127,7 @@ StaticNpc N(npcGroup_80246C60) = {
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
     },
-	.territory = { .temp = { 8, 156, 0, 187, -36, 0, 290, -159, 0, 50, -80, 0, -218, 66, 0, -362, 196, 0, -268, 280, 0, -124, 250, 0, 100, 0, 0, 0, 0, 0, 0, -32767, 250, 0, 100, 1000, 250, 1 }},
+    .territory = { .temp = { 8, 156, 0, 187, -36, 0, 290, -159, 0, 50, -80, 0, -218, 66, 0, -362, 196, 0, -268, 280, 0, -124, 250, 0, 100, 0, 0, 0, 0, 0, 0, -32767, 250, 0, 100, 1000, 250, 1 }},
     .animations = {
         ANIM_WorldTubba_Anim07,
         ANIM_WorldTubba_Anim0A,

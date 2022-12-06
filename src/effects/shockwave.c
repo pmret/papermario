@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000940_359CF0[];
 extern Gfx D_090009A0_359D50[];
 extern Gfx D_09000A80_359E30[];
 
@@ -73,55 +74,55 @@ void shockwave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     } else {
         part->unk_28 = 30;
     }
-    part->unk_38 = 255;
+    part->alpha = 255;
     part->unk_2C = 0;
     part->unk_00 = arg0;
-    part->unk_04 = arg1;
-    part->unk_08 = arg2;
-    part->unk_0C = arg3;
+    part->pos.x = arg1;
+    part->pos.y = arg2;
+    part->pos.z = arg3;
 
     switch (arg0) {
         case 0:
         case 1:
-            part->unk_50.r = 0;
-            part->unk_50.g = 255;
-            part->unk_50.b = 122;
-            part->unk_53.r = 240;
-            part->unk_53.g = 255;
-            part->unk_53.b = 250;
+            part->prim.r = 0;
+            part->prim.g = 255;
+            part->prim.b = 122;
+            part->env.r = 240;
+            part->env.g = 255;
+            part->env.b = 250;
             break;
         case 2:
-            part->unk_50.r = 125;
-            part->unk_50.g = 120;
-            part->unk_50.b = 100;
-            part->unk_53.r = 255;
-            part->unk_53.g = 255;
-            part->unk_53.b = 240;
+            part->prim.r = 125;
+            part->prim.g = 120;
+            part->prim.b = 100;
+            part->env.r = 255;
+            part->env.g = 255;
+            part->env.b = 240;
             break;
         case 3:
-            part->unk_50.r = 220;
-            part->unk_50.g = 210;
-            part->unk_50.b = 200;
-            part->unk_53.r = 255;
-            part->unk_53.g = 255;
-            part->unk_53.b = 250;
+            part->prim.r = 220;
+            part->prim.g = 210;
+            part->prim.b = 200;
+            part->env.r = 255;
+            part->env.g = 255;
+            part->env.b = 250;
             break;
         case 5:
-            part->unk_50.r = 225;
-            part->unk_50.g = 204;
-            part->unk_50.b = 93;
-            part->unk_53.r = 232;
-            part->unk_53.g = 231;
-            part->unk_53.b = 171;
+            part->prim.r = 225;
+            part->prim.g = 204;
+            part->prim.b = 93;
+            part->env.r = 232;
+            part->env.g = 231;
+            part->env.b = 171;
             break;
         default:
             part->unk_28 = 50;
-            part->unk_50.r = 208;
-            part->unk_50.g = 136;
-            part->unk_50.b = 40;
-            part->unk_53.r = 216;
-            part->unk_53.g = 169;
-            part->unk_53.b = 65;
+            part->prim.r = 208;
+            part->prim.g = 136;
+            part->prim.b = 40;
+            part->env.r = 216;
+            part->env.g = 169;
+            part->env.b = 65;
             break;
     }
 
@@ -165,12 +166,12 @@ void shockwave_update(EffectInstance* effect) {
         case 0:
         case 1:
             if (unk_2C >= 8) {
-                part->unk_38 *= 0.8;
+                part->alpha *= 0.8;
             }
             break;
         default:
             if (unk_2C >= 8) {
-                part->unk_38 *= 0.94;
+                part->alpha *= 0.94;
             }
             break;
     }
@@ -180,9 +181,9 @@ void shockwave_update(EffectInstance* effect) {
         part->unk_4C++;
         if (part->unk_4C >= 0) {
             if (part->unk_4C == 0) {
-                part->unk_04 = 0;
-                part->unk_08 = 0;
-                part->unk_0C = 0;
+                part->pos.x = 0.0f;
+                part->pos.y = 0.0f;
+                part->pos.z = 0.0f;
                 part->unk_10 = -shim_sin_deg(part->unk_34) * 0.5;
                 part->unk_14 = shim_cos_deg(part->unk_34) * 0.5;
                 part->unk_18 = 0;
@@ -264,4 +265,96 @@ void shockwave_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/shockwave", shockwave_appendGfx);
+void shockwave_appendGfx(void* effect) {
+    ShockwaveFXData* data = ((EffectInstance*) effect)->data.shockwave;
+    Matrix4f sp20, sp60;
+    Gfx* dlist = D_09000940_359CF0;
+    Gfx* dlist2;
+    s32 primA;
+    s32 primR, primG, primB;
+    s32 envR, envG, envB;
+    s32 primR2, primG2, primB2;
+    s32 envR2, envG2, envB2;
+    Gfx* savedGfxPos;
+    Gfx* savedGfxPos2;
+    s32 temp_v0;
+    s32 i;
+
+    primR = data->prim.r;
+    primG = data->prim.g;
+    primB = data->prim.b;
+    envR = data->env.r;
+    envG = data->env.g;
+    envB = data->env.b;
+    primR2 = data->prim.r;
+    primG2 = data->prim.g;
+    primB2 = data->prim.b;
+    envR2 = data->env.r;
+    envG2 = data->env.g;
+    envB2 = data->env.b;
+
+    temp_v0 = data->unk_00;
+    dlist2 = D_E004AE60[temp_v0];
+
+    if (temp_v0 >= 2) {
+        primR2 = primR >> 2;
+        primG2 = primG >> 2;
+        primB2 = primB >> 2;
+        envR2 = envR >> 2;
+        envG2 = envG >> 2;
+        envB2 = envB >> 2;
+    }
+    
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, dlist2);
+
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 
+                     data->pos.x, data->pos.y, data->pos.z);
+    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    primA = data->alpha;
+
+    savedGfxPos = gMasterGfxPos;
+    gMasterGfxPos++;
+    savedGfxPos2 = gMasterGfxPos;
+    
+    data++;
+    for (i = 1; i < ((EffectInstance*) effect)->numParts; i++, data++) {
+        if (data->unk_4C >= 0) {
+            shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+            shim_guRotateF(sp60, data->unk_34, 0.0f, 0.0f, 1.0f);
+            shim_guMtxCatF(sp60, sp20, sp20);
+            shim_guScaleF(sp60, data->unk_1C * 0.3, data->unk_20 * 0.3, data->unk_24 * 0.3);
+            shim_guMtxCatF(sp60, sp20, sp20);
+            shim_guRotateF(sp60, data->unk_30, 0.0f, 1.0f, 0.0f);
+            shim_guMtxCatF(sp60, sp20, sp20);
+            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, (s32) data->unk_3C, 0x00FC, (s32) data->unk_3C + 0x7C);
+            gDPSetTileSize(gMasterGfxPos++, 1, 0, (s32) data->unk_44, 0x007C, (s32) data->unk_44 + 0x7C);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+                      G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, dlist);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+    gSPEndDisplayList(gMasterGfxPos++);
+    gSPBranchList(savedGfxPos, gMasterGfxPos);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR2, primG2, primB2, primA);
+    gDPSetEnvColor(gMasterGfxPos++, envR2, envG2, envB2, 0);
+    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
+    gSPSetGeometryMode(gMasterGfxPos++, G_CULL_FRONT);
+    gSPDisplayList(gMasterGfxPos++, savedGfxPos2);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR, primG, primB, primA);
+    gDPSetEnvColor(gMasterGfxPos++, envR, envG, envB, 0);
+    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
+    gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
+    gSPDisplayList(gMasterGfxPos++, savedGfxPos2);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

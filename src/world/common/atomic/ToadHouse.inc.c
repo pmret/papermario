@@ -3,12 +3,12 @@
 #include "../../partners.h"
 
 API_CALLABLE(N(ToadHouse_DisableStatusMenu)) {
-    func_800E9894();
+    status_menu_ignore_changes();
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(ToadHouse_ShowStatusMenu)) {
-    func_800E98C4();
+    status_menu_respond_to_changes();
     sync_status_menu();
     return ApiStatus_DONE2;
 }

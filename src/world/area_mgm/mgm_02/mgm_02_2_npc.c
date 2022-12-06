@@ -216,7 +216,7 @@ API_CALLABLE(N(CreateScoreDisplay)) {
 
 API_CALLABLE(N(DisableMenus)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_MENUS;
-    func_800E9894();
+    status_menu_ignore_changes();
     close_status_menu();
     return ApiStatus_DONE2;
 }
@@ -435,7 +435,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_FUZZY_IDLE:
                     data->box[i].stateTimer--;
                     if (data->box[i].stateTimer <= 0) {
-                        npc->currentAnim = ANIM_Fuzzy_Anim02;
+                        npc->currentAnim = ANIM_Fuzzy_Walk;
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
                         sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -481,7 +481,7 @@ API_CALLABLE(N(RunMinigame)) {
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
                     gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
-                    npc->currentAnim = ANIM_Fuzzy_Anim03;
+                    npc->currentAnim = ANIM_Fuzzy_Run;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
                     npc->pos.y = centerY;
@@ -508,7 +508,7 @@ API_CALLABLE(N(RunMinigame)) {
                     gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
-                        npc->currentAnim = ANIM_Fuzzy_Anim0F;
+                        npc->currentAnim = ANIM_Fuzzy_Stunned;
                         gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->position.x;
@@ -534,7 +534,7 @@ API_CALLABLE(N(RunMinigame)) {
                         hud_element_set_script(data->hudElemID_AButton, &HES_AButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 160);
                         hud_element_set_alpha(data->hudElemID_Meter, 160);
-                        npc->currentAnim = ANIM_Fuzzy_Anim08;
+                        npc->currentAnim = ANIM_Fuzzy_Hurt;
                         npc->pos.y += 3.0;
                     }
                     break;
@@ -930,7 +930,7 @@ API_CALLABLE(N(CleanupGame)) {
                     if (data->box[i].state != BOX_STATE_FUZZY_END) {
                         data->box[i].state = BOX_STATE_FUZZY_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = ANIM_Fuzzy_Anim0E;
+                        npc->currentAnim = ANIM_Fuzzy_Sleep;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -958,7 +958,7 @@ API_CALLABLE(N(CreateMinigame)) {
     data->windowB_posX = SCREEN_WIDTH;
     data->timeLeft = PLAY_TIME;
 
-    func_800E9894();
+    status_menu_ignore_changes();
     close_status_menu();
 
     return ApiStatus_DONE2;
@@ -1795,7 +1795,7 @@ StaticNpc N(NpcData_GuideToad) = {
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Run)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_SWITCH(LVar0)
@@ -1879,22 +1879,22 @@ StaticNpc N(NpcData_Fuzzy_01) = {
         .flowerDrops = NO_DROPS,
     },
     .animations = {
-        .idle   = ANIM_Fuzzy_Anim02,
-        .walk   = ANIM_Fuzzy_Anim02,
-        .run    = ANIM_Fuzzy_Anim03,
-        .chase  = ANIM_Fuzzy_Anim03,
-        .anim_4 = ANIM_Fuzzy_Anim01,
-        .anim_5 = ANIM_Fuzzy_Anim01,
-        .death  = ANIM_Fuzzy_Anim08,
-        .hit    = ANIM_Fuzzy_Anim08,
-        .anim_8 = ANIM_Fuzzy_Anim03,
-        .anim_9 = ANIM_Fuzzy_Anim03,
-        .anim_A = ANIM_Fuzzy_Anim03,
-        .anim_B = ANIM_Fuzzy_Anim03,
-        .anim_C = ANIM_Fuzzy_Anim03,
-        .anim_D = ANIM_Fuzzy_Anim03,
-        .anim_E = ANIM_Fuzzy_Anim03,
-        .anim_F = ANIM_Fuzzy_Anim03,
+        .idle   = ANIM_Fuzzy_Walk,
+        .walk   = ANIM_Fuzzy_Walk,
+        .run    = ANIM_Fuzzy_Run,
+        .chase  = ANIM_Fuzzy_Run,
+        .anim_4 = ANIM_Fuzzy_Idle,
+        .anim_5 = ANIM_Fuzzy_Idle,
+        .death  = ANIM_Fuzzy_Hurt,
+        .hit    = ANIM_Fuzzy_Hurt,
+        .anim_8 = ANIM_Fuzzy_Run,
+        .anim_9 = ANIM_Fuzzy_Run,
+        .anim_A = ANIM_Fuzzy_Run,
+        .anim_B = ANIM_Fuzzy_Run,
+        .anim_C = ANIM_Fuzzy_Run,
+        .anim_D = ANIM_Fuzzy_Run,
+        .anim_E = ANIM_Fuzzy_Run,
+        .anim_F = ANIM_Fuzzy_Run,
     },
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
@@ -1912,22 +1912,22 @@ StaticNpc N(NpcData_Fuzzy_02) = {
         .flowerDrops = NO_DROPS,
     },
     .animations = {
-        .idle   = ANIM_Fuzzy_Anim02,
-        .walk   = ANIM_Fuzzy_Anim02,
-        .run    = ANIM_Fuzzy_Anim03,
-        .chase  = ANIM_Fuzzy_Anim03,
-        .anim_4 = ANIM_Fuzzy_Anim01,
-        .anim_5 = ANIM_Fuzzy_Anim01,
-        .death  = ANIM_Fuzzy_Anim08,
-        .hit    = ANIM_Fuzzy_Anim08,
-        .anim_8 = ANIM_Fuzzy_Anim03,
-        .anim_9 = ANIM_Fuzzy_Anim03,
-        .anim_A = ANIM_Fuzzy_Anim03,
-        .anim_B = ANIM_Fuzzy_Anim03,
-        .anim_C = ANIM_Fuzzy_Anim03,
-        .anim_D = ANIM_Fuzzy_Anim03,
-        .anim_E = ANIM_Fuzzy_Anim03,
-        .anim_F = ANIM_Fuzzy_Anim03,
+        .idle   = ANIM_Fuzzy_Walk,
+        .walk   = ANIM_Fuzzy_Walk,
+        .run    = ANIM_Fuzzy_Run,
+        .chase  = ANIM_Fuzzy_Run,
+        .anim_4 = ANIM_Fuzzy_Idle,
+        .anim_5 = ANIM_Fuzzy_Idle,
+        .death  = ANIM_Fuzzy_Hurt,
+        .hit    = ANIM_Fuzzy_Hurt,
+        .anim_8 = ANIM_Fuzzy_Run,
+        .anim_9 = ANIM_Fuzzy_Run,
+        .anim_A = ANIM_Fuzzy_Run,
+        .anim_B = ANIM_Fuzzy_Run,
+        .anim_C = ANIM_Fuzzy_Run,
+        .anim_D = ANIM_Fuzzy_Run,
+        .anim_E = ANIM_Fuzzy_Run,
+        .anim_F = ANIM_Fuzzy_Run,
     },
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
@@ -1945,22 +1945,22 @@ StaticNpc N(NpcData_Fuzzy_03) = {
         .flowerDrops = NO_DROPS,
     },
     .animations = {
-        .idle   = ANIM_Fuzzy_Anim02,
-        .walk   = ANIM_Fuzzy_Anim02,
-        .run    = ANIM_Fuzzy_Anim03,
-        .chase  = ANIM_Fuzzy_Anim03,
-        .anim_4 = ANIM_Fuzzy_Anim01,
-        .anim_5 = ANIM_Fuzzy_Anim01,
-        .death  = ANIM_Fuzzy_Anim08,
-        .hit    = ANIM_Fuzzy_Anim08,
-        .anim_8 = ANIM_Fuzzy_Anim03,
-        .anim_9 = ANIM_Fuzzy_Anim03,
-        .anim_A = ANIM_Fuzzy_Anim03,
-        .anim_B = ANIM_Fuzzy_Anim03,
-        .anim_C = ANIM_Fuzzy_Anim03,
-        .anim_D = ANIM_Fuzzy_Anim03,
-        .anim_E = ANIM_Fuzzy_Anim03,
-        .anim_F = ANIM_Fuzzy_Anim03,
+        .idle   = ANIM_Fuzzy_Walk,
+        .walk   = ANIM_Fuzzy_Walk,
+        .run    = ANIM_Fuzzy_Run,
+        .chase  = ANIM_Fuzzy_Run,
+        .anim_4 = ANIM_Fuzzy_Idle,
+        .anim_5 = ANIM_Fuzzy_Idle,
+        .death  = ANIM_Fuzzy_Hurt,
+        .hit    = ANIM_Fuzzy_Hurt,
+        .anim_8 = ANIM_Fuzzy_Run,
+        .anim_9 = ANIM_Fuzzy_Run,
+        .anim_A = ANIM_Fuzzy_Run,
+        .anim_B = ANIM_Fuzzy_Run,
+        .anim_C = ANIM_Fuzzy_Run,
+        .anim_D = ANIM_Fuzzy_Run,
+        .anim_E = ANIM_Fuzzy_Run,
+        .anim_F = ANIM_Fuzzy_Run,
     },
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
@@ -1978,22 +1978,22 @@ StaticNpc N(NpcData_Fuzzy_04) = {
         .flowerDrops = NO_DROPS,
     },
     .animations = {
-        .idle   = ANIM_Fuzzy_Anim02,
-        .walk   = ANIM_Fuzzy_Anim02,
-        .run    = ANIM_Fuzzy_Anim03,
-        .chase  = ANIM_Fuzzy_Anim03,
-        .anim_4 = ANIM_Fuzzy_Anim01,
-        .anim_5 = ANIM_Fuzzy_Anim01,
-        .death  = ANIM_Fuzzy_Anim08,
-        .hit    = ANIM_Fuzzy_Anim08,
-        .anim_8 = ANIM_Fuzzy_Anim03,
-        .anim_9 = ANIM_Fuzzy_Anim03,
-        .anim_A = ANIM_Fuzzy_Anim03,
-        .anim_B = ANIM_Fuzzy_Anim03,
-        .anim_C = ANIM_Fuzzy_Anim03,
-        .anim_D = ANIM_Fuzzy_Anim03,
-        .anim_E = ANIM_Fuzzy_Anim03,
-        .anim_F = ANIM_Fuzzy_Anim03,
+        .idle   = ANIM_Fuzzy_Walk,
+        .walk   = ANIM_Fuzzy_Walk,
+        .run    = ANIM_Fuzzy_Run,
+        .chase  = ANIM_Fuzzy_Run,
+        .anim_4 = ANIM_Fuzzy_Idle,
+        .anim_5 = ANIM_Fuzzy_Idle,
+        .death  = ANIM_Fuzzy_Hurt,
+        .hit    = ANIM_Fuzzy_Hurt,
+        .anim_8 = ANIM_Fuzzy_Run,
+        .anim_9 = ANIM_Fuzzy_Run,
+        .anim_A = ANIM_Fuzzy_Run,
+        .anim_B = ANIM_Fuzzy_Run,
+        .anim_C = ANIM_Fuzzy_Run,
+        .anim_D = ANIM_Fuzzy_Run,
+        .anim_E = ANIM_Fuzzy_Run,
+        .anim_F = ANIM_Fuzzy_Run,
     },
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
@@ -2011,22 +2011,22 @@ StaticNpc N(NpcData_Fuzzy_05) = {
         .flowerDrops = NO_DROPS,
     },
     .animations = {
-        .idle   = ANIM_Fuzzy_Anim02,
-        .walk   = ANIM_Fuzzy_Anim02,
-        .run    = ANIM_Fuzzy_Anim03,
-        .chase  = ANIM_Fuzzy_Anim03,
-        .anim_4 = ANIM_Fuzzy_Anim01,
-        .anim_5 = ANIM_Fuzzy_Anim01,
-        .death  = ANIM_Fuzzy_Anim08,
-        .hit    = ANIM_Fuzzy_Anim08,
-        .anim_8 = ANIM_Fuzzy_Anim03,
-        .anim_9 = ANIM_Fuzzy_Anim03,
-        .anim_A = ANIM_Fuzzy_Anim03,
-        .anim_B = ANIM_Fuzzy_Anim03,
-        .anim_C = ANIM_Fuzzy_Anim03,
-        .anim_D = ANIM_Fuzzy_Anim03,
-        .anim_E = ANIM_Fuzzy_Anim03,
-        .anim_F = ANIM_Fuzzy_Anim03,
+        .idle   = ANIM_Fuzzy_Walk,
+        .walk   = ANIM_Fuzzy_Walk,
+        .run    = ANIM_Fuzzy_Run,
+        .chase  = ANIM_Fuzzy_Run,
+        .anim_4 = ANIM_Fuzzy_Idle,
+        .anim_5 = ANIM_Fuzzy_Idle,
+        .death  = ANIM_Fuzzy_Hurt,
+        .hit    = ANIM_Fuzzy_Hurt,
+        .anim_8 = ANIM_Fuzzy_Run,
+        .anim_9 = ANIM_Fuzzy_Run,
+        .anim_A = ANIM_Fuzzy_Run,
+        .anim_B = ANIM_Fuzzy_Run,
+        .anim_C = ANIM_Fuzzy_Run,
+        .anim_D = ANIM_Fuzzy_Run,
+        .anim_E = ANIM_Fuzzy_Run,
+        .anim_F = ANIM_Fuzzy_Run,
     },
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };

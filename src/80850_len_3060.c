@@ -309,7 +309,7 @@ void initialize_status_menu(void) {
     uiStatus->hidden = FALSE;
     uiStatus->showTimer = 210;
     uiStatus->unk_3B[0] = 0;
-    uiStatus->ignoreChanges = 0;
+    uiStatus->ignoreChanges = FALSE;
     uiStatus->unk_45[0] = 0;
     uiStatus->unk_45[1] = 0;
     uiStatus->hpBlinking = 0;
@@ -1149,7 +1149,7 @@ void show_coin_counter(void) {
             uiStatus->unk_6C[2] = uiStatus->ignoreChanges;
         }
 
-        uiStatus->ignoreChanges = 1;
+        uiStatus->ignoreChanges = TRUE;
         D_8010CD10 = 1;
     }
 }
@@ -1219,7 +1219,7 @@ void func_800E97E4(void) {
     UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->drawPosY = -100;
-    uiStatus->ignoreChanges = 0;
+    uiStatus->ignoreChanges = FALSE;
     uiStatus->showTimer = 0;
     uiStatus->hidden = TRUE;
     uiStatus->unk_3B[0] = 0;
@@ -1231,7 +1231,7 @@ void func_800E9810(void) {
 
     uiStatus->showTimer = 210;
     uiStatus->drawPosY = 0;
-    uiStatus->ignoreChanges = 0;
+    uiStatus->ignoreChanges = FALSE;
     uiStatus->hidden = 0;
     uiStatus->unk_3B[0] = 1;
     uiStatus->unk_3B[1] = 0;
@@ -1259,19 +1259,19 @@ s32 func_800E9860(void) {
     return ret;
 }
 
-void func_800E9894(void) {
-    gUIStatus.ignoreChanges = 1;
+void status_menu_ignore_changes(void) {
+    gUIStatus.ignoreChanges = TRUE;
 }
 
 void func_800E98A8(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    uiStatus->ignoreChanges = 1;
+    uiStatus->ignoreChanges = TRUE;
     uiStatus->drawPosY = 18;
 }
 
-void func_800E98C4(void) {
-    gUIStatus.ignoreChanges = 0;
+void status_menu_respond_to_changes(void) {
+    gUIStatus.ignoreChanges = FALSE;
 }
 
 s32 func_800E98D4(void) {
@@ -1443,7 +1443,7 @@ void reset_status_menu(void) {
     uiStatus->hidden = 0;
     uiStatus->showTimer = 210;
     uiStatus->unk_3B[0] = 0;
-    uiStatus->ignoreChanges = 0;
+    uiStatus->ignoreChanges = FALSE;
     uiStatus->unk_45[0] = 0;
     uiStatus->unk_45[1] = 0;
     uiStatus->hpBlinking = 0;
@@ -1778,8 +1778,8 @@ s32 add_star_pieces(s32 amt) {
     s32 newSP = playerData->starPieces;
 
     newSP += amt;
-    if (newSP > 222) {
-        newSP = 222;
+    if (newSP > MAX_STAR_PIECES) {
+        newSP = MAX_STAR_PIECES;
     }
     if (newSP < 0) {
         newSP = 0;
@@ -1835,7 +1835,7 @@ s32 recover_fp(s32 amt) {
     s32 ret;
 
     if (amt == -2) {
-        playerData->curMaxFP += 1;
+        playerData->curMaxFP++;
         playerData->curFP = playerData->curMaxFP;
         return playerData->curMaxFP;
     }
@@ -1857,7 +1857,7 @@ s32 recover_hp(s32 amt) {
     s32 ret;
 
     if (amt == -2) {
-        playerData->curMaxHP += 1;
+        playerData->curMaxHP++;
         playerData->curHP = playerData->curMaxHP;
         return playerData->curMaxHP;
     }

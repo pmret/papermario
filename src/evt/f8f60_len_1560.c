@@ -516,10 +516,10 @@ ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (evt_get_variable(script, *args++) != 0) {
-        func_800E9894();
+        status_menu_ignore_changes();
         close_status_menu();
     } else {
-        func_800E98C4();
+        status_menu_respond_to_changes();
     }
 
     return ApiStatus_DONE2;

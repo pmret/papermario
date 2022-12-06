@@ -11,8 +11,8 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
+MAP_STATIC_PAD(1,post_quizmo); // or pre_key_item?
 
-MAP_STATIC_PAD(1,pre_key_item); // or post-quizmo?
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 #include "world/common/util/MonitorPlayerOrbiting.inc.c"
@@ -198,7 +198,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Mouser_01),
         .yaw = 90,
         .drops = MOUSER_DROPS,
-	    .animations = MOUSER_BLUE_ANIMS,
+        .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_Greeter,
     },
     {
@@ -209,7 +209,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Dryite_01),
         .yaw = 90,
         .drops = DRYITE_DROPS,
-	    .territory = {
+        .territory = {
             .wander = {
                 .isFlying = TRUE,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
@@ -232,7 +232,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Dryite_02),
         .yaw = 61,
         .drops = DRYITE_DROPS,
-	    .animations = DRYITE_BLUE_ANIMS,
+        .animations = DRYITE_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteD,
     },
     {
@@ -243,7 +243,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_HintDryite),
         .yaw = 74,
         .drops = DRYITE_DROPS,
-	    .animations = DRYITE_GREEN_ANIMS,
+        .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteB,
     },
     {
@@ -254,7 +254,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Dryite_04),
         .yaw = 257,
         .drops = DRYITE_DROPS,
-	    .animations = DRYITE_GREEN_ANIMS,
+        .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteC,
     },
     {
@@ -265,11 +265,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Composer),
         .yaw = 271,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = {
+        .animations = {
             ANIM_Musician_Composer_Idle,
             ANIM_Musician_Composer_Still,
             ANIM_Musician_Composer_Still,
@@ -297,7 +297,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_ShopOwner),
         .yaw = 180,
         .drops = MOUSER_DROPS,
-	    .animations = MOUSER_PURPLE_ANIMS,
+        .animations = MOUSER_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_ShopOwner,
     },
     {
@@ -392,7 +392,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 62,
         .drops = TOADETTE_DROPS,
-	    .animations = TOADETTE_PINK_ANIMS,
+        .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
@@ -403,7 +403,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 63,
         .drops = TOADETTE_DROPS,
-	    .animations = TOADETTE_PINK_ANIMS,
+        .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
@@ -414,7 +414,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 244,
         .drops = TOADETTE_DROPS,
-	    .animations = TOADETTE_PINK_ANIMS,
+        .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
     },
 };

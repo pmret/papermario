@@ -122,12 +122,13 @@ extern s16 D_8009A6A4;
 extern s16 D_8009A6A6;
 
 extern s8 D_800A0920;
-extern s32 D_800A0924;
+extern s32 SavedReverbMode;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
 extern char wMapTexName[];
 extern char wMapHitName[];
 extern char wMapShapeName[];
+extern char wMapBgName[];
 extern struct ShapeFile* D_80210000; // shouldnt be a pointer
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?

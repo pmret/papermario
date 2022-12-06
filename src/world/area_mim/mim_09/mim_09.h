@@ -10,7 +10,7 @@
 #include "mapfs/mim_09_hit.h"
 
 enum {
-	NPC_Fuzzy           = 0,
+    NPC_Fuzzy           = 0,
 };
 
 enum {

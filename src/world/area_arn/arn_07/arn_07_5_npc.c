@@ -7,7 +7,7 @@
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
-API_CALLABLE(N(UpgradeStarPower)) {
+API_CALLABLE(N(UpgradeStarPowerCh3)) {
     set_max_SP(3);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -472,7 +472,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Skolar, TRUE)
-    EVT_CALL(N(UpgradeStarPower))
+    EVT_CALL(N(UpgradeStarPowerCh3))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0193, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)

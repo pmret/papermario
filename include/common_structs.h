@@ -333,7 +333,7 @@ typedef struct PlayerData {
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ u16 playerFirstStrikes;
-    /* 0x29E */ s16 enemyFirstStrikes;
+    /* 0x29E */ u16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
     /* 0x2A4 */ u16 battlesWon;
@@ -346,13 +346,13 @@ typedef struct PlayerData {
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[2];
     /* 0x2BC */ u32 frameCounter; /* increases by 2 per frame */
-    /* 0x2C0 */ s16 quizzesAnswered;
-    /* 0x2C2 */ s16 quizzesCorrect;
+    /* 0x2C0 */ u16 quizzesAnswered;
+    /* 0x2C2 */ u16 quizzesCorrect;
     /* 0x2C4 */ s32 partnerUnlockedTime[12];
     /* 0x2F4 */ s32 partnerUsedTime[12];
     /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 droTreeHintTime;
-    /* 0x32C */ s16 starPiecesCollected;
+    /* 0x32C */ u16 starPiecesCollected;
     /* 0x32E */ u16 jumpGamePlays;
     /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */
     /* 0x334 */ u16 jumpGameRecord;
@@ -416,7 +416,7 @@ typedef union X32 {
 } X32;
 
 typedef struct Evt {
-    /* 0x000 */ u8 state;
+    /* 0x000 */ u8 stateFlags;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
     /* 0x003 */ u8 priority;
@@ -1514,7 +1514,7 @@ typedef struct SelectableTarget {
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
-    /* 0x00 */ Vec3f unk_00;
+    /* 0x00 */ Vec3f absolutePosition;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
     /* 0x24 */ f32 jumpScale;

@@ -313,7 +313,7 @@ dlabel D_800A0921
 dlabel D_800A0922
 .space 2
 
-dlabel D_800A0924
+dlabel SavedReverbMode
 .space 4
 
 dlabel D_800A0928

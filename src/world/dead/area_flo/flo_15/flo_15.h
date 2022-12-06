@@ -13,8 +13,8 @@
 #include "sprite/npc/Sun.h"
 
 enum {
-	NPC_Sun_01                  = 10,
-	NPC_Sun_02                  = 11,
+    NPC_Sun_01                  = 10,
+    NPC_Sun_02                  = 11,
 };
 
 #define NAMESPACE dead_flo_15

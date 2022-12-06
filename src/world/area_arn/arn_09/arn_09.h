@@ -12,7 +12,7 @@
 #include "sprite/npc/TubbasHeart.h"
 
 enum {
-	NPC_TubbasHeart             = 0,
+    NPC_TubbasHeart             = 0,
 };
 
 #define NAMESPACE arn_09

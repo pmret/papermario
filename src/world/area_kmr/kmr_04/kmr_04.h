@@ -13,8 +13,8 @@
 #include "sprite/npc/JrTroopa.h"
 
 enum {
-	NPC_JrTroopa        = 0,
-	NPC_Goompa          = 1,
+    NPC_JrTroopa        = 0,
+    NPC_Goompa          = 1,
 };
 
 enum {
@@ -32,7 +32,7 @@ enum {
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetNormalMusic);
 extern EvtScript N(EVS_SetJrTroopaMusic);
-extern EvtScript N(EVS_PushPopMusic);
+extern EvtScript N(EVS_PlayUpgradeSong);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
