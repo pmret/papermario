@@ -10,7 +10,7 @@ u32 D_80093D20 = 0;
 
 s32(*D_80093D24[4])(void) = {
     contRetrace,
-    contReadData,
+    (s32 (*) (void)) contReadData,
     contReadNW,
     contQuery,
 };
@@ -19,7 +19,7 @@ s32 D_80093D34 = 0;
 
 NUCallBackList nuContCallBack = {
     NULL,
-    &D_80093D24,
+    (s32 (**)(NUSiCommonMesg*)) &D_80093D24,
     0x100,
     0,
 };

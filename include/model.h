@@ -180,13 +180,13 @@ void delete_model_animator_nodes(ModelAnimator* animator);
 void delete_model_animator(ModelAnimator* animator);
 void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 segment, void* baseAddr);
 void appendGfx_animator(ModelAnimator* animator);
-ModelAnimator* set_animator_render_callback(s32 animModelID, s32 callbackArg, void (*callbackFunc)(void*));
+ModelAnimator* set_animator_render_callback(s32 animModelID, void* callbackArg, void (*callbackFunc)(void*));
 void reload_mesh_animator_tree(ModelAnimator* animator);
 s32 step_mesh_animator(ModelAnimator* animator);
 
 void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, ModelCustomGfxBuilderFunc post);
 void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32);
-void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip);
+void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSkip);
 
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
