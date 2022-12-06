@@ -1025,8 +1025,6 @@ void update_npc_blur(Npc* npc) {
     motionBlur->index = index;
 }
 
-// void appendGfx_npc_blur(Npc* npc);
-// INCLUDE_ASM(void, "npc", appendGfx_npc_blur, Npc* npc);
 void appendGfx_npc_blur(Npc* npc) {
     Matrix4f sp20, sp60;
     f32 x, y, z;
@@ -1092,8 +1090,8 @@ void appendGfx_npc_blur(Npc* npc) {
                 guMtxCatF(sp60, sp20, sp20);
             }
 
-            if (!(npc->flags & 0x40000000)) {
-                if (!(npc->flags & 0x01000000)) {
+            if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                if (!(npc->flags & NPC_FLAG_1000000)) {
                     spr_draw_npc_sprite(npc->spriteInstanceID, (s32) yaw, 0, 0, sp20);
                 }
             } else {
