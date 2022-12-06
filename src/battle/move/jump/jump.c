@@ -27,7 +27,7 @@ s32 D_802A1140_73D9A0[] = {
 EvtScript N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BeforeJump)
     EVT_LOOP(5)
-        EVT_CALL(CheckButtonPress, A_BUTTON, LVar0)
+        EVT_CALL(CheckButtonPress, BUTTON_A, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
