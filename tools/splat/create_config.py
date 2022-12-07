@@ -1,13 +1,13 @@
 #! /usr/bin/env python3
 
-import sys
 import argparse
+import sys
 from pathlib import Path
 
-from util.n64 import rominfo, find_code_length
+from segtypes.gc.rarc import GcSegRarc
 from util.gc import gcinfo
 
-from segtypes.gc.rarc import GcSegRarc
+from util.n64 import find_code_length, rominfo
 
 parser = argparse.ArgumentParser(
     description="Create a splat config from an N64 ROM or a GameCube disc image."

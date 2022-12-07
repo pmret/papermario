@@ -1,7 +1,7 @@
 import spimdisasm
+from util import symbols
 
 from segtypes.common.data import CommonSegData
-from util import symbols
 
 
 class CommonSegBss(CommonSegData):
