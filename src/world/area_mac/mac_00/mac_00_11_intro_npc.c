@@ -1,12 +1,7 @@
 #include "mac_00.h"
 
-NpcSettings N(NpcSettings_Luigi_Intro) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
-
 #define NAME_SUFFIX _Intro
+#include "world/common/npc/Luigi.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Toad_Wander.inc.c"
 #define NAME_SUFFIX
@@ -41,34 +36,13 @@ s32 N(ExtraAnims_Lee_Intro)[] = {
 
 StaticNpc N(NpcData_IntroNPCs)[] = {
     {
-        .id = NPC_Luigi_01,
+        .id = NPC_Luigi_Intro,
         .settings = &N(NpcSettings_Luigi_Intro),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Luigi_Still,
-            .walk   = ANIM_Luigi_Still,
-            .run    = ANIM_Luigi_Still,
-            .chase  = ANIM_Luigi_Still,
-            .anim_4 = ANIM_Luigi_Still,
-            .anim_5 = ANIM_Luigi_Still,
-            .death  = ANIM_Luigi_Still,
-            .hit    = ANIM_Luigi_Still,
-            .anim_8 = ANIM_Luigi_Still,
-            .anim_9 = ANIM_Luigi_Still,
-            .anim_A = ANIM_Luigi_Still,
-            .anim_B = ANIM_Luigi_Still,
-            .anim_C = ANIM_Luigi_Still,
-            .anim_D = ANIM_Luigi_Still,
-            .anim_E = ANIM_Luigi_Still,
-            .anim_F = ANIM_Luigi_Still,
-        },
+        .drops = LUIGI_DROPS,
+        .animations = LUIGI_ANIMS,
     },
     {
         .id = NPC_Toad_01,
@@ -76,11 +50,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { -150.0f, 0.0f, -275.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_GateGuardian,
     },
@@ -90,11 +60,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { 219.0f, 0.0f, -45.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -121,11 +87,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { 424.0f, 20.0f, -85.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DojoSpectator,
     },

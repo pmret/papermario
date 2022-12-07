@@ -23,24 +23,24 @@ EvtScript N(EVS_PlayerExitPipe_Intro) = {
 };
 
 EvtScript N(EVS_LuigiExitPipe_Intro) = {
-    EVT_CALL(EnableNpcShadow, NPC_Luigi_01, FALSE)
-    EVT_CALL(SetNpcPos, NPC_Luigi_01, -100, -35, -370)
-    EVT_CALL(SetNpcYaw, NPC_Luigi_01, 135)
+    EVT_CALL(EnableNpcShadow, NPC_Luigi_Intro, FALSE)
+    EVT_CALL(SetNpcPos, NPC_Luigi_Intro, -100, -35, -370)
+    EVT_CALL(SetNpcYaw, NPC_Luigi_Intro, 135)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_01, SOUND_ENTER_PIPE, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_Intro, SOUND_ENTER_PIPE, 0)
     EVT_CALL(func_802CFE2C, 0, 0x100)
     EVT_CALL(func_802CFD30, 0, 5, 2, 1, 1, 0)
-    EVT_CALL(SetNpcPos, NPC_Luigi_01, -100, -10, -370)
-    EVT_CALL(GetNpcPos, NPC_Luigi_01, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcPos, NPC_Luigi_Intro, -100, -10, -370)
+    EVT_CALL(GetNpcPos, NPC_Luigi_Intro, LVar0, LVar1, LVar2)
     EVT_LOOP(45)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetNpcPos, NPC_Luigi_01, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_Luigi_Intro, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(func_802CFD30, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Luigi_01, -100, 30, -370)
+    EVT_CALL(SetNpcPos, NPC_Luigi_Intro, -100, 30, -370)
     EVT_WAIT(3)
-    EVT_CALL(EnableNpcShadow, NPC_Luigi_01, TRUE)
+    EVT_CALL(EnableNpcShadow, NPC_Luigi_Intro, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -65,12 +65,12 @@ EvtScript N(EVS_Scene_Intro) = {
         EVT_WAIT(70)
         EVT_EXEC_WAIT(N(EVS_LuigiExitPipe_Intro))
         EVT_WAIT(10)
-        EVT_CALL(SetNpcFlagBits, NPC_Luigi_01, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_Luigi_01, ANIM_Luigi_Run)
-        EVT_CALL(SetNpcSpeed, NPC_Luigi_01, EVT_FLOAT(4.0))
-        EVT_CALL(NpcMoveTo, NPC_Luigi_01, 80, -60, 0)
-        EVT_CALL(NpcMoveTo, NPC_Luigi_01, 180, 0, 0)
-        EVT_CALL(NpcMoveTo, NPC_Luigi_01, 650, 0, 0)
+        EVT_CALL(SetNpcFlagBits, NPC_Luigi_Intro, NPC_FLAG_GRAVITY, TRUE)
+        EVT_CALL(SetNpcAnimation, NPC_Luigi_Intro, ANIM_Luigi_Run)
+        EVT_CALL(SetNpcSpeed, NPC_Luigi_Intro, EVT_FLOAT(4.0))
+        EVT_CALL(NpcMoveTo, NPC_Luigi_Intro, 80, -60, 0)
+        EVT_CALL(NpcMoveTo, NPC_Luigi_Intro, 180, 0, 0)
+        EVT_CALL(NpcMoveTo, NPC_Luigi_Intro, 650, 0, 0)
     EVT_END_THREAD
     EVT_WAIT(70)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -60, 0, -320)

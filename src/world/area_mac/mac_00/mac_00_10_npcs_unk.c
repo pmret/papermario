@@ -69,45 +69,45 @@ EvtScript N(EVS_8024F64C) = {
 EvtScript N(EVS_NpcInteract_Toad_04) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0002007F)
+            EVT_SET(LVar0, MSG_MAC_Gate_007F)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x00020080)
+            EVT_SET(LVar0, MSG_MAC_Gate_0080)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020081)
+            EVT_SET(LVar0, MSG_MAC_Gate_0081)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x00020082)
+                EVT_SET(LVar0, MSG_MAC_Gate_0082)
             EVT_ELSE
-                EVT_SET(LVar0, 0x00020083)
+                EVT_SET(LVar0, MSG_MAC_Gate_0083)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00020084)
+            EVT_SET(LVar0, MSG_MAC_Gate_0084)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, 0x00020085)
+                EVT_SET(LVar0, MSG_MAC_Gate_0085)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, 0x00020086)
+                    EVT_SET(LVar0, MSG_MAC_Gate_0086)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x00020087)
+                    EVT_SET(LVar0, MSG_MAC_Gate_0087)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x00020088)
+            EVT_SET(LVar0, MSG_MAC_Gate_0088)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020089)
+            EVT_SET(LVar0, MSG_MAC_Gate_0089)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x0002008A)
+            EVT_SET(LVar0, MSG_MAC_Gate_008A)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x0002008B)
+            EVT_SET(LVar0, MSG_MAC_Gate_008B)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x0002008C)
+            EVT_SET(LVar0, MSG_MAC_Gate_008C)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0002008D)
+            EVT_SET(LVar0, MSG_MAC_Gate_008D)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0002008E)
+            EVT_SET(LVar0, MSG_MAC_Gate_008E)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001002C)
+            EVT_SET(LVar0, MSG_Outro_002C)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_RETURN
@@ -136,45 +136,45 @@ EvtScript N(D_8024FC44_7FA954) = {
 EvtScript N(EVS_NpcInteract_Toad_05) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0002008F)
+            EVT_SET(LVar0, MSG_MAC_Gate_008F)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x00020090)
+            EVT_SET(LVar0, MSG_MAC_Gate_0090)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020091)
+            EVT_SET(LVar0, MSG_MAC_Gate_0091)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x00020092)
+                EVT_SET(LVar0, MSG_MAC_Gate_0092)
             EVT_ELSE
-                EVT_SET(LVar0, 0x00020093)
+                EVT_SET(LVar0, MSG_MAC_Gate_0093)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00020094)
+            EVT_SET(LVar0, MSG_MAC_Gate_0094)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, 0x00020095)
+                EVT_SET(LVar0, MSG_MAC_Gate_0095)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, 0x00020096)
+                    EVT_SET(LVar0, MSG_MAC_Gate_0096)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x00020097)
+                    EVT_SET(LVar0, MSG_MAC_Gate_0097)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x00020098)
+            EVT_SET(LVar0, MSG_MAC_Gate_0098)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020099)
+            EVT_SET(LVar0, MSG_MAC_Gate_0099)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x0002009A)
+            EVT_SET(LVar0, MSG_MAC_Gate_009A)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x0002009B)
+            EVT_SET(LVar0, MSG_MAC_Gate_009B)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x0002009C)
+            EVT_SET(LVar0, MSG_MAC_Gate_009C)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0002009D)
+            EVT_SET(LVar0, MSG_MAC_Gate_009D)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0002009E)
+            EVT_SET(LVar0, MSG_MAC_Gate_009E)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001002E)
+            EVT_SET(LVar0, MSG_Outro_002E)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_RETURN
@@ -184,45 +184,45 @@ EvtScript N(EVS_NpcInteract_Toad_05) = {
 EvtScript N(EVS_NpcInteract_Toad_06) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0002009F)
+            EVT_SET(LVar0, MSG_MAC_Gate_009F)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000200A0)
+            EVT_SET(LVar0, MSG_MAC_Gate_00A0)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200A1)
+            EVT_SET(LVar0, MSG_MAC_Gate_00A1)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000200A2)
+                EVT_SET(LVar0, MSG_MAC_Gate_00A2)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000200A3)
+                EVT_SET(LVar0, MSG_MAC_Gate_00A3)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200A4)
+            EVT_SET(LVar0, MSG_MAC_Gate_00A4)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, 0x000200A5)
+                EVT_SET(LVar0, MSG_MAC_Gate_00A5)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, 0x000200A6)
+                    EVT_SET(LVar0, MSG_MAC_Gate_00A6)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000200A7)
+                    EVT_SET(LVar0, MSG_MAC_Gate_00A7)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000200A8)
+            EVT_SET(LVar0, MSG_MAC_Gate_00A8)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200A9)
+            EVT_SET(LVar0, MSG_MAC_Gate_00A9)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000200AA)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AA)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200AB)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AB)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000200AC)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AC)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200AD)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AD)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000200AE)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AE)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001002F)
+            EVT_SET(LVar0, MSG_Outro_002F)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
     EVT_RETURN
@@ -232,62 +232,62 @@ EvtScript N(EVS_NpcInteract_Toad_06) = {
 EvtScript N(EVS_NpcInteract_Toad_07) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x000200AF)
-            EVT_SET(LVar1, 0x000200B0)
+            EVT_SET(LVar0, MSG_MAC_Gate_00AF)
+            EVT_SET(LVar1, MSG_MAC_Gate_00B0)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000200B1)
-            EVT_SET(LVar1, 0x000200B2)
+            EVT_SET(LVar0, MSG_MAC_Gate_00B1)
+            EVT_SET(LVar1, MSG_MAC_Gate_00B2)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200B3)
-            EVT_SET(LVar1, 0x000200B4)
+            EVT_SET(LVar0, MSG_MAC_Gate_00B3)
+            EVT_SET(LVar1, MSG_MAC_Gate_00B4)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000200B5)
-                EVT_SET(LVar1, 0x000200B6)
+                EVT_SET(LVar0, MSG_MAC_Gate_00B5)
+                EVT_SET(LVar1, MSG_MAC_Gate_00B6)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000200B7)
-                EVT_SET(LVar1, 0x000200B8)
+                EVT_SET(LVar0, MSG_MAC_Gate_00B7)
+                EVT_SET(LVar1, MSG_MAC_Gate_00B8)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200B9)
-            EVT_SET(LVar1, 0x000200BA)
+            EVT_SET(LVar0, MSG_MAC_Gate_00B9)
+            EVT_SET(LVar1, MSG_MAC_Gate_00BA)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_ShyGuyBlockingTracks, FALSE)
-                EVT_SET(LVar0, 0x000200BB)
-                EVT_SET(LVar1, 0x000200BC)
+                EVT_SET(LVar0, MSG_MAC_Gate_00BB)
+                EVT_SET(LVar1, MSG_MAC_Gate_00BC)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC03_ShyGuyChasedOff, FALSE)
-                    EVT_SET(LVar0, 0x000200BD)
-                    EVT_SET(LVar1, 0x000200BE)
+                    EVT_SET(LVar0, MSG_MAC_Gate_00BD)
+                    EVT_SET(LVar1, MSG_MAC_Gate_00BE)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000200BF)
-                    EVT_SET(LVar1, 0x000200C0)
+                    EVT_SET(LVar0, MSG_MAC_Gate_00BF)
+                    EVT_SET(LVar1, MSG_MAC_Gate_00C0)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000200C1)
-            EVT_SET(LVar1, 0x000200C2)
+            EVT_SET(LVar0, MSG_MAC_Gate_00C1)
+            EVT_SET(LVar1, MSG_MAC_Gate_00C2)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200C3)
-            EVT_SET(LVar1, 0x000200C4)
+            EVT_SET(LVar0, MSG_MAC_Gate_00C3)
+            EVT_SET(LVar1, MSG_MAC_Gate_00C4)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000200C5)
-            EVT_SET(LVar1, 0x000200C6)
+            EVT_SET(LVar0, MSG_MAC_Gate_00C5)
+            EVT_SET(LVar1, MSG_MAC_Gate_00C6)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200C7)
-            EVT_SET(LVar1, 0x000200C8)
+            EVT_SET(LVar0, MSG_MAC_Gate_00C7)
+            EVT_SET(LVar1, MSG_MAC_Gate_00C8)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000200C9)
-            EVT_SET(LVar1, 0x000200CA)
+            EVT_SET(LVar0, MSG_MAC_Gate_00C9)
+            EVT_SET(LVar1, MSG_MAC_Gate_00CA)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200CB)
-            EVT_SET(LVar1, 0x000200CC)
+            EVT_SET(LVar0, MSG_MAC_Gate_00CB)
+            EVT_SET(LVar1, MSG_MAC_Gate_00CC)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000200CD)
-            EVT_SET(LVar1, 0x000200CE)
+            EVT_SET(LVar0, MSG_MAC_Gate_00CD)
+            EVT_SET(LVar1, MSG_MAC_Gate_00CE)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010030)
-            EVT_SET(LVar1, 0x00010031)
+            EVT_SET(LVar0, MSG_Outro_0030)
+            EVT_SET(LVar1, MSG_Outro_0031)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 5, LVar0)
     EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, LVar1)
@@ -298,77 +298,77 @@ EvtScript N(EVS_NpcInteract_Toad_07) = {
 EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x000200CF)
-            EVT_SET(LVar1, 0x000200D0)
-            EVT_SET(LVar2, 0x000200D1)
+            EVT_SET(LVar0, MSG_MAC_Gate_00CF)
+            EVT_SET(LVar1, MSG_MAC_Gate_00D0)
+            EVT_SET(LVar2, MSG_MAC_Gate_00D1)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000200D2)
-            EVT_SET(LVar1, 0x000200D3)
-            EVT_SET(LVar2, 0x000200D4)
+            EVT_SET(LVar0, MSG_MAC_Gate_00D2)
+            EVT_SET(LVar1, MSG_MAC_Gate_00D3)
+            EVT_SET(LVar2, MSG_MAC_Gate_00D4)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200D5)
-            EVT_SET(LVar1, 0x000200D6)
-            EVT_SET(LVar2, 0x000200D7)
+            EVT_SET(LVar0, MSG_MAC_Gate_00D5)
+            EVT_SET(LVar1, MSG_MAC_Gate_00D6)
+            EVT_SET(LVar2, MSG_MAC_Gate_00D7)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000200D8)
-                EVT_SET(LVar1, 0x000200D9)
-                EVT_SET(LVar2, 0x000200DA)
+                EVT_SET(LVar0, MSG_MAC_Gate_00D8)
+                EVT_SET(LVar1, MSG_MAC_Gate_00D9)
+                EVT_SET(LVar2, MSG_MAC_Gate_00DA)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000200DB)
-                EVT_SET(LVar1, 0x000200DC)
-                EVT_SET(LVar2, 0x000200DD)
+                EVT_SET(LVar0, MSG_MAC_Gate_00DB)
+                EVT_SET(LVar1, MSG_MAC_Gate_00DC)
+                EVT_SET(LVar2, MSG_MAC_Gate_00DD)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200DE)
-            EVT_SET(LVar1, 0x000200DF)
-            EVT_SET(LVar2, 0x000200E0)
+            EVT_SET(LVar0, MSG_MAC_Gate_00DE)
+            EVT_SET(LVar1, MSG_MAC_Gate_00DF)
+            EVT_SET(LVar2, MSG_MAC_Gate_00E0)
         EVT_CASE_LT(STORY_CH4_RETURNED_STOREROOM_KEY)
             EVT_IF_EQ(GF_MAC04_StoreroomKeyStolen, FALSE)
-                EVT_SET(LVar0, 0x000200E1)
-                EVT_SET(LVar1, 0x000200E2)
-                EVT_SET(LVar2, 0x000200E3)
+                EVT_SET(LVar0, MSG_MAC_Gate_00E1)
+                EVT_SET(LVar1, MSG_MAC_Gate_00E2)
+                EVT_SET(LVar2, MSG_MAC_Gate_00E3)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000200E4)
-                EVT_SET(LVar1, 0x000200E5)
-                EVT_SET(LVar2, 0x000200E6)
+                EVT_SET(LVar0, MSG_MAC_Gate_00E4)
+                EVT_SET(LVar1, MSG_MAC_Gate_00E5)
+                EVT_SET(LVar2, MSG_MAC_Gate_00E6)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200E7)
-            EVT_SET(LVar1, 0x000200E8)
-            EVT_SET(LVar2, 0x000200E9)
+            EVT_SET(LVar0, MSG_MAC_Gate_00E7)
+            EVT_SET(LVar1, MSG_MAC_Gate_00E8)
+            EVT_SET(LVar2, MSG_MAC_Gate_00E9)
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000200EA)
-            EVT_SET(LVar1, 0x000200EB)
-            EVT_SET(LVar2, 0x000200EC)
+            EVT_SET(LVar0, MSG_MAC_Gate_00EA)
+            EVT_SET(LVar1, MSG_MAC_Gate_00EB)
+            EVT_SET(LVar2, MSG_MAC_Gate_00EC)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200ED)
-            EVT_SET(LVar1, 0x000200EE)
-            EVT_SET(LVar2, 0x000200EF)
+            EVT_SET(LVar0, MSG_MAC_Gate_00ED)
+            EVT_SET(LVar1, MSG_MAC_Gate_00EE)
+            EVT_SET(LVar2, MSG_MAC_Gate_00EF)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000200F0)
-            EVT_SET(LVar1, 0x000200F1)
-            EVT_SET(LVar2, 0x000200F2)
+            EVT_SET(LVar0, MSG_MAC_Gate_00F0)
+            EVT_SET(LVar1, MSG_MAC_Gate_00F1)
+            EVT_SET(LVar2, MSG_MAC_Gate_00F2)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000200F3)
-            EVT_SET(LVar1, 0x000200F4)
-            EVT_SET(LVar2, 0x000200F5)
+            EVT_SET(LVar0, MSG_MAC_Gate_00F3)
+            EVT_SET(LVar1, MSG_MAC_Gate_00F4)
+            EVT_SET(LVar2, MSG_MAC_Gate_00F5)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000200F6)
-            EVT_SET(LVar1, 0x000200F7)
-            EVT_SET(LVar2, 0x000200F8)
+            EVT_SET(LVar0, MSG_MAC_Gate_00F6)
+            EVT_SET(LVar1, MSG_MAC_Gate_00F7)
+            EVT_SET(LVar2, MSG_MAC_Gate_00F8)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000200F9)
-            EVT_SET(LVar1, 0x000200FA)
-            EVT_SET(LVar2, 0x000200FB)
+            EVT_SET(LVar0, MSG_MAC_Gate_00F9)
+            EVT_SET(LVar1, MSG_MAC_Gate_00FA)
+            EVT_SET(LVar2, MSG_MAC_Gate_00FB)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000200FC)
-            EVT_SET(LVar1, 0x000200FD)
-            EVT_SET(LVar2, 0x000200FE)
+            EVT_SET(LVar0, MSG_MAC_Gate_00FC)
+            EVT_SET(LVar1, MSG_MAC_Gate_00FD)
+            EVT_SET(LVar2, MSG_MAC_Gate_00FE)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010032)
-            EVT_SET(LVar1, 0x00010033)
-            EVT_SET(LVar2, 0x00010034)
+            EVT_SET(LVar0, MSG_Outro_0032)
+            EVT_SET(LVar1, MSG_Outro_0033)
+            EVT_SET(LVar2, MSG_Outro_0034)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
     EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle, 0, LVar1)
@@ -390,45 +390,45 @@ EvtScript N(EVS_NpcInteract_ThreeSisters_03) = {
 EvtScript N(EVS_NpcInteract_Toad_08) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x00020103)
+            EVT_SET(LVar0, MSG_MAC_Gate_0103)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x00020104)
+            EVT_SET(LVar0, MSG_MAC_Gate_0104)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020105)
+            EVT_SET(LVar0, MSG_MAC_Gate_0105)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x00020106)
+                EVT_SET(LVar0, MSG_MAC_Gate_0106)
             EVT_ELSE
-                EVT_SET(LVar0, 0x00020107)
+                EVT_SET(LVar0, MSG_MAC_Gate_0107)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00020108)
+            EVT_SET(LVar0, MSG_MAC_Gate_0108)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, 0x00020109)
+                EVT_SET(LVar0, MSG_MAC_Gate_0109)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, 0x0002010A)
+                    EVT_SET(LVar0, MSG_MAC_Gate_010A)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x0002010B)
+                    EVT_SET(LVar0, MSG_MAC_Gate_010B)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x0002010C)
+            EVT_SET(LVar0, MSG_MAC_Gate_010C)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0002010D)
+            EVT_SET(LVar0, MSG_MAC_Gate_010D)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x0002010E)
+            EVT_SET(LVar0, MSG_MAC_Gate_010E)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x0002010F)
+            EVT_SET(LVar0, MSG_MAC_Gate_010F)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x00020110)
+            EVT_SET(LVar0, MSG_MAC_Gate_0110)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00020111)
+            EVT_SET(LVar0, MSG_MAC_Gate_0111)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00020112)
+            EVT_SET(LVar0, MSG_MAC_Gate_0112)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010035)
+            EVT_SET(LVar0, MSG_Outro_0035)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
     EVT_RETURN
@@ -580,29 +580,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
         .init = &N(EVS_NpcInit_Toad_04),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Red_Idle,
-            .walk   = ANIM_Toad_Red_Walk,
-            .run    = ANIM_Toad_Red_Run,
-            .chase  = ANIM_Toad_Red_Run,
-            .anim_4 = ANIM_Toad_Red_Idle,
-            .anim_5 = ANIM_Toad_Red_Idle,
-            .death  = ANIM_Toad_Red_Disappointed,
-            .hit    = ANIM_Toad_Red_Disappointed,
-            .anim_8 = ANIM_Toad_Red_Run,
-            .anim_9 = ANIM_Toad_Red_Run,
-            .anim_A = ANIM_Toad_Red_Run,
-            .anim_B = ANIM_Toad_Red_Run,
-            .anim_C = ANIM_Toad_Red_Run,
-            .anim_D = ANIM_Toad_Red_Run,
-            .anim_E = ANIM_Toad_Red_Run,
-            .anim_F = ANIM_Toad_Red_Run,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_GateGuardian,
     },
     {
@@ -612,11 +591,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Toad_05),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -634,24 +609,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 200 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Red_Idle,
-            .walk   = ANIM_Toad_Red_Walk,
-            .run    = ANIM_Toad_Red_Run,
-            .chase  = ANIM_Toad_Red_Run,
-            .anim_4 = ANIM_Toad_Red_Idle,
-            .anim_5 = ANIM_Toad_Red_Idle,
-            .death  = ANIM_Toad_Red_Disappointed,
-            .hit    = ANIM_Toad_Red_Disappointed,
-            .anim_8 = ANIM_Toad_Red_Run,
-            .anim_9 = ANIM_Toad_Red_Run,
-            .anim_A = ANIM_Toad_Red_Run,
-            .anim_B = ANIM_Toad_Red_Run,
-            .anim_C = ANIM_Toad_Red_Run,
-            .anim_D = ANIM_Toad_Red_Run,
-            .anim_E = ANIM_Toad_Red_Run,
-            .anim_F = ANIM_Toad_Red_Run,
-        },
+        .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ShopLoiterer,
     },
     {
@@ -661,11 +619,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Toad_06),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -680,24 +634,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 200 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Yellow_Idle,
-            .walk   = ANIM_Toad_Yellow_Walk,
-            .run    = ANIM_Toad_Yellow_Run,
-            .chase  = ANIM_Toad_Yellow_Run,
-            .anim_4 = ANIM_Toad_Yellow_Idle,
-            .anim_5 = ANIM_Toad_Yellow_Idle,
-            .death  = ANIM_Toad_Yellow_Disappointed,
-            .hit    = ANIM_Toad_Yellow_Disappointed,
-            .anim_8 = ANIM_Toad_Yellow_Run,
-            .anim_9 = ANIM_Toad_Yellow_Run,
-            .anim_A = ANIM_Toad_Yellow_Run,
-            .anim_B = ANIM_Toad_Yellow_Run,
-            .anim_C = ANIM_Toad_Yellow_Run,
-            .anim_D = ANIM_Toad_Yellow_Run,
-            .anim_E = ANIM_Toad_Yellow_Run,
-            .anim_F = ANIM_Toad_Yellow_Run,
-        },
+        .animations = TOAD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_MAC_NewsEnthusiast,
     },
     {
@@ -707,29 +644,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_400000,
         .init = &N(EVS_NpcInit_Toad_07),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Blue_Idle,
-            .walk   = ANIM_Toad_Blue_Walk,
-            .run    = ANIM_Toad_Blue_Run,
-            .chase  = ANIM_Toad_Blue_Run,
-            .anim_4 = ANIM_Toad_Blue_Idle,
-            .anim_5 = ANIM_Toad_Blue_Idle,
-            .death  = ANIM_Toad_Blue_Disappointed,
-            .hit    = ANIM_Toad_Blue_Disappointed,
-            .anim_8 = ANIM_Toad_Blue_Run,
-            .anim_9 = ANIM_Toad_Blue_Run,
-            .anim_A = ANIM_Toad_Blue_Run,
-            .anim_B = ANIM_Toad_Blue_Run,
-            .anim_C = ANIM_Toad_Blue_Run,
-            .anim_D = ANIM_Toad_Blue_Run,
-            .anim_E = ANIM_Toad_Blue_Run,
-            .anim_F = ANIM_Toad_Blue_Run,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_FickleLovers,
     },
     {
@@ -739,30 +655,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_400000,
         .init = &N(EVS_NpcInit_ThreeSisters_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toadette_Pink_Idle,
-            .walk   = ANIM_Toadette_Pink_Walk,
-            .run    = ANIM_Toadette_Pink_Run,
-            .chase  = ANIM_Toadette_Pink_Run,
-            .anim_4 = ANIM_Toadette_Pink_Idle,
-            .anim_5 = ANIM_Toadette_Pink_Idle,
-            .death  = ANIM_Toadette_Pink_Disappointed,
-            .hit    = ANIM_Toadette_Pink_Disappointed,
-            .anim_8 = ANIM_Toadette_Pink_Run,
-            .anim_9 = ANIM_Toadette_Pink_Run,
-            .anim_A = ANIM_Toadette_Pink_Run,
-            .anim_B = ANIM_Toadette_Pink_Run,
-            .anim_C = ANIM_Toadette_Pink_Run,
-            .anim_D = ANIM_Toadette_Pink_Run,
-            .anim_E = ANIM_Toadette_Pink_Run,
-            .anim_F = ANIM_Toadette_Pink_Run,
-        },
-        .tattle = MSG_NpcTattle_MAC_ShamlessLover,
+        .drops = TOADETTE_DROPS,
+        .animations = TOADETTE_PINK_ANIMS,
+        .tattle = MSG_NpcTattle_MAC_ShamelessLover,
     },
     {
         .id = NPC_ThreeSisters_02,
@@ -771,29 +666,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toadette_Green_Idle,
-            .walk   = ANIM_Toadette_Green_Walk,
-            .run    = ANIM_Toadette_Green_Run,
-            .chase  = ANIM_Toadette_Green_Run,
-            .anim_4 = ANIM_Toadette_Green_Idle,
-            .anim_5 = ANIM_Toadette_Green_Idle,
-            .death  = ANIM_Toadette_Green_Disappointed,
-            .hit    = ANIM_Toadette_Green_Disappointed,
-            .anim_8 = ANIM_Toadette_Green_Run,
-            .anim_9 = ANIM_Toadette_Green_Run,
-            .anim_A = ANIM_Toadette_Green_Run,
-            .anim_B = ANIM_Toadette_Green_Run,
-            .anim_C = ANIM_Toadette_Green_Run,
-            .anim_D = ANIM_Toadette_Green_Run,
-            .anim_E = ANIM_Toadette_Green_Run,
-            .anim_F = ANIM_Toadette_Green_Run,
-        },
+        .drops = TOADETTE_DROPS,
+        .animations = TOADETTE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ThreeSisters_Eldest,
     },
     {
@@ -803,29 +677,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 180,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_ThreeSisters_03),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toadette_Orange_Idle,
-            .walk   = ANIM_Toadette_Orange_Walk,
-            .run    = ANIM_Toadette_Orange_Run,
-            .chase  = ANIM_Toadette_Orange_Run,
-            .anim_4 = ANIM_Toadette_Orange_Idle,
-            .anim_5 = ANIM_Toadette_Orange_Idle,
-            .death  = ANIM_Toadette_Orange_Disappointed,
-            .hit    = ANIM_Toadette_Orange_Disappointed,
-            .anim_8 = ANIM_Toadette_Orange_Run,
-            .anim_9 = ANIM_Toadette_Orange_Run,
-            .anim_A = ANIM_Toadette_Orange_Run,
-            .anim_B = ANIM_Toadette_Orange_Run,
-            .anim_C = ANIM_Toadette_Orange_Run,
-            .anim_D = ANIM_Toadette_Orange_Run,
-            .anim_E = ANIM_Toadette_Orange_Run,
-            .anim_F = ANIM_Toadette_Orange_Run,
-        },
+        .drops = TOADETTE_DROPS,
+        .animations = TOADETTE_ORANGE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ThreeSisters_Middle,
     },
     {
@@ -835,30 +688,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_ThreeSisters_04),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toadette_Purple_Idle,
-            .walk   = ANIM_Toadette_Purple_Walk,
-            .run    = ANIM_Toadette_Purple_Run,
-            .chase  = ANIM_Toadette_Purple_Run,
-            .anim_4 = ANIM_Toadette_Purple_Idle,
-            .anim_5 = ANIM_Toadette_Purple_Idle,
-            .death  = ANIM_Toadette_Purple_Disappointed,
-            .hit    = ANIM_Toadette_Purple_Disappointed,
-            .anim_8 = ANIM_Toadette_Purple_Run,
-            .anim_9 = ANIM_Toadette_Purple_Run,
-            .anim_A = ANIM_Toadette_Purple_Run,
-            .anim_B = ANIM_Toadette_Purple_Run,
-            .anim_C = ANIM_Toadette_Purple_Run,
-            .anim_D = ANIM_Toadette_Purple_Run,
-            .anim_E = ANIM_Toadette_Purple_Run,
-            .anim_F = ANIM_Toadette_Purple_Run,
-        },
-        .tattle = MSG_NpcTattle_MAC_hreeSisters_Youngest,
+        .drops = TOADETTE_DROPS,
+        .animations = TOADETTE_PURPLE_ANIMS,
+        .tattle = MSG_NpcTattle_MAC_ThreeSisters_Youngest,
     },
     {
         .id = NPC_Toad_08,
@@ -867,29 +699,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Toad_08),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Blue_Idle,
-            .walk   = ANIM_Toad_Blue_Walk,
-            .run    = ANIM_Toad_Blue_Run,
-            .chase  = ANIM_Toad_Blue_Run,
-            .anim_4 = ANIM_Toad_Blue_Idle,
-            .anim_5 = ANIM_Toad_Blue_Idle,
-            .death  = ANIM_Toad_Blue_Disappointed,
-            .hit    = ANIM_Toad_Blue_Disappointed,
-            .anim_8 = ANIM_Toad_Blue_Run,
-            .anim_9 = ANIM_Toad_Blue_Run,
-            .anim_A = ANIM_Toad_Blue_Run,
-            .anim_B = ANIM_Toad_Blue_Run,
-            .anim_C = ANIM_Toad_Blue_Run,
-            .anim_D = ANIM_Toad_Blue_Run,
-            .anim_E = ANIM_Toad_Blue_Run,
-            .anim_F = ANIM_Toad_Blue_Run,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DojoSpectator,
     },
     {
@@ -899,29 +710,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Toad_09),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Yellow_Idle,
-            .walk   = ANIM_Toad_Yellow_Walk,
-            .run    = ANIM_Toad_Yellow_Run,
-            .chase  = ANIM_Toad_Yellow_Run,
-            .anim_4 = ANIM_Toad_Yellow_Idle,
-            .anim_5 = ANIM_Toad_Yellow_Idle,
-            .death  = ANIM_Toad_Yellow_Disappointed,
-            .hit    = ANIM_Toad_Yellow_Disappointed,
-            .anim_8 = ANIM_Toad_Yellow_Run,
-            .anim_9 = ANIM_Toad_Yellow_Run,
-            .anim_A = ANIM_Toad_Yellow_Run,
-            .anim_B = ANIM_Toad_Yellow_Run,
-            .anim_C = ANIM_Toad_Yellow_Run,
-            .anim_D = ANIM_Toad_Yellow_Run,
-            .anim_E = ANIM_Toad_Yellow_Run,
-            .anim_F = ANIM_Toad_Yellow_Run,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DojoFanToad,
     },
 };

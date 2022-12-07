@@ -9,7 +9,7 @@ void N(gfx_build_water)(void) {
     gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
     gDPSetPrimDepth(gMasterGfxPos++, 0x7FF0, 0);
     gDPSetRenderMode(gMasterGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS,
-                     Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
+            Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 128, 0);
     gDPPipeSync(gMasterGfxPos++);

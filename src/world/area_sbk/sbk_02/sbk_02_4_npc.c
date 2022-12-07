@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
-    EVT_CHOOSE_ANY_CONSUMABLE()
+    EVT_CHOOSE_ANY_CONSUMABLE(2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)
@@ -241,7 +241,7 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad) = {
+EvtScript N(EVS_NpcInit_TradingToad) = {
     EVT_IF_NE(GF_TradingEvent2_Active, FALSE)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TradingToad)))
     EVT_ELSE
@@ -268,7 +268,7 @@ StaticNpc N(NpcData_TradingToad) = {
     .pos = { 0.0f, 2.0f, 150.0f },
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
-    .init = &N(EVS_NpcInit_Toad),
+    .init = &N(EVS_NpcInit_TradingToad),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,

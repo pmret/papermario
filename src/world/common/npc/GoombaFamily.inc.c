@@ -1,6 +1,6 @@
 #include "GoombaFamily.h"
 
-NpcSettings N(NpcSettings_Goomba_Family) = {
+NpcSettings N(NpcSettings_GoombaFamily) = {
     .height = 22,
     .radius = 24,
     .level = 99,

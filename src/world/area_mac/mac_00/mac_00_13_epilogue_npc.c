@@ -1,19 +1,8 @@
 #include "mac_00.h"
 
-NpcSettings N(NpcSettings_Luigi_Epilogue) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Goompapa_Epilogue) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
 #define NAME_SUFFIX _Epilogue
+#include "world/common/npc/Luigi.inc.c"
+#include "world/common/npc/GoombaFamily.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #define NAME_SUFFIX
 
@@ -105,14 +94,14 @@ EvtScript N(EVS_NpcInit_Lee_Epilogue) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Toad_03_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_Toad_03, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_Outro_0028)
+EvtScript N(EVS_NpcInteract_TheMaster_Epilogue) = {
+    EVT_CALL(SpeakToPlayer, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_Outro_0028)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_03_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_03_Epilogue)))
+EvtScript N(EVS_NpcInit_TheMaster_Epilogue) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TheMaster_Epilogue)))
     EVT_RETURN
     EVT_END
 };
@@ -157,35 +146,14 @@ s32 N(ExtraAnims_Luigi_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Luigi_Epilogue_Epilogue) = {
+StaticNpc N(NpcData_Luigi_Epilogue) = {
     .id = NPC_Luigi_Epilogue,
     .settings = &N(NpcSettings_Luigi_Epilogue),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Luigi_Still,
-        .walk   = ANIM_Luigi_Still,
-        .run    = ANIM_Luigi_Still,
-        .chase  = ANIM_Luigi_Still,
-        .anim_4 = ANIM_Luigi_Still,
-        .anim_5 = ANIM_Luigi_Still,
-        .death  = ANIM_Luigi_Still,
-        .hit    = ANIM_Luigi_Still,
-        .anim_8 = ANIM_Luigi_Still,
-        .anim_9 = ANIM_Luigi_Still,
-        .anim_A = ANIM_Luigi_Still,
-        .anim_B = ANIM_Luigi_Still,
-        .anim_C = ANIM_Luigi_Still,
-        .anim_D = ANIM_Luigi_Still,
-        .anim_E = ANIM_Luigi_Still,
-        .anim_F = ANIM_Luigi_Still,
-    },
+    .drops = LUIGI_DROPS,
+    .animations = LUIGI_ANIMS,
     .extraAnimations = N(ExtraAnims_Luigi_Epilogue),
 };
 
@@ -196,14 +164,14 @@ s32 N(ExtraAnims_Goompapa_Epilogue)[] = {
     -1
 };
 
-s32 N(D_80253F54_7FEC64_Epilogue)[] = {
+s32 N(ExtraAnims_Goomama_Epilogue)[] = {
     ANIM_Goomama_Still,
     ANIM_Goomama_Idle,
     ANIM_Goomama_Talk,
     -1
 };
 
-s32 N(D_80253F64_7FEC74_Epilogue)[] = {
+s32 N(ExtraAnims_Gooma_Epilogue)[] = {
     ANIM_Gooma_Still,
     ANIM_Gooma_Idle,
     ANIM_Gooma_Talk,
@@ -213,113 +181,50 @@ s32 N(D_80253F64_7FEC74_Epilogue)[] = {
 StaticNpc N(NpcData_Goompapa_Epilogue)[] = {
     {
         .id = NPC_Goompapa_Epilogue,
-        .settings = &N(NpcSettings_Goompapa_Epilogue),
+        .settings = &N(NpcSettings_GoombaFamily_Epilogue),
         .pos = { 70.0f, 0.0f, -30.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Goompapa_Epilogue),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Goompapa_Idle,
-            .walk   = ANIM_Goompapa_Walk,
-            .run    = ANIM_Goompapa_Run,
-            .chase  = ANIM_Goompapa_Run,
-            .anim_4 = ANIM_Goompapa_Idle,
-            .anim_5 = ANIM_Goompapa_Idle,
-            .death  = ANIM_Goompapa_Still,
-            .hit    = ANIM_Goompapa_Still,
-            .anim_8 = ANIM_Goompapa_Run,
-            .anim_9 = ANIM_Goompapa_Run,
-            .anim_A = ANIM_Goompapa_Run,
-            .anim_B = ANIM_Goompapa_Run,
-            .anim_C = ANIM_Goompapa_Run,
-            .anim_D = ANIM_Goompapa_Run,
-            .anim_E = ANIM_Goompapa_Run,
-            .anim_F = ANIM_Goompapa_Run,
-        },
+        .drops = GOOMPAPA_DROPS,
+        .animations = GOOMPAPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Goompapa_Epilogue),
         .tattle = MSG_NpcTattle_Goompapa,
     },
     {
         .id = NPC_Goomama_Epilogue,
-        .settings = &N(NpcSettings_Goompapa_Epilogue),
+        .settings = &N(NpcSettings_GoombaFamily_Epilogue),
         .pos = { 40.0f, 0.0f, 20.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Goomama_Epilogue),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Goomama_Idle,
-            .walk   = ANIM_Goomama_Walk,
-            .run    = ANIM_Goomama_Run,
-            .chase  = ANIM_Goomama_Run,
-            .anim_4 = ANIM_Goomama_Idle,
-            .anim_5 = ANIM_Goomama_Idle,
-            .death  = ANIM_Goomama_Still,
-            .hit    = ANIM_Goomama_Still,
-            .anim_8 = ANIM_Goomama_Run,
-            .anim_9 = ANIM_Goomama_Run,
-            .anim_A = ANIM_Goomama_Run,
-            .anim_B = ANIM_Goomama_Run,
-            .anim_C = ANIM_Goomama_Run,
-            .anim_D = ANIM_Goomama_Run,
-            .anim_E = ANIM_Goomama_Run,
-            .anim_F = ANIM_Goomama_Run,
-        },
-        .extraAnimations = N(D_80253F54_7FEC64_Epilogue),
+        .drops = GOOMAMA_DROPS,
+        .animations = GOOMAMA_ANIMS,
+        .extraAnimations = N(ExtraAnims_Goomama_Epilogue),
         .tattle = MSG_NpcTattle_Goomama,
     },
     {
         .id = NPC_Gooma_Epilogue,
-        .settings = &N(NpcSettings_Goompapa_Epilogue),
+        .settings = &N(NpcSettings_GoombaFamily_Epilogue),
         .pos = { 20.0f, 0.0f, -35.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
         .init = &N(EVS_NpcInit_Gooma_Epilogue),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Gooma_Idle,
-            .walk   = ANIM_Gooma_Walk,
-            .run    = ANIM_Gooma_Run,
-            .chase  = ANIM_Gooma_Run,
-            .anim_4 = ANIM_Gooma_Idle,
-            .anim_5 = ANIM_Gooma_Idle,
-            .death  = ANIM_Gooma_Still,
-            .hit    = ANIM_Gooma_Still,
-            .anim_8 = ANIM_Gooma_Run,
-            .anim_9 = ANIM_Gooma_Run,
-            .anim_A = ANIM_Gooma_Run,
-            .anim_B = ANIM_Gooma_Run,
-            .anim_C = ANIM_Gooma_Run,
-            .anim_D = ANIM_Gooma_Run,
-            .anim_E = ANIM_Gooma_Run,
-            .anim_F = ANIM_Gooma_Run,
-        },
-        .extraAnimations = N(D_80253F64_7FEC74_Epilogue),
+        .drops = GOOMA_DROPS,
+        .animations = GOOMA_ANIMS,
+        .extraAnimations = N(ExtraAnims_Gooma_Epilogue),
         .tattle = MSG_NpcTattle_Gooma,
     },
 };
 
-s32 N(D_80254544_7FF254_Epilogue)[] = {
+s32 N(ExtraAnims_Quizmo_Epilogue)[] = {
     ANIM_ChuckQuizmo_Still,
     ANIM_ChuckQuizmo_Idle,
     ANIM_ChuckQuizmo_Talk,
     -1
 };
 
-s32 N(D_80254554_7FF264_Epilogue)[] = {
+s32 N(ExtraAnims_VannaT_Epilogue)[] = {
     ANIM_VannaT_Still,
     ANIM_VannaT_Happy,
     ANIM_VannaT_Wave,
@@ -357,7 +262,7 @@ StaticNpc N(NpcData_ChuckQuizmo_Epilogue)[] = {
             .anim_E = ANIM_ChuckQuizmo_Run,
             .anim_F = ANIM_ChuckQuizmo_Run,
         },
-        .extraAnimations = N(D_80254544_7FF254_Epilogue),
+        .extraAnimations = N(ExtraAnims_Quizmo_Epilogue),
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },
     {
@@ -390,7 +295,7 @@ StaticNpc N(NpcData_ChuckQuizmo_Epilogue)[] = {
             .anim_E = ANIM_VannaT_Still,
             .anim_F = ANIM_VannaT_Still,
         },
-        .extraAnimations = N(D_80254554_7FF264_Epilogue),
+        .extraAnimations = N(ExtraAnims_VannaT_Epilogue),
         .tattle = MSG_NpcTattle_MAC00_ShopOwner,
     },
 };
@@ -416,14 +321,14 @@ s32 N(D_80254964_7FF674_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Toad_03_Epilogue)[] = {
+StaticNpc N(NpcData_DojoMembers_Epilogue)[] = {
     {
-        .id = NPC_Toad_03,
+        .id = NPC_TheMaster,
         .settings = &N(NpcSettings_Luigi_Epilogue),
         .pos = { 375.0f, 115.0f, -440.0f },
         .yaw = 225,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_Toad_03_Epilogue),
+        .init = &N(EVS_NpcInit_TheMaster_Epilogue),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -488,7 +393,7 @@ StaticNpc N(NpcData_Toad_03_Epilogue)[] = {
     },
 };
 
-s32 N(D_80254F44_7FFC54_Epilogue)[] = {
+s32 N(ExtraAnims_HarryT_Epilogue)[] = {
     ANIM_HarryT_Still,
     ANIM_HarryT_Idle,
     ANIM_HarryT_Talk,
@@ -515,7 +420,7 @@ StaticNpc N(NpcData_Toad_01_Epilogue)[] = {
             .chase  = ANIM_HarryT_Run,
             .anim_4 = ANIM_HarryT_Idle,
         },
-        .extraAnimations = N(D_80254F44_7FFC54_Epilogue),
+        .extraAnimations = N(ExtraAnims_HarryT_Epilogue),
         .tattle = MSG_NpcTattle_MAC00_ShopOwner,
     },
     {
@@ -537,21 +442,21 @@ StaticNpc N(NpcData_Toad_01_Epilogue)[] = {
             .chase  = ANIM_HarryT_Run,
             .anim_4 = ANIM_HarryT_Idle,
         },
-        .extraAnimations = N(D_80254F44_7FFC54_Epilogue),
+        .extraAnimations = N(ExtraAnims_HarryT_Epilogue),
         .tattle = MSG_NpcTattle_MAC00_ShopOwner,
     },
 };
 
 extern StaticNpc N(NpcData_Toad_04)[9]; //@bug this NPC list actually has 10 NPCs in it...
-extern StaticNpc N(NpcData_Toad_10)[4];
+extern StaticNpc N(NpcData_Waterfront_Family)[4];
 
 NpcGroupList N(EpilogueNPCs) = {
-    NPC_GROUP(N(NpcData_Luigi_Epilogue_Epilogue)),
-    NPC_GROUP(N(NpcData_Toad_03_Epilogue)),
+    NPC_GROUP(N(NpcData_Luigi_Epilogue)),
+    NPC_GROUP(N(NpcData_DojoMembers_Epilogue)),
     NPC_GROUP(N(NpcData_Goompapa_Epilogue)),
     NPC_GROUP(N(NpcData_ChuckQuizmo_Epilogue)),
     NPC_GROUP(N(NpcData_Toad_01_Epilogue)),
     NPC_GROUP(N(NpcData_Toad_04)),
-    NPC_GROUP(N(NpcData_Toad_10)),
+    NPC_GROUP(N(NpcData_Waterfront_Family)),
     {}
 };

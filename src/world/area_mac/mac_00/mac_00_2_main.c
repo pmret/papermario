@@ -14,7 +14,7 @@ API_CALLABLE(N(DummyColliderFunction)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240624_7EB334)) {
+API_CALLABLE(N(DummyInitFunction)) {
     return ApiStatus_DONE2;
 }
 
@@ -122,7 +122,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
-    EVT_CALL(N(func_80240624_7EB334))
+    EVT_CALL(N(DummyInitFunction))
     EVT_RETURN
     EVT_END
 };

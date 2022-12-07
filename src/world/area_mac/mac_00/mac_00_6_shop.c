@@ -26,17 +26,17 @@ s32 N(ShopMessages)[] = {
     MSG_Shop_0016, 
 };
 
-ShopItemData N(D_8024E26C_7F8F7C)[] = {
-    { .itemID = ITEM_FRIGHT_JAR,    .price =  5, .descMsg = 0x0024002A },
-    { .itemID = ITEM_SLEEPY_SHEEP,  .price = 10, .descMsg = 0x00240026 },
-    { .itemID = ITEM_POW_BLOCK,     .price =  5, .descMsg = 0x00240027 },
-    { .itemID = ITEM_FIRE_FLOWER,   .price = 10, .descMsg = 0x00240000 },
-    { .itemID = ITEM_HONEY_SYRUP,   .price = 10, .descMsg = 0x00240016 },
-    { .itemID = ITEM_MUSHROOM,      .price =  5, .descMsg = 0x00240009 },
+ShopItemData N(Inventory)[] = {
+    { .itemID = ITEM_FRIGHT_JAR,    .price =  5, .descMsg = MSG_ItemShopDesc_FrightJar },
+    { .itemID = ITEM_SLEEPY_SHEEP,  .price = 10, .descMsg = MSG_ItemShopDesc_SleepySheep },
+    { .itemID = ITEM_POW_BLOCK,     .price =  5, .descMsg = MSG_ItemShopDesc_POWBlock },
+    { .itemID = ITEM_FIRE_FLOWER,   .price = 10, .descMsg = MSG_ItemShopDesc_FireFlower },
+    { .itemID = ITEM_HONEY_SYRUP,   .price = 10, .descMsg = MSG_ItemShopDesc_HoneySyrup },
+    { .itemID = ITEM_MUSHROOM,      .price =  5, .descMsg = MSG_ItemShopDesc_Mushroom },
     {}
 };
 
-ShopSellPriceData N(D_8024E2C0_7F8FD0)[] = {
+ShopSellPriceData N(PriceList)[] = {
     { .itemID = ITEM_DRIED_SHROOM,  .sellPrice = 3 },
     { .itemID = ITEM_DRIED_PASTA,   .sellPrice = 5 },
     { .itemID = ITEM_DUSTY_HAMMER,  .sellPrice = 3 },
@@ -47,7 +47,7 @@ ShopSellPriceData N(D_8024E2C0_7F8FD0)[] = {
     {}
 };
 
-EvtScript N(D_8024E320_7F9030) = {
+EvtScript N(EVS_OnBuy) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(3)
         EVT_CASE_EQ(4)
@@ -58,7 +58,7 @@ EvtScript N(D_8024E320_7F9030) = {
     EVT_END
 };
 
-ShopItemLocation N(D_8024E374_7F9084)[] = {
+ShopItemLocation N(ItemPositions)[] = {
     { .posModelID = MODEL_syouhin1, .triggerColliderID = COLLIDER_mono1 },
     { .posModelID = MODEL_syouhin2, .triggerColliderID = COLLIDER_mono2 },
     { .posModelID = MODEL_shouhin3, .triggerColliderID = COLLIDER_mono3 },
@@ -67,17 +67,17 @@ ShopItemLocation N(D_8024E374_7F9084)[] = {
     { .posModelID = MODEL_shouhin6, .triggerColliderID = COLLIDER_mono6 },
 };
 
-ShopOwner N(D_8024E38C_7F909C) = {
+ShopOwner N(Owner) = {
     .npcID = 1,
-    .idleAnim = 0x00880001,
-    .talkAnim = 0x00880004,
-    .onBuyEvt = &N(D_8024E320_7F9030),
+    .idleAnim = ANIM_HarryT_Idle,
+    .talkAnim = ANIM_HarryT_Talk,
+    .onBuyEvt = &N(EVS_OnBuy),
     .shopMsgIDs = N(ShopMessages),
 };
 
 EvtScript N(EVS_SetupShop) = {
-    EVT_CALL(MakeShop, EVT_PTR(N(D_8024E374_7F9084)), EVT_PTR(N(D_8024E26C_7F8F7C)), EVT_PTR(N(D_8024E2C0_7F8FD0)), 0x00010000)
-    EVT_CALL(MakeShopOwner, EVT_PTR(N(D_8024E38C_7F909C)))
+    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAGS_10000)
+    EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
     EVT_RETURN
     EVT_END
 };

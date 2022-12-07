@@ -91,9 +91,9 @@ EvtScript N(EVS_ChooseItem) = {
     EVT_END
 };
 
-#define EVT_CHOOSE_ANY_CONSUMABLE() \
+#define EVT_CHOOSE_ANY_CONSUMABLE(unkMode) \
     EVT_SET(LVar0, 0) \
-    EVT_SET(LVar1, 2) \
+    EVT_SET(LVar1, unkMode) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))
 
 #define EVT_CHOOSE_CONSUMABLE_FROM(itemList, unkMode) \
