@@ -8,28 +8,29 @@ void confetti_appendGfx(void* effect);
 
 extern Gfx D_090009E8_38C588[];
 extern Gfx D_09000A00_38C5A0[];
+extern Gfx D_09000940_38C4E0[];
 
 Gfx* D_E0088CC0[] = {
     D_090009E8_38C588, D_090009E8_38C588, D_090009E8_38C588, D_09000A00_38C5A0,
     D_090009E8_38C588, D_090009E8_38C588, D_090009E8_38C588
 };
 
-u8 D_E0088CDC[] = {
-    232, 160, 168,
-    168,  80,  88,
-    160, 168, 232,
-     72,  72, 232,
-    160, 232, 160,
-     96, 176, 120,
-    224, 224,  88,
-    176, 160,  56,
-    232, 160, 232,
-    176,  64, 160,
-    160, 216, 216,
-     88, 168, 168
+Color_RGB8 D_E0088CDC[] = {
+    { 232, 160, 168, },
+    { 168,  80,  88, },
+    { 160, 168, 232, },
+    {  72,  72, 232, },
+    { 160, 232, 160, },
+    {  96, 176, 120, },
+    { 224, 224,  88, },
+    { 176, 160,  56, },
+    { 232, 160, 232, },
+    { 176,  64, 160, },
+    { 160, 216, 216, },
+    {  88, 168, 168, },
 };
 
-s8 D_E0088D00[] = { 0, 1, 2, 3, 2, 1, 0, 0 };
+u8 D_E0088D00[] = { 0, 1, 2, 3, 2, 1, 0, 0 };
 
 u8 D_E0088D08[] = { 0, 45, 0, 60 };
 
@@ -238,4 +239,79 @@ void confetti_render(EffectInstance* effect) {
     retTask = shim_queue_render_task(&renderTask);
 }
 
-INCLUDE_ASM(s32, "effects/confetti", confetti_appendGfx);
+void confetti_appendGfx(void* effect) {
+    ConfettiFXData* part = ((EffectInstance*)effect)->data.confetti; //s3
+    Matrix4f sp18;
+    Matrix4f sp58;
+    s32 i;
+
+    s32 temp;
+    s32 width = 0x3C;
+    s32 height = 0x3C;
+    s32 zero = 0;
+
+    s32 sp98;
+    s32 sp9C;
+    Gfx* spA0;
+    s32 spA4;
+    Gfx* temp_v1_4;
+    s32 temp_fp;
+    Color_RGB8* temp_s0;
+    s32 idx;
+
+    temp_fp = part->unk_24;
+    sp9C = part->unk_2C;
+    sp98 = part->unk_28;
+    spA0 = D_E0088CC0[part->unk_00];
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_09000940_38C4E0);
+
+    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    temp_v1_4 = gMasterGfxPos++;
+
+    part++;
+    for (i = 0; i < sp9C; i++, part++) {
+        temp_s0 = &D_E0088CDC[i % 12];
+
+        if (part->unk_30 <= 0) {
+            shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, temp_s0->r, temp_s0->g, temp_s0->b, sp98);
+
+            switch ((temp_fp + i) % 3) {
+                case 0:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, ENVIRONMENT, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+                case 1:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+                case 2:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+            }
+            temp = ((i + D_E0088D00[temp_fp % 6]) & 0xF) * 16;
+
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, zero << 2, temp << 2, (zero << 2) + ((width >> 1) << 1), (temp << 2) + (height /* << 2 */));
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, spA0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+
+    gSPEndDisplayList(gMasterGfxPos++);
+    gSPBranchList(temp_v1_4, gMasterGfxPos);
+    temp_v1_4++;
+    gSPDisplayList(gMasterGfxPos++, temp_v1_4);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
+

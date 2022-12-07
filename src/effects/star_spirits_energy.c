@@ -156,7 +156,174 @@ EffectInstance* star_spirits_energy_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3,
 void star_spirits_energy_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/star_spirits_energy", star_spirits_energy_update);
+void star_spirits_energy_update(EffectInstance* effect) {
+    f32 temp_f0;
+    f32 temp_f2;
+    f32 temp_f0_2;
+    f32 var_f2;
+    u8 temp_a0_2;
+    s32 temp_s1;
+    s32 temp_s2;
+    StarSpiritsEnergyFXData* data = effect->data.starSpiritsEnergy;
+    s32 i;
+    u8 var_v0;
+    u8 var_v02;
+
+    temp_s2 = data->unk_04;
+
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->unk_14 = 16;
+    }
+
+    if (data->unk_14 < 1000) {
+        data->unk_14--;
+    }
+
+    data->unk_18++;
+
+    if (data->unk_14 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    temp_s1 = data->unk_18;
+
+    if (data->unk_14 < 16) {
+        data->unk_28 = data->unk_14 * 16;
+    }
+
+    switch (data->unk_70) {
+        case 0:
+            data->unk_50[0] = (temp_s1 & 3) * 0x1E + 0xC8;
+            data->unk_74++;
+            data->unk_40[0] = shim_sin_deg(temp_s1 * 0x14) * 0.04 + 0.5;
+            if (data->unk_00 != 0) {
+                data->unk_08 += shim_sin_deg(temp_s1);
+                data->unk_0C += shim_cos_deg(temp_s1 * 1.235631);
+                if (data->unk_74 >= 0x33) {
+                    data->unk_74 = 0;
+                    if (temp_s2 == 3) {
+                        data->unk_70 = 100;
+                    } else {
+                        data->unk_70 = 1;
+                    }
+                }
+            }
+            break;
+        case 100:
+            switch (data->unk_74) {
+                case 0:
+                    data->unk_40[3] = 4.0f;
+                    data->unk_50[3] = 0xFF;
+                    break;
+                case 1:
+                    data->unk_40[3] = 8.0f;
+                    data->unk_50[3] = 0xFF;
+                    break;
+                default:
+                    data->unk_40[3] = 0;
+                    data->unk_50[3] = 0;
+                    break;
+            }
+            if (data->unk_74 < 0x1E) {
+                var_f2 = (f32) D_E0122BA8[data->unk_74].unk_00 * 0.01 + data->unk_74 * 0.3;
+                var_v0 = D_E0122BA8[data->unk_74].unk_03;
+            } else {
+                var_f2 = (f32) D_E0122BA8[0x1D].unk_00 * 0.01 + data->unk_74 * 0.3;
+                var_v0 = D_E0122BA8[0x1D].unk_03;
+            }
+            data->unk_40[0] = data->unk_50[0] = 0;
+            data->unk_50[1] = var_v0;
+            data->unk_50[2] = var_v0;
+            data->unk_40[1] = var_f2;
+            data->unk_40[2] = var_f2 + 0.6;
+            data->unk_74++;
+            break;
+        case 1:
+            switch (data->unk_74) {
+                case 0:
+                    data->unk_40[3] = 4.0f;
+                    data->unk_50[3] = 255;
+                    break;
+                case 1:
+                    data->unk_40[3] = 8.0f;
+                    data->unk_50[3] = 255;
+                    break;
+                default:
+                    data->unk_40[3] = 0;
+                    data->unk_50[3] = 0;
+                    break;
+            }
+            temp_f2 = (f32) D_E0122BA8[data->unk_74].unk_00 * 0.01;
+            var_v02 = D_E0122BA8[data->unk_74].unk_03;
+
+            data->unk_40[0] = data->unk_50[0] = 0;
+            data->unk_50[1] = var_v02;
+            data->unk_50[2] = var_v02;
+            data->unk_40[1] = temp_f2;
+            data->unk_40[2] = temp_f2 * 1.2 + 4.0;
+            data->unk_74++;
+            if (data->unk_74 >= 30) {
+                data->unk_74 = 0;
+                data->unk_70 = 4;
+            }
+            break;
+        case 4:
+            switch (29 - data->unk_74) {
+                case 0:
+                    data->unk_40[3] = 4.0f;
+                    data->unk_50[3] = 255;
+                    break;
+                case 1:
+                    data->unk_40[3] = 8.0f;
+                    data->unk_50[3] = 255;
+                    break;
+                default:
+                    data->unk_40[3] = 0;
+                    data->unk_50[3] = 0;
+                    break;
+            }
+            temp_f0_2 = (f32) D_E0122C20[data->unk_74].unk_00 * 0.01;
+            temp_a0_2 = D_E0122C20[data->unk_74].unk_03;
+            data->unk_40[0] = data->unk_50[0] = 0;
+            data->unk_50[1] = temp_a0_2;
+            data->unk_50[2] = 0;
+            data->unk_40[1] = temp_f0_2;
+            data->unk_40[2] = 0.0f;
+            data->unk_74++;
+            if (data->unk_74 >= 0x1E) {
+                data->unk_74 = 0;
+                data->unk_70 = 5;
+            }
+            break;
+        case 5:
+        default:
+            data->unk_40[0] = 0.0f;
+            data->unk_40[1] = 0.0f;
+            data->unk_40[2] = 0.0f;
+            data->unk_50[0] = 0;
+            data->unk_50[1] = 0;
+            data->unk_50[2] = 0;
+            data->unk_40[3] = 0;
+            data->unk_50[3] = 0;
+            data->unk_40[3] = 0;
+            data->unk_74++;
+            break;
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (data->unk_50[i] > 255) {
+            data->unk_50[i] = 255;
+        }
+        if (data->unk_50[i] < 0) {
+            data->unk_50[i] = 0;
+        }
+        if (data->unk_40[i] < 0.0f) {
+            data->unk_40[i] = 0.0f;
+        }
+    }
+}
 
 void star_spirits_energy_render(EffectInstance* effect) {
     RenderTask renderTask;
