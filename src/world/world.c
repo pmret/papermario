@@ -284,7 +284,7 @@ f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
 #include "area_mac/mac.h"
 MapConfig mac_maps[] = {
     { MAP(machi), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_00, 0x80243BE0), .bgName = "nok_bg" },
+    { MAP(mac_00), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
     { MAP(mac_02), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },

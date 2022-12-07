@@ -1,0 +1,173 @@
+#include "mac_00.h"
+
+NpcSettings N(NpcSettings_Luigi_Intro) = {
+    .height = 24,
+    .radius = 24,
+    .level = 99,
+};
+
+#define NAME_SUFFIX _Intro
+#include "world/common/npc/Toad_Stationary.inc.c"
+#include "world/common/npc/Toad_Wander.inc.c"
+#define NAME_SUFFIX
+
+EvtScript N(EVS_NpcInit_Chan_Intro) = {
+    EVT_CALL(SetNpcPos, NPC_SELF, 570, 20, -150)
+    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_Lee_Intro) = {
+    EVT_CALL(SetNpcPos, NPC_SELF, 600, 20, -145)
+    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
+    EVT_RETURN
+    EVT_END
+};
+
+s32 N(ExtraAnims_Chan_Intro)[] = {
+    ANIM_Chan_Still,
+    ANIM_Chan_Idle,
+    ANIM_Chan_Run,
+    -1
+};
+
+s32 N(ExtraAnims_Lee_Intro)[] = {
+    ANIM_Lee_Still,
+    ANIM_Lee_Idle,
+    ANIM_Lee_Talk,
+    -1
+};
+
+StaticNpc N(NpcData_IntroNPCs)[] = {
+    {
+        .id = NPC_Luigi_01,
+        .settings = &N(NpcSettings_Luigi_Intro),
+        .pos = { NPC_DISPOSE_LOCATION },
+        .yaw = 90,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .animations = {
+            .idle   = ANIM_Luigi_Still,
+            .walk   = ANIM_Luigi_Still,
+            .run    = ANIM_Luigi_Still,
+            .chase  = ANIM_Luigi_Still,
+            .anim_4 = ANIM_Luigi_Still,
+            .anim_5 = ANIM_Luigi_Still,
+            .death  = ANIM_Luigi_Still,
+            .hit    = ANIM_Luigi_Still,
+            .anim_8 = ANIM_Luigi_Still,
+            .anim_9 = ANIM_Luigi_Still,
+            .anim_A = ANIM_Luigi_Still,
+            .anim_B = ANIM_Luigi_Still,
+            .anim_C = ANIM_Luigi_Still,
+            .anim_D = ANIM_Luigi_Still,
+            .anim_E = ANIM_Luigi_Still,
+            .anim_F = ANIM_Luigi_Still,
+        },
+    },
+    {
+        .id = NPC_Toad_01,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
+        .pos = { -150.0f, 0.0f, -275.0f },
+        .yaw = 90,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .animations = TOAD_RED_ANIMS,
+        .tattle = MSG_NpcTattle_MAC_GateGuardian,
+    },
+    {
+        .id = NPC_Toad_02,
+        .settings = &N(NpcSettings_Toad_Wander_Intro),
+        .pos = { 219.0f, 0.0f, -45.0f },
+        .yaw = 90,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .territory = {
+            .patrol = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .numPoints  = 5,
+                .points  = {
+                    { 219, 0, -45 },
+                    { 144, 0, -10 },
+                    { 163, 0, -50 },
+                    { 240, 0, 50 },
+                    { 275, 0, 10 },
+                },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 0, 0, 0 },
+                .detectSize = { 200 },
+            }
+        },
+        .animations = TOAD_RED_ANIMS,
+        .tattle = MSG_NpcTattle_MAC_ShopLoiterer,
+    },
+    {
+        .id = NPC_Toad_03,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
+        .pos = { 424.0f, 20.0f, -85.0f },
+        .yaw = 270,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .animations = TOAD_BLUE_ANIMS,
+        .tattle = MSG_NpcTattle_MAC_DojoSpectator,
+    },
+    {
+        .id = NPC_Chan,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
+        .pos = { 310.0f, 115.0f, -390.0f },
+        .yaw = 45,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
+        .init = &N(EVS_NpcInit_Chan_Intro),
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .animations = {
+            .idle   = ANIM_Chan_Idle,
+        },
+        .extraAnimations = N(ExtraAnims_Chan_Intro),
+        .tattle = MSG_NpcTattle_Chan,
+    },
+    {
+        .id = NPC_Lee,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
+        .pos = { 330.0f, 115.0f, -410.0f },
+        .yaw = 45,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
+        .init = &N(EVS_NpcInit_Lee_Intro),
+        .drops = {
+            .dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops  = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+        .animations = {
+            .idle   = ANIM_Lee_Idle,
+        },
+        .extraAnimations = N(ExtraAnims_Lee_Intro),
+        .tattle = MSG_NpcTattle_Lee,
+    },
+};
+
+NpcGroupList N(IntroNPCs) = {
+    NPC_GROUP(N(NpcData_IntroNPCs)),
+    {}
+};

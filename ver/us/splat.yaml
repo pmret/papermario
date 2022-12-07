@@ -8968,22 +8968,22 @@ segments:
     start: 0x7EAD10
     vram: 0x80240000
     subsegments:
-    - [0x7EAD10, c]
-    - [0x7EB340, c]
-    - [0x7ECFD0, c]
-    - [0x7ED280, c]
-    - [0x7EE870, data]
-    - [0x7F0A20, data]
-    - [0x7F8F20, data]
-    - [0x7F9100, data]
-    - [0x7F91D0, data]
-    - [0x7F9800, data]
-    - [0x7F9850, data]
-    - [0x7FD1A0, data]
-    - [0x7FDF30, data]
-    - [0x7FE550, data]
-    - [0x8000B0, data]
-    - [0x8006A0]
+    - [0x7EAD10, c, mac_00_0_header]
+    - [0x7EAD10, c, mac_00_1_music]
+    - [0x7EAD10, c, mac_00_2_main]
+    - [0x7EB340, c, mac_00_3_entity]
+    - [0x7EB340, c, mac_00_4_rooms]
+    - [0x7EB340, c, mac_00_5_npc]
+    - [0x7ECFD0, c, mac_00_6_shop]
+    - [0x7ECFD0, c, mac_00_7_music_mix]
+    - [0x7ED100, c, mac_00_8_demo]
+    - [0x7ED100, c, mac_00_9_water_gfx]
+    - [0x7ED280, c, mac_00_10_npcs_unk]
+    - [0x7EE870, c, mac_00_11_intro_npc]
+    - [0x7EE870, c, mac_00_12_intro]
+    - [0x7EE870, c, mac_00_13_epilogue_npc]
+    - [0x7EE870, c, mac_00_14_epilogue]
+    - [0x7EE870]
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code

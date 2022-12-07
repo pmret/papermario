@@ -184,6 +184,7 @@ ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall);
 ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall);
 ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall);
 ApiStatus PlayerMoveTo(Evt* script, s32 isInitialCall);
+ApiStatus func_802D1270(Evt* script, s32 isInitialCall);
 ApiStatus PlayerJump(Evt* script, s32 isInitialCall);
 ApiStatus PlayerJump1(Evt* script, s32 isInitialCall);
 ApiStatus PlayerJump2(Evt* script, s32 isInitialCall);
