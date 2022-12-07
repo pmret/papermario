@@ -1083,7 +1083,7 @@ void check_input_midair_jump(void) {
         !(gPlayerStatus.animFlags & (PA_FLAGS_8BIT_MARIO | PA_FLAGS_USING_WATT)) &&
         gPlayerStatus.peakJumpTime >= 6 &&
         gPlayerStatus.timeInAir < 18 &&
-        gPlayerStatus.pressedButtons & A_BUTTON) {
+        gPlayerStatus.pressedButtons & BUTTON_A) {
 
         switch (gPlayerData.bootsLevel) {
             case 0:

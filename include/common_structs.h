@@ -1104,7 +1104,7 @@ typedef struct ModelAnimator {
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
     /* 0x2D4 */ void (*fpRenderCallback)(void*);
-    /* 0x2D8 */ s32 renderCallbackArg;
+    /* 0x2D8 */ void* renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
 } ModelAnimator; // size = 0x2E0
 
@@ -1743,7 +1743,7 @@ typedef struct AnimatedModel {
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Mtx mtx;
-    /* 0x68 */ u32 currentAnimData;
+    /* 0x68 */ s16* currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
 

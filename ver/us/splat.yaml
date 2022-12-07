@@ -357,7 +357,7 @@ segments:
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/setthreadpri]
-    - [0x6FA70, .data, os/timerintr] # libultra data
+    - [0x6FA70, .data, os/timerintr]
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
     - [auto, .data, os/guRotate]

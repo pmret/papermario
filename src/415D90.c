@@ -1229,7 +1229,7 @@ s32 func_802A2C84(void) {
                 break;
             }
 
-            if (battleStatus->currentButtonsPressed & 0x4000) {
+            if (battleStatus->currentButtonsPressed & BUTTON_B) {
                 sfx_play_sound(SOUND_MENU_BACK);
                 func_802A27E4();
                 battle_menu_moveState = -2;
