@@ -1025,7 +1025,82 @@ void update_npc_blur(Npc* npc) {
     motionBlur->index = index;
 }
 
-INCLUDE_ASM(void, "npc", appendGfx_npc_blur, Npc* npc);
+void appendGfx_npc_blur(Npc* npc) {
+    Matrix4f sp20, sp60;
+    f32 x, y, z;
+    f32 yaw;
+    s32 var_s3;
+    s32 var_s5;
+    s32 index;
+    NpcMotionBlur* blur;
+
+    var_s3 = 0;
+    var_s5 = 0;
+    blur = npc->blur.motion;
+    index = blur->index;
+
+    while (TRUE) {
+        index--;
+        var_s3++;
+        if (index < 0) {
+            index = ARRAY_COUNT(blur->x) - 1;
+        }
+        if (index == blur->index) {
+            break;
+        }
+
+        if (var_s3 >= 3) {
+            var_s3 = 0;
+            var_s5++;
+            if (var_s5 >= 4) {
+                break;
+            }
+
+            x = blur->x[index];
+            y = blur->y[index];
+            z = blur->z[index];
+            func_802DE894(npc->spriteInstanceID, 7, 255, 255, 255, 120 - (var_s5 * 20), 0);
+            yaw = npc->renderYaw;
+            guTranslateF(sp20, x, y, z);
+
+            if (npc->rotation.y != 0.0f) {
+                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+                guMtxCatF(sp60, sp20, sp20);
+            }
+            if (npc->rotation.x != 0.0f) {
+                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+                guMtxCatF(sp60, sp20, sp20);
+            }
+            if (npc->rotation.z != 0.0f) {
+                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+                guMtxCatF(sp60, sp20, sp20);
+            }
+
+            if (
+                (npc->scale.x * SPRITE_WORLD_SCALE_D) != 1.0 ||
+                ((npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D) != 1.0 ||
+                (npc->scale.z * SPRITE_WORLD_SCALE_D) != 1.0)
+            {
+                guScaleF(
+                    sp60,
+                    npc->scale.x * SPRITE_WORLD_SCALE_D,
+                    (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D,
+                    npc->scale.z * SPRITE_WORLD_SCALE_D
+                );
+                guMtxCatF(sp60, sp20, sp20);
+            }
+
+            if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                if (!(npc->flags & NPC_FLAG_1000000)) {
+                    spr_draw_npc_sprite(npc->spriteInstanceID, (s32) yaw, 0, 0, sp20);
+                }
+            } else {
+                spr_draw_player_sprite(0x40000001, (s32) yaw, 0, 0, sp20);
+            }
+        }
+    }
+    func_8003D3BC(npc);
+}
 
 void npc_enable_collisions(void) {
     D_800A0B94 = 1;

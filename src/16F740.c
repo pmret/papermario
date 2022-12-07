@@ -221,7 +221,7 @@ void btl_state_update_normal_start(void) {
 
             ASSERT(size <= 0x8000);
 
-            model = D_80210000;
+            model = D_80210000.root;
             textureRom = get_asset_offset(stage->texture, &size);
             if (model != NULL) {
                 load_data_for_models(model, textureRom, size);
