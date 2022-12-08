@@ -72,11 +72,11 @@ void nuContDataOpen(void) {
     osRecvMesg(&nuContDataMutexQ, NULL, OS_MESG_BLOCK);
 }
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contRetrace);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contRetrace);
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadData);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contReadData);
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadNW);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contReadNW);
 
 s32 contQuery(void) {
     s32 ret = osContStartQuery(&nuSiMesgQ);

@@ -274,4 +274,4 @@ void nuScEventBroadcast(NUScMsg* msg) {
     }
 }
 
-INCLUDE_ASM(void, "os/nusys/nuSched", nuScWaitTaskReady);
+INCLUDE_ASM(void, "os/nusys/nusched", nuScWaitTaskReady);
