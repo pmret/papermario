@@ -118,7 +118,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_IF_EQ(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
         EVT_SET(GB_StoryProgress, STORY_CH0_ARRIVED_AT_TOAD_TOWN)
-        EVT_EXEC(N(EVS_8024F64C))
+        EVT_EXEC(N(EVS_Scene_ToadTownGreeting))
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)

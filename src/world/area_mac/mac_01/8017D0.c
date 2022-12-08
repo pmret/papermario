@@ -295,7 +295,7 @@ ApiStatus func_802446AC_804F2C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnkPositionFunc.inc.c"
+#include "world/common/util/CheckPositionRelativeToPlane.inc.c"
 
 ApiStatus func_802447E0_805060(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {

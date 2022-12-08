@@ -85,7 +85,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     EVT_CALL(NpcMoveTo, NPC_Luigi_Epilogue, 60, -100, 0)
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, NPC_DISPOSE_LOCATION)
-    EVT_EXEC(N(D_8024FC44_7FA954))
+    EVT_EXEC(N(EVS_BlockExitToGoomaRoad))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

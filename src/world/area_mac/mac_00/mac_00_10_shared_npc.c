@@ -7,23 +7,23 @@
 #include "world/common/complete/LetterDelivery.inc.c"
 #define NAME_SUFFIX
 
-s32 N(D_8024F5F4_7FA304)[] = {
+s32 N(LetterList_MissT)[] = {
     ITEM_LETTER18,
     ITEM_NONE
 };
 
-EvtScript N(D_8024F5FC_7FA30C) = {
+EvtScript N(EVS_LetterPrompt_MissT) = {
     EVT_CALL(N(LetterDelivery_Init_Shared),
-        NPC_ThreeSisters_03, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle,
+        NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle,
         ITEM_LETTER18, ITEM_LETTER19,
         MSG_MAC_Gate_00FF, MSG_MAC_Gate_0100, MSG_MAC_Gate_0101, MSG_MAC_Gate_0102,
-        EVT_PTR(N(D_8024F5F4_7FA304)))
+        EVT_PTR(N(LetterList_MissT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery_Shared))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_8024F64C) = {
+EvtScript N(EVS_Scene_ToadTownGreeting) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -225, 0, -300)
@@ -114,7 +114,7 @@ EvtScript N(EVS_NpcInteract_Toad_04) = {
     EVT_END
 };
 
-EvtScript N(D_8024FBA0_7FA8B0) = {
+EvtScript N(EVS_Scene_CantLeaveTown) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(NpcFacePlayer, NPC_Toad_04, 0)
     EVT_WAIT(5)
@@ -127,8 +127,8 @@ EvtScript N(D_8024FBA0_7FA8B0) = {
     EVT_END
 };
 
-EvtScript N(D_8024FC44_7FA954) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_8024FBA0_7FA8B0)), TRIGGER_FLOOR_TOUCH, COLLIDER_o484, 1, 0)
+EvtScript N(EVS_BlockExitToGoomaRoad) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_CantLeaveTown)), TRIGGER_FLOOR_TOUCH, COLLIDER_o484, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -229,7 +229,7 @@ EvtScript N(EVS_NpcInteract_Toad_06) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Toad_07) = {
+EvtScript N(EVS_NpcInteract_Lovers) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
             EVT_SET(LVar0, MSG_MAC_Gate_00AF)
@@ -289,13 +289,13 @@ EvtScript N(EVS_NpcInteract_Toad_07) = {
             EVT_SET(LVar0, MSG_Outro_0030)
             EVT_SET(LVar1, MSG_Outro_0031)
     EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 5, LVar0)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, LVar1)
+    EVT_CALL(SpeakToPlayer, NPC_FickleLover, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 5, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_ShamelessLover, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, LVar1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
+EvtScript N(EVS_NpcInteract_ThreeSisters) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
             EVT_SET(LVar0, MSG_MAC_Gate_00CF)
@@ -370,16 +370,16 @@ EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
             EVT_SET(LVar1, MSG_Outro_0033)
             EVT_SET(LVar2, MSG_Outro_0034)
     EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle, 0, LVar1)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_04, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar2)
+    EVT_CALL(SpeakToPlayer, NPC_KrisT, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle, 0, LVar1)
+    EVT_CALL(SpeakToPlayer, NPC_FelissaT, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar2)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_03) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ThreeSisters_02))
-    EVT_EXEC_WAIT(N(D_8024F5FC_7FA30C))
+EvtScript N(EVS_NpcInteract_MissT) = {
+    EVT_EXEC_WAIT(N(EVS_NpcInteract_ThreeSisters))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MissT))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
@@ -435,7 +435,7 @@ EvtScript N(EVS_NpcInteract_Toad_08) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcAux_ThreeSisters_01) = {
+EvtScript N(EVS_NpcAux_ShamelessLover) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Still)
     EVT_WAIT(3)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Idle)
@@ -443,7 +443,7 @@ EvtScript N(EVS_NpcAux_ThreeSisters_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcAux_ThreeSisters_02) = {
+EvtScript N(EVS_NpcAux_KrisT) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Still)
     EVT_WAIT(2)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Idle)
@@ -451,7 +451,7 @@ EvtScript N(EVS_NpcAux_ThreeSisters_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcAux_ThreeSisters_03) = {
+EvtScript N(EVS_NpcAux_MissT) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Still)
     EVT_WAIT(6)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Idle)
@@ -459,7 +459,7 @@ EvtScript N(EVS_NpcAux_ThreeSisters_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcAux_ThreeSisters_04) = {
+EvtScript N(EVS_NpcAux_FelissaT) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Still)
     EVT_WAIT(8)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Idle)
@@ -505,7 +505,7 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, mac_00_ENTRY_7)
-        EVT_EXEC(N(D_8024FC44_7FA954))
+        EVT_EXEC(N(EVS_BlockExitToGoomaRoad))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -523,56 +523,56 @@ EvtScript N(EVS_NpcInit_Toad_06) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_07) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_07)))
+EvtScript N(EVS_NpcInit_FickleLover) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lovers)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_07)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ThreeSisters_01)))
+EvtScript N(EVS_NpcInit_ShamelessLover) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lovers)))
+    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ShamelessLover)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_02)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ThreeSisters_02)))
+EvtScript N(EVS_NpcInit_KrisT) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
+    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_KrisT)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_03)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ThreeSisters_03)))
+EvtScript N(EVS_NpcInit_MissT) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MissT)))
+    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_MissT)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_02)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ThreeSisters_04)))
+EvtScript N(EVS_NpcInit_FelissaT) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
+    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_FelissaT)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_08) = {
+EvtScript N(EVS_NpcInit_DojoSpectator) = {
     EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_Toad_08, 350, 20, -100)
+        EVT_CALL(SetNpcPos, NPC_DojoSpectator, 350, 20, -100)
     EVT_END_IF
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_08)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_09) = {
+EvtScript N(EVS_NpcInit_DojoFan) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_09)))
     EVT_RETURN
     EVT_END
 };
 
-StaticNpc N(NpcData_Toad_04)[] = {
+StaticNpc N(NpcData_SharedTownsfolk)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
@@ -638,78 +638,78 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .tattle = MSG_NpcTattle_MAC_NewsEnthusiast,
     },
     {
-        .id = NPC_Toad_07,
+        .id = NPC_FickleLover,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { -40.0f, 0.0f, 61.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_400000,
-        .init = &N(EVS_NpcInit_Toad_07),
+        .init = &N(EVS_NpcInit_FickleLover),
         .drops = TOAD_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_FickleLovers,
     },
     {
-        .id = NPC_ThreeSisters_01,
+        .id = NPC_ShamelessLover,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { -15.0f, 0.0f, 60.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_400000,
-        .init = &N(EVS_NpcInit_ThreeSisters_01),
+        .init = &N(EVS_NpcInit_ShamelessLover),
         .drops = TOADETTE_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ShamelessLover,
     },
     {
-        .id = NPC_ThreeSisters_02,
+        .id = NPC_KrisT,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { 426.0f, 20.0f, 268.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_KrisT),
         .drops = TOADETTE_DROPS,
         .animations = TOADETTE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ThreeSisters_Eldest,
     },
     {
-        .id = NPC_ThreeSisters_03,
+        .id = NPC_MissT,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { 381.0f, 20.0f, 326.0f },
         .yaw = 180,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_ThreeSisters_03),
+        .init = &N(EVS_NpcInit_MissT),
         .drops = TOADETTE_DROPS,
         .animations = TOADETTE_ORANGE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ThreeSisters_Middle,
     },
     {
-        .id = NPC_ThreeSisters_04,
+        .id = NPC_FelissaT,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { 476.0f, 20.0f, 326.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_ThreeSisters_04),
+        .init = &N(EVS_NpcInit_FelissaT),
         .drops = TOADETTE_DROPS,
         .animations = TOADETTE_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ThreeSisters_Youngest,
     },
     {
-        .id = NPC_Toad_08,
+        .id = NPC_DojoSpectator,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { 424.0f, 20.0f, -85.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_Toad_08),
+        .init = &N(EVS_NpcInit_DojoSpectator),
         .drops = TOAD_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DojoSpectator,
     },
     {
-        .id = NPC_Toad_09,
+        .id = NPC_DojoFan,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),
         .pos = { 373.0f, 0.0f, 22.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000,
-        .init = &N(EVS_NpcInit_Toad_09),
+        .init = &N(EVS_NpcInit_DojoFan),
         .drops = TOAD_DROPS,
         .animations = TOAD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DojoFanToad,

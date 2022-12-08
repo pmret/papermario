@@ -447,7 +447,7 @@ StaticNpc N(NpcData_Toad_01_Epilogue)[] = {
     },
 };
 
-extern StaticNpc N(NpcData_Toad_04)[9]; //@bug this NPC list actually has 10 NPCs in it...
+extern StaticNpc N(NpcData_SharedTownsfolk)[9]; //@bug this NPC list actually has 10 NPCs in it...
 extern StaticNpc N(NpcData_Waterfront_Family)[4];
 
 NpcGroupList N(EpilogueNPCs) = {
@@ -456,7 +456,7 @@ NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Goompapa_Epilogue)),
     NPC_GROUP(N(NpcData_ChuckQuizmo_Epilogue)),
     NPC_GROUP(N(NpcData_Toad_01_Epilogue)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_SharedTownsfolk)),
     NPC_GROUP(N(NpcData_Waterfront_Family)),
     {}
 };

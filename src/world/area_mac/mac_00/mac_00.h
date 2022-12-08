@@ -39,18 +39,18 @@ enum {
     NPC_Toad_04                 = 7,
     NPC_Toad_05                 = 8,
     NPC_Toad_06                 = 9,
-    NPC_Toad_07                 = 10,
-    NPC_ThreeSisters_01         = 11,
-    NPC_ThreeSisters_02         = 12,
-    NPC_ThreeSisters_03         = 13,
-    NPC_ThreeSisters_04         = 14,
-    NPC_Toad_08                 = 15,
-    NPC_Toad_09                 = 16,
+    NPC_FickleLover             = 10,
+    NPC_ShamelessLover          = 11,
+    NPC_KrisT                   = 12,
+    NPC_MissT                   = 13,
+    NPC_FelissaT                = 14,
+    NPC_DojoSpectator           = 15,
+    NPC_DojoFan                 = 16,
     NPC_Waterfront_Dad          = 17,
     NPC_Waterfront_Mom          = 18,
     NPC_Waterfront_Kid1         = 19,
     NPC_Waterfront_Kid2         = 20,
-    NPC_ShyGuy_01               = 21,
+    NPC_ShyGuyThief             = 21,
     NPC_ShyGuy_02               = 22,
     NPC_ShyGuy_03               = 23,
     NPC_Toad_11                 = 24,
@@ -70,17 +70,17 @@ enum {
 #define NAMESPACE mac_00
 
 extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_SetupMusicTriggers);
-extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_SetupShop);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_SetupWaterCustomGfx);
 extern EvtScript N(EVS_SetupDemo);
-extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_8024F64C);
 extern EvtScript N(EVS_Scene_Intro);
 extern EvtScript N(EVS_Scene_BeginEpilogue);
+extern EvtScript N(EVS_Scene_ToadTownGreeting);
+extern EvtScript N(EVS_BlockExitToGoomaRoad);
 extern EvtScript N(EVS_WaterfrontHouse_DoorLocked);
-extern EvtScript N(D_8024FC44_7FA954);
 extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(IntroNPCs);

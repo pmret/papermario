@@ -8978,7 +8978,7 @@ segments:
     - [0x7ECFD0, c, mac_00_7_music_mix]
     - [0x7ED100, c, mac_00_8_demo]
     - [0x7ED100, c, mac_00_9_water_gfx]
-    - [0x7ED280, c, mac_00_10_npcs_unk]
+    - [0x7ED280, c, mac_00_10_shared_npc]
     - [0x7EE870, c, mac_00_11_intro_npc]
     - [0x7EE870, c, mac_00_12_intro]
     - [0x7EE870, c, mac_00_13_epilogue_npc]
