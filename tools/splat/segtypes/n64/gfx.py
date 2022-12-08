@@ -27,6 +27,11 @@ from pygfxd import (
     gfxd_vtx_callback,
     gfxd_zimg_callback,
     GfxdEndian,
+    gfxd_f3d,
+    gfxd_f3db,
+    gfxd_f3dex,
+    gfxd_f3dexb,
+    gfxd_f3dex2,
 )
 
 from util import log, options
