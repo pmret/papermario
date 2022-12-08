@@ -691,9 +691,9 @@ typedef struct UiStatus {
     /* 0x54 */ s8 coinsBlinking; /* bool */
     /* 0x55 */ s8 coinsBlinkCounter;
     /* 0x56 */ s8 coinsBlinkTimer; /* until stop */
-    /* 0x57 */ u8 unk_57;
-    /* 0x58 */ u8 unk_58;
-    /* 0x59 */ u8 unk_59;
+    /* 0x57 */ s8 unk_57;
+    /* 0x58 */ s8 unk_58;
+    /* 0x59 */ s8 unk_59;
     /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
     /* 0x5C */ s32 iconIndex10;

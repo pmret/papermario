@@ -146,6 +146,7 @@ HudScript* SPStarHudScripts[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_Statu
     &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7
 };
 
+// TODO: make array when update_status_menu is decompiled
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;
 s32 D_800F7FF0 = 2;
