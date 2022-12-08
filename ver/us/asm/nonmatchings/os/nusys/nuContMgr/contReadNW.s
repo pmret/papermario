@@ -38,8 +38,8 @@ glabel contReadNW
 .L80060838:
 /* 3BC38 80060838 14400009 */  bnez      $v0, .L80060860
 /* 3BC3C 8006083C 00000000 */   nop
-/* 3BC40 80060840 3C028009 */  lui       $v0, %hi(D_80093D20)
-/* 3BC44 80060844 8C423D20 */  lw        $v0, %lo(D_80093D20)($v0)
+/* 3BC40 80060840 3C028009 */  lui       $v0, %hi(nuContReadFunc)
+/* 3BC44 80060844 8C423D20 */  lw        $v0, %lo(nuContReadFunc)($v0)
 /* 3BC48 80060848 50400005 */  beql      $v0, $zero, .L80060860
 /* 3BC4C 8006084C 0000102D */   daddu    $v0, $zero, $zero
 /* 3BC50 80060850 86040000 */  lh        $a0, ($s0)

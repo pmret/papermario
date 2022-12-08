@@ -23,6 +23,11 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define NOP_REORDER(statement) \
+    __asm__(".set nogpopt"); \
+    statement; \
+    __asm__(".set gpopt"); \
+
 #define PTR_LIST_END ((void*) -1)
 
 #define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)

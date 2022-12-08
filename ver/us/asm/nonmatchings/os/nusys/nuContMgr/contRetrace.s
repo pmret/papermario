@@ -42,8 +42,8 @@ glabel contRetrace
 /* 3BAF0 800606F0 0C0195BC */  jal       osRecvMesg
 /* 3BAF4 800606F4 24060001 */   addiu    $a2, $zero, 1
 .L800606F8:
-/* 3BAF8 800606F8 3C028009 */  lui       $v0, %hi(D_80093D20)
-/* 3BAFC 800606FC 8C423D20 */  lw        $v0, %lo(D_80093D20)($v0)
+/* 3BAF8 800606F8 3C028009 */  lui       $v0, %hi(nuContReadFunc)
+/* 3BAFC 800606FC 8C423D20 */  lw        $v0, %lo(nuContReadFunc)($v0)
 /* 3BB00 80060700 10400003 */  beqz      $v0, .L80060710
 /* 3BB04 80060704 00000000 */   nop
 /* 3BB08 80060708 0040F809 */  jalr      $v0

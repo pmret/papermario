@@ -3,6 +3,8 @@
 #include "nu/nualsgi.h"
 #include "audio.h"
 
+__asm__(".set nogpopt");
+
 u8 nuAuPreNMI = 0;
 NUAuPreNMIFunc nuAuPreNMIFunc = NULL;
 s32 nuAuDmaNext = 0;
@@ -293,10 +295,7 @@ void nuAuCleanDMABuffers(void) {
     } while (0);
 }
 
-// Nop issue
-// try again when bss is figured out up until this file
 // rename: default_nuAuPreNMIFunc
-#ifdef NON_MATCHING
 void func_8004B328(NUScMsg mesg_type, u32 frameCounter) {
     s16 temp;
     s32 temp2;
@@ -323,9 +322,6 @@ void func_8004B328(NUScMsg mesg_type, u32 frameCounter) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "audio/25f00_len_940", func_8004B328);
-#endif
 
 void alLink(ALLink* element, ALLink* after) {
     element->next = after->next;
