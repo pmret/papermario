@@ -107,8 +107,8 @@ EvtScript N(EVS_StartTongueWiggle) = {
     EVT_CALL(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
     EVT_EXEC(N(EVS_WiggleTongue))
     EVT_CALL(MakeLocalVertexCopy, 1, MODEL_sita, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(make_tongue_gfx)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_sita, 1, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(make_tongue_gfx)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_sita, CUSTOM_GFX_1, -1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_RETURN
     EVT_END

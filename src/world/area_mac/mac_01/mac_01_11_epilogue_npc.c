@@ -117,31 +117,31 @@ EvtScript N(EVS_NpcInit_Koopa) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Toad_01) = {
+EvtScript N(EVS_NpcInteract_Rowf) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0040)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_01) = {
+EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_CALL(SetNpcPos, NPC_SELF, -225, 0, 320)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Toad_02) = {
+EvtScript N(EVS_NpcInteract_Rhuff) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0041)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad_02) = {
+EvtScript N(EVS_NpcInit_Rhuff) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.75), EVT_FLOAT(0.75), EVT_FLOAT(0.75))
     EVT_CALL(SetNpcPos, NPC_SELF, -250, 0, 295)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff)))
     EVT_RETURN
     EVT_END
 };
@@ -405,21 +405,21 @@ StaticNpc N(NpcData_Kolorado)[] = {
     },
 };
 
-s32 N(D_80260A5C_8212DC)[] = {
+s32 N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Still,
     ANIM_Rowf_Idle,
     ANIM_Rowf_Talk,
     -1
 };
 
-StaticNpc N(NpcData_Toad_01)[] = {
+StaticNpc N(NpcData_RowfAndRhuff)[] = {
     {
-        .id = NPC_Toad_01,
+        .id = NPC_Rowf,
         .settings = &N(NpcSettings_Toad_01),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
-        .init = &N(EVS_NpcInit_Toad_01),
+        .init = &N(EVS_NpcInit_Rowf),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -428,16 +428,16 @@ StaticNpc N(NpcData_Toad_01)[] = {
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
-        .extraAnimations = N(D_80260A5C_8212DC),
+        .extraAnimations = N(ExtraAnims_Rowf),
         .tattle = MSG_NpcTattle_Rowf,
     },
     {
-        .id = NPC_Toad_02,
+        .id = NPC_Rhuff,
         .settings = &N(NpcSettings_Toad_01),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
-        .init = &N(EVS_NpcInit_Toad_02),
+        .init = &N(EVS_NpcInit_Rhuff),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -446,7 +446,7 @@ StaticNpc N(NpcData_Toad_01)[] = {
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
-        .extraAnimations = N(D_80260A5C_8212DC),
+        .extraAnimations = N(ExtraAnims_Rowf),
         .tattle = MSG_NpcTattle_Rhuff,
     },
 };
@@ -525,7 +525,7 @@ StaticNpc N(NpcData_Dryite_01)[] = {
     },
 };
 
-s32 N(D_8026123C_821ABC)[] = {
+s32 N(ExtraAnims_Chanterelle)[] = {
     ANIM_Chanterelle_Still,
     ANIM_Chanterelle_Idle,
     ANIM_Chanterelle_Sing,
@@ -533,14 +533,14 @@ s32 N(D_8026123C_821ABC)[] = {
     -1
 };
 
-s32 N(D_80261250_821AD0)[] = {
+s32 N(ExtraAnims_Poet)[] = {
     ANIM_Musician_Poet_Still,
     ANIM_Musician_Poet_Idle,
     ANIM_Musician_Poet_Talk,
     -1
 };
 
-StaticNpc N(NpcData_Chanterelle)[] = {
+StaticNpc N(NpcData_EpilogueNPCs)[] = {
     {
         .id = NPC_Chanterelle,
         .settings = &N(NpcSettings_Chanterelle),
@@ -571,7 +571,7 @@ StaticNpc N(NpcData_Chanterelle)[] = {
             .anim_E = ANIM_Chanterelle_Still,
             .anim_F = ANIM_Chanterelle_Still,
         },
-        .extraAnimations = N(D_8026123C_821ABC),
+        .extraAnimations = N(ExtraAnims_Chanterelle),
         .tattle = MSG_NpcTattle_PopDiva_CantSing,
     },
     {
@@ -604,7 +604,7 @@ StaticNpc N(NpcData_Chanterelle)[] = {
             .anim_E = ANIM_Musician_Poet_Idle,
             .anim_F = ANIM_Musician_Poet_Idle,
         },
-        .extraAnimations = N(D_80261250_821AD0),
+        .extraAnimations = N(ExtraAnims_Poet),
         .tattle = MSG_NpcTattle_MasterPoet,
     },
     {
@@ -637,7 +637,7 @@ StaticNpc N(NpcData_Chanterelle)[] = {
             .anim_E = ANIM_Musician_Composer_Still,
             .anim_F = ANIM_Musician_Composer_Still,
         },
-        .extraAnimations = N(D_80261250_821AD0),
+        .extraAnimations = N(ExtraAnims_Poet),
         .tattle = MSG_NpcTattle_Composer,
     },
 };
@@ -647,9 +647,9 @@ extern StaticNpc N(NpcData_Toad_04)[10];
 
 NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Kolorado_Epilogue)),
-    NPC_GROUP(N(NpcData_Toad_01_Epilogue)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff_Epilogue)),
     NPC_GROUP(N(NpcData_Dryite_01_Epilogue)),
-    NPC_GROUP(N(NpcData_Chanterelle_Epilogue)),
+    NPC_GROUP(N(NpcData_EpilogueNPCs_Epilogue)),
     NPC_GROUP(N(NpcData_Toad_04)),
     {}
 };

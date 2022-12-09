@@ -119,7 +119,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ShyGuy_03) = {
+EvtScript N(EVS_NpcInit_GardenShyGuy1) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
             EVT_IF_EQ(GF_MAC00_ShyGuyChasedFromShop, FALSE)
@@ -207,12 +207,12 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
         .tattle = MSG_NpcTattle_MAC_ShyGuyShopOwner,
     },
     {
-        .id = NPC_ShyGuy_03,
+        .id = NPC_GardenShyGuy1,
         .settings = &N(NpcSettings_ShyGuy_NoAI),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH,
-        .init = &N(EVS_NpcInit_ShyGuy_03),
+        .init = &N(EVS_NpcInit_GardenShyGuy1),
         .drops = SHY_GUY_NO_DROPS,
         .animations = SHY_GUY_ANIMS,
         .tattle = MSG_NpcTattle_MAC_ShyGuyShopOwner,

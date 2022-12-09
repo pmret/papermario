@@ -33,24 +33,29 @@
 #include "sprite/npc/Musician.h"
 
 enum {
+    // intro NPCs
     NPC_Luigi                   = 0,
+    NPC_IntroToad1              = 1,
+    NPC_IntroToad2              = 2,
+    NPC_IntroToad3              = 3,
+    // standard NPCs
 	NPC_Merlon                  = 0,
-    NPC_Toad_01                 = 1,
-    NPC_Toad_02                 = 2,
-    NPC_Toad_03                 = 3,
+    NPC_Rowf                    = 1,
+    NPC_Rhuff                   = 2,
+    NPC_Postmaster              = 3,
     NPC_Parakarry               = 4,
     NPC_ChuckQuizmo             = 5,
-    NPC_ShyGuy_01               = 6,
-    NPC_ShyGuy_02               = 7,
-    NPC_ShyGuy_03               = 8,
-    NPC_ShyGuy_04               = 9,
+    NPC_PostOfficeShyGuy        = 6,
+    NPC_ToadHouseShyGuy         = 7,
+    NPC_GardenShyGuy1           = 8,
+    NPC_GardenShyGuy2           = 9,
     NPC_Toad_04                 = 10,
     NPC_Toad_05                 = 11,
     NPC_Toad_06                 = 12,
     NPC_Toad_07                 = 13,
     NPC_Toad_08                 = 14,
     NPC_Toad_09                 = 15,
-    NPC_Toad_10                 = 16,
+    NPC_ToadHouseToad           = 16,
     NPC_Bubulb                  = 17,
     NPC_MinhT                   = 18,
     NPC_Kolorado                = 19,
@@ -99,25 +104,25 @@ enum {
 #define NAMESPACE mac_01
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80259AD0);
-extern EvtScript N(EVS_802488A8);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_SetupMusicMix);
+extern EvtScript N(EVS_PlayRestingSong);
+extern EvtScript N(EVS_PlaySpellcastSong);
+extern EvtScript N(EVS_PlayFlowerGateSong);
+extern EvtScript N(EVS_SetupRooms);
+extern EvtScript N(EVS_SetupBulletinBoard);
+extern EvtScript N(EVS_SetupFlowerModels);
+extern EvtScript N(EVS_EnterFlowerGate);
+extern EvtScript N(EVS_ExitFlowerGate);
+extern EvtScript N(EVS_Merlon_GiveHint);
+extern EvtScript N(EVS_SetupQuickChangeTrigger);
 extern EvtScript N(EVS_80257844);
 extern EvtScript N(EVS_802502AC);
 extern EvtScript N(EVS_80252EB0);
-extern EvtScript N(EVS_8024F27C);
-extern EvtScript N(EVS_8025023C);
-extern EvtScript N(D_80261880_822100);
-extern EvtScript N(EVS_8025A004);
-extern EvtScript N(EVS_80248070);
-extern EvtScript N(EVS_8025A2F0);
-extern EvtScript N(EVS_80247D18);
-extern EvtScript N(EVS_SetupBulletinBoard);
-extern EvtScript N(EVS_802468F8);
+extern EvtScript N(EVS_Scene_IntroWalking);
+extern EvtScript N(EVS_SetupBadgeShop);
 extern EvtScript N(EVS_80248428);
-extern EvtScript N(EVS_80246924);
-extern EvtScript N(EVS_80246824);
-extern EvtScript N(EVS_80246850);
-extern EvtScript N(D_80246770_806FF0);
+extern EvtScript N(EVS_ResetMusicAfterFortune);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 

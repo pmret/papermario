@@ -58,14 +58,14 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END_IF
     EVT_BIND_TRIGGER(EVT_PTR(N(D_802469AC_80722C)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_mac_02_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_80259AD0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitf, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitFlowerGate)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitf, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80246C94_807514) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, 1)
+    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
         EVT_EXEC(EnterSavePoint)
         EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_RETURN
@@ -94,9 +94,9 @@ EvtScript N(D_80246C94_807514) = {
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilitn, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(mac_01_ENTRY_4)
-            EVT_EXEC(N(D_80261880_822100))
+            EVT_EXEC(N(EVS_Scene_IntroWalking))
         EVT_CASE_EQ(mac_01_ENTRY_5)
-            EVT_EXEC_WAIT(N(EVS_8025A004))
+            EVT_EXEC_WAIT(N(EVS_EnterFlowerGate))
             EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
@@ -122,7 +122,7 @@ EvtScript N(EVS_Main) = {
     EVT_SET(AF_MAC_14, FALSE)
     EVT_SET(AF_MAC_15, FALSE)
     EVT_IF_LT(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_EXEC(N(EVS_80248070))
+        EVT_EXEC(N(EVS_SetupBadgeShop))
     EVT_ELSE
         EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
     EVT_END_IF
@@ -147,15 +147,15 @@ EvtScript N(EVS_Main) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
-    EVT_EXEC(N(EVS_8025A2F0))
+    EVT_EXEC(N(EVS_SetupFlowerModels))
     EVT_EXEC(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_80247D18))
+    EVT_EXEC(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupBulletinBoard))
     EVT_EXEC(N(EVS_80248428))
-    EVT_EXEC(N(D_80246770_806FF0))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(UseDoorSounds, DOOR_SOUNDS_LARGE)
     EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_EXEC(N(D_80246C94_807514))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_CALL(EnableTexPanning, MODEL_hikari, TRUE)
     EVT_THREAD
@@ -176,8 +176,8 @@ EvtScript N(EVS_Main) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
     EVT_END_THREAD
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_8024F27C)), TRIGGER_WALL_PRESS_A, COLLIDER_o335, 1, 0)
-    EVT_EXEC(N(EVS_8025023C))
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Merlon_GiveHint)), TRIGGER_WALL_PRESS_A, COLLIDER_o335, 1, 0)
+    EVT_EXEC(N(EVS_SetupQuickChangeTrigger))
     EVT_EXEC(N(EVS_SetupFoliage))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
     EVT_RETURN

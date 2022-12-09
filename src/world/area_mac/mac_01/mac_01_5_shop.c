@@ -100,14 +100,14 @@ ShopItemLocation N(RowfItemPositions)[] = {
 };
 
 ShopOwner N(ShopOwnerRowf) = {
-    .npcID = NPC_Toad_01,
+    .npcID = NPC_Rowf,
     .idleAnim = ANIM_Rowf_Idle,
     .talkAnim = ANIM_Rowf_Talk,
     .onBuyEvt = &N(EVS_OnBuy),
     .shopMsgIDs = N(ShopMessages),
 };
 
-EvtScript N(EVS_80248070) = {
+EvtScript N(EVS_SetupBadgeShop) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
         EVT_GOTO(1)
     EVT_END_IF

@@ -125,11 +125,11 @@ void N(func_80240628_800EA8)(void) {
 
 EvtScript N(EVS_80248428) = {
     EVT_WAIT(1)
-    EVT_CALL(SetCustomGfxBuilders, 2, EVT_PTR(N(func_802403C0_800C40)), EVT_PTR(N(func_802405E8_800E68)))
-    EVT_CALL(SetModelCustomGfx, MODEL_mirrorball, 2, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(func_802403C0_800C40)), EVT_PTR(N(func_802405E8_800E68)))
+    EVT_CALL(SetModelCustomGfx, MODEL_mirrorball, CUSTOM_GFX_2, -1)
     EVT_CALL(EnableModel, MODEL_mirrorball, FALSE)
-    EVT_CALL(SetCustomGfxBuilders, 3, EVT_PTR(N(func_80240628_800EA8)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_tama, 3, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(func_80240628_800EA8)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
     EVT_CALL(SetModelFlags, MODEL_tama, 256, TRUE)
     EVT_CALL(SetModelFlags, MODEL_ohosi, 256, TRUE)
     EVT_RETURN

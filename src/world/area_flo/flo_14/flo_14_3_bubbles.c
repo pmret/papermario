@@ -387,16 +387,16 @@ EvtScript N(EVS_SetupBubbles) = {
     EVT_SET(LVar0, CLONED_MODEL(5))
     EVT_EXEC(N(EVS_ManageBlownBubble))
     EVT_CALL(MakeLocalVertexCopy, 0, MODEL_o167, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(gfx_build_big_bubble)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_o167, 1, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_big_bubble)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
     EVT_CALL(SetModelCustomGfx, CLONED_MODEL(1), 1, -1)
     EVT_CALL(SetModelCustomGfx, CLONED_MODEL(2), 1, -1)
     EVT_CALL(SetModelCustomGfx, CLONED_MODEL(3), 1, -1)
     EVT_CALL(SetModelCustomGfx, CLONED_MODEL(4), 1, -1)
     EVT_CALL(SetModelCustomGfx, CLONED_MODEL(5), 1, -1)
     EVT_CALL(MakeLocalVertexCopy, 1, MODEL_o57, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 2, EVT_PTR(N(gfx_build_bubble_flower)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_o57, 2, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(gfx_build_bubble_flower)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
     EVT_RETURN
     EVT_END
 };

@@ -27,7 +27,7 @@ MusicProximityTrigger N(MusicMixTrigger3) = {
 };
 
 
-EvtScript N(EVS_802488A8) = {
+EvtScript N(EVS_SetupMusicMix) = {
     EVT_CALL(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
     EVT_CALL(EnableMusicProximityMix, 0)
     EVT_IF_EQ(MF_Unk_0E, FALSE)

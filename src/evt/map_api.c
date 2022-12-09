@@ -154,15 +154,15 @@ ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
 ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 customGfxUnit = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
     Model* model;
 
     treeIndex = get_model_list_index_from_tree_index(treeIndex);
     model = get_model_from_list_index(treeIndex);
 
-    set_mdl_custom_gfx_set(model, var2, var3);
-    if (var2 != -1) {
+    set_mdl_custom_gfx_set(model, customGfxUnit, var3);
+    if (customGfxUnit != -1) {
         model->flags |= MODEL_FLAGS_USES_CUSTOM_GFX;
     }
     return ApiStatus_DONE2;

@@ -4,7 +4,7 @@
 #include "world/common/todo/UnkMachiFunc.inc.c"
 #define NAME_SUFFIX
 
-EvtScript N(D_80261880_822100) = {
+EvtScript N(EVS_Scene_IntroWalking) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(EnableModel, MODEL_ju_1, FALSE)
     EVT_CALL(N(UnkMachiFunc_IntroScene))

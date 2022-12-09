@@ -1659,7 +1659,7 @@ enum ItemIDs {
     ITEM_LETTER06                     = 0x0000003B,
     ITEM_LETTER07                     = 0x0000003C,
     ITEM_LETTER08                     = 0x0000003D,
-    ITEM_LETTER09                     = 0x0000003E,
+    ITEM_LETTER_TO_MINHT              = 0x0000003E,
     ITEM_UNUSED_LETTER02              = 0x0000003F,
     ITEM_LETTER10                     = 0x00000040,
     ITEM_LETTER11                     = 0x00000041,
@@ -3425,7 +3425,7 @@ enum PopupType {
     POPUP_MENU_READ_DIARY_PAGE      = 0xA,
     POPUP_MENU_READ_POSTCARD        = 0xB,
     POPUP_MENU_USEKEY               = 0xC,
-    POPUP_MENU_D                    = 0xD,
+    POPUP_MENU_POST_OFFICE          = 0xD,
 };
 
 /// not really
@@ -4307,6 +4307,25 @@ enum TexPanner {
     // select texture component
     TEX_PANNER_MAIN = 0,
     TEX_PANNER_AUX  = 1,
+};
+
+enum CustomGfxUnit {
+    CUSTOM_GFX_0    = 0x0,
+    CUSTOM_GFX_1    = 0x1,
+    CUSTOM_GFX_2    = 0x2,
+    CUSTOM_GFX_3    = 0x3,
+    CUSTOM_GFX_4    = 0x4,
+    CUSTOM_GFX_5    = 0x5,
+    CUSTOM_GFX_6    = 0x6,
+    CUSTOM_GFX_7    = 0x7,
+    CUSTOM_GFX_8    = 0x8,
+    CUSTOM_GFX_9    = 0x9,
+    CUSTOM_GFX_A    = 0xA,
+    CUSTOM_GFX_B    = 0xB,
+    CUSTOM_GFX_C    = 0xC,
+    CUSTOM_GFX_D    = 0xD,
+    CUSTOM_GFX_E    = 0xE,
+    CUSTOM_GFX_F    = 0xF,
 };
 
 enum EnemyFlags {

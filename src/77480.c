@@ -1248,7 +1248,7 @@ void check_for_interactables(void) {
 
     if (!(playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE)) {
         func_800EF3D4(0);
-        repartner_set_tether_distance();
+        partner_reset_tether_distance();
         return;
     }
 

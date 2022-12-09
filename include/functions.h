@@ -1045,7 +1045,7 @@ void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);
 void remove_consumable(void);
 void delete_shadow(s32);
-void repartner_set_tether_distance(void);
+void partner_reset_tether_distance(void);
 void save_tattle_flags(s32);
 void update_merlee_messages(void);
 void draw_merlee_messages(void);

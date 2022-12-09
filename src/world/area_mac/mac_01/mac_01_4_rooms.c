@@ -157,41 +157,71 @@ EvtScript N(D_80247C28_8084A8) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SET(LVar0, 0)
     EVT_LABEL(0)
-    EVT_ADDF(LVar0, EVT_FLOAT(3.0))
-    EVT_IF_GT(LVar0, 360)
-        EVT_SUBF(LVar0, EVT_FLOAT(360.0))
-    EVT_END_IF
-    EVT_CALL(RotateGroup, MODEL_yane, LVar0, 0, 1, 0)
-    EVT_CALL(RotateGroup, MODEL_off_yane, LVar0, 0, 1, 0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_ADDF(LVar0, EVT_FLOAT(3.0))
+        EVT_IF_GT(LVar0, 360)
+            EVT_SUBF(LVar0, EVT_FLOAT(360.0))
+        EVT_END_IF
+        EVT_CALL(RotateGroup, MODEL_yane, LVar0, 0, 1, 0)
+        EVT_CALL(RotateGroup, MODEL_off_yane, LVar0, 0, 1, 0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_80247CF0_808570)[] = {
-    NPC_Toad_03,
+s32 N(InsideNPCs_PostOffice)[] = {
+    NPC_Postmaster,
     NPC_Parakarry,
-    NPC_ShyGuy_01,
+    NPC_PostOfficeShyGuy,
     -1
 };
 
-s32 N(D_80247D00_808580)[] = {
-    NPC_Toad_10,
-    NPC_ShyGuy_02,
+s32 N(InsideNPCs_ToadHouse)[] = {
+    NPC_ToadHouseToad,
+    NPC_ToadHouseShyGuy,
     -1
 };
 
-s32 N(D_80247D0C_80858C)[] = {
-    NPC_Luigi,
+s32 N(InsideNPCs_MerlonsHouse)[] = {
+    NPC_Merlon,
     NPC_Ninji,
     -1
 };
 
-EvtScript N(EVS_80247D18) = {
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80247430_807CB0)), EVT_PTR(N(D_802474DC_807D5C)), EVT_PTR(N(D_8024772C_807FAC)), EVT_PTR(N(D_8024775C_807FDC)), COLLIDER_deilit1, COLLIDER_deilit1u, MODEL_post_office, EVT_PTR(N(D_80247CF0_808570)))
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_802477CC_80804C)), EVT_PTR(N(D_8024780C_80808C)), 0, EVT_PTR(N(D_8024796C_8081EC)), COLLIDER_deilit2, COLLIDER_deilit2u, MODEL_kinopi, EVT_PTR(N(D_80247D00_808580)))
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_802479F0_808270)), EVT_PTR(N(D_80247A20_8082A0)), 0, EVT_PTR(N(D_80247A70_8082F0)), COLLIDER_deilitd, COLLIDER_deilitud, MODEL_de_aru, EVT_PTR(N(D_80247D0C_80858C)))
+EvtScript N(EVS_SetupRooms) = {
+    // post office
+    EVT_CALL(MakeDoorAdvanced,
+        2,
+        EVT_PTR(N(D_80247430_807CB0)),
+        EVT_PTR(N(D_802474DC_807D5C)),
+        EVT_PTR(N(D_8024772C_807FAC)),
+        EVT_PTR(N(D_8024775C_807FDC)),
+        COLLIDER_deilit1,
+        COLLIDER_deilit1u,
+        MODEL_post_office,
+        EVT_PTR(N(InsideNPCs_PostOffice)))
+    // toad house
+    EVT_CALL(MakeDoorAdvanced,
+        2,
+        EVT_PTR(N(D_802477CC_80804C)),
+        EVT_PTR(N(D_8024780C_80808C)),
+        0,
+        EVT_PTR(N(D_8024796C_8081EC)),
+        COLLIDER_deilit2,
+        COLLIDER_deilit2u,
+        MODEL_kinopi, 
+        EVT_PTR(N(InsideNPCs_ToadHouse)))
+    // merlon's house
+    EVT_CALL(MakeDoorAdvanced,
+        2,
+        EVT_PTR(N(D_802479F0_808270)),
+        EVT_PTR(N(D_80247A20_8082A0)),
+        0,
+        EVT_PTR(N(D_80247A70_8082F0)),
+        COLLIDER_deilitd,
+        COLLIDER_deilitud,
+        MODEL_de_aru,
+        EVT_PTR(N(InsideNPCs_MerlonsHouse)))
     EVT_EXEC(N(D_80247C28_8084A8))
     EVT_SET(LVar0, 3)
     EVT_EXEC(N(D_8024775C_807FDC))
