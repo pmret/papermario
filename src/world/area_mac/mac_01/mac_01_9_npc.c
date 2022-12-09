@@ -5,8 +5,8 @@
 extern s32 D_80262F68;
 extern PopupMenu D_80262C38;
 extern IconHudScriptPair gItemHudScripts[];
-extern EvtScript N(D_8025BB80_81C400);
-extern EvtScript N(D_8025BAE0_81C360);
+extern EvtScript N(EVS_ToadHouse_GetInBed);
+extern EvtScript N(EVS_SetToadHouseDialogue);
 extern EvtScript N(D_8025BDDC_81C65C);
 extern EvtScript N(D_80250414_810C94);
 
@@ -64,17 +64,17 @@ API_CALLABLE(N(func_80243380_803C00)) {
     temp_v0->scale.z = SPRITE_WORLD_SCALE_F;
     temp_v0->foldID = func_8013A704(1);
     temp_v0->entityID = create_worker_world(NULL, mac_01_UnkFoldFunc);
-    evt_set_variable(script, MapVar(10), (s32) temp_v0);
+    evt_set_variable(script, MV_Unk_0A, (s32) temp_v0);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80243494_803D14)) {
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL,MV_Unk_0A);
 
     func_8013A854(temp_v0->foldID);
     free_worker(temp_v0->entityID);
     heap_free(temp_v0);
-    evt_set_variable(script, MapVar(10), NULL);
+    evt_set_variable(script, MV_Unk_0A, NULL);
     return ApiStatus_DONE2;
 }
 
@@ -83,7 +83,7 @@ API_CALLABLE(N(func_80243500_803D80)) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MV_Unk_0A);
 
     temp_v0->pos.x = x;
     temp_v0->pos.y = y;
@@ -96,7 +96,7 @@ API_CALLABLE(N(func_802435C0_803E40)) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MV_Unk_0A);
 
     temp_v0->rot.x = x;
     temp_v0->rot.y = y;
@@ -109,7 +109,7 @@ API_CALLABLE(N(func_80243680_803F00)) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MV_Unk_0A);
 
     temp_v0->scale.x = x;
     temp_v0->scale.y = y;
@@ -121,7 +121,7 @@ API_CALLABLE(N(func_80243740_803FC0)) {
     Bytecode* args = script->ptrReadPos;
     s32 spriteIndex = evt_get_variable(script, *args++);
     s32 rasterIndex = evt_get_variable(script, *args++);
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MV_Unk_0A);
 
     temp_v0->spriteIndex = spriteIndex;
     temp_v0->rasterIndex = rasterIndex;
@@ -166,7 +166,7 @@ EvtScript N(D_8024D444_80DCC4) = {
 
 EvtScript N(EVS_NpcInteract_Toad_10) = {
     EVT_CALL(N(ToadHouse_InitScreenOverlay), 0, 0, 0)
-    EVT_EXEC_WAIT(N(D_8025BAE0_81C360))
+    EVT_EXEC_WAIT(N(EVS_SetToadHouseDialogue))
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
@@ -194,7 +194,7 @@ EvtScript N(EVS_NpcInteract_Toad_10) = {
     EVT_END_IF
     EVT_CALL(N(ToadHouse_PutPartnerAway), LVarA)
     EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(D_8025BB80_81C400))
+    EVT_EXEC_WAIT(N(EVS_ToadHouse_GetInBed))
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 255, 60, EASING_LINEAR)
         EVT_LABEL(0)
@@ -239,9 +239,9 @@ MAP_STATIC_PAD(1,key_choice);
 
 API_CALLABLE(N(func_802440FC_80497C)) {
     if (isInitialCall) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x2B)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x2A)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x29)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 3);
         set_model_env_color_parameters(255, 255, 255, 0, 0, 0);
         script->functionTemp[0] = 255;
     }
@@ -304,9 +304,9 @@ API_CALLABLE(N(func_80244308_804B88)) {
     }
     set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
     if (script->functionTemp[0] == 255) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x2B)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x2A)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(0x29)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 0);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -449,7 +449,7 @@ API_CALLABLE(N(func_802448A0_805120)) {
 }
 
 API_CALLABLE(N(func_80244984_805204)) {
-    s32 flagBase = GameFlag(1664);
+    s32 flagBase = GF_MAC01_RowfBadge_00;
     s32 count = 0;
     s32 i;
 
@@ -463,8 +463,8 @@ API_CALLABLE(N(func_80244984_805204)) {
 }
 
 API_CALLABLE(N(func_802449F8_805278)) {
-    s32 temp_s3 = -evt_get_variable(NULL, MapVar(1));
-    s32 temp_s4 = evt_get_variable(NULL, MapVar(0));
+    s32 temp_s3 = -evt_get_variable(NULL, MV_Unk_01);
+    s32 temp_s4 = evt_get_variable(NULL, MV_Unk_00);
     Npc* npc = script->varTablePtr[7];
     Enemy* enemy = get_enemy(2);
     f32 theta = (temp_s3 / 180.0f) * PI;
@@ -477,10 +477,10 @@ API_CALLABLE(N(func_802449F8_805278)) {
     script->varTable[5] = script->varTable[3] + (s32) ((vt0 * sinTheta) + (vt1 * cosTheta));
 
     if (temp_s3 == 0) {
-        npc->currentAnim = 0xA70001;
+        npc->currentAnim = ANIM_Rowf_Idle;
         enemy->flags &= ~ENEMY_FLAGS_8000000;
     } else {
-        npc->currentAnim = 0xA70002;
+        npc->currentAnim = ANIM_Rowf_Walk;
         enemy->flags |= ENEMY_FLAGS_8000000;
     }
 
@@ -491,13 +491,13 @@ API_CALLABLE(N(func_802449F8_805278)) {
     }
 
     if (temp_s4 != 0) {
-        npc->currentAnim = 0xA70006;
+        npc->currentAnim = ANIM_Rowf_Think;
     }
     return ApiStatus_DONE2;
 }
 
 void N(func_80244B98_805418)(void) {
-    s32 temp_s0 = evt_get_variable(NULL, MapVar(0));
+    s32 temp_s0 = evt_get_variable(NULL, MV_Unk_00);
     Vtx* sp10;
     Vtx* sp14;
     s32 numCopied;
@@ -506,7 +506,7 @@ void N(func_80244B98_805418)(void) {
     mdl_get_copied_vertices(0, &sp10, &sp14, &numCopied);
 
     for (i = 0; i < numCopied; i++) {
-        if (sp10[i].v.ob[0] == -0x4E) {
+        if (sp10[i].v.ob[0] == -78) {
             Vtx* v14 = &sp14[i];
 
             if (sp10[i].v.ob[1] == 0) {
@@ -514,7 +514,7 @@ void N(func_80244B98_805418)(void) {
             } else {
                 v14->v.ob[1] = sp10[i].v.ob[1] + (temp_s0 / 4);
             }
-        } else if (sp10[i].v.ob[0] == -0x10) {
+        } else if (sp10[i].v.ob[0] == -16) {
             Vtx* v14 = &sp14[i];
 
             if (sp10[i].v.ob[1] == 0) {
@@ -528,46 +528,49 @@ void N(func_80244B98_805418)(void) {
     gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
 }
 
-// flag clearing counterpart of UnkMachiFunc
 API_CALLABLE(N(func_80244CC0_805540)) {
-    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA) == 0) {
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_40);
     }
-    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB) == 0) {
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_40);
     }
-    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC) == 0) {
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_40);
     }
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnkMachiFunc.inc.c"
-
-API_CALLABLE(N(func_80244E10_805690)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 idx = evt_get_variable(script, *args++);
-
-    set_item_entity_position(
-        gGameStatusPtr->shopItemEntities[idx].index,
-        script->varTable[0], script->varTable[1], script->varTable[2] + 6
-    );
+ApiStatus N(UnkMachiFunc)(Evt* script, s32 isInitialCall) {
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_40);
+    }
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_40);
+    }
+    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_40);
+    }
     return ApiStatus_DONE2;
 }
 
-s32 N(D_8024E1EC_80EA6C)[] = {
+s32 N(LetterList_Merlon)[] = {
     ITEM_LETTER01,
     ITEM_NONE
 };
 
-EvtScript N(D_8024E1F4_80EA74) = {
-    EVT_CALL(N(LetterDelivery_Init), 0, 0x00A50004, 0x00A50001, 54, 0, 0x00030043, 0x00030044, 0x00030045, 0x00030046, EVT_PTR(N(D_8024E1EC_80EA6C)))
+EvtScript N(EVS_LetterPrompt_Merlon) = {
+    EVT_CALL(N(LetterDelivery_Init),
+        NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle,
+        ITEM_LETTER01, ITEM_NONE,
+        MSG_MAC_Plaza_0043, MSG_MAC_Plaza_0044, MSG_MAC_Plaza_0045, MSG_MAC_Plaza_0046,
+        EVT_PTR(N(LetterList_Merlon)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E244_80EAC4) = {
+EvtScript N(EVS_LetterReward_Merlon) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_GIVE_STAR_PIECE()
         EVT_CALL(InterpNpcYaw, NPC_Merlon, 135, 0)
@@ -576,19 +579,23 @@ EvtScript N(D_8024E244_80EAC4) = {
     EVT_END
 };
 
-s32 N(D_8024E2C0_80EB40)[] = {
+s32 N(LetterList_MinhT)[] = {
     ITEM_LETTER09,
     ITEM_NONE 
 };
 
-EvtScript N(D_8024E2C8_80EB48) = {
-    EVT_CALL(N(LetterDelivery_Init), 18, 0x00A80004, 0x00A80001, 62, 0, 0x00030078, 0x00030079, 0x0003007A, 0x0003007B, EVT_PTR(N(D_8024E2C0_80EB40)))
+EvtScript N(EVS_LetterPrompt_MinhT) = {
+    EVT_CALL(N(LetterDelivery_Init),
+        NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle,
+        ITEM_LETTER09, ITEM_NONE,
+        MSG_MAC_Plaza_0078, MSG_MAC_Plaza_0079, MSG_MAC_Plaza_007A, MSG_MAC_Plaza_007B,
+        EVT_PTR(N(LetterList_MinhT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E318_80EB98) = {
+EvtScript N(EVS_LetterReward_MinhT) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
@@ -596,19 +603,23 @@ EvtScript N(D_8024E318_80EB98) = {
     EVT_END
 };
 
-s32 N(D_8024E37C_80EBFC)[] = {
+s32 N(LetterList_Kolorado)[] = {
     ITEM_LETTER25,
     ITEM_NONE 
 };
 
-EvtScript N(D_8024E384_80EC04) = {
-    EVT_CALL(N(LetterDelivery_Init), 19, 0x00B60008, 0x00B60001, 84, 0, 0x000300E0, 0x000300E1, 0x000300E2, 0x000300E3, EVT_PTR(N(D_8024E37C_80EBFC)))
+EvtScript N(EVS_LetterPrompt_Kolorado) = {
+    EVT_CALL(N(LetterDelivery_Init),
+        NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
+        ITEM_LETTER25, ITEM_NONE,
+        MSG_MAC_Plaza_00E0, MSG_MAC_Plaza_00E1, MSG_MAC_Plaza_00E2, MSG_MAC_Plaza_00E3,
+        EVT_PTR(N(LetterList_Kolorado)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E3D4_80EC54) = {
+EvtScript N(EVS_LetterReward_Kolorado) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
@@ -616,12 +627,12 @@ EvtScript N(D_8024E3D4_80EC54) = {
     EVT_END
 };
 
-s32 N(D_8024E438_80ECB8)[] = {
+s32 N(ItemList_Artifact)[] = {
     ITEM_ARTIFACT,
     ITEM_NONE 
 };
 
-EvtScript N(D_8024E440_80ECC0) = {
+EvtScript N(EVS_ArtifactReward_Kolorado) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E8)
     EVT_GIVE_STAR_PIECE()
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E9)
@@ -630,7 +641,7 @@ EvtScript N(D_8024E440_80ECC0) = {
     EVT_END
 };
 
-EvtScript N(D_8024E4DC_80ED5C) = {
+EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
     EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -642,29 +653,29 @@ EvtScript N(D_8024E4DC_80ED5C) = {
         EVT_SET(AF_MAC_44, TRUE)
         EVT_IF_EQ(GF_SBK_KeptArtifactFromKolorado, FALSE)
             EVT_SET(GF_SBK_KeptArtifactFromKolorado, FALSE)
-            EVT_SET(LVar0, 0x000300E4)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00E4)
         EVT_ELSE
-            EVT_SET(LVar0, 0x000300E5)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00E5)
         EVT_END_IF
     EVT_ELSE
-        EVT_SET(LVar0, 0x000300E5)
+        EVT_SET(LVar0, MSG_MAC_Plaza_00E5)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
-    EVT_SET(LVar0, EVT_PTR(N(D_8024E438_80ECB8)))
+    EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
     EVT_SET(LVar1, 19)
     EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
     EVT_SWITCH(LVar0)
         EVT_CASE_GE(1)
-            EVT_EXEC_WAIT(N(D_8024E440_80ECC0))
+            EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
             EVT_BREAK_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E6)
-            EVT_SET(LVar0, EVT_PTR(N(D_8024E438_80ECB8)))
+            EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
             EVT_SET(LVar1, 19)
             EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
             EVT_SWITCH(LVar0)
                 EVT_CASE_GE(1)
-                    EVT_EXEC_WAIT(N(D_8024E440_80ECC0))
+                    EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
                 EVT_CASE_DEFAULT
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E7)
             EVT_END_SWITCH
@@ -1599,10 +1610,10 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
             EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_004C)
         EVT_CASE_GE(STORY_CH3_GOT_SUPER_BOOTS)
             EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, FALSE)
-                EVT_SET(LVar0, 0x0003003E)
+                EVT_SET(LVar0, MSG_MAC_Plaza_003E)
                 EVT_IF_GE(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
                     EVT_IF_LT(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-                        EVT_SET(LVar0, 0x0003003D)
+                        EVT_SET(LVar0, MSG_MAC_Plaza_003D)
                     EVT_END_IF
                 EVT_END_IF
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, LVar0)
@@ -1667,8 +1678,8 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_003B)
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(D_8024E1F4_80EA74))
-    EVT_EXEC_WAIT(N(D_8024E244_80EAC4))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Merlon))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_Merlon))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
@@ -2106,13 +2117,13 @@ EvtScript N(EVS_NpcInteract_Toad_01_B) = {
     EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableC)
     EVT_IF_EQ(LVar0, 3)
         EVT_IF_LT(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-            EVT_SET(LVar1, 0x00030005)
+            EVT_SET(LVar1, MSG_MAC_Plaza_0005)
         EVT_ELSE
             EVT_CALL(N(func_80244984_805204))
             EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LVar1, 0x00030006)
+                EVT_SET(LVar1, MSG_MAC_Plaza_0006)
             EVT_ELSE
-                EVT_SET(LVar1, 0x00030005)
+                EVT_SET(LVar1, MSG_MAC_Plaza_0005)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(SpeakToPlayer, NPC_Toad_01, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, LVar1)
@@ -2544,6 +2555,17 @@ EvtScript N(D_80255FEC_81686C) = {
     EVT_END
 };
 
+API_CALLABLE(N(RowfShop_SetBadgePos)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *args++);
+
+    set_item_entity_position(
+        gGameStatusPtr->shopItemEntities[idx].index,
+        script->varTable[0], script->varTable[1], script->varTable[2] + 6
+    );
+    return ApiStatus_DONE2;
+}
+
 EvtScript N(EVS_NpcInit_Toad_01) = {
     EVT_SET(MV_Unk_0D, 0)
     EVT_SET(MV_Unk_0E, 0)
@@ -2584,22 +2606,22 @@ EvtScript N(EVS_NpcInit_Toad_01) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetModelFlags, MODEL_b1, 4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b2, 4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b3, 4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAGS_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAGS_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAGS_FLAG_4, FALSE)
         EVT_CALL(N(UnkMachiFunc))
         EVT_LABEL(0)
         EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
             EVT_CALL(GetModelCenter, MODEL_b3)
-            EVT_CALL(N(func_80244E10_805690), 0)
+            EVT_CALL(N(RowfShop_SetBadgePos), 0)
         EVT_END_IF
         EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
             EVT_CALL(GetModelCenter, MODEL_b2)
-            EVT_CALL(N(func_80244E10_805690), 1)
+            EVT_CALL(N(RowfShop_SetBadgePos), 1)
         EVT_END_IF
         EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
             EVT_CALL(GetModelCenter, MODEL_b1)
-            EVT_CALL(N(func_80244E10_805690), 2)
+            EVT_CALL(N(RowfShop_SetBadgePos), 2)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_GOTO(0)
@@ -2711,25 +2733,25 @@ typedef struct PostOfficeEntry {
 // same as UnkMac00 ?
 
 PostOfficeEntry N(D_80256ADC_81735C)[] = {
-    { 1, 84, MSG_Document_Letter_Goombario2_From, MSG_Document_Letter_Goombario2_Desc, MSG_Document_Letter_Goombario2_Body },
-    { 1, 84, MSG_Document_Letter_Goombario1_From, MSG_Document_Letter_Goombario1_Desc, MSG_Document_Letter_Goombario1_Body },
-    { 1, 84, MSG_Document_Letter_Goombario3_From, MSG_Document_Letter_Goombario3_Desc, MSG_Document_Letter_Goombario3_Body },
-    { 2, 84, 0x00200027, 0x00200028, 0x00200029 },
-    { 2, 84, 0x00200024, 0x00200025, 0x00200026 },
-    { 2, 84, 0x00200021, 0x00200022, 0x00200023 },
-    { 3, 84, 0x0020002D, 0x0020002E, 0x0020002F },
-    { 3, 84, 0x00200030, 0x00200031, 0x00200032 },
-    { 3, 84, 0x0020002A, 0x0020002B, 0x0020002C },
-    { 4, 84, 0x00200033, 0x00200034, 0x00200035 },
-    { 4, 84, 0x00200036, 0x00200037, 0x00200038 },
-    { 9, 84, 0x00200039, 0x0020003A, 0x0020003B },
-    { 9, 84, 0x0020003C, 0x0020003D, 0x0020003E },
-    { 6, 84, 0x0020003F, 0x00200040, 0x00200041 },
-    { 6, 84, 0x00200042, 0x00200043, 0x00200044 },
-    { 7, 84, 0x00200048, 0x00200049, 0x0020004A },
-    { 7, 84, 0x00200045, 0x00200046, 0x00200047 },
-    { 8, 84, 0x0020004E, 0x0020004F, 0x00200050 },
-    { 8, 84, 0x0020004B, 0x0020004C, 0x0020004D },
+    { PARTNER_GOOMBARIO,  84, MSG_Document_Letter_Goombario2_From, MSG_Document_Letter_Goombario2_Desc, MSG_Document_Letter_Goombario2_Body },
+    { PARTNER_GOOMBARIO,  84, MSG_Document_Letter_Goombario1_From, MSG_Document_Letter_Goombario1_Desc, MSG_Document_Letter_Goombario1_Body },
+    { PARTNER_GOOMBARIO,  84, MSG_Document_Letter_Goombario3_From, MSG_Document_Letter_Goombario3_Desc, MSG_Document_Letter_Goombario3_Body },
+    { PARTNER_KOOPER,     84, MSG_Document_Letter_Kooper3_From, MSG_Document_Letter_Kooper3_Desc, MSG_Document_Letter_Kooper3_Body },
+    { PARTNER_KOOPER,     84, MSG_Document_Letter_Kooper2_From, MSG_Document_Letter_Kooper2_Desc, MSG_Document_Letter_Kooper2_Body },
+    { PARTNER_KOOPER,     84, MSG_Document_Letter_Kooper1_From, MSG_Document_Letter_Kooper1_Desc, MSG_Document_Letter_Kooper1_Body },
+    { PARTNER_BOMBETTE,   84, MSG_Document_Letter_Bombette2_From, MSG_Document_Letter_Bombette2_Desc, MSG_Document_Letter_Bombette2_Body },
+    { PARTNER_BOMBETTE,   84, MSG_Document_Letter_Bombette3_From, MSG_Document_Letter_Bombette3_Desc, MSG_Document_Letter_Bombette3_Body },
+    { PARTNER_BOMBETTE,   84, MSG_Document_Letter_Bombette1_From, MSG_Document_Letter_Bombette1_Desc, MSG_Document_Letter_Bombette1_Body },
+    { PARTNER_PARAKARRY,  84, MSG_Document_Letter_Parakarry1_From, MSG_Document_Letter_Parakarry1_Desc, MSG_Document_Letter_Parakarry1_Body },
+    { PARTNER_PARAKARRY,  84, MSG_Document_Letter_Parakarry2_From, MSG_Document_Letter_Parakarry2_Desc, MSG_Document_Letter_Parakarry2_Body },
+    { PARTNER_BOW,        84, MSG_Document_Letter_Bow1_From, MSG_Document_Letter_Bow1_Desc, MSG_Document_Letter_Bow1_Body },
+    { PARTNER_BOW,        84, MSG_Document_Letter_Bow2_From, MSG_Document_Letter_Bow2_Desc, MSG_Document_Letter_Bow2_Body },
+    { PARTNER_WATT,       84, MSG_Document_Letter_Watt1_From, MSG_Document_Letter_Watt1_Desc, MSG_Document_Letter_Watt1_Body },
+    { PARTNER_WATT,       84, MSG_Document_Letter_Watt2_From, MSG_Document_Letter_Watt2_Desc, MSG_Document_Letter_Watt2_Body },
+    { PARTNER_SUSHIE,     84, MSG_Document_Letter_Sushie2_From, MSG_Document_Letter_Sushie2_Desc, MSG_Document_Letter_Sushie2_Body },
+    { PARTNER_SUSHIE,     84, MSG_Document_Letter_Sushie1_From, MSG_Document_Letter_Sushie1_Desc, MSG_Document_Letter_Sushie1_Body },
+    { PARTNER_LAKILESTER, 84, MSG_Document_Letter_Lakilester2_From, MSG_Document_Letter_Lakilester2_Desc, MSG_Document_Letter_Lakilester2_Body },
+    { PARTNER_LAKILESTER, 84, MSG_Document_Letter_Lakilester1_From, MSG_Document_Letter_Lakilester1_Desc, MSG_Document_Letter_Lakilester1_Body },
 };
 
 API_CALLABLE(N(func_80244E90_805710)) {
@@ -2739,9 +2761,9 @@ API_CALLABLE(N(func_80244E90_805710)) {
 
     for (i = 0; i < ARRAY_COUNT(N(D_80256ADC_81735C)); i++) {
         if (playerData->partners[N(D_80256ADC_81735C)[i].unk_00].enabled &&
-            (evt_get_variable(NULL, GameFlag(153 + i)) != 0))
+            evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i))
         {
-            if (evt_get_variable(NULL, GameFlag(172 + i)) == 0) {
+            if (!evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i)) {
                 var_s2 = 1;
                 break;
             } else {
@@ -2753,16 +2775,18 @@ API_CALLABLE(N(func_80244E90_805710)) {
     return ApiStatus_DONE2;
 }
 
-s32 func_80244F5C_8057DC(s32 arg0) {
+s32 func_80244F5C_8057DC(s32 partner) {
     s32 ret = 0;
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(D_80256ADC_81735C)); i++) {
-        if (N(D_80256ADC_81735C)[i].unk_00 == arg0 && evt_get_variable(NULL, GameFlag(153 + i)) != 0) {
+        if (N(D_80256ADC_81735C)[i].unk_00 == partner &&
+            evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i))
+        {
             if (ret == 0) {
                 ret = 1;
             }
-            if (evt_get_variable(NULL, GameFlag(172 + i)) == 0) {
+            if (!evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i)) {
                 ret = 2;
                 break;
             }
@@ -2846,9 +2870,9 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
     s32 vt10 = script->varTable[10];
     PopupMenu* menu = &D_80262C38;
     IconHudScriptPair* scriptPair;
-    s32 temp_a0;
-    s32 temp_a1;
-    s32 temp_s0;
+    s32 letterIdx;
+    s32 hasRead;
+    s32 isUnlocked;
     s32 numEntries;
     u32 i;
 
@@ -2856,15 +2880,15 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
         numEntries = 0;
 
         for (i = 0; i < ARRAY_COUNT(N(D_80256ADC_81735C)); i++) {
-            temp_s0 = evt_get_variable(NULL, GameFlag(153 + i));
-            temp_a0 = evt_get_variable(NULL, GameFlag(172 + i));
-            if (temp_s0 != 0 && vt10 == N(D_80256ADC_81735C)[i].unk_00) {
+            isUnlocked = evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i);
+            hasRead = evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i);
+            if (isUnlocked && vt10 == N(D_80256ADC_81735C)[i].unk_00) {
                 scriptPair = &gItemHudScripts[gItemTable[84].hudElemID];
                 menu->userIndex[numEntries] = i;
                 menu->nameMsg[numEntries] = N(D_80256ADC_81735C)[i].unk_08;
                 menu->descMsg[numEntries] = N(D_80256ADC_81735C)[i].unk_0C;
                 menu->value[numEntries] = 0;
-                if (temp_a0 != 0) {
+                if (hasRead) {
                     menu->ptrIcon[numEntries] = scriptPair->disabled;
                     menu->enabled[numEntries] = FALSE;
                 } else {
@@ -2902,21 +2926,18 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
         script->varTable[1] = -1;
         return ApiStatus_DONE2;
     }
-    temp_a1 = menu->userIndex[script->functionTemp[1] - 1];
-    script->varTable[1] = temp_a1;
-    script->varTable[0] = N(D_80256ADC_81735C)[temp_a1].unk_10;
-    evt_set_variable(NULL, GameFlag(temp_a1 + 172), 1);
+    letterIdx = menu->userIndex[script->functionTemp[1] - 1];
+    script->varTable[1] = letterIdx;
+    script->varTable[0] = N(D_80256ADC_81735C)[letterIdx].unk_10;
+    evt_set_variable(NULL, GF_MAC01_ReadLetter_00 + letterIdx, 1);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80245440_805CC0)) {
-    PlayerData* playerData = &gPlayerData;
-
-    if (playerData->currentPartner == script->varTable[10]) {
+    if (gPlayerData.currentPartner == script->varTable[10]) {
         script->varTable[1] = 0;
         return ApiStatus_DONE2;
     }
-
     switch_to_partner(script->varTable[10]);
     script->varTable[1] = 1;
     return ApiStatus_DONE2;
@@ -3337,9 +3358,9 @@ EvtScript N(EVS_NpcInit_ShyGuy_04) = {
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_SET(LVar0, 0x00010045)
+        EVT_SET(LVar0, MSG_Outro_0045)
     EVT_ELSE
-        EVT_SET(LVar0, 0x00030077)
+        EVT_SET(LVar0, MSG_MAC_Plaza_0077)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, LVar0)
     EVT_RETURN
@@ -3372,7 +3393,7 @@ API_CALLABLE(N(func_80245488_805D08)) {
 
 void N(func_802454B4_805D34)(void) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(D_80258404_818C84) & 0xFF);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(D_80258404_818C84));
 }
 
 API_CALLABLE(N(func_80245504_805D84)) {
@@ -3458,7 +3479,7 @@ EvtScript N(D_80258684_818F04) = {
     EVT_WAIT(30)
     EVT_CALL(EnableModel, MODEL_r_door, TRUE)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_2A3, 0)
-    EVT_CALL(MakeLerp, 0, 0x00000BF4, 80, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 0, 3060, 80, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(RotateModel, MODEL_r_door, LVar0, 0, 1, 0)
@@ -3593,22 +3614,22 @@ EvtScript N(D_80258FFC_81987C) = {
             EVT_RETURN
         EVT_CASE_EQ(43)
             EVT_SET(GF_MAC01_Planted_MagicalSeed1, TRUE)
-            EVT_SET(LVar4, 0x00030076)
+            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
             EVT_SET(LVar5, 0)
             EVT_EXEC_WAIT(N(D_80258A68_8192E8))
         EVT_CASE_EQ(44)
             EVT_SET(GF_MAC01_Planted_MagicalSeed2, TRUE)
-            EVT_SET(LVar4, 0x00030076)
+            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
             EVT_SET(LVar5, 1)
             EVT_EXEC_WAIT(N(D_80258A68_8192E8))
         EVT_CASE_EQ(45)
             EVT_SET(GF_MAC01_Planted_MagicalSeed3, TRUE)
-            EVT_SET(LVar4, 0x00030076)
+            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
             EVT_SET(LVar5, 2)
             EVT_EXEC_WAIT(N(D_80258A68_8192E8))
         EVT_CASE_EQ(46)
             EVT_SET(GF_MAC01_Planted_MagicalSeed4, TRUE)
-            EVT_SET(LVar4, 0x00030076)
+            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
             EVT_SET(LVar5, 3)
             EVT_EXEC_WAIT(N(D_80258A68_8192E8))
     EVT_END_SWITCH
@@ -3617,16 +3638,16 @@ EvtScript N(D_80258FFC_81987C) = {
 };
 
 EvtScript N(EVS_NpcInteract_MinhT) = {
-    EVT_EXEC_WAIT(N(D_8024E2C8_80EB48))
-    EVT_EXEC_WAIT(N(D_8024E318_80EB98))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MinhT))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_MinhT))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar2, 0)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x00030065)
-            EVT_SET(LVar1, 0x00030065)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0065)
+            EVT_SET(LVar1, MSG_MAC_Plaza_0065)
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
             EVT_SET(LVar2, 1)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
@@ -3635,23 +3656,23 @@ EvtScript N(EVS_NpcInteract_MinhT) = {
             EVT_IF_EQ(LVar0, 2)
                 EVT_SET(LVar2, 1)
             EVT_ELSE
-                EVT_SET(LVar0, 0x0003006D)
-                EVT_SET(LVar1, 0x0003006E)
+                EVT_SET(LVar0, MSG_MAC_Plaza_006D)
+                EVT_SET(LVar1, MSG_MAC_Plaza_006E)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
             EVT_SET(LVar2, 1)
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_SET(LVar0, 0x00030071)
-            EVT_SET(LVar1, 0x00030071)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0071)
+            EVT_SET(LVar1, MSG_MAC_Plaza_0071)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00030072)
-            EVT_SET(LVar1, 0x00030072)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0072)
+            EVT_SET(LVar1, MSG_MAC_Plaza_0072)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00030073)
-            EVT_SET(LVar1, 0x00030073)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0073)
+            EVT_SET(LVar1, MSG_MAC_Plaza_0073)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010042)
-            EVT_SET(LVar1, 0x00010042)
+            EVT_SET(LVar0, MSG_Outro_0042)
+            EVT_SET(LVar1, MSG_Outro_0042)
     EVT_END_SWITCH
     EVT_IF_EQ(LVar2, 1)
         EVT_SET(LVar3, GF_MAC01_Planted_MagicalSeed1)
@@ -3678,17 +3699,17 @@ EvtScript N(EVS_NpcInteract_MinhT) = {
         EVT_END_SWITCH
         EVT_SWITCH(LVar3)
             EVT_CASE_EQ(0)
-                EVT_SET(LVar0, 0x00030066)
-                EVT_SET(LVar1, 0x00030066)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0066)
+                EVT_SET(LVar1, MSG_MAC_Plaza_0066)
             EVT_CASE_EQ(1)
-                EVT_SET(LVar0, 0x00030068)
-                EVT_SET(LVar1, 0x00030068)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0068)
+                EVT_SET(LVar1, MSG_MAC_Plaza_0068)
             EVT_CASE_EQ(2)
-                EVT_SET(LVar0, 0x0003006A)
-                EVT_SET(LVar1, 0x0003006A)
+                EVT_SET(LVar0, MSG_MAC_Plaza_006A)
+                EVT_SET(LVar1, MSG_MAC_Plaza_006A)
             EVT_CASE_EQ(3)
-                EVT_SET(LVar0, 0x0003006C)
-                EVT_SET(LVar1, 0x0003006C)
+                EVT_SET(LVar0, MSG_MAC_Plaza_006C)
+                EVT_SET(LVar1, MSG_MAC_Plaza_006C)
         EVT_END_SWITCH
     EVT_END_IF
     EVT_IF_EQ(AF_MAC_14, FALSE)
@@ -3709,17 +3730,17 @@ EvtScript N(EVS_NpcInteract_MinhT) = {
                 EVT_RETURN
             EVT_CASE_EQ(43)
                 EVT_SET(GF_MAC01_Planted_MagicalSeed1, TRUE)
-                EVT_SET(LVar4, 0x00030067)
+                EVT_SET(LVar4, MSG_MAC_Plaza_0067)
                 EVT_SET(LVar5, 0)
                 EVT_EXEC_WAIT(N(D_80258A68_8192E8))
             EVT_CASE_EQ(44)
                 EVT_SET(GF_MAC01_Planted_MagicalSeed2, TRUE)
-                EVT_SET(LVar4, 0x00030069)
+                EVT_SET(LVar4, MSG_MAC_Plaza_0069)
                 EVT_SET(LVar5, 1)
                 EVT_EXEC_WAIT(N(D_80258A68_8192E8))
             EVT_CASE_EQ(45)
                 EVT_SET(GF_MAC01_Planted_MagicalSeed3, TRUE)
-                EVT_SET(LVar4, 0x0003006B)
+                EVT_SET(LVar4, MSG_MAC_Plaza_006B)
                 EVT_SET(LVar5, 2)
                 EVT_EXEC_WAIT(N(D_80258A68_8192E8))
             EVT_CASE_EQ(46)
@@ -3868,7 +3889,7 @@ EvtScript N(EVS_80259AD0) = {
     EVT_END_LOOP
     EVT_IF_EQ(GF_StartedChapter6, FALSE)
         EVT_SET(GF_StartedChapter6, TRUE)
-        EVT_CALL(FadeOutMusic, 0, 0x000005DC)
+        EVT_CALL(FadeOutMusic, 0, 1500)
         EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_6, TRANSITION_6)
         EVT_WAIT(100)
         EVT_RETURN
@@ -3973,45 +3994,45 @@ EvtScript N(EVS_NpcIdle_Toad_04) = {
 EvtScript N(EVS_NpcInteract_Toad_04) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0003007C)
+            EVT_SET(LVar0, MSG_MAC_Plaza_007C)
         EVT_CASE_LT(STORY_CH1_SPOKE_WITH_MERLIN)
-            EVT_SET(LVar0, 0x0003007D)
+            EVT_SET(LVar0, MSG_MAC_Plaza_007D)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0003007E)
+            EVT_SET(LVar0, MSG_MAC_Plaza_007E)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x0003007F)
+                EVT_SET(LVar0, MSG_MAC_Plaza_007F)
             EVT_ELSE
-                EVT_SET(LVar0, 0x00030080)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0080)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00030081)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0081)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, 0x00030082)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0082)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, 0x00030083)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_0083)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x00030084)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_0084)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x00030085)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0085)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00030086)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0086)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x00030087)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0087)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00030088)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0088)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x00030089)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0089)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0003008A)
+            EVT_SET(LVar0, MSG_MAC_Plaza_008A)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0003008B)
+            EVT_SET(LVar0, MSG_MAC_Plaza_008B)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010046)
+            EVT_SET(LVar0, MSG_Outro_0046)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_RETURN
@@ -4031,45 +4052,45 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
 EvtScript N(EVS_NpcInteract_Toad_05) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0003008C)
+            EVT_SET(LVar0, MSG_MAC_Plaza_008C)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x0003008D)
+            EVT_SET(LVar0, MSG_MAC_Plaza_008D)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0003008E)
+            EVT_SET(LVar0, MSG_MAC_Plaza_008E)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x0003008F)
+                EVT_SET(LVar0, MSG_MAC_Plaza_008F)
             EVT_ELSE
-                EVT_SET(LVar0, 0x00030090)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0090)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00030091)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0091)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, 0x00030092)
+                EVT_SET(LVar0, MSG_MAC_Plaza_0092)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, 0x00030093)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_0093)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x00030094)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_0094)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x00030095)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0095)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x00030096)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0096)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x00030097)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0097)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x00030098)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0098)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x00030099)
+            EVT_SET(LVar0, MSG_MAC_Plaza_0099)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0003009A)
+            EVT_SET(LVar0, MSG_MAC_Plaza_009A)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0003009B)
+            EVT_SET(LVar0, MSG_MAC_Plaza_009B)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010047)
+            EVT_SET(LVar0, MSG_Outro_0047)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_05, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_RETURN
@@ -4109,45 +4130,45 @@ EvtScript N(EVS_NpcInit_Toad_05) = {
 EvtScript N(EVS_NpcInteract_Toad_06) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x0003009C)
+            EVT_SET(LVar0, MSG_MAC_Plaza_009C)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x0003009D)
+            EVT_SET(LVar0, MSG_MAC_Plaza_009D)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x0003009E)
+            EVT_SET(LVar0, MSG_MAC_Plaza_009E)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x0003009F)
+                EVT_SET(LVar0, MSG_MAC_Plaza_009F)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000300A0)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00A0)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300A1)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A1)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, 0x000300A2)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00A2)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, 0x000300A3)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00A3)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000300A4)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00A4)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000300A5)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A5)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300A6)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A6)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000300A7)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A7)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300A8)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A8)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000300A9)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00A9)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300AA)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00AA)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000300AB)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00AB)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x00010049)
+            EVT_SET(LVar0, MSG_Outro_0049)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_06, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
     EVT_RETURN
@@ -4173,45 +4194,45 @@ EvtScript N(EVS_NpcInit_Toad_06) = {
 EvtScript N(EVS_NpcInteract_Toad_07) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x000300AC)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00AC)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000300AD)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00AD)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300AE)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00AE)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000300AF)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00AF)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000300B0)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00B0)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300B1)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B1)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, 0x000300B2)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00B2)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, 0x000300B3)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00B3)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000300B4)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00B4)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000300B5)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B5)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300B6)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B6)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000300B7)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B7)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300B8)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B8)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000300B9)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00B9)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300BA)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00BA)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000300BB)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00BB)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001004A)
+            EVT_SET(LVar0, MSG_Outro_004A)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
     EVT_RETURN
@@ -4251,46 +4272,46 @@ EvtScript N(EVS_NpcInit_Toad_07) = {
 EvtScript N(EVS_NpcInteract_Toad_08) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x000300BC)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00BC)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000300BD)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00BD)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300BE)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00BE)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000300BF)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00BF)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000300C0)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00C0)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300C1)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C1)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_ShyGuysTramplingGarden, FALSE)
             EVT_ELSE
                 EVT_SET(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
                 EVT_ADD(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
                 EVT_IF_LT(LVar0, 2)
-                    EVT_SET(LVar0, 0x000300C2)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00C2)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000300C3)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00C3)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000300C4)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C4)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300C5)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C5)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000300C6)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C6)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300C7)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C7)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000300C8)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C8)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300C9)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00C9)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000300CA)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00CA)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001004C)
+            EVT_SET(LVar0, MSG_Outro_004C)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_08, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
     EVT_RETURN
@@ -4306,45 +4327,45 @@ EvtScript N(EVS_NpcInit_Toad_08) = {
 EvtScript N(EVS_NpcInteract_Toad_09) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, 0x000300CB)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00CB)
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, 0x000300CC)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00CC)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300CD)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00CD)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, 0x000300CE)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00CE)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000300CF)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00CF)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300D0)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D0)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, 0x000300D1)
+                EVT_SET(LVar0, MSG_MAC_Plaza_00D1)
             EVT_ELSE
                 EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, 0x000300D2)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00D2)
                 EVT_ELSE
-                    EVT_SET(LVar0, 0x000300D3)
+                    EVT_SET(LVar0, MSG_MAC_Plaza_00D3)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, 0x000300D4)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D4)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300D5)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D5)
         EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, 0x000300D6)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D6)
         EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, 0x000300D7)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D7)
         EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, 0x000300D8)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D8)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, 0x000300D9)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00D9)
         EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x000300DA)
+            EVT_SET(LVar0, MSG_MAC_Plaza_00DA)
         EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, 0x0001004D)
+            EVT_SET(LVar0, MSG_Outro_004D)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Toad_09, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, LVar0)
     EVT_RETURN
@@ -4430,22 +4451,22 @@ EvtScript N(EVS_NpcInteract_Toad_10_B) = {
     EVT_END
 };
 
-EvtScript N(D_8025BAE0_81C360) = {
+EvtScript N(EVS_SetToadHouseDialogue) = {
     EVT_IF_EQ(AF_MAC_43, FALSE)
-        EVT_SET(LVar0, 0x00030015)
-        EVT_SET(LVar8, 0x00030016)
+        EVT_SET(LVar0, MSG_MAC_Plaza_0015)
+        EVT_SET(LVar8, MSG_MAC_Plaza_0016)
     EVT_ELSE
-        EVT_SET(LVar0, 0x0003001B)
-        EVT_SET(LVar8, 0x0003001B)
+        EVT_SET(LVar0, MSG_MAC_Plaza_001B)
+        EVT_SET(LVar8, MSG_MAC_Plaza_001B)
     EVT_END_IF
-    EVT_SET(LVar1, 0x00030017)
-    EVT_SET(LVar2, 0x00030018)
-    EVT_SET(LVar3, 0x00030019)
+    EVT_SET(LVar1, MSG_MAC_Plaza_0017)
+    EVT_SET(LVar2, MSG_MAC_Plaza_0018)
+    EVT_SET(LVar3, MSG_MAC_Plaza_0019)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8025BB80_81C400) = {
+EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_EXEC(N(EVS_80246924))
     EVT_CALL(PlayerMoveTo, 535, -155, 20)
     EVT_THREAD
@@ -4464,8 +4485,8 @@ EvtScript N(D_8025BB80_81C400) = {
     EVT_CALL(InterpPlayerYaw, 263, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
-    EVT_CALL(func_802D286C, 0x00000800)
-    EVT_CALL(func_802D2520, 0x00010002, 5, 7, 1, 1, 0)
+    EVT_CALL(func_802D286C, 0x800)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
@@ -4486,7 +4507,7 @@ EvtScript N(D_8025BB80_81C400) = {
 EvtScript N(D_8025BDDC_81C65C) = {
     EVT_EXEC(N(D_80246770_806FF0))
     EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(func_802D2520, 0x00010002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(SetPlayerPos, 568, 20, -186)
     EVT_CALL(PlayerMoveTo, 525, -168, 20)
@@ -4724,9 +4745,9 @@ EvtScript N(EVS_NpcInit_Twink) = {
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00DF)
-    EVT_EXEC_WAIT(N(D_8024E4DC_80ED5C))
-    EVT_EXEC_WAIT(N(D_8024E384_80EC04))
-    EVT_EXEC_WAIT(N(D_8024E3D4_80EC54))
+    EVT_EXEC_WAIT(N(EVS_ArtifactPrompt_Kolorado))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

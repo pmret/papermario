@@ -324,7 +324,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_CALL(InterpPlayerYaw, 230, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(func_802D286C, 0x00000800)
+    EVT_CALL(func_802D286C, 0x800)
     EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
