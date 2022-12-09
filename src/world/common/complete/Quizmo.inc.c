@@ -63,6 +63,7 @@ enum {
 enum {
     // area_mac
     QUIZ_MAP_MAC_00     = 0,
+    QUIZ_MAP_MAC_01     = 1,
     QUIZ_MAP_MAC_04     = 4,
     QUIZ_MAP_MAC_05     = 5,
     QUIZ_COUNT_MAC      = 6,

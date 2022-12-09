@@ -8990,21 +8990,43 @@ segments:
     start: 0x800880
     vram: 0x80240000
     subsegments:
-    - [0x800880, c]
-    - [0x800C40, c]
-    - [0x801700, c]
-    - [0x8017D0, c]
-    - [0x805DD0, c]
-    - [0x806D10, c]
-    - [0x806F50, data]
-    - [0x807C00, data]
-    - [0x808680, data]
-    - [0x808D70, data]
-    - [0x8091F0, data]
-    - [0x8202D0, data]
-    - [0x822100, data]
-    - [0x822460, data]
-    - [0x822F30]
+    - [0x800880, c, mac_01_0_header]
+    - [0x800880, c, mac_01_1_music]
+    - [0x800880, c, mac_01_2_main]
+    - [0x800880, c, mac_01_3_entity]
+    - [0x800880, c, mac_01_4_rooms]
+    - [0x800880, c, mac_01_5_shop]
+    - [0x800C40, c, mac_01_6_custom_gfx]
+    - [0x801700, c, mac_01_7_bulletin]
+    - [0x8017D0, c, mac_01_8_music_mix]
+    - [0x801900, c, mac_01_9_npc]
+    - [0x805DD0, c, mac_01_10_npc_unk1]
+    - [0x806C60, c, mac_01_11_npc_unk2]
+    - [0x806C60, c, mac_01_12_intro]
+    - [0x806D10, c, mac_01_13_foliage]
+    - [0x806F50, .data, mac_01_0_header]
+    - [0x806FF0, .data, mac_01_1_music]
+    - [0x8071D0, .data, mac_01_2_main]
+    - [0x807C00, .data, mac_01_3_entity]
+    - [0x807CB0, .data, mac_01_4_rooms]
+    - [0x808680, .data, mac_01_5_shop]
+    - [0x808CA0, .data, mac_01_6_custom_gfx]
+    - [0x808D70, .data, mac_01_7_bulletin]
+    - [0x8090E0, .data, mac_01_8_music_mix]
+    - start: 0x8091F0
+      type: .data
+      name: mac_01_9_npc
+      subsegments:
+      - [0x970C40]
+      - [0x80BE10, vtx, toad_house_blanket]
+      - [0x80D3F0, gfx, toad_house_blanket]
+      - [0x80D558, rgba16, toad_house_blanket, 16, 32]
+      - [0x80D958]
+    - [0x81F9C0]
+    - [0x81F9C0, .data, mac_01_10_npc_unk1]
+    - [0x8202D0, .data, mac_01_11_npc_unk2]
+    - [0x822100, .data, mac_01_12_intro]
+    - [0x822460, .data, mac_01_13_foliage]
   - name: mac_02
     dir: world/area_mac/mac_02
     type: code

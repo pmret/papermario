@@ -68,7 +68,7 @@ ShopItemLocation N(ItemPositions)[] = {
 };
 
 ShopOwner N(Owner) = {
-    .npcID = 1,
+    .npcID = NPC_Toad_01,
     .idleAnim = ANIM_HarryT_Idle,
     .talkAnim = ANIM_HarryT_Talk,
     .onBuyEvt = &N(EVS_OnBuy),

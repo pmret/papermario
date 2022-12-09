@@ -473,17 +473,17 @@ ApiStatus func_80244E10_805690(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-typedef struct UnkMac01 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+typedef struct BulletinBoardEntry {
+    /* 0x00 */ s32 newsMessage;
+    /* 0x04 */ s32 gossipMessage;
+    /* 0x08 */ s32 requiredProgress;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-} UnkMac01; // size = 0x14
+} BulletinBoardEntry; // size = 0x14
 // same as UnkMac00 ?
 
-extern UnkMac01 D_80256ADC_81735C[19];
-extern UnkMac01 D_80256AEC_81736C[];
+extern BulletinBoardEntry D_80256ADC_81735C[19];
+extern BulletinBoardEntry D_80256AEC_81736C[];
 extern PopupMenu D_80262C38;
 
 ApiStatus func_80244E90_805710(Evt* script, s32 isInitialCall) {
@@ -492,7 +492,7 @@ ApiStatus func_80244E90_805710(Evt* script, s32 isInitialCall) {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_80256ADC_81735C); i++) {
-        if (playerData->partners[D_80256ADC_81735C[i].unk_00].enabled &&
+        if (playerData->partners[D_80256ADC_81735C[i].newsMessage].enabled &&
             (evt_get_variable(NULL, GameFlag(153 + i)) != 0))
         {
             if (evt_get_variable(NULL, GameFlag(172 + i)) == 0) {
@@ -512,7 +512,7 @@ s32 func_80244F5C_8057DC(s32 arg0) {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_80256ADC_81735C); i++) {
-        if (D_80256ADC_81735C[i].unk_00 == arg0 && evt_get_variable(NULL, GameFlag(153 + i)) != 0) {
+        if (D_80256ADC_81735C[i].newsMessage == arg0 && evt_get_variable(NULL, GameFlag(153 + i)) != 0) {
             if (ret == 0) {
                 ret = 1;
             }
@@ -612,10 +612,10 @@ ApiStatus func_8024522C_805AAC(Evt* script, s32 isInitialCall) {
         for (i = 0; i < ARRAY_COUNT(D_80256ADC_81735C); i++) {
             temp_s0 = evt_get_variable(NULL, GameFlag(153 + i));
             temp_a0 = evt_get_variable(NULL, GameFlag(172 + i));
-            if (temp_s0 != 0 && vt10 == D_80256ADC_81735C[i].unk_00) {
+            if (temp_s0 != 0 && vt10 == D_80256ADC_81735C[i].newsMessage) {
                 scriptPair = &gItemHudScripts[gItemTable[84].hudElemID];
                 menu->userIndex[numEntries] = i;
-                menu->nameMsg[numEntries] = D_80256ADC_81735C[i].unk_08;
+                menu->nameMsg[numEntries] = D_80256ADC_81735C[i].requiredProgress;
                 menu->descMsg[numEntries] = D_80256ADC_81735C[i].unk_0C;
                 menu->value[numEntries] = 0;
                 if (temp_a0 != 0) {
@@ -658,7 +658,7 @@ ApiStatus func_8024522C_805AAC(Evt* script, s32 isInitialCall) {
     }
     temp_a1 = menu->userIndex[script->functionTemp[1] - 1];
     script->varTable[1] = temp_a1;
-    script->varTable[0] = D_80256AEC_81736C[temp_a1].unk_00;
+    script->varTable[0] = D_80256AEC_81736C[temp_a1].newsMessage;
     evt_set_variable(NULL, GameFlag(temp_a1 + 172), 1);
     return ApiStatus_DONE2;
 }
