@@ -228,7 +228,6 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
     Npc* goombario = script->owner2.npc;
     s32 msgID;
     s32 entityType;
-    s32 triggerSomething;
     s32 v1;
     s32 i;
     s32 v0;
