@@ -1,7 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-__asm__(".set nogpopt");
+NOP_FIX
 
 s32 contRetrace(NUSiCommonMesg* mesg);
 s32 contReadData(OSContPad* pad, u32 lockflag);

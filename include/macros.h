@@ -23,10 +23,7 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
-#define NOP_REORDER(statement) \
-    __asm__(".set nogpopt"); \
-    statement; \
-    __asm__(".set gpopt"); \
+#define NOP_FIX __asm__(".set nogpopt");
 
 #define PTR_LIST_END ((void*) -1)
 

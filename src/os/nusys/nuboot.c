@@ -3,7 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
-__asm__(".set nogpopt");
+NOP_FIX
 
 extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
 

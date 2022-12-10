@@ -1,7 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-__asm__(".set nogpopt");
+NOP_FIX
 
 NUScPreNMIFunc nuScPreNMIFunc = NULL;
 

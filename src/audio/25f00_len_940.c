@@ -3,7 +3,7 @@
 #include "nu/nualsgi.h"
 #include "audio.h"
 
-__asm__(".set nogpopt");
+NOP_FIX
 
 u8 nuAuPreNMI = 0;
 NUAuPreNMIFunc nuAuPreNMIFunc = NULL;

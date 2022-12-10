@@ -115,19 +115,19 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
     u16 currentButtonsDown = battleStatus->currentButtonsDown;
     f32 mag;
 
-    if (currentButtonsDown & 0xF00) {
+    if (currentButtonsDown & (BUTTON_D_UP | BUTTON_D_DOWN | BUTTON_D_LEFT | BUTTON_D_RIGHT)) {
         stickY = 0.0f;
         stickX = 0.0f;
-        if (currentButtonsDown & 0x800) {
+        if (currentButtonsDown & BUTTON_D_UP) {
             stickY = maxMagnitude;
         }
-        if (currentButtonsDown & 0x400) {
+        if (currentButtonsDown & BUTTON_D_DOWN) {
             stickY = -maxMagnitude;
         }
-        if (currentButtonsDown & 0x200) {
+        if (currentButtonsDown & BUTTON_D_LEFT) {
             stickX = -maxMagnitude;
         }
-        if (currentButtonsDown & 0x100) {
+        if (currentButtonsDown & BUTTON_D_RIGHT) {
             stickX = maxMagnitude;
         }
     }
@@ -936,7 +936,7 @@ void btl_draw_enemy_health_bars(void) {
     }
 }
 
-__asm__(".set nogpopt");
+NOP_FIX
 
 void btl_update_starpoints_display(void) {
     BattleStatus* battleStatus = &gBattleStatus;
