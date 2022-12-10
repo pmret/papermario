@@ -3062,7 +3062,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAGS_CAM2          = 0x00000004,
     ITEM_ENTITY_FLAGS_CAM3          = 0x00000008,
     ITEM_ENTITY_FLAGS_10            = 0x00000010,
-    ITEM_ENTITY_FLAGS_40            = 0x00000040,
+    ITEM_ENTITY_FLAGS_HIDDEN        = 0x00000040, // do not render; player cant pickup
     ITEM_ENTITY_FLAGS_80            = 0x00000080,
     ITEM_ENTITY_FLAGS_100           = 0x00000100,
     ITEM_ENTITY_FLAGS_NEVER_VANISH  = 0x00000200,

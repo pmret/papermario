@@ -72,18 +72,18 @@ enum {
     NPC_KoloradoWife            = 30,
     NPC_KoopaKoot               = 31,
     NPC_Koopa                   = 32,
-    NPC_Bombomb                 = 33,
+    NPC_Bobomb                  = 33,
     NPC_Dryite_01               = 34,
     NPC_Dryite_02               = 35,
     NPC_Chanterelle             = 36,
-    NPC_ArtistToad_01           = 37,
-    NPC_ArtistToad_02           = 38,
+    NPC_Poet                    = 37,
+    NPC_Composer                = 38,
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
-    MV_Unk_01       = MapVar(1),
-    MV_Unk_02       = MapVar(2),
+    MV_RowfRugRippleAmount       = MapVar(0),
+    MV_RowfRugRotateAngle   = MapVar(1),
+    MV_RowfShopBuyFlags     = MapVar(2),
     MV_Unk_0A       = MapVar(10),
     MV_Unk_0C       = MapVar(12),
     MV_Unk_0D       = MapVar(13),
@@ -109,8 +109,11 @@ extern EvtScript N(EVS_SetupMusicMix);
 extern EvtScript N(EVS_PlayRestingSong);
 extern EvtScript N(EVS_PlaySpellcastSong);
 extern EvtScript N(EVS_PlayFlowerGateSong);
+extern EvtScript N(EVS_ResetMusicAfterFortune);
 extern EvtScript N(EVS_SetupRooms);
+extern EvtScript N(EVS_SetupBadgeShop);
 extern EvtScript N(EVS_SetupBulletinBoard);
+extern EvtScript N(EVS_SetupCrystalBallGfx);
 extern EvtScript N(EVS_SetupFlowerModels);
 extern EvtScript N(EVS_EnterFlowerGate);
 extern EvtScript N(EVS_ExitFlowerGate);
@@ -120,17 +123,16 @@ extern EvtScript N(EVS_80257844);
 extern EvtScript N(EVS_802502AC);
 extern EvtScript N(EVS_80252EB0);
 extern EvtScript N(EVS_Scene_IntroWalking);
-extern EvtScript N(EVS_SetupBadgeShop);
-extern EvtScript N(EVS_80248428);
-extern EvtScript N(EVS_ResetMusicAfterFortune);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(IntroNPCs);
 extern NpcGroupList N(EpilogueNPCs);
-extern NpcGroupList N(NpcGroup2);
-extern NpcGroupList N(NpcGroup3);
-extern NpcGroupList N(NpcGroup4);
-extern NpcGroupList N(NpcGroup5);
-extern NpcGroupList N(NpcGroup6);
-extern NpcGroupList N(NpcGroup7);
+extern NpcGroupList N(Chapter0NPCs);
+extern NpcGroupList N(Chapter1NPCs);
+extern NpcGroupList N(TwinkMeetingNPCs);
+extern NpcGroupList N(Chapter4NPCs);
+extern NpcGroupList N(NinjiMeetingNPCs);
+extern NpcGroupList N(DefaultNPCs);
+
+extern ShopItemData N(RowfBadgeInventory)[16];

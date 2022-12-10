@@ -129,6 +129,7 @@ API_CALLABLE(N(func_80243740_803FC0)) {
 }
 
 #include "world/common/atomic/ToadHouse.inc.c"
+//#include "world/common/atomic/ToadHouse.data.inc.c"
 
 EvtScript N(D_8024D3CC_80DC4C) = {
     EVT_CALL(EnableModel, LVar4, FALSE)
@@ -446,112 +447,6 @@ API_CALLABLE(N(func_802448A0_805120)) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(N(func_80244984_805204)) {
-    s32 flagBase = GF_MAC01_RowfBadge_00;
-    s32 count = 0;
-    s32 i;
-
-    for (i = 0; i < 16; i++) {
-        if (evt_get_variable(NULL, flagBase + i) == 0) {
-            count++;
-        }
-    }
-    script->varTable[0] = count;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(func_802449F8_805278)) {
-    s32 temp_s3 = -evt_get_variable(NULL, MV_Unk_01);
-    s32 temp_s4 = evt_get_variable(NULL, MV_Unk_00);
-    Npc* npc = script->varTablePtr[7];
-    Enemy* enemy = get_enemy(2);
-    f32 theta = (temp_s3 / 180.0f) * PI;
-    f32 sinTheta = sin_rad(theta);
-    f32 cosTheta = cos_rad(theta);
-    f32 vt0 = script->varTable[0];
-    f32 vt1 = script->varTable[1];
-
-    script->varTable[4] = script->varTable[2] + (s32) ((vt0 * cosTheta) - (vt1 * sinTheta));
-    script->varTable[5] = script->varTable[3] + (s32) ((vt0 * sinTheta) + (vt1 * cosTheta));
-
-    if (temp_s3 == 0) {
-        npc->currentAnim = ANIM_Rowf_Idle;
-        enemy->flags &= ~ENEMY_FLAGS_8000000;
-    } else {
-        npc->currentAnim = ANIM_Rowf_Walk;
-        enemy->flags |= ENEMY_FLAGS_8000000;
-    }
-
-    if (temp_s3 == -60) {
-        npc->flags |= NPC_FLAG_2;
-    } else {
-        npc->flags &= ~NPC_FLAG_2;
-    }
-
-    if (temp_s4 != 0) {
-        npc->currentAnim = ANIM_Rowf_Think;
-    }
-    return ApiStatus_DONE2;
-}
-
-void N(func_80244B98_805418)(void) {
-    s32 temp_s0 = evt_get_variable(NULL, MV_Unk_00);
-    Vtx* sp10;
-    Vtx* sp14;
-    s32 numCopied;
-    s32 i;
-
-    mdl_get_copied_vertices(0, &sp10, &sp14, &numCopied);
-
-    for (i = 0; i < numCopied; i++) {
-        if (sp10[i].v.ob[0] == -78) {
-            Vtx* v14 = &sp14[i];
-
-            if (sp10[i].v.ob[1] == 0) {
-                v14->v.ob[1] = sp10[i].v.ob[1] - (temp_s0 / 4);
-            } else {
-                v14->v.ob[1] = sp10[i].v.ob[1] + (temp_s0 / 4);
-            }
-        } else if (sp10[i].v.ob[0] == -16) {
-            Vtx* v14 = &sp14[i];
-
-            if (sp10[i].v.ob[1] == 0) {
-                v14->v.ob[1] = sp10[i].v.ob[1] - (temp_s0 / 4);
-            } else {
-                v14->v.ob[1] = sp10[i].v.ob[1] + (temp_s0 / 4);
-            }
-        }
-    }
-
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
-}
-
-API_CALLABLE(N(func_80244CC0_805540)) {
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_40);
-    }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_40);
-    }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_40);
-    }
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(UnkMachiFunc)(Evt* script, s32 isInitialCall) {
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_40);
-    }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_40);
-    }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_40);
-    }
-    return ApiStatus_DONE2;
 }
 
 s32 N(LetterList_Merlon)[] = {
@@ -1406,7 +1301,7 @@ EvtScript N(D_80250DFC_81167C) = {
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_2049, 0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_01, LVar3, -1000, LVar2)
+        EVT_CALL(SetNpcPos, NPC_DarkToad_01, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_01, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_01, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim0B)
@@ -1423,7 +1318,7 @@ EvtScript N(D_80250DFC_81167C) = {
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_02, SOUND_2049, 0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_02, LVar3, -1000, LVar2)
+        EVT_CALL(SetNpcPos, NPC_DarkToad_02, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_02, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Anim0B)
@@ -1440,7 +1335,7 @@ EvtScript N(D_80250DFC_81167C) = {
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_03, SOUND_2049, 0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_03, LVar3, -1000, LVar2)
+        EVT_CALL(SetNpcPos, NPC_DarkToad_03, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_03, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_03, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Anim0B)
@@ -1456,7 +1351,7 @@ EvtScript N(D_80250DFC_81167C) = {
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_04, SOUND_2049, 0)
     EVT_CALL(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
-    EVT_CALL(SetNpcPos, NPC_DarkToad_04, LVar3, -1000, LVar2)
+    EVT_CALL(SetNpcPos, NPC_DarkToad_04, LVar3, NPC_DISPOSE_POS_Y, LVar2)
     EVT_CALL(SetNpcPos, NPC_KoopaBros_04, LVar3, LVar4, LVar5)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_04, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Anim0B)
@@ -1804,7 +1699,7 @@ EvtScript N(EVS_80252EB0) = {
         EVT_CALL(SetNpcAnimation, NPC_Ninji, ANIM_Ninji_Walk)
         EVT_CALL(NpcMoveTo, NPC_Ninji, -230, -260, 0)
         EVT_CALL(NpcMoveTo, NPC_Ninji, -185, -194, 0)
-        EVT_CALL(SetNpcPos, NPC_Ninji, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_Ninji, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(25)
@@ -2094,635 +1989,7 @@ StaticNpc N(NpcData_Ninji) = {
     .tattle = MSG_NpcTattle_MAC_PowerHungryToadKid,
 };
 
-EvtScript N(EVS_NpcInteract_Toad_01_A) = {
-    EVT_IF_EQ(GF_MAC01_Met_Rowf_Early, FALSE)
-        EVT_SET(GF_MAC01_Met_Rowf_Early, TRUE)
-        EVT_SET(AF_MAC_41, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0000)
-    EVT_ELSE
-        EVT_IF_EQ(AF_MAC_41, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0001)
-        EVT_ELSE
-            EVT_SET(AF_MAC_41, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Think, 0, MSG_MAC_Plaza_0002)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_Toad_01_B) = {
-    EVT_SET(LVar0, GF_MAC01_RowfBadgeAvailableA)
-    EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableB)
-    EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableC)
-    EVT_IF_EQ(LVar0, 3)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0005)
-        EVT_ELSE
-            EVT_CALL(N(func_80244984_805204))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LVar1, MSG_MAC_Plaza_0006)
-            EVT_ELSE
-                EVT_SET(LVar1, MSG_MAC_Plaza_0005)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, LVar1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Met_Rowf_Late, FALSE)
-        EVT_SET(GF_MAC01_Met_Rowf_Late, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0003)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0004)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(D_80254858_8150D8)[] = {
-    ITEM_CALCULATOR,
-    ITEM_NONE 
-};
-
-EvtScript N(EVS_NpcInteract_Toad_01_C) = {
-    EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000A)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0008)
-    EVT_SET(LVar0, EVT_PTR(N(D_80254858_8150D8)))
-    EVT_SET(LVar1, 1)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000B)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0009)
-            EVT_WAIT(10)
-            EVT_SET(LVar0, ITEM_I_SPY)
-            EVT_SET(LVar3, 2)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
-            EVT_CALL(AddBadge, LVar0, LVar1)
-            EVT_SET(GF_MAC01_CalculatorReturned, TRUE)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0011)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_Toad_02_A) = {
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000C)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_Toad_02_B) = {
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0014)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_Toad_02_C) = {
-    EVT_CALL(N(func_80244984_805204))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000F)
-    EVT_ELSE
-        EVT_SET(LVar0, GF_MAC01_RowfBadgeAvailableA)
-        EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableB)
-        EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableC)
-        EVT_IF_EQ(LVar0, 3)
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000E)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000D)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_Toad_02_D) = {
-    EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0012)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0010)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcIdle_Toad_01) = {
-    EVT_CALL(SetNpcPos, NPC_Rowf, -250, 0, 295)
-    EVT_LABEL(0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -260, 281, 4)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -410, 281, 60)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 60, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -407, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 40, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -404, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 20, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -401, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 0, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_WAIT(5)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_LOOP(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
-            EVT_WAIT(1)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-            EVT_WAIT(20)
-        EVT_END_LOOP
-        EVT_LOOP(3)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
-            EVT_WAIT(1)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -250, 295, 60)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_WAIT(3)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_WaveOff)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Cheer)
-    EVT_WAIT(8)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, -90, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Talk)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 90, 40, EASING_CUBIC_IN)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 0, 1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, TRUE, 0, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcIdle_Toad_02_C) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -225, 0, 330)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_SET(LVar0, 0)
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_IF_LT(LVar1, 50)
-            EVT_ADD(LVar0, 1)
-        EVT_END_IF
-        EVT_SWITCH(LVar3)
-            EVT_CASE_RANGE(280, 380)
-                EVT_ADD(LVar0, 1)
-        EVT_END_SWITCH
-        EVT_IF_EQ(LVar0, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0013)
-    EVT_THREAD
-        EVT_CALL(func_802D1270, -280, 330, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -305, 330, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0014)
-    EVT_SET(GF_MAC01_Met_Rhuff, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcIdle_Toad_02_D) = {
-    EVT_SET(LVar0, EVT_FLOAT(53.0))
-    EVT_SET(LVar1, EVT_FLOAT(-192.0))
-    EVT_SET(LVar2, EVT_FLOAT(-300.0))
-    EVT_SET(LVar3, EVT_FLOAT(425.0))
-    EVT_CALL(GetNpcPointer, NPC_Rhuff, LVar7)
-    EVT_LOOP(0)
-        EVT_CALL(N(func_802449F8_805278))
-        EVT_CALL(SetNpcPos, NPC_Rhuff, LVar4, 0, LVar5)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(D_802555AC_815E2C)[] = {
-    600, 0, 598, 0, 595, 0, 590, 0, 
-    583, 0, 574, 0, 562, 0, 547, 0, 
-    529, 0, 509, 0, 489, 0, 469, 0, 
-    449, 0, 429, 0, 409, 0, 389, 0, 
-    369, 0, 349, 0, 329, 0, 309, 0, 
-    289, 0, 269, 0, 249, 0, 229, 0, 
-    209, 0, 189, 0, 169, 0, 149, 0, 
-    129, 0, 109, 0, 89, 0, 69, 0, 
-    49, 0, 29, 0, 9, 0, -11, -11, 
-    -16, -16, -18, -18, -19, -19, -19, -19, 
-    -19, -19, -19, -19, -15, -15, -5, -5, 
-    2, 2, 3, 3, 1, 1, 0, 0, 
-    0, 0, 0, 0, 
-};
-
-EvtScript N(D_8025573C_815FBC) = {
-    EVT_SET(MF_Unk_0B, TRUE)
-    EVT_CALL(SetNpcYaw, NPC_Rowf, 270)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_A9, 0, -220, 37, 271)
-        EVT_CALL(MakeLerp, 0, -220, 30, EASING_COS_BOUNCE)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(4)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, -120, 10, EASING_COS_SLOW_OVERSHOOT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_omote2, 0, LVar0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 100, 5, EASING_COS_SLOW_OVERSHOOT)
-        EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_ura, 0, 0, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(EnableModel, MODEL_ju_1, TRUE)
-    EVT_CALL(N(func_80244CC0_805540))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AA, 0)
-    EVT_USE_BUF(EVT_PTR(N(D_802555AC_815E2C)))
-    EVT_LOOP(50)
-        EVT_BUF_READ2(LVar0, MV_Unk_00)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_SET(MV_Unk_01, LVar0)
-        EVT_CALL(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(200.0))
-        EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-        EVT_CALL(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(NpcJump0, NPC_Rowf, -213, 6, 256, 16)
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255B30_8163B0) = {
-    EVT_SET(MF_Unk_0B, FALSE)
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_CALL(NpcJump0, NPC_Rowf, -220, -54, 261, 16)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AC, 0)
-        EVT_CALL(MakeLerp, 0, 600, 50, EASING_LINEAR)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_SET(MV_Unk_01, LVar0)
-        EVT_CALL(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(200.0))
-        EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-        EVT_CALL(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(EnableModel, MODEL_ju_1, FALSE)
-        EVT_CALL(N(UnkMachiFunc))
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -220, 0, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_AB, 0, -220, 37, 271)
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -120, 0, 10, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_omote2, 0, LVar0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 0, 5, EASING_COS_IN_OUT)
-        EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_ura, 0, 0, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(31)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255F60_8167E0) = {
-    EVT_IF_GE(MV_Unk_0D, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(MV_Unk_0E, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MF_Unk_0B, TRUE)
-    EVT_SET(MV_Unk_0D, 1)
-    EVT_EXEC_WAIT(N(D_8025573C_815FBC))
-    EVT_SET(MV_Unk_0D, 2)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255FEC_81686C) = {
-    EVT_IF_EQ(MV_Unk_0D, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MV_Unk_0E, 1)
-    EVT_SET(MF_Unk_0B, FALSE)
-    EVT_LABEL(10)
-    EVT_IF_EQ(MV_Unk_0D, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_SET(MV_Unk_0E, 2)
-    EVT_EXEC_WAIT(N(D_80255B30_8163B0))
-    EVT_SET(MV_Unk_0D, 0)
-    EVT_SET(MV_Unk_0E, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-API_CALLABLE(N(RowfShop_SetBadgePos)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 idx = evt_get_variable(script, *args++);
-
-    set_item_entity_position(
-        gGameStatusPtr->shopItemEntities[idx].index,
-        script->varTable[0], script->varTable[1], script->varTable[2] + 6
-    );
-    return ApiStatus_DONE2;
-}
-
-EvtScript N(EVS_NpcInit_Toad_01) = {
-    EVT_SET(MV_Unk_0D, 0)
-    EVT_SET(MV_Unk_0E, 0)
-    EVT_SET(AF_MAC_40, FALSE)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01_A)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_01)))
-        EVT_CASE_LT(STORY_CH3_STAR_SPRIT_DEPARTED)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01_B)))
-            EVT_SET(AF_MAC_40, TRUE)
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01_B)))
-                EVT_SET(AF_MAC_40, TRUE)
-            EVT_ELSE
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01_C)))
-                EVT_CALL(SetNpcPos, NPC_Rowf, -250, 0, 295)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_SET(AF_MAC_41, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_ju_2, 512, FALSE)
-    EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(RotateGroup, MODEL_jutan1, 60, 0, 1, 0)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 0, 0, 1, 0)
-    EVT_CALL(ScaleGroup, MODEL_jutan2, EVT_FLOAT(1.3), 1, EVT_FLOAT(1.3))
-    EVT_SET(MV_Unk_01, 60)
-    EVT_CALL(MakeLocalVertexCopy, 0, MODEL_ju_1, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(func_80244B98_805418)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
-    EVT_IF_EQ(AF_MAC_40, TRUE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_80255F60_8167E0)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_80255FEC_81686C)), TRIGGER_FLOOR_TOUCH, COLLIDER_o444, 1, 0)
-        EVT_CALL(SetNpcJumpscale, NPC_Rowf, 1)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAGS_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAGS_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAGS_FLAG_4, FALSE)
-        EVT_CALL(N(UnkMachiFunc))
-        EVT_LABEL(0)
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b3)
-            EVT_CALL(N(RowfShop_SetBadgePos), 0)
-        EVT_END_IF
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b2)
-            EVT_CALL(N(RowfShop_SetBadgePos), 1)
-        EVT_END_IF
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b1)
-            EVT_CALL(N(RowfShop_SetBadgePos), 2)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInit_Toad_02) = {
-    EVT_CALL(SetNpcScale, NPC_Rhuff, EVT_FLOAT(0.75), EVT_FLOAT(0.75), EVT_FLOAT(0.75))
-    EVT_CALL(SetNpcPos, NPC_Rhuff, -230, 0, 320)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, -90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02_A)))
-        EVT_CASE_LT(STORY_CH2_BEGAN_PEACH_MISSION)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02_B)))
-            EVT_IF_EQ(GF_MAC01_Met_Rhuff, FALSE)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_02_C)))
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, -305, 0, 330)
-                EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPRIT_DEPARTED)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02_C)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_02_D)))
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02_C)))
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_02_D)))
-            EVT_ELSE
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02_D)))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(D_80256684_816F04)[] = {
-    ANIM_Rowf_Still,
-    ANIM_Rowf_Idle,
-    ANIM_Rowf_Walk,
-    ANIM_Rowf_Talk,
-    ANIM_Rowf_Cheer,
-    ANIM_Rowf_Think,
-    ANIM_Rowf_WaveOff,
-    -1
-};
-
-NpcSettings N(NpcSettings_Toad_01) = {
-    .height = 36,
-    .radius = 24,
-    .flags = ENEMY_FLAGS_1,
-};
-
-NpcSettings N(NpcSettings_Toad_02) = {
-    .height = 27,
-    .radius = 18,
-    .flags = ENEMY_FLAGS_1,
-};
-
-StaticNpc N(NpcData_Toad_01)[] = {
-    {
-        .id = NPC_Rowf,
-        .settings = &N(NpcSettings_Toad_01),
-        .pos = { -213.0f, -54.0f, 256.0f },
-        .yaw = 90,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
-        .init = &N(EVS_NpcInit_Toad_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Rowf_Idle,
-        },
-        .extraAnimations = N(D_80256684_816F04),
-        .tattle = MSG_NpcTattle_Rowf,
-    },
-    {
-        .id = NPC_Rhuff,
-        .settings = &N(NpcSettings_Toad_02),
-        .pos = { -250.0f, 0.0f, 263.0f },
-        .yaw = 90,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
-        .init = &N(EVS_NpcInit_Toad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Rowf_Idle,
-        },
-        .extraAnimations = N(D_80256684_816F04),
-        .tattle = MSG_NpcTattle_Rhuff,
-    },
-};
-
+#include "npc/rowf_and_rhuff.inc.c"
 #include "npc/post_office.inc.c"
 #include "npc/flower_gate.inc.c"
 
@@ -3164,7 +2431,7 @@ EvtScript N(D_8025B854_81C0D4) = {
     EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 330, 30)
     EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 710, 30)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -3341,7 +2608,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_02) = {
     EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVarA)
     EVT_CALL(NpcMoveTo, NPC_SELF, 420, -118, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(BindNpcInteract, NPC_ToadHouseToad, EVT_PTR(N(EVS_NpcInteract_Toad_10)))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -3382,19 +2649,19 @@ EvtScript N(EVS_NpcInit_ShyGuy_02) = {
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy_02)))
         EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_ShyGuy_02)))
     EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-Vec3f N(D_8025C5B0_81CE30)[] = {
+Vec3f N(FlightPath_TwinkArrive)[] = {
     {  -80.0,   106.0,    0.0 },
     {  -50.0,    30.0,    0.0 },
     {    0.0,     0.0,    0.0 },
 };
 
-Vec3f N(D_8025C5D4_81CE54)[] = {
+Vec3f N(FlightPath_TwinkDepart)[] = {
     {    0.0,     0.0,    0.0 },
     {  -50.0,    30.0,    0.0 },
     {  -70.0,   106.0,    0.0 },
@@ -3426,7 +2693,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
     EVT_SUBF(LVar4, EVT_FLOAT(50.0))
     EVT_ADDF(LVar5, EVT_FLOAT(40.0))
     EVT_CALL(InterpNpcYaw, NPC_Twink, 90, 0)
-    EVT_CALL(LoadPath, 35, EVT_PTR(N(D_8025C5B0_81CE30)), 3, EASING_COS_IN_OUT)
+    EVT_CALL(LoadPath, 35, EVT_PTR(N(FlightPath_TwinkArrive)), ARRAY_COUNT(N(FlightPath_TwinkArrive)), EASING_COS_IN_OUT)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_ADDF(LVar1, LVar4)
@@ -3459,7 +2726,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
     EVT_CALL(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
-    EVT_CALL(LoadPath, 35, EVT_PTR(N(D_8025C5D4_81CE54)), 3, EASING_QUADRATIC_IN)
+    EVT_CALL(LoadPath, 35, EVT_PTR(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_ADD(LVar1, LVar4)
@@ -3471,7 +2738,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_Twink, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_SET(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
@@ -3517,7 +2784,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-s32 N(D_8025CC80_81D500)[] = {
+s32 N(ExtraAnims_Toad)[] = {
     ANIM_Toad_Red_Still,
     ANIM_Toad_Red_Idle,
     ANIM_Toad_Red_Walk,
@@ -3526,14 +2793,14 @@ s32 N(D_8025CC80_81D500)[] = {
     -1
 };
 
-s32 N(D_8025CC98_81D518)[] = {
+s32 N(ExtraAnims_Bubulb)[] = {
     ANIM_Bubulb_Pink_Idle,
     ANIM_Bubulb_Pink_EmbedIdle,
     ANIM_Bubulb_Pink_Talk,
     -1
 };
 
-StaticNpc N(NpcData_Toad_04)[] = {
+StaticNpc N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -3541,30 +2808,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_04),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Red_Idle,
-            .walk   = ANIM_Toad_Red_Walk,
-            .run    = ANIM_Toad_Red_Run,
-            .chase  = ANIM_Toad_Red_Run,
-            .anim_4 = ANIM_Toad_Red_Idle,
-            .anim_5 = ANIM_Toad_Red_Idle,
-            .death  = ANIM_Toad_Red_Disappointed,
-            .hit    = ANIM_Toad_Red_Disappointed,
-            .anim_8 = ANIM_Toad_Red_Run,
-            .anim_9 = ANIM_Toad_Red_Run,
-            .anim_A = ANIM_Toad_Red_Run,
-            .anim_B = ANIM_Toad_Red_Run,
-            .anim_C = ANIM_Toad_Red_Run,
-            .anim_D = ANIM_Toad_Red_Run,
-            .anim_E = ANIM_Toad_Red_Run,
-            .anim_F = ANIM_Toad_Red_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .drops = TOAD_DROPS,
+        .animations = TOAD_RED_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_RunsHisMouth,
     },
     {
@@ -3574,11 +2820,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_05),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -3591,25 +2833,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 10 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Red_Idle,
-            .walk   = ANIM_Toad_Red_Walk,
-            .run    = ANIM_Toad_Red_Run,
-            .chase  = ANIM_Toad_Red_Run,
-            .anim_4 = ANIM_Toad_Red_Idle,
-            .anim_5 = ANIM_Toad_Red_Idle,
-            .death  = ANIM_Toad_Red_Disappointed,
-            .hit    = ANIM_Toad_Red_Disappointed,
-            .anim_8 = ANIM_Toad_Red_Run,
-            .anim_9 = ANIM_Toad_Red_Run,
-            .anim_A = ANIM_Toad_Red_Run,
-            .anim_B = ANIM_Toad_Red_Run,
-            .anim_C = ANIM_Toad_Red_Run,
-            .anim_D = ANIM_Toad_Red_Run,
-            .anim_E = ANIM_Toad_Red_Run,
-            .anim_F = ANIM_Toad_Red_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .animations = TOAD_RED_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_KnowsTheGossip,
     },
     {
@@ -3619,11 +2844,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_06),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -3638,25 +2859,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 10 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Yellow_Idle,
-            .walk   = ANIM_Toad_Yellow_Walk,
-            .run    = ANIM_Toad_Yellow_Run,
-            .chase  = ANIM_Toad_Yellow_Run,
-            .anim_4 = ANIM_Toad_Yellow_Idle,
-            .anim_5 = ANIM_Toad_Yellow_Idle,
-            .death  = ANIM_Toad_Yellow_Disappointed,
-            .hit    = ANIM_Toad_Yellow_Disappointed,
-            .anim_8 = ANIM_Toad_Yellow_Run,
-            .anim_9 = ANIM_Toad_Yellow_Run,
-            .anim_A = ANIM_Toad_Yellow_Run,
-            .anim_B = ANIM_Toad_Yellow_Run,
-            .anim_C = ANIM_Toad_Yellow_Run,
-            .anim_D = ANIM_Toad_Yellow_Run,
-            .anim_E = ANIM_Toad_Yellow_Run,
-            .anim_F = ANIM_Toad_Yellow_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .animations = TOAD_YELLOW_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_PrincessFan,
     },
     {
@@ -3666,11 +2870,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_07),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -3685,25 +2885,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 10 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Yellow_Idle,
-            .walk   = ANIM_Toad_Yellow_Walk,
-            .run    = ANIM_Toad_Yellow_Run,
-            .chase  = ANIM_Toad_Yellow_Run,
-            .anim_4 = ANIM_Toad_Yellow_Idle,
-            .anim_5 = ANIM_Toad_Yellow_Idle,
-            .death  = ANIM_Toad_Yellow_Disappointed,
-            .hit    = ANIM_Toad_Yellow_Disappointed,
-            .anim_8 = ANIM_Toad_Yellow_Run,
-            .anim_9 = ANIM_Toad_Yellow_Run,
-            .anim_A = ANIM_Toad_Yellow_Run,
-            .anim_B = ANIM_Toad_Yellow_Run,
-            .anim_C = ANIM_Toad_Yellow_Run,
-            .anim_D = ANIM_Toad_Yellow_Run,
-            .anim_E = ANIM_Toad_Yellow_Run,
-            .anim_F = ANIM_Toad_Yellow_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .animations = TOAD_YELLOW_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_KnowsTheRumors,
     },
     {
@@ -3713,11 +2896,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_08),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -3732,25 +2911,8 @@ StaticNpc N(NpcData_Toad_04)[] = {
                 .detectSize = { 10 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Toad_Blue_Idle,
-            .walk   = ANIM_Toad_Blue_Walk,
-            .run    = ANIM_Toad_Blue_Run,
-            .chase  = ANIM_Toad_Blue_Run,
-            .anim_4 = ANIM_Toad_Blue_Idle,
-            .anim_5 = ANIM_Toad_Blue_Idle,
-            .death  = ANIM_Toad_Blue_Disappointed,
-            .hit    = ANIM_Toad_Blue_Disappointed,
-            .anim_8 = ANIM_Toad_Blue_Run,
-            .anim_9 = ANIM_Toad_Blue_Run,
-            .anim_A = ANIM_Toad_Blue_Run,
-            .anim_B = ANIM_Toad_Blue_Run,
-            .anim_C = ANIM_Toad_Blue_Run,
-            .anim_D = ANIM_Toad_Blue_Run,
-            .anim_E = ANIM_Toad_Blue_Run,
-            .anim_F = ANIM_Toad_Blue_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .animations = TOAD_BLUE_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_CrushingOnMinhT,
     },
     {
@@ -3760,30 +2922,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_09),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Green_Idle,
-            .walk   = ANIM_Toad_Green_Walk,
-            .run    = ANIM_Toad_Green_Run,
-            .chase  = ANIM_Toad_Green_Run,
-            .anim_4 = ANIM_Toad_Green_Idle,
-            .anim_5 = ANIM_Toad_Green_Idle,
-            .death  = ANIM_Toad_Green_Disappointed,
-            .hit    = ANIM_Toad_Green_Disappointed,
-            .anim_8 = ANIM_Toad_Green_Run,
-            .anim_9 = ANIM_Toad_Green_Run,
-            .anim_A = ANIM_Toad_Green_Run,
-            .anim_B = ANIM_Toad_Green_Run,
-            .anim_C = ANIM_Toad_Green_Run,
-            .anim_D = ANIM_Toad_Green_Run,
-            .anim_E = ANIM_Toad_Green_Run,
-            .anim_F = ANIM_Toad_Green_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .drops = TOAD_DROPS,
+        .animations = TOAD_GREEN_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_SeeksTheSouth,
     },
     {
@@ -3793,30 +2934,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 30,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Toad_10),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Toad_Red_Idle,
-            .walk   = ANIM_Toad_Red_Walk,
-            .run    = ANIM_Toad_Red_Run,
-            .chase  = ANIM_Toad_Red_Run,
-            .anim_4 = ANIM_Toad_Red_Idle,
-            .anim_5 = ANIM_Toad_Red_Idle,
-            .death  = ANIM_Toad_Red_Disappointed,
-            .hit    = ANIM_Toad_Red_Disappointed,
-            .anim_8 = ANIM_Toad_Red_Run,
-            .anim_9 = ANIM_Toad_Red_Run,
-            .anim_A = ANIM_Toad_Red_Run,
-            .anim_B = ANIM_Toad_Red_Run,
-            .anim_C = ANIM_Toad_Red_Run,
-            .anim_D = ANIM_Toad_Red_Run,
-            .anim_E = ANIM_Toad_Red_Run,
-            .anim_F = ANIM_Toad_Red_Run,
-        },
-        .extraAnimations = N(D_8025CC80_81D500),
+        .drops = TOAD_DROPS,
+        .animations = TOAD_RED_ANIMS,
+        .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_ToadHouseToad,
     },
     {
@@ -3826,30 +2946,9 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_Bubulb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Bubulb_Pink_Idle,
-            .walk   = ANIM_Bubulb_Pink_Walk,
-            .run    = ANIM_Bubulb_Pink_Walk,
-            .chase  = ANIM_Bubulb_Pink_Idle,
-            .anim_4 = ANIM_Bubulb_Pink_Idle,
-            .anim_5 = ANIM_Bubulb_Pink_Idle,
-            .death  = ANIM_Bubulb_Pink_Idle,
-            .hit    = ANIM_Bubulb_Pink_Idle,
-            .anim_8 = ANIM_Bubulb_Pink_Idle,
-            .anim_9 = ANIM_Bubulb_Pink_Idle,
-            .anim_A = ANIM_Bubulb_Pink_Idle,
-            .anim_B = ANIM_Bubulb_Pink_Idle,
-            .anim_C = ANIM_Bubulb_Pink_Idle,
-            .anim_D = ANIM_Bubulb_Pink_Idle,
-            .anim_E = ANIM_Bubulb_Pink_Idle,
-            .anim_F = ANIM_Bubulb_Pink_Idle,
-        },
-        .extraAnimations = N(D_8025CC98_81D518),
+        .drops = BUBULB_DROPS,
+        .animations = BUBULB_PINK_ANIMS,
+        .extraAnimations = N(ExtraAnims_Bubulb),
         .tattle = MSG_NpcTattle_MAC_FlowerGateBubulb,
     },
     {
@@ -3859,11 +2958,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
         .init = &N(EVS_NpcInit_MinhT),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = TOAD_DROPS,
         .animations = {
             .idle   = ANIM_MinhT_Idle,
         },
@@ -3922,7 +3017,7 @@ StaticNpc N(NpcData_Parakarry) = {
     .tattle = MSG_NpcTattle_MAC_Parakarry,
 };
 
-s32 N(D_8025E1F8_81EA78)[] = {
+s32 N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Fly,
     ANIM_Twink_Talk,
@@ -3936,33 +3031,12 @@ StaticNpc N(NpcData_Twink) = {
     .yaw = 274,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_400000,
     .init = &N(EVS_NpcInit_Twink),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Twink_Idle,
-        .walk   = ANIM_Twink_Fly,
-        .run    = ANIM_Twink_Angry,
-        .chase  = ANIM_Twink_Angry,
-        .anim_4 = ANIM_Twink_Idle,
-        .anim_5 = ANIM_Twink_Idle,
-        .death  = ANIM_Twink_Idle,
-        .hit    = ANIM_Twink_Idle,
-        .anim_8 = ANIM_Twink_Idle,
-        .anim_9 = ANIM_Twink_Idle,
-        .anim_A = ANIM_Twink_Idle,
-        .anim_B = ANIM_Twink_Idle,
-        .anim_C = ANIM_Twink_Idle,
-        .anim_D = ANIM_Twink_Idle,
-        .anim_E = ANIM_Twink_Idle,
-        .anim_F = ANIM_Twink_Idle,
-    },
-    .extraAnimations = N(D_8025E1F8_81EA78),
+    .drops = TWINK_DROPS,
+    .animations = TWINK_ANIMS,
+    .extraAnimations = N(ExtraAnims_Twink),
 };
 
-StaticNpc N(NpcData_ShyGuy_01)[] = {
+StaticNpc N(NpcData_ShyGuys)[] = {
     {
         .id = NPC_PostOfficeShyGuy,
         .settings = &N(NpcSettings_ShyGuy_NoAI),
@@ -3970,29 +3044,8 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_ShyGuy_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ShyGuy_Red_Anim01,
-            .walk   = ANIM_ShyGuy_Red_Anim02,
-            .run    = ANIM_ShyGuy_Red_Anim03,
-            .chase  = ANIM_ShyGuy_Red_Anim03,
-            .anim_4 = ANIM_ShyGuy_Red_Anim01,
-            .anim_5 = ANIM_ShyGuy_Red_Anim01,
-            .death  = ANIM_ShyGuy_Red_Anim0C,
-            .hit    = ANIM_ShyGuy_Red_Anim0C,
-            .anim_8 = ANIM_ShyGuy_Red_Anim15,
-            .anim_9 = ANIM_ShyGuy_Red_Anim12,
-            .anim_A = ANIM_ShyGuy_Red_Anim11,
-            .anim_B = ANIM_ShyGuy_Red_Anim10,
-            .anim_C = ANIM_ShyGuy_Red_Anim05,
-            .anim_D = ANIM_ShyGuy_Red_Anim01,
-            .anim_E = ANIM_ShyGuy_Red_Anim01,
-            .anim_F = ANIM_ShyGuy_Red_Anim01,
-        },
+        .drops = SHY_GUY_NO_DROPS,
+        .animations = SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ToadHouseShyGuy,
@@ -4001,29 +3054,8 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_ShyGuy_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ShyGuy_Red_Anim01,
-            .walk   = ANIM_ShyGuy_Red_Anim02,
-            .run    = ANIM_ShyGuy_Red_Anim03,
-            .chase  = ANIM_ShyGuy_Red_Anim03,
-            .anim_4 = ANIM_ShyGuy_Red_Anim01,
-            .anim_5 = ANIM_ShyGuy_Red_Anim01,
-            .death  = ANIM_ShyGuy_Red_Anim0C,
-            .hit    = ANIM_ShyGuy_Red_Anim0C,
-            .anim_8 = ANIM_ShyGuy_Red_Anim15,
-            .anim_9 = ANIM_ShyGuy_Red_Anim12,
-            .anim_A = ANIM_ShyGuy_Red_Anim11,
-            .anim_B = ANIM_ShyGuy_Red_Anim10,
-            .anim_C = ANIM_ShyGuy_Red_Anim05,
-            .anim_D = ANIM_ShyGuy_Red_Anim01,
-            .anim_E = ANIM_ShyGuy_Red_Anim01,
-            .anim_F = ANIM_ShyGuy_Red_Anim01,
-        },
+        .drops = SHY_GUY_NO_DROPS,
+        .animations = SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy1,
@@ -4032,29 +3064,8 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy1),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ShyGuy_Red_Anim01,
-            .walk   = ANIM_ShyGuy_Red_Anim02,
-            .run    = ANIM_ShyGuy_Red_Anim03,
-            .chase  = ANIM_ShyGuy_Red_Anim03,
-            .anim_4 = ANIM_ShyGuy_Red_Anim01,
-            .anim_5 = ANIM_ShyGuy_Red_Anim01,
-            .death  = ANIM_ShyGuy_Red_Anim0C,
-            .hit    = ANIM_ShyGuy_Red_Anim0C,
-            .anim_8 = ANIM_ShyGuy_Red_Anim15,
-            .anim_9 = ANIM_ShyGuy_Red_Anim12,
-            .anim_A = ANIM_ShyGuy_Red_Anim11,
-            .anim_B = ANIM_ShyGuy_Red_Anim10,
-            .anim_C = ANIM_ShyGuy_Red_Anim05,
-            .anim_D = ANIM_ShyGuy_Red_Anim01,
-            .anim_E = ANIM_ShyGuy_Red_Anim01,
-            .anim_F = ANIM_ShyGuy_Red_Anim01,
-        },
+        .drops = SHY_GUY_NO_DROPS,
+        .animations = SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy2,
@@ -4063,29 +3074,8 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy2),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ShyGuy_Red_Anim01,
-            .walk   = ANIM_ShyGuy_Red_Anim02,
-            .run    = ANIM_ShyGuy_Red_Anim03,
-            .chase  = ANIM_ShyGuy_Red_Anim03,
-            .anim_4 = ANIM_ShyGuy_Red_Anim01,
-            .anim_5 = ANIM_ShyGuy_Red_Anim01,
-            .death  = ANIM_ShyGuy_Red_Anim0C,
-            .hit    = ANIM_ShyGuy_Red_Anim0C,
-            .anim_8 = ANIM_ShyGuy_Red_Anim15,
-            .anim_9 = ANIM_ShyGuy_Red_Anim12,
-            .anim_A = ANIM_ShyGuy_Red_Anim11,
-            .anim_B = ANIM_ShyGuy_Red_Anim10,
-            .anim_C = ANIM_ShyGuy_Red_Anim05,
-            .anim_D = ANIM_ShyGuy_Red_Anim01,
-            .anim_E = ANIM_ShyGuy_Red_Anim01,
-            .anim_F = ANIM_ShyGuy_Red_Anim01,
-        },
+        .drops = SHY_GUY_NO_DROPS,
+        .animations = SHY_GUY_ANIMS,
     },
 };
 
@@ -4103,29 +3093,8 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 270,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Kolorado_Idle,
-        .walk   = ANIM_Kolorado_Walk,
-        .run    = ANIM_Kolorado_Run,
-        .chase  = ANIM_Kolorado_Run,
-        .anim_4 = ANIM_Kolorado_Idle,
-        .anim_5 = ANIM_Kolorado_Idle,
-        .death  = ANIM_Kolorado_Idle,
-        .hit    = ANIM_Kolorado_Idle,
-        .anim_8 = ANIM_Kolorado_Idle,
-        .anim_9 = ANIM_Kolorado_Idle,
-        .anim_A = ANIM_Kolorado_Idle,
-        .anim_B = ANIM_Kolorado_Idle,
-        .anim_C = ANIM_Kolorado_Idle,
-        .anim_D = ANIM_Kolorado_Idle,
-        .anim_E = ANIM_Kolorado_Idle,
-        .anim_F = ANIM_Kolorado_Idle,
-    },
+    .drops = KOLORADO_DROPS,
+    .animations = KOLORADO_ANIMS,
     .extraAnimations = N(D_8025EBB8_81F438),
     .tattle = MSG_NpcTattle_Kolorado,
 };
@@ -4138,81 +3107,60 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_01 }},
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_ChuckQuizmo_Idle,
-        .walk   = ANIM_ChuckQuizmo_Walk,
-        .run    = ANIM_ChuckQuizmo_Run,
-        .chase  = ANIM_ChuckQuizmo_Run,
-        .anim_4 = ANIM_ChuckQuizmo_Idle,
-        .anim_5 = ANIM_ChuckQuizmo_Idle,
-        .death  = ANIM_ChuckQuizmo_Still,
-        .hit    = ANIM_ChuckQuizmo_Still,
-        .anim_8 = ANIM_ChuckQuizmo_Run,
-        .anim_9 = ANIM_ChuckQuizmo_Run,
-        .anim_A = ANIM_ChuckQuizmo_Run,
-        .anim_B = ANIM_ChuckQuizmo_Run,
-        .anim_C = ANIM_ChuckQuizmo_Run,
-        .anim_D = ANIM_ChuckQuizmo_Run,
-        .anim_E = ANIM_ChuckQuizmo_Run,
-        .anim_F = ANIM_ChuckQuizmo_Run,
-    },
+    .drops = QUIZMO_DROPS,
+    .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
 
-NpcGroupList N(NpcGroup7) = {
+NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     NPC_GROUP(N(NpcData_Kolorado)),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
-NpcGroupList N(NpcGroup2) = {
+NpcGroupList N(Chapter0NPCs) = {
     NPC_GROUP(N(NpcData_Parakarry)),
     NPC_GROUP(N(NpcData_KoopaBros)),
     NPC_GROUP(N(NpcData_DarkToads)),
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };
 
-NpcGroupList N(NpcGroup3) = {
+NpcGroupList N(Chapter1NPCs) = {
     NPC_GROUP(N(NpcData_Parakarry)),
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };
 
-NpcGroupList N(NpcGroup4) = {
+NpcGroupList N(TwinkMeetingNPCs) = {
     NPC_GROUP(N(NpcData_Twink)),
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };
 
-NpcGroupList N(NpcGroup5) = {
-    NPC_GROUP(N(NpcData_ShyGuy_01)),
+NpcGroupList N(Chapter4NPCs) = {
+    NPC_GROUP(N(NpcData_ShyGuys)),
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };
 
-NpcGroupList N(NpcGroup6) = {
+NpcGroupList N(NinjiMeetingNPCs) = {
     NPC_GROUP(N(NpcData_Ninji)),
     NPC_GROUP(N(NpcData_Merlon)),
-    NPC_GROUP(N(NpcData_Toad_01)),
+    NPC_GROUP(N(NpcData_RowfAndRhuff)),
     NPC_GROUP(N(NpcData_Kolorado)),
-    NPC_GROUP(N(NpcData_Toad_04)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };
 

@@ -1,13 +1,22 @@
 #include "mac_01.h"
 
-#define NAME_SUFFIX _IntroScene
-#include "world/common/todo/UnkMachiFunc.inc.c"
-#define NAME_SUFFIX
+API_CALLABLE(N(HideRowfBadges_IntroScene)) {
+    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA) == 0) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_HIDDEN);
+    }
+    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB) == 0) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_HIDDEN);
+    }
+    if (evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC) == 0) {
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_HIDDEN);
+    }
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_Scene_IntroWalking) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(EnableModel, MODEL_ju_1, FALSE)
-    EVT_CALL(N(UnkMachiFunc_IntroScene))
+    EVT_CALL(N(HideRowfBadges_IntroScene))
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -560, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -560, 0, 0)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))

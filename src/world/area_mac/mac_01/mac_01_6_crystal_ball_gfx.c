@@ -2,15 +2,15 @@
 #include "model.h"
 #include "nu/nusys.h"
 
-s32 N(D_80248420_808CA0) = 0;
-s32 N(UnusedCustomGfxField) = 0;
+s32 N(CrystallBallRenderCounter) = 0;
+s32 N(UnusedCrystalBallField) = 0;
 
-void N(func_802403C0_800C40)(void) {
+void N(gfx_build_crystal_ball_pre)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Matrix4f sp50;
     LookAt sp90;
 
-    N(D_80248420_808CA0)++;
+    N(CrystallBallRenderCounter)++;
     guLookAtHiliteF(sp50, &sp90, &gDisplayContext->hilite,
                     camera->lookAt_eye.x, camera->lookAt_eye.y, camera->lookAt_eye.z,
                     camera->lookAt_obj.x, camera->lookAt_obj.y, camera->lookAt_obj.z,
@@ -26,12 +26,12 @@ void N(func_802403C0_800C40)(void) {
     gSPSetGeometryMode(gMasterGfxPos++, G_TEXTURE_GEN);
 }
 
-void N(func_802405E8_800E68)(void) {
+void N(gfx_build_crystal_ball_post)(void) {
     gSPClearGeometryMode(gMasterGfxPos++, G_TEXTURE_GEN);
     gSPEndDisplayList(gMasterGfxPos++);
 }
 
-void N(func_80240628_800EA8)(void) {
+void N(gfx_build_inside_crystal_ball)(void) {
     f32 x, y, z, s;
     f32 f20, f22;
     f32 f0, f2;
@@ -123,15 +123,15 @@ void N(func_80240628_800EA8)(void) {
     gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
-EvtScript N(EVS_80248428) = {
+EvtScript N(EVS_SetupCrystalBallGfx) = {
     EVT_WAIT(1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(func_802403C0_800C40)), EVT_PTR(N(func_802405E8_800E68)))
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(gfx_build_crystal_ball_pre)), EVT_PTR(N(gfx_build_crystal_ball_post)))
     EVT_CALL(SetModelCustomGfx, MODEL_mirrorball, CUSTOM_GFX_2, -1)
     EVT_CALL(EnableModel, MODEL_mirrorball, FALSE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(func_80240628_800EA8)), 0)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(gfx_build_inside_crystal_ball)), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
-    EVT_CALL(SetModelFlags, MODEL_tama, 256, TRUE)
-    EVT_CALL(SetModelFlags, MODEL_ohosi, 256, TRUE)
+    EVT_CALL(SetModelFlags, MODEL_tama, MODEL_FLAGS_USE_CAMERA_UNK_MATRIX, TRUE)
+    EVT_CALL(SetModelFlags, MODEL_ohosi, MODEL_FLAGS_USE_CAMERA_UNK_MATRIX, TRUE)
     EVT_RETURN
     EVT_END
 };

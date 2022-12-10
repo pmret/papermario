@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-// checks whether the player has crossed the plane defined by points A = (x1, z1) and B = (x2, z2)
+// checks whether the player has crossed the plane defined by points A = (Ax, Az) and B = (Bx, Bz)
 // this plane divides space into two halves: a "positive" region and "negative" region, with the positive
 // region on the right side of the line going from A to B.
 /*
@@ -42,12 +42,12 @@ ApiStatus N(CheckPositionRelativeToPlane)(Evt* script, s32 isInitialCall) {
     f32 Az = evt_get_variable(script, *args++);
     f32 Bx = evt_get_variable(script, *args++);
     f32 Bz = evt_get_variable(script, *args++);
-    f32 temp;
+    f32 dzdx;
 
-    temp = (Bz - Az) / (Bx - Ax);
+    dzdx = (Bz - Az) / (Bx - Ax);
 
     // this is equivalent to testing the determinant: ((Bx - Ax)*(Pz - Az) - (Bz - Az)*(Px - Ax)) < 0
-    if (playerStatus->position.z < ((temp * playerStatus->position.x) + (Az - (temp * Ax)))) {
+    if (playerStatus->position.z < ((dzdx * playerStatus->position.x) + (Az - (dzdx * Ax)))) {
         script->varTable[0] = PLANE_SIDE_NEGATIVE;
     } else {
         script->varTable[0] = PLANE_SIDE_POSITIVE;

@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitWalk_mac_00_1) = EVT_EXIT_WALK(60, mac_01_ENTRY_0, "mac_00", mac_00_ENTRY_1);
 
-EvtScript N(D_802469AC_80722C) = {
+EvtScript N(EVS_ExitWalk_nok_11_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(UseExitHeading, 60, mac_01_ENTRY_1)
     EVT_EXEC(ExitWalk)
@@ -19,22 +19,26 @@ EvtScript N(D_802469AC_80722C) = {
     EVT_END
 };
 
-s32 N(D_80246A70_8072F0)[] = {
-    158, 159, -1 
+s32 N(Models_CastleGateL)[] = {
+    MODEL_o306,
+    MODEL_o307,
+    -1 
 };
 
-s32 N(D_80246A7C_8072FC)[] = {
-    161, 162, -1 
+s32 N(Models_CastleGateR)[] = {
+    MODEL_o308,
+    MODEL_o309,
+    -1 
 };
 
-EvtScript N(D_80246A88_807308) = {
+EvtScript N(EVS_ExitDoors_osr_01_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, DOOR_SOUNDS_LARGE)
     EVT_SET(LVar0, 2)
     EVT_SET(LVar1, 5)
-    EVT_SET(LVar2, EVT_PTR(N(D_80246A70_8072F0)))
-    EVT_SET(LVar3, EVT_PTR(N(D_80246A7C_8072FC)))
+    EVT_SET(LVar2, EVT_PTR(N(Models_CastleGateL)))
+    EVT_SET(LVar3, EVT_PTR(N(Models_CastleGateR)))
     EVT_EXEC(BaseExitDoor)
     EVT_WAIT(17)
     EVT_SWITCH(GB_StoryProgress)
@@ -52,11 +56,11 @@ EvtScript N(EVS_ExitWalk_mac_02_2) = EVT_EXIT_WALK(60, mac_01_ENTRY_3, "mac_02",
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_mac_00_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80246A88_807308)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitn, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_osr_01_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitn, 1, 0)
     EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_802469AC_80722C)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_nok_11_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_mac_02_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitFlowerGate)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitf, 1, 0)
     EVT_RETURN
@@ -109,7 +113,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 90, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 90, 4096) // note: unusually large near clip dist: 90 vs 16
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
@@ -132,17 +136,17 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_GE(STORY_EPILOGUE)
             EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
         EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup2)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter0NPCs)))
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup3)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter1NPCs)))
         EVT_CASE_EQ(STORY_CH1_DEFEATED_JR_TROOPA)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup4)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(TwinkMeetingNPCs)))
         EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup5)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter4NPCs)))
         EVT_CASE_EQ(STORY_CH6_RETURNED_TO_TOAD_TOWN)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup6)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NinjiMeetingNPCs)))
         EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup7)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_END_SWITCH
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
@@ -151,7 +155,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupBulletinBoard))
-    EVT_EXEC(N(EVS_80248428))
+    EVT_EXEC(N(EVS_SetupCrystalBallGfx))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(UseDoorSounds, DOOR_SOUNDS_LARGE)
     EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
