@@ -406,6 +406,7 @@ PlayerData* get_player_data(void);
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);

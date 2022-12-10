@@ -15,9 +15,9 @@ BSS s32 bss_802BFEF0;
 BSS s32 bss_802BFEF4;
 BSS f32 bss_802BFEF8;
 BSS f32 bss_802BFEFC;
-BSS s32 bss_802BFF00;
-BSS s32 bss_802BFF04;
-BSS s32 bss_802BFF08;
+BSS f32 bss_802BFF00;
+BSS f32 bss_802BFF04;
+BSS f32 bss_802BFF08;
 BSS s32 bss_802BFF0C;
 BSS TweesterPhysics SushieTweesterPhysics;
 
@@ -91,8 +91,223 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     }
 }
 
-void func_802BD414_31E184(Npc*);
-INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
+// void func_802BD414_31E184(Npc*);
+// INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
+void func_802BD414_31E184(Npc* npc) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 var_f20;
+    f32 sp20;
+    f32 sp24;
+    f32 sinTheta, cosTheta;
+    f32 x, y, z;
+    f32 sp3C;
+
+    func_802BD20C_31DF7C(&sp20, &sp24);
+    if (bss_802BFEE4 != 0) {
+        var_f20 = 80.0f;
+    } else {
+        var_f20 = 32.0f;
+    }
+
+    if (sp24 != 0.0f) {
+        f32 t1;
+        f32 t2;
+        f32 t3;
+
+        t3 = D_802BFDB0_320B20 * D_802BFDB8_320B28;
+        t1 = 8.0f;
+        t2 = 32.0f;
+
+        if (t3 > 0.0f) {
+            D_802BFDB8_320B28 += D_802BFDB0_320B20 / t2;
+        } else {
+            D_802BFDB8_320B28 += D_802BFDB0_320B20 / t1;
+        }
+        if (D_802BFDB0_320B20 > 0.0f) {
+            if (D_802BFDB0_320B20 < D_802BFDB8_320B28) {
+                D_802BFDB8_320B28 = D_802BFDB0_320B20;
+            }
+        } else {
+            if (D_802BFDB8_320B28 < D_802BFDB0_320B20) {
+                D_802BFDB8_320B28 = D_802BFDB0_320B20;
+            }
+        }
+
+        if (D_802BFDB4_320B24 * D_802BFDBC_320B2C > 0.0f) {
+            D_802BFDBC_320B2C += D_802BFDB4_320B24 / t2;
+        } else {
+            D_802BFDBC_320B2C += D_802BFDB4_320B24 / t1;
+        }
+        if (D_802BFDB4_320B24 > 0.0f) {
+            if (D_802BFDB4_320B24 < D_802BFDBC_320B2C) {
+                D_802BFDBC_320B2C = D_802BFDB4_320B24;
+            }
+        } else {
+            if (D_802BFDBC_320B2C < D_802BFDB4_320B24) {
+                D_802BFDBC_320B2C = D_802BFDB4_320B24;
+            }
+        }
+
+        sp20 = clamp_angle(atan2(0.0f, 0.0f, D_802BFDB8_320B28, -D_802BFDBC_320B2C) + gCameras[CAM_DEFAULT].currentYaw);
+        if (bss_802BFEF8 <= sp24) {
+            bss_802BFEF8 = bss_802BFEF8 + ((sp24 - bss_802BFEF8) / var_f20);
+            if (bss_802BFEF8 > sp24) {
+                bss_802BFEF8 = sp24;
+            }
+        } else {
+            bss_802BFEF8 += (sp24 - bss_802BFEF8) / var_f20;
+        }
+        sp24 = bss_802BFEF8;
+        bss_802BFEFC = sp20;
+        sin_cos_rad(DEG_TO_RAD(sp20), &sinTheta, &cosTheta);
+        bss_802BFF00 += (sp24 * sinTheta) / var_f20;
+        bss_802BFF04 += (-sp24 * cosTheta) / var_f20;
+    } else {
+        bss_802BFEF8 -= 0.15;
+        if (bss_802BFEF8 < 0.0f) {
+            bss_802BFEF8 = 0.0f;
+            D_802BFDBC_320B2C = 0.0f;
+            D_802BFDB8_320B28 = 0.0f;
+        }
+        sp24 = bss_802BFEF8;
+        sp20 = bss_802BFEFC;
+        sin_cos_rad(DEG_TO_RAD(bss_802BFEFC), &sinTheta, &cosTheta);
+        bss_802BFF00 = sp24 * sinTheta;
+        bss_802BFF04 = -sp24 * cosTheta;
+    }
+    npc->moveSpeed = sp24;
+    if (sp24 != 0.0f) {
+        npc->yaw = sp20;
+        x = npc->pos.x;
+        z = npc->pos.z;
+        y = npc->moveToPos.y + -6.0f;
+        sp3C = (npc->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
+        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->moveSpeed, sp20, sp3C,
+                                               npc->collisionRadius) != 0)
+        {
+            collisionStatus->pushingAgainstWall = D_8010C978;
+            if ((get_collider_flags(D_8010C978) & 0xFF) == 4) {
+                bss_802BFEF0++;
+            } else {
+                bss_802BFEF0 = 0;
+            }
+            npc->pos.x += (x - npc->pos.x) * 0.5f;
+            npc->pos.z += (z - npc->pos.z) * 0.5f;
+        } else {
+            npc_move_heading(npc, sp24, sp20);
+            collisionStatus->pushingAgainstWall = -1;
+        }
+        sp24 = 2.0f;
+        sp20 = clamp_angle(npc->yaw - 30.0f);
+        x = npc->pos.x;
+        z = npc->pos.z;
+        y = npc->moveToPos.y + -6.0f;
+        sp3C = (npc->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
+        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, sp24, sp20, sp3C, npc->collisionRadius) != 0) {
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
+        }
+        sp20 = clamp_angle(npc->yaw + 30.0f);
+        x = npc->pos.x;
+        z = npc->pos.z;
+        y = npc->moveToPos.y + -6.0f;
+        sp3C = (npc->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
+        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, sp24, sp20, sp3C, npc->collisionRadius) != 0) {
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
+        }
+    }
+    if (bss_802BFEE4 == 0) {
+        func_802BD368_31E0D8(npc->collisionChannel, npc->pos.x, npc->pos.y, npc->pos.z, npc->yaw,
+                             npc->collisionRadius * 0.5f);
+        if (bss_802BFEE4 == 0) {
+            npc->moveSpeed = 3.0f;
+            npc->moveToPos.y = OriginalPlayerY - (npc->collisionHeight * 0.5f);
+            bss_802BFEE8 = 0;
+            if (partnerActionStatus->pressedButtons & BUTTON_C_DOWN) {
+                bss_802BFEE4 = 1;
+                npc->moveSpeed = 2.0f;
+            } else {
+                return;
+            }
+        }
+    }
+
+    if (bss_802BFEE4 == 1 && (partnerActionStatus->currentButtons & 4) && bss_802BFEE8 == 0) {
+        bss_802BFEE4 = 2;
+    }
+    bss_802BFEE8++;
+    if (bss_802BFEE4 == 2) {
+        x = npc->pos.x;
+        y = npc->pos.y;
+        z = npc->pos.z;
+        sp3C = npc->collisionHeight;
+        if (npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &sp3C, npc->yaw, npc->collisionRadius) != 0) {
+            var_f20 = ((OriginalPlayerY - (playerStatus->colliderHeight * 2)) - npc->moveToPos.y) * 0.1f;
+            npc->moveToPos.y += var_f20;
+            if (npc->moveToPos.y < y + 5.0f) {
+                npc->moveToPos.y = y + 5.0f;
+            }
+        } else {
+            var_f20 = ((OriginalPlayerY - (playerStatus->colliderHeight * 2)) - npc->moveToPos.y) * 0.1f;
+            npc->moveToPos.y += var_f20;
+        }
+        if (bss_802BFEE8 == ((bss_802BFEE8 / 6) * 6)) {
+            fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + (npc->collisionHeight * 0.5f), npc->pos.z,
+                             (OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f));
+        }
+        if (bss_802BFEE8 == 1) {
+            suggest_player_anim_setUnkFlag(ANIM_Mario_80010);
+            npc->currentAnim = 0x7000A;
+        }
+        if (bss_802BFEF4 == 0 && (playerStatus->position.y + (playerStatus->colliderHeight * 0.5f) < OriginalPlayerY)) {
+            bss_802BFEF4 = 1;
+            playerStatus->renderMode = 0xD;
+            func_802DDFF8(playerStatus->trueAnimation, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+        }
+        if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
+            npc->currentAnim = 0x7000C;
+            sfx_play_sound_at_npc(SOUND_694, 0, NPC_PARTNER);
+            bss_802BFEE4 = 3;
+        }
+    }
+
+    x = npc->pos.x;
+    y = npc->moveToPos.y;
+    z = npc->pos.z;
+    sp3C = (npc->collisionHeight * 0.5f) + playerStatus->colliderHeight;
+    if (npc_raycast_up_corners(npc->collisionChannel, &x, &y, &z, &sp3C, npc->yaw, npc->collisionRadius * 0.3f) >= 0) {
+        npc->moveToPos.y += (((npc->moveToPos.y - y) + sp3C) - ((npc->collisionHeight * 0.5f) + playerStatus->colliderHeight)) * 0.2f;
+        if (bss_802BFEE8 == ((bss_802BFEE8 / 9) * 9)) {
+            fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + (npc->collisionHeight * 0.5f), npc->pos.z,
+                             (OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f));
+        }
+    } else if (bss_802BFEE4 == 3) {
+        bss_802BFF08 += 0.14;
+        if (bss_802BFF08 > 1.8) {
+            bss_802BFF08 = 1.8f;
+        }
+        npc->moveToPos.y += bss_802BFF08;
+        if (bss_802BFEE8 == ((bss_802BFEE8 / 9) * 9)) {
+            fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + npc->collisionHeight * 0.5f, npc->pos.z,
+                             (OriginalPlayerY - npc->moveToPos.y) - npc->collisionHeight * 0.5f);
+        }
+        if ((OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f) <= 0.0f) {
+            if (bss_802BFEF4 != 0) {
+                bss_802BFEF4 = 0;
+                func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
+                func_8003D624(npc, 0, 0, 0, 0, 0, 0);
+            }
+            bss_802BFEE4 = 0;
+            npc->currentAnim = 0x7000A;
+            npc->moveToPos.y = OriginalPlayerY - (npc->collisionHeight * 0.5f);
+            suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
+        }
+    }
+}
 
 s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
     f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
@@ -133,9 +348,9 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
         func_802BF920_320690(npc);
         bss_802BFEFC = 0.0f;
         bss_802BFEF8 = 0.0f;
-        bss_802BFF00 = 0;
-        bss_802BFF04 = 0;
-        bss_802BFF08 = 0;
+        bss_802BFF00 = 0.0f;
+        bss_802BFF04 = 0.0f;
+        bss_802BFF08 = 0.0f;
         script->functionTemp[0] = 0;
     }
     playerData->partnerUsedTime[PARTNER_SUSHIE]++;
