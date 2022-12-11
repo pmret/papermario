@@ -34,12 +34,7 @@ NpcSettings N(NpcSettings_Parakarry) = {
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
-extern IMG_BIN N(toad_house_blanket_img)[];
-#include "mac_01_toad_house_blanket_skeleton.c"
-#include "world/area_mac/mac_01/toad_house_blanket.vtx.inc.c"
-#include "world/area_mac/mac_01/toad_house_blanket.gfx.inc.c"
-#include "world/area_mac/mac_01/toad_house_blanket.png.inc.c"
-#include "mac_01_toad_house_blanket_anim.c"
+#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 
 #define KNOCK_DOWN_MAP_VAR MV_KnockdownWorker
 #include "world/common/complete/KnockDownPlayer.inc.c"
