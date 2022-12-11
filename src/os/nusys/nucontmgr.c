@@ -1,15 +1,17 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-s32 contRetrace(void);
-s32 contReadData(s32* arg0);
+NOP_FIX
+
+s32 contRetrace(NUSiCommonMesg* mesg);
+s32 contReadData(OSContPad* pad, u32 lockflag);
 s32 contReadNW(void);
 s32 contQuery(void);
 
-u32 D_80093D20 = 0;
+NUContReadFunc nuContReadFunc = NULL;
 
 s32(*D_80093D24[4])(void) = {
-    contRetrace,
+    (s32 (*) (void)) contRetrace,
     (s32 (*) (void)) contReadData,
     contReadNW,
     contQuery,
@@ -24,9 +26,9 @@ NUCallBackList nuContCallBack = {
     0,
 };
 
-OSMesg nuContWaitMesgBuf;
-OSMesg nuContDataMutexBuf;
-OSMesgQueue nuContDataMutexQ;
+extern OSMesg nuContWaitMesgBuf;
+extern OSMesg nuContDataMutexBuf;
+extern OSMesgQueue nuContDataMutexQ;
 
 u8 nuContMgrInit(void) {
     s32 i;
@@ -64,21 +66,18 @@ void nuContMgrRemove(void) {
 
 void nuContDataClose(void) {
     osSendMesg(&nuContDataMutexQ, NULL, OS_MESG_BLOCK);
-
 }
 
 void nuContDataOpen(void) {
     osRecvMesg(&nuContDataMutexQ, NULL, OS_MESG_BLOCK);
 }
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contRetrace);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contRetrace);
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadData);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contReadData);
 
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadNW);
+INCLUDE_ASM(s32, "os/nusys/nucontmgr", contReadNW);
 
-// nuContStatus needs to be declared in this file.
-#ifdef NON_MATCHING
 s32 contQuery(void) {
     s32 ret = osContStartQuery(&nuSiMesgQ);
 
@@ -91,6 +90,3 @@ s32 contQuery(void) {
 
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "os/nusys/nuContMgr", contQuery);
-#endif

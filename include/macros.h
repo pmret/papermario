@@ -23,6 +23,8 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define NOP_FIX __asm__(".set nogpopt");
+
 #define PTR_LIST_END ((void*) -1)
 
 #define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)

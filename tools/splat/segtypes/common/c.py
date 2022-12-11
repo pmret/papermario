@@ -1,16 +1,17 @@
-from segtypes.common.codesubsegment import CommonSegCodeSubsegment
-from segtypes.common.group import CommonSegGroup
-from segtypes.common.rodata import CommonSegRodata
-from typing import Optional, Set
 import os
 import re
 from pathlib import Path
+from typing import Optional, Set
+
 import spimdisasm
 
-from util import log, options
-from util import symbols
+from util import log, options, symbols
 from util.compiler import GCC, SN64
 from util.symbols import Symbol
+
+from segtypes.common.codesubsegment import CommonSegCodeSubsegment
+from segtypes.common.group import CommonSegGroup
+from segtypes.common.rodata import CommonSegRodata
 
 
 class CommonSegC(CommonSegCodeSubsegment):
@@ -283,13 +284,19 @@ class CommonSegC(CommonSegCodeSubsegment):
         build_path = options.opts.build_path
 
         dep_path = build_path / c_path.with_suffix(".asmproc.d")
+        dep_path.parent.mkdir(parents=True, exist_ok=True)
         with dep_path.open("w") as f:
             o_path = build_path / c_path.with_suffix(".o")
             f.write(f"{o_path}:")
+            depend_list = []
             for func in self.spim_section.symbolList:
                 func_name = func.getName()
 
                 if func_name in self.global_asm_funcs or is_new_c_file:
                     outpath = asm_out_dir / self.name / (func_name + ".s")
+                    depend_list.append(outpath)
                     f.write(f" \\\n    {outpath}")
             f.write("\n")
+
+            for depend_file in depend_list:
+                f.write(f"{depend_file}:\n")

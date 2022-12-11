@@ -2,6 +2,7 @@ from segtypes.n64.segment import N64Segment
 from pathlib import Path
 import struct
 from util.n64 import Yay0decompress
+from util.n64.Yay0decompress import Yay0Decompressor
 from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
 from util import options
@@ -302,7 +303,7 @@ class N64SegPm_npc_sprites(N64Segment):
             start = int.from_bytes(data[i * 4 : (i + 1) * 4], byteorder="big")
             end = int.from_bytes(data[(i + 1) * 4 : (i + 2) * 4], byteorder="big")
 
-            sprite_data = Yay0decompress.decompress_yay0(data[start:end])
+            sprite_data = Yay0Decompressor.decompress_python(data[start:end])
             sprite = Sprite.from_bytes(sprite_data)
 
             if sprite_name in self.sprite_cfg:

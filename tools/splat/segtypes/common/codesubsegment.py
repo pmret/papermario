@@ -1,11 +1,14 @@
 from typing import Optional
-from util import options
-from segtypes.common.code import CommonSegCode
+
 import spimdisasm
+import rabbitizer
+
+from util import options, symbols
+
+from segtypes import segment
+from segtypes.common.code import CommonSegCode
 
 from segtypes.segment import Segment
-from segtypes import segment
-from util import symbols
 
 # abstract class for c, asm, data, etc
 class CommonSegCodeSubsegment(Segment):
@@ -22,12 +25,13 @@ class CommonSegCodeSubsegment(Segment):
         )
 
         self.str_encoding: Optional[str] = (
-            self.yaml.get("str_encoding", False)
-            if isinstance(self.yaml, dict)
-            else None
+            self.yaml.get("str_encoding", None) if isinstance(self.yaml, dict) else None
         )
 
         self.spim_section: Optional[spimdisasm.mips.sections.SectionBase] = None
+        self.instr_category = rabbitizer.InstrCategory.CPU
+        if options.opts.platform == "ps2":
+            self.instr_category = rabbitizer.InstrCategory.R5900
 
     @property
     def needs_symbols(self) -> bool:
@@ -55,6 +59,7 @@ class CommonSegCodeSubsegment(Segment):
         )
 
         self.spim_section.isHandwritten = is_hasm
+        self.spim_section.instrCat = self.instr_category
 
         self.spim_section.analyze()
         self.spim_section.setCommentOffset(self.rom_start)

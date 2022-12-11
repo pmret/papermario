@@ -191,8 +191,8 @@ extern EvtScript ShakeCamX;
 extern MusicSettings gMusicSettings[4];
 
 // OS
-extern OSThread D_800A4270; // idle thread, id 1
-extern OSThread D_800A4420; // id 3
+extern OSThread IdleThread; // idle thread, id 1
+extern OSThread MainThread; // id 3
 extern OSDevMgr __osPiDevMgr;
 
 // gfx

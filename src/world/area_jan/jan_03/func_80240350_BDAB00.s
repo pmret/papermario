@@ -8,7 +8,7 @@ dlabel D_802429E8_BDD198
 
 .section .text
 
-glabel func_80240350_BDAB00
+glabel obk_09_LoadPartyImage
 /* BDAB00 80240350 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* BDAB04 80240354 3C048024 */  lui       $a0, %hi(D_802429E8_BDD198)
 /* BDAB08 80240358 248429E8 */  addiu     $a0, $a0, %lo(D_802429E8_BDD198)

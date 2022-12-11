@@ -1,17 +1,18 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-s32 D_80093B80 = 0;
+NOP_FIX
 
-s32 D_80093B84[] = {
-    0x4E755379, 0x7374656D, 0x322E3035, 0x00000000
-};
+NUScPreNMIFunc nuScPreNMIFunc = NULL;
 
-s32* D_80093B94 = D_80093B84;
+char nusys_version[] = "NuSystem2.05";
+
+u32 nuScRetraceCounter = (u32) nusys_version; // wtf?
 
 void nuScEventHandler(void);
 void nuScExecuteAudio(void);
 void nuScExecuteGraphics(void);
+void nuScEventBroadcast(NUScMsg* msg);
 void nuScWaitTaskReady(NUScTask* task);
 
 extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
@@ -204,43 +205,22 @@ void nuScResetClientMesgType(NUScClient* client, NUScMsg msgType) {
     osSetIntMask(mask);
 }
 
-#ifdef NON_MATCHING
-// This should match when data is decompiled.
 OSMesgQueue* nuScGetGfxMQ(void) {
     return &nusched.graphicsRequestMQ;
 }
-#else
-INCLUDE_ASM(OSMesgQueue*, "os/nusys/nuSched", nuScGetGfxMQ, void);
-#endif
 
-#ifdef NON_MATCHING
-// This should match when data is decompiled.
 OSMesgQueue* nuScGetAudioMQ(void) {
     return &nusched.audioRequestMQ;
 }
-#else
-INCLUDE_ASM(OSMesgQueue*, "os/nusys/nuSched", nuScGetAudioMQ, void);
-#endif
 
-#ifdef NON_MATCHING
-// This should match when data is decompiled.
 void nuScSetFrameBufferNum(u8 frameBufferNum) {
     nusched.frameBufferNum = frameBufferNum;
 }
-#else
-INCLUDE_ASM(void, "os/nusys/nuSched", nuScSetFrameBufferNum, u8 frameBufferNum);
-#endif
 
-#ifdef NON_MATCHING
-// This should match when data is decompiled.
 s32 nuScGetFrameRate(void) {
     return nusched.frameRate;
 }
-#else
-INCLUDE_ASM(s32, "os/nusys/nuSched", nuScGetFrameRate, void);
-#endif
 
-#ifdef NON_MATCHING
 void nuScEventHandler(void) {
     OSMesg	msg;
     s32		beforeResetFrame;
@@ -282,9 +262,6 @@ void nuScEventHandler(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "os/nusys/nuSched", nuScEventHandler, void);
-#endif
 
 void nuScEventBroadcast(NUScMsg* msg) {
     NUScClient* clientList = nusched.clientList;
@@ -297,4 +274,4 @@ void nuScEventBroadcast(NUScMsg* msg) {
     }
 }
 
-INCLUDE_ASM(void, "os/nusys/nuSched", nuScWaitTaskReady);
+INCLUDE_ASM(void, "os/nusys/nusched", nuScWaitTaskReady);

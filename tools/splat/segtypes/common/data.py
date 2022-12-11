@@ -1,10 +1,11 @@
+from pathlib import Path
+from typing import Optional
+
 import spimdisasm
+from util import options, symbols
 
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.group import CommonSegGroup
-from pathlib import Path
-from typing import Optional
-from util import options, symbols
 
 
 class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):

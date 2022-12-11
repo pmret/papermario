@@ -1,5 +1,6 @@
-from segtypes.n64.ci import N64SegCi
 import n64img.image
+
+from segtypes.n64.ci import N64SegCi
 
 
 class N64SegCi4(N64SegCi):
