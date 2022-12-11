@@ -81,10 +81,10 @@ enum {
 };
 
 enum {
-    MV_RowfRugRippleAmount       = MapVar(0),
+    MV_RowfRugRippleAmount  = MapVar(0),
     MV_RowfRugRotateAngle   = MapVar(1),
     MV_RowfShopBuyFlags     = MapVar(2),
-    MV_Unk_0A       = MapVar(10),
+    MV_KnockdownWorker      = MapVar(10),
     MV_Unk_0C       = MapVar(12),
     MV_Unk_0D       = MapVar(13),
     MV_Unk_0E       = MapVar(14),
@@ -118,11 +118,11 @@ extern EvtScript N(EVS_SetupFlowerModels);
 extern EvtScript N(EVS_EnterFlowerGate);
 extern EvtScript N(EVS_ExitFlowerGate);
 extern EvtScript N(EVS_Merlon_GiveHint);
-extern EvtScript N(EVS_SetupQuickChangeTrigger);
-extern EvtScript N(EVS_Scene_MailbagTheft);
 extern EvtScript N(EVS_MerlonShooAway);
-extern EvtScript N(EVS_Scene_MerlonAndNinji);
+extern EvtScript N(EVS_SetupQuickChangeTrigger);
 extern EvtScript N(EVS_Scene_IntroWalking);
+extern EvtScript N(EVS_Scene_MailbagTheft);
+extern EvtScript N(EVS_Scene_MerlonAndNinji);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 

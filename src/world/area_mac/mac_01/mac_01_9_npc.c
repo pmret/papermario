@@ -41,7 +41,7 @@ extern IMG_BIN N(toad_house_blanket_img)[];
 #include "world/area_mac/mac_01/toad_house_blanket.png.inc.c"
 #include "mac_01_toad_house_blanket_anim.c"
 
-#define KNOCK_DOWN_MAP_VAR MV_Unk_0A
+#define KNOCK_DOWN_MAP_VAR MV_KnockdownWorker
 #include "world/common/complete/KnockDownPlayer.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
@@ -153,217 +153,6 @@ MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 #include "world/common/todo/GetPlayerCoins.inc.c"
-
-API_CALLABLE(N(func_802440FC_80497C)) {
-    if (isInitialCall) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 3);
-        set_model_env_color_parameters(255, 255, 255, 0, 0, 0);
-        script->functionTemp[0] = 255;
-    }
-    script->functionTemp[0] -= 4;
-    if (script->functionTemp[0] < 64) {
-        script->functionTemp[0] = 64;
-    }
-    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
-    if (script->functionTemp[0] == 64) {
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(N(func_802441EC_804A6C)) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 64;
-        script->functionTemp[2] = 64;
-        script->functionTemp[1] = 0;
-    }
-    if (script->functionTemp[1] == 0) {
-        script->functionTemp[0] += 4;
-        script->functionTemp[2] += 4;
-        if (script->functionTemp[0] > 127) {
-            script->functionTemp[0] = 127;
-        }
-        if (script->functionTemp[2] > 127) {
-            script->functionTemp[2] = 127;
-        }
-        if (script->functionTemp[0] == 127 && (script->functionTemp[2] == script->functionTemp[0])) {
-            script->functionTemp[1] = 1;
-        }
-    } else {
-        script->functionTemp[0] -= 4;
-        script->functionTemp[2] -= 4;
-        if (script->functionTemp[0] < 64) {
-            script->functionTemp[0] = 64;
-        }
-        if (script->functionTemp[2] < 0) {
-            script->functionTemp[2] = 0;
-        }
-    }
-    set_model_env_color_parameters(
-        script->functionTemp[0], script->functionTemp[0], script->functionTemp[0],
-        script->functionTemp[2], script->functionTemp[2], script->functionTemp[2]
-    );
-    if (script->functionTemp[0] == 64 && script->functionTemp[2] == 0) {
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(N(func_80244308_804B88)) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 64;
-    }
-    script->functionTemp[0] += 4;
-    if (script->functionTemp[0] > 255) {
-        script->functionTemp[0] = 255;
-    }
-    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
-    if (script->functionTemp[0] == 255) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 0);
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
-
-// identical to hos_06 func
-// TODO may not be motionBlurFlame
-API_CALLABLE(N(func_802443E0_804C60)) {
-    EffectInstance* effects[3];
-    Matrix4f sp28, sp68;
-    f32 tx;
-    f32 ty;
-    f32 temp_f24;
-    f32 temp_f28;
-    f32 temp_f30;
-    s32 i;
-
-    if (isInitialCall) {
-        script->functionTemp[0] = 180;
-        script->functionTempPtr[1] = (EffectInstance*) evt_get_variable(script, ArrayVar(3));
-        script->functionTempPtr[2] = (EffectInstance*) evt_get_variable(script, ArrayVar(4));
-        script->functionTempPtr[3] = (EffectInstance*) evt_get_variable(script, ArrayVar(5));
-    }
-
-    effects[0] = script->functionTempPtr[1];
-    effects[1] = script->functionTempPtr[2];
-    effects[2] = script->functionTempPtr[3];
-    temp_f30 = (sin_deg(script->functionTemp[0]) * 10.0f) + 10.0f;
-    temp_f28 = (sin_deg(script->functionTemp[0]) * 25.0f) + 10.0f;
-    temp_f24 = script->functionTemp[0] * 10;
-
-    for (i = 0; i < ARRAY_COUNT(effects); i++) {
-        guRotateF(sp28, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        guRotateF(sp68, i * 120, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(sp68, sp28, sp28);
-        tx = temp_f30 * sin_deg(temp_f24);
-        ty = temp_f28 * cos_deg(temp_f24);
-        guTranslateF(sp68, tx, ty, 0.0f);
-        guMtxCatF(sp68, sp28, sp28);
-        effects[i]->data.motionBlurFlame->pos.x = sp28[3][0];
-        effects[i]->data.motionBlurFlame->pos.y = sp28[3][1];
-        effects[i]->data.motionBlurFlame->pos.z = sp28[3][2];
-    }
-
-    script->functionTemp[0]--;
-    if (script->functionTemp[0] < 16) {
-        for (i = 0; i < ARRAY_COUNT(effects); i++) {
-            effects[i]->data.motionBlurFlame->unk_4C = script->functionTemp[0];
-        }
-    }
-
-    if (script->functionTemp[0] < 0) {
-        for (i = 0; i < ARRAY_COUNT(effects); i++) {
-            remove_effect(effects[i]);
-        }
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
-
-// identical to hos_06 func
-API_CALLABLE(N(func_802446AC_804F2C)) {
-    Bytecode* args = script->ptrReadPos;
-    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
-
-    // TODO effect may be wrong
-    effect->data.energyOrbWave->unk_1C++;
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/util/CheckPositionRelativeToPlane.inc.c"
-
-API_CALLABLE(N(func_802447E0_805060)) {
-    if (isInitialCall) {
-        script->functionTemp[1] = 0;
-    }
-
-    script->functionTemp[1] += 10;
-    if (script->functionTemp[1] > 255) {
-        script->functionTemp[1] = 255;
-    }
-
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
-
-    if (script->functionTemp[1] == 255) {
-        return ApiStatus_DONE2;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-}
-
-API_CALLABLE(N(func_80244848_8050C8)) {
-    if (isInitialCall) {
-        script->functionTemp[1] = 255;
-    }
-
-    script->functionTemp[1] -= 10;
-    if (script->functionTemp[1] <= 0) {
-        script->functionTemp[1] = 0;
-        return ApiStatus_DONE2;
-    }
-
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(N(func_802448A0_805120)) {
-    s32 alpha;
-
-    if (isInitialCall) {
-        if (script->varTable[0] == 0) {
-            func_8011B950(script->varTable[15], -1, 1, 1);
-        }
-        script->functionTemp[0] = 0;
-    }
-
-    script->functionTemp[0] += 32;
-    if (script->functionTemp[0] > 255) {
-        script->functionTemp[0] = 255;
-    }
-
-    if (script->varTable[0] == 0) {
-        alpha = script->functionTemp[0];
-    } else {
-        alpha = 255 - script->functionTemp[0];
-    }
-
-    set_background_color_blend(0, 0, 0, alpha);
-    gCameras[CAM_DEFAULT].bgColor[0] = 0;
-    gCameras[CAM_DEFAULT].bgColor[1] = 0;
-    gCameras[CAM_DEFAULT].bgColor[2] = 0;
-
-    if (script->functionTemp[0] >= 255) {
-        if (script->varTable[0] == 3) {
-            func_8011B950(script->varTable[15], -1, 0, 1);
-        }
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
 
 s32 N(LetterList_Merlon)[] = {
     ITEM_LETTER01,
@@ -534,7 +323,147 @@ EvtScript N(D_8024E7F0_80F070) = {
     EVT_END
 };
 
-EvtScript N(D_8024E8A0_80F120) = {
+API_CALLABLE(N(func_802440FC_80497C)) {
+    if (isInitialCall) {
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 3);
+        set_model_env_color_parameters(255, 255, 255, 0, 0, 0);
+        script->functionTemp[0] = 255;
+    }
+    script->functionTemp[0] -= 4;
+    if (script->functionTemp[0] < 64) {
+        script->functionTemp[0] = 64;
+    }
+    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
+    if (script->functionTemp[0] == 64) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(func_802441EC_804A6C)) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 64;
+        script->functionTemp[2] = 64;
+        script->functionTemp[1] = 0;
+    }
+    if (script->functionTemp[1] == 0) {
+        script->functionTemp[0] += 4;
+        script->functionTemp[2] += 4;
+        if (script->functionTemp[0] > 127) {
+            script->functionTemp[0] = 127;
+        }
+        if (script->functionTemp[2] > 127) {
+            script->functionTemp[2] = 127;
+        }
+        if (script->functionTemp[0] == 127 && (script->functionTemp[2] == script->functionTemp[0])) {
+            script->functionTemp[1] = 1;
+        }
+    } else {
+        script->functionTemp[0] -= 4;
+        script->functionTemp[2] -= 4;
+        if (script->functionTemp[0] < 64) {
+            script->functionTemp[0] = 64;
+        }
+        if (script->functionTemp[2] < 0) {
+            script->functionTemp[2] = 0;
+        }
+    }
+    set_model_env_color_parameters(
+        script->functionTemp[0], script->functionTemp[0], script->functionTemp[0],
+        script->functionTemp[2], script->functionTemp[2], script->functionTemp[2]
+    );
+    if (script->functionTemp[0] == 64 && script->functionTemp[2] == 0) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(func_80244308_804B88)) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 64;
+    }
+    script->functionTemp[0] += 4;
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
+    }
+    set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
+    if (script->functionTemp[0] == 255) {
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 0);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+// identical to hos_06 func
+// TODO may not be motionBlurFlame
+API_CALLABLE(N(func_802443E0_804C60)) {
+    EffectInstance* effects[3];
+    Matrix4f sp28, sp68;
+    f32 tx;
+    f32 ty;
+    f32 temp_f24;
+    f32 temp_f28;
+    f32 temp_f30;
+    s32 i;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 180;
+        script->functionTempPtr[1] = (EffectInstance*) evt_get_variable(script, ArrayVar(3));
+        script->functionTempPtr[2] = (EffectInstance*) evt_get_variable(script, ArrayVar(4));
+        script->functionTempPtr[3] = (EffectInstance*) evt_get_variable(script, ArrayVar(5));
+    }
+
+    effects[0] = script->functionTempPtr[1];
+    effects[1] = script->functionTempPtr[2];
+    effects[2] = script->functionTempPtr[3];
+    temp_f30 = (sin_deg(script->functionTemp[0]) * 10.0f) + 10.0f;
+    temp_f28 = (sin_deg(script->functionTemp[0]) * 25.0f) + 10.0f;
+    temp_f24 = script->functionTemp[0] * 10;
+
+    for (i = 0; i < ARRAY_COUNT(effects); i++) {
+        guRotateF(sp28, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp68, i * 120, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp68, sp28, sp28);
+        tx = temp_f30 * sin_deg(temp_f24);
+        ty = temp_f28 * cos_deg(temp_f24);
+        guTranslateF(sp68, tx, ty, 0.0f);
+        guMtxCatF(sp68, sp28, sp28);
+        effects[i]->data.motionBlurFlame->pos.x = sp28[3][0];
+        effects[i]->data.motionBlurFlame->pos.y = sp28[3][1];
+        effects[i]->data.motionBlurFlame->pos.z = sp28[3][2];
+    }
+
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] < 16) {
+        for (i = 0; i < ARRAY_COUNT(effects); i++) {
+            effects[i]->data.motionBlurFlame->unk_4C = script->functionTemp[0];
+        }
+    }
+
+    if (script->functionTemp[0] < 0) {
+        for (i = 0; i < ARRAY_COUNT(effects); i++) {
+            remove_effect(effects[i]);
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+
+// identical to hos_06 func
+API_CALLABLE(N(func_802446AC_804F2C)) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+
+    // TODO effect may be wrong
+    effect->data.energyOrbWave->unk_1C++;
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_Merlon_AnimateDiscoBall) = {
     EVT_CALL(EnableModel, MODEL_mirrorball, TRUE)
     EVT_SET(LVar0, 328)
     EVT_SET(LVar1, 0)
@@ -599,7 +528,7 @@ EvtScript N(D_8024E8A0_80F120) = {
     EVT_END
 };
 
-EvtScript N(D_8024EC64_80F4E4) = {
+EvtScript N(EVS_Merlon_ReadFortuneFX) = {
     EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_RaiseArms)
     EVT_CALL(GetModelCenter, MODEL_tama)
     EVT_CALL(PlaySoundAt, SOUND_207, 0, LVar0, LVar1, LVar2)
@@ -607,7 +536,7 @@ EvtScript N(D_8024EC64_80F4E4) = {
     EVT_SET(ArrayVar(1), LVarF)
     EVT_WAIT(30)
     EVT_SET(ArrayVar(6), 0)
-    EVT_EXEC(N(D_8024E8A0_80F120))
+    EVT_EXEC(N(EVS_Merlon_AnimateDiscoBall))
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(N(func_802440FC_80497C))
@@ -703,7 +632,7 @@ EvtScript N(EVS_Merlon_GiveHint) = {
         EVT_MALLOC_ARRAY(20, MV_Unk_0C)
     EVT_END_IF
     EVT_USE_ARRAY(MV_Unk_0C)
-    EVT_EXEC_WAIT(N(D_8024EC64_80F4E4))
+    EVT_EXEC_WAIT(N(EVS_Merlon_ReadFortuneFX))
     EVT_WAIT(20)
     EVT_EXEC(N(EVS_ResetMusicAfterFortune))
     EVT_SWITCH(GB_StoryProgress)
@@ -887,6 +816,77 @@ EvtScript N(EVS_Merlon_GiveHint) = {
     EVT_RETURN
     EVT_END
 };
+
+#include "world/common/util/CheckPositionRelativeToPlane.inc.c"
+
+API_CALLABLE(N(func_802447E0_805060)) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 0;
+    }
+
+    script->functionTemp[1] += 10;
+    if (script->functionTemp[1] > 255) {
+        script->functionTemp[1] = 255;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+
+    if (script->functionTemp[1] == 255) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+API_CALLABLE(N(func_80244848_8050C8)) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 255;
+    }
+
+    script->functionTemp[1] -= 10;
+    if (script->functionTemp[1] <= 0) {
+        script->functionTemp[1] = 0;
+        return ApiStatus_DONE2;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(N(func_802448A0_805120)) {
+    s32 alpha;
+
+    if (isInitialCall) {
+        if (script->varTable[0] == 0) {
+            func_8011B950(script->varTable[15], -1, 1, 1);
+        }
+        script->functionTemp[0] = 0;
+    }
+
+    script->functionTemp[0] += 32;
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
+    }
+
+    if (script->varTable[0] == 0) {
+        alpha = script->functionTemp[0];
+    } else {
+        alpha = 255 - script->functionTemp[0];
+    }
+
+    set_background_color_blend(0, 0, 0, alpha);
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+
+    if (script->functionTemp[0] >= 255) {
+        if (script->varTable[0] == 3) {
+            func_8011B950(script->varTable[15], -1, 0, 1);
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 EvtScript N(EVS_QuickChange_CheckForPound) = {
     EVT_CALL(GetPlayerActionState, LVar0)
