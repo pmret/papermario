@@ -13,9 +13,9 @@
 #include "sprite/npc/Fuzzy.h"
 
 enum {
-	NPC_Oaklie                  = 0,
-	NPC_Fuzzy_01                = 1,
-	NPC_Fuzzy_02                = 2,
+    NPC_Oaklie                  = 0,
+    NPC_Fuzzy_01                = 1,
+    NPC_Fuzzy_02                = 2,
 };
 
 #define NAMESPACE mim_02

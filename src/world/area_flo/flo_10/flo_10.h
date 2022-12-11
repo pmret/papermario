@@ -10,7 +10,7 @@
 #include "mapfs/flo_10_hit.h"
 
 enum {
-	NPC_Lily                    = 0,
+    NPC_Lily                    = 0,
 };
 
 #define NAMESPACE flo_10

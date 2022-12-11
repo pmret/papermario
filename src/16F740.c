@@ -221,7 +221,7 @@ void btl_state_update_normal_start(void) {
 
             ASSERT(size <= 0x8000);
 
-            model = D_80210000;
+            model = D_80210000.root;
             textureRom = get_asset_offset(stage->texture, &size);
             if (model != NULL) {
                 load_data_for_models(model, textureRom, size);
@@ -325,7 +325,7 @@ void btl_state_update_normal_start(void) {
                     battleStatus->controlScriptID = script->id;
                 }
 
-                uiStatus->hidden = 0;
+                uiStatus->hidden = FALSE;
                 gBattleStatus.flags1 |= BS_FLAGS1_1;
 
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
@@ -352,8 +352,8 @@ void btl_state_update_normal_start(void) {
                     actor->unk_208 = 0;
                     if (i == 0) {
                         actor->unk_208 = currentEncounter->unk_10;
-                        if (currentEncounter->dizzyAttackStatus == 4) {
-                            inflict_status_set_duration(actor, 4, 0x24, currentEncounter->dizzyAttackDuration);
+                        if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
+                            inflict_status_set_duration(actor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD, currentEncounter->dizzyAttackDuration);
                         }
                     }
                 }
@@ -368,8 +368,8 @@ void btl_state_update_normal_start(void) {
                         actor->unk_208 = 0;
                         if (i == 0) {
                             actor->unk_208 = 0;
-                            if (currentEncounter->dizzyAttackStatus == 4) {
-                                inflict_status_set_duration(actor, 4, 0x24, currentEncounter->dizzyAttackDuration);
+                            if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
+                                inflict_status_set_duration(actor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD, currentEncounter->dizzyAttackDuration);
                             }
                         }
 
@@ -379,9 +379,9 @@ void btl_state_update_normal_start(void) {
                 load_player_actor();
                 actor = battleStatus->playerActor;
                 if (gBattleStatus.flags2 & 0x40) {
-                    script = start_script(D_80284A30, 0xA, 0);
+                    script = start_script(D_80284A30, EVT_PRIORITY_A, 0);
                 } else {
-                    script = start_script(D_80284A20, 0xA, 0);
+                    script = start_script(D_80284A20, EVT_PRIORITY_A, 0);
                 }
                 actor->takeTurnScript = script;
                 actor->takeTurnID = script->id;

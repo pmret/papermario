@@ -185,7 +185,7 @@ void destroy_popup_menu(void) {
          gPopupMenu->popupType == POPUP_TYPE_USE_KEY
         ) && !gGameStatusPtr->isBattle) {
         if (D_8010D69A == 0) {
-            func_800E98C4();
+            status_menu_respond_to_changes();
         }
         close_status_menu();
     }
@@ -1213,7 +1213,7 @@ void create_popup_menu(PopupMenu* popup) {
     s32 numEntries;
 
     D_8010D69A = func_800E98D4();
-    func_800E9894();
+    status_menu_ignore_changes();
     open_status_menu_short();
     gPopupMenu = popup;
     popup->result = 0;
@@ -1258,7 +1258,7 @@ void create_popup_menu(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F4FC4(PopupMenu* popup) {
@@ -1303,7 +1303,7 @@ void func_800F4FC4(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F513C(PopupMenu* popup) {
@@ -1347,7 +1347,7 @@ void func_800F513C(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 9;
     D_8010D692 = 2;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F52BC(void) {

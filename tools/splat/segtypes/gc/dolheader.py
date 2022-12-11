@@ -1,5 +1,6 @@
-from segtypes.common.header import CommonSegHeader
 from util import options
+
+from segtypes.common.header import CommonSegHeader
 
 
 class DolSegHeader(CommonSegHeader):

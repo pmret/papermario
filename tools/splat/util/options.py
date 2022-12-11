@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Mapping, Optional, Type, TypeVar
+from typing import cast, Dict, List, Literal, Mapping, Optional, Set, Type, TypeVar
 
 from util import compiler
 from util.compiler import Compiler
@@ -24,7 +24,7 @@ class SplatOpts:
     # Determines the compiler used to compile the target binary
     compiler: Compiler
     # Determines the endianness of the target binary
-    endianness: str
+    endianness: Literal["big", "little"]
     # Determines the default section order of the target binary
     # this can be overridden per-segment
     section_order: List[str]
@@ -125,10 +125,14 @@ class SplatOpts:
     asm_inc_header: str
     # Determines the macro used to declare functions in asm files
     asm_function_macro: str
+    # Determines the macro used to declare jumptable labels in asm files
+    asm_jtbl_label_macro: str
     # Determines the macro used to declare data symbols in asm files
     asm_data_macro: str
     # Determines the macro used at the end of a function, such as endlabel or .end
     asm_end_label: str
+    # Determines including the macro.inc file on non-migrated rodata variables
+    include_macro_inc: bool
     # Determines the number of characters to left align before the TODO finish documenting
     mnemonic_ljust: int
     # Determines whether to pad the rom address
@@ -164,7 +168,7 @@ class SplatOpts:
     # Gamecube-specific options
     ################################################################################
     # Path where the iso's filesystem will be extracted to
-    filesystem_path: Path
+    filesystem_path: Optional[Path]
 
     ################################################################################
     # Compiler-specific options
@@ -181,206 +185,210 @@ class SplatOpts:
 opts: SplatOpts
 
 
-def parse_yaml(
-    yaml: Dict,
-    basename: str,
-    config_paths: List[str],
-    modes: List[str],
-    verbose: bool = False,
-) -> SplatOpts:
-    T = TypeVar("T")
+T = TypeVar("T")
 
-    def yaml_as_type(value: object, t: Type[T]) -> T:
-        if isinstance(value, t):
-            return value
-        raise ValueError(f"Expected {t}, got {type(value)}")
 
-    def parse_opt(
-        yaml: Mapping[str, object],
-        opt: str,
-        t: Type[T],
-        default: Optional[T] = None,
-    ) -> T:
-        value = yaml.get(opt)
-        if isinstance(value, t):
-            # Fast path
-            return value
-        if value is None and opt not in yaml:
+class OptParser:
+    _read_opts: Set[str]
+
+    def __init__(self, yaml: Mapping[str, object]) -> None:
+        self._yaml = yaml
+        self._read_opts = set()
+
+    def parse_opt(self, opt: str, t: Type[T], default: Optional[T] = None) -> T:
+        if opt not in self._yaml:
             if default is not None:
                 return default
             raise ValueError(f"Missing required option {opt}")
-        return yaml_as_type(value, t)
-
-    def parse_optional_opt(
-        yaml: Mapping[str, object],
-        opt: str,
-        t: Type[T],
-        default: Optional[T] = None,
-    ) -> Optional[T]:
-        value = yaml.get(opt)
+        self._read_opts.add(opt)
+        value = self._yaml[opt]
         if isinstance(value, t):
-            # Fast path
             return value
-        if value is None and opt not in yaml:
-            return default
-        return yaml_as_type(value, t)
+        if t is float and isinstance(value, int):
+            return cast(T, float(value))
+        raise ValueError(f"Expected {opt} to have type {t}, got {type(value)}")
+
+    def parse_optional_opt(self, opt: str, t: Type[T]) -> Optional[T]:
+        if opt not in self._yaml:
+            return None
+        return self.parse_opt(opt, t)
 
     def parse_opt_within(
-        yaml: Mapping[str, object],
-        opt: str,
-        t: Type[T],
-        within: List[T],
-        default: Optional[T] = None,
+        self, opt: str, t: Type[T], within: List[T], default: Optional[T] = None
     ) -> T:
-        value = parse_opt(yaml, opt, t, default)
+        value = self.parse_opt(opt, t, default)
         if value not in within:
             raise ValueError(f"Invalid value for {opt}: {value}")
         return value
 
     def parse_path(
-        yaml: Mapping[str, object], opt: str, default: Optional[str] = None
+        self, base_path: Path, opt: str, default: Optional[str] = None
     ) -> Path:
-        value = parse_opt(yaml, opt, str, default)
-        return Path(value)
+        return base_path / Path(self.parse_opt(opt, str, default))
 
-    def parse_optional_path(yaml: Mapping[str, object], opt: str, base_path: Path):
-        value = yaml.get(opt)
-        if value is None:
+    def parse_optional_path(self, base_path: Path, opt: str) -> Optional[Path]:
+        if opt not in self._yaml:
             return None
-        if not isinstance(value, str):
-            raise ValueError(f"Expected str, got {type(value)}")
-        return base_path / Path(value)
+        return self.parse_path(base_path, opt)
 
-    def parse_symbol_addrs_paths(yaml: Mapping[str, object]) -> List[Path]:
-        paths = yaml.get("symbol_addrs_path", "symbol_addrs.txt")
+    def check_no_unread_opts(self) -> None:
+        opts = [opt for opt in self._yaml if opt not in self._read_opts]
+        if opts:
+            raise ValueError(f"Unrecognized YAML option(s): {', '.join(opts)}")
+
+
+def _parse_yaml(
+    yaml: Dict,
+    config_paths: List[str],
+    modes: List[str],
+    verbose: bool = False,
+) -> SplatOpts:
+    p = OptParser(yaml)
+
+    def parse_symbol_addrs_paths(base_path: Path) -> List[Path]:
+        paths = p.parse_opt("symbol_addrs_path", object, "symbol_addrs.txt")
 
         if isinstance(paths, str):
             return [base_path / paths]
         elif isinstance(paths, list):
             return [base_path / path for path in paths]
         else:
-            raise ValueError(f"Expected str or list, got {type(paths)}")
+            raise ValueError(
+                f"Expected str or list for 'symbol_addrs_paths', got {type(paths)}"
+            )
 
-    platform = parse_opt_within(yaml, "platform", str, ["n64", "psx", "gc"])
-    comp = compiler.for_name(parse_opt(yaml, "compiler", str, "IDO"))
+    basename = p.parse_opt("basename", str)
+    platform = p.parse_opt_within("platform", str, ["n64", "psx", "gc", "ps2"])
+    comp = compiler.for_name(p.parse_opt("compiler", str, "IDO"))
 
-    base_path = Path(config_paths[0]).parent / parse_opt(yaml, "base_path", str)
-    asm_path: Path = base_path / parse_path(yaml, "asm_path", "asm")
+    base_path = Path(config_paths[0]).parent / p.parse_opt("base_path", str)
+    asm_path: Path = p.parse_path(base_path, "asm_path", "asm")
 
-    return SplatOpts(
-        verbose=verbose,
-        dump_symbols=parse_opt(yaml, "dump_symbols", bool, False),
-        modes=modes,
-        base_path=base_path,
-        target_path=base_path / parse_path(yaml, "target_path"),
-        platform=platform,
-        compiler=comp,
-        endianness=parse_opt(
-            yaml,
+    def parse_endianness() -> Literal["big", "little"]:
+        endianness = p.parse_opt_within(
             "endianness",
             str,
-            "little" if platform.lower() == "psx" else "big",
+            ["big", "little"],
+            "little" if platform in ["psx", "ps2"] else "big",
+        )
+
+        if endianness == "big":
+            return "big"
+        elif endianness == "little":
+            return "little"
+        else:
+            raise ValueError(f"Invalid endianness: {endianness}")
+
+    ret = SplatOpts(
+        verbose=verbose,
+        dump_symbols=p.parse_opt("dump_symbols", bool, False),
+        modes=modes,
+        base_path=base_path,
+        target_path=p.parse_path(base_path, "target_path"),
+        platform=platform,
+        compiler=comp,
+        endianness=parse_endianness(),
+        section_order=p.parse_opt(
+            "section_order", list, [".text", ".data", ".rodata", ".bss"]
         ),
-        section_order=parse_opt(
-            yaml, "section_order", list, [".text", ".data", ".rodata", ".bss"]
+        generated_c_preamble=p.parse_opt(
+            "generated_c_preamble", str, '#include "common.h"'
         ),
-        generated_c_preamble=parse_opt(
-            yaml, "generated_c_preamble", str, '#include "common.h"'
-        ),
-        generated_s_preamble=parse_opt(yaml, "generated_s_preamble", str, ""),
-        use_o_as_suffix=parse_opt(yaml, "o_as_suffix", bool, False),
-        gp=parse_opt(yaml, "gp_value", int, 0),
-        asset_path=base_path / parse_path(yaml, "asset_path", "assets"),
-        symbol_addrs_paths=parse_symbol_addrs_paths(yaml),
-        build_path=base_path / parse_path(yaml, "build_path", "build"),
-        src_path=base_path / parse_path(yaml, "src_path", "src"),
+        generated_s_preamble=p.parse_opt("generated_s_preamble", str, ""),
+        use_o_as_suffix=p.parse_opt("o_as_suffix", bool, False),
+        gp=p.parse_opt("gp_value", int, 0),
+        asset_path=p.parse_path(base_path, "asset_path", "assets"),
+        symbol_addrs_paths=parse_symbol_addrs_paths(base_path),
+        build_path=p.parse_path(base_path, "build_path", "build"),
+        src_path=p.parse_path(base_path, "src_path", "src"),
         asm_path=asm_path,
-        data_path=asm_path / parse_path(yaml, "data_path", "data"),
-        nonmatchings_path=asm_path
-        / parse_path(yaml, "nonmatchings_path", "nonmatchings"),
-        cache_path=base_path / parse_path(yaml, "cache_path", ".splache"),
-        create_undefined_funcs_auto=parse_opt(
-            yaml, "create_undefined_funcs_auto", bool, True
+        data_path=p.parse_path(asm_path, "data_path", "data"),
+        nonmatchings_path=p.parse_path(asm_path, "nonmatchings_path", "nonmatchings"),
+        cache_path=p.parse_path(base_path, "cache_path", ".splache"),
+        create_undefined_funcs_auto=p.parse_opt(
+            "create_undefined_funcs_auto", bool, True
         ),
-        undefined_funcs_auto_path=base_path
-        / parse_path(yaml, "undefined_funcs_auto_path", "undefined_funcs_auto.txt"),
-        create_undefined_syms_auto=parse_opt(
-            yaml, "create_undefined_syms_auto", bool, True
+        undefined_funcs_auto_path=p.parse_path(
+            base_path, "undefined_funcs_auto_path", "undefined_funcs_auto.txt"
         ),
-        undefined_syms_auto_path=base_path
-        / parse_path(yaml, "undefined_syms_auto_path", "undefined_syms_auto.txt"),
-        extensions_path=parse_optional_path(yaml, "extensions_path", base_path),
-        lib_path=base_path / parse_path(yaml, "lib_path", "lib"),
-        elf_section_list_path=parse_optional_path(
-            yaml, "elf_section_list_path", base_path
+        create_undefined_syms_auto=p.parse_opt(
+            "create_undefined_syms_auto", bool, True
         ),
-        subalign=parse_opt(yaml, "subalign", int, 16),
-        auto_all_sections=parse_opt(
-            yaml, "auto_all_sections", list, [".data", ".rodata", ".bss"]
+        undefined_syms_auto_path=p.parse_path(
+            base_path, "undefined_syms_auto_path", "undefined_syms_auto.txt"
         ),
-        ld_script_path=base_path / parse_path(yaml, "ld_script_path", f"{basename}.ld"),
-        ld_symbol_header_path=parse_optional_path(
-            yaml, "ld_symbol_header_path", base_path
+        extensions_path=p.parse_optional_path(base_path, "extensions_path"),
+        lib_path=p.parse_path(base_path, "lib_path", "lib"),
+        elf_section_list_path=p.parse_optional_path(base_path, "elf_section_list_path"),
+        subalign=p.parse_opt("subalign", int, 16),
+        auto_all_sections=p.parse_opt(
+            "auto_all_sections", list, [".data", ".rodata", ".bss"]
         ),
-        ld_discard_section=parse_opt(yaml, "ld_discard_section", bool, True),
-        ld_section_labels=parse_opt(
-            yaml,
+        ld_script_path=p.parse_path(base_path, "ld_script_path", f"{basename}.ld"),
+        ld_symbol_header_path=p.parse_optional_path(base_path, "ld_symbol_header_path"),
+        ld_discard_section=p.parse_opt("ld_discard_section", bool, True),
+        ld_section_labels=p.parse_opt(
             "ld_section_labels",
             list,
             [".text", ".data", ".rodata", ".bss"],
         ),
-        create_c_files=parse_opt(yaml, "create_c_files", bool, True),
-        auto_decompile_empty_functions=parse_opt(
-            yaml, "auto_decompile_empty_functions", bool, True
+        create_c_files=p.parse_opt("create_c_files", bool, True),
+        auto_decompile_empty_functions=p.parse_opt(
+            "auto_decompile_empty_functions", bool, True
         ),
-        do_c_func_detection=parse_opt(yaml, "do_c_func_detection", bool, True),
-        c_newline=parse_opt(yaml, "c_newline", str, comp.c_newline),
-        symbol_name_format=parse_opt(yaml, "symbol_name_format", str, "$VRAM"),
-        symbol_name_format_no_rom=parse_opt(
-            yaml, "symbol_name_format_no_rom", str, "$VRAM_$SEG"
+        do_c_func_detection=p.parse_opt("do_c_func_detection", bool, True),
+        c_newline=p.parse_opt("c_newline", str, comp.c_newline),
+        symbol_name_format=p.parse_opt("symbol_name_format", str, "$VRAM"),
+        symbol_name_format_no_rom=p.parse_opt(
+            "symbol_name_format_no_rom", str, "$VRAM_$SEG"
         ),
-        find_file_boundaries=parse_opt(yaml, "find_file_boundaries", bool, True),
-        migrate_rodata_to_functions=parse_opt(
-            yaml, "migrate_rodata_to_functions", bool, True
+        find_file_boundaries=p.parse_opt("find_file_boundaries", bool, True),
+        migrate_rodata_to_functions=p.parse_opt(
+            "migrate_rodata_to_functions", bool, True
         ),
-        asm_inc_header=parse_opt(yaml, "asm_inc_header", str, comp.asm_inc_header),
-        asm_function_macro=parse_opt(
-            yaml, "asm_function_macro", str, comp.asm_function_macro
+        asm_inc_header=p.parse_opt("asm_inc_header", str, comp.asm_inc_header),
+        asm_function_macro=p.parse_opt(
+            "asm_function_macro", str, comp.asm_function_macro
         ),
-        asm_data_macro=parse_opt(yaml, "asm_data_macro", str, comp.asm_data_macro),
-        asm_end_label=parse_opt(yaml, "asm_end_label", str, comp.asm_end_label),
-        mnemonic_ljust=parse_opt(yaml, "mnemonic_ljust", int, 11),
-        rom_address_padding=parse_opt(yaml, "rom_address_padding", bool, False),
-        mips_abi_gpr=parse_opt_within(
-            yaml,
+        asm_jtbl_label_macro=p.parse_opt(
+            "asm_jtbl_label_macro", str, comp.asm_jtbl_label_macro
+        ),
+        asm_data_macro=p.parse_opt("asm_data_macro", str, comp.asm_data_macro),
+        asm_end_label=p.parse_opt("asm_end_label", str, comp.asm_end_label),
+        include_macro_inc=p.parse_opt(
+            "include_macro_inc", bool, comp.include_macro_inc
+        ),
+        mnemonic_ljust=p.parse_opt("mnemonic_ljust", int, 11),
+        rom_address_padding=p.parse_opt("rom_address_padding", bool, False),
+        mips_abi_gpr=p.parse_opt_within(
             "mips_abi_gpr",
             str,
             ["numeric", "o32", "n32", "n64"],
             "o32",
         ),
-        mips_abi_float_regs=parse_opt_within(
-            yaml,
+        mips_abi_float_regs=p.parse_opt_within(
             "mips_abi_float_regs",
             str,
             ["numeric", "o32", "n32", "n64"],
             "numeric",
         ),
-        add_set_gp_64=parse_opt(yaml, "add_set_gp_64", bool, True),
-        create_asm_dependencies=parse_opt(yaml, "create_asm_dependencies", bool, False),
-        string_encoding=parse_optional_opt(yaml, "string_encoding", str, None),
-        header_encoding=parse_opt(yaml, "header_encoding", str, "ASCII"),
-        gfx_ucode=parse_opt_within(
-            yaml,
+        add_set_gp_64=p.parse_opt("add_set_gp_64", bool, True),
+        create_asm_dependencies=p.parse_opt("create_asm_dependencies", bool, False),
+        string_encoding=p.parse_optional_opt("string_encoding", str),
+        header_encoding=p.parse_opt("header_encoding", str, "ASCII"),
+        gfx_ucode=p.parse_opt_within(
             "gfx_ucode",
             str,
             ["f3d", "f3db", "f3dex", "f3dexb", "f3dex2"],
             "f3dex2",
         ),
-        libultra_symbols=parse_opt(yaml, "libultra_symbols", bool, False),
-        hardware_regs=parse_opt(yaml, "hardware_regs", bool, False),
-        use_legacy_include_asm=parse_opt(yaml, "use_legacy_include_asm", bool, True),
-        filesystem_path=parse_optional_path(yaml, "filesystem_path", base_path),
+        libultra_symbols=p.parse_opt("libultra_symbols", bool, False),
+        hardware_regs=p.parse_opt("hardware_regs", bool, False),
+        use_legacy_include_asm=p.parse_opt("use_legacy_include_asm", bool, True),
+        filesystem_path=p.parse_optional_path(base_path, "filesystem_path"),
     )
+    p.check_no_unread_opts()
+    return ret
 
 
 def initialize(
@@ -394,6 +402,4 @@ def initialize(
     if not modes:
         modes = ["all"]
 
-    opts = parse_yaml(
-        config["options"], config["options"]["basename"], config_paths, modes, verbose
-    )
+    opts = _parse_yaml(config["options"], config_paths, modes, verbose)

@@ -221,28 +221,25 @@ s32 world_goombario_can_pause(Npc* goombario) {
     return TRUE;
 }
 
-// get message for tattle routine
-#ifdef NON_MATCHING
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* goombario = script->owner2.npc;
     s32 msgID;
-    s32 entityType;
-    s32 triggerSomething;
+    s32 temp; // TODO required to match (this temp needs to be used in two places for different things)
     s32 v1;
-    s32 i;
     s32 v0;
+    s32 i;
 
     if (isInitialCall) {
         func_802BD564_317484(goombario);
         D_802BDF64 = 0;
         D_802BDF30 = 0;
         D_802BDF34 = 0;
-        if (playerStatus->animFlags & 0x20) {
+        if (playerStatus->animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) {
             D_802BDF30 = 1;
             D_802BDF38 = D_802B79A8_E21858->unk_00;
         }
-        if (playerStatus->animFlags & 0x10) {
+        if (playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) {
             D_802BDF34 = 1;
         }
         script->functionTemp[0] = 40;
@@ -250,7 +247,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (!(goombario->flags & 0x1000) || playerStatus->inputEnabledCounter != 0) {
+            if (!(goombario->flags & NPC_FLAG_1000) || playerStatus->inputEnabledCounter != 0) {
                 script->varTable[0] = -1;
                 return ApiStatus_DONE2;
             }
@@ -275,7 +272,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
             break;
         case 0:
             set_time_freeze_mode(1);
-            playerStatus->flags &= ~0x2000000;
+            playerStatus->flags &= ~PS_FLAGS_HAS_CONVERSATION_NPC;
             goombario->currentAnim = 0x010001;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerActionStatus.partnerActionState = 1;
@@ -289,58 +286,58 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
             /* fallthrough */
         case 1:
             if (GoombarioGetTattleID >= 0 && (GoombarioGetTattleID & 0x4000)) {
-                entityType = get_entity_type(GoombarioGetTattleID);
+                temp = get_entity_type(GoombarioGetTattleID);
                 msgID = -1;
                 do {} while (0);
                 for (i = 0; EntityTattles[2 * i] != -1; i++) {
-                    if (EntityTattles[2 * i] != entityType) {
+                    if (EntityTattles[2 * i] != temp) {
                         continue;
                     }
-                    switch (entityType) {
+                    switch (temp) {
                         case 22:
                         case 25:
                             if (gPlayerData.hammerLevel >= 1) {
-                                msgID = 0x1B0002;
+                                msgID = MSG_EntityTattle_HammerBlock2_CanBreak;
                             }
                             break;
                         case 23:
                         case 26:
                             if (gPlayerData.hammerLevel >= 2) {
-                                msgID = 0x1B0004;
+                                msgID = MSG_EntityTattle_HammerBlock3_CanBreak;
                             }
                             break;
                         case 36:
                             if (gPlayerData.bootsLevel == 1) {
-                                msgID = 0x1B0018;
+                                msgID = MSG_EntityTattle_WoodenCrate_SpinJump;
                             } else if (gPlayerData.bootsLevel == 2) {
-                                msgID = 0x1B0019;
+                                msgID = MSG_EntityTattle_WoodenCrate_TornadoJump;
                             }
                             break;
                         case 37:
                             if (gPlayerData.bootsLevel == 1) {
-                                msgID = 0x1B001B;
+                                msgID = MSG_EntityTattle_BoardedFloor_SpinJump;
                             } else if (gPlayerData.bootsLevel == 2) {
-                                msgID = 0x1B001C;
+                                msgID = MSG_EntityTattle_BoardedFloor_TornadoJump;
                             }
                             break;
                         case 9:
                             if (gPlayerData.bootsLevel >= 2) {
-                                msgID = 0x1B000D;
+                                msgID = MSG_EntityTattle_BigSwitch_TornadoJump;
                             }
                             break;
                         case 10:
                             if (gPlayerData.bootsLevel >= 2) {
-                                msgID = 0x1B000F;
+                                msgID = MSG_EntityTattle_FloorSwitch_TornadoJump;
                             }
                             break;
                         case 49:
                             if (gPlayerData.bootsLevel >= 2) {
-                                msgID = 0x1B001E;
+                                msgID = MSG_EntityTattle_JackInTheBox_TornadoJump;
                             }
                             break;
                         case 50:
                             if (get_entity_by_index(GoombarioGetTattleID & 0x3FFF)->dataBuf.chest->itemID == -1) {
-                                msgID = 0x1B0016;
+                                msgID = MSG_EntityTattle_EmptyChest;
                             }
                             break;
                     }
@@ -359,7 +356,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                 v0 = get_enemy(D_802BDF38->npcID)->tattleMsg;
                 if (v0 != 0) {
                     msgID = v0;
-                    if (msgID < -270000000) {
+                    if (msgID < EVT_LIMIT) {
                         script->varTable[0] = ((s32(*)(void))msgID)();
                     } else {
                         script->varTable[0] = msgID;
@@ -370,21 +367,22 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
             }
 
             if (D_802BDF34 != 0) {
-                script->varTable[0] = 0x1B0025;
+                script->varTable[0] = MSG_EntityTattle_25;
                 script->varTable[1] = 0;
                 return ApiStatus_DONE2;
             }
 
+            temp = 0;
             if (GoombarioGetTattleID >= 0) {
-                v1 = func_802BD100_317020(GoombarioGetTattleID);
+                temp = func_802BD100_317020(GoombarioGetTattleID);
             } else {
-                v1 = 0;
+                temp = 0;
             }
 
-            if (v1 == 0) {
+            if (temp == 0) {
                 msgID = get_current_map_settings()->tattle.msgID;
                 if (msgID != 0) {
-                    if (msgID < -270000000) {
+                    if (msgID < EVT_LIMIT) {
                         script->varTable[0] = ((s32(*)(void))msgID)();
                     } else {
                         script->varTable[0] = msgID;
@@ -392,7 +390,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                     }
                 }
             } else {
-                script->varTable[0] = v1;
+                script->varTable[0] = temp;
                 script->varTable[1] = 1;
             }
             return ApiStatus_DONE2;
@@ -402,7 +400,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
         case 10:
             msgID = get_current_map_settings()->tattle.msgID;
             if (msgID != 0) {
-                if (msgID < -270000000) {
+                if (msgID < EVT_LIMIT) {
                     script->varTable[0] = ((s32(*)(void))msgID)();
                 } else {
                     script->varTable[0] = msgID;
@@ -422,10 +420,6 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;

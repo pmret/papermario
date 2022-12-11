@@ -1218,7 +1218,7 @@ ApiStatus evt_handle_end_child_thread(Evt* script) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802C6E14(Evt* script) {
+ApiStatus evt_handle_debug_log(Evt* script) {
     return ApiStatus_DONE2;
 }
 
@@ -1635,10 +1635,10 @@ s32 evt_execute_next_command(Evt* script) {
             case EVT_OP_END_CHILD_THREAD:
                 status = evt_handle_end_child_thread(script);
                 break;
-            case EVT_OP_90:
-                status = func_802C6E14(script);
+            case EVT_OP_DEBUG_LOG:
+                status = evt_handle_debug_log(script);
                 break;
-            case EVT_OP_DEBUG_PRINT:
+            case EVT_OP_DEBUG_PRINT_VAR:
                 status = evt_handle_print_debug_var(script);
                 break;
             case EVT_OP_92:

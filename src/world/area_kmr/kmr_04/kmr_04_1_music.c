@@ -12,7 +12,7 @@ EvtScript N(EVS_SetJrTroopaMusic) = {
     EVT_END
 };
 
-EvtScript N(EVS_PushPopMusic) = {
+EvtScript N(EVS_PlayUpgradeSong) = {
     EVT_CALL(PushSong, SONG_ITEM_UPGRADE, 0)
     EVT_WAIT(130)
     EVT_CALL(PopSong)

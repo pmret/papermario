@@ -864,6 +864,7 @@ enum SoundIDs {
     SOUND_BOW_SPOOK                 = 0x00000291,
     SOUND_292                       = 0x00000292,
     SOUND_293                       = 0x00000293,
+    SOUND_294                       = 0x00000294,
     SOUND_295                       = 0x00000295,
     SOUND_297                       = 0x00000297,
     SOUND_298                       = 0x00000298,
@@ -1128,6 +1129,7 @@ enum SoundIDs {
     SOUND_62B                       = 0x0000062B,
     SOUND_648                       = 0x00000648,
     SOUND_649                       = 0x00000649,
+    SOUND_694                       = 0x00000694,
     SOUND_6A2                       = 0x000006A2,
     SOUND_749                       = 0x00000749,
     SOUND_759                       = 0x00000759,
@@ -1150,6 +1152,9 @@ enum SoundIDs {
     SOUND_2010                      = 0x00002010,
     SOUND_WATT_REPEL_DARKNESS       = 0x00002011,
     SOUND_WATT_RESUME_DARKNESS      = 0x00002012,
+    SOUND_2013                      = 0x00002013,
+    SOUND_2014                      = 0x00002014,
+    SOUND_2015                      = 0x00002015,
     SOUND_CANNON1                   = 0x00002016,
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
@@ -3315,39 +3320,61 @@ enum PlayerStatusFlags {
     PS_FLAGS_JUMPING                          = 0x00000002,
     PS_FLAGS_FALLING                          = 0x00000004,
     PS_FLAGS_FLYING                           = 0x00000008,
-    PS_FLAGS_10                               = 0x00000010,
-    PS_FLAGS_20                               = 0x00000020,
-    PS_FLAGS_40                               = 0x00000040,
-    PS_FLAGS_80                               = 0x00000080,
-    PS_FLAGS_100                              = 0x00000100,
-    PS_FLAGS_200                              = 0x00000200,
-    PS_FLAGS_400                              = 0x00000400,
-    PS_FLAGS_800                              = 0x00000800,
-    PS_FLAGS_1000                             = 0x00001000,
+    PS_FLAGS_SLIDING                          = 0x00000010,
+    /* Paused either via the start menu, or through another menu that causes a pause (like the item menu) */
+    PS_FLAGS_PAUSED                           = 0x00000020,
+    PS_FLAGS_NO_CHANGE_PARTNER                = 0x00000040,
+    PS_FLAGS_NO_PARTNER_USAGE                 = 0x00000080,
+    /* Prevents opening menus that would require a game-time pause (start menu, item menu, etc) */
+    PS_FLAGS_PAUSE_DISABLED                   = 0x00000100,
+    /* Doing either a spin jump or a tornado jump */
+    PS_FLAGS_SPECIAL_JUMP                     = 0x00000200,
+    /* Landing from either a spin jump or a tornado jump */
+    PS_FLAGS_SPECIAL_LAND                     = 0x00000400,
+    /* Burning from touching a fire hazard of some kind */
+    PS_FLAGS_HIT_FIRE                         = 0x00000800,
+    PS_FLAGS_NO_STATIC_COLLISION              = 0x00001000,
     PS_FLAGS_INPUT_DISABLED                   = 0x00002000,
-    PS_FLAGS_4000                             = 0x00004000,
-    PS_FLAGS_8000                             = 0x00008000,
-    PS_FLAGS_20000                            = 0x00020000, // spinning?
-    PS_FLAGS_40000                            = 0x00040000, // physics and animations run at half speed
-    PS_FLAGS_80000                            = 0x00080000,
-    PS_FLAGS_100000                           = 0x00100000,
-    PS_FLAGS_200000                           = 0x00200000, // using hammer?
-    PS_FLAGS_400000                           = 0x00400000, // taking quiz?
-    PS_FLAGS_800000                           = 0x00800000,
-    PS_FLAGS_1000000                          = 0x01000000,
+    /* Indicates that Mario's lateral movement is currently commandeered by a cutscene or script */
+    PS_FLAGS_CUTSCENE_MOVEMENT                = 0x00004000,
+    /* Either outta sight with Bow, or temporarily damage boosted - makes Mario ignore fire bars */
+    PS_FLAGS_HAZARD_INVINCIBILITY             = 0x00008000,
+    /* Spinning either through pressing Z or the tornado jump - causes a ghost trail to render */
+    PS_FLAGS_SPINNING                         = 0x00020000,
+    /* Slows Mario's physics and animations to half speed - responsible for the dramatic slowdown when starting an encounter by jumping on an enemy.
+       Also stops Mario from successfully completing a hammer. */
+    PS_FLAGS_ENTERING_BATTLE                  = 0x00040000,
+    /* Occurs after hitting a heart block - temporarily prevents encounters from starting */
+    PS_FLAGS_ARMS_RAISED                      = 0x00080000,
+    /* Stops Mario's sprite yaw from being adjusted, usually so a cutscene can do it instead. */
+    PS_FLAGS_ROTATION_LOCKED                  = 0x00100000,
+    /* Forces Mario's sprite to either face exactly left or right, without transitioning. */
+    PS_FLAGS_NO_FLIPPING                      = 0x00200000,
+    /* Prevents Mario from moving laterally */
+    PS_FLAGS_MOVEMENT_LOCKED                  = 0x00400000,
+    /* Stops Mario from air steering or using a special jump during a scripted fall */
+    PS_FLAGS_SCRIPTED_FALL                    = 0x00800000,
+    /* Not fully sure about this one, but appears to mark the frame that the check for what to hammer occurs */
+    PS_FLAGS_HAMMER_CHECK                     = 0x01000000,
     PS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
-    PS_FLAGS_8000000                          = 0x08000000,
-    PS_FLAGS_10000000                         = 0x10000000,
-    PS_FLAGS_20000000                         = 0x20000000, // done hammer?
-    PS_FLAGS_40000000                         = 0x40000000,
+    /* Mario just interacted with something (usually cleared on the same frame) */
+    PS_FLAGS_INTERACTED                       = 0x08000000,
+    /* Makes Mario face forwards, used when talking to NPCs, or when on Lakilester */
+    PS_FLAGS_FACE_FORWARDS                    = 0x10000000,
+    /* Freezes physics and animations - is usually reset at the start of a frame so often does nothing */
+    PS_FLAGS_TIME_STOPPED                     = 0x20000000,
+    /* Indicates that Mario needs his sprite redrawn */
+    PS_FLAGS_SPRITE_REDRAW                    = 0x40000000,
     PS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
 
 /// @see PlayerStatus::animFlags
 enum PlayerStatusAnimFlags {
-    PA_FLAGS_HOLDING_WATT                     = 0x00000001,
-    PA_FLAGS_2                                = 0x00000002,
+    /* Whether Mario is in the process of using Watt (but isn't necessarily holding them yet) */
+    PA_FLAGS_USING_WATT                       = 0x00000001,
+    /* Whether Watt is actually in Mario's hands at the moment */
+    PA_FLAGS_WATT_IN_HANDS                    = 0x00000002,
     PA_FLAGS_INTERRUPT_USE_PARTNER            = 0x00000004, ///< forces actions with bow, parakarry, watt, and lakilester to end (sushie not tested)
     PA_FLAGS_FORCE_USE_PARTNER                = 0x00000008, ///< triggers partner use when set
     PA_FLAGS_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
@@ -3357,26 +3384,35 @@ enum PlayerStatusAnimFlags {
     PA_FLAGS_100                              = 0x00000100,
     PA_FLAGS_RAISED_ARMS                      = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
     PA_FLAGS_SHIVERING                        = 0x00000400,
-    PA_FLAGS_800                              = 0x00000800,
+    PA_FLAGS_OPENED_HIDDEN_PANEL              = 0x00000800,
     PA_FLAGS_USING_PEACH_PHYSICS              = 0x00001000,
-    PA_FLAGS_IN_DISGUISE                      = 0x00002000,
+    PA_FLAGS_INVISIBLE                      = 0x00002000,
     PA_FLAGS_8BIT_MARIO                       = 0x00004000,
-    PA_FLAGS_8000                             = 0x00008000,
+    PA_FLAGS_NPC_COLLIDED                     = 0x00008000,
     PA_FLAGS_SPINNING                         = 0x00010000,
-    PA_FLAGS_20000                            = 0x00020000,
-    PA_FLAGS_40000                            = 0x00040000,
+    /* Began an encounter by spinning into an enemy with the Dizzy Attack badge on */
+    PA_FLAGS_DIZZY_ATTACK_ENCOUNTER           = 0x00020000,
+    PA_FLAGS_INTERRUPT_SPIN                   = 0x00040000,
     PA_FLAGS_80000                            = 0x00080000,
-    PA_FLAGS_100000                           = 0x00100000, ///< set when using pipes
-    PA_FLAGS_200000                           = 0x00200000,
-    PA_FLAGS_400000                           = 0x00400000,
-    PA_FLAGS_800000                           = 0x00800000,
-    PA_FLAGS_1000000                          = 0x01000000,
+    /* When Mario is in a transition to a new map, either through a loading zone or pipe */
+    PA_FLAGS_CHANGING_MAP                     = 0x00100000,
+    /* Occurs after PA_FLAGS_FORCE_USE_PARTNER. Some partners - namely Bow and Lakilester, unset this immediately.
+       Not sure why - seems like it might contribute to being unable to *stop* using your partner during a cutscene. */
+    PA_FLAGS_PARTNER_USAGE_FORCED             = 0x00200000,
+    PA_FLAGS_RIDING_PARTNER                   = 0x00400000,
+    PA_FLAGS_PUSHED_ALBINO_DINO               = 0x00800000,
+    /* Changes how Mario is rendered. Seems to be intended to make Mario's depth render properly when using Bow behind a switch (two translucent objects on top of eachother), but it doesn't actually work. */
+    PA_FLAGS_MAP_HAS_SWITCH                   = 0x01000000,
     PA_FLAGS_2000000                          = 0x02000000,
     PA_FLAGS_4000000                          = 0x04000000,
     PA_FLAGS_8000000                          = 0x08000000,
-    PA_FLAGS_10000000                         = 0x10000000,
-    PA_FLAGS_20000000                         = 0x20000000,
-    PA_FLAGS_40000000                         = 0x40000000,
+    /* Usually, if Mario falls for too long, he eventually gets reset to his last safe position. This prevents that. Used by some scripts. */
+    PA_FLAGS_NO_OOB_RESPAWN                   = 0x10000000,
+    /* This allows dismounting from Lakilester, even if in a precarious situation (like over spikes, lava, or water). */
+    PA_FLAGS_DISMOUNTING_ALLOWED              = 0x20000000,
+    /* This flag is set when partner usage was interrupted by a script, and it prevents menu sounds (like the error sound) from playing for script-initiated player actions */
+    PA_FLAGS_PARTNER_USAGE_STOPPED            = 0x40000000,
+    /* This one's really weird. Seems to have something to do with the direction Mario is facing, but I'm not sure what it's actually supposed to be achieving. */
     PA_FLAGS_80000000                         = 0x80000000,
 };
 
@@ -4406,37 +4442,11 @@ enum ProjectileHitboxAttackStates {
 
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,
-    MUSIC_SETTINGS_FLAGS_2                 = 0x00000002,
+    MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX   = 0x00000002,
     MUSIC_SETTINGS_FLAGS_4                 = 0x00000004,
     MUSIC_SETTINGS_FLAGS_8                 = 0x00000008,
     MUSIC_SETTINGS_FLAGS_10                = 0x00000010,
     MUSIC_SETTINGS_FLAGS_20                = 0x00000020,
-    MUSIC_SETTINGS_FLAGS_40                = 0x00000040,
-    MUSIC_SETTINGS_FLAGS_80                = 0x00000080,
-    MUSIC_SETTINGS_FLAGS_100               = 0x00000100,
-    MUSIC_SETTINGS_FLAGS_200               = 0x00000200,
-    MUSIC_SETTINGS_FLAGS_400               = 0x00000400,
-    MUSIC_SETTINGS_FLAGS_800               = 0x00000800,
-    MUSIC_SETTINGS_FLAGS_1000              = 0x00001000,
-    MUSIC_SETTINGS_FLAGS_2000              = 0x00002000,
-    MUSIC_SETTINGS_FLAGS_4000              = 0x00004000,
-    MUSIC_SETTINGS_FLAGS_8000              = 0x00008000,
-    MUSIC_SETTINGS_FLAGS_10000             = 0x00010000,
-    MUSIC_SETTINGS_FLAGS_20000             = 0x00020000,
-    MUSIC_SETTINGS_FLAGS_40000             = 0x00040000,
-    MUSIC_SETTINGS_FLAGS_80000             = 0x00080000,
-    MUSIC_SETTINGS_FLAGS_100000            = 0x00100000,
-    MUSIC_SETTINGS_FLAGS_200000            = 0x00200000,
-    MUSIC_SETTINGS_FLAGS_400000            = 0x00400000,
-    MUSIC_SETTINGS_FLAGS_800000            = 0x00800000,
-    MUSIC_SETTINGS_FLAGS_1000000           = 0x01000000,
-    MUSIC_SETTINGS_FLAGS_2000000           = 0x02000000,
-    MUSIC_SETTINGS_FLAGS_4000000           = 0x04000000,
-    MUSIC_SETTINGS_FLAGS_8000000           = 0x08000000,
-    MUSIC_SETTINGS_FLAGS_10000000          = 0x10000000,
-    MUSIC_SETTINGS_FLAGS_20000000          = 0x20000000,
-    MUSIC_SETTINGS_FLAGS_40000000          = 0x40000000,
-    MUSIC_SETTINGS_FLAGS_80000000          = 0x80000000,
 };
 
 // the lower byte of Collider::flags

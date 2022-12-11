@@ -12,8 +12,8 @@
 #include "sprite/npc/SmallPiranha.h"
 
 enum {
-	NPC_PiranhaPlant			= 1,
-	NPC_PiranhaPlant_Hitbox		= 2,
+    NPC_PiranhaPlant            = 1,
+    NPC_PiranhaPlant_Hitbox     = 2,
 };
 
 #define NAMESPACE mim_01

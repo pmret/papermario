@@ -313,7 +313,7 @@ dlabel D_800A0921
 dlabel D_800A0922
 .space 2
 
-dlabel D_800A0924
+dlabel SavedReverbMode
 .space 4
 
 dlabel D_800A0928
@@ -625,10 +625,10 @@ dlabel gCollisionDataZoneBackup
 dlabel D_800A426C
 .space 4
 
-dlabel D_800A4270
+dlabel IdleThread
 .space 0x000001b0
 
-dlabel D_800A4420
+dlabel MainThread
 .space 0x000021b0
 
 dlabel nuScStack

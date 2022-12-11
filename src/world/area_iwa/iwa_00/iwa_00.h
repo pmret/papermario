@@ -10,12 +10,12 @@
 #include "mapfs/iwa_00_hit.h"
 
 enum {
-	NPC_MontyMole_01            = 0,
-	NPC_MontyMole_01_Hole       = 1,
-	NPC_MontyMole_02            = 2,
-	NPC_MontyMole_02_Hole       = 3,
-	NPC_Whacka_01               = 4,
-	NPC_Whacka_02               = 5,
+    NPC_MontyMole_01            = 0,
+    NPC_MontyMole_01_Hole       = 1,
+    NPC_MontyMole_02            = 2,
+    NPC_MontyMole_02_Hole       = 3,
+    NPC_Whacka_01               = 4,
+    NPC_Whacka_02               = 5,
 };
 
 #define NAMESPACE iwa_00

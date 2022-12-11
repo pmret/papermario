@@ -7,9 +7,10 @@ Originally written by Mark Street (https://github.com/mkst)
 
 import struct
 from pathlib import Path
-from util.log import error
 
 from util import options
+from util.log import error
+
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
 
@@ -45,6 +46,9 @@ class N64SegVtx(CommonSegCodeSubsegment):
         self.file_text = self.disassemble_data(rom_bytes)
 
     def disassemble_data(self, rom_bytes):
+        assert isinstance(self.rom_start, int)
+        assert isinstance(self.rom_end, int)
+
         vertex_data = rom_bytes[self.rom_start : self.rom_end]
         segment_length = len(vertex_data)
         if (segment_length) % 16 != 0:

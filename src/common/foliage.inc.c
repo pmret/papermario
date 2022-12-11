@@ -177,3 +177,9 @@ EvtScript N(shakeTree) = {
     EVT_RETURN
     EVT_END
 };
+
+#define FOLIAGE_MODEL_LIST(names...) \
+{ \
+    .count = __NARG__(names), \
+    .models = {  names } \
+}

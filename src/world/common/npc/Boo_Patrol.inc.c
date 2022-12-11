@@ -1,4 +1,3 @@
-#include "common.h"
 #include "Boo.h"
 
 #include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"

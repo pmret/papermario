@@ -12,12 +12,12 @@
 #include "sprite/npc/TuffPuff.h"
 
 enum {
-	NPC_TuffPuff_01		= 0,
-	NPC_TuffPuff_02		= 1,
+    NPC_TuffPuff_01     = 0,
+    NPC_TuffPuff_02     = 1,
 };
 
 enum {
-	MV_SuperBlock		= MapVar(0),
+    MV_SuperBlock       = MapVar(0),
 };
 
 #define NAMESPACE flo_16

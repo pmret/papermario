@@ -308,7 +308,7 @@ void state_step_exit_language_select(void) {
 
                     calculate_model_sizes();
                     npc_reload_all();
-                    func_800E98C4();
+                    status_menu_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                 }
                 set_windows_visible(WINDOW_GROUP_ALL);

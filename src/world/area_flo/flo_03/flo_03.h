@@ -14,12 +14,12 @@
 #include "sprite/npc/Dayzee.h"
 
 enum {
-	NPC_Petunia                 = 0,
-	NPC_Dayzee                  = 1,
-	NPC_MontyMole_01            = 2,
-	NPC_MontyMole_02            = 3,
-	NPC_MontyMole_03            = 4,
-	NPC_MontyMole_04            = 5,
+    NPC_Petunia                 = 0,
+    NPC_Dayzee                  = 1,
+    NPC_MontyMole_01            = 2,
+    NPC_MontyMole_02            = 3,
+    NPC_MontyMole_03            = 4,
+    NPC_MontyMole_04            = 5,
 };
 
 enum {

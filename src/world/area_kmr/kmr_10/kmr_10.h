@@ -12,7 +12,7 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Dummy   = 0, // for controlling the spring as it falls from the tree
+    NPC_Dummy   = 0, // for controlling the spring as it falls from the tree
 };
 
 enum {

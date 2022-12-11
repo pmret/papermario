@@ -1,10 +1,7 @@
 import os
 from pathlib import Path
 from segtypes.n64.segment import N64Segment
-from segtypes.n64.ia8 import N64SegIa8
-from segtypes.n64.rgba32 import N64SegRgba32
-from segtypes.n64.ci4 import N64SegCi4
-from util.n64 import Yay0decompress
+from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
@@ -100,7 +97,7 @@ class N64SegPm_map_data(N64Segment):
             bytes = rom_bytes[bytes_start : bytes_start + size]
 
             if is_compressed:
-                bytes = Yay0decompress.decompress_yay0(bytes)
+                bytes = Yay0Decompressor.decompress_python(bytes)
 
             if name.startswith("party_"):
                 with open(path, "wb") as f:

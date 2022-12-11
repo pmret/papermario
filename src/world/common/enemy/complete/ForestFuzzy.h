@@ -16,20 +16,20 @@
 
 #define FOREST_FUZZY_ANIMS \
 { \
-    .idle   = ANIM_Fuzzy_Forest_Anim02, \
-    .walk   = ANIM_Fuzzy_Forest_Anim02, \
-    .run    = ANIM_Fuzzy_Forest_Anim03, \
-    .chase  = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_4 = ANIM_Fuzzy_Forest_Anim01, \
-    .anim_5 = ANIM_Fuzzy_Forest_Anim01, \
-    .death  = ANIM_Fuzzy_Forest_Anim08, \
-    .hit    = ANIM_Fuzzy_Forest_Anim08, \
-    .anim_8 = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_9 = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_A = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_B = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_C = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_D = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_E = ANIM_Fuzzy_Forest_Anim03, \
-    .anim_F = ANIM_Fuzzy_Forest_Anim03, \
+    .idle   = ANIM_Fuzzy_Forest_Walk, \
+    .walk   = ANIM_Fuzzy_Forest_Walk, \
+    .run    = ANIM_Fuzzy_Forest_Run, \
+    .chase  = ANIM_Fuzzy_Forest_Run, \
+    .anim_4 = ANIM_Fuzzy_Forest_Idle, \
+    .anim_5 = ANIM_Fuzzy_Forest_Idle, \
+    .death  = ANIM_Fuzzy_Forest_Hurt, \
+    .hit    = ANIM_Fuzzy_Forest_Hurt, \
+    .anim_8 = ANIM_Fuzzy_Forest_Run, \
+    .anim_9 = ANIM_Fuzzy_Forest_Run, \
+    .anim_A = ANIM_Fuzzy_Forest_Run, \
+    .anim_B = ANIM_Fuzzy_Forest_Run, \
+    .anim_C = ANIM_Fuzzy_Forest_Run, \
+    .anim_D = ANIM_Fuzzy_Forest_Run, \
+    .anim_E = ANIM_Fuzzy_Forest_Run, \
+    .anim_F = ANIM_Fuzzy_Forest_Run, \
 }

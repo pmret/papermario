@@ -6,6 +6,10 @@ void fx_65_update(EffectInstance* effect);
 void fx_65_render(EffectInstance* effect);
 void fx_65_appendGfx(void* effect);
 
+extern Gfx D_09000400_3D15E0[];
+
+Gfx* D_E00CACB0[] = { D_09000400_3D15E0, D_09000400_3D15E0, D_09000400_3D15E0, D_09000400_3D15E0 };
+
 EffectInstance* fx_65_main(
     s32 arg0,
     f32 arg1,

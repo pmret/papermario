@@ -2174,48 +2174,48 @@ KoopaTroopa:
     - Default
     - FrostTroopa
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
+    - Step1
+    - Step2
+    - Step3
+    - Idle1
+    - Idle2
+    - Salute
+    - HurtStill
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - ToppleStruggle1
+    - ToppleStruggle2
+    - ShellSpin1
+    - ShellSpin2
+    - ShellSpin3
+    - ShellSpin4
+    - ShellSpin5
+    - ShellSpin6
+    - BurnHurt1
+    - BurnHurt2
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - Panic1
+    - Panic2
+    - Panic3
+    - BeginPanic1
+    - BeginPanic2
+    - ToppleSleep1
+    - ToppleSleep2
+    - ToppleSleep3
+    - ToppleStill
+    - Scramble1
+    - Scramble2
+    - Scramble3
+    - ToppleStunned1
+    - ToppleStunned2
+    - ToppleStunned3
+    - ToppleStunned4
   palettes:
     - Dark
     - Default
@@ -2231,72 +2231,72 @@ KoopaTroopa:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
+    - Still
+    - Idle
+    - Scramble
+    - Walk
+    - Run
+    - ShellStill
+    - ShellSpin
+    - ShellEnter
+    - ShellExit
+    - Salute
+    - HurtStill
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Floating
+    - ToppleStruggle
+    - ToppleStill
+    - Sleep
+    - ToppleSleep
+    - Stunned
+    - ToppleStunned
+    - BeginPanic1
+    - BeginPanic2
+    - Panic
 ParaTroopa:
   variations:
     - DarkTroopa
     - Default
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - LWingFlap1
+    - RWingFlap1
+    - LWingFlap2
+    - RWingFlap2
+    - LWingFlap3
+    - RWingFlap3
+    - LWingFlap4
+    - RWingFlap4
+    - WingsRecoil1
+    - WingsRecoil2
+    - WingsWindup1
+    - WingsWindup2
+    - WingStill
+    - Shell
+    - IdleLegsDown
+    - IdleLegsUp
+    - Recoil
+    - Windup
+    - BurnStill
+    - HurtStill
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - Sleep
+    - Stun1
+    - Stun2
+    - Stun3
+    - Stun4
+    - EnterShell1
+    - EnterShell2
+    - EnterShell3
+    - LWingDive1
+    - RWingDive2
+    - LWingDive2
+    - WingsBurn1
+    - WingsBurn2
   palettes:
     - Dark
     - Default
@@ -2308,26 +2308,26 @@ ParaTroopa:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Windup
+    - Recoil
+    - HurtStill
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - ShellIdle
+    - ShellEnter
+    - ShellDive
+    - ShellHit
+    - ShellExit
+    - WingsStill
+    - WingsBurn
+    - UnusedIdle
+    - Sleep
+    - Stunned
 Fuzzy:
   variations:
     - Default
@@ -2335,21 +2335,21 @@ Fuzzy:
     - BlueFuzzy
     - JungleFuzzy
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
+    - Neutral
+    - Step1
+    - Step2
     - Raster03
     - Raster04
     - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Hurt1
+    - Hurt2
+    - Stunned1
+    - Stunned2
+    - Stunned3
+    - Stunned4
     - Raster0C
-    - Raster0D
-    - Raster0E
+    - Bite1
+    - Bite2
     - Raster0F
     - Raster10
     - Raster11
@@ -2357,8 +2357,8 @@ Fuzzy:
     - Raster13
     - Raster14
     - Raster15
-    - Raster16
-    - Raster17
+    - Cry1
+    - Cry2
   palettes:
     - Default
     - Forest
@@ -2378,27 +2378,27 @@ Fuzzy:
     - Jungle_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
+    - Still
+    - Idle
+    - Walk
+    - Run
     - Anim04
-    - Anim05
+    - Jump
     - Anim06
-    - Anim07
-    - Anim08
+    - Bite
+    - Hurt
     - Anim09
     - Anim0A
     - Anim0B
     - Anim0C
     - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
+    - Sleep
+    - Stunned
+    - Burn
+    - HurtStill
+    - BurnStill
+    - HurtShock
+    - HurtShockLoop
 Bobomb:
   variations:
     - Variant00
@@ -9222,8 +9222,8 @@ TheMaster:
     - AscendedCrouch
     - AscendedMidair
     - AscendedDive
-    - WindUp1
-    - WindUp2
+    - Windup1
+    - Windup2
     - DownwardStrike1
     - DownwardStrike2
   palettes:
@@ -9252,8 +9252,8 @@ TheMaster:
     - Cough
     - AscendedPunch
     - AscendedKick
-    - WindUpLoop
-    - WindUpStill
+    - WindupLoop
+    - WindupStill
     - DownwardStrike
     - AscendedPalmStance
     - AscendedUppercut

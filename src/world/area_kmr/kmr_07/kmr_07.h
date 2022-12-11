@@ -10,8 +10,8 @@
 #include "mapfs/kmr_07_hit.h"
 
 enum {
-	NPC_GoombaBros_Red			= 0,
-	NPC_GoombaBros_Blue			= 1,
+    NPC_GoombaBros_Red          = 0,
+    NPC_GoombaBros_Blue         = 1,
 };
 
 enum {

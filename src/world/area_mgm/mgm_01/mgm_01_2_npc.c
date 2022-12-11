@@ -164,7 +164,7 @@ void N(worker_draw_score)(void) {
 
 API_CALLABLE(N(DisableMenus)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_MENUS;
-    func_800E9894();
+    status_menu_ignore_changes();
     close_status_menu();
     return ApiStatus_DONE2;
 }
@@ -637,7 +637,7 @@ API_CALLABLE(N(CreateMinigame)) {
 
     data->scoreWindowPosX = SCREEN_WIDTH + 1;
     data->scoreWindowPosY = 28;
-    func_800E9894();
+    status_menu_ignore_changes();
     close_status_menu();
 
     return ApiStatus_DONE2;

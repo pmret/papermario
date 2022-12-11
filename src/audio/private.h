@@ -302,8 +302,8 @@ void sfx_reset_door_sounds(void);
 void sfx_clear_sounds(void);
 void sfx_clear_env_sounds(s16 playSounds);
 void sfx_update_looping_sound_params(void);
-void func_801497FC(s32 arg0);
-s32 func_80149828(void);
+void sfx_set_reverb_mode(s32 arg0);
+s32 sfx_get_reverb_mode(void);
 void sfx_stop_env_sounds(void);
 */
 SoundInstance* sfx_get_env_sound_instance(s32 soundID);

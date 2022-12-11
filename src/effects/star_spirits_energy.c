@@ -15,19 +15,76 @@ Gfx* D_E0122B90[] = {
 Gfx* D_E0122BA0[] = { D_09005440_4126D0 };
 Gfx* D_E0122BA4[] = { D_09004E00_412090 };
 
-s32 D_E0122BA8[] = {
-    0x006400FF, 0x00C800FF, 0x012C00FF, 0x019000FF, 0x01F400F5, 0x025800EB,
-    0x02BC00E1, 0x032000D7, 0x038400CD, 0x03E800C3, 0x044C00B9, 0x04B000AF,
-    0x051400A5, 0x0578009B, 0x05DC0091, 0x06400087, 0x06A4007D, 0x07080073,
-    0x076C0069, 0x07D0005F, 0x08340055, 0x0898004B, 0x08FC0041, 0x09600037,
-    0x09C4002D, 0x0A28001E, 0x0A8C0014, 0x0AF0000A, 0x0B540005, 0x0BB80000
+typedef struct UnkStarSpiritsEnergy {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02;
+    /* 0x02 */ u8 unk_03;
+} UnkStarSpiritsEnergy; // size = 0x4
+
+UnkStarSpiritsEnergy D_E0122BA8[] = {
+    { 100, 0, 255 },
+    { 200, 0, 255 },
+    { 300, 0, 255 },
+    { 400, 0, 255 },
+    { 500, 0, 245 },
+    { 600, 0, 235 },
+    { 700, 0, 225 },
+    { 800, 0, 215 },
+    { 900, 0, 205 },
+    { 1000, 0, 195 },
+    { 1100, 0, 185 },
+    { 1200, 0, 175 },
+    { 1300, 0, 165 },
+    { 1400, 0, 155 },
+    { 1500, 0, 145 },
+    { 1600, 0, 135 },
+    { 1700, 0, 125 },
+    { 1800, 0, 115 },
+    { 1900, 0, 105 },
+    { 2000, 0, 95 },
+    { 2100, 0, 85 },
+    { 2200, 0, 75 },
+    { 2300, 0, 65 },
+    { 2400, 0, 55 },
+    { 2500, 0, 45 },
+    { 2600, 0, 30 },
+    { 2700, 0, 20 },
+    { 2800, 0, 10 },
+    { 2900, 0, 5 },
+    { 3000, 0, 0 },
 };
 
-s32 D_E0122C20[] = {
-    0x0BB80000, 0x0B540005, 0x0AF0000A, 0x0A8C0014, 0x0A28001E, 0x09C4002D, 0x09600037, 0x08FC0041,
-    0x0898004B, 0x08340055, 0x07D0005F, 0x076C0069, 0x07080073, 0x06A4007D, 0x06400087, 0x05DC0091,
-    0x0578009B, 0x051400A5, 0x04B000AF, 0x044C00B9, 0x03E800C3, 0x038400CD, 0x032000D7, 0x02BC00E1,
-    0x025800EB, 0x01F400F5, 0x019000FF, 0x012C00FF, 0x00C800FF, 0x006400FF, 0x00000000, 0x00000000
+UnkStarSpiritsEnergy D_E0122C20[] = {
+    { 3000, 0, 0 },
+    { 2900, 0, 5 },
+    { 2800, 0, 10 },
+    { 2700, 0, 20 },
+    { 2600, 0, 30 },
+    { 2500, 0, 45 },
+    { 2400, 0, 55 },
+    { 2300, 0, 65 },
+    { 2200, 0, 75 },
+    { 2100, 0, 85 },
+    { 2000, 0, 95 },
+    { 1900, 0, 105 },
+    { 1800, 0, 115 },
+    { 1700, 0, 125 },
+    { 1600, 0, 135 },
+    { 1500, 0, 145 },
+    { 1400, 0, 155 },
+    { 1300, 0, 165 },
+    { 1200, 0, 175 },
+    { 1100, 0, 185 },
+    { 1000, 0, 195 },
+    { 900, 0, 205 },
+    { 800, 0, 215 },
+    { 700, 0, 225 },
+    { 600, 0, 235 },
+    { 500, 0, 245 },
+    { 400, 0, 255 },
+    { 300, 0, 255 },
+    { 200, 0, 255 },
+    { 100, 0, 255 },
 };
 
 void star_spirits_energy_init(EffectInstance* effect);
@@ -124,10 +181,12 @@ void star_spirits_energy_appendGfx(void* effect) {
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f,
+                     data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, D_E0122BA4[0]);
     gDPSetEnvColor(gMasterGfxPos++, data->unk_2C, data->unk_30, data->unk_34, data->unk_38);
 
@@ -137,7 +196,8 @@ void star_spirits_energy_appendGfx(void* effect) {
                 shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_40[i], 0.0f, 0.0f, 0.0f);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                          G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_1C, data->unk_20, data->unk_24, data->unk_50[i]);
                 gSPDisplayList(gMasterGfxPos++, D_E0122B90[i]);
                 gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

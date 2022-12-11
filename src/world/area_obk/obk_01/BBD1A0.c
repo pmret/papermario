@@ -18,7 +18,19 @@ ApiStatus func_80240038_BBD1D8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_8024007C_BBD21C);
+ApiStatus func_8024007C_BBD21C(Evt* script, s32 isInitialCall) {
+    u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
+    s32 val;
+
+    if (pressedButtons & BUTTON_A) {
+        val = TRUE;
+    } else {
+        val = FALSE;
+    }
+    script->varTable[6] = val;
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240098_BBD238);
 
@@ -67,7 +79,7 @@ ApiStatus func_80240730_BBD8D0(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240790_BBD930(Evt* script, s32 isInitialCall) {
     ItemEntity* item = get_item_entity(script->varTable[0]);
 
-    set_item_entity_flags(script->varTable[0], 0x80000);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TRANSPARENT);
     item->alpha = -1;
     return ApiStatus_DONE2;
 }

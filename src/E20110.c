@@ -176,7 +176,7 @@ void func_802B7728_E20838(void) {
     actionState = playerStatus->actionState;
     if ((func_802B7450_E20560() == 0) ||
         (playerStatus->inputEnabledCounter != 0) ||
-        (playerStatus->flags & PS_FLAGS_20) ||
+        (playerStatus->flags & PS_FLAGS_PAUSED) ||
         !(actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN))
     {
         D_802B7CB8_E20DC8->unk_23 = 3;

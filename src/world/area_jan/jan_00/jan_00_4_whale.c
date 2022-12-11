@@ -20,7 +20,6 @@ ApiStatus jan_00_UnkPlayerPosFunc(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(D_8024595C_B25E9C) = {
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 30, 60, 30, 0, 0)
     EVT_CALL(RotateModel, MODEL_o167, LVar0, 1, 0, 0)

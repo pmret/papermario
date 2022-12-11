@@ -462,11 +462,11 @@ StaticNpc N(npcGroup_80241FE4) = {
     .init = &N(init_80241F70),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -495,11 +495,11 @@ StaticNpc N(npcGroup_802421D4) = {
     .init = &N(init_80241F94),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -527,11 +527,11 @@ StaticNpc N(npcGroup_802423C4) = {
     .init = &N(init_80241FA4),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -559,11 +559,11 @@ StaticNpc N(npcGroup_802425B4) = {
     .init = &N(init_80241FB4),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -591,11 +591,11 @@ StaticNpc N(npcGroup_802427A4) = {
     .init = &N(init_80241FC4),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -623,11 +623,11 @@ StaticNpc N(npcGroup_80242994) = {
     .init = &N(init_80241FD4),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
@@ -801,11 +801,11 @@ StaticNpc N(npcGroup_802434FC) = {
     .init = &N(init_802434EC),
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,
         ANIM_Sentinel_Anim03,

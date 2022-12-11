@@ -21,7 +21,7 @@ ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
         (playerStatus->actionState != ACTION_STATE_RUN))
     {
         script->varTable[0] = 0;
-    } else if (playerStatus->animFlags & PA_FLAGS_HOLDING_WATT) {
+    } else if (playerStatus->animFlags & PA_FLAGS_USING_WATT) {
         script->varTable[0] = 0;
     } else {
         script->varTable[0] = 1;

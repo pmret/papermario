@@ -16,7 +16,7 @@ s32 strcmp(const char* str1, const char* str2);
 
 void nuBoot(void);
 void boot_idle(void* data);
-void boot_main(void);
+void boot_main(void* data);
 
 void is_debug_init(void);
 
@@ -134,8 +134,8 @@ void func_80258E14(void*);
 
 void func_80254610(Actor*);
 
-void func_800E315C(s32 colliderID);
-f32 func_800E34D8(void);
+void player_handle_floor_collider_type(s32 colliderID);
+f32 player_fall_distance(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
@@ -268,7 +268,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 
-s32 func_800E0208(void);
+s32 game_scripts_disabled(void);
 
 s32 battle_heap_create(void);
 
@@ -406,6 +406,7 @@ PlayerData* get_player_data(void);
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);
@@ -757,7 +758,7 @@ void func_802B7140(void);
 void func_802B71C8(void);
 void func_802B71D4(void);
 void func_802B72C0_E22870(void);
-s32 func_802BD7DC(void);
+s32 lakilester_raycast_below(void);
 void world_watt_sync_held_position(void);
 void func_802BFB44_323694(f32 arg0);
 
@@ -912,7 +913,7 @@ void collision_check_player_overlaps(void);
 void update_player_input(void);
 void phys_update_action_state(void);
 void collision_main_lateral(void);
-void func_800EFD08(void);
+void handle_floor_behavior(void);
 void check_input_open_menus(void);
 void check_input_status_menu(void);
 
@@ -932,14 +933,14 @@ void partner_reset_data(void);
 s32 has_valid_conversation_npc(void);
 s32 func_800E06D8(void);
 void func_800E01DC(void);
-void func_800E4F10(void);
+void collision_lateral_peach(void);
 void func_800E5520(void);
 void func_800E6B68(void);
 void func_800E9810(void);
 void func_800E983C(void);
 void func_800E984C(void);
 s32 func_800E9860(void);
-void func_800E98C4(void);
+void status_menu_respond_to_changes(void);
 void func_800E98EC(void);
 void func_800E9900(void);
 void func_800F0C9C(void);
@@ -981,7 +982,7 @@ void func_8025DA60(ActorPart*, s32);
 void func_8025DBC8(ActorPart*, s32);
 void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
-void func_800E9894(void);
+void status_menu_ignore_changes(void);
 void func_8013A854(u32);
 
 void set_script_flags(Evt* script, s32 flags);

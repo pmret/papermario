@@ -1390,10 +1390,18 @@ void render_entities(void) {
                 if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
-                            set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, entity->renderSetupFunc);
+                            set_animator_render_callback(
+                                entity->virtualModelIndex,
+                                (void*)(u32) entity->listIndex,
+                                (void (*)(void*)) entity->renderSetupFunc
+                            );
                         }
                     } else {
-                        set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                        set_animator_render_callback(
+                            entity->virtualModelIndex,
+                            (void*)(u32) entity->listIndex,
+                            func_8010FE44
+                        );
                     }
 
                     if (entity->gfxBaseAddr == NULL) {
@@ -1407,9 +1415,11 @@ void render_entities(void) {
                 } else {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
-                            bind_entity_model_setupGfx(entity->virtualModelIndex,
-                                                       (void*)(u32)entity->listIndex,
-                                                       entity->renderSetupFunc);
+                            bind_entity_model_setupGfx(
+                                entity->virtualModelIndex,
+                                (void*)(u32) entity->listIndex,
+                                (void (*)(void*)) entity->renderSetupFunc
+                            );
                         } else {
                             get_entity_model(entity->virtualModelIndex)->fpSetupGfxCallback = NULL;
                         }
@@ -4477,7 +4487,28 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
 }
 
 void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
+#ifdef NON_MATCHING
+void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3) {
+    u32 w0;
+    u32 temp_v1;
+    u32 w1;
+
+    do {
+        w0 = (u32) nodeDlist->words.w0 >> 0;
+        w1 = nodeDlist->words.w1;
+        temp_v1 = w0 >> 0x18;
+        nodeDlist++;
+        if (temp_v1 == 1) {
+            w1 = &arg3[(s32) (w1 - (s32)baseVtx) >> 4];
+        }
+        arg2->words.w0 = w0;
+        arg2->words.w1 = w1;
+        arg2++;
+    } while (temp_v1 != G_ENDDL);
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
+#endif
 
 void mdl_local_gfx_copy_vertices(Vtx* from, s32 num, Vtx* to) {
     u32 i;

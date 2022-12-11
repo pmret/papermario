@@ -10,7 +10,7 @@
 #include "mapfs/mim_03_hit.h"
 
 enum {
-	NPC_Oaklie                  = 0,
+    NPC_Oaklie                  = 0,
 };
 
 #define NAMESPACE mim_03
