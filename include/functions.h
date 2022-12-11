@@ -16,7 +16,7 @@ s32 strcmp(const char* str1, const char* str2);
 
 void nuBoot(void);
 void boot_idle(void* data);
-void boot_main(void);
+void boot_main(void* data);
 
 void is_debug_init(void);
 

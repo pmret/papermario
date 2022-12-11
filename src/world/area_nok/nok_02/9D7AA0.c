@@ -78,8 +78,8 @@ ApiStatus func_80243010_9DA030(Evt* script, s32 isInitialCall) {
 ApiStatus func_802430CC_9DA0EC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    Npc* npc1 = evt_get_variable(script, *args++);
-    Npc* npc2 = evt_get_variable(script, *args++);
+    Npc* npc1 = (Npc*) evt_get_variable(script, *args++);
+    Npc* npc2 = (Npc*) evt_get_variable(script, *args++);
     s32 outVal = FALSE;
     f32 xDiff, zDiff;
 
