@@ -70,7 +70,7 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
-    WaterBlockFXData *data;
+    WaterBlockFXData* data;
     s32 i;
     s32 var_a1;
     s32 numParts = 1;
@@ -107,7 +107,7 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     data->unk_30 = 0.0f;
     data->unk_34 = 0.0f;
 
-    for(i = 3, var_a1 = -13; i >= 0;  var_a1 += 4, i--) {
+    for (i = 3, var_a1 = -13; i >= 0;  var_a1 += 4, i--) {
         data->unk_88[i] = var_a1;
     }
     return effect;
@@ -119,11 +119,6 @@ void water_block_init(EffectInstance* effect) {
 void water_block_update(EffectInstance* effect) {
     WaterBlockFXData *data;
     f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f22;
-    f32 temp_f22_2;
-    f32 temp_f26;
-    f32 temp_f4;
     s32 temp_a0;
     s32 temp_s0;
     s32 temp_v1_3;
@@ -131,7 +126,7 @@ void water_block_update(EffectInstance* effect) {
 
     data = effect->data.waterBlock;
     temp_a0 = data->unk_00;
-    if ((effect->flags & 0x10) != 0) {
+    if (effect->flags & 0x10) {
         if (temp_a0 == 1) {
             effect->flags = effect->flags & ~0x10;
             data->unk_10 = 4;
@@ -184,7 +179,7 @@ void water_block_update(EffectInstance* effect) {
         data->unk_34 = 0.0f;
     }
 
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         data->unk_88[i]++;
         if (data->unk_88[i] >= 0) {
             if (data->unk_88[i] == 0) {
@@ -240,13 +235,13 @@ void water_block_appendGfx(void *effect) {
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[0x288 / 8]);
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[81]);
     spA8 = (Vtx*)++gMasterGfxPos;
-    gMasterGfxPos = &gMasterGfxPos[0x280 / 8];
+    gMasterGfxPos = &gMasterGfxPos[80];
 
     temp_s0 = gGameStatusPtr->frameCounter * 4;
     
-    for (var_s6 = D_E00B4CF0,i = 0,var_fp = spA8; i < 40; i++, var_s6++, var_fp++) {
+    for (var_s6 = D_E00B4CF0, i = 0, var_fp = spA8; i < 40; i++, var_s6++, var_fp++) {
         f32 x = var_s6->unk_00 * 10;
         f32 y = var_s6->unk_01 * 10;
         f32 z = var_s6->unk_02 * 10;
@@ -300,7 +295,7 @@ void water_block_appendGfx(void *effect) {
 
     gSPDisplayList(gMasterGfxPos++, D_090004D8_3B70C8);
 
-    gSPVertex(gMasterGfxPos++, (spA8 + (0x1C0 / 0x10)), 12, 0);
+    gSPVertex(gMasterGfxPos++, &spA8[28], 12, 0);
 
     gSPDisplayList(gMasterGfxPos++, D_09000538_3B7128)    
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
