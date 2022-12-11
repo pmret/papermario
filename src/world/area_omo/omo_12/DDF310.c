@@ -26,3 +26,5 @@ ApiStatus func_802403D8_DDF6E8(Evt* script, s32 isInitialCall) {
     set_screen_overlay_params_back(0xB, 0.0f);
     return ApiStatus_DONE2;
 }
+
+BSS char N(bss_80241380)[0x10];
