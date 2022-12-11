@@ -405,7 +405,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
     EVT_END
 };
 
-s32 N(D_80257598_817E18)[] = {
+s32 N(ExtraAnims_Parakarry)[] = {
     ANIM_WorldParakarry_Still,
     ANIM_WorldParakarry_Idle,
     ANIM_WorldParakarry_Talk,
@@ -420,7 +420,7 @@ EvtScript N(EVS_NpcInit_Parakarry) = {
     EVT_END
 };
 
-EvtScript N(D_802575F8_817E78) = {
+EvtScript N(EVS_CarryItem_PostOfficeShyGuy) = {
     EVT_CALL(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
     EVT_ADD(LVar3, 20)
     EVT_CALL(MakeItemEntity, ITEM_MAILBAG, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
@@ -437,10 +437,10 @@ EvtScript N(D_802575F8_817E78) = {
     EVT_END
 };
 
-EvtScript N(D_802576EC_817F6C) = {
+EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
     EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, 357, 20, -440)
     EVT_CALL(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
-    EVT_EXEC(N(D_802575F8_817E78))
+    EVT_EXEC(N(EVS_CarryItem_PostOfficeShyGuy))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(60)
     EVT_CALL(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_32C, 0)
@@ -451,14 +451,14 @@ EvtScript N(D_802576EC_817F6C) = {
     EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, 180, -410, 20)
     EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, 150, -333, 8)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
     EVT_SET(GF_MAC01_MailbagStolen, TRUE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80257844) = {
+EvtScript N(EVS_Scene_MailbagTheft) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
         EVT_RETURN
     EVT_END_IF
@@ -470,7 +470,7 @@ EvtScript N(EVS_80257844) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_IdleAlt, 0, MSG_MAC_Plaza_005F)
-    EVT_EXEC(N(D_802576EC_817F6C))
+    EVT_EXEC(N(EVS_PostOfficeShyGuy_Escape))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

@@ -66,7 +66,7 @@ EvtScript N(EVS_ToggleVis_PostOffice) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetGroupEnabled, MODEL_yubin_in, 1)
-            EVT_EXEC_WAIT(N(EVS_80257844))
+            EVT_EXEC_WAIT(N(EVS_Scene_MailbagTheft))
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, MODEL_yubin_in, 0)
     EVT_END_SWITCH
@@ -142,11 +142,11 @@ EvtScript N(EVS_ToggleVis_MerlonHouse) = {
         EVT_CASE_EQ(0)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(STORY_CH1_SPOKE_WITH_MERLIN)
-                    EVT_EXEC_WAIT(N(EVS_802502AC))
+                    EVT_EXEC_WAIT(N(EVS_MerlonShooAway))
                     EVT_SET(LVar0, -1)
                     EVT_RETURN
                 EVT_CASE_RANGE(STORY_CH6_RETURNED_TO_TOAD_TOWN, STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-                    EVT_EXEC(N(EVS_80252EB0))
+                    EVT_EXEC(N(EVS_Scene_MerlonAndNinji))
                 EVT_CASE_RANGE(STORY_CH3_GOT_SUPER_BOOTS, STORY_CH8_REACHED_PEACHS_CASTLE)
                     EVT_IF_EQ(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
                         EVT_BREAK_SWITCH

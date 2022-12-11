@@ -82,7 +82,7 @@ EvtScript N(EVS_GardenShyGuy_RunAway) = {
     EVT_CALL(ShowSweat, -1, 1, -45, 1, 0, 0, 0, 0, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, -30, 550, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, -30, 700, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_RETURN
     EVT_END
 };
