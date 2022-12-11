@@ -1,6 +1,7 @@
 #include "common.h"
 #include "stdlib/stdarg.h"
 #include "PR/os_internal_thread.h"
+#include "libc/xstdio.h"
 
 typedef struct {
     /* 0x000 */ OSThread thread;
@@ -142,7 +143,7 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
     }
 }
 
-void* crash_screen_copy_to_buf(void* dest, const char* src, u32 size) {
+char* crash_screen_copy_to_buf(char* dest, const char* src, size_t size) {
     memcpy(dest, src, size);
     return dest + size;
 }

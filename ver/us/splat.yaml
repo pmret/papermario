@@ -55,8 +55,8 @@ segments:
     - [0x6240, c, fio]
     - [0x6E40, c, curtains]
     - [0x7340, c, crash_screen]
-    - [0x7E40, c, os/nusys/nuGfxTaskMgr, -fforce-addr]
-    - [0x8230, c, os/nusys/nuSiMgr]
+    - [0x7E40, c, os/nusys/nugfxtaskmgr, -fforce-addr]
+    - [0x8230, c, os/nusys/nusimgr]
     - [0x8560, c]
     - [0x8800, c]
     - [0x9D10, c, 9d10_len_1080]
@@ -99,36 +99,36 @@ segments:
     - [0x362A0, c, collision]
     - [0x38F00, c, 38F00]
     - [0x39210, c, 39210_len_aa0]
-    - [0x39CB0, c, os/39cb0_len_100]
-    - [0x39DB0, c, os/nusys/nuSched]
-    - [0x3A650, c, os/nusys/nuGfxFuncSet]
-    - [0x3A690, c, os/nusys/nuGfxPreNMIFuncSet]
-    - [0x3A6D0, c, os/nusys/nuGfxTaskAllEndWait]
-    - [0x3A6F0, c, os/nusys/nuGfxSetCfb]
-    - [0x3A800, c, os/nusys/nuGfxDisplayOff]
-    - [0x3A830, c, os/nusys/nuGfxDisplayOn]
-    - [0x3A850, c, os/nusys/nuPiInit]
-    - [0x3A890, c, os/nusys/nuPiReadRom]
-    - [0x3A960, c, os/nusys/nuGfxInit]
-    - [0x3AA10, c, os/nusys/nuContInit]
-    - [0x3AA50, c, os/nusys/nuContDataGet]
-    - [0x3AAB0, c, os/nusys/nuContPakMgr]
-    - [0x3AD20, c, os/nusys/nuContRmbMgr]
-    - [0x3B290, c, os/nusys/nuContRmbStart]
-    - [0x3B2F0, c, os/nusys/nuContRmbCheck]
-    - [0x3B390, c, os/nusys/nuContRmbModeSet]
-    - [0x3B4A0, c, os/nusys/nuContRmbForceStop]
-    - [0x3B4C0, c, os/nusys/nuContRmbForceStopEnd]
-    - [0x3B4E0, c, os/nusys/nuPiReadRomOverlay]
-    - [0x3B5F0, c, os/nusys/nuGfxThread]
-    - [0x3B710, c, os/nusys/nuGfxSwapCfbFuncSet]
-    - [0x3B750, c, os/nusys/nuGfxSwapCfb]
-    - [0x3B770, c, os/nusys/nuGfxRetraceWait]
-    - [0x3B7F0, c, os/nusys/nuSiCallBackAdd]
-    - [0x3B890, c, os/nusys/nuSiCallBackRemove]
-    - [0x3B910, c, os/nusys/nuContMgr]
-    - [0x3BCC0, c, os/nusys/nuContDataLock]
-    - [0x3BD20, c, os/nusys/nuContQueryRead]
+    - [0x39cB0, c, os/nusys/nuboot]
+    - [0x39DB0, c, os/nusys/nusched]
+    - [0x3A650, c, os/nusys/nugfxfuncset]
+    - [0x3A690, c, os/nusys/nugfxprenmifuncset]
+    - [0x3A6D0, c, os/nusys/nugfxtaskallendwait]
+    - [0x3A6F0, c, os/nusys/nugfxsetcfb]
+    - [0x3A800, c, os/nusys/nugfxdisplayoff]
+    - [0x3A830, c, os/nusys/nugfxdisplayon]
+    - [0x3A850, c, os/nusys/nupiinit]
+    - [0x3A890, c, os/nusys/nupireadrom]
+    - [0x3A960, c, os/nusys/nugfxinit]
+    - [0x3AA10, c, os/nusys/nucontinit]
+    - [0x3AA50, c, os/nusys/nucontdataget]
+    - [0x3AAB0, c, os/nusys/nucontpakmgr]
+    - [0x3AD20, c, os/nusys/nucontrmbmgr]
+    - [0x3B290, c, os/nusys/nucontrmbstart]
+    - [0x3B2F0, c, os/nusys/nucontrmbcheck]
+    - [0x3B390, c, os/nusys/nucontrmbmodeset]
+    - [0x3B4A0, c, os/nusys/nucontrmbforcestop]
+    - [0x3B4C0, c, os/nusys/nucontrmbforcestopend]
+    - [0x3B4E0, c, os/nusys/nupireadromoverlay]
+    - [0x3B5F0, c, os/nusys/nugfxthread]
+    - [0x3B710, c, os/nusys/nugfxswapcfbfuncset]
+    - [0x3B750, c, os/nusys/nugfxswapcfb]
+    - [0x3B770, c, os/nusys/nugfxretracewait]
+    - [0x3B7F0, c, os/nusys/nusicallbackadd]
+    - [0x3B890, c, os/nusys/nusicallbackremove]
+    - [0x3B910, c, os/nusys/nucontmgr]
+    - [0x3BCC0, c, os/nusys/nucontdatalock]
+    - [0x3BD20, c, os/nusys/nucontqueryread]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/pimgr, gcc_272 -O3]
     - [0x3BF70, c, os/epirawdma, gcc_272 -O3]
@@ -314,8 +314,8 @@ segments:
       - [0x51540, ia8, ui/no_controller, 128, 32]
       - [0x52540]
     - [0x52610, .data, crash_screen]
-    - [0x527F0, .data, os/nusys/nuGfxTaskMgr]
-    - [0x52800, .data, os/nusys/nuSiMgr]
+    - [0x527F0, .data, os/nusys/nugfxtaskmgr]
+    - [0x52800, .data, os/nusys/nusimgr]
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
@@ -338,12 +338,12 @@ segments:
     - [0x5B320, .data, 5B320]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, .data, 38F00]
-    - [0x6EF80, .data, os/nusys/nuSched]
-    - [0x6EFA0, .data, os/nusys/nuGfxInit]
-    - [0x6F0A0, .data, os/nusys/nuContPakMgr]
-    - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
-    - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F120, .data, os/nusys/nuContMgr]
+    - [0x6EF80, .data, os/nusys/nusched]
+    - [0x6EFA0, .data, os/nusys/nugfxinit]
+    - [0x6F0A0, .data, os/nusys/nucontpakmgr]
+    - [0x6F0E0, .data, os/nusys/nucontrmbmgr]
+    - [0x6F110, .data, os/nusys/nugfxfuncset]
+    - [0x6F120, .data, os/nusys/nucontmgr]
     - [0x6F120, .data, os/pimgr]
     - [0x6F120, .data, os/epirawdma]
     - [0x6F180, .data, os/cartrominit]
@@ -357,7 +357,7 @@ segments:
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/setthreadpri]
-    - [0x6FA70, .data, os/timerintr] # libultra data
+    - [0x6FA70, .data, os/timerintr]
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
     - [auto, .data, os/guRotate]
@@ -16295,19 +16295,19 @@ segments:
   # - [0x199BB00, bin] # Princess Peach sprites
 
   - [0x19E0970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
-  - { start: 0x19E09A8, type: Yay0, align: 8 }
-  - { start: 0x19E1390, type: Yay0, align: 8 }
-  - { start: 0x19E1888, type: Yay0, align: 8 }
-  - { start: 0x19E2330, type: Yay0, align: 8 }
-  - { start: 0x19E2DE0, type: Yay0, align: 8 }
-  - { start: 0x19E3208, type: Yay0, align: 8 }
-  - { start: 0x19E3BA8, type: Yay0, align: 8 }
-  - { start: 0x19E3FD8, type: Yay0, align: 8 }
-  - { start: 0x19E4828, type: Yay0, align: 8 }
-  - { start: 0x19E4BE0, type: Yay0, align: 8 }
-  - { start: 0x19E5758, type: Yay0, align: 8 }
-  - { start: 0x19E5950, type: Yay0, align: 8 }
-  - { start: 0x19E62A0, type: Yay0, align: 8 }
+  - { start: 0x19E09A8, type: yay0, align: 8 }
+  - { start: 0x19E1390, type: yay0, align: 8 }
+  - { start: 0x19E1888, type: yay0, align: 8 }
+  - { start: 0x19E2330, type: yay0, align: 8 }
+  - { start: 0x19E2DE0, type: yay0, align: 8 }
+  - { start: 0x19E3208, type: yay0, align: 8 }
+  - { start: 0x19E3BA8, type: yay0, align: 8 }
+  - { start: 0x19E3FD8, type: yay0, align: 8 }
+  - { start: 0x19E4828, type: yay0, align: 8 }
+  - { start: 0x19E4BE0, type: yay0, align: 8 }
+  - { start: 0x19E5758, type: yay0, align: 8 }
+  - { start: 0x19E5950, type: yay0, align: 8 }
+  - { start: 0x19E62A0, type: yay0, align: 8 }
 
   - start: 0x19E67B8
     align: 8

@@ -13,17 +13,14 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 gTattleBgTextureYOffset = 0;
 
-BSS s32 bSavedPartner = 0;
-BSS s32 bSavedOverrideFlags = 0;
-BSS s32 D_8029DA38 = 0; // unused?
-BSS s32 D_8029DA3C = 0; // unused?
-BSS s32 D_8029DA40 = 0;
-BSS s32 D_8029DA44 = 0;
-BSS s32 D_8029DA48 = 0;
-// The following var has a nop issue, and the only way to fix it is by initializing it.
-// However, this puts it at the beginning of the BSS section, so all preceeding BSS needs to be initialized as well.
-BSS s32 D_8029DA4C = 0;
-
+BSS s32 bSavedPartner;
+BSS s32 bSavedOverrideFlags;
+BSS s32 D_8029DA38; // unused?
+BSS s32 D_8029DA3C; // unused?
+BSS s32 D_8029DA40;
+BSS s32 D_8029DA44;
+BSS s32 D_8029DA48;
+BSS s32 D_8029DA4C;
 BSS Camera D_8029DA50[ARRAY_COUNT(gCameras)];
 BSS f32 D_8029EFB0;
 BSS f32 D_8029EFB4;
@@ -118,19 +115,19 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
     u16 currentButtonsDown = battleStatus->currentButtonsDown;
     f32 mag;
 
-    if (currentButtonsDown & 0xF00) {
+    if (currentButtonsDown & (BUTTON_D_UP | BUTTON_D_DOWN | BUTTON_D_LEFT | BUTTON_D_RIGHT)) {
         stickY = 0.0f;
         stickX = 0.0f;
-        if (currentButtonsDown & 0x800) {
+        if (currentButtonsDown & BUTTON_D_UP) {
             stickY = maxMagnitude;
         }
-        if (currentButtonsDown & 0x400) {
+        if (currentButtonsDown & BUTTON_D_DOWN) {
             stickY = -maxMagnitude;
         }
-        if (currentButtonsDown & 0x200) {
+        if (currentButtonsDown & BUTTON_D_LEFT) {
             stickX = -maxMagnitude;
         }
-        if (currentButtonsDown & 0x100) {
+        if (currentButtonsDown & BUTTON_D_RIGHT) {
             stickX = maxMagnitude;
         }
     }
@@ -938,6 +935,8 @@ void btl_draw_enemy_health_bars(void) {
         }
     }
 }
+
+NOP_FIX
 
 void btl_update_starpoints_display(void) {
     BattleStatus* battleStatus = &gBattleStatus;

@@ -1,11 +1,19 @@
+from typing import Optional, Any
+
+from util import log, options
+from util.n64.decompressor import Decompressor
+
 from segtypes.n64.segment import N64Segment
-from util.n64 import Yay0decompress
-from util import options
-from util import log
 
 
-class N64SegYay0(N64Segment):
+class CommonSegDecompressor(N64Segment):
+    decompressor: Decompressor
+    compression_type = ""  # "Mio0" -> filename.Mio0.o
+
     def split(self, rom_bytes):
+        if self.decompressor is None:
+            log.error("Decompressor is not a standalone segment type")
+
         out_dir = options.opts.asset_path / self.dir
         out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -16,9 +24,12 @@ class N64SegYay0(N64Segment):
 
         out_path = out_dir / f"{self.name}.bin"
         with open(out_path, "wb") as f:
-            self.log(f"Decompressing {self.name}...")
+            assert isinstance(self.rom_start, int)
+            assert isinstance(self.rom_end, int)
+
+            self.log(f"Decompressing {self.name}")
             compressed_bytes = rom_bytes[self.rom_start : self.rom_end]
-            decompressed_bytes = Yay0decompress.decompress_yay0(compressed_bytes)
+            decompressed_bytes = self.decompressor.decompress(compressed_bytes)
             f.write(decompressed_bytes)
         self.log(f"Wrote {self.name} to {out_path}")
 
@@ -29,7 +40,9 @@ class N64SegYay0(N64Segment):
             LinkerEntry(
                 self,
                 [options.opts.asset_path / self.dir / f"{self.name}.bin"],
-                options.opts.asset_path / self.dir / f"{self.name}.Yay0",
+                options.opts.asset_path
+                / self.dir
+                / f"{self.name}.{self.compression_type}",
                 self.get_linker_section(),
             )
         ]

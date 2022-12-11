@@ -1,6 +1,7 @@
 import sys
-from colorama import init, Fore, Style
 from typing import Optional
+
+from colorama import Fore, init, Style
 
 init(autoreset=True)
 

@@ -109,12 +109,51 @@ ApiStatus func_80243EC8_9DAEE8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+typedef struct UnkNok02 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ char unk_0C[0x4];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+} UnkNok02; // size = 0x1C
+
+extern UnkNok02 D_80252784_9E97A4[20];
+extern s32 D_802529B4_9E99D4;
+
+ApiStatus func_80243F10_9DAF30(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243F10_9DAF30);
 
+ApiStatus func_80244078_9DB098(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80244078_9DB098);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80244224_9DB244);
+ApiStatus func_80244224_9DB244(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *args++) - 1;
+    UnkNok02* temp_v1 = &D_80252784_9E97A4[idx];
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80244288_9DB2A8);
+    script->varTable[0] = temp_v1->unk_00;
+    script->varTable[1] = temp_v1->unk_04;
+    script->varTable[2] = temp_v1->unk_08;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_802442E0_9DB300);
+ApiStatus func_80244288_9DB2A8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, D_80252784_9E97A4[evt_get_variable(script, *args++) - 1].unk_14, 1);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802442E0_9DB300(Evt* script, s32 isInitialCall) {
+    Bytecode *args = script->ptrReadPos;
+    s32 idx = evt_get_variable(script, *(args++)) - 1;
+    s32 val = D_80252784_9E97A4[idx].unk_18;
+    s16* typeFlags = &gItemTable[val].typeFlags;
+
+    D_802529B4_9E99D4 = val;
+    script->varTable[0] = (*typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) > 0;
+    script->varTable[1] = val;
+    return ApiStatus_DONE2;
+}

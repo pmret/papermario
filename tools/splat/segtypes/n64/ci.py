@@ -1,6 +1,8 @@
-from typing import TYPE_CHECKING, Optional
-from segtypes.n64.img import N64SegImg
+from typing import Optional, TYPE_CHECKING
+
 from util import log
+
+from segtypes.n64.img import N64SegImg
 
 if TYPE_CHECKING:
     from segtypes.n64.palette import N64SegPalette
@@ -29,6 +31,7 @@ class N64SegCi(N64SegImg):
             log.error(
                 f"no palette sibling segment exists\n(hint: add a segment with type 'palette' and name '{self.name}')"
             )
+        assert self.palette is not None
         self.palette.extract = False
         self.n64img.palette = self.palette.parse_palette(rom_bytes)
 

@@ -66,7 +66,7 @@ void func_80240A6C_BCF65C(void) {
     s32 idx;
     s32 i;
 
-    temp_v0->aPressed[temp_v0->unk_1C0] = gGameStatusPtr->pressedButtons[0] & A_BUTTON;
+    temp_v0->aPressed[temp_v0->unk_1C0] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     temp_v0->unk_1C0++;
     if (temp_v0->unk_1C0 >= ARRAY_COUNT(temp_v0->aPressed)) {
         temp_v0->unk_1C0 = 0;
@@ -384,7 +384,7 @@ moved:
     }
 
     script->varTable[0] = 0;
-    if (temp_v0->unk_1D8 >= 46 || (gGameStatusPtr->pressedButtons[0] & B_BUTTON)) {
+    if (temp_v0->unk_1D8 >= 46 || (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
         script->varTable[0] = 1;
         return ApiStatus_DONE2;
     }

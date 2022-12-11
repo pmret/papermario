@@ -208,8 +208,6 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
     f32* xPtr;
 
     f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f0_5;
     s32 var_v0_5;
     f32 temp1;
 
@@ -285,32 +283,31 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
                 evt->functionTemp[1] = 10;
             }
         case 1:
-            if (!(playerStatus->actionState == 0x15 || playerStatus->actionState == 0x16)) {
-                npc->pos.y = playerStatus->position.y + playerStatus->colliderHeight;
-                npc->yaw = playerStatus->targetYaw;
-                if (evt->functionTemp[1] == 1) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario_60006);
-                }
-
-                if (evt->functionTemp[1] != 0) {
-                    evt->functionTemp[1]--;
-                    break;
-                }
-
-                sfx_play_sound_at_npc(SOUND_80000000, 0, -4);
-                D_802BE924 = 1;
-                add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
-                npc->currentAnim = ANIM_WorldBombette_WalkLit;
-                npc->jumpVelocity = 0.0f;
-                D_802BE938 = 0;
-                npc->flags = (npc->flags | 0x200) & ~0x100;
-                npc->moveSpeed = 1.0f;
-                evt->functionTemp[0] = 2;
-                evt->functionTemp[1] = 50;
-            } else {
+            if (playerStatus->actionState == 0x15 || playerStatus->actionState == 0x16) {
                 evt->functionTemp[1] = 7;
                 break;
             }
+            npc->pos.y = playerStatus->position.y + playerStatus->colliderHeight;
+            npc->yaw = playerStatus->targetYaw;
+            if (evt->functionTemp[1] == 1) {
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_60006);
+            }
+
+            if (evt->functionTemp[1] != 0) {
+                evt->functionTemp[1]--;
+                break;
+            }
+
+            sfx_play_sound_at_npc(SOUND_80000000, 0, -4);
+            D_802BE924 = 1;
+            add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
+            npc->currentAnim = ANIM_WorldBombette_WalkLit;
+            npc->jumpVelocity = 0.0f;
+            D_802BE938 = 0;
+            npc->flags = (npc->flags | 0x200) & ~0x100;
+            npc->moveSpeed = 1.0f;
+            evt->functionTemp[0] = 2;
+            evt->functionTemp[1] = 50;
         case 2:
             if ((playerStatus->animFlags & 4) || (playerStatus->actionState == 0x15 || playerStatus->actionState == 0x16)) {
                 evt->functionTemp[0] = 7;
@@ -345,9 +342,9 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             } else {
                 if (!(evt->functionTemp[1] & 3)) {
                     if (gGameStatusPtr->frameCounter & 1) {
-                        sfx_play_sound_at_npc(SOUND_141, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL1, 0, -4);
                     } else {
-                        sfx_play_sound_at_npc(SOUND_142, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL2, 0, -4);
                     }
                 }
                 if (evt->functionTemp[1] == 40) {
@@ -397,13 +394,13 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
 
             switch (gPlayerData.partners[gPlayerData.currentPartner].level) {
                 case 0:
-                    sfx_play_sound_at_npc(SOUND_2016, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON1, 0, -4);
                     break;
                 case 1:
-                    sfx_play_sound_at_npc(SOUND_2017, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON2, 0, -4);
                     break;
                 case 2:
-                    sfx_play_sound_at_npc(SOUND_2018, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON3, 0, -4);
                     break;
             }
 
@@ -512,8 +509,8 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             if (D_802BE924 == 0) {
                 return ApiStatus_DONE2;
             }
+            sfx_stop_sound(SOUND_80000000); // TODO swapping these causes tail merging that we don't want
             D_802BE924 = 0;
-            sfx_stop_sound(SOUND_80000000);
             return ApiStatus_DONE2;
         case 8:
             if (D_802BE92C != 0) {
@@ -535,12 +532,11 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             xPtr = &npc->pos.x;
             zPtr = &npc->pos.z;
             if (D_802BE920 == 0) {
-                temp_f0_5 = clamp_angle(playerStatus->targetYaw + 90.0f);
+                add_vec2D_polar(xPtr, zPtr, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw + 90.0f));
             } else {
-                temp_f0_5 = clamp_angle(playerStatus->targetYaw - 90.0f);
+                add_vec2D_polar(xPtr, zPtr, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw - 90.0f));
             }
 
-            add_vec2D_polar(xPtr, zPtr, playerStatus->colliderDiameter / 4, temp_f0_5);
             npc->jumpVelocity = 0.0f;
             partner_clear_player_tracking(npc);
             if (D_802BE924 == 0) {
@@ -548,7 +544,7 @@ ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall) {
             }
             D_802BE924 = 0;
             sfx_stop_sound(SOUND_80000000);
-            break;
+            return ApiStatus_DONE2;
     }
 
     return ApiStatus_BLOCK;

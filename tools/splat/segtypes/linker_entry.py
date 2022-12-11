@@ -1,12 +1,14 @@
-from dataclasses import dataclass
-from functools import lru_cache
-from typing import Dict, Optional, OrderedDict, Union, List
-from pathlib import Path
-from segtypes.n64.palette import N64SegPalette
-from util import options
-from segtypes.segment import Segment
 import os
 import re
+from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
+from typing import Dict, List, Optional, OrderedDict, Union
+
+from util import options
+
+from segtypes.n64.palette import N64SegPalette
+from segtypes.segment import Segment
 
 # clean 'foo/../bar' to 'bar'
 @lru_cache(maxsize=None)
@@ -167,11 +169,7 @@ class LinkerWriter:
             leaving_bss = False
             cur_section = entry.section_type
 
-            if cur_section == "linker":
-                self._end_block()
-                self._begin_segment(entry.segment)
-                continue
-            elif cur_section == "linker_offset":
+            if cur_section == "linker_offset":
                 self._write_symbol(f"{get_segment_cname(entry.segment)}_OFFSET", ".")
                 continue
 

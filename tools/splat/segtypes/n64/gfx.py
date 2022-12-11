@@ -4,11 +4,39 @@ Dumps out Gfx[] as a .inc.c file.
 """
 
 from pathlib import Path
-from pygfxd import *
-from util import log
+
+from pygfxd import (
+    gfxd_buffer_to_string,
+    gfxd_cimg_callback,
+    gfxd_dl_callback,
+    gfxd_endian,
+    gfxd_execute,
+    gfxd_input_buffer,
+    gfxd_light_callback,
+    gfxd_lookat_callback,
+    gfxd_macro_dflt,
+    gfxd_macro_fn,
+    gfxd_mtx_callback,
+    gfxd_output_buffer,
+    gfxd_printf,
+    gfxd_puts,
+    gfxd_target,
+    gfxd_timg_callback,
+    gfxd_tlut_callback,
+    gfxd_vp_callback,
+    gfxd_vtx_callback,
+    gfxd_zimg_callback,
+    GfxdEndian,
+    gfxd_f3d,
+    gfxd_f3db,
+    gfxd_f3dex,
+    gfxd_f3dexb,
+    gfxd_f3dex2,
+)
+
+from util import log, options
 from util.log import error
 
-from util import options
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
 
@@ -137,6 +165,9 @@ class N64SegGfx(CommonSegCodeSubsegment):
         return 0
 
     def disassemble_data(self, rom_bytes):
+        assert isinstance(self.rom_start, int)
+        assert isinstance(self.rom_end, int)
+
         gfx_data = rom_bytes[self.rom_start : self.rom_end]
         segment_length = len(gfx_data)
         if (segment_length) % 8 != 0:

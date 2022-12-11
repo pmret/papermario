@@ -345,7 +345,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                         actionState == ACTION_STATE_RUN ||
                         actionState == ACTION_STATE_LAND)
                     {
-                        if (partnerActionStatus->pressedButtons & B_BUTTON) {
+                        if (partnerActionStatus->pressedButtons & BUTTON_B) {
                             D_802BE304 = 2;
                         }
                     }

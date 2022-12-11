@@ -953,7 +953,7 @@ ModelAnimator* get_animator_by_index(s32 animModelID) {
     return (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 }
 
-ModelAnimator* set_animator_render_callback(s32 animModelID, s32 callbackArg, void (*callbackFunc)(void*)) {
+ModelAnimator* set_animator_render_callback(s32 animModelID, void* callbackArg, void (*callbackFunc)(void*)) {
     ModelAnimator* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 
     ret->fpRenderCallback = callbackFunc;
@@ -1021,7 +1021,7 @@ void play_model_animation(s32 index, s16* animPos) {
     animator->nextUpdateTime = 1.0f;
 }
 
-void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip) {
+void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSkip) {
     s32 indexMasked = index & ~0x800;
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
     s32 i;
@@ -1030,8 +1030,8 @@ void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip
         animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
 
-    animator->animReadPos = (s16*) animPos;
-    animator->savedReadPos = (s16*) animPos;
+    animator->animReadPos = animPos;
+    animator->savedReadPos = animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 
