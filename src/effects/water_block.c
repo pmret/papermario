@@ -106,7 +106,7 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     data->unk_30 = 0.0f;
     data->unk_34 = 0.0f;
 
-    for (i = 3, var_a1 = -13; i >= 0;  var_a1 += 4, i--) {
+    for (i = NUM_WATER_BLOCK_COMPONENTS - 1, var_a1 = -13; i >= 0;  var_a1 += 4, i--) {
         data->unk_88[i] = var_a1;
     }
     return effect;
@@ -178,7 +178,7 @@ void water_block_update(EffectInstance* effect) {
         data->unk_34 = 0.0f;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < NUM_WATER_BLOCK_COMPONENTS; i++) {
         data->unk_88[i]++;
         if (data->unk_88[i] >= 0) {
             if (data->unk_88[i] == 0) {
@@ -275,7 +275,7 @@ void water_block_appendGfx(void *effect) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, spA4);
     gSPDisplayList(gMasterGfxPos++, D_090003B0_3B6FA0);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < NUM_WATER_BLOCK_COMPONENTS; i++) {
         if (data->unk_88[i] >= 0) {
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_78[i], data->unk_38[i], data->unk_48[i], 0.0f);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

@@ -1730,6 +1730,8 @@ typedef struct SquirtFXData {
     /* 0x1D8 */ u8 unk_1D8[12];
 } SquirtFXData; // size = 0x1E4
 
+#define NUM_WATER_BLOCK_COMPONENTS 4
+
 typedef struct WaterBlockFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
@@ -1743,12 +1745,12 @@ typedef struct WaterBlockFXData {
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38[4];
-    /* 0x48 */ f32 unk_48[4];
-    /* 0x58 */ f32 unk_58[4];
-    /* 0x68 */ f32 unk_68[4];
-    /* 0x78 */ f32 unk_78[4];
-    /* 0x88 */ s32 unk_88[4];
+    /* 0x38 */ f32 unk_38[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x48 */ f32 unk_48[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x58 */ f32 unk_58[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x68 */ f32 unk_68[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x78 */ f32 unk_78[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x88 */ s32 unk_88[NUM_WATER_BLOCK_COMPONENTS];
 } WaterBlockFXData; // size = 0x98
 
 typedef struct WaterfallFXData {
