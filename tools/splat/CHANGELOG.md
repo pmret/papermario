@@ -1,5 +1,9 @@
 # splat Release Notes
 
+### 0.12.8
+* The gfx and vtx segments now have a `data_only` option, which, if enabled, will emit only the plain data for the type and omit the enclosing symbol definition. This mode is useful when you want to manually declare the symbol and then #include the extracted data within the declaration.
+* The gfx segment has a method, `format_sym_name()`, which will allow custom overriding of the output of symbol names by extending the `gfx` segment. For example, this can be used to transform context-specific symbol names like mac_01_vtx into N(vtx), where N() is a macro that applies the current "namespace" to the symbol. Paper Mario plans to use this so we can extract an asset once and then #include it in multiple places, while giving each inclusion unique symbol names for each component.
+
 ### 0.12.7
 
 * Allow setting a different macro for jumptable labels with `asm_jtbl_label_macro`
