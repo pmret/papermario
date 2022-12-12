@@ -623,8 +623,9 @@ MapConfig mim_maps[] = {
 };
 
 /// Boo's Mansion
+#include "area_obk/obk.h"
 MapConfig obk_maps[] = {
-    { MAP_UNSPLIT(obk_01, 0x802411B0), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(obk_01), .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(obk_02, 0x802402E0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_03, 0x80241020), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_04, 0x80240E90), .songVariation = 1, .sfxReverb = 1 },

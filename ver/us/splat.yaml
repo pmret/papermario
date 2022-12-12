@@ -12428,13 +12428,15 @@ segments:
     start: 0xBBD1A0
     vram: 0x80240000
     subsegments:
-    - [0xBBD1A0, c]
-    - [0xBBD980, c]
-    - [0xBBE2E0, data]
-    - [0xBBE410, data]
-    - [0xBC0100, data]
-    - [0xBC11A0, data]
-    - [0xBC2A30]
+    - [0xBBD1A0, c, obk_01_0_header]
+    - [0xBBD1A0, c, obk_01_1_music]
+    - [0xBBD1A0, c, obk_01_2_main]
+    - [0xBBD1A0, c, obk_01_3_chandelier]
+    - [0xBBD980, c, obk_01_4_portrait]
+    - [0xBBD980, c, obk_01_5_jump_scare]
+    - [0xBBD980, c, obk_01_6_npc]
+    - [0xBBE2E0, c, obk_01_7_entity]
+    - [0xBBE2E0]
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
