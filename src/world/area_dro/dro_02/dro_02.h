@@ -52,7 +52,7 @@ extern EvtScript N(EVS_PlayRestMusic);
 extern EvtScript N(EVS_PlayMoustafaMusic);
 
 extern EvtScript N(EVS_SetupBuildings);
-extern EvtScript N(EVS_SetToadHouseDialogue);
+extern EvtScript N(EVS_ToadHouse_SetDialogue);
 extern EvtScript N(8024D434);
 extern EvtScript N(EVS_ToadHouse_GetInBed);
 extern EvtScript N(EVS_ToadHouse_ReturnFromRest);

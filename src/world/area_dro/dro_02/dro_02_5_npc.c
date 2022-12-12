@@ -289,7 +289,7 @@ EvtScript N(EVS_NpcInit_Mouser_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_SetToadHouseDialogue) = {
+EvtScript N(EVS_ToadHouse_SetDialogue) = {
     EVT_SET(LVar0, MSG_CH2_00D1)
     EVT_SET(LVar8, MSG_CH2_00D2)
     EVT_SET(LVar1, MSG_CH2_00D3)

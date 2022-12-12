@@ -9956,7 +9956,6 @@ segments:
     type: code
     start: 0x93F5B0
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0x93F5B0, c, sbk_30_0_header]
     - [0x93F5B0, c, sbk_30_1_music]
@@ -10553,7 +10552,6 @@ segments:
     type: code
     start: 0x9B1790
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0x9B1790, c, trd_06_0_header]
     - [0x9B1790, c, trd_06_1_main]
@@ -13202,7 +13200,6 @@ segments:
     type: code
     start: 0xC6C920
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0xC6C920, c, kzn_06_0_header]
     - [0xC6C920, c, kzn_06_1_main]
