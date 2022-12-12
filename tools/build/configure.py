@@ -141,17 +141,17 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("img_header",
         description="img_header $in",
-        command=f"$python {BUILD_TOOLS}/img/header.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/img/header.py $in $out \"$c_name\"",
     )
 
     ninja.rule("bin_inc_c",
         description="bin_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out \"$c_name\"",
     )
 
     ninja.rule("pal_inc_c",
         description="pal_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out \"$c_name\"",
     )
 
     ninja.rule("yay0",
@@ -435,7 +435,10 @@ class Configure:
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start, in_segment=True, type="data", define=True
                             )
-                            vars = {"c_name": c_sym.name}
+                            name = c_sym.name
+                            if "namespaced" in seg.args:
+                                name = f"N({name[7:]})"
+                            vars = {"c_name": name}
                             build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header", vars)
                             build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c", vars)
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
