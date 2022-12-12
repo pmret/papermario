@@ -37,6 +37,9 @@ class N64SegVtx(CommonSegCodeSubsegment):
         self.file_text = None
         self.data_only = isinstance(yaml, dict) and yaml.get("data_only", False)
 
+    def format_sym_name(self, sym) -> str:
+        return sym.name
+
     def get_linker_section(self) -> str:
         return ".data"
 
@@ -68,7 +71,7 @@ class N64SegVtx(CommonSegCodeSubsegment):
         )
 
         if not self.data_only:
-            lines.append(f"Vtx {sym.name}[{vertex_count}] = {{")
+            lines.append(f"Vtx {self.format_sym_name(sym)}[{vertex_count}] = {{")
 
         for vtx in struct.iter_unpack(">hhhHhhBBBB", vertex_data):
             x, y, z, flg, t, c, r, g, b, a = vtx

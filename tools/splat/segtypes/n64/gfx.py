@@ -63,7 +63,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
         self.file_text = None
         self.data_only = isinstance(yaml, dict) and yaml.get("data_only", False)
 
-    def format_sym_name(self, sym):
+    def format_sym_name(self, sym) -> str:
         return sym.name
 
     def get_linker_section(self) -> str:
