@@ -12443,13 +12443,13 @@ segments:
     start: 0xBC2A90
     vram: 0x80240000
     subsegments:
-    - [0xBC2A90, c]
-    - [0xBC2CD0, c]
-    - [0xBC2D40, data]
-    - [0xBC2E20, data]
-    - [0xBC3720, data]
-    - [0xBC3DE0, data]
-    - [0xBC3F60, data]
+    - [0xBC2A90, c, obk_02_0_header]
+    - [0xBC2A90, c, obk_02_1_music]
+    - [0xBC2A90, c, obk_02_2_main]
+    - [0xBC2A90, c, obk_02_3_npc]
+    - [0xBC2CD0, c, obk_02_4_bombable]
+    - [0xBC2CD0, c, obk_02_5_clock]
+    - [0xBC4260, c, obk_02_6_entity]
     - [0xBC4260]
   - name: obk_03
     dir: world/area_obk/obk_03
