@@ -79,28 +79,21 @@ void energy_orb_wave_init(EffectInstance* effect) {
 }
 
 void energy_orb_wave_update(EffectInstance* effect) {
-    f32 var_f0;
-    s32 temp_v0;
-    s32 var_a2;
-    s32 var_s1;
-    s32 var_v0_2;
-    s32 var_v0_5;
-    s32 var_v0_6;
-    s32 var_v1;
-    s32 var_v1_2;
-    EnergyOrbWaveFXData* data;
-    s32 temp_a0;
-    u16 v1;
-    s32 a1;
+    EnergyOrbWaveFXData* data = effect->data.energyOrbWave;
+    f32 var_float;
+    s32 unk_14;
+    s32 var_2;
+    s32 var_1;
+    s32 unk_1C;
+    u16 var_4;
+    s32 var_3;
 
-    data = effect->data.energyOrbWave;
-
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        data->unk_10 = 0x1E;
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->unk_10 = 30;
     }
 
-    if (data->unk_10 < 0x64) {
+    if (data->unk_10 < 100) {
         data->unk_10--;
     }
     data->unk_14++;
@@ -110,100 +103,100 @@ void energy_orb_wave_update(EffectInstance* effect) {
         return;
     }
 
-    temp_v0 = data->unk_14;
-    temp_a0 = data->unk_1C;
-    var_s1 = 0xFF;
-    var_a2 = 0xFF;
+    unk_14 = data->unk_14;
+    unk_1C = data->unk_1C;
+    var_1 = 0xFF;
+    var_2 = 0xFF;
 
-    if (temp_v0 < 16) {
-        var_s1 = (temp_v0 * 16) - 1;
+    if (unk_14 < 16) {
+        var_1 = (unk_14 * 16) - 1;
     }
     if (data->unk_10 < 16) {
-        var_s1 = var_s1 * data->unk_10 / 16;
-        var_a2 = data->unk_10 * 16;
+        var_1 = var_1 * data->unk_10 / 16;
+        var_2 = data->unk_10 * 16;
     }
 
-    switch (temp_a0) {
+    switch (unk_1C) {
         case 0:
-            data->unk_20 = 0x46;
-            data->unk_24 = 0xB4;
-            data->unk_28 = 0x78;
-            var_f0 = shim_sin_deg(temp_v0 * 2) * 10.0f + 190.0f;
-            data->unk_2C = ((s32) var_f0 * var_s1) / 255;
+            data->unk_20 = 70;
+            data->unk_24 = 180;
+            data->unk_28 = 120;
+            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 1:
-            a1 = 0xFF;
-            data->unk_20 = 0x46;
-            data->unk_24 = 0xFF;
-            data->unk_28 = 0xE6;
-            data->unk_2C = (var_s1 * a1) / 255;
+            var_3 = 255;
+            data->unk_20 = 70;
+            data->unk_24 = 255;
+            data->unk_28 = 230;
+            data->unk_2C = (var_1 * var_3) / 255;
             break;
         case 2:
-            data->unk_20 = 0xAA;
-            data->unk_24 = 0x28;
-            data->unk_28 = 0x6E;
-            var_f0 = shim_sin_deg(temp_v0 * 2) * 10.0f + 190.0f;
-            data->unk_2C = ((s32) var_f0 * var_s1) / 255;
+            data->unk_20 = 170;
+            data->unk_24 = 40;
+            data->unk_28 = 110;
+            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 3:
-            v1 = 0xFF;
-            data->unk_20 = 0xDC;
-            data->unk_24 = 0x28;
-            data->unk_28 = 0xAA;
-            data->unk_2C = (var_s1 * v1) / 255;
+            var_4 = 255;
+            data->unk_20 = 220;
+            data->unk_24 = 40;
+            data->unk_28 = 170;
+            data->unk_2C = (var_1 * var_4) / 255;
             break;
         case 4:
-            data->unk_20 = 0xEB;
-            data->unk_24 = 0xEB;
-            data->unk_28 = 0xC8;
-            var_f0 = shim_sin_deg(temp_v0 * 2) * 15.0f + 215.0f;
-            data->unk_2C = ((s32) var_f0 * var_s1) / 255;
+            data->unk_20 = 235;
+            data->unk_24 = 235;
+            data->unk_28 = 200;
+            var_float = shim_sin_deg(unk_14 * 2) * 15.0f + 215.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 5:
-            v1 = 0xFF;
-            data->unk_20 = 0xEB;
-            data->unk_24 = 0xEB;
-            data->unk_28 = 0xC8;
-            data->unk_2C = (var_s1 * v1) / 255;
+            var_4 = 255;
+            data->unk_20 = 235;
+            data->unk_24 = 235;
+            data->unk_28 = 200;
+            data->unk_2C = (var_1 * var_4) / 255;
             break;
         case 6:
-            v1 = 0x7F;
-            data->unk_20 = 0x46;
-            data->unk_24 = 0xB4;
-            data->unk_28 = 0x78;
-            data->unk_2C = (var_a2 * v1) / 255;
+            var_4 = 127;
+            data->unk_20 = 70;
+            data->unk_24 = 180;
+            data->unk_28 = 120;
+            data->unk_2C = (var_2 * var_4) / 255;
             data->scale *= 1.1;
             break;
         case 7:
-            v1 = 0xA0;
-            data->unk_20 = 0xA2;
-            data->unk_24 = 0xBD;
-            data->unk_28 = 0xAE;
-            data->unk_2C = (var_a2 * v1) / 255;
+            var_4 = 160;
+            data->unk_20 = 162;
+            data->unk_24 = 189;
+            data->unk_28 = 174;
+            data->unk_2C = (var_2 * var_4) / 255;
             data->scale *= 1.1;
             break;
         case 8:
-            v1 = 0x7F;
-            data->unk_20 = 0xAA;
-            data->unk_24 = 0x28;
-            data->unk_28 = 0x6E;
-            data->unk_2C = (var_a2 * v1) / 255;
+            var_4 = 127;
+            data->unk_20 = 170;
+            data->unk_24 = 40;
+            data->unk_28 = 110;
+            data->unk_2C = (var_2 * var_4) / 255;
             data->scale *= 1.1;
             break;
         case 9:
-            v1 = 0xA0;
-            data->unk_20 = 0xB4;
-            data->unk_24 = 0xB2;
-            data->unk_28 = 0xAE;
-            data->unk_2C = (var_a2 * v1) / 255;
+            var_4 = 160;
+            data->unk_20 = 180;
+            data->unk_24 = 178;
+            data->unk_28 = 174;
+            data->unk_2C = (var_2 * var_4) / 255;
             data->scale *= 1.1;
             break;
         default:
-            v1 = 0xA0;
-            data->unk_20 = 0x32;
-            data->unk_24 = 0x32;
-            data->unk_28 = 0xFF;
-            data->unk_2C = (var_a2 * v1) / 255;
+            var_4 = 160;
+            data->unk_20 = 50;
+            data->unk_24 = 50;
+            data->unk_28 = 255;
+            data->unk_2C = (var_2 * var_4) / 255;
             data->scale += data->unk_34;
             break;
     }
