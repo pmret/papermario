@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct waterBlockVtxData {
+typedef struct WaterBlockVtxData {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 unk_01;
     /* 0x02 */ s8 unk_02;
@@ -10,9 +10,9 @@ typedef struct waterBlockVtxData {
     /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
-} waterBlockVtxData; // size = 0xC
+} WaterBlockVtxData; // size = 0xC
 
-waterBlockVtxData D_E00B4CF0[] = {
+WaterBlockVtxData D_E00B4CF0[] = {
                      { 25,  4,  -25,    1025, 72,      176, 176, 176},
                      { 22,  0,  -22,    963,  0,       176, 176, 176},
                      {-22,  0,  -22,    61,   0,       176, 176, 176},
@@ -82,7 +82,6 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     bpPtr->unk_14 = NULL;
     bpPtr->effectID = EFFECT_WATER_BLOCK;
 
-    
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
     data = effect->data.waterBlock = shim_general_heap_malloc(sizeof(*data));
@@ -101,9 +100,9 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     data->pos.y = y;
     data->pos.z = z;
     data->unk_2C = arg4;
-    data->unk_18 = 0x2F;
-    data->unk_1C = 0x7F;
-    data->unk_20 = 0xFF;
+    data->unk_18 = 47;
+    data->unk_1C = 127;
+    data->unk_20 = 255;
     data->unk_30 = 0.0f;
     data->unk_34 = 0.0f;
 
@@ -223,7 +222,7 @@ void water_block_appendGfx(void *effect) {
     s32 spA4 = data->unk_24;
     Vtx* spA8;
     EffectInstance* effectTemp = effect;
-    waterBlockVtxData* var_s6;
+    WaterBlockVtxData* var_s6;
     Vtx* var_fp;
     s32 temp_s0;
     s32 i;

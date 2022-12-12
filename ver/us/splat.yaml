@@ -5161,8 +5161,6 @@ segments:
         - [0x3B70C8, gfx, D_090004D8_3B70C8]
         - [0x3B7128, gfx, D_09000538_3B7128]
         - [0x3B7158] # padding
-
-
   - name: effect_waterfall
     dir: effects
     type: code
