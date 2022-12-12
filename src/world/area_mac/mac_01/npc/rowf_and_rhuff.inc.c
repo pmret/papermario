@@ -54,7 +54,7 @@ void N(gfx_build_rowf_rug_with_ripples)(void) {
     s32 numCopied;
     s32 i;
 
-    mdl_get_copied_vertices(0, &src, &copy, &numCopied);
+    mdl_get_copied_vertices(VTX_COPY_0, &src, &copy, &numCopied);
 
     for (i = 0; i < numCopied; i++) {
         // 5th set of vertices on the rug from the left
@@ -78,7 +78,7 @@ void N(gfx_build_rowf_rug_with_ripples)(void) {
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
 }
 
 API_CALLABLE(N(RevealRowfBadges)) {
@@ -621,7 +621,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_CALL(RotateGroup, MODEL_jutan2, 0, 0, 1, 0)
     EVT_CALL(ScaleGroup, MODEL_jutan2, EVT_FLOAT(1.3), 1, EVT_FLOAT(1.3))
     EVT_SET(MV_RowfRugRotateAngle, 60)
-    EVT_CALL(MakeLocalVertexCopy, 0, MODEL_ju_1, TRUE)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_ju_1, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(gfx_build_rowf_rug_with_ripples)), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
     EVT_IF_EQ(AF_MAC_40, TRUE)

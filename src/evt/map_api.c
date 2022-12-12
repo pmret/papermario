@@ -491,11 +491,11 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    u16 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
+    s32 copyIndex = evt_get_variable(script, *args++);
+    u16 modelID = evt_get_variable(script, *args++);
+    s32 isMakingCopy = evt_get_variable(script, *args++);
 
-    mdl_make_local_vertex_copy(var1, var2, var3);
+    mdl_make_local_vertex_copy(copyIndex, modelID, isMakingCopy);
     return ApiStatus_DONE2;
 }
 

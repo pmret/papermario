@@ -10271,9 +10271,7 @@ segments:
       - [0x970B78, gfx, card_1]
       - [0x970BF8, gfx, card_2]
       - [0x970C40]
-      - [0x971F98, vtx, toad_house_blanket]
-      - [0x973578, gfx, toad_house_blanket]
-      - [0x9736E0, rgba16, toad_house_blanket, 16, 32]
+      - [0x971F98] # unmapped vtx/gfx for toad house blanket
       - [0x973AE0]
     - [0x9780D0]
   - name: isk_01

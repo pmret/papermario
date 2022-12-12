@@ -106,52 +106,52 @@ void func_80218CEC_47FD9C(s32 arg0) {
 EvtScript N(beforeBattle_80224BD0) = {
     EVT_CALL(SetSpriteShading, -1)
 
-    EVT_CALL(MakeLocalVertexCopy, 0, MODEL_o345, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o345, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(func_802184C0_47F570), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o345, CUSTOM_GFX_1, -1)
     EVT_CALL(SetModelFlags, MODEL_o345, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 1, MODEL_o338, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o338, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(func_802184C0_47F570), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o338, CUSTOM_GFX_2, -1)
     EVT_CALL(SetModelFlags, MODEL_o338, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 2, MODEL_o344, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_2, MODEL_o344, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(func_802184C0_47F570), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o344, CUSTOM_GFX_3, -1)
     EVT_CALL(SetModelFlags, MODEL_o344, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 3, MODEL_o354, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_3, MODEL_o354, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_4, EVT_PTR(func_802184C0_47F570), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o354, CUSTOM_GFX_4, -1)
     EVT_CALL(SetModelFlags, MODEL_o354, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 4, MODEL_o341, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_4, MODEL_o341, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_5, EVT_PTR(func_802184C0_47F570), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o341, CUSTOM_GFX_5, -1)
     EVT_CALL(SetModelFlags, MODEL_o341, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 5, MODEL_o352, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_5, MODEL_o352, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_6, EVT_PTR(func_802186B8_47F768), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o352, CUSTOM_GFX_6, -1)
     EVT_CALL(SetModelFlags, MODEL_o352, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 6, MODEL_o346, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_6, MODEL_o346, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_7, EVT_PTR(func_802186B8_47F768), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o346, CUSTOM_GFX_7, -1)
     EVT_CALL(SetModelFlags, MODEL_o346, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 7, MODEL_o349, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_7, MODEL_o349, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_8, EVT_PTR(func_802189D0_47FA80), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o349, CUSTOM_GFX_8, -1)
     EVT_CALL(SetModelFlags, MODEL_o349, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 8, MODEL_o353, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_8, MODEL_o353, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_9, EVT_PTR(func_802189D0_47FA80), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o353, CUSTOM_GFX_9, -1)
     EVT_CALL(SetModelFlags, MODEL_o353, 128, 1)
 
-    EVT_CALL(MakeLocalVertexCopy, 9, MODEL_o347, 1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_9, MODEL_o347, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_A, EVT_PTR(func_80218CEC_47FD9C), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o347, CUSTOM_GFX_A, -1)
     EVT_CALL(SetModelFlags, MODEL_o347, 128, 1)

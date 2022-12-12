@@ -20,7 +20,7 @@ void func_8024033C_A1B43C(void) {
     guRotate(&gDisplayContext->matrixStack[gMatrixListPos], angle, 0.0f, 1.0f, 0.0f);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    mdl_get_copied_vertices(1, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_1, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -33,7 +33,7 @@ void func_8024033C_A1B43C(void) {
     }
 
     gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
     D_80243BCE_A1ECCE += 0x666;
 }
 
@@ -44,7 +44,7 @@ void func_8024060C_A1B70C(void) {
     s32 i;
     s32 temp3;
 
-    mdl_get_copied_vertices(2, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_2, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -56,7 +56,7 @@ void func_8024060C_A1B70C(void) {
         colors[2] = colors[0] * temp3 / 0x10000;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(2));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_2));
     D_80243BD0_A1ECD0 += 0x253;
 }
 
@@ -66,7 +66,7 @@ void func_802407E8_A1B8E8(void) {
     s32 numVertices;
     s32 i;
 
-    mdl_get_copied_vertices(0, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_0, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         Vtx* vtxDst = &copiedVertices[i];
@@ -75,7 +75,7 @@ void func_802407E8_A1B8E8(void) {
         vtxDst->v.ob[1] = vtxSrc->v.ob[1] + v0 / 0x8000;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
     D_80243BD2_A1ECD2 += 0xA3;
 }
 

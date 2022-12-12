@@ -55,12 +55,7 @@ NpcSettings N(NpcSettings_Archeologist) = {
 MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-extern IMG_BIN N(toad_house_blanket_img)[];
-#include "dro_02_toad_house_blanket_skeleton.c"
-#include "world/area_dro/dro_02/toad_house_blanket.vtx.inc.c"
-#include "world/area_dro/dro_02/toad_house_blanket.gfx.inc.c"
-#include "world/area_dro/dro_02/toad_house_blanket.png.inc.c"
-#include "dro_02_toad_house_blanket_anim.c"
+#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"

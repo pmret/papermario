@@ -129,67 +129,58 @@ EvtScript N(EVS_Kolorado_TryArtifactTrade) = {
     EVT_END
 };
 
-// float stuff
-#ifdef NON_MATCHING
-API_CALLABLE(func_80242A90_854C00) {
+API_CALLABLE(N(func_80242A90_854C00)) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s1 = evt_get_variable(script, *args++);
-    s32 temp_s3 = *args++;
-    s32 temp_s4 = *args++;
-    s32 temp_s5 = *args++;
-    Npc* npc = get_npc_safe(0);
-    f32 temp_f20;
-    f32 var_f20;
-    f32 var_f22;
-    f32 var_f24;
-    f32 var_f26;
+    s32 mode = evt_get_variable(script, *args++);
+    s32 outVarX = *args++;
+    s32 outVarY = *args++;
+    s32 outVarZ = *args++;
+    Npc* npc = get_npc_safe(NPC_Whale);
+    f32 posX, posY, posZ;
+    f32 radius, angle;
 
-    switch (temp_s1) {
+    switch (mode) {
         case 0:
-            var_f26 = 55.0f;
+            radius = 55.0f;
             break;
         case 1:
-            var_f26 = 85.0f;
+            radius = 85.0f;
             break;
         case 2:
-            var_f26 = 25.0f;
+            radius = 25.0f;
             break;
         case 3:
-            var_f24 = -295.0f;
-            var_f22 = -10.0f;
-            var_f20 = 400.0f;
+            posX = -295.0f;
+            posY = -10.0f;
+            posZ = 400.0f;
             break;
         case 4:
-            var_f24 = -285.0f;
-            var_f22 = -10.0f;
-            var_f20 = 380.0f;
+            posX = -285.0f;
+            posY = -10.0f;
+            posZ = 380.0f;
             break;
         default:
-            var_f24 = -295.0f;
-            var_f22 = -10.0f;
-            var_f20 = 420.0f;
+            posX = -295.0f;
+            posY = -10.0f;
+            posZ = 420.0f;
             break;
     }
-    if (temp_s1 < 3) {
-        temp_f20 = -npc->yaw;
-        var_f24 = npc->pos.x + 30.0f + (sin_deg(temp_f20) * var_f26);
-        var_f22 = npc->pos.y + 50.0f;
-        var_f20 = npc->pos.z + (cos_deg(temp_f20) * var_f26);
+    if (mode < 3) {
+        angle = -npc->yaw;
+        posX = npc->pos.x + 30.0f + sin_deg(angle) * radius;
+        posZ = npc->pos.z + cos_deg(angle) * radius;
+        posY = npc->pos.y + 50.0f;
     }
-    evt_set_float_variable(script, temp_s3, var_f24);
-    evt_set_float_variable(script, temp_s4, var_f22);
-    evt_set_float_variable(script, temp_s5, var_f20);
+    evt_set_float_variable(script, outVarX, posX);
+    evt_set_float_variable(script, outVarY, posY);
+    evt_set_float_variable(script, outVarZ, posZ);
     return ApiStatus_DONE2;
 }
-#else
-API_CALLABLE(func_80242A90_854C00);
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A90_854C00);
-#endif
 
 // maybe a duplicate, not sure if the NPCs are the same
 API_CALLABLE(N(func_80242C78_854DE8)) {
     Bytecode* args = script->ptrReadPos;
-    Npc* npc0 = get_npc_safe(0);
+    Npc* npc0 = get_npc_safe(NPC_Whale);
     Npc* npc1;
     Npc* partner;
     f32 forward, radius;
@@ -605,19 +596,19 @@ EvtScript N(EVS_802496FC) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt9, COLLIDER_FLAGS_UPPER_MASK)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
-        EVT_CALL(func_80242A90_854C00, 5, LVar0, LVar1, LVar2)
+        EVT_CALL(N(func_80242A90_854C00), 5, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_32C, 0)
         EVT_CALL(SetNpcJumpscale, NPC_Kolorado, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 20)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
     EVT_END_IF
-    EVT_CALL(func_80242A90_854C00, 3, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_80242A90_854C00), 3, LVar0, LVar1, LVar2)
     EVT_EXEC(N(D_802496C0_85B830))
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_TALK)
-    EVT_CALL(func_80242A90_854C00, 4, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_80242A90_854C00), 4, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
@@ -1002,7 +993,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-    EVT_CALL(func_80242A90_854C00, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_80242A90_854C00), 0, LVar0, LVar1, LVar2)
     EVT_EXEC(N(D_802496C0_85B830))
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 20)
@@ -1013,7 +1004,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_TALK)
     EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar3, LVar5, 10)
-    EVT_CALL(func_80242A90_854C00, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_80242A90_854C00), 1, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
@@ -1025,7 +1016,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
         EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Talk, 0, MSG_MAC_Port_00AD)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
         EVT_CALL(NpcMoveTo, NPC_Kolorado, LVar3, LVar5, 20)
-        EVT_CALL(func_80242A90_854C00, 2, LVar0, LVar1, LVar2)
+        EVT_CALL(N(func_80242A90_854C00), 2, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_32C, 0)
         EVT_CALL(SetNpcJumpscale, NPC_Kolorado, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 20)

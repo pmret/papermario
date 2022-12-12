@@ -4510,16 +4510,16 @@ void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
 #endif
 
-void mdl_local_gfx_copy_vertices(Vtx* from, s32 num, Vtx* to) {
+void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
     u32 i;
 
-    for (i = 0; i < num * sizeof(*from); i++) {
-        ((u8*)to)[i] = ((u8*)from)[i];
+    for (i = 0; i < num * sizeof(*src); i++) {
+        ((u8*)dest)[i] = ((u8*)src)[i];
     }
 }
 
 
-void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32 arg2) {
+void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
     s32 numVertices;
     Vtx* baseVtx;
     s32 gfxCount;
@@ -4528,13 +4528,13 @@ void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32 arg2) {
     ModelLocalVertexCopy* copy;
     s32 i;
 
-    model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIdx));
+    model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
     nodeDlist = model->modelNode->displayData->displayList;
     mdl_get_vertex_count(nodeDlist, &numVertices, &baseVtx, &gfxCount, NULL);
 
-    copy = (*gCurrentModelLocalVtxBuffers)[arg0] = heap_malloc(sizeof(*copy));
+    copy = (*gCurrentModelLocalVtxBuffers)[copyIndex] = heap_malloc(sizeof(*copy));
 
-    if (arg2) {
+    if (isMakingCopy) {
         for (i = 0; i < ARRAY_COUNT(copy->gfxCopy); i++) {
             copy->gfxCopy[i] = heap_malloc(gfxCount * sizeof(*copy->gfxCopy[i]));
             copy->vtxCopy[i] = heap_malloc(numVertices * sizeof(*copy->vtxCopy[i]));

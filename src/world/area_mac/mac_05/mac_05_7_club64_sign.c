@@ -4,76 +4,64 @@ s32 N(UnusedInt) = 0;
 
 f32 N(Club64SignAlphaModulus) = 0.0f;
 
-// ordering
-#ifdef NON_MATCHING
-void func_80243DB0_855F20(f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5) {
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f12;
-    f32 temp_f2_2;
-    f32 temp_f4;
-    f32 temp_f8;
-    f32 var_f6;
-    s32 temp_f10;
-    f64 temp_f2;
-
-    if (arg2 <= 0.5f) {
-        temp_f2 = (f64) arg2;
-        var_f6 = (arg1 * temp_f2) + temp_f2;
+void N(hsl_to_rgb)(f32 hue, f32 saturation, f32 lightness, f32* outR, f32* outG, f32* outB) {
+    f32 hueSector;
+    f32 p, q, m;
+    f32 s, t;
+    
+    if (lightness <= 0.5f) {
+        q = lightness * (1.0 + saturation);
     } else {
-        var_f6 = (arg2 + arg1) - (arg2 * arg1);
+        q = (lightness + saturation) - (lightness * saturation);
     }
 
-    if (var_f6 == 0.0f) {
-        *arg5 = 0.0f;
-        *arg4 = 0.0f;
-        *arg3 = 0.0f;
+    if (q == 0.0f) {
+        *outB = 0.0f;
+        *outG = 0.0f;
+        *outR = 0.0f;
         return;
     }
-    temp_f12 = arg0 * 6.0f;
-    temp_f8 = (2.0f * arg2) - var_f6;
-    temp_f4 = (s32) temp_f12;
-    temp_f0 = var_f6 * ((var_f6 - temp_f8) / var_f6) * (temp_f12 - temp_f4);
-    temp_f2_2 = temp_f8 + temp_f0;
-    temp_f0_2 = var_f6 - temp_f0;
-    temp_f10 = (s32) temp_f4;
-    switch (temp_f10) {
+    
+    hue *= 6.0f;
+    hueSector = (s32) hue;
+    p = (2 * lightness) - q;
+    m = q * ((q - p) / q) * (hue - hueSector);
+    s = p + m;
+    t = q - m;
+    
+    switch ((s32) hueSector) {
         case 0:
-            *arg3 = var_f6;
-            *arg4 = temp_f2_2;
-            *arg5 = temp_f8;
+            *outR = q;
+            *outG = s;
+            *outB = p;
             break;
         case 1:
-            *arg3 = temp_f0_2;
-            *arg4 = var_f6;
-            *arg5 = temp_f8;
+            *outR = t;
+            *outG = q;
+            *outB = p;
             break;
         case 2:
-            *arg3 = temp_f8;
-            *arg4 = var_f6;
-            *arg5 = temp_f2_2;
+            *outR = p;
+            *outG = q;
+            *outB = s;
             break;
         case 3:
-            *arg3 = temp_f8;
-            *arg4 = temp_f0_2;
-            *arg5 = var_f6;
+            *outR = p;
+            *outG = t;
+            *outB = q;
             break;
         case 4:
-            *arg3 = temp_f2_2;
-            *arg4 = temp_f8;
-            *arg5 = var_f6;
+            *outR = s;
+            *outG = p;
+            *outB = q;
             break;
         case 5:
-            *arg3 = var_f6;
-            *arg4 = temp_f8;
-            *arg5 = temp_f0_2;
+            *outR = q;
+            *outG = p;
+            *outB = t;
             break;
     }
 }
-#else
-void func_80243DB0_855F20(f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5);
-INCLUDE_ASM(s32, "world/area_mac/mac_05/855F20", func_80243DB0_855F20);
-#endif
 
 void N(gfx_build_club_64)(s32 index) {
     Vtx* first;
@@ -82,22 +70,22 @@ void N(gfx_build_club_64)(s32 index) {
     s32 i;
     f32 colR, colG, colB;
 
-    mdl_get_copied_vertices(3, &first, &copied, &numCopied);
+    mdl_get_copied_vertices(VTX_COPY_3, &first, &copied, &numCopied);
 
     for (i = 0; i < numCopied; i++) {
         u8* colors = copied[i].v.cn;
-        f32 alpha = N(Club64SignAlphaModulus) + (f32)i / (f32)numCopied;
-        if (alpha > 1.0) {
-            alpha -= 1.0;
+        f32 hue = N(Club64SignAlphaModulus) + (f32)i / (f32)numCopied;
+        if (hue > 1.0) {
+            hue -= 1.0;
         }
-        func_80243DB0_855F20(alpha, 1.0f, 0.5f, &colR, &colG, &colB);
+        N(hsl_to_rgb)(hue, 1.0f, 0.5f, &colR, &colG, &colB);
 
         colors[0] = colR * 255.0f;
         colors[1] = colG * 255.0f;
         colors[2] = colB * 255.0f;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(3));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_3));
     N(Club64SignAlphaModulus) += 0.01;
     if (N(Club64SignAlphaModulus) > 1.0) {
         N(Club64SignAlphaModulus) -= 1.0f;
@@ -105,7 +93,7 @@ void N(gfx_build_club_64)(s32 index) {
 }
 
 EvtScript N(EVS_AnimateClub64Sign) = {
-    EVT_CALL(MakeLocalVertexCopy, 3, MODEL_o187, TRUE)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_3, MODEL_o187, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(gfx_build_club_64)), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o187, CUSTOM_GFX_3, -1)
     EVT_RETURN
